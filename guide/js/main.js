@@ -1,3 +1,5 @@
+// trailing commas are only here during development mode; pls no hate
+
 docute.init({
 	nav: [
 		{
@@ -23,5 +25,5 @@ docute.init({
 			],
 		},
 	],
-	// disableSidebarToggle: true,
+	disableSidebarToggle: true,
 });
