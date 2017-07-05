@@ -11,4 +11,4 @@ Alternatively, you can simply open up the index.html file and run it through the
 
 ## Adding Pages
 
-For now, you should refer to the [docute documentation](https://docute.js.org/#/home) in order to figure out how to add/edit existing pages. Or you can just copt/paste/modify some of the existing code in the `main.js` file. Honestly, this is just here as a placeholder; I'll edit it again later.
+For now, you should refer to the [docute documentation](https://docute.js.org/#/home) in order to figure out how to add/edit existing pages. Or you can just copy/paste/modify some of the existing code in the `main.js` file. Honestly, this is just here as a placeholder; I'll edit it again later.
