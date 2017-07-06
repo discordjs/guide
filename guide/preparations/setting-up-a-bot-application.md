@@ -27,7 +27,9 @@ After creating a bot user, you'll see a section like this:
 
 In that section, there's a field labeled "Token". Click the "click to reveal" link in order to view your token. Copy and save your token in a safe place, because you'll need it for later. Don't worry if you do happen to lose your token - you can always go back to this page and view it again, as well as generate a new one, if necessary.
 
-A token is essentially your bot's password; it's what your bot uses to login to Discord. With that being said, **it is vital that you do not ever share this token with anybody, purposely or accidentally**. If someone does manage to get a hold of your token, they can use your bot as if it were theirs - this means they can perform malicious acts with it. Allow me to give you an example scenario.
+A token is essentially your bot's password; it's what your bot uses to login to Discord. With that being said, **it is vital that you do not ever share this token with anybody, purposely or accidentally**. If someone does manage to get a hold of your token, they can use your bot as if it were theirs - this means they can perform malicious acts with it. Allow me to give you an elaborate.
+
+### Token leak scenario
 
 Let's imagine that you have a bot on over 1,000 servers, and it took you many, many months of coding and patience to get it on that amount. Your token gets leaked somewhere, and now someone else has it. That person can:
 
@@ -38,5 +40,3 @@ Let's imagine that you have a bot on over 1,000 servers, and it took you many, m
 * Make your bot leave all of the servers it has joined.
 
 All that and much, much more. Sounds pretty terrible, right? So make sure to keep your token as safe as possible! Now, let's move on to the next step.
-
-

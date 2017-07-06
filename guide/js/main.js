@@ -24,6 +24,16 @@ docute.init({
 				},
 			],
 		},
+		{
+			title: 'Creating Your Bot',
+			type: 'dropdown',
+			items: [
+				{
+					title: 'Up & Running',
+					path: '/creating-your-bot/',
+				},
+			],
+		},
 	],
 	disableSidebarToggle: true,
 });

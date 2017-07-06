@@ -1,10 +1,14 @@
-# Installing Node.js
+## Installing Node.js
 
-To use discord.js, you'll need to install Node.js. You can do so by going to [the Node.js website](https://nodejs.org/en/).
+To use discord.js, you'll need to install Node.js. You can do so by going to [the Node.js website](https://nodejs.org/).
 
-If you're developing on Windows, it's as simple as installing any other program. Go to their website \(linked above\) and download the latest version, open up the downloaded file, and follow the steps.
+### Installing on Windows
 
-If you're developing on Linux, you may consult [this page](https://nodejs.org/en/download/package-manager/) to determine how you should install Node. On that note, there's a possibility that you may already have Node \(e.g. if you're using a VPS\). You can check by running the `node -v` command. If it outputs something like `v8.0.0`, then you're good to go! Otherwise, take a look at the page linked above for instructions on installing Node on your OS.
+If you're developing on Windows, it's as simple as installing any other program. Go to [the Node.js website](https://nodejs.org/), download the latest version, open up the downloaded file, and follow the steps from the installer.
+
+### Installing on Linux
+
+If you're developing on Linux, you may consult [this page](https://nodejs.org/en/download/package-manager/) to determine how you should install Node.<br />On that note, there's a possibility that you may already have Node \(e.g. if you're using a VPS\). You can check by running the `node -v` command. If it outputs something like `v8.0.0`, then you're good to go! Otherwise, take a look at the page linked above for instructions on installing Node on your OS.
 
 <p class="warning">If you _do_ have Node installed, but have an older version \(i.e. anything below 8.0.0\), you should upgrade to the latest version.</p>
 
