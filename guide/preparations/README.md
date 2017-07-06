@@ -6,7 +6,7 @@ If you're developing on Windows, it's as simple as installing any other program.
 
 If you're developing on Linux, you may consult [this page](https://nodejs.org/en/download/package-manager/) to determine how you should install Node. On that note, there's a possibility that you may already have Node \(e.g. if you're using a VPS\). You can check by running the `node -v` command. If it outputs something like `v8.0.0`, then you're good to go! Otherwise, take a look at the page linked above for instructions on installing Node on your OS.
 
-<p class="tip">**Note:** If you _do_ have Node installed, but have an older version \(i.e. anything below 8.0.0\), you should upgrade to the latest version.</p>
+<p class="warning">If you _do_ have Node installed, but have an older version \(i.e. anything below 8.0.0\), you should upgrade to the latest version.</p>
 
 ---
 
@@ -54,7 +54,7 @@ Now that we've installed Node.js and know how to open up and run commands, we ca
 
 To install discord.js, simply run the `npm install discord.js`. This can take a bit of time, but should be done fairly quickly.
 
-<p class="warning">**Note:** Once the installation is complete, you'll see something like this:<br/>
+<p class="warning">Once the installation is complete, you'll see something like this:<br/>
 ![npm warnings](http://i.imgur.com/BbcuyJ6.png)<br/>**This is perfectly normal and means that it worked.** You don't need to install any of the items listed in order to use discord.js; they are 100% optional.</p>
 
 And that's it! Pretty simple, right? Now that we have all the necessities installed, we're almost ready to start coding our bot.
