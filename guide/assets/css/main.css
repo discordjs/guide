@@ -19,7 +19,7 @@
 	border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-/* `Line-height` so that inline <code> tags don't touch each other. */
+/* `line-height` so that inline <code> tags from different lines don't touch each other. */
 .markdown-body p {
 	line-height: 150%;
 }
