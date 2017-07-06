@@ -57,6 +57,9 @@ docute.init({
 ```
 
 The code above would display as the following:
+
 ![Example nav bar image](http://i.imgur.com/E6wYHKF.png)
+
+If you want to link to `/dir/some-tutorial`, you would create a `some-tutorial.md` file inside a `dir` folder.
 
 There are, of course, many other things you can do within the `docute.init()` method, but this should suffice for simple edits/additions. Consult the [documentation site](https://docute.js.org/#/home) for further info.
