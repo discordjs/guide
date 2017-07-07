@@ -4,7 +4,12 @@ sidebar: false
 # Introduction
 
 If you're reading this, it probably means you want to learn how make a bot with discord.js. Awesome! You've come to the right place.
-This guide will teach you how to get a bot up and running from scratch; how to create, organize, and expand on basic commands properly; how to use the best practices for common situations; and much more.
+This guide will teach you things such as:
+* How to get a bot up and running from scratch;
+* How to properly create, organize, and expand on your commands;
+* How to use the best practices for common situations;
+* and much more.
+
 This guide will also cover subjects like common errors and how to solve them, keeping your code clean, setting up a proper development environment, etc.
 Sounds good? Great! Let's get started, then.
 

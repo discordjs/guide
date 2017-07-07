@@ -1,0 +1,52 @@
+{
+	"extends": "eslint:recommended",
+	"env": {
+		"node": true,
+		"es6": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 2017
+	},
+	"rules": {
+		"no-console": "off",
+		"no-undef": "off",
+		"no-shadow": ["error", { "allow": ["err", "resolve", "reject"] }],
+		"no-trailing-spaces": ["error", { "skipBlankLines": true }],
+		"no-empty-function": "error",
+		"no-floating-decimal": "error",
+		"no-implied-eval": "error",
+		"no-invalid-this": "error",
+		"no-lone-blocks": "error",
+		"no-multi-spaces": "error",
+		"array-bracket-spacing": "error",
+		"block-spacing": "error",
+		"brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
+		"comma-dangle": ["error", "always"],
+		"comma-spacing": "error",
+		"comma-style": "error",
+		"computed-property-spacing": "error",
+		"key-spacing": "error",
+		"curly": ["error", "multi-line", "consistent"],
+		"dot-location": ["error", "property"],
+		"dot-notation": "error",
+		"handle-callback-err": "off",
+		"yoda": "error",
+		"object-curly-spacing": ["error", "always"],
+		"max-nested-callbacks": ["error", { "max": 4 }],
+		"max-statements-per-line": ["error", { "max": 2 }],
+		"no-inline-comments": "error",
+		"no-lonely-if": "error",
+		"no-mixed-operators": "error",
+		"no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1, "maxBOF": 0 }],
+		"space-before-blocks": "error",
+		"space-before-function-paren": ["error", "never"],
+		"space-in-parens": "error",
+		"space-infix-ops": "error",
+		"space-unary-ops": "error",
+		"spaced-comment": "error",
+		"indent": ["error","tab"],
+		"quote-props": ["error", "as-needed"],
+		"quotes": ["error", "single"],
+		"semi": ["error", "always"]
+	}
+}
