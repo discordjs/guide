@@ -32,6 +32,10 @@ docute.init({
 					title: 'Up & Running',
 					path: '/creating-your-bot/',
 				},
+				{
+					title: 'Configuration Files',
+					path: '/creating-your-bot/configuration-files',
+				},
 			],
 		},
 	],

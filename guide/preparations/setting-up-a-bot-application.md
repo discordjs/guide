@@ -27,7 +27,9 @@ After creating a bot user, you'll see a section like this:
 
 In that section, there's a field labeled "Token". Click the "click to reveal" link in order to view your token. Copy and save your token in a safe place, because you'll need it for later. Don't worry if you do happen to lose your token - you can always go back to this page and view it again, as well as generate a new one, if necessary.
 
-A token is essentially your bot's password; it's what your bot uses to login to Discord. With that being said, **it is vital that you do not ever share this token with anybody, purposely or accidentally**. If someone does manage to get a hold of your token, they can use your bot as if it were theirs - this means they can perform malicious acts with it. Allow me to give you an elaborate.
+### What is a token, anyway?
+
+A token is essentially your bot's password; it's what your bot uses to login to Discord. With that being said, **it is vital that you do not ever share this token with anybody, purposely or accidentally**. If someone does manage to get a hold of your token, they can use your bot as if it were theirs - this means they can perform malicious acts with it. Allow me to elaborate.
 
 ### Token leak scenario
 
