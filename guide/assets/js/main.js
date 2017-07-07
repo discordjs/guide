@@ -36,6 +36,10 @@ docute.init({
 					title: 'Configuration Files',
 					path: '/creating-your-bot/configuration-files',
 				},
+				{
+					title: 'Adding More Commands',
+					path: '/creating-your-bot/adding-more-commands',
+				},
 			],
 		},
 	],

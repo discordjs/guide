@@ -4,7 +4,7 @@ Now that we've installed Node and discord.js, we're almost ready to start coding
 
 It's incredibly easy to create one. The steps you need to take are as follows:
 
-1. Open up [the Discord website](https://discordapp.com/) and login \(via the "Login" button in the upper right-hand corner\). If you're already logged in, the button will display as "Open" instead of "Login".
+1. Open up [the Discord website](https://discordapp.com/) and [login](https://discordapp.com/login).
 2. Hover over the "More" drop-down menu and click the [Developers](https://discordapp.com/developers/docs/intro) link.
 3. On the sidebar, under "Applications", click on the [My Apps](https://discordapp.com/developers/applications/me) link.
 4. Click on the "New App" button and fill out the form. **Note:** Only the app name field is required; all the others are optional. Submit the form once you're done.
