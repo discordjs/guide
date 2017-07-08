@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // trailing commas are only here during development mode; pls no hate
 
 docute.init({
@@ -39,6 +40,16 @@ docute.init({
 				{
 					title: 'Adding More Commands',
 					path: '/creating-your-bot/adding-more-commands',
+				},
+			],
+		},
+		{
+			title: 'Development Environment',
+			type: 'dropdown',
+			items: [
+				{
+					title: 'Setting up a Code Editor',
+					path: '/better-dev-environment/setting-up-a-linter',
 				},
 			],
 		},
