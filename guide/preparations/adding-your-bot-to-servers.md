@@ -18,6 +18,8 @@ The structure of the url is pretty simply:
 - The second part that says ``client_id=...`` is to specify _which_ Application we want to authorize. You'll have to replace this part with the Client ID of your bot to invite yours. 
 - And lastly, the third part which says ``scope=bot`` specifies that we want to add this Application as a Discord bot.
 
+<p class="warning">A permissions parameter also exists to restrict or guarantee the permission your bot will have on the server you add it to. For ease of usage, it is recommended to use [this](https://discordapi.com/permissions.html) website.</p>
+
 ## Creating and using your own invite link
 
 Right. So if you've been paying attention, you'll likely have figured out that to add your own bot to a server, you're going to have to substitute the ``client_id=...`` part of the link with your bot Application's ID.
