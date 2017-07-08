@@ -67,10 +67,4 @@ And that's it! Pretty simple, right? Now that we have all the necessities instal
 
 ## Installing a linter
 
-While you are coding, you may find that you run into numerous syntax errors, or just code in an inconsistent style. Regardless, it's highly urged that you install a linter to ease a lot of coding troubles. While code editors generally are able to point out syntax errors, with a linter, you can coerce your coding to be in a specific style as you define in the configuration. Here are some links to common editors for their respective linters:
-
-[Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-
-[Atom](https://atom.io/packages/eslint)
-
-[Basic Setup](https://yorkaargh.gitbooks.io/discord-js-bot-guide/content/getting-started/installing_and_using_a_proper_editor.html)
+While you are coding, you may find that you run into numerous syntax errors, or just code in an inconsistent style. Regardless, it's highly urged that you install a linter to ease a lot of coding troubles. While code editors generally are able to point out syntax errors, with a linter, you can coerce your coding to be in a specific style as you define in the configuration. While this is not required, it's strongly reccommended. Click [here for the linter guide!](/better-dev-environment/setting-up-a-linter)
