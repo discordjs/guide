@@ -10,7 +10,7 @@ Open up your preferred code editor (whether it be [Visual Studio Code](https://c
 
 ### Logging in to Discord
 
-Once you've created a new file, do a quick check to see if you have everything setup properly. Copy & paste the following code into your file and save it again. Don't worry if you don't understand it right away - we'll be explaining it in depth after this.
+Once you've created a new file, do a quick check to see if you have everything setup properly. Copy & paste the following code into your file and save it again. Don't worry if you don't understand it right away - I'll be explaining it in depth after this.
 
 ```js
 const Discord = require('discord.js');
@@ -25,7 +25,7 @@ client.login('your-token-goes-here');
 
 Head back to your console window, type in `node your-file-name.js`, and press enter. If you see the `Ready!` message after a few seconds, you're good to go! If not, try going back a few steps and make sure you followed everything correctly.
 
-<p class="tip">Don't feel like typing the file name each time? Open up your `package.json` file, look for something like `"main": "index.js"`, and rename `index.js` to whatever your file name is. After saving, you can simply run the `node .` shortcut in your console to start the process!</p>
+<p class="tip">Don't feel like typing the file name each time? Open up your `package.json` file, look for something like `"main": "index.js"`, and change `"index.js"` to whatever your file name is. After saving, you can simply run the `node .` shortcut in your console to start the process!</p>
 
 
 #### Start-up code explained
@@ -55,7 +55,7 @@ Although it's not a lot, it's good to know what each bit of your code does. But,
 
 ## Listening for messages
 
-First, make sure to close the process in your console. You can do so by pressing `Ctrl + C` inside the console. Go back to your code editor and add the following piece of code above the `client.login();` line.
+First, make sure to close the process in your console. You can do so by pressing `Ctrl + C` inside the console. Go back to your code editor and add the following piece of code above the `client.login()` line.
 
 ```js
 // Whenever a message is sent, run this code.
@@ -71,7 +71,7 @@ Save the file, go back to your console, and start the process up again. Whenever
 
 ### Replying to messages
 
-Logging to the console is great and all, but it doesn't really provide any feedback for the end user. Let's create a basic ping/pong command before we move on to making real commands. Remove the `console.log(message.content);` line from your code and replace it with the following:
+Logging to the console is great and all, but it doesn't really provide any feedback for the end user. Let's create a basic ping/pong command before you move on to making real commands. Remove the `console.log(message.content)` line from your code and replace it with the following:
 
 ```js
 // If the message's content is exactly equal to "!ping"...
@@ -85,4 +85,4 @@ Save the file, restart the node process, and then send `!ping` to a channel your
 
 ![Ping pong command result](http://i.imgur.com/byiSflM.png)
 
-Awesome! We've successfully created our first Discord bot command! Exciting stuff, isn't it? This is only the beginning, so let's move on to making some more commands.
+Awesome! You've successfully created our first Discord bot command! Exciting stuff, isn't it? This is only the beginning, so let's move on to making some more commands.

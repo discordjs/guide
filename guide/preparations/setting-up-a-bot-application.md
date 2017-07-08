@@ -4,7 +4,7 @@ Now that we've installed Node and discord.js, we're almost ready to start coding
 
 It's incredibly easy to create one. The steps you need to take are as follows:
 
-1. Open up [the Discord website](https://discordapp.com/) and login \(via the "Login" button in the upper right-hand corner\). If you're already logged in, the button will display as "Open" instead of "Login".
+1. Open up [the Discord website](https://discordapp.com/) and [login](https://discordapp.com/login).
 2. Hover over the "More" drop-down menu and click the [Developers](https://discordapp.com/developers/docs/intro) link.
 3. On the sidebar, under "Applications", click on the [My Apps](https://discordapp.com/developers/applications/me) link.
 4. Click on the "New App" button and fill out the form. **Note:** Only the app name field is required; all the others are optional. Submit the form once you're done.
@@ -27,7 +27,9 @@ After creating a bot user, you'll see a section like this:
 
 In that section, there's a field labeled "Token". Click the "click to reveal" link in order to view your token. Copy and save your token in a safe place, because you'll need it for later. Don't worry if you do happen to lose your token - you can always go back to this page and view it again, as well as generate a new one, if necessary.
 
-A token is essentially your bot's password; it's what your bot uses to login to Discord. With that being said, **it is vital that you do not ever share this token with anybody, purposely or accidentally**. If someone does manage to get a hold of your token, they can use your bot as if it were theirs - this means they can perform malicious acts with it. Allow me to give you an elaborate.
+### What is a token, anyway?
+
+A token is essentially your bot's password; it's what your bot uses to login to Discord. With that being said, **it is vital that you do not ever share this token with anybody, purposely or accidentally**. If someone does manage to get a hold of your token, they can use your bot as if it were theirs - this means they can perform malicious acts with it. Allow me to elaborate.
 
 ### Token leak scenario
 

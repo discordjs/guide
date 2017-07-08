@@ -62,3 +62,9 @@ To install discord.js, simply run the `npm install discord.js`. This can take a 
 ![npm warnings](http://i.imgur.com/BbcuyJ6.png)<br/>**This is perfectly normal and means that it worked.** You don't need to install any of the items listed in order to use discord.js; they are 100% optional.</p>
 
 And that's it! Pretty simple, right? Now that we have all the necessities installed, we're almost ready to start coding our bot.
+
+---
+
+## Installing a linter
+
+While you are coding, you may find that you run into numerous syntax errors, or just code in an inconsistent style. Regardless, it's highly urged that you install a linter to ease a lot of coding troubles. While code editors generally are able to point out syntax errors, with a linter, you can coerce your coding to be in a specific style as you define in the configuration. While this is not required, it's strongly reccommended. Click [here for the linter guide!](/better-dev-environment/setting-up-a-linter)
