@@ -53,6 +53,16 @@ docute.init({
 				},
 			],
 		},
+		{
+			title: 'Extended features',
+			type: 'dropdown',
+			items: [
+				{
+					title: 'Storing data with sequelize',
+					path: '/sequelize/',
+				},
+			],
+		},
 	],
 	disableSidebarToggle: true,
 });
