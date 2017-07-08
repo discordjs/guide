@@ -15,7 +15,7 @@
 		"no-floating-decimal": "error",
 		"no-multi-spaces": "error",
 		"brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
-		"comma-dangle": ["error", "always"],
+		"comma-dangle": ["error", "always-multiline"],
 		"comma-spacing": "error",
 		"comma-style": "error",
 		"curly": ["error", "multi-line", "consistent"],
