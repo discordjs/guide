@@ -23,3 +23,9 @@
 .markdown-body p {
 	line-height: 150%;
 }
+
+/* change from purple to red */
+.token.boolean, .token.constant, .token.deleted, .token.number,
+.token.property, .token.symbol, .token.tag {
+	color: #CF3838;
+}

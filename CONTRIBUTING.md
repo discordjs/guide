@@ -2,12 +2,13 @@
 
 ## Installations
 
-Though it's not required, you may install the `docute-cli` package. You can do so by running the following command:
-    npm i -g docute-cli
+If you don't already have some sort of local server, you should install the `docute-cli` package. You can do so by running the following command:
+
+```
+npm i -g docute-cli
+```
 
 After that, you can simply run `docute ./guide` to run a server at `localhost:8080`.
-
-Alternatively, you can simply open up the index.html file and run it through there.
 
 ## Adding Pages
 

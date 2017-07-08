@@ -26,6 +26,9 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 	* Naming conventions, I guess? Maybe not, idk
 	* Sanity checks
 
+* Frequently asked questions section
+	* Difference between User and GuildMember
+
 * Frequently asked topic guides
 	* Command cooldowns
 	* How to navigate the d.js docs (hoo boi)
