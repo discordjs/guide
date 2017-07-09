@@ -23,6 +23,10 @@ docute.init({
 					title: 'Adding Your Bot to Servers',
 					path: '/preparations/adding-your-bot-to-servers',
 				},
+				{
+					title: 'Setting up a Code Editor',
+					path: '/better-dev-environment/setting-up-a-linter',
+				},
 			],
 		},
 		{
@@ -44,22 +48,26 @@ docute.init({
 			],
 		},
 		{
-			title: 'Development Environment',
-			type: 'dropdown',
-			items: [
-				{
-					title: 'Setting up a Code Editor',
-					path: '/better-dev-environment/setting-up-a-linter',
-				},
-			],
-		},
-		{
 			title: 'Extended features',
 			type: 'dropdown',
 			items: [
 				{
 					title: 'Storing data with sequelize',
 					path: '/sequelize/',
+				},
+			],
+		},
+		{
+			title: 'Sharding',
+			type: 'dropdown',
+			items: [
+				{
+					title: 'Initial file',
+					path: '/sharding/',
+				},
+				{
+					title: 'Basic changes',
+					path: '/sharding/basic-changes',
 				},
 			],
 		},
