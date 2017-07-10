@@ -1,5 +1,7 @@
 ## Preparing a better development environment
 
+As a developer, it's a good idea to make your development process as streamlined as possible. Installing and utilizing the right tools is an essitial part of any project you're working on. Although it's not required, installing a linter will help you a great amount.
+
 ### Installing a code editor
 
 First, you will need a proper code editor. Using Notepad and Notepad++ is discouraged, as they're inefficient for projects like these. If you are using either, it is highly reccommended to switch in order to save everyone lots of headaches and unecessary syntax error questions.

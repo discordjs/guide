@@ -1,4 +1,4 @@
-## Creating an Application
+## Creating an application
 
 Now that we've installed Node and discord.js, we're almost ready to start coding! The next step we need to take is setting up an actual Discord bot application via the website itself.
 
@@ -16,7 +16,7 @@ On that same page, click the "Create a Bot User" button.
 
 Congrats - you're now the proud owner of a shiny new Discord bot! We're not quite done, though.
 
-## Your Token
+## Your token
 
 
 <p class="danger">This section is very important, so pay close attention. It explains what your bot token is, as well as the security aspects of it.</p>
