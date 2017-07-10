@@ -107,6 +107,8 @@ And there you have it! As you can see, it's quite simple to add additional comma
 
 ## Bonus: Refactoring to ES6
 
+<p class="tip">This part of the guide is completely optional, but it is recommended. If you want to keep following best practices and achieve cleaner code, take the time to read through!</p>
+
 This section is specifically for transforming the ES5 code you've had up until now into ES6. If you're not sure what ES5/ES6 is referring to, think of them as just different versions of JavaScript. ES6 has many great features that you should take advantage of, whenever possible.
 
 Before anything, here's what your code should look like at this moment:
@@ -143,6 +145,8 @@ client.login(config.token);
 There are a few areas where things can be done better. Allow me to show you a few.
 
 ### Destructuring
+
+What you see in red is what you'll remove, and what you see in green is what you'll replace it with.
 
 ```diff
 - const config = require('./config.json');
@@ -198,7 +202,7 @@ It is a bit less to write out, and also looks cleaner. I wouldn't advise it, tho
 
 ### Template literals
 
-You know how you've been doing things like `prefix + 'name'` and `Your username: ' + message.author.username`? It's a bit unpleasing to the eyes, and not too fun to constantly type out. Thankfully, there's a better alternative.
+You know how you've been doing things like `prefix + 'name'` and `'Your username: ' + message.author.username`? It's a bit unpleasing to the eyes, and not too fun to constantly type out. Thankfully, there's a better alternative.
 
 ```js
 // ES5 version, as we currently have it

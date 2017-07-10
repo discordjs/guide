@@ -2,7 +2,7 @@
 
 ### Installing a code editor
 
-First, you will need a proper text editor. Using Notepad and Notepad++ is discouraged, as they're inefficient for projects like these. If you are using either, it is highly reccommended to switch in order to save everyone lots of headaches and unecessary syntax questions.
+First, you will need a proper code editor. Using Notepad and Notepad++ is discouraged, as they're inefficient for projects like these. If you are using either, it is highly reccommended to switch in order to save everyone lots of headaches and unecessary syntax error questions.
 
 * Atom is user-friendly. If you want to get started quickly, this is the recommended pick. Click [here](https://atom.io/) to be taken to their website.
 * Visual Studio Code is a very powerful editor known for being fast. It supports a broad range of languages and comes with its own terminal. Click [here](https://code.visualstudio.com/) to be taken to their website.

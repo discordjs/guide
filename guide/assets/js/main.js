@@ -16,16 +16,16 @@ docute.init({
 					path: '/preparations/',
 				},
 				{
+					title: 'Setting up a Code Editor',
+					path: '/preparations/setting-up-a-linter',
+				},
+				{
 					title: 'Settings Up a Bot Application',
 					path: '/preparations/setting-up-a-bot-application',
 				},
 				{
 					title: 'Adding Your Bot to Servers',
 					path: '/preparations/adding-your-bot-to-servers',
-				},
-				{
-					title: 'Setting up a Code Editor',
-					path: '/better-dev-environment/setting-up-a-linter',
 				},
 			],
 		},
@@ -52,15 +52,17 @@ docute.init({
 			type: 'dropdown',
 			items: [
 				{
-					title: 'Storing data with sequelize',
+					type: 'label',
+					title: 'Database'
+				},
+				{
+					title: 'Storing data with Sequelize',
 					path: '/sequelize/',
 				},
-			],
-		},
-		{
-			title: 'Sharding',
-			type: 'dropdown',
-			items: [
+				{
+					type: 'label',
+					title: 'Sharding',
+				},
 				{
 					title: 'Initial file',
 					path: '/sharding/',
