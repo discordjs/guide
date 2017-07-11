@@ -142,7 +142,9 @@ client.on('message', (message) => {
 client.login(config.token);
 ```
 
-There are a few areas where things can be done better. Allow me to show you a few.
+If you haven't noticed, we're actually already using a bit of ES6 in here! The `const` keyword and arrow function synax (`() => ...`) are a part of ES6, and are recommended to use whenever possible. If you aren't sure what they do, you can read our section about ES6 syntax [here](/path/to/es6/section) later!
+
+As for the code above, there are a few areas where things can be done better. Allow me to show you them.
 
 ### Destructuring
 
@@ -265,7 +267,7 @@ You can see the how easy and readable it makes things. ES6 has many great featur
 
 ## The problem with if/else if
 
-If you don't plan to make more than 7 or 8 commands for your bot, then using an if/else if chain is perfectly fine; it's presumably a small project at that point, so you shouldn't need to spend too much time on it. However, this isn't the case for most of us.<br/>You probably want your bot to be feature-rich and easy to configure and develop, right? Using a giant if/else if chain won't let you achieve that, and will only hinder your development process. After you read up on [creating arguments](/path/to/args/page), we'll be diving right into something called a "command handler" - code that makes handling commands easier and much more efficient.
+If you don't plan to make more than 7 or 8 commands for your bot, then using an if/else if chain is perfectly fine; it's presumably a small project at that point, so you shouldn't need to spend too much time on it. However, this isn't the case for most of us.<br />You probably want your bot to be feature-rich and easy to configure and develop, right? Using a giant if/else if chain won't let you achieve that, and will only hinder your development process. After you read up on [creating arguments](/path/to/args/page), we'll be diving right into something called a "command handler" - code that makes handling commands easier and much more efficient.
 
 Before continuing, here's a small list of reasons as to why you shouldn't use if/else if chains for anything that's not a small project:
 

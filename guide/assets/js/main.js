@@ -45,6 +45,10 @@ docute.init({
 					title: 'Adding more commands',
 					path: '/creating-your-bot/adding-more-commands',
 				},
+				{
+					title: 'Commands with user input',
+					path: '/creating-your-bot/commands-with-user-input',
+				},
 			],
 		},
 		{
@@ -53,7 +57,7 @@ docute.init({
 			items: [
 				{
 					type: 'label',
-					title: 'Database'
+					title: 'Database',
 				},
 				{
 					title: 'Storing data with Sequelize',

@@ -29,3 +29,9 @@
 .token.property, .token.symbol, .token.tag {
 	color: #CF3838;
 }
+
+/* replicate border style w/ box-shadow cuz docute has stupid dropdown menu CSS */
+.nav-list .nav-item-dropdown .dropdown-list {
+	border-width: 0;
+	box-shadow: 0 0 1px 1px #E2E2E2;
+}

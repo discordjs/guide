@@ -29,7 +29,8 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 * Frequently asked questions section
 	* Difference between User and GuildMember
 
-* Frequently asked topic guides
+* Frequently requested topic guides
+	* `.awaitMessages()`/MessageCollectors
 	* Command cooldowns
 	* How to navigate the d.js docs (hoo boi)
 	* Bot restart command
