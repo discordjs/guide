@@ -209,16 +209,16 @@ You know how you've been doing things like `prefix + 'name'` and `'Your username
 ```js
 // ES5 version, as we currently have it
 } else if (message.content.startsWith(prefix + 'server')) {
-    message.channel.send('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
+	message.channel.send('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
 } else if (message.content.startsWith(prefix + 'user-info')) {
-    message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
+	message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
 }
 
 // ES6 version, using template literals
 else if (message.content.startsWith(`${prefix}server`)) {
-    message.channel.send(`Guild name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
+	message.channel.send(`Guild name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
 } else if (message.content.startsWith(`${prefix}user-info`)) {
-    message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
+	message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
 }
 ```
 
@@ -236,7 +236,7 @@ const username = 'Sanctuary';
 const password = 'pleasedonthackme';
 
 function letsPretendThisDoesSomething() {
-    return 'yay for dummy data';
+	return 'yay for dummy data';
 }
 
 // Regular string concatination
@@ -245,8 +245,8 @@ console.log('Your password is: **' + password + '**.');
 console.log('1 + 1 = ' + (1 + 1));
 console.log('And here\'s a function call: ' + letsPretendThisDoesSomething());
 console.log('Putting strings on new lines\n' +
-'can be a bit painful\n' +
-'with string concatenation. :(');
+	'can be a bit painful\n' +
+	'with string concatenation. :(');
 
 // Template literals
 console.log(`Your password is: **${password}**.`);
@@ -254,8 +254,8 @@ console.log(`Your username is: **${username}**.`);
 console.log(`1 + 1 = ${1 + 1}`);
 console.log(`And here's a function call: ${letsPretendThisDoesSomething()}`);
 console.log(`Putting strings on new lines
-                is a breeze
-                with template literals! :)`);
+	is a breeze
+	with template literals! :)`);
 
 // NOTE: Template literals will also render the indentation inside them!
 // There are ways around that which we'll discuss in another section.
