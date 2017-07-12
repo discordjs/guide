@@ -33,18 +33,20 @@ You already have an if statement that checks messages for a ping/pong command. A
 ```js
 if (message.content === prefix + 'ping') {
 	message.channel.send('Pong.');
-} else if (message.content === prefix + 'beep') {
+}
+else if (message.content === prefix + 'beep') {
 	message.channel.send('Boop.');
 }
 ```
 
 Nearly the same, except we use `else if (...)` instead of only `if (...)`.<br />
-There are a few potential issues with this. For example, the ping command won't work if we send `!ping test`. It will only match `!ping` and nothing else. The same goes for the other command. If we our commands to be more flexible, we can do the following:
+There are a few potential issues with this. For example, the ping command won't work if we send `!ping test`. It will only match `!ping` and nothing else. The same goes for the other command. If we want our commands to be more flexible, we can do the following:
 
 ```js
 if (message.content.startsWith(prefix + 'ping')) {
 	message.channel.send('Pong.');
-} else if (message.content.startsWith(prefix + 'beep')) {
+}
+else if (message.content.startsWith(prefix + 'beep')) {
 	message.channel.send('Boop.');
 }
 ```
@@ -64,10 +66,8 @@ Make another if statement to check for commands using `server` as the command na
 <p class="tip">Servers are referred to as "guilds" in the Discord API and discord.js library. Whenever you see someone say "guild", they mean "server"!</p>
 
 ```js
-if (message.content.startsWith(prefix + 'ping')) {
-	message.channel.send('Pong.');
-} else if (message.content.startsWith(prefix + 'server')) {
-	message.channel.send('This guild\'s name is: ' + message.guild.name);
+else if (message.content.startsWith(prefix + 'server')) {
+	message.channel.send('This server\'s name is: ' + message.guild.name);
 }
 ```
 
@@ -78,7 +78,7 @@ The code above would result in this:
 If you want to expand upon that command and add some more info, here's an example of what you can do:
 
 ```js
-} else if (message.content.startsWith(prefix + 'server')) {
+else if (message.content.startsWith(prefix + 'server')) {
 	message.channel.send('Server name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
 }
 ```
@@ -96,7 +96,7 @@ You can, of course, modify this to your liking. You may want to also display the
 Set up another if statement and use the command name `user-info`.
 
 ```js
-} else if (message.content.startsWith(prefix + 'user-info')) {
+else if (message.content.startsWith(prefix + 'user-info')) {
 	message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
 }
 ```
@@ -131,11 +131,14 @@ const prefix = config.prefix;
 client.on('message', (message) => {
 	if (message.content.startsWith(prefix + 'ping')) {
 		message.channel.send('Pong.');
-	} else if (message.content.startsWith(prefix + 'beep')) {
+	}
+	else if (message.content.startsWith(prefix + 'beep')) {
 		message.channel.send('Boop.');
-	} else if (message.content.startsWith(prefix + 'server')) {
+	}
+	else if (message.content.startsWith(prefix + 'server')) {
 		message.channel.send('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
-	} else if (message.content.startsWith(prefix + 'user-info')) {
+	}
+	else if (message.content.startsWith(prefix + 'user-info')) {
 		message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
 	}
 });
@@ -189,14 +192,15 @@ Additionally, you could do this for your commands.
 
 ```js
 client.on('message', (message) => {
-    const { content } = message;
+	const { content } = message;
 
-    if (content.startsWith(prefix + 'ping')) {
-        // ping command here...
-    } else if (content.startsWith(prefix + 'beep')) {
-        // beep command here...
-    }
-    // other commands here...
+	if (content.startsWith(prefix + 'ping')) {
+		// ping command here...
+	}
+	else if (content.startsWith(prefix + 'beep')) {
+		// beep command here...
+	}
+	// other commands here...
 });
 ```
 
@@ -208,16 +212,18 @@ You know how you've been doing things like `prefix + 'name'` and `'Your username
 
 ```js
 // ES5 version, as we currently have it
-} else if (message.content.startsWith(prefix + 'server')) {
+else if (message.content.startsWith(prefix + 'server')) {
 	message.channel.send('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
-} else if (message.content.startsWith(prefix + 'user-info')) {
+}
+else if (message.content.startsWith(prefix + 'user-info')) {
 	message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
 }
 
 // ES6 version, using template literals
 else if (message.content.startsWith(`${prefix}server`)) {
 	message.channel.send(`Guild name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
-} else if (message.content.startsWith(`${prefix}user-info`)) {
+}
+else if (message.content.startsWith(`${prefix}user-info`)) {
 	message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
 }
 ```
