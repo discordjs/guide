@@ -45,6 +45,10 @@ docute.init({
 					title: 'Adding More Commands',
 					path: '/creating-your-bot/adding-more-commands',
 				},
+				{
+					title: 'Common questions',
+					path: '/creating-your-bot/common-questions',
+				},
 			],
 		},
 		{
