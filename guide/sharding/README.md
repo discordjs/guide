@@ -8,14 +8,14 @@ As an application grows large, developers may find it necessary to split their p
 
 ### Sharding File
 
-First, we need to have a file that we will be launching from now on, rather than your original `index.js` file. I highly reccommend renaming that to `bot.js` and naming this `index.js` instead, as you will not be launching the other file anymore. Copy paste the following snippet into the `index.js` file.
+First, you'll need to have a file that you'll be launching from now on, rather than your original `index.js` file. It's highly recommended renaming that to `bot.js` and naming this new file to `index.js` instead, as you will not be launching the other file anymore. Copy & paste the following snippet into your new `index.js` file.
 
 ```js
 const { ShardingManager } = require('discord.js');
-const manager = new ShardingManager('./bot.js', { totalShards: "auto", token: 'your token' });
+const manager = new ShardingManager('./bot.js', { totalShards: 'auto', token: 'your-token-goes-here' });
 manager.spawn();
 manager.on('launch', (shard) => console.log(`Launched shard ${shard.id}`));
 ```
 
-The above code utilizes discord.js's sharding manager to spawn the recommended amount of shards for your bot. The recommended amount should be approximately 1,000 guilds per shard. When you provide the token here, you will not need to in your `bot.js` file, but you will need to call the login method. So you should have `client.login()` exactly as it appears there.
-You can find the methods available for the ShardingManager [here](https://discord.js.org/#/docs/main/master/class/ShardingManager), although you may not be making much use of this section, unlike the next feature we will explore, which you may learn about by clicking [this link](/sharding/basic-changes).
+The above code utilizes discord.js's sharding manager to spawn the recommended amount of shards for your bot. The recommended amount should be approximately 1,000 guilds per shard. When you provide the token here, you won't need to provide it in your `bot.js` file - but you will still need to call the login method. So you should have `client.login()` exactly as it appears here.
+You can find the methods available for the ShardingManager class [here](https://discord.js.org/#/docs/main/master/class/ShardingManager). Though, you may not be making much use of this section, unlike the next feature we will explore, which you may learn about by clicking [this link](/sharding/basic-changes).

@@ -1,15 +1,15 @@
 # Storing data with Sequelize
 
-Sequelize is an object-relational-mapper, which means you can write a query using objects and have it run on almost any other database system that sequelize supports.
+Sequelize is an object-relational-mapper, which means you can write a query using objects and have it run on almost any other database system that Sequelize supports.
 
 ### Why use an ORM?
 
-The main benefit of using an ORM like sequelize is because it allows you to write code that essentially looks like native JavaScript. As a side benefit, an ORM will allow you to write code that can run in almost every database system. Although databases generally adhere very closely to SQL, they each have their own slight nuances and differences. You can create a database-agnostic query using an ORM that works on multiple database systems.
+The main benefit of using an ORM like Sequelize is that it allows you to write code that essentially looks like native JavaScript. As a side benefit, an ORM will allow you to write code that can run in almost every database system. Although databases generally adhere very closely to SQL, they each have their own slight nuances and differences. You can create a database-agnostic query using an ORM that works on multiple database systems.
 
 ## A simple tag system
 
 For this tutorial, we'll create a simple tag system. The tag system will allow you to add a tag, output a tag, edit the tag, show tag info, list tags, and delete a tag.   
-To begin, you should install sequelize into your discord.js project. We'll use sqlite as our first storage engine, but we'll move into other databases later. Note that you'll need node 7.6 or above to utilize the `async/await` operators.
+To begin, you should install Sequelize into your discord.js project. We'll use sqlite as our first storage engine, but we'll move into other databases later. Note that you'll need node 7.6 or above to utilize the `async/await` operators.
 
 ### Installing and using Sequelize
 
@@ -21,7 +21,7 @@ $ npm install --save sequelize
 $ npm install --save sqlite3
 ```
 
-After you have installed discord.js and sequelize, you can start with the following skeleton code. The comment labels will tell you where we'll insert our code.
+After you have installed discord.js and Sequelize, you can start with the following skeleton code. The comment labels will tell you where we'll insert our code.
 
 ```js
 const Discord = require('discord.js');
@@ -80,9 +80,9 @@ const sequelize = new Sequelize('database', 'user', 'password', {
 });
 ```
 
-`host` tells sequelize where to look for the database. This will be localhost for most systems, as the database usually resides with the application. But if you have a remote database, then you can set it to that connection address. But otherwise, don't touch this unless you know what you're doing.  
+`host` tells Sequelize where to look for the database. This will be localhost for most systems, as the database usually resides with the application. But if you have a remote database, then you can set it to that connection address. But otherwise, don't touch this unless you know what you're doing.  
 `dialect` refers to the database engine you're going to use. For this tutorial, we'll use sqlite.  
-`logging` setting this to false disables the verbose output from sequelize. Set it to true when you're trying to debug.  
+`logging` setting this to false disables the verbose output from Sequelize. Set it to true when you're trying to debug.  
 `storage` is a sqlite-only setting, because sqlite is the only database that stores all its data to a single file.  
 
 
@@ -95,7 +95,7 @@ In any relational database, you need to create tables in order to store your dat
 | bob | is the best | bob | 0 |
 | tableflip | (╯°□°）╯︵ ┻━┻ | joe | 8 |
 
-In order to do that in sequelize, we'll define a model object based on this structure.
+In order to do that in Sequelize, we'll define a model object based on this structure.
 
 ```js
 /* Equivalent SQL code
@@ -137,7 +137,7 @@ Now that we have defined our structure, we need to make sure the model exists in
 Tags.sync();
 ```
 
-The table doesn't actually get created until you `sync` it. The schema that we defined from before was simply creating the model that lets sequelize know what our data should look like. For testing, you can use `Tags.sync({ force: true })` to recreate the table every time on startup. This way you can get blank slate each time.
+The table doesn't actually get created until you `sync` it. The schema that we defined from before was simply creating the model that lets Sequelize know what our data should look like. For testing, you can use `Tags.sync({ force: true })` to recreate the table every time on startup. This way you can get blank slate each time.
 
 ### [delta] Adding a tag <div id="delta"></div>
 

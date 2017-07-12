@@ -107,6 +107,8 @@ And there you have it! As you can see, it's quite simple to add additional comma
 
 ## Bonus: Refactoring to ES6
 
+<p class="tip">This part of the guide is completely optional, but it is recommended. If you want to keep following best practices and achieve cleaner code, take the time to read through!</p>
+
 This section is specifically for transforming the ES5 code you've had up until now into ES6. If you're not sure what ES5/ES6 is referring to, think of them as just different versions of JavaScript. ES6 has many great features that you should take advantage of, whenever possible.
 
 Before anything, here's what your code should look like at this moment:
@@ -144,6 +146,8 @@ There are a few areas where things can be done better. Allow me to show you a fe
 
 ### Destructuring
 
+What you see in red is what you'll remove, and what you see in green is what you'll replace it with.
+
 ```diff
 - const config = require('./config.json');
 + const { prefix, token } = require('./config.json');
@@ -176,7 +180,7 @@ const token = require('./config.json').token;
 const { prefix, token } = require('./config.json');
 ```
 
-Destructuring extracts the property from the object on the right-hand side and stores it in a variable. If the property doesn't exist, it'll still create a variable, but with the value of `undefined`. So instead of doing `config.token` in your `client.login()` method, you'd simply use `token` in its place. And since destructuring creates a variable for us, you don't even need that `const prefix = config.prefix` line. Pretty cool!
+Destructuring extracts the property from the object on the right-hand side and stores it in a variable. If the property doesn't exist, it'll still create a variable, but with the value of `undefined`. So instead of using `config.token` in your `client.login()` method, you'd simply use `token` in its place. And since destructuring creates a variable for us, you don't even need that `const prefix = config.prefix` line. Pretty cool!
 
 Additionally, you could even do this for your commands.
 
@@ -198,7 +202,7 @@ It is a bit less to write out, and also looks cleaner. I wouldn't advise it, tho
 
 ### Template literals
 
-You know how you've been doing things like `prefix + 'name'` and `Your username: ' + message.author.username`? It's a bit unpleasing to the eyes, and not too fun to constantly type out. Thankfully, there's a better alternative.
+You know how you've been doing things like `prefix + 'name'` and `'Your username: ' + message.author.username`? It's a bit unpleasing to the eyes, and not too fun to constantly type out. Thankfully, there's a better alternative.
 
 ```js
 // ES5 version, as we currently have it
@@ -258,3 +262,17 @@ console.log(`Putting strings on new lines
 ```
 
 You can see the how easy and readable it makes things. ES6 has many great features similar to this one that make your code sleeker and more powerful than before. Interested in learning more? Finish up the next few pages and then check out the ES6 guide we have up! (link to be added later)
+
+## The problem with if/else if
+
+If you don't plan to make more than 7 or 8 commands for your bot, then using an if/else if chain is perfectly fine; it's presumably a small project at that point, so you shouldn't need to spend too much time on it. However, this isn't the case for most of us.<br/>You probably want your bot to be feature-rich and easy to configure and develop, right? Using a giant if/else if chain won't let you achieve that, and will only hinder your development process. After you read up on [creating arguments](/path/to/args/page), we'll be diving right into something called a "command handler" - code that makes handling commands easier and much more efficient.
+
+Before continuing, here's a small list of reasons as to why you shouldn't use if/else if chains for anything that's not a small project:
+
+* Takes longer to find a peice of code you want.
+* Easier to fall victim to spaghetti code.
+* Difficult to maintain as it grows.
+* A lot more strain on your eyes.
+* General bad practice.
+
+All that and more. In short, it's just not a good idea. But that's what this guide is for! Go ahead and read the next few pages to prevent these issues before they happen, as well learn new things along the way.

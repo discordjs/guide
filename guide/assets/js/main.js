@@ -12,20 +12,20 @@ docute.init({
 			type: 'dropdown',
 			items: [
 				{
-					title: 'Installing Node and discord.js ',
+					title: 'Installing Node and discord.js',
 					path: '/preparations/',
 				},
 				{
-					title: 'Settings Up a Bot Application',
+					title: 'Setting up a linter',
+					path: '/preparations/setting-up-a-linter',
+				},
+				{
+					title: 'Settings up a bot application',
 					path: '/preparations/setting-up-a-bot-application',
 				},
 				{
-					title: 'Adding Your Bot to Servers',
+					title: 'Adding your bot to servers',
 					path: '/preparations/adding-your-bot-to-servers',
-				},
-				{
-					title: 'Setting up a Code Editor',
-					path: '/better-dev-environment/setting-up-a-linter',
 				},
 			],
 		},
@@ -34,15 +34,15 @@ docute.init({
 			type: 'dropdown',
 			items: [
 				{
-					title: 'Up & Running',
+					title: 'Up & running',
 					path: '/creating-your-bot/',
 				},
 				{
-					title: 'Configuration Files',
+					title: 'Configuration files',
 					path: '/creating-your-bot/configuration-files',
 				},
 				{
-					title: 'Adding More Commands',
+					title: 'Adding more commands',
 					path: '/creating-your-bot/adding-more-commands',
 				},
 				{
@@ -56,15 +56,17 @@ docute.init({
 			type: 'dropdown',
 			items: [
 				{
-					title: 'Storing data with sequelize',
+					type: 'label',
+					title: 'Database'
+				},
+				{
+					title: 'Storing data with Sequelize',
 					path: '/sequelize/',
 				},
-			],
-		},
-		{
-			title: 'Sharding',
-			type: 'dropdown',
-			items: [
+				{
+					type: 'label',
+					title: 'Sharding',
+				},
 				{
 					title: 'Initial file',
 					path: '/sharding/',

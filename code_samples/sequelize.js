@@ -8,10 +8,8 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 	host: 'localhost',
 	dialect: 'sqlite',
 	logging: false,
-
 	// SQLite only
 	storage: 'database.sqlite',
-
 });
 
 const Tags = sequelize.define('tags', {
