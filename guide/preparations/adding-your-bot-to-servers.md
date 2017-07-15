@@ -20,6 +20,8 @@ The structure of the url is pretty simply:
 
 <p class="tip">A permissions parameter also exists to restrict or guarantee the permission your bot will have on the server you add it to. For ease of usage, it is recommended to use [this](https://discordapi.com/permissions.html) website.</p>
 
+<p class="warning">If you get an error message saying "Bot requires a code grant." then head over into your Application's settings and disable the "Require OAuth2 Code Grant" option. You usually shouldn't enable this checkbox unless you know what you are doing.</p>
+
 ## Creating and using your own invite link
 
 Right. So if you've been paying attention, you'll likely have figured out that to add your own bot to a server, you're going to have to substitute the ``client_id=...`` part of the link with your bot Application's ID.
@@ -32,7 +34,7 @@ Insert this ID into the Link template and then access it in your browser, you sh
 
 ![Bot Authorization field](https://i.imgur.com/A8l70bj.png)
 
-Choose the server you want to add it to (you can only add it to servers you own!) and press "Authorize", this should then present you a nice confirmation message:
+Choose the server you want to add it to (you can only add it to servers you have the "Manage Server" permission on!) and press "Authorize", this should then present you a nice confirmation message:
 
 ![Bot authorized](https://i.imgur.com/BAUsjyg.png)
 
