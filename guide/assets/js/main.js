@@ -49,6 +49,10 @@ docute.init({
 					title: 'Commands with user input',
 					path: '/creating-your-bot/commands-with-user-input',
 				},
+        {
+					title: 'Common questions',
+					path: '/creating-your-bot/common-questions',
+				},
 			],
 		},
 		{
