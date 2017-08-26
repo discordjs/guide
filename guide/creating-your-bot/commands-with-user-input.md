@@ -193,8 +193,11 @@ The first step would be to check if the input we give is an actual number.
 
 ```js
 else if (command === 'prune') {
-	// if the first argument is NaN (Not a Number), then return
-	if (isNaN(args[0])) {
+	// convert the first argument to a number first
+	const amount = parseInt(args[0]);
+
+	// if the amount is NaN (Not a Number), then let them know
+	if (isNaN(amount)) {
 		return message.reply('that doesn\'t seem to be a valid number.');
 	}
 
@@ -206,19 +209,60 @@ And if you test it, it should work as expected.
 
 ![isNaN test](http://i.imgur.com/lhuPYta.png)
 
-So what we need to do next is check if the first argument is between X and Y. Following the idea of a prune command, you'll most likely want to use the `.bulkDelete()` method, which allows you to delete multiple messages in one fell swoop. With that being said, that method does have its limits - you can only delete a minimum of 2 messages and a maximum of 100 (at a time). There's a few ways to deal with that, so let me show you one of them.
-
+So what we need to do next is check if the first argument is between X and Y. Following the idea of a prune command, you'll most likely want to use the `.bulkDelete()` method, which allows you to delete multiple messages in one fell swoop. With that being said, that method does have its limits - you can only delete a minimum of 2 and a maximum of 100 messages (at a time). There's a few ways to deal with that, so let me show you one of them.
 
 ```js
-else if (command === 'prune') {
-	if (isNaN(args[0])) {
-		return message.reply('that doesn\'t seem to be a valid number.');
-	}
-
-	// ...
+if (isNaN(amount)) {
+	return message.reply('that doesn\'t seem to be a valid number.');
 }
+// if the amount is less than 2 or more than 100, let them know again
+else if (amount < 2 || amount > 100) {
+	return message.reply('you need to input a number between 2 and 100.');
+}
+
+// ...
 ```
 
-### An array of possible answers
+Now all that's left is to delete the messages! It's a simple single line of code:
 
-## Holy fuck I'm tired of this page, I'll finish this shit later
+```js
+message.channel.bulkDelete(amount);
+```
+
+And you've got a working prune command! Create a test channel, send a few random messages, and test it out.
+
+#### Caveats
+
+You should note that there are actually a few caveats with the `.bulkDelete()` method. The first would be the trying to delete messages older than 2 weeks. Here's an easy fix for that:
+
+```js
+message.channel.bulkDelete(amount, true);
+```
+
+The 2nd parameter in the `.bulkDelete()` method is called `filterOld` - it will filter out messages older than 2 weeks automatically. So if there are 50 messages and 25 of them are older than 2 weeks, it'll only delete the first 25 without throwing an error. However, if all the messages you're trying to delete are older than 2 weeks, then it will still throw an error. Knowing this, we should catch that error by chaining a `.catch()`.
+
+```js
+message.channel.bulkDelete(amount, true).catch((err) => {
+	console.error(err);
+	message.channel.send('there was an error trying to prune messages in this channel!');
+});
+```
+
+<p class="tip">If you aren't familiar with the `.catch()` method, it's used to catch errors on Promises. Unsure what Promises are? Google around for more info!</p>
+
+The other caveat with this is that the `!prune {number}` message you sent will also count towards the amount deleted. What this means is that if you send `!prune 2`, it'll delete that message and only one other. There are a couple ways around this, but we'll be taking the easiest route for the sake of the tutorial. Here are the edits to make to your current code:
+
+```diff
+- const amount = parseInt(args[0]);
++ const amount = parseInt(args[0]) + 1;
+```
+
+```diff
+- else if (amount < 2 || amount > 100) {
+-	return message.reply('you need to input a number between 2 and 100.');
+- }
++ else if (amount < 1 || amount > 99) {
++	return message.reply('you need to input a number between 1 and 99.');
++ }
+```
+

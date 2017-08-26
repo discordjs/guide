@@ -157,13 +157,13 @@ What you see in red is what you'll remove, and what you see in green is what you
 ```diff
 - const config = require('./config.json');
 + const { prefix, token } = require('./config.json');
+```
 
-...
-
+```diff
 - const prefix = config.prefix;
+```
 
-...
-
+```diff
 - client.login(config.token);
 + client.login(token);
 ```
@@ -177,11 +177,15 @@ If you've never seen this syntax bfeore, it can be a bit confusing. But actually
 const config = require('./config.json');
 const prefix = config.prefix;
 const token = config.token;
+```
 
+```js
 // Here's an alternative version, still using ES5
 const prefix = require('./config.json').prefix;
 const token = require('./config.json').token;
+```
 
+```js
 // And here's the glorious ES6 version!
 const { prefix, token } = require('./config.json');
 ```
@@ -218,7 +222,9 @@ else if (message.content.startsWith(prefix + 'server')) {
 else if (message.content.startsWith(prefix + 'user-info')) {
 	message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
 }
+```
 
+```js
 // ES6 version, using template literals
 else if (message.content.startsWith(`${prefix}server`)) {
 	message.channel.send(`Guild name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
@@ -230,7 +236,7 @@ else if (message.content.startsWith(`${prefix}user-info`)) {
 
 Easier to read, easier to write! The best of both worlds.
 
-#### Tempate literals explained
+#### Tempate literals vs string concatination
 
 You can think of template literals as the ES6 version of string concatination. I won't go too much into detail about it, but if you're interested in reading more, you can read [the MDN page about them](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals).
 
@@ -244,7 +250,9 @@ const password = 'pleasedonthackme';
 function letsPretendThisDoesSomething() {
 	return 'yay for dummy data';
 }
+```
 
+```js
 // Regular string concatination
 console.log('Your username is **' + username + '**.');
 console.log('Your password is: **' + password + '**.');
@@ -253,18 +261,22 @@ console.log('And here\'s a function call: ' + letsPretendThisDoesSomething());
 console.log('Putting strings on new lines\n' +
 	'can be a bit painful\n' +
 	'with string concatenation. :(');
+```
 
+```js
 // Template literals
 console.log(`Your password is: **${password}**.`);
 console.log(`Your username is: **${username}**.`);
 console.log(`1 + 1 = ${1 + 1}`);
 console.log(`And here's a function call: ${letsPretendThisDoesSomething()}`);
-console.log(`Putting strings on new lines
+console.log(`
+	Putting strings on new lines
 	is a breeze
-	with template literals! :)`);
+	with template literals! :)
+`);
 
 // NOTE: Template literals will also render the indentation inside them!
-// There are ways around that which we'll discuss in another section.
+// There are ways around that, which we'll discuss in another section.
 ```
 
 You can see how it makes things easier and more readable. ES6 has many great features similar to this one that make your code sleeker and more powerful than before. Interested in learning more? Finish reading the next few pages and then check out the ES6 guide we have up! (link to be added later)
