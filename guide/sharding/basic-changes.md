@@ -13,12 +13,12 @@ client.on('message', (message) => {
 	}
 });
 
-client.login();
+client.login('token');
 ```
 
-Let's say your bot is in a total of 3,600 guilds. With the recommended shard count, you might be in 4 shards, the first 3 containing 1,000 guilds each,a nd the last one containing the remaining 600. If a guild on a certain shard (shard #2, for example) and it receives this command. The guild count will be 1,000, which is obviously not the "correct" number of guilds for your bot. Likewise, if the message is received on a guild in shard 3, (shards go up from 0 to n), the guild count will be 600, which is still not what you want. "How can I fix this?", you ask? Well, that's why we're here, isn't it?
+Let's say your bot is in a total of 3,600 guilds. With the recommended shard count, you might be in 4 shards, the first 3 containing 1,000 guilds each, and the last one containing the remaining 600. If a guild on a certain shard (shard #2, for example) and it receives this command. The guild count will be 1,000, which is obviously not the "correct" number of guilds for your bot. Likewise, if the message is received on a guild in shard 3, (shards go up from 0 to n), the guild count will be 600, which is still not what you want. "How can I fix this?", you ask? Well, that's why we're here, isn't it?
 
-### Broadcast eval
+### BroadcastEval
 
 First, let's take a look at [the most common sharding utility method you'll be using](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=broadcastEval). This method makes all of the shards evaluate a given script, where `this` is the `client` once each shard gets to evaluating it. You can read more about the `this` keyword [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this).
 
@@ -46,5 +46,7 @@ client.on('message', (message) => {
 	}
 });
 
-client.login();
+client.login('token');
 ```
+
+The next section contains additional changes you might want to take into consideration, which you may learn about by clicking [this link](/sharding/additional).

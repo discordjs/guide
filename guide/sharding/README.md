@@ -17,5 +17,5 @@ manager.spawn();
 manager.on('launch', (shard) => console.log(`Launched shard ${shard.id}`));
 ```
 
-The above code utilizes discord.js's sharding manager to spawn the recommended amount of shards for your bot. The recommended amount should be approximately 1,000 guilds per shard. When you provide the token here, you won't need to provide it in your `bot.js` file - but you will still need to call the login method. So you should have `client.login()` exactly as it appears here.
+The above code utilizes discord.js's sharding manager to spawn the recommended amount of shards for your bot. The recommended amount should be approximately 1,000 guilds per shard. Even though you provide the token here, you will still need to send it over to the main bot file in `client.login()`, so don't forget to do that.
 You can find the methods available for the ShardingManager class [here](https://discord.js.org/#/docs/main/master/class/ShardingManager). Though, you may not be making much use of this section, unlike the next feature we will explore, which you may learn about by clicking [this link](/sharding/basic-changes).

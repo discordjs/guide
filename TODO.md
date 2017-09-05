@@ -15,7 +15,7 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 	* cmder/hyper/etc.
 	* package.json scripts
 
-* Useful packages for bots (single page, probably) 
+* Useful packages for bots (single page, probably)
 	* common-tags
 	* moment.js
 	* chalk
@@ -34,4 +34,3 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 	* Command cooldowns
 	* How to navigate the d.js docs (hoo boi)
 	* Bot restart command
-	* Sharding guide (Hi Lewd ( ͡° ͜ʖ ͡°))
