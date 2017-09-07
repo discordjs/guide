@@ -13,7 +13,7 @@ Go to your code editor and make a new file. Add in the code below and save it as
 }
 ```
 
-Go back to your main bot file, locate the `const client = new Discord.Client()` line, and add this under it:
+Go back to your main bot file, locate the `const client = new Discord.Client()` line, and add this above it:
 
 ```js
 // `./` means "look for a file in the same directory as this file"

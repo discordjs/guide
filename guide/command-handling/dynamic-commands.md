@@ -1,0 +1,101 @@
+## Handling commands
+
+### How it works
+
+Now that you have a Collection of all our commands, you can use them easily! But before diving straight into it, it'd be a good idea to familiarize yourself with how you'll turn these basic if statements into something much more dynamic and robust. So let's continue with 1 more if statement example, and then we'll move onto the real stuff.
+
+As always, the red is what you'll remove and the green is what you'll replace it with.
+```diff
+if (command === 'ping') {
+--	message.channel.send('Pong.');
+++	client.commands.get('ping').execute(message, arguments);
+}
+```
+
+If you're a bit confused by that, here's the same code with some comments to help you understand:
+
+```js
+if (command === 'ping') {
+	// on the `client.commands` Collection, use the `.get()` method to get the command with a key named `ping`
+	// once you have that, call the `.execute()` method
+	// it's necessary to pass through the `message` and `args` variables through,
+	// because that's what we required in our `exports.execute = (message, args) => { ... }` bit
+	// in our command file
+	client.commands.get('ping').execute(message, args);
+}
+```
+
+Instead of putting your ping command code directly in the if statement, you can call it directly like that instead. Granted, this version is actually longer than what you had before for your ping command, but most commands usually aren't that short.
+
+So, if you wanted to (assuming that you've copied & pasted all of your commands into their own files by now), this could be your entire message event:
+
+```js
+client.on('message', (message) => {
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
+	const command = message.content.slice(prefix.length).split(' ')[0];
+	const args = message.content.split(/ +/g).slice(1);
+
+	if (command === 'ping') {
+		client.commands.get('ping').execute(message, args);
+	}
+	else if (command === 'beep') {
+		client.commands.get('beep').execute(message, args);
+	}
+	else if (command === 'server') {
+		client.commands.get('server').execute(message, args);
+	}
+	// do the same for the rest of your commands...
+});
+```
+
+That would work perfectly fine, but isn't dynamic; you'd still have too add an if statement and the same old code each time you wanted to register a new command, which is less than ideal.
+
+### Dynamically executing commands
+
+At this point, you can take that entire if/else if chain and delete it entirely. You won't need anything past the `const args = ...` line that's there right now. Instead, you'll be replacing it with this:
+
+```js
+if (!client.commands.has(command)) return;
+
+try {
+	client.commands.get(command).execute(message, args);
+}
+catch (error) {
+	console.error(error);
+	message.reply('there was an error trying to execute that command!');
+}
+```
+
+As always, here's the same code with comments:
+
+```js
+// if there aren't any items inside the `client.commands` Collection
+// with the key equal to the command name the user used, return
+if (!client.commands.has(command)) return;
+
+// wrapping this in a try catch in case any errors occur
+// so that it doesn't crash your bot entirely
+try {
+	// get the command from the `client.commands` Collection
+	// and then call its `.execute()` function (the one you exported)
+	// while also passing in our `message` and `args` as the function arguments
+	client.commands.get(command).execute(message, args);
+}
+catch (error) {
+	// log the error to the console so that we have an idea of what went wrong
+	console.error(error);
+
+	// let the user know something went wrong
+	message.reply('there was an error trying to execute that command!');
+}
+```
+
+... and that's it! You've successfully loaded commands dynamically! Whenever you want to add a new command, you simply make a new file in your `commands` directory, name it what you want, and then do what you did for the other commands. Pretty simple, isn't it?
+
+In the following chapters, we'll be going through how to implement some (very basic) features into your brand new command handler. Truth be told, it's hardly a command "handler" at this point; it's simply a command loader and executor, if you wish to see it that way. You'll learn how to implement new features and the logic behind them, such as:
+
+* Command aliases
+* A dynamic help message
+* Guild only commands
+* Owner only commands
+* Cooldowns

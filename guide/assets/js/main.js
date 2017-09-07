@@ -33,6 +33,10 @@ docute.init({
 			type: 'dropdown',
 			items: [
 				{
+					type: 'label',
+					title: 'Initial Steps',
+				},
+				{
 					title: 'Up & running',
 					path: '/creating-your-bot/',
 				},
@@ -47,6 +51,22 @@ docute.init({
 				{
 					title: 'Commands with user input',
 					path: '/creating-your-bot/commands-with-user-input',
+				},
+				{
+					type: 'label',
+					title: 'Command Handler',
+				},
+				{
+					title: 'File setup',
+					path: '/command-handling/',
+				},
+				{
+					title: 'Dynamic commands setup',
+					path: '/command-handling/',
+				},
+				{
+					type: 'label',
+					title: 'FAQ',
 				},
 				{
 					title: 'Common questions',

@@ -99,14 +99,14 @@ In any relational database, you need to create tables in order to store your dat
 In order to do that in Sequelize, we'll define a model object based on this structure.
 
 ```js
-/* Equivalent SQL code
-* CREATE TABLE `tags` (
-* name varchar (255),
-* description TEXT,
-* username varchar(255),
-* usage int DEFAULT 0
-* );
-* */
+/*
+ * equivalent to: CREATE TABLE tags(
+ * name VARCHAR(255),
+ * description TEXT,
+ * username VARCHAR(255),
+ * usage INT
+ * );
+ */
 const Tags = sequelize.define('tags', {
 	name: {
 		type: Sequelize.STRING,
@@ -151,7 +151,7 @@ const tagName = splitArgs.shift();
 const tagDescription = splitArgs.join(' ');
 
 try {
-	// equivalent to: INSERT INTO tags (name, descrption, username) values (?, ?, ?)
+	// equivalent to: INSERT INTO tags (name, descrption, username) values (?, ?, ?);
 	const tag = await Tags.create({
 		name: tagName,
 		description: tagDescription,
@@ -183,7 +183,7 @@ const tagName = commandArgs;
 // equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
 const tag = await Tags.findOne({ where: { name: tagName } });
 if (tag) {
-	// equivalent to UPDATE tags SET usage_count = usage_count + 1 WHERE name = 'tagName';
+	// equivalent to: UPDATE tags SET usage_count = usage_count + 1 WHERE name = 'tagName';
 	tag.increment('usage_count');
 	return msg.channel.send(tag.get('description'));
 }
@@ -200,7 +200,7 @@ const splitArgs = commandArgs.split(' ');
 const tagName = splitArgs.shift();
 const tagDescription = splitArgs.join(' ');
 
-// equivalent to: UPDATE tags (descrption) values (?) WHERE name="?"
+// equivalent to: UPDATE tags (descrption) values (?) WHERE name='?';
 const affectedRows = await Tags.update({ description: tagDescription }, { where: { name: tagName } });
 if (affectedRows > 0) {
 	return msg.reply(`Tag ${tagName} was edited.`);
@@ -229,7 +229,7 @@ This section is very similar to our previous command, except we're showing the t
 We'll use the next command to fetch a list of all the tags we've created so far.
 
 ```js
-// equivalent to SELECT name FROM tags;
+// equivalent to: SELECT name FROM tags;
 const tagList = await Tags.findAll({ attributes: ['name' ] });
 const tagString = tagList.map(t => t.name).join(', ') || 'No tags set.';
 return msg.channel.send(`List of tags: ${tagString}`);
@@ -241,7 +241,7 @@ Here, we use the `.findAll()` method to grab all the tag names. Notice that inst
 
 ```js
 const tagName = commandArgs;
-// equivalent to DELETE from tags WHERE name = ?
+// equivalent to: DELETE from tags WHERE name = ?;
 const rowCount = await Tags.destroy({ where: { name: tagName } });
 if (!rowCount) return msg.reply('That tag did not exist.');
 
