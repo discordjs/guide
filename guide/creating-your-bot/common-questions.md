@@ -28,7 +28,6 @@ const member = <message>.mentions.members.first();
 member.addRole(role);
 ```
 
-
 ## Miscellaneous
 
 ### How do I set my playing status?
