@@ -28,6 +28,7 @@ const member = <message>.mentions.members.first();
 member.addRole(role);
 ```
 
+
 ## Miscellaneous
 
 ### How do I set my playing status?
@@ -41,3 +42,12 @@ member.addRole(role);
 * If you would like to set your playing status upon startup, you must place the `<client>.user.setGame()` method in a `ready` event listener (`client.on('ready', () => {});`).
 
 * If you're using a selfbot to change your playing status, you won't be able to view the status change, but other users will.
+
+### How do I prompt the user for additional input?
+
+```js
+<message>.channel.send("Please enter more input.");
+const filter = (msg) => <message>.author == msg.author;
+const inputMessage = await <message>.awaitMessages(filter, { time: 60000, maxMatches: 1, errors: ['time'] })
+	.catch(() => <message>.channel.send("You did not enter any input!"));
+```
