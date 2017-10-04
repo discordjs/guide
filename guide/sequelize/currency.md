@@ -49,9 +49,9 @@ module.exports = (sequelize, DataTypes) => {
 ```
 Like you see in the diagram above, our Users model will only have 2 attributes, a `user_id` primary key and a `balance`. A primary key is a special type of attribute that becomes the default column used when joining tables together. In addition, a primary key is automatically set as unique and not null.
 
-Balance also sets `allowNull` to false. This, in conjunction with setting a primary key, means that both values have to be set, otherwise the database would throw an error. This means that we guarantee correctness in our data storage in that we never have null or empty values. This ensures that if we somehow forget to validate in the application that both values are not null, our database would do the final validation for us.
+Balance also sets `allowNull` to `false`. This, in conjunction with setting a primary key, means that both values have to be set, otherwise the database would throw an error. This means that we guarantee correctness in our data storage in that we never have null or empty values. This ensures that if we somehow forget to validate in the application that both values are not null, our database would do the final validation for us.
 
-Notice that our options object sets `timestamps` to false. This disables the `createdAt` and the `updatedAt` columns that sequelize usually creates for you. Setting `user_id` to primary also gets rid of the `id` primary key that Sequelize usually generates for you, since there can only be one primary key on a table.
+Notice that our options object sets `timestamps` to `false`. This disables the `createdAt` and the `updatedAt` columns that sequelize usually creates for you. Setting `user_id` to primary also gets rid of the `id` primary key that Sequelize usually generates for you, since there can only be one primary key on a table.
 
 
 Next, still in the same `models` folder, create a `CurrencyShop.js` file that contains the following:
@@ -128,7 +128,7 @@ sequelize.sync().then(async () => {
 }).catch(console.error);
 ```
 
-You'll notice some familiar things here from the previous tutorial. The Sequelize declaration is the same. We do have something different here, and that's how we import the models. Sequelize has an import function to make your code a bit cleaner when you have many models to use. We pull the two models and the junction table, sync them, and add items to our shop. A new function here is the `.upsert()` function. It's a portmanteau for **up**date or in**sert**.  We use `upsert` here because just in case you run this file multiple times, it doesn't create duplicates. That shouldn't happen because we defined name as *unique* but there's no harm in being safe. Upsert also has a nice side benefit; If you adjust the cost, the respective item should also have their cost updated.
+You'll notice some familiar things here from the previous tutorial such as the Sequelize declaration being the same. We do have something different here, and that's how we import the models. Sequelize has an import function to make your code a bit cleaner when you have many models to use. We pull the two models and the junction table, sync them, and add items to our shop. A new function here is the `.upsert()` function. It's a portmanteau for **up**date or in**sert**.  We use `upsert` here because just in case you run this file multiple times, it doesn't create duplicates. That shouldn't happen because we defined name as *unique* but there's no harm in being safe. Upsert also has a nice side benefit; If you adjust the cost, the respective item should also have their cost updated.
 
 
 ## Create associations
@@ -285,7 +285,7 @@ Nothing tricky here. We use our `.getBalance()` method to show either the author
 
 ```js
 const target = msg.mentions.users.first() || msg.author;
-const user = await Users.findOne({ where: { user_id: target.id } });
+const user = await Users.findByPrimary(target.id);
 const items = await user.getItems();
 
 if (!items.length) msg.channel.send(`${target.tag} has nothing!`);
@@ -322,7 +322,7 @@ if (item.cost > currency.getBalance(msg.author.id)) {
 	return msg.channel.send(`You currently have ${currency.getBalance(msg.author.id)}, but the ${item.name} costs ${item.cost}!`);
 }
 
-const user = await Users.findOne({ where: { user_id: msg.author.id } });
+const user = await Users.findByPrimary(msg.author.id);
 currency.add(msg.author.id, -item.cost);
 await user.addItem(item);
 
@@ -406,7 +406,7 @@ client.on('message', async msg => {
 	else if (command === 'inventory') {
 
 		const target = msg.mentions.users.first() || msg.author;
-		const user = await Users.findOne({ where: { user_id: target.id } });
+		const user = await Users.findByPrimary(target.id);
 		const items = await user.getItems();
 
 		if (!items.length) msg.channel.send(`${target.tag} has nothing!`);
@@ -431,13 +431,13 @@ client.on('message', async msg => {
 	}
 	else if (command === 'buy') {
 
-		const item = await CurrencyShop.findOne({ where: { name: {$like: commandArgs } } });
+		const item = await CurrencyShop.findOne({ where: { name: { $like: commandArgs } } });
 		if (!item) return msg.channel.send(`That item doesn't exist.`);
 		if (item.cost > currency.getBalance(msg.author.id)) {
 			return msg.channel.send(`You currently have ${currency.getBalance(msg.author.id)}, but the ${item.name} costs ${item.cost}!`);
 		}
 
-		const user = await Users.findOne({ where: { user_id: msg.author.id } });
+		const user = await Users.findByPrimary(msg.author.id);
 		currency.add(msg.author.id, -item.cost);
 		await user.addItem(item);
 
