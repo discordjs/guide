@@ -1,25 +1,25 @@
-# Making a Currency system
+# Making a Currency System
 
-A common feature of discord bots is a currency system. It's possible to do everything in one object, but we can also abstract that in terms of *relations* between objects. This is where the power of a RDBMS (Relational Database Management System) truly shines. Sequelize calls these *associations*, so we'll be using that term from now on. 
+A common feature of Discord bots is a currency system. It's possible to do everything in one object, but we can also abstract that in terms of *relations* between objects. This is where the power of a RDBMS (Relational Database Management System) truly shines. Sequelize calls these *associations*, so we'll be using that term from now on.
 
 
 ## File overview
 
-There will be multiple files. A db init script, your models, and your bot script. In the previous tutorial, we placed all of these in the same file. Having everything in one file is usually not how it's done in the real world, so we'll correct that. 
+There will be multiple files: a DB init script, your models, and your bot script. In the previous tutorial, we placed all of these in the same file. Having everything in one file is usually not how it's done in the real world, so we'll correct that.
 
 This time we'll have 6 files. 
 
-`app.js` is where we'll keep the main bot code.
+ - `app.js` is where we'll keep the main bot code.
 
-`dbInit.js` is the initialization for the database. We run this once and forget about it.
+ - `dbInit.js` is the initialization file for the database. We run this once and forget about it.
 
-`dbObjects.js` we'll import the models and create associations here.
+ - `dbObjects.js` is where we'll import the models and create associations here.
 
-`models/Users.js` the Users model. Users will have a currency attribute in here.
+ - `models/Users.js` is the Users model. Users will have a currency attribute in here.
 
-`models/CurrencyShop` The currency shop where you put the shop's items.
+ - `models/CurrencyShop.js` is the Shop model. The shop will have a name and a price for each item.
 
-`models/UserItems.js` This is our junction table between the users and the shop. A junction table is used to connect two tables together. Our junction table will have an additional field for the amount of that item the user has.
+ - `models/UserItems.js` is the junction table between the users and the shop. A junction table is used to connect two tables together. Our junction table will have an additional field for the amount of that item the user has.
 
 ## Create models
 Here is an entity relation diagram of the models we'll be making.
@@ -49,9 +49,9 @@ module.exports = (sequelize, DataTypes) => {
 ```
 Like you see in the diagram above, our Users model will only have 2 attributes, a `user_id` primary key and a `balance`. A primary key is a special type of attribute that becomes the default column used when joining tables together. In addition, a primary key is automatically set as unique and not null.
 
-Balance also sets allowNull to false. This in conjunction with setting a primary key means that both values have to be set, otherwise the database would throw an error. This means that we guarantee correctness in our data storage in that we never have null or empty values. This ensures that if we somehow forget to validate in the application that both values are not null, our database would do the final validation for us. 
+Balance also sets `allowNull` to false. This, in conjunction with setting a primary key, means that both values have to be set, otherwise the database would throw an error. This means that we guarantee correctness in our data storage in that we never have null or empty values. This ensures that if we somehow forget to validate in the application that both values are not null, our database would do the final validation for us.
 
-Notice that our options object sets timestamps to false. This disables the `createdAt` and the `updatedAt` columns that sequelize usually creates for you. Setting `user_id` to primary also gets rid of the `id` primary key that sequelize usually generates for you, since there can only be one primary key on a table.
+Notice that our options object sets `timestamps` to false. This disables the `createdAt` and the `updatedAt` columns that sequelize usually creates for you. Setting `user_id` to primary also gets rid of the `id` primary key that Sequelize usually generates for you, since there can only be one primary key on a table.
 
 
 Next, still in the same `models` folder, create a `CurrencyShop.js` file that contains the following:
@@ -71,7 +71,7 @@ module.exports = (sequelize, DataTypes) => {
 	});
 };
 ```
-Like our Users model, we don't need the timestamps here, so we'll disable it. Unlike the Users model however, we only set unique to true here. This is so that if you want to change the name of the item, you can change the name without affecting the primary key that joins this to the next object. This gets generated automatically by sequelize since we didn't set a primary key.
+Like our Users model, we don't need the timestamps here, so we'll disable it. Unlike the Users model however, we only set `unique` to `true` here. This is so that if you want to change the name of the item, you can change the name without affecting the primary key that joins this to the next object. This gets generated automatically by sequelize since we didn't set a primary key.
 
 
 
@@ -96,9 +96,11 @@ Our junction table will link `user_id` and the `id` of the currency shop togethe
 
 
 ## Initialize database
+
 Now that the models are defined, they should be created in our database so that we can access them in the bot file. We ran the sync in the `ready` event in our bot in the previous tutorial, which is completely unneeded, since it only needs to run once. So what we can do is make a file to initialize the database and never touch it again unless we want to remake the entire database
 
 Create a file called `dbInit.js`, in the base directory, *not* in the `models` folder.
+
 ```js
 const Sequelize = require('sequelize');
 
@@ -126,11 +128,13 @@ sequelize.sync().then(async () => {
 }).catch(console.error);
 ```
 
-You'll notice some familiar things here from the previous tutorial. The sequelize declaration is the same. We do have something different here, and that's how we import the models. Sequelize has an import function to make your code a bit cleaner when you have many models to use. We pull the two models and the junction table, sync them, and add items to our shop. A new function here is the `.upsert()` function. It's a portmanteau for **up**date or in**sert**.  We use `upsert` here because just in case you run this file multiple times, it doesn't create duplicates. That shouldn't happen because we defined name as *unique* but there's no harm in being safe. Upsert also has a nice side benefit. If you adjust the cost, the respective item should also have their cost updated. 
+You'll notice some familiar things here from the previous tutorial. The Sequelize declaration is the same. We do have something different here, and that's how we import the models. Sequelize has an import function to make your code a bit cleaner when you have many models to use. We pull the two models and the junction table, sync them, and add items to our shop. A new function here is the `.upsert()` function. It's a portmanteau for **up**date or in**sert**.  We use `upsert` here because just in case you run this file multiple times, it doesn't create duplicates. That shouldn't happen because we defined name as *unique* but there's no harm in being safe. Upsert also has a nice side benefit; If you adjust the cost, the respective item should also have their cost updated.
 
 
 ## Create associations
+
 Next we'll add our associations to the models. Create a file named `dbObjects.js` in the base directory, next to `dbInit.js`.
+
 ```js
 const Sequelize = require('sequelize');
 
@@ -148,13 +152,13 @@ const UserItems = sequelize.import('models/UserItems.js');
 UserItems.belongsTo(CurrencyShop, { foreignKey: 'item_id', as: 'item' });
 
 Users.prototype.addItem = async function(item) {
-	const useritem = await UserItems.findOne({
+	const userItem = await UserItems.findOne({
 		where: { user_id: this.user_id, item_id: item.id },
 	});
 
-	if (useritem) {
-		useritem.amount += 1;
-		return useritem.save();
+	if (userItem) {
+		userItem.amount += 1;
+		return userItem.save();
 	}
 
 	return UserItems.create({ user_id: this.user_id, item_id: item.id, amount: 1 });
@@ -163,7 +167,7 @@ Users.prototype.addItem = async function(item) {
 Users.prototype.getItems = function() {
 	return UserItems.findAll({
 		where: { user_id: this.user_id },
-		include: [ 'item' ],
+		include: ['item'],
 	});
 };
 
@@ -171,11 +175,11 @@ module.exports = { Users, CurrencyShop, UserItems };
 ```
 Note that we could have abstracted the connection object in another file, and had both `dbInit.js` and `dbObjects.js` use that connection file, but it's not necessary to overly abstract things.
 
-The new method we haven't seen before yet is the `.belongsTo()` method. Using this method, we add `CurrencyShop` as a property of `UserItem` so that when we do `useritem.item` we get the respective item that it's attached to. We use `item_id` as the foreign key so that it knows which item to attach. 
+The new method we haven't seen yet is the `.belongsTo()` method. Using this method, we add `CurrencyShop` as a property of `UserItem` so that when we do `userItem.item` we get the respective item that it's attached to. We use `item_id` as the foreign key so that it knows which item to attach.
 
-We now add some prototypes to the User object to finish up the junction. We want to be able to add items to users, and get their current inventory. The code inside should be somewhat familar from the last tutorial. We use a `.findOne()` to get the item if it exists in the user's inventory. We increment if it does, or create it if it doesn't.
+We now add some prototypes to the User object to finish up the junction: add items to users, and get their current inventory. The code inside should be somewhat familar from the last tutorial. We use a `.findOne()` to get the item if it exists in the user's inventory. We increment if it does, or create it if it doesn't.
 
-Getting items is similar, we just `.findAll()` using the user's id as the key. The `include` is for associating the CurrencyShop with the item. We basically have to explicitly tell sequelize to honour the `.belongsTo()` association, otherwise it will take the path of least effort.
+Getting items is similar, we just `.findAll()` using the user's id as the key. The `include` key is for associating the CurrencyShop with the item. We basically have to explicitly tell Sequelize to honor the `.belongsTo()` association, otherwise it will take the path of least effort.
 
 
 ## Application code
@@ -231,9 +235,10 @@ client.on('message', async msg => {
 client.login('pleaseinsertyourtokenheresothistutorialcanwork');
 ```
 
-Nothing special about this skeleton. We import the Users and CurrencyShop models from our dbOjects file, and add a currency collection. Every time someone talks, we add 1 to their currency count. The rest is just standard discord.js code and a simple if/else command handler. We're using the currency collection so we can cache user's currency, so we don't have to hit the database for every lookup. 
+Nothing special about this skeleton. We import the Users and CurrencyShop models from our `dbObjects.js` file, and add a currency Collection. Every time someone talks, we add 1 to their currency count. The rest is just standard discord.js code and a simple if/else command handler. We're using the currency Collection in order to cache individual user's currency, so we don't have to hit the database for every lookup.
 
 ### [alpha] Helper methods
+
 ```js
 Reflect.defineProperty(currency, 'add', {
 	value: async function add(id, amount) {
@@ -256,32 +261,35 @@ Reflect.defineProperty(currency, 'getBalance', {
 });
 ```
 
-We're defining an `.add()` method to our currency collection. It'll be used quite frequently, so having a method for it makes our lives easier. we'll also add a `.getBalance()` method so that we'll always get a number, and never return null.
+We're defining an `.add()` method to our currency collection. It'll be used quite frequently, so having a method for it makes our lives easier. We'll also add a `.getBalance()` method so that we'll always get a number.
 
 ### [beta] Ready event data sync
+
 ```js
 const storedBalances = await Users.findAll();
-storedBalances.forEach(b => {
-	currency.set(b.user_id, b);
-});
+storedBalances.forEach(b => currency.set(b.user_id, b));
 ```
+
 In our ready event, we want to sync our currency collection with the database for easy access later. 
 
 ### [gamma] Show user balance 
+
 ```js
 const target = msg.mentions.users.first() || msg.author;
 return msg.channel.send(`${target.tag} has ${currency.getBalance(target.id)}💰`);
 ```
-Nothing tricky here, we use our `.getbalance()` method to show either the author's balance, or the user they mentioned.
+
+Nothing tricky here. We use our `.getBalance()` method to show either the author's or the mentioned user's balance
 
 ### [delta] Show user inventory
+
 ```js
 const target = msg.mentions.users.first() || msg.author;
 const user = await Users.findOne({ where: { user_id: target.id } });
 const items = await user.getItems();
 
 if (!items.length) msg.channel.send(`${target.tag} has nothing!`);
-return msg.channel.send(`${target.tag} currently has ${items.map(t => `${t.amount} ${t.item.name}`).join(', ')}`);
+return msg.channel.send(`${target.tag} currently has ${items.map(i => `${i.amount} ${i.item.name}`).join(', ')}`);
 ```
 Here we begin to see the power of associations. Even though users and the shop are different tables, and the data is stored separately, we can get a user's inventory by looking at the junction table and join it with the shop. No duplicated item names that waste space!
 
@@ -291,9 +299,9 @@ const currentAmount = currency.getBalance(msg.author.id);
 const transferAmount = commandArgs.split(/\s+/g).find(t => !/<@!?\d+>/g.test(t));
 const transferTarget = msg.mentions.users.first();
 
-if (!transferAmount || isNaN(transferAmount)) return msg.channel.send(`Sorry ${msg.author}, that's an invalid amount`);
-if (transferAmount > currentAmount) return msg.channel.send(`Sorry ${msg.author} you don't have that much.`);
-if (transferAmount <= 0) return msg.channel.send(`Please enter an amount greater than zero, ${msg.author}`);
+if (!transferAmount || isNaN(transferAmount)) return msg.channel.send(`Sorry ${msg.author}, that's an invalid amount.`);
+if (transferAmount > currentAmount) return msg.channel.send(`Sorry ${msg.author}, you only have ${currentAmount}.`);
+if (transferAmount <= 0) return msg.channel.send(`Please enter an amount greater than zero, ${msg.author}.`);
 
 currency.add(msg.author.id, -transferAmount);
 currency.add(transferTarget.id, transferAmount);
@@ -311,14 +319,14 @@ We use `.add()` for both removing and adding currency. Since we already check if
 const item = await CurrencyShop.findOne({ where: { name: { $like: commandArgs } } });
 if (!item) return msg.channel.send(`That item doesn't exist.`);
 if (item.cost > currency.getBalance(msg.author.id)) {
-	return msg.channel.send(`You don't have enough currency, ${msg.author}`);
+	return msg.channel.send(`You currently have ${currency.getBalance(msg.author.id)}, but the ${item.name} costs ${item.cost}!`);
 }
 
 const user = await Users.findOne({ where: { user_id: msg.author.id } });
 currency.add(msg.author.id, -item.cost);
 await user.addItem(item);
 
-msg.channel.send(`You've bought a ${item.name}`);
+msg.channel.send(`You've bought: ${item.name}.`);
 ```
 In order for users to search for an item without having to care about case, we use the `$like` modifier when we're looking for the name. Keep in mind that this may be slow if you have millions of items, so please don't put a million items in your shop. 
 
@@ -326,22 +334,22 @@ In order for users to search for an item without having to care about case, we u
 
 ```js
 const items = await CurrencyShop.findAll();
-return msg.channel.send(items.map(i => `${i.name}: ${i.cost}💰`).join('\n'), { code: true });
+return msg.channel.send(items.map(item => `${item.name}: ${item.cost}💰`).join('\n'), { code: true });
 ```
-Nothing special here, just a regular `.findAll()` to get all the items in the shop, and map to transform that data into something nice looking.
+Nothing special here, just a regular `.findAll()` to get all the items in the shop, and `.map()` to transform that data into something nice looking.
 
 ### [lambda] Display the leaderboard
 
 ```js
 return msg.channel.send(
 	currency.sort((a, b) => b.balance - a.balance)
-	.filter((user) => client.users.get(user.user_id))
+	.filter(user => client.users.has(user.user_id))
 	.first(10)
 	.map((user, position) => `(${position + 1}) ${(client.users.get(user.user_id).tag)}: ${user.balance}💰`)
 	.join('\n')
 , { code: true });
 ```
-Nothing particularly special here either. We could have queried the database for the top 10 currency holders as well, but we already have access to them locally, so just sort the collection we have and use map again to display in a nice format. The filter is in case the users no longer exist in the bot's cache.
+Nothing particularly special here either. We could have queried the database for the top 10 currency holders as well, but we already have access to them locally, so just sort the Collection we have and use map again to display in a nice format. The filter is in case the users no longer exist in the bot's cache.
 
 
 
@@ -376,9 +384,7 @@ Reflect.defineProperty(currency, 'getBalance', {
 
 client.once('ready', async () => {
 	const storedBalances = await Users.findAll();
-	storedBalances.forEach(b => {
-		currency.set(b.user_id, b);
-	});
+	storedBalances.forEach(b => currency.set(b.user_id, b));
 	console.log(`Logged in as ${client.user.tag}!`);
 });
 
@@ -404,7 +410,7 @@ client.on('message', async msg => {
 		const items = await user.getItems();
 
 		if (!items.length) msg.channel.send(`${target.tag} has nothing!`);
-		return msg.channel.send(`${target.tag} currently has ${items.map(t => `${t.amount} ${t.item.name}`).join(', ')}`);
+		return msg.channel.send(`${target.tag} currently has ${items.map(i => `${i.amount} ${i.item.name}`).join(', ')}`);
 
 	}
 	else if (command === 'transfer') {
@@ -414,8 +420,8 @@ client.on('message', async msg => {
 		const transferTarget = msg.mentions.users.first();
 
 		if (!transferAmount || isNaN(transferAmount)) return msg.channel.send(`Sorry ${msg.author}, that's an invalid amount`);
-		if (transferAmount > currentAmount) return msg.channel.send(`Sorry ${msg.author} you don't have that much.`);
-		if (transferAmount <= 0) return msg.channel.send(`Please enter an amount greater than zero, ${msg.author}`);
+		if (transferAmount > currentAmount) return msg.channel.send(`Sorry ${msg.author}, you don't have that much.`);
+		if (transferAmount <= 0) return msg.channel.send(`Please enter an amount greater than zero, ${msg.author}.`);
 		
 		currency.add(msg.author.id, -transferAmount);
 		currency.add(transferTarget.id, transferAmount);
@@ -428,27 +434,27 @@ client.on('message', async msg => {
 		const item = await CurrencyShop.findOne({ where: { name: {$like: commandArgs } } });
 		if (!item) return msg.channel.send(`That item doesn't exist.`);
 		if (item.cost > currency.getBalance(msg.author.id)) {
-			return msg.channel.send(`You don't have enough currency, ${msg.author}`);
+			return msg.channel.send(`You currently have ${currency.getBalance(msg.author.id)}, but the ${item.name} costs ${item.cost}!`);
 		}
 
 		const user = await Users.findOne({ where: { user_id: msg.author.id } });
 		currency.add(msg.author.id, -item.cost);
 		await user.addItem(item);
 
-		msg.channel.send(`You've bought a ${item.name}`);
+		msg.channel.send(`You've bought ${item.name}.`);
 
 	}
 	else if (command === 'shop') {
 
 		const items = await CurrencyShop.findAll();
-		return msg.channel.send(items.map(i => `${i.name}: ${i.cost}💰`).join('\n'), { code: true });
+		return msg.channel.send(items.map(item => `${item.name}: ${item.cost}💰`).join('\n'), { code: true });
 
 	}
 	else if (command === 'leaderboard') {
 
 		return msg.channel.send(
 			currency.sort((a, b) => b.balance - a.balance)
-			.filter((user) => client.users.get(user.user_id))
+			.filter(user => client.users.has(user.user_id))
 			.first(10)
 			.map((user, position) => `(${position + 1}) ${(client.users.get(user.user_id).tag)}: ${user.balance}💰`)
 			.join('\n')
