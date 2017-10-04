@@ -46,7 +46,11 @@ member.addRole(role);
 
 ```js
 <message>.channel.send("Please enter more input.");
-const filter = (msg) => <message>.author == msg.author;
-const inputMessage = await <message>.awaitMessages(filter, { time: 60000, maxMatches: 1, errors: ['time'] })
-	.catch(() => <message>.channel.send("You did not enter any input!"));
+const filter = (msg) => <message>.author.id === msg.author.id;
+<message>.awaitMessages(filter, { time: 60000, maxMatches: 1, errors: ['time'] })
+.then(messages => {
+
+	msg.channel.send(`You've entered: ${messages.first().content}`);
+
+}).catch(() => <message>.channel.send("You did not enter any input!"));
 ```
