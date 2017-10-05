@@ -47,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
 	});
 };
 ```
-Like you see in the diagram above, our Users model will only have 2 attributes, a `user_id` primary key and a `balance`. A primary key is a special type of attribute that becomes the default column used when joining tables together. In addition, a primary key is automatically set as unique and not null.
+Like you see in the diagram above, our Users model will only have 2 attributes: a `user_id` primary key and a `balance`. A primary key is a special type of attribute that becomes the default column used when joining tables together. In addition, a primary key is automatically set as unique and not null.
 
 Balance also sets `allowNull` to `false`. This, in conjunction with setting a primary key, means that both values have to be set, otherwise the database would throw an error. This means that we guarantee correctness in our data storage in that we never have null or empty values. This ensures that if we somehow forget to validate in the application that both values are not null, our database would do the final validation for us.
 
