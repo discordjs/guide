@@ -67,6 +67,10 @@ docute.init({
 					path: '/sequelize/',
 				},
 				{
+					title: 'Making a currency system',
+					path: '/sequelize/currency',
+				},
+				{
 					type: 'label',
 					title: 'Sharding',
 				},
