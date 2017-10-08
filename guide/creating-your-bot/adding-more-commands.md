@@ -5,7 +5,7 @@ A bot with nothing but a single command would be really boring, and you probably
 Here's what your message event should currently look like:
 
 ```js
-client.on('message', (message) => {
+client.on('message', message => {
 	if (message.content === '!ping') {
 		message.channel.send('Pong.');
 	}
@@ -17,7 +17,7 @@ Before doing anything else, let's make a variable to store the prefix we've conf
 ```js
 const prefix = config.prefix;
 
-client.on('message', (message) => {
+client.on('message', message => {
 	if (message.content === prefix + 'ping') {
 		message.channel.send('Pong.');
 	}
@@ -128,7 +128,7 @@ client.on('ready', () => {
 
 const prefix = config.prefix;
 
-client.on('message', (message) => {
+client.on('message', message => {
 	if (message.content.startsWith(prefix + 'ping')) {
 		message.channel.send('Pong.');
 	}
@@ -177,15 +177,11 @@ If you've never seen this syntax bfeore, it can be a bit confusing. But actually
 const config = require('./config.json');
 const prefix = config.prefix;
 const token = config.token;
-```
 
-```js
 // Here's an alternative version, still using ES5
 const prefix = require('./config.json').prefix;
 const token = require('./config.json').token;
-```
 
-```js
 // And here's the glorious ES6 version!
 const { prefix, token } = require('./config.json');
 ```
@@ -195,7 +191,7 @@ Destructuring extracts certain properties from an object and stores them in vari
 Additionally, you could do this for your commands.
 
 ```js
-client.on('message', (message) => {
+client.on('message', message => {
 	const { content } = message;
 
 	if (content.startsWith(prefix + 'ping')) {

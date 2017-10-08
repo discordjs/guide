@@ -8,17 +8,74 @@ Before anything, you may want to create a backup of your current bot file. If yo
 
 ![Current folder structure](https://i.imgur.com/BmS09fY.png)
 
-In the same folder, create a new folder and name it `commands`. This is where you'll, obviously, store all of your commands. Open up your main file and go to your ping command and copy only the `message.channel.send('Pong.')` bit. Head to your newly created `commands` folder, create a new file named `ping.js`, and copy & paste in the following code:
+In the same folder, create a new folder and name it `commands`. This is where you'll store all of your commands, of course. Open up your main file, go to your ping command, and copy the entire command's code. Head over to your `commands` folder, create a new file named `ping.js`, and copy & paste in the following code:
 
 ```js
-exports.execute = (message, args) => {
-	message.channel.send('Pong.');
+module.exports = {
+	name: 'ping',
+	description: 'Ping!',
+	execute: (message, args) => {
+		message.channel.send('Pong.');
+	},
+};
+```
+
+You can go ahead and do the same for the rest of your commands as well. If you've been using the same code as the guide thus far, you can copy and paste your commands into their own files now just fine without any issue, as long as you follow the format above. The `description` property is optional, but will be useful for the dynamic help command we'll be covering later.
+
+<p class="tip">If you've set up ESLint for your editor and start receiving errors like `'args' is defined but never used` in your command files, there are a couple ways to go about this:<br />1. Apply the `// eslint-disable-line no-unused-vars` rule-disabling comment on the same line as `execute(message, args) {`.<br />2. If you know for a fact that you won't be using the `args` variable in that command at all (i.e. in your ping command), you can remove it entirely so that you only have a `message` variable in the parameter.</p>
+
+#### module.exports vs regular exports
+
+In the codeblock a bit above this paragraph, you'll notice the `module.exports` syntax that is an object and has 2 keys - the `name` and `execute` keys. In regards to the `execute` key, the codeblock we have above is the same as using `exports.execute = (message, args) => { ... }`. For example:
+
+```js
+// this...
+module.exports = {
+	title: 'Some title here',
+	active: true,
+	getAmount: () => {
+		// create an `amount` variable, some logic here, etc.
+		return amount;
+	},
+};
+
+// ... is essentially the same as this
+exports.title = 'Some title here';
+exports.active = true;
+exports.getAmount = () => {
+	// create an `amount` variable, some logic here, etc.
+	return amount;
+};
+```
+
+If you prefer that syntax, feel free to use it! More keys will be added later, so we'll be sticking to the `module.exports` syntax, as it's a bit easier to understand what's going on.
+
+On that note, if you continue to use the `module.exports` syntax, you can benefit from more ES6 syntax. Here's what I mean:
+
+```js
+// regular functions, ES5
+module.exports = {
+	someFunc: function() {
+		// ...
+	},
+};
+
+// arrow functions
+module.exports = {
+	someFunc: () => {
+		// ...
+	},
+};
+
+// regular functions, ES6
+module.exports = {
+	someFunc() {
+		// ...
+	},
 }
 ```
 
-You can go ahead and do the same for the rest of your commands as well. If you've been using the same code as the guide thus far, you can copy and paste your commands into their own files now just fine without any issue. The only thing you need to do is make sure that you put it inside the `exports.execute = ...` function, as seen above.
-
-When you dynamically load our commands, the file name will be set as the command name. Meaning that if you rename your ping file to `something-else`, the command name would now be `something-else` the next time you restart your bot.
+The last piece of code is what will be used for the rest of the guide. Aside from the reduced amount of characters you have to type out, the only difference between regular functions and arrow functions in this case is the `this` context in them, which may or not matter in your code. If you aren't sure what that means, don't worry about it! It's unrelated to the guide, so we won't be going in-depth about it; you can Google the difference between them if you're curious.
 
 ### Dynamically reading command files
 
@@ -29,16 +86,16 @@ At the very top of your main file, add this:
 const fs = require('fs');
 ```
 
-And after your `const client = new Discord.Client()` line, add this:
+And after your `const client = ...` line, add this:
 
 ```js
 // create a new Collection
 client.commands = new Discord.Collection();
 ```
 
-<p class="tip">If you aren't exactly sure what Collections are, they're a class that extend JS' native Map class and include more extensive, useful functionality avaiable. You can read about Maps [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), and see all the available Collection methods [here](https://discord.js.org/#/docs/main/stable/class/Collection).</p>
+<p class="tip">If you aren't exactly sure what Collections are, they're a class that extend JS' native Map class and include more extensive, useful functionality. You can read about Maps [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), and see all the available Collection methods [here](https://discord.js.org/#/docs/main/stable/class/Collection).</p>
 
-This next step is how you'll dynamically retreive all our (soon to be) newly created command files.
+This next step is how you'll dynamically retreive all your (soon to be) newly created command files.
 
 ```js
 // this'll return an array of all the file names in that directory
@@ -46,20 +103,19 @@ This next step is how you'll dynamically retreive all our (soon to be) newly cre
 const commandFiles = fs.readdirSync('./commands');
 ```
 
-Now that you have an array of all our file names, you can loop over it and dynamically set our commands to the Collection you made above.
+Now that you have an array of all your file names, you can loop over it and dynamically set your commands to the Collection you made above.
 
 ```js
 // loop over the array with a `for ... of` loop
 // if you're more comfortable or familiar with it,
 // you can even use a `.forEach()` here instead
-for (let file of commandFiles) {
-	// slice off the last 3 characters so that it's just `file-name` and not `file-name.js`
-	const name = file.slice(0, -3);
+for (const file of commandFiles) {
+	// require the command file
+	const command = require(`./commands/${file}`);
 
-	// use the `Map.set()` method to add a new item to our Collection
-	// with the key as the file name and the value as the exported functions
-	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set
-	client.commands.set(name, require(`./commands/${name}`));
+	// use the `Map.set()` method to add a new item to your Collection
+	// with the key as the command name and the value as the exported module
+	client.commands.set(command.name, command);
 }
 ```
 
@@ -75,9 +131,9 @@ client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands');
 
-for (let file of commandFiles) {
-	const name = file.slice(0, -3);
-	client.commands.set(name, require(`./commands/${name}`));
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	client.commands.set(command.name, command);
 }
 
 /* `client.on('...')` events and such below this point */

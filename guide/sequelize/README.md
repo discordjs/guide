@@ -37,7 +37,7 @@ client.once('ready', () => {
 	// [gamma]
 });
 
-client.on('message', async (msg) => {
+client.on('message', async msg => {
 	if (msg.content.startsWith(PREFIX)) {
 		const input = msg.content.slice(PREFIX.length).split(' ');
 		const command = input.shift();
@@ -230,7 +230,7 @@ We'll use the next command to fetch a list of all the tags we've created so far.
 
 ```js
 // equivalent to: SELECT name FROM tags;
-const tagList = await Tags.findAll({ attributes: ['name' ] });
+const tagList = await Tags.findAll({ attributes: ['name'] });
 const tagString = tagList.map(t => t.name).join(', ') || 'No tags set.';
 return msg.channel.send(`List of tags: ${tagString}`);
 ```

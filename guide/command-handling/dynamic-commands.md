@@ -7,8 +7,8 @@ Now that you have a Collection of all our commands, you can use them easily! But
 As always, the red is what you'll remove and the green is what you'll replace it with.
 ```diff
 if (command === 'ping') {
---	message.channel.send('Pong.');
-++	client.commands.get('ping').execute(message, arguments);
+-	message.channel.send('Pong.');
++	client.commands.get('ping').execute(message, arguments);
 }
 ```
 
@@ -19,7 +19,7 @@ if (command === 'ping') {
 	// on the `client.commands` Collection, use the `.get()` method to get the command with a key named `ping`
 	// once you have that, call the `.execute()` method
 	// it's necessary to pass through the `message` and `args` variables through,
-	// because that's what we required in our `exports.execute = (message, args) => { ... }` bit
+	// because that's what we required in our `execute(message, args) => { ... }` bit
 	// in our command file
 	client.commands.get('ping').execute(message, args);
 }
@@ -32,7 +32,7 @@ So, if you wanted to (assuming that you've copied & pasted all of your commands 
 ```js
 client.on('message', (message) => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
-	const command = message.content.slice(prefix.length).split(' ')[0];
+	const command = message.content.slice(prefix.length).split(' ')[0].toLowerCase();
 	const args = message.content.split(/ +/g).slice(1);
 
 	if (command === 'ping') {
@@ -69,23 +69,17 @@ catch (error) {
 As always, here's the same code with comments:
 
 ```js
-// if there aren't any items inside the `client.commands` Collection
-// with the key equal to the command name the user used, return
+// if we can't find a command with that name, return
 if (!client.commands.has(command)) return;
 
-// wrapping this in a try catch in case any errors occur
-// so that it doesn't crash your bot entirely
 try {
-	// get the command from the `client.commands` Collection
-	// and then call its `.execute()` function (the one you exported)
-	// while also passing in our `message` and `args` as the function arguments
+	// get the command, call its `.execute()` function (the one you exported)
+	// and then pass in our `message` and `args` as the function arguments
 	client.commands.get(command).execute(message, args);
 }
 catch (error) {
-	// log the error to the console so that we have an idea of what went wrong
+	// log the error and let the user know something went wrong
 	console.error(error);
-
-	// let the user know something went wrong
 	message.reply('there was an error trying to execute that command!');
 }
 ```

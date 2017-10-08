@@ -4,12 +4,12 @@ Sometimes you'll want to determine the result of a command depending on user inp
 
 ### Basic arguments
 
-We'll actually be tackling 2 things at once here. Things will be explained along the way, so don't worry if you don't understand immediately.<br />Go to your main bot file and find the `client.on('message', (message) => ...)` bit. Inside of it, add these 4 lines at the very top of it.
+We'll actually be tackling 2 things at once here. Things will be explained along the way, so don't worry if you don't understand immediately.<br />Go to your main bot file and find the `client.on('message', message => ...)` bit. Inside of it, add these 4 lines at the very top of it.
 
 ```js
 if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-const command = message.content.slice(prefix.length).split(' ')[0];
+const command = message.content.slice(prefix.length).split(' ')[0].toLowerCase();
 const args = message.content.split(' ').slice(1);
 ```
 
@@ -20,14 +20,11 @@ And here's the code again with some comments to explain it all:
 if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 // take the message content, cut off the prefix, and then "split" it
-// after using `.split(' ')`, if the input was `!kick member-name for being rude`
-// the result would be: ['kick', 'member-name', 'for', 'being', 'rude']
-// so by accessing the array with `[0]`, we'll get the command name (`kick`)
-const command = message.content.slice(prefix.length).split(' ')[0];
+// accessing the array with `[0]`, we'll get the command name (`kick`)
+const command = message.content.slice(prefix.length).split(' ')[0].toLowerCase();
 
 // take the message content, "split" it by spaces
-// that'll result in: ['!kick', 'member-name', 'for', 'being', 'rude']
-// using `.slice(1)`, it'll remove the first entry in the array
+// use `.slice(1)` to remove the command name from the args
 const args = message.content.split(' ').slice(1);
 ```
 
@@ -60,7 +57,7 @@ Now that we have an array of arguments, we can interact with them accordingly! T
 ```js
 else if (command === 'info') {
 	if (!args.length) {
-		return message.reply('You didn\'t provide any arguments!');
+		return message.reply('you didn\'t provide any arguments!');
 	}
 
 	// if the first result is equal to "foo"...
@@ -169,7 +166,7 @@ else if (command === 'avatar') {
 
 	// loop through all the mentioned users and then
 	// return a string with their username and avatar URL
-	const avatarList = message.mentions.users.map((user) => {
+	const avatarList = message.mentions.users.map(user => {
 		return `${user.username}'s avatar: ${user.displayAvatarURL}`;
 	});
 
@@ -242,7 +239,7 @@ message.channel.bulkDelete(amount, true);
 The 2nd parameter in the `.bulkDelete()` method is called `filterOld` - it will filter out messages older than 2 weeks automatically. So if there are 50 messages and 25 of them are older than 2 weeks, it'll only delete the first 25 without throwing an error. However, if all the messages you're trying to delete are older than 2 weeks, then it will still throw an error. Knowing this, we should catch that error by chaining a `.catch()`.
 
 ```js
-message.channel.bulkDelete(amount, true).catch((err) => {
+message.channel.bulkDelete(amount, true).catch(err => {
 	console.error(err);
 	message.channel.send('there was an error trying to prune messages in this channel!');
 });

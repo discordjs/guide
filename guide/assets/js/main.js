@@ -1,10 +1,9 @@
 /* eslint-disable no-undef */
-
 docute.init({
 	nav: [
 		{
-			path: '/',
 			title: 'Introduction',
+			path: '/',
 		},
 		{
 			title: 'Installations & Preparations',
@@ -62,7 +61,11 @@ docute.init({
 				},
 				{
 					title: 'Dynamic commands setup',
-					path: '/command-handling/',
+					path: '/command-handling/dynamic-commands',
+				},
+				{
+					title: 'Adding features',
+					path: '/command-handling/adding-features',
 				},
 				{
 					type: 'label',
