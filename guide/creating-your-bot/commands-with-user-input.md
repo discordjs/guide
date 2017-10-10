@@ -42,7 +42,7 @@ Now that we have an array of arguments, we can interact with them accordingly! T
 ```js
 else if (command === 'info') {
 	if (!args.length) {
-		return message.reply('you didn\'t provide any arguments!');
+		return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
 	}
 	else if (args[0] === 'foo') {
 		return message.channel.send('bar');
@@ -185,13 +185,12 @@ And if you test it, it should work as expected.
 
 ![isNaN test](http://i.imgur.com/lhuPYta.png)
 
-So what we need to do next is check if the first argument is between X and Y. Following the idea of a prune command, you'll most likely want to use the `.bulkDelete()` method, which allows you to delete multiple messages in one fell swoop. With that being said, that method does have its limits - you can only delete a minimum of 2 and a maximum of 100 messages (at a time). There's a few ways to deal with that, so let me show you one of them.
+So what we need to do next is check if the first argument is between X and Y. Following the idea of a prune command, you'll most likely want to use the `.bulkDelete()` method, which allows you to delete multiple messages in one fell swoop. With that being said, that method does have its limits - you can only delete a minimum of 2 and a maximum of 100 messages (at a time). There's a few ways to deal with that. One of those ways would be to just check the value of the `amount` variable, like so:
 
 ```js
 if (isNaN(amount)) {
 	return message.reply('that doesn\'t seem to be a valid number.');
 }
-// if the amount is less than 2 or more than 100, let them know again
 else if (amount < 2 || amount > 100) {
 	return message.reply('you need to input a number between 2 and 100.');
 }
