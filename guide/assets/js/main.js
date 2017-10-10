@@ -55,7 +55,7 @@ docute.init({
 			],
 		},
 		{
-			title: 'Extended features',
+			title: 'Extended Learning',
 			type: 'dropdown',
 			items: [
 				{
@@ -85,6 +85,11 @@ docute.init({
 				{
 					title: 'Additional Information',
 					path: '/sharding/additional',
+				},
+				{
+					type: 'label',
+					title: 'Collectors',
+					path: '/creating-your-bot/collectors'
 				},
 			],
 		},
