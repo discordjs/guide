@@ -12,18 +12,7 @@ if (command === 'ping') {
 }
 ```
 
-If you're a bit confused by that, here's the same code with some comments to help you understand:
-
-```js
-if (command === 'ping') {
-	// get the ping command and call its `.execute()` method
-	// pass through the `message` and `args` variables we created
-	// so that we can use them in our command file
-	client.commands.get('ping').execute(message, args);
-}
-```
-
-Instead of putting your ping command code directly in the if statement, you can call it directly like that instead. Granted, this version is actually longer than what you had before for your ping command, but most commands usually aren't that short.
+We `.get()` the ping command and call its `.execute()` method while passing in the `message` and `args` variable as the method arguments. Instead of putting your ping command code directly in the if statement, you can call it directly like that instead. Granted, this version is actually longer than what you had before for your ping command, but most commands usually aren't that short.
 
 So, if you wanted to (assuming that you've copied & pasted all of your commands into their own files by now), this could be your entire message event:
 
@@ -64,25 +53,9 @@ catch (error) {
 }
 ```
 
-As always, here's the same code with comments:
+If there isn't a command with that name, `return`. If there is, `.get()` the command and call it `.execute()` method while passing in our `message` and `args` variables as the method arguments. In case something goes wrong, we log the error and report back to the member to let them know.
 
-```js
-// if we can't find a command with that name, return
-if (!client.commands.has(command)) return;
-
-try {
-	// get the command, call its `.execute()` method
-	// and then pass in our `message` and `args` as the method arguments
-	client.commands.get(command).execute(message, args);
-}
-catch (error) {
-	// log the error and let the user know something went wrong
-	console.error(error);
-	message.reply('there was an error trying to execute that command!');
-}
-```
-
-... and that's it! Whenever you want to add a new command, you simply make a new file in your `commands` directory, name it what you want, and then do what you did for the other commands. Pretty simple, isn't it?
+... and that's it! Whenever you want to add a new command, you simply make a new file in your `commands` directory, name it what you want, and then do what you did for the other commands.
 
 In the next chapter, we'll be going through how to implement some basic features into your brand new command handler. Truth be told, it's hardly a command "handler" at this point; it's a command loader and executor, if you wish to see it that way. You'll learn how to implement some new features and the logic behind them, such as:
 

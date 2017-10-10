@@ -9,37 +9,22 @@ We'll actually be tackling 2 things at once here. Things will be explained along
 ```js
 if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-const command = message.content.slice(prefix.length).split(' ')[0].toLowerCase();
-const args = message.content.split(' ').slice(1);
+const args = message.content.slice(prefix.length).split(' ');
+const command = args.shift().toLowerCase();
 ```
 
-And here's the code again with some comments to explain it all:
-```js
-// if the message doesn't start with the prefix,
-// or if it's coming from a bot, stop the code entirely
-if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-// take the message content, cut off the prefix, and then "split" it
-// accessing the array with `[0]`, we'll get the command name (`kick`)
-const command = message.content.slice(prefix.length).split(' ')[0].toLowerCase();
-
-// take the message content, "split" it by spaces
-// use `.slice(1)` to remove the command name from the args
-const args = message.content.split(' ').slice(1);
-```
+If the message either doesn't start with our prefix, or was sent by a bot, `return`. Create an `args` variable that slices off the prefix entirely and then split it into an array by spaces. After that, create a `command` variable by calling `args.shift()`, which will take the first element in array and return it while also removing it from the original array (so that we don't have our command name string inside the `args` array).
 
 Hopefully that's a bit clearer, if there was any confusion. Let's create a quick command to check out the result of our new addition:
 
 ```js
-// using the new `command` variable, we can make this easier to type!
+// using the new `command` variable, we can make this easier to manage!
 // you can switch your other commands to this format as well
 else if (command === 'info') {
-	// if we don't provide any arguments...
 	if (!args.length) {
-		return message.reply('you didn\'t provide any arguments!');
+		return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
 	}
 
-	// using template literals!
 	message.channel.send(`Command name: ${command}\nArguments: ${args}`);
 }
 ```
@@ -59,10 +44,7 @@ else if (command === 'info') {
 	if (!args.length) {
 		return message.reply('you didn\'t provide any arguments!');
 	}
-
-	// if the first result is equal to "foo"...
-	if (args[0] === 'foo') {
-		// stop the code here and send back "bar"
+	else if (args[0] === 'foo') {
 		return message.channel.send('bar');
 	}
 
@@ -84,7 +66,7 @@ If you've never done something like this before, this probably isn't what you'd 
 
 ```diff
 - const args = message.content.split(' ').slice(1);
-+ const args = message.content.split(/ +/g).slice(1);
++ const args = message.content.split(/\s+/).slice(1);
 ```
 
 ![extra spaces args fixed](http://i.imgur.com/XGZYm6i.png)
@@ -129,7 +111,7 @@ if (!message.mentions.users.size) {
 }
 ```
 
-Since `message.mentions.users` is a Collection, it has a `.size` property. If no users are mentions, it'll return 0 (which is a `falsy` value), meaning we can do `if (!item)` to check if it's falsy. If you don't know much about Collections, don't worry for now; you can read more about them later in [this section of the guide](/path/to/collections/section).
+Since `message.mentions.users` is a Collection, it has a `.size` property. If no users are mentions, it'll return 0 (which is a `falsy` value), meaning we can do `if (!item)` to check if it's falsy.
 
 Anyway, if we try again, it should work as expected.
 
@@ -137,11 +119,10 @@ Anyway, if we try again, it should work as expected.
 
 #### Working with multiple mentions
 
-Let's say you have some sort of `!avatar` command, where it'll display the avatar of all the mentioned users, or your own avatar if no users were mentioned. Focus on that 2nd part for now - how would you go about displaying your own avatar if no users were mentioned?<br />Taking the snippet for the code we just used, you can do it just like this:
+Let's say you have some sort of `!avatar` command, where it'll display the avatar of all the mentioned users, or your own avatar if no users were mentioned. Focus on that 2nd part for now - how would you go about displaying your own avatar if no users were mentioned? Taking the snippet for the code we just used, you can do it just like this:
 
 ```js
 else if (command === 'avatar') {
-	// if no users were mentioned...
 	if (!message.mentions.users.size) {
 		return message.channel.send(`Your avatar: ${message.author.displayAvatarURL}`);
 	}
@@ -190,10 +171,8 @@ The first step would be to check if the input we give is an actual number.
 
 ```js
 else if (command === 'prune') {
-	// convert the first argument to a number first
 	const amount = parseInt(args[0]);
 
-	// if the amount is NaN (Not a Number), then let them know
 	if (isNaN(amount)) {
 		return message.reply('that doesn\'t seem to be a valid number.');
 	}
@@ -213,7 +192,7 @@ if (isNaN(amount)) {
 	return message.reply('that doesn\'t seem to be a valid number.');
 }
 // if the amount is less than 2 or more than 100, let them know again
-if (amount < 2 || amount > 100) {
+else if (amount < 2 || amount > 100) {
 	return message.reply('you need to input a number between 2 and 100.');
 }
 

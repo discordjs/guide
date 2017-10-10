@@ -12,14 +12,6 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 	storage: 'database.sqlite',
 });
 
-/*
- * equivalent to: CREATE TABLE tags(
- * name VARCHAR(255),
- * description TEXT,
- * username VARCHAR(255),
- * usage INT
- * );
- */
 const Tags = sequelize.define('tags', {
 	name: {
 		type: Sequelize.STRING,
@@ -35,6 +27,14 @@ const Tags = sequelize.define('tags', {
 });
 
 client.once('ready', () => {
+	/*
+	 * equivalent to: CREATE TABLE tags(
+	 * name VARCHAR(255),
+	 * description TEXT,
+	 * username VARCHAR(255),
+	 * usage INT
+	 * );
+	 */
 	Tags.sync();
 });
 
@@ -82,7 +82,7 @@ client.on('message', async (msg) => {
 			const tagName = splitArgs.shift();
 			const tagDescription = splitArgs.join(' ');
 
-			// equivalent to: UPDATE tags (descrption) values (?) WHERE name='?';
+			// equivalent to: UPDATE tags (descrption) values (?) WHERE name = ?;
 			const affectedRows = await Tags.update({ description: tagDescription }, { where: { name: tagName } });
 			if (affectedRows > 0) {
 				return msg.reply(`Tag ${tagName} was edited.`);

@@ -37,7 +37,7 @@ module.exports = {
 	description: 'Information about the arguments provided.',
 	execute(message, args) {
 		if (!args.length) {
-			return message.reply('you didn\'t provide any arguments!');
+			return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
 		}
 
 		message.channel.send(`Arguments: ${args}\nArguments length: ${args.length}`);
@@ -53,7 +53,7 @@ Here are the changes we'll be making:
 +	args: true,
 	execute(message, args) {
 -		if (!args.length) {
--			return message.reply('you didn\'t provide any arguments!');
+-			return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
 -		}
 -
 		message.channel.send(`Arguments: ${args}\nArguments length: ${args.length}`);
@@ -66,7 +66,7 @@ And then in your main file:
 	const command = client.commands.get(commandName);
 +
 +	if (command.args && !args.length) {
-+		return message.reply('you didn\'t provide any arguments!');
++		return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
 +	}
 +
 ```
@@ -91,14 +91,14 @@ In your main file:
 
 ```diff
 	if (command.args && !args.length) {
--		return message.reply('you didn\'t provide any arguments!');
-+		let reply = 'you didn\'t provide any arguments!';
+-		return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
++		let reply = `You didn't provide any arguments, ${message.author}!`;
 +
 +		if (command.usage) {
 +			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
 +		}
 +
-+		return message.reply(reply);
++		return message.channel.send(reply);
 	}
 ```
 
@@ -125,7 +125,7 @@ if (command.guildOnly && message.channel.type !== 'text') {
 }
 ```
 
-Now when you try to use the kick command, you'll get the appropriate response which will also prevent your bot from throwing an errors.
+Now when you try to use the kick command, you'll get the appropriate response which will also prevent your bot from throwing an error.
 
 ![guild command inside DMs](https://i.imgur.com/TiDpsVH.png)
 
@@ -133,28 +133,31 @@ Now when you try to use the kick command, you'll get the appropriate response wh
 
 Spam is something you generally want to avoid - especially if one of you command requires calls to other APIs, or takes a bit of time to build/send. This is also a very common feature bot developers want to integrate into their projects, so let's get started on that!
 
-We'll be using the ping command to test this on and add in the following bit of code to it:
+We'll be using the ping command to test this on. Add in the following bit of code:
 
 ```diff
+module.exports = {
+	name: 'ping',
 +	cooldown: 5,
-	execute(message, args) {
+	execute(message) {
+		message.channel.send('Pong.');
+	},
+};
 ```
 
-This is the amount (in seconds) that the user will have to wait before being able to properly use that command again.
-
-<p class="tip">We'll be using JS' native [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) global object for this. If you aren't sure what that is, you can quickly read up on that before continuing!</p>
+This is the amount (in seconds) that the user will have to wait before being able to properly use that command again. We'll be using Collections again to store what we need.
 
 In your main file, add in this line (preferably somewhere above your ready event):
 
 ```js
-const cooldowns = new Map();
+const cooldowns = new Discord.Collection();
 ```
 
 Again in your main file, directly above the try/catch, add in the following:
 
 ```js
 if (!cooldowns.has(command.name)) {
-	cooldowns.set(command.name, new Map());
+	cooldowns.set(command.name, new Discord.Collection());
 }
 
 const now = Date.now();
@@ -169,13 +172,13 @@ else {
 }
 ```
 
-We check if our `cooldowns` Map has the command set in it yet. If not, we add it in. Next, we create 3 variables:
+We check if our `cooldowns` Collection has the command set in it yet. If not, we add it in. Next, we create 3 variables:
 
 1. A variable with the current timestamp.
-2. A variable that `.get()`s the Map for the triggered command.
+2. A variable that `.get()`s the Collection for the triggered command.
 3. A variable that gets the necessary cooldown amount. If we don't supply it in our command file, it'll default to 3. We then convert it to the proper amount of milliseconds.
 
-After that, we make a simple if/else statement to check whether the Map has the author ID set in it yet or not.
+After that, we make a simple if/else statement to check whether the Collection has the author ID set in it yet or not.
 
 Continuing with our current setup, inside the if statement, this is all you'll have in it:
 
@@ -186,7 +189,7 @@ if (!timestamps.has(message.author.id)) {
 }
 ```
 
-If the `timestamps` Map we got doesn't have our ID, we set it in with the current timestamp, and then create a `setTimeout()` to automatically delete it later, depending on that certain command's cooldown number.
+If the `timestamps` Collection we got doesn't have our ID, we set it in with the current timestamp and create a `setTimeout()` to automatically delete it later, depending on that certain command's cooldown number.
 
 Now all that's left is the else part of our statement. Here's what we'll be using:
 
@@ -204,7 +207,7 @@ else {
 }
 ```
 
-Nothing overly complex here either. Since the `timestamps` Map has the author ID in it, we `.get()` it and then add the `cooldownAmount` variable to it, to get the correct expiration timestamp. We then check to see if it's actually expired or not, and return a message letting the user know how much time is left until they can use that command again if the cooldown hasn't expired. If it has, use the same code as our if statement to set the cooldown again. Easy!
+Nothing overly complex here either. Since the `timestamps` Collection has the author ID in it, we `.get()` it and then add the `cooldownAmount` variable to it, to get the correct expiration timestamp. We then check to see if it's actually expired or not, and return a message letting the user know how much time is left until they can use that command again if the cooldown hasn't expired. If it has, use the same code as our if statement to set the cooldown again.
 
 ### Command aliases
 
@@ -227,7 +230,7 @@ The `aliases` property should always contain an array of strings. In your main f
 -
 -	const command = client.commands.get(commandName);
 +	const command = client.commands.get(commandName)
-+		|| client.commands.find(cmd => cmd.aliases.length && cmd.aliases.includes(commandName));
++		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 +
 +	if (!command) return;
 ```
@@ -352,7 +355,7 @@ for (let file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
-const cooldowns = new Map();
+const cooldowns = new Discord.Collection();
 
 client.on('ready', () => {
 	console.log('Ready!');
@@ -365,7 +368,7 @@ client.on('message', message => {
 	const args = message.content.split(/ +/g).slice(1);
 
 	const command = client.commands.get(commandName)
-		|| client.commands.find(cmd => cmd.aliases.length && cmd.aliases.includes(commandName));
+		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 	if (!command) return;
 
@@ -374,17 +377,17 @@ client.on('message', message => {
 	}
 
 	if (command.args && !args.length) {
-		let reply = 'you didn\'t provide any arguments!';
+		let reply = `You didn\'t provide any arguments, ${message.author}!`;
 		
 		if (command.usage) {
 			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
 		}
 		
-		return message.reply(reply);
+		return message.channel.send(reply);
 	}
 
 	if (!cooldowns.has(command.name)) {
-		cooldowns.set(command.name, new Map());
+		cooldowns.set(command.name, new Discord.Collection());
 	}
 
 	const now = Date.now();
