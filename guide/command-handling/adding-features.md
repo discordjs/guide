@@ -364,8 +364,8 @@ client.on('ready', () => {
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-	const commandName = message.content.slice(prefix.length).split(' ')[0].toLowerCase();
-	const args = message.content.split(/ +/g).slice(1);
+	const args = message.content.slice(prefix.length).split(/\s+/);
+	const commandName = args.shift().toLowerCase();
 
 	const command = client.commands.get(commandName)
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
