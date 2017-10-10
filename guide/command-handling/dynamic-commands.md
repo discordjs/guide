@@ -19,8 +19,9 @@ So, if you wanted to (assuming that you've copied & pasted all of your commands 
 ```js
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
-	const command = message.content.slice(prefix.length).split(' ')[0].toLowerCase();
-	const args = message.content.split(/ +/g).slice(1);
+
+	const args = message.content.slice(prefix.length).split(/\s+/);
+	const command = args.shift().toLowerCase();
 
 	if (command === 'ping') {
 		client.commands.get('ping').execute(message, args);

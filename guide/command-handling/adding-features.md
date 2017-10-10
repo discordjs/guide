@@ -3,9 +3,9 @@
 The command handler we've been building so far doesn't do much aside from dynamically load and execute commands. Those two things alone are great, but definitely not the only things we want. Before we dive into it, let's do some quick refactoring in preparation.
 
 ```diff
--	const command = message.content.slice(prefix.length).split(' ')[0].toLowerCase();
-+	const commandName = message.content.slice(prefix.length).split(' ')[0].toLowerCase();
-	const args = message.content.split(/ +/g).slice(1);
+	const args = message.content.slice(prefix.length).split(/\s+/);
+-	const command = args.shift().toLowerCase();
++	const commandName = args.shift().toLowerCase();
 
 -	if (!client.commands.has(command)) return;
 +	if (!client.commands.has(commandName)) return;
