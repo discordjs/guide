@@ -28,13 +28,13 @@ const Tags = sequelize.define('tags', {
 
 client.once('ready', () => {
 	/*
-	 * CREATE TABLE `tags` (
-	 * name varchar (255),
+	 * equivalent to: CREATE TABLE tags(
+	 * name VARCHAR(255),
 	 * description TEXT,
-	 * username varchar(255),
-	 * usage int
+	 * username VARCHAR(255),
+	 * usage INT
 	 * );
-	 * */
+	 */
 	Tags.sync();
 });
 
@@ -50,7 +50,7 @@ client.on('message', async (msg) => {
 			const tagDescription = splitArgs.join(' ');
 
 			try {
-				// equivalent to: INSERT INTO tags (name, descrption, username) values (?, ?, ?)
+				// equivalent to: INSERT INTO tags (name, descrption, username) values (?, ?, ?);
 				const tag = await Tags.create({
 					name: tagName,
 					description: tagDescription,
@@ -71,7 +71,7 @@ client.on('message', async (msg) => {
 			// equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
 			const tag = await Tags.findOne({ where: { name: tagName } });
 			if (tag) {
-				// equivalent to UPDATE tags SET usage_count = usage_count + 1 WHERE name = 'tagName';
+				// equivalent to: UPDATE tags SET usage_count = usage_count + 1 WHERE name = 'tagName';
 				tag.increment('usage_count');
 				return msg.channel.send(tag.get('description'));
 			}
@@ -82,7 +82,7 @@ client.on('message', async (msg) => {
 			const tagName = splitArgs.shift();
 			const tagDescription = splitArgs.join(' ');
 
-			// equivalent to: UPDATE tags (descrption) values (?) WHERE name="?"
+			// equivalent to: UPDATE tags (descrption) values (?) WHERE name = ?;
 			const affectedRows = await Tags.update({ description: tagDescription }, { where: { name: tagName } });
 			if (affectedRows > 0) {
 				return msg.reply(`Tag ${tagName} was edited.`);
@@ -100,13 +100,13 @@ client.on('message', async (msg) => {
 			return msg.reply(`Could not find tag: ${tagName}`);
 		}
 		else if (command === 'showtags') {
-			// equivalent to SELECT name FROM tags;
-			const tagList = await Tags.findAll({ attributes: ['name' ] });
+			// equivalent to: SELECT name FROM tags;
+			const tagList = await Tags.findAll({ attributes: ['name'] });
 			const tagString = tagList.map(t => t.name).join(', ') || 'No tags set.';
 			return msg.channel.send(`List of tags: ${tagString}`);
 		}
 		else if (command === 'removetag') {
-			// equivalent to DELETE from tags WHERE name = ?
+			// equivalent to: DELETE from tags WHERE name = ?;
 			const tagName = commandArgs;
 			const rowCount = await Tags.destroy({ where: { name: tagName } });
 			if (!rowCount) return msg.reply('That tag did not exist.');

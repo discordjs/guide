@@ -59,7 +59,7 @@ First, make sure to close the process in your console. You can do so by pressing
 
 ```js
 // Whenever a message is sent, run this code.
-client.on('message', (message) => {
+client.on('message', message => {
 	// Log the message's content.
 	console.log(message.content);
 });
