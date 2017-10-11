@@ -4,7 +4,7 @@ We're finally getting to the exciting parts! Since your bot is in your server no
 
 ### Creating the bot file
 
-Open up your preferred code editor (whether it be [Visual Studio Code](https://code.visualstudio.com/), [Atom](http://atom.io/), [Sublime Text](https://www.sublimetext.com/), or any other editor of your choice), and create a new file. If you're brand new and aren't sure what to use, go with Visual Studio Code.
+Open up your preferred code editor (whether it be [Visual Studio Code](https://code.visualstudio.com/), [Atom](http://atom.io/), [Sublime Text](https://www.sublimetext.com/), or any other editor of your choice) and create a new file. If you're brand new and aren't sure what to use, go with Visual Studio Code.
 
 It's suggested that you save the file as `index.js`, but you may name it whatever you wish, as long as it ends with `.js`.
 
@@ -33,16 +33,16 @@ Head back to your console window, type in `node your-file-name.js`, and press en
 
 Here's the same code with comments, so it's easier to understand what's going on.
 ```js
-// Require the discord.js module.
+// require the discord.js module
 const Discord = require('discord.js');
 
-// Create a new Discord client.
+// create a new Discord client
 const client = new Discord.Client();
 
-// When the client is ready, run this code.
-// This event will trigger whenever your bot:
-// - finishes logging in;
-// - reconnects after disconnecting.
+// when the client is ready, run this code
+// this event will trigger whenever your bot:
+// - finishes logging in
+// - reconnects after disconnecting
 client.on('ready', () => {
 	// Log to the console to let us know we're ready.
 	console.log('Ready!');
