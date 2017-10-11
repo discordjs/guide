@@ -44,11 +44,10 @@ const client = new Discord.Client();
 // - finishes logging in
 // - reconnects after disconnecting
 client.on('ready', () => {
-	// Log to the console to let us know we're ready.
 	console.log('Ready!');
 });
 
-// Login to Discord with your app's token.
+// login to Discord with your app's token
 client.login('your-token-goes-here');
 ```
 
@@ -83,4 +82,4 @@ Restart your bot and then send `!ping` to a channel your bot has access to. If a
 
 ![Ping pong command result](http://i.imgur.com/byiSflM.png)
 
-Awesome! You've successfully created your first Discord bot command! Exciting stuff, isn't it? This is only the beginning, so let's move on to making some more commands.
+You've successfully created your first Discord bot command! Exciting stuff, isn't it? This is only the beginning, so let's move on to making some more commands.
