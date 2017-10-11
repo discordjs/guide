@@ -1,10 +1,8 @@
 ## Adding your bot to your own (and other) servers
 
-If you've been diligently following the previous pages of the guide, you're the proud owner of your very own bot application!
+If you've been diligently following the previous pages of the guide, you should have a bot application set up. However, it's not in any servers yet. So how does that work?
 
-But wait a second... where is it? You can't see it on any servers, you ask?
-
-That's right -- before you're actually able to see your bot in your own (or other) servers, it needs to be added using a special invite link that can be created using your bot application's Client ID.
+Before you're actually able to see your bot in your own (or other) servers, it needs to be added using a special invite link that can be created using your bot application's client ID.
 
 ### Bot invite links
 
@@ -22,11 +20,11 @@ The structure of the url is quite simple:
 
 <p class="tip">A permissions parameter also exists to restrict or guarantee the permission your bot will have on the server you add it to. For ease of use, it is recommended to use [this](https://discordapi.com/permissions.html) website.</p>
 
-<p class="warning">If you get an error message saying "Bot requires a code grant." then head over into your application's settings and disable the "Require OAuth2 Code Grant" option. You usually shouldn't enable this checkbox unless you know why you need to.</p>
+<p class="warning">If you get an error message saying "Bot requires a code grant", then head over into your application's settings and disable the "Require OAuth2 Code Grant" option. You usually shouldn't enable this checkbox unless you know why you need to.</p>
 
 ### Creating and using your own invite link
 
-As mentioned above, you'll need to replace the `client_id` parameter with your client's ID in order to generate your invite link. To find your app's ID, head back to the [My Apps](https://discordapp.com/developers/applications/me) page, under the "Applications" section once again, and click on your bot application to copy its ID.
+As mentioned above, you'll need to replace the `client_id` parameter with your client's ID in order to generate your invite link. To find your app's ID, head back to the [My Apps](https://discordapp.com/developers/applications/me) page under the "Applications" section once again and click on your bot application.
 
 ![Finding your Bot application's Client ID](http://i.imgur.com/U6mlQGm.png)
 
@@ -34,7 +32,7 @@ Insert your app's ID into the link template and then access it in your browser. 
 
 ![Bot Authorization field](https://i.imgur.com/A8l70bj.png)
 
-Choose the server you want to add it to (you can only add it to servers you have the "Manage Server" permission on) and click "Authorize". This should then present you a nice confirmation message:
+Choose the server you want to add it to and click "Authorize". Do note that you'll need the "Manage Server" permission on a server in order to be able to add your bot there. This should then present you a nice confirmation message:
 
 ![Bot authorized](https://i.imgur.com/BAUsjyg.png)
 
