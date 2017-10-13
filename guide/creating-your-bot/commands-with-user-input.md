@@ -4,45 +4,27 @@ Sometimes you'll want to determine the result of a command depending on user inp
 
 ### Basic arguments
 
-We'll actually be tackling 2 things at once here. Things will be explained along the way, so don't worry if you don't understand immediately.<br />Go to your main bot file and find the `client.on('message', (message) => ...)` bit. Inside of it, add these 4 lines at the very top of it.
+We'll actually be tackling 2 things at once here. Things will be explained along the way, so don't worry if you don't understand immediately.<br />Go to your main bot file and find the `client.on('message', message => ...)` bit. Inside of it, add these 4 lines at the very top of it.
 
 ```js
 if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-const command = message.content.slice(prefix.length).split(' ')[0];
-const args = message.content.split(' ').slice(1);
+const args = message.content.slice(prefix.length).split(' ');
+const command = args.shift().toLowerCase();
 ```
 
-And here's the code again with some comments to explain it all:
-```js
-// if the message doesn't start with the prefix,
-// or if it's coming from a bot, stop the code entirely
-if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-// take the message content, cut off the prefix, and then "split" it
-// after using `.split(' ')`, if the input was `!kick member-name for being rude`
-// the result would be: ['kick', 'member-name', 'for', 'being', 'rude']
-// so by accessing the array with `[0]`, we'll get the command name (`kick`)
-const command = message.content.slice(prefix.length).split(' ')[0];
-
-// take the message content, "split" it by spaces
-// that'll result in: ['!kick', 'member-name', 'for', 'being', 'rude']
-// using `.slice(1)`, it'll remove the first entry in the array
-const args = message.content.split(' ').slice(1);
-```
+If the message either doesn't start with our prefix, or was sent by a bot, `return`. Create an `args` variable that slices off the prefix entirely and then split it into an array by spaces. After that, create a `command` variable by calling `args.shift()`, which will take the first element in array and return it while also removing it from the original array (so that we don't have our command name string inside the `args` array).
 
 Hopefully that's a bit clearer, if there was any confusion. Let's create a quick command to check out the result of our new addition:
 
 ```js
-// using the new `command` variable, we can make this easier to type!
+// using the new `command` variable, we can make this easier to manage!
 // you can switch your other commands to this format as well
 else if (command === 'info') {
-	// if we don't provide any arguments...
 	if (!args.length) {
-		return message.reply('you didn\'t provide any arguments!');
+		return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
 	}
 
-	// using template literals!
 	message.channel.send(`Command name: ${command}\nArguments: ${args}`);
 }
 ```
@@ -60,12 +42,9 @@ Now that we have an array of arguments, we can interact with them accordingly! T
 ```js
 else if (command === 'info') {
 	if (!args.length) {
-		return message.reply('You didn\'t provide any arguments!');
+		return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
 	}
-
-	// if the first result is equal to "foo"...
-	if (args[0] === 'foo') {
-		// stop the code here and send back "bar"
+	else if (args[0] === 'foo') {
 		return message.channel.send('bar');
 	}
 
@@ -87,7 +66,7 @@ If you've never done something like this before, this probably isn't what you'd 
 
 ```diff
 - const args = message.content.split(' ').slice(1);
-+ const args = message.content.split(/ +/g).slice(1);
++ const args = message.content.split(/\s+/).slice(1);
 ```
 
 ![extra spaces args fixed](http://i.imgur.com/XGZYm6i.png)
@@ -132,7 +111,7 @@ if (!message.mentions.users.size) {
 }
 ```
 
-Since `message.mentions.users` is a Collection, it has a `.size` property. If no users are mentions, it'll return 0 (which is a `falsy` value), meaning we can do `if (!item)` to check if it's falsy. If you don't know much about Collections, don't worry for now; you can read more about them later in [this section of the guide](/path/to/collections/section).
+Since `message.mentions.users` is a Collection, it has a `.size` property. If no users are mentions, it'll return 0 (which is a `falsy` value), meaning we can do `if (!item)` to check if it's falsy.
 
 Anyway, if we try again, it should work as expected.
 
@@ -140,11 +119,10 @@ Anyway, if we try again, it should work as expected.
 
 #### Working with multiple mentions
 
-Let's say you have some sort of `!avatar` command, where it'll display the avatar of all the mentioned users, or your own avatar if no users were mentioned. Focus on that 2nd part for now - how would you go about displaying your own avatar if no users were mentioned?<br />Taking the snippet for the code we just used, you can do it just like this:
+Let's say you have some sort of `!avatar` command, where it'll display the avatar of all the mentioned users, or your own avatar if no users were mentioned. Focus on that 2nd part for now - how would you go about displaying your own avatar if no users were mentioned? Taking the snippet for the code we just used, you can do it just like this:
 
 ```js
 else if (command === 'avatar') {
-	// if no users were mentioned...
 	if (!message.mentions.users.size) {
 		return message.channel.send(`Your avatar: ${message.author.displayAvatarURL}`);
 	}
@@ -169,7 +147,7 @@ else if (command === 'avatar') {
 
 	// loop through all the mentioned users and then
 	// return a string with their username and avatar URL
-	const avatarList = message.mentions.users.map((user) => {
+	const avatarList = message.mentions.users.map(user => {
 		return `${user.username}'s avatar: ${user.displayAvatarURL}`;
 	});
 
@@ -193,10 +171,8 @@ The first step would be to check if the input we give is an actual number.
 
 ```js
 else if (command === 'prune') {
-	// convert the first argument to a number first
 	const amount = parseInt(args[0]);
 
-	// if the amount is NaN (Not a Number), then let them know
 	if (isNaN(amount)) {
 		return message.reply('that doesn\'t seem to be a valid number.');
 	}
@@ -209,13 +185,12 @@ And if you test it, it should work as expected.
 
 ![isNaN test](http://i.imgur.com/lhuPYta.png)
 
-So what we need to do next is check if the first argument is between X and Y. Following the idea of a prune command, you'll most likely want to use the `.bulkDelete()` method, which allows you to delete multiple messages in one fell swoop. With that being said, that method does have its limits - you can only delete a minimum of 2 and a maximum of 100 messages (at a time). There's a few ways to deal with that, so let me show you one of them.
+So what we need to do next is check if the first argument is between X and Y. Following the idea of a prune command, you'll most likely want to use the `.bulkDelete()` method, which allows you to delete multiple messages in one fell swoop. With that being said, that method does have its limits - you can only delete a minimum of 2 and a maximum of 100 messages (at a time). There's a few ways to deal with that. One of those ways would be to just check the value of the `amount` variable, like so:
 
 ```js
 if (isNaN(amount)) {
 	return message.reply('that doesn\'t seem to be a valid number.');
 }
-// if the amount is less than 2 or more than 100, let them know again
 else if (amount < 2 || amount > 100) {
 	return message.reply('you need to input a number between 2 and 100.');
 }
@@ -242,7 +217,7 @@ message.channel.bulkDelete(amount, true);
 The 2nd parameter in the `.bulkDelete()` method is called `filterOld` - it will filter out messages older than 2 weeks automatically. So if there are 50 messages and 25 of them are older than 2 weeks, it'll only delete the first 25 without throwing an error. However, if all the messages you're trying to delete are older than 2 weeks, then it will still throw an error. Knowing this, we should catch that error by chaining a `.catch()`.
 
 ```js
-message.channel.bulkDelete(amount, true).catch((err) => {
+message.channel.bulkDelete(amount, true).catch(err => {
 	console.error(err);
 	message.channel.send('there was an error trying to prune messages in this channel!');
 });
@@ -261,7 +236,7 @@ The other caveat with this is that the `!prune {number}` message you sent will a
 - else if (amount < 2 || amount > 100) {
 -	return message.reply('you need to input a number between 2 and 100.');
 - }
-+ else if (amount < 1 || amount > 99) {
++ else if (amount <= 1 || amount > 100) {
 +	return message.reply('you need to input a number between 1 and 99.');
 + }
 ```

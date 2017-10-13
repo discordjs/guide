@@ -42,8 +42,9 @@ ESLint will complain a lot about your code when you start using it, but don't le
 		"no-floating-decimal": "error",
 		"no-multi-spaces": "error",
 		"brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
-		"comma-dangle": ["error", "always"],
+		"comma-dangle": ["error", "always-multiline"],
 		"comma-spacing": "error",
+		"comma-style": "error",
 		"curly": ["error", "multi-line", "consistent"],
 		"dot-location": ["error", "property"],
 		"handle-callback-err": "off",
@@ -56,7 +57,11 @@ ESLint will complain a lot about your code when you start using it, but don't le
 		"no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1, "maxBOF": 0 }],
 		"space-before-blocks": "error",
 		"space-before-function-paren": ["error", "never"],
-		"indent": ["error", "tab"],
+		"space-in-parens": "error",
+		"space-infix-ops": "error",
+		"space-unary-ops": "error",
+		"spaced-comment": "error",
+		"indent": ["error","tab"],
 		"quotes": ["error", "single"],
 		"semi": ["error", "always"]
 	}
