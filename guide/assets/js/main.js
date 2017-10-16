@@ -106,8 +106,8 @@ docute.init({
 					path: '/sharding/basic-changes',
 				},
 				{
-					title: 'Additional Information',
-					path: '/sharding/additional',
+					title: 'Additional information',
+					path: '/sharding/additional-information',
 				},
 			],
 		},
