@@ -1,6 +1,7 @@
 # Common questions
 
 ## Legend
+
 `<client>` is a placeholder for the client object, such as `const client = new Discord.Client();`.
 `<message>` is a placeholder for the message object, such as `client.on('message', message => {});`.
 
@@ -48,9 +49,10 @@ member.addRole(role);
 <message>.channel.send('Please enter more input.');
 const filter = (msg) => <message>.author.id === msg.author.id;
 <message>.awaitMessages(filter, { time: 60000, maxMatches: 1, errors: ['time'] })
-.then(messages => {
-
-	msg.channel.send(`You've entered: ${messages.first().content}`);
-
-}).catch(() => <message>.channel.send('You did not enter any input!'));
+	.then(messages => {
+		<message>.channel.send(`You've entered: ${messages.first().content}`);
+	})
+	.catch(() => {
+		<message>.channel.send('You did not enter any input!');
+	});
 ```

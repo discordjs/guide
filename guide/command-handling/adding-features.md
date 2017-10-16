@@ -1,6 +1,6 @@
 ## Additional features
 
-The command handler we've been building so far doesn't do much aside from dynamically load and execute commands. Those two things alone are great, but definitely not the only things we want. Before we dive into it, let's do some quick refactoring in preparation.
+The command handler you've been building so far doesn't do much aside from dynamically load and execute commands. Those two things alone are great, but definitely not the only things you want. Before diving into it, let's do some quick refactoring in preparation.
 
 ```diff
 	const args = message.content.slice(prefix.length).split(/\s+/);
@@ -47,7 +47,7 @@ module.exports = {
 
 This is fine if you only have a few commands that require arguments. However, if you plan on making a lot of commands and don't want to copy & paste that if statement each time, it'd be a smart idea to change that check into something simpler.
 
-Here are the changes we'll be making:
+Here are the changes you'll be making:
 
 ```diff
 +	args: true,
@@ -77,7 +77,7 @@ Now whenever you set `args` to `true` in one of your command files, it'll perfor
 
 It's good UX (user experience) to let the user know that a command requires arguments when they don't provide any (that, and it also prevents your code from breaking). With that being said, letting them know what kind of arguments are expecting is even better.
 
-Here's a simple implementation of such a thing. For this example, we'll pretend we have a `!role` command, where the first argument is the user to give the role, and the 2nd argument is the name of the role to give them.
+Here's a simple implementation of such a thing. For this example, we'll pretend we have a `!role` command, where the first argument is the user to give the role, and the second argument is the name of the role to give them.
 
 In your `role.js` file:
 
@@ -125,7 +125,7 @@ if (command.guildOnly && message.channel.type !== 'text') {
 }
 ```
 
-Now when you try to use the kick command, you'll get the appropriate response which will also prevent your bot from throwing an error.
+Now when you try to use the kick command inside a DM, you'll get the appropriate response which will also prevent your bot from throwing an error.
 
 ![guild command inside DMs](https://i.imgur.com/TiDpsVH.png)
 
@@ -145,7 +145,7 @@ module.exports = {
 };
 ```
 
-This is the amount (in seconds) that the user will have to wait before being able to properly use that command again. We'll be using Collections again to store what we need.
+This is the amount (in seconds) that the user will have to wait before being able to properly use that command again. You'll be using Collections again to store what we need.
 
 In your main file, add in this line (preferably somewhere above your ready event):
 
@@ -172,15 +172,15 @@ else {
 }
 ```
 
-We check if our `cooldowns` Collection has the command set in it yet. If not, we add it in. Next, we create 3 variables:
+You check if the `cooldowns` Collection has the command set in it yet. If not, then add it in. Next, 3 variables are created:
 
 1. A variable with the current timestamp.
 2. A variable that `.get()`s the Collection for the triggered command.
-3. A variable that gets the necessary cooldown amount. If we don't supply it in our command file, it'll default to 3. We then convert it to the proper amount of milliseconds.
+3. A variable that gets the necessary cooldown amount. If you don't supply it in our command file, it'll default to 3. We then convert it to the proper amount of milliseconds.
 
-After that, we make a simple if/else statement to check whether the Collection has the author ID set in it yet or not.
+After that, a simple if/else statement to check if the Collection has the author ID set in it yet is created.
 
-Continuing with our current setup, inside the if statement, this is all you'll have in it:
+Continuing with your current setup, inside the if statement, this is all you'll have in it:
 
 ```js
 if (!timestamps.has(message.author.id)) {
@@ -189,9 +189,9 @@ if (!timestamps.has(message.author.id)) {
 }
 ```
 
-If the `timestamps` Collection we got doesn't have our ID, we set it in with the current timestamp and create a `setTimeout()` to automatically delete it later, depending on that certain command's cooldown number.
+If the `timestamps` Collection doesn't have the message author's ID, set it in with the current timestamp and create a `setTimeout()` to automatically delete it later, depending on that command's cooldown number.
 
-Now all that's left is the else part of our statement. Here's what we'll be using:
+Now all that's left is the else part of our statement. Here's what you'll be using:
 
 ```js
 else {
@@ -207,7 +207,7 @@ else {
 }
 ```
 
-Nothing overly complex here either. Since the `timestamps` Collection has the author ID in it, we `.get()` it and then add the `cooldownAmount` variable to it, to get the correct expiration timestamp. We then check to see if it's actually expired or not, and return a message letting the user know how much time is left until they can use that command again if the cooldown hasn't expired. If it has, use the same code as our if statement to set the cooldown again.
+Nothing overly complex here either. Since the `timestamps` Collection has the author ID in it, we `.get()` it and then sum it up with the `cooldownAmount` variable, in order to get the correct expiration timestamp. You then check to see if it's actually expired or not, and return a message letting the user know how much time is left until they can use that command again if the cooldown hasn't expired. If it has, use the same code as the if statement to set the cooldown again.
 
 ### Command aliases
 
@@ -241,7 +241,7 @@ Making those two small changes, you get this:
 
 ### A dynamic help command
 
-If you don't use a framework or command handler for your projects, you'll have a tough time setting up an always up-to-date help command. Luckily, that's not the case here. Start by creating a new command file inside your `commands` folder and populate it as your normally would.
+If you don't use a framework or command handler for your projects, you'll have a tough time setting up an always up-to-date help command. Luckily, that's not the case here. Start by creating a new command file inside your `commands` folder and populate it as you normally would.
 
 ```js
 module.exports = {
@@ -256,13 +256,13 @@ module.exports = {
 };
 ```
 
-We're gonna need our prefix variable a couple times inside this command, we let's require that at the very top of our file (outside of the `module.exports` bit).
+You're gonna need your prefix variable a couple times inside this command, so make sure to require that at the very top of the file (outside of the `module.exports` bit).
 
 ```js
 const { prefix } = require('../config.json');
 ```
 
-Inside the `execute()` function, let's set up some variables and an if/else statement to determine whether we should display a list of all the command names, or only information about a specific command.
+Inside the `execute()` function, set up some variables and an if/else statement to determine whether it should display a list of all the command names or only information about a specific command.
 
 ```js
 const { commands } = message.client;
@@ -310,7 +310,7 @@ First we check to see if that command name even exists inside our Collection. If
 
 Last but not least, we need to send the message back to the user. Since help messages can get messy, we'll be DMing it to the message author instead of posting it in the requested channel. However, there is something very important we should consider: the possibility of not being able to DM the user, whether it be that they have DMs disabled on that server or overall, or they have the bot blocked.
 
-For that, we'll be using the `.catch()` method at the end of it all.
+For that, you'll be using the `.catch()` method at the end of it all.
 
 ```js
 message.author.send(data, { split: true })
@@ -322,9 +322,9 @@ message.author.send(data, { split: true })
 	.catch(() => message.reply('it seems like I can\'t DM you!'));
 ```
 
-Because our `data` variable is an array, we can take advantage of discord.js' functionality where it will `.join()` any array sent with a `\n` character. If you prefer to not rely on that in the off-chance that it changes in the future, you can simply append `.join('\n')` to the end of that yourself.
+Because the `data` variable is an array, you can take advantage of discord.js' functionality where it will `.join()` any array sent with a `\n` character. If you prefer to not rely on that in the off chance that it changes in the future, you can simply append `.join('\n')` to the end of that yourself.
 
-If you weren't already away, `.send()` takes 2 parameters: the content to send, and the message options to pass in. You can read about the MessageOptions type [here](https://discord.js.org/#/docs/main/stable/typedef/MessageOptions). Using `split: true` here will automatically split our help message into 2 or more messages in the case that it reaches the 2,000 character limit.
+If you weren't already aware, `.send()` takes 2 parameters: the content to send, and the message options to pass in. You can read about the MessageOptions type [here](https://discord.js.org/#/docs/main/stable/typedef/MessageOptions). Using `split: true` here will automatically split our help message into 2 or more messages in the case that it reaches the 2,000 character limit.
 
 The only thing we use `.then()` here for is to let them know when we're done sending (but only if we're not already inside a DM, or else we'd be sending another unnecessary message).
 
