@@ -1,6 +1,13 @@
 ## Configuration files
 
-As you get deeper into development, you may need to interact with sensitive data (such as database passwords, API keys, and so on). Or maybe you have simple data that gets used in multiple locations (such as a prefix, or a list of bot owner IDs). Having that kind of data hard-coded in each of your files can be a bit bothersome and is less than ideal, to say the least. This is where configuration files come in - they're great for storing static data that can be easily updated in a single place.
+As you get deeper into development, you may need to interact with sensitive data or data that gets used in multiple locations, such as:
+
+* Database passwords
+* API keys
+* Command prefix(es)
+* A list of bot owner IDs
+
+Having that kind of data hard-coded in each of your files can be a bit bothersome and is less than ideal, to say the least. This is where configuration files come in - they're great for storing static data that can be easily updated in a single place.
 
 ### Implementing your config file
 

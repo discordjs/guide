@@ -65,7 +65,7 @@ client.on('message', message => {
 
 Save the file, go back to your console, and start the process up again. Whenever a message is sent inside a channel your bot has access to, the message's content will be logged to your console. Go ahead and test it out!
 
-<p class="tip">You can press the up arrow on your keyboard to bring up the latest commands you've run. Pressing `Up` and then `Enter` after closing the process is a nice, quick way to start it up again (as opposed to typing out the name each time).</p>
+<p class="tip">Inside your console, you can press the up arrow on your keyboard to bring up the latest commands you've run. Pressing `Up` and then `Enter` after closing the process is a nice, quick way to start it up again (as opposed to typing out the name each time).</p>
 
 ### Replying to messages
 

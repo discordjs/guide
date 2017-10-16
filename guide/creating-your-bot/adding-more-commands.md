@@ -12,82 +12,83 @@ client.on('message', message => {
 });
 ```
 
-Before doing anything else, let's make a variable to store the prefix we've configured.
+Before doing anything else, make a variable to store the prefix you've configured.
 
 ```js
-const prefix = config.prefix;
+const { prefix } = config;
 
 client.on('message', message => {
-	if (message.content === prefix + 'ping') {
+	if (message.content === `${prefix}ping`) {
 		message.channel.send('Pong.');
 	}
 });
 ```
 
-From now on, if you change the prefix in your config.json file, it'll change in your bot file as well. (We'll be using this a lot soon.)
+From now on, if you change the prefix in your config.json file, it'll change in your bot file as well. You'll be using this a lot soon.
+
+<p class="tip">SOMETHING SOMETHING ES6. SANC FINISH THIS SHIT LATER, KTHX.</p>
 
 ### Simple command structure
 
-You already have an if statement that checks messages for a ping/pong command. Adding other command checks is just as easy! There's one small difference, though.
+You already have an if statement that checks messages for a ping/pong command. Adding other command checks is just as easy - there's one small difference.
 
 ```js
-if (message.content === prefix + 'ping') {
+if (message.content === `${prefix}ping`) {
 	message.channel.send('Pong.');
 }
-else if (message.content === prefix + 'beep') {
+else if (message.content === `${prefix}beep`) {
 	message.channel.send('Boop.');
 }
 ```
 
-Nearly the same, except we use `else if (...)` instead of only `if (...)`.<br />
-There are a few potential issues with this. For example, the ping command won't work if we send `!ping test`. It will only match `!ping` and nothing else. The same goes for the other command. If we want our commands to be more flexible, we can do the following:
+Nearly the same, except we use `else if (...)` instead of only `if (...)`. There are a few potential issues with this. For example, the ping command won't work if you send `!ping test`. It will only match `!ping` and nothing else. The same goes for the other command. If you want your commands to be more flexible, you can do the following:
 
 ```js
-if (message.content.startsWith(prefix + 'ping')) {
+if (message.content.startsWith(`${prefix}ping`)) {
 	message.channel.send('Pong.');
 }
-else if (message.content.startsWith(prefix + 'beep')) {
+else if (message.content.startsWith(`${prefix}beep`)) {
 	message.channel.send('Boop.');
 }
 ```
 
-Now the ping command will trigger whenever the message _starts with_ `!ping`! Sometimes this is what you want, but other times, you may want to match only exactly `!ping` - it varies from case-to-case, so be mindful of what you need when creating commands.
+Now the ping command will trigger whenever the message _starts with_ `!ping`! Sometimes this is what you want, but other times, you may want to match only exactly `!ping` - it varies from case to case, so be mindful of what you need when creating commands.
 
-<p class="warning">Be aware that this will also match !pingpong, !pinguin, and the like. This is not a huge problem for now, so don't worry; we'll see better ways to check for commands later.</p>"
+<p class="warning">Be aware that this will also match `!pingpong`, `!pinguin`, and the like. This is not a huge problem for now, so don't worry; you'll see better ways to check for commands later.</p>
 
 ### Displaying real data
 
-It's time to move on from basic text commands. Let's start displaying some real data! For now, we'll only be going over basic member/server info.
+Let's start displaying some real data. For now, we'll only be going over basic member/server info.
 
 #### Server info command
 
 Make another if statement to check for commands using `server` as the command name. You've already interacted with the Message object via `message.channel.send()`. You get the message object, access the channel it was sent in, and send a message to it. Just like how `message.channel` gives you the message's _channel_, `message.guild` gives you the message's _server_.
 
-<p class="tip">Servers are referred to as "guilds" in the Discord API and discord.js library. Whenever you see someone say "guild", they mean "server"!</p>
+<p class="tip">Servers are referred to as "guilds" in the Discord API and discord.js library. Whenever you see someone say "guild", they mean server.</p>
 
 ```js
-else if (message.content.startsWith(prefix + 'server')) {
-	message.channel.send('This server\'s name is: ' + message.guild.name);
+else if (message.content.startsWith(`${prefix}server`)) {
+	message.channel.send(`This server's name is: ${message.guild.name}`);
 }
 ```
 
 The code above would result in this:
 
-![Server name command](http://i.imgur.com/p0XMbOH.png)
+![Server name command](https://i.imgur.com/Zhw4lzi.png)
 
 If you want to expand upon that command and add some more info, here's an example of what you can do:
 
 ```js
-else if (message.content.startsWith(prefix + 'server')) {
-	message.channel.send('Server name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
+else if (message.content.startsWith(`${prefix}server`)) {
+	message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
 }
 ```
 
 That would display both the server name _and_ the amount of members in it.
 
-![Server name and member count command](http://i.imgur.com/Lo1okFk.png)
+![Server name and member count command](https://i.imgur.com/jbVhpVm.png)
 
-You can, of course, modify this to your liking. You may want to also display the date the server was created, or the server's region. You would do those in the same manner; use `message.guild.createdAt` or `message.guild.region`, respectively.
+You can, of course, modify this to your liking. You may want to also display the date the server was created, or the server's region. You would do those in the same manner - use `message.guild.createdAt` or `message.guild.region`, respectively.
 
 <p class="tip">Want a list of all the properties you can access and all the methods you can call on a server? Refer to [the discord.js documentation site](https://discord.js.org/#/docs/main/master/class/Guild)!</p>
 
@@ -96,8 +97,8 @@ You can, of course, modify this to your liking. You may want to also display the
 Set up another if statement and use the command name `user-info`.
 
 ```js
-else if (message.content.startsWith(prefix + 'user-info')) {
-	message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
+else if (message.content.startsWith(`${prefix}user-info`)) {
+	message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
 }
 ```
 
@@ -279,12 +280,14 @@ You can see how it makes things easier and more readable. ES6 has many great fea
 
 ## The problem with if/else if
 
-If you don't plan to make more than 7 or 8 commands for your bot, then using an if/else if chain is perfectly fine; it's presumably a small project at that point, so you shouldn't need to spend too much time on it. However, this isn't the case for most of us.<br />You probably want your bot to be feature-rich and easy to configure and develop, right? Using a giant if/else if chain won't let you achieve that, and will only hinder your development process. After you read up on [creating arguments](/path/to/args/page), we'll be diving right into something called a "command handler" - code that makes handling commands easier and much more efficient.
+If you don't plan to make more than 7 or 8 commands for your bot, then using an if/else if chain is perfectly fine; it's presumably a small project at that point, so you shouldn't need to spend too much time on it. However, this isn't the case for most of us.
+
+You probably want your bot to be feature-rich and easy to configure and develop, right? Using a giant if/else if chain won't let you achieve that, and will only hinder your development process. After you read up on [creating arguments](/path/to/args/page), we'll be diving right into something called a "command handler" - code that makes handling commands easier and much more efficient.
 
 Before continuing, here's a small list of reasons why you shouldn't use if/else if chains for anything that's not a small project:
 
 * Takes longer to find a piece of code you want.
-* Easier to fall victim to (spaghetti code)[https://en.wikipedia.org/wiki/Spaghetti_code].
+* Easier to fall victim to [spaghetti code](https://en.wikipedia.org/wiki/Spaghetti_code).
 * Difficult to maintain as it grows.
 * Difficult to debug.
 * Difficult to organize.
