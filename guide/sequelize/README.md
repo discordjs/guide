@@ -67,7 +67,7 @@ client.on('message', async msg => {
 client.login('pleaseinsertyourtokenheresothistutorialcanwork');
 ```
 
-### [alpha] Connection information <a name="alpha"></a>
+### [alpha] Connection information <a id="alpha"></a>
 
 The first step is to define the connection information. It should look something like this:
 
@@ -87,7 +87,7 @@ const sequelize = new Sequelize('database', 'user', 'password', {
 `storage` is a sqlite-only setting, because sqlite is the only database that stores all its data to a single file.  
 
 
-### [beta] Creating the model <a name="beta"></a>
+### [beta] Creating the model <a id="beta"></a>
 
 In any relational database, you need to create tables in order to store your data. We're going to create a simple tag system, and we'll have four fields. The table in the database will look something like this:
 
@@ -132,7 +132,7 @@ The model mirrors very closely to what is defined in the database. We'll have a 
 
 > `Sequelize.STRING` vs `Sequelize.TEXT`: In most database systems, the length of the string is a fixed length for performance reasons. Sequelize defaults this to 255. Use STRING if your input has a max length, and use TEXT if doesn't. For sqlite, there's no unbounded string type so it won't matter which one you pick.
 
-### [gamma] Syncing the model <a name="gamma"></a>
+### [gamma] Syncing the model <a id="gamma"></a>
 
 Now that we have defined our structure, we need to make sure the model exists in the database. This goes in our `.once('ready')` event. This way the table structure gets created, and we don't need to worry about it later.
 ```js
@@ -141,7 +141,7 @@ Tags.sync();
 
 The table doesn't actually get created until you `sync` it. The schema that we defined from before was simply creating the model that lets Sequelize know what our data should look like. For testing, you can use `Tags.sync({ force: true })` to recreate the table every time on startup. This way you can get blank slate each time.
 
-### [delta] Adding a tag <a name="delta"></a>
+### [delta] Adding a tag <a id="delta"></a>
 
 We can finally get our first command. We'll start off with adding a tag.
 
@@ -173,7 +173,7 @@ catch (e) {
 
 > Note: Do not use catch for inserting new data. Only use it for gracefully handling things that go wrong in your code, or logging errors
 
-### [epsilon] Fetching a tag <a name="epsilon"></a>
+### [epsilon] Fetching a tag <a id="epsilon"></a>
 
 Next we will fetch the tag we just inserted.
 
@@ -193,7 +193,7 @@ return msg.reply(`Could not find tag: ${tagName}`);
 This is our first query. We're finally doing something with our data, yay!  
 `.findOne()` is how we fetch a single row of data. The `where: { name: tagName }` makes sure we get we only get the row with the tag that we're searching for. Since our queries are asynchronous, we need to have await in order to fetch it. After we receive the data, we can use `.get()` on that object to grab the data. If we don't get any data, then we tell the user that we can't find it.
 
-### [zeta] Editing a tag <a name="zeta"></a>
+### [zeta] Editing a tag <a id="zeta"></a>
 
 ```js
 const splitArgs = commandArgs.split(' ');
@@ -210,7 +210,7 @@ return msg.reply(`Could not find a tag with name ${tagName}.`);
 
 We can edit a record by using the `.update()` function. The result from the update is the number of rows that were changed by the where condition. Since we can only have tags with unique names, we don't have to worry about how many rows it may change. And if we get that no rows were changed, then we can conclude that the tag that was trying to be edited did not exist.
 
-### [theta] Display info on a specific tag <a name="theta"></a>
+### [theta] Display info on a specific tag <a id="theta"></a>
 
 ```js
 const tagName = commandArgs;
@@ -224,7 +224,7 @@ return msg.reply(`Could not find tag: ${tagName}`);
 ```
 This section is very similar to our previous command, except we're showing the tag metadata. `tag` contains our tag object. Notice two things here: firstly, we can access our object properties without the `.get()` function. This is because the object is an instance of a Tag, which we had defined properties in back in [\[beta\]](#beta), and not just a row of data. Second, we accessed a property that we didn't define, `createdAt`. This is because Sequelize automatically adds that column to all tables. We can turn this feature off by passing another object into our model with `{ createdAt: false }`, but in this case, it was useful to have.
 
-### [lambda] Listing all tags <a name="lambda"></a>
+### [lambda] Listing all tags <a id="lambda"></a>
 
 We'll use the next command to fetch a list of all the tags we've created so far.
 
@@ -237,7 +237,7 @@ return msg.channel.send(`List of tags: ${tagString}`);
 
 Here, we use the `.findAll()` method to grab all the tag names. Notice that instead of having `where`, we have set the optional field, `attributes`. Setting attribute to name will let us get *only* the names of tags. If we tried to access other fields, like the tag author, then we'll get an error. If left blank, it will fetch *all* of our associated column data. It won't actually affect our results, but from a performance perspective, we should only grab the data that we need. If we get no results, `tagString` will default to 'No tags set'.
 
-### [mu] Deleting a tag <a name="mu"></a>
+### [mu] Deleting a tag <a id="mu"></a>
 
 ```js
 const tagName = commandArgs;
