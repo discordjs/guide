@@ -110,7 +110,6 @@ docute.init({
 					path: '/sharding/additional',
 				},
 				{
-					type: 'label',
 					title: 'Collectors',
 					path: '/creating-your-bot/collectors'
 				},
