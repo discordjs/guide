@@ -4,12 +4,9 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 
 ---
 
-* Small section for updating Node (Windows + Linux)
-
 * Category for improving your dev environment
 	* Keyboard shortcuts for VSC/Atom/Sublime
 	* Useful packages for VSC/Atom/Sublime
-	* ESLint
 	* pm2
 	* GitKraken
 	* cmder/hyper/etc.
@@ -28,9 +25,8 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 
 * Frequently asked questions section
 	* Difference between User and GuildMember
+	* Incoming breaking changes in v12 from v11
 
 * Frequently requested topic guides
-	* `.awaitMessages()`/MessageCollectors
-	* Command cooldowns
 	* How to navigate the d.js docs (hoo boi)
 	* Bot restart command
