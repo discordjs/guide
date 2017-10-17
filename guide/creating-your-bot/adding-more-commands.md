@@ -30,7 +30,7 @@ From now on, if you change the prefix in your config.json file, it'll change in 
 
 ### Simple command structure
 
-You already have an if statement that checks messages for a ping/pong command. Adding other command checks is just as easy - there's one small difference.
+You already have an if statement that checks messages for a ping/pong command. Adding other command checks is just as easy; there's one small difference from what you already have.
 
 ```js
 if (message.content === `${prefix}ping`) {
@@ -41,7 +41,7 @@ else if (message.content === `${prefix}beep`) {
 }
 ```
 
-Nearly the same, except we use `else if (...)` instead of only `if (...)`. There are a few potential issues with this. For example, the ping command won't work if you send `!ping test`. It will only match `!ping` and nothing else. The same goes for the other command. If you want your commands to be more flexible, you can do the following:
+This is nearly the same, except we use `else if (...)` instead of only `if (...)`. There are a few potential issues with this. For example, the ping command won't work if you send `!ping test`. It will only match `!ping` and nothing else. The same goes for the other command. If you want your commands to be more flexible, you can do the following:
 
 ```js
 if (message.content.startsWith(`${prefix}ping`)) {
@@ -67,7 +67,7 @@ Make another if statement to check for commands using `server` as the command na
 <p class="tip">Servers are referred to as "guilds" in the Discord API and discord.js library. Whenever you see someone say "guild", they mean server.</p>
 
 ```js
-else if (message.content.startsWith(`${prefix}server`)) {
+else if (message.content === `${prefix}server`) {
 	message.channel.send(`This server's name is: ${message.guild.name}`);
 }
 ```
@@ -79,7 +79,7 @@ The code above would result in this:
 If you want to expand upon that command and add some more info, here's an example of what you can do:
 
 ```js
-else if (message.content.startsWith(`${prefix}server`)) {
+else if (message.content === `${prefix}server`) {
 	message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
 }
 ```
@@ -97,7 +97,7 @@ You can, of course, modify this to your liking. You may want to also display the
 Set up another if statement and use the command name `user-info`.
 
 ```js
-else if (message.content.startsWith(`${prefix}user-info`)) {
+else if (message.content === `${prefix}user-info`) {
 	message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
 }
 ```
@@ -130,16 +130,16 @@ client.on('ready', () => {
 const prefix = config.prefix;
 
 client.on('message', message => {
-	if (message.content.startsWith(prefix + 'ping')) {
+	if (message.content === `${prefix}ping`) {
 		message.channel.send('Pong.');
 	}
-	else if (message.content.startsWith(prefix + 'beep')) {
+	else if (message.content === `${prefix}beep`) {
 		message.channel.send('Boop.');
 	}
-	else if (message.content.startsWith(prefix + 'server')) {
+	else if (message.content === `${prefix}server`) {
 		message.channel.send('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
 	}
-	else if (message.content.startsWith(prefix + 'user-info')) {
+	else if (message.content === `${prefix}user-info`) {
 		message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
 	}
 });

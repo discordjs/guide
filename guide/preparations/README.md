@@ -54,7 +54,7 @@ Once you're done with that, you're ready to install discord.js!
 
 ## Installing discord.js
 
-Now that you've installed Node.js and know how to open up and run commands, you can finally install discord.js!
+Now that you've installed Node.js and know how to open up your console and run commands, you can finally install discord.js!
 
 To install discord.js, simply run the `npm install discord.js`. This can take a bit of time, but should be done fairly quickly.
 

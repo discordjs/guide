@@ -26,7 +26,7 @@ Go back to your main bot file, locate the `const client = new Discord.Client()` 
 const config = require('./config.json');
 ```
 
-Next, wherever you have `client.login('your-token-goes-here')`, copy & paste your token into the config.json file. Make sure to keep it between the double quotes.
+Next, copy your token from the `client.login('your-token-goes-here')` line and paste into the `config.json` file. Make sure to keep it between the double quotes.
 
 Now you can simply do `client.login(config.token)` to login! If you want to use a different prefix than `!`, you can change that as well.
 
@@ -75,4 +75,4 @@ const responseArray = require('./random-responses.json');
 console.log(responseArray); // ["Hi!", "Hey!", "What's up?", "How are you?"]
 ```
 
-Much cleaner and organized.
+This makes our code a bit more clean and easy to understand.

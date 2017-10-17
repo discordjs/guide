@@ -15,7 +15,7 @@ const args = message.content.slice(prefix.length).split(' ');
 const command = args.shift().toLowerCase();
 ```
 
-If the message either doesn't start with our prefix or was sent by a bot, `return`. Create an `args` variable that slices off the prefix entirely and then split it into an array by spaces. After that, create a `command` variable by calling `args.shift()`, which will take the first element in array and return it while also removing it from the original array (so that we don't have our command name string inside the `args` array).
+If the message either doesn't start with our prefix or was sent by a bot, `return`. Create an `args` variable that slices off the prefix entirely and then splits it into an array by spaces. After that, create a `command` variable by calling `args.shift()`, which will take the first element in array and return it while also removing it from the original array (so that we don't have our command name string inside the `args` array).
 
 Hopefully that's a bit clearer, if there was any confusion. Let's create a quick command to check out the result of our new addition:
 
@@ -104,7 +104,7 @@ message.channel.send(`You wanted to kick: ${taggedUser.username}`);
 TypeError: Cannot read property 'username' of undefined
 ```
 
-That's because you're trying to access the `username` property of a user you didn't mention! You can add a quick sanity check above the `const taggedUser = ...` line to prevent this from happening.
+That's because you're trying to access the `username` property of a user you didn't mention! Since `message.mentions.users` is a Collection and we're trying to call `.first()` on an empty Collection, it'll return `undefined`. You can add a quick sanity check above the `const taggedUser = ...` line to prevent this from happening.
 
 ```js
 if (!message.mentions.users.size) {
@@ -112,7 +112,7 @@ if (!message.mentions.users.size) {
 }
 ```
 
-<p class="tip">If you're wondering what `message.reply()` does, it's just a shortcut for `message.channel.send()` which also prepends a mention of the person who sent the message, unless used in a DM. It can be very useful for providing feedback!</p>
+<p class="tip">If you're wondering what `message.reply()` does, it's just an alternative for `message.channel.send()` which also prepends a mention of the person who sent the message, unless used in a DM. It can be very useful for providing feedback!</p>
 
 Since `message.mentions.users` is a Collection, it has a `.size` property. If no users are mentions, it'll return 0 (which is a `falsy` value), meaning we can do `if (!value)` to check if it's falsy.
 
@@ -140,7 +140,7 @@ That part is simple; we're just recyling the if statement we used in the section
 
 ![avatar command](http://i.imgur.com/3Ilv3lE.png)
 
-The next part is where it takes a turn - displaying the avatars of all the mentioned users. But it's simpler than you may think! `message.mentions.users` returns a Collection (as previously mentioned), which you can loop over in a number of different ways. We'll be using `.map()` to loop through, since we want to easily collect and store data in a variable in order to send 1 final message in the end, as opposed to multiple.
+The next part is where it takes a turn - displaying the avatars of all the mentioned users. But it's simpler than you may think! `message.mentions.users` returns a Collection (as previously mentioned), which you can loop over in a number of different ways. We'll be using `.map()` to loop through, since it allows you to easily collect and store data in a variable in order to send 1 final message in the end, as opposed to multiple.
 
 ```js
 else if (command === 'avatar') {
@@ -148,8 +148,8 @@ else if (command === 'avatar') {
 		return message.channel.send(`Your avatar: ${message.author.displayAvatarURL}`);
 	}
 
-	// loop through all the mentioned users,
-	// returning a string with their username and avatar URL
+	// loop through all the mentioned users
+	// and return a string with each user's username and avatar URL
 	const avatarList = message.mentions.users.map(user => {
 		return `${user.username}'s avatar: ${user.displayAvatarURL}`;
 	});
@@ -170,7 +170,7 @@ It does take up a lot of screen, but this is just an example command anyway.
 
 Sometimes you'll want users to give you input that ranges from X to Y, but nothing outside of that. Additionally, you want to make sure that they do give you an actual number and not random characters. A good example of this would be a `!prune` command, where it deletes X messages in the channel, depending on what the user inputs.
 
-The first step would be to check if the input they give is an actual number.
+The first step would be to check if the input they gave is an actual number.
 
 ```js
 else if (command === 'prune') {
@@ -188,7 +188,9 @@ And if you test it, it should work as expected.
 
 ![isNaN test](http://i.imgur.com/lhuPYta.png)
 
-So what you need to do next is check if the first argument is between X and Y. Following the idea of a prune command, you'll most likely want to use the `.bulkDelete()` method, which allows you to delete multiple messages in one fell swoop. With that being said, that method does have its limits - you can only delete a minimum of 2 and a maximum of 100 messages (at a time). There's a few ways to deal with that. One of those ways would be to just check the value of the `amount` variable, like so:
+So what you need to do next is check if the first argument is between X and Y. Following the idea of a prune command, you'll most likely want to use the `.bulkDelete()` method, which allows you to delete multiple messages in one fell swoop.
+
+With that being said, that method does have its limits: you can only delete a minimum of 2 and a maximum of 100 messages (at a time). Fortunately, there are a few ways to deal with that. One of those ways would be to just check the value of the `amount` variable, like so:
 
 ```js
 if (isNaN(amount)) {

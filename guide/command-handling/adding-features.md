@@ -178,7 +178,7 @@ You check if the `cooldowns` Collection has the command set in it yet. If not, t
 2. A variable that `.get()`s the Collection for the triggered command.
 3. A variable that gets the necessary cooldown amount. If you don't supply it in our command file, it'll default to 3. We then convert it to the proper amount of milliseconds.
 
-After that, a simple if/else statement to check if the Collection has the author ID set in it yet is created.
+After that, create a simple if/else statement to check if the Collection has the author ID in it yet or not.
 
 Continuing with your current setup, inside the if statement, this is all you'll have in it:
 
@@ -256,7 +256,7 @@ module.exports = {
 };
 ```
 
-You're gonna need your prefix variable a couple times inside this command, so make sure to require that at the very top of the file (outside of the `module.exports` bit).
+You're going to need your prefix variable a couple times inside this command, so make sure to require that at the very top of the file (outside of the `module.exports` bit).
 
 ```js
 const { prefix } = require('../config.json');
