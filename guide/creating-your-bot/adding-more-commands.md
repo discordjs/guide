@@ -41,7 +41,7 @@ else if (message.content === `${prefix}beep`) {
 }
 ```
 
-This is nearly the same, except we use `else if (...)` instead of only `if (...)`. There are a few potential issues with this. For example, the ping command won't work if you send `!ping test`. It will only match `!ping` and nothing else. The same goes for the other command. If you want your commands to be more flexible, you can do the following:
+This is nearly the same, except you use `else if (...)` instead of only `if (...)`. There are a few potential issues with this. For example, the ping command won't work if you send `!ping test`. It will only match `!ping` and nothing else. The same goes for the other command. If you want your commands to be more flexible, you can do the following:
 
 ```js
 if (message.content.startsWith(`${prefix}ping`)) {

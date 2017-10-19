@@ -22,7 +22,7 @@ const command = args.shift().toLowerCase();
 Hopefully that's a bit clearer, if there was any confusion. Let's create a quick command to check out the result of our new addition:
 
 ```js
-// using the new `command` variable, we can make this easier to manage!
+// using the new `command` variable, this makes it easier to manage!
 // you can switch your other commands to this format as well
 else if (command === 'info') {
 	if (!args.length) {
@@ -54,7 +54,7 @@ else if (command === 'info') {
 }
 ```
 
-So if the first argument we provide is equal to "foo", then send back "bar". Otherwise, we just send back the argument the user provided.
+So if the first argument provided is equal to "foo", then send back "bar". Otherwise, just send back the argument the user provided.
 
 ![foo bar example](http://i.imgur.com/pQttV6u.png)
 
@@ -106,7 +106,7 @@ message.channel.send(`You wanted to kick: ${taggedUser.username}`);
 TypeError: Cannot read property 'username' of undefined
 ```
 
-That's because you're trying to access the `username` property of a user you didn't mention! Since `message.mentions.users` is a Collection and we're trying to call `.first()` on an empty Collection, it'll return `undefined`. You can add a quick sanity check above the `const taggedUser = ...` line to prevent this from happening.
+That's because you're trying to access the `username` property of a user you didn't mention! Since `message.mentions.users` is a Collection and you're trying to call `.first()` on an empty Collection, it'll return `undefined`. You can add a quick sanity check above the `const taggedUser = ...` line to prevent this from happening.
 
 ```js
 if (!message.mentions.users.size) {
@@ -116,7 +116,7 @@ if (!message.mentions.users.size) {
 
 <p class="tip">If you're wondering what `message.reply()` does, it's just an alternative for `message.channel.send()` which also prepends a mention of the person who sent the message, unless used in a DM. It can be very useful for providing feedback!</p>
 
-Since `message.mentions.users` is a Collection, it has a `.size` property. If no users are mentioned, it'll return 0 (which is a `falsy` value), meaning we can do `if (!value)` to check if it's falsy.
+Since `message.mentions.users` is a Collection, it has a `.size` property. If no users are mentioned, it'll return 0 (which is a `falsy` value), meaning you can do `if (!value)` to check if it's falsy.
 
 If you try again, it should work as expected.
 
@@ -124,7 +124,7 @@ If you try again, it should work as expected.
 
 #### Working with multiple mentions
 
-Let's say you have some sort of `!avatar` command, where it'll display the avatar of all the mentioned users, or your own avatar if no users were mentioned. Focus on that 2nd part for now - how would you go about displaying your own avatar if no users were mentioned? Taking the snippet for the code we just used, you can do it just like this:
+Let's say you have some sort of `!avatar` command, where it'll display the avatar of all the mentioned users, or your own avatar if no users were mentioned. Focus on that 2nd part for now - how would you go about displaying your own avatar if no users were mentioned? Taking the snippet for the code you just used, you can do it just like this:
 
 ```js
 else if (command === 'avatar') {
@@ -138,11 +138,11 @@ else if (command === 'avatar') {
 
 <p class="warning">Depending on your discord.js version, the `.displayAvatarURL` part may vary. On v12, it'll be `.displayAvatarURL()` (a method), and on v11, it'll be `.displayAvatarURL` (a property). You can check what version you're running by using the `npm ls discord.js` command in your console.</p>
 
-That part is simple; we're just recyling the if statement we used in the section above and displaying the link to your avatar.
+That part is simple; just recycle the if statement you used in the section above and displaying the link to your avatar.
 
 ![avatar command](http://i.imgur.com/3Ilv3lE.png)
 
-The next part is where it takes a turn - displaying the avatars of all the mentioned users. But it's simpler than you may think! `message.mentions.users` returns a Collection (as previously mentioned), which you can loop over in a number of different ways. We'll be using `.map()` to loop through, since it allows you to easily collect and store data in a variable in order to send 1 final message in the end, as opposed to multiple.
+The next part is where it takes a turn - displaying the avatars of all the mentioned users. But it's simpler than you may think! `message.mentions.users` returns a Collection (as previously mentioned), which you can loop over in a number of different ways. You'll be using `.map()` to loop here, since it allows you to easily collect and store data in a variable in order to send 1 final message in the end, as opposed to multiple.
 
 ```js
 else if (command === 'avatar') {
@@ -150,8 +150,6 @@ else if (command === 'avatar') {
 		return message.channel.send(`Your avatar: ${message.author.displayAvatarURL}`);
 	}
 
-	// loop through all the mentioned users
-	// and return a string with each user's username and avatar URL
 	const avatarList = message.mentions.users.map(user => {
 		return `${user.username}'s avatar: ${user.displayAvatarURL}`;
 	});

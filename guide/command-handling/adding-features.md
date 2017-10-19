@@ -18,14 +18,14 @@ The command handler you've been building so far doesn't do much aside from dynam
 	}
 ```
 
-In this short (but necessary) refactor, we:
+In this short (but necessary) refactor, you:
 
-1. Renamed the original `command` variable to `commandName` (to be descriptive about what it actually is, and so that we can name one of our variables as `command` later).
+1. Renamed the original `command` variable to `commandName` (to be descriptive about what it actually is, and so that you can name one of our variables as `command` later).
 2. Changed the following if statement appropriately.
 3. Made a variable named `command` which is the actual command object.
 4. Changed the line inside the try/catch statement to use the `command` variable instead.
 
-Now we can start adding features!
+Now you can start adding features!
 
 ### Required arguments
 
@@ -77,7 +77,7 @@ Now whenever you set `args` to `true` in one of your command files, it'll perfor
 
 It's good UX (user experience) to let the user know that a command requires arguments when they don't provide any (that, and it also prevents your code from breaking). With that being said, letting them know what kind of arguments are expecting is even better.
 
-Here's a simple implementation of such a thing. For this example, we'll pretend we have a `!role` command, where the first argument is the user to give the role, and the second argument is the name of the role to give them.
+Here's a simple implementation of such a thing. For this example, pretend you have a `!role` command, where the first argument is the user to give the role, and the second argument is the name of the role to give them.
 
 In your `role.js` file:
 
@@ -102,13 +102,13 @@ In your main file:
 	}
 ```
 
-We use an if statement to check if the `usage` property exists (and is truthy) first, so that we don't accidentaly end up with `undefined` in the reply string (in the case that we forget to properply supply the property in our command file, or some similar incident). A simple addition like such can easily improve the end user's UX.
+Use an if statement to check if the `usage` property exists (and is truthy) first, so that you don't accidentaly end up with `undefined` in the reply string (in the case that you forget to properply supply the property in our command file, or some similar incident). A simple addition like such can easily improve the end user's UX.
 
 ### Guild only commands
 
 Some commands are meant to be used only inside servers and won't work whatsoever in DMs. A prime example of this would be a kick command. You can add a property to the necessary commands to determine whether or not it should be only available outside of servers.
 
-In the kick command we created in an earlier chapter, make the following changes:
+In the kick command you created in an earlier chapter, make the following changes:
 
 ```diff
 module.exports = {
@@ -145,7 +145,7 @@ module.exports = {
 };
 ```
 
-This is the amount (in seconds) that the user will have to wait before being able to properly use that command again. You'll be using Collections again to store what we need.
+This is the amount (in seconds) that the user will have to wait before being able to properly use that command again. You'll be using Collections again to store what you need.
 
 In your main file, add in this line (preferably somewhere above your ready event):
 
@@ -176,7 +176,7 @@ You check if the `cooldowns` Collection has the command set in it yet. If not, t
 
 1. A variable with the current timestamp.
 2. A variable that `.get()`s the Collection for the triggered command.
-3. A variable that gets the necessary cooldown amount. If you don't supply it in our command file, it'll default to 3. We then convert it to the proper amount of milliseconds.
+3. A variable that gets the necessary cooldown amount. If you don't supply it in our command file, it'll default to 3. Afterwards, convert it to the proper amount of milliseconds.
 
 After that, create a simple if/else statement to check if the Collection has the author ID in it yet or not.
 
@@ -207,7 +207,7 @@ else {
 }
 ```
 
-Nothing overly complex here either. Since the `timestamps` Collection has the author ID in it, we `.get()` it and then sum it up with the `cooldownAmount` variable, in order to get the correct expiration timestamp. You then check to see if it's actually expired or not, and return a message letting the user know how much time is left until they can use that command again if the cooldown hasn't expired. If it has, use the same code as the if statement to set the cooldown again.
+Nothing overly complex here either. Since the `timestamps` Collection has the author ID in it, you `.get()` it and then sum it up with the `cooldownAmount` variable, in order to get the correct expiration timestamp. You then check to see if it's actually expired or not, and return a message letting the user know how much time is left until they can use that command again if the cooldown hasn't expired. If it has, use the same code as the if statement to set the cooldown again.
 
 ### Command aliases
 
@@ -276,7 +276,7 @@ else {
 }
 ```
 
-We'll use `.push()` on the `data` variable to append the info we want and then DM it to the message author once we're done.
+You can use `.push()` on the `data` variable to append the info you want and then DM it to the message author once you're done.
 
 Inside the if statement, this is all you'll need:
 
@@ -286,7 +286,7 @@ data.push(commands.map(command => command.name).join(', '));
 data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
 ```
 
-There's nothing really complex here; all we do is append some strings, `.map()` over the `commands` Collection, and add an additional string to let the user know how to trigger information about a specific command.
+There's nothing really complex here; all you do is append some strings, `.map()` over the `commands` Collection, and add an additional string to let the user know how to trigger information about a specific command.
 
 Inside the else bit, it is a bit more code, but not too much.
 
@@ -306,9 +306,9 @@ if (command.usage) data.push(`**Usage:** ${prefix}${command.name} ${command.usag
 data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`);
 ```
 
-First we check to see if that command name even exists inside our Collection. If it does, we `.get()` it and then start `.push()`ing what we need into the `data` variable. Not all commands will have descriptions, aliases, or usage strings, so we use an if statement for each of those to append them conditionally.
+First you check to see if that command name even exists inside our Collection. If it does, you `.get()` it and then start `.push()`ing what you need into the `data` variable. Not all commands will have descriptions, aliases, or usage strings, so you use an if statement for each of those to append them conditionally.
 
-Last but not least, we need to send the message back to the user. Since help messages can get messy, we'll be DMing it to the message author instead of posting it in the requested channel. However, there is something very important we should consider: the possibility of not being able to DM the user, whether it be that they have DMs disabled on that server or overall, or they have the bot blocked.
+Last but not least, you need to send the message back to the user. Since help messages can get messy, you'll be DMing it to the message author instead of posting it in the requested channel. However, there is something very important you should consider: the possibility of not being able to DM the user, whether it be that they have DMs disabled on that server or overall, or they have the bot blocked.
 
 For that, you'll be using the `.catch()` method at the end of it all.
 
@@ -326,7 +326,7 @@ Because the `data` variable is an array, you can take advantage of discord.js' f
 
 If you weren't already aware, `.send()` takes 2 parameters: the content to send, and the message options to pass in. You can read about the MessageOptions type [here](https://discord.js.org/#/docs/main/stable/typedef/MessageOptions). Using `split: true` here will automatically split our help message into 2 or more messages in the case that it reaches the 2,000 character limit.
 
-The only thing we use `.then()` here for is to let them know when we're done sending (but only if we're not already inside a DM, or else we'd be sending another unnecessary message).
+The only thing you use `.then()` here for is to let them know when you're done sending (but only if the message isn't already inside a DM, or else you'd be sending another unnecessary message).
 
 At the end of it all, you should be getting this as a result:
 
