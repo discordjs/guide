@@ -1,10 +1,10 @@
-##  Message Collectors
+##  Message collectors
 
 Collectors are a useful way to enable your bot to obtain *additional* input after the first command was sent. An example would be initiating a quiz, where the bot will "await" a correct response from somebody.
 
 <p class="tip">You may read up more on collectors [here](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=createMessageCollector).</p>
 
-### Basic Message Collector
+### Basic message collector
 
 For now, let's take the example that they have provided us:
 
@@ -34,7 +34,7 @@ After a message passes through, this will trigger the `collect` event for the `c
 
 Those options you pass as the second argument in `.createMessageCollector()`. The benefit of using this method over `.awaitMessages()` is that you can stop it manually by calling `collector.stop()`, should you have your own reason to interrupt the collecting early.
 
-### Await Messages
+### Await messages
 
 Using `.awaitMessages()` can be easier if you understand promises, and it allows you to have cleaner code overall. It is essentially identical to `.createMessageCollector()`, except promisified. The drawback of using this method, however, is that you cannot do things before the promise is resolves or rejected, either by an error or completion. However, it should do for most purposes, such as awaiting the correct response in a quiz. Instead of taking their example, let's set up a basic quiz command using the `.awaitMessages()` feature.
 
@@ -82,9 +82,9 @@ In this filter, you iterate through the answers to find what you want. You would
 
 The filter looks for messages that match one of the answers in our array of possible answers in order to pass through the collector. In the options, in the second parameter, it's specified that only a maximum of 1 message can go through the filter successfully, before the promise will successfully resolve. In the errors section, it's specified that time will cause it to error out, which will cause the promise to reject if 1 correct answer is not received within the time limit of 1 minute. As you can see, there is no `collect` event, so you are limited in that regard.
 
-## Reaction Collectors
+## Reaction collectors
 
-### Basic Reaction Collector
+### Basic reaction collector
 
 These work quite similarly to message collectors, except that you apply them on a message rather than a channel. The following is an example taken from the documentation, with slightly better variable names fo clarification. The filter will check for the 👌 emoji - in the default skin tone specifically, so be wary of that. It will also check that the person who reacted shares the same id as the author of the original message that the collector was assigned to.
 
@@ -106,7 +106,7 @@ collector.on('end', collected => {
 });
 ```
 
-### Await Reactions
+### Await reactions
 
 As before, these work almost exactly the same as a reaction collector, except it is promise based. The same differences apply as with channel collectors.
 
