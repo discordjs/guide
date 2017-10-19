@@ -26,7 +26,7 @@ client.on('message', message => {
 
 From now on, if you change the prefix in your config.json file, it'll change in your bot file as well. You'll be using this a lot soon.
 
-<p class="tip">If you aren't familiar with some of this syntax, it may be because some of this is ES6 syntax. If it does confuse you, you should check out [this guide page](/page/link/here) before continuing.</p>
+<p class="tip">If you aren't familiar with some of this syntax, it may be because some of this is ES6 syntax. If it does confuse you, you should check out [this guide page](/additional-info/es6-syntax) before continuing.</p>
 
 ### Simple command structure
 
