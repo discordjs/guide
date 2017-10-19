@@ -15,7 +15,9 @@ const args = message.content.slice(prefix.length).split(' ');
 const command = args.shift().toLowerCase();
 ```
 
-If the message either doesn't start with our prefix or was sent by a bot, `return`. Create an `args` variable that slices off the prefix entirely and then splits it into an array by spaces. After that, create a `command` variable by calling `args.shift()`, which will take the first element in array and return it while also removing it from the original array (so that we don't have our command name string inside the `args` array).
+1. If the message either doesn't start with the prefix or was sent by a bot, `return`.
+2. Create an `args` variable that slices off the prefix entirely and then splits it into an array by spaces.
+3. Create a `command` variable by calling `args.shift()`, which will take the first element in array and return it while also removing it from the original array (so that you don't have the command name string inside the `args` array).
 
 Hopefully that's a bit clearer, if there was any confusion. Let's create a quick command to check out the result of our new addition:
 
@@ -114,7 +116,7 @@ if (!message.mentions.users.size) {
 
 <p class="tip">If you're wondering what `message.reply()` does, it's just an alternative for `message.channel.send()` which also prepends a mention of the person who sent the message, unless used in a DM. It can be very useful for providing feedback!</p>
 
-Since `message.mentions.users` is a Collection, it has a `.size` property. If no users are mentions, it'll return 0 (which is a `falsy` value), meaning we can do `if (!value)` to check if it's falsy.
+Since `message.mentions.users` is a Collection, it has a `.size` property. If no users are mentioned, it'll return 0 (which is a `falsy` value), meaning we can do `if (!value)` to check if it's falsy.
 
 If you try again, it should work as expected.
 
