@@ -41,7 +41,7 @@ As for the code above, there are a few places where things can be done better. L
 
 Arrow functions are shorthand for regular functions, with the addition that they use a lexical `this` context inside of their own. If you don't know what the `this` keyword is referring to, don't worry about it; you'll learn more about it as you advance.
 
-Here are some examples of when you could benefit from arrow functions over regular functions:
+Here are some examples of ways you can benefit from arrow functions over regular functions:
 
 ```js
 // regular functions, full ES5
@@ -62,11 +62,11 @@ var doubleAge = function(age) {
 }
 
 // inside a message collector command
-const filter = function(m) {
+var filter = function(m) {
 	return m.content === 'I agree' && !m.author.bot;
 }
 
-const collector = message.createReactionCollector(filter, { time: 15000 });
+var collector = message.createReactionCollector(filter, { time: 15000 });
 ```
 
 ```js
@@ -75,7 +75,7 @@ client.on('ready', () => console.log('Ready!'));
 
 client.on('typingStart', (channel, user) => console.log(`${user} started typing in ${channel}`));
 
-client.on('message', (message) => console.log(`${message.author} sent: ${message.content}`));
+client.on('message', message => console.log(`${message.author} sent: ${message.content}`));
 
 const doubleAge = age => `Your age doubled is: ${age * 2}`;
 
@@ -84,9 +84,14 @@ const filter = m => m.content === 'I agree' && !m.author.bot;
 const collector = message.createReactionCollector(filter, { time: 15000 });
 ```
 
-╔════════════════════════╗
-║<==To=Be=Continued===/\|║
-╚════════════════════════╝
+There are a few important things you should note here:
+
+* The parenthesis around function parameters are optional when you have only 1 parameter, but required otherwise. If you feel like this will confuse you at times, it may be a good idea to just always use parenthesis.
+* You can cleanly put what you need on a single line without curly braces.
+* Omitting curly braces will make arrow functions use **implicit return**, but only if you have a single-line expression. The `doubleAge` and `filter` variables are a good example of this.
+* Unlike the `function someFunc() { ... }` statement, arrow functions cannot be used to create functions with such syntax. You can create a variable and give it an anonymous arrow function as the value, though (as seen with the `doubleAge` and `filter` variables).
+
+We won't be covering the lexical `this` scope with arrow functions in here, but you can Google around if you're still curious. Again, if you aren't sure what `this` is or when you need it, reading about lexical `this` first may only confuse you. 
 
 ### Destructuring
 
@@ -126,23 +131,22 @@ client.on('message', message => {
 
 It is a bit less to write out, and also looks cleaner, but shouldn't be necessary if you follow along with the [command handler](/command-handling/) part of the guide.
 
-#### Changes to make
+You can also rename variables when destructuring, if necessary. A good example of when you'd need to do so is when you're extracting a property with a name that's already being used, or conflicts with a reserved keyword. The syntax is as follow:
 
-What you see in red is what you'll remove, and what you see in green is what you'll replace it with.
-
-```diff
-- const config = require('./config.json');
-+ const { prefix, token } = require('./config.json');
+```js
+// `default` is a reserved keyword
+const { default: defaultValue } = someObject;
 ```
 
-```diff
-- const prefix = config.prefix;
-```
+### var, let, and const
 
-```diff
-- client.login(config.token);
-+ client.login(token);
-```
+Since there are many, many articles out there that can explain this part more in depth, we'll only be giving you a TL;DR and an article link if you choose to read more about it.
+
+1. The `var` keyword is what was (and can still be) used in JS before `let` and `const` came to surface. There are actually many issues with `var`, though, such as it being function-scoped, hoisting related issues, and allowing redeclaration.
+2. The `let` keyword is essentially the new `var`; it addresses many of the issues `var` has, but its biggest factor would be that it's block-scoped and disallows redeclaration (*not* reassignment).
+3. The `const` keyword is for giving variables a constant value which may not be reassigned 
+
+The general rule of thumb recommended by this guide is to use `const` wherever possible, `let` otherwise, and avoid using `var`. Here's a [helpful article](https://madhatted.com/2016/1/25/let-it-be) if you want to read more about this subject.
 
 ### Template literals
 
@@ -187,7 +191,7 @@ function letsPretendThisDoesSomething() {
 ```
 
 ```js
-// Regular string concatination
+// regular string concatination
 console.log('Your username is: **' + username + '**.');
 console.log('Your password is: **' + password + '**.');
 
@@ -203,7 +207,7 @@ console.log(
 ```
 
 ```js
-// Template literals
+// template literals
 console.log(`Your password is: **${password}**.`);
 console.log(`Your username is: **${username}**.`);
 
