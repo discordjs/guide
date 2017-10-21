@@ -1,6 +1,6 @@
 ## File and folder restructuring
 
-As mentioned in a previous chapter, unless your bot project is a small one, it's not a very good idea to have a single file with a giant if/else if chain for commands. If you want to implement features into your bot and make your development process a lot less painful, you'll definitely want to use (or in our case, create) a command handler. Let's get started on that!
+As mentioned in a previous chapter, unless your bot project is a small one, it's not a very good idea to have a single file with a giant if/else if chain for commands. If you want to implement features into your bot and make your development process a lot less painful, you'll definitely want to use (or in this case, create) a command handler. Let's get started on that!
 
 ### Individual command files
 
@@ -22,7 +22,7 @@ module.exports = {
 
 You can go ahead and do the same for the rest of your commands as well, putting their respective blocks of code inside the `execute()` function. If you've been using the same code as the guide thus far, you can copy and paste your commands into their own files now just fine without any issue, as long as you follow the format above. The `description` property is optional, but will be useful for the dynamic help command we'll be covering later.
 
-<p class="warning">If you've set up ESLint for your editor and start receiving errors like `'args' is defined but never used` in your command files, this means that (as it currently is), you don't need that variable in your code. Since it's not being used, you can remove it entirely so that you only have a `message` variable in the parameter. If you decide that you need it later, you can add it back.</p>
+<p class="warning">If you've set up ESLint for your editor and start receiving errors like `'args' is defined but never used` in your command files, this means that (as it currently is), you don't need that variable in your code. Since it's not being used, you can remove it entirely so that you only have a `message` variable in the function parameters. If you realize that you need it later, you can add it back.</p>
 
 <p class="tip">`module.exports` is how you export data in Node.js so that you can `require()` it in other files. If you're unfamiliar with it and want to read more, you can take a look at [the documentation](https://nodejs.org/api/modules.html#modules_module_exports) for more info.</p>
 
@@ -31,7 +31,7 @@ You can go ahead and do the same for the rest of your commands as well, putting 
 At the very top of your main file, add this:
 
 ```js
-// require node's file system API - https://nodejs.org/api/fs.html
+// require node's file system module - https://nodejs.org/api/fs.html
 const fs = require('fs');
 ```
 

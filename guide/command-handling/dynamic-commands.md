@@ -5,6 +5,7 @@
 Now that you have a Collection of all our commands, you can use them easily! But before diving straight into it, it'd be a good idea to familiarize yourself with how you'll turn these basic if statements into something much more dynamic and robust. So let's continue with 1 more if statement example, and then we'll move onto the real stuff.
 
 As always, the red is what you'll remove and the green is what you'll replace it with.
+
 ```diff
 if (command === 'ping') {
 -	message.channel.send('Pong.');
@@ -12,7 +13,7 @@ if (command === 'ping') {
 }
 ```
 
-We `.get()` the ping command and call its `.execute()` method while passing in the `message` and `args` variable as the method arguments. Instead of putting your ping command code directly in the if statement, you can call it directly like that instead. Granted, this version is actually longer than what you had before for your ping command, but most commands usually aren't that short.
+You `.get()` the ping command and call its `.execute()` method while passing in the `message` and `args` variables as the method arguments. Instead of putting your ping command code directly in the if statement, you can call it directly like that instead. Granted, this version is actually longer than what you had before for your ping command, but commands usually aren't that short.
 
 So, if you wanted to (assuming that you've copied & pasted all of your commands into their own files by now), this could be your entire message event:
 
@@ -40,7 +41,7 @@ That would work perfectly fine, but it isn't dynamic; you'd still have too add a
 
 ### Dynamically executing commands
 
-At this point, you can take that entire if/else if chain and delete it; you won't need anything past the `const args = ...` line. Instead, you'll be replacing it with this:
+At this point, you can take that entire if/else if chain and delete it; you won't need anything past the `const command = ...` line. Instead, you'll be replacing it with this:
 
 ```js
 if (!client.commands.has(command)) return;
@@ -54,11 +55,11 @@ catch (error) {
 }
 ```
 
-If there isn't a command with that name, `return`. If there is, `.get()` the command and call it `.execute()` method while passing in our `message` and `args` variables as the method arguments. In case something goes wrong, we log the error and report back to the member to let them know.
+If there isn't a command with that name, `return`. If there is, `.get()` the command and call it `.execute()` method while passing in our `message` and `args` variables as the method arguments. In case something goes wrong, log the error and report back to the member to let them know.
 
 ... and that's it! Whenever you want to add a new command, you simply make a new file in your `commands` directory, name it what you want, and then do what you did for the other commands.
 
-In the next chapter, we'll be going through how to implement some basic features into your brand new command handler. Truth be told, it's hardly a command "handler" at this point; it's a command loader and executor, if you wish to see it that way. You'll learn how to implement some new features and the logic behind them, such as:
+In the next chapter, we'll be going through how to implement some basic features into your brand new command handler. Currently, it's hardly a command "handler" at this point; it's a command loader and executor, if you wish to see it that way. You'll learn how to implement some new features and the logic behind them, such as:
 
 * Command aliases
 * Cooldowns

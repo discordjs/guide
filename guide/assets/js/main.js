@@ -111,7 +111,11 @@ docute.init({
 				},
 				{
 					title: 'Collectors',
-					path: '/creating-your-bot/collectors'
+					path: '/creating-your-bot/collectors',
+				},
+				{
+					title: 'ES6 syntax examples',
+					path: '/additional-info/es6-syntax',
 				},
 			],
 		},
