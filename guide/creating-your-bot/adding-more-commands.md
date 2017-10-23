@@ -90,7 +90,7 @@ That would display both the server name _and_ the amount of members in it.
 
 You can, of course, modify this to your liking. You may want to also display the date the server was created, or the server's region. You would do those in the same manner - use `message.guild.createdAt` or `message.guild.region`, respectively.
 
-<p class="tip">Want a list of all the properties you can access and all the methods you can call on a server? Refer to [the discord.js documentation site](https://discord.js.org/#/docs/main/master/class/Guild)!</p>
+<p class="tip">Want a list of all the properties you can access and all the methods you can call on a server? Refer to [the discord.js documentation site](https://discord.js.org/#/docs/main/stable/class/Guild)!</p>
 
 #### Member info command
 
@@ -106,7 +106,7 @@ This will display the message author's **username** (not nickname, if they have 
 
 ![User info command](http://i.imgur.com/xhnVTA0.png)
 
-<p class="tip">`message.author` refers to the user who sent the message. For a full list of all the properties and methods for the author object (a member of the `User` class), check out [the documentation page for it](https://discord.js.org/#/docs/main/master/class/User).</p>
+<p class="tip">`message.author` refers to the user who sent the message. For a full list of all the properties and methods for the author object (a member of the `User` class), check out [the documentation page for it](https://discord.js.org/#/docs/main/stable/class/User).</p>
 
 And there you have it! As you can see, it's quite simple to add additional commands.
 
@@ -114,7 +114,7 @@ And there you have it! As you can see, it's quite simple to add additional comma
 
 If you don't plan to make more than 7 or 8 commands for your bot, then using an if/else if chain is perfectly fine; it's presumably a small project at that point, so you shouldn't need to spend too much time on it. However, this isn't the case for most of us.
 
-You probably want your bot to be feature-rich and easy to configure and develop, right? Using a giant if/else if chain won't let you achieve that, and will only hinder your development process. After you read up on [creating arguments](/path/to/args/page), we'll be diving right into something called a "command handler" - code that makes handling commands easier and much more efficient.
+You probably want your bot to be feature-rich and easy to configure and develop, right? Using a giant if/else if chain won't let you achieve that, and will only hinder your development process. After you read up on [creating arguments](/creating-your-bot/commands-with-user-input), we'll be diving right into something called a "command handler" - code that makes handling commands easier and much more efficient.
 
 Before continuing, here's a small list of reasons why you shouldn't use if/else if chains for anything that's not a small project:
 

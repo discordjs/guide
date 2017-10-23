@@ -132,7 +132,7 @@ else if (command === 'avatar') {
 		return message.channel.send(`Your avatar: ${message.author.displayAvatarURL}`);
 	}
 
-	// rest of code to be added...
+	// ...
 }
 ```
 
@@ -180,7 +180,7 @@ else if (command === 'prune') {
 		return message.reply('that doesn\'t seem to be a valid number.');
 	}
 
-	// rest of the code here...
+	// ...
 }
 ```
 

@@ -18,6 +18,8 @@ One of the major advantages proper code editors have over Notepad and Notepad++ 
 * [ESLint for Atom](https://atom.io/packages/eslint)
 * [ESLint for Sublime Text](https://packagecontrol.io/packages/ESLint)
 
+<p class="tip">You can install each of these directly inside the editors themselves. For Visual Studio Code, press `Ctrl + Shift + X`. For Atom, press `Ctrl + ,` and click on "Install". For Sublime, press `Ctrl + Shift + P` and search for "Install Package" (available with [Package Control](https://packagecontrol.io/installation). After that, you may then search for "eslint" and install it through there.</p>
+
 ### Setting up ESLint rules
 
 ESLint may display a lot of warnings and errors about your code when you start using it, but don't let this startle you. In order to get started, follow these steps:
