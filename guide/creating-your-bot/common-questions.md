@@ -49,7 +49,7 @@ member.addRole(role);
 <message>.channel.send('Please enter more input.').then(() => {
 	const filter = m => <message>.author.id === m.author.id;
 
-	<message>.awaitMessages(filter, { time: 60000, maxMatches: 1, errors: ['time'] })
+	<message>.channe.awaitMessages(filter, { time: 60000, maxMatches: 1, errors: ['time'] })
 		.then(messages => {
 			<message>.channel.send(`You've entered: ${messages.first().content}`);
 		})

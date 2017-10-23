@@ -19,7 +19,6 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 	* winston
 
 * Category for best practices
-	* Taking advantage of ES6
 	* Naming conventions, I guess? Maybe not, idk
 	* Sanity checks
 
