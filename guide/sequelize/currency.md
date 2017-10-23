@@ -22,10 +22,10 @@ This time we'll have 6 files.
  - `models/UserItems.js` is the junction table between the users and the shop. A junction table is used to connect two tables together. Our junction table will have an additional field for the amount of that item the user has.
 
 ## Create models
+
 Here is an entity relation diagram of the models we'll be making.
 
-<object type="image/svg+xml" data="/assets/img/currency_er_diagram.svg" class="logo">
-</object>
+<object type="image/svg+xml" data="../assets/img/currency_er_diagram.svg" class="logo"></object>
 
 `Users` have a `user_id`, and a `balance`. Each `user_id` can have multiple links to the `UserItems` table, and each entry in the table is connected to one of the items in the `CurrencyShop`, which will have a `name` and a `cost` associated with it. 
 

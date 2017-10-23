@@ -1,0 +1,36 @@
+* [Home](/)
+
+* **Installations & Preparations**
+	* [Installing Node and discord.js](/preparations/)
+	* [Setting up a linter](/preparations/setting-up-a-linter)
+	* [Settings up a bot application](/preparations/setting-up-a-bot-application)
+	* [Adding your bot to servers](/preparations/adding-your-bot-to-servers)
+
+* **Creating Your Bot**
+	* **Initial Steps**
+	* [Up & running](/creating-your-bot/)
+	* [Configuration files](/creating-your-bot/configuration-files)
+	* [Adding more commands](/creating-your-bot/adding-more-commands)
+	* [Commands with user input](/creating-your-bot/commands-with-user-input)
+
+	* **Command Handler**
+	* [File setup](/command-handling/)
+	* [Dynamic commands setup](/command-handling/dynamic-commands)
+	* [Adding features](/command-handling/adding-features)
+
+	* **FAQ**
+	* [Common questions](/creating-your-bot/common-questions)
+
+* **Extended Learning**
+	* **Database**
+	* [Storing data with Sequelize](/sequelize/)
+	* [Making a currency system](/sequelize/currency)
+	
+	* **Sharding**
+	* [Initial file](/sharding/)
+	* [Basic changes](/sharding/basic-changes)
+	* [Additional information](/sharding/additional-information)
+	
+	* **Miscellaneous**
+	* [Collectors](/creating-your-bot/collectors)
+	* [ES6 syntax examples](/additional-info/es6-syntax)

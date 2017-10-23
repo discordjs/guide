@@ -1,7 +1,4 @@
----
-sidebar: false
----
-# Introduction
+## Introduction
 
 If you're reading this, it probably means you want to learn how make a bot with discord.js. Awesome! You've come to the right place.
 This guide will teach you things such as:
@@ -13,7 +10,7 @@ This guide will teach you things such as:
 This guide will also cover subjects like common errors and how to solve them, keeping your code clean, setting up a proper development environment, etc.
 Sounds good? Great! Let's get started, then.
 
-# Before you begin...
+## Before you begin...
 
 Alright, making a bot is cool and all, but there are some prerequisites to it. To create a bot with discord.js, you should have a fairly decent grasp of JavaScript itself.
 While you _can_ make a bot with very little JS and programming knowledge, trying to do so without understanding the language first will only hinder you. You may get stuck on many uncomplicated issues, struggle with solutions to incredibly easy problems, and all-in-all end up frustrated. Sounds pretty annoying if you ask me.
