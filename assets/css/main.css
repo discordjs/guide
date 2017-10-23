@@ -1,0 +1,91 @@
+.markdown-section {
+	max-width: 1000px;
+}
+
+.markdown-section pre {
+	padding: 0 1em;
+	margin: 2.5px;
+	line-height: 125%;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 2px;
+}
+
+.markdown-section pre > code {
+	padding: 1em 0;
+}
+
+.markdown-section code {
+	background-color: #efefef;
+}
+
+.markdown-section p {
+	line-height: 150%;
+}
+
+.token.boolean, .token.constant, .token.deleted, .token.number,
+.token.property, .token.symbol, .token.tag {
+	color: #CF3838;
+}
+
+.markdown-section p.warning,
+.markdown-section p.danger {
+	border-bottom-right-radius: 2px;
+	border-width: 0 0 0 4px;
+	border-style: solid;
+	border-top-right-radius: 2px;
+	margin: 2em 0;
+	padding: 12px 24px 12px 30px;
+	position: relative;
+}
+
+.markdown-section p.tip {
+	border-color: #42b983;
+}
+
+.markdown-section p.danger {
+	border-color: #f66;
+}
+
+.markdown-section p.warning {
+	border-color: #f7d24c;
+}
+
+.markdown-section p.warning code,
+.markdown-section p.danger code {
+	background-color: #efefef;
+}
+
+.markdown-section p.warning em,
+.markdown-section p.danger em {
+	color: #34495e;
+}
+
+.markdown-section p.warning::before,
+.markdown-section p.danger::before {
+	border-radius: 100%;
+	color: #fff;
+	content: "!";
+	font-family: Dosis, Source Sans Pro, Helvetica Neue, Arial, sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	left: -12px;
+	line-height: 20px;
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	top: 14px;
+}
+
+.markdown-section p.tip::before {
+	background-color: #42b983;
+}
+
+.markdown-section p.warning::before {
+	background-color: #f7d24c;
+}
+
+.markdown-section p.danger::before {
+	background-color: #f66;
+}
+
