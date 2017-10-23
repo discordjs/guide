@@ -4,7 +4,7 @@ We're finally getting to the exciting parts! Since your bot is in your server no
 
 ### Creating the bot file
 
-Open up your preferred code editor (whether it be [Visual Studio Code](https://code.visualstudio.com/), [Atom](http://atom.io/), [Sublime Text](https://www.sublimetext.com/), or any other editor of your choice) and create a new file. If you're brand new and aren't sure what to use, go with Visual Studio Code.
+Open up your preferred code editor (whether it be [Visual Studio Code](https://code.visualstudio.com/), [Atom](https://atom.io/), [Sublime Text](https://www.sublimetext.com/), or any other editor of your choice) and create a new file. If you're brand new and aren't sure what to use, go with Visual Studio Code.
 
 It's suggested that you save the file as `index.js`, but you may name it whatever you wish, as long as it ends with `.js`.
 

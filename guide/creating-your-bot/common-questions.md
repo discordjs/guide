@@ -46,13 +46,17 @@ member.addRole(role);
 ### How do I prompt the user for additional input?
 
 ```js
-<message>.channel.send('Please enter more input.');
-const filter = m => <message>.author.id === m.author.id;
-<message>.awaitMessages(filter, { time: 60000, maxMatches: 1, errors: ['time'] })
-	.then(messages => {
-		<message>.channel.send(`You've entered: ${messages.first().content}`);
-	})
-	.catch(() => {
-		<message>.channel.send('You did not enter any input!');
-	});
+<message>.channel.send('Please enter more input.').then(() => {
+	const filter = m => <message>.author.id === m.author.id;
+
+	<message>.channel.awaitMessages(filter, { time: 60000, maxMatches: 1, errors: ['time'] })
+		.then(messages => {
+			<message>.channel.send(`You've entered: ${messages.first().content}`);
+		})
+		.catch(() => {
+			<message>.channel.send('You did not enter any input!');
+		});
+});
 ```
+
+<p class="tip">If you want to learn more about this syntax or want to learn about reaction collectors as well, check out [this dedicated guide page for collectors](/creating-your-bot/collectors)!</p>
