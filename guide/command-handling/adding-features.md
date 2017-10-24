@@ -29,11 +29,11 @@ Now you can start adding features!
 
 ### Required arguments
 
-For this section, we'll be using the `info.js` command as an example. If you chose to keep it, it should look like this now:
+For this section, we'll be using the `args-info.js` command as an example. If you chose to keep it, it should look like this now:
 
 ```js
 module.exports = {
-	name: 'info',
+	name: 'args-info',
 	description: 'Information about the arguments provided.',
 	execute(message, args) {
 		if (!args.length) {

@@ -24,7 +24,7 @@ Hopefully that's a bit clearer, if there was any confusion. Let's create a quick
 ```js
 // using the new `command` variable, this makes it easier to manage!
 // you can switch your other commands to this format as well
-else if (command === 'info') {
+else if (command === 'args-info') {
 	if (!args.length) {
 		return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
 	}
@@ -35,14 +35,14 @@ else if (command === 'info') {
 
 If you try it out, you'll get something like this:
 
-![Arguments testing](http://i.imgur.com/uZS0Xdl.png)
+![Arguments testing](https://i.imgur.com/w3F8C63.png)
 
 Looks good! Don't worry about the comma separation; that's the expected output when trying to send an array as a string.
 
 Now that you have an array of arguments, you can interact with it accordingly! Try out this small addition to the command:
 
 ```js
-else if (command === 'info') {
+else if (command === 'args-info') {
 	if (!args.length) {
 		return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
 	}
@@ -56,13 +56,13 @@ else if (command === 'info') {
 
 So if the first argument provided is equal to "foo", then send back "bar". Otherwise, just send back the argument the user provided.
 
-![foo bar example](http://i.imgur.com/pQttV6u.png)
+![foo bar example](https://i.imgur.com/v3Ocywd.png)
 
 #### Caveats
 
 Currently, you're using `.split(' ')` to split the command arguments. However, there's actually a slight issue with this. As is, it'll split the string by each and every space. Well, what happens if someone accidentally (or even purposely) adds additional spaces? Here's what:
 
-![extra spaces args](http://i.imgur.com/qBkMiaK.png)
+![extra spaces args](https://i.imgur.com/DMuC8t1.png)
 
 If you've never done something like this before, this probably isn't what you'd expect, right? Thankfully, there's a simple solution for this issue. The red line is what to remove, and the green line is what to replace it with.
 
@@ -71,7 +71,7 @@ If you've never done something like this before, this probably isn't what you'd 
 + const args = message.content.slice(prefix.length).split(/\s+/);
 ```
 
-![extra spaces args fixed](http://i.imgur.com/XGZYm6i.png)
+![extra spaces args fixed](https://i.imgur.com/ibSgjAC.png)
 
 Awesome! Nothing to worry in that regard about now. You're now using something called a "regular expression" (commonly referred to as "regex") to handle that small (but important) bug.
 

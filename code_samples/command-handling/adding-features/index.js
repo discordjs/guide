@@ -43,8 +43,6 @@ client.on('message', message => {
 		return message.channel.send(reply);
 	}
 
-	if (!client.commands.has(command)) return;
-
 	if (!cooldowns.has(command.name)) {
 		cooldowns.set(command.name, new Discord.Collection());
 	}
