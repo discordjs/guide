@@ -29,15 +29,18 @@ Now you can start adding features!
 
 ### Required arguments
 
-For this section, we'll be using the `info.js` command as an example. If you chose to keep it, it should look like this now:
+For this section, we'll be using the `args-info.js` command as an example. If you chose to keep it, it should look like this now:
 
 ```js
 module.exports = {
-	name: 'info',
+	name: 'args-info',
 	description: 'Information about the arguments provided.',
 	execute(message, args) {
 		if (!args.length) {
 			return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
+		}
+		else if (args[0] === 'foo') {
+			return message.channel.send('bar');
 		}
 
 		message.channel.send(`Arguments: ${args}\nArguments length: ${args.length}`);
@@ -55,7 +58,11 @@ Here are the changes you'll be making:
 -		if (!args.length) {
 -			return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
 -		}
--
+-		else if (args[0] === 'foo') {
++		if (args[0] === 'foo') {
+			return message.channel.send('bar');
+		}
+		
 		message.channel.send(`Arguments: ${args}\nArguments length: ${args.length}`);
 	},
 ```

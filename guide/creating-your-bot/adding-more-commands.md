@@ -12,19 +12,19 @@ client.on('message', message => {
 });
 ```
 
-Before doing anything else, make a variable to store the prefix you've configured.
+Before doing anything else, make a property to store the prefix you've configured. Instead of `const config = ...`, you can use destructuring to extract the prefix variable from the config file, and the token as well while you're at it.
 
-```js
-const { prefix } = config;
-
-client.on('message', message => {
-	if (message.content === `${prefix}ping`) {
-		message.channel.send('Pong.');
-	}
-});
+```diff
+- const config = require('./config.json');
++ const { prefix, token } = require('./config.json');
 ```
 
-From now on, if you change the prefix in your config.json file, it'll change in your bot file as well. You'll be using this a lot soon.
+```diff
+- client.login(config.token);
++ client.login(token);
+```
+
+From now on, if you change the prefix or token in your config.json file, it'll change in your bot file as well. You'll be using the prefix variable a lot soon.
 
 <p class="tip">If you aren't familiar with some of this syntax, it may be because some of this is ES6 syntax. If it does confuse you, you should check out [this guide page](/additional-info/es6-syntax) before continuing.</p>
 

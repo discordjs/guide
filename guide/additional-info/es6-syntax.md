@@ -144,7 +144,7 @@ Since there are many, many articles out there that can explain this part more in
 
 1. The `var` keyword is what was (and can still be) used in JS before `let` and `const` came to surface. There are actually many issues with `var`, though, such as it being function-scoped, hoisting related issues, and allowing redeclaration.
 2. The `let` keyword is essentially the new `var`; it addresses many of the issues `var` has, but its biggest factor would be that it's block-scoped and disallows redeclaration (*not* reassignment).
-3. The `const` keyword is for giving variables a constant value which may not be reassigned 
+3. The `const` keyword is for giving variables a constant value which may not be reassigned. `const`, like `let`, is also block-scoped.
 
 The general rule of thumb recommended by this guide is to use `const` wherever possible, `let` otherwise, and avoid using `var`. Here's a [helpful article](https://madhatted.com/2016/1/25/let-it-be) if you want to read more about this subject.
 
@@ -154,10 +154,10 @@ If you check the code above, it's currently doing things like `prefix + 'name'` 
 
 ```js
 // ES5 version, as we currently have it
-else if (message.content.startsWith(prefix + 'server')) {
+else if (message.content === prefix + 'server') {
 	message.channel.send('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
 }
-else if (message.content.startsWith(prefix + 'user-info')) {
+else if (message.content === prefix + 'user-info') {
 	message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
 }
 ```
@@ -176,7 +176,7 @@ Easier to read, easier to write! The best of both worlds.
 
 #### Tempate literals vs string concatination
 
-You can think of template literals as the ES6 version of string concatination. I won't go too much into detail about it, but if you're interested in reading more, you can read [the MDN page about them](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals).
+You can think of template literals as the ES6 version of string concatination. This example won't go too much into detail about it, but if you're interested in reading more, you can read [the MDN page about them](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals).
 
 Here's a quick comparison between the two:
 
@@ -225,4 +225,4 @@ console.log(`
 // there are ways around that, which we'll discuss in another section.
 ```
 
-You can see how it makes things easier and more readable.
+You can see how it makes things easier and more readable. In some cases, it can even make your code shorter! This one is something you'll definitely want to take advantage of as much as possible.

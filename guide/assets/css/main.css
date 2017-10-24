@@ -1,31 +1,57 @@
+/* container width */
+
 .markdown-section {
 	max-width: 1000px;
 }
 
+/* regular text blocks */
+
+.markdown-section p {
+	line-height: 170%;
+}
+
+/* codeblocks and inline code */
+
 .markdown-section pre {
-	padding: 0 1em;
-	margin: 2.5px;
+	padding: 1em;
+	margin: 1em 0;
 	line-height: 125%;
 	border: 1px solid rgba(0, 0, 0, 0.1);
 	border-radius: 2px;
-}
-
-.markdown-section pre > code {
-	padding: 1em 0;
 }
 
 .markdown-section code {
 	background-color: #efefef;
 }
 
-.markdown-section p {
+.markdown-section pre > code {
+	padding: 0;
 	line-height: 150%;
 }
 
+.markdown-section pre >code,
+.markdown-section code {
+	font-size: 0.9rem;
+	font-family: consolas;
+}
+
+/* syntax highlighting */
+
 .token.boolean, .token.constant, .token.deleted, .token.number,
 .token.property, .token.symbol, .token.tag {
-	color: #CF3838;
+	color: #da3b3b;
 }
+
+.token.deleted {
+	text-decoration: none;
+}
+
+.token.inserted {
+	color: #42b983;
+	border-width: 0;
+}
+
+/* helper classes */
 
 .markdown-section p.warning,
 .markdown-section p.danger {

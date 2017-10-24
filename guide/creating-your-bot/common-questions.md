@@ -2,8 +2,9 @@
 
 ## Legend
 
-`<client>` is a placeholder for the client object, such as `const client = new Discord.Client();`.
-`<message>` is a placeholder for the message object, such as `client.on('message', message => {});`.
+* `<client>` is a placeholder for the Client object, such as `const client = new Discord.Client();`.
+* `<message>` is a placeholder for the Message object, such as `client.on('message', message => { ... });`.
+* `<guild>` is a placeholder for the Guild object, such as `<message>.guild` or `<client>.guilds.get('<id>')`.
 
 ## Administrative
 
@@ -11,20 +12,20 @@
 
 ```js
 const user = <message>.mentions.users.first();
-<message>.guild.ban(user);
+<guild>.ban(user);
 ```
 
 ### How do I kick a user?
 
 ```js
 const user = <message>.mentions.users.first();
-<message>.guild.kick(user);
+<guild>.kick(user);
 ```
 
 ### How do I add a role to a guild member?
 
 ```js
-const role = <message>.guild.roles.find('name', '<role name>');
+const role = <guild>.roles.find('name', '<role name>');
 const member = <message>.mentions.members.first();
 member.addRole(role);
 ```

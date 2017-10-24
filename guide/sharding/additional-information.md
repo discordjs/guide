@@ -4,11 +4,11 @@ Here are some extra topics covered about sharding that you might have concerns a
 
 ### Client#Shard
 
-You should know this one from reading the guide up until this point, but just to make sure, `<client>.shard` is a reference to an instance of [ShardClientUtil]('https://discord.js.org/#/docs/main/stable/class/ShardClientUtil').
+You should know this one from reading the guide up until this point, but just to make sure, `<client>.shard` is a reference to an instance of [ShardClientUtil](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil).
 
 ### Shard messages
 
-In order for shards to communicate, they must send messages to one another, as they are each their own process. You can listen for these messages by adding the following listener in your `main.js` file:
+In order for shards to communicate, they must send messages to one another, as they are each their own process. You can listen for these messages by adding the following listener in your `index.js` file:
 
 ```js
 manager.on('message', (shard, message) => console.log(`Shard[${shard.id}]:${message._eval}:${message._result}`));
@@ -60,4 +60,4 @@ Looks a bit weird, for sure. At the end of the day, this would become `client.fu
 Here are some popular examples if you still need more resources.
 
 * [SNEK's Google Bot](https://github.com/devsnek/googlebot)
-* [WeebDev's Listen.moe](https://github.com/WeebDev/Listen.moe-Discord)
+* [WeebDev's Listen.moe](https://github.com/LISTEN-moe/discord-bot)
