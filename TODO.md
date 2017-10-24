@@ -4,9 +4,6 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 
 ---
 
-* Checkout some docsify plugins
-	* Search bar is a must
-
 * Category for improving your dev environment
 	* Keyboard shortcuts for VSC/Atom/Sublime
 	* Useful packages for VSC/Atom/Sublime
@@ -22,7 +19,6 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 	* winston
 
 * Category for best practices
-	* Naming conventions, I guess? Maybe not, idk
 	* Sanity checks
 
 * Frequently asked questions section
