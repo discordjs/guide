@@ -38,7 +38,7 @@ client.shard.broadcastEval('this.guilds.size').then(results => {
 }).catch(console.error);
 ```
 
-While it's a bit unattractive to have more nesting in your commands, it is necessary when not using `async`/`await` (more info [here](/asyncawait/placeholder)). Now, the code at the top should look something like the below:
+While it's a bit unattractive to have more nesting in your commands, it is necessary when not using `async`/`await`. Now, the code at the top should look something like the below:
 
 ```js
 const Discord = require('discord.js');
@@ -55,4 +55,4 @@ client.on('message', (message) => {
 client.login('token');
 ```
 
-The next section contains additional changes you might want to take into consideration, which you may learn about by clicking [this link](/sharding/additional).
+The next section contains additional changes you might want to take into consideration, which you may learn about by clicking [this link](/sharding/additional-information).

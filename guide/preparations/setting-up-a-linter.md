@@ -18,7 +18,7 @@ One of the major advantages proper code editors have over Notepad and Notepad++ 
 * [ESLint for Atom](https://atom.io/packages/eslint)
 * [ESLint for Sublime Text](https://packagecontrol.io/packages/ESLint)
 
-<p class="tip">You can install each of these directly inside the editors themselves. For Visual Studio Code, press `Ctrl + Shift + X`. For Atom, press `Ctrl + ,` and click on "Install". For Sublime, press `Ctrl + Shift + P` and search for "Install Package" (available with [Package Control](https://packagecontrol.io/installation). After that, you may then search for "eslint" and install it through there.</p>
+<p class="tip">You can install each of these directly inside the editors themselves. For Visual Studio Code, press `Ctrl + Shift + X`. For Atom, press `Ctrl + ,` and click on "Install". For Sublime, press `Ctrl + Shift + P` and search for "Install Package" (available via [Package Control](https://packagecontrol.io/installation)). After that, you may then search for "eslint" and install it through there.</p>
 
 ### Setting up ESLint rules
 
@@ -45,7 +45,7 @@ ESLint may display a lot of warnings and errors about your code when you start u
 		"curly": ["error", "multi-line", "consistent"],
 		"dot-location": ["error", "property"],
 		"handle-callback-err": "off",
-		"indent": ["error","tab"],
+		"indent": ["error", "tab"],
 		"max-nested-callbacks": ["error", { "max": 4 }],
 		"max-statements-per-line": ["error", { "max": 2 }],
 		"no-console": "off",
@@ -57,25 +57,30 @@ ESLint may display a lot of warnings and errors about your code when you start u
 		"no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1, "maxBOF": 0 }],
 		"no-shadow": ["error", { "allow": ["err", "resolve", "reject"] }],
 		"no-trailing-spaces": ["error", { "skipBlankLines": true }],
+		"no-var": "error",
 		"object-curly-spacing": ["error", "always"],
+		"prefer-const": "error",
 		"quotes": ["error", "single"],
+		"semi": ["error", "always"],
 		"space-before-blocks": "error",
 		"space-before-function-paren": ["error", "never"],
-		"spaced-comment": "error",
 		"space-in-parens": "error",
 		"space-infix-ops": "error",
 		"space-unary-ops": "error",
-		"semi": ["error", "always"],
+		"spaced-comment": "error",
 		"yoda": "error"
 	}
 }
 ```
 
-Essentially, all of these rules sum up to:
+The major points of this setup would be:
 
-* Allowing you to debug with `console.log()`.
-* Disapproving of variables with the same name in callbacks.
-* Requiring semicolons. (While it's not required in JavaScript, it's considered one of the most common best practices to follow.)
-* Requiring accessing properties to be on the same line.
-* Requiring indenting to be done with tabs.
-* Limiting nested callbacks to 4. (If you hit this error, it is a good idea to consider refactoring your code.)
+* Allowing you to debug with `console.log()`;
+* Prefer using `const` over `let` or `var`, as well as disallow `var`;
+* Disapproving of variables with the same name in callbacks;
+* Requiring semicolons. While it's not required in JavaScript, it's considered one of the most common best practices to follow;
+* Requiring accessing properties to be on the same line;
+* Requiring indenting to be done with tabs;
+* Limiting nested callbacks to 4. If you hit this error, it is a good idea to consider refactoring your code.
+
+If your current code style is a bit different or you simply don't like a few of these rules, that's perfectly fine! Just head over the the [ESLint docs](https://eslint.org/docs/rules/), find the rule(s) you want to modify, and change them accordingly.
