@@ -27,7 +27,7 @@
 	* [Making a currency system](/sequelize/currency)
 	
 	* **Sharding**
-	* [Getting Started](/sharding/)
+	* [Getting started](/sharding/)
 	* [Additional information](/sharding/additional-information)
 	
 	* **Miscellaneous**
