@@ -8,7 +8,7 @@ If you're developing on Windows, it's as simple as installing any other program.
 
 ### Installing on Linux
 
-If you're developing on Linux, you may consult [this page](https://nodejs.org/en/download/package-manager/) to determine how you should install Node.<br />On that note, there's a possibility that you may already have Node \(e.g. if you're using a VPS\). You can check by running the `node -v` command. If it outputs something like `v8.0.0`, then you're good to go! Otherwise, take a look at the page linked above for instructions on installing Node on your OS.
+If you're developing on Linux, you may consult [this page](https://nodejs.org/en/download/package-manager/) to determine how you should install Node.<br />On that note, there's a possibility that you may already have Node \(e.g. if you're using a VPS\). You can check by running the `node -v` command. If it outputs something like `v8.0.0` or higher, then you're good to go! Otherwise, take a look at the page linked above for instructions on installing Node on your OS.
 
 <p class="warning">If you _do_ have Node installed, but have an older version \(i.e. anything below 8.0.0\), you should upgrade to the latest version.</p>
 
@@ -22,9 +22,9 @@ To install and use discord.js, you'll need to install it via npm \(Node's packag
 
 Like any other project, you should have a dedicated folder for this, in order to keep it organized and manageable.
 
-Navigate to a place on your machine where it's be easy for find and open in the future, for convenience purposes. Create a new folder by either right-clicking and choosing the "New &gt; Folder" option \(Windows\) or using the `mkdir` command \(i.e. `mkdir project-name`\) \(Linux\). If you already have a name you want to use for your bot, you can use that as the folder name. Otherwise, you may name it something like `discord-bot` for the time being \(or anything else you have in mind\).
+Navigate to a place on your machine where it's be easy for find and open in the future, for convenience purposes. Create a new folder by either right-clicking and choosing the "New &gt; Folder" option \(Windows\) or using the `mkdir` command \(e.g. `mkdir project-name`\) \(Linux\). If you already have a name you want to use for your bot, you can use that as the folder name. Otherwise, you may name it something like `discord-bot` for the time being \(or anything else you have in mind\).
 
-Once you're done making the folder, open it up via simply clicking it open \(Windows\) or using the `cd` command \(i.e. `cd project-name`\) \(Linux\).
+Once you're done making the folder, open it up by double clicking it open \(Windows\) or using the `cd` command \(e.g. `cd project-name`\) \(Linux\).
 
 ### Opening the command prompt
 

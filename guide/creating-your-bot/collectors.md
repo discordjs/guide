@@ -2,7 +2,7 @@
 
 Collectors are a useful way to enable your bot to obtain *additional* input after the first command was sent. An example would be initiating a quiz, where the bot will "await" a correct response from somebody.
 
-<p class="tip">You may read up more on collectors [here](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=createMessageCollector).</p>
+<p class="tip">You can read up more on collectors [here](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=createMessageCollector).</p>
 
 ### Basic message collector
 
@@ -38,7 +38,7 @@ Those options you pass as the second argument in `.createMessageCollector()`. Th
 
 Using `.awaitMessages()` can be easier if you understand promises, and it allows you to have cleaner code overall. It is essentially identical to `.createMessageCollector()`, except promisified. The drawback of using this method, however, is that you cannot do things before the promise is resolves or rejected, either by an error or completion. However, it should do for most purposes, such as awaiting the correct response in a quiz. Instead of taking their example, let's set up a basic quiz command using the `.awaitMessages()` feature.
 
-<p class="tip">You may read up more on `.awaitMessages()` [here](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=awaitMessages).</p>
+<p class="tip">You can read up more on `.awaitMessages()` [here](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=awaitMessages).</p>
 
 First, you'll need some questions and answers to choose from, so here's a basic set:
 
