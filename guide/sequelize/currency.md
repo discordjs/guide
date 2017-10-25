@@ -1,8 +1,10 @@
 # Making a Currency System
+
 A common feature of Discord bots is a currency system. It's possible to do everything in one object, but we can also abstract that in terms of *relations* between objects. This is where the power of a RDBMS (Relational Database Management System) truly shines. Sequelize calls these *associations*, so we'll be using that term from now on.
 
 
 ## File overview
+
 There will be multiple files: a DB init script, your models, and your bot script. In the previous tutorial, we placed all of these in the same file. Having everything in one file is usually not how it's done in the real world, so we'll correct that.
 
 This time we'll have 6 files. 
@@ -20,6 +22,7 @@ This time we'll have 6 files.
  - `models/UserItems.js` is the junction table between the users and the shop. A junction table is used to connect two tables together. Our junction table will have an additional field for the amount of that item the user has.
 
 ## Create models
+
 Here is an entity relation diagram of the models we'll be making.
 
 <object type="image/svg+xml" data="assets/img/currency_er_diagram.svg" class="logo"></object>
@@ -93,6 +96,7 @@ Our junction table will link `user_id` and the `id` of the currency shop togethe
 
 
 ## Initialize database
+
 Now that the models are defined, they should be created in our database so that we can access them in the bot file. We ran the sync in the `ready` event in our bot in the previous tutorial, which is completely unneeded, since it only needs to run once. So what we can do is make a file to initialize the database and never touch it again unless we want to remake the entire database
 
 Create a file called `dbInit.js`, in the base directory, *not* in the `models` folder.
@@ -132,6 +136,7 @@ Execute `node dbInit.js` to create the database, then never touch the file again
 
 
 ## Create associations
+
 Next we'll add our associations to the models. Create a file named `dbObjects.js` in the base directory, next to `dbInit.js`.
 
 ```js
@@ -182,6 +187,7 @@ Getting items is similar, we just `.findAll()` using the user's id as the key. T
 
 
 ## Application code
+
 To put it together, we'll create an `app.js` in the base directory with the following skeleton code.
 
 ```js
@@ -236,6 +242,7 @@ client.login('pleaseinsertyourtokenheresothistutorialcanwork');
 Nothing special about this skeleton. We import the Users and CurrencyShop models from our `dbObjects.js` file, and add a currency Collection. Every time someone talks, we add 1 to their currency count. The rest is just standard discord.js code and a simple if/else command handler. We're using the currency Collection in order to cache individual user's currency, so we don't have to hit the database for every lookup. I've used an if/else handler here, but you can put it in a framework or command handler as long as you maintain a reference to the models and the currency collection.
 
 ### [alpha] Helper methods
+
 ```js
 Reflect.defineProperty(currency, 'add', {
 	value: async function add(id, amount) {
@@ -261,6 +268,7 @@ Reflect.defineProperty(currency, 'getBalance', {
 We're defining an `.add()` method to our currency collection. It'll be used quite frequently, so having a method for it makes our lives easier. We'll also add a `.getBalance()` method so that we'll always get a number.
 
 ### [beta] Ready event data sync
+
 ```js
 const storedBalances = await Users.findAll();
 storedBalances.forEach(b => currency.set(b.user_id, b));
@@ -269,6 +277,7 @@ storedBalances.forEach(b => currency.set(b.user_id, b));
 In our ready event, we want to sync our currency collection with the database for easy access later. 
 
 ### [gamma] Show user balance 
+
 ```js
 const target = msg.mentions.users.first() || msg.author;
 return msg.channel.send(`${target.tag} has ${currency.getBalance(target.id)}💰`);
@@ -277,6 +286,7 @@ return msg.channel.send(`${target.tag} has ${currency.getBalance(target.id)}💰
 Nothing tricky here. We use our `.getBalance()` method to show either the author's or the mentioned user's balance
 
 ### [delta] Show user inventory
+
 ```js
 const target = msg.mentions.users.first() || msg.author;
 const user = await Users.findByPrimary(target.id);
@@ -288,6 +298,7 @@ return msg.channel.send(`${target.tag} currently has ${items.map(i => `${i.amoun
 Here we begin to see the power of associations. Even though users and the shop are different tables, and the data is stored separately, we can get a user's inventory by looking at the junction table and join it with the shop. No duplicated item names that waste space!
 
 ### [epsilon] Transfer currency to another user
+
 ```js
 const currentAmount = currency.getBalance(msg.author.id);
 const transferAmount = commandArgs.split(/\s+/g).find(t => !/<@!?\d+>/g.test(t));
@@ -309,6 +320,7 @@ We want to be able to allow users to do both `!transfer 5 @user` and `!transfer 
 We use `.add()` for both removing and adding currency. Since we already check if the transfer amount is below zero, it will be safe to apply the additive inverse of the transfer amount to their balance.
 
 ### [zeta] Buying an item
+
 ```js
 const item = await CurrencyShop.findOne({ where: { name: { $like: commandArgs } } });
 if (!item) return msg.channel.send(`That item doesn't exist.`);
@@ -325,6 +337,7 @@ msg.channel.send(`You've bought: ${item.name}.`);
 In order for users to search for an item without having to care about case, we use the `$like` modifier when we're looking for the name. Keep in mind that this may be slow if you have millions of items, so please don't put a million items in your shop. 
 
 ### [theta] Display the shop
+
 ```js
 const items = await CurrencyShop.findAll();
 return msg.channel.send(items.map(item => `${item.name}: ${item.cost}💰`).join('\n'), { code: true });
@@ -332,6 +345,7 @@ return msg.channel.send(items.map(item => `${item.name}: ${item.cost}💰`).join
 Nothing special here, just a regular `.findAll()` to get all the items in the shop, and `.map()` to transform that data into something nice looking.
 
 ### [lambda] Display the leaderboard
+
 ```js
 return msg.channel.send(
 	currency.sort((a, b) => b.balance - a.balance)
@@ -344,4 +358,5 @@ return msg.channel.send(
 Nothing particularly special here either. We could have queried the database for the top 10 currency holders as well, but we already have access to them locally, so just sort the Collection we have and use map again to display in a nice format. The filter is in case the users no longer exist in the bot's cache.
 
 ## Resulting code
+
 If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/Danktuary/Making-Bots-with-Discord.js/tree/master/code_samples/sequelize/currency).
