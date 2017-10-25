@@ -76,3 +76,7 @@ console.log(responseArray); // ["Hi!", "Hey!", "What's up?", "How are you?"]
 ```
 
 This makes our code a bit more clean and easy to understand.
+
+## Resulting code
+
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/Danktuary/Making-Bots-with-Discord.js/tree/master/code_samples/creating-your-bot/configuration-files).
