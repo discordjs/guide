@@ -123,3 +123,7 @@ message.awaitReactions(filter, { max: 4, time: 60000, errors: ['time'] })
 		console.log(`After a minute, only ${collected.size} out of 4 reacted.`);
 	});
 ```
+
+## Resulting code
+
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/Danktuary/Making-Bots-with-Discord.js/tree/master/code_samples/creating-your-bot/commands-with-user-input).

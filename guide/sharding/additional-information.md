@@ -57,7 +57,10 @@ Looks a bit weird, for sure. At the end of the day, this would become `client.fu
 
 ## Online Examples
 
-Here are some popular examples if you still need more resources.
+Here are's an example if you still need more resources.
 
-* [SNEK's Google Bot](https://github.com/devsnek/googlebot)
-* [WeebDev's Listen.moe](https://github.com/LISTEN-moe/discord-bot)
+* [Listen.moe](https://github.com/LISTEN-moe/discord-bot)
+
+## Resulting code
+
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/Danktuary/Making-Bots-with-Discord.js/tree/master/code_samples/creating-your-bot/commands-with-user-input).
