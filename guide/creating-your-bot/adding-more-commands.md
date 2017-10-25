@@ -74,7 +74,7 @@ else if (message.content === `${prefix}server`) {
 
 The code above would result in this:
 
-![Server name command](https://i.imgur.com/Zhw4lzi.png)
+![Server name command](assets/img/Zhw4lzi.png)
 
 If you want to expand upon that command and add some more info, here's an example of what you can do:
 
@@ -86,7 +86,7 @@ else if (message.content === `${prefix}server`) {
 
 That would display both the server name _and_ the amount of members in it.
 
-![Server name and member count command](https://i.imgur.com/jbVhpVm.png)
+![Server name and member count command](assets/img/jbVhpVm.png)
 
 You can, of course, modify this to your liking. You may want to also display the date the server was created, or the server's region. You would do those in the same manner - use `message.guild.createdAt` or `message.guild.region`, respectively.
 
@@ -104,7 +104,7 @@ else if (message.content === `${prefix}user-info`) {
 
 This will display the message author's **username** (not nickname, if they have one set), as well as their user ID.
 
-![User info command](http://i.imgur.com/xhnVTA0.png)
+![User info command](assets/img/xhnVTA0.png)
 
 <p class="tip">`message.author` refers to the user who sent the message. For a full list of all the properties and methods for the author object (a member of the `User` class), check out [the documentation page for it](https://discord.js.org/#/docs/main/stable/class/User).</p>
 

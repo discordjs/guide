@@ -6,7 +6,7 @@ As mentioned in a previous chapter, unless your bot project is a small one, it's
 
 Before anything, you may want to create a backup of your current bot file. If you followed along so far, your entire foler structure should look something like this:
 
-![Current folder structure](https://i.imgur.com/BmS09fY.png)
+![Current folder structure](assets/img/BmS09fY.png)
 
 In the same folder, create a new folder and name it `commands`. This is where you'll store all of your commands, of course. Head over to your `commands` folder, create a new file named `ping.js`, and copy & paste in the following code:
 
