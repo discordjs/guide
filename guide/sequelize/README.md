@@ -252,5 +252,4 @@ return msg.reply('Tag deleted.');
 
 ### Final result
 
-Our end result will look like this:
-[link tbd]()
+Our end result will look like [this](https://github.com/Danktuary/Making-Bots-with-Discord.js/blob/master/code_samples/sequelize/tags/sequelize.js).

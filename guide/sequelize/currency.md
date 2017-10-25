@@ -111,9 +111,9 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 	storage: 'database.sqlite',
 });
 
-const Users = sequelize.import('models/Users.js');
-const CurrencyShop = sequelize.import('models/CurrencyShop.js');
-const UserItems = sequelize.import('models/UserItems.js');
+const CurrencyShop = sequelize.import('models/CurrencyShop');
+sequelize.import('models/Users');
+sequelize.import('models/UserItems');
 
 sequelize.sync().then(async () => {
 
@@ -130,6 +130,10 @@ sequelize.sync().then(async () => {
 
 You'll notice some familiar things here from the previous tutorial such as the Sequelize declaration being the same. We do have something different here, and that's how we import the models. Sequelize has an import function to make your code a bit cleaner when you have many models to use. We pull the two models and the junction table, sync them, and add items to our shop. A new function here is the `.upsert()` function. It's a portmanteau for **up**date or in**sert**.  We use `upsert` here because just in case you run this file multiple times, it doesn't create duplicates. That shouldn't happen because we defined name as *unique* but there's no harm in being safe. Upsert also has a nice side benefit; If you adjust the cost, the respective item should also have their cost updated.
 
+<p class="tip">
+Execute `node dbInit.js` to create the database, then never touch the file again. You can even delete it at this point if it executed successfully.
+</p>
+
 
 ## Create associations
 
@@ -145,9 +149,9 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 	storage: 'database.sqlite',
 });
 
-const Users = sequelize.import('models/Users.js');
-const CurrencyShop = sequelize.import('models/CurrencyShop.js');
-const UserItems = sequelize.import('models/UserItems.js');
+const Users = sequelize.import('models/Users');
+const CurrencyShop = sequelize.import('models/CurrencyShop');
+const UserItems = sequelize.import('models/UserItems');
 
 UserItems.belongsTo(CurrencyShop, { foreignKey: 'item_id', as: 'item' });
 
@@ -190,7 +194,7 @@ To put it together, we'll create an `app.js` in the base directory with the foll
 const Discord = require('discord.js');
 
 const client = new Discord.Client();
-const { Users, CurrencyShop } = require('./dbObjects.js');
+const { Users, CurrencyShop } = require('./dbObjects');
 const currency = new Discord.Collection();
 const PREFIX = '!';
 
@@ -208,7 +212,7 @@ client.on('message', async msg => {
 	if (!msg.content.startsWith(PREFIX)) return;
 	const input = msg.content.slice(PREFIX.length).trim();
 	if (!input.length) return;
-	const [, command, commandArgs ] = input.match(/(\w+)\s*([\s\S]*)/);
+	const [, command, commandArgs] = input.match(/(\w+)\s*([\s\S]*)/);
 
 	if (command === 'balance') {
 		// [gamma]
@@ -235,7 +239,7 @@ client.on('message', async msg => {
 client.login('pleaseinsertyourtokenheresothistutorialcanwork');
 ```
 
-Nothing special about this skeleton. We import the Users and CurrencyShop models from our `dbObjects.js` file, and add a currency Collection. Every time someone talks, we add 1 to their currency count. The rest is just standard discord.js code and a simple if/else command handler. We're using the currency Collection in order to cache individual user's currency, so we don't have to hit the database for every lookup.
+Nothing special about this skeleton. We import the Users and CurrencyShop models from our `dbObjects.js` file, and add a currency Collection. Every time someone talks, we add 1 to their currency count. The rest is just standard discord.js code and a simple if/else command handler. We're using the currency Collection in order to cache individual user's currency, so we don't have to hit the database for every lookup. I've used an if/else handler here, but you can put it in a framework or command handler as long as you maintain a reference to the models and the currency collection.
 
 ### [alpha] Helper methods
 
@@ -352,123 +356,4 @@ return msg.channel.send(
 Nothing particularly special here either. We could have queried the database for the top 10 currency holders as well, but we already have access to them locally, so just sort the Collection we have and use map again to display in a nice format. The filter is in case the users no longer exist in the bot's cache.
 
 
-
-## Final app code
-```js
-const Discord = require('discord.js');
-
-const client = new Discord.Client();
-const { Users, CurrencyShop } = require('./dbObjects.js');
-const currency = new Discord.Collection();
-const PREFIX = '!';
-
-Reflect.defineProperty(currency, 'add', {
-	value: async function add(id, amount) {
-		const user = currency.get(id);
-		if (user) {
-			user.balance += Number(amount);
-			return user.save();
-		}
-		const newUser = await Users.create({ user_id: id, balance: amount });
-		currency.set(id, newUser);
-		return newUser;
-	},
-});
-
-Reflect.defineProperty(currency, 'getBalance', {
-	value: function getBalance(id) {
-		const user = currency.get(id);
-		return user ? user.balance : 0;
-	},
-});
-
-client.once('ready', async () => {
-	const storedBalances = await Users.findAll();
-	storedBalances.forEach(b => currency.set(b.user_id, b));
-	console.log(`Logged in as ${client.user.tag}!`);
-});
-
-client.on('message', async msg => {
-	if (msg.author.bot) return;
-	currency.add(msg.author.id, 1);
-
-	if (!msg.content.startsWith(PREFIX)) return;
-	const input = msg.content.slice(PREFIX.length).trim();
-	if (!input.length) return;
-	const [, command, commandArgs ] = input.match(/(\w+)\s*([\s\S]*)/);
-
-	if (command === 'balance') {
-
-		const target = msg.mentions.users.first() || msg.author;
-		return msg.channel.send(`${target.tag} has ${currency.getBalance(target.id)}💰`);
-
-	}
-	else if (command === 'inventory') {
-
-		const target = msg.mentions.users.first() || msg.author;
-		const user = await Users.findByPrimary(target.id);
-		const items = await user.getItems();
-
-		if (!items.length) msg.channel.send(`${target.tag} has nothing!`);
-		return msg.channel.send(`${target.tag} currently has ${items.map(i => `${i.amount} ${i.item.name}`).join(', ')}`);
-
-	}
-	else if (command === 'transfer') {
-
-		const currentAmount = currency.getBalance(msg.author.id);
-		const transferAmount = commandArgs.split(/\s+/g).find(t => !/<@!?\d+>/g.test(t));
-		const transferTarget = msg.mentions.users.first();
-
-		if (!transferAmount || isNaN(transferAmount)) return msg.channel.send(`Sorry ${msg.author}, that's an invalid amount`);
-		if (transferAmount > currentAmount) return msg.channel.send(`Sorry ${msg.author}, you don't have that much.`);
-		if (transferAmount <= 0) return msg.channel.send(`Please enter an amount greater than zero, ${msg.author}.`);
-		
-		currency.add(msg.author.id, -transferAmount);
-		currency.add(transferTarget.id, transferAmount);
-
-		return msg.channel.send(`Successfully transferred ${transferAmount}💰 to ${transferTarget.tag}. Your current balance is ${currency.getBalance(msg.author.id)}💰`);
-		
-	}
-	else if (command === 'buy') {
-
-		const item = await CurrencyShop.findOne({ where: { name: { $like: commandArgs } } });
-		if (!item) return msg.channel.send(`That item doesn't exist.`);
-		if (item.cost > currency.getBalance(msg.author.id)) {
-			return msg.channel.send(`You currently have ${currency.getBalance(msg.author.id)}, but the ${item.name} costs ${item.cost}!`);
-		}
-
-		const user = await Users.findByPrimary(msg.author.id);
-		currency.add(msg.author.id, -item.cost);
-		await user.addItem(item);
-
-		msg.channel.send(`You've bought ${item.name}.`);
-
-	}
-	else if (command === 'shop') {
-
-		const items = await CurrencyShop.findAll();
-		return msg.channel.send(items.map(item => `${item.name}: ${item.cost}💰`).join('\n'), { code: true });
-
-	}
-	else if (command === 'leaderboard') {
-
-		return msg.channel.send(
-			currency.sort((a, b) => b.balance - a.balance)
-			.filter(user => client.users.has(user.user_id))
-			.first(10)
-			.map((user, position) => `(${position + 1}) ${(client.users.get(user.user_id).tag)}: ${user.balance}💰`)
-			.join('\n')
-		, { code: true });
-
-	}
-	else if (command === 'eval') {
-
-		if (msg.author.id === '130175406673231873') return msg.channel.send('```' + eval(commandArgs) + '```');
-
-	}
-	
-});
-
-client.login('pleaseinsertyourtokenheresothistutorialcanwork');
-```
-
+And the bot is done. If you need something as a reference, the code I've shown is in [this repo](https://github.com/Danktuary/Making-Bots-with-Discord.js/tree/master/code_samples/sequelize/currency).
