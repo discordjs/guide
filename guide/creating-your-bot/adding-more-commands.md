@@ -126,3 +126,7 @@ Before continuing, here's a small list of reasons why you shouldn't use if/else 
 * General bad practice.
 
 In short, it's just not a good idea. But that's what this guide is for! Go ahead and read the next few pages to prevent these issues before they happen, learning new things along the way.
+
+## Resulting code
+
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/Danktuary/Making-Bots-with-Discord.js/tree/master/code_samples/creating-your-bot/adding-more-commands).
