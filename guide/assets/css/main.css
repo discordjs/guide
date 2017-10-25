@@ -31,8 +31,8 @@
 
 .markdown-section pre >code,
 .markdown-section code {
-	font-size: 0.9rem;
-	font-family: consolas;
+	font-size: 0.8rem;
+	font-family: 'Droid Sans Mono', monospace;
 }
 
 /* syntax highlighting */
