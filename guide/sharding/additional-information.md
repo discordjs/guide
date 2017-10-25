@@ -57,7 +57,6 @@ Looks a bit weird, for sure. At the end of the day, this would become `client.fu
 
 ## Online Examples
 
-Here are some popular examples if you still need more resources.
+Here's an example if you still need more resources.
 
-* [SNEK's Google Bot](https://github.com/devsnek/googlebot)
-* [WeebDev's Listen.moe](https://github.com/LISTEN-moe/discord-bot)
+* [Listen.moe](https://github.com/LISTEN-moe/discord-bot)
