@@ -38,7 +38,7 @@ const manager = new ShardingManager('./bot.js', { shardArgs: ['--ansi', '--color
 
 The shardArgs are what you would normally pass if you ran your bot without sharding, like so: `node bot.js --ansi --color --trace-warnings`, and are available in `process.argv`, which contain an array of command line arguments used to execute the script.
 
-### Eval Arguments
+### Eval arguments
 
 There may come a point where you will want to pass functions or arguments from the outer scope into a broadcastEval.
 
