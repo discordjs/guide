@@ -83,3 +83,7 @@ for (const file of commandFiles) {
 ```
 
 As for setting up your files, that's it for now. In the next chapter, you'll learn how to make your commands execute dynamically!
+
+## Resulting code
+
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/Danktuary/Making-Bots-with-Discord.js/tree/master/code_samples/command-handling/file-setup).

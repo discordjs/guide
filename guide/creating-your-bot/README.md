@@ -83,3 +83,7 @@ Restart your bot and then send `!ping` to a channel your bot has access to. If a
 ![Ping pong command result](http://i.imgur.com/byiSflM.png)
 
 You've successfully created your first Discord bot command! Exciting stuff, isn't it? This is only the beginning, so let's move on to making some more commands.
+
+## Resulting code
+
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/Danktuary/Making-Bots-with-Discord.js/tree/master/code_samples/creating-your-bot/up-and-running).

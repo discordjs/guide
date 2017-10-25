@@ -246,3 +246,6 @@ The other caveat with this is that the `!prune {number}` message you sent will a
 + }
 ```
 
+## Resulting code
+
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/Danktuary/Making-Bots-with-Discord.js/tree/master/code_samples/creating-your-bot/commands-with-user-input).
