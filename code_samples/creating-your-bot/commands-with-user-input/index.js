@@ -1,12 +1,10 @@
 const Discord = require('discord.js');
-const config = require('./config.json');
+const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
 
 client.on('ready', () => {
 	console.log('Ready!');
 });
-
-const { prefix } = config;
 
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
@@ -73,4 +71,4 @@ client.on('message', message => {
 	}
 });
 
-client.login(config.token);
+client.login(token);
