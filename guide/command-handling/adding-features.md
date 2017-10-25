@@ -134,7 +134,7 @@ if (command.guildOnly && message.channel.type !== 'text') {
 
 Now when you try to use the kick command inside a DM, you'll get the appropriate response which will also prevent your bot from throwing an error.
 
-![guild command inside DMs](https://i.imgur.com/TiDpsVH.png)
+![guild command inside DMs](assets/img/TiDpsVH.png)
 
 ### Cooldowns
 
@@ -244,7 +244,7 @@ The `aliases` property should always contain an array of strings. In your main f
 
 Making those two small changes, you get this:
 
-![aliases](https://i.imgur.com/0hFEXpW.png)
+![aliases](assets/img/0hFEXpW.png)
 
 ### A dynamic help command
 
@@ -337,7 +337,7 @@ The only thing you use `.then()` here for is to let them know when you're done s
 
 At the end of it all, you should be getting this as a result:
 
-![help commands](https://i.imgur.com/f5T9OyI.png)
+![help commands](assets/img/f5T9OyI.png)
 
 No more manually editing your help command! If you aren't completely satisfied with how it looks, you can always adjust it to your liking later.
 

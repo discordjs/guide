@@ -10,7 +10,7 @@ It's incredibly easy to create one. The steps you need to take are as follows:
 4. Click on the "New App" button and fill out the form. **Note:** Only the app name field is required; all the others are optional. Submit the form once you're done.
 
 Once you fill out and submit the form, you should see a page like this:
-![Successfully created application](http://i.imgur.com/jnE3tVM.png)
+![Successfully created application](assets/img/jnE3tVM.png)
 
 On that same page, click the "Create a Bot User" button.
 
@@ -21,7 +21,7 @@ Congratulations, you're now the proud owner of a shiny new Discord bot! you're n
 <p class="danger">This section is very important, so pay close attention. It explains what your bot token is, as well as the security aspects of it.</p>
 
 After creating a bot user, you'll see a section like this:
-![Bot application](http://i.imgur.com/E1CZqFT.png)
+![Bot application](assets/img/E1CZqFT.png)
 
 In that section, there's a field labeled "Token". Click the "click to reveal" link in order to view your token. When we ask you to paste your token somewhere, this is the value that you need to put in. Don't worry if you do happen to lose your token—you can always go back to this page and view it again, as well as generate a new one, if necessary.
 
