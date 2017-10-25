@@ -30,7 +30,7 @@ From now on, if you change the prefix or token in your config.json file, it'll c
 
 ### Simple command structure
 
-You already have an if statement that checks messages for a ping/pong command. Adding other command checks is just as easy; there's one small difference from what you already have.
+You already have an if statement that checks messages for a ping/pong command. Adding other command checks is just as easy; just chain an `else if` to your existing condition.
 
 ```js
 if (message.content === `${prefix}ping`) {
@@ -41,7 +41,7 @@ else if (message.content === `${prefix}beep`) {
 }
 ```
 
-This is nearly the same, except you use `else if (...)` instead of only `if (...)`. There are a few potential issues with this. For example, the ping command won't work if you send `!ping test`. It will only match `!ping` and nothing else. The same goes for the other command. If you want your commands to be more flexible, you can do the following:
+There are a few potential issues with this. For example, the ping command won't work if you send `!ping test`. It will only match `!ping` and nothing else. The same goes for the other command. If you want your commands to be more flexible, you can do the following:
 
 ```js
 if (message.content.startsWith(`${prefix}ping`)) {
@@ -58,7 +58,7 @@ Now the ping command will trigger whenever the message _starts with_ `!ping`! So
 
 ### Displaying real data
 
-Let's start displaying some real data. For now, we'll only be going over basic member/server info.
+Let's start displaying some real data. For now, we'll be displaying basic member/server info.
 
 #### Server info command
 

@@ -219,7 +219,7 @@ You should note that there are actually a few caveats with the `.bulkDelete()` m
 message.channel.bulkDelete(amount, true);
 ```
 
-The 2nd parameter in the `.bulkDelete()` method is called `filterOld` - it will filter out messages older than 2 weeks automatically. So if there are 50 messages and 25 of them are older than 2 weeks, it'll only delete the first 25 without throwing an error. However, if all the messages you're trying to delete are older than 2 weeks, then it will still throw an error. Knowing this, you should catch that error by chaining a `.catch()`.
+The second parameter in the `.bulkDelete()` method will filter out messages older than 2 weeks if you give it a truthy value. So if there are 50 messages and 25 of them are older than 2 weeks, it'll only delete the first 25 without throwing an error. However, if all the messages you're trying to delete are older than 2 weeks, then it will still throw an error. Knowing this, you should catch that error by chaining a `.catch()`.
 
 ```js
 message.channel.bulkDelete(amount, true).catch(err => {

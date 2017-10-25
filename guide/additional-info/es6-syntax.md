@@ -86,7 +86,7 @@ const collector = message.createReactionCollector(filter, { time: 15000 });
 
 There are a few important things you should note here:
 
-* The parenthesis around function parameters are optional when you have only 1 parameter, but required otherwise. If you feel like this will confuse you at times, it may be a good idea to just always use parenthesis.
+* The parenthesis around function parameters are optional when you have only one parameter, but required otherwise. If you feel like this will confuse you at times, it may be a good idea to just always use parenthesis.
 * You can cleanly put what you need on a single line without curly braces.
 * Omitting curly braces will make arrow functions use **implicit return**, but only if you have a single-line expression. The `doubleAge` and `filter` variables are a good example of this.
 * Unlike the `function someFunc() { ... }` statement, arrow functions cannot be used to create functions with such syntax. You can create a variable and give it an anonymous arrow function as the value, though (as seen with the `doubleAge` and `filter` variables).
@@ -95,7 +95,7 @@ We won't be covering the lexical `this` scope with arrow functions in here, but 
 
 ### Destructuring
 
-Destructuring is an easy way to extract properties from an object. If you've never seen this syntax bfeore, it can be a bit confusing. But actually, it's very easy to understand! Here, take a look:
+Destructuring is an easy way to extract properties from an object. If you've never seen this syntax before, it can be a bit confusing. But it's actually very easy to understand! Here, take a look:
 
 ```js
 // ES5 version

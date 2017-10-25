@@ -12,7 +12,7 @@ It's suggested that you save the file as `index.js`, but you may name it whateve
 
 ### Logging in to Discord
 
-Once you've created a new file, do a quick check to see if you have everything setup properly. Copy & paste the following code into your file and save it again. Don't worry if you don't understand it right away - it'll be explained a bit more in depth after this.
+Once you've created a new file, do a quick check to see if you have everything setup properly. Copy & paste the following code into your file and save it. Don't worry if you don't understand it right away—it'll be explained a bit more in depth after this.
 
 ```js
 const Discord = require('discord.js');
