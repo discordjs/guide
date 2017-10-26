@@ -8,6 +8,10 @@ The section headers will be named after the v11 classes/methods/properties so th
 
 <p class="danger">Before anything, it is important to note that discord.js v12 (and so forth) requires a **minimum** Node version of v8. If you aren't sure what Node version you're on, run `node -v` in your console and update if necessary.</p>
 
+### Attachment
+
+The `Attachment` class has been renamed to `MessageAttachment`.
+
 ### Channel#send\*\*\*
 
 All the `.send***()` methods were removed in favor of one general `.send()` method.
@@ -49,7 +53,7 @@ All the `.send***()` methods were removed in favor of one general `.send()` meth
 
 ### Channel#fetchMessage(s)
 
-`channel.fetchMessage()` and `channel.fetchMessages()` were both removed in favor of DataStores.
+`channel.fetchMessage()` and `channel.fetchMessages()` were both removed and transformed in the shape of DataStores.
 
 ```diff
 - channel.fetchMessage('123456789012345678');
@@ -63,11 +67,23 @@ All the `.send***()` methods were removed in favor of one general `.send()` meth
 
 ### Client#fetchUser
 
-`client.fetchUser` has been removed in favor of DataStores.
+`client.fetchUser()` has been removed and transformed in the shape of DataStores.
 
 ```diff
 - client.fetchUser('123456789012345678');
 + client.users.fetch('123456789012345678');
+```
+
+### ClientUser#setGame
+
+`client.user.setGame()` has been changed to `client.user.setActivity()`. The second parameter is no longer for providing a streaming URL, but rather an object that allows you to provide the URL and activity type.
+
+```diff
+- client.user.setGame('with my bot friends!');
++ client.user.setActivity('with my bot friends!');
+
+- client.user.setGame('with my bot friends!', 'https://twitch.tv/your/stream/here');
++ client.user.setActivity('with my bot friends!', { url: 'https://twitch.tv/your/stream/here', type: 'STREAMING' });
 ```
 
 ### Guild#defaultChannel
@@ -76,7 +92,7 @@ Unfortunately, "default" channels don't exist in Discord anymore, and as such, t
 
 **Q:** "I previously had a welcome message system (or something similar) set up using that property. What can I do now?"
 
-**A:** There are a few ways to tackle this. Inside the `guildMemberAdd` event, you can:
+**A:** There are a few ways to tackle this. Using the example of a welcome message system, inside the `guildMemberAdd` event, you can:
 
 1. Make a new command that creates a `welcome-messages` channel, set up a database, store the channel ID in a column, and use `client.channels.get('id')` to send to that channel. This is the most reliable method and gives server staff freedom to rename the channel as they please.
 2. Make a new command that creates a `welcome-messages` channel and use `guild.channels.find('name', 'welcome-messages')`. This method will work nearly the same as the one above, but will break if someone on that server decides to rename the channel. This may also give you unexpected results, due to Discord allowing multiple channels to have the same name.
@@ -85,7 +101,7 @@ Unfortunately, "default" channels don't exist in Discord anymore, and as such, t
 
 ### Guild#fetchMember(s)
 
-`guild.fetchMember()` and `guild.fetchMembers()` were both removed in favor of DataStores. In addition, `guild.members.fetch()` will return a `Collection` of `GuildMember`s in v12, where as v11 would return a `Guild` object.
+`guild.fetchMember()` and `guild.fetchMembers()` were both removed and transformed in the shape of DataStores. In addition, `guild.members.fetch()` will return a `Collection` of `GuildMember`s in v12, where as v11 would return a `Guild` object.
 
 ```diff
 - guild.fetchMember('123456789012345678');
@@ -104,7 +120,7 @@ Unfortunately, "default" channels don't exist in Discord anymore, and as such, t
 ```diff
 - guild.iconURL;
 + guild.iconURL();
-+ guild.iconURL({ format: 'png', size: '1024' })
++ guild.iconURL({ format: 'png', size: 1024 });
 ```
 
 ### GuildChannel#createInvite
@@ -179,7 +195,7 @@ The `OAuth2Application` class has been renamed to `ClientApplication`.
 ```diff
 - user.iconURL;
 + user.iconURL();
-+ user.iconURL({ format: 'png', size: '1024' })
++ user.iconURL({ format: 'png', size: 1024 });
 ```
 
 ### Permissions#flags
@@ -252,7 +268,7 @@ The `MessageEmbed` class is the new and improved `RichEmbed`. In most cases, all
 ```diff
 - user.avatarURL;
 + user.avatarURL();
-+ user.avatarURL({ format: 'png', size: '1024' })
++ user.avatarURL({ format: 'png', size: 1024 });
 ```
 
 ### User#displayAvatarURL
@@ -262,7 +278,7 @@ The `MessageEmbed` class is the new and improved `RichEmbed`. In most cases, all
 ```diff
 - user.displayAvatarURL;
 + user.displayAvatarURL();
-+ user.displayAvatarURL({ format: 'png', size: '1024' })
++ user.displayAvatarURL({ format: 'png', size: 1024 });
 ```
 
 ### Webhook#send\*\*\*
