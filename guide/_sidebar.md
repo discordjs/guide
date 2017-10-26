@@ -31,5 +31,6 @@
 	* [Additional information](/sharding/additional-information)
 	
 	* **Miscellaneous**
+	* [Changes in v12](/additional-info/changes-in-v12)
 	* [Collectors](/creating-your-bot/collectors)
 	* [ES6 syntax examples](/additional-info/es6-syntax)
