@@ -1,6 +1,6 @@
 # Changes in v12
 
-If you weren't already aware, v12 is constantly in development, and you can even start using it by running `npm install hydrabolt/discord.js` (as opposed to `npm install discord.js`). However, there are many breaking changes from v11 to v12; you'll almost definitely need to change your code in a few places. This section of the guide is here to let you know what those changes are and how you can change your code accordingly.
+If you weren't already aware, v12 is constantly in development, and you can even start using it right now by running `npm install hydrabolt/discord.js` (as opposed to `npm install discord.js`). However, there are many breaking changes from v11 to v12; you'll more than likely need to change your code in a few places. This section of the guide is here to let you know what those changes are and how you can change your code accordingly.
 
 The section headers will be named after the v11 classes/methods/properties and will be in alphabetical order, so that you can easily find what you're looking for. "Difference" codeblocks will be used to show you the old methods vs the newer ones—the red being what's been removed and the green being its replacement. Some bits may have more than one version of being handled.
 
@@ -16,7 +16,7 @@ The section headers will be named after the v11 classes/methods/properties and w
 
 ### Attachment
 
-The `Attachment` class has been renamed to `MessageAttachment`.
+The `Attachment` class has been removed in favor of the `MessageAttachment` class.
 
 ### Channel#send\*\*\*
 
@@ -43,6 +43,10 @@ All the `.send***()` methods were removed in favor of one general `.send()` meth
 <p class="tip">Assuming you have the `MessageAttachment` class required somewhere in your file, e.g. `const { MessageAttachment } = require('discord.js')`.</p>
 
 ```diff
+- channel.sendFile('./file.png');
++ channel.send({ files: [{ attachment: './file.png' }] });
++ channel.send(new MessageAttachment('./file.png'));
+
 - channel.sendFile('./file.png', 'file-name.png');
 + channel.send({ files: [{ attachment: './file.png', name: 'file-name.png' }] });
 + channel.send(new MessageAttachment('./file.png', 'file-name.png'));
@@ -57,9 +61,9 @@ All the `.send***()` methods were removed in favor of one general `.send()` meth
 + channel.send({ files: [new MessageAttachment('./file-one.png'), new MessageAttachment('./file-two.png')] });
 ```
 
-### Channel#fetchMessage(s)
+### Channel#fetch(Pinned)Message(s)
 
-`channel.fetchMessage()` and `channel.fetchMessages()` were both removed and transformed in the shape of DataStores.
+`channel.fetchMessage()`, `channel.fetchMessages()`, and `channel.fetchPinnedMessages()` were all removed and transformed in the shape of DataStores.
 
 ```diff
 - channel.fetchMessage('123456789012345678');
@@ -69,6 +73,11 @@ All the `.send***()` methods were removed in favor of one general `.send()` meth
 ```diff
 - channel.fetchMessages({ limit: 100 });
 + channel.messages.fetch({ limit: 100 });
+```
+
+```diff
+- channel.fetchPinnedMessages();
++ channel.messages.fetchPinned();
 ```
 
 ### Client#fetchUser
@@ -159,8 +168,8 @@ The second parameter in `clientUser.setPassword()` has been changed. The `oldPas
 The third and fourth parameters in `guild.createChannel()` have been changed/removed, leaving it with a total of three parameters. The `overwrites` and `reason` parameters from v11 have been merged into an object as the third parameter.
 
 ```diff
-- guild.createChannel('new-channel', 'text', permissionOverwriteArray, 'New channel');
-+ guild.createChannel('new-channel', 'text', { overwrites: permissionOverwriteArray, reason: 'New channel' });
+- guild.createChannel('new-channel', 'text', permissionOverwriteArray, 'New channel added for fun!');
++ guild.createChannel('new-channel', 'text', { overwrites: permissionOverwriteArray, reason: 'New channel added for fun!' });
 ```
 
 ### Guild#createEmoji
@@ -177,8 +186,8 @@ The third and fourth parameters in `guild.createEmoji()` have been changed/remov
 The first and second parameters in `guild.createRole()` have been changed/removed, leaving it with a total of one parameter. The `data` and `reason` parameters from v11 have been moved into an object as the first parameter.
 
 ```diff
-- guild.createRole(roleData, 'New staff role');
-+ guild.createRole({ data: roleData, reason: 'New staff role' });
+- guild.createRole(roleData, 'New staff role!');
++ guild.createRole({ data: roleData, reason: 'New staff role!' });
 ```
 
 ### Guild#deleteEmoji
@@ -196,10 +205,10 @@ Unfortunately, "default" channels don't exist in Discord anymore, and as such, t
 
 **Q:** "I previously had a welcome message system (or something similar) set up using that property. What can I do now?"
 
-**A:** There are a few ways to tackle this. Using the example of a welcome message system, inside the `guildMemberAdd` event, you can:
+**A:** There are a few ways to tackle this. Using the example of a welcome message system, you can:
 
-1. Make a new command that creates a `welcome-messages` channel, set up a database, store the channel ID in a column, and use `client.channels.get('id')` to send to that channel. This is the most reliable method and gives server staff freedom to rename the channel as they please.
-2. Make a new command that creates a `welcome-messages` channel and use `guild.channels.find('name', 'welcome-messages')`. This method will work nearly the same as the one above, but will break if someone on that server decides to rename the channel. This may also give you unexpected results, due to Discord allowing multiple channels to have the same name.
+1. Set up a database table to store the channel ID in a column when someone uses a `!welcome-channel #channel-name` command, for example. Then inside the `guildMemberAdd` event, use `client.channels.get('id')` and send a message to that channel. This is the most reliable method and gives server staff freedom to rename the channel as they please.
+2. Make a new command that creates a `welcome-messages` channel, use `guild.channels.find('name', 'welcome-messages')`, and send a message to that channel. This method will work fine in most cases, but will break if someone on that server decides to rename the channel. This may also give you unexpected results, due to Discord allowing multiple channels to have the same name.
 
 <p class="tip">Not sure how to set up a database? Check out [this page](/sequelize/)!</p>
 
@@ -214,7 +223,7 @@ Unfortunately, "default" channels don't exist in Discord anymore, and as such, t
 
 ### Guild#fetchMember(s)
 
-`guild.fetchMember()` and `guild.fetchMembers()` were both removed and transformed in the shape of DataStores. In addition, `guild.members.fetch()` will return a `Collection` of `GuildMember`s in v12, where as v11 would return a `Guild` object.
+`guild.fetchMember()` and `guild.fetchMembers()` were both removed and transformed in the shape of DataStores. In addition, `guild.members.fetch()` will return a `Collection` of `GuildMember` objects in v12, whereas v11 would return a `Guild` object.
 
 ```diff
 - guild.fetchMember('123456789012345678');
@@ -238,7 +247,7 @@ Unfortunately, "default" channels don't exist in Discord anymore, and as such, t
 
 ### Guild#pruneMembers
 
-The first, second, and third parameters in `guild.createEmoji()` have been changed/removed, leaving it with a total of one parameter. The `dry` and `reason` parameters from v11 have been merged into an object as the first parameter.
+The first, second, and third parameters in `guild.createEmoji()` have been changed/removed, leaving it with a total of one parameter. The `days`, `dry`, and `reason` parameters from v11 have been merged into an object as the first parameter.
 
 ```diff
 - guild.pruneMembers(7, true, 'Scheduled pruning');
@@ -265,7 +274,7 @@ The first, second, and third parameters in `guild.createEmoji()` have been chang
 
 ### GuildChannel#createInvite
 
-`channel.createInvite()` no longer takes a second parameter. The `reason` parameter has been moved inside the first parameter's object as a `reason` property.
+The second parameter in `guild.createEmoji()` has been removed, leaving it with a total of one parameter. The `reason` parameter from v11 have been merged into an object as the first parameter.
 
 ```diff
 - channel.createInvite({ temporary: true }, 'Just testing');
@@ -274,7 +283,7 @@ The first, second, and third parameters in `guild.createEmoji()` have been chang
 
 ### GuildMember#hasPermissions
 
-`member.hasPermissions()` has been removed, but `member.hasPermission()` now takes either a string or an array.
+`member.hasPermissions()` has been removed in favor of `member.hasPermission()`.
 
 ```diff
 - member.hasPermissions(['MANAGE_MESSAGES', 'MANAGE_ROLES']);
@@ -283,17 +292,16 @@ The first, second, and third parameters in `guild.createEmoji()` have been chang
 
 ### Message#delete
 
-The first parameter in `message.delete()` has been changed from a number to an object, also allowing you to set the reason for deleting that message.
+The first parameter in `message.delete()` has been changed. The `timeout` parameter from v11 have been merged into an object as the first parameter.
 
 ```diff
 - message.delete(5000);
 + message.delete({ timeout: 5000 });
-+ message.delete({ timeout: 5000, reason: 'Very bad message' });
 ```
 
 ### Message#editCode
 
-In the same sense that the `.send*()` methods were removed, `.editCode()` was also removed entirely.
+In the same sense that the `channel.sendCode()` method was removed, `message.editCode()` has also been removed entirely.
 
 ```diff
 - message.editCode('js', 'const version = 11;');
@@ -324,11 +332,11 @@ The `max` and `maxMatches` properties of the `MessageCollector` class have been 
 
 ### MessageEmbed#client
 
-`embed.client` has been removed entirely.
+`messageEmbed.client` has been removed entirely.
 
 ### MessageEmbed#message
 
-`embed.message` has been removed entirely.
+`messageEmbed.message` has been removed entirely.
 
 ### OAuth2Application
 
@@ -350,7 +358,7 @@ The `OAuth2Application` class has been renamed to `ClientApplication`.
 
 ### Permissions#flags
 
-The following permission flag names have been renamed:
+The following permission flags have been renamed:
 
 * `READ_MESSAGES` -> `VIEW_CHANNEL`
 * `EXTERNAL_EMOJIS` -> `USE_EXTERNAL_EMOJIS`
@@ -358,11 +366,12 @@ The following permission flag names have been renamed:
 
 ### Permissions#member
 
-`permissions.member` has been removed entirely with no alternative.
+`permissions.member` has been removed entirely.
 
 ### Permissions#missingPermissions
 
-`permissions.missingPermissions()` has been renamed to `permissions.missing()` and refactored a bit. The second parameter in v11 was named `explicit`, described as "Whether to require the user to explicitly have the exact permissions", defaulting to `false`. However, the second parameter in v11 is named `checkAdmin`, described as "Whether to allow the administrator permission to override", and defaulting to `true`.
+
+`permissions.missingPermissions()` has been renamed to `permissions.missing()` and also refactored. The second parameter in v11 was named `explicit`, described as "Whether to require the user to explicitly have the exact permissions", defaulting to `false`. However, the second parameter in v11 is named `checkAdmin`, described as "Whether to allow the administrator permission to override", defaulting to `true`.
 
 ```diff
 - permissions.missingPermissions(['MANAGE_SERVER']);
@@ -371,11 +380,20 @@ The following permission flag names have been renamed:
 
 ### Permissions#raw
 
-`permissions.raw` has been removed. Should you need to use this, you can use `permissions.bitfield` instead.
+`permissions.raw` has been removed in favor of `permissions.bitfield`.
 
-### RichEmbeds
+```diff
+- permissions.raw;
++ permissions.bitfield;
+```
 
-The `MessageEmbed` class is the new and improved `RichEmbed`. In most cases, all you'll need to do is find & replace `RichEmbed` with `MessageEmbed` in your code. However, there are some small differences.
+### RichEmbed
+
+The `RichEmbed` class has been removed in favor of the `MessageEmbed` class.
+
+### RichEmbed#attachFile
+
+`richEmbed.attachFile()` has been removed in favor of `messageEmbed.attachFiles()`.
 
 ```diff
 - new RichEmbed().attachFile('attachment://file-namme.png');
@@ -390,7 +408,7 @@ The `MessageEmbed` class is the new and improved `RichEmbed`. In most cases, all
 
 ### Role#hasPermission(s)
 
-`role.hasPermission()` and `role.hasPermissions()` were both removed, but `Role` objects still have a `.permissions` property, in which you can use the `.has()` method on.
+`role.hasPermission()` and `role.hasPermissions()` have been removed in favor of `permissions.has()`.
 
 ```diff
 - role.hasPermission('MANAGE_MESSAGES');
