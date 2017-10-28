@@ -28,6 +28,7 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 * Frequently requested topic guides
 	* How to navigate the d.js docs (hoo boi)
 	* How to use APIs (general snekfetch/HTTP request guide and how to use that data)
+	* How to use permission overwrites (upon channel creation, setting/unsetting them, reading them, etc.)
 
 * Long-term plans
 	* OAuth guide
