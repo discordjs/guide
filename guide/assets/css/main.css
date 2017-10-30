@@ -10,6 +10,13 @@
 	line-height: 170%;
 }
 
+/* lists */
+
+.markdown-section ul li,
+.markdown-section ol li {
+	margin: 0.25em 0;
+}
+
 /* codeblocks and inline code */
 
 .markdown-section pre {
