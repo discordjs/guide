@@ -30,7 +30,28 @@ const member = <message>.mentions.members.first();
 member.addRole(role);
 ```
 
-## Miscellaneous
+### How do I check if a guild member has a certain role?
+
+```js
+const member = <message>.mentions.members.first();
+if (member.roles.exists('name', '<role name>')) {
+	// ...
+}
+```
+
+## Bot Configuration
+
+### How do I set my username?
+
+```js
+<client>.user.setUsername('<username>');
+```
+
+### How do I set my avatar?
+
+```js
+<client>.user.setAvatar('<nickname>');
+```
 
 ### How do I set my playing status?
 
@@ -43,6 +64,24 @@ member.addRole(role);
 * If you would like to set your playing status upon startup, you must place the `<client>.user.setGame()` method in a `ready` event listener (`client.on('ready', () => {});`).
 
 * If you're using a selfbot to change your playing status, you won't be able to view the status change, but other users will.
+
+## Miscellaneous
+
+### How do I send a message to a certain channel?
+
+```js
+const channel = <client>.channels.get('<id>');
+channel.send('<content>');
+```
+
+### How do I DM a certain user?
+
+```js
+const user = <client>.users.get('<id>');
+user.send('<content>');
+```
+
+<p class="tip">If you want to DM the user who sent the message, you can use `<message>.author.send()`.</p>
 
 ### How do I prompt the user for additional input?
 
