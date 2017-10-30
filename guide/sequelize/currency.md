@@ -2,34 +2,29 @@
 
 A common feature of Discord bots is a currency system. It's possible to do everything in one object, but we can also abstract that in terms of *relations* between objects. This is where the power of a RDBMS (Relational Database Management System) truly shines. Sequelize calls these *associations*, so we'll be using that term from now on.
 
-
 ## File overview
 
 There will be multiple files: a DB init script, your models, and your bot script. In the previous tutorial, we placed all of these in the same file. Having everything in one file is usually not how it's done in the real world, so we'll correct that.
 
 This time we'll have 6 files. 
 
- - `app.js` is where we'll keep the main bot code.
-
- - `dbInit.js` is the initialization file for the database. We run this once and forget about it.
-
- - `dbObjects.js` is where we'll import the models and create associations here.
-
- - `models/Users.js` is the Users model. Users will have a currency attribute in here.
-
- - `models/CurrencyShop.js` is the Shop model. The shop will have a name and a price for each item.
-
- - `models/UserItems.js` is the junction table between the users and the shop. A junction table is used to connect two tables together. Our junction table will have an additional field for the amount of that item the user has.
+* `app.js` is where we'll keep the main bot code.
+* `dbInit.js` is the initialization file for the database. We run this once and forget about it.
+* `dbObjects.js` is where we'll import the models and create associations here.
+* `models/Users.js` is the Users model. Users will have a currency attribute in here.
+* `models/CurrencyShop.js` is the Shop model. The shop will have a name and a price for each item.
+* `models/UserItems.js` is the junction table between the users and the shop. A junction table is used to connect two tables together. Our junction table will have an additional field for the amount of that item the user has.
 
 ## Create models
 
-Here is an entity relation diagram of the models we'll be making.
+Here is an entity relation diagram of the models we'll be making:
 
 <object type="image/svg+xml" data="assets/img/currency_er_diagram.svg" class="logo"></object>
 
 `Users` have a `user_id`, and a `balance`. Each `user_id` can have multiple links to the `UserItems` table, and each entry in the table is connected to one of the items in the `CurrencyShop`, which will have a `name` and a `cost` associated with it. 
 
 To implement this, we'll begin by making a `models` folder and create a `Users.js` file inside which contains the following:
+
 ```js
 module.exports = (sequelize, DataTypes) => {
 	return sequelize.define('users', {
@@ -47,14 +42,15 @@ module.exports = (sequelize, DataTypes) => {
 	});
 };
 ```
+
 Like you see in the diagram above, our Users model will only have 2 attributes: a `user_id` primary key and a `balance`. A primary key is a special type of attribute that becomes the default column used when joining tables together. In addition, a primary key is automatically set as unique and not null.
 
 Balance also sets `allowNull` to `false`. This, in conjunction with setting a primary key, means that both values have to be set, otherwise the database would throw an error. This means that we guarantee correctness in our data storage in that we never have null or empty values. This ensures that if we somehow forget to validate in the application that both values are not null, our database would do the final validation for us.
 
 Notice that our options object sets `timestamps` to `false`. This disables the `createdAt` and the `updatedAt` columns that sequelize usually creates for you. Setting `user_id` to primary also gets rid of the `id` primary key that Sequelize usually generates for you, since there can only be one primary key on a table.
 
-
 Next, still in the same `models` folder, create a `CurrencyShop.js` file that contains the following:
+
 ```js
 module.exports = (sequelize, DataTypes) => {
 	return sequelize.define('currency_shop', {
@@ -71,11 +67,11 @@ module.exports = (sequelize, DataTypes) => {
 	});
 };
 ```
+
 Like our Users model, we don't need the timestamps here, so we'll disable it. Unlike the Users model however, we only set `unique` to `true` here. This is so that if you want to change the name of the item, you can change the name without affecting the primary key that joins this to the next object. This gets generated automatically by sequelize since we didn't set a primary key.
 
-
-
 The next file will be `UserItems.js`, our junction table.
+
 ```js
 module.exports = (sequelize, DataTypes) => {
 	return sequelize.define('user_item', {
@@ -93,7 +89,6 @@ module.exports = (sequelize, DataTypes) => {
 ```
 
 Our junction table will link `user_id` and the `id` of the currency shop together. It also contains an `amount` number which indicates how many of that item a user has.
-
 
 ## Initialize database
 
@@ -130,10 +125,7 @@ sequelize.sync().then(async () => {
 
 You'll notice some familiar things here from the previous tutorial such as the Sequelize declaration being the same. We do have something different here, and that's how we import the models. Sequelize has an import function to make your code a bit cleaner when you have many models to use. We pull the two models and the junction table, sync them, and add items to our shop. A new function here is the `.upsert()` function. It's a portmanteau for **up**date or in**sert**.  We use `upsert` here because just in case you run this file multiple times, it doesn't create duplicates. That shouldn't happen because we defined name as *unique* but there's no harm in being safe. Upsert also has a nice side benefit; If you adjust the cost, the respective item should also have their cost updated.
 
-<p class="tip">
-Execute `node dbInit.js` to create the database, then never touch the file again. You can even delete it at this point if it executed successfully.
-</p>
-
+<p class="tip">Execute `node dbInit.js` to create the database, then never touch the file again. You can even delete it at this point if it executed successfully.</p>
 
 ## Create associations
 
@@ -177,6 +169,7 @@ Users.prototype.getItems = function() {
 
 module.exports = { Users, CurrencyShop, UserItems };
 ```
+
 Note that we could have abstracted the connection object in another file, and had both `dbInit.js` and `dbObjects.js` use that connection file, but it's not necessary to overly abstract things.
 
 The new method we haven't seen yet is the `.belongsTo()` method. Using this method, we add `CurrencyShop` as a property of `UserItem` so that when we do `userItem.item` we get the respective item that it's attached to. We use `item_id` as the foreign key so that it knows which item to attach.
@@ -184,7 +177,6 @@ The new method we haven't seen yet is the `.belongsTo()` method. Using this meth
 We now add some prototypes to the User object to finish up the junction: add items to users, and get their current inventory. The code inside should be somewhat familar from the last tutorial. We use a `.findOne()` to get the item if it exists in the user's inventory. We increment if it does, or create it if it doesn't.
 
 Getting items is similar, we just `.findAll()` using the user's id as the key. The `include` key is for associating the CurrencyShop with the item. We basically have to explicitly tell Sequelize to honor the `.belongsTo()` association, otherwise it will take the path of least effort.
-
 
 ## Application code
 
@@ -233,7 +225,6 @@ client.on('message', async msg => {
 		// [lambda]
 	}
 
-	
 });
 
 client.login('pleaseinsertyourtokenheresothistutorialcanwork');
@@ -334,6 +325,7 @@ await user.addItem(item);
 
 msg.channel.send(`You've bought: ${item.name}.`);
 ```
+
 In order for users to search for an item without having to care about case, we use the `$like` modifier when we're looking for the name. Keep in mind that this may be slow if you have millions of items, so please don't put a million items in your shop. 
 
 ### [theta] Display the shop
@@ -355,6 +347,7 @@ return msg.channel.send(
 	.join('\n')
 , { code: true });
 ```
+
 Nothing particularly special here either. We could have queried the database for the top 10 currency holders as well, but we already have access to them locally, so just sort the Collection we have and use map again to display in a nice format. The filter is in case the users no longer exist in the bot's cache.
 
 ## Resulting code
