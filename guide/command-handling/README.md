@@ -4,7 +4,7 @@ As mentioned in a previous chapter, unless your bot project is a small one, it's
 
 ### Individual command files
 
-Before anything, you may want to create a backup of your current bot file. If you followed along so far, your entire foler structure should look something like this:
+Before anything, you may want to create a backup of your current bot file. If you followed along so far, your entire folder structure should look something like this:
 
 ![Current folder structure](assets/img/BmS09fY.png)
 
@@ -43,7 +43,7 @@ client.commands = new Discord.Collection();
 
 <p class="tip">If you aren't exactly sure what Collections are, they're a class that extend JS's native Map class and include more extensive, useful functionality. You can read about Maps [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), and see all the available Collection methods [here](https://discord.js.org/#/docs/main/stable/class/Collection).</p>
 
-This next step is how you'll dynamically retreive all your (soon to be) newly created command files.
+This next step is how you'll dynamically retrieve all your (soon to be) newly created command files.
 
 ```js
 const commandFiles = fs.readdirSync('./commands');

@@ -109,7 +109,7 @@ In your main file:
 	}
 ```
 
-Use an if statement to check if the `usage` property exists (and is truthy) first, so that you don't accidentaly end up with `undefined` in the reply string (in the case that you forget to properply supply the property in our command file, or some similar incident). A simple addition like such can easily improve the end user's UX.
+Use an if statement to check if the `usage` property exists (and is truthy) first, so that you don't accidentally end up with `undefined` in the reply string (in the case that you forget to properly supply the property in our command file, or some similar incident). A simple addition like such can easily improve the end user's UX.
 
 ### Guild only commands
 
@@ -218,7 +218,7 @@ Nothing overly complex here either. Since the `timestamps` Collection has the au
 
 ### Command aliases
 
-It's a good idea to allow users to trigger your commands in more than one way; it gives them the freedom of choosing what to send and may even make some command names easier to rememebr. Luckily, setting up aliases for your commands is quite simple.
+It's a good idea to allow users to trigger your commands in more than one way; it gives them the freedom of choosing what to send and may even make some command names easier to remember. Luckily, setting up aliases for your commands is quite simple.
 
 For this bit of the guide, we'll be using the avatar command as a target. Around Discord, your profile picture is referred to as an "avatar" - however, not everyone calls it that. Some people prefer "icon" or "pfp" (profile picture). With that in mind, let's update the avatar command to allow all 3 of those triggers.
 

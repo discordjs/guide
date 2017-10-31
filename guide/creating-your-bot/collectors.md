@@ -85,7 +85,7 @@ The filter looks for messages that match one of the answers in our array of poss
 
 ### Basic reaction collector
 
-These work quite similarly to message collectors, except that you apply them on a message rather than a channel. The following is an example taken from the documentation, with slightly better variable names fo clarification. The filter will check for the 👌 emoji - in the default skin tone specifically, so be wary of that. It will also check that the person who reacted shares the same id as the author of the original message that the collector was assigned to.
+These work quite similarly to message collectors, except that you apply them on a message rather than a channel. The following is an example taken from the documentation, with slightly better variable names for clarification. The filter will check for the 👌 emoji - in the default skin tone specifically, so be wary of that. It will also check that the person who reacted shares the same id as the author of the original message that the collector was assigned to.
 
 <p class="tip">You can read the docs for the `.createReactionCollector()` method [here](https://discord.js.org/#/docs/main/stable/class/Message?scrollTo=createReactionCollector).</p>
 
