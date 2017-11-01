@@ -157,14 +157,14 @@ This is the amount (in seconds) that the user will have to wait before being abl
 In your main file, add in this line (preferably somewhere above your ready event):
 
 ```js
-const cooldowns = new Discord.Collection();
+const cooldowns = new Collection();
 ```
 
 Again in your main file, directly above the try/catch, add in the following:
 
 ```js
 if (!cooldowns.has(command.name)) {
-	cooldowns.set(command.name, new Discord.Collection());
+	cooldowns.set(command.name, new Collection());
 }
 
 const now = Date.now();

@@ -20,7 +20,7 @@ Go to your code editor and make a new file. Add in the code below and save it as
 }
 ```
 
-Go back to your main bot file, locate the `const client = new Discord.Client()` line, and add this above it:
+Go back to your main bot file, locate the `const client = new Client()` line, and add this above it:
 
 ```js
 const config = require('./config.json');

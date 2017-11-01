@@ -183,11 +183,11 @@ Getting items is similar, we just `.findAll()` using the user's id as the key. T
 To put it together, we'll create an `app.js` in the base directory with the following skeleton code.
 
 ```js
-const Discord = require('discord.js');
+const { Client } = require('discord.js');
 
-const client = new Discord.Client();
+const client = new Client();
 const { Users, CurrencyShop } = require('./dbObjects');
-const currency = new Discord.Collection();
+const currency = new Collection();
 const PREFIX = '!';
 
 // [alpha] 

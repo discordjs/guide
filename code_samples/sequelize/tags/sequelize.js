@@ -1,7 +1,7 @@
-const Discord = require('discord.js');
+const { Client } = require('discord.js');
 const Sequelize = require('sequelize');
 
-const client = new Discord.Client();
+const client = new Client();
 const PREFIX = '!';
 
 const sequelize = new Sequelize('database', 'username', 'password', {

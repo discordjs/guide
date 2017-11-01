@@ -5,8 +5,8 @@ If you've used JavaScript for only a (relatively) small amount of time or just a
 Here's the startup code we'll be using:
 
 ```js
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Client } = require('discord.js');
+const client = new Client();
 const config = require('./config.json');
 
 client.on('ready', () => {

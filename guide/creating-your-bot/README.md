@@ -15,8 +15,8 @@ It's suggested that you save the file as `index.js`, but you may name it whateve
 Once you've created a new file, do a quick check to see if you have everything setup properly. Copy & paste the following code into your file and save it. Don't worry if you don't understand it right away—it'll be explained a bit more in depth after this.
 
 ```js
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Client } = require('discord.js');
+const client = new Client();
 
 client.on('ready', () => {
 	console.log('Ready!');
@@ -34,10 +34,10 @@ Head back to your console window, type in `node your-file-name.js`, and press en
 Here's the same code with comments, so it's easier to understand what's going on.
 ```js
 // require the discord.js module
-const Discord = require('discord.js');
+const { Client } = require('discord.js');
 
 // create a new Discord client
-const client = new Discord.Client();
+const client = new Client();
 
 // when the client is ready, run this code
 // this event will trigger whenever your bot:

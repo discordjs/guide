@@ -28,8 +28,8 @@ You will most likely have to change some code in order to get your newly sharded
 
 ```js
 // bot.js
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Client } = require('discord.js');
+const client = new Client();
 
 client.on('message', message => {
 	if (message.content === 'stats') {
@@ -65,8 +65,8 @@ client.shard.broadcastEval('this.guilds.size').then(results => {
 While it's a bit unattractive to have more nesting in your commands, it is necessary when not using `async`/`await`. Now, the code at the top should look something like the below:
 
 ```js
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Client } = require('discord.js');
+const client = new Client();
 
 client.on('message', message => {
 	if (message.content === 'stats') {

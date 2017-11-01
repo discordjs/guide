@@ -2,7 +2,7 @@
 
 ## Legend
 
-* `<client>` is a placeholder for the Client object, such as `const client = new Discord.Client();`.
+* `<client>` is a placeholder for the Client object, such as `const client = new Client();`.
 * `<message>` is a placeholder for the Message object, such as `client.on('message', message => { ... });`.
 * `<guild>` is a placeholder for the Guild object, such as `<message>.guild` or `<client>.guilds.get('<id>')`.
 

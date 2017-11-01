@@ -1,9 +1,9 @@
 const fs = require('fs');
-const Discord = require('discord.js');
+const { Client, Collection } = require('discord.js');
 const { prefix, token } = require('./config.json');
 
-const client = new Discord.Client();
-client.commands = new Discord.Collection();
+const client = new Client();
+client.commands = new Collection();
 
 const commandFiles = fs.readdirSync('./commands');
 
@@ -12,7 +12,7 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
-const cooldowns = new Discord.Collection();
+const cooldowns = new Collection();
 
 client.on('ready', () => {
 	console.log('Ready!');
@@ -44,7 +44,7 @@ client.on('message', message => {
 	}
 
 	if (!cooldowns.has(command.name)) {
-		cooldowns.set(command.name, new Discord.Collection());
+		cooldowns.set(command.name, new Collection());
 	}
 
 	const now = Date.now();

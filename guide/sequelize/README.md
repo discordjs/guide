@@ -24,10 +24,10 @@ $ npm install --save sqlite3
 After you have installed discord.js and Sequelize, you can start with the following skeleton code. The comment labels will tell you where we'll insert our code.
 
 ```js
-const Discord = require('discord.js');
+const { Client } = require('discord.js');
 const Sequelize = require('sequelize');
 
-const client = new Discord.Client();
+const client = new Client();
 const PREFIX = '!';
 
 // [alpha]
