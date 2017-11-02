@@ -118,7 +118,7 @@ client.on('message', async message => {
 });
 ```
 
-A nice side effect is that you dont have redundant catch blocks now since you use a multi catch because you wrapped all Promises inside the try block. So you could maybe asking now how would i get the value the Promise resolved with well lets look at an example where you want to delete a sent message.
+A nice side effect is that you dont have redundant catch blocks now since you use a multi catch because you wrapped all Promises inside the try block. So you could maybe asking now how would i get the value the Promise resolved with async/await, well lets look at an example where you want to delete a sent message.
 
 ```js
 client.on('message', message => {
