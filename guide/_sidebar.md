@@ -33,3 +33,4 @@
 	* **Miscellaneous**
 	* [Collectors](/creating-your-bot/collectors)
 	* [ES6 syntax examples](/additional-info/es6-syntax)
+	* [Understand Async/Await](/additional-info/async-await)
