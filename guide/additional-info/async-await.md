@@ -1,20 +1,20 @@
 # Understanding async/await
 
-if you aren't that familiar with ecmascript 2017 you might have not known about async/await. It's an usefull way to handle Promises in a synchronous way instead stacking .then() callbacks aswell as it just looks cleaner.
+If you aren't that familiar with ecmascript 2017 you might have not known about async/await. It's an usefull way to handle Promises in a synchronous way instead stacking .then() callbacks aswell as it just looks cleaner.
 
 ## How does Promises work?
 
-before we can get into async/await you should know what Promises are and how they work because async/await is only a other way to handle Promises or better an extension (if you know what Promises are and how to deal with them you can skip this part). Promises are a way to handle asynchronous tasks in Javascript, they are the newer alternative to Callbacks. a Promise have a lot of simularities to a Progress bar thats why i like to take that as an example. Like a Progressbar, Promises represent a Process what is still ongoing and not done yet a good example for that is a request to a Server (thats what Discord.js uses Promises for as example) a Promise can have 3 states
+Before we can get into async/await you should know what Promises are and how they work because async/await is only a other way to handle Promises or better an extension (if you know what Promises are and how to deal with them you can skip this part). Promises are a way to handle asynchronous tasks in Javascript, they are the newer alternative to Callbacks. A Promise have a lot of simularities to a Progress bar thats why i like to take that as an example. Like a Progressbar, Promises represent a Process what is still ongoing and not done yet a good example for that is a request to a Server (thats what Discord.js uses Promises for as example) a Promise can have 3 states
 
 * pending
 * fulfilled
 * rejected
 
-the first state **pending** means that the Promise still is ongoing and nether fulfilled nor rejected.
-the second state **fulfilled** means that the Promise is done and was executed without any errors.
-the third state **rejected** means that the Promsie encountered an Error and could not be executed correctly.
+The first state **pending** means that the Promise still is ongoing and nether fulfilled nor rejected.
+The second state **fulfilled** means that the Promise is done and was executed without any errors.
+The third state **rejected** means that the Promsie encountered an Error and could not be executed correctly.
 
-important to know is that a Promise can only have 1 state it can never be pending and fulfilled, rejected and fulfilled or pending and rejected."so how would that look in code?" you maybe ask now. I will give you an little example here
+Important to know is that a Promise can only have 1 state it can never be pending and fulfilled, rejected and fulfilled or pending and rejected."so how would that look in code?" you maybe ask now. I will give you an little example here.
 (ES6 code is used if you dont know what that is you should read that up [here](/additional-info/es6-syntax))
 
 ```js
@@ -33,11 +33,11 @@ asyncTask().then(value => {
 })
 ```
 
-in this scenario the asyncTask returns a Promise and we attach a .then() function and a .catch() function to it, the .then() function will trigger if the Promise was fulfilled and the .catch() function if the Promise was rejected. But with our function we resolve the Promise after 2 seconds with the String "Task is Done" so the .catch() function will never be executed.
+In this scenario the asyncTask returns a Promise and we attach a .then() function and a .catch() function to it, the .then() function will trigger if the Promise was fulfilled and the .catch() function if the Promise was rejected. But with our function we resolve the Promise after 2 seconds with the String "Task is Done" so the .catch() function will never be executed.
 
 ## How to implement async/await
 
-after knowing how Promises works and what they are for, lets look at a example where you want to handle mutiple Promises. Lets say you want to react to a message in order with letters for this example i take the basic template for a Discord.js Bot with some es6 adjustments.
+After knowing how Promises works and what they are for, lets look at a example where you want to handle mutiple Promises. Lets say you want to react to a message in order with letters for this example i take the basic template for a Discord.js Bot with some es6 adjustments.
 
 ```js
 const Discord = require('discord.js');
@@ -58,7 +58,7 @@ client.on('message', message => {
 client.login('tokeninhere');
 ```
 
-so now we need to put the code in and if you dont know how node.js asynchronous execution works you would probably try something what would look like this
+So now we need to put the code in and if you dont know how node.js asynchronous execution works you would probably try something what would look like this
 
 ```js
 client.on('message', message => {
@@ -70,7 +70,7 @@ client.on('message', message => {
 });
 ```
 
-but since all of these react methods are started at the same time it would just be a race what server request is done as first, so there would be no warranty that it would be react in order. but since we want that to be reacting in order we need to use the .then() callback from the Promises what these methods return. As Result the code we want would mostly look like this
+But since all of these react methods are started at the same time it would just be a race what server request is done as first, so there would be no warranty that it would be react in order. but since we want that to be reacting in order we need to use the .then() callback from the Promises what these methods return. As Result the code we want would mostly look like this
 
 ```js
 client.on('message', message => {
@@ -132,7 +132,7 @@ client.on('message', message => {
 });
 ```
 
-the return value of a .send() is a Promise what resolves with the sent Message Object but how would the same code with Async/Await look like?
+The return value of a .send() is a Promise what resolves with the sent Message Object but how would the same code with Async/Await look like?
 
 ```js
 client.on('message', async message => {
@@ -147,7 +147,7 @@ client.on('message', async message => {
 });
 ```
 
-with Async/Await you can just assign the awaited function to a variable that will represent the returned value. Now you know how you use async/await.
+With Async/Await you can just assign the awaited function to a variable that will represent the returned value. Now you know how you use async/await.
 
 ## When should i use async/await over .then()?
 
