@@ -10,9 +10,9 @@ Before we can get into async/await you should know what Promises are and how the
 * fulfilled
 * rejected
 
-The first state **pending** means that the Promise still is ongoing and nether fulfilled nor rejected.
-The second state **fulfilled** means that the Promise is done and was executed without any errors.
-The third state **rejected** means that the Promsie encountered an Error and could not be executed correctly.
+The state **pending** means that the Promise still is ongoing and nether fulfilled nor rejected.
+The state **fulfilled** means that the Promise is done and was executed without any errors.
+The state **rejected** means that the Promsie encountered an Error and could not be executed correctly.
 
 Important to know is that a Promise can only have 1 state it can never be pending and fulfilled, rejected and fulfilled or pending and rejected."so how would that look in code?" you maybe ask now. I will give you an little example here.
 (ES6 code is used if you dont know what that is you should read that up [here](/additional-info/es6-syntax))
