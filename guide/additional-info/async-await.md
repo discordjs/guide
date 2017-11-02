@@ -122,8 +122,8 @@ A nice side effect is that you dont have redundant catch blocks now since you us
 
 ```js
 client.on('message', message => {
-	if (message.content === `${prefix}edit`) {
-		message.channel.send('this message will be edited')
+	if (message.content === `${prefix}delete`) {
+		message.channel.send('this message will be deleted')
 		.then(sentMessage => sentMessage.delete(10000))
 		.catch(error => {
 			//handle error
@@ -132,7 +132,7 @@ client.on('message', message => {
 });
 ```
 
-The return value of a .send() is a Promise what resolves with the sent Message Object but how would the same code with Async/Await look like?
+The return value of a .send() is a Promise what resolves with the sent Message Object but how would the same code with async/await look like?
 
 ```js
 client.on('message', async message => {
@@ -147,7 +147,7 @@ client.on('message', async message => {
 });
 ```
 
-With Async/Await you can just assign the awaited function to a variable that will represent the returned value. Now you know how you use async/await.
+With async/await you can just assign the awaited function to a variable that will represent the returned value. Now you know how you use async/await.
 
 ## When should i use async/await over .then()?
 
