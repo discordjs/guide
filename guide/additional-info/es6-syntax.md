@@ -16,16 +16,16 @@ client.on('ready', () => {
 const prefix = config.prefix;
 
 client.on('message', message => {
-	if (message.content === `${prefix}ping`) {
+	if (message.content === prefix + 'ping') {
 		message.channel.send('Pong.');
 	}
-	else if (message.content === `${prefix}beep`) {
+	else if (message.content === prefix + 'beep') {
 		message.channel.send('Boop.');
 	}
-	else if (message.content === `${prefix}server`) {
+	else if (message.content === prefix + 'server') {
 		message.channel.send('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
 	}
-	else if (message.content === `${prefix}user-info`) {
+	else if (message.content === prefix + 'user-info') {
 		message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
 	}
 });
