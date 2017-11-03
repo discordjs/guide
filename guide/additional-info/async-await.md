@@ -16,8 +16,7 @@ The **rejected** state means that the Promise encountered an error and could not
 
 One important thing to know is that a Promise can only have one state at a time; it can never be pending and fulfilled, rejected and fulfilled, or pending and rejected. You may be asking "How would that look in code?". Here is a small example:
 
-<p class="tip">ES6 code is being used in this example<br>
-if you do not know what that is, you should read up on that [here](/additional-info/es6-syntax).</p>
+<p class="tip">ES6 code is being used in this example. If you do not know what that is, you should read up on that [here](/additional-info/es6-syntax).</p>
 
 ```js
 function asyncTask(input) {
@@ -126,7 +125,7 @@ client.on('message', async message => {
 
 A nice side effect is that you don't have redundant catch blocks now since you use a multi catch because you wrapped all Promises inside the try block. 
 
-So you may be asking, "How would I get the value the Promise resolved with?"
+So you may be asking, "How would I get the value the Promise resolved with?".
 
 Well let's look at an example where you want to delete a sent message.
 
