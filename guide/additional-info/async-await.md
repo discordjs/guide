@@ -4,7 +4,7 @@ If you aren't very familiar with ECMAScript 2017, you may not know about async/a
 
 ## How do Promises work?
 
-Before we can get into async/await, you should know what Promises are and how they work, because async/await is just a way to handle Promises. if you know what Promises are and how to deal with them, then you can skip this part. 
+Before we can get into async/await, you should know what Promises are and how they work, because async/await is just a way to handle Promises. If you know what Promises are and how to deal with them, then you can skip this part. 
 
 Promises are a way to handle asynchronous tasks in Javascript; they are the newer alternative to callbacks. A Promise has a lot of similarities to a progress bar; Promises represent an ongoing process that has not yet finished. A good example for that is a request to a server (e.g discord.js sends requests to Discord's API).
 
@@ -19,23 +19,23 @@ One important thing to know is that a Promise can only have one state at a time;
 <p class="tip">ES6 code is being used in this example. If you do not know what that is, you should read up on that [here](/additional-info/es6-syntax).</p>
 
 ```js
-function asyncTask(input) {
+function deleteMessages(amount) {
 	return new Promise((resolve, reject) => {
-		if (input > 10) return reject(new Error('the specified number is too high'));
-		resolve('Everything is fine');
+		if (amount > 10) return reject(new Error('You can\'t delete more than 10 Messages at a time.'));
+		resolve('Deleted 10 messages.');
 	});
 }
 
-asyncTask(5).then(value => {
-	// `asyncTask` is complete and has not encountered any errors
-	// the resolved value will be the string "Everything is fine"
+deleteMessages(5).then(value => {
+	// `deleteMessages` is complete and has not encountered any errors
+	// the resolved value will be the string "Deleted 10 messages"
 }).catch(error => {
-	// `asyncTask` encountered an error
+	// `deleteMessages` encountered an error
 	// the error will be an Error Object
 });
 ```
 
-In this scenario the `asyncTask` returns a Promise. The `.then()` function will trigger if the Promise was fulfilled and the `.catch()` function if the Promise was rejected. But with our function we resolve the Promise after 2 seconds with the String "Everything is fine", so the `.catch()` function will never be executed.
+In this scenario the `deleteMessages` returns a Promise. The `.then()` function will trigger if the Promise was fulfilled and the `.catch()` function if the Promise was rejected. But with our function we resolve the Promise after 2 seconds with the String "Everything is fine", so the `.catch()` function will never be executed.
 
 ## How to implement async/await
 
