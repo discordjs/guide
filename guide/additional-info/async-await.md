@@ -116,7 +116,7 @@ client.on('message', async message => {
 			await message.react('🇨');
 		} 
 		catch(error) {
-			//handle failure of any Promise rejection inside here
+			// handle failure of any Promise rejection inside here
 		}
 	}
 });
@@ -134,7 +134,7 @@ client.on('message', message => {
 		message.channel.send('this message will be delete')
 		.then(sentMessage => sentMessage.delete(10000))
 		.catch(error => {
-			//handle error
+			// handle error
 		});
 	}
 });
@@ -149,7 +149,7 @@ client.on('message', async message => {
 			const sentMessage = await message.channel.send('this message will be delete');
 			sentMessage.delete(10000);
 		}catch(error){
-			//handle error
+			// handle error
 		}
 	}
 });
