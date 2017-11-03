@@ -20,7 +20,7 @@ One important thing to know is that a Promise can only have one state at a time;
 ```js
 function asyncTask() {
 	return Promise((resolve, reject) => {
-		setTimeout(resolve("Task is done"), 2000)
+		setTimeout(resolve("Task is done"), 2000);
 	});
 }
 
