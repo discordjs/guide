@@ -12,9 +12,9 @@ A Promise can have 3 states:
 * fulfilled
 * rejected
 
-The first state, **pending**, means that the Promise still is ongoing and nether fulfilled nor rejected.
-The second state, **fulfilled**, means that the Promise is done and was executed without any errors.
-The third state, **rejected**, means that the Promise encountered an error and could not be executed correctly.
+The state, **pending**, means that the Promise still is ongoing and nether fulfilled nor rejected.
+The state, **fulfilled**, means that the Promise is done and was executed without any errors.
+The state, **rejected**, means that the Promise encountered an error and could not be executed correctly.
 
 One important thing to know is that a Promise can only have 1 state; it can never be pending and fulfilled, rejected and fulfilled, or pending and rejected. You may be asking, "How would that look in code?". Here is a small example:
 (ES6 code is being used in this example; if you do not know what that is, you should read up on that [here](/additional-info/es6-syntax).)
@@ -126,8 +126,8 @@ So you may be asking, "How would I get the value the Promise resolved with?" Wel
 
 ```js
 client.on('message', message => {
-	if (message.content === `${prefix}edit`) {
-		message.channel.send('this message will be edited')
+	if (message.content === `${prefix}delete`) {
+		message.channel.send('this message will be delete')
 		.then(sentMessage => sentMessage.delete(10000))
 		.catch(error => {
 			//handle error
@@ -140,9 +140,9 @@ The return value of a .send() is a Promise what resolves with the sent Message o
 
 ```js
 client.on('message', async message => {
-	if (message.content === `${prefix}edit`) {
+	if (message.content === `${prefix}delete`) {
 		try{
-			const sentMessage = await message.channel.send('this message will be edited')
+			const sentMessage = await message.channel.send('this message will be delete')
 			sentMessage.delete(10000)
 		}catch(error){
 			//handle error
