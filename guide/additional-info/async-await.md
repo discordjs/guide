@@ -132,10 +132,10 @@ Well let's look at an example where you want to delete a sent message.
 client.on('message', message => {
 	if (message.content === `${prefix}delete`) {
 		message.channel.send('this message will be delete')
-		.then(sentMessage => sentMessage.delete(10000))
-		.catch(error => {
-			// handle error
-		});
+			.then(sentMessage => sentMessage.delete(10000))
+			.catch(error => {
+				// handle error
+			});
 	}
 });
 ```
