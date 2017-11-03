@@ -38,7 +38,7 @@ const fs = require('fs');
 And after your `const client = ...` line, add this:
 
 ```js
-client.commands = new Discord.Collection();
+client.commands = new Collection();
 ```
 
 <p class="tip">If you aren't exactly sure what Collections are, they're a class that extend JS's native Map class and include more extensive, useful functionality. You can read about Maps [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), and see all the available Collection methods [here](https://discord.js.org/#/docs/main/stable/class/Collection).</p>
@@ -66,11 +66,11 @@ By this point, your code should look something like this:
 
 ```js
 const fs = require('fs');
-const Discord = require('discord.js');
+const { Client } = require('discord.js');
 const { prefix, token } = require('./config.json');
 
-const client = new Discord.Client();
-client.commands = new Discord.Collection();
+const client = new Client();
+client.commands = new Collection();
 
 const commandFiles = fs.readdirSync('./commands');
 

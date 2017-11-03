@@ -1,9 +1,9 @@
 const config = require('./config');
-const Discord = require('discord.js');
+const { Client, Collection } = require('discord.js');
 
-const client = new Discord.Client();
+const client = new Client();
 const { Users, CurrencyShop } = require('./dbObjects');
-const currency = new Discord.Collection();
+const currency = new Collection();
 const PREFIX = '!';
 
 Reflect.defineProperty(currency, 'add', {
