@@ -106,4 +106,4 @@ The major points of this setup would be:
 * Requiring indenting to be done with tabs;
 * Limiting nested callbacks to 4. If you hit this error, it is a good idea to consider refactoring your code.
 
-If your current code style is a bit different or you simply don't like a few of these rules, that's perfectly fine! Just head over to the [ESLint docs](https://eslint.org/docs/rules/) and modify the rules appropriately.
+If your current code style is a bit different or you simply don't like a few of these rules, that's perfectly fine! Just head over to the [ESLint docs](https://eslint.org/docs/rules/), find the rule(s) you want to modify, and change them accordingly.
