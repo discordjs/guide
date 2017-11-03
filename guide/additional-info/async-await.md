@@ -1,39 +1,42 @@
 # Understanding async/await
 
-If you aren't very familiar with ECMAScript 2017, you may not know about async/await. It's a useful way to handle Promises in a synchronous manner instead stacking `.then()` callbacks. Also, it looks cleaner and is increases readability overall.
+If you aren't very familiar with ECMAScript 2017, you may not know about async/await. It's a useful way to handle Promises in a synchronous manner instead stacking `.then()` callbacks. Also, it looks cleaner and it increases readability overall.
 
 ## How do Promises work?
 
-Before we can get into async/await, you should know what Promises are and how they work, because async/await is just a way to handle Promises. if you know "what Promises are and how to deal with them" you can skip this part. 
+Before we can get into async/await, you should know what Promises are and how they work, because async/await is just a way to handle Promises. if you know what Promises are and how to deal with them, then you can skip this part. 
 
 Promises are a way to handle asynchronous tasks in Javascript; they are the newer alternative to callbacks. A Promise has a lot of similarities to a progress bar; Promises represent an ongoing process that has not yet finished. A good example for that is a request to a server (e.g discord.js sends requests to Discord's API).
 
-A Promise can have 3 states pending, fulfilled, and rejected
+A Promise can have 3 states; pending, fulfilled, and rejected
 
-The state **pending** means that the Promise still is ongoing and nether fulfilled nor rejected.
-The state **resolved** means that the Promise is done and was executed without any errors.
-The state **rejected** means that the Promise encountered an error and could not be executed correctly.
+The **pending** state means that the Promise still is ongoing and nether fulfilled nor rejected.
+The **resolved** state means that the Promise is done and was executed without any errors.
+The **rejected** state means that the Promise encountered an error and could not be executed correctly.
 
-One important thing to know is that a Promise can only have one state at a time; it can never be pending and fulfilled, rejected and fulfilled, or pending and rejected. You may be asking, "How would that look in code?". Here is a small example:
-<p class="tip">ES6 code is being used in this example; if you do not know what that is, you should read up on that [here](/additional-info/es6-syntax).</p>
+One important thing to know is that a Promise can only have one state at a time; it can never be pending and fulfilled, rejected and fulfilled, or pending and rejected. You may be asking "How would that look in code?". Here is a small example:
+
+<p class="tip">ES6 code is being used in this example<br>
+if you do not know what that is, you should read up on that [here](/additional-info/es6-syntax).</p>
 
 ```js
-function asyncTask() {
-	return Promise((resolve, reject) => {
-		setTimeout(resolve('Task is done'), 2000);
+function asyncTask(input) {
+	return new Promise((resolve, reject) => {
+		if (input > 10) return reject(new Error('the specified number is too high'));
+		resolve('Everything is fine');
 	});
 }
 
-asyncTask().then(value => {
+asyncTask(5).then(value => {
 	// `asyncTask` is complete and has not encountered any errors
-	// the resolved value will be the string "Task is done"
+	// the resolved value will be the string "Everything is fine"
 }).catch(error => {
 	// `asyncTask` encountered an error
 	// the error will be an Error Object
 });
 ```
 
-In this scenario the "asyncTask" returns a Promise and we attach a `.then()` function and a `.catch()` function to it. The `.then()` function will trigger if the Promise was fulfilled and the `.catch()` function if the Promise was rejected. But with our function we resolve the Promise after 2 seconds with the String "Task is Done", so the `.catch()` function will never be executed.
+In this scenario the `asyncTask` returns a Promise. The `.then()` function will trigger if the Promise was fulfilled and the `.catch()` function if the Promise was rejected. But with our function we resolve the Promise after 2 seconds with the String "Everything is fine", so the `.catch()` function will never be executed.
 
 ## How to implement async/await
 
@@ -58,7 +61,7 @@ client.on('message', message => {
 client.login('tokeninhere');
 ```
 
-So now we need to put the code in. If you don't know how NODE.JS asynchronous execution works, you would probably try something like this:
+So now we need to put the code in. If you don't know how Node.js asynchronous execution works, you would probably try something like this:
 
 ```js
 client.on('message', message => {
@@ -139,12 +142,12 @@ client.on('message', message => {
 });
 ```
 
-The return value of a .send() is a Promise what resolves with the sent Message object, but how would the same code with async/await look like?
+The return value of a `.send()` is a Promise what resolves with the sent Message object, but how would the same code with async/await look like?
 
 ```js
 client.on('message', async message => {
 	if (message.content === `${prefix}delete`) {
-		try{
+		try {
 			const sentMessage = await message.channel.send('this message will be delete');
 			sentMessage.delete(10000);
 		}
