@@ -8,13 +8,13 @@ Before we can get into async/await, you should know what Promises are and how th
 
 Promises are a way to handle asynchronous tasks in Javascript; they are the newer alternative to callbacks. A Promise has a lot of similarities to a progress bar; Promises represent an ongoing process that has not yet finished. A good example for that is a request to a server (e.g discord.js sends requests to Discord's API).
 
-A Promise can have 3 states; pending, fulfilled, and rejected
+A Promise can have 3 states; pending, resolved, and rejected
 
-The **pending** state means that the Promise still is ongoing and nether fulfilled nor rejected.
+The **pending** state means that the Promise still is ongoing and nether resolved nor rejected.
 The **resolved** state means that the Promise is done and was executed without any errors.
 The **rejected** state means that the Promise encountered an error and could not be executed correctly.
 
-One important thing to know is that a Promise can only have one state at a time; it can never be pending and fulfilled, rejected and fulfilled, or pending and rejected. You may be asking "How would that look in code?". Here is a small example:
+One important thing to know is that a Promise can only have one state at a time; it can never be pending and resolved, rejected and resolved, or pending and rejected. You may be asking "How would that look in code?". Here is a small example:
 
 <p class="tip">ES6 code is being used in this example. If you do not know what that is, you should read up on that [here](/additional-info/es6-syntax).</p>
 
@@ -35,7 +35,7 @@ deleteMessages(5).then(value => {
 });
 ```
 
-In this scenario the `deleteMessages` function returns a Promise. The `.then()` function will trigger if the Promise was fulfilled and the `.catch()` function if the Promise was rejected. But with our function we resolve the Promise after 2 seconds with the String "Everything is fine", so the `.catch()` function will never be executed.
+In this scenario the `deleteMessages` function returns a Promise. The `.then()` function will trigger if the Promise was resolved and the `.catch()` function if the Promise was rejected. But with our function we resolve the Promise after 2 seconds with the String "Everything is fine", so the `.catch()` function will never be executed.
 
 ## How to implement async/await
 
