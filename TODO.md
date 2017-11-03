@@ -22,7 +22,6 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 	* Sanity checks
 
 * Frequently asked questions section
-	* Difference between User and GuildMember
 	* Incoming breaking changes in v12 from v11
 
 * Frequently requested topic guides
