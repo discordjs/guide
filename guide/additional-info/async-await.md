@@ -1,6 +1,6 @@
 # Understanding async/await
 
-If you aren't very familiar with ECMAScript 2017, you may not know about async/await. It's a useful way to handle Promises in a synchronous manner instead stacking ".then()" callbacks. Also, it looks cleaner and is increases readability overall.
+If you aren't very familiar with ECMAScript 2017, you may not know about async/await. It's a useful way to handle Promises in a synchronous manner instead stacking `.then()` callbacks. Also, it looks cleaner and is increases readability overall.
 
 ## How do Promises work?
 
@@ -20,20 +20,20 @@ One important thing to know is that a Promise can only have one state at a time;
 ```js
 function asyncTask() {
 	return Promise((resolve, reject) => {
-		setTimeout(resolve("Task is done"), 2000);
+		setTimeout(resolve('Task is done'), 2000);
 	});
 }
 
 asyncTask().then(value => {
-	// "asyncTask" is complete and has not encountered any errors
+	// `asyncTask` is complete and has not encountered any errors
 	// the resolved value will be the string "Task is done"
 }).catch(error => {
-	// "asyncTask" encountered an error
+	// `asyncTask` encountered an error
 	// the error will be an Error Object
 });
 ```
 
-In this scenario the "asyncTask" returns a Promise and we attach a ".then()" function and a ".catch()" function to it. The ".then()" function will trigger if the Promise was fulfilled and the ".catch()" function if the Promise was rejected. But with our function we resolve the Promise after 2 seconds with the String "Task is Done", so the .catch() function will never be executed.
+In this scenario the "asyncTask" returns a Promise and we attach a `.then()` function and a `.catch()` function to it. The `.then()` function will trigger if the Promise was fulfilled and the `.catch()` function if the Promise was rejected. But with our function we resolve the Promise after 2 seconds with the String "Task is Done", so the `.catch()` function will never be executed.
 
 ## How to implement async/await
 
@@ -70,7 +70,7 @@ client.on('message', message => {
 });
 ```
 
-But since all of these react methods are started at the same time, it would just be a race to which server request finished first, so there would be no guarantee that it would react in the order you wanted it to. In order to make sure it reacts in order (a, b, c), we need to use the .then() callback from the Promises that these methods return. As a result the code we want would mostly look like this:
+But since all of these react methods are started at the same time, it would just be a race to which server request finished first, so there would be no guarantee that it would react in the order you wanted it to. In order to make sure it reacts in order (a, b, c), we need to use the `.then()` callback from the Promises that these methods return. As a result the code we want would mostly look like this:
 
 ```js
 client.on('message', message => {
@@ -105,7 +105,7 @@ client.on('message', async message => {
 });
 ```
 
-That would mostly be the same code with async/await (note that you can only use the await keyword inside an async function!), but how do we catch Promise rejections now since we won't use .catch() anymore? That is also a useful feature with async/await; the error will be thrown if you await it so you can just wrap the awaited Promises inside a try/catch and you're good to go. 
+That would mostly be the same code with async/await (note that you can only use the await keyword inside an async function!), but how do we catch Promise rejections now since we won't use `.catch()` anymore? That is also a useful feature with async/await; the error will be thrown if you await it so you can just wrap the awaited Promises inside a try/catch and you're good to go. 
 
 ```js
 client.on('message', async message => {
@@ -157,6 +157,6 @@ client.on('message', async message => {
 
 With async/await you can just assign the awaited function to a variable that will represent the returned value. Now you know how you use async/await.
 
-## When should I use async/await over ".then()"?
+## When should I use async/await over `.then()`?
 
-This last topic is probaly the important one because of how often I see how people use async/await in unnecessary situations. async/await should mostly be used in situations where you need the value of mutiple Promises or need to execute a chain of Promises in order. Using async/await for only one Promise has no advantage over using ".then()", and it may be slowing your code down.
+This last topic is probaly the important one because of how often I see how people use async/await in unnecessary situations. async/await should mostly be used in situations where you need the value of mutiple Promises or need to execute a chain of Promises in order. Using async/await for only one Promise has no advantage over using `.then()`, and it may be slowing your code down.
