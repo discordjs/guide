@@ -77,17 +77,16 @@ client.on('message', message => {
 	if (message.content === `${prefix}react`) {
 		message.react('🇦').then(() => {
 			message.react('🇧').then(() => {
-				message.react('🇨')
-					.catch(error => {
+				message.react('🇨').catch(error => {
 					// handle failure of the third react
-					});
+				});
 			})
 			.catch(error => {
-			// handle failure of the second react
+				// handle failure of the second react
 			});
 		})
 		.catch(error => {
-		// handle failure of the first react
+			// handle failure of the first react
 		});
 	}
 });
