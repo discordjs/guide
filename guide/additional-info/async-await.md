@@ -148,7 +148,8 @@ client.on('message', async message => {
 		try{
 			const sentMessage = await message.channel.send('this message will be delete');
 			sentMessage.delete(10000);
-		}catch(error){
+		}
+		catch(error){
 			// handle error
 		}
 	}
