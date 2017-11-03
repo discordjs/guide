@@ -35,7 +35,7 @@ deleteMessages(5).then(value => {
 });
 ```
 
-In this scenario the `deleteMessages` returns a Promise. The `.then()` function will trigger if the Promise was fulfilled and the `.catch()` function if the Promise was rejected. But with our function we resolve the Promise after 2 seconds with the String "Everything is fine", so the `.catch()` function will never be executed.
+In this scenario the `deleteMessages` function returns a Promise. The `.then()` function will trigger if the Promise was fulfilled and the `.catch()` function if the Promise was rejected. But with our function we resolve the Promise after 2 seconds with the String "Everything is fine", so the `.catch()` function will never be executed.
 
 ## How to implement async/await
 
