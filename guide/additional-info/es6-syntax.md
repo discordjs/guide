@@ -16,16 +16,16 @@ client.on('ready', () => {
 const prefix = config.prefix;
 
 client.on('message', message => {
-	if (message.content === `${prefix}ping`) {
+	if (message.content === prefix + 'ping') {
 		message.channel.send('Pong.');
 	}
-	else if (message.content === `${prefix}beep`) {
+	else if (message.content === prefix + 'beep') {
 		message.channel.send('Boop.');
 	}
-	else if (message.content === `${prefix}server`) {
+	else if (message.content === prefix + 'server') {
 		message.channel.send('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
 	}
-	else if (message.content === `${prefix}user-info`) {
+	else if (message.content === prefix + 'user-info') {
 		message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
 	}
 });
@@ -33,7 +33,7 @@ client.on('message', message => {
 client.login(config.token);
 ```
 
-If you haven't noticed, this piece of code is actually already using a bit of ES6 in here! The `const` keyword and arrow function synax (`() => ...`) are a part of ES6, and are recommended to use whenever possible.
+If you haven't noticed, this piece of code is actually already using a bit of ES6 in here! The `const` keyword and arrow function syntax (`() => ...`) are a part of ES6, and are recommended to use whenever possible.
 
 As for the code above, there are a few places where things can be done better. Let's look at them.
 
@@ -174,9 +174,9 @@ else if (message.content.startsWith(`${prefix}user-info`)) {
 
 Easier to read, easier to write! The best of both worlds.
 
-#### Tempate literals vs string concatination
+#### Tempate literals vs string concatenation
 
-You can think of template literals as the ES6 version of string concatination. This example won't go too much into detail about it, but if you're interested in reading more, you can read [the MDN page about them](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals).
+You can think of template literals as the ES6 version of string concatenation. This example won't go too much into detail about it, but if you're interested in reading more, you can read [the MDN page about them](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals).
 
 Here's a quick comparison between the two:
 
@@ -191,7 +191,7 @@ function letsPretendThisDoesSomething() {
 ```
 
 ```js
-// regular string concatination
+// regular string concatenation
 console.log('Your username is: **' + username + '**.');
 console.log('Your password is: **' + password + '**.');
 

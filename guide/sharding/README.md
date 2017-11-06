@@ -15,7 +15,7 @@ First, you'll need to have a file that you'll be launching from now on, rather t
 const { ShardingManager } = require('discord.js');
 const manager = new ShardingManager('./bot.js', { totalShards: 'auto', token: 'your-token-goes-here' });
 manager.spawn();
-manager.on('launch', (shard) => console.log(`Launched shard ${shard.id}`));
+manager.on('launch', shard => console.log(`Launched shard ${shard.id}`));
 ```
 
 The above code utilizes discord.js's sharding manager to spawn the recommended amount of shards for your bot. The recommended amount should be approximately 1,000 guilds per shard. Even though you provide the token here, you will still need to send it over to the main bot file in `client.login()`, so don't forget to do that.
@@ -31,7 +31,7 @@ You will most likely have to change some code in order to get your newly sharded
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-client.on('message', (message) => {
+client.on('message', message => {
 	if (message.content === 'stats') {
 		message.reply(`Server count: ${client.guilds.size}`);
 	}
@@ -68,7 +68,7 @@ While it's a bit unattractive to have more nesting in your commands, it is neces
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-client.on('message', (message) => {
+client.on('message', message => {
 	if (message.content === 'stats') {
 		client.shard.broadcastEval('this.guilds.size').then(results => {
 			message.reply(`server count: ${results.reduce((prev, val) => prev + val, 0)}`);

@@ -35,7 +35,7 @@ else if (command === 'args-info') {
 
 If you try it out, you'll get something like this:
 
-![Arguments testing](https://i.imgur.com/w3F8C63.png)
+![Arguments testing](assets/img/w3F8C63.png)
 
 Looks good! Don't worry about the comma separation; that's the expected output when trying to send an array as a string.
 
@@ -56,13 +56,13 @@ else if (command === 'args-info') {
 
 So if the first argument provided is equal to "foo", then send back "bar". Otherwise, just send back the argument the user provided.
 
-![foo bar example](https://i.imgur.com/v3Ocywd.png)
+![foo bar example](assets/img/v3Ocywd.png)
 
 #### Caveats
 
 Currently, you're using `.split(' ')` to split the command arguments. However, there's actually a slight issue with this. As is, it'll split the string by each and every space. Well, what happens if someone accidentally (or even purposely) adds additional spaces? Here's what:
 
-![extra spaces args](https://i.imgur.com/DMuC8t1.png)
+![extra spaces args](assets/img/DMuC8t1.png)
 
 If you've never done something like this before, this probably isn't what you'd expect, right? Thankfully, there's a simple solution for this issue. The red line is what to remove, and the green line is what to replace it with.
 
@@ -71,7 +71,7 @@ If you've never done something like this before, this probably isn't what you'd 
 + const args = message.content.slice(prefix.length).split(/\s+/);
 ```
 
-![extra spaces args fixed](https://i.imgur.com/ibSgjAC.png)
+![extra spaces args fixed](assets/img/ibSgjAC.png)
 
 Awesome! Nothing to worry in that regard about now. You're now using something called a "regular expression" (commonly referred to as "regex") to handle that small (but important) bug.
 
@@ -95,7 +95,7 @@ else if (command === 'kick') {
 
 And as you can see, it works!
 
-![user mention example](http://i.imgur.com/AsAa9dV.png)
+![user mention example](assets/img/AsAa9dV.png)
 
 But what happens if you try to use the command without mentioning anybody? If you try it yourself, you'll notice that the bot doesn't respond (due to it crashing), and you should see something like this in your console:
 
@@ -120,7 +120,7 @@ Since `message.mentions.users` is a Collection, it has a `.size` property. If no
 
 If you try again, it should work as expected.
 
-![after sanity check](http://i.imgur.com/9chaOim.png)
+![after sanity check](assets/img/9chaOim.png)
 
 #### Working with multiple mentions
 
@@ -140,7 +140,7 @@ else if (command === 'avatar') {
 
 That part is simple; just recycle the if statement you used in the section above and displaying the link to your avatar.
 
-![avatar command](http://i.imgur.com/3Ilv3lE.png)
+![avatar command](assets/img/3Ilv3lE.png)
 
 The next part is where it takes a turn - displaying the avatars of all the mentioned users. But it's simpler than you may think! `message.mentions.users` returns a Collection (as previously mentioned), which you can loop over in a number of different ways. You'll be using `.map()` to loop here, since it allows you to easily collect and store data in a variable in order to send 1 final message in the end, as opposed to multiple.
 
@@ -162,7 +162,7 @@ else if (command === 'avatar') {
 
 And ta-da! You now have a list of avatar links of all the users you tagged.
 
-![avatar command multiple users](http://i.imgur.com/zVUUmRs.png)
+![avatar command multiple users](assets/img/zVUUmRs.png)
 
 It does take up a lot of screen, but this is just an example command anyway.
 
@@ -186,7 +186,7 @@ else if (command === 'prune') {
 
 And if you test it, it should work as expected.
 
-![isNaN test](http://i.imgur.com/lhuPYta.png)
+![isNaN test](assets/img/lhuPYta.png)
 
 So what you need to do next is check if the first argument is between X and Y. Following the idea of a prune command, you'll most likely want to use the `.bulkDelete()` method, which allows you to delete multiple messages in one fell swoop.
 

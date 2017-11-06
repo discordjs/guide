@@ -4,7 +4,7 @@ As a developer, it's a good idea to make your development process as streamlined
 
 ### Installing a code editor
 
-First, you will need a proper code editor. Using Notepad and Notepad++ is discouraged, as they're inefficient for projects like these. If you are using either, it is highly reccommended to switch in order to save everyone lots of headaches and unecessary syntax error questions.
+First, you will need a proper code editor. Using Notepad and Notepad++ is discouraged, as they're inefficient for projects like these. If you are using either, it is highly recommended to switch in order to save everyone lots of headaches and unnecessary syntax error questions.
 
 * [Visual Studio Code](https://code.visualstudio.com/) is a very popular choice known for being fast and powerful. It supports a broad range of languages and comes with its own terminal, as well as built-in intellisense and autocomplete for both JavaScript and TypeScript. This is the recommended choice.
 * [Atom](https://atom.io/) is user-friendly, being concise and easy to navigate. This is what many developers use to get started.
@@ -38,6 +38,28 @@ ESLint may display a lot of warnings and errors about your code when you start u
 		"ecmaVersion": 2017
 	},
 	"rules": {
+
+	}
+}
+```
+
+This is the base of what an ESLint file will look like. The `rules` object is where you'll define what rules you want to apply to ESLint. For example, if you want to make sure you never miss a semicolon, the `"semi": ["error", "always"]` rule is what you'll want to add inside that object.
+
+You can find a list of all of ESLint's rules on their site, located [here](https://eslint.org/). There are indeed many rules and it may be overwhelming at first, but you'll only need to go through the list and define your file once.
+
+Alternatively, if you don't want to go through everything one-by-one on your own, you can use the ESLint file we use for this guide.
+
+```json
+{
+	"extends": "eslint:recommended",
+	"env": {
+		"node": true,
+		"es6": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 2017
+	},
+	"rules": {
 		"brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
 		"comma-dangle": ["error", "always-multiline"],
 		"comma-spacing": "error",
@@ -56,7 +78,7 @@ ESLint may display a lot of warnings and errors about your code when you start u
 		"no-multi-spaces": "error",
 		"no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1, "maxBOF": 0 }],
 		"no-shadow": ["error", { "allow": ["err", "resolve", "reject"] }],
-		"no-trailing-spaces": ["error", { "skipBlankLines": true }],
+		"no-trailing-spaces": ["error"],
 		"no-var": "error",
 		"object-curly-spacing": ["error", "always"],
 		"prefer-const": "error",
@@ -78,9 +100,10 @@ The major points of this setup would be:
 * Allowing you to debug with `console.log()`;
 * Prefer using `const` over `let` or `var`, as well as disallow `var`;
 * Disapproving of variables with the same name in callbacks;
+* Requiring single quotes over double quotes;
 * Requiring semicolons. While it's not required in JavaScript, it's considered one of the most common best practices to follow;
 * Requiring accessing properties to be on the same line;
 * Requiring indenting to be done with tabs;
 * Limiting nested callbacks to 4. If you hit this error, it is a good idea to consider refactoring your code.
 
-If your current code style is a bit different or you simply don't like a few of these rules, that's perfectly fine! Just head over the the [ESLint docs](https://eslint.org/docs/rules/), find the rule(s) you want to modify, and change them accordingly.
+If your current code style is a bit different or you simply don't like a few of these rules, that's perfectly fine! Just head over to the [ESLint docs](https://eslint.org/docs/rules/), find the rule(s) you want to modify, and change them accordingly.

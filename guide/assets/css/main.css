@@ -4,10 +4,24 @@
 	max-width: 1000px;
 }
 
+/* sidebar */
+
+.sidebar {
+	padding: 30px 0 0;
+	bottom: 40px;
+}
+
 /* regular text blocks */
 
 .markdown-section p {
 	line-height: 170%;
+}
+
+/* lists */
+
+.markdown-section ul li,
+.markdown-section ol li {
+	margin: 0.25em 0;
 }
 
 /* codeblocks and inline code */
@@ -31,8 +45,8 @@
 
 .markdown-section pre >code,
 .markdown-section code {
-	font-size: 0.9rem;
-	font-family: consolas;
+	font-size: 0.8rem;
+	font-family: 'Droid Sans Mono', monospace;
 }
 
 /* syntax highlighting */

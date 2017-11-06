@@ -3,7 +3,7 @@
 * **Installations & Preparations**
 	* [Installing Node and discord.js](/preparations/)
 	* [Setting up a linter](/preparations/setting-up-a-linter)
-	* [Settings up a bot application](/preparations/setting-up-a-bot-application)
+	* [Setting up a bot application](/preparations/setting-up-a-bot-application)
 	* [Adding your bot to servers](/preparations/adding-your-bot-to-servers)
 
 * **Creating Your Bot**
@@ -33,3 +33,4 @@
 	* **Miscellaneous**
 	* [Collectors](/creating-your-bot/collectors)
 	* [ES6 syntax examples](/additional-info/es6-syntax)
+	* [Understand async/await](/additional-info/async-await)

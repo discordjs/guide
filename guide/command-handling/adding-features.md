@@ -109,7 +109,7 @@ In your main file:
 	}
 ```
 
-Use an if statement to check if the `usage` property exists (and is truthy) first, so that you don't accidentaly end up with `undefined` in the reply string (in the case that you forget to properply supply the property in our command file, or some similar incident). A simple addition like such can easily improve the end user's UX.
+Use an if statement to check if the `usage` property exists (and is truthy) first, so that you don't accidentally end up with `undefined` in the reply string (in the case that you forget to properly supply the property in our command file, or some similar incident). A simple addition like such can easily improve the end user's UX.
 
 ### Guild only commands
 
@@ -134,7 +134,7 @@ if (command.guildOnly && message.channel.type !== 'text') {
 
 Now when you try to use the kick command inside a DM, you'll get the appropriate response which will also prevent your bot from throwing an error.
 
-![guild command inside DMs](https://i.imgur.com/TiDpsVH.png)
+![guild command inside DMs](assets/img/TiDpsVH.png)
 
 ### Cooldowns
 
@@ -218,7 +218,7 @@ Nothing overly complex here either. Since the `timestamps` Collection has the au
 
 ### Command aliases
 
-It's a good idea to allow users to trigger your commands in more than one way; it gives them the freedom of choosing what to send and may even make some command names easier to rememebr. Luckily, setting up aliases for your commands is quite simple.
+It's a good idea to allow users to trigger your commands in more than one way; it gives them the freedom of choosing what to send and may even make some command names easier to remember. Luckily, setting up aliases for your commands is quite simple.
 
 For this bit of the guide, we'll be using the avatar command as a target. Around Discord, your profile picture is referred to as an "avatar" - however, not everyone calls it that. Some people prefer "icon" or "pfp" (profile picture). With that in mind, let's update the avatar command to allow all 3 of those triggers.
 
@@ -244,7 +244,7 @@ The `aliases` property should always contain an array of strings. In your main f
 
 Making those two small changes, you get this:
 
-![aliases](https://i.imgur.com/0hFEXpW.png)
+![aliases](assets/img/0hFEXpW.png)
 
 ### A dynamic help command
 
@@ -337,7 +337,7 @@ The only thing you use `.then()` here for is to let them know when you're done s
 
 At the end of it all, you should be getting this as a result:
 
-![help commands](https://i.imgur.com/f5T9OyI.png)
+![help commands](assets/img/f5T9OyI.png)
 
 No more manually editing your help command! If you aren't completely satisfied with how it looks, you can always adjust it to your liking later.
 

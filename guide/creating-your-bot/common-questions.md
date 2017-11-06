@@ -30,7 +30,28 @@ const member = <message>.mentions.members.first();
 member.addRole(role);
 ```
 
-## Miscellaneous
+### How do I check if a guild member has a certain role?
+
+```js
+const member = <message>.mentions.members.first();
+if (member.roles.exists('name', '<role name>')) {
+	// ...
+}
+```
+
+## Bot Configuration
+
+### How do I set my username?
+
+```js
+<client>.user.setUsername('<username>');
+```
+
+### How do I set my avatar?
+
+```js
+<client>.user.setAvatar('<nickname>');
+```
 
 ### How do I set my playing status?
 
@@ -43,6 +64,24 @@ member.addRole(role);
 * If you would like to set your playing status upon startup, you must place the `<client>.user.setGame()` method in a `ready` event listener (`client.on('ready', () => {});`).
 
 * If you're using a selfbot to change your playing status, you won't be able to view the status change, but other users will.
+
+## Miscellaneous
+
+### How do I send a message to a certain channel?
+
+```js
+const channel = <client>.channels.get('<id>');
+channel.send('<content>');
+```
+
+### How do I DM a certain user?
+
+```js
+const user = <client>.users.get('<id>');
+user.send('<content>');
+```
+
+<p class="tip">If you want to DM the user who sent the message, you can use `<message>.author.send()`.</p>
 
 ### How do I prompt the user for additional input?
 
@@ -61,3 +100,11 @@ member.addRole(role);
 ```
 
 <p class="tip">If you want to learn more about this syntax or want to learn about reaction collectors as well, check out [this dedicated guide page for collectors](/creating-your-bot/collectors)!</p>
+
+### What is the difference between a User and a GuildMember?
+
+A lot of users get confused what is the difference between a User and a GuildMember.
+
+The simple answer is that an User represent a global Discord user and a GuildMember represent a Discord user on a specific server.
+
+That means only GuildMembers can have permissions, roles, and nicknames for example because all these things are server-bound information that could be different on every server that user is in.
