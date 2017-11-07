@@ -17,6 +17,7 @@ The section headers will be named after the v11 classes/methods/properties and w
 * ClientUser
 * DiscordAPIError
 * DMChannel
+* GroupDMChannel
 * Guild
 * Invite
 * OAuth2Application
@@ -112,7 +113,7 @@ All the `.send***()` methods were removed in favor of one general `.send()` meth
 
 ### ClientUser#avatarURL
 
-`clientUser.avatarURL` is now a method as opposed to a property. It also allows you to determine the file format and size to return.
+`clientUser.avatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return.
 
 ```diff
 - clientUser.avatarURL;
@@ -131,7 +132,7 @@ The second and third parameters in `clienrUser.createGuild()` have been changed/
 
 ### ClientUser#displayAvatarURL
 
-`clientUser.displayAvatarURL` is now a method as opposed to a property. It also allows you to determine the file format and size to return.
+`clientUser.displayAvatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return.
 
 ```diff
 - clientUser.displayAvatarURL;
@@ -175,6 +176,39 @@ The second parameter in `clientUser.setPassword()` has been changed. The `oldPas
 ### Collector#cleanup
 
 `collector.cleanup()` has been removed entirely.
+
+### GroupDMChannel#iconURL
+
+`groupDM.iconURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return.
+
+```diff
+- groupDM.iconURL;
++ groupDM.iconURL();
++ groupDM.iconURL({ format: 'png', size: 1024 });
+```
+
+### GroupDMChannel#addUser
+
+
+The first and second parameters in `groupDM.addUser()` have been changed/removed, leaving it with a total of one parameter. The `accessTokenOrID` and `reason` parameters from v11 have been merged into an object as the first parameter.
+
+```diff
+- groupDM.addUser('123456789012345678');
++ groupDM.addUser({ user: '123456789012345678' });
++ groupDM.addUser({ user: '123456789012345678', accessToken: 'access-token', nick: 'My Best Friend!' });
+```
+
+### Guild#ban
+
+The second parameter in `guild.ban()` has been changed. The `options` parameter no longer accepts a number, nor a string.
+
+```diff
+- guild.ban(user, 7);
++ guild.ban(user, { days: 7 });
+
+- guild.ban(user, 'Too much trolling');
++ guild.ban(user, { reason: 'Too much trolling' });
+```
 
 ### Guild#createChannel
 
@@ -225,13 +259,13 @@ Unfortunately, "default" channels don't exist in Discord anymore, and as such, t
 
 <p class="tip">Not sure how to set up a database? Check out [this page](/sequelize/)!</p>
 
-### Guild#defaultRole
+### Guild#fetchBans
 
-`guild.defaultRole` has been removed entirely. As an alternative, you can use `.get()` with the Guild's ID on the `guild.roles` Collection.
+`guild.fetchBans()` will return a `Collection` of objects in v12, whereas v11 would return a `Collection` of `User` objects.
 
 ```diff
-- guild.defaultRole;
-+ guild.roles.get(guild.id);
+- guild.fetchBans().then(bans => console.log(`${bans.first().tag} was banned`));
++ guild.fetchBans().then(bans => console.log(`${bans.first().user.tag} was banned because "${bans.first().reason}"`));
 ```
 
 ### Guild#fetchMember(s)
@@ -248,9 +282,18 @@ Unfortunately, "default" channels don't exist in Discord anymore, and as such, t
 + guild.members.fetch();
 ```
 
+### Guild#fetchWebhooks
+
+`guild.fetchWebhooks()` is now a Promise that returns a `Collection` of `Webhook`s.
+
+```diff
+- guild.fetchWebhooks().first();
++ guild.fetchWebhooks().then(webhooks => webhooks.first());
+```
+
 ### Guild#iconURL
 
-`guild.iconURL` is now a method as opposed to a property. It also allows you to determine the file format and size to return.
+`guild.iconURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return.
 
 ```diff
 - guild.iconURL;
@@ -269,7 +312,7 @@ The first, second, and third parameters in `guild.createEmoji()` have been chang
 
 ### Guild#setChannelPosition
 
-`guild.setChannelPosition()` has been removed entirely. As an alternative, you can use `channel.setPosition()`.
+`guild.setChannelPosition()` has been removed entirely. As an alternative, you can use `channel.setPosition()`, or `guild.setChannelPositions()`, which accepts accepts the same form of data as `guild.setChannelPosition` but inside an array.
 
 ### Guild#setRolePosition
 
@@ -277,7 +320,7 @@ The first, second, and third parameters in `guild.createEmoji()` have been chang
 
 ### Guild#splashURL
 
-`guild.splashURL` is now a method as opposed to a property. It also allows you to determine the file format and size to return.
+`guild.splashURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return.
 
 ```diff
 - guild.splashURL;
@@ -361,7 +404,7 @@ The `OAuth2Application` class has been renamed to `ClientApplication`.
 
 ### OAuth2Application#iconURL
 
-`application.iconURL` is now a method as opposed to a property. It also allows you to determine the file format and size to return.
+`application.iconURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return.
 
 ```diff
 - user.iconURL;
@@ -382,7 +425,6 @@ The following permission flags have been renamed:
 `permissions.member` has been removed entirely.
 
 ### Permissions#missingPermissions
-
 
 `permissions.missingPermissions()` has been renamed to `permissions.missing()` and also refactored. The second parameter in v11 was named `explicit`, described as "Whether to require the user to explicitly have the exact permissions", defaulting to `false`. However, the second parameter in v11 is named `checkAdmin`, described as "Whether to allow the administrator permission to override", defaulting to `true`.
 
@@ -444,7 +486,7 @@ The `RichEmbed` class has been removed in favor of the `MessageEmbed` class.
 
 ### User#avatarURL
 
-`user.avatarURL` is now a method as opposed to a property. It also allows you to determine the file format and size to return.
+`user.avatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return.
 
 ```diff
 - user.avatarURL;
@@ -454,7 +496,7 @@ The `RichEmbed` class has been removed in favor of the `MessageEmbed` class.
 
 ### User#displayAvatarURL
 
-`user.displayAvatarURL` is now a method as opposed to a property. It also allows you to determine the file format and size to return.
+`user.displayAvatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return.
 
 ```diff
 - user.displayAvatarURL;
@@ -474,3 +516,57 @@ Just like the `Channel#send***` methods, all the `.send***()` methods were remov
 
 * DiscordAPIError
 * DMChannel
+* Emoji
+* GroupDMChannel
+
+### Emoji#addRestrictedRoles
+
+`emoji.addRestrictedRoles()` now also accepts a `Collection` of `Role` objects,, as opposed to only an array of `RoleResolvable`s.
+
+### Emoji#delete
+
+`emoji.delete()` has been added and (optionally) accepts a `reason` string as the first parameter.
+
+### Emoji#removeRestrictedRoles
+
+`emoji.removeRestrictedRoles()` now also accepts a `Collection` of `Role` objects,, as opposed to only an array of `RoleResolvable`s.
+
+### GroupDMChannel#edit
+
+`groupDM.edit()` has been added, accepts a `data` object as the first parameter, and (optionally) a `reason` string as the second parameter.
+
+### Guild#createChannel
+
+The third parameter in `guild.createChannel()` has been refactored in the following manner:
+
+* It now accepts a `nsfw` property (boolean).
+* It now accepts a `bitrate` property (number, voice channels only).
+* It now accepts a `userLimit` property (number, voice channels only).
+* It now accepts a `parent` property (ChannelResolvable).
+* The `overwrites` now accepts an array of `ChannelCreationOverwrites`.
+
+```js
+guild.createChannel('secret-text-channel', 'text', {
+	nsfw: true,
+	overwrites: [
+		{
+			deny: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
+			id: '123456789012345678',
+		},
+		{
+			allow: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
+			id: '876543210987654321',
+		},
+	],
+});
+
+guild.createChannel('Secret Voice Channel', 'voice', {
+	bitrate: 64,
+	userLimit: 2,
+	parent: '123456789012345678',
+});
+```
+
+### Guild#verified
+
+`Guild.verified` has been added.
