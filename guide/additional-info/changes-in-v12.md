@@ -4,13 +4,22 @@ If you weren't already aware, v12 is constantly in development, and you can even
 
 The section headers will be named after the v11 classes/methods/properties and will be in alphabetical order, so that you can easily find what you're looking for. "Difference" codeblocks will be used to show you the old methods vs the newer ones—the red being what's been removed and the green being its replacement. Some bits may have more than one version of being handled.
 
+## Legend
+
+* All headers are named as `Class#propertyOrMethod`
+* The use of parenthesis designates optional inclusion. For example, `Channel#fetch(Pinned)Message(s)` means that this section will include changes for `Channel#fetchPinnedMessages`, `Channel#fetchMessages`, and `Channel#fetchMessage`.
+* The user of asterisks designates a wildcard. For example, `Channel#send***` means that this section will include changes for `Channel#sendMessage`, `Channel#sendFile`, `Channel#sendEmbed`, and so forth.
+
+## Breaking changes
+
 <p class="danger">This next bit is for me (Sanc) to keep track of the classes I've gone through and checked for breaking changes. Remove before making the PR.</p>
 
 * ClientUser
+* DiscordAPIError
+* DMChannel
 * Guild
 * Invite
-
-## Breaking changes
+* OAuth2Application
 
 <p class="danger">Before anything, it is important to note that discord.js v12 (and so forth) requires a **minimum** Node version of v8. If you aren't sure what Node version you're on, run `node -v` in your console and update if necessary.</p>
 
@@ -162,6 +171,10 @@ The second parameter in `clientUser.setPassword()` has been changed. The `oldPas
 ### ClientUser#unblock
 
 `clientUser.unblock()` has been removed entirely.
+
+### Collector#cleanup
+
+`collector.cleanup()` has been removed entirely.
 
 ### Guild#createChannel
 
@@ -344,7 +357,7 @@ The `OAuth2Application` class has been renamed to `ClientApplication`.
 
 ### OAuth2Application#reset
 
-`application.reset()` has been renamed to `application.resetSecret()`.
+`application.reset()` has been split up into `application.resetSecret()` and `application.resetToken()`.
 
 ### OAuth2Application#iconURL
 
@@ -453,3 +466,11 @@ The `RichEmbed` class has been removed in favor of the `MessageEmbed` class.
 
 Just like the `Channel#send***` methods, all the `.send***()` methods were removed in favor of one general `.send()` method. Read through the [Channel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
 
+---
+
+## Additions
+
+<p class="danger">This next bit is for me (Sanc) to keep track of the classes I've gone through and checked for additions. Remove before making the PR.</p>
+
+* DiscordAPIError
+* DMChannel
