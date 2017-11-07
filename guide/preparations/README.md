@@ -22,13 +22,13 @@ To install and use discord.js, you'll need to install it via npm \(Node's packag
 
 Like any other project, you should have a dedicated folder for this, in order to keep it organized and manageable.
 
-Navigate to a place on your machine where it's be easy for find and open in the future, for convenience purposes. Create a new folder by either right-clicking and choosing the "New &gt; Folder" option \(Windows\) or using the `mkdir` command \(e.g. `mkdir project-name`\) \(Linux\). If you already have a name you want to use for your bot, you can use that as the folder name. Otherwise, you may name it something like `discord-bot` for the time being \(or anything else you have in mind\).
+Navigate to a place on your machine where it's be easy for find and open in the future, for convenience purposes. Create a new folder like you normally would (for Linux, you can use `mkdir project-name` inside your terminal). If you already have a name you want to use for your bot, you can use that as the folder name. Otherwise, you may name it something like `discord-bot` for the time being \(or anything else you have in mind\).
 
-Once you're done making the folder, open it up by double clicking it open \(Windows\) or using the `cd` command \(e.g. `cd project-name`\) \(Linux\).
+Once you're done making the folder, open it up (for Linux, you can use `cd project-name` inside your terminal).
 
 ### Opening the command prompt
 
-If you're on Linux, you should already be inside of a command prompt, so you can skip to the next step.
+If you're on Linux, you can quickly open up the terminal with `Ctrl + Alt + T`.
 
 If you're on Windows and aren't familiar with opening up the command prompt, simply do the following:
 
@@ -67,4 +67,4 @@ And that's it! With all the necessities installed, you're almost ready to start 
 
 ## Installing a linter
 
-While you are coding, you may find that you run into numerous syntax errors, or just code in an inconsistent style. Regardless, it's highly urged that you install a linter to ease a lot of coding troubles. While code editors generally are able to point out syntax errors, with a linter, you can coerce your coding to be in a specific style as you define in the configuration. While this is not required, it's strongly recommended. [Click here for the linter guide!](/preparations/setting-up-a-linter)
+While you are coding, you may find that you run into numerous syntax errors, or just code in an inconsistent style. It's highly urged that you install a linter to ease these troubles. While code editors generally are able to point out syntax errors, with a linter, you can coerce your coding to be in a specific style as you define in the configuration. While this is not required, it's strongly reccommended. [Click here for the linter guide!](/preparations/setting-up-a-linter)
