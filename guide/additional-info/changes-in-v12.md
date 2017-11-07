@@ -2,7 +2,9 @@
 
 If you weren't already aware, v12 is constantly in development, and you can even start using it right now by running `npm install hydrabolt/discord.js` (as opposed to `npm install discord.js`). However, there are many breaking changes from v11 to v12; you'll more than likely need to change your code in a few places. This section of the guide is here to let you know what those changes are and how you can change your code accordingly.
 
-The section headers will be named after the v11 classes/methods/properties and will be in alphabetical order, so that you can easily find what you're looking for. "Difference" codeblocks will be used to show you the old methods vs the newer ones—the red being what's been removed and the green being its replacement. Some bits may have more than one version of being handled.
+The section headers for breaking changes will be named after the v11 classes/methods/properties and will be in alphabetical order, so that you can easily find what you're looking for. The section headers for additions will be named after the v12 classes/methods/properties, to reflect their current syntax appropriately.
+
+"Difference" codeblocks will be used to show you the old methods vs the newer ones—the red being what's been removed and the green being its replacement. Some bits may have more than one version of being handled.
 
 <p class="danger">While this list has been carefully crafted, it may be incomplete! If you notice a pieces of missing or inaccurate data, we encourage you to [submit a pull request](https://github.com/Danktuary/Making-Bots-with-Discord.js)!</p>
 
@@ -10,7 +12,7 @@ The section headers will be named after the v11 classes/methods/properties and w
 
 * All headers are named as `Class#propertyOrMethod`
 * The use of parenthesis designates optional inclusion. For example, `Channel#fetch(Pinned)Message(s)` means that this section will include changes for `Channel#fetchPinnedMessages`, `Channel#fetchMessages`, and `Channel#fetchMessage`.
-* The user of asterisks designates a wildcard. For example, `Channel#send***` means that this section will include changes for `Channel#sendMessage`, `Channel#sendFile`, `Channel#sendEmbed`, and so forth.
+* The use of asterisks designates a wildcard. For example, `Channel#send***` means that this section will include changes for `Channel#sendMessage`, `Channel#sendFile`, `Channel#sendEmbed`, and so forth.
 
 ## Breaking changes
 
@@ -24,8 +26,17 @@ The section headers will be named after the v11 classes/methods/properties and w
 * GuildAuditLogs
 * GuildAuditLogsEntry
 * GuildChannel
+* GuildMember
 * Invite
+* Message
+* MessageAttachment
+* MessageMentions
 * OAuth2Application
+
+TODO LATER CUZ I DON'T WANNA TOUCH THAT SHIT RN:
+
+* MessageCollector
+* MessageEmbed***
 
 <p class="danger">Before anything, it is important to note that discord.js v12 (and so forth) requires a **minimum** Node version of v8. If you aren't sure what Node version you're on, run `node -v` in your console and update if necessary.</p>
 
@@ -74,7 +85,7 @@ All the `.send***()` methods were removed in favor of one general `.send()` meth
 
 ```diff
 - channel.sendFiles(['./file-one.png', './file-two.png']);
-+ channel.send({ files: [{ attachment: './file-one.png' }, { attachment: './file-one.png' }] });
++ channel.send({ files: [{ attachment: './file-one.png' }, { attachment: './file-two.png' }] });
 + channel.send({ files: [new MessageAttachment('./file-one.png'), new MessageAttachment('./file-two.png')] });
 ```
 
@@ -134,7 +145,7 @@ All the `.send***()` methods were removed in favor of one general `.send()` meth
 
 #### ClientUser#createGuild
 
-The second and third parameters in `clienrUser.createGuild()` have been changed/removed, leaving it with a total of two parameters. The `region` and `icon` parameters from v11 have been merged into an object as the second parameter.
+The second and third parameters in `clientUser.createGuild()` have been changed/removed, leaving it with a total of two parameters. The `region` and `icon` parameters from v11 have been merged into an object as the second parameter.
 
 ```diff
 - clientUser.createGuild('New server', 'us-east', './path/to/file.png');
@@ -373,10 +384,31 @@ The second parameter in `channel.setPosition()` has been changed. The `relative`
 
 ```diff
 - channel.setPosition(10, true);
-+ channel.setPosition(10, { relative: true, reason: 'Basic organization' });
++ channel.setPosition(10, { relative: true });
 ```
 
 ### GuildMember
+
+#### GuildMember#ban
+
+The second parameter in `member.ban()` has been changed. The `options` parameter no longer accepts a number, nor a string.
+
+```diff
+- member.ban(user, 7);
++ member.ban(user, { days: 7 });
+
+- member.ban(user, 'Too much trolling');
++ member.ban(user, { reason: 'Too much trolling' });
+```
+
+#### GuildMember#hasPermission
+
+The second, third, and fourth parameters in `member.hasPermission()` have been changed/removed, leaving it with a total of three parameters. The `explicit` parammeter from v11 has been removed.
+
+```diff
+- member.hasPermission('MANAGE_MESSAGES', true, false, false);
++ member.hasPermission('MANAGE_MESSAGES', false, false);
+```
 
 #### GuildMember#hasPermissions
 
@@ -386,6 +418,10 @@ The second parameter in `channel.setPosition()` has been changed. The `relative`
 - member.hasPermissions(['MANAGE_MESSAGES', 'MANAGE_ROLES']);
 + member.hasPermission(['MANAGE_MESSAGES', 'MANAGE_ROLES']);
 ```
+
+#### GuildMember#send\*\*\*
+
+Just like the `Channel#send***` methods, all the `.send***()` methods were removed in favor of one general `.send()` method. Read through the [Channel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
 
 ### Message
 
@@ -400,7 +436,7 @@ The first parameter in `message.delete()` has been changed. The `timeout` parame
 
 #### Message#editCode
 
-In the same sense that the `channel.sendCode()` method was removed, `message.editCode()` has also been removed entirely.
+`message.editCode()` has been removed entirely.
 
 ```diff
 - message.editCode('js', 'const version = 11;');
@@ -416,6 +452,22 @@ In the same sense that the `channel.sendCode()` method was removed, `message.edi
 - message.isMemberMentioned('123456789012345678');
 + message.mentions.has('123456789012345678');
 ```
+
+### MessageAttachment
+
+The `MessageAttachment` class' constructor parameters have changed
+
+#### MessageAttachment#client
+
+`attachment.client` has been removed entirely.
+
+#### MessageAttachment#filename
+
+`attachment.filename` has been renamed to `attachment.name`.
+
+#### MessageAttachment#filesize
+
+`attachment.filesize` has been renamed to `attachment.size`.
 
 ### MessageCollector
 
@@ -440,6 +492,17 @@ The `max` and `maxMatches` properties of the `MessageCollector` class have been 
 #### MessageEmbed#message
 
 `messageEmbed.message` has been removed entirely.
+
+### MessageReaction
+
+#### MessageReaction#fetchUsers
+
+The first parameter in `reaction.fetchUsers()` has been changed. The `limit` parameter from v11 has been merged into an object as the first parameter.
+
+```diff
+- reaction.fetchUsers(50);
++ reaction.fetchUsers({ limit: 50 });
+```
 
 ### OAuth2Application
 
@@ -579,6 +642,11 @@ Just like the `Channel#send***` methods, all the `.send***()` methods were remov
 * GuildAuditLogs
 * GuildAuditLogsEntry
 * GuildChannel
+* GuildMember
+* Invite
+* Message
+* MessageAttachment
+* MessageMentions
 
 ### Channel
 
@@ -667,3 +735,51 @@ guild.createChannel('Secret Voice Channel', 'voice', {
 #### GuildChannel#setParent
 
 `channel.setParent()` has been added.
+
+### Message
+
+#### Message#activity
+
+`message.activity` has been added.
+
+#### Message#application
+
+`message.application` has been added.
+
+### MessageAttachment
+
+#### MessageAttachment#setAttachment
+
+`attachment.setAttachment()` has been added.
+
+#### MessageAttachment#setFile
+
+`attachment.setFile()` has been added.
+
+#### MessageAttachment#setName
+
+`attachment.setName()` has been added.
+
+### MessageMentions
+
+#### MessageMentions#has
+
+`mentions.has()` has been added.
+
+### ClientApplication
+
+#### ClientApplication#cover
+
+`application.cover` has been added.
+
+#### ClientApplication#coverImage
+
+`application.coverImage()` has been added.
+
+#### ClientApplication#createAsset
+
+`application.createAsset()` has been added.
+
+#### ClientApplication#fetchAssets
+
+`application.fetchAssets()` has been added.
