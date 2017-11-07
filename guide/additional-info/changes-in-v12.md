@@ -4,13 +4,13 @@ If you weren't already aware, v12 is constantly in development, and you can even
 
 The section headers for breaking changes will be named after the v11 classes/methods/properties and will be in alphabetical order, so that you can easily find what you're looking for. The section headers for additions will be named after the v12 classes/methods/properties, to reflect their current syntax appropriately.
 
-"Difference" codeblocks will be used to show you the old methods vs the newer ones—the red being what's been removed and the green being its replacement. Some bits may have more than one version of being handled.
+"Difference" codeblocks will be used to display the old methods vs the newer ones—the red being what's been removed and the green being its replacement. Some bits may have more than one version of being handled. Regular JavaScript syntax codeblocks will be used to display the additions. 
 
-<p class="danger">While this list has been carefully crafted, it may be incomplete! If you notice a pieces of missing or inaccurate data, we encourage you to [submit a pull request](https://github.com/Danktuary/Making-Bots-with-Discord.js)!</p>
+<p class="danger">While this list has been carefully crafted, it may be incomplete! If you notice pieces of missing or inaccurate data, we encourage you to [submit a pull request](https://github.com/Danktuary/Making-Bots-with-Discord.js)!</p>
 
 ## Legend
 
-* All headers are named as `Class#propertyOrMethod`
+* All section headers are named in the following convention: `Class#methodOrProperty`.
 * The use of parenthesis designates optional inclusion. For example, `Channel#fetch(Pinned)Message(s)` means that this section will include changes for `Channel#fetchPinnedMessages`, `Channel#fetchMessages`, and `Channel#fetchMessage`.
 * The use of asterisks designates a wildcard. For example, `Channel#send***` means that this section will include changes for `Channel#sendMessage`, `Channel#sendFile`, `Channel#sendEmbed`, and so forth.
 
@@ -50,7 +50,7 @@ The `Attachment` class has been removed in favor of the `MessageAttachment` clas
 
 #### Channel#send\*\*\*
 
-All the `.send***()` methods were removed in favor of one general `.send()` method.
+All the `.send***()` methods have been removed in favor of one general `.send()` method.
 
 ```diff
 - channel.sendMessage('Hey!');
@@ -170,7 +170,7 @@ The second and third parameters in `clientUser.createGuild()` have been changed/
 
 #### ClientUser#send\*\*\*
 
-Just like the `Channel#send***` methods, all the `.send***()` methods were removed in favor of one general `.send()` method. Read through the [Channel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
+Just like the `Channel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [Channel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
 
 #### ClientUser#setGame
 
@@ -423,7 +423,7 @@ The second, third, and fourth parameters in `member.hasPermission()` have been c
 
 #### GuildMember#send\*\*\*
 
-Just like the `Channel#send***` methods, all the `.send***()` methods were removed in favor of one general `.send()` method. Read through the [Channel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
+Just like the `Channel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [Channel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
 
 ### Message
 
@@ -595,7 +595,7 @@ The `RichEmbed` class has been removed in favor of the `MessageEmbed` class.
 
 #### TextChannel#createCollector
 
-`channel.createCollector()` has now been removed in favor of `channel.createMessageCollector()` (which was already available in v11.1). In addition, the `max` and `maxMatches` properties were renamed and repurposed. You can read more about that [here](/additional-info/changes-in-v12?id=messagecollectormaxmatches).
+`channel.createCollector()` has been removed in favor of `channel.createMessageCollector()`. In addition, the `max` and `maxMatches` properties were renamed and repurposed. You can read more about that [here](/additional-info/changes-in-v12?id=messagecollectormaxmatches).
 
 ```diff
 - channel.createCollector(filterFunction, { maxMatches: 2, max: 10, time: 15000 });
@@ -628,7 +628,7 @@ The `RichEmbed` class has been removed in favor of the `MessageEmbed` class.
 
 #### Webhook#send\*\*\*
 
-Just like the `Channel#send***` methods, all the `.send***()` methods were removed in favor of one general `.send()` method. Read through the [Channel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
+Just like the `Channel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [Channel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
 
 ---
 
