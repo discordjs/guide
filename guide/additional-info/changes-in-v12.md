@@ -31,7 +31,9 @@ The section headers for breaking changes will be named after the v11 classes/met
 * Message
 * MessageAttachment
 * MessageMentions
+* MessageReaction
 * OAuth2Application
+* PermissionOverwrites
 
 TODO LATER CUZ I DON'T WANNA TOUCH THAT SHIT RN:
 
@@ -632,21 +634,7 @@ Just like the `Channel#send***` methods, all the `.send***()` methods were remov
 
 ## Additions
 
-<p class="danger">This next bit is for me (Sanc) to keep track of the classes I've gone through and checked for additions. Remove before making the PR.</p>
-
-* DiscordAPIError
-* DMChannel
-* Emoji
-* GroupDMChannel
-* Guild
-* GuildAuditLogs
-* GuildAuditLogsEntry
-* GuildChannel
-* GuildMember
-* Invite
-* Message
-* MessageAttachment
-* MessageMentions
+<p class="warning">Remember to add examples for the additions.</p>
 
 ### Channel
 
@@ -783,3 +771,14 @@ guild.createChannel('Secret Voice Channel', 'voice', {
 #### ClientApplication#fetchAssets
 
 `application.fetchAssets()` has been added.
+
+### PermissionOverwrites
+
+#### PermissionOverwrites#allowed
+
+`permissionOverwrites.allowed` has been added.
+
+#### PermissionOverwrites#denied
+
+`permissionOverwrites.denied` has been added.
+
