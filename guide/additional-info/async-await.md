@@ -39,8 +39,8 @@ In this scenario the `deleteMessages` function returns a Promise. The `.then()` 
 
 ## How to implement async/await
 
-### Theory information
-The following Information are important to know before starting working with async/await. You can only use the await keyword inside a function what is marked as async (you call the async keyword before the function name, function keyword or the parameter when you use an arrow function) a simple example would be 
+### Theory
+The following Information are important to know before starting working with async/await. You can only use the await keyword inside a function that is declared as async (you put the async keyword before the  function keyword or the parameter when you use an arrow function) a simple example would be:
 ```js
 async function markedAsAsync() {
 	// code
@@ -52,11 +52,11 @@ async () => {
 	// code
 }
 ```
-also an important thing to know is that a function marked as async will always return a Promise. In addition to this if you return something inside a async function this value will be the resolved value and if you throw an error inside an async function it will reject this Promise with the error object. 
+Also an important thing to know, is that a function declared as async will always return a Promise. In addition to this, if you return something inside a async function the returned promise will resolve with that value and if you throw an error inside an async function it will reject the Promise with the error object. 
 
 
 ### Execution with discord.js code
-After knowing how Promises works and what they are for aswell as about the theory information, let's look at an example in which we handle multiple Promises. Let's say you wanted to react to a message in a certain order with letters (regional indicators). For this example, I will take the basic template for a discord.js bot with some ES6 adjustments.
+After knowing how Promises works and what they are for as well as about the theory, let's look at an example in which we'll handle multiple Promises. Let's say you want to react with letters (regional indicators) in a certain order. For this example, you will take the basic template for a discord.js bot with some ES6 adjustments.
 
 ```js
 const Discord = require('discord.js');
