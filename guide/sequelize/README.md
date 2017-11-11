@@ -208,7 +208,7 @@ if (affectedRows > 0) {
 return msg.reply(`Could not find a tag with name ${tagName}.`);
 ```
 
-We can edit a record by using the `.update()` function. The result from the update is the number of rows that were changed by the where condition. Since we can only have tags with unique names, we don't have to worry about how many rows it may change. And if we get that no rows were changed, then we can conclude that the tag that was trying to be edited did not exist.
+We can edit a record by using the `.update()` function. The result from the update is the number of rows that were changed by the `where` condition. Since we can only have tags with unique names, we don't have to worry about how many rows it may change. And if we get that no rows were changed, then we can conclude that the tag that was trying to be edited did not exist.
 
 ### [theta] Display info on a specific tag
 
