@@ -15,7 +15,7 @@ const args = message.content.slice(prefix.length).split(' ');
 const command = args.shift().toLowerCase();
 ```
 
-1. If the message either doesn't start with the prefix or was sent by a bot, `return`.
+1. If the message either doesn't start with the prefix or was sent by a bot, exit early.
 2. Create an `args` variable that slices off the prefix entirely and then splits it into an array by spaces.
 3. Create a `command` variable by calling `args.shift()`, which will take the first element in array and return it while also removing it from the original array (so that you don't have the command name string inside the `args` array).
 
