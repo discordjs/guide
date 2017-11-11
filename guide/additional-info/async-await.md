@@ -40,7 +40,7 @@ In this scenario the `deleteMessages` function returns a Promise. The `.then()` 
 ## How to implement async/await
 
 ### Theory
-The following Information are important to know before starting working with async/await. You can only use the await keyword inside a function that is declared as async (you put the async keyword before the  function keyword or the parameter when you use an arrow function) a simple example would be:
+The following Information are important to know before starting working with async/await. You can only use the await keyword inside a function that is declared as async (you put the async keyword before the function keyword or the parameter when you use an arrow function) a simple example would be:
 ```js
 async function markedAsAsync() {
 	// code
@@ -52,7 +52,7 @@ async () => {
 	// code
 }
 ```
-Also an important thing to know, is that a function declared as async will always return a Promise. In addition to this, if you return something inside a async function the returned promise will resolve with that value and if you throw an error inside an async function it will reject the Promise with the error object. 
+Also an important thing to know, is that a function declared as async will always return a Promise. In addition to this, if you return something the Promise will resolve with that value and if you throw an error it will reject the Promise with this error. 
 
 
 ### Execution with discord.js code
