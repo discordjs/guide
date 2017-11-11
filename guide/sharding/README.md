@@ -1,11 +1,11 @@
 ## Should I shard?
 
-Before you dive in this section, please ask yourself this question. Sharding is only necessary at 2500 guilds - at that point, Discord will not allow your bot to login. With that in mind, you should consider this when your bot is around 2000 guilds, which should be enough time to get this working. Contrary to popular belief, sharding itself is very simple. It can be complex depending on your bot's needs, however. So, if you meet the 2000 guild requirement, please continue with this guide, otherwise, maybe you should wait a bit! Without further ado, let's get started.
+Before you dive in this section, please ask yourself this question. Sharding is only necessary at 2500 guilds—at that point, Discord will not allow your bot to login. With that in mind, you should consider this when your bot is around 2000 guilds, which should be enough time to get this working. Contrary to popular belief, sharding itself is very simple. It can be complex depending on your bot's needs, however. So, if you meet the 2000 guild requirement, please continue with this guide, otherwise, maybe you should wait a bit! Without further ado, let's get started.
 
 ### How does sharding work?
 
 As an application grows large, developers may find it necessary to split their process up to run parallel to one another in order to maximize efficiency. In a much larger scale of things, the developer might notice their process slow down, amongst other problems.
-[Sharding with Discord Bots](https://discordapp.com/developers/docs/topics/gateway#sharding)
+[Check out the official Discord Documentation on the topic.](https://discordapp.com/developers/docs/topics/gateway#sharding)
 
 ### Sharding file
 
@@ -13,7 +13,11 @@ First, you'll need to have a file that you'll be launching from now on, rather t
 
 ```js
 const { ShardingManager } = require('discord.js');
-const manager = new ShardingManager('./bot.js', { totalShards: 'auto', token: 'your-token-goes-here' });
+const manager = new ShardingManager('./bot.js', {
+	totalShards: 'auto',
+	token: 'your-token-goes-here',
+});
+
 manager.spawn();
 manager.on('launch', shard => console.log(`Launched shard ${shard.id}`));
 ```
@@ -40,7 +44,7 @@ client.on('message', message => {
 client.login('token');
 ```
 
-Let's say your bot is in a total of 3,600 guilds. With the recommended shard count, you might be in 4 shards, the first 3 containing 1,000 guilds each, and the last one containing the remaining 600. If a guild on a certain shard (shard #2, for example) and it receives this command, the guild count will be 1,000, which is obviously not the "correct" number of guilds for your bot. Likewise, if the message is received on a guild in shard 3, (shards go up from 0 to n), the guild count will be 600, which is still not what you want. "How can I fix this?", you ask? Well, that's why we're here, isn't it?
+Let's say your bot is in a total of 3,600 guilds. With the recommended shard count, you might be in 4 shards, the first 3 containing 1,000 guilds each, and the last one containing the remaining 600. If a guild on a certain shard (shard #2, for example) and it receives this command, the guild count will be 1,000, which is obviously not the "correct" number of guilds for your bot. Likewise, if the message is received on a guild in shard 3, (shard IDs are zero-indexed), the guild count will be 600, which is still not what you want. "How can I fix this?", you ask? Well, that's why we're here, isn't it?
 
 ### BroadcastEval
 
@@ -52,7 +56,7 @@ Now, take the following snippet of code:
 client.shard.broadcastEval('this.guilds.size').then(console.log);
 ```
 
-If you run it, you will notice an output like `[1000, 1000, 1000, 600]`. You will be correct in assuming that that's the total number of guilds per shard, which is stored in an array in the Promise. We can both assume this isn't the ideal output for guild count, so we will need to make use of an array manipulation method - specifically [Array.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce).
+If you run it, you will notice an output like `[1000, 1000, 1000, 600]`. You will be correct in assuming that that's the total number of guilds per shard, which is stored in an array in the Promise. We can both assume this isn't the ideal output for guild count, so we will need to make use of an array manipulation method—specifically [Array.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce).
 
 It's highly urged for you to visit that link to understand how the method works, as you will probably find great use of it in sharding. Basically, this method (in this case) iterates through the array and adds each current value to the total amount.
 

@@ -33,7 +33,10 @@ This code snippet will ask the first shard (0) to restart. Remember, [Shard#Broa
 Take the following code snippet for example, with some _shardArgs_ passed to it.
 
 ```js
-const manager = new ShardingManager('./bot.js', { shardArgs: ['--ansi', '--color', '--trace-warnings'], token });
+const manager = new ShardingManager('./bot.js', { 
+	shardArgs: [ '--ansi', '--color', '--trace-warnings'],
+	token: 'your-token-goes-here',
+});
 ```
 
 The shardArgs are what you would normally pass if you ran your bot without sharding, like so: `node bot.js --ansi --color --trace-warnings`, and are available in `process.argv`, which contain an array of command line arguments used to execute the script.
