@@ -14,7 +14,7 @@ Once you fill out and submit the form, you should see a page like this:
 
 On that same page, click the "Create a Bot User" button.
 
-Congratulations, you're now the proud owner of a shiny new Discord bot! you're not quite done, though.
+Congratulations, you're now the proud owner of a shiny new Discord bot! You're not quite done, though.
 
 ## Your token
 
