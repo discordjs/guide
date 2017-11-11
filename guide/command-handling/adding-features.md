@@ -295,7 +295,7 @@ data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a spec
 
 There's nothing really complex here; all you do is append some strings, `.map()` over the `commands` Collection, and add an additional string to let the user know how to trigger information about a specific command.
 
-Inside the else bit, it is a bit more code, but not too much.
+There's a bit more code in the `else` block, but nothing complicated.
 
 ```js
 if (!commands.has(args[0])) {
@@ -331,7 +331,7 @@ message.author.send(data, { split: true })
 
 Because the `data` variable is an array, you can take advantage of discord.js' functionality where it will `.join()` any array sent with a `\n` character. If you prefer to not rely on that in the off chance that it changes in the future, you can simply append `.join('\n')` to the end of that yourself.
 
-If you weren't already aware, `.send()` takes 2 parameters: the content to send, and the message options to pass in. You can read about the MessageOptions type [here](https://discord.js.org/#/docs/main/stable/typedef/MessageOptions). Using `split: true` here will automatically split our help message into 2 or more messages in the case that it reaches the 2,000 character limit.
+If you weren't already aware, `.send()` takes 2 parameters: the content to send, and the message options to pass in. You can read about the MessageOptions type [here](https://discord.js.org/#/docs/main/stable/typedef/MessageOptions). Using `split: true` here will automatically split our help message into 2 or more messages in the case that it exceeds the 2,000 character limit.
 
 The only thing you use `.then()` here for is to let them know when you're done sending (but only if the message isn't already inside a DM, or else you'd be sending another unnecessary message).
 

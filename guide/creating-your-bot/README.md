@@ -1,6 +1,6 @@
 ## Getting your bot up & running
 
-We're finally getting to the exciting parts! Since your bot is in your server now, the next step is to get it online and start coding!
+We're finally getting to the exciting parts! Since your bot is in your server now, the next step is to start coding and get it online!
 
 ### Creating the bot file
 
