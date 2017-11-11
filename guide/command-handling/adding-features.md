@@ -295,7 +295,7 @@ data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a spec
 
 There's nothing really complex here; all you do is append some strings, `.map()` over the `commands` Collection, and add an additional string to let the user know how to trigger information about a specific command.
 
-Inside the else bit, it is a bit more code, but not too much.
+There's a bit more code in the `else` block, but nothing complicated.
 
 ```js
 if (!commands.has(args[0])) {
