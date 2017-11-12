@@ -40,7 +40,7 @@ In this scenario the `deleteMessages` function returns a Promise. The `.then()` 
 ## How to implement async/await
 
 ### Theory
-The following Information are important to know before starting working with async/await. You can only use the await keyword inside a function that is declared as async (you put the async keyword before the function keyword or the parameter when you use an arrow function) a simple example would be:
+The following information are important to know before starting working with async/await. You can only use the await keyword inside a function that is declared as async (you put the async keyword before the function keyword or the parameter when you use an arrow function) a simple example would be:
 ```js
 async function markedAsAsync() {
 	// code
@@ -52,11 +52,11 @@ async () => {
 	// code
 }
 ```
-Also an important thing to know, is that a function declared as async will always return a Promise. In addition to this, if you return something the Promise will resolve with that value and if you throw an error it will reject the Promise with this error. 
+Also an important thing to know, is that a function declared as async will always return a Promise. In addition to this, if you return something the Promise will resolve with that value and if you throw an error it will reject the Promise with that error. 
 
 
 ### Execution with discord.js code
-After knowing how Promises works and what they are for as well as about the theory, let's look at an example in which we'll handle multiple Promises. Let's say you want to react with letters (regional indicators) in a certain order. For this example, you will take the basic template for a discord.js bot with some ES6 adjustments.
+After knowing how Promises work and what they are for, as well as about the theory, let's look at an example in which we'll handle multiple Promises. Let's say you want to react with letters (regional indicators) in a certain order. For this example, you will take the basic template for a discord.js bot with some ES6 adjustments.
 
 ```js
 const Discord = require('discord.js');
