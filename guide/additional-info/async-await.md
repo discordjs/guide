@@ -35,25 +35,35 @@ deleteMessages(5).then(value => {
 });
 ```
 
-In this scenario the `deleteMessages` function returns a Promise. The `.then()` method will trigger if the Promise was resolved and the `.catch()` method if the Promise was rejected. But with our function we resolve the Promise after 2 seconds with the String "Everything is fine", so the `.catch()` method will never be executed.
+In this scenario, the `deleteMessages` function returns a Promise. The `.then()` method will trigger if the Promise was resolved, and the `.catch()` method if the Promise was rejected. But with our function, we resolve the Promise after 2 seconds with the String "Everything is fine", so the `.catch()` method will never be executed.
 
 ## How to implement async/await
 
 ### Theory
-The following information are important to know before starting working with async/await. You can only use the await keyword inside a function that is declared as async (you put the async keyword before the function keyword or the parameter when you use an arrow function) a simple example would be:
+The following information is important to know before starting working with async/await. You can only use the `await` keyword inside a function that is declared as `async` (you put the async keyword before the function keyword or before the parameters when using a callback function). 
+
+A simple example would be:
 ```js
-async function markedAsAsync() {
+async function declaredAsync() {
 	// code
 }
 ``` 
 or 
 ```js 
-async () => {
+const declaredAsAsync = async () => {
 	// code
 }
 ```
-Also an important thing to know, is that a function declared as async will always return a Promise. In addition to this, if you return something the Promise will resolve with that value and if you throw an error it will reject the Promise with that error. 
 
+you can use that aswell if you use the Arrow function as a event listener function.
+
+```js
+client.on('event', async (first, last) => {
+	// code
+})
+```
+
+An important thing to know is that a function declared as async will always return a Promise. In addition to this, if you return something, the Promise will resolve with that value, and if you throw an error, it will reject the Promise with that error.
 
 ### Execution with discord.js code
 After knowing how Promises work and what they are for, as well as about the theory, let's look at an example in which we'll handle multiple Promises. Let's say you want to react with letters (regional indicators) in a certain order. For this example, you will take the basic template for a discord.js bot with some ES6 adjustments.
