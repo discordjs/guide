@@ -50,7 +50,7 @@ if (member.roles.exists('name', '<role name>')) {
 ### How do I set my avatar?
 
 ```js
-<client>.user.setAvatar('<nickname>');
+<client>.user.setAvatar('<url or path>');
 ```
 
 ### How do I set my playing status?
