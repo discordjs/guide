@@ -62,7 +62,7 @@ client.on('message', async msg => {
 	else if (command === 'transfer') {
 
 		const currentAmount = currency.getBalance(msg.author.id);
-		const transferAmount = commandArgs.split(/\s+/g).find(t => !/<@!?\d+>/g.test(t));
+		const transferAmount = commandArgs.split(/\s+/g).find(arg => !/<@!?\d+>/g.test(arg));
 		const transferTarget = msg.mentions.users.first();
 
 		if (!transferAmount || isNaN(transferAmount)) return msg.channel.send(`Sorry ${msg.author}, that's an invalid amount`);
