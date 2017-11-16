@@ -38,7 +38,7 @@ client.once('ready', () => {
 	Tags.sync();
 });
 
-client.on('message', async (msg) => {
+client.on('message', async(msg) => {
 	if (msg.content.startsWith(PREFIX)) {
 		const input = msg.content.slice(PREFIX.length).split(' ');
 		const command = input.shift();

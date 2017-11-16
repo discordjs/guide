@@ -77,8 +77,8 @@ client.on('message', async msg => {
 	}
 	else if (command === 'buy') {
 
-		const item = await CurrencyShop.findOne({ where: { name: {$iLike: commandArgs} } });
-		if (!item) return msg.channel.send(`That item doesn't exist.`);
+		const item = await CurrencyShop.findOne({ where: { name: { $iLike: commandArgs } } });
+		if (!item) return msg.channel.send('That item doesn\'t exist.');
 		if (item.cost > currency.getBalance(msg.author.id)) {
 			return msg.channel.send(`You don't have enough currency, ${msg.author}`);
 		}
