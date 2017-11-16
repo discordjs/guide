@@ -26,7 +26,7 @@ Reflect.defineProperty(currency, 'getBalance', {
 	},
 });
 
-client.once('ready', async () => {
+client.once('ready', async() => {
 	const storedBalances = await Users.findAll();
 	storedBalances.forEach(b => {
 		currency.set(b.user_id, b);
@@ -68,12 +68,12 @@ client.on('message', async msg => {
 		if (!transferAmount || isNaN(transferAmount)) return msg.channel.send(`Sorry ${msg.author}, that's an invalid amount`);
 		if (transferAmount > currentAmount) return msg.channel.send(`Sorry ${msg.author} you don't have that much.`);
 		if (transferAmount <= 0) return msg.channel.send(`Please enter an amount greater than zero, ${msg.author}`);
-		
+
 		currency.add(msg.author.id, -transferAmount);
 		currency.add(transferTarget.id, transferAmount);
 
 		return msg.channel.send(`Successfully transferred ${transferAmount}💰 to ${transferTarget.tag}. Your current balance is ${currency.getBalance(msg.author.id)}💰`);
-		
+
 	}
 	else if (command === 'buy') {
 
@@ -102,10 +102,10 @@ client.on('message', async msg => {
 
 		return msg.channel.send('```' +
 			Array.from(currency.entries()).sort((a, b) => b[1].balance - a[1].balance)
-			.filter((u) => client.users.get(u[0]))
-			.slice(0, 10)
-			.map((v, k) => `(${k + 1}) ${(client.users.get(v[0]).tag)}: ${v[1].balance}💰`)
-			.join('\n')
+				.filter((u) => client.users.get(u[0]))
+				.slice(0, 10)
+				.map((v, k) => `(${k + 1}) ${(client.users.get(v[0]).tag)}: ${v[1].balance}💰`)
+				.join('\n')
 		+ '```');
 
 	}
