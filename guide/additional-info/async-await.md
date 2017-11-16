@@ -40,11 +40,11 @@ In this scenario, the `deleteMessages` function returns a Promise. The `.then()`
 ## How to implement async/await
 
 ### Theory
-The following information is important to know before starting working with async/await. You can only use the `await` keyword inside a function that is declared as `async` (you put the async keyword before the function keyword or before the parameters when using a callback function). 
+The following information is important to know before working with async/await. You can only use the `await` keyword inside a function that is declared as `async` (you put the async keyword before the function keyword or before the parameters when using a callback function). 
 
 A simple example would be:
 ```js
-async function declaredAsync() {
+async function declaredAsAsync() {
 	// code
 }
 ``` 
@@ -55,7 +55,7 @@ const declaredAsAsync = async () => {
 }
 ```
 
-you can use that aswell if you use the Arrow function as a event listener function.
+You can use that as well if you use the arrow function as an event listener.
 
 ```js
 client.on('event', async (first, last) => {
