@@ -11,7 +11,7 @@ client.on('message', message => {
 
 	const args = message.content.slice(prefix.length).split(/\s+/);
 	const command = args.shift().toLowerCase();
-	
+
 	if (command === 'ping') {
 		message.channel.send('Pong.');
 	}
@@ -38,7 +38,7 @@ client.on('message', message => {
 		if (!message.mentions.users.size) {
 			return message.reply('you need to tag a user in order to kick them!');
 		}
-		
+
 		const taggedUser = message.mentions.users.first();
 
 		message.channel.send(`You wanted to kick: ${taggedUser.username}`);
@@ -63,7 +63,7 @@ client.on('message', message => {
 		else if (amount <= 1 || amount > 100) {
 			return message.reply('you need to input a number between 1 and 99.');
 		}
-		
+
 		message.channel.bulkDelete(amount, true).catch(err => {
 			console.error(err);
 			message.channel.send('there was an error trying to prune messages in this channel!');

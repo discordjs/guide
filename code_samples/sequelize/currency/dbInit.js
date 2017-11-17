@@ -8,7 +8,7 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 });
 
 const CurrencyShop = sequelize.import('models/CurrencyShop');
-sequelize.import('models/Users')
+sequelize.import('models/Users');
 sequelize.import('models/UserItems');
 
 sequelize.sync().then(async () => {

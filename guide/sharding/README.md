@@ -13,10 +13,7 @@ First, you'll need to have a file that you'll be launching from now on, rather t
 
 ```js
 const { ShardingManager } = require('discord.js');
-const manager = new ShardingManager('./bot.js', {
-	totalShards: 'auto',
-	token: 'your-token-goes-here',
-});
+const manager = new ShardingManager('./bot.js', { token: 'your-token-goes-here' });
 
 manager.spawn();
 manager.on('launch', shard => console.log(`Launched shard ${shard.id}`));
