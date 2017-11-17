@@ -11,7 +11,7 @@ const CurrencyShop = sequelize.import('models/CurrencyShop');
 sequelize.import('models/Users');
 sequelize.import('models/UserItems');
 
-sequelize.sync().then(async() => {
+sequelize.sync().then(async () => {
 
 	const shop = [
 		CurrencyShop.upsert({ name: 'Tea', cost: 1 }),
