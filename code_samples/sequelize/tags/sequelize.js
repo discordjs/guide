@@ -38,9 +38,9 @@ client.once('ready', () => {
 	Tags.sync();
 });
 
-client.on('message', async(msg) => {
-	if (msg.content.startsWith(PREFIX)) {
-		const input = msg.content.slice(PREFIX.length).split(' ');
+client.on('message', async message => {
+	if (message.content.startsWith(PREFIX)) {
+		const input = message.content.slice(PREFIX.length).split(' ');
 		const command = input.shift();
 		const commandArgs = input.join(' ');
 
@@ -54,15 +54,15 @@ client.on('message', async(msg) => {
 				const tag = await Tags.create({
 					name: tagName,
 					description: tagDescription,
-					username: msg.author.username,
+					username: message.author.username,
 				});
-				return msg.reply(`Tag ${tag.name} added.`);
+				return message.reply(`Tag ${tag.name} added.`);
 			}
 			catch (e) {
 				if (e.name === 'SequelizeUniqueConstraintError') {
-					return msg.reply('That tag already exists.');
+					return message.reply('That tag already exists.');
 				}
-				return msg.reply('Something went wrong with adding a tag.');
+				return message.reply('Something went wrong with adding a tag.');
 			}
 		}
 		else if (command === 'tag') {
@@ -73,9 +73,9 @@ client.on('message', async(msg) => {
 			if (tag) {
 				// equivalent to: UPDATE tags SET usage_count = usage_count + 1 WHERE name = 'tagName';
 				tag.increment('usage_count');
-				return msg.channel.send(tag.get('description'));
+				return message.channel.send(tag.get('description'));
 			}
-			return msg.reply(`Could not find tag: ${tagName}`);
+			return message.reply(`Could not find tag: ${tagName}`);
 		}
 		else if (command === 'edittag') {
 			const splitArgs = commandArgs.split(' ');
@@ -85,9 +85,9 @@ client.on('message', async(msg) => {
 			// equivalent to: UPDATE tags (descrption) values (?) WHERE name = ?;
 			const affectedRows = await Tags.update({ description: tagDescription }, { where: { name: tagName } });
 			if (affectedRows > 0) {
-				return msg.reply(`Tag ${tagName} was edited.`);
+				return message.reply(`Tag ${tagName} was edited.`);
 			}
-			return msg.reply(`Could not find a tag with name ${tagName}.`);
+			return message.reply(`Could not find a tag with name ${tagName}.`);
 		}
 		else if (command === 'taginfo') {
 			const tagName = commandArgs;
@@ -95,23 +95,23 @@ client.on('message', async(msg) => {
 			// equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
 			const tag = await Tags.findOne({ where: { name: tagName } });
 			if (tag) {
-				return msg.channel.send(`${tagName} was created by ${tag.username} at ${tag.createdAt} and has been used ${tag.usage_count} times.`);
+				return message.channel.send(`${tagName} was created by ${tag.username} at ${tag.createdAt} and has been used ${tag.usage_count} times.`);
 			}
-			return msg.reply(`Could not find tag: ${tagName}`);
+			return message.reply(`Could not find tag: ${tagName}`);
 		}
 		else if (command === 'showtags') {
 			// equivalent to: SELECT name FROM tags;
 			const tagList = await Tags.findAll({ attributes: ['name'] });
 			const tagString = tagList.map(t => t.name).join(', ') || 'No tags set.';
-			return msg.channel.send(`List of tags: ${tagString}`);
+			return message.channel.send(`List of tags: ${tagString}`);
 		}
 		else if (command === 'removetag') {
 			// equivalent to: DELETE from tags WHERE name = ?;
 			const tagName = commandArgs;
 			const rowCount = await Tags.destroy({ where: { name: tagName } });
-			if (!rowCount) return msg.reply('That tag did not exist.');
+			if (!rowCount) return message.reply('That tag did not exist.');
 
-			return msg.reply('Tag deleted.');
+			return message.reply('Tag deleted.');
 		}
 	}
 });

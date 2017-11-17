@@ -197,12 +197,12 @@ client.once('ready', async () => {
 	console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('message', async msg => {
-	if (msg.author.bot) return;
-	currency.add(msg.author.id, 1);
+client.on('message', async message => {
+	if (message.author.bot) return;
+	currency.add(message.author.id, 1);
 
-	if (!msg.content.startsWith(PREFIX)) return;
-	const input = msg.content.slice(PREFIX.length).trim();
+	if (!message.content.startsWith(PREFIX)) return;
+	const input = message.content.slice(PREFIX.length).trim();
 	if (!input.length) return;
 	const [, command, commandArgs] = input.match(/(\w+)\s*([\s\S]*)/);
 
@@ -270,8 +270,8 @@ In our ready event, we want to sync our currency collection with the database fo
 ### [gamma] Show user balance 
 
 ```js
-const target = msg.mentions.users.first() || msg.author;
-return msg.channel.send(`${target.tag} has ${currency.getBalance(target.id)}💰`);
+const target = message.mentions.users.first() || message.author;
+return message.channel.send(`${target.tag} has ${currency.getBalance(target.id)}💰`);
 ```
 
 Nothing tricky here. We use our `.getBalance()` method to show either the author's or the mentioned user's balance
@@ -279,30 +279,30 @@ Nothing tricky here. We use our `.getBalance()` method to show either the author
 ### [delta] Show user inventory
 
 ```js
-const target = msg.mentions.users.first() || msg.author;
+const target = message.mentions.users.first() || message.author;
 const user = await Users.findByPrimary(target.id);
 const items = await user.getItems();
 
-if (!items.length) msg.channel.send(`${target.tag} has nothing!`);
-return msg.channel.send(`${target.tag} currently has ${items.map(i => `${i.amount} ${i.item.name}`).join(', ')}`);
+if (!items.length) message.channel.send(`${target.tag} has nothing!`);
+return message.channel.send(`${target.tag} currently has ${items.map(i => `${i.amount} ${i.item.name}`).join(', ')}`);
 ```
 Here we begin to see the power of associations. Even though users and the shop are different tables, and the data is stored separately, we can get a user's inventory by looking at the junction table and join it with the shop. No duplicated item names that waste space!
 
 ### [epsilon] Transfer currency to another user
 
 ```js
-const currentAmount = currency.getBalance(msg.author.id);
+const currentAmount = currency.getBalance(message.author.id);
 const transferAmount = commandArgs.split(/\s+/g).find(arg => !/<@!?\d+>/g.test(arg));
-const transferTarget = msg.mentions.users.first();
+const transferTarget = message.mentions.users.first();
 
-if (!transferAmount || isNaN(transferAmount)) return msg.channel.send(`Sorry ${msg.author}, that's an invalid amount.`);
-if (transferAmount > currentAmount) return msg.channel.send(`Sorry ${msg.author}, you only have ${currentAmount}.`);
-if (transferAmount <= 0) return msg.channel.send(`Please enter an amount greater than zero, ${msg.author}.`);
+if (!transferAmount || isNaN(transferAmount)) return message.channel.send(`Sorry ${message.author}, that's an invalid amount.`);
+if (transferAmount > currentAmount) return message.channel.send(`Sorry ${message.author}, you only have ${currentAmount}.`);
+if (transferAmount <= 0) return message.channel.send(`Please enter an amount greater than zero, ${message.author}.`);
 
-currency.add(msg.author.id, -transferAmount);
+currency.add(message.author.id, -transferAmount);
 currency.add(transferTarget.id, transferAmount);
 
-return msg.channel.send(`Successfully transferred ${transferAmount}💰 to ${transferTarget.tag}. Your current balance is ${currency.getBalance(msg.author.id)}💰`);
+return message.channel.send(`Successfully transferred ${transferAmount}💰 to ${transferTarget.tag}. Your current balance is ${currency.getBalance(message.author.id)}💰`);
 ```
 As a bot creator, you should always be thinking about how to make the user experience better. Good UX makes users less frustrated with your commands. If your input are different types, don't make them memorize which parameters come before the other.
 
@@ -314,16 +314,16 @@ We use `.add()` for both removing and adding currency. Since we already check if
 
 ```js
 const item = await CurrencyShop.findOne({ where: { name: { $like: commandArgs } } });
-if (!item) return msg.channel.send(`That item doesn't exist.`);
-if (item.cost > currency.getBalance(msg.author.id)) {
-	return msg.channel.send(`You currently have ${currency.getBalance(msg.author.id)}, but the ${item.name} costs ${item.cost}!`);
+if (!item) return message.channel.send(`That item doesn't exist.`);
+if (item.cost > currency.getBalance(message.author.id)) {
+	return message.channel.send(`You currently have ${currency.getBalance(message.author.id)}, but the ${item.name} costs ${item.cost}!`);
 }
 
-const user = await Users.findByPrimary(msg.author.id);
-currency.add(msg.author.id, -item.cost);
+const user = await Users.findByPrimary(message.author.id);
+currency.add(message.author.id, -item.cost);
 await user.addItem(item);
 
-msg.channel.send(`You've bought: ${item.name}.`);
+message.channel.send(`You've bought: ${item.name}.`);
 ```
 
 In order for users to search for an item without having to care about case, we use the `$like` modifier when we're looking for the name. Keep in mind that this may be slow if you have millions of items, so please don't put a million items in your shop. 
@@ -332,20 +332,20 @@ In order for users to search for an item without having to care about case, we u
 
 ```js
 const items = await CurrencyShop.findAll();
-return msg.channel.send(items.map(item => `${item.name}: ${item.cost}💰`).join('\n'), { code: true });
+return message.channel.send(items.map(item => `${item.name}: ${item.cost}💰`).join('\n'), { code: true });
 ```
 Nothing special here, just a regular `.findAll()` to get all the items in the shop, and `.map()` to transform that data into something nice looking.
 
 ### [lambda] Display the leaderboard
 
 ```js
-return msg.channel.send(
+return message.channel.send(
 	currency.sort((a, b) => b.balance - a.balance)
-	.filter(user => client.users.has(user.user_id))
-	.first(10)
-	.map((user, position) => `(${position + 1}) ${(client.users.get(user.user_id).tag)}: ${user.balance}💰`)
-	.join('\n')
-, { code: true });
+		.filter(user => client.users.has(user.user_id))
+		.first(10)
+		.map((user, position) => `(${position + 1}) ${(client.users.get(user.user_id).tag)}: ${user.balance}💰`)
+		.join('\n'),
+	{ code: true });
 ```
 
 Nothing particularly special here either. We could have queried the database for the top 10 currency holders as well, but we already have access to them locally, so just sort the Collection we have and use map again to display in a nice format. The filter is in case the users no longer exist in the bot's cache.

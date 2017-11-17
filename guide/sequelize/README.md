@@ -37,9 +37,9 @@ client.once('ready', () => {
 	// [gamma]
 });
 
-client.on('message', async msg => {
-	if (msg.content.startsWith(PREFIX)) {
-		const input = msg.content.slice(PREFIX.length).split(' ');
+client.on('message', async message => {
+	if (message.content.startsWith(PREFIX)) {
+		const input = message.content.slice(PREFIX.length).split(' ');
 		const command = input.shift();
 		const commandArgs = input.join(' ');
 
@@ -155,15 +155,15 @@ try {
 	const tag = await Tags.create({
 		name: tagName,
 		description: tagDescription,
-		username: msg.author.username,
+		username: message.author.username,
 	});
-	return msg.reply(`Tag ${tag.name} added.`);
+	return message.reply(`Tag ${tag.name} added.`);
 }
 catch (e) {
 	if (e.name === 'SequelizeUniqueConstraintError') {
-		return msg.reply('That tag already exists.');
+		return message.reply('That tag already exists.');
 	}
-	return msg.reply('Something went wrong with adding a tag.');
+	return message.reply('Something went wrong with adding a tag.');
 }
 ```
 
@@ -185,9 +185,9 @@ const tag = await Tags.findOne({ where: { name: tagName } });
 if (tag) {
 	// equivalent to: UPDATE tags SET usage_count = usage_count + 1 WHERE name = 'tagName';
 	tag.increment('usage_count');
-	return msg.channel.send(tag.get('description'));
+	return message.channel.send(tag.get('description'));
 }
-return msg.reply(`Could not find tag: ${tagName}`);
+return message.reply(`Could not find tag: ${tagName}`);
 ```
 
 This is our first query. We're finally doing something with our data, yay!  
@@ -203,9 +203,9 @@ const tagDescription = splitArgs.join(' ');
 // equivalent to: UPDATE tags (descrption) values (?) WHERE name='?';
 const affectedRows = await Tags.update({ description: tagDescription }, { where: { name: tagName } });
 if (affectedRows > 0) {
-	return msg.reply(`Tag ${tagName} was edited.`);
+	return message.reply(`Tag ${tagName} was edited.`);
 }
-return msg.reply(`Could not find a tag with name ${tagName}.`);
+return message.reply(`Could not find a tag with name ${tagName}.`);
 ```
 
 We can edit a record by using the `.update()` function. The result from the update is the number of rows that were changed by the `where` condition. Since we can only have tags with unique names, we don't have to worry about how many rows it may change. And if we get that no rows were changed, then we can conclude that the tag that was trying to be edited did not exist.
@@ -218,9 +218,9 @@ const tagName = commandArgs;
 // equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
 const tag = await Tags.findOne({ where: { name: tagName } });
 if (tag) {
-	return msg.channel.send(`${tagName} was created by ${tag.username} at ${tag.createdAt} and has been used ${tag.usage_count} times.`);
+	return message.channel.send(`${tagName} was created by ${tag.username} at ${tag.createdAt} and has been used ${tag.usage_count} times.`);
 }
-return msg.reply(`Could not find tag: ${tagName}`);
+return message.reply(`Could not find tag: ${tagName}`);
 ```
 This section is very similar to our previous command, except we're showing the tag metadata. `tag` contains our tag object. Notice two things here: firstly, we can access our object properties without the `.get()` function. This is because the object is an instance of a Tag, which we can treat as an object, and not just a row of data. Second, we accessed a property that we didn't define, `createdAt`. This is because Sequelize automatically adds that column to all tables. We can turn this feature off by passing another object into our model with `{ createdAt: false }`, but in this case, it was useful to have.
 
@@ -232,7 +232,7 @@ We'll use the next command to fetch a list of all the tags we've created so far.
 // equivalent to: SELECT name FROM tags;
 const tagList = await Tags.findAll({ attributes: ['name'] });
 const tagString = tagList.map(t => t.name).join(', ') || 'No tags set.';
-return msg.channel.send(`List of tags: ${tagString}`);
+return message.channel.send(`List of tags: ${tagString}`);
 ```
 
 Here, we use the `.findAll()` method to grab all the tag names. Notice that instead of having `where`, we have set the optional field, `attributes`. Setting attribute to name will let us get *only* the names of tags. If we tried to access other fields, like the tag author, then we'll get an error. If left blank, it will fetch *all* of our associated column data. It won't actually affect our results, but from a performance perspective, we should only grab the data that we need. If we get no results, `tagString` will default to 'No tags set'.
@@ -243,9 +243,9 @@ Here, we use the `.findAll()` method to grab all the tag names. Notice that inst
 const tagName = commandArgs;
 // equivalent to: DELETE from tags WHERE name = ?;
 const rowCount = await Tags.destroy({ where: { name: tagName } });
-if (!rowCount) return msg.reply('That tag did not exist.');
+if (!rowCount) return message.reply('That tag did not exist.');
 
-return msg.reply('Tag deleted.');
+return message.reply('Tag deleted.');
 ```
 `.destroy()` runs the delete operation. The operation returns a count of the number of affected rows. If it returns with a value of 0, we know nothing was deleted, and that tag didn't exist in the database in the first place.
 
