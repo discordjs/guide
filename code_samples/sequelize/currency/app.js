@@ -28,9 +28,7 @@ Reflect.defineProperty(currency, 'getBalance', {
 
 client.once('ready', async () => {
 	const storedBalances = await Users.findAll();
-	storedBalances.forEach(b => {
-		currency.set(b.user_id, b);
-	});
+	storedBalances.forEach(b => currency.set(b.user_id, b));
 	console.log(`Logged in as ${client.user.tag}!`);
 });
 
@@ -62,7 +60,7 @@ client.on('message', async message => {
 	else if (command === 'transfer') {
 
 		const currentAmount = currency.getBalance(message.author.id);
-		const transferAmount = commandArgs.split(/\s+/g).find(arg => !/<@!?\d+>/g.test(arg));
+		const transferAmount = commandArgs.split(/\s+/).find(arg => !/<@!?\d+>/.test(arg));
 		const transferTarget = message.mentions.users.first();
 
 		if (!transferAmount || isNaN(transferAmount)) return message.channel.send(`Sorry ${message.author}, that's an invalid amount`);
@@ -93,20 +91,19 @@ client.on('message', async message => {
 	else if (command === 'shop') {
 
 		const items = await CurrencyShop.findAll();
-		return message.channel.send('```' +
-			items.map(i => `${i.name}: ${i.cost}💰`).join('\n')
-		+ '```');
+		return message.channel.send(items.map(i => `${i.name}: ${i.cost}💰`).join('\n'), { code: true });
 
 	}
 	else if (command === 'leaderboard') {
 
 		return message.channel.send(
-			Array.from(currency.entries()).sort((a, b) => b[1].balance - a[1].balance)
-				.filter((u) => client.users.get(u[0]))
-				.slice(0, 10)
-				.map((v, k) => `(${k + 1}) ${(client.users.get(v[0]).tag)}: ${v[1].balance}💰`)
+			currency.sort((a, b) => b.balance - a.balance)
+				.filter(user => client.users.has(user.user_id))
+				.first(10)
+				.map((user, position) => `(${position + 1}) ${(client.users.get(user.user_id).tag)}: ${user.balance}💰`)
 				.join('\n'),
-			{ code: true });
+			{ code: true }
+		);
 	}
 
 });

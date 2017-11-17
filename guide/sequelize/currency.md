@@ -313,7 +313,7 @@ We use `.add()` for both removing and adding currency. Since we already check if
 ### [zeta] Buying an item
 
 ```js
-const item = await CurrencyShop.findOne({ where: { name: { $like: commandArgs } } });
+const item = await CurrencyShop.findOne({ where: { name: { $iLike: commandArgs } } });
 if (!item) return message.channel.send(`That item doesn't exist.`);
 if (item.cost > currency.getBalance(message.author.id)) {
 	return message.channel.send(`You currently have ${currency.getBalance(message.author.id)}, but the ${item.name} costs ${item.cost}!`);
@@ -326,7 +326,7 @@ await user.addItem(item);
 message.channel.send(`You've bought: ${item.name}.`);
 ```
 
-In order for users to search for an item without having to care about case, we use the `$like` modifier when we're looking for the name. Keep in mind that this may be slow if you have millions of items, so please don't put a million items in your shop. 
+In order for users to search for an item without having to care about case, we use the `$iLike` modifier when we're looking for the name. Keep in mind that this may be slow if you have millions of items, so please don't put a million items in your shop. 
 
 ### [theta] Display the shop
 
@@ -345,7 +345,8 @@ return message.channel.send(
 		.first(10)
 		.map((user, position) => `(${position + 1}) ${(client.users.get(user.user_id).tag)}: ${user.balance}💰`)
 		.join('\n'),
-	{ code: true });
+	{ code: true }
+);
 ```
 
 Nothing particularly special here either. We could have queried the database for the top 10 currency holders as well, but we already have access to them locally, so just sort the Collection we have and use map again to display in a nice format. The filter is in case the users no longer exist in the bot's cache.
