@@ -103,8 +103,7 @@ user.send('<content>');
 
 ### What is the difference between a User and a GuildMember?
 
-A lot of users get confused what is the difference between a User and a GuildMember.
+A lot of users get confused as to what the difference between Users and GuildMembers is.
 
-The simple answer is that an User represent a global Discord user and a GuildMember represent a Discord user on a specific server.
-
+The simple answer is that a User represent a global Discord user and a GuildMember represent a Discord user on a specific server.
 That means only GuildMembers can have permissions, roles, and nicknames for example because all these things are server-bound information that could be different on every server that user is in.
