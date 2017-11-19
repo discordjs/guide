@@ -18,8 +18,8 @@ const user = <message>.mentions.users.first();
 ### How do I kick a user?
 
 ```js
-const user = <message>.mentions.users.first();
-<guild>.kick(user);
+const member = <message>.mentions.members.first();
+member.kick();
 ```
 
 ### How do I add a role to a guild member?
