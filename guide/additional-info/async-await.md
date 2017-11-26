@@ -111,8 +111,8 @@ client.on('message', message => {
 	if (message.content === `${prefix}react`) {
 		message.react('🇦')            
 			.then(() => message.react('B'))
-            .then(() => message.react('C'))
-            .then(() => message.react('D'))
+			.then(() => message.react('C'))
+			.then(() => message.react('D'))
 			.catch(err => {
 				// handle failure of any Promise rejection inside here
 			})
