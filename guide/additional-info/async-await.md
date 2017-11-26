@@ -110,9 +110,8 @@ But since all of these react methods are started at the same time, it would just
 client.on('message', message => {
 	if (message.content === `${prefix}react`) {
 		message.react('🇦')            
-			.then(() => message.react('B'))
-			.then(() => message.react('C'))
-			.then(() => message.react('D'))
+			.then(() => message.react('🇧'))
+			.then(() => message.react('🇨'))
 			.catch(err => {
 				// handle failure of any Promise rejection inside here
 			})
