@@ -1,6 +1,6 @@
 # Understanding async/await
 
-If you aren't very familiar with ECMAScript 2017, you may not know about async/await. It's a useful way to handle Promises in a hoisted manner. Also, it looks cleaner, it increases readability overall and it is faster.
+If you aren't very familiar with ECMAScript 2017, you may not know about async/await. It's a useful way to handle Promises in a hoisted manner. Also, it looks cleaner, it increases readability overall and it is slightly faster.
 
 ## How do Promises work?
 
