@@ -35,7 +35,7 @@ deleteMessages(5).then(value => {
 });
 ```
 
-In this scenario, the `deleteMessages` function returns a Promise. The `.then()` method will trigger if the Promise was resolved, and the `.catch()` method if the Promise was rejected. But with our function, we resolve the Promise after 2 seconds with the String "Everything is fine", so the `.catch()` method will never be executed.
+In this scenario, the `deleteMessages` function returns a Promise. The `.then()` method will trigger if the Promise was resolved, and the `.catch()` method if the Promise was rejected. But with our function, we resolve the Promise after 2 seconds with the String "Deleted 10 messages.", so the `.catch()` method will never be executed.
 
 ## How to implement async/await
 
@@ -119,7 +119,7 @@ client.on('message', message => {
 });
 ```
 
-This is an special form of resolving mutiple Promises because we use the `.then()` callback to chain resolving Promises with each other and if one of the Promises gets rejected the `.catch()` does fire. So let's look how the same code would look with async/await.
+In this piece of code we [chain resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then#Chaining) Promises with each other and if one of the Promises gets rejected the function we passed to `.catch()` get called. So let's look how the same code would look with async/await.
 
 ```js
 client.on('message', async message => {
