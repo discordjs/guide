@@ -1,6 +1,6 @@
 # Understanding async/await
 
-If you aren't very familiar with ECMAScript 2017, you may not know about async/await. It's a useful way to handle Promises in a hoisted manner. Also, it looks cleaner, it increases readability overall and it is slightly faster.
+If you aren't very familiar with ECMAScript 2017, you may not know about async/await. It's a useful way to handle Promises in a hoisted manner. In addition, it looks cleaner, increases overall readability, and is slightly faster.
 
 ## How do Promises work?
 
@@ -35,7 +35,7 @@ deleteMessages(5).then(value => {
 });
 ```
 
-In this scenario, the `deleteMessages` function returns a Promise. The `.then()` method will trigger if the Promise was resolved, and the `.catch()` method if the Promise was rejected. But with our function, we resolve the Promise after 2 seconds with the String "Deleted 10 messages.", so the `.catch()` method will never be executed.
+In this scenario, the `deleteMessages` function returns a Promise. The `.then()` method will trigger if the Promise was resolved, and the `.catch()` method if the Promise was rejected. But with our function, we resolve the Promise after 2 seconds with the String "Deleted 10 messages.", so the `.catch()` method will never be executed. You can also pass the `.catch()` function as the second parameter of `.then()`.
 
 ## How to implement async/await
 
@@ -119,7 +119,7 @@ client.on('message', message => {
 });
 ```
 
-In this piece of code we [chain resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then#Chaining) Promises with each other and if one of the Promises gets rejected the function we passed to `.catch()` get called. So let's look how the same code would look with async/await.
+In this piece of code, we [chain resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then#Chaining) Promises with each other, and if one of the Promises gets rejected, the function we passed to `.catch()` get called. So let's look at how the same code would look with async/await.
 
 ```js
 client.on('message', async message => {
@@ -173,7 +173,7 @@ client.on('message', async message => {
 	if (message.content === `${prefix}delete`) {
 		try {
 			const sentMessage = await message.channel.send('this message will be delete');
-			sentMessage.delete(10000);
+			await sentMessage.delete(10000);
 		}
 		catch(error){
 			// handle error
