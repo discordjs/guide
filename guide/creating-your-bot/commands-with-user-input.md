@@ -1,5 +1,7 @@
 ## Commands with user input (a.k.a. "arguments")
 
+<p class="tip">This page is a follow-up and bases its code off of [the previous page](/creating-your-bot/adding-more-commands).</p>
+
 Sometimes you'll want to determine the result of a command depending on user input. It's a very common case with a very simple solution. This section will teach you how to extract user input from a message and use it in your code. Generally, you'll hear other people refer to this as "arguments", and you should refer to them as that as well.
 
 ### Basic arguments

@@ -1,5 +1,7 @@
 ## Adding more commands
 
+<p class="tip">This page is a follow-up and bases its code off of [the previous page](/creating-your-bot/configuration-files).</p>
+
 A bot with nothing but a single command would be really boring, and you probably have a bunch of command ideas floating around in your head already, right? Let's begin, then.
 
 Here's what your message event should currently look like:

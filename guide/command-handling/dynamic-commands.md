@@ -1,5 +1,7 @@
 ## Handling commands
 
+<p class="tip">This page is a follow-up and bases its code off of [the previous page](/command-handling/).</p>
+
 ### How it works
 
 Now that you have a Collection of all our commands, you can use them easily! But before diving straight into it, it'd be a good idea to familiarize yourself with how you'll turn these basic if statements into something much more dynamic and robust. So let's continue with 1 more if statement example, and then we'll move onto the real stuff.

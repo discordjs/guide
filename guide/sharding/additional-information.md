@@ -1,5 +1,7 @@
 ## Additional changes
 
+<p class="tip">This page is a follow-up and bases its code off of [the previous page](/sharding/).</p>
+
 Here are some extra topics covered about sharding that you might have concerns about.
 
 ### Client#Shard
@@ -46,7 +48,7 @@ The shardArgs are what you would normally pass if you ran your bot without shard
 There may come a point where you will want to pass functions or arguments from the outer scope into a broadcastEval.
 
 ```js
-client.shard.broadcastEval(`(${funcName})('${arg}')`)
+client.shard.broadcastEval(`(${funcName})('${arg}')`);
 ```
 
 In this small snippet, I am passing an entire function through the eval, and it needs to be encased in parenthesis otherwise it will throw errors on its way there. Another set of parenthesis is needed so the function actually *gets called*. Finally, the passing of the argument itself, which varies slightly depending on what type of argument you are passing. If it's a string, you must wrap it in quotes, otherwise it will be interpreted as is and throw a syntax error, because it won't be a string by the time it gets there.
