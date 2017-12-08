@@ -33,7 +33,7 @@ If you're using something like [PM2](http://pm2.keymetrics.io/) or [Forever](htt
 
 ### ShardingManager#shardArgs
 
-Consider the following example of creating a new `ShardingManager` instance.
+Consider the following example of creating a new `ShardingManager` instance:
 
 ```js
 const manager = new ShardingManager('./bot.js', { 
@@ -42,7 +42,7 @@ const manager = new ShardingManager('./bot.js', {
 });
 ```
 
-The `shardArgs` property is what you would normally add in if you executed your bot process without sharding, i.e. :
+The `shardArgs` property is what you would normally pass in if you executed your bot process without sharding, i.e.:
 
 ```
 node bot.js --ansi --color --trace-warnings
@@ -68,8 +68,10 @@ client.shard.broadcastEval(`this.${funcName}(${args});`);
 
 This would become `client.funcName(args)` once it gets through. This is handy if you, for example, have extended your client object with your own class and wish to call some of its methods manually.
 
-## Sharded Bots Example
+## Sharded Bot Example(s)
 
-Here's an example if you still need more resources.
+If you'd like to check out a full example of sharding, here are the open-source examples we've found:
 
 * [Listen.moe](https://github.com/LISTEN-moe/discord-bot)
+
+If you know of other open-source bots that are sharded and use discord.js, feel free to [make a pull request](https://github.com/Danktuary/Making-Bots-with-Discord.js/blob/master/guide/sharding/additional-information.md)!
