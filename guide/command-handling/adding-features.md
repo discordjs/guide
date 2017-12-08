@@ -5,7 +5,7 @@
 The command handler you've been building so far doesn't do much aside from dynamically load and execute commands. Those two things alone are great, but definitely not the only things you want. Before diving into it, let's do some quick refactoring in preparation.
 
 ```diff
-	const args = message.content.slice(prefix.length).split(/\s+/);
+	const args = message.content.slice(prefix.length).split(/ +/);
 -	const command = args.shift().toLowerCase();
 +	const commandName = args.shift().toLowerCase();
 

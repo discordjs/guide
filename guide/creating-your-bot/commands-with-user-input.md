@@ -70,7 +70,7 @@ If you've never done something like this before, this probably isn't what you'd 
 
 ```diff
 - const args = message.content.slice(prefix.length).split(' ');
-+ const args = message.content.slice(prefix.length).split(/\s+/);
++ const args = message.content.slice(prefix.length).split(/ +/);
 ```
 
 ![extra spaces args fixed](assets/img/ibSgjAC.png)
