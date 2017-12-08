@@ -292,7 +292,7 @@ Here we begin to see the power of associations. Even though users and the shop a
 
 ```js
 const currentAmount = currency.getBalance(message.author.id);
-const transferAmount = commandArgs.split(/\s+/g).find(arg => !/<@!?\d+>/g.test(arg));
+const transferAmount = commandArgs.split(/ +/g).find(arg => !/<@!?\d+>/g.test(arg));
 const transferTarget = message.mentions.users.first();
 
 if (!transferAmount || isNaN(transferAmount)) return message.channel.send(`Sorry ${message.author}, that's an invalid amount.`);

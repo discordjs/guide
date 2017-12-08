@@ -1,5 +1,7 @@
 ## Additional changes
 
+<p class="tip">This page is a follow-up and bases its code off of [the previous page](/sharding/).</p>
+
 Here are some extra topics covered about sharding that you might have concerns about.
 
 ### Legend

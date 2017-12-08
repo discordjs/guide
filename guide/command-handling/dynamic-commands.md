@@ -1,5 +1,7 @@
 ## Handling commands
 
+<p class="tip">This page is a follow-up and bases its code off of [the previous page](/command-handling/).</p>
+
 ### How it works
 
 Now that you have a Collection of all our commands, you can use them easily! But before diving straight into it, it'd be a good idea to familiarize yourself with how you'll turn these basic if statements into something much more dynamic and robust. So let's continue with 1 more if statement example, and then we'll move onto the real stuff.
@@ -21,7 +23,7 @@ So, if you wanted to (assuming that you've copied & pasted all of your commands 
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-	const args = message.content.slice(prefix.length).split(/\s+/);
+	const args = message.content.slice(prefix.length).split(/ +/);
 	const command = args.shift().toLowerCase();
 
 	if (command === 'ping') {
