@@ -33,7 +33,6 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 	* Figure out how to make an OAuth dashboard (node, express, passport, vue maybe)
 
 * Adjustments / Fixes
-	* Killing / restarting a shard [needs clarification](http://discordjs.guide/#/sharding/additional-information)
 	* Update `Reflect.defineProperty()` and prototyped methods to use `.findOrCreate()`/`.findOrBuild()` instead of manual checks
 	* Fix code style inconsistency in the Sequelize pages
 	* Fix wording style inconsistency in the Sequelize pages (e.g. using "we" instead of "you")
