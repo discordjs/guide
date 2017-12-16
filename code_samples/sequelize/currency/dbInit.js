@@ -11,7 +11,9 @@ const CurrencyShop = sequelize.import('models/CurrencyShop');
 sequelize.import('models/Users');
 sequelize.import('models/UserItems');
 
-sequelize.sync().then(async () => {
+const force = process.argv.includes('--force') || process.argv.includes('-f');
+
+sequelize.sync({ force }).then(async () => {
 
 	const shop = [
 		CurrencyShop.upsert({ name: 'Tea', cost: 1 }),
@@ -19,6 +21,7 @@ sequelize.sync().then(async () => {
 		CurrencyShop.upsert({ name: 'Cake', cost: 5 }),
 	];
 	await Promise.all(shop);
-	console.log('Database loaded');
+	console.log('Database synced');
+	sequelize.close();
 
 }).catch(console.error);

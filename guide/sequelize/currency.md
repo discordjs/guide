@@ -92,9 +92,9 @@ Our junction table will link `user_id` and the `id` of the currency shop togethe
 
 ## Initialize database
 
-Now that the models are defined, they should be created in our database so that we can access them in the bot file. We ran the sync in the `ready` event in our bot in the previous tutorial, which is completely unneeded, since it only needs to run once. So what we can do is make a file to initialize the database and never touch it again unless we want to remake the entire database
+Now that the models are defined, we should create them in our database so that we can access them in the bot file. We ran the sync in the `ready` event in our bot in the previous tutorial, which is completely unnecessary, since it only needs to run once. So what we can do is make a file to initialize the database and never touch it again unless we want to remake the entire database.
 
-Create a file called `dbInit.js`, in the base directory, *not* in the `models` folder.
+Create a file called `dbInit.js` in the base directory (*not* in the `models` folder).
 
 ```js
 const Sequelize = require('sequelize');
@@ -110,7 +110,9 @@ const CurrencyShop = sequelize.import('models/CurrencyShop');
 sequelize.import('models/Users');
 sequelize.import('models/UserItems');
 
-sequelize.sync().then(async () => {
+const force = process.argv.includes('--force') || process.argv.includes('-f');
+
+sequelize.sync({ force }).then(async () => {
 
 	const shop = [
 		CurrencyShop.upsert({ name: 'Tea', cost: 1 }),
@@ -118,14 +120,17 @@ sequelize.sync().then(async () => {
 		CurrencyShop.upsert({ name: 'Cake', cost: 5 }),
 	];
 	await Promise.all(shop);
-	console.log('Database loaded');
+	console.log('Database synced');
+	sequelize.close();
 
 }).catch(console.error);
 ```
 
-You'll notice some familiar things here from the previous tutorial such as the Sequelize declaration being the same. We do have something different here, and that's how we import the models. Sequelize has an import function to make your code a bit cleaner when you have many models to use. We pull the two models and the junction table, sync them, and add items to our shop. A new function here is the `.upsert()` function. It's a portmanteau for **up**date or in**sert**.  We use `upsert` here because just in case you run this file multiple times, it doesn't create duplicates. That shouldn't happen because we defined name as *unique* but there's no harm in being safe. Upsert also has a nice side benefit; If you adjust the cost, the respective item should also have their cost updated.
+You'll notice some familiar things here from the previous tutorial, such as the Sequelize declaration being the same. We do have something different here, and that's how we import the models. Sequelize has an import function to make your code a bit cleaner when you have many models to use. We pull the two models and the junction table, sync them, and add items to our shop.
 
-<p class="tip">Execute `node dbInit.js` to create the database, then never touch the file again. You can even delete it at this point if it executed successfully.</p>
+A new function here is the `.upsert()` function. It's a portmanteau for **up**date or in**sert**.  We use `upsert` here because just in case you run this file multiple times, it doesn't create duplicates. That shouldn't happen because we defined name as *unique* but there's no harm in being safe. Upsert also has a nice side benefit; If you adjust the cost, the respective item should also have their cost updated.
+
+<p class="tip">Execute `node dbInit.js` to create the database tables. Unless you make a change to the models, you'll never need to touch the file again. If you do make a change to a model, you can execute `node dbInit.js --force` or `node dbInit.js -f` to force sync your tables. It's important to note that this **will** empty out and remake your model tables.</p>
 
 ## Create associations
 
