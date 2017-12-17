@@ -44,7 +44,7 @@ const manager = new ShardingManager('./bot.js', {
 });
 ```
 
-The `shardArgs` property is what you would normally pass in if you executed your bot process without sharding, i.e.:
+The `shardArgs` property is what you would normally pass in if you executed your bot process without sharding, e.g.:
 
 ```
 node bot.js --ansi --color --trace-warnings
