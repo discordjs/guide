@@ -63,11 +63,11 @@ else if (message.content.startsWith(`${prefix}user-info`)) {
 
 Easier to read, easier to write! The best of both worlds.
 
-#### Tempate literals vs string concatenation
+#### Template literals vs string concatenation
 
-You can think of template literals as the ES6 version of string concatenation. This example won't go too much into detail about it, but if you're interested in reading more, you can read [the MDN page about them](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals).
+If you've used other programming languages, you might be familiar with the term "string interpolation". Template literals would be JavaScript's implementation of string interpolation. If you're familiar with the heredoc syntax, it's very much like that; it allows for string interpolation, as well as multiline strings.
 
-Here's a quick comparison between the two:
+The example below won't go too much into detail about it, but if you're interested in reading more, you can [read about them on MDN](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals).
 
 ```js
 // variables/function used throughout the examples
