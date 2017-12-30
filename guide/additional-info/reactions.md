@@ -213,7 +213,7 @@ client.on('raw', async event => {
 });
 ```
 
-This will prevent your code from trying to build data that isn't relevant to that event. Next, you should  make use of the `d` property. Since it gives you a channel, user, and message ID, you can fetch the proper objects for those.
+This will prevent your code from trying to build data that isn't relevant to that event. Next, you should make use of the `d` property. Since it gives you a channel, user, and message ID, you can fetch the proper objects for those.
 
 ```js
 const { d: data } = event;
