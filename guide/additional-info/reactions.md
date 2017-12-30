@@ -218,21 +218,14 @@ This will prevent your code from trying to build data that isn't relevant to tha
 ```js
 const { d: data } = event;
 const channel = client.channels.get(data.channel_id);
-const user = client.users.get(data.user_id);
-const message = await channel.fetchMessage(data.message_id);
-```
-
-However, there is something very important to note. If you continue like this, you'll end up re-emitting the event for both uncached *and* cached messages. This would cause your `messageReactionAdd` event to execute twice for a single reaction. Instead of the code above, use this:
-
-```js
-const { d: data } = event;
-const channel = client.channels.get(data.channel_id);
 
 if (channel.messages.has(data.message_id)) return;
 
 const user = client.users.get(data.user_id);
 const message = await channel.fetchMessage(data.message_id);
 ```
+
+The if statement in the middle plays an important role; it prevents us from re-emitting the event for both uncached *and* cached messages. Without this, your `messageReactionAdd` event would execute twice for a single reaction if the message was already cached.
 
 All that's left is to fetch the actual reaction from the message and emit the event. Since custom emoji reactions are keyed by their ID and unicode emoji are keyed by their name, you''ll have to do something like this:
 

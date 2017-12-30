@@ -19,8 +19,8 @@
 	* [Adding features](/command-handling/adding-features)
 
 	* **Popular Topics**
-	* [Common questions](/creating-your-bot/common-questions)
 	* [Reactions](/additional-info/reactions)
+	* [Common questions](/creating-your-bot/common-questions)
 
 * **Extended Learning**
 	* **Database**
