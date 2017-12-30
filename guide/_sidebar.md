@@ -18,8 +18,9 @@
 	* [Dynamic commands setup](/command-handling/dynamic-commands)
 	* [Adding features](/command-handling/adding-features)
 
-	* **FAQ**
+	* **Popular Topics**
 	* [Common questions](/creating-your-bot/common-questions)
+	* [Reactions](/additional-info/reactions)
 
 * **Extended Learning**
 	* **Database**
