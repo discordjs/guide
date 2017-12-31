@@ -20,6 +20,7 @@
 
 	* **FAQ**
 	* [Common questions](/creating-your-bot/common-questions)
+	* [Miscellaneous examples](/additional-info/miscellaneous-examples)
 
 * **Extended Learning**
 	* **Database**
