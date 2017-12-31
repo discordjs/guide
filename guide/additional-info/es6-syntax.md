@@ -37,6 +37,85 @@ If you haven't noticed, this piece of code is actually already using a bit of ES
 
 As for the code above, there are a few places where things can be done better. Let's look at them.
 
+### Template literals
+
+If you check the code above, it's currently doing things like `prefix + 'name'` and `'Your username: ' + message.author.username`, which is perfectly valid. It is a bit hard to read, though, it's not too fun to constantly type out. Fortunately, there's a better alternative.
+
+```js
+// ES5 version, as we currently have it
+else if (message.content === prefix + 'server') {
+	message.channel.send('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
+}
+else if (message.content === prefix + 'user-info') {
+	message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
+}
+```
+
+```js
+// ES6 version, using template literals
+else if (message.content.startsWith(`${prefix}server`)) {
+	message.channel.send(`Guild name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
+}
+else if (message.content.startsWith(`${prefix}user-info`)) {
+	message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
+}
+```
+
+Easier to read, easier to write! The best of both worlds.
+
+#### Template literals vs string concatenation
+
+If you've used other programming languages, you might be familiar with the term "string interpolation". Template literals would be JavaScript's implementation of string interpolation. If you're familiar with the heredoc syntax, it's very much like that; it allows for string interpolation, as well as multiline strings.
+
+The example below won't go too much into detail about it, but if you're interested in reading more, you can [read about them on MDN](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals).
+
+```js
+// variables/function used throughout the examples
+const username = 'Sanctuary';
+const password = 'pleasedonthackme';
+
+function letsPretendThisDoesSomething() {
+	return 'Yay for dummy data.';
+}
+```
+
+```js
+// regular string concatenation
+console.log('Your username is: **' + username + '**.');
+console.log('Your password is: **' + password + '**.');
+
+console.log('1 + 1 = ' + (1 + 1));
+
+console.log('And here\'s a function call: ' + letsPretendThisDoesSomething());
+
+console.log(
+	'Putting strings on new lines\n' +
+	'can be a bit painful\n' +
+	'with string concatenation. :('
+);
+```
+
+```js
+// template literals
+console.log(`Your password is: **${password}**.`);
+console.log(`Your username is: **${username}**.`);
+
+console.log(`1 + 1 = ${1 + 1}`);
+
+console.log(`And here's a function call: ${letsPretendThisDoesSomething()}`);
+
+console.log(`
+	Putting strings on new lines
+	is a breeze
+	with template literals! :)
+`);
+
+// NOTE: template literals will also render the indentation inside them
+// there are ways around that, which we'll discuss in another section.
+```
+
+You can see how it makes things easier and more readable. In some cases, it can even make your code shorter! This one is something you'll definitely want to take advantage of as much as possible.
+
 ### Arrow functions
 
 Arrow functions are shorthand for regular functions, with the addition that they use a lexical `this` context inside of their own. If you don't know what the `this` keyword is referring to, don't worry about it; you'll learn more about it as you advance.
@@ -50,7 +129,7 @@ client.on('ready', function() {
 });
 
 client.on('typingStart', function(channel, user) {
-	console.log(`${user} started typing in ${channel}`)
+	console.log(user + ' started typing in ' + channel);
 });
 
 client.on('message', function(message) {
@@ -131,11 +210,13 @@ client.on('message', message => {
 
 It is a bit less to write out, and also looks cleaner, but shouldn't be necessary if you follow along with the [command handler](/command-handling/) part of the guide.
 
-You can also rename variables when destructuring, if necessary. A good example of when you'd need to do so is when you're extracting a property with a name that's already being used, or conflicts with a reserved keyword. The syntax is as follow:
+You can also rename variables when destructuring, if necessary. A good example of when you'd need to do so is when you're extracting a property with a name that's already being used, or conflicts with a reserved keyword. The syntax is as follows:
 
 ```js
 // `default` is a reserved keyword
 const { default: defaultValue } = someObject;
+
+console.log(defaultValue); // 'Some defalut value here'
 ```
 
 ### var, let, and const
@@ -148,81 +229,3 @@ Since there are many, many articles out there that can explain this part more in
 
 The general rule of thumb recommended by this guide is to use `const` wherever possible, `let` otherwise, and avoid using `var`. Here's a [helpful article](https://madhatted.com/2016/1/25/let-it-be) if you want to read more about this subject.
 
-### Template literals
-
-If you check the code above, it's currently doing things like `prefix + 'name'` and `'Your username: ' + message.author.username`, which is perfectly valid. It is a bit hard to read, though, it's not too fun to constantly type out. Fortunately, there's a better alternative.
-
-```js
-// ES5 version, as we currently have it
-else if (message.content === prefix + 'server') {
-	message.channel.send('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
-}
-else if (message.content === prefix + 'user-info') {
-	message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
-}
-```
-
-```js
-// ES6 version, using template literals
-else if (message.content.startsWith(`${prefix}server`)) {
-	message.channel.send(`Guild name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
-}
-else if (message.content.startsWith(`${prefix}user-info`)) {
-	message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
-}
-```
-
-Easier to read, easier to write! The best of both worlds.
-
-#### Tempate literals vs string concatenation
-
-You can think of template literals as the ES6 version of string concatenation. This example won't go too much into detail about it, but if you're interested in reading more, you can read [the MDN page about them](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals).
-
-Here's a quick comparison between the two:
-
-```js
-// variables/function used throughout the examples
-const username = 'Sanctuary';
-const password = 'pleasedonthackme';
-
-function letsPretendThisDoesSomething() {
-	return 'Yay for dummy data.';
-}
-```
-
-```js
-// regular string concatenation
-console.log('Your username is: **' + username + '**.');
-console.log('Your password is: **' + password + '**.');
-
-console.log('1 + 1 = ' + (1 + 1));
-
-console.log('And here\'s a function call: ' + letsPretendThisDoesSomething());
-
-console.log(
-	'Putting strings on new lines\n' +
-	'can be a bit painful\n' +
-	'with string concatenation. :('
-);
-```
-
-```js
-// template literals
-console.log(`Your password is: **${password}**.`);
-console.log(`Your username is: **${username}**.`);
-
-console.log(`1 + 1 = ${1 + 1}`);
-
-console.log(`And here's a function call: ${letsPretendThisDoesSomething()}`);
-
-console.log(`
-	Putting strings on new lines
-	is a breeze
-	with template literals! :)
-`);
-
-// NOTE: template literals will also render the indentation inside them
-// there are ways around that, which we'll discuss in another section.
-```
-
-You can see how it makes things easier and more readable. In some cases, it can even make your code shorter! This one is something you'll definitely want to take advantage of as much as possible.
