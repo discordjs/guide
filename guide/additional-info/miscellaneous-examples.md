@@ -17,7 +17,7 @@ const ytdl = require('ytdl-core');
 const client = new Discord.Client();
 
 client.on('message', message => {
-	if (message.content.startsWith('!play')) {
+	if (message.content === '!play') {
 		if (message.channel.type !== 'text') return;
 
 		const { voiceChannel } = message.member;
