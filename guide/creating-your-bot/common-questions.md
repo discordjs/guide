@@ -42,7 +42,7 @@ if (member.roles.exists('name', '<role name>')) {
 ### How do I limit a command to a single user?
 
 ```js
-if (message.author.id === '<id>') {
+if (<message>.author.id === '<id>') {
 	// ...
 }
 ```

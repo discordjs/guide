@@ -40,7 +40,7 @@ client.login('your-token-goes-here');
 
 ### Catching UnhandledPromiseRejectionWarnings
 
-If you've ever seen something labled `UnhandledPromiseRejectionWarnings` in your console, it can sometimes be a bit vague as to why it occured. In addition to that, not handling promise rejections is currently deprecated and will eventually be removed. Once that happens, any unhandled promise rejections will close your app with a non-zero exit code.
+If you've ever seen something labled as `UnhandledPromiseRejectionWarnings` in your console, the reason of occurrence can be vague sometimes. In addition to that, not handling promise rejections is currently deprecated and will eventually be removed. Once that happens, any unhandled promise rejections will close your app with a non-zero exit code.
 
 You can use a single line of code to prevent that, though. This will also display the line number of where the error occured.
 
@@ -103,26 +103,25 @@ message.channel.send({
 		},
 		fields: [
 			{
-				name: 'Fields',
+				name: 'Regular field title',
 				value: 'Some value here',
-				inline: true,
 			},
 			{
 				name: '\u200b',
 				value: '\u200b',
 			},
 			{
-				name: 'Fields',
+				name: 'Inline field title',
 				value: 'Some value here',
 				inline: true,
 			},
 			{
-				name: 'Fields',
+				name: 'Inline field title',
 				value: 'Some value here',
 				inline: true,
 			},
 			{
-				name: 'Fields',
+				name: 'Inline field title',
 				value: 'Some value here',
 				inline: true,
 			},
