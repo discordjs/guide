@@ -15,7 +15,6 @@ client.on('raw', async event => {
 
 	const user = client.users.get(data.user_id);
 	const message = await channel.fetchMessage(data.message_id);
-
 	const reaction = message.reactions.get(data.emoji.id || data.emoji.name);
 
 	client.emit('messageReactionAdd', reaction, user);
