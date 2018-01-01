@@ -45,7 +45,7 @@ If you've ever seen something labled as `UnhandledPromiseRejectionWarnings` in y
 You can use a single line of code to prevent that, though. This will also display the line number of where the error occured.
 
 ```js
-process.on('unhandledRejection', error => console.error(`Uncaught Promise Error:\n${error.stack}`));
+process.on('unhandledRejection', error => console.error(`Uncaught Promise Rejection:\n${error}`));
 ```
 
 ### Sending an embed
@@ -146,7 +146,7 @@ message.channel.send({
 
 * You can have a maximum of 25 fields.
 * You can have a maximum of 6,000 characters (combined amount between all areas).
-* There are set limits for each embed area. Refer to (this Discord API docs page](https://discordapp.com/developers/docs/resources/channel#embed-limits) to view them.
+* There are set limits for each embed area. Refer to [the Discord API docs page](https://discordapp.com/developers/docs/resources/channel#embed-limits) to view them.
 * You need at least two consecutive fields set to `inline` in order for them to display correctly.
 * If you have a thumbnail set, a maximum of 2 fields will be displayed inlined, as opposed to the default 3.
 * If you use the `.setTimestamp()` or `timestamp` field, the timestamp will automatically adjust the timezone depending on the user's device.
