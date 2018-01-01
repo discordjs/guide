@@ -133,6 +133,21 @@ If you try again with either of the codeblocks above, you'll get the result you 
 
 <p class="tip">If you aren't familiar with Promises or `async`/`await`, you can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [our guide page on async/await]((/additional-info/async-await)!</p>
 
+However, if you don't mind the order the emojis react in, you can take advantage of `Promise.all()`, like so:
+
+```js
+if (message.content === '!fruits') {
+	Promise.all([
+		message.react('🍎'),
+		message.react('🍊'),
+		message.react('🍇')
+	])
+		.catch(() => console.error('One of the emojis failed to react.'));
+}
+```
+
+The benefit of this small optimization is that you can use `.then()` to handle when all of the Promises have resolved, or `.catch()` when one of them has failed. You can also `await` it since it's a Promise itself.
+
 ## Awaiting reactions
 
 A common use case for reactions in commands is having a user confirm or deny an action, or creating a poll system. Luckily, we actually [already have a guide page that covers this](/creating-your-bot/collectors)! Check out that page if you want a more in-depth explanation. Otherwise, here's a basic example for reference:
