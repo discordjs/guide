@@ -242,10 +242,24 @@ const message = await channel.fetchMessage(data.message_id);
 
 The if statement in the middle plays an important role; it prevents us from re-emitting the event for both uncached *and* cached messages. Without this, your `messageReactionAdd` event would execute twice for a single reaction if the message was already cached.
 
-All that's left is to fetch the actual reaction from the message and emit the event. Since custom emoji reactions are keyed by their ID and unicode emoji are keyed by their name, you''ll have to do something like this:
+A custom emoji contains both a name and an ID, while a unicode emoji contains just a name. Since custom emoji reactions are keyed by their name:ID and unicode emoji reactions are keyed by their name, you'll have to do something like this to set the right emoji for this event:
 
 ```js
-const reaction = message.reactions.get(data.emoji.id || data.emoji.name);
+let emoji = ''
+            
+if(data.emoji.id) {
+	emoji = `${data.emoji.name}:${data.emoji.id}`
+} else {
+	emoji = data.emoji.name
+}
+```
+
+We are checking for `emoji.id` because a unicode emoji won't have an ID inside the emoji object. Next we are using template literals to combine the name and the ID to create the fulle `name:ID` we need to get the custom emoji reaction.
+
+All that's left is to fetch the actual reaction from the message and emit the event.
+
+```js
+const reaction = message.reactions.get(emoji);
 ```
 
 After that, simply emit the event with the proper data you've built up.
