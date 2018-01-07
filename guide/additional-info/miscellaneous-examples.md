@@ -83,6 +83,7 @@ message.channel.send({ embed: exampleEmbed });
 * There are also specific strings you can use with `.setColor()`, e.g. `DARK_RED` or `RANDOM`. A list of them can be found [here](https://discord.js.org/#/docs/main/stable/typedef/ColorResolvable).
 * `.addBlankField()` is just shorthand for `.addField('\u200b', '\u200b')`. If you want to make it inline as well, pass in `true` as the first argument.
 * If you're on the master branch/v12, you'll need to use `Discord.MessageEmbed()`, not `Discord.RichEmbed()`.
+* If your RichEmbed object is named "embed", you can replace `.send({embed: exampleEmbed});` with `.send({embed})`.
 
 #### Embed object
 
