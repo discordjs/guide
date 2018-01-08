@@ -256,7 +256,7 @@ All that's left is to fetch the actual reaction from the message and emit the ev
 const reaction = message.reactions.get(emojiKey);
 ```
 
-<p class="tip">In the master branch/v12, reactions are keyed by their ID only, not in a `name:ID format.</p>
+<p class="tip">In the master branch/v12, reactions are keyed by their ID only, not in a `name:ID` format.</p>
 
 After that, simply emit the event with the proper data you've built up.
 
