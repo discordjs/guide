@@ -18,13 +18,8 @@ client.on('raw', async event => {
 
 	let emoji = ''
 
-	if(data.emoji.id) {
-		emoji = `${data.emoji.name}:${data.emoji.id}`
-	} else {
-		emoji = data.emoji.name
-	}
-
-	const reaction = message.reactions.get(emoji);
+	const emojiKey = (data.emoji.id) ? `${data.emoji.name}:${data.emoji.id}` : data.emoji.name;
+	const reaction = message.reactions.get(emojiKey);
 
 	client.emit('messageReactionAdd', reaction, user);
 });
