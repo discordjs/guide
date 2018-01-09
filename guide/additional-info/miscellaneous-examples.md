@@ -83,7 +83,6 @@ message.channel.send({ embed: exampleEmbed });
 * There are also specific strings you can use with `.setColor()`, e.g. `DARK_RED` or `RANDOM`. A list of them can be found [here](https://discord.js.org/#/docs/main/stable/typedef/ColorResolvable).
 * `.addBlankField()` is just shorthand for `.addField('\u200b', '\u200b')`. If you want to make it inline as well, pass in `true` as the first argument.
 * If you're on the master branch/v12, you'll need to use `Discord.MessageEmbed()`, not `Discord.RichEmbed()`.
-* If your RichEmbed object is named "embed", you can replace `.send({embed: exampleEmbed});` with `.send({embed})`.
 
 #### Embed object
 
@@ -151,6 +150,7 @@ message.channel.send({
 * You need at least two consecutive fields set to `inline` in order for them to display correctly.
 * If you have a thumbnail set, a maximum of 2 fields will be displayed inlined, as opposed to the default 3.
 * If you use the `.setTimestamp()` or `timestamp` field, the timestamp will automatically adjust the timezone depending on the user's device.
+* If your embed object variable is named `embed`, you can replace `.send({ embed: exampleEmbed })` with `.send({ embed })`
 
 #### Embed preview
 
