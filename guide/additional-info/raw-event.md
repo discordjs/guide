@@ -35,3 +35,5 @@ In many cases, this event won't be necessary for bot coders. The options to fetc
 Similarly, one could want to track a guildMember update event, even if the details of the update are not available. 
 
 In some cases, the raw event will contain sufficient information to be able to cleanly emit a regular d.js event, in other cases this might not be the case (taking the example of message reaction add versus guild member update).
+
+### A few examples
