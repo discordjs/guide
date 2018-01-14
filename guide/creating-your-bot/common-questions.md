@@ -109,11 +109,16 @@ user.send('<content>');
 
 <p class="tip">If you want to learn more about this syntax or want to learn about reaction collectors as well, check out [this dedicated guide page for collectors](/creating-your-bot/collectors)!</p>
 
+### How do I react to the message my bot sent?
+
 ```js
-<message>.channel.send('My message to react to.').then( msg => {
-	msg.react('👍');
+<message>.channel.send('My message to react to.').then(sentMessage => {
+	sentMessage.react('👍');
+	sentMessage.react(<client>.emojis.get('myCustomEmojiIdHere'));
 })
 ```
+
+<p class="tip">If you want to learn more about reactions, check ou [this dedicated guide on reactions](/additional-info/reactions)!</p>
 
 ### What is the difference between a User and a GuildMember?
 
