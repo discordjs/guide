@@ -109,6 +109,17 @@ user.send('<content>');
 
 <p class="tip">If you want to learn more about this syntax or want to learn about reaction collectors as well, check out [this dedicated guide page for collectors](/creating-your-bot/collectors)!</p>
 
+### How do I react to the message my bot sent?
+
+```js
+<message>.channel.send('My message to react to.').then(sentMessage => {
+	sentMessage.react('👍');
+	sentMessage.react(<client>.emojis.get('myCustomEmojiIdHere'));
+});
+```
+
+<p class="tip">If you want to learn more about reactions, check out [this dedicated guide on reactions](/additional-info/reactions)!</p>
+
 ### What is the difference between a User and a GuildMember?
 
 A lot of users get confused as to what the difference between Users and GuildMembers is. The simple answer is that a User represent a global Discord user and a GuildMember represents a Discord user on a specific server. That means only GuildMembers can have permissions, roles, and nicknames, for example, because all these things are server-bound information that could be different on every server that user is in.
