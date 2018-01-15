@@ -115,10 +115,10 @@ user.send('<content>');
 <message>.channel.send('My message to react to.').then(sentMessage => {
 	sentMessage.react('👍');
 	sentMessage.react(<client>.emojis.get('myCustomEmojiIdHere'));
-})
+});
 ```
 
-<p class="tip">If you want to learn more about reactions, check ou [this dedicated guide on reactions](/additional-info/reactions)!</p>
+<p class="tip">If you want to learn more about reactions, check out [this dedicated guide on reactions](/additional-info/reactions)!</p>
 
 ### What is the difference between a User and a GuildMember?
 
