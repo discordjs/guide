@@ -19,9 +19,10 @@
 	* [Adding features](/command-handling/adding-features)
 
 	* **Popular Topics**
-	* [Reactions](/additional-info/reactions)
-	* [Common questions](/creating-your-bot/common-questions)
-	* [Miscellaneous examples](/additional-info/miscellaneous-examples)
+	* [Reactions](/popular-topics/reactions)
+	* [Collectors](/popular-topics/collectors)
+	* [Common questions](/popular-topics/common-questions)
+	* [Miscellaneous examples](/popular-topics/miscellaneous-examples)
 
 * **Extended Learning**
 	* **Database**
@@ -32,7 +33,6 @@
 	* [Getting started](/sharding/)
 	* [Additional information](/sharding/additional-information)
 	
-	* **Miscellaneous**
-	* [Collectors](/creating-your-bot/collectors)
+	* **Additional Info**
 	* [ES6 syntax examples](/additional-info/es6-syntax)
 	* [Understanding async/await](/additional-info/async-await)

@@ -150,7 +150,7 @@ The benefit of this small optimization is that you can use `.then()` to handle w
 
 ## Awaiting reactions
 
-A common use case for reactions in commands is having a user confirm or deny an action, or creating a poll system. Luckily, we actually [already have a guide page that covers this](/creating-your-bot/collectors)! Check out that page if you want a more in-depth explanation. Otherwise, here's a basic example for reference:
+A common use case for reactions in commands is having a user confirm or deny an action, or creating a poll system. Luckily, we actually [already have a guide page that covers this](/popular-topics/collectors)! Check out that page if you want a more in-depth explanation. Otherwise, here's a basic example for reference:
 
 ```js
 message.react('👍').then(() => message.react('👎'));
@@ -268,4 +268,4 @@ And you're done! If you send a message, restart your bot, and react to that mess
 
 ## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/Danktuary/Making-Bots-with-Discord.js/tree/master/code_samples/additional-info/reactions).
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/Danktuary/Making-Bots-with-Discord.js/tree/master/code_samples/popular-topics/reactions).
