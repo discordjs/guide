@@ -151,7 +151,7 @@ message.channel.send({
 * If you have a thumbnail set, a maximum of 2 fields will be displayed inlined, as opposed to the default 3.
 * If you use the `.setTimestamp()` or `timestamp` field, the timestamp will automatically adjust the timezone depending on the user's device.
 
-<p class="tip"> If your embed object variable is named "embed", you can replace <code>.send({ embed: exampleEmbed })</code> with <code>.send({ embed })</code></p>
+<p class="tip"> If your embed object variable is named `embed`, you can replace `.send({ embed: exampleEmbed })` with `.send({ embed })`.</p>
 
 #### Embed preview
 
