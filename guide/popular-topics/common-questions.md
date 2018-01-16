@@ -107,7 +107,7 @@ user.send('<content>');
 });
 ```
 
-<p class="tip">If you want to learn more about this syntax or want to learn about reaction collectors as well, check out [this dedicated guide page for collectors](/creating-your-bot/collectors)!</p>
+<p class="tip">If you want to learn more about this syntax or want to learn about reaction collectors as well, check out [this dedicated guide page for collectors](/popular-topics/collectors)!</p>
 
 ### How do I react to the message my bot sent?
 
@@ -118,7 +118,7 @@ user.send('<content>');
 });
 ```
 
-<p class="tip">If you want to learn more about reactions, check out [this dedicated guide on reactions](/additional-info/reactions)!</p>
+<p class="tip">If you want to learn more about reactions, check out [this dedicated guide on reactions](/popular-topics/reactions)!</p>
 
 ### What is the difference between a User and a GuildMember?
 

@@ -1,6 +1,6 @@
 # Miscellaneous examples
 
-<p class="tip">For more, even shorter code examples, check out [the common questions page](/creating-your-bot/common-questions)!</p>
+<p class="tip">For more, even shorter code examples, check out [the common questions page](/popular-topics/common-questions)!</p>
 
 ### Play music from YouTube
 
