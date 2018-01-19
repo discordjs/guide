@@ -1,31 +1,54 @@
 /* container width */
-
 .markdown-section {
 	max-width: 1000px;
 }
 
 /* sidebar */
-
 .sidebar {
 	padding: 30px 0 0;
-	bottom: 40px;
+	bottom: 39px;
+}
+
+.sidebar-toggle {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 300px;
+	padding: 0;
+}
+
+.sidebar-toggle > div {
+	width: 50%;
+	cursor: pointer;
+	padding: 12px 10px 8px;
+	transition: opacity 0.15s ease-in-out;
+}
+
+.sidebar-toggle > div:hover {
+	opacity: 0.5;
+}
+
+.sidebar-toggle #theme-toggle-button {
+	text-align: right;
+	font-size: 1.1em;
+}
+
+body.close .sidebar-toggle > div {
+	margin: 0 0.25em;
 }
 
 /* regular text blocks */
-
 .markdown-section p {
 	line-height: 170%;
 }
 
 /* lists */
-
 .markdown-section ul li,
 .markdown-section ol li {
 	margin: 0.25em 0;
 }
 
 /* codeblocks and inline code */
-
 .markdown-section pre {
 	padding: 1em;
 	margin: 1em 0;
@@ -50,7 +73,6 @@
 }
 
 /* syntax highlighting */
-
 .token.boolean, .token.constant, .token.deleted, .token.number,
 .token.property, .token.symbol, .token.tag {
 	color: #da3b3b;
@@ -66,7 +88,6 @@
 }
 
 /* helper classes */
-
 .markdown-section p.warning,
 .markdown-section p.danger {
 	border-bottom-right-radius: 2px;
@@ -128,4 +149,3 @@
 .markdown-section p.danger::before {
 	background-color: #f66;
 }
-

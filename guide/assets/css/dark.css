@@ -1,0 +1,89 @@
+/* body */
+body {
+	color: #f3f3f3;
+	background-color: #1a1a1a;
+}
+
+/* sidebar */
+.sidebar {
+	color: #f3f3f3;
+	background-color: #1d1d1d;
+	border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.sidebar-toggle {
+	background-color: #1d1d1d;
+	border-top: 1px solid rgba(255, 255, 255, 0.15);
+	border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.sidebar ul li a {
+	color: #f3f3f3;
+}
+
+.sidebar-toggle #theme-toggle-button {
+	color: #f3f3f3;
+}
+
+/* codeblocks and inline code */
+.markdown-section pre {
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.markdown-section pre,
+.markdown-section pre > code {
+	color: #e5e5e5;
+	background-color: #1d1d1d;
+}
+
+.markdown-section code,
+.markdown-section p.tip code,
+.markdown-section p.warning code,
+.markdown-section p.danger code {
+	color: #dd6efd;
+	background-color: #2a2a2a;
+}
+
+/* syntax highlighting */
+.token.keyword {
+	color: #dd6efd
+}
+
+.token.punctuation {
+	color: #a9a9a9;
+}
+
+/* markdown stylings */
+.markdown-section h1,
+.markdown-section h2,
+.markdown-section h3,
+.markdown-section h4,
+.markdown-section strong,
+.anchor span,
+.markdown-section p.warning em,
+.markdown-section p.danger em {
+	color: #f3f3f3;
+}
+
+.markdown-section tr:nth-child(2n) {
+	color: #f3f3f3;
+	background-color: #1a1a1a;
+}
+
+.markdown-section td,
+.markdown-section th {
+	border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* helper classes */
+.markdown-section p.tip {
+	background-color: rgba(66, 185, 131, 0.25);
+}
+
+.markdown-section p.warning {
+	background-color: rgba(247, 210, 76, 0.25);
+}
+
+.markdown-section p.danger {
+	background-color: rgba(255, 102, 102, 0.25);
+}
