@@ -5,16 +5,20 @@
 
 /* sidebar */
 .sidebar {
-	padding: 30px 0 0;
 	bottom: 39px;
+	padding: 30px 0 0;
+	border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-toggle {
+	background-color: #fff;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	width: 300px;
 	padding: 0;
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-toggle > div {
@@ -35,6 +39,17 @@
 
 body.close .sidebar-toggle > div {
 	margin: 0 0.25em;
+}
+
+@media screen and (max-width: 768px) {
+	.sidebar-toggle {
+		width: auto;
+	}
+
+	body.close .sidebar-toggle {
+		background-color: inherit;
+		width: 300px;
+	}
 }
 
 /* regular text blocks */
