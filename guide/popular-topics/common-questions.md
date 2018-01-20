@@ -114,7 +114,7 @@ user.send('<content>');
 ```js
 <message>.channel.send('My message to react to.').then(sentMessage => {
 	sentMessage.react('👍');
-	sentMessage.react(<client>.emojis.get('myCustomEmojiIdHere'));
+	sentMessage.react(<client>.emojis.get('<id>'));
 });
 ```
 
