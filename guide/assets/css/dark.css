@@ -87,3 +87,9 @@ body {
 .markdown-section p.danger {
 	background-color: rgba(255, 102, 102, 0.25);
 }
+
+/* octocat */
+.octo-body,
+.octo-arm {
+	color: #1d1d1d;
+}
