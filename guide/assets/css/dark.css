@@ -21,6 +21,10 @@ body.dark {
 	color: #f3f3f3;
 }
 
+.dark .sidebar ul li.active a {
+	color: #42b983;
+}
+
 /* codeblocks and inline code */
 .dark .markdown-section pre {
 	border: 1px solid rgba(255, 255, 255, 0.1);
