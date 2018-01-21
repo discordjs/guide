@@ -1,95 +1,91 @@
 /* body */
-body {
+body.dark {
 	color: #f3f3f3;
 	background-color: #1a1a1a;
 }
 
 /* sidebar */
-.sidebar {
+.dark .sidebar {
 	color: #f3f3f3;
 	background-color: #1d1d1d;
 	border-right: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.sidebar-toggle {
+.dark .sidebar-toggle {
 	background-color: #1d1d1d;
 	border-top: 1px solid rgba(255, 255, 255, 0.15);
 	border-right: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.sidebar ul li a {
-	color: #f3f3f3;
-}
-
-.sidebar-toggle #theme-toggle-button {
+.dark .sidebar ul li a {
 	color: #f3f3f3;
 }
 
 /* codeblocks and inline code */
-.markdown-section pre {
+.dark .markdown-section pre {
 	border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.markdown-section pre,
-.markdown-section pre > code {
+.dark .markdown-section pre,
+.dark .markdown-section pre > code {
 	color: #e5e5e5;
 	background-color: #1d1d1d;
 }
 
-.markdown-section code,
-.markdown-section p.tip code,
-.markdown-section p.warning code,
-.markdown-section p.danger code {
+.dark .markdown-section code,
+.dark .markdown-section p.tip code,
+.dark .markdown-section p.warning code,
+.dark .markdown-section p.danger code {
 	color: #dd6efd;
 	background-color: #2a2a2a;
 }
 
 /* syntax highlighting */
-.token.keyword {
+.dark .token.keyword {
 	color: #dd6efd
 }
 
-.token.punctuation {
+.dark .token.punctuation {
 	color: #a9a9a9;
 }
 
 /* markdown stylings */
-.markdown-section h1,
-.markdown-section h2,
-.markdown-section h3,
-.markdown-section h4,
-.markdown-section strong,
-.anchor span,
-.markdown-section p.warning em,
-.markdown-section p.danger em {
+.dark .markdown-section h1,
+.dark .markdown-section h2,
+.dark .markdown-section h3,
+.dark .markdown-section h4,
+.dark .markdown-section strong,
+.dark .anchor span,
+.dark .markdown-section p.warning em,
+.dark .markdown-section p.danger em {
 	color: #f3f3f3;
 }
 
-.markdown-section tr:nth-child(2n) {
+.dark .markdown-section tr:nth-child(2n) {
 	color: #f3f3f3;
 	background-color: #1a1a1a;
 }
 
-.markdown-section td,
-.markdown-section th {
+.dark .markdown-section td,
+.dark .markdown-section th {
 	border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 /* helper classes */
-.markdown-section p.tip {
+.dark .markdown-section p.tip {
 	background-color: rgba(66, 185, 131, 0.25);
 }
 
-.markdown-section p.warning {
+.dark .markdown-section p.warning {
 	background-color: rgba(247, 210, 76, 0.25);
 }
 
-.markdown-section p.danger {
+.dark .markdown-section p.danger {
 	background-color: rgba(255, 102, 102, 0.25);
 }
 
 /* octocat */
-.octo-body,
-.octo-arm {
+.dark .octo-body,
+.dark .octo-arm {
 	color: #1d1d1d;
 }

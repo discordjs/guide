@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars, no-var */
-if (localStorage.getItem('dark-theme') == 'true') {
-	document.querySelector('#dark-theme-css').removeAttribute('disabled');
+if (localStorage.getItem('dark-theme') === 'true') {
+	document.body.classList.add('dark');
 }
 
 var $docsify = {

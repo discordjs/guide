@@ -4,30 +4,30 @@ document.addEventListener('DOMContentLoaded', function() {
 	var darkTheme = localStorage.getItem('dark-theme');
 
 	var icon = (!darkTheme) ? 'moon' : 'sun';
-	var toggleThemeButton = '<div id="theme-toggle-button"><i class="icon icon-' + icon + '-o"></i></div>';
+	var toggleThemeButton = '<button id="theme-toggle-button" class="sidebar-toggle">\
+		<i class="icon icon-' + icon + '-o"></i>\
+	</button>';
 
-	$('.sidebar-toggle').insertAdjacentHTML('beforeend', toggleThemeButton);
+	$('.sidebar-toggle').innerHTML = '<i class="icon icon-bars"></i>';
+	$('.sidebar-toggle').insertAdjacentHTML('afterend', toggleThemeButton);
 
 	$('#theme-toggle-button').addEventListener('click', function(event) {
 		event.stopPropagation();
 		event.preventDefault();
 
 		darkTheme = !darkTheme;
-		var stylesheet = $('#dark-theme-css');
+		document.body.classList.toggle('dark');
+
 		var classes = $('#theme-toggle-button > i').classList;
 
 		if (!darkTheme) {
 			classes.remove('icon-sun-o');
 			classes.add('icon-moon-o');
-
-			localStorage.removeItem('dark-theme');
-			return stylesheet.setAttribute('disabled', '');
+			return localStorage.removeItem('dark-theme');
 		}
 
 		classes.remove('icon-moon-o');
 		classes.add('icon-sun-o');
-
 		localStorage.setItem('dark-theme', true);
-		return stylesheet.removeAttribute('disabled');
 	});
 });
