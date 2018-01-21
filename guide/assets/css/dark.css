@@ -21,7 +21,7 @@ body.dark {
 	color: #f3f3f3;
 }
 
-.dark .sidebar ul li.active a {
+.dark .sidebar ul li.active > a {
 	color: #42b983;
 }
 
