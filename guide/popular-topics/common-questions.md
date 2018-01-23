@@ -64,14 +64,21 @@ if (<message>.author.id === '<id>') {
 ### How do I set my playing status?
 
 ```js
-<client>.user.setGame('<game>');
+<client>.user.setActivity('<activity>');
 ```
 
-**Notes:**
+### How do I set my status to "Watching ..." or "Listening to ..."?
 
-* If you would like to set your playing status upon startup, you must place the `<client>.user.setGame()` method in a `ready` event listener (`client.on('ready', () => {});`).
+```js
+<client>.user.setActivity('<activity>', { type: 'WATCHING' });
+<client>.user.setActivity('<activity>', { type: 'LISTENING' });
+```
 
-* If you're using a selfbot to change your playing status, you won't be able to view the status change, but other users will.
+<p class="tip">If you would like to set your activity upon startup, you must place the `<client>.user.setActivity()` method in a `ready` event listener (`<client>.on('ready', () => {});`).</p>
+
+<p class="tip">If you're using a selfbot to change your activity, you won't be able to view the status change, but other users will.</p>
+
+<p class="warning">`<client>.user.setActivity()` will only work in v11.3 and above. You can check your version with `npm ls discord.js` and update with `npm install discord.js`. You can still use `<client>.user.setGame()`, but it is deprecated as of v11.3, and has been removed in v12.</p>
 
 ## Miscellaneous
 
