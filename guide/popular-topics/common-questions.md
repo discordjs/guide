@@ -78,7 +78,7 @@ if (<message>.author.id === '<id>') {
 
 <p class="tip">If you're using a selfbot to change your activity, you won't be able to view the status change, but other users will.</p>
 
-<p class="warning">`<client>.user.setActivity()` will only work in v11.3 and above. You can check your version with `npm ls discord.js` and update with `npm install discord.js`. You can still use `<client>.user.setGame()`, but it is now deprecated and removed in v12.</p>
+<p class="warning">`<client>.user.setActivity()` will only work in v11.3 and above. You can check your version with `npm ls discord.js` and update with `npm install discord.js`. You can still use `<client>.user.setGame()`, but it is deprecated as of v11.3, and has been removed in v12.</p>
 
 ## Miscellaneous
 
