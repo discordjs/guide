@@ -51,6 +51,7 @@ body.close #theme-toggle-button {
 	body.close .sidebar-toggle {
 		background-color: inherit;
 		width: 150px;
+		transition: none;
 	}
 
 	body #theme-toggle-button {
