@@ -1,3 +1,9 @@
+/* body */
+body {
+	transition: all 0.2s ease-in-out;
+	transition-property: color, background-color;
+}
+
 /* container width */
 .markdown-section {
 	max-width: 1000px;
@@ -8,6 +14,8 @@
 	bottom: 41px;
 	padding: 30px 0 0;
 	border-right: 1px solid rgba(0, 0, 0, 0.1);
+	transition: all 0.2s ease-in-out;
+	transition-property: color, background-color, transform;
 }
 
 .sidebar-toggle {
@@ -22,12 +30,14 @@
 	border-right: 1px solid rgba(0, 0, 0, 0.1);
 	text-align: left;
 	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+	transition-property: color, background-color;
 }
 
 .sidebar-toggle i {
 	width: 100%;
 	font-size: 16px;
-	transition: opacity 0.15s ease-in-out;
+	transition: opacity 0.2s ease-in-out;
 }
 
 .sidebar-toggle:hover i {
@@ -51,6 +61,7 @@ body.close #theme-toggle-button {
 	body.close .sidebar-toggle {
 		background-color: inherit;
 		width: 150px;
+		transition: none;
 	}
 
 	body #theme-toggle-button {
@@ -67,6 +78,16 @@ body.close #theme-toggle-button {
 	line-height: 170%;
 }
 
+/* tables */
+.markdown-section tr:nth-child(2n) {
+	transition: background-color 0.2s ease-in-out;
+}
+
+.markdown-section td,
+.markdown-section th {
+	transition: border-color 0.2s ease-in-out;
+}
+
 /* lists */
 .markdown-section ul li,
 .markdown-section ol li {
@@ -80,6 +101,8 @@ body.close #theme-toggle-button {
 	line-height: 125%;
 	border: 1px solid rgba(0, 0, 0, 0.1);
 	border-radius: 2px;
+	transition: all 0.2s ease-in-out;
+	transition-property: color, background-color;
 }
 
 .markdown-section code {
@@ -91,16 +114,19 @@ body.close #theme-toggle-button {
 	line-height: 150%;
 }
 
-.markdown-section pre >code,
+.markdown-section pre > code,
 .markdown-section code {
 	font-size: 0.8rem;
 	font-family: 'Droid Sans Mono', monospace;
+	transition: all 0.2s ease-in-out;
+	transition-property: color, background-color;
 }
 
 /* syntax highlighting */
 .token.boolean, .token.constant, .token.deleted, .token.number,
 .token.property, .token.symbol, .token.tag {
 	color: #da3b3b;
+	transition: color 0.2s ease-in-out;
 }
 
 .token.deleted {
@@ -110,6 +136,7 @@ body.close #theme-toggle-button {
 .token.inserted {
 	color: #42b983;
 	border-width: 0;
+	transition: color 0.2s ease-in-out;
 }
 
 /* helper classes */
@@ -126,6 +153,7 @@ body.close #theme-toggle-button {
 
 .markdown-section p.tip {
 	border-color: #42b983;
+	transition: background-color 0.2s ease-in-out;
 }
 
 .markdown-section p.danger {
@@ -139,18 +167,20 @@ body.close #theme-toggle-button {
 .markdown-section p.warning code,
 .markdown-section p.danger code {
 	background-color: #efefef;
+	transition: background-color 0.2s ease-in-out;
 }
 
 .markdown-section p.warning em,
 .markdown-section p.danger em {
 	color: #34495e;
+	transition: color 0.2s ease-in-out;
 }
 
 .markdown-section p.warning::before,
 .markdown-section p.danger::before {
 	border-radius: 100%;
 	color: #fff;
-	content: "!";
+	content: '!';
 	font-family: Dosis, Source Sans Pro, Helvetica Neue, Arial, sans-serif;
 	font-size: 14px;
 	font-weight: 700;
@@ -165,12 +195,21 @@ body.close #theme-toggle-button {
 
 .markdown-section p.tip::before {
 	background-color: #42b983;
+	transition: background-color 0.2s ease-in-out;
 }
 
 .markdown-section p.warning::before {
 	background-color: #f7d24c;
+	transition: background-color 0.2s ease-in-out;
 }
 
 .markdown-section p.danger::before {
 	background-color: #f66;
+	transition: background-color 0.2s ease-in-out;
+}
+
+/* octocat */
+.octo-body,
+.octo-arm {
+	transition: color 0.2s ease-in-out;
 }
