@@ -34,6 +34,10 @@ body {
 	transition-property: color, background-color;
 }
 
+.sidebar ul li a {
+	transition: color 0.2s ease-in-out;
+}
+
 .sidebar-toggle i {
 	width: 100%;
 	font-size: 16px;
@@ -76,6 +80,18 @@ body.close #theme-toggle-button {
 /* regular text blocks */
 .markdown-section p {
 	line-height: 170%;
+}
+
+/* markdown stylings */
+.markdown-section h1,
+.markdown-section h2,
+.markdown-section h3,
+.markdown-section h4,
+.markdown-section strong,
+.anchor span,
+.markdown-section p.warning em,
+.markdown-section p.danger em {
+	transition: color 0.2s ease-in-out;
 }
 
 /* tables */
