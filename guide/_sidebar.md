@@ -1,4 +1,5 @@
 * [Home](/)
+* [Requesting more content](/requesting-more-content)
 
 * **Installations & Preparations**
 	* [Installing Node and discord.js](/preparations/)
