@@ -75,5 +75,6 @@ This would become `client.funcName(args)` once it gets through. This is handy if
 If you'd like to check out a full example of sharding, here are the open-source examples we've found:
 
 * [Listen.moe](https://github.com/LISTEN-moe/discord-bot)
+* [Bastion](https://github.com/TheBastionBot/Bastion)
 
 If you know of other open-source bots that are sharded and use discord.js, feel free to [make a pull request](https://github.com/Danktuary/Making-Bots-with-Discord.js/blob/master/guide/sharding/additional-information.md)!
