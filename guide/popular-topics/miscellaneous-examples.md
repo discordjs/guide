@@ -160,3 +160,18 @@ Here's what the embed from code above would look like:
 ![Embed preview](/assets/img/ooaOAeu.png)
 
 <p class="tip">If you want to instantly preview what your embed will look like, check out [this site](https://leovoel.github.io/embed-visualizer/)!</p>
+
+### ROT13 Translator
+
+```js
+exports.run = (client, message, args) => {
+  function rot13(str) {
+    var input     = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    var output    = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+    var index     = x => input.indexOf(x);
+    var translate = x => index(x) > -1 ? output[index(x)] : x;
+    return str.split('').map(translate).join('');
+  }
+  message.channel.send(rot13(args.join(' ')));
+}
+```
