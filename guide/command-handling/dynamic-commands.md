@@ -70,4 +70,4 @@ In the next chapter, we'll be going through how to implement some basic features
 
 ## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/Danktuary/Making-Bots-with-Discord.js/tree/master/code_samples/command-handling/dynamic-commands).
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/Making-Bots-with-Discord.js/tree/master/code_samples/command-handling/dynamic-commands).
