@@ -1,3 +1,3 @@
-# Making Bots with Discord.js
+# Discord.js Guide
 
-A guide made by the community of discord.js for its users.
+The official guide for [discord.js](https://github.com/discordjs/discord.js), created and maintained by core members of its community.
