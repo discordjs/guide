@@ -7,10 +7,8 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 * Category for improving your dev environment
 	* Keyboard shortcuts for VSC/Atom/Sublime
 	* Useful packages for VSC/Atom/Sublime
-	* pm2
 	* GitKraken
 	* cmder/hyper/etc.
-	* package.json scripts
 
 * Useful packages for bots (single page, probably)
 	* common-tags
