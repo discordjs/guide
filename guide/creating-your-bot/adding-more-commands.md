@@ -131,4 +131,4 @@ In short, it's just not a good idea. But that's what this guide is for! Go ahead
 
 ## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/Making-Bots-with-Discord.js/tree/master/code_samples/creating-your-bot/adding-more-commands).
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code_samples/creating-your-bot/adding-more-commands).

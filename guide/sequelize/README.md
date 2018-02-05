@@ -252,4 +252,4 @@ return message.reply('Tag deleted.');
 
 ### Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/Making-Bots-with-Discord.js/blob/master/code_samples/sequelize/tags/sequelize.js).
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/blob/master/code_samples/sequelize/tags/sequelize.js).

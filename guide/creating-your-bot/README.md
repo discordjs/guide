@@ -86,4 +86,4 @@ You've successfully created your first Discord bot command! Exciting stuff, isn'
 
 ## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/Making-Bots-with-Discord.js/tree/master/code_samples/creating-your-bot/up-and-running).
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code_samples/creating-your-bot/up-and-running).

@@ -349,4 +349,4 @@ At this point of the guide, you should now have a command handler with some very
 
 ## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/Making-Bots-with-Discord.js/tree/master/code_samples/command-handling/adding-features).
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code_samples/command-handling/adding-features).

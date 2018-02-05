@@ -5,7 +5,7 @@ if (localStorage.getItem('dark-theme') === 'true') {
 
 var $docsify = {
 	name: 'Discord.js Guide',
-	repo: 'https://github.com/discordjs/Making-Bots-with-Discord.js',
+	repo: 'https://github.com/discordjs/guide',
 	loadSidebar: true,
 	subMaxLevel: 4,
 	auto2top: true,
