@@ -1,6 +1,6 @@
 # Managing your bot process with PM2
 
-PM2 is a process manager. It manages your applications states, so you can start, stop, restart and delete processes. It offers features such as monitoring running processes and setting up a "start with operating system" (be that Windows, Linux or Mac) so your processes start when you boot your system.
+PM2 is a process manager. It manages your applications' states, so you can start, stop, restart and delete processes. It offers features such as monitoring running processes and setting up a "start with operating system" (be that Windows, Linux or Mac) so your processes start when you boot your system.
 
 ## Getting started
 
@@ -12,7 +12,7 @@ You can install PM2 via npm:
 npm i -g pm2
 ```
 
-or, if you use Yarn:
+Or, if you use Yarn:
 
 ```bash
 yarn global add pm2
@@ -72,11 +72,11 @@ pm2-service-install
 You need to get a start script, which you can get by running the following command:
 
 ```bash
-# Detects the available init system, generates the config and enable startup system
+# Detects the available init system, generates the config and enables startup system
 pm2 startup
 ```
 
-or, if you want to manually specify your machine select one of the options with the command:
+Or, if you want to manually specify your machine select one of the options with the command:
 
 ```bash
 pm2 startup [ubuntu | ubuntu14 | ubuntu12 | centos | centos6 | arch | oracle | amazon | macos | darwin | freesd | systemd | systemv | upstart | launchd | rcd | openrc]
