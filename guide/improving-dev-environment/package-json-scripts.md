@@ -1,6 +1,6 @@
 # Setting up package.json scripts
 
-An easy way to run scripts like a start script, a linter script or whatever scripts you use, is by storing them in your `package.json` file. After you store these scripts in your `package.json` file, you can just type `npm run start` or `npm run lint` to start your bot or lint your code!
+An easy way to run scripts like a script to start your bot, a script to lint your bot's files or whatever scripts you use, is by storing them in your `package.json` file. After you store these scripts in your `package.json` file, you can just type `npm run start` to start your bot, or `npm run lint` to lint your code for errors.
 
 ## Getting started
 
@@ -10,9 +10,9 @@ If you haven't touched your `package.json` file yet (excluding installing depend
 
 ```json
 {
-  "name": "your-project",
+  "name": "my-bot",
   "version": "1.0.0",
-  "description": "This is the description of your project.",
+  "description": "A Discord bot!",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -52,9 +52,9 @@ Your `package.json` file should now look similar to the following:
 
 ```json
 {
-  "name": "your-project",
+  "name": "my-bot",
   "version": "1.0.0",
-  "description": "This is the description of your project.",
+  "description": "A Discord bot!",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
