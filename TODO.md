@@ -25,7 +25,6 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 
 * Frequently requested topic guides
 	* How to navigate the d.js docs (hoo boi)
-	* Bot restart command (examples page)
 	* Reaction menu example
 	* Embeds
 	* Permission overwrites (roles, members, adding, deleting, etc.)
