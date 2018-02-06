@@ -150,7 +150,7 @@ body.close #theme-toggle-button {
 }
 
 .token.inserted {
-	color: #42b983;
+	color: #00ab58;
 	border-width: 0;
 	transition: color 0.2s ease-in-out;
 }
