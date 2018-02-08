@@ -96,7 +96,7 @@ const filter = (reaction, user) => {
 
 const collector = message.createReactionCollector(filter, { time: 15000 });
 
-collector.on('collect', (reaction, user) => {
+collector.on('collect', (reaction, reactionCollector) => {
 	console.log(`Collected ${reaction.emoji.name}`);
 });
 
