@@ -23,6 +23,8 @@ const command = args.shift().toLowerCase();
 
 Hopefully that's a bit clearer, if there was any confusion. Let's create a quick command to check out the result of our new addition:
 
+<!-- eslint-skip -->
+
 ```js
 // using the new `command` variable, this makes it easier to manage!
 // you can switch your other commands to this format as well
@@ -42,6 +44,8 @@ If you try it out, you'll get something like this:
 Looks good! Don't worry about the comma separation; that's the expected output when trying to send an array as a string.
 
 Now that you have an array of arguments, you can interact with it accordingly! Try out this small addition to the command:
+
+<!-- eslint-skip -->
 
 ```js
 else if (command === 'args-info') {
@@ -84,6 +88,8 @@ Here is where we'll be going over a few common situations where you'll want to m
 ### Mentions
 
 Using the example of a kick command, you most likely want it to allow the user to use the command and mention the person to kick, right? We won't actually be constructing the full kick command in this example, but here's how you can go about it:
+
+<!-- eslint-skip -->
 
 ```js
 else if (command === 'kick') {
@@ -128,6 +134,8 @@ If you try again, it should work as expected.
 
 Let's say you have some sort of `!avatar` command, where it'll display the avatar of all the mentioned users, or your own avatar if no users were mentioned. Focus on that 2nd part for now - how would you go about displaying your own avatar if no users were mentioned? Taking the snippet for the code you just used, you can do it just like this:
 
+<!-- eslint-skip -->
+
 ```js
 else if (command === 'avatar') {
 	if (!message.mentions.users.size) {
@@ -145,6 +153,8 @@ That part is simple; just recycle the if statement you used in the section above
 ![avatar command](assets/img/3Ilv3lE.png)
 
 The next part is where it takes a turn - displaying the avatars of all the mentioned users. But it's simpler than you may think! `message.mentions.users` returns a Collection (as previously mentioned), which you can loop over in a number of different ways. You'll be using `.map()` to loop here, since it allows you to easily collect and store data in a variable in order to send 1 final message in the end, as opposed to multiple.
+
+<!-- eslint-skip -->
 
 ```js
 else if (command === 'avatar') {
@@ -173,6 +183,8 @@ It does take up a lot of screen, but this is just an example command anyway.
 Sometimes you'll want users to give you input that ranges from X to Y, but nothing outside of that. Additionally, you want to make sure that they do give you an actual number and not random characters. A good example of this would be a `!prune` command, where it deletes X messages in the channel, depending on what the user inputs.
 
 The first step would be to check if the input they gave is an actual number.
+
+<!-- eslint-skip -->
 
 ```js
 else if (command === 'prune') {

@@ -41,6 +41,8 @@ As for the code above, there are a few places where things can be done better. L
 
 If you check the code above, it's currently doing things like `prefix + 'name'` and `'Your username: ' + message.author.username`, which is perfectly valid. It is a bit hard to read, though, it's not too fun to constantly type out. Fortunately, there's a better alternative.
 
+<!-- eslint-skip -->
+
 ```js
 // ES5 version, as we currently have it
 else if (message.content === prefix + 'server') {
@@ -50,6 +52,8 @@ else if (message.content === prefix + 'user-info') {
 	message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
 }
 ```
+
+<!-- eslint-skip -->
 
 ```js
 // ES6 version, using template literals
@@ -122,10 +126,12 @@ Arrow functions are shorthand for regular functions, with the addition that they
 
 Here are some examples of ways you can benefit from arrow functions over regular functions:
 
+<!-- eslint-disable no-var -->
+
 ```js
 // regular functions, full ES5
 client.on('ready', function() {
-	console.log('Ready!')
+	console.log('Ready!');
 });
 
 client.on('typingStart', function(channel, user) {
@@ -138,12 +144,12 @@ client.on('message', function(message) {
 
 var doubleAge = function(age) {
 	return 'Your age doubled is: ' + (age * 2);
-}
+};
 
 // inside a message collector command
 var filter = function(m) {
 	return m.content === 'I agree' && !m.author.bot;
-}
+};
 
 var collector = message.createReactionCollector(filter, { time: 15000 });
 ```
@@ -175,6 +181,8 @@ We won't be covering the lexical `this` scope with arrow functions in here, but 
 ### Destructuring
 
 Destructuring is an easy way to extract properties from an object. If you've never seen this syntax before, it can be a bit confusing. But it's actually very easy to understand! Here, take a look:
+
+<!-- eslint-skip -->
 
 ```js
 // ES5 version
@@ -216,7 +224,8 @@ You can also rename variables when destructuring, if necessary. A good example o
 // `default` is a reserved keyword
 const { default: defaultValue } = someObject;
 
-console.log(defaultValue); // 'Some defalut value here'
+console.log(defaultValue);
+// 'Some defalut value here'
 ```
 
 ### var, let, and const

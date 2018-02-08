@@ -116,12 +116,12 @@ The other would be to use the `async`/`await` keywords.
 client.on('message', async message => {
 	if (message.content === '!fruits') {
 		try {
-			await message.react('🍎')
-			await message.react('🍊')
+			await message.react('🍎');
+			await message.react('🍊');
 			await message.react('🍇');
 		}
 		catch (error) {
-			console.error('One of the emojis failed to react.')
+			console.error('One of the emojis failed to react.');
 		}
 	}
 });
@@ -140,7 +140,7 @@ if (message.content === '!fruits') {
 	Promise.all([
 		message.react('🍎'),
 		message.react('🍊'),
-		message.react('🍇')
+		message.react('🍇'),
 	])
 		.catch(() => console.error('One of the emojis failed to react.'));
 }
@@ -165,7 +165,8 @@ message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
 
 		if (reaction.emoji.name === '👍') {
 			message.reply('you reacted with a thumbs up.');
-		} else {
+		}
+		else {
 			message.reply('you reacted with a thumbs down.');
 		}
 	})
@@ -192,6 +193,8 @@ client.on('raw', event => {
 The `raw` event listens for *all* client events and returns a set amount of data. If you look at as is, it might look a bit like gibberish to you, but that's okay because you'll only need to know about two of the properties it contains.
 
 After your `ready` event triggers, try adding a reaction to any message right after. You should see something like this in your console:
+
+<!-- eslint-skip  -->
 
 ```js
  { t: 'MESSAGE_REACTION_ADD',
@@ -229,6 +232,8 @@ client.on('raw', async event => {
 ```
 
 This will prevent your code from trying to build data that isn't relevant to that event. Next, you should make use of the `d` property. Since it gives you a channel, user, and message ID, you can fetch the proper objects for those.
+
+<!-- eslint-skip -->
 
 ```js
 const { d: data } = event;

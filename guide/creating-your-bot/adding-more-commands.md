@@ -68,6 +68,8 @@ Make another if statement to check for commands using `server` as the command na
 
 <p class="tip">Servers are referred to as "guilds" in the Discord API and discord.js library. Whenever you see someone say "guild", they mean server.</p>
 
+<!-- eslint-skip -->
+
 ```js
 else if (message.content === `${prefix}server`) {
 	message.channel.send(`This server's name is: ${message.guild.name}`);
@@ -79,6 +81,8 @@ The code above would result in this:
 ![Server name command](assets/img/Zhw4lzi.png)
 
 If you want to expand upon that command and add some more info, here's an example of what you can do:
+
+<!-- eslint-skip -->
 
 ```js
 else if (message.content === `${prefix}server`) {
@@ -97,6 +101,8 @@ You can, of course, modify this to your liking. You may want to also display the
 #### Member info command
 
 Set up another if statement and use the command name `user-info`.
+
+<!-- eslint-skip -->
 
 ```js
 else if (message.content === `${prefix}user-info`) {

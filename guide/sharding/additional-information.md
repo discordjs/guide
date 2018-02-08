@@ -38,7 +38,7 @@ If you're using something like [PM2](http://pm2.keymetrics.io/) or [Forever](htt
 Consider the following example of creating a new `ShardingManager` instance:
 
 ```js
-const manager = new ShardingManager('./bot.js', { 
+const manager = new ShardingManager('./bot.js', {
 	shardArgs: ['--ansi', '--color', '--trace-warnings'],
 	token: 'your-token-goes-here',
 });

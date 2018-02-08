@@ -10,6 +10,8 @@
 
 ### How do I ban a user?
 
+<!-- eslint-skip -->
+
 ```js
 const user = <message>.mentions.users.first();
 <guild>.ban(user);
@@ -17,12 +19,16 @@ const user = <message>.mentions.users.first();
 
 ### How do I kick a user?
 
+<!-- eslint-skip -->
+
 ```js
 const member = <message>.mentions.members.first();
 member.kick();
 ```
 
 ### How do I add a role to a guild member?
+
+<!-- eslint-skip -->
 
 ```js
 const role = <guild>.roles.find('name', '<role name>');
@@ -32,6 +38,8 @@ member.addRole(role);
 
 ### How do I check if a guild member has a certain role?
 
+<!-- eslint-skip -->
+
 ```js
 const member = <message>.mentions.members.first();
 if (member.roles.exists('name', '<role name>')) {
@@ -40,6 +48,8 @@ if (member.roles.exists('name', '<role name>')) {
 ```
 
 ### How do I limit a command to a single user?
+
+<!-- eslint-skip -->
 
 ```js
 if (<message>.author.id === '<id>') {
@@ -51,11 +61,15 @@ if (<message>.author.id === '<id>') {
 
 ### How do I set my username?
 
+<!-- eslint-skip -->
+
 ```js
 <client>.user.setUsername('<username>');
 ```
 
 ### How do I set my avatar?
+
+<!-- eslint-skip -->
 
 ```js
 <client>.user.setAvatar('<url or path>');
@@ -63,11 +77,15 @@ if (<message>.author.id === '<id>') {
 
 ### How do I set my playing status?
 
+<!-- eslint-skip -->
+
 ```js
 <client>.user.setActivity('<activity>');
 ```
 
 ### How do I set my status to "Watching ..." or "Listening to ..."?
+
+<!-- eslint-skip -->
 
 ```js
 <client>.user.setActivity('<activity>', { type: 'WATCHING' });
@@ -84,12 +102,16 @@ if (<message>.author.id === '<id>') {
 
 ### How do I send a message to a certain channel?
 
+<!-- eslint-skip -->
+
 ```js
 const channel = <client>.channels.get('<id>');
 channel.send('<content>');
 ```
 
 ### How do I DM a certain user?
+
+<!-- eslint-skip -->
 
 ```js
 const user = <client>.users.get('<id>');
@@ -112,6 +134,8 @@ const user = <message>.mentions.users.first();
 
 ### How do I prompt the user for additional input?
 
+<!-- eslint-skip -->
+
 ```js
 <message>.channel.send('Please enter more input.').then(() => {
 	const filter = m => <message>.author.id === m.author.id;
@@ -129,6 +153,8 @@ const user = <message>.mentions.users.first();
 <p class="tip">If you want to learn more about this syntax or want to learn about reaction collectors as well, check out [this dedicated guide page for collectors](/popular-topics/collectors)!</p>
 
 ### How do I react to the message my bot sent?
+
+<!-- eslint-skip -->
 
 ```js
 <message>.channel.send('My message to react to.').then(sentMessage => {
