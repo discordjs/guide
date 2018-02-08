@@ -98,6 +98,18 @@ user.send('<content>');
 
 <p class="tip">If you want to DM the user who sent the message, you can use `<message>.author.send()`.</p>
 
+### How do I tag a certain user in a message?
+
+```js
+const user = <message>.mentions.users.first();
+<message>.channel.send(`Hi, ${user}.`);
+<message>.channel.send('Hi, <@user id>.');
+```
+
+<p class="tip">If you want to tag the user who sent the message, you can use `<message>.reply()`. For example: `<message>.reply('hi.')` would result in `@User, hi.`. If you want to insert the tag elsewhere, you can store `<message>.author` as your `user` variable and use the original example.</p>
+
+<p class="tip">Tags inside certain areas of an embed may display correctly, but will not actually ping the user. Tags inside other certain areas of an embed will display the raw string instead (e.g. `<@123456789012345678>`).</p>
+
 ### How do I prompt the user for additional input?
 
 ```js
@@ -121,12 +133,22 @@ user.send('<content>');
 ```js
 <message>.channel.send('My message to react to.').then(sentMessage => {
 	sentMessage.react('👍');
-	sentMessage.react(<client>.emojis.get('<id>'));
+	sentMessage.react('<emoji id>');
 });
 ```
 
 <p class="tip">If you want to learn more about reactions, check out [this dedicated guide on reactions](/popular-topics/reactions)!</p>
 
+### How do I create a restart command?
+
+```js
+process.exit();
+```
+
+<p class="tip">`process.exit()` will only kill your Node process, but when using [PM2](http://pm2.keymetrics.io/), it will restart the process whenever it gets killed. You can read our guide on PM2 [here](/improving-dev-environment/pm2).</p>
+
+<p class="warning">Be sure to [limit this to your own ID](/popular-topics/common-questions?id=how-do-i-limit-a-command-to-a-single-user) so that other users can't restart your bot!</p>
+
 ### What is the difference between a User and a GuildMember?
 
-A lot of users get confused as to what the difference between Users and GuildMembers is. The simple answer is that a User represent a global Discord user and a GuildMember represents a Discord user on a specific server. That means only GuildMembers can have permissions, roles, and nicknames, for example, because all these things are server-bound information that could be different on every server that user is in.
+A lot of users get confused as to what the difference between Users and GuildMembers is. The simple answer is that a User represents a global Discord user and a GuildMember represents a Discord user on a specific server. That means only GuildMembers can have permissions, roles, and nicknames, for example, because all of these things are server-bound information that could be different on each server that user is in.
