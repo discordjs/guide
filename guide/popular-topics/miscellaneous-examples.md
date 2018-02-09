@@ -2,7 +2,7 @@
 
 <p class="tip">For more, even shorter code examples, check out [the common questions page](/popular-topics/common-questions)!</p>
 
-### Play music from YouTube
+## Play music from YouTube
 
 Here's a short example of a command that connects to a voice channel, plays a song, and exits when it's done. You'll need to install the `ytdl-code` package in order to run this.
 
@@ -38,7 +38,7 @@ client.on('message', message => {
 client.login('your-token-goes-here');
 ```
 
-### Catching UnhandledPromiseRejectionWarnings
+## Catching UnhandledPromiseRejectionWarnings
 
 If you've ever seen something labled as `UnhandledPromiseRejectionWarnings` in your console, the reason of occurrence can be vague sometimes. In addition to that, not handling promise rejections is currently deprecated and will eventually be removed. Once that happens, any unhandled promise rejections will close your app with a non-zero exit code.
 
@@ -48,9 +48,9 @@ You can use a single line of code to prevent that, though. This will also displa
 process.on('unhandledRejection', error => console.error(`Uncaught Promise Rejection:\n${error}`));
 ```
 
-### Sending an embed
+## Sending an embed
 
-#### RichEmbed builder
+### RichEmbed builder
 
 ```js
 // somewhere at the top of your file
@@ -76,7 +76,7 @@ const exampleEmbed = new Discord.RichEmbed()
 message.channel.send({ embed: exampleEmbed });
 ```
 
-##### RichEmbed builder notes
+#### RichEmbed builder notes
 
 * If you're on discord.js v11.2 or above, you can simply do `message.channel.send(exampleEmbed)`.
 * For `.setColor()`, it accepts a base 10 integer, HEX color as a string, or an array of RGB values.
@@ -84,7 +84,7 @@ message.channel.send({ embed: exampleEmbed });
 * `.addBlankField()` is just shorthand for `.addField('\u200b', '\u200b')`. If you want to make it inline as well, pass in `true` as the first argument.
 * If you're on the master branch/v12, you'll need to use `Discord.MessageEmbed()`, not `Discord.RichEmbed()`.
 
-#### Embed object
+### Embed object
 
 ```js
 message.channel.send({
@@ -138,11 +138,11 @@ message.channel.send({
 });
 ```
 
-##### Embed object notes
+#### Embed object notes
 
 * The `color` field **must** be a base 10 integer. If you have a hex color (e.g. `#0099ff`), you can replace the `#` with `0x` and use that (as a number).
 
-#### General embed notes
+### General embed notes
 
 * You can have a maximum of 25 fields.
 * You can have a maximum of 6,000 characters (combined amount between all areas).
@@ -153,10 +153,43 @@ message.channel.send({
 
 <p class="tip"> If your embed object variable is named `embed`, you can replace `.send({ embed: exampleEmbed })` with `.send({ embed })`.</p>
 
-#### Embed preview
+### Embed preview
 
 Here's what the embed from code above would look like:
 
 ![Embed preview](/assets/img/ooaOAeu.png)
 
 <p class="tip">If you want to instantly preview what your embed will look like, check out [this site](https://leovoel.github.io/embed-visualizer/)!</p>
+
+## Mention prefix
+
+When a user adds your bot to their server, they may not immediately know what the prefix is. This is why it's a good idea to allow your bot to be trigged by either a set prefix, or by pinging them. In addition, it's also a good idea to have a commmand that displays the available prefixes.
+
+```js
+const Discord = require('discord.js');
+
+const client = new Discord.Client();
+const prefix = '!';
+
+client.on('message', message => {
+	const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${prefix})\s*`);
+	if (!prefixRegex.test(message.content)) return;
+
+	const [, matchedPrefix] = message.content.match(prefixRegex);
+	const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
+	const command = args.shift();
+
+	if (command === 'ping') {
+		message.channel.send('Pong!');
+	}
+	else if (command === 'prefix') {
+		message.reply(`you can either ping me or use \`${prefix}\` as my prefix.`);
+	}
+});
+
+client.login('your-token-goes-here');
+```
+
+With a fairly simple regex, you can easily implement this feature into your that improves UX.
+
+<p class="tip">If you aren't familiar with the syntax used on the `const [, matchedPrefix] = ...` line, that's called "array destructuring". Google around for more info!</p>
