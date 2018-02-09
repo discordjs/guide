@@ -174,23 +174,29 @@ We won't be covering the lexical `this` scope with arrow functions in here, but 
 
 ### Destructuring
 
-Destructuring is an easy way to extract properties from an object. If you've never seen this syntax before, it can be a bit confusing. But it's actually very easy to understand! Here, take a look:
+Destructuring is an easy way to extract items from an object or array. If you've never seen the syntax for it before, it can be a bit confusing, but it's actually very easy to understand once explained!
+
+#### Object destructuring
+
+Here's an common example where destructuring would come in handy:
 
 ```js
-// ES5 version
 const config = require('./config.json');
 const prefix = config.prefix;
 const token = config.token;
 
-// Alternative ES5 version (not recommended)
+// Alternative version (not recommended)
 const prefix = require('./config.json').prefix;
 const token = require('./config.json').token;
+```
 
-// ES6 version
+This is a bit verbose and not the most fun to write out each time. Object destructuring simplifies this, making it easier to both read and write. Take a look:
+
+```js
 const { prefix, token } = require('./config.json');
 ```
 
-Destructuring takes those properties from the object and stores them in variables. If the property doesn't exist, it'll still create a variable, but with the value of `undefined`. So instead of using `config.token` in your `client.login()` method, you'd simply use `token`. And since destructuring creates a variable for us, you don't even need that `const prefix = config.prefix` line. Pretty cool!
+Object destructuring takes those properties from the object and stores them in variables. If the property doesn't exist, it'll still create a variable, but with the value of `undefined`. So instead of using `config.token` in your `client.login()` method, you'd simply use `token`. And since destructuring creates a variable for us, you don't even need that `const prefix = config.prefix` line. Pretty cool!
 
 Additionally, you could do this for your commands.
 
@@ -218,6 +224,31 @@ const { default: defaultValue } = someObject;
 
 console.log(defaultValue); // 'Some defalut value here'
 ```
+
+#### Array destructuring
+
+Array destructuring syntax is very similar to object destructuring, except that you use brackets instead of curly braces. In addition, since you're using it on an array, you destructure the items in the same order the array is. Without array destructuring, this is how you'd extract items from an array:
+
+```js
+// assuming we're in a `profile` command and have an `args` variable
+const name = args[0];
+const age = args[1];
+const location = args[2];
+```
+
+Just like the first example with object destructuring, this is a bit verbose and not fun to write out. Array destructuring eases this pain.
+
+```js
+const [name, age, location] = args;
+```
+
+A single line of code that makes things much cleaner! In some cases, you may not even need all items in the array (e.g. when using `string.match(regex)`). Array destructuring still allows you to operate in the same sense.
+
+```js
+const [, username, id] = message.content.match(someRegex);
+```
+
+In this snippet, we use a comma without providing a name for the item in the array we don't need. You can also give it a dummy name if you prefer, of course; it's entirely preference at that point.
 
 ### var, let, and const
 
