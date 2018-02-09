@@ -178,7 +178,7 @@ Destructuring is an easy way to extract items from an object or array. If you've
 
 #### Object destructuring
 
-Here's an common example where destructuring would come in handy:
+Here's a common example where object destructuring would come in handy:
 
 ```js
 const config = require('./config.json');
