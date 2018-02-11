@@ -43,5 +43,4 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 	* Update `Reflect.defineProperty()` and prototyped methods to use `.findOrCreate()`/`.findOrBuild()` instead of manual checks
 	* Fix code style inconsistency in the Sequelize pages
 	* Fix wording style inconsistency in the Sequelize pages (e.g. using "we" instead of "you")
-	* Update the destructuring section on the ES6 page (needs to cover array destructuring)
 	* Add a section on the reactions page about removing reactions (per user, per emoji, etc.)
