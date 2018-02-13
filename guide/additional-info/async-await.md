@@ -22,7 +22,7 @@ One important thing to know is that a Promise can only have one state at a time;
 function deleteMessages(amount) {
 	return new Promise((resolve) => {
 		if (amount > 10) throw new Error('You can\'t delete more than 10 Messages at a time.');
-		setTimeout(() => resolve('Deleted 10 messages.'), 2000)
+		setTimeout(() => resolve('Deleted 10 messages.'), 2000);
 	});
 }
 
@@ -56,7 +56,7 @@ or
 ```js 
 const declaredAsAsync = async () => {
 	// code
-}
+};
 ```
 
 You can use that as well if you use the arrow function as an event listener.
@@ -64,7 +64,7 @@ You can use that as well if you use the arrow function as an event listener.
 ```js
 client.on('event', async (first, last) => {
 	// code
-})
+});
 ```
 
 An important thing to know is that a function declared as `async` will always return a Promise. In addition to this, if you return something, the Promise will resolve with that value, and if you throw an error, it will reject the Promise with that error.
@@ -109,12 +109,12 @@ But since all of these react methods are started at the same time, it would just
 ```js
 client.on('message', message => {
 	if (message.content === `${prefix}react`) {
-		message.react('🇦')            
+		message.react('🇦')
 			.then(() => message.react('🇧'))
 			.then(() => message.react('🇨'))
-			.catch(err => {
+			.catch(error => {
 				// handle failure of any Promise rejection inside here
-			})
+			});
 	}
 });
 ```
@@ -140,7 +140,7 @@ client.on('message', async message => {
 			await message.react('🇦');
 			await message.react('🇧');
 			await message.react('🇨');
-		} 
+		}
 		catch(error) {
 			// handle failure of any Promise rejection inside here
 		}
@@ -172,10 +172,10 @@ The return value of a `.send()` is a Promise what resolves with the sent Message
 client.on('message', async message => {
 	if (message.content === `${prefix}delete`) {
 		try {
-			const sentMessage = await message.channel.send('this message will be delete');
+			const sentMessage = await message.channel.send('This message will be deleted in 10 seconds.');
 			await sentMessage.delete(10000);
 		}
-		catch(error){
+		catch(error) {
 			// handle error
 		}
 	}

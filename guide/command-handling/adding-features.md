@@ -202,6 +202,8 @@ If the `timestamps` Collection doesn't have the message author's ID, set it in w
 
 Now all that's left is the else part of our statement. Here's what you'll be using:
 
+<!-- eslint-skip -->
+
 ```js
 else {
 	const expirationTime = timestamps.get(message.author.id) + cooldownAmount;

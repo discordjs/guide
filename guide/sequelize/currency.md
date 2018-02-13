@@ -195,7 +195,7 @@ const { Users, CurrencyShop } = require('./dbObjects');
 const currency = new Discord.Collection();
 const PREFIX = '!';
 
-// [alpha] 
+// [alpha]
 
 client.once('ready', async () => {
 	// [beta]
@@ -265,6 +265,8 @@ We're defining an `.add()` method to our currency collection. It'll be used quit
 
 ### [beta] Ready event data sync
 
+<!-- eslint-skip -->
+
 ```js
 const storedBalances = await Users.findAll();
 storedBalances.forEach(b => currency.set(b.user_id, b));
@@ -282,6 +284,8 @@ return message.channel.send(`${target.tag} has ${currency.getBalance(target.id)}
 Nothing tricky here. We use our `.getBalance()` method to show either the author's or the mentioned user's balance
 
 ### [delta] Show user inventory
+
+<!-- eslint-skip -->
 
 ```js
 const target = message.mentions.users.first() || message.author;
@@ -317,6 +321,8 @@ We use `.add()` for both removing and adding currency. Since we already check if
 
 ### [zeta] Buying an item
 
+<!-- eslint-skip -->
+
 ```js
 const item = await CurrencyShop.findOne({ where: { name: { $iLike: commandArgs } } });
 if (!item) return message.channel.send(`That item doesn't exist.`);
@@ -334,6 +340,8 @@ message.channel.send(`You've bought: ${item.name}.`);
 In order for users to search for an item without having to care about case, we use the `$iLike` modifier when we're looking for the name. Keep in mind that this may be slow if you have millions of items, so please don't put a million items in your shop. 
 
 ### [theta] Display the shop
+
+<!-- eslint-skip -->
 
 ```js
 const items = await CurrencyShop.findAll();

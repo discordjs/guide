@@ -145,6 +145,8 @@ The table doesn't actually get created until you `sync` it. The schema that we d
 
 We can finally get our first command. We'll start off with adding a tag.
 
+<!-- eslint-skip -->
+
 ```js
 const splitArgs = commandArgs.split(' ');
 const tagName = splitArgs.shift();
@@ -177,6 +179,8 @@ catch (e) {
 
 Next we will fetch the tag we just inserted.
 
+<!-- eslint-skip -->
+
 ```js
 const tagName = commandArgs;
 
@@ -195,6 +199,8 @@ This is our first query. We're finally doing something with our data, yay!
 
 ### [zeta] Editing a tag
 
+<!-- eslint-skip -->
+
 ```js
 const splitArgs = commandArgs.split(' ');
 const tagName = splitArgs.shift();
@@ -212,6 +218,8 @@ We can edit a record by using the `.update()` function. The result from the upda
 
 ### [theta] Display info on a specific tag
 
+<!-- eslint-skip -->
+
 ```js
 const tagName = commandArgs;
 
@@ -222,11 +230,14 @@ if (tag) {
 }
 return message.reply(`Could not find tag: ${tagName}`);
 ```
+
 This section is very similar to our previous command, except we're showing the tag metadata. `tag` contains our tag object. Notice two things here: firstly, we can access our object properties without the `.get()` function. This is because the object is an instance of a Tag, which we can treat as an object, and not just a row of data. Second, we accessed a property that we didn't define, `createdAt`. This is because Sequelize automatically adds that column to all tables. We can turn this feature off by passing another object into our model with `{ createdAt: false }`, but in this case, it was useful to have.
 
 ### [lambda] Listing all tags
 
 We'll use the next command to fetch a list of all the tags we've created so far.
+
+<!-- eslint-skip -->
 
 ```js
 // equivalent to: SELECT name FROM tags;
@@ -238,6 +249,8 @@ return message.channel.send(`List of tags: ${tagString}`);
 Here, we use the `.findAll()` method to grab all the tag names. Notice that instead of having `where`, we have set the optional field, `attributes`. Setting attribute to name will let us get *only* the names of tags. If we tried to access other fields, like the tag author, then we'll get an error. If left blank, it will fetch *all* of our associated column data. It won't actually affect our results, but from a performance perspective, we should only grab the data that we need. If we get no results, `tagString` will default to 'No tags set'.
 
 ### [mu] Deleting a tag
+
+<!-- eslint-skip -->
 
 ```js
 const tagName = commandArgs;

@@ -1,4 +1,3 @@
-/* eslint-disable no-var */
 document.addEventListener('DOMContentLoaded', function() {
 	var $ = document.querySelector.bind(document);
 	var darkTheme = localStorage.getItem('dark-theme');
