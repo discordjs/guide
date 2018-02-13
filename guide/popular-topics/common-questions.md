@@ -122,6 +122,8 @@ user.send('<content>');
 
 ### How do I tag a certain user in a message?
 
+<!-- eslint-skip -->
+
 ```js
 const user = <message>.mentions.users.first();
 <message>.channel.send(`Hi, ${user}.`);

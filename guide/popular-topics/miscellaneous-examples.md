@@ -172,7 +172,7 @@ const client = new Discord.Client();
 const prefix = '!';
 
 client.on('message', message => {
-	const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${prefix})\s*`);
+	const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|\\${prefix})\\s*`);
 	if (!prefixRegex.test(message.content)) return;
 
 	const [, matchedPrefix] = message.content.match(prefixRegex);
