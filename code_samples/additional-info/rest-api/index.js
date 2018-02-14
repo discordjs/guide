@@ -1,5 +1,4 @@
-const { Client, MessageEmbed } = require('discord.js');
-const RichEmbed = MessageEmbed;
+const { Client, RichEmbed } = require('discord.js');
 const { get } = require('snekfetch');
 const { prefix, token } = require('./config.json');
 const client = new Client();
@@ -28,10 +27,10 @@ client.on('message', async message => {
 
 		// message.channel.send(body.list[0].definition);
 
-		const [answer] = body.list; // Taking advantage of array destructuring to get the first object.
+		const [answer] = body.list;
 
 		const embed = new RichEmbed()
-			.setColor(0xEFFF00) // Yellow
+			.setColor(0xEFFF00)
 			.setTitle(answer.word)
 			.setURL(answer.permalink)
 			.addField('Definition', trim(answer.definition, 1024))

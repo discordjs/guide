@@ -111,10 +111,10 @@ const trim = (str, max) => str.length > max ? `${str.slice(0, max - 3)}...` : st
 Now, to make the embed, here's what we'll do:
 
 ```js
-const [answer] = body.list; // Taking advantage of array destructuring to get the first object.
+const [answer] = body.list;
 
 const embed = new RichEmbed()
-	.setColor(0xEFFF00) // Yellow
+	.setColor(0xEFFF00)
 	.setTitle(answer.word)
 	.setURL(answer.permalink)
 	.addField('Definition', trim(answer.definition, 1024))
