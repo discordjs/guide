@@ -41,3 +41,4 @@
 	* **Additional Info**
 	* [ES6 syntax examples](/additional-info/es6-syntax)
 	* [Understanding async/await](/additional-info/async-await)
+	* [Using a REST API](/additional-info/rest-api)
