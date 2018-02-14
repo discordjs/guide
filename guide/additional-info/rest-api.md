@@ -1,12 +1,12 @@
 # Using a REST API
 
-REST APIs are extremely popular on the web and allow you to freely grab a site's data of that site has an available API over an HTTP connection.
+REST APIs are extremely popular on the web and allow you to freely grab a site's data if that site has an available API over an HTTP connection.
 
-If you've ever seen a music bot that accepts a YouTube query instead of just a video's URL, then you've seen a REST API in action. As a matter of fact, discord.js is made to use Discord's API, so you've probably used an API yourself.
+If you've ever seen a music bot that accepts a YouTube query instead of just a video's URL, then you've seen a REST API in action. As a matter of fact, discord.js is made to use Discord's API. So, you've probably used an API yourself.
 
 ## Using a REST API with node
 
-In these examples we are going to be using [Snekfetch](https://www.npmjs.com/package/snekfetch) which is a great library for making HTTP requests by one of the contributors of discord.js. Discord.js actually uses Snekfetch which is part of the reason why it's ideal; it's already installed if you're using discord.js!
+In these examples we are going to be using [Snekfetch](https://www.npmjs.com/package/snekfetch) which is a great library for making HTTP requests by one of the developers of discord.js. Discord.js actually uses Snekfetch which is part of the reason why it's ideal; it's already installed if you're using discord.js!
 
 If you're not using discord.js you'll simply have to do the following to install Snekfetch.
 
@@ -16,13 +16,13 @@ npm install --save snekfetch
 
 ## Using Snekfetch
 
-Snekfetch is a promise-based request library with beautiful syntax. If don't already know about promises, you should read up on them [here](/additional-info/async-await).
+Snekfetch is a promise-based request library with beautiful syntax. If you don't already know about promises, you should read up on them [here](/additional-info/async-await).
 
 In this tutorial we'll be making a bot with 2 API based commands. The first will be using [random.cat](https://random.cat) and the other will use [Urban Dictionary](https://www.urbandictionary.com).
 
-<p class="tip">We're going to be take advantage of [destructuring](/additional-info/es6-syntax?id=destructuring) in this tutorial because it just looks great.</tip>
+<p class="tip">We're going to take advantage of [destructuring](/additional-info/es6-syntax?id=destructuring) in this tutorial because it just looks great.</tip>
 
-Since we are only going to be making [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) requests in this tutorial, we're going to use [Snekfetch.get](https://snekfetch.js.org/?api=snekfetch#Snekfetch.get). To require Snekfetch's GET request method, we'll do:
+Since we're only going to be making [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) requests in this tutorial, we're going to use [Snekfetch.get](https://snekfetch.js.org/?api=snekfetch#Snekfetch.get). To require Snekfetch's GET request method, we'll do:
 
 ```js
 const { get } = require('snekfetch');
@@ -36,7 +36,7 @@ Random cat's API is available at [random.cat/meow](https://random.cat/meow) and 
 get('https://random.cat/meow');
 ```
 
-Now, of course it seems like this does nothing but what it's doing is launching a request to the random.cat server and random.cat is returning some JSON that contains a `file` property which is a string that contains a link to a random cat. So, let's implement that into a command. It should similar to this:
+Now, of course it seems like this does nothing but what it's doing is launching a request to the random.cat server and random.cat is returning some JSON that contains a `file` property which is a string containing a link to a random cat. So, let's implement that into a command. The code should look similar to this:
 
 ```js
 const { body } = await get('https://random.cat/meow');
@@ -49,7 +49,7 @@ So, here's what's happening in this code:
 2) random.cat sees our request and gets a random file from their database.
 3) random.cat then sends that file's URL as a JSON object that contains a link to the image/gif.
 4) Snekfetch's body property deserializes the JSON response using [JSON.parse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse].
-5) We then send the object's `file` property.
+5) We then send the object's `file` property in Discord.
 
 <p class="warn">The response will only be parsed if the server's `Content-Type` header includes `application/json`. In some cases, you may have to get the `text` property instead of the `body` property and JSON.parse it yourself.</p>
 
@@ -57,7 +57,7 @@ So, here's what's happening in this code:
 
 Urban Dictionary's API is available at `https://api.urbandictionary.com/v0/define` and accepts a `term` parameter and also returns a JSON response.
 
-<p class="warn">This section assumes that you have an args variable. If you don't, you should read the [arguments tutorial](/creating-your-bot/commands-with-user-input).</p>
+<p class="warn">This section assumes that you have an `args` variable. If you don't, you should follow the [arguments tutorial](/creating-your-bot/commands-with-user-input).</p>
 
 First, we're going to need to fetch the API and get it's body. To do this, we'd do:
 
@@ -67,11 +67,11 @@ if (command === 'urban') {
 }
 ```
 
-The `query` appends [query string](https://en.wikipedia.org/wiki/Query_string) to the URL so that the Urban Dictionary server can parse it and know what to search for.
+The `query` appends a [query string](https://en.wikipedia.org/wiki/Query_string) to the URL so that the Urban Dictionary server can parse it and know what to search for.
 
 If we were to do `!urban hello world` (assuming your prefix is `!`) then, the URL would become `https://api.urbandictionary.com/v0/define?term=hello%20world` as the string gets [encoded](https://en.wikipedia.org/wiki/Query_string#URL_encoding).
 
-With our body variable we can get the properties of the returned JSON. If you were to view it in your browser, it usually looks like a bunch of mumbo jumbo. If it doesn't, great! If it does, then you should get a JSON formatter/viewer. If you're using Chrome, I'd recommend [JSON Formatter](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa). If you're using anything else that doesn't have a JSON formatter/viewer, get one for your browser.
+With our body variable, we can get the properties of the returned JSON. If you were to view it in your browser, it usually looks like a bunch of mumbo jumbo. If it doesn't, great! If it does, then you should get a JSON formatter/viewer. If you're using Chrome, I'd recommend [JSON Formatter](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa). If you're not using Chrome, search for "JSON formatter/viewer <your browser>" and get one.
 
 Now, if we look at the JSON, we can see that there are 4 properties:
 
@@ -94,7 +94,7 @@ After making sure that there are results, we will use those results. For now, le
 message.channel.send(body.list[0].definition);
 ```
 
-Here, we are simply getting the first object from the array of objects called `list` and grabbing it's `definition` property.
+Here, we are simply getting the first object from the array of objects called `list` and grabbing its `definition` property.
 
 If you've followed the tutorial, you should have something like this:
 
