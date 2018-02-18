@@ -90,6 +90,8 @@ Urban Dictionary's API is available at https://api.urbandictionary.com/v0/define
 
 First, you're going to need to fetch data from the API and get it's body. To do this, you'd do:
 
+<!-- eslint-skip -->
+
 ```js
 if (command === 'urban') {
 	const { body } = await snekfetch.get('https://api.urbandictionary.com/v0/define').query({ term: args.join(' ') });
