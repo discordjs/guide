@@ -14,11 +14,9 @@ If you're not using discord.js you'll simply have to do the following to install
 npm install --save snekfetch
 ```
 
-## Skeleton Code
+## Skeleton code
 
 To start off, you're just going to be using this skeleton code:
-
-<p class="tip">We're going to take advantage of [destructuring](/additional-info/es6-syntax?id=destructuring) in this tutorial to maintain readability.</p>
 
 ```js
 const Discord = require('discord.js');
@@ -35,18 +33,22 @@ client.on('message', async message => {
 
 	const args = message.content.slice(prefix.length).split(/ +/);
 	const command = args.shift().toLowerCase();
+
+	// ...
 });
 
 client.login('pleaseinsertyourtokenheresothistutorialcanwork');
 ```
 
-## Using Snekfetch
+<p class="tip">We're going to take advantage of [destructuring](/additional-info/es6-syntax?id=destructuring) in this tutorial to maintain readability.</p>
 
-Snekfetch is a promise-based request library with beautiful syntax. If you aren't already familiar with promises, you should read up on them [here](/additional-info/async-await).
+## Using snekfetch
 
-In this tutorial we'll be making a bot with 2 API based commands. The first will be using [random.cat](https://random.cat) and the other will use [Urban Dictionary](https://www.urbandictionary.com).
+snekfetch is a promise-based request library with beautiful syntax. If you aren't already familiar with promises, you should read up on them [here](/additional-info/async-await).
 
-To require snekfetch you'd do:
+In this tutorial we'll be making a bot with 2 API-based commands. The first will be using [random.cat](https://random.cat) and the other will use [Urban Dictionary](https://www.urbandictionary.com).
+
+To require snekfetch, you'd do:
 
 ```js
 const snekfetch = require('snekfetch');
@@ -62,6 +64,8 @@ snekfetch.get('https://random.cat/meow');
 
 Now, of course it seems like this does nothing but what it's doing is launching a request to the random.cat server and random.cat is returning some JSON that contains a `file` property which is a string containing a link to a random cat. So, let's implement that into a command. The code should look similar to this:
 
+<!-- eslint-skip -->
+
 ```js
 if (command === 'cat') {
 	const { body } = await snekfetch.get('https://random.cat/meow');
@@ -75,7 +79,7 @@ So, here's what's happening in this code:
 1. You're sending a `GET` request to random.cat.
 2. random.cat sees your request and gets a random file from their database.
 3. random.cat then sends that file's URL as a JSON object that contains a link to the image.
-4. Snekfetch's `body` property deserializes the JSON response using [JSON#parse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse].
+4. snekfetch's `body` property deserializes the JSON response using [JSON#parse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse).
 5. You then send the object's `file` property in Discord.
 
 <p class="warning">The response will only be parsed if the server's `Content-Type` header includes `application/json`. In some cases, you may have to get the `text` property instead of the `body` property and `JSON.parse()` it yourself.</p>
@@ -84,7 +88,7 @@ So, here's what's happening in this code:
 
 Urban Dictionary's API is available at https://api.urbandictionary.com/v0/define, accepts a `term` parameter, and also returns a JSON response.
 
-First, you're going to need to fetch the API and get it's body. To do this, you'd do:
+First, you're going to need to fetch data from the API and get it's body. To do this, you'd do:
 
 ```js
 if (command === 'urban') {
