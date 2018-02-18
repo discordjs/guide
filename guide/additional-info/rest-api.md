@@ -14,23 +14,11 @@ If you're not using discord.js you'll simply have to do the following to install
 npm install --save snekfetch
 ```
 
-## Using Snekfetch
-
-Snekfetch is a promise-based request library with beautiful syntax. If you aren't already familiar with promises, you should read up on them [here](/additional-info/async-await).
-
-In this tutorial we'll be making a bot with 2 API based commands. The first will be using [random.cat](https://random.cat) and the other will use [Urban Dictionary](https://www.urbandictionary.com).
-
-<p class="tip">We're going to take advantage of [destructuring](/additional-info/es6-syntax?id=destructuring) in this tutorial to maintain readability.</p>
-
-To require snekfetch you'd do:
-
-```js
-const snekfetch = require('snekfetch');
-```
-
-### Skeleton Code
+## Skeleton Code
 
 To start off, you're just going to be using this skeleton code:
+
+<p class="tip">We're going to take advantage of [destructuring](/additional-info/es6-syntax?id=destructuring) in this tutorial to maintain readability.</p>
 
 ```js
 const Discord = require('discord.js');
@@ -50,6 +38,18 @@ client.on('message', async message => {
 });
 
 client.login('pleaseinsertyourtokenheresothistutorialcanwork');
+```
+
+## Using Snekfetch
+
+Snekfetch is a promise-based request library with beautiful syntax. If you aren't already familiar with promises, you should read up on them [here](/additional-info/async-await).
+
+In this tutorial we'll be making a bot with 2 API based commands. The first will be using [random.cat](https://random.cat) and the other will use [Urban Dictionary](https://www.urbandictionary.com).
+
+To require snekfetch you'd do:
+
+```js
+const snekfetch = require('snekfetch');
 ```
 
 ### Random Cat
@@ -72,11 +72,11 @@ if (command === 'cat') {
 
 So, here's what's happening in this code:
 
-1) You're sending a `GET` request to random.cat.
-2) random.cat sees your request and gets a random file from their database.
-3) random.cat then sends that file's URL as a JSON object that contains a link to the image.
-4) Snekfetch's `body` property deserializes the JSON response using [JSON#parse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse].
-5) You then send the object's `file` property in Discord.
+1. You're sending a `GET` request to random.cat.
+2. random.cat sees your request and gets a random file from their database.
+3. random.cat then sends that file's URL as a JSON object that contains a link to the image.
+4. Snekfetch's `body` property deserializes the JSON response using [JSON#parse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse].
+5. You then send the object's `file` property in Discord.
 
 <p class="warning">The response will only be parsed if the server's `Content-Type` header includes `application/json`. In some cases, you may have to get the `text` property instead of the `body` property and `JSON.parse()` it yourself.</p>
 
@@ -135,7 +135,7 @@ We are also going to be defining a utility function at the top of our file so th
 const trim = (str, max) => (str.length > max) ? `${str.slice(0, max - 3)}...` : str;
 ```
 
-Now, to make the embed, here's what we'll do:
+This is how we'll be structuring the embed:
 
 ```js
 const [answer] = body.list;

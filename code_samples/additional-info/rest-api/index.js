@@ -1,8 +1,8 @@
-const snekfetch = require('snekfetch');
 const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
+const snekfetch = require('snekfetch');
 
 const client = new Discord.Client();
+const prefix = '!';
 
 const trim = (str, max) => (str.length > max) ? `${str.slice(0, max - 3)}...` : str;
 
@@ -43,4 +43,4 @@ client.on('message', async message => {
 	}
 });
 
-client.login(token);
+client.login('pleaseinsertyourtokenheresothistutorialcanwork');
