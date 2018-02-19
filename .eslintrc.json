@@ -1,5 +1,6 @@
 {
 	"extends": "eslint:recommended",
+	"plugins": ["markdown"],
 	"env": {
 		"node": true,
 		"es6": true

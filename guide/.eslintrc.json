@@ -1,6 +1,5 @@
 {
 	"extends": "../.eslintrc.json",
-	"plugins": ["markdown"],
 	"rules": {
 		"no-undef": "off",
 		"no-unused-vars": "off"

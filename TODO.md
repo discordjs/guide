@@ -34,7 +34,6 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 * Long-term plans
 	* OAuth guide
 	* Figure out how to make an OAuth dashboard (node, express, passport, vue maybe)
-	* Set up Travis
 	* Merge the Commando guide into this guide
 	* Look into how to create a search plugin for Docsify (the existing one doesn't work well at all)
 	* Possibly adopt [Crawl's ESLint config](https://github.com/iCrawl/eslint-config-aqua)
