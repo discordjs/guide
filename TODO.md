@@ -37,7 +37,6 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 	* Merge the Commando guide into this guide
 	* Look into how to create a search plugin for Docsify (the existing one doesn't work well at all)
 	* Possibly adopt [Crawl's ESLint config](https://github.com/iCrawl/eslint-config-aqua)
-	* Update the contributing.md file with some thorough guidelines and steps to making PRs
 
 * Adjustments / Updates
 	* Update `Reflect.defineProperty()` and prototyped methods to use `.findOrCreate()`/`.findOrBuild()` instead of manual checks
