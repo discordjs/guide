@@ -15,10 +15,11 @@ First, you will need a proper code editor. Using Notepad and Notepad++ is discou
 One of the major advantages proper code editors have over Notepad and Notepad++ is their ability to use linters. Linters check syntax and help you produce consistent code that follows certain style rules that you can define yourself, if you choose to do so. They help form good habits if you stick to a single configuration. When you start using a linter, you might be bombarded with errors at first. This is normal and perfectly fine. It might be a pain to get through during the initial process, but it's most definitely worth it.
 
 * [ESLint for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-* [ESLint for Atom](https://atom.io/packages/eslint)
+* [Linter-ESLint for Atom](https://atom.io/packages/linter-eslint) requires [Linter for Atom](https://atom.io/packages/linter)
 * [ESLint for Sublime Text](https://packagecontrol.io/packages/ESLint)
 
-<p class="tip">You can install each of these directly inside the editors themselves. For Visual Studio Code, press `Ctrl + Shift + X`. For Atom, press `Ctrl + ,` and click on "Install". For Sublime, press `Ctrl + Shift + P` and search for "Install Package" (available via [Package Control](https://packagecontrol.io/installation)). After that, you may then search for "eslint" and install it through there.</p>
+<p class="tip">You can install each of these directly inside the editors themselves. For Visual Studio Code, press `Ctrl + Shift + X`. For Atom, press `Ctrl + ,` and click on "Install". For Sublime, press `Ctrl + Shift + P` and search for "Install Package" (available via [Package Control](https://packagecontrol.io/installation)). After that, you may then search for "eslint" and install it through there.
+The Atom plugin requires "linter" as well as "linter-eslint" to work.</p>
 
 ### Setting up ESLint rules
 
