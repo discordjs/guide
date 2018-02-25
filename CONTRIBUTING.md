@@ -18,7 +18,7 @@ After that, simply run `docsify serve ./guide --open` inside the project's root 
 
 ### Linting
 
-Remember to always lint your edits/additions before making a commit, to ensure everything's lined up and consistent with the rest of the guide. We use ESLint and have a package.json script for linting both JS files and JS codeblocks inside Markdown files. Just install the dependencies and run the lint script.
+Remember to always lint your edits/additions before making a commit to ensure everything's lined up and consistent with the rest of the guide. We use ESLint and have a package.json script for linting both JS files and JS codeblocks inside Markdown files. Just install the dependencies and run the lint script.
 
 ```bash
 npm install
@@ -101,7 +101,7 @@ In this section, we'll be doing some stuff!
 
 <p class="warning">Make sure you're on version 2.0.0 or above before trying this.</p>
 
-<p class="danger">Be careful; this action is irreversable!</p>
+<p class="danger">Be careful; this action is irreversible!</p>
 ```
 
 ![Utility tags preview](https://i.imgur.com/ayFvW6h.png)
@@ -110,7 +110,7 @@ In this section, we'll be doing some stuff!
 
 #### Spacing between entities
 
-Even though this generally does not affect the actual output, you should space out your entities with a single blank line between them. It keeps the source code clean and easier to read. For example:
+Even though this generally does not affect the actual output, you should space out your entities with a single blank line between them; it keeps the source code clean and easier to read. For example:
 
 ```md
 ## Section title
