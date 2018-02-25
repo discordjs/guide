@@ -1,12 +1,42 @@
 ## File and folder restructuring
 
-<p class="tip">This page is a follow-up and bases its code off of [the previous page](/creating-your-bot/commands-with-user-input).</p>
-
 As mentioned in a previous chapter, unless your bot project is a small one, it's not a very good idea to have a single file with a giant if/else if chain for commands. If you want to implement features into your bot and make your development process a lot less painful, you'll definitely want to use (or in this case, create) a command handler. Let's get started on that!
+
+Here's the base code we'll be using:
+
+```js
+const Discord = require('discord.js');
+const { prefix, token } = require('./config.json');
+
+const client = new Discord.Client();
+
+client.on('ready', () => {
+	console.log('Ready!');
+});
+
+client.on('message', message => {
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+	const args = message.content.slice(prefix.length).split(/ +/);
+	const command = args.shift().toLowerCase();
+
+	if (command === 'ping') {
+		message.channel.send('Pong.');
+	}
+	else if (command === 'beep') {
+		message.channel.send('Boop.');
+	}
+	// other commands...
+});
+
+client.login(token);
+```
+
+<p class="tip">We'll be moving over the commands created in [the previous page](/creating-your-bot/commands-with-user-input) as well, but for the sake of keeping the base code short, those commands have been omitted from the codeblock above.</p>
 
 ### Individual command files
 
-Before anything, you may want to create a backup of your current bot file. If you followed along so far, your entire folder structure should look something like this:
+Before anything, you may want to create a backup of your current bot file. If you've followed along so far, your entire folder structure should look something like this:
 
 ![Current folder structure](assets/img/BmS09fY.png)
 
@@ -22,40 +52,39 @@ module.exports = {
 };
 ```
 
-You can go ahead and do the same for the rest of your commands as well, putting their respective blocks of code inside the `execute()` function. If you've been using the same code as the guide thus far, you can copy and paste your commands into their own files now just fine without any issue, as long as you follow the format above. The `description` property is optional, but will be useful for the dynamic help command we'll be covering later.
+You can go ahead and do the same for the rest of your commands as well, putting their respective blocks of code inside the `execute()` function. If you've been using the same code as the guide thus far, you can copy & paste your commands into their own files now just fine without any issue, as long as you follow the format above. The `description` property is optional, but will be useful for the dynamic help command we'll be covering later.
 
-<p class="warning">If you've set up ESLint for your editor and start receiving errors like `'args' is defined but never used` in your command files, this means that (as it currently is) you don't need that variable in your code. Since it's not being used, you can remove it entirely so that you only have a `message` variable in the function parameters. If you realize that you need it later, you can add it back.</p>
+<p class="warning">If you've [set up ESLint](/preparations/setting-up-a-linter) for your editor and start receiving errors like `'args' is defined but never used` in your command files, this means that (as it currently is) you don't need that variable in your code. Since it's not being used, you can remove it entirely so that you only have a `message` variable in the function parameters. If you realize that you need it later, you can add it back.</p>
 
 <p class="tip">`module.exports` is how you export data in Node.js so that you can `require()` it in other files. If you're unfamiliar with it and want to read more, you can take a look at [the documentation](https://nodejs.org/api/modules.html#modules_module_exports) for more info.</p>
 
 ### Dynamically reading command files
 
-At the very top of your main file, add this:
+Back in your main file, make these two additions:
 
-```js
-// require node's file system module - https://nodejs.org/api/fs.html
-const fs = require('fs');
+```diff
++ const fs = require('fs');
+const Discord = require('discord.js');
+const { prefix, token } = require('./config.json');
+
+const client = new Discord.Client();
++ client.commands = new Discord.Collection();
 ```
 
-And after your `const client = ...` line, add this:
-
-```js
-client.commands = new Discord.Collection();
-```
+<p class="tip">`fs` is Node's native file system module. You can read the docs about it [here](https://nodejs.org/api/fs.html).</p>
 
 <p class="tip">If you aren't exactly sure what Collections are, they're a class that extend JS's native Map class and include more extensive, useful functionality. You can read about Maps [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), and see all the available Collection methods [here](https://discord.js.org/#/docs/main/stable/class/Collection).</p>
 
-This next step is how you'll dynamically retrieve all your (soon to be) newly created command files.
+This next step is how you'll dynamically retrieve all your newly created command files. Add this below your `client.commands` line:
 
 ```js
 const commandFiles = fs.readdirSync('./commands');
 ```
 
-The `fs.readdirSync()` method will return an array of all the file names in that directory, i.e. `['ping.js', 'beep.js', 'server.js']`. With that array, you can loop over it and dynamically set your commands to the Collection you made above.
+The `fs.readdirSync()` method will return an array of all the file names in that directory, e.g. `['ping.js', 'beep.js']`. With that array, you can loop over it and dynamically set your commands to the Collection you made above.
 
 ```js
 for (const file of commandFiles) {
-	// require the command file
 	const command = require(`./commands/${file}`);
 
 	// set a new item in the Collection
@@ -81,7 +110,7 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
-/* `client.on('...')` events and such below this point */
+// `client.on('...')` events and such below this point
 ```
 
 As for setting up your files, that's it for now. In the next chapter, you'll learn how to make your commands execute dynamically!
