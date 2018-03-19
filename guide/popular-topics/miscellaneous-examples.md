@@ -190,6 +190,4 @@ client.on('message', message => {
 client.login('your-token-goes-here');
 ```
 
-With a fairly simple regex, you can easily implement this feature into your that improves UX.
-
-<p class="tip">If you aren't familiar with the syntax used on the `const [, matchedPrefix] = ...` line, that's called "array destructuring". Google around for more info!</p>
+<p class="tip">If you aren't familiar with the syntax used on the `const [, matchedPrefix] = ...` line, that's called "array destructuring". Feel free to read more about it in the [ES6 syntax](/additional-info/es6-syntax?id=array-destructuring) guide!</p>
