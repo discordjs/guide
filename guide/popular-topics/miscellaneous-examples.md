@@ -190,4 +190,4 @@ client.on('message', message => {
 client.login('your-token-goes-here');
 ```
 
-<p class="tip">If you aren't familiar with the syntax used on the `const [, matchedPrefix] = ...` line, that's called "array destructuring". Feel free to read more about it in the [es6 syntax](https://discordjs.guide/#/additional-info/es6-syntax?id=array-destructuring) guide!</p>
+<p class="tip">If you aren't familiar with the syntax used on the `const [, matchedPrefix] = ...` line, that's called "array destructuring". Feel free to read more about it in the [ES6 syntax](/additional-info/es6-syntax?id=array-destructuring) guide!</p>
