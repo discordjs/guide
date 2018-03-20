@@ -17,7 +17,7 @@ client.on('message', async message => {
 	const command = args.shift().toLowerCase();
 
 	if (command === 'cat') {
-		const { body } = await snekfetch.get('https://random.cat/meow');
+		const { body } = await snekfetch.get('https://aws.random.cat/meow');
 
 		message.channel.send(body.file);
 	}
