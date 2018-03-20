@@ -68,7 +68,7 @@ Now, of course it seems like this does nothing but what it's doing is launching 
 
 ```js
 if (command === 'cat') {
-	const { body } = await snekfetch.get('https://random.cat/meow');
+	const { body } = await snekfetch.get('https://aws.random.cat/meow');
 
 	message.channel.send(body.file);
 }
