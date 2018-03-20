@@ -46,7 +46,7 @@ client.login('pleaseinsertyourtokenheresothistutorialcanwork');
 
 snekfetch is a promise-based request library with beautiful syntax. If you aren't already familiar with promises, you should read up on them [here](/additional-info/async-await).
 
-In this tutorial we'll be making a bot with 2 API-based commands. The first will be using [random.cat](https://random.cat) and the other will use [Urban Dictionary](https://www.urbandictionary.com).
+In this tutorial we'll be making a bot with 2 API-based commands. The first will be using [random.cat](https://aws.random.cat) and the other will use [Urban Dictionary](https://www.urbandictionary.com).
 
 To require snekfetch, you'd do:
 
@@ -56,10 +56,10 @@ const snekfetch = require('snekfetch');
 
 ### Random Cat
 
-Random cat's API is available at https://random.cat/meow and returns a [JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) response. To actually fetch data from the API, you're going to do the following:
+Random cat's API is available at https://aws.random.cat/meow and returns a [JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) response. To actually fetch data from the API, you're going to do the following:
 
 ```js
-snekfetch.get('https://random.cat/meow');
+snekfetch.get('https://aws.random.cat/meow');
 ```
 
 Now, of course it seems like this does nothing but what it's doing is launching a request to the random.cat server and random.cat is returning some JSON that contains a `file` property which is a string containing a link to a random cat. So, let's implement that into a command. The code should look similar to this:
