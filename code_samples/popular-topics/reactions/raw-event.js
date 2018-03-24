@@ -9,13 +9,12 @@ client.on('raw', async event => {
 	if (event.t !== 'MESSAGE_REACTION_ADD') return;
 
 	const { d: data } = event;
-	const channel = client.channels.get(data.channel_id);
+	const user = client.users.get(data.user_id);
+	const channel = client.channels.get(data.channel_id) || await user.createDM();
 
 	if (channel.messages.has(data.message_id)) return;
 
-	const user = client.users.get(data.user_id);
 	const message = await channel.fetchMessage(data.message_id);
-
 	const emojiKey = (data.emoji.id) ? `${data.emoji.name}:${data.emoji.id}` : data.emoji.name;
 	const reaction = message.reactions.get(emojiKey);
 
