@@ -239,7 +239,7 @@ This will prevent your code from trying to build data that isn't relevant to tha
 const { d: data } = event;
 const channel = client.channels.get(data.channel_id);
 
-if (channel.messages.has(data.message_id)) return;
+if (!channel || channel.messages.has(data.message_id)) return;
 
 const user = client.users.get(data.user_id);
 const message = await channel.fetchMessage(data.message_id);
