@@ -54,9 +54,9 @@ module.exports = {
 
 You can go ahead and do the same for the rest of your commands as well, putting their respective blocks of code inside the `execute()` function. If you've been using the same code as the guide thus far, you can copy & paste your commands into their own files now just fine without any issue, as long as you follow the format above. The `description` property is optional, but will be useful for the dynamic help command we'll be covering later.
 
-<p class="warning">If you've [set up ESLint](/preparations/setting-up-a-linter) for your editor and start receiving errors like `'args' is defined but never used` in your command files, this means that (as it currently is) you don't need that variable in your code. Since it's not being used, you can remove it entirely so that you only have a `message` variable in the function parameters. If you realize that you need it later, you can add it back.</p>
-
 <p class="tip">`module.exports` is how you export data in Node.js so that you can `require()` it in other files. If you're unfamiliar with it and want to read more, you can take a look at [the documentation](https://nodejs.org/api/modules.html#modules_module_exports) for more info.</p>
+
+<p class="tip">If you need to access your client instance from inside one of your command files, you can access it via `message.client`. If you need to access things such as external files or modules, you should re-require them at the top of the file.</p>
 
 ### Dynamically reading command files
 
