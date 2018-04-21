@@ -211,11 +211,15 @@ The only two properties you'll need to worry about are `t` and `d`. `t` is the r
 
 ### Emitting the event(s) yourself
 
-Before anything, add a regular `messageReactionAdd` event in your file. This will serve as proof that you'll be able to listen to any reaction and execute your code accordingly.
+Before anything, add two regular `messageReactionAdd` and `messageReactionRemove` events in your file. This will serve as proof that you'll be able to listen to any reaction addition/removal and execute your code accordingly.
 
 ```js
 client.on('messageReactionAdd', (reaction, user) => {
 	console.log(`${user.username} reacted with "${reaction.emoji.name}".`);
+});
+
+client.on('messageReactionRemove', (reaction, user) => {
+	console.log(`${user.username} removed their "${reaction.emoji.name}" reaction.`);
 });
 ```
 
@@ -224,8 +228,13 @@ Send a messsage, restart your bot, and add a reaction to the message you just se
 Since the `raw` event gives you just enough data to work with, you can build up the proper objects and emit the other events yourself. First, replace your entire `raw` event with this:
 
 ```js
+const events = {
+	MESSAGE_REACTION_ADD: 'messageReactionAdd',
+	MESSAGE_REACTION_REMOVE: 'messageReactionRemove',
+};
+
 client.on('raw', async event => {
-	if (event.t !== 'MESSAGE_REACTION_ADD') return;
+	if (!events.hasOwnProperty(event.t)) return;
 
 	// ...
 });
@@ -245,7 +254,7 @@ if (channel.messages.has(data.message_id)) return;
 const message = await channel.fetchMessage(data.message_id);
 ```
 
-The if statement in the middle plays an important role; it prevents us from re-emitting the event for both uncached *and* cached messages. Without this, your `messageReactionAdd` event would execute twice for a single reaction if the message was already cached.
+The if statement in the middle plays an important role; it prevents us from re-emitting the event for both uncached *and* cached messages. Without this, your reaction events would execute twice for a single reaction if the message was already cached.
 
 A custom emoji contains both a name and an ID, while a unicode emoji contains just a name. Since custom emoji reactions are keyed in a `name:ID` format and unicode emoji reactions are keyed by their name, you'll have to do something like this to set the right emoji for this event:
 
@@ -266,7 +275,7 @@ const reaction = message.reactions.get(emojiKey);
 After that, simply emit the event with the proper data you've built up.
 
 ```js
-client.emit('messageReactionAdd', reaction, user);
+client.emit(events[event.t], reaction, user);
 ```
 
 And you're done! If you send a message, restart your bot, and react to that message, your `messageReactionAdd` event should log as normal. You can also easily adjust this code to include the `messageReactionRemove` event, if need be.

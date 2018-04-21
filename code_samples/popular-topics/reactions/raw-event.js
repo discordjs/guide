@@ -5,8 +5,13 @@ client.on('ready', () => {
 	console.log('Ready!');
 });
 
+const events = {
+	MESSAGE_REACTION_ADD: 'messageReactionAdd',
+	MESSAGE_REACTION_REMOVE: 'messageReactionRemove',
+};
+
 client.on('raw', async event => {
-	if (event.t !== 'MESSAGE_REACTION_ADD') return;
+	if (!events.hasOwnProperty(event.t)) return;
 
 	const { d: data } = event;
 	const user = client.users.get(data.user_id);
@@ -18,7 +23,7 @@ client.on('raw', async event => {
 	const emojiKey = (data.emoji.id) ? `${data.emoji.name}:${data.emoji.id}` : data.emoji.name;
 	const reaction = message.reactions.get(emojiKey);
 
-	client.emit('messageReactionAdd', reaction, user);
+	client.emit(events[event.t], reaction, user);
 });
 
 client.on('messageReactionAdd', (reaction, user) => {
