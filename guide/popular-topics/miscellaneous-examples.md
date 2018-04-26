@@ -18,8 +18,14 @@ If you get an error that says 'OPUS_ENGINE_MISSING', you'll need to install one 
 npm install --save node-opus
 ```
 
-If you get an error that says 'FFMPEG not found', this can be resolved by installing the `ffmpeg-binaries` package.
+If you get an error that says 'FFMPEG not found', this can be resolved by installing ffmpeg.
 
+On Debian / Ubuntu:
+```
+sudo apt-get install ffmpeg
+```
+
+On Windows:
 ```
 npm install ffmpeg-binaries
 ```
