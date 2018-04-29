@@ -21,13 +21,15 @@ npm install --save node-opus
 If you get an error that says 'FFMPEG not found', this can be resolved by installing ffmpeg.
 
 On Debian / Ubuntu:
+
 ```
 sudo apt-get install ffmpeg
 ```
 
 On Windows:
+
 ```
-npm install ffmpeg-binaries
+npm install ffmpeg-binaries --save
 ```
 
 Additionally, there have been reports that playing audio in this way from the Ubuntu subsystem offered by Windows 10 does not work.
