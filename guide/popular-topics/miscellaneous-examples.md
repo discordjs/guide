@@ -4,11 +4,35 @@
 
 ## Play music from YouTube
 
-Here's a short example of a command that connects to a voice channel, plays a song, and exits when it's done. You'll need to install the `ytdl-code` package in order to run this.
+Here's a short example of a command that connects to a voice channel, plays a song, and exits when it's done.
+
+In order to run this, you'll need to have `ytdl-core` installed.
 
 ```
 npm install --save ytdl-core
 ```
+
+If you get an error that says 'OPUS_ENGINE_MISSING', you'll need to install one of the opus packages discord.js recommends.
+
+```
+npm install --save node-opus
+```
+
+If you get an error that says 'FFMPEG not found', this can be resolved by installing ffmpeg.
+
+On Debian / Ubuntu:
+
+```
+sudo apt-get install ffmpeg
+```
+
+On Windows:
+
+```
+npm install ffmpeg-binaries --save
+```
+
+Additionally, there have been reports that playing audio in this way from the Ubuntu subsystem offered by Windows 10 does not work.
 
 ```js
 const Discord = require('discord.js');
