@@ -103,6 +103,7 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 	host: 'localhost',
 	dialect: 'sqlite',
 	logging: false,
+	operatorsAliases: Sequelize.Op,
 	storage: 'database.sqlite',
 });
 
@@ -172,7 +173,7 @@ Users.prototype.getItems = function() {
 	});
 };
 
-module.exports = { Users, CurrencyShop, UserItems };
+module.exports = { Users, CurrencyShop, UserItems, Op: Sequelize.Op };
 ```
 
 Note that we could have abstracted the connection object in another file, and had both `dbInit.js` and `dbObjects.js` use that connection file, but it's not necessary to overly abstract things.
@@ -191,7 +192,7 @@ To put it together, we'll create an `app.js` in the base directory with the foll
 const Discord = require('discord.js');
 
 const client = new Discord.Client();
-const { Users, CurrencyShop } = require('./dbObjects');
+const { Users, CurrencyShop, Op } = require('./dbObjects');
 const currency = new Discord.Collection();
 const PREFIX = '!';
 
@@ -292,7 +293,7 @@ const target = message.mentions.users.first() || message.author;
 const user = await Users.findByPrimary(target.id);
 const items = await user.getItems();
 
-if (!items.length) message.channel.send(`${target.tag} has nothing!`);
+if (!items.length) return message.channel.send(`${target.tag} has nothing!`);
 return message.channel.send(`${target.tag} currently has ${items.map(i => `${i.amount} ${i.item.name}`).join(', ')}`);
 ```
 Here we begin to see the power of associations. Even though users and the shop are different tables, and the data is stored separately, we can get a user's inventory by looking at the junction table and join it with the shop. No duplicated item names that waste space!
@@ -324,7 +325,7 @@ We use `.add()` for both removing and adding currency. Since we already check if
 <!-- eslint-skip -->
 
 ```js
-const item = await CurrencyShop.findOne({ where: { name: { $iLike: commandArgs } } });
+const item = await CurrencyShop.findOne({ where: { name: { [Op.like]: commandArgs } } });
 if (!item) return message.channel.send(`That item doesn't exist.`);
 if (item.cost > currency.getBalance(message.author.id)) {
 	return message.channel.send(`You currently have ${currency.getBalance(message.author.id)}, but the ${item.name} costs ${item.cost}!`);

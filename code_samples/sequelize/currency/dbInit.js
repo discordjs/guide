@@ -5,6 +5,7 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 	dialect: 'sqlite',
 	logging: false,
 	storage: 'database.sqlite',
+	operatorsAliases: Sequelize.Op,
 });
 
 const CurrencyShop = sequelize.import('models/CurrencyShop');

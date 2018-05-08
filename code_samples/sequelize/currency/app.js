@@ -2,7 +2,7 @@ const config = require('./config');
 const Discord = require('discord.js');
 
 const client = new Discord.Client();
-const { Users, CurrencyShop } = require('./dbObjects');
+const { Users, CurrencyShop, Op } = require('./dbObjects');
 const currency = new Discord.Collection();
 const PREFIX = '!';
 
@@ -53,7 +53,7 @@ client.on('message', async message => {
 		const user = await Users.findOne({ where: { user_id: target.id } });
 		const items = await user.getItems();
 
-		if (!items.length) message.channel.send(`${target.tag} has nothing!`);
+		if (!items.length) return message.channel.send(`${target.tag} has nothing!`);
 		return message.channel.send(`${target.tag} currently has ${items.map(t => `${t.amount} ${t.item.name}`).join(', ')}`);
 
 	}
@@ -75,7 +75,7 @@ client.on('message', async message => {
 	}
 	else if (command === 'buy') {
 
-		const item = await CurrencyShop.findOne({ where: { name: { $iLike: commandArgs } } });
+		const item = await CurrencyShop.findOne({ where: { name: { [Op.like]:commandArgs } } });
 		if (!item) return message.channel.send('That item doesn\'t exist.');
 		if (item.cost > currency.getBalance(message.author.id)) {
 			return message.channel.send(`You don't have enough currency, ${message.author}`);

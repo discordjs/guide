@@ -5,6 +5,7 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 	dialect: 'sqlite',
 	logging: false,
 	storage: 'database.sqlite',
+	operatorsAliases: Sequelize.Op,
 });
 
 const Users = sequelize.import('models/Users');
@@ -33,4 +34,4 @@ Users.prototype.getItems = function() {
 	});
 };
 
-module.exports = { Users, CurrencyShop, UserItems };
+module.exports = { Users, CurrencyShop, UserItems, Op: Sequelize.Op };

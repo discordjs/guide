@@ -8,6 +8,7 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 	host: 'localhost',
 	dialect: 'sqlite',
 	logging: false,
+	operatorsAliases: Sequelize.Op,
 	// SQLite only
 	storage: 'database.sqlite',
 });
