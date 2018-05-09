@@ -103,7 +103,7 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 	host: 'localhost',
 	dialect: 'sqlite',
 	logging: false,
-	operatorsAliases: Sequelize.Op,
+	operatorsAliases: false,
 	storage: 'database.sqlite',
 });
 
@@ -173,7 +173,7 @@ Users.prototype.getItems = function() {
 	});
 };
 
-module.exports = { Users, CurrencyShop, UserItems, Op: Sequelize.Op };
+module.exports = { Users, CurrencyShop, UserItems };
 ```
 
 Note that we could have abstracted the connection object in another file, and had both `dbInit.js` and `dbObjects.js` use that connection file, but it's not necessary to overly abstract things.
@@ -192,7 +192,8 @@ To put it together, we'll create an `app.js` in the base directory with the foll
 const Discord = require('discord.js');
 
 const client = new Discord.Client();
-const { Users, CurrencyShop, Op } = require('./dbObjects');
+const { Users, CurrencyShop } = require('./dbObjects');
+const { Op } = require('sequelize');
 const currency = new Discord.Collection();
 const PREFIX = '!';
 
