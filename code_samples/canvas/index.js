@@ -31,7 +31,7 @@ const makeAvatar = async url => {
 };
 
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find('name', 'member-log');
+	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
 	if (!channel) return;
 
 	const canvas = Canvas.createCanvas(700, 250);

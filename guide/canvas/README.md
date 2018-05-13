@@ -117,21 +117,40 @@ const Discord = require('discord.js');
 const Canvas = require('canvas');
 const snekfetch = require('snekfetch');
 
-// Make a function and pass the url of the avatar here
-const makeAvatar = async url => {
-	// Create a smaller canvas of the desired dimensions for the avatar
-	const canvas = Canvas.createCanvas(200, 200);
+client.on('guildMemberAdd', async member => {
+	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+	if (!channel) return;
+
+	const canvas = Canvas.createCanvas(700, 200);
 	const ctx = canvas.getContext('2d');
 
-	// We need the avatar as a buffer to work with it
-	const buffer = await snekfetch.get(url).then(r => r.body);
-	// Now we should wait for canvas to load the image
-	const avatar = await Canvas.loadImage(buffer);
-	// Draw the picture onto the entire canvas
-	ctx.drawImage(avatar, 0, 0, canvas.width, canvas.height);
+	const background = await Canvas.loadImage('./wallpaper.jpg');
+	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-	return canvas;
-};
+	// Get the icon in the form of a buffer
+	const buffer = await snekfetch.get(member.user.displayAvatarURL).then(r => r.body);
+	// Wait for canvas to load the image
+	const avatar = await Canvas.loadImage(buffer);
+	// Draw a shape onto the main canvas
+	ctx.drawImage(avatar, 25, 0, 200, canvas.height);
+
+	ctx.strokeStyle = '#FF0000';
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+	const attachment = new Discord.Attachment(canvas.toBuffer(), 'image.png');
+
+	channel.send(`Welcome to the server, ${member}`, attachment);
+});
+```
+
+If followed successfully, the image should now look like this: ![Image](/assets/img/UCndZMo.png)
+
+Looking pretty good, but the picture isn't positioned properly. For starters, it's stretched out vertically too much.
+
+```js
+const Discord = require('discord.js');
+const Canvas = require('canvas');
+const snekfetch = require('snekfetch');
 
 client.on('guildMemberAdd', async member => {
 	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
@@ -143,16 +162,10 @@ client.on('guildMemberAdd', async member => {
 	const background = await Canvas.loadImage('./wallpaper.jpg');
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-	// A new Canvas Image is required for every image
-	const avatarImage = new Canvas.Image();
-	// Call our function that generates an entirely new canvas with the image
-	const circleCanvas = await makeAvatar(member.user.displayAvatarURL);
-	// Since we made a canvas with makeAvatar(), we can return its data into a url format for canvas to interpret
-	const base64 = circleCanvas.toDataURL('image/png');
-	// This is needed to set the source of the image for canvas to recognize it
-	avatarImage.src = base64;
-	// Finally, draw the image
-	ctx.drawImage(avatarImage, 25, 0);
+	const buffer = await snekfetch.get(member.user.displayAvatarURL).then(r => r.body);
+	const avatar = await Canvas.loadImage(buffer);
+	// Move the image downwards vertically and constrain its height to 200, so it's a square
+	ctx.drawImage(avatar, 25, 25, 200, 200);
 
 	ctx.strokeStyle = '#FF0000';
 	ctx.strokeRect(0, 0, canvas.width, canvas.height);
@@ -163,54 +176,39 @@ client.on('guildMemberAdd', async member => {
 });
 ```
 
-If followed successfully, the image should now look like this: ![Image](/assets/img/pz4opFT.png) 
+If followed successfully, the image should now look like this: ![Image](/assets/img/9JfHooY.png)
 
-Now, since we covered how to load external images, I think a circle would look a lot nicer, don't you agree? Well, let's get started with that, then.
+The purpose of this small section is to demonstrate that working with canvas is essentially a hit-and-miss workflow where you fiddle with properties until they work just right.
 
-```js
-const makeAvatar = async url => {
-	const canvas = Canvas.createCanvas(200, 200);
-	const ctx = canvas.getContext('2d');
-
-	// Pick up the pen to start drawing the circle
-	ctx.beginPath();
-	// Form the ark with provided radius and dimensions
-	ctx.arc(100, 100, 100, 0, Math.PI * 2, true);
-	// Put the pen down
-	ctx.closePath();
-	// This is needed for some reason
-	ctx.clip();
-
-	const buffer = await snekfetch.get(url).then(r => r.body);
-	const avatar = await Canvas.loadImage(buffer);
-	ctx.drawImage(avatar, 0, 0, canvas.width, canvas.height);
-
-	return canvas;
-};
-```
-
-If followed successfully, the image should now look like this: ![Image](/assets/img/YctpWWf.png) 
-
-It was pretty easy to draw the circle with the same height as the canvas. However, the image has the same height as the background, which looks a little odd. Let's fix that, shall we?
+Now, since we covered how to load external images and fix dimensions, I think a circle would look a lot nicer, don't you agree? Well, let's get started with that, then.
 
 ```js
+const Discord = require('discord.js');
+const Canvas = require('canvas');
+const snekfetch = require('snekfetch');
+
 client.on('guildMemberAdd', async member => {
 	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
 	if (!channel) return;
 
-	// Make the canvas taller to better fit the circle
-	const canvas = Canvas.createCanvas(700, 250);
+	const canvas = Canvas.createCanvas(700, 200);
 	const ctx = canvas.getContext('2d');
 
 	const background = await Canvas.loadImage('./wallpaper.jpg');
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+	
+	// Pick up the pen
+	ctx.beginPath();
+	// Start the arc to form a circle
+	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
+	// Put the pen down
+	ctx.closePath();
+	// Needed for some reason
+	ctx.clip();
 
-	const avatarImage = new Canvas.Image();
-	const circleCanvas = await makeAvatar(member.user.displayAvatarURL);
-	const base64 = circleCanvas.toDataURL('image/png');
-	avatarImage.src = base64;
-	// Move the circle down a little bit
-	ctx.drawImage(avatarImage, 25, 25);
+	const buffer = await snekfetch.get(member.user.displayAvatarURL).then(r => r.body);
+	const avatar = await Canvas.loadImage(buffer);
+	ctx.drawImage(avatar, 25, 25, 200, 200);
 
 	ctx.strokeStyle = '#FF0000';
 	ctx.strokeRect(0, 0, canvas.width, canvas.height);
@@ -222,7 +220,6 @@ client.on('guildMemberAdd', async member => {
 ```
 
 If followed successfully, the image should now look like this: ![Image](/assets/img/r6CiT3M.png)
-The purpose of sections like these are to illustrate that canvas is generally a hit-and-miss workflow- just play with values until you get them right as you get more comfortable working with canvas.
 
 <p class="tip">You can read documentation on `context.arc()` [here](https://www.w3schools.com/tags/canvas_arc.asp).</p>
 
@@ -239,11 +236,14 @@ client.on('guildMemberAdd', async member => {
 	const background = await Canvas.loadImage('./wallpaper.jpg');
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-	const avatarImage = new Canvas.Image();
-	const circleCanvas = await makeAvatar(member.user.displayAvatarURL);
-	const base64 = circleCanvas.toDataURL('image/png');
-	avatarImage.src = base64;
-	ctx.drawImage(avatarImage, 25, 25);
+	ctx.beginPath();
+	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
+	ctx.closePath();
+	ctx.clip();
+
+	const buffer = await snekfetch.get(member.user.displayAvatarURL).then(r => r.body);
+	const avatar = await Canvas.loadImage(buffer);
+	ctx.drawImage(avatar, 25, 25, 200, 200);
 
 	ctx.strokeStyle = '#FF0000';
 	ctx.strokeRect(0, 0, canvas.width, canvas.height);
@@ -296,18 +296,24 @@ client.on('guildMemberAdd', async member => {
 	const background = await Canvas.loadImage('./wallpaper.jpg');
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-	const avatarImage = new Canvas.Image();
-	const circleCanvas = await makeAvatar(member.user.displayAvatarURL);
-	const base64 = circleCanvas.toDataURL('image/png');
-	avatarImage.src = base64;
-	ctx.drawImage(avatarImage, 25, 25);
+	ctx.beginPath();
+	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
+	ctx.closePath();
+	ctx.clip();
+
+	const buffer = await snekfetch.get(member.user.displayAvatarURL).then(r => r.body);
+	const avatar = await Canvas.loadImage(buffer);
+	ctx.drawImage(avatar, 25, 25, 200, 200);
+
 
 	ctx.strokeStyle = '#FF0000';
 	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
 	// Assign the decided font to the canvas
 	ctx.font = applyText(canvas, member.displayName);
+	// Choose a white color
 	ctx.fillStyle = '#FFFFFF';
+	// Actually fill the text in with a solid color
 	ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
 
 	const attachment = new Discord.Attachment(canvas.toBuffer(), 'image.png');
