@@ -21,7 +21,7 @@ Here is what your guildMemberAdd event should look like on a basic level, taken 
 const Discord = require('discord.js');
 
 client.on('guildMemberAdd', member => {
-	const channel = member.guild.channels.find('name', 'member-log');
+	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
 	if (!channel) return;
 	channel.send(`Welcome to the server, ${member}`);
 });
@@ -38,7 +38,7 @@ const Discord = require('discord.js');
 const Canvas = require('canvas');
 
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find('name', 'member-log');
+	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
 	if (!channel) return;
 
 	// Set a new canvas to the dimensions of 700x200 pixels
@@ -59,7 +59,7 @@ const Discord = require('discord.js');
 const Canvas = require('canvas');
 
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find('name', 'member-log');
+	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
 	if (!channel) return;
 
 	const canvas = Canvas.createCanvas(700, 200);
@@ -88,7 +88,7 @@ const Discord = require('discord.js');
 const Canvas = require('canvas');
 
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find('name', 'member-log');
+	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
 	if (!channel) return;
 
 	const canvas = Canvas.createCanvas(700, 200);
@@ -134,7 +134,7 @@ const makeAvatar = async url => {
 };
 
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find('name', 'member-log');
+	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
 	if (!channel) return;
 
 	const canvas = Canvas.createCanvas(700, 200);
@@ -195,7 +195,7 @@ It was pretty easy to draw the circle with the same height as the canvas. Howeve
 
 ```js
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find('name', 'member-log');
+	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
 	if (!channel) return;
 
 	// Make the canvas taller to better fit the circle
@@ -230,7 +230,7 @@ Now, let's quickly go over adding text to our image. I'm sure that will be helpf
 
 ```js
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find('name', 'member-log');
+	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
 	if (!channel) return;
 
 	const canvas = Canvas.createCanvas(700, 250);
@@ -287,7 +287,7 @@ const applyText = (canvas, username) => {
 };
 
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find('name', 'member-log');
+	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
 	if (!channel) return;
 
 	const canvas = Canvas.createCanvas(700, 250);
