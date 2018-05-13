@@ -34,6 +34,9 @@
 	* [Getting started](/sharding/)
 	* [Additional information](/sharding/additional-information)
 
+	* **Canvas**
+	* [Canvas](/canvas/)
+
 	* **Improving your dev environment**
 	* [Managing your bot process with PM2](/improving-dev-environment/pm2)
 	* [Setting up package.json scripts](/improving-dev-environment/package-json-scripts)
