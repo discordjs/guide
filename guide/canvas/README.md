@@ -196,7 +196,7 @@ client.on('guildMemberAdd', async member => {
 
 	const background = await Canvas.loadImage('./wallpaper.jpg');
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-	
+
 	// Pick up the pen
 	ctx.beginPath();
 	// Start the arc to form a circle
