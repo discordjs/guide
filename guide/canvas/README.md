@@ -52,7 +52,7 @@ client.on('guildMemberAdd', async member => {
 
 <p class="tip">You can force the event to fire by executing some sample code with [eval](https://gist.github.com/Lewdcario/c457c12f7eabfb4115c2067d634d549a), such as with `client.emit('guildMemberAdd', message.member)`. This makes it easier to test as you do not have to rely on a member joining every time.</p>
 
-Now, we need to load the image we want to use into canvas. In order to have more sufficient coverage I will first show how to load a basic image from a local directory. We will use this as our background in our welcomer image. In order for this to work, please download [this image](/assets/img/HoPWpVw.png) and store it in the directory where this code is ran.
+Now, we need to load the image we want to use into canvas. In order to have more sufficient coverage I will first show how to load a basic image from a local directory. We will use this as our background in our welcomer image. In order for this to work, please download [this image](/assets/img/wallpaper.jpg), with the name `wallpaper.jpg` and store it in the directory where this code is ran.
 
 ```js
 const Discord = require('discord.js');
@@ -66,7 +66,7 @@ client.on('guildMemberAdd', async member => {
 	const ctx = canvas.getContext('2d');
 
 	// Since the image takes time to load, we should await it
-	const background = await Canvas.loadImage('./test.png');
+	const background = await Canvas.loadImage('./wallpaper.jpg');
 	// This uses the canvas dimensions to stretch the image onto the entire canvas
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 	// Use helpful Attachment class structure to process the file for you
@@ -94,7 +94,7 @@ client.on('guildMemberAdd', async member => {
 	const canvas = Canvas.createCanvas(700, 200);
 	const ctx = canvas.getContext('2d');
 
-	const background = await Canvas.loadImage('./test.png');
+	const background = await Canvas.loadImage('./wallpaper.jpg');
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
 	// Select the colour of the stroke
@@ -140,7 +140,7 @@ client.on('guildMemberAdd', async member => {
 	const canvas = Canvas.createCanvas(700, 200);
 	const ctx = canvas.getContext('2d');
 
-	const background = await Canvas.loadImage('./test.png');
+	const background = await Canvas.loadImage('./wallpaper.jpg');
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
 	// A new Canvas Image is required for every image
@@ -202,7 +202,7 @@ client.on('guildMemberAdd', async member => {
 	const canvas = Canvas.createCanvas(700, 250);
 	const ctx = canvas.getContext('2d');
 
-	const background = await Canvas.loadImage('./test.png');
+	const background = await Canvas.loadImage('./wallpaper.jpg');
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
 	const avatarImage = new Canvas.Image();
@@ -236,7 +236,7 @@ client.on('guildMemberAdd', async member => {
 	const canvas = Canvas.createCanvas(700, 250);
 	const ctx = canvas.getContext('2d');
 
-	const background = await Canvas.loadImage('./test.png');
+	const background = await Canvas.loadImage('./wallpaper.jpg');
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
 	const avatarImage = new Canvas.Image();
@@ -293,7 +293,7 @@ client.on('guildMemberAdd', async member => {
 	const canvas = Canvas.createCanvas(700, 250);
 	const ctx = canvas.getContext('2d');
 
-	const background = await Canvas.loadImage('./test.png');
+	const background = await Canvas.loadImage('./wallpaper.jpg');
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
 	const avatarImage = new Canvas.Image();
