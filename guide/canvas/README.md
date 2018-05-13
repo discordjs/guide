@@ -146,7 +146,7 @@ client.on('guildMemberAdd', async member => {
 	// A new Canvas Image is required for every image
 	const avatarImage = new Canvas.Image();
 	// Call our function that generates an entirely new canvas with the image
-	const circleCanvas = await makeAvatar(message.author.displayAvatarURL, message);
+	const circleCanvas = await makeAvatar(member.user.displayAvatarURL);
 	// Since we made a canvas with makeAvatar(), we can return its data into a url format for canvas to interpret
 	const base64 = circleCanvas.toDataURL('image/png');
 	// This is needed to set the source of the image for canvas to recognize it
@@ -206,7 +206,7 @@ client.on('guildMemberAdd', async member => {
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
 	const avatarImage = new Canvas.Image();
-	const circleCanvas = await makeAvatar(message.author.displayAvatarURL, message);
+	const circleCanvas = await makeAvatar(member.user.displayAvatarURL);
 	const base64 = circleCanvas.toDataURL('image/png');
 	avatarImage.src = base64;
 	// Move the circle down a little bit
@@ -240,7 +240,7 @@ client.on('guildMemberAdd', async member => {
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
 	const avatarImage = new Canvas.Image();
-	const circleCanvas = await makeAvatar(message.author.displayAvatarURL, message);
+	const circleCanvas = await makeAvatar(member.user.displayAvatarURL);
 	const base64 = circleCanvas.toDataURL('image/png');
 	avatarImage.src = base64;
 	ctx.drawImage(avatarImage, 25, 25);
@@ -297,7 +297,7 @@ client.on('guildMemberAdd', async member => {
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
 	const avatarImage = new Canvas.Image();
-	const circleCanvas = await makeAvatar(message.author.displayAvatarURL, message);
+	const circleCanvas = await makeAvatar(member.user.displayAvatarURL);
 	const base64 = circleCanvas.toDataURL('image/png');
 	avatarImage.src = base64;
 	ctx.drawImage(avatarImage, 25, 25);

@@ -41,7 +41,7 @@ client.on('guildMemberAdd', async member => {
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
 	const avatarImage = new Canvas.Image();
-	const circleCanvas = await makeAvatar(message.author.displayAvatarURL, message);
+	const circleCanvas = await makeAvatar(member.user.displayAvatarURL);
 	const base64 = circleCanvas.toDataURL('image/png');
 	avatarImage.src = base64;
 	ctx.drawImage(avatarImage, 25, 25);
