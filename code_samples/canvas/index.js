@@ -14,22 +14,6 @@ const applyText = (canvas, username) => {
 	return ctx.font;
 };
 
-const makeAvatar = async url => {
-	const canvas = Canvas.createCanvas(200, 200);
-	const ctx = canvas.getContext('2d');
-
-	ctx.beginPath();
-	ctx.arc(100, 100, 100, 0, Math.PI * 2, true);
-	ctx.closePath();
-	ctx.clip();
-
-	const buffer = await snekfetch.get(url).then(r => r.body);
-	const avatar = await Canvas.loadImage(buffer);
-	ctx.drawImage(avatar, 0, 0, canvas.width, canvas.height);
-
-	return canvas;
-};
-
 client.on('guildMemberAdd', async member => {
 	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
 	if (!channel) return;
@@ -37,14 +21,18 @@ client.on('guildMemberAdd', async member => {
 	const canvas = Canvas.createCanvas(700, 250);
 	const ctx = canvas.getContext('2d');
 
-	const background = await Canvas.loadImage('./test.png');
+	const background = await Canvas.loadImage('./wallpaper.jpg');
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-	const avatarImage = new Canvas.Image();
-	const circleCanvas = await makeAvatar(member.user.displayAvatarURL);
-	const base64 = circleCanvas.toDataURL('image/png');
-	avatarImage.src = base64;
-	ctx.drawImage(avatarImage, 25, 25);
+	ctx.beginPath();
+	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
+	ctx.closePath();
+	ctx.clip();
+
+	const buffer = await snekfetch.get(member.user.displayAvatarURL).then(r => r.body);
+	const avatar = await Canvas.loadImage(buffer);
+	ctx.drawImage(avatar, 25, 25, 200, 200);
+
 
 	ctx.strokeStyle = '#FF0000';
 	ctx.strokeRect(0, 0, canvas.width, canvas.height);
