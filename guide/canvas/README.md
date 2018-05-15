@@ -9,12 +9,17 @@ Canvas is an image manipulation tool that allows you to basically modify picture
 ### Installation
 
 #### Windows
-I reccommend using Chocolatey to install this, instructions found [here](https://github.com/Automattic/node-canvas/wiki/Installation---Windows).
+
+You will need a package called Windows Built Tools. You may install it with npm with the following command: `npm i --global --production windows-build-tools`, or with yarn by running the following: `yarn global add --production windows-build-tools`. It is also bundled with Chocolatey, should you choose that installation path. Afterwards, you should follow the instructions detailed [here](https://github.com/Automattic/node-canvas/wiki/Installation---Windows).
+Additionally, make sure Node and Cairo are both either **32-bit** or **64-bit**, whichever your system works with.
+If you are *still* unable to install canvas, you might want to consider installing [Microsoft Visual Studio 2015](https://www.visualstudio.com/vs/older-donwloads/).
 
 #### Other Distributions
+
 You can run one of the commands listed [here](https://github.com/Automattic/node-canvas#compiling) to install the necessary tools canvas needs.
 
 #### After Prerequisites
+
 After running the correct command, if you are using **yarn**, run `yarn add canvas@next`, for **npm** the command to run is `npm i -s canvas@next`.
 
 #### Getting Started
@@ -131,15 +136,15 @@ client.on('guildMemberAdd', async member => {
 	const background = await Canvas.loadImage('./wallpaper.jpg');
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
+	ctx.strokeStyle = '#FF0000';
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
 	// Get the icon in the form of a buffer
 	const buffer = await snekfetch.get(member.user.displayAvatarURL).then(r => r.body);
 	// Wait for canvas to load the image
 	const avatar = await Canvas.loadImage(buffer);
 	// Draw a shape onto the main canvas
 	ctx.drawImage(avatar, 25, 0, 200, canvas.height);
-
-	ctx.strokeStyle = '#FF0000';
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
 	const attachment = new Discord.Attachment(canvas.toBuffer(), 'image.png');
 
@@ -166,13 +171,13 @@ client.on('guildMemberAdd', async member => {
 	const background = await Canvas.loadImage('./wallpaper.jpg');
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
+	ctx.strokeStyle = '#FF0000';
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
 	const buffer = await snekfetch.get(member.user.displayAvatarURL).then(r => r.body);
 	const avatar = await Canvas.loadImage(buffer);
 	// Move the image downwards vertically and constrain its height to 200, so it's a square
 	ctx.drawImage(avatar, 25, 25, 200, 200);
-
-	ctx.strokeStyle = '#FF0000';
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
 	const attachment = new Discord.Attachment(canvas.toBuffer(), 'image.png');
 
@@ -201,6 +206,9 @@ client.on('guildMemberAdd', async member => {
 	const background = await Canvas.loadImage('./wallpaper.jpg');
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
+	ctx.strokeStyle = '#FF0000';
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
 	// Pick up the pen
 	ctx.beginPath();
 	// Start the arc to form a circle
@@ -213,9 +221,6 @@ client.on('guildMemberAdd', async member => {
 	const buffer = await snekfetch.get(member.user.displayAvatarURL).then(r => r.body);
 	const avatar = await Canvas.loadImage(buffer);
 	ctx.drawImage(avatar, 25, 25, 200, 200);
-
-	ctx.strokeStyle = '#FF0000';
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
 	const attachment = new Discord.Attachment(canvas.toBuffer(), 'image.png');
 
@@ -240,15 +245,6 @@ client.on('guildMemberAdd', async member => {
 	const background = await Canvas.loadImage('./wallpaper.jpg');
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-	ctx.beginPath();
-	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
-	ctx.closePath();
-	ctx.clip();
-
-	const buffer = await snekfetch.get(member.user.displayAvatarURL).then(r => r.body);
-	const avatar = await Canvas.loadImage(buffer);
-	ctx.drawImage(avatar, 25, 25, 200, 200);
-
 	ctx.strokeStyle = '#FF0000';
 	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
@@ -259,6 +255,15 @@ client.on('guildMemberAdd', async member => {
 	// Actually fill the text with a solid color
 	ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
 
+	ctx.beginPath();
+	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
+	ctx.closePath();
+	ctx.clip();
+
+	const buffer = await snekfetch.get(member.user.displayAvatarURL).then(r => r.body);
+	const avatar = await Canvas.loadImage(buffer);
+	ctx.drawImage(avatar, 25, 25, 200, 200);
+
 	const attachment = new Discord.Attachment(canvas.toBuffer(), 'image.png');
 
 	channel.send(`Welcome to the server, ${member}`, attachment);
@@ -266,6 +271,8 @@ client.on('guildMemberAdd', async member => {
 ```
 
 If followed successfully, the image should now look like this: ![Image](/assets/img/3rLGb1s.png)
+
+If you get an error like `Fontconfig error: Cannot load default config file`, it means you do not have any fonts installed on your system. Run the following command to install it: `sudo apt-get install fontconfig`. 
 
 Maybe you have noticed, or considered, where if a member's username is too long, then the output won't be quite nice. This is because the text overflows out of the canvas, and you don't have any measures in place for that. Let's take care of this issue, shall we?
 
@@ -300,6 +307,14 @@ client.on('guildMemberAdd', async member => {
 	const background = await Canvas.loadImage('./wallpaper.jpg');
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
+	ctx.strokeStyle = '#FF0000';
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+	// Assign the decided font to the canvas
+	ctx.font = applyText(canvas, member.displayName);
+	ctx.fillStyle = '#FFFFFF';
+	ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
+
 	ctx.beginPath();
 	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
 	ctx.closePath();
@@ -308,15 +323,6 @@ client.on('guildMemberAdd', async member => {
 	const buffer = await snekfetch.get(member.user.displayAvatarURL).then(r => r.body);
 	const avatar = await Canvas.loadImage(buffer);
 	ctx.drawImage(avatar, 25, 25, 200, 200);
-
-
-	ctx.strokeStyle = '#FF0000';
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
-
-	// Assign the decided font to the canvas
-	ctx.font = applyText(canvas, member.displayName);
-	ctx.fillStyle = '#FFFFFF';
-	ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
 
 	const attachment = new Discord.Attachment(canvas.toBuffer(), 'image.png');
 

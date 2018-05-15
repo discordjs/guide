@@ -24,6 +24,13 @@ client.on('guildMemberAdd', async member => {
 	const background = await Canvas.loadImage('./wallpaper.jpg');
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
+	ctx.strokeStyle = '#FF0000';
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+	ctx.font = applyText(canvas, member.displayName);
+	ctx.fillStyle = '#FFFFFF';
+	ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);	
+
 	ctx.beginPath();
 	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
 	ctx.closePath();
@@ -32,14 +39,6 @@ client.on('guildMemberAdd', async member => {
 	const buffer = await snekfetch.get(member.user.displayAvatarURL).then(r => r.body);
 	const avatar = await Canvas.loadImage(buffer);
 	ctx.drawImage(avatar, 25, 25, 200, 200);
-
-
-	ctx.strokeStyle = '#FF0000';
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
-
-	ctx.font = applyText(canvas, member.displayName);
-	ctx.fillStyle = '#FFFFFF';
-	ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
 
 	const attachment = new Discord.Attachment(canvas.toBuffer(), 'image.png');
 
