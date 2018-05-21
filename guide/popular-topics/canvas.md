@@ -4,7 +4,7 @@
 
 Canvas is an image manipulation tool that allows you to basically modify pictures with code. We will explore how to use this module in a heavily requested feature: guild member welcome messages. But first, we must go through the intense labor of installing canvas. It's highly recommended that you use a Linux ditro for this because it'll be much easier to install on.
 
-<p class="warning">This guide assumes you have read the [async await](/additional-info/async-await) portion of the guide.</p>
+<p class="warning">You should know [async await](/additional-info/async-await) before continuing, as we will make use of this feature.</p>
 
 ### Installation
 
