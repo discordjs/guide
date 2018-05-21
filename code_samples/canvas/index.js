@@ -3,14 +3,15 @@ const Canvas = require('canvas');
 const snekfetch = require('snekfetch');
 
 const client = new Discord.Client();
-client.login('token');
 
 const applyText = (canvas, username) => {
 	const ctx = canvas.getContext('2d');
 	let size = 70;
+
 	do {
 		ctx.font = `${size -= 10}px sans-serif`;
 	} while (ctx.measureText(username).width > canvas.width - 300);
+
 	return ctx.font;
 };
 
@@ -36,7 +37,7 @@ client.on('guildMemberAdd', async member => {
 	ctx.closePath();
 	ctx.clip();
 
-	const buffer = await snekfetch.get(member.user.displayAvatarURL).then(r => r.body);
+	const { body: buffer } = await snekfetch.get(member.user.displayAvatarURL);
 	const avatar = await Canvas.loadImage(buffer);
 	ctx.drawImage(avatar, 25, 25, 200, 200);
 
@@ -44,3 +45,5 @@ client.on('guildMemberAdd', async member => {
 
 	channel.send(`Welcome to the server, ${member}`, attachment);
 });
+
+client.login('token');

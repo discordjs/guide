@@ -2,7 +2,7 @@
 
 <p class="tip">For this guide, we will be using `canvas@next`. At the time of writing, that is `canvas@2.0.0-alpha.12`, so ensure your `package.json` has that or a similar version after installation.</p>
 
-Canvas is an image manipulation tool that allows you to basically modify pictures with code. We will explore how to use this module in a heavily requested feature: guild member welcome messages. But first, we must go through the intense labour of installing canvas. I highly reccommend using a linux distro because it is much easier to install.
+Canvas is an image manipulation tool that allows you to basically modify pictures with code. We will explore how to use this module in a heavily requested feature: guild member welcome messages. But first, we must go through the intense labor of installing canvas. It's highly recommended that you use a Linux ditro for this because it'll be much easier to install on.
 
 <p class="warning">This guide assumes you have read the [async await](/additional-info/async-await) portion of the guide.</p>
 
@@ -10,9 +10,9 @@ Canvas is an image manipulation tool that allows you to basically modify picture
 
 #### Windows
 
-You will need a package called Windows Built Tools. You may install it with npm with the following command: `npm i --global --production windows-build-tools`, or with yarn by running the following: `yarn global add --production windows-build-tools`. It is also bundled with Chocolatey, should you choose that installation path. Afterwards, you should follow the instructions detailed [here](https://github.com/Automattic/node-canvas/wiki/Installation---Windows).
+You will need a package called Windows Build Tools. You may install it with npm with the following command: `npm i --global --production windows-build-tools`, or with yarn by running the following: `yarn global add --production windows-build-tools`. It is also bundled with Chocolatey, should you choose that installation path. Afterwards, you should follow the instructions detailed [here](https://github.com/Automattic/node-canvas/wiki/Installation---Windows).
 Additionally, make sure Node and Cairo are both either **32-bit** or **64-bit**, whichever your system works with.
-If you are *still* unable to install canvas, you might want to consider installing [Microsoft Visual Studio 2015](https://www.visualstudio.com/vs/older-donwloads/).
+If you are *still* unable to install canvas, you might want to consider installing [Microsoft Visual Studio 2015](https://www.visualstudio.com/vs/older-downloads/).
 
 #### Other Distributions
 
@@ -140,7 +140,7 @@ client.on('guildMemberAdd', async member => {
 	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
 	// Get the icon in the form of a buffer
-	const buffer = await snekfetch.get(member.user.displayAvatarURL).then(r => r.body);
+	const { body: buffer } = await snekfetch.get(member.user.displayAvatarURL);
 	// Wait for canvas to load the image
 	const avatar = await Canvas.loadImage(buffer);
 	// Draw a shape onto the main canvas
@@ -174,7 +174,7 @@ client.on('guildMemberAdd', async member => {
 	ctx.strokeStyle = '#FF0000';
 	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-	const buffer = await snekfetch.get(member.user.displayAvatarURL).then(r => r.body);
+	const { body: buffer } = await snekfetch.get(member.user.displayAvatarURL);
 	const avatar = await Canvas.loadImage(buffer);
 	// Move the image downwards vertically and constrain its height to 200, so it's a square
 	ctx.drawImage(avatar, 25, 25, 200, 200);
@@ -185,11 +185,11 @@ client.on('guildMemberAdd', async member => {
 });
 ```
 
-If followed successfully, the image should now look like this: ![Image](/assets/img/9JfHooY.png)
+![Image](/assets/img/9JfHooY.png)
 
 The purpose of this small section is to demonstrate that working with canvas is essentially a hit-and-miss workflow where you fiddle with properties until they work just right.
 
-Now, since we covered how to load external images and fix dimensions, I think a circle would look a lot nicer, don't you agree? Well, let's get started with that, then.
+Now, since we covered how to load external images and fix dimensions, we should use a circle to improve the overall look of the image.
 
 ```js
 const Discord = require('discord.js');
@@ -218,7 +218,7 @@ client.on('guildMemberAdd', async member => {
 	// Needed for some reason
 	ctx.clip();
 
-	const buffer = await snekfetch.get(member.user.displayAvatarURL).then(r => r.body);
+	const { body: buffer } = await snekfetch.get(member.user.displayAvatarURL);
 	const avatar = await Canvas.loadImage(buffer);
 	ctx.drawImage(avatar, 25, 25, 200, 200);
 
@@ -228,7 +228,7 @@ client.on('guildMemberAdd', async member => {
 });
 ```
 
-If followed successfully, the image should now look like this: ![Image](/assets/img/r6CiT3M.png)
+![Image](/assets/img/r6CiT3M.png)
 
 <p class="tip">You can read documentation on `context.arc()` [here](https://www.w3schools.com/tags/canvas_arc.asp).</p>
 
@@ -260,7 +260,7 @@ client.on('guildMemberAdd', async member => {
 	ctx.closePath();
 	ctx.clip();
 
-	const buffer = await snekfetch.get(member.user.displayAvatarURL).then(r => r.body);
+	const { body: buffer } = await snekfetch.get(member.user.displayAvatarURL);
 	const avatar = await Canvas.loadImage(buffer);
 	ctx.drawImage(avatar, 25, 25, 200, 200);
 
@@ -270,9 +270,9 @@ client.on('guildMemberAdd', async member => {
 });
 ```
 
-If followed successfully, the image should now look like this: ![Image](/assets/img/3rLGb1s.png)
+![Image](/assets/img/3rLGb1s.png)
 
-If you get an error like `Fontconfig error: Cannot load default config file`, it means you do not have any fonts installed on your system. Run the following command to install it: `sudo apt-get install fontconfig`. 
+If you get an error like `Fontconfig error: Cannot load default config file`, it means you do not have any fonts installed on your system. Run the following command to install it: `sudo apt-get install fontconfig`. This might also need to be installed if you see boxes where the text should be. As for windows, you will need to find a way to install fonts.
 
 Maybe you have noticed, or considered, where if a member's username is too long, then the output won't be quite nice. This is because the text overflows out of the canvas, and you don't have any measures in place for that. Let's take care of this issue, shall we?
 
@@ -320,7 +320,7 @@ client.on('guildMemberAdd', async member => {
 	ctx.closePath();
 	ctx.clip();
 
-	const buffer = await snekfetch.get(member.user.displayAvatarURL).then(r => r.body);
+	const { body: buffer } = await snekfetch.get(member.user.displayAvatarURL);
 	const avatar = await Canvas.loadImage(buffer);
 	ctx.drawImage(avatar, 25, 25, 200, 200);
 
@@ -330,5 +330,12 @@ client.on('guildMemberAdd', async member => {
 });
 ```
 
-Before adjustment: ![Image](/assets/img/NKw7P2q.png)<br />
+Before adjustment: ![Image](/assets/img/NKw7P2q.png)
+
 After adjustment: ![Image](/assets/img/Ja4Ywf4.png)
+
+And that's it! We have covered the basics of image manipulation, text generation and loading from a remote source.
+
+## Resulting code
+
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code_samples/canvas/).
