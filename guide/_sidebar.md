@@ -23,6 +23,7 @@
 	* [Reactions](/popular-topics/reactions)
 	* [Collectors](/popular-topics/collectors)
 	* [Common questions](/popular-topics/common-questions)
+	* [Canvas](/popular-topics/canvas)
 	* [Miscellaneous examples](/popular-topics/miscellaneous-examples)
 
 * **Extended Learning**
