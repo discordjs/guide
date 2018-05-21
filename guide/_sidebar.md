@@ -23,6 +23,7 @@
 	* [Reactions](/popular-topics/reactions)
 	* [Collectors](/popular-topics/collectors)
 	* [Common questions](/popular-topics/common-questions)
+	* [Canvas](/popular-topics/canvas)
 	* [Miscellaneous examples](/popular-topics/miscellaneous-examples)
 
 * **Extended Learning**
@@ -33,9 +34,6 @@
 	* **Sharding**
 	* [Getting started](/sharding/)
 	* [Additional information](/sharding/additional-information)
-
-	* **Canvas**
-	* [Canvas](/canvas/)
 
 	* **Improving your dev environment**
 	* [Managing your bot process with PM2](/improving-dev-environment/pm2)

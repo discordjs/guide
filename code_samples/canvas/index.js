@@ -30,7 +30,7 @@ client.on('guildMemberAdd', async member => {
 
 	ctx.font = applyText(canvas, member.displayName);
 	ctx.fillStyle = '#FFFFFF';
-	ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);	
+	ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
 
 	ctx.beginPath();
 	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
