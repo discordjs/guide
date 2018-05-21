@@ -85,7 +85,6 @@ client.on('guildMemberAdd', async member => {
 });
 ```
 
-If you have that code working it should present you with the following image:
 ![Image](/assets/img/8CQvVRV.png)
 
 If you get an error, such as `Error: error while reading from input stream`, then the provided path to the file was incorrect.
@@ -117,7 +116,7 @@ client.on('guildMemberAdd', async member => {
 });
 ```
 
-If followed successfully, the image should now look like this: ![Image](/assets/img/2vsIPEP.png) 
+![Image](/assets/img/2vsIPEP.png) 
 
 Quite boring and plain, is it not? Fear not, for you have a bit more to do until we reach completion. Since designing is hard, let's just place a basic square shaped avatar for now on the left side of the image. In interest of coverage, you will also make it a circle afterwards.
 
@@ -152,7 +151,7 @@ client.on('guildMemberAdd', async member => {
 });
 ```
 
-If followed successfully, the image should now look like this: ![Image](/assets/img/UCndZMo.png)
+![Image](/assets/img/UCndZMo.png)
 
 Looking pretty good, but the picture isn't positioned properly. For starters, it's stretched out vertically too much.
 
