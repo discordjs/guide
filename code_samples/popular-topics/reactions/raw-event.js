@@ -30,4 +30,8 @@ client.on('messageReactionAdd', (reaction, user) => {
 	console.log(`${user.username} reacted with "${reaction.emoji.name}".`);
 });
 
+client.on('messageReactionRemove', (reaction, user) => {
+	console.log(`${user.username} removed their "${reaction.emoji.name}" reaction.`);
+});
+
 client.login('your-token-goes-here');
