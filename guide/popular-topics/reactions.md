@@ -270,7 +270,7 @@ All that's left is to fetch the actual reaction from the message and emit the ev
 const reaction = message.reactions.get(emojiKey);
 ```
 
-<p class="tip">In the master branch/v12, reactions are keyed by their ID only, not in a `name:ID` format.</p>
+<p class="tip">In the master branch/v12, reactions are keyed by their ID or name only, not in a `name:ID` format.</p>
 
 After that, simply emit the event with the proper data you've built up.
 
@@ -278,7 +278,23 @@ After that, simply emit the event with the proper data you've built up.
 client.emit(events[event.t], reaction, user);
 ```
 
-And you're done! If you send a message, restart your bot, and react to that message, your `messageReactionAdd` event should log as normal. You can also easily adjust this code to include the `messageReactionRemove` event, if need be.
+If you managed to get `cannot read property emoji of undefined` when testing, then that means you removed the last reaction in the message, so there was nothing to retrieve from `message.reactions`. What you should do is create a temporary object that can be passed through the event as if nothing ever happened. Simply adjust the last few lines like so:
+
+```js
+let reaction = message.reactions.get(emojiKey);
+
+if (!reaction) {
+	// Create an object that can be passed through the event like normal
+	const emoji = new Discord.Emoji(client.guilds.get(data.guild_id), data.emoji);
+	reaction = new Discord.MessageReaction(message, emoji, 1, data.user_id === client.user.id);
+}
+
+client.emit(events[event.t], reaction, user);
+```
+
+<p class="tip">In the master branch, you can avoid that mess by applying [this fix](https://gist.github.com/Lewdcario/52e1c66433c994c5c3c272284b9ab29c) instead.</p>
+
+And you're done! If you send a message, restart your bot, and react to that message, your `messageReactionAdd` and `messageReactionRemove` events should log as normal.
 
 ## Resulting code
 

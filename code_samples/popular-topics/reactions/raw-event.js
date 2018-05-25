@@ -21,7 +21,12 @@ client.on('raw', async event => {
 
 	const message = await channel.fetchMessage(data.message_id);
 	const emojiKey = (data.emoji.id) ? `${data.emoji.name}:${data.emoji.id}` : data.emoji.name;
-	const reaction = message.reactions.get(emojiKey);
+	let reaction = message.reactions.get(emojiKey);
+	
+	if (!reaction) {
+		const emoji = new Discord.Emoji(client.guilds.get(data.guild_id), data.emoji); 
+		reaction = new Discord.MessageReaction(message, emoji, 1, data.user_id === client.user.id); \
+	} 
 
 	client.emit(events[event.t], reaction, user);
 });
