@@ -1,9 +1,8 @@
 ## Setting up Canvas
 
+Canvas is an image manipulation tool that allows you to modify images with code. We'll explore how to use this module in a heavily requested feature: guild member welcome messages. But first, you must go through the intense labor of installing Canvas. It's highly recommended that you use a Linux distribution for this because it'll be much easier to install on.
 
-Canvas is an image manipulation tool that allows you to modify images with code. We will explore how to use this module in a heavily requested feature: guild member welcome messages. But first, we must go through the intense labor of installing Canvas. It's highly recommended that you use a Linux distribution for this because it'll be much easier to install on.
-
-<p class="tip">For this guide, we will be using `canvas@next`. At the time of writing, that is `canvas@2.0.0-alpha.12`, so ensure your `package.json` has that or a similar version after installation.</p>
+<p class="tip">For this guide, we'll be using `canvas@next`. At the time of writing, that is `canvas@2.0.0-alpha.12`, so ensure your `package.json` has that or a similar version after installation.</p>
 
 <p class="warning">Be sure that you're familiar with things like [async/await](/additional-info/async-await) and [object destructuring](/additional-info/es6-syntax?id=object-destructuring) before continuing, as we'll be making use of features like these.</p>
 
@@ -62,7 +61,7 @@ What this will do is trigger the `guildMemberAdd` event while passing in the mes
 
 #### Basic image loading
 
-The end goal will be to display the user's avatar, username, and a simple "Welcome!" message when they join. After importing the Canvas module and initializing it, you should to load the images. With Canvas, you have to specify where the image comes from first, naturally, and then specify how it gets loaded into the actual Canvas using `ctx`, which is what you will use to interact with Canvas.
+The end goal will be to display the user's avatar, username, and a simple "Welcome!" message when they join. After importing the Canvas module and initializing it, you should load the images. With Canvas, you have to specify where the image comes from first, naturally, and then specify how it gets loaded into the actual Canvas using `ctx`, which is what you will use to interact with Canvas.
 
 <p class="tip">`node-canvas` works almost identical to HTML5 Canvas. You can read the HTML5 Canvas tutorials on [w3Schools](https://www.w3schools.com/html/html5_canvas.asp) and [MDN](https://developer.mozilla.org/kab/docs/Web/API/Canvas_API) for more information later!</p>
 
@@ -81,7 +80,7 @@ client.on('guildMemberAdd', async member => {
 });
 ```
 
-Now, you need to load the image you want to use into Canvas. In order to have more sufficient coverage, we'll first show you how to load a basic image from a local directory. We'll be using [this image](https://cdn.discordapp.com/attachments/300527776727957504/449437366243950592/wallpaper.jpg) as the background in the welcome image, but you can use whatever you want. Be sure to download the file, name it `wallpaper.jpg`, and save it inside the same direcory as your main bot file.
+Now, you need to load the image you want to use into Canvas. In order to have more sufficient coverage, we'll first show you how to load a basic image from a local directory. We'll be using [this image](https://cdn.discordapp.com/attachments/300527776727957504/449437366243950592/wallpaper.jpg) as the background in the welcome image, but you can use whatever you want. Be sure to download the file, name it `wallpaper.jpg`, and save it inside the same directory as your main bot file.
 
 ```js
 client.on('guildMemberAdd', async member => {
@@ -91,7 +90,7 @@ client.on('guildMemberAdd', async member => {
 	const canvas = Canvas.createCanvas(700, 250);
 	const ctx = canvas.getContext('2d');
 
-	// Since the image takes time to load, we should await it
+	// Since the image takes time to load, you should await it
 	const background = await Canvas.loadImage('./wallpaper.jpg');
 	// This uses the canvas dimensions to stretch the image onto the entire canvas
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
@@ -134,7 +133,7 @@ client.on('guildMemberAdd', async member => {
 
 ![Image](/assets/img/2vsIPEP.png)
 
-A bit plain, right? Fear not, for you have a bit more to do until we reach completion. Since the goal of guide page is focused more on actual code than design, let's just place a basic square shaped avatar for now on the left side of the image. In interest of coverage, you will also make it a circle afterwards.
+A bit plain, right? Fear not, for you have a bit more to do until you reach completion. Since the goal of guide page is focused more on actual code than design, let's just place a basic square shaped avatar for now on the left side of the image. In interest of coverage, you will also make it a circle afterwards.
 
 ```js
 client.on('guildMemberAdd', async member => {
@@ -196,7 +195,7 @@ client.on('guildMemberAdd', async member => {
 
 The purpose of this small section is to demonstrate that working with Canvas is essentially a hit-and-miss workflow where you fiddle with properties until they work just right.
 
-Since we covered how to load external images and fix dimensions, we'll turn the avatar into a circle to improve the overall style of the image.
+Since we covered how to load external images and fix dimensions, let's turn the avatar into a circle to improve the overall style of the image.
 
 ```js
 client.on('guildMemberAdd', async member => {
@@ -218,7 +217,7 @@ client.on('guildMemberAdd', async member => {
 	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
 	// Put the pen down
 	ctx.closePath();
-	// Clip off the region we drew on
+	// Clip off the region you drew on
 	ctx.clip();
 
 	const { body: buffer } = await snekfetch.get(member.user.displayAvatarURL);
@@ -383,7 +382,7 @@ client.on('guildMemberAdd', async member => {
 
 ![Final result](/assets/img/DDzEgdZ.png)
 
-And that's it! We have covered the basics of image manipulation, text generation and loading from a remote source.
+And that's it! We have covered the basics of image manipulation, text generation, and loading from a remote source.
 
 ## Resulting code
 
