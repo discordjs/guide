@@ -1,8 +1,6 @@
 ## Extended Changes
 
-<p class="tip">This page is a follow-up and bases its code off of [the previous page](/sharding/additional-information.md/).</p>
-
-<p class="warning">Assumes knowledge of arguments</p>
+<p class="tip">This page is a follow-up and bases its code off of [the previous page](/sharding/additional-information.md/), which assumes knowledge of arguments and passing functions.</p>
 
 ### Sending Messages Cross-Shards
 
@@ -215,4 +213,6 @@ client.on('message', message => {
 });
 ```
 
-And voila! The emoji should have pretty-printed in a message as you'd expect.
+And that's all! The emoji should have pretty-printed in a message as you'd expect.
+
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code_samples/sharding/extended).
