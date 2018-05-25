@@ -31,10 +31,16 @@ You will most likely have to change some code in order to get your newly sharded
 // bot.js
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const prefix = '!';
 
 client.on('message', message => {
-	if (message.content === 'stats') {
-		message.reply(`Server count: ${client.guilds.size}`);
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+	const args = message.content.slice(prefix.length).split(/ +/);
+	const command = args.shift().toLowerCase();
+
+	if (command === 'stats') {
+		return message.reply(`Server count: ${client.guilds.size}`);
 	}
 });
 
@@ -68,10 +74,16 @@ While it's a bit unattractive to have more nesting in your commands, it is neces
 ```js
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const prefix = '!';
 
 client.on('message', message => {
-	if (message.content === 'stats') {
-		client.shard.broadcastEval('this.guilds.size').then(results => {
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+	const args = message.content.slice(prefix.length).split(/ +/);
+	const command = args.shift().toLowerCase();
+
+	if (command === 'stats') {
+		return client.shard.broadcastEval('this.guilds.size').then(results => {
 			message.reply(`server count: ${results.reduce((prev, val) => prev + val, 0)}`);
 		}).catch(console.error);
 	}
