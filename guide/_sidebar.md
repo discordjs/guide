@@ -22,8 +22,8 @@
 	* **Popular Topics**
 	* [Reactions](/popular-topics/reactions)
 	* [Collectors](/popular-topics/collectors)
+	* [Image manipulation with Canvas](/popular-topics/canvas)
 	* [Common questions](/popular-topics/common-questions)
-	* [Canvas](/popular-topics/canvas)
 	* [Miscellaneous examples](/popular-topics/miscellaneous-examples)
 
 * **Extended Learning**
