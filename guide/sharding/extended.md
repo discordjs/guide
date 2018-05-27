@@ -2,9 +2,9 @@
 
 <p class="tip">This page is a follow-up and bases its code off of [the previous page](/sharding/additional-information.md/), which assumes knowledge of arguments and passing functions.</p>
 
-### Sending Messages Cross-Shards
+### Sending messages across shards
 
-Let's start off with a basic usage with shards. If you are like myself, you might have wanted to send a message to another channel, which may or may not necessarily be on the same guild, which means it may or may not be on the same shard. To remedy this, you will need to go back to your friend `.broadcastEval()` and try every shard for the desired channel. Suppose you have the following code in your `message` event:
+Let's start off with a basic usage with shards. At some point in bot development, you might have wanted to send a message to another channel, which may or may not necessarily be on the same guild, which means it may or may not be on the same shard. To remedy this, you will need to go back to your friend `.broadcastEval()` and try every shard for the desired channel. Suppose you have the following code in your `message` event:
 
 ```js
 client.on('message', message => {
@@ -27,63 +27,56 @@ client.on('message', message => {
 
 This will never work for a channel that lies on another shard. So, let's remedy this.
 
-```js
-client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-	const args = message.content.slice(prefix.length).split(/ +/);
-	const command = args.shift().toLowerCase();
-
+```diff
 	if (command === 'send') {
 		if (!args.length) return message.reply('please specify a destination channel id.');
 
-		return client.shard.broadcastEval(`
-			const channel = this.channels.get('${args[0]}');
-			if (channel) {
-				channel.send('This is a message from shard ${this.shard.id}!');
-				true;
-			}
-			else false;
-		`)
-			.then(console.log);
+-		const channel = client.channels.get(args[0]);
+-		if (!channel) return message.reply('I could not find such a channel.');
+
+-		channel.send('Hello!');
+-		return message.reply(`I have sent a message to channel \`${args[0]}\`!`);
++		return client.shard.broadcastEval(`
++			const channel = this.channels.get('${args[0]}');
++			if (channel) {
++				channel.send('This is a message from shard ${this.shard.id}!');
++				true;
++			}
++			else {
++				false;
++			}
++		`)
++			.then(console.log);
 	}
-});
 ```
 
 If all is well, then you should notice an output like the following: `[false, true, false, false]`. If it is not clear why `true` and `false` are hanging around, it is because that is how one "returns" out of an eval statement. You will want this if you want any feedback in the results. Now that you have observed said results, you can adjust the command to give yourself proper feedback, like so:
 
-```js
-client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+```diff
+	return client.shard.broadcastEval(`
+		const channel = this.channels.get('${args[0]}');
+		if (channel) {
+			channel.send('This is a message from shard ${this.shard.id}!');
+			true;
+		}
+		else {
+			false;
+		}
+	`)
+-		.then(console.log);
++		.then(sentArray => {
++			// Search for a non falsy value before providing feedback
++			if (!sentArray.includes(true)) {
++				return message.reply('I could not find such a channel.');
++			}
 
-	const args = message.content.slice(prefix.length).split(/ +/);
-	const command = args.shift().toLowerCase();
-
-	if (command === 'send') {
-		if (!args.length) return message.reply('please specify a destination channel id.');
-
-		return client.shard.broadcastEval(`
-			const channel = this.channels.get('${args[0]}');
-			if (channel) {
-				channel.send('This is a message from shard ${this.shard.id}!');
-				true;
-			}
-			else false;
-		`)
-			.then(results => {
-				// Search for a non falsy value before providing feedback
-				const found = results.find(result => result);
-				if (!found) return message.reply('I could not find such a channel.');
-
-				return message.reply(`I have sent a message to channel \`${args[0]}\`!`);
-			});
-	}
-});
++			return message.reply(`I have sent a message to channel \`${args[0]}\`!`);
++		});
 ```
 
 And that's it for this section! You have successfully communicated across all of your shards.
 
-### Using Functions Continued
+### Using functions continued
 
 If you remember, there was a brief mention of passing functions through `.broadcastEval()`, but no super clear description of exactly how to go about it. Well, fret not, for it will be covered in this section! Suppose you have the following code in your `message` event:
 
@@ -142,28 +135,11 @@ Now, run this code, and you will surely get a result that looks like the followi
 ```js
 [ { guild:
      { members: {},
-       channels: {},
-       roles: {},
-       presences: {},
-       available: true,
+       // ...
        id: '222078108977594368',
        name: 'Discord.js Official',
        icon: '6e4b4d1a0c7187f9fd5d4976c50ac96e',
-       splash: null,
-       region: 'eu-west',
-       memberCount: 10984,
-       large: true,
-       features: [],
-       applicationID: null,
-       afkTimeout: 300,
-       afkChannelID: null,
-       systemChannelID: '66564597481480192',
-       verificationLevel: 3,
-       explicitContentFilter: 2,
-       mfaLevel: 1,
-       joinedTimestamp: 1516080348268,
-       ownerID: '66564597481480192',
-       _rawVoiceStates: {},
+       // ...
        emojis: {} },
     id: '383735055509356544',
     name: 'duckSmug',
@@ -175,44 +151,40 @@ Now, run this code, and you will surely get a result that looks like the followi
 
 While this result isnt *necessarily* bad or incorrect, it's simply a raw object that got `JSON.parse()`'d and `JSON.stringify()`'d over, so all of the circular references are gone. More importantly, The object is no longer a true `Emoji` object as provided by discord.js. This means none of the convenience methods usually provided to you are available. If this is not a concern to you, then you can effectively skip the rest of this section. However, this is a tutorial, so it should be covered regardless! Let's remedy this issue, shall we?
 
-```js
+```diff
 function findEmoji(id) {
 	const temp = this.emojis.get(id);
 	if (!temp) return false;
-
-	// Clone the object because it is modified right after, so as to not affect the cache in client.emojis
-	const emoji = Object.assign({}, temp);
-	// Circular references can't be returned outside of eval, so change it to the id
-	if (emoji.guild) emoji.guild = emoji.guild.id;
-	// A new object will be construted, so simulate raw data by adding this property back
-	emoji.require_colons = emoji.requiresColons;
-
++
++	// Clone the object because it is modified right after, so as to not affect the cache in client.emojis
++	const emoji = Object.assign({}, temp);
++	// Circular references can't be returned outside of eval, so change it to the id
++	if (emoji.guild) emoji.guild = emoji.guild.id;
++	// A new object will be construted, so simulate raw data by adding this property back
++	emoji.require_colons = emoji.requiresColons;
++
 	return emoji;
 }
+```
 
-client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+Now, you will want to make use of it in the actual command:
 
-	const args = message.content.slice(prefix.length).split(/ +/);
-	const command = args.shift().toLowerCase();
-
-	if (command === 'emoji') {
-		if (!args.length) return message.reply('please specify an emoji id to search for.');
-
-		return client.shard.broadcastEval(`(${findEmoji}).call(this, '${args[0]}')`)
-			.then(results => {
-				// Locate a non falsy result, which will be the emoji in question
-				const found = results.find(result => result);
-				if (!found) return message.reply('I could not find such an emoji.');
-
-				// Reconstruct an emoji object as required by discord.js
-				const emoji = new Discord.Emoji(client.guilds.get(found.guild), found);
-				return message.reply(`I have found an emoji ${emoji}!`);
-			});
-	}
-});
+```diff
+	return client.shard.broadcastEval(`(${findEmoji}).call(this, '${args[0]}')`)
+-		.then(results => console.log(results));
++		.then(emojiArray => {
++			// Locate a non falsy result, which will be the emoji in question
++			const foundEmoji = emojiArray.find(emoji => emoji);
++			if (!foundEmoji) return message.reply('I could not find such an emoji.');
++
++			// Reconstruct an emoji object as required by discord.js
++			const emoji = new Discord.Emoji(client.guilds.get(foundEmoji.guild), foundEmoji);
++			return message.reply(`I have found an emoji ${emoji}!`);
++		});
 ```
 
 And that's all! The emoji should have pretty-printed in a message as you'd expect.
+
+### Resulting code
 
 If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code_samples/sharding/extended).

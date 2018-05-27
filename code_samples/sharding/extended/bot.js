@@ -22,7 +22,7 @@ client.on('message', message => {
 	if (command === 'stats') {
 		return client.shard.broadcastEval('this.guilds.size')
 			.then(results => {
-				return message.reply(`Server count: ${results.reduce((prev, val) => prev + val, 0)}`);
+				return message.reply(`server count: ${results.reduce((prev, val) => prev + val, 0)}`);
 			})
 			.catch(console.error);
 	}
@@ -36,11 +36,14 @@ client.on('message', message => {
 				channel.send('This is a message from shard ${this.shard.id}!');
 				true;
 			}
-			else false;
+			else {
+				false;
+			}
 		`)
-			.then(results => {
-				const found = results.find(result => result);
-				if (!found) return message.reply('I could not find such a channel.');
+			.then(sentArray => {
+				if (!sentArray.includes(true)) {
+					return message.reply('I could not find such a channel.');
+				}
 
 				return message.reply(`I have sent a message to channel \`${args[0]}\`!`);
 			});
@@ -50,11 +53,11 @@ client.on('message', message => {
 		if (!args.length) return message.reply('please specify an emoji id to search for.');
 
 		return client.shard.broadcastEval(`(${findEmoji}).call(this, '${args[0]}')`)
-			.then(results => {
-				const found = results.find(result => result);
-				if (!found) return message.reply('I could not find such an emoji.');
+			.then(emojiArray => {
+				const foundEmoji = emojiArray.find(emoji => emoji);
+				if (!foundEmoji) return message.reply('I could not find such an emoji.');
 
-				const emoji = new Discord.Emoji(client.guilds.get(found.guild), found);
+				const emoji = new Discord.Emoji(client.guilds.get(foundEmoji.guild), foundEmoji);
 				return message.reply(`I have found an emoji ${emoji}!`);
 			});
 	}
