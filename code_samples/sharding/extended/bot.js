@@ -22,7 +22,7 @@ client.on('message', message => {
 	if (command === 'stats') {
 		return client.shard.broadcastEval('this.guilds.size')
 			.then(results => {
-				return message.reply(`server count: ${results.reduce((prev, val) => prev + val, 0)}`);
+				return message.channel.send(`Server count: ${results.reduce((prev, val) => prev + val, 0)}`);
 			})
 			.catch(console.error);
 	}

@@ -121,7 +121,7 @@ client.on('message', message => {
 		if (!args.length) return message.reply('please specify an emoji id to search for.');
 
 		return client.shard.broadcastEval(`(${findEmoji}).call(this, '${args[0]}')`)
-			.then(results => console.log(results));
+			.then(console.log);
 	}
 });
 ```
@@ -171,7 +171,7 @@ Now, you will want to make use of it in the actual command:
 
 ```diff
 	return client.shard.broadcastEval(`(${findEmoji}).call(this, '${args[0]}')`)
--		.then(results => console.log(results));
+-		.then(console.log);
 +		.then(emojiArray => {
 +			// Locate a non falsy result, which will be the emoji in question
 +			const foundEmoji = emojiArray.find(emoji => emoji);
