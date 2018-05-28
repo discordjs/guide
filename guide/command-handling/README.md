@@ -78,10 +78,10 @@ const client = new Discord.Client();
 This next step is how you'll dynamically retrieve all your newly created command files. Add this below your `client.commands` line:
 
 ```js
-const commandFiles = fs.readdirSync('./commands');
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 ```
 
-The `fs.readdirSync()` method will return an array of all the file names in that directory, e.g. `['ping.js', 'beep.js']`. With that array, you can loop over it and dynamically set your commands to the Collection you made above.
+The `fs.readdirSync()` method will return an array of all the file names in that directory, e.g. `['ping.js', 'beep.js']`. The filter is there to make sure any non-JS files are left out of the array. With that array, you can loop over it and dynamically set your commands to the Collection you made above.
 
 ```js
 for (const file of commandFiles) {
@@ -103,7 +103,7 @@ const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
-const commandFiles = fs.readdirSync('./commands');
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
