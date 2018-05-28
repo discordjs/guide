@@ -187,7 +187,7 @@ Here's what the embed from code above would look like:
 
 ## Mention prefix
 
-When a user adds your bot to their server, they may not immediately know what the prefix is. This is why it's a good idea to allow your bot to be trigged by either a set prefix, or by pinging them. In addition, it's also a good idea to have a commmand that displays the available prefixes.
+When a user adds your bot to their server, they may not immediately know what the prefix is. This is why it's a good idea to allow your bot to be triggered by either a set prefix, or by pinging them. In addition, it's also a good idea to have a commmand that displays the available prefixes.
 
 ```js
 const Discord = require('discord.js');
