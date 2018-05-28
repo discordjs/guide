@@ -386,4 +386,4 @@ And that's it! We have covered the basics of image manipulation, text generation
 
 ## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/canvas/).
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/popular-topics/canvas/).
