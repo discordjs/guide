@@ -215,3 +215,35 @@ client.login('your-token-goes-here');
 ```
 
 <p class="tip">If you aren't familiar with the syntax used on the `const [, matchedPrefix] = ...` line, that's called "array destructuring". Feel free to read more about it in the [ES6 syntax](/additional-info/es6-syntax?id=array-destructuring) guide!</p>
+
+## Emoji characters
+
+If you've tried using [the usual method of retrieving unicode emojis](/popular-topics/reactions?id=unicode-emojis), you may have noticed that some characters don't provide the expected results. Here's a short snippet that'll help with that issue. You can toss this into a file of its own and use it anywhere you need!
+
+```js
+// emojiCharacters.js
+module.exports = {
+	a: '🇦', b: '🇧', c: '🇨', d: '🇩',
+	e: '🇪', f: '🇫', g: '🇬', h: '🇭',
+	i: '🇮', j: '🇯', k: '🇰', l: '🇱',
+	m: '🇲', n: '🇳', o: '🇴', p: '🇵',
+	q: '🇶', r: '🇷', s: '🇸', t: '🇹',
+	u: '🇺', v: '🇻', w: '🇼', x: '🇽',
+	y: '🇾', z: '🇿', 0: '0⃣', 1: '1⃣',
+	2: '2⃣', 3: '3⃣', 4: '4⃣', 5: '5⃣',
+	6: '6⃣', 7: '7⃣', 8: '8⃣', 9: '9⃣',
+	10: '🔟', '#': '#⃣', '*': '*⃣',
+	'!': '❗', '?': '❓',
+};
+```
+
+```js
+// index.js
+const emojiCharacters = require('./emojiCharacters');
+
+console.log(emojiCharacters.a); // 🇦
+console.log(emojiCharacters[10]); // 🔟
+console.log(emojiCharacters['!']); // ❗
+```
+
+<p class="tip">On Windows, you may be able to use the `Win + .` keyboard shortcut to open up an emoji picker can be used for quick, easy access to all the unicode emojis available to you. Some of the emojis listed above may not be there, though (e.g the 0-9 emojis).</p>
