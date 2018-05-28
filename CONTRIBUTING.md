@@ -8,13 +8,7 @@ Clone the repo into your desired folder and `cd` into it.
 git clone https://github.com/discordjs/guide.git && cd guide
 ```
 
-If you don't already have some sort of local server, you should install the [docsify-cli package](https://github.com/QingWei-Li/docsify-cli). You can do so by running:
-
-```bash
-npm install -g docsify-cli
-```
-
-After that, simply run `docsify serve ./guide --open` inside the project's root directory to run a server at http://localhost:3000. The `--open` flag will make it automatically open it in your browser. If you need to use a different port, use the `--port` flag.
+You should install the necessary dev dependencies afterwards, so that view the site locally. You can use `npm run serve` to open up a local version of the site at http://localhost:3000. If you need to use a different port, run it as `npm run serve -- --port=1234`.
 
 ### Linting
 

@@ -3,7 +3,8 @@
   "description": "The official guide for discord.js, created and maintained by core members of its community.",
   "version": "1.0.0",
   "scripts": {
-    "lint": "eslint . --ext md,js"
+    "lint": "eslint . --ext md,js",
+    "serve": "docsify serve guide --open"
   },
   "repository": "https://github.com/discordjs/guide.git",
   "keywords": [
@@ -21,6 +22,7 @@
   },
   "homepage": "https://discordjs.guide",
   "devDependencies": {
+    "docsify-cli": "^4.2.1",
     "eslint": "^4.17.0",
     "eslint-plugin-markdown": "eslint/eslint-plugin-markdown"
   }
