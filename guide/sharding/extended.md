@@ -1,4 +1,4 @@
-## Extended Changes
+## Extended changes
 
 <p class="tip">This page is a follow-up and bases its code off of [the previous page](/sharding/additional-information.md/), which assumes knowledge of arguments and passing functions.</p>
 
