@@ -237,6 +237,8 @@ module.exports = {
 };
 ```
 
+<!-- eslint-skip -->
+
 ```js
 // index.js
 const emojiCharacters = require('./emojiCharacters');
