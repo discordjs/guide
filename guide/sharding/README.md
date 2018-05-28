@@ -31,10 +31,16 @@ You will most likely have to change some code in order to get your newly sharded
 // bot.js
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const prefix = '!';
 
 client.on('message', message => {
-	if (message.content === 'stats') {
-		message.reply(`Server count: ${client.guilds.size}`);
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+	const args = message.content.slice(prefix.length).split(/ +/);
+	const command = args.shift().toLowerCase();
+
+	if (command === 'stats') {
+		return message.channel.send(`Server count: ${client.guilds.size}`);
 	}
 });
 
@@ -58,26 +64,24 @@ If you run it, you will notice an output like `[1000, 1000, 1000, 600]`. You wil
 It's highly urged for you to visit that link to understand how the method works, as you will probably find great use of it in sharding. Basically, this method (in this case) iterates through the array and adds each current value to the total amount.
 
 ```js
-client.shard.broadcastEval('this.guilds.size').then(results => {
-	console.log(`${results.reduce((prev, val) => prev + val, 0)} total guilds`);
-}).catch(console.error);
+client.shard.broadcastEval('this.guilds.size')
+	.then(results => {
+		console.log(`${results.reduce((prev, val) => prev + val, 0)} total guilds`);
+	})
+	.catch(console.error);
 ```
 
 While it's a bit unattractive to have more nesting in your commands, it is necessary when not using `async`/`await`. Now, the code at the top should look something like the below:
 
-```js
-const Discord = require('discord.js');
-const client = new Discord.Client();
-
-client.on('message', message => {
-	if (message.content === 'stats') {
-		client.shard.broadcastEval('this.guilds.size').then(results => {
-			message.reply(`server count: ${results.reduce((prev, val) => prev + val, 0)}`);
-		}).catch(console.error);
+```diff
+	if (command === 'stats') {
+-		return message.channel.send(`Server count: ${client.guilds.size}`);
++		return client.shard.broadcastEval('this.guilds.size')
++			.then(results => {
++				return message.channel.send(`Server count: ${results.reduce((prev, val) => prev + val, 0)}`);
++			})
++			.catch(console.error);
 	}
-});
-
-client.login('token');
 ```
 
 The next section contains additional changes you might want to take into consideration, which you may learn about by clicking [this link](/sharding/additional-information).

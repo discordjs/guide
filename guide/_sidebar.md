@@ -34,6 +34,7 @@
 	* **Sharding**
 	* [Getting started](/sharding/)
 	* [Additional information](/sharding/additional-information)
+	* [Extended](/sharding/extended)
 
 	* **Improving your dev environment**
 	* [Managing your bot process with PM2](/improving-dev-environment/pm2)
