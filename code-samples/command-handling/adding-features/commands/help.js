@@ -38,7 +38,7 @@ module.exports = {
 				}
 			})
 			.catch((error) => {
-				console.log("Could not send DM to user.", error);
+				console.log('Could not send DM to user.', error);
 				return message.reply('it seems like I can\'t DM you!');}
 			);
 	},
