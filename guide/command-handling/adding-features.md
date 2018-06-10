@@ -276,71 +276,66 @@ const { prefix } = require('../config.json');
 Inside the `execute()` function, set up some variables and an if/else statement to determine whether it should display a list of all the command names or only information about a specific command.
 
 ```js
-const { commands } = message.client;
 const data = [];
+const { commands } = message.client;
 
 if (!args.length) {
 	// ...
 }
-else {
-	// ...
-}
+
+// ...
 ```
 
 You can use `.push()` on the `data` variable to append the info you want and then DM it to the message author once you're done.
 
-Inside the if statement, this is all you'll need:
+Inside the if statement, this is what you'll need:
 
 ```js
 data.push('Here\'s a list of all my commands:');
 data.push(commands.map(command => command.name).join(', '));
 data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
+
+return message.author.send(data, { split: true })
+	.then(() => {
+		if (message.channel.type === 'dm') return;
+		message.reply('I\'ve sent you a DM with all my commands!');
+	})
+	.catch(error => {
+		console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
+		message.reply('it seems like I can\'t DM you! Do you have DMs disabled?');
+	});
 ```
 
 There's nothing really complex here; all you do is append some strings, `.map()` over the `commands` Collection, and add an additional string to let the user know how to trigger information about a specific command.
 
-There's a bit more code in the `else` block, but nothing complicated.
+Since help messages can get messy, you'll be DMing it to the message author instead of posting it in the requested channel. However, there is something very important you should consider: the possibility of not being able to DM the user, whether it be that they have DMs disabled on that server or overall, or they have the bot blocked. For that reason, you should `.catch()` it and let them know.
+
+<p class="tip">If you weren't already aware, `.send()` takes 2 parameters: the content to send, and the message options to pass in. You can read about the `MessageOptions` type [here](https://discord.js.org/#/docs/main/stable/typedef/MessageOptions). Using `split: true` here will automatically split our help message into 2 or more messages in the case that it exceeds the 2,000 character limit.</p>
+
+<p class="tip">Because the `data` variable is an array, you can take advantage of discord.js' functionality where it will `.join()` any array sent with a `\n` character. If you prefer to not rely on that in the chance that it changes in the future, you can simply append `.join('\n')` to the end of that yourself.</p>
+
+Below the `if (!args.length)` statement is where you'll send the help message for the command they specified.
 
 ```js
-if (!commands.has(args[0])) {
+const name = args[0].toLowerCase();
+const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
+
+if (!command) {
 	return message.reply('that\'s not a valid command!');
 }
 
-const command = commands.get(args[0]);
-
 data.push(`**Name:** ${command.name}`);
 
-if (command.description) data.push(`**Description:** ${command.description}`);
 if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(', ')}`);
+if (command.description) data.push(`**Description:** ${command.description}`);
 if (command.usage) data.push(`**Usage:** ${prefix}${command.name} ${command.usage}`);
 
 data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`);
+
+message.channel.send(data, { split: true });
 ```
 
-First you check to see if that command name even exists inside our Collection. If it does, you `.get()` it and then start `.push()`ing what you need into the `data` variable. Not all commands will have descriptions, aliases, or usage strings, so you use an if statement for each of those to append them conditionally.
-
-Last but not least, you need to send the message back to the user. Since help messages can get messy, you'll be DMing it to the message author instead of posting it in the requested channel. However, there is something very important you should consider: the possibility of not being able to DM the user, whether it be that they have DMs disabled on that server or overall, or they have the bot blocked.
-
-For that, you'll be using the `.catch()` method at the end of it all.
-
-```js
-message.author.send(data, { split: true })
-	.then(() => {
-		if (message.channel.type !== 'dm') {
-			message.channel.send('I\'ve sent you a DM with all my commands!');
-		}
-	})
-	.catch(error => {
-		console.error(`Could not send help DM to ${message.author.tag}.`, error);
-		return message.reply('it seems like I can\'t DM you!');
-	});
-```
-
-Because the `data` variable is an array, you can take advantage of discord.js' functionality where it will `.join()` any array sent with a `\n` character. If you prefer to not rely on that in the off chance that it changes in the future, you can simply append `.join('\n')` to the end of that yourself.
-
-If you weren't already aware, `.send()` takes 2 parameters: the content to send, and the message options to pass in. You can read about the MessageOptions type [here](https://discord.js.org/#/docs/main/stable/typedef/MessageOptions). Using `split: true` here will automatically split our help message into 2 or more messages in the case that it exceeds the 2,000 character limit.
-
-The only thing you use `.then()` here for is to let them know when you're done sending (but only if the message isn't already inside a DM, or else you'd be sending another unnecessary message).
+Once you get the command based off the name or alias they gave, you can start `.push()`ing what you need into the `data` variable. Not all commands will have descriptions, aliases, or usage strings, so you use an if statement for each of those to append them conditionally. After that, send back all the relevant information.
 
 At the end of it all, you should be getting this as a result:
 
