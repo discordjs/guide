@@ -37,8 +37,8 @@ module.exports = {
 					message.channel.send('I\'ve sent you a DM with all my commands!');
 				}
 			})
-			.catch((error) => {
-				console.log('Could not send DM to user.', error);
+			.catch(error => {
+				console.error(`Could not send help DM to ${message.author.tag}.`, error);
 				return message.reply('it seems like I can\'t DM you!');
 			});
 	},

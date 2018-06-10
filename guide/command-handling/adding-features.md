@@ -330,7 +330,10 @@ message.author.send(data, { split: true })
 			message.channel.send('I\'ve sent you a DM with all my commands!');
 		}
 	})
-	.catch(() => message.reply('it seems like I can\'t DM you!'));
+	.catch(error => {
+		console.error(`Could not send help DM to ${message.author.tag}.`, error);
+		return message.reply('it seems like I can\'t DM you!');
+	});
 ```
 
 Because the `data` variable is an array, you can take advantage of discord.js' functionality where it will `.join()` any array sent with a `\n` character. If you prefer to not rely on that in the off chance that it changes in the future, you can simply append `.join('\n')` to the end of that yourself.
