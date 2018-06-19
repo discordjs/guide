@@ -276,7 +276,7 @@ Now we fetch the message if it isn't cached and the actual reaction from the mes
 if(!message) {
 	message = await channel.fetchMessage(data.message_id);
 }
-let const = message.reactions.get(emojiKey);
+const reaction = message.reactions.get(emojiKey);
 ```
 
 <tip>In the master branch/v12, reactions are keyed by their ID or name only, not in a `name:ID` format.</tip>
