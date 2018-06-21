@@ -130,10 +130,10 @@ client.on('message', async message => {
 Lastly would be to use a loop.
 
 ```js
-let reactions = ['🍎', '🍊', '🍇'];
+const reactions = ['🍎', '🍊', '🍇'];
 client.on('message', async message => {
 	if (message.content === '!fruits') {
-		for (let reaction of reactions) {
+		for (const reaction of reactions) {
 			message.react(reaction);
 		}
 	}
