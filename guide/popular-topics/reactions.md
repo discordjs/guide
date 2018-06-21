@@ -96,7 +96,7 @@ if (message.content === '!fruits') {
 
 As you can see, if you leave it like that, it won't display as you really want it to. It was able to react correctly on the first try, but reacts in a different order each time after that.
 
-Luckily, there are two easy solutions to this. The first would be to to chain `.then()`s in the order you want it to display.
+Luckily, there are three easy solutions to this. The first would be to to chain `.then()`s in the order you want it to display.
 
 ```js
 client.on('message', message => {
@@ -109,7 +109,7 @@ client.on('message', message => {
 });
 ```
 
-The other would be to use the `async`/`await` keywords.
+Another would be to use the `async`/`await` keywords.
 
 ```js
 // notice the `async` keyword
@@ -127,7 +127,20 @@ client.on('message', async message => {
 });
 ```
 
-If you try again with either of the codeblocks above, you'll get the result you originally wanted!
+Lastly would be to use a loop.
+
+```js
+let reactions = ['🍎', '🍊', '🍇'];
+client.on('message', async message => {
+	if (message.content === '!fruits') {
+		for (let reaction of reactions) {
+			message.react(reaction);
+		}
+	}
+});
+```
+
+If you try again with one of the codeblocks above, you'll get the result you originally wanted!
 
 ![Emojis reacting in correct order](/assets/img/1IWSJ1C.png)
 
