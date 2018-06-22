@@ -134,7 +134,7 @@ const reactions = ['🍎', '🍊', '🍇'];
 client.on('message', async message => {
 	if (message.content === '!fruits') {
 		for (const reaction of reactions) {
-			message.react(reaction);
+			await message.react(reaction);
 		}
 	}
 });
