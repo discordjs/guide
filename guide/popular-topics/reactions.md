@@ -140,7 +140,7 @@ client.on('message', async message => {
 });
 ```
 
-If you try again with either of the codeblocks above, you'll get the result you originally wanted!
+If you try again with one of the codeblocks above, you'll get the result you originally wanted!
 
 ![Emojis reacting in correct order](/assets/img/1IWSJ1C.png)
 
