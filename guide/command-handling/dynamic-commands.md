@@ -39,7 +39,7 @@ client.on('message', message => {
 });
 ```
 
-That would work perfectly fine, but it isn't dynamic; you'd still have too add an if statement and the same old code each time you wanted to register a new command, which is less than ideal.
+That would work perfectly fine, but it isn't dynamic; you'd still have to add an if statement and the same old code each time you wanted to register a new command, which is less than ideal.
 
 ### Dynamically executing commands
 
