@@ -85,11 +85,11 @@ You can also provide the permissions when creating a role as part of RoleData as
 
 ```js
 // permission bitfield in decimal representation
-guild.createRole( { name: 'Mod', permissions: 8194  } ); 
+guild.createRole({ name: 'Mod', permissions: 8194 });
 // permission bitfield in binary representation
-guild.createRole( { name: 'Mod', permissions: 0b10000000000010 } ); 
+guild.createRole({ name: 'Mod', permissions: 0b10000000000010 });
 // permission flag array
-guild.createRole( { name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS'] } );
+guild.createRole({ name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS'] });
 ```
 
 ## Channel overwrites
@@ -104,21 +104,19 @@ To add a permission overwrite for a role or user we access the GuildChannel obje
 Let's add an overwrite to lock everyone out of the channel (the guild ID is at the same time the ID for the default Role @everyone)
 
 ```js
-channel.overwritePermissions( channel.guild.id, { VIEW_CHANNEL: false } );
+channel.overwritePermissions(channel.guild.id, { VIEW_CHANNEL: false });
 ```
 
 Any permissionflags not specified in this PermissionOverwriteOptions object (the second parameter) do not get an explicit allow or explicit deny overwrite.
 You can also provide an array of overwrites during channel creation:
 
 ```js
-guild.createChannel( 'new-channel', 'text', [{
-        id: guild.id,
-        deny: ['VIEW_CHANNEL']
-    },
-    {
-        id: user,
-        allow: ['VIEW_CHANNEL']
-    }] );
+guild.createChannel('new-channel', 'text', [{
+	id: guild.id,
+	deny: ['VIEW_CHANNEL'] },
+{
+	id: user,
+	allow: ['VIEW_CHANNEL'] }]);
 ```
 
 These are ChannelCreationOverwrites and differ from PermissionOverwriteOptions in syntax, take care to not mix them up!
@@ -136,12 +134,12 @@ Some methods and properties in Discord.js return permission decimals rather than
 You can however pass these decimals to the Permissions constructor to convert them.
 
 ```js
-const Discord = require("discord.js");
+const Discord = require('discord.js');
 // constructing a Permissions Object from a permission number
 const permissions = new Discord.Permissions(268550160);
 // constructing a Permissions Object from an array of PermissionResolvables
-const flags = ['MANAGE_CHANNELS', 'EMBED_LINKS', 'ATTACH_FILES', 'READ_MESSAGE_HISTORY', 'MANAGE_ROLES']
-const permissions2 = new Discord.Permissions(flags)
+const flags = ['MANAGE_CHANNELS', 'EMBED_LINKS', 'ATTACH_FILES', 'READ_MESSAGE_HISTORY', 'MANAGE_ROLES'];
+const permissions2 = new Discord.Permissions(flags);
 ```
 
 ### Checking for permissions
@@ -154,14 +152,20 @@ Let's say you want to know if the decimal bitfield representation `268550160` ha
 ```js
 const Discord = require('discord.js');
 const permissions = new Discord.Permissions(268550160);
-console.log(permissions.has('MANAGE_CHANNELS')); // true
-console.log(permissions.has(['MANAGE_CHANNELS', 'EMBED_LINKS'])) // true
-console.log(permissions.has(['MANAGE_CHANNELS', 'KICK_MEMBERS'])) // false
+console.log(permissions.has('MANAGE_CHANNELS'));
+// output: true
+console.log(permissions.has(['MANAGE_CHANNELS', 'EMBED_LINKS']));
+// output: true
+console.log(permissions.has(['MANAGE_CHANNELS', 'KICK_MEMBERS']));
+// output: false
 
-const adminPermissions = new Discord.Permissions("ADMINISTRATOR")
-console.log(adminperms.has('MANAGE_CHANNELS')); // true
-console.log(adminperms.has('MANAGE_CHANNELS'), true); // true
-console.log(adminperms.has('MANAGE_CHANNELS'), false); // false
+const adminPermissions = new Discord.Permissions('ADMINISTRATOR');
+console.log(adminperms.has('MANAGE_CHANNELS'));
+// output: true
+console.log(adminperms.has('MANAGE_CHANNELS'), true);
+// output: true
+console.log(adminperms.has('MANAGE_CHANNELS'), false);
+// output: false
 ```
 
 ## Final permissions
@@ -171,13 +175,15 @@ Discord.js features two utility functions to easily determine the final permissi
 To check your bots permissions in the channel the command was used in you could use something like
 
 ```js
-if (message.channel.permissionsFor(message.guild.me).has(['SEND_MESSAGES', 'VIEW_CHANNEL']))
+if (message.channel.permissionsFor(message.guild.me).has(['SEND_MESSAGES', 'VIEW_CHANNEL'])) {
 	return console.log('I can send a message here');
+}
 
 // or
 
-if (message.guild.me.permissionsIn(message.channel).has(['SEND_MESSAGES', 'VIEW_CHANNEL']))
+if (message.guild.me.permissionsIn(message.channel).has(['SEND_MESSAGES', 'VIEW_CHANNEL'])) {
 	return console.log('I can send a message here');
+}
 ```
 For normal permission checks you won't need to specify a second parameter, as it is optional and you will generally want to allow `ADMINISTRATOR` to override.
 
@@ -191,17 +197,21 @@ While the concept sounds really simple this is relatively hard to achieve as you
 ```js
 // Anatomy of PermissionOverwriteOptions objects
 // Object mapping flags to booleans, the target is specified in the .overwritePermissions method
-{
- 'SEND_MESSAGES': true,
- 'ATTACH_FILES': false,
-}
+const permissionOverwriteOptions = {
+	SEND_MESSAGES: true,
+	ATTACH_FILES: false,
+};
 // Anatomy of PermissionOverwrites objects
-PermissionOverwrites {
-    id: 'someid', // target id
-    type: 'role', // role or user depending on the target
-    deny: 268435456, // bitfield in decimal representation
-    allow: 0 // bitfield in decimal representation
-}
+const permissionOverwrites = {
+	// target id
+	id: 'someid',
+	// role or user depending on the target
+	type: 'role',
+	// bitfield in decimal representation
+	deny: 268435456,
+	// bitfield in decimal representation
+	allow: 0,
+};
 ```
 
 To solve this we need to construct our own PermissionOverwriteOptions object for each overwrite in the PermissionOverwrites collection of the parent (category) and apply them individually to the child channel with the specified target id.
@@ -213,32 +223,33 @@ const Discord = require('discord.js');
 if (!channel.parent) return;
 // iterate over overwrites of the channel and delete any that are not on the parent
 for (const overwrite of channel.permissionOverwrites.values()) {
-    if (!channel.parent.permissionOverwrites.has(overwrite.id))
-        overwrite.delete()
+	if (!channel.parent.permissionOverwrites.has(overwrite.id)) {
+		overwrite.delete();
+	}
 }
 // iterate over the overwrites of the parent
-for (const overwrite of channel.parent.permissionOverwrites.values()) { 
-    // initialize an empty object
-    const options = {}; 
-    // convert allow and deny to Permissions objects so we can easily check flags later with .has()
-    const allow = new Discord.Permissions(overwrite.allow); 
-    const deny = new Discord.Permissions(overwrite.deny); 
-    // iterate over all possible permission flags
-    for (const flag of Object.keys(Discord.Permissions.FLAGS)) { 
-        // if present in the allow part of the overwrite
-        // assign a property with the name of the flag and set the value to true
-        if (allow.has(flag)) options[flag] = true; 
-        // if not present in allow, check deny
-        // assign a property with the name of the flag and set the value to false
-        // since allow overwrites deny you only need to check deny if the permission is not in allow
-        else if (deny.has(flag)) options[flag] = false; 
-        // if not referenced in either of the two
-        // assign a property with the name of the flag and set the value to null
-        // to overwrite existing alow/deny overwrites in the child channel
-        else options[flag] = null;
-    }
-    // apply overwrites
-    channel.overwritePermissions(overwrite.id, options);
+for (const overwrite of channel.parent.permissionOverwrites.values()) {
+	// initialize an empty object
+	const options = {};
+	// convert allow and deny to Permissions objects so we can easily check flags later with .has()
+	const allow = new Discord.Permissions(overwrite.allow);
+	const deny = new Discord.Permissions(overwrite.deny);
+	// iterate over all possible permission flags
+	for (const flag of Object.keys(Discord.Permissions.FLAGS)) {
+		// if present in the allow part of the overwrite
+		// assign a property with the name of the flag and set the value to true
+		if (allow.has(flag)) options[flag] = true;
+		// if not present in allow, check deny
+		// assign a property with the name of the flag and set the value to false
+		// since allow overwrites deny you only need to check deny if the permission is not in allow
+		else if (deny.has(flag)) options[flag] = false;
+		// if not referenced in either of the two
+		// assign a property with the name of the flag and set the value to null
+		// to overwrite existing alow/deny overwrites in the child channel
+		else options[flag] = null;
+	}
+	// apply overwrites
+	channel.overwritePermissions(overwrite.id, options);
 }
 ```
 <p class = "tip">The masterbranch introduces `channel.lockPermissions` to easily sync permission with the parent channel. You can also pass PermissionOverwrites to `channel.overwritePermissions` in master to adopt permissions from other channels</p>
@@ -251,25 +262,26 @@ The following snippet uses [bitwise operations](https://developer.mozilla.org/en
 
 ```js
 const getRoleFinalPermissions = (channel, role) => {
-    // compute base permissions by combining the role permissions with @everyone permissions
-    let permissions = role.permissions | role.guild.defaultRole.permissions;
-    // if permissions include ADMINISTRATOR return a Permissions object with base permissions
-	if (permissions & 1 << 3)
+	// compute base permissions by combining the role permissions with @everyone permissions
+	let permissions = role.permissions | role.guild.defaultRole.permissions;
+	// if permissions include ADMINISTRATOR return a Permissions object with base permissions
+	if (permissions & 1 << 3) {
 		return new Discord.Permissions(permissions);
-    // get overwrite for role and @everyone
+	}
+	// get overwrite for role and @everyone
 	const roleOverwrites = channel.permissionOverwrites.get(role.id);
-    const everyoneOverwrites = channel.permissionOverwrites.get(role.guild.id);
-    // apply overwrites for @everyone 
+	const everyoneOverwrites = channel.permissionOverwrites.get(role.guild.id);
+	// apply overwrites for @everyone
 	if (everyoneOverwrites) {
 		permissions &= ~everyoneOverwrites.deny;
 		permissions |= everyoneOverwrites.allow;
-    }
-    // apply overwrites for role
+	}
+	// apply overwrites for role
 	if (roleOverwrites) {
 		permissions &= ~roleOverwrites.deny;
 		permissions |= roleOverwrites.allow;
 	}
-    // return final permissions
+	// return final permissions
 	return new Discord.Permissions(permissions);
 };
 ```
