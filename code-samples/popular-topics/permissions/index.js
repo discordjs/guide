@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const util = require('util');
 
 const client = new Discord.Client();
 
@@ -38,7 +39,7 @@ client.on('message', message => {
 	}
 	else if (message.content === '!mypermissions') {
 		const finalPermissions = message.channel.permissionsFor(message.member);
-		message.channel.send(finalPermissions.serialize(), { code: 'js' });
+		message.channel.send(util.inspect(finalPermissions.serialize()), { code: 'js' });
 	}
 	else if (message.content === '!sync') {
 		if (!message.channel.parent) return;
@@ -75,7 +76,7 @@ client.on('message', message => {
 			}
 			return new Discord.Permissions(permissions);
 		};
-		message.channel.send(getRoleFinalPermissions(message.channel, message.member.highestRole).serialize(), { code: 'js' });
+		message.channel.send(util.inspect(getRoleFinalPermissions(message.channel, message.member.highestRole).serialize()), { code: 'js' });
 	}
 });
 
