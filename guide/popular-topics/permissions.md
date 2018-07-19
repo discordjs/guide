@@ -168,6 +168,27 @@ console.log(adminperms.has('MANAGE_CHANNELS'), false);
 // output: false
 ```
 
+### Manipulating permissions
+
+The Permissions object enables you to easily add or remove certain permissions from an existing bitfield without having to worry about bitwise operations. Both `.add()` and `.remove()` can take a single permission flag or number, an array of permissionflags or numbers or multiple permissionflags or numbers as multiple parameters.
+
+```js
+const Discord = require('discord.js');
+const permissions = new Discord.Permissions(268550160);
+console.log(permissions.has('KICK_MEMBERS'));
+// output: false
+permissions.add('KICK_MEMBERS');
+console.log(permissions.has('KICK_MEMBERS'));
+// output: true
+permissions.remove(2);
+console.log(permissions.has('KICK_MEMBERS'));
+// output : false
+```
+
+You can utilize these methods to adapt permissions or overwrites without touching the other flags. To achieve this you can get the existing permissions for a role, manipulating the bitfield as described above and passing the changed bitfield to `role.setPermissions()`.
+
+<p class = "tip">In the stable branch `role.permissions` returns a number which needs to be converted to a Permissions object for this to work as described here, we covered how to achieve this in the section "Converting permission numbers to Objects"</p>
+
 ## Final permissions
 
 Discord.js features two utility functions to easily determine the final permissions for a guildmember in a specific channel: `.permissionsFor()` on the [GuildChannel](https://discord.js.org/#/docs/main/stable/class/GuildChannel?scrollTo=permissionsFor) class and `permissionsIn()` on the [GuildMember](https://discord.js.org/#/docs/main/stable/class/GuildMember?scrollTo=permissionsIn) class. Both return a Permissions object.

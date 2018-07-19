@@ -8,9 +8,17 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-	if (message.content === '!everyonemod') {
-		message.guild.defaultRole.setPermissions(['VIEW_CHANNEL', 'MANAGE_MESSAGES', 'KICK_MEMBERS']);
-		console.log('Made everyone mod');
+	if (message.content === '!modeveryone') {
+		const everyonePerms = new Discord.Permissions(message.guild.defaultRole.permissions);
+		const newPerms = everyonePerms.add(['MANAGE_MESSAGES', 'KICK_MEMBERS']);
+		message.guild.defaultRole.setPermissions(newPerms.bitfield);
+		console.log('Added mod permissions to @everyone');
+	}
+	if (message.content === '!unmodeveryone') {
+		const everyonePerms = new Discord.Permissions(message.guild.defaultRole.permissions);
+		const newPerms = everyonePerms.remove(['MANAGE_MESSAGES', 'KICK_MEMBERS']);
+		message.guild.defaultRole.setPermissions(newPerms.bitfield);
+		console.log('Removed mod permissions from @everyone');
 	}
 	if (message.content === '!createmod') {
 		message.guild.createRole({ name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS'] });
