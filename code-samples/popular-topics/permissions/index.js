@@ -108,6 +108,12 @@ client.on('message', message => {
 		};
 		message.reply(util.inspect(getRoleFinalPermissions(message.channel, message.member.highestRole).serialize()), { code: 'js' });
 	}
+	else if (message.content === '!mod') {
+		if (message.member.roles.some(thisRole => thisRole.name === 'Mod')) {
+			return message.reply('You have a role called Mod');
+		}
+		message.reply('You do not have a role called Mod');
+	}
 });
 
 client.login('your-token-goes-here');

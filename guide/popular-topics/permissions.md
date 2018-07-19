@@ -4,6 +4,21 @@ Permissions are Discords primary feature enabeling users to customize the workin
 To break it down to essentials: Permissions and permission overwrites tell Discord who is allowed to do what and where.
 When first confronted with them they can be quite confusing, but no worries we are here to take care of that, so let's dive in!
 
+### Roles as permission system
+
+If you want to keep your bots permission system simple you might find it sufficient to just check if the member has a certain role. To achieve this you can use the `.has()` method of the [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) class or `.some()`of [Collection](https://discord.js.org/#/docs/main/stable/class/Collection). The first is possible because the Discord.js Collection extends the Map class and inherits all its methods.
+
+If you know the ID you should always use the `.get()` method since it's a lot faster  than `.find()` and `.some()` which both require iteration.
+
+```js
+member.roles.has('role-id-here');
+// returns true if the member has the role
+member.roles.some(thisRole => thisRole.name === 'Mod');
+// returns true if any of the members roles pass the provided validating function
+```
+
+<p class = "tip">`message.member` can be uncached on large guilds if the respective member was not online, dnd or idle during the uptime of your bot. If this is the case you need to fetch the member with [`guild.fetchMember(msg.author)`](https://discord.js.org/#/docs/main/stable/class/Guild?scrollTo=fetchMember)</p>
+
 ### Terminology
 
 * Permission: The ability to execute a certain action in Discord
@@ -96,9 +111,11 @@ guild.createRole({ name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS']
 
 As you probably have already seen in your Discord client, channel overwrites have three states: 
 
-- explicit allow `true` (green checkbox)
+- explicit allow `true` (green ✓)
 - explicit deny `false` (red X) 
 - default `null` (gray /).
+
+### Adding overwrites
 
 To add a permission overwrite for a role or user we access the GuildChannel object and use the `overwritePermissions` method.
 Let's add an overwrite to lock everyone out of the channel (the guild ID is at the same time the ID for the default Role @everyone)
@@ -122,6 +139,15 @@ guild.createChannel('new-channel', 'text', [{
 These are ChannelCreationOverwrites and differ from PermissionOverwriteOptions in syntax, take care to not mix them up!
 
 <p class = "tip">The masterbranch changes the funcitonality of `GuildChannel#overwritePermissions` to be able to set multiple overwrites and introduces `GuildChannel#updateOverwrite` with the prior functionality (updating overwrites for one target specifically whilst keeping all others intact)</p>
+
+### Removing overwrites
+
+To remove an overwrite for a specific member or role you get it from the channels permissionOverwrites collection and call the `.delete()` method on it. Since the collection is keyed by the targets ID (either role ID or user ID) the respective overwrite is very easy to access.
+
+```js
+channel.permissionOverwrites.get(message.author.id).delete();
+// deletes the channels overwrite for the message author
+```
 
 ## Permissions object
 
@@ -308,3 +334,7 @@ const getRoleFinalPermissions = (channel, role) => {
 ```
 
 <p class = "tip">On the masterbranch `channel.permissionsFor()` accepts a RoleResolvable as parameter making this entirely redundant</p>
+
+## Resulting code
+
+If you want to check a working implementation for all methods and functionalities in this guide, you can look at a boilerplate bot over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/popular-topics/permissions/).
