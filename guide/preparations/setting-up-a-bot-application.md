@@ -7,7 +7,7 @@ It's incredibly easy to create one. The steps you need to take are as follows:
 1. Open up [the Discord website](https://discordapp.com/) and [login](https://discordapp.com/login).
 2. Hover over the "Developers" drop-down menu and click on the [Developer Portal](https://discordapp.com/developers/docs/intro) link.
 3. On the header click on the [Applications](https://discordapp.com/developers/applications) link.
-4. Click on the "Create an application" button. 
+4. Click on the "Create an application" button.
 
 You should see a page like this:
 
