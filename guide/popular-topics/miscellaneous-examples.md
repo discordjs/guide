@@ -185,6 +185,73 @@ Here's what the embed from code above would look like:
 
 <p class="tip">If you want to instantly preview what your embed will look like, check out [this site](https://leovoel.github.io/embed-visualizer/)!</p>
 
+### Converting MessageEmbeds
+
+If you ever tried to fetch the embed from an existing message and resend it (maybe in another channel) you will know that this is not easily possible.
+Received embeds are of the class [MessageEmbed](https://discord.js.org/#/docs/main/stable/class/MessageEmbed) while outgoing embeds have to be of the class [RichEmbed](https://discord.js.org/#/docs/main/stable/class/RichEmbed). 
+
+The RichEmbed class does have a constructor taking in embed data, this will however cause conflicts with the circular nature of MessageEmbeds. 
+To solve this issue you can construct a new RichEmbed and apply the correlating values of the received MessageEmbed as demonstrated below. 
+
+The following code sample results in a bot re-posting any and all embeds it reads:
+
+```js
+const Discord = require('discord.js');
+const client = new Discord.Client();
+
+const toRichEmbed = (messageEmbed) => {
+	const richEmbed = new Discord.RichEmbed();
+	if (messageEmbed.title) {
+		richEmbed.setTitle(messageEmbed.title);
+	}
+	if (messageEmbed.description) {
+		richEmbed.setDescription(messageEmbed.description);
+	}
+	if (messageEmbed.author) {
+		richEmbed.setAuthor(messageEmbed.author.name, messageEmbed.author.iconURL, messageEmbed.author.url);
+	}
+	if (messageEmbed.footer) {
+		richEmbed.setFooter(messageEmbed.footer.text, messageEmbed.footer.iconURL);
+	}
+	if (messageEmbed.thumbnail) {
+		richEmbed.setThumbnail(messageEmbed.thumbnail.url);
+	}
+	if (messageEmbed.timestamp) {
+		richEmbed.setTimestamp(messageEmbed.timestamp);
+	}
+	if (messageEmbed.image) {
+		richEmbed.setImage(messageEmbed.image.url);
+	}
+	if (messageEmbed.url) {
+		richEmbed.setURL(messageEmbed.url);
+	}
+	richEmbed.setColor(messageEmbed.color);
+	for (const field of messageEmbed.fields) {
+		richEmbed.addField(field.name, field.value, field.inline);
+	}
+	if (messageEmbed.message.attachments.size) {
+		const attachment = messageEmbed.message.attachments.first();
+		richEmbed.attachFile(attachment.url, attachment.filename);
+	}
+	return richEmbed;
+};
+
+client.on('message', message => {
+	if (msg.author.id === client.user.id) {
+		return;
+	}
+	if (msg.embeds.length) {
+		const embed = msg.embeds[0];
+		message.channel.send(toRichEmbed(embed));
+	}
+});
+
+client.login('your-token-goes-here');
+```
+
+<p class="warning">Trying to convert discord native embeds like video, audio, or website preview embeds resulting in the aforementioned might yield unexpected results as bots can not make use of video- or audio players inside embeds</p>
+<p class="tip">The master branch of Discord.js merges the RichEmbed class into [MessageEmbed](https://discord.js.org/#/docs/main/master/class/MessageEmbed). This allows modification and re-sending of received embeds without any conversion, making this entirely redundant.</p>
+
 ## Mention prefix
 
 When a user adds your bot to their server, they may not immediately know what the prefix is. This is why it's a good idea to allow your bot to be triggered by either a set prefix, or by pinging them. In addition, it's also a good idea to have a commmand that displays the available prefixes.
