@@ -13,8 +13,7 @@ You should see a page like this:
 
 ![Successfully created application](assets/img/create-app.png)
 
-You can optionally enter a name, description and picture for your application, once you are done and pressed "Save Changes" we can move on
-to the left pane and select the "Bot" category.
+You can optionally enter a name, description and picture for your application here. Once you are done and pressed "Save Changes" we can move on by selecting the "Bot" category in the left pane.
 
 ![Create a bot UI](assets/img/create-bot.png)
 
@@ -29,9 +28,9 @@ After creating a bot user, you'll see a section like this:
 
 ![Bot application](assets/img/created-bot.png)
 
-In this panel you can set a snazzy picture, set a username for your bot and make it public or private.
-There is also a section labeled "Token"
-Click the "copy" button to copy your token. When we ask you to paste your token somewhere, this is the value that you need to put in. Don't worry if you do happen to lose your token. You can always go back to this page and copy it again, as well as generate a new one, if necessary.
+In this panel you can add a snazzy profile picture, set a username for your bot and make it public or private.
+You can access your token in this panel as well either by reavealing it or simply pressing the "copy" button.
+When we ask you to paste your "token" somewhere, this is the value that you need to put in. Don't worry if you do happen to lose it at some point. You can always come back to this page and copy it again.
 
 ### What is a token, anyway?
 
@@ -49,8 +48,10 @@ Let's imagine that you have a bot on over 1,000 servers, and it took you many, m
 
 All that and much, much more. Sounds pretty terrible, right? So make sure to keep your token as safe as possible!
 
-<p class="danger">Should you ever leak your token, commit it to a repository, post it in a support channel, see your brother take a picture of it or otherwise see your bot in danger return to this page and click the "Regenerate" button.</p>
+### Resetting your token
+
+<p class="danger">Should you ever leak your token (commit it to a repository, post it in a support channel, see your brother take a picture of it) or otherwise see your bot in danger return to this page and click the "Regenerate" button.</p>
 
 ![Reset Token](assets/img/token-reset.png)
 
-After you regenerated your token the old one will be invalid and you will ned to update it whereever you use it!
+After you regenerated your token the old one is invalid. You will have to update the token wherever you used it!
