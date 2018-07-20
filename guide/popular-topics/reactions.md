@@ -261,7 +261,7 @@ With the following if statements we make sure to return if the library already e
 In the case of `MESSAGE_REACTION_REMOVE` this is a cached message with a populated usercache.
 In the case of `MESSAGE_REACTION_ADD` this is a cached message.
 
-WIthout this your reaction events would execute twice for a single reaction or not at all, depending on the combination of met conditions.
+Without this your reaction events would execute twice for a single reaction or not at all, depending on the combination of met conditions.
 
 ```js
 if (event.t === 'MESSAGE_REACTION_REMOVE' && message && message.reactions.get(emojiKey) && message.reactions.get(emojiKey).users.size) return;
