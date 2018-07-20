@@ -198,7 +198,7 @@ collector.on('collect', async reaction => {
 	console.log(`Added the role to ${member.displayName}`);
 });
 ```
-<p class="tip">On the masterbranch the `collect` event emits with the User that reacted as second parameter, so you don't need to optain it as `reaction.users.last()`</p>
+<p class="tip">On the masterbranch the `collect` event emits with the User that reacted as second parameter, so you don't need to obtain it as `reaction.users.last()`</p>
 
 If you want a static massage on the server people can react to to assign their roles you are better off using the `messageReactionAdd` event and comparing the `reaction.message.id` to your specified reactionmessage. This clientevent passes you the [MessageReaction object](https://discord.js.org/#/docs/main/stable/class/MessageReaction) and the user that reacted which you can utilize in the same way as shown above.
 To make it work after you restarted the bot keep reading to learn how to listen for reactions on old messages.
@@ -250,7 +250,7 @@ client.on('messageReactionRemove', (reaction, user) => {
 });
 ```
 
-Send a messsage, restart your bot, and add a reaction to the message you just sent. You'll notice that the `messageReactionAdd` event doesn't trigger, but the `raw` event does. If you send a new message and react to that one, the `messageReactionAdd` should trigger then. This is because one isn't cached (the old one) and the other is (the new one).
+Send a message, restart your bot, and add a reaction to the message you just sent. You'll notice that the `messageReactionAdd` event doesn't trigger, but the `raw` event does. If you send a new message and react to that one, the `messageReactionAdd` should trigger then. This is because one isn't cached (the old one) and the other is (the new one).
 
 Since the `raw` event gives you just enough data to work with, you can build up the proper objects and emit the other events yourself. First, replace your entire `raw` event with this:
 
