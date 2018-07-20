@@ -29,7 +29,7 @@ After creating a bot user, you'll see a section like this:
 ![Bot application](assets/img/created-bot.png)
 
 In this panel you can add a snazzy profile picture, set a username for your bot and make it public or private.
-You can access your token in this panel as well either by reavealing it or simply pressing the "copy" button.
+You can access your token in this panel as well either by revealing it or simply pressing the "copy" button.
 When we ask you to paste your "token" somewhere, this is the value that you need to put in. Don't worry if you do happen to lose it at some point. You can always come back to this page and copy it again.
 
 ### What is a token, anyway?
