@@ -1,6 +1,6 @@
 ## Introduction
 
-Permissions are Discords primary feature enabeling users to customize the workings of their server to their liking.
+Permissions are Discords primary feature enabling users to customize the workings of their server to their liking.
 To break it down to essentials: Permissions and permission overwrites tell Discord who is allowed to do what and where.
 When first confronted with them they can be quite confusing, but no worries we are here to take care of that, so let's dive in!
 
@@ -138,7 +138,7 @@ guild.createChannel('new-channel', 'text', [{
 
 These are ChannelCreationOverwrites and differ from PermissionOverwriteOptions in syntax, take care to not mix them up!
 
-<p class = "tip">The masterbranch changes the funcitonality of `GuildChannel#overwritePermissions` to be able to set multiple overwrites and introduces `GuildChannel#updateOverwrite` with the prior functionality (updating overwrites for one target specifically whilst keeping all others intact)</p>
+<p class = "tip">The masterbranch changes the functionality of `GuildChannel#overwritePermissions` to be able to set multiple overwrites and introduces `GuildChannel#updateOverwrite` with the prior functionality (updating overwrites for one target specifically whilst keeping all others intact)</p>
 
 ### Removing overwrites
 
@@ -292,7 +292,7 @@ for (const overwrite of channel.parent.permissionOverwrites.values()) {
 		else if (deny.has(flag)) options[flag] = false;
 		// if not referenced in either of the two
 		// assign a property with the name of the flag and set the value to null
-		// to overwrite existing alow/deny overwrites in the child channel
+		// to overwrite existing allow/deny overwrites in the child channel
 		else options[flag] = null;
 	}
 	// apply overwrites
