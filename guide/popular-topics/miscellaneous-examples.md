@@ -196,11 +196,11 @@ To solve this issue you can construct a new RichEmbed and apply the correlating 
 The following code sample results in a bot re-posting any and all embeds it reads:
 
 ```js
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Client, RichEmbed } = require('discord.js');
+const client = new Client();
 
-const toRichEmbed = (messageEmbed) => {
-	const richEmbed = new Discord.RichEmbed();
+const toRichEmbed = messageEmbed => {
+	const richEmbed = new RichEmbed();
 	if (messageEmbed.title) {
 		richEmbed.setTitle(messageEmbed.title);
 	}
@@ -233,15 +233,16 @@ const toRichEmbed = (messageEmbed) => {
 		const attachment = messageEmbed.message.attachments.first();
 		richEmbed.attachFile(attachment.url, attachment.filename);
 	}
+
 	return richEmbed;
 };
 
 client.on('message', message => {
-	if (msg.author.id === client.user.id) {
+	if (message.author.id === client.user.id) {
 		return;
 	}
-	if (msg.embeds.length) {
-		const embed = msg.embeds[0];
+	if (message.embeds.length) {
+		const embed = message.embeds[0];
 		message.channel.send(toRichEmbed(embed));
 	}
 });
