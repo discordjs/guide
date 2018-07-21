@@ -23,8 +23,8 @@ member.roles.some(thisRole => thisRole.name === 'Mod');
 
 * Permission: The ability to execute a certain action in Discord
 * Overwrite: Rule on a channel to modify the permissions for a member or role
-* Bitfield: Binary representation of Discord permissions 
-* Flag: Readable string in MACRO_CASE, for example `'KICK_MEMBERS'`, refers to a position in the permission bitfield. You can find a list of all valid flags in the [Discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Permissions?scrollTo=s-FLAGS)
+* Bit field: Binary representation of Discord permissions 
+* Flag: Readable string in MACRO_CASE, for example `'KICK_MEMBERS'`, refers to a position in the permission bit field. You can find a list of all valid flags in the [Discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Permissions?scrollTo=s-FLAGS)
 * Base Permissions: Permissions for all roles a member has, added up
 * Final Permissions: Permissions for a member, after all overwrites are applied
 
@@ -32,11 +32,11 @@ member.roles.some(thisRole => thisRole.name === 'Mod');
 
 Discord permissions are stored in a 53-bit integer and calculated using bitwise operations, if you want to dive deeper into what's happening behind the curtains check the [wikipedia](https://en.wikipedia.org/wiki/Bit_field) and [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) articles on the topic.
 
-In Discord.js permission bitfields are represented with either the decimal value of said bitfield or the according flags.
-Every position in a permissions bitfield represents one of these flags and its state (either referenced `1` or not referenced `0`).
+In Discord.js permission bit fields are represented with either the decimal value of said bit field or the according flags.
+Every position in a permissions bit field represents one of these flags and its state (either referenced `1` or not referenced `0`).
 
 The flag `KICK_MEMBERS` for example corresponds to the position 2¹,`00000000000000000000000000000010` or `2` as decimal value.
-`MANAGE_MESSAGES` corresponds to the position 2¹³ and a bitfield with both flags referenced looks like this: `00000000000000000010000000000010` or `8194` as decimal value.
+`MANAGE_MESSAGES` corresponds to the position 2¹³ and a bit field with both flags referenced looks like this: `00000000000000000010000000000010` or `8194` as decimal value.
 The Discord API documentation features a [handy calculator to convert permission flags into decimals](https://discordapp.com/developers/tools/permissions-calculator) if you are interested.
 
 Before we get into actually assigning permissions let's quickly go over the method Discord uses to determine a guildmembers final permissions:
@@ -51,7 +51,7 @@ Before we get into actually assigning permissions let's quickly go over the meth
 
 Due to the way base permissions apply, if you grant `SEND_MESSAGES` for @everyone but don't enable it for your muterole @muted, members with the muterole will still be able to send messages unless you specifically add overwrites.
 
-All roles allows are applied after all roles denies! If any of a members roles has an overwrite to explicitly allow a permission the member will be able to execute the specified action in this channel even if a higher role has an overwrite to explicitly deny the same permission. So placing an overwrite to allow `SEND_MESSAGES` on a role will result in members with this role to not be muteable via role assignment in this channel.
+All roles allows are applied after all roles denies! If any of a members roles has an overwrite to explicitly allow a permission the member will be able to execute the specified action in this channel even if a higher role has an overwrite to explicitly deny the same permission. So placing an overwrite to allow `SEND_MESSAGES` on a role will result in members with this role to not be mutable via role assignment in this channel.
 
 ## Elevated permissions
 
@@ -96,12 +96,12 @@ guild.defaultRole.setPermissions(['SEND_MESSAGES', 'VIEW_CHANNEL']);
 
 Any permission flags not specified in this array are not granted to the role! They are also not denied, just not granted.
 Note that although `VIEW_CHANNEL` grants access to view multiple channels the permission flag is still called `VIEW_CHANNEL` in singular!
-You can also provide the permissions when creating a role as part of RoleData as either numeral representation of the permission bitfield or an array of permission flags:
+You can also provide the permissions when creating a role as part of RoleData as either numeral representation of the permission bit field or an array of permission flags:
 
 ```js
-// permission bitfield in decimal representation
+// permission bit field in decimal representation
 guild.createRole({ name: 'Mod', permissions: 8194 });
-// permission bitfield in binary representation
+// permission bit field in binary representation
 guild.createRole({ name: 'Mod', permissions: 0b10000000000010 });
 // permission flag array
 guild.createRole({ name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS'] });
@@ -124,7 +124,7 @@ Let's add an overwrite to lock everyone out of the channel (the guild ID is at t
 channel.overwritePermissions(channel.guild.id, { VIEW_CHANNEL: false });
 ```
 
-Any permissionflags not specified in this PermissionOverwriteOptions object (the second parameter) do not get an explicit allow or explicit deny overwrite.
+Any permission flags not specified in this PermissionOverwriteOptions object (the second parameter) do not get an explicit allow or explicit deny overwrite.
 You can also provide an array of overwrites during channel creation:
 
 ```js
@@ -138,7 +138,7 @@ guild.createChannel('new-channel', 'text', [{
 
 These are ChannelCreationOverwrites and differ from PermissionOverwriteOptions in syntax, take care to not mix them up!
 
-<p class = "tip">The masterbranch changes the functionality of `GuildChannel#overwritePermissions` to be able to set multiple overwrites and introduces `GuildChannel#updateOverwrite` with the prior functionality (updating overwrites for one target specifically whilst keeping all others intact)</p>
+<p class = "tip">The master branch changes the functionality of `GuildChannel#overwritePermissions` to be able to set multiple overwrites and introduces `GuildChannel#updateOverwrite` with the prior functionality (updating overwrites for one target specifically whilst keeping all others intact)</p>
 
 ### Removing overwrites
 
@@ -151,8 +151,8 @@ channel.permissionOverwrites.get(message.author.id).delete();
 
 ## Permissions object
 
-The [Permissions object](https://discord.js.org/#/docs/main/stable/class/Permissions) is a Discord.js class with a permissions bitfield and a bunch of utility methods to manipulate it easily.
-Remember that using these methods will not manipulate permissions, but just return a modified version of the bitfield.
+The [Permissions object](https://discord.js.org/#/docs/main/stable/class/Permissions) is a Discord.js class with a permissions bit field and a bunch of utility methods to manipulate it easily.
+Remember that using these methods will not manipulate permissions, but just return a modified version of the bit field.
 
 ### Converting permission numbers to Objects
 
@@ -170,10 +170,10 @@ const permissions2 = new Discord.Permissions(flags);
 
 ### Checking for permissions
 
-The Permissions object features the `.has()` method allowing an easy way to check flags in a Permissions bitfield.
+The Permissions object features the `.has()` method allowing an easy way to check flags in a Permissions bit field.
 The `.has()` method takes two parameters. The first being either a permission number, single flag or an array of permission numbers and flags, the second being a boolean (true or false) indicating if you want to allow the `ADMINISTRATOR` permission to override (defaults to true).
 
-Let's say you want to know if the decimal bitfield representation `268550160` has `MANAGE_CHANNELS` referenced:
+Let's say you want to know if the decimal bit field representation `268550160` has `MANAGE_CHANNELS` referenced:
 
 ```js
 const Discord = require('discord.js');
@@ -196,7 +196,7 @@ console.log(adminperms.has('MANAGE_CHANNELS'), false);
 
 ### Manipulating permissions
 
-The Permissions object enables you to easily add or remove certain permissions from an existing bitfield without having to worry about bitwise operations. Both `.add()` and `.remove()` can take a single permission flag or number, an array of permissionflags or numbers or multiple permissionflags or numbers as multiple parameters.
+The Permissions object enables you to easily add or remove certain permissions from an existing bit field without having to worry about bitwise operations. Both `.add()` and `.remove()` can take a single permission flag or number, an array of permission flags or numbers or multiple permission flags or numbers as multiple parameters.
 
 ```js
 const Discord = require('discord.js');
@@ -211,7 +211,7 @@ console.log(permissions.has('KICK_MEMBERS'));
 // output : false
 ```
 
-You can utilize these methods to adapt permissions or overwrites without touching the other flags. To achieve this you can get the existing permissions for a role, manipulating the bitfield as described above and passing the changed bitfield to `role.setPermissions()`.
+You can utilize these methods to adapt permissions or overwrites without touching the other flags. To achieve this you can get the existing permissions for a role, manipulating the bit field as described above and passing the changed bit field to `role.setPermissions()`.
 
 <p class = "tip">In the stable branch `role.permissions` returns a number which needs to be converted to a Permissions object for this to work as described here, we covered how to achieve this in the section "Converting permission numbers to Objects"</p>
 
@@ -254,9 +254,9 @@ const permissionOverwrites = {
 	id: 'someid',
 	// role or user depending on the target
 	type: 'role',
-	// bitfield in decimal representation
+	// bit field in decimal representation
 	deny: 268435456,
-	// bitfield in decimal representation
+	// bit field in decimal representation
 	allow: 0,
 };
 ```
@@ -299,7 +299,7 @@ for (const overwrite of channel.parent.permissionOverwrites.values()) {
 	channel.overwritePermissions(overwrite.id, options);
 }
 ```
-<p class = "tip">The masterbranch introduces `channel.lockPermissions` to easily sync permission with the parent channel. You can also pass PermissionOverwrites to `channel.overwritePermissions` in master to adopt permissions from other channels</p>
+<p class = "tip">The master branch introduces `channel.lockPermissions` to easily sync permission with the parent channel. You can also pass PermissionOverwrites to `channel.overwritePermissions` in master to adopt permissions from other channels</p>
 
 ## Final permissions for a role    
 
@@ -333,7 +333,7 @@ const getRoleFinalPermissions = (channel, role) => {
 };
 ```
 
-<p class = "tip">On the masterbranch `channel.permissionsFor()` accepts a RoleResolvable as parameter making this entirely redundant</p>
+<p class = "tip">On the master branch `channel.permissionsFor()` accepts a RoleResolvable as parameter making this entirely redundant</p>
 
 ## Resulting code
 

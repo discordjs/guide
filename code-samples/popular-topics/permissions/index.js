@@ -1,7 +1,6 @@
-const Discord = require('discord.js');
 const util = require('util');
-
-const client = new Discord.Client();
+const { Client, Permissions } = require('discord.js');
+const client = new Client();
 
 client.on('ready', () => {
 	console.log('Ready!');
@@ -17,14 +16,14 @@ client.on('message', message => {
 		return message.reply(`I need the permissions ${botPermsGlobal.join(', ')} for this demonstration to work properly`);
 	}
 	if (message.content === '!modeveryone') {
-		const everyonePerms = new Discord.Permissions(message.guild.defaultRole.permissions);
+		const everyonePerms = new Permissions(message.guild.defaultRole.permissions);
 		const newPerms = everyonePerms.add(['MANAGE_MESSAGES', 'KICK_MEMBERS']);
 		message.guild.defaultRole.setPermissions(newPerms.bitfield);
 		message.reply('Added mod permissions to `@everyone`');
 	}
 
 	else if (message.content === '!unmodeveryone') {
-		const everyonePerms = new Discord.Permissions(message.guild.defaultRole.permissions);
+		const everyonePerms = new Permissions(message.guild.defaultRole.permissions);
 		const newPerms = everyonePerms.remove(['MANAGE_MESSAGES', 'KICK_MEMBERS']);
 		message.guild.defaultRole.setPermissions(newPerms.bitfield);
 		message.reply('Removed mod permissions from `@everyone`');
@@ -78,9 +77,9 @@ client.on('message', message => {
 		}
 		for (const overwrite of message.channel.parent.permissionOverwrites.values()) {
 			const options = {};
-			const allow = new Discord.Permissions(overwrite.allow);
-			const deny = new Discord.Permissions(overwrite.deny);
-			for (const flag of Object.keys(Discord.Permissions.FLAGS)) {
+			const allow = new Permissions(overwrite.allow);
+			const deny = new Permissions(overwrite.deny);
+			for (const flag of Object.keys(Permissions.FLAGS)) {
 				if (allow.has(flag)) options[flag] = true;
 				else if (deny.has(flag)) options[flag] = false;
 				else options[flag] = null;
@@ -93,7 +92,9 @@ client.on('message', message => {
 	else if (message.content === '!rolepermissions') {
 		const getRoleFinalPermissions = (channel, role) => {
 			let permissions = role.permissions | role.guild.defaultRole.permissions;
-			if (permissions & 1 << 3) {return new Discord.Permissions(permissions);}
+			if (permissions & 1 << 3) {
+				return new Permissions(permissions);
+			}
 			const roleOverwrites = channel.permissionOverwrites.get(role.id);
 			const everyoneOverwrites = channel.permissionOverwrites.get(role.guild.id);
 			if (everyoneOverwrites) {
@@ -104,7 +105,7 @@ client.on('message', message => {
 				permissions &= ~roleOverwrites.deny;
 				permissions |= roleOverwrites.allow;
 			}
-			return new Discord.Permissions(permissions);
+			return new Permissions(permissions);
 		};
 		message.reply(util.inspect(getRoleFinalPermissions(message.channel, message.member.highestRole).serialize()), { code: 'js' });
 	}
