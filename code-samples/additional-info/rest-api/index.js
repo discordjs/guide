@@ -22,10 +22,14 @@ client.on('message', async message => {
 		message.channel.send(body.file);
 	}
 	else if (command === 'urban') {
+		if (!args.length) {
+			return message.channel.send('You need to supply a search term!');
+		}
+
 		const { body } = await snekfetch.get('https://api.urbandictionary.com/v0/define').query({ term: args.join(' ') });
 
-		if (body.result_type === 'no_results') {
-			return message.channel.send(`No results found for **${args.join(' ')}**`);
+		if (!body.list.length) {
+			return message.channel.send(`No results found for **${args.join(' ')}**.`);
 		}
 
 		const [answer] = body.list;
@@ -36,8 +40,7 @@ client.on('message', async message => {
 			.setURL(answer.permalink)
 			.addField('Definition', trim(answer.definition, 1024))
 			.addField('Example', trim(answer.example, 1024))
-			.addField('Rating', `${answer.thumbs_up} thumbs up.\n${answer.thumbs_down} thumbs down.`)
-			.setFooter(`Tags: ${body.tags.join(', ')}`);
+			.addField('Rating', `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.`);
 
 		message.channel.send(embed);
 	}

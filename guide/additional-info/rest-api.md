@@ -88,12 +88,16 @@ So, here's what's happening in this code:
 
 Urban Dictionary's API is available at https://api.urbandictionary.com/v0/define, accepts a `term` parameter, and also returns a JSON response.
 
-First, you're going to need to fetch data from the API and get it's body. To do this, you'd do:
+First, you're going to need to fetch data from the API and get its body. To do this, you'd do:
 
 <!-- eslint-skip -->
 
 ```js
 if (command === 'urban') {
+	if (!args.length) {
+		return message.channel.send('You need to supply a search term!');
+	}
+
 	const { body } = await snekfetch.get('https://api.urbandictionary.com/v0/define').query({ term: args.join(' ') });
 }
 ```
@@ -102,22 +106,15 @@ The `.query()` method appends a [query string](https://en.wikipedia.org/wiki/Que
 
 If you were to do `!urban hello world`, then the URL would become https://api.urbandictionary.com/v0/define?term=hello%20world since the string gets encoded.
 
-With the `body` variable, you can get the properties of the returned JSON response. If you were to view it in your browser, it usually looks like a bunch of mumbo jumbo. If it doesn't, great! If it does, then you should get a JSON formatter/viewer. If you're using Chrome, I'd recommend [JSON Formatter](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa). If you're not using Chrome, search for "JSON formatter/viewer <your browser>" and get one.
+With the `body` variable, you can get the properties of the returned JSON response. If you were to view it in your browser, it usually looks like a bunch of mumbo jumbo. If it doesn't, great! If it does, then you should get a JSON formatter/viewer. If you're using Chrome, [JSON Formatter](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa) is one of the more popular extensions. If you're not using Chrome, search for "JSON formatter/viewer <your browser>" and get one.
 
-Now, if you look at the JSON, you can see that there are 4 properties:
-
-- `tags`: An array of strings containing tags related to the search result.
-- `result_type`: A string containing the type of the result.
-- `list`: An array of objects containing various definitions for the term (maximum 10).
-- `sounds`: An array of strings containg links to audio recordings of people saying the term (ignore this, we won't use it).
-
-Something you always want to do when making API based commands is to handle there being no results. So, let's throw a random term in there (e.g. `njaksdcas`) and then look at the response. From what it looks like, when there are no results, the `result_type` property is `no_results`. Now you are ready to start writing!
+Now, if you look at the JSON, you can see that's a `list` property, which is an array of objects containing various definitions for the term (maximum 10). Something you always want to do when making API based commands is to handle there being no results. So, let's throw a random term in there (e.g. `njaksdcas`) and then look at the response. The `list` array should then be empty. Now you are ready to start writing!
 
 First, you want to start with a check. After fetching the API and storing the body, you would do:
 
 ```js
-if (body.result_type === 'no_results') {
-	return message.channel.send(`No results found for **${args.join(' ')}**`);
+if (!body.list.length) {
+	return message.channel.send(`No results found for **${args.join(' ')}**.`);
 }
 ```
 
@@ -152,8 +149,7 @@ const embed = new Discord.RichEmbed()
 	.setURL(answer.permalink)
 	.addField('Definition', trim(answer.definition, 1024))
 	.addField('Example', trim(answer.example, 1024))
-	.addField('Rating', `${answer.thumbs_up} thumbs up.\n${answer.thumbs_down} thumbs down.`)
-	.setFooter(`Tags: ${body.tags.join(', ')}`);
+	.addField('Rating', `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.`);
 
 message.channel.send(embed);
 ```
@@ -163,4 +159,5 @@ Now, if you do that same command again, you should get this:
 ![Embeded Urban Command](/assets/img/RMv88.png)
 
 ## Resulting code
+
 If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/additional-info/rest-api).
