@@ -176,6 +176,33 @@ message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
 	});
 ```
 
+## Assigning a Role on Reaction
+
+Another common use case for reactions is assigning roles to members that react to the bots message. To achieve our goal we will be utilizing a ReactionCollector. Since we  [already have a guide page that covers this](/popular-topics/collectors#reaction-collectors) we'll be focusing on the aspect of getting the GuildMember from the Collector.
+We will make use of `async`/`await` keywords for the following snippet to prevent callback madness, if you need further elaboration on this topic we [explain this in another part of the guide](/additional-info/async-await).
+
+<!-- eslint-skip -->
+```js
+// we send the initial message and react with the bot so members can easily add reactions
+const reactmessage = await message.channel.send('React with 👌 to get your role!'); 
+await reactmessage.react('👌'); 
+
+const filter = (reaction, user) => reaction.emoji.name === '👌' && !user.bot; 
+const collector = reactmessage.createReactionCollector(filter, { time: 15000 });
+
+collector.on('collect', async reaction => { 
+	const user = reaction.users.last(); // the last user that reacted aka the user that triggered the 'collect' event
+	const guild = reaction.message.guild; // the guild the reaction happened in
+	const member = guild.member(user) || await guild.fetchMember(user); // getting the member from the user
+	member.addRole("some-role-id"); // adding the role to the member
+	console.log(`Added the role to ${member.displayName}`);
+});
+```
+<p class="tip">On the masterbranch the `collect` event emits with the User that reacted as second parameter, so you don't need to obtain it as `reaction.users.last()`</p>
+
+If you want a static massage on the server people can react to to assign their roles you are better off using the `messageReactionAdd` event and comparing the `reaction.message.id` to your specified reactionmessage. This clientevent passes you the [MessageReaction object](https://discord.js.org/#/docs/main/stable/class/MessageReaction) and the user that reacted which you can utilize in the same way as shown above.
+To make it work after you restarted the bot keep reading to learn how to listen for reactions on old messages.
+
 ## Listening for reactions on old messages
 
 If you've tried using the `messageReactionAdd` or `messageReactionRemove` events before, you may have noticed that it doesn't always emit. That's because these events only trigger for cached messages. Fortunately, there is a way to make those events trigger for *all* messages.
@@ -223,7 +250,7 @@ client.on('messageReactionRemove', (reaction, user) => {
 });
 ```
 
-Send a messsage, restart your bot, and add a reaction to the message you just sent. You'll notice that the `messageReactionAdd` event doesn't trigger, but the `raw` event does. If you send a new message and react to that one, the `messageReactionAdd` should trigger then. This is because one isn't cached (the old one) and the other is (the new one).
+Send a message, restart your bot, and add a reaction to the message you just sent. You'll notice that the `messageReactionAdd` event doesn't trigger, but the `raw` event does. If you send a new message and react to that one, the `messageReactionAdd` should trigger then. This is because one isn't cached (the old one) and the other is (the new one).
 
 Since the `raw` event gives you just enough data to work with, you can build up the proper objects and emit the other events yourself. First, replace your entire `raw` event with this:
 
