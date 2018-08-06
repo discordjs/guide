@@ -6,6 +6,8 @@
 * `<message>` is a placeholder for the Message object, such as `client.on('message', message => { ... });`.
 * `<guild>` is a placeholder for the Guild object, such as `<message>.guild` or `<client>.guilds.get('<id>')`.
 
+For a more detailed explanation on the notations commonly used in this guide, the docs, and the support server, see [here](/additional-info/notation).
+
 ## Administrative
 
 ### How do I ban a user?
