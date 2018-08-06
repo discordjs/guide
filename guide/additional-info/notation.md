@@ -22,6 +22,12 @@ Sometimes, the notation is extended, which can help you determine which one the 
 
 The important thing to take away from this notation is that the `#` symbol signifies that the property, method, or event can only be accessed through an instance of the class. Unfortunately, this notation is often abused, e.g. `<Message>#send` (`<Message>` is already an instance so this makes no sense), or `Util#resolveColor` (`resolveColor` is a static method, this should be written `Util.resolveColor`), so always refer back to the docs if you are confused.
 
+An example of where this notation is used is in the documentation's search feature.
+
+![Docs search](/assets/img/search.png)
+
+Notice the use of the `.` operator for the static method, `Role.comparePositions` and the `#` notation for the method, `Role#comparePositionsTo`.
+
 ## Types
 
 In the discord.js docs, there are type signatures everywhere, such as in properties, parameters, or return values. If you do not come from a statically typed language, you may not know what certain notations mean.
@@ -30,9 +36,11 @@ The symbol `*` means any type. For example, methods that return `*` means that t
 
 The symbol `?` means that the type is nullable. You can see it before or after the type (e.g. `?T` or `T?`). What this symbol means is that the value can be of the type `T` or it can be `null`. An example is the property `GuildMember#nickname` which has the type `?string` since a member may or may not have a nickname.
 
+The expression `T[]` means an array of `T`. You can sometimes see multiple brackets `[]`, meaning that the array is multi-dimensional, e.g. `string[][]`.
+
 The expression `...T` signifies a rest parameter of type `T`. This means that the function can take any amount of arguments, and all those arguments must be of the type `T`.
 
-The operator `|` (which can be read as "or") creates a union type, e.g. `A|B|C`. Simply, it means the value can be of any one of the types given.
+The operator `|`, which can be read as "or", creates a union type, e.g. `A|B|C`. Simply, it means the value can be of any one of the types given.
 
 The angle brackets `<>` are used for generic types or parameterized types. This means a type that uses another type(s). The notation looks like `A<B>` where `A` is the type and `B` is a type parameter. If this is hard to follow, it is enough to keep in mind that whenever you see `A<B>` you can think an `A` that contains `B`. Examples:
 
@@ -40,3 +48,7 @@ The angle brackets `<>` are used for generic types or parameterized types. This 
 - `Promise<User>` means a `Promise` that contains a `User`.
 - `Array<Promise<User|GuildMember>>` would be an array of `Promise`s each containing a `User` or a `GuildMember`.
 - `Collection<Snowflake, User>` would be a `Collection`, containing key-value pairs where the keys are `Snowflake`s, and the values are `User`s.
+
+![Message#send on the docs](/assets/img/send.png)
+
+In this piece of the docs, you can see three type signatures, `StringResolvable`, `MessageOptions or Attachment or RichEmbed`, and `Promise<(Message|Array<Message>)>`. The meaning of the word "or" here is the same as `|`.
