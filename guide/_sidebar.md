@@ -41,6 +41,7 @@
 	* [Setting up package.json scripts](/improving-dev-environment/package-json-scripts)
 	
 	* **Additional Info**
+	* [Understanding notation](/additional-info/notation)
 	* [ES6 syntax examples](/additional-info/es6-syntax)
 	* [Understanding async/await](/additional-info/async-await)
 	* [Using a REST API](/additional-info/rest-api)
