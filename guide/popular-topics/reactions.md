@@ -127,7 +127,20 @@ client.on('message', async message => {
 });
 ```
 
-If you try again with either of the codeblocks above, you'll get the result you originally wanted!
+You can also perform this in a loop.
+
+```js
+const reactions = ['🍎', '🍊', '🍇'];
+client.on('message', async message => {
+	if (message.content === '!fruits') {
+		for (const reaction of reactions) {
+			await message.react(reaction);
+		}
+	}
+});
+```
+
+If you try again with one of the codeblocks above, you'll get the result you originally wanted!
 
 ![Emojis reacting in correct order](/assets/img/1IWSJ1C.png)
 
