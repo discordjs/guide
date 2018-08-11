@@ -184,6 +184,12 @@ Discord.js even ships with Regular Expressions for all the different kinds of me
 You can find them in the [discord.js docs](https://discord.js.org/#/docs/main/stable/class/MessageMentions?scrollTo=s-CHANNELS_PATTERN).
 </p>
 
+<p class="warning">
+Discord.js has [built-in patterns](https://discord.js.org/#/docs/main/stable/class/MessageMentions?scrollTo=s-CHANNELS_PATTERN)
+for matching mentions, however as of version 11.4 they do not contain any groups
+and thus aren't useful for actually getting the ID out of the mention.
+</p>
+
 Updating your `getUserFromMention` function to use RegEx gives you this:
 
 ```js
