@@ -40,8 +40,9 @@ I think we should add @GoodPerson to the @Mod role.
 
 then the `message.content` for that message will look something like this
 
+<!-- eslint-skip -->
 ```js
-"I think we should add <@86890631690977280> to the <@&134362454976102401> role."
+'I think we should add <@86890631690977280> to the <@&134362454976102401> role.'
 ```
 
 ### Implementation
