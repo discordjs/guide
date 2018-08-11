@@ -179,6 +179,11 @@ Generally IDs are 17 or 18 digits long, but you do not need to enforce such a ru
 The `\d+` is wrapped in parentheses to create a group. Groups allow you to extract information from a string.
 The `match` method on strings returns all the values captured by the groups in the RegEx.
 
+<p class="tip">
+Discord.js even ships with Regular Expressions for all the different kinds of mentions.
+You can find them in the [discord.js docs](https://discord.js.org/#/docs/main/stable/class/MessageMentions?scrollTo=s-CHANNELS_PATTERN).
+</p>
+
 Updating your `getUserFromMention` function to use RegEx gives you this:
 
 ```js
