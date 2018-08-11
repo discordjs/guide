@@ -178,6 +178,8 @@ And ta-da! You now have a list of avatar links of all the users you tagged.
 
 It does take up a lot of screen, but this is just an example command anyway.
 
+<p class="tip">If you're looking for a more advanced way to handle mentions as arguments you can check out [this guide](/creating-your-bot/parsing-mention-arguments).</p>
+
 ### Number ranges
 
 Sometimes you'll want users to give you input that ranges from X to Y, but nothing outside of that. Additionally, you want to make sure that they do give you an actual number and not random characters. A good example of this would be a `!prune` command, where it deletes X messages in the channel, depending on what the user inputs.
