@@ -182,11 +182,6 @@ Here is how the RegEx works:
 
 Using the `match` method on strings you can get the values of the capture group, i.e., the ID of the mention.
 
-<p class="tip">
-Discord.js even ships with Regular Expressions for all the different kinds of mentions.
-You can find them in the [discord.js docs](https://discord.js.org/#/docs/main/stable/class/MessageMentions?scrollTo=s-CHANNELS_PATTERN).
-</p>
-
 <p class="warning">
 Discord.js has [built-in patterns](https://discord.js.org/#/docs/main/stable/class/MessageMentions?scrollTo=s-CHANNELS_PATTERN)
 for matching mentions, however as of version 11.4 they do not contain any groups
