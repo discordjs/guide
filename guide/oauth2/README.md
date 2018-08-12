@@ -179,11 +179,11 @@ if (accessCode) {
 You should see something like this in the console after you click your OAuth2 url.
 
 ```json
-{ access_token: 'an access token',
-  token_type: 'Bearer',
-  expires_in: 604800,
-  refresh_token: 'a refresh token',
-  scope: 'identify' }
+{ "access_token": "an access token",
+  "token_type": "Bearer",
+  "expires_in": 604800,
+  "refresh_token": "a refresh token",
+  "scope": "identify" }
 ```
 
 Now you have an access token and it was never exposed on the user's side! How secure!
