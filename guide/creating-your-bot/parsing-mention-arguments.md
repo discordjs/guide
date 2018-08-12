@@ -172,12 +172,15 @@ If you have never worked with Regular Expressions before, this might seem daunti
 <p class="tip">For a more detailed explanation of please consult the [MDN's documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) about them.</p>
 
 The RegEx you will use for user mentions will look like this: `/^<@!?(\d+)>$/`.
-That does not look too bad, does it? The ^ at the beginning and the $ at the end mean that the mention has to take up the entire string.
-Like you learned previously, the mentions start with <@ and end with >.
-The `?` after the `!` indicates that the `!` is optional. `\d` in RegEx stands for any digit, the `+` means it has to be at least one digit.
-Generally IDs are 17 or 18 digits long, but you do not need to enforce such a rule; the exact length of the ID does not matter.
-The `\d+` is wrapped in parentheses to create a group. Groups allow you to extract information from a string.
-The `match` method on strings returns all the values captured by the groups in the RegEx.
+Here is how the RegEx works:
+
+ 1. The `^` at the beginning and the `$` at the end mean that the mention has to take up the entire string.
+ 2. You have the typical `<@` and `>` at the beginning and end.
+ 3. The `?` after the `!` indicates that the `!` is optional.
+ 4. `\d+` means the RegEx will look for multiple digits, which will be the ID.
+ 5. The parentheses around the `\d+` create a capture group, which allows us to get the ID out of the mention.
+
+Using the `match` method on strings you can get the values of the capture group, i.e., the ID of the mention.
 
 <p class="tip">
 Discord.js even ships with Regular Expressions for all the different kinds of mentions.
