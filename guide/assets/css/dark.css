@@ -93,3 +93,14 @@ body.dark {
 .dark .octo-arm {
 	color: #1d1d1d;
 }
+
+/* Discord message component */
+.dark .discord-messages {
+	color: #fff;
+	background-color: #36393e;
+	border-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark .discord-messages .discord-message {
+	border-bottom-color: rgba(255, 255, 255, 0.05);
+}
