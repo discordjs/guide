@@ -21,8 +21,7 @@ client.on('message', message => {
 		const newPerms = everyonePerms.add(['MANAGE_MESSAGES', 'KICK_MEMBERS']);
 		message.guild.defaultRole.setPermissions(newPerms.bitfield)
 			.then(() => message.reply('Added mod permissions to `@everyone`'))
-			.catch(console.error)
-		;
+			.catch(console.error);
 	}
 
 	else if (message.content === '!unmodeveryone') {
@@ -30,8 +29,7 @@ client.on('message', message => {
 		const newPerms = everyonePerms.remove(['MANAGE_MESSAGES', 'KICK_MEMBERS']);
 		message.guild.defaultRole.setPermissions(newPerms.bitfield)
 			.then(() => message.reply('Removed mod permissions from `@everyone`'))
-			.catch(console.error)
-		;
+			.catch(console.error);
 	}
 
 	else if (message.content === '!createmod') {
