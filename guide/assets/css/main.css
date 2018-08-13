@@ -262,10 +262,25 @@ body.close #theme-toggle-button {
 	border-radius: 50%;
 }
 
+.discord-message .author-header {
+	display: flex;
+	align-items: center;
+}
+
 .discord-message .author-header .author-username {
 	font-size: 1.1em;
 	font-weight: 500;
 	letter-spacing: 0.5px;
+}
+
+.discord-message .author-header .bot-tag {
+	background-color: #7289da;
+	font-size: 0.65em;
+	margin-left: 5px;
+	padding: 3px;
+	border-radius: 3px;
+	line-height: 100%;
+	text-transform: uppercase;
 }
 
 .discord-message .message-body {

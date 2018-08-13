@@ -15,6 +15,7 @@ Vue.component('discord-message', {
 			<div class="message-content">\
 				<div class="author-header">\
 					<span class="author-username">{{ author }}</span>\
+					<span v-if="bot" class="bot-tag">Bot</span>\
 				</div>\
 				<div class="message-body">\
 					<slot></slot>\
@@ -27,6 +28,7 @@ Vue.component('discord-message', {
 	props: {
 		author: String,
 		avatar: String,
+		bot: Boolean,
 	},
 
 	data: function() {
