@@ -91,7 +91,7 @@ You can see that by clicking `Authorize`, you are allowing the application to ac
 </script>
 ```
 
-Here, we just grab the access token and type from the url if it's there and use it to get info on the user, which is then used to them. In the following sections, we'll go over various details of Discord and OAuth2.
+Here, we just grab the access token and type from the url if it's there and use it to get info on the user, which is then used to greet them. In the following sections, we'll go over various details of Discord and OAuth2.
 
 ## More details
 
