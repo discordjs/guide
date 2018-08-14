@@ -24,19 +24,17 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 	* An eval command
 
 * Frequently requested topic guides
-	* How to navigate the d.js docs (hoo boi)
-	* Reaction menu example
-	* Embeds
 	* Permission overwrites (roles, members, adding, deleting, etc.)
 	* Audit logs (e.g. see who deleted what message)
 	* Common errors and what they mean
+	* Add a section on the reactions page about removing reactions (per user, per emoji, etc.)
 
 * Long-term plans
 	* OAuth guide
 	* Figure out how to make an OAuth dashboard (node, express, passport, vue maybe)
 	* Merge the Commando guide into this guide
-	* Look into how to create a search plugin for Docsify (the existing one doesn't work well at all)
 	* Possibly adopt [Crawl's ESLint config](https://github.com/iCrawl/eslint-config-aqua)
+	* Convert to VuePress
 
 * Adjustments / Updates
 	* Update `Reflect.defineProperty()` and prototyped methods to use `.findOrCreate()`/`.findOrBuild()` instead of manual checks
