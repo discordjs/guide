@@ -41,7 +41,7 @@ Vue.component('discord-message', {
 
 	created: function() {
 		var defaultAvatars = {
-			user: '/assets/img/discord-avatar-user.png',
+			djs: '/assets/img/discord-avatar-djs.png',
 			blue: '/assets/img/discord-avatar-blue.png',
 			green: '/assets/img/discord-avatar-green.png',
 		};
