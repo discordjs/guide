@@ -43,7 +43,6 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 
 * Vue-related
 	* Make a [version selector component](https://github.com/discordjs/guide/issues/121) that determines what content a user sees on a page
-	* Replace all `<p class="tip">` stuff with Vue components, e.g. `<tip>`, `<warning>`, etc.
 	* Expand upon Discord message component:
 		* Add a component for embeds and all the related areas, e.g. `<discord-embed>`, `<embed-field>`, `<embed-footer>`, etc.
 		* Possibly add a component for reactions
