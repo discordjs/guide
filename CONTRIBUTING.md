@@ -176,3 +176,26 @@ If you want to include an image in a page, the image you add should be saved to 
 +
 + If you want to read more about this, you can check out the page on [that other cool stuff](/some-really-cool-stuff).
 ```
+
+### Faking Discord messages
+
+We have some useful custom helper components that you can use to "fake" Discord message. The reason for this is to make it easy for you to create, easy for anyone in the future to edit, and avoid having to take screenshots and using too many images on a page at once. Here's a preview of the components:
+
+![Discord message faker preview](https://i.imgur.com/1qZodqm.png)
+
+The syntax to make this display is quite simple as well:
+
+```html
+<discord-messages>
+	<discord-message author="User" avatar="djs">
+		!ping
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		Pong! Took 250ms
+	</discord-message>
+</discord-messages>
+```
+
+The `author` and `avatar` attributes must be strings, and the `bot` attribute must be a boolean. Do note the semicolon in `:bot="true"`. These components are made with Vue, but if you aren't familiar with Vue, don't worry about it. Just understand that this allows us to pass in the actual boolean `true` and not the string `'true'`. All `<discord-message>` tags must be children of a single `<discord-messages>` tag for it to display properly.
+
+There are also some shortcuts you can use for the `avatar` attribute. The currently available ones are `blue`, `green`, and `djs`. `blue` and `green` will make it use a default Discord avatar of that color, and `djs` will make it use the discord.js guild icon.
