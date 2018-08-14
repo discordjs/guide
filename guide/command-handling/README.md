@@ -32,7 +32,7 @@ client.on('message', message => {
 client.login(token);
 ```
 
-<p class="tip">We'll be moving over the commands created in [the previous page](/creating-your-bot/commands-with-user-input) as well, but for the sake of keeping the base code short, those commands have been omitted from the codeblock above.</p>
+<tip>We'll be moving over the commands created in [the previous page](/creating-your-bot/commands-with-user-input) as well, but for the sake of keeping the base code short, those commands have been omitted from the codeblock above.</tip>
 
 ### Individual command files
 
@@ -54,9 +54,9 @@ module.exports = {
 
 You can go ahead and do the same for the rest of your commands as well, putting their respective blocks of code inside the `execute()` function. If you've been using the same code as the guide thus far, you can copy & paste your commands into their own files now just fine without any issue, as long as you follow the format above. The `description` property is optional, but will be useful for the dynamic help command we'll be covering later.
 
-<p class="tip">`module.exports` is how you export data in Node.js so that you can `require()` it in other files. If you're unfamiliar with it and want to read more, you can take a look at [the documentation](https://nodejs.org/api/modules.html#modules_module_exports) for more info.</p>
+<tip>`module.exports` is how you export data in Node.js so that you can `require()` it in other files. If you're unfamiliar with it and want to read more, you can take a look at [the documentation](https://nodejs.org/api/modules.html#modules_module_exports) for more info.</tip>
 
-<p class="tip">If you need to access your client instance from inside one of your command files, you can access it via `message.client`. If you need to access things such as external files or modules, you should re-require them at the top of the file.</p>
+<tip>If you need to access your client instance from inside one of your command files, you can access it via `message.client`. If you need to access things such as external files or modules, you should re-require them at the top of the file.</tip>
 
 ### Dynamically reading command files
 
@@ -71,9 +71,9 @@ const client = new Discord.Client();
 + client.commands = new Discord.Collection();
 ```
 
-<p class="tip">`fs` is Node's native file system module. You can read the docs about it [here](https://nodejs.org/api/fs.html).</p>
+<tip>`fs` is Node's native file system module. You can read the docs about it [here](https://nodejs.org/api/fs.html).</tip>
 
-<p class="tip">If you aren't exactly sure what Collections are, they're a class that extend JS's native Map class and include more extensive, useful functionality. You can read about Maps [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), and see all the available Collection methods [here](https://discord.js.org/#/docs/main/stable/class/Collection).</p>
+<tip>If you aren't exactly sure what Collections are, they're a class that extend JS's native Map class and include more extensive, useful functionality. You can read about Maps [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), and see all the available Collection methods [here](https://discord.js.org/#/docs/main/stable/class/Collection).</tip>
 
 This next step is how you'll dynamically retrieve all your newly created command files. Add this below your `client.commands` line:
 

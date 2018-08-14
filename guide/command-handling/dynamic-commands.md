@@ -1,6 +1,6 @@
 ## Handling commands
 
-<p class="tip">This page is a follow-up and bases its code off of [the previous page](/command-handling/).</p>
+<tip>This page is a follow-up and bases its code off of [the previous page](/command-handling/).</tip>
 
 ### How it works
 

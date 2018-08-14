@@ -131,7 +131,7 @@ You'll notice some familiar things here from the previous tutorial, such as the 
 
 A new function here is the `.upsert()` function. It's a portmanteau for **up**date or in**sert**.  We use `upsert` here because just in case you run this file multiple times, it doesn't create duplicates. That shouldn't happen because we defined name as *unique* but there's no harm in being safe. Upsert also has a nice side benefit; If you adjust the cost, the respective item should also have their cost updated.
 
-<p class="tip">Execute `node dbInit.js` to create the database tables. Unless you make a change to the models, you'll never need to touch the file again. If you do make a change to a model, you can execute `node dbInit.js --force` or `node dbInit.js -f` to force sync your tables. It's important to note that this **will** empty out and remake your model tables.</p>
+<tip>Execute `node dbInit.js` to create the database tables. Unless you make a change to the models, you'll never need to touch the file again. If you do make a change to a model, you can execute `node dbInit.js --force` or `node dbInit.js -f` to force sync your tables. It's important to note that this **will** empty out and remake your model tables.</tip>
 
 ## Create associations
 

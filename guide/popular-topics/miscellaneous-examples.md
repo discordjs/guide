@@ -1,6 +1,6 @@
 # Miscellaneous examples
 
-<p class="tip">For more, even shorter code examples, check out [the common questions page](/popular-topics/common-questions)!</p>
+<tip>For more, even shorter code examples, check out [the common questions page](/popular-topics/common-questions)!</tip>
 
 ## Play music from YouTube
 
@@ -175,7 +175,7 @@ message.channel.send({
 * If you have a thumbnail set, a maximum of 2 fields will be displayed inlined, as opposed to the default 3.
 * If you use the `.setTimestamp()` or `timestamp` field, the timestamp will automatically adjust the timezone depending on the user's device.
 
-<p class="tip"> If your embed object variable is named `embed`, you can replace `.send({ embed: exampleEmbed })` with `.send({ embed })`.</p>
+<tip> If your embed object variable is named `embed`, you can replace `.send({ embed: exampleEmbed })` with `.send({ embed })`.</tip>
 
 ### Embed preview
 
@@ -183,7 +183,7 @@ Here's what the embed from code above would look like:
 
 ![Embed preview](/assets/img/ooaOAeu.png)
 
-<p class="tip">If you want to instantly preview what your embed will look like, check out [this site](https://leovoel.github.io/embed-visualizer/)!</p>
+<tip>If you want to instantly preview what your embed will look like, check out [this site](https://leovoel.github.io/embed-visualizer/)!</tip>
 
 ## Mention prefix
 
@@ -214,7 +214,7 @@ client.on('message', message => {
 client.login('your-token-goes-here');
 ```
 
-<p class="tip">If you aren't familiar with the syntax used on the `const [, matchedPrefix] = ...` line, that's called "array destructuring". Feel free to read more about it in the [ES6 syntax](/additional-info/es6-syntax?id=array-destructuring) guide!</p>
+<tip>If you aren't familiar with the syntax used on the `const [, matchedPrefix] = ...` line, that's called "array destructuring". Feel free to read more about it in the [ES6 syntax](/additional-info/es6-syntax?id=array-destructuring) guide!</tip>
 
 ## Emoji characters
 
@@ -248,4 +248,4 @@ console.log(emojiCharacters[10]); // 🔟
 console.log(emojiCharacters['!']); // ❗
 ```
 
-<p class="tip">On Windows, you may be able to use the `Win + .` keyboard shortcut to open up an emoji picker can be used for quick, easy access to all the unicode emojis available to you. Some of the emojis listed above may not be there, though (e.g the 0-9 emojis).</p>
+<tip>On Windows, you may be able to use the `Win + .` keyboard shortcut to open up an emoji picker can be used for quick, easy access to all the unicode emojis available to you. Some of the emojis listed above may not be there, though (e.g the 0-9 emojis).</tip>

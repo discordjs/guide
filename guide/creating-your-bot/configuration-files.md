@@ -1,6 +1,6 @@
 ## Configuration files
 
-<p class="tip">This page is a follow-up and bases its code off of [the previous page](/creating-your-bot/).</p>
+<tip>This page is a follow-up and bases its code off of [the previous page](/creating-your-bot/).</tip>
 
 As you get deeper into development, you may need to interact with sensitive data or data that gets used in multiple locations, such as:
 

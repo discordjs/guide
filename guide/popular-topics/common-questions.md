@@ -94,11 +94,11 @@ if (<message>.author.id === '<id>') {
 <client>.user.setActivity('<activity>', { type: 'LISTENING' });
 ```
 
-<p class="tip">If you would like to set your activity upon startup, you must place the `<client>.user.setActivity()` method in a `ready` event listener (`<client>.on('ready', () => {});`).</p>
+<tip>If you would like to set your activity upon startup, you must place the `<client>.user.setActivity()` method in a `ready` event listener (`<client>.on('ready', () => {});`).</tip>
 
-<p class="tip">If you're using a selfbot to change your activity, you won't be able to view the status change, but other users will.</p>
+<tip>If you're using a selfbot to change your activity, you won't be able to view the status change, but other users will.</tip>
 
-<p class="warning">`<client>.user.setActivity()` will only work in v11.3 and above. You can check your version with `npm ls discord.js` and update with `npm install discord.js`. You can still use `<client>.user.setGame()`, but it is deprecated as of v11.3, and has been removed in v12.</p>
+<warning>`<client>.user.setActivity()` will only work in v11.3 and above. You can check your version with `npm ls discord.js` and update with `npm install discord.js`. You can still use `<client>.user.setGame()`, but it is deprecated as of v11.3, and has been removed in v12.</warning>
 
 ## Miscellaneous
 
@@ -120,7 +120,7 @@ const user = <client>.users.get('<id>');
 user.send('<content>');
 ```
 
-<p class="tip">If you want to DM the user who sent the message, you can use `<message>.author.send()`.</p>
+<tip>If you want to DM the user who sent the message, you can use `<message>.author.send()`.</tip>
 
 ### How do I tag a certain user in a message?
 
@@ -132,9 +132,9 @@ const user = <message>.mentions.users.first();
 <message>.channel.send('Hi, <@user id>.');
 ```
 
-<p class="tip">If you want to tag the user who sent the message, you can use `<message>.reply()`. For example: `<message>.reply('hi.')` would result in `@User, hi.`. If you want to insert the tag elsewhere, you can store `<message>.author` as your `user` variable and use the original example.</p>
+<tip>If you want to tag the user who sent the message, you can use `<message>.reply()`. For example: `<message>.reply('hi.')` would result in `@User, hi.`. If you want to insert the tag elsewhere, you can store `<message>.author` as your `user` variable and use the original example.</tip>
 
-<p class="tip">Tags inside certain areas of an embed may display correctly, but will not actually ping the user. Tags inside other certain areas of an embed will display the raw string instead (e.g. `<@123456789012345678>`).</p>
+<tip>Tags inside certain areas of an embed may display correctly, but will not actually ping the user. Tags inside other certain areas of an embed will display the raw string instead (e.g. `<@123456789012345678>`).</tip>
 
 ### How do I prompt the user for additional input?
 
@@ -154,7 +154,7 @@ const user = <message>.mentions.users.first();
 });
 ```
 
-<p class="tip">If you want to learn more about this syntax or want to learn about reaction collectors as well, check out [this dedicated guide page for collectors](/popular-topics/collectors)!</p>
+<tip>If you want to learn more about this syntax or want to learn about reaction collectors as well, check out [this dedicated guide page for collectors](/popular-topics/collectors)!</tip>
 
 ### How do I react to the message my bot sent?
 
@@ -167,7 +167,7 @@ const user = <message>.mentions.users.first();
 });
 ```
 
-<p class="tip">If you want to learn more about reactions, check out [this dedicated guide on reactions](/popular-topics/reactions)!</p>
+<tip>If you want to learn more about reactions, check out [this dedicated guide on reactions](/popular-topics/reactions)!</tip>
 
 ### How do I create a restart command?
 
@@ -175,9 +175,9 @@ const user = <message>.mentions.users.first();
 process.exit();
 ```
 
-<p class="tip">`process.exit()` will only kill your Node process, but when using [PM2](http://pm2.keymetrics.io/), it will restart the process whenever it gets killed. You can read our guide on PM2 [here](/improving-dev-environment/pm2).</p>
+<tip>`process.exit()` will only kill your Node process, but when using [PM2](http://pm2.keymetrics.io/), it will restart the process whenever it gets killed. You can read our guide on PM2 [here](/improving-dev-environment/pm2).</tip>
 
-<p class="warning">Be sure to [limit this to your own ID](/popular-topics/common-questions?id=how-do-i-limit-a-command-to-a-single-user) so that other users can't restart your bot!</p>
+<warning>Be sure to [limit this to your own ID](/popular-topics/common-questions?id=how-do-i-limit-a-command-to-a-single-user) so that other users can't restart your bot!</warning>
 
 ### What is the difference between a User and a GuildMember?
 

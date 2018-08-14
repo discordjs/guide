@@ -58,7 +58,7 @@ Two of the easiest ways you can retrieve an emoji would be:
 * Use `.find()` on a Collection of Emojis.
 * Use `.get()` on the `client.emojis` Collection.
 
-<p class="tip">It is possible for two or more emojis to have the same name, and using `.find()` will only return the **first** entry it finds. As such, this can cause unexpected results.</p>
+<tip>It is possible for two or more emojis to have the same name, and using `.find()` will only return the **first** entry it finds. As such, this can cause unexpected results.</tip>
 
 Using `.find()`, your code would look something like this:
 
@@ -131,7 +131,7 @@ If you try again with either of the codeblocks above, you'll get the result you 
 
 ![Emojis reacting in correct order](/assets/img/1IWSJ1C.png)
 
-<p class="tip">If you aren't familiar with Promises or `async`/`await`, you can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [our guide page on async/await](/additional-info/async-await)!</p>
+<tip>If you aren't familiar with Promises or `async`/`await`, you can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [our guide page on async/await](/additional-info/async-await)!</tip>
 
 However, if you don't mind the order the emojis react in, you can take advantage of `Promise.all()`, like so:
 
@@ -188,7 +188,7 @@ client.on('raw', event => {
 });
 ```
 
-<p class="tip">It's recommended that you create a new bot and add it to a new server, because you will most likely be bombarded with console logs otherwise, and it'll become harder to keep track of the data you want to view.</p>
+<tip>It's recommended that you create a new bot and add it to a new server, because you will most likely be bombarded with console logs otherwise, and it'll become harder to keep track of the data you want to view.</tip>
 
 The `raw` event listens for *all* client events and returns a set amount of data. If you look at as is, it might look a bit like gibberish to you, but that's okay because you'll only need to know about two of the properties it contains.
 
@@ -270,7 +270,7 @@ All that's left is to fetch the actual reaction from the message and emit the ev
 const reaction = message.reactions.get(emojiKey);
 ```
 
-<p class="tip">In the master branch/v12, reactions are keyed by their ID or name only, not in a `name:ID` format.</p>
+<tip>In the master branch/v12, reactions are keyed by their ID or name only, not in a `name:ID` format.</tip>
 
 After that, simply emit the event with the proper data you've built up.
 
@@ -292,7 +292,7 @@ if (!reaction) {
 client.emit(events[event.t], reaction, user);
 ```
 
-<p class="tip">In the master branch, you can avoid that mess by applying [this fix](https://gist.github.com/Lewdcario/52e1c66433c994c5c3c272284b9ab29c) instead.</p>
+<tip>In the master branch, you can avoid that mess by applying [this fix](https://gist.github.com/Lewdcario/52e1c66433c994c5c3c272284b9ab29c) instead.</tip>
 
 And you're done! If you send a message, restart your bot, and react to that message, your `messageReactionAdd` and `messageReactionRemove` events should log as normal.
 

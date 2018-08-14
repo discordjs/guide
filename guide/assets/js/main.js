@@ -50,13 +50,13 @@ Vue.component('discord-message', {
 });
 
 Vue.component('tip', {
-	template: '<p class="tip"><slot></slot></p>'
+	template: '<p class="tip"><slot></slot></p>',
 });
 
 Vue.component('warning', {
-	template: '<p class="warning"><slot></slot></p>'
+	template: '<p class="warning"><slot></slot></p>',
 });
 
 Vue.component('danger', {
-	template: '<p class="danger"><slot></slot></p>'
+	template: '<p class="danger"><slot></slot></p>',
 });

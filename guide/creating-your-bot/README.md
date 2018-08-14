@@ -8,7 +8,7 @@ Open up your preferred code editor (whether it be [Visual Studio Code](https://c
 
 It's suggested that you save the file as `index.js`, but you may name it whatever you wish, as long as it ends with `.js`.
 
-<p class="tip">You can quickly create a new file by using the `Ctrl + N` shortcut on your keyboard, and then using `Ctrl + S` to save the file.</p>
+<tip>You can quickly create a new file by using the `Ctrl + N` shortcut on your keyboard, and then using `Ctrl + S` to save the file.</tip>
 
 ### Logging in to Discord
 
@@ -27,7 +27,7 @@ client.login('your-token-goes-here');
 
 Head back to your console window, type in `node your-file-name.js`, and press enter. If you see the `Ready!` message after a few seconds, you're good to go! If not, try going back a few steps and make sure you followed everything correctly.
 
-<p class="tip">Don't feel like typing the file name each time? Open up your `package.json` file, look for something like `"main": "index.js"`, and change `"index.js"` to whatever your file name is. After saving, you can simply run the `node .` shortcut in your console to start the process!</p>
+<tip>Don't feel like typing the file name each time? Open up your `package.json` file, look for something like `"main": "index.js"`, and change `"index.js"` to whatever your file name is. After saving, you can simply run the `node .` shortcut in your console to start the process!</tip>
 
 #### Start-up code explained
 
@@ -65,7 +65,7 @@ client.on('message', message => {
 
 Save the file, go back to your console, and start the process up again. Whenever a message is sent inside a channel your bot has access to, the message's content will be logged to your console. Go ahead and test it out!
 
-<p class="tip">Inside your console, you can press the up arrow on your keyboard to bring up the latest commands you've run. Pressing `Up` and then `Enter` after closing the process is a nice, quick way to start it up again (as opposed to typing out the name each time).</p>
+<tip>Inside your console, you can press the up arrow on your keyboard to bring up the latest commands you've run. Pressing `Up` and then `Enter` after closing the process is a nice, quick way to start it up again (as opposed to typing out the name each time).</tip>
 
 ### Replying to messages
 

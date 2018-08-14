@@ -42,7 +42,7 @@ pm2 start your-app-name.js --name "Some cool name"
 pm2 start your-app-name.js --watch
 ```
 
-<p class="tip">The `pm2 start` command can take more optional parameters, but for now only these 2 are relevant for us. If you want to see all the parameters available, you can check the documentation of pm2 [here](http://pm2.keymetrics.io/docs/usage/).</p>
+<tip>The `pm2 start` command can take more optional parameters, but for now only these 2 are relevant for us. If you want to see all the parameters available, you can check the documentation of pm2 [here](http://pm2.keymetrics.io/docs/usage/).</tip>
 
 ### Setting up booting with your system
 
@@ -52,7 +52,7 @@ The initial steps to run differ per OS. In this guide, we'll cover those for Win
 
 #### Initial steps for Windows
 
-<p class="tip">Run these from an administrative command prompt to avoid getting hit with a bunch of UAC dialogs.</p>
+<tip>Run these from an administrative command prompt to avoid getting hit with a bunch of UAC dialogs.</tip>
 
 **Install the [pm2-windows-service](https://www.npmjs.com/package/pm2-windows-service) package from npm:**
 
@@ -65,7 +65,7 @@ npm i -g pm2-windows-service
 ```bash
 pm2-service-install
 ```
-<p class="tip">You can use the `-n` parameter to set the service name: `pm2-service-install -n "the-service-name"`</p>
+<tip>You can use the `-n` parameter to set the service name: `pm2-service-install -n "the-service-name"`</tip>
 
 #### Initial steps for Linux/MacOS
 

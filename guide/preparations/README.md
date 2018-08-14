@@ -10,7 +10,7 @@ If you're developing on Windows, it's as simple as installing any other program.
 
 If you're developing on Linux, you may consult [this page](https://nodejs.org/en/download/package-manager/) to determine how you should install Node.<br />On that note, there's a possibility that you may already have Node \(e.g. if you're using a VPS\). You can check by running the `node -v` command. If it outputs something like `v8.0.0` or higher, then you're good to go! Otherwise, take a look at the page linked above for instructions on installing Node on your OS.
 
-<p class="warning">If you _do_ have Node installed, but have an older version \(i.e. anything below 8.0.0\), you should upgrade to the latest version.</p>
+<warning>If you _do_ have Node installed, but have an older version \(i.e. anything below 8.0.0\), you should upgrade to the latest version.</warning>
 
 ---
 
@@ -46,7 +46,7 @@ The next command you'll be running is `npm init`. This command creates a `packag
 
 The `npm init` command will ask you a sequence of questions - you should fill them out as you see fit. If you're not sure of something or just want to skip it as a whole, simply leave it blank and press enter.
 
-<p class="tip">Want to get started quickly? Use `npm init -y` to have it fill out everything for you!</p>
+<tip>Want to get started quickly? Use `npm init -y` to have it fill out everything for you!</tip>
 
 Once you're done with that, you're ready to install discord.js!
 

@@ -40,7 +40,7 @@ client.on('message', async message => {
 client.login('pleaseinsertyourtokenheresothistutorialcanwork');
 ```
 
-<p class="tip">We're going to take advantage of [destructuring](/additional-info/es6-syntax?id=destructuring) in this tutorial to maintain readability.</p>
+<tip>We're going to take advantage of [destructuring](/additional-info/es6-syntax?id=destructuring) in this tutorial to maintain readability.</tip>
 
 ## Using snekfetch
 
@@ -82,7 +82,7 @@ So, here's what's happening in this code:
 4. snekfetch's `body` property deserializes the JSON response using [JSON#parse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse).
 5. You then send the object's `file` property in Discord.
 
-<p class="warning">The response will only be parsed if the server's `Content-Type` header includes `application/json`. In some cases, you may have to get the `text` property instead of the `body` property and `JSON.parse()` it yourself.</p>
+<warning>The response will only be parsed if the server's `Content-Type` header includes `application/json`. In some cases, you may have to get the `text` property instead of the `body` property and `JSON.parse()` it yourself.</warning>
 
 ### Urban Dictionary
 
