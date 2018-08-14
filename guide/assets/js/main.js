@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-undef
+/* eslint-disable no-undef */
 Vue.component('discord-messages', {
 	template: '\
 		<div class="discord-messages">\
@@ -7,7 +7,6 @@ Vue.component('discord-messages', {
 	',
 });
 
-// eslint-disable-next-line no-undef
 Vue.component('discord-message', {
 	template: '\
 		<div class="discord-message">\
@@ -48,4 +47,16 @@ Vue.component('discord-message', {
 
 		this.avatarSrc = defaultAvatars[this.avatar] || this.avatar || defaultAvatars.blue;
 	},
+});
+
+Vue.component('tip', {
+	template: '<p class="tip"><slot></slot></p>'
+});
+
+Vue.component('warning', {
+	template: '<p class="warning"><slot></slot></p>'
+});
+
+Vue.component('danger', {
+	template: '<p class="danger"><slot></slot></p>'
 });
