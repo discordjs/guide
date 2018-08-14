@@ -40,7 +40,6 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 	* Update `Reflect.defineProperty()` and prototyped methods to use `.findOrCreate()`/`.findOrBuild()` instead of manual checks
 	* Fix code style inconsistency in the Sequelize pages
 	* Fix wording style inconsistency in the Sequelize pages (e.g. using "we" instead of "you")
-	* Add a section on the reactions page about removing reactions (per user, per emoji, etc.)
 
 * Vue-related
 	* Make a [version selector component](https://github.com/discordjs/guide/issues/121) that determines what content a user sees on a page
