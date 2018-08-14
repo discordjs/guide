@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "scripts": {
     "lint": "eslint . --ext md,js",
-    "serve": "docsify serve guide --open"
+    "serve": "docsify serve guide --open",
+    "precommit": "npm run lint"
   },
   "repository": "https://github.com/discordjs/guide.git",
   "keywords": [
@@ -24,6 +25,7 @@
   "devDependencies": {
     "docsify-cli": "^4.2.1",
     "eslint": "^4.17.0",
-    "eslint-plugin-markdown": "eslint/eslint-plugin-markdown"
+    "eslint-plugin-markdown": "eslint/eslint-plugin-markdown",
+    "husky": "^0.14.3"
   }
 }
