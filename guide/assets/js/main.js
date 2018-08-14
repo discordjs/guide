@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 Vue.component('discord-messages', {
 	template: '\
 		<div class="discord-messages">\
@@ -6,6 +7,7 @@ Vue.component('discord-messages', {
 	',
 });
 
+// eslint-disable-next-line no-undef
 Vue.component('discord-message', {
 	template: '\
 		<div class="discord-message">\
