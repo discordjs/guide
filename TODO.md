@@ -43,3 +43,11 @@ Feel free to add on to this list as you see fit. Make sure to cross things off a
 	* Fix code style inconsistency in the Sequelize pages
 	* Fix wording style inconsistency in the Sequelize pages (e.g. using "we" instead of "you")
 	* Add a section on the reactions page about removing reactions (per user, per emoji, etc.)
+
+* Vue-related
+	* Make a [version selector component](https://github.com/discordjs/guide/issues/121) that determines what content a user sees on a page
+	* Replace all `<p class="tip">` stuff with Vue components, e.g. `<tip>`, `<warning>`, etc.
+	* Expand upon Discord message component:
+		* Add a component for embeds and all the related areas, e.g. `<discord-embed>`, `<embed-field>`, `<embed-footer>`, etc.
+		* Possibly add a component for reactions
+		* Eventually move it to its own repo so that it doesn't have to be directly related to the guide and other people can use it in their own projects
