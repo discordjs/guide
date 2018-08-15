@@ -101,7 +101,7 @@ During your tests you will likely run into `DiscordAPIError: Missing Permissions
 - It is trying to execute a forbidden action on the server owner.
 - It is trying to execute an action based on another unfulfilled factor (for example reserved for partnered guilds). 
 
-<p class = "tip">The `ADMINISTRATOR` permission being granted does not skip any hierarchical check!</p>
+<tip>The `ADMINISTRATOR` permission being granted does not skip any hierarchical check!</tip>
 
 ## Base permissions
 
@@ -168,7 +168,7 @@ guild.createChannel('new-channel', 'text', [{
 
 These objects are ChannelCreationOverwrites and differ from PermissionOverwriteOptions, take care to not mix them up!
 
-<p class = "tip">On the master branch the functionality of `GuildChannel#overwritePermissions` is changed to replacing all overwrites. `GuildChannel#updateOverwrite` is introduced to take its place in updating a single overwrite while keeping all others intact.</p>
+<tip>On the master branch the functionality of `GuildChannel#overwritePermissions` is changed to replacing all overwrites. `GuildChannel#updateOverwrite` is introduced to take its place in updating a single overwrite while keeping all others intact.</tip>
 
 ### Replacing overwrites
 
@@ -187,7 +187,7 @@ channel.replacePermissionOverwrites({ overwrites: [{
 	allow: ['VIEW_CHANNEL'] }] });
 ```
 
-<p class = "tip">On the master branch the functionality of `GuildChannel#overwritePermissions` is changed to replace overwrites</p>
+<tip>On the master branch the functionality of `GuildChannel#overwritePermissions` is changed to replace overwrites</tip>
 
 ### Removing overwrites
 
@@ -265,7 +265,7 @@ console.log(permissions.has('KICK_MEMBERS'));
 
 You can utilize these methods to adapt permissions or overwrites without touching the other flags. To achieve this you can get the existing permissions for a role, manipulating the bit field as described above and passing the changed bit field to `role.setPermissions()`.
 
-<p class = "tip">In the stable branch `role.permissions` returns a number which needs to be converted to a Permissions object for this to work as described here, we covered how to achieve this in the section "Converting permission numbers to Objects"</p>
+<tip>In the stable branch `role.permissions` returns a number which needs to be converted to a Permissions object for this to work as described here, we covered how to achieve this in the section "Converting permission numbers to Objects"</tip>
 
 ## Final permissions
 
