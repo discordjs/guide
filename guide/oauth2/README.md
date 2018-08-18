@@ -25,7 +25,8 @@ http.createServer((req, res) => {
 	});
 	res.write(content);
 	res.end();
-}).listen(port);
+})
+	.listen(port);
 ```
 
 Right now, we've designated that the contents of an `index.html` file will be served to the user when they visit the root domain, so let's create an `index.html` file in the same directory with the following contents.
@@ -135,17 +136,20 @@ What we did in our quick example was go through the `implicit grant` flow, which
 
 #### Authorization code grant
 
-Unlike the quick example, we need an OAuth2 url where the `response_type` is `code`. Once you've obtained it, try visiting the link and authorizing your application. You should notice that instead of a hash, the redirect url now has a single query parameter appended to it like `?code=ACCESS_CODE`. Let's modify our `index.js` file to pull the parameter out of the url if it exists.
+Unlike the quick example, we need an OAuth2 url where the `response_type` is `code`. Once you've obtained it, try visiting the link and authorizing your application. You should notice that instead of a hash, the redirect url now has a single query parameter appended to it like `?code=ACCESS_CODE`. Let's modify our `index.js` file to pull the parameter out of the url if it exists. We can use the `url` module to do this for us.
 
 ```js
-const [url, queryParams] = req.url.split('?');
-if (queryParams) {
-	const accessCode = queryParams.match(/code=(.+?)(?:&|$)/);
-	if (accessCode) {
-		console.log(`The access code is: ${accessCode[1]}`);
-	}
+const url = require('url');
+
+// ...
+
+const urlObj = url.parse(req.url, true);
+
+if (urlObj.query.code) {
+	const accessCode = urlObj.query.code;
+	console.log(`The access code is: ${accessCode}`);
 }
-if (url === '/') {
+if (urlObj.pathname === '/') {
 	responseCode = 200;
 	content = fs.readFileSync('./index.html');
 }
@@ -161,21 +165,19 @@ const FormData = require('form-data');
 
 // ...
 
-if (accessCode) {
-	const data = new FormData();
-	data.append('client_id', 'your client id');
-	data.append('client_secret', 'your client secret');
-	data.append('grant_type', 'authorization_code');
-	data.append('redirect_uri', 'your redirect url');
-	data.append('scope', 'the scopes');
-	data.append('code', accessCode[1]);
-	fetch('https://discordapp.com/api/oauth2/token', {
-		method: 'POST',
-		body: data,
-	})
-		.then(res => res.json())
-		.then(console.log);
-}
+const data = new FormData();
+data.append('client_id', 'your client id');
+data.append('client_secret', 'your client secret');
+data.append('grant_type', 'authorization_code');
+data.append('redirect_uri', 'your redirect url');
+data.append('scope', 'the scopes');
+data.append('code', accessCode);
+fetch('https://discordapp.com/api/oauth2/token', {
+	method: 'POST',
+	body: data,
+})
+	.then(res => res.json())
+	.then(console.log);
 ```
 
 <p class="warning">The content-type for the token url must be application/x-www-form-urlencoded. This is why `form-data` is used.</p>
