@@ -34,9 +34,11 @@ Role mentions and channel mentions work similarly. Role mentions look like `<@&1
 That means when you receive a message from the Discord API and it contains mentions the message's content will contain that special syntax.  
 If you send
 
-```
-I think we should add @GoodPerson to the @Mod role.
-```
+<discord-messages>
+	<discord-message author="User" avatar="djs">
+		I think we should add @GoodPerson to the @Mod role.
+	</discord-message>
+</discord-messages>
 
 then the `message.content` for that message will look something like this
 
@@ -123,7 +125,7 @@ function getUserFromMention(mention) {
 }
 ```
 
-<p class="tip">The `slice` method is used in a more advance way here. You can read the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) for more info.</p>
+<tip>The `slice` method is used in a more advance way here. You can read the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) for more info.</tip>
 
 Now you have a nifty function you can use whenever you need to convert a raw mention into a proper user object.
 Plugging it into the command will give you this:
@@ -153,7 +155,14 @@ if (command === 'avatar') {
 
 And that is it! Simple, isn't it? Start up your bot and see if it works.
 
-![Test with string function](assets/img/qEIaiam.png)
+<discord-messages>
+	<discord-message author="AnotherUser" avatar="green">
+		!avatar @User
+	</discord-message>
+	<discord-message author="User" avatar="blue" :bot="true">
+		User's avatar: https://cdn.discordapp.com/avatars/208330347295932416/e2456a4bc63ec0215334434ade7fa45c.png
+	</discord-message>
+</discord-messages>
 
 Lo and behold, it does work.
 
@@ -169,7 +178,7 @@ But using Regular Expressions (aka "RegEx" or "RegExp"), you can condense all th
 
 If you have never worked with Regular Expressions before, this might seem daunting. But in fact, you already have used regular expressions. Remember `withoutPrefix.split(/ +/);`? This little `/ +/` is actually a Regular Expression. The `/` on either side tell JavaScript where the Regular Expression begins and where it ends, the stuff inbetween is it is content. 
 
-<p class="tip">For a more detailed explanation of please consult the [MDN's documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) about them.</p>
+<tip>For a more detailed explanation of please consult the [MDN's documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) about them.</tip>
 
 The RegEx you will use for user mentions will look like this: `/^<@!?(\d+)>$/`.
 Here is how the RegEx works:
@@ -182,11 +191,11 @@ Here is how the RegEx works:
 
 Using the `match` method on strings you can get the values of the capture group, i.e., the ID of the mention.
 
-<p class="warning">
+<warning>
 Discord.js has [built-in patterns](https://discord.js.org/#/docs/main/stable/class/MessageMentions?scrollTo=s-CHANNELS_PATTERN)
 for matching mentions, however as of version 11.4 they do not contain any groups
 and thus aren't useful for actually getting the ID out of the mention.
-</p>
+</warning>
 
 Updating your `getUserFromMention` function to use RegEx gives you this:
 
