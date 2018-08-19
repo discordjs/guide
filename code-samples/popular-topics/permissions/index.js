@@ -41,11 +41,18 @@ client.on('message', message => {
 			.catch(console.error);
 	}
 
-	else if (message.content === '!mod') {
+	else if (message.content === '!checkmod') {
 		if (message.member.roles.some(thisRole => thisRole.name === 'Mod')) {
 			return message.reply('You have a role called Mod');
 		}
 		message.reply('You do not have a role called Mod');
+	}
+
+	else if (message.content === '!cankick') {
+		if (message.member.hasPermission('KICK_MEMBERS')) {
+			return message.reply('You can kick members');
+		}
+		return message.reply('You can not kick members');
 	}
 
 	else if (message.content === '!makeprivate') {

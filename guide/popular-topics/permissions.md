@@ -105,6 +105,8 @@ During your tests you will likely run into `DiscordAPIError: Missing Permissions
 
 ## Base permissions
 
+### Setting role permissions
+
 Permissions are set on roles, not the guild member itself. To change them you access the Role object (for example via `guild.roles`) and use the `.setPermissions()` method.
 Let's change the base permissions for @everyone so you can see it in action:
 
@@ -120,6 +122,8 @@ Any permission not referenced in the flag array or bit field are not granted to 
 
 Note that flag names are literal. Although `VIEW_CHANNEL` grants access to view multiple channels the permission flag is still called `VIEW_CHANNEL` in singular.
 
+### Creating a role with permissions
+
 Alternatively you can provide permissions as a property of RoleData objects during role creation as an array of flag strings or a permission number:
 
 ```js
@@ -132,6 +136,27 @@ guild.createRole({ name: 'Mod', permissions: 0b10000000000010 });
 // permission flag array
 guild.createRole({ name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS'] });
 ```
+
+### Checking member permissions
+
+To know if a members roles have a permission enabled you can use the `.hasPermission()` method of the [GuildMember](https://discord.js.org/#/docs/main/stable/class/GuildMember?scrollTo=permissionsIn) class and provide a permission flag, array or number to check for. You can also specify if you want to allow the `ADMINISTRATOR` permission or the guild owner status to override this check with the following parameters.
+
+```js
+if (member.hasPermission('KICK_MEMBERS')) {
+	return console.log('This member can kick');
+}
+if (member.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS'])) {
+	return console.log('This member can kick and ban');
+}
+if (member.hasPermission('KICK_MEMBERS', false, false)) {
+	return console.log('This member can kick without allowing admin to override');
+}
+if (member.hasPermission('KICK_MEMBERS', false, false, false)) {
+	return console.log('This member can kick without allowing admin or owner to override');
+}
+```
+
+If you provide multiple permissions to the method it will only return `true` if all permissions you specified are granted.
 
 ## Channel overwrites
 
@@ -198,12 +223,49 @@ To remove the overwrite for a specific member or role you can get it from the ch
 channel.permissionOverwrites.get(message.author.id).delete();
 ```
 
+### Syncing with a category
+
+If the permission overwrites on a channel under a category match with the parent (category) the channel is considered to be synchronized. This means that any changes in the categories overwrites will now also change the channels overwrites. Changing the child channels overwrites will not effect the parent. 
+
+To easily synchronize permissions with the parent channel you can call the `.lockPermissions()` method on the respective child channel.  
+
+```js
+if (!channel.parent) {
+	console.log('This channel is not listed under a category');
+}
+
+channel.lockPermissions()
+	.then(() => console.log('Successfully synchronized permissions with parent channel'))
+	.catch(console.error);
+```
+
+### Permissions after overwrites
+
+Discord.js features two utility functions to easily determine the final permissions for a guild member or role in a specific channel: `.permissionsFor()` on the [GuildChannel](https://discord.js.org/#/docs/main/stable/class/GuildChannel?scrollTo=permissionsFor) class and `.permissionsIn()` on the [GuildMember](https://discord.js.org/#/docs/main/stable/class/GuildMember?scrollTo=permissionsIn) class (Note that the Role class does not yet feature a `.permissionsIn()` function on stable). Both return a Permissions object.
+
+To check your bots permissions in the channel the command was used in you could use something like this:
+
+```js
+// Final permissions for a guild member using permissionsFor
+const botPermissionsFor = channel.permissionsFor(guild.me);
+
+// Final permissions for a guild member using permissionsIn
+const botPermissionsIn = guild.me.permissionsIn(channel);
+
+// Final permissions for a role
+const rolePermissions = channel.permissionsFor(myRole);
+```
+
+<warning>The `.permissionsFor()` method returns a bit field with all permissions set if the member or role has the global `ADMINISTRATOR` permission and does not take overwrites into consideration in this case. Using the second parameter of the `.has()` method as described further down in the guide will not allow you to check without taking `ADMINISTRATOR` into account here!</warning>
+
+If you want to know how to work with the returned Permissions objects keep reading as this will be our next topic.
+
 ## The Permissions object
 
 The [Permissions object](https://discord.js.org/#/docs/main/stable/class/Permissions) is a Discord.js class containing a permissions bit field and a bunch of utility methods to manipulate it easily.
 Remember that using these methods will not manipulate permissions, but create a new instance representing the changed bit field.
 
-### Converting permission numbers to Objects
+### Converting permission numbers
 
 Some methods and properties in Discord.js return permission decimals rather than a Permissions object, making it hard to manipulate or read them if you don't want to use bitwise operations.
 You can however pass these decimals to the Permissions constructor to convert them.
@@ -266,47 +328,6 @@ console.log(permissions.has('KICK_MEMBERS'));
 You can utilize these methods to adapt permissions or overwrites without touching the other flags. To achieve this you can get the existing permissions for a role, manipulating the bit field as described above and passing the changed bit field to `role.setPermissions()`.
 
 <tip>In the stable branch `role.permissions` returns a number which needs to be converted to a Permissions object for this to work as described here, we covered how to achieve this in the section "Converting permission numbers to Objects"</tip>
-
-## Final permissions
-
-Discord.js features two utility functions to easily determine the final permissions for a guild member or role in a specific channel: `.permissionsFor()` on the [GuildChannel](https://discord.js.org/#/docs/main/stable/class/GuildChannel?scrollTo=permissionsFor) class and `.permissionsIn()` on the [GuildMember](https://discord.js.org/#/docs/main/stable/class/GuildMember?scrollTo=permissionsIn) class (Note that the Role class does not yet feature a `.permissionsIn()` function on stable). Both return a Permissions object.
-
-To check your bots permissions in the channel the command was used in you could use something like this:
-
-```js
-// Final permissions for a guild member using permissionsFor
-if (message.channel.permissionsFor(message.guild.me).has(['SEND_MESSAGES', 'VIEW_CHANNEL'])) {
-	return console.log('I can send a message here');
-}
-
-// Final permissions for a guild member using permissionsIn
-
-if (message.guild.me.permissionsIn(message.channel).has(['SEND_MESSAGES', 'VIEW_CHANNEL'])) {
-	return console.log('I can send a message here');
-}
-
-// Final permissions for a role
-if (channel.permissionsFor(myRole).has(['SEND_MESSAGES', 'VIEW_CHANNEL'])) {
-	channel.send('This role can send a message here');
-}
-```
-As you will generally want to allow `ADMINISTRATOR` to override you don't need to specify a second parameter here. It defaults to true.
-
-## Syncing permissions with a category
-
-If the permission overwrites on a channel under a category match with the parent (category) the channel is considered to be synchronized. This means that any changes in the categories overwrites will now also change the channels overwrites. Changing the child channels overwrites will not effect the parent. 
-
-To easily synchronize permissions with the parent channel you can call the `.lockPermissions()` method on the respective child channel.  
-
-```js
-if (!channel.parent) {
-	console.log('This channel is not listed under a category');
-}
-
-channel.lockPermissions()
-	.then(() => console.log('Successfully synchronized permissions with parent channel'))
-	.catch(console.error);
-```
 
 ## Resulting code
 
