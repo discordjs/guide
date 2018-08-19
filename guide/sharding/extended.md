@@ -1,6 +1,6 @@
 ## Extended changes
 
-<tip>This page is a follow-up and bases its code off of [the previous page](/sharding/additional-information.md/), which assumes knowledge of arguments and passing functions.</tip>
+<tip>This page is a follow-up and bases its code off of [the previous page](/sharding/additional-information), which assumes knowledge of arguments and passing functions.</tip>
 
 ### Sending messages across shards
 
