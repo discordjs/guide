@@ -177,9 +177,15 @@ Now, you will want to make use of it in the actual command:
 +			const foundEmoji = emojiArray.find(emoji => emoji);
 +			if (!foundEmoji) return message.reply('I could not find such an emoji.');
 +
-+			// Reconstruct an emoji object as required by discord.js
-+			const emoji = new Discord.Emoji(client.guilds.get(foundEmoji.guild), foundEmoji);
-+			return message.reply(`I have found an emoji ${emoji}!`);
++			// Acquire a guild that can be reconstructed with discord.js
++			return client.rest.makeRequest('get', Discord.Constants.Endpoints.Guild(foundEmoji.guild).toString(), true)
++					.then(raw => {
++						// Reconstruct a guild
++						const guild = new Discord.Guild(client, raw);
++						// Reconstruct an emoji object as required by discord.js
++						const emoji = new Discord.Emoji(guild, foundEmoji);
++						return message.reply(`I have found an emoji ${emoji.toString()}!`);
++					});
 +		});
 ```
 

@@ -57,8 +57,12 @@ client.on('message', message => {
 				const foundEmoji = emojiArray.find(emoji => emoji);
 				if (!foundEmoji) return message.reply('I could not find such an emoji.');
 
-				const emoji = new Discord.Emoji(client.guilds.get(foundEmoji.guild), foundEmoji);
-				return message.reply(`I have found an emoji ${emoji}!`);
+				return client.rest.makeRequest('get', Discord.Constants.Endpoints.Guild(foundEmoji.guild).toString(), true)
+					.then(raw => {
+						const guild = new Discord.Guild(client, raw);
+						const emoji = new Discord.Emoji(guild, foundEmoji);
+						return message.reply(`I have found an emoji ${emoji.toString()}!`);
+					});
 			});
 	}
 });
