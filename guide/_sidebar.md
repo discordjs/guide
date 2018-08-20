@@ -37,7 +37,7 @@
 	* [Extended](/sharding/extended)
 
 	* **OAuth2**
-	* [Getting an Access Token](/oauth2/)
+	* [Getting an access token](/oauth2/)
 
 	* **Improving your dev environment**
 	* [Managing your bot process with PM2](/improving-dev-environment/pm2)
