@@ -4,7 +4,7 @@ const prefix = '!';
 
 function findEmoji(id) {
 	const temp = this.emojis.get(id);
-	if (!temp) return false;
+	if (!temp) return null;
 
 	const emoji = Object.assign({}, temp);
 	if (emoji.guild) emoji.guild = emoji.guild.id;

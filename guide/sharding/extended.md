@@ -103,7 +103,7 @@ Let's start off with an extremely basic function, which will try to grab an emoj
 ```js
 function findEmoji(id) {
 	const emoji = this.emojis.get(id);
-	if (!emoji) return false;
+	if (!emoji) return null;
 	return emoji;
 }
 ```
@@ -154,7 +154,7 @@ While this result isnt *necessarily* bad or incorrect, it's simply a raw object 
 ```diff
 function findEmoji(id) {
 	const temp = this.emojis.get(id);
-	if (!temp) return false;
+	if (!temp) return null;
 +
 +	// Clone the object because it is modified right after, so as to not affect the cache in client.emojis
 +	const emoji = Object.assign({}, temp);
