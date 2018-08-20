@@ -77,7 +77,7 @@ channel.send(exampleEmbed);
 
 <warning>If the images doesn't display inside the embed but outside of it, double check your syntax to make sure it's as shown above.</warning>
 
-## Using an Embed object
+## Using an embed object
 
 ```js
 const exampleEmbed = {
@@ -166,7 +166,7 @@ channel.send({ files: [file], embed: exampleEmbed });
 
 <warning>If the images doesn't display inside the embed but outside of it, double check your syntax to make sure it's as shown above.</warning>
 
-## Resending Embeds
+## Resending embeds
 
 At some point in your bot development, you might want to get an embed from a message that's already sent, edit it, and send it again.
 
@@ -190,7 +190,7 @@ channel.send(exampleEmbed);
 - Mentions in embeds will not trigger a notification
 - Embeds allow masked links (e.g. `[Guide](https://discordjs.guide/)`), but only in field values and descriptions
 
-## Embed Limits
+## Embed limits
 
 There are a few limits to be aware of while planning your embeds due to limitations set by the API. Here is a quick reference you can come back to:
 
