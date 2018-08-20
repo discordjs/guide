@@ -3,20 +3,19 @@
 If you have been around on Discord for a bit chances are you have seen these special messages.
 They have a colored border, are often sent by bots and have embedded images, text fields and other fancy stuff.
 
-In the following section we will explain how you compose an Embed, send it and what you need to be aware of while doing so.
+In the following section we will explain how you compose an embed, send it, and what you need to be aware of while doing so.
 
 ### Embed Limits
 
-There are a few limits to be aware of while planning your embeds due to limitations set by the API.
-Here is a quick reference you can come back to.
+There are a few limits to be aware of while planning your embeds due to limitations set by the API. Here is a quick reference you can come back to:
 
-- Embed Titles are limited to 256 characters
-- Embed Descriptions are limited to 2048 characters
-- There can be up to 25 field objects
-- A fields name is limited to 256 and it's value to 1024 characters
+- Embed titles are limited to 256 characters
+- Embed descriptions are limited to 2048 characters
+- There can be up to 25 fields
+- A field's name is limited to 256 characters and its value to 1024 characters
 - The footer text is limited to 2048 characters
-- The Author name is limited to 256 characters
-- In addition the sum of all characters in an embed structure must not exceed 6000 characters.
+- The author name is limited to 256 characters
+- In addition, the sum of all characters in an embed structure must not exceed 6000 characters
 - A bot can have 1 embed per message
 - A webhook can have 10 embeds per message
 
@@ -24,20 +23,18 @@ Source: [Discord API documentation](https://discordapp.com/developers/docs/resou
 
 ### Notes
 
-- To display fields inline you need at least two consecutive fields set to `inline`
-- By default up to 3 fields will display inline, if a thumbnail is set this will change to 2
+- To display fields side-by-side, you need at least two consecutive fields set to `inline`
+- By default, up to 3 fields will display inline. If a thumbnail is set, this will change to 2
 - The timestamp will automatically adjust the timezone depending on the user's device
 - Mentions of any kind will only render correctly in field values and descriptions
 - Mentions in embeds will not trigger a notification
-- Embeds allow masked links (`[Guide](https://discordjs.guide/)`) but only in field values and descriptions
+- Embeds allow masked links (e.g. `[Guide](https://discordjs.guide/)`), but only in field values and descriptions
 
 ### Embed preview
 
 Here is an example of what an embed may look like. We will go over their construction in the next part of this guide.
 
 ![Embed preview](/assets/img/ooaOAeu.png)
-
-<tip>If you want to instantly preview what your embed will look like, check out [this site](https://leovoel.github.io/embed-visualizer/)!</tip>
 
 ## Using the RichEmbed constructor
 
@@ -46,7 +43,8 @@ Discord.js features the utility class [RichEmbed](https://discord.js.org/#/docs/
 ```js
 // at the top of your file
 const Discord = require('discord.js');
-// inside your command/event listener etc.
+
+// inside a command, event listener, etc.
 const exampleEmbed = new Discord.RichEmbed()
 	.setColor('#0099ff')
 	.setTitle('Some title')
@@ -65,23 +63,23 @@ const exampleEmbed = new Discord.RichEmbed()
 
 channel.send(exampleEmbed);
 ```
-<tip>You don't need to include all the elements showcased above, if you want a simpler embed just leave some out</tip>
+
+<tip>You don't need to include all the elements showcased above. If you want a simpler embed, just leave some out.</tip>
 
 The `.setColor()` method accepts a base 10 integer, HEX color string, an array of RGB values or specific color strings. You can find a list of them at [the Discord.js documentation](https://discord.js.org/#/docs/main/stable/typedef/ColorResolvable).
 
 `.addBlankField()` is a convenience method for `.addField('\u200b', '\u200b')` to add a spacer to the embed. This can also be used inline by passing `true` as the first parameter.
 
-<tip>On the master branch the receiving and outgoing embed classes have been unified, you will need to use `Discord.MessageEmbed()` as constructor instead</tip>
+<warning>On the master branch, the receiving and outgoing embed classes have been unified; you will need to use `Discord.MessageEmbed()` as constructor instead.</warning>
 
 The above example chains the manipulating methods to the newly created RichEmbed object.
 If you want to modify the embed based on conditions you will need to reference it as the constant `exampleEmbed` (for our example).
 
+<!-- eslint-skip -->
+
 ```js
-// at the top of your file
-const Discord = require('discord.js');
-// inside your command/event listener etc.
-const exampleEmbed = new Discord.RichEmbed()
-	.setTitle('Some title');
+const exampleEmbed = new Discord.RichEmbed().setTitle('Some title');
+
 if (message.author.bot) {
 	exampleEmbed.setColor('#7289da');
 }
@@ -89,14 +87,11 @@ if (message.author.bot) {
 
 ### Local images
 
-To use local images inside your embed you need to upload them alongside the embed with the `.attachFiles()` method. You can either provide the file path [FileOptions](https://discord.js.org/#/docs/main/stable/typedef/FileOptions), BufferResolvable or Attachment objects inside an array. 
+To use local images inside your embed, you need to upload them alongside the embed with the `.attachFiles()` method. You can either provide the file path [FileOptions](https://discord.js.org/#/docs/main/stable/typedef/FileOptions), BufferResolvable, or Attachment objects inside an array. 
 
 You can then access and use the images inside the embed itself with `attachment://fileName.extension`.
 
 ```js
-// at the top of your file
-const Discord = require('discord.js');
-// inside your command/event listener etc.
 const exampleEmbed = new Discord.RichEmbed()
 	.setTitle('Some title')
 	.attachFiles(['../assets/discordjs.png'])
@@ -105,7 +100,7 @@ const exampleEmbed = new Discord.RichEmbed()
 channel.send(exampleEmbed);
 ```
 
-<tip>If the embed does not display inside the embed but outside of it make sure you use the right syntax as shown above</tip>
+<warning>If the images doesn't display inside the embed but outside of it, double check your syntax to make sure it's as shown above.</warning>
 
 ## Using an Embed object
 
@@ -160,18 +155,18 @@ const exampleEmbed = {
 
 channel.send({ embed: exampleEmbed });
 ```
-<tip>You don't need to include all the properties showcased above, if you want a simpler embed just leave some out</tip>
 
-<tip>The `color` field has to be a base 10 integer for embed objects! If you have a hex color string (e.g. `'#0099ff'`) you can replace the `#` with `0x` to use it as a number: `0x0099ff`</tip>
+<tip>You don't need to include all the elements showcased above. If you want a simpler embed, just leave some out.</tip>
+
+<warning>The `color` field has to be a base 10 integer for embed objects! If you have a hex color string (e.g. `'#0099ff'`) you can replace the `#` with `0x` to use it as a number: `0x0099ff`.</warning>
 
 If you want to modify the embed object based on conditions you will need to reference it as the constant `exampleEmbed` (for our example). You can then reassign the property values as you would with any other object.
 
 ```js
-const exampleEmbed = {
-	title: 'Some title',
-};
+const exampleEmbed = { title: 'Some title' };
+
 if (message.author.bot) {
-	exampleEmbed.color = ('#7289da');
+	exampleEmbed.color = '#7289da';
 }
 ```
 
@@ -182,39 +177,31 @@ To use local images inside your embed you need to construct an [Attachment](http
 You can then access and use the images inside the embed itself with `attachment://fileName.extension`.
 
 ```js
-// at the top of your file
-const Discord = require('discord.js');
-// inside your command/event listener etc.
 const file = new Discord.Attachment('../assets/discordjs.png');
+
 const exampleEmbed = {
 	title: 'Some title',
 	image: {
 		url: 'attachment://discordjs.png',
 	},
 };
-channel.send({
-	files: [file],
-	embed: exampleEmbed,
-});
+
+channel.send({ files: [file], embed: exampleEmbed });
 ```
 
-<tip>If the embed does not display inside the embed but outside of it make sure you use the right syntax as shown above</tip>
+<warning>If the images doesn't display inside the embed but outside of it, double check your syntax to make sure it's as shown above.</warning>
 
-## Re-sending Embeds
+## Resending Embeds
 
-At some point in your bot development you might want to get an embed from a message that's already sent, edit it and send it again.
+At some point in your bot development, you might want to get an embed from a message that's already sent, edit it, and send it again.
 
-To achieve this you retrieve the embed from the messages embed array `message.embeds` and pass it to the RichEmbed constructor. The constructed RichEmbed can then of course also be edit before sending it again if you wish to do so.
+To achieve this, you retrieve the embed from the messages embed array (`message.embeds`) and pass it to the RichEmbed constructor. The constructed RichEmbed can then of course also be edit before sending it again if you wish to do so.
 
-<warning>You can not just resend the received embed structure! It's a [MessageEmbed](https://discord.js.org/#/docs/main/stable/class/MessageEmbed) rather than a RichEmbed and contains circular references that prevent sending.</warning>
+<warning>You cannot just resend the received embed structure! It's a [MessageEmbed](https://discord.js.org/#/docs/main/stable/class/MessageEmbed) rather than a RichEmbed and contains circular references that prevent sending.</warning>
 
 ```js
-// at the top of your file
-const Discord = require('discord.js');
-// inside your command/event listener etc.
 const receivedEmbed = message.embeds[0];
-const exampleEmbed = new Discord.RichEmbed(receivedEmbed)
-	.setTitle('New title');
+const exampleEmbed = new Discord.RichEmbed(receivedEmbed).setTitle('New title');
 
 channel.send(exampleEmbed);
 ```
