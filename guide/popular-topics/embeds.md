@@ -5,31 +5,6 @@ They have a colored border, are often sent by bots and have embedded images, tex
 
 In the following section we will explain how you compose an embed, send it, and what you need to be aware of while doing so.
 
-### Embed Limits
-
-There are a few limits to be aware of while planning your embeds due to limitations set by the API. Here is a quick reference you can come back to:
-
-- Embed titles are limited to 256 characters
-- Embed descriptions are limited to 2048 characters
-- There can be up to 25 fields
-- A field's name is limited to 256 characters and its value to 1024 characters
-- The footer text is limited to 2048 characters
-- The author name is limited to 256 characters
-- In addition, the sum of all characters in an embed structure must not exceed 6000 characters
-- A bot can have 1 embed per message
-- A webhook can have 10 embeds per message
-
-Source: [Discord API documentation](https://discordapp.com/developers/docs/resources/channel#embed-limits)
-
-### Notes
-
-- To display fields side-by-side, you need at least two consecutive fields set to `inline`
-- By default, up to 3 fields will display inline. If a thumbnail is set, this will change to 2
-- The timestamp will automatically adjust the timezone depending on the user's device
-- Mentions of any kind will only render correctly in field values and descriptions
-- Mentions in embeds will not trigger a notification
-- Embeds allow masked links (e.g. `[Guide](https://discordjs.guide/)`), but only in field values and descriptions
-
 ### Embed preview
 
 Here is an example of what an embed may look like. We will go over their construction in the next part of this guide.
@@ -205,3 +180,28 @@ const exampleEmbed = new Discord.RichEmbed(receivedEmbed).setTitle('New title');
 
 channel.send(exampleEmbed);
 ```
+
+## Notes
+
+- To display fields side-by-side, you need at least two consecutive fields set to `inline`
+- By default, up to 3 fields will display inline. If a thumbnail is set, this will change to 2
+- The timestamp will automatically adjust the timezone depending on the user's device
+- Mentions of any kind will only render correctly in field values and descriptions
+- Mentions in embeds will not trigger a notification
+- Embeds allow masked links (e.g. `[Guide](https://discordjs.guide/)`), but only in field values and descriptions
+
+## Embed Limits
+
+There are a few limits to be aware of while planning your embeds due to limitations set by the API. Here is a quick reference you can come back to:
+
+- Embed titles are limited to 256 characters
+- Embed descriptions are limited to 2048 characters
+- There can be up to 25 fields
+- A field's name is limited to 256 characters and its value to 1024 characters
+- The footer text is limited to 2048 characters
+- The author name is limited to 256 characters
+- In addition, the sum of all characters in an embed structure must not exceed 6000 characters
+- A bot can have 1 embed per message
+- A webhook can have 10 embeds per message
+
+Source: [Discord API documentation](https://discordapp.com/developers/docs/resources/channel#embed-limits)
