@@ -224,6 +224,10 @@ You now have an access token and a refresh token.
 
 <p class="tip">To maintain security, store the access token server side but associate it with a session ID that you generate for the user.</p>
 
+### Resulting code
+
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/blob/master/code-samples/oauth/simple-oauth-webserver/).
+
 ## Additional Reading
 
 [RFC 6759](https://tools.ietf.org/html/rfc6749)  
