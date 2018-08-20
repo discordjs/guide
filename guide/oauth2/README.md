@@ -1,10 +1,12 @@
 # OAuth2 
 
+OAuth2 enables application developers to build applications that utilize authentication and data from the Discord API. This can be used to create things such as web dashboard to display user info, fetch linked third-party accounts like Twitch or Steam, access users' guild information without actually being in the guild, and much more. OAuth2 can greatly extend the functionality of your bot if used correctly.
+
 ## A quick example
 
 ###  Setting up a basic web server
 
-Typically, OAuth2 is used in websites to get information about their users from an external service. Here, we will use Node.js' built-in `http` module to create a web server because this example is simple enough. First, create a file named `index.js` which will be used to start the server.
+Most of the time, OAuth2 is used in websites to get information about its users from an external service. In this example, you will use Node.js' built-in `http` module to create a web server to use a user's Discord information to greet them. First, create a file named `index.js` which will be used to start the server.
 
 ```js
 const http = require('http');
@@ -132,7 +134,7 @@ function generateRandomString() {
 const randStr = generateRandomString();
 localStorage.setItem('stateParameter', randStr);
 
-document.getElementById('login').href += `&state=${btoa(randStr)}`;;
+document.getElementById('login').href += `&state=${btoa(randStr)}`;
 ```
 
 When you visit a url with a state parameter appended to it and then click `Authorize`, you'll notice that after being redirected, the url will also have the state parameter appended to it, which you should then check against what was stored. You can modify the script in your `index.html` file to handle this.
