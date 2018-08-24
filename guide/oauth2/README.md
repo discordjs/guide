@@ -93,17 +93,21 @@ You can see that by clicking `Authorize`, you are allowing the application to ac
 
 			if (match) {
 				const [, access_token, token_type] = match;
-				const xml = new XMLHttpRequest();
 
-				xml.onload = () => {
-					const { username, discriminator } = JSON.parse(xml.response);
-					document.getElementById('info').innerText += ` ${username}#${discriminator}`;
-				}
+				fetch('https://discordapp.com/api/users/@me', {
+					headers: {
+						authorization: `${token_type} ${access_token}`
+					}
+				})
+					.then(res => res.json())
+					.then(response => {
+						const { username, discriminator } = response;
+						document.getElementById('info').innerText += ` ${username}#${discriminator}`;
+					})
+					.catch(console.error);
 
-				xml.open('GET', 'https://discordapp.com/api/users/@me');   
-				xml.setRequestHeader('authorization', token_type + ' ' + access_token);
-				xml.send();
-			} else {
+			}
+			else {
 				document.getElementById('login').style.display = 'block';
 			}
 		}

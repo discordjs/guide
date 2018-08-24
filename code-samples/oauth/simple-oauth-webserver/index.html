@@ -32,19 +32,18 @@
 					return;
 				}
 
-				const xml = new XMLHttpRequest();
-
-				xml.onload = () => {
-					const res = JSON.parse(xml.response);
-					console.log(res);
-
-					const { username, discriminator } = res;
-					document.getElementById('info').innerText += ` ${username}#${discriminator}`;
-				}
-
-				xml.open('GET', 'https://discordapp.com/api/users/@me');
-				xml.setRequestHeader('authorization', token_type + ' ' + access_token);
-				xml.send();
+				fetch('https://discordapp.com/api/users/@me', {
+					headers: {
+						authorization: `${token_type} ${access_token}`
+					}
+				})
+					.then(res => res.json())
+					.then(response => {
+						console.log(response);
+						const { username, discriminator } = response;
+						document.getElementById('info').innerText += ` ${username}#${discriminator}`;
+					})
+					.catch(console.error);
 			} 
 			else {
 				const randStr = generateRandomString();
