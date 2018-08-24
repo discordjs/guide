@@ -36,6 +36,7 @@ Right now, you have designated that the contents of an `index.html` file will be
 
 ```html
 <!DOCTYPE html>
+<html>
 <head>
 	<title>My First OAuth2 App</title>
 </head>
@@ -44,6 +45,7 @@ Right now, you have designated that the contents of an `index.html` file will be
 		Hoi!
 	</div>
 </body>
+</html>
 ```
 
 You can start your server with `node index.js`. Once you start it, try connecting to http://localhost:53134 and you should see Hoi!
@@ -76,6 +78,7 @@ You can see that by clicking `Authorize`, you are allowing the application to ac
 
 ```html
 <!DOCTYPE html>
+<html>
 <head>
 	<title>My First OAuth2 App</title>
 </head>
@@ -106,6 +109,7 @@ You can see that by clicking `Authorize`, you are allowing the application to ac
 		}
 	</script>
 </body>
+</html>
 ```
 
 Here, you just grab the access token and type from the url if it's there and use it to get info on the user, which is then used to greet them. In the following sections, we'll go over various details of Discord and OAuth2.
@@ -146,7 +150,7 @@ if (match) {
 	const [, access_token, token_type, urlState] = match;
 	const stateParameter = localStorage.getItem('stateParameter');
 
-	if (btoa(stateParameter) !== urlState) {
+	if (btoa(stateParameter) !== decodeURIComponent(urlState)) {
 		console.log('You may have been clickjacked!');
 		return;
 	}
@@ -224,11 +228,11 @@ You now have an access token and a refresh token.
 
 <p class="tip">To maintain security, store the access token server side but associate it with a session ID that you generate for the user.</p>
 
-### Resulting code
-
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/blob/master/code-samples/oauth/simple-oauth-webserver/).
-
-## Additional Reading
+## Additional reading
 
 [RFC 6759](https://tools.ietf.org/html/rfc6749)  
 [Discord Docs for OAuth2](https://discordapp.com/developers/docs/topics/oauth2)
+
+### Resulting code
+
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/blob/master/code-samples/oauth/simple-oauth-webserver/).

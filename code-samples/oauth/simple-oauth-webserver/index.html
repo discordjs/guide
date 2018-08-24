@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-
+<html>
 <head>
 	<title>My First OAuth2 App</title>
 </head>
-
 <body>
 	<div id="info">
 		Hoi!
@@ -46,7 +45,8 @@
 				xml.open('GET', 'https://discordapp.com/api/users/@me');
 				xml.setRequestHeader('authorization', token_type + ' ' + access_token);
 				xml.send();
-			} else {
+			} 
+			else {
 				const randStr = generateRandomString();
 				localStorage.setItem('stateParameter', randStr);
 
@@ -56,3 +56,4 @@
 		}
 	</script>
 </body>
+</html>
