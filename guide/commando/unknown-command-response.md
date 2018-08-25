@@ -1,6 +1,6 @@
 ## Removing the Unknown Command Response
 
-Sometimes, you may want to remove the \(somewhat annoying\) unknown command response from your bot. Be it Cleverbot or some other reason, sometimes you just want it gone, and it's quite simple to remove.
+Sometimes, you may want to remove the unknown command response from your bot. Be it Cleverbot or some other reason, sometimes you just want it gone, and it's quite simple to remove.
 
 Head over to your `index.js` file and find your `client`. You're going to be adding a new setting here.
 

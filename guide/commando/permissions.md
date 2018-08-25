@@ -25,7 +25,7 @@ module.exports = class MeowCommand extends Command {
 };
 ```
 
-Now, just use the `userPermissions` and `clientPermissions` options to check for certain permissions. For example, say to use `meow`, the user needs the ability to Manage Messages, and the client needs full Administrator access. This is dumb, but it's just an example.
+Now, just use the `userPermissions` and `clientPermissions` options to check for certain permissions. For example, say to use `meow`, the user needs the ability to Manage Messages, and the client needs full Administrator access.
 
 <!-- eslint-skip -->
 
