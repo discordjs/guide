@@ -103,7 +103,7 @@ Let's start off with an extremely basic function, which will try to grab an emoj
 ```js
 function findEmoji(id) {
 	const emoji = this.emojis.get(id);
-	if (!emoji) return false;
+	if (!emoji) return null;
 	return emoji;
 }
 ```
@@ -153,8 +153,10 @@ While this result isnt *necessarily* bad or incorrect, it's simply a raw object 
 
 ```diff
 function findEmoji(id) {
-	const temp = this.emojis.get(id);
-	if (!temp) return false;
+-	const emoji = this.emojis.get(id);	
++	const temp = this.emojis.get(id);
+-	if (!emoji) return null;
++	if (!temp) return null;
 +
 +	// Clone the object because it is modified right after, so as to not affect the cache in client.emojis
 +	const emoji = Object.assign({}, temp);
@@ -177,9 +179,15 @@ Now, you will want to make use of it in the actual command:
 +			const foundEmoji = emojiArray.find(emoji => emoji);
 +			if (!foundEmoji) return message.reply('I could not find such an emoji.');
 +
-+			// Reconstruct an emoji object as required by discord.js
-+			const emoji = new Discord.Emoji(client.guilds.get(foundEmoji.guild), foundEmoji);
-+			return message.reply(`I have found an emoji ${emoji}!`);
++			// Acquire a guild that can be reconstructed with discord.js
++			return client.rest.makeRequest('get', Discord.Constants.Endpoints.Guild(foundEmoji.guild).toString(), true)
++					.then(raw => {
++						// Reconstruct a guild
++						const guild = new Discord.Guild(client, raw);
++						// Reconstruct an emoji object as required by discord.js
++						const emoji = new Discord.Emoji(guild, foundEmoji);
++						return message.reply(`I have found an emoji ${emoji.toString()}!`);
++					});
 +		});
 ```
 
