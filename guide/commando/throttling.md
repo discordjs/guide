@@ -1,4 +1,4 @@
-# Throttling
+## Throttling
 
 Throttling is like rate-limiting, it only allows the command to be used in a certain period of time. A cooldown of sorts. This is useful for commands that rely on API calls, or commands that can be spammy, to allow them to not be overused by one user.
 
