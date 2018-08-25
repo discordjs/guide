@@ -28,6 +28,7 @@ module.exports = class MeowCommand extends Command {
 Now, just use the `userPermissions` and `clientPermissions` options to check for certain permissions. For example, say to use `meow`, the user needs the ability to Manage Messages, and the client needs full Administrator access. This is dumb, but it's just an example.
 
 <!-- eslint-skip -->
+
 ```js
 super(client, {
 	name: 'meow',
@@ -46,6 +47,7 @@ All you need to do is set the properties to an array of permission flags. A list
 Another thing you may want to do is set a command as owner-only. This will make a command only usable by the bot owner(s). Doing this is even simpler than the client/userPermissions, all you have to do is set the `ownerOnly` parameter to `true`.
 
 <!-- eslint-skip -->
+
 ```js
 super(client, {
 	name: 'meow',

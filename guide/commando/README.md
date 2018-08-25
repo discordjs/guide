@@ -63,6 +63,7 @@ Doing this you've also created your first command group! Make another folder cal
 Adding more command groups is as simple as adding another option to the array and making another folder.
 
 <!-- eslint-skip -->
+
 ```js
 .registerGroups([
 	['first', 'Your First Command Group'],
@@ -74,6 +75,7 @@ Adding more command groups is as simple as adding another option to the array an
 Should you want to disable a default command, such as if you wanted to make your own help command and replace the default one, you can pass that as an option in `registerDefaultCommands`.
 
 <!-- eslint-skip -->
+
 ```js
 .registerDefaultCommands({
 	help: false,

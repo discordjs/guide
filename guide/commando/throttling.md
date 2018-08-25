@@ -31,6 +31,7 @@ Now, add the `throttling` property to the command. `throttling` is an object, wh
 Let's make it have 2 usages allowed in a 10 second period.
 
 <!-- eslint-skip -->
+
 ```js
 super(client, {
 	name: 'meow',

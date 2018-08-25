@@ -33,6 +33,7 @@ Place a `,` after the `description` field, we're going to be adding an `args` fi
 The `args` field is simply an array of objects, each containing data for that argument.
 
 <!-- eslint-skip -->
+
 ```js
 super(client, {
 	name: 'say',
@@ -59,6 +60,7 @@ See? Simple.
 Adding more args is as simple as adding another object to the array, like so:
 
 <!-- eslint-skip -->
+
 ```js
 args: [
 	{
@@ -77,6 +79,7 @@ args: [
 You can also set arguments to default to a specifc value:
 
 <!-- eslint-skip -->
+
 ```js
 {
 	key: 'otherThing',
@@ -91,6 +94,7 @@ As you can see, they're very powerful things.
 Now, head on over to your `run` method and, firstly, set our `text` arg to a variable.
 
 <!-- eslint-skip -->
+
 ```js
 run(msg, { text }) {
 	// empty for now
@@ -100,6 +104,7 @@ run(msg, { text }) {
 Next, make the `run` method return the text back to the user.
 
 <!-- eslint-skip -->
+
 ```js
 run(msg, { text }) {
 	return msg.reply(text);

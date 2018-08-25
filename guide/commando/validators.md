@@ -10,6 +10,7 @@ Let's say you have a command where your first argument has to match a certain te
 First, pull the argument from your say command:
 
 <!-- eslint-skip -->
+
 ```js
 args: [
 	{
@@ -23,6 +24,7 @@ args: [
 Let's add a blank `validate` to the arg.
 
 <!-- eslint-skip -->
+
 ```js
 args: [
 	{
@@ -37,6 +39,7 @@ args: [
 Inside our validate function, check to see if the length is below 201 characters.
 
 <!-- eslint-skip -->
+
 ```js
 args: [
 	{
@@ -55,6 +58,7 @@ And now you've got a validator that checks if the length is 200!
 Another property we can use to validate arguments is the `oneOf` option. This option forces the argument of be _one of_ the options provided in an array. For example, say you wanted to make an argument the required a "yes" or "no" response.
 
 <!-- eslint-skip -->
+
 ```js
 args: [
 	{

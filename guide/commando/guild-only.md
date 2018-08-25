@@ -26,6 +26,7 @@ module.exports = class MeowCommand extends Command {
 After `description`, add a `guildOnly` setting and set it to `true`.
 
 <!-- eslint-skip -->
+
 ```js
 super(client, {
 	name: 'meow',
