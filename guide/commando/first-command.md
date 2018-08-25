@@ -2,7 +2,7 @@
 
 Now that you've set up a command group and registered your command folder, you're ready to make your first command file! First, you're going to need to create a new file for the command. Hop over to your `commands` folder, and then your `first` folder, and make a new file called `meow.js`. This is going to be a simple command that only replies with a message when used. We'll go into arguments and all that later.
 
-Once you have your file, let's get started!
+Once you have your file, it's time to get started!
 
 ### Creating Your Command Class
 
@@ -12,7 +12,7 @@ Before you do anything, at the start of your file, you're going to need to requi
 const { Command } = require('discord.js-commando');
 ```
 
-Commands are classes exported with `module.exports`. So let's create the class and set `module.exports` to it. You will also set a bunch of options here, which I'll explain below.
+Commands are classes exported with `module.exports`. Create the class and set `module.exports` to it. You will also set a bunch of options here, which I'll explain below.
 
 ```js
 module.exports = class MeowCommand extends Command {
@@ -40,7 +40,7 @@ There are many more properties you can use, but those will be explained in their
 
 ### Creating Your Run Method
 
-The next thing we're going to need is a `run` method. This should go right below the constructor for the command. Inside, let's return a message:
+The next thing we're going to need is a `run` method. This should go right below the constructor for the command. Inside, you'll return a message:
 
 ```js
 module.exports = class MeowCommand extends Command {

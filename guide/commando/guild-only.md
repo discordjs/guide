@@ -23,7 +23,7 @@ module.exports = class MeowCommand extends Command {
 };
 ```
 
-After `description`, let's add a `guildOnly` setting and set it to `true`.
+After `description`, add a `guildOnly` setting and set it to `true`.
 
 <!-- eslint-skip -->
 ```js

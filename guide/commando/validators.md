@@ -7,7 +7,7 @@ Sometimes you're going to want an argument to be a certain thing. for example, a
 
 Let's say you have a command where your first argument has to match a certain text. For example, if you wanted your `say` command to only allow 200 characters to be repeated, and no more. It's very simple.
 
-First, let's pull the argument from your say command:
+First, pull the argument from your say command:
 
 <!-- eslint-skip -->
 ```js
@@ -34,7 +34,7 @@ args: [
 ],
 ```
 
-Inside our validate function, let's check to see if the length is below 201 characters.
+Inside our validate function, check to see if the length is below 201 characters.
 
 <!-- eslint-skip -->
 ```js
@@ -52,7 +52,7 @@ And now you've got a validator that checks if the length is 200!
 
 ### oneOf
 
-Another property we can use to validate arguments is the `oneOf` option. This option forces the argument of be _one of_ the options provided in an array. For example, let's say you wanted to make an argument the required a "yes" or "no" response.
+Another property we can use to validate arguments is the `oneOf` option. This option forces the argument of be _one of_ the options provided in an array. For example, say you wanted to make an argument the required a "yes" or "no" response.
 
 <!-- eslint-skip -->
 ```js

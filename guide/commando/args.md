@@ -97,7 +97,7 @@ run(msg, { text }) {
 }
 ```
 
-Next, let's make the `run` method return the text back to the user.
+Next, make the `run` method return the text back to the user.
 
 <!-- eslint-skip -->
 ```js

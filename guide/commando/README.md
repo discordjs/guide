@@ -93,7 +93,7 @@ client.on('error', console.error);
 
 This will send a message to your console when the bot is ready, and set the Bot's playing status to `with Commando`. You can set both to whatever you wish.
 
-Last but certainly not least, let's log the bot in.
+Last but certainly not least, log the bot in.
 
 ```js
 client.login('Your Secret Token');

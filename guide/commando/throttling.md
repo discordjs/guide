@@ -23,7 +23,7 @@ module.exports = class MeowCommand extends Command {
 };
 ```
 
-Now, let's add the `throttling` property to the command. `throttling` is an object, which contains two things:
+Now, add the `throttling` property to the command. `throttling` is an object, which contains two things:
 
 - `usages` is the amount of times the command can be used in the given time period.  
 - `duration` is the amount of time the cooldown lasts, in seconds.
