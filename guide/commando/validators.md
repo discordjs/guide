@@ -5,7 +5,7 @@ Sometimes you're going to want an argument to be a certain thing. for example, a
 
 ### Basic Validators
 
-Let's say you have a command where your first argument has to match a certain text. For example, if you wanted your `say` command to only allow 200 characters to be repeated, and no more. It's very simple.
+What if you have a command where your first argument has to match a certain text? For example, if you wanted your `say` command to only allow 200 characters to be repeated, and no more. It's very simple.
 
 First, pull the argument from your say command:
 
@@ -21,7 +21,7 @@ args: [
 ],
 ```
 
-Let's add a blank `validate` to the arg.
+Add a blank `validate` to the arg.
 
 <!-- eslint-skip -->
 

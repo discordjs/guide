@@ -28,7 +28,7 @@ Now, add the `throttling` property to the command. `throttling` is an object, wh
 - `usages` is the amount of times the command can be used in the given time period.  
 - `duration` is the amount of time the cooldown lasts, in seconds.
 
-Let's make it have 2 usages allowed in a 10 second period.
+Now, make it have 2 usages allowed in a 10 second period.
 
 <!-- eslint-skip -->
 
