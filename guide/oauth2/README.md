@@ -48,15 +48,15 @@ Right now, you have designated that the contents of an `index.html` file will be
 </html>
 ```
 
-You can start your server with `node index.js`. Once you start it, try connecting to http://localhost:53134 and you should see Hoi!
+You can start your server with `node index.js`. Once you start it, try connecting to http://localhost:53134 and you should see "Hoi!".
 
 ### Getting an OAuth2 url
 
-Now that you have your web server up and running, it's time to get some information from Discord. Head over to [Discord](https://discordapp.com/developers/applications/) and click `Create an application` where you'll be greeted with the following page.
+Now that you have your web server up and running, it's time to get some information from Discord. Head over to [your Discord applications](https://discordapp.com/developers/applications/) and click "Create an application", where you'll be greeted with the following page:
 
-![img](/assets/img/1ch98sm.png)
+![Create an application page](/assets/img/1ch98sm.png)
 
-Take note of the `client id` field, the `client secret` field, and the `OAuth2` link on the left side of the page. For now, click on `OAuth2` and add a redirect url to `http://localhost:53134` like so.
+Take note of the `client id` field, the `client secret` field, and the "OAuth2" link on the left side of the page. For now, click on "OAuth2' and add a redirect url to `http://localhost:53134` like so:
 
 ![img](/assets/img/9fejia2.png)
 
@@ -116,7 +116,7 @@ You can see that by clicking `Authorize`, you are allowing the application to ac
 </html>
 ```
 
-Here, you just grab the access token and type from the url if it's there and use it to get info on the user, which is then used to greet them. In the following sections, we'll go over various details of Discord and OAuth2.
+Here you just grab the access token and type from the url if it's there and use it to get info on the user, which is then used to greet them. In the following sections, we'll go over various details of Discord and OAuth2.
 
 ## More details
 
@@ -145,7 +145,7 @@ localStorage.setItem('stateParameter', randStr);
 document.getElementById('login').href += `&state=${btoa(randStr)}`;
 ```
 
-When you visit a url with a state parameter appended to it and then click `Authorize`, you'll notice that after being redirected, the url will also have the state parameter appended to it, which you should then check against what was stored. You can modify the script in your `index.html` file to handle this.
+When you visit a url with a `state` parameter appended to it and then click `Authorize`, you'll notice that after being redirected, the url will also have the `state` parameter appended to it, which you should then check against what was stored. You can modify the script in your `index.html` file to handle this.
 
 ```js
 const match = window.location.hash.match(/access_token=(.+?)&token_type=(.+?)&state=(.+?)(?:&|$)/);
@@ -161,7 +161,7 @@ if (match) {
 }
 ```
 
-<p class="tip">Don't forgo security for a tiny bit of convenience!</p>
+<tip>Don't forgo security for a tiny bit of convenience!</tip>
 
 ### OAuth2 flows
 
@@ -216,7 +216,7 @@ fetch('https://discordapp.com/api/oauth2/token', {
 	.then(console.log);
 ```
 
-<p class="warning">The content-type for the token url must be application/x-www-form-urlencoded. This is why `form-data` is used.</p>
+<warning>The content-type for the token url must be `application/x-www-form-urlencoded`. This is why `form-data` is used.</warning>
 
 Now try visiting your OAuth2 url and authorizing your application. Once you're redirected, you should see something like this in your console.
 
@@ -230,7 +230,7 @@ Now try visiting your OAuth2 url and authorizing your application. Once you're r
 
 You now have an access token and a refresh token.
 
-<p class="tip">To maintain security, store the access token server side but associate it with a session ID that you generate for the user.</p>
+<tip>To maintain security, store the access token server side but associate it with a session ID that you generate for the user.</tip>
 
 ## Additional reading
 
