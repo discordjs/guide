@@ -65,25 +65,8 @@ You may have also noticed that I used `msg.say` instead of `msg.channel.send`. T
 
 The reason for this is that Commando allows editing messages into commands, and using these methods allows Commando to save the messages for that use. It also checks if it can send a message to the current channel, so you get two things in one!
 
-With all that done, your file should look like this:
-
-```js
-const { Command } = require('discord.js-commando');
-
-module.exports = class MeowCommand extends Command {
-	constructor(client) {
-		super(client, {
-			name: 'meow',
-			group: 'first',
-			memberName: 'meow',
-			description: 'Replies with a meow, kitty cat.',
-		});
-	}
-
-	run(msg) {
-		return msg.say('Meow!');
-	}
-};
-```
-
 Now, fire up the bot as normal and use your command! It should automatically be `?meow` to use it.
+
+## Resulting code
+
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/commando/first-command).

@@ -112,33 +112,6 @@ index.js
 package.json
 ```
 
-Your `index.js` file should look something like this:
+## Resulting code
 
-```js
-const { CommandoClient } = require('discord.js-commando');
-const path = require('path');
-
-const client = new CommandoClient({
-	commandPrefix: '?',
-	owner: '278305350804045834',
-	invite: 'https://discord.gg/bRCvFy9',
-});
-
-client.registry
-	.registerDefaultTypes()
-	.registerGroups([
-		['first', 'Your First Command Group'],
-	])
-	.registerDefaultGroups()
-	.registerDefaultCommands()
-	.registerCommandsIn(path.join(__dirname, 'commands'));
-
-client.on('ready', () => {
-	console.log(`Logged in as ${client.user.tag}! (${client.user.id})`);
-	client.user.setActivity('with Commando');
-});
-
-client.on('error', console.error);
-
-client.login('Your Secret Token');
-```
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/commando/getting-started).

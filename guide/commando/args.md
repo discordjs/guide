@@ -113,29 +113,6 @@ run(msg, { text }) {
 
 And there we have it, a say command using args!
 
-```js
-const { Command } = require('discord.js-commando');
+## Resulting code
 
-module.exports = class SayCommand extends Command {
-	constructor(client) {
-		super(client, {
-			name: 'say',
-			aliases: ['parrot', 'copy'],
-			group: 'first',
-			memberName: 'say',
-			description: 'Replies with the text you provide.',
-			args: [
-				{
-					key: 'text',
-					prompt: 'What text would you like the bot to say?',
-					type: 'string',
-				},
-			],
-		});
-	}
-
-	run(msg, { text }) {
-		return msg.reply(text);
-	}
-};
-```
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/commando/args).
