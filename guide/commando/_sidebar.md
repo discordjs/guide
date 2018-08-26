@@ -2,18 +2,18 @@
 * [Requesting more content](/requesting-more-content)
 
 * **Getting Started**
-	* [Getting Started with Commando](/commando/)
-	* [Your First Command](/commando/first-command)
+	* [Getting started with Commando](/commando/)
+	* [Your first command](/commando/first-command)
 
 * **Extra Command Info**
-	* [Using Throttling](/commando/throttling)
-	* [Setting a Command as Guild-Only](/commando/guild-only)
-	* [Handling Permissions](/commando/permissions)
+	* [Throttling](/commando/throttling)
+	* [Setting a command as guild-only](/commando/guild-only)
+	* [Handling permissions](/commando/permissions)
 
 * **Arguments**
-	* [Using Arguments in Commands](/commando/args)
-	* [Using Argument Validators](/commando/validators)
+	* [Using arguments in commands](/commando/args)
+	* [Using argument validators](/commando/validators)
 
 * **Additional Info**
-	* [Using Client Values in Commands](/commando/client-values)
-	* [Removing the Unknown Command Response](/commando/unknown-command-response)
+	* [Using client values in commands](/commando/client-values)
+	* [Removing the unknown command response](/commando/unknown-command-response)
