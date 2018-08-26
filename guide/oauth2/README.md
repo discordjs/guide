@@ -41,7 +41,7 @@ Right now, you have designated that the contents of an `index.html` file will be
 	<title>My First OAuth2 App</title>
 </head>
 <body>
-	<div id='info'>
+	<div id="info">
 		Hoi!
 	</div>
 </body>
@@ -86,7 +86,7 @@ You can see that by clicking `Authorize`, you are allowing the application to ac
 	<div id="info">
 		Hoi!
 	</div>
-	<a id='login' style='display:none;' href='your oauth2 url here'>Identify Yourself</a>
+	<a id="login" style="display: none;" href="your oauth2 url here">Identify Yourself</a>
 	<script>
 		window.onload = () => {
 			const match = window.location.hash.match(/access_token=(.+?)&token_type=(.+?)(?:&|$)/);
