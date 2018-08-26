@@ -5,9 +5,9 @@ When you got your first bot up and running with Discord.js, you should've instal
 Stable (v11): `npm i discord.js-commando`  
 Master (v12): `npm i discordjs/Commando`
 
-<p class="warning">Master requires [Git](https://git-scm.com/downloads) to install.</p>
+<warning>Master requires [Git](https://git-scm.com/downloads) to install.</warning>
 
-<p class="warning">You need at least Node.js version 8.0.0 to use Commando.</p>
+<warning>You need at least Node.js version 8.0.0 to use Commando.</warning>
 
 If you're using Discord.js master, you'll need Commando master. Reverse for stable.
 
@@ -38,7 +38,7 @@ In the `commandPrefix` parameter, you should insert the prefix you intend to use
 
 After that is the `owner` parameter, which should contain the ID for the owner of the bot. It can be either a string of one ID, or an array of many.
 
-<p class="danger">The users you set here have complete control over the bot. They can use eval and other owner-only commands, ignore command throttling, and bypass all user permissions! Be sure to only give this to people you trust!</p>
+<danger>The users you set here have complete control over the bot. They can use eval and other owner-only commands, ignore command throttling, and bypass all user permissions! Be sure to only give this to people you trust!</danger>
 
 The final option, `invite`, is the **full** invite URL to your bot's support server. While not a required option, it's a good idea to have a support server on hand to handle questions and concerns your users may have about your bot if it is public. If not, it's safe to leave this option out.
 
@@ -101,7 +101,7 @@ Last but certainly not least, log the bot in.
 client.login('Your Secret Token');
 ```
 
-<p class="danger">You should use environment variables or a `config.json` for your token instead of passing it directly!</p>
+<danger>You should use environment variables or a `config.json` for your token instead of passing it directly!</danger>
 
 And there you have it! You've set up your `index.js` file! In the end your file structure should look like this, along with whatever `.gitignore` or `config.json` you may have:
 
