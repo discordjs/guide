@@ -18,7 +18,7 @@ module.exports = class SayCommand extends Command {
 		});
 	}
 
-	run(msg, { text }) {
-		return msg.reply(text);
+	run(message, { text }) {
+		return message.reply(text);
 	}
 };
