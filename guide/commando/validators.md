@@ -1,9 +1,9 @@
-## Using argument validators
+# Using argument validators
 
 Sometimes you're going to want an argument to be a certain thing. for example, a certain text, or maybe you want to check the length, there's many things you may want to do. This can be accomplished with a `validate` function in your arg.
 
 
-### Basic validators
+## Basic validators
 
 What if you have a command where your first argument has to match a certain text? For example, if you wanted your `say` command to only allow 200 characters to be repeated, and no more. It's very simple.
 
@@ -53,7 +53,7 @@ args: [
 
 And now you've got a validator that checks if the length is 200!
 
-### oneOf
+## oneOf
 
 Another property we can use to validate arguments is the `oneOf` option. This option forces the argument of be _one of_ the options provided in an array. For example, say you wanted to make an argument the required a "yes" or "no" response.
 
