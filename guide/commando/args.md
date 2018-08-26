@@ -22,7 +22,7 @@ module.exports = class SayCommand extends Command {
 		});
 	}
 
-	run(msg) {
+	run(message) {
 		// empty for now
 	}
 };
@@ -96,7 +96,7 @@ Now, head on over to your `run` method and, firstly, set our `text` arg to a var
 <!-- eslint-skip -->
 
 ```js
-run(msg, { text }) {
+run(message, { text }) {
 	// empty for now
 }
 ```
@@ -106,8 +106,8 @@ Next, make the `run` method return the text back to the user.
 <!-- eslint-skip -->
 
 ```js
-run(msg, { text }) {
-	return msg.reply(text);
+run(message, { text }) {
+	return message.reply(text);
 }
 ```
 

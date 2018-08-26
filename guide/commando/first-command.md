@@ -53,15 +53,15 @@ module.exports = class MeowCommand extends Command {
 		});
 	}
 
-	run(msg) {
-		return msg.say('Meow!');
+	run(message) {
+		return message.say('Meow!');
 	}
 };
 ```
 
 As you can see, the `run` method is simply the code you want the bot to run when the command is used. This can be anything you can do in normal Discord.js, as Commando is simply an extension.
 
-You may have also noticed that I used `msg.say` instead of `msg.channel.send`. This is Commando's magic. Instead of `send`, use `say`. For embeds, use `embed`. For code, use `code`. The only exception to this is files, which are still sent the same as normal.
+You may have also noticed that I used `message.say` instead of `message.channel.send`. This is Commando's magic. Instead of `send`, use `say`. For embeds, use `embed`. For code, use `code`. The only exception to this is files, which are still sent the same as normal.
 
 The reason for this is that Commando allows editing messages into commands, and using these methods allows Commando to save the messages for that use. It also checks if it can send a message to the current channel, so you get two things in one!
 
