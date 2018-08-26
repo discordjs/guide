@@ -6,13 +6,13 @@ Once you have your file, it's time to get started!
 
 ## Creating your command class
 
-Before you do anything, at the start of your file, you're going to need to require Commando again, specifically it's Command class.
+Before you do anything, at the start of your file, you're going to need to require Commando again. Specifically its Command class.
 
 ```js
 const { Command } = require('discord.js-commando');
 ```
 
-Commands are classes exported with `module.exports`. Create the class and set `module.exports` to it. You will also set a bunch of options here, which I'll explain below.
+Commands are classes exported with `module.exports`. Create the class and set `module.exports` to it. You will also set a bunch of options here, which will be explained below.
 
 ```js
 module.exports = class MeowCommand extends Command {
@@ -40,7 +40,7 @@ There are many more properties you can use, but those will be explained in their
 
 ## Creating your run method
 
-The next thing we're going to need is a `run` method. This should go right below the constructor for the command. Inside, you'll return a message:
+The next thing you're going to need is a `run` method. This should go right below the constructor for the command. Inside, you'll return a message:
 
 ```js
 module.exports = class MeowCommand extends Command {
@@ -65,7 +65,7 @@ You may have also noticed that I used `message.say` instead of `message.channel.
 
 The reason for this is that Commando allows editing messages into commands, and using these methods allows Commando to save the messages for that use. It also checks if it can send a message to the current channel, so you get two things in one!
 
-Now, fire up the bot as normal and use your command! It should automatically be `?meow` to use it.
+Now fire up the bot as normal and use your command! It should automatically be `?meow` to use it.
 
 ## Resulting code
 

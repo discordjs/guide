@@ -1,11 +1,10 @@
 # Using argument validators
 
-Sometimes you're going to want an argument to be a certain thing. for example, a certain text, or maybe you want to check the length, there's many things you may want to do. This can be accomplished with a `validate` function in your arg.
-
+Sometimes you're going to want an argument to be a certain thing, e.g. check if it's a specific piece of text, or check the length. This can be accomplished with a `validate` function in your arg.
 
 ## Basic validators
 
-What if you have a command where your first argument has to match a certain text? For example, if you wanted your `say` command to only allow 200 characters to be repeated, and no more. It's very simple.
+What if you have a command where your first argument has to match a certain text? For example: if you wanted your `say` command to allow a maximum of 200 characters. It's very simple.
 
 First, pull the argument from your say command:
 
@@ -21,7 +20,7 @@ args: [
 ],
 ```
 
-Add a blank `validate` to the arg.
+Add a blank `validate` function to the arg.
 
 <!-- eslint-skip -->
 
@@ -36,7 +35,7 @@ args: [
 ],
 ```
 
-Inside our validate function, check to see if the length is below 201 characters.
+Inside your `validate` function, check to see if the length is below 201 characters.
 
 <!-- eslint-skip -->
 
@@ -55,7 +54,7 @@ And now you've got a validator that checks if the length is 200!
 
 ## oneOf
 
-Another property we can use to validate arguments is the `oneOf` option. This option forces the argument of be _one of_ the options provided in an array. For example, say you wanted to make an argument the required a "yes" or "no" response.
+Another property you can use to validate arguments is the `oneOf` option. This option forces the argument of be _one of_ the options provided in an array. If you wanted to make an argument that required a "yes" or "no" response, you'd do this:
 
 <!-- eslint-skip -->
 

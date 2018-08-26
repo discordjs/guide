@@ -37,4 +37,4 @@ super(client, {
 });
 ```
 
-And that's all there is to it! Now, when used in a DM, the bot will not permit the command to be used, and you will no longer receive errors!
+And that's all there is to it! Now when used in a DM, the bot will not permit the command to be used, and you will no longer receive errors!

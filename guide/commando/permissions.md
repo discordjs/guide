@@ -1,6 +1,6 @@
 # Handling permissions
 
-Sometimes, you may need a user to have a certain permission to use a command. Or, maybe the bot needs a permission to make the command work. Well, Commando makes both of these very simple.
+Sometimes you may need a user to have a certain permission to use a command, or maybe your bot needs a permission to make the command work. Well, Commando makes both of these very simple.
 
 ## User and client permissions
 
@@ -25,7 +25,7 @@ module.exports = class MeowCommand extends Command {
 };
 ```
 
-Now, just use the `userPermissions` and `clientPermissions` options to check for certain permissions. For example, say to use `meow`, the user needs the ability to Manage Messages, and the client needs full Administrator access.
+You can then use the `userPermissions` and `clientPermissions` options to check for certain permissions. If you wanted to restrict the `meow` command, requiring the user to have the ability to manage messages, and the client full administrator access, you'd do the following:
 
 <!-- eslint-skip -->
 
@@ -40,7 +40,7 @@ super(client, {
 });
 ```
 
-All you need to do is set the properties to an array of permission flags. A list of those is [here](https://discord.js.org/#/docs/main/stable/class/Permissions?scrollTo=s-FLAGS).
+All you need to do is set the properties to an array of permission flags. A list of those can be found [here](https://discord.js.org/#/docs/main/stable/class/Permissions?scrollTo=s-FLAGS).
 
 ## Owner-only commands
 

@@ -1,6 +1,6 @@
 # Throttling
 
-Throttling is like rate-limiting, it only allows the command to be used in a certain period of time. A cooldown of sorts. This is useful for commands that rely on API calls, or commands that can be spammy, to allow them to not be overused by one user.
+Throttling is like rate-limiting; it allows the command to be used only in a certain period of time—a cooldown of sorts. This is useful for commands that rely on API calls, or commands that can be spammy, to allow them to not be overused by one user.
 
 First, grab a command file you want to use throttling with.
 
@@ -23,12 +23,12 @@ module.exports = class MeowCommand extends Command {
 };
 ```
 
-Now, add the `throttling` property to the command. `throttling` is an object, which contains two things:
+Add the `throttling` property to the command. `throttling` is an object, which contains two things:
 
-- `usages` is the amount of times the command can be used in the given time period.  
+- `usages` is the amount of times the command can be used in the given time period.
 - `duration` is the amount of time the cooldown lasts, in seconds.
 
-Now, make it have 2 usages allowed in a 10 second period.
+Make it have 2 usages allowed in a 10 second period.
 
 <!-- eslint-skip -->
 
@@ -45,4 +45,4 @@ super(client, {
 });
 ```
 
-Now, the command has a cooldown. If a user tries to use the `meow` command more than 2 times in 10 seconds, it will not allow them to use it until the 10 seconds have fully passed. While useless in a command like `meow`, this can be very useful for other, more heavy commands you don't want abused.
+The command now has a cooldown. If a user tries to use the `meow` command more than 2 times in 10 seconds, it will not allow them to use it until the 10 seconds have fully passed. While useless in a command like `meow`, this can be very useful for other, heavier commands you don't want abused.

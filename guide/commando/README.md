@@ -7,15 +7,15 @@ Master (v12): `npm i discordjs/Commando`
 
 <warning>You need at least Node.js version 8.0.0 to use Commando. Master branch will also require you to install [Git](https://git-scm.com/downloads).</warning>
 
-If you're using Discord.js master, you'll need Commando master. Reverse for stable.
+If you're using Discord.js master, you'll need Commando master, and vice versa for stable.
 
 ## Creating your index.js file
 
 While it doesn't have to be called `index.js`, this file is the main file for your bot, which handles everything from registering new commands to logging in your client.
 
-The first thing you have to do is require Commando. Contrary to what you may think, you do **not** need to require Discord.js to use Commando. Commando handles all Discord.js-related functions within itself, and the Commando client extends Discord.js', so you'll rarely ever have to touch Discord.js proper!
+The first thing you have to do is require Commando. Contrary to what you may think, you do **not** need to require Discord.js to use Commando. Commando handles all discord.js-related functions within itself, and the Commando client extends discord.js', so you'll rarely ever have to touch core discord.js!
 
-We'll also be requiring `path`. Don't worry, you don't have to install `path`, it comes bundled with Node.
+You'll also be requiring `path`. Don't worry, you don't have to install `path`; it comes bundled with Node.
 
 ```js
 const { CommandoClient } = require('discord.js-commando');
@@ -40,7 +40,7 @@ After that is the `owner` parameter, which should contain the ID for the owner o
 
 The final option, `invite`, is the **full** invite URL to your bot's support server. While not a required option, it's a good idea to have a support server on hand to handle questions and concerns your users may have about your bot if it is public. If not, it's safe to leave this option out.
 
-Next you're going to register the command groups, args types, and default commands. Then, you register the commands in a folder. You can name the folder whatever you want, but I personally recommend `commands`, as it makes the most sense.
+Next you're going to register the command groups, args types, and default commands. Then, you register the commands in a folder. You can name the folder whatever you want, but it's recommended to stick with `commands`, as it makes the most sense.
 
 ```js
 client.registry
@@ -54,9 +54,7 @@ client.registry
 	.registerCommandsIn(path.join(__dirname, 'commands'));
 ```
 
-Remember how I said you'd need path? There's the answer to your burning question.
-
-Doing this you've also created your first command group! Make another folder called `first` in your `commands` folder, so you can put the commands for that group in there. The group will be displayed in the help command as `Your First Command Group`. You can use any name you want for either of these options, but do note that the key (`first`) **must be lowercase**!
+Doing this you've also created your first command group! Make another folder called `first` in your `commands` folder so that you can put the commands for that group in there. The group will be displayed in the help command as `Your First Command Group`. You can use any name you want for either of these options, but do note that the key (`first`) **must be lowercase**!
 
 Adding more command groups is as simple as adding another option to the array and making another folder.
 
@@ -91,12 +89,12 @@ client.on('ready', () => {
 client.on('error', console.error);
 ```
 
-This will send a message to your console when the bot is ready, and set the Bot's playing status to `with Commando`. You can set both to whatever you wish.
+This will send a message to your console when the bot is ready, and set the bot's playing status to "with Commando". You can set both to whatever you wish.
 
 Last but certainly not least, log the bot in.
 
 ```js
-client.login('Your Secret Token');
+client.login('your-token-goes-here');
 ```
 
 <danger>You should use environment variables or a `config.json` for your token instead of passing it directly!</danger>
@@ -104,8 +102,8 @@ client.login('Your Secret Token');
 And there you have it! You've set up your `index.js` file! In the end your file structure should look like this, along with whatever `.gitignore` or `config.json` you may have:
 
 ```
-commands
-- first
+/commands
+	/first
 index.js
 package.json
 ```
