@@ -1,9 +1,9 @@
-## Using Argument Validators
+## Using argument validators
 
 Sometimes you're going to want an argument to be a certain thing. for example, a certain text, or maybe you want to check the length, there's many things you may want to do. This can be accomplished with a `validate` function in your arg.
 
 
-### Basic Validators
+### Basic validators
 
 What if you have a command where your first argument has to match a certain text? For example, if you wanted your `say` command to only allow 200 characters to be repeated, and no more. It's very simple.
 

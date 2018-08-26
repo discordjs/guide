@@ -1,8 +1,8 @@
-## Using Arguments in Commands
+## Using arguments in commands
 
 Sometimes when using commands you may want to get data from the user, and change the response accordingly. In this section, you'll create a command that pulls a string from the message and says it back to the user!
 
-### String Arguments
+### String arguments
 
 A `string` argument is simply the text after the command name and prefix. For example, `?say Hi there!` would cause our argument to be `Hi there!`. It's quite simple to create one.
 

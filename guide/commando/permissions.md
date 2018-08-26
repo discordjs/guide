@@ -1,8 +1,8 @@
-## Handling Permissions
+## Handling permissions
 
 Sometimes, you may need a user to have a certain permission to use a command. Or, maybe the bot needs a permission to make the command work. Well, Commando makes both of these very simple.
 
-### User and Client Permissions
+### User and client permissions
 
 First, go grab the command you want to use permissions with.
 
@@ -42,7 +42,7 @@ super(client, {
 
 All you need to do is set the properties to an array of permission flags. A list of those is [here](https://discord.js.org/#/docs/main/stable/class/Permissions?scrollTo=s-FLAGS).
 
-### Owner-Only Commands
+### Owner-only commands
 
 Another thing you may want to do is set a command as owner-only. This will make a command only usable by the bot owner(s). Doing this is even simpler than the client/userPermissions, all you have to do is set the `ownerOnly` parameter to `true`.
 

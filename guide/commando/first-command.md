@@ -1,10 +1,10 @@
-## Your First Command
+## Your first command
 
 Now that you've set up a command group and registered your command folder, you're ready to make your first command file! First, you're going to need to create a new file for the command. Hop over to your `commands` folder, and then your `first` folder, and make a new file called `meow.js`. This is going to be a simple command that only replies with a message when used. We'll go into arguments and all that later.
 
 Once you have your file, it's time to get started!
 
-### Creating Your Command Class
+### Creating your command class
 
 Before you do anything, at the start of your file, you're going to need to require Commando again, specifically it's Command class.
 
@@ -38,7 +38,7 @@ Don't let this scare you, it's actually very simple.
 
 There are many more properties you can use, but those will be explained in their own sections.
 
-### Creating Your Run Method
+### Creating your run method
 
 The next thing we're going to need is a `run` method. This should go right below the constructor for the command. Inside, you'll return a message:
 
