@@ -5,9 +5,7 @@ When you got your first bot up and running with Discord.js, you should've instal
 Stable (v11): `npm i discord.js-commando`  
 Master (v12): `npm i discordjs/Commando`
 
-<warning>Master requires [Git](https://git-scm.com/downloads) to install.</warning>
-
-<warning>You need at least Node.js version 8.0.0 to use Commando.</warning>
+<warning>You need at least Node.js version 8.0.0 to use Commando. Master branch will also require you to install [Git](https://git-scm.com/downloads).</warning>
 
 If you're using Discord.js master, you'll need Commando master. Reverse for stable.
 
