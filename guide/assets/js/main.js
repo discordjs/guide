@@ -23,7 +23,6 @@ Vue.component('discord-message', {
 				</div>\
 			</div>\
 		</div>\
-	</div>\
 	',
 
 	props: {
