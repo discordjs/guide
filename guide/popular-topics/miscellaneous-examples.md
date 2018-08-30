@@ -69,7 +69,7 @@ If you've ever seen something labeled as `UnhandledPromiseRejectionWarnings` in 
 You can use a single line of code to prevent that, though. This will also display the line number of where the error occurred.
 
 ```js
-process.on('unhandledRejection', error => console.error(`Uncaught Promise Rejection:\n${error}`));
+process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
 ```
 
 ## Mention prefix

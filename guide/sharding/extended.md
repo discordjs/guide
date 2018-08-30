@@ -50,7 +50,7 @@ This will never work for a channel that lies on another shard. So, let's remedy 
 	}
 ```
 
-If all is well, then you should notice an output like the following: `[false, true, false, false]`. If it is not clear why `true` and `false` are hanging around, it is because that is how one "returns" out of an eval statement. You will want this if you want any feedback in the results. Now that you have observed said results, you can adjust the command to give yourself proper feedback, like so:
+If all is well, then you should notice an output like the following: `[false, true, false, false]`. If it is not clear why `true` and `false` are hanging around, it's because the last expression of the eval statement is what will be returned. You will want this if you want any feedback in the results. Now that you have observed said results, you can adjust the command to give yourself proper feedback, like so:
 
 ```diff
 	return client.shard.broadcastEval(`
