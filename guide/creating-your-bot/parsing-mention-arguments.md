@@ -57,27 +57,20 @@ Say you already have a simple command handler like this:
 
 ```js
 client.on('message', message => {
-	// Don not go any further if there is no command prefix.
 	if (!message.content.startsWith(config.prefix)) return;
 
-	// Remove the prefix from the message.
 	const withoutPrefix = message.content.slice(config.prefix.length);
-	// Split the message by spaces
 	const split = withoutPrefix.split(/ +/);
-	// The first element is the command, the rest are the arguments.
 	const command = split[0];
 	const args = split.slice(1);
-
-	// ....Some commands here....
 });
 ```
 
-Now you can easily test the waters by upgrading the avatar command from last time.
+Now you can easily test the waters by upgrading the avatar command from [last time](/creating-your-bot/commands-with-user-input).
 This is what we have so far. It is pretty simple, it will show the avatar of who used the command.
 
 ```js
 if (command === 'avatar') {
-	// What to put here to use the mention?
 	const user = message.author;
 
 	return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL}`);
@@ -89,69 +82,51 @@ Putting it into a function will make it easily reusable. We will use the name `g
 
 ```js
 function getUserFromMention(mention) {
-	// Check if `mention` contains a string.
-	// If not, just return undefined to signal there is no user to be found.
-	if (!mention) return undefined;
+	if (!mention) return;
 
-	// A user mention starts with <@ as well as a > at the end,
-	// so check for those.
 	if (mention.startsWith('<@') && mention.endsWith('>')) {
-		// Now remove the <@ and >, they are not necessary.
 		mention = mention.slice(2, -1);
 
-		// If the user has a nickname they will also have a ! in their mention.
-		// Remove that as well.
 		if (mention.startsWith('!')) {
 			mention = mention.slice(1);
 		}
 
-		// Now all that is left should be the ID,
-		// which can be used to get the user object.
-		const user = client.users.get(mention);
-		// The ID might be invalid, so check for that as well.
-		if (!user) {
-			// Just return undefined to indicate nothing was found.
-			return undefined;
-		}
-		else {
-			// A user was found, so return that.
-			return user;
-		}
+		return client.users.get(mention);
 	}
 
-	// Return undefined here as well.
-	// If the code reaches this point nothing was found.
-	return undefined;
+	return;
 }
 ```
 
-<tip>The `slice` method is used in a more advance way here. You can read the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) for more info.</tip>
+As you can see it is a fairly straight forward function.
+It essentially just works itself through the structure of the mention bit by bit:
+ 1. Check if the mention starts with the `<@` and ends with a `>` and then remove those.
+ 2. If the user has a nickname and their mention contains a `!` remove that as well.
+ 3. Only the ID should be left now, so use that to fetch the user from the `client.users` Collection.
+Whenever it encounters an error with the mention (i.e. invalid structure) it simply returns `undefined` to signal the mention is invalid.
+
+<tip>The `.slice()` method is used in a more advance way here. You can read the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) for more info.</tip>
 
 Now you have a nifty function you can use whenever you need to convert a raw mention into a proper user object.
 Plugging it into the command will give you this:
 
 ```js
 if (command === 'avatar') {
-	// First check if the user even tried to supply a mention arg
 	if (args[0]) {
-		// If he did try to turn that mention into a user object.
-		// The first argument should be the mention, so pass it to the function.
 		const user = getUserFromMention(args[0]);
-
-		// The function can return undefined, in which case notify
-		// the user that the argument was invalid.
 		if (!user) {
 			return message.reply('Please use a proper mention if you want to see someone else\'s avatar.');
 		}
-		else {
-			return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL}`);
-		}
+
+		return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL}`);
 	}
-	else {
-		return message.channel.send(`${message.author.username}, your avatar: ${message.author.displayAvatarURL}`);
-	}
+
+	return message.channel.send(`${message.author.username}, your avatar: ${message.author.displayAvatarURL}`);
 }
 ```
+
+And here we simply plug the new function into the command.  
+If the user supplied an argument it should be the user mention, so it just gets passed right into the function.
 
 And that is it! Simple, isn't it? Start up your bot and see if it works.
 
@@ -164,8 +139,6 @@ And that is it! Simple, isn't it? Start up your bot and see if it works.
 	</discord-message>
 </discord-messages>
 
-Lo and behold, it does work.
-
 So now, instead of using `message.mentions` you can use your new, fantastic function.
 This will allow you to add proper checks for all your args, so that you can tell when a command was used correctly and when it was used incorrectly.
 
@@ -173,12 +146,12 @@ But this does not mark the end of the page. If you feel adventurous you can read
 
 ### Using Regular Expressions
 
-Previously you learn how to use rudimentary string related functions to turn the special mention syntax Discord uses into a proper Discord.js User object.
+Previously you learn how to use rudimentary string related functions to turn the special mention syntax Discord uses into a proper discord.js User object.
 But using Regular Expressions (aka "RegEx" or "RegExp"), you can condense all that logic into a single line! Crazy, right?
 
 If you have never worked with Regular Expressions before, this might seem daunting. But in fact, you already have used regular expressions. Remember `withoutPrefix.split(/ +/);`? This little `/ +/` is actually a Regular Expression. The `/` on either side tell JavaScript where the Regular Expression begins and where it ends, the stuff inbetween is it is content. 
 
-<tip>For a more detailed explanation of please consult the [MDN's documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) about them.</tip>
+<tip>For a more detailed explanation please consult the [MDN's documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp).</tip>
 
 The RegEx you will use for user mentions will look like this: `/^<@!?(\d+)>$/`.
 Here is how the RegEx works:
@@ -189,7 +162,7 @@ Here is how the RegEx works:
  4. `\d+` means the RegEx will look for multiple digits, which will be the ID.
  5. The parentheses around the `\d+` create a capture group, which allows us to get the ID out of the mention.
 
-Using the `match` method on strings you can get the values of the capture group, i.e., the ID of the mention.
+Using the `.match()` method on strings you can get the values of the capture group, i.e., the ID of the mention.
 
 <warning>
 Discord.js has [built-in patterns](https://discord.js.org/#/docs/main/stable/class/MessageMentions?scrollTo=s-CHANNELS_PATTERN)
@@ -206,7 +179,7 @@ function getUserFromMention(mention) {
 	// However the first element in the matches array will be the entire mention, not just the ID,
 	// so use index 1.
 	const id = matches[1];
-	// Now just get the User with the ID and return that.
+
 	return client.users.get(id);
 }
 ```
