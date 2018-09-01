@@ -13,7 +13,6 @@
 	* [Configuration files](/creating-your-bot/configuration-files)
 	* [Adding more commands](/creating-your-bot/adding-more-commands)
 	* [Commands with user input](/creating-your-bot/commands-with-user-input)
-	* [Parsing mention arguments](/creating-your-bot/parsing-mention-arguments)
 
 	* **Command Handler**
 	* [File setup](/command-handling/)
@@ -26,6 +25,9 @@
 	* [Image manipulation with Canvas](/popular-topics/canvas)
 	* [Common questions](/popular-topics/common-questions)
 	* [Miscellaneous examples](/popular-topics/miscellaneous-examples)
+
+* **Miscellaneous**
+	* [Parsing mention arguments](/miscellaneous/parsing-mention-arguments)
 
 * **Extended Learning**
 	* **Database**
