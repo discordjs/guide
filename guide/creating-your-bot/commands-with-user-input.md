@@ -178,7 +178,7 @@ And ta-da! You now have a list of avatar links of all the users you tagged.
 
 It does take up a lot of screen, but this is just an example command anyway.
 
-<p class="tip">If you're looking for a more advanced way to handle mentions as arguments you can check out [this guide](/creating-your-bot/parsing-mention-arguments).</p>
+<p class="tip">If you're looking for a more advanced way to handle mentions as arguments you can check out [this guide](/miscellaneous/parsing-mention-arguments).</p>
 
 ### Number ranges
 
