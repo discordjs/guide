@@ -174,12 +174,16 @@ Any permission flags not specified get neither an explicit allow nor deny overwr
 You can also provide an array of overwrites during channel creation as shown below:
 
 ```js
-guild.createChannel('new-channel', 'text', [{
-	id: guild.id,
-	deny: ['VIEW_CHANNEL'] },
-{
-	id: user,
-	allow: ['VIEW_CHANNEL'] }]);
+guild.createChannel('new-channel', 'text', [
+	{
+		id: guild.id,
+		deny: ['VIEW_CHANNEL']
+	},
+	{
+		id: user,
+		allow: ['VIEW_CHANNEL'] 
+	}
+]);
 ```
 
 These objects are ChannelCreationOverwrites and differ from PermissionOverwriteOptions, take care to not mix them up!
@@ -195,12 +199,18 @@ To replace all permission overwrites on the channel with a provided set of new o
 channel.replacePermissionOverwrites({ overwrites: otherChannel.permissionOverwrites });
 
 // replacing Overwrites with PermissionOverwriteOptions
-channel.replacePermissionOverwrites({ overwrites: [{
-	id: guild.id,
-	deny: ['VIEW_CHANNEL'] },
-{
-	id: user,
-	allow: ['VIEW_CHANNEL'] }] });
+channel.replacePermissionOverwrites({ 
+	overwrites: [
+		{
+			id: guild.id,
+			deny: ['VIEW_CHANNEL']
+		},
+		{
+			id: user,
+			allow: ['VIEW_CHANNEL']
+		}
+	]
+});
 ```
 
 <tip>On the master branch the functionality of `GuildChannel#overwritePermissions` is changed to replace overwrites</tip>
