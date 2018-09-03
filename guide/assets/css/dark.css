@@ -104,3 +104,7 @@ body.dark {
 .dark .discord-messages .discord-message {
 	border-bottom-color: rgba(255, 255, 255, 0.05);
 }
+
+.dark .discord-messages .discord-message a {
+	color: #0096cf;
+}

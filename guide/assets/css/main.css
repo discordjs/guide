@@ -251,6 +251,16 @@ body.close #theme-toggle-button {
 	border-bottom-width: 0;
 }
 
+.discord-message a {
+	color: #00b0f4;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+.discord-message a:hover {
+	text-decoration: underline;
+}
+
 .discord-message .author-avatar {
 	margin-right: 1rem;
 	min-width: 40px;
