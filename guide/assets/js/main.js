@@ -48,6 +48,10 @@ Vue.component('discord-message', {
 	},
 });
 
+Vue.component('mention', {
+	template: '<span class="discord-mention">@<slot></slot></span>',
+});
+
 Vue.component('tip', {
 	template: '<p class="tip"><slot></slot></p>',
 });
