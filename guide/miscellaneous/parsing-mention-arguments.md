@@ -36,7 +36,7 @@ If you send
 
 <discord-messages>
 	<discord-message author="User" avatar="djs">
-		I think we should add @GoodPerson to the @Mod role.
+		I think we should add <mention>GoodPerson</mention> to the <mention>Mod</mention> role.
 	</discord-message>
 </discord-messages>
 
@@ -132,7 +132,7 @@ And that is it! Simple, isn't it? Start up your bot and see if it works.
 
 <discord-messages>
 	<discord-message author="AnotherUser" avatar="green">
-		!avatar @User
+		!avatar <mention>User</mention>
 	</discord-message>
 	<discord-message author="User" avatar="blue" :bot="true">
 		User's avatar: https://cdn.discordapp.com/avatars/208330347295932416/e2456a4bc63ec0215334434ade7fa45c.png
