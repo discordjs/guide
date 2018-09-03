@@ -274,6 +274,7 @@ body.close #theme-toggle-button {
 }
 
 .discord-message .author-header .bot-tag {
+	color: #fff;
 	background-color: #7289da;
 	font-size: 0.65em;
 	margin-left: 5px;
