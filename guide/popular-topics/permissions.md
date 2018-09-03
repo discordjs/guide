@@ -114,7 +114,7 @@ guild.defaultRole.setPermissions(3072);
 
 Any permission not referenced in the flag array or bit field are not granted to the role. 
 
-Note that flag names are literal. Although `VIEW_CHANNEL` grants access to view multiple channels the permission flag is still called `VIEW_CHANNEL` in singular.
+<tip>Note that flag names are literal. Although `VIEW_CHANNEL` grants access to view multiple channels the permission flag is still called `VIEW_CHANNEL` in singular.</tip>
 
 ### Creating a role with permissions
 
