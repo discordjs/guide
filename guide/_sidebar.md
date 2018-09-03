@@ -27,6 +27,9 @@
 	* [Common questions](/popular-topics/common-questions)
 	* [Miscellaneous examples](/popular-topics/miscellaneous-examples)
 
+* **Miscellaneous**
+	* [Parsing mention arguments](/miscellaneous/parsing-mention-arguments)
+
 * **Extended Learning**
 	* **Database**
 	* [Storing data with Sequelize](/sequelize/)
