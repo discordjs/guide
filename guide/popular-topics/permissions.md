@@ -36,12 +36,6 @@ To include permission checks like `ADMINISTRATOR` or `MANAGE_GUILD` keep reading
 
 Discord permissions are stored in a 53-bit integer and calculated using bitwise operations, if you want to dive deeper into what's happening behind the curtains check the [wikipedia](https://en.wikipedia.org/wiki/Bit_field) and [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) articles on the topic.
 
-In Discord.js permission bit fields are represented as either the decimal value of said bit field or its referenced flags.
-Every position in a permissions bit field represents one of these flags and its state (either referenced `1` or not referenced `0`).
-
-The flag `KICK_MEMBERS` for example corresponds to the position 2¹,`00000000000000000000000000000010` or `2` as decimal value.
-`MANAGE_MESSAGES` corresponds to the position 2¹³ and a bit field with both flags referenced looks like this: `00000000000000000010000000000010` or `8194` as decimal value.
-
 Before we get into actually assigning permissions let's quickly go over the method Discord uses to determine a guild members final permissions:
 
 1. Take all permissions for all roles the guild member has and add them up.
@@ -129,9 +123,6 @@ Alternatively you can provide permissions as a property of RoleData objects duri
 ```js
 // permission bit field in decimal representation
 guild.createRole({ name: 'Mod', permissions: 8194 });
-
-// permission bit field in binary representation
-guild.createRole({ name: 'Mod', permissions: 0b10000000000010 });
 
 // permission flag array
 guild.createRole({ name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS'] });
