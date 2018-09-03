@@ -177,12 +177,12 @@ You can also provide an array of overwrites during channel creation as shown bel
 guild.createChannel('new-channel', 'text', [
 	{
 		id: guild.id,
-		deny: ['VIEW_CHANNEL']
+		deny: ['VIEW_CHANNEL'],
 	},
 	{
 		id: user,
-		allow: ['VIEW_CHANNEL'] 
-	}
+		allow: ['VIEW_CHANNEL'],
+	},
 ]);
 ```
 
@@ -199,17 +199,17 @@ To replace all permission overwrites on the channel with a provided set of new o
 channel.replacePermissionOverwrites({ overwrites: otherChannel.permissionOverwrites });
 
 // replacing Overwrites with PermissionOverwriteOptions
-channel.replacePermissionOverwrites({ 
+channel.replacePermissionOverwrites({
 	overwrites: [
 		{
 			id: guild.id,
-			deny: ['VIEW_CHANNEL']
+			deny: ['VIEW_CHANNEL'],
 		},
 		{
 			id: user,
-			allow: ['VIEW_CHANNEL']
-		}
-	]
+			allow: ['VIEW_CHANNEL'],
+		},
+	],
 });
 ```
 
