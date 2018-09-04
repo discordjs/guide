@@ -38,7 +38,7 @@ To include permission checks like `ADMINISTRATOR` or `MANAGE_GUILD` keep reading
 
 ### Setting role permissions
 
-Permissions are set on roles, not the guild member itself. To change them you access the Role object (for example via `member.roles.first` or `guild.roles.random()`) and use the `.setPermissions()` method.
+Permissions are set on roles, not the guild member itself. To change them you access the Role object (for example via `member.roles.first()` or `guild.roles.random()`) and use the `.setPermissions()` method.
 Let's change the base permissions for @everyone so you can see it in action:
 
 ```js

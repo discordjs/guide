@@ -8,7 +8,6 @@ client.on('ready', () => {
 
 client.on('message', message => {
 	if (message.author.bot || !message.content.startsWith('!')) return;
-
 	if (!message.channel.permissionsFor(client.user).has('SEND_MESSAGES')) {
 		return;
 	}
@@ -18,7 +17,6 @@ client.on('message', message => {
 	if (!message.guild.me.permissions.has(botPerms)) {
 		return message.reply(`I need the permissions ${botPerms.join(', ')} for this demonstration to work properly`);
 	}
-
 	if (message.content === '!modeveryone') {
 		const everyonePerms = new Permissions(message.guild.defaultRole.permissions);
 		const newPerms = everyonePerms.add(['MANAGE_MESSAGES', 'KICK_MEMBERS']);
@@ -27,7 +25,6 @@ client.on('message', message => {
 			.then(() => message.reply('Added mod permissions to `@everyone`'))
 			.catch(console.error);
 	}
-
 	else if (message.content === '!unmodeveryone') {
 		const everyonePerms = new Permissions(message.guild.defaultRole.permissions);
 		const newPerms = everyonePerms.remove(['MANAGE_MESSAGES', 'KICK_MEMBERS']);
@@ -36,7 +33,6 @@ client.on('message', message => {
 			.then(() => message.reply('Removed mod permissions from `@everyone`'))
 			.catch(console.error);
 	}
-
 	else if (message.content === '!createmod') {
 		if(message.guild.roles.some(role => role.name === 'Mod')) {
 			return message.reply('A role with the name "Mod" already exists on this server');
@@ -46,7 +42,6 @@ client.on('message', message => {
 			.then(() => message.reply('Created modrole'))
 			.catch(console.error);
 	}
-
 	else if (message.content === '!checkmod') {
 		if (message.member.roles.some(thisRole => thisRole.name === 'Mod')) {
 			return message.reply('You have a role called Mod');
@@ -54,7 +49,6 @@ client.on('message', message => {
 
 		message.reply('You do not have a role called Mod');
 	}
-
 	else if (message.content === '!cankick') {
 		if (message.member.hasPermission('KICK_MEMBERS')) {
 			return message.reply('You can kick members');
@@ -62,7 +56,6 @@ client.on('message', message => {
 
 		message.reply('You can not kick members');
 	}
-
 	else if (message.content === '!makeprivate') {
 		if (!message.channel.permissionsFor(client.user).has('MANAGE_ROLES')) {
 			return message.reply('Please make sure i have the permissions MANAGE_ROLES in this channel and retry');
@@ -87,7 +80,6 @@ client.on('message', message => {
 			.then(() => message.reply(`Made channel ${message.channel.name} private`))
 			.catch(console.error);
 	}
-
 	else if (message.content === '!createprivate') {
 		message.guild.createChannel('private', 'text', [{
 			id: message.guild.id,
@@ -104,7 +96,6 @@ client.on('message', message => {
 			.then(() => message.reply('Created a private channel'))
 			.catch(console.error);
 	}
-
 	else if (message.content === '!unprivate') {
 		if (!message.channel.permissionsFor(client.user).has('MANAGE_ROLES')) {
 			return message.reply('Please make sure i have the permissions MANAGE_ROLES in this channel and retry');
@@ -114,13 +105,11 @@ client.on('message', message => {
 			.then(() => message.reply(`Made channel ${message.channel.name} public`))
 			.catch(console.error);
 	}
-
 	else if (message.content === '!mypermissions') {
 		const finalPermissions = message.channel.permissionsFor(message.member);
 
 		message.reply(util.inspect(finalPermissions.serialize()), { code: 'js' });
 	}
-
 	else if (message.content === '!lockpermissions') {
 		if (!message.channel.parent) {
 			return message.reply('This channel is not placed under a category');
@@ -132,7 +121,6 @@ client.on('message', message => {
 		message.channel.lockPermissions();
 		message.reply(`Synchronized overwrites of ${message.channel.name} with ${message.channel.parent.name}`);
 	}
-
 	else if (message.content === '!rolepermissions') {
 		const roleFinalPermissions = message.channel.permissionsFor(message.member.highestRole);
 
