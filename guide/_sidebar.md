@@ -21,6 +21,7 @@
 
 	* **Popular Topics**
 	* [Permissions](/popular-topics/permissions)
+	* [Permissions extended](/popular-topics/permissions-extended)
 	* [Reactions](/popular-topics/reactions)
 	* [Collectors](/popular-topics/collectors)
 	* [Image manipulation with Canvas](/popular-topics/canvas)

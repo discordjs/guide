@@ -32,84 +32,17 @@ To include permission checks like `ADMINISTRATOR` or `MANAGE_GUILD` keep reading
 * Base Permissions: Permissions for roles the member has, set on the guild level
 * Final Permissions: Permissions for a member or role, after all overwrites are applied
 
-## Discord's permission system
-
-Discord permissions are stored in a 53-bit integer and calculated using bitwise operations, if you want to dive deeper into what's happening behind the curtains check the [wikipedia](https://en.wikipedia.org/wiki/Bit_field) and [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) articles on the topic.
-
-Before we get into actually assigning permissions let's quickly go over the method Discord uses to determine a guild members final permissions:
-
-1. Take all permissions for all roles the guild member has and add them up.
-2. Apply all denies for the default role (@everyone).
-3. Apply all allows for the default role (@everyone ).
-4. Apply all denies for all additional roles the guild member has at once.
-5. Apply all allows for all additional roles the guild member has at once.
-6. Apply all denies for the specific guild member if they exist.
-7. Apply all allows for the specific guild member if they exist.
-
-Due to this system you can not deny base permissions. If you grant @everyone `SEND_MESSAGES` and don't grant it for a role @muted muted members will still be able to send messages unless you specify channel based overwrites.
-
-All additional roles allow overwrites are applied after all additional roles denies! If any of a members roles has an overwrite to explicitly allow a permission the member will be able to execute the associated actions in this channel regardless of role hierarchy. 
-
-Placing an overwrite to allow `SEND_MESSAGES` on a role will result in members with this role to not be mutable via role assignment in this channel. 
-
-### Elevated permissions
-
-If the guild owner enables the servers two-factor authentication option everyone executing a certain subset of actions will need to have 2FA enabled on their account. As bots do not have 2FA themselves you as the application owner will need to enable it on your account for your bot to work on those servers.
-Check out [Discords help article](https://support.discordapp.com/hc/en-us/articles/219576828-Setting-up-Two-Factor-Authentication) if you need assistance with this.
-
-The permissions assigned to these actions are called "elevated permissions" and are: 
-`KICK_MEMBERS`, `BAN_MEMBERS`, `ADMINISTRATOR`, `MANAGE_CHANNELS`, `MANAGE_GUILD`, `MANAGE_MESSAGES`, `MANAGE_ROLES`, `MANAGE_WEBHOOKS` and `MANAGE_EMOJIS`.
-
-### Implicit permissions
-
-Some Discord permissions apply implicitly based on logical use which can cause unwanted behavior if you are not aware of this fact.
-
-The prime example for implicit permissions is `VIEW_CHANNEL`. If this flag is missing in the final permissions you can't do anything on that channel, makes sense, right? If you can't view the channel you can't read or send messages in it, set the topic or change its name.
-The library does not handle implicit permissions for you, so understanding how the system works is vital for you as a bot developer.
-
-Let's say you want to send a message in a channel. To prevent unnecessary API calls you want to make sure your bots permissions in this channel include `SEND_MESSAGES` (more on how to achieve this down below). The check passes, but you still can't actually send the message and are greeted with `DiscordAPIError: Missing Access`.
-
-This means your bot is missing `VIEW_CHANNEL` and as such can't send messages either.
-
-One possible scenario causing this: The channel has permission overwrites for the default role @everyone to grant `SEND_MESSAGES` so everyone who can see the channel can also write in it, but at the same time has an overwrite to deny `VIEW_CHANNEL` to make it only accessible to a subset of members.
-
-As you only check for `SEND_MESSAGES` the bot will try to execute the send, but since `VIEW_CHANNEL` is missing, the request is denied by the API.
-
-### Limitations and oddities
-
-- Your bot needs `MANAGE_ROLES` in its base permissions to change base permissions.
-- It needs `MANAGE_ROLES` in its final permissions to change permission overwrites.
-- It can not edit permissions for roles that are higher than or equal to its highest role.
-- It can not grant permissions it doesn't have.
-- It can manage overwrites for roles or users with higher roles than its own highest role.
-- It can manage overwrites for permissions it doesn't have.
-- Members with the `ADMINISTRATOR` permission are not affected by overwrites at all.
-
-### Missing permissions
-
-During your tests you will likely run into `DiscordAPIError: Missing Permissions` at some point. This error can be caused by one of the following:
-
-- Your bot is missing the needed permission to execute this action in it's calculated base or final permissions (requirement changes based on the type of action you are trying to execute).
-- It is trying to execute an action on a guild member with a role higher than or equal to your bots highest role.
-- It is trying to modify a role that is higher than or equal to its highest role.
-- It is trying to execute a forbidden action on the server owner.
-- It is trying to execute an action based on another unfulfilled factor (for example reserved for partnered guilds). 
-
-<tip>The `ADMINISTRATOR` permission being granted does not skip any hierarchical check!</tip>
+<tip>You can provide permission decimals wherever we use flag literals in this guide. If you are interested in a handy permission calculator you can look at the "Bot" section in the [Discord developer portal](https://discordapp.com/developers/applications).</tip>
 
 ## Base permissions
 
 ### Setting role permissions
 
-Permissions are set on roles, not the guild member itself. To change them you access the Role object (for example via `guild.roles`) and use the `.setPermissions()` method.
+Permissions are set on roles, not the guild member itself. To change them you access the Role object (for example via `member.roles.first` or `guild.roles.random()`) and use the `.setPermissions()` method.
 Let's change the base permissions for @everyone so you can see it in action:
 
 ```js
-// permission flag array
 guild.defaultRole.setPermissions(['SEND_MESSAGES', 'VIEW_CHANNEL']);
-
-// permission bit field in decimal representation
-guild.defaultRole.setPermissions(3072);
 ```
 
 Any permission not referenced in the flag array or bit field are not granted to the role. 
@@ -121,10 +54,6 @@ Any permission not referenced in the flag array or bit field are not granted to 
 Alternatively you can provide permissions as a property of RoleData objects during role creation as an array of flag strings or a permission number:
 
 ```js
-// permission bit field in decimal representation
-guild.createRole({ name: 'Mod', permissions: 8194 });
-
-// permission flag array
 guild.createRole({ name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS'] });
 ```
 
@@ -136,12 +65,15 @@ To know if a members roles have a permission enabled you can use the `.hasPermis
 if (member.hasPermission('KICK_MEMBERS')) {
 	return console.log('This member can kick');
 }
+
 if (member.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS'])) {
 	return console.log('This member can kick and ban');
 }
+
 if (member.hasPermission('KICK_MEMBERS', false, false)) {
 	return console.log('This member can kick without allowing admin to override');
 }
+
 if (member.hasPermission('KICK_MEMBERS', false, false, false)) {
 	return console.log('This member can kick without allowing admin or owner to override');
 }
@@ -161,7 +93,7 @@ As you have likely already seen in your desktop client, channel overwrites have 
 
 ### Adding overwrites
 
-To add a permission overwrite for a role or user you access the channel object and use the `.overwritePermissions()` method. The first parameter is the target of the overwrite, either a Role or User object or their respective resolvable, the second is a PermissionOverwriteOptions object.
+To add a permission overwrite for a role or member you access the channel object and use the `.overwritePermissions()` method. The first parameter is the target of the overwrite, either a Role or GuildMember object or its respective resolvable, the second is a PermissionOverwriteOptions object.
 
 Let's add an overwrite to lock everyone out of the channel. The guild ID doubles as the role id for the default role @everyone as demonstrated below:
 
@@ -198,7 +130,7 @@ To replace all permission overwrites on the channel with a provided set of new o
 // copying overwrites from another channel
 channel.replacePermissionOverwrites({ overwrites: otherChannel.permissionOverwrites });
 
-// replacing Overwrites with PermissionOverwriteOptions
+// replacing overwrites with PermissionOverwriteOptions
 channel.replacePermissionOverwrites({
 	overwrites: [
 		{
@@ -220,7 +152,7 @@ channel.replacePermissionOverwrites({
 To remove the overwrite for a specific member or role you can get it from the channels permissionOverwrites collection and call the `.delete()` method on it. Since the collection is keyed by the targets ID (either role ID or user ID) the respective overwrite is very easy to access.
 
 ```js
-// deletes the channels overwrite for the message author
+// deleting the channels overwrite for the message author
 channel.permissionOverwrites.get(message.author.id).delete();
 ```
 
@@ -247,13 +179,13 @@ Discord.js features two utility functions to easily determine the final permissi
 To check your bots permissions in the channel the command was used in you could use something like this:
 
 ```js
-// Final permissions for a guild member using permissionsFor
+// final permissions for a guild member using permissionsFor
 const botPermissionsFor = channel.permissionsFor(guild.me);
 
-// Final permissions for a guild member using permissionsIn
+// final permissions for a guild member using permissionsIn
 const botPermissionsIn = guild.me.permissionsIn(channel);
 
-// Final permissions for a role
+// final permissions for a role
 const rolePermissions = channel.permissionsFor(myRole);
 ```
 
@@ -274,10 +206,14 @@ You can however pass these decimals to the Permissions constructor to convert th
 ```js
 const { Permissions } = require('discord.js');
 
-// constructing a Permissions Object from a permission number
-const permissions = new Permissions(268550160);
 // constructing a Permissions Object from an array of PermissionResolvables
-const flags = ['MANAGE_CHANNELS', 'EMBED_LINKS', 'ATTACH_FILES', 'READ_MESSAGE_HISTORY', 'MANAGE_ROLES'];
+const flags = [
+	'MANAGE_CHANNELS',
+	'EMBED_LINKS',
+	'ATTACH_FILES',
+	'READ_MESSAGE_HISTORY',
+	'MANAGE_ROLES',
+];
 const permissions2 = new Permissions(flags);
 ```
 
@@ -291,19 +227,29 @@ Let's say you want to know if the decimal bit field representation `268550160` h
 ```js
 const { Permissions } = require('discord.js');
 
-const permissions = new Permissions(268550160);
+const permissions = new Permissions([
+	'MANAGE_CHANNELS',
+	'EMBED_LINKS',
+	'ATTACH_FILES',
+	'READ_MESSAGE_HISTORY',
+	'MANAGE_ROLES',
+]);
 console.log(permissions.has('MANAGE_CHANNELS'));
 // output: true
+
 console.log(permissions.has(['MANAGE_CHANNELS', 'EMBED_LINKS']));
 // output: true
+
 console.log(permissions.has(['MANAGE_CHANNELS', 'KICK_MEMBERS']));
 // output: false
 
 const adminPermissions = new Permissions('ADMINISTRATOR');
 console.log(adminperms.has('MANAGE_CHANNELS'));
 // output: true
+
 console.log(adminperms.has('MANAGE_CHANNELS'), true);
 // output: true
+
 console.log(adminperms.has('MANAGE_CHANNELS'), false);
 // output: false
 ```
@@ -315,12 +261,20 @@ The Permissions object enables you to easily add or remove certain permissions f
 ```js
 const { Permissions } = require('discord.js');
 
-const permissions = new Permissions(268550160);
+const permissions = new Permissions([
+	'MANAGE_CHANNELS',
+	'EMBED_LINKS',
+	'ATTACH_FILES',
+	'READ_MESSAGE_HISTORY',
+	'MANAGE_ROLES',
+]);
 console.log(permissions.has('KICK_MEMBERS'));
 // output: false
+
 permissions.add('KICK_MEMBERS');
 console.log(permissions.has('KICK_MEMBERS'));
 // output: true
+
 permissions.remove(2);
 console.log(permissions.has('KICK_MEMBERS'));
 // output : false
@@ -332,4 +286,4 @@ You can utilize these methods to adapt permissions or overwrites without touchin
 
 ## Resulting code
 
-If you want to check a working implementation for all methods and functionalities explained in this guide, you can look at a boilerplate bot over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/popular-topics/permissions/).
+If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/popular-topics/permissions/).
