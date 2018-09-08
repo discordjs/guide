@@ -20,7 +20,9 @@
 	* [Adding features](/command-handling/adding-features)
 
 	* **Popular Topics**
-	* [Embeds](/popular-topics/embeds)
+  	* [Embeds](/popular-topics/embeds)
+	* [Permissions](/popular-topics/permissions)
+	* [Permissions (extended)](/popular-topics/permissions-extended)
 	* [Reactions](/popular-topics/reactions)
 	* [Collectors](/popular-topics/collectors)
 	* [Image manipulation with Canvas](/popular-topics/canvas)
