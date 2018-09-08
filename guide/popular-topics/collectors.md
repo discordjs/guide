@@ -36,7 +36,7 @@ Those options you pass as the second argument in `.createMessageCollector()`. Th
 
 ### Await messages
 
-Using `.awaitMessages()` can be easier if you understand promises, and it allows you to have cleaner code overall. It is essentially identical to `.createMessageCollector()`, except promisified. The drawback of using this method, however, is that you cannot do things before the promise is resolves or rejected, either by an error or completion. However, it should do for most purposes, such as awaiting the correct response in a quiz. Instead of taking their example, let's set up a basic quiz command using the `.awaitMessages()` feature.
+Using `.awaitMessages()` can be easier if you understand promises, and it allows you to have cleaner code overall. It is essentially identical to `.createMessageCollector()`, except promisified. The drawback of using this method, however, is that you cannot do things before the promise is resolved or rejected, either by an error or completion. However, it should do for most purposes, such as awaiting the correct response in a quiz. Instead of taking their example, let's set up a basic quiz command using the `.awaitMessages()` feature.
 
 <tip>You can read the docs for the `.awaitMessages()` method [here](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=awaitMessages).</tip>
 

@@ -1,6 +1,6 @@
 ## Extended changes
 
-<tip>This page is a follow-up and bases its code off of [the previous page](/sharding/additional-information.md/), which assumes knowledge of arguments and passing functions.</tip>
+<tip>This page is a follow-up and bases its code off of [the previous page](/sharding/additional-information), which assumes knowledge of arguments and passing functions.</tip>
 
 ### Sending messages across shards
 
@@ -50,7 +50,7 @@ This will never work for a channel that lies on another shard. So, let's remedy 
 	}
 ```
 
-If all is well, then you should notice an output like the following: `[false, true, false, false]`. If it is not clear why `true` and `false` are hanging around, it is because that is how one "returns" out of an eval statement. You will want this if you want any feedback in the results. Now that you have observed said results, you can adjust the command to give yourself proper feedback, like so:
+If all is well, then you should notice an output like the following: `[false, true, false, false]`. If it is not clear why `true` and `false` are hanging around, it's because the last expression of the eval statement is what will be returned. You will want this if you want any feedback in the results. Now that you have observed said results, you can adjust the command to give yourself proper feedback, like so:
 
 ```diff
 	return client.shard.broadcastEval(`
@@ -103,7 +103,7 @@ Let's start off with an extremely basic function, which will try to grab an emoj
 ```js
 function findEmoji(id) {
 	const emoji = this.emojis.get(id);
-	if (!emoji) return false;
+	if (!emoji) return null;
 	return emoji;
 }
 ```
@@ -153,8 +153,10 @@ While this result isnt *necessarily* bad or incorrect, it's simply a raw object 
 
 ```diff
 function findEmoji(id) {
-	const temp = this.emojis.get(id);
-	if (!temp) return false;
+-	const emoji = this.emojis.get(id);	
++	const temp = this.emojis.get(id);
+-	if (!emoji) return null;
++	if (!temp) return null;
 +
 +	// Clone the object because it is modified right after, so as to not affect the cache in client.emojis
 +	const emoji = Object.assign({}, temp);
@@ -177,9 +179,15 @@ Now, you will want to make use of it in the actual command:
 +			const foundEmoji = emojiArray.find(emoji => emoji);
 +			if (!foundEmoji) return message.reply('I could not find such an emoji.');
 +
-+			// Reconstruct an emoji object as required by discord.js
-+			const emoji = new Discord.Emoji(client.guilds.get(foundEmoji.guild), foundEmoji);
-+			return message.reply(`I have found an emoji ${emoji}!`);
++			// Acquire a guild that can be reconstructed with discord.js
++			return client.rest.makeRequest('get', Discord.Constants.Endpoints.Guild(foundEmoji.guild).toString(), true)
++					.then(raw => {
++						// Reconstruct a guild
++						const guild = new Discord.Guild(client, raw);
++						// Reconstruct an emoji object as required by discord.js
++						const emoji = new Discord.Emoji(guild, foundEmoji);
++						return message.reply(`I have found an emoji ${emoji.toString()}!`);
++					});
 +		});
 ```
 

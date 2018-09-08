@@ -251,6 +251,16 @@ body.close #theme-toggle-button {
 	border-bottom-width: 0;
 }
 
+.discord-message a {
+	color: #00b0f4;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+.discord-message a:hover {
+	text-decoration: underline;
+}
+
 .discord-message .author-avatar {
 	margin-right: 1rem;
 	min-width: 40px;
@@ -274,6 +284,7 @@ body.close #theme-toggle-button {
 }
 
 .discord-message .author-header .bot-tag {
+	color: #fff;
 	background-color: #7289da;
 	font-size: 0.65em;
 	margin-left: 5px;
@@ -286,4 +297,17 @@ body.close #theme-toggle-button {
 .discord-message .message-body {
 	font-size: 0.9em;
 	letter-spacing: 0.5px
+}
+
+.discord-message .discord-mention {
+	color: #7289da;
+	background-color: rgba(114, 137, 218, 0.1);
+	font-weight: 500;
+	padding: 0 1px;
+	cursor: pointer;
+}
+
+.discord-message .discord-mention:hover {
+	color: #fff;
+	background-color: rgba(114, 137, 218, 0.7);
 }

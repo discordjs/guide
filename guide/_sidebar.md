@@ -20,23 +20,33 @@
 	* [Adding features](/command-handling/adding-features)
 
 	* **Popular Topics**
+  * [Embeds](/popular-topics/embeds)
 	* [Permissions](/popular-topics/permissions)
-	* [Permissions extended](/popular-topics/permissions-extended)
+	* [Permissions (extended)](/popular-topics/permissions-extended)
 	* [Reactions](/popular-topics/reactions)
 	* [Collectors](/popular-topics/collectors)
 	* [Image manipulation with Canvas](/popular-topics/canvas)
 	* [Common questions](/popular-topics/common-questions)
 	* [Miscellaneous examples](/popular-topics/miscellaneous-examples)
 
+* **Miscellaneous**
+	* [Parsing mention arguments](/miscellaneous/parsing-mention-arguments)
+
 * **Extended Learning**
 	* **Database**
 	* [Storing data with Sequelize](/sequelize/)
 	* [Making a currency system](/sequelize/currency)
-	
+
+	* **Frameworks**
+	* [Commando](/commando/)
+
 	* **Sharding**
 	* [Getting started](/sharding/)
 	* [Additional information](/sharding/additional-information)
 	* [Extended](/sharding/extended)
+
+	* **OAuth2**
+	* [Getting an access token](/oauth2/)
 
 	* **Improving your dev environment**
 	* [Managing your bot process with PM2](/improving-dev-environment/pm2)

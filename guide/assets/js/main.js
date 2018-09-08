@@ -23,7 +23,6 @@ Vue.component('discord-message', {
 				</div>\
 			</div>\
 		</div>\
-	</div>\
 	',
 
 	props: {
@@ -47,6 +46,10 @@ Vue.component('discord-message', {
 
 		this.avatarSrc = defaultAvatars[this.avatar] || this.avatar || defaultAvatars.blue;
 	},
+});
+
+Vue.component('mention', {
+	template: '<span class="discord-mention">@<slot></slot></span>',
 });
 
 Vue.component('tip', {
