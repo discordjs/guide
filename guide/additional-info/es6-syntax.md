@@ -231,7 +231,7 @@ You can also rename variables when destructuring, if necessary. A good example o
 const { default: defaultValue } = someObject;
 
 console.log(defaultValue);
-// 'Some defalut value here'
+// 'Some default value here'
 ```
 
 #### Array destructuring
