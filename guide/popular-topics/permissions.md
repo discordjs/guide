@@ -201,7 +201,6 @@ Remember that using these methods will not manipulate permissions, but create a 
 Some methods and properties in Discord.js return permission decimals rather than a Permissions object, making it hard to manipulate or read them if you don't want to use bitwise operations.
 You can, however, pass these decimals to the Permissions constructor to convert them as shown below.
 
-
 ```js
 const { Permissions } = require('discord.js');
 const permissions = new Permissions(268550160);
