@@ -199,12 +199,18 @@ Remember that using these methods will not manipulate permissions, but create a 
 ### Converting permission numbers
 
 Some methods and properties in Discord.js return permission decimals rather than a Permissions object, making it hard to manipulate or read them if you don't want to use bitwise operations.
-You can, however, pass these decimals to the Permissions constructor to convert them.
+You can, however, pass these decimals to the Permissions constructor to convert them as shown below.
+
 
 ```js
 const { Permissions } = require('discord.js');
+const permissions = new Permissions(268550160);
+```
 
-// constructing a Permissions Object from an array of PermissionResolvables
+You can also use this approach for other [PermissionResolvable](https://discord.js.org/#/docs/main/stable/typedef/PermissionResolvable)s like flag arrays or flags.
+
+```js
+const { Permissions } = require('discord.js');
 const flags = [
 	'MANAGE_CHANNELS',
 	'EMBED_LINKS',
@@ -277,7 +283,7 @@ permissions.add('KICK_MEMBERS');
 console.log(permissions.has('KICK_MEMBERS'));
 // output: true
 
-permissions.remove(2);
+permissions.remove('KICK_MEMBERS');
 console.log(permissions.has('KICK_MEMBERS'));
 // output : false
 ```
