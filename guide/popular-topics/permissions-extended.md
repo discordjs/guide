@@ -60,7 +60,7 @@ During your development you will likely run into `DiscordAPIError: Missing Permi
 
 - Your bot is missing the needed permission to execute this action in it's calculated base or final permissions (requirement changes based on the type of action you are trying to execute).
 - It is trying to execute an action on a guild member with a role higher than or equal to your bots highest role.
-- It is trying to modify a role that is higher than or equal to its highest role.
+- It is trying to modify or assign a role that is higher than or equal to its highest role.
 - It is trying to execute a forbidden action on the server owner.
 - It is trying to execute an action based on another unfulfilled factor (for example reserved for partnered guilds). 
 
