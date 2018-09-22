@@ -178,6 +178,8 @@ message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
 
 ## Listening for reactions on old messages
 
+<danger>This section describes how to use some undocumented APIs to add unsupported functionality into Discord.js, and as such you should follow anything here with extreme caution. Anything here is subject to change at any time without notice, and may break other functionality in your bot.</danger>
+
 If you've tried using the `messageReactionAdd` or `messageReactionRemove` events before, you may have noticed that it doesn't always emit. That's because these events only trigger for cached messages. Fortunately, there is a way to make those events trigger for *all* messages.
 
 In order to make that happen, you'll need to listen to a completely different event and emit the `messageReactionEvent` yourself. The name of the event you'll need to listen to is `raw`, and it has a single parameter.
