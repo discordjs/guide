@@ -184,13 +184,13 @@ If you've tried using the `messageReactionAdd` or `messageReactionRemove` events
 
 In order to make that happen, you'll need to listen to a completely different event and emit the `messageReactionEvent` yourself. The name of the event you'll need to listen to is `raw`, and it has a single parameter.
 
+<warning>Due to the `raw` event being undocumented and unsupported feature, all of the following code will be a basic example and may not cover all cases.</warning>
+
 ```js
 client.on('raw', event => {
 	console.log('\nRaw event data:\n', event);
 });
 ```
-
-<tip>It's recommended that you create a new bot and add it to a new server, because you will most likely be bombarded with console logs otherwise, and it'll become harder to keep track of the data you want to view.</tip>
 
 The `raw` event listens for *all* client events and returns a set amount of data. If you look at as is, it might look a bit like gibberish to you, but that's okay because you'll only need to know about two of the properties it contains.
 
