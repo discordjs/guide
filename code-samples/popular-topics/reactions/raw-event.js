@@ -16,11 +16,16 @@ client.on('raw', async event => {
 	const { d: data } = event;
 	const user = client.users.get(data.user_id);
 	const channel = client.channels.get(data.channel_id) || await user.createDM();
+	let message = channel.messages.get(data.message_id);
 
-	if (channel.messages.has(data.message_id)) return;
-
-	const message = await channel.fetchMessage(data.message_id);
 	const emojiKey = (data.emoji.id) ? `${data.emoji.name}:${data.emoji.id}` : data.emoji.name;
+
+	if (event.t === 'MESSAGE_REACTION_REMOVE' && message && message.reactions.get(emojiKey) && message.reactions.get(emojiKey).users.size) return;
+	if (event.t === 'MESSAGE_REACTION_ADD' && message) return;
+
+	if (!message) {
+		message = await channel.fetchMessage(data.message_id);
+	}
 	let reaction = message.reactions.get(emojiKey);
 
 	if (!reaction) {

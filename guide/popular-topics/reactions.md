@@ -250,25 +250,34 @@ This will prevent your code from trying to build data that isn't relevant to tha
 const { d: data } = event;
 const user = client.users.get(data.user_id);
 const channel = client.channels.get(data.channel_id) || await user.createDM();
-
-if (channel.messages.has(data.message_id)) return;
-
-const message = await channel.fetchMessage(data.message_id);
+let message = channel.messages.get(data.message_id);
 ```
-
-The if statement in the middle plays an important role; it prevents us from re-emitting the event for both uncached *and* cached messages. Without this, your reaction events would execute twice for a single reaction if the message was already cached.
-
 A custom emoji contains both a name and an ID, while a unicode emoji contains just a name. Since custom emoji reactions are keyed in a `name:ID` format and unicode emoji reactions are keyed by their name, you'll have to do something like this to set the right emoji for this event:
 
 ```js
 const emojiKey = (data.emoji.id) ? `${data.emoji.name}:${data.emoji.id}` : data.emoji.name;
 ```
-
 We are checking for `emoji.id` because a unicode emoji won't have an ID inside the emoji object. Next we are using template literals to combine the name and the ID to construct the proper key format `name:ID` we need to get the custom emoji reaction.
 
-All that's left is to fetch the actual reaction from the message and emit the event.
+With the following if statements we make sure to return if the library already emits those events properly.
+In the case of `MESSAGE_REACTION_REMOVE` this is a cached message with a populated usercache.
+In the case of `MESSAGE_REACTION_ADD` this is a cached message.
+
+Without this your reaction events would execute twice for a single reaction or not at all, depending on the combination of met conditions.
 
 ```js
+if (event.t === 'MESSAGE_REACTION_REMOVE' && message && message.reactions.get(emojiKey) && message.reactions.get(emojiKey).users.size) return;
+if (event.t === 'MESSAGE_REACTION_ADD' && message) return;
+
+```
+Now we fetch the message if it isn't cached and the actual reaction from the message.
+
+<!-- eslint-skip -->
+
+```js
+if(!message) {
+	message = await channel.fetchMessage(data.message_id);
+}
 const reaction = message.reactions.get(emojiKey);
 ```
 
