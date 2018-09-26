@@ -7,7 +7,7 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-	if (message.content === config.prefix+'ping') {
+	if (message.content === `${prefix}ping`) {
 		message.channel.send('Pong.');
 	}
 });
