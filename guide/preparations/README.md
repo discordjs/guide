@@ -10,6 +10,10 @@ If you're developing on Windows, it's as simple as installing any other program.
 
 If you're developing on Linux, you may consult [this page](https://nodejs.org/en/download/package-manager/) to determine how you should install Node.<br />On that note, there's a possibility that you may already have Node \(e.g. if you're using a VPS\). You can check by running the `node -v` command. If it outputs something like `v8.0.0` or higher, then you're good to go! Otherwise, take a look at the page linked above for instructions on installing Node on your OS.
 
+### Installing on Mac
+
+If you're developing on Mac, Visit [this page](https://nodejs.org/en/download/package-manager/#macos) to determine how you should install Node.<br />You can check to see if Node is installed by running the `node -v` command.<br />If it outputs something like `v8.0.0` or higher, then you're good to go!
+
 <warning>If you _do_ have Node installed, but have an older version \(i.e. anything below 8.0.0\), you should upgrade to the latest version.</warning>
 
 ---
@@ -29,6 +33,8 @@ Once you're done making the folder, open it up (for Linux, you can use `cd proje
 ### Opening the command prompt
 
 If you're on Linux, you can quickly open up the terminal with `Ctrl + Alt + T`.
+
+If you're on Mac, you can use spotlight search `Cmd + Spacebar` to search for 'Terminal.app'.
 
 If you're on Windows and aren't familiar with opening up the command prompt, simply do the following:
 
