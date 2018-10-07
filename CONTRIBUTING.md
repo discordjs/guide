@@ -27,7 +27,7 @@ There might come a time where a snippet will contain a parse error, and ESLint w
 
 ```js
 const sent = await message.channel.send('Hi!');
-console.log(sent.content)
+console.log(sent.content);
 ```
 
 ESLint would error with `Parsing error: Unexpected token message` instead of letting you know that you're missing a semicolon. In this case, it's because of the use of `await` outside of an async function. In situations like this, after you've fixed any obvious errors, you can add an `<!-- eslint-skip -->` comment above the codeblock to have it ignored entirely by ESLint when running the lint script. 
