@@ -101,7 +101,7 @@ You can think of it as two `filter`s, but done at the same time:
 // `humans` is a Collection where the property was false instead!
 const [bots, humans] = collection.partition(u => u.bot);
 
-// Both returns true.
+// Both return true.
 bots.every(b => b.bot);
 humans.every(h => !h.bot);
 ```
