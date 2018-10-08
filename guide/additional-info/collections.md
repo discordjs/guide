@@ -43,12 +43,14 @@ There are two ways you might want to convert a `Collection` into an `Array`. The
 They simply create an array from the items in the collection, but also caches it too:
 
 ```js
+// Not computed again the second time, it is cached!
 collection.array();
-collection.array(); // Not computed again, it is cached!
+collection.array();
 
 // Any change to the collection, however, invalidates the cache.
+// This call to `array` must be recomputed.
 collection.delete('81440962496172032');
-collection.array(); // Must be computed again.
+collection.array();
 ```
 
 This caching behavior is undesirable if you are planning to mutate the array, so instead, you can use `Array.from`:
@@ -98,6 +100,8 @@ You can think of it as two `filter`s, but done at the same time:
 // `bots` is a Collection of users where their `bot` property was true.
 // `humans` is a Collection where the property was false instead!
 const [bots, humans] = collection.partition(u => u.bot);
-bots.every(b => b.bot); // true
-humans.every(h => !h.bot); // true
+
+// Both returns true.
+bots.every(b => b.bot);
+humans.every(h => !h.bot);
 ```
