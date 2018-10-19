@@ -6,12 +6,12 @@ If you've ever seen a music bot that accepts a YouTube query instead of just a v
 
 ## Using a REST API with Node
 
-In these examples we are going to be using [snekfetch](https://www.npmjs.com/package/snekfetch) which is a great library for making HTTP requests by one of the developers of discord.js. Discord.js actually uses snekfetch which is part of the reason why it's ideal; it's already installed if you're using discord.js!
+In these examples we are going to be using [node-fetch](https://www.npmjs.com/package/node-fetch) which is a great library for making HTTP requests.
 
-If you're not using discord.js you'll simply have to do the following to install snekfetch.
+To install node-fetch, run the following command:
 
 ```bash
-npm install --save snekfetch
+npm install node-fetch
 ```
 
 ## Skeleton code
@@ -42,16 +42,16 @@ client.login('pleaseinsertyourtokenheresothistutorialcanwork');
 
 <tip>We're going to take advantage of [destructuring](/additional-info/es6-syntax?id=destructuring) in this tutorial to maintain readability.</tip>
 
-## Using snekfetch
+## Using node-fetch
 
-snekfetch is a promise-based request library with beautiful syntax. If you aren't already familiar with promises, you should read up on them [here](/additional-info/async-await).
+node-fetch is a lightweight module that brings the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) which is available in browsers to node. It is a promised based library. If you aren't already familiar with promises, you should read up on them [here](/additional-info/async-await).
 
 In this tutorial we'll be making a bot with 2 API-based commands. The first will be using [random.cat](https://aws.random.cat) and the other will use [Urban Dictionary](https://www.urbandictionary.com).
 
-To require snekfetch, you'd do:
+To require node-fetch, you'd do:
 
 ```js
-const snekfetch = require('snekfetch');
+const fetch = require('node-fetch');
 ```
 
 ### Random Cat
@@ -59,16 +59,16 @@ const snekfetch = require('snekfetch');
 Random cat's API is available at https://aws.random.cat/meow and returns a [JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) response. To actually fetch data from the API, you're going to do the following:
 
 ```js
-snekfetch.get('https://aws.random.cat/meow');
+fetch('https://aws.random.cat/meow').then(response => response.json());
 ```
 
-Now, of course it seems like this does nothing but what it's doing is launching a request to the random.cat server and random.cat is returning some JSON that contains a `file` property which is a string containing a link to a random cat. So, let's implement that into a command. The code should look similar to this:
+Now, of course it seems like this does nothing but what it's doing is launching a request to the random.cat server and random.cat is returning some JSON that contains a `file` property which is a string containing a link to a random cat. node-fetch returns a response object which we can change into JSON with `response.json()`. Next, let's implement this into a command. The code should look similar to this:
 
 <!-- eslint-skip -->
 
 ```js
 if (command === 'cat') {
-	const { body } = await snekfetch.get('https://aws.random.cat/meow');
+	const { body } = await fetch('https://aws.random.cat/meow').then(response => response.json());
 
 	message.channel.send(body.file);
 }
@@ -79,7 +79,7 @@ So, here's what's happening in this code:
 1. You're sending a `GET` request to random.cat.
 2. random.cat sees your request and gets a random file from their database.
 3. random.cat then sends that file's URL as a JSON object that contains a link to the image.
-4. snekfetch's `body` property deserializes the JSON response using [JSON#parse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse).
+4. node-fetch recieves the response and deserializes it with `reponse.json()`.
 5. You then send the object's `file` property in Discord.
 
 <warning>The response will only be parsed if the server's `Content-Type` header includes `application/json`. In some cases, you may have to get the `text` property instead of the `body` property and `JSON.parse()` it yourself.</warning>
@@ -93,16 +93,20 @@ First, you're going to need to fetch data from the API and get its body. To do t
 <!-- eslint-skip -->
 
 ```js
-if (command === 'urban') {
-	if (!args.length) {
-		return message.channel.send('You need to supply a search term!');
-	}
+const querystring = require('querystring');
 
-	const { body } = await snekfetch.get('https://api.urbandictionary.com/v0/define').query({ term: args.join(' ') });
+if (command === 'urban') {
+  if (!args.length) {
+    return message.channel.send('You need to supply a search term!');
+  }
+
+	const query = querystring.stringify({ term: args.join(' ') });
+
+  const { body } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`).then(response => response.json());
 }
 ```
 
-The `.query()` method appends a [query string](https://en.wikipedia.org/wiki/Query_string) to the URL so that the Urban Dictionary server can parse it and know what to search for.
+Here, we use Node's native [querystring module](https://nodejs.org/api/querystring.html) to create a [query string](https://en.wikipedia.org/wiki/Query_string) for the URL so that the Urban Dictionary server can parse it and know what to search for.
 
 If you were to do `!urban hello world`, then the URL would become https://api.urbandictionary.com/v0/define?term=hello%20world since the string gets encoded.
 
