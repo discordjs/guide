@@ -8,7 +8,7 @@ Sometimes you'll want to determine the result of a command depending on user inp
 
 We'll actually be tackling 2 things at once here. Things will be explained along the way, so don't worry if you don't understand immediately.
 
-Go to your main bot file and find the `client.on('message')` bit. Inside of it, add these 4 lines at the very top of it.
+Go to your main bot file and find the `client.on('message', ...)` bit. Inside of it, add these 4 lines at the very top of it.
 
 ```js
 if (!message.content.startsWith(prefix) || message.author.bot) return;
