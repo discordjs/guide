@@ -16,7 +16,7 @@ Moment is a powerful package for working with dates in JavaScript.
 It allows you to quickly and easily format dates in any way you want or parse strings back into JavaScript Date objects.  
 There are even some extensions for it to allow you work with durations and more.
 
-For example if you want to wanted to ask your users to give the bot a date,  
+For example if you wanted to ask your users to give you a date,  
 you can use moment to turn it in a Date object you can use in your code:
 
 <!-- eslint-skip -->
@@ -89,7 +89,7 @@ common-tags got you covered:
 const packageName = 'common-tags';
 
 if (someCondition) {
-	const poem = stripIndent`
+	const poem = stripIndents`
 		I like ${packageName}.
 		It makes my strings so pretty,
 		you should use it too.
