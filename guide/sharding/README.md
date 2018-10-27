@@ -49,14 +49,14 @@ client.login('token');
 
 Let's say your bot is in a total of 3,600 guilds. Using the recommended shard count you might end up at 4 shards, the first 3 containing 1,000 guilds each and the last one containing the remaining 600. If a guild is on a certain shard (shard #2, for example) and it receives this command, the guild count will be 1,000, which is obviously not the "correct" number of guilds for your bot. Likewise, if the message is received on a guild in shard 3 (shard IDs are zero-indexed), the guild count will be 600, which is still not what you want. "How can I fix this?", you ask? Well, that's why we're here, isn't it?
 
-### FetchClientProperties
+### FetchClientValues
 
-First, let's take a look at [one of the most common sharding utility methods you'll be using](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=fetchClientProperties) called `fetchClientProperties`. This method retrieves a client property of all shards.
+First, let's take a look at [one of the most common sharding utility methods you'll be using](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=fetchClientValues) called `fetchClientValues`. This method retrieves a client property of all shards.
 
 Now, take the following snippet of code:
 
 ```js
-client.shard.fetchClientProperties('guilds.size').then(console.log);
+client.shard.fetchClientValues('guilds.size').then(console.log);
 ```
 
 If you run it, you will notice an output like `[1000, 1000, 1000, 600]`. You will be correct in assuming that that's the total number of guilds per shard, which is stored in an array in the Promise. We can both assume this isn't the ideal output for guild count, so we will need to make use of an array manipulation method, specifically [Array.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce).
@@ -64,7 +64,7 @@ If you run it, you will notice an output like `[1000, 1000, 1000, 600]`. You wil
 It's highly urged for you to visit that link to understand how the method works, as you will probably find great use of it in sharding. Basically, this method (in this case) iterates through the array and adds each current value to the total amount.
 
 ```js
-client.shard.fetchClientProperties('guilds.size')
+client.shard.fetchClientValues('guilds.size')
 	.then(results => {
 		console.log(`${results.reduce((prev, guildCount) => prev + guildCount, 0)} total guilds`);
 	})
@@ -76,7 +76,7 @@ While it's a bit unattractive to have more nesting in your commands, it is neces
 ```diff
 	if (command === 'stats') {
 -		return message.channel.send(`Server count: ${client.guilds.size}`);
-+		return client.shard.fetchClientProperties('guilds.size')
++		return client.shard.fetchClientValues('guilds.size')
 +			.then(results => {
 +				return message.channel.send(`Server count: ${results.reduce((prev, guildCount) => prev + guildCount, 0)}`);
 +			})
@@ -108,7 +108,7 @@ You'd likely want to output both pieces of information in the stats command, so 
 
 ```js
 const promises = [
-	client.shard.fetchClientProperties('guilds.size'),
+	client.shard.fetchClientValues('guilds.size'),
 	client.shard.broadcastEval('this.guilds.reduce((prev, guild) => prev + guild.memberCount, 0)'),
 ];
 
@@ -127,7 +127,7 @@ Promise.all(promises)
 	if (command === 'stats') {
 -		return message.channel.send(`Server count: ${client.guilds.size}`);
 +		const promises = [
-+			client.shard.fetchClientProperties('guilds.size'),
++			client.shard.fetchClientValues('guilds.size'),
 +			client.shard.broadcastEval('this.guilds.reduce((prev, guild) => prev + guild.memberCount, 0)'')
 +		];
 +
