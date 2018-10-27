@@ -109,7 +109,7 @@ You'd likely want to output both pieces of information in the stats command, so 
 ```js
 const promises = [
 	client.shard.fetchClientProperties('guilds.size'),
-	client.shard.broadcastEval(`this.guilds.reduce((prev, guild) => prev + guild.memberCount, 0)`)
+	client.shard.broadcastEval('this.guilds.reduce((prev, guild) => prev + guild.memberCount, 0)'),
 ];
 
 Promise.all(promises)
