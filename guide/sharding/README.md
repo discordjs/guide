@@ -66,7 +66,7 @@ It's highly urged for you to visit that link to understand how the method works,
 ```js
 client.shard.fetchClientProperties('guilds.size')
 	.then(results => {
-		console.log(`${results.reduce((prev, val) => prev + guildCount, 0)} total guilds`);
+		console.log(`${results.reduce((prev, guildCount) => prev + guildCount, 0)} total guilds`);
 	})
 	.catch(console.error);
 ```
