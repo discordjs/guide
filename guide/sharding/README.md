@@ -97,7 +97,7 @@ This will run the code given to `broadcastEval` on each shard and return the res
 ```js
 client.shard.broadcastEval('this.guilds.reduce((prev, guild) => prev + guild.memberCount, 0)')
 	.then(results => {
-		return message.channel.send(`Total member count: ${results.reduce((prev, val) => prev + val, 0)}`);
+		return message.channel.send(`Total member count: ${results.reduce((prev, memberCount) => prev + memberCount, 0)}`);
 	})
 	.catch(console.error);
 ```
