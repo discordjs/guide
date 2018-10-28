@@ -11,7 +11,7 @@ client.on('message', message => {
 
 	if (command === 'stats') {
 		const promises = [
-			client.shard.fetchClientProperties('guilds.size'),
+			client.shard.fetchClientValues('guilds.size'),
 			client.shard.broadcastEval('this.guilds.reduce((prev, guild) => prev + guild.memberCount, 0)'),
 		];
 
