@@ -9,7 +9,7 @@ PM2 is a process manager. It manages your applications' states, so you can start
 You can install PM2 via npm:
 
 ```bash
-npm i -g pm2
+npm install --global pm2
 ```
 
 Or, if you use Yarn:
@@ -57,7 +57,7 @@ The initial steps to run differ per OS. In this guide, we'll cover those for Win
 **Install the [pm2-windows-service](https://www.npmjs.com/package/pm2-windows-service) package from npm:**
 
 ```bash
-npm i -g pm2-windows-service
+npm install --global pm2-windows-service
 ```
 
 **After installation has finished, install the service by running the following command:**

@@ -18,10 +18,10 @@ First, be sure to install the [ESLint package](https://www.npmjs.com/package/esl
 
 ```bash
 # locally
-npm i eslint
+npm install eslint
 
 # globally
-npm i -g eslint
+npm install --global eslint
 ```
 
 Afterwards, install the appropriate plugin(s) for your editor of choice.
