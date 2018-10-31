@@ -24,7 +24,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '!';
 
-client.on('ready', () => {
+client.once('ready', () => {
 	console.log('Ready!');
 });
 

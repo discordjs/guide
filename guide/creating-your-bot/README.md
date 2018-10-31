@@ -18,7 +18,7 @@ Once you've created a new file, do a quick check to see if you have everything s
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-client.on('ready', () => {
+client.once('ready', () => {
 	console.log('Ready!');
 });
 
@@ -43,7 +43,7 @@ const client = new Discord.Client();
 // this event will trigger whenever your bot:
 // - finishes logging in
 // - reconnects after disconnecting
-client.on('ready', () => {
+client.once('ready', () => {
 	console.log('Ready!');
 });
 

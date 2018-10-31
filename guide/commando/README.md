@@ -81,7 +81,7 @@ Should you want to disable a default command, such as if you wanted to make your
 Next, you're going to need to create a ready event and an error event, as usual.
 
 ```js
-client.on('ready', () => {
+client.once('ready', () => {
 	console.log(`Logged in as ${client.user.tag}! (${client.user.id})`);
 	client.user.setActivity('with Commando');
 });

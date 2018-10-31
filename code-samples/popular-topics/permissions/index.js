@@ -2,7 +2,7 @@ const util = require('util');
 const { Client, Permissions } = require('discord.js');
 const client = new Client();
 
-client.on('ready', () => {
+client.once('ready', () => {
 	console.log('Ready!');
 });
 
