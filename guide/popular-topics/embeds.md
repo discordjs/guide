@@ -168,9 +168,9 @@ channel.send({ files: [file], embed: exampleEmbed });
 
 ## Resending embeds
 
-At some point in your bot development, you might want to get an embed from a message that's already sent, edit it, and send it again.
+At some point in your bot development, you might want to get an embed from a message that you're receiving, edit it, and send it again.
 
-To achieve this, you retrieve the embed from the messages embed array (`message.embeds`) and pass it to the RichEmbed constructor. The constructed RichEmbed can then of course also be edit before sending it again if you wish to do so.
+To achieve this, you retrieve the embed from the messages embed array (`message.embeds`) and pass it to the RichEmbed constructor. The constructed RichEmbed can then be edited before sending it again.
 
 <warning>You cannot just resend the received embed structure! It's a [MessageEmbed](https://discord.js.org/#/docs/main/stable/class/MessageEmbed) rather than a RichEmbed and contains circular references that prevent sending.</warning>
 
