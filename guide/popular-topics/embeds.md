@@ -188,7 +188,7 @@ channel.send(exampleEmbed);
 - The timestamp will automatically adjust the timezone depending on the user's device
 - Mentions of any kind will only render correctly in field values and descriptions
 - Mentions in embeds will not trigger a notification
-- Embeds allow masked links (e.g. `[Guide](https://discordjs.guide/)`), but only in field values and descriptions
+- Embeds allow masked links (e.g. `[Guide](https://discordjs.guide/ 'optional hovertext')`), but only in description and field values
 
 ## Embed limits
 
