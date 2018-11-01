@@ -33,7 +33,7 @@ const snekfetch = require('snekfetch');
 
 const client = new Discord.Client();
 
-client.on('ready', () => {
+client.once('ready', () => {
 	console.log('Ready!');
 });
 

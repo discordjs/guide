@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
 
-client.on('ready', () => {
+client.once('ready', () => {
 	console.log('Ready!');
 });
 

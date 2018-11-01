@@ -9,7 +9,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require('./config.json');
 
-client.on('ready', () => {
+client.once('ready', () => {
 	console.log('Ready!');
 });
 
@@ -130,7 +130,7 @@ Here are some examples of ways you can benefit from arrow functions over regular
 
 ```js
 // regular functions, full ES5
-client.on('ready', function() {
+client.once('ready', function() {
 	console.log('Ready!');
 });
 
@@ -156,7 +156,7 @@ var collector = message.createReactionCollector(filter, { time: 15000 });
 
 ```js
 // arrow functions, full ES6
-client.on('ready', () => console.log('Ready!'));
+client.once('ready', () => console.log('Ready!'));
 
 client.on('typingStart', (channel, user) => console.log(`${user} started typing in ${channel}`));
 
