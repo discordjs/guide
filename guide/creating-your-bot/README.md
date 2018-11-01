@@ -40,9 +40,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 // when the client is ready, run this code
-// this event will trigger whenever your bot:
-// - finishes logging in
-// - reconnects after disconnecting
+// this event will only trigger one time after logging in
 client.once('ready', () => {
 	console.log('Ready!');
 });
@@ -63,7 +61,7 @@ client.on('message', message => {
 });
 ```
 
-Save the file, go back to your console, and start the process up again. Whenever a message is sent inside a channel your bot has access to, the message's content will be logged to your console. Go ahead and test it out!
+Notice how the code uses `.on` rather than `.once` like in the ready event. This means that it can trigger multiple times. Save the file, go back to your console, and start the process up again. Whenever a message is sent inside a channel your bot has access to, the message's content will be logged to your console. Go ahead and test it out!
 
 <tip>Inside your console, you can press the up arrow on your keyboard to bring up the latest commands you've run. Pressing `Up` and then `Enter` after closing the process is a nice, quick way to start it up again (as opposed to typing out the name each time).</tip>
 
