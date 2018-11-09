@@ -23,9 +23,9 @@ The command handler you've been building so far doesn't do much aside from dynam
 In this short (but necessary) refactor, you:
 
 1. Renamed the original `command` variable to `commandName` (to be descriptive about what it actually is, and so that you can name one of our variables as `command` later).
-2. Changed the following if statement appropriately.
+2. Changed the following `if` statement appropriately.
 3. Made a variable named `command` which is the actual command object.
-4. Changed the line inside the try/catch statement to use the `command` variable instead.
+4. Changed the line inside the `try/catch` statement to use the `command` variable instead.
 
 Now you can start adding features!
 
@@ -50,7 +50,7 @@ module.exports = {
 };
 ```
 
-This is fine if you only have a few commands that require arguments. However, if you plan on making a lot of commands and don't want to copy & paste that if statement each time, it'd be a smart idea to change that check into something simpler.
+This is fine if you only have a few commands that require arguments. However, if you plan on making a lot of commands and don't want to copy & paste that `if` statement each time, it'd be a smart idea to change that check into something simpler.
 
 Here are the changes you'll be making:
 
@@ -84,7 +84,7 @@ Now whenever you set `args` to `true` in one of your command files, it'll perfor
 
 #### Expected command usage
 
-It's good UX (user experience) to let the user know that a command requires arguments when they don't provide any (that, and it also prevents your code from breaking). With that being said, letting them know what kind of arguments are expecting is even better.
+It's good UX (user experience) to let the user know that a command requires arguments when they don't provide any (it also prevents your code from breaking). Letting them know what kind of arguments are expected is even better.
 
 Here's a simple implementation of such a thing. For this example, pretend you have a `!role` command, where the first argument is the user to give the role, and the second argument is the name of the role to give them.
 
@@ -111,7 +111,7 @@ In your main file:
 	}
 ```
 
-Use an if statement to check if the `usage` property exists (and is truthy) first, so that you don't accidentally end up with `undefined` in the reply string (in the case that you forget to properly supply the property in our command file, or some similar incident). A simple addition like such can easily improve the end user's UX.
+Use an `if` statement to check if the `usage` property exists (and is truthy) first, so that you don't accidentally end up with `undefined` in the reply string (in the case that you forget to properly supply the property in your command file, or some similar incident). A simple precaution such as this can greatly improve the user experience.
 
 ### Guild only commands
 
@@ -140,9 +140,9 @@ Now when you try to use the kick command inside a DM, you'll get the appropriate
 
 ### Cooldowns
 
-Spam is something you generally want to avoid - especially if one of you command requires calls to other APIs, or takes a bit of time to build/send. This is also a very common feature bot developers want to integrate into their projects, so let's get started on that!
+Spam is something you generally want to avoid - especially if one of your commands requires calls to other APIs, or takes a bit of time to build/send. This is also a very common feature bot developers want to integrate into their projects, so let's get started on that!
 
-We'll be using the ping command to test this on. Add in the following bit of code:
+You'll be using the ping command to test this on. Add in the following bit of code:
 
 ```diff
 module.exports = {
@@ -156,13 +156,13 @@ module.exports = {
 
 This is the amount (in seconds) that the user will have to wait before being able to properly use that command again. You'll be using Collections again to store what you need.
 
-In your main file, add in this line (preferably somewhere above your ready event):
+In your main file, add in this line (preferably somewhere above your `ready` event):
 
 ```js
 const cooldowns = new Discord.Collection();
 ```
 
-Again in your main file, directly above the try/catch, add in the following:
+Again in your main file, directly above the `try/catch`, add in the following:
 
 ```js
 if (!cooldowns.has(command.name)) {
@@ -173,10 +173,7 @@ const now = Date.now();
 const timestamps = cooldowns.get(command.name);
 const cooldownAmount = (command.cooldown || 3) * 1000;
 
-if (!timestamps.has(message.author.id)) {
-	// ...
-}
-else {
+if (timestamps.has(message.author.id)) {
 	// ...
 }
 ```
@@ -185,40 +182,33 @@ You check if the `cooldowns` Collection has the command set in it yet. If not, t
 
 1. A variable with the current timestamp.
 2. A variable that `.get()`s the Collection for the triggered command.
-3. A variable that gets the necessary cooldown amount. If you don't supply it in our command file, it'll default to 3. Afterwards, convert it to the proper amount of milliseconds.
+3. A variable that gets the necessary cooldown amount. If you don't supply it in your command file, it'll default to 3. Afterwards, convert it to the proper amount of milliseconds.
 
-After that, create a simple if/else statement to check if the Collection has the author ID in it yet or not.
+After that, create a simple `if` statement to check if the `timestamps` Collection has the author ID in it yet.
 
-Continuing with your current setup, inside the if statement, this is all you'll have in it:
-
-```js
-if (!timestamps.has(message.author.id)) {
-	timestamps.set(message.author.id, now);
-	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-}
-```
-
-If the `timestamps` Collection doesn't have the message author's ID, set it in with the current timestamp and create a `setTimeout()` to automatically delete it later, depending on that command's cooldown number.
-
-Now all that's left is the else part of our statement. Here's what you'll be using:
-
-<!-- eslint-skip -->
+Continuing with your current setup, this is the complete `if` statement:
 
 ```js
-else {
+if (timestamps.has(message.author.id)) {
 	const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
 
 	if (now < expirationTime) {
 		const timeLeft = (expirationTime - now) / 1000;
 		return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
 	}
-
-	timestamps.set(message.author.id, now);
-	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 }
 ```
 
-Nothing overly complex here either. Since the `timestamps` Collection has the author ID in it, you `.get()` it and then sum it up with the `cooldownAmount` variable, in order to get the correct expiration timestamp. You then check to see if it's actually expired or not, and return a message letting the user know how much time is left until they can use that command again if the cooldown hasn't expired. If it has, use the same code as the if statement to set the cooldown again.
+Since the `timestamps` Collection has the author ID in it, you `.get()` it and then sum it up with the `cooldownAmount` variable, in order to get the correct expiration timestamp. You then check to see if it's actually expired or not.
+
+If the `expirationTime` has not passed, you return a message letting the user know how much time is left until they can use that command again. As you will see shortly, the author ID should be deleted from the `timestamps` Collection upon expiration, but you should take this extra precaution to avoid potential UX problems.
+
+Finally, if the `timestamps` Collection doesn't have the message author's ID (or if the author ID did not get deleted as planned), `.set()` the author ID with the current timestamp and create a `setTimeout()` to automatically delete it after the cooldown period has passed:
+
+```js
+timestamps.set(message.author.id, now);
+setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+```
 
 ### Command aliases
 
