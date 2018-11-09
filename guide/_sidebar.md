@@ -36,7 +36,7 @@
 	* **Database**
 	* [Storing data with Sequelize](/sequelize/)
 	* [Making a currency system](/sequelize/currency)
-	* [Building a per-guild prefix system](/keyv)
+	* [Building a per-guild prefix system](/keyv/)
 
 	* **Frameworks**
 	* [Commando](/commando/)

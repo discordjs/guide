@@ -129,10 +129,10 @@ if (command === 'prefix') {
 	// if there's at least one argument, set the prefix
 	if (args.length) {
 		await prefixes.set(message.guild.id, args[0]);
-		return message.channel.send(`successfully set prefix to \`${args[0]}\``);
+		return message.channel.send(`Successfully set prefix to \`${args[0]}\``);
 	}
 
-	return message.channel.send(`prefix is \`${await prefixes.get(message.guild.id) || globalPrefix}\``);
+	return message.channel.send(`Prefix is \`${await prefixes.get(message.guild.id) || globalPrefix}\``);
 }
 ```
 
@@ -140,16 +140,26 @@ You will probably want to setup additional validation such as required permissio
 
 ### Usage
 
-```
-> .prefix
-< prefix is `.`
-
-> .prefix $
-< successfully set prefix to `$`
-
-> $prefix
-< prefix is `$`
-```
+<discord-messages>
+	<discord-message author="User" avatar="djs">
+		.prefix
+	</discord-message>
+	<discord-message author="Tutorial Bot" :bot="true">
+		Prefix is `.`
+	</discord-message>
+	<discord-message author="User" avatar="djs">
+		.prefix $
+	</discord-message>
+	<discord-message author="Tutorial Bot" :bot="true">
+		Successfully set prefix to `$`
+	</discord-message>
+	<discord-message author="User" avatar="djs">
+		$prefix
+	</discord-message>
+	<discord-message author="Tutorial Bot" :bot="true">
+		Prefix is `$`
+	</discord-message>
+</discord-messages>
 
 ## Next steps
 
