@@ -55,5 +55,6 @@
 	* **Additional Info**
 	* [Understanding notation](/additional-info/notation)
 	* [ES6 syntax examples](/additional-info/es6-syntax)
+	* [Collections](/additional-info/collections)
 	* [Understanding async/await](/additional-info/async-await)
 	* [Using a REST API](/additional-info/rest-api)
