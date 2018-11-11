@@ -44,6 +44,8 @@ One possible scenario causing this: the channel has permission overwrites for th
 
 As you only check for `SEND_MESSAGES` the bot will try to execute the send, but since `VIEW_CHANNEL` is missing, the request is denied by the API.
 
+<warning>For voice channels this same principle applies to the permission `CONNECT` as well</warning>
+
 ## Limitations and oddities
 
 - Your bot needs `MANAGE_ROLES` in its base permissions to change base permissions.
@@ -62,6 +64,7 @@ During your development you will likely run into `DiscordAPIError: Missing Permi
 - It is trying to execute an action on a guild member with a role higher than or equal to your bots highest role.
 - It is trying to modify or assign a role that is higher than or equal to its highest role.
 - It is trying to execute a forbidden action on the server owner.
-- It is trying to execute an action based on another unfulfilled factor (for example reserved for partnered guilds). 
+- It is trying to execute an action based on another unfulfilled factor (for example reserved for partnered guilds).
+- It is trying to execute an action on a voice channel without the `VIEW_CHANNEL` permission.
 
 <warning>The `ADMINISTRATOR` permission being granted does not skip any hierarchical check!</warning>
