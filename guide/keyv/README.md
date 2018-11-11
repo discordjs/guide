@@ -83,7 +83,7 @@ const globalPrefix = '.';
 This guide uses a very basic command handler with some added complexity to allow for multiple prefixes. For more a more robust command handler, look at the [command handling](/command-handling) guide.
 
 ```js
-client.on('message', async (message) => {
+client.on('message', async message => {
 	if (message.author.bot) return;
 
 	let args;
@@ -91,7 +91,6 @@ client.on('message', async (message) => {
 	if (message.guild) {
 		let prefix;
 
-		// check if the message starts with the global prefix
 		if (message.content.startsWith(globalPrefix)) {
 			prefix = globalPrefix;
 		}
@@ -102,15 +101,12 @@ client.on('message', async (message) => {
 		}
 
 		// if we found a prefix, setup args; otherwise, this isn't a command
-		if (prefix) args = message.content.slice(prefix.length).split(/\s+/);
-		else return;
+		if (!prefix) return;
+		args = message.content.slice(prefix.length).split(/\s+/);
 	}
 	else {
 		// handle DMs
-		let slice = 0;
-
-		// check if they used the global prefix
-		if (message.content.startsWith(prefix)) slice = globalPrefix.length;
+		const slice = message.content.startsWith(globalPrefix) ? globalPrefix.length : 0;
 		args = message.content.slice(slice).split(/\s+/);
 	}
 
