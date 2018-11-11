@@ -253,10 +253,10 @@ const adminPermissions = new Permissions('ADMINISTRATOR');
 console.log(adminPermissions.has('MANAGE_CHANNELS'));
 // output: true
 
-console.log(adminPermissions.has('MANAGE_CHANNELS'), true);
+console.log(adminPermissions.has('MANAGE_CHANNELS', true));
 // output: true
 
-console.log(adminPermissions.has('MANAGE_CHANNELS'), false);
+console.log(adminPermissions.has('MANAGE_CHANNELS', false));
 // output: false
 ```
 
