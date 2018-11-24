@@ -36,6 +36,7 @@
 	* **Database**
 	* [Storing data with Sequelize](/sequelize/)
 	* [Making a currency system](/sequelize/currency)
+	* [Working with Keyv](/keyv/)
 
 	* **Frameworks**
 	* [Commando](/commando/)
@@ -51,7 +52,7 @@
 	* **Improving your dev environment**
 	* [Managing your bot process with PM2](/improving-dev-environment/pm2)
 	* [Setting up package.json scripts](/improving-dev-environment/package-json-scripts)
-	
+
 	* **Additional Info**
 	* [Understanding notation](/additional-info/notation)
 	* [ES6 syntax examples](/additional-info/es6-syntax)
