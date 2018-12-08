@@ -39,7 +39,15 @@ else if (command === 'args-info') {
 
 If you try it out, you'll get something like this:
 
-![Arguments testing](assets/img/w3F8C63.png)
+<discord-messages>
+	<discord-message author="User" avatar="djs">
+		!args-info here are my arguments
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		Command name: args-info
+		Arguments: here,are,my,arguments
+	</discord-message>
+</discord-messages>
 
 Looks good! Don't worry about the comma separation; that's the expected output when trying to send an array as a string.
 
@@ -62,13 +70,35 @@ else if (command === 'args-info') {
 
 So if the first argument provided is equal to "foo", then send back "bar". Otherwise, just send back the argument the user provided.
 
-![foo bar example](assets/img/v3Ocywd.png)
+<discord-messages>
+	<discord-message author="User" avatar="djs">
+		!args-info foo
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		bar
+	</discord-message>
+	<discord-message author="User" avatar="djs">
+		!args-info not-foo
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		First argument: not-foo
+	</discord-message>
+</discord-messages>
 
 #### Caveats
 
 Currently, you're using `.split(' ')` to split the command arguments. However, there's actually a slight issue with this. As is, it'll split the string by each and every space. Well, what happens if someone accidentally (or even purposely) adds additional spaces? Here's what:
 
-![extra spaces args](assets/img/DMuC8t1.png)
+<discord-messages>
+	<discord-message author="User" avatar="djs">
+		!args-info     here    are    my    arguments
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		Command name: args-info
+		Arguments: here,,,,,are,,,,,my,,,,,,arguments
+		Argument length: 20
+	</discord-message>
+</discord-messages>
 
 If you've never done something like this before, this probably isn't what you'd expect, right? Thankfully, there's a simple solution for this issue. The red line is what to remove, and the green line is what to replace it with.
 
@@ -77,7 +107,16 @@ If you've never done something like this before, this probably isn't what you'd 
 + const args = message.content.slice(prefix.length).split(/ +/);
 ```
 
-![extra spaces args fixed](assets/img/ibSgjAC.png)
+<discord-messages>
+	<discord-message author="User" avatar="djs">
+		!args-info     here    are    my    arguments
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		Command name: args-info
+		Arguments: here,are,my,arguments
+		Argument length: 4
+	</discord-message>
+</discord-messages>
 
 Awesome! Nothing to worry in that regard about now. You're now using something called a "regular expression" (commonly referred to as "regex") to handle that small (but important) bug.
 
@@ -103,7 +142,14 @@ else if (command === 'kick') {
 
 And as you can see, it works!
 
-![user mention example](assets/img/AsAa9dV.png)
+<discord-messages>
+	<discord-message author="User" avatar="djs">
+		!kick <mention>Tutorial Bot</mention>
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		You want to kick: Tutorial Bot
+	</discord-message>
+</discord-messages>
 
 But what happens if you try to use the command without mentioning anybody? If you try it yourself, you'll notice that the bot doesn't respond (due to it crashing), and you should see something like this in your console:
 
@@ -128,7 +174,20 @@ Since `message.mentions.users` is a Collection, it has a `.size` property. If no
 
 If you try again, it should work as expected.
 
-![after sanity check](assets/img/9chaOim.png)
+<discord-messages>
+	<discord-message author="User" avatar="djs">
+		!kick
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		<mention :highlight="true">User</mention>, you need to tag a user to kick them!
+	</discord-message>
+	<discord-message author="User" avatar="djs">
+		!kick <mention>Tutorial Bot</mention>
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		You want to kick: Tutorial Bot
+	</discord-message>
+</discord-messages>
 
 #### Working with multiple mentions
 
@@ -139,7 +198,7 @@ Let's say you have some sort of `!avatar` command, where it'll display the avata
 ```js
 else if (command === 'avatar') {
 	if (!message.mentions.users.size) {
-		return message.channel.send(`Your avatar: ${message.author.displayAvatarURL}`);
+		return message.channel.send(`Your avatar: <${message.author.displayAvatarURL}>`);
 	}
 
 	// ...
@@ -150,7 +209,15 @@ else if (command === 'avatar') {
 
 That part is simple; just recycle the if statement you used in the section above and displaying the link to your avatar.
 
-![avatar command](assets/img/3Ilv3lE.png)
+<discord-messages>
+	<discord-message author="User" avatar="djs">
+		!avatar
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		Your avatar:
+		https://cdn.discordapp.com/avatars/459757892778590229/72153038872deb9b81a2444a0edcf041.png?size=2084
+	</discord-message>
+</discord-messages>
 
 The next part is where it takes a turn - displaying the avatars of all the mentioned users. But it's simpler than you may think! `message.mentions.users` returns a Collection (as previously mentioned), which you can loop over in a number of different ways. You'll be using `.map()` to loop here, since it allows you to easily collect and store data in a variable in order to send 1 final message in the end, as opposed to multiple.
 
@@ -159,11 +226,11 @@ The next part is where it takes a turn - displaying the avatars of all the menti
 ```js
 else if (command === 'avatar') {
 	if (!message.mentions.users.size) {
-		return message.channel.send(`Your avatar: ${message.author.displayAvatarURL}`);
+		return message.channel.send(`Your avatar: <${message.author.displayAvatarURL}>`);
 	}
 
 	const avatarList = message.mentions.users.map(user => {
-		return `${user.username}'s avatar: ${user.displayAvatarURL}`;
+		return `${user.username}'s avatar: <${user.displayAvatarURL}>`;
 	});
 
 	// send the entire array of strings as a message
@@ -174,7 +241,17 @@ else if (command === 'avatar') {
 
 And ta-da! You now have a list of avatar links of all the users you tagged.
 
-![avatar command multiple users](assets/img/zVUUmRs.png)
+<discord-messages>
+	<discord-message author="User" avatar="djs">
+		!avatar <mention :highlight="true">User</mention> <mention>Tutorialbot</mention>
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		User's avatar:
+		https://cdn.discordapp.com/avatars/459757892778590229/72153038872deb9b81a2444a0edcf041.png?size=2084<br>
+		Tutorial Bot's avatar:
+		https://cdn.discordapp.com/avatars/459757708720209940/d48f3d90d923e9531c02c6bb9850339f.png?size=2084
+	</discord-message>
+</discord-messages>
 
 It does take up a lot of screen, but this is just an example command anyway.
 
@@ -202,7 +279,14 @@ else if (command === 'prune') {
 
 And if you test it, it should work as expected.
 
-![isNaN test](assets/img/lhuPYta.png)
+<discord-messages>
+	<discord-message author="User" avatar="djs">
+		!prune some-string
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		<mention :highlight="true">User</mention>, that doesn't seem to be a valid number.
+	</discord-message>
+</discord-messages>
 
 So what you need to do next is check if the first argument is between X and Y. Following the idea of a prune command, you'll most likely want to use the `.bulkDelete()` method, which allows you to delete multiple messages in one fell swoop.
 
