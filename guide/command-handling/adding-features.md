@@ -136,7 +136,14 @@ if (command.guildOnly && message.channel.type !== 'text') {
 
 Now when you try to use the kick command inside a DM, you'll get the appropriate response which will also prevent your bot from throwing an error.
 
-![guild command inside DMs](assets/img/TiDpsVH.png)
+<discord-messages>
+	<discord-message author="User" avatar="djs">
+		!kick
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		I can't execute that command inside DMs!
+	</discord-message>
+</discord-messages>
 
 ### Cooldowns
 
@@ -238,7 +245,22 @@ The `aliases` property should always contain an array of strings. In your main f
 
 Making those two small changes, you get this:
 
-![aliases](assets/img/0hFEXpW.png)
+<discord-messages>
+	<discord-message author="User" avatar="djs">
+		!avatar <mention :highlight="true">User</mention>
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		User's avatar:
+		https://cdn.discordapp.com/avatars/459757892778590229/72153038872deb9b81a2444a0edcf041.png?size=2084
+	</discord-message>
+	<discord-message author="User" avatar="djs">
+		!icon <mention :highlight="true">User</mention>
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		User's avatar:
+		https://cdn.discordapp.com/avatars/459757892778590229/72153038872deb9b81a2444a0edcf041.png?size=2084
+	</discord-message>
+</discord-messages>
 
 ### A dynamic help command
 
@@ -329,7 +351,25 @@ Once you get the command based off the name or alias they gave, you can start `.
 
 At the end of it all, you should be getting this as a result:
 
-![help commands](assets/img/f5T9OyI.png)
+<discord-messages>
+	<discord-message author="User" avatar="djs">
+		!help
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		Here's a list of all my commands:
+		args-info, avatar, beep, help, kick, ping, prune, server, user-info	<br>
+		You can send `!help [command name]` to get info on a specific command!
+	</discord-message>
+	<discord-message author="User" avatar="djs">
+		!help avatar
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		**Name:** avatar <br>
+		**Aliases:** icon,pfp <br>
+		**Description:** Get the avatar URL of the tagged user(s), or your own avatar. <br>
+		**Cooldown:** 3 second(s)
+	</discord-message>
+</discord-messages>
 
 No more manually editing your help command! If you aren't completely satisfied with how it looks, you can always adjust it to your liking later.
 
