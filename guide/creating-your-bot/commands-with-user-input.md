@@ -44,7 +44,7 @@ If you try it out, you'll get something like this:
 		!args-info here are my arguments
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-		Command name: args-info
+		Command name: args-info <br>
 		Arguments: here,are,my,arguments
 	</discord-message>
 </discord-messages>
@@ -94,8 +94,8 @@ Currently, you're using `.split(' ')` to split the command arguments. However, t
 		!args-info     here    are    my    arguments
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-		Command name: args-info
-		Arguments: here,,,,,are,,,,,my,,,,,,arguments
+		Command name: args-info <br>
+		Arguments: here,,,,,are,,,,,my,,,,,,arguments <br>
 		Argument length: 20
 	</discord-message>
 </discord-messages>
@@ -112,8 +112,8 @@ If you've never done something like this before, this probably isn't what you'd 
 		!args-info     here    are    my    arguments
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-		Command name: args-info
-		Arguments: here,are,my,arguments
+		Command name: args-info <br>
+		Arguments: here,are,my,arguments <br>
 		Argument length: 4
 	</discord-message>
 </discord-messages>

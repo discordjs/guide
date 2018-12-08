@@ -104,7 +104,7 @@ That would display both the server name _and_ the amount of members in it.
 		!server
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-		Server name: Discord Bot Tutorial
+		Server name: Discord Bot Tutorial <br>
 		Total members: 3
 	</discord-message>
 </discord-messages>
@@ -132,7 +132,7 @@ This will display the message author's **username** (not nickname, if they have 
 		!user-info
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-		Your username: User
+		Your username: User <br>
 		Your ID: 20833034795932416
 	</discord-message>
 </discord-messages>
