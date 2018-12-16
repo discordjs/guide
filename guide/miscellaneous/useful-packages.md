@@ -26,7 +26,7 @@ const input = await message.channel.awaitMessages(m => m.author.id === message.a
 	time: 10e3,
 	errors: ['time'],
 });
-const date = moment(input);
+const date = moment(input.first().content);
 ```
 
 Using the "moment-duration-format" extension we could tell the user how many days in the future or past the date is:
@@ -121,9 +121,9 @@ Check the the documentation to find more useful functions.
 <tip>Official documentation: https://www.npmjs.com/package/chalk</tip>
 
 Chalk is not exactly useful for Discord bots themselves, but it will make your terminal output a lot prettier and organized.
-This package lets you colour and style your `console.log`s in many, many different ways; No more simple white on black.
+This package lets you color and style your `console.log`s in many, many different ways; No more simple white on black.
 
-Let's say you want your error messages to be easily visible; Let us give them a nice red colour:
+Let's say you want your error messages to be easily visible; Let us give them a nice red color:
 
 ```js
 console.log(chalk.redBright('FATAL ERROR'), 'Something really bad happened!');
@@ -181,7 +181,7 @@ client.login('token');
 The above code creates a simple logger which will log to both the console and a file called "log" (defined by the `transports` options).  
 The `format` option tells the logger which format to use for the messages, by default it outputs JSON objects.
 While useful, JSON is not very readable, so we are defining a custom format which just displays the log level in all caps alongside the message.
-If you wanted to you could also use the chalk module to make the logger's format a bit prettier by applying colours, etc.
+If you wanted to you could also use the chalk module to make the logger's format a bit prettier by applying colors, etc.
 
 ![winston example](/assets/img/winston.png)
 
