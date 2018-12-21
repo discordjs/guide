@@ -44,6 +44,8 @@ pm2 start your-app-name.js --watch
 
 <tip>The `pm2 start` command can take more optional parameters, but for now only these 2 are relevant for us. If you want to see all the parameters available, you can check the documentation of pm2 [here](http://pm2.keymetrics.io/docs/usage/).</tip>
 
+Once the process is launched with pm2, you can run `pm2 monit` to monitor any and all console outputs from the processes started by pm2. This accounts for any `console.log()` in your code or outputted errors.
+
 ### Setting up booting with your system
 
 Perhaps one of the more useful features of PM2 is being able to boot up with your Operating System. This will ensure that your bot processes will always be started after an (unexpected) reboot (e.g. after a power outage).
