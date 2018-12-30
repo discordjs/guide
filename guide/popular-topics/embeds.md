@@ -9,29 +9,45 @@ In the following section we will explain how you compose an embed, send it, and 
 
 Here is an example of what an embed may look like. We will go over their construction in the next part of this guide.
 
-<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-	<discord-embed slot="embeds" color="#0099ff" title="Some title" url="https://discord.js.org/" thumbnail="https://i.imgur.com/wSTFkRM.png" image="https://i.imgur.com/wSTFkRM.png" footer-image="https://i.imgur.com/wSTFkRM.png" timestamp="01/01/2018" :author="{name: 'Some name', image:'https://i.imgur.com/wSTFkRM.png', url: 'https://discord.js.org/'}">
-		Some description here
-		<embed-fields slot="fields">
-			<embed-field title="Regular field title">
-				Some value here
-			</embed-field>
-			<embed-field title="​">
-				​
-			</embed-field>
-			<embed-field :inline="true" title="Inline field title">
-				Some value here
-			</embed-field>
-			<embed-field :inline="true" title="Inline field title">
-				Some value here
-			</embed-field>
-			<embed-field :inline="true" title="Inline field title">
-				Some value here
-			</embed-field>
-		</embed-fields>
-		<span slot="footer">Some footer text here</span>
-	</discord-embed>
-</discord-message>
+<discord-messages>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		<discord-embed
+			slot="embeds"
+			color="#0099ff"
+			title="Some title"
+			url="https://discord.js.org/"
+			thumbnail="https://i.imgur.com/wSTFkRM.png"
+			image="https://i.imgur.com/wSTFkRM.png"
+			footer-image="https://i.imgur.com/wSTFkRM.png"
+			timestamp="01/01/2018"
+			:author="{
+				name: 'Some name',
+				image: 'https://i.imgur.com/wSTFkRM.png',
+				url: 'https://discord.js.org/',
+			}"
+		>
+			Some description here
+			<embed-fields slot="fields">
+				<embed-field title="Regular field title">
+					Some value here
+				</embed-field>
+				<embed-field title="​">
+					​
+				</embed-field>
+				<embed-field :inline="true" title="Inline field title">
+					Some value here
+				</embed-field>
+				<embed-field :inline="true" title="Inline field title">
+					Some value here
+				</embed-field>
+				<embed-field :inline="true" title="Inline field title">
+					Some value here
+				</embed-field>
+			</embed-fields>
+			<span slot="footer">Some footer text here</span>
+		</discord-embed>
+	</discord-message>
+</discord-messages>
 
 ## Using the RichEmbed constructor
 

@@ -251,14 +251,16 @@ Making those two small changes, you get this:
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
 		User's avatar:
-		https://cdn.discordapp.com/avatars/459757892778590229/72153038872deb9b81a2444a0edcf041.png?size=2084
+		https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png?size=2084
+		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
 	</discord-message>
 	<discord-message author="User" avatar="djs">
 		!icon <mention :highlight="true">User</mention>
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
 		User's avatar:
-		https://cdn.discordapp.com/avatars/459757892778590229/72153038872deb9b81a2444a0edcf041.png?size=2084
+		https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png?size=2084
+		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
 	</discord-message>
 </discord-messages>
 

@@ -147,7 +147,7 @@ And as you can see, it works!
 		!kick <mention>Tutorial Bot</mention>
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-		You want to kick: Tutorial Bot
+		You wanted to kick: Tutorial Bot
 	</discord-message>
 </discord-messages>
 
@@ -185,7 +185,7 @@ If you try again, it should work as expected.
 		!kick <mention>Tutorial Bot</mention>
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-		You want to kick: Tutorial Bot
+		You wanted to kick: Tutorial Bot
 	</discord-message>
 </discord-messages>
 

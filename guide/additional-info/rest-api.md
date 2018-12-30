@@ -143,8 +143,7 @@ If you've followed the tutorial, you should have something like this:
 		!urban hello world
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-		The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter
-		of most programming books.
+		The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books.
 	</discord-message>
 </discord-messages>
 
