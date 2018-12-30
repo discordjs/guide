@@ -31,6 +31,7 @@
 
 * **Miscellaneous**
 	* [Parsing mention arguments](/miscellaneous/parsing-mention-arguments)
+	* [Useful packages](/miscellaneous/useful-packages)
 
 * **Extended Learning**
 	* **Database**
