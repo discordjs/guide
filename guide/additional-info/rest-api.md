@@ -132,7 +132,21 @@ Here, you are simply getting the first object from the array of objects called `
 
 If you've followed the tutorial, you should have something like this:
 
-![Basic Urban Command](/assets/img/N0t4M.png)
+<discord-messages>
+	<discord-message author="User" avatar="djs">
+		!urban njaksdcas
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		<mention :highlight="true">User</mention>, No results for **njaksdcas**
+	</discord-message>
+	<discord-message author="User" avatar="djs">
+		!urban hello world
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter
+		of most programming books.
+	</discord-message>
+</discord-messages>
 
 Now, let's just make this an [embed](/popular-topics/miscellaneous-examples?id=sending-an-embed).
 
@@ -160,7 +174,31 @@ message.channel.send(embed);
 
 Now, if you do that same command again, you should get this:
 
-![Embeded Urban Command](/assets/img/RMv88.png)
+<discord-messages>
+	<discord-message author="User" avatar="djs">
+		!urban hello world
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		<discord-embed slot="embeds" color="#EFFF00" title="hello world" url="https://www.urbandictionary.com/define.php?term=hello%20world" >
+			<embed-fields slot="fields">
+				<embed-field title="Definition">
+					The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books. 
+				</embed-field>
+				<embed-field title="Example">
+					programming noob: Hey I just attended my first programming lesson earlier! <br>
+					.NET Veteran: Oh? What can you do? <br>
+					programming noob: I could make a dialog box pop up which says "Hello World!" !!! <br>
+					.NET Veteran: lmao.. hey guys! look.. check out this "hello world" programmer <br><br>
+					Console.WriteLine("Hello World")
+				</embed-field>
+				<embed-field title="Rating">
+					122 thumbs up. <br>
+					42 thumbs down.
+				</embed-field>
+			</embed-fields>
+		</discord-embed>
+	</discord-message>
+</discord-messages>
 
 ## Resulting code
 
