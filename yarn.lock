@@ -3130,6 +3130,10 @@ he@1.2.x, he@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
 
+hex-to-rgba@^1.0.1:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/hex-to-rgba/-/hex-to-rgba-1.0.2.tgz#1273dc05a499ddc955b80220ae04dcf542decfec"
+
 hmac-drbg@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
@@ -6610,6 +6614,16 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-click-outside@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/vue-click-outside/-/vue-click-outside-1.0.7.tgz#cdd2b1605e3c4944784e1794eae4a12a0f700bd6"
+
+vue-discord-message@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/vue-discord-message/-/vue-discord-message-2.0.0.tgz#80218b41c5a22aea48308681605155d22be21729"
+  dependencies:
+    hex-to-rgba "^1.0.1"
+
 vue-hot-reload-api@^2.3.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.1.tgz#b2d3d95402a811602380783ea4f566eb875569a2"
@@ -6674,6 +6688,12 @@ vuepress-html-webpack-plugin@^3.2.0:
     tapable "^1.0.0"
     toposort "^1.0.0"
     util.promisify "1.0.0"
+
+vuepress-theme-yuu@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/vuepress-theme-yuu/-/vuepress-theme-yuu-1.0.0.tgz#970b6aa8f5f6bd2e5db5d00539ccacba83ad4389"
+  dependencies:
+    vue-click-outside "^1.0.7"
 
 vuepress@^0.14.4:
   version "0.14.8"
