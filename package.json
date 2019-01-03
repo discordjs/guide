@@ -5,8 +5,7 @@
   "scripts": {
     "lint": "eslint . --ext md,js",
     "serve": "vuepress dev guide",
-    "build": "vuepress build guide",
-    "precommit": "npm run lint"
+    "build": "vuepress build guide"
   },
   "repository": "https://github.com/discordjs/guide.git",
   "keywords": [
@@ -26,7 +25,6 @@
   "devDependencies": {
     "eslint": "^4.17.0",
     "eslint-plugin-markdown": "^1.0.0",
-    "husky": "^0.14.3",
     "vuepress": "^0.14.4"
   }
 }
