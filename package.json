@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "scripts": {
     "lint": "eslint . --ext md,js",
-    "serve": "docsify serve guide --open",
+    "serve": "vuepress dev guide",
+    "build": "vuepress build guide",
     "precommit": "npm run lint"
   },
   "repository": "https://github.com/discordjs/guide.git",
@@ -23,9 +24,9 @@
   },
   "homepage": "https://discordjs.guide",
   "devDependencies": {
-    "docsify-cli": "^4.2.1",
     "eslint": "^4.17.0",
-    "eslint-plugin-markdown": "eslint/eslint-plugin-markdown",
-    "husky": "^0.14.3"
+    "eslint-plugin-markdown": "^1.0.0",
+    "husky": "^0.14.3",
+    "vuepress": "^0.14.4"
   }
 }
