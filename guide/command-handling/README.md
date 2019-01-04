@@ -33,7 +33,7 @@ client.login(token);
 ```
 
 ::: tip
-We'll be moving over the commands created in [the previous page](/creating-your-bot/commands-with-user-input) as well, but for the sake of keeping the base code short, those commands have been omitted from the codeblock above.
+We'll be moving over the commands created in [the previous page](/creating-your-bot/commands-with-user-input.md) as well, but for the sake of keeping the base code short, those commands have been omitted from the codeblock above.
 :::
 
 ## Individual command files

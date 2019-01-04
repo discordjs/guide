@@ -66,7 +66,7 @@ client.on('message', message => {
 });
 ```
 
-Now you can easily test the waters by upgrading the avatar command from [last time](/creating-your-bot/commands-with-user-input).
+Now you can easily test the waters by upgrading the avatar command from [last time](/creating-your-bot/commands-with-user-input.md).
 This is what we have so far. It is pretty simple, it will show the avatar of who used the command.
 
 ```js

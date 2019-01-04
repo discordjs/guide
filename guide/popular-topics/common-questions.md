@@ -6,7 +6,7 @@
 * `<message>` is a placeholder for the Message object, such as `client.on('message', message => { ... });`.
 * `<guild>` is a placeholder for the Guild object, such as `<message>.guild` or `<client>.guilds.get('<id>')`.
 
-For a more detailed explanation on the notations commonly used in this guide, the docs, and the support server, see [here](/additional-info/notation).
+For a more detailed explanation on the notations commonly used in this guide, the docs, and the support server, see [here](/additional-info/notation.md).
 
 ## Administrative
 
@@ -167,7 +167,7 @@ Tags inside certain areas of an embed may display correctly, but will not actual
 ```
 
 ::: tip
-If you want to learn more about this syntax or want to learn about reaction collectors as well, check out [this dedicated guide page for collectors](/popular-topics/collectors)!
+If you want to learn more about this syntax or want to learn about reaction collectors as well, check out [this dedicated guide page for collectors](/popular-topics/collectors.md)!
 :::
 
 ### How do I react to the message my bot sent?
@@ -182,7 +182,7 @@ If you want to learn more about this syntax or want to learn about reaction coll
 ```
 
 ::: tip
-If you want to learn more about reactions, check out [this dedicated guide on reactions](/popular-topics/reactions)!
+If you want to learn more about reactions, check out [this dedicated guide on reactions](/popular-topics/reactions.md)!
 :::
 
 ### How do I create a restart command?
@@ -192,11 +192,11 @@ process.exit();
 ```
 
 ::: tip
-`process.exit()` will only kill your Node process, but when using [PM2](http://pm2.keymetrics.io/), it will restart the process whenever it gets killed. You can read our guide on PM2 [here](/improving-dev-environment/pm2).
+`process.exit()` will only kill your Node process, but when using [PM2](http://pm2.keymetrics.io/), it will restart the process whenever it gets killed. You can read our guide on PM2 [here](/improving-dev-environment/pm2.md).
 :::
 
 ::: warning
-Be sure to [limit this to your own ID](/popular-topics/common-questions?id=how-do-i-limit-a-command-to-a-single-user) so that other users can't restart your bot!
+Be sure to [limit this to your own ID](/popular-topics/common-questions.md#how-do-i-limit-a-command-to-a-single-user) so that other users can't restart your bot!
 :::
 
 ### What is the difference between a User and a GuildMember?

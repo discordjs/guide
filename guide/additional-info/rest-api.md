@@ -41,12 +41,12 @@ client.login('pleaseinsertyourtokenheresothistutorialcanwork');
 ```
 
 ::: tip
-We're going to take advantage of [destructuring](/additional-info/es6-syntax?id=destructuring) in this tutorial to maintain readability.
+We're going to take advantage of [destructuring](/additional-info/es6-syntax.md#destructuring) in this tutorial to maintain readability.
 :::
 
 ## Using node-fetch
 
-node-fetch is a lightweight module that brings the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) which is available in browsers to node. It is a promised based library. If you aren't already familiar with promises, you should read up on them [here](/additional-info/async-await).
+node-fetch is a lightweight module that brings the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) which is available in browsers to node. It is a promised based library. If you aren't already familiar with promises, you should read up on them [here](/additional-info/async-await.md).
 
 In this tutorial we'll be making a bot with 2 API-based commands. The first will be using [random.cat](https://aws.random.cat) and the other will use [Urban Dictionary](https://www.urbandictionary.com).
 
@@ -151,7 +151,7 @@ If you've followed the tutorial, you should have something like this:
 	</discord-message>
 </div>
 
-Now, let's just make this an [embed](/popular-topics/miscellaneous-examples?id=sending-an-embed).
+Now, let's just make this an [embed](/popular-topics/miscellaneous-examples.md#sending-an-embed).
 
 We are also going to be defining a utility function at the top of our file so that our embed doesn't error when the field value is over 1024 characters. Here is a bit of code to do that:
 

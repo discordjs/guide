@@ -9,7 +9,7 @@ For this guide, we'll be using `canvas@next`. At the time of writing, that is `c
 :::
 
 ::: warning
-Be sure that you're familiar with things like [async/await](/additional-info/async-await) and [object destructuring](/additional-info/es6-syntax?id=object-destructuring) before continuing, as we'll be making use of features like these.
+Be sure that you're familiar with things like [async/await](/additional-info/async-await.md) and [object destructuring](/additional-info/es6-syntax.md#object-destructuring) before continuing, as we'll be making use of features like these.
 :::
 
 ## Installation

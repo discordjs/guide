@@ -1,7 +1,7 @@
 # Miscellaneous examples
 
 ::: tip
-For more, even shorter code examples, check out [the common questions page](/popular-topics/common-questions)!
+For more, even shorter code examples, check out [the common questions page](/popular-topics/common-questions.md)!
 :::
 
 ## Play music from YouTube
@@ -104,12 +104,12 @@ client.login('your-token-goes-here');
 ```
 
 ::: tip
-If you aren't familiar with the syntax used on the `const [, matchedPrefix] = ...` line, that's called "array destructuring". Feel free to read more about it in the [ES6 syntax](/additional-info/es6-syntax?id=array-destructuring) guide!
+If you aren't familiar with the syntax used on the `const [, matchedPrefix] = ...` line, that's called "array destructuring". Feel free to read more about it in the [ES6 syntax](/additional-info/es6-syntax.md#array-destructuring) guide!
 :::
 
 ## Emoji characters
 
-If you've tried using [the usual method of retrieving unicode emojis](/popular-topics/reactions?id=unicode-emojis), you may have noticed that some characters don't provide the expected results. Here's a short snippet that'll help with that issue. You can toss this into a file of its own and use it anywhere you need!
+If you've tried using [the usual method of retrieving unicode emojis](/popular-topics/reactions.md#unicode-emojis), you may have noticed that some characters don't provide the expected results. Here's a short snippet that'll help with that issue. You can toss this into a file of its own and use it anywhere you need!
 
 ```js
 // emojiCharacters.js

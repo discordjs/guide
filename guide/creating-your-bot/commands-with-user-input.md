@@ -1,7 +1,7 @@
 # Commands with user input (a.k.a. "arguments")
 
 ::: tip
-This page is a follow-up and bases its code off of [the previous page](/creating-your-bot/adding-more-commands).
+This page is a follow-up and bases its code off of [the previous page](/creating-your-bot/adding-more-commands.md).
 :::
 
 Sometimes you'll want to determine the result of a command depending on user input. It's a very common case with a very simple solution. This section will teach you how to extract user input from a message and use it in your code. Generally, you'll hear other people refer to this as "arguments", and you should refer to them as that as well.
@@ -261,7 +261,7 @@ And ta-da! You now have a list of avatar links of all the users you tagged.
 
 It does take up a lot of screen, but this is just an example command anyway.
 
-<p class="tip">If you're looking for a more advanced way to handle mentions as arguments you can check out [this guide](/miscellaneous/parsing-mention-arguments).</p>
+<p class="tip">If you're looking for a more advanced way to handle mentions as arguments you can check out [this guide](/miscellaneous/parsing-mention-arguments.md).</p>
 
 ## Number ranges
 

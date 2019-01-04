@@ -4,7 +4,7 @@ Discord.js comes with this utility class known as `Collection`.
 It extends JavaScript's native `Map` class, so it has all the features of `Map` and more!  
 
 ::: warning
-If you're not familiar with `Map`, read [MDN's page on it](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) before continuing. You should be familiar with `Array` [methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) as well. We will also be using some ES6 features, so read up [here](/additional-info/es6-syntax) if you do not know what they are.
+If you're not familiar with `Map`, read [MDN's page on it](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) before continuing. You should be familiar with `Array` [methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) as well. We will also be using some ES6 features, so read up [here](/additional-info/es6-syntax.md) if you do not know what they are.
 :::
 
 In essence, `Map` allow for an association between unique keys and their values, but lack an iterative interface.

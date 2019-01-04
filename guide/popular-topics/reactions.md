@@ -136,7 +136,7 @@ If you try again with either of the codeblocks above, you'll get the result you 
 ![Emojis reacting in correct order](~@/images/1IWSJ1C.png)
 
 ::: tip
-If you aren't familiar with Promises or `async`/`await`, you can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [our guide page on async/await](/additional-info/async-await)!
+If you aren't familiar with Promises or `async`/`await`, you can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [our guide page on async/await](/additional-info/async-await.md)!
 :::
 
 However, if you don't mind the order the emojis react in, you can take advantage of `Promise.all()`, like so:
@@ -156,7 +156,7 @@ The benefit of this small optimization is that you can use `.then()` to handle w
 
 ## Awaiting reactions
 
-A common use case for reactions in commands is having a user confirm or deny an action, or creating a poll system. Luckily, we actually [already have a guide page that covers this](/popular-topics/collectors)! Check out that page if you want a more in-depth explanation. Otherwise, here's a basic example for reference:
+A common use case for reactions in commands is having a user confirm or deny an action, or creating a poll system. Luckily, we actually [already have a guide page that covers this](/popular-topics/collectors.md)! Check out that page if you want a more in-depth explanation. Otherwise, here's a basic example for reference:
 
 ```js
 message.react('👍').then(() => message.react('👎'));

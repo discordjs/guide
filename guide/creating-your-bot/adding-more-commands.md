@@ -1,7 +1,7 @@
 # Adding more commands
 
 ::: tip
-This page is a follow-up and bases its code off of [the previous page](/creating-your-bot/configuration-files).
+This page is a follow-up and bases its code off of [the previous page](/creating-your-bot/configuration-files.md).
 :::
 
 A bot with nothing but a single command would be really boring, and you probably have a bunch of command ideas floating around in your head already, right? Let's begin, then.
@@ -31,7 +31,7 @@ Before doing anything else, make a property to store the prefix you've configure
 From now on, if you change the prefix or token in your config.json file, it'll change in your bot file as well. You'll be using the prefix variable a lot soon.
 
 ::: tip
-If you aren't familiar with some of this syntax, it may be because some of this is ES6 syntax. If it does confuse you, you should check out [this guide page](/additional-info/es6-syntax) before continuing.
+If you aren't familiar with some of this syntax, it may be because some of this is ES6 syntax. If it does confuse you, you should check out [this guide page](/additional-info/es6-syntax.md) before continuing.
 :::
 
 ## Simple command structure
@@ -157,7 +157,7 @@ And there you have it! As you can see, it's quite simple to add additional comma
 
 If you don't plan to make more than 7 or 8 commands for your bot, then using an if/else if chain is perfectly fine; it's presumably a small project at that point, so you shouldn't need to spend too much time on it. However, this isn't the case for most of us.
 
-You probably want your bot to be feature-rich and easy to configure and develop, right? Using a giant if/else if chain won't let you achieve that, and will only hinder your development process. After you read up on [creating arguments](/creating-your-bot/commands-with-user-input), we'll be diving right into something called a "command handler" - code that makes handling commands easier and much more efficient.
+You probably want your bot to be feature-rich and easy to configure and develop, right? Using a giant if/else if chain won't let you achieve that, and will only hinder your development process. After you read up on [creating arguments](/creating-your-bot/commands-with-user-input.md), we'll be diving right into something called a "command handler" - code that makes handling commands easier and much more efficient.
 
 Before continuing, here's a small list of reasons why you shouldn't use if/else if chains for anything that's not a small project:
 

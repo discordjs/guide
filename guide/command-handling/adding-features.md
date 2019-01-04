@@ -1,7 +1,7 @@
 # Additional features
 
 ::: tip
-This page is a follow-up and bases its code off of [the previous page](/command-handling/dynamic-commands).
+This page is a follow-up and bases its code off of [the previous page](/command-handling/dynamic-commands.md).
 :::
 
 The command handler you've been building so far doesn't do much aside from dynamically load and execute commands. Those two things alone are great, but definitely not the only things you want. Before diving into it, let's do some quick refactoring in preparation.

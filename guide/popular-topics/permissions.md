@@ -300,7 +300,7 @@ console.log(permissions.has('KICK_MEMBERS'));
 You can utilize these methods to adapt permissions or overwrites without touching the other flags. To achieve this you can get the existing permissions for a role, manipulating the bit field as described above and passing the changed bit field to `role.setPermissions()`.
 
 ::: tip
-In the stable branch, `role.permissions` returns a number which needs to be converted to a Permissions object for this to work as described here. We covered how to achieve this in the section "[Converting permission numbers to Objects](popular-topics/permissions?id=converting-permission-numbers)"
+In the stable branch, `role.permissions` returns a number which needs to be converted to a Permissions object for this to work as described here. We covered how to achieve this in the section "[Converting permission numbers to Objects](/popular-topics/permissions.md#converting-permission-numbers)"
 :::
 
 ## Resulting code

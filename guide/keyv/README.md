@@ -1,6 +1,6 @@
 # Storing data with Keyv
 
-[Keyv](https://github.com/lukechilds/keyv) is a simple key-value store that works with multiple backends. It's fully scalable for [sharding](/sharding) and supports JSON storage.
+[Keyv](https://github.com/lukechilds/keyv) is a simple key-value store that works with multiple backends. It's fully scalable for [sharding](/sharding/) and supports JSON storage.
 
 ## Installation
 
@@ -43,7 +43,7 @@ For more detailed setup, check out the [Keyv readme](https://github.com/lukechil
 
 ## Usage
 
-Keyv exposes a familiar [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)-like API. However, it only has `set`, `get`, `delete`, and `clear` methods. Additionally, instead of immediately returning data, these methods return [Promises](/additional-info/async-await) that resolve with the data.
+Keyv exposes a familiar [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)-like API. However, it only has `set`, `get`, `delete`, and `clear` methods. Additionally, instead of immediately returning data, these methods return [Promises](/additional-info/async-await.md) that resolve with the data.
 
 ```js
 (async () => {
@@ -82,7 +82,7 @@ const globalPrefix = '.';
 
 ### Command handler
 
-This guide uses a very basic command handler with some added complexity to allow for multiple prefixes. For more a more robust command handler, look at the [command handling](/command-handling) guide.
+This guide uses a very basic command handler with some added complexity to allow for multiple prefixes. For more a more robust command handler, look at the [command handling](/command-handling/) guide.
 
 ```js
 client.on('message', async message => {
