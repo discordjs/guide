@@ -1,4 +1,4 @@
-# Getting started with OAUTh2
+# Getting started with OAuth2
 
 OAuth2 enables application developers to build applications that utilize authentication and data from the Discord API. This can be used to create things such as web dashboard to display user info, fetch linked third-party accounts like Twitch or Steam, access users' guild information without actually being in the guild, and much more. OAuth2 can greatly extend the functionality of your bot if used correctly.
 
