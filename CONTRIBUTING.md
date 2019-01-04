@@ -189,6 +189,31 @@ If you want to include an image in a page, the image you add should be saved to 
 + If you want to read more about this, you can check out the page on [that other cool stuff](/some-really-cool-stuff).
 ```
 
+### Code samples
+
+If you're writing a page that teaches the reader how to build something step-by-step, make sure to include the final piece of code in a file inside the `/code-samples` directory. The folder destination inside the `/code-samples` folder should match the destination inside the `/guide` folder. For example: `guide/foo/bar.md` -> `code-samples/foo/bar/index.js`.
+
+```md
+<!-- Inside /guide/foo/bar.md -->
+## Resulting code
+
+<!-- Will result in `/code-samples/foo/bar/` -->
+<resulting-code />
+```
+
+This will automatically generate the link to the proper directory on GitHub for that specific page. Should you need to overwrite the path, you can do so:
+
+```md
+<!-- Inside /guide/baz/README.md -->
+## Resulting code
+
+<!-- Will result in `/code-samples/baz/` -->
+<resulting-code />
+
+<!-- Will result in `/code-samples/baz/getting-started/` -->
+<resulting-code path="baz/getting-started" />
+```
+
 ### Faking Discord messages
 
 We have some useful custom helper components that you can use to "fake" Discord message. The reason for this is to make it easy for you to create, easy for anyone in the future to edit, and avoid having to take screenshots and using too many images on a page at once. Here's a preview of the components:
