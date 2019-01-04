@@ -1,4 +1,4 @@
-import VueDiscordMessage from '../../node_modules/vuepress-theme-yuu';
+import VueDiscordMessage from '../../node_modules/vue-discord-message';
 
 export default ({ Vue }) => {
 	Vue.use(VueDiscordMessage, {
