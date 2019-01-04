@@ -1,3 +1,7 @@
+---
+forceTheme: blue
+---
+
 # Using arguments in commands
 
 Sometimes when using commands you may want to get data from the user, and change the response accordingly. In this section, you'll create a command that pulls a string from the message and says it back to the user!
