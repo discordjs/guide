@@ -172,7 +172,7 @@ If you want to include an image in a page, the image you add should be saved to 
 
 + Here's what the final result would look like:
 +
-+ ![Final result](/assets/img/78fcCsF.png)
++ ![Final result](~@/images/78fcCsF.png)
 +
 + If you want to read more about this, you can check out the page on [that other cool stuff](/some-really-cool-stuff).
 ```

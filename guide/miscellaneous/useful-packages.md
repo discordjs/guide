@@ -129,7 +129,7 @@ Let's say you want your error messages to be easily visible; Let us give them a 
 console.log(chalk.redBright('FATAL ERROR'), 'Something really bad happened!');
 ```
 
-![image of code above](/assets/img/chalk-red.png)
+![image of code above](~@/images/chalk-red.png)
 
 You can also chain multiple different multipliers.  
 If you wanted to have green text, a grey background and have it all underlined that is absolutely possible:
@@ -138,7 +138,7 @@ If you wanted to have green text, a grey background and have it all underlined t
 console.log(chalk.green.bgBrightBlack.underline('This is so pretty.'));
 ```
 
-![image of code above](/assets/img/chalk-ugly.png)
+![image of code above](~@/images/chalk-ugly.png)
 
 ### winston
 
@@ -183,7 +183,7 @@ The `format` option tells the logger which format to use for the messages, by de
 While useful, JSON is not very readable, so we are defining a custom format which just displays the log level in all caps alongside the message.
 If you wanted to you could also use the chalk module to make the logger's format a bit prettier by applying colors, etc.
 
-![winston example](/assets/img/winston.png)
+![winston example](~@/images/winston.png)
 
 Winston is not the only logging library out there though, so if you are not convinced you should google around a bit and
 you should find something you will like.

@@ -54,15 +54,15 @@ You can start your server with `node index.js`. Once you start it, try connectin
 
 Now that you have your web server up and running, it's time to get some information from Discord. Head over to [your Discord applications](https://discordapp.com/developers/applications/) and click "Create an application", where you'll be greeted with the following page:
 
-![Create an application page](/assets/img/1ch98sm.png)
+![Create an application page](~@/images/1ch98sm.png)
 
 Take note of the `client id` field, the `client secret` field, and the "OAuth2" link on the left side of the page. For now, click on "OAuth2' and add a redirect url to `http://localhost:53134` like so:
 
-![img](/assets/img/9fejia2.png)
+![img](~@/images/9fejia2.png)
 
 Once you've added your redirect url, you will want to generate an OAuth2 url. Lower down on the page, you can conveniently find an OAuth2 Url Generator provided by Discord. Use this to generate a url for yourself with the `identify` scope. 
 
-![img](/assets/img/18e2dwi.png)
+![img](~@/images/18e2dwi.png)
 
 The `identify` scope will allow your application to get basic user information from Discord. A list of all scopes can be found [here](https://discordapp.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes).
 
@@ -72,7 +72,7 @@ You have your website, and you have a url. Now you need to use those two things 
 
 After you change the response type, you can test the url right away. Try visiting it in your browser and you will be directed to a page that looks like this.
 
-![img](/assets/img/49jali8.png)
+![img](~@/images/49jali8.png)
 
 You can see that by clicking `Authorize`, you are allowing the application to access your username and avatar. Once you click through, you should be redirected to the redirect url with `#access_token=ACCESS_TOKEN&token_type=Bearer&expires_in=EXPIRATION&scope=identify` appended to it. You now have an access token and can make requests to Discord's API to get information on the user. Modify `index.html` to add your OAuth2 url and to take advantage of the access token if it exists.
 

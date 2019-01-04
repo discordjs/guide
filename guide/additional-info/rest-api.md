@@ -110,7 +110,7 @@ Here, we use Node's native [querystring module](https://nodejs.org/api/querystri
 
 If you were to do `!urban hello world`, then the URL would become https://api.urbandictionary.com/v0/define?term=hello%20world since the string gets encoded.
 
-With the `body` variable, you can get the properties of the returned JSON response. If you were to view it in your browser, it usually looks like a bunch of mumbo jumbo. If it doesn't, great! If it does, then you should get a JSON formatter/viewer. If you're using Chrome, [JSON Formatter](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa) is one of the more popular extensions. If you're not using Chrome, search for "JSON formatter/viewer <your browser>" and get one.
+With the `body` variable, you can get the properties of the returned JSON response. If you were to view it in your browser, it usually looks like a bunch of mumbo jumbo. If it doesn't, great! If it does, then you should get a JSON formatter/viewer. If you're using Chrome, [JSON Formatter](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa) is one of the more popular extensions. If you're not using Chrome, search for "JSON formatter/viewer &lt;your browser&gt;" and get one.
 
 Now, if you look at the JSON, you can see that's a `list` property, which is an array of objects containing various definitions for the term (maximum 10). Something you always want to do when making API based commands is to handle there being no results. So, let's throw a random term in there (e.g. `njaksdcas`) and then look at the response. The `list` array should then be empty. Now you are ready to start writing!
 
