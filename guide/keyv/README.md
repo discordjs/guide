@@ -136,7 +136,7 @@ You will probably want to setup additional validation such as required permissio
 
 ### Usage
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		.prefix
 	</discord-message>
@@ -155,7 +155,7 @@ You will probably want to setup additional validation such as required permissio
 	<discord-message author="Tutorial Bot" :bot="true">
 		Prefix is `$`
 	</discord-message>
-</discord-messages>
+</div>
 
 ## Next steps
 

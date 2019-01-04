@@ -9,7 +9,7 @@ In the following section we will explain how you compose an embed, send it, and 
 
 Here is an example of what an embed may look like. We will go over their construction in the next part of this guide.
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
 		<discord-embed
 			slot="embeds"
@@ -47,7 +47,7 @@ Here is an example of what an embed may look like. We will go over their constru
 			<span slot="footer">Some footer text here</span>
 		</discord-embed>
 	</discord-message>
-</discord-messages>
+</div>
 
 ## Using the RichEmbed constructor
 

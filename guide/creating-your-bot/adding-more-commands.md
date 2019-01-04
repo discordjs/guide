@@ -78,14 +78,14 @@ else if (message.content === `${prefix}server`) {
 
 The code above would result in this:
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!server
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
 		This server's name is: Discord Bot Tutorial
 	</discord-message>
-</discord-messages>
+</div>
 
 If you want to expand upon that command and add some more info, here's an example of what you can do:
 
@@ -99,7 +99,7 @@ else if (message.content === `${prefix}server`) {
 
 That would display both the server name _and_ the amount of members in it.
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!server
 	</discord-message>
@@ -107,7 +107,7 @@ That would display both the server name _and_ the amount of members in it.
 		Server name: Discord Bot Tutorial <br>
 		Total members: 3
 	</discord-message>
-</discord-messages>
+</div>
 
 You can, of course, modify this to your liking. You may want to also display the date the server was created, or the server's region. You would do those in the same manner - use `message.guild.createdAt` or `message.guild.region`, respectively.
 
@@ -127,7 +127,7 @@ else if (message.content === `${prefix}user-info`) {
 
 This will display the message author's **username** (not nickname, if they have one set), as well as their user ID.
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!user-info
 	</discord-message>
@@ -135,7 +135,7 @@ This will display the message author's **username** (not nickname, if they have 
 		Your username: User <br>
 		Your ID: 20833034795932416
 	</discord-message>
-</discord-messages>
+</div>
 
 <tip>`message.author` refers to the user who sent the message. For a full list of all the properties and methods for the author object (a member of the `User` class), check out [the documentation page for it](https://discord.js.org/#/docs/main/stable/class/User).</tip>
 

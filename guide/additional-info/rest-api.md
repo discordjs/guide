@@ -132,7 +132,7 @@ Here, you are simply getting the first object from the array of objects called `
 
 If you've followed the tutorial, you should have something like this:
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!urban njaksdcas
 	</discord-message>
@@ -145,7 +145,7 @@ If you've followed the tutorial, you should have something like this:
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
 		The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books.
 	</discord-message>
-</discord-messages>
+</div>
 
 Now, let's just make this an [embed](/popular-topics/miscellaneous-examples?id=sending-an-embed).
 
@@ -173,7 +173,7 @@ message.channel.send(embed);
 
 Now, if you do that same command again, you should get this:
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!urban hello world
 	</discord-message>
@@ -197,7 +197,7 @@ Now, if you do that same command again, you should get this:
 			</embed-fields>
 		</discord-embed>
 	</discord-message>
-</discord-messages>
+</div>
 
 ## Resulting code
 

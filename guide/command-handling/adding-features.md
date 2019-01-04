@@ -136,14 +136,14 @@ if (command.guildOnly && message.channel.type !== 'text') {
 
 Now when you try to use the kick command inside a DM, you'll get the appropriate response which will also prevent your bot from throwing an error.
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!kick
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
 		I can't execute that command inside DMs!
 	</discord-message>
-</discord-messages>
+</div>
 
 ### Cooldowns
 
@@ -245,7 +245,7 @@ The `aliases` property should always contain an array of strings. In your main f
 
 Making those two small changes, you get this:
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!avatar <mention :highlight="true">User</mention>
 	</discord-message>
@@ -262,7 +262,7 @@ Making those two small changes, you get this:
 		https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png?size=2084
 		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
 	</discord-message>
-</discord-messages>
+</div>
 
 ### A dynamic help command
 
@@ -353,7 +353,7 @@ Once you get the command based off the name or alias they gave, you can start `.
 
 At the end of it all, you should be getting this as a result:
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!help
 	</discord-message>
@@ -371,7 +371,7 @@ At the end of it all, you should be getting this as a result:
 		**Description:** Get the avatar URL of the tagged user(s), or your own avatar. <br>
 		**Cooldown:** 3 second(s)
 	</discord-message>
-</discord-messages>
+</div>
 
 No more manually editing your help command! If you aren't completely satisfied with how it looks, you can always adjust it to your liking later.
 

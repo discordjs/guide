@@ -78,14 +78,14 @@ if (message.content === '!ping') {
 
 Restart your bot and then send `!ping` to a channel your bot has access to. If all goes well, you should see something like this:
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!ping
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
 		Pong.
 	</discord-message>
-</discord-messages>
+</div>
 
 You've successfully created your first Discord bot command! Exciting stuff, isn't it? This is only the beginning, so let's move on to making some more commands.
 

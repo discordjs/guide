@@ -34,11 +34,11 @@ Role mentions and channel mentions work similarly. Role mentions look like `<@&1
 That means when you receive a message from the Discord API and it contains mentions the message's content will contain that special syntax.  
 If you send
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		I think we should add <mention>GoodPerson</mention> to the <mention>Mod</mention> role.
 	</discord-message>
-</discord-messages>
+</div>
 
 then the `message.content` for that message will look something like this
 
@@ -130,14 +130,14 @@ If the user supplied an argument it should be the user mention, so it just gets 
 
 And that is it! Simple, isn't it? Start up your bot and see if it works.
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="AnotherUser" avatar="green">
 		!avatar <mention>User</mention>
 	</discord-message>
 	<discord-message author="User" avatar="blue" :bot="true">
 		User's avatar: https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png
 	</discord-message>
-</discord-messages>
+</div>
 
 So now, instead of using `message.mentions` you can use your new, fantastic function.
 This will allow you to add proper checks for all your args, so that you can tell when a command was used correctly and when it was used incorrectly.
