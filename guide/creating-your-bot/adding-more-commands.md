@@ -41,8 +41,7 @@ You already have an if statement that checks messages for a ping/pong command. A
 ```js
 if (message.content === `${prefix}ping`) {
 	message.channel.send('Pong.');
-}
-else if (message.content === `${prefix}beep`) {
+} else if (message.content === `${prefix}beep`) {
 	message.channel.send('Boop.');
 }
 ```
@@ -52,8 +51,7 @@ There are a few potential issues with this. For example, the ping command won't 
 ```js
 if (message.content.startsWith(`${prefix}ping`)) {
 	message.channel.send('Pong.');
-}
-else if (message.content.startsWith(`${prefix}beep`)) {
+} else if (message.content.startsWith(`${prefix}beep`)) {
 	message.channel.send('Boop.');
 }
 ```

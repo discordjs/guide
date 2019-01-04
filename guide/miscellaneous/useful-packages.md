@@ -33,12 +33,10 @@ if (date.isValid()) {
 
 	if (duration > 0) {
 		message.channel.send(`The date you gave me is ${formatted} into the future.`);
-	}
-	else {
+	} else {
 		message.channel.send(`The date you gave me is ${formatted} into the past.`);
 	}
-}
-else {
+} else {
 	message.channel.send('You didn\'t give me a valid date.');
 }
 ```

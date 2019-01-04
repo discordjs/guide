@@ -45,16 +45,14 @@ client.on('message', async message => {
 	if (command === 'balance') {
 		const target = message.mentions.users.first() || message.author;
 		return message.channel.send(`${target.tag} has ${currency.getBalance(target.id)}💰`);
-	}
-	else if (command === 'inventory') {
+	} else if (command === 'inventory') {
 		const target = message.mentions.users.first() || message.author;
 		const user = await Users.findOne({ where: { user_id: target.id } });
 		const items = await user.getItems();
 
 		if (!items.length) return message.channel.send(`${target.tag} has nothing!`);
 		return message.channel.send(`${target.tag} currently has ${items.map(t => `${t.amount} ${t.item.name}`).join(', ')}`);
-	}
-	else if (command === 'transfer') {
+	} else if (command === 'transfer') {
 		const currentAmount = currency.getBalance(message.author.id);
 		const transferAmount = commandArgs.split(/ +/).find(arg => !/<@!?\d+>/.test(arg));
 		const transferTarget = message.mentions.users.first();
@@ -67,8 +65,7 @@ client.on('message', async message => {
 		currency.add(transferTarget.id, transferAmount);
 
 		return message.channel.send(`Successfully transferred ${transferAmount}💰 to ${transferTarget.tag}. Your current balance is ${currency.getBalance(message.author.id)}💰`);
-	}
-	else if (command === 'buy') {
+	} else if (command === 'buy') {
 		const item = await CurrencyShop.findOne({ where: { name: { [Op.like]: commandArgs } } });
 		if (!item) return message.channel.send('That item doesn\'t exist.');
 		if (item.cost > currency.getBalance(message.author.id)) {
@@ -80,12 +77,10 @@ client.on('message', async message => {
 		await user.addItem(item);
 
 		message.channel.send(`You've bought a ${item.name}`);
-	}
-	else if (command === 'shop') {
+	} else if (command === 'shop') {
 		const items = await CurrencyShop.findAll();
 		return message.channel.send(items.map(i => `${i.name}: ${i.cost}💰`).join('\n'), { code: true });
-	}
-	else if (command === 'leaderboard') {
+	} else if (command === 'leaderboard') {
 		return message.channel.send(
 			currency.sort((a, b) => b.balance - a.balance)
 				.filter(user => client.users.has(user.user_id))

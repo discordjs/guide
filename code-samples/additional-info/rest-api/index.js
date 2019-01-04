@@ -21,8 +21,7 @@ client.on('message', async message => {
 		const { body } = await fetch('https://aws.random.cat/meow').then(response => response.json());
 
 		message.channel.send(body.file);
-	}
-	else if (command === 'urban') {
+	} else if (command === 'urban') {
 		if (!args.length) {
 			return message.channel.send('You need to supply a search term!');
 		}

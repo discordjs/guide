@@ -142,8 +142,7 @@ client.on('message', async message => {
 			await message.react('🇦');
 			await message.react('🇧');
 			await message.react('🇨');
-		}
-		catch (error) {
+		} catch (error) {
 			// handle failure of any Promise rejection inside here
 		}
 	}
@@ -176,8 +175,7 @@ client.on('message', async message => {
 		try {
 			const sentMessage = await message.channel.send('This message will be deleted in 10 seconds.');
 			await sentMessage.delete(10000);
-		}
-		catch (error) {
+		} catch (error) {
 			// handle error
 		}
 	}

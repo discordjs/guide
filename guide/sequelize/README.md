@@ -47,20 +47,15 @@ client.on('message', async message => {
 
 		if (command === 'addtag') {
 			// [delta]
-		}
-		else if (command === 'tag') {
+		} else if (command === 'tag') {
 			// [epsilon]
-		}
-		else if (command === 'edittag') {
+		} else if (command === 'edittag') {
 			// [zeta]
-		}
-		else if (command === 'taginfo') {
+		} else if (command === 'taginfo') {
 			// [theta]
-		}
-		else if (command === 'showtags') {
+		} else if (command === 'showtags') {
 			// [lambda]
-		}
-		else if (command === 'removetag') {
+		} else if (command === 'removetag') {
 			// [mu]
 		}
 	}

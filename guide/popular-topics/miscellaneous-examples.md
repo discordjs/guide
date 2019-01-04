@@ -94,8 +94,7 @@ client.on('message', message => {
 
 	if (command === 'ping') {
 		message.channel.send('Pong!');
-	}
-	else if (command === 'prefix') {
+	} else if (command === 'prefix') {
 		message.reply(`you can either ping me or use \`${prefix}\` as my prefix.`);
 	}
 });

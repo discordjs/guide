@@ -8,11 +8,9 @@ client.once('ready', () => {
 client.on('message', message => {
 	if (message.content === '!react') {
 		message.react('😄');
-	}
-	else if (message.content === '!react-custom') {
+	} else if (message.content === '!react-custom') {
 		message.react('396548322053062656');
-	}
-	else if (message.content === '!fruits') {
+	} else if (message.content === '!fruits') {
 		message.react('🍎')
 			.then(() => message.react('🍊'))
 			.then(() => message.react('🍇'))

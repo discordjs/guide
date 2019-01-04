@@ -19,8 +19,7 @@ client.on('message', message => {
 
 				if (reaction.emoji.name === '👍') {
 					message.reply('you reacted with a thumbs up.');
-				}
-				else {
+				} else {
 					message.reply('you reacted with a thumbs down.');
 				}
 			})

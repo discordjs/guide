@@ -3,7 +3,6 @@ module.exports = {
 	plugins: ['markdown'],
 	rules: {
 		'arrow-body-style': 'off',
-		'brace-style': ['error', 'stroustrup'],
 		'comma-dangle': ['error', 'always-multiline'],
 		'radix': ['error', 'as-needed'],
 		'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',

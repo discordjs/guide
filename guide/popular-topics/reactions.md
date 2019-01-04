@@ -123,8 +123,7 @@ client.on('message', async message => {
 			await message.react('🍎');
 			await message.react('🍊');
 			await message.react('🍇');
-		}
-		catch (error) {
+		} catch (error) {
 			console.error('One of the emojis failed to react.');
 		}
 	}
@@ -171,8 +170,7 @@ message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
 
 		if (reaction.emoji.name === '👍') {
 			message.reply('you reacted with a thumbs up.');
-		}
-		else {
+		} else {
 			message.reply('you reacted with a thumbs down.');
 		}
 	})

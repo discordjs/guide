@@ -30,11 +30,9 @@ client.on('message', message => {
 
 	if (command === 'ping') {
 		client.commands.get('ping').execute(message, args);
-	}
-	else if (command === 'beep') {
+	} else if (command === 'beep') {
 		client.commands.get('beep').execute(message, args);
-	}
-	else if (command === 'server') {
+	} else if (command === 'server') {
 		client.commands.get('server').execute(message, args);
 	}
 	// do the same for the rest of the commands...
@@ -52,8 +50,7 @@ if (!client.commands.has(command)) return;
 
 try {
 	client.commands.get(command).execute(message, args);
-}
-catch (error) {
+} catch (error) {
 	console.error(error);
 	message.reply('there was an error trying to execute that command!');
 }

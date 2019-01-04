@@ -217,20 +217,15 @@ client.on('message', async message => {
 
 	if (command === 'balance') {
 		// [gamma]
-	}
-	else if (command === 'inventory') {
+	} else if (command === 'inventory') {
 		// [delta]
-	}
-	else if (command === 'transfer') {
+	} else if (command === 'transfer') {
 		// [epsilon]
-	}
-	else if (command === 'buy') {
+	} else if (command === 'buy') {
 		// [zeta]
-	}
-	else if (command === 'shop') {
+	} else if (command === 'shop') {
 		// [theta]
-	}
-	else if (command === 'leaderboard') {
+	} else if (command === 'leaderboard') {
 		// [lambda]
 	}
 });

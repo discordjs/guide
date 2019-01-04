@@ -95,8 +95,7 @@ client.on('message', async message => {
 
 		if (message.content.startsWith(globalPrefix)) {
 			prefix = globalPrefix;
-		}
-		else {
+		} else {
 			// check the guild-level prefix
 			const guildPrefix = await prefixes.get(message.guild.id);
 			if (message.content.startsWith(guildPrefix)) prefix = guildPrefix;
@@ -105,8 +104,7 @@ client.on('message', async message => {
 		// if we found a prefix, setup args; otherwise, this isn't a command
 		if (!prefix) return;
 		args = message.content.slice(prefix.length).split(/\s+/);
-	}
-	else {
+	} else {
 		// handle DMs
 		const slice = message.content.startsWith(globalPrefix) ? globalPrefix.length : 0;
 		args = message.content.slice(slice).split(/\s+/);
