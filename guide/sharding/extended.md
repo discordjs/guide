@@ -197,6 +197,6 @@ Now, you will want to make use of it in the actual command:
 
 And that's all! The emoji should have pretty-printed in a message as you'd expect.
 
-### Resulting code
+## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/sharding/extended).
+<resulting-code />

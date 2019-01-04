@@ -207,4 +207,4 @@ Now, if you do that same command again, you should get this:
 
 ## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/additional-info/rest-api).
+<resulting-code />

@@ -242,6 +242,6 @@ To maintain security, store the access token server side but associate it with a
 [RFC 6759](https://tools.ietf.org/html/rfc6749)  
 [Discord Docs for OAuth2](https://discordapp.com/developers/docs/topics/oauth2)
 
-### Resulting code
+## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/blob/master/code-samples/oauth/simple-oauth-webserver/).
+<resulting-code path="oauth/simple-oauth-webserver" />

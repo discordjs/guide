@@ -191,4 +191,4 @@ If you run your bot again now everything should still work the same.
 
 ## Resulting code
 
-If you want to compare your code to a working example, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/miscellaneous/parsing-mention-arguments).
+<resulting-code />

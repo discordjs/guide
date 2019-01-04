@@ -119,4 +119,4 @@ And there you have it, a say command using args!
 
 ## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/commando/args).
+<resulting-code />

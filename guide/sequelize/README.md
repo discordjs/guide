@@ -271,6 +271,6 @@ return message.reply('Tag deleted.');
 `.destroy()` runs the delete operation. The operation returns a count of the number of affected rows. If it returns with a value of 0, we know nothing was deleted, and that tag didn't exist in the database in the first place.
 
 
-### Resulting code
+## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/blob/master/code-samples/sequelize/tags/sequelize.js).
+<resulting-code path="sequelize/tags" />
