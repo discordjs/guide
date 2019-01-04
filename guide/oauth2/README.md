@@ -155,8 +155,7 @@ if (match) {
 	const stateParameter = localStorage.getItem('stateParameter');
 
 	if (btoa(stateParameter) !== decodeURIComponent(urlState)) {
-		console.log('You may have been clickjacked!');
-		return;
+		return console.log('You may have been clickjacked!');
 	}
 }
 ```

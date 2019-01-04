@@ -156,7 +156,7 @@ Now, let's just make this an [embed](/popular-topics/miscellaneous-examples?id=s
 We are also going to be defining a utility function at the top of our file so that our embed doesn't error when the field value is over 1024 characters. Here is a bit of code to do that:
 
 ```js
-const trim = (str, max) => (str.length > max) ? `${str.slice(0, max - 3)}...` : str;
+const trim = (str, max) => ((str.length > max) ? `${str.slice(0, max - 3)}...` : str);
 ```
 
 This is how we'll be structuring the embed:

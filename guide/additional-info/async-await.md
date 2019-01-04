@@ -22,7 +22,7 @@ ES6 code is being used in this example. If you do not know what that is, you sho
 
 ```js
 function deleteMessages(amount) {
-	return new Promise((resolve) => {
+	return new Promise(resolve => {
 		if (amount > 10) throw new Error('You can\'t delete more than 10 Messages at a time.');
 		setTimeout(() => resolve('Deleted 10 messages.'), 2000);
 	});
@@ -143,7 +143,7 @@ client.on('message', async message => {
 			await message.react('🇧');
 			await message.react('🇨');
 		}
-		catch(error) {
+		catch (error) {
 			// handle failure of any Promise rejection inside here
 		}
 	}
@@ -177,7 +177,7 @@ client.on('message', async message => {
 			const sentMessage = await message.channel.send('This message will be deleted in 10 seconds.');
 			await sentMessage.delete(10000);
 		}
-		catch(error) {
+		catch (error) {
 			// handle error
 		}
 	}

@@ -93,8 +93,6 @@ function getUserFromMention(mention) {
 
 		return client.users.get(mention);
 	}
-
-	return;
 }
 ```
 

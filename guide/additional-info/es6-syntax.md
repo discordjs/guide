@@ -4,6 +4,8 @@ If you've used JavaScript for only a (relatively) small amount of time or just a
 
 Here's the startup code we'll be using:
 
+<!-- eslint-disable prefer-template-->
+
 ```js
 const Discord = require('discord.js');
 const client = new Discord.Client();
@@ -83,6 +85,8 @@ function letsPretendThisDoesSomething() {
 }
 ```
 
+<!-- eslint-disable prefer-template-->
+
 ```js
 // regular string concatenation
 console.log('Your username is: **' + username + '**.');
@@ -126,7 +130,7 @@ Arrow functions are shorthand for regular functions, with the addition that they
 
 Here are some examples of ways you can benefit from arrow functions over regular functions:
 
-<!-- eslint-disable no-var -->
+<!-- eslint-disable no-var prefer-template -->
 
 ```js
 // regular functions, full ES5
@@ -212,10 +216,10 @@ Additionally, you could do this for your commands.
 client.on('message', message => {
 	const { content } = message;
 
-	if (content === prefix + 'ping') {
+	if (content === `${prefix}ping`) {
 		// ping command here...
 	}
-	else if (content === prefix + 'beep') {
+	else if (content === `${prefix}beep`) {
 		// beep command here...
 	}
 	// other commands here...
