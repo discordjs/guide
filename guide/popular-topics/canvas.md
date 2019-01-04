@@ -2,9 +2,13 @@
 
 Canvas is an image manipulation tool that allows you to modify images with code. We'll explore how to use this module in a heavily requested feature: guild member welcome messages. But first, you must go through the intense labor of installing Canvas. It's highly recommended that you use a Linux distribution for this because it'll be much easier to install on.
 
-<tip>For this guide, we'll be using `canvas@next`. At the time of writing, that is `canvas@2.0.0-alpha.12`, so ensure your `package.json` has that or a similar version after installation.</tip>
+::: tip
+For this guide, we'll be using `canvas@next`. At the time of writing, that is `canvas@2.0.0-alpha.12`, so ensure your `package.json` has that or a similar version after installation.
+:::
 
-<warning>Be sure that you're familiar with things like [async/await](/additional-info/async-await) and [object destructuring](/additional-info/es6-syntax?id=object-destructuring) before continuing, as we'll be making use of features like these.</warning>
+::: warning
+Be sure that you're familiar with things like [async/await](/additional-info/async-await) and [object destructuring](/additional-info/es6-syntax?id=object-destructuring) before continuing, as we'll be making use of features like these.
+:::
 
 ### Installation
 
@@ -63,7 +67,9 @@ What this will do is trigger the `guildMemberAdd` event while passing in the mes
 
 The end goal will be to display the user's avatar, username, and a simple "Welcome!" message when they join. After importing the Canvas module and initializing it, you should load the images. With Canvas, you have to specify where the image comes from first, naturally, and then specify how it gets loaded into the actual Canvas using `ctx`, which is what you will use to interact with Canvas.
 
-<tip>`node-canvas` works almost identical to HTML5 Canvas. You can read the HTML5 Canvas tutorials on [w3Schools](https://www.w3schools.com/html/html5_canvas.asp) and [MDN](https://developer.mozilla.org/kab/docs/Web/API/Canvas_API) for more information later!</tip>
+::: tip
+`node-canvas` works almost identical to HTML5 Canvas. You can read the HTML5 Canvas tutorials on [w3Schools](https://www.w3schools.com/html/html5_canvas.asp) and [MDN](https://developer.mozilla.org/kab/docs/Web/API/Canvas_API) for more information later!
+:::
 
 ```js
 client.on('guildMemberAdd', async member => {
@@ -232,7 +238,9 @@ client.on('guildMemberAdd', async member => {
 
 ![Image](~@/images/r6CiT3M.png)
 
-<tip>You can read more about `ctx.arc()` on [w3schools](https://www.w3schools.com/tags/canvas_arc.asp) or [MDN](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc).</tip>
+::: tip
+You can read more about `ctx.arc()` on [w3schools](https://www.w3schools.com/tags/canvas_arc.asp) or [MDN](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc).
+:::
 
 #### Adding in text
 

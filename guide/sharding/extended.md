@@ -1,6 +1,8 @@
 ## Extended changes
 
-<tip>This page is a follow-up and bases its code off of [the previous page](/sharding/additional-information), which assumes knowledge of arguments and passing functions.</tip>
+::: tip
+This page is a follow-up and bases its code off of [the previous page](/sharding/additional-information), which assumes knowledge of arguments and passing functions.
+:::
 
 ### Sending messages across shards
 
@@ -126,7 +128,9 @@ client.on('message', message => {
 });
 ```
 
-<tip>If you are unsure as to what `.call()` does, you may read up on it [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call).</tip>
+::: tip
+If you are unsure as to what `.call()` does, you may read up on it [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call).
+:::
 
 Now, run this code, and you will surely get a result that looks like the following:
 

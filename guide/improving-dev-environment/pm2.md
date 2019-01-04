@@ -42,7 +42,9 @@ pm2 start your-app-name.js --name "Some cool name"
 pm2 start your-app-name.js --watch
 ```
 
-<tip>The `pm2 start` command can take more optional parameters, but for now only these 2 are relevant for us. If you want to see all the parameters available, you can check the documentation of pm2 [here](http://pm2.keymetrics.io/docs/usage/).</tip>
+::: tip
+The `pm2 start` command can take more optional parameters, but for now only these 2 are relevant for us. If you want to see all the parameters available, you can check the documentation of pm2 [here](http://pm2.keymetrics.io/docs/usage/).
+:::
 
 Once the process is launched with pm2, you can run `pm2 monit` to monitor any and all console outputs from the processes started by pm2. This accounts for any `console.log()` in your code or outputted errors.
 
@@ -54,7 +56,9 @@ The initial steps to run differ per OS. In this guide, we'll cover those for Win
 
 #### Initial steps for Windows
 
-<tip>Run these from an administrative command prompt to avoid getting hit with a bunch of UAC dialogs.</tip>
+::: tip
+Run these from an administrative command prompt to avoid getting hit with a bunch of UAC dialogs.
+:::
 
 **Install the [pm2-windows-service](https://www.npmjs.com/package/pm2-windows-service) package from npm:**
 
@@ -67,7 +71,9 @@ npm install --global pm2-windows-service
 ```bash
 pm2-service-install
 ```
-<tip>You can use the `-n` parameter to set the service name: `pm2-service-install -n "the-service-name"`</tip>
+::: tip
+You can use the `-n` parameter to set the service name: `pm2-service-install -n "the-service-name"`
+:::
 
 #### Initial steps for Linux/MacOS
 

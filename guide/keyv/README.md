@@ -65,7 +65,9 @@ Keyv exposes a familiar [Map](https://developer.mozilla.org/en-US/docs/Web/JavaS
 
 Although Keyv can be used in any scenario where you need key-value data, we will focus on setting up a per-guild prefix configuration using Sqlite.
 
-<tip>This section will still work with any provider supported by Keyv. We recommend PostgreSQL for larger applications.</tip>
+::: tip
+This section will still work with any provider supported by Keyv. We recommend PostgreSQL for larger applications.
+:::
 
 ### Setup
 

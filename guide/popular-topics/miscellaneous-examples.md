@@ -1,6 +1,8 @@
 # Miscellaneous examples
 
-<tip>For more, even shorter code examples, check out [the common questions page](/popular-topics/common-questions)!</tip>
+::: tip
+For more, even shorter code examples, check out [the common questions page](/popular-topics/common-questions)!
+:::
 
 ## Play music from YouTube
 
@@ -101,7 +103,9 @@ client.on('message', message => {
 client.login('your-token-goes-here');
 ```
 
-<tip>If you aren't familiar with the syntax used on the `const [, matchedPrefix] = ...` line, that's called "array destructuring". Feel free to read more about it in the [ES6 syntax](/additional-info/es6-syntax?id=array-destructuring) guide!</tip>
+::: tip
+If you aren't familiar with the syntax used on the `const [, matchedPrefix] = ...` line, that's called "array destructuring". Feel free to read more about it in the [ES6 syntax](/additional-info/es6-syntax?id=array-destructuring) guide!
+:::
 
 ## Emoji characters
 
@@ -135,4 +139,6 @@ console.log(emojiCharacters[10]); // 🔟
 console.log(emojiCharacters['!']); // ❗
 ```
 
-<tip>On Windows, you may be able to use the `Win + .` keyboard shortcut to open up an emoji picker can be used for quick, easy access to all the unicode emojis available to you. Some of the emojis listed above may not be there, though (e.g the 0-9 emojis).</tip>
+::: tip
+On Windows, you may be able to use the `Win + .` keyboard shortcut to open up an emoji picker can be used for quick, easy access to all the unicode emojis available to you. Some of the emojis listed above may not be there, though (e.g the 0-9 emojis).
+:::

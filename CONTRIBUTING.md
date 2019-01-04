@@ -91,11 +91,17 @@ If you have a tip to share with to user, you can format them in a specific way s
 ```md
 In this section, we'll be doing some stuff!
 
-<tip>You can do this stuff even faster if you do this cool thing listed in this tip!</tip>
+::: tip
+You can do this stuff even faster if you do this cool thing listed in this tip!
+:::
 
-<warning>Make sure you're on version 2.0.0 or above before trying this.</warning>
+::: warning
+Make sure you're on version 2.0.0 or above before trying this.
+:::
 
-<danger>Be careful; this action is irreversible!</danger>
+::: danger
+Be careful; this action is irreversible!
+:::
 ```
 
 ![Utility tags preview](https://i.imgur.com/ayFvW6h.png)
@@ -118,9 +124,13 @@ console.log(data);
 
 And here's a sentence that would explain how that works, maybe.
 
-<tip>Here's where you'd tell them something even cooler than the really cool thing they just learned.</ti
+::: tip
+Here's where you'd tell them something even cooler than the really cool thing they just learned.
+:::
 
-<warning>This is where you'd warn them about the possible issues that arise when using this method.</warning>
+::: warning
+This is where you'd warn them about the possible issues that arise when using this method.
+:::
 ```
 
 #### Headers and sidebar links

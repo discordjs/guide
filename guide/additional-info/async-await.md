@@ -16,7 +16,9 @@ The **rejected** state means that the Promise encountered an error and could not
 
 One important thing to know is that a Promise can only have one state at a time; it can never be pending and resolved, rejected and resolved, or pending and rejected. You may be asking "How would that look in code?". Here is a small example:
 
-<tip>ES6 code is being used in this example. If you do not know what that is, you should read up on that [here](/additional-info/es6-syntax).</tip>
+::: tip
+ES6 code is being used in this example. If you do not know what that is, you should read up on that [here](/additional-info/es6-syntax).
+:::
 
 ```js
 function deleteMessages(amount) {

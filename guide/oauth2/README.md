@@ -161,7 +161,9 @@ if (match) {
 }
 ```
 
-<tip>Don't forgo security for a tiny bit of convenience!</tip>
+::: tip
+Don't forgo security for a tiny bit of convenience!
+:::
 
 ### OAuth2 flows
 
@@ -216,7 +218,9 @@ fetch('https://discordapp.com/api/oauth2/token', {
 	.then(console.log);
 ```
 
-<warning>The content-type for the token url must be `application/x-www-form-urlencoded`. This is why `form-data` is used.</warning>
+::: warning
+The content-type for the token url must be `application/x-www-form-urlencoded`. This is why `form-data` is used.
+:::
 
 Now try visiting your OAuth2 url and authorizing your application. Once you're redirected, you should see something like this in your console.
 
@@ -230,7 +234,9 @@ Now try visiting your OAuth2 url and authorizing your application. Once you're r
 
 You now have an access token and a refresh token.
 
-<tip>To maintain security, store the access token server side but associate it with a session ID that you generate for the user.</tip>
+::: tip
+To maintain security, store the access token server side but associate it with a session ID that you generate for the user.
+:::
 
 ## Additional reading
 

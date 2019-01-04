@@ -10,7 +10,9 @@
 
 ### moment.js
 
-<tip>Official documentation: https://momentjs.com/docs/</tip>
+::: tip
+Official documentation: https://momentjs.com/docs/
+:::
 
 Moment is a powerful package for working with dates in JavaScript.  
 It allows you to quickly and easily format dates in any way you want or parse strings back into JavaScript Date objects.  
@@ -51,7 +53,9 @@ else {
 
 ### ms
 
-<tip>Official documentation: https://github.com/zeit/ms</tip>
+::: tip
+Official documentation: https://github.com/zeit/ms
+:::
 
 Ms is another tool for working with times in JavaScript. However, ms specializes on durations.
 It allows you to convert times in milliseconds into human readable formats, and vice versa.
@@ -75,7 +79,9 @@ message.channel.send(`You sent the two messages ${formatted} apart.`);
 
 ### common-tags
 
-<tip>Official documentation: https://github.com/declandewet/common-tags</tip>
+::: tip
+Official documentation: https://github.com/declandewet/common-tags
+:::
 
 Common-tags is a library all about working with template literals.  
 So far you have probably only used them for interpolating variables into your strings, but they can do a whole lot more.
@@ -118,7 +124,9 @@ Check the the documentation to find more useful functions.
 
 ### chalk
 
-<tip>Official documentation: https://www.npmjs.com/package/chalk</tip>
+::: tip
+Official documentation: https://www.npmjs.com/package/chalk
+:::
 
 Chalk is not exactly useful for Discord bots themselves, but it will make your terminal output a lot prettier and organized.
 This package lets you color and style your `console.log`s in many, many different ways; No more simple white on black.
@@ -142,7 +150,9 @@ console.log(chalk.green.bgBrightBlack.underline('This is so pretty.'));
 
 ### winston
 
-<tip>Official documentation: https://github.com/winstonjs/winston</tip>
+::: tip
+Official documentation: https://github.com/winstonjs/winston
+:::
 
 Winston is "a logger for just about everything".
 You can log to the terminal, you can log to a file, etc.  

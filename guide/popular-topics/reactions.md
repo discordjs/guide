@@ -58,7 +58,9 @@ Two of the easiest ways you can retrieve an emoji would be:
 * Use `.find()` on a Collection of Emojis.
 * Use `.get()` on the `client.emojis` Collection.
 
-<tip>It is possible for two or more emojis to have the same name, and using `.find()` will only return the **first** entry it finds. As such, this can cause unexpected results.</tip>
+::: tip
+It is possible for two or more emojis to have the same name, and using `.find()` will only return the **first** entry it finds. As such, this can cause unexpected results.
+:::
 
 Using `.find()`, your code would look something like this:
 
@@ -131,7 +133,9 @@ If you try again with either of the codeblocks above, you'll get the result you 
 
 ![Emojis reacting in correct order](~@/images/1IWSJ1C.png)
 
-<tip>If you aren't familiar with Promises or `async`/`await`, you can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [our guide page on async/await](/additional-info/async-await)!</tip>
+::: tip
+If you aren't familiar with Promises or `async`/`await`, you can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [our guide page on async/await](/additional-info/async-await)!
+:::
 
 However, if you don't mind the order the emojis react in, you can take advantage of `Promise.all()`, like so:
 
@@ -178,13 +182,17 @@ message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
 
 ## Listening for reactions on old messages
 
-<danger>This section describes how to use some undocumented APIs to add unsupported functionality into discord.js, and as such you should follow anything here with extreme caution. Anything here is subject to change at any time without notice, and may break other functionality in your bot.</danger>
+::: danger
+This section describes how to use some undocumented APIs to add unsupported functionality into discord.js, and as such you should follow anything here with extreme caution. Anything here is subject to change at any time without notice, and may break other functionality in your bot.
+:::
 
 If you've tried using the `messageReactionAdd` or `messageReactionRemove` events before, you may have noticed that it doesn't always emit. That's because these events only trigger for cached messages. Fortunately, there is a way to make those events trigger for *all* messages.
 
 In order to make that happen, you'll need to listen to a completely different event and emit the `messageReactionEvent` yourself. The name of the event you'll need to listen to is `raw`, and it has a single parameter.
 
-<warning>Due to the `raw` event being undocumented and unsupported feature, all of the following code will be a basic example and may not cover all cases.</warning>
+::: warning
+Due to the `raw` event being undocumented and unsupported feature, all of the following code will be a basic example and may not cover all cases.
+:::
 
 ```js
 client.on('raw', event => {
@@ -272,7 +280,9 @@ All that's left is to fetch the actual reaction from the message and emit the ev
 const reaction = message.reactions.get(emojiKey);
 ```
 
-<tip>In the master branch/v12, reactions are keyed by their ID or name only, not in a `name:ID` format.</tip>
+::: tip
+In the master branch/v12, reactions are keyed by their ID or name only, not in a `name:ID` format.
+:::
 
 After that, simply emit the event with the proper data you've built up.
 
@@ -294,7 +304,9 @@ if (!reaction) {
 client.emit(events[event.t], reaction, user);
 ```
 
-<tip>In the master branch, you can avoid that mess by applying [this fix](https://gist.github.com/Lewdcario/52e1c66433c994c5c3c272284b9ab29c) instead.</tip>
+::: tip
+In the master branch, you can avoid that mess by applying [this fix](https://gist.github.com/Lewdcario/52e1c66433c994c5c3c272284b9ab29c) instead.
+:::
 
 And you're done! If you send a message, restart your bot, and react to that message, your `messageReactionAdd` and `messageReactionRemove` events should log as normal.
 
