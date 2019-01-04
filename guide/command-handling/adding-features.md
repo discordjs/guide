@@ -1,4 +1,4 @@
-## Additional features
+# Additional features
 
 ::: tip
 This page is a follow-up and bases its code off of [the previous page](/command-handling/dynamic-commands).
@@ -31,7 +31,7 @@ In this short (but necessary) refactor, you:
 
 Now you can start adding features!
 
-### Required arguments
+## Required arguments
 
 For this section, we'll be using the `args-info.js` command as an example. If you chose to keep it, it should look like this now:
 
@@ -84,7 +84,7 @@ And then in your main file:
 
 Now whenever you set `args` to `true` in one of your command files, it'll perform this check and supply feedback if necessary.
 
-#### Expected command usage
+### Expected command usage
 
 It's good UX (user experience) to let the user know that a command requires arguments when they don't provide any (it also prevents your code from breaking). Letting them know what kind of arguments are expected is even better.
 
@@ -115,7 +115,7 @@ In your main file:
 
 Use an `if` statement to check if the `usage` property exists (and is truthy) first, so that you don't accidentally end up with `undefined` in the reply string (in the case that you forget to properly supply the property in your command file, or some similar incident). A simple precaution such as this can greatly improve the user experience.
 
-### Guild only commands
+## Guild only commands
 
 Some commands are meant to be used only inside servers and won't work whatsoever in DMs. A prime example of this would be a kick command. You can add a property to the necessary commands to determine whether or not it should be only available outside of servers.
 
@@ -147,7 +147,7 @@ Now when you try to use the kick command inside a DM, you'll get the appropriate
 	</discord-message>
 </div>
 
-### Cooldowns
+## Cooldowns
 
 Spam is something you generally want to avoid - especially if one of your commands requires calls to other APIs, or takes a bit of time to build/send. This is also a very common feature bot developers want to integrate into their projects, so let's get started on that!
 
@@ -219,7 +219,7 @@ timestamps.set(message.author.id, now);
 setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 ```
 
-### Command aliases
+## Command aliases
 
 It's a good idea to allow users to trigger your commands in more than one way; it gives them the freedom of choosing what to send and may even make some command names easier to remember. Luckily, setting up aliases for your commands is quite simple.
 
@@ -266,7 +266,7 @@ Making those two small changes, you get this:
 	</discord-message>
 </div>
 
-### A dynamic help command
+## A dynamic help command
 
 If you don't use a framework or command handler for your projects, you'll have a tough time setting up an always up-to-date help command. Luckily, that's not the case here. Start by creating a new command file inside your `commands` folder and populate it as you normally would.
 
@@ -381,7 +381,7 @@ At the end of it all, you should be getting this as a result:
 
 No more manually editing your help command! If you aren't completely satisfied with how it looks, you can always adjust it to your liking later.
 
-### Conclusion 
+## Conclusion 
 
 At this point of the guide, you should now have a command handler with some very basic (but useful) features! If you see fit, you can expand upon the current structure to make something even better and easier for you to use in the future.
 

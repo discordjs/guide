@@ -1,4 +1,4 @@
-## Understanding ES6
+# ES6 syntax examples
 
 If you've used JavaScript for only a (relatively) small amount of time or just aren't very experienced with it, you might not be aware of what ES6 is and its crazy beneficial features. Since this is a guide primarily for Discord bots, we'll be using some discord.js code as an example of what you might have, versus what you could do to benefit from ES6.
 
@@ -39,7 +39,7 @@ If you haven't noticed, this piece of code is actually already using a bit of ES
 
 As for the code above, there are a few places where things can be done better. Let's look at them.
 
-### Template literals
+## Template literals
 
 If you check the code above, it's currently doing things like `prefix + 'name'` and `'Your username: ' + message.author.username`, which is perfectly valid. It is a bit hard to read, though, it's not too fun to constantly type out. Fortunately, there's a better alternative.
 
@@ -69,7 +69,7 @@ else if (message.content.startsWith(`${prefix}user-info`)) {
 
 Easier to read, easier to write! The best of both worlds.
 
-#### Template literals vs string concatenation
+### Template literals vs string concatenation
 
 If you've used other programming languages, you might be familiar with the term "string interpolation". Template literals would be JavaScript's implementation of string interpolation. If you're familiar with the heredoc syntax, it's very much like that; it allows for string interpolation, as well as multiline strings.
 
@@ -124,7 +124,7 @@ console.log(`
 
 You can see how it makes things easier and more readable. In some cases, it can even make your code shorter! This one is something you'll definitely want to take advantage of as much as possible.
 
-### Arrow functions
+## Arrow functions
 
 Arrow functions are shorthand for regular functions, with the addition that they use a lexical `this` context inside of their own. If you don't know what the `this` keyword is referring to, don't worry about it; you'll learn more about it as you advance.
 
@@ -182,11 +182,11 @@ There are a few important things you should note here:
 
 We won't be covering the lexical `this` scope with arrow functions in here, but you can Google around if you're still curious. Again, if you aren't sure what `this` is or when you need it, reading about lexical `this` first may only confuse you. 
 
-### Destructuring
+## Destructuring
 
 Destructuring is an easy way to extract items from an object or array. If you've never seen the syntax for it before, it can be a bit confusing, but it's actually very easy to understand once explained!
 
-#### Object destructuring
+### Object destructuring
 
 Here's a common example where object destructuring would come in handy:
 
@@ -238,7 +238,7 @@ console.log(defaultValue);
 // 'Some default value here'
 ```
 
-#### Array destructuring
+### Array destructuring
 
 Array destructuring syntax is very similar to object destructuring, except that you use brackets instead of curly braces. In addition, since you're using it on an array, you destructure the items in the same order the array is. Without array destructuring, this is how you'd extract items from an array:
 
@@ -263,7 +263,7 @@ const [, username, id] = message.content.match(someRegex);
 
 In this snippet, we use a comma without providing a name for the item in the array we don't need. You can also give it a dummy name if you prefer, of course; it's entirely preference at that point.
 
-### var, let, and const
+## var, let, and const
 
 Since there are many, many articles out there that can explain this part more in depth, we'll only be giving you a TL;DR and an article link if you choose to read more about it.
 

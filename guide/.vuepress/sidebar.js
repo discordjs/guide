@@ -48,10 +48,10 @@ module.exports = {
 		{
 			title: 'Installations & Preparations',
 			children: [
-				['/preparations/', 'Installing Node and discord.js'],
-				['/preparations/setting-up-a-linter', 'Setting up a linter'],
-				['/preparations/setting-up-a-bot-application', 'Setting up a bot application'],
-				['/preparations/adding-your-bot-to-servers', 'Adding your bot to servers'],
+				'/preparations/',
+				'/preparations/setting-up-a-linter',
+				'/preparations/setting-up-a-bot-application',
+				'/preparations/adding-your-bot-to-servers',
 			],
 		},
 		{
@@ -60,26 +60,26 @@ module.exports = {
 				'/creating-your-bot/',
 				'/creating-your-bot/configuration-files',
 				'/creating-your-bot/adding-more-commands',
-				['/creating-your-bot/commands-with-user-input', 'Commands with user input'],
+				'/creating-your-bot/commands-with-user-input',
 			],
 		},
 		{
 			title: 'Command Handler',
 			children: [
 				'/command-handling/',
-				['/command-handling/dynamic-commands', 'Dynamic commands setup'],
+				'/command-handling/dynamic-commands',
 				'/command-handling/adding-features',
 			],
 		},
 		{
 			title: 'Popular Topics',
 			children: [
-				['/popular-topics/embeds', 'Embeds'],
-				['/popular-topics/permissions', 'Permissions'],
-				['/popular-topics/permissions-extended', 'Permissions (extended)'],
-				['/popular-topics/reactions', 'Reactions'],
-				['/popular-topics/collectors', 'Collectors'],
-				['/popular-topics/canvas', 'Image manipulation with Canvas'],
+				'/popular-topics/embeds',
+				'/popular-topics/permissions',
+				'/popular-topics/permissions-extended',
+				'/popular-topics/reactions',
+				'/popular-topics/collectors',
+				'/popular-topics/canvas',
 				'/popular-topics/common-questions',
 				'/popular-topics/miscellaneous-examples',
 			],
@@ -95,22 +95,22 @@ module.exports = {
 			title: 'Databases',
 			children: [
 				'/sequelize/',
-				['/sequelize/currency', 'Making a currency system'],
+				'/sequelize/currency',
 				'/keyv/',
 			],
 		},
 		{
 			title: 'Sharding',
 			children: [
-				['/sharding/', 'Getting started'],
-				['/sharding/additional-information', 'Additional information'],
+				'/sharding/',
+				'/sharding/additional-information',
 				'/sharding/extended',
 			],
 		},
 		{
 			title: 'OAuth2',
 			children: [
-				['/oauth2/', 'Getting an access token'],
+				'/oauth2/',
 			],
 		},
 		{
@@ -124,7 +124,7 @@ module.exports = {
 			title: 'Additional Information',
 			children: [
 				'/additional-info/notation',
-				['/additional-info/es6-syntax', 'ES6 syntax examples'],
+				'/additional-info/es6-syntax',
 				'/additional-info/collections',
 				'/additional-info/async-await',
 				'/additional-info/rest-api',

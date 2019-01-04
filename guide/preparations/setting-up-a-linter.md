@@ -1,8 +1,8 @@
-## Preparing a better development environment
+# Setting up a linter
 
 As a developer, it's a good idea to make your development process as streamlined as possible. Installing and utilizing the right tools is an essential part of any project you're working on. Although it's not required, installing a linter will help you greatly.
 
-### Installing a code editor
+## Installing a code editor
 
 First, you will need a proper code editor. Using Notepad and Notepad++ is discouraged, as they're inefficient for projects like these. If you are using either, it is highly recommended to switch in order to save everyone lots of headaches and unnecessary syntax error questions.
 
@@ -10,7 +10,7 @@ First, you will need a proper code editor. Using Notepad and Notepad++ is discou
 * [Atom](https://atom.io/) is user-friendly, being concise and easy to navigate. This is what many developers use to get started.
 * [Sublime Text](https://www.sublimetext.com/) is another powerful editor known for looking sleek and performing speedily and efficiently.
 
-### Installing a linter
+## Installing a linter
 
 One of the major advantages proper code editors have over Notepad and Notepad++ is their ability to use linters. Linters check syntax and help you produce consistent code that follows certain style rules that you can define yourself, if you choose to do so. They help form good habits if you stick to a single configuration. When you start using a linter, you might be bombarded with errors at first. This is normal and perfectly fine. It might be a pain to get through during the initial process, but it's most definitely worth it.
 
@@ -34,7 +34,7 @@ Afterwards, install the appropriate plugin(s) for your editor of choice.
 You can install each of these directly inside the editors themselves. For Visual Studio Code, press `Ctrl + Shift + X`. For Atom, press `Ctrl + ,` and click on "Install". For Sublime, press `Ctrl + Shift + P` and search for "Install Package" (available via [Package Control](https://packagecontrol.io/installation)). After that, you may then search for the appropriate plugin and install it through there.
 :::
 
-### Setting up ESLint rules
+## Setting up ESLint rules
 
 ESLint may display a lot of warnings and errors about your code when you start using it, but don't let this startle you. In order to get started, follow these steps:
 

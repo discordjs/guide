@@ -1,4 +1,4 @@
-## Commands with user input (a.k.a. "arguments")
+# Commands with user input (a.k.a. "arguments")
 
 ::: tip
 This page is a follow-up and bases its code off of [the previous page](/creating-your-bot/adding-more-commands).
@@ -6,7 +6,7 @@ This page is a follow-up and bases its code off of [the previous page](/creating
 
 Sometimes you'll want to determine the result of a command depending on user input. It's a very common case with a very simple solution. This section will teach you how to extract user input from a message and use it in your code. Generally, you'll hear other people refer to this as "arguments", and you should refer to them as that as well.
 
-### Basic arguments
+## Basic arguments
 
 We'll actually be tackling 2 things at once here. Things will be explained along the way, so don't worry if you don't understand immediately.
 
@@ -87,7 +87,7 @@ So if the first argument provided is equal to "foo", then send back "bar". Other
 	</discord-message>
 </div>
 
-#### Caveats
+### Caveats
 
 Currently, you're using `.split(' ')` to split the command arguments. However, there's actually a slight issue with this. As is, it'll split the string by each and every space. Well, what happens if someone accidentally (or even purposely) adds additional spaces? Here's what:
 
@@ -126,7 +126,7 @@ Awesome! Nothing to worry in that regard about now. You're now using something c
 
 Here is where we'll be going over a few common situations where you'll want to make sure that an argument fits a certain criteria.
 
-### Mentions
+## Mentions
 
 Using the example of a kick command, you most likely want it to allow the user to use the command and mention the person to kick, right? We won't actually be constructing the full kick command in this example, but here's how you can go about it:
 
@@ -193,7 +193,7 @@ If you try again, it should work as expected.
 	</discord-message>
 </div>
 
-#### Working with multiple mentions
+### Working with multiple mentions
 
 Let's say you have some sort of `!avatar` command, where it'll display the avatar of all the mentioned users, or your own avatar if no users were mentioned. Focus on that 2nd part for now - how would you go about displaying your own avatar if no users were mentioned? Taking the snippet for the code you just used, you can do it just like this:
 
@@ -263,7 +263,7 @@ It does take up a lot of screen, but this is just an example command anyway.
 
 <p class="tip">If you're looking for a more advanced way to handle mentions as arguments you can check out [this guide](/miscellaneous/parsing-mention-arguments).</p>
 
-### Number ranges
+## Number ranges
 
 Sometimes you'll want users to give you input that ranges from X to Y, but nothing outside of that. Additionally, you want to make sure that they do give you an actual number and not random characters. A good example of this would be a `!prune` command, where it deletes X messages in the channel, depending on what the user inputs.
 
@@ -317,7 +317,7 @@ message.channel.bulkDelete(amount);
 
 And you've got a working prune command! Create a test channel, send a few random messages, and test it out.
 
-#### Caveats
+### Caveats
 
 You should note that there are actually a few caveats with the `.bulkDelete()` method. The first would be the trying to delete messages older than 2 weeks, which would normally error. Here's an easy fix for that:
 

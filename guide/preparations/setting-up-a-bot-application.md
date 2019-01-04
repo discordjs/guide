@@ -1,4 +1,6 @@
-## Creating an application
+# Setting up a bot application
+
+## Creating your bot
 
 Now that you've installed Node, discord.js, and hopefully a linter, you're almost ready to start coding! The next step you need to take is setting up an actual Discord bot application via Discord's website.
 

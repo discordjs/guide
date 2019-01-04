@@ -1,4 +1,4 @@
-## Parsing mention arguments
+# Parsing mention arguments
 
 In a previous chapter you learned how to build commands with user input, you also learned how to use *mentions* as user input.
 However, using `message.mentions` can lead to a few problems.  
@@ -26,7 +26,7 @@ Say someone accidentally used the ban command like this:
 
 The bot will still ban someone, but it will be the @Victim again. `message.mentions.users` still contains a mention, which the bot will use. But in reality you would want your bot to be able to tell the user he used the command incorrectly.
 
-### How Discord mentions work
+## How Discord mentions work
 
 Discord uses a special syntax to embed mentions in a message. For user mentions it is the user's ID with `<@` at the start and `>` at the end, like this: `<@86890631690977280>`. If they have a nickname there will also be a be a `!` after the `@`.  
 Role mentions and channel mentions work similarly. Role mentions look like `<@&134362454976102401>` and channel mentions like `<#222197033908436994>`.
@@ -47,7 +47,7 @@ then the `message.content` for that message will look something like this
 'I think we should add <@86890631690977280> to the <@&134362454976102401> role.'
 ```
 
-### Implementation
+## Implementation
 
 So, how do you actually use this new information for your bot?  
 Most of your code will not change, however instead of using `message.mentions` to find the mentioned users you will have to do it manually.  

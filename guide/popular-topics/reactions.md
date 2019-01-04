@@ -1,3 +1,5 @@
+# Reactions
+
 ## Reacting to messages
 
 One of the first things many people want to know is how to react with emojis, both custom and "regular" (unicode). There are different routes you need to take for each of those, so let's take a look at both.

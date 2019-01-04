@@ -4,7 +4,7 @@ REST APIs are extremely popular on the web and allow you to freely grab a site's
 
 If you've ever seen a music bot that accepts a YouTube query instead of just a video's URL, then you've seen a REST API in action. As a matter of fact, discord.js is made to use Discord's API. So, you've probably used an API yourself.
 
-## Using a REST API with Node
+## Making HTTP requests with Node
 
 In these examples we are going to be using [node-fetch](https://www.npmjs.com/package/node-fetch) which is a great library for making HTTP requests.
 

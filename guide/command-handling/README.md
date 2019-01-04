@@ -1,4 +1,4 @@
-## File and folder restructuring
+# File and folder structure
 
 As mentioned in a previous chapter, unless your bot project is a small one, it's not a very good idea to have a single file with a giant if/else if chain for commands. If you want to implement features into your bot and make your development process a lot less painful, you'll definitely want to use (or in this case, create) a command handler. Let's get started on that!
 
@@ -36,7 +36,7 @@ client.login(token);
 We'll be moving over the commands created in [the previous page](/creating-your-bot/commands-with-user-input) as well, but for the sake of keeping the base code short, those commands have been omitted from the codeblock above.
 :::
 
-### Individual command files
+## Individual command files
 
 Before anything, you may want to create a backup of your current bot file. If you've followed along so far, your entire folder structure should look something like this:
 
@@ -64,7 +64,7 @@ You can go ahead and do the same for the rest of your commands as well, putting 
 If you need to access your client instance from inside one of your command files, you can access it via `message.client`. If you need to access things such as external files or modules, you should re-require them at the top of the file.
 :::
 
-### Dynamically reading command files
+## Dynamically reading command files
 
 Back in your main file, make these two additions:
 

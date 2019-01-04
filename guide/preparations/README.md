@@ -1,3 +1,5 @@
+# Installing Node.js and discord.js
+
 ## Installing Node.js
 
 To use discord.js, you'll need to install Node.js. You can do so by going to [the Node.js website](https://nodejs.org/).

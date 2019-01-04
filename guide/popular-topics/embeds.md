@@ -1,11 +1,11 @@
-## Introduction
+# Embeds
 
 If you have been around on Discord for a bit chances are you have seen these special messages.
 They have a colored border, are often sent by bots and have embedded images, text fields and other fancy stuff.
 
 In the following section we will explain how you compose an embed, send it, and what you need to be aware of while doing so.
 
-### Embed preview
+## Embed preview
 
 Here is an example of what an embed may look like. We will go over their construction in the next part of this guide.
 

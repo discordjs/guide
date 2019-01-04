@@ -1,4 +1,4 @@
-# Understanding Notation
+# Understanding notation
 
 Throughout out the discord.js docs and when asking for help on the official server, you will run into many different kinds of notations. To help you understand the texts that you read, we will be going over some common notations.
 

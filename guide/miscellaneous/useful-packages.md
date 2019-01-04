@@ -1,14 +1,6 @@
-## Useful packages
+# Useful packages
 
-### Table of contents
-
- 1. moment.js
- 2. ms
- 3. common-tags
- 4. chalk
- 5. winston
-
-### moment.js
+## moment.js
 
 ::: tip
 Official documentation: https://momentjs.com/docs/
@@ -51,7 +43,7 @@ else {
 }
 ```
 
-### ms
+## ms
 
 ::: tip
 Official documentation: https://github.com/zeit/ms
@@ -77,7 +69,7 @@ const formatted = ms(difference);
 message.channel.send(`You sent the two messages ${formatted} apart.`);
 ```
 
-### common-tags
+## common-tags
 
 ::: tip
 Official documentation: https://github.com/declandewet/common-tags
@@ -122,7 +114,7 @@ message.channel.send(oneLineCommaListsOr`
 
 Check the the documentation to find more useful functions.
 
-### chalk
+## chalk
 
 ::: tip
 Official documentation: https://www.npmjs.com/package/chalk
@@ -148,7 +140,7 @@ console.log(chalk.green.bgBrightBlack.underline('This is so pretty.'));
 
 ![image of code above](~@/images/chalk-ugly.png)
 
-### winston
+## winston
 
 ::: tip
 Official documentation: https://github.com/winstonjs/winston

@@ -1,10 +1,8 @@
-## Handling commands
+# Dynamic commands
 
-::: tip
-This page is a follow-up and bases its code off of [the previous page](/command-handling/).
-:::
+<tip>This page is a follow-up and bases its code off of [the previous page](/command-handling/).</tip>
 
-### How it works
+## How it works
 
 Now that you have a Collection of all our commands, you can use them easily! But before diving straight into it, it'd be a good idea to familiarize yourself with how you'll turn these basic if statements into something much more dynamic and robust. So let's continue with 1 more if statement example, and then we'll move onto the real stuff.
 
@@ -43,7 +41,7 @@ client.on('message', message => {
 
 That would work perfectly fine, but it isn't dynamic; you'd still have to add an if statement and the same old code each time you wanted to register a new command, which is less than ideal.
 
-### Dynamically executing commands
+## Dynamically executing commands
 
 At this point, you can take that entire if/else if chain and delete it; you won't need anything past the `const command = ...` line. Instead, you'll be replacing it with this:
 

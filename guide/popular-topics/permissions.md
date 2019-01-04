@@ -1,10 +1,10 @@
-## Introduction
+# Permissions
 
 Permissions are Discords primary feature enabling users to customize the workings of their server to their liking.
 To break it down to essentials: Permissions and permission overwrites tell Discord who is allowed to do what and where.
 When first confronted with them they can be quite confusing, but no worries we are here to take care of that, so let's dive in!
 
-### Roles as bot permissions
+## Roles as bot permissions
 
 If you want to keep your bots permission checks simple, you might find it sufficient to just check if the member executing the command has a certain role.
 
@@ -22,7 +22,7 @@ If you want to enhance this system slightly, you can include the guild owner by 
 
 To include permission checks like `ADMINISTRATOR` or `MANAGE_GUILD`, keep reading as we will cover Discord Permissions and all their intricacies in the following sections.
 
-### Terminology
+## Terminology
 
 * Permission: The ability to execute a certain action in Discord
 * Overwrite: Rule on a channel to modify the permissions for a member or role

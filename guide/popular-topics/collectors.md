@@ -1,4 +1,6 @@
-##  Message collectors
+# Collectors
+
+## Message collectors
 
 Collectors are a useful way to enable your bot to obtain *additional* input after the first command was sent. An example would be initiating a quiz, where the bot will "await" a correct response from somebody.
 

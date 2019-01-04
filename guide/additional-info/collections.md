@@ -1,4 +1,4 @@
-## Introduction
+# Collections
 
 Discord.js comes with this utility class known as `Collection`.
 It extends JavaScript's native `Map` class, so it has all the features of `Map` and more!  

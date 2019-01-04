@@ -1,4 +1,4 @@
-## Adding more commands
+# Adding more commands
 
 ::: tip
 This page is a follow-up and bases its code off of [the previous page](/creating-your-bot/configuration-files).
@@ -34,7 +34,7 @@ From now on, if you change the prefix or token in your config.json file, it'll c
 If you aren't familiar with some of this syntax, it may be because some of this is ES6 syntax. If it does confuse you, you should check out [this guide page](/additional-info/es6-syntax) before continuing.
 :::
 
-### Simple command structure
+## Simple command structure
 
 You already have an if statement that checks messages for a ping/pong command. Adding other command checks is just as easy; just chain an `else if` to your existing condition.
 
@@ -64,11 +64,11 @@ Now the ping command will trigger whenever the message _starts with_ `!ping`! So
 Be aware that this will also match `!pingpong`, `!pinguin`, and the like. This is not a huge problem for now, so don't worry; you'll see better ways to check for commands later.
 :::
 
-### Displaying real data
+## Displaying real data
 
 Let's start displaying some real data. For now, we'll be displaying basic member/server info.
 
-#### Server info command
+### Server info command
 
 Make another if statement to check for commands using `server` as the command name. You've already interacted with the Message object via `message.channel.send()`. You get the message object, access the channel it was sent in, and send a message to it. Just like how `message.channel` gives you the message's _channel_, `message.guild` gives you the message's _server_.
 
@@ -123,7 +123,7 @@ You can, of course, modify this to your liking. You may want to also display the
 Want a list of all the properties you can access and all the methods you can call on a server? Refer to [the discord.js documentation site](https://discord.js.org/#/docs/main/stable/class/Guild)!
 :::
 
-#### Member info command
+### Member info command
 
 Set up another if statement and use the command name `user-info`.
 
@@ -153,7 +153,7 @@ This will display the message author's **username** (not nickname, if they have 
 
 And there you have it! As you can see, it's quite simple to add additional commands.
 
-## The problem with if/else if
+## The problem with `if`/`else if`
 
 If you don't plan to make more than 7 or 8 commands for your bot, then using an if/else if chain is perfectly fine; it's presumably a small project at that point, so you shouldn't need to spend too much time on it. However, this isn't the case for most of us.
 
