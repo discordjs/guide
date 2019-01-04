@@ -32,12 +32,12 @@ As mentioned above, you'll need to replace the `client_id` parameter with your c
 
 Insert your app's ID into the link template and then access it in your browser. You should see something like this (with your bot's username and avatar):
 
-![Bot Authorization field](assets/img/A8l70bj.png)
+![Bot Authorization field](~@/images/A8l70bj.png)
 
 Choose the server you want to add it to and click "Authorize". Do note that you'll need the "Manage Server" permission on a server in order to be able to add your bot there. This should then present you a nice confirmation message:
 
-![Bot authorized](assets/img/BAUsjyg.png)
+![Bot authorized](~@/images/BAUsjyg.png)
 
 Congratulations! You've successfully added your bot to your Discord server. It should show up in your server's member list somewhat like this:
 
-![Bot in server's user list](assets/img/6qTlDW0.png)
+![Bot in server's user list](~@/images/6qTlDW0.png)
