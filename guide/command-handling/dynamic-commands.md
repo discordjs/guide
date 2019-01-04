@@ -1,6 +1,8 @@
 # Dynamic commands
 
-<tip>This page is a follow-up and bases its code off of [the previous page](/command-handling/).</tip>
+::: tip
+This page is a follow-up and bases its code off of [the previous page](/command-handling/).
+:::
 
 ## How it works
 
