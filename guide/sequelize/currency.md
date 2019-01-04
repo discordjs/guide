@@ -19,7 +19,7 @@ This time we'll have 6 files.
 
 Here is an entity relation diagram of the models we'll be making:
 
-<object type="image/svg+xml" data="assets/img/currency_er_diagram.svg" class="logo currency-table-diagram"></object>
+<img src="~@/images/currency_er_diagram.svg" alt="Curreny database structure diagram" />
 
 `Users` have a `user_id`, and a `balance`. Each `user_id` can have multiple links to the `UserItems` table, and each entry in the table is connected to one of the items in the `CurrencyShop`, which will have a `name` and a `cost` associated with it. 
 
@@ -114,7 +114,6 @@ sequelize.import('models/UserItems');
 const force = process.argv.includes('--force') || process.argv.includes('-f');
 
 sequelize.sync({ force }).then(async () => {
-
 	const shop = [
 		CurrencyShop.upsert({ name: 'Tea', cost: 1 }),
 		CurrencyShop.upsert({ name: 'Coffee', cost: 2 }),
@@ -123,7 +122,6 @@ sequelize.sync({ force }).then(async () => {
 	await Promise.all(shop);
 	console.log('Database synced');
 	sequelize.close();
-
 }).catch(console.error);
 ```
 
@@ -233,7 +231,6 @@ client.on('message', async message => {
 	else if (command === 'leaderboard') {
 		// [lambda]
 	}
-
 });
 
 client.login('pleaseinsertyourtokenheresothistutorialcanwork');
