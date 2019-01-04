@@ -73,6 +73,8 @@ The end goal will be to display the user's avatar, username, and a simple "Welco
 `node-canvas` works almost identical to HTML5 Canvas. You can read the HTML5 Canvas tutorials on [w3Schools](https://www.w3schools.com/html/html5_canvas.asp) and [MDN](https://developer.mozilla.org/kab/docs/Web/API/Canvas_API) for more information later!
 :::
 
+<!-- eslint-disable require-await -->
+
 ```js
 client.on('guildMemberAdd', async member => {
 	const channel = member.guild.channels.find(ch => ch.name === 'member-log');

@@ -188,6 +188,8 @@ Getting items is similar, we just `.findAll()` using the user's id as the key. T
 
 To put it together, we'll create an `app.js` in the base directory with the following skeleton code.
 
+<!-- eslint-disable require-await -->
+
 ```js
 const Discord = require('discord.js');
 

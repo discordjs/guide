@@ -123,6 +123,8 @@ If the images doesn't display inside the embed but outside of it, double check y
 
 ## Using an embed object
 
+<!-- eslint-disable camelcase -->
+
 ```js
 const exampleEmbed = {
 	color: 0x0099ff,

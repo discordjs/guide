@@ -239,6 +239,8 @@ Send a messsage, restart your bot, and add a reaction to the message you just se
 
 Since the `raw` event gives you just enough data to work with, you can build up the proper objects and emit the other events yourself. First, replace your entire `raw` event with this:
 
+<!-- eslint-disable require-await, no-useless-return -->
+
 ```js
 const events = {
 	MESSAGE_REACTION_ADD: 'messageReactionAdd',

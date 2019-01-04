@@ -18,6 +18,8 @@ npm install node-fetch
 
 To start off, you're just going to be using this skeleton code:
 
+<!-- eslint-disable require-await -->
+
 ```js
 const Discord = require('discord.js');
 

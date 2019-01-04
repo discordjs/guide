@@ -4,7 +4,7 @@ If you've used JavaScript for only a (relatively) small amount of time or just a
 
 Here's the startup code we'll be using:
 
-<!-- eslint-disable prefer-template-->
+<!-- eslint-disable prefer-template -->
 
 ```js
 const Discord = require('discord.js');
@@ -85,7 +85,7 @@ function letsPretendThisDoesSomething() {
 }
 ```
 
-<!-- eslint-disable prefer-template-->
+<!-- eslint-disable prefer-template -->
 
 ```js
 // regular string concatenation
@@ -97,9 +97,9 @@ console.log('1 + 1 = ' + (1 + 1));
 console.log('And here\'s a function call: ' + letsPretendThisDoesSomething());
 
 console.log(
-	'Putting strings on new lines\n' +
-	'can be a bit painful\n' +
-	'with string concatenation. :('
+	'Putting strings on new lines\n'
+	+ 'can be a bit painful\n'
+	+ 'with string concatenation. :('
 );
 ```
 
@@ -130,7 +130,7 @@ Arrow functions are shorthand for regular functions, with the addition that they
 
 Here are some examples of ways you can benefit from arrow functions over regular functions:
 
-<!-- eslint-disable no-var prefer-template -->
+<!-- eslint-disable func-names, no-var, prefer-arrow-callback, prefer-template -->
 
 ```js
 // regular functions, full ES5

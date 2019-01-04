@@ -92,11 +92,11 @@ You can see that by clicking `Authorize`, you are allowing the application to ac
 			const match = window.location.hash.match(/access_token=(.+?)&token_type=(.+?)(?:&|$)/);
 
 			if (match) {
-				const [, access_token, token_type] = match;
+				const [, accessToken, tokenType] = match;
 
 				fetch('https://discordapp.com/api/users/@me', {
 					headers: {
-						authorization: `${token_type} ${access_token}`
+						authorization: `${tokenType} ${accessToken}`
 					}
 				})
 					.then(res => res.json())
@@ -151,7 +151,7 @@ When you visit a url with a `state` parameter appended to it and then click `Aut
 const match = window.location.hash.match(/access_token=(.+?)&token_type=(.+?)&state=(.+?)(?:&|$)/);
 
 if (match) {
-	const [, access_token, token_type, urlState] = match;
+	const [, accessToken, tokenType, urlState] = match;
 	const stateParameter = localStorage.getItem('stateParameter');
 
 	if (btoa(stateParameter) !== decodeURIComponent(urlState)) {

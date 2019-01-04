@@ -5,7 +5,7 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('message', async message => {
+client.on('message', message => {
 	if (message.content === '!react') {
 		message.react('😄');
 	}
