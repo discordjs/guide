@@ -10,7 +10,7 @@ cd guide
 yarn # or npm install
 ```
 
-You should install the necessary dev dependencies afterwards, so that view the site locally. You can use `yarn serve` to open up a local version of the site at http://localhost:8080. If you need to use a different port, run it as `yarn serve -- --port=1234`.
+You should install the necessary dev dependencies afterwards, so that view the site locally. You can use `yarn serve` to open up a local version of the site at http://localhost:8080. If you need to use a different port, run it as `yarn serve --port=1234`.
 
 ### Linting
 
