@@ -3,12 +3,12 @@
   "description": "The official guide for discord.js, created and maintained by core members of its community.",
   "version": "1.0.0",
   "scripts": {
-    "lint": "eslint . --ext md,js",
+    "lint": "eslint . --ext js,md,vue",
     "serve": "vuepress dev guide",
     "build": "vuepress build guide"
   },
   "repository": "https://github.com/discordjs/guide.git",
-  "keywords": [
+  "keywords": [	
     "discord",
     "bot",
     "guide",
