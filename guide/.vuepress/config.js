@@ -10,7 +10,7 @@ const config = {
 		['meta', { name: 'og:description', content: 'A guide made by the community of discord.js for its users.' }],
 		['meta', { name: 'og:type', content: 'website' }],
 		['meta', { name: 'og:url', content: 'https://discordjs.guide/' }],
-		['meta', { name: 'og:locale', content: 'en_US', }],
+		['meta', { name: 'og:locale', content: 'en_US' }],
 	],
 	theme: 'yuu',
 	themeConfig: {

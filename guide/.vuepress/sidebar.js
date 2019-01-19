@@ -4,7 +4,7 @@ module.exports = {
 			title: 'Home',
 			children: [
 				'/',
-				'/requesting-more-content'
+				'/requesting-more-content',
 			],
 		},
 		{
@@ -42,7 +42,7 @@ module.exports = {
 			title: 'Home',
 			children: [
 				'/',
-				'requesting-more-content'
+				'requesting-more-content',
 			],
 		},
 		{
@@ -131,4 +131,4 @@ module.exports = {
 			],
 		},
 	],
-}
+};

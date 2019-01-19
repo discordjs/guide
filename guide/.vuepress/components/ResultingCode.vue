@@ -1,5 +1,10 @@
 <template>
-	<p>If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository <a :href="githubLink" target="_blank" rel="noopener noreferrer">here <outbound-link /></a>.</p>
+	<p>
+		If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository
+		<a :href="githubLink" target="_blank" rel="noopener noreferrer">
+			here <outbound-link />
+		</a>.
+	</p>
 </template>
 
 <script>
@@ -17,7 +22,7 @@ export default {
 	},
 
 	mounted() {
-		this.githubLink += this.path || this.$page.path.slice(1).replace(/\.(html|md)/, '');
-	}
+		this.githubLink += this.path || this.$page.path.slice(1).replace('.html', '');
+	},
 };
 </script>
