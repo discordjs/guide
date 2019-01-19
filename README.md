@@ -1,5 +1,9 @@
 # Discord.js Guide
 
+<div align="center">
+	<img src="guide/images/logo-small.png" title="Discord.js Guide" alt="Discord.js Guide" />
+</div>
+
 The official guide for [discord.js](https://github.com/discordjs/discord.js), created and maintained by core members of its community and contributed to by [various others](https://github.com/discordjs/guide/graphs/contributors?type=a).
 
 ## About
