@@ -15,8 +15,6 @@ function getUserFromMention(mention) {
 
 		return client.users.get(mention);
 	}
-
-	return;
 }
 
 // eslint-disable-next-line no-unused-vars

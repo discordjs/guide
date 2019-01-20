@@ -1,10 +1,10 @@
-## Introduction
+# Permissions
 
 Permissions are Discords primary feature enabling users to customize the workings of their server to their liking.
 To break it down to essentials: Permissions and permission overwrites tell Discord who is allowed to do what and where.
 When first confronted with them they can be quite confusing, but no worries we are here to take care of that, so let's dive in!
 
-### Roles as bot permissions
+## Roles as bot permissions
 
 If you want to keep your bots permission checks simple, you might find it sufficient to just check if the member executing the command has a certain role.
 
@@ -22,7 +22,7 @@ If you want to enhance this system slightly, you can include the guild owner by 
 
 To include permission checks like `ADMINISTRATOR` or `MANAGE_GUILD`, keep reading as we will cover Discord Permissions and all their intricacies in the following sections.
 
-### Terminology
+## Terminology
 
 * Permission: The ability to execute a certain action in Discord
 * Overwrite: Rule on a channel to modify the permissions for a member or role
@@ -31,7 +31,9 @@ To include permission checks like `ADMINISTRATOR` or `MANAGE_GUILD`, keep readin
 * Base Permissions: Permissions for roles the member has, set on the guild level
 * Final Permissions: Permissions for a member or role, after all overwrites are applied
 
-<tip>You can provide permission decimals wherever we use flag literals in this guide. If you are interested in a handy permission calculator you can look at the "Bot" section in the [Discord developer portal](https://discordapp.com/developers/applications).</tip>
+::: tip
+You can provide permission decimals wherever we use flag literals in this guide. If you are interested in a handy permission calculator you can look at the "Bot" section in the [Discord developer portal](https://discordapp.com/developers/applications).
+:::
 
 ## Base permissions
 
@@ -45,7 +47,9 @@ guild.defaultRole.setPermissions(['SEND_MESSAGES', 'VIEW_CHANNEL']);
 
 Any permission not referenced in the flag array or bit field are not granted to the role. 
 
-<tip>Note that flag names are literal. Although `VIEW_CHANNEL` grants access to view multiple channels the permission flag is still called `VIEW_CHANNEL` in singular.</tip>
+::: tip
+Note that flag names are literal. Although `VIEW_CHANNEL` grants access to view multiple channels the permission flag is still called `VIEW_CHANNEL` in singular.
+:::
 
 ### Creating a role with permissions
 
@@ -118,7 +122,9 @@ guild.createChannel('new-channel', 'text', [
 
 These objects are [ChannelCreationOverwrites](https://discord.js.org/#/docs/main/stable/typedef/ChannelCreationOverwrites) and differ from [PermissionOverwriteOptions](https://discord.js.org/#/docs/main/stable/typedef/PermissionOverwriteOptions); be careful to not mix them up!
 
-<warning>On the master branch, the functionality of `GuildChannel#overwritePermissions` is changed to replacing all overwrites. `GuildChannel#updateOverwrite` is introduced to take its place in updating a single overwrite while keeping all others intact.</warning>
+::: warning
+On the master branch, the functionality of `GuildChannel#overwritePermissions` is changed to replacing all overwrites. `GuildChannel#updateOverwrite` is introduced to take its place in updating a single overwrite while keeping all others intact.
+:::
 
 ### Replacing overwrites
 
@@ -143,7 +149,9 @@ channel.replacePermissionOverwrites({
 });
 ```
 
-<warning>On the master branch, the functionality of `GuildChannel#overwritePermissions` is changed to replace overwrites</warning>
+::: warning
+On the master branch, the functionality of `GuildChannel#overwritePermissions` is changed to replace overwrites
+:::
 
 ### Removing overwrites
 
@@ -187,7 +195,9 @@ const botPermissionsIn = guild.me.permissionsIn(channel);
 const rolePermissions = channel.permissionsFor(role);
 ```
 
-<warning>The `.permissionsFor()` method returns a bit field with all permissions set if the member or role has the global `ADMINISTRATOR` permission and does not take overwrites into consideration in this case. Using the second parameter of the `.has()` method as described further down in the guide will not allow you to check without taking `ADMINISTRATOR` into account here!</warning>
+::: warning
+The `.permissionsFor()` method returns a bit field with all permissions set if the member or role has the global `ADMINISTRATOR` permission and does not take overwrites into consideration in this case. Using the second parameter of the `.has()` method as described further down in the guide will not allow you to check without taking `ADMINISTRATOR` into account here!
+:::
 
 If you want to know how to work with the returned Permissions objects keep reading as this will be our next topic.
 
@@ -289,8 +299,10 @@ console.log(permissions.has('KICK_MEMBERS'));
 
 You can utilize these methods to adapt permissions or overwrites without touching the other flags. To achieve this you can get the existing permissions for a role, manipulating the bit field as described above and passing the changed bit field to `role.setPermissions()`.
 
-<tip>In the stable branch, `role.permissions` returns a number which needs to be converted to a Permissions object for this to work as described here. We covered how to achieve this in the section "[Converting permission numbers to Objects](popular-topics/permissions?id=converting-permission-numbers)"</tip>
+::: tip
+In the stable branch, `role.permissions` returns a number which needs to be converted to a Permissions object for this to work as described here. We covered how to achieve this in the section "[Converting permission numbers to Objects](/popular-topics/permissions.md#converting-permission-numbers)"
+:::
 
 ## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/popular-topics/permissions/).
+<resulting-code />

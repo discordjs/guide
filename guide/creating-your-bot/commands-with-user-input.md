@@ -1,10 +1,12 @@
-## Commands with user input (a.k.a. "arguments")
+# Commands with user input (a.k.a. "arguments")
 
-<tip>This page is a follow-up and bases its code off of [the previous page](/creating-your-bot/adding-more-commands).</tip>
+::: tip
+This page is a follow-up and bases its code off of [the previous page](/creating-your-bot/adding-more-commands.md).
+:::
 
 Sometimes you'll want to determine the result of a command depending on user input. It's a very common case with a very simple solution. This section will teach you how to extract user input from a message and use it in your code. Generally, you'll hear other people refer to this as "arguments", and you should refer to them as that as well.
 
-### Basic arguments
+## Basic arguments
 
 We'll actually be tackling 2 things at once here. Things will be explained along the way, so don't worry if you don't understand immediately.
 
@@ -39,7 +41,7 @@ else if (command === 'args-info') {
 
 If you try it out, you'll get something like this:
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!args-info here are my arguments
 	</discord-message>
@@ -47,7 +49,7 @@ If you try it out, you'll get something like this:
 		Command name: args-info <br>
 		Arguments: here,are,my,arguments
 	</discord-message>
-</discord-messages>
+</div>
 
 Looks good! Don't worry about the comma separation; that's the expected output when trying to send an array as a string.
 
@@ -70,7 +72,7 @@ else if (command === 'args-info') {
 
 So if the first argument provided is equal to "foo", then send back "bar". Otherwise, just send back the argument the user provided.
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!args-info foo
 	</discord-message>
@@ -83,13 +85,13 @@ So if the first argument provided is equal to "foo", then send back "bar". Other
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
 		First argument: not-foo
 	</discord-message>
-</discord-messages>
+</div>
 
-#### Caveats
+### Caveats
 
 Currently, you're using `.split(' ')` to split the command arguments. However, there's actually a slight issue with this. As is, it'll split the string by each and every space. Well, what happens if someone accidentally (or even purposely) adds additional spaces? Here's what:
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!args-info     here    are    my    arguments
 	</discord-message>
@@ -98,7 +100,7 @@ Currently, you're using `.split(' ')` to split the command arguments. However, t
 		Arguments: here,,,,,are,,,,,my,,,,,,arguments <br>
 		Argument length: 20
 	</discord-message>
-</discord-messages>
+</div>
 
 If you've never done something like this before, this probably isn't what you'd expect, right? Thankfully, there's a simple solution for this issue. The red line is what to remove, and the green line is what to replace it with.
 
@@ -107,7 +109,7 @@ If you've never done something like this before, this probably isn't what you'd 
 + const args = message.content.slice(prefix.length).split(/ +/);
 ```
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!args-info     here    are    my    arguments
 	</discord-message>
@@ -116,7 +118,7 @@ If you've never done something like this before, this probably isn't what you'd 
 		Arguments: here,are,my,arguments <br>
 		Argument length: 4
 	</discord-message>
-</discord-messages>
+</div>
 
 Awesome! Nothing to worry in that regard about now. You're now using something called a "regular expression" (commonly referred to as "regex") to handle that small (but important) bug.
 
@@ -124,7 +126,7 @@ Awesome! Nothing to worry in that regard about now. You're now using something c
 
 Here is where we'll be going over a few common situations where you'll want to make sure that an argument fits a certain criteria.
 
-### Mentions
+## Mentions
 
 Using the example of a kick command, you most likely want it to allow the user to use the command and mention the person to kick, right? We won't actually be constructing the full kick command in this example, but here's how you can go about it:
 
@@ -142,14 +144,14 @@ else if (command === 'kick') {
 
 And as you can see, it works!
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!kick <mention>Tutorial Bot</mention>
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
 		You wanted to kick: Tutorial Bot
 	</discord-message>
-</discord-messages>
+</div>
 
 But what happens if you try to use the command without mentioning anybody? If you try it yourself, you'll notice that the bot doesn't respond (due to it crashing), and you should see something like this in your console:
 
@@ -168,13 +170,15 @@ if (!message.mentions.users.size) {
 }
 ```
 
-<tip>If you're wondering what `message.reply()` does, it's just an alternative for `message.channel.send()` which also prepends a mention of the person who sent the message, unless used in a DM. It can be very useful for providing feedback!</tip>
+::: tip
+If you're wondering what `message.reply()` does, it's just an alternative for `message.channel.send()` which also prepends a mention of the person who sent the message, unless used in a DM. It can be very useful for providing feedback!
+:::
 
 Since `message.mentions.users` is a Collection, it has a `.size` property. If no users are mentioned, it'll return 0 (which is a `falsy` value), meaning you can do `if (!value)` to check if it's falsy.
 
 If you try again, it should work as expected.
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!kick
 	</discord-message>
@@ -187,9 +191,9 @@ If you try again, it should work as expected.
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
 		You wanted to kick: Tutorial Bot
 	</discord-message>
-</discord-messages>
+</div>
 
-#### Working with multiple mentions
+### Working with multiple mentions
 
 Let's say you have some sort of `!avatar` command, where it'll display the avatar of all the mentioned users, or your own avatar if no users were mentioned. Focus on that 2nd part for now - how would you go about displaying your own avatar if no users were mentioned? Taking the snippet for the code you just used, you can do it just like this:
 
@@ -205,11 +209,13 @@ else if (command === 'avatar') {
 }
 ```
 
-<warning>Depending on your discord.js version, the `.displayAvatarURL` part may vary. On v12, it'll be `.displayAvatarURL()` (a method), and on v11, it'll be `.displayAvatarURL` (a property). You can check what version you're running by using the `npm ls discord.js` command in your console.</warning>
+::: warning
+Depending on your discord.js version, the `.displayAvatarURL` part may vary. On v12, it'll be `.displayAvatarURL()` (a method), and on v11, it'll be `.displayAvatarURL` (a property). You can check what version you're running by using the `npm ls discord.js` command in your console.
+:::
 
 That part is simple; just recycle the if statement you used in the section above and displaying the link to your avatar.
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!avatar
 	</discord-message>
@@ -217,7 +223,7 @@ That part is simple; just recycle the if statement you used in the section above
 		Your avatar:
 		https://cdn.discordapp.com/avatars/459757892778590229/72153038872deb9b81a2444a0edcf041.png?size=2084
 	</discord-message>
-</discord-messages>
+</div>
 
 The next part is where it takes a turn - displaying the avatars of all the mentioned users. But it's simpler than you may think! `message.mentions.users` returns a Collection (as previously mentioned), which you can loop over in a number of different ways. You'll be using `.map()` to loop here, since it allows you to easily collect and store data in a variable in order to send 1 final message in the end, as opposed to multiple.
 
@@ -241,7 +247,7 @@ else if (command === 'avatar') {
 
 And ta-da! You now have a list of avatar links of all the users you tagged.
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!avatar <mention :highlight="true">User</mention> <mention>Tutorialbot</mention>
 	</discord-message>
@@ -251,13 +257,13 @@ And ta-da! You now have a list of avatar links of all the users you tagged.
 		Tutorial Bot's avatar:
 		https://cdn.discordapp.com/avatars/459757708720209940/d48f3d90d923e9531c02c6bb9850339f.png?size=2084
 	</discord-message>
-</discord-messages>
+</div>
 
 It does take up a lot of screen, but this is just an example command anyway.
 
-<p class="tip">If you're looking for a more advanced way to handle mentions as arguments you can check out [this guide](/miscellaneous/parsing-mention-arguments).</p>
+<p class="tip">If you're looking for a more advanced way to handle mentions as arguments you can check out [this guide](/miscellaneous/parsing-mention-arguments.md).</p>
 
-### Number ranges
+## Number ranges
 
 Sometimes you'll want users to give you input that ranges from X to Y, but nothing outside of that. Additionally, you want to make sure that they do give you an actual number and not random characters. A good example of this would be a `!prune` command, where it deletes X messages in the channel, depending on what the user inputs.
 
@@ -279,14 +285,14 @@ else if (command === 'prune') {
 
 And if you test it, it should work as expected.
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!prune some-string
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
 		<mention :highlight="true">User</mention>, that doesn't seem to be a valid number.
 	</discord-message>
-</discord-messages>
+</div>
 
 So what you need to do next is check if the first argument is between X and Y. Following the idea of a prune command, you'll most likely want to use the `.bulkDelete()` method, which allows you to delete multiple messages in one fell swoop.
 
@@ -295,8 +301,7 @@ With that being said, that method does have its limits: you can only delete a mi
 ```js
 if (isNaN(amount)) {
 	return message.reply('that doesn\'t seem to be a valid number.');
-}
-else if (amount < 2 || amount > 100) {
+} else if (amount < 2 || amount > 100) {
 	return message.reply('you need to input a number between 2 and 100.');
 }
 
@@ -311,7 +316,7 @@ message.channel.bulkDelete(amount);
 
 And you've got a working prune command! Create a test channel, send a few random messages, and test it out.
 
-#### Caveats
+### Caveats
 
 You should note that there are actually a few caveats with the `.bulkDelete()` method. The first would be the trying to delete messages older than 2 weeks, which would normally error. Here's an easy fix for that:
 
@@ -328,7 +333,9 @@ message.channel.bulkDelete(amount, true).catch(err => {
 });
 ```
 
-<tip>If you aren't familiar with the `.catch()` method, it's used to catch errors on Promises. Unsure what Promises are? Google around for more info!</tip>
+::: tip
+If you aren't familiar with the `.catch()` method, it's used to catch errors on Promises. Unsure what Promises are? Google around for more info!
+:::
 
 The other caveat with this is that the `!prune {number}` message you sent will also count towards the amount deleted. What this means is that if you send `!prune 2`, it'll delete that message and only one other. There are a couple ways around this, but we'll be taking the easiest route for the sake of the tutorial. Here are the edits to make to your current code:
 
@@ -348,4 +355,4 @@ The other caveat with this is that the `!prune {number}` message you sent will a
 
 ## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/creating-your-bot/commands-with-user-input).
+<resulting-code />

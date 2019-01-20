@@ -1,15 +1,15 @@
-## Introduction
+# Embeds
 
 If you have been around on Discord for a bit chances are you have seen these special messages.
 They have a colored border, are often sent by bots and have embedded images, text fields and other fancy stuff.
 
 In the following section we will explain how you compose an embed, send it, and what you need to be aware of while doing so.
 
-### Embed preview
+## Embed preview
 
 Here is an example of what an embed may look like. We will go over their construction in the next part of this guide.
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
 		<discord-embed
 			slot="embeds"
@@ -47,7 +47,7 @@ Here is an example of what an embed may look like. We will go over their constru
 			<span slot="footer">Some footer text here</span>
 		</discord-embed>
 	</discord-message>
-</discord-messages>
+</div>
 
 ## Using the RichEmbed constructor
 
@@ -77,13 +77,17 @@ const exampleEmbed = new Discord.RichEmbed()
 channel.send(exampleEmbed);
 ```
 
-<tip>You don't need to include all the elements showcased above. If you want a simpler embed, just leave some out.</tip>
+::: tip
+You don't need to include all the elements showcased above. If you want a simpler embed, just leave some out.
+:::
 
 The `.setColor()` method accepts a base 10 integer, HEX color string, an array of RGB values or specific color strings. You can find a list of them at [the Discord.js documentation](https://discord.js.org/#/docs/main/stable/typedef/ColorResolvable).
 
 `.addBlankField()` is a convenience method for `.addField('\u200b', '\u200b')` to add a spacer to the embed. This can also be used inline by passing `true` as the first parameter.
 
-<warning>On the master branch, the receiving and outgoing embed classes have been unified; you will need to use `Discord.MessageEmbed()` as constructor instead.</warning>
+::: warning
+On the master branch, the receiving and outgoing embed classes have been unified; you will need to use `Discord.MessageEmbed()` as constructor instead.
+:::
 
 The above example chains the manipulating methods to the newly created RichEmbed object.
 If you want to modify the embed based on conditions you will need to reference it as the constant `exampleEmbed` (for our example).
@@ -113,9 +117,13 @@ const exampleEmbed = new Discord.RichEmbed()
 channel.send(exampleEmbed);
 ```
 
-<warning>If the images doesn't display inside the embed but outside of it, double check your syntax to make sure it's as shown above.</warning>
+::: warning
+If the images doesn't display inside the embed but outside of it, double check your syntax to make sure it's as shown above.
+:::
 
 ## Using an embed object
+
+<!-- eslint-disable camelcase -->
 
 ```js
 const exampleEmbed = {
@@ -169,9 +177,13 @@ const exampleEmbed = {
 channel.send({ embed: exampleEmbed });
 ```
 
-<tip>You don't need to include all the elements showcased above. If you want a simpler embed, just leave some out.</tip>
+::: tip
+You don't need to include all the elements showcased above. If you want a simpler embed, just leave some out.
+:::
 
-<warning>The `color` field has to be a base 10 integer for embed objects! If you have a hex color string (e.g. `'#0099ff'`) you can replace the `#` with `0x` to use it as a number: `0x0099ff`.</warning>
+::: warning
+The `color` field has to be a base 10 integer for embed objects! If you have a hex color string (e.g. `'#0099ff'`) you can replace the `#` with `0x` to use it as a number: `0x0099ff`.
+:::
 
 If you want to modify the embed object based on conditions you will need to reference it as the constant `exampleEmbed` (for our example). You can then reassign the property values as you would with any other object.
 
@@ -202,7 +214,9 @@ const exampleEmbed = {
 channel.send({ files: [file], embed: exampleEmbed });
 ```
 
-<warning>If the images doesn't display inside the embed but outside of it, double check your syntax to make sure it's as shown above.</warning>
+::: warning
+If the images doesn't display inside the embed but outside of it, double check your syntax to make sure it's as shown above.
+:::
 
 ## Resending embeds
 
@@ -210,7 +224,9 @@ At some point in your bot development, you might want to get an embed from a mes
 
 To achieve this, you retrieve the embed from the messages embed array (`message.embeds`) and pass it to the RichEmbed constructor. The constructed RichEmbed can then be edited before sending it again.
 
-<warning>You cannot just resend the received embed structure! It's a [MessageEmbed](https://discord.js.org/#/docs/main/stable/class/MessageEmbed) rather than a RichEmbed and contains circular references that prevent sending.</warning>
+::: warning
+You cannot just resend the received embed structure! It's a [MessageEmbed](https://discord.js.org/#/docs/main/stable/class/MessageEmbed) rather than a RichEmbed and contains circular references that prevent sending.
+:::
 
 ```js
 const receivedEmbed = message.embeds[0];

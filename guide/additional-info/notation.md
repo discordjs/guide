@@ -1,8 +1,10 @@
-# Understanding Notation
+# Understanding notation
 
 Throughout out the discord.js docs and when asking for help on the official server, you will run into many different kinds of notations. To help you understand the texts that you read, we will be going over some common notations.
 
-<tip>Always keep in mind that notation is not always rigorous. There will be typos, misunderstandings, or context that will cause notation to differ from the usual meanings.</tip>
+::: tip
+Always keep in mind that notation is not always rigorous. There will be typos, misunderstandings, or context that will cause notation to differ from the usual meanings.
+:::
 
 ## Classes
 
@@ -16,7 +18,9 @@ The notation `Class#foo` can refer to the `foo` property, method, or event of th
 - `TextChannel#send`, means that you should refer to the `send` method on a `TextChannel`.
 - `Client#message`, means that you should refer to the `message` event on a `Client`.
 
-<tip>Remember that this notation is not valid JavaScript, it is a shorthand to refer to a certain piece of code.</tip>
+::: tip
+Remember that this notation is not valid JavaScript, it is a shorthand to refer to a certain piece of code.
+:::
 
 Sometimes, the notation is extended, which can help you determine which one the writer meant. For example, `TextChannel#send(content, options)` is definitely a method of `TextChannel`, since it uses function notation. And, `Client#event:message` is an event, since it says that it is an event.
 
@@ -24,7 +28,7 @@ The important thing to take away from this notation is that the `#` symbol signi
 
 An example of where this notation is used is in the documentation's search feature.
 
-![Docs search](/assets/img/search.png)
+![Docs search](~@/images/search.png)
 
 Notice the use of the `.` operator for the static method, `Role.comparePositions` and the `#` notation for the method, `Role#comparePositionsTo`.
 
@@ -49,6 +53,6 @@ The angle brackets `<>` are used for generic types or parameterized types. This 
 - `Array<Promise<User|GuildMember>>` would be an array of `Promise`s each containing a `User` or a `GuildMember`.
 - `Collection<Snowflake, User>` would be a `Collection`, containing key-value pairs where the keys are `Snowflake`s, and the values are `User`s.
 
-![Message#send on the docs](/assets/img/send.png)
+![Message#send on the docs](~@/images/send.png)
 
 In this piece of the docs, you can see three type signatures, `StringResolvable`, `MessageOptions or Attachment or RichEmbed`, and `Promise<(Message|Array<Message>)>`. The meaning of the word "or" here is the same as `|`.

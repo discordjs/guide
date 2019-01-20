@@ -1,28 +1,34 @@
+# Image manipulation with Canvas
+
 ## Setting up Canvas
 
 Canvas is an image manipulation tool that allows you to modify images with code. We'll explore how to use this module in a heavily requested feature: guild member welcome messages. But first, you must go through the intense labor of installing Canvas. It's highly recommended that you use a Linux distribution for this because it'll be much easier to install on.
 
-<tip>For this guide, we'll be using `canvas@next`. At the time of writing, that is `canvas@2.0.0-alpha.12`, so ensure your `package.json` has that or a similar version after installation.</tip>
+::: tip
+For this guide, we'll be using `canvas@next`. At the time of writing, that is `canvas@2.0.0-alpha.12`, so ensure your `package.json` has that or a similar version after installation.
+:::
 
-<warning>Be sure that you're familiar with things like [async/await](/additional-info/async-await) and [object destructuring](/additional-info/es6-syntax?id=object-destructuring) before continuing, as we'll be making use of features like these.</warning>
+::: warning
+Be sure that you're familiar with things like [async/await](/additional-info/async-await.md) and [object destructuring](/additional-info/es6-syntax.md#object-destructuring) before continuing, as we'll be making use of features like these.
+:::
 
-### Installation
+## Installation
 
-#### Windows
+### Windows
 
 You will need a package called Windows Build Tools. You may install it with npm with the following command: `npm i --global --production windows-build-tools`, or with yarn by running the following: `yarn global add --production windows-build-tools`. It is also bundled with Chocolatey, should you choose that installation path. Afterwards, you should follow the instructions detailed [here](https://github.com/Automattic/node-canvas/wiki/Installation---Windows). Additionally, make sure Node and Cairo are **both** either 32-bit or 64-bit; having a 32-bit version of one and a 64-bit version of the other will cause errors.
 
 If you are *still* unable to install Canvas, you might want to consider installing [Microsoft Visual Studio 2015](https://www.visualstudio.com/vs/older-downloads/).
 
-#### Other distributions
+### Other distributions
 
 You can run one of the commands listed [here](https://github.com/Automattic/node-canvas#compiling) to install the necessary tools Canvas needs.
 
-#### Package installation
+### Package installation
 
 After installing all the necessary software, run `npm i -S canvas@next` if you use npm, or `yarn add canvas@next` if you use Yarn.
 
-### Getting started
+## Getting started
 
 Here is the base code you'll be using to get started:
 
@@ -59,11 +65,15 @@ client.on('message', async message => {
 
 What this will do is trigger the `guildMemberAdd` event while passing in the message author's GuildMember object. Of course, you should remove this command once you're doing adding this feature to your actual bot.
 
-#### Basic image loading
+### Basic image loading
 
 The end goal will be to display the user's avatar, username, and a simple "Welcome!" message when they join. After importing the Canvas module and initializing it, you should load the images. With Canvas, you have to specify where the image comes from first, naturally, and then specify how it gets loaded into the actual Canvas using `ctx`, which is what you will use to interact with Canvas.
 
-<tip>`node-canvas` works almost identical to HTML5 Canvas. You can read the HTML5 Canvas tutorials on [w3Schools](https://www.w3schools.com/html/html5_canvas.asp) and [MDN](https://developer.mozilla.org/kab/docs/Web/API/Canvas_API) for more information later!</tip>
+::: tip
+`node-canvas` works almost identical to HTML5 Canvas. You can read the HTML5 Canvas tutorials on [w3Schools](https://www.w3schools.com/html/html5_canvas.asp) and [MDN](https://developer.mozilla.org/kab/docs/Web/API/Canvas_API) for more information later!
+:::
+
+<!-- eslint-disable require-await -->
 
 ```js
 client.on('guildMemberAdd', async member => {
@@ -101,11 +111,11 @@ client.on('guildMemberAdd', async member => {
 });
 ```
 
-![Basic canvas preview](/assets/img/8CQvVRV.png)
+![Basic canvas preview](~@/images/8CQvVRV.png)
 
 If you get an error such as `Error: error while reading from input stream`, then the provided path to the file was incorrect.
 
-#### Manipulating images
+### Manipulating images
 
 Next, let's place a border around the image, for the sake of demonstration purposes.
 
@@ -131,7 +141,7 @@ client.on('guildMemberAdd', async member => {
 });
 ```
 
-![Image](/assets/img/2vsIPEP.png)
+![Image](~@/images/2vsIPEP.png)
 
 A bit plain, right? Fear not, for you have a bit more to do until you reach completion. Since the goal of guide page is focused more on actual code than design, let's just place a basic square shaped avatar for now on the left side of the image. In interest of coverage, you will also make it a circle afterwards.
 
@@ -162,7 +172,7 @@ client.on('guildMemberAdd', async member => {
 });
 ```
 
-![Image](/assets/img/UCndZMo.png)
+![Image](~@/images/UCndZMo.png)
 
 Works well, but the avatar image itself seems a bit stretched out. Let's remedy that.
 
@@ -191,7 +201,7 @@ client.on('guildMemberAdd', async member => {
 });
 ```
 
-![Image](/assets/img/9JfHooY.png)
+![Image](~@/images/9JfHooY.png)
 
 The purpose of this small section is to demonstrate that working with Canvas is essentially a hit-and-miss workflow where you fiddle with properties until they work just right.
 
@@ -230,11 +240,13 @@ client.on('guildMemberAdd', async member => {
 });
 ```
 
-![Image](/assets/img/r6CiT3M.png)
+![Image](~@/images/r6CiT3M.png)
 
-<tip>You can read more about `ctx.arc()` on [w3schools](https://www.w3schools.com/tags/canvas_arc.asp) or [MDN](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc).</tip>
+::: tip
+You can read more about `ctx.arc()` on [w3schools](https://www.w3schools.com/tags/canvas_arc.asp) or [MDN](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc).
+:::
 
-#### Adding in text
+### Adding in text
 
 Now, let's quickly go over adding text to your image. This will be helpful to make the purpose of this image very clear, since currently it's just an avatar floating on a starry background that comes out of nowhere.
 
@@ -274,7 +286,7 @@ client.on('guildMemberAdd', async member => {
 });
 ```
 
-![Image](/assets/img/3rLGb1s.png)
+![Image](~@/images/3rLGb1s.png)
 
 If you get an error like `Fontconfig error: Cannot load default config file`, it means you do not have any fonts installed on your system. On Linux, you can run the following command to fix this: `sudo apt-get install fontconfig`. This might also need to be installed if you see boxes where the text should be. As for Windows, you will need to find a way to install fonts.
 
@@ -333,11 +345,11 @@ client.on('guildMemberAdd', async member => {
 
 Before adjustment:
 
-![Before adjustment](/assets/img/NKw7P2q.png)
+![Before adjustment](~@/images/NKw7P2q.png)
 
 After adjustment:
 
-![After adjustment](/assets/img/Ja4Ywf4.png)
+![After adjustment](~@/images/Ja4Ywf4.png)
 
 As a nice finishing touch, let's move the welcome text inside the image itself instead of adding it outside.
 
@@ -380,10 +392,10 @@ client.on('guildMemberAdd', async member => {
 });
 ```
 
-![Final result](/assets/img/DDzEgdZ.png)
+![Final result](~@/images/DDzEgdZ.png)
 
 And that's it! We have covered the basics of image manipulation, text generation, and loading from a remote source.
 
 ## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/popular-topics/canvas/).
+<resulting-code />

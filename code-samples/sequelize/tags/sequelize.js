@@ -58,15 +58,13 @@ client.on('message', async message => {
 					username: message.author.username,
 				});
 				return message.reply(`Tag ${tag.name} added.`);
-			}
-			catch (e) {
+			} catch (e) {
 				if (e.name === 'SequelizeUniqueConstraintError') {
 					return message.reply('That tag already exists.');
 				}
 				return message.reply('Something went wrong with adding a tag.');
 			}
-		}
-		else if (command === 'tag') {
+		} else if (command === 'tag') {
 			const tagName = commandArgs;
 
 			// equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
@@ -77,8 +75,7 @@ client.on('message', async message => {
 				return message.channel.send(tag.get('description'));
 			}
 			return message.reply(`Could not find tag: ${tagName}`);
-		}
-		else if (command === 'edittag') {
+		} else if (command === 'edittag') {
 			const splitArgs = commandArgs.split(' ');
 			const tagName = splitArgs.shift();
 			const tagDescription = splitArgs.join(' ');
@@ -89,8 +86,7 @@ client.on('message', async message => {
 				return message.reply(`Tag ${tagName} was edited.`);
 			}
 			return message.reply(`Could not find a tag with name ${tagName}.`);
-		}
-		else if (command === 'taginfo') {
+		} else if (command === 'taginfo') {
 			const tagName = commandArgs;
 
 			// equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
@@ -99,14 +95,12 @@ client.on('message', async message => {
 				return message.channel.send(`${tagName} was created by ${tag.username} at ${tag.createdAt} and has been used ${tag.usage_count} times.`);
 			}
 			return message.reply(`Could not find tag: ${tagName}`);
-		}
-		else if (command === 'showtags') {
+		} else if (command === 'showtags') {
 			// equivalent to: SELECT name FROM tags;
 			const tagList = await Tags.findAll({ attributes: ['name'] });
 			const tagString = tagList.map(t => t.name).join(', ') || 'No tags set.';
 			return message.channel.send(`List of tags: ${tagString}`);
-		}
-		else if (command === 'removetag') {
+		} else if (command === 'removetag') {
 			// equivalent to: DELETE from tags WHERE name = ?;
 			const tagName = commandArgs;
 			const rowCount = await Tags.destroy({ where: { name: tagName } });

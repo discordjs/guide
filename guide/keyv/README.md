@@ -1,6 +1,6 @@
 # Storing data with Keyv
 
-[Keyv](https://github.com/lukechilds/keyv) is a simple key-value store that works with multiple backends. It's fully scalable for [sharding](/sharding) and supports JSON storage.
+[Keyv](https://github.com/lukechilds/keyv) is a simple key-value store that works with multiple backends. It's fully scalable for [sharding](/sharding/) and supports JSON storage.
 
 ## Installation
 
@@ -43,7 +43,7 @@ For more detailed setup, check out the [Keyv readme](https://github.com/lukechil
 
 ## Usage
 
-Keyv exposes a familiar [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)-like API. However, it only has `set`, `get`, `delete`, and `clear` methods. Additionally, instead of immediately returning data, these methods return [Promises](/additional-info/async-await) that resolve with the data.
+Keyv exposes a familiar [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)-like API. However, it only has `set`, `get`, `delete`, and `clear` methods. Additionally, instead of immediately returning data, these methods return [Promises](/additional-info/async-await.md) that resolve with the data.
 
 ```js
 (async () => {
@@ -65,7 +65,9 @@ Keyv exposes a familiar [Map](https://developer.mozilla.org/en-US/docs/Web/JavaS
 
 Although Keyv can be used in any scenario where you need key-value data, we will focus on setting up a per-guild prefix configuration using Sqlite.
 
-<tip>This section will still work with any provider supported by Keyv. We recommend PostgreSQL for larger applications.</tip>
+::: tip
+This section will still work with any provider supported by Keyv. We recommend PostgreSQL for larger applications.
+:::
 
 ### Setup
 
@@ -80,7 +82,7 @@ const globalPrefix = '.';
 
 ### Command handler
 
-This guide uses a very basic command handler with some added complexity to allow for multiple prefixes. For more a more robust command handler, look at the [command handling](/command-handling) guide.
+This guide uses a very basic command handler with some added complexity to allow for multiple prefixes. For more a more robust command handler, look at the [command handling](/command-handling/) guide.
 
 ```js
 client.on('message', async message => {
@@ -93,8 +95,7 @@ client.on('message', async message => {
 
 		if (message.content.startsWith(globalPrefix)) {
 			prefix = globalPrefix;
-		}
-		else {
+		} else {
 			// check the guild-level prefix
 			const guildPrefix = await prefixes.get(message.guild.id);
 			if (message.content.startsWith(guildPrefix)) prefix = guildPrefix;
@@ -103,8 +104,7 @@ client.on('message', async message => {
 		// if we found a prefix, setup args; otherwise, this isn't a command
 		if (!prefix) return;
 		args = message.content.slice(prefix.length).split(/\s+/);
-	}
-	else {
+	} else {
 		// handle DMs
 		const slice = message.content.startsWith(globalPrefix) ? globalPrefix.length : 0;
 		args = message.content.slice(slice).split(/\s+/);
@@ -136,7 +136,7 @@ You will probably want to setup additional validation such as required permissio
 
 ### Usage
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		.prefix
 	</discord-message>
@@ -155,7 +155,7 @@ You will probably want to setup additional validation such as required permissio
 	<discord-message author="Tutorial Bot" :bot="true">
 		Prefix is `$`
 	</discord-message>
-</discord-messages>
+</div>
 
 ## Next steps
 

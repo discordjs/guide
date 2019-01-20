@@ -4,7 +4,9 @@ An easy way to run scripts like a script to start your bot, a script to lint you
 
 ## Getting started
 
-<tip>Before getting started, you'll need to have a `package.json` file. If you don't have a `package.json` file yet, you can run `npm init -y` in the console to generate one.</tip>
+::: tip
+Before getting started, you'll need to have a `package.json` file. If you don't have a `package.json` file yet, you can run `npm init -y` in the console to generate one.
+:::
 
 If you haven't touched your `package.json` file yet (excluding installing dependencies), your `package.json` file should look similar to the following:
 
@@ -27,7 +29,9 @@ Let's zoom in more. Below `main`, you'll see `scripts`. You can specify your scr
 
 ## Adding your first script
 
-<tip>We'll assume you have finished the [creating your first bot](/creating-your-bot/) section of the guide. If you haven't, ensure to follow it first!</tip>
+::: tip
+We'll assume you have finished the [creating your first bot](/creating-your-bot/) section of the guide. If you haven't, ensure to follow it first!
+:::
 
 Over at your `package.json` file, add the following line to the `scripts`:
 
@@ -35,11 +39,15 @@ Over at your `package.json` file, add the following line to the `scripts`:
 "start": "node ."
 ```
 
-<tip>The `node .` script will run the file which you have specified at the `main` entry in your `package.json` file. If you don't have it set yet, make sure to set `main` to your bot's main file!</tip>
+::: tip
+The `node .` script will run the file which you have specified at the `main` entry in your `package.json` file. If you don't have it set yet, make sure to set `main` to your bot's main file!
+:::
 
 Now, whenever you run the `npm run start` script in your bot's directory, it will run the `node .` command. Let's create another script to lint your code via the command line.
 
-<tip>If you do not have ESLint installed globally, you can use [npx](https://alligator.io/workflow/npx/) to run the ESLint script for your local directory. For more info on how to set it up, you can read the site [here](https://alligator.io/workflow/npx/).</tip>
+::: tip
+If you do not have ESLint installed globally, you can use [npx](https://alligator.io/workflow/npx/) to run the ESLint script for your local directory. For more info on how to set it up, you can read the site [here](https://alligator.io/workflow/npx/).
+:::
 Add the following line to your scripts:
 
 ```json

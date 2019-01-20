@@ -1,16 +1,10 @@
-## Useful packages
+# Useful packages
 
-### Table of contents
+## moment.js
 
- 1. moment.js
- 2. ms
- 3. common-tags
- 4. chalk
- 5. winston
-
-### moment.js
-
-<tip>Official documentation: https://momentjs.com/docs/</tip>
+::: tip
+Official documentation: https://momentjs.com/docs/
+:::
 
 Moment is a powerful package for working with dates in JavaScript.  
 It allows you to quickly and easily format dates in any way you want or parse strings back into JavaScript Date objects.  
@@ -39,19 +33,19 @@ if (date.isValid()) {
 
 	if (duration > 0) {
 		message.channel.send(`The date you gave me is ${formatted} into the future.`);
-	}
-	else {
+	} else {
 		message.channel.send(`The date you gave me is ${formatted} into the past.`);
 	}
-}
-else {
+} else {
 	message.channel.send('You didn\'t give me a valid date.');
 }
 ```
 
-### ms
+## ms
 
-<tip>Official documentation: https://github.com/zeit/ms</tip>
+::: tip
+Official documentation: https://github.com/zeit/ms
+:::
 
 Ms is another tool for working with times in JavaScript. However, ms specializes on durations.
 It allows you to convert times in milliseconds into human readable formats, and vice versa.
@@ -73,9 +67,11 @@ const formatted = ms(difference);
 message.channel.send(`You sent the two messages ${formatted} apart.`);
 ```
 
-### common-tags
+## common-tags
 
-<tip>Official documentation: https://github.com/declandewet/common-tags</tip>
+::: tip
+Official documentation: https://github.com/declandewet/common-tags
+:::
 
 Common-tags is a library all about working with template literals.  
 So far you have probably only used them for interpolating variables into your strings, but they can do a whole lot more.
@@ -116,9 +112,11 @@ message.channel.send(oneLineCommaListsOr`
 
 Check the the documentation to find more useful functions.
 
-### chalk
+## chalk
 
-<tip>Official documentation: https://www.npmjs.com/package/chalk</tip>
+::: tip
+Official documentation: https://www.npmjs.com/package/chalk
+:::
 
 Chalk is not exactly useful for Discord bots themselves, but it will make your terminal output a lot prettier and organized.
 This package lets you color and style your `console.log`s in many, many different ways; No more simple white on black.
@@ -129,7 +127,7 @@ Let's say you want your error messages to be easily visible; Let us give them a 
 console.log(chalk.redBright('FATAL ERROR'), 'Something really bad happened!');
 ```
 
-![image of code above](/assets/img/chalk-red.png)
+![image of code above](~@/images/chalk-red.png)
 
 You can also chain multiple different multipliers.  
 If you wanted to have green text, a grey background and have it all underlined that is absolutely possible:
@@ -138,11 +136,13 @@ If you wanted to have green text, a grey background and have it all underlined t
 console.log(chalk.green.bgBrightBlack.underline('This is so pretty.'));
 ```
 
-![image of code above](/assets/img/chalk-ugly.png)
+![image of code above](~@/images/chalk-ugly.png)
 
-### winston
+## winston
 
-<tip>Official documentation: https://github.com/winstonjs/winston</tip>
+::: tip
+Official documentation: https://github.com/winstonjs/winston
+:::
 
 Winston is "a logger for just about everything".
 You can log to the terminal, you can log to a file, etc.  
@@ -183,7 +183,7 @@ The `format` option tells the logger which format to use for the messages, by de
 While useful, JSON is not very readable, so we are defining a custom format which just displays the log level in all caps alongside the message.
 If you wanted to you could also use the chalk module to make the logger's format a bit prettier by applying colors, etc.
 
-![winston example](/assets/img/winston.png)
+![winston example](~@/images/winston.png)
 
 Winston is not the only logging library out there though, so if you are not convinced you should google around a bit and
 you should find something you will like.

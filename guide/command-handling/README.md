@@ -1,4 +1,4 @@
-## File and folder restructuring
+# Command handling
 
 As mentioned in a previous chapter, unless your bot project is a small one, it's not a very good idea to have a single file with a giant if/else if chain for commands. If you want to implement features into your bot and make your development process a lot less painful, you'll definitely want to use (or in this case, create) a command handler. Let's get started on that!
 
@@ -22,8 +22,7 @@ client.on('message', message => {
 
 	if (command === 'ping') {
 		message.channel.send('Pong.');
-	}
-	else if (command === 'beep') {
+	} else if (command === 'beep') {
 		message.channel.send('Boop.');
 	}
 	// other commands...
@@ -32,13 +31,15 @@ client.on('message', message => {
 client.login(token);
 ```
 
-<tip>We'll be moving over the commands created in [the previous page](/creating-your-bot/commands-with-user-input) as well, but for the sake of keeping the base code short, those commands have been omitted from the codeblock above.</tip>
+::: tip
+We'll be moving over the commands created in [the previous page](/creating-your-bot/commands-with-user-input.md) as well, but for the sake of keeping the base code short, those commands have been omitted from the codeblock above.
+:::
 
-### Individual command files
+## Individual command files
 
 Before anything, you may want to create a backup of your current bot file. If you've followed along so far, your entire folder structure should look something like this:
 
-![Current folder structure](assets/img/BmS09fY.png)
+![Current folder structure](~@/images/BmS09fY.png)
 
 In the same folder, create a new folder and name it `commands`. This is where you'll store all of your commands, of course. Head over to your `commands` folder, create a new file named `ping.js`, and copy & paste in the following code:
 
@@ -54,11 +55,15 @@ module.exports = {
 
 You can go ahead and do the same for the rest of your commands as well, putting their respective blocks of code inside the `execute()` function. If you've been using the same code as the guide thus far, you can copy & paste your commands into their own files now just fine without any issue, as long as you follow the format above. The `description` property is optional, but will be useful for the dynamic help command we'll be covering later.
 
-<tip>`module.exports` is how you export data in Node.js so that you can `require()` it in other files. If you're unfamiliar with it and want to read more, you can take a look at [the documentation](https://nodejs.org/api/modules.html#modules_module_exports) for more info.</tip>
+::: tip
+`module.exports` is how you export data in Node.js so that you can `require()` it in other files. If you're unfamiliar with it and want to read more, you can take a look at [the documentation](https://nodejs.org/api/modules.html#modules_module_exports) for more info.
+:::
 
-<tip>If you need to access your client instance from inside one of your command files, you can access it via `message.client`. If you need to access things such as external files or modules, you should re-require them at the top of the file.</tip>
+::: tip
+If you need to access your client instance from inside one of your command files, you can access it via `message.client`. If you need to access things such as external files or modules, you should re-require them at the top of the file.
+:::
 
-### Dynamically reading command files
+## Dynamically reading command files
 
 Back in your main file, make these two additions:
 
@@ -71,9 +76,13 @@ const client = new Discord.Client();
 + client.commands = new Discord.Collection();
 ```
 
-<tip>`fs` is Node's native file system module. You can read the docs about it [here](https://nodejs.org/api/fs.html).</tip>
+::: tip
+`fs` is Node's native file system module. You can read the docs about it [here](https://nodejs.org/api/fs.html).
+:::
 
-<tip>If you aren't exactly sure what Collections are, they're a class that extend JS's native Map class and include more extensive, useful functionality. You can read about Maps [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), and see all the available Collection methods [here](https://discord.js.org/#/docs/main/stable/class/Collection).</tip>
+::: tip
+If you aren't exactly sure what Collections are, they're a class that extend JS's native Map class and include more extensive, useful functionality. You can read about Maps [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), and see all the available Collection methods [here](https://discord.js.org/#/docs/main/stable/class/Collection).
+:::
 
 This next step is how you'll dynamically retrieve all your newly created command files. Add this below your `client.commands` line:
 
@@ -117,4 +126,4 @@ As for setting up your files, that's it for now. In the next chapter, you'll lea
 
 ## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/command-handling/file-setup).
+<resulting-code path="command-handling/file-setup" />

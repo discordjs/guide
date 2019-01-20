@@ -1,11 +1,11 @@
-## Introduction
+# Collections
 
 Discord.js comes with this utility class known as `Collection`.
 It extends JavaScript's native `Map` class, so it has all the features of `Map` and more!  
 
-<warning>If you're not familiar with `Map`, read [MDN's page on it](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
-before continuing. You should be familiar with `Array` [methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) as well    .  
-We will also be using some ES6 features, so read up [here](/additional-info/es6-syntax) if you do not know what they are.</warning>
+::: warning
+If you're not familiar with `Map`, read [MDN's page on it](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) before continuing. You should be familiar with `Array` [methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) as well. We will also be using some ES6 features, so read up [here](/additional-info/es6-syntax.md) if you do not know what they are.
+:::
 
 In essence, `Map` allow for an association between unique keys and their values, but lack an iterative interface.
 For example, how can you transform every value or filter the entries in a `Map` easily?
@@ -66,9 +66,9 @@ Array.from(collection.keys());
 Array.from(collection);
 ```
 
-<warning>Many people use `array` way too much! This leads to unneeded caching of data and confusing code.
-Before you use `array` or similar, ask yourself if whatever you are trying to do can't be done with the given
-`Map` or `Collection` methods or with a for-of loop.</warning>
+::: warning
+Many people use `array` way too much! This leads to unneeded caching of data and confusing code. Before you use `array` or similar, ask yourself if whatever you are trying to do can't be done with the given `Map` or `Collection` methods or with a for-of loop.
+:::
 
 ## Extra Utilities
 

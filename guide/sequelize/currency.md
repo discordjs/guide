@@ -19,7 +19,7 @@ This time we'll have 6 files.
 
 Here is an entity relation diagram of the models we'll be making:
 
-<object type="image/svg+xml" data="assets/img/currency_er_diagram.svg" class="logo currency-table-diagram"></object>
+<img src="~@/images/currency_er_diagram.svg" alt="Curreny database structure diagram" />
 
 `Users` have a `user_id`, and a `balance`. Each `user_id` can have multiple links to the `UserItems` table, and each entry in the table is connected to one of the items in the `CurrencyShop`, which will have a `name` and a `cost` associated with it. 
 
@@ -114,7 +114,6 @@ sequelize.import('models/UserItems');
 const force = process.argv.includes('--force') || process.argv.includes('-f');
 
 sequelize.sync({ force }).then(async () => {
-
 	const shop = [
 		CurrencyShop.upsert({ name: 'Tea', cost: 1 }),
 		CurrencyShop.upsert({ name: 'Coffee', cost: 2 }),
@@ -123,7 +122,6 @@ sequelize.sync({ force }).then(async () => {
 	await Promise.all(shop);
 	console.log('Database synced');
 	sequelize.close();
-
 }).catch(console.error);
 ```
 
@@ -131,7 +129,9 @@ You'll notice some familiar things here from the previous tutorial, such as the 
 
 A new function here is the `.upsert()` function. It's a portmanteau for **up**date or in**sert**.  We use `upsert` here because just in case you run this file multiple times, it doesn't create duplicates. That shouldn't happen because we defined name as *unique* but there's no harm in being safe. Upsert also has a nice side benefit; If you adjust the cost, the respective item should also have their cost updated.
 
-<tip>Execute `node dbInit.js` to create the database tables. Unless you make a change to the models, you'll never need to touch the file again. If you do make a change to a model, you can execute `node dbInit.js --force` or `node dbInit.js -f` to force sync your tables. It's important to note that this **will** empty out and remake your model tables.</tip>
+::: tip
+Execute `node dbInit.js` to create the database tables. Unless you make a change to the models, you'll never need to touch the file again. If you do make a change to a model, you can execute `node dbInit.js --force` or `node dbInit.js -f` to force sync your tables. It's important to note that this **will** empty out and remake your model tables.
+:::
 
 ## Create associations
 
@@ -188,6 +188,8 @@ Getting items is similar, we just `.findAll()` using the user's id as the key. T
 
 To put it together, we'll create an `app.js` in the base directory with the following skeleton code.
 
+<!-- eslint-disable require-await -->
+
 ```js
 const Discord = require('discord.js');
 
@@ -215,23 +217,17 @@ client.on('message', async message => {
 
 	if (command === 'balance') {
 		// [gamma]
-	}
-	else if (command === 'inventory') {
+	} else if (command === 'inventory') {
 		// [delta]
-	}
-	else if (command === 'transfer') {
+	} else if (command === 'transfer') {
 		// [epsilon]
-	}
-	else if (command === 'buy') {
+	} else if (command === 'buy') {
 		// [zeta]
-	}
-	else if (command === 'shop') {
+	} else if (command === 'shop') {
 		// [theta]
-	}
-	else if (command === 'leaderboard') {
+	} else if (command === 'leaderboard') {
 		// [lambda]
 	}
-
 });
 
 client.login('pleaseinsertyourtokenheresothistutorialcanwork');
@@ -368,4 +364,4 @@ Nothing particularly special here either. We could have queried the database for
 
 ## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/sequelize/currency).
+<resulting-code />

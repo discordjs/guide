@@ -1,3 +1,5 @@
+# Reactions
+
 ## Reacting to messages
 
 One of the first things many people want to know is how to react with emojis, both custom and "regular" (unicode). There are different routes you need to take for each of those, so let's take a look at both.
@@ -23,7 +25,7 @@ client.login('your-token-goes-here');
 
 To react with a unicode emoji, you will need the actual unicode character of the emoji. There are many ways to get a unicode character of an emoji, but the easiest way would be through Discord itself. If you send a message with a unicode emoji (such as `:smile:`, for example) and put a `\` before it, it will "escape" the emoji and will display the unicode character instead of the normal emoji image.
 
-![Escaped unicode emoji](/assets/img/I2ruNRf.png)
+![Escaped unicode emoji](~@/images/I2ruNRf.png)
 
 To actually react with an emoji, you need to use the `message.react()` method. Once you have the emoji character, all you need to do is copy & paste it as a string inside the `.react()` method!
 
@@ -33,13 +35,13 @@ if (message.content === '!react') {
 }
 ```
 
-![Unicode emoji reaction](/assets/img/NUvOWqG.png)
+![Unicode emoji reaction](~@/images/NUvOWqG.png)
 
 ### Custom emojis
 
 For custom emojis, there are actually multiple ways of reacting. Like unicode emojis, custom emojis can also be escaped. However, when you escape a custom emoji, the result will be different.
 
-![Escaped custom emoji](/assets/img/DFfdFw4.png)
+![Escaped custom emoji](~@/images/DFfdFw4.png)
 
 This format is essentially the name of the emoji, followed by its ID. Copy & paste the ID into the `.react()` method as a string.
 
@@ -49,7 +51,7 @@ if (message.content === '!react-custom') {
 }
 ```
 
-![Custom emoji reaction via ID](/assets/img/qSCjlEB.png)
+![Custom emoji reaction via ID](~@/images/qSCjlEB.png)
 
 Great! This route may not always be available to you, though. Sometimes you'll need to react with an emoji programmatically. To do so, you'll need to retrieve the emoji object.
 
@@ -58,7 +60,9 @@ Two of the easiest ways you can retrieve an emoji would be:
 * Use `.find()` on a Collection of Emojis.
 * Use `.get()` on the `client.emojis` Collection.
 
-<tip>It is possible for two or more emojis to have the same name, and using `.find()` will only return the **first** entry it finds. As such, this can cause unexpected results.</tip>
+::: tip
+It is possible for two or more emojis to have the same name, and using `.find()` will only return the **first** entry it finds. As such, this can cause unexpected results.
+:::
 
 Using `.find()`, your code would look something like this:
 
@@ -92,7 +96,7 @@ if (message.content === '!fruits') {
 }
 ```
 
-![Reaction race condition](/assets/img/DgDVtcv.png)
+![Reaction race condition](~@/images/DgDVtcv.png)
 
 As you can see, if you leave it like that, it won't display as you really want it to. It was able to react correctly on the first try, but reacts in a different order each time after that.
 
@@ -119,8 +123,7 @@ client.on('message', async message => {
 			await message.react('🍎');
 			await message.react('🍊');
 			await message.react('🍇');
-		}
-		catch (error) {
+		} catch (error) {
 			console.error('One of the emojis failed to react.');
 		}
 	}
@@ -129,9 +132,11 @@ client.on('message', async message => {
 
 If you try again with either of the codeblocks above, you'll get the result you originally wanted!
 
-![Emojis reacting in correct order](/assets/img/1IWSJ1C.png)
+![Emojis reacting in correct order](~@/images/1IWSJ1C.png)
 
-<tip>If you aren't familiar with Promises or `async`/`await`, you can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [our guide page on async/await](/additional-info/async-await)!</tip>
+::: tip
+If you aren't familiar with Promises or `async`/`await`, you can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [our guide page on async/await](/additional-info/async-await.md)!
+:::
 
 However, if you don't mind the order the emojis react in, you can take advantage of `Promise.all()`, like so:
 
@@ -150,7 +155,7 @@ The benefit of this small optimization is that you can use `.then()` to handle w
 
 ## Awaiting reactions
 
-A common use case for reactions in commands is having a user confirm or deny an action, or creating a poll system. Luckily, we actually [already have a guide page that covers this](/popular-topics/collectors)! Check out that page if you want a more in-depth explanation. Otherwise, here's a basic example for reference:
+A common use case for reactions in commands is having a user confirm or deny an action, or creating a poll system. Luckily, we actually [already have a guide page that covers this](/popular-topics/collectors.md)! Check out that page if you want a more in-depth explanation. Otherwise, here's a basic example for reference:
 
 ```js
 message.react('👍').then(() => message.react('👎'));
@@ -165,8 +170,7 @@ message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
 
 		if (reaction.emoji.name === '👍') {
 			message.reply('you reacted with a thumbs up.');
-		}
-		else {
+		} else {
 			message.reply('you reacted with a thumbs down.');
 		}
 	})
@@ -178,13 +182,17 @@ message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
 
 ## Listening for reactions on old messages
 
-<danger>This section describes how to use some undocumented APIs to add unsupported functionality into discord.js, and as such you should follow anything here with extreme caution. Anything here is subject to change at any time without notice, and may break other functionality in your bot.</danger>
+::: danger
+This section describes how to use some undocumented APIs to add unsupported functionality into discord.js, and as such you should follow anything here with extreme caution. Anything here is subject to change at any time without notice, and may break other functionality in your bot.
+:::
 
 If you've tried using the `messageReactionAdd` or `messageReactionRemove` events before, you may have noticed that it doesn't always emit. That's because these events only trigger for cached messages. Fortunately, there is a way to make those events trigger for *all* messages.
 
 In order to make that happen, you'll need to listen to a completely different event and emit the `messageReactionEvent` yourself. The name of the event you'll need to listen to is `raw`, and it has a single parameter.
 
-<warning>Due to the `raw` event being undocumented and unsupported feature, all of the following code will be a basic example and may not cover all cases.</warning>
+::: warning
+Due to the `raw` event being undocumented and unsupported feature, all of the following code will be a basic example and may not cover all cases.
+:::
 
 ```js
 client.on('raw', event => {
@@ -229,6 +237,8 @@ Send a messsage, restart your bot, and add a reaction to the message you just se
 
 Since the `raw` event gives you just enough data to work with, you can build up the proper objects and emit the other events yourself. First, replace your entire `raw` event with this:
 
+<!-- eslint-disable require-await, no-useless-return -->
+
 ```js
 const events = {
 	MESSAGE_REACTION_ADD: 'messageReactionAdd',
@@ -272,7 +282,9 @@ All that's left is to fetch the actual reaction from the message and emit the ev
 const reaction = message.reactions.get(emojiKey);
 ```
 
-<tip>In the master branch/v12, reactions are keyed by their ID or name only, not in a `name:ID` format.</tip>
+::: tip
+In the master branch/v12, reactions are keyed by their ID or name only, not in a `name:ID` format.
+:::
 
 After that, simply emit the event with the proper data you've built up.
 
@@ -294,10 +306,12 @@ if (!reaction) {
 client.emit(events[event.t], reaction, user);
 ```
 
-<tip>In the master branch, you can avoid that mess by applying [this fix](https://gist.github.com/Lewdcario/52e1c66433c994c5c3c272284b9ab29c) instead.</tip>
+::: tip
+In the master branch, you can avoid that mess by applying [this fix](https://gist.github.com/Lewdcario/52e1c66433c994c5c3c272284b9ab29c) instead.
+:::
 
 And you're done! If you send a message, restart your bot, and react to that message, your `messageReactionAdd` and `messageReactionRemove` events should log as normal.
 
 ## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/popular-topics/reactions).
+<resulting-code />

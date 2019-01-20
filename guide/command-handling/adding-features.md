@@ -1,6 +1,8 @@
-## Additional features
+# Additional features
 
-<tip>This page is a follow-up and bases its code off of [the previous page](/command-handling/dynamic-commands).</tip>
+::: tip
+This page is a follow-up and bases its code off of [the previous page](/command-handling/dynamic-commands.md).
+:::
 
 The command handler you've been building so far doesn't do much aside from dynamically load and execute commands. Those two things alone are great, but definitely not the only things you want. Before diving into it, let's do some quick refactoring in preparation.
 
@@ -29,7 +31,7 @@ In this short (but necessary) refactor, you:
 
 Now you can start adding features!
 
-### Required arguments
+## Required arguments
 
 For this section, we'll be using the `args-info.js` command as an example. If you chose to keep it, it should look like this now:
 
@@ -40,8 +42,7 @@ module.exports = {
 	execute(message, args) {
 		if (!args.length) {
 			return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
-		}
-		else if (args[0] === 'foo') {
+		} else if (args[0] === 'foo') {
 			return message.channel.send('bar');
 		}
 
@@ -82,7 +83,7 @@ And then in your main file:
 
 Now whenever you set `args` to `true` in one of your command files, it'll perform this check and supply feedback if necessary.
 
-#### Expected command usage
+### Expected command usage
 
 It's good UX (user experience) to let the user know that a command requires arguments when they don't provide any (it also prevents your code from breaking). Letting them know what kind of arguments are expected is even better.
 
@@ -113,7 +114,7 @@ In your main file:
 
 Use an `if` statement to check if the `usage` property exists (and is truthy) first, so that you don't accidentally end up with `undefined` in the reply string (in the case that you forget to properly supply the property in your command file, or some similar incident). A simple precaution such as this can greatly improve the user experience.
 
-### Guild only commands
+## Guild only commands
 
 Some commands are meant to be used only inside servers and won't work whatsoever in DMs. A prime example of this would be a kick command. You can add a property to the necessary commands to determine whether or not it should be only available outside of servers.
 
@@ -136,16 +137,16 @@ if (command.guildOnly && message.channel.type !== 'text') {
 
 Now when you try to use the kick command inside a DM, you'll get the appropriate response which will also prevent your bot from throwing an error.
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!kick
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
 		I can't execute that command inside DMs!
 	</discord-message>
-</discord-messages>
+</div>
 
-### Cooldowns
+## Cooldowns
 
 Spam is something you generally want to avoid - especially if one of your commands requires calls to other APIs, or takes a bit of time to build/send. This is also a very common feature bot developers want to integrate into their projects, so let's get started on that!
 
@@ -217,7 +218,7 @@ timestamps.set(message.author.id, now);
 setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 ```
 
-### Command aliases
+## Command aliases
 
 It's a good idea to allow users to trigger your commands in more than one way; it gives them the freedom of choosing what to send and may even make some command names easier to remember. Luckily, setting up aliases for your commands is quite simple.
 
@@ -245,13 +246,14 @@ The `aliases` property should always contain an array of strings. In your main f
 
 Making those two small changes, you get this:
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!avatar <mention :highlight="true">User</mention>
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
 		User's avatar:
 		https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png?size=2084
+		<br />
 		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
 	</discord-message>
 	<discord-message author="User" avatar="djs">
@@ -260,11 +262,12 @@ Making those two small changes, you get this:
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
 		User's avatar:
 		https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png?size=2084
+		<br />
 		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
 	</discord-message>
-</discord-messages>
+</div>
 
-### A dynamic help command
+## A dynamic help command
 
 If you don't use a framework or command handler for your projects, you'll have a tough time setting up an always up-to-date help command. Luckily, that's not the case here. Start by creating a new command file inside your `commands` folder and populate it as you normally would.
 
@@ -324,9 +327,13 @@ There's nothing really complex here; all you do is append some strings, `.map()`
 
 Since help messages can get messy, you'll be DMing it to the message author instead of posting it in the requested channel. However, there is something very important you should consider: the possibility of not being able to DM the user, whether it be that they have DMs disabled on that server or overall, or they have the bot blocked. For that reason, you should `.catch()` it and let them know.
 
-<tip>If you weren't already aware, `.send()` takes 2 parameters: the content to send, and the message options to pass in. You can read about the `MessageOptions` type [here](https://discord.js.org/#/docs/main/stable/typedef/MessageOptions). Using `split: true` here will automatically split our help message into 2 or more messages in the case that it exceeds the 2,000 character limit.</tip>
+::: tip
+If you weren't already aware, `.send()` takes 2 parameters: the content to send, and the message options to pass in. You can read about the `MessageOptions` type [here](https://discord.js.org/#/docs/main/stable/typedef/MessageOptions). Using `split: true` here will automatically split our help message into 2 or more messages in the case that it exceeds the 2,000 character limit.
+:::
 
-<tip>Because the `data` variable is an array, you can take advantage of discord.js' functionality where it will `.join()` any array sent with a `\n` character. If you prefer to not rely on that in the chance that it changes in the future, you can simply append `.join('\n')` to the end of that yourself.</tip>
+::: tip
+Because the `data` variable is an array, you can take advantage of discord.js' functionality where it will `.join()` any array sent with a `\n` character. If you prefer to not rely on that in the chance that it changes in the future, you can simply append `.join('\n')` to the end of that yourself.
+:::
 
 Below the `if (!args.length)` statement is where you'll send the help message for the command they specified.
 
@@ -353,7 +360,7 @@ Once you get the command based off the name or alias they gave, you can start `.
 
 At the end of it all, you should be getting this as a result:
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!help
 	</discord-message>
@@ -371,14 +378,14 @@ At the end of it all, you should be getting this as a result:
 		**Description:** Get the avatar URL of the tagged user(s), or your own avatar. <br>
 		**Cooldown:** 3 second(s)
 	</discord-message>
-</discord-messages>
+</div>
 
 No more manually editing your help command! If you aren't completely satisfied with how it looks, you can always adjust it to your liking later.
 
-### Conclusion 
+## Conclusion 
 
 At this point of the guide, you should now have a command handler with some very basic (but useful) features! If you see fit, you can expand upon the current structure to make something even better and easier for you to use in the future.
 
 ## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/command-handling/adding-features).
+<resulting-code />

@@ -1,8 +1,10 @@
-## Handling commands
+# Dynamic commands
 
-<tip>This page is a follow-up and bases its code off of [the previous page](/command-handling/).</tip>
+::: tip
+This page is a follow-up and bases its code off of [the previous page](/command-handling/).
+:::
 
-### How it works
+## How it works
 
 Now that you have a Collection of all our commands, you can use them easily! But before diving straight into it, it'd be a good idea to familiarize yourself with how you'll turn these basic if statements into something much more dynamic and robust. So let's continue with 1 more if statement example, and then we'll move onto the real stuff.
 
@@ -28,11 +30,9 @@ client.on('message', message => {
 
 	if (command === 'ping') {
 		client.commands.get('ping').execute(message, args);
-	}
-	else if (command === 'beep') {
+	} else if (command === 'beep') {
 		client.commands.get('beep').execute(message, args);
-	}
-	else if (command === 'server') {
+	} else if (command === 'server') {
 		client.commands.get('server').execute(message, args);
 	}
 	// do the same for the rest of the commands...
@@ -41,7 +41,7 @@ client.on('message', message => {
 
 That would work perfectly fine, but it isn't dynamic; you'd still have to add an if statement and the same old code each time you wanted to register a new command, which is less than ideal.
 
-### Dynamically executing commands
+## Dynamically executing commands
 
 At this point, you can take that entire if/else if chain and delete it; you won't need anything past the `const command = ...` line. Instead, you'll be replacing it with this:
 
@@ -50,8 +50,7 @@ if (!client.commands.has(command)) return;
 
 try {
 	client.commands.get(command).execute(message, args);
-}
-catch (error) {
+} catch (error) {
 	console.error(error);
 	message.reply('there was an error trying to execute that command!');
 }
@@ -70,4 +69,4 @@ In the next chapter, we'll be going through how to implement some basic features
 
 ## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/command-handling/dynamic-commands).
+<resulting-code />

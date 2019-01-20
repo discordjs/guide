@@ -1,8 +1,12 @@
-##  Message collectors
+# Collectors
+
+## Message collectors
 
 Collectors are a useful way to enable your bot to obtain *additional* input after the first command was sent. An example would be initiating a quiz, where the bot will "await" a correct response from somebody.
 
-<tip>You can read the docs for the Collector class [here](https://discord.js.org/#/docs/main/stable/class/Collector).</tip>
+::: tip
+You can read the docs for the Collector class [here](https://discord.js.org/#/docs/main/stable/class/Collector).
+:::
 
 ### Basic message collector
 
@@ -38,7 +42,9 @@ Those options you pass as the second argument in `.createMessageCollector()`. Th
 
 Using `.awaitMessages()` can be easier if you understand promises, and it allows you to have cleaner code overall. It is essentially identical to `.createMessageCollector()`, except promisified. The drawback of using this method, however, is that you cannot do things before the promise is resolved or rejected, either by an error or completion. However, it should do for most purposes, such as awaiting the correct response in a quiz. Instead of taking their example, let's set up a basic quiz command using the `.awaitMessages()` feature.
 
-<tip>You can read the docs for the `.awaitMessages()` method [here](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=awaitMessages).</tip>
+::: tip
+You can read the docs for the `.awaitMessages()` method [here](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=awaitMessages).
+:::
 
 First, you'll need some questions and answers to choose from, so here's a basic set:
 
@@ -75,7 +81,9 @@ message.channel.send(item.question).then(() => {
 });
 ```
 
-<tip>If you don't understand how `.some()` works, you can read about it in more detail [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some).</tip>
+::: tip
+If you don't understand how `.some()` works, you can read about it in more detail [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some).
+:::
 
 In this filter, you iterate through the answers to find what you want. You would like to ignore case because simple typos can happen, so you convert each answer to its lowercase form, and check if it's equal to the response in lowercase form as well. In the options section, you only want to allow one answer to pass through, hence the `maxMatches: 1` setting.
 
@@ -87,7 +95,9 @@ The filter looks for messages that match one of the answers in our array of poss
 
 These work quite similarly to message collectors, except that you apply them on a message rather than a channel. The following is an example taken from the documentation, with slightly better variable names for clarification. The filter will check for the 👌 emoji - in the default skin tone specifically, so be wary of that. It will also check that the person who reacted shares the same id as the author of the original message that the collector was assigned to.
 
-<tip>You can read the docs for the `.createReactionCollector()` method [here](https://discord.js.org/#/docs/main/stable/class/Message?scrollTo=createReactionCollector).</tip>
+::: tip
+You can read the docs for the `.createReactionCollector()` method [here](https://discord.js.org/#/docs/main/stable/class/Message?scrollTo=createReactionCollector).
+:::
 
 ```js
 const filter = (reaction, user) => {
@@ -109,7 +119,9 @@ collector.on('end', collected => {
 
 As before, these work almost exactly the same as a reaction collector, except it is promise based. The same differences apply as with channel collectors.
 
-<tip>You can read the docs for the `.awaitReactions()` method [here](https://discord.js.org/#/docs/main/stable/class/Message?scrollTo=awaitReactions).</tip>
+::: tip
+You can read the docs for the `.awaitReactions()` method [here](https://discord.js.org/#/docs/main/stable/class/Message?scrollTo=awaitReactions).
+:::
 
 ```js
 const filter = (reaction, user) => {

@@ -23,6 +23,8 @@ $ npm install --save sqlite3
 
 After you have installed discord.js and Sequelize, you can start with the following skeleton code. The comment labels will tell you where we'll insert our code.
 
+<!-- eslint-disable require-await -->
+
 ```js
 const Discord = require('discord.js');
 const Sequelize = require('sequelize');
@@ -45,20 +47,15 @@ client.on('message', async message => {
 
 		if (command === 'addtag') {
 			// [delta]
-		}
-		else if (command === 'tag') {
+		} else if (command === 'tag') {
 			// [epsilon]
-		}
-		else if (command === 'edittag') {
+		} else if (command === 'edittag') {
 			// [zeta]
-		}
-		else if (command === 'taginfo') {
+		} else if (command === 'taginfo') {
 			// [theta]
-		}
-		else if (command === 'showtags') {
+		} else if (command === 'showtags') {
 			// [lambda]
-		}
-		else if (command === 'removetag') {
+		} else if (command === 'removetag') {
 			// [mu]
 		}
 	}
@@ -132,7 +129,9 @@ The model mirrors very closely to what is defined in the database. We'll have a 
 `defaultValue` lets us set a fallback value if we don't assign the value during the insert.  
 `allowNull` is not all that important, but this will guarantee in the database that the attribute is never unset. You could potentially set it to be a blank or empty string, but has to be set to _something_.
 
-<tip>`Sequelize.STRING` vs `Sequelize.TEXT`: In most database systems, the length of the string is a fixed length for performance reasons. Sequelize defaults this to 255. Use STRING if your input has a max length, and use TEXT if doesn't. For sqlite, there's no unbounded string type so it won't matter which one you pick.</tip>
+::: tip
+`Sequelize.STRING` vs `Sequelize.TEXT`: In most database systems, the length of the string is a fixed length for performance reasons. Sequelize defaults this to 255. Use STRING if your input has a max length, and use TEXT if doesn't. For sqlite, there's no unbounded string type so it won't matter which one you pick.
+:::
 
 ### [gamma] Syncing the model
 
@@ -175,7 +174,9 @@ catch (e) {
 `catch (e)` This section is absolutely necessary for our insert. We offload checking for duplicates to the database, so that it will tell us if we create a tag that already exists. The alternative is to query the database before adding data, and checking if we get a result. If we don't, only then do we add the data. But this requires two queries instead of one, so this method is less work.   
 `if (e.name === "SequelizeUniqueConstraintError")` Although this was mostly for doing less work, it's always good to handle your errors, especially if you know what types of errors you will receive. This error comes up if your unique constraint is violated, i.e. someone inserted duplicate values.
 
-<warning>Do not use catch for inserting new data. Only use it for gracefully handling things that go wrong in your code, or logging errors.</warning>
+::: warning
+Do not use catch for inserting new data. Only use it for gracefully handling things that go wrong in your code, or logging errors.
+:::
 
 ### [epsilon] Fetching a tag
 
@@ -265,6 +266,6 @@ return message.reply('Tag deleted.');
 `.destroy()` runs the delete operation. The operation returns a count of the number of affected rows. If it returns with a value of 0, we know nothing was deleted, and that tag didn't exist in the database in the first place.
 
 
-### Resulting code
+## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/blob/master/code-samples/sequelize/tags/sequelize.js).
+<resulting-code path="sequelize/tags" />
