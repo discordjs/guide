@@ -1,8 +1,8 @@
-# Discord.js Guide
-
 <div align="center">
-	<img src="guide/images/logo-small.png" title="Discord.js Guide" alt="Discord.js Guide" />
+	<img src="guide/images/branding/banner.png" title="Discord.js Guide" alt="Discord.js Guide" />
 </div>
+
+# Discord.js Guide
 
 The official guide for [discord.js](https://github.com/discordjs/discord.js), created and maintained by core members of its community and contributed to by [various others](https://github.com/discordjs/guide/graphs/contributors?type=a).
 
@@ -14,9 +14,9 @@ There are many different subjects covered, such as:
 
 - How to get a bot [up and running](https://discordjs.guide/#/preparations/) from scratch;
 - How to properly [create](https://discordjs.guide/#/creating-your-bot/), [organize](https://discordjs.guide/#/command-handling/), and [expand](https://discordjs.guide/#/command-handling/adding-features) on your commands;
-- In-depth explanations and examples regarding popular topics (e.g. [reactions](https://discordjs.guide/#/popular-topics/reactions), [embeds](https://discordjs.guide/#/popular-topics/embeds), [canvas](https://discordjs.guide/#/popular-topics/canvas))
-- Working with databases ([sequelize](https://discordjs.guide/#/sequelize/) and [keyv](https://discordjs.guide/#/keyv/))
-- Getting started with [sharding](https://discordjs.guide/#/sharding/)
+- In-depth explanations and examples regarding popular topics (e.g. [reactions](https://discordjs.guide/#/popular-topics/reactions), [embeds](https://discordjs.guide/#/popular-topics/embeds), [canvas](https://discordjs.guide/#/popular-topics/canvas));
+- Working with databases (e.g. [sequelize](https://discordjs.guide/#/sequelize/) and [keyv](https://discordjs.guide/#/keyv/));
+- Getting started with [sharding](https://discordjs.guide/#/sharding/);
 - And much more.
 
 ## Contributing
