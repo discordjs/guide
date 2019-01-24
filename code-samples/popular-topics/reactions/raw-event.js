@@ -28,6 +28,8 @@ client.on('raw', async event => {
 		reaction = new Discord.MessageReaction(message, emoji, 1, data.user_id === client.user.id);
 	}
 
+	if (event.t === 'MESSAGE_REACTION_ADD') message._addReaction(reaction.emoji, user);
+
 	client.emit(events[event.t], reaction, user);
 });
 
