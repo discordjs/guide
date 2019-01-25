@@ -1,3 +1,7 @@
+---
+title: より多くのコンテンツをリクエストする
+---
+
 <!--
 # Requesting more content
 -->
