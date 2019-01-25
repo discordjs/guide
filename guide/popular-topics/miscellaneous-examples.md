@@ -141,3 +141,40 @@ console.log(emojiCharacters['!']); // ❗
 ::: tip
 On Windows, you may be able to use the `Win + .` keyboard shortcut to open up an emoji picker can be used for quick, easy access to all the unicode emojis available to you. Some of the emojis listed above may not be there, though (e.g the 0-9 emojis).
 :::
+
+## Customizable Prefix
+You can use this if some bot in your server has the same prefix.
+
+::: tip
+This one using the package named, `quick.db`. Quick.db is an open-sourced package meant to provide an easy way for beginners, and people of all levels to access & manage a database. All data is stored persistently, and comes with various extra features.
+:::
+
+To run this, you need to install the package first.
+```npm install quick.db```
+
+```js
+// index.js (main file)
+
+  var prefix = '!!'; // Your bot prefix.
+  let fetched = await db.fetch(`prefix_${message.guild.id}`);
+  if (fetched === null) prefix = '!!'; // If the server doesn't change your bot prefix before, turn this to your default prefix.
+  else prefix = fetched; // If the server has changed your bot prefix before, turn this to the custom prefixes.
+  
+ // prefix.js (command file)
+ 
+const Discord = require('discord.js') // Discord.js (11.4.2)
+const db = require('quick.db') // Quick.db (7.0.0-b19)
+
+exports.run = async (bot, message, args) => {
+
+  let prefixes = args.join(' ')
+
+  if (!message.member.hasPermission('MANAGE_GUILD')) { 
+  	return message.channel.send(`You don't have a **Manage Server** permissions.`) 
+  } // If the user doesn't have the required permissions.
+  
+  if (!preFIX) return message.channel.send(`Please supply the prefix/symbols.`) // If the user doesn't put any arguments/prefixes.
+
+  db.set(`prefix_${message.guild.id}`, preFIX)
+	message.channel.send(`${cute} Server Prefix has been changed to **\`${preFIX}\`**`); // Successful Message
+}```
