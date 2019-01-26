@@ -121,6 +121,12 @@ module.exports = {
 			],
 		},
 		{
+			title: 'Hosting',
+			children: [
+				'/hosting/heroku'
+			]
+		},
+		{
 			title: 'Additional Information',
 			children: [
 				'/additional-info/notation',
