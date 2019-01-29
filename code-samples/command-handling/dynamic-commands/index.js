@@ -12,7 +12,7 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
-client.on('ready', () => {
+client.once('ready', () => {
 	console.log('Ready!');
 });
 
@@ -26,8 +26,7 @@ client.on('message', message => {
 
 	try {
 		client.commands.get(command).execute(message, args);
-	}
-	catch (error) {
+	} catch (error) {
 		console.error(error);
 		message.reply('there was an error trying to execute that command!');
 	}

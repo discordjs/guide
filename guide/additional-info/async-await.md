@@ -16,11 +16,13 @@ The **rejected** state means that the Promise encountered an error and could not
 
 One important thing to know is that a Promise can only have one state at a time; it can never be pending and resolved, rejected and resolved, or pending and rejected. You may be asking "How would that look in code?". Here is a small example:
 
-<tip>ES6 code is being used in this example. If you do not know what that is, you should read up on that [here](/additional-info/es6-syntax).</tip>
+::: tip
+ES6 code is being used in this example. If you do not know what that is, you should read up on that [here](/additional-info/es6-syntax.md).
+:::
 
 ```js
 function deleteMessages(amount) {
-	return new Promise((resolve) => {
+	return new Promise(resolve => {
 		if (amount > 10) throw new Error('You can\'t delete more than 10 Messages at a time.');
 		setTimeout(() => resolve('Deleted 10 messages.'), 2000);
 	});
@@ -79,7 +81,7 @@ const client = new Discord.Client();
 
 const prefix = '?';
 
-client.on('ready', () => {
+client.once('ready', () => {
 	console.log('I am ready!');
 });
 
@@ -140,8 +142,7 @@ client.on('message', async message => {
 			await message.react('🇦');
 			await message.react('🇧');
 			await message.react('🇨');
-		}
-		catch(error) {
+		} catch (error) {
 			// handle failure of any Promise rejection inside here
 		}
 	}
@@ -174,8 +175,7 @@ client.on('message', async message => {
 		try {
 			const sentMessage = await message.channel.send('This message will be deleted in 10 seconds.');
 			await sentMessage.delete(10000);
-		}
-		catch(error) {
+		} catch (error) {
 			// handle error
 		}
 	}

@@ -2,14 +2,12 @@
 
 PM2 is a process manager. It manages your applications' states, so you can start, stop, restart and delete processes. It offers features such as monitoring running processes and setting up a "start with operating system" (be that Windows, Linux or Mac) so your processes start when you boot your system.
 
-## Getting started
-
-### Installation
+## Installation
 
 You can install PM2 via npm:
 
 ```bash
-npm i -g pm2
+npm install --global pm2
 ```
 
 Or, if you use Yarn:
@@ -18,7 +16,7 @@ Or, if you use Yarn:
 yarn global add pm2
 ```
 
-### Starting your app
+## Starting your app
 
 After PM2 has been installed, the easiest way you can start your app is by going to the directory your bot is in, and then run the following:
 
@@ -26,7 +24,7 @@ After PM2 has been installed, the easiest way you can start your app is by going
 pm2 start your-app-name.js
 ```
 
-#### Additional notes
+### Additional notes
 
 The `pm2 start` script allows for more optional command-line arguments.
 
@@ -42,22 +40,28 @@ pm2 start your-app-name.js --name "Some cool name"
 pm2 start your-app-name.js --watch
 ```
 
-<tip>The `pm2 start` command can take more optional parameters, but for now only these 2 are relevant for us. If you want to see all the parameters available, you can check the documentation of pm2 [here](http://pm2.keymetrics.io/docs/usage/).</tip>
+::: tip
+The `pm2 start` command can take more optional parameters, but for now only these 2 are relevant for us. If you want to see all the parameters available, you can check the documentation of pm2 [here](http://pm2.keymetrics.io/docs/usage/).
+:::
 
-### Setting up booting with your system
+Once the process is launched with pm2, you can run `pm2 monit` to monitor any and all console outputs from the processes started by pm2. This accounts for any `console.log()` in your code or outputted errors.
+
+## Setting up booting with your system
 
 Perhaps one of the more useful features of PM2 is being able to boot up with your Operating System. This will ensure that your bot processes will always be started after an (unexpected) reboot (e.g. after a power outage).
 
 The initial steps to run differ per OS. In this guide, we'll cover those for Windows and for Linux/MacOS.
 
-#### Initial steps for Windows
+### Initial steps for Windows
 
-<tip>Run these from an administrative command prompt to avoid getting hit with a bunch of UAC dialogs.</tip>
+::: tip
+Run these from an administrative command prompt to avoid getting hit with a bunch of UAC dialogs.
+:::
 
 **Install the [pm2-windows-service](https://www.npmjs.com/package/pm2-windows-service) package from npm:**
 
 ```bash
-npm i -g pm2-windows-service
+npm install --global pm2-windows-service
 ```
 
 **After installation has finished, install the service by running the following command:**
@@ -65,9 +69,11 @@ npm i -g pm2-windows-service
 ```bash
 pm2-service-install
 ```
-<tip>You can use the `-n` parameter to set the service name: `pm2-service-install -n "the-service-name"`</tip>
+::: tip
+You can use the `-n` parameter to set the service name: `pm2-service-install -n "the-service-name"`
+:::
 
-#### Initial steps for Linux/MacOS
+### Initial steps for Linux/MacOS
 
 You need to get a start script, which you can get by running the following command:
 
@@ -93,7 +99,7 @@ The output of running one of the commands listed above will output a command for
 
 After running that command, you can continue to the next step.
 
-#### Saving the current process list
+### Saving the current process list
 
 To save the current process list so it will automatically get started after a restart, run the following command:
 

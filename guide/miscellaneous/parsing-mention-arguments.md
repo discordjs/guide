@@ -1,4 +1,4 @@
-## Parsing mention arguments
+# Parsing mention arguments
 
 In a previous chapter you learned how to build commands with user input, you also learned how to use *mentions* as user input.
 However, using `message.mentions` can lead to a few problems.  
@@ -26,7 +26,7 @@ Say someone accidentally used the ban command like this:
 
 The bot will still ban someone, but it will be the @Victim again. `message.mentions.users` still contains a mention, which the bot will use. But in reality you would want your bot to be able to tell the user he used the command incorrectly.
 
-### How Discord mentions work
+## How Discord mentions work
 
 Discord uses a special syntax to embed mentions in a message. For user mentions it is the user's ID with `<@` at the start and `>` at the end, like this: `<@86890631690977280>`. If they have a nickname there will also be a be a `!` after the `@`.  
 Role mentions and channel mentions work similarly. Role mentions look like `<@&134362454976102401>` and channel mentions like `<#222197033908436994>`.
@@ -34,11 +34,11 @@ Role mentions and channel mentions work similarly. Role mentions look like `<@&1
 That means when you receive a message from the Discord API and it contains mentions the message's content will contain that special syntax.  
 If you send
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		I think we should add <mention>GoodPerson</mention> to the <mention>Mod</mention> role.
 	</discord-message>
-</discord-messages>
+</div>
 
 then the `message.content` for that message will look something like this
 
@@ -47,7 +47,7 @@ then the `message.content` for that message will look something like this
 'I think we should add <@86890631690977280> to the <@&134362454976102401> role.'
 ```
 
-### Implementation
+## Implementation
 
 So, how do you actually use this new information for your bot?  
 Most of your code will not change, however instead of using `message.mentions` to find the mentioned users you will have to do it manually.  
@@ -66,7 +66,7 @@ client.on('message', message => {
 });
 ```
 
-Now you can easily test the waters by upgrading the avatar command from [last time](/creating-your-bot/commands-with-user-input).
+Now you can easily test the waters by upgrading the avatar command from [last time](/creating-your-bot/commands-with-user-input.md).
 This is what we have so far. It is pretty simple, it will show the avatar of who used the command.
 
 ```js
@@ -93,8 +93,6 @@ function getUserFromMention(mention) {
 
 		return client.users.get(mention);
 	}
-
-	return;
 }
 ```
 
@@ -105,7 +103,9 @@ It essentially just works itself through the structure of the mention bit by bit
  3. Only the ID should be left now, so use that to fetch the user from the `client.users` Collection.
 Whenever it encounters an error with the mention (i.e. invalid structure) it simply returns `undefined` to signal the mention is invalid.
 
-<tip>The `.slice()` method is used in a more advance way here. You can read the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) for more info.</tip>
+::: tip
+The `.slice()` method is used in a more advance way here. You can read the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) for more info.
+:::
 
 Now you have a nifty function you can use whenever you need to convert a raw mention into a proper user object.
 Plugging it into the command will give you this:
@@ -130,14 +130,14 @@ If the user supplied an argument it should be the user mention, so it just gets 
 
 And that is it! Simple, isn't it? Start up your bot and see if it works.
 
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="AnotherUser" avatar="green">
 		!avatar <mention>User</mention>
 	</discord-message>
 	<discord-message author="User" avatar="blue" :bot="true">
-		User's avatar: https://cdn.discordapp.com/avatars/208330347295932416/e2456a4bc63ec0215334434ade7fa45c.png
+		User's avatar: https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png
 	</discord-message>
-</discord-messages>
+</div>
 
 So now, instead of using `message.mentions` you can use your new, fantastic function.
 This will allow you to add proper checks for all your args, so that you can tell when a command was used correctly and when it was used incorrectly.
@@ -151,7 +151,9 @@ But using Regular Expressions (aka "RegEx" or "RegExp"), you can condense all th
 
 If you have never worked with Regular Expressions before, this might seem daunting. But in fact, you already have used regular expressions. Remember `withoutPrefix.split(/ +/);`? This little `/ +/` is actually a Regular Expression. The `/` on either side tell JavaScript where the Regular Expression begins and where it ends, the stuff inbetween is it is content. 
 
-<tip>For a more detailed explanation please consult the [MDN's documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp).</tip>
+::: tip
+For a more detailed explanation please consult the [MDN's documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp).
+:::
 
 The RegEx you will use for user mentions will look like this: `/^<@!?(\d+)>$/`.
 Here is how the RegEx works:
@@ -164,11 +166,11 @@ Here is how the RegEx works:
 
 Using the `.match()` method on strings you can get the values of the capture group, i.e., the ID of the mention.
 
-<warning>
+::: warning
 Discord.js has [built-in patterns](https://discord.js.org/#/docs/main/stable/class/MessageMentions?scrollTo=s-CHANNELS_PATTERN)
 for matching mentions, however as of version 11.4 they do not contain any groups
 and thus aren't useful for actually getting the ID out of the mention.
-</warning>
+:::
 
 Updating your `getUserFromMention` function to use RegEx gives you this:
 
@@ -189,4 +191,4 @@ If you run your bot again now everything should still work the same.
 
 ## Resulting code
 
-If you want to compare your code to a working example, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/miscellaneous/parsing-mention-arguments).
+<resulting-code />

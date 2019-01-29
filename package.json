@@ -3,12 +3,12 @@
   "description": "The official guide for discord.js, created and maintained by core members of its community.",
   "version": "1.0.0",
   "scripts": {
-    "lint": "eslint . --ext md,js",
-    "serve": "docsify serve guide --open",
-    "precommit": "npm run lint"
+    "lint": "eslint . --ext js,md,vue",
+    "serve": "vuepress dev guide",
+    "build": "vuepress build guide"
   },
   "repository": "https://github.com/discordjs/guide.git",
-  "keywords": [
+  "keywords": [	
     "discord",
     "bot",
     "guide",
@@ -23,9 +23,15 @@
   },
   "homepage": "https://discordjs.guide",
   "devDependencies": {
-    "docsify-cli": "^4.2.1",
+    "babel-eslint": "^10.0.1",
     "eslint": "^4.17.0",
-    "eslint-plugin-markdown": "eslint/eslint-plugin-markdown",
-    "husky": "^0.14.3"
+    "eslint-config-aqua": "^4.4.1",
+    "eslint-plugin-markdown": "^1.0.0",
+    "eslint-plugin-vue": "^5.1.0",
+    "vuepress": "^0.14.4"
+  },
+  "dependencies": {
+    "vue-discord-message": "^2.0.0",
+    "vuepress-theme-yuu": "^1.0.0"
   }
 }

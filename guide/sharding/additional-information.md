@@ -1,15 +1,17 @@
-## Additional changes
+# Additional information
 
-<tip>This page is a follow-up and bases its code off of [the previous page](/sharding/).</tip>
+::: tip
+This page is a follow-up and bases its code off of [the previous page](/sharding/).
+:::
 
 Here are some extra topics covered about sharding that you might have concerns about.
 
-### Legend
+## Legend
 
 * `manager` is an instance of `ShardingManager`, e.g. `const manager = new ShardingManager(file, options);`
 * `client.shard` refers to the current shard.
 
-### Shard messages
+## Shard messages
 
 In order for shards to communicate, they must send messages to one another, as they are each their own process. You can listen for these messages by adding the following listener in your `index.js` file:
 
@@ -23,7 +25,7 @@ As the property names imply, the `_eval` property is what the shard is attemptin
 
 You can also send messages via `process.send('hello')`, which would not contain the same information. This is why the `.message` property's type is declared as `*` [in the discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Shard?scrollTo=e-message).
 
-### Specific shards
+## Specific shards
 
 There might be times where you want to target a specific shard. An example would be to kill a specific shard that isn't working as intended. You can achieve this by taking the following snippet (in a command, preferably):
 
@@ -33,7 +35,7 @@ client.shard.broadcastEval('if (this.shard.id === 0) process.exit();');
 
 If you're using something like [PM2](http://pm2.keymetrics.io/) or [Forever](https://github.com/foreverjs/forever), this is an easy way to restart a specific shard. Remember, [Shard#BroadcastEval](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=broadcastEval) sends a message to **all** shards, so you have to check if it's on the shard you want.
 
-### ShardingManager#shardArgs
+## `ShardingManager#shardArgs`
 
 Consider the following example of creating a new `ShardingManager` instance:
 
@@ -52,7 +54,7 @@ node bot.js --ansi --color --trace-warnings
 
 Should you need them for whatever reason, they're available in `process.argv` property, which contains an array of command-line arguments used to execute the script.
 
-### Eval arguments
+## Eval arguments
 
 There may come a point where you will want to pass functions or arguments from the outer scope into a `.broadcastEval()` call.
 
@@ -69,6 +71,38 @@ client.shard.broadcastEval(`this.${funcName}(${args});`);
 ```
 
 This would become `client.funcName(args)` once it gets through. This is handy if you, for example, have extended your client object with your own class and wish to call some of its methods manually.
+
+### Asynchronous functions
+
+There may be a time when you want to have your shard process an asynchronous function. Here's how you can do that!
+
+```js
+client.shard.broadcastEval(`
+	let channel = this.channels.get('id');
+	let msg;
+	if (channel) {
+		msg = channel.fetchMessage('id').then(m => m.id);
+	}
+	msg;
+`);
+```
+
+This snippet allows you to return fetched messages outside of the `broadcastEval`, allowing you to know whether or not you were able to retrieve a message, for example. Remember, you aren't able to return entire objects outside. Now, what if we wanted to use `async/await` syntax inside?
+
+```js
+client.shard.broadcastEval(`
+	(async => {
+		let channel = this.channels.get('id');
+		let msg;
+		if (channel) {
+			msg = await channel.fetchMessage('id').then(m => m.id);
+		}
+		return msg;
+	})();
+`);
+```
+
+This example will work the same, but you are able to produce cleaner code with `async/await`. Additionally. What this does is declare an asynchronous function and then immediately call it. As it is also the last declared line, it is effectively being returned. Remember that you need to `return` an item inside a function one way or another.
 
 ## Sharded Bot Example(s)
 

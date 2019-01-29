@@ -1,3 +1,7 @@
+---
+forceTheme: blue
+---
+
 # Using arguments in commands
 
 Sometimes when using commands you may want to get data from the user, and change the response accordingly. In this section, you'll create a command that pulls a string from the message and says it back to the user!
@@ -115,4 +119,4 @@ And there you have it, a say command using args!
 
 ## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/commando/args).
+<resulting-code />

@@ -1,6 +1,8 @@
 ## Extended changes
 
-<tip>This page is a follow-up and bases its code off of [the previous page](/sharding/additional-information), which assumes knowledge of arguments and passing functions.</tip>
+::: tip
+This page is a follow-up and bases its code off of [the previous page](/sharding/additional-information.md), which assumes knowledge of arguments and passing functions.
+:::
 
 ### Sending messages across shards
 
@@ -126,7 +128,9 @@ client.on('message', message => {
 });
 ```
 
-<tip>If you are unsure as to what `.call()` does, you may read up on it [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call).</tip>
+::: tip
+If you are unsure as to what `.call()` does, you may read up on it [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call).
+:::
 
 Now, run this code, and you will surely get a result that looks like the following:
 
@@ -193,6 +197,6 @@ Now, you will want to make use of it in the actual command:
 
 And that's all! The emoji should have pretty-printed in a message as you'd expect.
 
-### Resulting code
+## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/sharding/extended).
+<resulting-code />

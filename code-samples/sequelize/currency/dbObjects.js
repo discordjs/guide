@@ -30,7 +30,7 @@ Users.prototype.addItem = async function(item) {
 Users.prototype.getItems = function() {
 	return UserItems.findAll({
 		where: { user_id: this.user_id },
-		include: [ 'item' ],
+		include: ['item'],
 	});
 };
 

@@ -1,6 +1,8 @@
-## Configuration files
+# Configuration files
 
-<tip>This page is a follow-up and bases its code off of [the previous page](/creating-your-bot/).</tip>
+::: tip
+This page is a follow-up and bases its code off of [the previous page](/creating-your-bot/).
+:::
 
 As you get deeper into development, you may need to interact with sensitive data or data that gets used in multiple locations, such as:
 
@@ -11,7 +13,7 @@ As you get deeper into development, you may need to interact with sensitive data
 
 Having that kind of data hard-coded in each of your files can be a bit bothersome and is less than ideal, to say the least. This is where configuration files come in - they're great for storing static data that can be easily updated in a single place.
 
-### Implementing your config file
+## Implementing your config file
 
 Go to your code editor and make a new file. Add in the code below and save it as `config.json`, in the same directory as your main bot file.
 
@@ -32,7 +34,7 @@ Next, copy your token from the `client.login('your-token-goes-here')` line and p
 
 Now you can simply do `client.login(config.token)` to login! If you want to use a different prefix than `!`, you can change that as well.
 
-### Storing additional data
+## Storing additional data
 
 As previously mentioned, you'll probably want to store more than just your token and prefix at one point or another. If you want to store more data, just add another key/value pair to the list!
 
@@ -51,4 +53,4 @@ As previously mentioned, you'll probably want to store more than just your token
 
 ## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/tree/master/code-samples/creating-your-bot/configuration-files).
+<resulting-code />

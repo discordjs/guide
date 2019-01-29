@@ -2,21 +2,23 @@
 
 ## Local development
 
-Clone the repo into your desired folder and `cd` into it.
+Clone the repo into your desired folder, `cd` into it, and install the dependencies.
 
 ```bash
-git clone https://github.com/discordjs/guide.git && cd guide
+git clone https://github.com/discordjs/guide.git
+cd guide
+yarn # or npm install
 ```
 
-You should install the necessary dev dependencies afterwards, so that view the site locally. You can use `npm run serve` to open up a local version of the site at http://localhost:3000. If you need to use a different port, run it as `npm run serve -- --port=1234`.
+You should install the necessary dev dependencies afterwards, so that view the site locally. You can use `yarn serve` to open up a local version of the site at http://localhost:8080. If you need to use a different port, run it as `yarn serve --port=1234`.
 
 ### Linting
 
 Remember to always lint your edits/additions before making a commit to ensure everything's lined up and consistent with the rest of the guide. We use ESLint and have a package.json script for linting both JS files and JS codeblocks inside Markdown files. Just install the dependencies and run the lint script.
 
 ```bash
-npm install
-npm run lint
+yarn
+yarn lint
 ```
 
 #### Caveats
@@ -34,7 +36,7 @@ ESLint would error with `Parsing error: Unexpected token message` instead of let
 
 ## Adding pages
 
-To add a new page to the guide, create a `file-name.md` file inside the folder of your choice. If you want to link to `/dir/some-tutorial`, you would create a `some-tutorial.md` file inside a `dir` folder. [Docsify](https://github.com/QingWei-Li/docsify) will pick up on it and set up the routing appropriately.
+To add a new page to the guide, create a `file-name.md` file inside the folder of your choice. If you want to link to `/dir/some-tutorial.html`, you would create a `some-tutorial.md` file inside a `dir` folder. [VuePress](https://github.com/vuejs/vuepress) will pick up on it and set up the routing appropriately.
 
 With that being said, you will still need to add the link to the sidebar manually. Go to the `/guide/_sidebar.md` file and insert a new list item with a link to your newly created page.
 
@@ -91,14 +93,20 @@ If you have a tip to share with to user, you can format them in a specific way s
 ```md
 In this section, we'll be doing some stuff!
 
-<tip>You can do this stuff even faster if you do this cool thing listed in this tip!</tip>
+::: tip
+You can do this stuff even faster if you do this cool thing listed in this tip!
+:::
 
-<warning>Make sure you're on version 2.0.0 or above before trying this.</warning>
+::: warning
+Make sure you're on version 2.0.0 or above before trying this.
+:::
 
-<danger>Be careful; this action is irreversible!</danger>
+::: danger
+Be careful; this action is irreversible!
+:::
 ```
 
-![Utility tags preview](https://i.imgur.com/ayFvW6h.png)
+![Utility tags preview](https://i.imgur.com/CnzVBmr.png)
 
 ### General styling
 
@@ -118,9 +126,13 @@ console.log(data);
 
 And here's a sentence that would explain how that works, maybe.
 
-<tip>Here's where you'd tell them something even cooler than the really cool thing they just learned.</ti
+::: tip
+Here's where you'd tell them something even cooler than the really cool thing they just learned.
+:::
 
-<warning>This is where you'd warn them about the possible issues that arise when using this method.</warning>
+::: warning
+This is where you'd warn them about the possible issues that arise when using this method.
+:::
 ```
 
 #### Headers and sidebar links
@@ -172,9 +184,36 @@ If you want to include an image in a page, the image you add should be saved to 
 
 + Here's what the final result would look like:
 +
-+ ![Final result](/assets/img/78fcCsF.png)
++ ![Final result](~@/images/78fcCsF.png)
 +
 + If you want to read more about this, you can check out the page on [that other cool stuff](/some-really-cool-stuff).
+```
+
+Do note the `~@/images/*` syntax used. The `~@/` part is a shortcut to the base `/guide` directory, which holds all the .md files and the `/images` folder. When it comes to images, this syntax should always be used.
+
+### Code samples
+
+If you're writing a page that teaches the reader how to build something step-by-step, make sure to include the final piece of code in a file inside the `/code-samples` directory. The folder destination inside the `/code-samples` folder should match the destination inside the `/guide` folder. For example: `guide/foo/bar.md` -> `code-samples/foo/bar/index.js`.
+
+```md
+<!-- Inside /guide/foo/bar.md -->
+## Resulting code
+
+<!-- Will result in `/code-samples/foo/bar/` -->
+<resulting-code />
+```
+
+This will automatically generate the link to the proper directory on GitHub for that specific page. Should you need to overwrite the path, you can do so:
+
+```md
+<!-- Inside /guide/baz/README.md -->
+## Resulting code
+
+<!-- Will result in `/code-samples/baz/` -->
+<resulting-code />
+
+<!-- Will result in `/code-samples/baz/getting-started/` -->
+<resulting-code path="baz/getting-started" />
 ```
 
 ### Faking Discord messages
@@ -186,16 +225,18 @@ We have some useful custom helper components that you can use to "fake" Discord 
 The syntax to make this display is quite simple as well:
 
 ```html
-<discord-messages>
+<div is="discord-messages">
 	<discord-message author="User" avatar="djs">
 		!ping
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
 		Pong! Took 250ms
 	</discord-message>
-</discord-messages>
+</div>
 ```
 
-The `author` and `avatar` attributes must be strings, and the `bot` attribute must be a boolean. Do note the semicolon in `:bot="true"`. These components are made with Vue, but if you aren't familiar with Vue, don't worry about it. Just understand that this allows us to pass in the actual boolean `true` and not the string `'true'`. All `<discord-message>` tags must be children of a single `<discord-messages>` tag for it to display properly.
+The `author` and `avatar` attributes must be strings, and the `bot` attribute must be a boolean. Do note the colon in `:bot="true"`. These components are made with Vue, but if you aren't familiar with Vue, don't worry about it. Just understand that this allows us to pass in the actual boolean `true` and not the string `'true'`. All `<discord-message>` tags must be children of a single `<div is="discord-messages">` tag for it to display properly.
 
-There are also some shortcuts you can use for the `avatar` attribute. The currently available ones are `blue`, `green`, and `djs`. `blue` and `green` will make it use a default Discord avatar of that color, and `djs` will make it use the discord.js guild icon.
+Do note the `<div is="discord-messages">` syntax instead of `<discord-messages>`. This is due to how VuePress renders markdown and HTML inside markdown files and doesn't recognize `<discord-messages>` as an HTML element, therefore rendering anything indented inside as a regular codeblock.
+
+You can read more about how to use these components by checking out [the package's GitHub repo](https://github.com/Danktuary/vue-discord-message).

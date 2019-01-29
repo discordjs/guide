@@ -1,3 +1,7 @@
+---
+forceTheme: blue
+---
+
 # Using argument validators
 
 Sometimes you're going to want an argument to be a certain thing, e.g. check if it's a specific piece of text, or check the length. This can be accomplished with a `validate` function in your arg.

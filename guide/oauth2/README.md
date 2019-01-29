@@ -1,4 +1,4 @@
-# OAuth2 
+# Getting started with OAuth2
 
 OAuth2 enables application developers to build applications that utilize authentication and data from the Discord API. This can be used to create things such as web dashboard to display user info, fetch linked third-party accounts like Twitch or Steam, access users' guild information without actually being in the guild, and much more. OAuth2 can greatly extend the functionality of your bot if used correctly.
 
@@ -54,15 +54,15 @@ You can start your server with `node index.js`. Once you start it, try connectin
 
 Now that you have your web server up and running, it's time to get some information from Discord. Head over to [your Discord applications](https://discordapp.com/developers/applications/) and click "Create an application", where you'll be greeted with the following page:
 
-![Create an application page](/assets/img/1ch98sm.png)
+![Create an application page](~@/images/1ch98sm.png)
 
 Take note of the `client id` field, the `client secret` field, and the "OAuth2" link on the left side of the page. For now, click on "OAuth2' and add a redirect url to `http://localhost:53134` like so:
 
-![img](/assets/img/9fejia2.png)
+![img](~@/images/9fejia2.png)
 
 Once you've added your redirect url, you will want to generate an OAuth2 url. Lower down on the page, you can conveniently find an OAuth2 Url Generator provided by Discord. Use this to generate a url for yourself with the `identify` scope. 
 
-![img](/assets/img/18e2dwi.png)
+![img](~@/images/18e2dwi.png)
 
 The `identify` scope will allow your application to get basic user information from Discord. A list of all scopes can be found [here](https://discordapp.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes).
 
@@ -72,7 +72,7 @@ You have your website, and you have a url. Now you need to use those two things 
 
 After you change the response type, you can test the url right away. Try visiting it in your browser and you will be directed to a page that looks like this.
 
-![img](/assets/img/49jali8.png)
+![img](~@/images/49jali8.png)
 
 You can see that by clicking `Authorize`, you are allowing the application to access your username and avatar. Once you click through, you should be redirected to the redirect url with `#access_token=ACCESS_TOKEN&token_type=Bearer&expires_in=EXPIRATION&scope=identify` appended to it. You now have an access token and can make requests to Discord's API to get information on the user. Modify `index.html` to add your OAuth2 url and to take advantage of the access token if it exists.
 
@@ -92,11 +92,11 @@ You can see that by clicking `Authorize`, you are allowing the application to ac
 			const match = window.location.hash.match(/access_token=(.+?)&token_type=(.+?)(?:&|$)/);
 
 			if (match) {
-				const [, access_token, token_type] = match;
+				const [, accessToken, tokenType] = match;
 
 				fetch('https://discordapp.com/api/users/@me', {
 					headers: {
-						authorization: `${token_type} ${access_token}`
+						authorization: `${tokenType} ${accessToken}`
 					}
 				})
 					.then(res => res.json())
@@ -151,17 +151,18 @@ When you visit a url with a `state` parameter appended to it and then click `Aut
 const match = window.location.hash.match(/access_token=(.+?)&token_type=(.+?)&state=(.+?)(?:&|$)/);
 
 if (match) {
-	const [, access_token, token_type, urlState] = match;
+	const [, accessToken, tokenType, urlState] = match;
 	const stateParameter = localStorage.getItem('stateParameter');
 
 	if (btoa(stateParameter) !== decodeURIComponent(urlState)) {
-		console.log('You may have been clickjacked!');
-		return;
+		return console.log('You may have been clickjacked!');
 	}
 }
 ```
 
-<tip>Don't forgo security for a tiny bit of convenience!</tip>
+::: tip
+Don't forgo security for a tiny bit of convenience!
+:::
 
 ### OAuth2 flows
 
@@ -216,7 +217,9 @@ fetch('https://discordapp.com/api/oauth2/token', {
 	.then(console.log);
 ```
 
-<warning>The content-type for the token url must be `application/x-www-form-urlencoded`. This is why `form-data` is used.</warning>
+::: warning
+The content-type for the token url must be `application/x-www-form-urlencoded`. This is why `form-data` is used.
+:::
 
 Now try visiting your OAuth2 url and authorizing your application. Once you're redirected, you should see something like this in your console.
 
@@ -230,13 +233,15 @@ Now try visiting your OAuth2 url and authorizing your application. Once you're r
 
 You now have an access token and a refresh token.
 
-<tip>To maintain security, store the access token server side but associate it with a session ID that you generate for the user.</tip>
+::: tip
+To maintain security, store the access token server side but associate it with a session ID that you generate for the user.
+:::
 
 ## Additional reading
 
 [RFC 6759](https://tools.ietf.org/html/rfc6749)  
 [Discord Docs for OAuth2](https://discordapp.com/developers/docs/topics/oauth2)
 
-### Resulting code
+## Resulting code
 
-If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository [here](https://github.com/discordjs/guide/blob/master/code-samples/oauth/simple-oauth-webserver/).
+<resulting-code path="oauth/simple-oauth-webserver" />

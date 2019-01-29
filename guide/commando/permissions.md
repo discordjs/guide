@@ -1,3 +1,7 @@
+---
+forceTheme: blue
+---
+
 # Handling permissions
 
 Sometimes you may need a user to have a certain permission to use a command, or maybe your bot needs a permission to make the command work. Well, Commando makes both of these very simple.
