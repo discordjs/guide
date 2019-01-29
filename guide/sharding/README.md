@@ -53,24 +53,24 @@ client.login('token');
 
 Let's say your bot is in a total of 3,600 guilds. Using the recommended shard count you might end up at 4 shards, the first 3 containing 1,000 guilds each and the last one containing the remaining 600. If a guild is on a certain shard (shard #2, for example) and it receives this command, the guild count will be 1,000, which is obviously not the "correct" number of guilds for your bot. Likewise, if the message is received on a guild in shard 3 (shard IDs are zero-indexed), the guild count will be 600, which is still not what you want. "How can I fix this?", you ask? Well, that's why we're here, isn't it?
 
-## BroadcastEval
+## FetchClientValues
 
-First, let's take a look at [the most common sharding utility method you'll be using](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=broadcastEval). This method makes all of the shards evaluate a given script, where `this` is the `client` once each shard gets to evaluating it. You can read more about the `this` keyword [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this). For now, essentially understand that it is the "client".
+First, let's take a look at [one of the most common sharding utility methods you'll be using](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=fetchClientValues) called `fetchClientValues`. This method retrieves a client property of all shards.
 
 Now, take the following snippet of code:
 
 ```js
-client.shard.broadcastEval('this.guilds.size').then(console.log);
+client.shard.fetchClientValues('guilds.size').then(console.log);
 ```
 
-If you run it, you will notice an output like `[1000, 1000, 1000, 600]`. You will be correct in assuming that that's the total number of guilds per shard, which is stored in an array in the Promise. We can both assume this isn't the ideal output for guild count, so we will need to make use of an array manipulation method—specifically [Array.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce).
+If you run it, you will notice an output like `[1000, 1000, 1000, 600]`. You will be correct in assuming that that's the total number of guilds per shard, which is stored in an array in the Promise. We can both assume this isn't the ideal output for guild count, so we will need to make use of an array manipulation method, specifically [Array.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce).
 
 It's highly urged for you to visit that link to understand how the method works, as you will probably find great use of it in sharding. Basically, this method (in this case) iterates through the array and adds each current value to the total amount.
 
 ```js
-client.shard.broadcastEval('this.guilds.size')
+client.shard.fetchClientValues('guilds.size')
 	.then(results => {
-		console.log(`${results.reduce((prev, val) => prev + val, 0)} total guilds`);
+		console.log(`${results.reduce((prev, guildCount) => prev + guildCount, 0)} total guilds`);
 	})
 	.catch(console.error);
 ```
@@ -80,9 +80,66 @@ While it's a bit unattractive to have more nesting in your commands, it is neces
 ```diff
 	if (command === 'stats') {
 -		return message.channel.send(`Server count: ${client.guilds.size}`);
-+		return client.shard.broadcastEval('this.guilds.size')
++		return client.shard.fetchClientValues('guilds.size')
 +			.then(results => {
-+				return message.channel.send(`Server count: ${results.reduce((prev, val) => prev + val, 0)}`);
++				return message.channel.send(`Server count: ${results.reduce((prev, guildCount) => prev + guildCount, 0)}`);
++			})
++			.catch(console.error);
+	}
+```
+
+## BroadcastEval
+
+Next, check out [another handy sharding method](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=broadcastEval) known as `broadcastEval`. This method makes all of the shards evaluate a given script, where `this` is the `client` once each shard gets to evaluating it. You can read more about the `this` keyword [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this). For now, essentially understand that it is the "client" object.
+
+```js
+client.shard.broadcastEval('this.guilds.reduce((prev, guild) => prev + guild.memberCount, 0)').then(console.log);
+```
+
+This will run the code given to `broadcastEval` on each shard and return the results to the Promise as an array, once again. You should see something like `[9001, 16658, 13337, 15687]` logged. The code being sent to each shard adds up the `memberCount` property of every guild that shard is handling and returns it, so it's each shard's total guild member count. Of course, if you want to then total up the member count of *every* shard, you can do the same thing again on the results returned from the Promise.
+
+```js
+client.shard.broadcastEval('this.guilds.reduce((prev, guild) => prev + guild.memberCount, 0)')
+	.then(results => {
+		return message.channel.send(`Total member count: ${results.reduce((prev, memberCount) => prev + memberCount, 0)}`);
+	})
+	.catch(console.error);
+```
+
+## Putting them together
+
+You'd likely want to output both pieces of information in the stats command, so let's combine these two examples using [Promise.all()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all):
+
+```js
+const promises = [
+	client.shard.fetchClientValues('guilds.size'),
+	client.shard.broadcastEval('this.guilds.reduce((prev, guild) => prev + guild.memberCount, 0)'),
+];
+
+Promise.all(promises)
+	.then(results => {
+		const totalGuilds = results[0].reduce((prev, guildCount) => prev + guildCount, 0);
+		const totalMembers = results[1].reduce((prev, memberCount) => prev + memberCount, 0);
+		return message.channel.send(`Server count: ${totalGuilds}\nMember count: ${totalMembers}`);
+	})
+	.catch(console.error);
+```
+
+`Promise.all()` runs every promise you pass to it inside of an array in parallel, and waits for them all to finish before returning all of their results at once. The result is an array that corresponds with the array of promises you pass - so the first result element will be from the first promise. With that, your stats command should look something like this:
+
+```diff
+	if (command === 'stats') {
+-		return message.channel.send(`Server count: ${client.guilds.size}`);
++		const promises = [
++			client.shard.fetchClientValues('guilds.size'),
++			client.shard.broadcastEval('this.guilds.reduce((prev, guild) => prev + guild.memberCount, 0)'')
++		];
++
++		return Promise.all(promises)
++			.then(results => {
++				const totalGuilds = results[0].reduce((prev, guildCount) => prev + guildCount, 0);
++				const totalMembers = results[1].reduce((prev, memberCount) => prev + memberCount, 0);
++				return message.channel.send(`Server count: ${totalGuilds}\nMember count: ${totalMembers}`);
 +			})
 +			.catch(console.error);
 	}
