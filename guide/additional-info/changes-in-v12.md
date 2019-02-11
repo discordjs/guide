@@ -40,7 +40,7 @@ TODO LATER CUZ I DON'T WANNA TOUCH THAT SHIT RN:
 * MessageCollector
 * MessageEmbed***
 
-<p class="danger">Before anything, it is important to note that discord.js v12 (and so forth) requires a **minimum** Node version of v8. If you aren't sure what Node version you're on, run `node -v` in your console and update if necessary.</p>
+<p class="danger">Before anything, it is important to note that discord.js v12 (and so forth) requires a **minimum** Node version of v10. If you aren't sure what Node version you're on, run `node -v` in your console and update if necessary.</p>
 
 ### Attachment
 
