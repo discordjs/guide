@@ -197,6 +197,36 @@ The second parameter in `clientUser.setPassword()` has been changed. The `oldPas
 
 `clientUser.unblock()` has been removed entirely.
 
+### Collection
+
+#### Collection#find/findKey
+
+Both methods will now return `undefined` if nothing is found.
+
+#### Collection#deleteAll
+
+`collection.deleteAll()` has been removed in favor of map's default `clear()` method.
+
+#### Collection#exists
+
+`collection.exists()` has been replaced by the `collection.some()` method.
+
+#### Collection#filterArray
+
+`collection.filterArray()` has been removed completely.
+
+#### Collection#findAll
+
+`collection.findAll()` has been removed completely as the same functionality can be obtained through `collection.filter()`.
+
+#### Collection#first/firstKey/last/lastKey/random/randomKey
+
+The `amount` parameter of these methods now allows a negative number which will start the query from the end of the collection instead of the start.
+
+#### Collection#tap
+
+Now runs a specific function over the collection instead of mimicking `<array>.forEach()`, this functionality was moved to `collection.each()`. 
+
 ### Collector
 
 #### Collector#cleanup
@@ -268,7 +298,7 @@ The first and second parameters in `guild.createRole()` have been changed/remove
 
 #### Guild#deleteEmoji
 
-`Guild.deleteEmoji()` has been removed and transformed in the shape of a DataStore.
+`Guild.deleteEmoji()` has been removed and transformed in the shape of a DataStore. Note the possible use of `resolve()` as a broader alternative to `get()`.
 
 ```diff
 - guild.deleteEmoji('123456789012345678');
@@ -556,6 +586,13 @@ The following permission flags have been renamed:
 + permissions.bitfield;
 ```
 
+### Receiver
+`receiver.createOpusStream(user)` and `receiver.createPCMStream(user)` have been removed in favor of `receiver.createStream()`.
+
+```diff
+- receiver.createOpusStream(message.author);
++ receiver.createStream(message.author, {mode: 'opus', end: 'silence'});
+
 ### RichEmbed
 
 The `RichEmbed` class has been removed in favor of the `MessageEmbed` class.
@@ -641,6 +678,30 @@ Just like the `Channel#send***` methods, all the `.send***()` methods have been 
 #### Channel#type
 
 `channel.type` now may also return `category` or `unknown`.
+
+### Client
+
+#### client.rateLimit
+
+`client.rateLimit` is an event now emitted whenever the client hits ratelimits while making a request
+
+### DataStore
+
+The DataStore class was added in order to store various data types. Uses include
+- RoleStore
+- UserStore
+- GuildStore
+- ChannelStore
+- MessageStore
+- PresenceStore
+- ReactionStore
+- GuildEmojiStore
+- GuildMemberStore
+- GuildChannelStore
+- ReactionUserStore
+- GuildEmojiRoleStore
+- GuildMemberRoleStore
+
 
 ### Emoji
 
