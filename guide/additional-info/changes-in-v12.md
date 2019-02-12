@@ -677,6 +677,11 @@ The `RichEmbed` class has been removed in favor of the `MessageEmbed` class.
 + user.displayAvatarURL();
 + user.displayAvatarURL({ format: 'png', size: 1024 });
 ```
+### voiceConnection
+
+#### VoiceConnection#createReceiver
+`voiceconnection.createReceiver()` has been removed, the receiver can now simply be accessed from `voiceConnection.receiver`
+
 
 ### Webhook
 
