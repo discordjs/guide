@@ -608,6 +608,7 @@ The following permission flags have been renamed:
 ```diff
 - receiver.createOpusStream(message.author);
 + receiver.createStream(message.author, {mode: 'opus', end: 'silence'});
+```
 
 ### RichEmbed
 
