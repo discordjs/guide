@@ -31,7 +31,7 @@
     "vuepress": "^0.14.4"
   },
   "dependencies": {
-    "vue-discord-message": "^2.0.0",
+    "vue-discord-message": "^3.0.0",
     "vuepress-theme-yuu": "^1.0.0"
   }
 }
