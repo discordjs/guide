@@ -68,8 +68,11 @@ Now that you've installed Node.js and know how to open up your console and run c
 
 To install discord.js, simply run the `npm install discord.js`. This can take a bit of time, but should be done fairly quickly.
 
-<p class="warning">Once the installation is complete, you'll see something like this:<br/>
-![npm warnings](~@/images/BbcuyJ6.png)<br/>**This is perfectly normal and means that it worked.** You don't need to install any of the items listed in order to use discord.js; they are 100% optional.</p>
+::: warning
+Once the installation is complete, you'll see something like this:
+![npm warnings](~@/images/BbcuyJ6.png)<br/>
+**This is perfectly normal and means that it worked.** You don't need to install any of the items listed in order to use discord.js; they are 100% optional.
+:::
 
 And that's it! With all the necessities installed, you're almost ready to start coding your bot.
 
