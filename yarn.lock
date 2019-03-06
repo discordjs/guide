@@ -6828,9 +6828,9 @@ vuepress-theme-yuu@^1.0.0:
   dependencies:
     vue-click-outside "^1.0.7"
 
-vuepress@^0.14.4:
-  version "0.14.8"
-  resolved "https://registry.yarnpkg.com/vuepress/-/vuepress-0.14.8.tgz#1e0a70a64c19e82e365eb7313b1ec88cc4ad7ab3"
+vuepress@^0.14.10:
+  version "0.14.10"
+  resolved "https://registry.yarnpkg.com/vuepress/-/vuepress-0.14.10.tgz#070281ad0c9d48e7c848eb9511c96ceb106414ab"
   dependencies:
     "@babel/core" "7.0.0-beta.47"
     "@vue/babel-preset-app" "3.0.0-beta.11"
