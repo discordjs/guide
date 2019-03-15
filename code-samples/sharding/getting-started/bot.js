@@ -10,16 +10,9 @@ client.on('message', message => {
 	const command = args.shift().toLowerCase();
 
 	if (command === 'stats') {
-		const promises = [
-			client.shard.fetchClientValues('guilds.size'),
-			client.shard.broadcastEval('this.guilds.reduce((prev, guild) => prev + guild.memberCount, 0)'),
-		];
-
-		return Promise.all(promises)
+		return client.shard.broadcastEval('this.guilds.size')
 			.then(results => {
-				const totalGuilds = results[0].reduce((prev, guildCount) => prev + guildCount, 0);
-				const totalMembers = results[1].reduce((prev, memberCount) => prev + memberCount, 0);
-				return message.channel.send(`Server count: ${totalGuilds}\nMember count: ${totalMembers}`);
+				return message.channel.send(`Server count: ${results.reduce((prev, val) => prev + val, 0)}`);
 			})
 			.catch(console.error);
 	}
