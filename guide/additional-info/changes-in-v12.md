@@ -40,7 +40,7 @@ TODO LATER CUZ I DON'T WANNA TOUCH THAT SHIT RN:
 * MessageCollector
 * MessageEmbed***
 
-<p class="danger">Before anything, it is important to note that discord.js v12 (and so forth) requires a **minimum** Node version of v8. If you aren't sure what Node version you're on, run `node -v` in your console and update if necessary.</p>
+<p class="danger">Before anything, it is important to note that discord.js v12 (and so forth) requires a **minimum** Node version of v10. If you aren't sure what Node version you're on, run `node -v` in your console and update if necessary.</p>
 
 ### Attachment
 
@@ -120,6 +120,43 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 - client.fetchUser('123456789012345678');
 + client.users.fetch('123456789012345678');
 ```
+
+#### Client#browser
+
+`client.browser` has been removed entirely.
+
+#### Client#channels
+
+`client.channels` has been changed from a Collection to a DataStore.
+
+#### Client#emojis
+
+`client.emojis` has been changed from a Collection to a DataStore.
+
+#### Client#guilds
+
+`client.guilds` has been changed from a Collection to a DataStore.
+
+#### Client#ping
+
+`client.ping` has been moved to the WebSocketManager under `client.ws.ping`
+
+```diff
+- client.ping
++ client.ws.ping
+```
+
+#### Client#pings
+
+`client.pings` has been removed entirely.
+
+#### Client#presences
+
+`client.presences` has been removed entirely.
+
+#### Client#users
+
+`client.users` has been changed from a Collection to a DataStore.
 
 ### ClientUser
 
