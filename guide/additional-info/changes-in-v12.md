@@ -6,8 +6,109 @@ After a long time in development, Discord.js v12 is nearing a stable release, me
 
 v12 requires Node 10.x or higher to  use, so make sure you're up-to-date.  To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it!  There are many resources online to help you get up-to-date.
 
-For now, you do need Git installed and added to your PATH environment, so ensure that's done as well - again, guides are available online for a wide variety of operating systems.  Once you have Node up-to-date and Git installed, you can install v12 by running `npm install discordjs/discord.js` in your terminal or command prompt for text-only use, or `npm install discordjs/discord.js node-opus` for voice support.  
+For now, you do need Git installed and added to your PATH environment, so ensure that's done as well - again, guides are available online for a wide variety of operating systems.  Once you have Node up-to-date and Git installed, you can install v12 by running `npm install discordjs/discord.js` in your terminal or command prompt for text-only use, or `npm install discordjs/discord.js node-opus` for voice support.
 
+## Commonly Used Methods That Changed
+
+Below is a list a of the most commonly-used or asked-about methods and properties that changed from v11 to v12.
+
+### Fetch
+
+Some methods that retrieve uncached data have been changed, transformed in the shape of a DataStore.
+
+```diff
+- client.fetchUser('123456789012345678')
++ client.users.fetch('123456789012345678')
+
+- guild.fetchMember('123456789012345678')
++ guild.members.fetch('123456789012345678')
+
+- guild.fetchMembers()
++ guild.members.fetch()
+
+- textChannel.fetchMessage('123456789012345678')
++ textChannel.messages.fetch('123456789012345678')
+
+- textChannel.fetchMessages({limit: 10})
++ textChannel.messages.fetch({limit: 10})
+
+- textChannel.fetcHPinnedMessages()
++ textChannel.messages.fetchPinned()
+```
+
+### Roles
+
+The `GuildMember.roles` Collection has been changed to a DataStore in v12, so a lot of the associated methods for interacting with a member's roles have changed as well.  They're no longer on the GuildMember object itself, but instead now on the `GuildMemberRoleStore` Data Store.
+
+```diff
+- guildMember.addRole('123456789012345678')
+- guildMember.addRoles(['123456789012345678', '098765432109876543'])
++ guildMember.roles.add('123456789012345678')
++ guildMember.roles.add(['123456789012345678', '098765432109876543'])
+
+- guildMember.removeRole('123456789012345678')
+- guildMember.removeRoles(['123456789012345678', '098765432109876543'])
++ guildMember.roles.remove('123456789012345678')
++ guildMember.roles.remove(['123456789012345678', '098765432109876543'])
+
+- guildMember.setRoles(['123456789012345678', '098765432109876543'])
++ guildMember.roles.set(['123456789012345678', '098765432109876543'])
+```
+
+In addition, the GuildMember properties related to roles have also been moved to the `GuildMemberRoleStore` Data Store.
+
+```diff
+- guildMember.colorRole
++ guildMember.roles.color
+
+- guildMember.highestRole
++ guildMember.roles.highest
+
+- guildMember.hoistRole
++ guildMember.roles.hoist
+```
+
+### Ban and Unban
+
+The method to ban members and users have been moved to the `GuildMemberStore` Data Store.
+
+```diff
+- guildMember.ban()
+- guild.ban('123456789012345678')
++ guild.members.ban('123456789012345678')
+
+- guild.unban('123456789012345678')
++ guild.members.unban('123456789012345678')
++
+```
+
+### Image URLs
+
+Some image-related properties like `user.avatarURL` are now a method in v12, so that you can apply some options to them, eg. to affect their display size.
+
+```diff
+- user.avatarURL
++ user.avatarURL()
+
+- user.displayAvatarURL
++ user.displayAvatarURL()
+
+- guild.iconURL
++ guild.iconURL()
+
+- guild.splashURL
++ guild.splashURL()
+```
+
+### RichEmbed Constructor
+
+The RichEmbed constructor has been removed and is now called `MessageEmbed`.  It is largely the same to use, the only difference being the removal of `RichEmbed.attachFile()` - `MessageEmbed.attachFiles()` accepts a single file as a parameter as well.
+
+### User Account-Only Methods
+
+All user account-only methods have been removed, as they are no longer publicly accessible from the API.
+
+---
 <p class="danger">This stuff should keep getting shoved to the bottom, with the commonly-used methods that are changed, as well as topic overviews added before it.</p>
 
 The section headers for breaking changes will be named after the v11 classes/methods/properties and will be in alphabetical order, so that you can easily find what you're looking for. The section headers for additions will be named after the v12 classes/methods/properties, to reflect their current syntax appropriately.
