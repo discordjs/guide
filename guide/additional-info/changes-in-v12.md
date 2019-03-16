@@ -17,23 +17,54 @@ Below is a list a of the most commonly-used or asked-about methods and propertie
 Some methods that retrieve uncached data have been changed, transformed in the shape of a DataStore.
 
 ```diff
-- client.fetchUser('123456789012345678')
-+ client.users.fetch('123456789012345678')
+- client.fetchUser('123456789012345678');
++ client.users.fetch('123456789012345678');
 
-- guild.fetchMember('123456789012345678')
-+ guild.members.fetch('123456789012345678')
+- guild.fetchMember('123456789012345678');
++ guild.members.fetch('123456789012345678');
 
-- guild.fetchMembers()
-+ guild.members.fetch()
+- guild.fetchMembers();
++ guild.members.fetch();
 
-- textChannel.fetchMessage('123456789012345678')
-+ textChannel.messages.fetch('123456789012345678')
+- textChannel.fetchMessage('123456789012345678');
++ textChannel.messages.fetch('123456789012345678');
 
-- textChannel.fetchMessages({limit: 10})
-+ textChannel.messages.fetch({limit: 10})
+- textChannel.fetchMessages({ limit: 10 });
++ textChannel.messages.fetch({ limit: 10 });
 
-- textChannel.fetcHPinnedMessages()
-+ textChannel.messages.fetchPinned()
+- textChannel.fetchPinnedMessages();
++ textChannel.messages.fetchPinned();
+```
+
+### Send
+
+All the `.send***()` methods have been removed in favor of one general `.send()` method.
+
+```diff
+- channel.sendMessage('Hey!');
++ channel.send('Hey!');
+
+- channel.sendEmbed(embedVariable);
++ channel.send(embedVariable);
++ channel.send({ embed: embedVariable });
+```
+
+<p class="warning">`channel.send(embedVariable)` will only work if that variable is an instance of the `MessageEmbed` class; object literals won't give you the expected result unless your embed data is inside an `embed` key.</p>
+
+```diff
+- channel.sendCode('js', 'const version = 11;');
++ channel.send('const version = 12;', { code: 'js' });
+
+- channel.sendFile('./file.png');
+- channel.sendFiles(['./file-one.png', './file-two.png']);
++ channel.send({
+  files: [{
+    attachment: 'entire/path/to/file.jpg',
+    name: 'file.jpg'
+  }]
++ channel.send({
+  files: ['https://cdn.discordapp.com/icons/222078108977594368/6e1019b3179d71046e463a75915e7244.png?size=2048']
+});
 ```
 
 ### Roles
@@ -41,31 +72,31 @@ Some methods that retrieve uncached data have been changed, transformed in the s
 The `GuildMember.roles` Collection has been changed to a DataStore in v12, so a lot of the associated methods for interacting with a member's roles have changed as well.  They're no longer on the GuildMember object itself, but instead now on the `GuildMemberRoleStore` Data Store.
 
 ```diff
-- guildMember.addRole('123456789012345678')
-- guildMember.addRoles(['123456789012345678', '098765432109876543'])
-+ guildMember.roles.add('123456789012345678')
-+ guildMember.roles.add(['123456789012345678', '098765432109876543'])
+- guildMember.addRole('123456789012345678');
+- guildMember.addRoles(['123456789012345678', '098765432109876543']);
++ guildMember.roles.add('123456789012345678');
++ guildMember.roles.add(['123456789012345678', '098765432109876543']);
 
-- guildMember.removeRole('123456789012345678')
-- guildMember.removeRoles(['123456789012345678', '098765432109876543'])
-+ guildMember.roles.remove('123456789012345678')
-+ guildMember.roles.remove(['123456789012345678', '098765432109876543'])
+- guildMember.removeRole('123456789012345678');
+- guildMember.removeRoles(['123456789012345678', '098765432109876543']);
++ guildMember.roles.remove('123456789012345678');
++ guildMember.roles.remove(['123456789012345678', '098765432109876543']);
 
-- guildMember.setRoles(['123456789012345678', '098765432109876543'])
-+ guildMember.roles.set(['123456789012345678', '098765432109876543'])
+- guildMember.setRoles(['123456789012345678', '098765432109876543']);
++ guildMember.roles.set(['123456789012345678', '098765432109876543']);
 ```
 
 In addition, the GuildMember properties related to roles have also been moved to the `GuildMemberRoleStore` Data Store.
 
 ```diff
-- guildMember.colorRole
-+ guildMember.roles.color
+- guildMember.colorRole;
++ guildMember.roles.color;
 
-- guildMember.highestRole
-+ guildMember.roles.highest
+- guildMember.highestRole;
++ guildMember.roles.highest;
 
-- guildMember.hoistRole
-+ guildMember.roles.hoist
+- guildMember.hoistRole;
++ guildMember.roles.hoist;
 ```
 
 ### Ban and Unban
@@ -73,12 +104,12 @@ In addition, the GuildMember properties related to roles have also been moved to
 The method to ban members and users have been moved to the `GuildMemberStore` Data Store.
 
 ```diff
-- guildMember.ban()
-- guild.ban('123456789012345678')
-+ guild.members.ban('123456789012345678')
+- guildMember.ban();
+- guild.ban('123456789012345678');
++ guild.members.ban('123456789012345678');
 
-- guild.unban('123456789012345678')
-+ guild.members.unban('123456789012345678')
+- guild.unban('123456789012345678');
++ guild.members.unban('123456789012345678');
 +
 ```
 
@@ -87,22 +118,31 @@ The method to ban members and users have been moved to the `GuildMemberStore` Da
 Some image-related properties like `user.avatarURL` are now a method in v12, so that you can apply some options to them, eg. to affect their display size.
 
 ```diff
-- user.avatarURL
-+ user.avatarURL()
+- user.avatarURL;
++ user.avatarURL();
 
-- user.displayAvatarURL
-+ user.displayAvatarURL()
+- user.displayAvatarURL;
++ user.displayAvatarURL();
 
-- guild.iconURL
-+ guild.iconURL()
+- guild.iconURL;
++ guild.iconURL();
 
-- guild.splashURL
-+ guild.splashURL()
+- guild.splashURL;
++ guild.splashURL();
 ```
 
 ### RichEmbed Constructor
 
 The RichEmbed constructor has been removed and is now called `MessageEmbed`.  It is largely the same to use, the only difference being the removal of `RichEmbed.attachFile()` - `MessageEmbed.attachFiles()` accepts a single file as a parameter as well.
+
+### String Concatenation
+
+v12 has changed how string concatenation works with stringifying objects.  The `valueOf` any data structure will return its id, which affects how it behaves in strings, eg. using an object for a mention.  In v11, you used to be able to use `channel.send('Hello ' + userObject)` and it would automatically stringify the object and it would become the mention, but in v12, it will now send a message that says `Hello 123456789012345678` instead.  Using template literals (\`\`) will still return the mention, however.
+
+```diff
+- channel.send('Hello ' + userObject)
++ channel.send(`Hello ${userObject}`)
+```
 
 ### User Account-Only Methods
 
@@ -159,46 +199,7 @@ The `Attachment` class has been removed in favor of the `MessageAttachment` clas
 
 #### Channel#send\*\*\*
 
-All the `.send***()` methods have been removed in favor of one general `.send()` method.
 
-```diff
-- channel.sendMessage('Hey!');
-+ channel.send('Hey!');
-```
-
-```diff
-- channel.sendEmbed(embedVariable);
-+ channel.send(embedVariable);
-+ channel.send({ embed: embedVariable });
-```
-
-<p class="warning">`channel.send(embedVariable)` will only work if that variable is an instance of the `MessageEmbed` class; object literals won't give you the expected result unless your embed data is inside an `embed` key.</p>
-
-```diff
-- channel.sendCode('js', 'const version = 11;');
-+ channel.send('const version = 12;', { code: 'js' });
-```
-
-<p class="tip">Assuming you have the `MessageAttachment` class required somewhere in your file, e.g. `const { MessageAttachment } = require('discord.js')`.</p>
-
-```diff
-- channel.sendFile('./file.png');
-+ channel.send({ files: [{ attachment: './file.png' }] });
-+ channel.send(new MessageAttachment('./file.png'));
-
-- channel.sendFile('./file.png', 'file-name.png');
-+ channel.send({ files: [{ attachment: './file.png', name: 'file-name.png' }] });
-+ channel.send(new MessageAttachment('./file.png', 'file-name.png'));
-
-- channel.sendFile('./file.png', 'file-name.png', 'With a message attached');
-+ channel.send('With a message attached', { files: [new MessageAttachment('./file.png', 'file-name.png')] });
-```
-
-```diff
-- channel.sendFiles(['./file-one.png', './file-two.png']);
-+ channel.send({ files: [{ attachment: './file-one.png' }, { attachment: './file-two.png' }] });
-+ channel.send({ files: [new MessageAttachment('./file-one.png'), new MessageAttachment('./file-two.png')] });
-```
 
 #### Channel#fetch(Pinned)Message(s)
 
