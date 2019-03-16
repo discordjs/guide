@@ -1,6 +1,6 @@
 # Changes in v12
 
-If you weren't already aware, v12 is constantly in development, and you can even start using it right now by running `npm install hydrabolt/discord.js` (as opposed to `npm install discord.js`). However, there are many breaking changes from v11 to v12; you'll more than likely need to change your code in a few places. This section of the guide is here to let you know what those changes are and how you can change your code accordingly.
+If you weren't already aware, v12 is constantly in development, and you can even start using it right now by running `npm install discordjs/discord.js` (as opposed to `npm install discord.js`). However, there are many breaking changes from v11 to v12; you'll more than likely need to change your code in a few places. This section of the guide is here to let you know what those changes are and how you can change your code accordingly.
 
 The section headers for breaking changes will be named after the v11 classes/methods/properties and will be in alphabetical order, so that you can easily find what you're looking for. The section headers for additions will be named after the v12 classes/methods/properties, to reflect their current syntax appropriately.
 
