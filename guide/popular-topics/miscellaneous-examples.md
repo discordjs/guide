@@ -84,8 +84,10 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '!';
 
+const escapeRegex = require('escape-string-regexp');
+
 client.on('message', message => {
-	const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|\\${prefix})\\s*`);
+	const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
 	if (!prefixRegex.test(message.content)) return;
 
 	const [, matchedPrefix] = message.content.match(prefixRegex);
