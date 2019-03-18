@@ -1,18 +1,163 @@
-# Changes in v12
+# A Brief Primer Updating from v11 to v12
 
-If you weren't already aware, v12 is constantly in development, and you can even start using it right now by running `npm install hydrabolt/discord.js` (as opposed to `npm install discord.js`). However, there are many breaking changes from v11 to v12; you'll more than likely need to change your code in a few places. This section of the guide is here to let you know what those changes are and how you can change your code accordingly.
+After a long time in development, Discord.js v12 is nearing a stable release, meaning it's time to update from v11 to get new features for your bots!  However, with those new features comes a lot of changes to the library that will break code written for v11.  This guide will serve as a handy reference for updating your code, covering the most commonly-used methods that have been changed, new topics such as partials and internal sharding, and will also include a comprehensive list of the method and property changes at the end.
+
+## Before You Start
+
+v12 requires Node 10.x or higher to  use, so make sure you're up-to-date.  To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it!  There are many resources online to help you get up-to-date.
+
+For now, you do need Git installed and added to your PATH environment, so ensure that's done as well - again, guides are available online for a wide variety of operating systems.  Once you have Node up-to-date and Git installed, you can install v12 by running `npm install discordjs/discord.js` in your terminal or command prompt for text-only use, or `npm install discordjs/discord.js node-opus` for voice support.
+
+## Commonly Used Methods That Changed
+
+* All section headers are named in the following convention: `Class#methodOrProperty`.
+* The use of parenthesis designates optional inclusion. For example, `Channel#fetch(Pinned)Message(s)` means that this section will include changes for `Channel#fetchPinnedMessages`, `Channel#fetchMessages`, and `Channel#fetchMessage`.
+* The use of asterisks designates a wildcard. For example, `Channel#send***` means that this section will include changes for `Channel#sendMessage`, `Channel#sendFile`, `Channel#sendEmbed`, and so forth.
+
+### Fetch
+
+Some methods that retrieve uncached data have been changed, transformed in the shape of a DataStore.
+
+```diff
+- client.fetchUser('123456789012345678');
++ client.users.fetch('123456789012345678');
+
+- guild.fetchMember('123456789012345678');
++ guild.members.fetch('123456789012345678');
+
+- guild.fetchMembers();
++ guild.members.fetch();
+
+- textChannel.fetchMessage('123456789012345678');
++ textChannel.messages.fetch('123456789012345678');
+
+- textChannel.fetchMessages({ limit: 10 });
++ textChannel.messages.fetch({ limit: 10 });
+
+- textChannel.fetchPinnedMessages();
++ textChannel.messages.fetchPinned();
+```
+
+### Send
+
+All the `.send***()` methods have been removed in favor of one general `.send()` method.
+
+```diff
+- channel.sendMessage('Hey!');
++ channel.send('Hey!');
+
+- channel.sendEmbed(embedVariable);
++ channel.send(embedVariable);
++ channel.send({ embed: embedVariable });
+```
+
+<p class="warning">`channel.send(embedVariable)` will only work if that variable is an instance of the `MessageEmbed` class; object literals won't give you the expected result unless your embed data is inside an `embed` key.</p>
+
+```diff
+- channel.sendCode('js', 'const version = 11;');
++ channel.send('const version = 12;', { code: 'js' });
+
+- channel.sendFile('./file.png');
+- channel.sendFiles(['./file-one.png', './file-two.png']);
++ channel.send({
+  files: [{
+    attachment: 'entire/path/to/file.jpg',
+    name: 'file.jpg'
+  }]
++ channel.send({
+  files: ['https://cdn.discordapp.com/icons/222078108977594368/6e1019b3179d71046e463a75915e7244.png?size=2048']
+});
+```
+
+### Roles
+
+The `GuildMember.roles` Collection has been changed to a DataStore in v12, so a lot of the associated methods for interacting with a member's roles have changed as well.  They're no longer on the GuildMember object itself, but instead now on the `GuildMemberRoleStore` Data Store.
+
+```diff
+- guildMember.addRole('123456789012345678');
+- guildMember.addRoles(['123456789012345678', '098765432109876543']);
++ guildMember.roles.add('123456789012345678');
++ guildMember.roles.add(['123456789012345678', '098765432109876543']);
+
+- guildMember.removeRole('123456789012345678');
+- guildMember.removeRoles(['123456789012345678', '098765432109876543']);
++ guildMember.roles.remove('123456789012345678');
++ guildMember.roles.remove(['123456789012345678', '098765432109876543']);
+
+- guildMember.setRoles(['123456789012345678', '098765432109876543']);
++ guildMember.roles.set(['123456789012345678', '098765432109876543']);
+```
+
+In addition, the GuildMember properties related to roles have also been moved to the `GuildMemberRoleStore` Data Store.
+
+```diff
+- guildMember.colorRole;
++ guildMember.roles.color;
+
+- guildMember.highestRole;
++ guildMember.roles.highest;
+
+- guildMember.hoistRole;
++ guildMember.roles.hoist;
+```
+
+### Ban and Unban
+
+The method to ban members and users have been moved to the `GuildMemberStore` Data Store.
+
+```diff
+- guildMember.ban();
+- guild.ban('123456789012345678');
++ guild.members.ban('123456789012345678');
+
+- guild.unban('123456789012345678');
++ guild.members.unban('123456789012345678');
++
+```
+
+### Image URLs
+
+Some image-related properties like `user.avatarURL` are now a method in v12, so that you can apply some options to them, eg. to affect their display size.
+
+```diff
+- user.avatarURL;
++ user.avatarURL();
+
+- user.displayAvatarURL;
++ user.displayAvatarURL();
+
+- guild.iconURL;
++ guild.iconURL();
+
+- guild.splashURL;
++ guild.splashURL();
+```
+
+### RichEmbed Constructor
+
+The RichEmbed constructor has been removed and is now called `MessageEmbed`.  It is largely the same to use, the only difference being the removal of `RichEmbed.attachFile()` - `MessageEmbed.attachFiles()` accepts a single file as a parameter as well.
+
+### String Concatenation
+
+v12 has changed how string concatenation works with stringifying objects.  The `valueOf` any data structure will return its id, which affects how it behaves in strings, eg. using an object for a mention.  In v11, you used to be able to use `channel.send(userObject + ' has joined!')` and it would automatically stringify the object and it would become the mention (`@user has joined!`), but in v12, it will now send a message that says `123456789012345678 has joined` instead.  Using template literals (\`\`) will still return the mention, however.
+
+```diff
+- channel.send(userObject + ' has joined!')
++ channel.send(`${userObject} has joined!`)
+```
+
+### User Account-Only Methods
+
+All user account-only methods have been removed, as they are no longer publicly accessible from the API.
+
+---
+<p class="danger">This stuff should keep getting shoved to the bottom, with the commonly-used methods that are changed, as well as topic overviews added before it.</p>
 
 The section headers for breaking changes will be named after the v11 classes/methods/properties and will be in alphabetical order, so that you can easily find what you're looking for. The section headers for additions will be named after the v12 classes/methods/properties, to reflect their current syntax appropriately.
 
 "Difference" codeblocks will be used to display the old methods vs the newer ones—the red being what's been removed and the green being its replacement. Some bits may have more than one version of being handled. Regular JavaScript syntax codeblocks will be used to display the additions. 
 
 <p class="danger">While this list has been carefully crafted, it may be incomplete! If you notice pieces of missing or inaccurate data, we encourage you to [submit a pull request](https://github.com/Danktuary/Making-Bots-with-Discord.js)!</p>
-
-## Legend
-
-* All section headers are named in the following convention: `Class#methodOrProperty`.
-* The use of parenthesis designates optional inclusion. For example, `Channel#fetch(Pinned)Message(s)` means that this section will include changes for `Channel#fetchPinnedMessages`, `Channel#fetchMessages`, and `Channel#fetchMessage`.
-* The use of asterisks designates a wildcard. For example, `Channel#send***` means that this section will include changes for `Channel#sendMessage`, `Channel#sendFile`, `Channel#sendEmbed`, and so forth.
 
 ## Breaking changes
 
@@ -34,6 +179,11 @@ The section headers for breaking changes will be named after the v11 classes/met
 * MessageReaction
 * OAuth2Application
 * PermissionOverwrites
+
+TODO LATER CUZ I DON'T WANNA TOUCH THAT SHIT RN:
+
+* MessageCollector
+* MessageEmbed***
 
 TODO LATER CUZ I DON'T WANNA TOUCH THAT SHIT RN:
 
@@ -120,6 +270,43 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 - client.fetchUser('123456789012345678');
 + client.users.fetch('123456789012345678');
 ```
+
+#### Client#browser
+
+`client.browser` has been removed entirely.
+
+#### Client#channels
+
+`client.channels` has been changed from a Collection to a DataStore.
+
+#### Client#emojis
+
+`client.emojis` has been changed from a Collection to a DataStore.
+
+#### Client#guilds
+
+`client.guilds` has been changed from a Collection to a DataStore.
+
+#### Client#ping
+
+`client.ping` has been moved to the WebSocketManager under `client.ws.ping`
+
+```diff
+- client.ping
++ client.ws.ping
+```
+
+#### Client#pings
+
+`client.pings` has been removed entirely.
+
+#### Client#presences
+
+`client.presences` has been removed entirely.
+
+#### Client#users
+
+`client.users` has been changed from a Collection to a DataStore.
 
 ### ClientUser
 
@@ -301,6 +488,24 @@ Unfortunately, "default" channels don't exist in Discord anymore, and as such, t
 
 `guild.fetchMember()` and `guild.fetchMembers()` were both removed and transformed in the shape of DataStores. In addition, `guild.members.fetch()` will return a `Collection` of `GuildMember` objects in v12, whereas v11 would return a `Guild` object.
 
+1. Set up a database table to store the channel ID in a column when someone uses a `!welcome-channel #channel-name` command, for example. Then inside the `guildMemberAdd` event, use `client.channels.get('id')` and send a message to that channel. This is the most reliable method and gives server staff freedom to rename the channel as they please.
+2. Make a new command that creates a `welcome-messages` channel, use `guild.channels.find('name', 'welcome-messages')`, and send a message to that channel. This method will work fine in most cases, but will break if someone on that server decides to rename the channel. This may also give you unexpected results, due to Discord allowing multiple channels to have the same name.
+
+<p class="tip">Not sure how to set up a database? Check out [this page](/sequelize/)!</p>
+
+### Guild#defaultRole
+
+`guild.fetchBans()` will return a `Collection` of objects in v12, whereas v11 would return a `Collection` of `User` objects.
+
+```diff
+- guild.fetchBans().then(bans => console.log(`${bans.first().tag} was banned`));
++ guild.fetchBans().then(bans => console.log(`${bans.first().user.tag} was banned because "${bans.first().reason}"`));
+```
+
+#### Guild#fetchMember(s)
+
+`guild.fetchMember()` and `guild.fetchMembers()` were both removed and transformed in the shape of DataStores. In addition, `guild.members.fetch()` will return a `Collection` of `GuildMember` objects in v12, whereas v11 would return a `Guild` object.
+
 ```diff
 - guild.fetchMember('123456789012345678');
 + guild.members.fetch('123456789012345678');
@@ -359,6 +564,10 @@ The first, second, and third parameters in `guild.createEmoji()` have been chang
 
 ### GuildChannel
 
+#### GuildChannel#createInvite
+
+The second parameter in `guild.createEmoji()` has been removed, leaving it with a total of one parameter. The `reason` parameter from v11 have been merged into an object as the first parameter.
+
 #### GuildChannel#calculatedPosition
 
 `channel.calculatedPosition` has been renamed to `channel.position`.
@@ -386,7 +595,7 @@ The second parameter in `channel.setPosition()` has been changed. The `relative`
 
 ```diff
 - channel.setPosition(10, true);
-+ channel.setPosition(10, { relative: true });
++ channel.setPosition(10, { relative: true, reason: 'Basic organization' });
 ```
 
 ### GuildMember
@@ -421,7 +630,7 @@ The second, third, and fourth parameters in `member.hasPermission()` have been c
 + member.hasPermission(['MANAGE_MESSAGES', 'MANAGE_ROLES']);
 ```
 
-#### GuildMember#send\*\*\*
+#### GuildMember#send
 
 Just like the `Channel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [Channel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
 
@@ -438,7 +647,7 @@ The first parameter in `message.delete()` has been changed. The `timeout` parame
 
 #### Message#editCode
 
-`message.editCode()` has been removed entirely.
+In the same sense that the `channel.sendCode()` method was removed, `message.editCode()` has also been removed entirely.
 
 ```diff
 - message.editCode('js', 'const version = 11;');
@@ -550,6 +759,17 @@ The following permission flags have been renamed:
 #### Permissions#raw
 
 `permissions.raw` has been removed in favor of `permissions.bitfield`.
+
+```diff
+- permissions.raw;
++ permissions.bitfield;
+```
+
+### RichEmbed
+
+The `RichEmbed` class has been removed in favor of the `MessageEmbed` class.
+
+#### RichEmbed#attachFile
 
 ```diff
 - permissions.raw;
