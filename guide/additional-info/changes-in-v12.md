@@ -18,6 +18,8 @@ The section headers for breaking changes will be named after the v11 classes/met
 
 <p class="danger">This next bit is for me (Sanc) to keep track of the classes I've gone through and checked for breaking changes. Remove before making the PR.</p>
 
+<p class = "danger">Whatever happened here: https://github.com/discordjs/discord.js/pull/2765/files needs to be added as well as internal sharding and partials</p>
+
 * ClientUser
 * DiscordAPIError
 * DMChannel
@@ -40,7 +42,12 @@ TODO LATER CUZ I DON'T WANNA TOUCH THAT SHIT RN:
 * MessageCollector
 * MessageEmbed***
 
-<p class="danger">Before anything, it is important to note that discord.js v12 (and so forth) requires a **minimum** Node version of v8. If you aren't sure what Node version you're on, run `node -v` in your console and update if necessary.</p>
+<p class="danger">Before anything, it is important to note that discord.js v12 (and so forth) requires a **minimum** Node version of v10. If you aren't sure what Node version you're on, run `node -v` in your console and update if necessary.</p>
+
+### Dependencies
+
+#### Snekfetch
+Please note that `snekfetch` has been removed as a dependency, and has been replaced by `node-fetch`
 
 ### Attachment
 
@@ -197,6 +204,36 @@ The second parameter in `clientUser.setPassword()` has been changed. The `oldPas
 
 `clientUser.unblock()` has been removed entirely.
 
+### Collection
+
+#### Collection#find/findKey
+
+Both methods will now return `undefined` if nothing is found.
+
+#### Collection#deleteAll
+
+`collection.deleteAll()` has been removed in favor of map's default `clear()` method.
+
+#### Collection#exists
+
+`collection.exists()` has been replaced by the `collection.some()` method.
+
+#### Collection#filterArray
+
+`collection.filterArray()` has been removed completely.
+
+#### Collection#findAll
+
+`collection.findAll()` has been removed completely as the same functionality can be obtained through `collection.filter()`.
+
+#### Collection#first/firstKey/last/lastKey/random/randomKey
+
+The `amount` parameter of these methods now allows a negative number which will start the query from the end of the collection instead of the start.
+
+#### Collection#tap
+
+Now runs a specific function over the collection instead of mimicking `<array>.forEach()`, this functionality was moved to `collection.each()`. 
+
 ### Collector
 
 #### Collector#cleanup
@@ -268,7 +305,7 @@ The first and second parameters in `guild.createRole()` have been changed/remove
 
 #### Guild#deleteEmoji
 
-`Guild.deleteEmoji()` has been removed and transformed in the shape of a DataStore.
+`Guild.deleteEmoji()` has been removed and transformed in the shape of a DataStore. Note the possible use of `resolve()` as a broader alternative to `get()`.
 
 ```diff
 - guild.deleteEmoji('123456789012345678');
@@ -367,6 +404,9 @@ The first, second, and third parameters in `guild.createEmoji()` have been chang
 
 The first, second, third, and fourth parameters in `channel.clone()` have been changed/removed, leaving it with a total of one parameter. The `name`, `withPermissions`, `withTopic`, and `reason` parameters from v11 have been merged into an object as the first parameter. 
 
+#### GuildChannel#create
+This method can now use the `rateLimitPerUser` as an option.
+
 #### GuildChannel#createInvite
 
 The second parameter in `channel.createInvite()` has been removed, leaving it with a total of one parameter. The `reason` parameter from v11 have been merged into an object as the first parameter.
@@ -426,6 +466,9 @@ The second, third, and fourth parameters in `member.hasPermission()` have been c
 Just like the `Channel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [Channel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
 
 ### Message
+
+#### Message.cleanContent
+`message.cleanContent()` has been moved to `Util.cleanContent()`.
 
 #### Message#delete
 
@@ -495,6 +538,9 @@ The `max` and `maxMatches` properties of the `MessageCollector` class have been 
 
 `messageEmbed.message` has been removed entirely.
 
+#### MessageEmbed#setTimestamp
+`messageEmbed.setTimestamp()` now accepts a timestamp.
+
 ### MessageReaction
 
 #### MessageReaction#fetchUsers
@@ -554,6 +600,14 @@ The following permission flags have been renamed:
 ```diff
 - permissions.raw;
 + permissions.bitfield;
+```
+
+### Receiver
+`receiver.createOpusStream(user)` and `receiver.createPCMStream(user)` have been removed in favor of `receiver.createStream()`.
+
+```diff
+- receiver.createOpusStream(message.author);
++ receiver.createStream(message.author, {mode: 'opus', end: 'silence'});
 ```
 
 ### RichEmbed
@@ -623,6 +677,11 @@ The `RichEmbed` class has been removed in favor of the `MessageEmbed` class.
 + user.displayAvatarURL();
 + user.displayAvatarURL({ format: 'png', size: 1024 });
 ```
+### voiceConnection
+
+#### VoiceConnection#createReceiver
+`voiceconnection.createReceiver()` has been removed, the receiver can now simply be accessed from `voiceConnection.receiver`
+
 
 ### Webhook
 
@@ -641,6 +700,30 @@ Just like the `Channel#send***` methods, all the `.send***()` methods have been 
 #### Channel#type
 
 `channel.type` now may also return `category` or `unknown`.
+
+### Client
+
+#### client.rateLimit
+
+`client.rateLimit` is an event now emitted whenever the client hits ratelimits while making a request
+
+### DataStore
+
+The DataStore class was added in order to store various data types. Uses include
+- RoleStore
+- UserStore
+- GuildStore
+- ChannelStore
+- MessageStore
+- PresenceStore
+- ReactionStore
+- GuildEmojiStore
+- GuildMemberStore
+- GuildChannelStore
+- ReactionUserStore
+- GuildEmojiRoleStore
+- GuildMemberRoleStore
+
 
 ### Emoji
 
@@ -696,8 +779,25 @@ guild.createChannel('Secret Voice Channel', 'voice', {
 });
 ```
 
-#### Guild#verified
+#### Guild.createIntegration
+`guild.createIntegration()` has been added.
 
+#### Guild#defaultMessageNotifications
+`guild.defaultMessageNotifications` has been added.
+
+#### Guild.fetchEmbed
+`guild.fetchEmbed` has been added.
+
+#### Guild.fetchIntegrations
+`guild.fetchIntegrations()` has been added.
+
+#### Guild#fetchVanityCode
+`guild.fetchVanityCode()` has been added. 
+
+#### Guild.setEmbed
+`guild.setEmbed` has been added.
+
+#### Guild#verified
 `guild.verified` has been added.
 
 ### GuildAuditLogs
@@ -734,6 +834,9 @@ guild.createChannel('Secret Voice Channel', 'voice', {
 
 `message.application` has been added.
 
+#### Message.url
+`message.url` has been added.
+
 ### MessageAttachment
 
 #### MessageAttachment#setAttachment
@@ -747,6 +850,11 @@ guild.createChannel('Secret Voice Channel', 'voice', {
 #### MessageAttachment#setName
 
 `attachment.setName()` has been added.
+
+### MessageEmbed
+
+#### MessageEmbed#length
+`MessageEmbed.length` has been added.
 
 ### MessageMentions
 
@@ -772,6 +880,16 @@ guild.createChannel('Secret Voice Channel', 'voice', {
 
 `application.fetchAssets()` has been added.
 
+### ClientOptions
+
+#### ClientOptions#retryLimit
+`ClientOption.retryLimit` parameter was added
+
+### Permission
+
+#### Permissions#flags
+`PRIORITY_SPEAKER` has been added.
+
 ### PermissionOverwrites
 
 #### PermissionOverwrites#allowed
@@ -781,3 +899,22 @@ guild.createChannel('Secret Voice Channel', 'voice', {
 #### PermissionOverwrites#denied
 
 `permissionOverwrites.denied` has been added.
+
+### TextChannel#rateLimitPerUser
+`TextChannel.rateLimitPerUser()` was added.
+
+### TextChannel#lastPinTimestamp
+`TextChannel.lastPinTimestamp` was added.
+
+### TextChannel#lastPinAt
+`TextChannel.lastPinAt` was added.
+
+### User
+
+#### User#local
+`user.local` has been added
+
+### Util#Constants
+
+#### Constant.Colors
+`WHITE` was added as a value.
