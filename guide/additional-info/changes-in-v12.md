@@ -71,7 +71,7 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 
 ### Roles
 
-The `GuildMember.roles` Collection has been changed to a DataStore in v12, so a lot of the associated methods for interacting with a member's roles have changed as well.  They're no longer on the GuildMember object itself, but instead now on the `GuildMemberRoleStore` Data Store.
+The `GuildMember.roles` Collection has been changed to a DataStore in v12, so a lot of the associated methods for interacting with a member's roles have changed as well.  They're no longer on the GuildMember object itself, but instead now on the `GuildMemberRoleStore` DataStore.
 
 ```diff
 - guildMember.addRole('123456789012345678');
@@ -88,7 +88,7 @@ The `GuildMember.roles` Collection has been changed to a DataStore in v12, so a 
 + guildMember.roles.set(['123456789012345678', '098765432109876543']);
 ```
 
-In addition, the GuildMember properties related to roles have also been moved to the `GuildMemberRoleStore` Data Store.
+In addition, the GuildMember properties related to roles have also been moved to the `GuildMemberRoleStore` DataStore.
 
 ```diff
 - guildMember.colorRole;
@@ -159,7 +159,7 @@ The section headers for breaking changes will be named after the v11 classes/met
 
 <p class="danger">While this list has been carefully crafted, it may be incomplete! If you notice pieces of missing or inaccurate data, we encourage you to [submit a pull request](https://github.com/Danktuary/Making-Bots-with-Discord.js)!</p>
 
-## Breaking changes
+## Breaking Changes and Deletions
 
 <p class="danger">This next bit is for me (Sanc) to keep track of the classes I've gone through and checked for breaking changes. Remove before making the PR.</p>
 
@@ -187,7 +187,16 @@ TODO LATER CUZ I DON'T WANNA TOUCH THAT SHIT RN:
 * MessageCollector
 * MessageEmbed***
 
-<p class="danger">Before anything, it is important to note that discord.js v12 (and so forth) requires a **minimum** Node version of v10. If you aren't sure what Node version you're on, run `node -v` in your console and update if necessary.</p>
+Stuff Mark has gone through and updated:
+
+* Client
+* ClientOptions
+* ClientUser
+* Channel (changed send/fetch to TextChannel)
+* Collector
+* CollectorOptions
+* DMChannel
+* Emoji
 
 ### Dependencies
 
@@ -197,70 +206,6 @@ Please note that `snekfetch` has been removed as a dependency, and has been repl
 ### Attachment
 
 The `Attachment` class has been removed in favor of the `MessageAttachment` class.
-
-### Channel
-
-#### Channel#send\*\*\*
-
-All the `.send***()` methods have been removed in favor of one general `.send()` method.
-
-```diff
-- channel.sendMessage('Hey!');
-+ channel.send('Hey!');
-```
-
-```diff
-- channel.sendEmbed(embedVariable);
-+ channel.send(embedVariable);
-+ channel.send({ embed: embedVariable });
-```
-
-<p class="warning">`channel.send(embedVariable)` will only work if that variable is an instance of the `MessageEmbed` class; object literals won't give you the expected result unless your embed data is inside an `embed` key.</p>
-
-```diff
-- channel.sendCode('js', 'const version = 11;');
-+ channel.send('const version = 12;', { code: 'js' });
-```
-
-<p class="tip">Assuming you have the `MessageAttachment` class required somewhere in your file, e.g. `const { MessageAttachment } = require('discord.js')`.</p>
-
-```diff
-- channel.sendFile('./file.png');
-+ channel.send({ files: [{ attachment: './file.png' }] });
-+ channel.send(new MessageAttachment('./file.png'));
-
-- channel.sendFile('./file.png', 'file-name.png');
-+ channel.send({ files: [{ attachment: './file.png', name: 'file-name.png' }] });
-+ channel.send(new MessageAttachment('./file.png', 'file-name.png'));
-
-- channel.sendFile('./file.png', 'file-name.png', 'With a message attached');
-+ channel.send('With a message attached', { files: [new MessageAttachment('./file.png', 'file-name.png')] });
-```
-
-```diff
-- channel.sendFiles(['./file-one.png', './file-two.png']);
-+ channel.send({ files: [{ attachment: './file-one.png' }, { attachment: './file-two.png' }] });
-+ channel.send({ files: [new MessageAttachment('./file-one.png'), new MessageAttachment('./file-two.png')] });
-```
-
-#### Channel#fetch(Pinned)Message(s)
-
-`channel.fetchMessage()`, `channel.fetchMessages()`, and `channel.fetchPinnedMessages()` were all removed and transformed in the shape of DataStores.
-
-```diff
-- channel.fetchMessage('123456789012345678');
-+ channel.messages.fetch('123456789012345678');
-```
-
-```diff
-- channel.fetchMessages({ limit: 100 });
-+ channel.messages.fetch({ limit: 100 });
-```
-
-```diff
-- channel.fetchPinnedMessages();
-+ channel.messages.fetchPinned();
-```
 
 ### Client
 
@@ -280,6 +225,14 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 #### Client#channels
 
 `client.channels` has been changed from a Collection to a DataStore.
+
+#### Client#clientUserGuildSettingsUpdate
+
+The `client.clientUserGuildSettingsUpdate` event has been removed entirely.
+
+#### Client#clientUserSettingsUpdate
+
+The `client.clientUserSettingsUpdate` event has been removed entirely.
 
 #### Client#emojis
 
@@ -306,9 +259,46 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 
 `client.presences` has been removed entirely.
 
+#### Client#syncGuilds
+
+`client.syncGuilds()` has been removed entirely.
+
+#### Client#typingStop
+
+The `client.typingStop` event has been removed entirely.
+
+#### Client#userNoteUpdate
+
+The `client.userNoteUpdate` event has been removed entirely.
+
 #### Client#users
 
 `client.users` has been changed from a Collection to a DataStore.
+
+### ClientOptions
+
+There have been several changes made to the `ClientOptions` object located in `client#options`.
+
+#### ClientOptions#apiRequestMethod
+
+`clientOptions.apiRequestMethod` has been removed entirely.
+
+#### ClientOptions#shardId
+
+`clientOptions.shardId` has been changed to `clientOptions.shards` and now also accepts an array of numbers.
+
+```diff
+- options.shardId: 1
++ options.shards: [1, 2, 3]
+```
+
+#### ClientOptions#shards
+
+`clientOptions.shards` is functionally equivalent to `clientOptions.totalShardCount` on v12.
+
+#### ClientOptions#sync
+
+`clientOptions.sync` has been removed entirely.
 
 ### ClientUser
 
@@ -336,11 +326,11 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 
 #### ClientUser#createGuild
 
-The second and third parameters in `clientUser.createGuild()` have been changed/removed, leaving it with a total of two parameters. The `region` and `icon` parameters from v11 have been merged into an object as the second parameter.
+`clientUser.createGuild()` has been transformed in the shape of a DataStore.  In addition, the second and third parameters in `clientUser.createGuild()` have been changed/removed, leaving it with a total of two parameters. The `region` and `icon` parameters from v11 have been merged into an object as the second parameter.
 
 ```diff
 - clientUser.createGuild('New server', 'us-east', './path/to/file.png');
-+ clientUser.createGuild('New server', { region: 'us-east', icon: './path/to/file.png' });
++ clientUser.guilds.create('New server', { region: 'us-east', icon: './path/to/file.png' });
 ```
 
 #### ClientUser#displayAvatarURL
@@ -359,7 +349,7 @@ The second and third parameters in `clientUser.createGuild()` have been changed/
 
 #### ClientUser#send\*\*\*
 
-Just like the `Channel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [Channel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
+Just like the `TextChannel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [TextChannel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
 
 #### ClientUser#setGame
 
@@ -375,12 +365,7 @@ Just like the `Channel#send***` methods, all the `.send***()` methods have been 
 
 #### ClientUser#setPassword
 
-The second parameter in `clientUser.setPassword()` has been changed. The `oldPassword` parameter from v11 has been changed into an object as the second parameter.
-
-```diff
-- clientUser.setPassword('newpassword', 'oldpassword');
-+ clientUser.setPassword('newpassword', { oldPassword: 'oldpassword', mfaCode: '123456' });
-```
+`clientUser.setPassword()` has been removed entirely.
 
 #### ClientUser#unblock
 
@@ -421,6 +406,76 @@ Now runs a specific function over the collection instead of mimicking `<array>.f
 #### Collector#cleanup
 
 `collector.cleanup()` has been removed entirely.
+
+#### Collector#handle
+
+`collector.handle()` has been changed to `collector.handleCollect()`.
+
+#### Collector#postCheck
+
+`collector.postCheck()` has been changed to `collector.checkEnd()`.
+
+### DMChannel
+
+#### DMChannel#acknowledge
+
+`dmChannel.acknowledge()` has been removed entirely.
+
+#### DMChannel#createCollector
+
+`dmChannel.createCollector()` has been removed in favor of `dmChannel.createMessageCollector()`.
+
+#### DMChannel#fetch(Pinned)Message(s)
+
+`dmChannel.fetchMessage(s)` has been transformed in the shape of a DataStore.  See the [TextChannel#fetch(Pinned)Message(s)](/additional-info/changes-inv-v12?id=channel) section for more information.
+
+#### DMChannel#search
+
+`dmChannel.search()` has been removed entirely.
+
+#### DMChannel#send\*\*\*
+
+Just like the `TextChannel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [TextChannel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
+
+### Emoji
+
+`Emoji` now extends `Base` and represent either a `GuildEmoji` or `ReactionEmoji`, and some of the specific properties have moved to their respective object, instead of everything on the base `Emoji` object.
+
+#### Emoji#\*\*\*RestrictedRole(s)
+
+The helper methods to add and remove a role or roles from the roles allowed to use the emoji have been removed from `emoji.edit()` and are now set via `guildEmoji.edit()`.
+
+```diff
+- emoji.addRestrictedRole('123456789012345678');
+- emoji.addRestrictedRoles(['123456789012345678', '098765432109876543']);
+- emoji.removeRestrictedRole('1234567890123345678');
+- emoji.removedRestrictedRoles(['123456789012345678', '098765432109876543']);
++ emoji.edit({ roles: ['123456789012345678', '098765432109876543'] })
+```
+
+#### Emoji#deletable
+
+`emoji.deletable` has been moved to `guildEmoji.deletable`.
+
+#### Emoji#fetchAuthor
+
+`emoji.fetchAuthor()` has been moved to `guildEmoji.fetchAuthor()`.
+
+#### Emoji#guild
+
+`emoji.guild` has been moved to `guildEmoji.guild`.
+
+#### Emoji#managed
+
+`emoji.managed` has been removed entirely.
+
+#### Emoji#requiresColons
+
+`emojis.requiresColons` has been removed entirely.
+
+#### Emoji#setName
+
+`emoji.setName()` has been moved to `guildEmoji.setName()`.
 
 ### GroupDMChannel
 
@@ -871,6 +926,66 @@ The `RichEmbed` class has been removed in favor of the `MessageEmbed` class.
 + channel.createMessageCollector(filterFunction, { max: 2, maxProcessed: 10, time: 15000 });
 ```
 
+#### TextChannel#send\*\*\*
+
+All the `.send***()` methods have been removed in favor of one general `.send()` method.
+
+```diff
+- channel.sendMessage('Hey!');
++ channel.send('Hey!');
+```
+
+```diff
+- channel.sendEmbed(embedVariable);
++ channel.send(embedVariable);
++ channel.send({ embed: embedVariable });
+```
+
+<p class="warning">`channel.send(embedVariable)` will only work if that variable is an instance of the `MessageEmbed` class; object literals won't give you the expected result unless your embed data is inside an `embed` key.</p>
+
+```diff
+- channel.sendCode('js', 'const version = 11;');
++ channel.send('const version = 12;', { code: 'js' });
+```
+
+```diff
+- channel.sendFile('./file.png');
+- channel.sendFiles(['./file-one.png', './file-two.png']);
++ channel.send({
+  files: [{
+    attachment: 'entire/path/to/file.jpg',
+    name: 'file.jpg'
+  }]
++ channel.send({
+  files: ['https://cdn.discordapp.com/icons/222078108977594368/6e1019b3179d71046e463a75915e7244.png?size=2048']
+});
+```
+
+```diff
+- channel.sendFiles(['./file-one.png', './file-two.png']);
++ channel.send({ files: [{ attachment: './file-one.png' }, { attachment: './file-two.png' }] });
++ channel.send({ files: [new MessageAttachment('./file-one.png'), new MessageAttachment('./file-two.png')] });
+```
+
+#### TextChannel#fetch(Pinned)Message(s)
+
+`channel.fetchMessage()`, `channel.fetchMessages()`, and `channel.fetchPinnedMessages()` were all removed and transformed in the shape of DataStores.
+
+```diff
+- channel.fetchMessage('123456789012345678');
++ channel.messages.fetch('123456789012345678');
+```
+
+```diff
+- channel.fetchMessages({ limit: 100 });
++ channel.messages.fetch({ limit: 100 });
+```
+
+```diff
+- channel.fetchPinnedMessages();
++ channel.messages.fetchPinned();
+```
+
 ### User
 
 #### User#avatarURL
@@ -902,7 +1017,7 @@ The `RichEmbed` class has been removed in favor of the `MessageEmbed` class.
 
 #### Webhook#send\*\*\*
 
-Just like the `Channel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [Channel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
+Just like the `TextChannel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [TextChannel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
 
 ---
 
@@ -912,11 +1027,49 @@ Just like the `Channel#send***` methods, all the `.send***()` methods have been 
 
 ### Channel
 
+#### Channel#toString
+
+`channel.toString()` was moved from `GuildChannel` to `Channel`.
+
 #### Channel#type
 
-`channel.type` now may also return `category` or `unknown`.
+`channel.type` now may also return `unknown`.
 
 ### Client
+
+#### Client#clearImmediate
+
+#### Client#guildIntergrationsUpdate
+
+#### Client#invalidated
+
+#### Client#setImmediate
+
+#### Client#webhookUpdate
+
+#### ClientOptions#partials
+
+`clientOptions.partials` has been added to allow for partial structures - see the `Partials` section of the guide for more details.
+
+#### ClientOptions#retry
+
+`clientOptions.retry` has been added to allow a maximum amount of reconnect attempts on 5XX errors.
+
+#### ClientOptions#presence
+
+`clientOptions.presence` has been added to specify presence data to set upon login.
+
+### Collector
+
+#### Collector#(handle)Dispose
+
+`collector.handleDispose` and `collector.dispose()` have been added to remove an element from the collection.
+
+### CollectorOptions
+
+#### CollectorOptions#dispose
+
+`collectorOptions.dispose` has been added to allow for deleted data to be removed from the collection.
 
 #### client.rateLimit
 
@@ -939,6 +1092,15 @@ The DataStore class was added in order to store various data types. Uses include
 - GuildEmojiRoleStore
 - GuildMemberRoleStore
 
+### DMChannel
+
+#### DMChannel#lastMessage
+
+The message object of the last message in the channel, if one was sent.
+
+#### DMChannel#lastPin\*\*\*
+
+Two properties have been added, `dmChannel#lastPinAt` (read-only) and `dmChannel#lastPinStamp`, which returns the Date and timestamp, respectively, of the last pinned message if one is present.
 
 ### Emoji
 
