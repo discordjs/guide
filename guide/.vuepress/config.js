@@ -19,10 +19,6 @@ const config = {
 		yuu: {
 			colorThemes: ['blue', 'red'],
 		},
-		algolia: {
-			apiKey: 'c8d9361fb8403f7c5111887e0edf4b5e',
-			indexName: 'discordjs',
-		},
 		repo: 'discordjs/guide',
 		docsDir: 'guide',
 		sidebarDepth: 3,
@@ -54,6 +50,13 @@ for (const group of Object.values(config.themeConfig.sidebar)) {
 		if (section.collapsable) continue;
 		section.collapsable = false;
 	}
+}
+
+if (process.env.NODE_ENV === 'production') {
+	config.themeConfig.algolia = {
+		apiKey: 'c8d9361fb8403f7c5111887e0edf4b5e',
+		indexName: 'discordjs',
+	};
 }
 
 module.exports = config;
