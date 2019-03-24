@@ -154,7 +154,7 @@ const tagName = splitArgs.shift();
 const tagDescription = splitArgs.join(' ');
 
 try {
-	// equivalent to: INSERT INTO tags (name, descrption, username) values (?, ?, ?);
+	// equivalent to: INSERT INTO tags (name, description, username) values (?, ?, ?);
 	const tag = await Tags.create({
 		name: tagName,
 		description: tagDescription,
