@@ -14,6 +14,34 @@ For now, you do need Git installed and added to your PATH environment, so ensure
 * The use of parenthesis designates optional inclusion. For example, `Channel#fetch(Pinned)Message(s)` means that this section will include changes for `Channel#fetchPinnedMessages`, `Channel#fetchMessages`, and `Channel#fetchMessage`.
 * The use of asterisks designates a wildcard. For example, `Channel#send***` means that this section will include changes for `Channel#sendMessage`, `Channel#sendFile`, `Channel#sendEmbed`, and so forth.
 
+### Collection
+
+#### Collection#exists
+
+`collection.exists` was removed entirely, `collection.some()` should be used to check if an element exists in the collection that satisfies the provided value.
+
+```diff
+- client.users.exists('username', 'Bob');
++ client.users.some(user => user.username === 'Bob');
+```
+
+#### Collection#filterArray
+
+`colelction.filterArray()` was removed entirely, as it was just a helper method for `collection.filter().array()` and most of the time converting a collection to an array is an unnecessary step.
+
+#### Collection#find
+
+`collection.find('property', value)` has been removed entirely, and `collection.find()` only accepts a function in v12.
+
+```diff
+- client.users.find('username', 'Bob');
++ client.users.find(user => user.username === 'Bob');
+```
+
+#### Collection#findAll
+
+`collection.findAll()` was removed entirely as it just duplicated `collection.filterArray()`'s results.
+
 ### Fetch
 
 Some methods that retrieve uncached data have been changed, transformed in the shape of a DataStore.
@@ -51,7 +79,7 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 + channel.send({ embed: embedVariable });
 ```
 
-<p class="warning">`channel.send(embedVariable)` will only work if that variable is an instance of the `MessageEmbed` class; object literals won't give you the expected result unless your embed data is inside an `embed` key.</p>
+`channel.send(embedVariable)` will only work if that variable is an instance of the `MessageEmbed` class; object literals won't give you the expected result unless your embed data is inside an `embed` key.
 
 ```diff
 - channel.sendCode('js', 'const version = 11;');
@@ -112,7 +140,6 @@ The method to ban members and users have been moved to the `GuildMemberStore` Da
 
 - guild.unban('123456789012345678');
 + guild.members.unban('123456789012345678');
-+
 ```
 
 ### Image URLs
@@ -135,7 +162,7 @@ Some image-related properties like `user.avatarURL` are now a method in v12, so 
 
 ### RichEmbed Constructor
 
-The RichEmbed constructor has been removed and is now called `MessageEmbed`.  It is largely the same to use, the only difference being the removal of `RichEmbed.attachFile()` - `MessageEmbed.attachFiles()` accepts a single file as a parameter as well.
+The RichEmbed constructor has been removed and now the `MessageEmbed` constructor is used.  It is largely the same to use, the only difference being the removal of `RichEmbed.attachFile()` - `MessageEmbed.attachFiles()` accepts a single file as a parameter as well.
 
 ### String Concatenation
 
@@ -187,8 +214,16 @@ TODO LATER CUZ I DON'T WANNA TOUCH THAT SHIT RN:
 * MessageCollector
 * MessageEmbed***
 
-Stuff Mark has gone through and updated:
+Stuff Mark has gone through and updated - anything under Additions at the end will still likely need descriptions:
 
+* Activity
+* ActivityFlags
+* APIMessage
+* Base
+* BaseClient
+* BitField
+* BroadcastDispatcher
+* ClientApplication
 * Client
 * ClientOptions
 * ClientUser
@@ -197,11 +232,32 @@ Stuff Mark has gone through and updated:
 * CollectorOptions
 * DMChannel
 * Emoji
+* EvaluatedPermissions
+* Game
+* GroupDMChannel
+* Guild
+* GuildChannel
+* GuildMember
+* HTTPError
+* Integration
+* Invite
+* Message
+* MessageReaction
+* OAuth2Application
+* PartialGuild
+* PartialGuildChannel
+* PermissionOverwrite
+* Permissions
+
+
+Stuff Mark didn't do:
+
+* MessageAttachment
 
 ### Dependencies
 
 #### Snekfetch
-Please note that `snekfetch` has been removed as a dependency, and has been replaced by `node-fetch`
+Please note that `snekfetch` has been removed as a dependency, and has been replaced by `node-fetch`.
 
 ### Attachment
 
@@ -274,6 +330,15 @@ The `client.userNoteUpdate` event has been removed entirely.
 #### Client#users
 
 `client.users` has been changed from a Collection to a DataStore.
+
+#### Client#voiceStateUpdate
+
+The `client.voiceStateUpdate` event now returns `oldState` and `newState` representing the `VoiceState` of the member before and after the update, as opposed to the member itself.
+
+```diff
+- client.on('voiceStateUpdate', (oldMember, newMember) => console.log(oldMember));
++ client.on('voiceStateUpdate', (oldState, newState) => console.log(oldState));
+```
 
 ### ClientOptions
 
@@ -370,6 +435,18 @@ Just like the `TextChannel#send***` methods, all the `.send***()` methods have b
 #### ClientUser#unblock
 
 `clientUser.unblock()` has been removed entirely.
+
+### ClientUserChannelOverride
+
+The `clientUserChannelOverride` class has been removed entirely.
+
+### ClientUserGuildSettings
+
+The `clientUserGuildSettings` class has been removed entirely.
+
+### ClientUserSettings
+
+The `clientUserSettings` class has been removed entirely.
 
 ### Collection
 
@@ -477,67 +554,74 @@ The helper methods to add and remove a role or roles from the roles allowed to u
 
 `emoji.setName()` has been moved to `guildEmoji.setName()`.
 
+### EvaluatedPermissions
+
+`evaluatedPermissions` has been removed entirely, see the `Permissions` page.
+
+### Game
+
+The `Game` class has been removed in favor of the `Activity` class.
+
+```diff
+- user.presence.game
++ user.presence.activity
+```
+
 ### GroupDMChannel
 
-#### GroupDMChannel#iconURL
-
-`groupDM.iconURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return.
-
-```diff
-- groupDM.iconURL;
-+ groupDM.iconURL();
-+ groupDM.iconURL({ format: 'png', size: 1024 });
-```
-
-#### GroupDMChannel#addUser
-
-The first and second parameters in `groupDM.addUser()` have been changed/removed, leaving it with a total of one parameter. The `accessTokenOrID` and `reason` parameters from v11 have been merged into an object as the first parameter.
-
-```diff
-- groupDM.addUser('123456789012345678');
-+ groupDM.addUser({ user: '123456789012345678' });
-+ groupDM.addUser({ user: '123456789012345678', accessToken: 'access-token', nick: 'My Best Friend!' });
-```
+The `groupDMChannel` class has been removed entirely.
 
 ### Guild
 
+#### Guild#acknowledge
+
+`guild.acknowledge()` has been removed entirely.
+
+#### Guild#allowDMs
+
+`guild.allowDMs()` has been removed entirely.
+
 #### Guild#ban
 
-The second parameter in `guild.ban()` has been changed. The `options` parameter no longer accepts a number, nor a string.
+`guild.ban()` has been moved to the `GuildMemberStore`.  In addition, the second parameter in `guild.members.ban()` has been changed. The `options` parameter no longer accepts a number, nor a string.
 
 ```diff
 - guild.ban(user, 7);
-+ guild.ban(user, { days: 7 });
++ guild.members.ban(user, { days: 7 });
 
 - guild.ban(user, 'Too much trolling');
-+ guild.ban(user, { reason: 'Too much trolling' });
++ guild.members.ban(user, { reason: 'Too much trolling' });
 ```
+
+#### Guild#Channels
+
+`guild.channels` is now a DataStore instead of a Collection.
 
 #### Guild#createChannel
 
-The third and fourth parameters in `guild.createChannel()` have been changed/removed, leaving it with a total of three parameters. The `overwrites` and `reason` parameters from v11 have been merged into an object as the third parameter.
+`guild.createChannel()` has been transformed in the shape of a DataStore.  The second, third and fourth parameters in `guild.createChannel()` have been changed/removed, leaving it with a total of two parameters, the second one being an object with all of the options available in `ChannelData`.
 
 ```diff
 - guild.createChannel('new-channel', 'text', permissionOverwriteArray, 'New channel added for fun!');
-+ guild.createChannel('new-channel', 'text', { overwrites: permissionOverwriteArray, reason: 'New channel added for fun!' });
++ guild.channels.create('new-channel', 'text', { overwrites: permissionOverwriteArray, reason: 'New channel added for fun!' });
 ```
 
 #### Guild#createEmoji
 
-The third and fourth parameters in `guild.createEmoji()` have been changed/removed, leaving it with a total of three parameters. The `roles` and `reason` parameters from v11 have been merged into an object as the third parameter.
+`guild.createEmoji()` has been transformed in the shape of a DataStore.  The third and fourth parameters in `guild.createEmoji()` have been changed/removed, leaving it with a total of three parameters. The `roles` and `reason` parameters from v11 have been merged into an object as the third parameter.
 
 ```diff
 - guild.createEmoji('./path/to/file.png', 'NewEmoji', collectionOfRoles, 'New emoji added for fun!');
-+ guild.createEmoji('./path/to/file.png', 'NewEmoji', { roles: collectionOfRoles, reason: 'New emoji added for fun!' });
++ guild.emojis.create('./path/to/file.png', 'NewEmoji', { roles: collectionOfRoles, reason: 'New emoji added for fun!' });
 ```
 
 #### Guild#createRole
 
-The first and second parameters in `guild.createRole()` have been changed/removed, leaving it with a total of one parameter. The `data` and `reason` parameters from v11 have been moved into an object as the first parameter.
+`guild.createRole()` has been transformed in the shape of a DataStore.  The first and second parameters in `guild.createRole()` have been changed/removed, leaving it with a total of one parameter. The `data` and `reason` parameters from v11 have been moved into an object as the first parameter.
 
 ```diff
 - guild.createRole(roleData, 'New staff role!');
-+ guild.createRole({ data: roleData, reason: 'New staff role!' });
++ guild.roles.create({ data: roleData, reason: 'New staff role!' });
 ```
 
 #### Guild#deleteEmoji
@@ -562,25 +646,11 @@ Unfortunately, "default" channels don't exist in Discord anymore, and as such, t
 
 <p class="tip">Not sure how to set up a database? Check out [this page](/sequelize/)!</p>
 
+#### Guild#emojis
+
+`guild.emojis` has been transformed in the shape of a DataStore.
+
 #### Guild#fetchBans
-
-`guild.fetchBans()` will return a `Collection` of objects in v12, whereas v11 would return a `Collection` of `User` objects.
-
-```diff
-- guild.fetchBans().then(bans => console.log(`${bans.first().tag} was banned`));
-+ guild.fetchBans().then(bans => console.log(`${bans.first().user.tag} was banned because "${bans.first().reason}"`));
-```
-
-#### Guild#fetchMember(s)
-
-`guild.fetchMember()` and `guild.fetchMembers()` were both removed and transformed in the shape of DataStores. In addition, `guild.members.fetch()` will return a `Collection` of `GuildMember` objects in v12, whereas v11 would return a `Guild` object.
-
-1. Set up a database table to store the channel ID in a column when someone uses a `!welcome-channel #channel-name` command, for example. Then inside the `guildMemberAdd` event, use `client.channels.get('id')` and send a message to that channel. This is the most reliable method and gives server staff freedom to rename the channel as they please.
-2. Make a new command that creates a `welcome-messages` channel, use `guild.channels.find('name', 'welcome-messages')`, and send a message to that channel. This method will work fine in most cases, but will break if someone on that server decides to rename the channel. This may also give you unexpected results, due to Discord allowing multiple channels to have the same name.
-
-<p class="tip">Not sure how to set up a database? Check out [this page](/sequelize/)!</p>
-
-### Guild#defaultRole
 
 `guild.fetchBans()` will return a `Collection` of objects in v12, whereas v11 would return a `Collection` of `User` objects.
 
@@ -622,18 +692,50 @@ Unfortunately, "default" channels don't exist in Discord anymore, and as such, t
 + guild.iconURL({ format: 'png', size: 1024 });
 ```
 
+#### Guild#messageNotifications
+
+`guild.messageNotifications` has been removed entirely.
+
+#### Guild#mobilePush
+
+`guild.mobilePush` has been removed entirely.
+
+#### Guild#muted
+
+`guild.muted` has been removed entirely.
+
+#### Guild#position
+
+`guild.position` has been removed entirely.
+
+#### Guild#presences
+
+`guild.presences` is now a DataStore instead of a Collection.
+
 #### Guild#pruneMembers
 
-The first, second, and third parameters in `guild.createEmoji()` have been changed/removed, leaving it with a total of one parameter. The `days`, `dry`, and `reason` parameters from v11 have been merged into an object as the first parameter.
+`guild.pruneMembers()` has been transformed in the shape of a DataStore.  In addition, the first, second, and third parameters in `guild.createEmoji()` have been changed/removed, leaving it with a total of one parameter. The `days`, `dry`, and `reason` parameters from v11 have been merged into an object as the first parameter.
 
 ```diff
 - guild.pruneMembers(7, true, 'Scheduled pruning');
-+ guild.pruneMembers({ days: 7, dry: true, reason: 'Scheduled pruning' });
++ guild.members.prune({ days: 7, dry: true, reason: 'Scheduled pruning' });
 ```
+
+#### Guild#roles
+
+`guild.roles` is now a DataStore instead of a Collection.
+
+#### Guild#search
+
+`guild.search()` has been removed entirely.
 
 #### Guild#setChannelPosition
 
 `guild.setChannelPosition()` has been removed entirely. As an alternative, you can use `channel.setPosition()`, or `guild.setChannelPositions()`, which accepts accepts the same form of data as `guild.setChannelPosition` but inside an array.
+
+#### Guild#setPosition
+
+`guild.setPosition()` has been removed entirely.
 
 #### Guild#setRolePosition
 
@@ -649,22 +751,33 @@ The first, second, and third parameters in `guild.createEmoji()` have been chang
 + guild.splashURL({ format: 'png', size: 1024 });
 ```
 
+#### Guild#suppressEveryone
+
+`guild.suppressEveryone` has been removed entirely.
+
+#### Guild#sync
+
+`guild.sync()` has been removed entirely.
+
+#### Guild#unban
+
+`guild.unban()` has been transformed in the shape of a DataStore and is now a method on `GuildMemberStore`.  In addition, it also now optionally accepts a string as a second parameter for `reason`.
+
+```diff
+- guild.unban('123456789012345678');
++ guild.members.unban('123456789012345678', 'Ban appealed.');
+```
+
 ### GuildChannel
-
-#### GuildChannel#createInvite
-
-The second parameter in `guild.createEmoji()` has been removed, leaving it with a total of one parameter. The `reason` parameter from v11 have been merged into an object as the first parameter.
 
 #### GuildChannel#calculatedPosition
 
-`channel.calculatedPosition` has been renamed to `channel.position`.
+`guildChannel.calculatedPosition` is now `guildChannel.rawPosition`.
 
 #### GuildChannel#clone
 
-The first, second, third, and fourth parameters in `channel.clone()` have been changed/removed, leaving it with a total of one parameter. The `name`, `withPermissions`, `withTopic`, and `reason` parameters from v11 have been merged into an object as the first parameter. 
+The first, second, third, and fourth parameters in `channel.clone()` have been changed/removed, leaving it with a total of one parameter. The `name`, `withPermissions`, `withTopic`, and `reason` parameters from v11 have been merged into an object as the first parameter.  Several other parameters have also been added to the options object.
 
-#### GuildChannel#create
-This method can now use the `rateLimitPerUser` as an option.
 
 #### GuildChannel#createInvite
 
@@ -675,9 +788,25 @@ The second parameter in `channel.createInvite()` has been removed, leaving it wi
 + channel.createInvite({ temporary: true, reason: 'Just testing' });
 ```
 
-#### GuildChannel#position
+#### GuildChannel#members
 
-`channel.position` has been renamed to `channel.rawPosition`.
+`guildChannel.members` has been removed from `guildChannel.members` and added to `textChannel.members` and `voiceChannel.members`.
+
+#### GuildChannel#messageNotifications
+
+`guildChannel.messageNotifications` has been removed entirely.
+
+#### GuildChannel#muted
+
+`guildChannel.muted` has been removed entirely.
+
+#### GuildChannel#\*\*\*Permissions
+
+`guildChannel.memberPermissions` and `guildChannel.rolePermissions` are now private.
+
+#### GuildChannel#replacePermissionOverwrites
+
+`guildChannel.replacePermissionOverwrites` has been removed entirely.
 
 #### GuildChannel#setPosition
 
@@ -690,44 +819,156 @@ The second parameter in `channel.setPosition()` has been changed. The `relative`
 
 ### GuildMember
 
+#### GuildMember\*\*\*Role(s)
+
+All of the methods to modify a member's roles have been moved to the `GuildMemberRoleStore`.
+
+```diff
+- guildMember.addRole('123456789012345678');
+- guildMember.addRoles(['123456789012345678', '098765432109876543']);
++ guildMember.roles.add('123456789012345678');
++ guildMember.roles.add(['123456789012345678', '098765432109876543']);
+
+- guildMember.removeRole('123456789012345678');
+- guildMember.removeRoles(['123456789012345678', '098765432109876543']);
++ guildMember.roles.remove('123456789012345678');
++ guildMember.roles.remove(['123456789012345678', '098765432109876543']);
+
+- guildMember.setRoles(['123456789012345678', '098765432109876543']);
++ guildMember.roles.set(['123456789012345678', '098765432109876543']);
+```
+
 #### GuildMember#ban
 
-The second parameter in `member.ban()` has been changed. The `options` parameter no longer accepts a number, nor a string.
+`guildMember.ban()` has been transformed in the shape of a DataStore and is now a method on `GuildMemberStore`. The second parameter has been changed. The `options` parameter no longer accepts a number, nor a string.
 
 ```diff
 - member.ban(user, 7);
-+ member.ban(user, { days: 7 });
++ guild.members.ban(user, { days: 7 });
 
 - member.ban(user, 'Too much trolling');
-+ member.ban(user, { reason: 'Too much trolling' });
++ guild.members.ban(user, { reason: 'Too much trolling' });
+```
+
+#### GuildMember#\*\*\*Role
+
+`guildMember.colorRole`, `guildMember.highestRole` and `guildMember.hoistRole` have all been moved to the `GuildMemberRoleStore` DataStore.
+
+```diff
+- guildMember.colorRole;
++ guildMember.roles.color;
+
+- guildMember.highestRole;
++ guildMember.roles.highest;
+
+- guildMember.hoistRole;
++ guildMember.roles.hoist;
+```
+
+#### GuildMember#\*\*\*deaf
+
+`guildMember.deaf`, `guildMember.selfDeaf` and `guildMember.serverDeaf` have all been moved to the `VoiceState` class.
+
+```diff
+- guildMember.deaf;
++ guildMember.voice.deaf;
+
+- guildMember.selfDeaf;
++ guildMember.voice.selfDeaf;
+
+- guildMember.serverDeaf;
++ guildMember.voice.serverDeaf;
 ```
 
 #### GuildMember#hasPermission
 
-The second, third, and fourth parameters in `member.hasPermission()` have been changed/removed, leaving it with a total of three parameters. The `explicit` parammeter from v11 has been removed.
+The `explicit` parameter has been removed entirely.  The `checkAdmin` and `checkOwner` parameters have been changed into a single `options` object with those values as keys.
 
 ```diff
-- member.hasPermission('MANAGE_MESSAGES', true, false, false);
-+ member.hasPermission('MANAGE_MESSAGES', false, false);
+- guildMember.hasPermission('MANAGE_MESSAGES', true, false, false);
++ guildMember.hasPermission('MANAGE_MESSAGES', { checkAdmin: false, checkOwner: false });
 ```
 
 #### GuildMember#hasPermissions
 
-`member.hasPermissions()` has been removed in favor of `member.hasPermission()`.
+`guildMember.hasPermissions()` has been removed in favor of `guildMember.hasPermission()`.
 
 ```diff
-- member.hasPermissions(['MANAGE_MESSAGES', 'MANAGE_ROLES']);
-+ member.hasPermission(['MANAGE_MESSAGES', 'MANAGE_ROLES']);
+- guildMember.hasPermissions(['MANAGE_MESSAGES', 'MANAGE_ROLES']);
++ guildMember.hasPermission(['MANAGE_MESSAGES', 'MANAGE_ROLES']);
 ```
 
-#### GuildMember#send
+#### GuildMember#missingPermissions
 
-Just like the `Channel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [Channel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
+`guildMember.missingPermissions` has been removed entirely.
+
+#### GuildMember#\*\*\*mute
+
+`guildMember.mute`, `guildMember.selfMute` and `guildMember.serverMute` have all been moved to the `VoiceState` class.
+
+```diff
+- guildMember.mute;
++ guildMember.voice.mute;
+
+- guildMember.selfMute;
++ guildMember.voice.selfMute;
+
+- guildMember.serverMute;
++ guildMember.voice.serverMute;
+```
+
+#### GuildMember#roles
+
+`guildMember.roles` is now a DataStore instead of a Collection.
+
+#### GuildMember#send\*\*\*
+
+Just like the `textChannel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [textChannel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
+
+#### GuildMember#speaking
+
+`guildMember.speaking` has been moved to the `VoiceState` class.
+
+```diff
+- guildMember.speaking;
++ guildMember.voice.speaking;
+```
+
+#### GuildMember#voice\*\*\*
+
+`guildMember.voiceChannel`, `guildMember.voiceChannelID` and `guildMember.voiceSessionID` have all been moved to the `VoiceState` class.
+
+```diff
+- guildMember.voiceChannel;
++ guildMember.voice.channel;
+
+- guildMember.voiceChannelID;
++ guildMember.voice.channelID;
+
+- guildMember.voiceSessionID;
++ guildMember.voice.sessionID;
+```
+
+### Invite
+
+#### Invite#\*\*\*ChannelCount
+
+`invite.textChannelCount` and `invite.voiceChannelCount` have both been removed entirely.
 
 ### Message
 
-#### Message.cleanContent
-`message.cleanContent()` has been moved to `Util.cleanContent()`.
+#### Message#acknowledge
+
+`message.acknowledge()` has been removed entirely.
+
+#### Message#clearReactions
+
+`message.clearReactions()` has been transformed in the shape of a DataStore.
+
+```diff
+- message.clearReactions();
++ message.reactions.clear();
+```
 
 #### Message#delete
 
@@ -747,6 +988,10 @@ In the same sense that the `channel.sendCode()` method was removed, `message.edi
 + message.edit('const version = 12;', { code: 'js' });
 ```
 
+#### Message#hit
+
+`message.hit` has been removed entirely.
+
 #### Message#is(Member)Mentioned
 
 `message.isMentioned()` and `message.isMemberMentioned()` have been removed in favor of `message.mentions.has()`.
@@ -759,7 +1004,7 @@ In the same sense that the `channel.sendCode()` method was removed, `message.edi
 
 ### MessageAttachment
 
-The `MessageAttachment` class' constructor parameters have changed
+The `MessageAttachment` class constructor parameters have changed to reflect that `Attachment` has been removed and rolled into `MessageAttachment`.
 
 #### MessageAttachment#client
 
@@ -775,7 +1020,19 @@ The `MessageAttachment` class' constructor parameters have changed
 
 ### MessageCollector
 
-#### MessageCollector#max(Matches)
+See the `Collector` section for most of the changes to `MessageCollector`, such as the new `dispose` method and event.  Changes to the `MessageCollector` constructor in particular are as follows:
+
+#### MessageCollector#channel
+
+A `GroupDMChannel` is no longer able to be used for a collector, only `DMChannel` and `TextChannel`.
+
+#### MessageCollector#message
+
+The `messageCollector.message` event has been removed in favor of the generic `collector.on` event.
+
+### MessageCollectorOptions
+
+#### MessageCollectorOptions#max(Matches)
 
 The `max` and `maxMatches` properties of the `MessageCollector` class have been renamed and repurposed.
 
@@ -789,6 +1046,12 @@ The `max` and `maxMatches` properties of the `MessageCollector` class have been 
 
 ### MessageEmbed
 
+`MessageEmbed` now encompasses both the received embeds in a message and the constructor - the `RichEmbed` constructor was removed in favor of `MessageEmbed`.
+
+#### MessageEmbed#attachFiles
+
+`RichEmbed.attachFile()` is the only method that did not make the transition from v11 to v12.  The `MessageEmbed.attachFiles()` works for one or more files.
+
 #### MessageEmbed#client
 
 `messageEmbed.client` has been removed entirely.
@@ -797,27 +1060,41 @@ The `max` and `maxMatches` properties of the `MessageCollector` class have been 
 
 `messageEmbed.message` has been removed entirely.
 
-#### MessageEmbed#setTimestamp
-`messageEmbed.setTimestamp()` now accepts a timestamp.
-
 ### MessageReaction
 
 #### MessageReaction#fetchUsers
 
-The first parameter in `reaction.fetchUsers()` has been changed. The `limit` parameter from v11 has been merged into an object as the first parameter.
+`messageReaction.fetchUsers()` has been transformed in the shape of a DataStore.  In addition, the first parameter has been removed in favor of an object.
 
 ```diff
 - reaction.fetchUsers(50);
-+ reaction.fetchUsers({ limit: 50 });
++ reaction.users.fetch({ limit: 50 });
+```
+
+#### MessageReaction#remove
+
+`messageReaction.remove()` has been transformed in the shape of a DataStore.
+
+```diff
+- reaction.remove();
++ reaction.users.remove();
 ```
 
 ### OAuth2Application
 
 The `OAuth2Application` class has been renamed to `ClientApplication`.
 
+#### OAuth2Application#bot
+
+`application.bot` has been removed entirely.
+
+#### OAuth2Application#flags
+
+`application.flags` has been removed entirely.
+
 #### OAuth2Application#reset
 
-`application.reset()` has been split up into `application.resetSecret()` and `application.resetToken()`.
+`application.reset()` has been removed entirely.
 
 #### OAuth2Application#iconURL
 
@@ -829,7 +1106,37 @@ The `OAuth2Application` class has been renamed to `ClientApplication`.
 + user.iconURL({ format: 'png', size: 1024 });
 ```
 
+#### OAuth2Application#redirectURLs
+
+`application.redirectURLs` has been removed entirely.
+
+#### OAuth2Application#rpcApplicationState
+
+`application.rpgcApplicationState` has been removed entirely.
+
+#### OAuth2Application#secret
+
+`application.secret` has been removed entirely.
+
+### PartialGuild(Channel)
+
+The `partialGuild` and `partialGuildChannel` classes for use with invites have been removed entirely.
+
+### PermissionOverwrites
+
+#### PermissionOverwrites#allow
+
+`permissionOverwrites.allow` has been removed, use `permissionOverwrites.allowed` instead for a Permissions structure of allowed permissions for the user or role.
+
+#### PermissionOberwrites#deny
+
+`permissionOverwritres.deny` has been removed, use `permissionOverwrites.denied` instead for a Permissions structure of denied permissions for the user or role.
+
 ### Permissions
+
+#### Permissions#_member
+
+`permissions._member` has been removed entirely.
 
 #### Permissions#flags
 
@@ -839,9 +1146,9 @@ The following permission flags have been renamed:
 * `EXTERNAL_EMOJIS` -> `USE_EXTERNAL_EMOJIS`
 * `MANAGE_ROLES_OR_PERMISSIONS` -> `MANAGE_ROLES`
 
-#### Permissions#member
+#### Permission#hasPermission(s)
 
-`permissions.member` has been removed entirely.
+`permissions.hasPermission()` and `permissions.hasPermissions()` have been removed entirely in favor of `permissions.has()`.
 
 #### Permissions#missingPermissions
 
@@ -861,23 +1168,16 @@ The following permission flags have been renamed:
 + permissions.bitfield;
 ```
 
+#### Permissions#resolve
+
+`permissions.resolve()` has been removed entirely.
+
 ### Receiver
 `receiver.createOpusStream(user)` and `receiver.createPCMStream(user)` have been removed in favor of `receiver.createStream()`.
 
 ```diff
 - receiver.createOpusStream(message.author);
 + receiver.createStream(message.author, {mode: 'opus', end: 'silence'});
-```
-
-### RichEmbed
-
-The `RichEmbed` class has been removed in favor of the `MessageEmbed` class.
-
-#### RichEmbed#attachFile
-
-```diff
-- permissions.raw;
-+ permissions.bitfield;
 ```
 
 ### RichEmbed
@@ -1025,6 +1325,20 @@ Just like the `TextChannel#send***` methods, all the `.send***()` methods have b
 
 <p class="warning">Remember to add examples for the additions.</p>
 
+### Activity
+
+### ActivityFlags
+
+### APIMessage
+
+### Base
+
+### BaseClient
+
+### BitField
+
+### BroadcastDispatcher
+
 ### Channel
 
 #### Channel#toString
@@ -1039,13 +1353,31 @@ Just like the `TextChannel#send***` methods, all the `.send***()` methods have b
 
 #### Client#clearImmediate
 
-#### Client#guildIntergrationsUpdate
+#### Client#guildIntegrationsUpdate
 
 #### Client#invalidated
 
 #### Client#setImmediate
 
 #### Client#webhookUpdate
+
+### ClientApplication
+
+This is a not a new class; it was formerly called `OAuth2Application` in v11.  Changes and deletions to methods and properties are covered above (link needed).  Additions are as follow:
+
+#### ClientApplication#cover(Image)
+
+`clientApplication.cover` and its associated method `clientApplication.coverImage()` return the URL to the application's cover image, with optional modifiers if applied in the method.
+
+```js
+clientApplication.coverImage({ width: 1024, height: 1024 });
+```
+
+#### ClientApplication#fetchAssets
+
+`clientApplication.fetchAssests()` returns a promise that resolves into an array of `ClientAsset` objects, each of which contains an `id`, `name` and `type`.
+
+### ClientOptions
 
 #### ClientOptions#partials
 
@@ -1070,10 +1402,6 @@ Just like the `TextChannel#send***` methods, all the `.send***()` methods have b
 #### CollectorOptions#dispose
 
 `collectorOptions.dispose` has been added to allow for deleted data to be removed from the collection.
-
-#### client.rateLimit
-
-`client.rateLimit` is an event now emitted whenever the client hits ratelimits while making a request
 
 ### DataStore
 
@@ -1102,80 +1430,31 @@ The message object of the last message in the channel, if one was sent.
 
 Two properties have been added, `dmChannel#lastPinAt` (read-only) and `dmChannel#lastPinStamp`, which returns the Date and timestamp, respectively, of the last pinned message if one is present.
 
-### Emoji
-
-#### Emoji#addRestrictedRoles
-
-`emoji.addRestrictedRoles()` now also accepts a `Collection` of `Role` objects,, as opposed to only an array of `RoleResolvable`s.
-
-#### Emoji#delete
-
-`emoji.delete()` has been added and (optionally) accepts a `reason` string as the first parameter.
-
-#### Emoji#removeRestrictedRoles
-
-`emoji.removeRestrictedRoles()` now also accepts a `Collection` of `Role` objects,, as opposed to only an array of `RoleResolvable`s.
-
-### GroupDMChannel
-
-#### GroupDMChannel#edit
-
-`groupDM.edit()` has been added, accepts a `data` object as the first parameter, and (optionally) a `reason` string as the second parameter.
-
 ### Guild
 
-#### Guild#createChannel
+#### Guild#createIntegration
 
-The third parameter in `guild.createChannel()` has been refactored in the following manner:
-
-* It now accepts a `nsfw` property (boolean).
-* It now accepts a `bitrate` property (number, voice channels only).
-* It now accepts a `userLimit` property (number, voice channels only).
-* It now accepts a `parent` property (ChannelResolvable).
-* The `overwrites` now accepts an array of `ChannelCreationOverwrites`.
-
-```js
-guild.createChannel('secret-text-channel', 'text', {
-	nsfw: true,
-	overwrites: [
-		{
-			deny: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
-			id: '123456789012345678',
-		},
-		{
-			allow: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
-			id: '876543210987654321',
-		},
-	],
-});
-
-guild.createChannel('Secret Voice Channel', 'voice', {
-	bitrate: 64,
-	userLimit: 2,
-	parent: '123456789012345678',
-});
-```
-
-#### Guild.createIntegration
 `guild.createIntegration()` has been added.
 
-#### Guild#defaultMessageNotifications
-`guild.defaultMessageNotifications` has been added.
+#### Guild#fetchEmbed
 
-#### Guild.fetchEmbed
 `guild.fetchEmbed` has been added.
 
-#### Guild.fetchIntegrations
+#### Guild#fetchIntegrations
+
 `guild.fetchIntegrations()` has been added.
 
 #### Guild#fetchVanityCode
+
 `guild.fetchVanityCode()` has been added. 
 
-#### Guild.setEmbed
-`guild.setEmbed` has been added.
+#### Guild#setEmbed
 
-#### Guild#verified
-`guild.verified` has been added.
+`guild.setEmbed()` has been added.
+
+#### Guild#shard(ID)
+
+`guild.shard` and `guild.shardID` have been added, representing the information of the shard the guild is on.
 
 ### GuildAuditLogs
 
@@ -1189,17 +1468,27 @@ guild.createChannel('Secret Voice Channel', 'voice', {
 
 ### GuildChannel
 
-#### GuildChannel#lockPermissions
+#### GuildChannel#permissionsLocked
 
-`channel.lockPermimssions()` has been added.
+`guildChannel.permissionsLocked` is a boolean value representing if the `permissionOverwrites` of the channel match its parents' `permissionOverwrites`.
 
-#### GuildChannel#parent(ID)
+#### GuildChannel#updateOverwrites
 
-`channel.parent` and `channel.parentID` have been added.
+Creates or update an existing overwrite for a user or role.  The first parameter is a `PermissionOverwriteOption` object; the second, optional parameter is `reason`, a string.
 
-#### GuildChannel#setParent
+```js
+channel.updateOverwrite(message.author, {
+	SEND_MESSAGES: false
+});
+```
 
-`channel.setParent()` has been added.
+#### GuildChannel#viewable
+
+`guildChannel.viewable` is a boolean value representing whether the channel is visible to the client user.
+
+### HTTPError
+
+### Integration
 
 ### Message
 
@@ -1237,30 +1526,16 @@ guild.createChannel('Secret Voice Channel', 'voice', {
 
 #### MessageMentions#has
 
-`mentions.has()` has been added.
+`mentions.has()` has been added, replacing `message.isMentioned()` and `message.isMemberMentioned()`.  It has two paramets: the first is `data` representing a `User`, `GuildMember`, `Role`, or `GuildChannel` and an optional `options` object.
 
-### ClientApplication
+```diff
+- message.isMentioned('123456789012345678');
+- message.isMemberMentioned('123456789012345678');
++ message.mentions.has('123456789012345678');
++ message.mentions.has('123456789012345678', { ignoreDirect: true, ignoreRoles: true, ignoreEveryone: true });
+```
 
-#### ClientApplication#cover
-
-`application.cover` has been added.
-
-#### ClientApplication#coverImage
-
-`application.coverImage()` has been added.
-
-#### ClientApplication#createAsset
-
-`application.createAsset()` has been added.
-
-#### ClientApplication#fetchAssets
-
-`application.fetchAssets()` has been added.
-
-### ClientOptions
-
-#### ClientOptions#retryLimit
-`ClientOption.retryLimit` parameter was added
+###
 
 ### Permission
 
