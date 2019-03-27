@@ -18,7 +18,7 @@ For now, you do need Git installed and added to your PATH environment, so ensure
 
 #### Collection#exists
 
-`collection.exists` was removed entirely, `collection.some()` should be used to check if an element exists in the collection that satisfies the provided value.
+`collection.exists()` was removed entirely, `collection.some()` should be used to check if an element exists in the collection that satisfies the provided value.
 
 ```diff
 - client.users.exists('username', 'Bob');
@@ -438,15 +438,15 @@ Just like the `TextChannel#send***` methods, all the `.send***()` methods have b
 
 ### ClientUserChannelOverride
 
-The `clientUserChannelOverride` class has been removed entirely.
+The `ClientUserChannelOverride` class has been removed entirely.
 
 ### ClientUserGuildSettings
 
-The `clientUserGuildSettings` class has been removed entirely.
+The `ClientUserGuildSettings` class has been removed entirely.
 
 ### ClientUserSettings
 
-The `clientUserSettings` class has been removed entirely.
+The `ClientUserSettings` class has been removed entirely.
 
 ### Collection
 
@@ -458,9 +458,19 @@ Both methods will now return `undefined` if nothing is found.
 
 `collection.deleteAll()` has been removed in favor of map's default `clear()` method.
 
+```diff
+- roles.deleteAll();
++ roles.clear();
+```
+
 #### Collection#exists
 
-`collection.exists()` has been replaced by the `collection.some()` method.
+`collection.exists()` has been removed entirely in favor of `collection.some()`
+
+```diff
+- client.users.exists('username', 'Bob');
++ client.users.some(user => user.username === 'Bob');
+```
 
 #### Collection#filterArray
 
@@ -569,7 +579,7 @@ The `Game` class has been removed in favor of the `Activity` class.
 
 ### GroupDMChannel
 
-The `groupDMChannel` class has been removed entirely.
+The `GroupDMChannel` class has been removed entirely.
 
 ### Guild
 
@@ -1120,7 +1130,7 @@ The `OAuth2Application` class has been renamed to `ClientApplication`.
 
 ### PartialGuild(Channel)
 
-The `partialGuild` and `partialGuildChannel` classes for use with invites have been removed entirely.
+The `PartialGuild` and `PartialGuildChannel` classes for use with invites have been removed entirely.
 
 ### PermissionOverwrites
 
