@@ -27,7 +27,7 @@ For now, you do need Git installed and added to your PATH environment, so ensure
 
 #### Collection#filterArray
 
-`colelction.filterArray()` was removed entirely, as it was just a helper method for `collection.filter().array()` and most of the time converting a collection to an array is an unnecessary step.
+`collection.filterArray()` was removed entirely, as it was just a helper method for `collection.filter().array()` and most of the time converting a collection to an array is an unnecessary step.
 
 #### Collection#find
 
