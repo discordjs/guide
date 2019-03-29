@@ -724,7 +724,7 @@ Unfortunately, "default" channels don't exist in Discord anymore, and as such, t
 
 #### Guild#pruneMembers
 
-`guild.pruneMembers()` has been transformed in the shape of a DataStore.  In addition, the first, second, and third parameters in `guild.createEmoji()` have been changed/removed, leaving it with a total of one parameter. The `days`, `dry`, and `reason` parameters from v11 have been merged into an object as the first parameter.
+`guild.pruneMembers()` has been transformed in the shape of a DataStore.  In addition, the first, second, and third parameters in the method have been changed or removed, leaving it with a total of one parameter. The `days`, `dry`, and `reason` parameters from v11 have been merged into an object as the first parameter.
 
 ```diff
 - guild.pruneMembers(7, true, 'Scheduled pruning');
@@ -1140,7 +1140,7 @@ The `PartialGuild` and `PartialGuildChannel` classes for use with invites have b
 
 #### PermissionOberwrites#deny
 
-`permissionOverwritres.deny` has been removed, use `permissionOverwrites.denied` instead for a Permissions structure of denied permissions for the user or role.
+`permissionOverwrites.deny` has been removed, use `permissionOverwrites.denied` instead for a Permissions structure of denied permissions for the user or role.
 
 ### Permissions
 
@@ -1196,7 +1196,7 @@ The `RichEmbed` class has been removed in favor of the `MessageEmbed` class.
 
 #### RichEmbed#attachFile
 
-`richEmbed.attachFile()` has been removed in favor of `messageEmbed.attachFiles()`.
+`RichEmbed.attachFile()` has been removed in favor of `MessageEmbed.attachFiles()`.
 
 ```diff
 - new RichEmbed().attachFile('attachment://file-namme.png');
@@ -1264,7 +1264,7 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 + channel.send({
   files: [{
     attachment: 'entire/path/to/file.jpg',
-    name: 'file.jpg'
+    name: 'file.jpg',
   }]
 + channel.send({
   files: ['https://cdn.discordapp.com/icons/222078108977594368/6e1019b3179d71046e463a75915e7244.png?size=2048']
@@ -1488,7 +1488,7 @@ Creates or update an existing overwrite for a user or role.  The first parameter
 
 ```js
 channel.updateOverwrite(message.author, {
-	SEND_MESSAGES: false
+	SEND_MESSAGES: false,
 });
 ```
 
@@ -1511,6 +1511,7 @@ channel.updateOverwrite(message.author, {
 `message.application` has been added.
 
 #### Message.url
+
 `message.url` has been added.
 
 ### MessageAttachment
@@ -1563,6 +1564,7 @@ channel.updateOverwrite(message.author, {
 `permissionOverwrites.denied` has been added.
 
 ### TextChannel#rateLimitPerUser
+
 `TextChannel.rateLimitPerUser()` was added.
 
 ### TextChannel#lastPinTimestamp
