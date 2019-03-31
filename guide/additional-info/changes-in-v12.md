@@ -505,7 +505,6 @@ Now runs a specific function over the collection instead of mimicking `<array>.f
 ### DMChannel
 
 #### DMChannel#acknowledge
-
 `dmChannel.acknowledge()` has been removed entirely.
 
 #### DMChannel#createCollector
