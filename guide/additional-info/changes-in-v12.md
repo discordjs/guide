@@ -1121,7 +1121,7 @@ The `OAuth2Application` class has been renamed to `ClientApplication`.
 
 #### OAuth2Application#rpcApplicationState
 
-`application.rpgcApplicationState` has been removed entirely.
+`application.rpcApplicationState` has been removed entirely.
 
 #### OAuth2Application#secret
 
