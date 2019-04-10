@@ -256,6 +256,7 @@ Stuff Mark has gone through and updated - anything under Additions at the end wi
 * Role
 
 
+
 Stuff Mark didn't do:
 
 * MessageAttachment
@@ -263,6 +264,7 @@ Stuff Mark didn't do:
 ### Dependencies
 
 #### Snekfetch
+
 Please note that `snekfetch` has been removed as a dependency, and has been replaced by `node-fetch`.  `snekfetch` has been deprecated by its developer and is no longer maintained.
 
 ### Attachment
@@ -565,6 +567,18 @@ The `ClientUserGuildSettings` class has been removed entirely, along with all ot
 
 The `ClientUserSettings` class has been removed entirely, along with all other user account-only properties and methods.
 
+### ClientUserChannelOverride
+
+The `ClientUserChannelOverride` class has been removed entirely.
+
+### ClientUserGuildSettings
+
+The `ClientUserGuildSettings` class has been removed entirely.
+
+### ClientUserSettings
+
+The `ClientUserSettings` class has been removed entirely.
+
 ### Collection
 
 #### Collection#find/findKey
@@ -622,6 +636,7 @@ The `amount` parameter of these methods now allows a negative number which will 
 ### DMChannel
 
 #### DMChannel#acknowledge
+
 `dmChannel.acknowledge()` has been removed entirely, along with all other user account-only properties and methods.
 
 #### DMChannel#createCollector
@@ -920,6 +935,21 @@ The second parameter in `channel.createInvite()` has been removed, leaving it wi
 #### GuildChannel#muted
 
 `guildChannel.muted` has been removed entirely, along with all other user account-only properties and methods.
+
+#### GuildChannel#\*\*\*Permissions
+
+=======
+#### GuildChannel#members
+
+`guildChannel.members` has been removed from `guildChannel.members` and added to `textChannel.members` and `voiceChannel.members`.
+
+#### GuildChannel#messageNotifications
+
+`guildChannel.messageNotifications` has been removed entirely.
+
+#### GuildChannel#muted
+
+`guildChannel.muted` has been removed entirely.
 
 #### GuildChannel#\*\*\*Permissions
 
@@ -1562,7 +1592,7 @@ ClientApplication.coverImage({ width: 1024, height: 1024 });
 
 #### ClientApplication#fetchAssets
 
-`ClientApplication.fetchAssests()` returns a promise that resolves into an array of `ClientAsset` objects, each of which contains an `id`, `name` and `type`.
+`ClientApplication.fetchAssests()` returns a promise that resolves into an array of `ClientAsset` objects, each of which contains `id`, `name` and `type` keys.
 
 ### ClientOptions
 
