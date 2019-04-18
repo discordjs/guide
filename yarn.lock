@@ -2549,9 +2549,9 @@ escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
 
-eslint-config-aqua@^4.4.1:
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-aqua/-/eslint-config-aqua-4.4.1.tgz#eaf15713b7a9ca31d0c4ac9bdbddc1531a2055a7"
+eslint-config-aqua@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-aqua/-/eslint-config-aqua-5.0.0.tgz#f0ed8be7805e86aa389c35f9c3021ba4c51234bd"
 
 eslint-plugin-markdown@^1.0.0:
   version "1.0.0"
