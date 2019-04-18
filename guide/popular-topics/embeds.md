@@ -20,11 +20,9 @@ Here is an example of what an embed may look like. We will go over their constru
 			image="https://i.imgur.com/wSTFkRM.png"
 			footer-image="https://i.imgur.com/wSTFkRM.png"
 			timestamp="01/01/2018"
-			:author="{
-				name: 'Some name',
-				image: 'https://i.imgur.com/wSTFkRM.png',
-				url: 'https://discord.js.org/',
-			}"
+			authorName="Some name"
+			authorImage="https://i.imgur.com/wSTFkRM.png"
+			authorUrl="https://discord.js.org/"
 		>
 			Some description here
 			<embed-fields slot="fields">
