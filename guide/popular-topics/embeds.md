@@ -189,7 +189,7 @@ If you want to modify the embed object based on conditions you will need to refe
 const exampleEmbed = { title: 'Some title' };
 
 if (message.author.bot) {
-	exampleEmbed.color = '#7289da';
+	exampleEmbed.color = 0x7289da;
 }
 ```
 
