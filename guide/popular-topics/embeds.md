@@ -179,10 +179,6 @@ channel.send({ embed: exampleEmbed });
 You don't need to include all the elements showcased above. If you want a simpler embed, just leave some out.
 :::
 
-::: warning
-The `color` field has to be a base 10 integer for embed objects! If you have a hex color string (e.g. `'#0099ff'`) you can replace the `#` with `0x` to use it as a number: `0x0099ff`.
-:::
-
 If you want to modify the embed object based on conditions you will need to reference it as the constant `exampleEmbed` (for our example). You can then reassign the property values as you would with any other object.
 
 ```js
