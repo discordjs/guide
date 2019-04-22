@@ -79,7 +79,7 @@ channel.send(exampleEmbed);
 You don't need to include all the elements showcased above. If you want a simpler embed, just leave some out.
 :::
 
-The `.setColor()` method accepts a base 10 integer, HEX color string, an array of RGB values or specific color strings. You can find a list of them at [the Discord.js documentation](https://discord.js.org/#/docs/main/stable/typedef/ColorResolvable).
+The `.setColor()` method accepts an integer, HEX color string, an array of RGB values or specific color strings. You can find a list of them at [the Discord.js documentation](https://discord.js.org/#/docs/main/stable/typedef/ColorResolvable).
 
 `.addBlankField()` is a convenience method for `.addField('\u200b', '\u200b')` to add a spacer to the embed. This can also be used inline by passing `true` as the first parameter.
 
@@ -180,10 +180,10 @@ You don't need to include all the elements showcased above. If you want a simple
 :::
 
 ::: warning
-The `color` field has to be a base 10 integer for embed objects! If you have a hex color string (e.g. `'#0099ff'`) you can replace the `#` with `0x` to use it as a number: `0x0099ff`.
+The `color` field has to be an integer for embed objects! If you have a hex color string (e.g. `'#7289da'`) you can replace the `#` with `0x` to use it as a number: `0x7289da`.
 :::
 
-If you want to modify the embed object based on conditions you will need to reference it as the constant `exampleEmbed` (for our example). You can then reassign the property values as you would with any other object.
+If you want to modify the embed object based on conditions you will need to reference it as the constant (`exampleEmbed` for our example). You can then reassign the property values as you would with any other object.
 
 ```js
 const exampleEmbed = { title: 'Some title' };
