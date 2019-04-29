@@ -33,7 +33,7 @@ member.kick();
 <!-- eslint-skip -->
 
 ```js
-const role = <guild>.roles.find('name', '<role name>');
+const role = <guild>.roles.find(role => role.name === '<role name>');
 const member = <message>.mentions.members.first();
 member.addRole(role);
 ```
