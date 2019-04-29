@@ -44,7 +44,7 @@ member.addRole(role);
 
 ```js
 const member = <message>.mentions.members.first();
-if (member.roles.exists('name', '<role name>')) {
+if (member.roles.some(role => role.name === '<role name>')) {
 	// ...
 }
 ```
