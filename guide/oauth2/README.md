@@ -92,7 +92,7 @@ You can see that by clicking `Authorize`, you are allowing the application to ac
 			const fragment = new URLSearchParams(window.location.hash.slice(1));
 
 			if (fragment.has("access_token")) {
-				const accessToken = hash.get("access_token");
+				const accessToken = fragment.get("access_token");
 				const tokenType = fragment.get("token_type");
 
 				fetch('https://discordapp.com/api/users/@me', {
