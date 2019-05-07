@@ -84,7 +84,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '!';
 
-const escapeRegex = require('escape-string-regexp');
+const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 client.on('message', message => {
 	const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
@@ -103,6 +103,9 @@ client.on('message', message => {
 
 client.login('your-token-goes-here');
 ```
+
+::: tip
+The `escapeRegex` arrow function is a simple function used to remove special characters, that would normally result in an error, from a [regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)!
 
 ::: tip
 If you aren't familiar with the syntax used on the `const [, matchedPrefix] = ...` line, that's called "array destructuring". Feel free to read more about it in the [ES6 syntax](/additional-info/es6-syntax.md#array-destructuring) guide!
