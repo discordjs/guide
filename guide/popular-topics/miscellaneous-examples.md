@@ -76,6 +76,10 @@ process.on('unhandledRejection', error => console.error('Uncaught Promise Reject
 
 ## Mention prefix
 
+::: tip
+The `escapeRegex` function is used to convert special characters into literal characters by escaping them, so that they don't terminate the pattern within the [Regular Expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)!
+:::
+
 When a user adds your bot to their server, they may not immediately know what the prefix is. This is why it's a good idea to allow your bot to be triggered by either a set prefix, or by pinging them. In addition, it's also a good idea to have a command that displays the available prefixes.
 
 ```js
@@ -103,9 +107,6 @@ client.on('message', message => {
 
 client.login('your-token-goes-here');
 ```
-
-::: tip
-The `escapeRegex` function is used to convert special characters into literal characters by escaping them, so that they don't terminate the pattern within the [Regular Expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)!
 
 ::: tip
 If you aren't familiar with the syntax used on the `const [, matchedPrefix] = ...` line, that's called "array destructuring". Feel free to read more about it in the [ES6 syntax](/additional-info/es6-syntax.md#array-destructuring) guide!
