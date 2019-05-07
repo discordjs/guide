@@ -80,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
 		amount: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
-			default: 0,
+			'default': 0,
 		},
 	}, {
 		timestamps: false,

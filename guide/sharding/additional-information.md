@@ -91,7 +91,7 @@ This snippet allows you to return fetched messages outside of the `broadcastEval
 
 ```js
 client.shard.broadcastEval(`
-	(async => {
+	(async () => {
 		let channel = this.channels.get('id');
 		let msg;
 		if (channel) {

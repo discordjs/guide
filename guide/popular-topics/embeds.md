@@ -20,14 +20,12 @@ Here is an example of what an embed may look like. We will go over their constru
 			image="https://i.imgur.com/wSTFkRM.png"
 			footer-image="https://i.imgur.com/wSTFkRM.png"
 			timestamp="01/01/2018"
-			:author="{
-				name: 'Some name',
-				image: 'https://i.imgur.com/wSTFkRM.png',
-				url: 'https://discord.js.org/',
-			}"
+			authorName="Some name"
+			authorImage="https://i.imgur.com/wSTFkRM.png"
+			authorUrl="https://discord.js.org/"
 		>
 			Some description here
-			<embed-fields slot="fields">
+			<embed-fields>
 				<embed-field title="Regular field title">
 					Some value here
 				</embed-field>
@@ -81,7 +79,7 @@ channel.send(exampleEmbed);
 You don't need to include all the elements showcased above. If you want a simpler embed, just leave some out.
 :::
 
-The `.setColor()` method accepts a base 10 integer, HEX color string, an array of RGB values or specific color strings. You can find a list of them at [the Discord.js documentation](https://discord.js.org/#/docs/main/stable/typedef/ColorResolvable).
+The `.setColor()` method accepts an integer, HEX color string, an array of RGB values or specific color strings. You can find a list of them at [the Discord.js documentation](https://discord.js.org/#/docs/main/stable/typedef/ColorResolvable).
 
 `.addBlankField()` is a convenience method for `.addField('\u200b', '\u200b')` to add a spacer to the embed. This can also be used inline by passing `true` as the first parameter.
 
@@ -89,8 +87,8 @@ The `.setColor()` method accepts a base 10 integer, HEX color string, an array o
 On the master branch, the receiving and outgoing embed classes have been unified; you will need to use `Discord.MessageEmbed()` as constructor instead.
 :::
 
-The above example chains the manipulating methods to the newly created RichEmbed object.
-If you want to modify the embed based on conditions you will need to reference it as the constant `exampleEmbed` (for our example).
+The above example chains the manipulating methods to the newly created RichEmbed object. This is possible because the return value of each manipulating method is the RichEmbed instance itself.
+If you want to modify the embed based on conditions you will need to reference it directly (as `exampleEmbed` for our example).
 
 <!-- eslint-skip -->
 
@@ -104,7 +102,7 @@ if (message.author.bot) {
 
 ### Local images
 
-To use local images inside your embed, you need to upload them alongside the embed with the `.attachFiles()` method. You can either provide the file path [FileOptions](https://discord.js.org/#/docs/main/stable/typedef/FileOptions), BufferResolvable, or Attachment objects inside an array. 
+To use local images inside your embed, you need to upload them alongside the embed with the `.attachFiles()` method. You can either provide the file path [FileOptions](https://discord.js.org/#/docs/main/stable/typedef/FileOptions), BufferResolvable, or Attachment objects inside an array.
 
 You can then access and use the images inside the embed itself with `attachment://fileName.extension`.
 
@@ -182,16 +180,16 @@ You don't need to include all the elements showcased above. If you want a simple
 :::
 
 ::: warning
-The `color` field has to be a base 10 integer for embed objects! If you have a hex color string (e.g. `'#0099ff'`) you can replace the `#` with `0x` to use it as a number: `0x0099ff`.
+The `color` field has to be an integer for embed objects! If you have a hex color string (e.g. `'#7289da'`) you can replace the `#` with `0x` to use it as a number: `0x7289da`.
 :::
 
-If you want to modify the embed object based on conditions you will need to reference it as the constant `exampleEmbed` (for our example). You can then reassign the property values as you would with any other object.
+If you want to modify the embed object based on conditions you will need to reference it directly (as `exampleEmbed` for our example). You can then (re)assign the property values as you would with any other object.
 
 ```js
 const exampleEmbed = { title: 'Some title' };
 
 if (message.author.bot) {
-	exampleEmbed.color = '#7289da';
+	exampleEmbed.color = 0x7289da;
 }
 ```
 
@@ -226,6 +224,7 @@ To achieve this, you retrieve the embed from the messages embed array (`message.
 
 ::: warning
 You cannot just resend the received embed structure! It's a [MessageEmbed](https://discord.js.org/#/docs/main/stable/class/MessageEmbed) rather than a RichEmbed and contains circular references that prevent sending.
+While possible on the master branch due to above mentioned merge of RichEmbed and MessageEmbed it's still not recommended to edit the reference directly as this modifies the embed on the original Message in your bots cache as well and thus may lead to unexpected behaviour!
 :::
 
 ```js

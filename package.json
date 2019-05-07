@@ -8,7 +8,7 @@
     "build": "vuepress build guide"
   },
   "repository": "https://github.com/discordjs/guide.git",
-  "keywords": [	
+  "keywords": [
     "discord",
     "bot",
     "guide",
@@ -24,8 +24,8 @@
   "homepage": "https://discordjs.guide",
   "devDependencies": {
     "babel-eslint": "^10.0.1",
-    "eslint": "^4.17.0",
-    "eslint-config-aqua": "^4.4.1",
+    "eslint": "^5.6.0",
+    "eslint-config-sora": "^2.0.0",
     "eslint-plugin-markdown": "^1.0.0",
     "eslint-plugin-vue": "^5.2.2",
     "vuepress": "^0.14.10"
