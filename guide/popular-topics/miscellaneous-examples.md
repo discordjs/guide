@@ -105,7 +105,7 @@ client.login('your-token-goes-here');
 ```
 
 ::: tip
-The `escapeRegex` arrow function is a simple function used to remove special characters, that would normally result in an error, from a [regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)!
+The `escapeRegex` function is used to convert special characters into literal characters by escaping them, so that they don't terminate the pattern within the [Regular Expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)!
 
 ::: tip
 If you aren't familiar with the syntax used on the `const [, matchedPrefix] = ...` line, that's called "array destructuring". Feel free to read more about it in the [ES6 syntax](/additional-info/es6-syntax.md#array-destructuring) guide!
