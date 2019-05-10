@@ -68,7 +68,7 @@ Using `.find()`, your code would look something like this:
 
 ```js
 if (message.content === '!react-custom') {
-	const emoji = message.guild.emojis.find('name', 'ayy');
+	const emoji = message.guild.emojis.find(emote => emote.name === 'ayy');
 	message.react(emoji);
 }
 ```
