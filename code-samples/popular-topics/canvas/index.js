@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const Canvas = require('canvas');
-const snekfetch = require('snekfetch');
 
 const client = new Discord.Client();
 
@@ -45,8 +44,7 @@ client.on('guildMemberAdd', async member => {
 	ctx.closePath();
 	ctx.clip();
 
-	const { body: buffer } = await snekfetch.get(member.user.displayAvatarURL);
-	const avatar = await Canvas.loadImage(buffer);
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
 	ctx.drawImage(avatar, 25, 25, 200, 200);
 
 	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
