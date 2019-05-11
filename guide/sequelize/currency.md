@@ -328,7 +328,7 @@ if (item.cost > currency.getBalance(message.author.id)) {
 	return message.channel.send(`You currently have ${currency.getBalance(message.author.id)}, but the ${item.name} costs ${item.cost}!`);
 }
 
-const user = await Users.Users.findOne({ where: { user_id: message.author.id } });
+const user = await Users.findOne({ where: { user_id: message.author.id } });
 currency.add(message.author.id, -item.cost);
 await user.addItem(item);
 
