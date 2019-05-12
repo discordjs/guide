@@ -206,7 +206,7 @@ You can now also play Ogg Opus files or WebM Opus files directly without the nee
 
 ```js
 connection.play(fs.createReadStream('file.ogg'), { type: 'ogg/opus' });
-connection.play(fs.createReadStream('file.webm'), { type: 'webm/opus' })
+connection.play(fs.createReadStream('file.webm'), { type: 'webm/opus' });
 ```
 
 It is also possible to define initial values for `plp`, `fec` and `bitrate` when playing a stream. Minus bitrate, these are new configurable options in v12 that can help when playing audio on unstable network connections.
@@ -219,7 +219,7 @@ It is also possible to define initial values for `plp`, `fec` and `bitrate` when
 If you don't want to alter the volume of a stream while you're playing it, you can disable volume to improve performance. This cannot be reverted during playback.
 
 ```js
-connection.play(stream, { volume: false })
+connection.play(stream, { volume: false });
 ```
 
 The internal voice system in v12 now uses streams where possible, and as such StreamDispatcher itself is now a WritableStream. It also comes with new changes:
@@ -234,13 +234,13 @@ The internal voice system in v12 now uses streams where possible, and as such St
 
 You can manually control how many audio packets should be queued before playing audio for more consistent playback using the `highWaterMark` option (defaults to 12)
 ```js
-connection.play(stream, { highWaterMark: 512 })
+connection.play(stream, { highWaterMark: 512 });
 ```
 
 If you're frequently pausing/resuming an audio stream, you can enable playing silence packets while paused to prevent audio glitches on the Discord client
 ```js
 // Passing true plays silence
-dispatcher.pause(true)
+dispatcher.pause(true);
 ```
 
 #### Broadcasts
