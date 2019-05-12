@@ -33,7 +33,7 @@ member.kick();
 <!-- eslint-skip -->
 
 ```js
-const role = <guild>.roles.find('name', '<role name>');
+const role = <guild>.roles.find(role => role.name === '<role name>');
 const member = <message>.mentions.members.first();
 member.addRole(role);
 ```
@@ -44,7 +44,7 @@ member.addRole(role);
 
 ```js
 const member = <message>.mentions.members.first();
-if (member.roles.exists('name', '<role name>')) {
+if (member.roles.some(role => role.name === '<role name>')) {
 	// ...
 }
 ```
