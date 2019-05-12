@@ -216,7 +216,7 @@ It is also possible to define initial values for `plp`, `fec` and `bitrate` when
 + connection.play(stream, { bitrate: 96 })
 ```
 
-If you don't want to alter the volume of a stream while you're playing it, you can disable volume to improve performance. This cannot be changed during playback.
+If you don't want to alter the volume of a stream while you're playing it, you can disable volume to improve performance. This cannot be reverted during playback.
 
 ```js
 connection.play(stream, { volume: false })
@@ -241,6 +241,18 @@ If you're frequently pausing/resuming an audio stream, you can enable playing si
 ```js
 // Passing true plays silence
 dispatcher.pause(true)
+```
+
+#### Broadcasts
+
+Broadcasts themselves now contain a `BroadcastDispatcher` that shares a similar interface to the `StreamDispatcher` and can be used to control the playback of an audio stream.
+
+```diff
+- client.createVoiceBroadcast()
++ client.voice.createBroadcast()
+
+- broadcast.dispatchers
++ broadcast.subscribers
 ```
 
 ---
@@ -1587,7 +1599,7 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 ### VoiceConnection
 
 #### VoiceConnection#createReceiver
-`voiceconnection.createReceiver()` has been removed, the receiver can now simply be accessed from `voiceConnection.receiver`
+`voiceconnection.createReceiver()` has been removed, there is now a single receiver that be accessed from `voiceConnection.receiver`
 
 
 ### Webhook
