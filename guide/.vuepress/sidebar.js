@@ -114,6 +114,14 @@ module.exports = {
 			],
 		},
 		{
+			title: 'Voice',
+			children: [
+				'/voice/',
+				'/voice/understanding-voice',
+				'/voice/getting-started',
+			],
+		},
+		{
 			title: 'Improving Your Dev Environment',
 			children: [
 				'/improving-dev-environment/pm2',
