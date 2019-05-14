@@ -17,7 +17,7 @@ If you're developing on macOS, you have a few options. You can go to [the Node.j
 If you're developing on Linux, you may consult [this page](https://nodejs.org/en/download/package-manager/) to determine how you should install Node.<br />On that note, there's a possibility that you may already have Node \(e.g. if you're using a VPS\). You can check by running the `node -v` command. If it outputs something like `v8.0.0` or higher, then you're good to go! Otherwise, take a look at the page linked above for instructions on installing Node on your OS.
 
 ::: warning
-If you _do_ have Node installed, but have an older version \(i.e. anything below 8.0.0\), you should upgrade to the latest version.
+If you _do_ have Node installed, but have an older version \(i.e. anything below 10.0.0\), you should upgrade to the latest version. v12 requires Node 10.0.0 or higher to run.
 :::
 
 ---

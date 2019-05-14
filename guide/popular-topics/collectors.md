@@ -71,7 +71,7 @@ const filter = response => {
 };
 
 message.channel.send(item.question).then(() => {
-	message.channel.awaitMessages(filter, { maxMatches: 1, time: 30000, errors: ['time'] })
+	message.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ['time'] })
 		.then(collected => {
 			message.channel.send(`${collected.first().author} got the correct answer!`);
 		})
