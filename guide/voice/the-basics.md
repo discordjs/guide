@@ -23,7 +23,9 @@ In the above example we accessed a `VoiceState` through `member.voice`. A voice 
 
 ## Playing audio
 
-Playing audio is also simple. It provides you with a `StreamDispatcher`, you can use this to control and monitor the playback of your audio over the voice channel.
+Playing audio is also simple. A `StreamDispatcher` is created for you to control and monitor the playback of your audio over the voice channel.
+
+A VoiceConnection can only ever have at most one dispatcher. If you try to play another stream while audio is already playing, the existing stream will be destroyed and the new audio will begin to play shortly after.
 
 ```js
 // Create a dispatcher
@@ -41,17 +43,76 @@ dispatcher.on('finish', () => {
 dispatcher.on('error', console.error);
 ```
 
-A VoiceConnection can only ever have one dispatcher. If you try to play another stream while audio is already playing, the existing stream will be destroyed and the new audio will begin to play shortly after.
-
 To end the stream yourself, you can run:
 
 ```js
 dispatcher.destroy();
 ```
 
+You can also create the dispatcher with options. The following example will play a stream at 50% volume and with 3 passes (this is the number of times an audio packet is sent. Increasing this value will reduce the chance of packet loss, but will also increase bandwidth!)
+
+```js
+connection.play('audio.mp3', { volume: 0.5, passes: 3 });
+```
+
+### What sources of audio can I play?
+#### FFmpeg
+
+In the example shown above, you can play a file from its path, this is an example of using FFmpeg to play a file. You can also pass a `ReadableStream` (or path) of most media files, e.g. mp3, mkv, mp4, and this will be played. You can even play from URLs!
+
+```js
+const fs = require('fs');
+
+// From a path
+connection.play('audio.mp3');
+// From a ReadableStream
+connection.play(fs.createReadStream('audio.mp3'));
+// From a URL
+connection.play('http://myserver.com/audio.aac');
+```
+
+You can consult the [FFmpeg Protocols](https://www.ffmpeg.org/ffmpeg-protocols.html#Protocols) documentation for a full list of resources you can play with FFmpeg.
+
+#### WebM/Ogg Opus Files
+
+WebM/Ogg Opus files already contain Opus audio, this means we do not require FFmpeg to convert the file. This is efficient, and using these files where possible will improve the performance of your bot.
+
+To play these files, you'll need to have a ReadableStream of the file and you'll need to specify the type of file when playing:
+
+```js
+const fs = require('fs');
+// Play a WebM Opus stream
+connection.play(fs.createReadStream('audio.webm'), { type: 'webm/opus' });
+// Play an Ogg Opus stream
+connection.play(fs.createReadStream('audio.ogg'), { type: 'ogg/opus' });
+```
+
+::: tip
+You may be wondering why we specified the source `type` in this example and we didn't in the FFmpeg one. Discord.js will default to the `'unknown'` (i.e. "use FFmpeg") type when no type is provided.
+:::
+
+## Controlling the Stream Dispatcher
+
+You can pause, resume, and alter the volume of a stream dispatcher in real-time.
+
+```js
+dispatcher.pause();
+dispatcher.resume();
+// Set the volume to 25%
+dispatcher.setVolume(0.25);
+```
+
+::: tip
+In cases where you'll be pausing/resuming a stream rapidly, you can use the _"play silence"_ mode to prevent audio glitches occurring in the Discord client. To opt-in to this mode, simply pass `true` to the pause method:
+```js
+// Play silent packets while paused
+dispatcher.pause(true);
+```
+:::
+
 ## Leaving voice channels
 
-Leaving a voice channel will cause the current dispatcher (if there is one) to be destroyed.
+Leaving a voice channel will cause the current dispatcher (if there is one) to be destroyed, and will also destroy the voice connection.
 
 ```js
 // Option 1
