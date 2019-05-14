@@ -33,7 +33,7 @@ dispatcher.on('start', () => {
   console.log('audio.mp3 is now playing!');
 });
 
-dispatcher.on('finish'), () => {
+dispatcher.on('finish', () => {
   console.log('audio.mp3 is finished playing!');
 });
 
