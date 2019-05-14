@@ -118,7 +118,7 @@ module.exports = {
 			children: [
 				'/voice/',
 				'/voice/understanding-voice',
-				'/voice/getting-started',
+				'/voice/the-basics',
 			],
 		},
 		{

@@ -20,7 +20,8 @@ At the bare minimum, you'll need:
 
 You may also choose to install the following dependencies.
 
-- FFmpeg (recommended) – allows you to play a range of media (e.g. MP3s) 
+- FFmpeg (recommended) – allows you to play a range of media (e.g. MP3s).
+  - **This guide will assume you have installed FFmpeg.**
   - [`ffmpeg`](https://ffmpeg.org/) - install and add to your system environment
   - [`ffmpeg-static`](https://www.npmjs.com/package/ffmpeg-static) - to install FFmpeg via npm
 - Faster encryption packages

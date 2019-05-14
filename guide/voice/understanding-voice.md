@@ -46,7 +46,7 @@ Just as we send audio to the UDP socket, we also receive audio through the UDP s
 3. If selected, the packet is decoded into PCM audio
 4. The processed packet is pushed to a user-friendly stream given to you
 
-### Key Take Aways
+### Key take aways
 
 - You should be familiar with the definitions in the glossary above
 - A voice connection does not disrupt the bot's main gateway - separate connections to a voice gateway and UDP socket are created
