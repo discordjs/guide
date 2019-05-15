@@ -56,7 +56,7 @@ Note that flag names are literal. Although `VIEW_CHANNEL` grants access to view 
 Alternatively you can provide permissions as a property of [RoleData](https://discord.js.org/#/docs/main/stable/typedef/RoleData) objects during role creation as an array of flag strings or a permission number:
 
 ```js
-guild.roles.create({ data: { name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS'] }});
+guild.roles.create({ data: { name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS'] } });
 ```
 
 ### Checking member permissions
@@ -105,18 +105,18 @@ You can also provide an array of overwrites during channel creation as shown bel
 
 ```js
 guild.channels.create('new-chat', {
-  type: 'text',
-  permissionOverwrites: [
-     {
-       id: message.guild.id,
-       deny: ['VIEW_CHANNEL'],
-     },
-     {
-       id: message.author.id,
-       allow: ['VIEW_CHANNEL'],
-    },
-  ],
-})
+	type: 'text',
+	permissionOverwrites: [
+		{
+			id: message.guild.id,
+			deny: ['VIEW_CHANNEL'],
+		},
+		{
+			id: message.author.id,
+			allow: ['VIEW_CHANNEL'],
+		},
+	],
+});
 ```
 
 ### Replacing overwrites
