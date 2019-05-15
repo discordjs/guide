@@ -69,6 +69,10 @@ async function play(connection, url) {
 You might be wondering why the type is `opus` and not `webm/opus` or `ogg/opus`. Discord.js allows us to play Opus streams **without a container** operating in object-mode (i.e. each item pushed to the stream is a distinct Opus packet). `ytdl-core-discord` provides this type of stream, and so we must specify `opus` as the type.
 :::
 
+### Using `highWaterMark`, `fec` and `plp`
+
+### Increasing passes to counteract packet loss
+
 ### Disabling Inline Volume
 
 If you're not going to change the volume of your stream in real-time, you can disable the volume transformer Discord.js creates for you. You'll need to do this before playing the stream:
