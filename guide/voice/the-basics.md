@@ -18,7 +18,7 @@ client.on('message', async message => {
 If you try to join a channel the bot is already in, nothing will happen so we don't need to worry about running this method repeatedly.
 
 ::: tip
-In the above example we accessed a `VoiceState` through `member.voice`. A voice state exists for members connected to a voice channel, and it tells you which channel they're connected to, if the member is speaking, and whether they're deafened or muted. Consult the documentation for a full description of what voice states can do!
+In the above example we accessed a `VoiceState` through `member.voice`. A voice state exists for members connected to a voice channel, and tells you which channel they're connected to, if the member is speaking, and whether they're deafened or muted. Consult the documentation for a full description of what voice states can do!
 :::
 
 ## Playing audio
@@ -36,7 +36,7 @@ dispatcher.on('start', () => {
 });
 
 dispatcher.on('finish', () => {
-	console.log('audio.mp3 is finished playing!');
+	console.log('audio.mp3 has finished playing!');
 });
 
 // Always remember to handle errors appropriately!
@@ -55,10 +55,11 @@ You can also create the dispatcher with options. The following example will play
 connection.play('audio.mp3', { volume: 0.5, passes: 3 });
 ```
 
-### What sources of audio can I play?
+### Which audio sources can I use?
+
 #### FFmpeg
 
-In the example shown above, you can play a file from its path, this is an example of using FFmpeg to play a file. You can also pass a `ReadableStream` (or path) of most media files, e.g. mp3, mkv, mp4, and this will be played. You can even play from URLs!
+In the example shown above, you can play a file from its path. This is an example of using FFmpeg to play a file. You can also pass a `ReadableStream` (or path) of most media files, e.g. mp3, mkv, mp4, and this will be played. You can even play from URLs!
 
 ```js
 const fs = require('fs');
@@ -88,7 +89,7 @@ connection.play(fs.createReadStream('audio.ogg'), { type: 'ogg/opus' });
 ```
 
 ::: tip
-You may be wondering why we specified the source `type` in this example and we didn't in the FFmpeg one. Discord.js will default to the `'unknown'` (i.e. "use FFmpeg") type when no type is provided.
+You may be wondering why we specified the source `type` in this example when we didn't in the FFmpeg one. Discord.js will default to the `'unknown'` (i.e. "use FFmpeg") type when no type is provided.
 :::
 
 ## Controlling the Stream Dispatcher

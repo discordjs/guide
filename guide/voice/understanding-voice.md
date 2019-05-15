@@ -23,7 +23,7 @@ To play audio, we need to send Opus audio packets to Discord at a regular time i
 
 Obtaining the Opus audio is mainly offloaded to a separate module, [`prism-media`](https://github.com/amishshah/prism-media). This module converts media to Opus audio, either through "demuxing" Ogg/WebM media files (extracting Opus audio directly), or using FFmpeg to transcode most media formats to Opus audio so we can use it.
 
-It also can be used to change the volume of a stream in real-time without much cost to performance.
+It can also be used to change the volume of a stream in real-time without much cost to performance.
 
 In conclusion:
 
@@ -46,7 +46,7 @@ Just as we send audio to the UDP socket, we also receive audio through the UDP s
 3. If selected, the packet is decoded into PCM audio
 4. The processed packet is pushed to a user-friendly stream given to you
 
-### Key take aways
+### Key takeaways
 
 - You should be familiar with the definitions in the glossary above
 - A voice connection does not disrupt the bot's main gateway - separate connections to a voice gateway and UDP socket are created

@@ -29,7 +29,7 @@ You may also choose to install the following dependencies.
   - [`libsodium-wrappers`](https://www.npmjs.com/package/libsodium-wrappers)
 
 ::: tip
-Outside a development environment, is recommended for you to use `node-opus` and `sodium` to improve performance and improve the stability of audio playback!
+Outside a development environment, it is recommended for you to use `node-opus` and `sodium` to improve performance and improve the stability of audio playback!
 
 If you're struggling to install these dependencies, make sure you have build tools installed first. On Windows, this is easy as running `npm install --global windows-build-tools`!
 :::
