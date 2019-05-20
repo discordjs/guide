@@ -1,0 +1,50 @@
+<template>
+	<div v-show="displayContent">
+		<slot />
+	</div>
+</template>
+
+<script>
+import semver from 'semver';
+import branches from '../branches.js';
+import eventBus from '../eventBus.js';
+
+const [defaultBranch] = branches;
+
+export default {
+	name: 'Branch',
+
+	data() {
+		return {
+			selectedBranch: localStorage.getItem('branch-version') || defaultBranch.version,
+		};
+	},
+
+	props: {
+		version: {
+			type: String,
+			required: true,
+		},
+	},
+
+	mounted() {
+		eventBus.$on('branch-update', this.updateBranch);
+	},
+
+	destroyed() {
+		eventBus.$off('branch-update', this.updateBranch);
+	},
+
+	computed: {
+		displayContent() {
+			return semver.satisfies(semver.coerce(this.version), this.selectedBranch);
+		},
+	},
+
+	methods: {
+		updateBranch(branch) {
+			this.selectedBranch = branch;
+		},
+	},
+};
+</script>
