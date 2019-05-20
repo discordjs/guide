@@ -21,8 +21,12 @@ export default {
 	data() {
 		return {
 			branches,
-			selectedBranch: localStorage.getItem('branch-version') || defaultBranch.version,
+			selectedBranch: defaultBranch.version,
 		};
+	},
+
+	mounted() {
+		this.selectedBranch = localStorage.getItem('branch-version') || defaultBranch.version;
 	},
 
 	methods: {

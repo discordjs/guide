@@ -16,7 +16,7 @@ export default {
 
 	data() {
 		return {
-			selectedBranch: localStorage.getItem('branch-version') || defaultBranch.version,
+			selectedBranch: defaultBranch.version,
 		};
 	},
 
@@ -28,6 +28,7 @@ export default {
 	},
 
 	mounted() {
+		this.selectedBranch = localStorage.getItem('branch-version') || defaultBranch.version;
 		eventBus.$on('branch-update', this.updateBranch);
 	},
 
