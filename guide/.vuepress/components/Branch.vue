@@ -1,6 +1,6 @@
 <template>
 	<div v-show="displayContent">
-		<slot />
+		<slot></slot>
 	</div>
 </template>
 
@@ -14,16 +14,22 @@ const [defaultBranch] = branches;
 export default {
 	name: 'Branch',
 
+	props: {
+		version: {
+			type: String,
+			required: true,
+		},
+	},
+
 	data() {
 		return {
 			selectedBranch: defaultBranch.version,
 		};
 	},
 
-	props: {
-		version: {
-			type: String,
-			required: true,
+	computed: {
+		displayContent() {
+			return semver.satisfies(semver.coerce(this.version), this.selectedBranch);
 		},
 	},
 
@@ -34,12 +40,6 @@ export default {
 
 	destroyed() {
 		eventBus.$off('branch-update', this.updateBranch);
-	},
-
-	computed: {
-		displayContent() {
-			return semver.satisfies(semver.coerce(this.version), this.selectedBranch);
-		},
 	},
 
 	methods: {
