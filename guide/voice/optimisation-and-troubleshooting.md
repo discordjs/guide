@@ -61,7 +61,7 @@ To do this, you can use the [`ytdl-core-discord`](https://github.com/amishshah/y
 const ytdl = require('ytdl-core-discord');
 
 async function play(connection, url) {
-  connection.play(await ytdl(url), { type: 'opus' });
+	connection.play(await ytdl(url), { type: 'opus' });
 }
 ```
 
