@@ -77,7 +77,7 @@ The default value for this property is `12` - this equates to 240 ms of audio re
 
 ```js
 // Have 50 audio packets ready (1 second of playback)
-connection.play("file.mp3", { highWaterMark: 50 });
+connection.play('file.mp3', { highWaterMark: 50 });
 ```
 
 You can try increasing this property to improve choppy playback, but increasing it too much will mean that playback will take longer to start, and any changes to volume will not take effect immediately. 
@@ -88,7 +88,7 @@ If you have a bad network connection, you can try increasing the `passes` proper
 
 ```js
 // Play a file with 3 passes
-connection.play("file.mp3", { passes: 3 });
+connection.play('file.mp3', { passes: 3 });
 ```
 
 ::: warning
