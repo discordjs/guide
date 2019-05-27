@@ -69,9 +69,31 @@ async function play(connection, url) {
 You might be wondering why the type is `opus` and not `webm/opus` or `ogg/opus`. Discord.js allows us to play Opus streams **without a container** operating in object-mode (i.e. each item pushed to the stream is a distinct Opus packet). `ytdl-core-discord` provides this type of stream, and so we must specify `opus` as the type.
 :::
 
-### Using `highWaterMark`, `fec` and `plp`
+### Using `highWaterMark`
+
+Another way to improve performance is through altering the `highWaterMark` property. This property, put simply, describes how many packets of Opus audio should be available to the stream at any given time.
+
+The default value for this property is `12` - this equates to 240 ms of audio ready to play at any given time. You can adjust the property like so:
+
+```js
+// Have 50 audio packets ready (1 second of playback)
+connection.play("file.mp3", { highWaterMark: 50 });
+```
+
+You can try increasing this property to improve choppy playback, but increasing it too much will mean that playback will take longer to start, and any changes to volume will not take effect immediately. 
 
 ### Increasing passes to counteract packet loss
+
+If you have a bad network connection, you can try increasing the `passes` property - this is how many times a packet is sent to Discord to increase the probability it is actually received. The default value is 1.
+
+```js
+// Play a file with 3 passes
+connection.play("file.mp3", { passes: 3 });
+```
+
+::: warning
+No more than 3 passes are recommended as this effectively triples the bandwidth you're using.
+:::
 
 ### Disabling Inline Volume
 
@@ -85,7 +107,3 @@ connection.play(audioStream, { volume: false });
 Once you've done this, you will **not** be able to change the volume of your StreamDispatcher.
 
 This will not have a big impact on performance, but can still help you improve the efficiency of your bot nevertheless.
-
-### Using VoiceBroadcasts
-
-### Sharding

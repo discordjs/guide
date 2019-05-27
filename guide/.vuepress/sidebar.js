@@ -119,6 +119,7 @@ module.exports = {
 				'/voice/',
 				'/voice/understanding-voice',
 				'/voice/the-basics',
+				'/voice/voice-broadcasts',
 				'/voice/optimisation-and-troubleshooting',
 			],
 		},
