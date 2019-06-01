@@ -6828,14 +6828,9 @@ vuepress-html-webpack-plugin@^3.2.0:
     util.promisify "1.0.0"
 
 vuepress-theme-yuu@^1.0.0:
-<<<<<<< HEAD
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/vuepress-theme-yuu/-/vuepress-theme-yuu-1.0.0.tgz#970b6aa8f5f6bd2e5db5d00539ccacba83ad4389"
-=======
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/vuepress-theme-yuu/-/vuepress-theme-yuu-1.1.0.tgz#bbf177b82ba3eb0f52193042150d8b02946ede20"
   integrity sha512-fuwT1xprMT9zz2d3cKO76DU6IaUe1H6U4g4e62aagsPH0na/DJLhXzIc1uxo/x3iU+EsJ95Guyb0pdpxRPzX9g==
->>>>>>> Update vuepress-theme-yuu to v1.1.0
   dependencies:
     vue-click-outside "^1.0.7"
 
