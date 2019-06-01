@@ -21,7 +21,7 @@ export default {
 		},
 		inline: {
 			type: Boolean,
-			'default': false,
+			default: false,
 		},
 	},
 
