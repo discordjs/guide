@@ -1,7 +1,7 @@
 <template>
-	<div v-show="displayContent">
+	<span v-show="displayContent" :style="{ display: inline ? 'inline-block' : 'block' }">
 		<slot></slot>
-	</div>
+	</span>
 </template>
 
 <script>
@@ -18,6 +18,10 @@ export default {
 		version: {
 			type: String,
 			required: true,
+		},
+		inline: {
+			type: Boolean,
+			default: false,
 		},
 	},
 
