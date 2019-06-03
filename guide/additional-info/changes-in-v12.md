@@ -88,12 +88,12 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 - channel.sendFile('./file.png');
 - channel.sendFiles(['./file-one.png', './file-two.png']);
 + channel.send({
-  files: [{
-    attachment: 'entire/path/to/file.jpg',
-    name: 'file.jpg'
-  }]
+	files: [{
+		attachment: 'entire/path/to/file.jpg',
+		name: 'file.jpg'
+	}]
 + channel.send({
-  files: ['https://cdn.discordapp.com/icons/222078108977594368/6e1019b3179d71046e463a75915e7244.png?size=2048']
+	files: ['https://cdn.discordapp.com/icons/222078108977594368/6e1019b3179d71046e463a75915e7244.png?size=2048']
 });
 ```
 
@@ -216,46 +216,67 @@ TODO LATER CUZ I DON'T WANNA TOUCH THAT SHIT RN:
 
 Stuff Mark has gone through and updated - anything under Additions at the end will still likely need descriptions:
 
-* Activity
-* ActivityFlags
-* APIMessage
-* Base
-* BaseClient
-* BitField
-* BroadcastDispatcher
-* ClientApplication
-* Client
-* ClientOptions
-* ClientUser
-* Channel (changed send/fetch to TextChannel)
-* Collector
-* CollectorOptions
-* DMChannel
-* Emoji
-* EvaluatedPermissions
-* Game
-* GroupDMChannel
-* Guild
-* GuildChannel
-* GuildMember
-* HTTPError
-* Integration
-* Invite
-* Message
-* MessageReaction
-* OAuth2Application
-* PartialGuild
-* PartialGuildChannel
-* PermissionOverwrite
-* Permissions
-* Presence
-* ReactionCollector
-* ReactionEmoji
-* RichEmbed
-* RichPresenceAssets
-* Role
-
-
+* Activity [(additions)](/additional-info/changes-in-v12?id=activity)
+* ActivityFlags [(additions)](/additional-info/changes-in-v12?id=activityflags)
+* APIMessage [(additions)](/additional-info/changes-in-v12?id=apimessage)
+* Base [(additions)](/additional-info/changes-in-v12?id=base)
+* BaseClient [(additions)](/additional-info/changes-in-v12?id=baseclient)
+* BitField [(additions)](/additional-info/changes-in-v12?id=bitfield)
+* BroadcastDispatcher [(additions)](/additional-info/changes-in-v12?id=broadcastdispatcher)
+* Channel (changed send/fetch to TextChannel) [(additions)](/additional-info/changes-in-v12?id=channel)
+* ClientApplication [(additions)](/additional-info/changes-in-v12?id=clientapplication)
+* Client [(changes)](/additional-info/changes-in-v12?id=client) [(additions)](/additional-info/changes-in-v12?id=client-1)
+* ClientOptions [(changes)](/additional-info/changes-in-v12?id=clientoptions) [(additions)](/additional-info/changes-in-v12?id=clientoptions-1)
+* ClientUser [(changes)](/additional-info/changes-in-v12?id=clientuser) [(additions)](/additional-info/changes-in-v12?id=clientuser-1)
+* Collection [(changes)](/additional-info/changes-in-v12?id=collection)
+* Collector [(changes)](/additional-info/changes-in-v12?id=collector) [(additions)](/additional-info/changes-in-v12?id=collector-1)
+* CollectorOptions [(additions)](/additional-info/changes-in-v12?id=collectoroptions)
+* DMChannel [(channges)](/additional-info/changes-in-v12?id=dmchannel) [(additions)](/additional-info/changes-in-v12?id=dmchannel-1)
+* Emoji [(changes)](/additional-info/changes-in-v12?id=emoji)
+* EvaluatedPermissions [(changes)](/additional-info/changes-in-v12?id=evaluatedpermissions)
+* Game [(changes)](/additional-info/changes-in-v12?id=game)
+* GroupDMChannel [(changes)](/additional-info/changes-in-v12?id=groupdmchannel)
+* Guild [(changes)](/additional-info/changes-in-v12?id=guild) [(additions)](/additional-info/changes-in-v12?id=guild-1)
+* GuildChannel [(changes)](/additional-info/changes-in-v12?id=guildchannel) [(additions)](/additional-info/changes-in-v12?id=guildchannel-1)
+* GuildMember [(changes)](/additional-info/changes-in-v12?id=guildmember)
+* HTTPError [(additions)](/additional-info/changes-in-v12?id=httperror)
+* Integration [(additions)](/additional-info/changes-in-v12?id=integrations)
+* Invite [(changes)](/additional-info/changes-in-v12?id=invite)
+* Message [(changes)](/additional-info/changes-in-v12?id=message) [(additions)](/additional-info/changes-in-v12?id=message-1)
+* MessageAttachment [(changes)](/additional-info/changes-in-v12?id=messageattachment) [(additions)](/additional-info/changes-in-v12?id=messageattachment-1)
+* MessageCollectorOptions [(changes)](/additional-info/changes-in-v12?id=messagecollectoroptions)
+* MessageEmbed [(changes)](/additional-info/changes-in-v12?id=messageembed) [(additions)](/additional-info/changes-in-v12?id=messageembed-1)
+* MessageMentions [(changes)](/additional-info/changes-in-v12?id=messagementions)
+* MessageReaction [(changes)](/additional-info/changes-in-v12?id=messagereaction)
+* OAuth2Application [(changes)](/additional-info/changes-in-v12?id=oauth2application)
+* PartialGuild [(changes)](/additional-info/changes-in-v12?id=partialguildchannel)
+* PartialGuildChannel [(changes)](/additional-info/changes-in-v12?id=partialguildchannel)
+* PermissionOverwrites [(changes)](/additional-info/changes-in-v12?id=permissionoverwrites) [(additions)]((/additional-info/changes-in-v12?id=permissionoverwrites-1))
+* Permissions [(changes)](/additional-info/changes-in-v12?id=permissions) [(additions)](/additional-info/changes-in-v12?id=permissions-1)
+* Presence [(changes)](/additional-info/changes-in-v12?id=presence) [(additions)](/additional-info/changes-in-v12?id=presence-1)
+* ReactionCollector [(additions)](/additional-info/changes-in-v12?id=reactioncollector)
+* ReactionEmoji [(changes)](/additional-info/changes-in-v12?id=)
+* RichEmbed [(changes)](/additional-info/changes-in-v12?id=richembed)
+* RichPresenceAssets [(changes)](/additional-info/changes-in-v12?id=richpresenceassets)
+* Role [(changes)](/additional-info/changes-in-v12?id=role)
+* Shard [(changes)](/additional-info/changes-in-v12?id=shard)
+* ShardClientUtil [(changes)](/additional-info/changes-in-v12?id=shardclientutil)
+* ShardingManager [(changes)](/additional-info/changes-in-v12?id=shardingmanager)
+* StreamDispatcher [(changes)](/additional-info/changes-in-v12?id=streamdispatcher)
+* TextChannel [(changes)](/additional-info/changes-in-v12?id=textchannel) [(additions)](/additional-info/changes-in-v12?id=textchannel-1)
+* User [(changes)](/additional-info/changes-in-v12?id=user) [(additions)](/additional-info/changes-in-v12?id=user-1)
+* Util [(changes)](/additional-info/changes-in-v12?id=util) [(additions)](/additional-info/changes-in-v12?id=util-1)
+* VoiceBroadcast [(changes)](/additional-info/changes-in-v12?id=voicebroadcast) [(additions)](/additional-info/changes-in-v12?id=voicebroadcast-1)
+* VoiceChannel [(additions)](/additional-info/changes-in-v12?id=voicechannel)
+* VoiceConnection [(changes)](/additional-info/changes-in-v12?id=voiceconnection)
+* VoiceReceiver [(changes)](/additional-info/changes-in-v12?id=voicereceiver) [(additions)](/additional-info/changes-in-v12?id=voicereceiver-1)
+* VoiceRegion [(changes)](/additional-info/changes-in-v12?id=voiceregion)
+* VoiceState [(additions)](/additional-info/changes-in-v12?id=voicestate)
+* VolumeInterface [(changes)](/additional-info/changes-in-v12?id=volumeinterface) [(additions)](/additional-info/changes-in-v12?id=volumeinterface-1)
+* Webhook [(changes)](/additional-info/changes-in-v12?id=webhook) [(additions)](/additional-info/changes-in-v12?id=webhook-1)
+* WebhookClient [(changes)](/additional-info/changes-in-v12?id=webhookclient)
+* WebSocketManager [(additions)](/additional-info/changes-in-v12?id=websocketmanager)
+* WebSocketShard [(additions)](/additional-info/changes-in-v12?id=websocketshard)
 
 Stuff Mark didn't do:
 
@@ -319,6 +340,10 @@ The `client.disconnect` event has been removed in favor of the `client.shardDisc
 #### Client#emojis
 
 `client.emojis` has been changed from a Collection to a DataStore.
+
+#### Client#guildMemberSpeaking
+
+The `speaking` parameter has been changed from a `boolean` value to a read-only `Speaking` class.
 
 #### Client#guilds
 
@@ -928,28 +953,17 @@ The second parameter in `channel.createInvite()` has been removed, leaving it wi
 + channel.createInvite({ temporary: true, reason: 'Just testing' });
 ```
 
-#### GuildChannel#messageNotifications
-
-`guildChannel.messageNotifications` has been removed entirely, along with all other user account-only properties and methods.
-
-#### GuildChannel#muted
-
-`guildChannel.muted` has been removed entirely, along with all other user account-only properties and methods.
-
-#### GuildChannel#\*\*\*Permissions
-
-=======
 #### GuildChannel#members
 
 `guildChannel.members` has been removed from `guildChannel.members` and added to `textChannel.members` and `voiceChannel.members`.
 
 #### GuildChannel#messageNotifications
 
-`guildChannel.messageNotifications` has been removed entirely.
+`guildChannel.messageNotifications` has been removed entirely, along with all other user account-only properties.
 
 #### GuildChannel#muted
 
-`guildChannel.muted` has been removed entirely.
+`guildChannel.muted` has been removed entirely, along with all other user account-only properties.
 
 #### GuildChannel#\*\*\*Permissions
 
@@ -1079,6 +1093,21 @@ The `guildMember.lastMessage` property is now read-only.
 #### GuildMember#send\*\*\*
 
 Just like the `textChannel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [textChannel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
+
+#### GuildMember#set\*\*\*
+
+Along with the rest of the voice-related methods and properties, the methods for moving, muting and deafening a member have been moved to the `VoiceState` class.
+
+```diff
+- guildMember.setDeaf(true);
++ guildMember.voice.setDeaf(true);
+
+- guildMember.setMute(true);
++ guildMember.voice.setMute(true);
+
+- guildMember.setVoiceChannel('123456789012345678');
++ guildMember.voice.setChannel('123456789012345678');
+```
 
 #### GuildMember#speaking
 
@@ -1219,6 +1248,19 @@ The `max` and `maxMatches` properties of the `MessageCollector` class have been 
 
 `messageEmbed.message` has been removed entirely so a new embed can be constructed without needing the full client.
 
+### MessageMentions
+
+#### MessageMentions#has
+
+`mentions.has()` has been added, replacing `message.isMentioned()` and `message.isMemberMentioned()`.  It has two paramets: the first is `data` representing a `User`, `GuildMember`, `Role`, or `GuildChannel` and an optional `options` object.
+
+```diff
+- message.isMentioned('123456789012345678');
+- message.isMemberMentioned('123456789012345678');
++ message.mentions.has('123456789012345678');
++ message.mentions.has('123456789012345678', { ignoreDirect: true, ignoreRoles: true, ignoreEveryone: true });
+```
+
 ### MessageReaction
 
 #### MessageReaction#fetchUsers
@@ -1342,14 +1384,6 @@ The following permission flags have been renamed:
 + presence.activity;
 ```
 
-### Receiver
-`receiver.createOpusStream(user)` and `receiver.createPCMStream(user)` have been removed in favor of `receiver.createStream()`.
-
-```diff
-- receiver.createOpusStream(message.author);
-+ receiver.createStream(message.author, {mode: 'opus', end: 'silence'});
-```
-
 ### RichEmbed
 
 The `RichEmbed` class has been removed in favor of the `MessageEmbed` class.
@@ -1426,16 +1460,134 @@ The optional, second parameter of the `role.setPosition()` method has been chang
 + role.setPosition(3, { relative: true, reason: 'Needed to be higher.' });
 ```
 
+### Shard
+
+The `death` and `spawn` events for a shard can also include a `Worker` in addition to the `ChildProcess` that was exited or spawned.
+
+#### Shard#args
+
+`shard.args` is now a property of the shard and has been removed as a parameter from the constructor.
+
+#### Shard#respawn
+
+`shard.respawn` now takes a second, optional parameter `spawnTimeout`, how long to wait in milliseconds until the shard's `Client` becomes ready.
+
+#### Shard#spawn
+
+The parameters in v11 have been removed and replaced with a single, optional parameter, `spawnTimeout`.
+
+### ShardClientUtil
+
+In order to make use of workers introduced in Node v10.5.0, a new `mode` parameter is available in the constructor.
+
+#### ShardClientUtil#id
+
+`shardClientUtil.id` has been removed and replaced with `shardClientUtil.ids`, which is an array of shard IDs of the current client.
+
+#### ShardClientUtil#singleton
+
+`shardCLientUtil` now has a second parameter `mode` to specify whether it's a `process` or `worker`.
+
+### ShardingManager
+
+#### ShardingManger#_spawn
+
+The private method `shardingManager._spawn()` has been removed entirely.
+
+#### ShardingManager#createShard
+
+The `id` parameter is now optional and defaults to `this.shards.size`.
+
+#### ShardingManager#launch
+
+The `shardingManager.launch` event has been removed entirely and replaced with the `shardingManager.shardCreate` event.
+
+#### ShardingManager#message
+
+The `shardingManager.message` event has been removed from this class and is now on the `Shard` class.
+
+#### ShardingManager#respawnAll
+
+The `waitForReady` parameter has been renamed to `spawnTimeout`, and the `currentShardIndex` parameter has been removed entirely.
+
+#### ShardingManager#spawn
+
+A third, optional parameter `spawnTimeout` has been added, specifying how long to wait in miliseconds to wait until the `Client` is ready; the default is `30000`.
+
+### StreamDispatcher
+
+`StreamDispatcher` now extends `WritableStream` from Node, you can see the docs [here](https://nodejs.org/api/stream.html#stream_class_stream_writable).
+
+#### StreamDispatcher#destroyed
+
+`streamDispatcher.destroyed` has been removed entirely.
+
+#### StreamDispatcher#end
+
+The `end` event and method are now extended from the `WritableStream` class in Node, instead of being custom functions.
+
+#### StreamDispatcher#passes
+
+`streamDispatcher.passes` has been removed entirely.
+
+#### StreamDispatcher#pause
+
+The `streamDispatcher.pause` method now takes an optional parameter `silence`, to specify whether to play silence while paused to prevent audio glitches.  Its value is a `boolean` and defaults to `false`.
+
+```diff
+- dispatcher.pause();
++ dispatcher.pause(true);
+```
+
+#### StreamDispatcher#stream
+
+The `streamDispatcher.stream` property has been removed entirely and has been replaced with the `streamDispatcher.broadcast` property, which is the broadcast controlling the stream, if any.
+
+#### StreamDispatcher#time
+
+The `streamDispatcher.time` property has been renamed to `streamDispatcher.streamTime`.
+
 ### TextChannel
+
+#### TextChannel#acknowledge
+
+Has been removed entirely, along with all other user account-only methods and properties.
+
+#### TextChannel#\*\*\*position
+
+See the [GuildChannel](/additional-info/changes-in-v12?id=guildchannel) section for changes to positions.
+
+#### TextChannel#clone
+
+All parameters have been removed and reconfigured into a single object.
+
+```diff
+- channel.clone(undefined, true, false, 'Needed a clone');
++ channel.clone({ name: undefined, reason: 'Needed a clone' });
+```
 
 #### TextChannel#createCollector
 
-`channel.createCollector()` has been removed in favor of `channel.createMessageCollector()`. In addition, the `max` and `maxMatches` properties were renamed and repurposed. You can read more about that [here](/additional-info/changes-in-v12?id=messagecollectormaxmatches).
+`textChannel.createCollector()` has been removed entirely in favor of `textChannel.createMessageCollector()`.
+
+See [this section](/additional-info/changes-in-v12?id=messagecollector) for changes to the `MessageCollector` class.
 
 ```diff
 - channel.createCollector(filterFunction, { maxMatches: 2, max: 10, time: 15000 });
 + channel.createMessageCollector(filterFunction, { max: 2, maxProcessed: 10, time: 15000 });
 ```
+
+#### TextChannel#memberPermissions
+
+This method is now private.
+
+#### TextChannel#rolePermissions
+
+This method is now private.
+
+#### TextChannel#search
+
+This method has been removed, along with all other user account-only methods.
 
 #### TextChannel#send\*\*\*
 
@@ -1460,15 +1612,15 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 ```
 
 ```diff
-- channel.sendFile('./file.png');
+- channel.sendFile('./file.pn	g');
 - channel.sendFiles(['./file-one.png', './file-two.png']);
 + channel.send({
-  files: [{
-    attachment: 'entire/path/to/file.jpg',
-    name: 'file.jpg',
-  }]
+	files: [{
+		attachment: 'entire/path/to/file.jpg',
+		name: 'file.jpg',
+	}]
 + channel.send({
-  files: ['https://cdn.discordapp.com/icons/222078108977594368/6e1019b3179d71046e463a75915e7244.png?size=2048']
+	files: ['https://cdn.discordapp.com/icons/222078108977594368/6e1019b3179d71046e463a75915e7244.png?size=2048']
 });
 ```
 
@@ -1499,6 +1651,10 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 
 ### User
 
+#### User#addFriend
+
+`user.addFriend()` has been removed entirely, along with all other user account-only methods.
+
 #### User#avatarURL
 
 `user.avatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return.
@@ -1509,6 +1665,10 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 + user.avatarURL({ format: 'png', size: 1024 });
 ```
 
+#### User#block
+
+`user.block()` has been removed entirely, along with all other user account-only methods.
+
 #### User#displayAvatarURL
 
 `user.displayAvatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return.
@@ -1518,17 +1678,170 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 + user.displayAvatarURL();
 + user.displayAvatarURL({ format: 'png', size: 1024 });
 ```
-### voiceConnection
+
+#### User#fetchProfile
+
+`user.fetchProfile()` has been removed entirely, along with all other user account-only methods.
+
+#### User#note
+
+`user.note` has been removed entirely, along with all other user account-only methods.
+
+#### User#removeFriend
+
+`user.removeFriend()` has been removed entirely, along with all other user account-only methods.
+
+#### User#setNote
+
+`user.setNote()` has been removed entirely, along with all other user account-only methods.
+
+#### User#send\*\*\*
+
+Just like the `textChannel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [textChannel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
+
+#### User#unblock
+
+`user.unblock()` has been removed entirely, along with all other user account-only methods.
+
+### UserConnection
+
+The `UserConnection` class has been removed entirely, along with all other user account-only properties.
+
+### UserProfile
+
+The `UserProfile` class has been removed entirely, along with all other user account-only properties.
+
+### VoiceBroadcast
+
+`VoiceBroadcast` now implements `PlayInterface` instead of `VolumeInterface`.
+
+#### VoiceBroadcast#currentTranscoder
+
+This property has been removed entirely.
+
+#### VoiceBroadcast#destroy
+
+This method has been removed entirely.
+
+#### VoiceBroadcast#dispatchers
+
+This property has been renamed to `subscribers` and is no longer read-only.
+
+```diff
+- broadcast.dispatchers;
++ broadcast.subscribers;
+```
+
+#### VoiceBroadcast#end
+
+This event has been removed from the `VoiceBroadcast` class and is implemented from the `WritableStream` class from Node, which `BroadcastDispatcher` implements.
+
+#### VoiceBroadcast#error
+
+This event has been removed from the `VoiceBroadcast` class to the `BroadcastDispatcher` class.
+
+#### VoiceBroadcast#pause
+
+This method has been removed from the `VoiceBroadcast` class to the `BroadcastDispatcher` class.
+
+#### VoiceBroadcast#play\*\*\*
+
+All `.play\*\*\*()` methods have been removed and transformed into a single `.play()` method.
+
+#### VoiceBroadcast#prism
+
+This property has been removed entirely.
+
+#### VoiceBroadcast#resume
+
+This method has been removed from the `VoiceBroadcast` class to the `BroadcastDispatcher` class.
+
+#### VoiceBroadcast#warn
+
+This event has been removed entirely.
+
+### VoiceConnection
+
+The `VoiceConnection` class also implements the new `PlayInterface` class in addition to extending `EventEmitter` from Node.
 
 #### VoiceConnection#createReceiver
 `voiceconnection.createReceiver()` has been removed, the receiver can now simply be accessed from `voiceConnection.receiver`
 
+#### VoiceConnection#play\*\*\*\
+
+All `connection.play\*\*\*()` methods have been removed in favor of one, flexible `.play()` method.
+
+#### VoiceConnection#prism
+
+This property has been removed entirely.
+
+#### VoiceConnection#receivers
+
+This property has been removed entirely.
+
+#### VoiceConnection#sendVoiceStateUpdate
+
+This method has been removed entirely.
+
+#### VoiceConnection#set\*\*\*
+
+Both `connection.setSessionID()` and `connection.setTokenAndEndpoint()` have been removed entirely.
+
+### VoiceReceiver
+
+#### VoiceReceiver#create\*\*\*Stream
+
+Both the `receiver.createOpusStream()` and `receiver.createPCMStream()` methods have been condensed into one method, `receiver.createStream()`, which also optionally accepts a `ReceiveStreamOptions` object for the stream.
+
+```diff
+- receiver.createOpusStream('123456789012345678');
+- receiver.createPCMStream('123456789012345678');
++ receiver.createStream('123456789012345678', { mode: 'opus', end: 'silence' });
+```
+
+#### VoiceReceiver#destroy
+
+This method has been removed entirely, refer to `StreamDispatcher#destroy` for documentation.
+
+#### VoiceReceiver#destroyed
+
+This property has been removed entirely.
+
+#### VoiceReceiver#opus
+
+This event has been removed entirely.
+
+#### VoiceReceiver#pcm
+
+This event has been removed entirely.
+
+#### VoiceReceiver#recreate
+
+This method has been removed entirely.
+
+#### VoiceReceiver#voiceConnection
+
+This property has been removed entirely.
+
+#### VoiceReceiver#warn
+
+This event has been removed entirely, use the `receiver.debug` event instead.
+
+### VoiceRegion
+
+#### VoiceRegion#sampleHostname
+
+This property has been removed entirely.
 
 ### Webhook
 
 #### Webhook#send\*\*\*
 
 Just like the `TextChannel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [TextChannel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
+
+### WebhookClient
+
+The `WebhookClient` class now extends `BaseClient` and implements `Webhook` instead of just extending `Webhook`, so a lot of methods and properties are documented there, as opposed to on the client.
 
 ---
 
@@ -1539,6 +1852,10 @@ Just like the `TextChannel#send***` methods, all the `.send***()` methods have b
 ### Activity
 
 ### ActivityFlags
+
+### ActivityOptions
+
+These are options for setting an `Activity`.
 
 ### APIMessage
 
@@ -1753,26 +2070,6 @@ channel.updateOverwrite(message.author, {
 
 `MessageEmbed.length` has been added.  It returns a `number` equal to all of the fields, title, description, and footer.
 
-### MessageMentions
-
-#### MessageMentions#has
-
-`mentions.has()` has been added, replacing `message.isMentioned()` and `message.isMemberMentioned()`.  It has two paramets: the first is `data` representing a `User`, `GuildMember`, `Role`, or `GuildChannel` and an optional `options` object.
-
-```diff
-- message.isMentioned('123456789012345678');
-- message.isMemberMentioned('123456789012345678');
-+ message.mentions.has('123456789012345678');
-+ message.mentions.has('123456789012345678', { ignoreDirect: true, ignoreRoles: true, ignoreEveryone: true });
-```
-
-###
-
-### Permission
-
-#### Permissions#flags
-`PRIORITY_SPEAKER` has been added.
-
 ### PermissionOverwrites
 
 #### PermissionOverwrites#allowed
@@ -1782,6 +2079,15 @@ channel.updateOverwrite(message.author, {
 #### PermissionOverwrites#denied
 
 `permissionOverwrites.denied` has been added.
+
+### Permissions
+
+#### Permissions#flags
+`PRIORITY_SPEAKER` has been added.
+
+### PlayInterface
+
+This is a new class to play audio over `VoiceConnection`s and `VoiceBroadcast`s.
 
 ### Presence
 
@@ -1813,18 +2119,143 @@ The new `presence.clientStatus` property returns an object with three keys: `web
 
 The new `remove` event emits when a collected reaction is un-reacted, if the `dispose` option is set to `true`
 
-### TextChannel#lastPinTimestamp
+### Shard
+
+#### Shard#_evals
+
+The private property `_evals` has been added to map ongoing promises for calls to `shard.eval()`.
+
+#### Shard#_fetches
+
+The private property `_fetches` has been added to map ongoing promises for calls to `shard.fetchClientValues()`.
+
+#### Shard#worker
+
+### ShardClientUtil
+
+#### ShardClientUtil#client
+
+#### ShardClientUtil#parentPort
+
+The message port for the master process, if the mode of the `ShardClientUtil` is `worker`.
+
+#### ShardClientUtil#respawnAll
+
+`shardClientUtil.respawnAll()` will request a respawn of all shards.  It has three parameters, all of which are optional: `shardDelay`, how to long to wait in milliseconds between each shard; `respawnDelay`, how long to wait between killing the shard's process or worker and restarting it; and `spawnTimeout`, how long to wait in milliseconds for a shard to become ready before moving to the next shard.
+
+### Speaking
+
+The `Speaking` class has been added as a data structure to interact with the bitfields present when a `GuildMember` is speaking, or in the `VoiceConnection#speaking` event.
+
+### StreamDispatcher
+
+#### StreamDispatcher#bitrateEditable
+
+#### StreamDispatcher#paused\*\*\*
+
+Two new properties have been added, `pausedSince` and `pausedTime`, to represent the timestamp when the stream was paused, and how long it's been paused for in milliseconds, respectively.
+
+#### StreamDispatcher#set\*\*\*
+
+Several new methods have been added to adjust various aspects of the stream.  Methods marked with a \* denote that they're usable only with a compatible Opus stream.
+
+- `setFEC()`\* - whether to forward error correction or not if using a compatible Opus stream
+- `setPLP()`\* - sets the expected packet loss percentage if using a compatible Opus stream
+- `setVolume()` - sets the volume relative to the input stream
+- `setVolumeDecibels()` - sets the volume in decibels
+- `setVolumeLogarithmic()` - sets the volume so that a perceived value of `0.5` is half the perceived volume, etc.
+
+#### StreamDispatcher#volumeChange
+
+A new event listener, it is emitted when a volume change in the stream is detected.
+
+```js
+dispatcher.on('volumeChange', (oldVolume, newVolume) => {
+	console.log(`Volume changed from ${oldVolume} to ${newVolume}.`);
+});
+```
+
+### TextChannel
+
+#### TextChannel#lastPinTimestamp
+
 `TextChannel.lastPinTimestamp` was added.
 
-### TextChannel#lastPinAt
+#### TextChannel#lastPinAt
+
 `TextChannel.lastPinAt` was added.
 
 ### User
 
-#### User#local
-`user.local` has been added
+#### User#lastMessageChannelID
 
-### Util#Constants
+#### User#locale
+
+`user.locale` has been added.
+
+### Util
+
+#### Util#cleanContent
+
+This new method converts all mentions to their equivalent text.
+
+#### Util#discordSort
+
+This new method sorts a `Collection` by Discord's osition and ID.
+
+#### Util#flatten
+
+This new method flattens any object.  Any `Collection`s in the object will be converted to an array of keys.
+
+#### Util#resolveColor
+
+This new method resolves a `ColorResolvable` into a color number.
+
+#### Util#resolveString
+
+THis new method resolves a `StringResolvable` into a string.
+
+#### Util#Constants
 
 #### Constant.Colors
-`WHITE` was added as a value.
+`WHITE` and `YELLOW` have been added as values.
+
+### VoiceBroadcast
+
+#### VoiceBroadcast#dispatcher
+
+This new property represents the master dispatcher - if any - that controls everything played by subscribed dispatchers.
+
+### VoiceChannel
+
+#### VoiceChannel#editable
+
+This new property returns a `boolean` value whether the client can edit the `VoiceChannel` or not, eg. any change to the channel besides moving it via `channel.setPosition()`.  It differs from `channel.manageable` in that it also checks if the client has the `CONNECT` permissions for that particular channel.
+
+### VoiceReceiver
+
+#### VoiceReceiver#debug
+
+This new event is emitted whenever there is a warning and will emit either with an `Error` object or string, depending on what causes it to be emitted.
+
+### VoiceState
+
+### VolumeInterface
+
+#### VolumeInterface#volumeEditable
+
+This new property returns a `boolean` value whether the client can edit the volume of the stream.
+
+### Webhook
+
+#### Webhook#url
+
+This new property returns a `string` representing the URL of the webhook, and is read-only.
+
+### WebSocketManager
+
+This new class represents the manager of the websocket connection for the client.
+
+### WebSocketShard
+
+This new class represents a `Shard`'s websocket connection.
