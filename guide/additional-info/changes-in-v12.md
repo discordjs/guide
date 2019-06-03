@@ -216,6 +216,8 @@ TODO LATER CUZ I DON'T WANNA TOUCH THAT SHIT RN:
 
 Stuff Mark has gone through and updated - anything under Additions at the end will still likely need descriptions:
 
+Any voice-related classes may change at any time, as they're still actively being worked on, and will be finalized at a later date.
+
 * Activity [(additions)](/additional-info/changes-in-v12?id=activity)
 * ActivityFlags [(additions)](/additional-info/changes-in-v12?id=activityflags)
 * APIMessage [(additions)](/additional-info/changes-in-v12?id=apimessage)
