@@ -1614,7 +1614,7 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 ```
 
 ```diff
-- channel.sendFile('./file.pn	g');
+- channel.sendFile('./file.png');
 - channel.sendFiles(['./file-one.png', './file-two.png']);
 + channel.send({
 	files: [{
