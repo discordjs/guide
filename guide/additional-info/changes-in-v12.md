@@ -1,3 +1,5 @@
+[[toc]]
+
 # A Brief Primer Updating from v11 to v12
 
 After a long time in development, Discord.js v12 is nearing a stable release, meaning it's time to update from v11 to get new features for your bots!  However, with those new features comes a lot of changes to the library that will break code written for v11.  This guide will serve as a handy reference for updating your code, covering the most commonly-used methods that have been changed, new topics such as partials and internal sharding, and will also include a comprehensive list of the method and property changes at the end.
@@ -266,97 +268,70 @@ The section headers for breaking changes will be named after the v11 classes/met
 
 ## Breaking Changes and Deletions
 
-<p class="danger">This next bit is for me (Sanc) to keep track of the classes I've gone through and checked for breaking changes. Remove before making the PR.</p>
-
-<p class = "danger">Whatever happened here: https://github.com/discordjs/discord.js/pull/2765/files needs to be added as well as internal sharding and partials</p>
-
-* ClientUser
-* DiscordAPIError
-* DMChannel
-* GroupDMChannel
-* Guild
-* GuildAuditLogs
-* GuildAuditLogsEntry
-* GuildChannel
-* GuildMember
-* Invite
-* Message
-* MessageAttachment
-* MessageMentions
-* MessageReaction
-* OAuth2Application
-* PermissionOverwrites
-
-TODO LATER CUZ I DON'T WANNA TOUCH THAT SHIT RN:
-
-* MessageCollector
-* MessageEmbed***
-
-Stuff Mark has gone through and updated - anything under Additions at the end will still likely need descriptions:
+Stuff that has gone through and updated - anything under Additions at the end will still likely need descriptions:
 
 Any voice-related classes may change at any time, as they're still actively being worked on, and will be finalized at a later date.
 
-* Activity [(additions)](/additional-info/changes-in-v12?id=activity)
-* ActivityFlags [(additions)](/additional-info/changes-in-v12?id=activityflags)
-* APIMessage [(additions)](/additional-info/changes-in-v12?id=apimessage)
-* Base [(additions)](/additional-info/changes-in-v12?id=base)
-* BaseClient [(additions)](/additional-info/changes-in-v12?id=baseclient)
-* BitField [(additions)](/additional-info/changes-in-v12?id=bitfield)
-* BroadcastDispatcher [(additions)](/additional-info/changes-in-v12?id=broadcastdispatcher)
-* Channel (changed send/fetch to TextChannel) [(additions)](/additional-info/changes-in-v12?id=channel)
-* ClientApplication [(additions)](/additional-info/changes-in-v12?id=clientapplication)
-* Client [(changes)](/additional-info/changes-in-v12?id=client) [(additions)](/additional-info/changes-in-v12?id=client-1)
-* ClientOptions [(changes)](/additional-info/changes-in-v12?id=clientoptions) [(additions)](/additional-info/changes-in-v12?id=clientoptions-1)
-* ClientUser [(changes)](/additional-info/changes-in-v12?id=clientuser) [(additions)](/additional-info/changes-in-v12?id=clientuser-1)
-* Collection [(changes)](/additional-info/changes-in-v12?id=collection)
-* Collector [(changes)](/additional-info/changes-in-v12?id=collector) [(additions)](/additional-info/changes-in-v12?id=collector-1)
-* CollectorOptions [(additions)](/additional-info/changes-in-v12?id=collectoroptions)
-* DMChannel [(channges)](/additional-info/changes-in-v12?id=dmchannel) [(additions)](/additional-info/changes-in-v12?id=dmchannel-1)
-* Emoji [(changes)](/additional-info/changes-in-v12?id=emoji)
-* EvaluatedPermissions [(changes)](/additional-info/changes-in-v12?id=evaluatedpermissions)
-* Game [(changes)](/additional-info/changes-in-v12?id=game)
-* GroupDMChannel [(changes)](/additional-info/changes-in-v12?id=groupdmchannel)
-* Guild [(changes)](/additional-info/changes-in-v12?id=guild) [(additions)](/additional-info/changes-in-v12?id=guild-1)
-* GuildChannel [(changes)](/additional-info/changes-in-v12?id=guildchannel) [(additions)](/additional-info/changes-in-v12?id=guildchannel-1)
-* GuildMember [(changes)](/additional-info/changes-in-v12?id=guildmember)
-* HTTPError [(additions)](/additional-info/changes-in-v12?id=httperror)
-* Integration [(additions)](/additional-info/changes-in-v12?id=integrations)
-* Invite [(changes)](/additional-info/changes-in-v12?id=invite)
-* Message [(changes)](/additional-info/changes-in-v12?id=message) [(additions)](/additional-info/changes-in-v12?id=message-1)
-* MessageAttachment [(changes)](/additional-info/changes-in-v12?id=messageattachment) [(additions)](/additional-info/changes-in-v12?id=messageattachment-1)
-* MessageCollectorOptions [(changes)](/additional-info/changes-in-v12?id=messagecollectoroptions)
-* MessageEmbed [(changes)](/additional-info/changes-in-v12?id=messageembed) [(additions)](/additional-info/changes-in-v12?id=messageembed-1)
-* MessageMentions [(changes)](/additional-info/changes-in-v12?id=messagementions)
-* MessageReaction [(changes)](/additional-info/changes-in-v12?id=messagereaction)
-* OAuth2Application [(changes)](/additional-info/changes-in-v12?id=oauth2application)
-* PartialGuild [(changes)](/additional-info/changes-in-v12?id=partialguildchannel)
-* PartialGuildChannel [(changes)](/additional-info/changes-in-v12?id=partialguildchannel)
-* PermissionOverwrites [(changes)](/additional-info/changes-in-v12?id=permissionoverwrites) [(additions)]((/additional-info/changes-in-v12?id=permissionoverwrites-1))
-* Permissions [(changes)](/additional-info/changes-in-v12?id=permissions) [(additions)](/additional-info/changes-in-v12?id=permissions-1)
-* Presence [(changes)](/additional-info/changes-in-v12?id=presence) [(additions)](/additional-info/changes-in-v12?id=presence-1)
-* ReactionCollector [(additions)](/additional-info/changes-in-v12?id=reactioncollector)
-* ReactionEmoji [(changes)](/additional-info/changes-in-v12?id=)
-* RichEmbed [(changes)](/additional-info/changes-in-v12?id=richembed)
-* RichPresenceAssets [(changes)](/additional-info/changes-in-v12?id=richpresenceassets)
-* Role [(changes)](/additional-info/changes-in-v12?id=role)
-* Shard [(changes)](/additional-info/changes-in-v12?id=shard)
-* ShardClientUtil [(changes)](/additional-info/changes-in-v12?id=shardclientutil)
-* ShardingManager [(changes)](/additional-info/changes-in-v12?id=shardingmanager)
-* StreamDispatcher [(changes)](/additional-info/changes-in-v12?id=streamdispatcher)
-* TextChannel [(changes)](/additional-info/changes-in-v12?id=textchannel) [(additions)](/additional-info/changes-in-v12?id=textchannel-1)
-* User [(changes)](/additional-info/changes-in-v12?id=user) [(additions)](/additional-info/changes-in-v12?id=user-1)
-* Util [(changes)](/additional-info/changes-in-v12?id=util) [(additions)](/additional-info/changes-in-v12?id=util-1)
-* VoiceBroadcast [(changes)](/additional-info/changes-in-v12?id=voicebroadcast) [(additions)](/additional-info/changes-in-v12?id=voicebroadcast-1)
-* VoiceChannel [(additions)](/additional-info/changes-in-v12?id=voicechannel)
-* VoiceConnection [(changes)](/additional-info/changes-in-v12?id=voiceconnection)
-* VoiceReceiver [(changes)](/additional-info/changes-in-v12?id=voicereceiver) [(additions)](/additional-info/changes-in-v12?id=voicereceiver-1)
-* VoiceRegion [(changes)](/additional-info/changes-in-v12?id=voiceregion)
-* VoiceState [(additions)](/additional-info/changes-in-v12?id=voicestate)
-* VolumeInterface [(changes)](/additional-info/changes-in-v12?id=volumeinterface) [(additions)](/additional-info/changes-in-v12?id=volumeinterface-1)
-* Webhook [(changes)](/additional-info/changes-in-v12?id=webhook) [(additions)](/additional-info/changes-in-v12?id=webhook-1)
-* WebhookClient [(changes)](/additional-info/changes-in-v12?id=webhookclient)
-* WebSocketManager [(additions)](/additional-info/changes-in-v12?id=websocketmanager)
-* WebSocketShard [(additions)](/additional-info/changes-in-v12?id=websocketshard)
+* Activity [(additions)](/additional-info/changes-in-v12.md#activity)
+* ActivityFlags [(additions)](/additional-info/changes-in-v12.md#activityflags)
+* APIMessage [(additions)](/additional-info/changes-in-v12.md#apimessage)
+* Base [(additions)](/additional-info/changes-in-v12.md#base)
+* BaseClient [(additions)](/additional-info/changes-in-v12.md#baseclient)
+* BitField [(additions)](/additional-info/changes-in-v12.md#bitfield)
+* BroadcastDispatcher [(additions)](/additional-info/changes-in-v12.md#broadcastdispatcher)
+* Channel (changed send/fetch to TextChannel) [(additions)](/additional-info/changes-in-v12.md#channel)
+* ClientApplication [(additions)](/additional-info/changes-in-v12.md#clientapplication)
+* Client [(changes)](/additional-info/changes-in-v12.md#client) [(additions)](/additional-info/changes-in-v12.md#client-1)
+* ClientOptions [(changes)](/additional-info/changes-in-v12.md#clientoptions) [(additions)](/additional-info/changes-in-v12.md#clientoptions-1)
+* ClientUser [(changes)](/additional-info/changes-in-v12.md#clientuser) [(additions)](/additional-info/changes-in-v12.md#clientuser-1)
+* Collection [(changes)](/additional-info/changes-in-v12.md#collection)
+* Collector [(changes)](/additional-info/changes-in-v12.md#collector) [(additions)](/additional-info/changes-in-v12.md#collector-1)
+* CollectorOptions [(additions)](/additional-info/changes-in-v12.md#collectoroptions)
+* DMChannel [(channges)](/additional-info/changes-in-v12.md#dmchannel) [(additions)](/additional-info/changes-in-v12.md#dmchannel-1)
+* Emoji [(changes)](/additional-info/changes-in-v12.md#emoji)
+* EvaluatedPermissions [(changes)](/additional-info/changes-in-v12.md#evaluatedpermissions)
+* Game [(changes)](/additional-info/changes-in-v12.md#game)
+* GroupDMChannel [(changes)](/additional-info/changes-in-v12.md#groupdmchannel)
+* Guild [(changes)](/additional-info/changes-in-v12.md#guild) [(additions)](/additional-info/changes-in-v12.md#guild-1)
+* GuildChannel [(changes)](/additional-info/changes-in-v12.md#guildchannel) [(additions)](/additional-info/changes-in-v12.md#guildchannel-1)
+* GuildMember [(changes)](/additional-info/changes-in-v12.md#guildmember)
+* HTTPError [(additions)](/additional-info/changes-in-v12.md#httperror)
+* Integration [(additions)](/additional-info/changes-in-v12.md#integrations)
+* Invite [(changes)](/additional-info/changes-in-v12.md#invite)
+* Message [(changes)](/additional-info/changes-in-v12.md#message) [(additions)](/additional-info/changes-in-v12.md#message-1)
+* MessageAttachment [(changes)](/additional-info/changes-in-v12.md#messageattachment) [(additions)](/additional-info/changes-in-v12.md#messageattachment-1)
+* MessageCollectorOptions [(changes)](/additional-info/changes-in-v12.md#messagecollectoroptions)
+* MessageEmbed [(changes)](/additional-info/changes-in-v12.md#messageembed) [(additions)](/additional-info/changes-in-v12.md#messageembed-1)
+* MessageMentions [(changes)](/additional-info/changes-in-v12.md#messagementions)
+* MessageReaction [(changes)](/additional-info/changes-in-v12.md#messagereaction)
+* OAuth2Application [(changes)](/additional-info/changes-in-v12.md#oauth2application)
+* PartialGuild [(changes)](/additional-info/changes-in-v12.md#partialguildchannel)
+* PartialGuildChannel [(changes)](/additional-info/changes-in-v12.md#partialguildchannel)
+* Permissions [(changes)](/additional-info/changes-in-v12.md#permissions) [(additions)](/additional-info/changes-in-v12.md#permissions-1)
+* Presence [(changes)](/additional-info/changes-in-v12.md#presence) [(additions)](/additional-info/changes-in-v12.md#presence-1)
+* ReactionCollector [(additions)](/additional-info/changes-in-v12.md#reactioncollector)
+* ReactionEmoji [(changes)](/additional-info/changes-in-v12.md#)
+* RichEmbed [(changes)](/additional-info/changes-in-v12.md#richembed)
+* RichPresenceAssets [(changes)](/additional-info/changes-in-v12.md#richpresenceassets)
+* Role [(changes)](/additional-info/changes-in-v12.md#role)
+* Shard [(changes)](/additional-info/changes-in-v12.md#shard)
+* ShardClientUtil [(changes)](/additional-info/changes-in-v12.md#shardclientutil)
+* ShardingManager [(changes)](/additional-info/changes-in-v12.md#shardingmanager)
+* StreamDispatcher [(changes)](/additional-info/changes-in-v12.md#streamdispatcher)
+* TextChannel [(changes)](/additional-info/changes-in-v12.md#textchannel) [(additions)](/additional-info/changes-in-v12.md#textchannel-1)
+* User [(changes)](/additional-info/changes-in-v12.md#user) [(additions)](/additional-info/changes-in-v12.md#user-1)
+* Util [(changes)](/additional-info/changes-in-v12.md#util) [(additions)](/additional-info/changes-in-v12.md#util-1)
+* VoiceBroadcast [(changes)](/additional-info/changes-in-v12.md#voicebroadcast) [(additions)](/additional-info/changes-in-v12.md#voicebroadcast-1)
+* VoiceChannel [(additions)](/additional-info/changes-in-v12.md#voicechannel)
+* VoiceConnection [(changes)](/additional-info/changes-in-v12.md#voiceconnection)
+* VoiceReceiver [(changes)](/additional-info/changes-in-v12.md#voicereceiver) [(additions)](/additional-info/changes-in-v12.md#voicereceiver-1)
+* VoiceRegion [(changes)](/additional-info/changes-in-v12.md#voiceregion)
+* VoiceState [(additions)](/additional-info/changes-in-v12.md#voicestate)
+* VolumeInterface [(changes)](/additional-info/changes-in-v12.md#volumeinterface) [(additions)](/additional-info/changes-in-v12.md#volumeinterface-1)
+* Webhook [(changes)](/additional-info/changes-in-v12.md#webhook) [(additions)](/additional-info/changes-in-v12.md#webhook-1)
+* WebhookClient [(changes)](/additional-info/changes-in-v12.md#webhookclient)
+* WebSocketManager [(additions)](/additional-info/changes-in-v12.md#websocketmanager)
+* WebSocketShard [(additions)](/additional-info/changes-in-v12.md#websocketshard)
 
 Stuff Mark didn't do:
 
@@ -630,7 +605,7 @@ There have been several changes made to the `ClientOptions` object located in `c
 
 #### ClientUser#send\*\*\*
 
-Just like the `TextChannel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [TextChannel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
+Just like the `TextChannel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [TextChannel#send\*\*\*](/additional-info/changes-in-v12.md#channelsend) section for more information.
 
 #### ClientUser#setGame
 
@@ -750,7 +725,7 @@ The `amount` parameter of these methods now allows a negative number which will 
 
 #### DMChannel#fetch(Pinned)Message(s)
 
-`dmChannel.fetchMessage(s)` has been transformed in the shape of a DataStore.  See the [TextChannel#fetch(Pinned)Message(s)](/additional-info/changes-inv-v12?id=channel) section for more information.
+`dmChannel.fetchMessage(s)` has been transformed in the shape of a DataStore.  See the [TextChannel#fetch(Pinned)Message(s)](/additional-info/changes-inv-v12.md#channel) section for more information.
 
 #### DMChannel#search
 
@@ -758,7 +733,7 @@ The `amount` parameter of these methods now allows a negative number which will 
 
 #### DMChannel#send\*\*\*
 
-Just like the `TextChannel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [TextChannel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
+Just like the `TextChannel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [TextChannel#send\*\*\*](/additional-info/changes-in-v12.md#channelsend) section for more information.
 
 ### Emoji
 
@@ -1172,7 +1147,7 @@ The `guildMember.lastMessage` property is now read-only.
 
 #### GuildMember#send\*\*\*
 
-Just like the `textChannel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [textChannel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
+Just like the `textChannel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [textChannel#send\*\*\*](/additional-info/changes-in-v12.md#channelsend) section for more information.
 
 #### GuildMember#set\*\*\*
 
@@ -1403,16 +1378,6 @@ The `OAuth2Application` class has been renamed to `ClientApplication`.
 
 The `PartialGuild` and `PartialGuildChannel` classes for use with invites have been removed entirely.
 
-### PermissionOverwrites
-
-#### PermissionOverwrites#allow
-
-`permissionOverwrites.allow` has been removed, use `permissionOverwrites.allowed` instead for a Permissions object of allowed permissions for the user or role.
-
-#### PermissionOverwrites#deny
-
-`permissionOverwrites.deny` has been removed, use `permissionOverwrites.denied` instead for a Permissions object of denied permissions for the user or role.
-
 ### Permissions
 
 #### Permissions#_member
@@ -1635,7 +1600,7 @@ Has been removed entirely, along with all other user account-only methods and pr
 
 #### TextChannel#\*\*\*position
 
-See the [GuildChannel](/additional-info/changes-in-v12?id=guildchannel) section for changes to positions.
+See the [GuildChannel](/additional-info/changes-in-v12.md#guildchannel) section for changes to positions.
 
 #### TextChannel#clone
 
@@ -1650,7 +1615,7 @@ All parameters have been removed and reconfigured into a single object.
 
 `textChannel.createCollector()` has been removed entirely in favor of `textChannel.createMessageCollector()`.
 
-See [this section](/additional-info/changes-in-v12?id=messagecollector) for changes to the `MessageCollector` class.
+See [this section](/additional-info/changes-in-v12.md#messagecollector) for changes to the `MessageCollector` class.
 
 ```diff
 - channel.createCollector(filterFunction, { maxMatches: 2, max: 10, time: 15000 });
@@ -1777,7 +1742,7 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 
 #### User#send\*\*\*
 
-Just like the `textChannel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [textChannel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
+Just like the `textChannel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [textChannel#send\*\*\*](/additional-info/changes-in-v12.md#channelsend) section for more information.
 
 #### User#unblock
 
@@ -1917,7 +1882,7 @@ This property has been removed entirely.
 
 #### Webhook#send\*\*\*
 
-Just like the `TextChannel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [TextChannel#send\*\*\*](/additional-info/changes-in-v12?id=channelsend) section for more information.
+Just like the `TextChannel#send***` methods, all the `.send***()` methods have been removed in favor of one general `.send()` method. Read through the [TextChannel#send\*\*\*](/additional-info/changes-in-v12.md#channelsend) section for more information.
 
 ### WebhookClient
 
@@ -2150,16 +2115,6 @@ channel.updateOverwrite(message.author, {
 
 `MessageEmbed.length` has been added.  It returns a `number` equal to all of the fields, title, description, and footer.
 
-### PermissionOverwrites
-
-#### PermissionOverwrites#allowed
-
-`permissionOverwrites.allowed` has been added.
-
-#### PermissionOverwrites#denied
-
-`permissionOverwrites.denied` has been added.
-
 ### Permissions
 
 #### Permissions#flags
@@ -2281,7 +2236,7 @@ This new method converts all mentions to their equivalent text.
 
 #### Util#discordSort
 
-This new method sorts a `Collection` by Discord's osition and ID.
+This new method sorts a `Collection` by Discord's position and ID.
 
 #### Util#flatten
 
