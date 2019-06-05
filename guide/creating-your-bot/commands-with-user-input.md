@@ -202,16 +202,12 @@ Let's say you have some sort of `!avatar` command, where it'll display the avata
 ```js
 else if (command === 'avatar') {
 	if (!message.mentions.users.size) {
-		return message.channel.send(`Your avatar: <${message.author.displayAvatarURL}>`);
+		return message.channel.send(`Your avatar: <${message.author.displayAvatarURL()}>`);
 	}
 
 	// ...
 }
 ```
-
-::: warning
-Depending on your discord.js version, the `.displayAvatarURL` part may vary. On v12, it'll be `.displayAvatarURL()` (a method), and on v11, it'll be `.displayAvatarURL` (a property). You can check what version you're running by using the `npm ls discord.js` command in your console.
-:::
 
 That part is simple; just recycle the if statement you used in the section above and displaying the link to your avatar.
 
@@ -232,11 +228,11 @@ The next part is where it takes a turn - displaying the avatars of all the menti
 ```js
 else if (command === 'avatar') {
 	if (!message.mentions.users.size) {
-		return message.channel.send(`Your avatar: <${message.author.displayAvatarURL}>`);
+		return message.channel.send(`Your avatar: <${message.author.displayAvatarURL()}>`);
 	}
 
 	const avatarList = message.mentions.users.map(user => {
-		return `${user.username}'s avatar: <${user.displayAvatarURL}>`;
+		return `${user.username}'s avatar: <${user.displayAvatarURL()}>`;
 	});
 
 	// send the entire array of strings as a message

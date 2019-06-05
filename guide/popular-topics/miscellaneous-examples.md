@@ -46,7 +46,7 @@ client.on('message', message => {
 	if (message.content === '!play') {
 		if (message.channel.type !== 'text') return;
 
-		const { voiceChannel } = message.member;
+		const voiceChannel = message.member.voice.channel;
 
 		if (!voiceChannel) {
 			return message.reply('please join a voice channel first!');

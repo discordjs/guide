@@ -17,6 +17,7 @@ const config = {
 	themeConfig: {
 		yuu: {
 			colorThemes: ['blue', 'red'],
+			extraOptions: { below: 'BranchSelector' },
 		},
 		algolia: {
 			apiKey: 'c8d9361fb8403f7c5111887e0edf4b5e',
