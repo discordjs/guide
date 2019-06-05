@@ -35,7 +35,7 @@ member.kick();
 ```js
 const role = <guild>.roles.find(role => role.name === '<role name>');
 const member = <message>.mentions.members.first();
-member.addRole(role);
+member.roles.add(role);
 ```
 
 ### How do I check if a guild member has a certain role?
@@ -95,15 +95,7 @@ if (<message>.author.id === '<id>') {
 ```
 
 ::: tip
-If you would like to set your activity upon startup, you must place the `<client>.user.setActivity()` method in a `ready` event listener (`<client>.on('ready', () => {});`).
-:::
-
-::: tip
-If you're using a selfbot to change your activity, you won't be able to view the status change, but other users will.
-:::
-
-::: warning
-`<client>.user.setActivity()` will only work in v11.3 and above. You can check your version with `npm ls discord.js` and update with `npm install discord.js`. You can still use `<client>.user.setGame()`, but it is deprecated as of v11.3, and has been removed in v12.
+If you would like to set your activity upon startup, you can use the `ClientOptions` object to set the appropriate `Presence` data.
 :::
 
 ## Miscellaneous
@@ -156,7 +148,7 @@ Tags inside certain areas of an embed may display correctly, but will not actual
 <message>.channel.send('Please enter more input.').then(() => {
 	const filter = m => <message>.author.id === m.author.id;
 
-	<message>.channel.awaitMessages(filter, { time: 60000, maxMatches: 1, errors: ['time'] })
+	<message>.channel.awaitMessages(filter, { time: 60000, max: 1, errors: ['time'] })
 		.then(messages => {
 			<message>.channel.send(`You've entered: ${messages.first().content}`);
 		})
