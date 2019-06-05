@@ -5,11 +5,6 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-const events = {
-	MESSAGE_REACTION_ADD: 'messageReactionAdd',
-	MESSAGE_REACTION_REMOVE: 'messageReactionRemove',
-};
-
 client.on('messageReactionAdd', async (reaction, user) => {
 	if (reaction.message.partial) {
 		try {
