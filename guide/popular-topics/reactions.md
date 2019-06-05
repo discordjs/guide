@@ -189,7 +189,7 @@ Make sure you enable partial structures for both `MESSAGE` and `CHANNEL` when in
 
 ```js
 const Discord = require('discord.js');
-const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL'] })
+const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL'] });
 client.on('messageReactionAdd', async (reaction, user) => {
 	// When we receive a reaction we check if the message is partial or not
 	if (reaction.message.partial) {

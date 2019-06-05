@@ -54,7 +54,7 @@ if (message.partial) {
 		})
 		.catch(error => {
 			console.log('Something went wrong when fetching the message: ', error);
-		})
+		});
 } else {
 	console.log('The message is not partial.');
 }
