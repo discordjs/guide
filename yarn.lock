@@ -5848,6 +5848,11 @@ semver-diff@^2.0.0:
   version "5.6.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.6.0.tgz#7e74256fbaa49c75aa7c7a205cc22799cac80004"
 
+semver@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-6.0.0.tgz#05e359ee571e5ad7ed641a6eec1e547ba52dea65"
+  integrity sha512-0UewU+9rFapKFnlbirLi3byoOuhrSsli/z/ihNnvM24vgF+8sNBiI1LZPBSH9wJKUwaUbw+s3hToDLCXkrghrQ==
+
 serialize-javascript@^1.3.0, serialize-javascript@^1.4.0:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-1.6.1.tgz#4d1f697ec49429a847ca6f442a2a755126c4d879"
@@ -6823,8 +6828,9 @@ vuepress-html-webpack-plugin@^3.2.0:
     util.promisify "1.0.0"
 
 vuepress-theme-yuu@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/vuepress-theme-yuu/-/vuepress-theme-yuu-1.0.0.tgz#970b6aa8f5f6bd2e5db5d00539ccacba83ad4389"
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/vuepress-theme-yuu/-/vuepress-theme-yuu-1.1.0.tgz#bbf177b82ba3eb0f52193042150d8b02946ede20"
+  integrity sha512-fuwT1xprMT9zz2d3cKO76DU6IaUe1H6U4g4e62aagsPH0na/DJLhXzIc1uxo/x3iU+EsJ95Guyb0pdpxRPzX9g==
   dependencies:
     vue-click-outside "^1.0.7"
 
