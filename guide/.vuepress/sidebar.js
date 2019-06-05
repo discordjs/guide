@@ -79,6 +79,7 @@ module.exports = {
 				'/popular-topics/permissions-extended',
 				'/popular-topics/reactions',
 				'/popular-topics/collectors',
+				'/popular-topics/partials',
 				'/popular-topics/canvas',
 				'/popular-topics/common-questions',
 				'/popular-topics/miscellaneous-examples',
