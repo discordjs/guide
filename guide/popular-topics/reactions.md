@@ -138,6 +138,8 @@ If you try again with either of the codeblocks above, you'll get the result you 
 If you aren't familiar with Promises or `async`/`await`, you can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [our guide page on async/await](/additional-info/async-await.md)!
 :::
 
+## Handling multiple reactions if the order doesn't matter
+
 However, if you don't mind the order the emojis react in, you can take advantage of `Promise.all()`, like so:
 
 ```js
@@ -151,7 +153,7 @@ if (message.content === '!fruits') {
 }
 ```
 
-The benefit of this small optimization is that you can use `.then()` to handle when all of the Promises have resolved, or `.catch()` when one of them has failed. You can also `await` it since it's a Promise itself.
+The benefit of this small optimization is that you can use `.then()` to handle when all of the Promises have resolved, or `.catch()` when one of them has failed. You can also `await` it since it returns a Promise itself.
 
 ## Awaiting reactions
 
