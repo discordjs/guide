@@ -21,20 +21,21 @@
 		}
 
 		window.onload = () => {
-			const match = window.location.hash.match(/access_token=(.+?)&token_type=(.+?)&state=(.+?)(?:&|$)/);
+			const fragment = new URLSearchParams(window.location.hash.slice(1));
 
-			if (match) {
-				const [, access_token, token_type, urlState] = match;
+			if (fragment.has("access_token")) {
+				const urlState = fragment.get("state");
 				const stateParameter = localStorage.getItem('stateParameter');
-
-				if (btoa(stateParameter) !== decodeURIComponent(urlState)) {
-					console.log('You may have been clickjacked!');
-					return;
+				if (stateParameter !== atob(decodeURIComponent(urlState))) {
+					return console.log('You may have been clickjacked!');
 				}
+
+				const accessToken = fragment.get("access_token");
+				const tokenType = fragment.get("token_type");
 
 				fetch('https://discordapp.com/api/users/@me', {
 					headers: {
-						authorization: `${token_type} ${access_token}`
+						authorization: `${tokenType} ${accessToken}`
 					}
 				})
 					.then(res => res.json())
@@ -44,12 +45,13 @@
 						document.getElementById('info').innerText += ` ${username}#${discriminator}`;
 					})
 					.catch(console.error);
-			} 
+
+			}
 			else {
 				const randStr = generateRandomString();
 				localStorage.setItem('stateParameter', randStr);
 
-				document.getElementById('login').href += `&state=${btoa(randStr)}`;
+				document.getElementById('login').href += `&state=${encodeURIComponent(btoa(randStr))}`;
 				document.getElementById('login').style.display = 'block';
 			}
 		}

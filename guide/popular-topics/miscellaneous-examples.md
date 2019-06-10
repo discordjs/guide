@@ -84,8 +84,10 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '!';
 
+const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 client.on('message', message => {
-	const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|\\${prefix})\\s*`);
+	const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
 	if (!prefixRegex.test(message.content)) return;
 
 	const [, matchedPrefix] = message.content.match(prefixRegex);
@@ -101,6 +103,10 @@ client.on('message', message => {
 
 client.login('your-token-goes-here');
 ```
+
+::: tip
+The `escapeRegex` function is used to convert special characters into literal characters by escaping them, so that they don't terminate the pattern within the [Regular Expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)!
+:::
 
 ::: tip
 If you aren't familiar with the syntax used on the `const [, matchedPrefix] = ...` line, that's called "array destructuring". Feel free to read more about it in the [ES6 syntax](/additional-info/es6-syntax.md#array-destructuring) guide!

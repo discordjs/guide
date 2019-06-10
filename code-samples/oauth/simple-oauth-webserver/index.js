@@ -20,7 +20,7 @@ http.createServer((req, res) => {
 		data.append('client_secret', 'your client secret');
 		data.append('grant_type', 'authorization_code');
 		data.append('redirect_uri', 'your redirect url');
-		data.append('scope', 'the scopes');
+		data.append('scope', 'your scopes');
 		data.append('code', accessCode);
 
 		fetch('https://discordapp.com/api/oauth2/token', {
@@ -28,6 +28,16 @@ http.createServer((req, res) => {
 			body: data,
 		})
 			.then(discordRes => discordRes.json())
+			.then(info => {
+				console.log(info);
+				return info;
+			})
+			.then(info => fetch('https://discordapp.com/api/users/@me', {
+				headers: {
+					authorization: `${info.token_type} ${info.access_token}`,
+				},
+			}))
+			.then(userRes => userRes.json())
 			.then(console.log);
 	}
 

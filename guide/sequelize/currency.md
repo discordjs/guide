@@ -6,7 +6,7 @@ A common feature of Discord bots is a currency system. It's possible to do every
 
 There will be multiple files: a DB init script, your models, and your bot script. In the previous tutorial, we placed all of these in the same file. Having everything in one file is usually not how it's done in the real world, so we'll correct that.
 
-This time we'll have 6 files. 
+This time we'll have 6 files.
 
 * `app.js` is where we'll keep the main bot code.
 * `dbInit.js` is the initialization file for the database. We run this once and forget about it.
@@ -21,7 +21,7 @@ Here is an entity relation diagram of the models we'll be making:
 
 <img src="~@/images/currency_er_diagram.svg" alt="Curreny database structure diagram" />
 
-`Users` have a `user_id`, and a `balance`. Each `user_id` can have multiple links to the `UserItems` table, and each entry in the table is connected to one of the items in the `CurrencyShop`, which will have a `name` and a `cost` associated with it. 
+`Users` have a `user_id`, and a `balance`. Each `user_id` can have multiple links to the `UserItems` table, and each entry in the table is connected to one of the items in the `CurrencyShop`, which will have a `name` and a `cost` associated with it.
 
 To implement this, we'll begin by making a `models` folder and create a `Users.js` file inside which contains the following:
 
@@ -80,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
 		amount: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
-			default: 0,
+			'default': 0,
 		},
 	}, {
 		timestamps: false,
@@ -270,9 +270,9 @@ const storedBalances = await Users.findAll();
 storedBalances.forEach(b => currency.set(b.user_id, b));
 ```
 
-In our ready event, we want to sync our currency collection with the database for easy access later. 
+In our ready event, we want to sync our currency collection with the database for easy access later.
 
-### [gamma] Show user balance 
+### [gamma] Show user balance
 
 ```js
 const target = message.mentions.users.first() || message.author;
@@ -287,7 +287,7 @@ Nothing tricky here. We use our `.getBalance()` method to show either the author
 
 ```js
 const target = message.mentions.users.first() || message.author;
-const user = await Users.findByPrimary(target.id);
+const user = await Users.findOne({ where: { user_id: target.id } });
 const items = await user.getItems();
 
 if (!items.length) return message.channel.send(`${target.tag} has nothing!`);
@@ -313,7 +313,7 @@ return message.channel.send(`Successfully transferred ${transferAmount}💰 to $
 ```
 As a bot creator, you should always be thinking about how to make the user experience better. Good UX makes users less frustrated with your commands. If your input are different types, don't make them memorize which parameters come before the other.
 
-We want to be able to allow users to do both `!transfer 5 @user` and `!transfer @user 5`. So what we're going to do is grab the first non-mention text in the command. In the second line of the above code, we split the command by spaces, and then we look for anything that doesn't match a mention, and we'll assume that's the transfer amount. Then we do some checking to make sure it's a valid input. You can also do error checking on the transfer target, but that's trivial, so it won't be included here. 
+We want to be able to allow users to do both `!transfer 5 @user` and `!transfer @user 5`. So what we're going to do is grab the first non-mention text in the command. In the second line of the above code, we split the command by spaces, and then we look for anything that doesn't match a mention, and we'll assume that's the transfer amount. Then we do some checking to make sure it's a valid input. You can also do error checking on the transfer target, but that's trivial, so it won't be included here.
 
 We use `.add()` for both removing and adding currency. Since we already check if the transfer amount is below zero, it will be safe to apply the additive inverse of the transfer amount to their balance.
 
@@ -328,14 +328,14 @@ if (item.cost > currency.getBalance(message.author.id)) {
 	return message.channel.send(`You currently have ${currency.getBalance(message.author.id)}, but the ${item.name} costs ${item.cost}!`);
 }
 
-const user = await Users.findByPrimary(message.author.id);
+const user = await Users.findOne({ where: { user_id: message.author.id } });
 currency.add(message.author.id, -item.cost);
 await user.addItem(item);
 
 message.channel.send(`You've bought: ${item.name}.`);
 ```
 
-In order for users to search for an item without having to care about case, we use the `$iLike` modifier when we're looking for the name. Keep in mind that this may be slow if you have millions of items, so please don't put a million items in your shop. 
+In order for users to search for an item without having to care about case, we use the `$iLike` modifier when we're looking for the name. Keep in mind that this may be slow if you have millions of items, so please don't put a million items in your shop.
 
 ### [theta] Display the shop
 

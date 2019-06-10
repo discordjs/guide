@@ -35,7 +35,6 @@ Here is the base code you'll be using to get started:
 ```js
 const Discord = require('discord.js');
 const Canvas = require('canvas');
-const snekfetch = require('snekfetch');
 
 const client = new Discord.Client();
 
@@ -113,7 +112,9 @@ client.on('guildMemberAdd', async member => {
 
 ![Basic canvas preview](~@/images/8CQvVRV.png)
 
+::: tip
 If you get an error such as `Error: error while reading from input stream`, then the provided path to the file was incorrect.
+:::
 
 ### Manipulating images
 
@@ -159,10 +160,8 @@ client.on('guildMemberAdd', async member => {
 	ctx.strokeStyle = '#74037b';
 	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-	// Get the icon in the form of a buffer
-	const { body: buffer } = await snekfetch.get(member.user.displayAvatarURL);
 	// Wait for Canvas to load the image
-	const avatar = await Canvas.loadImage(buffer);
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
 	// Draw a shape onto the main canvas
 	ctx.drawImage(avatar, 25, 0, 200, canvas.height);
 
@@ -190,8 +189,7 @@ client.on('guildMemberAdd', async member => {
 	ctx.strokeStyle = '#74037b';
 	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-	const { body: buffer } = await snekfetch.get(member.user.displayAvatarURL);
-	const avatar = await Canvas.loadImage(buffer);
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
 	// Move the image downwards vertically and constrain its height to 200, so it's a square
 	ctx.drawImage(avatar, 25, 25, 200, 200);
 
@@ -230,8 +228,7 @@ client.on('guildMemberAdd', async member => {
 	// Clip off the region you drew on
 	ctx.clip();
 
-	const { body: buffer } = await snekfetch.get(member.user.displayAvatarURL);
-	const avatar = await Canvas.loadImage(buffer);
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
 	ctx.drawImage(avatar, 25, 25, 200, 200);
 
 	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
@@ -276,8 +273,7 @@ client.on('guildMemberAdd', async member => {
 	ctx.closePath();
 	ctx.clip();
 
-	const { body: buffer } = await snekfetch.get(member.user.displayAvatarURL);
-	const avatar = await Canvas.loadImage(buffer);
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
 	ctx.drawImage(avatar, 25, 25, 200, 200);
 
 	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
@@ -288,7 +284,9 @@ client.on('guildMemberAdd', async member => {
 
 ![Image](~@/images/3rLGb1s.png)
 
+::: tip
 If you get an error like `Fontconfig error: Cannot load default config file`, it means you do not have any fonts installed on your system. On Linux, you can run the following command to fix this: `sudo apt-get install fontconfig`. This might also need to be installed if you see boxes where the text should be. As for Windows, you will need to find a way to install fonts.
+:::
 
 You may have noticed or considered that if a member's username is too long, then the output won't be quite nice. This is because the text overflows out of the canvas, and you don't have any measures in place for that. Let's take care of this issue!
 
@@ -333,8 +331,7 @@ client.on('guildMemberAdd', async member => {
 	ctx.closePath();
 	ctx.clip();
 
-	const { body: buffer } = await snekfetch.get(member.user.displayAvatarURL);
-	const avatar = await Canvas.loadImage(buffer);
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
 	ctx.drawImage(avatar, 25, 25, 200, 200);
 
 	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
@@ -382,8 +379,7 @@ client.on('guildMemberAdd', async member => {
 	ctx.closePath();
 	ctx.clip();
 
-	const { body: buffer } = await snekfetch.get(member.user.displayAvatarURL);
-	const avatar = await Canvas.loadImage(buffer);
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
 	ctx.drawImage(avatar, 25, 25, 200, 200);
 
 	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');

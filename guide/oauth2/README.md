@@ -56,7 +56,7 @@ Now that you have your web server up and running, it's time to get some informat
 
 ![Create an application page](~@/images/1ch98sm.png)
 
-Take note of the `client id` field, the `client secret` field, and the "OAuth2" link on the left side of the page. For now, click on "OAuth2' and add a redirect url to `http://localhost:53134` like so:
+Take note of the `client id` field, the `client secret` field, and the "OAuth2" link on the left side of the page. For now, click on "OAuth2" and add a redirect url to `http://localhost:53134` like so:
 
 ![img](~@/images/9fejia2.png)
 
@@ -74,7 +74,7 @@ After you change the response type, you can test the url right away. Try visitin
 
 ![img](~@/images/49jali8.png)
 
-You can see that by clicking `Authorize`, you are allowing the application to access your username and avatar. Once you click through, you should be redirected to the redirect url with `#access_token=ACCESS_TOKEN&token_type=Bearer&expires_in=EXPIRATION&scope=identify` appended to it. You now have an access token and can make requests to Discord's API to get information on the user. Modify `index.html` to add your OAuth2 url and to take advantage of the access token if it exists.
+You can see that by clicking `Authorize`, you are allowing the application to access your username and avatar. Once you click through, you should be redirected to the redirect url with a [fragment identifier](https://en.wikipedia.org/wiki/Fragment_identifier) appended to it. You now have an access token and can make requests to Discord's API to get information on the user. Modify `index.html` to add your OAuth2 url and to take advantage of the access token if it exists. Even though [`URLSearchParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) is for working with query strings, it can work here because the structure of the fragment follows that of a query string after removing the leading "#".
 
 ```html
 <!DOCTYPE html>
@@ -89,10 +89,11 @@ You can see that by clicking `Authorize`, you are allowing the application to ac
 	<a id="login" style="display: none;" href="your oauth2 url here">Identify Yourself</a>
 	<script>
 		window.onload = () => {
-			const match = window.location.hash.match(/access_token=(.+?)&token_type=(.+?)(?:&|$)/);
+			const fragment = new URLSearchParams(window.location.hash.slice(1));
 
-			if (match) {
-				const [, accessToken, tokenType] = match;
+			if (fragment.has("access_token")) {
+				const accessToken = fragment.get("access_token");
+				const tokenType = fragment.get("token_type");
 
 				fetch('https://discordapp.com/api/users/@me', {
 					headers: {
@@ -148,13 +149,12 @@ document.getElementById('login').href += `&state=${btoa(randStr)}`;
 When you visit a url with a `state` parameter appended to it and then click `Authorize`, you'll notice that after being redirected, the url will also have the `state` parameter appended to it, which you should then check against what was stored. You can modify the script in your `index.html` file to handle this.
 
 ```js
-const match = window.location.hash.match(/access_token=(.+?)&token_type=(.+?)&state=(.+?)(?:&|$)/);
+const fragment = new URLSearchParams(window.location.hash.slice(1));
 
-if (match) {
-	const [, accessToken, tokenType, urlState] = match;
+if (fragment.has('access_token')) {
+	const urlState = fragment.get('state');
 	const stateParameter = localStorage.getItem('stateParameter');
-
-	if (btoa(stateParameter) !== decodeURIComponent(urlState)) {
+	if (stateParameter !== atob(decodeURIComponent(urlState))) {
 		return console.log('You may have been clickjacked!');
 	}
 }
@@ -231,7 +231,21 @@ Now try visiting your OAuth2 url and authorizing your application. Once you're r
   "scope": "identify" }
 ```
 
-You now have an access token and a refresh token.
+Now that you have an access token and a refresh token, try fetching the user's information. It's the exact same as how it was done in the html file.
+
+```js
+fetch('https://discordapp.com/api/oauth2/token', {
+	method: 'POST',
+	body: data,
+})
+	.then(res => res.json())
+	.then(info => fetch('https//discordapp.com/api/users/@me', {
+		headers: {
+			authorization: `${info.token_type} ${info.access_token}`,
+		},
+	}))
+	.then(console.log);
+```
 
 ::: tip
 To maintain security, store the access token server side but associate it with a session ID that you generate for the user.

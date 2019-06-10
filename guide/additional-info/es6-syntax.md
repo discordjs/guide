@@ -15,7 +15,7 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-const prefix = config.prefix;
+const { prefix } = config;
 
 client.on('message', message => {
 	if (message.content === prefix + 'ping') {
@@ -228,7 +228,7 @@ You can also rename variables when destructuring, if necessary. A good example o
 
 ```js
 // `default` is a reserved keyword
-const { default: defaultValue } = someObject;
+const { 'default': defaultValue } = someObject;
 
 console.log(defaultValue);
 // 'Some default value here'
