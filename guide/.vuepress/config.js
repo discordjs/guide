@@ -34,6 +34,10 @@ const config = {
 				link: '/',
 			},
 			{
+				text: 'Updating',
+				link: '/updating/',
+			},
+			{
 				text: 'Commando',
 				link: '/commando/',
 			},

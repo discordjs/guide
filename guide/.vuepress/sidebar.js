@@ -1,4 +1,64 @@
 module.exports = {
+	'/updating/': [
+		{
+			title: 'Back to safety',
+			children: [
+				'/',
+			],
+		},
+		{
+			title: 'Primer',
+			children: [
+				'/updating/',
+			],
+		},
+		{
+			title: 'Commenly Used Methods',
+			children: [
+				'/updating/collection',
+				'/updating/fetch',
+				'/updating/send',
+				'/updating/roles',
+				'/updating/ban',
+				'/updating/image-url',
+				'/updating/user-accounts',
+				'/updating/voice',
+			],
+		},
+		{
+			title: 'Breaking Changes',
+			children: [
+				'/updating/dependencies',
+				'/updating/attachment',
+				'/updating/client',
+				'/updating/collection',
+				'/updating/collector',
+				'/updating/dm-channel',
+				'/updating/emoji',
+				'/updating/evaluated-permissions',
+				'/updating/game',
+				'/updating/group-dm',
+				'/updating/guild',
+				'/updating/guildchannel',
+				'/updating/invite',
+				'/updating/message',
+				'/updating/message-attachment',
+				'/updating/message-collector',
+				'/updating/message-embed',
+				'/updating/message-mentions',
+				'/updating/message-reaction',
+				'/updating/oauth2app',
+
+
+			],
+		},
+		{
+			title: 'Additions',
+			children: [
+				'/',
+			],
+		},
+	],
 	'/commando/': [
 		{
 			title: 'Home',
@@ -131,4 +191,5 @@ module.exports = {
 			],
 		},
 	],
+
 };
