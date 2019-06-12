@@ -199,3 +199,8 @@ Unfortunately, "default" channels don't exist in Discord anymore, and as such, t
 ```diff
 - guild.unban('123456789012345678');
 + guild.members.unban('123456789012345678', 'Ban appealed.');
+```
+
+# PartialGuild(Channel)
+
+The `PartialGuild` and `PartialGuildChannel` classes for use with invites have been removed entirely.

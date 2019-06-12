@@ -18,6 +18,7 @@ module.exports = {
 				'/updating/collection',
 				'/updating/fetch',
 				'/updating/send',
+				'/updating/richembed',
 				'/updating/roles',
 				'/updating/ban',
 				'/updating/image-url',
@@ -48,8 +49,16 @@ module.exports = {
 				'/updating/message-mentions',
 				'/updating/message-reaction',
 				'/updating/oauth2app',
-
-
+				'/updating/permissions',
+				'/updating/presence',
+				'/updating/rich-embed',
+				'/updating/role',
+				'/updating/sharding',
+				'/updating/streamdispatcher',
+				'/updating/textchannel',
+				'/updating/user',
+				'/updating/voice',
+				'/updating/webhook',
 			],
 		},
 		{
