@@ -80,7 +80,7 @@ args: [
 ]
 ```
 
-You can also set arguments to default to a specifc value:
+You can also set arguments to default to a specific value:
 
 <!-- eslint-skip -->
 
