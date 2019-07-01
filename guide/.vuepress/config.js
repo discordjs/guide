@@ -8,7 +8,13 @@ const config = {
 		['meta', { name: 'theme-color', content: '#42b983' }],
 		['meta', { name: 'twitter:card', content: 'summary' }],
 		['meta', { name: 'og:title', content: 'Discord.js Guide' }],
-		['meta', { name: 'og:description', content: 'A guide made by the community of discord.js for its users.' }],
+		[
+			'meta',
+			{
+				name: 'og:description',
+				content: 'A guide made by the community of discord.js for its users.',
+			},
+		],
 		['meta', { name: 'og:type', content: 'website' }],
 		['meta', { name: 'og:url', content: 'https://discordjs.guide/' }],
 		['meta', { name: 'og:locale', content: 'en_US' }],
@@ -32,6 +38,10 @@ const config = {
 			{
 				text: 'Commando',
 				link: '/commando/',
+			},
+			{
+				text: 'API Documentation',
+				link: 'https://discord.js.org/#/docs/main/stable/general/welcome',
 			},
 		],
 		sidebar,
