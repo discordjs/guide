@@ -33,6 +33,10 @@ const config = {
 				text: 'Commando',
 				link: '/commando/',
 			},
+			{
+				text: 'Discord.js Documentation',
+				link: 'https://discord.js.org/#/docs/main/stable/general/welcome',
+			},
 		],
 		sidebar,
 	},
