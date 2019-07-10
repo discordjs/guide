@@ -30,7 +30,7 @@ To install and use discord.js, you'll need to install it via npm \(Node's packag
 
 Like any other project, you should have a dedicated folder for this, in order to keep it organized and manageable.
 
-Navigate to a place on your machine where it's be easy for find and open in the future, for convenience purposes. Create a new folder like you normally would (for Linux, you can use `mkdir project-name` inside your terminal). If you already have a name you want to use for your bot, you can use that as the folder name. Otherwise, you may name it something like `discord-bot` for the time being \(or anything else you have in mind\).
+Navigate to a place on your machine where it's easy to find and open it in the future, for convenience purposes. Create a new folder like you normally would (for Linux, you can use `mkdir project-name` inside your terminal). If you already have a name you want to use for your bot, you can use that as the folder name. Otherwise, you may name it something like `discord-bot` for the time being \(or anything else you have in mind\).
 
 Once you're done making the folder, open it up (for Linux, you can use `cd project-name` inside your terminal).
 
