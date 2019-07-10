@@ -1,6 +1,6 @@
 # Introduction
 
-If you're reading this, it probably means you want to learn how make a bot with discord.js. Awesome! You've come to the right place.
+If you're reading this, it probably means you want to learn how to make a bot with discord.js. Awesome! You've come to the right place.
 This guide will teach you things such as:
 * How to get a bot up and running from scratch;
 * How to properly create, organize, and expand on your commands;
