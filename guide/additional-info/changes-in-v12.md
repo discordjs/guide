@@ -287,7 +287,7 @@ Any voice-related classes may change at any time, as they're still actively bein
 * Collection [(changes)](/additional-info/changes-in-v12.md#collection)
 * Collector [(changes)](/additional-info/changes-in-v12.md#collector) [(additions)](/additional-info/changes-in-v12.md#collector-1)
 * CollectorOptions [(additions)](/additional-info/changes-in-v12.md#collectoroptions)
-* DMChannel [(channges)](/additional-info/changes-in-v12.md#dmchannel) [(additions)](/additional-info/changes-in-v12.md#dmchannel-1)
+* DMChannel [(changes)](/additional-info/changes-in-v12.md#dmchannel) [(additions)](/additional-info/changes-in-v12.md#dmchannel-1)
 * Emoji [(changes)](/additional-info/changes-in-v12.md#emoji)
 * EvaluatedPermissions [(changes)](/additional-info/changes-in-v12.md#evaluatedpermissions)
 * Game [(changes)](/additional-info/changes-in-v12.md#game)
