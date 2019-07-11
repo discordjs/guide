@@ -136,7 +136,6 @@ In addition, the GuildMember properties related to roles have also been moved to
 The method to ban members and users have been moved to the `GuildMemberStore` Data Store.
 
 ```diff
-- guildMember.ban();
 - guild.ban('123456789012345678');
 + guild.members.ban('123456789012345678');
 
@@ -287,7 +286,7 @@ Any voice-related classes may change at any time, as they're still actively bein
 * Collection [(changes)](/additional-info/changes-in-v12.md#collection)
 * Collector [(changes)](/additional-info/changes-in-v12.md#collector) [(additions)](/additional-info/changes-in-v12.md#collector-1)
 * CollectorOptions [(additions)](/additional-info/changes-in-v12.md#collectoroptions)
-* DMChannel [(channges)](/additional-info/changes-in-v12.md#dmchannel) [(additions)](/additional-info/changes-in-v12.md#dmchannel-1)
+* DMChannel [(changes)](/additional-info/changes-in-v12.md#dmchannel) [(additions)](/additional-info/changes-in-v12.md#dmchannel-1)
 * Emoji [(changes)](/additional-info/changes-in-v12.md#emoji)
 * EvaluatedPermissions [(changes)](/additional-info/changes-in-v12.md#evaluatedpermissions)
 * Game [(changes)](/additional-info/changes-in-v12.md#game)
