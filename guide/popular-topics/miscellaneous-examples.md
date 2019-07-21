@@ -30,9 +30,14 @@ sudo apt-get install ffmpeg
 
 On Windows:
 
+::: tip
+You can get choco at [chocolatey.org](https://chocolatey.org/)
+:::
+
 ```
-npm install ffmpeg-binaries --save
+choco install ffmpeg
 ```
+Alternatively, you can download it from [FFmpeg website](http://ffmpeg.org/download.html)
 
 Additionally, there have been reports that playing audio in this way from the Ubuntu subsystem offered by Windows 10 does not work.
 
