@@ -180,6 +180,10 @@ function getUserFromMention(mention) {
 	// The id is the first and only match found by the RegEx.
 	// However the first element in the matches array will be the entire mention, not just the ID,
 	// so use index 1.
+
+	if (!matches) return;
+	// If supplied variable was not a mention, matches will be null instead of an array.
+
 	const id = matches[1];
 
 	return client.users.get(id);
