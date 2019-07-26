@@ -51,6 +51,10 @@ Here is an example of what an embed may look like. We will go over their constru
 
 Discord.js features the utility class [RichEmbed](https://discord.js.org/#/docs/main/stable/class/RichEmbed) for easy construction and manipulation of embeds.
 
+::: warning
+On the master branch, the receiving and outgoing embed classes have been unified; you will need to use `Discord.MessageEmbed()` as constructor instead.
+:::
+
 ```js
 // at the top of your file
 const Discord = require('discord.js');
@@ -82,10 +86,6 @@ You don't need to include all the elements showcased above. If you want a simple
 The `.setColor()` method accepts an integer, HEX color string, an array of RGB values or specific color strings. You can find a list of them at [the Discord.js documentation](https://discord.js.org/#/docs/main/stable/typedef/ColorResolvable).
 
 `.addBlankField()` is a convenience method for `.addField('\u200b', '\u200b')` to add a spacer to the embed. This can also be used inline by passing `true` as the first parameter.
-
-::: warning
-On the master branch, the receiving and outgoing embed classes have been unified; you will need to use `Discord.MessageEmbed()` as constructor instead.
-:::
 
 The above example chains the manipulating methods to the newly created RichEmbed object. This is possible because the return value of each manipulating method is the RichEmbed instance itself.
 If you want to modify the embed based on conditions you will need to reference it directly (as `exampleEmbed` for our example).
