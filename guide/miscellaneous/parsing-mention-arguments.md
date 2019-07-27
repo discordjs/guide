@@ -84,7 +84,7 @@ Putting it into a function will make it easily reusable. We will use the name `g
 function getUserFromMention(mention) {
 	if (!mention) return;
 
-	if (mention.startsWith('<@') && mention.endsWith('>')) {
+	if (mention.startsWith('<@') && mention.endsWith('>') && mention[2] !== "&") {
 		mention = mention.slice(2, -1);
 
 		if (mention.startsWith('!')) {
