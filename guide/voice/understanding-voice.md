@@ -12,7 +12,7 @@ It's common for people to get confused with voice and not understand what they'r
 
 ### The voice connection lifecycle
 1. A packet is sent to the main gateway telling Discord we wish to join a voice channel. Discord responds with a voice gateway (WebSocket) to connect to and the bot authenticates itself. We also select an _encryption mode_ available on that gateway. We now start heartbeating.
-2. We find our external port and send it to Discord over UDP so we can send/receive audio. It follows that a voice connection has two main components, a WebSocket connection - where we can change channels and speaking status - and a UDP socket, where audio is actually sent and received.
+2. We find our external port and send it to Discord over UDP so we can send/receive audio. It follows that a voice connection has two main components, a WebSocket connection - where we can change speaking status - and a UDP socket, where audio is actually sent and received.
 3. We send our audio packets at regular time intervals to the UDP socket, which forwards it to other users connected to the channel.
 4. The server may change its voice region, in this case Discord.js will disconnect these sockets and reconnect to the new voice servers.
 5. Once we're done with the voice connection, we tell the main gateway that we're no longer in a voice channel, and we can now destroy the UDP socket and voice gateway connection without disrupting any activity on the normal gateway.
