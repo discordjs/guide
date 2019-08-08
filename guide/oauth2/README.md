@@ -239,7 +239,7 @@ fetch('https://discordapp.com/api/oauth2/token', {
 	body: data,
 })
 	.then(res => res.json())
-	.then(info => fetch('https//discordapp.com/api/users/@me', {
+	.then(info => fetch('https://discordapp.com/api/users/@me', {
 		headers: {
 			authorization: `${info.token_type} ${info.access_token}`,
 		},
