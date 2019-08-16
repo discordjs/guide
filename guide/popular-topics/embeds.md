@@ -49,9 +49,38 @@ Here is an example of what an embed may look like. We will go over their constru
 	</discord-message>
 </div>
 
-## Using the MessageEmbed constructor
+## Using the <branch version="v11.x" inline>RichEmbed</branch><branch version="v12.x" inline>MessageEmbed</branch> constructor
 
-Discord.js features the utility class [MessageEmbed](https://discord.js.org/#/docs/main/master/class/MessageEmbed) for easy construction and manipulation of embeds.
+Discord.js features the utility class <branch version="v11.x" inline>[RichEmbed](https://discord.js.org/#/docs/main/11.5.1/class/MessageEmbed)</branch><branch version="v12.x" inline>[MessageEmbed](https://discord.js.org/#/docs/main/12.0.0/class/MessageEmbed)</branch> for easy construction and manipulation of embeds.
+
+<branch version="11.x">
+
+```js
+// at the top of your file
+const Discord = require('discord.js');
+
+// inside a command, event listener, etc.
+const exampleEmbed = new Discord.RichEmbed()
+	.setColor('#0099ff')
+	.setTitle('Some title')
+	.setURL('https://discord.js.org/')
+	.setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
+	.setDescription('Some description here')
+	.setThumbnail('https://i.imgur.com/wSTFkRM.png')
+	.addField('Regular field title', 'Some value here')
+	.addBlankField()
+	.addField('Inline field title', 'Some value here', true)
+	.addField('Inline field title', 'Some value here', true)
+	.addField('Inline field title', 'Some value here', true)
+	.setImage('https://i.imgur.com/wSTFkRM.png')
+	.setTimestamp()
+	.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
+
+channel.send(exampleEmbed);
+```
+
+</branch>
+<branch version="12.x">
 
 ```js
 // at the top of your file
@@ -77,6 +106,8 @@ const exampleEmbed = new Discord.MessageEmbed()
 channel.send(exampleEmbed);
 ```
 
+</branch>
+
 ::: tip
 You don't need to include all the elements showcased above. If you want a simpler embed, just leave some out.
 :::
@@ -85,8 +116,23 @@ The `.setColor()` method accepts a base 10 integer, HEX color string, an array o
 
 `.addBlankField()` is a convenience method for `.addField('\u200b', '\u200b')` to add a spacer to the embed. This can also be used inline by passing `true` as the first parameter.
 
-The above example chains the manipulating methods to the newly created MessageEmbed object.
+The above example chains the manipulating methods to the newly created <branch version="v11.x" inline>RichEmbed</branch><branch version="v12.x" inline>MessageEmbed</branch> object.
 If you want to modify the embed based on conditions you will need to reference it as the constant `exampleEmbed` (for our example).
+
+<branch version="11.x">
+
+<!-- eslint-skip -->
+
+```js
+const exampleEmbed = new Discord.RichEmbed().setTitle('Some title');
+
+if (message.author.bot) {
+	exampleEmbed.setColor('#7289da');
+}
+```
+
+</branch>
+<branch version="12.x">
 
 <!-- eslint-skip -->
 
@@ -98,11 +144,27 @@ if (message.author.bot) {
 }
 ```
 
+</branch>
+
 ### Local images
 
 To use local images inside your embed, you need to upload them alongside the embed with the `.attachFiles()` method. You can either provide the file path [FileOptions](https://discord.js.org/#/docs/main/stable/typedef/FileOptions), BufferResolvable, or Attachment objects inside an array. 
 
 You can then access and use the images inside the embed itself with `attachment://fileName.extension`.
+
+<branch version="11.x">
+
+```js
+const exampleEmbed = new Discord.RichEmbed()
+	.setTitle('Some title')
+	.attachFiles(['../assets/discordjs.png'])
+	.setImage('attachment://discordjs.png');
+
+channel.send(exampleEmbed);
+```
+
+</branch>
+<branch version="12.x">
 
 ```js
 const exampleEmbed = new Discord.MessageEmbed()
@@ -112,6 +174,8 @@ const exampleEmbed = new Discord.MessageEmbed()
 
 channel.send(exampleEmbed);
 ```
+
+</branch>
 
 ::: warning
 If the images doesn't display inside the embed but outside of it, double check your syntax to make sure it's as shown above.
@@ -220,12 +284,28 @@ At some point in your bot development, you might want to get an embed from a mes
 
 To achieve this, you retrieve the embed from the messages embed array (`message.embeds`) and pass it to the MessageEmbed constructor. The constructed MessageEmbed can then be edited before sending it again.
 
+<branch version="11.x" inline>You can not resend the received embed structure! The MessageEmbed returned from `message.embeds` contains circular structures and needs to be converted to a RichEmbed object before sending.</branch><branch version="12.x" inline>We deliberately create a new Embed here instead of just modifying `message.embeds[0]` directly to keep the cache valid. If we were to not do this the embed in cache on the original message would diverge from what the actual embed looks like, which can result in unexpected behaviour down the line!</branch>
+
+<branch version="11.x">
+
+```js
+const receivedEmbed = message.embeds[0];
+const exampleEmbed = new Discord.RichEmbed(receivedEmbed).setTitle('New title');
+
+channel.send(exampleEmbed);
+```
+
+</branch>
+<branch version="12.x">
+
 ```js
 const receivedEmbed = message.embeds[0];
 const exampleEmbed = new Discord.MessageEmbed(receivedEmbed).setTitle('New title');
 
 channel.send(exampleEmbed);
 ```
+
+</branch>
 
 ## Notes
 
