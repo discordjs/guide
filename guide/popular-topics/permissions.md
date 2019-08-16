@@ -58,7 +58,7 @@ Alternatively you can provide permissions as a property of [RoleData](https://di
 <branch version="11.x">
 
 ```js
-guild.createRole({ name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS'] });;
+guild.createRole({ name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS'] });
 ```
 
 </branch>
@@ -154,8 +154,7 @@ guild.createChannel('new-channel', {
 	permissionOverwrites: [
 		{
 			id: message.guild.id,
-			deny: ['
-			VIEW_CHANNEL'],
+			deny: ['VIEW_CHANNEL'],
 		},
 		{
 			id: message.author.id,
@@ -178,8 +177,7 @@ guild.channels.create('new-channel', {
 	permissionOverwrites: [
 		{
 			id: message.guild.id,
-			deny: ['
-			VIEW_CHANNEL'],
+			deny: ['VIEW_CHANNEL'],
 		},
 		{
 			id: message.author.id,
