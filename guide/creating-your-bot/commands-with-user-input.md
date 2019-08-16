@@ -242,8 +242,9 @@ That part is simple; just recycle the if statement you used in the section above
 
 The next part is where it takes a turn - displaying the avatars of all the mentioned users. But it's simpler than you may think! `message.mentions.users` returns a Collection (as previously mentioned), which you can loop over in a number of different ways. You'll be using `.map()` to loop here, since it allows you to easily collect and store data in a variable in order to send 1 final message in the end, as opposed to multiple.
 
-<!-- eslint-skip -->
 <branch version="11.x">
+
+<!-- eslint-skip -->
 
 ```js
 else if (command === 'avatar') {
@@ -263,6 +264,8 @@ else if (command === 'avatar') {
 
 </branch>
 <branch version="12.x">
+
+<!-- eslint-skip -->
 
 ```js
 else if (command === 'avatar') {
