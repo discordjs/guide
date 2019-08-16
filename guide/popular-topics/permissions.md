@@ -55,13 +55,43 @@ Note that flag names are literal. Although `VIEW_CHANNEL` grants access to view 
 
 Alternatively you can provide permissions as a property of [RoleData](https://discord.js.org/#/docs/main/stable/typedef/RoleData) objects during role creation as an array of flag strings or a permission number:
 
+<branch version="11.x">
+
+```js
+guild.createRole({ name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS'] });;
+```
+
+</branch>
+<branch version="12.x">
+
 ```js
 guild.roles.create({ data: { name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS'] } });
 ```
 
+</branch>
+
 ### Checking member permissions
 
 To know if a one of a member's roles has a permission enabled, you can use the `.hasPermission()` method of the [GuildMember](https://discord.js.org/#/docs/main/stable/class/GuildMember) class and provide a permission flag, array, or number to check for. You can also specify if you want to allow the `ADMINISTRATOR` permission or the guild owner status to override this check with the following parameters.
+
+<branch version="11.x">
+
+```js
+if (member.hasPermission('KICK_MEMBERS', false, false)) {
+	console.log('This member can kick');
+}
+
+if (member.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS'])) {
+	console.log('This member can kick and ban');
+}
+
+if (member.hasPermission('KICK_MEMBERS', false, false, false)) {
+	console.log('This member can kick without allowing admin to override');
+}
+```
+
+</branch>
+<branch version="12.x">
 
 ```js
 if (member.hasPermission('KICK_MEMBERS')) {
@@ -77,6 +107,8 @@ if (member.hasPermission('KICK_MEMBERS', { checkAdmin: false, checkOwner: false 
 }
 ```
 
+</branch>
+
 If you provide multiple permissions to the method, it will only return `true` if all permissions you specified are granted.
 
 ## Channel overwrites
@@ -91,25 +123,39 @@ As you have likely already seen in your desktop client, channel overwrites have 
 
 ### Adding overwrites
 
-To add a permission overwrite for a role or guild member, you access the channel object and use the `.updateOverwrite()` method. The first parameter is the target of the overwrite, either a Role or User object (or its respective resolvable), and the second is a [PermissionOverwriteOptions](https://discord.js.org/#/docs/main/stable/typedef/PermissionOverwriteOptions) object.
+To add a permission overwrite for a role or guild member, you access the channel object and use the <branch version="v11.x" inline>`.overwritePermissions()`</branch><branch version="v12.x" inline>`.updateOverwrite()`</branch> method. The first parameter is the target of the overwrite, either a Role or User object (or its respective resolvable), and the second is a [PermissionOverwriteOptions](https://discord.js.org/#/docs/main/stable/typedef/PermissionOverwriteOptions) object.
 
 Let's add an overwrite to lock everyone out of the channel. The guild ID doubles as the role id for the default role @everyone as demonstrated below:
+
+<branch version="11.x">
+
+```js
+channel.overwritePermissions(channel.guild.defaultRole, { VIEW_CHANNEL: false });
+```
+
+</branch>
+<branch version="12.x">
 
 ```js
 channel.updateOverwrite(channel.guild.defaultRole, { VIEW_CHANNEL: false });
 ```
 
+</branch>
+
 Any permission flags not specified get neither an explicit allow nor deny overwrite and will use the base permission, unless another role has an explicit overwrite set.
 
 You can also provide an array of overwrites during channel creation as shown below:
 
+<branch version="11.x">
+
 ```js
-guild.channels.create('new-chat', {
+guild.createChannel('new-channel', {
 	type: 'text',
 	permissionOverwrites: [
 		{
 			id: message.guild.id,
-			deny: ['VIEW_CHANNEL'],
+			deny: ['
+			VIEW_CHANNEL'],
 		},
 		{
 			id: message.author.id,
@@ -119,9 +165,59 @@ guild.channels.create('new-chat', {
 });
 ```
 
+::: warning
+These objects are [ChannelCreationOverwrites](https://discord.js.org/#/docs/main/stable/typedef/ChannelCreationOverwrites) and differ from [PermissionOverwriteOptions](https://discord.js.org/#/docs/main/stable/typedef/PermissionOverwriteOptions); be careful to not mix them up!
+:::
+
+</branch>
+<branch version="12.x">
+
+```js
+guild.channels.create('new-channel', {
+	type: 'text',
+	permissionOverwrites: [
+		{
+			id: message.guild.id,
+			deny: ['
+			VIEW_CHANNEL'],
+		},
+		{
+			id: message.author.id,
+			allow: ['VIEW_CHANNEL'],
+		},
+	],
+});
+```
+
+</branch>
+
 ### Replacing overwrites
 
-To replace all permission overwrites on the channel with a provided set of new overwrites, you can use the `.overwritePermissions()` function. This is extremely handy if you want to copy a channels full set of overwrites to another one, as this method allows passing an array or Collection of [PermissionOverwrites](https://discord.js.org/#/docs/main/stable/class/PermissionOverwrites).
+To replace all permission overwrites on the channel with a provided set of new overwrites, you can use the <branch version="v11.x" inline>`.replaceOverwrites()`</branch><branch version="v12.x" inline>`.overwritePermissions()`</branch> function. This is extremely handy if you want to copy a channels full set of overwrites to another one, as this method allows passing an array or Collection of [PermissionOverwrites](https://discord.js.org/#/docs/main/stable/class/PermissionOverwrites)<branch version="11.x" inline> or [ChannelCreationOverwrites](https://discord.js.org/#/docs/main/stable/typedef/ChannelCreationOverwrites)</branch>.
+
+<branch version="11.x">
+
+```js
+// copying overwrites from another channel
+channel.replacePermissionOverwrites({ overwrites: otherChannel.permissionOverwrites });
+
+// replacing overwrites with PermissionOverwriteOptions
+channel.replacePermissionOverwrites({
+	overwrites: [
+		{
+			id: guild.defaultRole.id,
+			deny: ['VIEW_CHANNEL'],
+		},
+		{
+			id: user.id,
+			allow: ['VIEW_CHANNEL'],
+		},
+	],
+});
+```
+
+</branch>
+<branch version="12.x">
 
 ```js
 // copying overwrites from another channel
@@ -141,6 +237,8 @@ channel.overwritePermissions({
 	],
 });
 ```
+
+</branch>
 
 ### Removing overwrites
 
@@ -169,7 +267,7 @@ channel.lockPermissions()
 
 ### Permissions after overwrites
 
-discord.js features two utility methods to easily determine the final permissions for a guild member or role in a specific channel: `.permissionsFor()` on the [GuildChannel](https://discord.js.org/#/docs/main/stable/class/GuildChannel?scrollTo=permissionsFor) class and `.permissionsIn()` on the [GuildMember](https://discord.js.org/#/docs/main/stable/class/GuildMember?scrollTo=permissionsIn) and [Role](https://discord.js.org/#/docs/main/stable/class/Role?scrollTo=permissionsIn) classes. Both return a [Permissions](https://discord.js.org/#/docs/main/stable/class/Permissions) object.
+discord.js features two utility methods to easily determine the final permissions for a guild member or role in a specific channel: `.permissionsFor()` on the [GuildChannel](https://discord.js.org/#/docs/main/stable/class/GuildChannel?scrollTo=permissionsFor) class and `.permissionsIn()` on the [GuildMember](https://discord.js.org/#/docs/main/stable/class/GuildMember?scrollTo=permissionsIn) <branch version="v11.x" inline>class</branch><branch version="v12.x" inline>and [Role](https://discord.js.org/#/docs/main/stable/class/Role?scrollTo=permissionsIn) classes </branch>. Both return a [Permissions](https://discord.js.org/#/docs/main/stable/class/Permissions) object.
 
 To check your bots permissions in the channel the command was used in, you could use something like this:
 
@@ -185,7 +283,7 @@ const rolePermissions = channel.permissionsFor(role);
 ```
 
 ::: warning
-The `.permissionsFor()` method returns a Permissions object with all permissions set if the member or role has the global `ADMINISTRATOR` permission and does not take overwrites into consideration in this case. Using the second parameter of the `.has()` method as described further down in the guide will not allow you to check without taking `ADMINISTRATOR` into account here!
+The `.permissionsFor()` method returns a <branch version="v11.x" inline>bit field</branch><branch version="v12.x" inline>Permissions object</branch> with all permissions set if the member or role has the global `ADMINISTRATOR` permission and does not take overwrites into consideration in this case. Using the second parameter of the `.has()` method as described further down in the guide will not allow you to check without taking `ADMINISTRATOR` into account here!
 :::
 
 If you want to know how to work with the returned Permissions objects keep reading as this will be our next topic.
@@ -288,9 +386,13 @@ console.log(permissions.has('KICK_MEMBERS'));
 
 You can utilize these methods to adapt permissions or overwrites without touching the other flags. To achieve this you can get the existing permissions for a role, manipulating the bit field as described above and passing the changed bit field to `role.setPermissions()`.
 
+<branch version="11.x">
+
 ::: tip
-In the stable branch, `role.permissions` returns a number which needs to be converted to a Permissions object for this to work as described here. We covered how to achieve this in the section "[Converting permission numbers to Objects](/popular-topics/permissions.md#converting-permission-numbers)"
+The expression `role.permissions` returns a number which needs to be converted to a Permissions object for this to work as described here. We covered how to achieve this in the section "[Converting permission numbers to Objects](/popular-topics/permissions.md#converting-permission-numbers)"
 :::
+
+</branch>
 
 ## Resulting code
 
