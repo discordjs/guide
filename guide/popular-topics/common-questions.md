@@ -30,6 +30,19 @@ member.kick();
 
 ### How do I add a role to a guild member?
 
+<branch version="11.x">
+
+<!-- eslint-skip -->
+
+```js
+const role = <guild>.roles.find(role => role.name === '<role name>');
+const member = <message>.mentions.members.first();
+member.addRole(role);
+```
+
+</branch>
+<branch version="12.x">
+
 <!-- eslint-skip -->
 
 ```js
@@ -37,6 +50,8 @@ const role = <guild>.roles.find(role => role.name === '<role name>');
 const member = <message>.mentions.members.first();
 member.roles.add(role);
 ```
+
+</branch>
 
 ### How do I check if a guild member has a certain role?
 
@@ -94,9 +109,23 @@ if (<message>.author.id === '<id>') {
 <client>.user.setActivity('<activity>', { type: 'LISTENING' });
 ```
 
+<branch version="11.x">
+::: tip
+If you would like to set your activity upon startup, you must place the `<client>.user.setActivity()` method in a `ready` event listener (`<client>.on('ready', () => {});`).
+:::
+
+::: warning
+`<client>.user.setActivity()` will only work in v11.3 and above. You can check your version with `npm ls discord.js` and update with `npm install discord.js`. You can still use `<client>.user.setGame()`, but it is deprecated as of v11.3, and has been removed in v12.
+:::
+
+</branch>
+<branch version="12.x">
+
 ::: tip
 If you would like to set your activity upon startup, you can use the `ClientOptions` object to set the appropriate `Presence` data.
 :::
+
+</branch>
 
 ## Miscellaneous
 
@@ -142,6 +171,27 @@ Tags inside certain areas of an embed may display correctly, but will not actual
 
 ### How do I prompt the user for additional input?
 
+<branch version="11.x">
+
+<!-- eslint-skip -->
+
+```js
+<message>.channel.send('Please enter more input.').then(() => {
+	const filter = m => <message>.author.id === m.author.id;
+
+	<message>.channel.awaitMessages(filter, { time: 60000, maxMatches: 1, errors: ['time'] })
+		.then(messages => {
+			<message>.channel.send(`You've entered: ${messages.first().content}`);
+		})
+		.catch(() => {
+			<message>.channel.send('You did not enter any input!');
+		});
+});
+```
+
+</branch>
+<branch version="12.x">
+
 <!-- eslint-skip -->
 
 ```js
@@ -157,6 +207,8 @@ Tags inside certain areas of an embed may display correctly, but will not actual
 		});
 });
 ```
+
+</branch>
 
 ::: tip
 If you want to learn more about this syntax or want to learn about reaction collectors as well, check out [this dedicated guide page for collectors](/popular-topics/collectors.md)!
