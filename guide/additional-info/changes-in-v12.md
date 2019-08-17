@@ -856,7 +856,7 @@ Unfortunately, "default" channels don't exist in Discord anymore, and as such, t
 1. Set up a database table to store the channel ID in a column when someone uses a `!welcome-channel #channel-name` command, for example. Then inside the `guildMemberAdd` event, use `client.channels.get('id')` and send a message to that channel. This is the most reliable method and gives server staff freedom to rename the channel as they please.
 2. Make a new command that creates a `welcome-messages` channel, use `guild.channels.find(channel => channel.name === 'welcome-messages')`, and send a message to that channel. This method will work fine in most cases, but will break if someone on that server decides to rename the channel. This may also give you unexpected results, due to Discord allowing multiple channels to have the same name.
 
-<p class="tip">Not sure how to set up a database? Check out [this page](/sequelize/)!</p>
+<p class="tip">Not sure how to set up a database? Check out [this page](/sequelize)!</p>
 
 #### Guild#emojis
 
