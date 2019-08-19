@@ -163,6 +163,8 @@ const trim = (str, max) => ((str.length > max) ? `${str.slice(0, max - 3)}...` :
 
 This is how we'll be structuring the embed:
 
+<branch version="11.x">
+
 ```js
 const [answer] = list;
 
@@ -176,6 +178,25 @@ const embed = new Discord.RichEmbed()
 
 message.channel.send(embed);
 ```
+
+</branch>
+<branch version="12.x">
+
+```js
+const [answer] = list;
+
+const embed = new Discord.MessageEmbed()
+	.setColor('#EFFF00')
+	.setTitle(answer.word)
+	.setURL(answer.permalink)
+	.addField('Definition', trim(answer.definition, 1024))
+	.addField('Example', trim(answer.example, 1024))
+	.addField('Rating', `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.`);
+
+message.channel.send(embed);
+```
+
+</branch>
 
 Now, if you do that same command again, you should get this:
 
