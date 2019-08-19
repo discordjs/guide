@@ -65,20 +65,20 @@ There are some things to be aware of with broadcasts, this section will help you
 - Can be created with `client.voice.createBroadcast()` when you're going to be playing the same audio across more than one `VoiceConnection`.
 - Playing the same broadcast across multiple connections offers much better performance and synchronicity compared to playing the same resource across each connection individually - much of the intensive audio processing is done only once.
 - `subscribe` and `unsubscribe` events are emitted here when VoiceConnections are subscribed and unsubscribed.
-  ```js
-  broadcast.on('subscribe', dispatcher => {
-    console.log(`Broadcast playing in ${dispatcher.player.voiceConnection.channel.name}`);
-  });
+	```js
+	broadcast.on('subscribe', dispatcher => {
+		console.log(`Broadcast playing in ${dispatcher.player.voiceConnection.channel.name}`);
+	});
 
-  // Emits the subscribe event on the broadcast
-  connection.play(broadcast);
-  ```
+	// Emits the subscribe event on the broadcast
+	connection.play(broadcast);
+	```
 - You can use the `.play(resource)` method to play audio on the broadcast and across all subscribers.
 - You can use the `.end()` method to destroy the broadcast, ending playback across all subcribers and unsubscribing them. This will also remove the broadcast from the `client.voice.broadcasts` array.
-  ```js
-  // Destroy a broadcast
-  broadcast.end();
-  ```
+	```js
+	// Destroy a broadcast
+	broadcast.end();
+	```
 
 ### BroadcastDispatcher
 ```js
@@ -99,7 +99,7 @@ const streamDispatcher = connection.play(broadcast);
 - When audio is finished playing on the broadcast, the StreamDispatcher will remain alive and not emit a `finish` event - you should listen for that from the BroadcastDispatcher.
 - You can still pause/resume StreamDispatchers as normal.
 - To unsubscribe from a broadcast, you can use the `.destroy()` method.
-  ```js
-  // Unsubscribe from broadcast
-  streamDispatcher.destroy();
-  ```
+	```js
+	// Unsubscribe from broadcast
+	streamDispatcher.destroy();
+	```
