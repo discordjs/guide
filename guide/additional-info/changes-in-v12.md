@@ -257,13 +257,17 @@ Broadcasts themselves now contain a `BroadcastDispatcher` that shares a similar 
 ```
 
 ---
-<p class="danger">This stuff should keep getting shoved to the bottom, with the commonly-used methods that are changed, as well as topic overviews added before it.</p>
+::: danger
+This stuff should keep getting shoved to the bottom, with the commonly-used methods that are changed, as well as topic overviews added before it.
+:::
 
 The section headers for breaking changes will be named after the v11 classes/methods/properties and will be in alphabetical order, so that you can easily find what you're looking for. The section headers for additions will be named after the v12 classes/methods/properties, to reflect their current syntax appropriately.
 
 "Difference" codeblocks will be used to display the old methods vs the newer ones—the red being what's been removed and the green being its replacement. Some bits may have more than one version of being handled. Regular JavaScript syntax codeblocks will be used to display the additions. 
 
-<p class="danger">While this list has been carefully crafted, it may be incomplete! If you notice pieces of missing or inaccurate data, we encourage you to [submit a pull request](https://github.com/Danktuary/Making-Bots-with-Discord.js)!</p>
+::: danger
+While this list has been carefully crafted, it may be incomplete! If you notice pieces of missing or inaccurate data, we encourage you to [submit a pull request](https://github.com/Danktuary/Making-Bots-with-Discord.js)!
+:::
 
 ## Breaking Changes and Deletions
 
@@ -856,7 +860,9 @@ Unfortunately, "default" channels don't exist in Discord anymore, and as such, t
 1. Set up a database table to store the channel ID in a column when someone uses a `!welcome-channel #channel-name` command, for example. Then inside the `guildMemberAdd` event, use `client.channels.get('id')` and send a message to that channel. This is the most reliable method and gives server staff freedom to rename the channel as they please.
 2. Make a new command that creates a `welcome-messages` channel, use `guild.channels.find(channel => channel.name === 'welcome-messages')`, and send a message to that channel. This method will work fine in most cases, but will break if someone on that server decides to rename the channel. This may also give you unexpected results, due to Discord allowing multiple channels to have the same name.
 
-<p class="tip">Not sure how to set up a database? Check out [this page](/sequelize/)!</p>
+::: tip
+Not sure how to set up a database? Check out [this page](/sequelize/)!
+:::
 
 #### Guild#emojis
 
@@ -1648,7 +1654,9 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 + channel.send({ embed: embedVariable });
 ```
 
-<p class="warning">`channel.send(embedVariable)` will only work if that variable is an instance of the `MessageEmbed` class; object literals won't give you the expected result unless your embed data is inside an `embed` key.</p>
+::: warning
+`channel.send(embedVariable)` will only work if that variable is an instance of the `MessageEmbed` class; object literals won't give you the expected result unless your embed data is inside an `embed` key.
+:::
 
 ```diff
 - channel.sendCode('js', 'const version = 11;');
@@ -1891,7 +1899,9 @@ The `WebhookClient` class now extends `BaseClient` and implements `Webhook` inst
 
 ## Additions
 
-<p class="warning">Remember to add examples for the additions.</p>
+::: warning
+Remember to add examples for the additions.
+:::
 
 ### Activity
 
