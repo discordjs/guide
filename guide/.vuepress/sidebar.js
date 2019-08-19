@@ -121,6 +121,7 @@ module.exports = {
 				'/voice/the-basics',
 				'/voice/voice-broadcasts',
 				'/voice/optimisation-and-troubleshooting',
+				'/voice/receiving-audio',
 			],
 		},
 		{
