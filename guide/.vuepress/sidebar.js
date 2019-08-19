@@ -129,6 +129,7 @@ module.exports = {
 				'/additional-info/collections',
 				'/additional-info/async-await',
 				'/additional-info/rest-api',
+				'/additional-info/changes-in-v12',
 			],
 		},
 	],
