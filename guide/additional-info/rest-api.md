@@ -39,7 +39,7 @@ client.on('message', async message => {
 	// ...
 });
 
-client.login('pleaseinsertyourtokenheresothistutorialcanwork');
+client.login('your-token-goes-here');
 ```
 
 ::: tip
@@ -72,9 +72,9 @@ Now, of course it seems like this does nothing but what it's doing is launching 
 
 ```js
 if (command === 'cat') {
-	const { body } = await fetch('https://aws.random.cat/meow').then(response => response.json());
+	const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
 
-	message.channel.send(body.file);
+	message.channel.send(file);
 }
 ```
 
@@ -87,14 +87,14 @@ So, here's what's happening in this code:
 5. You then send the object's `file` property in Discord.
 
 ::: warning
-The response will only be parsed if the server's `Content-Type` header includes `application/json`. In some cases, you may have to get the `text` property instead of the `body` property and `JSON.parse()` it yourself.
+The response will only be parsed if the server's `Content-Type` header includes `application/json`. In some cases you may have to apply the `.text()` method instead of `.json()` and `JSON.parse()` it yourself.
 :::
 
 ### Urban Dictionary
 
 Urban Dictionary's API is available at https://api.urbandictionary.com/v0/define, accepts a `term` parameter, and also returns a JSON response.
 
-First, you're going to need to fetch data from the API and get its body. To do this, you'd do:
+First, you're going to need to fetch data from the API. To do this, you'd do:
 
 <!-- eslint-skip -->
 
@@ -108,7 +108,7 @@ if (command === 'urban') {
 
 	const query = querystring.stringify({ term: args.join(' ') });
 
-  const { body } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`).then(response => response.json());
+  const { list } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`).then(response => response.json());
 }
 ```
 
@@ -116,14 +116,14 @@ Here, we use Node's native [querystring module](https://nodejs.org/api/querystri
 
 If you were to do `!urban hello world`, then the URL would become https://api.urbandictionary.com/v0/define?term=hello%20world since the string gets encoded.
 
-With the `body` variable, you can get the properties of the returned JSON response. If you were to view it in your browser, it usually looks like a bunch of mumbo jumbo. If it doesn't, great! If it does, then you should get a JSON formatter/viewer. If you're using Chrome, [JSON Formatter](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa) is one of the more popular extensions. If you're not using Chrome, search for "JSON formatter/viewer &lt;your browser&gt;" and get one.
+You can get the respective properties from the returned JSON. If you were to view it in your browser, it usually looks like a bunch of mumbo jumbo. If it doesn't, great! If it does, then you should get a JSON formatter/viewer. If you're using Chrome, [JSON Formatter](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa) is one of the more popular extensions. If you're not using Chrome, search for "JSON formatter/viewer &lt;your browser&gt;" and get one.
 
 Now, if you look at the JSON, you can see that's a `list` property, which is an array of objects containing various definitions for the term (maximum 10). Something you always want to do when making API based commands is to handle there being no results. So, let's throw a random term in there (e.g. `njaksdcas`) and then look at the response. The `list` array should then be empty. Now you are ready to start writing!
 
-First, you want to start with a check. After fetching the API and storing the body, you would do:
+As explained above we want to check if the API returned any answers for our query like so:
 
 ```js
-if (!body.list.length) {
+if (!list.length) {
 	return message.channel.send(`No results found for **${args.join(' ')}**.`);
 }
 ```
@@ -131,7 +131,7 @@ if (!body.list.length) {
 After making sure that there are results, you will use those results. For now, let's simply send back the definition and nothing more. It's as simple as:
 
 ```js
-message.channel.send(body.list[0].definition);
+message.channel.send(list[0].definition);
 ```
 
 Here, you are simply getting the first object from the array of objects called `list` and grabbing its `definition` property.
@@ -164,7 +164,7 @@ const trim = (str, max) => ((str.length > max) ? `${str.slice(0, max - 3)}...` :
 This is how we'll be structuring the embed:
 
 ```js
-const [answer] = body.list;
+const [answer] = list;
 
 const embed = new Discord.RichEmbed()
 	.setColor('#EFFF00')
