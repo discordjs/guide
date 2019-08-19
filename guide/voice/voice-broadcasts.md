@@ -59,7 +59,7 @@ connection3.play(broadcast);
 
 ## Key takeaways
 
-There are some things to be aware of with broadcasts, this section will help you to understand them.
+There are some specific things to be aware of with broadcasts. This section will help you to understand them.
 
 ### VoiceBroadcast
 - Can be created with `client.voice.createBroadcast()` when you're going to be playing the same audio across more than one `VoiceConnection`.
@@ -88,7 +88,7 @@ const broadcastDispatcher = broadcast.play('music.mp3');
 - A central controller for all subscribers - any changes to this dispatcher will affect all subscribers.
 - Pausing/resuming this dispatcher will pause/resume playback across all subscribers.
 - Altering the volume of this dispatcher will alter the volume across all subscribers.
-- Destroying this dispatcher will stop playback across all subscribers, but they will still remained to the broadcast as the broadcast itself has not been destroyed. To end the broadcast entirely and unsubscribe all subscribers, you should use `broadcast.end()`.
+- Destroying this dispatcher will stop playback across all subscribers, but they will still remain subscribed to the broadcast as the broadcast itself has not been destroyed. To end the broadcast entirely and unsubscribe all subscribers, you should use `broadcast.end()`.
 
 ### StreamDispatcher
 ```js

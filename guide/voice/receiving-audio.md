@@ -19,14 +19,14 @@ const audio = connection.receiver.createStream(user, { mode: 'pcm' });
 audio.pipe(fs.createWriteStream('user_audio'));
 ```
 
-The `mode` option defaults to `'opus'` and can be specified as `'pcm'`. When `'opus'` is specified, Discord.js will not attempt to decode each received Opus packet. The stream created in this case will be a ReadableStream of Opus packets.
+The `mode` option defaults to `'opus'` and can alternatively be specified as `'pcm'`. When `'opus'` is specified, Discord.js will not attempt to decode each received Opus packet. The stream created in this case will be a ReadableStream of Opus packets.
 
 With `'pcm'` specified, Discord.js will attempt to decode each received Opus packet into PCM, giving you a stream of raw audio that can be processed by other applications.
 
-Additionally, the `end` option can be specified. It defaults to `'silence'`, which ends the ReadableStream once the user stops talking. It can be set to `'manual'`, which means the stream doesn't end until you end it yourself. Note that Discord.js will not interpolate silence into gaps in the audio (where the user has stopped speaking), this is something you will have to do yourself.
+Additionally, the `end` option can be specified. It defaults to `'silence'`, which ends the ReadableStream once the user stops talking. It can also be set to `'manual'`, which means the stream doesn't end until you end it yourself. Note that Discord.js will not interpolate silence into gaps in the audio (where the user has stopped speaking), this is something you will have to do yourself.
 
 ::: tip
-To work with PCM audio, you could use software such as [Audacity.](https://www.audacityteam.org/) To import the audio into Audacity, **File > Import > Raw Data...** and then select your audio file. You should select **Signed 16-bit PCM** as the encoding, a **Little-endian** byte order, **2 Channels (Stereo)** and a sample rate of **48000Hz**. 
+To work with PCM audio, you could use software such as [Audacity.](https://www.audacityteam.org/) To import the audio into Audacity, open **File > Import > Raw Data...** and then select your audio file. You should select **Signed 16-bit PCM** as the encoding, a **Little-endian** byte order, **2 Channels (Stereo)** and a sample rate of **48000Hz**. 
 :::
 
 ## Advanced Usage
