@@ -73,7 +73,6 @@ const sequelize = new Sequelize('database', 'user', 'password', {
 	host: 'localhost',
 	dialect: 'sqlite',
 	logging: false,
-	operatorsAliases: false,
 	// SQLite only
 	storage: 'database.sqlite',
 });
@@ -82,7 +81,6 @@ const sequelize = new Sequelize('database', 'user', 'password', {
 `host` tells Sequelize where to look for the database. This will be localhost for most systems, as the database usually resides with the application. But if you have a remote database, then you can set it to that connection address. But otherwise, don't touch this unless you know what you're doing.  
 `dialect` refers to the database engine you're going to use. For this tutorial, we'll use sqlite.  
 `logging` setting this to false disables the verbose output from Sequelize. Set it to true when you're trying to debug.  
-`operatorsAliases` this line is something you have to add because Sequelize recently deprecated using string based operators.
 `storage` is a sqlite-only setting, because sqlite is the only database that stores all its data to a single file.  
 
 
