@@ -7,6 +7,11 @@ const { Op } = require('sequelize');
 const currency = new Discord.Collection();
 const PREFIX = '!';
 
+/*
+ * Make sure you are on at least version 5 of Sequelize! Version 4 as used in this guide will pose a security threat.
+ * You can read more about this issue On the [Sequelize issue tracker](https://github.com/sequelize/sequelize/issues/7310).
+ */
+
 Reflect.defineProperty(currency, 'add', {
 	value: async function add(id, amount) {
 		const user = currency.get(id);
