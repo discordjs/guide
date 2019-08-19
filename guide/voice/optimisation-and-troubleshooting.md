@@ -18,8 +18,8 @@ channel.join().then(connection => {
 
 This is likely due to a poor network connection, or your machine not having enough resources to play audio smoothly. This can be identified if the following occur:
 
-1. Audio playback is only choppy on a specific network or machine
-2. There is a high rate of packet loss (you can identify this by joining a voice channel in Discord, clicking the signal indicator and then selecting your bot and viewing the rate of packet loss)
+1. Audio playback is only choppy on a specific network or machine.
+2. There is a high rate of packet loss (you can identify this by joining a voice channel in Discord, clicking the signal indicator, selecting your bot and viewing the rate of packet loss).
 
 Besides allocating more resources to your bot and having a better network connection, there are also a few techniques we can use to try and improve performance to make playback smoother:
 
@@ -31,7 +31,7 @@ Besides allocating more resources to your bot and having a better network connec
 
 Using Ogg/WebM Opus streams can greatly improve performance as it means an FFmpeg transcoder is not required at runtime. If you're playing audio from static files, you can just convert your files to Ogg Opus easily - this means the transcoder is run only once for the entire file when converting it, and not every single time the file is played.
 
-You can run the following command to convert your audio files to Ogg Opus, provided you've [installed FFmpeg](http://localhost:8080/voice/#installing-dependencies):
+You can run the following command to convert your audio files to Ogg Opus, provided you've [installed FFmpeg](/voice/#installing-dependencies):
 
 ```bash
 $ ffmpeg -i input.mp3 -c:a libopus -b:a 96k output.ogg
