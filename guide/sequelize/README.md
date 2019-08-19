@@ -61,7 +61,7 @@ client.on('message', async message => {
 	}
 });
 
-client.login('pleaseinsertyourtokenheresothistutorialcanwork');
+client.login('your-token-goes-here');
 ```
 
 ### [alpha] Connection information
