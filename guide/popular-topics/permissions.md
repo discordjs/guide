@@ -223,7 +223,7 @@ channel.overwritePermissions({ overwrites: otherChannel.permissionOverwrites });
 
 // replacing overwrites with PermissionOverwriteOptions
 channel.overwritePermissions({
-	overwrites: [
+	permissionOverwrites: [
 		{
 			id: guild.defaultRole.id,
 			deny: ['VIEW_CHANNEL'],
