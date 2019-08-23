@@ -182,6 +182,15 @@ message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
 
 ## Listening for reactions on old messages
 
+<branch version="11.x">
+
+Discord.js v11 does not have the ability to emit events if the respective structures it needs to emit with are incomplete and does not auto-fetch the missing information.
+This behaviour has been changed in version 12 of the library. It introduces partial structures which enable us to emit incomplete structures and complete them with a single fetch call.
+This feature is not available on version 11.x if you want to listen for reactions on old messages please use version 12 of the library.
+
+</branch>
+<branch version="12.x">
+
 Messages sent before your bot started are uncached, unless you fetch them first. By default the library does not emit client events if the data received and cached is not sufficient to build fully functional objects.
 Since version 12 you can change this behaviour by activating partials. For a full explanation of partials see (this page)[/popular-topics/partials.md].
 
@@ -208,6 +217,8 @@ client.on('messageReactionAdd', async (reaction, user) => {
 :::warning
 Partial structures are enabled globally. You can not only make them work for a certain event or cache and you very likely need to adapt other parts of your code that are accessing data from the relevant caches. All caches holding the respective structure type might return partials as well!
 :::
+
+</branch>
 
 ## Resulting code
 

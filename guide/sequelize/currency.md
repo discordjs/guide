@@ -96,6 +96,10 @@ Now that the models are defined, we should create them in our database so that w
 
 Create a file called `dbInit.js` in the base directory (*not* in the `models` folder).
 
+::: danger
+Make sure you use version 5 or later of Sequelize! Version 4 as used in this guide will pose a security threat. You can read more about this issue On the [Sequelize issue tracker](https://github.com/sequelize/sequelize/issues/7310).
+:::
+
 ```js
 const Sequelize = require('sequelize');
 
@@ -103,7 +107,6 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 	host: 'localhost',
 	dialect: 'sqlite',
 	logging: false,
-	operatorsAliases: false,
 	storage: 'database.sqlite',
 });
 
@@ -230,7 +233,7 @@ client.on('message', async message => {
 	}
 });
 
-client.login('pleaseinsertyourtokenheresothistutorialcanwork');
+client.login('your-token-goes-here');
 ```
 
 Nothing special about this skeleton. We import the Users and CurrencyShop models from our `dbObjects.js` file, and add a currency Collection. Every time someone talks, we add 1 to their currency count. The rest is just standard discord.js code and a simple if/else command handler. We're using the currency Collection in order to cache individual user's currency, so we don't have to hit the database for every lookup. I've used an if/else handler here, but you can put it in a framework or command handler as long as you maintain a reference to the models and the currency collection.

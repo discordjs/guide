@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const Canvas = require('canvas');
-const snekfetch = require('snekfetch');
 
 const client = new Discord.Client();
 
@@ -45,18 +44,17 @@ client.on('guildMemberAdd', async member => {
 	ctx.closePath();
 	ctx.clip();
 
-	const { body: buffer } = await snekfetch.get(member.user.displayAvatarURL);
-	const avatar = await Canvas.loadImage(buffer);
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
 	ctx.drawImage(avatar, 25, 25, 200, 200);
 
-	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
+	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
 
 	channel.send(`Welcome to the server, ${member}!`, attachment);
 });
 
-client.on('message', async message => {
+client.on('message', message => {
 	if (message.content === '!join') {
-		client.emit('guildMemberAdd', message.member || await message.guild.fetchMember(message.author));
+		client.emit('guildMemberAdd', message.member);
 	}
 });
 
