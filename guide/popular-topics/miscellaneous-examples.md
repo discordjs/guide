@@ -92,7 +92,7 @@ client.on('message', message => {
 
 	const [, matchedPrefix] = message.content.match(prefixRegex);
 	const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
-	const command = args.shift();
+	const command = args.shift().toLowerCase();
 
 	if (command === 'ping') {
 		message.channel.send('Pong!');
