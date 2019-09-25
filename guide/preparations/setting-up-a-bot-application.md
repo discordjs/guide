@@ -9,7 +9,7 @@ It's incredibly easy to create one. The steps you need to take are as follows:
 1. Open up [the Discord website](https://discordapp.com/) and [login](https://discordapp.com/login).
 2. Hover over the "Developers" drop-down menu and click on the [Developer Portal](https://discordapp.com/developers/applications/) link.
 3. Click on the "New Application" button.
-4. Enter a name and confirm the pop-up window by clicking the "Create" button.
+4. Enter a name and select team to create a bot in if you joined any team. Then confirm the pop-up window by clicking the "Create" button.
 
 You should see a page like this:
 
