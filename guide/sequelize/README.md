@@ -82,7 +82,7 @@ const sequelize = new Sequelize('database', 'user', 'password', {
 });
 ```
 
-`host` tells Sequelize where to look for the database. This will be localhost for most systems, as the database usually resides with the application. If you have a remote database however, then you can set it to that connection address. Otherwise, don't touch this unless you know what you're doing.  
+`host` tells Sequelize where to look for the database. This will be localhost for most systems, as the database usually resides with the application. If you have a remote database however, then you can set it to that connection address. Otherwise, don't touch this unless you know what you are doing.  
 `dialect` refers to the database engine you are going to use. For this tutorial, it will be sqlite.  
 `logging` setting this to false disables the verbose output from Sequelize. Set it to true when you are trying to debug.  
 `storage` is a sqlite-only setting, because sqlite is the only database that stores all its data to a single file.  
@@ -265,7 +265,7 @@ if (!rowCount) return message.reply('That tag did not exist.');
 
 return message.reply('Tag deleted.');
 ```
-`.destroy()` runs the delete operation. The operation returns a count of the number of affected rows. If it returns with a value of 0, then nothing was deleted and that tag didn't exist in the database in the first place.
+`.destroy()` runs the delete operation. The operation returns a count of the number of affected rows. If it returns with a value of 0, then nothing was deleted and that tag did not exist in the database in the first place.
 
 
 ## Resulting code
