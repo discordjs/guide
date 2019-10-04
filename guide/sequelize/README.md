@@ -1,6 +1,6 @@
 # Storing data with Sequelize
 
-Sequelize is an object-relational-mapper, which means you can write a query using objects and have it runs on almost any other database system that Sequelize supports.
+Sequelize is an object-relational-mapper, which means you can write a query using objects and have it run on almost any other database system that Sequelize supports.
 
 ### Why use an ORM?
 
@@ -124,7 +124,7 @@ const Tags = sequelize.define('tags', {
 ```
 
 The model mirrors very closely to what is defined in the database. There will be a table with 4 fields called `name`, `description`, `userid`, and `usage_count`.  
-`sequelize.define()` takes two parameters. `'tags'` is passed as the name of our table, and an object that represents the table's schema in key-value pairs. Keys in the object become the model's attributes, and the values describe the attributes.
+`sequelize.define()` takes two parameters. `'tags'` will be passed as the name of our table, and an object that represents the table's schema in key-value pairs. Keys in the object become the model's attributes, and the values describe the attributes.
 
 `type` refers to what kind of data this attribute should hold. The most common types are number, string, and date, but there are other data types that are available depending on the database.  
 `unique: true` will ensure that this field will never have duplicated entries. Duplicate tag names will be disalowed in this database.  
@@ -137,7 +137,7 @@ The model mirrors very closely to what is defined in the database. There will be
 
 ### [gamma] Syncing the model
 
-Now that our structure is defined, you need to make sure the model exists in the database. This goes in our `.once('ready')` event. This way the table structure gets created, and we do not need to worry about it later.
+Now that our structure is defined, you need to make sure the model exists in the database. This goes in our `.once('ready')` event. This way the table structure gets created, and you do not need to worry about it later.
 ```js
 Tags.sync();
 ```
@@ -172,7 +172,7 @@ catch (e) {
 }
 ```
 
-`Tags.create()` uses the models that we created previously. The `.create()` method inserts some data into the model. you are going to be inserting a tag name, description, and the author name into the database.  
+`Tags.create()` uses the models that was created previously. The `.create()` method inserts some data into the model. you are going to be inserting a tag name, description, and the author name into the database.  
 `catch (e)` This section is necessary for the insert. This will offload checking for duplicates to the database, so that it will notify you if you attempt to create a tag that already exists. The alternative is to query the database before adding data, and checking if a result is returned. If there are no errors, or no identical tag is found, only then should you add the data. Of the two methods it is clear that catching the error is less work for yourself.  
 `if (e.name === "SequelizeUniqueConstraintError")` Although this was mostly for doing less work, it is always good to handle your errors, especially if you know what types of errors you will receive. This error comes up if your unique constraint is violated, i.e. someone inserted duplicate values.
 
