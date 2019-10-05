@@ -89,6 +89,7 @@ module.exports = {
 			children: [
 				'/miscellaneous/parsing-mention-arguments',
 				'/miscellaneous/useful-packages',
+				'/miscellaneous/making-an-eval-command',
 			],
 		},
 		{
