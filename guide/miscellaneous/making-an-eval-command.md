@@ -30,7 +30,7 @@ To do that, we will add a condition, which will return if the author's ID is not
 if (message.author.id !== 'ownerID') return;
 ```
 
-Additionally, you can add your ID in the config file:
+Alternatively you can add your ID in the config file:
 
 ```json
 {
