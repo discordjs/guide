@@ -59,6 +59,28 @@ if (<message>.author.id === '<id>') {
 }
 ```
 
+### How do I check which role was added/removed, and for which member?
+
+<!-- eslint-skip -->
+
+```js
+// We start by declaring a guildMemberUpdate listener
+// This should ***not*** be inside the message listener (or any other listener)
+
+<client>.on('guildMemberUpdate', (oldMember, newMember) => {
+	if(oldMember.roles.size === newMember.roles.size) return;
+
+	if(oldMember.roles.size > newMember.roles.size) {
+		const removedRole = oldMember.roles.find(role => !newMember.roles.some(roleTwo => roleTwo.name === role.name));
+		if(removedRole) console.log(`The role ${removedRole.name} was removed from ${oldMember.displayName}.`);
+	}
+	else {
+		const addedRole = newMember.roles.find(role => !oldMember.roles.some(roleTwo => roleTwo.name === role.name));
+		if(addedRole) console.log(`The role ${addedRole.name} was removed from ${oldMember.displayName}.`);
+	}
+});
+```
+
 ## Bot Configuration
 
 ### How do I set my username?
@@ -205,6 +227,7 @@ A lot of users get confused as to what the difference between Users and GuildMem
 
 ### How do I find all online members?
 
+<!-- eslint-skip -->
 Assuming the process is to be done for the guild the message is sent in.
 ```js
 // First we fetchMembers to be 100% sure everyone is in the member cache
