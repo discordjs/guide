@@ -227,8 +227,9 @@ A lot of users get confused as to what the difference between Users and GuildMem
 
 ### How do I find all online members?
 
-<!-- eslint-skip -->
 Assuming the process is to be done for the guild the message is sent in.
+<!-- eslint-skip -->
+
 ```js
 // First we fetchMembers to be 100% sure everyone is in the member cache
 <message>.guild.fetchMembers().then(fetchedGuild => {
