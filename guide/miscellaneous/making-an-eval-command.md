@@ -5,25 +5,24 @@
 ### What is eval?
 
 The eval() function evaluates JavaScript code represented as a string.
-For instance, `eval(1 + 1)` will return `2` and `eval(client.user.tag)` will return the bot's tag, e.g. `MyBot#0001`.
+For instance, `eval(1 + 1)` will return `2`. Similarly, `eval(client.user.tag)` returns the bot's tag, e.g. `MyBot#0001`.
 
 ### Why eval can be dangerous?
 
-eval() is a dangerous function, which executes the passed code, with the privileges of the caller. If you run eval() with a string that could be affected by a malicious party, you may end up running malicious code on your machine. More importantly, a third-party code can see the scope in which eval() was invoked, which can lead to possible attacks in ways to which the similar Function is not susceptible.
+eval() is a dangerous function, which executes the supplied code, with the privileges of the caller. If you run eval() with a string that could be affected by a malicious party, you may end up running malicious code on your machine. More importantly, a third-party code can see the scope in which eval() was invoked, which can lead to possible attacks.
 
-In other words, eval is dangerous and if somehow someone else has access to it, the person can run (malicious) code with full access.
-Furthermore, anyone with the access to it can get the app's secrets and credentials - such as bot token, API keys, so on.
+In other words, eval is dangerous if somehow someone else has access to it, the person can run (malicious) code with administrator access, i.e. anyone with access to it can get the app's secrets and credentials such as bot token, API keys, and so on.
 
 :::warning
-Note: eval() is also slower than the alternatives, since it has to invoke the JS interpreter, while many other constructs are optimized by modern JS engines.
+Note: eval() is also slower than the alternatives since it has to invoke the JS interpreter, while many other constructs are optimized by modern JS engines.
 :::
 
 ## Implementation
 
 ### Securing eval
 
-Basically, we will be limiting the eval command only to the owner.
-To do that, we will add an condition, which will return if the author's ID is not equals to owner's ID.
+We will be limiting the eval command only to the owner.
+To do that, we will add a condition, which will return if the author's ID is not equals to the owner's ID.
 
 <!-- eslint-skip -->
 
@@ -66,8 +65,8 @@ const clean = content => {
 
 ### Object to String representation
 
-We can convert object to string representation by using an in-built Node.js module - `util`. Specifically, `util#inspect()`
-So what is `util#inspect`? `util.inspect()` method returns a string representation of object that is intended for debugging.
+We can convert an object to string representation by using an in-built Node.js module - `util`. Specifically, `util#inspect()`
+So what is `util#inspect`? The `util.inspect()` method returns a string representation of an object that is intended for debugging.
 Read more on [Node.js API Docs](https://nodejs.org/api/util.html#util_util_inspect_object_options).
 
 First, requiring the `util` module, however, we just need the inspect module, so we will simply destruct it from the module.
