@@ -1,4 +1,4 @@
-# Making an Eval Command
+# Making an Eval command
 
 ## Introduction
 
@@ -17,7 +17,9 @@ Furthermore, anyone with the access to it can get the app's secrets and credenti
 Note: eval() is also slower than the alternatives, since it has to invoke the JS interpreter, while many other constructs are optimized by modern JS engines.
 :::
 
-## Securing eval
+## Implementation
+
+### Securing eval
 
 Basically, we will be limiting the eval command only to the owner.
 To do that, we will add an condition, which will return if the author's ID is not equals to owner's ID.
@@ -40,7 +42,7 @@ const { owner } = require('../config.json');
 if (message.author.id !== owner) return;
 ```
 
-## Cleaning eval
+### Cleaning eval
 
 We'll be creating a function that prevents the use of actual mentions within the return line by adding a zero-width character between the @ and the first character of the mention - blocking the mention from happening.
 
@@ -54,18 +56,34 @@ const clean = content => {
 }
 ```
 
+### Object to String representation
+
+We can convert object to string representation by using an in-built Node.js module - `util`. Specifically, `util#inspect()`
+So what is `util#inspect`? `util.inspect()` method returns a string representation of object that is intended for debugging.
+Read more on [Node.js API Docs](https://nodejs.org/api/util.html#util_util_inspect_object_options).
+
+First, requiring the `util` module, however, we just need the inspect module, so we will simply destruct it from the module.
+```js
+const { inspect } = require('util');
+```
+
+Second, checking if the result is a string or not, if it is, inspect it:
+```js
+let res = eval(args.join(' '));
+if (typeof res !== 'string') res = inspect(res);
+```
+
 ## Conclusion
 
 Here's the final code with enhancements.
 ```js
+const { inspect } = require('util');
 const { owner } = require('../config.json');
 
 if (message.author.id !== owner) return;
 try {
     let res = eval(args.join(' '));
-    if (typeof res !== 'string') {
-        res = require('util').inspect(res);
-    }
+    if (typeof res !== 'string') res = inspect(res);
     message.channel.send(clean(evaled), { code: 'xl' });
 } catch (err) {
     message.channel.send(`\`Error\` \`\`\`xl\n${clean(err)}\n\`\`\``);
