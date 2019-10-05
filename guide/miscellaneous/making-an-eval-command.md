@@ -13,7 +13,7 @@ eval() is a dangerous function, which executes the supplied code, with the privi
 
 In other words, eval is dangerous if somehow someone else has access to it, the person can run (malicious) code with administrator access, i.e. anyone with access to it can get the app's secrets and credentials such as bot token, API keys, and so on.
 
-:::warning
+::: tip
 Note: eval() is also slower than the alternatives since it has to invoke the JS interpreter, while many other constructs are optimized by modern JS engines.
 :::
 
