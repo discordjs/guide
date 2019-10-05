@@ -202,3 +202,15 @@ Be sure to [limit this to your own ID](/popular-topics/common-questions.md#how-d
 ### What is the difference between a User and a GuildMember?
 
 A lot of users get confused as to what the difference between Users and GuildMembers is. The simple answer is that a User represents a global Discord user and a GuildMember represents a Discord user on a specific server. That means only GuildMembers can have permissions, roles, and nicknames, for example, because all of these things are server-bound information that could be different on each server that user is in.
+
+### How do I find all online members?
+
+Assuming the process is to be done for the guild the message is sent in.
+```js
+// First we fetchMembers to be 100% sure everyone is in the member cache
+<message>.guild.fetchMembers().then(fetchedGuild => {
+	const totalOnline = fetchedGuild.members.filter(member => member.presence.status === 'online');
+	// We now have an array with all online member objects in the totalOnline variable
+	<message>.channel.send(`There are currently ${totalOnline.size} members online in this guild!`);
+});
+```
