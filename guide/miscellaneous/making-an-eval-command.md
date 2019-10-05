@@ -25,6 +25,8 @@ Note: eval() is also slower than the alternatives, since it has to invoke the JS
 Basically, we will be limiting the eval command only to the owner.
 To do that, we will add an condition, which will return if the author's ID is not equals to owner's ID.
 
+<!-- eslint-skip -->
+
 ```js
 if (message.author.id !== 'ownerID') return;
 ```
@@ -39,6 +41,8 @@ Additionally, you can add your ID in the config file:
 }
 ```
 
+<!-- eslint-skip -->
+
 ```js
 const { owner } = require('../config.json');
 if (message.author.id !== owner) return;
@@ -47,6 +51,8 @@ if (message.author.id !== owner) return;
 ### Cleaning eval
 
 We'll be creating a function that prevents the use of actual mentions within the return line by adding a zero-width character between the @ and the first character of the mention - blocking the mention from happening.
+
+<!-- eslint-skip -->
 
 ```js
 const clean = content => {
@@ -72,6 +78,8 @@ const { inspect } = require('util');
 
 Second, checking if the result is a string or not, if it is, inspect it:
 
+<!-- eslint-skip -->
+
 ```js
 let res = eval(args.join(' '));
 if (typeof res !== 'string') res = inspect(res);
@@ -80,6 +88,8 @@ if (typeof res !== 'string') res = inspect(res);
 ## Conclusion
 
 Here's the final code with enhancements.
+
+<!-- eslint-skip -->
 
 ```js
 const { inspect } = require('util');
