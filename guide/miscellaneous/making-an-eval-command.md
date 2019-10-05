@@ -48,10 +48,9 @@ We'll be creating a function that prevents the use of actual mentions within the
 const clean = content => {
     if (typeof content === 'string') {
         return content.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203));
-    }
+    } else {
         return content;
-
-}  }
+    }
 }
 ```
 
@@ -59,20 +58,15 @@ const clean = content => {
 
 Here's the final code with enhancements.
 ```js
+const { owner } = require('../config.json');
+
 if (message.author.id !== owner) return;
-const clean = content => {
-    if (typeof content === 'string') {
-        return content.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203));
-    } else {
-        return content;
-    }
-}
 try {
     let res = eval(args.join(' '));
     if (typeof res !== 'string') {
         res = require('util').inspect(res);
     }
-    message.channel.send(clean(res), { code: 'xl' });
+    message.channel.send(clean(evaled), { code: 'xl' });
 } catch (err) {
     message.channel.send(`\`Error\` \`\`\`xl\n${clean(err)}\n\`\`\``);
 }
