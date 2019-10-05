@@ -3,8 +3,9 @@
 ## Introduction
 
 ### What is eval?
+
 The eval() function evaluates JavaScript code represented as a string.
-For instance, `eval(1 + 1)` will return `4` and `eval(client.user.tag)` will return the bot's tag (`MyBot#0001`).
+For instance, `eval(1 + 1)` will return `2` and `eval(client.user.tag)` will return the bot's tag, e.g. `MyBot#0001`.
 
 ### Why eval can be dangerous?
 
@@ -23,6 +24,7 @@ Note: eval() is also slower than the alternatives, since it has to invoke the JS
 
 Basically, we will be limiting the eval command only to the owner.
 To do that, we will add an condition, which will return if the author's ID is not equals to owner's ID.
+
 ```js
 if (message.author.id !== 'ownerID') return;
 ```
@@ -31,8 +33,8 @@ Additionally, you can add your ID in the config file:
 
 ```json
 {
-	"prefix": "!",
-	"token": "your-token-goes-here",
+    "prefix": "!",
+    "token": "your-token-goes-here",
     "owner": "Owner-ID-here"
 }
 ```
@@ -63,11 +65,13 @@ So what is `util#inspect`? `util.inspect()` method returns a string representati
 Read more on [Node.js API Docs](https://nodejs.org/api/util.html#util_util_inspect_object_options).
 
 First, requiring the `util` module, however, we just need the inspect module, so we will simply destruct it from the module.
+
 ```js
 const { inspect } = require('util');
 ```
 
 Second, checking if the result is a string or not, if it is, inspect it:
+
 ```js
 let res = eval(args.join(' '));
 if (typeof res !== 'string') res = inspect(res);
@@ -76,6 +80,7 @@ if (typeof res !== 'string') res = inspect(res);
 ## Conclusion
 
 Here's the final code with enhancements.
+
 ```js
 const { inspect } = require('util');
 const { owner } = require('../config.json');
