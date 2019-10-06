@@ -1,6 +1,6 @@
 # Storing data with Sequelize
 
-Sequelize is an object-relational-mapper, which means you can write a query using objects and have it run on almost any other database system that Sequelize supports.
+Sequelize is an object-relational-mapper, which means you can write a query using objects and have it runs on almost any other database system that Sequelize supports.
 
 ### Why use an ORM?
 
@@ -9,7 +9,7 @@ The main benefit of using an ORM like Sequelize is that it allows you to write c
 ## A simple tag system
 
 For this tutorial, you will create a simple tag system. The tag system will allow you to add a tag, output a tag, edit the tag, show tag info, list tags, and delete a tag.   
-To begin, you should install Sequelize into your discord.js project. SQlite will be used as the first storage engine, other database will be expanded upon later. Note that you will need node 7.6 or above to utilize the `async/await` operators.
+To begin, you should install Sequelize into your discord.js project. We will explain SQlite as the first storage engine and show how to use other databases later. Note that you will need node 7.6 or above to utilize the `async/await` operators.
 
 ### Installing and using Sequelize
 
@@ -25,7 +25,7 @@ $ npm install --save sqlite3
 Make sure you use version 5 or later of Sequelize! Version 4 as used in this guide will pose a security threat. You can read more about this issue On the [Sequelize issue tracker](https://github.com/sequelize/sequelize/issues/7310).
 :::
 
-After having installed discord.js and Sequelize, you can start with the following skeleton code. The comment labels will tell you where to insert the later code blocks.
+After you have installed discord.js and Sequelize, you can start with the following skeleton code. The comment labels will tell you where to insert the later code blocks.
 
 <!-- eslint-disable require-await -->
 
@@ -82,7 +82,7 @@ const sequelize = new Sequelize('database', 'user', 'password', {
 });
 ```
 
-`host` tells Sequelize where to look for the database. This will be localhost for most systems, as the database usually resides with the application. If you have a remote database however, then you can set it to that connection address. Otherwise, don't touch this unless you know what you are doing.  
+`host` tells Sequelize where to look for the database. This will be localhost for most systems, as the database usually resides with the application. If you have a remote database however, then you can set it to that connection address. Otherwise, don't touch this unless you know what you're doing.  
 `dialect` refers to the database engine you are going to use. For this tutorial, it will be sqlite.  
 `logging` setting this to false disables the verbose output from Sequelize. Set it to true when you are trying to debug.  
 `storage` is a sqlite-only setting, because sqlite is the only database that stores all its data to a single file.  
@@ -97,7 +97,7 @@ In any relational database, you need to create tables in order to store your dat
 | bob | is the best | bob | 0 |
 | tableflip | (╯°□°）╯︵ ┻━┻ | joe | 8 |
 
-In order to do that in Sequelize, a model object will be defined based on this structure.
+In order to do that in Sequelize, you define a model based on this structure, as shown below.
 
 ```js
 /*
@@ -124,11 +124,11 @@ const Tags = sequelize.define('tags', {
 ```
 
 The model mirrors very closely to what is defined in the database. There will be a table with 4 fields called `name`, `description`, `userid`, and `usage_count`.  
-`sequelize.define()` takes two parameters. `'tags'` will be passed as the name of our table, and an object that represents the table's schema in key-value pairs. Keys in the object become the model's attributes, and the values describe the attributes.
+`sequelize.define()` takes two parameters. `'tags'` is passed as the name of our table, and an object that represents the table's schema in key-value pairs. Keys in the object become the model's attributes, and the values describe the attributes.
 
 `type` refers to what kind of data this attribute should hold. The most common types are number, string, and date, but there are other data types that are available depending on the database.  
 `unique: true` will ensure that this field will never have duplicated entries. Duplicate tag names will be disalowed in this database.  
-`defaultValue` allows to set a fallback value if no value is set during the insert.  
+`defaultValue` allows you to set a fallback value if no value is set during the insert.  
 `allowNull` is not all that important, but this will guarantee in the database that the attribute is never unset. You could potentially set it to be a blank or empty string, but has to be set to _something_.
 
 ::: tip
@@ -137,16 +137,16 @@ The model mirrors very closely to what is defined in the database. There will be
 
 ### [gamma] Syncing the model
 
-Now that our structure is defined, you need to make sure the model exists in the database. This goes in our `.once('ready')` event. This way the table structure gets created, and you do not need to worry about it later.
+Now that your structure is defined, you need to make sure the model exists in the database. This goes in our `.once('ready')` event. This way the table structure gets created when the bot is ready and we do not need to worry about it later.
 ```js
 Tags.sync();
 ```
 
-The table does not actually get created until you `sync` it. The schema that was defined from before was simply creating the model that lets Sequelize know what the data should look like. For testing, you can use `Tags.sync({ force: true })` to recreate the table every time on startup. This way you can get blank slate each time.
+The table does not actually get created until you `sync` it. The schema you defined from before was simply creating the model that lets Sequelize know what the data should look like. For testing, you can use `Tags.sync({ force: true })` to recreate the table every time on startup. This way you can get blank slate each time.
 
 ### [delta] Adding a tag
 
-You can finally get your first command. Start off with adding a tag.
+After all this preperation, you can now write your first command! We will start off with the ability to add a tag.
 
 <!-- eslint-skip -->
 
@@ -172,7 +172,7 @@ catch (e) {
 }
 ```
 
-`Tags.create()` uses the models that was created previously. The `.create()` method inserts some data into the model. you are going to be inserting a tag name, description, and the author name into the database.  
+`Tags.create()` uses the models that you created previously. The `.create()` method inserts some data into the model. You are going to insert a tag name, description, and the author name into the database.  
 `catch (e)` This section is necessary for the insert. This will offload checking for duplicates to the database, so that it will notify you if you attempt to create a tag that already exists. The alternative is to query the database before adding data, and checking if a result is returned. If there are no errors, or no identical tag is found, only then should you add the data. Of the two methods it is clear that catching the error is less work for yourself.  
 `if (e.name === "SequelizeUniqueConstraintError")` Although this was mostly for doing less work, it is always good to handle your errors, especially if you know what types of errors you will receive. This error comes up if your unique constraint is violated, i.e. someone inserted duplicate values.
 
@@ -182,7 +182,7 @@ Do not use catch for inserting new data. Only use it for gracefully handling thi
 
 ### [epsilon] Fetching a tag
 
-Next you will fetch the tag that was just inserted.
+Next we will explain how to fetch the tag that was just inserted.
 
 <!-- eslint-skip -->
 
@@ -240,7 +240,7 @@ This section is very similar to our previous command, except you will be showing
 
 ### [lambda] Listing all tags
 
-You will use the next command to fetch a list of all the tags that were created so far.
+The next command will enable you to fetch a list of all the tags that were created so far.
 
 <!-- eslint-skip -->
 
@@ -265,7 +265,7 @@ if (!rowCount) return message.reply('That tag did not exist.');
 
 return message.reply('Tag deleted.');
 ```
-`.destroy()` runs the delete operation. The operation returns a count of the number of affected rows. If it returns with a value of 0, then nothing was deleted and that tag did not exist in the database in the first place.
+`.destroy()` runs the delete operation. The operation returns a count of the number of affected rows. If it returns with a value of 0, then nothing was deleted and that tag didn't exist in the database in the first place.
 
 
 ## Resulting code
