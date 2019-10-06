@@ -18,10 +18,6 @@ In other words, eval is dangerous if somehow someone else has access to it, the 
 :::tip
 `eval()` is also slower than the alternatives since it has to invoke the JS interpreter, while many other constructs are optimized by modern JS engines.
 
-::: tip
-`eval()` is also slower than the alternatives since it has to invoke the JS interpreter, while many other constructs are optimized by modern JS engines.
-:::
-
 ## Implementation
 
 ### Securing eval
