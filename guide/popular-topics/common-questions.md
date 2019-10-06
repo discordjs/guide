@@ -226,10 +226,10 @@ Assuming the process is to be done for the guild the message is sent in.
 // This code should be placed outside of any other listener callbacks to prevent listener nesting
 
 <client>.on('guildMemberUpdate', (oldMember, newMember) => {
-	const removedRoles = oldMember.roles.filter(role => !newMember.roles.some(roleTwo => roleTwo.name === role.name));
+	const removedRoles = oldMember.roles.filter(role => !newMember.roles.has(role.id));
 	if(removedRoles.size > 0) console.log(`The roles ${removedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
 
-	const addedRoles = newMember.roles.filter(role => !oldMember.roles.some(roleTwo => roleTwo.name === role.name));
+	const addedRoles = newMember.roles.filter(role => !oldMember.roles.has(role.id));
 	if(addedRoles.size > 0) console.log(`The roles ${addedRoles.map(r => r.name)} were removed from ${oldMember.displayName}.`);
 });
 ```
