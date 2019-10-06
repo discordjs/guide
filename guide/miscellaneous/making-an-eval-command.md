@@ -82,7 +82,7 @@ The `util` modules comes with Node.js, so you don't have to install it.
 const util = require('util');
 ```
 
-Second, if result is not a string, calling the `Util#inspect`:
+Second, if result is not a string, calling the `Util#inspect` function:
 
 <!-- eslint-skip -->
 
