@@ -20,7 +20,7 @@ Once you've created a new file, do a quick check to see if you have everything s
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-client.once('ready', () => {
+client.on('ready', () => {
 	console.log('Ready!');
 });
 
@@ -45,7 +45,7 @@ const client = new Discord.Client();
 
 // when the client is ready, run this code
 // this event will only trigger one time after logging in
-client.once('ready', () => {
+client.on('ready', () => {
 	console.log('Ready!');
 });
 
