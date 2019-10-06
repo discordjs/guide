@@ -250,16 +250,35 @@ A lot of users get confused as to what the difference between Users and GuildMem
 ### How do I find all online members?
 
 Assuming the process is to be done for the guild the message is sent in.
+
+<branch version="11.x">
+
 <!-- eslint-skip -->
 
 ```js
 // First we use fetchMembers to make sure all members are cached
+<message>.guild.fetchMembers().then(fetchedGuild => {
+	const totalOnline = fetchedGuild.members.filter(member => member.presence.status === 'online');
+	// We now have a collection with all online member objects in the totalOnline variable
+	<message>.channel.send(`There are currently ${totalOnline.size} members online in this guild!`);
+});
+```
+
+</branch>
+<branch version="12.x">
+
+<!-- eslint-skip -->
+
+```js
+// First we use guild.members.fetch to make sure all members are cached
 <message>.guild.members.fetch().then(fetchedMembers => {
 	const totalOnline = fetchedMembers.filter(member => member.presence.status === 'online');
 	// We now have a collection with all online member objects in the totalOnline variable
 	<message>.channel.send(`There are currently ${totalOnline.size} members online in this guild!`);
 });
 ```
+
+</branch>
 
 ### How do I check which role was added/removed, and for which member?
 
