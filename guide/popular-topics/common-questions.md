@@ -212,7 +212,7 @@ Assuming the process is to be done for the guild the message is sent in.
 // First we use fetchMembers to make sure all members are cached
 <message>.guild.fetchMembers().then(fetchedGuild => {
 	const totalOnline = fetchedGuild.members.filter(member => member.presence.status === 'online');
-	// We now have an array with all online member objects in the totalOnline variable
+	// We now have a collection with all online member objects in the totalOnline variable
 	<message>.channel.send(`There are currently ${totalOnline.size} members online in this guild!`);
 });
 ```
