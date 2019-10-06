@@ -17,6 +17,9 @@ In other words, eval is dangerous if somehow someone else has access to it, the 
 
 :::tip
 `eval()` is also slower than the alternatives since it has to invoke the JS interpreter, while many other constructs are optimized by modern JS engines.
+
+::: tip
+`eval()` is also slower than the alternatives since it has to invoke the JS interpreter, while many other constructs are optimized by modern JS engines.
 :::
 
 ## Implementation
@@ -31,7 +34,7 @@ To limit the eval command to the owner, add a condition which will return if the
 if (message.author.id !== 'ownerID') return;
 ```
 
-Additionally, you can add your ID in the config file:
+Alternatively you can add your ID in the config file:
 
 ```json
 {
