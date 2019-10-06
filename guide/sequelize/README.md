@@ -1,6 +1,6 @@
 # Storing data with Sequelize
 
-Sequelize is an object-relational-mapper, which means you can write a query using objects and have it runs on almost any other database system that Sequelize supports.
+Sequelize is an object-relational-mapper, which means you can write a query using objects and have it run on almost any other database system that Sequelize supports.
 
 ### Why use an ORM?
 
@@ -265,7 +265,7 @@ if (!rowCount) return message.reply('That tag did not exist.');
 
 return message.reply('Tag deleted.');
 ```
-`.destroy()` runs the delete operation. The operation returns a count of the number of affected rows. If it returns with a value of 0, then nothing was deleted and that tag didn't exist in the database in the first place.
+`.destroy()` runs the delete operation. The operation returns a count of the number of affected rows. If it returns with a value of 0, then nothing was deleted and that tag did not exist in the database in the first place.
 
 
 ## Resulting code
