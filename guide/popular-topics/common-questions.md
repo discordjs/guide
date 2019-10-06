@@ -246,3 +246,35 @@ Be sure to [limit this to your own ID](/popular-topics/common-questions.md#how-d
 ### What is the difference between a User and a GuildMember?
 
 A lot of users get confused as to what the difference between Users and GuildMembers is. The simple answer is that a User represents a global Discord user and a GuildMember represents a Discord user on a specific server. That means only GuildMembers can have permissions, roles, and nicknames, for example, because all of these things are server-bound information that could be different on each server that user is in.
+
+
+### How do I find all online members?
+
+Assuming the process is to be done for the guild the message is sent in.
+<!-- eslint-skip -->
+
+```js
+// First we use fetchMembers to make sure all members are cached
+<message>.guild.members.fetch().then(fetchedMembers => {
+	const totalOnline = fetchedMembers.filter(member => member.presence.status === 'online');
+	// We now have a collection with all online member objects in the totalOnline variable
+	<message>.channel.send(`There are currently ${totalOnline.size} members online in this guild!`);
+});
+```
+
+### How do I check which role was added/removed, and for which member?
+
+<!-- eslint-skip -->
+
+```js
+// We start by declaring a guildMemberUpdate listener
+// This code should be placed outside of any other listener callbacks to prevent listener nesting
+<client>.on('guildMemberUpdate', (oldMember, newMember) => {
+	// If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
+	const removedRoles = oldMember.roles.filter(role => !newMember.roles.has(role.id));
+	if(removedRoles.size > 0) console.log(`The roles ${removedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
+	// If the role(s) are present on the new member object but are not on the new one (i.e role(s) were added)
+	const addedRoles = newMember.roles.filter(role => !oldMember.roles.has(role.id));
+	if(addedRoles.size > 0) console.log(`The roles ${addedRoles.map(r => r.name)} were removed from ${oldMember.displayName}.`);
+});
+```
