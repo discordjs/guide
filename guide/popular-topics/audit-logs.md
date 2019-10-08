@@ -11,6 +11,8 @@ It is crucial that you first understand two details about audit logs:
 
 Let us start by looking quickly at the `fetchAuditLogs` method and how we want to work with it. Similarly to many djs methods, it returns a promise containing what we really want, the GuildAuditLogs object. In most cases, only the `entries` property will be of interest, as that is where a collection of GuildAuditLogsEntry objects are held, and consequently the information we usually want. You can always take a look at the options [in the djs docs](https://discord.js.org/#/docs/main/stable/class/Guild?scrollTo=fetchAuditLogs).
 
+In the following examples, a very simple case for some auditLog types will be explored. Some basic error handling is performed but these code segments are by no means fool proof and are meant to teach you how fetching audit logs work. For a rigorous system you will most likely need to expand on the examples based on your own goals.
+
 ## Who Deleted a Message?
 Let us dive right into it with probably the most common use of audit logs; understanding who deleted any given message in a discord server.
 
@@ -51,7 +53,7 @@ client.on('messageDelete', async message => {
 	const deletionLog = fetchedLogs.entries.first();
 
 	// Let's perform a sanity check here and make sure we got *something*
-	if(!deletionLog) return console.log(`A message by ${message.author.tag} was deleted, but no relevant audit logs were found.`)
+	if(!deletionLog) return console.log(`A message by ${message.author.tag} was deleted, but no relevant audit logs were found.`);
 
 	// We now grab the user object of the person who deleted the message
 	const executor = deletionLog.executor;
@@ -102,6 +104,9 @@ client.on('guildMemberRemove', async message => {
 	// Since we only have 1 audit log entry in this collection, we can simply grab the first one
 	const kickLog = fetchedLogs.entries.first();
 
+	// Let's perform a sanity check here and make sure we got *something*
+	if(!kickLog) return console.log(`${member.user.tag} left the guild, most likely of their own will.`);
+
 	// We now grab the user object of the person who kicked our member
 	const executor = kickLog.executor;
 
@@ -114,7 +119,57 @@ client.on('guildMemberRemove', async message => {
 		console.log(`${member.user.tag} left the guild; kicked by ${executor.tag}?`);
 	}
 	else {
-		console.log(`${member.user.tag} left the guild... perhaps by a ghost.`);
+		console.log(`${member.user.tag} left the guild, audit log fetch was inconclusive.`);
+	}
+});
+```
+
+## Who banned a user?
+
+The logic for this will be very similar to the above kick example, with the exception that this time we have an event specifically for guild bans, that is `guildBanAdd`. Starting with again a skeleton code, we have the following.
+
+```js
+const Discord = require('discord.js');
+const client = new Discord.Client();
+
+client.once('ready', () => {
+	console.log('Ready!');
+});
+
+client.on('guildBanAdd', async (guild, user) => {
+	console.log(`${user.tag} got hit with the swift hammer of justice in the guild ${guild.name}.`);
+});
+
+client.login('your-token-goes-here');
+```
+
+As was the case in the previous examples, we can see what happened, to whom it happened, but not who executed the action. Enter once again audit logs where we will limit ourselves to 1 entry, and looking at the `MEMBER_BAN_ADD` type. Our `guildBanAdd` listener then becomes.
+
+```js
+client.on('guildBaneAdd', async message => {
+	const fetchedLogs = await message.guild.fetchAuditLogs({
+			limit: 1,
+			type: 'MEMBER_BAN_ADD',
+	});
+	// Since we only have 1 audit log entry in this collection, we can simply grab the first one
+	const banLog = fetchedLogs.entries.first();
+
+	// Let's perform a sanity check here and make sure we got *something*
+	if(!banLog) return console.log(`${user.tag} was banned from ${guild.name} but no audit log could be found.`);
+
+	// We now grab the user object of the person who banned the user
+	const executor = banLog.executor;
+
+	// Let us also grab the target of this action to double check things
+	const target = banLog.target;
+
+	// And now we can update our output with a bit more information
+	// We will also run a check to make sure the log we got was for the same kicked member
+	if(target.id === user.id) {
+		console.log(`${user.tag} got hit with the swift hammer of justice in the guild ${guild.name}, wielded by the mighty ${executor.tag}`);
+	}
+	else {
+		console.log(`${user.tag} got hit with the swift hammer of justice in the guild ${guild.name}, audit log fetch was inconclusive.`);
 	}
 });
 ```
