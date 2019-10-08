@@ -57,7 +57,7 @@ client.on('messageDelete', async message => {
 
 	// We now grab the user object of the person who deleted the message
 	// Let us also grab the target of this action to double check things
-	const {executor, target} = deletionLog;
+	const { executor, target } = deletionLog;
 
 
 	// And now we can update our output with a bit more information
@@ -107,7 +107,7 @@ client.on('guildMemberRemove', async message => {
 
 	// We now grab the user object of the person who kicked our member
 	// Let us also grab the target of this action to double check things
-	const {executor, target} = kickLog;
+	const { executor, target } = kickLog;
 
 	// And now we can update our output with a bit more information
 	// We will also run a check to make sure the log we got was for the same kicked member
@@ -154,7 +154,7 @@ client.on('guildBanAdd', async message => {
 
 	// We now grab the user object of the person who banned the user
 	// Let us also grab the target of this action to double check things
-	const {executor, target} = banLog;
+	const { executor, target } = banLog;
 
 	// And now we can update our output with a bit more information
 	// We will also run a check to make sure the log we got was for the same kicked member
