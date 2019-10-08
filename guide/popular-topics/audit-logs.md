@@ -146,7 +146,7 @@ client.login('your-token-goes-here');
 As was the case in the previous examples, we can see what happened, to whom it happened, but not who executed the action. Enter once again audit logs where we will limit ourselves to 1 entry, and looking at the `MEMBER_BAN_ADD` type. Our `guildBanAdd` listener then becomes.
 
 ```js
-client.on('guildBaneAdd', async message => {
+client.on('guildBanAdd', async message => {
 	const fetchedLogs = await message.guild.fetchAuditLogs({
 			limit: 1,
 			type: 'MEMBER_BAN_ADD',
