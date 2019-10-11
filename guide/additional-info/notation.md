@@ -53,6 +53,6 @@ The angle brackets `<>` are used for generic types or parameterized types. This 
 - `Array<Promise<User|GuildMember>>` would be an array of `Promise`s each containing a `User` or a `GuildMember`.
 - `Collection<Snowflake, User>` would be a `Collection`, containing key-value pairs where the keys are `Snowflake`s, and the values are `User`s.
 
-![Message#send on the docs](~@/images/send.png)
+![TextChannel#send on the docs](~@/images/send.png)
 
-In this piece of the docs, you can see three type signatures, `StringResolvable`, `MessageOptions or Attachment or RichEmbed`, and `Promise<(Message|Array<Message>)>`. The meaning of the word "or" here is the same as `|`.
+In this piece of the docs, you can see three type signatures, `StringResolvable`, `MessageOptions or MessageAdditions`, and `Promise<(Message|Array<Message>)>`. The meaning of the word "or" here is the same as `|`.

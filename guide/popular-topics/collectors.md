@@ -63,6 +63,8 @@ First, you'll need some questions and answers to choose from, so here's a basic 
 
 The provided set allows for responder error with an array of answers allowed. Ideally, you should place this in a json file, which you can call `quiz.json` for simplicity.
 
+<branch version="11.x">
+
 ```js
 const quiz = require('./quiz.json');
 const item = quiz[Math.floor(Math.random() * quiz.length)];
@@ -81,11 +83,34 @@ message.channel.send(item.question).then(() => {
 });
 ```
 
+</branch>
+<branch version="12.x">
+
+```js
+const quiz = require('./quiz.json');
+const item = quiz[Math.floor(Math.random() * quiz.length)];
+const filter = response => {
+	return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
+};
+
+message.channel.send(item.question).then(() => {
+	message.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ['time'] })
+		.then(collected => {
+			message.channel.send(`${collected.first().author} got the correct answer!`);
+		})
+		.catch(collected => {
+			message.channel.send('Looks like nobody got the answer this time.');
+		});
+});
+```
+
+</branch>
+
 ::: tip
 If you don't understand how `.some()` works, you can read about it in more detail [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some).
 :::
 
-In this filter, you iterate through the answers to find what you want. You would like to ignore case because simple typos can happen, so you convert each answer to its lowercase form, and check if it's equal to the response in lowercase form as well. In the options section, you only want to allow one answer to pass through, hence the `maxMatches: 1` setting.
+In this filter, you iterate through the answers to find what you want. You would like to ignore case because simple typos can happen, so you convert each answer to its lowercase form, and check if it's equal to the response in lowercase form as well. In the options section, you only want to allow one answer to pass through, hence the <branch version="v11.x" inline>`maxMatches: 1`</branch><branch version="v12.x" inline>`max: 1`</branch> setting.
 
 The filter looks for messages that match one of the answers in our array of possible answers in order to pass through the collector. In the options (the second parameter), it's specified that only a maximum of 1 message can go through the filter successfully before the promise will successfully resolve. In the errors section, it's specified that time will cause it to error out, which will cause the promise to reject if 1 correct answer is not received within the time limit of 1 minute. As you can see, there is no `collect` event, so you are limited in that regard.
 

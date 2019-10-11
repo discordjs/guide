@@ -25,7 +25,7 @@ $ npm install --save sqlite3
 Make sure you use version 5 or later of Sequelize! Version 4 as used in this guide will pose a security threat. You can read more about this issue On the [Sequelize issue tracker](https://github.com/sequelize/sequelize/issues/7310).
 :::
 
-After you have installed discord.js and Sequelize, you can start with the following skeleton code. The comment labels will tell you where to insert the later code blocks.
+After you have installed discord.js and Sequelize, you can start with the following skeleton code. The comment labels will tell you where to insert code lateron.
 
 <!-- eslint-disable require-await -->
 
@@ -65,7 +65,7 @@ client.on('message', async message => {
 	}
 });
 
-client.login('pleaseinsertyourtokenheresothistutorialcanwork');
+client.login('your-token-goes-here');
 ```
 
 ### [alpha] Connection information

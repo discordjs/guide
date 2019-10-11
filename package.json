@@ -31,7 +31,8 @@
     "vuepress": "^0.14.10"
   },
   "dependencies": {
+    "semver": "^6.0.0",
     "vue-discord-message": "^3.0.0",
-    "vuepress-theme-yuu": "^1.0.0"
+    "vuepress-theme-yuu": "^1.1.0"
   }
 }
