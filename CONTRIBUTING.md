@@ -38,7 +38,7 @@ ESLint would error with `Parsing error: Unexpected token message` instead of let
 
 To add a new page to the guide, create a `file-name.md` file inside the folder of your choice. If you want to link to `/dir/some-tutorial.html`, you would create a `some-tutorial.md` file inside a `dir` folder. [VuePress](https://github.com/vuejs/vuepress) will pick up on it and set up the routing appropriately.
 
-With that being said, you will still need to add the link to the sidebar manually. Go to the `/guide/_sidebar.md` file and insert a new list item with a link to your newly created page.
+With that being said, you will still need to add the link to the sidebar manually. Go to the `/guide/.vuepress/sidebar.js` file and insert a new item with the path to your newly created page.
 
 ## General guidelines
 
