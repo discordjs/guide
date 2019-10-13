@@ -197,7 +197,7 @@ If you try again, it should work as expected.
 
 Let's say you have some sort of `!avatar` command, where it'll display the avatar of all the mentioned users, or your own avatar if no users were mentioned. Focus on that 2nd part for now - how would you go about displaying your own avatar if no users were mentioned? Taking the snippet for the code you just used, you can do it just like this:
 
-<branch version ="11.x">
+<branch version="11.x">
 
 <!-- eslint-skip -->
 
@@ -212,7 +212,7 @@ else if (command === 'avatar') {
 ```
 
 </branch>
-<branch version ="12.x">
+<branch version="12.x">
 
 <!-- eslint-skip -->
 
