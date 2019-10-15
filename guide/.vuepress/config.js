@@ -13,7 +13,7 @@ const config = {
 		['meta', { name: 'og:url', content: 'https://discordjs.guide/' }],
 		['meta', { name: 'og:locale', content: 'en_US' }],
 	],
-	ga: 'UA-108513187-1',
+	plugins: [],
 	theme: 'yuu',
 	themeConfig: {
 		yuu: {
@@ -62,6 +62,8 @@ if (process.env.NODE_ENV === 'production') {
 		apiKey: 'c8d9361fb8403f7c5111887e0edf4b5e',
 		indexName: 'discordjs',
 	};
+
+	config.plugins.push(['@vuepress/google-analytics', { ga: 'UA-108513187-1' }]);
 }
 
 module.exports = config;
