@@ -110,6 +110,7 @@ if (<message>.author.id === '<id>') {
 ```
 
 <branch version="11.x">
+
 ::: tip
 If you would like to set your activity upon startup, you must place the `<client>.user.setActivity()` method in a `ready` event listener (`<client>.on('ready', () => {});`).
 :::
