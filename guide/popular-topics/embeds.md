@@ -263,6 +263,8 @@ To use local images inside your embed you need to construct <branch version="11.
 
 You can then access and use the images inside the embed itself with `attachment://fileName.extension`.
 
+<branch version="11.x">
+
 ```js
 const file = new Discord.Attachment('../assets/discordjs.png');
 
@@ -275,6 +277,24 @@ const exampleEmbed = {
 
 channel.send({ files: [file], embed: exampleEmbed });
 ```
+
+</branch>
+<branch version="12.x">
+
+```js
+const file = new Discord.MessageAttachment('../assets/discordjs.png');
+
+const exampleEmbed = {
+	title: 'Some title',
+	image: {
+		url: 'attachment://discordjs.png',
+	},
+};
+
+channel.send({ files: [file], embed: exampleEmbed });
+```
+
+</branch>
 
 ::: warning
 If the images doesn't display inside the embed but outside of it, double check your syntax to make sure it's as shown above.
