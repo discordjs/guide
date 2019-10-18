@@ -193,7 +193,7 @@ This feature is not available on version 11.x if you want to listen for reaction
 <branch version="12.x">
 
 Messages sent before your bot started are uncached, unless you fetch them first. By default the library does not emit client events if the data received and cached is not sufficient to build fully functional objects.
-Since version 12 you can change this behaviour by activating partials. For a full explanation of partials see (this page)[/popular-topics/partials.md].
+Since version 12 you can change this behaviour by activating partials. For a full explanation of partials see [this page](/popular-topics/partials.md).
 
 Make sure you enable partial structures for both `MESSAGE` and `CHANNEL` when instantiating your client, if you want reaction events on uncached messages for both server and direct message channels. If you do not want to support direct message channels you can only enable `MESSAGE`.
 
