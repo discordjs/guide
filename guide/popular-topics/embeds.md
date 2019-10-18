@@ -114,7 +114,7 @@ channel.send(exampleEmbed);
 You don't need to include all the elements showcased above. If you want a simpler embed, just leave some out.
 :::
 
-The `.setColor()` method accepts an integer, HEX color string, an array of RGB values or specific color strings. You can find a list of them at [the Discord.js documentation](https://discord.js.org/#/docs/main/stable/typedef/ColorResolvable).
+The `.setColor()` method accepts an integer, HEX color string, an array of RGB values or specific color strings. You can find a list of them at <branch version="11.x" inline>[the Discord.js documentation](https://discord.js.org/#/docs/main/11.5.1/typedef/ColorResolvable)</branch><branch version="12.x" inline>[the Discord.js documentation](https://discord.js.org/#/docs/main/master/typedef/ColorResolvable)</branch>.
 
 `.addBlankField()` is a convenience method for `.addField('\u200b', '\u200b')` to add a spacer to the embed. This can also be used inline by passing `true` as the first parameter.
 
@@ -150,7 +150,7 @@ if (message.author.bot) {
 
 ### Local images
 
-To use local images inside your embed, you need to upload them alongside the embed with the `.attachFiles()` method. You can either provide the file path [FileOptions](https://discord.js.org/#/docs/main/stable/typedef/FileOptions), BufferResolvable, or Attachment objects inside an array.
+To use local images inside your embed, you need to upload them alongside the embed with the `.attachFiles()` method. You can either provide the file path <branch version="11.x" inline>[FileOptions](https://discord.js.org/#/docs/main/11.5.1/typedef/FileOptions)</branch><branch version="12.x" inline>[FileOptions](https://discord.js.org/#/docs/main/master/typedef/FileOptions)</branch>, BufferResolvable, or Attachment objects inside an array.
 
 You can then access and use the images inside the embed itself with `attachment://fileName.extension`.
 
@@ -259,7 +259,7 @@ if (message.author.bot) {
 
 ### Local images
 
-To use local images inside your embed you need to construct an [Attachment](https://discord.js.org/#/docs/main/stable/class/Attachment) from them to send as message option alongside the embed.
+To use local images inside your embed you need to construct <branch version="11.x" inline>an [Attachment](https://discord.js.org/#/docs/main/11.5.1/class/Attachment)</branch><branch version="12.x" inline>a [MessageAttachment](https://discord.js.org/#/docs/main/master/class/MessageAttachment)</branch> from them to send as message option alongside the embed.
 
 You can then access and use the images inside the embed itself with `attachment://fileName.extension`.
 
