@@ -47,9 +47,9 @@ Here is an example of what an embed may look like. We will go over their constru
 	</discord-message>
 </div>
 
-## Using the <branch version="v11.x" inline>RichEmbed</branch><branch version="v12.x" inline>MessageEmbed</branch> constructor
+## Using the <branch version="11.x" inline>RichEmbed</branch><branch version="12.x" inline>MessageEmbed</branch> constructor
 
-Discord.js features the utility class <branch version="v11.x" inline>[RichEmbed](https://discord.js.org/#/docs/main/11.5.1/class/MessageEmbed)</branch><branch version="v12.x" inline>[MessageEmbed](https://discord.js.org/#/docs/main/12.0.0/class/MessageEmbed)</branch> for easy construction and manipulation of embeds.
+Discord.js features the utility class <branch version="11.x" inline>[RichEmbed](https://discord.js.org/#/docs/main/11.5.1/class/MessageEmbed)</branch><branch version="12.x" inline>[MessageEmbed](https://discord.js.org/#/docs/main/12.0.0/class/MessageEmbed)</branch> for easy construction and manipulation of embeds.
 
 <branch version="11.x">
 
@@ -118,7 +118,7 @@ The `.setColor()` method accepts an integer, HEX color string, an array of RGB v
 
 `.addBlankField()` is a convenience method for `.addField('\u200b', '\u200b')` to add a spacer to the embed. This can also be used inline by passing `true` as the first parameter.
 
-The above example chains the manipulating methods to the newly created <branch version="v11.x" inline>RichEmbed</branch><branch version="v12.x" inline>MessageEmbed</branch> object.
+The above example chains the manipulating methods to the newly created <branch version="11.x" inline>RichEmbed</branch><branch version="12.x" inline>MessageEmbed</branch> object.
 If you want to modify the embed based on conditions you will need to reference it as the constant `exampleEmbed` (for our example).
 
 <branch version="11.x">

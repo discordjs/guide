@@ -123,7 +123,7 @@ As you have likely already seen in your desktop client, channel overwrites have 
 
 ### Adding overwrites
 
-To add a permission overwrite for a role or guild member, you access the channel object and use the <branch version="v11.x" inline>`.overwritePermissions()`</branch><branch version="v12.x" inline>`.updateOverwrite()`</branch> method. The first parameter is the target of the overwrite, either a Role or User object (or its respective resolvable), and the second is a <branch version="11.x" inline>[PermissionOverwriteOptions](https://discord.js.org/#/docs/main/11.5.1/typedef/PermissionOverwriteOptions)</branch><branch version="12.x" inline>[PermissionOverwriteOption](https://discord.js.org/#/docs/main/master/typedef/PermissionOverwriteOption)</branch> object.
+To add a permission overwrite for a role or guild member, you access the channel object and use the <branch version="11.x" inline>`.overwritePermissions()`</branch><branch version="12.x" inline>`.updateOverwrite()`</branch> method. The first parameter is the target of the overwrite, either a Role or User object (or its respective resolvable), and the second is a <branch version="11.x" inline>[PermissionOverwriteOptions](https://discord.js.org/#/docs/main/11.5.1/typedef/PermissionOverwriteOptions)</branch><branch version="12.x" inline>[PermissionOverwriteOption](https://discord.js.org/#/docs/main/master/typedef/PermissionOverwriteOption)</branch> object.
 
 Let's add an overwrite to lock everyone out of the channel. The guild ID doubles as the role id for the default role @everyone as demonstrated below:
 
@@ -191,7 +191,7 @@ guild.channels.create('new-channel', {
 
 ### Replacing overwrites
 
-To replace all permission overwrites on the channel with a provided set of new overwrites, you can use the <branch version="v11.x" inline>`.replaceOverwrites()`</branch><branch version="v12.x" inline>`.overwritePermissions()`</branch> function. This is extremely handy if you want to copy a channels full set of overwrites to another one, as this method allows passing an array or Collection of <branch version="12.x" inline>[PermissionOverwrites](https://discord.js.org/#/docs/main/master/class/PermissionOverwrites)</branch><branch version="11.x" inline>[PermissionOverwrites](https://discord.js.org/#/docs/main/11.5.1/class/PermissionOverwrites) or [ChannelCreationOverwrites](https://discord.js.org/#/docs/main/11.5.1/typedef/ChannelCreationOverwrites)</branch>.
+To replace all permission overwrites on the channel with a provided set of new overwrites, you can use the <branch version="11.x" inline>`.replaceOverwrites()`</branch><branch version="12.x" inline>`.overwritePermissions()`</branch> function. This is extremely handy if you want to copy a channels full set of overwrites to another one, as this method allows passing an array or Collection of <branch version="12.x" inline>[PermissionOverwrites](https://discord.js.org/#/docs/main/master/class/PermissionOverwrites)</branch><branch version="11.x" inline>[PermissionOverwrites](https://discord.js.org/#/docs/main/11.5.1/class/PermissionOverwrites) or [ChannelCreationOverwrites](https://discord.js.org/#/docs/main/11.5.1/typedef/ChannelCreationOverwrites)</branch>.
 
 <branch version="11.x">
 
@@ -290,7 +290,7 @@ const rolePermissions = channel.permissionsFor(role);
 ```
 
 ::: warning
-The `.permissionsFor()` and `.permissiosnIn()` methods return a <branch version="v11.x" inline>bit field</branch><branch version="v12.x" inline>Permissions object</branch> with all permissions set if the member or role has the global `ADMINISTRATOR` permission and does not take overwrites into consideration in this case. Using the second parameter of the `.has()` method as described further down in the guide will not allow you to check without taking `ADMINISTRATOR` into account here!
+The `.permissionsFor()` and `.permissiosnIn()` methods return a <branch version="11.x" inline>bit field</branch><branch version="12.x" inline>Permissions object</branch> with all permissions set if the member or role has the global `ADMINISTRATOR` permission and does not take overwrites into consideration in this case. Using the second parameter of the `.has()` method as described further down in the guide will not allow you to check without taking `ADMINISTRATOR` into account here!
 :::
 
 If you want to know how to work with the returned Permissions objects keep reading as this will be our next topic.
