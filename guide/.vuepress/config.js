@@ -18,7 +18,7 @@ const config = {
 	themeConfig: {
 		yuu: {
 			colorThemes: ['blue', 'red'],
-			extraOptions: { below: 'BranchSelector' },
+			extraOptions: { before: 'BranchSelector' },
 		},
 		repo: 'discordjs/guide',
 		docsDir: 'guide',
