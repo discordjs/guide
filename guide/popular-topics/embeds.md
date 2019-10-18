@@ -49,7 +49,7 @@ Here is an example of what an embed may look like. We will go over their constru
 
 ## Using the <branch version="11.x" inline>RichEmbed</branch><branch version="12.x" inline>MessageEmbed</branch> constructor
 
-Discord.js features the utility class <branch version="11.x" inline>[RichEmbed](https://discord.js.org/#/docs/main/11.5.1/class/MessageEmbed)</branch><branch version="12.x" inline>[MessageEmbed](https://discord.js.org/#/docs/main/12.0.0/class/MessageEmbed)</branch> for easy construction and manipulation of embeds.
+Discord.js features the utility class <branch version="11.x" inline>[RichEmbed](https://discord.js.org/#/docs/main/11.5.1/class/MessageEmbed)</branch><branch version="12.x" inline>[MessageEmbed](https://discord.js.org/#/docs/main/master/class/MessageEmbed)</branch> for easy construction and manipulation of embeds.
 
 <branch version="11.x">
 

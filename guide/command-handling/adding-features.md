@@ -383,7 +383,7 @@ At the end of it all, you should be getting this as a result:
 No more manually editing your help command! If you aren't completely satisfied with how it looks, you can always adjust it to your liking later.
 
 ::: tip
-If you want to add categories or other information to your commands you can simply add properties reflecting it to your `module.exports`. If you only want to show a subset of commands remember that `commands` is a Collection you can [filter](https://discord.js.org/#/docs/main/stable/class/Collection?scrollTo=filter) to fit your specific needs!
+If you want to add categories or other information to your commands you can simply add properties reflecting it to your `module.exports`. If you only want to show a subset of commands remember that `commands` is a Collection you can [filter](https://discord.js.org/#/docs/main/11.5.1/class/Collection?scrollTo=filter) to fit your specific needs!
 :::
 
 ## Conclusion 

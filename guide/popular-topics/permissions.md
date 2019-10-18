@@ -165,7 +165,7 @@ guild.createChannel('new-channel', {
 ```
 
 ::: warning
-These objects are [ChannelCreationOverwrites](https://discord.js.org/#/docs/main/stable/typedef/ChannelCreationOverwrites) and differ from [PermissionOverwriteOptions](https://discord.js.org/#/docs/main/stable/typedef/PermissionOverwriteOptions); be careful to not mix them up!
+These objects are [ChannelCreationOverwrites](https://discord.js.org/#/docs/main/11.5.1/typedef/ChannelCreationOverwrites) and differ from [PermissionOverwriteOptions](https://discord.js.org/#/docs/main/11.5.1/typedef/PermissionOverwriteOptions); be careful to not mix them up!
 :::
 
 </branch>
