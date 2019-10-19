@@ -5,7 +5,7 @@
   "scripts": {
     "lint": "eslint . --ext js,md,vue",
     "serve": "vuepress dev guide",
-    "build": "vuepress build guide"
+    "build": "NODE_ENV=production vuepress build guide"
   },
   "repository": "https://github.com/discordjs/guide.git",
   "keywords": [
