@@ -7648,7 +7648,7 @@ vue-click-outside@^1.0.7:
   resolved "https://registry.yarnpkg.com/vue-click-outside/-/vue-click-outside-1.0.7.tgz#cdd2b1605e3c4944784e1794eae4a12a0f700bd6"
   integrity sha1-zdKxYF48SUR4TheU6uShKg9wC9Y=
 
-vue-discord-message@^3.0.0:
+vue-discord-message@^3.2.3:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/vue-discord-message/-/vue-discord-message-3.2.3.tgz#24bf4cc84a1603395e50fdf1cf1e2acf71fa0a1d"
   integrity sha512-fwIJKG3u5kKTxkDU4tohmT7FWeot1mGa77+VVQa+d+XlmUCvk9iuK8AWig2b6lBdtcgI17yrT/yO0pxdwQOvVw==
@@ -7755,10 +7755,10 @@ vuepress-plugin-smooth-scroll@^0.0.3:
   dependencies:
     smoothscroll-polyfill "^0.4.3"
 
-vuepress-theme-yuu@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/vuepress-theme-yuu/-/vuepress-theme-yuu-2.0.0.tgz#4f895a59e01800c92de94656012f1b873d9d31d8"
-  integrity sha512-eNYjZvCL8gQyA1PVSPguKJmzwuvJZErC1rFSR9tWXlisPQjZ9LOkhW0ISEJ2jGVGy7DVhIvA8uNGWLKKqLXiKg==
+vuepress-theme-yuu@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/vuepress-theme-yuu/-/vuepress-theme-yuu-2.0.1.tgz#b791d3db139286b755ced73962c4d16306d759b8"
+  integrity sha512-PfL1BDd6LG2F+ahsPxdpNckZA9vYAQcI4cNf2I+6KYIc5J4CT45DHa4KBS6jkDRQlo2cTqHYtGHcUjBTPR73Gw==
   dependencies:
     vue-click-outside "^1.0.7"
 

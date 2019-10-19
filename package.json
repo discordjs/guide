@@ -34,6 +34,6 @@
     "@vuepress/plugin-google-analytics": "^1.2.0",
     "semver": "^6.0.0",
     "vue-discord-message": "^3.2.3",
-    "vuepress-theme-yuu": "^2.0.0"
+    "vuepress-theme-yuu": "^2.0.1"
   }
 }
