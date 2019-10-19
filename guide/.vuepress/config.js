@@ -12,6 +12,7 @@ const config = {
 		['meta', { name: 'og:type', content: 'website' }],
 		['meta', { name: 'og:url', content: 'https://discordjs.guide/' }],
 		['meta', { name: 'og:locale', content: 'en_US' }],
+		['meta', { name: 'og:image', content: '/meta-image.png' }],
 	],
 	plugins: [],
 	theme: 'yuu',
