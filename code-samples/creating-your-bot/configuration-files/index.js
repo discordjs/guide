@@ -8,7 +8,6 @@ client.once('ready', () => {
 
 client.on('message', message => {
 	if (!message.content.startsWith(config.prefix)) return;
-	
 	if (message.content === config.prefix + 'ping') {
 		message.channel.send('Pong.');
 	}
