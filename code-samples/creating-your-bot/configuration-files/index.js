@@ -7,7 +7,7 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
-	if (!message.content.startsWith(config.prefix) {
+	if (!message.content.startsWith(config.prefix)) {
 		return;
 	}
 	
