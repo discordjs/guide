@@ -12,13 +12,14 @@ const config = {
 		['meta', { name: 'og:type', content: 'website' }],
 		['meta', { name: 'og:url', content: 'https://discordjs.guide/' }],
 		['meta', { name: 'og:locale', content: 'en_US' }],
+		['meta', { name: 'og:image', content: '/meta-image.png' }],
 	],
 	plugins: [],
 	theme: 'yuu',
 	themeConfig: {
 		yuu: {
 			colorThemes: ['blue', 'red'],
-			extraOptions: { below: 'BranchSelector' },
+			extraOptions: { before: 'BranchSelector' },
 		},
 		repo: 'discordjs/guide',
 		docsDir: 'guide',
