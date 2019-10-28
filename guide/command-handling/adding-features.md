@@ -386,6 +386,61 @@ No more manually editing your help command! If you aren't completely satisfied w
 If you want to add categories or other information to your commands you can simply add properties reflecting it to your `module.exports`. If you only want to show a subset of commands remember that `commands` is a Collection you can <branch version="11.x" inline>[filter](https://discord.js.org/#/docs/main/11.5.1/class/Collection?scrollTo=filter)</branch><branch version="12.x" inline>[filter](https://discord.js.org/#/docs/collection/master/class/Collection?scrollTo=filter)</branch> to fit your specific needs!
 :::
 
+## Reloading commands
+
+When writing your commands, you may find it tedious to restart bot every time you want to test even slightest change in your code. However, if you have a command handler, reloading commands can be done with a single command.
+
+Create new command file and paste in the usual format:
+
+```js
+module.exports = {
+  name: 'reload',
+  description: 'Reloads a command',
+  args: true,
+  execute(message, args) {
+    // ...
+  }
+}
+```
+
+In this command, you will be using command's name or alias as an only argument. First off, you need to check if command you want to reload exists. This can be done in similiar fashion as getting a command in your main file:
+
+```js
+const commandName = args[0].toLowerCase();
+const command = message.client.commands.get(commandName)
+    || message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+if (!command) return message.channel.send(`There is no command with name or alias \`${commandName}\`, ${message.author}!`);
+```
+
+`message.client`? Yes! Every library specific object has `client` as a property. That means that you don't have to pass it as a parameter to commands to access for example `client.guilds` or `client.commands` that you will need now.
+
+Now, in theory, all there is to do, is to delete the previous command from `client.commands` and require the file again. In practice though, you cannot do this that easy, as `require()` caches the file. If you would require it again, you would simply load previously cached file without any of your changes. In order to remove the file from the cache, you need to add the following line to your command's code:
+
+```js
+delete require.cache[require.resolve(`./${commandName}.js`)];
+```
+
+After removing file from cache, all you have to do is require the file and add freshly loaded command to `client.commands`:
+
+```js
+try {
+  const newCommand = require(`./${commandName}.js`);
+  message.client.commands.set(newCommand.name, newCommand);
+} catch (error) {
+  console.log(error);
+  message.channel.send(`There was an error while reloading a command \`${commandName}\`:\n\`${error.message}\``);
+}
+```
+
+Code above uses `try/catch` to load the command file and add it to `client.commands`, and in case of error - logs whole error to console and notifies about the fact.
+
+Last thing you need to add, is to send message to confirm succesful reload:
+
+```js
+message.channel.send(`Command \`${commandName}\` was reloaded!`);
+```
+
 ## Conclusion 
 
 At this point of the guide, you should now have a command handler with some very basic (but useful) features! If you see fit, you can expand upon the current structure to make something even better and easier for you to use in the future.
