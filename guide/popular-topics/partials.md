@@ -1,6 +1,6 @@
 # Partial Structures
 
-Partial Structures were introduced to the library in version 12 and are optionall received whenever there is no sufficient data to emit the client event with a fully intact discord.js structure.They are (as the name suggests) incomplete and you can not expect them to have any information besides their ID. All other properties and methods on this object should be considered invalid and defunct. Prior to this feature discord.js client events would simply not emit if one of the necessary structures could not be build with sufficient data to guarantee a fully functional structure with. If you do not opt into partials this is still the case.
+Partial Structures were introduced to the library in version 12 and are optionally received whenever there is no sufficient data to emit the client event with a fully intact discord.js structure. They are (as the name suggests) incomplete and you cannot expect them to have any information besides their ID. All other properties and methods on this object should be considered invalid and defunct. Prior to this feature discord.js client events would simply not emit if one of the necessary structures could not be build with sufficient data to guarantee a fully functional structure with. If you do not opt into partials this is still the case.
 
 One example leveraging partials is the handling of reactions on uncached messages, which is explained on [this page](/popular-topics/reactions.md#listening-for-reactions-on-old-messages).
 
