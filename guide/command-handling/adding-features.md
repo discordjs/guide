@@ -413,7 +413,7 @@ const command = message.client.commands.get(commandName)
 if (!command) return message.channel.send(`There is no command with name or alias \`${commandName}\`, ${message.author}!`);
 ```
 
-`message.client`? Yes! Every library specific object has `client` as a property. That means that you don't have to pass it as a parameter to commands to access for example `client.guilds` or `client.commands` that you will need now.
+`message.client`? Yes! Every library specific object has `client` as a property. That means that you don't have to pass it as a parameter to commands to access for example `client.guilds` or `client.commands` which you will need now.
 
 Now, in theory, all there is to do, is to delete the previous command from `client.commands` and require the file again. In practice though, you cannot do this that easy, as `require()` caches the file. If you would require it again, you would simply load previously cached file without any of your changes. In order to remove the file from the cache, you need to add the following line to your command's code:
 
@@ -433,9 +433,9 @@ try {
 }
 ```
 
-Code above uses `try/catch` to load the command file and add it to `client.commands`, and in case of error - logs whole error to console and notifies about the fact.
+Snippet above uses `try/catch` to load the command file and add it to `client.commands`, and in case of error - log whole error to console and notify about the fact sending only short `error.message`.
 
-Last thing you need to add, is to send message to confirm succesful reload:
+Last thing you might want to add is sending a message on succesful reload:
 
 ```js
 message.channel.send(`Command \`${commandName}\` was reloaded!`);
