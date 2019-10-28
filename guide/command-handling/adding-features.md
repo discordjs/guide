@@ -433,7 +433,7 @@ try {
 }
 ```
 
-Snippet above uses `try/catch` to load the command file and add it to `client.commands`, and in case of error - log whole error to console and notify about the fact sending only short `error.message`.
+Snippet above uses `try/catch` to load the command file and add it to `client.commands`, and in case of error - log whole error to console and notify about the fact sending only short `error.message`. Note the fact that we never actually delete the command from commands collection, and instead just overwrite it. This prevents from deleting a command, and ending up with no such command in collection upon failed `require()`, as each use of the reload command checks that collection again.
 
 Last thing you might want to add is sending a message on succesful reload:
 
