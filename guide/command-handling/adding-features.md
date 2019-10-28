@@ -394,13 +394,13 @@ Create new command file and paste in the usual format:
 
 ```js
 module.exports = {
-  name: 'reload',
-  description: 'Reloads a command',
-  args: true,
-  execute(message, args) {
-    // ...
-  }
-}
+	name: 'reload',
+	description: 'Reloads a command',
+	args: true,
+		execute(message, args) {
+			// ...
+		},
+};
 ```
 
 In this command, you will be using command's name or alias as an only argument. First off, you need to check if command you want to reload exists. This can be done in similiar fashion as getting a command in your main file:
@@ -408,7 +408,7 @@ In this command, you will be using command's name or alias as an only argument. 
 ```js
 const commandName = args[0].toLowerCase();
 const command = message.client.commands.get(commandName)
-    || message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+	|| message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 if (!command) return message.channel.send(`There is no command with name or alias \`${commandName}\`, ${message.author}!`);
 ```
@@ -425,11 +425,11 @@ After removing file from cache, all you have to do is require the file and add f
 
 ```js
 try {
-  const newCommand = require(`./${commandName}.js`);
-  message.client.commands.set(newCommand.name, newCommand);
+	const newCommand = require(`./${commandName}.js`);
+	message.client.commands.set(newCommand.name, newCommand);
 } catch (error) {
-  console.log(error);
-  message.channel.send(`There was an error while reloading a command \`${commandName}\`:\n\`${error.message}\``);
+	console.log(error);
+	message.channel.send(`There was an error while reloading a command \`${commandName}\`:\n\`${error.message}\``);
 }
 ```
 
