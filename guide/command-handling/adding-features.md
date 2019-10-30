@@ -396,16 +396,17 @@ Create new command file and paste in the usual format:
 module.exports = {
 	name: 'reload',
 	description: 'Reloads a command',
-	args: true,
 	execute(message, args) {
 		// ...
 	},
 };
 ```
 
-In this command, you will be using command's name or alias as an only argument. First off, you need to check if command you want to reload exists. This can be done in similiar fashion as getting a command in your main file:
+In this command, you will be using command's name or alias as an only argument. First off, you need to check if command you want to reload exists. This can be done in similiar fashion as getting a command in your main file.  
+Note that you can skip first line if you use [argument checker](/command-handling/adding-features.html#required-arguments) from above:
 
 ```js
+if (!args.length) return message.channel.send(`You didn't pass any command to reload, ${message.author}!`);
 const commandName = args[0].toLowerCase();
 const command = message.client.commands.get(commandName)
 	|| message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
