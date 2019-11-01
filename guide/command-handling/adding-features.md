@@ -434,7 +434,7 @@ try {
 }
 ```
 
-Snippet above uses `try/catch` to load the command file and add it to `client.commands`, and in case of error - log whole error to console and notify about the fact sending only short `error.message`. Note the fact that we never actually delete the command from commands collection, and instead just overwrite it. This prevents from deleting a command, and ending up with no such command in collection upon failed `require()`, as each use of the reload command checks that collection again.
+The snippet above uses a `try/catch` block to load the command file and add it to `client.commands`. In case of an error it will log the full error to console and notify the user about it with the error's message component `error.message`. Note the you never actually delete the command from the commands collection, and instead just overwrite it. This prevents you from deleting a command, and ending up with no command at all after a failed `require()` call, as each use of the reload command checks that collection again.
 
 The last thing you might want to add is sending a message if the reload was successful:
 
