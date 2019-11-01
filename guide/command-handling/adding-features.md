@@ -388,9 +388,9 @@ If you want to add categories or other information to your commands you can simp
 
 ## Reloading commands
 
-When writing your commands, you may find it tedious to restart bot every time you want to test even slightest change in your code. However, if you have a command handler, reloading commands can be done with a single command.
+When writing your commands, you may find it tedious to restart your bot every time you want to test even the slightest change in your code. However, if you have a command handler, reloading commands can be done with a single bot command.
 
-Create new command file and paste in the usual format:
+Create a new command file and paste in the usual format:
 
 ```js
 module.exports = {
@@ -402,8 +402,8 @@ module.exports = {
 };
 ```
 
-In this command, you will be using command's name or alias as an only argument. First off, you need to check if command you want to reload exists. This can be done in similiar fashion as getting a command in your main file.  
-Note that you can skip first line if you use [argument checker](/command-handling/adding-features.html#required-arguments) from above:
+In this command, you will be using a command name or alias as the only argument. First off, you need to check if the command you want to reload exists. This can be done in a similar fashion as getting a command in your main file.  
+Note that you can skip the first line if you use the [argument checker](/command-handling/adding-features.html#required-arguments) from above:
 
 ```js
 if (!args.length) return message.channel.send(`You didn't pass any command to reload, ${message.author}!`);
@@ -416,13 +416,13 @@ if (!command) return message.channel.send(`There is no command with name or alia
 
 `message.client`? Yes! Every library specific object has `client` as a property. That means that you don't have to pass it as a parameter to commands to access for example `client.guilds` or `client.commands` which you will need now.
 
-Now, in theory, all there is to do, is to delete the previous command from `client.commands` and require the file again. In practice though, you cannot do this that easy, as `require()` caches the file. If you would require it again, you would simply load previously cached file without any of your changes. In order to remove the file from the cache, you need to add the following line to your command's code:
+Now, in theory, all there is to do, is to delete the previous command from `client.commands` and require the file again. In practice though, you cannot do this that easily as `require()` caches the file. If you were to require it again, you would simply load the previously cached file without any of your changes. In order to remove the file from the cache, you need to add the following line to your code:
 
 ```js
 delete require.cache[require.resolve(`./${commandName}.js`)];
 ```
 
-After removing file from cache, all you have to do is require the file and add freshly loaded command to `client.commands`:
+After removing the command from the cache, all you have to do is require the file again and add the freshly loaded command to `client.commands`:
 
 ```js
 try {
@@ -436,7 +436,7 @@ try {
 
 Snippet above uses `try/catch` to load the command file and add it to `client.commands`, and in case of error - log whole error to console and notify about the fact sending only short `error.message`. Note the fact that we never actually delete the command from commands collection, and instead just overwrite it. This prevents from deleting a command, and ending up with no such command in collection upon failed `require()`, as each use of the reload command checks that collection again.
 
-Last thing you might want to add is sending a message on succesful reload:
+The last thing you might want to add is sending a message if the reload was successful:
 
 ```js
 message.channel.send(`Command \`${commandName}\` was reloaded!`);
