@@ -7756,9 +7756,9 @@ vuepress-plugin-smooth-scroll@^0.0.3:
     smoothscroll-polyfill "^0.4.3"
 
 vuepress-theme-yuu@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/vuepress-theme-yuu/-/vuepress-theme-yuu-2.0.1.tgz#b791d3db139286b755ced73962c4d16306d759b8"
-  integrity sha512-PfL1BDd6LG2F+ahsPxdpNckZA9vYAQcI4cNf2I+6KYIc5J4CT45DHa4KBS6jkDRQlo2cTqHYtGHcUjBTPR73Gw==
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/vuepress-theme-yuu/-/vuepress-theme-yuu-2.2.0.tgz#534dbb3da2ced745e01a8fd1b01fdd55d6d91fc9"
+  integrity sha512-UdyOTrk6DEE+f9LXA6ZxD4cAQg/izGnAt+8ETRLa/G1rlKtJMuMlEfDY/RZox/YrzWp4/+wV3XlU7NCD8o4lgg==
   dependencies:
     vue-click-outside "^1.0.7"
 
