@@ -386,6 +386,64 @@ No more manually editing your help command! If you aren't completely satisfied w
 If you want to add categories or other information to your commands you can simply add properties reflecting it to your `module.exports`. If you only want to show a subset of commands remember that `commands` is a Collection you can <branch version="11.x" inline>[filter](https://discord.js.org/#/docs/main/11.5.1/class/Collection?scrollTo=filter)</branch><branch version="12.x" inline>[filter](https://discord.js.org/#/docs/collection/master/class/Collection?scrollTo=filter)</branch> to fit your specific needs!
 :::
 
+## Reloading commands
+
+When writing your commands, you may find it tedious to restart your bot every time you want to test even the slightest change in your code. However, if you have a command handler, reloading commands can be done with a single bot command.
+
+Create a new command file and paste in the usual format:
+
+```js
+module.exports = {
+	name: 'reload',
+	description: 'Reloads a command',
+	execute(message, args) {
+		// ...
+	},
+};
+```
+
+In this command, you will be using a command name or alias as the only argument. First off, you need to check if the command you want to reload exists. This can be done in a similar fashion as getting a command in your main file.  
+Note that you can skip the first line if you use the [argument checker](/command-handling/adding-features.html#required-arguments) from above:
+
+```js
+if (!args.length) return message.channel.send(`You didn't pass any command to reload, ${message.author}!`);
+const commandName = args[0].toLowerCase();
+const command = message.client.commands.get(commandName)
+	|| message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+if (!command) return message.channel.send(`There is no command with name or alias \`${commandName}\`, ${message.author}!`);
+```
+
+:::tip
+A lot of library specific structures have `client` as a property. That means you don't have to pass the client reference as a parameter to commands to access for example `client.guilds` or `client.commands`, but can directly access the respective properties directly from the `message` object, as shown in the snippet above.
+:::
+
+Now, in theory, all there is to do, is to delete the previous command from `client.commands` and require the file again. In practice though, you cannot do this that easily as `require()` caches the file. If you were to require it again, you would simply load the previously cached file without any of your changes. In order to remove the file from the cache, you need to add the following line to your code:
+
+```js
+delete require.cache[require.resolve(`./${commandName}.js`)];
+```
+
+After removing the command from the cache, all you have to do is require the file again and add the freshly loaded command to `client.commands`:
+
+```js
+try {
+	const newCommand = require(`./${commandName}.js`);
+	message.client.commands.set(newCommand.name, newCommand);
+} catch (error) {
+	console.log(error);
+	message.channel.send(`There was an error while reloading a command \`${commandName}\`:\n\`${error.message}\``);
+}
+```
+
+The snippet above uses a `try/catch` block to load the command file and add it to `client.commands`. In case of an error it will log the full error to console and notify the user about it with the error's message component `error.message`. Note the you never actually delete the command from the commands collection, and instead just overwrite it. This prevents you from deleting a command, and ending up with no command at all after a failed `require()` call, as each use of the reload command checks that collection again.
+
+The last thing you might want to add is sending a message if the reload was successful:
+
+```js
+message.channel.send(`Command \`${commandName}\` was reloaded!`);
+```
+
 ## Conclusion 
 
 At this point of the guide, you should now have a command handler with some very basic (but useful) features! If you see fit, you can expand upon the current structure to make something even better and easier for you to use in the future.
