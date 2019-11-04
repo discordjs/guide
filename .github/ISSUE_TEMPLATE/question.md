@@ -1,7 +1,7 @@
 ---
 name: Question/General support request
 about: Ask questions about discord.js in Discord - https://discord.gg/bRCvFy9 
-labels: question
+labels: 'type: question'
 
 ---
 

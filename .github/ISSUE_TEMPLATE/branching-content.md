@@ -2,7 +2,7 @@
 name: Branching Content
 about: Content is missing for a certain version and requires branching sections
   or code samples
-labels: 'code refactoring'
+labels: 'type: enhancement','meta: branching'
 
 ---
 
