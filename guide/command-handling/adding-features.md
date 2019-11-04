@@ -415,7 +415,7 @@ if (!command) return message.channel.send(`There is no command with name or alia
 ```
 
 :::tip
-Every library specific object has `client` as a property. That means that you don't have to pass it as a parameter to commands to access for example `client.guilds` or `client.commands`, but can access it directly from `message` object, as in the snippet above.
+A lot of library specific structures have `client` as a property. That means you don't have to pass the client reference as a parameter to commands to access for example `client.guilds` or `client.commands`, but can directly access the respective properties directly from the `message` object, as shown in the snippet above.
 :::
 
 Now, in theory, all there is to do, is to delete the previous command from `client.commands` and require the file again. In practice though, you cannot do this that easily as `require()` caches the file. If you were to require it again, you would simply load the previously cached file without any of your changes. In order to remove the file from the cache, you need to add the following line to your code:
