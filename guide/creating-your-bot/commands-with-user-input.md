@@ -10,13 +10,15 @@ Sometimes you'll want to determine the result of a command depending on user inp
 
 We'll actually be tackling 2 things at once here. Things will be explained along the way, so don't worry if you don't understand immediately.
 
-Go to your main bot file and find the `client.on('message', ...)` bit. Inside of it, add these 4 lines at the very top of it.
+Go to your main bot file and find the `client.on('message', ...)` bit. Add the following block of code at the top of this event listeners callback function (the part we replaced with `...` here).
 
 ```js
+// client.on('message', message => {
 if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 const args = message.content.slice(prefix.length).split(' ');
 const command = args.shift().toLowerCase();
+// the rest of your code
 ```
 
 1. If the message either doesn't start with the prefix or was sent by a bot, exit early.
