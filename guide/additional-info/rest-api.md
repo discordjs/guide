@@ -43,7 +43,6 @@ client.on('message', async message => {
 client.login('your-token-goes-here');
 ```
 </branch>
-
 <branch version="12.x">
 	
 ```js
