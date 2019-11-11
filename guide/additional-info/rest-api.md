@@ -47,7 +47,7 @@ client.login('your-token-goes-here');
 <branch version="12.x">
 	
 ```js
-const { Client, RichEmbed } = require('discord.js');
+const { Client, MessageEmbed } = require('discord.js');
 
 const client = new Client();
 const prefix = '!';
