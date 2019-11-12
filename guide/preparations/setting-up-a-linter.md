@@ -6,9 +6,9 @@ As a developer, it's a good idea to make your development process as streamlined
 
 First, you will need a proper code editor. Using Notepad and Notepad++ is discouraged, as they're inefficient for projects like these. If you are using either, it is highly recommended to switch in order to save everyone lots of headaches and unnecessary syntax error questions.
 
-* [Visual Studio Code](https://code.visualstudio.com/) is a very popular choice known for being fast and powerful. It supports a broad range of languages and comes with its own terminal, as well as built-in intellisense and autocomplete for both JavaScript and TypeScript. This is the recommended choice.
-* [Atom](https://atom.io/) is user-friendly, being concise and easy to navigate. This is what many developers use to get started.
-* [Sublime Text](https://www.sublimetext.com/) is another powerful editor known for looking sleek and performing speedily and efficiently.
+* [Visual Studio Code](https://code.visualstudio.com/) is a very popular choice; it is known for being fast and powerful. It supports a large variety of languages, has its own terminal, built-in IntelliSense support, and autocomplete for both JavaScript and TypeScript. This is the recommended choice.
+* [Atom](https://atom.io/) is user-friendly, concise and easy to navigate. This is what many developers use to get started.
+* [Sublime Text](https://www.sublimetext.com/) is another popular editor that's easy to use and write code with.
 
 ## Installing a linter
 
