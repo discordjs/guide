@@ -48,7 +48,7 @@ It should then open up a window with a black background. It's a bit unattractive
 
 ### Using the command prompt
 
-With the command prompt open, run the `node -v` command to make sure you've successfully installed Node.js. If you see something like `v8.0.0`, great! If not, go back and try installing again.
+With the command prompt open, run the `node -v` command to make sure you've successfully installed Node.js. If you see something like <branch="11.x" inline>`v8.0.0`</branch><branch="12.x" inline>`v10.0.0`</branch>, great! If not, go back and try installing again.
 
 The next command you'll be running is `npm init`. This command creates a `package.json` file for you, which is what will be used to keep track of the dependencies your bot uses, as well as other info. If you're a bit confused by that, you can simply ignore it for the time being.
 
