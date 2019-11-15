@@ -67,6 +67,7 @@ client.on('message', async message => {
 client.login('your-token-goes-here');
 ```
 </branch>
+
 ::: tip
 We're going to take advantage of [destructuring](/additional-info/es6-syntax.md#destructuring) in this tutorial to maintain readability.
 :::
