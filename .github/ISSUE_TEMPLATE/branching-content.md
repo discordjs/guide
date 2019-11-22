@@ -7,7 +7,7 @@ labels: 'type: enhancement','meta: branching'
 ---
 
 **Part of the guide or code sample that needs a branching update**
-URL or path to the file or section in question.
+<!-- URL or path to the file or section in question. -->
 
-**Special Notices:**
-Anything that needs to or should be considered or addressed when implementing this branching request.
+**Additional notes**
+<!-- Add any other notes about the problem here. -->
