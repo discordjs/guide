@@ -1122,7 +1122,7 @@ Just like the `textChannel#send***` methods, all the `.send***()` methods have b
 
 ```diff
 - message.clearReactions();
-+ message.reactions.clear();
++ message.reactions.removeAll();
 ```
 
 #### Message#delete
