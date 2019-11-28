@@ -1209,7 +1209,7 @@ Along with the rest of the voice-related methods and properties, the methods for
 
 ```diff
 - message.clearReactions();
-+ message.reactions.clear();
++ message.reactions.removeAll();
 ```
 
 #### Message#delete
