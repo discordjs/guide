@@ -132,10 +132,40 @@ client.on('message', async message => {
 
 If you try again with either of the codeblocks above, you'll get the result you originally wanted!
 
+
 ![Emojis reacting in correct order](~@/images/1IWSJ1C.png)
+
 
 ::: tip
 If you aren't familiar with Promises or `async`/`await`, you can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [our guide page on async/await](/additional-info/async-await.md)!
+:::
+
+### Reacting in order using a loop
+
+Lets say you have the reactions in an array called `reactions` such as:
+
+```js
+const reactions = ['🍎','🍊','🍇'];
+```
+
+And you would like to react with the emojis in the array. You can use a simple `for... of` loop to achieve this.
+
+```js
+const reactions = ['🍎','🍊','🍇'];
+
+client.on('message', async message => {
+	if (message.content === '!fruits') {
+		for(const i of reactions) {
+			await message.react(i)
+		}
+	}
+});
+```
+
+This way you can change the amount of reactions, the order, and the types by simply editing the `reactions` array. By awaiting the `message.react(i)` inside of the `for... of` loop we wait for the reaction to go through before going onto the next, which displays the reactions in order how we want them.
+
+::: warning
+This does not work in order with `.forEach()`. Despite if you declare the function async and await the reacting inside of it, due to the way `.forEach()` behaves, all of the requests will be sent out at once and they will not be in order.
 :::
 
 ### Handling multiple reactions if the order doesn't matter
