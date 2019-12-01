@@ -145,18 +145,18 @@ If you aren't familiar with Promises or `async`/`await`, you can read more about
 Lets say you have the reactions in an array called `reactions` such as:
 
 ```js
-const reactions = ['🍎','🍊','🍇'];
+const reactions = ['🍎', '🍊', '🍇'];
 ```
 
 And you would like to react with the emojis in the array. You can use a simple `for... of` loop to achieve this.
 
 ```js
-const reactions = ['🍎','🍊','🍇'];
+const reactions = ['🍎', '🍊', '🍇'];
 
 client.on('message', async message => {
 	if (message.content === '!fruits') {
-		for(const i of reactions) {
-			await message.react(i)
+		for (const i of reactions) {
+			await message.react(i);
 		}
 	}
 });
