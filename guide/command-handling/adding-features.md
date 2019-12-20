@@ -275,6 +275,7 @@ If you don't use a framework or command handler for your projects, you'll have a
 module.exports = {
 	name: 'help',
 	description: 'List all of my commands or info about a specific command.',
+	args: true,
 	aliases: ['commands'],
 	usage: '[command name]',
 	cooldown: 5,
