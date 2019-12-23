@@ -1,12 +1,11 @@
 ---
 name: Question/General support request
-about: Ask questions about discord.js in Discord - https://discord.gg/bRCvFy9 
+about: This template is for asking questions about the guide. 
 labels: 'type: question'
-
 ---
 
 <!--
-**If you have specific questions about discord.js library usage, please ask in the Discord Server**
+**If you have any questions about the discord.js library usage, please ask them in the Discord Server instead.**
 https://discord.gg/bRCvFy9 
 -->
 
