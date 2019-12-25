@@ -24,15 +24,30 @@ Example: `ReferenceError: "x" is not defined`
 
 ### Websocket and Network Errors
 
-Websocket and Network errors are common system errors thrown by Node in response to something wrong with the websocket connection. Unfortunately, these errors do not have a concrete solution and can be (usually) fixed by getting a better, and stronger connection. However, if you handle these errors correctly, discord.js will attempt to reconnect to the websocket automatically.
+Websocket and Network errors are common system errors thrown by Node in response to something wrong with the websocket connection. Unfortunately, these errors do not have a concrete solution and can be (usually) fixed by getting a better, more stable, and stronger connection. Discord.js will automatically try to reconnect to the websocket if an error occurs. 
 
-You can handle these errors by adding an error listener as shown below.
+<branch version="11.x">
+
+Normally these errors will crash your process, however, you can add an event listener for these errors which will notify you of them and it won't crash your process as shown below.
 
 ```js
 client.on('error', console.error);
 ```
 
-Now, when an error occurs it will be logged to the console and discord.js will automatically attempt to reconnect to the websocket.
+Now, when an error occurs it will be logged to the console and it will not terminate the process.
+
+</branch>
+
+<branch version="12.x">
+
+On master, WebSocket errors are handled internally, meaning your process should never crash from them. If you want to log these errors, should they happen, you can listen to the `shardError` event as shown below.
+
+```js
+client.on('shardError', console.error);
+```
+
+</branch>
+
 The commonly thrown codes for these errors are:
 - `ECONNRESET` - The connection was forcibly closed by a peer, thrown by the loss of connection to a websocket due to timeout or reboot.
 - `ETIMEDOUT` - A connect or send request failed because the receiving party did not respond after some time.
@@ -130,7 +145,7 @@ This error originates from an invalid call to `bulkDelete()`, make sure you are 
 
 ### Members didnt't arrive in time.
 
-Another common error, this error originates from the client requesting members from the API through the websocket, and the member chunks not arriving in time and triggering the timeout. The most common cause to this error is a bad connection, however, it can also be caused by a very large amount of members being fetched, upwards of 50 thousand. To fix this, run the bot on a location with better internet, such as a VPS. If this does not work for you, you will have to manually change the member fetching timeout.
+Another common error, this error originates from the client requesting members from the API through the websocket, and the member chunks not arriving in time and triggering the timeout. The most common cause to this error is a bad connection, however, it can also be caused by a very large amount of members being fetched, upwards of 50 thousand. To fix this, run the bot on a location with better internet, such as a VPS. If this does not work for you, you will have to manually change the hardcoded member fetching timeout in the source code.
 
 ### MaxListenersExceededWarning: Possible EventEmitter memory leak detected...
 
@@ -149,7 +164,7 @@ In the case of the last two reasons, the error is not preventable, as the Discor
 
 ### code ENOENT... syscall spawn git.
 
-This is an error commonly thrown by npm due to git not being installed on your machine. You must install git:
-Ubuntu/Debian: `sudo apt-get install git`
-Windows: https://git-scm.com/download/win
+This error is commonly thrown by your system due to it not being able to find `git`. You need to install `git` or update your path if `git` is already installed. Here are the download links for it:
+- Ubuntu/Debian: `sudo apt-get install git`
+- Windows: https://git-scm.com/download/win
 
