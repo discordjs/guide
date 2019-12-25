@@ -116,7 +116,7 @@ Another common error, this error originates from the client attempting to execut
 
 ### MessageEmbed field names may not be empty.
 
-This error originates from attempting to call `MessageEmbed.addField()` without the first parameter, which is a title. If you would like the title to be empty for a reason, you should use a zero width space, which can be inputted as `\u2008`.
+This error originates from attempting to call `MessageEmbed.addField()` without the first parameter, which is a title. If you would like the title to be empty for a reason, you should use a zero width space, which can be inputted as `\u200b`.
 
 ### MessageEmbed field values may not be empty.
 
