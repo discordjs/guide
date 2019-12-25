@@ -28,8 +28,8 @@ API Errors can be tracked down by adding an event listener for unhandled rejecti
 This can be done by easily adding this to your main file.
 
 ```js
-process.on("unhandledRejection", error => {
-    console.error("Unhandled promise rejection:", error);
+process.on('unhandledRejection', error => {
+	console.error('Unhandled promise rejection:', error);
 });
 ```
 
@@ -110,5 +110,3 @@ This error originates from an invalid call to `bulkDelete()`, make sure you are 
 ### Members didnt't arrive in time.
 
 Another common error, this error originates from the client requesting members from the API through the websocket, and the member chunks not arriving in time and triggering the timeout. The most common cause to this error is a bad connection, however, it can also be caused by a very large amount of members being fetched, upwards of 50 thousand. To fix this, run the bot on a location with better internet, such as a VPS. If this does not work for you, you will have to manually change the member fetching timeout.
-
-### 
