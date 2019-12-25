@@ -113,3 +113,8 @@ This error originates from an invalid call to `bulkDelete()`, make sure you are 
 ### Members didnt't arrive in time.
 
 Another common error, this error originates from the client requesting members from the API through the websocket, and the member chunks not arriving in time and triggering the timeout. The most common cause to this error is a bad connection, however, it can also be caused by a very large amount of members being fetched, upwards of 50 thousand. To fix this, run the bot on a location with better internet, such as a VPS. If this does not work for you, you will have to manually change the member fetching timeout.
+
+### MaxListenersExceededWarning: Possible EventEmitter memory leak detected...
+
+This error is caused by spawning a large amount of event listeners, usually for the client. The most common cause of this is nesting your event listeners instead of separating them. This can also be caused by spawning a lot of Collectors, since Collectors themselves spawn event listeners. The way to fix this error is to make sure you do not nest your listeners or spawn a lot of Collectors, it is **not** to use `emitter.setMaxListeners()` as the error suggests.
+
