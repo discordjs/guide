@@ -83,9 +83,11 @@ This is a very common error, it originates from a wrong token being passed into 
 - Simply showing the token and copying that, instead of clicking regenerate and copying that.
 
 <branch version="12.x">
+
 ::: warning
 On master there used to be an issue where the token was not prefixed correctly which resulted in valid tokens being marked as invalid. If you have verified that all of the above is not the case, make sure you have updated discord.js to the latest commit.
 :::
+
 </branch>
 
 ### Request to use token, but token was unavailable to the client.
