@@ -90,7 +90,7 @@ DELETE - Used to completely delete a piece of data
 
 In this particular example we can see we are trying to access a piece of data, specifically, a message.
 
-## Common discord.js errors
+## Common Discord.js and API errors
 
 ### An invalid token was provided.
 
