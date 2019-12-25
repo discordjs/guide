@@ -147,3 +147,9 @@ In the case of the last two reasons, the error is not preventable, as the Discor
 
 ## Common miscellaneous errors
 
+### code ENOENT... syscall spawn git.
+
+This is an error commonly thrown by npm due to git not being installed on your machine. You must install git:
+Ubuntu/Debian: `sudo apt-get install git`
+Windows: https://git-scm.com/download/win
+
