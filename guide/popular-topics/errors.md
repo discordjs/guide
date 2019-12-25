@@ -22,6 +22,24 @@ JS Errors are simple errors which can be thrown by node itself, or by discord.js
 
 Example: `ReferenceError: "x" is not defined`
 
+### Websocket and Network Errors
+
+Websocket and Network errors are common system errors thrown by Node in response to something wrong with the websocket connection. Unfortunately, these errors do not have a concrete solution and can be (usually) fixed by getting a better, and stronger connection. However, if you handle these errors correctly, discord.js will attempt to reconnect to the websocket automatically.
+
+You can handle these errors by adding an error listener as shown below.
+
+```js
+client.on('error', console.error);
+```
+
+Now, when an error occurs it will be logged to the console and discord.js will automatically attempt to reconnect to the websocket.
+The commonly thrown codes for these errors are:
+- `ECONNRESET` - The connection was forcibly closed by a peer, thrown by the loss of connection to a websocket due to timeout or reboot.
+- `ETIMEDOUT` - A connect or send request failed because the receiving party did not respond after some time.
+- `EPIPE` - The remote side of the stream being written to has been closed.
+- `ENOTFOUND` - The domain being accessed is unavailable, usually caused by a lack of internet, can be thrown by the websocket and http API.
+- `ECONNREFUSED` - The target machine refused the connection, check your ports and firewall.
+
 ## How to diagnose API errors
 
 API Errors can be tracked down by adding an event listener for unhandled rejections and looking at the extra info that is given.
@@ -72,7 +90,7 @@ DELETE - Used to completely delete a piece of data
 
 In this particular example we can see we are trying to access a piece of data, specifically, a message.
 
-## Common errors
+## Common discord.js errors
 
 ### An invalid token was provided.
 
@@ -126,4 +144,6 @@ This error is thrown when the bot attempts to send a DM message to a user and it
 - The user has disabled dms in the privacy settings.
 
 In the case of the last two reasons, the error is not preventable, as the Discord API does not provide a way to check if you can send a user a dm until you attempt to send one. The best way to handle this error is to add a `.catch()` where you attempt to dm the user, and either ignore the rejected promise, or do what you want because of it.
+
+## Common miscellaneous errors
 
