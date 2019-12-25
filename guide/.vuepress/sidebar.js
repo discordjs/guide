@@ -75,6 +75,7 @@ module.exports = {
 			title: 'Popular Topics',
 			children: [
 				'/popular-topics/embeds',
+				'/popular-topics/errors',
 				'/popular-topics/permissions',
 				'/popular-topics/permissions-extended',
 				'/popular-topics/reactions',
