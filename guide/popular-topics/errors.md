@@ -118,3 +118,12 @@ Another common error, this error originates from the client requesting members f
 
 This error is caused by spawning a large amount of event listeners, usually for the client. The most common cause of this is nesting your event listeners instead of separating them. This can also be caused by spawning a lot of Collectors, since Collectors themselves spawn event listeners. The way to fix this error is to make sure you do not nest your listeners or spawn a lot of Collectors, it is **not** to use `emitter.setMaxListeners()` as the error suggests.
 
+### Cannot send messages to this user.
+
+This error is thrown when the bot attempts to send a DM message to a user and it is unable to do so. This is caused by a variety of reasons:
+- The bot and the user do not share a guild (oftentimes people accidentally kick or ban a user and then try to dm them).
+- The user has blocked the bot.
+- The user has disabled dms in the privacy settings.
+
+In the case of the last two reasons, the error is not preventable, as the Discord API does not provide a way to check if you can send a user a dm until you attempt to send one. The best way to handle this error is to add a `.catch()` where you attempt to dm the user, and either ignore the rejected promise, or do what you want because of it.
+
