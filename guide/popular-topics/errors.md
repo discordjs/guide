@@ -103,6 +103,7 @@ This error originates from attempting to call `MessageEmbed.addField()` without 
 ### MessageEmbed field values may not be empty.
 
 This error, in conjunction to the previous error, is the result of calling `MessageEmbed.addField()` without the second parameter, the value. You can use a zero width space if you would like this empty.
+
 </branch>
 
 ### The messages must be an Array, Collection, or number.
