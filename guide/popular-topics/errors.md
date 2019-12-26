@@ -14,7 +14,7 @@ Example: `DiscordAPIError: Cannot send an empty message`
 
 Discord.js Errors are errors which are thrown by the library itself, they can usually be easily tracked down using the stacktrace and error message.
 
-Example: `Error: Members didn't arrive in time.`
+Example: `The messages must be an Array, Collection, or number.`
 
 ### JS Errors
 
@@ -31,7 +31,9 @@ Websocket and Network errors are common system errors thrown by Node in response
 Normally these errors will crash your process, however, you can add an event listener for these errors which will notify you of them and it won't crash your process as shown below.
 
 ```js
-client.on('error', console.error);
+client.on('error', error => {
+  console.error('The websocket connection encountered an error:', error);
+});
 ```
 
 Now, when an error occurs it will be logged to the console and it will not terminate the process.
@@ -43,7 +45,9 @@ Now, when an error occurs it will be logged to the console and it will not termi
 On master, WebSocket errors are handled internally, meaning your process should never crash from them. If you want to log these errors, should they happen, you can listen to the `shardError` event as shown below.
 
 ```js
-client.on('shardError', console.error);
+client.on('shardError', error => {
+  console.error('A websocket connection encountered an error:', error);
+});
 ```
 
 </branch>
@@ -112,7 +116,7 @@ In this particular example we can see we are trying to access a piece of data, s
 This is a very common error, it originates from a wrong token being passed into `client.login()`. The most common causes of this error are:
 
 - Not importing the config or env file correctly
-- Copying the client secret instead of the bot token (token is alphanumerical and 3 parts delimited by a period while client secret is all numbers)
+- Copying the client secret instead of the bot token (token is alphanumerical and 3 parts delimited by a period while the client secret is significantly smaller and one part only)
 - Simply showing the token and copying that, instead of clicking regenerate and copying that.
 
 <branch version="12.x">
@@ -126,6 +130,31 @@ On master there used to be an issue where the token was not prefixed correctly w
 ### Request to use token, but token was unavailable to the client.
 
 Another common error, this error originates from the client attempting to execute an action which requires the token but the token not being available. This is most commonly caused by destroying the client and then attempting to execute an action.
+
+This error is also caused by attempting to use a client which has not been logged in. Both of the examples below will throw errors.
+
+```js
+const { Client } = require('discord.js');
+const client = new Client(); // Should not be here!
+
+module.exports = (message, args) => {
+  // Should be message.client instead!
+  client.fetchUser(args[0]).then(user =>
+    message.reply('your requested user', user.tag),
+  );
+}
+```
+
+```js
+const { Client } = require('discord.js');
+const client = new Client();
+
+client.on('message', someHandlerFunction);
+
+client.login('token');
+//client will not be logged in yet!
+client.fetchUser('myId').then(someInitFunction);
+```
 
 <branch version="12.x">
 
@@ -149,7 +178,11 @@ Another common error, this error originates from the client requesting members f
 
 ### MaxListenersExceededWarning: Possible EventEmitter memory leak detected...
 
-This error is caused by spawning a large amount of event listeners, usually for the client. The most common cause of this is nesting your event listeners instead of separating them. This can also be caused by spawning a lot of Collectors, since Collectors themselves spawn event listeners. The way to fix this error is to make sure you do not nest your listeners or spawn a lot of Collectors, it is **not** to use `emitter.setMaxListeners()` as the error suggests.
+This error is caused by spawning a large amount of event listeners, usually for the client. The most common cause of this is nesting your event listeners instead of separating them. The way to fix this error is to make sure you do not nest your listeners, it is **not** to use `emitter.setMaxListeners()` as the error suggests.
+
+You can debug these messages in different ways:
+- Through the [CLI](https://nodejs.org/api/cli.html#cli_trace_warnings): `node --trace-warnings index.js`
+- Through the [`process#warning` event](https://nodejs.org/api/process.html#process_event_warning): `process.on('warning', console.warn);`
 
 ### Cannot send messages to this user.
 
@@ -157,6 +190,7 @@ This error is thrown when the bot attempts to send a DM message to a user and it
 - The bot and the user do not share a guild (oftentimes people accidentally kick or ban a user and then try to dm them).
 - The user has blocked the bot.
 - The user has disabled dms in the privacy settings.
+- The bot is attempting to DM another bot.
 
 In the case of the last two reasons, the error is not preventable, as the Discord API does not provide a way to check if you can send a user a dm until you attempt to send one. The best way to handle this error is to add a `.catch()` where you attempt to dm the user, and either ignore the rejected promise, or do what you want because of it.
 
