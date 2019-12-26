@@ -32,7 +32,7 @@ Normally these errors will crash your process, however, you can add an event lis
 
 ```js
 client.on('error', error => {
-  console.error('The websocket connection encountered an error:', error);
+	 console.error('The websocket connection encountered an error:', error);
 });
 ```
 
@@ -46,7 +46,7 @@ On master, WebSocket errors are handled internally, meaning your process should 
 
 ```js
 client.on('shardError', error => {
-  console.error('A websocket connection encountered an error:', error);
+	 console.error('A websocket connection encountered an error:', error);
 });
 ```
 
@@ -137,12 +137,12 @@ This error is also caused by attempting to use a client which has not been logge
 const { Client } = require('discord.js');
 const client = new Client(); // Should not be here!
 
-module.exports = (message, args) => {
-  // Should be message.client instead!
-  client.fetchUser(args[0]).then(user =>
-    message.reply('your requested user', user.tag),
-  );
-}
+module.exports = (message, args) =>	{
+	// Should be message.client instead!
+	client.fetchUser(args[0]).then(user => {
+		message.reply('your requested user', userg);
+	});
+};
 ```
 
 ```js
@@ -152,7 +152,7 @@ const client = new Client();
 client.on('message', someHandlerFunction);
 
 client.login('token');
-//client will not be logged in yet!
+//	client will not be logged in yet!
 client.fetchUser('myId').then(someInitFunction);
 ```
 
