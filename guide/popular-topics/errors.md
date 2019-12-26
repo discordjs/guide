@@ -211,9 +211,9 @@ You can debug these messages in different ways:
 
 This error is thrown when the bot attempts to send a DM message to a user and it is unable to do so. This is caused by a variety of reasons:
 - The bot and the user do not share a guild (oftentimes people accidentally kick or ban a user and then try to dm them).
+- The bot is attempting to DM another bot.
 - The user has blocked the bot.
 - The user has disabled dms in the privacy settings.
-- The bot is attempting to DM another bot.
 
 In the case of the last two reasons, the error is not preventable, as the Discord API does not provide a way to check if you can send a user a dm until you attempt to send one. The best way to handle this error is to add a `.catch()` where you attempt to dm the user, and either ignore the rejected promise, or do what you want because of it.
 
