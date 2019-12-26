@@ -140,7 +140,7 @@ const client = new Client(); // Should not be here!
 module.exports = (message, args) =>	{
 	// Should be message.client instead!
 	client.fetchUser(args[0]).then(user => {
-		message.reply('your requested user', userg);
+		message.reply('your requested user', user.tag);
 	});
 };
 ```
