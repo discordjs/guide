@@ -223,7 +223,7 @@ In the case of the last two reasons, the error is not preventable, as the Discor
 
 This error is commonly thrown by your system due to it not being able to find `git`. You need to install `git` or update your path if `git` is already installed. Here are the download links for it:
 - Ubuntu/Debian: `sudo apt-get install git`
-- Windows: https://git-scm.com/download/win
+- Windows: [git-scm](https://git-scm.com/download/win)
 
 ### code ELIFECYCLE
 
