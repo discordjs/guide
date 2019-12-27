@@ -225,3 +225,11 @@ This error is commonly thrown by your system due to it not being able to find `g
 - Ubuntu/Debian: `sudo apt-get install git`
 - Windows: https://git-scm.com/download/win
 
+### code ELIFECYCLE
+
+This error is commonly thrown by your system in response to the process unexpectedly closing. It can usually be fixed by cleaning npm cache, and deleting node_modules. The instructions for doing that are as such:
+- Clean npm cache with `npm cache clean --force`
+- delete `node_modules`
+- delete `package-lock.json` (make sure you have a `package.json`!)
+- run `npm install` to reinstall packages from `package.json`
+
