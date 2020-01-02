@@ -186,7 +186,7 @@ message.reactions.removeAll().catch(error => console.error('Failed to clear reac
 
 Removing reactions by emoji is not as straightforward as clearing all reactions. The API does not provide a method for selectively removing reactions by emoji, it only allows you to remove a user from a specific reaction. This means you will have to get the users who reacted with that emoji, and loop through and remove each one of them.
 
-Reaction collections are keyed by <branch version="11.x" inline>`name:id`</branch><branch version="12.x" inline>`id`</branch> for custom emojis and by `name` for unicode emojis (represented by their unicode character, see the section above). Once you have the key you can simply run a `.get()` on `message.reactions` to get the reaction representing the emoji you want.
+Reaction collections are keyed by <branch version="11.x" inline>`name:id`</branch><branch version="12.x" inline>`id`</branch> for custom emojis and by `name` for unicode emojis (represented by their unicode character, see [here](/popular-topics/reactions.html#unicode-emojis)). Once you have the key you can simply run a `.get()` on `message.reactions` to get the reaction representing the emoji you want.
 
 <branch version="11.x">
 
