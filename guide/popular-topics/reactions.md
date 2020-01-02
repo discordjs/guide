@@ -157,7 +157,7 @@ The benefit of this small optimization is that you can use `.then()` to handle w
 
 ## Removing reactions
 
-Now that you know how to add reactions, you might be asking, how do we remove them? In this section you will learn how to remove all reactions, remove reactions by user, and remove reactions by emoji.
+Now that you know how to add reactions, you might be asking, how do you remove them? In this section you will learn how to remove all reactions, remove reactions by user, and remove reactions by emoji.
 
 ::: warning
 All of these methods require `MANAGE_MESSAGES` permissions. Make sure your bot has permissions before attempting to utilize any of these methods, as it will error if it doesnt.
@@ -165,42 +165,35 @@ All of these methods require `MANAGE_MESSAGES` permissions. Make sure your bot h
 
 ### Removing all reactions
 
-Removing all reactions from a message is the easiest, the API allows us to do this through a single call. It can be done through the <branch version="11.x" inline> `message.clearReactions()` </branch> <branch version="12.x" inline> `message.reactions.removeAll()` </branch> method. 
+Removing all reactions from a message is the easiest, the API allows you to do this through a single call. It can be done through the <branch version="11.x" inline> `message.clearReactions()` </branch><branch version="12.x" inline> `message.reactions.removeAll()` </branch> method. 
 
 <branch version="11.x">
 
 ```js
-message.clearReactions()
-	.catch(err => console.error('Failed to clear reactions: ', err));
+message.clearReactions().catch(error => console.error('Failed to clear reactions: ', error));
 ```
 
 </branch>
-
 <branch version="12.x">
 
 ```js
-message.reactions.removeAll()
-	.catch(err => console.error('Failed to clear reactions: ', err));
+message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
 ```
 
 </branch>
 
 ### Removing reactions by emoji
 
-Removing reactions by emoji is not as straightforward as clearing all reactions. The API does not provide a method for selectively removing reactions by emoji, it only allows us to remove a user from a specific reaction. This means we will have to get the users who reacted with that emoji, and loop through and remove each one of them. Firstly, we need to get the reaction, for unicode emojis, this is simple as escaping the emoji in discord and copying the result as you saw before.
+Removing reactions by emoji is not as straightforward as clearing all reactions. The API does not provide a method for selectively removing reactions by emoji, it only allows you to remove a user from a specific reaction. This means you will have to get the users who reacted with that emoji, and loop through and remove each one of them.
 
-Reaction collections are keyed by <branch version="11.x" inline>`name:id`</branch> <branch version="12.x" inline>`id`</branch> for custom emojis and by `name` for unicode emojis. This means we can simply run a `.get()` on `message.reactions` to get the reaction representing the emoji we want. After we have the reaction, we can loop through `reaction.users` and call <branch version="11.x" inline>`reaction.remove(user)`</branch> <branch version="12.x" inline>`reaction.users.remove()`</branch> on each of them.
-
-For this example we will fetch a specific message for which we want to remove a specific emoji's reaction on.
+Reaction collections are keyed by <branch version="11.x" inline>`name:id`</branch><branch version="12.x" inline>`id`</branch> for custom emojis and by `name` for unicode emojis (represented by their unicode character, see the section above). Once you have the key you can simply run a `.get()` on `message.reactions` to get the reaction representing the emoji you want.
 
 <branch version="11.x">
 
-```js
 <!-- eslint-skip -->
-//	Get the reaction representing the emoji
+```js
 const reaction = message.reactions.get('Thonk:484535447171760141');
 try {
-	// Loop through each user and remove their reaction
 	for (const user of reaction.users.values()) {
 		await reaction.remove(user);
 	}
@@ -210,15 +203,12 @@ try {
 ```
 
 </branch>
-
 <branch version="12.x">
 
-```js
 <!-- eslint-skip -->
-//	Get the reaction representing the emoji
+```js
 const reaction = message.reactions.get('484535447171760141');
 try {
-	// Loop through each user and remove their reaction
 	for (const user of reaction.users.values()) {
 		await reaction.users.remove(user);
 	}
@@ -233,16 +223,14 @@ The reason we use a `for... of` loop over something like `forEach()` is due to `
 
 ### Removing reactions by user
 
-Removing reactions by user is similar to what we did before. However, instead of iterating through users of a reaction, we will iterate through reactions which include a user. To do this we will get all reactions and filter based on whether the user has reacted. If you are not familiar with `Collection.filter()` and `Collection.has()` take the time to understand what they do and then come back.
+Removing reactions by user is similar to what you did before. However, instead of iterating through users of a reaction, you will iterate through reactions which include a user. To do this you will get all reactions and filter based on whether the user has reacted. If you are not familiar with `Collection.filter()` and `Collection.has()` take the time to understand what they do and then come back.
 
 <branch version="11.x">
 
-```js
 <!-- eslint-skip -->
-//	Get the reactions which the user has reacted to
+```js
 const userReactions = message.reactions.filter(reaction => reaction.users.has(userId));
 try {
-	// Loop through each reaction and remove the user
 	for (const reaction of userReactions) {
 		await reaction.remove(userId);
 	}
@@ -252,15 +240,12 @@ try {
 ```
 
 </branch>
-
 <branch version="12.x">
 
-```js
 <!-- eslint-skip -->
-//	Get the reactions which the user has reacted to
+```js
 const userReactions = message.reactions.filter(reaction => reaction.users.has(userId));
 try {
-	// Loop through each reaction and remove the user
 	for (const reaction of userReactions) {
 		await reaction.users.remove(userId);
 	}
