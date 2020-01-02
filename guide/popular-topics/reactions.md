@@ -155,6 +155,115 @@ if (message.content === '!fruits') {
 
 The benefit of this small optimization is that you can use `.then()` to handle when all of the Promises have resolved, or `.catch()` when one of them has failed. You can also `await` it since it returns a Promise itself.
 
+## Removing reactions
+
+Now that you know how to add reactions, you might be asking, how do you remove them? In this section you will learn how to remove all reactions, remove reactions by user, and remove reactions by emoji.
+
+::: warning
+All of these methods require `MANAGE_MESSAGES` permissions. Make sure your bot has permissions before attempting to utilize any of these methods, as it will error if it doesnt.
+:::
+
+### Removing all reactions
+
+Removing all reactions from a message is the easiest, the API allows you to do this through a single call. It can be done through the <branch version="11.x" inline>`message.clearReactions()`</branch><branch version="12.x" inline>`message.reactions.removeAll()`</branch> method. 
+
+<branch version="11.x">
+
+```js
+message.clearReactions().catch(error => console.error('Failed to clear reactions: ', error));
+```
+
+</branch>
+<branch version="12.x">
+
+```js
+message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+```
+
+</branch>
+
+### Removing reactions by emoji
+
+Removing reactions by emoji is not as straightforward as clearing all reactions. The API does not provide a method for selectively removing reactions by emoji, it only allows you to remove a user from a specific reaction. This means you will have to get the users who reacted with that emoji, and loop through and remove each one of them.
+
+Reaction collections are keyed by <branch version="11.x" inline>`name:id`</branch><branch version="12.x" inline>`id`</branch> for custom emojis and by `name` for unicode emojis (represented by their unicode character, see [here](/popular-topics/reactions.html#unicode-emojis)). Once you have the key you can simply run a `.get()` on `message.reactions` to get the reaction representing the emoji you want.
+
+<branch version="11.x">
+
+<!-- eslint-skip -->
+```js
+const reaction = message.reactions.get('Thonk:484535447171760141');
+try {
+	for (const user of reaction.users.values()) {
+		await reaction.remove(user);
+	}
+} catch (error) {
+	console.error('Failed to remove reactions.');
+}
+```
+
+</branch>
+<branch version="12.x">
+
+<!-- eslint-skip -->
+```js
+const reaction = message.reactions.get('484535447171760141');
+try {
+	for (const user of reaction.users.values()) {
+		await reaction.users.remove(user);
+	}
+} catch (error) {
+	console.error('Failed to remove reactions.');
+}
+```
+
+</branch>
+
+The reason we use a `for...of` loop over something like `.forEach()` is due to `.forEach()`'s behavior for async operations. `.forEach()` will send out all calls almost at once even if we await inside of the function. However, if we `await` inside of a `for...of` loop, it will wait for the previous reaction to go through, and we avoid spamming the API with a lot of calls at once.
+
+### Removing reactions by user
+
+Removing reactions by user is similar to what you did before. However, instead of iterating through users of a reaction, you will iterate through reactions which include a user. To do this you will get all reactions and filter based on whether the user has reacted. 
+
+::: tip
+If you are not familiar with [`Collection.filter()`](https://discord.js.org/#/docs/main/stable/class/Collection?scrollTo=filter) and [`Collection.has()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) take the time to understand what they do and then come back.
+:::
+
+<branch version="11.x">
+
+<!-- eslint-skip -->
+```js
+const userReactions = message.reactions.filter(reaction => reaction.users.has(userId));
+try {
+	for (const reaction of userReactions) {
+		await reaction.remove(userId);
+	}
+} catch (error) {
+	console.error('Failed to remove reactions.');
+}
+```
+
+</branch>
+<branch version="12.x">
+
+<!-- eslint-skip -->
+```js
+const userReactions = message.reactions.filter(reaction => reaction.users.has(userId));
+try {
+	for (const reaction of userReactions) {
+		await reaction.users.remove(userId);
+	}
+} catch (error) {
+	console.error('Failed to remove reactions.');
+}
+```
+
+</branch>
+
+::: warning
+Make sure not to remove reactions by emoji or by user too much, if there are a lot of reactions or a lot of users it can be considered API spam.
+:::
+
 ## Awaiting reactions
 
 A common use case for reactions in commands is having a user confirm or deny an action, or creating a poll system. Luckily, we actually [already have a guide page that covers this](/popular-topics/collectors.md)! Check out that page if you want a more in-depth explanation. Otherwise, here's a basic example for reference:
