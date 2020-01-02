@@ -196,6 +196,7 @@ For this example we will fetch a specific message for which we want to remove a 
 <branch version="11.x">
 
 ```js
+<!-- eslint-skip -->
 //	Get the reaction representing the emoji
 const reaction = message.reactions.get('Thonk:484535447171760141');
 try {
@@ -213,6 +214,7 @@ try {
 <branch version="12.x">
 
 ```js
+<!-- eslint-skip -->
 //	Get the reaction representing the emoji
 const reaction = message.reactions.get('484535447171760141');
 try {
@@ -236,6 +238,7 @@ Removing reactions by user is similar to what we did before. However, instead of
 <branch version="11.x">
 
 ```js
+<!-- eslint-skip -->
 //	Get the reactions which the user has reacted to
 const userReactions = message.reactions.filter(reaction => reaction.users.has(userId));
 try {
@@ -253,6 +256,7 @@ try {
 <branch version="12.x">
 
 ```js
+<!-- eslint-skip -->
 //	Get the reactions which the user has reacted to
 const userReactions = message.reactions.filter(reaction => reaction.users.has(userId));
 try {
