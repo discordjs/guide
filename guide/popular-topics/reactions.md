@@ -165,7 +165,7 @@ All of these methods require `MANAGE_MESSAGES` permissions. Make sure your bot h
 
 ### Removing all reactions
 
-Removing all reactions from a message is the easiest, the API allows you to do this through a single call. It can be done through the <branch version="11.x" inline> `message.clearReactions()` </branch><branch version="12.x" inline> `message.reactions.removeAll()` </branch> method. 
+Removing all reactions from a message is the easiest, the API allows you to do this through a single call. It can be done through the <branch version="11.x" inline>`message.clearReactions()`</branch><branch version="12.x" inline>`message.reactions.removeAll()`</branch> method. 
 
 <branch version="11.x">
 
@@ -219,11 +219,15 @@ try {
 
 </branch>
 
-The reason we use a `for... of` loop over something like `forEach()` is due to `forEach()`'s behavior for async operations. `forEach()` will send out all calls almost at once even if we await inside of the function. However, if we `await` inside of a `for... of` loop, it will wait for the previous reaction to go through, and we avoid spamming the API with a lot of calls at once.
+The reason we use a `for...of` loop over something like `.forEach()` is due to `.forEach()`'s behavior for async operations. `.forEach()` will send out all calls almost at once even if we await inside of the function. However, if we `await` inside of a `for... of` loop, it will wait for the previous reaction to go through, and we avoid spamming the API with a lot of calls at once.
 
 ### Removing reactions by user
 
-Removing reactions by user is similar to what you did before. However, instead of iterating through users of a reaction, you will iterate through reactions which include a user. To do this you will get all reactions and filter based on whether the user has reacted. If you are not familiar with `Collection.filter()` and `Collection.has()` take the time to understand what they do and then come back.
+Removing reactions by user is similar to what you did before. However, instead of iterating through users of a reaction, you will iterate through reactions which include a user. To do this you will get all reactions and filter based on whether the user has reacted. 
+
+::: tip
+If you are not familiar with [`Collection.filter()`](https://discord.js.org/#/docs/main/stable/class/Collection?scrollTo=filter) and [`Collection.has()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) take the time to understand what they do and then come back.
+:::
 
 <branch version="11.x">
 
@@ -252,12 +256,11 @@ try {
 } catch (error) {
 	console.error('Failed to remove reactions.');
 }
-});
 ```
 
 </branch>
 
-::: warning 
+::: warning
 Make sure not to remove reactions by emoji or by user too much, if there are a lot of reactions or a lot of users it can be considered API spam.
 :::
 
