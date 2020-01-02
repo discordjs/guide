@@ -219,7 +219,7 @@ try {
 
 </branch>
 
-The reason we use a `for...of` loop over something like `.forEach()` is due to `.forEach()`'s behavior for async operations. `.forEach()` will send out all calls almost at once even if we await inside of the function. However, if we `await` inside of a `for... of` loop, it will wait for the previous reaction to go through, and we avoid spamming the API with a lot of calls at once.
+The reason we use a `for...of` loop over something like `.forEach()` is due to `.forEach()`'s behavior for async operations. `.forEach()` will send out all calls almost at once even if we await inside of the function. However, if we `await` inside of a `for...of` loop, it will wait for the previous reaction to go through, and we avoid spamming the API with a lot of calls at once.
 
 ### Removing reactions by user
 
