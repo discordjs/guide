@@ -54,8 +54,8 @@ Discord.js provides a method for creating webhooks called <branch version="11.x"
 
 ```js
 channel.createWebhook('Snek', 'https://i.imgur.com/IgscS45.jpg')
-  .then(webhook => console.log(`Created webhook ${webhook}`))
-  .catch(console.error);
+	.then(webhook => console.log(`Created webhook ${webhook}`))
+	.catch(console.error);
 ```
 
 ## Editing webhooks
