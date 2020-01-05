@@ -4,11 +4,11 @@ const config = require('./config.json');
 const webhookClient = new Discord.WebhookClient(config.webhookID, config.webhookToken);
 
 const embed = new Discord.MessageEmbed()
-	.setTitle('Webhooks are very cool')
-	.setColor('GREEN');
+	.setTitle('Some Title')
+	.setColor('#0099ff');
 
 webhookClient.send('Webhook test', {
-	username: 'burger',
-	avatarURL: 'https://i.imgur.com/0lYWsg9.jpg',
+	username: 'some-username',
+	avatarURL: 'https://i.imgur.com/wSTFkRM.png',
 	embeds: [embed],
 });

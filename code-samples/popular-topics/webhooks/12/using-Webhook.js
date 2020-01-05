@@ -4,8 +4,8 @@ const config = require('./config.json');
 const client = new Discord.Client();
 
 const embed = new Discord.MessageEmbed()
-	.setTitle('Webhooks are very cool')
-	.setColor('GREEN');
+	.setTitle('Some Title')
+	.setColor('#0099ff');
 
 client.once('ready', async () => {
 	const channel = client.channels.get('222197033908436994');
@@ -14,8 +14,8 @@ client.once('ready', async () => {
 		const webhook = webhooks.first();
 
 		await webhook.send('Webhook test', {
-			username: 'burger',
-			avatarURL: 'https://i.imgur.com/0lYWsg9.jpg',
+			username: 'some-username',
+			avatarURL: 'https://i.imgur.com/wSTFkRM.png',
 			embeds: [embed],
 		});
 	} catch (error) {
