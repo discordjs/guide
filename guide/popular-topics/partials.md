@@ -17,14 +17,14 @@ Partials are not available in version 11, please update to version 12 of the lib
 
 As we said earlier partials do not have all the information necessary to make them fully functional discord.js structures, so it would not be a good idea to enable the functionality by default. Users should know how to handle them before opting in to this feature.
 
-You choose which structures you want to emit as partials as client options when instantiating your bot client. Available structures are: `USER`, `CHANNEL` (only DM channels can be uncached, server channels will always be available), `GUILD_MEMBER` and `MESSAGE`.
+You choose which structures you want to emit as partials as client options when instantiating your bot client. Available structures are: `USER`, `CHANNEL` (only DM channels can be uncached, server channels will always be available), `GUILD_MEMBER`, `MESSAGE` and `REACTION`.
 
 ```js
 const Discord = require('discord.js');
-const client = new Client({ partials: ['MESSAGE', 'CHANNEL'] });
+const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 ```
 :::tip
-Make sure you enable all partials you need for your use case! If you miss one the event does not get emitted. For example listening for reactions on uncached Messages in a direct message channel requires both `MESSAGE` and `CHANNEL`!
+Make sure you enable all partials you need for your use case! If you miss one the event does not get emitted. For example listening for reactions on uncached Messages in a direct message channel requires both `MESSAGE`, `CHANNEL` and `REACTION`!
 If you miss `CHANNEL` as enabled partial type reactions on uncached messages in servers will be emitted (as guild channels are always cached) but will not do so for direct messages.
 :::
 
