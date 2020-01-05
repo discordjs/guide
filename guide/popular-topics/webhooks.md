@@ -4,7 +4,7 @@ Webhooks are a way of sending messages to a text channel without having to log i
 
 ## What is a webhook
 
-Webhooks are a utility used to send messages to text channels without needing a discord application. Webhooks are useful for allowing something to send messages without requiring a discord application. However, you should note that you cannot edit or delete messages you sent through the webhook. Discord.js introduces two structures to make use of this functionality, `Webhook` and `WebhookClient`. `WebhookClient` is an extended version of a `Webhook` which allows you to send messages through it without needing a bot client.
+Webhooks are a utility used to send messages to text channels without needing a discord application. Webhooks are useful for allowing something to send messages without requiring a discord application. However, you should note that you cannot directly edit or delete messages you sent through the webhook. Discord.js introduces two structures to make use of this functionality, `Webhook` and `WebhookClient`. `WebhookClient` is an extended version of a `Webhook` which allows you to send messages through it without needing a bot client.
 
 ::: tip
 If you would like to read about how to use webhooks through the API without discord.js, you can read about them [here](https://discordapp.com/developers/docs/resources/webhook).
