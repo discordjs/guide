@@ -23,7 +23,7 @@ If you would like to get the webhook object that sent the message, you can use <
 ## Fetching webhooks
 
 ::: tip 
-Webhook fetching will always make use of promises, and collections, if you do not understand either concepts, revise them and then come back to this section.  You can read about collections [here](/additional-info/collections.md), and promises [here](/additional-info/async-await.md) and [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
+Webhook fetching will always make use of collections and promises, if you do not understand either concepts, revise them and then come back to this section.  You can read about collections [here](/additional-info/collections.md), and promises [here](/additional-info/async-await.md) and [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
 :::
 
 ### Fetching all webhooks of a guild
