@@ -3,7 +3,7 @@ const config = require('./config.json');
 
 const client = new Discord.Client();
 
-const embed = new Discord.MessageEmbed()
+const embed = new Discord.RichEmbed()
 	.setTitle('Webhooks are very cool')
 	.setColor('GREEN');
 
