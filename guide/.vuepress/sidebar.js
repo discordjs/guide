@@ -84,6 +84,7 @@ module.exports = {
 				'/popular-topics/canvas',
 				'/popular-topics/common-questions',
 				'/popular-topics/miscellaneous-examples',
+				'/popular-topics/webhooks',
 			],
 		},
 		{
