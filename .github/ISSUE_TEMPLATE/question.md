@@ -1,7 +1,7 @@
 ---
 name: Question/General support request
-about: This template is for asking questions about the guide. 
-labels: 'type: question'
+about: Ask questions about the guide. 
+labels: 'question'
 ---
 
 <!--
