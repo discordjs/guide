@@ -19,11 +19,12 @@ npm install node-fetch
 To start off, you're just going to be using this skeleton code:
 
 <!-- eslint-disable require-await -->
+<branch version="11.x">
 
 ```js
-const Discord = require('discord.js');
+const { Client, RichEmbed } = require('discord.js');
 
-const client = new Discord.Client();
+const client = new Client();
 const prefix = '!';
 
 client.once('ready', () => {
@@ -41,6 +42,31 @@ client.on('message', async message => {
 
 client.login('your-token-goes-here');
 ```
+</branch>
+<branch version="12.x">
+	
+```js
+const { Client, MessageEmbed } = require('discord.js');
+
+const client = new Client();
+const prefix = '!';
+
+client.once('ready', () => {
+	console.log('Ready!');
+});
+
+client.on('message', async message => {
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+	const args = message.content.slice(prefix.length).split(/ +/);
+	const command = args.shift().toLowerCase();
+
+	// ...
+});
+
+client.login('your-token-goes-here');
+```
+</branch>
 
 ::: tip
 We're going to take advantage of [destructuring](/additional-info/es6-syntax.md#destructuring) in this tutorial to maintain readability.
@@ -163,10 +189,12 @@ const trim = (str, max) => ((str.length > max) ? `${str.slice(0, max - 3)}...` :
 
 This is how we'll be structuring the embed:
 
+<branch version="11.x">
+
 ```js
 const [answer] = list;
 
-const embed = new Discord.RichEmbed()
+const embed = new RichEmbed()
 	.setColor('#EFFF00')
 	.setTitle(answer.word)
 	.setURL(answer.permalink)
@@ -176,6 +204,25 @@ const embed = new Discord.RichEmbed()
 
 message.channel.send(embed);
 ```
+
+</branch>
+<branch version="12.x">
+
+```js
+const [answer] = list;
+
+const embed = new MessageEmbed()
+	.setColor('#EFFF00')
+	.setTitle(answer.word)
+	.setURL(answer.permalink)
+	.addField('Definition', trim(answer.definition, 1024))
+	.addField('Example', trim(answer.example, 1024))
+	.addField('Rating', `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.`);
+
+message.channel.send(embed);
+```
+
+</branch>
 
 Now, if you do that same command again, you should get this:
 

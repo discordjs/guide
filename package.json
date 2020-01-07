@@ -5,7 +5,7 @@
   "scripts": {
     "lint": "eslint . --ext js,md,vue",
     "serve": "vuepress dev guide",
-    "build": "vuepress build guide"
+    "build": "NODE_ENV=production vuepress build guide"
   },
   "repository": "https://github.com/discordjs/guide.git",
   "keywords": [
@@ -28,10 +28,12 @@
     "eslint-config-sora": "^2.0.0",
     "eslint-plugin-markdown": "^1.0.0",
     "eslint-plugin-vue": "^5.2.2",
-    "vuepress": "^0.14.10"
+    "vuepress": "^1.2.0"
   },
   "dependencies": {
-    "vue-discord-message": "^3.0.0",
-    "vuepress-theme-yuu": "^1.0.0"
+    "@vuepress/plugin-google-analytics": "^1.2.0",
+    "semver": "^6.0.0",
+    "vue-discord-message": "^3.2.5",
+    "vuepress-theme-yuu": "^2.2.0"
   }
 }

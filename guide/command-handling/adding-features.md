@@ -328,7 +328,7 @@ There's nothing really complex here; all you do is append some strings, `.map()`
 Since help messages can get messy, you'll be DMing it to the message author instead of posting it in the requested channel. However, there is something very important you should consider: the possibility of not being able to DM the user, whether it be that they have DMs disabled on that server or overall, or they have the bot blocked. For that reason, you should `.catch()` it and let them know.
 
 ::: tip
-If you weren't already aware, `.send()` takes 2 parameters: the content to send, and the message options to pass in. You can read about the `MessageOptions` type [here](https://discord.js.org/#/docs/main/stable/typedef/MessageOptions). Using `split: true` here will automatically split our help message into 2 or more messages in the case that it exceeds the 2,000 character limit.
+If you weren't already aware, `.send()` takes 2 parameters: the content to send, and the message options to pass in. You can read about the `MessageOptions` type <branch version="11.x" inline>[here](https://discord.js.org/#/docs/main/11.5.1/typedef/MessageOptions)</branch><branch version="12.x" inline>[here](https://discord.js.org/#/docs/main/master/typedef/MessageOptions)</branch>. Using `split: true` here will automatically split our help message into 2 or more messages in the case that it exceeds the 2,000 character limit.
 :::
 
 ::: tip
@@ -383,8 +383,66 @@ At the end of it all, you should be getting this as a result:
 No more manually editing your help command! If you aren't completely satisfied with how it looks, you can always adjust it to your liking later.
 
 ::: tip
-If you want to add categories or other information to your commands you can simply add properties reflecting it to your `module.exports`. If you only want to show a subset of commands remember that `commands` is a Collection you can [filter](https://discord.js.org/#/docs/main/stable/class/Collection?scrollTo=filter) to fit your specific needs!
+If you want to add categories or other information to your commands you can simply add properties reflecting it to your `module.exports`. If you only want to show a subset of commands remember that `commands` is a Collection you can <branch version="11.x" inline>[filter](https://discord.js.org/#/docs/main/11.5.1/class/Collection?scrollTo=filter)</branch><branch version="12.x" inline>[filter](https://discord.js.org/#/docs/collection/master/class/Collection?scrollTo=filter)</branch> to fit your specific needs!
 :::
+
+## Reloading commands
+
+When writing your commands, you may find it tedious to restart your bot every time you want to test even the slightest change in your code. However, if you have a command handler, reloading commands can be done with a single bot command.
+
+Create a new command file and paste in the usual format:
+
+```js
+module.exports = {
+	name: 'reload',
+	description: 'Reloads a command',
+	execute(message, args) {
+		// ...
+	},
+};
+```
+
+In this command, you will be using a command name or alias as the only argument. First off, you need to check if the command you want to reload exists. This can be done in a similar fashion as getting a command in your main file.  
+Note that you can skip the first line if you use the [argument checker](/command-handling/adding-features.html#required-arguments) from above:
+
+```js
+if (!args.length) return message.channel.send(`You didn't pass any command to reload, ${message.author}!`);
+const commandName = args[0].toLowerCase();
+const command = message.client.commands.get(commandName)
+	|| message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+if (!command) return message.channel.send(`There is no command with name or alias \`${commandName}\`, ${message.author}!`);
+```
+
+:::tip
+A lot of library specific structures have `client` as a property. That means you don't have to pass the client reference as a parameter to commands to access for example `client.guilds` or `client.commands`, but can directly access the respective properties directly from the `message` object, as shown in the snippet above.
+:::
+
+Now, in theory, all there is to do, is to delete the previous command from `client.commands` and require the file again. In practice though, you cannot do this that easily as `require()` caches the file. If you were to require it again, you would simply load the previously cached file without any of your changes. In order to remove the file from the cache, you need to add the following line to your code:
+
+```js
+delete require.cache[require.resolve(`./${commandName}.js`)];
+```
+
+After removing the command from the cache, all you have to do is require the file again and add the freshly loaded command to `client.commands`:
+
+```js
+try {
+	const newCommand = require(`./${commandName}.js`);
+	message.client.commands.set(newCommand.name, newCommand);
+} catch (error) {
+	console.log(error);
+	message.channel.send(`There was an error while reloading a command \`${commandName}\`:\n\`${error.message}\``);
+}
+```
+
+The snippet above uses a `try/catch` block to load the command file and add it to `client.commands`. In case of an error it will log the full error to console and notify the user about it with the error's message component `error.message`. Note the you never actually delete the command from the commands collection, and instead just overwrite it. This prevents you from deleting a command, and ending up with no command at all after a failed `require()` call, as each use of the reload command checks that collection again.
+
+The last thing you might want to add is sending a message if the reload was successful:
+
+```js
+message.channel.send(`Command \`${commandName}\` was reloaded!`);
+```
 
 ## Conclusion 
 
