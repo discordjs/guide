@@ -1,7 +1,9 @@
 # Working with Audit Logs
 
 ## Some quick background
-Audit logs are a great moderation tool offered by discord to know what happened in a server, and usually by whom. There are quite a few cases where audit logs may be used, this guide will limit itself to the most common use cases. For more information on audit logs, feel free to consult the [relevant discord api page](https://discordapp.com/developers/docs/resources/audit-log).
+Audit logs are a great moderation tool offered by discord to know what happened in a server, and usually by whom. At the moment, these are the only method to help you determine who the executor of a mod action was on the server. Relevant events such as `messageDelete` and `guildMemberLeave` unfortunately do not provide info on the moderation actions having triggered them; making the fetch for audit logs a necessity.
+
+There are quite a few cases where audit logs may be used, this guide will limit itself to the most common use cases. For more information on audit logs, feel free to consult the [relevant discord api page](https://discordapp.com/developers/docs/resources/audit-log).
 
 ::: warning
 It is crucial that you first understand two details about audit logs:
@@ -17,7 +19,7 @@ In the following examples, a very simple case for some auditLog types will be ex
 Let us dive right into it with probably the most common use of audit logs; understanding who deleted any given message in a discord server.
 
 ::: warning
-At the moment of writing this, discord does not emit an audit log if the person who deleted the message is a bot, or is the author of the message itself.
+At the moment of writing this, discord does not emit an audit log if the person who deleted the message is a bot deleting a single message, or is the author of the message itself.
 :::
 
 For now we will look only at the `messageDelete` event. Let us start off with defining a basic trial code for this task.
@@ -37,7 +39,7 @@ client.on('messageDelete', message => {
 client.login('your-token-goes-here');
 ```
 
-So far nothing should seem new or complicated, we get the message deleted event, and log that a message was removed from a channel. We could make use of more information from the message object, but that is left as an exercise for the student.
+So far nothing should seem new or complicated, we get the message deleted event, and log that a message was removed from a channel. We could make use of more information from the message object, but that is left as an exercise for the reader.
 
 For our interests we are going to set a fetch limit of 1, and only care about the type `MESSAGE_DELETE`.
 
@@ -91,7 +93,7 @@ client.on('guildMemberRemove', member => {
 client.login('your-token-goes-here');
 ```
 
-We will again fetchAuditLogs while limiting ourselves to 1 entry, and looking at the `MEMBER_KICK` type.
+We will again fetch audit logs while limiting ourselves to 1 entry, and looking at the `MEMBER_KICK` type.
 
 ```js
 client.on('guildMemberRemove', async member => {
@@ -121,7 +123,7 @@ client.on('guildMemberRemove', async member => {
 
 ## Who banned a user?
 
-The logic for this will be very similar to the above kick example, with the exception that this time we have an event specifically for guild bans, that is `guildBanAdd`. Starting with again a skeleton code, we have the following.
+The logic for this will be very similar to the above kick example, with the exception that this time we have an event specifically for guild bans, that is `guildBanAdd`. Starting with a skeleton code, we have the following.
 
 ```js
 const Discord = require('discord.js');
