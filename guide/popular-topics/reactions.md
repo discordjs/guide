@@ -304,11 +304,11 @@ This feature is not available on version 11.x if you want to listen for reaction
 Messages sent before your bot started are uncached, unless you fetch them first. By default the library does not emit client events if the data received and cached is not sufficient to build fully functional objects.
 Since version 12 you can change this behaviour by activating partials. For a full explanation of partials see [this page](/popular-topics/partials.md).
 
-Make sure you enable partial structures for both `MESSAGE` and `CHANNEL` when instantiating your client, if you want reaction events on uncached messages for both server and direct message channels. If you do not want to support direct message channels you can only enable `MESSAGE`.
+Make sure you enable partial structures for `MESSAGE`, `CHANNEL` and `REACTION` when instantiating your client, if you want reaction events on uncached messages for both server and direct message channels. If you do not want to support direct message channels you can exclude `CHANNEL`.
 
 ```js
 const Discord = require('discord.js');
-const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL'] });
+const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 client.on('messageReactionAdd', async (reaction, user) => {
 	// When we receive a reaction we check if the message is partial or not
 	if (reaction.message.partial) {
@@ -321,6 +321,16 @@ client.on('messageReactionAdd', async (reaction, user) => {
 	}
 	// Now the message has been cached and is fully available
 	console.log(`${reaction.message.author}'s message "${reaction.message.content}" gained a reaction!`);
+	// We can also check if the reaction is partial or not
+	if (reaction.partial) {
+		try {
+			await reaction.fetch();
+		} catch (error) {
+			console.log('Something went wrong when fetching the reaction: ', error);
+		}
+	}
+	// Now the reaction is fully available and the properties will be reflected accurately:
+	console.log(`${reaction.count} user(s) have given the same reaction to this message!`);
 });
 ```
 
