@@ -1,5 +1,14 @@
 # Voice Broadcasts
 
+<branch version="11.x">
+
+The Discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots, and tips and tricks to optimize performance!
+
+This voice guide is written for Discord.js v12, which features an improved audio system. Much of the example code in the voice guide is unsuitable for v11 and below - to access this content, please update Discord.js to v12! 
+
+</branch>
+<branch version="12.x">
+
 ## Example Usage
 
 A voice broadcast can be thought of as a reusable StreamDispatcher - you can play an audio stream onto a broadcast, and then you can play the same broadcast across multiple voice connections. This is particularly useful for "radio bots" and performs much better than if you tried to play the same stream separately in each voice channel. It also ensures that all the voice connections are in sync when playing the audio.
@@ -103,3 +112,5 @@ const streamDispatcher = connection.play(broadcast);
 	// Unsubscribe from broadcast
 	streamDispatcher.destroy();
 	```
+
+</branch>
