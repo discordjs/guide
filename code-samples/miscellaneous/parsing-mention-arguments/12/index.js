@@ -45,10 +45,10 @@ client.on('message', message => {
 				return message.reply('Please use a proper mention if you want to see someone else\'s avatar.');
 			}
 
-			return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL}`);
+			return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL()}`);
 		}
 
-		return message.channel.send(`${message.author.username}, your avatar: ${message.author.displayAvatarURL}`);
+		return message.channel.send(`${message.author.username}, your avatar: ${message.author.displayAvatarURL()}`);
 	}
 });
 

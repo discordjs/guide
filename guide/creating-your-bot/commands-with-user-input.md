@@ -10,13 +10,15 @@ Sometimes you'll want to determine the result of a command depending on user inp
 
 We'll actually be tackling 2 things at once here. Things will be explained along the way, so don't worry if you don't understand immediately.
 
-Go to your main bot file and find the `client.on('message', ...)` bit. Inside of it, add these 4 lines at the very top of it.
+Go to your main bot file and find the `client.on('message', ...)` bit. Add the following block of code at the top of this event listeners callback function (the part we replaced with `...` here).
 
 ```js
+// client.on('message', message => {
 if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 const args = message.content.slice(prefix.length).split(' ');
 const command = args.shift().toLowerCase();
+// the rest of your code
 ```
 
 1. If the message either doesn't start with the prefix or was sent by a bot, exit early.
@@ -197,6 +199,8 @@ If you try again, it should work as expected.
 
 Let's say you have some sort of `!avatar` command, where it'll display the avatar of all the mentioned users, or your own avatar if no users were mentioned. Focus on that 2nd part for now - how would you go about displaying your own avatar if no users were mentioned? Taking the snippet for the code you just used, you can do it just like this:
 
+<branch version="11.x">
+
 <!-- eslint-skip -->
 
 ```js
@@ -209,9 +213,22 @@ else if (command === 'avatar') {
 }
 ```
 
-::: warning
-Depending on your discord.js version, the `.displayAvatarURL` part may vary. On v12, it'll be `.displayAvatarURL()` (a method), and on v11, it'll be `.displayAvatarURL` (a property). You can check what version you're running by using the `npm ls discord.js` command in your console.
-:::
+</branch>
+<branch version="12.x">
+
+<!-- eslint-skip -->
+
+```js
+else if (command === 'avatar') {
+	if (!message.mentions.users.size) {
+		return message.channel.send(`Your avatar: <${message.author.displayAvatarURL()}>`);
+	}
+
+	// ...
+}
+```
+
+</branch>
 
 That part is simple; just recycle the if statement you used in the section above and displaying the link to your avatar.
 
@@ -226,6 +243,8 @@ That part is simple; just recycle the if statement you used in the section above
 </div>
 
 The next part is where it takes a turn - displaying the avatars of all the mentioned users. But it's simpler than you may think! `message.mentions.users` returns a Collection (as previously mentioned), which you can loop over in a number of different ways. You'll be using `.map()` to loop here, since it allows you to easily collect and store data in a variable in order to send 1 final message in the end, as opposed to multiple.
+
+<branch version="11.x">
 
 <!-- eslint-skip -->
 
@@ -244,6 +263,29 @@ else if (command === 'avatar') {
 	message.channel.send(avatarList);
 }
 ```
+
+</branch>
+<branch version="12.x">
+
+<!-- eslint-skip -->
+
+```js
+else if (command === 'avatar') {
+	if (!message.mentions.users.size) {
+		return message.channel.send(`Your avatar: <${message.author.displayAvatarURL()}>`);
+	}
+
+	const avatarList = message.mentions.users.map(user => {
+		return `${user.username}'s avatar: <${user.displayAvatarURL()}>`;
+	});
+
+	// send the entire array of strings as a message
+	// by default, discord.js will `.join()` the array with `\n`
+	message.channel.send(avatarList);
+}
+```
+
+</branch>
 
 And ta-da! You now have a list of avatar links of all the users you tagged.
 

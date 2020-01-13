@@ -167,7 +167,7 @@ Here is how the RegEx works:
 Using the `.match()` method on strings you can get the values of the capture group, i.e., the ID of the mention.
 
 ::: warning
-Discord.js has [built-in patterns](https://discord.js.org/#/docs/main/stable/class/MessageMentions?scrollTo=s-CHANNELS_PATTERN)
+Discord.js has <branch version="11.x" inline>[built-in patterns](https://discord.js.org/#/docs/main/11.5.1/class/MessageMentions?scrollTo=s-CHANNELS_PATTERN)</branch><branch version="12.x" inline>[built-in patterns](https://discord.js.org/#/docs/main/master/class/MessageMentions?scrollTo=s-CHANNELS_PATTERN)</branch>
 for matching mentions, however as of version 11.4 they do not contain any groups
 and thus aren't useful for actually getting the ID out of the mention.
 :::
@@ -176,8 +176,12 @@ Updating your `getUserFromMention` function to use RegEx gives you this:
 
 ```js
 function getUserFromMention(mention) {
-	const matches = mention.match(/^<@!?(\d+)>$/);
 	// The id is the first and only match found by the RegEx.
+	const matches = mention.match(/^<@!?(\d+)>$/);
+
+	// If supplied variable was not a mention, matches will be null instead of an array.
+	if (!matches) return;
+
 	// However the first element in the matches array will be the entire mention, not just the ID,
 	// so use index 1.
 	const id = matches[1];

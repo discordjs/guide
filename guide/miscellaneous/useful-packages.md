@@ -61,7 +61,7 @@ const messages = await message.channel.awaitMessages(m => m.author.id === messag
 	errors: ['time'],
 });
 
-const difference = messages.last().createdTimestamp - message.first().createdTimestamp();
+const difference = messages.last().createdTimestamp - messages.first().createdTimestamp;
 const formatted = ms(difference);
 
 message.channel.send(`You sent the two messages ${formatted} apart.`);

@@ -12,12 +12,13 @@ const config = {
 		['meta', { name: 'og:type', content: 'website' }],
 		['meta', { name: 'og:url', content: 'https://discordjs.guide/' }],
 		['meta', { name: 'og:locale', content: 'en_US' }],
+		['meta', { name: 'og:image', content: '/meta-image.png' }],
 	],
-	ga: 'UA-108513187-1',
+	plugins: [],
 	theme: 'yuu',
 	themeConfig: {
 		yuu: {
-			colorThemes: ['blue', 'red'],
+			extraOptions: { before: 'BranchSelector' },
 		},
 		repo: 'discordjs/guide',
 		docsDir: 'guide',
@@ -32,6 +33,10 @@ const config = {
 			{
 				text: 'Commando',
 				link: '/commando/',
+			},
+			{
+				text: 'Discord.js Documentation',
+				link: 'https://discord.js.org/#/docs/main/stable/general/welcome',
 			},
 		],
 		sidebar,
@@ -57,6 +62,8 @@ if (process.env.NODE_ENV === 'production') {
 		apiKey: 'c8d9361fb8403f7c5111887e0edf4b5e',
 		indexName: 'discordjs',
 	};
+
+	config.plugins.push(['@vuepress/google-analytics', { ga: 'UA-108513187-1' }]);
 }
 
 module.exports = config;

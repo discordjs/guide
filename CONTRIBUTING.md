@@ -38,7 +38,7 @@ ESLint would error with `Parsing error: Unexpected token message` instead of let
 
 To add a new page to the guide, create a `file-name.md` file inside the folder of your choice. If you want to link to `/dir/some-tutorial.html`, you would create a `some-tutorial.md` file inside a `dir` folder. [VuePress](https://github.com/vuejs/vuepress) will pick up on it and set up the routing appropriately.
 
-With that being said, you will still need to add the link to the sidebar manually. Go to the `/guide/_sidebar.md` file and insert a new list item with a link to your newly created page.
+With that being said, you will still need to add the link to the sidebar manually. Go to the `/guide/.vuepress/sidebar.js` file and insert a new item with the path to your newly created page.
 
 ## General guidelines
 
@@ -240,3 +240,41 @@ The `author` and `avatar` attributes must be strings, and the `bot` attribute mu
 Do note the `<div is="discord-messages">` syntax instead of `<discord-messages>`. This is due to how VuePress renders markdown and HTML inside markdown files and doesn't recognize `<discord-messages>` as an HTML element, therefore rendering anything indented inside as a regular codeblock.
 
 You can read more about how to use these components by checking out [the package's GitHub repo](https://github.com/Danktuary/vue-discord-message).
+
+### Branch-specific content
+
+On some pages, you'll want to display content that applies only to the stable branch and other content that applies to a different branch. You can use the `<branch>` component inside any .md file like so:
+
+```md
+You can use
+<branch version="11.x" inline>`message.channel.fetchMessages()`</branch>
+<branch version="12.x" inline>`message.channel.messages.fetch()`</branch>
+to fetch all messages in a channel
+```
+
+If you're on the `11.x` branch, you'd see "You can use `message.channel.fetchMessages()` to fetch all messages in a channel. Use the `inline` attribute to make content display inline with the content around it. Otherwise, it'll be displayed on its own line.
+
+You can refer to the `guide/.vuepress/branches.js` file to see which values are valid to use for the `version` attribute.
+
+#### Codeblocks and other markdown
+
+A common use-case for this component would be with codeblocks. Using Vue components inside markdown can get tricky and cause weird errors, so in order for everything to render properly, an extra blank line should be added before and after the component tag. For example (ignoring the `\` before the backticks):
+
+```md
+You can use the following to fetch all messages in a channel:
+
+<branch version="11.x">
+
+\```js
+message.channel.fetchMessages();
+\```
+
+</branch>
+<branch version="12.x">
+
+\```js
+message.channel.messages.fetch();
+\```
+
+</branch>
+```
