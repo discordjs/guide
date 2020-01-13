@@ -82,19 +82,6 @@ connection.play('file.mp3', { highWaterMark: 50 });
 
 You can try increasing this property to improve choppy playback, but increasing it too much will mean that playback will take longer to start, and any changes to volume will not take effect immediately. 
 
-### Increasing passes to counteract packet loss
-
-If you have a bad network connection, you can try increasing the `passes` property - this is how many times a packet is sent to Discord to increase the probability it is actually received. The default value is 1.
-
-```js
-// Play a file with 3 passes
-connection.play('file.mp3', { passes: 3 });
-```
-
-::: warning
-No more than 3 passes are recommended as this effectively triples the bandwidth you're using.
-:::
-
 ### Disabling Inline Volume
 
 If you're not going to change the volume of your stream in real-time, you can disable the volume transformer Discord.js creates for you. You'll need to do this before playing the stream:
