@@ -14,10 +14,10 @@ If you're developing on macOS, you have a few options. You can go to [the Node.j
 
 ### Installing on Linux
 
-If you're developing on Linux, you may consult [this page](https://nodejs.org/en/download/package-manager/) to determine how you should install Node.<br />On that note, there's a possibility that you may already have Node \(e.g. if you're using a VPS\). You can check by running the `node -v` command. If it outputs something like <branch version="v11.x" inline>`v8.0.0`</branch><branch version="v12.x" inline>`v10.0.0`</branch> or higher, then you're good to go! Otherwise, take a look at the page linked above for instructions on installing Node on your OS.
+If you're developing on Linux, you may consult [this page](https://nodejs.org/en/download/package-manager/) to determine how you should install Node.<br />On that note, there's a possibility that you may already have Node \(e.g. if you're using a VPS\). You can check by running the `node -v` command. If it outputs something like <branch version="v11.x" inline>`v8.0.0`</branch><branch version="v12.x" inline>`v10.2.0`</branch> or higher, then you're good to go! Otherwise, take a look at the page linked above for instructions on installing Node on your OS.
 
 ::: warning
-If you _do_ have Node installed, but have an older version \(i.e. anything below <branch version="v11.x" inline>8.0.0</branch><branch version="v12.x" inline>10.0.0</branch>\), you should upgrade to the latest version. <branch version="11.x" inline>Discord.js v11</branch><branch version="12.x" inline> Discord.js v12</branch> requires Node <branch version="11.x" inline>8.0.0</branch><branch version="12.x" inline>10.0.0</branch> or higher.
+If you _do_ have Node installed, but have an older version \(i.e. anything below <branch version="v11.x" inline>8.0.0</branch><branch version="v12.x" inline>10.2.0</branch>\), you should upgrade to the latest version. <branch version="11.x" inline>Discord.js v11</branch><branch version="12.x" inline> Discord.js v12</branch> requires Node <branch version="11.x" inline>8.0.0</branch><branch version="12.x" inline>10.2.0</branch> or higher.
 :::
 
 ---
@@ -48,7 +48,7 @@ It should then open up a window with a black background. It's a bit unattractive
 
 ### Using the command prompt
 
-With the command prompt open, run the `node -v` command to make sure you've successfully installed Node.js. If you see something like <branch version="11.x" inline>`v8.0.0`</branch><branch version="12.x" inline>`v10.0.0`</branch>, great! If not, go back and try installing again.
+With the command prompt open, run the `node -v` command to make sure you've successfully installed Node.js. If you see something like <branch version="11.x" inline>`v8.0.0`</branch><branch version="12.x" inline>`v10.2.0`</branch>, great! If not, go back and try installing again.
 
 The next command you'll be running is `npm init`. This command creates a `package.json` file for you, which is what will be used to keep track of the dependencies your bot uses, as well as other info. If you're a bit confused by that, you can simply ignore it for the time being.
 
