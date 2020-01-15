@@ -29,14 +29,12 @@ function extractBranchVersion(query, hash) {
 
 export default {
 	name: 'BranchSelector',
-
 	data() {
 		return {
 			branches,
 			selectedBranch: defaultBranch.version,
 		};
 	},
-
 	mounted() {
 		const branch = extractBranchVersion(this.$route.query, this.$route.hash);
 
@@ -47,7 +45,6 @@ export default {
 
 		this.selectedBranch = localStorage.getItem('branch-version') || defaultBranch.version;
 	},
-
 	methods: {
 		updateBranch() {
 			localStorage.setItem('branch-version', this.selectedBranch);

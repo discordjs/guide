@@ -10,17 +10,14 @@
 <script>
 export default {
 	name: 'ResultingCode',
-
 	props: {
 		path: String,
 	},
-
 	data() {
 		return {
 			githubLink: 'https://github.com/discordjs/guide/tree/master/code-samples/',
 		};
 	},
-
 	mounted() {
 		this.githubLink += this.path || this.$page.path.slice(1).replace('.html', '');
 	},
