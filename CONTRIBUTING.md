@@ -10,20 +10,19 @@ cd guide
 yarn # or npm install
 ```
 
-You should install the necessary dev dependencies afterwards, so that view the site locally. You can use `yarn serve` to open up a local version of the site at http://localhost:8080. If you need to use a different port, run it as `yarn serve --port=1234`.
+You can use `yarn serve` to open up a local version of the site at http://localhost:8080. If you need to use a different port, run it as `yarn serve --port=1234`.
 
 ### Linting
 
-Remember to always lint your edits/additions before making a commit to ensure everything's lined up and consistent with the rest of the guide. We use ESLint and have a package.json script for linting both JS files and JS codeblocks inside Markdown files. Just install the dependencies and run the lint script.
+Remember to always lint your edits/additions before making a commit to ensure everything's lined up and consistent with the rest of the guide. We use ESLint and have a package.json script for linting both JS files and JS codeblocks inside Markdown files.
 
 ```bash
-yarn
 yarn lint
 ```
 
 #### Caveats
 
-There might come a time where a snippet will contain a parse error, and ESLint won't be able to lint it properly. For example:
+There might come a time where a snippet will contain a parsing error, and ESLint won't be able to lint it properly. For example:
 
 <!-- eslint-skip -->
 
@@ -32,7 +31,7 @@ const sent = await message.channel.send('Hi!');
 console.log(sent.content)
 ```
 
-ESLint would error with `Parsing error: Unexpected token message` instead of letting you know that you're missing a semicolon. In this case, it's because of the use of `await` outside of an async function. In situations like this, after you've fixed any obvious errors, you can add an `<!-- eslint-skip -->` comment above the codeblock to have it ignored entirely by ESLint when running the lint script. 
+ESLint would error with `Parsing error: Unexpected token message` instead of letting you know that you're missing a semicolon. In this case, it's because of the use of `await` outside of an async function. In situations like this, after you've fixed any obvious errors, you can add an `<!-- eslint-skip -->` comment above the codeblock to have it ignored entirely by ESLint when running the lint script.
 
 ## Adding pages
 
@@ -46,13 +45,13 @@ Because we want to keep everything as consistent and clean as possible, here are
 
 ### Spelling, grammar, and wording
 
-Improper grammar, strange wording, and incorrect spelling are all things that may lead to confusion when a user reads a guide page. It's very important to attempt to keep the content clear and concise. Re-read what you've written and place yourself in the shoes of someone else for a moment to see if you can fully understand everything without any confusion.
+Improper grammar, strange wording, and incorrect spelling are all things that may lead to confusion when a user reads a guide page. It's important to attempt to keep the content clear and consistent. Re-read what you've written and place yourself in the shoes of someone else for a moment to see if you can fully understand everything without any confusion.
 
 Don't worry if you aren't super confident with your grammar/spelling/wording skills; all pull requests get thoroughly reviewed, and comments are left in areas that need to be fixed or could be done better/differently.
 
 #### "You"/"your" instead of "we"/"our"
 
-When explaining parts of a guide, it'd recommended to use "you" instead of "we" in most situations. For example:
+When explaining parts of a guide, it's recommended to use "you" instead of "we" in most situations. For example:
 
 ```diff
 - To check our Node version, we can run `node -v`.
@@ -84,11 +83,11 @@ When refering to yourself, use "we" (as in "the writers of this guide") instead 
 
 ### Paragraph structure
 
-Tied in with the section above, try to keep things as neatly formatted as possible! If a paragraph gets long, split it up into multiple paragraphs so that it adds some spacing and is easier on the eyes.
+Tied in with the section above, try to keep things as neatly formatted as possible. If a paragraph gets long, split it up into multiple paragraphs so that it adds some spacing and is easier on the eyes.
 
 #### Tips, warnings, and danger messages
 
-If you have a tip to share with to user, you can format them in a specific way so that it looks appealing and noticable. The same goes for warning and "danger" messages.
+If you have a tip to share with the reader, you can format them in a specific way so that it looks appealing and noticable. The same goes for warning and "danger" messages.
 
 ```md
 In this section, we'll be doing some stuff!
@@ -127,11 +126,11 @@ console.log(data);
 And here's a sentence that would explain how that works, maybe.
 
 ::: tip
-Here's where you'd tell them something even cooler than the really cool thing they just learned.
+Here's where we'd tell you something even cooler than the really cool thing you just learned.
 :::
 
 ::: warning
-This is where you'd warn them about the possible issues that arise when using this method.
+This is where we'd warn you about the possible issues that arise when using this method.
 :::
 ```
 
@@ -154,7 +153,7 @@ Section headers and sidebar links should generally be short and right to the poi
 When making references to pieces of code (e.g. variables, properties, etc.), place those references inside backticks. For example:
 
 ```md
-After accessing the `icon` property off of the `data` object, you can send that as a file to Discord.
+After accessing the `.icon` property off of the `data` object, you can send that as a file to Discord.
 
 ---
 
@@ -164,11 +163,11 @@ If you want to change your bot's username username, you can use the `ClientUser#
 References to class names should be capitalized, but remain outside of backticks. For example:
 
 ```md
-Since `guild.members` returns a Collection, we can interate over it with `.forEach()` or a `for ... of` loop.
+Since `guild.members` returns a Collection, you can iterate over it with `.forEach()` or a `for...of` loop.
 
 ---
 
-Since the `.delete()` method returns a Promise, we need to `await` it when inside a `try`/`catch` block.
+Since the `.delete()` method returns a Promise, you need to `await` it when inside a `try`/`catch` block.
 ```
 
 ### Images and links
@@ -199,11 +198,11 @@ If you're writing a page that teaches the reader how to build something step-by-
 <!-- Inside /guide/foo/bar.md -->
 ## Resulting code
 
-<!-- Will result in `/code-samples/foo/bar/` -->
+<!-- Will link to /code-samples/foo/bar/ -->
 <resulting-code />
 ```
 
-This will automatically generate the link to the proper directory on GitHub for that specific page. Should you need to overwrite the path, you can do so:
+`<resulting-code />` is a helper component to generate a sentence and link to the proper directory on GitHub for that specific page. Should you need to overwrite the path, you can do so:
 
 ```md
 <!-- Inside /guide/baz/README.md -->
@@ -220,7 +219,7 @@ This will automatically generate the link to the proper directory on GitHub for 
 
 We have some useful custom helper components that you can use to "fake" Discord message. The reason for this is to make it easy for you to create, easy for anyone in the future to edit, and avoid having to take screenshots and using too many images on a page at once. Here's a preview of the components:
 
-![Discord message faker preview](https://i.imgur.com/1qZodqm.png)
+![Discord message faker preview](https://i.imgur.com/KAN3YYe.png)
 
 The syntax to make this display is quite simple as well:
 
@@ -235,15 +234,15 @@ The syntax to make this display is quite simple as well:
 </div>
 ```
 
-The `author` and `avatar` attributes must be strings, and the `bot` attribute must be a boolean. Do note the colon in `:bot="true"`. These components are made with Vue, but if you aren't familiar with Vue, don't worry about it. Just understand that this allows us to pass in the actual boolean `true` and not the string `'true'`. All `<discord-message>` tags must be children of a single `<div is="discord-messages">` tag for it to display properly.
+The `author` and `avatar` attributes must be strings, and the `bot` attribute must be a boolean. Do note the colon in `:bot="true"`. These components are made with [Vue](https://vuejs.org/), but if you aren't familiar with Vue, don't worry about it. Just understand that this allows us to pass in the actual boolean `true` and not the string `'true'`. All `<discord-message>` tags must be children of a single `<div is="discord-messages">` tag for it to display properly.
 
-Do note the `<div is="discord-messages">` syntax instead of `<discord-messages>`. This is due to how VuePress renders markdown and HTML inside markdown files and doesn't recognize `<discord-messages>` as an HTML element, therefore rendering anything indented inside as a regular codeblock.
+Do note the `<div is="discord-messages">` syntax instead of `<discord-messages>`. This is due to how VuePress renders markdown and HTML inside markdown files. It doesn't recognize `<discord-messages>` as an HTML element, therefore rendering anything indented inside it as a regular codeblock.
 
 You can read more about how to use these components by checking out [the package's GitHub repo](https://github.com/Danktuary/vue-discord-message).
 
 ### Branch-specific content
 
-On some pages, you'll want to display content that applies only to the stable branch and other content that applies to a different branch. You can use the `<branch>` component inside any .md file like so:
+On some pages, you'll want to display content that applies only to the stable branch and other content that applies to a different branch. You can use the `<branch>` component inside any .md file, like so:
 
 ```md
 You can use
