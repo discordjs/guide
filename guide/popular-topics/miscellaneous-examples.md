@@ -17,7 +17,7 @@ npm install --save ytdl-core
 If you get an error that says 'OPUS_ENGINE_MISSING', you'll need to install one of the opus packages discord.js recommends.
 
 ```
-npm install --save node-opus
+npm install --save @discordjs/opus
 ```
 
 If you get an error that says 'FFMPEG not found', this can be resolved by installing ffmpeg.

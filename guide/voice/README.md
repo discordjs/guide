@@ -24,7 +24,8 @@ async function play(voiceChannel) {
 At the bare minimum, you'll need:
 
 - An Opus library:
-  - [`node-opus`](https://github.com/Rantanen/node-opus/) (best performance)
+  - [`@discordjs/opus`](https://github.com/discordjs/opus) (best performance)
+  - [`node-opus`](https://github.com/Rantanen/node-opus/)
   - [`opusscript`](https://github.com/abalabahaha/opusscript/)
 
 You may also choose to install the following dependencies.
