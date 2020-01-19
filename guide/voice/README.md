@@ -24,7 +24,8 @@ async function play(voiceChannel) {
 At the bare minimum, you'll need:
 
 - An Opus library:
-  - [`node-opus`](https://github.com/Rantanen/node-opus/) (best performance)
+  - [`@discordjs/opus`](https://github.com/discordjs/opus) (best performance)
+  - [`node-opus`](https://github.com/Rantanen/node-opus/)
   - [`opusscript`](https://github.com/abalabahaha/opusscript/)
 
 You may also choose to install the following dependencies.
@@ -38,7 +39,7 @@ You may also choose to install the following dependencies.
   - [`libsodium-wrappers`](https://www.npmjs.com/package/libsodium-wrappers)
 
 ::: tip
-Outside a development environment, it is recommended for you to use `node-opus` and `sodium` to improve performance and improve the stability of audio playback!
+Outside a development environment, it is recommended for you to use `@discordjs/opus` and `sodium` to improve performance and improve the stability of audio playback!
 
 If you're struggling to install these dependencies, make sure you have build tools installed first. On Windows, this is as easy as running `npm install --global --production --vs2015 --add-python-to-path windows-build-tools`!
 :::
