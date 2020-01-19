@@ -1356,9 +1356,9 @@ The `OAuth2Application` class has been renamed to `ClientApplication`.
 `application.iconURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return.
 
 ```diff
-- user.iconURL;
-+ user.iconURL();
-+ user.iconURL({ format: 'png', size: 1024 });
+- application.iconURL;
++ application.iconURL();
++ application.iconURL({ format: 'png', size: 1024 });
 ```
 
 #### OAuth2Application#redirectURLs
