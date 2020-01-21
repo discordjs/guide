@@ -359,7 +359,7 @@ message.edit(embed);
 <branch version="12.x">
 
 ```js
-const exampleEmbed = new Discord.RichEmbed()
+const exampleEmbed = new Discord.MessageEmbed()
 	.setTitle('Some title')
 	.setDescription('Description after the edit');
 
