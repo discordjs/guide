@@ -339,9 +339,9 @@ const exampleEmbed = new Discord.MessageEmbed(receivedEmbed).setTitle('New title
 channel.send(exampleEmbed);
 ```
 
-### Editing the embedded message content
-
 </branch>
+
+### Editing the embedded message content
 
 To edit the content of an embed you need to pass a new <branch version="11.x" inline>RichEmbed</branch><branch version="12.x" inline>MessageEmbed</branch> structure or embed object to the messages `.edit()` method.
 
