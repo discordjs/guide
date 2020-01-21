@@ -156,7 +156,7 @@ You can then reference and use the images inside the embed itself with `attachme
 
 ::: tip
 If you plan to attach the same image over and over consider hosting it online and just provide the URL in the respective embed field instead. This also makes your bot respond much faster, since it doesn't need to upload the image with every response depending on it.
-::
+:::
 
 <branch version="11.x">
 
