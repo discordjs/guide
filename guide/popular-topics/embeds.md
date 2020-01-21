@@ -148,11 +148,15 @@ if (message.author.bot) {
 
 </branch>
 
-### Local images
+### Attaching images
 
-To use local images inside your embed, you need to upload them alongside the embed with the `.attachFiles()` method. You can either provide the file path <branch version="11.x" inline>[FileOptions](https://discord.js.org/#/docs/main/11.5.1/typedef/FileOptions)</branch><branch version="12.x" inline>[FileOptions](https://discord.js.org/#/docs/main/master/typedef/FileOptions)</branch>, BufferResolvable, or Attachment objects inside an array.
+You can use the `.attachFiles()` method to upload images alongside your embed and use them as source for embed fields that support image urls. The method accepts the source file as file path <branch version="11.x" inline>[FileOptions](https://discord.js.org/#/docs/main/11.5.1/typedef/FileOptions)</branch><branch version="12.x" inline>[FileOptions](https://discord.js.org/#/docs/main/master/typedef/FileOptions)</branch>, BufferResolvable (including a URL to an external image), or Attachment objects inside an array.
 
-You can then access and use the images inside the embed itself with `attachment://fileName.extension`.
+You can then reference and use the images inside the embed itself with `attachment://fileName.extension`.
+
+::: tip
+If you plan to attach the same image over and over consider hosting it online and just provide the URL in the respective embed field instead. This also makes your bot respond much faster, since it doesn't need to upload the image with every response depending on it.
+::
 
 <branch version="11.x">
 
@@ -257,11 +261,15 @@ if (message.author.bot) {
 }
 ```
 
-### Local images
+### Attaching images
 
-To use local images inside your embed you need to construct <branch version="11.x" inline>an [Attachment](https://discord.js.org/#/docs/main/11.5.1/class/Attachment)</branch><branch version="12.x" inline>a [MessageAttachment](https://discord.js.org/#/docs/main/master/class/MessageAttachment)</branch> from them to send as message option alongside the embed.
+You can upload images with your embedded message and use them as source for embed fields that support image urls by constructing <branch version="11.x" inline>an [Attachment](https://discord.js.org/#/docs/main/11.5.1/class/Attachment)</branch><branch version="12.x" inline>a [MessageAttachment](https://discord.js.org/#/docs/main/master/class/MessageAttachment)</branch> from them to send as message option alongside the embed. The <branch version="11.x" inline>file</branch><branch version="12.x" inline>attachment</branch> parameter takes a BufferResolvable or Stream including the URL to an external image.
 
-You can then access and use the images inside the embed itself with `attachment://fileName.extension`.
+You can then reference and use the images inside the embed itself with `attachment://fileName.extension`.
+
+::: tip
+If you plan to attach the same image over and over consider hosting it online and just provide the URL in the respective embed field instead. This also makes your bot respond much faster, since it doesn't need to upload the image with every response depending on it.
+:::
 
 <branch version="11.x">
 
@@ -300,13 +308,17 @@ channel.send({ files: [file], embed: exampleEmbed });
 If the images doesn't display inside the embed but outside of it, double check your syntax to make sure it's as shown above.
 :::
 
-## Resending embeds
+## Resending and editing
 
-At some point in your bot development, you might want to get an embed from a message that you're receiving, edit it, and send it again.
+We will now explain how to edit embedded message content and resend a received embed.
 
-To achieve this, you retrieve the embed from the messages embed array (`message.embeds`) and pass it to the MessageEmbed constructor. The constructed MessageEmbed can then be edited before sending it again.
+### Resending a received embed
 
-<branch version="11.x" inline>You can not resend the received embed structure! The MessageEmbed returned from `message.embeds` contains circular structures and needs to be converted to a RichEmbed object before sending.</branch><branch version="12.x" inline>We deliberately create a new Embed here instead of just modifying `message.embeds[0]` directly to keep the cache valid. If we were to not do this the embed in cache on the original message would diverge from what the actual embed looks like, which can result in unexpected behaviour down the line!</branch>
+To forward a received embed you retrieve it from the messages embed array (`message.embeds`) and pass it to the <branch version="11.x" inline>RichEmbed</branch><branch version="12.x" inline>MessageEmbed</branch> constructor. The constructed <branch version="11.x" inline>RichEmbed</branch><branch version="12.x" inline>MessageEmbed</branch> can then be edited before sending it again.
+
+::: warning
+<branch version="11.x" inline>You can not resend the received embed structure! The MessageEmbed returned from `message.embeds` contains circular structures and needs to be converted to a RichEmbed object before sending.</branch><branch version="12.x" inline>We deliberately create a new Embed here instead of just modifying `message.embeds[0]` directly to keep the cache valid. If we were to not do this the embed in cache on the original message would diverge from what the actual embed looks like, which can result in unexpected behavior down the line!</branch>
+:::
 
 <branch version="11.x">
 
@@ -327,7 +339,36 @@ const exampleEmbed = new Discord.MessageEmbed(receivedEmbed).setTitle('New title
 channel.send(exampleEmbed);
 ```
 
+### Editing the embedded message content
+
 </branch>
+
+To edit the content of an embed you need to pass a new <branch version="11.x" inline>RichEmbed</branch><branch version="12.x" inline>MessageEmbed</branch> structure or embed object to the messages `.edit()` method.
+
+<branch version="11.x">
+
+```js
+const exampleEmbed = new Discord.RichEmbed()
+	.setTitle('Some title')
+	.setDescription('Description after the edit');
+
+message.edit(embed);
+```
+
+</branch>
+<branch version="12.x">
+
+```js
+const exampleEmbed = new Discord.RichEmbed()
+	.setTitle('Some title')
+	.setDescription('Description after the edit');
+
+message.edit(embed);
+```
+
+</branch>
+
+If you want to build the new embed data on the template of a previously sent embed make sure to read the caveats in the previous section. 
 
 ## Notes
 
