@@ -207,9 +207,9 @@ try {
 
 <!-- eslint-skip -->
 ```js
-const reaction = message.reactions.get('484535447171760141');
+const reaction = message.reactions.cache.get('484535447171760141');
 try {
-	for (const user of reaction.users.values()) {
+	for (const user of reaction.users.cache.values()) {
 		await reaction.users.remove(user);
 	}
 } catch (error) {
@@ -248,7 +248,7 @@ try {
 
 <!-- eslint-skip -->
 ```js
-const userReactions = message.reactions.filter(reaction => reaction.users.has(userId));
+const userReactions = message.reactions.cache.filter(reaction => reaction.users.cache.has(userId));
 try {
 	for (const reaction of userReactions) {
 		await reaction.users.remove(userId);

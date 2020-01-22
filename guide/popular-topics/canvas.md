@@ -32,6 +32,8 @@ After installing all the necessary software, run `npm i canvas` if you use npm, 
 
 Here is the base code you'll be using to get started:
 
+<branch version="11.x">
+
 ```js
 const Discord = require('discord.js');
 const Canvas = require('canvas');
@@ -51,6 +53,31 @@ client.on('guildMemberAdd', member => {
 
 client.login('your-token-goes-here');
 ```
+
+</branch>
+<branch version="12.x">
+
+```js
+const Discord = require('discord.js');
+const Canvas = require('canvas');
+
+const client = new Discord.Client();
+
+client.once('ready', () => {
+	console.log('Ready!');
+});
+
+client.on('guildMemberAdd', member => {
+	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
+	if (!channel) return;
+
+	channel.send(`Welcome to the server, ${member}!`);
+});
+
+client.login('your-token-goes-here');
+```
+
+</branch>
 
 To make testing this feature much easier, you can add a simple command that'll "fake" a new member joining.
 
@@ -88,6 +115,8 @@ The end goal will be to display the user's avatar, username, and a simple "Welco
 `node-canvas` works almost identical to HTML5 Canvas. You can read the HTML5 Canvas tutorials on [w3Schools](https://www.w3schools.com/html/html5_canvas.asp) and [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) for more information later!
 :::
 
+<branch version="11.x">
+
 <!-- eslint-disable require-await -->
 
 ```js
@@ -104,6 +133,28 @@ client.on('guildMemberAdd', async member => {
 	channel.send(`Welcome to the server, ${member}!`);
 });
 ```
+
+</branch>
+<branch version="12.x">
+
+<!-- eslint-disable require-await -->
+
+```js
+client.on('guildMemberAdd', async member => {
+	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
+	if (!channel) return;
+
+	// Set a new canvas to the dimensions of 700x250 pixels
+	const canvas = Canvas.createCanvas(700, 250);
+	// ctx (context) will be used to modify a lot of the canvas
+
+	const ctx = canvas.getContext('2d');
+
+	channel.send(`Welcome to the server, ${member}!`);
+});
+```
+
+</branch>
 
 Now, you need to load the image you want to use into Canvas. In order to have more sufficient coverage, we'll first show you how to load a basic image from a local directory. We'll be using [this image](~@/images/canvas.jpg) as the background in the welcome image, but you can use whatever you want. Be sure to download the file, name it `wallpaper.jpg`, and save it inside the same directory as your main bot file.
 
@@ -133,7 +184,7 @@ client.on('guildMemberAdd', async member => {
 
 ```js
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
 	if (!channel) return;
 
 	const canvas = Canvas.createCanvas(700, 250);
@@ -191,7 +242,7 @@ client.on('guildMemberAdd', async member => {
 
 ```js
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
 	if (!channel) return;
 
 	const canvas = Canvas.createCanvas(700, 250);
@@ -249,7 +300,7 @@ client.on('guildMemberAdd', async member => {
 
 ```js
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
 	if (!channel) return;
 
 	const canvas = Canvas.createCanvas(700, 250);
@@ -309,7 +360,7 @@ client.on('guildMemberAdd', async member => {
 
 ```js
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
 	if (!channel) return;
 
 	const canvas = Canvas.createCanvas(700, 250);
@@ -378,7 +429,7 @@ client.on('guildMemberAdd', async member => {
 
 ```js
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
 	if (!channel) return;
 
 	const canvas = Canvas.createCanvas(700, 250);
@@ -462,7 +513,7 @@ client.on('guildMemberAdd', async member => {
 
 ```js
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
 	if (!channel) return;
 
 	const canvas = Canvas.createCanvas(700, 250);
@@ -579,7 +630,7 @@ const applyText = (canvas, text) => {
 };
 
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
 	if (!channel) return;
 
 	const canvas = Canvas.createCanvas(700, 250);
@@ -667,7 +718,7 @@ client.on('guildMemberAdd', async member => {
 
 ```js
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
 	if (!channel) return;
 
 	const canvas = Canvas.createCanvas(700, 250);
