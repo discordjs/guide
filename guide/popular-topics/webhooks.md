@@ -18,7 +18,7 @@ Bots receive webhook messages in a text channel normally. You can detect if the 
 if (message.webhookID) return;
 ```
 
-If you would like to get the webhook object that sent the message, you can use <branch version="11.x" inline>[`Message#fetchWebhook()`](https://discord.js.org/#/docs/main/stable/class/Message?scrollTo=fetchWebhook)</branch><branch version="12.x" inline>[`Message#fetchWebhook()`](https://discord.js.org/#/docs/main/master/class/Message?scrollTo=fetchWebhook)</branch>.
+If you would like to get the webhook object that sent the message, you can use <branch version="11.x" inline>[`Message#fetchWebhook()`](https://discord.js.org/#/docs/main/11.5.1/class/Message?scrollTo=fetchWebhook)</branch><branch version="12.x" inline>[`Message#fetchWebhook()`](https://discord.js.org/#/docs/main/master/class/Message?scrollTo=fetchWebhook)</branch>.
 
 ## Fetching webhooks
 
@@ -28,17 +28,17 @@ Webhook fetching will always make use of collections and promises, if you do not
 
 ### Fetching all webhooks of a guild
 
-If you would like to get all webhooks of a guild you can use <branch version="11.x" inline>[`Guild#fetchWebhook()`](https://discord.js.org/#/docs/main/stable/class/Guild?scrollTo=fetchWebhooks)</branch><branch version="12.x" inline>[`Guild#fetchWebhooks()`](https://discord.js.org/#/docs/main/master/class/Guild?scrollTo=fetchWebhooks)</branch>. This will return a promise which will resolve into a Collection of `Webhook`s.
+If you would like to get all webhooks of a guild you can use <branch version="11.x" inline>[`Guild#fetchWebhooks()`](https://discord.js.org/#/docs/main/11.5.1/class/Guild?scrollTo=fetchWebhooks)</branch><branch version="12.x" inline>[`Guild#fetchWebhooks()`](https://discord.js.org/#/docs/main/master/class/Guild?scrollTo=fetchWebhooks)</branch>. This will return a promise which will resolve into a Collection of `Webhook`s.
 
 ### Fetching webhooks of a channel
 
-Webhooks belonging to a channel can be fetched using <branch version="11.x" inline>[`TextChannel#fetchWebhook()`](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=fetchWebhooks)</branch><branch version="12.x" inline>[`Guild#fetchWebhooks()`](https://discord.js.org/#/docs/main/master/class/TextChannel?scrollTo=fetchWebhooks)</branch>. This will return a promise which will resolve into a Collection of `Webhook`s. A collection will be returned even if the channel contains a single webhook, if you are certain the channel contains a single webhook, you can use [`Collection#first()`](https://discord.js.org/#/docs/main/stable/class/Collection?scrollTo=first) on the Collection to get the webhook.
+Webhooks belonging to a channel can be fetched using <branch version="11.x" inline>[`TextChannel#fetchWebhooks()`](https://discord.js.org/#/docs/main/11.5.1/class/TextChannel?scrollTo=fetchWebhooks)</branch><branch version="12.x" inline>[`TextChannel#fetchWebhooks()`](https://discord.js.org/#/docs/main/master/class/TextChannel?scrollTo=fetchWebhooks)</branch>. This will return a promise which will resolve into a Collection of `Webhook`s. A collection will be returned even if the channel contains a single webhook. If you are certain the channel contains a single webhook, you can use <branch version="11.x" inline>[`Collection#first()`](https://discord.js.org/#/docs/main/11.5.1/class/Collection?scrollTo=first)</branch><branch version="12.x" inline>[`Collection#first()`](https://discord.js.org/#/docs/collection/master/class/Collection?scrollTo=first)</branch> on the Collection to get the webhook.
 
 ### Fetching a single webhook
 
 #### Using client
 
-You can fetch a specific webhook using its `id` with <branch version="11.x" inline>[`Client#fetchWebhook()`](https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=fetchWebhook)</branch><branch version="12.x" inline>[`Client#fetchWebhook()`](https://discord.js.org/#/docs/main/master/class/Client?scrollTo=fetchWebhook)</branch>. You can obtain the webhook id by looking at its link, the number after `https://discordapp.com/api/webhooks/` is the `id`, and the part after that is the `token`.
+You can fetch a specific webhook using its `id` with <branch version="11.x" inline>[`Client#fetchWebhook()`](https://discord.js.org/#/docs/main/11.5.1/class/Client?scrollTo=fetchWebhook)</branch><branch version="12.x" inline>[`Client#fetchWebhook()`](https://discord.js.org/#/docs/main/master/class/Client?scrollTo=fetchWebhook)</branch>. You can obtain the webhook id by looking at its link, the number after `https://discordapp.com/api/webhooks/` is the `id`, and the part after that is the `token`.
 
 #### Using the WebhookClient constructor
 
@@ -62,7 +62,7 @@ Once you are there, click on the `Create Webhook` button on the top right. This 
 
 ### Creating webhooks with discord.js
 
-Discord.js provides a method for creating webhooks called <branch version="11.x" inline>[`TextChannel#createWebhook()`](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=createWebhook)</branch><branch version="12.x" inline>[`TextChannel#createWebhook()`](https://discord.js.org/#/docs/main/master/class/TextChannel?scrollTo=createWebhook)</branch>.
+Discord.js provides a method for creating webhooks called <branch version="11.x" inline>[`TextChannel#createWebhook()`](https://discord.js.org/#/docs/main/11.5.1/class/TextChannel?scrollTo=createWebhook)</branch><branch version="12.x" inline>[`TextChannel#createWebhook()`](https://discord.js.org/#/docs/main/master/class/TextChannel?scrollTo=createWebhook)</branch>.
 
 ```js
 channel.createWebhook('Some-username', 'https://i.imgur.com/wSTFkRM.png')
@@ -74,7 +74,7 @@ channel.createWebhook('Some-username', 'https://i.imgur.com/wSTFkRM.png')
 
 <branch version="11.x">
 
-You can edit Webhooks and WebhookClients to change their avatar and name using [`Webhook#edit()`](https://discord.js.org/#/docs/main/stable/class/Webhook?scrollTo=edit) and [`WebhookClient#edit()`](https://discord.js.org/#/docs/main/stable/class/WebhookClient?scrollTo=edit).
+You can edit Webhooks and WebhookClients to change their avatar and name using [`Webhook#edit()`](https://discord.js.org/#/docs/main/11.5.1/class/Webhook?scrollTo=edit) and [`WebhookClient#edit()`](https://discord.js.org/#/docs/main/11.5.1/class/WebhookClient?scrollTo=edit).
 
 ```js
 webhook.edit('Some-username', 'https://i.imgur.com/wSTFkRM.png')
@@ -99,7 +99,7 @@ webhook.edit({
 
 ## Using webhooks
 
-Webhooks, unlike bots, can send more than one embed per message, up to 10. They can also send attachments and normal content. The <branch version="11.x" inline> [`Webhook#send()`](https://discord.js.org/#/docs/main/stable/class/Webhook?scrollTo=send)</branch><branch version="12.x" inline>[`Webhook#send()`](https://discord.js.org/#/docs/main/master/class/Webhook?scrollTo=send)</branch> method to send to a webhook is very similar to the method for sending to a text channel. Webhooks can also choose what the username and avatar will appear as when the message is sent.
+Webhooks, unlike bots, can send more than one embed per message, up to 10. They can also send attachments and normal content. The <branch version="11.x" inline> [`Webhook#send()`](https://discord.js.org/#/docs/main/11.5.1/class/Webhook?scrollTo=send)</branch><branch version="12.x" inline>[`Webhook#send()`](https://discord.js.org/#/docs/main/master/class/Webhook?scrollTo=send)</branch> method to send to a webhook is very similar to the method for sending to a text channel. Webhooks can also choose what the username and avatar will appear as when the message is sent.
 
 <branch version="11.x">
 
