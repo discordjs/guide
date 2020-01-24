@@ -221,12 +221,14 @@ else if (command === 'avatar') {
 ```js
 else if (command === 'avatar') {
 	if (!message.mentions.users.size) {
-		return message.channel.send(`Your avatar: <${message.author.displayAvatarURL()}>`);
+		return message.channel.send(`Your avatar: <${message.author.displayAvatarURL(format: "png", dynamic: true)}>`);
 	}
 
 	// ...
 }
 ```
+
+If the `dynamic` option is provided you will receive a `.gif` URL if the image is animated, otherwise it will fall back to the specified `format` or its default `.webp` if none is provided.
 
 </branch>
 
@@ -272,11 +274,11 @@ else if (command === 'avatar') {
 ```js
 else if (command === 'avatar') {
 	if (!message.mentions.users.size) {
-		return message.channel.send(`Your avatar: <${message.author.displayAvatarURL()}>`);
+		return message.channel.send(`Your avatar: <${message.author.displayAvatarURL(format: "png", dynamic: true)}>`);
 	}
 
 	const avatarList = message.mentions.users.map(user => {
-		return `${user.username}'s avatar: <${user.displayAvatarURL()}>`;
+		return `${user.username}'s avatar: <${user.displayAvatarURL(format: "png", dynamic: true)}>`;
 	});
 
 	// send the entire array of strings as a message
@@ -284,6 +286,8 @@ else if (command === 'avatar') {
 	message.channel.send(avatarList);
 }
 ```
+
+If the `dynamic` option is provided you will receive a `.gif` URL if the image is animated, otherwise it will fall back to the specified `format` or its default `.webp` if none is provided.
 
 </branch>
 
