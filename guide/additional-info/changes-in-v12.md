@@ -1817,9 +1817,9 @@ The `VoiceConnection` class also implements the new `PlayInterface` class in add
 #### VoiceConnection#createReceiver
 `voiceconnection.createReceiver()` has been removed, there is now a single receiver that be accessed from `voiceConnection.receiver`
 
-#### VoiceConnection#play\*\*\*\
+#### VoiceConnection#play\*\*\*
 
-All `connection.play\*\*\*()` methods have been removed in favor of one, flexible `.play()` method.
+All `connection.play***()` methods have been removed in favor of one, flexible `.play()` method.
 
 #### VoiceConnection#prism
 
