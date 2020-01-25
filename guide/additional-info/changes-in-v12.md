@@ -1093,7 +1093,7 @@ All of the methods to modify a member's roles have been moved to the `GuildMembe
 
 #### GuildMember#\*\*\*Role
 
-`guildMember.colorRole`, `guildMember.highestRole` and `guildMember.hoistRole` have all been moved to the `GuildMemberRoleStore` Manager.
+`guildMember.colorRole`, `guildMember.highestRole` and `guildMember.hoistRole` have all been moved to the `GuildMemberRoleManager` Manager.
 
 ```diff
 - guildMember.colorRole;
@@ -2012,19 +2012,19 @@ ClientApplication.coverImage({ width: 1024, height: 1024 });
 ### Manager
 
 The Manager class was added in order to store various data types. Uses include
-- RoleStore
-- UserStore
-- GuildStore
-- ChannelStore
-- MessageStore
-- PresenceStore
-- ReactionStore
-- GuildEmojiStore
-- GuildMemberStore
-- GuildChannelStore
-- ReactionUserStore
-- GuildEmojiRoleStore
-- GuildMemberRoleStore
+- RoleManager
+- UserManager
+- GuildManager
+- ChannelManager
+- MessageManager
+- PresenceManager
+- ReactionManager
+- GuildEmojiManager
+- GuildMemberManager
+- GuildChannelManager
+- ReactionUserManager
+- GuildEmojiRoleManager
+- GuildMemberRoleManager
 
 ### DiscordAPIError
 
