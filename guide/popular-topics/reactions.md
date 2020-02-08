@@ -184,11 +184,11 @@ message.reactions.removeAll().catch(error => console.error('Failed to clear reac
 
 ### Removing reactions by emoji
 
-Removing reactions by emoji is not as straightforward as clearing all reactions. The API does not provide a method for selectively removing reactions by emoji, it only allows you to remove a user from a specific reaction. This means you will have to get the users who reacted with that emoji, and loop through and remove each one of them.
-
-Reaction collections are keyed by <branch version="11.x" inline>`name:id`</branch><branch version="12.x" inline>`id`</branch> for custom emojis and by `name` for unicode emojis (represented by their unicode character, see [here](/popular-topics/reactions.html#unicode-emojis)). Once you have the key you can simply run a `.get()` on `message.reactions` to get the reaction representing the emoji you want.
-
 <branch version="11.x">
+
+Removing reactions by emoji is not as straightforward as clearing all reactions. Discord.js version 11.5.x does not provide a method for selectively removing reactions by emoji, it only allows you to remove a user from a specific reaction. This means you will have to get the users who reacted with that emoji, and loop through and remove each one of them.
+
+Reaction collections are keyed by `name:id` for custom emojis and by `name` for unicode emojis (represented by their unicode character, see [here](/popular-topics/reactions.html#unicode-emojis)). Once you have the key you can simply run a `.get()` on `message.reactions` to get the reaction representing the emoji you want.
 
 <!-- eslint-skip -->
 ```js
@@ -202,34 +202,27 @@ try {
 }
 ```
 
+The reason we use a `for...of` loop over something like `.forEach()` is due to `.forEach()`'s behavior for async operations. `.forEach()` will send out all calls almost at once even if we await inside of the function. However, if we `await` inside of a `for...of` loop, it will wait for the previous reaction to go through, and we avoid spamming the API with a lot of calls at once.
+
 </branch>
 <branch version="12.x">
 
-<!-- eslint-skip -->
+Removing reactions by emoji is easily done by using [`MessageReaction.remove()`](https://discord.js.org/#/docs/main/master/class/MessageReaction?scrollTo=remove).
+
 ```js
-const reaction = message.reactions.get('484535447171760141');
-try {
-	for (const user of reaction.users.values()) {
-		await reaction.users.remove(user);
-	}
-} catch (error) {
-	console.error('Failed to remove reactions.');
-}
+message.reactions.get('484535447171760141').remove().catch(error => console.error('Failed to remove reactions: ', error))
 ```
 
 </branch>
 
-The reason we use a `for...of` loop over something like `.forEach()` is due to `.forEach()`'s behavior for async operations. `.forEach()` will send out all calls almost at once even if we await inside of the function. However, if we `await` inside of a `for...of` loop, it will wait for the previous reaction to go through, and we avoid spamming the API with a lot of calls at once.
-
 ### Removing reactions by user
-
-Removing reactions by user is similar to what you did before. However, instead of iterating through users of a reaction, you will iterate through reactions which include a user. To do this you will get all reactions and filter based on whether the user has reacted. 
-
 ::: tip
 If you are not familiar with [`Collection.filter()`](https://discord.js.org/#/docs/main/stable/class/Collection?scrollTo=filter) and [`Collection.has()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) take the time to understand what they do and then come back.
 :::
 
 <branch version="11.x">
+
+Removing reactions by user is similar to what you did before. However, instead of iterating through users of a reaction, you will iterate through reactions which include a user. To do this you will get all reactions and filter based on whether the user has reacted. 
 
 <!-- eslint-skip -->
 ```js
@@ -243,8 +236,14 @@ try {
 }
 ```
 
+::: warning
+Make sure not to remove reactions by emoji or by user too much, if there are a lot of reactions or a lot of users it can be considered API spam.
+:::
+
 </branch>
 <branch version="12.x">
+
+Removing reactions by user is not as straightforward as removing by emoji or removing all reactions. The API does not provide a method for selectively removing reactions of a user. This means you will have to iterate through reactions which include the user and remove them.
 
 <!-- eslint-skip -->
 ```js
@@ -258,11 +257,11 @@ try {
 }
 ```
 
-</branch>
-
 ::: warning
-Make sure not to remove reactions by emoji or by user too much, if there are a lot of reactions or a lot of users it can be considered API spam.
+Make sure not to remove reactions by by user too much, if there are a lot of reactions or a lot of users it can be considered API spam.
 :::
+
+</branch>
 
 ## Awaiting reactions
 
