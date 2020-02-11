@@ -161,7 +161,7 @@ The method to ban members and users have been moved to the `GuildMemberManager` 
 
 ### Image URLs
 
-Some image-related properties like `user.avatarURL` are now a method in v12, so that you can apply some options to them, eg. to affect their display size.
+Some image-related properties like `user.avatarURL` are now a method in v12, so that you can apply some options to them, eg. to affect their display size. 
 
 ```diff
 - user.avatarURL;
@@ -175,6 +175,14 @@ Some image-related properties like `user.avatarURL` are now a method in v12, so 
 
 - guild.splashURL;
 + guild.splashURL();
+```
+
+## Dynamic File type
+
+Version 12 now allows you to dynamically set the file type for images. If the `dynamic` option is provided you will receive a `.gif` URL if the image is animated, otherwise it will fall back to the specified `format` or its default `.webp` if none is provided.
+
+```js
+user.avatarURL({ format: 'png', dynamic: true, size: 1024 });
 ```
 
 ### RichEmbed Constructor
@@ -543,12 +551,12 @@ There have been several changes made to the `ClientOptions` object located in `c
 
 #### ClientUser#avatarURL
 
-`clientUser.avatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return.
+`clientUser.avatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. The `dynamic` option allows you to always get a `.gif` file for animated avatars. Otherwise the returned link will fall back to the format specified in the `format` option or `.webp` (it's default) if none is provided.
 
 ```diff
 - clientUser.avatarURL;
 + clientUser.avatarURL();
-+ clientUser.avatarURL({ format: 'png', size: 1024 });
++ clientUser.avatarURL({ dynamic: true, format: 'png', size: 1024 });
 ```
 
 #### ClientUser#block
@@ -570,12 +578,12 @@ There have been several changes made to the `ClientOptions` object located in `c
 
 #### ClientUser#displayAvatarURL
 
-`clientUser.displayAvatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return.
+`clientUser.displayAvatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If the `dynamic` option is provided you will receive a `.gif` URL if the image is animated, otherwise it will fall back to the specified `format` or its default `.webp` if none is provided.
 
 ```diff
 - clientUser.displayAvatarURL;
 + clientUser.displayAvatarURL();
-+ clientUser.displayAvatarURL({ format: 'png', size: 1024 });
++ clientUser.displayAvatarURL({ format: 'png', dynamic: true, size: 1024 });
 ```
 
 #### ClientUser#email
@@ -909,12 +917,12 @@ Not sure how to set up a database? Check out [this page](/sequelize/)!
 
 #### Guild#iconURL
 
-`guild.iconURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return.
+`guild.iconURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If the `dynamic` option is provided you will receive a `.gif` URL if the image is animated, otherwise it will fall back to the specified `format` or its default `.webp` if none is provided.
 
 ```diff
 - guild.iconURL;
 + guild.iconURL();
-+ guild.iconURL({ format: 'png', size: 1024 });
++ guild.iconURL({ format: 'png', dynamic: true, size: 1024 });
 ```
 
 #### Guild#messageNotifications
@@ -1725,12 +1733,12 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 
 #### User#avatarURL
 
-`user.avatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return.
+`user.avatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If the `dynamic` option is provided you will receive a `.gif` URL if the image is animated, otherwise it will fall back to the specified `format` or its default `.webp` if none is provided.
 
 ```diff
 - user.avatarURL;
 + user.avatarURL();
-+ user.avatarURL({ format: 'png', size: 1024 });
++ user.avatarURL({ format: 'png', dynamic: true, size: 1024 });
 ```
 
 #### User#block
@@ -1739,12 +1747,12 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 
 #### User#displayAvatarURL
 
-`user.displayAvatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return.
+`user.displayAvatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If the `dynamic` option is provided you will receive a `.gif` URL if the image is animated, otherwise it will fall back to the specified `format` or its default `.webp` if none is provided.
 
 ```diff
 - user.displayAvatarURL;
 + user.displayAvatarURL();
-+ user.displayAvatarURL({ format: 'png', size: 1024 });
++ user.displayAvatarURL({ format: 'png', dynamic: true, size: 1024 });
 ```
 
 #### User#fetchProfile
@@ -1835,9 +1843,9 @@ The `VoiceConnection` class also implements the new `PlayInterface` class in add
 #### VoiceConnection#createReceiver
 `voiceconnection.createReceiver()` has been removed, there is now a single receiver that be accessed from `voiceConnection.receiver`
 
-#### VoiceConnection#play\*\*\*\
+#### VoiceConnection#play\*\*\*
 
-All `connection.play\*\*\*()` methods have been removed in favor of one, flexible `.play()` method.
+All `connection.play***()` methods have been removed in favor of one, flexible `.play()` method.
 
 #### VoiceConnection#prism
 
