@@ -258,7 +258,7 @@ try {
 ```
 
 ::: warning
-Make sure not to remove reactions by by user too much, if there are a lot of reactions or a lot of users it can be considered API spam.
+Make sure not to remove reactions by user too much, if there are a lot of reactions or a lot of users it can be considered API spam.
 :::
 
 </branch>
