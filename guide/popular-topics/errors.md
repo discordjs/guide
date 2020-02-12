@@ -195,7 +195,7 @@ This error, in conjunction to the previous error, is the result of calling `Mess
 
 This error originates from an invalid call to `bulkDelete()`, make sure you are inputting a valid Array or Collection of messages, or a valid number.
 
-### Members didnt't arrive in time.
+### Members didn't arrive in time.
 
 Another common error, this error originates from the client requesting members from the API through the websocket, and the member chunks not arriving in time and triggering the timeout. The most common cause to this error is a bad connection, however, it can also be caused by a very large amount of members being fetched, upwards of 50 thousand. To fix this, run the bot on a location with better internet, such as a VPS. If this does not work for you, you will have to manually change the hardcoded member fetching timeout in the source code.
 
