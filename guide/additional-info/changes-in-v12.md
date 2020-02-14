@@ -825,7 +825,7 @@ The `GroupDMChannel` class has been deprecated from the Discord API.  While it's
 
 ```diff
 - guild.createChannel('new-channel', 'text', permissionOverwriteArray, 'New channel added for fun!');
-+ guild.channels.create('new-channel', 'text', { overwrites: permissionOverwriteArray, reason: 'New channel added for fun!' });
++ guild.channels.create('new-channel', { type: 'text', permissionOverwrites: permissionOverwriteArray, reason: 'New channel added for fun!' });
 ```
 
 #### Guild#createEmoji
@@ -1012,7 +1012,7 @@ The first, second, third, and fourth parameters in `channel.clone()` have been c
 
 #### GuildChannel#createInvite
 
-The second parameter in `channel.createInvite()` has been removed, leaving it with a total of one parameter. The `reason` parameter from v11 have been merged into an object as the first parameter.
+The second parameter in `channel.createInvite()` has been removed, leaving it with a total of one parameter. The `reason` parameter from v11 has been merged into an object as the first parameter.
 
 ```diff
 - channel.createInvite({ temporary: true }, 'Just testing');
@@ -1403,7 +1403,7 @@ The following permission flags have been renamed:
 * `EXTERNAL_EMOJIS` -> `USE_EXTERNAL_EMOJIS`
 * `MANAGE_ROLES_OR_PERMISSIONS` -> `MANAGE_ROLES`
 
-#### Permission#hasPermission(s)
+#### Permissions#hasPermission(s)
 
 `permissions.hasPermission()` and `permissions.hasPermissions()` have been removed entirely in favor of `permissions.has()`.  This change reduces extraneous helper methods.
 
@@ -1530,7 +1530,7 @@ The `death` and `spawn` events for a shard can also include a `Worker` in additi
 
 #### Shard#spawn
 
-The parameters in v11 have been removed and replaced with a single, optional parameter, `spawnTimeout`.
+The parameters in v12 have been removed and replaced with a single, optional parameter, `spawnTimeout`.
 
 ### ShardClientUtil
 
@@ -1796,11 +1796,11 @@ This event has been removed from the `VoiceBroadcast` class and is implemented f
 
 #### VoiceBroadcast#error
 
-This event has been removed from the `VoiceBroadcast` class to the `BroadcastDispatcher` class.
+This event has been moved from the `VoiceBroadcast` class to the `BroadcastDispatcher` class.
 
 #### VoiceBroadcast#pause
 
-This method has been removed from the `VoiceBroadcast` class to the `BroadcastDispatcher` class.
+This method has been moved from the `VoiceBroadcast` class to the `BroadcastDispatcher` class.
 
 #### VoiceBroadcast#play\*\*\*
 
@@ -1812,7 +1812,7 @@ This property has been removed entirely.
 
 #### VoiceBroadcast#resume
 
-This method has been removed from the `VoiceBroadcast` class to the `BroadcastDispatcher` class.
+This method has been moved from the `VoiceBroadcast` class to the `BroadcastDispatcher` class.
 
 #### VoiceBroadcast#warn
 
