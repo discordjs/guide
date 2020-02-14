@@ -114,7 +114,7 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 
 ### Roles
 
-The `GuildMember.roles` Collection has been changed to a Manager in v12, so a lot of the associated methods for interacting with a member's roles have changed as well.  They're no longer on the GuildMember object itself, but instead now on the `GuildMemberRoleManager` Manager. The Manager holds API methods and cache for the roles, in the form of `GuildMemberRoleManager#cache` which is a plain Collection.
+The `GuildMember.roles` Collection has been changed to a Manager in v12, so a lot of the associated methods for interacting with a member's roles have changed as well.  They're no longer on the GuildMember object itself, but instead now on the `GuildMemberRoleManager`. The Manager holds API methods and cache for the roles, in the form of `GuildMemberRoleManager#cache` which is a plain Collection.
 
 ```diff
 - guildMember.addRole('123456789012345678');
@@ -134,7 +134,7 @@ The `GuildMember.roles` Collection has been changed to a Manager in v12, so a lo
 + guildMember.roles.cache.get('123456789012345678');
 ```
 
-In addition, the GuildMember properties related to roles have also been moved to the `GuildMemberRoleManager` Manager.
+In addition, the GuildMember properties related to roles have also been moved to the `GuildMemberRoleManager`.
 
 ```diff
 - guildMember.colorRole;
@@ -149,7 +149,7 @@ In addition, the GuildMember properties related to roles have also been moved to
 
 ### Ban and Unban
 
-The method to ban members and users have been moved to the `GuildMemberManager` Manager.
+The method to ban members and users have been moved to the `GuildMemberManager`.
 
 ```diff
 - guild.ban('123456789012345678');
@@ -768,7 +768,7 @@ Just like the `TextChannel#send***` methods, all the `.send***()` methods have b
 
 #### Emoji#\*\*\*RestrictedRole(s)
 
-The helper methods to add and remove a role or roles from the roles allowed to use the emoji are now set via the `GuildEmojiRoleManager` manager.
+The helper methods to add and remove a role or roles from the roles allowed to use the emoji are now set via the `GuildEmojiRoleManager`.
 
 ```diff
 - emoji.addRestrictedRole('123456789012345678');
@@ -1103,7 +1103,7 @@ All of the methods to modify a member's roles have been moved to the `GuildMembe
 
 #### GuildMember#\*\*\*Role
 
-`guildMember.colorRole`, `guildMember.highestRole` and `guildMember.hoistRole` have all been moved to the `GuildMemberRoleManager` Manager.
+`guildMember.colorRole`, `guildMember.highestRole` and `guildMember.hoistRole` have all been moved to the `GuildMemberRoleManager`.
 
 ```diff
 - guildMember.colorRole;
