@@ -768,14 +768,16 @@ Just like the `TextChannel#send***` methods, all the `.send***()` methods have b
 
 #### Emoji#\*\*\*RestrictedRole(s)
 
-The helper methods to add and remove a role or roles from the roles allowed to use the emoji have been removed from `emoji.edit()` and are now set via `guildEmoji.edit()`.
+The helper methods to add and remove a role or roles from the roles allowed to use the emoji are now set via the GuildEmojiRoleManager manager.
 
 ```diff
 - emoji.addRestrictedRole('123456789012345678');
 - emoji.addRestrictedRoles(['123456789012345678', '098765432109876543']);
 - emoji.removeRestrictedRole('1234567890123345678');
 - emoji.removedRestrictedRoles(['123456789012345678', '098765432109876543']);
-+ emoji.edit({ roles: ['123456789012345678', '098765432109876543'] })
++ emoji.roles.add('123456789012345678');
++ emoji.roles.remove('123456789012345678');
++ emoji.roles.set(['123456789012345678', '098765432109876543']);
 ```
 
 #### Emoji#deletable
