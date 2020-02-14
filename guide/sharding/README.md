@@ -13,6 +13,8 @@ As an application grows large, developers may find it necessary to split their p
 
 First, you'll need to have a file that you'll be launching from now on, rather than your original `index.js` file. It's highly recommended renaming that to `bot.js` and naming this new file to `index.js` instead. Copy & paste the following snippet into your new `index.js` file.
 
+<branch version="11.x">
+
 ```js
 const { ShardingManager } = require('discord.js');
 const manager = new ShardingManager('./bot.js', { token: 'your-token-goes-here' });
@@ -20,6 +22,19 @@ const manager = new ShardingManager('./bot.js', { token: 'your-token-goes-here' 
 manager.spawn();
 manager.on('launch', shard => console.log(`Launched shard ${shard.id}`));
 ```
+
+</branch>
+<branch version="12.x">
+
+```js
+const { ShardingManager } = require('discord.js');
+const manager = new ShardingManager('./bot.js', { token: 'your-token-goes-here' });
+
+manager.spawn();
+manager.on('shardCreate', shard => console.log(`Launched shard ${shard.id}`));
+```
+
+</branch>
 
 The above code utilizes discord.js's sharding manager to spawn the recommended amount of shards for your bot. The recommended amount should be approximately 1,000 guilds per shard. Even though you provide the token here, you will still need to send it over to the main bot file in `client.login()`, so don't forget to do that.
 

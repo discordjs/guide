@@ -217,6 +217,7 @@ client.on('message', async message => {
 	}
 });
 ```
+
 </branch>
 
 With async/await you can just assign the awaited function to a variable that will represent the returned value. Now you know how you use async/await.

@@ -156,6 +156,8 @@ Another common error, this error originates from the client attempting to execut
 
 This error is also caused by attempting to use a client which has not been logged in. Both of the examples below will throw errors.
 
+<branch version="11.x">
+
 ```js
 const { Client } = require('discord.js');
 const client = new Client(); // Should not be here!
@@ -179,7 +181,31 @@ client.login('token');
 client.fetchUser('myId').then(someInitFunction);
 ```
 
+</branch>
 <branch version="12.x">
+
+```js
+const { Client } = require('discord.js');
+const client = new Client(); // Should not be here!
+
+module.exports = (message, args) =>	{
+	// Should be message.client instead!
+	client.users.fetch(args[0]).then(user => {
+		message.reply('your requested user', user.tag);
+	});
+};
+```
+
+```js
+const { Client } = require('discord.js');
+const client = new Client();
+
+client.on('message', someHandlerFunction);
+
+client.login('token');
+//	client will not be logged in yet!
+client.users.fetch('myId').then(someInitFunction);
+```
 
 ### MessageEmbed field names may not be empty.
 

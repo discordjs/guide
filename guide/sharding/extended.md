@@ -175,6 +175,8 @@ function findEmoji(id) {
 
 Now, you will want to make use of it in the actual command:
 
+<branch version="11.x">
+
 ```diff
 	return client.shard.broadcastEval(`(${findEmoji}).call(this, '${args[0]}')`)
 -		.then(console.log);
@@ -194,6 +196,31 @@ Now, you will want to make use of it in the actual command:
 +					});
 +		});
 ```
+
+</branch>
+<branch version="12.x">
+
+```diff
+	return client.shard.broadcastEval(`(${findEmoji}).call(this, '${args[0]}')`)
+-		.then(console.log);
++		.then(emojiArray => {
++			// Locate a non falsy result, which will be the emoji in question
++			const foundEmoji = emojiArray.find(emoji => emoji);
++			if (!foundEmoji) return message.reply('I could not find such an emoji.');
++
++			// Acquire a guild that can be reconstructed with discord.js
++			return client.api.guilds(raw.guild).get()
++					.then(raw => {
++						// Reconstruct a guild
++						const guild = new Discord.Guild(client, raw);
++						// Reconstruct an emoji object as required by discord.js
++						const emoji = new Discord.GuildEmoji(client, guild, foundEmoji);
++						return message.reply(`I have found an emoji ${emoji.toString()}!`);
++					});
++		});
+```
+
+</branch>
 
 And that's all! The emoji should have pretty-printed in a message as you'd expect.
 
