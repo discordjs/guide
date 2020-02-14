@@ -768,7 +768,7 @@ Just like the `TextChannel#send***` methods, all the `.send***()` methods have b
 
 #### Emoji#\*\*\*RestrictedRole(s)
 
-The helper methods to add and remove a role or roles from the roles allowed to use the emoji are now set via the GuildEmojiRoleManager manager.
+The helper methods to add and remove a role or roles from the roles allowed to use the emoji are now set via the `GuildEmojiRoleManager` manager.
 
 ```diff
 - emoji.addRestrictedRole('123456789012345678');
