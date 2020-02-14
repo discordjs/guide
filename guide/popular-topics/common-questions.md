@@ -12,8 +12,9 @@ For a more detailed explanation on the notations commonly used in this guide, th
 
 ### How do I ban a user?
 
-<!-- eslint-skip -->
 <branch version="11.x">
+
+<!-- eslint-skip -->
 
 ```js
 const user = <message>.mentions.users.first();
@@ -22,6 +23,8 @@ const user = <message>.mentions.users.first();
 
 </branch>
 <branch version="12.x">
+
+<!-- eslint-skip -->
 
 ```js
 const user = <message>.mentions.users.first();
