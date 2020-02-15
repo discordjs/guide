@@ -344,7 +344,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
 			await reaction.fetch();
 		} catch (error) {
 			console.log('Something went wrong when fetching the message: ', error);
-			// Return as `reaction.message.author` may be undefined/null 
+			// Return as `reaction.message.author` may be undefined/null
 			return;
 		}
 	}
