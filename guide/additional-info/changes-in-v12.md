@@ -1530,7 +1530,7 @@ The `death` and `spawn` events for a shard can also include a `Worker` in additi
 
 #### Shard#spawn
 
-The parameters in v12 have been removed and replaced with a single, optional parameter, `spawnTimeout`.
+The parameters used in v11 have been removed and replaced with a single, optional parameter, `spawnTimeout`.
 
 ### ShardClientUtil
 
