@@ -31,7 +31,7 @@ client.on('message', message => {
 			.then(() => message.channel.send('Removed mod permissions from `@everyone`.'))
 			.catch(console.error);
 	} else if (message.content === '!create-mod') {
-		if (message.guild.roles.some(role => role.name === 'Mod')) {
+		if (message.guild.roles.cache.some(role => role.name === 'Mod')) {
 			return message.channel.send('A role with the name "Mod" already exists on this server.');
 		}
 
@@ -39,7 +39,7 @@ client.on('message', message => {
 			.then(() => message.channel.send('Created Mod role.'))
 			.catch(console.error);
 	} else if (message.content === '!check-mod') {
-		if (message.member.roles.some(role => role.name === 'Mod')) {
+		if (message.member.roles.cache.some(role => role.name === 'Mod')) {
 			return message.channel.send('You do have a role called Mod.');
 		}
 

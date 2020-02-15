@@ -46,7 +46,7 @@ member.addRole(role);
 <!-- eslint-skip -->
 
 ```js
-const role = <guild>.roles.find(role => role.name === '<role name>');
+const role = <guild>.roles.cache.find(role => role.name === '<role name>');
 const member = <message>.mentions.members.first();
 member.roles.add(role);
 ```
@@ -54,6 +54,8 @@ member.roles.add(role);
 </branch>
 
 ### How do I check if a guild member has a certain role?
+
+<branch version="11.x">
 
 <!-- eslint-skip -->
 
@@ -63,6 +65,20 @@ if (member.roles.some(role => role.name === '<role name>')) {
 	// ...
 }
 ```
+
+</branch>
+<branch version="12.x">
+
+<!-- eslint-skip -->
+
+```js
+const member = <message>.mentions.members.first();
+if (member.roles.cache.some(role => role.name === '<role name>')) {
+	// ...
+}
+```
+
+</branch>
 
 ### How do I limit a command to a single user?
 
@@ -132,6 +148,8 @@ If you would like to set your activity upon startup, you can use the `ClientOpti
 
 ### How do I send a message to a certain channel?
 
+<branch version="11.x">
+
 <!-- eslint-skip -->
 
 ```js
@@ -139,7 +157,21 @@ const channel = <client>.channels.get('<id>');
 channel.send('<content>');
 ```
 
+</branch>
+<branch version="12.x">
+
+<!-- eslint-skip -->
+
+```js
+const channel = <client>.channels.cache.get('<id>');
+channel.send('<content>');
+```
+
+</branch>
+
 ### How do I DM a certain user?
+
+<branch version="11.x">
 
 <!-- eslint-skip -->
 
@@ -147,6 +179,18 @@ channel.send('<content>');
 const user = <client>.users.get('<id>');
 user.send('<content>');
 ```
+
+</branch>
+<branch version="12.x">
+
+<!-- eslint-skip -->
+
+```js
+const user = <client>.users.cache.get('<id>');
+user.send('<content>');
+```
+
+</branch>
 
 ::: tip
 If you want to DM the user who sent the message, you can use `<message>.author.send()`.

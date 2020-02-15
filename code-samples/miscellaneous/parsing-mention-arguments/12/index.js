@@ -13,7 +13,7 @@ function getUserFromMention(mention) {
 			mention = mention.slice(1);
 		}
 
-		return client.users.get(mention);
+		return client.users.cache.get(mention);
 	}
 }
 
@@ -25,7 +25,7 @@ function getUserFromMentionRegEx(mention) {
 	// so use index 1.
 	const id = matches[1];
 
-	return client.users.get(id);
+	return client.users.cache.get(id);
 }
 
 client.on('message', message => {

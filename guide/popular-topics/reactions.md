@@ -210,7 +210,7 @@ The reason we use a `for...of` loop over something like `.forEach()` is due to `
 Removing reactions by emoji is easily done by using [`MessageReaction.remove()`](https://discord.js.org/#/docs/main/master/class/MessageReaction?scrollTo=remove).
 
 ```js
-message.reactions.get('484535447171760141').remove().catch(error => console.error('Failed to remove reactions: ', error));
+message.reactions.cache.get('484535447171760141').remove().catch(error => console.error('Failed to remove reactions: ', error));
 ```
 
 </branch>
@@ -247,7 +247,7 @@ Removing reactions by user is not as straightforward as removing by emoji or rem
 
 <!-- eslint-skip -->
 ```js
-const userReactions = message.reactions.filter(reaction => reaction.users.has(userId));
+const userReactions = message.reactions.cache.filter(reaction => reaction.users.cache.has(userId));
 try {
 	for (const reaction of userReactions) {
 		await reaction.users.remove(userId);

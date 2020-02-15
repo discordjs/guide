@@ -10,6 +10,8 @@ If you want to keep your bots permission checks simple, you might find it suffic
 
 If you have the role ID, you can simply check if the `.roles` Collection on a GuildMember object includes it, using `.has()`. Should you not know the ID and want to check for something like a role named "Mod", you can use `.some()`.
 
+<branch version="11.x">
+
 ```js
 member.roles.has('role-id-here');
 // returns true if the member has the role
@@ -17,6 +19,19 @@ member.roles.has('role-id-here');
 member.roles.some(role => role.name === 'Mod');
 // returns true if any of the member's roles is exactly named "Mod"
 ```
+
+</branch>
+<branch version="12.x">
+
+```js
+member.roles.cache.has('role-id-here');
+// returns true if the member has the role
+
+member.roles.cache.some(role => role.name === 'Mod');
+// returns true if any of the member's roles is exactly named "Mod"
+```
+
+</branch>
 
 If you want to enhance this system slightly, you can include the guild owner by comparing the executing members ID with `message.guild.ownerID`. 
 
