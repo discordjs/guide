@@ -341,6 +341,8 @@ Assuming the process is to be done for the guild the message is sent in.
 
 ### How do I check which role was added/removed, and for which member?
 
+<branch version="11.x">
+
 <!-- eslint-skip -->
 
 ```js
@@ -349,9 +351,29 @@ Assuming the process is to be done for the guild the message is sent in.
 <client>.on('guildMemberUpdate', (oldMember, newMember) => {
 	// If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
 	const removedRoles = oldMember.roles.filter(role => !newMember.roles.has(role.id));
-	if(removedRoles.size > 0) console.log(`The roles ${removedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
+	if (removedRoles.size > 0) console.log(`The roles ${removedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
 	// If the role(s) are present on the new member object but are not on the new one (i.e role(s) were added)
 	const addedRoles = newMember.roles.filter(role => !oldMember.roles.has(role.id));
-	if(addedRoles.size > 0) console.log(`The roles ${addedRoles.map(r => r.name)} were removed from ${oldMember.displayName}.`);
+	if (addedRoles.size > 0) console.log(`The roles ${addedRoles.map(r => r.name)} were removed from ${oldMember.displayName}.`);
 });
 ```
+
+</branch>
+<branch version="12.x">
+
+<!-- eslint-skip -->
+
+```js
+// We start by declaring a guildMemberUpdate listener
+// This code should be placed outside of any other listener callbacks to prevent listener nesting
+<client>.on('guildMemberUpdate', (oldMember, newMember) => {
+	// If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
+	const removedRoles = oldMember.roles.cache.filter(role => !newMember.roles.cache.has(role.id));
+	if (removedRoles.size > 0) console.log(`The roles ${removedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
+	// If the role(s) are present on the new member object but are not on the new one (i.e role(s) were added)
+	const addedRoles = newMember.roles.cache.filter(role => !oldMember.roles.cache.has(role.id));
+	if (addedRoles.size > 0) console.log(`The roles ${addedRoles.map(r => r.name)} were removed from ${oldMember.displayName}.`);
+});
+```
+
+</branch>

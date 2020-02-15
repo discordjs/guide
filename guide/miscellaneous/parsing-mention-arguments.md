@@ -69,6 +69,8 @@ client.on('message', message => {
 Now you can easily test the waters by upgrading the avatar command from [last time](/creating-your-bot/commands-with-user-input.md).
 This is what we have so far. It is pretty simple, it will show the avatar of who used the command.
 
+<branch version="11.x">
+
 ```js
 if (command === 'avatar') {
 	const user = message.author;
@@ -76,6 +78,19 @@ if (command === 'avatar') {
 	return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL}`);
 }
 ```
+
+</branch>
+<branch version="12.x">
+
+```js
+if (command === 'avatar') {
+	const user = message.author;
+
+	return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL({ dynamic: true })}`);
+}
+```
+
+</branch>
 
 But how do you actually get the correct user now? Well, this requires a few simple steps.  
 Putting it into a function will make it easily reusable. We will use the name `getUserFromMention` here.
@@ -123,7 +138,7 @@ As you can see it is a fairly straight forward function.
 It essentially just works itself through the structure of the mention bit by bit:
  1. Check if the mention starts with the `<@` and ends with a `>` and then remove those.
  2. If the user has a nickname and their mention contains a `!` remove that as well.
- 3. Only the ID should be left now, so use that to fetch the user from the `client.users` Collection.
+ 3. Only the ID should be left now, so use that to fetch the user from the <branch version="11.x">`client.users`</branch><branch version="12.x">`client.users.cache`</branch> Collection.
 Whenever it encounters an error with the mention (i.e. invalid structure) it simply returns `undefined` to signal the mention is invalid.
 
 ::: tip
@@ -132,6 +147,8 @@ The `.slice()` method is used in a more advance way here. You can read the [MDN 
 
 Now you have a nifty function you can use whenever you need to convert a raw mention into a proper user object.
 Plugging it into the command will give you this:
+
+<branch version="11.x">
 
 ```js
 if (command === 'avatar') {
@@ -147,6 +164,26 @@ if (command === 'avatar') {
 	return message.channel.send(`${message.author.username}, your avatar: ${message.author.displayAvatarURL}`);
 }
 ```
+
+</branch>
+<branch version="12.x">
+
+```js
+if (command === 'avatar') {
+	if (args[0]) {
+		const user = getUserFromMention(args[0]);
+		if (!user) {
+			return message.reply('Please use a proper mention if you want to see someone else\'s avatar.');
+		}
+
+		return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL({ dynamic: true })}`);
+	}
+
+	return message.channel.send(`${message.author.username}, your avatar: ${message.author.displayAvatarURL({ dynamic: true })}`);
+}
+```
+
+</branch>
 
 And here we simply plug the new function into the command.  
 If the user supplied an argument it should be the user mention, so it just gets passed right into the function.
