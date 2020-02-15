@@ -12,12 +12,26 @@ For a more detailed explanation on the notations commonly used in this guide, th
 
 ### How do I ban a user?
 
+<branch version="11.x">
+
 <!-- eslint-skip -->
 
 ```js
 const user = <message>.mentions.users.first();
 <guild>.ban(user);
 ```
+
+</branch>
+<branch version="12.x">
+
+<!-- eslint-skip -->
+
+```js
+const user = <message>.mentions.users.first();
+<guild>.members.ban(user);
+```
+
+</branch>
 
 ### How do I kick a user?
 

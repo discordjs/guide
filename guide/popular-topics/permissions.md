@@ -56,9 +56,20 @@ You can provide permission decimals wherever we use flag literals in this guide.
 
 Base permissions are set on roles, not the guild member itself. To change them, you access a Role object (for example via `member.roles.first()` or `guild.roles.random()`) and use the `.setPermissions()` method. This is how you'd change the base permissions for the @everyone role, for example:
 
+<branch version="11.x">
+
 ```js
 guild.defaultRole.setPermissions(['SEND_MESSAGES', 'VIEW_CHANNEL']);
 ```
+
+</branch>
+<branch version="12.x">
+
+```js
+guild.roles.everyone.setPermissions(['SEND_MESSAGES', 'VIEW_CHANNEL']);
+```
+
+</branch>
 
 Any permission not referenced in the flag array or bit field are not granted to the role. 
 
@@ -152,7 +163,7 @@ channel.overwritePermissions(channel.guild.defaultRole, { VIEW_CHANNEL: false })
 <branch version="12.x">
 
 ```js
-channel.updateOverwrite(channel.guild.defaultRole, { VIEW_CHANNEL: false });
+channel.updateOverwrite(channel.guild.roles.everyone, { VIEW_CHANNEL: false });
 ```
 
 </branch>
@@ -234,13 +245,13 @@ channel.replacePermissionOverwrites({
 
 ```js
 // copying overwrites from another channel
-channel.overwritePermissions({ overwrites: otherChannel.permissionOverwrites });
+channel.overwritePermissions({ permissionOverwrites: otherChannel.permissionOverwrites });
 
 // replacing overwrites with PermissionOverwriteOptions
 channel.overwritePermissions({
 	permissionOverwrites: [
 		{
-			id: guild.defaultRole.id,
+			id: guild.id,
 			deny: ['VIEW_CHANNEL'],
 		},
 		{
