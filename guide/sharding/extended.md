@@ -276,7 +276,7 @@ Now, run this code, and you will surely get a result that looks like the followi
     _roles: [] } ]
 ```
 
-While this result isnt *necessarily* bad or incorrect, it's simply a raw object that got `JSON.parse()`'d and `JSON.stringify()`'d over, so all of the circular references are gone. More importantly, The object is no longer a true <branch version="11.x">`Emoji`</branch><branch version="11.x">`GuildEmoji`</branch> object as provided by discord.js. This means none of the convenience methods usually provided to you are available. If this is not a concern to you, then you can effectively skip the rest of this section. However, this is a tutorial, so it should be covered regardless! Let's remedy this issue, shall we?
+While this result isnt *necessarily* bad or incorrect, it's simply a raw object that got `JSON.parse()`'d and `JSON.stringify()`'d over, so all of the circular references are gone. More importantly, The object is no longer a true <branch version="11.x">`Emoji`</branch><branch version="12.x">`GuildEmoji`</branch> object as provided by discord.js. This means none of the convenience methods usually provided to you are available. If this is not a concern to you, then you can effectively skip the rest of this section. However, this is a tutorial, so it should be covered regardless! Let's remedy this issue, shall we?
 
 <branch version="11.x">
 
