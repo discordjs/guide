@@ -299,7 +299,7 @@ function findEmoji(id) {
 ```
 
 </branch>
-<branch version="11.x">
+<branch version="12.x">
 
 ```diff
 function findEmoji(id) {
