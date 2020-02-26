@@ -32,8 +32,6 @@ module.exports = class SayCommand extends Command {
 };
 ```
 
-Place a `,` after the `description` field, because you're going to be adding an `args` field.
-
 The `args` field is simply an array of objects, each containing data for that argument.
 
 <!-- eslint-skip -->
