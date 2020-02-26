@@ -99,24 +99,24 @@ const exampleEmbed = new Discord.MessageEmbed()
 	.addFields({
 	    name: 'Regular field title',
 		value: 'Some value here'
-    })
+	})
 	.addFields(
-        {
-            name: 'Inline field title',
-            value: 'Some value here',
-            inline: true
-        },
-        {
-            name: 'Inline field title',
-            value: 'Some value here',
-            inline: true
-        },
-        {
-            name: 'Inline field title',
-            value: 'Some value here',
-            inline: true
-        }
-    )
+		{
+			name: 'Inline field title',
+			value: 'Some value here',
+			inline: true
+		},
+		{
+			name: 'Inline field title',
+			value: 'Some value here',
+			inline: true
+		},
+		{
+			name: 'Inline field title',
+			value: 'Some value here',
+			inline: true
+		}
+	)
 	.setImage('https://i.imgur.com/wSTFkRM.png')
 	.setTimestamp()
 	.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
