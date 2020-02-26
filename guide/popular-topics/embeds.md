@@ -96,11 +96,13 @@ const exampleEmbed = new Discord.MessageEmbed()
 	.setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
 	.setDescription('Some description here')
 	.setThumbnail('https://i.imgur.com/wSTFkRM.png')
-	.addField('Regular field title', 'Some value here')
-	.addBlankField()
-	.addField('Inline field title', 'Some value here', true)
-	.addField('Inline field title', 'Some value here', true)
-	.addField('Inline field title', 'Some value here', true)
+	.addFields(
+		{ name: 'Regular field title', value: 'Some value here' },
+		{ name: '\u200B', value: '\u200B' },
+		{ name: 'Inline field title', value: 'Some value here', inline: true },
+		{ name: 'Inline field title', value: 'Some value here', inline: true },
+		{ name: 'Inline field title', value: 'Some value here', inline: true },
+	)
 	.setImage('https://i.imgur.com/wSTFkRM.png')
 	.setTimestamp()
 	.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
@@ -116,7 +118,16 @@ You don't need to include all the elements showcased above. If you want a simple
 
 The `.setColor()` method accepts an integer, HEX color string, an array of RGB values or specific color strings. You can find a list of them at <branch version="11.x" inline>[the Discord.js documentation](https://discord.js.org/#/docs/main/11.5.1/typedef/ColorResolvable)</branch><branch version="12.x" inline>[the Discord.js documentation](https://discord.js.org/#/docs/main/master/typedef/ColorResolvable)</branch>.
 
+<branch version="11.x">
+
 `.addBlankField()` is a convenience method for `.addField('\u200b', '\u200b')` to add a spacer to the embed. This can also be used inline by passing `true` as the first parameter.
+
+</branch>
+<branch version="12.x">
+
+`.addBlankField()` was a convienience method for using `.addField('\u200b', '\u200b')` to add a spacer to the embed. However, separate method for that was removed when `.addField()` method was replaced with `.addFields()`. To add a blank field with `.addFields()`, do `.addFields({ name: '\u200b', value: '\u200b' })`
+
+</branch>
 
 The above example chains the manipulating methods to the newly created <branch version="11.x" inline>RichEmbed</branch><branch version="12.x" inline>MessageEmbed</branch> object.
 If you want to modify the embed based on conditions you will need to reference it as the constant `exampleEmbed` (for our example).

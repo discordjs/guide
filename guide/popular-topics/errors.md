@@ -209,11 +209,11 @@ client.users.fetch('myId').then(someInitFunction);
 
 ### MessageEmbed field names may not be empty.
 
-This error originates from attempting to call `MessageEmbed.addField()` without the first parameter, which is a title. If you would like the title to be empty for a reason, you should use a zero width space, which can be inputted as `\u200b`.
+This error originates from attempting to call `MessageEmbed.addFields()` with field object that has an empty string as a value for `name` field. If you would like the title to be empty for a reason, you should use a zero width space, which can be inputted as `\u200b`.
 
 ### MessageEmbed field values may not be empty.
 
-This error, in conjunction to the previous error, is the result of calling `MessageEmbed.addField()` without the second parameter, the value. You can use a zero width space if you would like this empty.
+This error, in conjunction to the previous error, is the result of calling `MessageEmbed.addFields()` with field object that has an empty string as a value for `value` field. You can use a zero width space if you would like this empty.
 
 </branch>
 
