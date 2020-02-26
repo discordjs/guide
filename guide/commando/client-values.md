@@ -22,6 +22,8 @@ client.guilds.cache.size;
 
 However, in Commando, you have to use `this` to get these values.
 
+<branch version="11.x">
+
 ```js
 this.client.guilds.size;
 ```
