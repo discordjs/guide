@@ -76,6 +76,8 @@ This would become `client.funcName(args)` once it gets through. This is handy if
 
 There may be a time when you want to have your shard process an asynchronous function. Here's how you can do that!
 
+<branch version="11.x">
+
 ```js
 client.shard.broadcastEval(`
 	let channel = this.channels.get('id');
@@ -87,7 +89,25 @@ client.shard.broadcastEval(`
 `);
 ```
 
+</branch>
+<branch version="12.x">
+
+```js
+client.shard.broadcastEval(`
+	let channel = this.channels.cache.get('id');
+	let msg;
+	if (channel) {
+		msg = channel.messages.fetch('id').then(m => m.id);
+	}
+	msg;
+`);
+```
+
+</branch>
+
 This snippet allows you to return fetched messages outside of the `broadcastEval`, allowing you to know whether or not you were able to retrieve a message, for example. Remember, you aren't able to return entire objects outside. Now, what if we wanted to use `async/await` syntax inside?
+
+<branch version="11.x">
 
 ```js
 client.shard.broadcastEval(`
@@ -101,6 +121,24 @@ client.shard.broadcastEval(`
 	})();
 `);
 ```
+
+</branch>
+<branch version="12.x">
+
+```js
+client.shard.broadcastEval(`
+	(async () => {
+		let channel = this.channels.cache.get('id');
+		let msg;
+		if (channel) {
+			msg = await channel.messages.fetch('id').then(m => m.id);
+		}
+		return msg;
+	})();
+`);
+```
+
+</branch>
 
 This example will work the same, but you are able to produce cleaner code with `async/await`. Additionally. What this does is declare an asynchronous function and then immediately call it. As it is also the last declared line, it is effectively being returned. Remember that you need to `return` an item inside a function one way or another.
 

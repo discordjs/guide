@@ -258,9 +258,13 @@ channel.send({ embed: exampleEmbed });
 You don't need to include all the elements showcased above. If you want a simpler embed, just leave some out.
 :::
 
+<branch version="11.x">
+
 ::: warning
 The `color` field has to be an integer for embed objects! If you have a hex color string (e.g. `'#7289da'`) you can replace the `#` with `0x` to use it as a number: `0x7289da`.
 :::
+
+</branch>
 
 If you want to modify the embed object based on conditions you will need to reference it directly (as `exampleEmbed` for our example). You can then (re)assign the property values as you would with any other object.
 

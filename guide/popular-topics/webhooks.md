@@ -188,7 +188,7 @@ const embed = new Discord.MessageEmbed()
 	.setColor('#0099ff');
 
 client.once('ready', async () => {
-	const channel = client.channels.get('222197033908436994');
+	const channel = client.channels.cache.get('222197033908436994');
 	try {
 		const webhooks = await channel.fetchWebhooks();
 		const webhook = webhooks.first();
