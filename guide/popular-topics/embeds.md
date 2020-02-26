@@ -98,23 +98,23 @@ const exampleEmbed = new Discord.MessageEmbed()
 	.setThumbnail('https://i.imgur.com/wSTFkRM.png')
 	.addFields({
 	    name: 'Regular field title',
-		value: 'Some value here'
+		value: 'Some value here',
 	})
 	.addFields(
 		{
 			name: 'Inline field title',
 			value: 'Some value here',
-			inline: true
+			inline: true,
 		},
 		{
 			name: 'Inline field title',
 			value: 'Some value here',
-			inline: true
+			inline: true,
 		},
 		{
 			name: 'Inline field title',
 			value: 'Some value here',
-			inline: true
+			inline: true,
 		}
 	)
 	.setImage('https://i.imgur.com/wSTFkRM.png')
