@@ -1332,7 +1332,7 @@ The `max` and `maxMatches` properties of the `MessageCollector` class have been 
 
 #### MessageEmbed#attachFiles
 
-`RichEmbed.attachFile()` is the only method that did not make the transition from v11 to v12.  The `MessageEmbed.attachFiles()` works for one or more files.
+`RichEmbed.attachFile()` has been removed in favor of `MessageEmbed.attachFiles()` method, which works for one or more files.
 
 #### MessageEmbed#client
 
