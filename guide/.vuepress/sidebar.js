@@ -144,6 +144,7 @@ module.exports = {
 				'/additional-info/async-await',
 				'/additional-info/rest-api',
 				'/additional-info/changes-in-v12',
+				'/additional-info/hosting',
 			],
 		},
 	],
