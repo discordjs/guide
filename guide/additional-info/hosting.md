@@ -1,6 +1,6 @@
 # Hosting Your Bot
 
-The advantages of using a VPS outweight the advantages of hosting locally on your pc. It is easy to obtain a VPS for a small monthly free or you can host your bot for free using [Glitch](https://glitch.com).
+The advantages of using a VPS outweight the advantages of hosting locally on your PC. It is easy to obtain a VPS for a small monthly fee.
 
 ## Hosting Providers
 
