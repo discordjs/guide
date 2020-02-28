@@ -50,8 +50,8 @@ You will most likely have to change some code in order to get your newly sharded
 
 ```js
 // bot.js
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Client } = require('discord.js');
+const client = new Client();
 const prefix = '!';
 
 client.on('message', message => {
@@ -73,8 +73,8 @@ client.login('token');
 
 ```js
 // bot.js
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Client } = require('discord.js');
+const client = new Client();
 const prefix = '!';
 
 client.on('message', message => {
