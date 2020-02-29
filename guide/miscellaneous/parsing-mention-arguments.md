@@ -138,7 +138,7 @@ As you can see it is a fairly straight forward function.
 It essentially just works itself through the structure of the mention bit by bit:
  1. Check if the mention starts with the `<@` and ends with a `>` and then remove those.
  2. If the user has a nickname and their mention contains a `!` remove that as well.
- 3. Only the ID should be left now, so use that to fetch the user from the <branch version="11.x">`client.users`</branch><branch version="12.x">`client.users.cache`</branch> Collection.
+ 3. Only the ID should be left now, so use that to fetch the user from the <branch version="11.x" inline>`client.users`</branch><branch version="12.x" inline>`client.users.cache`</branch> Collection.
 Whenever it encounters an error with the mention (i.e. invalid structure) it simply returns `undefined` to signal the mention is invalid.
 
 ::: tip

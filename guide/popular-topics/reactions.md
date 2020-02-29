@@ -58,7 +58,7 @@ Great! This route may not always be available to you, though. Sometimes you'll n
 Two of the easiest ways you can retrieve an emoji would be:
 
 * Use `.find()` on a Collection of Emojis.
-* Use `.get()` on the <branch version="11.x">`client.emojis`</branch><branch version="12.x">`client.emojis.cache`</branch> Collection.
+* Use `.get()` on the <branch version="11.x" inline>`client.emojis`</branch><branch version="12.x" inline>`client.emojis.cache`</branch> Collection.
 
 ::: tip
 It is possible for two or more emojis to have the same name, and using `.find()` will only return the **first** entry it finds. As such, this can cause unexpected results.

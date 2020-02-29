@@ -44,7 +44,7 @@ You can find the methods available for the ShardingManager class <branch version
 
 ## Getting started
 
-You will most likely have to change some code in order to get your newly sharded bot to work. If your bot is very basic, then you're in luck! I assume you probably have a `stats` command, by which you can quickly view your bots statistics, such as its server count. In this code, you likely have the snippet <branch version="11.x">`client.guilds.size`</branch><branch version="12.x">`client.guilds.cache.size`</branch>, which counts the number of *cached* guilds attached to that client. With sharding, since multiple processes will be launched, each process (each shard) will now have its own subset collection of guilds. This means that your original code will not function as you expect it to. Here is some sample code for a `stats` command, without sharding taken into consideration.
+You will most likely have to change some code in order to get your newly sharded bot to work. If your bot is very basic, then you're in luck! I assume you probably have a `stats` command, by which you can quickly view your bots statistics, such as its server count. In this code, you likely have the snippet <branch version="11.x" inline>`client.guilds.size`</branch><branch version="12.x" inline>`client.guilds.cache.size`</branch>, which counts the number of *cached* guilds attached to that client. With sharding, since multiple processes will be launched, each process (each shard) will now have its own subset collection of guilds. This means that your original code will not function as you expect it to. Here is some sample code for a `stats` command, without sharding taken into consideration.
 
 <branch version="11.x">
 
