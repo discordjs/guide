@@ -54,7 +54,7 @@ You can provide permission decimals wherever we use flag literals in this guide.
 
 ### Setting role permissions
 
-Base permissions are set on roles, not the guild member itself. To change them, you access a Role object (for example via <branch version="11.x">`member.roles.first()` or `guild.roles.random()`</branch><branch version="12.x">`member.roles.cache.first()` or `guild.roles.cache.random()`</branch>) and use the `.setPermissions()` method. This is how you'd change the base permissions for the @everyone role, for example:
+Base permissions are set on roles, not the guild member itself. To change them, you access a Role object (for example via <branch version="11.x" inline>`member.roles.first()` or `guild.roles.random()`</branch><branch version="12.x" inline>`member.roles.cache.first()` or `guild.roles.cache.random()`</branch>) and use the `.setPermissions()` method. This is how you'd change the base permissions for the @everyone role, for example:
 
 <branch version="11.x">
 

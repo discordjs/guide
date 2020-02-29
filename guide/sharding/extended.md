@@ -206,7 +206,7 @@ client.on('message', message => {
 
 </branch>
 
-The aforementioned code will essentially search through <branch version="11.x">`client.emojis`</branch><branch version="12.x">`client.emojis.cache`</branch> for the provided id, which will be given with `args[0]`. However, with sharding, you might notice it doesn't search through all the emojis the client actually has. As mentioned in an earlier section of this guide, this is due to the client being split up into different shards, so each shard has its own cache. Emojis are derived from guilds, so each shard will have the emojis from all of the guilds for that shard. The solution is to use `.broadcastEval()` to search all the shards for the desired emoji. However, in the interest of providing an example on using functions, you will make use of one here. Consider that when something is evaluated, it is ran in the context of the `client`, which means `this` represents the current client for that shard.
+The aforementioned code will essentially search through <branch version="11.x" inline>`client.emojis`</branch><branch version="12.x" inline>`client.emojis.cache`</branch> for the provided id, which will be given with `args[0]`. However, with sharding, you might notice it doesn't search through all the emojis the client actually has. As mentioned in an earlier section of this guide, this is due to the client being split up into different shards, so each shard has its own cache. Emojis are derived from guilds, so each shard will have the emojis from all of the guilds for that shard. The solution is to use `.broadcastEval()` to search all the shards for the desired emoji. However, in the interest of providing an example on using functions, you will make use of one here. Consider that when something is evaluated, it is ran in the context of the `client`, which means `this` represents the current client for that shard.
 
 Let's start off with an extremely basic function, which will try to grab an emoji from the current client and return it.
 
@@ -276,7 +276,7 @@ Now, run this code, and you will surely get a result that looks like the followi
     _roles: [] } ]
 ```
 
-While this result isnt *necessarily* bad or incorrect, it's simply a raw object that got `JSON.parse()`'d and `JSON.stringify()`'d over, so all of the circular references are gone. More importantly, The object is no longer a true <branch version="11.x">`Emoji`</branch><branch version="12.x">`GuildEmoji`</branch> object as provided by discord.js. This means none of the convenience methods usually provided to you are available. If this is not a concern to you, then you can effectively skip the rest of this section. However, this is a tutorial, so it should be covered regardless! Let's remedy this issue, shall we?
+While this result isnt *necessarily* bad or incorrect, it's simply a raw object that got `JSON.parse()`'d and `JSON.stringify()`'d over, so all of the circular references are gone. More importantly, The object is no longer a true <branch version="11.x" inline>`Emoji`</branch><branch version="12.x" inline>`GuildEmoji`</branch> object as provided by discord.js. This means none of the convenience methods usually provided to you are available. If this is not a concern to you, then you can effectively skip the rest of this section. However, this is a tutorial, so it should be covered regardless! Let's remedy this issue, shall we?
 
 <branch version="11.x">
 
