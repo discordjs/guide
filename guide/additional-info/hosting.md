@@ -20,3 +20,7 @@ The advantages of using a VPS outweight the advantages of hosting locally on you
     Starting at €3.99/month for 1 core, 2GB RAM, 20GB SSD
 - **VIRMACH:** https://virmach.com/
     Full Windows and Linux Desktop VPS starting at $7/mo and $1/mo respectively
+	
+## Hosting on [Vultr](https://www.vultr.com/)
+
+Start off by signing up or logging in to your account. Once you are logged in, you will be redirected to the products page.
