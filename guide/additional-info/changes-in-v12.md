@@ -187,7 +187,7 @@ user.avatarURL({ format: 'png', dynamic: true, size: 1024 });
 
 ### RichEmbed Constructor
 
-The RichEmbed constructor has been removed and now the `MessageEmbed` constructor is used. It is largely the same to use, the only differences being the removal of `RichEmbed.attachFile()` - `MessageEmbed.attachFiles()` accepts a single file as a parameter as well, and removing `RichEmbed.addField()` and `RichEmbed.addBlankField()` methods in favor of `MessageEmbed.addFields()` which can add multiple fields in one call.
+The RichEmbed constructor has been removed and now the `MessageEmbed` constructor is used. It is largely the same to use, the only differences being the removal of `richEmbed.attachFile` (`messageEmbed.attachFiles` accepts a single file as a parameter as well) and `richEmbed.addBlankField` and the addition of `messageEmbed.addFields`.
 
 ### String Concatenation
 
@@ -1321,13 +1321,9 @@ The `max` and `maxMatches` properties of the `MessageCollector` class have been 
 
 `MessageEmbed` now encompasses both the received embeds in a message and the constructor - the `RichEmbed` constructor was removed in favor of `MessageEmbed`.
 
-#### MessageEmbed#addField
-
-`messageEmbed.addField()` has been removed in favor of `messageEmbed.addFields()` that can add multiple fields per call.
-
 #### MessageEmbed#addBlankField
 
-`messageEmbed.addBlankField()` has been removed entirely. To add a blank field, use `messageEmbed.addFields()` and pass `'\u200b'` as values for the field.
+`messageEmbed.addBlankField()` has been removed entirely. To add a blank field, use `messageEmbed.addField('\u200b', '\u200b')`.
 
 #### MessageEmbed#attachFiles
 
@@ -2148,6 +2144,10 @@ channel.updateOverwrite(message.author, {
 `attachment.setName()` has been added.
 
 ### MessageEmbed
+
+#### MessageEmbed#addFields
+
+`MessageEmbed.addFields` has been added to add multiple fields at once (note: Fields have to be passed as EmbedFieldData)
 
 #### MessageEmbed#files
 
