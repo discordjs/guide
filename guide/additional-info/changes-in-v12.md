@@ -280,10 +280,9 @@ Broadcasts themselves now contain a `BroadcastDispatcher` that shares a similar 
 + broadcast.subscribers
 ```
 
----
-::: danger
-This stuff should keep getting shoved to the bottom, with the commonly-used methods that are changed, as well as topic overviews added before it.
-:::
+## Breaking Changes and Deletions
+
+<!-- This stuff should keep getting shoved to the bottom, with the commonly-used methods that are changed, as well as topic overviews added before it. -->
 
 The section headers for breaking changes will be named after the v11 classes/methods/properties and will be in alphabetical order, so that you can easily find what you're looking for. The section headers for additions will be named after the v12 classes/methods/properties, to reflect their current syntax appropriately.
 
@@ -292,8 +291,6 @@ The section headers for breaking changes will be named after the v11 classes/met
 ::: danger
 While this list has been carefully crafted, it may be incomplete! If you notice pieces of missing or inaccurate data, we encourage you to [submit a pull request](https://github.com/Danktuary/Making-Bots-with-Discord.js)!
 :::
-
-## Breaking Changes and Deletions
 
 Stuff that has gone through and updated - anything under Additions at the end will still likely need descriptions:
 
