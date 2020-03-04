@@ -101,8 +101,8 @@ const exampleEmbed = new Discord.MessageEmbed()
 		{ name: '\u200B', value: '\u200B' },
 		{ name: 'Inline field title', value: 'Some value here', inline: true },
 		{ name: 'Inline field title', value: 'Some value here', inline: true },
-		{ name: 'Inline field title', value: 'Some value here', inline: true },
 	)
+	.addField('Inline field title', 'Some value here', true)
 	.setImage('https://i.imgur.com/wSTFkRM.png')
 	.setTimestamp()
 	.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
@@ -120,12 +120,12 @@ The `.setColor()` method accepts an integer, HEX color string, an array of RGB v
 
 <branch version="11.x">
 
-`.addBlankField()` is a convenience method for `.addField('\u200b', '\u200b')` to add a spacer to the embed. This can also be used inline by passing `true` as the first parameter.
+`.addBlankField()` is a convenience method for `.addField('\u200b', '\u200b', false)`, used to add a spacer to the embed. It can also be used inline by passing `true` as the first parameter.
 
 </branch>
 <branch version="12.x">
 
-`.addBlankField()` was a convienience method for using `.addField('\u200b', '\u200b')` to add a spacer to the embed. However, separate method for that was removed when `.addField()` method was replaced with `.addFields()`. To add a blank field with `.addFields()`, do `.addFields({ name: '\u200b', value: '\u200b' })`
+`.addBlankField()` was a convenience method to add a spacer to the embed. To add a blank field you can now use `.addField('\u200b', '\u200b', false)` instead.
 
 </branch>
 
@@ -224,6 +224,7 @@ const exampleEmbed = {
 		{
 			name: '\u200b',
 			value: '\u200b',
+			inline: false,
 		},
 		{
 			name: 'Inline field title',
