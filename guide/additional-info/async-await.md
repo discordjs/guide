@@ -10,7 +10,7 @@ Promises are a way to handle asynchronous tasks in Javascript; they are the newe
 
 A Promise can have 3 states; pending, resolved, and rejected
 
-The **pending** state means that the Promise still is ongoing and nether resolved nor rejected.
+The **pending** state means that the Promise still is ongoing and neither resolved nor rejected.
 The **resolved** state means that the Promise is done and was executed without any errors.
 The **rejected** state means that the Promise encountered an error and could not be executed correctly.
 
