@@ -357,10 +357,6 @@ Any voice-related classes may change at any time, as they're still actively bein
 * WebSocketManager [(additions)](/additional-info/changes-in-v12.md#websocketmanager)
 * WebSocketShard [(additions)](/additional-info/changes-in-v12.md#websocketshard)
 
-Stuff Mark didn't do:
-
-* MessageAttachment
-
 ### Dependencies
 
 #### Snekfetch
