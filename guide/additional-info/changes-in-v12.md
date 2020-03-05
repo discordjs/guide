@@ -1,12 +1,14 @@
 # Updating from v11 to v12
 
-After a long time in development, Discord.js v12 is nearing a stable release, meaning it's time to update from v11 to get new features for your bots!  However, with those new features comes a lot of changes to the library that will break code written for v11.  This guide will serve as a handy reference for updating your code, covering the most commonly-used methods that have been changed, new topics such as partials and internal sharding, and will also include a comprehensive list of the method and property changes at the end.
+After a long time in development, Discord.js v12 has been formally released, meaning it's time to update from v11 to get new features for your bots!  However, with those new features comes a lot of changes to the library that will break code written for v11.  This guide will serve as a handy reference for updating your code, covering the most commonly-used methods that have been changed, new topics such as partials and internal sharding, and will also include a comprehensive list of the method and property changes at the end.
 
 ## Before You Start
 
-v12 requires Node 12.x or higher to  use, so make sure you're up-to-date.  To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it!  There are many resources online to help you get up-to-date.
+v12 requires Node 12.x or higher to  use, so make sure you're up-to-date.  To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it!  There are many resources online to help you with this step based on your host system.
 
-For now, you do need Git installed and added to your PATH environment, so ensure that's done as well - again, guides are available online for a wide variety of operating systems.  Once you have Node up-to-date and Git installed, you can install v12 by running `npm install discord.js` in your terminal or command prompt for text-only use, or `npm install discord.js @discordjs/opus` for voice support.
+Once you got Node up-to-date you can install v12 by running `npm install discord.js` in your terminal or command prompt for text-only use, or `npm install discord.js @discordjs/opus` for voice support.
+
+You can check your discord.js version with `npm list discord.js`. Should it still show v11.x uninstall (`npm uninstall discord.js`) and re-install discord.js and make sure the entry in your package.json does not prevent a major version update. Please refer to the [npm documentation](https://docs.npmjs.com/files/package.json#dependencies) for this.
 
 ## Commonly Used Methods That Changed
 
@@ -281,19 +283,17 @@ Broadcasts themselves now contain a `BroadcastDispatcher` that shares a similar 
 ```
 
 ---
-::: danger
-This stuff should keep getting shoved to the bottom, with the commonly-used methods that are changed, as well as topic overviews added before it.
-:::
+
+## Breaking Changes and Deletions
 
 The section headers for breaking changes will be named after the v11 classes/methods/properties and will be in alphabetical order, so that you can easily find what you're looking for. The section headers for additions will be named after the v12 classes/methods/properties, to reflect their current syntax appropriately.
 
-"Difference" codeblocks will be used to display the old methods vs the newer ones—the red being what's been removed and the green being its replacement. Some bits may have more than one version of being handled. Regular JavaScript syntax codeblocks will be used to display the additions. 
+"Difference" code blocks will be used to display the old methods vs the newer ones—the red being what's been removed and the green being its replacement. Some bits may have more than one version of being handled. Regular JavaScript syntax code blocks will be used to display the additions. 
 
 ::: danger
-While this list has been carefully crafted, it may be incomplete! If you notice pieces of missing or inaccurate data, we encourage you to [submit a pull request](https://github.com/Danktuary/Making-Bots-with-Discord.js)!
+While this list has been carefully crafted, it may be incomplete! If you notice pieces of missing or inaccurate data, we encourage you to [submit a pull request](https://github.com/discordjs/guide/compare)!
 :::
 
-## Breaking Changes and Deletions
 
 Stuff that has gone through and updated - anything under Additions at the end will still likely need descriptions:
 
@@ -358,10 +358,6 @@ Any voice-related classes may change at any time, as they're still actively bein
 * WebhookClient [(changes)](/additional-info/changes-in-v12.md#webhookclient)
 * WebSocketManager [(additions)](/additional-info/changes-in-v12.md#websocketmanager)
 * WebSocketShard [(additions)](/additional-info/changes-in-v12.md#websocketshard)
-
-Stuff Mark didn't do:
-
-* MessageAttachment
 
 ### Dependencies
 
