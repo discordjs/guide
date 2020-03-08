@@ -405,6 +405,10 @@ The `client.clientUserGuildSettingsUpdate` event has been removed entirely, alon
 
 The `client.clientUserSettingsUpdate` event has been removed entirely, along with all other user account-only properties and methods.
 
+#### Client#destroy
+
+The `client.destroy()` method no longer returns a Promise.
+
 #### Client#disconnect
 
 The `client.disconnect` event has been removed in favor of the `client.shardDisconnected` event to make use of internal sharding.
@@ -447,6 +451,15 @@ The `speaking` parameter has been changed from a `boolean` value to a read-only 
 #### Client#presences
 
 `client.presences` has been removed to reduce extraneous getters.
+
+#### Client#presenceUpdate
+
+The `client.presenceUpdate` has been changed and now passes the old and new `Presence` rather than the `GuildMember`.
+
+```diff
+- client.on('presenceUpdate', (oldMember, newMember) =>
++ client.on('presenceUpdate', (oldPresence, newPresence) =>
+```
 
 #### Client#reconnecting
 
