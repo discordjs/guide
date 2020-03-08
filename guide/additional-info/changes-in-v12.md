@@ -109,6 +109,7 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 		attachment: 'entire/path/to/file.jpg',
 		name: 'file.jpg'
 	}]
+});
 + channel.send({
 	files: ['https://cdn.discordapp.com/icons/222078108977594368/6e1019b3179d71046e463a75915e7244.png?size=2048']
 });
