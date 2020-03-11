@@ -120,12 +120,12 @@ The `.setColor()` method accepts an integer, HEX color string, an array of RGB v
 
 <branch version="11.x">
 
-`.addBlankField()` is a convenience method for `.addField('\u200b', '\u200b', false)`, used to add a spacer to the embed. It can also be used inline by passing `true` as the first parameter.
+`.addBlankField()` is a convenience method for `.addField('\u200b', '\u200b')`, used to add a spacer to the embed. It can also be used inline by passing `true` as the first parameter.
 
 </branch>
 <branch version="12.x">
 
-`.addBlankField()` was a convenience method to add a spacer to the embed. To add a blank field you can now use `.addField('\u200b', '\u200b', false)` instead.
+`.addBlankField()` was a convenience method to add a spacer to the embed. To add a blank field you can now use `.addField('\u200b', '\u200b')` instead.
 
 </branch>
 

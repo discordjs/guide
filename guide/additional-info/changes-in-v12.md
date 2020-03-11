@@ -1333,7 +1333,7 @@ The `max` and `maxMatches` properties of the `MessageCollector` class have been 
 
 #### MessageEmbed#addBlankField
 
-`messageEmbed.addBlankField()` has been removed entirely. To add a blank field, use `messageEmbed.addField('\u200b', '\u200b', false)`.
+`messageEmbed.addBlankField()` has been removed entirely. To add a blank field, use `messageEmbed.addField('\u200b', '\u200b')`.
 
 #### MessageEmbed#attachFiles
 
