@@ -283,6 +283,9 @@ module.exports = {
 	},
 };
 ```
+::: tip
+You Can Export Anything In Module.exports and call it in help
+:::
 
 You're going to need your prefix variable a couple times inside this command, so make sure to require that at the very top of the file (outside of the `module.exports` bit).
 
