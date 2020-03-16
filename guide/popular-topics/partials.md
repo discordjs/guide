@@ -20,7 +20,7 @@ As we said earlier partials do not have all the information necessary to make th
 You choose which structures you want to emit as partials as client options when instantiating your bot client. Available structures are: `USER`, `CHANNEL` (only DM channels can be uncached, server channels will always be available), `GUILD_MEMBER`, `MESSAGE` and `REACTION`.
 
 ```js
-const Discord = require('discord.js');
+const { Client } = require('discord.js');
 const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 ```
 :::tip
