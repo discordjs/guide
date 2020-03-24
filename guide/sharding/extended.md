@@ -357,7 +357,7 @@ Now, you will want to make use of it in the actual command:
 +			if (!foundEmoji) return message.reply('I could not find such an emoji.');
 +
 +			// Acquire a guild that can be reconstructed with discord.js
-+			return client.api.guilds(raw.guild).get()
++			return client.api.guilds(foundEmoji.guild).get()
 +					.then(raw => {
 +						// Reconstruct a guild
 +						const guild = new Discord.Guild(client, raw);
