@@ -353,6 +353,7 @@ While this list has been carefully crafted, it may be incomplete! If you notice 
 * Webhook [(changes)](/additional-info/changes-in-v12.md#webhook) [(additions)](/additional-info/changes-in-v12.md#webhook-2)
 * WebhookClient [(changes)](/additional-info/changes-in-v12.md#webhookclient)
 * WebSocketManager [(additions)](/additional-info/changes-in-v12.md#websocketmanager)
+* WebsocketOptions [(additions)](/additional-info/changes-in-v12.md#websocketoptions)
 * WebSocketShard [(additions)](/additional-info/changes-in-v12.md#websocketshard)
 
 ### Dependencies
