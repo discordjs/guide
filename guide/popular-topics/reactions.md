@@ -256,7 +256,7 @@ Removing reactions by user is similar to what you did before. However, instead o
 ```js
 const userReactions = message.reactions.filter(reaction => reaction.users.has(userId));
 try {
-	for (const reaction of userReactions) {
+	for (const reaction of userReactions.values()) {
 		await reaction.remove(userId);
 	}
 } catch (error) {
@@ -277,7 +277,7 @@ Removing reactions by user is not as straightforward as removing by emoji or rem
 ```js
 const userReactions = message.reactions.cache.filter(reaction => reaction.users.cache.has(userId));
 try {
-	for (const reaction of userReactions) {
+	for (const reaction of userReactions.values()) {
 		await reaction.users.remove(userId);
 	}
 } catch (error) {
