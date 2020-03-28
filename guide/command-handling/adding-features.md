@@ -421,18 +421,18 @@ A lot of library specific structures have `client` as a property. That means you
 Now, in theory, all there is to do, is to delete the previous command from `client.commands` and require the file again. In practice though, you cannot do this that easily as `require()` caches the file. If you were to require it again, you would simply load the previously cached file without any of your changes. In order to remove the file from the cache, you need to add the following line to your code:
 
 ```js
-delete require.cache[require.resolve(`./${commandName}.js`)];
+delete require.cache[require.resolve(`./${command.name}.js`)];
 ```
 
 After removing the command from the cache, all you have to do is require the file again and add the freshly loaded command to `client.commands`:
 
 ```js
 try {
-	const newCommand = require(`./${commandName}.js`);
+	const newCommand = require(`./${command.name}.js`);
 	message.client.commands.set(newCommand.name, newCommand);
 } catch (error) {
 	console.log(error);
-	message.channel.send(`There was an error while reloading a command \`${commandName}\`:\n\`${error.message}\``);
+	message.channel.send(`There was an error while reloading a command \`${command.name}\`:\n\`${error.message}\``);
 }
 ```
 
@@ -441,7 +441,7 @@ The snippet above uses a `try/catch` block to load the command file and add it t
 The last thing you might want to add is sending a message if the reload was successful:
 
 ```js
-message.channel.send(`Command \`${commandName}\` was reloaded!`);
+message.channel.send(`Command \`${command.name}\` was reloaded!`);
 ```
 
 ## Conclusion 
