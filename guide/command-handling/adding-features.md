@@ -432,7 +432,7 @@ try {
 	message.client.commands.set(newCommand.name, newCommand);
 } catch (error) {
 	console.log(error);
-	message.channel.send(`There was an error while reloading a command \`${commandName}\`:\n\`${error.message}\``);
+	message.channel.send(`There was an error while reloading a command \`${command.name}\`:\n\`${error.message}\``);
 }
 ```
 
@@ -441,7 +441,7 @@ The snippet above uses a `try/catch` block to load the command file and add it t
 The last thing you might want to add is sending a message if the reload was successful:
 
 ```js
-message.channel.send(`Command \`${commandName}\` was reloaded!`);
+message.channel.send(`Command \`${command.name}\` was reloaded!`);
 ```
 
 ## Conclusion 
