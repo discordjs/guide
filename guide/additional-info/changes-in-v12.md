@@ -1202,6 +1202,9 @@ Along with the rest of the voice-related methods and properties, the methods for
 
 - guildMember.setVoiceChannel('123456789012345678');
 + guildMember.voice.setChannel('123456789012345678');
+
+- guildMember.setVoiceChannel(null);
++ guildMember.voice.kick();
 ```
 
 #### GuildMember#speaking
