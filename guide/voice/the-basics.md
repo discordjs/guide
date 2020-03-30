@@ -58,10 +58,10 @@ To end the stream yourself, you can run:
 dispatcher.destroy();
 ```
 
-You can also create the dispatcher with options. The following example will play a stream at 50% volume and with 3 passes (this is the number of times an audio packet is sent. Increasing this value will reduce the chance of packet loss, but will also increase bandwidth used!)
+You can also create the dispatcher with options. The following example will play a stream at 50% volume from the start on.
 
 ```js
-connection.play('audio.mp3', { volume: 0.5, passes: 3 });
+connection.play('audio.mp3', { volume: 0.5 });
 ```
 
 ### Which audio sources can I use?
