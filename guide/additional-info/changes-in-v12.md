@@ -1616,7 +1616,9 @@ A third, optional parameter `spawnTimeout` has been added, specifying how long t
 
 #### StreamDispatcher#end
 
-The `end` event and method are now extended from the `WritableStream` class in Node, instead of being custom functions.
+The `end` event has been removed. Please use the native `finish` event as documented [here](https://nodejs.org/api/stream.html#stream_event_finish).
+
+The `end` method is now inherited from `WritableStream` as documented [here](https://nodejs.org/api/stream.html#stream_writable_end_chunk_encoding_callback).
 
 #### StreamDispatcher#passes
 
