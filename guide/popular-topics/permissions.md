@@ -245,21 +245,19 @@ channel.replacePermissionOverwrites({
 
 ```js
 // copying overwrites from another channel
-channel.overwritePermissions({ permissionOverwrites: otherChannel.permissionOverwrites });
+channel.overwritePermissions(otherChannel.permissionOverwrites);
 
 // replacing overwrites with PermissionOverwriteOptions
-channel.overwritePermissions({
-	permissionOverwrites: [
-		{
-			id: guild.id,
-			deny: ['VIEW_CHANNEL'],
-		},
-		{
-			id: user.id,
-			allow: ['VIEW_CHANNEL'],
-		},
-	],
-});
+channel.overwritePermissions([
+	{
+		id: guild.id,
+		deny: ['VIEW_CHANNEL'],
+	},
+	{
+		id: user.id,
+		allow: ['VIEW_CHANNEL'],
+	},
+]);
 ```
 
 </branch>
