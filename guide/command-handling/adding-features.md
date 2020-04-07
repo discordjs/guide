@@ -421,7 +421,7 @@ A lot of library specific structures have `client` as a property. That means you
 Now, in theory, all there is to do, is to delete the previous command from `client.commands` and require the file again. In practice though, you cannot do this that easily as `require()` caches the file. If you were to require it again, you would simply load the previously cached file without any of your changes. In order to remove the file from the cache, you need to add the following lines to your code:
 
 ```js
-const id = Object.values(require.cache).find(module => module.exports === command).id;
+const { id } = Object.values(require.cache).find(module => module.exports === command);
 delete require.cache[id];
 ```
 

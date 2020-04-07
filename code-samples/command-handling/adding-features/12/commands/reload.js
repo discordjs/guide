@@ -11,7 +11,7 @@ module.exports = {
 			return message.channel.send(`There is no command with name or alias \`${commandName}\`, ${message.author}!`);
 		}
 
-		const id = Object.values(require.cache).find(module => module.exports === command).id;
+		const { id } = Object.values(require.cache).find(module => module.exports === command);
 		delete require.cache[id];
 
 		try {
