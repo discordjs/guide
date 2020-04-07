@@ -11,10 +11,11 @@ module.exports = {
 			return message.channel.send(`There is no command with name or alias \`${commandName}\`, ${message.author}!`);
 		}
 
-		delete require.cache[require.resolve(`./${command.name}.js`)];
+		const id = Object.values(require.cache).find(module => module.exports === command).id;
+		delete require.cache[id];
 
 		try {
-			const newCommand = require(`./${command.name}.js`);
+			const newCommand = require(id);
 			message.client.commands.set(newCommand.name, newCommand);
 		} catch (error) {
 			console.log(error);

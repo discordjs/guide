@@ -418,17 +418,18 @@ if (!command) return message.channel.send(`There is no command with name or alia
 A lot of library specific structures have `client` as a property. That means you don't have to pass the client reference as a parameter to commands to access for example `client.guilds` or `client.commands`, but can directly access the respective properties directly from the `message` object, as shown in the snippet above.
 :::
 
-Now, in theory, all there is to do, is to delete the previous command from `client.commands` and require the file again. In practice though, you cannot do this that easily as `require()` caches the file. If you were to require it again, you would simply load the previously cached file without any of your changes. In order to remove the file from the cache, you need to add the following line to your code:
+Now, in theory, all there is to do, is to delete the previous command from `client.commands` and require the file again. In practice though, you cannot do this that easily as `require()` caches the file. If you were to require it again, you would simply load the previously cached file without any of your changes. In order to remove the file from the cache, you need to add the following lines to your code:
 
 ```js
-delete require.cache[require.resolve(`./${command.name}.js`)];
+const id = Object.values(require.cache).find(module => module.exports === command).id;
+delete require.cache[id];
 ```
 
 After removing the command from the cache, all you have to do is require the file again and add the freshly loaded command to `client.commands`:
 
 ```js
 try {
-	const newCommand = require(`./${command.name}.js`);
+	const newCommand = require(id);
 	message.client.commands.set(newCommand.name, newCommand);
 } catch (error) {
 	console.log(error);
