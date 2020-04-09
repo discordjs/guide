@@ -46,8 +46,11 @@ One possible scenario causing this: the channel has permission overwrites for th
 
 As you only check for `SEND_MESSAGES` the bot will try to execute the send, but since `VIEW_CHANNEL` is missing, the request is denied by the API.
 
-::: warning
-For voice channels this same principle applies to the permission `CONNECT` as well
+::: tip
+Causes for "Missing Access":
+- Text Channels require `VIEW_CHANNEL` as detailed above.
+- Voice Channels require `CONNECT` in the same way.
+- Reacting on a message requires `READ_MESSAGE_HISTORY` in the channel the message was posted in.
 :::
 
 ## Limitations and oddities
