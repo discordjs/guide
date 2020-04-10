@@ -295,11 +295,6 @@ The section headers for breaking changes will be named after the v11 classes/met
 While this list has been carefully crafted, it may be incomplete! If you notice pieces of missing or inaccurate data, we encourage you to [submit a pull request](https://github.com/discordjs/guide/compare)!
 :::
 
-
-Stuff that has gone through and updated - anything under Additions at the end will still likely need descriptions:
-
-Any voice-related classes may change at any time, as they're still actively being worked on, and will be finalized at a later date.
-
 * Activity [(additions)](/additional-info/changes-in-v12.md#activity)
 * ActivityFlags [(additions)](/additional-info/changes-in-v12.md#activityflags)
 * APIMessage [(additions)](/additional-info/changes-in-v12.md#apimessage)
