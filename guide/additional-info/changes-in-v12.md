@@ -660,7 +660,7 @@ Just like the `TextChannel#send***` methods, all the `.send***()` methods have b
 
 #### ClientUser#settings
 
-`clentUser.settings` has been removed entirely, along with all other user account-only properties and methods.
+`clientUser.settings` has been removed entirely, along with all other user account-only properties and methods.
 
 #### ClientUser#unblock
 
