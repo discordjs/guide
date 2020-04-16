@@ -47,6 +47,8 @@ Placing this into the previous code, we get the following. Note that we will als
 
 ```js
 client.on('messageDelete', async message => {
+	// ignore direct messages
+	if (!message.guild) return;
 	const fetchedLogs = await message.guild.fetchAuditLogs({
 		limit: 1,
 		type: 'MESSAGE_DELETE',
