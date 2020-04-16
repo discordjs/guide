@@ -55,8 +55,7 @@ client.on('message', message => {
 			return message.channel.send('Please make sure I have the `MANAGE_ROLES` permissions in this channel and retry.');
 		}
 
-		message.channel.overwritePermissions({
-			permissionOverwrites: [
+		message.channel.overwritePermissions([
 				{
 					id: message.guild.id,
 					deny: ['VIEW_CHANNEL'],
@@ -69,8 +68,7 @@ client.on('message', message => {
 					id: message.author.id,
 					allow: ['VIEW_CHANNEL'],
 				},
-			],
-		})
+			])
 			.then(() => message.channel.send(`Made channel \`${message.channel.name}\` private.`))
 			.catch(console.error);
 	} else if (message.content === '!create-private') {
