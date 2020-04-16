@@ -56,21 +56,21 @@ client.on('message', message => {
 		}
 
 		message.channel.overwritePermissions([
-				{
-					id: message.guild.id,
-					deny: ['VIEW_CHANNEL'],
-				},
-				{
-					id: client.user.id,
-					allow: ['VIEW_CHANNEL'],
-				},
-				{
-					id: message.author.id,
-					allow: ['VIEW_CHANNEL'],
-				},
-			])
-			.then(() => message.channel.send(`Made channel \`${message.channel.name}\` private.`))
-			.catch(console.error);
+			{
+				id: message.guild.id,
+				deny: ['VIEW_CHANNEL'],
+			},
+			{
+				id: client.user.id,
+				allow: ['VIEW_CHANNEL'],
+			},
+			{
+				id: message.author.id,
+				allow: ['VIEW_CHANNEL'],
+			},
+		])
+		.then(() => message.channel.send(`Made channel \`${message.channel.name}\` private.`))
+		.catch(console.error);
 	} else if (message.content === '!create-private') {
 		message.guild.channels.create('private', {
 			type: 'text', permissionOverwrites: [
