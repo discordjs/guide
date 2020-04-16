@@ -69,8 +69,8 @@ client.on('message', message => {
 				allow: ['VIEW_CHANNEL'],
 			},
 		])
-		.then(() => message.channel.send(`Made channel \`${message.channel.name}\` private.`))
-		.catch(console.error);
+			.then(() => message.channel.send(`Made channel \`${message.channel.name}\` private.`))
+			.catch(console.error);
 	} else if (message.content === '!create-private') {
 		message.guild.channels.create('private', {
 			type: 'text', permissionOverwrites: [
