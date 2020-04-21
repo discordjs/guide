@@ -1055,13 +1055,46 @@ The second parameter in `channel.createInvite()` has been removed, leaving it wi
 
 `guildChannel.muted` has been removed entirely, along with all other user account-only properties.
 
+#### GuildChannel#overwritePermissions
+
+`guildChannel.overwritePermissions` has been changed to act as replacement for `guildChannel.replacePermissionOverwrites`.
+
+The old functionality is moved to `guildChannel.updateOverwrite` and `guildChannel.createOverwrite`
+
+```diff
+- message.channel.overwritePermissions(message.author, {
+-   SEND_MESSAGES: false
+- })
++ message.channel.createOverwrite(message.author, {
++   SEND_MESSAGES: false
++ })
+```
+
 #### GuildChannel#\*\*\*Permissions
 
 `guildChannel.memberPermissions` and `guildChannel.rolePermissions` are now private.
 
 #### GuildChannel#replacePermissionOverwrites
 
-`guildChannel.replacePermissionOverwrites` has been removed entirely.
+`guildChannel.replacePermissionOverwrites` has been renamed to `guildChannel.overwritePermissions`. Overwrites and reason are no longer provided Through an options object, but directly as method arguments.
+
+```diff
+- channel.replacePermissionOverwrites({
+- overwrites: [
+-   {
+-      id: message.author.id,
+-      denied: ['VIEW_CHANNEL'],
+-   },
+- ],
+-   reason: 'Needed to change permissions'
+- });
++ channel.overwritePermissions([
++   {
++      id: message.author.id,
++      deny: ['VIEW_CHANNEL'],
++   },
++ ], 'Needed to change permissions');
+```
 
 #### GuildChannel#setPosition
 
@@ -2103,11 +2136,21 @@ Two properties have been added, `dmChannel#lastPinAt` (read-only) and `dmChannel
 
 ### GuildChannel
 
+#### GuildChannel#createOverwrite
+
+Creates or update an existing overwrite for a user or role.  The first parameter is a `PermissionOverwriteOption` object; the second, optional parameter is `reason`, a string.
+
+```js
+channel.createOverwrite(message.author, {
+	SEND_MESSAGES: false,
+});
+```
+
 #### GuildChannel#permissionsLocked
 
 `guildChannel.permissionsLocked` is a boolean value representing if the `permissionOverwrites` of the channel match its parent's `permissionOverwrites`.
 
-#### GuildChannel#updateOverwrites
+#### GuildChannel#updateOverwrite
 
 Creates or update an existing overwrite for a user or role.  The first parameter is a `PermissionOverwriteOption` object; the second, optional parameter is `reason`, a string.
 
