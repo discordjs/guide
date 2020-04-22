@@ -543,6 +543,10 @@ There have been several changes made to the `ClientOptions` object located in `c
 
 `clientOptions.sync` has been removed entirely, along with all other user account-only properties and methods.
 
+#### ClientOptions#disabledEvents
+
+`clientOptions.disabledEvents` has been removed in favor of using intents. Please refer to our more [detailed article about this topic](/popular-topics/intents)
+
 ### ClientUser
 
 #### ClientUser#acceptInvite
@@ -2342,6 +2346,12 @@ This new property returns a `string` representing the URL of the webhook, and is
 ### WebSocketManager
 
 This new class represents the manager of the websocket connection for the client.
+
+### WebsocketOptions
+
+#### WebsocketOptions#intents
+
+This new parameter adds support for Intents, controlling which events you receive from Discord. Please refer to our more [detailed article about this topic](/popular-topics/intents)
 
 ### WebSocketShard
 
