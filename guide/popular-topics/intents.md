@@ -27,11 +27,36 @@ const { Client } = require('discord.js');
 const client = new Client({ ws: { intents: ['GUILDS', 'GUILD_MESSAGES'] } });
 ```
 
+### The Intents bit field wrapper
+
+Discord.js provides a utility structure [`Intents`](https://discord.js.org/#/docs/main/stable/class/Intents) which can be utilized to easily adapt the underlying bit field.
+
+We also provide static fields for all, privileged and non-privileged intents. You can provide these as-is or pass them to the Intents constructor to further modify to your needs.
+
+```js
+const { Client, Intents } = require('discord.js');
+const client = new Client({ ws: { intents: Intents.ALL } });
+```
+
+The other static bits can be accessed likewise via `Intents.PRIVILEGED` and `Intents.NON_PRIVILEGED`.
+
+
+```js
+const { Client, Intents } = require('discord.js');
+const myIntents = new Intents(Intents.NON_PRIVILEGED);
+myIntents.remove(['DIRECT_MESSAGE_TYPING', 'GUILD_MESSAGE_TYPING']);
+
+const client = new Client({ ws: { intents: myIntents } });
+```
+
+If you want to view the built flags you can utilize the `.toArray()`, `.serialize()` and `.missing()`  methods. The first returns an array of flags represented in this bit field, the second an object mapping all possible flag values to a boolean, based on it they are represented in this bit field. The third can be used to view the flags not represented in this bit field (you can optionally pass a bit field of specific intents to check against).
+
 ### Privileged Intents
 
-Discord defines some intents as "privileged" due to the sensitive nature of the data.
-Intents above marked with an asterisk signify a privileged intent (`GUILD_PRESENCES` and `GUILD_MEMBERS`).
+### More on bit fields
 
-To receive privileged intents, you must first go to your application in the [Developer Portal](https://discordapp.com/developers/applications) and enable the toggle for the Privileged Intents you wish to use.
+Discord permissions are stored in a 53-bit integer and calculated using bitwise operations. If you want to dive deeper into what's happening behind the curtains, check the [Wikipedia](https://en.wikipedia.org/wiki/Bit_field) and [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) articles on the topic.
+
+In discord.js, permission bit fields are represented as either the decimal value of said bit field or its referenced flags. Every position in a permissions bit field represents one of these flags and its state (either referenced `1` or not referenced `0`).
 
 </branch>
