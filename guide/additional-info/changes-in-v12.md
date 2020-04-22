@@ -353,6 +353,7 @@ While this list has been carefully crafted, it may be incomplete! If you notice 
 * Webhook [(changes)](/additional-info/changes-in-v12.md#webhook) [(additions)](/additional-info/changes-in-v12.md#webhook-2)
 * WebhookClient [(changes)](/additional-info/changes-in-v12.md#webhookclient)
 * WebSocketManager [(additions)](/additional-info/changes-in-v12.md#websocketmanager)
+* WebsocketOptions [(additions)](/additional-info/changes-in-v12.md#websocketoptions)
 * WebSocketShard [(additions)](/additional-info/changes-in-v12.md#websocketshard)
 
 ### Dependencies
@@ -542,6 +543,10 @@ There have been several changes made to the `ClientOptions` object located in `c
 #### ClientOptions#sync
 
 `clientOptions.sync` has been removed entirely, along with all other user account-only properties and methods.
+
+#### ClientOptions#disabledEvents
+
+`clientOptions.disabledEvents` has been removed in favor of using intents. Please refer to our more [detailed article about this topic](/popular-topics/intents)
 
 ### ClientUser
 
@@ -2385,6 +2390,12 @@ This new property returns a `string` representing the URL of the webhook, and is
 ### WebSocketManager
 
 This new class represents the manager of the websocket connection for the client.
+
+### WebsocketOptions
+
+#### WebsocketOptions#intents
+
+This new parameter adds support for Intents, controlling which events you receive from Discord. Please refer to our more [detailed article about this topic](/popular-topics/intents)
 
 ### WebSocketShard
 
