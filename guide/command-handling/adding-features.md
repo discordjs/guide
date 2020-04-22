@@ -438,7 +438,7 @@ try {
 
 The snippet above uses a `try/catch` block to load the command file and add it to `client.commands`. In case of an error it will log the full error to console and notify the user about it with the error's message component `error.message`. Note the you never actually delete the command from the commands collection, and instead just overwrite it. This prevents you from deleting a command, and ending up with no command at all after a failed `require()` call, as each use of the reload command checks that collection again.
 
-The last thing you might want to add is sending a message if the reload was successful:
+The last slight improvement you might want to add to the try block is sending a message if the reload was successful:
 
 ```js
 message.channel.send(`Command \`${command.name}\` was reloaded!`);
