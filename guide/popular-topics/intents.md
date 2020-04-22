@@ -51,7 +51,7 @@ myIntents.remove(['DIRECT_MESSAGE_TYPING', 'GUILD_MESSAGE_TYPING']);
 const client = new Client({ ws: { intents: myIntents } });
 ```
 
-If you want to view the built flags you can utilize the `.toArray()`, `.serialize()` and `.missing()`  methods. The first returns an array of flags represented in this bit field, the second an object mapping all possible flag values to a boolean, based on it they are represented in this bit field. The third can be used to view the flags not represented in this bit field (you can optionally pass a bit field of specific intents to check against).
+If you want to view the built flags you can utilize the `.toArray()`, `.serialize()` and `.missing()`  methods. The first returns an array of flags represented in this bit field, the second an object mapping all possible flag values to a boolean, based on it they are represented in this bit field. The third can be used to view the flags not represented in this bit field (you use it by passing a bit field of specific intents to check against).
 
 ### Privileged Intents
 
