@@ -42,6 +42,7 @@ const client = new Client({ ws: { intents: Intents.ALL } });
 
 The other static bits can be accessed likewise via `Intents.PRIVILEGED` and `Intents.NON_PRIVILEGED`.
 
+You can use the `.add()` and `.remove()` methods to add or remove flags to modify the bit field. Since discord.js uses a spread operator for the provided arguments you can provide single flags as well as an array or bit field. To use a set of intents as template you can pass them to the constructor. A few approaches are demonstrated below:
 
 ```js
 const { Client, Intents } = require('discord.js');
