@@ -4,6 +4,8 @@
 For now sending intents is optional, but it will become mandatory as of October 7, 2020!
 :::
 
+Gateway Intents were introduced to the library in v12 and allow you to pick which events your bot will receive. Intents are groups of pre-defined events that the discord.js client will conditionally subscribe to. For example, omitting the `DIRECT_MESSAGE_TYPING` intent would prevent the discord.js client from receiving any typing events from direct messages. Intents also enable you to remove unwanted data from polluting your bots cache, however we can not yet explicitly list which unwanted side effects omitting a certain event may have on the internal workings of the library.
+
 <branch version="11.x">
 
 Intents are not available in version 11, please update to version 12 of the library if you want to use gateway intents in your bot.
