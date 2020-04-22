@@ -83,7 +83,7 @@ Make sure you enable all intents you need for your use case! If you miss one, th
 :::
 
 :::tip
-We strongly recommend you omit the `GUILD_PRESENCES` intent if you don't frequently access the presence data.
+`GUILD_PRESENCES` is required in order to receive the initial GuildMember data. If you do not supply it your member caches will be empty and not updates, even if you do provide `GUILD_MEMBERS`! Before you disable intents think about what your bot does and how not receiving the listed events might prevent it from doing this. Version 12 of discord.js does not yet fully support any combination of intents without loosing seemingly unrelated data.
 :::
 
 ```js
