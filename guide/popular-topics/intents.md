@@ -46,10 +46,16 @@ You can use the `.add()` and `.remove()` methods to add or remove flags to modif
 
 ```js
 const { Client, Intents } = require('discord.js');
-const myIntents = new Intents(Intents.NON_PRIVILEGED);
-myIntents.remove(['DIRECT_MESSAGE_TYPING', 'GUILD_MESSAGE_TYPING']);
+const myIntents = new Intents();
+myIntents.add('GUILD_PRESENCES', 'GUILD_MEMBERS');
 
 const client = new Client({ ws: { intents: myIntents } });
+
+const otherIntents = new Intents(Intents.NON_PRIVILEGED);
+otherIntents.remove(['GUILDS', 'GUILD_MESSAGES']);
+
+const otherIntents2 = new Intents(32509);
+otherIntents2.remove(1, 512);
 ```
 
 If you want to view the built flags you can utilize the `.toArray()`, `.serialize()` and `.missing()`  methods. The first returns an array of flags represented in this bit field, the second an object mapping all possible flag values to a boolean, based on it they are represented in this bit field. The third can be used to view the flags not represented in this bit field (you use it by passing a bit field of specific intents to check against).
