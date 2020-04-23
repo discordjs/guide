@@ -51,6 +51,8 @@ myIntents.add('GUILD_PRESENCES', 'GUILD_MEMBERS');
 
 const client = new Client({ ws: { intents: myIntents } });
 
+// more examples of manipulating the bit field
+
 const otherIntents = new Intents(Intents.NON_PRIVILEGED);
 otherIntents.remove(['GUILDS', 'GUILD_MESSAGES']);
 
