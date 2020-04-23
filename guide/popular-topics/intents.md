@@ -29,7 +29,7 @@ const { Client } = require('discord.js');
 const client = new Client({ ws: { intents: ['GUILDS', 'GUILD_MESSAGES'] } });
 ```
 
-### The Intents bit field wrapper
+## The Intents bit field wrapper
 
 Discord.js provides a utility structure [`Intents`](https://discord.js.org/#/docs/main/stable/class/Intents) which can be utilized to easily adapt the underlying bit field.
 
@@ -51,6 +51,8 @@ myIntents.add('GUILD_PRESENCES', 'GUILD_MEMBERS');
 
 const client = new Client({ ws: { intents: myIntents } });
 
+// more examples of manipulating the bit field
+
 const otherIntents = new Intents(Intents.NON_PRIVILEGED);
 otherIntents.remove(['GUILDS', 'GUILD_MESSAGES']);
 
@@ -60,7 +62,7 @@ otherIntents2.remove(1, 512);
 
 If you want to view the built flags you can utilize the `.toArray()`, `.serialize()` and `.missing()`  methods. The first returns an array of flags represented in this bit field, the second an object mapping all possible flag values to a boolean, based on it they are represented in this bit field. The third can be used to view the flags not represented in this bit field (you use it by passing a bit field of specific intents to check against).
 
-### Privileged Intents
+## Privileged Intents
 
 Discord defines some intents as "privileged" due to the sensitive nature of the data sent through the affected events.
 At the time of writing this article privileged intents are `GUILD_PRESENCES` and `GUILD_MEMBERS`
@@ -69,7 +71,7 @@ For now you can simply enable these intents in the [Discord Developer Portal](ht
 
 Should you receive the error `[DISALLOWED_INTENTS]: Privileged intent provided is not enabled or whitelisted` please review your settings for all privileged intents you use. The official documentation for privileged intents can be found on the [discord API documentation](https://discordapp.com/developers/docs/topics/gateway#privileged-intents).
 
-### More on bit fields
+## More on bit fields
 
 Discord permissions are stored in a 53-bit integer and calculated using bitwise operations. If you want to dive deeper into what's happening behind the curtains, check the [Wikipedia](https://en.wikipedia.org/wiki/Bit_field) and [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) articles on the topic.
 

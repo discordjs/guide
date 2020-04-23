@@ -81,6 +81,7 @@ module.exports = {
 				'/popular-topics/reactions',
 				'/popular-topics/collectors',
 				'/popular-topics/partials',
+				'/popular-topics/intents',
 				'/popular-topics/canvas',
 				'/popular-topics/common-questions',
 				'/popular-topics/miscellaneous-examples',
