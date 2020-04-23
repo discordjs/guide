@@ -21,6 +21,8 @@ If you don't know JS but would like to learn about it, here are a few links to h
 * [Eloquent JavaScript, a free online book](http://eloquentjavascript.net/)
 * [Nodeschool, for both JavaScript and Node.js lessons](https://nodeschool.io/)
 * [MDN's JavaScript guide and full documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+* [KhanAcademy's free, interactive course](https://www.khanacademy.org/computing/computer-programming/programming)
 * [Google, your best friend](https://google.com)
+
 
 Take your pick, learn some JS, and once you feel like you're confident enough to make a bot, come back and get started!
