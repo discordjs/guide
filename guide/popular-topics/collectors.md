@@ -124,6 +124,8 @@ These work quite similarly to message collectors, except that you apply them on 
 You can read the docs for the `.createReactionCollector()` method <branch version="11.x" inline>[here](https://discord.js.org/#/docs/main/11.5.1/class/Message?scrollTo=createReactionCollector)</branch><branch version="12.x" inline>[here](https://discord.js.org/#/docs/main/master/class/Message?scrollTo=createReactionCollector)</branch>.
 :::
 
+<branch version="11.x">
+
 ```js
 const filter = (reaction, user) => {
 	return reaction.emoji.name === '👌' && user.id === message.author.id;
@@ -131,14 +133,35 @@ const filter = (reaction, user) => {
 
 const collector = message.createReactionCollector(filter, { time: 15000 });
 
-collector.on('collect', (reaction, reactionCollector) => {
-	console.log(`Collected ${reaction.emoji.name}`);
+collector.on('collect', reaction => {
+	console.log(`Collected ${reaction.emoji.name} from ${reaction.users.last().tag}`);
 });
 
 collector.on('end', collected => {
 	console.log(`Collected ${collected.size} items`);
 });
 ```
+
+</branch>
+<branch version="12.x">
+
+```js
+const filter = (reaction, user) => {
+	return reaction.emoji.name === '👌' && user.id === message.author.id;
+};
+
+const collector = message.createReactionCollector(filter, { time: 15000 });
+
+collector.on('collect', (reaction, user) => {
+	console.log(`Collected ${reaction.emoji.name} from ${user.tag}`);
+});
+
+collector.on('end', collected => {
+	console.log(`Collected ${collected.size} items`);
+});
+```
+
+</branch>
 
 ### Await reactions
 
