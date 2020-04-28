@@ -105,14 +105,14 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 - channel.sendFile('./file.png');
 - channel.sendFiles(['./file-one.png', './file-two.png']);
 + channel.send({
-	files: [{
-		attachment: 'entire/path/to/file.jpg',
-		name: 'file.jpg'
-	}]
-});
++	files: [{
++		attachment: 'entire/path/to/file.jpg',
++		name: 'file.jpg'
++	}]
++ });
 + channel.send({
-	files: ['https://cdn.discordapp.com/icons/222078108977594368/6e1019b3179d71046e463a75915e7244.png?size=2048']
-});
++	files: ['https://cdn.discordapp.com/icons/222078108977594368/6e1019b3179d71046e463a75915e7244.png?size=2048']
++ });
 ```
 
 ### Roles
@@ -408,11 +408,11 @@ The `client.destroy()` method no longer returns a Promise.
 
 #### Client#disconnect
 
-The `client.disconnect` event has been removed in favor of the `client.shardDisconnected` event to make use of internal sharding.
+The `client.disconnect` event has been removed in favor of the `client.shardDisconnect` event to make use of internal sharding.
 
 ```diff
 - client.on('disconnect', event => {});
-+ client.on('shardDisconnected', (event, shardID) => {});
++ client.on('shardDisconnect', (event, shardID) => {});
 ```
 
 #### Client#emojis
@@ -442,7 +442,7 @@ The `speaking` parameter has been changed from a `boolean` value to a read-only 
 
 ```diff
 - client.pings;
-+ guild.shard.pings;
++ guild.shard.ping;
 ```
 
 #### Client#presences
@@ -469,11 +469,11 @@ The `client.reconnecting` event has been removed in favor of the `client.shardRe
 
 #### Client#resume
 
-The `client.resume` event has been removed in favor of the `client.shardResumed` event to make use of internal sharding.
+The `client.resume` event has been removed in favor of the `client.shardResume` event to make use of internal sharding.
 
 ```diff
 - client.on('resume', replayed => console.log(`Resumed connection and replayed ${replayed} events.`));
-+ client.on('shardResumed', (replayed, shardID) => console.log(`Shard ID ${shardID} resumed connection and replayed ${replayed} events.`));
++ client.on('shardResume', (replayed, shardID) => console.log(`Shard ID ${shardID} resumed connection and replayed ${replayed} events.`));
 ```
 
 #### Client#status
@@ -538,7 +538,7 @@ There have been several changes made to the `ClientOptions` object located in `c
 
 #### ClientOptions#shards
 
-`clientOptions.shards` has been removed and is functionally equivalent to `clientOptions.totalShardCount` on v12.
+`clientOptions.shards` has been removed and is functionally equivalent to `clientOptions.shardCount` on v12.
 
 #### ClientOptions#sync
 
@@ -2143,7 +2143,7 @@ Two properties have been added, `dmChannel#lastPinAt` (read-only) and `dmChannel
 
 #### GuildChannel#createOverwrite
 
-Creates or update an existing overwrite for a user or role.  The first parameter is a `PermissionOverwriteOption` object; the second, optional parameter is `reason`, a string.
+Creates or update an existing overwrite for a user or role.  The second parameter is a `PermissionOverwriteOption` object; the third, optional parameter is `reason`, a string.
 
 ```js
 channel.createOverwrite(message.author, {
@@ -2157,7 +2157,7 @@ channel.createOverwrite(message.author, {
 
 #### GuildChannel#updateOverwrite
 
-Creates or update an existing overwrite for a user or role.  The first parameter is a `PermissionOverwriteOption` object; the second, optional parameter is `reason`, a string.
+Creates or update an existing overwrite for a user or role.  The second parameter is a `PermissionOverwriteOption` object; the third, optional parameter is `reason`, a string.
 
 ```js
 channel.updateOverwrite(message.author, {
@@ -2391,9 +2391,9 @@ This new property returns a `string` representing the URL of the webhook, and is
 
 This new class represents the manager of the websocket connection for the client.
 
-### WebsocketOptions
+### WebSocketOptions
 
-#### WebsocketOptions#intents
+#### WebSocketOptions#intents
 
 This new parameter adds support for Intents, controlling which events you receive from Discord. Please refer to our more [detailed article about this topic](/popular-topics/intents)
 
