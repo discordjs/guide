@@ -18,7 +18,7 @@ Intents are not available in version 11, please update to version 12 of the libr
 
 You can choose which intents you'd like to receive as client options when instantiating your bot client.
 
-A list of all available gateway intents the library supports can be found at [the discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Intents?scrollTo=s-FLAGS). The events included in the respective events on the [discord API documentation](https://discordapp.com/developers/docs/topics/gateway#list-of-intents).
+A list of all available gateway intents the library supports can be found at [the discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Intents?scrollTo=s-FLAGS). The events included in the respective intents on the [discord API documentation](https://discordapp.com/developers/docs/topics/gateway#list-of-intents).
 
 :::tip
 `GUILD_PRESENCES` is required in order to receive the initial GuildMember data. If you do not supply it your member caches will be empty and not updates, even if you do provide `GUILD_MEMBERS`! Before you disable intents think about what your bot does and how not receiving the listed events might prevent it from doing this. Version 12 of discord.js does not yet fully support any combination of intents without loosing seemingly unrelated data.
