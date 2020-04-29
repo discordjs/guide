@@ -367,12 +367,9 @@ Assuming the process is to be done for the guild the message is sent in.
 // We start by declaring a guildMemberUpdate listener
 // This code should be placed outside of any other listener callbacks to prevent listener nesting
 <client>.on('guildMemberUpdate', (oldMember, newMember) => {
-	// If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
-	const removedRoles = oldMember.roles.cache.filter(role => !newMember.roles.cache.has(role.id));
+	// The difference method returns all items in one collection not present in the other, so which roles changed.
+	const changedRoles = newMember.roles.cache.difference(oldMember.roles.cache);
 	if (removedRoles.size > 0) console.log(`The roles ${removedRoles.map(r => r.name)} were removed from ${oldMember.displayName}.`);
-	// If the role(s) are present on the new member object but are not on the old one (i.e role(s) were added)
-	const addedRoles = newMember.roles.cache.filter(role => !oldMember.roles.cache.has(role.id));
-	if (addedRoles.size > 0) console.log(`The roles ${addedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
 });
 ```
 
