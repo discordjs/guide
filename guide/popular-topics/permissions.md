@@ -42,7 +42,7 @@ To include permission checks like `ADMINISTRATOR` or `MANAGE_GUILD`, keep readin
 * Permission: The ability to execute a certain action in Discord
 * Overwrite: Rule on a channel to modify the permissions for a member or role
 * Bit field: Binary representation of Discord permissions 
-* Flag: Human readable string in MACRO_CASE, for example `'KICK_MEMBERS'`, refers to a position in the permission bit field. You can find a list of all valid flags in the <branch version="11.x" inline>[discord.js documentation](https://discord.js.org/#/docs/main/11.5.1/class/Permissions?scrollTo=s-FLAGS)</branch><branch version="12.x" inline>[discord.js documentation](https://discord.js.org/#/docs/main/master/class/Permissions?scrollTo=s-FLAGS)</branch>
+* Flag: Human readable string in MACRO_CASE, for example `'KICK_MEMBERS'`, refers to a position in the permission bit field. You can find a list of all valid flags in the <branch version="11.x" inline>[discord.js documentation](https://discord.js.org/#/docs/main/11.5.1/class/Permissions?scrollTo=s-FLAGS)</branch><branch version="12.x" inline>[discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Permissions?scrollTo=s-FLAGS)</branch>
 * Base Permissions: Permissions for roles the member has, set on the guild level
 * Final Permissions: Permissions for a member or role, after all overwrites are applied
 
@@ -79,7 +79,7 @@ Note that flag names are literal. Although `VIEW_CHANNEL` grants access to view 
 
 ### Creating a role with permissions
 
-Alternatively you can provide permissions as a property of <branch version="11.x" inline>[RoleData](https://discord.js.org/#/docs/main/11.5.1/typedef/RoleData)</branch><branch version="12.x" inline>[RoleData](https://discord.js.org/#/docs/main/master/typedef/RoleData)</branch> objects during role creation as an array of flag strings or a permission number:
+Alternatively you can provide permissions as a property of <branch version="11.x" inline>[RoleData](https://discord.js.org/#/docs/main/11.5.1/typedef/RoleData)</branch><branch version="12.x" inline>[RoleData](https://discord.js.org/#/docs/main/stable/typedef/RoleData)</branch> objects during role creation as an array of flag strings or a permission number:
 
 <branch version="11.x">
 
@@ -98,7 +98,7 @@ guild.roles.create({ data: { name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK
 
 ### Checking member permissions
 
-To know if a one of a member's roles has a permission enabled, you can use the `.hasPermission()` method of the <branch version="11.x" inline>[GuildMember](https://discord.js.org/#/docs/main/11.5.1/class/GuildMember)</branch><branch version="12.x" inline>[GuildMember](https://discord.js.org/#/docs/main/master/class/GuildMember)</branch> class and provide a permission flag, array, or number to check for. You can also specify if you want to allow the `ADMINISTRATOR` permission or the guild owner status to override this check with the following parameters.
+To know if a one of a member's roles has a permission enabled, you can use the `.hasPermission()` method of the <branch version="11.x" inline>[GuildMember](https://discord.js.org/#/docs/main/11.5.1/class/GuildMember)</branch><branch version="12.x" inline>[GuildMember](https://discord.js.org/#/docs/main/stable/class/GuildMember)</branch> class and provide a permission flag, array, or number to check for. You can also specify if you want to allow the `ADMINISTRATOR` permission or the guild owner status to override this check with the following parameters.
 
 <branch version="11.x">
 
@@ -149,7 +149,7 @@ As you have likely already seen in your desktop client, channel overwrites have 
 
 ### Adding overwrites
 
-To add a permission overwrite for a role or guild member, you access the channel object and use the <branch version="11.x" inline>`.overwritePermissions()`</branch><branch version="12.x" inline>`.updateOverwrite()`</branch> method. The first parameter is the target of the overwrite, either a Role or User object (or its respective resolvable), and the second is a <branch version="11.x" inline>[PermissionOverwriteOptions](https://discord.js.org/#/docs/main/11.5.1/typedef/PermissionOverwriteOptions)</branch><branch version="12.x" inline>[PermissionOverwriteOption](https://discord.js.org/#/docs/main/master/typedef/PermissionOverwriteOption)</branch> object.
+To add a permission overwrite for a role or guild member, you access the channel object and use the <branch version="11.x" inline>`.overwritePermissions()`</branch><branch version="12.x" inline>`.updateOverwrite()`</branch> method. The first parameter is the target of the overwrite, either a Role or User object (or its respective resolvable), and the second is a <branch version="11.x" inline>[PermissionOverwriteOptions](https://discord.js.org/#/docs/main/11.5.1/typedef/PermissionOverwriteOptions)</branch><branch version="12.x" inline>[PermissionOverwriteOptions](https://discord.js.org/#/docs/main/stable/typedef/PermissionOverwriteOptions)</branch> object.
 
 Let's add an overwrite to lock everyone out of the channel. The guild ID doubles as the role id for the default role @everyone as demonstrated below:
 
@@ -217,7 +217,7 @@ guild.channels.create('new-channel', {
 
 ### Replacing overwrites
 
-To replace all permission overwrites on the channel with a provided set of new overwrites, you can use the <branch version="11.x" inline>`.replaceOverwrites()`</branch><branch version="12.x" inline>`.overwritePermissions()`</branch> function. This is extremely handy if you want to copy a channels full set of overwrites to another one, as this method allows passing an array or Collection of <branch version="12.x" inline>[PermissionOverwrites](https://discord.js.org/#/docs/main/master/class/PermissionOverwrites)</branch><branch version="11.x" inline>[PermissionOverwrites](https://discord.js.org/#/docs/main/11.5.1/class/PermissionOverwrites) or [ChannelCreationOverwrites](https://discord.js.org/#/docs/main/11.5.1/typedef/ChannelCreationOverwrites)</branch>.
+To replace all permission overwrites on the channel with a provided set of new overwrites, you can use the <branch version="11.x" inline>`.replaceOverwrites()`</branch><branch version="12.x" inline>`.overwritePermissions()`</branch> function. This is extremely handy if you want to copy a channels full set of overwrites to another one, as this method allows passing an array or Collection of <branch version="12.x" inline>[PermissionOverwrites](https://discord.js.org/#/docs/main/stable/class/PermissionOverwritess)</branch><branch version="11.x" inline>[PermissionOverwrites](https://discord.js.org/#/docs/main/11.5.1/class/PermissionOverwrites) or [ChannelCreationOverwrites](https://discord.js.org/#/docs/main/11.5.1/typedef/ChannelCreationOverwrites)</branch>.
 
 <branch version="11.x">
 
@@ -296,7 +296,7 @@ discord.js features two utility methods to easily determine the final permission
 </branch>
 <branch version="12.x">
 
-discord.js features two utility methods to easily determine the final permissions for a guild member or role in a specific channel: `.permissionsFor()` on the [GuildChannel](https://discord.js.org/#/docs/main/master/class/GuildChannel?scrollTo=permissionsFor) class and `.permissionsIn()` on the [GuildMember](https://discord.js.org/#/docs/main/master/class/GuildMember?scrollTo=permissionsIn)and [Role](https://discord.js.org/#/docs/main/master/class/Role?scrollTo=permissionsIn) classes. Both return a [Permissions](https://discord.js.org/#/docs/main/master/class/Permissions) object.
+discord.js features two utility methods to easily determine the final permissions for a guild member or role in a specific channel: `.permissionsFor()` on the [GuildChannel](https://discord.js.org/#/docs/main/stable/class/GuildChannel?scrollTo=permissionsFor) class and `.permissionsIn()` on the [GuildMember](https://discord.js.org/#/docs/main/stable/class/GuildMember?scrollTo=permissionsIn)and [Role](https://discord.js.org/#/docs/main/stable/class/Role?scrollTo=permissionsIn) classes. Both return a [Permissions](hhttps://discord.js.org/#/docs/main/stable/class/Permissions) object.
 
 </branch>
 
@@ -321,7 +321,7 @@ If you want to know how to work with the returned Permissions objects keep readi
 
 ## The Permissions object
 
-The <branch version="11.x" inline>[Permissions](https://discord.js.org/#/docs/main/11.5.1/class/Permissions)</branch><branch version="12.x" inline>[Permissions](https://discord.js.org/#/docs/main/master/class/Permissions)</branch> object is a discord.js class containing a permissions bit field and a bunch of utility methods to manipulate it easily.
+The <branch version="11.x" inline>[Permissions](https://discord.js.org/#/docs/main/11.5.1/class/Permissions)</branch><branch version="12.x" inline>[Permissions](https://discord.js.org/#/docs/main/stable/class/Permissions)</branch> object is a discord.js class containing a permissions bit field and a bunch of utility methods to manipulate it easily.
 Remember that using these methods will not manipulate permissions, but create a new instance representing the changed bit field.
 
 ### Converting permission numbers
@@ -334,7 +334,7 @@ const { Permissions } = require('discord.js');
 const permissions = new Permissions(268550160);
 ```
 
-You can also use this approach for other <branch version="11.x" inline>[PermissionResolvable](https://discord.js.org/#/docs/main/11.5.1/typedef/PermissionResolvable)</branch><branch version="12.x" inline>[PermissionResolvable](https://discord.js.org/#/docs/main/master/typedef/PermissionResolvable)</branch>s like flag arrays or flags.
+You can also use this approach for other <branch version="11.x" inline>[PermissionResolvable](https://discord.js.org/#/docs/main/11.5.1/typedef/PermissionResolvable)</branch><branch version="12.x" inline>[PermissionResolvable](https://discord.js.org/#/docs/main/stable/typedef/PermissionResolvable)</branch>s like flag arrays or flags.
 
 ```js
 const { Permissions } = require('discord.js');

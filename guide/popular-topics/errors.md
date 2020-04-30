@@ -42,7 +42,7 @@ Now, when an error occurs it will be logged to the console and it will not termi
 
 <branch version="12.x">
 
-On master, WebSocket errors are handled internally, meaning your process should never crash from them. If you want to log these errors, should they happen, you can listen to the `shardError` event as shown below.
+In version 12, WebSocket errors are handled internally, meaning your process should never crash from them. If you want to log these errors, should they happen, you can listen to the `shardError` event as shown below.
 
 ```js
 client.on('shardError', error => {
@@ -116,7 +116,7 @@ message.delete().catch(error => {
 });
 ```
 
-You can find a list of constants <branch version="12.x" inline> [here](https://github.com/discordjs/discord.js/blob/master/src/util/Constants.js#L552) </branch> <branch version="11.x" inline> [here](https://github.com/discordjs/discord.js/blob/stable/src/util/Constants.js#L788) </branch>
+You can find a list of constants <branch version="12.x" inline> [here](https://github.com/discordjs/discord.js/blob/stable/src/util/Constants.js#L552) </branch> <branch version="11.x" inline> [here](https://github.com/discordjs/discord.js/blob/stable/src/util/Constants.js#L788) </branch>
 
 ### Method
 
@@ -145,7 +145,7 @@ This is a very common error, it originates from a wrong token being passed into 
 <branch version="12.x">
 
 ::: warning
-On master there used to be an issue where the token was not prefixed correctly which resulted in valid tokens being marked as invalid. If you have verified that all of the above is not the case, make sure you have updated discord.js to the latest commit.
+Before the release of version there used to be an issue where the token was not prefixed correctly which resulted in valid tokens being marked as invalid. If you have verified that all of the above is not the case, make sure you have updated discord.js to the currently stable version.
 :::
 
 </branch>
