@@ -1875,7 +1875,7 @@ This method has been moved from the `VoiceBroadcast` class to the `BroadcastDisp
 
 #### VoiceBroadcast#play\*\*\*
 
-All `.play\*\*\*()` methods have been removed and transformed into a single `.play()` method.
+All `.play***()` methods have been removed and transformed into a single `.play()` method.
 
 #### VoiceBroadcast#prism
 
