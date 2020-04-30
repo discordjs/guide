@@ -362,7 +362,7 @@ Now, you will want to make use of it in the actual command:
 +						// Reconstruct a guild
 +						const guild = new Discord.Guild(client, raw);
 +						// Reconstruct an emoji object as required by discord.js
-+						const emoji = new Discord.GuildEmoji(client, guild, foundEmoji);
++						const emoji = new Discord.GuildEmoji(client, foundEmoji, guild);
 +						return message.reply(`I have found an emoji ${emoji.toString()}!`);
 +					});
 +		});
