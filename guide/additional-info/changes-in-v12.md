@@ -1704,6 +1704,15 @@ See [this section](/additional-info/changes-in-v12.md#messagecollector) for chan
 + channel.createMessageCollector(filterFunction, { max: 2, maxProcessed: 10, time: 15000 });
 ```
 
+#### TextChannel#createWebhook
+
+The second and third parameters in `textChannel.createWebhook()` have been changed/removed, leaving it with a total of two parameters. The `avatar` and `reason` parameters from v11 have been merged into an object as the second parameter.
+
+```diff
+- channel.createWebhook('Snek', 'https://i.imgur.com/mI8XcpG.jpg', 'Needed a cool new Webhook');
++ channel.createWebhook('Snek', { avatar: 'https://i.imgur.com/mI8XcpG.jpg', reason: 'Needed a cool new Webhook' });
+```
+
 #### TextChannel#memberPermissions
 
 This method is now private.
@@ -1963,6 +1972,16 @@ This event has been removed entirely, use the `receiver.debug` event instead.
 This property has been removed entirely.
 
 ### Webhook
+
+#### Webhook#avatarURL
+
+`webhook.avatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If the `dynamic` option is provided you will receive a `.gif` URL if the image is animated, otherwise it will fall back to the specified `format` or its default `.webp` if none is provided.
+
+```diff
+- webhook.avatarURL;
++ webhook.avatarURL();
++ webhook.avatarURL({ format: 'png', dynamic: true, size: 1024 });
+```
 
 #### Webhook#send\*\*\*
 
