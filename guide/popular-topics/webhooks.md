@@ -22,7 +22,7 @@ If you would like to get the webhook object that sent the message, you can use <
 
 ## Fetching webhooks
 
-::: tip 
+::: tip
 Webhook fetching will always make use of collections and promises, if you do not understand either concepts, revise them and then come back to this section.  You can read about collections [here](/additional-info/collections.md), and promises [here](/additional-info/async-await.md) and [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
 :::
 
@@ -62,13 +62,27 @@ Once you are there, click on the `Create Webhook` button on the top right. This 
 
 ### Creating webhooks with discord.js
 
+
 Discord.js provides a method for creating webhooks called <branch version="11.x" inline>[`TextChannel#createWebhook()`](https://discord.js.org/#/docs/main/11.5.1/class/TextChannel?scrollTo=createWebhook)</branch><branch version="12.x" inline>[`TextChannel#createWebhook()`](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=createWebhook)</branch>.
+
+<branch version="11.x">
 
 ```js
 channel.createWebhook('Some-username', 'https://i.imgur.com/wSTFkRM.png')
 	.then(webhook => console.log(`Created webhook ${webhook}`))
 	.catch(console.error);
 ```
+
+</branch>
+<branch version="12.x">
+
+```js
+channel.createWebhook('Some-username', {
+	avatar: 'https://i.imgur.com/wSTFkRM.png',
+}).then(webhook => console.log(`Created webhook ${webhook}`)).catch(console.error);
+```
+
+</branch>
 
 ## Editing webhooks
 
