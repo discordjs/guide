@@ -10,6 +10,10 @@ This guide will teach you things such as:
 This guide will also cover subjects like common errors and how to solve them, keeping your code clean, setting up a proper development environment, etc.
 Sounds good? Great! Let's get started, then.
 
+## Online Courses & Video Tutorials
+
+* [Classpert - How to make a Discord bot (a catalog of online courses from major providers)](https://classpert.com/how-to-make-a-discord-bot)
+
 ## Before you begin...
 
 Alright, making a bot is cool and all, but there are some prerequisites to it. To create a bot with discord.js, you should have a fairly decent grasp of JavaScript itself.
