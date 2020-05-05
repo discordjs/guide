@@ -328,7 +328,7 @@ There's nothing really complex here; all you do is append some strings, `.map()`
 Since help messages can get messy, you'll be DMing it to the message author instead of posting it in the requested channel. However, there is something very important you should consider: the possibility of not being able to DM the user, whether it be that they have DMs disabled on that server or overall, or they have the bot blocked. For that reason, you should `.catch()` it and let them know.
 
 ::: tip
-If you weren't already aware, `.send()` takes 2 parameters: the content to send, and the message options to pass in. You can read about the `MessageOptions` type <branch version="11.x" inline>[here](https://discord.js.org/#/docs/main/11.5.1/typedef/MessageOptions)</branch><branch version="12.x" inline>[here](https://discord.js.org/#/docs/main/stable/typedef/MessageOptions)</branch>. Using `split: true` here will automatically split our help message into 2 or more messages in the case that it exceeds the 2,000 character limit.
+If you weren't already aware, `.send()` takes 2 parameters: the content to send, and the message options to pass in. You can read about the `MessageOptions` type <branch version="11.x" inline>[here](https://discord.js.org/#/docs/main/v11/typedef/MessageOptions)</branch><branch version="12.x" inline>[here](https://discord.js.org/#/docs/main/stable/typedef/MessageOptions)</branch>. Using `split: true` here will automatically split our help message into 2 or more messages in the case that it exceeds the 2,000 character limit.
 :::
 
 ::: tip
@@ -383,7 +383,7 @@ At the end of it all, you should be getting this as a result:
 No more manually editing your help command! If you aren't completely satisfied with how it looks, you can always adjust it to your liking later.
 
 ::: tip
-If you want to add categories or other information to your commands you can simply add properties reflecting it to your `module.exports`. If you only want to show a subset of commands remember that `commands` is a Collection you can <branch version="11.x" inline>[filter](https://discord.js.org/#/docs/main/11.5.1/class/Collection?scrollTo=filter)</branch><branch version="12.x" inline>[filter](https://discord.js.org/#/docs/collection/master/class/Collection?scrollTo=filter)</branch> to fit your specific needs!
+If you want to add categories or other information to your commands you can simply add properties reflecting it to your `module.exports`. If you only want to show a subset of commands remember that `commands` is a Collection you can <branch version="11.x" inline>[filter](https://discord.js.org/#/docs/main/v11/class/Collection?scrollTo=filter)</branch><branch version="12.x" inline>[filter](https://discord.js.org/#/docs/collection/master/class/Collection?scrollTo=filter)</branch> to fit your specific needs!
 :::
 
 ## Reloading commands

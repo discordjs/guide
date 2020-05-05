@@ -5,7 +5,7 @@ export default [
 		aliases: ['12', 'stable'],
 	},
 	{
-		label: 'v11.5',
+		label: 'v11.6',
 		version: '11.x',
 		aliases: ['11'],
 	},
