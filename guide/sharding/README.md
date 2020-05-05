@@ -39,7 +39,7 @@ manager.on('shardCreate', shard => console.log(`Launched shard ${shard.id}`));
 The above code utilizes discord.js's sharding manager to spawn the recommended amount of shards for your bot. The recommended amount should be approximately 1,000 guilds per shard. Even though you provide the token here, you will still need to send it over to the main bot file in `client.login()`, so don't forget to do that.
 
 ::: tip
-You can find the methods available for the ShardingManager class <branch version="11.x" inline>[here](https://discord.js.org/#/docs/main/11.5.1/class/ShardingManager)</branch><branch version="12.x" inline>[here](https://discord.js.org/#/docs/main/stable/class/ShardingManager)</branch>. Though, you may not be making much use of this section, unlike the next feature we will explore, which you may learn about by clicking [this link](/sharding/additional-information.md).
+You can find the methods available for the ShardingManager class <branch version="11.x" inline>[here](https://discord.js.org/#/docs/main/v11/class/ShardingManager)</branch><branch version="12.x" inline>[here](https://discord.js.org/#/docs/main/stable/class/ShardingManager)</branch>. Though, you may not be making much use of this section, unlike the next feature we will explore, which you may learn about by clicking [this link](/sharding/additional-information.md).
 :::
 
 ## Getting started
@@ -97,7 +97,7 @@ Let's say your bot is in a total of 3,600 guilds. Using the recommended shard co
 
 ## FetchClientValues
 
-First, let's take a look at <branch version="11.x" inline>[one of the most common sharding utility methods you'll be using](https://discord.js.org/#/docs/main/11.5.1/class/ShardClientUtil?scrollTo=fetchClientValues)</branch><branch version="12.x" inline>[one of the most common sharding utility methods you'll be using](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=fetchClientValues)</branch> called `fetchClientValues`. This method retrieves a client property of all shards.
+First, let's take a look at <branch version="11.x" inline>[one of the most common sharding utility methods you'll be using](https://discord.js.org/#/docs/main/v11/class/ShardClientUtil?scrollTo=fetchClientValues)</branch><branch version="12.x" inline>[one of the most common sharding utility methods you'll be using](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=fetchClientValues)</branch> called `fetchClientValues`. This method retrieves a client property of all shards.
 
 Now, take the following snippet of code:
 
@@ -176,7 +176,7 @@ While it's a bit unattractive to have more nesting in your commands, it is neces
 
 ## BroadcastEval
 
-Next, check out <branch version="11.x" inline>[another handy sharding method](https://discord.js.org/#/docs/main/11.5.1/class/ShardClientUtil?scrollTo=broadcastEval)</branch><branch version="12.x" inline>[another handy sharding method](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=broadcastEval)</branch> known as `broadcastEval`. This method makes all of the shards evaluate a given script, where `this` is the `client` once each shard gets to evaluating it. You can read more about the `this` keyword [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this). For now, essentially understand that it is the "client" object.
+Next, check out <branch version="11.x" inline>[another handy sharding method](https://discord.js.org/#/docs/main/v11/class/ShardClientUtil?scrollTo=broadcastEval)</branch><branch version="12.x" inline>[another handy sharding method](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=broadcastEval)</branch> known as `broadcastEval`. This method makes all of the shards evaluate a given script, where `this` is the `client` once each shard gets to evaluating it. You can read more about the `this` keyword [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this). For now, essentially understand that it is the "client" object.
 
 <branch version="11.x">
 

@@ -214,7 +214,7 @@ message.reactions.removeAll().catch(error => console.error('Failed to clear reac
 
 <branch version="11.x">
 
-Removing reactions by emoji is not as straightforward as clearing all reactions. Discord.js version 11.5.x does not provide a method for selectively removing reactions by emoji, it only allows you to remove a user from a specific reaction. This means you will have to get the users who reacted with that emoji, and loop through and remove each one of them.
+Removing reactions by emoji is not as straightforward as clearing all reactions. Discord.js version 11.x does not provide a method for selectively removing reactions by emoji, it only allows you to remove a user from a specific reaction. This means you will have to get the users who reacted with that emoji, and loop through and remove each one of them.
 
 Reaction collections are keyed by `name:id` for custom emojis and by `name` for unicode emojis (represented by their unicode character, see [here](/popular-topics/reactions.html#unicode-emojis)). Once you have the key you can simply run a `.get()` on `message.reactions` to get the reaction representing the emoji you want.
 
@@ -245,7 +245,7 @@ message.reactions.cache.get('484535447171760141').remove().catch(error => consol
 
 ### Removing reactions by user
 ::: tip
-If you are not familiar with [`Collection.filter()`](https://discord.js.org/#/docs/main/stable/class/Collection?scrollTo=filter) and [`Collection.has()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) take the time to understand what they do and then come back.
+If you are not familiar with <branch version="11.x" inline>[`Collection.filter()`](https://discord.js.org/#/docs/main/v11/class/Collection?scrollTo=filter)</branch><branch version="12.x" inline>[`Collection.filter()`](https://discord.js.org/#/docs/collection/master/class/Collection?scrollTo=filter)</branch> and [`Collection.has()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) take the time to understand what they do and then come back.
 :::
 
 <branch version="11.x">
