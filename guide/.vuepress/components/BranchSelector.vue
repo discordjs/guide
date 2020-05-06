@@ -10,40 +10,27 @@
 </template>
 
 <script>
-import branches from '../branches.js';
 import eventBus from '../eventBus.js';
-
-const [defaultBranch] = branches;
+import branches from '../mixins/branches.js';
 
 // `route.query` with `page.html?v=1#header` renders as `{ v: '1' }`
 // `route.query` with `page.html#header?v=1` renders as `{}`, and renders `route.hash` as `'#header?v=1'`
 // the former is plausible but the latter is more common
-function extractBranchVersion(query, hash) {
+function getVersionFromRoute({ query, hash }) {
 	const versionRegex = /\?(?:v|version)=(.*)/;
-	const getBranch = version => branches.find(branch => branch.aliases.includes(version) || branch.version === version);
-
-	if (query.v || query.version) return getBranch(query.v || query.version);
-	if (hash.length && versionRegex.test(hash)) return getBranch(hash.match(versionRegex)[1]);
-	return null;
+	return query.v || query.version || (hash.length && versionRegex.test(hash) ? hash.match(versionRegex)[1] : null);
 }
 
 export default {
 	name: 'BranchSelector',
-	data() {
-		return {
-			branches,
-			selectedBranch: defaultBranch.version,
-		};
-	},
+	mixins: [branches],
 	mounted() {
-		const branch = extractBranchVersion(this.$route.query, this.$route.hash);
+		const branch = this.getBranch(getVersionFromRoute({ query: this.$route.query, hash: this.$route.hash }));
 
 		if (branch) {
 			this.selectedBranch = branch.version;
 			return this.updateBranch();
 		}
-
-		this.selectedBranch = localStorage.getItem('branch-version') || defaultBranch.version;
 	},
 	methods: {
 		updateBranch() {

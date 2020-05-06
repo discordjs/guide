@@ -6,13 +6,12 @@
 
 <script>
 import semver from 'semver';
-import branches from '../branches.js';
 import eventBus from '../eventBus.js';
-
-const [defaultBranch] = branches;
+import branches from '../mixins/branches.js';
 
 export default {
 	name: 'Branch',
+	mixins: [branches],
 	props: {
 		version: {
 			type: String,
@@ -23,27 +22,16 @@ export default {
 			'default': false,
 		},
 	},
-	data() {
-		return {
-			selectedBranch: defaultBranch.version,
-		};
-	},
 	computed: {
 		displayContent() {
 			return semver.satisfies(semver.coerce(this.version), this.selectedBranch);
 		},
 	},
 	mounted() {
-		this.selectedBranch = localStorage.getItem('branch-version') || defaultBranch.version;
 		eventBus.$on('branch-update', this.updateBranch);
 	},
 	destroyed() {
 		eventBus.$off('branch-update', this.updateBranch);
-	},
-	methods: {
-		updateBranch(branch) {
-			this.selectedBranch = branch;
-		},
 	},
 };
 </script>

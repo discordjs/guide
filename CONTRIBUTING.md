@@ -253,7 +253,7 @@ to fetch all messages in a channel
 
 If you're on the `11.x` branch, you'd see "You can use `message.channel.fetchMessages()` to fetch all messages in a channel. Use the `inline` attribute to make content display inline with the content around it. Otherwise, it'll be displayed on its own line.
 
-You can refer to the `guide/.vuepress/branches.js` file to see which values are valid to use for the `version` attribute.
+You can refer to the `guide/.vuepress/mixins/branches.js` file to see which values are valid to use for the `version` attribute.
 
 #### Codeblocks and other markdown
 
