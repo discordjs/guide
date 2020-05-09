@@ -253,7 +253,7 @@ to fetch all messages in a channel
 
 If you're on the `11.x` branch, you'd see "You can use `message.channel.fetchMessages()` to fetch all messages in a channel. Use the `inline` attribute to make content display inline with the content around it. Otherwise, it'll be displayed on its own line.
 
-You can refer to the `guide/.vuepress/branches.js` file to see which values are valid to use for the `version` attribute.
+You can refer to the `guide/.vuepress/mixins/branches.js` file to see which values are valid to use for the `version` attribute.
 
 #### Codeblocks and other markdown
 
@@ -277,3 +277,31 @@ message.channel.messages.fetch();
 
 </branch>
 ```
+
+### Discord.js documentation links
+
+On pages where links to the discord.js documentation are used, you can use the `<docs-link>` component. Since the discord.js documentation is split into different categories and branches, the component allows you to supply the necessary info accordingly. The only required prop is `path`.
+
+```md
+Main docs, branch version inherited from branch selector, `class/Client`:
+<docs-link path="class/Client">Link text</docs-link>
+<!-- Becomes: https://discord.js.org/#/docs/main/v11/class/Client -->
+
+Main docs, stable branch (becomes "v12" due to the aliases set in `.vuepress/mixins/branches.js`), `class/Client`:
+<docs-link branch="stable" path="class/Client">Link text</docs-link>
+<!-- Becomes: https://discord.js.org/#/docs/main/v12/class/Client -->
+
+Main docs, reply-prefix branch, `class/Client`:
+<docs-link section="main" branch="reply-prefix" path="class/Client">Link text</docs-link>
+<!-- Becomes: https://discord.js.org/#/docs/main/reply-prefix/class/Client -->
+
+Commando docs, djs-v11 branch, `class/Command`:
+<docs-link section="commando" branch="djs-v11" path="class/Command">Link text</docs-link>
+<!-- Becomes: https://discord.js.org/#/docs/commando/djs-v11/class/Command -->
+
+Collection docs, master branch (no `branch` prop set), `class/Collection?scrollTo=partition`:
+<docs-link section="collection" path="class/Collection?scrollTo=partition">Link text</docs-link>
+<!-- Becomes: https://discord.js.org/#/docs/collection/master/class/Collection?scrollTo=partition -->
+```
+
+If the `section` prop is set to `main` (or omitted) and the `branch` prop is omitted, the `branch` prop will default to the version the user has set via the site's branch selector dropdown and update accordingly. If `section` is set to anything else and `branch` is omitted, the `branch` prop will default to `'master'`.
