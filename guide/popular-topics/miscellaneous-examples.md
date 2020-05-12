@@ -155,7 +155,7 @@ If you've tried using [the usual method of retrieving unicode emojis](/popular-t
 // emojiCharacters.js
 module.exports = {
 	a: '🇦', b: '🇧', c: '🇨', d: '🇩',
-	e: '🇪', f: '🇫', g: '🇬', h: '🇭'
+	e: '🇪', f: '🇫', g: '🇬', h: '🇭',
 	i: '🇮', j: '🇯', k: '🇰', l: '🇱',
 	m: '🇲', n: '🇳', o: '🇴', p: '🇵',
 	q: '🇶', r: '🇷', s: '🇸', t: '🇹',
