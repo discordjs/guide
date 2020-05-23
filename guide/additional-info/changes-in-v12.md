@@ -578,11 +578,11 @@ There have been several changes made to the `ClientOptions` object located in `c
 
 #### ClientUser#createGuild
 
-`clientUser.createGuild()` has been transformed in the shape of a Manager.  In addition, the second and third parameters in `clientUser.createGuild()` have been changed/removed, leaving it with a total of two parameters. The `region` and `icon` parameters from v11 have been merged into an object as the second parameter.
+`clientUser.createGuild()` has been removed and transformed in the shape of a Manager. In addition, the second and third parameters in `clientUser.createGuild()` have been changed/removed, leaving it with a total of two parameters. The `region` and `icon` parameters from v11 have been merged into an object as the second parameter.
 
 ```diff
 - clientUser.createGuild('New server', 'us-east', './path/to/file.png');
-+ clientUser.guilds.create('New server', { region: 'us-east', icon: './path/to/file.png' });
++ client.guilds.create('New server', { region: 'us-east', icon: './path/to/file.png' });
 ```
 
 #### ClientUser#displayAvatarURL
