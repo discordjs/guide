@@ -82,7 +82,7 @@ const globalPrefix = '.';
 
 ### Command handler
 
-This guide uses a very basic command handler with some added complexity to allow for multiple prefixes. For more a more robust command handler, look at the [command handling](/command-handling/) guide.
+This guide uses a very basic command handler with some added complexity to allow for multiple prefixes. For a more robust command handler, look at the [command handling](/command-handling/) guide.
 
 ```js
 client.on('message', async message => {
