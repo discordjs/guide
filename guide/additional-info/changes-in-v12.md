@@ -1023,6 +1023,10 @@ Not sure how to set up a database? Check out [this page](/sequelize/)!
 + guild.members.unban('123456789012345678', 'Ban appealed.');
 ```
 
+### Guild#verificationLevel
+
+`guild.verificationLevel` now returns one of `"None", "LOW", "MEDIUM", "HIGH", "VERY_HIGH"` instead of the corresponding number.
+
 ### GuildChannel
 
 The properties of a channel relating to its position have been renamed.  `guildChannel.calculatedPosition` is now `guildChannel.position`.  `guildChannel.position` is now more clearly named `guildChannel.rawPosition` to denote that it's directly from the API without any sorting.
