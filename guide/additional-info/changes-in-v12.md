@@ -1023,9 +1023,9 @@ Not sure how to set up a database? Check out [this page](/sequelize/)!
 + guild.members.unban('123456789012345678', 'Ban appealed.');
 ```
 
-### Guild#verificationLevel
+#### Guild#verificationLevel
 
-`guild.verificationLevel` now returns one of `"None", "LOW", "MEDIUM", "HIGH", "VERY_HIGH"` instead of the corresponding number.
+`guild.verificationLevel` now returns one of `"NONE"`, `"LOW"`, `"MEDIUM"`, `"HIGH"`, `"VERY_HIGH"` instead of the corresponding number.
 
 ### GuildChannel
 
