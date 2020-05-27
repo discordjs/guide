@@ -1,16 +1,14 @@
 <template>
 	<div v-if="showNotice" class="eol-notice">
-		Discord will require the use of
-		<router-link to="/popular-topics/intents.html">
-			gateway intents
-		</router-link>
-		on October 7th, 2020.
+		Discord has announced breaking API changes that will not be implemented into discord.js version 11.
 		<br />
-		This change won't be brought to discord.js v11; please
+		We expect this to happen around October 2020.
+		<br />
+		Along with this we decided to no longer maintain bug fixes or new features for version 11 of discord.js. Please
 		<router-link to="/additional-info/changes-in-v12.html">
-			update your bot to v12
+			update your bot to version 12
 		</router-link>
-		before this date. <a href="#" @click.prevent="dismiss">[Dismiss for 1 week]</a>
+		at your earliest convenience. <a href="#" @click.prevent="dismiss">[Dismiss for 1 week]</a>
 	</div>
 </template>
 
