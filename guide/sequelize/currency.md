@@ -364,6 +364,7 @@ return message.channel.send(
 	{ code: true }
 );
 ```
+
 </branch>
 <branch version="12.x">
 
@@ -377,6 +378,7 @@ return message.channel.send(
 	{ code: true }
 );
 ```
+
 </branch>
 
 Nothing particularly special here either. We could have queried the database for the top 10 currency holders as well, but we already have access to them locally, so just sort the Collection we have and use map again to display in a nice format. The filter is in case the users no longer exist in the bot's cache.
