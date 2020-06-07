@@ -190,35 +190,45 @@ if (urlObj.pathname === '/') {
 }
 ```
 
-Now, that you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten them, head over to [your applications](https://discordapp.com/developers/applications) and get them. You can use `node-fetch` along with `form-data` to make requests to Discord; you can install them with `npm i node-fetch` and `npm i form-data` respectively.
+Now, that you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten them, head over to [your applications](https://discordapp.com/developers/applications) and get them. You can use `node-fetch` to make requests to Discord; you can install it with `npm i node-fetch`. Note that Discord adheres strict
 
-Require these new modules and make your request.
+Require `node-fetch` and make your request.
 
 ```js
 const fetch = require('node-fetch');
-const FormData = require('form-data');
 
 // ...
 
-const data = new FormData();
 
-data.append('client_id', 'your client id');
-data.append('client_secret', 'your client secret');
-data.append('grant_type', 'authorization_code');
-data.append('redirect_uri', 'your redirect url');
-data.append('scope', 'the scopes');
-data.append('code', accessCode);
+const data = {
+	'client_id': 'your client id',
+	'client_secret': 'your client secret',
+	'grant_type': 'authorization_code',
+	'redirect_uri': 'your redirect uri',
+	'code': accessCode,
+	'scope': 'the scopes'
+};
+
+// convert to application/x-www-form-urlencoded
+function formUrlEncode(data) {
+	return Object.entries(data)
+		.map(([k, v]) => k + '=' + v)
+		.join('&');
+}
 
 fetch('https://discordapp.com/api/oauth2/token', {
 	method: 'POST',
-	body: data,
+	body: formUrlEncode(data),
+	headers : {
+		'Content-Type': 'application/x-www-form-urlencoded'
+	}
 })
 	.then(res => res.json())
 	.then(console.log);
 ```
 
 ::: warning
-The content-type for the token url must be `application/x-www-form-urlencoded`. This is why `form-data` is used.
+The content-type for the token url must be `application/x-www-form-urlencoded`. This is why `formUrlEncode()` is used.
 :::
 
 Now try visiting your OAuth2 url and authorizing your application. Once you're redirected, you should see something like this in your console.
