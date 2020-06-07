@@ -201,27 +201,27 @@ const fetch = require('node-fetch');
 
 
 const data = {
-	'client_id': 'your client id',
-	'client_secret': 'your client secret',
-	'grant_type': 'authorization_code',
-	'redirect_uri': 'your redirect uri',
-	'code': accessCode,
-	'scope': 'the scopes'
+	client_id: 'your client id',
+	client_secret: 'your client secret',
+	grant_type: 'authorization_code',
+	redirect_uri: 'your redirect uri',
+	code: accessCode,
+	scope: 'the scopes',
 };
 
 // convert to application/x-www-form-urlencoded
 function formUrlEncode(data) {
 	return Object.entries(data)
-		.map(([k, v]) => k + '=' + v)
+		.map(([k, v]) => `${k}=${v}`)
 		.join('&');
 }
 
 fetch('https://discordapp.com/api/oauth2/token', {
 	method: 'POST',
 	body: formUrlEncode(data),
-	headers : {
-		'Content-Type': 'application/x-www-form-urlencoded'
-	}
+	headers: {
+		'Content-Type': 'application/x-www-form-urlencoded',
+	},
 })
 	.then(res => res.json())
 	.then(console.log);
