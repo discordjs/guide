@@ -2,7 +2,6 @@ const http = require('http');
 const fs = require('fs');
 const url = require('url');
 const fetch = require('node-fetch');
-const FormData = require('form-data');
 
 const port = 53134;
 
@@ -14,18 +13,28 @@ http.createServer((req, res) => {
 
 	if (urlObj.query.code) {
 		const accessCode = urlObj.query.code;
-		const data = new FormData();
+		const data = {
+			'client_id': 'your client id',
+			'client_secret': 'your client secret',
+			'grant_type': 'authorization_code',
+			'redirect_uri': 'your redirect uri',
+			'code': accessCode,
+			'scope': 'the scopes'
+		};
 
-		data.append('client_id', 'your client id');
-		data.append('client_secret', 'your client secret');
-		data.append('grant_type', 'authorization_code');
-		data.append('redirect_uri', 'your redirect url');
-		data.append('scope', 'your scopes');
-		data.append('code', accessCode);
+		// convert to application/x-www-form-urlencoded
+		function formUrlEncode(data) {
+			return Object.entries(data)
+				.map(([k, v]) => k + '=' + v)
+				.join('&');
+		}
 
 		fetch('https://discordapp.com/api/oauth2/token', {
 			method: 'POST',
-			body: data,
+			body: formUrlEncode(data),
+			headers : {
+				'Content-Type': 'application/x-www-form-urlencoded'
+			}
 		})
 			.then(discordRes => discordRes.json())
 			.then(info => {
