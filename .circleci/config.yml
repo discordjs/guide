@@ -21,19 +21,19 @@ jobs:
 
       # Download and cache dependencies
       - restore_cache:
-          name: Restore Yarn Package Cache
+          name: Restore node modules cache
           keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+            - node_modules-{{ checksum "package-lock.json" }}
 
       - run:
           name: Install Dependencies
-          command: yarn install
+          command: npm install
 
       - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+          name: Save node modules Cache
+          key: node_modules-{{ checksum "package-lock.json" }}
           paths:
-            - ~/.cache/yarn
+            - node_modules
         
       # run tests!
-      - run: yarn lint
+      - run: npm lint

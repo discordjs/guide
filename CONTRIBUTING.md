@@ -7,17 +7,17 @@ Clone the repo into your desired folder, `cd` into it, and install the dependenc
 ```bash
 git clone https://github.com/discordjs/guide.git
 cd guide
-yarn # or npm install
+npm install
 ```
 
-You can use `yarn serve` to open up a local version of the site at http://localhost:8080. If you need to use a different port, run it as `yarn serve --port=1234`.
+You can use `npm run serve` to open up a local version of the site at http://localhost:8080. If you need to use a different port, run it as `npm run serve -- --port=1234`.
 
 ### Linting
 
 Remember to always lint your edits/additions before making a commit to ensure everything's lined up and consistent with the rest of the guide. We use ESLint and have a package.json script for linting both JS files and JS codeblocks inside Markdown files.
 
 ```bash
-yarn lint
+npm run lint
 ```
 
 #### Caveats
