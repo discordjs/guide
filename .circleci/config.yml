@@ -36,4 +36,4 @@ jobs:
             - node_modules
         
       # run tests!
-      - run: npm lint
+      - run: npm run lint
