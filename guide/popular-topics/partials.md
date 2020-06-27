@@ -23,9 +23,9 @@ You choose which structures you want to emit as partials as client options when 
 const { Client } = require('discord.js');
 const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 ```
-:::tip
-Make sure you enable all partials you need for your use case! If you miss one the event does not get emitted. For example listening for reactions on uncached Messages in a direct message channel requires all of `MESSAGE`, `CHANNEL` and `REACTION`!
-If you miss `CHANNEL` as enabled partial type reactions on uncached messages in servers will be emitted (as guild channels are always cached) but will not do so for direct messages.
+
+:::warning
+Make sure you enable all partials you need for your use case! If you miss one the event does not get emitted.
 :::
 
 :::warning

@@ -333,6 +333,10 @@ Since version 12 you can change this behaviour by activating partials. For a ful
 
 Make sure you enable partial structures for `MESSAGE`, `CHANNEL` and `REACTION` when instantiating your client, if you want reaction events on uncached messages for both server and direct message channels. If you do not want to support direct message channels you can exclude `CHANNEL`.
 
+:::tip
+If you use [gateway intents](/popular-topics/intents.md) but can't or don't want to use the privileged `GUILD_MEMBER_PRESENCE` intent you additionally need the `USER` partial.
+:::
+
 ```js
 const Discord = require('discord.js');
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
