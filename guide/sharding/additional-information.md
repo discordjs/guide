@@ -15,11 +15,28 @@ Here are some extra topics covered about sharding that you might have concerns a
 
 In order for shards to communicate, they must send messages to one another, as they are each their own process. You can listen for these messages by adding the following listener in your `index.js` file:
 
+<branch version="11.x">
+
 ```js
 manager.on('message', (shard, message) => {
 	console.log(`Shard[${shard.id}] : ${message._eval} : ${message._result}`);
 });
 ```
+
+</branch>
+<branch version="12.x">
+
+::: tip
+In version 12 shards can have multiple ids. If you use the default sharding manager the `.ids` array will only have one entry.
+:::
+
+```js
+manager.on('message', (shard, message) => {
+	console.log(`Shard[${shard.ids.join(',')}] : ${message._eval} : ${message._result}`);
+});
+```
+
+</branch>
 
 As the property names imply, the `_eval` property is what the shard is attempting to evaluate, and the `_result` property is the output of said evaluation. However, these properties are only guaranteed if a _shard_ is sending a message. There will also be an `_error` property, should the evaluation have thrown an error.
 
@@ -29,9 +46,20 @@ You can also send messages via `process.send('hello')`, which would not contain 
 
 There might be times where you want to target a specific shard. An example would be to kill a specific shard that isn't working as intended. You can achieve this by taking the following snippet (in a command, preferably):
 
+<branch version="11.x">
+
 ```js
 client.shard.broadcastEval('if (this.shard.id === 0) process.exit();');
 ```
+
+</branch>
+<branch version="12.x">
+
+```js
+client.shard.broadcastEval('if (this.shard.ids.includes(0)) process.exit();');
+```
+
+</branch>
 
 If you're using something like [PM2](http://pm2.keymetrics.io/) or [Forever](https://github.com/foreverjs/forever), this is an easy way to restart a specific shard. Remember, <branch version="11.x" inline>[Shard#BroadcastEval](https://discord.js.org/#/docs/main/v11/class/ShardClientUtil?scrollTo=broadcastEval)</branch><branch version="12.x" inline>[Shard#BroadcastEval](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=broadcastEval)</branch> sends a message to **all** shards, so you have to check if it's on the shard you want.
 
