@@ -60,7 +60,7 @@ Take note of the `client id` field, the `client secret` field, and the "OAuth2" 
 
 ![img](~@/images/9fejia2.png)
 
-Once you've added your redirect url, you will want to generate an OAuth2 url. Lower down on the page, you can conveniently find an OAuth2 Url Generator provided by Discord. Use this to generate a url for yourself with the `identify` scope. 
+Once you've added your redirect url, you will want to generate an OAuth2 url. Lower down on the page, you can conveniently find an OAuth2 Url Generator provided by Discord. Use this to generate a url for yourself with the `identify` scope.
 
 ![img](~@/images/18e2dwi.png)
 
@@ -121,7 +121,7 @@ Here you just grab the access token and type from the url if it's there and use 
 
 ## More details
 
-### The state parameter 
+### The state parameter
 
 OAuth2's protocols provide a `state` parameter which is supported by Discord. This is used to help prevent [CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) attacks and can also be used to represent the state of your application. This should be generated per user and appended to the OAuth2 url. For a very basic example, you can use a randomly generated string encoded in Base64 as the state parameter.
 
@@ -190,7 +190,7 @@ if (urlObj.pathname === '/') {
 }
 ```
 
-Now, that you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten them, head over to [your applications](https://discordapp.com/developers/applications) and get them. You can use `node-fetch` to make requests to Discord; you can install it with `npm i node-fetch`. Note that Discord adheres strict
+Now, that you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten them, head over to [your applications](https://discordapp.com/developers/applications) and get them. You can use `node-fetch` to make requests to Discord; you can install it with `npm i node-fetch`. Note that Discord does not accept tokens passed through `encodeUriComponent`.
 
 Require `node-fetch` and make your request.
 
