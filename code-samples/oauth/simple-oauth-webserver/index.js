@@ -2,7 +2,6 @@ const http = require('http');
 const fs = require('fs');
 const url = require('url');
 const fetch = require('node-fetch');
-const querystring = require('querystring');
 
 const port = 53134;
 
@@ -25,7 +24,7 @@ http.createServer((req, res) => {
 
 		fetch('https://discordapp.com/api/oauth2/token', {
 			method: 'POST',
-			body: querystring.unescape(querystring.stringify(data)),
+			body: new URLSearchParams(data),
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 			},
