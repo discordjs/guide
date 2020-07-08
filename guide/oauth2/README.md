@@ -196,6 +196,7 @@ Require `node-fetch` and make your request.
 
 ```js
 const fetch = require('node-fetch');
+const qs = require('querystring');
 
 // ...
 
@@ -218,7 +219,7 @@ function formUrlEncode(data) {
 
 fetch('https://discordapp.com/api/oauth2/token', {
 	method: 'POST',
-	body: formUrlEncode(data),
+	body: qs.unescape(qs.stringify(data)),
 	headers: {
 		'Content-Type': 'application/x-www-form-urlencoded',
 	},

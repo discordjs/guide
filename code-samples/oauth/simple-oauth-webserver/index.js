@@ -2,6 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const url = require('url');
 const fetch = require('node-fetch');
+const querystring = require('querystring');
 
 const port = 53134;
 
@@ -22,16 +23,9 @@ http.createServer((req, res) => {
 			scope: 'the scopes',
 		};
 
-		// convert to application/x-www-form-urlencoded
-		function formUrlEncode(data) {
-			return Object.entries(data)
-				.map(([k, v]) => k + '=' + v)
-				.join('&');
-		}
-
 		fetch('https://discordapp.com/api/oauth2/token', {
 			method: 'POST',
-			body: formUrlEncode(data),
+			body: querystring.unescape(querystring.stringify(data)),
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 			},
