@@ -190,7 +190,7 @@ if (urlObj.pathname === '/') {
 }
 ```
 
-Now, that you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten them, head over to [your applications](https://discordapp.com/developers/applications) and get them. You can use `node-fetch` to make requests to Discord; you can install it with `npm i node-fetch`. Note that Discord does not accept tokens passed through `encodeUriComponent`.
+Now you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten them, head over to [your applications](https://discordapp.com/developers/applications) and get them. You can use `node-fetch` to make requests to Discord; you can install it with `npm i node-fetch`.
 
 Require `node-fetch` and make your request.
 
@@ -220,7 +220,7 @@ fetch('https://discordapp.com/api/oauth2/token', {
 ```
 
 ::: warning
-The content-type for the token url must be `application/x-www-form-urlencoded`. This is why `formUrlEncode()` is used.
+The content-type for the token url must be `application/x-www-form-urlencoded`. This is why `URLSearchParams` is used.
 :::
 
 Now try visiting your OAuth2 url and authorizing your application. Once you're redirected, you should see something like this in your console.
