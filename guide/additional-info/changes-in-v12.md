@@ -17,8 +17,8 @@ You can check your discord.js version with `npm list discord.js`. Should it stil
 ## Commonly Used Methods That Changed
 
 * All section headers are named in the following convention: `Class#methodOrProperty`.
-* The use of parenthesis designates optional inclusion. For example, `Channel#fetch(Pinned)Message(s)` means that this section will include changes for `Channel#fetchPinnedMessages`, `Channel#fetchMessages`, and `Channel#fetchMessage`.
-* The use of asterisks designates a wildcard. For example, `Channel#send***` means that this section will include changes for `Channel#sendMessage`, `Channel#sendFile`, `Channel#sendEmbed`, and so forth.
+* The use of parenthesis designates optional inclusion. For example, `TextChannel#fetch(Pinned)Message(s)` means that this section will include changes for `TextChannel#fetchPinnedMessages`, `TextChannel#fetchMessages`, and `TextChannel#fetchMessage`.
+* The use of asterisks designates a wildcard. For example, `TextChannel#send***` means that this section will include changes for `TextChannel#sendMessage`, `TextChannel#sendFile`, `TextChannel#sendEmbed`, and so forth.
 
 ### Managers/ Cache
 
@@ -2029,7 +2029,7 @@ These are options for setting an `Activity`.
 
 #### CategoryChannel#members
 
-Similar to `textChannel#members` and `voiceChannel#members`, `categoryChannel#members` returns a `Collection` of `GuildMembers` who can see the category, mapped by their ID.
+Similar to `TextChannel#members` and `VoiceChannel#members`, `CategoryChannel#members` returns a `Collection` of `GuildMembers` who can see the category, mapped by their ID.
 
 ### Channel
 
