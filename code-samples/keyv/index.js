@@ -26,7 +26,7 @@ client.on('message', async message => {
 		}
 
 		if (!prefix) return;
-		args = message.content.slice(prefix.length).split(/\s+/);
+		args = message.content.slice(prefix.length).trim().split(/\s+/);
 	} else {
 		const slice = message.content.startsWith(globalPrefix) ? globalPrefix.length : 0;
 		args = message.content.slice(slice).split(/\s+/);
