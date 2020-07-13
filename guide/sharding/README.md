@@ -30,16 +30,12 @@ manager.on('launch', shard => console.log(`Launched shard ${shard.id}`));
 </branch>
 <branch version="12.x">
 
-::: tip
-In version 12 shards can have multiple ids. If you use the default sharding manager the `.ids` array will only have one entry.
-:::
-
 ```js
 const { ShardingManager } = require('discord.js');
 const manager = new ShardingManager('./bot.js', { token: 'your-token-goes-here' });
 
 manager.spawn();
-manager.on('shardCreate', shard => console.log(`Launched shard id(s) ${shard.ids.join(', ')}`));
+manager.on('shardCreate', shard => console.log(`Launched shard id ${shard.id}`));
 ```
 
 </branch>
