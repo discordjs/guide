@@ -16,13 +16,13 @@ Go to your main bot file and find the `client.on('message', ...)` bit. Add the f
 // client.on('message', message => {
 if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-const args = message.content.slice(prefix.length).split(' ');
+const args = message.content.slice(prefix.length).trim().split(' ');
 const command = args.shift().toLowerCase();
 // the rest of your code
 ```
 
 1. If the message either doesn't start with the prefix or was sent by a bot, exit early.
-2. Create an `args` variable that slices off the prefix entirely and then splits it into an array by spaces.
+2. Create an `args` variable that slices off the prefix entirely, removes the leftover whitespaces and then splits it into an array by spaces.
 3. Create a `command` variable by calling `args.shift()`, which will take the first element in array and return it while also removing it from the original array (so that you don't have the command name string inside the `args` array).
 
 Hopefully that's a bit clearer, if there was any confusion. Let's create a quick command to check out the result of our new addition:
@@ -107,8 +107,8 @@ Currently, you're using `.split(' ')` to split the command arguments. However, t
 If you've never done something like this before, this probably isn't what you'd expect, right? Thankfully, there's a simple solution for this issue. The red line is what to remove, and the green line is what to replace it with.
 
 ```diff
-- const args = message.content.slice(prefix.length).split(' ');
-+ const args = message.content.slice(prefix.length).split(/ +/);
+- const args = message.content.slice(prefix.length).trim().split(' ');
++ const args = message.content.slice(prefix.length).trim().split(/ +/);
 ```
 
 <div is="discord-messages">

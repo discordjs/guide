@@ -103,7 +103,7 @@ client.on('message', async message => {
 
 		// if we found a prefix, setup args; otherwise, this isn't a command
 		if (!prefix) return;
-		args = message.content.slice(prefix.length).split(/\s+/);
+		args = message.content.slice(prefix.length).trim().split(/\s+/);
 	} else {
 		// handle DMs
 		const slice = message.content.startsWith(globalPrefix) ? globalPrefix.length : 0;
