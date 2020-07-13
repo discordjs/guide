@@ -83,10 +83,6 @@ This will never work for a channel that lies on another shard. So, let's remedy 
 </branch>
 <branch version="12.x">
 
-::: tip
-In version 12 shards can have multiple ids. If you use the default sharding manager the `.ids` array will only have one entry.
-:::
-
 ```diff
 	if (command === 'send') {
 		if (!args.length) return message.reply('please specify a destination channel id.');
@@ -99,7 +95,7 @@ In version 12 shards can have multiple ids. If you use the default sharding mana
 +		return client.shard.broadcastEval(`
 +			const channel = this.channels.cache.get('${args[0]}');
 +			if (channel) {
-+				channel.send('This is a message from shard id(s) ${this.shard.ids.join(",")}!');
++				channel.send('This is a message from shard ${this.shard.id}!');
 +				true;
 +			}
 +			else {
@@ -145,7 +141,7 @@ If all is well, then you should notice an output like the following: `[false, tr
 	return client.shard.broadcastEval(`
 		const channel = this.channels.cache.get('${args[0]}');
 		if (channel) {
-			channel.send('This is a message from shard id(s) ${this.shard.ids.join(",")}!');
+			channel.send('This is a message from shard ${this.shard.id}!');
 			true;
 		}
 		else {
