@@ -29,6 +29,8 @@ You can also send messages via `process.send('hello')`, which would not contain 
 
 There might be times where you want to target a specific shard. An example would be to kill a specific shard that isn't working as intended. You can achieve this by taking the following snippet (in a command, preferably):
 
+<branch version="11.x">
+
 ```js
 client.shard.broadcastEval('if (this.shard.id === 0) process.exit();');
 ```
