@@ -128,7 +128,7 @@ You can read the docs for the `.createReactionCollector()` method <branch versio
 
 ```js
 const filter = (reaction, user) => {
-	return reaction.emoji.name === '👌' && user.id === message.author.id;
+	return reaction.emoji.name === '✅' && user.id === message.author.id;
 };
 
 const collector = message.createReactionCollector(filter, { time: 15000 });
@@ -147,7 +147,7 @@ collector.on('end', collected => {
 
 ```js
 const filter = (reaction, user) => {
-	return reaction.emoji.name === '👌' && user.id === message.author.id;
+	return reaction.emoji.name === '✅' && user.id === message.author.id;
 };
 
 const collector = message.createReactionCollector(filter, { time: 15000 });
@@ -173,7 +173,7 @@ You can read the docs for the `.awaitReactions()` method <branch version="11.x" 
 
 ```js
 const filter = (reaction, user) => {
-	return reaction.emoji.name === '👌' && user.id === message.author.id;
+	return reaction.emoji.name === '✅' && user.id === message.author.id;
 };
 
 message.awaitReactions(filter, { max: 4, time: 60000, errors: ['time'] })
