@@ -83,6 +83,10 @@ This will never work for a channel that lies on another shard. So, let's remedy 
 </branch>
 <branch version="12.x">
 
+::: tip
+In version 12 [`client.shard`](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=ids) can hold multiple ids. If you use the default sharding manager the `.ids` array will only have one entry.
+:::
+
 ```diff
 	if (command === 'send') {
 		if (!args.length) return message.reply('please specify a destination channel id.');
@@ -95,7 +99,7 @@ This will never work for a channel that lies on another shard. So, let's remedy 
 +		return client.shard.broadcastEval(`
 +			const channel = this.channels.cache.get('${args[0]}');
 +			if (channel) {
-+				channel.send('This is a message from shard ${this.shard.id}!');
++				channel.send('This is a message from shard ${this.shard.ids.join(',')}!');
 +				true;
 +			}
 +			else {

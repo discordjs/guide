@@ -29,9 +29,24 @@ You can also send messages via `process.send('hello')`, which would not contain 
 
 There might be times where you want to target a specific shard. An example would be to kill a specific shard that isn't working as intended. You can achieve this by taking the following snippet (in a command, preferably):
 
+<branch version="11.x">
+
 ```js
 client.shard.broadcastEval('if (this.shard.id === 0) process.exit();');
 ```
+
+</branch>
+<branch version="12.x">
+
+::: tip
+In version 12 [`client.shard`](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=ids) can hold multiple ids. If you use the default sharding manager the `.ids` array will only have one entry.
+:::
+
+```js
+client.shard.broadcastEval('if (this.shard.ids.includes(0)) process.exit();');
+```
+
+</branch>
 
 If you're using something like [PM2](http://pm2.keymetrics.io/) or [Forever](https://github.com/foreverjs/forever), this is an easy way to restart a specific shard. Remember, <branch version="11.x" inline>[Shard#BroadcastEval](https://discord.js.org/#/docs/main/v11/class/ShardClientUtil?scrollTo=broadcastEval)</branch><branch version="12.x" inline>[Shard#BroadcastEval](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=broadcastEval)</branch> sends a message to **all** shards, so you have to check if it's on the shard you want.
 
