@@ -1908,6 +1908,16 @@ This event has been removed entirely.
 
 ### VoiceConnection
 
+The `VoiceConnection` class is now accessed via respective `VoiceState` class.
+
+```diff
+- guild.voiceConnection;
++ guild.voice.connection;
+
+- member.voiceConnection;
++ member.voice.connection;
+```
+
 The `VoiceConnection` class also implements the new `PlayInterface` class in addition to extending `EventEmitter` from Node.
 
 #### VoiceConnection#createReceiver
