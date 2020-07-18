@@ -1908,7 +1908,7 @@ This event has been removed entirely.
 
 ### VoiceConnection
 
-The `VoiceConnection` class is now accessed via respective `VoiceState` class.
+The `VoiceConnection` class is now accessed via the respective `VoiceState` class.
 
 ```diff
 - guild.voiceConnection;
