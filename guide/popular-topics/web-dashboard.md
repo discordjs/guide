@@ -1,7 +1,7 @@
 # Web Dashboard
 
 ::: tip
-This page assumes your code looks like the one on [this page](/command-handling/).
+This page assumes your code looks like the one on [this page](https://discordjs.guide/command-handling/adding-features.html).
 :::
 
 ## How It Works
