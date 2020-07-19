@@ -21,7 +21,7 @@ if (command === 'ping') {
 }
 ```
 
-To get started, install [Express](https://expressjs.com/). Express is a powerfull yet lightweight module that allows node to recieve requests.
+To get started, install [Express](https://expressjs.com/). Express is a powerful yet lightweight module that allows node to recieve requests.
 ```sh
 npm install express --save
 ```
@@ -142,7 +142,11 @@ module.exports.server = function (id){
 
 Try visiting [http://localhost](http://localhost) again - you should see a link to a dashboard. Click it and you should be taken to a page where the dashboard is at. The server name and title may take a few seconds to update, but after a few seconds it should be the name of the server you set in `server.js`. If it does do so, you've successfully created a simple web dashboard! Exciting stuff, isn't it? This is only the beginning, so let's add more to the dashboard.
 
-## Settings
+## Adding Settings
+The dashboard currently is not interactive and does not display anything other than the server name. Lets change that by adding customizable options for each server. We'll use 
+
+First, modify `bot.js` as shown below:
+
 
 loader 			//https://i.gifer.com/ZZ5H.gif
 ```js
