@@ -16,8 +16,8 @@ As always, the red is what you'll remove and the green is what you'll replace it
 
 ```diff
 if (command === 'ping') {
--	message.channel.send('Pong.');
-+	client.commands.get('ping').execute(message, args);
+-	message.channel.send('Pong.'); //Remove this
++	client.commands.get('ping').execute(message, args); //Add this
 }
 ```
 
