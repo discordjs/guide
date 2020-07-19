@@ -47,7 +47,7 @@ app.get("/", function(req, res){
 });
 
 app.listen(80, () => {
-  console.log("HTTP server is listening at port " + listener.address().port);
+  console.log("HTTP server is listening!");
 });
 ```
 ::: tip
@@ -55,14 +55,13 @@ If you're using [Glitch](https://glitch.com) for hosting, replace the last three
 
 ```js
 app.listen(process.env.PORT, () => {
-  console.log("HTTP server is listening at port " + listener.address().port);
+  console.log("HTTP server is listening!");
 });
 ```
-
 Glitch will auto-assign your project a port to use.
 :::
 
-You can test out the code by restarting your project and visiting [http://localhost:80](http://localhost:80) in your browser. If you see a `Hello world!`, you've successfully created a HTTP server! Exciting stuff, isn't it? This is only the beginning, so let's move on to making the site more usefull.
+You can test out the code by restarting your project and visiting [http://localhost](http://localhost) in your browser. If you see a `Hello world!`, you've successfully created a HTTP server! Exciting stuff, isn't it? This is only the beginning, so let's move on to making the site more usefull.
 
 ## Creating a Dashboard
 
