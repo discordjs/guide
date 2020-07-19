@@ -125,9 +125,7 @@ app.get("/", function(req, res){
 + res.json(server);
 + });
 
-app.listen(80, function () {
-  console.log("HTTP server is listening at port " + listener.address().port);
-});
+//Rest of code stays the same...
 
 ```
 
