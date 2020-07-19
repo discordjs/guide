@@ -68,34 +68,35 @@ You can test out the code by restarting your project and visiting [http://localh
 
 Create a new folder named `views` and create a new file named `dashboard.html`:
 ```html
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Loading Server... | Dashboard</title>
-	</head>
-	<body>
-		<h1>Server Name</h1>
-		<br>
-		<input id="prefix" placeholder="Enter prefix here..." value="">
-		<br>
-		<button type="button">Save</button>
-		<script>
-			var guild = window.location.pathname.replace(/^\/?guild[\/]+([0-9]+)\/?$/gmi, "$1");
-			var xhttp = new XMLHttpRequest();
-			xhttp.onload = function(){
-				if(this.readyState !== 4) return;
-				if(this.status == 404) return alert("Could not find server!");
-				const json = JSON.parse(this.responseText);
-				document.title = json.name + " | Dashboard";
-				document.querySelector("body > h1").innerText = json.name;
-				document.querySelector("#prefix").value = json.prefix;
-			};
-    		xhttp.open("GET", "/api/guild/" + guild, true);
-    		xhttp.send();
-		</script>
-	</body>
+    <head>
+        <meta charset="utf-8" />
+        <title>Loading Server... | Dashboard</title>
+    </head>
+    <body>
+        <h1>Server Name</h1>
+        <br />
+        <input id="prefix" placeholder="Enter prefix here..." value="" />
+        <br />
+        <button type="button">Save</button>
+        <script>
+            var guild = window.location.pathname.replace(/^\/?guild[\/]+([0-9]+)\/?$/gim, "$1");
+            var xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                if (this.readyState !== 4) return;
+                if (this.status == 404) return alert("Could not find server!");
+                const json = JSON.parse(this.responseText);
+                document.title = json.name + " | Dashboard";
+                document.querySelector("body > h1").innerText = json.name;
+                document.querySelector("#prefix").value = json.prefix;
+            };
+            xhttp.open("GET", "/api/guild/" + guild, true);
+            xhttp.send();
+        </script>
+    </body>
 </html>
+
 ```
 
 Next, edit `index.js`, replacing `<guild id>` with the server id of any server your bot is in:
