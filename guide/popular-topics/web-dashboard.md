@@ -132,7 +132,6 @@ app.get("/", function(req, res){
 To finish up, add this line of code to `bot.js`, preferrably after creating a client:
 ```js
 module.exports.server = function (id){
-	if(client.readyTimestamp) return;
 	return client.guilds.cache.get(id);
 };
 ```
