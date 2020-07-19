@@ -979,7 +979,7 @@ Not sure how to set up a database? Check out [this page](/sequelize/)!
 
 #### Guild#setChannelPosition
 
-`guild.setChannelPosition()` has been removed entirely. As an alternative, you can use `channel.setPosition()`, or `guild.setChannelPositions()`, which accepts accepts the same form of data as `guild.setChannelPosition` but inside an array.
+`guild.setChannelPosition()` has been removed entirely. As an alternative, you can use `channel.setPosition()`, or `guild.setChannelPositions()`, which accepts the same form of data as `guild.setChannelPosition` but inside an array.
 
 ```diff
 - guild.setChannelPosition({ channel: '123456789012345678', position: 1 });
