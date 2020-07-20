@@ -75,10 +75,6 @@ Create a new folder named `views` and create a new file named `dashboard.html`:
     </head>
     <body>
         <h1>Server Name</h1>
-        <br />
-        <input id="prefix" placeholder="Enter prefix here..." value="" />
-        <br />
-        <button type="button">Save</button>
         <script>
             var guild = window.location.pathname.replace(/^\/?guild[\/]+([0-9]+)\/?$/gim, "$1");
             var xhttp = new XMLHttpRequest();
