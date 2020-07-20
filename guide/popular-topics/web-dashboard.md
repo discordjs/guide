@@ -139,9 +139,45 @@ module.exports.server = function (id){
 Try visiting [http://localhost](http://localhost) again - you should see a link to a dashboard. Click it and you should be taken to a page where the dashboard is at. The server name and title may take a few seconds to update, but after a few seconds it should be the name of the server you set in `server.js`. If it does do so, you've successfully created a simple web dashboard! Exciting stuff, isn't it? This is only the beginning, so let's add more to the dashboard.
 
 ## Adding Settings
-The dashboard currently is not interactive and does not display anything other than the server name. Lets change that by adding customizable options for each server. We'll use 
+The dashboard currently is not interactive and does not display anything other than the server name. Lets change that by adding customizable options for each server. We'll use an extremely simple key-value storage solution named [quick.db](https://quickdb.js.org/), but you can just as easily use anything else, such as [Keyv](https://www.npmjs.com/package/keyv) or a collection.
 
-First, modify `bot.js` as shown below:
+::: tip
+You can read the docs for quick.db [here](https://quickdb.js.org/docs.html)
+:::
+
+```sh
+npm install quick.db --save
+```
+
+Add this line of code to the top of `bot.js`, after instantating a new client:
+
+```js
+const db = require("quick.db");
+const guilds = new db.table("guilds");
+```
+
+Modify the code to use the db when returning data for each guild in `bot.js`:
+
+```diff
+module.exports.server = function (id){
+	- return client.guilds.cache.get(id);
+	+ if(!client.guilds.cache.has(id)) return false;
+	+ if(!guilds.has(id)){
+	+ 	guilds.set(id, {
+	+ 		prefix: prefix,
+	+		permissions: {}
+	+ 	});
+	+ }
+	+ return {
+	+ 	server: client.guilds.cache.get(id),
+	+	settings: guilds.get(id)
+	+ };
+};
+```
+
+
+
+
 
 
 loader 			//https://i.gifer.com/ZZ5H.gif
