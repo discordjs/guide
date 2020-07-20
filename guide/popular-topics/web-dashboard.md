@@ -158,7 +158,7 @@ const guilds = new db.table("guilds");
 
 Modify the code to use the db when returning data for each guild in `bot.js`:
 
-```dif
+```diff
 module.exports.server = function (id){
 	- return client.guilds.cache.get(id);
 	+ if(!client.guilds.cache.has(id)) return false;
