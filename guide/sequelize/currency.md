@@ -97,7 +97,7 @@ Now that the models are defined, we should create them in our database so that w
 Create a file called `dbInit.js` in the base directory (*not* in the `models` folder).
 
 ::: danger
-Make sure you use version 5 or later of Sequelize! Version 4 as used in this guide will pose a security threat. You can read more about this issue On the [Sequelize issue tracker](https://github.com/sequelize/sequelize/issues/7310).
+Make sure you use version 5 or later of Sequelize! Version 4 as used in this guide will pose a security threat. You can read more about this issue on the [Sequelize issue tracker](https://github.com/sequelize/sequelize/issues/7310).
 :::
 
 ```js
