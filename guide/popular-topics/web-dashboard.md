@@ -160,18 +160,18 @@ Modify the code to use the db when returning data for each guild in `bot.js`:
 
 ```diff
 module.exports.server = function (id){
-	- return client.guilds.cache.get(id);
-	+ if(!client.guilds.cache.has(id)) return false;
-	+ if(!guilds.has(id)){
-	+ 	guilds.set(id, {
-	+ 		prefix: prefix,
-	+		permissions: {}
-	+ 	});
-	+ }
-	+ return {
-	+ 	server: client.guilds.cache.get(id),
-	+	settings: guilds.get(id)
-	+ };
+- return client.guilds.cache.get(id);
++ if(!client.guilds.cache.has(id)) return false;
++ if(!guilds.has(id)){
++ 	guilds.set(id, {
++ 		prefix: prefix,
++		permissions: {}
++ 	});
++ }
++ return {
++ 	server: client.guilds.cache.get(id),
++	settings: guilds.get(id)
++ };
 };
 ```
 
