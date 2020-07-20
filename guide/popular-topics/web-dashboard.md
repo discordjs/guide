@@ -175,8 +175,57 @@ module.exports.server = function (id){
 };
 ```
 
+Now edit the `message` event in `bot.js` to accept a custom prefix:
 
+```diff
+client.on('message', message => {
+-	if (!message.content.startsWith(prefix) || message.author.bot) return;
++	if (message.author.bot) return;
++	if(!guilds.has(message.guild.id)) {
++		guilds.set(message.guild.id, {
++ 			prefix: prefix,
++			permissions: {}
++ 		});
++	}
++	if(!message.content.startsWith(guilds.get(message.guild.id).prefix))) return;
 
+-	const args = message.content.slice(prefix.length).trim().split(/ +/);
++	const args = message.content.slice(guilds.get(message.guild.id).prefix.length).trim().split(/ +/);
+
+	const commandName = args.shift().toLowerCase();
+
+	const command = client.commands.get(commandName)
+		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+		
+	//Rest of code...
+});
+```
+
+Lets add an input for the guild prefix on the web dashboard. Modify `dashboard.html` as follows:
+
+```diff
+<body>
+        <h1>Server Name</h1>
++        <br />
++        <input id="prefix" placeholder="Enter prefix here..." value="" />
+        <script>
+            var guild = window.location.pathname.replace(/^\/?guild[\/]+([0-9]+)\/?$/gim, "$1");
+            var xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                if (this.readyState !== 4) return;
+                if (this.status == 404) return alert("Could not find server!");
+                const json = JSON.parse(this.responseText);
+-                document.title = json.name + " | Dashboard";
+-                document.querySelector("body > h1").innerText = json.name;
++				 document.title = json.server.name + " | Dashboard";
++                document.querySelector("body > h1").innerText = json.server.name;
++                document.querySelector("#prefix").value = json.settings.prefix;
+            };
+            xhttp.open("GET", "/api/guild/" + guild, true);
+            xhttp.send();
+        </script>
+</body>
+```
 
 
 
