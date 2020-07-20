@@ -226,10 +226,3 @@ Lets add an input for the guild prefix on the web dashboard. Modify `dashboard.h
         </script>
 </body>
 ```
-
-
-
-loader 			//https://i.gifer.com/ZZ5H.gif
-```js
-
-```
