@@ -98,7 +98,7 @@ guild.roles.create({ data: { name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK
 
 ### Checking member permissions
 
-To know if a one of a member's roles has a permission enabled, you can use the `.hasPermission()` method of the <branch version="11.x" inline>[GuildMember](https://discord.js.org/#/docs/main/v11/class/GuildMember)</branch><branch version="12.x" inline>[GuildMember](https://discord.js.org/#/docs/main/stable/class/GuildMember)</branch> class and provide a permission flag, array, or number to check for. You can also specify if you want to allow the `ADMINISTRATOR` permission or the guild owner status to override this check with the following parameters.
+To know if one of a member's roles has a permission enabled, you can use the `.hasPermission()` method of the <branch version="11.x" inline>[GuildMember](https://discord.js.org/#/docs/main/v11/class/GuildMember)</branch><branch version="12.x" inline>[GuildMember](https://discord.js.org/#/docs/main/stable/class/GuildMember)</branch> class and provide a permission flag, array, or number to check for. You can also specify if you want to allow the `ADMINISTRATOR` permission or the guild owner status to override this check with the following parameters.
 
 <branch version="11.x">
 
