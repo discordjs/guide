@@ -60,7 +60,7 @@ Take note of the `client id` field, the `client secret` field, and the "OAuth2" 
 
 ![img](~@/images/9fejia2.png)
 
-Once you've added your redirect url, you will want to generate an OAuth2 url. Lower down on the page, you can conveniently find an OAuth2 Url Generator provided by Discord. Use this to generate a url for yourself with the `identify` scope. 
+Once you've added your redirect url, you will want to generate an OAuth2 url. Lower down on the page, you can conveniently find an OAuth2 Url Generator provided by Discord. Use this to generate a url for yourself with the `identify` scope.
 
 ![img](~@/images/18e2dwi.png)
 
@@ -121,7 +121,7 @@ Here you just grab the access token and type from the url if it's there and use 
 
 ## More details
 
-### The state parameter 
+### The state parameter
 
 OAuth2's protocols provide a `state` parameter which is supported by Discord. This is used to help prevent [CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) attacks and can also be used to represent the state of your application. This should be generated per user and appended to the OAuth2 url. For a very basic example, you can use a randomly generated string encoded in Base64 as the state parameter.
 
@@ -190,35 +190,37 @@ if (urlObj.pathname === '/') {
 }
 ```
 
-Now, that you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten them, head over to [your applications](https://discordapp.com/developers/applications) and get them. You can use `node-fetch` along with `form-data` to make requests to Discord; you can install them with `npm i node-fetch` and `npm i form-data` respectively.
+Now you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten them, head over to [your applications](https://discordapp.com/developers/applications) and get them. You can use `node-fetch` to make requests to Discord; you can install it with `npm i node-fetch`.
 
-Require these new modules and make your request.
+Require `node-fetch` and make your request.
 
 ```js
 const fetch = require('node-fetch');
-const FormData = require('form-data');
 
 // ...
 
-const data = new FormData();
-
-data.append('client_id', 'your client id');
-data.append('client_secret', 'your client secret');
-data.append('grant_type', 'authorization_code');
-data.append('redirect_uri', 'your redirect url');
-data.append('scope', 'the scopes');
-data.append('code', accessCode);
+const data = {
+	client_id: 'your client id',
+	client_secret: 'your client secret',
+	grant_type: 'authorization_code',
+	redirect_uri: 'your redirect uri',
+	code: accessCode,
+	scope: 'the scopes',
+};
 
 fetch('https://discordapp.com/api/oauth2/token', {
 	method: 'POST',
-	body: data,
+	body: new URLSearchParams(data),
+	headers: {
+		'Content-Type': 'application/x-www-form-urlencoded',
+	},
 })
 	.then(res => res.json())
 	.then(console.log);
 ```
 
 ::: warning
-The content-type for the token url must be `application/x-www-form-urlencoded`. This is why `form-data` is used.
+The content-type for the token url must be `application/x-www-form-urlencoded`. This is why `URLSearchParams` is used.
 :::
 
 Now try visiting your OAuth2 url and authorizing your application. Once you're redirected, you should see something like this in your console.
