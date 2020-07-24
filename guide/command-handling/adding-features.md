@@ -76,7 +76,12 @@ And then in your main file:
 	const command = client.commands.get(commandName);
 +
 +	if (command.args && !args.length) {
-+		return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
++		try{
++			return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
++		}catch(error){
++			console.log(error);
++			return;
++		}
 +	}
 +
 ```
@@ -107,9 +112,13 @@ In your main file:
 +		if (command.usage) {
 +			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
 +		}
-+
-+		return message.channel.send(reply);
-	}
++		try {
++     		return message.channel.send(reply);
++    		}catch (error){
++     			console.log(error);
++      			return; 
++			}
++		}
 ```
 
 Use an `if` statement to check if the `usage` property exists (and is truthy) first, so that you don't accidentally end up with `undefined` in the reply string (in the case that you forget to properly supply the property in your command file, or some similar incident). A simple precaution such as this can greatly improve the user experience.
