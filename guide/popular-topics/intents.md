@@ -71,7 +71,7 @@ You can enable privileged gateway intents in the [Discord Developer Portal](http
 
 Note that access to these special intents needs to be requested during the [verification process](https://support.discordapp.com/hc/en-us/articles/360040720412) discord requires for bots in 100 or more guilds.
 
-Should you receive an error prefixed `[DISALLOWED_INTENTS]` please review your settings for all privileged intents you use. The official documentation for this topic can be found on the [discord API documentation](https://discordapp.com/developers/docs/topics/gateway#privileged-intents).
+Should you receive an error prefixed with `[DISALLOWED_INTENTS]` please review your settings for all privileged intents you use. The official documentation for this topic can be found on the [discord API documentation](https://discordapp.com/developers/docs/topics/gateway#privileged-intents).
 
 ## More on bit fields
 
