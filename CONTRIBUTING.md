@@ -69,7 +69,7 @@ When explaining parts of a guide, it's recommended to use "you" instead of "we" 
 
 #### "We" instead of "I"
 
-When refering to yourself, use "we" (as in "the writers of this guide") instead of "I". For example:
+When referring to yourself, use "we" (as in "the writers of this guide") instead of "I". For example:
 
 ```diff
 - If you don't already have this package installed, I would highly recommend doing so.
@@ -99,7 +99,7 @@ Tied in with the section above, try to keep things as neatly formatted as possib
 
 #### Tips, warnings, and danger messages
 
-If you have a tip to share with the reader, you can format them in a specific way so that it looks appealing and noticable. The same goes for warning and "danger" messages.
+If you have a tip to share with the reader, you can format them in a specific way so that it looks appealing and noticeable. The same goes for warning and "danger" messages.
 
 ```md
 In this section, we'll be doing some stuff!
@@ -169,7 +169,7 @@ After accessing the `.icon` property off of the `data` object, you can send that
 
 ---
 
-If you want to change your bot's username username, you can use the `ClientUser#setUsername` method.
+If you want to change your bots username username, you can use the `ClientUser#setUsername` method.
 ```
 
 References to class names should be capitalized, but remain outside of backticks. For example:
