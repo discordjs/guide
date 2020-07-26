@@ -164,7 +164,7 @@ message.channel.send(`You wanted to kick: ${taggedUser.username}`);
 TypeError: Cannot read property 'username' of undefined
 ```
 
-That's because you're trying to access the `username` property of a user you didn't mention! Since `message.mentions.users` is a Collection and you're trying to call `.first()` on an empty Collection, it'll return `undefined`. You can add a quick sanity check above the `const taggedUser = ...` line to prevent this from happening.
+That's because you're trying to access the `username` property of a user you didn't mention! Since `message.mentions.users` is a Collection and you're trying to call `.first()` on an empty Collection, it'll return `undefined`. You can add a quick coherence check above the `const taggedUser = ...` line to prevent this from happening.
 
 ```js
 if (!message.mentions.users.size) {

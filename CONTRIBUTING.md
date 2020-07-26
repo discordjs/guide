@@ -81,6 +81,18 @@ When refering to yourself, use "we" (as in "the writers of this guide") instead 
 + In this section, we'll be covering how to do that really cool thing everyone's asking about.
 ```
 
+### Inclusive language
+
+Try to avoid gendered and otherwise non-inclusive language. Examples are:
+
+- Whitelist -> Allowlist
+- Blacklist -> Denylist
+- Master/Slave -> Leader/follower, primary/replica, primary/secondary, primary/standby
+- Gendered pronouns (e.g. he/him/his) -> They, them, their
+- Gendered terms (e.g. guys) -> Folks, people
+- Sanity check -> Quick check, confidence check, coherence check
+- Dummy value -> Placeholder, sample value
+
 ### Paragraph structure
 
 Tied in with the section above, try to keep things as neatly formatted as possible. If a paragraph gets long, split it up into multiple paragraphs so that it adds some spacing and is easier on the eyes.

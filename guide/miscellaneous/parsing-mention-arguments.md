@@ -10,21 +10,21 @@ Say you are writing a bot for moderating your server. Obviously you will want a 
 But what happens if you try to use the command like this?
 
 ```
-!ban @Offender Because he was rude to @Victim
+!ban @Offender because they were rude to @Victim
 ```
 
 You might expect it to ban @Offender, because that is who you mentioned first.
 However, the Discord API does not send the mentions in the order they appear; They are sorted by their ID instead.
 
-If the @Victim happens to have joined Discord before @Offender and thus has a smaller ID he might get banned instead.  
+If the @Victim happens to have joined Discord before @Offender and thus has a smaller ID they might get banned instead.  
 Or maybe someone uses a command incorrectly, the bot might still accept it but it will create an unexpected outcome.  
 Say someone accidentally used the ban command like this:
 
 ```
-!ban Because he was rude to @Victim
+!ban because they were rude to @Victim
 ```
 
-The bot will still ban someone, but it will be the @Victim again. `message.mentions.users` still contains a mention, which the bot will use. But in reality you would want your bot to be able to tell the user he used the command incorrectly.
+The bot will still ban someone, but it will be the @Victim again. `message.mentions.users` still contains a mention, which the bot will use. But in reality you would want your bot to be able to tell the user they used the command incorrectly.
 
 ## How Discord mentions work
 

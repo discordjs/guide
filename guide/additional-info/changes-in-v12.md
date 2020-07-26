@@ -2309,7 +2309,7 @@ The private property `_fetches` has been added to map ongoing promises for calls
 
 #### ShardClientUtil#parentPort
 
-The message port for the master process, if the mode of the `ShardClientUtil` is `worker`.
+The message port for the primary process, if the mode of the `ShardClientUtil` is `worker`.
 
 #### ShardClientUtil#respawnAll
 
@@ -2396,7 +2396,7 @@ THis new method resolves a `StringResolvable` into a string.
 
 #### VoiceBroadcast#dispatcher
 
-This new property represents the master dispatcher - if any - that controls everything played by subscribed dispatchers.
+This new property represents the primary dispatcher - if any - that controls everything played by subscribed dispatchers.
 
 ### VoiceChannel
 

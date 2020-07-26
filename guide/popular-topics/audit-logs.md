@@ -56,7 +56,7 @@ client.on('messageDelete', async message => {
 	// Since we only have 1 audit log entry in this collection, we can simply grab the first one
 	const deletionLog = fetchedLogs.entries.first();
 
-	// Let's perform a sanity check here and make sure we got *something*
+	// Let's perform a coherence check here and make sure we got *something*
 	if (!deletionLog) return console.log(`A message by ${message.author.tag} was deleted, but no relevant audit logs were found.`);
 
 	// We now grab the user object of the person who deleted the message
@@ -106,7 +106,7 @@ client.on('guildMemberRemove', async member => {
 	// Since we only have 1 audit log entry in this collection, we can simply grab the first one
 	const kickLog = fetchedLogs.entries.first();
 
-	// Let's perform a sanity check here and make sure we got *something*
+	// Let's perform a coherence check here and make sure we got *something*
 	if (!kickLog) return console.log(`${member.user.tag} left the guild, most likely of their own will.`);
 
 	// We now grab the user object of the person who kicked our member
@@ -153,7 +153,7 @@ client.on('guildBanAdd', async (guild, user) => {
 	// Since we only have 1 audit log entry in this collection, we can simply grab the first one
 	const banLog = fetchedLogs.entries.first();
 
-	// Let's perform a sanity check here and make sure we got *something*
+	// Let's perform a coherence check here and make sure we got *something*
 	if (!banLog) return console.log(`${user.tag} was banned from ${guild.name} but no audit log could be found.`);
 
 	// We now grab the user object of the person who banned the user

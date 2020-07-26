@@ -78,7 +78,7 @@ const username = 'Sanctuary';
 const password = 'pleasedonthackme';
 
 function letsPretendThisDoesSomething() {
-	return 'Yay for dummy data.';
+	return 'Yay for sample data.';
 }
 ```
 
@@ -257,7 +257,7 @@ A single line of code that makes things much cleaner! In some cases, you may not
 const [, username, id] = message.content.match(someRegex);
 ```
 
-In this snippet, we use a comma without providing a name for the item in the array we don't need. You can also give it a dummy name if you prefer, of course; it's entirely preference at that point.
+In this snippet, we use a comma without providing a name for the item in the array we don't need. You can also give it a placeholder name if you prefer, of course; it's entirely preference at that point.
 
 ## var, let, and const
 
