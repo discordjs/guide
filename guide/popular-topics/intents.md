@@ -67,9 +67,11 @@ If you want to view the built flags you can utilize the `.toArray()`, `.serializ
 Discord defines some intents as "privileged" due to the sensitive nature of the data sent through the affected events.
 At the time of writing this article privileged intents are `GUILD_PRESENCES` and `GUILD_MEMBERS`
 
-For now you can simply enable these intents in the [Discord Developer Portal](https://discordapp.com/developers/applications) through a toggle. Please note that this is currently in a deprecation period and if your bot is in more then 100 guild it must be whitelisted to use privileged intents as of October 7, 2020. You can find more information on whitelisting in [this discord support article](https://support.discordapp.com/hc/en-us/articles/360040720412-Bot-Verification-and-Data-Whitelisting)
+You can enable privileged gateway intents in the [Discord Developer Portal](https://discordapp.com/developers/applications) under "Privileged Gateway Intents" in the "Bot" section.
 
-Should you receive the error `[DISALLOWED_INTENTS]: Privileged intent provided is not enabled or whitelisted` please review your settings for all privileged intents you use. The official documentation for privileged intents can be found on the [discord API documentation](https://discordapp.com/developers/docs/topics/gateway#privileged-intents).
+Note that access to these special intents needs to be requested during the [verification process](https://support.discordapp.com/hc/en-us/articles/360040720412) discord requires for bots in 100 or more guilds.
+
+Should you receive an error prefixed `[DISALLOWED_INTENTS]` please review your settings for all privileged intents you use. The official documentation for this topic can be found on the [discord API documentation](https://discordapp.com/developers/docs/topics/gateway#privileged-intents).
 
 ## More on bit fields
 
