@@ -289,9 +289,17 @@ If you want to learn more about reactions, check out [this dedicated guide on re
 :::
 
 ### How do I create a restart command?
+You can either use:
 
 ```js
 process.exit();
+```
+
+or
+
+```js
+<Client>.destroy();
+<Client>.login('<your-token-goes-here>')
 ```
 
 ::: tip
