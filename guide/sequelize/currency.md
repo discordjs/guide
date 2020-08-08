@@ -110,9 +110,9 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 	storage: 'database.sqlite',
 });
 
-const CurrencyShop = sequelize.import('models/CurrencyShop');
-sequelize.import('models/Users');
-sequelize.import('models/UserItems');
+const CurrencyShop = require('./models/CurrencyShop')(sequelize, Sequelize.DataTypes);
+require('./models/Users')(sequelize, Sequelize.DataTypes);
+require('./models/UserItems')(sequelize, Sequelize.DataTypes);
 
 const force = process.argv.includes('--force') || process.argv.includes('-f');
 
@@ -128,7 +128,7 @@ sequelize.sync({ force }).then(async () => {
 }).catch(console.error);
 ```
 
-You'll notice some familiar things here from the previous tutorial, such as the Sequelize declaration being the same. We do have something different here, and that's how we import the models. Sequelize has an import function to make your code a bit cleaner when you have many models to use. We pull the two models and the junction table, sync them, and add items to our shop.
+Here we pull the two models and the junction table from the respective model declarations, sync them, and add items to our shop.
 
 A new function here is the `.upsert()` function. It's a portmanteau for **up**date or in**sert**.  We use `upsert` here because just in case you run this file multiple times, it doesn't create duplicates. That shouldn't happen because we defined name as *unique* but there's no harm in being safe. Upsert also has a nice side benefit; If you adjust the cost, the respective item should also have their cost updated.
 
@@ -150,12 +150,13 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 	storage: 'database.sqlite',
 });
 
-const Users = sequelize.import('models/Users');
-const CurrencyShop = sequelize.import('models/CurrencyShop');
-const UserItems = sequelize.import('models/UserItems');
+const Users = require('./models/Users')(sequelize, Sequelize.DataTypes);
+const CurrencyShop = require('./models/CurrencyShop')(sequelize, Sequelize.DataTypes);
+const UserItems = require('./models/UserItems')(sequelize, Sequelize.DataTypes);
 
 UserItems.belongsTo(CurrencyShop, { foreignKey: 'item_id', as: 'item' });
 
+/* eslint-disable-next-line func-names */
 Users.prototype.addItem = async function(item) {
 	const userItem = await UserItems.findOne({
 		where: { user_id: this.user_id, item_id: item.id },
@@ -169,6 +170,7 @@ Users.prototype.addItem = async function(item) {
 	return UserItems.create({ user_id: this.user_id, item_id: item.id, amount: 1 });
 };
 
+/* eslint-disable-next-line func-names */
 Users.prototype.getItems = function() {
 	return UserItems.findAll({
 		where: { user_id: this.user_id },
@@ -242,6 +244,7 @@ Nothing special about this skeleton. We import the Users and CurrencyShop models
 
 ```js
 Reflect.defineProperty(currency, 'add', {
+	/* eslint-disable-next-line func-name-matching */
 	value: async function add(id, amount) {
 		const user = currency.get(id);
 		if (user) {
@@ -255,6 +258,7 @@ Reflect.defineProperty(currency, 'add', {
 });
 
 Reflect.defineProperty(currency, 'getBalance', {
+	/* eslint-disable-next-line func-name-matching */
 	value: function getBalance(id) {
 		const user = currency.get(id);
 		return user ? user.balance : 0;
