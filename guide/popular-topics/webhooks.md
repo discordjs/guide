@@ -14,6 +14,7 @@ If you would like to read about how to use webhooks through the API without disc
 
 Bots receive webhook messages in a text channel normally. You can detect if the message was sent by a webhook by simply checking if the `Message.webhookID` is not `null`. In this example we return if the message was sent by a webhook.
 
+<!-- eslint-skip -->
 ```js
 if (message.webhookID) return;
 ```

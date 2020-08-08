@@ -70,8 +70,8 @@ Using `.find()`, your code would look something like this:
 
 ```js
 if (message.content === '!react-custom') {
-	const emoji = message.guild.emojis.find(emoji => emoji.name === 'ayy');
-	message.react(emoji);
+	const reactionEmoji = message.guild.emojis.find(emoji => emoji.name === 'ayy');
+	message.react(reactionEmoji);
 }
 ```
 
@@ -80,8 +80,8 @@ if (message.content === '!react-custom') {
 
 ```js
 if (message.content === '!react-custom') {
-	const emoji = message.guild.emojis.cache.find(emoji => emoji.name === 'ayy');
-	message.react(emoji);
+	const reactionEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'ayy');
+	message.react(reactionEmoji);
 }
 ```
 
@@ -93,8 +93,8 @@ Using `.get()`, your code would look something like this:
 
 ```js
 if (message.content === '!react-custom') {
-	const emoji = client.emojis.get(config.emojiID);
-	message.react(emoji);
+	const reactionEmoji = client.emojis.get(config.emojiID);
+	message.react(reactionEmoji);
 }
 ```
 
@@ -103,8 +103,8 @@ if (message.content === '!react-custom') {
 
 ```js
 if (message.content === '!react-custom') {
-	const emoji = client.emojis.cache.get(config.emojiID);
-	message.react(emoji);
+	const reactionEmoji = client.emojis.cache.get(config.emojiID);
+	message.react(reactionEmoji);
 }
 ```
 
