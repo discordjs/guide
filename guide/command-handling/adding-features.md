@@ -130,7 +130,7 @@ module.exports = {
 And in your main file, above the args checking line, add this in:
 
 ```js
-if (command.guildOnly && message.channel.type !== 'text') {
+if (command.guildOnly && message.channel.type === 'dm') {
 	return message.reply('I can\'t execute that command inside DMs!');
 }
 ```

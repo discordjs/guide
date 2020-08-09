@@ -46,7 +46,7 @@ const client = new Discord.Client();
 
 client.on('message', message => {
 	if (message.content === '!play') {
-		if (message.channel.type !== 'text') return;
+		if (message.channel.type === 'dm') return;
 
 		const { voiceChannel } = message.member;
 
@@ -77,7 +77,7 @@ const client = new Discord.Client();
 
 client.on('message', message => {
 	if (message.content === '!play') {
-		if (message.channel.type !== 'text') return;
+		if (message.channel.type === 'dm') return;
 
 		const voiceChannel = message.member.voice.channel;
 
