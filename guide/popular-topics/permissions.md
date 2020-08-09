@@ -217,7 +217,7 @@ guild.channels.create('new-channel', {
 
 ### Replacing overwrites
 
-To replace all permission overwrites on the channel with a provided set of new overwrites, you can use the <branch version="11.x" inline>`.replaceOverwrites()`</branch><branch version="12.x" inline>`.overwritePermissions()`</branch> function. This is extremely handy if you want to copy a channels full set of overwrites to another one, as this method allows passing an array or Collection of <branch version="12.x" inline>[PermissionOverwrites](https://discord.js.org/#/docs/main/stable/class/PermissionOverwritess)</branch><branch version="11.x" inline>[PermissionOverwrites](https://discord.js.org/#/docs/main/v11/class/PermissionOverwrites) or [ChannelCreationOverwrites](https://discord.js.org/#/docs/main/v11/typedef/ChannelCreationOverwrites)</branch>.
+To replace all permission overwrites on the channel with a provided set of new overwrites, you can use the <branch version="11.x" inline>`.replaceOverwrites()`</branch><branch version="12.x" inline>`.overwritePermissions()`</branch> function. This is extremely handy if you want to copy a channels full set of overwrites to another one, as this method allows passing an array or Collection of <branch version="12.x" inline>[PermissionOverwrites](https://discord.js.org/#/docs/main/stable/class/PermissionOverwrites)</branch><branch version="11.x" inline>[PermissionOverwrites](https://discord.js.org/#/docs/main/v11/class/PermissionOverwrites) or [ChannelCreationOverwrites](https://discord.js.org/#/docs/main/v11/typedef/ChannelCreationOverwrites)</branch>.
 
 <branch version="11.x">
 
