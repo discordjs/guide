@@ -367,9 +367,19 @@ At the end of it all, you should be getting this as a result:
 		!help
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-		Here's a list of all my commands:
-		args-info, avatar, beep, help, kick, ping, prune, server, user-info	<br>
-		You can send `!help [command name]` to get info on a specific command!
+		Here's a list of all my commands: <br>
+		<br>		
+		`!args-info` - Information about the arguments provided. <br>
+		`!avatar` - Get the avatar URL of the tagged user(s), or your own avatar. <br>
+		`!beep` - Beep! <br>
+		`!help` - List all of my commands or info about a specific command. <br>
+		`!kick` - Tag a member and kick them (but not really) <br>
+		`!ping` - Ping!<br>
+		`!prune` - Prune up to 99 messages. <br>
+		`!server` - Display info about this server. <br>
+		`!user-info` - Display info about yourself. <br>
+		<br>
+		You can send `!help [command name]` to get detailed info on a specific command!
 	</discord-message>
 	<discord-message author="User" avatar="djs">
 		!help avatar
