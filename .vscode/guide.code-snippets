@@ -1,0 +1,93 @@
+// https://code.visualstudio.com/docs/editor/userdefinedsnippets#_project-snippet-scope
+// custom element explanations: https://github.com/discordjs/guide/blob/master/CONTRIBUTING.md
+// mocking discord messages: https://github.com/Danktuary/vue-discord-message
+
+{
+	"tip": {
+		"prefix": "tip",
+		"description": "insert a tip element",
+		"body": [
+			":::tip",
+			"$1",
+			":::"
+		]
+	},
+	"warning": {
+		"prefix": "warning",
+		"description": "insert a warning element",
+		"body": [
+			":::warning",
+			"$1",
+			":::"
+		]
+	},
+	"danger": {
+		"prefix": "danger",
+		"description": "insert a danger element",
+		"body": [
+			":::danger",
+			"$1",
+			":::"
+		]
+	},
+	"image": {
+		"prefix": ["image", "img"],
+		"description": "image tag",
+		"body": "![${1:some alt text}](~@${2:/images/78fcCsF.png})"
+	},
+	"messages": {
+		"prefix": ["messages", "discord-messages"],
+		"description": "mock discord message wrapper",
+		"body": [
+			"<div is=\"discord-messages\">",
+			"\t$1",
+			"</div>"
+		]
+	},
+	"message": {
+		"prefix": ["message", "discord-message"],
+		"description": "mock discord message",
+		"body": [
+			"<discord-message author=\"${1:Tutorial Bot}\" avatar=\"${2:djs}\">",
+			"\t${3:You can mock mentions with <mention>someone</mention> and mark the message as highlighted (mentioning the logged in user) with <mention :highlight=\"true\">someone</mention>}$0",
+			"</discord-message>"
+		]
+	},
+	"branch": {
+		"prefix": [
+			"branch", "br"
+		],
+		"description": "v11-v12 branches",
+		"body": [
+			"<branch version=\"11.x\">", 
+			"",
+			"$1",
+			"",
+			"</branch>",
+			"<branch version=\"12.x\">",
+			"",
+			"$2",
+			"",
+			"</branch>"
+		]
+	},
+	"branch-inline": {
+		"prefix": ["branch-inline", "br-inline"],
+		"description": "v11-v12 branches (inline)",
+		"body": "<branch version=\"11.x\" inline>$1</branch><branch version=\"12.x\" inline>$2</branch>"
+	},
+	"docs": {
+		"prefix": ["docs", "djs-docs"],
+		"description": "version sensitive link to the discord.js documentation",
+		"body": [
+			"<docks-link path=\"${1:class/Client}\">${2:some link text}</docs-link>"
+		]
+	},
+	"docs-collection": {
+		"prefix": ["docs-collection", "coll-docs"],
+		"description": "link to the discord.js collections",
+		"body": [
+			"<docs-link section=\"collection\" path=\"${1:class/Collection?scrollTo=partition}\">${2:some link text}</docs-link>"
+		]
+	}
+}

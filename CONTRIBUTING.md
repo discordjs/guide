@@ -317,3 +317,7 @@ Collection docs, master branch (no `branch` prop set), `class/Collection?scrollT
 ```
 
 If the `section` prop is set to `main` (or omitted) and the `branch` prop is omitted, the `branch` prop will default to the version the user has set via the site's branch selector dropdown and update accordingly. If `section` is set to anything else and `branch` is omitted, the `branch` prop will default to `'master'`.
+
+### VScode snippets
+
+To make your life with these custom elements a little bit easier we created some [project scoped VSC snippets](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_project-snippet-scope). If you are using [Visual Studio Code](https://code.visualstudio.com/) as your editor of choice you can access these by typing the key word and pressing `CTRL` + `Space` on your keyboard in the entire guide project. Please note, that the elements can become quite complex and we can not write examples for every small use case. Check the explanations above whenever you are unsure.
