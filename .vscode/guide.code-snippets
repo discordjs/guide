@@ -80,7 +80,7 @@
 		"prefix": ["docs", "djs-docs"],
 		"description": "version sensitive link to the discord.js documentation",
 		"body": [
-			"<docks-link path=\"${1:class/Client}\">${2:some link text}</docs-link>"
+			"<docs-link path=\"${1:class/Client}\">${2:some link text}</docs-link>"
 		]
 	},
 	"docs-collection": {
