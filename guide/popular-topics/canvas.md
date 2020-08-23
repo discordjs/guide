@@ -156,7 +156,7 @@ client.on('guildMemberAdd', async member => {
 
 </branch>
 
-Now, you need to load the image you want to use into Canvas. In order to have more sufficient coverage, we'll first show you how to load a basic image from a local directory. We'll be using [this image](~@/images/canvas.jpg) as the background in the welcome image, but you can use whatever you want. Be sure to download the file, name it `wallpaper.jpg`, and save it inside the same directory as your main bot file.
+Now, you need to load the image you want to use into Canvas. In order to have more sufficient coverage, we'll first show you how to load a basic image from a local directory. We'll be using [this image](https://github.com/discordjs/guide/blob/master/guide/images/canvas.jpg) as the background in the welcome image, but you can use whatever you want. Be sure to download the file, name it `wallpaper.jpg`, and save it inside the same directory as your main bot file.
 
 <branch version="11.x">
 
