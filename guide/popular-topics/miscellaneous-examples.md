@@ -180,5 +180,5 @@ console.log(emojiCharacters['!']); // ❗
 ```
 
 ::: tip
-On Windows, you may be able to use the `Win + .` keyboard shortcut to open up an emoji picker can be used for quick, easy access to all the unicode emojis available to you. Some of the emojis listed above may not be there, though (e.g the 0-9 emojis).
+On Windows, you may be able to use the `Win + .` or the `Win + ;` keyboard shortcut to open up an emoji picker. This can give you access to all Unicode emojis without having to go to websites like EmojiPedia or GetEmoji. Some of the emojis listed above may not appear in your Windows Emoji Picker. (e.g the 0-9 emojis).
 :::
