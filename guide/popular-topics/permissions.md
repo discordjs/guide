@@ -341,7 +341,7 @@ Another possible way to get the `Permissions` object would be to access channel 
 ```js
 const overwrites = channel.permissionOverwrites
 /*Permission overwites are presented in the form of a collection, mapped by the user/role id, and the corresponding permissions object.
-Therefore, we must get/find the specific overwrite we want to access, and then specify if we want to view allowed/denied before we can use an methods on the Permissions object. *\ 
+Therefore, we must get/find the specific overwrite we want to access, and then specify if we want to view allowed/denied before we can use an methods on the Permissions object. */
 const deniedPermissions = overwrites.get('ROLE_OR_USER_ID').deny
 const permissionArray = deniedPermissions.toArray()
 ```
