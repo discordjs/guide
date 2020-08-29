@@ -324,6 +324,30 @@ If you want to know how to work with the returned Permissions objects keep readi
 The <branch version="11.x" inline>[Permissions](https://discord.js.org/#/docs/main/v11/class/Permissions)</branch><branch version="12.x" inline>[Permissions](https://discord.js.org/#/docs/main/stable/class/Permissions)</branch> object is a discord.js class containing a permissions bit field and a bunch of utility methods to manipulate it easily.
 Remember that using these methods will not manipulate permissions, but create a new instance representing the changed bit field.
 
+### Displaying permissions as an array
+
+Discord.js provides a `toArray()` method, which can be used to convert a `Permissions` object of a member into an array containing permission flags. This is useful if you want to display/list them and it enables you to use other array methods. For example:
+
+```js
+const memberPermissions = member.permissions.toArray()
+const rolePermissions = role.permissions.toArray();
+//Will return something along the lines of ['SEND_MESSAGES', 'ADD_REACTIONS', 'CHANGE_NICKNAME'] ...etc...
+```
+
+The return value of `toArray()` depends entirely on where the `Permissions` object is coming from. In the examples above, we grabbed a `GuildMember`'s and a `Role`'s [base](https://discordjs.guide/popular-topics/permissions.html#base-permissions) permissions, which does not encompass any overwrites.
+
+Another possible way to get the `Permissions` object would be to access channel overwrites. For exmaple, 
+
+```js
+const overwrites = channel.permissionOverwrites
+/*Permission overwites are presented in the form of a collection, mapped by the user/role id, and the corresponding permissions object.
+Therefore, we must get/find the specific overwrite we want to access, and then specify if we want to view allowed/denied before we can use an methods on the Permissions object. */
+const deniedPermissions = overwrites.get('ROLE_OR_USER_ID').deny
+const permissionArray = deniedPermissions.toArray()
+```
+
+
+
 ### Converting permission numbers
 
 Some methods and properties in Discord.js return permission decimals rather than a Permissions object, making it hard to manipulate or read them if you don't want to use bitwise operations.
