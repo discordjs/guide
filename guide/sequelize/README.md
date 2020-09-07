@@ -25,7 +25,7 @@ $ npm install --save sqlite3
 Make sure you use version 5 or later of Sequelize! Version 4 as used in this guide will pose a security threat. You can read more about this issue On the [Sequelize issue tracker](https://github.com/sequelize/sequelize/issues/7310).
 :::
 
-After you have installed discord.js and Sequelize, you can start with the following skeleton code. The comment labels will tell you where to insert code lateron.
+After you have installed discord.js and Sequelize, you can start with the following skeleton code. The comment labels will tell you where to insert code later on.
 
 <!-- eslint-disable require-await -->
 
@@ -127,7 +127,7 @@ The model mirrors very closely to what is defined in the database. There will be
 `sequelize.define()` takes two parameters. `'tags'` is passed as the name of our table, and an object that represents the table's schema in key-value pairs. Keys in the object become the model's attributes, and the values describe the attributes.
 
 `type` refers to what kind of data this attribute should hold. The most common types are number, string, and date, but there are other data types that are available depending on the database.  
-`unique: true` will ensure that this field will never have duplicated entries. Duplicate tag names will be disalowed in this database.  
+`unique: true` will ensure that this field will never have duplicated entries. Duplicate tag names will be disallowed in this database.  
 `defaultValue` allows you to set a fallback value if no value is set during the insert.  
 `allowNull` is not all that important, but this will guarantee in the database that the attribute is never unset. You could potentially set it to be a blank or empty string, but has to be set to _something_.
 
@@ -146,7 +146,7 @@ The table does not actually get created until you `sync` it. The schema you defi
 
 ### [delta] Adding a tag
 
-After all this preperation, you can now write your first command! We will start off with the ability to add a tag.
+After all this preparation, you can now write your first command! We will start off with the ability to add a tag.
 
 <!-- eslint-skip -->
 
@@ -211,7 +211,7 @@ const splitArgs = commandArgs.split(' ');
 const tagName = splitArgs.shift();
 const tagDescription = splitArgs.join(' ');
 
-// equivalent to: UPDATE tags (descrption) values (?) WHERE name='?';
+// equivalent to: UPDATE tags (description) values (?) WHERE name='?';
 const affectedRows = await Tags.update({ description: tagDescription }, { where: { name: tagName } });
 if (affectedRows > 0) {
 	return message.reply(`Tag ${tagName} was edited.`);
