@@ -331,7 +331,7 @@ Discord.js provides a `toArray()` method, which can be used to convert a `Permis
 ```js
 const memberPermissions = member.permissions.toArray();
 const rolePermissions = role.permissions.toArray();
-//	Will return something along the lines of ['SEND_MESSAGES', 'ADD_REACTIONS', 'CHANGE_NICKNAME'] ...etc...
+//	output: ['SEND_MESSAGES', 'ADD_REACTIONS', 'CHANGE_NICKNAME', ...]
 ```
 
 The meaning of the return value of `toArray()` can vary, depending on where the `Permissions` object is coming from. In the examples above, we grabbed a `GuildMember`'s and a `Role`'s [base](https://discordjs.guide/popular-topics/permissions.html#base-permissions) permissions, which is basically what a member/role can do, by default. However, you can also view things such as denied/allowed channel overwrites, and the meaning of the resulting array is different.
