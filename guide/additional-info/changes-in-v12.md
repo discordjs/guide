@@ -20,6 +20,17 @@ You can check your discord.js version with `npm list discord.js`. Should it stil
 * The use of parenthesis designates optional inclusion. For example, `TextChannel#fetch(Pinned)Message(s)` means that this section will include changes for `TextChannel#fetchPinnedMessages`, `TextChannel#fetchMessages`, and `TextChannel#fetchMessage`.
 * The use of asterisks designates a wildcard. For example, `TextChannel#send***` means that this section will include changes for `TextChannel#sendMessage`, `TextChannel#sendFile`, `TextChannel#sendEmbed`, and so forth.
 
+:::danger
+
+`clientOptions.disableEveryone` has been removed and replaced with `clientOptions.disableMentions`!
+
+```diff
+- const client = new Discord.Client({ disableEveryone: true });
++ const client = new Discord.Client({ disableMentions: "everyone" });
+```
+
+:::
+
 ### Managers/ Cache
 
 v12 introduces the concept of managers, you will no longer be able to directly use collection methods such as `Collection#get` on data structures like `Client#users`. You will now have to directly ask for cache on a manager before trying to use collection methods. Any method that is called directly on a manager will call the API, such as `GuildMemberManager#fetch` and `MessageManager#delete`. 
@@ -2080,6 +2091,15 @@ ClientApplication.coverImage({ width: 1024, height: 1024 });
 `ClientApplication.fetchAssests()` returns a promise that resolves into an array of `ClientAsset` objects, each of which contains `id`, `name` and `type` keys.
 
 ### ClientOptions
+
+#### ClientOptions#disableEveryone
+
+`clientOptions.disableEveryone` has been removed and replaced with `clientOptions.disableMentions`. The former was a best effort approach to escape the everyone mention before sending it off to discord. The API has since introduced a way to deal with this properly on their end which we make use of in version 12 through `clientOptions.disableMentions`.
+
+```diff
+- const client = new Discord.Client({ disableEveryone: true });
++ const client = new Discord.Client({ disableMentions: "everyone" });
+```
 
 #### ClientOptions#partials
 
