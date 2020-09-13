@@ -26,7 +26,7 @@ You can check your discord.js version with `npm list discord.js`. Should it stil
 
 ```diff
 - const client = new Discord.Client({ disableEveryone: true });
-+ const client = new Discord.Client({ disableMentions: "everyone" });
++ const client = new Discord.Client({ disableMentions: 'everyone' });
 ```
 
 :::
@@ -924,7 +924,7 @@ Not sure how to set up a database? Check out [this page](/sequelize/)!
 
 ```diff
 - guild.fetchBans().then(bans => console.log(`${bans.first().tag} was banned`));
-+ guild.fetchBans().then(bans => console.log(`${bans.first().user.tag} was banned because "${bans.first().reason}"`));
++ guild.fetchBans().then(bans => console.log(`${bans.first().user.tag} was banned because '${bans.first().reason}'`));
 ```
 
 #### Guild#fetchMember(s)
@@ -2098,7 +2098,7 @@ ClientApplication.coverImage({ width: 1024, height: 1024 });
 
 ```diff
 - const client = new Discord.Client({ disableEveryone: true });
-+ const client = new Discord.Client({ disableMentions: "everyone" });
++ const client = new Discord.Client({ disableMentions: 'everyone' });
 ```
 
 #### ClientOptions#partials
