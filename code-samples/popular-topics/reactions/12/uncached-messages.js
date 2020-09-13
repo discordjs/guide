@@ -10,7 +10,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
 		try {
 			await reaction.message.fetch();
 		} catch (error) {
-			console.log('Something went wrong when fetching the message: ', error);
+			console.error('Something went wrong when fetching the message: ', error);
 		}
 	}
 	console.log(`${user.username} reacted with "${reaction.emoji.name}".`);
@@ -21,7 +21,7 @@ client.on('messageReactionRemove', async (reaction, user) => {
 		try {
 			await reaction.message.fetch();
 		} catch (error) {
-			console.log('Something went wrong when fetching the message: ', error);
+			console.error('Something went wrong when fetching the message: ', error);
 		}
 	}
 	console.log(`${user.username} removed their "${reaction.emoji.name}" reaction.`);

@@ -124,7 +124,7 @@ This package lets you color and style your `console.log`s in many, many differen
 Let's say you want your error messages to be easily visible; Let us give them a nice red color:
 
 ```js
-console.log(chalk.redBright('FATAL ERROR'), 'Something really bad happened!');
+console.error(chalk.redBright('FATAL ERROR'), 'Something really bad happened!');
 ```
 
 ![image of code above](~@/images/chalk-red.png)
