@@ -53,13 +53,16 @@ const webhookClient = new Discord.WebhookClient('id', 'token');
 
 ### Creating webhooks through server settings
 
-You can create webhooks directly through the discord client, go to Server Settings, you will see a `Webhooks` tab.
+You can create webhooks directly through the discord client, go to Server Settings, you will see an `Integrations` tab.
 
-![Webhook tab](~@/images/creating-webhooks-1.png)
+![Integrations tab](~@/images/creating-webhooks-1.png)
 
-Once you are there, click on the `Create Webhook` button on the top right. This will create a webhook, from here you can edit the channel, the name, and the avatar. Copy the link, the first part is the id, and the second is the token.
+If you already have created a webhook, it will look this this, you will need to click the `View Webhooks` button.
+![Integrations tab](~@/images/creating-webhooks-2.png)
 
-![Creating a Webhook](~@/images/creating-webhooks-2.png)
+Once you are there, click on the `Create Webhook` / `New Webhook` button. This will create a webhook, from here you can edit the channel, the name, and the avatar. Copy the link, the first part is the id, and the second is the token.
+
+![Creating a Webhook](~@/images/creating-webhooks-3.png)
 
 ### Creating webhooks with discord.js
 
@@ -80,7 +83,9 @@ channel.createWebhook('Some-username', 'https://i.imgur.com/wSTFkRM.png')
 ```js
 channel.createWebhook('Some-username', {
 	avatar: 'https://i.imgur.com/wSTFkRM.png',
-}).then(webhook => console.log(`Created webhook ${webhook}`)).catch(console.error);
+})
+	.then(webhook => console.log(`Created webhook ${webhook}`))
+	.catch(console.error);
 ```
 
 </branch>
@@ -107,7 +112,9 @@ webhook.edit({
 	name: 'Some-username',
 	avatar: 'https://i.imgur.com/wSTFkRM.png',
 	channel: '222197033908436994',
-}).then(webhook => console.log(`Edited webhook ${webhook}`)).catch(console.error);
+})
+	.then(webhook => console.log(`Edited webhook ${webhook}`))
+	.catch(console.error);
 ```
 
 </branch>
