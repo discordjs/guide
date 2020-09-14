@@ -57,7 +57,8 @@ You can create webhooks directly through the discord client, go to Server Settin
 
 ![Integrations tab](~@/images/creating-webhooks-1.png)
 
-If you already have created a webhook, it will look this this, you will need to click the `View Webhooks` button.
+If you already have created a webhook the webhooks tab will look this, you will need to click the `View Webhooks` button.
+
 ![Integrations tab](~@/images/creating-webhooks-2.png)
 
 Once you are there, click on the `Create Webhook` / `New Webhook` button. This will create a webhook, from here you can edit the channel, the name, and the avatar. Copy the link, the first part is the id, and the second is the token.
