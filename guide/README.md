@@ -23,5 +23,9 @@ If you don't know JS but would like to learn about it, here are a few links to h
 * [Nodeschool, for both JavaScript and Node.js lessons](https://nodeschool.io/)
 * [MDN's JavaScript guide and full documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * [Google, your best friend](https://google.com)
+* [Grasshopper, a JavaScript learning app by Google](https://grasshopper.app)
+* [w3schools' free tutorials for both server-side and client-side JavaScript](https://w3schools.com)
+* [Learn-js.org's interactive tutorials](https://learn-js.org)
+* [freeCodeCamp where you can learn programming for free (with no ads!)](https://https://www.freecodecamp.org/)
 
 Take your pick, learn some JS, and once you feel like you're confident enough to make a bot, come back and get started!
