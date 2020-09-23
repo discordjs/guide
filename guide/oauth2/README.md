@@ -161,7 +161,7 @@ if (fragment.has('access_token')) {
 ```
 
 ::: tip
-Don't forgo security for a tiny bit of convenience!
+Don't forget security for a tiny bit of convenience!
 :::
 
 ### OAuth2 flows
