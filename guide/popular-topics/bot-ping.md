@@ -30,4 +30,15 @@ It's pretty simple. First, you're fetching your bot (client), and then its **Web
 
 Additionally, **MS** stands for **milliseconds**, as that's what ping is measured in.
 
+And here's the result!
+<div is="discord-messages">
+	<discord-message author="User" avatar="djs">
+		!ping
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		My ping is 100 MS!
+	</discord-message>
+</div>
+The number will be what ever your bot's ping is!
+
 **It's as simple as that!**
