@@ -195,7 +195,7 @@ Some image-related properties like `user.avatarURL` are now a method in v12, so 
 + guild.splashURL();
 ```
 
-## Dynamic File type
+### Dynamic File type
 
 Version 12 now allows you to dynamically set the file type for images. If the `dynamic` option is provided you will receive a `.gif` URL if the image is animated, otherwise it will fall back to the specified `format` or its default `.webp` if none is provided.
 
