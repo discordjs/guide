@@ -389,7 +389,6 @@ If you want to build the new embed data on the template of a previously sent emb
 ## Notes
 
 - To display fields side-by-side, you need at least two consecutive fields set to `inline`
-- By default, up to 3 fields will display inline. If a thumbnail is set, this will change to 2
 - The timestamp will automatically adjust the timezone depending on the user's device
 - Mentions of any kind will only render correctly in field values and descriptions
 - Mentions in embeds will not trigger a notification

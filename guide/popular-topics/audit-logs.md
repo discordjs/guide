@@ -15,7 +15,7 @@ Let us start by looking quickly at the `fetchAuditLogs` method and how we want t
 
 In the following examples, a very simple case for some auditLog types will be explored. Some basic error handling is performed but these code segments are by no means fool proof and are meant to teach you how fetching audit logs work. For a rigorous system you will most likely need to expand on the examples based on your own goals.
 
-## Who Deleted a Message?
+## Who deleted a message?
 Let us dive right into it with probably the most common use of audit logs; understanding who deleted any given message in a discord server.
 
 ::: warning
@@ -76,7 +76,7 @@ client.on('messageDelete', async message => {
 
 With this we now have a very simple logger telling us who deleted a message authored by another person.
 
-## Who Kicked a User?
+## Who kicked a user?
 
 Similarly to the `messageDelete` case, we will start with a bare-bones bot looking, this time, at the `guildMemberRemove` event.
 
