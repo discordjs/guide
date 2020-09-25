@@ -1,58 +1,43 @@
-const http = require('http');
-const fs = require('fs');
-const url = require('url');
+const express = require('express');
+const app = express();
 const fetch = require('node-fetch');
 
-const port = 53134;
+app.get('/', async (request, response) => {
+	let access_token;
+	let token_type;
+	if (request.query.code) {
+	    const accessCode = request.query.code;
+	    const data = {
+	        client_id: 'client_id',
+	        client_secret: 'client_secret',
+	        grant_type: 'authorization_code',
+	        redirect_uri: 'htQtp://localhost:3000/',
+	        code: accessCode,
+	        scope: 'identify',
+	    };
 
-http.createServer((req, res) => {
-	let responseCode = 404;
-	let content = '404 Error';
-
-	const urlObj = url.parse(req.url, true);
-
-	if (urlObj.query.code) {
-		const accessCode = urlObj.query.code;
-		const data = {
-			client_id: 'your client id',
-			client_secret: 'your client secret',
-			grant_type: 'authorization_code',
-			redirect_uri: 'your redirect uri',
-			code: accessCode,
-			scope: 'the scopes',
-		};
-
-		fetch('https://discordapp.com/api/oauth2/token', {
-			method: 'POST',
+	    const res = await fetch('https://discordapp.com/api/oauth2/token', {
+	        method: 'POST',
 			body: new URLSearchParams(data),
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 			},
-		})
-			.then(discordRes => discordRes.json())
-			.then(info => {
-				console.log(info);
-				return info;
-			})
-			.then(info => fetch('https://discordapp.com/api/users/@me', {
-				headers: {
-					authorization: `${info.token_type} ${info.access_token}`,
-				},
-			}))
-			.then(userRes => userRes.json())
-			.then(console.log);
+		});
+		const info = await res.json();
+		token_type = info.token_type;
+		access_token = info.access_token;
+		const post = await fetch('https://discordapp.com/api/users/@me', {
+			headers: {
+				authorization: `${token_type} ${access_token}`,
+			},
+		});
+		const user = await post.json();
+		console.log(user);
 	}
 
-	if (urlObj.pathname === '/') {
-		responseCode = 200;
-		content = fs.readFileSync('./index.html');
-	}
+	if (token_type && access_token && request.query.state) {
+		response.status(200).redirect(`/?code=${request.query.code}&state=${request.query.state}&access_token=${access_token}&token_type=${token_type}`);
+	} else { response.sendFile('index.html', { root: '.' }); }
+});
 
-	res.writeHead(responseCode, {
-		'content-type': 'text/html;charset=utf-8',
-	});
-
-	res.write(content);
-	res.end();
-})
-	.listen(port);
+app.listen(3000);

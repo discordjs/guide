@@ -20,18 +20,17 @@
 			return randStr;
 		}
 
-		window.onload = () => {
-			const fragment = new URLSearchParams(window.location.hash.slice(1));
-
-			if (fragment.has("access_token")) {
-				const urlState = fragment.get("state");
+		window.onload = function () {
+            const fragment = parseQuery(window.location.href);
+			if (fragment.access_token) {
+				const urlState = fragment.state;
 				const stateParameter = localStorage.getItem('stateParameter');
 				if (stateParameter !== atob(decodeURIComponent(urlState))) {
 					return console.log('You may have been clickjacked!');
 				}
 
-				const accessToken = fragment.get("access_token");
-				const tokenType = fragment.get("token_type");
+				const accessToken = fragment.access_token;
+				const tokenType = fragment.token_type;
 
 				fetch('https://discordapp.com/api/users/@me', {
 					headers: {
@@ -41,20 +40,28 @@
 					.then(res => res.json())
 					.then(response => {
 						console.log(response);
-						const { username, discriminator } = response;
-						document.getElementById('info').innerText += ` ${username}#${discriminator}`;
+                        const { username, discriminator } = response;
+                        console.log(username, discriminator);
+						document.getElementById('info').textContent += ` ${username}#${discriminator}`;
 					})
 					.catch(console.error);
-
-			}
-			else {
+			} else {
 				const randStr = generateRandomString();
 				localStorage.setItem('stateParameter', randStr);
 
 				document.getElementById('login').href += `&state=${encodeURIComponent(btoa(randStr))}`;
 				document.getElementById('login').style.display = 'block';
 			}
-		}
+        }
+        function parseQuery(queryString) {
+            var query = {};
+            var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
+            for (var i = 0; i < pairs.length; i++) {
+                var pair = pairs[i].split('=');
+                query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+            }
+            return query;
+        }
 	</script>
 </body>
 </html>
