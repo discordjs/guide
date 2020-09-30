@@ -118,6 +118,10 @@ The response will only be parsed if the server's `Content-Type` header includes 
 
 ### Urban Dictionary
 
+::: warning
+The Urban Dictionary API may return NSFW results, in practice you should limit this command to NSFW channels.
+:::
+
 Urban Dictionary's API is available at https://api.urbandictionary.com/v0/define, accepts a `term` parameter, and also returns a JSON response.
 
 First, you're going to need to fetch data from the API. To do this, you'd do:
