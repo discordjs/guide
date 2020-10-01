@@ -1,65 +1,60 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>My First OAuth2 App</title>
+	<title>My First OAuth2 App</title>
 </head>
-
 <body>
-    <div id="info">
-        Hoi!
-    </div>
-    <a id="login" style="display: none;" href="your oauth2 url here">Identify Yourself</a>
-    <script>
-        function generateRandomString() {
-            const rand = Math.floor(Math.random() * 10);
-            let randStr = '';
+	<div id="info">
+		Hoi!
+	</div>
+	<a id="login" style="display: none;" href="your oauth2 url here">Identify Yourself</a>
+	<script>
+		function generateRandomString() {
+			const rand = Math.floor(Math.random() * 10);
+			let randStr = '';
 
-            for (let i = 0; i < 20 + rand; i++) {
-                randStr += String.fromCharCode(33 + Math.floor(Math.random() * 94));
-            }
+			for (let i = 0; i < 20 + rand; i++) {
+				randStr += String.fromCharCode(33 + Math.floor(Math.random() * 94));
+			}
 
-            return randStr;
-        }
+			return randStr;
+		}
 
-        window.onload = () => {
-            const fragment = new URLSearchParams(window.location.hash.slice(1));
+		window.onload = () => {
+			const fragment = new URLSearchParams(window.location.hash.slice(1));
 
-            if (fragment.has("access_token")) {
-                const urlState = fragment.get("state");
-                const stateParameter = localStorage.getItem('stateParameter');
-                if (stateParameter !== atob(decodeURIComponent(urlState))) {
-                    return console.log('You may have been clickjacked!');
-                }
+			if (fragment.has("access_token")) {
+				const urlState = fragment.get("state");
+				const stateParameter = localStorage.getItem('stateParameter');
+				if (stateParameter !== atob(decodeURIComponent(urlState))) {
+					return console.log('You may have been clickjacked!');
+				}
 
-                const accessToken = fragment.get("access_token");
-                const tokenType = fragment.get("token_type");
+				const accessToken = fragment.get("access_token");
+				const tokenType = fragment.get("token_type");
 
-                fetch('https://discord.com/api/users/@me', {
-                        headers: {
-                            authorization: `${tokenType} ${accessToken}`
-                        }
-                    })
-                    .then(res => res.json())
-                    .then(response => {
-                        console.log(response);
-                        const {
-                            username,
-                            discriminator
-                        } = response;
-                        document.getElementById('info').innerText += ` ${username}#${discriminator}`;
-                    })
-                    .catch(console.error);
+				fetch('https://discord.com/api/users/@me', {
+					headers: {
+						authorization: `${tokenType} ${accessToken}`
+					}
+				})
+					.then(res => res.json())
+					.then(response => {
+						console.log(response);
+						const { username, discriminator } = response;
+						document.getElementById('info').innerText += ` ${username}#${discriminator}`;
+					})
+					.catch(console.error);
 
-            } else {
-                const randStr = generateRandomString();
-                localStorage.setItem('stateParameter', randStr);
+			}
+			else {
+				const randStr = generateRandomString();
+				localStorage.setItem('stateParameter', randStr);
 
-                document.getElementById('login').href += `&state=${encodeURIComponent(btoa(randStr))}`;
-                document.getElementById('login').style.display = 'block';
-            }
-        }
-    </script>
+				document.getElementById('login').href += `&state=${encodeURIComponent(btoa(randStr))}`;
+				document.getElementById('login').style.display = 'block';
+			}
+		}
+	</script>
 </body>
-
 </html>
