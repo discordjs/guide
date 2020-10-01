@@ -324,9 +324,9 @@ If you want to know how to work with the returned Permissions objects keep readi
 The <branch version="11.x" inline>[Permissions](https://discord.js.org/#/docs/main/v11/class/Permissions)</branch><branch version="12.x" inline>[Permissions](https://discord.js.org/#/docs/main/stable/class/Permissions)</branch> object is a discord.js class containing a permissions bit field and a bunch of utility methods to manipulate it easily.
 Remember that using these methods will not manipulate permissions, but create a new instance representing the changed bit field.
 
-### Displaying permissions as an array
+### Displaying permission flags
 
-Discord.js provides a `toArray()` method, which can be used to convert a `Permissions` object into an array containing permission flags. This is useful if you want to display/list them and it enables you to use other array methods. For example:
+Discord.js provides a `toArray()` method, which can be used to convert a `Permissions` object into an array containing permission flags. This is useful if you want to display/list them and it enables you to use other array manipulation methods. For example:
 
 ```js
 const memberPermissions = member.permissions.toArray();
@@ -334,22 +334,22 @@ const rolePermissions = role.permissions.toArray();
 //	output: ['SEND_MESSAGES', 'ADD_REACTIONS', 'CHANGE_NICKNAME', ...]
 ```
 
-The meaning of the return value of `toArray()` can vary, depending on where the `Permissions` object is coming from. In the examples above, we grabbed a `GuildMember`'s and a `Role`'s [base](https://discordjs.guide/popular-topics/permissions.html#base-permissions) permissions, which is basically what a member/role can do, by default. However, you can also view things such as denied/allowed channel overwrites, and the meaning of the resulting array is different.
+::: tip 
+The return value of `toArray()` always represents the permission flags present in the Permissions instance that the method was called on. This means that if you call the method on, for example: `PermissionOverwrites#deny`, you will receive a pretty array of all denied permissions in that overwrite.
+:::
 
-
-For example,
+Additionally, you can serialize the underlying bit field of the Permissions object by calling `.serialize()`. This returns an object which maps permission names to a boolean value, indicating whether or not the relevant "bit" is available in the Permissions instance.
 
 ```js
-const overwrites = channel.permissionOverwrites;
-/*	Permission overwites are presented in the form of a collection, mapped by the user/role id, and the corresponding permissions object.
-Therefore, we must get/find the specific overwrite we want to access, and then specify if we want to view allowed/denied before we can use an methods on the Permissions object. */
-
-const deniedPermissions = overwrites.get('ROLE_OR_USER_ID').deny;
-const permissionArray = deniedPermissions.toArray();
-
-// Will return a list of the denied permissions for a specific role/member, such as ['SEND_MESSAGES', 'ADD_REACTIONS']...etc...
+const memberPermissions = member.permissions.serialize()
+const rolePermissions = role.permissions.serialize()
+// output: {
+SEND_MESSAGES: true,
+ADD_REACTIONS: true,
+BAN_MEMBERS: false,
+...
+}
 ```
-
 
 
 ### Converting permission numbers
