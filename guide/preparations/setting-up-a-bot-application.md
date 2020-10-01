@@ -6,8 +6,8 @@ Now that you've installed Node, discord.js, and hopefully a linter, you're almos
 
 It's incredibly easy to create one. The steps you need to take are as follows:
 
-1. Open up [the Discord website](https://discordapp.com/) and [login](https://discordapp.com/login).
-2. Hover over the "Developers" drop-down menu and click on the [Developer Portal](https://discordapp.com/developers/applications/) link.
+1. Open up [the Discord website](https://discord.com/) and [login](https://discord.com/login).
+2. Hover over the "Developers" drop-down menu and click on the [Developer Portal](https://discord.com/developers/applications/) link.
 3. Click on the "New Application" button.
 4. Enter a name and optionally select a team (if you want the bot to belong to one). Then confirm the pop-up window by clicking the "Create" button.
 

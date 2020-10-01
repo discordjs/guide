@@ -1,39 +1,39 @@
 {
-  "name": "guide",
-  "description": "The official guide for discord.js, created and maintained by core members of its community.",
-  "version": "1.0.0",
-  "scripts": {
-    "lint": "eslint . --ext js,md,vue",
-    "serve": "vuepress dev guide",
-    "build": "NODE_ENV=production vuepress build guide"
-  },
-  "repository": "https://github.com/discordjs/guide.git",
-  "keywords": [
-    "discord",
-    "bot",
-    "guide",
-    "tutorial",
-    "javascript",
-    "node"
-  ],
-  "author": "Sanctuary <sanc.pw@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/discordjs/guide/issues"
-  },
-  "homepage": "https://discordjs.guide",
-  "devDependencies": {
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.6.0",
-    "eslint-config-sora": "^2.0.0",
-    "eslint-plugin-markdown": "^1.0.0",
-    "eslint-plugin-vue": "^5.2.2",
-    "vuepress": "^1.2.0"
-  },
-  "dependencies": {
-    "@vuepress/plugin-google-analytics": "^1.2.0",
-    "semver": "^6.0.0",
-    "vue-discord-message": "^3.2.5",
-    "vuepress-theme-yuu": "^2.2.0"
-  }
+    "name": "guide",
+    "description": "The official guide for discord.js, created and maintained by core members of its community.",
+    "version": "1.0.0",
+    "scripts": {
+        "lint": "eslint . --ext js,md,vue",
+        "serve": "vuepress dev guide",
+        "build": "NODE_ENV=production vuepress build guide"
+    },
+    "repository": "https://github.com/discordjs/guide.git",
+    "keywords": [
+        "discord",
+        "bot",
+        "guide",
+        "tutorial",
+        "javascript",
+        "node"
+    ],
+    "author": "Sanctuary <sanc.pw@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/discordjs/guide/issues"
+    },
+    "homepage": "https://discordjs.guide",
+    "devDependencies": {
+        "babel-eslint": "^10.0.1",
+        "eslint": "^5.6.0",
+        "eslint-config-sora": "^2.0.0",
+        "eslint-plugin-markdown": "^1.0.0",
+        "eslint-plugin-vue": "^5.2.2",
+        "vuepress": "^1.2.0"
+    },
+    "dependencies": {
+        "@vuepress/plugin-google-analytics": "^1.2.0",
+        "semver": "^6.0.0",
+        "vue-discord-message": "^3.2.5",
+        "vuepress-theme-yuu": "^2.2.0"
+    }
 }

@@ -408,4 +408,4 @@ There are a few limits to be aware of while planning your embeds due to limitati
 - A bot can have 1 embed per message
 - A webhook can have 10 embeds per message
 
-Source: [Discord API documentation](https://discordapp.com/developers/docs/resources/channel#embed-limits)
+Source: [Discord API documentation](https://discord.com/developers/docs/resources/channel#embed-limits)

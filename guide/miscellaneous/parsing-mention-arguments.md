@@ -195,7 +195,7 @@ And that is it! Simple, isn't it? Start up your bot and see if it works.
 		!avatar <mention>User</mention>
 	</discord-message>
 	<discord-message author="User" avatar="blue" :bot="true">
-		User's avatar: https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png
+		User's avatar: https://cdn.discord.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png
 	</discord-message>
 </div>
 

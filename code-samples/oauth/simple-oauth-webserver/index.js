@@ -22,7 +22,7 @@ http.createServer((req, res) => {
 			scope: 'the scopes',
 		};
 
-		fetch('https://discordapp.com/api/oauth2/token', {
+		fetch('https://discord.com/api/oauth2/token', {
 			method: 'POST',
 			body: new URLSearchParams(data),
 			headers: {
@@ -34,7 +34,7 @@ http.createServer((req, res) => {
 				console.log(info);
 				return info;
 			})
-			.then(info => fetch('https://discordapp.com/api/users/@me', {
+			.then(info => fetch('https://discord.com/api/users/@me', {
 				headers: {
 					authorization: `${info.token_type} ${info.access_token}`,
 				},
