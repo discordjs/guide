@@ -11,7 +11,7 @@ app.get('/', async (request, response) => {
 	        client_id: 'client_id',
 	        client_secret: 'client_secret',
 	        grant_type: 'authorization_code',
-	        redirect_uri: 'htQtp://localhost:3000/',
+	        redirect_uri: 'http://localhost:3000/',
 	        code: accessCode,
 	        scope: 'identify',
 	    };
