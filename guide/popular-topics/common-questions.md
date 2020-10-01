@@ -22,14 +22,47 @@ const user = <message>.mentions.users.first();
 ```
 
 </branch>
+
 <branch version="12.x">
 
 <!-- eslint-skip -->
 
 ```js
-const user = <message>.mentions.users.first();
+const user = args[0];
 <guild>.members.ban(user);
 ```
+
+</branch>
+
+### How do I unban a user?
+
+<branch version="11.x">
+
+<!-- eslint-skip -->
+
+```js
+const id = args[0];
+<guild>.unban(id);
+```
+
+::: warning
+Because we cannot ping a user who isn't in the server, we have to pass in the user id. To do this, we use arguments, represented by `args` (see "Commands with user input").
+:::
+
+</branch>
+
+<branch version="12.x">
+
+<!-- eslint-skip -->
+
+```js
+const id = args[0];
+<guild>.members.unban(id);
+```
+
+::: warning
+Because we cannot ping a user who isn't in the server, we have to pass in the user id. To do this we use arguments, which is represented by `args` (see "Commands with user input").
+:::
 
 </branch>
 
