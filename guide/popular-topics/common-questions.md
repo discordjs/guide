@@ -44,10 +44,6 @@ const id = args[0];
 <guild>.unban(id);
 ```
 
-::: warning
-Because we cannot ping a user who isn't in the server, we have to pass in the user id. To do this, we use arguments, represented by `args` (see "Commands with user input").
-:::
-
 </branch>
 <branch version="12.x">
 
@@ -58,11 +54,11 @@ const id = args[0];
 <guild>.members.unban(id);
 ```
 
-::: warning
-Because we cannot ping a user who isn't in the server, we have to pass in the user id. To do this we use arguments, which is represented by `args` (see "Commands with user input").
-:::
-
 </branch>
+
+::: warning
+Because we cannot ping a user who isn't in the server, we have to pass in the user id. To do this, we use arguments, represented by `args` (see [Commands with user input](/creating-your-bot/commands-with-user-input/)).
+:::
 
 ### How do I kick a user?
 
