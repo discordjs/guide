@@ -377,3 +377,52 @@ Assuming the process is to be done for the guild the message is sent in.
 ```
 
 </branch>
+
+### How do I check the ping of my bot?
+
+There are several ways to get the **"ping"** of the bot. Two of the ways can be by the **WebSocket ping** or by the **message latency**.
+
+<branch version="11.x">
+
+<!-- eslint-skip -->
+
+The first example gets the websocket ping. The `ping` property can be found on the Client object.
+
+```js
+// The Client is where you can get the ping property.
+message.channel.send(`My heartbeat ping is ${client.ping}ms!`);
+```
+
+The second example is message latency. The latency is determined by subtracting the triggering message timestamp from the bots message timestamp.
+
+```js
+// This can also be converted to using async/await if wanted.
+message.channel.send('Pinging...').then(sent => {
+	sent.edit(`Ponged! Latency is ${sentMessage.createdTimestamp - message.createdTimestamp}ms!`);
+});
+```
+
+</branch>
+<branch version="12.x">
+
+<!-- eslint-skip -->
+
+The first example gets the websocket ping. The `ping` property can be found on the WebSocketManager, accessible by `client.ws`.
+
+```js
+// The ping is on the WebSocketManager of the client, and where you can get the ping property.
+message.channel.send(`My heartbeat ping is ${client.ws.ping}ms!`);
+```
+
+The second example is message latency. The latency is determined by subtracting the triggering message timestamp from the bots message timestamp.
+
+```js
+// This can also be converted to using async/await if wanted.
+message.channel.send('Pinging...').then(sent => {
+	sent.edit(`Ponged! Latency is ${sentMessage.createdTimestamp - message.createdTimestamp}ms!`);
+});
+```
+</branch>
+
+::: tip
+The example above determines the time it takes for the client to **receive the trigger** and for your bot to **acknowledge the command**. The message sent from the bot is then used to calculate the amount of **time elapsed between** the trigger message and the bots message in **milliseconds**. This is also known as the **round-trip latency**.
