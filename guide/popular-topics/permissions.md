@@ -343,12 +343,13 @@ Additionally, you can serialize the underlying bit field of the Permissions obje
 ```js
 const memberPermissions = member.permissions.serialize()
 const rolePermissions = role.permissions.serialize()
-// output: {
+/* output: {
 SEND_MESSAGES: true,
 ADD_REACTIONS: true,
 BAN_MEMBERS: false,
 ...
 }
+*/
 ```
 
 
