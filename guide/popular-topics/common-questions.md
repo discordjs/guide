@@ -22,13 +22,12 @@ const user = <message>.mentions.users.first();
 ```
 
 </branch>
-
 <branch version="12.x">
 
 <!-- eslint-skip -->
 
 ```js
-const user = args[0];
+const user = <message>.mentions.users.first();
 <guild>.members.ban(user);
 ```
 
@@ -50,7 +49,6 @@ Because we cannot ping a user who isn't in the server, we have to pass in the us
 :::
 
 </branch>
-
 <branch version="12.x">
 
 <!-- eslint-skip -->
