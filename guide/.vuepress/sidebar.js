@@ -87,6 +87,7 @@ module.exports = {
 				'/popular-topics/miscellaneous-examples',
 				'/popular-topics/webhooks',
 				'/popular-topics/audit-logs',
+				'/popular-topics/bot-ping',
 			],
 		},
 		{
