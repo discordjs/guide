@@ -341,8 +341,8 @@ The return value of `toArray()` always represents the permission flags present i
 Additionally, you can serialize the underlying bit field of the Permissions object by calling `.serialize()`. This returns an object which maps permission names to a boolean value, indicating whether or not the relevant "bit" is available in the Permissions instance.
 
 ```js
-const memberPermissions = member.permissions.serialize()
-const rolePermissions = role.permissions.serialize()
+const memberPermissions = member.permissions.serialize();
+const rolePermissions = role.permissions.serialize();
 /* output: {
 SEND_MESSAGES: true,
 ADD_REACTIONS: true,
