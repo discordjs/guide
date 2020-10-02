@@ -352,7 +352,6 @@ BAN_MEMBERS: false,
 */
 ```
 
-
 ### Converting permission numbers
 
 Some methods and properties in Discord.js return permission decimals rather than a Permissions object, making it hard to manipulate or read them if you don't want to use bitwise operations.
