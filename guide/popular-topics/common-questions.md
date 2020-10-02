@@ -56,7 +56,7 @@ const id = args[0];
 
 </branch>
 
-::: warning
+::: tip
 Because we cannot ping a user who isn't in the server, we have to pass in the user id. To do this, we use arguments, represented by `args` (see [Commands with user input](/creating-your-bot/commands-with-user-input/)).
 :::
 
