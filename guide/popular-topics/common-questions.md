@@ -380,13 +380,13 @@ Assuming the process is to be done for the guild the message is sent in.
 
 ### How do I check the ping of my bot?
 
-There are several ways to get the **"ping"** of the bot. Two of the ways can be by the **WebSocket heartbeat** or by the **API latency**.
+There are two common ways to get the "ping" of the bot, **WebSocket heartbeat** and **API Latency**, respectively. **WebSocket heartbeat** is the amount of time elapsed between the **Discord API** sending a **PING** to your bot's WebSocket connection, and the **Discord API** receiving a **PONG** acknowledgement in return. The **API Latency** is the amount of time it takes for the **Discord API**'s request to reach your bot, your bot processing it, and your bot sending a response back.
+
+The first example shows how to get the **WebSocket heartbeat**. The `ping` property can be found on the <branch version="11.x" inline>Client object</branch><branch version="12.x" inline>WebSocketManager, found at `<client>.ws`</branch>.
 
 <branch version="11.x">
 
 <!-- eslint-skip -->
-
-The first example gets the websocket heartbeat. The `ping` property can be found on the Client object.
 
 ```js
 <message>.channel.send(`My WebSocket heartbeat is ${<client>.ping}ms!`);
@@ -397,16 +397,19 @@ The first example gets the websocket heartbeat. The `ping` property can be found
 
 <!-- eslint-skip -->
 
-The first example gets the websocket heartbeat. The `ping` property can be found on the WebSocketManager, accessible by `client.ws`.
-
 ```js
 <message>.channel.send(`My heartbeat ping is ${<client>.ws.ping}ms!`);
 ```
 
+::: tip
+A certain shards heartbeat can be found on the WebSocketShard instance, accessible at `<client>.ws.shards` -> `.ping`.
+:::
+
 </branch>
 
+The second example covers **API latency**. Retrieving the latency is done by sending a message, then subtracting the trigger messages timestamp from the message sent by the bot's timestamp.
 
-The second example is message latency. This calculates the time it takes for the client to **receive the request** and for your bot to **acknowledge the command**. The message sent by the bot is then used to measure **the elapsed time** between the trigger and the bots response in **milliseconds**. This is known as the **round-trip latency**.
+<!-- eslint-skip -->
 
 ```js
 <message>.channel.send('Pinging...').then(sent => {
