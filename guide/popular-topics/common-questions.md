@@ -33,6 +33,33 @@ const user = <message>.mentions.users.first();
 
 </branch>
 
+### How do I unban a user?
+
+<branch version="11.x">
+
+<!-- eslint-skip -->
+
+```js
+const id = args[0];
+<guild>.unban(id);
+```
+
+</branch>
+<branch version="12.x">
+
+<!-- eslint-skip -->
+
+```js
+const id = args[0];
+<guild>.members.unban(id);
+```
+
+</branch>
+
+::: tip
+Because you cannot ping a user who isn't in the server, you have to pass in the user id. To do this, we use arguments, represented by `args` (see [Commands with user input](/creating-your-bot/commands-with-user-input/) for more details on this topic).
+:::
+
 ### How do I kick a user?
 
 <!-- eslint-skip -->
