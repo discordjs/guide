@@ -160,6 +160,8 @@ But let us get a quick overview of what it can do:
 
 ```js
 const client = new Discord.Client();
+const winston = require('winston');
+
 const logger = winston.createLogger({
 	transports: [
 		new winston.transports.Console(),
