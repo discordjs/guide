@@ -1,7 +1,9 @@
 # Gateway Intents
 
 :::warning
-For now sending intents is optional, but it might become required in a future version of discords API. Privileged intents will require verification for bots in 100+ servers on October 7th 2020.
+As of October 7th 2020, the privileged intents `GUILD_PRESENCES` and `GUILD_MEMBERS` must be enabled for your bot application in the Developer Portal if you wish to continue receiving them. For bots in 100+ servers, enabling these intents will require verification. 
+
+v12 of the library uses Discord API v6, which does not require intents to be specified when connecting to Discord. Specifying intents will be required when the library moves to API v8 in the next major release.
 :::
 
 Gateway Intents were introduced to the library in v12 and allow you to pick which events your bot will receive. Intents are groups of pre-defined events that the discord.js client will conditionally subscribe to. For example, omitting the `DIRECT_MESSAGE_TYPING` intent would prevent the discord.js client from receiving any typing events from direct messages. Intents also enable you to remove unwanted data from polluting your bots cache, however we can not yet explicitly list which unwanted side effects omitting a certain event may have on the internal workings of the library.
