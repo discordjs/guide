@@ -76,7 +76,7 @@ The `shardArgs` property is what you would normally pass to your bot without sha
 node bot.js --ansi --color
 ```
 
-You can access the later as usual via `process.argv`, which contains an array of executable, your main file, and the command-line arguments used to execute the script.
+You can access them later as usual via `process.argv`, which contains an array of executable, your main file, and the command-line arguments used to execute the script.
 
 ## Eval arguments
 
