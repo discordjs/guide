@@ -1,7 +1,7 @@
 # Gateway Intents
 
 :::warning
-For now sending intents is optional, but it will become mandatory as of October 7, 2020!
+For now sending intents is optional, but it might become required in a future version of discords API. Privileged intents will require verification for bots in 100+ servers on October 7th 2020.
 :::
 
 Gateway Intents were introduced to the library in v12 and allow you to pick which events your bot will receive. Intents are groups of pre-defined events that the discord.js client will conditionally subscribe to. For example, omitting the `DIRECT_MESSAGE_TYPING` intent would prevent the discord.js client from receiving any typing events from direct messages. Intents also enable you to remove unwanted data from polluting your bots cache, however we can not yet explicitly list which unwanted side effects omitting a certain event may have on the internal workings of the library.
@@ -18,7 +18,7 @@ Intents are not available in version 11, please update to version 12 of the libr
 
 You can choose which intents you'd like to receive as client options when instantiating your bot client.
 
-A list of all available gateway intents the library supports can be found at [the discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Intents?scrollTo=s-FLAGS). The events included in the respective intents on the [discord API documentation](https://discordapp.com/developers/docs/topics/gateway#list-of-intents).
+A list of all available gateway intents the library supports can be found at [the discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Intents?scrollTo=s-FLAGS). The events included in the respective intents on the [discord API documentation](https://discord.com/developers/docs/topics/gateway#list-of-intents).
 
 :::tip
 `GUILD_PRESENCES` is required in order to receive the initial GuildMember data. If you do not supply it your member caches will be empty and not updates, even if you do provide `GUILD_MEMBERS`! Before you disable intents think about what your bot does and how not receiving the listed events might prevent it from doing this. Version 12 of discord.js does not yet fully support any combination of intents without loosing seemingly unrelated data.
@@ -67,11 +67,11 @@ If you want to view the built flags you can utilize the `.toArray()`, `.serializ
 Discord defines some intents as "privileged" due to the sensitive nature of the data sent through the affected events.
 At the time of writing this article privileged intents are `GUILD_PRESENCES` and `GUILD_MEMBERS`
 
-You can enable privileged gateway intents in the [Discord Developer Portal](https://discordapp.com/developers/applications) under "Privileged Gateway Intents" in the "Bot" section.
+You can enable privileged gateway intents in the [Discord Developer Portal](https://discord.com/developers/applications) under "Privileged Gateway Intents" in the "Bot" section.
 
-Note that access to these special intents needs to be requested during the [verification process](https://support.discordapp.com/hc/en-us/articles/360040720412) discord requires for bots in 100 or more guilds.
+Note that access to these special intents needs to be requested during the [verification process](https://support.discord.com/hc/en-us/articles/360040720412) discord requires for bots in 100 or more guilds.
 
-Should you receive an error prefixed with `[DISALLOWED_INTENTS]` please review your settings for all privileged intents you use. The official documentation for this topic can be found on the [discord API documentation](https://discordapp.com/developers/docs/topics/gateway#privileged-intents).
+Should you receive an error prefixed with `[DISALLOWED_INTENTS]` please review your settings for all privileged intents you use. The official documentation for this topic can be found on the [discord API documentation](https://discord.com/developers/docs/topics/gateway#privileged-intents).
 
 ## More on bit fields
 

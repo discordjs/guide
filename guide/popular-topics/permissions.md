@@ -47,7 +47,7 @@ To include permission checks like `ADMINISTRATOR` or `MANAGE_GUILD`, keep readin
 * Final Permissions: Permissions for a member or role, after all overwrites are applied
 
 ::: tip
-You can provide permission decimals wherever we use flag literals in this guide. If you are interested in a handy permission calculator you can look at the "Bot" section in the [Discord developer portal](https://discordapp.com/developers/applications).
+You can provide permission decimals wherever we use flag literals in this guide. If you are interested in a handy permission calculator you can look at the "Bot" section in the [Discord developer portal](https://discord.com/developers/applications).
 :::
 
 ## Base permissions
@@ -323,6 +323,34 @@ If you want to know how to work with the returned Permissions objects keep readi
 
 The <branch version="11.x" inline>[Permissions](https://discord.js.org/#/docs/main/v11/class/Permissions)</branch><branch version="12.x" inline>[Permissions](https://discord.js.org/#/docs/main/stable/class/Permissions)</branch> object is a discord.js class containing a permissions bit field and a bunch of utility methods to manipulate it easily.
 Remember that using these methods will not manipulate permissions, but create a new instance representing the changed bit field.
+
+### Displaying permission flags
+
+Discord.js provides a `toArray()` method, which can be used to convert a `Permissions` object into an array containing permission flags. This is useful if you want to display/list them and it enables you to use other array manipulation methods. For example:
+
+```js
+const memberPermissions = member.permissions.toArray();
+const rolePermissions = role.permissions.toArray();
+//	output: ['SEND_MESSAGES', 'ADD_REACTIONS', 'CHANGE_NICKNAME', ...]
+```
+
+::: tip 
+The return value of `toArray()` always represents the permission flags present in the Permissions instance that the method was called on. This means that if you call the method on, for example: `PermissionOverwrites#deny`, you will receive a pretty array of all denied permissions in that overwrite.
+:::
+
+Additionally, you can serialize the underlying bit field of the Permissions object by calling `.serialize()`. This returns an object which maps permission names to a boolean value, indicating whether or not the relevant "bit" is available in the Permissions instance.
+
+```js
+const memberPermissions = member.permissions.serialize();
+const rolePermissions = role.permissions.serialize();
+/* output: {
+SEND_MESSAGES: true,
+ADD_REACTIONS: true,
+BAN_MEMBERS: false,
+...
+}
+*/
+```
 
 ### Converting permission numbers
 

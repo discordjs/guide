@@ -52,7 +52,7 @@ You can start your server with `node index.js`. Once you start it, try connectin
 
 ### Getting an OAuth2 url
 
-Now that you have your web server up and running, it's time to get some information from Discord. Head over to [your Discord applications](https://discordapp.com/developers/applications/) and click "Create an application", where you'll be greeted with the following page:
+Now that you have your web server up and running, it's time to get some information from Discord. Head over to [your Discord applications](https://discord.com/developers/applications/) and click "Create an application", where you'll be greeted with the following page:
 
 ![Create an application page](~@/images/1ch98sm.png)
 
@@ -64,7 +64,7 @@ Once you've added your redirect url, you will want to generate an OAuth2 url. Lo
 
 ![img](~@/images/18e2dwi.png)
 
-The `identify` scope will allow your application to get basic user information from Discord. A list of all scopes can be found [here](https://discordapp.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes).
+The `identify` scope will allow your application to get basic user information from Discord. A list of all scopes can be found [here](https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes).
 
 ### Putting it together
 
@@ -270,7 +270,7 @@ To maintain security, store the access token server side but associate it with a
 ## Additional reading
 
 [RFC 6759](https://tools.ietf.org/html/rfc6749)  
-[Discord Docs for OAuth2](https://discordapp.com/developers/docs/topics/oauth2)
+[Discord Docs for OAuth2](https://discord.com/developers/docs/topics/oauth2)
 
 ## Resulting code
 

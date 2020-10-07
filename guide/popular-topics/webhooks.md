@@ -7,7 +7,7 @@ Webhooks are a way of sending messages to a text channel without having to log i
 Webhooks are a utility used to send messages to text channels without needing a discord application. Webhooks are useful for allowing something to send messages without requiring a discord application. However, you should note that you cannot directly edit or delete messages you sent through the webhook. Discord.js introduces two structures to make use of this functionality, `Webhook` and `WebhookClient`. `WebhookClient` is an extended version of a `Webhook` which allows you to send messages through it without needing a bot client.
 
 ::: tip
-If you would like to read about how to use webhooks through the API without discord.js, you can read about them [here](https://discordapp.com/developers/docs/resources/webhook).
+If you would like to read about how to use webhooks through the API without discord.js, you can read about them [here](https://discord.com/developers/docs/resources/webhook).
 :::
 
 ## Detecting webhook messages
@@ -39,7 +39,7 @@ Webhooks belonging to a channel can be fetched using <branch version="11.x" inli
 
 #### Using client
 
-You can fetch a specific webhook using its `id` with <branch version="11.x" inline>[`Client#fetchWebhook()`](https://discord.js.org/#/docs/main/v11/class/Client?scrollTo=fetchWebhook)</branch><branch version="12.x" inline>[`Client#fetchWebhook()`](https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=fetchWebhook)</branch>. You can obtain the webhook id by looking at its link, the number after `https://discordapp.com/api/webhooks/` is the `id`, and the part after that is the `token`.
+You can fetch a specific webhook using its `id` with <branch version="11.x" inline>[`Client#fetchWebhook()`](https://discord.js.org/#/docs/main/v11/class/Client?scrollTo=fetchWebhook)</branch><branch version="12.x" inline>[`Client#fetchWebhook()`](https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=fetchWebhook)</branch>. You can obtain the webhook id by looking at its link, the number after `https://discord.com/api/webhooks/` is the `id`, and the part after that is the `token`.
 
 #### Using the WebhookClient constructor
 

@@ -85,7 +85,7 @@ All of this information can help you track down what caused the error and how to
 ### Message
 
 The most important part of the error is the message, it tells you what actually went wrong which can help you track down where it came from. 
-You can find a full list of messages [here](https://discordapp.com/developers/docs/topics/opcodes-and-status-codes#json) in the Discord API Docs.
+You can find a full list of messages [here](https://discord.com/developers/docs/topics/opcodes-and-status-codes#json) in the Discord API Docs.
 
 ### Path
 
@@ -93,7 +93,7 @@ The path is another helpful piece of information, the path tells you where you t
 
 ### Code
 
-The code is another partial representation of the message, in this case `Invalid Form Body`. You can find a full list of codes [here](https://discordapp.com/developers/docs/topics/opcodes-and-status-codes#json-json-error-codes)
+The code is another partial representation of the message, in this case `Invalid Form Body`. You can find a full list of codes [here](https://discord.com/developers/docs/topics/opcodes-and-status-codes#json-json-error-codes)
 
 The code is also very useful if you want to only handle a specific error. Say we were trying to delete a message which may or may not be there, and we wanted to simply ignore unknown message errors. This can be done by checking the code, either manually, or using discord.js's constants.
 
