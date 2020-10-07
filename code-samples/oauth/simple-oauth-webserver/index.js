@@ -18,21 +18,21 @@ app.get('/', async (request, response) => {
 
 	    const res = await fetch('https://discord.com/api/oauth2/token', {
 	        method: 'POST',
-          body: new URLSearchParams(data),
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-       });
-      const info = await res.json();
-      token_type = info.token_type;
-      access_token = info.access_token;
-      const post = await fetch('https://discord.com/api/users/@me', {
-        headers: {
-          authorization: `${token_type} ${access_token}`,
-        },
-      });
-      const user = await post.json();
-      console.log(user);
+			body: new URLSearchParams(data),
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+			},
+		});
+		const info = await res.json();
+		token_type = info.token_type;
+		access_token = info.access_token;
+		const post = await fetch('https://discord.com/api/users/@me', {
+			headers: {
+				authorization: `${token_type} ${access_token}`,
+			},
+		});
+		const user = await post.json();
+		console.log(user);
 	}
 
 	if (token_type && access_token && request.query.state) {
