@@ -16,7 +16,7 @@ app.get('/', async (request, response) => {
 	        scope: 'identify',
 	    };
 
-	    const res = await fetch('https://discordapp.com/api/oauth2/token', {
+	    const res = await fetch('https://discord.com/api/oauth2/token', {
 	        method: 'POST',
 			body: new URLSearchParams(data),
 			headers: {
