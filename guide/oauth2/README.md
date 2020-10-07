@@ -254,7 +254,7 @@ Now try visiting your OAuth2 url and authorizing your application. Once you're r
 Now that you have an access token and a refresh token, try fetching the user's information. It's the exact same as how it was done in the html file.
 <!-- eslint-skip -->
 ```js
-const userPost = await fetch('https://discordapp.com/api/users/@me', {
+const userPost = await fetch('https://discord.com/api/users/@me', {
 	headers: {
 		authorization: `${info.token_type} ${info.access_token}`,
 	}
