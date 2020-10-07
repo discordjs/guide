@@ -26,7 +26,7 @@ app.get('/', async (request, response) => {
 		const info = await res.json();
 		token_type = info.token_type;
 		access_token = info.access_token;
-		const post = await fetch('https://discordapp.com/api/users/@me', {
+		const post = await fetch('https://discord.com/api/users/@me', {
 			headers: {
 				authorization: `${token_type} ${access_token}`,
 			},
