@@ -47,7 +47,7 @@ To include permission checks like `ADMINISTRATOR` or `MANAGE_GUILD`, keep readin
 * Final Permissions: Permissions for a member or role, after all overwrites are applied
 
 ::: tip
-You can provide permission decimals wherever we use flag literals in this guide. If you are interested in a handy permission calculator you can look at the "Bot" section in the [Discord developer portal](https://discordapp.com/developers/applications).
+You can provide permission decimals wherever we use flag literals in this guide. If you are interested in a handy permission calculator you can look at the "Bot" section in the [Discord developer portal](https://discord.com/developers/applications).
 :::
 
 ## Base permissions

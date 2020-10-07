@@ -10,7 +10,7 @@ This voice guide is written for Discord.js v12, which features an improved audio
 <branch version="12.x">
 
 ::: warning
-Discord does not officially support Discord Bots receiving audio ([see here](https://github.com/discordapp/discord-api-docs/issues/808)), so there may be some breakages. However, Discord.js aims to reasonably support this feature.
+Discord does not officially support Discord Bots receiving audio ([see here](https://github.com/discord/discord-api-docs/issues/808)), so there may be some breakages. However, Discord.js aims to reasonably support this feature.
 :::
 
 ## Basic Usage

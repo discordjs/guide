@@ -52,7 +52,7 @@ You can start your server with `node index.js`. Once you start it, try connectin
 
 ### Getting an OAuth2 url
 
-Now that you have your web server up and running, it's time to get some information from Discord. Head over to [your Discord applications](https://discordapp.com/developers/applications/) and click "Create an application", where you'll be greeted with the following page:
+Now that you have your web server up and running, it's time to get some information from Discord. Head over to [your Discord applications](https://discord.com/developers/applications/) and click "Create an application", where you'll be greeted with the following page:
 
 ![Create an application page](~@/images/1ch98sm.png)
 
@@ -64,7 +64,7 @@ Once you've added your redirect url, you will want to generate an OAuth2 url. Lo
 
 ![img](~@/images/18e2dwi.png)
 
-The `identify` scope will allow your application to get basic user information from Discord. A list of all scopes can be found [here](https://discordapp.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes).
+The `identify` scope will allow your application to get basic user information from Discord. A list of all scopes can be found [here](https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes).
 
 ### Putting it together
 
@@ -95,7 +95,7 @@ You can see that by clicking `Authorize`, you are allowing the application to ac
 				const accessToken = fragment.get("access_token");
 				const tokenType = fragment.get("token_type");
 
-				fetch('https://discordapp.com/api/users/@me', {
+				fetch('https://discord.com/api/users/@me', {
 					headers: {
 						authorization: `${tokenType} ${accessToken}`
 					}
@@ -190,7 +190,7 @@ if (urlObj.pathname === '/') {
 }
 ```
 
-Now you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten them, head over to [your applications](https://discordapp.com/developers/applications) and get them. You can use `node-fetch` to make requests to Discord; you can install it with `npm i node-fetch`.
+Now you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten them, head over to [your applications](https://discord.com/developers/applications) and get them. You can use `node-fetch` to make requests to Discord; you can install it with `npm i node-fetch`.
 
 Require `node-fetch` and make your request.
 
@@ -208,7 +208,7 @@ const data = {
 	scope: 'the scopes',
 };
 
-fetch('https://discordapp.com/api/oauth2/token', {
+fetch('https://discord.com/api/oauth2/token', {
 	method: 'POST',
 	body: new URLSearchParams(data),
 	headers: {
@@ -236,12 +236,12 @@ Now try visiting your OAuth2 url and authorizing your application. Once you're r
 Now that you have an access token and a refresh token, try fetching the user's information. It's the exact same as how it was done in the html file.
 
 ```js
-fetch('https://discordapp.com/api/oauth2/token', {
+fetch('https://discord.com/api/oauth2/token', {
 	method: 'POST',
 	body: data,
 })
 	.then(res => res.json())
-	.then(info => fetch('https://discordapp.com/api/users/@me', {
+	.then(info => fetch('https://discord.com/api/users/@me', {
 		headers: {
 			authorization: `${info.token_type} ${info.access_token}`,
 		},
@@ -256,7 +256,7 @@ To maintain security, store the access token server side but associate it with a
 ## Additional reading
 
 [RFC 6759](https://tools.ietf.org/html/rfc6749)  
-[Discord Docs for OAuth2](https://discordapp.com/developers/docs/topics/oauth2)
+[Discord Docs for OAuth2](https://discord.com/developers/docs/topics/oauth2)
 
 ## Resulting code
 
