@@ -32,7 +32,7 @@
 				const accessToken = fragment.access_token;
 				const tokenType = fragment.token_type;
 
-				fetch('https://discordapp.com/api/users/@me', {
+				fetch('https://discord.com/api/users/@me', {
 					headers: {
 						authorization: `${tokenType} ${accessToken}`
 					}
