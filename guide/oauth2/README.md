@@ -95,7 +95,7 @@ You can see that by clicking `Authorize`, you are allowing the application to ac
 				const accessToken = fragment.access_token;
 				const tokenType = fragment.token_type;
 
-				fetch('https://discordapp.com/api/users/@me', {
+				fetch('https://discord.com/api/users/@me', {
 					headers: {
 						authorization: `${tokenType} ${accessToken}`
 					}
