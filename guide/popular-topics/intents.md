@@ -23,7 +23,7 @@ You can choose which intents you'd like to receive as client options when instan
 A list of all available gateway intents the library supports can be found at [the discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Intents?scrollTo=s-FLAGS). The events included in the respective intents on the [discord API documentation](https://discordapp.com/developers/docs/topics/gateway#list-of-intents).
 
 :::tip
-`GUILD_PRESENCES` is required in order to receive the initial GuildMember data. If you do not supply it your member caches will be empty and not updates, even if you do provide `GUILD_MEMBERS`! Before you disable intents think about what your bot does and how not receiving the listed events might prevent it from doing this. Version 12 of discord.js does not yet fully support any combination of intents without loosing seemingly unrelated data.
+`GUILD_PRESENCES` is required in order to receive the initial GuildMember data when your bot connects to Discord. If you do not supply it, your member caches will start empty. `guildMemberUpdate` events will not be processed unless the `GuildMember` has been cached by other means, such as by sending a message or being mentioned in one, regardless of if the `GUILD_MEMBER` partial is enabled. Before you disable intents think about what your bot does and how not receiving the listed events might prevent it from doing this. Version 12 of discord.js may not function as expected when specific intents are not provided.
 :::
 
 ```js
