@@ -2,9 +2,9 @@
 
 ## Legend
 
--   `<client>` is a placeholder for the Client object, such as `const client = new Discord.Client();`.
--   `<message>` is a placeholder for the Message object, such as `client.on('message', message => { ... });`.
--   `<guild>` is a placeholder for the Guild object, such as `<message>.guild` or <branch version="12.x" inline>`<client>.guilds.cache.get('<id>')`</branch><branch version="11.x" inline>`<client>.guilds.get('<id>')`</branch>.
+* `<client>` is a placeholder for the Client object, such as `const client = new Discord.Client();`.
+* `<message>` is a placeholder for the Message object, such as `client.on('message', message => { ... });`.
+* `<guild>` is a placeholder for the Guild object, such as `<message>.guild` or <branch version="12.x" inline>`<client>.guilds.cache.get('<id>')`</branch><branch version="11.x" inline>`<client>.guilds.get('<id>')`</branch>.
 
 For a more detailed explanation on the notations commonly used in this guide, the docs, and the support server, see [here](/additional-info/notation.md).
 
