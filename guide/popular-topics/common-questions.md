@@ -2,9 +2,9 @@
 
 ## Legend
 
-* `<client>` is a placeholder for the Client object, such as `const client = new Discord.Client();`.
-* `<message>` is a placeholder for the Message object, such as `client.on('message', message => { ... });`.
-* `<guild>` is a placeholder for the Guild object, such as `<message>.guild` or <branch version="12.x" inline>`<client>.guilds.cache.get('<id>')`</branch><branch version="11.x" inline>`<client>.guilds.get('<id>')`</branch>.
+-   `<client>` is a placeholder for the Client object, such as `const client = new Discord.Client();`.
+-   `<message>` is a placeholder for the Message object, such as `client.on('message', message => { ... });`.
+-   `<guild>` is a placeholder for the Guild object, such as `<message>.guild` or <branch version="12.x" inline>`<client>.guilds.cache.get('<id>')`</branch><branch version="11.x" inline>`<client>.guilds.get('<id>')`</branch>.
 
 For a more detailed explanation on the notations commonly used in this guide, the docs, and the support server, see [here](/additional-info/notation.md).
 
@@ -380,7 +380,7 @@ Assuming the process is to be done for the guild the message is sent in.
 
 ### How do I check the ping of my bot?
 
-There are two common ways to get the "ping" of the bot, **WebSocket heartbeat** and **API Latency**, respectively. **WebSocket heartbeat** is the amount of time elapsed between the **Discord API** sending a **PING** to your bot's WebSocket connection, and the **Discord API** receiving a **PONG** acknowledgement in return. The **API Latency** is the amount of time it takes for the **Discord API**'s request to reach your bot, your bot processing it, and your bot sending a response back.
+There are two common ways to obtain the **"ping"** of the bot, **WebSocket heartbeat** and **API latency**. **WebSocket heartbeat** is the amount of time between the **Discord Gateway** pinging your bot and the **Discord Gateway** receiving a response in return. **API Latency** is the amount of time it takes for the bot to send a request to the **Discord API** and receiving an acknowledgement back.
 
 The first example shows how to get the **WebSocket heartbeat**. The `ping` property can be found on the <branch version="11.x" inline>Client object</branch><branch version="12.x" inline>WebSocketManager, found at `<client>.ws`</branch>.
 
@@ -407,12 +407,14 @@ A certain shards heartbeat can be found on the WebSocketShard instance, accessib
 
 </branch>
 
-The second example covers **API latency**. Retrieving the latency is done by sending a message, then subtracting the trigger messages timestamp from the message sent by the bot's timestamp.
+The second example covers **API latency**. The latency of the **Discord API** is the amount of time it takes for your bot to receive an acknowledgement from a request.
 
 <!-- eslint-skip -->
 
 ```js
+const startTime = new Date();
+
 <message>.channel.send('Pinging...').then(sent => {
-	sent.edit(`Ponged! Latency is ${sent.createdTimestamp - <message>.createdTimestamp}ms!`);
+	sent.edit(`Ponged! Latency is ${sent.createdTimestamp - startTime}ms!`);
 });
 ```
