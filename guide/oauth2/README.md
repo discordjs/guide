@@ -166,7 +166,7 @@ Don't forgo security for a tiny bit of convenience!
 
 ### OAuth2 flows
 
-What you did in the quick example was go through the `implicit grant` flow, which passed the access token straight to the user's browser. This is great and simple, but you don't get to refresh the token without the user and it is less secure than going through the `authorization code grant`. This involves recieving an access code, which is then exchanged by your server for an access token. Notice that this way, the access token never actually reaches the user throughout the process.
+What you did in the quick example was go through the `implicit grant` flow, which passed the access token straight to the user's browser. This is great and simple, but you don't get to refresh the token without the user and it is less secure than going through the `authorization code grant`. This involves receiving an access code, which is then exchanged by your server for an access token. Notice that this way, the access token never actually reaches the user throughout the process.
 
 #### Authorization code grant
 

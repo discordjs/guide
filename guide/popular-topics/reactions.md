@@ -158,7 +158,7 @@ client.on('message', async message => {
 });
 ```
 
-If you try again with either of the codeblocks above, you'll get the result you originally wanted!
+If you try again with either of the code blocks above, you'll get the result you originally wanted!
 
 ![Emojis reacting in correct order](~@/images/1IWSJ1C.png)
 
@@ -188,7 +188,7 @@ The benefit of this small optimization is that you can use `.then()` to handle w
 Now that you know how to add reactions, you might be asking, how do you remove them? In this section you will learn how to remove all reactions, remove reactions by user, and remove reactions by emoji.
 
 ::: warning
-All of these methods require `MANAGE_MESSAGES` permissions. Make sure your bot has permissions before attempting to utilize any of these methods, as it will error if it doesnt.
+All of these methods require `MANAGE_MESSAGES` permissions. Make sure your bot has permissions before attempting to utilize any of these methods, as it will error if it doesn't.
 :::
 
 ### Removing all reactions
@@ -322,14 +322,14 @@ message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
 <branch version="11.x">
 
 Discord.js v11 does not have the ability to emit events if the respective structures it needs to emit with are incomplete and does not auto-fetch the missing information.
-This behaviour has been changed in version 12 of the library. It introduces partial structures which enable us to emit incomplete structures and complete them with a single fetch call.
+This behavior has been changed in version 12 of the library. It introduces partial structures which enable us to emit incomplete structures and complete them with a single fetch call.
 This feature is not available on version 11.x if you want to listen for reactions on old messages please use version 12 of the library.
 
 </branch>
 <branch version="12.x">
 
 Messages sent before your bot started are uncached, unless you fetch them first. By default the library does not emit client events if the data received and cached is not sufficient to build fully functional objects.
-Since version 12 you can change this behaviour by activating partials. For a full explanation of partials see [this page](/popular-topics/partials.md).
+Since version 12 you can change this behavior by activating partials. For a full explanation of partials see [this page](/popular-topics/partials.md).
 
 Make sure you enable partial structures for `MESSAGE`, `CHANNEL` and `REACTION` when instantiating your client, if you want reaction events on uncached messages for both server and direct message channels. If you do not want to support direct message channels you can exclude `CHANNEL`.
 

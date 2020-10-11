@@ -51,7 +51,7 @@ First, you'll need some questions and answers to choose from, so here's a basic 
 ```json
 [
 	{
-		"question": "What colour is the sky?",
+		"question": "What color is the sky?",
 		"answers": ["blue"]
 	},
 	{

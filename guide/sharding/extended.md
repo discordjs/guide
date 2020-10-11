@@ -280,7 +280,7 @@ Now, run this code, and you will surely get a result that looks like the followi
     _roles: [] } ]
 ```
 
-While this result isnt *necessarily* bad or incorrect, it's simply a raw object that got `JSON.parse()`'d and `JSON.stringify()`'d over, so all of the circular references are gone. More importantly, The object is no longer a true <branch version="11.x" inline>`Emoji`</branch><branch version="12.x" inline>`GuildEmoji`</branch> object as provided by discord.js. This means none of the convenience methods usually provided to you are available. If this is not a concern to you, then you can effectively skip the rest of this section. However, this is a tutorial, so it should be covered regardless! Let's remedy this issue, shall we?
+While this result isn't *necessarily* bad or incorrect, it's simply a raw object that got `JSON.parse()`'d and `JSON.stringify()`'d over, so all of the circular references are gone. More importantly, The object is no longer a true <branch version="11.x" inline>`Emoji`</branch><branch version="12.x" inline>`GuildEmoji`</branch> object as provided by discord.js. This means none of the convenience methods usually provided to you are available. If this is not a concern to you, then you can effectively skip the rest of this section. However, this is a tutorial, so it should be covered regardless! Let's remedy this issue, shall we?
 
 <branch version="11.x">
 
@@ -295,7 +295,7 @@ function findEmoji(id) {
 +	const emoji = Object.assign({}, temp);
 +	// Circular references can't be returned outside of eval, so change it to the id
 +	if (emoji.guild) emoji.guild = emoji.guild.id;
-+	// A new object will be construted, so simulate raw data by adding this property back
++	// A new object will be constructed, so simulate raw data by adding this property back
 +	emoji.require_colons = emoji.requiresColons;
 +
 	return emoji;
@@ -316,7 +316,7 @@ function findEmoji(id) {
 +	const emoji = Object.assign({}, temp);
 +	// Circular references can't be returned outside of eval, so change it to the id
 +	if (emoji.guild) emoji.guild = emoji.guild.id;
-+	// A new object will be construted, so simulate raw data by adding this property back
++	// A new object will be constructed, so simulate raw data by adding this property back
 +	emoji.require_colons = emoji.requiresColons;
 +
 	return emoji;
