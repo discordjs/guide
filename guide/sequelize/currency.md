@@ -19,7 +19,7 @@ This time we'll have 6 files.
 
 Here is an entity relation diagram of the models we'll be making:
 
-<img src="~@/images/currency_er_diagram.svg" alt="Curreny database structure diagram" />
+<img src="~@/images/currency_er_diagram.svg" alt="Currency database structure diagram" />
 
 `Users` have a `user_id`, and a `balance`. Each `user_id` can have multiple links to the `UserItems` table, and each entry in the table is connected to one of the items in the `CurrencyShop`, which will have a `name` and a `cost` associated with it.
 
@@ -185,7 +185,7 @@ Note that we could have abstracted the connection object in another file, and ha
 
 The new method we haven't seen yet is the `.belongsTo()` method. Using this method, we add `CurrencyShop` as a property of `UserItem` so that when we do `userItem.item` we get the respective item that it's attached to. We use `item_id` as the foreign key so that it knows which item to attach.
 
-We now add some prototypes to the User object to finish up the junction: add items to users, and get their current inventory. The code inside should be somewhat familar from the last tutorial. We use a `.findOne()` to get the item if it exists in the user's inventory. We increment if it does, or create it if it doesn't.
+We now add some prototypes to the User object to finish up the junction: add items to users, and get their current inventory. The code inside should be somewhat familiar from the last tutorial. We use a `.findOne()` to get the item if it exists in the user's inventory. We increment if it does, or create it if it doesn't.
 
 Getting items is similar, we just `.findAll()` using the user's id as the key. The `include` key is for associating the CurrencyShop with the item. We basically have to explicitly tell Sequelize to honor the `.belongsTo()` association, otherwise it will take the path of least effort.
 
@@ -385,7 +385,7 @@ return message.channel.send(
 
 </branch>
 
-Nothing particularly special here either. We could have queried the database for the top 10 currency holders as well, but we already have access to them locally, so just sort the Collection we have and use map again to display in a nice format. The filter is in case the users no longer exist in the bot's cache.
+Nothing particularly special here either. We could have queried the database for the top 10 currency holders as well, but we already have access to them locally, so just sort the Collection we have and use map again to display in a nice format. The filter is in case the users no longer exist in the bots cache.
 
 ## Resulting code
 

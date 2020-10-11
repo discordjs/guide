@@ -1,6 +1,6 @@
 # Setting up package.json scripts
 
-An easy way to run scripts like a script to start your bot, a script to lint your bot's files or whatever scripts you use, is by storing them in your `package.json` file. After you store these scripts in your `package.json` file, you can just type `npm run start` to start your bot, or `npm run lint` to lint your code for errors.
+An easy way to run scripts like a script to start your bot, a script to lint your bots files or whatever scripts you use, is by storing them in your `package.json` file. After you store these scripts in your `package.json` file, you can just type `npm run start` to start your bot, or `npm run lint` to lint your code for errors.
 
 ## Getting started
 
@@ -40,10 +40,10 @@ Over at your `package.json` file, add the following line to the `scripts`:
 ```
 
 ::: tip
-The `node .` script will run the file which you have specified at the `main` entry in your `package.json` file. If you don't have it set yet, make sure to set `main` to your bot's main file!
+The `node .` script will run the file which you have specified at the `main` entry in your `package.json` file. If you don't have it set yet, make sure to set `main` to your bots main file!
 :::
 
-Now, whenever you run the `npm run start` script in your bot's directory, it will run the `node .` command. Let's create another script to lint your code via the command line.
+Now, whenever you run the `npm run start` script in your bots directory, it will run the `node .` command. Let's create another script to lint your code via the command line.
 
 ::: tip
 If you do not have ESLint installed globally, you can use [npx](https://alligator.io/workflow/npx/) to run the ESLint script for your local directory. For more info on how to set it up, you can read the site [here](https://alligator.io/workflow/npx/).

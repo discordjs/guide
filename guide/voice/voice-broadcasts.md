@@ -25,7 +25,7 @@ connection2.play(broadcast);
 
 ## Creating broadcasts
 
-You can create as many broadcasts as you want via the voice submodule:
+You can create as many broadcasts as you want via the voice sub-module:
 
 ```js
 const broadcast = client.voice.createBroadcast();
@@ -83,7 +83,7 @@ There are some specific things to be aware of with broadcasts. This section will
 	connection.play(broadcast);
 	```
 - You can use the `.play(resource)` method to play audio on the broadcast and across all subscribers.
-- You can use the `.end()` method to destroy the broadcast, ending playback across all subcribers and unsubscribing them. This will also remove the broadcast from the `client.voice.broadcasts` array.
+- You can use the `.end()` method to destroy the broadcast, ending playback across all subscribers and unsubscribing them. This will also remove the broadcast from the `client.voice.broadcasts` array.
 	```js
 	// Destroy a broadcast
 	broadcast.end();

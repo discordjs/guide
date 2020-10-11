@@ -263,8 +263,8 @@ In this snippet, we use a comma without providing a name for the item in the arr
 
 Since there are many, many articles out there that can explain this part more in depth, we'll only be giving you a TL;DR and an article link if you choose to read more about it.
 
-1. The `var` keyword is what was (and can still be) used in JS before `let` and `const` came to surface. There are actually many issues with `var`, though, such as it being function-scoped, hoisting related issues, and allowing redeclaration.
-2. The `let` keyword is essentially the new `var`; it addresses many of the issues `var` has, but its biggest factor would be that it's block-scoped and disallows redeclaration (*not* reassignment).
+1. The `var` keyword is what was (and can still be) used in JS before `let` and `const` came to surface. There are actually many issues with `var`, though, such as it being function-scoped, hoisting related issues, and allowing re-declaration.
+2. The `let` keyword is essentially the new `var`; it addresses many of the issues `var` has, but its biggest factor would be that it's block-scoped and disallows re-declaration (*not* reassignment).
 3. The `const` keyword is for giving variables a constant value which may not be reassigned. `const`, like `let`, is also block-scoped.
 
 The general rule of thumb recommended by this guide is to use `const` wherever possible, `let` otherwise, and avoid using `var`. Here's a [helpful article](https://madhatted.com/2016/1/25/let-it-be) if you want to read more about this subject.

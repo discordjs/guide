@@ -2088,7 +2088,7 @@ ClientApplication.coverImage({ width: 1024, height: 1024 });
 
 #### ClientApplication#fetchAssets
 
-`ClientApplication.fetchAssests()` returns a promise that resolves into an array of `ClientAsset` objects, each of which contains `id`, `name` and `type` keys.
+`ClientApplication.fetchAssets()` returns a promise that resolves into an array of `ClientAsset` objects, each of which contains `id`, `name` and `type` keys.
 
 ### ClientOptions
 
@@ -2337,7 +2337,7 @@ The message port for the primary process, if the mode of the `ShardClientUtil` i
 
 ### Speaking
 
-The `Speaking` class has been added as a data structure to interact with the bitfields present when a `GuildMember` is speaking, or in the `VoiceConnection#speaking` event.
+The `Speaking` class has been added as a data structure to interact with the bit fields present when a `GuildMember` is speaking, or in the `VoiceConnection#speaking` event.
 
 ### StreamDispatcher
 

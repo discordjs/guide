@@ -4,7 +4,7 @@ Partial Structures were introduced to the library in version 12 and are optional
 
 One example leveraging partials is the handling of reactions on uncached messages, which is explained on [this page](/popular-topics/reactions.md#listening-for-reactions-on-old-messages).
 
-Prior you had to either handle the undocumented `raw` event or fetch the respective messages on startup. The first approach was prone to errors and unexpected internal behaviour and the second not fully fail proof either, as the messages could still be uncached if cache size was exceeded in busy channels.
+Prior you had to either handle the undocumented `raw` event or fetch the respective messages on startup. The first approach was prone to errors and unexpected internal behavior and the second not fully fail proof either, as the messages could still be uncached if cache size was exceeded in busy channels.
 
 <branch version="11.x">
 

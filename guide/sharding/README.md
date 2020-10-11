@@ -2,7 +2,7 @@
 
 ## When to shard
 
-Before you dive into this section, please note that sharding may not be necessary for you. Sharding is only necessary at 2,500 guilds—at that point, Discord will not allow your bot to login without sharding. With that in mind, you should consider this when your bot is around 2,000 guilds, which should be enough time to get this working. Contrary to popular belief, sharding itself is very simple. It can be complex depending on your bot's needs, however. If your bot is in a total of 2,000 or more servers, then please continue with this guide. Otherwise, it may be a good idea to wait until then.
+Before you dive into this section, please note that sharding may not be necessary for you. Sharding is only necessary at 2,500 guilds—at that point, Discord will not allow your bot to login without sharding. With that in mind, you should consider this when your bot is around 2,000 guilds, which should be enough time to get this working. Contrary to popular belief, sharding itself is very simple. It can be complex depending on your bots needs, however. If your bot is in a total of 2,000 or more servers, then please continue with this guide. Otherwise, it may be a good idea to wait until then.
 
 ## How does sharding work?
 
@@ -40,7 +40,7 @@ manager.spawn();
 
 </branch>
 
-The above code utilizes discord.js's sharding manager to spawn the recommended amount of shards for your bot. The recommended amount should be approximately 1,000 guilds per shard. Note that you have to attach the event listener to `shardCreate` before calling `.spawn()` to prevent a race condition possibly preventing shard 0 from logging the successful launch. Even though you provide the token here, you will still need to send it over to the main bot file in `client.login()`, so don't forget to do that.
+The above code utilizes the discord.js sharding manager to spawn the recommended amount of shards for your bot. The recommended amount should be approximately 1,000 guilds per shard. Note that you have to attach the event listener to `shardCreate` before calling `.spawn()` to prevent a race condition possibly preventing shard 0 from logging the successful launch. Even though you provide the token here, you will still need to send it over to the main bot file in `client.login()`, so don't forget to do that.
 
 ::: tip
 You can find the methods available for the ShardingManager class <branch version="11.x" inline>[here](https://discord.js.org/#/docs/main/v11/class/ShardingManager)</branch><branch version="12.x" inline>[here](https://discord.js.org/#/docs/main/stable/class/ShardingManager)</branch>. Though, you may not be making much use of this section, unlike the next feature we will explore, which you may learn about by clicking [this link](/sharding/additional-information.md).
@@ -73,7 +73,7 @@ client.on('message', message => {
 	}
 });
 
-client.login('token');
+client.login('your-token-goes-here');
 ```
 
 </branch>
@@ -96,7 +96,7 @@ client.on('message', message => {
 	}
 });
 
-client.login('token');
+client.login('your-token-goes-here');
 ```
 
 </branch>

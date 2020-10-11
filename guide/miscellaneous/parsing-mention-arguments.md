@@ -155,7 +155,7 @@ if (command === 'avatar') {
 	if (args[0]) {
 		const user = getUserFromMention(args[0]);
 		if (!user) {
-			return message.reply('Please use a proper mention if you want to see someone else\'s avatar.');
+			return message.reply('Please use a proper mention if you want to see someone elses avatar.');
 		}
 
 		return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL}`);
@@ -173,7 +173,7 @@ if (command === 'avatar') {
 	if (args[0]) {
 		const user = getUserFromMention(args[0]);
 		if (!user) {
-			return message.reply('Please use a proper mention if you want to see someone else\'s avatar.');
+			return message.reply('Please use a proper mention if you want to see someone elses avatar.');
 		}
 
 		return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL({ dynamic: true })}`);
@@ -209,7 +209,7 @@ But this does not mark the end of the page. If you feel adventurous you can read
 Previously you learn how to use rudimentary string related functions to turn the special mention syntax Discord uses into a proper discord.js User object.
 But using Regular Expressions (aka "RegEx" or "RegExp"), you can condense all that logic into a single line! Crazy, right?
 
-If you have never worked with Regular Expressions before, this might seem daunting. But in fact, you already have used regular expressions. Remember `withoutPrefix.split(/ +/);`? This little `/ +/` is actually a Regular Expression. The `/` on either side tell JavaScript where the Regular Expression begins and where it ends, the stuff inbetween is it is content. 
+If you have never worked with Regular Expressions before, this might seem daunting. But in fact, you already have used regular expressions. Remember `withoutPrefix.split(/ +/);`? This little `/ +/` is actually a Regular Expression. The `/` on either side tell JavaScript where the Regular Expression begins and where it ends, the stuff in between is it is content. 
 
 ::: tip
 For a more detailed explanation please consult the [MDN's documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp).

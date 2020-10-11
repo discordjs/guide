@@ -109,7 +109,7 @@ So, here's what's happening in this code:
 1. You're sending a `GET` request to random.cat.
 2. random.cat sees your request and gets a random file from their database.
 3. random.cat then sends that file's URL as a JSON object that contains a link to the image.
-4. node-fetch recieves the response and deserializes it with `reponse.json()`.
+4. node-fetch receives the response and de-serializes it with `response.json()`.
 5. You then send the object's `file` property in Discord.
 
 ::: warning

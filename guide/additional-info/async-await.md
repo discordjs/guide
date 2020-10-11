@@ -91,7 +91,7 @@ client.on('message', message => {
 	}
 });
 
-client.login('tokeninhere');
+client.login('your-token-goes-here');
 ```
 
 So now we need to put the code in. If you don't know how Node.js asynchronous execution works, you would probably try something like this:

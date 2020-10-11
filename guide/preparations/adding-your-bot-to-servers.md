@@ -30,7 +30,7 @@ If you get an error message saying "Bot requires a code grant", then head over i
 
 As mentioned above, you'll need to replace the `client_id` parameter with your client's ID in order to generate your invite link. To find your app's ID, head back to the [My Apps](https://discord.com/developers/applications/me) page under the "Applications" section once again and click on your bot application.
 
-Insert your app's ID into the link template and then access it in your browser. You should see something like this (with your bot's username and avatar):
+Insert your app's ID into the link template and then access it in your browser. You should see something like this (with your bots username and avatar):
 
 ![Bot Authorization field](~@/images/A8l70bj.png)
 

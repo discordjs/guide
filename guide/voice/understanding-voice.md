@@ -20,7 +20,7 @@ It's common for people to get confused with voice and not understand what they'r
 - [FFmpeg](https://ffmpeg.org/) - for cases where we _don't_ have Opus audio, e.g. in MP3 files, we need a way of converting them to Opus. FFmpeg is the tool we use, it converts hundreds of formats of media to Opus for us so they can be played over Discord.
 
 ### The voice connection lifecycle
-1. A packet is sent to the main gateway telling Discord we wish to join a voice channel. Discord responds with a voice gateway (WebSocket) to connect to and the bot authenticates itself. We also select an _encryption mode_ available on that gateway. We now start heartbeating.
+1. A packet is sent to the main gateway telling Discord we wish to join a voice channel. Discord responds with a voice gateway (WebSocket) to connect to and the bot authenticates itself. We also select an _encryption mode_ available on that gateway. We now start heart beating.
 2. We find our external port and send it to Discord over UDP so we can send/receive audio. It follows that a voice connection has two main components, a WebSocket connection - where we can change speaking status - and a UDP socket, where audio is actually sent and received.
 3. We send our audio packets at regular time intervals to the UDP socket, which forwards it to other users connected to the channel.
 4. The server may change its voice region, in this case Discord.js will disconnect these sockets and reconnect to the new voice servers.
@@ -58,7 +58,7 @@ Just as we send audio to the UDP socket, we also receive audio through the UDP s
 ### Key takeaways
 
 - You should be familiar with the definitions in the glossary above
-- A voice connection does not disrupt the bot's main gateway - separate connections to a voice gateway and UDP socket are created
+- A voice connection does not disrupt the bots main gateway - separate connections to a voice gateway and UDP socket are created
 - The `StreamDispatcher` is essentially a WritableStream that takes Opus audio
 - Receiving audio is officially unsupported, however we do our best to maintain it
 - Playing audio has varying complexity depending on the file/audio you want to play - the simplest (and most efficient) files to play would be Ogg/WebM files as they already contain Opus audio. Other files must be passed through FFmpeg and an Opus Encoder before they are able to be played

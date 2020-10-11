@@ -95,7 +95,7 @@ The path is another helpful piece of information, the path tells you where you t
 
 The code is another partial representation of the message, in this case `Invalid Form Body`. You can find a full list of codes [here](https://discord.com/developers/docs/topics/opcodes-and-status-codes#json-json-error-codes)
 
-The code is also very useful if you want to only handle a specific error. Say we were trying to delete a message which may or may not be there, and we wanted to simply ignore unknown message errors. This can be done by checking the code, either manually, or using discord.js's constants.
+The code is also very useful if you want to only handle a specific error. Say we were trying to delete a message which may or may not be there, and we wanted to simply ignore unknown message errors. This can be done by checking the code, either manually, or using discord.js constants.
 
 ```js
 message.delete().catch(error => {
