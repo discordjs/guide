@@ -1,7 +1,9 @@
 # Gateway Intents
 
 :::warning
-For now sending intents is optional, but it might become required in a future version of discords API. Privileged intents will require verification for bots in 100+ servers on October 7th 2020.
+As of October 7th 2020, the privileged intents `GUILD_PRESENCES` and `GUILD_MEMBERS` must be enabled for your bot application in the Developer Portal if you wish to continue receiving them. For bots in 100+ servers, enabling these intents will require verification. 
+
+v12 of the library uses Discord API v6, which does not require intents to be specified when connecting to Discord. Specifying intents will be required when the library moves to API v8 in the next major release.
 :::
 
 Gateway Intents were introduced to the library in v12 and allow you to pick which events your bot will receive. Intents are groups of pre-defined events that the discord.js client will conditionally subscribe to. For example, omitting the `DIRECT_MESSAGE_TYPING` intent would prevent the discord.js client from receiving any typing events from direct messages. Intents also enable you to remove unwanted data from polluting your bots cache, however we can not yet explicitly list which unwanted side effects omitting a certain event may have on the internal workings of the library.
@@ -21,7 +23,7 @@ You can choose which intents you'd like to receive as client options when instan
 A list of all available gateway intents the library supports can be found at [the discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Intents?scrollTo=s-FLAGS). The events included in the respective intents on the [discord API documentation](https://discord.com/developers/docs/topics/gateway#list-of-intents).
 
 :::tip
-`GUILD_PRESENCES` is required in order to receive the initial GuildMember data. If you do not supply it your member caches will be empty and not updates, even if you do provide `GUILD_MEMBERS`! Before you disable intents think about what your bot does and how not receiving the listed events might prevent it from doing this. Version 12 of discord.js does not yet fully support any combination of intents without loosing seemingly unrelated data.
+`GUILD_PRESENCES` is required in order to receive the initial GuildMember data when your bot connects to Discord. If you do not supply it, your member caches will start empty. `guildMemberUpdate` events will not be processed, regardless of if the `GUILD_MEMBER` partial is enabled, unless the `GuildMember` has been cached by other means such as by sending a message, being mentioned in one, or the `guildMemberAdd` event. Before you disable intents think about what your bot does and how not receiving the listed events might prevent it from doing this. Version 12 of discord.js may not function as expected when specific intents are not provided.
 :::
 
 ```js
