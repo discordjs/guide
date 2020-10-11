@@ -179,7 +179,7 @@ If you've followed the tutorial, you should have something like this:
 	</discord-message>
 </div>
 
-Now, let's just make this an [embed](/popular-topics/miscellaneous-examples.md#sending-an-embed).
+Now, let's just make this an [embed](/popular-topics/embeds.md).
 
 We are also going to be defining a utility function at the top of our file so that our embed doesn't error when the field value is over 1024 characters. Here is a bit of code to do that:
 
