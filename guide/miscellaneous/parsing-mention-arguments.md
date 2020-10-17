@@ -9,9 +9,11 @@ then the mentions will still take up space in your args array which can mess up 
 Say you are writing a bot for moderating your server. Obviously you will want a kick or a ban command which allows you to mention the person you are trying to ban.
 But what happens if you try to use the command like this?
 
-```
-!ban @Offender because they were rude to @Victim
-```
+<div is="discord-messages">
+	<discord-message author="User" avatar="djs">
+		!ban @Offender Because they were rude to @Victim.
+	</discord-message>
+</div>
 
 You might expect it to ban @Offender, because that is who you mentioned first.
 However, the Discord API does not send the mentions in the order they appear; They are sorted by their ID instead.
@@ -20,9 +22,11 @@ If the @Victim happens to have joined Discord before @Offender and thus has a sm
 Or maybe someone uses a command incorrectly, the bot might still accept it but it will create an unexpected outcome.  
 Say someone accidentally used the ban command like this:
 
-```
-!ban because they were rude to @Victim
-```
+<div is="discord-messages">
+	<discord-message author="User" avatar="djs">
+		!ban Because they were rude to @Victim.
+	</discord-message>
+</div>
 
 The bot will still ban someone, but it will be the @Victim again. `message.mentions.users` still contains a mention, which the bot will use. But in reality you would want your bot to be able to tell the user they used the command incorrectly.
 
@@ -203,6 +207,70 @@ So now, instead of using `message.mentions` you can use your new, fantastic func
 This will allow you to add proper checks for all your args, so that you can tell when a command was used correctly and when it was used incorrectly.
 
 But this does not mark the end of the page. If you feel adventurous you can read on and learn how to use Regular Expressions to easily convert a mention into a user object in just two lines.
+
+### The ban command from the intro
+
+You now know how to parse user mentions for a simple command like the avatar command.
+However the avatar command does not benefit from it as much as the example used in the intro to this guide.
+
+When writing a ban command where a mention might appear in the ban reason, manual parsing mentions
+is a lot more important. You can see an example of how to do it as follows:
+
+<branch version="11.x">
+
+<!-- eslint-skip -->
+
+```js
+if (command === 'ban') {
+	if (args.length < 2) {
+		return message.reply('Please mention the user you want to ban and specify a ban reason.');
+	}
+
+	const user = getUserFromMention(args[0]);
+	if (!user) {
+		return message.reply('Please use a proper mention if you want to ban someone.');
+	}
+
+	const reason = args.slice(1).join(' ');
+	await message.guild.ban(user, { reason });
+
+	return message.channel.send(`Successfully banned **${user.tag}** from the server!`);
+}
+```
+
+</branch>
+<branch version="12.x">
+
+<!-- eslint-skip -->
+
+```js
+if (command === 'ban') {
+	if (args.length < 2) {
+		return message.reply('Please mention the user you want to ban and specify a ban reason.');
+	}
+
+	const user = getUserFromMention(args[0]);
+	if (!user) {
+		return message.reply('Please use a proper mention if you want to ban someone.');
+	}
+
+	const reason = args.slice(1).join(' ');
+	await message.guild.members.ban(user, { reason });
+
+	return message.channel.send(`Successfully banned **${user.tag}** from the server!`);
+}
+```
+
+</branch>
+
+Now if you send a command like the following you can always be sure it will use the mention at the 
+very front to figure out who to ban, and will properly validate the mention:
+
+<div is="discord-messages">
+	<discord-message author="User" avatar="djs">
+		!ban @Offender because they were rude to @Victim.
+	</discord-message>
+</div>
 
 ### Using Regular Expressions
 
