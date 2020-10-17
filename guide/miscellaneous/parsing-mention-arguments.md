@@ -11,7 +11,7 @@ But what happens if you try to use the command like this?
 
 <div is="discord-messages">
 	<discord-message author="User" avatar="djs">
-		!ban @Offender Because they were rude to @Victim.
+		!ban <mention>Offender</mention> Because they were rude to <mention>Victim</mention>.
 	</discord-message>
 </div>
 
@@ -24,7 +24,7 @@ Say someone accidentally used the ban command like this:
 
 <div is="discord-messages">
 	<discord-message author="User" avatar="djs">
-		!ban Because they were rude to @Victim.
+		!ban Because they were rude to <mention>Victim</mention>.
 	</discord-message>
 </div>
 
@@ -268,7 +268,7 @@ very front to figure out who to ban, and will properly validate the mention:
 
 <div is="discord-messages">
 	<discord-message author="User" avatar="djs">
-		!ban @Offender because they were rude to @Victim.
+		!ban <mention>Offender</mention> because they were rude to <mention>Victim</mention>.
 	</discord-message>
 </div>
 
