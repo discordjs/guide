@@ -296,7 +296,7 @@ discord.js features two utility methods to easily determine the final permission
 </branch>
 <branch version="12.x">
 
-discord.js features two utility methods to easily determine the final permissions for a guild member or role in a specific channel: `.permissionsFor()` on the [GuildChannel](https://discord.js.org/#/docs/main/stable/class/GuildChannel?scrollTo=permissionsFor) class and `.permissionsIn()` on the [GuildMember](https://discord.js.org/#/docs/main/stable/class/GuildMember?scrollTo=permissionsIn)and [Role](https://discord.js.org/#/docs/main/stable/class/Role?scrollTo=permissionsIn) classes. Both return a [Permissions](hhttps://discord.js.org/#/docs/main/stable/class/Permissions) object.
+discord.js features two utility methods to easily determine the final permissions for a guild member or role in a specific channel: `.permissionsFor()` on the [GuildChannel](https://discord.js.org/#/docs/main/stable/class/GuildChannel?scrollTo=permissionsFor) class and `.permissionsIn()` on the [GuildMember](https://discord.js.org/#/docs/main/stable/class/GuildMember?scrollTo=permissionsIn)and [Role](https://discord.js.org/#/docs/main/stable/class/Role?scrollTo=permissionsIn) classes. Both return a [Permissions](https://discord.js.org/#/docs/main/stable/class/Permissions) object.
 
 </branch>
 
