@@ -209,7 +209,7 @@ The RichEmbed constructor has been removed and now the `MessageEmbed` constructo
 
 ### String Concatenation
 
-v12 has changed how discord.js objects behave when being cast to a string. If added to a string structures will now display as their id whenever possible (due to the internal method `valueOf` being changed according to its specification). When `toString` is called explicitly, the structures is cast via the `String` constructor or supplied as a value in template expressions (which internally calls `toString`) the mention format `<@id>` is displayed, which discord resolves to a proper mention if the structure is cached in the viewing client (in v11 both `toString` and `valueOf` showed the same behavior as `toString` does now).
+v12 has changed how discord.js objects behave when being cast to a string. If added to a string structures will now display as their id whenever possible (due to the internal method `valueOf` being changed according to its specification). When `toString` is called explicitly, the structure is cast via the `String` constructor or supplied as a value in template expressions (which internally calls `toString`) the mention format `<@id>` is displayed, which discord resolves to a proper mention if the structure is cached in the viewing client (in v11 both `toString` and `valueOf` showed the same behavior as `toString` does now).
 
 ```diff
 - channel.send(userObject + ' has joined!')
