@@ -68,8 +68,8 @@ client.on('message', async message => {
 		const reason = args.slice(1).join(' ');
 		try {
 			await message.guild.ban(user, { reason });
-		} catch (e) {
-			return message.channel.send(`Failed to ban **${user.tag}**: ${e}`);
+		} catch (error) {
+			return message.channel.send(`Failed to ban **${user.tag}**: ${error}`);
 		}
 
 		return message.channel.send(`Successfully banned **${user.tag}** from the server!`);
