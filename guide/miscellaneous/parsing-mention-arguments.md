@@ -210,11 +210,9 @@ But this does not mark the end of the page. If you feel adventurous you can read
 
 ### The ban command from the intro
 
-You now know how to parse user mentions for a simple command like the avatar command.
-However the avatar command does not benefit from it as much as the example used in the intro to this guide.
+You now know how to parse user mentions for a simple command like the avatar command. However the avatar command does not benefit from it as much as the example used in the intro to this guide.
 
-When writing a ban command where a mention might appear in the ban reason, manual parsing mentions
-is a lot more important. You can see an example of how to do it as follows:
+When writing a ban command where a mention might appear in the ban reason, manual parsing mentions is a lot more important. You can see an example of how to do it as follows:
 
 <branch version="11.x">
 
@@ -263,8 +261,7 @@ if (command === 'ban') {
 
 </branch>
 
-Now if you send a command like the following you can always be sure it will use the mention at the 
-very front to figure out who to ban, and will properly validate the mention:
+Now if you send a command like the following you can always be sure it will use the mention at the very front to figure out who to ban, and will properly validate the mention:
 
 <div is="discord-messages">
 	<discord-message author="User" avatar="djs">
