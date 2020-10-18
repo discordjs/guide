@@ -213,7 +213,7 @@ the `activity` key will only work in v11.3 and above. You can still use the `gam
 
 </branch>
 
-### How do I make my bot react to mentions?
+### How do I add a mention prefix to my bot?
 
 ```js
 const Discord = require('discord.js');
