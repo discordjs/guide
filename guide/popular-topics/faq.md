@@ -134,7 +134,7 @@ if (<message>.author.id === '<id>') {
 
 ## Bot Configuration and Utility
 
-### How do I set my bots username?
+### How do I set my bot's username?
 
 <!-- eslint-skip -->
 
@@ -142,7 +142,7 @@ if (<message>.author.id === '<id>') {
 <client>.user.setUsername('<username>');
 ```
 
-### How do I set my bots avatar?
+### How do I set my bot's avatar?
 
 <!-- eslint-skip -->
 
@@ -375,7 +375,7 @@ If you want to learn more about this syntax or reaction collectors, check out [t
 If you want to learn more about reactions, check out [this dedicated guide on reactions](/popular-topics/reactions.md)!
 :::
 
-### How do I restart the bot with a command?
+### How do I restart my bot with a command?
 
 ```js
 process.exit();
