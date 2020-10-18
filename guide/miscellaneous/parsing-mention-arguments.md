@@ -230,7 +230,11 @@ if (command === 'ban') {
 	}
 
 	const reason = args.slice(1).join(' ');
-	await message.guild.ban(user, { reason });
+	try {
+		await message.guild.ban(user, { reason });
+	} catch (e) {
+		return message.channel.send(`Failed to ban **${user.tag}**: ${e}`);
+	}
 
 	return message.channel.send(`Successfully banned **${user.tag}** from the server!`);
 }
@@ -253,7 +257,11 @@ if (command === 'ban') {
 	}
 
 	const reason = args.slice(1).join(' ');
-	await message.guild.members.ban(user, { reason });
+	try {
+		await message.guild.members.ban(user, { reason });
+	} catch (e) {
+		return message.channel.send(`Failed to ban **${user.tag}**: ${e}`);
+	}
 
 	return message.channel.send(`Successfully banned **${user.tag}** from the server!`);
 }
