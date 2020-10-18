@@ -1,10 +1,11 @@
-# Common questions
+# Frequently asked Questions
 
 ## Legend
 
 * `<client>` is a placeholder for the Client object, such as `const client = new Discord.Client();`.
 * `<message>` is a placeholder for the Message object, such as `client.on('message', message => { ... });`.
 * `<guild>` is a placeholder for the Guild object, such as `<message>.guild` or <branch version="12.x" inline>`<client>.guilds.cache.get('<id>')`</branch><branch version="11.x" inline>`<client>.guilds.get('<id>')`</branch>.
+* `<voiceChannel>` is a placeholder for the VoiceChannel object, such as <branch version="11.x" inline>`<message>.member.voiceChannel`</branch><branch version="12.x" inline>`<message>.member.voice.channel`</branch>
 
 For a more detailed explanation on the notations commonly used in this guide, the docs, and the support server, see [here](/additional-info/notation.md).
 
@@ -131,9 +132,9 @@ if (<message>.author.id === '<id>') {
 }
 ```
 
-## Bot Configuration
+## Bot Configuration and Utility
 
-### How do I set my username?
+### How do I set my bot's username?
 
 <!-- eslint-skip -->
 
@@ -141,7 +142,7 @@ if (<message>.author.id === '<id>') {
 <client>.user.setUsername('<username>');
 ```
 
-### How do I set my avatar?
+### How do I set my bot's avatar?
 
 <!-- eslint-skip -->
 
@@ -169,11 +170,11 @@ if (<message>.author.id === '<id>') {
 <branch version="11.x">
 
 ::: tip
-If you would like to set your activity upon startup, you must place the `<client>.user.setActivity()` method in a `ready` event listener (`<client>.on('ready', () => {});`).
+If you would like to set your activity upon startup, you must place the `<client>.user.setActivity()` method call inside a `ready` event listener (`<client>.on('ready', () => {});`).
 :::
 
 ::: warning
-`<client>.user.setActivity()` will only work in v11.3 and above. You can check your version with `npm ls discord.js` and update with `npm install discord.js`. You can still use `<client>.user.setGame()`, but it is deprecated as of v11.3, and has been removed in v12.
+`<client>.user.setActivity()` will only work in v11.3 and above. You can still use `<client>.user.setGame()`, but it is deprecated as of v11.3, and has been removed in v12.
 :::
 
 </branch>
@@ -185,9 +186,72 @@ If you would like to set your activity upon startup, you can use the `ClientOpti
 
 </branch>
 
+### How do I make my bot display online/idle/dnd/invisible?
+
+<!-- eslint-skip -->
+
+```js
+<client>.user.setStatus('online');
+<client>.user.setStatus('idle');
+<client>.user.setStatus('dnd');
+<client>.user.setStatus('invisible');
+```
+
+### How do I set both status and activity in one go?
+
+<!-- eslint-skip -->
+
+```js
+<client>.user.setPresence({ activity: { name: '<activity>' }, status: 'idle' });
+```
+
+<branch version="11.x">
+
+::: warning
+the `activity` key will only work in v11.3 and above. You can still use the `game` key instead, but it is deprecated as of v11.3, and has been removed in v12.
+:::
+
+</branch>
+
+### How do I add a mention prefix to my bot?
+
+```js
+const Discord = require('discord.js');
+
+const client = new Discord.Client();
+const prefix = '!';
+
+const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+client.on('message', message => {
+	const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
+	if (!prefixRegex.test(message.content)) return;
+
+	const [, matchedPrefix] = message.content.match(prefixRegex);
+	const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
+	const command = args.shift().toLowerCase();
+
+	if (command === 'ping') {
+		message.channel.send('Pong!');
+	} else if (command === 'prefix') {
+		message.reply(`you can either ping me or use \`${prefix}\` as my prefix.`);
+	}
+});
+
+client.login('your-token-goes-here');
+```
+
+::: tip
+The `escapeRegex` function is used to convert special characters into literal characters by escaping them, so that they don't terminate the pattern within the [Regular Expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)!
+:::
+
+::: tip
+If you aren't familiar with the syntax used on the `const [, matchedPrefix] = ...` line, that's called "array destructuring". Feel free to read more about it in the [ES6 syntax](/additional-info/es6-syntax.md#array-destructuring) guide!
+:::
+
 ## Miscellaneous
 
-### How do I send a message to a certain channel?
+### How do I send a message to a specific channel?
 
 <branch version="11.x">
 
@@ -237,7 +301,7 @@ user.send('<content>');
 If you want to DM the user who sent the message, you can use `<message>.author.send()`.
 :::
 
-### How do I tag a certain user in a message?
+### How do I mention a certain user in a message?
 
 <!-- eslint-skip -->
 
@@ -248,11 +312,7 @@ const user = <message>.mentions.users.first();
 ```
 
 ::: tip
-If you want to tag the user who sent the message, you can use `<message>.reply()`. For example: `<message>.reply('hi.')` would result in `@User, hi.`. If you want to insert the tag elsewhere, you can store `<message>.author` as your `user` variable and use the original example.
-:::
-
-::: tip
-Tags inside certain areas of an embed may display correctly, but will not actually ping the user. Tags inside other certain areas of an embed will display the raw string instead (e.g. `<@123456789012345678>`).
+Mentions in embeds may resolve correctly but will never notify the user. Some areas of embeds do not support mentions at all.
 :::
 
 ### How do I prompt the user for additional input?
@@ -297,7 +357,7 @@ Tags inside certain areas of an embed may display correctly, but will not actual
 </branch>
 
 ::: tip
-If you want to learn more about this syntax or want to learn about reaction collectors as well, check out [this dedicated guide page for collectors](/popular-topics/collectors.md)!
+If you want to learn more about this syntax or reaction collectors, check out [this dedicated guide page for collectors](/popular-topics/collectors.md)!
 :::
 
 ### How do I react to the message my bot sent?
@@ -315,7 +375,7 @@ If you want to learn more about this syntax or want to learn about reaction coll
 If you want to learn more about reactions, check out [this dedicated guide on reactions](/popular-topics/reactions.md)!
 :::
 
-### How do I create a restart command?
+### How do I restart my bot with a command?
 
 ```js
 process.exit();
@@ -325,17 +385,11 @@ process.exit();
 `process.exit()` will only kill your Node process, but when using [PM2](http://pm2.keymetrics.io/), it will restart the process whenever it gets killed. You can read our guide on PM2 [here](/improving-dev-environment/pm2.md).
 :::
 
-::: warning
-Be sure to [limit this to your own ID](/popular-topics/common-questions.md#how-do-i-limit-a-command-to-a-single-user) so that other users can't restart your bot!
-:::
-
 ### What is the difference between a User and a GuildMember?
 
-A lot of users get confused as to what the difference between Users and GuildMembers is. The simple answer is that a User represents a global Discord user and a GuildMember represents a Discord user on a specific server. That means only GuildMembers can have permissions, roles, and nicknames, for example, because all of these things are server-bound information that could be different on each server that user is in.
+A User represents a global Discord user and a GuildMember represents a Discord user on a specific server. That means only GuildMembers can have permissions, roles, and nicknames, for example, because all of these things are server-bound information that could be different on each server that user is in.
 
-### How do I find all online members?
-
-Assuming the process is to be done for the guild the message is sent in.
+### How do I find all online members of a guild?
 
 <branch version="11.x">
 
@@ -343,10 +397,10 @@ Assuming the process is to be done for the guild the message is sent in.
 
 ```js
 // First we use fetchMembers to make sure all members are cached
-<message>.guild.fetchMembers().then(fetchedGuild => {
+<guild>.fetchMembers().then(fetchedGuild => {
 	const totalOnline = fetchedGuild.members.filter(member => member.presence.status === 'online');
 	// We now have a collection with all online member objects in the totalOnline variable
-	<message>.channel.send(`There are currently ${totalOnline.size} members online in this guild!`);
+	console.log(`There are currently ${totalOnline.size} members online in this guild!`)
 });
 ```
 
@@ -357,10 +411,10 @@ Assuming the process is to be done for the guild the message is sent in.
 
 ```js
 // First we use guild.members.fetch to make sure all members are cached
-<message>.guild.members.fetch().then(fetchedMembers => {
+<guild>.members.fetch().then(fetchedMembers => {
 	const totalOnline = fetchedMembers.filter(member => member.presence.status === 'online');
 	// We now have a collection with all online member objects in the totalOnline variable
-	<message>.channel.send(`There are currently ${totalOnline.size} members online in this guild!`);
+	console.log(`There are currently ${totalOnline.size} members online in this guild!`)
 });
 ```
 
@@ -404,3 +458,92 @@ Assuming the process is to be done for the guild the message is sent in.
 ```
 
 </branch>
+
+### How do I play music from YouTube?
+
+For this to work you need to have `ytdl-core` installed.
+
+```bash
+npm install --save ytdl-core
+```
+
+Additionally you may need the following:
+
+```bash
+npm install --save @discordjs/opus # opus engine (if missing)
+sudo apt-get install ffmpeg # ffmpeg debian/ubuntu
+npm install ffmpeg-static # ffmpeg windows
+```
+
+<branch version="11.x">
+
+<!-- eslint-skip -->
+
+```js
+// ...
+const ytdl = require('ytdl-core');
+
+<voiceChannel>.join().then(connection => {
+	const stream = ytdl('<youtubelink>', { filter: 'audioonly' });
+	const dispatcher = connection.playStream(stream);
+	
+	dispatcher.on('end', () => voiceChannel.leave());
+})
+
+```
+
+</branch>
+<branch version="12.x">
+
+<!-- eslint-skip -->
+
+```js
+// ...
+const ytdl = require('ytdl-core');
+
+<voiceChannel>.join().then(connection => {
+	const stream = ytdl('<youtubelink>', { filter: 'audioonly' });
+	const dispatcher = connection.play(stream);
+	
+	dispatcher.on('finish', () => voiceChannel.leave());
+})
+
+```
+
+</branch>
+
+### Why do some emojis behave weirdly?
+
+If you've tried using [the usual method of retrieving unicode emojis](/popular-topics/reactions.md#unicode-emojis), you may have noticed that some characters don't provide the expected results. Here's a short snippet that'll help with that issue. You can toss this into a file of its own and use it anywhere you need! Alternatively feel free to simply copy-paste the characters from below:
+
+```js
+// emojiCharacters.js
+module.exports = {
+	a: '🇦', b: '🇧', c: '🇨', d: '🇩',
+	e: '🇪', f: '🇫', g: '🇬', h: '🇭',
+	i: '🇮', j: '🇯', k: '🇰', l: '🇱',
+	m: '🇲', n: '🇳', o: '🇴', p: '🇵',
+	q: '🇶', r: '🇷', s: '🇸', t: '🇹',
+	u: '🇺', v: '🇻', w: '🇼', x: '🇽',
+	y: '🇾', z: '🇿', 0: '0️⃣', 1: '1️⃣',
+	2: '2️⃣', 3: '3️⃣', 4: '4️⃣', 5: '5️⃣',
+	6: '6️⃣', 7: '7️⃣', 8: '8️⃣', 9: '9️⃣',
+	10: '🔟', '#': '#️⃣', '*': '*️⃣',
+	'!': '❗', '?': '❓',
+};
+```
+
+<!-- eslint-skip -->
+
+```js
+// index.js
+const emojiCharacters = require('./emojiCharacters');
+
+console.log(emojiCharacters.a); // 🇦
+console.log(emojiCharacters[10]); // 🔟
+console.log(emojiCharacters['!']); // ❗
+```
+
+::: tip
+On Windows, you may be able to use the `Win + .` keyboard shortcut to open up an emoji picker can be used for quick, easy access to all the unicode emojis available to you. Some of the emojis listed above may not be represented there, though (e.g the 0-9 emojis).
+:::
