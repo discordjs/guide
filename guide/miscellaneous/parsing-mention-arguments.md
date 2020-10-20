@@ -208,7 +208,7 @@ This will allow you to add proper checks for all your args, so that you can tell
 
 But this does not mark the end of the page. If you feel adventurous you can read on and learn how to use Regular Expressions to easily convert a mention into a user object in just two lines.
 
-### The ban command from the intro
+### Ban command
 
 You now know how to parse user mentions for a simple command like the avatar command. However the avatar command does not benefit from it as much as the example used in the intro to this guide.
 
