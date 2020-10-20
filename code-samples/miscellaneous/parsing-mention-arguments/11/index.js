@@ -32,7 +32,7 @@ function getUserFromMentionRegEx(mention) {
 	return client.users.get(id);
 }
 
-client.on('message', message => {
+client.on('message', async message => {
 	if (!message.content.startsWith(config.prefix)) return;
 
 	const withoutPrefix = message.content.slice(config.prefix.length);
@@ -53,6 +53,26 @@ client.on('message', message => {
 		}
 
 		return message.channel.send(`${message.author.username}, your avatar: ${message.author.displayAvatarURL}`);
+	}
+
+	if (command === 'ban') {
+		if (args.length < 2) {
+			return message.reply('Please mention the user you want to ban and specify a ban reason.');
+		}
+
+		const user = getUserFromMention(args[0]);
+		if (!user) {
+			return message.reply('Please use a proper mention if you want to ban someone.');
+		}
+
+		const reason = args.slice(1).join(' ');
+		try {
+			await message.guild.ban(user, { reason });
+		} catch (error) {
+			return message.channel.send(`Failed to ban **${user.tag}**: ${error}`);
+		}
+
+		return message.channel.send(`Successfully banned **${user.tag}** from the server!`);
 	}
 });
 
