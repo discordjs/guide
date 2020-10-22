@@ -6,7 +6,7 @@ When first confronted with them they can be quite confusing, but no worries we a
 
 ## Roles as bot permissions
 
-If you want to keep your bots permission checks simple, you might find it sufficient to just check if the member executing the command has a certain role.
+If you want to keep your bot's permission checks simple, you might find it sufficient to just check if the member executing the command has a certain role.
 
 If you have the role ID, you can simply check if the `.roles` Collection on a GuildMember object includes it, using `.has()`. Should you not know the ID and want to check for something like a role named "Mod", you can use `.some()`.
 
@@ -300,7 +300,7 @@ discord.js features two utility methods to easily determine the final permission
 
 </branch>
 
-To check your bots permissions in the channel the command was used in, you could use something like this:
+To check your bot's permissions in the channel the command was used in, you could use something like this:
 
 ```js
 // final permissions for a guild member using permissionsFor

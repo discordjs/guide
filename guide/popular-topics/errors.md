@@ -176,7 +176,7 @@ const client = new Client();
 
 client.on('message', someHandlerFunction);
 
-client.login('token');
+client.login('your-token-goes-here');
 //	client will not be logged in yet!
 client.fetchUser('myId').then(someInitFunction);
 ```
@@ -202,7 +202,7 @@ const client = new Client();
 
 client.on('message', someHandlerFunction);
 
-client.login('token');
+client.login('your-token-goes-here');
 //	client will not be logged in yet!
 client.users.fetch('myId').then(someInitFunction);
 ```

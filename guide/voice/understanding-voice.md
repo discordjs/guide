@@ -58,7 +58,7 @@ Just as we send audio to the UDP socket, we also receive audio through the UDP s
 ### Key takeaways
 
 - You should be familiar with the definitions in the glossary above
-- A voice connection does not disrupt the bots main gateway - separate connections to a voice gateway and UDP socket are created
+- A voice connection does not disrupt the bot's main gateway - separate connections to a voice gateway and UDP socket are created
 - The `StreamDispatcher` is essentially a WritableStream that takes Opus audio
 - Receiving audio is officially unsupported, however we do our best to maintain it
 - Playing audio has varying complexity depending on the file/audio you want to play - the simplest (and most efficient) files to play would be Ogg/WebM files as they already contain Opus audio. Other files must be passed through FFmpeg and an Opus Encoder before they are able to be played

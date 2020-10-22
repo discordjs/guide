@@ -44,7 +44,7 @@ After that is the `owner` parameter, which should contain the ID for the owner o
 The users you set here have complete control over the bot. They can use eval and other owner-only commands, ignore command throttling, and bypass all user permissions! Be sure to only give this to people you trust!
 :::
 
-The final option, `invite`, is the **full** invite URL to your bots support server. While not a required option, it's a good idea to have a support server on hand to handle questions and concerns your users may have about your bot if it is public. If not, it's safe to leave this option out.
+The final option, `invite`, is the **full** invite URL to your bot's support server. While not a required option, it's a good idea to have a support server on hand to handle questions and concerns your users may have about your bot if it is public. If not, it's safe to leave this option out.
 
 Next you're going to register the command groups, args types, and default commands. Then, you register the commands in a folder. You can name the folder whatever you want, but it's recommended to stick with `commands`, as it makes the most sense.
 
@@ -95,7 +95,7 @@ client.once('ready', () => {
 client.on('error', console.error);
 ```
 
-This will send a message to your console when the bot is ready, and set the bots playing status to "with Commando". You can set both to whatever you wish.
+This will send a message to your console when the bot is ready, and set the bot's playing status to "with Commando". You can set both to whatever you wish.
 
 Last but certainly not least, log the bot in.
 
