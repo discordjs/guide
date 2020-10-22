@@ -175,7 +175,7 @@ client.on('error', m => logger.log('error', m));
 
 process.on('uncaughtException', error => logger.log('error', error));
 
-client.login('token');
+client.login('your-token-goes-here');
 ```
 
 The above code creates a simple logger which will log to both the console and a file called "log" (defined by the `transports` options).  

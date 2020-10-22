@@ -169,7 +169,7 @@ After accessing the `.icon` property off of the `data` object, you can send that
 
 ---
 
-If you want to change your bots username username, you can use the `ClientUser#setUsername` method.
+If you want to change your bot's username, you can use the `ClientUser#setUsername` method.
 ```
 
 References to class names should be capitalized, but remain outside of backticks. For example:

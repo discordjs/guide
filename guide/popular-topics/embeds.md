@@ -1,9 +1,9 @@
 # Embeds
 
-If you have been around on Discord for a bit chances are you have seen these special messages.
-They have a colored border, are often sent by bots and have embedded images, text fields and other fancy stuff.
+If you have been around on Discord for a bit, chances are you have seen these special messages, often sent by bots.
+They can have a colored border, embedded images, text fields, and other fancy properties.
 
-In the following section we will explain how you compose an embed, send it, and what you need to be aware of while doing so.
+In the following section we will explain how to compose an embed, send it, and what you need to be aware of while doing so.
 
 ## Embed preview
 

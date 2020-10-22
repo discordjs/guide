@@ -38,7 +38,7 @@ Some Discord permissions apply implicitly based on logical use, which can cause 
 The prime example for implicit permissions is `VIEW_CHANNEL`. If this flag is missing in the final permissions, you can't do anything on that channel. Makes sense, right? If you can't view the channel, you can't read or send messages in it, set the topic, or change its name.
 The library does not handle implicit permissions for you, so understanding how the system works is vital for you as a bot developer.
 
-Let's say you want to send a message in a channel. To prevent unnecessary API calls, you want to make sure your bots permissions in this channel include `SEND_MESSAGES` (more on how to achieve this [here](/popular-topics/permissions.md#checking-for-permissions)). The check passes, but you still can't actually send the message and are greeted with `DiscordAPIError: Missing Access`.
+Let's say you want to send a message in a channel. To prevent unnecessary API calls, you want to make sure your bot's permissions in this channel include `SEND_MESSAGES` (more on how to achieve this [here](/popular-topics/permissions.md#checking-for-permissions)). The check passes, but you still can't actually send the message and are greeted with `DiscordAPIError: Missing Access`.
 
 This means your bot is missing `VIEW_CHANNEL`, and as such, can't send messages either.
 
@@ -69,7 +69,7 @@ During your development you will likely run into `DiscordAPIError: Missing Permi
 
 - Your bot is missing the needed permission to execute this action in it's calculated base or final permissions (requirement changes based on the type of action you are trying to execute).
 - You provided an invalid permission number while trying to create overwrites. (The calculator on the apps page returns decimal values while the developer documentation lists the flags in hex. Make sure you are not mixing the two and don't use the hex prefix `0x` where not applicable)
-- It is trying to execute an action on a guild member with a role higher than or equal to your bots highest role.
+- It is trying to execute an action on a guild member with a role higher than or equal to your bot's highest role.
 - It is trying to modify or assign a role that is higher than or equal to its highest role.
 - It is trying to add a managed role to a member.
 - It is trying to remove a managed role from a member.

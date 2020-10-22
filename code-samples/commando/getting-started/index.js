@@ -23,4 +23,4 @@ client.once('ready', () => {
 
 client.on('error', console.error);
 
-client.login('Your Secret Token');
+client.login('your-token-goes-here');
