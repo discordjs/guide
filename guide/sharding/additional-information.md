@@ -171,6 +171,5 @@ This example will work the same, but you are able to produce cleaner code with `
 If you'd like to check out a full example of sharding, here are the open-source examples we've found:
 
 * [Listen.moe](https://github.com/LISTEN-moe/discord-bot)
-* [Bastion](https://github.com/TheBastionBot/Bastion)
 
 If you know of other open source bots that are sharded and use discord.js, feel free to [make a pull request](https://github.com/discordjs/guide/blob/master/guide/sharding/additional-information.md)!
