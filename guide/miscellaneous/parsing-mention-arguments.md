@@ -146,7 +146,7 @@ It essentially just works itself through the structure of the mention bit by bit
 Whenever it encounters an error with the mention (i.e. invalid structure) it simply returns `undefined` to signal the mention is invalid.
 
 ::: tip
-The `.slice()` method is used in a more advance way here. You can read the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) for more info.
+The `.slice()` method is used in a more advanced way here. You can read the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) for more info.
 :::
 
 Now you have a nifty function you can use whenever you need to convert a raw mention into a proper user object.
