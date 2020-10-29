@@ -1,5 +1,52 @@
 # Gateway Intents
+:::danger
+The high volume of requests regarding recent API changes have made a change necessary here. This is a makeshift placeholder based around current knowledge until we can invest resources to properly rewrite the section on intents.
 
+We are sorry for any confusion or inconvenience our previous explanations might have caused for developers and discord staff! We are doing our best to update information as it becomes available.
+:::
+
+:::warning
+
+**Privileged intents and what they mean for you** </br>
+**❯ If you are on version 11 or earlier**  </br>
+• Update. We no longer provide support for or add features and bug fixes to version 11.  </br> </br>
+
+**❯ Which intents are privileged, which do I need?**  </br>
+• `GUILD_MEMBERS` | `guildMemberAdd`, `guildMemberRemove`, `guildMemberUpdate`  </br>
+• `GUILD_PRESENCES` | `presenceUpdate`, knowledge about peoples activities and client status  </br>
+• If your bot does not need this information to provide its functionality, please do not request it.  </br> </br>
+
+**❯ How can I do things without these events?**  </br>
+• Try to design your commands so they do not require this information  </br>
+• Fetch member data by ID as you need it `<Guild>.members.fetch("id")`  </br>
+• You have `GUILD_MEMBERS`: consider fetching members periodically, for the initial operation on boot you can consider using the client option `fetchAllMembers` (note: this will heavily increase memory usage)  </br> </br>
+
+**❯ A) Your bot is verified**  </br>
+• You need to reach out to discord support `R3` in order for intents to be enabled  </br>
+• Please include a use case sample as to why you need that intent into your request  </br>
+• Read `R1`, it explains the whole procedure and requirements  </br> </br>
+
+**❯ B) Your bot is not verified**  </br>
+• You can switch the intent toggles in the developer dashboard's "bot" section `R2`  </br>
+• You should still consider designing your commands to not require privileged intents where ever possible  </br> </br>
+
+**❯ Symptoms you might be experiencing right now:**  </br>
+• member caches are empty *(or only have very few entries)*  </br>
+• user cache is empty *(or has only very few entries)*  </br>
+• fetching members times out  </br>
+• all members appear to be offline  </br>
+• login times out if you try to fetch all members on startup  </br>
+• The client events `"guildMemberAdd"`, `"guildMemberRemove"`, `"guildMemberUpdate"` do not emit  </br>
+• `Guild#memberCount` returns count as of ready  </br> </br>
+
+**❯ Resources**  </br> 
+• `R1` Discords FAQ: <https://dis.gd/gwupdate>  </br>
+• `R2` Discord Developer Portal: <https://discord.com/developers/applications>  </br>
+• `R3` Discord Support: <https://dis.gd/contact>
+
+:::
+
+<!--
 :::warning
 As of October 7th 2020, the privileged intents `GUILD_PRESENCES` and `GUILD_MEMBERS` must be enabled for your bot application in the Developer Portal if you wish to continue receiving them. For bots in 100+ servers, enabling these intents will require verification. 
 
@@ -82,3 +129,4 @@ Discord permissions are stored in a 53-bit integer and calculated using bitwise 
 In discord.js, permission bit fields are represented as either the decimal value of said bit field or its referenced flags. Every position in a permissions bit field represents one of these flags and its state (either referenced `1` or not referenced `0`).
 
 </branch>
+-->
