@@ -1699,6 +1699,14 @@ The `streamDispatcher.time` property has been renamed to `streamDispatcher.strea
 
 Has been removed entirely, along with all other user account-only methods and properties.
 
+#### TextChannel#awaitMessages
+
+The legacy property `maxMatches` is no longer supported in v12 in the AwaitMessagesOptions object. Please use `max` as described in the documentation.
+```diff
+- channel.awaitMessages(filterFunction, { maxMatches: 2, time: 15000 });
++ channel.awaitMessages(filterFunction, { max: 2, time: 15000 });
+```
+
 #### TextChannel#\*\*\*position
 
 See the [GuildChannel](/additional-info/changes-in-v12.md#guildchannel) section for changes to positions.
