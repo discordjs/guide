@@ -157,7 +157,7 @@ var collector = message.createReactionCollector(filter, { time: 15000 });
 
 ```js
 // arrow functions, full ES6
-client.once('ready', () => console.log('Ready!'));
+client.once('ready', _ => console.log('Ready!'));
 
 client.on('typingStart', (channel, user) => console.log(`${user} started typing in ${channel}`));
 
