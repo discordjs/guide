@@ -488,7 +488,7 @@ The `client.resume` event has been removed in favor of the `client.shardResume` 
 
 ```diff
 - client.on('resume', replayed => console.log(`Resumed connection and replayed ${replayed} events.`));
-+ client.on('shardResume', (replayed, shardID) => console.log(`Shard ID ${shardID} resumed connection and replayed ${replayed} events.`));
++ client.on('shardResume', (shardID, replayed) => console.log(`Shard ID ${shardID} resumed connection and replayed ${replayed} events.`));
 ```
 
 #### Client#status
