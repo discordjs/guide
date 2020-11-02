@@ -312,7 +312,7 @@ const user = <message>.mentions.users.first();
 ```
 
 ::: tip
-Mentions in embeds may resolve correctly but will never notify the user. Some areas of embeds do not support mentions at all.
+Mentions in embeds may resolve correctly but will never notify the user. Some areas of embeds do not support mentions at all (such as embed titles).
 :::
 
 ### How do I prompt the user for additional input?
