@@ -142,7 +142,7 @@ Now that your structure is defined, you need to make sure the model exists in th
 Tags.sync();
 ```
 
-The table does not actually get created until you `sync` it. The schema you defined from before was simply creating the model that lets Sequelize know what the data should look like. For testing, you can use `Tags.sync({ force: true })` to recreate the table every time on startup. This way you can get blank slate each time.
+The table does not actually get created until you `sync` it. The schema you defined from before was simply creating the model that lets Sequelize know what the data should look like. For testing, you can use `Tags.sync({ force: true })` to recreate the table every time on startup. This way you can get a blank slate each time.
 
 ### [delta] Adding a tag
 
