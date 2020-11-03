@@ -60,7 +60,7 @@ client.on('message', message => {
 				return client.api.guilds(foundEmoji.guild).get()
 					.then(raw => {
 						const guild = new Discord.Guild(client, raw);
-						const emoji = new Discord.GuildEmoji(client, guild, foundEmoji);
+						const emoji = new Discord.GuildEmoji(client, foundEmoji, guild);
 						return message.reply(`I have found an emoji ${emoji.toString()}!`);
 					});
 			});
