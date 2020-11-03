@@ -380,7 +380,7 @@ You do not need to have a constant local variable like `blockedUsers` above. If 
 <client>.on('message', async message => {
 	const blockedUsers = await database.query('SELECT user_id FROM blocked_users;');
 	if (blockedUsers.includes(message.author.id)) return;
-})
+});
 ```
 
 Note that this is just a showcase of how such a check could be done.
