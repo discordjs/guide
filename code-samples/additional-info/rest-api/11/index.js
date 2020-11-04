@@ -18,9 +18,10 @@ client.on('message', async message => {
 	const command = args.shift().toLowerCase();
 
 	if (command === 'cat') {
-		const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
+		const file = await fetch('https://aws.random.cat/meow')
+		const fileJson = await file.json();
 
-		message.channel.send(file);
+		message.channel.send(fileJson.file);
 	} else if (command === 'urban') {
 		if (!args.length) {
 			return message.channel.send('You need to supply a search term!');
@@ -28,13 +29,14 @@ client.on('message', async message => {
 
 		const query = querystring.stringify({ term: args.join(' ') });
 
-		const { list } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`).then(response => response.json());
+		const list = await fetch(`https://api.urbandictionary.com/v0/define?${query}`)
+		const listJson = await list.json();
 
-		if (!list.length) {
+		if (!listJson.length) {
 			return message.channel.send(`No results found for **${args.join(' ')}**.`);
 		}
 
-		const [answer] = list;
+		const [answer] = listJson;
 
 		const embed = new Discord.RichEmbed()
 			.setColor('#EFFF00')
