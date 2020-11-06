@@ -1,14 +1,12 @@
 <template>
 	<div v-if="showNotice" class="eol-notice">
-		Discord has announced breaking API changes that will not be implemented into discord.js version 11.
-		<br />
-		We expect this to happen around October 2020.
-		<br />
-		Along with this we decided to no longer maintain bug fixes or new features for version 11 of discord.js. Please
+		We no longer provide support, maintain bug fixes or new features for version 11 of discord.js. Please
 		<router-link to="/additional-info/changes-in-v12.html">
 			update your bot to version 12
 		</router-link>
-		at your earliest convenience. <a href="#" @click.prevent="dismiss">[Dismiss for 1 week]</a>
+		at your earliest convenience.
+		<br />
+		We expect version 11 to die for good around the start of 2021 due to discord introducing breaking changes.  <a href="#" @click.prevent="dismiss">[Dismiss for 1 week]</a>
 	</div>
 </template>
 
