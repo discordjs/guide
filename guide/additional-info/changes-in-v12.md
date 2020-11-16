@@ -1375,7 +1375,7 @@ The `messageCollector.message` event has been removed in favor of the generic `c
 The `max` and `maxMatches` properties of the `MessageCollector` class have been renamed and repurposed.
 
 ```diff
-- `max`: The The maximum amount of messages to process.
+- `max`: The maximum amount of messages to process.
 + `maxProcessed`: The maximum amount of messages to process.
 
 - `maxMatches`: The maximum amount of messages to collect.
