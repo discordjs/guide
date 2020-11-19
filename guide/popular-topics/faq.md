@@ -360,6 +360,32 @@ Mentions in embeds may resolve correctly in embed description and field values b
 If you want to learn more about this syntax or reaction collectors, check out [this dedicated guide page for collectors](/popular-topics/collectors.md)!
 :::
 
+### How do I block a user from using my bot?
+
+<!-- eslint-skip -->
+
+```js
+const blockedUsers = [ 'id1', 'id2' ];
+<client>.on('message', message => {
+	if (blockedUsers.includes(message.author.id)) return;
+});
+```
+
+:::tip
+You do not need to have a constant local variable like `blockedUsers` above. If you have a database system which you use to store IDs of blocked users, you can query the database instead:
+
+<!-- eslint-skip -->
+
+```js
+<client>.on('message', async message => {
+	const blockedUsers = await database.query('SELECT user_id FROM blocked_users;');
+	if (blockedUsers.includes(message.author.id)) return;
+});
+```
+
+Note that this is just a showcase of how such a check could be done.
+:::
+
 ### How do I react to the message my bot sent?
 
 <!-- eslint-skip -->
