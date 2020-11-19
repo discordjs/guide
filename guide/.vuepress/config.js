@@ -4,6 +4,8 @@ const config = {
 	title: 'Discord.js Guide',
 	description: 'A guide made by the community of discord.js for its users.',
 	head: [
+		['meta', { charset: 'utf-8' }],
+		['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }],
 		['link', { rel: 'icon', href: '/favicon.png' }],
 		['meta', { name: 'theme-color', content: '#42b983' }],
 		['meta', { name: 'twitter:card', content: 'summary' }],
