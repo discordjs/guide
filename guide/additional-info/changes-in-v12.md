@@ -914,6 +914,15 @@ Unfortunately, "default" channels don't exist in Discord anymore, and as such, t
 Not sure how to set up a database? Check out [this page](/sequelize/)!
 :::
 
+#### Guild#defaultRole
+
+`guild.defaultRole` has been moved to the RoleManager and renamed to use the less confusing "everyone" terminology.
+
+```diff
+- guild.defaultRole
++ guild.roles.everyone
+```
+
 #### Guild#emojis
 
 `guild.emojis` has been transformed in the shape of a Manager.
