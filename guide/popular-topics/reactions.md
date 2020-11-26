@@ -331,7 +331,7 @@ This feature is not available on version 11.x if you want to listen for reaction
 Messages sent before your bot started are uncached, unless you fetch them first. By default the library does not emit client events if the data received and cached is not sufficient to build fully functional objects.
 Since version 12 you can change this behavior by activating partials. For a full explanation of partials see [this page](/popular-topics/partials.md).
 
-Make sure you enable partial structures for `MESSAGE`, `CHANNEL` and `REACTION` when instantiating your client, if you want reaction events on uncached messages for both server and direct message channels. If you do not want to support direct message channels you can exclude `CHANNEL`.
+Make sure you enable partial structures for `MESSAGE`, `CHANNEL`, `USER` and `REACTION` when instantiating your client, if you want reaction events on uncached messages for both server and direct message channels. If you do not want to support direct message channels you can exclude `CHANNEL`.
 
 :::tip
 If you use [gateway intents](/popular-topics/intents.md) but can't or don't want to use the privileged `GUILD_PRESENCES` intent you additionally need the `USER` partial.
@@ -339,18 +339,19 @@ If you use [gateway intents](/popular-topics/intents.md) but can't or don't want
 
 ```js
 const Discord = require('discord.js');
-const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
+const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'USER', 'REACTION'] });
 client.on('messageReactionAdd', async (reaction, user) => {
-	// When we receive a reaction we check if the reaction is partial or not
-	if (reaction.partial) {
-		// If the message this reaction belongs to was removed the fetching might result in an API error, which we need to handle
-		try {
-			await reaction.fetch();
-		} catch (error) {
-			console.error('Something went wrong when fetching the message: ', error);
-			// Return as `reaction.message.author` may be undefined/null
-			return;
-		}
+	try {
+		// We fetch the reaction and/or user if they are partial
+		await Promise.all([
+		    reaction.partial ? reaction.fetch() : null,
+		    user.partial ? user.fetch() : null,
+		]);
+	} catch (error) {
+		// If the message or user this reaction belongs to was removed the fetching might result in an API error, which we need to handle
+		console.error('Something went wrong when fetching the message: ', error);
+		// Return as `reaction.message.author` may be undefined/null
+		return;
 	}
 	// Now the message has been cached and is fully available
 	console.log(`${reaction.message.author}'s message "${reaction.message.content}" gained a reaction!`);
