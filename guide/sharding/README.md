@@ -280,7 +280,7 @@ Promise.all(promises)
 -		return message.channel.send(`Server count: ${client.guilds.size}`);
 +		const promises = [
 +			client.shard.fetchClientValues('guilds.size'),
-+			client.shard.broadcastEval('this.guilds.reduce((acc, guild) => acc + guild.memberCount, 0)'')
++			client.shard.broadcastEval('this.guilds.reduce((acc, guild) => acc + guild.memberCount, 0)')
 +		];
 +
 +		return Promise.all(promises)
