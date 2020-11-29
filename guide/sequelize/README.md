@@ -123,7 +123,7 @@ const Tags = sequelize.define('tags', {
 });
 ```
 
-The model mirrors very closely to what is defined in the database. There will be a table with 4 fields called `name`, `description`, `userid`, and `usage_count`.  
+The model mirrors very closely to what is defined in the database. There will be a table with 4 fields called `name`, `description`, `username`, and `usage_count`.  
 `sequelize.define()` takes two parameters. `'tags'` is passed as the name of our table, and an object that represents the table's schema in key-value pairs. Keys in the object become the model's attributes, and the values describe the attributes.
 
 `type` refers to what kind of data this attribute should hold. The most common types are number, string, and date, but there are other data types that are available depending on the database.  
