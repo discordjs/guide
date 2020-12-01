@@ -1,10 +1,10 @@
 # Additional information
 
 ::: tip
-This page is a follow-up and bases its code off of [the previous page](/sharding/).
+This page is a follow-up and bases its code on [the previous page](/sharding/).
 :::
 
-Here are some extra topics covered about sharding that you might have concerns about.
+Here are some extra topics covered about sharding that might have raised concerns.
 
 ## Legend
 
@@ -39,7 +39,7 @@ client.shard.broadcastEval('if (this.shard.id === 0) process.exit();');
 <branch version="12.x">
 
 ::: tip
-In version 12 [`client.shard`](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=ids) can hold multiple ids. If you use the default sharding manager the `.ids` array will only have one entry.
+In version 12 [`client.shard`](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=ids) can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
 :::
 
 ```js
@@ -62,15 +62,15 @@ const manager = new ShardingManager('./bot.js', {
 });
 ```
 
-The `execArgv` property is what you would normally pass to node without sharding, e.g.:
+The `execArgv` property is what you would usually pass to node without sharding, e.g.:
 
 ```
 node --trace-warnings bot.js
 ```
 
-You can find a list of command line options for node [here](https://nodejs.org/api/cli.html).
+You can find a list of command-line options for node [here](https://nodejs.org/api/cli.html).
 
-The `shardArgs` property is what you would normally pass to your bot without sharding, e.g.:
+The `shardArgs` property is what you would usually pass to your bot without sharding, e.g.:
 
 ```
 node bot.js --ansi --color
@@ -80,13 +80,13 @@ You can access them later as usual via `process.argv`, which contains an array o
 
 ## Eval arguments
 
-There may come a point where you will want to pass functions or arguments from the outer scope into a `.broadcastEval()` call.
+There may come the point where you will want to pass functions or arguments from the outer scope into a `.broadcastEval()` call.
 
 ```js
 client.shard.broadcastEval(`(${funcName})('${arg}')`);
 ```
 
-In this small snippet, an entire function is being passed to the eval. It needs to be encased in parenthesis; it will throw errors on its way there otherwise. Another set of parenthesis is needed so the function actually gets called. Finally, the passing of the argument itself, which slightly varies, depending on the type of argument you are passing. If it's a string, you must wrap it in quotes, or it will be interpreted as is and will throw a syntax error, because it won't be a string by the time it gets there.
+In this small snippet, an entire function is passed to the eval. It needs to be encased in parenthesis; it will throw errors on its way there otherwise. Another set of parenthesis is required, so the function gets called. Finally, the passing of the argument itself, which slightly varies, depending on the type of argument you are passing. If it's a string, you must wrap it in quotes, or it will be interpreted as is and will throw a syntax error because it won't be a string by the time it gets there.
 
 Now, what if you wanted to call a function from *within* the client context? That is to say, you are not passing a function. It would look something like this:
 
@@ -94,7 +94,7 @@ Now, what if you wanted to call a function from *within* the client context? Tha
 client.shard.broadcastEval(`this.${funcName}(${args});`);
 ```
 
-This would become `client.funcName(args)` once it gets through. This is handy if you, for example, have extended your client object with your own class and wish to call some of its methods manually.
+This would become `client.funcName(args)` once it gets through. This is handy if you, for example, have extended your client object with your class and wish to call some of its methods manually.
 
 ### Asynchronous functions
 
@@ -104,12 +104,12 @@ There may be a time when you want to have your shard process an asynchronous fun
 
 ```js
 client.shard.broadcastEval(`
-	let channel = this.channels.get('id');
-	let msg;
-	if (channel) {
-		msg = channel.fetchMessage('id').then(m => m.id);
-	}
-	msg;
+    let channel = this.channels.get('id');
+    let msg;
+    if (channel) {
+        msg = channel.fetchMessage('id').then(m => m.id);
+    }
+    msg;
 `);
 ```
 
@@ -118,31 +118,31 @@ client.shard.broadcastEval(`
 
 ```js
 client.shard.broadcastEval(`
-	let channel = this.channels.cache.get('id');
-	let msg;
-	if (channel) {
-		msg = channel.messages.fetch('id').then(m => m.id);
-	}
-	msg;
+    let channel = this.channels.cache.get('id');
+    let msg;
+    if (channel) {
+        msg = channel.messages.fetch('id').then(m => m.id);
+    }
+    msg;
 `);
 ```
 
 </branch>
 
-This snippet allows you to return fetched messages outside of the `broadcastEval`, allowing you to know whether or not you were able to retrieve a message, for example. Remember, you aren't able to return entire objects outside. Now, what if we wanted to use `async/await` syntax inside?
+This snippet allows you to return fetched messages outside of the `broadcastEval`, letting you know whether or not you were able to retrieve a message, for example. Remember, you aren't able to return entire objects outside. Now, what if we wanted to use `async/await` syntax inside?
 
 <branch version="11.x">
 
 ```js
 client.shard.broadcastEval(`
-	(async () => {
-		let channel = this.channels.get('id');
-		let msg;
-		if (channel) {
-			msg = await channel.fetchMessage('id').then(m => m.id);
-		}
-		return msg;
-	})();
+    (async () => {
+        let channel = this.channels.get('id');
+        let msg;
+        if (channel) {
+            msg = await channel.fetchMessage('id').then(m => m.id);
+        }
+        return msg;
+    })();
 `);
 ```
 
@@ -151,20 +151,20 @@ client.shard.broadcastEval(`
 
 ```js
 client.shard.broadcastEval(`
-	(async () => {
-		let channel = this.channels.cache.get('id');
-		let msg;
-		if (channel) {
-			msg = await channel.messages.fetch('id').then(m => m.id);
-		}
-		return msg;
-	})();
+    (async () => {
+        let channel = this.channels.cache.get('id');
+        let msg;
+        if (channel) {
+            msg = await channel.messages.fetch('id').then(m => m.id);
+        }
+        return msg;
+    })();
 `);
 ```
 
 </branch>
 
-This example will work the same, but you are able to produce cleaner code with `async/await`. Additionally. What this does is declare an asynchronous function and then immediately call it. As it is also the last declared line, it is effectively being returned. Remember that you need to `return` an item inside a function one way or another.
+This example will work the same, but you can produce cleaner code with `async/await`. Additionally, what this does is declare an asynchronous function and then immediately call it. As it is also the last declared line, it is effectively being returned. Remember that you need to `return` an item inside a function one way or another.
 
 ## Sharded Bot Example(s)
 
@@ -172,4 +172,4 @@ If you'd like to check out a full example of sharding, here are the open-source 
 
 * [Listen.moe](https://github.com/LISTEN-moe/discord-bot)
 
-If you know of other open source bots that are sharded and use discord.js, feel free to [make a pull request](https://github.com/discordjs/guide/blob/master/guide/sharding/additional-information.md)!
+If you know of other open-source bots that use sharding and discord.js, feel free to [make a pull request](https://github.com/discordjs/guide/blob/master/guide/sharding/additional-information.md)!

@@ -1,14 +1,14 @@
 # Permissions
 
-Permissions are Discords primary feature enabling users to customize the workings of their server to their liking.
-To break it down to essentials: Permissions and permission overwrites tell Discord who is allowed to do what and where.
-When first confronted with them they can be quite confusing, but no worries we are here to take care of that, so let's dive in!
+Permissions are Discord's primary feature, enabling users to customize the workings of their server to their liking.
+Essentially, Permissions and permission overwrites tell Discord who is allowed to do what and where.
+When first confronted with them, they can be quite confusing, but no worries, we are here to take care of that, so let's dive in!
 
 ## Roles as bot permissions
 
-If you want to keep your bot's permission checks simple, you might find it sufficient to just check if the member executing the command has a certain role.
+If you want to keep your bot's permission checks simple, you might find it sufficient to check if the member executing the command has a specific role.
 
-If you have the role ID, you can simply check if the `.roles` Collection on a GuildMember object includes it, using `.has()`. Should you not know the ID and want to check for something like a role named "Mod", you can use `.some()`.
+If you have the role ID, you can check if the `.roles` Collection on a GuildMember object includes it, using `.has()`. Should you not know the ID and want to check for something like a "Mod" role, you can use `.some()`.
 
 <branch version="11.x">
 
@@ -33,7 +33,7 @@ member.roles.cache.some(role => role.name === 'Mod');
 
 </branch>
 
-If you want to enhance this system slightly, you can include the guild owner by comparing the executing members ID with `message.guild.ownerID`. 
+If you want to enhance this system slightly, you can include the guild owner by comparing the executing member's ID with `message.guild.ownerID`. 
 
 To include permission checks like `ADMINISTRATOR` or `MANAGE_GUILD`, keep reading as we will cover Discord Permissions and all their intricacies in the following sections.
 
@@ -42,12 +42,12 @@ To include permission checks like `ADMINISTRATOR` or `MANAGE_GUILD`, keep readin
 * Permission: The ability to execute a certain action in Discord
 * Overwrite: Rule on a channel to modify the permissions for a member or role
 * Bit field: Binary representation of Discord permissions 
-* Flag: Human readable string in MACRO_CASE, for example `'KICK_MEMBERS'`, refers to a position in the permission bit field. You can find a list of all valid flags in the <branch version="11.x" inline>[discord.js documentation](https://discord.js.org/#/docs/main/v11/class/Permissions?scrollTo=s-FLAGS)</branch><branch version="12.x" inline>[discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Permissions?scrollTo=s-FLAGS)</branch>
+* Flag: Human readable string in MACRO_CASE, for example, `'KICK_MEMBERS'`, refers to a position in the permission bit field. You can find a list of all valid flags in the <branch version="11.x" inline>[discord.js documentation](https://discord.js.org/#/docs/main/v11/class/Permissions?scrollTo=s-FLAGS)</branch><branch version="12.x" inline>[discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Permissions?scrollTo=s-FLAGS)</branch>
 * Base Permissions: Permissions for roles the member has, set on the guild level
 * Final Permissions: Permissions for a member or role, after all overwrites are applied
 
 ::: tip
-You can provide permission decimals wherever we use flag literals in this guide. If you are interested in a handy permission calculator you can look at the "Bot" section in the [Discord developer portal](https://discord.com/developers/applications).
+You can provide permission decimals wherever we use flag literals in this guide. If you are interested in a handy permission calculator, you can look at the "Bot" section in the [Discord developer portal](https://discord.com/developers/applications).
 :::
 
 ## Base permissions
@@ -71,10 +71,10 @@ guild.roles.everyone.setPermissions(['SEND_MESSAGES', 'VIEW_CHANNEL']);
 
 </branch>
 
-Any permission not referenced in the flag array or bit field are not granted to the role. 
+Any permission not referenced in the flag array or bit field is not granted to the role. 
 
 ::: tip
-Note that flag names are literal. Although `VIEW_CHANNEL` grants access to view multiple channels the permission flag is still called `VIEW_CHANNEL` in singular.
+Note that flag names are literal. Although `VIEW_CHANNEL` grants access to view multiple channels, the permission flag is still called `VIEW_CHANNEL` in the singular.
 :::
 
 ### Creating a role with permissions
@@ -139,7 +139,7 @@ If you provide multiple permissions to the method, it will only return `true` if
 
 ## Channel overwrites
 
-Permission overwrites control the abilities of members for this specific channel or a set of channels if applied to a category with synchronized child channels.
+Permission overwrites control members' abilities for this specific channel or a set of channels if applied to a category with synchronized child channels.
 
 As you have likely already seen in your desktop client, channel overwrites have three states: 
 
@@ -168,9 +168,9 @@ channel.updateOverwrite(channel.guild.roles.everyone, { VIEW_CHANNEL: false });
 
 </branch>
 
-Any permission flags not specified get neither an explicit allow nor deny overwrite and will use the base permission, unless another role has an explicit overwrite set.
+Any permission flags not specified get neither an explicit allow nor deny overwrite and will use the base permission unless another role has an explicit overwrite set.
 
-You can also provide an array of overwrites during channel creation as shown below:
+You can also provide an array of overwrites during channel creation, as shown below:
 
 <branch version="11.x">
 
@@ -264,7 +264,7 @@ channel.overwritePermissions([
 
 ### Removing overwrites
 
-To remove the overwrite for a specific member or role, you can get it from the channels permissionOverwrites Collection and call the `.delete()` method on it. Since the Collection is keyed by the target's ID (either role ID or user ID), the respective overwrite is very easy to access.
+To remove the overwrite for a specific member or role, you can get it from the channels permissionOverwrites Collection and call the `.delete()` method on it. Since the Collection is keyed by the target's ID (either role ID or user ID), the respective overwrite is easy to access.
 
 ```js
 // deleting the channels overwrite for the message author
@@ -273,9 +273,9 @@ channel.permissionOverwrites.get(message.author.id).delete();
 
 ### Syncing with a category
 
-If the permission overwrites on a channel under a category match with the parent (category) the channel is considered to be synchronized. This means that any changes in the categories overwrites will now also change the channels overwrites. Changing the child channels overwrites will not effect the parent. 
+If the permission overwrites on a channel under a category match with the parent (category), it is considered synchronized. This means that any changes in the categories overwrites will now also change the channels overwrites. Changing the child channels overwrites will not affect the parent. 
 
-To easily synchronize permissions with the parent channel you can call the `.lockPermissions()` method on the respective child channel.  
+To easily synchronize permissions with the parent channel, you can call the `.lockPermissions()` method on the respective child channel.  
 
 ```js
 if (!channel.parent) {
@@ -317,12 +317,12 @@ const rolePermissions = channel.permissionsFor(role);
 The `.permissionsFor()` and `.permissionsIn()` methods return a <branch version="11.x" inline>bit field</branch><branch version="12.x" inline>Permissions object</branch> with all permissions set if the member or role has the global `ADMINISTRATOR` permission and does not take overwrites into consideration in this case. Using the second parameter of the `.has()` method as described further down in the guide will not allow you to check without taking `ADMINISTRATOR` into account here!
 :::
 
-If you want to know how to work with the returned Permissions objects keep reading as this will be our next topic.
+If you want to know how to work with the returned Permissions objects, keep reading as this will be our next topic.
 
 ## The Permissions object
 
 The <branch version="11.x" inline>[Permissions](https://discord.js.org/#/docs/main/v11/class/Permissions)</branch><branch version="12.x" inline>[Permissions](https://discord.js.org/#/docs/main/stable/class/Permissions)</branch> object is a discord.js class containing a permissions bit field and a bunch of utility methods to manipulate it easily.
-Remember that using these methods will not manipulate permissions, but create a new instance representing the changed bit field.
+Remember that using these methods will not manipulate permissions but create a new instance representing the changed bit field.
 
 ### Displaying permission flags
 
@@ -331,14 +331,14 @@ Discord.js provides a `toArray()` method, which can be used to convert a `Permis
 ```js
 const memberPermissions = member.permissions.toArray();
 const rolePermissions = role.permissions.toArray();
-//	output: ['SEND_MESSAGES', 'ADD_REACTIONS', 'CHANGE_NICKNAME', ...]
+//  output: ['SEND_MESSAGES', 'ADD_REACTIONS', 'CHANGE_NICKNAME', ...]
 ```
 
 ::: tip 
 The return value of `toArray()` always represents the permission flags present in the Permissions instance that the method was called on. This means that if you call the method on, for example: `PermissionOverwrites#deny`, you will receive a pretty array of all denied permissions in that overwrite.
 :::
 
-Additionally, you can serialize the underlying bit field of the Permissions object by calling `.serialize()`. This returns an object which maps permission names to a boolean value, indicating whether or not the relevant "bit" is available in the Permissions instance.
+Additionally, you can serialize the Permissions object's underlying bit field by calling `.serialize()`. This returns an object that maps permission names to a boolean value, indicating whether the relevant "bit" is available in the Permissions instance.
 
 ```js
 const memberPermissions = member.permissions.serialize();
@@ -355,7 +355,7 @@ BAN_MEMBERS: false,
 ### Converting permission numbers
 
 Some methods and properties in Discord.js return permission decimals rather than a Permissions object, making it hard to manipulate or read them if you don't want to use bitwise operations.
-You can, however, pass these decimals to the Permissions constructor to convert them as shown below.
+However, you can pass these decimals to the Permissions constructor to convert them, as shown below.
 
 ```js
 const { Permissions } = require('discord.js');
@@ -418,7 +418,7 @@ console.log(adminPermissions.has('MANAGE_CHANNELS', false));
 
 ### Manipulating permissions
 
-The Permissions object enables you to easily add or remove certain permissions from an existing bit field without having to worry about bitwise operations. Both `.add()` and `.remove()` can take a single permission flag or number, an array of permission flags or numbers, or multiple permission flags or numbers as multiple parameters.
+The Permissions object enables you to easily add or remove certain permissions from an existing bit field without worrying about bitwise operations. Both `.add()` and `.remove()` can take a single permission flag or number, an array of permission flags or numbers, or multiple permission flags or numbers as multiple parameters.
 
 ```js
 const { Permissions } = require('discord.js');
@@ -443,12 +443,12 @@ console.log(permissions.has('KICK_MEMBERS'));
 // output : false
 ```
 
-You can utilize these methods to adapt permissions or overwrites without touching the other flags. To achieve this you can get the existing permissions for a role, manipulating the bit field as described above and passing the changed bit field to `role.setPermissions()`.
+You can utilize these methods to adapt permissions or overwrites without touching the other flags. To achieve this, you can get the existing permissions for a role, manipulating the bit field as described above and passing the changed bit field to `role.setPermissions()`.
 
 <branch version="11.x">
 
 ::: tip
-The expression `role.permissions` returns a number which needs to be converted to a Permissions object for this to work as described here. We covered how to achieve this in the section "[Converting permission numbers to Objects](/popular-topics/permissions.md#converting-permission-numbers)"
+The expression `role.permissions` returns a number that needs to be converted to a Permissions object for this to work as described here. We covered how to achieve this in the section "[Converting permission numbers to Objects](/popular-topics/permissions.md#converting-permission-numbers)"
 :::
 
 </branch>

@@ -1,6 +1,6 @@
 # Command handling
 
-As mentioned in a previous chapter, unless your bot project is a small one, it's not a very good idea to have a single file with a giant if/else if chain for commands. If you want to implement features into your bot and make your development process a lot less painful, you'll definitely want to use (or in this case, create) a command handler. Let's get started on that!
+Unless your bot project is a small one, it's not a very good idea to have a single file with a giant if/else if chain for commands. If you want to implement features into your bot and make your development process a lot less painful, you'll want to implement a command handler. Let's get started on that!
 
 Here's the base code we'll be using:
 
@@ -32,7 +32,7 @@ client.login(token);
 ```
 
 ::: tip
-We'll be moving over the commands created in [the previous page](/creating-your-bot/commands-with-user-input.md) as well, but for the sake of keeping the base code short, those commands have been omitted from the codeblock above.
+We'll be moving over the commands created in [the previous page](/creating-your-bot/commands-with-user-input.md) as well, but for the sake of keeping the base code short, the code block above omits those commands.
 :::
 
 ## Individual command files
@@ -53,14 +53,14 @@ module.exports = {
 };
 ```
 
-You can go ahead and do the same for the rest of your commands as well, putting their respective blocks of code inside the `execute()` function. If you've been using the same code as the guide thus far, you can copy & paste your commands into their own files now just fine without any issue, as long as you follow the format above. The `description` property is optional, but will be useful for the dynamic help command we'll be covering later.
+You can go ahead and do the same for the rest of your commands and put their respective blocks of code inside the `execute()` function. If you've been using the same code as the guide thus far, you can copy & paste your commands into their own files now, following the format above. The `description` property is optional but will be useful for the dynamic help command we'll be covering later.
 
 ::: tip
-`module.exports` is how you export data in Node.js so that you can `require()` it in other files. If you're unfamiliar with it and want to read more, you can take a look at [the documentation](https://nodejs.org/api/modules.html#modules_module_exports) for more info.
+`module.exports` is how you export data in Node.js so that you can `require()` it in other files. If you're unfamiliar with it and want to read more, you can look at [the documentation](https://nodejs.org/api/modules.html#modules_module_exports) for more info.
 :::
 
 ::: tip
-If you need to access your client instance from inside one of your command files, you can access it via `message.client`. If you need to access things such as external files or modules, you should re-require them at the top of the file.
+If you need to access your client instance from inside one of your command files, you can access it via `message.client`. If you need to access external files, modules, etc., you should re-require them at the top of the file.
 :::
 
 ## Dynamically reading command files
@@ -90,7 +90,7 @@ This next step is how you'll dynamically retrieve all your newly created command
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 ```
 
-The `fs.readdirSync()` method will return an array of all the file names in that directory, e.g. `['ping.js', 'beep.js']`. The filter is there to make sure any non-JS files are left out of the array. With that array, you can loop over it and dynamically set your commands to the Collection you made above.
+The `fs.readdirSync()` method will return an array of all the file names in that directory, e.g. `['ping.js', 'beep.js']`. The filter is there to leave out any non-JS files from the array. With that array, you can loop over it and dynamically set your commands to the Collection you made above.
 
 ```js
 for (const file of commandFiles) {
