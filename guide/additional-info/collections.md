@@ -7,7 +7,7 @@ It extends JavaScript's native `Map` class, so it has all the features of `Map` 
 If you're not familiar with `Map`, read [MDN's page on it](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) before continuing. You should be familiar with `Array` [methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) as well. We will also be using some ES6 features, so read up [here](/additional-info/es6-syntax.md) if you do not know what they are.
 :::
 
-In essence, `Map` allow for an association between unique keys and their values, but lack an iterative interface.
+In essence, `Map` allow for an association between unique keys and their values but lack an iterative interface.
 For example, how can you transform every value or filter the entries in a `Map` easily?
 This is the point of the `Collection` class!
 
@@ -43,7 +43,7 @@ There are two ways you might want to convert a `Collection` into an `Array`. The
 They simply create an array from the items in the collection, but also caches it too:
 
 ```js
-// Not computed again the second time, it is cached!
+// Not computed again the second time; it is cached!
 collection.array();
 collection.array();
 
@@ -75,7 +75,7 @@ Many people use `array` way too much! This leads to unneeded caching of data and
 Some methods are not from `Array` and are instead completely new to standard JavaScript.
 
 ```js
-// A random value. Be careful, this uses `array` so caching is done.
+// A random value. Be careful; this uses `array` so caching is done.
 collection.random();
 
 // The first value.
@@ -93,7 +93,7 @@ collection.last(2);
 collection.sweep(user => user.username === 'Bob');
 ```
 
-A more complicated method is `partition`, which splits a collection into two, based on a certain criteria.
+A more complicated method is `partition`, which splits a collection into two based on a certain criteria.
 You can think of it as two `filter`s, but done at the same time:
 
 ```js

@@ -4,9 +4,9 @@ If you aren't very familiar with ECMAScript 2017, you may not know about async/a
 
 ## How do Promises work?
 
-Before we can get into async/await, you should know what Promises are and how they work, because async/await is just a way to handle Promises. If you know what Promises are and how to deal with them, then you can skip this part. 
+Before we can get into async/await, you should know what Promises are and how they work because async/await is just a way to handle Promises. If you know what Promises are and how to deal with them, then you can skip this part. 
 
-Promises are a way to handle asynchronous tasks in Javascript; they are the newer alternative to callbacks. A Promise has a lot of similarities to a progress bar; Promises represent an ongoing process that has not yet finished. A good example for that is a request to a server (e.g discord.js sends requests to Discord's API).
+Promises are a way to handle asynchronous tasks in Javascript; they are the newer alternative to callbacks. A Promise has a lot of similarities to a progress bar; Promises represent an ongoing process that has not yet finished. A good example for that is a request to a server (e.g., discord.js sends requests to Discord's API).
 
 A Promise can have 3 states; pending, resolved, and rejected
 
@@ -14,7 +14,7 @@ The **pending** state means that the Promise still is ongoing and neither resolv
 The **resolved** state means that the Promise is done and was executed without any errors.
 The **rejected** state means that the Promise encountered an error and could not be executed correctly.
 
-One important thing to know is that a Promise can only have one state at a time; it can never be pending and resolved, rejected and resolved, or pending and rejected. You may be asking "How would that look in code?". Here is a small example:
+One important thing to know is that a Promise can only have one state at a time; it can never be pending and resolved, rejected and resolved, or pending and rejected. You may be asking, "How would that look in code?". Here is a small example:
 
 ::: tip
 ES6 code is being used in this example. If you do not know what that is, you should read up on that [here](/additional-info/es6-syntax.md).
@@ -22,18 +22,18 @@ ES6 code is being used in this example. If you do not know what that is, you sho
 
 ```js
 function deleteMessages(amount) {
-	return new Promise(resolve => {
-		if (amount > 10) throw new Error('You can\'t delete more than 10 Messages at a time.');
-		setTimeout(() => resolve('Deleted 10 messages.'), 2000);
-	});
+    return new Promise(resolve => {
+        if (amount > 10) throw new Error('You can\'t delete more than 10 Messages at a time.');
+        setTimeout(() => resolve('Deleted 10 messages.'), 2000);
+    });
 }
 
 deleteMessages(5).then(value => {
-	// `deleteMessages` is complete and has not encountered any errors
-	// the resolved value will be the string "Deleted 10 messages"
+    // `deleteMessages` is complete and has not encountered any errors
+    // the resolved value will be the string "Deleted 10 messages"
 }).catch(error => {
-	// `deleteMessages` encountered an error
-	// the error will be an Error Object
+    // `deleteMessages` encountered an error
+    // the error will be an Error Object
 });
 ```
 
@@ -49,7 +49,7 @@ A simple example would be:
 
 ```js
 async function declaredAsAsync() {
-	// code
+    // code
 }
 ```
 
@@ -57,7 +57,7 @@ or
 
 ```js 
 const declaredAsAsync = async () => {
-	// code
+    // code
 };
 ```
 
@@ -65,7 +65,7 @@ You can use that as well if you use the arrow function as an event listener.
 
 ```js
 client.on('event', async (first, last) => {
-	// code
+    // code
 });
 ```
 
@@ -82,13 +82,13 @@ const client = new Discord.Client();
 const prefix = '?';
 
 client.once('ready', () => {
-	console.log('I am ready!');
+    console.log('I am ready!');
 });
 
 client.on('message', message => {
-	if (message.content === `${prefix}react`) {
-		// code inside here
-	}
+    if (message.content === `${prefix}react`) {
+        // code inside here
+    }
 });
 
 client.login('your-token-goes-here');
@@ -98,11 +98,11 @@ So now we need to put the code in. If you don't know how Node.js asynchronous ex
 
 ```js
 client.on('message', message => {
-	if (message.content === `${prefix}react`) {
-		message.react('🇦');
-		message.react('🇧');
-		message.react('🇨');
-	}
+    if (message.content === `${prefix}react`) {
+        message.react('🇦');
+        message.react('🇧');
+        message.react('🇨');
+    }
 });
 ```
 
@@ -110,14 +110,14 @@ But since all of these react methods are started at the same time, it would just
 
 ```js
 client.on('message', message => {
-	if (message.content === `${prefix}react`) {
-		message.react('🇦')
-			.then(() => message.react('🇧'))
-			.then(() => message.react('🇨'))
-			.catch(error => {
-				// handle failure of any Promise rejection inside here
-			});
-	}
+    if (message.content === `${prefix}react`) {
+        message.react('🇦')
+            .then(() => message.react('🇧'))
+            .then(() => message.react('🇨'))
+            .catch(error => {
+                // handle failure of any Promise rejection inside here
+            });
+    }
 });
 ```
 
@@ -125,27 +125,27 @@ In this piece of code, we [chain resolve](https://developer.mozilla.org/en-US/do
 
 ```js
 client.on('message', async message => {
-	if (message.content === `${prefix}react`) {
-		await message.react('🇦');
-		await message.react('🇧');
-		await message.react('🇨');
-	}
+    if (message.content === `${prefix}react`) {
+        await message.react('🇦');
+        await message.react('🇧');
+        await message.react('🇨');
+    }
 });
 ```
 
-That would mostly be the same code with async/await, but how do we catch Promise rejections now since we won't use `.catch()` anymore? That is also a useful feature with async/await; the error will be thrown if you await it so you can just wrap the awaited Promises inside a try/catch and you're good to go. 
+That would mostly be the same code with async/await, but how do we catch Promise rejections now since we won't use `.catch()` anymore? That is also a useful feature with async/await; the error will be thrown if you await it, so you can just wrap the awaited Promises inside a try/catch, and you're good to go. 
 
 ```js
 client.on('message', async message => {
-	if (message.content === `${prefix}react`) {
-		try {
-			await message.react('🇦');
-			await message.react('🇧');
-			await message.react('🇨');
-		} catch (error) {
-			// handle failure of any Promise rejection inside here
-		}
-	}
+    if (message.content === `${prefix}react`) {
+        try {
+            await message.react('🇦');
+            await message.react('🇧');
+            await message.react('🇨');
+        } catch (error) {
+            // handle failure of any Promise rejection inside here
+        }
+    }
 });
 ```
 
@@ -153,19 +153,19 @@ This looks clean and is also nice and easy to read.
 
 So you may be asking, "How would I get the value the Promise resolved with?".
 
-Well let's look at an example where you want to delete a sent message.
+Well, let's look at an example where you want to delete a sent message.
 
 <branch version="11.x">
 
 ```js
 client.on('message', message => {
-	if (message.content === `${prefix}delete`) {
-		message.channel.send('this message will be deleted')
-			.then(sentMessage => sentMessage.delete(10000))
-			.catch(error => {
-				// handle error
-			});
-	}
+    if (message.content === `${prefix}delete`) {
+        message.channel.send('this message will be deleted')
+            .then(sentMessage => sentMessage.delete(10000))
+            .catch(error => {
+                // handle error
+            });
+    }
 });
 ```
 
@@ -174,13 +174,13 @@ client.on('message', message => {
 
 ```js
 client.on('message', message => {
-	if (message.content === `${prefix}delete`) {
-		message.channel.send('this message will be deleted')
-			.then(sentMessage => sentMessage.delete({ timeout: 10000 }))
-			.catch(error => {
-				// handle error
-			});
-	}
+    if (message.content === `${prefix}delete`) {
+        message.channel.send('this message will be deleted')
+            .then(sentMessage => sentMessage.delete({ timeout: 10000 }))
+            .catch(error => {
+                // handle error
+            });
+    }
 });
 ```
 
@@ -191,14 +191,14 @@ The return value of a `.send()` is a Promise what resolves with the sent Message
 
 ```js
 client.on('message', async message => {
-	if (message.content === `${prefix}delete`) {
-		try {
-			const sentMessage = await message.channel.send('This message will be deleted in 10 seconds.');
-			await sentMessage.delete(10000);
-		} catch (error) {
-			// handle error
-		}
-	}
+    if (message.content === `${prefix}delete`) {
+        try {
+            const sentMessage = await message.channel.send('This message will be deleted in 10 seconds.');
+            await sentMessage.delete(10000);
+        } catch (error) {
+            // handle error
+        }
+    }
 });
 ```
 
@@ -207,17 +207,17 @@ client.on('message', async message => {
 
 ```js
 client.on('message', async message => {
-	if (message.content === `${prefix}delete`) {
-		try {
-			const sentMessage = await message.channel.send('This message will be deleted in 10 seconds.');
-			await sentMessage.delete({ timeout: 10000 });
-		} catch (error) {
-			// handle error
-		}
-	}
+    if (message.content === `${prefix}delete`) {
+        try {
+            const sentMessage = await message.channel.send('This message will be deleted in 10 seconds.');
+            await sentMessage.delete({ timeout: 10000 });
+        } catch (error) {
+            // handle error
+        }
+    }
 });
 ```
 
 </branch>
 
-With async/await you can just assign the awaited function to a variable that will represent the returned value. Now you know how you use async/await.
+With async/await, you can just assign the awaited function to a variable that will represent the returned value. Now you know how you use async/await.

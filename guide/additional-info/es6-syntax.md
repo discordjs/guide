@@ -1,6 +1,6 @@
 # ES6 syntax examples
 
-If you've used JavaScript for only a (relatively) small amount of time or just aren't very experienced with it, you might not be aware of what ES6 is and its crazy beneficial features. Since this is a guide primarily for Discord bots, we'll be using some discord.js code as an example of what you might have, versus what you could do to benefit from ES6.
+If you've used JavaScript for only a (relatively) small amount of time or just aren't very experienced with it, you might not be aware of what ES6 is and its crazy beneficial features. Since this is a guide primarily for Discord bots, we'll be using some discord.js code as an example of what you might have versus what you could do to benefit from ES6.
 
 Here's the startup code we'll be using:
 
@@ -12,27 +12,27 @@ const client = new Discord.Client();
 const config = require('./config.json');
 
 client.once('ready', () => {
-	console.log('Ready!');
+    console.log('Ready!');
 });
 
 const { prefix } = config;
 
 client.on('message', message => {
-	if (message.content === prefix + 'ping') {
-		message.channel.send('Pong.');
-	} else if (message.content === prefix + 'beep') {
-		message.channel.send('Boop.');
-	} else if (message.content === prefix + 'server') {
-		message.channel.send('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
-	} else if (message.content === prefix + 'user-info') {
-		message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
-	}
+    if (message.content === prefix + 'ping') {
+        message.channel.send('Pong.');
+    } else if (message.content === prefix + 'beep') {
+        message.channel.send('Boop.');
+    } else if (message.content === prefix + 'server') {
+        message.channel.send('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
+    } else if (message.content === prefix + 'user-info') {
+        message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
+    }
 });
 
 client.login(config.token);
 ```
 
-If you haven't noticed, this piece of code is actually already using a bit of ES6 in here! The `const` keyword and arrow function syntax (`() => ...`) are a part of ES6, and are recommended to use whenever possible.
+If you haven't noticed, this piece of code is actually already using a bit of ES6 in here! The `const` keyword and arrow function syntax (`() => ...`) are a part of ES6 and are recommended to use whenever possible.
 
 As for the code above, there are a few places where things can be done better. Let's look at them.
 
@@ -45,10 +45,10 @@ If you check the code above, it's currently doing things like `prefix + 'name'` 
 ```js
 // ES5 version, as we currently have it
 else if (message.content === prefix + 'server') {
-	message.channel.send('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
+    message.channel.send('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
 }
 else if (message.content === prefix + 'user-info') {
-	message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
+    message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
 }
 ```
 
@@ -57,10 +57,10 @@ else if (message.content === prefix + 'user-info') {
 ```js
 // ES6 version, using template literals
 else if (message.content.startsWith(`${prefix}server`)) {
-	message.channel.send(`Guild name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
+    message.channel.send(`Guild name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
 }
 else if (message.content.startsWith(`${prefix}user-info`)) {
-	message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
+    message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
 }
 ```
 
@@ -78,7 +78,7 @@ const username = 'Sanctuary';
 const password = 'pleasedonthackme';
 
 function letsPretendThisDoesSomething() {
-	return 'Yay for sample data.';
+    return 'Yay for sample data.';
 }
 ```
 
@@ -94,9 +94,9 @@ console.log('1 + 1 = ' + (1 + 1));
 console.log('And here\'s a function call: ' + letsPretendThisDoesSomething());
 
 console.log(
-	'Putting strings on new lines\n'
-	+ 'can be a bit painful\n'
-	+ 'with string concatenation. :('
+    'Putting strings on new lines\n'
+    + 'can be a bit painful\n'
+    + 'with string concatenation. :('
 );
 ```
 
@@ -110,9 +110,9 @@ console.log(`1 + 1 = ${1 + 1}`);
 console.log(`And here's a function call: ${letsPretendThisDoesSomething()}`);
 
 console.log(`
-	Putting strings on new lines
-	is a breeze
-	with template literals! :)
+    Putting strings on new lines
+    is a breeze
+    with template literals! :)
 `);
 
 // NOTE: template literals will also render the indentation inside them
@@ -132,24 +132,24 @@ Here are some examples of ways you can benefit from arrow functions over regular
 ```js
 // regular functions, full ES5
 client.once('ready', function() {
-	console.log('Ready!');
+    console.log('Ready!');
 });
 
 client.on('typingStart', function(channel, user) {
-	console.log(user + ' started typing in ' + channel);
+    console.log(user + ' started typing in ' + channel);
 });
 
 client.on('message', function(message) {
-	console.log(message.author + ' sent: ' + message.content);
+    console.log(message.author + ' sent: ' + message.content);
 });
 
 var doubleAge = function(age) {
-	return 'Your age doubled is: ' + (age * 2);
+    return 'Your age doubled is: ' + (age * 2);
 };
 
 // inside a message collector command
 var filter = function(m) {
-	return m.content === 'I agree' && !m.author.bot;
+    return m.content === 'I agree' && !m.author.bot;
 };
 
 var collector = message.createReactionCollector(filter, { time: 15000 });
@@ -172,7 +172,7 @@ const collector = message.createReactionCollector(filter, { time: 15000 });
 
 There are a few important things you should note here:
 
-* The parenthesis around function parameters are optional when you have only one parameter, but required otherwise. If you feel like this will confuse you at times, it may be a good idea to just always use parenthesis.
+* The parenthesis around function parameters are optional when you have only one parameter but required otherwise. If you feel like this will confuse you at times, it may be a good idea to just always use parenthesis.
 * You can cleanly put what you need on a single line without curly braces.
 * Omitting curly braces will make arrow functions use **implicit return**, but only if you have a single-line expression. The `doubleAge` and `filter` variables are a good example of this.
 * Unlike the `function someFunc() { ... }` declaration, arrow functions cannot be used to create functions with such syntax. You can create a variable and give it an anonymous arrow function as the value, though (as seen with the `doubleAge` and `filter` variables).
@@ -211,20 +211,20 @@ Additionally, you could do this for your commands.
 
 ```js
 client.on('message', message => {
-	const { content } = message;
+    const { content } = message;
 
-	if (content === `${prefix}ping`) {
-		// ping command here...
-	} else if (content === `${prefix}beep`) {
-		// beep command here...
-	}
-	// other commands here...
+    if (content === `${prefix}ping`) {
+        // ping command here...
+    } else if (content === `${prefix}beep`) {
+        // beep command here...
+    }
+    // other commands here...
 });
 ```
 
-It is a bit less to write out, and also looks cleaner, but shouldn't be necessary if you follow along with the [command handler](/command-handling/) part of the guide.
+It is a bit less to write out and also looks cleaner, but shouldn't be necessary if you follow along with the [command handler](/command-handling/) part of the guide.
 
-You can also rename variables when destructuring, if necessary. A good example of when you'd need to do so is when you're extracting a property with a name that's already being used, or conflicts with a reserved keyword. The syntax is as follows:
+You can also rename variables when destructuring, if necessary. A good example of when you'd need to do so is when you're extracting a property with a name that's already being used or conflicts with a reserved keyword. The syntax is as follows:
 
 ```js
 // `default` is a reserved keyword
@@ -251,7 +251,7 @@ Just like the first example with object destructuring, this is a bit verbose and
 const [name, age, location] = args;
 ```
 
-A single line of code that makes things much cleaner! In some cases, you may not even need all items in the array (e.g. when using `string.match(regex)`). Array destructuring still allows you to operate in the same sense.
+A single line of code that makes things much cleaner! In some cases, you may not even need all items in the array (e.g., when using `string.match(regex)`). Array destructuring still allows you to operate in the same sense.
 
 ```js
 const [, username, id] = message.content.match(someRegex);
@@ -261,11 +261,10 @@ In this snippet, we use a comma without providing a name for the item in the arr
 
 ## var, let, and const
 
-Since there are many, many articles out there that can explain this part more in depth, we'll only be giving you a TL;DR and an article link if you choose to read more about it.
+Since there are many, many articles out there that can explain this part more in-depth, we'll only be giving you a TL;DR and an article link if you choose to read more about it.
 
 1. The `var` keyword is what was (and can still be) used in JS before `let` and `const` came to surface. There are actually many issues with `var`, though, such as it being function-scoped, hoisting related issues, and allowing redeclaration.
 2. The `let` keyword is essentially the new `var`; it addresses many of the issues `var` has, but its biggest factor would be that it's block-scoped and disallows redeclaration (*not* reassignment).
 3. The `const` keyword is for giving variables a constant value which may not be reassigned. `const`, like `let`, is also block-scoped.
 
 The general rule of thumb recommended by this guide is to use `const` wherever possible, `let` otherwise, and avoid using `var`. Here's a [helpful article](https://madhatted.com/2016/1/25/let-it-be) if you want to read more about this subject.
-
