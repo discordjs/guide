@@ -22,18 +22,18 @@ ES6 code is being used in this example. If you do not know what that is, you sho
 
 ```js
 function deleteMessages(amount) {
-    return new Promise(resolve => {
-        if (amount > 10) throw new Error('You can\'t delete more than 10 Messages at a time.');
-        setTimeout(() => resolve('Deleted 10 messages.'), 2000);
-    });
+	return new Promise(resolve => {
+		if (amount > 10) throw new Error('You can\'t delete more than 10 Messages at a time.');
+		setTimeout(() => resolve('Deleted 10 messages.'), 2000);
+	});
 }
 
 deleteMessages(5).then(value => {
-    // `deleteMessages` is complete and has not encountered any errors
-    // the resolved value will be the string "Deleted 10 messages"
+	// `deleteMessages` is complete and has not encountered any errors
+	// the resolved value will be the string "Deleted 10 messages"
 }).catch(error => {
-    // `deleteMessages` encountered an error
-    // the error will be an Error Object
+	// `deleteMessages` encountered an error
+	// the error will be an Error Object
 });
 ```
 
@@ -49,7 +49,7 @@ A simple example would be:
 
 ```js
 async function declaredAsAsync() {
-    // code
+	// code
 }
 ```
 
@@ -57,7 +57,7 @@ or
 
 ```js 
 const declaredAsAsync = async () => {
-    // code
+	// code
 };
 ```
 
@@ -65,7 +65,7 @@ You can use that as well if you use the arrow function as an event listener.
 
 ```js
 client.on('event', async (first, last) => {
-    // code
+	// code
 });
 ```
 
@@ -82,13 +82,13 @@ const client = new Discord.Client();
 const prefix = '?';
 
 client.once('ready', () => {
-    console.log('I am ready!');
+	console.log('I am ready!');
 });
 
 client.on('message', message => {
-    if (message.content === `${prefix}react`) {
-        // code inside here
-    }
+	if (message.content === `${prefix}react`) {
+		// code inside here
+	}
 });
 
 client.login('your-token-goes-here');
@@ -98,11 +98,11 @@ So now we need to put the code in. If you don't know how Node.js asynchronous ex
 
 ```js
 client.on('message', message => {
-    if (message.content === `${prefix}react`) {
-        message.react('🇦');
-        message.react('🇧');
-        message.react('🇨');
-    }
+	if (message.content === `${prefix}react`) {
+		message.react('🇦');
+		message.react('🇧');
+		message.react('🇨');
+	}
 });
 ```
 
@@ -110,14 +110,14 @@ But since all of these react methods are started at the same time, it would just
 
 ```js
 client.on('message', message => {
-    if (message.content === `${prefix}react`) {
-        message.react('🇦')
-            .then(() => message.react('🇧'))
-            .then(() => message.react('🇨'))
-            .catch(error => {
-                // handle failure of any Promise rejection inside here
-            });
-    }
+	if (message.content === `${prefix}react`) {
+		message.react('🇦')
+			.then(() => message.react('🇧'))
+			.then(() => message.react('🇨'))
+			.catch(error => {
+				// handle failure of any Promise rejection inside here
+			});
+	}
 });
 ```
 
@@ -125,11 +125,11 @@ In this piece of code, we [chain resolve](https://developer.mozilla.org/en-US/do
 
 ```js
 client.on('message', async message => {
-    if (message.content === `${prefix}react`) {
-        await message.react('🇦');
-        await message.react('🇧');
-        await message.react('🇨');
-    }
+	if (message.content === `${prefix}react`) {
+		await message.react('🇦');
+		await message.react('🇧');
+		await message.react('🇨');
+	}
 });
 ```
 
@@ -137,15 +137,15 @@ That would mostly be the same code with async/await, but how do we catch Promise
 
 ```js
 client.on('message', async message => {
-    if (message.content === `${prefix}react`) {
-        try {
-            await message.react('🇦');
-            await message.react('🇧');
-            await message.react('🇨');
-        } catch (error) {
-            // handle failure of any Promise rejection inside here
-        }
-    }
+	if (message.content === `${prefix}react`) {
+		try {
+			await message.react('🇦');
+			await message.react('🇧');
+			await message.react('🇨');
+		} catch (error) {
+			// handle failure of any Promise rejection inside here
+		}
+	}
 });
 ```
 
@@ -159,13 +159,13 @@ Well, let's look at an example where you want to delete a sent message.
 
 ```js
 client.on('message', message => {
-    if (message.content === `${prefix}delete`) {
-        message.channel.send('this message will be deleted')
-            .then(sentMessage => sentMessage.delete(10000))
-            .catch(error => {
-                // handle error
-            });
-    }
+	if (message.content === `${prefix}delete`) {
+		message.channel.send('this message will be deleted')
+			.then(sentMessage => sentMessage.delete(10000))
+			.catch(error => {
+				// handle error
+			});
+	}
 });
 ```
 
@@ -174,13 +174,13 @@ client.on('message', message => {
 
 ```js
 client.on('message', message => {
-    if (message.content === `${prefix}delete`) {
-        message.channel.send('this message will be deleted')
-            .then(sentMessage => sentMessage.delete({ timeout: 10000 }))
-            .catch(error => {
-                // handle error
-            });
-    }
+	if (message.content === `${prefix}delete`) {
+		message.channel.send('this message will be deleted')
+			.then(sentMessage => sentMessage.delete({ timeout: 10000 }))
+			.catch(error => {
+				// handle error
+			});
+	}
 });
 ```
 
@@ -191,14 +191,14 @@ The return value of a `.send()` is a Promise what resolves with the sent Message
 
 ```js
 client.on('message', async message => {
-    if (message.content === `${prefix}delete`) {
-        try {
-            const sentMessage = await message.channel.send('This message will be deleted in 10 seconds.');
-            await sentMessage.delete(10000);
-        } catch (error) {
-            // handle error
-        }
-    }
+	if (message.content === `${prefix}delete`) {
+		try {
+			const sentMessage = await message.channel.send('This message will be deleted in 10 seconds.');
+			await sentMessage.delete(10000);
+		} catch (error) {
+			// handle error
+		}
+	}
 });
 ```
 
@@ -207,14 +207,14 @@ client.on('message', async message => {
 
 ```js
 client.on('message', async message => {
-    if (message.content === `${prefix}delete`) {
-        try {
-            const sentMessage = await message.channel.send('This message will be deleted in 10 seconds.');
-            await sentMessage.delete({ timeout: 10000 });
-        } catch (error) {
-            // handle error
-        }
-    }
+	if (message.content === `${prefix}delete`) {
+		try {
+			const sentMessage = await message.channel.send('This message will be deleted in 10 seconds.');
+			await sentMessage.delete({ timeout: 10000 });
+		} catch (error) {
+			// handle error
+		}
+	}
 });
 ```
 
