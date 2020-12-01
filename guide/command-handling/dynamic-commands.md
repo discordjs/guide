@@ -8,12 +8,12 @@ This page is a follow-up and bases its code off of [the previous page](/command-
 
 Now that you have a Collection of all our commands, you can use them easily! But before diving straight into it, it'd be a good idea to familiarize yourself with how you'll turn these basic if statements into something much more dynamic and robust. So let's continue with 1 more if statement example, and then we'll move onto the real stuff.
 
-As always, the red is what you'll remove and the green is what you'll replace it with.
+As always, the red is what you'll remove, and the green is what you'll replace it with.
 
 ```diff
 if (command === 'ping') {
--	message.channel.send('Pong.');
-+	client.commands.get('ping').execute(message, args);
+-   message.channel.send('Pong.');
++   client.commands.get('ping').execute(message, args);
 }
 ```
 
@@ -60,7 +60,7 @@ If there isn't a command with that name, exit early. If there is, `.get()` the c
 
 ... and that's it! Whenever you want to add a new command, you simply make a new file in your `commands` directory, name it what you want, and then do what you did for the other commands.
 
-In the next chapter, we'll be going through how to implement some basic features into your brand new command handler. Currently, it's hardly a command "handler" at this point; it's a command loader and executor, if you wish to see it that way. You'll learn how to implement some new features and the logic behind them, such as:
+In the next chapter, we'll be going through how to implement some basic features into your brand new command handler. Currently, it's hardly a command "handler" at this point; it's a command loader and executor if you wish to see it that way. You'll learn how to implement some new features and the logic behind them, such as:
 
 * Command aliases
 * Cooldowns

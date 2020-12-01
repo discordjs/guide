@@ -1,6 +1,6 @@
 # Command handling
 
-As mentioned in a previous chapter, unless your bot project is a small one, it's not a very good idea to have a single file with a giant if/else if chain for commands. If you want to implement features into your bot and make your development process a lot less painful, you'll definitely want to use (or in this case, create) a command handler. Let's get started on that!
+As mentioned in a previous chapter, unless your bot project is a small one, it's not a very good idea to have a single file with a giant if/else if chain for commands. If you want to implement features into your bot and make your development process a lot less painful, you'll definitely want to use (or, in this case, create) a command handler. Let's get started on that!
 
 Here's the base code we'll be using:
 
@@ -11,21 +11,21 @@ const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
 
 client.once('ready', () => {
-	console.log('Ready!');
+    console.log('Ready!');
 });
 
 client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const command = args.shift().toLowerCase();
 
-	if (command === 'ping') {
-		message.channel.send('Pong.');
-	} else if (command === 'beep') {
-		message.channel.send('Boop.');
-	}
-	// other commands...
+    if (command === 'ping') {
+        message.channel.send('Pong.');
+    } else if (command === 'beep') {
+        message.channel.send('Boop.');
+    }
+    // other commands...
 });
 
 client.login(token);
@@ -45,15 +45,15 @@ In the same folder, create a new folder and name it `commands`. This is where yo
 
 ```js
 module.exports = {
-	name: 'ping',
-	description: 'Ping!',
-	execute(message, args) {
-		message.channel.send('Pong.');
-	},
+    name: 'ping',
+    description: 'Ping!',
+    execute(message, args) {
+        message.channel.send('Pong.');
+    },
 };
 ```
 
-You can go ahead and do the same for the rest of your commands as well, putting their respective blocks of code inside the `execute()` function. If you've been using the same code as the guide thus far, you can copy & paste your commands into their own files now just fine without any issue, as long as you follow the format above. The `description` property is optional, but will be useful for the dynamic help command we'll be covering later.
+You can go ahead and do the same for the rest of your commands as well, putting their respective blocks of code inside the `execute()` function. If you've been using the same code as the guide thus far, you can copy & paste your commands into their own files now just fine without any issue, as long as you follow the format above. The `description` property is optional but will be useful for the dynamic help command we'll be covering later.
 
 ::: tip
 `module.exports` is how you export data in Node.js so that you can `require()` it in other files. If you're unfamiliar with it and want to read more, you can take a look at [the documentation](https://nodejs.org/api/modules.html#modules_module_exports) for more info.
@@ -94,11 +94,11 @@ The `fs.readdirSync()` method will return an array of all the file names in that
 
 ```js
 for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
+    const command = require(`./commands/${file}`);
 
-	// set a new item in the Collection
-	// with the key as the command name and the value as the exported module
-	client.commands.set(command.name, command);
+    // set a new item in the Collection
+    // with the key as the command name and the value as the exported module
+    client.commands.set(command.name, command);
 }
 ```
 
@@ -115,8 +115,8 @@ client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	client.commands.set(command.name, command);
+    const command = require(`./commands/${file}`);
+    client.commands.set(command.name, command);
 }
 
 // `client.on('...')` events and such below this point
