@@ -16,7 +16,7 @@ client.on('message', message => {
 });
 ```
 
-Before doing anything else, make a property to store the prefix you've configured. Instead of `const config = ...`, you can use destructuring to extract the prefix variable from the config file, and the token as well while you're at it.
+Before doing anything else, make a property to store the prefix you've configured. Instead of `const config = ...`, you can use destructuring to extract the prefix variable from the config file and the token as well while you're at it.
 
 ```diff
 - const config = require('./config.json');
@@ -59,7 +59,7 @@ if (message.content.startsWith(`${prefix}ping`)) {
 Now the ping command will trigger whenever the message _starts with_ `!ping`! Sometimes this is what you want, but other times, you may want to match only exactly `!ping` - it varies from case to case, so be mindful of what you need when creating commands.
 
 ::: warning
-Be aware that this will also match `!pingpong`, `!pinguin`, and the like. This is not a huge problem for now, so don't worry; you'll see better ways to check for commands later.
+Be aware that this will also match `!pingpong`, `!pinguin`, and the like. This is not a huge problem, for now, so don't worry; you'll see better ways to check for commands later.
 :::
 
 ## Displaying real data
@@ -115,7 +115,7 @@ That would display both the server name _and_ the amount of members in it.
 	</discord-message>
 </div>
 
-You can, of course, modify this to your liking. You may want to also display the date the server was created, or the server's region. You would do those in the same manner - use `message.guild.createdAt` or `message.guild.region`, respectively.
+You can, of course, modify this to your liking. You may want to also display the date the server was created or the server's region. You would do those in the same manner - use `message.guild.createdAt` or `message.guild.region`, respectively.
 
 ::: tip
 Want a list of all the properties you can access and all the methods you can call on a server? Refer to <branch version="11.x" inline>[the discord.js documentation site](https://discord.js.org/#/docs/main/v11/class/Guild)</branch><branch version="12.x" inline>[the discord.js documentation site](https://discord.js.org/#/docs/main/stable/class/Guild)</branch>!
@@ -155,7 +155,7 @@ And there you have it! As you can see, it's quite simple to add additional comma
 
 If you don't plan to make more than 7 or 8 commands for your bot, then using an if/else if chain is perfectly fine; it's presumably a small project at that point, so you shouldn't need to spend too much time on it. However, this isn't the case for most of us.
 
-You probably want your bot to be feature-rich and easy to configure and develop, right? Using a giant if/else if chain won't let you achieve that, and will only hinder your development process. After you read up on [creating arguments](/creating-your-bot/commands-with-user-input.md), we'll be diving right into something called a "command handler" - code that makes handling commands easier and much more efficient.
+You probably want your bot to be feature-rich and easy to configure and develop, right? Using a giant if/else if chain won't let you achieve that and will only hinder your development process. After you read up on [creating arguments](/creating-your-bot/commands-with-user-input.md), we'll be diving right into something called a "command handler" - code that makes handling commands easier and much more efficient.
 
 Before continuing, here's a small list of reasons why you shouldn't use if/else if chains for anything that's not a small project:
 

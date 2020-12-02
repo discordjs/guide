@@ -22,10 +22,10 @@ const command = args.shift().toLowerCase();
 ```
 
 1. If the message either doesn't start with the prefix or was sent by a bot, exit early.
-2. Create an `args` variable that slices off the prefix entirely, removes the leftover whitespaces and then splits it into an array by spaces.
+2. Create an `args` variable that slices off the prefix entirely, removes the leftover whitespaces, and then splits it into an array by spaces.
 3. Create a `command` variable by calling `args.shift()`, which will take the first element in array and return it while also removing it from the original array (so that you don't have the command name string inside the `args` array).
 
-Hopefully that's a bit clearer, if there was any confusion. Let's create a quick command to check out the result of our new addition:
+Hopefully, that's a bit clearer if there was any confusion. Let's create a quick command to check out the result of our new addition:
 
 <!-- eslint-skip -->
 
@@ -72,7 +72,7 @@ else if (command === 'args-info') {
 }
 ```
 
-So if the first argument provided is equal to "foo", then send back "bar". Otherwise, just send back the argument the user provided.
+So if the first argument provided is equal to "foo", then send back "bar". Otherwise, just send back the argument the user-provided.
 
 <div is="discord-messages">
 	<discord-message author="User" avatar="djs">
@@ -159,7 +159,7 @@ But what happens if you try to use the command without mentioning anybody? If yo
 
 ```
 message.channel.send(`You wanted to kick: ${taggedUser.username}`);
-                                                      ^
+													  ^
 
 TypeError: Cannot read property 'username' of undefined
 ```
@@ -173,7 +173,7 @@ if (!message.mentions.users.size) {
 ```
 
 ::: tip
-If you're wondering what `message.reply()` does, it's just an alternative for `message.channel.send()` which also prepends a mention of the person who sent the message, unless used in a DM. It can be very useful for providing feedback!
+If you're wondering what `message.reply()` does, it's just an alternative for `message.channel.send()`, which also prepends a mention of the person who sent the message, unless used in a DM. It can be very useful for providing feedback!
 :::
 
 Since `message.mentions.users` is a Collection, it has a `.size` property. If no users are mentioned, it'll return 0 (which is a `falsy` value), meaning you can do `if (!value)` to check if it's falsy.
@@ -197,7 +197,7 @@ If you try again, it should work as expected.
 
 ### Working with multiple mentions
 
-Let's say you have some sort of `!avatar` command, where it'll display the avatar of all the mentioned users, or your own avatar if no users were mentioned. Focus on that 2nd part for now - how would you go about displaying your own avatar if no users were mentioned? Taking the snippet for the code you just used, you can do it just like this:
+Let's say you have some sort of `!avatar` command, where it'll display the avatar of all the mentioned users or your own avatar if no users were mentioned. Focus on that 2nd part for now - how would you go about displaying your own avatar if no users were mentioned? Taking the snippet for the code you just used, you can do it just like this:
 
 <branch version="11.x">
 
@@ -228,7 +228,7 @@ else if (command === 'avatar') {
 }
 ```
 
-If the `dynamic` option is provided you will receive a `.gif` URL if the image is animated, otherwise it will fall back to the specified `format` or its default `.webp` if none is provided.
+If the `dynamic` option is provided, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp` if none is provided.
 
 </branch>
 
@@ -244,7 +244,7 @@ That part is simple; just recycle the if statement you used in the section above
 	</discord-message>
 </div>
 
-The next part is where it takes a turn - displaying the avatars of all the mentioned users. But it's simpler than you may think! `message.mentions.users` returns a Collection (as previously mentioned), which you can loop over in a number of different ways. You'll be using `.map()` to loop here, since it allows you to easily collect and store data in a variable in order to send 1 final message in the end, as opposed to multiple.
+The next part is where it takes a turn - displaying the avatars of all the mentioned users. But it's simpler than you may think! `message.mentions.users` returns a Collection (as previously mentioned), which you can loop over in a number of different ways. You'll be using `.map()` to loop here since it allows you to easily collect and store data in a variable in order to send 1 final message in the end, as opposed to multiple.
 
 <branch version="11.x">
 
@@ -287,7 +287,7 @@ else if (command === 'avatar') {
 }
 ```
 
-If the `dynamic` option is provided you will receive a `.gif` URL if the image is animated, otherwise it will fall back to the specified `format` or its default `.webp` if none is provided.
+If the `dynamic` option is provided, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp` if none is provided.
 
 </branch>
 
@@ -308,7 +308,7 @@ And ta-da! You now have a list of avatar links of all the users you tagged.
 It does take up a lot of screen, but this is just an example command anyway.
 
 ::: tip
-If you're looking for a more advanced way to handle mentions as arguments you can check out [this guide](/miscellaneous/parsing-mention-arguments.md).
+If you're looking for a more advanced way to handle mentions as arguments, you can check out [this guide](/miscellaneous/parsing-mention-arguments.md).
 :::
 
 ## Number ranges
@@ -394,10 +394,10 @@ The other caveat with this is that the `!prune {number}` message you sent will a
 
 ```diff
 - else if (amount < 2 || amount > 100) {
--	return message.reply('you need to input a number between 2 and 100.');
+-   return message.reply('you need to input a number between 2 and 100.');
 - }
 + else if (amount <= 1 || amount > 100) {
-+	return message.reply('you need to input a number between 1 and 99.');
++   return message.reply('you need to input a number between 1 and 99.');
 + }
 ```
 
