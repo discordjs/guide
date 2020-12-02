@@ -7,7 +7,7 @@ This page is a follow-up and bases its code off of [the previous page](/command-
 The command handler you've been building so far doesn't do much aside from dynamically load and execute commands. Those two things alone are great, but definitely not the only things you want. Before diving into it, let's do some quick refactoring in preparation.
 
 ```diff
-    const args = message.content.slice(prefix.length).trim().split(/ +/);
+	const args = message.content.slice(prefix.length).trim().split(/ +/);
 -   const command = args.shift().toLowerCase();
 +   const commandName = args.shift().toLowerCase();
 
@@ -16,10 +16,10 @@ The command handler you've been building so far doesn't do much aside from dynam
 +
 +   const command = client.commands.get(commandName);
 
-    try {
+	try {
 -       client.commands.get(command).execute(message, args);
 +       command.execute(message, args);
-    }
+	}
 ```
 
 In this short (but necessary) refactor, you:
@@ -57,23 +57,23 @@ Here are the changes you'll be making:
 
 ```diff
 +   args: true,
-    execute(message, args) {
+	execute(message, args) {
 -       if (!args.length) {
 -           return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
 -       }
 -       else if (args[0] === 'foo') {
 +       if (args[0] === 'foo') {
-            return message.channel.send('bar');
-        }
-        
-        message.channel.send(`Arguments: ${args}\nArguments length: ${args.length}`);
-    },
+			return message.channel.send('bar');
+		}
+		
+		message.channel.send(`Arguments: ${args}\nArguments length: ${args.length}`);
+	},
 ```
 
 And then in your main file:
 
 ```diff
-    const command = client.commands.get(commandName);
+	const command = client.commands.get(commandName);
 +
 +   if (command.args && !args.length) {
 +       return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
@@ -92,15 +92,15 @@ Here's a simple implementation of such a thing. For this example, pretend you ha
 In your `role.js` file:
 
 ```diff
-    args: true,
+	args: true,
 +   usage: '<user> <role>',
-    execute(message, args) {
+	execute(message, args) {
 ```
 
 In your main file:
 
 ```diff
-    if (command.args && !args.length) {
+	if (command.args && !args.length) {
 -       return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
 +       let reply = `You didn't provide any arguments, ${message.author}!`;
 +
@@ -109,7 +109,7 @@ In your main file:
 +       }
 +
 +       return message.channel.send(reply);
-    }
+	}
 ```
 
 Use an `if` statement to check if the `usage` property exists (and is truthy) first so that you don't accidentally end up with `undefined` in the reply string (in the case that you forget to properly supply the property in your command file, or some similar incident). A simple precaution such as this can greatly improve the user experience.
@@ -122,8 +122,8 @@ In the kick command you created in an earlier chapter, make the following change
 
 ```diff
 module.exports = {
-    name: 'kick',
-    description: 'Kick a user from the server.',
+	name: 'kick',
+	description: 'Kick a user from the server.',
 +   guildOnly: true,
 ```
 
@@ -138,12 +138,12 @@ if (command.guildOnly && message.channel.type === 'dm') {
 Now when you try to use the kick command inside a DM, you'll get the appropriate response, which will also prevent your bot from throwing an error.
 
 <div is="discord-messages">
-    <discord-message author="User" avatar="djs">
-        !kick
-    </discord-message>
-    <discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-        I can't execute that command inside DMs!
-    </discord-message>
+	<discord-message author="User" avatar="djs">
+		!kick
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		I can't execute that command inside DMs!
+	</discord-message>
 </div>
 
 ## Cooldowns
@@ -154,11 +154,11 @@ You'll be using the ping command to test this on. Add in the following bit of co
 
 ```diff
 module.exports = {
-    name: 'ping',
+	name: 'ping',
 +   cooldown: 5,
-    execute(message) {
-        message.channel.send('Pong.');
-    },
+	execute(message) {
+		message.channel.send('Pong.');
+	},
 };
 ```
 
@@ -228,7 +228,7 @@ Open your `avatar.js` file and add in the following line:
 
 ```diff
 module.exports = {
-    name: 'avatar',
+	name: 'avatar',
 +   aliases: ['icon', 'pfp'],
 ```
 
@@ -247,24 +247,24 @@ The `aliases` property should always contain an array of strings. In your main f
 Making those two small changes, you get this:
 
 <div is="discord-messages">
-    <discord-message author="User" avatar="djs">
-        !avatar <mention :highlight="true">User</mention>
-    </discord-message>
-    <discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-        User's avatar:
-        https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png
-        <br />
-        <img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
-    </discord-message>
-    <discord-message author="User" avatar="djs">
-        !icon <mention :highlight="true">User</mention>
-    </discord-message>
-    <discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-        User's avatar:
-        https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png
-        <br />
-        <img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
-    </discord-message>
+	<discord-message author="User" avatar="djs">
+		!avatar <mention :highlight="true">User</mention>
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		User's avatar:
+		https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png
+		<br />
+		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
+	</discord-message>
+	<discord-message author="User" avatar="djs">
+		!icon <mention :highlight="true">User</mention>
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		User's avatar:
+		https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png
+		<br />
+		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
+	</discord-message>
 </div>
 
 ## A dynamic help command
@@ -361,23 +361,23 @@ Once you get the command based off the name or alias they gave, you can start `.
 At the end of it all, you should be getting this as a result:
 
 <div is="discord-messages">
-    <discord-message author="User" avatar="djs">
-        !help
-    </discord-message>
-    <discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-        Here's a list of all my commands:
-        args-info, avatar, beep, help, kick, ping, prune, server, user-info <br>
-        You can send `!help [command name]` to get info on a specific command!
-    </discord-message>
-    <discord-message author="User" avatar="djs">
-        !help avatar
-    </discord-message>
-    <discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-        **Name:** avatar <br>
-        **Aliases:** icon,pfp <br>
-        **Description:** Get the avatar URL of the tagged user(s), or your own avatar. <br>
-        **Cooldown:** 3 second(s)
-    </discord-message>
+	<discord-message author="User" avatar="djs">
+		!help
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		Here's a list of all my commands:
+		args-info, avatar, beep, help, kick, ping, prune, server, user-info <br>
+		You can send `!help [command name]` to get info on a specific command!
+	</discord-message>
+	<discord-message author="User" avatar="djs">
+		!help avatar
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		**Name:** avatar <br>
+		**Aliases:** icon,pfp <br>
+		**Description:** Get the avatar URL of the tagged user(s), or your own avatar. <br>
+		**Cooldown:** 3 second(s)
+	</discord-message>
 </div>
 
 No more manually editing your help command! If you aren't completely satisfied with how it looks, you can always adjust it to your liking later.
@@ -409,7 +409,7 @@ Note that you can skip the first line if you use the [argument checker](/command
 if (!args.length) return message.channel.send(`You didn't pass any command to reload, ${message.author}!`);
 const commandName = args[0].toLowerCase();
 const command = message.client.commands.get(commandName)
-    || message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+	|| message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 if (!command) return message.channel.send(`There is no command with name or alias \`${commandName}\`, ${message.author}!`);
 ```

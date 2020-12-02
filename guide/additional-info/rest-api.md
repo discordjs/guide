@@ -44,7 +44,7 @@ client.login('your-token-goes-here');
 ```
 </branch>
 <branch version="12.x">
-    
+	
 ```js
 const { Client, MessageEmbed } = require('discord.js');
 
@@ -52,16 +52,16 @@ const client = new Client();
 const prefix = '!';
 
 client.once('ready', () => {
-    console.log('Ready!');
+	console.log('Ready!');
 });
 
 client.on('message', async message => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-    const args = message.content.slice(prefix.length).trim().split(/ +/);
-    const command = args.shift().toLowerCase();
+	const args = message.content.slice(prefix.length).trim().split(/ +/);
+	const command = args.shift().toLowerCase();
 
-    // ...
+	// ...
 });
 
 client.login('your-token-goes-here');
@@ -98,9 +98,9 @@ Now, of course, it seems like this does nothing, but what it's doing is launchin
 
 ```js
 if (command === 'cat') {
-    const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
+	const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
 
-    message.channel.send(file);
+	message.channel.send(file);
 }
 ```
 
@@ -129,10 +129,10 @@ const querystring = require('querystring');
 
 if (command === 'urban') {
   if (!args.length) {
-    return message.channel.send('You need to supply a search term!');
+	return message.channel.send('You need to supply a search term!');
   }
 
-    const query = querystring.stringify({ term: args.join(' ') });
+	const query = querystring.stringify({ term: args.join(' ') });
 
   const { list } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`).then(response => response.json());
 }
@@ -165,18 +165,18 @@ Here, you are simply getting the first object from the array of objects called `
 If you've followed the tutorial, you should have something like this:
 
 <div is="discord-messages">
-    <discord-message author="User" avatar="djs">
-        !urban njaksdcas
-    </discord-message>
-    <discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-        <mention :highlight="true">User</mention>, No results for **njaksdcas**
-    </discord-message>
-    <discord-message author="User" avatar="djs">
-        !urban hello world
-    </discord-message>
-    <discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-        The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books.
-    </discord-message>
+	<discord-message author="User" avatar="djs">
+		!urban njaksdcas
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		<mention :highlight="true">User</mention>, No results for **njaksdcas**
+	</discord-message>
+	<discord-message author="User" avatar="djs">
+		!urban hello world
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books.
+	</discord-message>
 </div>
 
 Now, let's just make this an [embed](/popular-topics/embeds.md).
@@ -229,29 +229,29 @@ message.channel.send(embed);
 Now, if you do that same command again, you should get this:
 
 <div is="discord-messages">
-    <discord-message author="User" avatar="djs">
-        !urban hello world
-    </discord-message>
-    <discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-        <discord-embed slot="embeds" color="#EFFF00" title="hello world" url="https://www.urbandictionary.com/define.php?term=hello%20world" >
-            <embed-fields slot="fields">
-                <embed-field title="Definition">
-                    The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books. 
-                </embed-field>
-                <embed-field title="Example">
-                    programming noob: Hey I just attended my first programming lesson earlier! <br>
-                    .NET Veteran: Oh? What can you do? <br>
-                    programming noob: I could make a dialog box pop up which says "Hello World!" !!! <br>
-                    .NET Veteran: lmao.. hey guys! look.. check out this "hello world" programmer <br><br>
-                    Console.WriteLine("Hello World")
-                </embed-field>
-                <embed-field title="Rating">
-                    122 thumbs up. <br>
-                    42 thumbs down.
-                </embed-field>
-            </embed-fields>
-        </discord-embed>
-    </discord-message>
+	<discord-message author="User" avatar="djs">
+		!urban hello world
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		<discord-embed slot="embeds" color="#EFFF00" title="hello world" url="https://www.urbandictionary.com/define.php?term=hello%20world" >
+			<embed-fields slot="fields">
+				<embed-field title="Definition">
+					The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books. 
+				</embed-field>
+				<embed-field title="Example">
+					programming noob: Hey I just attended my first programming lesson earlier! <br>
+					.NET Veteran: Oh? What can you do? <br>
+					programming noob: I could make a dialog box pop up which says "Hello World!" !!! <br>
+					.NET Veteran: lmao.. hey guys! look.. check out this "hello world" programmer <br><br>
+					Console.WriteLine("Hello World")
+				</embed-field>
+				<embed-field title="Rating">
+					122 thumbs up. <br>
+					42 thumbs down.
+				</embed-field>
+			</embed-fields>
+		</discord-embed>
+	</discord-message>
 </div>
 
 ## Resulting code
