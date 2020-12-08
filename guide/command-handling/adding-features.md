@@ -416,7 +416,7 @@ module.exports = {
 If you really want to kick the member, you can refer to the [documentation](https://discord.js.org/#/docs/main/stable/examples/moderation) for an example on kicking a member.
 :::
 
-Now that you have made the code, any member who is not having the permissions to kick the member in the guild will be prompted to have the permissions to kick the member in the guild
+Now that you have added the check, any member who doesn't have permissions to kick members from the guild will be prompted to have the permissions to kick.
 
 ## Reloading commands
 
