@@ -392,9 +392,9 @@ If you want to add categories or other information to your commands you can simp
 If you need more help regarding permissions, You can refer to the permissions article which can be found [here](https://discordjs.guide/popular-topics/permissions.html) and the extended permissions article [here](https://discordjs.guide/popular-topics/permissions-extended.html).
 :::
 
-If you want members having a specific permission in the guild to use a command such as the `KICK_MEMBERS` permission for using the kick command? You can do so by adding the following code.
+If you want members having a specific permission in the guild to use a command such as the `KICK_MEMBERS` permission for using the kick command? Yes, it is possible
 
-In the main file, You can do so by adding the following code between the Guild Commands checker and the Args checker:
+In the main file, add the following code between the Guild Commands checker and the Args checker:
 
 ```js
 if (command.permissions && !message.member.hasPermission(command.permissions)) {
