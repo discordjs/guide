@@ -386,6 +386,38 @@ No more manually editing your help command! If you aren't completely satisfied w
 If you want to add categories or other information to your commands you can simply add properties reflecting it to your `module.exports`. If you only want to show a subset of commands remember that `commands` is a Collection you can <branch version="11.x" inline>[filter](https://discord.js.org/#/docs/main/v11/class/Collection?scrollTo=filter)</branch><branch version="12.x" inline>[filter](https://discord.js.org/#/docs/collection/master/class/Collection?scrollTo=filter)</branch> to fit your specific needs!
 :::
 
+## Command permissions
+
+::: tip
+If you need more help regarding permissions, You can refer to the permissions article which can be found [here](https://discordjs.guide/popular-topics/permissions.html) and the extended permissions article [here](https://discordjs.guide/popular-topics/permissions-extended.html).
+:::
+
+If you want members having a specific permission in the guild to use a command such as the `KICK_MEMBERS` permission for using the kick command? You can do so by adding the following code.
+
+In the main file, You can do so by adding the following code between the Guild Commands checker and the Args checker:
+
+```js
+  if (command.permissions && !message.member.hasPermission(command.permissions)) {
+  	return message.reply(`You must have the \`${command.permissions}\` in your role or channel to use that command`)
+  }
+```
+
+Now, in the `kick.js` file, add the following code:
+
+```diff
+module.exports = {
+	name: 'kick',
+	description: 'Kick a user from the server.',
+	guildOnly: true,
++	permissions: 'KICK_MEMBERS',
+```
+
+::: tip
+If you really want to kick the member, you can refer to the [documentation](https://discord.js.org/#/docs/main/stable/examples/moderation) for an example on kicking a member.
+:::
+
+Now that you have made the code, any member who is not having the permissions to kick the member in the guild will be prompted to have the permissions to kick the member in the guild
+
 ## Reloading commands
 
 When writing your commands, you may find it tedious to restart your bot every time you want to test even the slightest change in your code. However, if you have a command handler, reloading commands can be done with a single bot command.
