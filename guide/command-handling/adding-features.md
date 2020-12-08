@@ -398,8 +398,8 @@ In the main file, You can do so by adding the following code between the Guild C
 
 ```js
 if (command.permissions && !message.member.hasPermission(command.permissions)) {
- return message.reply(`You must have the \`${command.permissions}\` in your role or channel to use that command`)
-}
+	return message.reply(`You must have the \`${command.permissions}\` in your role or channel to use that command`)
+};
 ```
 
 Now, in the `kick.js` file, add the following code:
