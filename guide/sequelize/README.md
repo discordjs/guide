@@ -22,7 +22,7 @@ $ npm install --save sqlite3
 ```
 
 ::: danger
-Make sure you use version 5 or later of Sequelize! Version 4 as used in this guide will pose a security threat. You can read more about this issue On the [Sequelize issue tracker](https://github.com/sequelize/sequelize/issues/7310).
+Make sure you use version 5 or later of Sequelize! Version 4, as used in this guide, will pose a security threat. You can read more about this issue On the [Sequelize issue tracker](https://github.com/sequelize/sequelize/issues/7310).
 :::
 
 After you have installed discord.js and Sequelize, you can start with the following skeleton code. The comment labels will tell you where to insert code later on.
@@ -82,10 +82,10 @@ const sequelize = new Sequelize('database', 'user', 'password', {
 });
 ```
 
-`host` tells Sequelize where to look for the database. This will be localhost for most systems, as the database usually resides with the application. If you have a remote database however, then you can set it to that connection address. Otherwise, don't touch this unless you know what you're doing.  
+`host` tells Sequelize where to look for the database. This will be localhost for most systems, as the database usually resides with the application. If you have a remote database, however, then you can set it to that connection address. Otherwise, don't touch this unless you know what you're doing.  
 `dialect` refers to the database engine you are going to use. For this tutorial, it will be sqlite.  
 `logging` setting this to false disables the verbose output from Sequelize. Set it to true when you are trying to debug.  
-`storage` is a sqlite-only setting, because sqlite is the only database that stores all its data to a single file.  
+`storage` is a sqlite-only setting because sqlite is the only database that stores all its data to a single file.  
 
 
 ### [beta] Creating the model
@@ -129,20 +129,20 @@ The model mirrors very closely to what is defined in the database. There will be
 `type` refers to what kind of data this attribute should hold. The most common types are number, string, and date, but there are other data types that are available depending on the database.  
 `unique: true` will ensure that this field will never have duplicated entries. Duplicate tag names will be disallowed in this database.  
 `defaultValue` allows you to set a fallback value if no value is set during the insert.  
-`allowNull` is not all that important, but this will guarantee in the database that the attribute is never unset. You could potentially set it to be a blank or empty string, but has to be set to _something_.
+`allowNull` is not all that important, but this will guarantee in the database that the attribute is never unset. You could potentially set it to be a blank or empty string but has to be set to _something_.
 
 ::: tip
-`Sequelize.STRING` vs `Sequelize.TEXT`: In most database systems, the length of the string is a fixed length for performance reasons. Sequelize defaults this to 255. Use STRING if your input has a max length, and use TEXT if does not. For sqlite, there is no unbounded string type so it will not matter which one you pick.
+`Sequelize.STRING` vs. `Sequelize.TEXT`: In most database systems, the length of the string is a fixed length for performance reasons. Sequelize defaults this to 255. Use STRING if your input has a max length, and use TEXT if does not. For sqlite, there is no unbounded string type, so it will not matter which one you pick.
 :::
 
 ### [gamma] Syncing the model
 
-Now that your structure is defined, you need to make sure the model exists in the database. This goes in our `.once('ready')` event. This way the table structure gets created when the bot is ready and we do not need to worry about it later.
+Now that your structure is defined, you need to make sure the model exists in the database. This goes in our `.once('ready')` event. This way, the table structure gets created when the bot is ready, and we do not need to worry about it later.
 ```js
 Tags.sync();
 ```
 
-The table does not actually get created until you `sync` it. The schema you defined from before was simply creating the model that lets Sequelize know what the data should look like. For testing, you can use `Tags.sync({ force: true })` to recreate the table every time on startup. This way you can get a blank slate each time.
+The table does not actually get created until you `sync` it. The schema you defined from before was simply creating the model that lets Sequelize know what the data should look like. For testing, you can use `Tags.sync({ force: true })` to recreate the table every time on startup. This way, you can get a blank slate each time.
 
 ### [delta] Adding a tag
 
@@ -173,16 +173,16 @@ catch (e) {
 ```
 
 `Tags.create()` uses the models that you created previously. The `.create()` method inserts some data into the model. You are going to insert a tag name, description, and the author name into the database.  
-`catch (e)` This section is necessary for the insert. This will offload checking for duplicates to the database, so that it will notify you if you attempt to create a tag that already exists. The alternative is to query the database before adding data, and checking if a result is returned. If there are no errors, or no identical tag is found, only then should you add the data. Of the two methods it is clear that catching the error is less work for yourself.  
-`if (e.name === "SequelizeUniqueConstraintError")` Although this was mostly for doing less work, it is always good to handle your errors, especially if you know what types of errors you will receive. This error comes up if your unique constraint is violated, i.e. someone inserted duplicate values.
+`catch (e)` This section is necessary for the insert. This will offload checking for duplicates to the database so that it will notify you if you attempt to create a tag that already exists. The alternative is to query the database before adding data, and checking if a result is returned. If there are no errors or no identical tag is found, only then should you add the data. Of the two methods, it is clear that catching the error is less work for yourself.  
+`if (e.name === "SequelizeUniqueConstraintError")` Although this was mostly for doing less work, it is always good to handle your errors, especially if you know what types of errors you will receive. This error comes up if your unique constraint is violated, i.e., someone inserted duplicate values.
 
 ::: warning
-Do not use catch for inserting new data. Only use it for gracefully handling things that go wrong in your code, or logging errors.
+Do not use catch for inserting new data. Only use it for gracefully handling things that go wrong in your code or logging errors.
 :::
 
 ### [epsilon] Fetching a tag
 
-Next we will explain how to fetch the tag that was just inserted.
+Next, we will explain how to fetch the tag that was just inserted.
 
 <!-- eslint-skip -->
 
@@ -236,7 +236,7 @@ if (tag) {
 return message.reply(`Could not find tag: ${tagName}`);
 ```
 
-This section is very similar to our previous command, except you will be showing the tag metadata. `tag` contains our tag object. Notice two things here: firstly, it is possible to access our object properties without the `.get()` function. This is because the object is an instance of a Tag, which you can treat as an object, and not just a row of data. Second, you can access a property that was not defined explicitly, `createdAt`. This is because Sequelize automatically adds that column to all tables. This feature can be disabled by passing another object into the model with `{ createdAt: false }`, but in this case, it was useful to have.
+This section is very similar to our previous command, except you will be showing the tag metadata. `tag` contains our tag object. Notice two things here: firstly, it is possible to access our object properties without the `.get()` function. This is because the object is an instance of a Tag, which you can treat as an object and not just a row of data. Second, you can access a property that was not defined explicitly, `createdAt`. This is because Sequelize automatically adds that column to all tables. This feature can be disabled by passing another object into the model with `{ createdAt: false }`, but in this case, it was useful to have.
 
 ### [lambda] Listing all tags
 
@@ -265,7 +265,7 @@ if (!rowCount) return message.reply('That tag did not exist.');
 
 return message.reply('Tag deleted.');
 ```
-`.destroy()` runs the delete operation. The operation returns a count of the number of affected rows. If it returns with a value of 0, then nothing was deleted and that tag did not exist in the database in the first place.
+`.destroy()` runs the delete operation. The operation returns a count of the number of affected rows. If it returns with a value of 0, then nothing was deleted, and that tag did not exist in the database in the first place.
 
 
 ## Resulting code
