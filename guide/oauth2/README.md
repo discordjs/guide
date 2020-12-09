@@ -6,7 +6,7 @@ OAuth2 enables application developers to build applications that utilize authent
 
 ###  Setting up a basic web server
 
-Most of the time, OAuth2 is used in websites to get information about its users from an external service. In this example, you will use Node.js' built-in `http` module to create a web server to use a user's Discord information to greet them. First, create a file named `index.js` which will be used to start the server.
+Most of the time, OAuth2 is used in websites to get information about its users from an external service. In this example, you will use Node.js' built-in `http` module to create a web server to use a user's Discord information to greet them. First, create a file named `index.js`, which will be used to start the server.
 
 ```js
 const http = require('http');
@@ -48,7 +48,7 @@ Right now, you have designated that the contents of an `index.html` file will be
 </html>
 ```
 
-You can start your server with `node index.js`. Once you start it, try connecting to http://localhost:53134 and you should see "Hoi!".
+You can start your server with `node index.js`. Once you start it, try connecting to http://localhost:53134, and you should see "Hoi!".
 
 ### Getting an OAuth2 url
 
@@ -70,7 +70,7 @@ The `identify` scope will allow your application to get basic user information f
 
 You have your website, and you have a url. Now you need to use those two things to get an access token. For basic applications like [SPAs](https://en.wikipedia.org/wiki/Single-page_application), getting an access token directly is enough to work with. If you want to do this, make sure the `response_type` in the url is `token`. However, this means you will not get a refresh token, which means the user will have to explicitly re-authorize when this access token has expired.
 
-After you change the response type, you can test the url right away. Try visiting it in your browser and you will be directed to a page that looks like this.
+After you change the response type, you can test the url right away. Try visiting it in your browser, and you will be directed to a page that looks like this.
 
 ![img](~@/images/49jali8.png)
 
@@ -123,7 +123,7 @@ Here you just grab the access token and type from the url if it's there and use 
 
 ### The state parameter
 
-OAuth2's protocols provide a `state` parameter which is supported by Discord. This is used to help prevent [CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) attacks and can also be used to represent the state of your application. This should be generated per user and appended to the OAuth2 url. For a very basic example, you can use a randomly generated string encoded in Base64 as the state parameter.
+OAuth2's protocols provide a `state` parameter, which is supported by Discord. This is used to help prevent [CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) attacks and can also be used to represent the state of your application. This should be generated per user and appended to the OAuth2 url. For a very basic example, you can use a randomly generated string encoded in Base64 as the state parameter.
 
 ```js
 function generateRandomString() {
@@ -166,7 +166,7 @@ Don't forgo security for a tiny bit of convenience!
 
 ### OAuth2 flows
 
-What you did in the quick example was go through the `implicit grant` flow, which passed the access token straight to the user's browser. This is great and simple, but you don't get to refresh the token without the user and it is less secure than going through the `authorization code grant`. This involves receiving an access code, which is then exchanged by your server for an access token. Notice that this way, the access token never actually reaches the user throughout the process.
+What you did in the quick example was go through the `implicit grant` flow, which passed the access token straight to the user's browser. This is great and simple, but you don't get to refresh the token without the user, and it is less secure than going through the `authorization code grant`. This involves receiving an access code, which is then exchanged by your server for an access token. Notice that this way, the access token never actually reaches the user throughout the process.
 
 #### Authorization code grant
 
@@ -233,7 +233,7 @@ Now try visiting your OAuth2 url and authorizing your application. Once you're r
   "scope": "identify" }
 ```
 
-Now that you have an access token and a refresh token, try fetching the user's information. It's the exact same as how it was done in the html file.
+Now that you have an access token and a refresh token try fetching the user's information. It's the exact same as how it was done in the html file.
 
 ```js
 fetch('https://discord.com/api/oauth2/token', {
@@ -250,7 +250,7 @@ fetch('https://discord.com/api/oauth2/token', {
 ```
 
 ::: tip
-To maintain security, store the access token server side but associate it with a session ID that you generate for the user.
+To maintain security, store the access token server-side but associate it with a session ID that you generate for the user.
 :::
 
 ## Additional reading
