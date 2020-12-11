@@ -39,7 +39,7 @@ client.shard.broadcastEval('if (this.shard.id === 0) process.exit();');
 <branch version="12.x">
 
 ::: tip
-In version 12 [`client.shard`](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=ids) can hold multiple ids. If you use the default sharding manager the `.ids` array will only have one entry.
+In version 12 [`client.shard`](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=ids) can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
 :::
 
 ```js
@@ -68,7 +68,7 @@ The `execArgv` property is what you would normally pass to node without sharding
 node --trace-warnings bot.js
 ```
 
-You can find a list of command line options for node [here](https://nodejs.org/api/cli.html).
+You can find a list of command-line options for node [here](https://nodejs.org/api/cli.html).
 
 The `shardArgs` property is what you would normally pass to your bot without sharding, e.g.:
 
@@ -86,7 +86,7 @@ There may come a point where you will want to pass functions or arguments from t
 client.shard.broadcastEval(`(${funcName})('${arg}')`);
 ```
 
-In this small snippet, an entire function is being passed to the eval. It needs to be encased in parenthesis; it will throw errors on its way there otherwise. Another set of parenthesis is needed so the function actually gets called. Finally, the passing of the argument itself, which slightly varies, depending on the type of argument you are passing. If it's a string, you must wrap it in quotes, or it will be interpreted as is and will throw a syntax error, because it won't be a string by the time it gets there.
+In this small snippet, an entire function is being passed to the eval. It needs to be encased in parenthesis; it will throw errors on its way there otherwise. Another set of parenthesis is needed, so the function actually gets called. Finally, the passing of the argument itself, which slightly varies, depending on the type of argument you are passing. If it's a string, you must wrap it in quotes, or it will be interpreted as is and will throw a syntax error because it won't be a string by the time it gets there.
 
 Now, what if you wanted to call a function from *within* the client context? That is to say, you are not passing a function. It would look something like this:
 
@@ -164,7 +164,7 @@ client.shard.broadcastEval(`
 
 </branch>
 
-This example will work the same, but you are able to produce cleaner code with `async/await`. Additionally. What this does is declare an asynchronous function and then immediately call it. As it is also the last declared line, it is effectively being returned. Remember that you need to `return` an item inside a function one way or another.
+This example will work the same, but you are able to produce cleaner code with `async/await`. Additionally, what this does is declare an asynchronous function and then immediately call it. As it is also the last declared line, it is effectively being returned. Remember that you need to `return` an item inside a function one way or another.
 
 ## Sharded Bot Example(s)
 
@@ -172,4 +172,4 @@ If you'd like to check out a full example of sharding, here are the open-source 
 
 * [Listen.moe](https://github.com/LISTEN-moe/discord-bot)
 
-If you know of other open source bots that are sharded and use discord.js, feel free to [make a pull request](https://github.com/discordjs/guide/blob/master/guide/sharding/additional-information.md)!
+If you know of other open-source bots that are sharded and use discord.js, feel free to [make a pull request](https://github.com/discordjs/guide/blob/master/guide/sharding/additional-information.md)!

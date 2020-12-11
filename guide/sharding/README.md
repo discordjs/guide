@@ -10,7 +10,7 @@ As an application grows large, developers may find it necessary to split their p
 [Check out the official Discord documentation on the topic.](https://discord.com/developers/docs/topics/gateway#sharding)
 
 :::warning
-This guide only explains the basics of sharding using the built-in ShardingManager, which can run shards as separate processes or threads on a single machine. If you need to scale beyond that (e.g. running shards on multiple machines/containers), you can still do it with discord.js by passing appropriate options to the Client constructor, but you will be on your own regarding managing shards and passing information between them.
+This guide only explains the basics of sharding using the built-in ShardingManager, which can run shards as separate processes or threads on a single machine. If you need to scale beyond that (e.g., running shards on multiple machines/containers), you can still do it with discord.js by passing appropriate options to the Client constructor, but you will be on your own regarding managing shards and passing information between them.
 :::
 
 ## Sharding file
@@ -101,7 +101,7 @@ client.login('your-token-goes-here');
 
 </branch>
 
-Let's say your bot is in a total of 3,600 guilds. Using the recommended shard count you might end up at 4 shards, each containing approximately 900 guilds. If a guild is on a certain shard (shard #2, for example) and it receives this command, the guild count will be close to 900, which is obviously not the "correct" number of guilds for your bot. "How can I fix this?", you ask? Well, that's why we're here, isn't it?
+Let's say your bot is in a total of 3,600 guilds. Using the recommended shard count, you might end up at 4 shards, each containing approximately 900 guilds. If a guild is on a certain shard (shard #2, for example) and it receives this command, the guild count will be close to 900, which is obviously not the "correct" number of guilds for your bot. "How can I fix this?", you ask? Well, that's why we're here, isn't it?
 
 ## FetchClientValues
 
@@ -271,7 +271,7 @@ Promise.all(promises)
 
 </branch>
 
-`Promise.all()` runs every promise you pass to it inside of an array in parallel, and waits for them all to finish before returning all of their results at once. The result is an array that corresponds with the array of promises you pass - so the first result element will be from the first promise. With that, your stats command should look something like this:
+`Promise.all()` runs every promise you pass to it inside of an array in parallel and waits for them all to finish before returning all of their results at once. The result is an array that corresponds with the array of promises you pass - so the first result element will be from the first promise. With that, your stats command should look something like this:
 
 <branch version="11.x">
 
