@@ -50,5 +50,5 @@ Let's imagine that you have a bot on over 1,000 servers, and it took you many, m
 All that and much, much more. Sounds pretty terrible, right? So make sure to keep your token as safe as possible!
 
 ::: danger
-If you ever somehow leak your token (commit it to a repository, post it in a support channel, etc.) or otherwise see your bot in danger, return to this page and regenerate a new one. Your old token will become invalid and you'll need to update it with the new one in all the places you've used it.
+If you ever somehow leak your token (commit it to a repository, post it in a support channel, etc.) or otherwise see your bot in danger, return to this page and regenerate a new one. Your old token will become invalid, and you'll need to update it with the new one in all the places you've used it.
 :::

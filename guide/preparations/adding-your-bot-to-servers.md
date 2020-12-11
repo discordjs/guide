@@ -16,7 +16,7 @@ The structure of the url is quite simple:
 
 * The first part is just Discord's standard structure for authorizing an OAuth2 application (such as your bot application) for entry to a Discord server.
 * The second part that says `client_id=...` is to specify _which_ application you want to authorize. You'll need to replace this part with your client's ID in order to create a valid invite link. 
-* Lastly, the third part which says `scope=bot` specifies that you want to add this application as a Discord bot.
+* Lastly, the third part, which says `scope=bot`, specifies that you want to add this application as a Discord bot.
 
 ::: tip
 A `permissions` parameter also exists to restrict or guarantee the permission your bot will have on the server you are adding it to. For ease of use, it is recommended to use [this](https://discordapi.com/permissions.html) website.
@@ -30,7 +30,7 @@ If you get an error message saying "Bot requires a code grant", then head over i
 
 As mentioned above, you'll need to replace the `client_id` parameter with your client's ID in order to generate your invite link. To find your app's ID, head back to the [My Apps](https://discord.com/developers/applications/me) page under the "Applications" section once again and click on your bot application.
 
-Insert your app's ID into the link template and then access it in your browser. You should see something like this (with your bot's username and avatar):
+Insert your app's ID into the link template, and then access it in your browser. You should see something like this (with your bot's username and avatar):
 
 ![Bot Authorization field](~@/images/A8l70bj.png)
 
