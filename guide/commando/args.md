@@ -4,7 +4,7 @@ forceTheme: blue
 
 # Using arguments in commands
 
-Sometimes when using commands you may want to get data from the user, and change the response accordingly. In this section, you'll create a command that pulls a string from the message and says it back to the user!
+Sometimes when using commands, you may want to get data from the user and change the response accordingly. In this section, you'll create a command that pulls a string from the message and says it back to the user!
 
 ## String arguments
 
@@ -57,13 +57,13 @@ See? Simple.
 
 - `key` is the name of the argument. When you define it in your `run` method, this is what you'll be using.
 - `prompt` is the text that displays if no argument is provided. If someone uses just `?say`, that prompt will come up asking for the text.
-- `type` is the type the argument is a part of. This can be many things, including `string`, `integer`, `user`, `member`, etc.
+- `type` is the type the argument is a part of. This can be many things, including `string`, `integer`, `user`, 'member`, etc.
 
 Adding more args is as simple as adding another object to the array, like so:
 
 <!-- eslint-skip -->
 
-```js
+"`js
 args: [
 	{
 		key: 'text',
@@ -82,7 +82,7 @@ You can also set arguments to default to a specific value:
 
 <!-- eslint-skip -->
 
-```js
+"`js
 {
 	key: 'otherThing',
 	prompt: 'What is this other useless thing?',

@@ -32,7 +32,7 @@ module.exports = class MeowCommand extends Command {
 };
 ```
 
-Don't let this scare you, it's actually very simple.
+Don't let this scare you; it's actually very simple.
 
 - `name` is the name of the command.
 - `aliases` are other ways the command can be called. You can have as many as you want!
