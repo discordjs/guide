@@ -57,7 +57,7 @@ broadcast.play('http://myserver.com/audio.aac');
 
 The `.play()` method on a VoiceBroadcast returns a `BroadcastDispatcher` that can be used to control the playback of the audio stream like a regular `StreamDispatcher`.
 
-Playing a broadcast on a voice connection (i.e. to subscribing to the broadcast) is really easy!
+Playing a broadcast on a voice connection (i.e., to subscribing to the broadcast) is really easy!
 
 ```js
 // All 3 connections will play the same broadcast - they will play audio at the same time

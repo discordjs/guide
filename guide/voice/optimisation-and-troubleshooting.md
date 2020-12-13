@@ -2,7 +2,7 @@
 
 <branch version="11.x">
 
-The Discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots, and tips and tricks to optimize performance!
+The Discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots and tips and tricks to optimize performance!
 
 This voice guide is written for Discord.js v12, which features an improved audio system. Much of the example code in the voice guide is unsuitable for v11 and below - to access this content, please update Discord.js to v12! 
 
@@ -25,10 +25,10 @@ channel.join().then(connection => {
 
 ## Stuttering/choppy streams
 
-This is likely due to a poor network connection, or your machine not having enough resources to play audio smoothly. This can be identified if the following occur:
+This is likely due to a poor network connection or your machine not having enough resources to play audio smoothly. This can be identified if the following occur:
 
 1. Audio playback is only choppy on a specific network or machine.
-2. There is a high rate of packet loss (you can identify this by joining a voice channel in Discord, clicking the signal indicator, selecting your bot and viewing the rate of packet loss).
+2. There is a high rate of packet loss (you can identify this by joining a voice channel in Discord, clicking the signal indicator, selecting your bot, and viewing the rate of packet loss).
 
 Besides allocating more resources to your bot and having a better network connection, there are also a few techniques we can use to try and improve performance to make playback smoother:
 
@@ -46,7 +46,7 @@ You can run the following command to convert your audio files to Ogg Opus, provi
 $ ffmpeg -i input.mp3 -c:a libopus -b:a 96k output.ogg
 ```
 
-You can specify a higher bitrate instead of `96k` if your Discord server has a higher cap (e.g. VIP servers), but for most users 96k will be the highest they are able to play at.
+You can specify a higher bitrate instead of `96k` if your Discord server has a higher cap (e.g., VIP servers), but for most users, 96k will be the highest they are able to play at.
 
 You can also replace `input.mp3` with any media file with an audio channel.
 
@@ -58,13 +58,13 @@ const fs = require('fs');
 connection.play(fs.createReadStream('output.ogg'), { type: 'ogg/opus' });
 ```
 
-And that's it! Discord.js will not create an FFmpeg transcoder for your file, and will instead demux the Opus audio from it, greatly improving performance.
+And that's it! Discord.js will not create an FFmpeg transcoder for your file and will instead demux the Opus audio from it, greatly improving performance.
 
 #### From YouTube videos
 
 Many voice bots allow an ability to play audio from YouTube videos in voice channels. YouTube itself provides WebM/Ogg streams for newer videos, and so we can also demux these files for Opus audio instead of running them through an FFmpeg transcoder first.
 
-To do this, you can use the [`ytdl-core-discord`](https://github.com/amishshah/ytdl-core-discord) module. It will play WebM/Ogg Opus streams directly where possible, and will fallback to FFmpeg for incompatible videos - this should help you achieve the best performance when using YouTube streams.
+To do this, you can use the [`ytdl-core-discord`](https://github.com/amishshah/ytdl-core-discord) module. It will play WebM/Ogg Opus streams directly where possible and will fallback to FFmpeg for incompatible videos - this should help you achieve the best performance when using YouTube streams.
 
 ```js
 const ytdl = require('ytdl-core-discord');
@@ -75,12 +75,12 @@ async function play(connection, url) {
 ```
 
 ::: tip
-You might be wondering why the type is `opus` and not `webm/opus` or `ogg/opus`. Discord.js allows us to play Opus streams **without a container** operating in object-mode (i.e. each item pushed to the stream is a distinct Opus packet). `ytdl-core-discord` provides this type of stream, and so we must specify `opus` as the type.
+You might be wondering why the type is `opus` and not `webm/opus` or `ogg/opus`. Discord.js allows us to play Opus streams **without a container** operating in object-mode (i.e., each item pushed to the stream is a distinct Opus packet). `ytdl-core-discord` provides this type of stream, and so we must specify `opus` as the type.
 :::
 
 ### Using `highWaterMark`
 
-Another way to improve performance is through altering the `highWaterMark` property. This property, put simply, describes how many packets of Opus audio should be available to the stream at any given time.
+Another way to improve performance is through altering the `highWaterMark` property. This property put simply, describes how many packets of Opus audio should be available to the stream at any given time.
 
 The default value for this property is `12` - this equates to 240 ms of audio ready to play at any given time. You can adjust the property like so:
 
