@@ -208,7 +208,7 @@ If you would like to set your activity upon startup, you can use the `ClientOpti
 <branch version="11.x">
 
 ::: warning
-the `activity` key will only work in v11.3 and above. You can still use the `game` key instead, but it is deprecated as of v11.3, and has been removed in v12.
+the `activity` key will only work in v11.3 and above. You can still use the `game` key instead, but it is deprecated as of v11.3 and has been removed in v12.
 :::
 
 </branch>
@@ -242,7 +242,7 @@ client.login('your-token-goes-here');
 ```
 
 ::: tip
-The `escapeRegex` function is used to convert special characters into literal characters by escaping them, so that they don't terminate the pattern within the [Regular Expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)!
+The `escapeRegex` function is used to convert special characters into literal characters by escaping them so that they don't terminate the pattern within the [Regular Expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)!
 :::
 
 ::: tip
@@ -413,7 +413,7 @@ process.exit();
 
 ### What is the difference between a User and a GuildMember?
 
-A User represents a global Discord user and a GuildMember represents a Discord user on a specific server. That means only GuildMembers can have permissions, roles, and nicknames, for example, because all of these things are server-bound information that could be different on each server that user is in.
+A User represents a global Discord user, and a GuildMember represents a Discord user on a specific server. That means only GuildMembers can have permissions, roles, and nicknames, for example, because all of these things are server-bound information that could be different on each server that user is in.
 
 ### How do I find all online members of a guild?
 
@@ -487,13 +487,13 @@ A User represents a global Discord user and a GuildMember represents a Discord u
 
 ### How do I play music from YouTube?
 
-For this to work you need to have `ytdl-core` installed.
+For this to work, you need to have `ytdl-core` installed.
 
 ```bash
 npm install --save ytdl-core
 ```
 
-Additionally you may need the following:
+Additionally, you may need the following:
 
 ```bash
 npm install --save @discordjs/opus # opus engine (if missing)
@@ -571,5 +571,5 @@ console.log(emojiCharacters['!']); // ❗
 ```
 
 ::: tip
-On Windows, you may be able to use the `Win + .` keyboard shortcut to open up an emoji picker can be used for quick, easy access to all the unicode emojis available to you. Some of the emojis listed above may not be represented there, though (e.g the 0-9 emojis).
+On Windows, you may be able to use the `Win + .` keyboard shortcut to open up an emoji picker can be used for quick, easy access to all the unicode emojis available to you. Some of the emojis listed above may not be represented there, though (e.g., the 0-9 emojis).
 :::

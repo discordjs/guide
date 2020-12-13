@@ -211,7 +211,7 @@ If you get an error such as `Error: error while reading from input stream`, then
 
 ### Manipulating images
 
-Next, let's place a border around the image, for the sake of demonstration purposes.
+Next, let's place a border around the image for the sake of demonstration purposes.
 
 <branch version="11.x">
 
@@ -266,7 +266,7 @@ client.on('guildMemberAdd', async member => {
 
 ![Image](~@/images/2vsIPEP.png)
 
-A bit plain, right? Fear not, for you have a bit more to do until you reach completion. Since the goal of guide page is focused more on actual code than design, let's just place a basic square shaped avatar for now on the left side of the image. In interest of coverage, you will also make it a circle afterwards.
+A bit plain, right? Fear not, for you have a bit more to do until you reach completion. Since the goal of guide page is focused more on actual code than design, let's just place a basic square-shaped avatar for now on the left side of the image. In interest of coverage, you will also make it a circle afterwards.
 
 <branch version="11.x">
 
@@ -469,7 +469,7 @@ You can read more about `ctx.arc()` on [w3schools](https://www.w3schools.com/tag
 
 ### Adding in text
 
-Now, let's quickly go over adding text to your image. This will be helpful to make the purpose of this image very clear, since currently it's just an avatar floating on a starry background that comes out of nowhere.
+Now, let's quickly go over adding text to your image. This will be helpful to make the purpose of this image very clear since currently, it's just an avatar floating on a starry background that comes out of nowhere.
 
 <branch version="11.x">
 

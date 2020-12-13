@@ -44,7 +44,7 @@ This means your bot is missing `VIEW_CHANNEL`, and as such, can't send messages 
 
 One possible scenario causing this: the channel has permission overwrites for the default role @everyone to grant `SEND_MESSAGES` so everyone who can see the channel can also write in it, but at the same time has an overwrite to deny `VIEW_CHANNEL` to make it only accessible to a subset of members.
 
-As you only check for `SEND_MESSAGES` the bot will try to execute the send, but since `VIEW_CHANNEL` is missing, the request is denied by the API.
+As you only check for `SEND_MESSAGES`, the bot will try to execute the send, but since `VIEW_CHANNEL` is missing, the request is denied by the API.
 
 ::: tip
 Causes for "Missing Access":
@@ -65,7 +65,7 @@ Causes for "Missing Access":
 
 ## Missing permissions
 
-During your development you will likely run into `DiscordAPIError: Missing Permissions` at some point. This error can be caused by one of the following:
+During your development, you will likely run into `DiscordAPIError: Missing Permissions` at some point. This error can be caused by one of the following:
 
 - Your bot is missing the needed permission to execute this action in it's calculated base or final permissions (requirement changes based on the type of action you are trying to execute).
 - You provided an invalid permission number while trying to create overwrites. (The calculator on the apps page returns decimal values while the developer documentation lists the flags in hex. Make sure you are not mixing the two and don't use the hex prefix `0x` where not applicable)
@@ -74,7 +74,7 @@ During your development you will likely run into `DiscordAPIError: Missing Permi
 - It is trying to add a managed role to a member.
 - It is trying to remove a managed role from a member.
 - It is trying to execute a forbidden action on the server owner.
-- It is trying to execute an action based on another unfulfilled factor (for example reserved for partnered guilds).
+- It is trying to execute an action based on another unfulfilled factor (for example, reserved for partnered guilds).
 - It is trying to execute an action on a voice channel without the `VIEW_CHANNEL` permission.
 
 ::: warning
