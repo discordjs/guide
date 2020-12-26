@@ -55,7 +55,7 @@ Example:
 <!-- eslint-skip -->
 ```js
 await message.channel.send('Send two messages and I\'ll tell you how far apart you sent them.');
-const messages = await message.channel.awaitMessages(m => m.author.id === message.author.id. {
+const messages = await message.channel.awaitMessages(m => m.author.id === message.author.id, {
 	max: 2,
 	time: 30e3,
 	errors: ['time'],
