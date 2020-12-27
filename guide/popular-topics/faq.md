@@ -485,6 +485,37 @@ A User represents a global Discord user and a GuildMember represents a Discord u
 
 </branch>
 
+### How to check the bots ping?
+
+There are two common measurements for bot pings. The first, **Websocket heartbeat**, is the average interval of a regularly sent signal indicating the healthy operation of the websocket connection the library receives events over:
+
+<branch version="11.x">
+
+```js
+<message>.channel.send(`Websocket heartbeat: ${<client>.ping}ms.`);
+```
+
+</branch>
+<branch version="12.x">
+
+```js
+<message>.channel.send(`Websocket heartbeat: ${<client>.ws.ping}ms.`);
+```
+
+:::tip
+A specific shards heartbeat can be found on the WebSocketShard instance, accessible at `<client>.ws.shards` > `.ping`.
+:::
+
+</branch>
+
+The second, **Roundtrip Latency**, describes the amount of time a full API roundtrip (from creation of the command message to creation of the response message) takes. We then edit the response to the respective value in order to avoid needing to send yet another message:
+
+```js
+<message>.channel.send('Pinging...').then(sent => {
+    sent.edit(`Roundtrip latency: ${sent.createdTimestamp - <message>.createdTimestamp}ms`);
+});
+```
+
 ### How do I play music from YouTube?
 
 For this to work you need to have `ytdl-core` installed.
