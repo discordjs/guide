@@ -774,6 +774,10 @@ The `amount` parameter of these methods now allows a negative number which will 
 
 `dmChannel.createCollector()` has been removed in favor of `dmChannel.createMessageCollector()`.
 
+:::tip
+Note that the behavior of collector options has changed! See [this section](/additional-info/changes-in-v12.html#messagecollectoroptions-max-matches) for more details!
+:::
+
 #### DMChannel#fetch(Pinned)Message(s)
 
 `dmChannel.fetchMessage(s)` has been transformed in the shape of a Manager.  See the [TextChannel#fetch(Pinned)Message(s)](/additional-info/changes-inv-v12.md#channel) section for more information.
@@ -1708,6 +1712,12 @@ The `streamDispatcher.time` property has been renamed to `streamDispatcher.strea
 
 Has been removed entirely, along with all other user account-only methods and properties.
 
+#### Textchannel#awaitMessages
+
+:::tip
+The behavior of collector options has changed! See [this section](/additional-info/changes-in-v12.html#messagecollectoroptions-max-matches) for more details!
+:::
+
 #### TextChannel#\*\*\*position
 
 See the [GuildChannel](/additional-info/changes-in-v12.md#guildchannel) section for changes to positions.
@@ -1731,6 +1741,10 @@ See [this section](/additional-info/changes-in-v12.md#messagecollector) for chan
 - channel.createCollector(filterFunction, { maxMatches: 2, max: 10, time: 15000 });
 + channel.createMessageCollector(filterFunction, { max: 2, maxProcessed: 10, time: 15000 });
 ```
+
+:::tip
+Note that the behavior of collector options has changed! See [this section](/additional-info/changes-in-v12.html#messagecollectoroptions-max-matches) for more details!
+:::
 
 #### TextChannel#createWebhook
 
