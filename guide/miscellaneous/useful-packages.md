@@ -187,3 +187,13 @@ If you wanted to you could also use the chalk module to make the logger's format
 
 Winston is not the only logging library out there though, so if you are not convinced you should google around a bit and
 you should find something you will like.
+
+## i18next
+
+:::tip
+Official documentation: https://www.i18next.com/
+:::
+
+I18Next is an internationalization-framework for javascript and as such very useful if you want to translate your bot's user-facing messages into various languages based on the server it is used in.
+
+Covering an entire use case example for internationalization would be out of the scope of this guide and requires some more explanation as to how the system operates. Please refer to the official documentation linked above for an in-depth usage guide.
