@@ -386,6 +386,47 @@ No more manually editing your help command! If you aren't completely satisfied w
 If you want to add categories or other information to your commands you can simply add properties reflecting it to your `module.exports`. If you only want to show a subset of commands remember that `commands` is a Collection you can <branch version="11.x" inline>[filter](https://discord.js.org/#/docs/main/v11/class/Collection?scrollTo=filter)</branch><branch version="12.x" inline>[filter](https://discord.js.org/#/docs/collection/master/class/Collection?scrollTo=filter)</branch> to fit your specific needs!
 :::
 
+## Command permissions
+
+In this section you will be adding permission requirements to the command handler we established so far. To do so you need to add at a `permissions` key to your existing command options. We will use the 'kick' command to demonstrate:
+
+```diff
+module.exports = {
+	name: 'kick',
+	description: 'Kick a user from the server.',
+	guildOnly: true,
++	permissions: 'KICK_MEMBERS',
+	execute(message, args) {
+		// ...
+	},
+};
+```
+
+You also need to check for those permissions before executing the command, which is done in the main file, as shown below. We use `TextChannel#permissionsFor` in combination with `Permissions#has` rather than `Guildmember#hasPermission` to respect permission overwrites in our check.
+
+```diff
+// ...
+if (command.guildOnly && message.channel.type === 'dm') {
+	return message.reply('I can\'t execute that command inside DMs!');
+}
+
++ if (command.permissions) {
++ 	const authorPerms = message.channel.permissionsFor(message.client.user);
++ 	if (!authorPerms || !authorPerms.has(command.permissions)) {
++ 		return message.channel.reply('You can not do this!');
++ 	}
++ }
+
+if (command.args && !args.length) {
+// ...
+```
+
+Your command handler will now refuse to execute commands if the permissions you specify in the command structure are missing from the member trying to use it. Note that the `ADMINISTRATOR` permission as well as the message author being the owner of the guild will overwrite this.
+
+:::tip
+Need more resources on how Discord's permission system works? Check the [permissions article](/popular-topics/permissions.html), [extended permissions knowledge base](/popular-topics/permissions-extended.html) and documentation of <branch version="11.x" inline>[permission flags](https://discord.js.org/#/docs/main/v11/class/Permissions?scrollTo=s-FLAGS)</branch><branch version="12.x" inline>[permission flags](https://discord.js.org/#/docs/main/stable/class/Permissions?scrollTo=s-FLAGS)</branch> out! 
+:::
+
 ## Reloading commands
 
 When writing your commands, you may find it tedious to restart your bot every time you want to test even the slightest change in your code. However, if you have a command handler, reloading commands can be done with a single bot command.
