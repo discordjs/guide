@@ -147,7 +147,7 @@ The new `Channel#isText()` getter provides an easy way for TypeScript developers
 
 #### ClientOptions#messageEditHistoryMaxSize
 
-The new `ClientOptions#messageEditHistoryMaxSize` option allows developers to set set a fixed limit on the edit history stored for each message in the client cache. 
+The new `ClientOptions#messageEditHistoryMaxSize` option allows developers to set a fixed limit on the edit history stored for each message in the client cache. 
 
 ### GuildManager
 
