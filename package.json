@@ -33,7 +33,7 @@
     "dependencies": {
         "@vuepress/plugin-google-analytics": "^1.2.0",
         "semver": "^6.0.0",
-        "vue-discord-message": "^5.0.0",
+        "vue-discord-message": "^5.0.2",
         "vuepress-theme-yuu": "^2.2.0"
     }
 }
