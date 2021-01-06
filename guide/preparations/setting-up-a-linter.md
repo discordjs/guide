@@ -38,79 +38,104 @@ You can install each of these directly inside the editors themselves. For Visual
 
 ESLint may display a lot of warnings and errors about your code when you start using it, but don't let this startle you. In order to get started, follow these steps:
 
-1. Create a file in your root directory named `.eslintrc.json` (where your main project file is located).
+1. Create a file in your root directory named `.eslintrc.yml` (where your main project file is located).
 2. Copy the code below into the file.
 
-```json
-{
-	"extends": "eslint:recommended",
-	"env": {
-		"node": true,
-		"es6": true
-	},
-	"parserOptions": {
-		"ecmaVersion": 2019
-	},
-	"rules": {
+```yaml
+extends: eslint:recommended
 
-	}
-}
+env:
+  node: true
+  es6: true
+
+parserOptions:
+  ecmaVersion: 2019
+
+rules:
+  # Define your rules here
 ```
 
-This is the base of what an ESLint file will look like. The `rules` object is where you'll define what rules you want to apply to ESLint. For example, if you want to make sure you never miss a semicolon, the `"semi": ["error", "always"]` rule is what you'll want to add inside that object.
+This is the base of what an ESLint file will look like. The `rules` object is where you'll define what rules you want to apply to ESLint. For example, if you want to make sure you never miss a semicolon, the `semi: error` rule is what you'll want to add inside that object.
 
 You can find a list of all of ESLint's rules on their site, located [here](https://eslint.org/). There are indeed many rules and it may be overwhelming at first, but you'll only need to go through the list and define your file once.
 
 Alternatively, if you don't want to go through everything one-by-one on your own, you can use the ESLint file we use for this guide.
 
-```json
-{
-	"extends": "eslint:recommended",
-	"env": {
-		"node": true,
-		"es6": true
-	},
-	"parserOptions": {
-		"ecmaVersion": 2019
-	},
-	"rules": {
-		"brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
-		"comma-dangle": ["error", "always-multiline"],
-		"comma-spacing": "error",
-		"comma-style": "error",
-		"curly": ["error", "multi-line", "consistent"],
-		"dot-location": ["error", "property"],
-		"handle-callback-err": "off",
-		"indent": ["error", "tab"],
-		"max-nested-callbacks": ["error", { "max": 4 }],
-		"max-statements-per-line": ["error", { "max": 2 }],
-		"no-console": "off",
-		"no-empty-function": "error",
-		"no-floating-decimal": "error",
-		"no-inline-comments": "error",
-		"no-lonely-if": "error",
-		"no-multi-spaces": "error",
-		"no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1, "maxBOF": 0 }],
-		"no-shadow": ["error", { "allow": ["err", "resolve", "reject"] }],
-		"no-trailing-spaces": ["error"],
-		"no-var": "error",
-		"object-curly-spacing": ["error", "always"],
-		"prefer-const": "error",
-		"quotes": ["error", "single"],
-		"semi": ["error", "always"],
-		"space-before-blocks": "error",
-		"space-before-function-paren": ["error", {
-			"anonymous": "never",
-			"named": "never",
-			"asyncArrow": "always"
-		}],
-		"space-in-parens": "error",
-		"space-infix-ops": "error",
-		"space-unary-ops": "error",
-		"spaced-comment": "error",
-		"yoda": "error"
-	}
-}
+```yaml
+extends: eslint:recommended
+
+env:
+  node: true
+  es6: true
+
+parserOptions:
+  ecmaVersion: 2019
+
+rules:
+  brace-style:
+  - error
+  - stroustrup
+  - allowSingleLine: true
+  comma-dangle:
+  - error
+  - always-multiline
+  comma-spacing: error
+  comma-style: error
+  curly:
+  - error
+  - multi-line
+  - consistent
+  dot-location:
+  - error
+  - property
+  handle-callback-err: off
+  indent:
+  - error
+  - tab
+  max-nested-callbacks:
+  - error
+  - max: 4
+  max-statements-per-line:
+  - error
+  - max: 2
+  no-console: off
+  no-empty-function: error
+  no-floating-decimal: error
+  no-inline-comments: error
+  no-lonely-if: error
+  no-multi-spaces: error
+  no-multiple-empty-lines:
+  - error
+  - max: 2
+    maxEOF: 1
+    maxBOF: 0
+  no-shadow:
+  - error
+  - allow:
+    - err
+    - resolve
+    - reject
+  no-trailing-spaces: error
+  no-var: error
+  object-curly-spacing:
+  - error
+  - always
+  prefer-const: error
+  quotes:
+  - error
+  - single
+  semi: error
+  space-before-blocks: error
+  space-before-function-paren:
+  - error
+  - anonymous: never
+    named: never
+    asyncArrow: always
+  space-in-parens: error
+  space-infix-ops: error
+  space-unary-ops: error
+  spaced-comment: error
+  yoda: error
 ```
 
 The major points of this setup would be:
