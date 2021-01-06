@@ -411,7 +411,7 @@ if (command.guildOnly && message.channel.type === 'dm') {
 }
 
 + if (command.permissions) {
-+ 	const authorPerms = message.channel.permissionsFor(message.client.user);
++ 	const authorPerms = message.channel.permissionsFor(message.author);
 + 	if (!authorPerms || !authorPerms.has(command.permissions)) {
 + 		return message.channel.reply('You can not do this!');
 + 	}
