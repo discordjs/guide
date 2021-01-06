@@ -15,7 +15,7 @@ You can quickly create a new file by using the `Ctrl + N` shortcut on your keybo
 ## Logging in to Discord
 
 Once you've created a new file, do a quick check to see if you have everything setup properly. Copy & paste the following code into your file and save it. Don't worry if you don't understand it right away—it'll be explained a bit more in depth after this.
-
+You can change the name of your two const.
 ```js
 const Discord = require('discord.js');
 const client = new Discord.Client();
