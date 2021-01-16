@@ -28,7 +28,7 @@
         "eslint-config-sora": "^2.0.0",
         "eslint-plugin-markdown": "^1.0.0",
         "eslint-plugin-vue": "^5.2.2",
-        "vuepress": "^1.2.0"
+        "vuepress": "^1.8.0"
     },
     "dependencies": {
         "@vuepress/plugin-google-analytics": "^1.2.0",
