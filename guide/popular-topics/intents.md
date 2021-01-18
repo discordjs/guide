@@ -59,7 +59,7 @@ Discord.js provides a utility structure [`Intents`](https://discord.js.org/#/doc
 
 These are mostly meant to serve as templates. While using them directly is possible we strongly discourage you from using them that way. You should instead think about which events your bot strictly needs access to based on the functionality you want it to provide.
 
-You can use the `.add()` and `.remove()` methods to add or remove flags (Intent string literals representing a certain bit) and modify the bitfield. You can provide single flags as well as an array or bitfield. To use a set of intents as a template you can pass it to the constructor. A few approaches are demonstrated below:
+You can use the `.add()` and `.remove()` methods to add or remove flags (Intent string literals representing a certain bit) and modify the bitfield. You can provide single flags as well as an array or bitfield. To use a set of intents as a template you can pass it to the constructor. A few approaches are demonstrated below (note that the empty constructor `new Intents()` creates an empty Intents instance, representing no intents or the bitfield `0`):
 
 ```js
 const { Client, Intents } = require('discord.js');
