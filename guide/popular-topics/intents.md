@@ -25,7 +25,6 @@ Before storming off and doing so you should stop and carefully think about if yo
 
 ### Symptoms in version 12
 
-- Login times out if you try to fetch all members when starting your bot
 - Member caches are empty *(or only have very few entries)*
 - User cache is empty *(or has only very few entries)*
 - Fetching members times out
