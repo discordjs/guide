@@ -1,9 +1,9 @@
 # Updating from v11 to v12
 
-After a long time in development, Discord.js v12 has been formally released, meaning it's time to update from v11 to get new features for your bots!  However, with those new features comes a lot of changes to the library that will break code written for v11.  This guide will serve as a handy reference for updating your code, covering the most commonly-used methods that have been changed, new topics such as partials and internal sharding, and will also include a comprehensive list of the method and property changes at the end.
+Discord.js v12 has been formally released after a long time in development, meaning it's time to update from v11 to get new features for your bots!  However, with those new features come many changes to the library that will break code written for v11.  This guide will serve as a handy reference for updating your code, covering the most commonly-used methods that have changed, new topics such as partials and internal sharding. It will also include a comprehensive list of the method and property changes at the end.
 
 :::tip
-This guide has two versions! Make sure to select `v12 (stable)` in the drop-down selection in the header bar to get code snippets and explanations for the new version across the guide.
+This guide has two versions! Make sure to select `v12 (stable)` in the header bar's drop-down selection to get code snippets and explanations for the new version across the guide.
 :::
 
 ## Before You Start
@@ -33,7 +33,7 @@ You can check your discord.js version with `npm list discord.js`. Should it stil
 
 ### Managers/ Cache
 
-v12 introduces the concept of managers; you will no longer be able to directly use collection methods such as `Collection#get` on data structures like `Client#users`. You will now have to directly ask for cache on a manager before trying to use collection methods. Any method that is called directly on a manager will call the API, such as `GuildMemberManager#fetch` and `MessageManager#delete`. 
+v12 introduces the concept of managers; you will no longer be able to directly use collection methods such as `Collection#get` on data structures like `Client#users`. You will now have to directly ask for cache on a manager before trying to use collection methods. Any method called directly on a manager will call the API, such as `GuildMemberManager#fetch` and `MessageManager#delete`. 
 
 ```diff
 - client.users.get('123456789012345678');
@@ -76,7 +76,7 @@ v12 introduces the concept of managers; you will no longer be able to directly u
 
 ### Fetch
 
-Some methods that retrieve uncached data have been changed, transformed in the shape of a Manager.
+Some methods that retrieve uncached data have changed, transformed in the shape of a Manager.
 
 ```diff
 - client.fetchUser('123456789012345678');
@@ -132,7 +132,7 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 
 ### Roles
 
-The `GuildMember.roles` Collection has been changed to a Manager in v12, so a lot of the associated methods for interacting with a member's roles have changed as well. They're no longer on the GuildMember object itself, but instead now on the `GuildMemberRoleManager`. The Manager holds API methods and cache for the roles, in the form of `GuildMemberRoleManager#cache`, which is a plain Collection.
+The `GuildMember.roles` Collection has changed to a Manager in v12, so many of the associated methods for interacting with a member's roles have changed. They're no longer on the GuildMember object itself, but instead now on the `GuildMemberRoleManager`. The Manager holds API methods and cache for the roles, in the form of `GuildMemberRoleManager#cache`, a plain Collection.
 
 ```diff
 - guildMember.addRole('123456789012345678');
@@ -152,7 +152,7 @@ The `GuildMember.roles` Collection has been changed to a Manager in v12, so a lo
 + guildMember.roles.cache.get('123456789012345678');
 ```
 
-In addition, the GuildMember properties related to roles have also been moved to the `GuildMemberRoleManager`.
+Also, the GuildMember properties related to roles have moved to the `GuildMemberRoleManager`.
 
 ```diff
 - guildMember.colorRole;
@@ -167,7 +167,7 @@ In addition, the GuildMember properties related to roles have also been moved to
 
 ### Ban and Unban
 
-The method to ban members and users have been moved to the `GuildMemberManager`.
+The method to ban members and users have moved to the `GuildMemberManager`.
 
 ```diff
 - guild.ban('123456789012345678');
@@ -197,7 +197,7 @@ Some image-related properties like `user.avatarURL` are now a method in v12 so t
 
 ### Dynamic File type
 
-Version 12 now allows you to dynamically set the file type for images. If the `dynamic` option is provided, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp` if none is provided.
+Version 12 now allows you to set the file type for images dynamically. If the `dynamic` option is provided, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp` if none is provided.
 
 ```js
 user.avatarURL({ format: 'png', dynamic: true, size: 1024 });
@@ -205,11 +205,11 @@ user.avatarURL({ format: 'png', dynamic: true, size: 1024 });
 
 ### RichEmbed Constructor
 
-The RichEmbed constructor has been removed, and now the `MessageEmbed` constructor is used. It is largely the same to use, the only differences being the removal of `richEmbed.attachFile` (`messageEmbed.attachFiles` accepts a single file as a parameter as well) and `richEmbed.addBlankField` and the addition of `messageEmbed.addFields`.
+The RichEmbed constructor has been removed, and now the `MessageEmbed` constructor is used. It is mostly the same to use. The only differences are removing `richEmbed.attachFile` (`messageEmbed.attachFiles` accepts a single file as a parameter as well) and `richEmbed.addBlankField` and the addition of `messageEmbed.addFields`.
 
 ### String Concatenation
 
-v12 has changed how discord.js objects behave when being cast to a string. If added to a string, structures will now display as their id whenever possible (due to the internal method `valueOf` being changed according to its specification). When `toString` is called explicitly, the structure is cast via the `String` constructor or supplied as a value in template expressions (which internally calls `toString`). The mention format `<@id>` is displayed, which discord resolves to a proper mention if the structure is cached in the viewing client (in v11, both `toString` and `valueOf` showed the same behavior as `toString` does now).
+v12 has changed how discord.js objects behave when being cast to a string. If added to a string, structures will now display as their id whenever possible (due to the internal method `valueOf` being changed according to its specification). When calling `toString` explicitly, the structure is cast via the `String` constructor or supplied as a value in template expressions (which internally calls `toString`). The mention format `<@id>` is displayed, which discord resolves to a proper mention if the structure is cached in the viewing client (in v11, both `toString` and `valueOf` showed the same behavior as `toString` does now).
 
 ```diff
 - channel.send(userObject + ' has joined!')
@@ -259,7 +259,7 @@ It is also possible to define initial values for `plp`, `fec`, and `bitrate` whe
 + connection.play(stream, { bitrate: 96 })
 ```
 
-If you don't want to alter the volume of a stream while you're playing it, you can disable volume to improve performance. This cannot be reverted during playback.
+If you don't want to alter a stream's volume while you're playing it, you can disable volume to improve performance. This cannot be reverted during playback.
 
 ```js
 connection.play(stream, { volume: false });
@@ -275,7 +275,7 @@ The internal voice system in v12 now uses streams where possible, and as such, S
 + dispatcher.on('finish', handler)
 ```
 
-You can manually control how many audio packets should be queued before playing audio for more consistent playback using the `highWaterMark` option (defaults to 12)
+You can manually control how many audio packets should queue before playing audio for more consistent playback using the `highWaterMark` option (defaults to 12)
 "`js
 connection.play(stream, { highWaterMark: 512 });
 ```
@@ -302,9 +302,9 @@ Broadcasts themselves now contain a `BroadcastDispatcher` that shares a similar 
 
 ## Breaking Changes and Deletions
 
-The section headers for breaking changes will be named after the v11 classes/methods/properties and will be in alphabetical order so that you can easily find what you're looking for. The section headers for additions will be named after the v12 classes/methods/properties to reflect their current syntax appropriately.
+The section headers for breaking changes will be named after the v11 classes/methods/properties and will be in alphabetical order so that you can easily find what you're looking for. The section headers for additions will be named after the v12 classes/methods/properties to appropriately reflect their current syntax.
 
-"Difference" code blocks will be used to display the old methods vs. the newer ones—the red being what's been removed and the green being its replacement. Some bits may have more than one version of being handled. Regular JavaScript syntax code blocks will be used to display the additions. 
+"Difference" code blocks will be used to display the old methods vs. the newer ones—the red being what's been removed and the green being its replacement. Some bits may have more than one version of being handled. Additions will use regular JavaScript syntax code blocks. 
 
 ::: danger
 While this list has been carefully crafted, it may be incomplete! If you notice pieces of missing or inaccurate data, we encourage you to [submit a pull request](https://github.com/discordjs/guide/compare)!
@@ -423,7 +423,7 @@ The `client.destroy()` method no longer returns a Promise.
 
 #### Client#disconnect
 
-The `client.disconnect` event has been removed in favor of the `client.shardDisconnect` event to make use of internal sharding.
+The `client.disconnect` event has been removed in favor of the `client.shardDisconnect` event to use internal sharding.
 
 ```diff
 - client.on('disconnect', event => {});
@@ -432,19 +432,19 @@ The `client.disconnect` event has been removed in favor of the `client.shardDisc
 
 #### Client#emojis
 
-`client.emojis` has been changed from a Collection to a Manager.
+`client.emojis` has changed from a Collection to a Manager.
 
 #### Client#guildMemberSpeaking
 
-The `speaking` parameter has been changed from a `boolean` value to a read-only `Speaking` class.
+The `speaking` parameter has changed from a `boolean` value to a read-only `Speaking` class.
 
 #### Client#guilds
 
-`client.guilds` has been changed from a Collection to a Manager.
+`client.guilds` has changed from a Collection to a Manager.
 
 #### Client#ping
 
-`client.ping` has been moved to the WebSocketManager under `client.ws.ping`
+`client.ping` has moved to the WebSocketManager under `client.ws.ping`
 
 ```diff
 - client.ping
@@ -453,7 +453,7 @@ The `speaking` parameter has been changed from a `boolean` value to a read-only 
 
 #### Client#pings
 
-`client.pings` has been moved to the `WebSocketShard` class to make use of internal sharding.  The `Client` class has a `Collection` of `WebSocketShard's available via `client.ws.shards`; alternatively, the `WebSocketShard` can be found as a property of other structures, e.g.` guild.shard`.
+`client.pings` has been moved to the `WebSocketShard` class to use internal sharding.  The `Client` class has a `Collection` of `WebSocketShard's available via `client.ws.shards`; alternatively, the `WebSocketShard` can be found as a property of other structures, e.g.` guild.shard`.
 
 ```diff
 - client.pings;
@@ -475,7 +475,7 @@ The `client.presenceUpdate` has been changed and now passes the old and new `Pre
 
 #### Client#reconnecting
 
-The `client.reconnecting` event has been removed in favor of the `client.shardReconnecting` event to make use of internal sharding.
+The `client.reconnecting` event has been removed in favor of the `client.shardReconnecting` event to use internal sharding.
 
 ```diff
 - client.on('reconnecting', () => console.log('Successfully reconnected.'));
@@ -484,7 +484,7 @@ The `client.reconnecting` event has been removed in favor of the `client.shardRe
 
 #### Client#resume
 
-The `client.resume` event has been removed in favor of the `client.shardResume` event to make use of internal sharding.
+The `client.resume` event has been removed in favor of the `client.shardResume` event to use internal sharding.
 
 ```diff
 - client.on('resume', replayed => console.log(`Resumed connection and replayed ${replayed} events.`));
@@ -493,7 +493,7 @@ The `client.resume` event has been removed in favor of the `client.shardResume` 
 
 #### Client#status
 
-The `client.status` property has been removed and is now in the `WebSocketManager` class.  In addition, it is no longer a getter.
+The `client.status` property has been removed and is now in the `WebSocketManager` class, and it is no longer a getter.
 
 ```diff
 - client.status;
@@ -518,7 +518,7 @@ The `client.userNoteUpdate` event has been removed entirely, along with all othe
 
 #### Client#voiceConnections
 
-`client.voiceConnections` has been removed and is now in the `ClientVoiceManager` class.  In addition, the `Collection` is no longer a getter.
+`client.voiceConnections` has been removed and is now in the `ClientVoiceManager` class, and the `Collection` is no longer a getter.
 
 ```diff
 - client.voiceConnections;
@@ -527,7 +527,7 @@ The `client.userNoteUpdate` event has been removed entirely, along with all othe
 
 #### Client#voiceStateUpdate
 
-The `client.voiceStateUpdate` event now returns `oldState` and `newState` representing the `VoiceState` of the member before and after the update, as opposed to the member itself.
+The `client.voiceStateUpdate` event now returns `oldState` and `newState` representing the `VoiceState` of the member before and after the update instead of the member itself.
 
 ```diff
 - client.on('voiceStateUpdate', (oldMember, newMember) => console.log(oldMember));
@@ -536,7 +536,7 @@ The `client.voiceStateUpdate` event now returns `oldState` and `newState` repres
 
 ### ClientOptions
 
-There have been several changes made to the `ClientOptions` object located in `client#options`.
+Several changes were made to the `ClientOptions` object located in `client#options`.
 
 #### ClientOptions#apiRequestMethod
 
@@ -575,7 +575,7 @@ There have been several changes made to the `ClientOptions` object located in `c
 
 #### ClientUser#avatarURL
 
-`clientUser.avatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. The `dynamic` option allows you to always get a `.gif` file for animated avatars. Otherwise, the returned link will fall back to the format specified in the `format` option or `.webp` (it's default) if none is provided.
+`clientUser.avatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. The `dynamic` option will enable you always to get a `.gif` file for animated avatars. Otherwise, the returned link will fall back to the format specified in the `format` option or `.webp` (it's default) if none is provided.
 
 ```diff
 - clientUser.avatarURL;
@@ -593,7 +593,7 @@ There have been several changes made to the `ClientOptions` object located in `c
 
 #### ClientUser#createGuild
 
-`clientUser.createGuild()` has been removed and transformed in the shape of a Manager. In addition, the second and third parameters in `clientUser.createGuild()` have been changed/removed, leaving it with a total of two parameters. The `region` and `icon` parameters from v11 have been merged into an object as the second parameter.
+`clientUser.createGuild()` has been removed and transformed in the shape of a Manager. Also, the second and third parameters in `clientUser.createGuild()` have been changed/removed, leaving it with a total of two parameters. The `region` and `icon` parameters from v11 were merged into an object as the second parameter.
 
 ```diff
 - clientUser.createGuild('New server', 'us-east', './path/to/file.png');
@@ -700,15 +700,15 @@ The `ClientUserSettings` class has been removed entirely, along with all other u
 
 ### ClientUserChannelOverride
 
-The `ClientUserChannelOverride` class has been removed entirely.
+The `ClientUserChannelOverride` class was removed entirely.
 
 ### ClientUserGuildSettings
 
-The `ClientUserGuildSettings` class has been removed entirely.
+The `ClientUserGuildSettings` class was removed entirely.
 
 ### ClientUserSettings
 
-The `ClientUserSettings` class has been removed entirely.
+The `ClientUserSettings` class was removed entirely.
 
 ### Collection
 
@@ -744,7 +744,7 @@ Both methods will now return `undefined` if nothing is found.
 
 #### Collection#first/firstKey/last/lastKey/random/randomKey
 
-The `amount` parameter of these methods now allows a negative number, which will start the query from the end of the collection instead of the start.
+The `amount` parameter of these methods now allows a negative number, which will start the query from the end of the collection instead.
 
 #### Collection#tap
 
@@ -788,7 +788,7 @@ Just like the `TextChannel#send***` methods, all the `.send***()` methods have b
 
 ### Emoji
 
-`Emoji` now extends `Base` and represent either a `GuildEmoji` or `ReactionEmoji`, and some of the specific properties have moved to their respective object, instead of everything on the base `Emoji` object.
+`Emoji` now extends `Base` and represents either a `GuildEmoji` or `ReactionEmoji`. Some of the specific properties have moved to their respective object, instead of everything on the base `Emoji` object.
 
 #### Emoji#\*\*\*RestrictedRole(s)
 
@@ -865,7 +865,7 @@ The `GroupDMChannel` class has been deprecated from the Discord API.  While it's
 
 #### Guild#createChannel
 
-`guild.createChannel()` has been transformed in the shape of a Manager.  The second, third, and fourth parameters in `guild.createChannel()` have been changed/removed, leaving it with a total of two parameters, the second one being an object with all of the options available in `ChannelData`.
+`guild.createChannel()` has been transformed in the shape of a Manager.  The second, third, and fourth parameters in `guild.createChannel()` have been changed/removed, leaving it with a total of two parameters; the second one is an object with all of the options available in `ChannelData`.
 
 ```diff
 - guild.createChannel('new-channel', 'text', permissionOverwriteArray, 'New channel added for fun!');
@@ -874,7 +874,7 @@ The `GroupDMChannel` class has been deprecated from the Discord API.  While it's
 
 #### Guild#createEmoji
 
-`guild.createEmoji()` has been transformed in the shape of a Manager.  The third and fourth parameters in `guild.createEmoji()` have been changed/removed, leaving it with a total of three parameters. The `roles` and `reason` parameters from v11 have been merged into an object as the third parameter.
+`guild.createEmoji()` has been transformed in the shape of a Manager.  The third and fourth parameters in `guild.createEmoji()` have been changed/removed, leaving it with a total of three parameters. The `roles` and `reason` parameters from v11 were merged into an object as the third parameter.
 
 ```diff
 - guild.createEmoji('./path/to/file.png', 'NewEmoji', collectionOfRoles, 'New emoji added for fun!');
@@ -883,7 +883,7 @@ The `GroupDMChannel` class has been deprecated from the Discord API.  While it's
 
 #### Guild#createRole
 
-`guild.createRole()` has been transformed in the shape of a Manager.  The first and second parameters in `guild.createRole()` have been changed/removed, leaving it with a total of one parameter. The `data` and `reason` parameters from v11 have been moved into an object as the first parameter.
+`guild.createRole()` has been transformed in the shape of a Manager.  The first and second parameters in `guild.createRole()` have been changed/removed, leaving it with a total of one parameter. The `data` and `reason` parameters from v11 has moved into an object as the first parameter.
 
 ```diff
 - guild.createRole(roleData, 'New staff role!');
@@ -901,7 +901,7 @@ The `GroupDMChannel` class has been deprecated from the Discord API.  While it's
 
 #### Guild#defaultChannel
 
-Unfortunately, "default" channels don't exist in Discord anymore, and as such, the `guild.defaultChannel` property has been removed with no alternative.
+Unfortunately, "default" channels don't exist in Discord anymore, and as such, the `guild.defaultChannel` property was removed with no alternative.
 
 **Q:** "I previously had a welcome message system (or something similar) set up using that property. What can I do now?"
 
@@ -982,7 +982,7 @@ Not sure how to set up a database? Check out [this page](/sequelize/)!
 
 #### Guild#pruneMembers
 
-`guild.pruneMembers()` has been transformed in the shape of a Manager.  In addition, the first, second, and third parameters in the method have been changed or removed, leaving it with a total of one parameter. The `days`, `dry`, and `reason` parameters from v11 have been merged into an object as the first parameter.
+`guild.pruneMembers()` has been transformed in the shape of a Manager.  In addition, the first, second, and third parameters in the method have changed or removed, leaving it with a total of one parameter. The `days`, `dry`, and `reason` parameters from v11 have been merged into an object as the first parameter.
 
 ```diff
 - guild.pruneMembers(7, true, 'Scheduled pruning');
@@ -1665,7 +1665,7 @@ The `waitForReady` parameter has been renamed to `spawnTimeout`, and the `curren
 
 #### ShardingManager#spawn
 
-A third, optional parameter `spawnTimeout` has been added, specifying how long to wait in miliseconds to wait until the `Client` is ready; the default is `30000`.
+A third, optional parameter `spawnTimeout` has been added, specifying how long to wait in milliseconds to wait until the `Client` is ready; the default is `30000`.
 
 ### StreamDispatcher
 
@@ -2414,7 +2414,7 @@ This new method resolves a `ColorResolvable` into a color number.
 
 #### Util#resolveString
 
-THis new method resolves a `StringResolvable` into a string.
+This new method resolves a `StringResolvable` into a string.
 
 #### Util#Constants
 
@@ -2455,7 +2455,7 @@ This new property returns a `string` representing the URL of the webhook and is 
 
 ### WebSocketManager
 
-This new class represents the manager of the websocket connection for the client.
+This new class represents the manager of the WebSocket connection for the client.
 
 ### WebSocketOptions
 
@@ -2465,4 +2465,4 @@ This new parameter adds support for Intents, controlling which events you receiv
 
 ### WebSocketShard
 
-This new class represents a `Shard` 's websocket connection.
+This new class represents a `Shard` 's WebSocket connection.

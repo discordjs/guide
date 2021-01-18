@@ -1,6 +1,6 @@
 # ES6 syntax examples
 
-If you've used JavaScript for only a (relatively) small amount of time or just aren't very experienced with it, you might not be aware of what ES6 is and its crazy beneficial features. Since this is a guide primarily for Discord bots, we'll be using some discord.js code as an example of what you might have versus what you could do to benefit from ES6.
+If you've used JavaScript for only a (relatively) small amount of time or don't have much experience with it, you might not be aware of what ES6 is and its crazy beneficial features. Since this is a guide primarily for Discord bots, we'll be using some discord.js code as an example of what you might have versus what you could do to benefit from ES6.
 
 Here's the startup code we'll be using:
 
@@ -32,23 +32,23 @@ client.on('message', message => {
 client.login(config.token);
 ```
 
-If you haven't noticed, this piece of code is actually already using a bit of ES6 in here! The `const` keyword and arrow function syntax (`() => ...`) are a part of ES6 and are recommended to use whenever possible.
+If you haven't noticed, this piece of code is already using a bit of ES6 here! The `const` keyword and arrow function syntax (`() => ...`) is a part of ES6 and is recommended to use whenever possible.
 
 As for the code above, there are a few places where things can be done better. Let's look at them.
 
 ## Template literals
 
-If you check the code above, it's currently doing things like `prefix + 'name'` and `'Your username: ' + message.author.username`, which is perfectly valid. It is a bit hard to read, though, it's not too fun to constantly type out. Fortunately, there's a better alternative.
+If you check the code above, it's currently doing things like `prefix + 'name'` and `'Your username: ' + message.author.username`, which is perfectly valid. It is a bit hard to read, though, and it's not too fun to constantly type out. Fortunately, there's a better alternative.
 
 <!-- eslint-skip -->
 
 ```js
 // ES5 version, as we currently have it
 else if (message.content === prefix + 'server') {
-	message.channel.send('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
+    message.channel.send('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
 }
 else if (message.content === prefix + 'user-info') {
-	message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
+    message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
 }
 ```
 
@@ -57,14 +57,14 @@ else if (message.content === prefix + 'user-info') {
 ```js
 // ES6 version, using template literals
 else if (message.content.startsWith(`${prefix}server`)) {
-	message.channel.send(`Guild name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
+    message.channel.send(`Guild name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
 }
 else if (message.content.startsWith(`${prefix}user-info`)) {
-	message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
+    message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
 }
 ```
 
-Easier to read, easier to write! The best of both worlds.
+Easier to read and write! The best of both worlds.
 
 ### Template literals vs string concatenation
 
@@ -95,8 +95,8 @@ console.log('And here\'s a function call: ' + letsPretendThisDoesSomething());
 
 console.log(
 	'Putting strings on new lines\n'
-	+ 'can be a bit painful\n'
-	+ 'with string concatenation. :('
+    + 'can be a bit painful\n'
+    + 'with string concatenation. :('
 );
 ```
 
@@ -110,16 +110,16 @@ console.log(`1 + 1 = ${1 + 1}`);
 console.log(`And here's a function call: ${letsPretendThisDoesSomething()}`);
 
 console.log(`
-	Putting strings on new lines
-	is a breeze
-	with template literals! :)
+    Putting strings on new lines
+    is a breeze
+    with template literals! :)
 `);
 
 // NOTE: template literals will also render the indentation inside them
 // there are ways around that, which we'll discuss in another section.
 ```
 
-You can see how it makes things easier and more readable. In some cases, it can even make your code shorter! This one is something you'll definitely want to take advantage of as much as possible.
+You can see how it makes things easier and more readable. In some cases, it can even make your code shorter! This one is something you'll want to take advantage of as much as possible.
 
 ## Arrow functions
 
@@ -172,7 +172,7 @@ const collector = message.createReactionCollector(filter, { time: 15000 });
 
 There are a few important things you should note here:
 
-* The parenthesis around function parameters are optional when you have only one parameter but required otherwise. If you feel like this will confuse you at times, it may be a good idea to just always use parenthesis.
+* The parenthesis around function parameters are optional when you have only one parameter but are required otherwise. If you feel like this will confuse you, it may be a good idea to use parenthesis.
 * You can cleanly put what you need on a single line without curly braces.
 * Omitting curly braces will make arrow functions use **implicit return**, but only if you have a single-line expression. The `doubleAge` and `filter` variables are a good example of this.
 * Unlike the `function someFunc() { ... }` declaration, arrow functions cannot be used to create functions with such syntax. You can create a variable and give it an anonymous arrow function as the value, though (as seen with the `doubleAge` and `filter` variables).
@@ -181,7 +181,7 @@ We won't be covering the lexical `this` scope with arrow functions in here, but 
 
 ## Destructuring
 
-Destructuring is an easy way to extract items from an object or array. If you've never seen the syntax for it before, it can be a bit confusing, but it's actually very easy to understand once explained!
+Destructuring is an easy way to extract items from an object or array. If you've never seen the syntax for it before, it can be a bit confusing, but it's straightforward to understand once explained!
 
 ### Object destructuring
 
@@ -199,7 +199,7 @@ const prefix = require('./config.json').prefix;
 const token = require('./config.json').token;
 ```
 
-This is a bit verbose and not the most fun to write out each time. Object destructuring simplifies this, making it easier to both read and write. Take a look:
+This code is a bit verbose and not the most fun to write out each time. Object destructuring simplifies this, making it easier to both read and write. Take a look:
 
 ```js
 const { prefix, token } = require('./config.json');
@@ -222,9 +222,9 @@ client.on('message', message => {
 });
 ```
 
-It is a bit less to write out and also looks cleaner, but shouldn't be necessary if you follow along with the [command handler](/command-handling/) part of the guide.
+It is a bit less to write out and looks cleaner, but it shouldn't be necessary if you follow along with the [command handler](/command-handling/) part of the guide.
 
-You can also rename variables when destructuring, if necessary. A good example of when you'd need to do so is when you're extracting a property with a name that's already being used or conflicts with a reserved keyword. The syntax is as follows:
+You can also rename variables when destructuring, if necessary. A good example is when you're extracting a property with a name already being used or conflicts with a reserved keyword. The syntax is as follows:
 
 ```js
 // `default` is a reserved keyword
@@ -245,13 +245,13 @@ const age = args[1];
 const location = args[2];
 ```
 
-Just like the first example with object destructuring, this is a bit verbose and not fun to write out. Array destructuring eases this pain.
+Like the first example with object destructuring, this is a bit verbose and not fun to write out. Array destructuring eases this pain.
 
 ```js
 const [name, age, location] = args;
 ```
 
-A single line of code that makes things much cleaner! In some cases, you may not even need all items in the array (e.g., when using `string.match(regex)`). Array destructuring still allows you to operate in the same sense.
+A single line of code that makes things much cleaner! In some cases, you may not even need all the array's items (e.g., when using `string.match(regex)`). Array destructuring still allows you to operate in the same sense.
 
 ```js
 const [, username, id] = message.content.match(someRegex);
@@ -263,8 +263,8 @@ In this snippet, we use a comma without providing a name for the item in the arr
 
 Since there are many, many articles out there that can explain this part more in-depth, we'll only be giving you a TL;DR and an article link if you choose to read more about it.
 
-1. The `var` keyword is what was (and can still be) used in JS before `let` and `const` came to surface. There are actually many issues with `var`, though, such as it being function-scoped, hoisting related issues, and allowing redeclaration.
-2. The `let` keyword is essentially the new `var`; it addresses many of the issues `var` has, but its biggest factor would be that it's block-scoped and disallows redeclaration (*not* reassignment).
-3. The `const` keyword is for giving variables a constant value which may not be reassigned. `const`, like `let`, is also block-scoped.
+1. The `var` keyword is what was (and can still be) used in JS before `let` and `const` came to surface. There are many issues with `var`, though, such as it being function-scoped, hoisting related issues, and allowing redeclaration.
+2. The `let` keyword is essentially the new `var`; it addresses many of the issues `var` has, but its most significant factor would be that it's block-scoped and disallows redeclaration (*not* reassignment).
+3. The `const` keyword is for giving variables a constant value that is unable to be reassigned. `const`, like `let`, is also block-scoped.
 
 The general rule of thumb recommended by this guide is to use `const` wherever possible, `let` otherwise, and avoid using `var`. Here's a [helpful article](https://madhatted.com/2016/1/25/let-it-be) if you want to read more about this subject.
