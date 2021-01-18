@@ -148,9 +148,9 @@ Now when you try to use the kick command inside a DM, you'll get the appropriate
 
 ## Cooldowns
 
-Spam is something you generally want to avoid - especially if one of your commands requires calls to other APIs, or takes a bit of time to build/send. This is also a very common feature bot developers want to integrate into their projects, so let's get started on that!
+Spam is something you generally want to avoid, especially if the command in question requires you to call other APIs or takes substantial time to do background operations. We will now explain how you can introduce cooldowns into your bot to prevent users from spamming commands back to back.
 
-You'll be using the ping command to test this on. Add in the following bit of code:
+First, add a cooldown key to one of your commands (we use the ping command here) exports. This determines how long the user will have to wait (in seconds) before using this specific command again.
 
 ```diff
 module.exports = {
@@ -162,15 +162,15 @@ module.exports = {
 };
 ```
 
-This is the amount (in seconds) that the user will have to wait before being able to properly use that command again. You'll be using Collections again to store what you need.
-
-In your main file, add in this line (preferably somewhere above your `ready` event):
+In your main file (`index.js` in our examples), add this line preferably somewhere at the top before you handle any events:
 
 ```js
 const cooldowns = new Discord.Collection();
 ```
 
-Again in your main file, directly above the `try/catch`, add in the following:
+This initializes an empty Collection (remember, Collection is a utility data structure, which works based on key/value pairs) which you can then fill later when commands are used. The key will be the command name and the value will be another Collection associating the user id (key) to the last time (value) this specific user used this specific command. Overall the logical path to get a specific user's last usage of a specific command will be `cooldowns > command > user > timestamp`.
+
+In your main file, directly above the `try/catch` block causing command execution, add in the following:
 
 ```js
 if (!cooldowns.has(command.name)) {
@@ -186,13 +186,13 @@ if (timestamps.has(message.author.id)) {
 }
 ```
 
-You check if the `cooldowns` Collection has the command set in it yet. If not, then add it in. Next, 3 variables are created:
+You check if the `cooldowns` Collection already has an entry for the command being used right now. If this is not the case, add a new entry, where the value is initialized as an empty Collection. Next, 3 variables are created:
 
-1. A variable with the current timestamp.
-2. A variable that `.get()`s the Collection for the triggered command.
-3. A variable that gets the necessary cooldown amount. If you don't supply it in your command file, it'll default to 3. Afterwards, convert it to the proper amount of milliseconds.
+1. `now`: The current timestamp.
+2. `timestamps`: A reference to the Collection of user-ID and timestamp key/value pairs for the triggered command.
+3. `cooldownAmount`: The specified cooldown from the command file, converted to milliseconds for straightforward calculation. If none is specified this defaults to three seconds.
 
-After that, create a simple `if` statement to check if the `timestamps` Collection has the author ID in it yet.
+If the author has already used this command in this session, get the timestamp, calculate the expiration time and inform the user of the amount of time they need to wait before being able to use this command again. Note that you use a `return` statement here, causing the code below this snippet to only execute if the message author has not used this command in this session or the wait has already expired.
 
 Continuing with your current setup, this is the complete `if` statement:
 
@@ -207,16 +207,19 @@ if (timestamps.has(message.author.id)) {
 }
 ```
 
-Since the `timestamps` Collection has the author ID in it, you `.get()` it and then sum it up with the `cooldownAmount` variable, in order to get the correct expiration timestamp. You then check to see if it's actually expired or not.
+If the `timestamps` Collection doesn't have the message author's ID, use `.set()` to add an entry to your Collection. The key will be the author's ID, the value the current timestamp. This reflects "now" to be the last time this user used this command, which you can look up later and start the whole cooldown check cycle again.
 
-If the `expirationTime` has not passed, you return a message letting the user know how much time is left until they can use that command again. As you will see shortly, the author ID should be deleted from the `timestamps` Collection upon expiration, but you should take this extra precaution to avoid potential UX problems.
-
-Finally, if the `timestamps` Collection doesn't have the message author's ID (or if the author ID did not get deleted as planned), `.set()` the author ID with the current timestamp and create a `setTimeout()` to automatically delete it after the cooldown period has passed:
+The previous author check serves as a precaution and should normally not be necessary, as you will now insert a short piece of code causing the author's entry to be deleted after the cooldown has expired. To facilitate this you will use the node.js `setTimeout` method, which allows you to execute a function after a specified amount of time:
 
 ```js
+// if (timestamps.has(message.author.id)) {
+// ...
+// }
 timestamps.set(message.author.id, now);
 setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 ```
+
+This line causes the entry for the message author under the specified command to be deleted after the command's cooldown time is expired for this user.
 
 ## Command aliases
 
