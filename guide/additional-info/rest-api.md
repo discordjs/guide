@@ -74,9 +74,9 @@ We're going to take advantage of [destructuring](/additional-info/es6-syntax.md#
 
 ## Using node-fetch
 
-node-fetch is a lightweight module that brings the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), which is available in browsers to node. It is a promised based library. If you aren't already familiar with promises, you should read up on them [here](/additional-info/async-await.md).
+node-fetch is a lightweight, Promise-based module that brings the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), which is available in browsers, to node. If you aren't already familiar with Promises, you should read up on them [here](/additional-info/async-await.md).
 
-In this tutorial, we'll be making a bot with 2 API-based commands. The first will be using [random.cat](https://aws.random.cat), and the other will use [Urban Dictionary](https://www.urbandictionary.com).
+In this tutorial, we'll be making a bot with 2 API-based commands using the [random.cat](https://aws.random.cat) and [Urban Dictionary](https://www.urbandictionary.com) APIs.
 
 To require node-fetch, you'd do:
 
@@ -92,7 +92,7 @@ Random cat's API is available at https://aws.random.cat/meow and returns a [JSON
 fetch('https://aws.random.cat/meow').then(response => response.json());
 ```
 
-Of course, it seems like this does nothing, but what it's doing is launching a request to the random.cat server and random.cat is returning some JSON that contains a `file` property, which is a string containing a link to a random cat. node-fetch returns a response object, which we can change into JSON with `response.json()`. Next, let's implement this into a command. The code should look similar to this:
+It may seem like this does nothing, but what it's doing is launching a request to the random.cat server. The server is returning some JSON that contains a `file` property, which is a string containing a link to a random cat. node-fetch returns a response object, which we can change into JSON with `response.json()`. Next, let's implement this into a command. The code should look similar to this:
 
 <!-- eslint-skip -->
 

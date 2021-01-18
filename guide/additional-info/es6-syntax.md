@@ -1,6 +1,6 @@
 # ES6 syntax examples
 
-If you've used JavaScript for only a (relatively) small amount of time or don't have much experience with it, you might not be aware of what ES6 is and its crazy beneficial features. Since this is a guide primarily for Discord bots, we'll be using some discord.js code as an example of what you might have versus what you could do to benefit from ES6.
+If you've used JavaScript for only a (relatively) small amount of time or don't have much experience with it, you might not be aware of what ES6 is and what beneficial features it includes. Since this is a guide primarily for Discord bots, we'll be using some discord.js code as an example of what you might have versus what you could do to benefit from ES6.
 
 Here's the startup code we'll be using:
 
@@ -172,7 +172,7 @@ const collector = message.createReactionCollector(filter, { time: 15000 });
 
 There are a few important things you should note here:
 
-* The parenthesis around function parameters are optional when you have only one parameter but are required otherwise. If you feel like this will confuse you, it may be a good idea to use parenthesis.
+* The parentheses around function parameters are optional when you have only one parameter but are required otherwise. If you feel like this will confuse you, it may be a good idea to use parentheses.
 * You can cleanly put what you need on a single line without curly braces.
 * Omitting curly braces will make arrow functions use **implicit return**, but only if you have a single-line expression. The `doubleAge` and `filter` variables are a good example of this.
 * Unlike the `function someFunc() { ... }` declaration, arrow functions cannot be used to create functions with such syntax. You can create a variable and give it an anonymous arrow function as the value, though (as seen with the `doubleAge` and `filter` variables).
@@ -222,7 +222,7 @@ client.on('message', message => {
 });
 ```
 
-It is a bit less to write out and looks cleaner, but it shouldn't be necessary if you follow along with the [command handler](/command-handling/) part of the guide.
+The code is shorter and looks cleaner, but it shouldn't be necessary if you follow along with the [command handler](/command-handling/) part of the guide.
 
 You can also rename variables when destructuring, if necessary. A good example is when you're extracting a property with a name already being used or conflicts with a reserved keyword. The syntax is as follows:
 

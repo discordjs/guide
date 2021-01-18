@@ -12,7 +12,7 @@ Some common notations refer to a class or the properties, methods, or events of 
 
 The notation `<Class>` means an instance of the `Class` class. For example, a snippet like `<Message>.reply('hello')` is asking you to replace `<Message>` with some value that is an instance of `Message`, e.g. `msg.reply('hello')`. It could also just be a placeholder, e.g., `<id>` would mean a placeholder for some ID.
 
-The notation `Class#foo` can refer to the `foo` property, method, or event of the `Class` class. Specifically, which one the writer meant needs to be determined from context. For example:
+The notation `Class#foo` can refer to the `foo` property, method, or event of the `Class` class. Which one the writer meant needs to be determined from context. For example:
 
 - `Message#author` means that you should refer to the `author` property on a `Message`.
 - `TextChannel#send` means that you should refer to the `send` method on a `TextChannel`.
@@ -22,7 +22,7 @@ The notation `Class#foo` can refer to the `foo` property, method, or event of th
 Remember that this notation is not valid JavaScript; it is a shorthand to refer to a specific piece of code.
 :::
 
-Sometimes, the notation is extended, which can help you determine which one the writer meant. For example, `TextChannel#send(content, options)` is definitely a method of `TextChannel`, since it uses function notation. And, `Client#event:message` is an event since it says it is an event.
+Sometimes, the notation is extended, which can help you determine which one the writer meant. For example, `TextChannel#send(content, options)` is definitely a method of `TextChannel`, since it uses function notation. `Client#event:message` is an event since it says it is an event.
 
 The important thing to take away from this notation is that the `#` symbol signifies that the property, method, or event can only be accessed through an instance of the class. Unfortunately, this notation is often abused, e.g., `<Message>#send` (`<Message>` is already an instance, so this makes no sense), or `Util#resolveColor` (`resolveColor` is a static method–you should write it as `Util.resolveColor`), so always refer back to the docs if you are confused.
 
@@ -38,7 +38,7 @@ In the discord.js docs, there are type signatures everywhere, such as in propert
 
 The symbol `*` means any type. For example, methods that return `*` means that they can return anything, and a parameter of type `*` can be anything.
 
-The symbol `?` means that the type is nullable. You can see it before or after the type (e.g. `?T` or `T?`). This symbol means that the value can be of the type `T` or `null`. An example is the property `GuildMember#nickname`, which has the type `?string` since a member may or may not have a nickname.
+The symbol `?` means that the type is nullable. You can see it before or after the type (e.g. `?T` or `T?`). This symbol means that the value can be of the type `T` or `null`. An example is `GuildMember#nickname`; its type is `?string` since a member may or may not have a nickname.
 
 The expression `T[]` means an array of `T`. You can sometimes see multiple brackets `[]`, indicating that the array is multi-dimensional, e.g., `string[][]`.
 
