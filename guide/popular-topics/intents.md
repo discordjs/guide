@@ -74,7 +74,7 @@ const otherIntents = new Intents(Intents.NON_PRIVILEGED);
 otherIntents.remove(['DIRECT_MESSAGES', 'GUILD_MESSAGES']);
 
 const otherIntents2 = new Intents(32509);
-otherIntents2.remove(1, 512);
+otherIntents2.remove(4096, 512);
 ```
 
 If you want to view the built flags you can utilize the `.toArray()`, `.serialize()` and `.missing()` methods. The first returns an array of flags represented in this bitfield, the second an object mapping all possible flag values to a boolean, based on if they are represented in this bitfield. The third can be used to view the flags not represented (you use it by passing a bitfield of specific intents to check for).
