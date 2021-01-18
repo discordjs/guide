@@ -55,14 +55,11 @@ const client = new Client({ ws: { intents: ['GUILDS', 'GUILD_MESSAGES'] } });
 
 ## The Intents Bitfield
 
-Discord.js provides a utility structure [`Intents`](https://discord.js.org/#/docs/main/stable/class/Intents) which can be utilized to easily adapt the underlying bit field. This class also has static fields for all (`Intents.ALL`), privileged (`Intents.PRIVILEGED`) and non-privileged (`Intents.NON_PRIVILEGED`) intents. You can provide these as-is or pass them to the Intents constructor to further modify to your needs.
+Discord.js provides a utility structure [`Intents`](https://discord.js.org/#/docs/main/stable/class/Intents) which you can use to easily modify bitfields. The class also features static attributes for all (`Intents.ALL`), privileged (`Intents.PRIVILEGED`), and non-privileged (`Intents.NON_PRIVILEGED`) intents.
 
-```js
-const { Client, Intents } = require('discord.js');
-const client = new Client({ ws: { intents: Intents.NON_PRIVILEGED } });
-```
+These are mostly meant to serve as templates. While using them directly is possible we strongly discourage you from using them that way. You should instead think about which events your bot strictly needs access to based on the functionality you want it to provide.
 
-You can use the `.add()` and `.remove()` methods to add or remove flags to modify the bit field. You can provide single flags as well as an array or bit field. To use a set of intents as a template you can pass it to the constructor. A few approaches are demonstrated below:
+You can use the `.add()` and `.remove()` methods to add or remove flags (Intent string literals representing a certain bit) and modify the bitfield. You can provide single flags as well as an array or bitfield. To use a set of intents as a template you can pass it to the constructor. A few approaches are demonstrated below:
 
 ```js
 const { Client, Intents } = require('discord.js');
