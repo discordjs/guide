@@ -16,9 +16,9 @@ you can use moment to turn it in a Date object you can use in your code:
 <!-- eslint-skip -->
 ```js
 const input = await message.channel.awaitMessages(m => m.author.id === message.author.id, {
-	max: 4,
-	time: 10e3,
-	errors: ['time'],
+    max: 4,
+    time: 10e3,
+    errors: ['time'],
 });
 const date = moment(input.first().content);
 ```
@@ -48,7 +48,7 @@ Official documentation: https://github.com/zeit/ms
 :::
 
 Ms is another tool for working with times in JavaScript. However, ms specializes on durations.
-It allows you to convert times in milliseconds into human-readable formats, and vice versa.
+It allows you to convert times in milliseconds into human-readable formats and vice versa.
 
 Example:
 
@@ -56,9 +56,9 @@ Example:
 ```js
 await message.channel.send('Send two messages and I\'ll tell you how far apart you sent them.');
 const messages = await message.channel.awaitMessages(m => m.author.id === message.author.id. {
-	max: 2,
-	time: 30e3,
-	errors: ['time'],
+    max: 2,
+    time: 30e3,
+    errors: ['time'],
 });
 
 const difference = messages.last().createdTimestamp - messages.first().createdTimestamp;
@@ -86,10 +86,10 @@ const packageName = 'common-tags';
 
 if (someCondition) {
 	const poem = stripIndents`
-		I like ${packageName}.
-		It makes my strings so pretty,
-		you should use it too.
-	`;
+        I like ${packageName}.
+        It makes my strings so pretty,
+        you should use it too.
+    `;
 
 	console.log(poem);
 }
@@ -106,7 +106,7 @@ const options = ['add', 'delete', 'edit'];
 
 // -> Do you want me to add, delete or edit the channel?
 message.channel.send(oneLineCommaListsOr`
-	Do you want me to ${options} the channel?
+    Do you want me to ${options} the channel?
 `);
 ```
 
@@ -119,7 +119,7 @@ Official documentation: https://www.npmjs.com/package/chalk
 :::
 
 Chalk is not exactly useful for Discord bots themselves, but it will make your terminal output a lot prettier and organized.
-This package lets you color and style your `console.log`s in many, many different ways; No more simple white on black.
+This package lets you color and style your `console.log`s in many different ways; No more simple white on black.
 
 Let's say you want your error messages to be easily visible; Let us give them a nice red color:
 
@@ -130,7 +130,7 @@ console.error(chalk.redBright('FATAL ERROR'), 'Something really bad happened!');
 ![image of code above](~@/images/chalk-red.png)
 
 You can also chain multiple different multipliers.  
-If you wanted to have green text, a grey background, and have it all underlined, that is absolutely possible:
+If you wanted to have green text, a grey background, and have it all underlined, that is possible:
 
 ```js
 console.log(chalk.green.bgBrightBlack.underline('This is so pretty.'));
@@ -148,14 +148,14 @@ Winston is "a logger for just about everything".
 You can log to the terminal, you can log to a file, etc.  
 "But wait," I hear you cry, "what's wrong with `console.log`?".  
 Well, the answer is simple: `console.log` is slow, very slow, and not very versatile.
-Whenver you make a call to `console.log`, your program halts; it has to wait for console.log to finish.
-While it does that, your program can do nothing else. That does not sound very good, does it?
-Well, that is exactly what winston is for.
+Whenver you call `console.log`, your program halts; it has to wait for console.log to finish.
+While it does that, your program can do nothing else, which does not sound good.
+Well, that is precisely what winston is for.
 
 Winston is fast and highly configurable. It has different log levels for all your needs; it can log to files, the terminal, etc.
 Like moment.js, it also has extension packages. So if there is something you feel is missing, you can probably find one that fits your needs.
 
-Now, there really are *a lot* of options, so it is recommended you take a look at the docs yourself.
+Now, there are *a lot* of options, so it is recommended you take a look at the docs yourself.
 But let us get a quick overview of what it can do:
 
 ```js
@@ -178,9 +178,9 @@ process.on('uncaughtException', error => logger.log('error', error));
 client.login('your-token-goes-here');
 ```
 
-The above code creates a simple logger which will log to both the console and a file called "log" (defined by the `transports` options).  
+The above code creates a simple logger that will log to both the console and a file called "log" (defined by the `transports` options).  
 The `format` option tells the logger which format to use for the messages; by default, it outputs JSON objects.
-While useful, JSON is not very readable, so we are defining a custom format which just displays the log level in all caps alongside the message.
+While useful, JSON is not very readable, so we define a custom format that displays the log level in all caps alongside the message.
 If you wanted to, you could also use the chalk module to make the logger's format a bit prettier by applying colors, etc.
 
 ![winston example](~@/images/winston.png)
