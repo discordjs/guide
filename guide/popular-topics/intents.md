@@ -74,7 +74,7 @@ const client = new Client({ ws: { intents: myIntents } });
 // more examples about manipulating the bitfield
 
 const otherIntents = new Intents(Intents.NON_PRIVILEGED);
-otherIntents.remove(['GUILDS', 'GUILD_MESSAGES']);
+otherIntents.remove(['DIRECT_MESSAGES', 'GUILD_MESSAGES']);
 
 const otherIntents2 = new Intents(32509);
 otherIntents2.remove(1, 512);
