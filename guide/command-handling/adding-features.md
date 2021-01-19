@@ -31,6 +31,46 @@ In this short (but necessary) refactor, you:
 
 Now you can start adding features!
 
+## Command Categories
+
+So far all your command files are in a single `commands` folder. This is fine if you only have a few commands for your bot but if you're planning to make a bot that does lots of stuff you might end up with a large number of files in the `commands` folder. It will be a mess and thus a hard to maintain project. To fix this issue, you can sort your commands according to their types and put them in separate folders inside the `commands` folder. This sounds good, but it will throw an error if you try to do this with the current setup you have in the `index.js` to load commands. You will have to make a few changes to your existing code in order to make this all work out smoothly.
+
+If you've followed along so far, your project structure should look something like this:
+
+![Project structure before sorting](~@/images/before-sorting.png)
+
+The first thing you have to do is sort out the files in the `commands` folder into categories and put them in separate folders inside the `commands` folder. If we sort the command files we currently have and put them inside folders that are named according to the type of command files they hold, it will look something like this:
+
+![Project structure after sorting](~@/images/after-sorting.png)
+
+:::warning
+Make sure you put every command file you have inside one of the new sub-folders. Leaving a command file directly under the `commands` folder will create problems.
+:::
+
+It is not necessary to name your sub-folders exactly like we have named them here. You can create any number of sub-folders and name them whatever you want. Although, it will be a good practice to name them according to the type of commands stored inside them.
+
+Now, go back to your main file `index.js` and add this below the `client.commands = new Discord.Collection();` line:
+
+```js
+const commandFolders = fs.readdirSync('./commands');
+```
+
+We used the `fs` module again to get the name of all sub-folders inside the `commands` folder in an array. If you `console.log()` the `commandFolders` it will print this: `[ 'fun', 'moderation', 'utility' ]` in your terminal.
+
+As you can see, now we have three sub-folders instead of just one `commands` folder. The logic remains the same. You have to do the same thing you did earlier to load files from the `commands` folder, but now you have to do it for each sub-folders inside it. This is how the code for that looks like:
+
+```js
+commandFolders.forEach(folder => {
+	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
+	for (const file of commandFiles) {
+		const command = require(`./commands/${folder}/${file}`);
+		client.commands.set(command.name, command);
+	}
+});
+```
+
+That's it! You can now add new commands to your bot just like earlier. Make sure you create the new command files inside one of the sub-folders (or a new one) in the `commands` folder.
+
 ## Required arguments
 
 For this section, we'll be using the `args-info.js` command as an example. If you chose to keep it, it should look like this now:
