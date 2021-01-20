@@ -55,7 +55,7 @@ Now, go back to your main file `index.js` and add this below the `client.command
 const commandFolders = fs.readdirSync('./commands');
 ```
 
-We used the `fs` module again to get the name of all sub-folders inside the `commands` folder in an array. If you `console.log()` the `commandFolders` it will print this: `[ 'fun', 'moderation', 'utility' ]` in your terminal.
+We used the `fs` module again to get the names of all sub-folders inside the `commands` folder in an array. If you `console.log()` the `commandFolders` it will print this: `[ 'fun', 'moderation', 'utility' ]` in your terminal.
 
 As you can see, now we have three sub-folders instead of just one `commands` folder. The logic remains the same. You have to do the same thing you did earlier to load files from the `commands` folder, but now you have to do it for each sub-folders inside it. This is how the code for that looks like:
 
