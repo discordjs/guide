@@ -60,13 +60,13 @@ You used the `fs` module again to get the names of all sub-folders inside the `c
 As you can see, now you have three sub-folders instead of just one `commands` folder. The logic remains the same. You have to do the same thing you did earlier to load files from the `commands` folder, but now you have to do it for each of the sub-folders inside it. This is what the code for that looks like:
 
 ```js
-commandFolders.forEach(folder => {
+for (const folder of commandFolders) {
 	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
 	for (const file of commandFiles) {
 		const command = require(`./commands/${folder}/${file}`);
 		client.commands.set(command.name, command);
 	}
-});
+}
 ```
 
 That's it! When creating new files for commands, make sure you create it inside one of the sub-folders (or a new one) in the `commands` folder.
@@ -502,26 +502,12 @@ if (!command) return message.channel.send(`There is no command with name or alia
 A lot of library specific structures have `client` as a property. That means you don't have to pass the client reference as a parameter to commands to access for example `client.guilds` or `client.commands`, but can directly access the respective properties directly from the `message` object, as shown in the snippet above.
 :::
 
-Now to retrieve a file you will have to pass its path to `require()`. To create this path you just need the name of the file and the sub-folder it's in. You can get the filename using `command.name`. To find the sub-folder name you will have to loop through all the sub-folders in the `commands` folder. When you find the file of this command, you'll store the name of its sub-folder in  `folderName` and break out of both the loops. This is what the code for that looks like:
+Now to retrieve a file you will have to pass its path to `require()`. To create this path you just need the name of the file and the sub-folder it's in. You can get the filename using `command.name`. To find the sub-folder name you will have to use the `find` method on the `commandFolders` array. For each of the sub-folders in the `commandFolders` array, you'll check whether the file of this command is in that folder or not. You will do that using the `includes` method on the file names array of each sub-folder. It will store the name of the sub-folder in `folderName` once it finds the file of this command. This is what the code for that looks like:
 
 ```js
 const commandFolders = fs.readdirSync('./commands');
 
-let folderName;
-let folderFound = false;
-
-for (const folder of commandFolders) {
-	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
-	for (const file of commandFiles) {
-		const fileName = file.slice(0, -3);
-		if (commandName === fileName) {
-			folderName = folder;
-			folderFound = true;
-			break;
-		}
-	}
-	if (folderFound) break;
-}
+const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${folder}`).includes(`${commandName}.js`));
 ```
 
 Now, in theory, all there is to do, is to delete the previous command from `client.commands` and require the file again. In practice though, you cannot do this that easily as `require()` caches the file. If you were to require it again, you would simply load the previously cached file without any of your changes. In order to remove the file from the cache, you need to add the following line to your code:

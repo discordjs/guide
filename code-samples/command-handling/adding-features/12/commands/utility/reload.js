@@ -15,21 +15,7 @@ module.exports = {
 
 		const commandFolders = fs.readdirSync('./commands');
 
-		let folderName;
-		let folderFound = false;
-
-		for (const folder of commandFolders) {
-			const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
-			for (const file of commandFiles) {
-				const fileName = file.slice(0, -3);
-				if (commandName === fileName) {
-					folderName = folder;
-					folderFound = true;
-					break;
-				}
-			}
-			if (folderFound) break;
-		}
+		const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${folder}`).includes(`${commandName}.js`));
 
 		delete require.cache[require.resolve(`../${folderName}/${command.name}.js`)];
 
