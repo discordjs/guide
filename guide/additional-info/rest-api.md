@@ -218,7 +218,7 @@ const embed = new MessageEmbed()
 	.addFields(
 		{ name: 'Definition', value: trim(answer.definition, 1024) },
 		{ name: 'Example', value: trim(answer.example, 1024) },
-		{ name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` }
+		{ name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` },
 	);
 
 message.channel.send(embed);

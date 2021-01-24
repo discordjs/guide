@@ -491,12 +491,16 @@ There are two common measurements for bot pings. The first, **Websocket heartbea
 
 <branch version="11.x">
 
+<!-- eslint-skip -->
+
 ```js
 <message>.channel.send(`Websocket heartbeat: ${<client>.ping}ms.`);
 ```
 
 </branch>
 <branch version="12.x">
+
+<!-- eslint-skip -->
 
 ```js
 <message>.channel.send(`Websocket heartbeat: ${<client>.ws.ping}ms.`);
@@ -509,6 +513,8 @@ A specific shards heartbeat can be found on the WebSocketShard instance, accessi
 </branch>
 
 The second, **Roundtrip Latency**, describes the amount of time a full API roundtrip (from creation of the command message to creation of the response message) takes. We then edit the response to the respective value in order to avoid needing to send yet another message:
+
+<!-- eslint-skip -->
 
 ```js
 <message>.channel.send('Pinging...').then(sent => {
