@@ -33,13 +33,13 @@ Now you can start adding features!
 
 ## Command Categories
 
-So far all your command files are in a single `commands` folder. This is fine if you only have a few commands for your bot but if you're planning to make a bot that does lots of stuff you might end up with a large number of files in the `commands` folder. It will be a mess and thus a hard to maintain project. To fix this issue, you can sort your commands according to their types and put them in separate folders inside the `commands` folder. This sounds good, but it will throw an error if you try to do this with the current setup you have in the `index.js` to load commands. You will have to make a few changes to your existing code in order to make this all work out smoothly.
+So far all your command files are in a single `commands` folder. This is fine if you only have a few of them but if you're planning to make a bot that does lots of stuff you might end up with a large number of files in the `commands` folder. Keeping track of that many files can be a little tough. To make this a little easier, you can sort your commands according to their types and put them in separate folders inside the `commands` folder. You will have to make a few changes to your existing code in `index.js` for this to work out.
 
 If you've followed along so far, your project structure should look something like this:
 
 ![Project structure before sorting](~@/images/before-sorting.png)
 
-The first thing you have to do is sort out the files in the `commands` folder into categories and put them in separate folders inside the `commands` folder. If we sort the command files we currently have and put them inside folders that are named according to the type of command files they hold, it will look something like this:
+The first thing you have to do is sort out the files in the `commands` folder into categories and put them in separate folders inside the `commands` folder. If you sort the command files you currently have and put them inside folders that are named according to the type of command files they hold, it will look something like this:
 
 ![Project structure after sorting](~@/images/after-sorting.png)
 
@@ -47,7 +47,7 @@ The first thing you have to do is sort out the files in the `commands` folder in
 Make sure you put every command file you have inside one of the new sub-folders. Leaving a command file directly under the `commands` folder will create problems.
 :::
 
-It is not necessary to name your sub-folders exactly like we have named them here. You can create any number of sub-folders and name them whatever you want. Although, it will be a good practice to name them according to the type of commands stored inside them.
+It is not necessary to name your sub-folders exactly like we have named them here. You can create any number of sub-folders and name them whatever you want. Although, it is a good practice to name them according to the type of commands stored inside them.
 
 Now, go back to your main file `index.js` and add this below the `client.commands = new Discord.Collection();` line:
 
@@ -55,9 +55,9 @@ Now, go back to your main file `index.js` and add this below the `client.command
 const commandFolders = fs.readdirSync('./commands');
 ```
 
-We used the `fs` module again to get the names of all sub-folders inside the `commands` folder in an array. If you `console.log()` the `commandFolders` it will print this: `[ 'fun', 'moderation', 'utility' ]` in your terminal.
+You used the `fs` module again to get the names of all sub-folders inside the `commands` folder in an array. If you `console.log()` the `commandFolders` it will print this: `[ 'fun', 'moderation', 'utility' ]` in your terminal.
 
-As you can see, now we have three sub-folders instead of just one `commands` folder. The logic remains the same. You have to do the same thing you did earlier to load files from the `commands` folder, but now you have to do it for each sub-folders inside it. This is how the code for that looks like:
+As you can see, now you have three sub-folders instead of just one `commands` folder. The logic remains the same. You have to do the same thing you did earlier to load files from the `commands` folder, but now you have to do it for each of the sub-folders inside it. This is what the code for that looks like:
 
 ```js
 commandFolders.forEach(folder => {
@@ -69,7 +69,7 @@ commandFolders.forEach(folder => {
 });
 ```
 
-That's it! You can now add new commands to your bot just like earlier. Make sure you create the new command files inside one of the sub-folders (or a new one) in the `commands` folder.
+That's it! When creating new files for commands, make sure you create it inside one of the sub-folders (or a new one) in the `commands` folder.
 
 ## Required arguments
 
@@ -471,9 +471,12 @@ Need more resources on how Discord's permission system works? Check the [permiss
 
 When writing your commands, you may find it tedious to restart your bot every time you want to test even the slightest change in your code. However, if you have a command handler, reloading commands can be done with a single bot command.
 
-Create a new command file and paste in the usual format:
+Create a new command file and paste in the usual format with a slight change:
 
 ```js
+// You'll use fs later in this file
+const fs = require('fs');
+
 module.exports = {
 	name: 'reload',
 	description: 'Reloads a command',
@@ -499,17 +502,39 @@ if (!command) return message.channel.send(`There is no command with name or alia
 A lot of library specific structures have `client` as a property. That means you don't have to pass the client reference as a parameter to commands to access for example `client.guilds` or `client.commands`, but can directly access the respective properties directly from the `message` object, as shown in the snippet above.
 :::
 
+Now to retrieve a file you will have to pass its path to `require()`. To create this path you just need the name of the file and the sub-folder it's in. You can get the filename using `command.name`. To find the sub-folder name you will have to loop through all the sub-folders in the `commands` folder. When you find the file of this command, you'll store the name of its sub-folder in  `folderName` and break out of both the loops. This is what the code for that looks like:
+
+```js
+const commandFolders = fs.readdirSync('./commands');
+
+let folderName;
+let folderFound = false;
+
+for (const folder of commandFolders) {
+	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
+	for (const file of commandFiles) {
+		const fileName = file.slice(0, -3);
+		if (commandName === fileName) {
+			folderName = folder;
+			folderFound = true;
+			break;
+		}
+	}
+	if (folderFound) break;
+}
+```
+
 Now, in theory, all there is to do, is to delete the previous command from `client.commands` and require the file again. In practice though, you cannot do this that easily as `require()` caches the file. If you were to require it again, you would simply load the previously cached file without any of your changes. In order to remove the file from the cache, you need to add the following line to your code:
 
 ```js
-delete require.cache[require.resolve(`./${command.name}.js`)];
+delete require.cache[require.resolve(`../${folderName}/${command.name}.js`)];
 ```
 
 After removing the command from the cache, all you have to do is require the file again and add the freshly loaded command to `client.commands`:
 
 ```js
 try {
-	const newCommand = require(`./${command.name}.js`);
+	const newCommand = require(`../${folderName}/${command.name}.js`);
 	message.client.commands.set(newCommand.name, newCommand);
 } catch (error) {
 	console.error(error);
