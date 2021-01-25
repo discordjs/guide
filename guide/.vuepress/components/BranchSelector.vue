@@ -64,7 +64,7 @@ export default {
 		border-radius: 4px;
 	}
 
-	@media screen and (max-width: 470px) {
+	@media screen and (max-width: $MQMobile) {
 		min-width: unset;
 
 		.branch-selector-label {

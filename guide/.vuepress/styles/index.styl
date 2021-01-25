@@ -1,12 +1,28 @@
-@media screen and (max-width: 600px) {
-	.navbar .home-link .site-name {
-		background: url('/favicon.png') top left / contain no-repeat;
-		text-indent: -999px;
+// @parent-theme/components/SearchBox.vue
+.navbar .links .search-box input {
+	cursor: pointer;
+	width: 0;
+	border-color: #eaecef;
+	padding-right: 0.2rem;
+
+	&:focus {
+		cursor: auto;
+		width: 10rem;
+		border-color: $accentColor;
+		padding-right: 0.5rem;
 	}
 }
 
-@media screen and (max-width: 360px) {
-	// so that the branch selector and book icon don't overlap each other
+.yuu-theme-dark .navbar .links .search-box input {
+	border-color: rgba(255, 255, 255, 0.1);
+
+	&:focus {
+		border-color: $accentColor;
+	}
+}
+
+@media screen and (max-width: $MQMobile) {
+	// so that the branch selector doesn't overlap the book icon much
 	.navbar .links {
 		padding-left: 0.25rem !important;
 	}
