@@ -1,5 +1,5 @@
 ---
-forceTheme: blue
+pageTheme: blue
 ---
 
 # Getting started with Commando

@@ -1,5 +1,5 @@
 ---
-forceTheme: blue
+pageTheme: blue
 ---
 
 # Setting a command as guild-only
