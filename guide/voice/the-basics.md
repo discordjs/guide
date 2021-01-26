@@ -17,10 +17,10 @@ Joining a voice channel is easy, here's a common example:
 
 ```js
 client.on('message', async message => {
-    // Join the same voice channel of the author of the message
-    if (message.member.voice.channel) {
-        const connection = await message.member.voice.channel.join();
-    }
+	// Join the same voice channel of the author of the message
+	if (message.member.voice.channel) {
+		const connection = await message.member.voice.channel.join();
+	}
 });
 ```
 
@@ -41,11 +41,11 @@ A VoiceConnection can only ever have at most one dispatcher. Attempting to play 
 const dispatcher = connection.play('audio.mp3');
 
 dispatcher.on('start', () => {
-    console.log('audio.mp3 is now playing!');
+	console.log('audio.mp3 is now playing!');
 });
 
 dispatcher.on('finish', () => {
-    console.log('audio.mp3 has finished playing!');
+	console.log('audio.mp3 has finished playing!');
 });
 
 // Always remember to handle errors appropriately!

@@ -19,7 +19,7 @@ This information will be beneficial if you need to report any issues with voice 
 client.on('debug', console.log);
 
 channel.join().then(connection => {
-    connection.on('debug', console.log);
+	connection.on('debug', console.log);
 });
 ```
 
@@ -70,7 +70,7 @@ To do this, you can use the [`ytdl-core-discord`](https://github.com/amishshah/y
 const ytdl = require('ytdl-core-discord');
 
 async function play(connection, url) {
-    connection.play(await ytdl(url), { type: 'opus' });
+	connection.play(await ytdl(url), { type: 'opus' });
 }
 ```
 

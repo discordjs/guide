@@ -76,7 +76,7 @@ There are some specific things to be aware of with broadcasts. This section will
 - `subscribe` and `unsubscribe` events emit here when VoiceConnections are subscribed and unsubscribed.
     ```js
     broadcast.on('subscribe', dispatcher => {
-        console.log(`Broadcast playing in ${dispatcher.player.voiceConnection.channel.name}`);
+    	console.log(`Broadcast playing in ${dispatcher.player.voiceConnection.channel.name}`);
     });
 
     // Emits the subscribe event on the broadcast
