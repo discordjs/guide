@@ -1393,7 +1393,7 @@ The `max` and `maxMatches` properties of the `MessageCollector` class have been 
 
 ### MessageEmbed
 
-`MessageEmbed` now encompasses both the received embeds in a message and the constructor - the `RichEmbed` constructor was removed in favor of `MessageEmbed`.
+`MessageEmbed` now encompasses both the received embeds in a message and the constructor–the `RichEmbed` constructor was removed in favor of `MessageEmbed`.
 
 #### MessageEmbed#addBlankField
 
@@ -2112,7 +2112,7 @@ ClientApplication.coverImage({ width: 1024, height: 1024 });
 
 #### ClientOptions#partials
 
-`clientOptions.partials` has been added to allow for partial structures - see the `Partials` section of the guide for more details.
+`clientOptions.partials` has been added to allow for partial structures–see the `Partials` section of the guide for more details.
 
 #### ClientOptions#retry
 
@@ -2425,7 +2425,7 @@ This new method resolves a `StringResolvable` into a string.
 
 #### VoiceBroadcast#dispatcher
 
-This new property represents the primary dispatcher - if any - that controls everything played by subscribed dispatchers.
+This new property represents the primary dispatcher–if any–that controls everything played by subscribed dispatchers.
 
 ### VoiceChannel
 

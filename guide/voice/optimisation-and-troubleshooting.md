@@ -64,7 +64,7 @@ And that's it! Discord.js will not create an FFmpeg transcoder for your file and
 
 Many voice bots allow an ability to play audio from YouTube videos in voice channels. YouTube itself provides WebM/Ogg streams for newer videos, and so we can also demux these files for Opus audio instead of running them through an FFmpeg transcoder first.
 
-To do this, you can use the [`ytdl-core-discord`](https://github.com/amishshah/ytdl-core-discord) module. It will play WebM/Ogg Opus streams directly where possible and will fallback to FFmpeg for incompatible videos - this should help you achieve the best performance when using YouTube streams.
+To do this, you can use the [`ytdl-core-discord`](https://github.com/amishshah/ytdl-core-discord) module. It will play WebM/Ogg Opus streams directly where possible and will fallback to FFmpeg for incompatible videos–this should help you achieve the best performance when using YouTube streams.
 
 ```js
 const ytdl = require('ytdl-core-discord');

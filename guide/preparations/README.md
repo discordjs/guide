@@ -52,7 +52,7 @@ With the command prompt open, run the `node -v` command to make sure you've succ
 
 The next command you'll be running is `npm init`. This command creates a `package.json` file for you, which will keep track of the dependencies your bot uses and other info. If you're a bit confused by that, you can ignore it for the time being.
 
-The `npm init` command will ask you a sequence of questions - you should fill them out as you see fit. If you're not sure of something or want to skip it as a whole, leave it blank and press enter.
+The `npm init` command will ask you a sequence of questions–you should fill them out as you see fit. If you're not sure of something or want to skip it as a whole, leave it blank and press enter.
 
 ::: tip
 Want to get started quickly? Use `npm init -y` to have it fill out everything for you!

@@ -60,7 +60,7 @@ The `.play()` method on a VoiceBroadcast returns a `BroadcastDispatcher` that ca
 Playing a broadcast on a voice connection (i.e., subscribing to the broadcast) is easy!
 
 ```js
-// All 3 connections will play the same broadcast - they will play audio at the same time
+// All 3 connections will play the same broadcast–they will play audio at the same time
 connection1.play(broadcast);
 connection2.play(broadcast);
 connection3.play(broadcast);
@@ -94,7 +94,7 @@ There are some specific things to be aware of with broadcasts. This section will
 const broadcastDispatcher = broadcast.play('music.mp3');
 ```
 - Subscribers are `VoiceConnection`s that are currently playing the broadcast.
-- A central controller for all subscribers - any changes to this dispatcher will affect all subscribers.
+- A central controller for all subscribers–any changes to this dispatcher will affect all subscribers.
 - Pausing/resuming this dispatcher will pause/resume playback across all subscribers.
 - Altering the volume of this dispatcher will alter the volume across all subscribers.
 - Destroying this dispatcher will stop playback across all subscribers, but they will remain subscribed to the broadcast as the broadcast itself has not been destroyed. To end the broadcast entirely and unsubscribe all subscribers, you should use `broadcast.end()`.

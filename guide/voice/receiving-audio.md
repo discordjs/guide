@@ -54,7 +54,7 @@ You can do several things with this audio:
 
 By default, Discord.js selects the `'silence'` mode when creating a receiver stream. This mode means that once a user stops speaking, the receiver stream ends and will not restart if they start talking again.
 
-You can select the `'manual'` mode to keep the stream alive indefinitely and end it yourself when you choose to. Note that Discord.js won't interpolate any silence into the stream when the user is silent - i.e., the gaps in the user's speech aren't present in the receiver stream.
+You can select the `'manual'` mode to keep the stream alive indefinitely and end it yourself when you choose to. Note that Discord.js won't interpolate any silence into the stream when the user is silent–i.e., the gaps in the user's speech aren't present in the receiver stream.
 
 ### What if I want to listen to multiple users?
 

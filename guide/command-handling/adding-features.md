@@ -148,7 +148,7 @@ Now when you try to use the kick command inside a DM, you'll get the appropriate
 
 ## Cooldowns
 
-Spam is something you generally want to avoid - especially if one of your commands requires calls to other APIs or takes a bit of time to build/send. This is also a very common feature bot developers want to integrate into their projects, so let's get started on that!
+Spam is something you generally want to avoid–especially if one of your commands requires calls to other APIs or takes a bit of time to build/send. This is also a very common feature bot developers want to integrate into their projects, so let's get started on that!
 
 You'll be using the ping command to test this on. Add in the following bit of code:
 

@@ -271,7 +271,7 @@ Promise.all(promises)
 
 </branch>
 
-`Promise.all()` runs every Promise you pass inside an array in parallel and waits for each to finish before returning their results simultaneously. The result is an array that corresponds with the array of promises you pass - so the first result element will be from the first Promise. With that, your stats command should look something like this:
+`Promise.all()` runs every Promise you pass inside an array in parallel and waits for each to finish before returning their results simultaneously. The result is an array that corresponds with the array of promises you pass–so the first result element will be from the first Promise. With that, your stats command should look something like this:
 
 <branch version="11.x">
 

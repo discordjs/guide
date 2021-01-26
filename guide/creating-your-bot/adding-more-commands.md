@@ -115,7 +115,7 @@ That would display both the server name _and_ the amount of members in it.
     </discord-message>
 </div>
 
-Of course, you can modify this to your liking. You may also want to display the date the server was created or the server's region. You would do those in the same manner - use `message.guild.createdAt` or `message.guild.region`, respectively.
+Of course, you can modify this to your liking. You may also want to display the date the server was created or the server's region. You would do those in the same manner–use `message.guild.createdAt` or `message.guild.region`, respectively.
 
 ::: tip
 Want a list of all the properties you can access and all the methods you can call on a server? Refer to <branch version="11.x" inline>[the discord.js documentation site](https://discord.js.org/#/docs/main/v11/class/Guild)</branch><branch version="12.x" inline>[the discord.js documentation site](https://discord.js.org/#/docs/main/stable/class/Guild)</branch>!
