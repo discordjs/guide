@@ -4,7 +4,7 @@
 
 The Discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots and tips and tricks to optimize performance!
 
-This voice guide is written for Discord.js v12, which features an improved audio system. Much of the example code in the voice guide is unsuitable for v11 and below - to access this content, please update Discord.js to v12! 
+This voice guide targets Discord.js v12, which features an improved audio system. Much of the example code in the voice guide is unsuitable for v11 and below–to access this content, please update Discord.js to v12! 
 
 </branch>
 <branch version="12.x">
@@ -13,19 +13,19 @@ This voice guide is written for Discord.js v12, which features an improved audio
 
 If you're experiencing issues, you can listen to debug information from the client and any voice connections you have. Below is a rudimentary example of a logger, although you can adapt it to suit your needs. Storing these logs will help when troubleshooting any issues you may have.
 
-This will be very useful information if you need to report any issues with voice to our issue tracker.
+This information will be beneficial if you need to report any issues with voice to our issue tracker.
 
 ```js
 client.on('debug', console.log);
 
 channel.join().then(connection => {
-	connection.on('debug', console.log);
+    connection.on('debug', console.log);
 });
 ```
 
 ## Stuttering/choppy streams
 
-This is likely due to a poor network connection or your machine not having enough resources to play audio smoothly. This can be identified if the following occur:
+Low-quality streams are likely due to a poor network connection or your machine not having enough resources to play audio smoothly. The following can identify the cause:
 
 1. Audio playback is only choppy on a specific network or machine.
 2. There is a high rate of packet loss (you can identify this by joining a voice channel in Discord, clicking the signal indicator, selecting your bot, and viewing the rate of packet loss).
@@ -38,7 +38,7 @@ Besides allocating more resources to your bot and having a better network connec
 
 #### From local files
 
-Using Ogg/WebM Opus streams can greatly improve performance as it means an FFmpeg transcoder is not required at runtime. If you're playing audio from static files, you can just convert your files to Ogg Opus easily - this means the transcoder is run only once for the entire file when converting it, and not every single time the file is played.
+Using Ogg/WebM Opus streams can significantly improve performance as it means runtime does not require an FFmpeg transcoder. If you're playing audio from static files, you can easily convert your files to Ogg Opus–this means the transcoder is run only once for the entire file when converting it, not every single time the file plays.
 
 You can run the following command to convert your audio files to Ogg Opus, provided you've [installed FFmpeg](/voice/#installing-dependencies):
 
@@ -46,7 +46,7 @@ You can run the following command to convert your audio files to Ogg Opus, provi
 $ ffmpeg -i input.mp3 -c:a libopus -b:a 96k output.ogg
 ```
 
-You can specify a higher bitrate instead of `96k` if your Discord server has a higher cap (e.g., VIP servers), but for most users, 96k will be the highest they are able to play at.
+You can specify a higher bitrate instead of `96k` if your Discord server has a higher cap (e.g., VIP servers), but 96k will be the highest for most users.
 
 You can also replace `input.mp3` with any media file with an audio channel.
 
@@ -58,7 +58,7 @@ const fs = require('fs');
 connection.play(fs.createReadStream('output.ogg'), { type: 'ogg/opus' });
 ```
 
-And that's it! Discord.js will not create an FFmpeg transcoder for your file and will instead demux the Opus audio from it, greatly improving performance.
+And that's it! Discord.js will not create an FFmpeg transcoder for your file and will instead demux the Opus audio from it, significantly improving performance.
 
 #### From YouTube videos
 
@@ -70,7 +70,7 @@ To do this, you can use the [`ytdl-core-discord`](https://github.com/amishshah/y
 const ytdl = require('ytdl-core-discord');
 
 async function play(connection, url) {
-	connection.play(await ytdl(url), { type: 'opus' });
+    connection.play(await ytdl(url), { type: 'opus' });
 }
 ```
 
@@ -80,7 +80,7 @@ You might be wondering why the type is `opus` and not `webm/opus` or `ogg/opus`.
 
 ### Using `highWaterMark`
 
-Another way to improve performance is through altering the `highWaterMark` property. This property put simply, describes how many packets of Opus audio should be available to the stream at any given time.
+Another way to improve performance is through altering the `highWaterMark` property. This property describes how many Opus audio packets should be available to the stream at any given time.
 
 The default value for this property is `12` - this equates to 240 ms of audio ready to play at any given time. You can adjust the property like so:
 
@@ -89,11 +89,11 @@ The default value for this property is `12` - this equates to 240 ms of audio re
 connection.play('file.mp3', { highWaterMark: 50 });
 ```
 
-You can try increasing this property to improve choppy playback, but increasing it too much will mean that playback will take longer to start, and any changes to volume will not take effect immediately. 
+You can try increasing this property to improve choppy playback, but increasing it too much will mean that playback will take longer to start, and any volume changes will not take effect immediately. 
 
 ### Disabling Inline Volume
 
-If you're not going to change the volume of your stream in real-time, you can disable the volume transformer Discord.js creates for you. You'll need to do this before playing the stream:
+If you're not going to change your stream's volume in real-time, you can disable the volume transformer Discord.js creates for you. You'll need to do this before playing the stream:
 
 ```js
 // Disable volume transformer
@@ -102,6 +102,6 @@ connection.play(audioStream, { volume: false });
 
 Once you've done this, you will **not** be able to change the volume of your StreamDispatcher.
 
-This will not have a big impact on performance, but can still help you improve the efficiency of your bot nevertheless.
+This will not have a significant impact on performance but can still help you improve your bot's efficiency nevertheless.
 
 </branch>
