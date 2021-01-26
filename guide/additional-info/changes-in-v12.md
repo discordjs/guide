@@ -276,12 +276,12 @@ The internal voice system in v12 now uses streams where possible, and as such, S
 ```
 
 You can manually control how many audio packets should queue before playing audio for more consistent playback using the `highWaterMark` option (defaults to 12)
-"`js
+```js
 connection.play(stream, { highWaterMark: 512 });
 ```
 
 If you're frequently pausing/resuming an audio stream, you can enable playing silence packets while paused to prevent audio glitches on the Discord client
-"`js
+```js
 // Passing true plays silence
 dispatcher.pause(true);
 ```
@@ -2091,7 +2091,7 @@ This is a not a new class; it was formerly called `OAuth2Application` in v11.  C
 
 `ClientApplication.cover` and its associated method `ClientApplication.coverImage()` return the URL to the application's cover image, with optional modifiers if applied in the method.
 
-"`js
+```js
 ClientApplication.coverImage({ width: 1024, height: 1024 });
 ```
 

@@ -63,7 +63,7 @@ Adding more args is as simple as adding another object to the array, like so:
 
 <!-- eslint-skip -->
 
-"`js
+```js
 args: [
 	{
 		key: 'text',
@@ -82,7 +82,7 @@ You can also set arguments to default to a specific value:
 
 <!-- eslint-skip -->
 
-"`js
+```js
 {
 	key: 'otherThing',
 	prompt: 'What is this other useless thing?',
