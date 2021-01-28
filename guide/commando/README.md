@@ -26,7 +26,7 @@ const { CommandoClient } = require('discord.js-commando');
 const path = require('path');
 ```
 
-The next step is to create a new CommandoClient. There's also a few options you will need to set.
+The next step is to create a new CommandoClient. There are also a few options you will need to set.
 
 ```js
 const client = new CommandoClient({
@@ -38,7 +38,7 @@ const client = new CommandoClient({
 
 In the `commandPrefix` parameter, you should insert the prefix you intend to use for your bot. As of writing, you can only have one, so choose wisely! However, note that mentioning your bot will **always** be allowed alongside the prefix you set here. In other words, this prefix and mentions are how your users will call your bot. **No, there is no way to disable mentions being a prefix!**
 
-After that is the `owner` parameter, which should contain the ID for the owner of the bot. It can be either a string of one ID or an array of many.
+After that is the `owner` parameter, which should contain the bot's owner's ID; it can be either a string of one ID or an array of many.
 
 ::: danger
 The users you set here have complete control over the bot. They can use eval and other owner-only commands, ignore command throttling, and bypass all user permissions! Be sure to only give this to people you trust!
@@ -60,7 +60,7 @@ client.registry
 	.registerCommandsIn(path.join(__dirname, 'commands'));
 ```
 
-Doing this, you've also created your first command group! Make another folder called `first` in your `commands` folder so that you can put the commands for that group in there. The group will be displayed in the help command as `Your First Command Group`. You can use any name you want for either of these options, but do note that the key (`first`) **must be lowercase**!
+Doing this, you've also created your first command group! Make another folder called `first` in your `commands` folder so that you can put the commands for that group in there. The group will display in the help command as `Your First Command Group`. You can use any name you want for either of these options, but note that the key (`first`) **must be lowercase**!
 
 Adding more command groups is as simple as adding another option to the array and making another folder.
 
@@ -68,19 +68,19 @@ Adding more command groups is as simple as adding another option to the array an
 
 ```js
 .registerGroups([
-	['first', 'Your First Command Group'],
-	['second', 'Your Second Command Group'],
-	['third', 'Your Third Command Group'],
+    ['first', 'Your First Command Group'],
+    ['second', 'Your Second Command Group'],
+    ['third', 'Your Third Command Group'],
 ])
 ```
 
-Should you want to disable a default command, such as if you wanted to make your own help command and replace the default one, you can pass that as an option in `registerDefaultCommands`.
+Should you want to disable a default command, such as if you wanted to make a custom help command and replace the default one, you could pass that as an option in `registerDefaultCommands`.
 
 <!-- eslint-skip -->
 
 ```js
 .registerDefaultCommands({
-	help: false,
+    help: false,
 })
 ```
 
@@ -111,7 +111,7 @@ And there you have it! You've set up your `index.js` file! In the end, your file
 
 ```
 /commands
-	/first
+    /first
 index.js
 package.json
 ```

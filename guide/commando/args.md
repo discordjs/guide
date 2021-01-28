@@ -38,26 +38,26 @@ The `args` field is simply an array of objects, each containing data for that ar
 
 ```js
 super(client, {
-	name: 'say',
-	aliases: ['parrot', 'copy'],
-	group: 'first',
-	memberName: 'say',
-	description: 'Replies with the text you provide.',
-	args: [
-		{
-			key: 'text',
-			prompt: 'What text would you like the bot to say?',
-			type: 'string',
-		},
-	],
+    name: 'say',
+    aliases: ['parrot', 'copy'],
+    group: 'first',
+    memberName: 'say',
+    description: 'Replies with the text you provide.',
+    args: [
+        {
+            key: 'text',
+            prompt: 'What text would you like the bot to say?',
+            type: 'string',
+        },
+    ],
 });
 ```
 
 See? Simple.
 
 - `key` is the name of the argument. When you define it in your `run` method, this is what you'll be using.
-- `prompt` is the text that displays if no argument is provided. If someone uses just `?say`, that prompt will come up asking for the text.
-- `type` is the type the argument is a part of. This can be many things, including `string`, `integer`, `user`, 'member`, etc.
+- `prompt` is the text that displays if no argument is provided. If someone uses `?say` by itself, that prompt will ask for the text.
+- `type` is the type the argument is a part of. This can be many things, including `string`, `integer`, `user`, `member`, etc.
 
 Adding more args is as simple as adding another object to the array, like so:
 
@@ -65,16 +65,16 @@ Adding more args is as simple as adding another object to the array, like so:
 
 ```js
 args: [
-	{
-		key: 'text',
-		prompt: 'What text would you like the bot to say?',
-		type: 'string',
-	},
-	{
-		key: 'otherThing',
-		prompt: 'What is this other useless thing?',
-		type: 'string',
-	},
+    {
+        key: 'text',
+        prompt: 'What text would you like the bot to say?',
+        type: 'string',
+    },
+    {
+        key: 'otherThing',
+        prompt: 'What is this other useless thing?',
+        type: 'string',
+    },
 ]
 ```
 
@@ -84,10 +84,10 @@ You can also set arguments to default to a specific value:
 
 ```js
 {
-	key: 'otherThing',
-	prompt: 'What is this other useless thing?',
-	type: 'string',
-	default: 'dog',
+    key: 'otherThing',
+    prompt: 'What is this other useless thing?',
+    type: 'string',
+    default: 'dog',
 },
 ```
 
@@ -99,17 +99,17 @@ Head on over to your `run` method and set the `text` arg to a variable.
 
 ```js
 run(message, { text }) {
-	// empty for now
+    // empty for now
 }
 ```
 
-Next, make the `run` method return the text back to the user.
+Next, make the `run` method return the text to the user.
 
 <!-- eslint-skip -->
 
 ```js
 run(message, { text }) {
-	return message.reply(text);
+    return message.reply(text);
 }
 ```
 

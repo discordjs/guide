@@ -4,11 +4,11 @@ forceTheme: blue
 
 # Handling permissions
 
-Sometimes you may need a user to have a certain permission to use a command, or maybe your bot needs a permission to make the command work. Well, Commando makes both of these very simple.
+Sometimes you may need a user to have a specific permission to use a command, or maybe your bot needs a permission to make the command work. Well, Commando makes both of these very simple.
 
 ## User and client permissions
 
-First, go grab the command you want to use permissions with.
+First, grab the command you want to use permissions with.
 
 ```js
 const { Command } = require('discord.js-commando');
@@ -35,12 +35,12 @@ You can then use the `userPermissions` and `clientPermissions` options to check 
 
 ```js
 super(client, {
-	name: 'meow',
-	group: 'first',
-	memberName: 'meow',
-	description: 'Replies with a meow, kitty cat.',
-	clientPermissions: ['ADMINISTRATOR'],
-	userPermissions: ['MANAGE_MESSAGES'],
+    name: 'meow',
+    group: 'first',
+    memberName: 'meow',
+    description: 'Replies with a meow, kitty cat.',
+    clientPermissions: ['ADMINISTRATOR'],
+    userPermissions: ['MANAGE_MESSAGES'],
 });
 ```
 
@@ -54,10 +54,10 @@ Another thing you may want to do is set a command as owner-only. This will make 
 
 ```js
 super(client, {
-	name: 'meow',
-	group: 'first',
-	memberName: 'meow',
-	description: 'Replies with a meow, kitty cat.',
-	ownerOnly: true,
+    name: 'meow',
+    group: 'first',
+    memberName: 'meow',
+    description: 'Replies with a meow, kitty cat.',
+    ownerOnly: true,
 });
 ```
