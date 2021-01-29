@@ -11,11 +11,11 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 client.once('ready', () => {
-    console.log('Ready!');
+	console.log('Ready!');
 });
 
 client.on('message', message => {
-    // ...
+	// ...
 });
 
 client.login('your-token-goes-here');
@@ -31,7 +31,7 @@ To react with an emoji, you need to use the `message.react()` method. Once you h
 
 ```js
 if (message.content === '!react') {
-    message.react('😄');
+	message.react('😄');
 }
 ```
 
@@ -47,7 +47,7 @@ This format is essentially the name of the emoji, followed by its ID. Copy & pas
 
 ```js
 if (message.content === '!react-custom') {
-    message.react('396548322053062656');
+	message.react('396548322053062656');
 }
 ```
 
@@ -70,8 +70,8 @@ Using `.find()`, your code would look something like this:
 
 ```js
 if (message.content === '!react-custom') {
-    const reactionEmoji = message.guild.emojis.find(emoji => emoji.name === 'ayy');
-    message.react(reactionEmoji);
+	const reactionEmoji = message.guild.emojis.find(emoji => emoji.name === 'ayy');
+	message.react(reactionEmoji);
 }
 ```
 
@@ -80,8 +80,8 @@ if (message.content === '!react-custom') {
 
 ```js
 if (message.content === '!react-custom') {
-    const reactionEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'ayy');
-    message.react(reactionEmoji);
+	const reactionEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'ayy');
+	message.react(reactionEmoji);
 }
 ```
 
@@ -93,8 +93,8 @@ Using `.get()`, your code would look something like this:
 
 ```js
 if (message.content === '!react-custom') {
-    const reactionEmoji = client.emojis.get(config.emojiID);
-    message.react(reactionEmoji);
+	const reactionEmoji = client.emojis.get(config.emojiID);
+	message.react(reactionEmoji);
 }
 ```
 
@@ -103,8 +103,8 @@ if (message.content === '!react-custom') {
 
 ```js
 if (message.content === '!react-custom') {
-    const reactionEmoji = client.emojis.cache.get(config.emojiID);
-    message.react(reactionEmoji);
+	const reactionEmoji = client.emojis.cache.get(config.emojiID);
+	message.react(reactionEmoji);
 }
 ```
 
@@ -118,9 +118,9 @@ If you just put one `message.react()` under another, it won't always react in or
 
 ```js
 if (message.content === '!fruits') {
-    message.react('🍎');
-    message.react('🍊');
-    message.react('🍇');
+	message.react('🍎');
+	message.react('🍊');
+	message.react('🍇');
 }
 ```
 
@@ -132,12 +132,12 @@ Luckily, there are two easy solutions to this. The first would be to chain `.the
 
 ```js
 client.on('message', message => {
-    if (message.content === '!fruits') {
-        message.react('🍎')
-            .then(() => message.react('🍊'))
-            .then(() => message.react('🍇'))
-            .catch(() => console.error('One of the emojis failed to react.'));
-    }
+	if (message.content === '!fruits') {
+		message.react('🍎')
+			.then(() => message.react('🍊'))
+			.then(() => message.react('🍇'))
+			.catch(() => console.error('One of the emojis failed to react.'));
+	}
 });
 ```
 
@@ -146,15 +146,15 @@ The other would be to use the `async`/`await` keywords.
 ```js
 // notice the `async` keyword
 client.on('message', async message => {
-    if (message.content === '!fruits') {
-        try {
-            await message.react('🍎');
-            await message.react('🍊');
-            await message.react('🍇');
-        } catch (error) {
-            console.error('One of the emojis failed to react.');
-        }
-    }
+	if (message.content === '!fruits') {
+		try {
+			await message.react('🍎');
+			await message.react('🍊');
+			await message.react('🍇');
+		} catch (error) {
+			console.error('One of the emojis failed to react.');
+		}
+	}
 });
 ```
 
@@ -172,12 +172,12 @@ However, if you don't mind the order the emojis react in, you can take advantage
 
 ```js
 if (message.content === '!fruits') {
-    Promise.all([
-        message.react('🍎'),
-        message.react('🍊'),
-        message.react('🍇'),
-    ])
-        .catch(() => console.error('One of the emojis failed to react.'));
+	Promise.all([
+		message.react('🍎'),
+		message.react('🍊'),
+		message.react('🍇'),
+	])
+		.catch(() => console.error('One of the emojis failed to react.'));
 }
 ```
 
@@ -299,22 +299,22 @@ A common use case for reactions in commands is having a user confirm or deny an 
 message.react('👍').then(() => message.react('👎'));
 
 const filter = (reaction, user) => {
-    return ['👍', '👎'].includes(reaction.emoji.name) && user.id === message.author.id;
+	return ['👍', '👎'].includes(reaction.emoji.name) && user.id === message.author.id;
 };
 
 message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
-    .then(collected => {
-        const reaction = collected.first();
+	.then(collected => {
+		const reaction = collected.first();
 
-        if (reaction.emoji.name === '👍') {
-            message.reply('you reacted with a thumbs up.');
-        } else {
-            message.reply('you reacted with a thumbs down.');
-        }
-    })
-    .catch(collected => {
-        message.reply('you reacted with neither a thumbs up, nor a thumbs down.');
-    });
+		if (reaction.emoji.name === '👍') {
+			message.reply('you reacted with a thumbs up.');
+		} else {
+			message.reply('you reacted with a thumbs down.');
+		}
+	})
+	.catch(collected => {
+		message.reply('you reacted with neither a thumbs up, nor a thumbs down.');
+	});
 ```
 
 ## Listening for reactions on old messages
@@ -341,21 +341,21 @@ If you use [gateway intents](/popular-topics/intents.md) but can't or don't want
 const Discord = require('discord.js');
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 client.on('messageReactionAdd', async (reaction, user) => {
-    // When we receive a reaction we check if the reaction is partial or not
-    if (reaction.partial) {
-        // If the message this reaction belongs to was removed the fetching might result in an API error, which we need to handle
-        try {
-            await reaction.fetch();
-        } catch (error) {
-            console.error('Something went wrong when fetching the message: ', error);
-            // Return as `reaction.message.author` may be undefined/null
-            return;
-        }
-    }
-    // Now the message has been cached and is fully available
-    console.log(`${reaction.message.author}'s message "${reaction.message.content}" gained a reaction!`);
-    // The reaction is now also fully available and the properties will be reflected accurately:
-    console.log(`${reaction.count} user(s) have given the same reaction to this message!`);
+	// When we receive a reaction we check if the reaction is partial or not
+	if (reaction.partial) {
+		// If the message this reaction belongs to was removed the fetching might result in an API error, which we need to handle
+		try {
+			await reaction.fetch();
+		} catch (error) {
+			console.error('Something went wrong when fetching the message: ', error);
+			// Return as `reaction.message.author` may be undefined/null
+			return;
+		}
+	}
+	// Now the message has been cached and is fully available
+	console.log(`${reaction.message.author}'s message "${reaction.message.content}" gained a reaction!`);
+	// The reaction is now also fully available and the properties will be reflected accurately:
+	console.log(`${reaction.count} user(s) have given the same reaction to this message!`);
 });
 ```
 

@@ -29,11 +29,11 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 client.once('ready', () => {
-    console.log('Ready!');
+	console.log('Ready!');
 });
 
 client.on('messageDelete', message => {
-    console.log(`A message by ${message.author.tag} was deleted, but we don't know by who yet.`);
+	console.log(`A message by ${message.author.tag} was deleted, but we don't know by who yet.`);
 });
 
 client.login('your-token-goes-here');
@@ -47,30 +47,30 @@ Placing this into the previous code, we get the following. Note that we will als
 
 ```js
 client.on('messageDelete', async message => {
-    // ignore direct messages
-    if (!message.guild) return;
-    const fetchedLogs = await message.guild.fetchAuditLogs({
-        limit: 1,
-        type: 'MESSAGE_DELETE',
-    });
-    // Since we only have 1 audit log entry in this collection, we can simply grab the first one
-    const deletionLog = fetchedLogs.entries.first();
+	// ignore direct messages
+	if (!message.guild) return;
+	const fetchedLogs = await message.guild.fetchAuditLogs({
+		limit: 1,
+		type: 'MESSAGE_DELETE',
+	});
+	// Since we only have 1 audit log entry in this collection, we can simply grab the first one
+	const deletionLog = fetchedLogs.entries.first();
 
-    // Let's perform a coherence check here and make sure we got *something*
-    if (!deletionLog) return console.log(`A message by ${message.author.tag} was deleted, but no relevant audit logs were found.`);
+	// Let's perform a coherence check here and make sure we got *something*
+	if (!deletionLog) return console.log(`A message by ${message.author.tag} was deleted, but no relevant audit logs were found.`);
 
-    // We now grab the user object of the person who deleted the message
-    // Let us also grab the target of this action to double-check things
-    const { executor, target } = deletionLog;
+	// We now grab the user object of the person who deleted the message
+	// Let us also grab the target of this action to double-check things
+	const { executor, target } = deletionLog;
 
 
-    // And now we can update our output with a bit more information
-    // We will also run a check to make sure the log we got was for the same author's message
-    if (target.id === message.author.id) {
-        console.log(`A message by ${message.author.tag} was deleted by ${executor.tag}.`);
-    }   else {
-        console.log(`A message by ${message.author.tag} was deleted, but we don't know by who.`);
-    }
+	// And now we can update our output with a bit more information
+	// We will also run a check to make sure the log we got was for the same author's message
+	if (target.id === message.author.id) {
+		console.log(`A message by ${message.author.tag} was deleted by ${executor.tag}.`);
+	} else {
+		console.log(`A message by ${message.author.tag} was deleted, but we don't know by who.`);
+	}
 });
 ```
 
@@ -85,11 +85,11 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 client.once('ready', () => {
-    console.log('Ready!');
+	console.log('Ready!');
 });
 
 client.on('guildMemberRemove', member => {
-    console.log(`${member.user.tag} left the guild... but was it of their own free will?`);
+	console.log(`${member.user.tag} left the guild... but was it of their own free will?`);
 });
 
 client.login('your-token-goes-here');
@@ -99,27 +99,27 @@ We will again fetch audit logs while limiting ourselves to 1 entry and looking a
 
 ```js
 client.on('guildMemberRemove', async member => {
-    const fetchedLogs = await member.guild.fetchAuditLogs({
-        limit: 1,
-        type: 'MEMBER_KICK',
-    });
-    // Since we only have 1 audit log entry in this collection, we can simply grab the first one
-    const kickLog = fetchedLogs.entries.first();
+	const fetchedLogs = await member.guild.fetchAuditLogs({
+		limit: 1,
+		type: 'MEMBER_KICK',
+	});
+	// Since we only have 1 audit log entry in this collection, we can simply grab the first one
+	const kickLog = fetchedLogs.entries.first();
 
-    // Let's perform a coherence check here and make sure we got *something*
-    if (!kickLog) return console.log(`${member.user.tag} left the guild, most likely of their own will.`);
+	// Let's perform a coherence check here and make sure we got *something*
+	if (!kickLog) return console.log(`${member.user.tag} left the guild, most likely of their own will.`);
 
-    // We now grab the user object of the person who kicked our member
-    // Let us also grab the target of this action to double-check things
-    const { executor, target } = kickLog;
+	// We now grab the user object of the person who kicked our member
+	// Let us also grab the target of this action to double-check things
+	const { executor, target } = kickLog;
 
-    // And now we can update our output with a bit more information
-    // We will also run a check to make sure the log we got was for the same kicked member
-    if (target.id === member.id) {
-        console.log(`${member.user.tag} left the guild; kicked by ${executor.tag}?`);
-    } else {
-        console.log(`${member.user.tag} left the guild, audit log fetch was inconclusive.`);
-    }
+	// And now we can update our output with a bit more information
+	// We will also run a check to make sure the log we got was for the same kicked member
+	if (target.id === member.id) {
+		console.log(`${member.user.tag} left the guild; kicked by ${executor.tag}?`);
+	} else {
+		console.log(`${member.user.tag} left the guild, audit log fetch was inconclusive.`);
+	}
 });
 ```
 
@@ -132,11 +132,11 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 client.once('ready', () => {
-    console.log('Ready!');
+	console.log('Ready!');
 });
 
 client.on('guildBanAdd', async (guild, user) => {
-    console.log(`${user.tag} got hit with the swift hammer of justice in the guild ${guild.name}.`);
+	console.log(`${user.tag} got hit with the swift hammer of justice in the guild ${guild.name}.`);
 });
 
 client.login('your-token-goes-here');
@@ -146,26 +146,26 @@ As was the case in the previous examples, we can see what happened, to whom it h
 
 ```js
 client.on('guildBanAdd', async (guild, user) => {
-    const fetchedLogs = await guild.fetchAuditLogs({
-        limit: 1,
-        type: 'MEMBER_BAN_ADD',
-    });
-    // Since we only have 1 audit log entry in this collection, we can simply grab the first one
-    const banLog = fetchedLogs.entries.first();
+	const fetchedLogs = await guild.fetchAuditLogs({
+		limit: 1,
+		type: 'MEMBER_BAN_ADD',
+	});
+	// Since we only have 1 audit log entry in this collection, we can simply grab the first one
+	const banLog = fetchedLogs.entries.first();
 
-    // Let's perform a coherence check here and make sure we got *something*
-    if (!banLog) return console.log(`${user.tag} was banned from ${guild.name} but no audit log could be found.`);
+	// Let's perform a coherence check here and make sure we got *something*
+	if (!banLog) return console.log(`${user.tag} was banned from ${guild.name} but no audit log could be found.`);
 
-    // We now grab the user object of the person who banned the user
-    // Let us also grab the target of this action to double-check things
-    const { executor, target } = banLog;
+	// We now grab the user object of the person who banned the user
+	// Let us also grab the target of this action to double-check things
+	const { executor, target } = banLog;
 
-    // And now we can update our output with a bit more information
-    // We will also run a check to make sure the log we got was for the same kicked member
-    if (target.id === user.id) {
-        console.log(`${user.tag} got hit with the swift hammer of justice in the guild ${guild.name}, wielded by the mighty ${executor.tag}`);
-    } else {
-        console.log(`${user.tag} got hit with the swift hammer of justice in the guild ${guild.name}, audit log fetch was inconclusive.`);
-    }
+	// And now we can update our output with a bit more information
+	// We will also run a check to make sure the log we got was for the same kicked member
+	if (target.id === user.id) {
+		console.log(`${user.tag} got hit with the swift hammer of justice in the guild ${guild.name}, wielded by the mighty ${executor.tag}`);
+	} else {
+		console.log(`${user.tag} got hit with the swift hammer of justice in the guild ${guild.name}, audit log fetch was inconclusive.`);
+	}
 });
 ```

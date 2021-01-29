@@ -63,20 +63,20 @@ const Discord = require('discord.js');
 
 // inside a command, event listener, etc.
 const exampleEmbed = new Discord.RichEmbed()
-    .setColor('#0099ff')
-    .setTitle('Some title')
-    .setURL('https://discord.js.org/')
-    .setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
-    .setDescription('Some description here')
-    .setThumbnail('https://i.imgur.com/wSTFkRM.png')
-    .addField('Regular field title', 'Some value here')
-    .addBlankField()
-    .addField('Inline field title', 'Some value here', true)
-    .addField('Inline field title', 'Some value here', true)
-    .addField('Inline field title', 'Some value here', true)
-    .setImage('https://i.imgur.com/wSTFkRM.png')
-    .setTimestamp()
-    .setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
+	.setColor('#0099ff')
+	.setTitle('Some title')
+	.setURL('https://discord.js.org/')
+	.setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
+	.setDescription('Some description here')
+	.setThumbnail('https://i.imgur.com/wSTFkRM.png')
+	.addField('Regular field title', 'Some value here')
+	.addBlankField()
+	.addField('Inline field title', 'Some value here', true)
+	.addField('Inline field title', 'Some value here', true)
+	.addField('Inline field title', 'Some value here', true)
+	.setImage('https://i.imgur.com/wSTFkRM.png')
+	.setTimestamp()
+	.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
 
 channel.send(exampleEmbed);
 ```
@@ -90,22 +90,22 @@ const Discord = require('discord.js');
 
 // inside a command, event listener, etc.
 const exampleEmbed = new Discord.MessageEmbed()
-    .setColor('#0099ff')
-    .setTitle('Some title')
-    .setURL('https://discord.js.org/')
-    .setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
-    .setDescription('Some description here')
-    .setThumbnail('https://i.imgur.com/wSTFkRM.png')
-    .addFields(
-        { name: 'Regular field title', value: 'Some value here' },
-        { name: '\u200B', value: '\u200B' },
-        { name: 'Inline field title', value: 'Some value here', inline: true },
-        { name: 'Inline field title', value: 'Some value here', inline: true },
-    )
-    .addField('Inline field title', 'Some value here', true)
-    .setImage('https://i.imgur.com/wSTFkRM.png')
-    .setTimestamp()
-    .setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
+	.setColor('#0099ff')
+	.setTitle('Some title')
+	.setURL('https://discord.js.org/')
+	.setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
+	.setDescription('Some description here')
+	.setThumbnail('https://i.imgur.com/wSTFkRM.png')
+	.addFields(
+		{ name: 'Regular field title', value: 'Some value here' },
+		{ name: '\u200B', value: '\u200B' },
+		{ name: 'Inline field title', value: 'Some value here', inline: true },
+		{ name: 'Inline field title', value: 'Some value here', inline: true },
+	)
+	.addField('Inline field title', 'Some value here', true)
+	.setImage('https://i.imgur.com/wSTFkRM.png')
+	.setTimestamp()
+	.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
 
 channel.send(exampleEmbed);
 ```
@@ -173,9 +173,9 @@ If you plan to attach the same image over and over, consider hosting it online a
 
 ```js
 const exampleEmbed = new Discord.RichEmbed()
-    .setTitle('Some title')
-    .attachFiles(['../assets/discordjs.png'])
-    .setImage('attachment://discordjs.png');
+	.setTitle('Some title')
+	.attachFiles(['../assets/discordjs.png'])
+	.setImage('attachment://discordjs.png');
 
 channel.send(exampleEmbed);
 ```
@@ -185,9 +185,9 @@ channel.send(exampleEmbed);
 
 ```js
 const exampleEmbed = new Discord.MessageEmbed()
-    .setTitle('Some title')
-    .attachFiles(['../assets/discordjs.png'])
-    .setImage('attachment://discordjs.png');
+	.setTitle('Some title')
+	.attachFiles(['../assets/discordjs.png'])
+	.setImage('attachment://discordjs.png');
 
 channel.send(exampleEmbed);
 ```
@@ -204,52 +204,52 @@ If the images don't display inside the embed but outside of it, double-check you
 
 ```js
 const exampleEmbed = {
-    color: 0x0099ff,
-    title: 'Some title',
-    url: 'https://discord.js.org',
-    author: {
-        name: 'Some name',
-        icon_url: 'https://i.imgur.com/wSTFkRM.png',
-        url: 'https://discord.js.org',
-    },
-    description: 'Some description here',
-    thumbnail: {
-        url: 'https://i.imgur.com/wSTFkRM.png',
-    },
-    fields: [
-        {
-            name: 'Regular field title',
-            value: 'Some value here',
-        },
-        {
-            name: '\u200b',
-            value: '\u200b',
-            inline: false,
-        },
-        {
-            name: 'Inline field title',
-            value: 'Some value here',
-            inline: true,
-        },
-        {
-            name: 'Inline field title',
-            value: 'Some value here',
-            inline: true,
-        },
-        {
-            name: 'Inline field title',
-            value: 'Some value here',
-            inline: true,
-        },
-    ],
-    image: {
-        url: 'https://i.imgur.com/wSTFkRM.png',
-    },
-    timestamp: new Date(),
-    footer: {
-        text: 'Some footer text here',
-        icon_url: 'https://i.imgur.com/wSTFkRM.png',
-    },
+	color: 0x0099ff,
+	title: 'Some title',
+	url: 'https://discord.js.org',
+	author: {
+		name: 'Some name',
+		icon_url: 'https://i.imgur.com/wSTFkRM.png',
+		url: 'https://discord.js.org',
+	},
+	description: 'Some description here',
+	thumbnail: {
+		url: 'https://i.imgur.com/wSTFkRM.png',
+	},
+	fields: [
+		{
+			name: 'Regular field title',
+			value: 'Some value here',
+		},
+		{
+			name: '\u200b',
+			value: '\u200b',
+			inline: false,
+		},
+		{
+			name: 'Inline field title',
+			value: 'Some value here',
+			inline: true,
+		},
+		{
+			name: 'Inline field title',
+			value: 'Some value here',
+			inline: true,
+		},
+		{
+			name: 'Inline field title',
+			value: 'Some value here',
+			inline: true,
+		},
+	],
+	image: {
+		url: 'https://i.imgur.com/wSTFkRM.png',
+	},
+	timestamp: new Date(),
+	footer: {
+		text: 'Some footer text here',
+		icon_url: 'https://i.imgur.com/wSTFkRM.png',
+	},
 };
 
 channel.send({ embed: exampleEmbed });
@@ -273,7 +273,7 @@ If you want to modify the embed object based on conditions, you will need to ref
 const exampleEmbed = { title: 'Some title' };
 
 if (message.author.bot) {
-    exampleEmbed.color = 0x7289da;
+	exampleEmbed.color = 0x7289da;
 }
 ```
 
@@ -293,10 +293,10 @@ If you plan to attach the same image over and over, consider hosting it online a
 const file = new Discord.Attachment('../assets/discordjs.png');
 
 const exampleEmbed = {
-    title: 'Some title',
-    image: {
-        url: 'attachment://discordjs.png',
-    },
+	title: 'Some title',
+	image: {
+		url: 'attachment://discordjs.png',
+	},
 };
 
 channel.send({ files: [file], embed: exampleEmbed });
@@ -309,10 +309,10 @@ channel.send({ files: [file], embed: exampleEmbed });
 const file = new Discord.MessageAttachment('../assets/discordjs.png');
 
 const exampleEmbed = {
-    title: 'Some title',
-    image: {
-        url: 'attachment://discordjs.png',
-    },
+	title: 'Some title',
+	image: {
+		url: 'attachment://discordjs.png',
+	},
 };
 
 channel.send({ files: [file], embed: exampleEmbed });
@@ -365,8 +365,8 @@ To edit the content of an embed you need to pass a new <branch version="11.x" in
 
 ```js
 const exampleEmbed = new Discord.RichEmbed()
-    .setTitle('Some title')
-    .setDescription('Description after the edit');
+	.setTitle('Some title')
+	.setDescription('Description after the edit');
 
 message.edit(exampleEmbed);
 ```
@@ -376,8 +376,8 @@ message.edit(exampleEmbed);
 
 ```js
 const exampleEmbed = new Discord.MessageEmbed()
-    .setTitle('Some title')
-    .setDescription('Description after the edit');
+	.setTitle('Some title')
+	.setDescription('Description after the edit');
 
 message.edit(exampleEmbed);
 ```

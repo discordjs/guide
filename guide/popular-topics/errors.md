@@ -32,7 +32,7 @@ Usually, these errors will crash your process; however, you can add an event lis
 
 ```js
 client.on('error', error => {
-     console.error('The websocket connection encountered an error:', error);
+	console.error('The websocket connection encountered an error:', error);
 });
 ```
 
@@ -46,7 +46,7 @@ In version 12, WebSocket errors are handled internally, meaning your process sho
 
 ```js
 client.on('shardError', error => {
-     console.error('A websocket connection encountered an error:', error);
+	console.error('A websocket connection encountered an error:', error);
 });
 ```
 
@@ -66,7 +66,7 @@ This can be done by quickly adding this to your main file.
 
 ```js
 process.on('unhandledRejection', error => {
-    console.error('Unhandled promise rejection:', error);
+	console.error('Unhandled promise rejection:', error);
 });
 ```
 
@@ -99,10 +99,10 @@ The code is also handy if you want only to handle a specific error. Say we were 
 
 ```js
 message.delete().catch(error => {
-    // Only log the error if it is not an Unknown Message error
-    if (error.code !== 10008) {
-        console.error('Failed to delete the message:', error);
-    }
+	// Only log the error if it is not an Unknown Message error
+	if (error.code !== 10008) {
+		console.error('Failed to delete the message:', error);
+	}
 });
 ```
 
@@ -110,9 +110,9 @@ Or using Constants:
 
 ```js
 message.delete().catch(error => {
-    if (error.code !== Discord.Constants.APIErrors.UNKNOWN_MESSAGE) {
-        console.error('Failed to delete the message:', error);
-    }
+	if (error.code !== Discord.Constants.APIErrors.UNKNOWN_MESSAGE) {
+		console.error('Failed to delete the message:', error);
+	}
 });
 ```
 
@@ -163,10 +163,10 @@ const { Client } = require('discord.js');
 const client = new Client(); // Should not be here!
 
 module.exports = (message, args) => {
-    // Should be message.client instead!
-    client.fetchUser(args[0]).then(user => {
-        message.reply('your requested user', user.tag);
-    });
+	// Should be message.client instead!
+	client.fetchUser(args[0]).then(user => {
+		message.reply('your requested user', user.tag);
+	});
 };
 ```
 
@@ -189,10 +189,10 @@ const { Client } = require('discord.js');
 const client = new Client(); // Should not be here!
 
 module.exports = (message, args) => {
-    // Should be message.client instead!
-    client.users.fetch(args[0]).then(user => {
-        message.reply('your requested user', user.tag);
-    });
+	// Should be message.client instead!
+	client.users.fetch(args[0]).then(user => {
+		message.reply('your requested user', user.tag);
+	});
 };
 ```
 

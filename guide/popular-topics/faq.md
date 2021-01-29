@@ -224,18 +224,18 @@ const prefix = '!';
 const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 client.on('message', message => {
-    const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
-    if (!prefixRegex.test(message.content)) return;
+	const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
+	if (!prefixRegex.test(message.content)) return;
 
-    const [, matchedPrefix] = message.content.match(prefixRegex);
-    const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
-    const command = args.shift().toLowerCase();
+	const [, matchedPrefix] = message.content.match(prefixRegex);
+	const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
+	const command = args.shift().toLowerCase();
 
-    if (command === 'ping') {
-        message.channel.send('Pong!');
-    } else if (command === 'prefix') {
-        message.reply(`you can either ping me or use \`${prefix}\` as my prefix.`);
-    }
+	if (command === 'ping') {
+		message.channel.send('Pong!');
+	} else if (command === 'prefix') {
+		message.reply(`you can either ping me or use \`${prefix}\` as my prefix.`);
+	}
 });
 
 client.login('your-token-goes-here');
@@ -545,17 +545,17 @@ If you've tried using [the usual method of retrieving unicode emojis](/popular-t
 ```js
 // emojiCharacters.js
 module.exports = {
-    a: '🇦', b: '🇧', c: '🇨', d: '🇩',
-    e: '🇪', f: '🇫', g: '🇬', h: '🇭',
-    i: '🇮', j: '🇯', k: '🇰', l: '🇱',
-    m: '🇲', n: '🇳', o: '🇴', p: '🇵',
-    q: '🇶', r: '🇷', s: '🇸', t: '🇹',
-    u: '🇺', v: '🇻', w: '🇼', x: '🇽',
-    y: '🇾', z: '🇿', 0: '0️⃣', 1: '1️⃣',
-    2: '2️⃣', 3: '3️⃣', 4: '4️⃣', 5: '5️⃣',
-    6: '6️⃣', 7: '7️⃣', 8: '8️⃣', 9: '9️⃣',
-    10: '🔟', '#': '#️⃣', '*': '*️⃣',
-    '!': '❗', '?': '❓',
+	a: '🇦', b: '🇧', c: '🇨', d: '🇩',
+	e: '🇪', f: '🇫', g: '🇬', h: '🇭',
+	i: '🇮', j: '🇯', k: '🇰', l: '🇱',
+	m: '🇲', n: '🇳', o: '🇴', p: '🇵',
+	q: '🇶', r: '🇷', s: '🇸', t: '🇹',
+	u: '🇺', v: '🇻', w: '🇼', x: '🇽',
+	y: '🇾', z: '🇿', 0: '0️⃣', 1: '1️⃣',
+	2: '2️⃣', 3: '3️⃣', 4: '4️⃣', 5: '5️⃣',
+	6: '6️⃣', 7: '7️⃣', 8: '8️⃣', 9: '9️⃣',
+	10: '🔟', '#': '#️⃣', '*': '*️⃣',
+	'!': '❗', '?': '❓',
 };
 ```
 

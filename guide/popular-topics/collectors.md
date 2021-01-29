@@ -18,11 +18,11 @@ const filter = m => m.content.includes('discord');
 const collector = message.channel.createMessageCollector(filter, { time: 15000 });
 
 collector.on('collect', m => {
-    console.log(`Collected ${m.content}`);
+	console.log(`Collected ${m.content}`);
 });
 
 collector.on('end', collected => {
-    console.log(`Collected ${collected.size} items`);
+	console.log(`Collected ${collected.size} items`);
 });
 ```
 
@@ -69,17 +69,17 @@ The provided set allows for responder error with an array of answers permitted. 
 const quiz = require('./quiz.json');
 const item = quiz[Math.floor(Math.random() * quiz.length)];
 const filter = response => {
-    return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
+	return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
 };
 
 message.channel.send(item.question).then(() => {
-    message.channel.awaitMessages(filter, { maxMatches: 1, time: 30000, errors: ['time'] })
-        .then(collected => {
-            message.channel.send(`${collected.first().author} got the correct answer!`);
-        })
-        .catch(collected => {
-            message.channel.send('Looks like nobody got the answer this time.');
-        });
+	message.channel.awaitMessages(filter, { maxMatches: 1, time: 30000, errors: ['time'] })
+		.then(collected => {
+			message.channel.send(`${collected.first().author} got the correct answer!`);
+		})
+		.catch(collected => {
+			message.channel.send('Looks like nobody got the answer this time.');
+		});
 });
 ```
 
@@ -90,17 +90,17 @@ message.channel.send(item.question).then(() => {
 const quiz = require('./quiz.json');
 const item = quiz[Math.floor(Math.random() * quiz.length)];
 const filter = response => {
-    return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
+	return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
 };
 
 message.channel.send(item.question).then(() => {
-    message.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ['time'] })
-        .then(collected => {
-            message.channel.send(`${collected.first().author} got the correct answer!`);
-        })
-        .catch(collected => {
-            message.channel.send('Looks like nobody got the answer this time.');
-        });
+	message.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ['time'] })
+		.then(collected => {
+			message.channel.send(`${collected.first().author} got the correct answer!`);
+		})
+		.catch(collected => {
+			message.channel.send('Looks like nobody got the answer this time.');
+		});
 });
 ```
 
@@ -128,17 +128,17 @@ You can read the docs for the `.createReactionCollector()` method <branch versio
 
 ```js
 const filter = (reaction, user) => {
-    return reaction.emoji.name === '👍' && user.id === message.author.id;
+	return reaction.emoji.name === '👍' && user.id === message.author.id;
 };
 
 const collector = message.createReactionCollector(filter, { time: 15000 });
 
 collector.on('collect', reaction => {
-    console.log(`Collected ${reaction.emoji.name} from ${reaction.users.last().tag}`);
+	console.log(`Collected ${reaction.emoji.name} from ${reaction.users.last().tag}`);
 });
 
 collector.on('end', collected => {
-    console.log(`Collected ${collected.size} items`);
+	console.log(`Collected ${collected.size} items`);
 });
 ```
 
@@ -147,17 +147,17 @@ collector.on('end', collected => {
 
 ```js
 const filter = (reaction, user) => {
-    return reaction.emoji.name === '👍' && user.id === message.author.id;
+	return reaction.emoji.name === '👍' && user.id === message.author.id;
 };
 
 const collector = message.createReactionCollector(filter, { time: 15000 });
 
 collector.on('collect', (reaction, user) => {
-    console.log(`Collected ${reaction.emoji.name} from ${user.tag}`);
+	console.log(`Collected ${reaction.emoji.name} from ${user.tag}`);
 });
 
 collector.on('end', collected => {
-    console.log(`Collected ${collected.size} items`);
+	console.log(`Collected ${collected.size} items`);
 });
 ```
 
@@ -173,12 +173,12 @@ You can read the docs for the `.awaitReactions()` method <branch version="11.x" 
 
 ```js
 const filter = (reaction, user) => {
-    return reaction.emoji.name === '👍' && user.id === message.author.id;
+	return reaction.emoji.name === '👍' && user.id === message.author.id;
 };
 
 message.awaitReactions(filter, { max: 4, time: 60000, errors: ['time'] })
-    .then(collected => console.log(collected.size))
-    .catch(collected => {
-        console.log(`After a minute, only ${collected.size} out of 4 reacted.`);
-    });
+	.then(collected => console.log(collected.size))
+	.catch(collected => {
+		console.log(`After a minute, only ${collected.size} out of 4 reacted.`);
+	});
 ```

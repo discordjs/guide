@@ -104,15 +104,15 @@ To know if one of a member's roles has a permission enabled, you can use the `.h
 
 ```js
 if (member.hasPermission('KICK_MEMBERS', false, false)) {
-    console.log('This member can kick');
+	console.log('This member can kick');
 }
 
 if (member.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS'])) {
-    console.log('This member can kick and ban');
+	console.log('This member can kick and ban');
 }
 
 if (member.hasPermission('KICK_MEMBERS', false, false, false)) {
-    console.log('This member can kick without allowing admin to override');
+	console.log('This member can kick without allowing admin to override');
 }
 ```
 
@@ -121,15 +121,15 @@ if (member.hasPermission('KICK_MEMBERS', false, false, false)) {
 
 ```js
 if (member.hasPermission('KICK_MEMBERS')) {
-    console.log('This member can kick');
+	console.log('This member can kick');
 }
 
 if (member.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS'])) {
-    console.log('This member can kick and ban');
+	console.log('This member can kick and ban');
 }
 
 if (member.hasPermission('KICK_MEMBERS', { checkAdmin: false, checkOwner: false })) {
-    console.log('This member can kick without allowing admin to override');
+	console.log('This member can kick without allowing admin to override');
 }
 ```
 
@@ -176,17 +176,17 @@ You can also provide an array of overwrites during channel creation, as shown be
 
 ```js
 guild.createChannel('new-channel', {
-    type: 'text',
-    permissionOverwrites: [
-        {
-            id: message.guild.id,
-            deny: ['VIEW_CHANNEL'],
-        },
-        {
-            id: message.author.id,
-            allow: ['VIEW_CHANNEL'],
-        },
-    ],
+	type: 'text',
+	permissionOverwrites: [
+		{
+			id: message.guild.id,
+			deny: ['VIEW_CHANNEL'],
+		},
+		{
+			id: message.author.id,
+			allow: ['VIEW_CHANNEL'],
+		},
+	],
 });
 ```
 
@@ -199,17 +199,17 @@ These objects are [ChannelCreationOverwrites](https://discord.js.org/#/docs/main
 
 ```js
 guild.channels.create('new-channel', {
-    type: 'text',
-    permissionOverwrites: [
-        {
-            id: message.guild.id,
-            deny: ['VIEW_CHANNEL'],
-        },
-        {
-            id: message.author.id,
-            allow: ['VIEW_CHANNEL'],
-        },
-    ],
+	type: 'text',
+	permissionOverwrites: [
+		{
+			id: message.guild.id,
+			deny: ['VIEW_CHANNEL'],
+		},
+		{
+			id: message.author.id,
+			allow: ['VIEW_CHANNEL'],
+		},
+	],
 });
 ```
 
@@ -227,16 +227,16 @@ channel.replacePermissionOverwrites({ overwrites: otherChannel.permissionOverwri
 
 // replacing overwrites with PermissionOverwriteOptions
 channel.replacePermissionOverwrites({
-    overwrites: [
-        {
-            id: guild.defaultRole.id,
-            deny: ['VIEW_CHANNEL'],
-        },
-        {
-            id: user.id,
-            allow: ['VIEW_CHANNEL'],
-        },
-    ],
+	overwrites: [
+		{
+			id: guild.defaultRole.id,
+			deny: ['VIEW_CHANNEL'],
+		},
+		{
+			id: user.id,
+			allow: ['VIEW_CHANNEL'],
+		},
+	],
 });
 ```
 
@@ -249,14 +249,14 @@ channel.overwritePermissions(otherChannel.permissionOverwrites);
 
 // replacing overwrites with PermissionOverwriteOptions
 channel.overwritePermissions([
-    {
-        id: guild.id,
-        deny: ['VIEW_CHANNEL'],
-    },
-    {
-        id: user.id,
-        allow: ['VIEW_CHANNEL'],
-    },
+	{
+		id: guild.id,
+		deny: ['VIEW_CHANNEL'],
+	},
+	{
+		id: user.id,
+		allow: ['VIEW_CHANNEL'],
+	},
 ]);
 ```
 
@@ -279,12 +279,12 @@ To easily synchronize permissions with the parent channel, you can call the `.lo
 
 ```js
 if (!channel.parent) {
-    return console.log('This channel is not listed under a category');
+	return console.log('This channel is not listed under a category');
 }
 
 channel.lockPermissions()
-    .then(() => console.log('Successfully synchronized permissions with parent channel'))
-    .catch(console.error);
+	.then(() => console.log('Successfully synchronized permissions with parent channel'))
+	.catch(console.error);
 ```
 
 ### Permissions after overwrites
@@ -367,11 +367,11 @@ You can also use this approach for other <branch version="11.x" inline>[Permissi
 ```js
 const { Permissions } = require('discord.js');
 const flags = [
-    'MANAGE_CHANNELS',
-    'EMBED_LINKS',
-    'ATTACH_FILES',
-    'READ_MESSAGE_HISTORY',
-    'MANAGE_ROLES',
+	'MANAGE_CHANNELS',
+	'EMBED_LINKS',
+	'ATTACH_FILES',
+	'READ_MESSAGE_HISTORY',
+	'MANAGE_ROLES',
 ];
 
 const permissions = new Permissions(flags);
@@ -388,11 +388,11 @@ Let's say you want to know if the decimal bit field representation `268550160` h
 const { Permissions } = require('discord.js');
 
 const permissions = new Permissions([
-    'MANAGE_CHANNELS',
-    'EMBED_LINKS',
-    'ATTACH_FILES',
-    'READ_MESSAGE_HISTORY',
-    'MANAGE_ROLES',
+	'MANAGE_CHANNELS',
+	'EMBED_LINKS',
+	'ATTACH_FILES',
+	'READ_MESSAGE_HISTORY',
+	'MANAGE_ROLES',
 ]);
 
 console.log(permissions.has('MANAGE_CHANNELS'));
@@ -424,11 +424,11 @@ The Permissions object enables you to easily add or remove certain permissions f
 const { Permissions } = require('discord.js');
 
 const permissions = new Permissions([
-    'MANAGE_CHANNELS',
-    'EMBED_LINKS',
-    'ATTACH_FILES',
-    'READ_MESSAGE_HISTORY',
-    'MANAGE_ROLES',
+	'MANAGE_CHANNELS',
+	'EMBED_LINKS',
+	'ATTACH_FILES',
+	'READ_MESSAGE_HISTORY',
+	'MANAGE_ROLES',
 ]);
 
 console.log(permissions.has('KICK_MEMBERS'));

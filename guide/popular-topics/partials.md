@@ -42,9 +42,9 @@ Partial data is only ever guaranteed to contain an ID! Do not assume any propert
 
 ```js
 if (message.partial) {
-    console.log('The message is partial.');
+	console.log('The message is partial.');
 } else {
-    console.log('The message is not partial.');
+	console.log('The message is not partial.');
 }
 ```
 
@@ -54,16 +54,16 @@ Along with `.partial` to check if the structure you call it on is partial or not
 
 ```js
 if (message.partial) {
-    console.log('The message is partial.');
-    message.fetch()
-        .then(fullmessage => {
-            console.log(fullmessage.content);
-        })
-        .catch(error => {
-            console.log('Something went wrong when fetching the message: ', error);
-        });
+	console.log('The message is partial.');
+	message.fetch()
+		.then(fullmessage => {
+			console.log(fullmessage.content);
+		})
+		.catch(error => {
+			console.log('Something went wrong when fetching the message: ', error);
+		});
 } else {
-    console.log('The message is not partial.');
+	console.log('The message is not partial.');
 }
 ```
 

@@ -41,14 +41,14 @@ const Canvas = require('canvas');
 const client = new Discord.Client();
 
 client.once('ready', () => {
-    console.log('Ready!');
+	console.log('Ready!');
 });
 
 client.on('guildMemberAdd', member => {
-    const channel = member.guild.channels.find(ch => ch.name === 'member-log');
-    if (!channel) return;
+	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+	if (!channel) return;
 
-    channel.send(`Welcome to the server, ${member}!`);
+	channel.send(`Welcome to the server, ${member}!`);
 });
 
 client.login('your-token-goes-here');
@@ -64,14 +64,14 @@ const Canvas = require('canvas');
 const client = new Discord.Client();
 
 client.once('ready', () => {
-    console.log('Ready!');
+	console.log('Ready!');
 });
 
 client.on('guildMemberAdd', member => {
-    const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-    if (!channel) return;
+	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
+	if (!channel) return;
 
-    channel.send(`Welcome to the server, ${member}!`);
+	channel.send(`Welcome to the server, ${member}!`);
 });
 
 client.login('your-token-goes-here');
@@ -86,9 +86,9 @@ To make testing this feature much more manageable, you can add a simple command 
 
 ```js
 client.on('message', async message => {
-    if (message.content === '!join') {
-        client.emit('guildMemberAdd', message.member || await message.guild.fetchMember(message.author));
-    }
+	if (message.content === '!join') {
+		client.emit('guildMemberAdd', message.member || await message.guild.fetchMember(message.author));
+	}
 });
 ```
 
@@ -97,9 +97,9 @@ client.on('message', async message => {
 
 ```js
 client.on('message', message => {
-    if (message.content === '!join') {
-        client.emit('guildMemberAdd', message.member);
-    }
+	if (message.content === '!join') {
+		client.emit('guildMemberAdd', message.member);
+	}
 });
 ```
 
@@ -121,16 +121,16 @@ The end goal will be to display the user's avatar, username, and a simple "Welco
 
 ```js
 client.on('guildMemberAdd', async member => {
-    const channel = member.guild.channels.find(ch => ch.name === 'member-log');
-    if (!channel) return;
+	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+	if (!channel) return;
 
-    // Set a new canvas to the dimensions of 700x250 pixels
-    const canvas = Canvas.createCanvas(700, 250);
-    // ctx (context) will be used to modify a lot of the canvas
+	// Set a new canvas to the dimensions of 700x250 pixels
+	const canvas = Canvas.createCanvas(700, 250);
+	// ctx (context) will be used to modify a lot of the canvas
 
-    const ctx = canvas.getContext('2d');
+	const ctx = canvas.getContext('2d');
 
-    channel.send(`Welcome to the server, ${member}!`);
+	channel.send(`Welcome to the server, ${member}!`);
 });
 ```
 
@@ -141,16 +141,16 @@ client.on('guildMemberAdd', async member => {
 
 ```js
 client.on('guildMemberAdd', async member => {
-    const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-    if (!channel) return;
+	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
+	if (!channel) return;
 
-    // Set a new canvas to the dimensions of 700x250 pixels
-    const canvas = Canvas.createCanvas(700, 250);
-    // ctx (context) will be used to modify a lot of the canvas
+	// Set a new canvas to the dimensions of 700x250 pixels
+	const canvas = Canvas.createCanvas(700, 250);
+	// ctx (context) will be used to modify a lot of the canvas
 
-    const ctx = canvas.getContext('2d');
+	const ctx = canvas.getContext('2d');
 
-    channel.send(`Welcome to the server, ${member}!`);
+	channel.send(`Welcome to the server, ${member}!`);
 });
 ```
 
@@ -162,20 +162,20 @@ Now, you need to load the image you want to use into Canvas. To have sufficient 
 
 ```js
 client.on('guildMemberAdd', async member => {
-    const channel = member.guild.channels.find(ch => ch.name === 'member-log');
-    if (!channel) return;
+	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+	if (!channel) return;
 
-    const canvas = Canvas.createCanvas(700, 250);
-    const ctx = canvas.getContext('2d');
+	const canvas = Canvas.createCanvas(700, 250);
+	const ctx = canvas.getContext('2d');
 
-    // Since the image takes time to load, you should await it
-    const background = await Canvas.loadImage('./wallpaper.jpg');
-    // This uses the canvas dimensions to stretch the image onto the entire canvas
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-    // Use helpful Attachment class structure to process the file for you
-    const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
+	// Since the image takes time to load, you should await it
+	const background = await Canvas.loadImage('./wallpaper.jpg');
+	// This uses the canvas dimensions to stretch the image onto the entire canvas
+	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+	// Use helpful Attachment class structure to process the file for you
+	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
 
-    channel.send(`Welcome to the server, ${member}!`, attachment);
+	channel.send(`Welcome to the server, ${member}!`, attachment);
 });
 ```
 
@@ -184,20 +184,20 @@ client.on('guildMemberAdd', async member => {
 
 ```js
 client.on('guildMemberAdd', async member => {
-    const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-    if (!channel) return;
+	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
+	if (!channel) return;
 
-    const canvas = Canvas.createCanvas(700, 250);
-    const ctx = canvas.getContext('2d');
+	const canvas = Canvas.createCanvas(700, 250);
+	const ctx = canvas.getContext('2d');
 
-    // Since the image takes time to load, you should await it
-    const background = await Canvas.loadImage('./wallpaper.jpg');
-    // This uses the canvas dimensions to stretch the image onto the entire canvas
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-    // Use helpful Attachment class structure to process the file for you
-    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
+	// Since the image takes time to load, you should await it
+	const background = await Canvas.loadImage('./wallpaper.jpg');
+	// This uses the canvas dimensions to stretch the image onto the entire canvas
+	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+	// Use helpful Attachment class structure to process the file for you
+	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
 
-    channel.send(`Welcome to the server, ${member}!`, attachment);
+	channel.send(`Welcome to the server, ${member}!`, attachment);
 });
 ```
 
@@ -217,23 +217,23 @@ Next, let's place a border around the image for the sake of demonstration purpos
 
 ```js
 client.on('guildMemberAdd', async member => {
-    const channel = member.guild.channels.find(ch => ch.name === 'member-log');
-    if (!channel) return;
+	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+	if (!channel) return;
 
-    const canvas = Canvas.createCanvas(700, 250);
-    const ctx = canvas.getContext('2d');
+	const canvas = Canvas.createCanvas(700, 250);
+	const ctx = canvas.getContext('2d');
 
-    const background = await Canvas.loadImage('./wallpaper.jpg');
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+	const background = await Canvas.loadImage('./wallpaper.jpg');
+	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-    // Select the color of the stroke
-    ctx.strokeStyle = '#74037b';
-    // Draw a rectangle with the dimensions of the entire canvas
-    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	// Select the color of the stroke
+	ctx.strokeStyle = '#74037b';
+	// Draw a rectangle with the dimensions of the entire canvas
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-    const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
+	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
 
-    channel.send(`Welcome to the server, ${member}!`, attachment);
+	channel.send(`Welcome to the server, ${member}!`, attachment);
 });
 ```
 
@@ -242,23 +242,23 @@ client.on('guildMemberAdd', async member => {
 
 ```js
 client.on('guildMemberAdd', async member => {
-    const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-    if (!channel) return;
+	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
+	if (!channel) return;
 
-    const canvas = Canvas.createCanvas(700, 250);
-    const ctx = canvas.getContext('2d');
+	const canvas = Canvas.createCanvas(700, 250);
+	const ctx = canvas.getContext('2d');
 
-    const background = await Canvas.loadImage('./wallpaper.jpg');
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+	const background = await Canvas.loadImage('./wallpaper.jpg');
+	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-    // Select the color of the stroke
-    ctx.strokeStyle = '#74037b';
-    // Draw a rectangle with the dimensions of the entire canvas
-    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	// Select the color of the stroke
+	ctx.strokeStyle = '#74037b';
+	// Draw a rectangle with the dimensions of the entire canvas
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
+	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
 
-    channel.send(`Welcome to the server, ${member}!`, attachment);
+	channel.send(`Welcome to the server, ${member}!`, attachment);
 });
 ```
 
@@ -272,26 +272,26 @@ A bit plain, right? Fear not, for you have a bit more to do until you reach comp
 
 ```js
 client.on('guildMemberAdd', async member => {
-    const channel = member.guild.channels.find(ch => ch.name === 'member-log');
-    if (!channel) return;
+	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+	if (!channel) return;
 
-    const canvas = Canvas.createCanvas(700, 250);
-    const ctx = canvas.getContext('2d');
+	const canvas = Canvas.createCanvas(700, 250);
+	const ctx = canvas.getContext('2d');
 
-    const background = await Canvas.loadImage('./wallpaper.jpg');
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+	const background = await Canvas.loadImage('./wallpaper.jpg');
+	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-    ctx.strokeStyle = '#74037b';
-    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	ctx.strokeStyle = '#74037b';
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-    // Wait for Canvas to load the image
-    const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
-    // Draw a shape onto the main canvas
-    ctx.drawImage(avatar, 25, 0, 200, canvas.height);
+	// Wait for Canvas to load the image
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
+	// Draw a shape onto the main canvas
+	ctx.drawImage(avatar, 25, 0, 200, canvas.height);
 
-    const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
+	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
 
-    channel.send(`Welcome to the server, ${member}!`, attachment);
+	channel.send(`Welcome to the server, ${member}!`, attachment);
 });
 ```
 
@@ -300,26 +300,26 @@ client.on('guildMemberAdd', async member => {
 
 ```js
 client.on('guildMemberAdd', async member => {
-    const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-    if (!channel) return;
+	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
+	if (!channel) return;
 
-    const canvas = Canvas.createCanvas(700, 250);
-    const ctx = canvas.getContext('2d');
+	const canvas = Canvas.createCanvas(700, 250);
+	const ctx = canvas.getContext('2d');
 
-    const background = await Canvas.loadImage('./wallpaper.jpg');
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+	const background = await Canvas.loadImage('./wallpaper.jpg');
+	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-    ctx.strokeStyle = '#74037b';
-    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	ctx.strokeStyle = '#74037b';
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-    // Wait for Canvas to load the image
-    const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
-    // Draw a shape onto the main canvas
-    ctx.drawImage(avatar, 25, 0, 200, canvas.height);
+	// Wait for Canvas to load the image
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
+	// Draw a shape onto the main canvas
+	ctx.drawImage(avatar, 25, 0, 200, canvas.height);
 
-    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
+	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
 
-    channel.send(`Welcome to the server, ${member}!`, attachment);
+	channel.send(`Welcome to the server, ${member}!`, attachment);
 });
 ```
 
@@ -333,25 +333,25 @@ It works well, but the avatar image itself seems a bit stretched out. Let's reme
 
 ```js
 client.on('guildMemberAdd', async member => {
-    const channel = member.guild.channels.find(ch => ch.name === 'member-log');
-    if (!channel) return;
+	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+	if (!channel) return;
 
-    const canvas = Canvas.createCanvas(700, 250);
-    const ctx = canvas.getContext('2d');
+	const canvas = Canvas.createCanvas(700, 250);
+	const ctx = canvas.getContext('2d');
 
-    const background = await Canvas.loadImage('./wallpaper.jpg');
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+	const background = await Canvas.loadImage('./wallpaper.jpg');
+	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-    ctx.strokeStyle = '#74037b';
-    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	ctx.strokeStyle = '#74037b';
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-    const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
-    // Move the image downwards vertically and constrain its height to 200, so it's a square
-    ctx.drawImage(avatar, 25, 25, 200, 200);
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
+	// Move the image downwards vertically and constrain its height to 200, so it's a square
+	ctx.drawImage(avatar, 25, 25, 200, 200);
 
-    const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
+	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
 
-    channel.send(`Welcome to the server, ${member}!`, attachment);
+	channel.send(`Welcome to the server, ${member}!`, attachment);
 });
 ```
 
@@ -360,25 +360,25 @@ client.on('guildMemberAdd', async member => {
 
 ```js
 client.on('guildMemberAdd', async member => {
-    const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-    if (!channel) return;
+	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
+	if (!channel) return;
 
-    const canvas = Canvas.createCanvas(700, 250);
-    const ctx = canvas.getContext('2d');
+	const canvas = Canvas.createCanvas(700, 250);
+	const ctx = canvas.getContext('2d');
 
-    const background = await Canvas.loadImage('./wallpaper.jpg');
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+	const background = await Canvas.loadImage('./wallpaper.jpg');
+	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-    ctx.strokeStyle = '#74037b';
-    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	ctx.strokeStyle = '#74037b';
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-    const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
-    // Move the image downwards vertically and constrain its height to 200, so it's a square
-    ctx.drawImage(avatar, 25, 25, 200, 200);
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
+	// Move the image downwards vertically and constrain its height to 200, so it's a square
+	ctx.drawImage(avatar, 25, 25, 200, 200);
 
-    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
+	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
 
-    channel.send(`Welcome to the server, ${member}!`, attachment);
+	channel.send(`Welcome to the server, ${member}!`, attachment);
 });
 ```
 
@@ -394,33 +394,33 @@ Since we covered how to load external images and fix dimensions, let's turn the 
 
 ```js
 client.on('guildMemberAdd', async member => {
-    const channel = member.guild.channels.find(ch => ch.name === 'member-log');
-    if (!channel) return;
+	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+	if (!channel) return;
 
-    const canvas = Canvas.createCanvas(700, 250);
-    const ctx = canvas.getContext('2d');
+	const canvas = Canvas.createCanvas(700, 250);
+	const ctx = canvas.getContext('2d');
 
-    const background = await Canvas.loadImage('./wallpaper.jpg');
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+	const background = await Canvas.loadImage('./wallpaper.jpg');
+	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-    ctx.strokeStyle = '#74037b';
-    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	ctx.strokeStyle = '#74037b';
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-    // Pick up the pen
-    ctx.beginPath();
-    // Start the arc to form a circle
-    ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
-    // Put the pen down
-    ctx.closePath();
-    // Clip off the region you drew on
-    ctx.clip();
+	// Pick up the pen
+	ctx.beginPath();
+	// Start the arc to form a circle
+	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
+	// Put the pen down
+	ctx.closePath();
+	// Clip off the region you drew on
+	ctx.clip();
 
-    const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
-    ctx.drawImage(avatar, 25, 25, 200, 200);
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
+	ctx.drawImage(avatar, 25, 25, 200, 200);
 
-    const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
+	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
 
-    channel.send(`Welcome to the server, ${member}!`, attachment);
+	channel.send(`Welcome to the server, ${member}!`, attachment);
 });
 ```
 
@@ -429,33 +429,33 @@ client.on('guildMemberAdd', async member => {
 
 ```js
 client.on('guildMemberAdd', async member => {
-    const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-    if (!channel) return;
+	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
+	if (!channel) return;
 
-    const canvas = Canvas.createCanvas(700, 250);
-    const ctx = canvas.getContext('2d');
+	const canvas = Canvas.createCanvas(700, 250);
+	const ctx = canvas.getContext('2d');
 
-    const background = await Canvas.loadImage('./wallpaper.jpg');
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+	const background = await Canvas.loadImage('./wallpaper.jpg');
+	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-    ctx.strokeStyle = '#74037b';
-    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	ctx.strokeStyle = '#74037b';
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-    // Pick up the pen
-    ctx.beginPath();
-    // Start the arc to form a circle
-    ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
-    // Put the pen down
-    ctx.closePath();
-    // Clip off the region you drew on
-    ctx.clip();
+	// Pick up the pen
+	ctx.beginPath();
+	// Start the arc to form a circle
+	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
+	// Put the pen down
+	ctx.closePath();
+	// Clip off the region you drew on
+	ctx.clip();
 
-    const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
-    ctx.drawImage(avatar, 25, 25, 200, 200);
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
+	ctx.drawImage(avatar, 25, 25, 200, 200);
 
-    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
+	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
 
-    channel.send(`Welcome to the server, ${member}!`, attachment);
+	channel.send(`Welcome to the server, ${member}!`, attachment);
 });
 ```
 
@@ -475,36 +475,36 @@ Now, let's quickly go over adding text to your image. This will help make the pu
 
 ```js
 client.on('guildMemberAdd', async member => {
-    const channel = member.guild.channels.find(ch => ch.name === 'member-log');
-    if (!channel) return;
+	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+	if (!channel) return;
 
-    const canvas = Canvas.createCanvas(700, 250);
-    const ctx = canvas.getContext('2d');
+	const canvas = Canvas.createCanvas(700, 250);
+	const ctx = canvas.getContext('2d');
 
-    const background = await Canvas.loadImage('./wallpaper.jpg');
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+	const background = await Canvas.loadImage('./wallpaper.jpg');
+	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-    ctx.strokeStyle = '#74037b';
-    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	ctx.strokeStyle = '#74037b';
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-    // Select the font size and type from one of the natively available fonts
-    ctx.font = '60px sans-serif';
-    // Select the style that will be used to fill the text in
-    ctx.fillStyle = '#ffffff';
-    // Actually fill the text with a solid color
-    ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
+	// Select the font size and type from one of the natively available fonts
+	ctx.font = '60px sans-serif';
+	// Select the style that will be used to fill the text in
+	ctx.fillStyle = '#ffffff';
+	// Actually fill the text with a solid color
+	ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
 
-    ctx.beginPath();
-    ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
-    ctx.closePath();
-    ctx.clip();
+	ctx.beginPath();
+	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
+	ctx.closePath();
+	ctx.clip();
 
-    const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
-    ctx.drawImage(avatar, 25, 25, 200, 200);
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
+	ctx.drawImage(avatar, 25, 25, 200, 200);
 
-    const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
+	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
 
-    channel.send(`Welcome to the server, ${member}!`, attachment);
+	channel.send(`Welcome to the server, ${member}!`, attachment);
 });
 ```
 
@@ -513,36 +513,36 @@ client.on('guildMemberAdd', async member => {
 
 ```js
 client.on('guildMemberAdd', async member => {
-    const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-    if (!channel) return;
+	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
+	if (!channel) return;
 
-    const canvas = Canvas.createCanvas(700, 250);
-    const ctx = canvas.getContext('2d');
+	const canvas = Canvas.createCanvas(700, 250);
+	const ctx = canvas.getContext('2d');
 
-    const background = await Canvas.loadImage('./wallpaper.jpg');
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+	const background = await Canvas.loadImage('./wallpaper.jpg');
+	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-    ctx.strokeStyle = '#74037b';
-    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	ctx.strokeStyle = '#74037b';
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-    // Select the font size and type from one of the natively available fonts
-    ctx.font = '60px sans-serif';
-    // Select the style that will be used to fill the text in
-    ctx.fillStyle = '#ffffff';
-    // Actually fill the text with a solid color
-    ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
+	// Select the font size and type from one of the natively available fonts
+	ctx.font = '60px sans-serif';
+	// Select the style that will be used to fill the text in
+	ctx.fillStyle = '#ffffff';
+	// Actually fill the text with a solid color
+	ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
 
-    ctx.beginPath();
-    ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
-    ctx.closePath();
-    ctx.clip();
+	ctx.beginPath();
+	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
+	ctx.closePath();
+	ctx.clip();
 
-    const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
-    ctx.drawImage(avatar, 25, 25, 200, 200);
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
+	ctx.drawImage(avatar, 25, 25, 200, 200);
 
-    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
+	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
 
-    channel.send(`Welcome to the server, ${member}!`, attachment);
+	channel.send(`Welcome to the server, ${member}!`, attachment);
 });
 ```
 
@@ -561,50 +561,50 @@ You may have noticed or considered that if a member's username is too long, then
 ```js
 // Pass the entire Canvas object because you'll need to access its width, as well its context
 const applyText = (canvas, text) => {
-    const ctx = canvas.getContext('2d');
+	const ctx = canvas.getContext('2d');
 
-    // Declare a base size of the font
-    let fontSize = 70;
+	// Declare a base size of the font
+	let fontSize = 70;
 
-    do {
-        // Assign the font to the context and decrement it so it can be measured again
-        ctx.font = `${fontSize -= 10}px sans-serif`;
-        // Compare pixel width of the text to the canvas minus the approximate avatar size
-    } while (ctx.measureText(text).width > canvas.width - 300);
+	do {
+		// Assign the font to the context and decrement it so it can be measured again
+		ctx.font = `${fontSize -= 10}px sans-serif`;
+		// Compare pixel width of the text to the canvas minus the approximate avatar size
+	} while (ctx.measureText(text).width > canvas.width - 300);
 
-    // Return the result to use in the actual canvas
-    return ctx.font;
+	// Return the result to use in the actual canvas
+	return ctx.font;
 };
 
 client.on('guildMemberAdd', async member => {
-    const channel = member.guild.channels.find(ch => ch.name === 'member-log');
-    if (!channel) return;
+	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+	if (!channel) return;
 
-    const canvas = Canvas.createCanvas(700, 250);
-    const ctx = canvas.getContext('2d');
+	const canvas = Canvas.createCanvas(700, 250);
+	const ctx = canvas.getContext('2d');
 
-    const background = await Canvas.loadImage('./wallpaper.jpg');
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+	const background = await Canvas.loadImage('./wallpaper.jpg');
+	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-    ctx.strokeStyle = '#74037b';
-    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	ctx.strokeStyle = '#74037b';
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-    // Assign the decided font to the canvas
-    ctx.font = applyText(canvas, member.displayName);
-    ctx.fillStyle = '#ffffff';
-    ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
+	// Assign the decided font to the canvas
+	ctx.font = applyText(canvas, member.displayName);
+	ctx.fillStyle = '#ffffff';
+	ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
 
-    ctx.beginPath();
-    ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
-    ctx.closePath();
-    ctx.clip();
+	ctx.beginPath();
+	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
+	ctx.closePath();
+	ctx.clip();
 
-    const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
-    ctx.drawImage(avatar, 25, 25, 200, 200);
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
+	ctx.drawImage(avatar, 25, 25, 200, 200);
 
-    const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
+	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
 
-    channel.send(`Welcome to the server, ${member}!`, attachment);
+	channel.send(`Welcome to the server, ${member}!`, attachment);
 });
 ```
 
@@ -614,50 +614,50 @@ client.on('guildMemberAdd', async member => {
 ```js
 // Pass the entire Canvas object because you'll need to access its width, as well its context
 const applyText = (canvas, text) => {
-    const ctx = canvas.getContext('2d');
+	const ctx = canvas.getContext('2d');
 
-    // Declare a base size of the font
-    let fontSize = 70;
+	// Declare a base size of the font
+	let fontSize = 70;
 
-    do {
-        // Assign the font to the context and decrement it so it can be measured again
-        ctx.font = `${fontSize -= 10}px sans-serif`;
-        // Compare pixel width of the text to the canvas minus the approximate avatar size
-    } while (ctx.measureText(text).width > canvas.width - 300);
+	do {
+		// Assign the font to the context and decrement it so it can be measured again
+		ctx.font = `${fontSize -= 10}px sans-serif`;
+		// Compare pixel width of the text to the canvas minus the approximate avatar size
+	} while (ctx.measureText(text).width > canvas.width - 300);
 
-    // Return the result to use in the actual canvas
-    return ctx.font;
+	// Return the result to use in the actual canvas
+	return ctx.font;
 };
 
 client.on('guildMemberAdd', async member => {
-    const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-    if (!channel) return;
+	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
+	if (!channel) return;
 
-    const canvas = Canvas.createCanvas(700, 250);
-    const ctx = canvas.getContext('2d');
+	const canvas = Canvas.createCanvas(700, 250);
+	const ctx = canvas.getContext('2d');
 
-    const background = await Canvas.loadImage('./wallpaper.jpg');
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+	const background = await Canvas.loadImage('./wallpaper.jpg');
+	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-    ctx.strokeStyle = '#74037b';
-    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	ctx.strokeStyle = '#74037b';
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-    // Assign the decided font to the canvas
-    ctx.font = applyText(canvas, member.displayName);
-    ctx.fillStyle = '#ffffff';
-    ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
+	// Assign the decided font to the canvas
+	ctx.font = applyText(canvas, member.displayName);
+	ctx.fillStyle = '#ffffff';
+	ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
 
-    ctx.beginPath();
-    ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
-    ctx.closePath();
-    ctx.clip();
+	ctx.beginPath();
+	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
+	ctx.closePath();
+	ctx.clip();
 
-    const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
-    ctx.drawImage(avatar, 25, 25, 200, 200);
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
+	ctx.drawImage(avatar, 25, 25, 200, 200);
 
-    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
+	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
 
-    channel.send(`Welcome to the server, ${member}!`, attachment);
+	channel.send(`Welcome to the server, ${member}!`, attachment);
 });
 ```
 
@@ -677,39 +677,39 @@ Let's move the welcome text inside the image itself instead of adding it outside
 
 ```js
 client.on('guildMemberAdd', async member => {
-    const channel = member.guild.channels.find(ch => ch.name === 'member-log');
-    if (!channel) return;
+	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+	if (!channel) return;
 
-    const canvas = Canvas.createCanvas(700, 250);
-    const ctx = canvas.getContext('2d');
+	const canvas = Canvas.createCanvas(700, 250);
+	const ctx = canvas.getContext('2d');
 
-    const background = await Canvas.loadImage('./wallpaper.jpg');
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+	const background = await Canvas.loadImage('./wallpaper.jpg');
+	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-    ctx.strokeStyle = '#74037b';
-    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	ctx.strokeStyle = '#74037b';
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-    // Slightly smaller text placed above the member's display name
-    ctx.font = '28px sans-serif';
-    ctx.fillStyle = '#ffffff';
-    ctx.fillText('Welcome to the server,', canvas.width / 2.5, canvas.height / 3.5);
+	// Slightly smaller text placed above the member's display name
+	ctx.font = '28px sans-serif';
+	ctx.fillStyle = '#ffffff';
+	ctx.fillText('Welcome to the server,', canvas.width / 2.5, canvas.height / 3.5);
 
-    // Add an exclamation point here and below
-    ctx.font = applyText(canvas, `${member.displayName}!`);
-    ctx.fillStyle = '#ffffff';
-    ctx.fillText(`${member.displayName}!`, canvas.width / 2.5, canvas.height / 1.8);
+	// Add an exclamation point here and below
+	ctx.font = applyText(canvas, `${member.displayName}!`);
+	ctx.fillStyle = '#ffffff';
+	ctx.fillText(`${member.displayName}!`, canvas.width / 2.5, canvas.height / 1.8);
 
-    ctx.beginPath();
-    ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
-    ctx.closePath();
-    ctx.clip();
+	ctx.beginPath();
+	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
+	ctx.closePath();
+	ctx.clip();
 
-    const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
-    ctx.drawImage(avatar, 25, 25, 200, 200);
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
+	ctx.drawImage(avatar, 25, 25, 200, 200);
 
-    const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
+	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
 
-    channel.send(`Welcome to the server, ${member}!`, attachment);
+	channel.send(`Welcome to the server, ${member}!`, attachment);
 });
 ```
 
@@ -718,39 +718,39 @@ client.on('guildMemberAdd', async member => {
 
 ```js
 client.on('guildMemberAdd', async member => {
-    const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-    if (!channel) return;
+	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
+	if (!channel) return;
 
-    const canvas = Canvas.createCanvas(700, 250);
-    const ctx = canvas.getContext('2d');
+	const canvas = Canvas.createCanvas(700, 250);
+	const ctx = canvas.getContext('2d');
 
-    const background = await Canvas.loadImage('./wallpaper.jpg');
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+	const background = await Canvas.loadImage('./wallpaper.jpg');
+	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-    ctx.strokeStyle = '#74037b';
-    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	ctx.strokeStyle = '#74037b';
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-    // Slightly smaller text placed above the member's display name
-    ctx.font = '28px sans-serif';
-    ctx.fillStyle = '#ffffff';
-    ctx.fillText('Welcome to the server,', canvas.width / 2.5, canvas.height / 3.5);
+	// Slightly smaller text placed above the member's display name
+	ctx.font = '28px sans-serif';
+	ctx.fillStyle = '#ffffff';
+	ctx.fillText('Welcome to the server,', canvas.width / 2.5, canvas.height / 3.5);
 
-    // Add an exclamation point here and below
-    ctx.font = applyText(canvas, `${member.displayName}!`);
-    ctx.fillStyle = '#ffffff';
-    ctx.fillText(`${member.displayName}!`, canvas.width / 2.5, canvas.height / 1.8);
+	// Add an exclamation point here and below
+	ctx.font = applyText(canvas, `${member.displayName}!`);
+	ctx.fillStyle = '#ffffff';
+	ctx.fillText(`${member.displayName}!`, canvas.width / 2.5, canvas.height / 1.8);
 
-    ctx.beginPath();
-    ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
-    ctx.closePath();
-    ctx.clip();
+	ctx.beginPath();
+	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
+	ctx.closePath();
+	ctx.clip();
 
-    const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
-    ctx.drawImage(avatar, 25, 25, 200, 200);
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
+	ctx.drawImage(avatar, 25, 25, 200, 200);
 
-    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
+	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
 
-    channel.send(`Welcome to the server, ${member}!`, attachment);
+	channel.send(`Welcome to the server, ${member}!`, attachment);
 });
 ```
 

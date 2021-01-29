@@ -74,8 +74,8 @@ Discord.js provides a method for creating webhooks called <branch version="11.x"
 
 ```js
 channel.createWebhook('Some-username', 'https://i.imgur.com/wSTFkRM.png')
-    .then(webhook => console.log(`Created webhook ${webhook}`))
-    .catch(console.error);
+	.then(webhook => console.log(`Created webhook ${webhook}`))
+	.catch(console.error);
 ```
 
 </branch>
@@ -83,10 +83,10 @@ channel.createWebhook('Some-username', 'https://i.imgur.com/wSTFkRM.png')
 
 ```js
 channel.createWebhook('Some-username', {
-    avatar: 'https://i.imgur.com/wSTFkRM.png',
+	avatar: 'https://i.imgur.com/wSTFkRM.png',
 })
-    .then(webhook => console.log(`Created webhook ${webhook}`))
-    .catch(console.error);
+	.then(webhook => console.log(`Created webhook ${webhook}`))
+	.catch(console.error);
 ```
 
 </branch>
@@ -99,8 +99,8 @@ You can edit Webhooks and WebhookClients to change their avatar and name using [
 
 ```js
 webhook.edit('Some-username', 'https://i.imgur.com/wSTFkRM.png')
-    .then(webhook => console.log(`Edited webhook ${webhook}`))
-    .catch(console.error);
+	.then(webhook => console.log(`Edited webhook ${webhook}`))
+	.catch(console.error);
 ```
 
 </branch>
@@ -110,12 +110,12 @@ You can edit Webhooks and WebhookClients to change their name, avatar, and chann
 
 ```js
 webhook.edit({
-    name: 'Some-username',
-    avatar: 'https://i.imgur.com/wSTFkRM.png',
-    channel: '222197033908436994',
+	name: 'Some-username',
+	avatar: 'https://i.imgur.com/wSTFkRM.png',
+	channel: '222197033908436994',
 })
-    .then(webhook => console.log(`Edited webhook ${webhook}`))
-    .catch(console.error);
+	.then(webhook => console.log(`Edited webhook ${webhook}`))
+	.catch(console.error);
 ```
 
 </branch>
@@ -135,13 +135,13 @@ const config = require('./config.json');
 const webhookClient = new Discord.WebhookClient(config.webhookID, config.webhookToken);
 
 const embed = new Discord.RichEmbed()
-    .setTitle('Some Title')
-    .setColor('#0099ff');
+	.setTitle('Some Title')
+	.setColor('#0099ff');
 
 webhookClient.send('Webhook test', {
-    username: 'some-username',
-    avatarURL: 'https://i.imgur.com/wSTFkRM.png',
-    embeds: [embed],
+	username: 'some-username',
+	avatarURL: 'https://i.imgur.com/wSTFkRM.png',
+	embeds: [embed],
 });
 ```
 
@@ -154,23 +154,23 @@ const config = require('./config.json');
 const client = new Discord.Client();
 
 const embed = new Discord.RichEmbed()
-    .setTitle('Some Title')
-    .setColor('#0099ff');
+	.setTitle('Some Title')
+	.setColor('#0099ff');
 
 client.once('ready', async () => {
-    const channel = client.channels.get('222197033908436994');
-    try {
-        const webhooks = await channel.fetchWebhooks();
-        const webhook = webhooks.first();
+	const channel = client.channels.get('222197033908436994');
+	try {
+		const webhooks = await channel.fetchWebhooks();
+		const webhook = webhooks.first();
 
-        await webhook.send('Webhook test', {
-            username: 'some-username',
-            avatarURL: 'https://i.imgur.com/wSTFkRM.png',
-            embeds: [embed],
-        });
-    } catch (error) {
-        console.error('Error trying to send: ', error);
-    }
+		await webhook.send('Webhook test', {
+			username: 'some-username',
+			avatarURL: 'https://i.imgur.com/wSTFkRM.png',
+			embeds: [embed],
+		});
+	} catch (error) {
+		console.error('Error trying to send: ', error);
+	}
 });
 
 client.login(token);
@@ -188,13 +188,13 @@ const config = require('./config.json');
 const webhookClient = new Discord.WebhookClient(config.webhookID, config.webhookToken);
 
 const embed = new Discord.MessageEmbed()
-    .setTitle('Some Title')
-    .setColor('#0099ff');
+	.setTitle('Some Title')
+	.setColor('#0099ff');
 
 webhookClient.send('Webhook test', {
-    username: 'some-username',
-    avatarURL: 'https://i.imgur.com/wSTFkRM.png',
-    embeds: [embed],
+	username: 'some-username',
+	avatarURL: 'https://i.imgur.com/wSTFkRM.png',
+	embeds: [embed],
 });
 ```
 
@@ -207,23 +207,23 @@ const config = require('./config.json');
 const client = new Discord.Client();
 
 const embed = new Discord.MessageEmbed()
-    .setTitle('Some Title')
-    .setColor('#0099ff');
+	.setTitle('Some Title')
+	.setColor('#0099ff');
 
 client.once('ready', async () => {
-    const channel = client.channels.cache.get('222197033908436994');
-    try {
-        const webhooks = await channel.fetchWebhooks();
-        const webhook = webhooks.first();
+	const channel = client.channels.cache.get('222197033908436994');
+	try {
+		const webhooks = await channel.fetchWebhooks();
+		const webhook = webhooks.first();
 
-        await webhook.send('Webhook test', {
-            username: 'some-username',
-            avatarURL: 'https://i.imgur.com/wSTFkRM.png',
-            embeds: [embed],
-        });
-    } catch (error) {
-        console.error('Error trying to send: ', error);
-    }
+		await webhook.send('Webhook test', {
+			username: 'some-username',
+			avatarURL: 'https://i.imgur.com/wSTFkRM.png',
+			embeds: [embed],
+		});
+	} catch (error) {
+		console.error('Error trying to send: ', error);
+	}
 });
 
 client.login(token);
