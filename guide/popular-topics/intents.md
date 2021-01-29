@@ -1,8 +1,8 @@
 # Gateway Intents
 :::danger
-The high volume of requests regarding recent API changes have made a change necessary here. This is a makeshift placeholder based around current knowledge until we can invest resources to properly rewrite the section on intents.
+The high volume of requests regarding recent API changes has made a change necessary here. This is a makeshift placeholder based around current knowledge until we can invest resources to rewrite the section on intents properly.
 
-We are sorry for any confusion or inconvenience our previous explanations might have caused for developers and discord staff! We are doing our best to update information as it becomes available.
+We are sorry for any confusion or inconvenience our previous explanations might have caused developers and discord staff! We are doing our best to update information as it becomes available.
 :::
 
 :::warning
@@ -50,10 +50,10 @@ We are sorry for any confusion or inconvenience our previous explanations might 
 :::warning
 As of October 7th, 2020, the privileged intents `GUILD_PRESENCES` and `GUILD_MEMBERS` must be enabled for your bot application in the Developer Portal if you wish to continue receiving them. For bots in 100+ servers, enabling these intents will require verification. 
 
-v12 of the library uses Discord API v6, which does not require intents to be specified when connecting to Discord. Specifying intents will be required when the library moves to API v8 in the next major release.
+v12 uses Discord API v6, which does not require intents to be specified when connecting to Discord. Specifying intents will be necessary when the library moves to API v8 in the next major release.
 :::
 
-Gateway Intents were introduced to the library in v12 and allow you to pick which events your bot will receive. Intents are groups of pre-defined events that the discord.js client will conditionally subscribe to. For example, omitting the `DIRECT_MESSAGE_TYPING` intent would prevent the discord.js client from receiving any typing events from direct messages. Intents also enable you to remove unwanted data from polluting your bot's cache; however, we can not yet explicitly list which unwanted side effects omitting a certain event may have on the internal workings of the library.
+Gateway Intents were introduced to the library in v12 and allow you to pick which events your bot will receive. Intents are groups of pre-defined events that the discord.js client will conditionally subscribe to. For example, omitting the `DIRECT_MESSAGE_TYPING` intent would prevent the discord.js client from receiving any typing events from direct messages. Intents also enable you to remove unwanted data from polluting your bot's cache; however, we can not yet explicitly list which unwanted side effects omitting an individual event may have on the library's internal workings.
 
 <branch version="11.x">
 
@@ -70,7 +70,7 @@ You can choose which intents you'd like to receive as client options when instan
 A list of all available gateway intents the library supports can be found at [the discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Intents?scrollTo=s-FLAGS). The events included in the respective intents on the [discord API documentation](https://discord.com/developers/docs/topics/gateway#list-of-intents).
 
 :::tip
-`GUILD_PRESENCES` is required in order to receive the initial GuildMember data when your bot connects to Discord. If you do not supply it, your member caches will start empty. `guildMemberUpdate` events will not be processed, regardless of if the `GUILD_MEMBER` partial is enabled, unless the `GuildMember` has been cached by other means such as by sending a message, being mentioned in one, or the `guildMemberAdd` event. Before you disable intents, think about what your bot does and how not receiving the listed events might prevent it from doing this. Version 12 of discord.js may not function as expected when specific intents are not provided.
+`GUILD_PRESENCES` is required to receive the initial GuildMember data when your bot connects to Discord. If you do not supply it, your member caches will start empty. `guildMemberUpdate` events will not be processed, regardless of if the `GUILD_MEMBER` partial is enabled, unless the `GuildMember` has been cached by other means such as by sending a message, being mentioned in one, or the `guildMemberAdd` event. Before you disable intents, think about what your bot does and how not receiving the listed events might prevent it from doing this. Version 12 of discord.js may not function as expected when specific intents are not provided.
 :::
 
 ```js
@@ -80,9 +80,9 @@ const client = new Client({ ws: { intents: ['GUILDS', 'GUILD_MESSAGES'] } });
 
 ## The Intents bit field wrapper
 
-Discord.js provides a utility structure [`Intents`](https://discord.js.org/#/docs/main/stable/class/Intents) which can be utilized to easily adapt the underlying bit field.
+Discord.js provides a utility structure [`Intents`](https://discord.js.org/#/docs/main/stable/class/Intents) which can be utilized to adapt the underlying bit field easily.
 
-We also provide static fields for all privileged and non-privileged intents. You can provide these as-is or pass them to the Intents constructor to further modify to your needs.
+We also provide static fields for all privileged and non-privileged intents. You can give these as-is or pass them to the Intents constructor to further modify to your needs.
 
 ```js
 const { Client, Intents } = require('discord.js');
@@ -109,18 +109,18 @@ const otherIntents2 = new Intents(32509);
 otherIntents2.remove(1, 512);
 ```
 
-If you want to view the built flags you can utilize the `.toArray()`, `.serialize()` and `.missing()`  methods. The first returns an array of flags represented in this bit field, the second an object mapping all possible flag values to a boolean, based on it they are represented in this bit field. The third can be used to view the flags not represented in this bit field (you use it by passing a bit field of specific intents to check against).
+If you want to view the built flags you can utilize the `.toArray()`, `.serialize()` and `.missing()`  methods. The first returns an array of flags represented in this bit field, the second an object mapping all possible flag values to a boolean; based on it, they are represented in this bit field. The third can be used to view the flags not represented in this bit field (you use it by passing a bit field of specific intents to check against).
 
 ## Privileged Intents
 
-Discord defines some intents as "privileged" due to the sensitive nature of the data sent through the affected events.
+Discord defines some intents as "privileged" due to the data's sensitive nature through the affected events.
 At the time of writing this article, privileged intents are `GUILD_PRESENCES` and `GUILD_MEMBERS`
 
 You can enable privileged gateway intents in the [Discord Developer Portal](https://discord.com/developers/applications) under "Privileged Gateway Intents" in the "Bot" section.
 
 Note that access to these special intents needs to be requested during the [verification process](https://support.discord.com/hc/en-us/articles/360040720412) discord requires for bots in 100 or more guilds.
 
-Should you receive an error prefixed with `[DISALLOWED_INTENTS]` please review your settings for all privileged intents you use. The official documentation for this topic can be found on the [discord API documentation](https://discord.com/developers/docs/topics/gateway#privileged-intents).
+Should you receive an error prefixed with `[DISALLOWED_INTENTS]`, please review your settings for all privileged intents you use. This topic's official documentation can be found on the [discord API documentation](https://discord.com/developers/docs/topics/gateway#privileged-intents).
 
 ## More on bit fields
 

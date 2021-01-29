@@ -7,7 +7,7 @@
 * `<guild>` is a placeholder for the Guild object, such as `<message>.guild` or <branch version="12.x" inline>`<client>.guilds.cache.get('<id>')`</branch><branch version="11.x" inline>`<client>.guilds.get('<id>')`</branch>.
 * `<voiceChannel>` is a placeholder for the VoiceChannel object, such as <branch version="11.x" inline>`<message>.member.voiceChannel`</branch><branch version="12.x" inline>`<message>.member.voice.channel`</branch>
 
-For a more detailed explanation on the notations commonly used in this guide, the docs, and the support server, see [here](/additional-info/notation.md).
+For a more detailed explanation of the notations commonly used in this guide, the docs, and the support server, see [here](/additional-info/notation.md).
 
 ## Administrative
 
@@ -95,7 +95,7 @@ member.roles.add(role);
 
 </branch>
 
-### How do I check if a guild member has a certain role?
+### How do I check if a guild member has a specific role?
 
 <branch version="11.x">
 
@@ -104,7 +104,7 @@ member.roles.add(role);
 ```js
 const member = <message>.mentions.members.first();
 if (member.roles.some(role => role.name === '<role name>')) {
-	// ...
+    // ...
 }
 ```
 
@@ -116,7 +116,7 @@ if (member.roles.some(role => role.name === '<role name>')) {
 ```js
 const member = <message>.mentions.members.first();
 if (member.roles.cache.some(role => role.name === '<role name>')) {
-	// ...
+    // ...
 }
 ```
 
@@ -128,7 +128,7 @@ if (member.roles.cache.some(role => role.name === '<role name>')) {
 
 ```js
 if (<message>.author.id === '<id>') {
-	// ...
+    // ...
 }
 ```
 
@@ -208,7 +208,7 @@ If you would like to set your activity upon startup, you can use the `ClientOpti
 <branch version="11.x">
 
 ::: warning
-the `activity` key will only work in v11.3 and above. You can still use the `game` key instead, but it is deprecated as of v11.3 and has been removed in v12.
+the `activity` key will only work in v11.3 and above. You can still use the `game` key instead, but it is deprecated as of v11.3 and removed in v12.
 :::
 
 </branch>
@@ -224,25 +224,25 @@ const prefix = '!';
 const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 client.on('message', message => {
-	const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
-	if (!prefixRegex.test(message.content)) return;
+    const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
+    if (!prefixRegex.test(message.content)) return;
 
-	const [, matchedPrefix] = message.content.match(prefixRegex);
-	const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
+    const [, matchedPrefix] = message.content.match(prefixRegex);
+    const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
+    const command = args.shift().toLowerCase();
 
-	if (command === 'ping') {
-		message.channel.send('Pong!');
-	} else if (command === 'prefix') {
-		message.reply(`you can either ping me or use \`${prefix}\` as my prefix.`);
-	}
+    if (command === 'ping') {
+        message.channel.send('Pong!');
+    } else if (command === 'prefix') {
+        message.reply(`you can either ping me or use \`${prefix}\` as my prefix.`);
+    }
 });
 
 client.login('your-token-goes-here');
 ```
 
 ::: tip
-The `escapeRegex` function is used to convert special characters into literal characters by escaping them so that they don't terminate the pattern within the [Regular Expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)!
+The `escapeRegex` function converts special characters into literal characters by escaping them to not terminate the pattern within the [Regular Expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)!
 :::
 
 ::: tip
@@ -274,7 +274,7 @@ channel.send('<content>');
 
 </branch>
 
-### How do I DM a certain user?
+### How do I DM a specific user?
 
 <branch version="11.x">
 
@@ -301,7 +301,7 @@ user.send('<content>');
 If you want to DM the user who sent the message, you can use `<message>.author.send()`.
 :::
 
-### How do I mention a certain user in a message?
+### How do I mention a specific user in a message?
 
 <!-- eslint-skip -->
 
@@ -323,15 +323,15 @@ Mentions in embeds may resolve correctly in embed description and field values b
 
 ```js
 <message>.channel.send('Please enter more input.').then(() => {
-	const filter = m => <message>.author.id === m.author.id;
+    const filter = m => <message>.author.id === m.author.id;
 
-	<message>.channel.awaitMessages(filter, { time: 60000, maxMatches: 1, errors: ['time'] })
-		.then(messages => {
-			<message>.channel.send(`You've entered: ${messages.first().content}`);
-		})
-		.catch(() => {
-			<message>.channel.send('You did not enter any input!');
-		});
+    <message>.channel.awaitMessages(filter, { time: 60000, maxMatches: 1, errors: ['time'] })
+        .then(messages => {
+            <message>.channel.send(`You've entered: ${messages.first().content}`);
+        })
+        .catch(() => {
+            <message>.channel.send('You did not enter any input!');
+        });
 });
 ```
 
@@ -342,15 +342,15 @@ Mentions in embeds may resolve correctly in embed description and field values b
 
 ```js
 <message>.channel.send('Please enter more input.').then(() => {
-	const filter = m => <message>.author.id === m.author.id;
+    const filter = m => <message>.author.id === m.author.id;
 
-	<message>.channel.awaitMessages(filter, { time: 60000, max: 1, errors: ['time'] })
-		.then(messages => {
-			<message>.channel.send(`You've entered: ${messages.first().content}`);
-		})
-		.catch(() => {
-			<message>.channel.send('You did not enter any input!');
-		});
+    <message>.channel.awaitMessages(filter, { time: 60000, max: 1, errors: ['time'] })
+        .then(messages => {
+            <message>.channel.send(`You've entered: ${messages.first().content}`);
+        })
+        .catch(() => {
+            <message>.channel.send('You did not enter any input!');
+        });
 });
 ```
 
@@ -367,19 +367,19 @@ If you want to learn more about this syntax or reaction collectors, check out [t
 ```js
 const blockedUsers = [ 'id1', 'id2' ];
 <client>.on('message', message => {
-	if (blockedUsers.includes(message.author.id)) return;
+    if (blockedUsers.includes(message.author.id)) return;
 });
 ```
 
 :::tip
-You do not need to have a constant local variable like `blockedUsers` above. If you have a database system which you use to store IDs of blocked users, you can query the database instead:
+You do not need to have a constant local variable like `blockedUsers` above. If you have a database system that you use to store IDs of blocked users, you can query the database instead:
 
 <!-- eslint-skip -->
 
 ```js
 <client>.on('message', async message => {
-	const blockedUsers = await database.query('SELECT user_id FROM blocked_users;');
-	if (blockedUsers.includes(message.author.id)) return;
+    const blockedUsers = await database.query('SELECT user_id FROM blocked_users;');
+    if (blockedUsers.includes(message.author.id)) return;
 });
 ```
 
@@ -392,8 +392,8 @@ Note that this is just a showcase of how such a check could be done.
 
 ```js
 <message>.channel.send('My message to react to.').then(sentMessage => {
-	sentMessage.react('👍');
-	sentMessage.react('<emoji id>');
+    sentMessage.react('👍');
+    sentMessage.react('<emoji id>');
 });
 ```
 
@@ -413,7 +413,7 @@ process.exit();
 
 ### What is the difference between a User and a GuildMember?
 
-A User represents a global Discord user, and a GuildMember represents a Discord user on a specific server. That means only GuildMembers can have permissions, roles, and nicknames, for example, because all of these things are server-bound information that could be different on each server that user is in.
+A User represents a global Discord user, and a GuildMember represents a Discord user on a specific server. That means only GuildMembers can have permissions, roles, and nicknames, for example, because all of these things are server-bound information that could be different on each server that the user is in.
 
 ### How do I find all online members of a guild?
 
@@ -424,9 +424,9 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 ```js
 // First we use fetchMembers to make sure all members are cached
 <guild>.fetchMembers().then(fetchedGuild => {
-	const totalOnline = fetchedGuild.members.filter(member => member.presence.status === 'online');
-	// We now have a collection with all online member objects in the totalOnline variable
-	console.log(`There are currently ${totalOnline.size} members online in this guild!`)
+    const totalOnline = fetchedGuild.members.filter(member => member.presence.status === 'online');
+    // We now have a collection with all online member objects in the totalOnline variable
+    console.log(`There are currently ${totalOnline.size} members online in this guild!`)
 });
 ```
 
@@ -438,9 +438,9 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 ```js
 // First we use guild.members.fetch to make sure all members are cached
 <guild>.members.fetch().then(fetchedMembers => {
-	const totalOnline = fetchedMembers.filter(member => member.presence.status === 'online');
-	// We now have a collection with all online member objects in the totalOnline variable
-	console.log(`There are currently ${totalOnline.size} members online in this guild!`)
+    const totalOnline = fetchedMembers.filter(member => member.presence.status === 'online');
+    // We now have a collection with all online member objects in the totalOnline variable
+    console.log(`There are currently ${totalOnline.size} members online in this guild!`)
 });
 ```
 
@@ -456,12 +456,12 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 // We start by declaring a guildMemberUpdate listener
 // This code should be placed outside of any other listener callbacks to prevent listener nesting
 <client>.on('guildMemberUpdate', (oldMember, newMember) => {
-	// If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
-	const removedRoles = oldMember.roles.filter(role => !newMember.roles.has(role.id));
-	if(removedRoles.size > 0) console.log(`The roles ${removedRoles.map(r => r.name)} were removed from ${oldMember.displayName}.`);
-	// If the role(s) are present on the new member object but are not on the old one (i.e role(s) were added)
-	const addedRoles = newMember.roles.filter(role => !oldMember.roles.has(role.id));
-	if(addedRoles.size > 0) console.log(`The roles ${addedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
+    // If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
+    const removedRoles = oldMember.roles.filter(role => !newMember.roles.has(role.id));
+    if(removedRoles.size > 0) console.log(`The roles ${removedRoles.map(r => r.name)} were removed from ${oldMember.displayName}.`);
+    // If the role(s) are present on the new member object but are not on the old one (i.e role(s) were added)
+    const addedRoles = newMember.roles.filter(role => !oldMember.roles.has(role.id));
+    if(addedRoles.size > 0) console.log(`The roles ${addedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
 });
 ```
 
@@ -474,12 +474,12 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 // We start by declaring a guildMemberUpdate listener
 // This code should be placed outside of any other listener callbacks to prevent listener nesting
 <client>.on('guildMemberUpdate', (oldMember, newMember) => {
-	// If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
-	const removedRoles = oldMember.roles.cache.filter(role => !newMember.roles.cache.has(role.id));
-	if (removedRoles.size > 0) console.log(`The roles ${removedRoles.map(r => r.name)} were removed from ${oldMember.displayName}.`);
-	// If the role(s) are present on the new member object but are not on the old one (i.e role(s) were added)
-	const addedRoles = newMember.roles.cache.filter(role => !oldMember.roles.cache.has(role.id));
-	if (addedRoles.size > 0) console.log(`The roles ${addedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
+    // If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
+    const removedRoles = oldMember.roles.cache.filter(role => !newMember.roles.cache.has(role.id));
+    if (removedRoles.size > 0) console.log(`The roles ${removedRoles.map(r => r.name)} were removed from ${oldMember.displayName}.`);
+    // If the role(s) are present on the new member object but are not on the old one (i.e role(s) were added)
+    const addedRoles = newMember.roles.cache.filter(role => !oldMember.roles.cache.has(role.id));
+    if (addedRoles.size > 0) console.log(`The roles ${addedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
 });
 ```
 
@@ -510,10 +510,10 @@ npm install ffmpeg-static # ffmpeg windows
 const ytdl = require('ytdl-core');
 
 <voiceChannel>.join().then(connection => {
-	const stream = ytdl('<youtubelink>', { filter: 'audioonly' });
-	const dispatcher = connection.playStream(stream);
-	
-	dispatcher.on('end', () => voiceChannel.leave());
+    const stream = ytdl('<youtubelink>', { filter: 'audioonly' });
+    const dispatcher = connection.playStream(stream);
+    
+    dispatcher.on('end', () => voiceChannel.leave());
 })
 
 ```
@@ -528,10 +528,10 @@ const ytdl = require('ytdl-core');
 const ytdl = require('ytdl-core');
 
 <voiceChannel>.join().then(connection => {
-	const stream = ytdl('<youtubelink>', { filter: 'audioonly' });
-	const dispatcher = connection.play(stream);
-	
-	dispatcher.on('finish', () => voiceChannel.leave());
+    const stream = ytdl('<youtubelink>', { filter: 'audioonly' });
+    const dispatcher = connection.play(stream);
+    
+    dispatcher.on('finish', () => voiceChannel.leave());
 })
 
 ```
@@ -545,17 +545,17 @@ If you've tried using [the usual method of retrieving unicode emojis](/popular-t
 ```js
 // emojiCharacters.js
 module.exports = {
-	a: '🇦', b: '🇧', c: '🇨', d: '🇩',
-	e: '🇪', f: '🇫', g: '🇬', h: '🇭',
-	i: '🇮', j: '🇯', k: '🇰', l: '🇱',
-	m: '🇲', n: '🇳', o: '🇴', p: '🇵',
-	q: '🇶', r: '🇷', s: '🇸', t: '🇹',
-	u: '🇺', v: '🇻', w: '🇼', x: '🇽',
-	y: '🇾', z: '🇿', 0: '0️⃣', 1: '1️⃣',
-	2: '2️⃣', 3: '3️⃣', 4: '4️⃣', 5: '5️⃣',
-	6: '6️⃣', 7: '7️⃣', 8: '8️⃣', 9: '9️⃣',
-	10: '🔟', '#': '#️⃣', '*': '*️⃣',
-	'!': '❗', '?': '❓',
+    a: '🇦', b: '🇧', c: '🇨', d: '🇩',
+    e: '🇪', f: '🇫', g: '🇬', h: '🇭',
+    i: '🇮', j: '🇯', k: '🇰', l: '🇱',
+    m: '🇲', n: '🇳', o: '🇴', p: '🇵',
+    q: '🇶', r: '🇷', s: '🇸', t: '🇹',
+    u: '🇺', v: '🇻', w: '🇼', x: '🇽',
+    y: '🇾', z: '🇿', 0: '0️⃣', 1: '1️⃣',
+    2: '2️⃣', 3: '3️⃣', 4: '4️⃣', 5: '5️⃣',
+    6: '6️⃣', 7: '7️⃣', 8: '8️⃣', 9: '9️⃣',
+    10: '🔟', '#': '#️⃣', '*': '*️⃣',
+    '!': '❗', '?': '❓',
 };
 ```
 
@@ -571,5 +571,5 @@ console.log(emojiCharacters['!']); // ❗
 ```
 
 ::: tip
-On Windows, you may be able to use the `Win + .` keyboard shortcut to open up an emoji picker can be used for quick, easy access to all the unicode emojis available to you. Some of the emojis listed above may not be represented there, though (e.g., the 0-9 emojis).
+On Windows, you may be able to use the `Win + .` keyboard shortcut to open up an emoji picker that can be used for quick, easy access to all the unicode emojis available to you. Some of the emojis listed above may not be represented there, though (e.g., the 0-9 emojis).
 :::
