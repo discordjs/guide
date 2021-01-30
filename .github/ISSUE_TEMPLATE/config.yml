@@ -1,8 +1,11 @@
 blank_issues_enabled: false
 contact_links:
-  - name: discord.js discord server
+  - name: Discord server
     url: https://discord.gg/bRCvFy9
-    about: Please use this Discord Server to ask questions and get support on discord.js. We don't typically answer questions here and they will likely be closed and redirected to the Discord server.
-  - name: discord.js Github repository issues page
+    about: Visit our Discord server for questions and support requests.
+  - name: Guide discussion boards
+    url: https://github.com/discordjs/discord.js/discussions
+    about: Ask questions and receive answers.
+  - name: Discord.js issues
     url: https://github.com/discordjs/discord.js/issues/new/choose
-    about: Please use this issue tracker to suggest new features and/or report bugs about discord.js itself.
+    about: Issue tracker for the library discord.js.
