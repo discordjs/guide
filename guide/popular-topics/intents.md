@@ -25,11 +25,15 @@ Before storming off and doing so you should stop and carefully think about if yo
 
 ### Symptoms in version 12
 
-| `GUILD_MEMBERS` | `GUILD_PRESENCES` |
-| --------------- | ----------------- |
-| The client events `"guildMemberAdd"`, `"guildMemberRemove"`, `"guildMemberUpdate"` do not emit | Member caches are empty *(or only have very few entries)* |
-| [`Guild#memberCount`](https://discord.js.org/#/docs/main/stable/class/Guild?scrollTo=memberCount) returns the member count as of ready | User cache is empty *(or has only very few entries)* |
-| Fetching members times out | All members appear to be offline |
+`GUILD_MEMBERS`
+- The client events `"guildMemberAdd"`, `"guildMemberRemove"`, `"guildMemberUpdate"` do not emit
+- [`Guild#memberCount`](https://discord.js.org/#/docs/main/stable/class/Guild?scrollTo=memberCount) returns the member count as of ready
+- Fetching members times out
+
+`GUILD_PRESENCES`
+- Member caches are empty *(or only have very few entries)*
+- User cache is empty *(or has only very few entries)*
+- All members appear to be offline
 
 ### Error: Disallowed Intents
 
