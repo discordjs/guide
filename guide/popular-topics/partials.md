@@ -29,7 +29,7 @@ Make sure you enable all partials you need for your use case! If you miss one, t
 :::
 
 :::warning
-Partial structures are enabled globally. You can not make them work for only a specific event or cache, and you very likely need to adapt other parts of your code that are accessing data from the relevant caches. All caches holding the respective structure type might return partials as well!
+Partial structures are enabled globally. You cannot make them work for only a specific event or cache, and you very likely need to adapt other parts of your code that are accessing data from the relevant caches. All caches holding the respective structure type might return partials as well!
 :::
 
 ## Handling Partial data
@@ -68,7 +68,7 @@ if (message.partial) {
 ```
 
 :::warning
-You can not fetch deleted data from the API. For message deletions, `messageDelete` will only emit with the ID, which you can not use to fetch the complete message containing content, author, or other information, as it is already inaccessible by the time you receive the event.
+You cannot fetch deleted data from the API. For message deletions, `messageDelete` will only emit with the ID, which you cannot use to fetch the complete message containing content, author, or other information, as it is already inaccessible by the time you receive the event.
 :::
 
 

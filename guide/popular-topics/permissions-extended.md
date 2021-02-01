@@ -57,8 +57,8 @@ Causes for "Missing Access":
 
 - Your bot needs `MANAGE_ROLES` in its base permissions to change base permissions.
 - It needs `MANAGE_ROLES` in its final permissions to change permission overwrites.
-- It can not edit permissions for roles that are higher than or equal to its highest role.
-- It can not grant permissions it doesn't have.
+- It cannot edit permissions for roles that are higher than or equal to its highest role.
+- It cannot grant permissions it doesn't have.
 - It can manage overwrites for roles or users with higher roles than its own highest role.
 - It can manage overwrites for permissions it doesn't have.
 - Members with the `ADMINISTRATOR` permission are not affected by overwrites at all.

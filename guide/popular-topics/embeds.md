@@ -333,7 +333,7 @@ We will now explain how to edit embedded message content and resend a received e
 To forward a received embed you retrieve it from the messages embed array (`message.embeds`) and pass it to the <branch version="11.x" inline>RichEmbed</branch><branch version="12.x" inline>MessageEmbed</branch> constructor. The constructed <branch version="11.x" inline>RichEmbed</branch><branch version="12.x" inline>MessageEmbed</branch> can then be edited before sending it again.
 
 ::: warning
-<branch version="11.x" inline>You can not resend the received embed structure! The MessageEmbed returned from `message.embeds` contains circular structures and needs to be converted to a RichEmbed object before sending.</branch><branch version="12.x" inline>We deliberately create a new Embed here instead of just modifying `message.embeds[0]` directly to keep the cache valid. If we were not to do this, the embed in cache on the original message would diverge from what the actual embed looks like, which can result in unexpected behavior down the line!</branch>
+<branch version="11.x" inline>You cannot resend the received embed structure! The MessageEmbed returned from `message.embeds` contains circular structures and needs to be converted to a RichEmbed object before sending.</branch><branch version="12.x" inline>We deliberately create a new Embed here instead of just modifying `message.embeds[0]` directly to keep the cache valid. If we were not to do this, the embed in cache on the original message would diverge from what the actual embed looks like, which can result in unexpected behavior down the line!</branch>
 :::
 
 <branch version="11.x">

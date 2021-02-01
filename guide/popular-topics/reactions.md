@@ -360,7 +360,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
 ```
 
 :::warning
-Partial structures are enabled globally. You can not only make them work for a specific event or cache, and you very likely need to adapt other parts of your code that are accessing data from the relevant caches. All caches holding the respective structure type might return partials as well!
+Partial structures are enabled globally. You cannot only make them work for a specific event or cache, and you very likely need to adapt other parts of your code that are accessing data from the relevant caches. All caches holding the respective structure type might return partials as well!
 :::
 
 </branch>
