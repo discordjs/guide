@@ -1,4 +1,4 @@
-# Event Handling
+# Event handling
 
 Nodejs uses an event-driven architecture. This makes it possible to execute a certain piece of code only when a certain event occurs. The `discord.js` library takes full advantage of this architecture. You have already used two of these events i.e. `ready` and `message`. The `ready` event emits when the `Client` becomes ready for use and the `message` event emits when someone sends a message. You can visit the [documentation](https://discord.js.org/#/docs/main/stable/class/Client) site for `discord.js` to see the full list of all the client events.
 
@@ -120,7 +120,7 @@ Learn more about `rest` parameter and `spread` syntax [here](https://javascript.
 
 Before you go any further you should check the event handler is working or not. Open your terminal, type `node index.js` and press enter. If you see `Ready!` gets printed, then congratulations, you've made an event handler. After this listening for other events is as easy as creating a new event file in the `events` folder. The event handler will automatically retrieve this new event file and register the respective event whenever you restart the bot.
 
-## Message Event
+## Message event
 
 You created an event file for the `ready` event above. That module was somewhat short and easy to write, as you were only logging `Ready!` in it. The `ready` event doesn't return any argument and you don't do much when that event emits. This section teaches you how to write an event file for an event that returns at least one argument and how to do lots of stuff in it. You'll also learn how to retrieve things that are not available in the event file but can be required either from other files or accessed through the arguments returned by the event.
 
@@ -165,3 +165,69 @@ if (!message.content.startsWith(prefix) || message.author.bot) return;
 Now run your bot and check whether it's working or not. If you encounter any error, go back and check you haven't made any mistake.
 
 You can add back all the additional features in the `message.js` event file. Just make sure you take care of the things that we talked about above.
+
+## Passing client to event files
+
+You must have noticed how important `Client` class is in `discord.js`. You created a `client` instance of this class in the `index.js` file. Most of the time you can use this `client` in other files by either obtaining it from one of the `discord.js` structures or from function parameters. You did the former in the above section by using `<Message>.client`. When you don't have access to any of the structures that have `client` as one of their property, you'll have to use the latter method. The perfect example of this is the `ready.js` event file.
+
+The `ready` event does not return anything, this means that `args` will be an empty array, thus nothing will be passed to the arrow function in the `ready.js` event file. Now to obtain the `client` you'll have to pass it as an argument along with the `args` array in the event-handler. So, head back to the `index.js` file and make the following changes in it:
+
+```diff
+for (const file of eventFiles) {
+    const event = require(`./events/${file}`);
+    const eventName = file.slice(0, -3);
+-	client.on(eventName, (...args) => event(...args));
++   client.on(eventName, (...args) => event(...args, client));
+}
+```
+
+Now, `client` will be available as the last argument to the arrow function in every event file you'll create. Since, `ready` event doesn't return anything, `client` will be the only argument to the arrow function of `ready.js` event file. You can make use of `client` in `ready.js` by logging your bot's name in the console when it becomes ready. Head back to `ready.js` and make the following changes to it:
+
+```diff
++ module.exports = (client) => {
+-	console.log('Ready!');
++	console.log(`Logged in as ${client.user.tag}`);
+}
+```
+
+You can omit the `client` argument from the arrow function definition in an event file if you either obtain it from some other `discord.js` structure or don't need the `client` in it at all. For example, the `message.js` event file will still work if you don't take `client` as an argument in the arrow function, but if you want you can make the following changes, and it will work just like earlier: 
+
+```diff
++ module.exports = (message, client) => {
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
+-	const client = message.client;
+	const args = message.content.slice(prefix.length).trim().split(/ +/);
+	// ...
+}
+```
+
+::: warning
+Always, make sure that you take all the valid arguments returned by an event first and then take the `client` as the last argument.
+:::
+
+It is worth to note that the position of `client` argument matters. For example `messageUpdate` event returns `oldMessage` and `newMessage` objects. Your event file for this event should look something like this:
+
+```js
+// This will work
+module.exports = (oldMessage, newMessage, client) => {
+	// ...
+};
+```
+
+If you aren't using `client` in an event file, you can omit it from the function arguments, and it will still work without any errors:
+
+```js
+// This will work too
+module.exports = (oldMessage, newMessage) => {
+	// ...
+};
+```
+
+What you cannot do is pass the `client` argument at the wrong position, like this:
+
+```js
+// This will create problems :(
+module.exports = (newMessage, client) => {
+	// ...
+};
+```
