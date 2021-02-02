@@ -231,3 +231,7 @@ module.exports = (newMessage, client) => {
 	// ...
 };
 ```
+
+## Resulting code
+
+<resulting-code path="event-handling/file-setup" />
