@@ -29,7 +29,7 @@ module.exports = class MeowCommand extends Command {
 };
 ```
 
-You can then use the `userPermissions` and `clientPermissions` options to check for certain permissions. If you wanted to restrict the `meow` command, requiring the user to have the ability to manage messages and the client full administrator access, you'd do the following:
+You can then use the `userPermissions` and `clientPermissions` options to check for certain permissions. If you wanted to restrict the `meow` command, requiring the member to have the ability to manage messages and the client full administrator access, you'd do the following:
 
 <!-- eslint-skip -->
 

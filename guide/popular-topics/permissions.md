@@ -1,7 +1,7 @@
 # Permissions
 
-Permissions are Discords primary feature, enabling users to customize the workings of their server to their liking.
-To break it down to essentials: Permissions and permission overwrites tell Discord who is allowed to do what and where.
+Permissions are Discord's primary feature, enabling users to customize the workings of their server to their liking.
+Essentially, Permissions and permission overwrites tell Discord who is allowed to do what and where.
 When first confronted with them, they can be quite confusing, but no worries, we are here to take care of that, so let's dive in!
 
 ## Roles as bot permissions

@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
 
 Like you see in the diagram above, our Users model will only have 2 attributes: a `user_id` primary key and a `balance`. A primary key is a particular attribute that becomes the default column used when joining tables together and is automatically unique and not null.
 
-Balance also sets `allowNull` to `false`, which means that both values have to be set in conjunction with creating a primary key; otherwise, the database would throw an error. This constraint guarantees correctness in our data storage. We never have null or empty values, ensuring that if we somehow forget to validate in the application that both values are not null, our database would do the final validation for us.
+Balance also sets `allowNull` to `false`, which means that both values have to be set in conjunction with creating a primary key; otherwise, the database would throw an error. This constraint guarantees correctness in our data storage. We'll never have null or empty values, ensuring that if we somehow forget to validate in the application that both values are not null, our database would do the final validation for us.
 
 Notice that our options object sets `timestamps` to `false`. This option disables the `createdAt` and the `updatedAt` columns that sequelize usually creates for you. Setting `user_id` to primary also eliminates the `id` primary key that Sequelize usually generates for you since there can only be one primary key on a table.
 
@@ -342,7 +342,7 @@ await user.addItem(item);
 message.channel.send(`You've bought: ${item.name}.`);
 ```
 
-For users to search for an item without caring about the case, we use the `$iLike` modifier when looking for the name. Keep in mind that this may be slow if you have millions of items, so please don't put a million items in your shop.
+For users to search for an item without caring about the letter casing, we use the `$iLike` modifier when looking for the name. Keep in mind that this may be slow if you have millions of items, so please don't put a million items in your shop.
 
 ### [theta] Display the shop
 

@@ -19,7 +19,7 @@ While it doesn't have to be called `index.js`, this file is the main file for yo
 
 The first thing you have to do is require Commando. Contrary to what you may think, you do **not** need to require Discord.js to use Commando. Commando handles all discord.js-related functions within itself, and the Commando client extends discord.js', so you'll rarely ever have to touch core discord.js!
 
-You'll also be requiring `path`. Don't worry; you don't have to install `path`; it comes bundled with Node.
+You'll also be requiring `path`. You don't have to install `path`; it comes bundled with Node.
 
 ```js
 const { CommandoClient } = require('discord.js-commando');
@@ -60,7 +60,7 @@ client.registry
 	.registerCommandsIn(path.join(__dirname, 'commands'));
 ```
 
-Doing this, you've also created your first command group! Make another folder called `first` in your `commands` folder so that you can put the commands for that group in there. The group will display in the help command as `Your First Command Group`. You can use any name you want for either of these options, but note that the key (`first`) **must be lowercase**!
+You've just created your first command group! Make another folder called `first` in your `commands` folder so that you can put the commands for that group in there. The group will display in the help command as `Your First Command Group`. You can use any name you want for either of these options, but note that the key (`first`) **must be lowercase**!
 
 Adding more command groups is as simple as adding another option to the array and making another folder.
 
