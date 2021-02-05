@@ -4,7 +4,7 @@
 
 v13 requires Node 14.x or higher to use, so make sure you're up to date. To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it!  There are many resources online to help you with this step based on your host system.
 
-Once you got Node up-to-date you can install v12 by running `npm install discord.js` in your terminal or command prompt for text-only use, or `npm install discord.js @discordjs/opus` for voice support.
+Once you've got Node up-to-date you can install v13 by running `npm install discord.js` in your terminal or command prompt for text-only use, or `npm install discord.js @discordjs/opus` for voice support.
 
 You can check your discord.js version with `npm list discord.js`. Should it still show v12.x uninstall (`npm uninstall discord.js`) and re-install discord.js and make sure the entry in your package.json does not prevent a major version update. Please refer to the [npm documentation](https://docs.npmjs.com/files/package.json#dependencies) for this.
 
@@ -24,7 +24,6 @@ The Discord API now allows bots much more granular control over mention parsing,
 ```diff
 - const client = new Discord.Client({ disableMentions: 'everyone' });
 + const client = new Discord.Client({ allowedMentions: { parse: ['users', 'roles'], repliedUser: true } });
-
 ```
 
 :::
@@ -121,7 +120,7 @@ The `Guild#voice` getter has been removed.
 
 ### UserFlags
 
-The deprecated UserFlags `DISCORD_PARTNER` and `VERIFIED_DEVELOPER/EARLY_VERIFIED_DEVELOPER` have been removed in favour of their renamed versions.
+The deprecated UserFlags `DISCORD_PARTNER` and `VERIFIED_DEVELOPER` / `EARLY_VERIFIED_DEVELOPER` have been removed in favour of their renamed versions.
 
 ```diff
 - user.flags.has(UserFlags.FLAGS.DISCORD_PARTNER)
@@ -142,12 +141,6 @@ New activity type `COMPETING` added.
 #### Channel#isText()
 
 The new `Channel#isText()` getter provides an easy way for TypeScript developers to determine if a channel is Text-Based ("dm", "text", "news")
-
-### ClientOptions
-
-#### ClientOptions#messageEditHistoryMaxSize
-
-The new `ClientOptions#messageEditHistoryMaxSize` option allows developers to set set a fixed limit on the edit history stored for each message in the client cache. 
 
 ### GuildManager
 
@@ -179,7 +172,7 @@ Equivalent to `GuildMember#kick(reason)`
 
 ### GuildTemplate
 
-API support for [Server Templates](https://github.com/discord/discord-api-docs/pull/2144)
+API support for [Server Templates](https://discord.com/developers/docs/resources/template)
 
 ### Message
 
