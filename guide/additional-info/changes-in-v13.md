@@ -13,7 +13,7 @@ You can check your discord.js version with `npm list discord.js`. Should it stil
 ### Intents
 
 As v13 makes the switch to Discord API v8, it will now be **required** to specify intents in your Client constructor.
-For more information, refer to our more [detailed article about this topic](/popular-topics/intents)
+For more information, refer to our more [detailed article about this topic](/popular-topics/intents).
 
 :::danger
 
@@ -35,8 +35,8 @@ The Discord API now allows bots much more granular control over mention parsing,
 `MessageOptions.reply` (User ID) has been removed, replaced with `MessageOptions.replyTo` (Message ID)
 
 ```diff
-- channel.send("content", { reply: '123456789012345678' })` // User ID
-+ channel.send("content", { replyTo: '765432109876543219' })` // Message ID
+- channel.send('content', { reply: '123456789012345678' })` // User ID
++ channel.send('content', { replyTo: '765432109876543219' })` // Message ID
 ```
 
 The new `MessageOptions.allowedMentions.repliedUser` boolean option determines if the reply will notify the author of the original message.
@@ -48,7 +48,7 @@ The new `MessageOptions.allowedMentions.repliedUser` boolean option determines i
 
 ### Bitfields / Permissions
 
-Bitfields such as Permissions and UserFlags will no longer support the use of string literals, instead requiring use of the flag.
+The usage of string literals for bitfields such as `Permissions` and `UserFlags` is discouraged, you should use the flag instead.
 
 ```diff
 - permissions.has('SEND_MESSAGES')
@@ -90,6 +90,7 @@ With the introduction of gateway intents, the `fetchAllMembers` Client option wo
 The `ClientOptions#messageEditHistoryMaxSize` option has been removed.
 
 To reduce on caching, discord.js will no longer store an edit history. This will need to be manually implemented if required.
+
 ### Guild
 
 #### Guild#member
@@ -126,8 +127,8 @@ The `Guild#voice` getter has been removed.
 This shortcut method has been removed.
 
 ```diff
-- member.hasPermission(Permission.FLAGS.SEND_MESSAGES);
-+ member.permissions.has(Permission.FLAGS.SEND_MESSAGES);
+- member.hasPermission(Permissions.FLAGS.SEND_MESSAGES);
++ member.permissions.has(Permissions.FLAGS.SEND_MESSAGES);
 ```
 
 ### GuildMemberManager
@@ -159,20 +160,17 @@ This shortcut method has been removed.
 `MessageManager.delete()` no longer accepts any additional options, requiring a timed-delete to be performed manually.
 
 ```diff
-- channel.messages.delete(''123456789012345678', { timeout: 10000 });
+- channel.messages.delete('123456789012345678', { timeout: 10000 });
 + client.setTimeout(() => channel.messages.delete('123456789012345678'), 10000);
 ```
 
 `reason` is no longer a parameter as it is not used by the API.
-
-
 ### RoleManager
 
 #### RoleManager#create
 
 The options passed to `RoleManager#create` no longer need to be nested in a `data` object.
-
-Additionally `reason` is now part of the options, not a second parameter
+Additionally, `reason` is now part of the options, not a second parameter.
 
 ```diff
 - guild.roles.create({ data: { name: "New role" } }, "Creating new role");
@@ -228,6 +226,7 @@ The new `Channel#isText()` getter provides an easy way for TypeScript developers
 Constructing a Collector without providing a filter function will now throw a meaningful `TypeError`.
 
 ### Guild
+
 #### Guild#emojis
 
 The `GuildEmojiManager` now extends `BaseGuildEmojiManager`.
@@ -352,7 +351,7 @@ Provides API support for bots to follow announcements in other channels
 
 #### NewsChannel#setType
 
-`channel.setType("text")`
+`channel.setType('text')`
 
 Allows conversion between NewsChannel and TextChannel
 
@@ -380,6 +379,6 @@ Gets the premium subscriber (booster) role for the Guild, if any
 
 #### TextChannel#setType
 
-`channel.setType("news")`
+`channel.setType('news')`
 
 Allows conversion between TextChannel and NewsChannel
