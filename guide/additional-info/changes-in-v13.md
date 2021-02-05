@@ -59,8 +59,37 @@ Bitfields such as Permissions and UserFlags will no longer support the use of st
 
 Webpack builds are no longer supported.
 
-## Breaking changes and deletions
+## Changes and deletions
 
+### Client
+
+#### Client#emojis
+
+The Client Emoji manager is now a `BaseGuildEmojiManager`, providing cache resolution only and removing methods which would fail to create emojis as there was no Guild context.
+
+#### Client#generateInvite
+
+`Client#generateInvite` no longer supports `PermissionsResolvable` as its argument, requiring `InviteGenerationOptions`.
+
+To provide permissions, use `InviteGenerationOptions#permissions`.
+```diff
+- client.generateInvite([Permissions.FLAGS.SEND_MESSAGES]);
++ client.generateInvite({ permissions: [Permissions.FLAGS.SEND_MESSAGES] })
+```
+
+### ClientOptions
+
+#### ClientOptions#fetchAllMembers
+
+The `ClientOptions#fetchAllMembers` option has been removed.
+
+With the introduction of gateway intents, the `fetchAllMembers` Client option would often fail and causes major delays in ready states or even cause timeout errors. As its purpose is contradictory to Discord's intentions to reduce scraping of user and presence data, it has been removed.
+
+#### ClientOptions#messageEditHistoryMaxSize
+
+The `ClientOptions#messageEditHistoryMaxSize` option has been removed.
+
+To reduce on caching, discord.js will no longer store an edit history. This will need to be manually implemented if required.
 ### Guild
 
 #### Guild#member
@@ -81,32 +110,74 @@ The `Guild#voice` getter has been removed.
 + guild.me.voice
 ```
 
-### GuildMember / GuildMemberManager
+### GuildMember 
 
-#### GuildMember#ban / GuildMemberManager#ban
+#### GuildMember#ban
 
-`GuildMember#ban()` and `GuildMemberManager#ban` will throw a TypeError when a string is provided instead of an options object.
+`GuildMember#ban()` will throw a TypeError when a string is provided instead of an options object.
 
 ```diff
 - member.ban('reason')
 + member.ban({ reason: 'reason' })
+```
 
+### GuildMember#hasPermission
+
+This shortcut method has been removed.
+
+```diff
+- member.hasPermission(Permission.FLAGS.SEND_MESSAGES);
++ member.permissions.has(Permission.FLAGS.SEND_MESSAGES);
+```
+
+### GuildMemberManager
+
+#### GuildMemberManager#ban
+
+``GuildMemberManager#ban` will throw a TypeError when a string is provided instead of an options object.
+
+```diff
 - guild.members.ban('123456789012345678', 'reason')
 + guild.members.ban('123456789012345678', { reason: 'reason' })
 ```
 
 ### Message / MessageManager
 
-#### Message#delete / MessageManager#delete
+#### Message#delete
 
-`Message.delete()` and `MessageManager.delete()` no longer accept any options, requiring a timed-delete to be performed manually.
+`Message.delete()` no longer accepts any options, requiring a timed-delete to be performed manually.
 
 ```diff
 - message.delete({ timeout: 10000 });
 + client.setTimeout(() => message.delete(), 10000);
 ```
 
+`reason` is no longer a parameter as it is not used by the API.
+
+#### MessageManager#delete
+
+`MessageManager.delete()` no longer accepts any additional options, requiring a timed-delete to be performed manually.
+
+```diff
+- channel.messages.delete(''123456789012345678', { timeout: 10000 });
++ client.setTimeout(() => channel.messages.delete('123456789012345678'), 10000);
+```
+
+`reason` is no longer a parameter as it is not used by the API.
+
+
 ### RoleManager
+
+#### RoleManager#create
+
+The options passed to `RoleManager#create` no longer need to be nested in a `data` object.
+
+Additionally `reason` is now part of the options, not a second parameter
+
+```diff
+- guild.roles.create({ data: { name: "New role" } }, "Creating new role");
++ guild.roles.create({ name: "New role", reason: "Creating new role" })
+```
 
 #### RoleManager#fetch
 
@@ -130,6 +201,14 @@ The deprecated UserFlags `DISCORD_PARTNER` and `VERIFIED_DEVELOPER` / `EARLY_VER
 + user.flags.has(UserFlags.FLAGS.EARLY_VERIFIED_BOT_DEVELOPER)
 ```
 
+### Util
+
+#### Util#convertToBuffer
+
+#### Util#str2ab
+
+Both removed in favour of Node built-in Buffer methods.
+
 ## Additions
 
 ### ActivityTypes
@@ -142,6 +221,19 @@ New activity type `COMPETING` added.
 
 The new `Channel#isText()` getter provides an easy way for TypeScript developers to determine if a channel is Text-Based ("dm", "text", "news")
 
+### CollectorOptions
+
+#### CollectorOptions#filter
+
+Constructing a Collector without providing a filter function will now throw a meaningful `TypeError`.
+
+### Guild
+#### Guild#emojis
+
+The `GuildEmojiManager` now extends `BaseGuildEmojiManager`.
+
+In addition to the existing methods, it now supports `GuildEmojiManager#fetch`.
+
 ### GuildManager
 
 #### GuildManager#create
@@ -153,6 +245,14 @@ The `GuildManager#create` method now supports specifying the AFK and system chan
 #### GuildEmojiManager#fetch
 
 API support for the `GET /guilds/{guild.id}/emojis` endpoint.
+
+### GuildMember
+
+#### GuildMember#pending
+
+The `GuildMember#pending` boolean property flags whether a member has passed the Guild's membership gate.
+
+The flag is `true` prior to accepting, and fires `guildMemberUpdate` when the member accepts.
 
 ### GuildMemberManager
 
@@ -170,9 +270,29 @@ Approximately equivalent to `GuildMember#edit(data, reason)` but does not resolv
 
 Equivalent to `GuildMember#kick(reason)`
 
+### GuildMemberRoleManager
+
+#### GuildMemberRoleManager#botRole
+
+Gets the managed role this member created when joining the guild, if any.
+
+`member.roles.botRole`
+
+#### GuildMemberRoleManager#premiumSubscriberRole
+
+Gets the premium subscriber (booster) role if present on the member.
+
+`member.roles.premiumSubscriberRole`
+
 ### GuildTemplate
 
 API support for [Server Templates](https://discord.com/developers/docs/resources/template)
+
+### Integration
+
+#### Integration#roles
+
+Provides a Collection of Roles managed by the integration.
 
 ### Message
 
@@ -182,7 +302,11 @@ Permission helper to check if a Message can be crossposted
 
 #### Message#react
 
-Adds support for `<:name:id>` and `<a:name:id>` as valid inputs to `Message#react()`
+Added support for `<:name:id>` and `<a:name:id>` as valid inputs to `Message#react()`
+
+#### Message#referencedMessage
+
+Gets the message this message references, if this message is a crosspost/reply/pin-add and the referenced message is cached.
 
 ### MessageManager
 
@@ -222,4 +346,40 @@ Approximately equivalent to `message.unpin(options)` but does not resolve to a M
 
 #### NewsChannel#addFollower
 
-`NewsChannel#addFollower` provides API support for bots to follow announcements in other channels
+`channel.addFollower(channel)`
+
+Provides API support for bots to follow announcements in other channels
+
+#### NewsChannel#setType
+
+`channel.setType("text")`
+
+Allows conversion between NewsChannel and TextChannel
+
+### Role
+
+#### Role#tags
+
+Tags for roles belonging to bots, integrations, or premium subscribers.
+
+### RoleManager
+
+#### RoleManager#botRoleFor
+
+`guild.roles.botRoleFor(user)`
+
+Get the managed role a user created when joining the guild, if any.
+
+#### RoleManager#premiumSubscriberRole
+
+`guild.roles.premiumSubscriberRole`
+
+Gets the premium subscriber (booster) role for the Guild, if any
+
+### TextChannel
+
+#### TextChannel#setType
+
+`channel.setType("news")`
+
+Allows conversion between TextChannel and NewsChannel
