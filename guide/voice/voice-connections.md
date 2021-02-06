@@ -1,6 +1,12 @@
 # Voice Connections
 
-Voice connections represent a connection to a voice channel in a Guild. You can only connect to one voice channel in a Guild at a time. They can be created like so:
+Voice connections represent a connection to a voice channel in a Guild. You can only connect to one voice channel in a Guild at a time.
+
+## Cheat sheet
+
+### Creation
+
+Creating a voice connection is simple:
 
 ```ts
 import { joinVoiceChannel } from '@discordjs/voice';
@@ -8,9 +14,50 @@ import { joinVoiceChannel } from '@discordjs/voice';
 const connection = joinVoiceChannel(myVoiceChannel);
 ```
 
-## Life Cycle
+If you try to call `joinVoiceChannel` on another channel in the same guild in which there is already an active voice connection, the existing voice connection switches over to the new channel.
 
-Voice connections have their own life cycle, with 5 distinct states:
+### Access
+
+You can access created connections elsewhere in your code without having to track the connections yourself. It is best practice to not track the voice connections yourself as you may forget to clean them up once they are destroyed, leading to memory leaks.
+
+```ts
+import { getVoiceConnection } from '@discordjs/voice';
+
+const connection = getVoiceConnection(myVoiceChannel.guild.id);
+```
+
+### Deletion
+
+You can destroy a voice connection when you no longer require it. This will disconnect its connection if it is still active, stop audio playing to it, and will remove it from the internal tracker for voice connections.
+
+It's important that you destroy voice connections when they are no longer required so that your bot leaves the voice channel, and to prevent memory leaks.
+
+```ts
+connection.destroy();
+```
+
+### Playing audio
+
+You can subscribe voice connections to audio players as soon as they're created. Audio players will try to stream audio to all their subscribed voice connections that are in the Ready state. Destroyed voice connections cannot be subscribed to audio players.
+
+```ts
+// Subscribe the connection to the audio player (will play audio on the voice connection)
+const subscription = connection.subscribe(audioPlayer);
+
+// subscription could be undefined if the connection is destroyed!
+if (subscription) {
+	// Unsubscribe after 5 seconds (stop playing audio on the voice connection)
+	setTimeout(() => subscription.unsubscribe(), 5_000);
+}
+```
+
+::: warning
+**Voice connections can be subscribed to one audio player at most.** If you try to subscribe to another audio player while already subscribed to one, the current audio player is unsubscribed and replaced with the new one.
+:::
+
+## Life cycle
+
+Voice connections have their own life cycle, with 5 distinct states. You can follow the methods discussed in the [life cycles](./life-cycles) section to subscribe to changes to voice connections.
 
 - **Signalling** - this is the initial state of a voice connection. The connection will be in this state when it is requesting permission to join a voice channel.
 
@@ -22,40 +69,14 @@ Voice connections have their own life cycle, with 5 distinct states:
 
 - **Destroyed** - this is the state a voice connection enters when it has been manually been destroyed. This will prevent it from accidentally being reused, and it will be removed from an in-memory tracker of voice connections.
 
-It's important that you listen to the state changes of a voice connection so that you can track where it is in the life cycle, and what action needs to be taken.
-
-### Subscribing to specific state changes
-
-The first method of tracking this information is by subscribing to specific states. Below is an example of how to subscribe to a voice connection entering the Ready state:
-
 ```ts
 import { VoiceConnectionStatus } from '@discordjs/voice';
 
-connection.on(VoiceConnectionStatus.Ready, (oldState, newState) => {
-	console.log('Connection is in the Ready state!');
+connection.on(VoiceConnectionStatus.Ready, () => {
+	console.log('The connection has entered the Ready state - ready to play audio!');
 });
 ```
 
-You will notice that you're given access to both the previous and the new state of a voice connection in the event handler – this is to inform your decision-making on what action to take on certain state transitions.
+## Handling disconnects
 
-### Subscribing to all state changes
-
-The second method of tracking state changes is to subscribe to the `stateChange` event. This would be useful if you want to track many different state transitions.
-
-```ts
-import { VoiceConnectionStatus } from '@discordjs/voice';
-
-connection.on('stateChange', (oldState, newState) => {
-	if (newState.status === VoiceConnectionStatus.Ready) {
-		console.log('Connection is in the Ready state!');
-	}
-});
-```
-
-:::tip
-A common problem you may across is wanting to set a time limit for state transitions. For example, you may want to allow a voice connection 30 seconds to successfully join a voice channel and transition to the Ready state before giving up and destroying it.
-
-Time limits can be useful to make sure you're not waiting indefinitely for transitions that may never occur.
-
-Take a look at [our examples](https://github.com/discordjs/voice/tree/main/examples) to see how we've implemented this.
-:::
+todo

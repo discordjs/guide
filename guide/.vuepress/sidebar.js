@@ -49,7 +49,13 @@ module.exports = {
 			title: 'Getting Started',
 			children: [
 				'/voice/',
-				'/voice/voice-connections'
+			],
+		},
+		{
+			title: 'Structure',
+			children: [
+				'/voice/life-cycles',
+				'/voice/voice-connections',
 			],
 		},
 	],
