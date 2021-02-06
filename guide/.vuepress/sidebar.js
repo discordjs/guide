@@ -37,6 +37,14 @@ module.exports = {
 			],
 		},
 	],
+	'/voice/': [
+		{
+			title: 'Home',
+			children: [
+				'/',
+			],
+		},
+	],
 	'/': [
 		{
 			title: 'Home',
@@ -115,17 +123,6 @@ module.exports = {
 			title: 'OAuth2',
 			children: [
 				'/oauth2/',
-			],
-		},
-		{
-			title: 'Voice',
-			children: [
-				'/voice/',
-				'/voice/understanding-voice',
-				'/voice/the-basics',
-				'/voice/voice-broadcasts',
-				'/voice/optimisation-and-troubleshooting',
-				'/voice/receiving-audio',
 			],
 		},
 		{

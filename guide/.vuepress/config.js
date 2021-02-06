@@ -37,6 +37,10 @@ const config = {
 				link: '/commando/',
 			},
 			{
+				text: 'Voice',
+				link: '/voice/',
+			},
+			{
 				text: 'Discord.js Documentation',
 				link: 'https://discord.js.org/#/docs/main/stable/general/welcome',
 			},
