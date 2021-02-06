@@ -45,6 +45,12 @@ module.exports = {
 				'/requesting-more-content',
 			],
 		},
+		{
+			title: 'Getting Started',
+			children: [
+				'/voice/',
+			],
+		},
 	],
 	'/': [
 		{
