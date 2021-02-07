@@ -241,7 +241,7 @@ This error throws when the bot attempts to send a DM message to a user, and it i
 - The user has blocked the bot.
 - The user has disabled dms in the privacy settings.
 
-In the case of the last two reasons, the error is not preventable, as the Discord API does not provide a way to check if you can send a user a dm until you attempt to send one. The best way to handle this error is to add a `.catch()` where you try to dm the user and either ignore the rejected promise or do what you want because of it.
+In the case of the last two reasons, the error is not preventable, as the Discord API does not provide a way to check if you can send a user a dm until you attempt to send one. The best way to handle this error is to add a `.catch()` where you try to dm the user and either ignore the rejected Promise or do what you want because of it.
 
 ## Common miscellaneous errors
 

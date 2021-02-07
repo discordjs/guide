@@ -2097,7 +2097,7 @@ ClientApplication.coverImage({ width: 1024, height: 1024 });
 
 #### ClientApplication#fetchAssets
 
-`ClientApplication.fetchAssets()` returns a promise that resolves into an array of `ClientAsset` objects, each of which contains `id`, `name` and `type` keys.
+`ClientApplication.fetchAssets()` returns a Promise that resolves into an array of `ClientAsset` objects, each of which contains `id`, `name` and `type` keys.
 
 ### ClientOptions
 
@@ -2324,11 +2324,11 @@ The new `remove` event emits when a collected reaction is un-reacted if the `dis
 
 #### Shard#_evals
 
-The private property `_evals` has been added to map ongoing promises for calls to `shard.eval()`.
+The private property `_evals` has been added to map ongoing Promises for calls to `shard.eval()`.
 
 #### Shard#_fetches
 
-The private property `_fetches` has been added to map ongoing promises for calls to `shard.fetchClientValues()`.
+The private property `_fetches` has been added to map ongoing Promises for calls to `shard.fetchClientValues()`.
 
 #### Shard#worker
 

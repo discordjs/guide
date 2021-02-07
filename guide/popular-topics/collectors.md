@@ -40,7 +40,7 @@ Those options you pass as the second argument in `.createMessageCollector()`. Th
 
 ### Await messages
 
-Using `.awaitMessages()` can be easier if you understand promises, and it allows you to have cleaner code overall. It is essentially identical to `.createMessageCollector()`, except promisified. However, the drawback of using this method is that you cannot do things before the promise is resolved or rejected, either by an error or completion. However, it should do for most purposes, such as awaiting the correct response in a quiz. Instead of taking their example, let's set up a basic quiz command using the `.awaitMessages()` feature.
+Using `.awaitMessages()` can be easier if you understand Promises, and it allows you to have cleaner code overall. It is essentially identical to `.createMessageCollector()`, except promisified. However, the drawback of using this method is that you cannot do things before the Promise is resolved or rejected, either by an error or completion. However, it should do for most purposes, such as awaiting the correct response in a quiz. Instead of taking their example, let's set up a basic quiz command using the `.awaitMessages()` feature.
 
 ::: tip
 You can read the docs for the `.awaitMessages()` method <branch version="11.x" inline>[here](https://discord.js.org/#/docs/main/v11/class/TextChannel?scrollTo=awaitMessages)</branch><branch version="12.x" inline>[here](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=awaitMessages)</branch>.
@@ -112,7 +112,7 @@ If you don't understand how `.some()` works, you can read about it in more detai
 
 In this filter, you iterate through the answers to find what you want. You would like to ignore the case because simple typos can happen, so you convert each answer to its lowercase form and check if it's equal to the response in lowercase form as well. In the options section, you only want to allow one answer to pass through, hence the <branch version="11.x" inline>`maxMatches: 1`</branch><branch version="12.x" inline>`max: 1`</branch> setting.
 
-The filter looks for messages that match one of the answers in our array of possible answers to pass through the collector. The options (the second parameter) specifies that only a maximum of 1 message can go through the filter successfully before the promise successfully resolves. The errors section specifies that time will cause it to error out, which will cause the promise to reject if one correct answer is not received within the time limit of 1 minute. As you can see, there is no `collect` event, so you are limited in that regard.
+The filter looks for messages that match one of the answers in our array of possible answers to pass through the collector. The options (the second parameter) specifies that only a maximum of 1 message can go through the filter successfully before the Promise successfully resolves. The errors section specifies that time will cause it to error out, which will cause the Promise to reject if one correct answer is not received within the time limit of 1 minute. As you can see, there is no `collect` event, so you are limited in that regard.
 
 ## Reaction collectors
 
@@ -165,7 +165,7 @@ collector.on('end', collected => {
 
 ### Await reactions
 
-As before, these work almost the same as a reaction collector, except it is promise-based. The same differences apply as with channel collectors.
+As before, these work almost the same as a reaction collector, except it is Promise-based. The same differences apply as with channel collectors.
 
 ::: tip
 You can read the docs for the `.awaitReactions()` method <branch version="11.x" inline>[here](https://discord.js.org/#/docs/main/v11/class/Message?scrollTo=awaitReactions)</branch><branch version="12.x" inline>[here](https://discord.js.org/#/docs/main/stable/class/Message?scrollTo=awaitReactions)</branch>.

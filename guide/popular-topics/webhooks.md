@@ -24,16 +24,16 @@ If you would like to get the webhook object that sent the message, you can use <
 ## Fetching webhooks
 
 ::: tip
-Webhook fetching will always make use of collections and promises. If you do not understand either concept, revise them, and then come back to this section.  You can read about collections [here](/additional-info/collections.md), and promises [here](/additional-info/async-await.md) and [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
+Webhook fetching will always make use of collections and Promises. If you do not understand either concept, revise them, and then come back to this section.  You can read about collections [here](/additional-info/collections.md), and Promises [here](/additional-info/async-await.md) and [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
 :::
 
 ### Fetching all webhooks of a guild
 
-If you would like to get all webhooks of a guild you can use <branch version="11.x" inline>[`Guild#fetchWebhooks()`](https://discord.js.org/#/docs/main/v11/class/Guild?scrollTo=fetchWebhooks)</branch><branch version="12.x" inline>[`Guild#fetchWebhooks()`](https://discord.js.org/#/docs/main/stable/class/Guild?scrollTo=fetchWebhooks)</branch>. This will return a promise which will resolve into a Collection of `Webhook`s.
+If you would like to get all webhooks of a guild you can use <branch version="11.x" inline>[`Guild#fetchWebhooks()`](https://discord.js.org/#/docs/main/v11/class/Guild?scrollTo=fetchWebhooks)</branch><branch version="12.x" inline>[`Guild#fetchWebhooks()`](https://discord.js.org/#/docs/main/stable/class/Guild?scrollTo=fetchWebhooks)</branch>. This will return a Promise which will resolve into a Collection of `Webhook`s.
 
 ### Fetching webhooks of a channel
 
-Webhooks belonging to a channel can be fetched using <branch version="11.x" inline>[`TextChannel#fetchWebhooks()`](https://discord.js.org/#/docs/main/v11/class/TextChannel?scrollTo=fetchWebhooks)</branch><branch version="12.x" inline>[`TextChannel#fetchWebhooks()`](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=fetchWebhooks)</branch>. This will return a promise which will resolve into a Collection of `Webhook`s. A collection will be returned even if the channel contains a single webhook. If you are certain the channel contains a single webhook, you can use <branch version="11.x" inline>[`Collection#first()`](https://discord.js.org/#/docs/main/v11/class/Collection?scrollTo=first)</branch><branch version="12.x" inline>[`Collection#first()`](https://discord.js.org/#/docs/collection/stable/class/Collection?scrollTo=first)</branch> on the Collection to get the webhook.
+Webhooks belonging to a channel can be fetched using <branch version="11.x" inline>[`TextChannel#fetchWebhooks()`](https://discord.js.org/#/docs/main/v11/class/TextChannel?scrollTo=fetchWebhooks)</branch><branch version="12.x" inline>[`TextChannel#fetchWebhooks()`](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=fetchWebhooks)</branch>. This will return a Promise which will resolve into a Collection of `Webhook`s. A collection will be returned even if the channel contains a single webhook. If you are certain the channel contains a single webhook, you can use <branch version="11.x" inline>[`Collection#first()`](https://discord.js.org/#/docs/main/v11/class/Collection?scrollTo=first)</branch><branch version="12.x" inline>[`Collection#first()`](https://discord.js.org/#/docs/collection/stable/class/Collection?scrollTo=first)</branch> on the Collection to get the webhook.
 
 ### Fetching a single webhook
 
