@@ -37,17 +37,17 @@ For this section, we'll be using the `args-info.js` command as an example. If yo
 
 ```js
 module.exports = {
-    name: 'args-info',
-    description: 'Information about the arguments provided.',
-    execute(message, args) {
-        if (!args.length) {
-            return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
-        } else if (args[0] === 'foo') {
-            return message.channel.send('bar');
-        }
+	name: 'args-info',
+	description: 'Information about the arguments provided.',
+	execute(message, args) {
+		if (!args.length) {
+			return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
+		} else if (args[0] === 'foo') {
+			return message.channel.send('bar');
+		}
 
-        message.channel.send(`Arguments: ${args}\nArguments length: ${args.length}`);
-    },
+		message.channel.send(`Arguments: ${args}\nArguments length: ${args.length}`);
+	},
 };
 ```
 
@@ -131,7 +131,7 @@ And in your main file, above the args checking line, add this in:
 
 ```js
 if (command.guildOnly && message.channel.type === 'dm') {
-    return message.reply('I can\'t execute that command inside DMs!');
+	return message.reply('I can\'t execute that command inside DMs!');
 }
 ```
 
@@ -174,7 +174,7 @@ Again in your main file, directly above the `try/catch`, add in the following:
 
 ```js
 if (!cooldowns.has(command.name)) {
-    cooldowns.set(command.name, new Discord.Collection());
+	cooldowns.set(command.name, new Discord.Collection());
 }
 
 const now = Date.now();
@@ -182,7 +182,7 @@ const timestamps = cooldowns.get(command.name);
 const cooldownAmount = (command.cooldown || 3) * 1000;
 
 if (timestamps.has(message.author.id)) {
-    // ...
+	// ...
 }
 ```
 
@@ -198,12 +198,12 @@ Continuing with your current setup, this is the complete `if` statement:
 
 ```js
 if (timestamps.has(message.author.id)) {
-    const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+	const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
 
-    if (now < expirationTime) {
-        const timeLeft = (expirationTime - now) / 1000;
-        return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
-    }
+	if (now < expirationTime) {
+		const timeLeft = (expirationTime - now) / 1000;
+		return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
+	}
 }
 ```
 
@@ -273,14 +273,14 @@ If you don't use a framework or command handler for your projects, you'll have a
 
 ```js
 module.exports = {
-    name: 'help',
-    description: 'List all of my commands or info about a specific command.',
-    aliases: ['commands'],
-    usage: '[command name]',
-    cooldown: 5,
-    execute(message, args) {
-        // ...
-    },
+	name: 'help',
+	description: 'List all of my commands or info about a specific command.',
+	aliases: ['commands'],
+	usage: '[command name]',
+	cooldown: 5,
+	execute(message, args) {
+		// ...
+	},
 };
 ```
 
@@ -297,7 +297,7 @@ const data = [];
 const { commands } = message.client;
 
 if (!args.length) {
-    // ...
+	// ...
 }
 
 // ...
@@ -313,14 +313,14 @@ data.push(commands.map(command => command.name).join(', '));
 data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
 
 return message.author.send(data, { split: true })
-    .then(() => {
-        if (message.channel.type === 'dm') return;
-        message.reply('I\'ve sent you a DM with all my commands!');
-    })
-    .catch(error => {
-        console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
-        message.reply('it seems like I can\'t DM you! Do you have DMs disabled?');
-    });
+	.then(() => {
+		if (message.channel.type === 'dm') return;
+		message.reply('I\'ve sent you a DM with all my commands!');
+	})
+	.catch(error => {
+		console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
+		message.reply('it seems like I can\'t DM you! Do you have DMs disabled?');
+	});
 ```
 
 There's nothing complicated here; all you do is append some strings, `.map()` over the `commands` Collection, and add a string to let the user know how to trigger information about a specific command.
@@ -342,7 +342,7 @@ const name = args[0].toLowerCase();
 const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
 
 if (!command) {
-    return message.reply('that\'s not a valid command!');
+	return message.reply('that\'s not a valid command!');
 }
 
 data.push(`**Name:** ${command.name}`);
@@ -394,11 +394,11 @@ Create a new command file and paste in the usual format:
 
 ```js
 module.exports = {
-    name: 'reload',
-    description: 'Reloads a command',
-    execute(message, args) {
-        // ...
-    },
+	name: 'reload',
+	description: 'Reloads a command',
+	execute(message, args) {
+		// ...
+	},
 };
 ```
 
@@ -428,11 +428,11 @@ After removing the command from the cache, all you have to do is require the fil
 
 ```js
 try {
-    const newCommand = require(`./${command.name}.js`);
-    message.client.commands.set(newCommand.name, newCommand);
+	const newCommand = require(`./${command.name}.js`);
+	message.client.commands.set(newCommand.name, newCommand);
 } catch (error) {
-    console.error(error);
-    message.channel.send(`There was an error while reloading a command \`${command.name}\`:\n\`${error.message}\``);
+	console.error(error);
+	message.channel.send(`There was an error while reloading a command \`${command.name}\`:\n\`${error.message}\``);
 }
 ```
 
