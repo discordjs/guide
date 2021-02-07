@@ -1,9 +1,9 @@
 # Working with Audit Logs
 
 ## Some quick background
-Audit logs are an excellent moderation tool offered by discord to know what happened in a server, and usually by whom. At the moment, these are the only method to help you determine who the executor of a mod action was on the server. Relevant events such as `messageDelete` and `guildMemberLeave` unfortunately do not provide info on the moderation actions having triggered them, making the fetch for audit logs a necessity.
+Audit logs are an excellent moderation tool offered by Discord to know what happened in a server, and usually by whom. At the moment, these are the only method to help you determine who the executor of a mod action was on the server. Relevant events such as `messageDelete` and `guildMemberLeave` unfortunately do not provide info on the moderation actions having triggered them, making the fetch for audit logs a necessity.
 
-There are quite a few cases where you may use audit logs. This guide will limit itself to the most common use cases. Feel free to consult the [relevant discord api page](https://discord.com/developers/docs/resources/audit-log) for more information.
+There are quite a few cases where you may use audit logs. This guide will limit itself to the most common use cases. Feel free to consult the [relevant Discord API page](https://discord.com/developers/docs/resources/audit-log) for more information.
 
 ::: warning
 It is crucial that you first understand two details about audit logs:
@@ -16,10 +16,10 @@ Let us start by glancing at the `fetchAuditLogs` method and how we want to work 
 The following examples will explore a straightforward case for some auditLog types. Some basic error handling is performed, but these code segments are by no means foolproof and are meant to teach you how fetching audit logs work. You will most likely need to expand on the examples based on your own goals for a rigorous system.
 
 ## Who deleted a message?
-Let us dive right into it with probably the most common use of audit logs, understanding who deleted any given message in a discord server.
+Let us dive right into it with probably the most common use of audit logs, understanding who deleted any given message in a Discord server.
 
 ::: warning
-At the time of writing, discord does not emit an audit log if the person who deleted the message is a bot deleting a single message or is the author of the message itself.
+At the time of writing, Discord does not emit an audit log if the person who deleted the message is a bot deleting a single message or is the author of the message itself.
 :::
 
 For now, we will look only at the `messageDelete` event. Let us start with defining a basic trial code for this task.

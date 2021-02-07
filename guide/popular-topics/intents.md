@@ -2,7 +2,7 @@
 :::danger
 The high volume of requests regarding recent API changes has made a change necessary here. This is a makeshift placeholder based around current knowledge until we can invest resources to rewrite the section on intents properly.
 
-We are sorry for any confusion or inconvenience our previous explanations might have caused developers and discord staff! We are doing our best to update information as it becomes available.
+We are sorry for any confusion or inconvenience our previous explanations might have caused developers and Discord staff! We are doing our best to update information as it becomes available.
 :::
 
 :::warning
@@ -22,7 +22,7 @@ We are sorry for any confusion or inconvenience our previous explanations might 
 • You have `GUILD_MEMBERS`: consider fetching members periodically, for the initial operation on boot you can consider using the client option `fetchAllMembers` (note: this will heavily increase memory usage)  </br> </br>
 
 **❯ A) Your bot is verified**  </br>
-• You need to reach out to discord support `R3` in order for intents to be enabled  </br>
+• You need to reach out to Discord support `R3` in order for intents to be enabled  </br>
 • Please include a use case sample as to why you need that intent into your request  </br>
 • Read `R1`, it explains the whole procedure and requirements  </br> </br>
 
@@ -67,7 +67,7 @@ Intents are not available in version 11; please update to version 12 of the libr
 
 You can choose which intents you'd like to receive as client options when instantiating your bot client.
 
-A list of all available gateway intents the library supports can be found at [the discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Intents?scrollTo=s-FLAGS). The events included in the respective intents on the [discord API documentation](https://discord.com/developers/docs/topics/gateway#list-of-intents).
+A list of all available gateway intents the library supports can be found at [the discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Intents?scrollTo=s-FLAGS). The events included in the respective intents on the [Discord API documentation](https://discord.com/developers/docs/topics/gateway#list-of-intents).
 
 :::tip
 `GUILD_PRESENCES` is required to receive the initial GuildMember data when your bot connects to Discord. If you do not supply it, your member caches will start empty. `guildMemberUpdate` events will not be processed, regardless of if the `GUILD_MEMBER` partial is enabled, unless the `GuildMember` has been cached by other means such as by sending a message, being mentioned in one, or the `guildMemberAdd` event. Before you disable intents, think about what your bot does and how not receiving the listed events might prevent it from doing this. Version 12 of discord.js may not function as expected when specific intents are not provided.
@@ -118,9 +118,9 @@ At the time of writing this article, privileged intents are `GUILD_PRESENCES` an
 
 You can enable privileged gateway intents in the [Discord Developer Portal](https://discord.com/developers/applications) under "Privileged Gateway Intents" in the "Bot" section.
 
-Note that access to these special intents needs to be requested during the [verification process](https://support.discord.com/hc/en-us/articles/360040720412) discord requires for bots in 100 or more guilds.
+Note that access to these special intents needs to be requested during the [verification process](https://support.discord.com/hc/en-us/articles/360040720412) Discord requires for bots in 100 or more guilds.
 
-Should you receive an error prefixed with `[DISALLOWED_INTENTS]`, please review your settings for all privileged intents you use. This topic's official documentation can be found on the [discord API documentation](https://discord.com/developers/docs/topics/gateway#privileged-intents).
+Should you receive an error prefixed with `[DISALLOWED_INTENTS]`, please review your settings for all privileged intents you use. This topic's official documentation can be found on the [Discord API documentation](https://discord.com/developers/docs/topics/gateway#privileged-intents).
 
 ## More on bit fields
 
