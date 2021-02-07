@@ -56,6 +56,7 @@ module.exports = {
 			children: [
 				'/voice/life-cycles',
 				'/voice/voice-connections',
+				'/voice/audio-player',
 			],
 		},
 	],
