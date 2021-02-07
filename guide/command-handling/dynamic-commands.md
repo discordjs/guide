@@ -17,7 +17,7 @@ if (command === 'ping') {
 }
 ```
 
-You `.get()` the ping command and call its `.execute()` method while passing in the `message` and `args` variables as the method arguments. Instead of putting your ping command code directly in the if statement, you can call it directly like that instead. This version is longer than what you had before for your ping command, but commands usually aren't that short.
+You `.get()` the ping command and call its `.execute()` method while passing in the `message` and `args` variables as the method arguments. Instead of putting your ping command code in the if statement, you can call it directly like that instead. This version is longer than what you had before for your ping command, but commands usually aren't that short.
 
 So, if you wanted to (assuming that you've copied & pasted all of your commands into their own files by now), this could be your entire message event:
 

@@ -37,17 +37,17 @@ For this section, we'll be using the `args-info.js` command as an example. If yo
 
 ```js
 module.exports = {
-	name: 'args-info',
-	description: 'Information about the arguments provided.',
-	execute(message, args) {
-		if (!args.length) {
-			return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
-		} else if (args[0] === 'foo') {
-			return message.channel.send('bar');
-		}
+    name: 'args-info',
+    description: 'Information about the arguments provided.',
+    execute(message, args) {
+        if (!args.length) {
+            return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
+        } else if (args[0] === 'foo') {
+            return message.channel.send('bar');
+        }
 
-		message.channel.send(`Arguments: ${args}\nArguments length: ${args.length}`);
-	},
+        message.channel.send(`Arguments: ${args}\nArguments length: ${args.length}`);
+    },
 };
 ```
 
@@ -87,7 +87,7 @@ Now, whenever you set `args` to `true` in one of your command files, it'll perfo
 
 It's good UX (user experience) to let the user know that a command requires arguments when they don't provide any (it also prevents your code from breaking). Letting them know what kind of arguments are expected is even better.
 
-Here's a simple implementation of such a thing. For this example, pretend you have a `!role` command, where the first argument is the user to give the role, and the second argument is the name of the role to give them.
+Here's a simple implementation of such a thing. For this example, pretend you have a `!role` command, where the first argument is the user to give the role, and the second argument is the name of the role.
 
 In your `role.js` file:
 
@@ -131,7 +131,7 @@ And in your main file, above the args checking line, add this in:
 
 ```js
 if (command.guildOnly && message.channel.type === 'dm') {
-	return message.reply('I can\'t execute that command inside DMs!');
+    return message.reply('I can\'t execute that command inside DMs!');
 }
 ```
 
@@ -174,7 +174,7 @@ Again in your main file, directly above the `try/catch`, add in the following:
 
 ```js
 if (!cooldowns.has(command.name)) {
-	cooldowns.set(command.name, new Discord.Collection());
+    cooldowns.set(command.name, new Discord.Collection());
 }
 
 const now = Date.now();
@@ -182,7 +182,7 @@ const timestamps = cooldowns.get(command.name);
 const cooldownAmount = (command.cooldown || 3) * 1000;
 
 if (timestamps.has(message.author.id)) {
-	// ...
+    // ...
 }
 ```
 
@@ -198,18 +198,18 @@ Continuing with your current setup, this is the complete `if` statement:
 
 ```js
 if (timestamps.has(message.author.id)) {
-	const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+    const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
 
-	if (now < expirationTime) {
-		const timeLeft = (expirationTime - now) / 1000;
-		return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
-	}
+    if (now < expirationTime) {
+        const timeLeft = (expirationTime - now) / 1000;
+        return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
+    }
 }
 ```
 
 Since the `timestamps` Collection has the author's ID in it as a key, you `.get()` it and then sum it up with the `cooldownAmount` variable to get the correct expiration timestamp. You then check to see if it's expired or not.
 
-If the `expirationTime` has not passed, you return a message letting the user know how much time is left until they can use that command again. As you will see shortly, the author ID should be deleted from the `timestamps` Collection upon expiration, but you should take this extra precaution to avoid potential UX problems.
+If the `expirationTime` has not passed, you return a message letting the user know how much time is left until they can use that command again. As you will see shortly,  the `timestamps` Collection should delete the author ID upon expiration, but you should take this extra precaution to avoid potential UX problems.
 
 Finally, if the `timestamps` Collection doesn't have the message author's ID (or if the author ID did not get deleted as planned), `.set()` the author ID with the current timestamp and create a `setTimeout()` to automatically delete it after the cooldown period has passed:
 
@@ -222,7 +222,7 @@ setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
 It's a good idea to allow users to trigger your commands in more than one way; it gives them the freedom of choosing what to send and may even make some command names easier to remember. Luckily, setting up aliases for your commands is quite simple.
 
-For this bit of the guide, we'll be using the avatar command as a target. Around Discord, your profile picture is referred to as an "avatar"; however, not everyone calls it that. Some people prefer "icon" or "pfp" (profile picture). With that in mind, let's update the avatar command to allow all 3 of those triggers.
+For this bit of the guide, we'll be using the avatar command as a target. Discord refers to your profile picture as an "avatar"; however, not everyone calls it that. Some people prefer "icon" or "pfp" (profile picture). With that in mind, let's update the avatar command to allow all 3 of those triggers.
 
 Open your `avatar.js` file and add in the following line:
 
@@ -273,14 +273,14 @@ If you don't use a framework or command handler for your projects, you'll have a
 
 ```js
 module.exports = {
-	name: 'help',
-	description: 'List all of my commands or info about a specific command.',
-	aliases: ['commands'],
-	usage: '[command name]',
-	cooldown: 5,
-	execute(message, args) {
-		// ...
-	},
+    name: 'help',
+    description: 'List all of my commands or info about a specific command.',
+    aliases: ['commands'],
+    usage: '[command name]',
+    cooldown: 5,
+    execute(message, args) {
+        // ...
+    },
 };
 ```
 
@@ -297,7 +297,7 @@ const data = [];
 const { commands } = message.client;
 
 if (!args.length) {
-	// ...
+    // ...
 }
 
 // ...
@@ -313,17 +313,17 @@ data.push(commands.map(command => command.name).join(', '));
 data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
 
 return message.author.send(data, { split: true })
-	.then(() => {
-		if (message.channel.type === 'dm') return;
-		message.reply('I\'ve sent you a DM with all my commands!');
-	})
-	.catch(error => {
-		console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
-		message.reply('it seems like I can\'t DM you! Do you have DMs disabled?');
-	});
+    .then(() => {
+        if (message.channel.type === 'dm') return;
+        message.reply('I\'ve sent you a DM with all my commands!');
+    })
+    .catch(error => {
+        console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
+        message.reply('it seems like I can\'t DM you! Do you have DMs disabled?');
+    });
 ```
 
-There's nothing complicated here; all you do is append some strings, `.map()` over the `commands` Collection, and add an additional string to let the user know how to trigger information about a specific command.
+There's nothing complicated here; all you do is append some strings, `.map()` over the `commands` Collection, and add a string to let the user know how to trigger information about a specific command.
 
 Since help messages can get messy, you'll be DMing it to the message author instead of posting it in the requested channel. However, there is something significant you should consider: the possibility of not being able to DM the user, whether it be that they have DMs disabled on that server or overall, or they have the bot blocked. For that reason, you should `.catch()` it and let them know.
 
@@ -342,7 +342,7 @@ const name = args[0].toLowerCase();
 const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
 
 if (!command) {
-	return message.reply('that\'s not a valid command!');
+    return message.reply('that\'s not a valid command!');
 }
 
 data.push(`**Name:** ${command.name}`);
@@ -388,21 +388,21 @@ If you want to add categories or other information to your commands, you can add
 
 ## Reloading commands
 
-When writing your commands, you may find it tedious to restart your bot every time you want to test even the slightest change in your code. However, if you have a command handler, reloading commands can be done with a single bot command.
+When writing your commands, you may find it tedious to restart your bot every time you want to test even your code's slightest change. However, a single bot command can reload commands if you have a command handler.
 
 Create a new command file and paste in the usual format:
 
 ```js
 module.exports = {
-	name: 'reload',
-	description: 'Reloads a command',
-	execute(message, args) {
-		// ...
-	},
+    name: 'reload',
+    description: 'Reloads a command',
+    execute(message, args) {
+        // ...
+    },
 };
 ```
 
-In this command, you will be using a command name or alias as the only argument. First off, you need to check if the command you want to reload exists. This can be done similarly to getting a command in your main file.  
+In this command, you will be using a command name or alias as the only argument. First off, you need to check if the command you want to reload exists. You can do this check similarly to getting a command in your main file.  
 Note that you can skip the first line if you use the [argument checker](/command-handling/adding-features.html#required-arguments) from above:
 
 ```js
@@ -428,11 +428,11 @@ After removing the command from the cache, all you have to do is require the fil
 
 ```js
 try {
-	const newCommand = require(`./${command.name}.js`);
-	message.client.commands.set(newCommand.name, newCommand);
+    const newCommand = require(`./${command.name}.js`);
+    message.client.commands.set(newCommand.name, newCommand);
 } catch (error) {
-	console.error(error);
-	message.channel.send(`There was an error while reloading a command \`${command.name}\`:\n\`${error.message}\``);
+    console.error(error);
+    message.channel.send(`There was an error while reloading a command \`${command.name}\`:\n\`${error.message}\``);
 }
 ```
 

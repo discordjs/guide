@@ -11,21 +11,21 @@ const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
 
 client.once('ready', () => {
-	console.log('Ready!');
+    console.log('Ready!');
 });
 
 client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const command = args.shift().toLowerCase();
 
-	if (command === 'ping') {
-		message.channel.send('Pong.');
-	} else if (command === 'beep') {
-		message.channel.send('Boop.');
-	}
-	// other commands...
+    if (command === 'ping') {
+        message.channel.send('Pong.');
+    } else if (command === 'beep') {
+        message.channel.send('Boop.');
+    }
+    // other commands...
 });
 
 client.login(token);
@@ -45,11 +45,11 @@ In the same folder, create a new folder and name it `commands`. This is where yo
 
 ```js
 module.exports = {
-	name: 'ping',
-	description: 'Ping!',
-	execute(message, args) {
-		message.channel.send('Pong.');
-	},
+    name: 'ping',
+    description: 'Ping!',
+    execute(message, args) {
+        message.channel.send('Pong.');
+    },
 };
 ```
 
@@ -60,7 +60,7 @@ You can go ahead and do the same for the rest of your commands and put their res
 :::
 
 ::: tip
-If you need to access your client instance from inside one of your command files, you can access it via `message.client`. If you need to access things such as external files or modules, you should re-require them at the top of the file.
+If you need to access your client instance from inside one of your command files, you can access it via `message.client`. If you need to access external files, modules, etc., you should re-require them at the top of the file.
 :::
 
 ## Dynamically reading command files
@@ -94,11 +94,11 @@ The `fs.readdirSync()` method will return an array of all the file names in that
 
 ```js
 for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
+    const command = require(`./commands/${file}`);
 
-	// set a new item in the Collection
-	// with the key as the command name and the value as the exported module
-	client.commands.set(command.name, command);
+    // set a new item in the Collection
+    // with the key as the command name and the value as the exported module
+    client.commands.set(command.name, command);
 }
 ```
 
@@ -115,8 +115,8 @@ client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	client.commands.set(command.name, command);
+    const command = require(`./commands/${file}`);
+    client.commands.set(command.name, command);
 }
 
 // `client.on('...')` events and such below this point

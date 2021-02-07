@@ -2,7 +2,7 @@
 
 REST APIs are extremely popular on the web and allow you to freely grab a site's data if it has an available API over an HTTP connection.
 
-If you've ever seen a music bot that accepts a YouTube query instead of just a video's URL, then you've seen a REST API in action. As a matter of fact, discord.js uses the Discord API. So, you've probably used an API yourself.
+If you've ever seen a music bot that accepts a YouTube query instead of just a video's URL, then you've seen a REST API in action. discord.js uses the Discord API even, so you've probably used an API yourself.
 
 ## Making HTTP requests with Node
 
@@ -28,16 +28,16 @@ const client = new Client();
 const prefix = '!';
 
 client.once('ready', () => {
-	console.log('Ready!');
+    console.log('Ready!');
 });
 
 client.on('message', async message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const command = args.shift().toLowerCase();
 
-	// ...
+    // ...
 });
 
 client.login('your-token-goes-here');
@@ -150,7 +150,7 @@ As explained above we want to check if the API returned any answers for our quer
 
 ```js
 if (!list.length) {
-	return message.channel.send(`No results found for **${args.join(' ')}**.`);
+    return message.channel.send(`No results found for **${args.join(' ')}**.`);
 }
 ```
 
@@ -195,12 +195,12 @@ This is how we'll be structuring the embed:
 const [answer] = list;
 
 const embed = new RichEmbed()
-	.setColor('#EFFF00')
-	.setTitle(answer.word)
-	.setURL(answer.permalink)
-	.addField('Definition', trim(answer.definition, 1024))
-	.addField('Example', trim(answer.example, 1024))
-	.addField('Rating', `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.`);
+    .setColor('#EFFF00')
+    .setTitle(answer.word)
+    .setURL(answer.permalink)
+    .addField('Definition', trim(answer.definition, 1024))
+    .addField('Example', trim(answer.example, 1024))
+    .addField('Rating', `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.`);
 
 message.channel.send(embed);
 ```
@@ -212,14 +212,14 @@ message.channel.send(embed);
 const [answer] = list;
 
 const embed = new MessageEmbed()
-	.setColor('#EFFF00')
-	.setTitle(answer.word)
-	.setURL(answer.permalink)
-	.addFields(
-		{ name: 'Definition', value: trim(answer.definition, 1024) },
-		{ name: 'Example', value: trim(answer.example, 1024) },
-		{ name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` }
-	);
+    .setColor('#EFFF00')
+    .setTitle(answer.word)
+    .setURL(answer.permalink)
+    .addFields(
+        { name: 'Definition', value: trim(answer.definition, 1024) },
+        { name: 'Example', value: trim(answer.example, 1024) },
+        { name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` }
+    );
 
 message.channel.send(embed);
 ```

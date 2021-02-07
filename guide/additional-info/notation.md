@@ -24,9 +24,9 @@ Remember that this notation is not valid JavaScript; it is a shorthand to refer 
 
 Sometimes, the notation is extended, which can help you determine which one the writer meant. For example, `TextChannel#send(content, options)` is definitely a method of `TextChannel`, since it uses function notation. `Client#event:message` is an event since it says it is an event.
 
-The important thing to take away from this notation is that the `#` symbol signifies that the property, method, or event can only be accessed through an instance of the class. Unfortunately, this notation is often abused, e.g., `<Message>#send` (`<Message>` is already an instance, so this makes no sense), or `Util#resolveColor` (`resolveColor` is a static method–you should write it as `Util.resolveColor`), so always refer back to the docs if you are confused.
+The vital thing to take away from this notation is that the `#` symbol signifies that the property, method, or event can only be accessed through an instance of the class. Unfortunately, many abuse this notation, e.g., `<Message>#send`  or `Util#resolveColor`. `<Message>` is already an instance, so this makes no sense, and `resolveColor` is a static method–you should write it as `Util.resolveColor`. Always refer back to the docs if you are confused.
 
-An example of where this notation is used is in the documentation's search feature.
+As an example, the documentation's search feature uses this notation.
 
 ![Docs search](~@/images/search.png)
 
