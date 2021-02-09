@@ -57,6 +57,7 @@ module.exports = {
 				'/voice/life-cycles',
 				'/voice/voice-connections',
 				'/voice/audio-player',
+				'/voice/audio-resources',
 			],
 		},
 	],
