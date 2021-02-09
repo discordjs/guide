@@ -6,7 +6,7 @@
 
 ### Barebones
 
-To add voice functinoality to your Discord.js v12 or v13 bot, install the `@discordjs/voice` module:
+To add voice functionality to your Discord.js v12 or v13 bot, install the `@discordjs/voice` module:
 
 ```bash
 npm install @discordjs/voice
