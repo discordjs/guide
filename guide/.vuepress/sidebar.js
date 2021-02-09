@@ -49,10 +49,11 @@ module.exports = {
 			title: 'Getting Started',
 			children: [
 				'/voice/',
+				'/voice/v12',
 			],
 		},
 		{
-			title: 'Structure',
+			title: 'Library',
 			children: [
 				'/voice/life-cycles',
 				'/voice/voice-connections',
