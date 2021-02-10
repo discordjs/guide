@@ -52,7 +52,7 @@ Altering the state of an audio player from an audio resource error handler is **
 
 A good solution for handling errors from these resources is to simply apply a `noop` handler to them. As long as you are listening for errors from your audio player, this is acceptable. This makes the assumption that you do not care about errors emitted from resources that aren't being consumed by an audio player.
 
-### Optimisations
+### Optimizations
 
 To improve performance, you can consider the following methods. They reduce the computational demand required to play audio, and could help to reduce jitter in the audio stream.
 

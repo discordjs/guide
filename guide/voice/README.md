@@ -72,9 +72,9 @@ FFmpeg
 - **Core Dependencies**
   - These are dependencies that should definitely be available.
 - **Opus Libraries**
-  - If you want to use varying file types or inline volume altering, you will need to have one of these
+  - If you want to use varying file types or inline volume altering, you will need to have one of these.
 - **Encryption Libraries**
-  - You should have at least one encryption library installed to use `@discordjs/voice`
+  - You should have at least one encryption library installed to use `@discordjs/voice`.
 - **FFmpeg**
-  - If you want to use varying file types, you will need to have FFmpeg installed
+  - If you want to use varying file types, you will need to have FFmpeg installed.
   - If `libopus` is enabled, you will be able to make use of performance improvements planned for the future.
