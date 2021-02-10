@@ -96,7 +96,7 @@ The third case can be quite problematic to treat as a disconnect, as the bot cou
 An imperfect workaround to this is to see if the bot has entered a signalling/connecting state shortly after entering the Disconnected state. If it has, then it means that the bot has moved voice channels. Otherwise, we should treat it as a real disconnect and not reconnect.
 
 ```ts
-import { VoiceConnectionStatus } from '@discordjs/voice';
+import { VoiceConnectionStatus, entersState } from '@discordjs/voice';
 
 connection.on(VoiceConnectionStatus.Disconnected, async (oldState, newState) => {
 	try {
