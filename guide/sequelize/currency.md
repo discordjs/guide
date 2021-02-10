@@ -19,7 +19,7 @@ This time we'll have 6 files.
 
 Here is an entity relation diagram of the models we'll be making:
 
-<img src="~@/images/currency_er_diagram.svg" alt="Currency database structure diagram" />
+<img src="./images/currency_er_diagram.svg" alt="Currency database structure diagram" />
 
 `Users` have a `user_id`, and a `balance`. Each `user_id` can have multiple links to the `UserItems` table, and each entry in the table is connected to one of the items in the `CurrencyShop`, which will have a `name` and a `cost` associated with it.
 

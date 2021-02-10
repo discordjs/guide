@@ -70,7 +70,7 @@ To install discord.js, simply run the `npm install discord.js`. This can take a 
 
 ::: warning
 Once the installation is complete, you'll see something like this:
-![npm warnings](~@/images/BbcuyJ6.png)<br/>
+![npm warnings](./images/npm-warnings.png)<br/>
 **This is perfectly normal and means that it worked.** You don't need to install any of the items listed in order to use discord.js; they are 100% optional.
 :::
 

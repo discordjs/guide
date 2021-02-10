@@ -39,7 +39,7 @@ We'll be moving over the commands created in [the previous page](/creating-your-
 
 Before anything, you may want to create a backup of your current bot file. If you've followed along so far, your entire folder structure should look something like this:
 
-![Current folder structure](~@/images/BmS09fY.png)
+![Current folder structure](./images/folder-structure.png)
 
 In the same folder, create a new folder and name it `commands`. This is where you'll store all of your commands, of course. Head over to your `commands` folder, create a new file named `ping.js`, and copy & paste in the following code:
 
