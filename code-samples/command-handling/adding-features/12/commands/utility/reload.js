@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 module.exports = {
 	name: 'reload',
 	description: 'Reloads a command',
@@ -11,10 +13,13 @@ module.exports = {
 			return message.channel.send(`There is no command with name or alias \`${commandName}\`, ${message.author}!`);
 		}
 
-		delete require.cache[require.resolve(`./${command.name}.js`)];
+		const commandFolders = fs.readdirSync('./commands');
+		const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${folder}`).includes(`${commandName}.js`));
+
+		delete require.cache[require.resolve(`../${folderName}/${command.name}.js`)];
 
 		try {
-			const newCommand = require(`./${command.name}.js`);
+			const newCommand = require(`../${folderName}/${command.name}.js`);
 			message.client.commands.set(newCommand.name, newCommand);
 			message.channel.send(`Command \`${command.name}\` was reloaded!`);
 		} catch (error) {
