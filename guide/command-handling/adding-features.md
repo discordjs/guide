@@ -33,7 +33,7 @@ Now you can start adding features!
 
 ## Command categories
 
-So far all your command files are in a single `commands` folder. This is fine if you only have a few of them but if you're planning to make a bot that does lots of stuff you might end up with a large number of files in the `commands` folder. Keeping track of that many files can be a little tough. To make this a little easier, you can sort your commands according to their types and put them in separate folders inside the `commands` folder. You will have to make a few changes to your existing code in `index.js` for this to work out.
+So far, all of your command files are in a single `commands` folder. This is fine at first, but as your project grows, the number of files in the `commands` folder will too. Keeping track of that many files can be a little tough. To make this a little easier, you can categorize your commands and put them in sub-folders inside the `commands` folder. You will have to make a few changes to your existing code in `index.js` for this to work out.
 
 If you've been following along, your project structure should look something like this:
 
