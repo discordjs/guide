@@ -503,7 +503,6 @@ In order to build the correct file path, you will need the file name and the sub
 
 ```js
 const commandFolders = fs.readdirSync('./commands');
-
 const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${folder}`).includes(`${commandName}.js`));
 ```
 
