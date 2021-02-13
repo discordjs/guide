@@ -9,7 +9,7 @@ Two of the main components that you'll interact with when using `@discordjs/voic
 - **VoiceConnection** – maintains a network connection to a Discord voice server
 - **AudioPlayer** – plays audio resources across a voice connection
 
-Both voice connections and audio players are _stateful_, and you are able to subscribe to changes in their state as they progress through their respective life cycles.
+Both voice connections and audio players are _stateful_, and you can subscribe to changes in their state as they progress through their respective life cycles.
 
 It's important to listen for state change events, as they will likely require you to take some action. For example, a voice connection entering the `Disconnected` state will probably require you to attempt to reconnect it.
 
