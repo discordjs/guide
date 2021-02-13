@@ -18,7 +18,7 @@ import { createAudioPlayer } from '@discordjs/voice';
 const player = createAudioPlayer();
 ```
 
-You can also customise the behaviors of an audio player. For example, the default behavior is to pause when there are no active subscribers for an audio player. This behavior can be configured to either pause, stop, or just continue playing through the stream:
+You can also customize the behaviors of an audio player. For example, the default behavior is to pause when there are no active subscribers for an audio player. This behavior can be configured to either pause, stop, or just continue playing through the stream:
 
 ```ts
 import { createAudioPlayer, NoSubscriberBehaviour } from '@discordjs/voice';
@@ -65,7 +65,7 @@ You can call the `pause()` and `unpause()` methods. While the audio player is pa
 connection.pause();
 
 // Unpause after 5 seconds
-setTimeout(() => connection.unpause(), 5_000);
+setTimeout(() => connection.unpause(), 5e3);
 ```
 
 ## Life cycle

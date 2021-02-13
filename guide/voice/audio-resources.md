@@ -56,17 +56,17 @@ Altering the state of an audio player from an audio resource error handler is **
 
 A good solution for handling errors from these resources is to simply apply a `noop` handler to them. As long as you are listening for errors from your audio player, this is acceptable. This makes the assumption that you do not care about errors emitted from resources that aren't being consumed by an audio player.
 
-### Optimizations
+## Optimizations
 
 To improve performance, you can consider the following methods. They reduce the computational demand required to play audio, and could help to reduce jitter in the audio stream.
 
-#### Not using inline volume
+### Not using inline volume
 
 By default, inline volume is disabled for performance reasons. Enabling it will allow you to modify the volume of your stream in realtime. This comes at a performance cost, even if you aren't actually modifying the volume of your stream.
 
 Make sure you consider whether it is worth enabling for your use case.
 
-#### Playing Opus streams
+### Playing Opus streams
 
 If you are repeatedly playing the same resource, you may consider converting it to Ogg opus or WebM opus. Alternatively, if you are fetching an external resource and are able to specify a format that you'd like to stream the resource in, you should consider specifying Ogg opus or WebM opus.
 
