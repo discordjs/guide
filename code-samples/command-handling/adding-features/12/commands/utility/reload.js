@@ -14,7 +14,6 @@ module.exports = {
 		}
 
 		const commandFolders = fs.readdirSync('./commands');
-
 		const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${folder}`).includes(`${commandName}.js`));
 
 		delete require.cache[require.resolve(`../${folderName}/${command.name}.js`)];
