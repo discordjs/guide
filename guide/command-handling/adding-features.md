@@ -39,7 +39,7 @@ If you've been following along, your project structure should look something lik
 
 ![Project structure before sorting](./images/before-sorting.png)
 
-The first thing you have to do is sort out the files in the `commands` folder into categories and put them in separate folders inside the `commands` folder. If you sort the command files you currently have and put them inside folders that are named according to the type of command files they hold, it will look something like this:
+After moving your commands into sub-folders, it will look something like this:
 
 ![Project structure after sorting](./images/after-sorting.png)
 
