@@ -61,15 +61,15 @@ if (subscription) {
 
 Voice connections have their own life cycle, with 5 distinct states. You can follow the methods discussed in the [life cycles](./life-cycles) section to subscribe to changes to voice connections.
 
-- **Signalling** - this is the initial state of a voice connection. The connection will be in this state when it is requesting permission to join a voice channel.
+- **Signalling** - the initial state of a voice connection. The connection will be in this state when it is requesting permission to join a voice channel.
 
-- **Connecting** - this is the state a voice connection enters once it has permission to join a voice channel and is in the process of establishing a connection to it.
+- **Connecting** - the state a voice connection enters once it has permission to join a voice channel and is in the process of establishing a connection to it.
 
-- **Ready** - this is the state a voice connection enters once it has successfully established a connection to the voice channel. It is ready to play audio in this state.
+- **Ready** - the state a voice connection enters once it has successfully established a connection to the voice channel. It is ready to play audio in this state.
 
-- **Disconnected** - this is the state a voice connection enters when the connection to a voice channel has been severed. This can occur even if the connection has not yet been established. You may choose to attempt to reconnect in this state.
+- **Disconnected** - the state a voice connection enters when the connection to a voice channel has been severed. This can occur even if the connection has not yet been established. You may choose to attempt to reconnect in this state.
 
-- **Destroyed** - this is the state a voice connection enters when it has been manually been destroyed. This will prevent it from accidentally being reused, and it will be removed from an in-memory tracker of voice connections.
+- **Destroyed** - the state a voice connection enters when it has been manually been destroyed. This will prevent it from accidentally being reused, and it will be removed from an in-memory tracker of voice connections.
 
 ```ts
 import { VoiceConnectionStatus } from '@discordjs/voice';
