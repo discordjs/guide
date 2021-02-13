@@ -15,7 +15,7 @@ Voice connections will automatically try their best to re-establish their connec
 Creating a voice connection is simple:
 
 ```ts
-import { joinVoiceChannel } from '@discordjs/voice';
+const { joinVoiceChannel } = require('@discordjs/voice');
 
 const connection = joinVoiceChannel(myVoiceChannel);
 ```
@@ -27,7 +27,7 @@ If you try to call `joinVoiceChannel` on another channel in the same guild in wh
 You can access created connections elsewhere in your code without having to track the connections yourself. It is best practice to not track the voice connections yourself as you may forget to clean them up once they are destroyed, leading to memory leaks.
 
 ```ts
-import { getVoiceConnection } from '@discordjs/voice';
+const { getVoiceConnection } = require('@discordjs/voice');
 
 const connection = getVoiceConnection(myVoiceChannel.guild.id);
 ```
@@ -76,7 +76,7 @@ Voice connections have their own life cycle, with 5 distinct states. You can fol
 - **Destroyed** - the state a voice connection enters when it has been manually been destroyed. This will prevent it from accidentally being reused, and it will be removed from an in-memory tracker of voice connections.
 
 ```ts
-import { VoiceConnectionStatus } from '@discordjs/voice';
+const { VoiceConnectionStatus } = require('@discordjs/voice');
 
 connection.on(VoiceConnectionStatus.Ready, () => {
 	console.log('The connection has entered the Ready state - ready to play audio!');
@@ -100,7 +100,7 @@ The third case can be quite problematic to treat as a disconnect, as the bot cou
 An imperfect workaround to this is to see if the bot has entered a signalling/connecting state shortly after entering the Disconnected state. If it has, then it means that the bot has moved voice channels. Otherwise, we should treat it as a real disconnect and not reconnect.
 
 ```ts
-import { VoiceConnectionStatus, entersState } from '@discordjs/voice';
+const { VoiceConnectionStatus, entersState } = require('@discordjs/voice');
 
 connection.on(VoiceConnectionStatus.Disconnected, async (oldState, newState) => {
 	try {

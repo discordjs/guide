@@ -20,7 +20,7 @@ Listening to changes in the life cycles of voice connections and audio players c
 ## Subscribing to individual events
 
 ```ts
-import { VoiceConnectionStatus, AudioPlayerStatus } from '@discordjs/voice';
+const { VoiceConnectionStatus, AudioPlayerStatus } = require('@discordjs/voice');
 
 connection.on(VoiceConnectionStatus.Ready, (oldState, newState) => {
 	console.log('Connection is in the Ready state!');
@@ -35,7 +35,7 @@ player.on(AudioPlayerStatus.Playing, (oldState, newState) => {
 One advantage of listening for transitions to individual states is that it becomes a lot easier to write sequential logic. This is made easy using our [state transition helper](https://github.com/discordjs/voice/blob/main/src/util/entersState.ts). An example is shown below.
 
 ```ts
-import { AudioPlayerStatus, entersState } from '@discordjs/voice';
+const { AudioPlayerStatus, entersState } = require('@discordjs/voice');
 
 player.play(resource);
 try {
@@ -56,7 +56,7 @@ try {
 If you would prefer to keep a single event listener for all possible state transitions, then you can also listen to the `stateChange` event:
 
 ```ts
-import { VoiceConnectionStatus, AudioPlayerStatus } from '@discordjs/voice';
+const { VoiceConnectionStatus, AudioPlayerStatus } = require('@discordjs/voice');
 
 connection.on('stateChange', (oldState, newState) => {
 	console.log(`Connection transitioned from ${oldState.status} to ${newState.status}`);

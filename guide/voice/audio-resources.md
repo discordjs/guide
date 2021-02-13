@@ -13,8 +13,8 @@ Audio resources contain audio that can be played by an audio player to voice con
 There are many ways to create an audio resource. Below are some example scenarios:
 
 ```ts
-import { createAudioResource, StreamType } from '@discordjs/voice';
-import { createReadStream } from 'fs';
+const { createAudioResource, StreamType } = require('@discordjs/voice');
+const { createReadStream } = require('fs');
 
 // Basic, default options are:
 // Input type is unknown, so will use FFmpeg to convert to Opus under-the-hood
@@ -75,8 +75,8 @@ The reason for this is that you can remove FFmpeg from the process of streaming 
 Both of the examples below will skip the FFmpeg component of the pipeline to improve performance.
 
 ```ts
-import { createAudioResource, StreamType } from '@discordjs/voice';
-import { createReadStream } from 'fs';
+const { createAudioResource, StreamType } = require('@discordjs/voice');
+const { createReadStream } = require('fs');
 
 let resource = createAudioResource(createReadStream('my_file.ogg'), {
 	inputType: StreamType.OggOpus

@@ -13,7 +13,7 @@ Audio players can be used to play audio across voice connections. A single audio
 Creating an audio player is simple:
 
 ```ts
-import { createAudioPlayer } from '@discordjs/voice';
+const { createAudioPlayer } = require('@discordjs/voice');
 
 const player = createAudioPlayer();
 ```
@@ -21,7 +21,7 @@ const player = createAudioPlayer();
 You can also customize the behaviors of an audio player. For example, the default behavior is to pause when there are no active subscribers for an audio player. This behavior can be configured to either pause, stop, or just continue playing through the stream:
 
 ```ts
-import { createAudioPlayer, NoSubscriberBehaviour } from '@discordjs/voice';
+const { createAudioPlayer, NoSubscriberBehaviour } = require('@discordjs/voice');
 
 const player = createAudioPlayer({
 	behaviours: {
@@ -83,7 +83,7 @@ Voice connections have their own life cycle, with 5 distinct states. You can fol
 - **Paused** - this is the state a voice connection enters when it is paused by the user.
 
 ```ts
-import { VoiceConnectionStatus } from '@discordjs/voice';
+const { VoiceConnectionStatus } = require('@discordjs/voice');
 
 connection.on(VoiceConnectionStatus.Playing, () => {
 	console.log('The audio player has started playing!');
