@@ -1,3 +1,7 @@
+---
+forceTheme: purple
+---
+
 # Audio Player
 
 Audio players can be used to play audio across voice connections. A single audio player can play the same audio over multiple voice connections.

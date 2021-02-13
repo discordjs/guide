@@ -1,3 +1,7 @@
+---
+forceTheme: purple
+---
+
 # Introduction
 
 "Voice" refers to the ability of a bot to send audio in voice channels. Discord.js makes it easy for you to get up and running with voice!

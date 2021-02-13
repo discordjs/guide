@@ -1,3 +1,7 @@
+---
+forceTheme: purple
+---
+
 # Audio Resources
 
 Audio resources contain audio that can be played by an audio player to voice connections.
