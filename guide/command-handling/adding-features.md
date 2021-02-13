@@ -474,7 +474,6 @@ When writing your commands, you may find it tedious to restart your bot every ti
 Create a new command file and paste in the usual format with a slight change:
 
 ```js
-// You'll use fs later in this file
 const fs = require('fs');
 
 module.exports = {
