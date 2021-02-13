@@ -43,11 +43,11 @@ player.play(resource);
 
 ### Deletion
 
-The underlying streams of an audio resource are destroyed and flushed once an audio player is done playing their audio. Make sure to remove any references that you have created to the resource to prevent memory leaks.
+The underlying streams of an audio resource are destroyed and flushed once an audio player is done playing their audio. Make sure to remove any references you've created to the resource to prevent memory leaks.
 
 ## Handling errors
 
-For most scenarios, you will create an audio resource for immediate use for an audio player. This means that the audio player will propagate errors from the resource for you, so you can attach `error` handlers to the player instead of the resource.
+For most scenarios, you will create an audio resource for immediate use by an audio player. This means that the audio player will propagate errors from the resource for you, so you can attach `error` handlers to the player instead of the resource.
 
 However, it is still recommended to attach `error` handlers to the resource's `playStream`. In the event that you create your stream a little earlier than it is actually played, errors could still arise.
 

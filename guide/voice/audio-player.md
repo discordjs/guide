@@ -94,7 +94,7 @@ connection.on(VoiceConnectionStatus.Playing, () => {
 
 When an audio player is given an audio resource to play, it will propagate errors from the audio resource for you to handle.
 
-In the error handler, you can choose to either play a new audio resource or stop playback. If you take no action, the audio player will stop itself and revert to the Idle state.
+In the error handler, you can choose to either play a new audio resource or stop playback. If you take no action, the audio player will stop itself and revert to the `Idle` state.
 
 Two different examples of how you may handle errors are shown below.
 
@@ -111,9 +111,9 @@ player.on('error', error => {
 });
 ```
 
-### Taking action within the Idle state
+### Taking action within the `Idle` state
 
-In this example, the error event is used only for logging purposes. The audio player will naturally transition into the Idle state, and then another resource is played. This has the advantage of working with streams that come to an end gracefully, and those that are interrupted by errors.
+In this example, the error event is used only for logging purposes. The audio player will naturally transition into the `Idle` state, and then another resource is played. This has the advantage of working with streams that come to an end gracefully, and those that are interrupted by errors.
 
 ```ts
 player.play(getNextResource());
