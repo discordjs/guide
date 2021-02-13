@@ -37,11 +37,11 @@ So far all your command files are in a single `commands` folder. This is fine if
 
 If you've followed along so far, your project structure should look something like this:
 
-![Project structure before sorting](~@/images/before-sorting.png)
+![Project structure before sorting](./images/before-sorting.png)
 
 The first thing you have to do is sort out the files in the `commands` folder into categories and put them in separate folders inside the `commands` folder. If you sort the command files you currently have and put them inside folders that are named according to the type of command files they hold, it will look something like this:
 
-![Project structure after sorting](~@/images/after-sorting.png)
+![Project structure after sorting](./images/after-sorting.png)
 
 :::warning
 Make sure you put every command file you have inside one of the new sub-folders. Leaving a command file directly under the `commands` folder will create problems.
