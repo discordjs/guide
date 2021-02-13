@@ -87,17 +87,17 @@ connection.on(VoiceConnectionStatus.Ready, () => {
 
 Disconnects can be quite complex to handle. There are 3 cases for handling disconnects:
 
-1. **Resumable disconnects** - this means there is no clear reason why the disconnect occurred. In this case, voice connections will automatically try to resume the existing session. The voice connection will enter the Connecting state. If this fails, it may enter a disconnected state again.
+1. **Resumable disconnects** - this means there is no clear reason why the disconnect occurred. In this case, voice connections will automatically try to resume the existing session. The voice connection will enter the `Connecting` state. If this fails, it may enter a `Disconnected` state again.
 
-2. **Reconnectable disconnects** - this means that Discord has closed the connection and given a reason as to why, and that the reason is recoverable. In this case, the voice connection will automatically try to rejoin the voice channel. The voice connection will enter the Signalling state. If this fails, it may enter a disconnected state again.
+2. **Reconnectable disconnects** - this means that Discord has closed the connection and given a reason as to why, and that the reason is recoverable. In this case, the voice connection will automatically try to rejoin the voice channel. The voice connection will enter the `Signalling` state. If this fails, it may enter a `Disconnected` state again.
 
-3. **Potentially reconnectable disconnects** - this means that the bot has either been moved to another voice channel, the channel has been deleted, or the bot has been kicked/lost access to the voice channel. The bot will enter the Disconnected state.
+3. **Potentially reconnectable disconnects** - this means that the bot has either been moved to another voice channel, the channel has been deleted, or the bot has been kicked/lost access to the voice channel. The bot will enter the `Disconnected` state.
 
 As shown above, the first two cases are covered automatically by the voice connection itself. The only case you need to think carefully about is the third case.
 
 The third case can be quite problematic to treat as a disconnect, as the bot could simply be moving to another voice channel and so not "truly" disconnected.
 
-An imperfect workaround to this is to see if the bot has entered a signalling/connecting state shortly after entering the Disconnected state. If it has, then it means that the bot has moved voice channels. Otherwise, we should treat it as a real disconnect and not reconnect.
+An imperfect workaround to this is to see if the bot has entered a `Signalling` / `Connecting` state shortly after entering the `Disconnected` state. If it has, then it means that the bot has moved voice channels. Otherwise, we should treat it as a real disconnect and not reconnect.
 
 ```ts
 const { VoiceConnectionStatus, entersState } = require('@discordjs/voice');
