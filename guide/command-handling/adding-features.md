@@ -499,7 +499,7 @@ if (!command) return message.channel.send(`There is no command with name or alia
 A lot of library specific structures have `client` as a property. That means you don't have to pass the client reference as a parameter to commands to access for example `client.guilds` or `client.commands`, but can directly access the respective properties directly from the `message` object, as shown in the snippet above.
 :::
 
-Now to retrieve a file you will have to pass its path to `require()`. To create this path you just need the name of the file and the sub-folder it's in. You can get the filename using `command.name`. To find the sub-folder name you will have to use the `find` method on the `commandFolders` array. For each of the sub-folders in the `commandFolders` array, you'll check whether the file of this command is in that folder or not. You will do that using the `includes` method on the file names array of each sub-folder. It will store the name of the sub-folder in `folderName` once it finds the file of this command. This is what the code for that looks like:
+In order to build the correct file path, you will need the file name and the sub-folder the command belongs to. For the file name, you can use `command.name`. To find the sub-folder name, you will have to loop through the commands sub-folders and check whether the command file is in that folder or not. You can do that by using `Array.includes()` on the file names array of each sub-folder. 
 
 ```js
 const commandFolders = fs.readdirSync('./commands');
