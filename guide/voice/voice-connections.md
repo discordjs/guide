@@ -1,6 +1,6 @@
 # Voice Connections
 
-Voice connections represent a connection to a voice channel in a Guild. You can only connect to one voice channel in a Guild at a time.
+Voice connections represent connections to voice channels in a guild. You can only connect to one voice channel in a guild at a time.
 
 Voice connections will automatically try their best to re-establish their connections when they move across voice channels, or if the voice server region changes.
 

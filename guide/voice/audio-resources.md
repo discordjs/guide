@@ -64,7 +64,7 @@ Make sure you consider whether it is worth enabling for your use case.
 
 #### Playing Opus streams
 
-If you are repeatedly playing the same resource, you may consider converting it to Ogg opus or WebM opus. Alternatively, if you are fetching an external resource and are able to specify a format that you'd like to stream the resource in, then you should consider specifying Ogg opus or WebM opus.
+If you are repeatedly playing the same resource, you may consider converting it to Ogg opus or WebM opus. Alternatively, if you are fetching an external resource and are able to specify a format that you'd like to stream the resource in, you should consider specifying Ogg opus or WebM opus.
 
 The reason for this is that you can remove FFmpeg from the process of streaming audio. FFmpeg is used to convert unknown inputs into Opus audio which can be streamed to Discord. If your audio is already in the Opus format, this removes one of the most computationally demanding parts of the audio pipeline from the streaming process, which would surely improve performance.
 
@@ -84,5 +84,5 @@ resource = createAudioResource(createReadStream('my_file.webm'), {
 ```
 
 :::warning
-This optimisation is useful if you do not want to use inline volume. Enabling inline volume will disable the optimisation.
+This optimization is useful if you do not want to use inline volume. Enabling inline volume will disable the optimization.
 :::

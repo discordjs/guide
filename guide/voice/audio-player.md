@@ -14,15 +14,15 @@ import { createAudioPlayer } from '@discordjs/voice';
 const player = createAudioPlayer();
 ```
 
-You can also customise the behaviours of an audio player. For example, the default behaviour is to pause when there are no active subscribers for an audio player. This behaviour can be configured to either pause, stop, or just continue playing through the stream:
+You can also customise the behaviors of an audio player. For example, the default behavior is to pause when there are no active subscribers for an audio player. This behavior can be configured to either pause, stop, or just continue playing through the stream:
 
 ```ts
 import { createAudioPlayer, NoSubscriberBehaviour } from '@discordjs/voice';
 
 const player = createAudioPlayer({
 	behaviours: {
-		noSubscriber: NoSubscriberBehaviour.Pause
-	}
+		noSubscriber: NoSubscriberBehaviour.Pause,
+	},
 });
 ```
 
@@ -74,7 +74,7 @@ Voice connections have their own life cycle, with 5 distinct states. You can fol
 
 - **Playing** - this is the state a voice connection enters when it is actively playing an audio resource. When the audio resource comes to an end, the audio player will transition to the Idle state.
 
-- **AutoPaused** - this is the state a voice connection will enter when the player has paused itself because there are no active voice connections to play to. This is only possible with `noSubscriber` behaviour set to `Pause`. It will automatically transition back to Playing once at least one connection becomes available again.
+- **AutoPaused** - this is the state a voice connection will enter when the player has paused itself because there are no active voice connections to play to. This is only possible with the `noSubscriber` behavior set to `Pause`. It will automatically transition back to `Playing` once at least one connection becomes available again.
 
 - **Paused** - this is the state a voice connection enters when it is paused by the user.
 
@@ -90,7 +90,7 @@ connection.on(VoiceConnectionStatus.Playing, () => {
 
 When an audio player is given an audio resource to play, it will propagate errors from the audio resource for you to handle.
 
-In the error handler, you can choose to either play a new audio resource or stop playback. If you take no action, then the audio player will stop itself and revert to the Idle state.
+In the error handler, you can choose to either play a new audio resource or stop playback. If you take no action, the audio player will stop itself and revert to the Idle state.
 
 Two different examples of how you may handle errors are shown below.
 
