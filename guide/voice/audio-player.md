@@ -72,15 +72,15 @@ setTimeout(() => connection.unpause(), 5e3);
 
 Voice connections have their own life cycle, with 5 distinct states. You can follow the methods discussed in the [life cycles](./life-cycles) section to subscribe to changes to voice connections.
 
-- **Idle** - this is the initial state of an audio player. The audio player will be in this state when there is no audio resource for it to play.
+- **Idle** - the initial state of an audio player. The audio player will be in this state when there is no audio resource for it to play.
 
-- **Bufferring** - this is the state an audio player will be in while it is waiting for an audio resource to become playable. The audio player may transition either the `Playing` state (success) or the `Idle` state (failure) from this state.
+- **Bufferring** - the state an audio player will be in while it is waiting for an audio resource to become playable. The audio player may transition either the `Playing` state (success) or the `Idle` state (failure) from this state.
 
-- **Playing** - this is the state a voice connection enters when it is actively playing an audio resource. When the audio resource comes to an end, the audio player will transition to the Idle state.
+- **Playing** - the state a voice connection enters when it is actively playing an audio resource. When the audio resource comes to an end, the audio player will transition to the Idle state.
 
-- **AutoPaused** - this is the state a voice connection will enter when the player has paused itself because there are no active voice connections to play to. This is only possible with the `noSubscriber` behavior set to `Pause`. It will automatically transition back to `Playing` once at least one connection becomes available again.
+- **AutoPaused** - the state a voice connection will enter when the player has paused itself because there are no active voice connections to play to. This is only possible with the `noSubscriber` behavior set to `Pause`. It will automatically transition back to `Playing` once at least one connection becomes available again.
 
-- **Paused** - this is the state a voice connection enters when it is paused by the user.
+- **Paused** - the state a voice connection enters when it is paused by the user.
 
 ```ts
 const { VoiceConnectionStatus } = require('@discordjs/voice');
