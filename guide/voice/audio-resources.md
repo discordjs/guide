@@ -15,24 +15,25 @@ There are many ways to create an audio resource. Below are some example scenario
 ```ts
 const { createAudioResource, StreamType } = require('@discordjs/voice');
 const { createReadStream } = require('fs');
+const { join } = require('path');
 
 // Basic, default options are:
 // Input type is unknown, so will use FFmpeg to convert to Opus under-the-hood
 // Inline volume is opt-in to improve performance
-let resource = createAudioResource('file.mp3');
+let resource = createAudioResource(join(__dirname, 'file.mp3'));
 
 // Will use FFmpeg with volume control enabled
-resource = createAudioResource('file.mp3', { inlineVolume: true });
+resource = createAudioResource(join(__dirname, 'file.mp3'), { inlineVolume: true });
 resource.volume.setVolume(0.5);
 
 // Will play .ogg or .webm Opus files without FFmpeg for better performance
 // Remember, inline volume is still disabled
-resource = createAudioResource(createReadStream('./file.ogg', {
+resource = createAudioResource(createReadStream(join(__dirname, 'file.ogg'), {
 	inputType: StreamType.OggOpus
 }));
 
 // Will play with FFmpeg due to inline volume being enabled.
-resource = createAudioResource(createReadStream('./file.webm', {
+resource = createAudioResource(createReadStream(join(__dirname, 'file.webm'), {
 	inputType: StreamType.WebmOpus,
 	inlineVolume: true
 }));
