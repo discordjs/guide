@@ -30,7 +30,7 @@ The Discord API now allows bots much more granular control over mention parsing,
 
 ### Replies / Message#reply
 
-`Message.reply()` will no longer result in the bot prepending a user mention to the content, replacing the behaviour with Discord's reply feature.
+`Message.reply()` will no longer result in the bot prepending a user mention to the content, replacing the behavior with Discord's reply feature.
 
 `MessageOptions.reply` (User ID) has been removed, replaced with `MessageOptions.replyTo` (Message ID)
 
@@ -189,7 +189,7 @@ Additionally, `reason` is now part of the options, not a second parameter.
 
 ### UserFlags
 
-The deprecated UserFlags `DISCORD_PARTNER` and `VERIFIED_DEVELOPER` / `EARLY_VERIFIED_DEVELOPER` have been removed in favour of their renamed versions.
+The deprecated UserFlags `DISCORD_PARTNER` and `VERIFIED_DEVELOPER` / `EARLY_VERIFIED_DEVELOPER` have been removed in favor of their renamed versions.
 
 ```diff
 - user.flags.has(UserFlags.FLAGS.DISCORD_PARTNER)
@@ -205,7 +205,7 @@ The deprecated UserFlags `DISCORD_PARTNER` and `VERIFIED_DEVELOPER` / `EARLY_VER
 
 #### Util#str2ab
 
-Both removed in favour of Node built-in Buffer methods.
+Both removed in favor of Node built-in Buffer methods.
 
 ## Additions
 
