@@ -37,17 +37,21 @@ One advantage of listening for transitions to individual states is that it becom
 ```js
 const { AudioPlayerStatus, entersState } = require('@discordjs/voice');
 
-player.play(resource);
-try {
-	await entersState(player, AudioPlayerStatus.Playing, 5e3);
-	// The player has entered the Playing state within 5 seconds
-	console.log('Playback has started!');
-} catch (error) {
-	// The player has not entered the Playing state and either:
-	// 1) The 'error' event has been emitted and should be handled.
-	// 2) 5 seconds have passed
-	console.error(error);
+async function start() {
+	player.play(resource);
+	try {
+		await entersState(player, AudioPlayerStatus.Playing, 5e3);
+		// The player has entered the Playing state within 5 seconds
+		console.log('Playback has started!');
+	} catch (error) {
+		// The player has not entered the Playing state and either:
+		// 1) The 'error' event has been emitted and should be handled.
+		// 2) 5 seconds have passed
+		console.error(error);
+	}
 }
+
+void start();
 ```
 :::
 

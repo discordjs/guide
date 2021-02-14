@@ -29,13 +29,13 @@ resource.volume.setVolume(0.5);
 // Will play .ogg or .webm Opus files without FFmpeg for better performance
 // Remember, inline volume is still disabled
 resource = createAudioResource(createReadStream(join(__dirname, 'file.ogg'), {
-	inputType: StreamType.OggOpus
+	inputType: StreamType.OggOpus,
 }));
 
 // Will play with FFmpeg due to inline volume being enabled.
 resource = createAudioResource(createReadStream(join(__dirname, 'file.webm'), {
 	inputType: StreamType.WebmOpus,
-	inlineVolume: true
+	inlineVolume: true,
 }));
 
 player.play(resource);
@@ -80,11 +80,11 @@ const { createAudioResource, StreamType } = require('@discordjs/voice');
 const { createReadStream } = require('fs');
 
 let resource = createAudioResource(createReadStream('my_file.ogg'), {
-	inputType: StreamType.OggOpus
+	inputType: StreamType.OggOpus,
 });
 
 resource = createAudioResource(createReadStream('my_file.webm'), {
-	inputType: StreamType.WebmOpus
+	inputType: StreamType.WebmOpus,
 });
 ```
 
