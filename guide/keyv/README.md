@@ -137,22 +137,22 @@ You will probably want to setup additional validation such as required permissio
 ### Usage
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		.prefix
 	</discord-message>
-	<discord-message author="Tutorial Bot" :bot="true">
+	<discord-message profile="bot">
 		Prefix is <code class="discord-message-inline-code">.</code>
 	</discord-message>
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		.prefix $
 	</discord-message>
-	<discord-message author="Tutorial Bot" :bot="true">
+	<discord-message profile="bot">
 		Successfully set prefix to <code class="discord-message-inline-code">$</code>
 	</discord-message>
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		$prefix
 	</discord-message>
-	<discord-message author="Tutorial Bot" :bot="true">
+	<discord-message profile="bot">
 		Prefix is <code class="discord-message-inline-code">$</code>
 	</discord-message>
 </div>

@@ -85,10 +85,10 @@ else if (message.content === `${prefix}server`) {
 The code above would result in this:
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!server
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		This server's name is: Discord Bot Tutorial
 	</discord-message>
 </div>
@@ -106,10 +106,10 @@ else if (message.content === `${prefix}server`) {
 That would display both the server name _and_ the amount of members in it.
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!server
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		Server name: Discord Bot Tutorial <br>
 		Total members: 3
 	</discord-message>
@@ -136,10 +136,10 @@ else if (message.content === `${prefix}user-info`) {
 This will display the message author's **username** (not nickname, if they have one set), as well as their user ID.
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!user-info
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		Your username: User <br>
 		Your ID: 20833034795932416
 	</discord-message>

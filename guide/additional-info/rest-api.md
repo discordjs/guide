@@ -165,16 +165,16 @@ Here, you are simply getting the first object from the array of objects called `
 If you've followed the tutorial, you should have something like this:
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!urban njaksdcas
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-		<mention :highlight="true">User</mention>, No results for <strong>njaksdcas</strong>
+	<discord-message profile="bot">
+		<mention :highlight="true" profile="user" />, No results for <strong>njaksdcas</strong>
 	</discord-message>
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!urban hello world
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books.
 	</discord-message>
 </div>
@@ -229,10 +229,10 @@ message.channel.send(embed);
 Now, if you do that same command again, you should get this:
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!urban hello world
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		<discord-embed slot="embeds" color="#EFFF00" title="hello world" url="https://www.urbandictionary.com/define.php?term=hello%20world" >
 			<embed-fields slot="fields">
 				<embed-field title="Definition">

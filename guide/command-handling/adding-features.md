@@ -176,10 +176,10 @@ if (command.guildOnly && message.channel.type === 'dm') {
 Now when you try to use the kick command inside a DM, you'll get the appropriate response which will also prevent your bot from throwing an error.
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!kick
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		I can't execute that command inside DMs!
 	</discord-message>
 </div>
@@ -288,19 +288,19 @@ The `aliases` property should always contain an array of strings. In your main f
 Making those two small changes, you get this:
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
-		!avatar <mention :highlight="true">User</mention>
+	<discord-message profile="user">
+		!avatar <mention :highlight="true" profile="user" />
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		User's avatar:
 		<a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
 		<br />
 		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
 	</discord-message>
-	<discord-message author="User" avatar="djs">
-		!icon <mention :highlight="true">User</mention>
+	<discord-message profile="user">
+		!icon <mention :highlight="true" profile="user" />
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		User's avatar:
 		<a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
 		<br />
@@ -402,18 +402,18 @@ Once you get the command based off the name or alias they gave, you can start `.
 At the end of it all, you should be getting this as a result:
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!help
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		Here's a list of all my commands:
 		args-info, avatar, beep, help, kick, ping, prune, server, user-info	<br>
 		You can send `!help [command name]` to get info on a specific command!
 	</discord-message>
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!help avatar
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		<strong>Name:</strong> avatar <br>
 		<strong>Aliases:</strong> icon,pfp <br>
 		<strong>Description:</strong> Get the avatar URL of the tagged user(s), or your own avatar. <br>
