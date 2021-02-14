@@ -4,7 +4,7 @@ Node.js uses an event-driven architecture. This makes it possible to execute cod
 
 Here's the base code we'll be using:
 
-\```js
+```js
 const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
 
@@ -19,7 +19,7 @@ client.on('message', message => {
 });
 
 client.login(token);
-\```
+```
 
 Currently, the event listeners are placed in the `index.js` file. The `ready` event emits once when the `Client` becomes ready for use and the `message` event emits whenever a message is received. Moving the event listener code into individual files is simple and we'll be taking a similar approach to the [command handler](/command-handling/). 
 
