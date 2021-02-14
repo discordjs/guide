@@ -1,8 +1,27 @@
 # Event handling
 
-Nodejs uses an event-driven architecture. This makes it possible to execute a certain piece of code only when a certain event occurs. The `discord.js` library takes full advantage of this architecture. You have already used two of these events i.e. `ready` and `message`. The `ready` event emits when the `Client` becomes ready for use and the `message` event emits when someone sends a message. You can visit the [documentation](https://discord.js.org/#/docs/main/stable/class/Client) site for `discord.js` to see the full list of all the client events.
+Node.js uses an event-driven architecture. This makes it possible to execute code when a certain event occurs. The discord.js library takes full advantage of this. You can visit the [discord.js documentation site](https://discord.js.org/#/docs/main/stable/class/Client) to see the full list of `Client` events.
 
-So far you have been listening to these events in your main `index.js` file. This is fine for small bots that do only a few things, but if you want your bot to do a lot of things, you'll have to listen for more than just the above two events. If you went to the documentation site, you would have seen that there are a lot of events that the bot can listen for. Writing code for these events in the `index.js` file will make this file bigger and messy. This is bad for project maintenance. Therefore, you'll have to take your code for each event from `index.js` and keep them in their own separate file inside an `events` folder. This is somewhat similar to what you did with commands while making the Command Handler.
+Here's the base code we'll be using:
+
+\```js
+const Discord = require('discord.js');
+const { prefix, token } = require('./config.json');
+
+const client = new Discord.Client();
+
+client.once('ready', () => {
+	console.log(`Ready! Logged in as ${client.user.tag}`);
+});
+
+client.on('message', message => {
+	console.log(`${message.author.tag} in #${message.channel.name} sent: ${message.content}`);
+});
+
+client.login(token);
+\```
+
+Currently, the event listeners are placed in the `index.js` file. The `ready` event emits once when the `Client` becomes ready for use and the `message` event emits whenever a message is received. Moving the event listener code into individual files is simple and we'll be taking a similar approach to the [command handler](/command-handling/). 
 
 ## Individual event files
 
