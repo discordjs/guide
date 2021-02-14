@@ -8,11 +8,11 @@ So far you have been listening to these events in your main `index.js` file. Thi
 
 If you have followed along so far, your entire project structure should look something like this:
 
-![Project structure before events folder](~@/images/project-structure-before-events-folder.png)
+![Project structure before events folder](./images/project-structure-before-events-folder.png)
 
 Create a new `events` folder in the directory where your `index.js` file is kept. This is how your project structure should look like after that:
 
-![Project structure after events folder](~@/images/project-structure-after-events-folder.png)
+![Project structure after events folder](./images/project-structure-after-events-folder.png)
 
 Now, you'll move the existing code you have written for the events in `index.js` to their individual files inside `events` folders.
 
