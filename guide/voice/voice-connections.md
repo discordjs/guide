@@ -1,5 +1,5 @@
 ---
-forceTheme: purple
+pageTheme: purple
 ---
 
 # Voice Connections
