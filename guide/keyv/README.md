@@ -141,19 +141,19 @@ You will probably want to setup additional validation such as required permissio
 		.prefix
 	</discord-message>
 	<discord-message author="Tutorial Bot" :bot="true">
-		Prefix is `.`
+		Prefix is <code class="discord-message-inline-code">.</code>
 	</discord-message>
 	<discord-message author="User" avatar="djs">
 		.prefix $
 	</discord-message>
 	<discord-message author="Tutorial Bot" :bot="true">
-		Successfully set prefix to `$`
+		Successfully set prefix to <code class="discord-message-inline-code">$</code>
 	</discord-message>
 	<discord-message author="User" avatar="djs">
 		$prefix
 	</discord-message>
 	<discord-message author="Tutorial Bot" :bot="true">
-		Prefix is `$`
+		Prefix is <code class="discord-message-inline-code">$</code>
 	</discord-message>
 </div>
 

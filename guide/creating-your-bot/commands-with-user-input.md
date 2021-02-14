@@ -240,7 +240,9 @@ That part is simple; just recycle the if statement you used in the section above
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
 		Your avatar:
-		https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png
+		<a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
+		<br />
+		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
 	</discord-message>
 </div>
 
@@ -299,9 +301,14 @@ And ta-da! You now have a list of avatar links of all the users you tagged.
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
 		User's avatar:
-		https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png<br>
+		<a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
+		<br />
 		Tutorial Bot's avatar:
-		https://cdn.discordapp.com/avatars/459757708720209940/d48f3d90d923e9531c02c6bb9850339f.png
+		<a href="https://cdn.discordapp.com/avatars/768861834441654282/6188d7f0602c2d495a5b7d98f8c0ebb5.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/768861834441654282/6188d7f0602c2d495a5b7d98f8c0ebb5.png</a>
+		<br />
+		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
+		<br />
+		<img src="https://cdn.discordapp.com/avatars/768861834441654282/6188d7f0602c2d495a5b7d98f8c0ebb5.png" alt="" />
 	</discord-message>
 </div>
 

@@ -169,7 +169,7 @@ If you've followed the tutorial, you should have something like this:
 		!urban njaksdcas
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-		<mention :highlight="true">User</mention>, No results for **njaksdcas**
+		<mention :highlight="true">User</mention>, No results for <strong>njaksdcas</strong>
 	</discord-message>
 	<discord-message author="User" avatar="djs">
 		!urban hello world

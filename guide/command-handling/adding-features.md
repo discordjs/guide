@@ -293,7 +293,7 @@ Making those two small changes, you get this:
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
 		User's avatar:
-		https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png
+		<a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
 		<br />
 		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
 	</discord-message>
@@ -302,7 +302,7 @@ Making those two small changes, you get this:
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
 		User's avatar:
-		https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png
+		<a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
 		<br />
 		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
 	</discord-message>
@@ -414,10 +414,10 @@ At the end of it all, you should be getting this as a result:
 		!help avatar
 	</discord-message>
 	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-		**Name:** avatar <br>
-		**Aliases:** icon,pfp <br>
-		**Description:** Get the avatar URL of the tagged user(s), or your own avatar. <br>
-		**Cooldown:** 3 second(s)
+		<strong>Name:</strong> avatar <br>
+		<strong>Aliases:</strong> icon,pfp <br>
+		<strong>Description:</strong> Get the avatar URL of the tagged user(s), or your own avatar. <br>
+		<strong>Cooldown:</strong> 3 second(s)
 	</discord-message>
 </div>
 
