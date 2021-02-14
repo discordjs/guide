@@ -367,7 +367,7 @@ Tags for roles belonging to bots, integrations, or premium subscribers.
 
 `guild.roles.botRoleFor(user)`
 
-Get the managed role a user created when joining the guild, if any.
+Gets the managed role a bot created when joining the guild, if any.
 
 #### RoleManager#premiumSubscriberRole
 
