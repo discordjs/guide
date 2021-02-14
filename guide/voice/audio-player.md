@@ -12,7 +12,7 @@ Audio players can be used to play audio across voice connections. A single audio
 
 Creating an audio player is simple:
 
-```ts
+```js
 const { createAudioPlayer } = require('@discordjs/voice');
 
 const player = createAudioPlayer();
@@ -20,7 +20,7 @@ const player = createAudioPlayer();
 
 You can also customize the behaviors of an audio player. For example, the default behavior is to pause when there are no active subscribers for an audio player. This behavior can be configured to either pause, stop, or just continue playing through the stream:
 
-```ts
+```js
 const { createAudioPlayer, NoSubscriberBehaviour } = require('@discordjs/voice');
 
 const player = createAudioPlayer({
@@ -34,7 +34,7 @@ const player = createAudioPlayer({
 
 If you no longer require an audio player, you can `stop()` it and then remove references to it so that it gets garbage collected.
 
-```ts
+```js
 connection.stop();
 // Make sure that you don't hold any references to the
 // connection to ensure it gets removed from memory
@@ -44,7 +44,7 @@ connection.stop();
 
 You can create [audio resources](./audio-resources) and then play them on an audio player.
 
-```ts
+```js
 const resource = createAudioResource('/home/user/track.mp3');
 player.play(resource);
 
@@ -61,7 +61,7 @@ connection2.subscribe(player);
 
 You can call the `pause()` and `unpause()` methods. While the audio player is paused, no audio will be played. When it is resumed, it will continue where it left off.
 
-```ts
+```js
 connection.pause();
 
 // Unpause after 5 seconds
@@ -82,7 +82,7 @@ Voice connections have their own life cycle, with 5 distinct states. You can fol
 
 - **Paused** - the state a voice connection enters when it is paused by the user.
 
-```ts
+```js
 const { VoiceConnectionStatus } = require('@discordjs/voice');
 
 connection.on(VoiceConnectionStatus.Playing, () => {
@@ -102,7 +102,7 @@ Two different examples of how you may handle errors are shown below.
 
 In this example, the audio player will only move on to playing the next audio resource if an error has occurred. If playback ends gracefully, nothing will happen.
 
-```ts
+```js
 player.play(getNextResource());
 
 player.on('error', error => {
@@ -115,7 +115,7 @@ player.on('error', error => {
 
 In this example, the error event is used only for logging purposes. The audio player will naturally transition into the `Idle` state, and then another resource is played. This has the advantage of working with streams that come to an end gracefully, and those that are interrupted by errors.
 
-```ts
+```js
 player.play(getNextResource());
 
 player.on('error', error => {

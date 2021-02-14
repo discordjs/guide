@@ -14,7 +14,7 @@ Voice connections will automatically try their best to re-establish their connec
 
 Creating a voice connection is simple:
 
-```ts
+```js
 const { joinVoiceChannel } = require('@discordjs/voice');
 
 const connection = joinVoiceChannel(myVoiceChannel);
@@ -26,7 +26,7 @@ If you try to call `joinVoiceChannel` on another channel in the same guild in wh
 
 You can access created connections elsewhere in your code without having to track the connections yourself. It is best practice to not track the voice connections yourself as you may forget to clean them up once they are destroyed, leading to memory leaks.
 
-```ts
+```js
 const { getVoiceConnection } = require('@discordjs/voice');
 
 const connection = getVoiceConnection(myVoiceChannel.guild.id);
@@ -38,7 +38,7 @@ You can destroy a voice connection when you no longer require it. This will disc
 
 It's important that you destroy voice connections when they are no longer required so that your bot leaves the voice channel, and to prevent memory leaks.
 
-```ts
+```js
 connection.destroy();
 ```
 
@@ -46,14 +46,14 @@ connection.destroy();
 
 You can subscribe voice connections to audio players as soon as they're created. Audio players will try to stream audio to all their subscribed voice connections that are in the Ready state. Destroyed voice connections cannot be subscribed to audio players.
 
-```ts
+```js
 // Subscribe the connection to the audio player (will play audio on the voice connection)
 const subscription = connection.subscribe(audioPlayer);
 
 // subscription could be undefined if the connection is destroyed!
 if (subscription) {
 	// Unsubscribe after 5 seconds (stop playing audio on the voice connection)
-	setTimeout(() => subscription.unsubscribe(), 5_000);
+	setTimeout(() => subscription.unsubscribe(), 5e3);
 }
 ```
 
@@ -75,7 +75,7 @@ Voice connections have their own life cycle, with 5 distinct states. You can fol
 
 - **Destroyed** - the state a voice connection enters when it has been manually been destroyed. This will prevent it from accidentally being reused, and it will be removed from an in-memory tracker of voice connections.
 
-```ts
+```js
 const { VoiceConnectionStatus } = require('@discordjs/voice');
 
 connection.on(VoiceConnectionStatus.Ready, () => {
@@ -87,11 +87,11 @@ connection.on(VoiceConnectionStatus.Ready, () => {
 
 Disconnects can be quite complex to handle. There are 3 cases for handling disconnects:
 
-1. **Resumable disconnects** - this means there is no clear reason why the disconnect occurred. In this case, voice connections will automatically try to resume the existing session. The voice connection will enter the `Connecting` state. If this fails, it may enter a `Disconnected` state again.
+1. **Resumable disconnects** - there is no clear reason why the disconnect occurred. In this case, voice connections will automatically try to resume the existing session. The voice connection will enter the `Connecting` state. If this fails, it may enter a `Disconnected` state again.
 
-2. **Reconnectable disconnects** - this means that Discord has closed the connection and given a reason as to why, and that the reason is recoverable. In this case, the voice connection will automatically try to rejoin the voice channel. The voice connection will enter the `Signalling` state. If this fails, it may enter a `Disconnected` state again.
+2. **Reconnectable disconnects** - Discord has closed the connection and given a reason as to why, and that the reason is recoverable. In this case, the voice connection will automatically try to rejoin the voice channel. The voice connection will enter the `Signalling` state. If this fails, it may enter a `Disconnected` state again.
 
-3. **Potentially reconnectable disconnects** - this means that the bot has either been moved to another voice channel, the channel has been deleted, or the bot has been kicked/lost access to the voice channel. The bot will enter the `Disconnected` state.
+3. **Potentially reconnectable disconnects** - the bot has either been moved to another voice channel, the channel has been deleted, or the bot has been kicked/lost access to the voice channel. The bot will enter the `Disconnected` state.
 
 As shown above, the first two cases are covered automatically by the voice connection itself. The only case you need to think carefully about is the third case.
 
@@ -99,14 +99,14 @@ The third case can be quite problematic to treat as a disconnect, as the bot cou
 
 An imperfect workaround to this is to see if the bot has entered a `Signalling` / `Connecting` state shortly after entering the `Disconnected` state. If it has, then it means that the bot has moved voice channels. Otherwise, we should treat it as a real disconnect and not reconnect.
 
-```ts
+```js
 const { VoiceConnectionStatus, entersState } = require('@discordjs/voice');
 
 connection.on(VoiceConnectionStatus.Disconnected, async (oldState, newState) => {
 	try {
 		await Promise.race([
-			entersState(connection, VoiceConnectionStatus.Signalling, 5_000),
-			entersState(connection, VoiceConnectionStatus.Connecting, 5_000)
+			entersState(connection, VoiceConnectionStatus.Signalling, 5e3),
+			entersState(connection, VoiceConnectionStatus.Connecting, 5e3)
 		]);
 		// Seems to be reconnecting to a new channel - ignore disconnect
 	} catch (error) {

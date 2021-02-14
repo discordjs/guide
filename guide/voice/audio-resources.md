@@ -12,7 +12,7 @@ Audio resources contain audio that can be played by an audio player to voice con
 
 There are many ways to create an audio resource. Below are some example scenarios:
 
-```ts
+```js
 const { createAudioResource, StreamType } = require('@discordjs/voice');
 const { createReadStream } = require('fs');
 const { join } = require('path');
@@ -75,7 +75,7 @@ The reason for this is that you can remove FFmpeg from the process of streaming 
 
 Both of the examples below will skip the FFmpeg component of the pipeline to improve performance.
 
-```ts
+```js
 const { createAudioResource, StreamType } = require('@discordjs/voice');
 const { createReadStream } = require('fs');
 

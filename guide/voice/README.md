@@ -45,7 +45,7 @@ If you're struggling to install these dependencies, make sure you have build too
 
 The library includes a helper function that helps you to find out which dependencies you've successfully installed. This information is also very helpful if you ever need to submit an issue on the `@discordjs/voice` issue tracker.
 
-```ts
+```js
 const { generateDependencyReport } = require('@discordjs/voice');
 
 console.log(generateDependencyReport());
