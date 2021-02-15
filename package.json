@@ -24,16 +24,16 @@
     "homepage": "https://discordjs.guide",
     "devDependencies": {
         "babel-eslint": "^10.0.1",
-        "eslint": "^5.6.0",
-        "eslint-config-sora": "^2.0.0",
+        "eslint": "^7.18.0",
+        "eslint-config-sora": "^3.1.0",
         "eslint-plugin-markdown": "^1.0.0",
-        "eslint-plugin-vue": "^5.2.2",
-        "vuepress": "^1.2.0"
+        "eslint-plugin-vue": "^7.5.0",
+        "vuepress": "^1.8.0"
     },
     "dependencies": {
         "@vuepress/plugin-google-analytics": "^1.2.0",
         "semver": "^6.0.0",
         "vue-discord-message": "^5.0.2",
-        "vuepress-theme-yuu": "^2.2.0"
+        "vuepress-theme-yuu": "^3.0.0"
     }
 }

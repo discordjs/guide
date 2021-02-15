@@ -48,7 +48,7 @@
 		"prefix": ["message", "discord-message"],
 		"description": "mock discord message",
 		"body": [
-			"<discord-message author=\"${1:Tutorial Bot}\" avatar=\"${2:djs}\">",
+			"<discord-message profile=\"${1:user}\">",
 			"\t${3:You can mock mentions with <mention>someone</mention> and mark the message as highlighted (mentioning the logged in user) with <mention :highlight=\"true\">someone</mention>}$0",
 			"</discord-message>"
 		]

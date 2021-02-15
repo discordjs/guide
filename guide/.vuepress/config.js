@@ -20,6 +20,7 @@ const config = {
 	theme: 'yuu',
 	themeConfig: {
 		yuu: {
+			logo: 'GuideLogo',
 			extraOptions: { before: 'BranchSelector' },
 		},
 		repo: 'discordjs/guide',

@@ -10,7 +10,7 @@ Say you are writing a bot for moderating your server. Obviously you will want a 
 But what happens if you try to use the command like this?
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!ban <mention>Offender</mention> Because they were rude to <mention>Victim</mention>.
 	</discord-message>
 </div>
@@ -23,7 +23,7 @@ Or maybe someone uses a command incorrectly, the bot might still accept it but i
 Say someone accidentally used the ban command like this:
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!ban Because they were rude to <mention>Victim</mention>.
 	</discord-message>
 </div>
@@ -39,8 +39,8 @@ That means when you receive a message from the Discord API and it contains menti
 If you send
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
-		I think we should add <mention>GoodPerson</mention> to the <mention>Mod</mention> role.
+	<discord-message profile="user">
+		I think we should add <mention>GoodPerson</mention> to the <mention type="role" color="#3eaf7c">Mod</mention> role.
 	</discord-message>
 </div>
 
@@ -196,10 +196,13 @@ And that is it! Simple, isn't it? Start up your bot and see if it works.
 
 <div is="discord-messages">
 	<discord-message author="AnotherUser" avatar="green">
-		!avatar <mention>User</mention>
+		!avatar <mention profile="user" />
 	</discord-message>
-	<discord-message author="User" avatar="blue" :bot="true">
-		User's avatar: https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png
+	<discord-message profile="bot">
+		User's avatar:
+		<a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
+		<br />
+		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
 	</discord-message>
 </div>
 
@@ -272,7 +275,7 @@ if (command === 'ban') {
 Now if you send a command like the following you can always be sure it will use the mention at the very front to figure out who to ban, and will properly validate the mention:
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!ban <mention>Offender</mention> because they were rude to <mention>Victim</mention>.
 	</discord-message>
 </div>

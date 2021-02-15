@@ -1,5 +1,5 @@
 ---
-forceTheme: blue
+pageTheme: blue
 ---
 
 # Your first command

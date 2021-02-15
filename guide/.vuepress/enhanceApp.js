@@ -5,5 +5,16 @@ export default ({ Vue }) => {
 		avatars: {
 			djs: require('./assets/discord-avatar-djs.png'),
 		},
+		profiles: {
+			user: {
+				author: 'User',
+				avatar: 'djs',
+			},
+			bot: {
+				author: 'Tutorial Bot',
+				avatar: 'blue',
+				bot: true,
+			},
+		},
 	});
 };

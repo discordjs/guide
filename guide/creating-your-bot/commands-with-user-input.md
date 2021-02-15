@@ -44,10 +44,10 @@ else if (command === 'args-info') {
 If you try it out, you'll get something like this:
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!args-info here are my arguments
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		Command name: args-info <br>
 		Arguments: here,are,my,arguments
 	</discord-message>
@@ -75,16 +75,16 @@ else if (command === 'args-info') {
 So if the first argument provided is equal to "foo", then send back "bar". Otherwise, just send back the argument the user provided.
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!args-info foo
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		bar
 	</discord-message>
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!args-info not-foo
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		First argument: not-foo
 	</discord-message>
 </div>
@@ -94,10 +94,10 @@ So if the first argument provided is equal to "foo", then send back "bar". Other
 Currently, you're using `.split(' ')` to split the command arguments. However, there's actually a slight issue with this. As is, it'll split the string by each and every space. Well, what happens if someone accidentally (or even purposely) adds additional spaces? Here's what:
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!args-info     here    are    my    arguments
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		Command name: args-info <br>
 		Arguments: here,,,,,are,,,,,my,,,,,,arguments <br>
 		Argument length: 20
@@ -112,10 +112,10 @@ If you've never done something like this before, this probably isn't what you'd 
 ```
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!args-info     here    are    my    arguments
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		Command name: args-info <br>
 		Arguments: here,are,my,arguments <br>
 		Argument length: 4
@@ -147,10 +147,10 @@ else if (command === 'kick') {
 And as you can see, it works!
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
-		!kick <mention>Tutorial Bot</mention>
+	<discord-message profile="user">
+		!kick <mention profile="bot" />
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		You wanted to kick: Tutorial Bot
 	</discord-message>
 </div>
@@ -181,16 +181,16 @@ Since `message.mentions.users` is a Collection, it has a `.size` property. If no
 If you try again, it should work as expected.
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!kick
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-		<mention :highlight="true">User</mention>, you need to tag a user to kick them!
+	<discord-message profile="bot">
+		<mention :highlight="true" profile="user" />, you need to tag a user to kick them!
 	</discord-message>
-	<discord-message author="User" avatar="djs">
-		!kick <mention>Tutorial Bot</mention>
+	<discord-message profile="user">
+		!kick <mention profile="bot" />
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		You wanted to kick: Tutorial Bot
 	</discord-message>
 </div>
@@ -235,12 +235,14 @@ If the `dynamic` option is provided you will receive a `.gif` URL if the image i
 That part is simple; just recycle the if statement you used in the section above and displaying the link to your avatar.
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!avatar
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		Your avatar:
-		https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png
+		<a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
+		<br />
+		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
 	</discord-message>
 </div>
 
@@ -294,14 +296,19 @@ If the `dynamic` option is provided you will receive a `.gif` URL if the image i
 And ta-da! You now have a list of avatar links of all the users you tagged.
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
-		!avatar <mention :highlight="true">User</mention> <mention>Tutorialbot</mention>
+	<discord-message profile="user">
+		!avatar <mention :highlight="true" profile="user" /> <mention profile="bot" />
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		User's avatar:
-		https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png<br>
+		<a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
+		<br />
 		Tutorial Bot's avatar:
-		https://cdn.discordapp.com/avatars/459757708720209940/d48f3d90d923e9531c02c6bb9850339f.png
+		<a href="https://cdn.discordapp.com/avatars/768861834441654282/6188d7f0602c2d495a5b7d98f8c0ebb5.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/768861834441654282/6188d7f0602c2d495a5b7d98f8c0ebb5.png</a>
+		<br />
+		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
+		<br />
+		<img src="https://cdn.discordapp.com/avatars/768861834441654282/6188d7f0602c2d495a5b7d98f8c0ebb5.png" alt="" />
 	</discord-message>
 </div>
 
@@ -334,11 +341,11 @@ else if (command === 'prune') {
 And if you test it, it should work as expected.
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!prune some-string
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-		<mention :highlight="true">User</mention>, that doesn't seem to be a valid number.
+	<discord-message profile="bot">
+		<mention :highlight="true" profile="user" />, that doesn't seem to be a valid number.
 	</discord-message>
 </div>
 

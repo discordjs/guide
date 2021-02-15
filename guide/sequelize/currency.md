@@ -365,7 +365,7 @@ return message.channel.send(
 		.first(10)
 		.map((user, position) => `(${position + 1}) ${(client.users.get(user.user_id).tag)}: ${user.balance}💰`)
 		.join('\n'),
-	{ code: true }
+	{ code: true },
 );
 ```
 
@@ -379,7 +379,7 @@ return message.channel.send(
 		.first(10)
 		.map((user, position) => `(${position + 1}) ${(client.users.cache.get(user.user_id).tag)}: ${user.balance}💰`)
 		.join('\n'),
-	{ code: true }
+	{ code: true },
 );
 ```
 

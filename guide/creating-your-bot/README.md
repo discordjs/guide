@@ -85,10 +85,10 @@ if (message.content === '!ping') {
 Restart your bot and then send `!ping` to a channel your bot has access to. If all goes well, you should see something like this:
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!ping
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		Pong.
 	</discord-message>
 </div>

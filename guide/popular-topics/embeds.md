@@ -10,7 +10,7 @@ In the following section we will explain how to compose an embed, send it, and w
 Here is an example of what an embed may look like. We will go over their construction in the next part of this guide.
 
 <div is="discord-messages">
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		<discord-embed
 			slot="embeds"
 			color="#0099ff"

@@ -31,6 +31,44 @@ In this short (but necessary) refactor, you:
 
 Now you can start adding features!
 
+## Command categories
+
+So far, all of your command files are in a single `commands` folder. This is fine at first, but as your project grows, the number of files in the `commands` folder will too. Keeping track of that many files can be a little tough. To make this a little easier, you can categorize your commands and put them in sub-folders inside the `commands` folder. You will have to make a few changes to your existing code in `index.js` for this to work out.
+
+If you've been following along, your project structure should look something like this:
+
+![Project structure before sorting](./images/before-sorting.png)
+
+After moving your commands into sub-folders, it will look something like this:
+
+![Project structure after sorting](./images/after-sorting.png)
+
+:::warning
+Make sure you put every command file you have inside one of the new sub-folders. Leaving a command file directly under the `commands` folder will create problems.
+:::
+
+It is not necessary to name your sub-folders exactly like we have named them here. You can create any number of sub-folders and name them whatever you want. Although, it is a good practice to name them according to the type of commands stored inside them.
+
+Now, go back to your main file `index.js` and add this below the `client.commands = new Discord.Collection();` line:
+
+```js
+const commandFolders = fs.readdirSync('./commands');
+```
+
+The `fs.readdirSync()` method will return an array of all the sub-folder names in the `commands` folder, e.g. `['fun', 'moderation', 'utility']`. The rest of the logic remains the same, except now you have to do it for each of the sub-folders:
+
+```js
+for (const folder of commandFolders) {
+	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
+	for (const file of commandFiles) {
+		const command = require(`./commands/${folder}/${file}`);
+		client.commands.set(command.name, command);
+	}
+}
+```
+
+That's it! When creating new files for commands, make sure you create it inside one of the sub-folders (or a new one) in the `commands` folder.
+
 ## Required arguments
 
 For this section, we'll be using the `args-info.js` command as an example. If you chose to keep it, it should look like this now:
@@ -138,10 +176,10 @@ if (command.guildOnly && message.channel.type === 'dm') {
 Now when you try to use the kick command inside a DM, you'll get the appropriate response which will also prevent your bot from throwing an error.
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!kick
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		I can't execute that command inside DMs!
 	</discord-message>
 </div>
@@ -250,21 +288,21 @@ The `aliases` property should always contain an array of strings. In your main f
 Making those two small changes, you get this:
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
-		!avatar <mention :highlight="true">User</mention>
+	<discord-message profile="user">
+		!avatar <mention :highlight="true" profile="user" />
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		User's avatar:
-		https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png
+		<a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
 		<br />
 		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
 	</discord-message>
-	<discord-message author="User" avatar="djs">
-		!icon <mention :highlight="true">User</mention>
+	<discord-message profile="user">
+		!icon <mention :highlight="true" profile="user" />
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		User's avatar:
-		https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png
+		<a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
 		<br />
 		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
 	</discord-message>
@@ -290,7 +328,7 @@ module.exports = {
 You're going to need your prefix variable a couple times inside this command, so make sure to require that at the very top of the file (outside of the `module.exports` bit).
 
 ```js
-const { prefix } = require('../config.json');
+const { prefix } = require('../../config.json');
 ```
 
 Inside the `execute()` function, set up some variables and an if/else statement to determine whether it should display a list of all the command names or only information about a specific command.
@@ -364,22 +402,22 @@ Once you get the command based off the name or alias they gave, you can start `.
 At the end of it all, you should be getting this as a result:
 
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!help
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		Here's a list of all my commands:
 		args-info, avatar, beep, help, kick, ping, prune, server, user-info	<br>
 		You can send `!help [command name]` to get info on a specific command!
 	</discord-message>
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!help avatar
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-		**Name:** avatar <br>
-		**Aliases:** icon,pfp <br>
-		**Description:** Get the avatar URL of the tagged user(s), or your own avatar. <br>
-		**Cooldown:** 3 second(s)
+	<discord-message profile="bot">
+		<strong>Name:</strong> avatar <br>
+		<strong>Aliases:</strong> icon,pfp <br>
+		<strong>Description:</strong> Get the avatar URL of the tagged user(s), or your own avatar. <br>
+		<strong>Cooldown:</strong> 3 second(s)
 	</discord-message>
 </div>
 
@@ -434,9 +472,11 @@ Need more resources on how Discord's permission system works? Check the [permiss
 
 When writing your commands, you may find it tedious to restart your bot every time you want to test even the slightest change in your code. However, if you have a command handler, reloading commands can be done with a single bot command.
 
-Create a new command file and paste in the usual format:
+Create a new command file and paste in the usual format with a slight change:
 
 ```js
+const fs = require('fs');
+
 module.exports = {
 	name: 'reload',
 	description: 'Reloads a command',
@@ -462,17 +502,24 @@ if (!command) return message.channel.send(`There is no command with name or alia
 A lot of library specific structures have `client` as a property. That means you don't have to pass the client reference as a parameter to commands to access for example `client.guilds` or `client.commands`, but can directly access the respective properties directly from the `message` object, as shown in the snippet above.
 :::
 
+In order to build the correct file path, you will need the file name and the sub-folder the command belongs to. For the file name, you can use `command.name`. To find the sub-folder name, you will have to loop through the commands sub-folders and check whether the command file is in that folder or not. You can do that by using `Array.includes()` on the file names array of each sub-folder. 
+
+```js
+const commandFolders = fs.readdirSync('./commands');
+const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${folder}`).includes(`${commandName}.js`));
+```
+
 Now, in theory, all there is to do, is to delete the previous command from `client.commands` and require the file again. In practice though, you cannot do this that easily as `require()` caches the file. If you were to require it again, you would simply load the previously cached file without any of your changes. In order to remove the file from the cache, you need to add the following line to your code:
 
 ```js
-delete require.cache[require.resolve(`./${command.name}.js`)];
+delete require.cache[require.resolve(`../${folderName}/${command.name}.js`)];
 ```
 
 After removing the command from the cache, all you have to do is require the file again and add the freshly loaded command to `client.commands`:
 
 ```js
 try {
-	const newCommand = require(`./${command.name}.js`);
+	const newCommand = require(`../${folderName}/${command.name}.js`);
 	message.client.commands.set(newCommand.name, newCommand);
 } catch (error) {
 	console.error(error);

@@ -94,7 +94,7 @@ client.on('message', async message => {
 				.first(10)
 				.map((user, position) => `(${position + 1}) ${(client.users.cache.get(user.user_id).tag)}: ${user.balance}💰`)
 				.join('\n'),
-			{ code: true }
+			{ code: true },
 		);
 	}
 });
