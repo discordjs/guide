@@ -1,14 +1,18 @@
 const { prefix } = require('../config.json');
 
-module.exports = (message, client) => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+module.exports = {
+	name: 'message',
+	once: false,
+	execute(message, client) {
+		if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const commandName = args.shift().toLowerCase();
+		const args = message.content.slice(prefix.length).trim().split(/ +/);
 
-	const command = client.commands.get(commandName);
+		const commandName = args.shift().toLowerCase();
+		const command = client.commands.get(commandName);
 
-	if (!command) return;
+		if (!command) return;
 
-	command.execute(message, args);
+		command.execute(message, args);
+	},
 };

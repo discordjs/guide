@@ -39,19 +39,19 @@ Now, you'll move the existing code you have written for the events in `index.js`
 Always name your event file after the name of the event. For example, if you want to create a file for `guildMemberAdd` event, then it should be named `guildMemberAdd.js`
 :::
 
-The first event file you'll create will be for the `ready` event. Create a new file in the `events` folder and name it `ready.js`. After doing that, this is what you would write inside it:
+The first event file you'll create will be for the `ready` event. Create a new file in the `events` folder and name it `ready.js`. After that, this is what you would write in it:
 
 ```js
-module.exports = () => {
-	console.log('Ready!');
+module.exports = {
+	name: 'ready',
+	once: true,
+	execute() {
+		console.log('Ready!');
+	},
 };
 ```
 
-We are doing the same thing we did earlier for command files. However, instead of exporting an object, we are exporting an arrow function here. This function will execute when the `ready` event will emit. But for that to happen, you will have to make some changes in the `index.js` file.
-
-::: tip
-You can read more about arrow functions [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
-:::
+The `name` property of this object states what event this file is for, the `once` property is a boolean and specifies whether the event should be registered to be run only once or not. The most important part of this object is the `execute` function. The event-handler will call this function when the event emits.
 
 Since code for each event will be in its respective event file, you don't need the code for `ready` and `message` events in the `index.js` file. Head back to the `index.js` and remove the following code from there:
 
@@ -69,7 +69,7 @@ const cooldowns = new Discord.Collection();
 client.login(token);
 ```
 
-After removing the above code, you'll dynamically retrieve all the event files. Add this below your `const cooldowns` line:
+Now, you'll write the code for dynamically retrieving all the event files in the `events` folder. Add this below the `const cooldowns` line in `index.js`:
 
 ```diff
 const cooldowns = new Discord.Collection();
@@ -77,15 +77,18 @@ const cooldowns = new Discord.Collection();
 + const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 ```
 
-You have already learned about this in the Command Handling section. The `fs.readdirSync()` method will return an array of all the file names in that directory. Here, the directory is `events` therefore if you do `console.log(eventFiles)` at this point, it will print: `[ 'ready.js' ]`. Since we are only looking for JavaScript files, we filtered out all the files that don't end with `.js` extension. Right now you have a single file in the `events` folder but you'll create more once you have made the necessary changes in `index.js`.
+You have already learned about this in the [command handler](/command-handling/) section. The `fs.readdirSync()` method returns an array of all the file names in a given directory. Here, the directory is `events`, therefore if you log `eventFiles` it will print: `[ 'ready.js' ]`. Since you only need JavaScript files, you filtered out all the files that do not end with `.js` extension. Currently, you have a single file in the `events` folder but you'll create more once you have made the necessary changes in `index.js`.
 
 Add the following code after the above line in `index.js`:
 
 ```js
 for (const file of eventFiles) {
 	const event = require(`./events/${file}`);
-	const eventName = file.slice(0, -3);
-	client.on(eventName, (...args) => event(...args));
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args));
+	}
 }
 ```
 
@@ -103,41 +106,37 @@ In the first line, you have a loop, that iterates over each element of the `even
 const event = require(`./events/${file}`);
 ```
 
-Each event file that you will create will have an arrow function that it exports.  You'll retrieve that exported arrow function in the `index.js` file and then assign it to the `event` variable.
+Each event file that you will create will export an object. You'll retrieve that exported object in the `index.js` file and then assign it to the `event` variable.
 
-```js
-const eventName = file.slice(0, -3);
-```
+You'll have to learn `event registeration` and `rest & spread` before you understand what's happening in the last few lines.
 
-In this line, you're storing the name of the current file without the extension part in `eventName` variable. Remember, when we told you to make sure your event file's name should match with the name of its event. Now you know the reason for it. The `file` variable here is one of the filenames from the `eventFiles` array. Since it's a string, we can use the slice method on it that starts from the first character and ends just before the third character from the end. Doing this returns a new string which doesn't have the last three character i.e. `.js` in it.
-
-::: tip
-You can learn more about the `slice` method [here](https://javascript.info/string#getting-a-substring)
-:::
-
-There are two things that you'll have to learn in order to understand what's happening in the last line:
-
-```js
-client.on(eventName, (...args) => event(...args));
-```
-
-Those two things are `event registeration` and `rest & spread`.
-
-In order to listen for events, we have to register them first. In other words, we have to tell nodejs what is the name of the event that we want to listen for and what function should be called, when that event emits. This is done by using the `on` method of an `EventEmitter`.
+In order to listen for events, we have to register them first. In other words, we have to tell nodejs what is the name of the event that we want to listen for and what function should be called, when that event emits. Since this function gets called when an event emits, we say it's a [callback function](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function). This is done by using the `on` or `once` method of an `EventEmitter`. The `on` method is used to register callback function for events that can emit multiple times, while functions registered using `once` method get unregistered after a single event.
 
 ::: tip
 You can learn more about `EventEmitter` [here](https://nodejs.org/api/events.html#events_class_eventemitter)
 :::
 
-The `Client` class in `discord.js` extends this `EventEmitter` class. Therefore, the `client` object also have this `on` method that you can use to register events. The `on` method takes two arguments: name of the event and a callback function. You already have the name of the event in the `eventName` variable. So that is what you'll pass as the first argument to the `on` method. The second argument should be a function. That's why you'll pass an arrow function to it. Since this function gets called when an event emits, we say it's a [callback function](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function).
+The `Client` class in discord.js extends this `EventEmitter` class. Therefore, the `client` object also has these `on` and `once` methods that you can use to register events. These methods take two arguments: name of the event and a callback function. You get the name of the event from `event.name`.
 
-The callback function you've passed to the `on` method takes argument(s) returned by the events you've registered, collects them in an `args` array using the `...` rest parameter, passes the individual elements in the `args` array to the `event` function using the `...` spread syntax and then calls it. This must be a bit confusing to you, as both the `rest` and `spread` look same, while their functionality is exactly opposite of each other. For now, just understand that you have to use these two because different types of events in `discord.js` return different number of arguments. So, you collect these arguments returned by the events without caring about their numbers in the `args` array using`rest` parameter and pass it on to the arrow function of the respective event file using the `spread` syntax. The arrow functions in the event files will always get the correct number of arguments due to this.
+The callback function you passed, takes argument(s) returned by its respective event, collects them in an `args` array using the `...` rest parameter, then passes the elements in the `args` array to the `event.execute` function using the `...` spread syntax and then finally calls it. Even though `rest` and `spread` look the same, their functionality is exactly opposite of each other. You have to use them here because different types of events in discord.js return different number of arguments. The `rest` parameter collects these unknown number of arguments into a single array, the `spread` operator then takes each element from this `args` array and passes it to the `execute` function.
 
 ::: tip
-Learn more about `rest` parameter and `spread` syntax [here](https://javascript.info/rest-parameters-spread)
+Learn more about `rest` and `spread` [here](https://javascript.info/rest-parameters-spread)
 :::
 
-Before you go any further you should check the event handler is working or not. Open your terminal, type `node index.js` and press enter. If you see `Ready!` gets printed, then congratulations, you've made an event handler. After this listening for other events is as easy as creating a new event file in the `events` folder. The event handler will automatically retrieve this new event file and register the respective event whenever you restart the bot.
+Now, lets come back to the event-handler and see what's happening in its last few lines:
+
+```js
+if (event.once) {
+	client.once(event.name, (...args) => event.execute(...args));
+} else {
+	client.on(event.name, (...args) => event.execute(...args));
+}
+```
+
+You can listen for an event either only once or multiple times by registering it using `once` or `on` respectively. In both of the above conditions, you are registering a callback function that will be called when its respective event emits, but for events that have their `once` property set to `true`, you will register them using the `once` method, so that it gets unregistered after a single event.
+
+Before you go any further you should check the event handler is working or not. Open your terminal, type `node index.js` and press enter. If you see `Ready!` gets printed, then congratulations, you've made an event handler. After this, listening for other events is as easy as creating a new event file in the `events` folder. The event handler will automatically retrieve this new event file and register the respective event whenever you restart the bot.
 
 ## Message event
 
@@ -146,17 +145,21 @@ You created an event file for the `ready` event above. That module was somewhat 
 Create a new event file in the `events` folder. Since you're creating this file for the `message` event, you should name it `message.js`. After that,  write the following lines of code in it:
 
 ```js
-module.exports = message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+module.exports = {
+	name: 'message',
+	once: false,
+	execute(message) {
+		if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
+		const args = message.content.slice(prefix.length).trim().split(/ +/);
 
-	const commandName = args.shift().toLowerCase();
-	const command = client.commands.get(commandName);
+		const commandName = args.shift().toLowerCase();
+		const command = client.commands.get(commandName);
 
-	if (!command) return;
+		if (!command) return;
 
-	command.execute(message, args);
+		command.execute(message, args);
+	},
 };
 ```
 
@@ -167,14 +170,16 @@ The first thing that needs attention is the `prefix`. You can see, you're checki
 ```diff
 + const { prefix } = require('../config.json');
 
-module.exports = message => {...
+module.exports = {
+	// ...
+}
 ```
 
 ::: warning
 In `index.js` you used `./` while here you have to use `../` while specifying the path for the `config.json` file. Don't forget to keep this in mind. You can read more about `require` [here](https://nodejs.org/api/modules.html#modules_require_id)
 :::
 
-Your next step would be to define the `client` object. In the `index.js` file, you defined it by calling its constructor. What you have to do here is to get hold of that `client` so that you can use it in this file too. Most of the structures in `discord.js` have the `client` as their property. This makes it possible to get hold of the client through these structures. The `message` object returned by the `message` event is one of those structures. Therefore you can define the `client` by adding the following line after checking for the `prefix`:
+Your next step would be to define the `client` object. In the `index.js` file, you defined it by calling its constructor. What you have to do here is to get hold of that `client` so that you can use it in this file too. Most of the structures in discord.js have the `client` as their property. This makes it possible to get hold of the client through these structures. The `message` object returned by the `message` event is one of those structures. Therefore you can define the `client` by adding the following line after checking for the `prefix`:
 
 ```diff
 if (!message.content.startsWith(prefix) || message.author.bot) return;
@@ -187,37 +192,48 @@ You can add back all the additional features in the `message.js` event file. Jus
 
 ## Passing client to event files
 
-You must have noticed how important `Client` class is in `discord.js`. You created a `client` instance of this class in the `index.js` file. Most of the time you can use this `client` in other files by either obtaining it from one of the `discord.js` structures or from function parameters. You did the former in the above section by using `<Message>.client`. When you don't have access to any of the structures that have `client` as one of their property, you'll have to use the latter method. The perfect example of this is the `ready.js` event file.
+You must have noticed how important `Client` class is in discord.js. You created a `client` instance of this class in the `index.js` file. Most of the time you can use this `client` in other files by either obtaining it from one of the `discord.js` structures or from function parameters. You did the former in the above section by using `<Message>.client`. When you don't have access to any of the structures that have `client` as one of their properties, you'll have to use the latter method. The perfect example of this is the `ready.js` event file.
 
-The `ready` event does not return anything, this means that `args` will be an empty array, thus nothing will be passed to the arrow function in the `ready.js` event file. Now to obtain the `client` you'll have to pass it as an argument along with the `args` array in the event-handler. So, head back to the `index.js` file and make the following changes in it:
+The `ready` event does not return anything, this means that `args` will be an empty array, thus nothing will be passed to the `execute` function in the `ready.js` event file. Now to obtain the `client` you'll have to pass it as an argument along with the `args` array in the event-handler. So, head back to the `index.js` file and make the following changes in it:
 
 ```diff
 for (const file of eventFiles) {
-    const event = require(`./events/${file}`);
-    const eventName = file.slice(0, -3);
--	client.on(eventName, (...args) => event(...args));
-+   client.on(eventName, (...args) => event(...args, client));
+	const event = require(`./events/${file}`);
+	if (event.once) {
+-		client.once(event.name, (...args) => event.execute(...args));
++		client.once(event.name, (...args) => event.execute(...args, client));
+	} else {
+-		client.on(event.name, (...args) => event.execute(...args));
++		client.on(event.name, (...args) => event.execute(...args, client));
+	}
 }
 ```
 
-Now, `client` will be available as the last argument to the arrow function in every event file you'll create. Since, `ready` event doesn't return anything, `client` will be the only argument to the arrow function of `ready.js` event file. You can make use of `client` in `ready.js` by logging your bot's name in the console when it becomes ready. Head back to `ready.js` and make the following changes to it:
+Now, `client` will be available as the last argument to the `execute` function in every event file you'll create. Since, `ready` event doesn't return anything, `client` will be the only argument to the `execute` function of `ready.js` event file. You can make use of `client` in `ready.js` by logging your bot's name in the console when it becomes ready. Head back to `ready.js` and make the following changes to it:
 
 ```diff
-+ module.exports = (client) => {
--	console.log('Ready!');
-+	console.log(`Logged in as ${client.user.tag}`);
-}
+module.exports = {
+	name: 'ready',
+    once: true,
++	execute(client) {
+-		console.log('Ready!');
++		console.log(`Logged in as ${client.user.tag}`);
+	},
+};
 ```
 
-You can omit the `client` argument from the arrow function definition in an event file if you either obtain it from some other `discord.js` structure or don't need the `client` in it at all. For example, the `message.js` event file will still work if you don't take `client` as an argument in the arrow function, but if you want you can make the following changes, and it will work just like earlier: 
+You can omit the `client` argument from the `execute` function in an event file if you either obtain it from some other discord.js structure or don't need the `client` in it at all. For example, the `message.js` event file will still work if you don't take `client` as an argument in the arrow function, but if you want you can make the following changes, and it will work just like earlier: 
 
 ```diff
-+ module.exports = (message, client) => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
--	const client = message.client;
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	// ...
-}
+module.exports = {
+	name: 'message',
+	once: false,
++	execute(message, client) {
+		if (!message.content.startsWith(prefix) || message.author.bot) return;
+-		const client = message.client;
+		// ...
+	},
+};
 ```
 
 ::: warning
@@ -228,8 +244,12 @@ It is worth to note that the position of `client` argument matters. For example 
 
 ```js
 // This will work
-module.exports = (oldMessage, newMessage, client) => {
-	// ...
+module.exports = {
+	name: 'messageUpdate',
+	once: false,
+	execute(oldMessage, newMessage, client) {
+		// ...
+	},
 };
 ```
 
@@ -237,8 +257,12 @@ If you aren't using `client` in an event file, you can omit it from the function
 
 ```js
 // This will work too
-module.exports = (oldMessage, newMessage) => {
-	// ...
+module.exports = {
+	name: 'messageUpdate',
+	once: false,
+	execute(oldMessage, newMessage) {
+		// ...
+	},
 };
 ```
 
@@ -246,8 +270,12 @@ What you cannot do is pass the `client` argument at the wrong position, like thi
 
 ```js
 // This will create problems :(
-module.exports = (newMessage, client) => {
-	// ...
+module.exports = {
+	name: 'messageUpdate',
+	once: false,
+	execute(newMessage, client) {
+		// ...
+	},
 };
 ```
 
