@@ -168,9 +168,12 @@ module.exports = {
 And in your main file, above the args checking line, add this in:
 
 ```js
-if (command.guildOnly && message.channel.type === 'dm') {
++ if (command.guildOnly && message.channel.type === 'dm') {
 	return message.reply('I can\'t execute that command inside DMs!');
 }
+
+    if (command.args && !args.length) {  let reply = `You didn't provide any arguments, ${message.author}!`;  if (command.usage) { reply = `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;  } return message.channel.send(reply); 	  } 
+
 ```
 
 Now when you try to use the kick command inside a DM, you'll get the appropriate response which will also prevent your bot from throwing an error.
