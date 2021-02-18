@@ -222,7 +222,7 @@ module.exports = {
 };
 ```
 
-You can omit the `client` argument from the `execute` function in an event file if you either obtain it from some other discord.js structure or don't need the `client` in it at all. For example, the `message.js` event file will still work if you don't take `client` as an argument in the arrow function, but if you want you can make the following changes, and it will work just like earlier: 
+You can omit the `client` argument from the `execute` function in an event file if you either obtain it from some other discord.js structure or don't need the `client` in it at all. For example, the `message.js` event file will still work if you don't take `client` as an argument in the `execute` function, but if you want you can make the following changes, and it will work just like earlier: 
 
 ```diff
 module.exports = {
