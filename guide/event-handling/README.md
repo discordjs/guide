@@ -6,7 +6,7 @@ Here's the base code we'll be using:
 
 ```js
 const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
+const { token } = require('./config.json');
 
 const client = new Discord.Client();
 
