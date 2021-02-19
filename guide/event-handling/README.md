@@ -33,15 +33,9 @@ Create an `events` folder in the directory where your `index.js` file is kept. T
 
 ![Project structure after events folder](./images/project-structure-after-events-folder.png)
 
-Now, you'll move the existing code you have written for the events in `index.js` to their individual files inside `events` folders.
+Now, you'll take your existing events code in `index.js` and move them to individual files inside the `events` folders. Create a `ready.js` and a `message.js` file in the `events` folder and place in the code for the respective files:
 
-::: danger
-Always name your event file after the name of the event. For example, if you want to create a file for `guildMemberAdd` event, then it should be named `guildMemberAdd.js`
-:::
-
-The first event file you'll create will be for the `ready` event. Create a new file in the `events` folder and name it `ready.js`. After that, this is what you would write in it:
-
-```js
+` ``js
 module.exports = {
 	name: 'ready',
 	once: true,
@@ -49,25 +43,18 @@ module.exports = {
 		console.log('Ready!');
 	},
 };
-```
+` ``
 
-The `name` property of this object states what event this file is for, the `once` property is a boolean and specifies whether the event should be registered to be run only once or not. The most important part of this object is the `execute` function. The event-handler will call this function when the event emits.
+` ``js
+module.exports = {
+	name: 'message',
+	execute(message) {
+		console.log(`${message.author.tag} in #${message.channel.name} sent: ${message.content}`);
+	},
+};
+` ``
 
-Since code for each event will be in its respective event file, you don't need the code for `ready` and `message` events in the `index.js` file. Head back to the `index.js` and remove the following code from there:
-
-```diff
-const cooldowns = new Discord.Collection();
-
-- client.once('ready', () => {
--	console.log('Ready!');
-- });
-
-- client.on('message', message => {
--	// ...
-- });
-
-client.login(token);
-```
+The `name` property states which event this file is for, the `once` property is a boolean and specifies if the the event should run only once, and the `execute` function is for your event logic. The event handler will call this function whenever the event emits.
 
 Now, you'll write the code for dynamically retrieving all the event files in the `events` folder. Add this below the `const cooldowns` line in `index.js`:
 
