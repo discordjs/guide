@@ -35,7 +35,7 @@ Create an `events` folder in the directory where your `index.js` file is kept. T
 
 Now, you'll take your existing events code in `index.js` and move them to individual files inside the `events` folders. Create a `ready.js` and a `message.js` file in the `events` folder and place in the code for the respective files:
 
-` ``js
+```js
 module.exports = {
 	name: 'ready',
 	once: true,
@@ -43,16 +43,16 @@ module.exports = {
 		console.log('Ready!');
 	},
 };
-` ``
+```
 
-` ``js
+```js
 module.exports = {
 	name: 'message',
 	execute(message) {
 		console.log(`${message.author.tag} in #${message.channel.name} sent: ${message.content}`);
 	},
 };
-` ``
+```
 
 The `name` property states which event this file is for, the `once` property is a boolean and specifies if the the event should run only once, and the `execute` function is for your event logic. The event handler will call this function whenever the event emits.
 
@@ -128,14 +128,14 @@ You can omit the `client` argument from the `execute` function in files where yo
 
 It is worth noting that the position of `client` argument matters. For example, the `messageUpdate` event has two arguments: `oldMessage` and `newMessage`. Events like this should be handled as:
 
-` ``js
+```js
 module.exports = {
 	name: 'messageUpdate',
 	execute(oldMessage, newMessage, client) {
 		// ...
 	},
 };
-` ``
+```
 
 If you were to try `execute(newMessage, client)`, this would mean that `newMessage` is an `oldMessage` object and `client` is a `newMessage` object.
 
