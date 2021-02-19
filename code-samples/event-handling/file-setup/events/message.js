@@ -1,17 +1,6 @@
-const { prefix } = require('../config.json');
-
 module.exports = {
 	name: 'message',
-	execute(message, client) {
-		if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-		const args = message.content.slice(prefix.length).trim().split(/ +/);
-
-		const commandName = args.shift().toLowerCase();
-		const command = client.commands.get(commandName);
-
-		if (!command) return;
-
-		command.execute(message, args);
+	execute(message) {
+		console.log(`${message.author.tag} in #${message.channel.name} sent: ${message.content}`);
 	},
 };

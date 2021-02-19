@@ -92,58 +92,6 @@ The callback function passed takes argument(s) returned by its respective event,
 
 After this, listening for other events is as easy as creating a new file in the `events` folder. The event handler will automatically retrieve and register it whenever you restart your bot.
 
-## Message event
-
-You created an event file for the `ready` event above. That module was somewhat short and easy to write, as you were only logging `Ready!` in it. The `ready` event doesn't return any argument and you don't do much when that event emits. This section teaches you how to write an event file for an event that returns at least one argument and how to do lots of stuff in it. You'll also learn how to retrieve things that are not available in the event file but can be required either from other files or accessed through the arguments returned by the event.
-
-Create a new event file in the `events` folder. Since you're creating this file for the `message` event, you should name it `message.js`. After that,  write the following lines of code in it:
-
-```js
-module.exports = {
-	name: 'message',
-	once: false,
-	execute(message) {
-		if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-		const args = message.content.slice(prefix.length).trim().split(/ +/);
-
-		const commandName = args.shift().toLowerCase();
-		const command = client.commands.get(commandName);
-
-		if (!command) return;
-
-		command.execute(message, args);
-	},
-};
-```
-
-You can see the code in the `message.js` event file looks almost similar to what you wrote earlier for the `message` event in `index.js`. All the additional feature you learned earlier have been dropped for the sake of simplicity. You can add those again later. Even though the code looks similar but it won't work until you make some necessary changes.
-
-The first thing that needs attention is the `prefix`. You can see, you're checking for the `prefix` in the first line, but you haven't defined it anywhere in this event file. You can fix this by retrieving it from `config.json`, just like you did in `index.js` file. Add this line above the `module.exports` line:
-
-```diff
-+ const { prefix } = require('../config.json');
-
-module.exports = {
-	// ...
-}
-```
-
-::: warning
-In `index.js` you used `./` while here you have to use `../` while specifying the path for the `config.json` file. Don't forget to keep this in mind. You can read more about `require` [here](https://nodejs.org/api/modules.html#modules_require_id)
-:::
-
-Your next step would be to define the `client` object. In the `index.js` file, you defined it by calling its constructor. What you have to do here is to get hold of that `client` so that you can use it in this file too. Most of the structures in discord.js have the `client` as their property. This makes it possible to get hold of the client through these structures. The `message` object returned by the `message` event is one of those structures. Therefore you can define the `client` by adding the following line after checking for the `prefix`:
-
-```diff
-if (!message.content.startsWith(prefix) || message.author.bot) return;
-+ const client = message.client;
-```
-
-Now run your bot and check whether it's working or not. If you encounter any error, go back and check you haven't made any mistake.
-
-You can add back all the additional features in the `message.js` event file. Just make sure you take care of the things that we talked about above.
-
 ## Passing `Client` to event files
 
 You may have noticed how important the `Client` class is. You created a `client` instance of this class in the `index.js` file. Most of the time you can use this `client` instance in other files by either obtaining it from one of the other discord.js structures or from function parameters. In your `message` event, you can use `message.client`. When you don't have access to any of the structures that have the `client` property, you'll have to use the latter method. The prime example of this is the `ready` event.
