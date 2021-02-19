@@ -11,7 +11,7 @@ const { token } = require('./config.json');
 const client = new Discord.Client();
 
 client.once('ready', () => {
-	console.log(`Ready! Logged in as ${client.user.tag}`);
+	console.log('Ready!');
 });
 
 client.on('message', message => {
@@ -56,10 +56,10 @@ module.exports = {
 
 The `name` property states which event this file is for, the `once` property is a boolean and specifies if the the event should run only once, and the `execute` function is for your event logic. The event handler will call this function whenever the event emits.
 
-Now, you'll write the code for dynamically retrieving all the event files in the `events` folder. Add this below the `const cooldowns` line in `index.js`:
+Now, you'll write the code for dynamically retrieving all the event files in the `events` folder. Add this below the `const client` line in `index.js`:
 
 ```diff
-const cooldowns = new Discord.Collection();
+const client = new Discord.Client();
 
 + const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 ```
@@ -177,7 +177,7 @@ Now run your bot and check whether it's working or not. If you encounter any err
 
 You can add back all the additional features in the `message.js` event file. Just make sure you take care of the things that we talked about above.
 
-## Passing client to event files
+## Passing `Client` to event files
 
 You must have noticed how important `Client` class is in discord.js. You created a `client` instance of this class in the `index.js` file. Most of the time you can use this `client` in other files by either obtaining it from one of the `discord.js` structures or from function parameters. You did the former in the above section by using `<Message>.client`. When you don't have access to any of the structures that have `client` as one of their properties, you'll have to use the latter method. The perfect example of this is the `ready.js` event file.
 
@@ -204,7 +204,7 @@ module.exports = {
     once: true,
 +	execute(client) {
 -		console.log('Ready!');
-+		console.log(`Logged in as ${client.user.tag}`);
++		console.log(`Ready! Logged in as ${client.user.tag}`);
 	},
 };
 ```
