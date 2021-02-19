@@ -2,7 +2,6 @@ const { prefix } = require('../config.json');
 
 module.exports = {
 	name: 'message',
-	once: false,
 	execute(message, client) {
 		if (!message.content.startsWith(prefix) || message.author.bot) return;
 
