@@ -79,21 +79,6 @@ for (const file of eventFiles) {
 }
 ```
 
-Don't be afraid we'll go through each line one by one to teach you what's happening here.
-
-```js
-for (const file of eventFiles) {
-	// ...
-}
-```
-
-In the first line, you have a loop, that iterates over each element of the `eventFiles` array and executes the code inside it for that element. You already know the elements in the `eventFiles` array are just names of the javascript files that are inside the `events` folder.
-
-```js
-const event = require(`./events/${file}`);
-```
-
-Each event file that you will create will export an object. You'll retrieve that exported object in the `index.js` file and then assign it to the `event` variable.
 
 You'll have to learn `event registeration` and `rest & spread` before you understand what's happening in the last few lines.
 
