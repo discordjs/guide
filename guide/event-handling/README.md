@@ -25,15 +25,11 @@ Currently, the event listeners are placed in the `index.js` file. The `ready` ev
 
 ## Individual event files
 
-Your project structure should look something like this:
+Your folder structure should look something like this:
 
-![Project structure before events folder](./images/project-structure-before-events-folder.png)
+![Folder structure](./images/folder-structure.png)
 
-Create an `events` folder in the directory where your `index.js` file is kept. This is how your project structure should look after that:
-
-![Project structure after events folder](./images/project-structure-after-events-folder.png)
-
-Now, you'll take your existing events code in `index.js` and move them to individual files inside the `events` folders. Create a `ready.js` and a `message.js` file in the `events` folder and place in the code for the respective files:
+Create an `events` folder in the same directory. You can now take your existing events code in `index.js` and move them to individual files inside the `events` folders. Create a `ready.js` and a `message.js` file in the `events` folder and place in the code for the respective files:
 
 ```js
 module.exports = {
