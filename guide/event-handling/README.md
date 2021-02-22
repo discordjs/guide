@@ -64,7 +64,7 @@ const client = new Discord.Client();
 + const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 ```
 
-You have already learned about this in the [command handler](/command-handling/) section. The `fs.readdirSync()` method returns an array of all the file names in a given directory. Here, the directory is `events`, therefore if you log `eventFiles` it will print: `[ 'ready.js' ]`. Since you only need JavaScript files, you filtered out all the files that do not end with `.js` extension. Currently, you have a single file in the `events` folder but you'll create more once you have made the necessary changes in `index.js`.
+This same method is used in our [command handler](/command-handling/) section. The `fs.readdirSync().filter()` calls return an array of all the file names in the given directory and filter for only `.js` files, i.e. `['ready.js', 'message.js']`.
 
 Add the following code after the above line in `index.js`:
 
@@ -124,7 +124,9 @@ module.exports = {
 };
 ```
 
+::: tip
 You can omit the `client` argument from the `execute` function in files where you don't need it. For example, it isn't needed in the `message.js` file because its first argument is a `Message` instance, meaning you can use `message.client`.
+:::
 
 It is worth noting that the position of `client` argument matters. For example, the `messageUpdate` event has two arguments: `oldMessage` and `newMessage`. Events like this should be handled as:
 
