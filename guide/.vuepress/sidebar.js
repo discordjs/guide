@@ -72,6 +72,12 @@ module.exports = {
 			],
 		},
 		{
+			title: 'Event Handler',
+			children: [
+				'/event-handling/',
+			],
+		},
+		{
 			title: 'Popular Topics',
 			children: [
 				'/popular-topics/faq',
