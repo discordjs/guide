@@ -160,28 +160,28 @@ While it's a bit unattractive to have more nesting in your commands, it is neces
 <branch version="11.x">
 
 ```diff
-    if (command === 'stats') {
+	if (command === 'stats') {
 -       return message.channel.send(`Server count: ${client.guilds.size}`);
 +       return client.shard.fetchClientValues('guilds.size')
 +           .then(results => {
 +               return message.channel.send(`Server count: ${results.reduce((acc, guildCount) => acc + guildCount, 0)}`);
 +           })
 +           .catch(console.error);
-    }
+	}
 ```
 
 </branch>
 <branch version="12.x">
 
 ```diff
-    if (command === 'stats') {
+	if (command === 'stats') {
 -       return message.channel.send(`Server count: ${client.guilds.cache.size}`);
 +       return client.shard.fetchClientValues('guilds.cache.size')
 +           .then(results => {
 +               return message.channel.send(`Server count: ${results.reduce((acc, guildCount) => acc + guildCount, 0)}`);
 +           })
 +           .catch(console.error);
-    }
+	}
 ```
 
 </branch>
@@ -276,7 +276,7 @@ Promise.all(promises)
 <branch version="11.x">
 
 ```diff
-    if (command === 'stats') {
+	if (command === 'stats') {
 -       return message.channel.send(`Server count: ${client.guilds.size}`);
 +       const promises = [
 +           client.shard.fetchClientValues('guilds.size'),
@@ -290,14 +290,14 @@ Promise.all(promises)
 +               return message.channel.send(`Server count: ${totalGuilds}\nMember count: ${totalMembers}`);
 +           })
 +           .catch(console.error);
-    }
+	}
 ```
 
 </branch>
 <branch version="12.x">
 
 ```diff
-    if (command === 'stats') {
+	if (command === 'stats') {
 -       return message.channel.send(`Server count: ${client.guilds.cache.size}`);
 +       const promises = [
 +           client.shard.fetchClientValues('guilds.cache.size'),
@@ -311,7 +311,7 @@ Promise.all(promises)
 +               return message.channel.send(`Server count: ${totalGuilds}\nMember count: ${totalMembers}`);
 +           })
 +           .catch(console.error);
-    }
+	}
 ```
 
 </branch>

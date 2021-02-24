@@ -16,11 +16,11 @@ First, pull the argument from your say command:
 
 ```js
 args: [
-    {
-        key: 'text',
-        prompt: 'What text would you like the bot to say?',
-        type: 'string',
-    },
+	{
+		key: 'text',
+		prompt: 'What text would you like the bot to say?',
+		type: 'string',
+	},
 ],
 ```
 
@@ -30,12 +30,12 @@ Add a blank `validate` function to the arg.
 
 ```js
 args: [
-    {
-        key: 'text',
-        prompt: 'What text would you like the bot to say?',
-        type: 'string',
-        validate: text => {},
-    },
+	{
+		key: 'text',
+		prompt: 'What text would you like the bot to say?',
+		type: 'string',
+		validate: text => {},
+	},
 ],
 ```
 
@@ -45,12 +45,12 @@ Inside your `validate` function, check to see if the length is below 201 charact
 
 ```js
 args: [
-    {
-        key: 'text',
-        prompt: 'What text would you like the bot to say?',
-        type: 'string',
-        validate: text => text.length < 201,
-    },
+	{
+		key: 'text',
+		prompt: 'What text would you like the bot to say?',
+		type: 'string',
+		validate: text => text.length < 201,
+	},
 ],
 ```
 
@@ -64,12 +64,12 @@ Another property you can use to validate arguments is the `oneOf` option. This o
 
 ```js
 args: [
-    {
-        key: 'option',
-        prompt: 'Yes or No?',
-        type: 'string',
-        oneOf: ['yes', 'no'],
-    },
+	{
+		key: 'option',
+		prompt: 'Yes or No?',
+		type: 'string',
+		oneOf: ['yes', 'no'],
+	},
 ],
 ```
 

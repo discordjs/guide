@@ -122,13 +122,13 @@ Now that you have a command handler, you can make a command to allow people to u
 <!-- eslint-skip -->
 ```js
 if (command === 'prefix') {
-    // if there's at least one argument, set the prefix
-    if (args.length) {
-        await prefixes.set(message.guild.id, args[0]);
-        return message.channel.send(`Successfully set prefix to \`${args[0]}\``);
-    }
+	// if there's at least one argument, set the prefix
+	if (args.length) {
+		await prefixes.set(message.guild.id, args[0]);
+		return message.channel.send(`Successfully set prefix to \`${args[0]}\``);
+	}
 
-    return message.channel.send(`Prefix is \`${await prefixes.get(message.guild.id) || globalPrefix}\``);
+	return message.channel.send(`Prefix is \`${await prefixes.get(message.guild.id) || globalPrefix}\``);
 }
 ```
 
@@ -137,24 +137,24 @@ You will probably want to set up additional validation such as required permissi
 ### Usage
 
 <div is="discord-messages">
-    <discord-message author="User" avatar="djs">
-        .prefix
-    </discord-message>
-    <discord-message author="Tutorial Bot" :bot="true">
-        Prefix is `.`
-    </discord-message>
-    <discord-message author="User" avatar="djs">
-        .prefix $
-    </discord-message>
-    <discord-message author="Tutorial Bot" :bot="true">
-        Successfully set prefix to `$`
-    </discord-message>
-    <discord-message author="User" avatar="djs">
-        $prefix
-    </discord-message>
-    <discord-message author="Tutorial Bot" :bot="true">
-        Prefix is `$`
-    </discord-message>
+	<discord-message author="User" avatar="djs">
+		.prefix
+	</discord-message>
+	<discord-message author="Tutorial Bot" :bot="true">
+		Prefix is `.`
+	</discord-message>
+	<discord-message author="User" avatar="djs">
+		.prefix $
+	</discord-message>
+	<discord-message author="Tutorial Bot" :bot="true">
+		Successfully set prefix to `$`
+	</discord-message>
+	<discord-message author="User" avatar="djs">
+		$prefix
+	</discord-message>
+	<discord-message author="Tutorial Bot" :bot="true">
+		Prefix is `$`
+	</discord-message>
 </div>
 
 ## Next steps

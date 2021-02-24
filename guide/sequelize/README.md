@@ -157,18 +157,18 @@ const tagDescription = splitArgs.join(' ');
 
 try {
 	// equivalent to: INSERT INTO tags (name, description, username) values (?, ?, ?);
-    const tag = await Tags.create({
-        name: tagName,
-        description: tagDescription,
-        username: message.author.username,
-    });
-    return message.reply(`Tag ${tag.name} added.`);
+	const tag = await Tags.create({
+		name: tagName,
+		description: tagDescription,
+		username: message.author.username,
+	});
+	return message.reply(`Tag ${tag.name} added.`);
 }
 catch (e) {
-    if (e.name === 'SequelizeUniqueConstraintError') {
-        return message.reply('That tag already exists.');
-    }
-    return message.reply('Something went wrong with adding a tag.');
+	if (e.name === 'SequelizeUniqueConstraintError') {
+		return message.reply('That tag already exists.');
+	}
+	return message.reply('Something went wrong with adding a tag.');
 }
 ```
 
@@ -192,9 +192,9 @@ const tagName = commandArgs;
 // equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
 const tag = await Tags.findOne({ where: { name: tagName } });
 if (tag) {
-    // equivalent to: UPDATE tags SET usage_count = usage_count + 1 WHERE name = 'tagName';
-    tag.increment('usage_count');
-    return message.channel.send(tag.get('description'));
+	// equivalent to: UPDATE tags SET usage_count = usage_count + 1 WHERE name = 'tagName';
+	tag.increment('usage_count');
+	return message.channel.send(tag.get('description'));
 }
 return message.reply(`Could not find tag: ${tagName}`);
 ```
@@ -214,7 +214,7 @@ const tagDescription = splitArgs.join(' ');
 // equivalent to: UPDATE tags (description) values (?) WHERE name='?';
 const affectedRows = await Tags.update({ description: tagDescription }, { where: { name: tagName } });
 if (affectedRows > 0) {
-    return message.reply(`Tag ${tagName} was edited.`);
+	return message.reply(`Tag ${tagName} was edited.`);
 }
 return message.reply(`Could not find a tag with name ${tagName}.`);
 ```
@@ -231,7 +231,7 @@ const tagName = commandArgs;
 // equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
 const tag = await Tags.findOne({ where: { name: tagName } });
 if (tag) {
-    return message.channel.send(`${tagName} was created by ${tag.username} at ${tag.createdAt} and has been used ${tag.usage_count} times.`);
+	return message.channel.send(`${tagName} was created by ${tag.username} at ${tag.createdAt} and has been used ${tag.usage_count} times.`);
 }
 return message.reply(`Could not find tag: ${tagName}`);
 ```

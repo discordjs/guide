@@ -19,8 +19,8 @@ Go to your code editor and make a new file. Add in the code below and save it as
 
 ```json
 {
-    "prefix": "!",
-    "token": "your-token-goes-here"
+	"prefix": "!",
+	"token": "your-token-goes-here"
 }
 ```
 
@@ -40,14 +40,14 @@ As previously mentioned, you'll probably want to store more than just your token
 
 ```json
 {
-    "prefix": "!",
-    "token": "your-token-goes-here",
-    "meaning_of_life": 42,
-    "passwords_array": ["please", "dont", "hack", "me"],
-    "secret_passcodes": {
-        "bank": 1234,
-        "home": 4321
-    }
+	"prefix": "!",
+	"token": "your-token-goes-here",
+	"meaning_of_life": 42,
+	"passwords_array": ["please", "dont", "hack", "me"],
+	"secret_passcodes": {
+		"bank": 1234,
+		"home": 4321
+	}
 }
 ```
 

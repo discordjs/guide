@@ -16,9 +16,9 @@ you can use moment to turn it in a Date object you can use in your code:
 <!-- eslint-skip -->
 ```js
 const input = await message.channel.awaitMessages(m => m.author.id === message.author.id, {
-    max: 4,
-    time: 10e3,
-    errors: ['time'],
+	max: 4,
+	time: 10e3,
+	errors: ['time'],
 });
 const date = moment(input.first().content);
 ```
@@ -56,9 +56,9 @@ Example:
 ```js
 await message.channel.send('Send two messages and I\'ll tell you how far apart you sent them.');
 const messages = await message.channel.awaitMessages(m => m.author.id === message.author.id. {
-    max: 2,
-    time: 30e3,
-    errors: ['time'],
+	max: 2,
+	time: 30e3,
+	errors: ['time'],
 });
 
 const difference = messages.last().createdTimestamp - messages.first().createdTimestamp;
@@ -86,10 +86,10 @@ const packageName = 'common-tags';
 
 if (someCondition) {
 	const poem = stripIndents`
-        I like ${packageName}.
-        It makes my strings so pretty,
-        you should use it too.
-    `;
+		I like ${packageName}.
+		It makes my strings so pretty,
+		you should use it too.
+	`;
 
 	console.log(poem);
 }
@@ -106,7 +106,7 @@ const options = ['add', 'delete', 'edit'];
 
 // -> Do you want me to add, delete or edit the channel?
 message.channel.send(oneLineCommaListsOr`
-    Do you want me to ${options} the channel?
+	Do you want me to ${options} the channel?
 `);
 ```
 

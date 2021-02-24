@@ -222,11 +222,11 @@ Reaction collections are keyed by `name:id` for custom emojis and by `name` for 
 ```js
 const reaction = message.reactions.get('Thonk:484535447171760141');
 try {
-    for (const user of reaction.users.values()) {
-        await reaction.remove(user);
-    }
+	for (const user of reaction.users.values()) {
+		await reaction.remove(user);
+	}
 } catch (error) {
-    console.error('Failed to remove reactions.');
+	console.error('Failed to remove reactions.');
 }
 ```
 
@@ -256,11 +256,11 @@ Removing reactions by user is similar to what you did before. However, instead o
 ```js
 const userReactions = message.reactions.filter(reaction => reaction.users.has(userId));
 try {
-    for (const reaction of userReactions.values()) {
-        await reaction.remove(userId);
-    }
+	for (const reaction of userReactions.values()) {
+		await reaction.remove(userId);
+	}
 } catch (error) {
-    console.error('Failed to remove reactions.');
+	console.error('Failed to remove reactions.');
 }
 ```
 
@@ -277,11 +277,11 @@ Removing reactions by user is not as straightforward as removing by emoji or rem
 ```js
 const userReactions = message.reactions.cache.filter(reaction => reaction.users.cache.has(userId));
 try {
-    for (const reaction of userReactions.values()) {
-        await reaction.users.remove(userId);
-    }
+	for (const reaction of userReactions.values()) {
+		await reaction.users.remove(userId);
+	}
 } catch (error) {
-    console.error('Failed to remove reactions.');
+	console.error('Failed to remove reactions.');
 }
 ```
 

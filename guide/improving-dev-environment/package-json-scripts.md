@@ -12,16 +12,16 @@ If you haven't touched your `package.json` file yet (excluding installing depend
 
 ```json
 {
-  "name": "my-bot",
-  "version": "1.0.0",
-  "description": "A Discord bot!",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+	"name": "my-bot",
+	"version": "1.0.0",
+	"description": "A Discord bot!",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
 }
 ```
 
@@ -60,18 +60,18 @@ Your `package.json` file should now look similar to the following:
 
 ```json
 {
-  "name": "my-bot",
-  "version": "1.0.0",
-  "description": "A Discord bot!",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node .",
-    "lint": "eslint ."
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+	"name": "my-bot",
+	"version": "1.0.0",
+	"description": "A Discord bot!",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node .",
+		"lint": "eslint ."
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
 }
 ```
 

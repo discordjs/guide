@@ -45,10 +45,10 @@ You can do several things with this audio:
 - Process the audio with a voice recognition system to provide another interface of interaction to your bot.
 - An audio recording bot allowing users to store audio and play it back at a later date.
 - A bot that relays audio from one voice connection to another.
-    ```js
-    const audio = connectionA.receiver.createStream('User ID');
-    connectionB.play(audio, { type: 'opus' });
-    ```
+	```js
+	const audio = connectionA.receiver.createStream('User ID');
+	connectionB.play(audio, { type: 'opus' });
+	```
 
 ### What if I want to listen to a user indefinitely?
 

@@ -58,8 +58,8 @@ This will never work for a channel that lies on another shard. So, let's remedy 
 <branch version="11.x">
 
 ```diff
-    if (command === 'send') {
-        if (!args.length) return message.reply('please specify a destination channel id.');
+	if (command === 'send') {
+		if (!args.length) return message.reply('please specify a destination channel id.');
 
 -       const channel = client.channels.get(args[0]);
 -       if (!channel) return message.reply('I could not find such a channel.');
@@ -77,7 +77,7 @@ This will never work for a channel that lies on another shard. So, let's remedy 
 +           }
 +       `)
 +           .then(console.log);
-    }
+	}
 ```
 
 </branch>
@@ -88,8 +88,8 @@ In version 12 [`client.shard`](https://discord.js.org/#/docs/main/stable/class/S
 :::
 
 ```diff
-    if (command === 'send') {
-        if (!args.length) return message.reply('please specify a destination channel id.');
+	if (command === 'send') {
+		if (!args.length) return message.reply('please specify a destination channel id.');
 
 -       const channel = client.channels.cache.get(args[0]);
 -       if (!channel) return message.reply('I could not find such a channel.');
@@ -107,7 +107,7 @@ In version 12 [`client.shard`](https://discord.js.org/#/docs/main/stable/class/S
 +           }
 +       `)
 +           .then(console.log);
-    }
+	}
 ```
 
 </branch>
@@ -117,16 +117,16 @@ If all is well, you should notice an output like `[false, true, false, false]`. 
 <branch version="11.x">
 
 ```diff
-    return client.shard.broadcastEval(`
-        const channel = this.channels.get('${args[0]}');
-        if (channel) {
-            channel.send('This is a message from shard ${this.shard.id}!');
-            true;
-        }
-        else {
-            false;
-        }
-    `)
+	return client.shard.broadcastEval(`
+		const channel = this.channels.get('${args[0]}');
+		if (channel) {
+			channel.send('This is a message from shard ${this.shard.id}!');
+			true;
+		}
+		else {
+			false;
+		}
+	`)
 -       .then(console.log);
 +       .then(sentArray => {
 +           // Search for a non falsy value before providing feedback
@@ -142,16 +142,16 @@ If all is well, you should notice an output like `[false, true, false, false]`. 
 <branch version="12.x">
 
 ```diff
-    return client.shard.broadcastEval(`
-        const channel = this.channels.cache.get('${args[0]}');
-        if (channel) {
-            channel.send('This is a message from shard ${this.shard.id}!');
-            true;
-        }
-        else {
-            false;
-        }
-    `)
+	return client.shard.broadcastEval(`
+		const channel = this.channels.cache.get('${args[0]}');
+		if (channel) {
+			channel.send('This is a message from shard ${this.shard.id}!');
+			true;
+		}
+		else {
+			false;
+		}
+	`)
 -       .then(console.log);
 +       .then(sentArray => {
 +           // Search for a non falsy value before providing feedback
@@ -265,19 +265,19 @@ Now, run this code, and you will surely get a result that looks like the followi
 
 ```js
 [ { guild:
-     { members: {},
-       // ...
-       id: '222078108977594368',
-       name: 'Discord.js Official',
-       icon: '6e4b4d1a0c7187f9fd5d4976c50ac96e',
-       // ...
-       emojis: {} },
-    id: '383735055509356544',
-    name: 'duckSmug',
-    requiresColons: true,
-    managed: false,
-    animated: false,
-    _roles: [] } ]
+	 { members: {},
+	   // ...
+	   id: '222078108977594368',
+	   name: 'Discord.js Official',
+	   icon: '6e4b4d1a0c7187f9fd5d4976c50ac96e',
+	   // ...
+	   emojis: {} },
+	id: '383735055509356544',
+	name: 'duckSmug',
+	requiresColons: true,
+	managed: false,
+	animated: false,
+	_roles: [] } ]
 ```
 
 While this result isn't *necessarily* bad or incorrect, it's simply a raw object that got `JSON.parse()`'d and `JSON.stringify()`'d over, so all of the circular references are gone. More importantly, The object is no longer a true <branch version="11.x" inline>`Emoji`</branch><branch version="12.x" inline>`GuildEmoji`</branch> object as provided by discord.js. This means none of the convenience methods usually provided to you are available. If this is not a concern to you, you can effectively skip the rest of this section. However, this tutorial should cover it regardless! Let's remedy this issue, shall we?
@@ -298,7 +298,7 @@ function findEmoji(id) {
 +   // A new object will be constructed, so simulate raw data by adding this property back
 +   emoji.require_colons = emoji.requiresColons;
 +
-    return emoji;
+	return emoji;
 }
 ```
 
@@ -319,7 +319,7 @@ function findEmoji(id) {
 +   // A new object will be constructed, so simulate raw data by adding this property back
 +   emoji.require_colons = emoji.requiresColons;
 +
-    return emoji;
+	return emoji;
 }
 ```
 
@@ -330,7 +330,7 @@ Now, you will want to make use of it in the actual command:
 <branch version="11.x">
 
 ```diff
-    return client.shard.broadcastEval(`(${findEmoji}).call(this, '${args[0]}')`)
+	return client.shard.broadcastEval(`(${findEmoji}).call(this, '${args[0]}')`)
 -       .then(console.log);
 +       .then(emojiArray => {
 +           // Locate a non falsy result, which will be the emoji in question
@@ -353,7 +353,7 @@ Now, you will want to make use of it in the actual command:
 <branch version="12.x">
 
 ```diff
-    return client.shard.broadcastEval(`(${findEmoji}).call(this, '${args[0]}')`)
+	return client.shard.broadcastEval(`(${findEmoji}).call(this, '${args[0]}')`)
 -       .then(console.log);
 +       .then(emojiArray => {
 +           // Locate a non falsy result, which will be the emoji in question

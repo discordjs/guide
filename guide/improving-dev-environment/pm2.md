@@ -94,7 +94,7 @@ The output of running one of the commands listed above will output a command for
 
 ```bash
 [PM2] You have to run this command as root. Execute the following command:
-      sudo su -c "env PATH=$PATH:/home/user/.nvm/versions/node/v8.9/bin pm2 startup ubuntu -u user --hp /home/user
+	  sudo su -c "env PATH=$PATH:/home/user/.nvm/versions/node/v8.9/bin pm2 startup ubuntu -u user --hp /home/user
 ```
 
 After running that command, you can continue to the next step.
