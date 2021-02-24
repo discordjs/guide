@@ -7,7 +7,7 @@ This page is a follow-up and bases its code on [the previous page](/command-hand
 The command handler you've been building so far doesn't do much aside from dynamically load and execute commands. Those two things alone are great, but not the only things you want. Before diving into it, let's do some quick refactoring in preparation.
 
 ```diff
-    const args = message.content.slice(prefix.length).trim().split(/ +/);
+	const args = message.content.slice(prefix.length).trim().split(/ +/);
 -   const command = args.shift().toLowerCase();
 +   const commandName = args.shift().toLowerCase();
 
@@ -16,10 +16,10 @@ The command handler you've been building so far doesn't do much aside from dynam
 +
 +   const command = client.commands.get(commandName);
 
-    try {
+	try {
 -       client.commands.get(command).execute(message, args);
 +       command.execute(message, args);
-    }
+	}
 ```
 
 In this short (but necessary) refactor, you:
@@ -51,29 +51,29 @@ module.exports = {
 };
 ```
 
-This is fine if you only have a few commands that require arguments; however, if you plan on making a lot of commands and don't want to copy & paste that `if` statement each time, it'd be a smart idea to change that check into something more straightforward.
+This check suffices if you only have a few commands that require arguments; however, if you plan on making a lot of commands and don't want to copy & paste that `if` statement each time, it'd be a smart idea to change that check into something more straightforward.
 
 Here are the changes you'll be making:
 
 ```diff
 +   args: true,
-    execute(message, args) {
+	execute(message, args) {
 -       if (!args.length) {
 -           return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
 -       }
 -       else if (args[0] === 'foo') {
 +       if (args[0] === 'foo') {
-            return message.channel.send('bar');
-        }
-        
-        message.channel.send(`Arguments: ${args}\nArguments length: ${args.length}`);
-    },
+			return message.channel.send('bar');
+		}
+		
+		message.channel.send(`Arguments: ${args}\nArguments length: ${args.length}`);
+	},
 ```
 
 And then in your main file:
 
 ```diff
-    const command = client.commands.get(commandName);
+	const command = client.commands.get(commandName);
 +
 +   if (command.args && !args.length) {
 +       return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
@@ -85,22 +85,22 @@ Now, whenever you set `args` to `true` in one of your command files, it'll perfo
 
 ### Expected command usage
 
-It's good UX (user experience) to let the user know that a command requires arguments when they don't provide any (it also prevents your code from breaking). Letting them know what kind of arguments are expected is even better.
+It's good UX (user experience) to let the user know that a command requires arguments when they don't provide any (it also prevents your code from breaking). Letting them know what kind of arguments the command expects is even better.
 
 Here's a simple implementation of such a thing. For this example, pretend you have a `!role` command, where the first argument is the user to give the role, and the second argument is the name of the role.
 
 In your `role.js` file:
 
 ```diff
-    args: true,
+	args: true,
 +   usage: '<user> <role>',
-    execute(message, args) {
+	execute(message, args) {
 ```
 
 In your main file:
 
 ```diff
-    if (command.args && !args.length) {
+	if (command.args && !args.length) {
 -       return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
 +       let reply = `You didn't provide any arguments, ${message.author}!`;
 +
@@ -109,10 +109,10 @@ In your main file:
 +       }
 +
 +       return message.channel.send(reply);
-    }
+	}
 ```
 
-Use an `if` statement to check if the `usage` property exists (and is truthy) first. For example, forgetting to provide the property would display `undefined` in the reply string. A simple precaution such as this can significantly improve the user experience.
+Use an `if` statement to check if the `usage` property exists (and is truthy) first. For example, if you forget to provide the property, it would display `undefined` in the reply string. A simple precaution such as this can significantly improve the user experience.
 
 ## Guild only commands
 
@@ -122,8 +122,8 @@ In the kick command you created in an earlier chapter, make the following change
 
 ```diff
 module.exports = {
-    name: 'kick',
-    description: 'Kick a user from the server.',
+	name: 'kick',
+	description: 'Kick a user from the server.',
 +   guildOnly: true,
 ```
 
@@ -138,31 +138,31 @@ if (command.guildOnly && message.channel.type === 'dm') {
 Now when you try to use the kick command inside a DM, you'll get the appropriate response, preventing your bot from throwing an error.
 
 <div is="discord-messages">
-    <discord-message author="User" avatar="djs">
-        !kick
-    </discord-message>
-    <discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-        I can't execute that command inside DMs!
-    </discord-message>
+	<discord-message author="User" avatar="djs">
+		!kick
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		I can't execute that command inside DMs!
+	</discord-message>
 </div>
 
 ## Cooldowns
 
-Spam is something you generally want to avoid–especially if one of your commands requires calls to other APIs or takes a bit of time to build/send. This is also a very common feature bot developers want to integrate into their projects, so let's get started on that!
+Spam is something you generally want to avoid–especially if one of your commands requires calls to other APIs or takes a bit of time to build/send. Cooldowns are also a very common feature bot developers want to integrate into their projects, so let's get started on that!
 
 You'll be using the ping command to test this on. Add in the following bit of code:
 
 ```diff
 module.exports = {
-    name: 'ping',
+	name: 'ping',
 +   cooldown: 5,
-    execute(message) {
-        message.channel.send('Pong.');
-    },
+	execute(message) {
+		message.channel.send('Pong.');
+	},
 };
 ```
 
-This is the amount (in seconds) that the user will have to wait before using that command again. You'll be using Collections again to store what you need.
+The `cooldown` property is the amount (in seconds) that the user will have to wait for before using that command again. You'll be using Collections again to store what you need.
 
 In your main file, add in this line (preferably somewhere above your `ready` event):
 
@@ -228,7 +228,7 @@ Open your `avatar.js` file and add in the following line:
 
 ```diff
 module.exports = {
-    name: 'avatar',
+	name: 'avatar',
 +   aliases: ['icon', 'pfp'],
 ```
 
@@ -247,24 +247,24 @@ The `aliases` property should always contain an array of strings. In your main f
 Making those two small changes, you get this:
 
 <div is="discord-messages">
-    <discord-message author="User" avatar="djs">
-        !avatar <mention :highlight="true">User</mention>
-    </discord-message>
-    <discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-        User's avatar:
-        https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png
-        <br />
-        <img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
-    </discord-message>
-    <discord-message author="User" avatar="djs">
-        !icon <mention :highlight="true">User</mention>
-    </discord-message>
-    <discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-        User's avatar:
-        https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png
-        <br />
-        <img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
-    </discord-message>
+	<discord-message author="User" avatar="djs">
+		!avatar <mention :highlight="true">User</mention>
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		User's avatar:
+		https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png
+		<br />
+		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
+	</discord-message>
+	<discord-message author="User" avatar="djs">
+		!icon <mention :highlight="true">User</mention>
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		User's avatar:
+		https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png
+		<br />
+		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
+	</discord-message>
 </div>
 
 ## A dynamic help command
@@ -303,7 +303,7 @@ if (!args.length) {
 // ...
 ```
 
-You can use `.push()` on the `data` variable to append the info you want and then DM it to the message author once you're done.
+You can use `.push()` on the `data` variable to append the info you want and then DM it to the message author afterward.
 
 Inside the if statement, this is what you'll need:
 
@@ -361,23 +361,23 @@ Once you get the command based on the name or alias they gave, you can start `.p
 At the end of it all, you should be getting this as a result:
 
 <div is="discord-messages">
-    <discord-message author="User" avatar="djs">
-        !help
-    </discord-message>
-    <discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-        Here's a list of all my commands:
-        args-info, avatar, beep, help, kick, ping, prune, server, user-info <br>
-        You can send `!help [command name]` to get info on a specific command!
-    </discord-message>
-    <discord-message author="User" avatar="djs">
-        !help avatar
-    </discord-message>
-    <discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-        **Name:** avatar <br>
-        **Aliases:** icon,pfp <br>
-        **Description:** Get the avatar URL of the tagged user(s), or your own avatar. <br>
-        **Cooldown:** 3 second(s)
-    </discord-message>
+	<discord-message author="User" avatar="djs">
+		!help
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		Here's a list of all my commands:
+		args-info, avatar, beep, help, kick, ping, prune, server, user-info <br>
+		You can send `!help [command name]` to get info on a specific command!
+	</discord-message>
+	<discord-message author="User" avatar="djs">
+		!help avatar
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		**Name:** avatar <br>
+		**Aliases:** icon,pfp <br>
+		**Description:** Get the avatar URL of the tagged user(s), or your own avatar. <br>
+		**Cooldown:** 3 second(s)
+	</discord-message>
 </div>
 
 No more manually editing your help command! If you aren't satisfied with how it looks, you can always adjust it to your liking later.
@@ -409,7 +409,7 @@ Note that you can skip the first line if you use the [argument checker](/command
 if (!args.length) return message.channel.send(`You didn't pass any command to reload, ${message.author}!`);
 const commandName = args[0].toLowerCase();
 const command = message.client.commands.get(commandName)
-    || message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+	|| message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 if (!command) return message.channel.send(`There is no command with name or alias \`${commandName}\`, ${message.author}!`);
 ```
@@ -436,7 +436,7 @@ try {
 }
 ```
 
-The snippet above uses a `try/catch` block to load the command file and add it to `client.commands`. In case of an error, it will log the full error to the console and notify the user about it with the error's message component `error.message`. Note the you never actually delete the command from the commands Collection and instead overwrite it. This prevents you from deleting a command and ending up with no command at all after a failed `require()` call, as each use of the reload command checks that Collection again.
+The snippet above uses a `try/catch` block to load the command file and add it to `client.commands`. In case of an error, it will log the full error to the console and notify the user about it with the error's message component `error.message`. Note the you never actually delete the command from the commands Collection and instead overwrite it. This behavior prevents you from deleting a command and ending up with no command at all after a failed `require()` call, as each use of the reload command checks that Collection again.
 
 The last slight improvement you might want to add to the try block is sending a message if the reload was successful:
 

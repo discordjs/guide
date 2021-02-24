@@ -4,7 +4,7 @@ forceTheme: blue
 
 # Getting started with Commando
 
-When you got your first bot up and running with Discord.js, you should've installed Discord.js using npm, Node.js' Package Manager. The same applies to Commando, which must be separately installed. You can do this in one of two ways:
+When you got your first bot up and running with Discord.js, you should've installed Discord.js using npm, Node.js' Package Manager. The same applies to Commando, which you must separately install. You can do this in one of two ways:
 
 If using Discord.js v11: `npm install discord.js-commando`  
 If using Discord.js v12: `npm install discordjs/Commando`
@@ -46,7 +46,7 @@ The users you set here have complete control over the bot. They can use eval and
 
 The final option, `invite`, is the **full** invite URL to your bot's support server. While not a required option, it's a good idea to have a support server on hand to handle questions and concerns your users may have about your bot if it is public. If not, it's safe to leave this option out.
 
-Next, you're going to register the command groups, args types, and default commands. Then, you register the commands in a folder. You can name the folder whatever you want, but it's recommended to stick with `commands`, as it makes the most sense.
+Next, you're going to register the command groups, args types, and default commands. Then, you register the commands in a folder. You can name the folder whatever you want, but we recommend sticking with `commands`, as it makes the most sense.
 
 ```js
 client.registry
@@ -68,9 +68,9 @@ Adding more command groups is as simple as adding another option to the array an
 
 ```js
 .registerGroups([
-    ['first', 'Your First Command Group'],
-    ['second', 'Your Second Command Group'],
-    ['third', 'Your Third Command Group'],
+	['first', 'Your First Command Group'],
+	['second', 'Your Second Command Group'],
+	['third', 'Your Third Command Group'],
 ])
 ```
 
@@ -80,7 +80,7 @@ Should you want to disable a default command, such as if you wanted to make a cu
 
 ```js
 .registerDefaultCommands({
-    help: false,
+	help: false,
 })
 ```
 
@@ -111,7 +111,7 @@ And there you have it! You've set up your `index.js` file! In the end, your file
 
 ```
 /commands
-    /first
+	/first
 index.js
 package.json
 ```

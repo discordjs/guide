@@ -31,7 +31,7 @@ Before doing anything else, make a property to store the prefix you've configure
 From now on, if you change the prefix or token in your config.json file, it'll change in your bot file as well. You'll be using the prefix variable a lot soon.
 
 ::: tip
-If you aren't familiar with some of this syntax, it may be because it is ES6 syntax. If it does confuse you, you should check out [this guide page](/additional-info/es6-syntax.md) before continuing.
+If you aren't familiar with some of this syntax, it may be ES6 syntax. If it does confuse you, you should check out [this guide page](/additional-info/es6-syntax.md) before continuing.
 :::
 
 ## Simple command structure
@@ -78,19 +78,19 @@ Servers are referred to as "guilds" in the Discord API and discord.js library. W
 
 ```js
 else if (message.content === `${prefix}server`) {
-    message.channel.send(`This server's name is: ${message.guild.name}`);
+	message.channel.send(`This server's name is: ${message.guild.name}`);
 }
 ```
 
 The code above would result in this:
 
 <div is="discord-messages">
-    <discord-message author="User" avatar="djs">
-        !server
-    </discord-message>
-    <discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-        This server's name is: Discord Bot Tutorial
-    </discord-message>
+	<discord-message author="User" avatar="djs">
+		!server
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		This server's name is: Discord Bot Tutorial
+	</discord-message>
 </div>
 
 If you want to expand upon that command and add some more info, here's an example of what you can do:
@@ -99,20 +99,20 @@ If you want to expand upon that command and add some more info, here's an exampl
 
 ```js
 else if (message.content === `${prefix}server`) {
-    message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
+	message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
 }
 ```
 
 That would display both the server name _and_ the amount of members in it.
 
 <div is="discord-messages">
-    <discord-message author="User" avatar="djs">
-        !server
-    </discord-message>
-    <discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-        Server name: Discord Bot Tutorial <br>
-        Total members: 3
-    </discord-message>
+	<discord-message author="User" avatar="djs">
+		!server
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		Server name: Discord Bot Tutorial <br>
+		Total members: 3
+	</discord-message>
 </div>
 
 Of course, you can modify this to your liking. You may also want to display the date the server was created or the server's region. You would do those in the same manner–use `message.guild.createdAt` or `message.guild.region`, respectively.
@@ -129,20 +129,20 @@ Set up another if statement and use the command name `user-info`.
 
 ```js
 else if (message.content === `${prefix}user-info`) {
-    message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
+	message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
 }
 ```
 
 This will display the message author's **username** (not nickname, if they have one set), as well as their user ID.
 
 <div is="discord-messages">
-    <discord-message author="User" avatar="djs">
-        !user-info
-    </discord-message>
-    <discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-        Your username: User <br>
-        Your ID: 20833034795932416
-    </discord-message>
+	<discord-message author="User" avatar="djs">
+		!user-info
+	</discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		Your username: User <br>
+		Your ID: 20833034795932416
+	</discord-message>
 </div>
 
 ::: tip

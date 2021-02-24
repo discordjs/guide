@@ -4,7 +4,7 @@ forceTheme: blue
 
 # Throttling
 
-Throttling is like rate-limiting; it allows the command to be used only in a certain period of time—a cooldown of sorts. This is useful for commands that rely on API calls or commands that can be spammy to avoid a user overusing them.
+Throttling is like rate-limiting; it allows the command to be used only in a certain period of time—a cooldown of sorts. This feature is useful for commands that rely on API calls or commands that can be spammy to avoid a user overusing them.
 
 First, grab a command file you want to throttle.
 
@@ -29,7 +29,7 @@ module.exports = class MeowCommand extends Command {
 
 Add the `throttling` property to the command. `throttling` is an object, which contains two things:
 
-- `usages` is the number of times the command can be used in the given time period.
+- `usages` is the number of times someone can use the command in the given time.
 - `duration` is the amount of time the cooldown lasts, in seconds.
 
 Make it have two usages allowed in a 10 second period.
@@ -38,14 +38,14 @@ Make it have two usages allowed in a 10 second period.
 
 ```js
 super(client, {
-    name: 'meow',
-    group: 'first',
-    memberName: 'meow',
-    description: 'Replies with a meow, kitty cat.',
-    throttling: {
-        usages: 2,
-        duration: 10,
-    },
+	name: 'meow',
+	group: 'first',
+	memberName: 'meow',
+	description: 'Replies with a meow, kitty cat.',
+	throttling: {
+		usages: 2,
+		duration: 10,
+	},
 });
 ```
 

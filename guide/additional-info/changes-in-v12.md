@@ -167,7 +167,7 @@ Also, the GuildMember properties related to roles have moved to the `GuildMember
 
 ### Ban and Unban
 
-The method to ban members and users have moved to the `GuildMemberManager`.
+The method to ban members and users has moved to the `GuildMemberManager`.
 
 ```diff
 - guild.ban('123456789012345678');
@@ -593,7 +593,7 @@ Several changes were made to the `ClientOptions` object located in `client#optio
 
 #### ClientUser#createGuild
 
-`clientUser.createGuild()` was removed and transformed in the shape of a Manager. Also, the second and third parameters in `clientUser.createGuild()` have been changed/removed, leaving it with a total of two parameters. The `region` and `icon` parameters from v11 was merged into an object as the second parameter.
+`clientUser.createGuild()` was removed and transformed in the shape of a Manager. Also, the second and third parameters in `clientUser.createGuild()` have been changed/removed, leaving it with a total of two parameters. The `region` and `icon` parameters from v11 were merged into an object as the second parameter.
 
 ```diff
 - clientUser.createGuild('New server', 'us-east', './path/to/file.png');
@@ -788,7 +788,7 @@ Just like the `TextChannel#send***` methods, all the `.send***()` methods have b
 
 ### Emoji
 
-`Emoji` now extends `Base` and represents either a `GuildEmoji` or `ReactionEmoji`. Some of the specific properties have moved to their respective object, instead of everything on the base `Emoji` object.
+`Emoji` now extends `Base` and represents either a `GuildEmoji` or `ReactionEmoji`. Some of the specific properties have moved to their respective object instead of everything on the base `Emoji` object.
 
 #### Emoji#\*\*\*RestrictedRole(s)
 
@@ -835,7 +835,7 @@ The `Game` class was removed in favor of the `Activity` class to be consistent w
 
 ### GroupDMChannel
 
-The `GroupDMChannel` class has been deprecated from the Discord API.  While it's still available through Gamebridge for now, that will also be removed in the future.  In addition, group DM's has always been unreliable and hacky to work with a bot.
+The `GroupDMChannel` class was deprecated from the Discord API.  While it's still available through Gamebridge for now, that will also be removed in the future.  In addition, group DM's has always been unreliable and hacky to work with a bot.
 
 ### Guild
 
@@ -874,7 +874,7 @@ The `GroupDMChannel` class has been deprecated from the Discord API.  While it's
 
 #### Guild#createEmoji
 
-`guild.createEmoji()` has transformed in the shape of a Manager.  The third and fourth parameters in `guild.createEmoji()` were changed/removed, leaving it with a total of three parameters. The `roles` and `reason` parameters from v11 were merged into an object as the third parameter.
+`guild.createEmoji()` has been transformed in the shape of a Manager.  The third and fourth parameters in `guild.createEmoji()` were changed/removed, leaving it with a total of three parameters. The `roles` and `reason` parameters from v11 were merged into an object as the third parameter.
 
 ```diff
 - guild.createEmoji('./path/to/file.png', 'NewEmoji', collectionOfRoles, 'New emoji added for fun!');
@@ -1687,7 +1687,7 @@ The `end` method is now inherited from `WritableStream` as documented [here](htt
 
 #### StreamDispatcher#pause
 
-The `streamDispatcher.pause` method now takes an optional parameter `silence`, to specify whether to play silence while paused to prevent audio glitches.  Its value is a `boolean` and defaults to `false`.
+The `streamDispatcher.pause` method now takes an optional parameter `silence` to specify whether to play silence while paused to prevent audio glitches.  Its value is a `boolean` and defaults to `false`.
 
 ```diff
 - dispatcher.pause();
@@ -1696,7 +1696,7 @@ The `streamDispatcher.pause` method now takes an optional parameter `silence`, t
 
 #### StreamDispatcher#stream
 
-The `streamDispatcher.stream` property was removed entirely and has been replaced with the `streamDispatcher.broadcast` property, which is the broadcast controlling the stream, if any.
+The `streamDispatcher.stream` property was removed entirely and has been replaced with the `streamDispatcher.broadcast` property, which is the broadcast controlling the stream if any.
 
 #### StreamDispatcher#time
 
@@ -2209,7 +2209,7 @@ Two properties have been added, `dmChannel#lastPinAt` (read-only) and `dmChannel
 
 #### GuildChannel#createOverwrite
 
-Creates or updates an existing overwrite for a user or role.  The second parameter is a `PermissionOverwriteOption` object; the third, optional parameter is `reason`, a string.
+Creates or updates an existing overwrite for a user or role.  The second parameter is a `PermissionOverwriteOption` object; the third optional parameter is `reason`, a string.
 
 ```js
 channel.createOverwrite(message.author, {
@@ -2223,7 +2223,7 @@ channel.createOverwrite(message.author, {
 
 #### GuildChannel#updateOverwrite
 
-Creates or updates an existing overwrite for a user or role.  The second parameter is a `PermissionOverwriteOption` object; the third, optional parameter is `reason`, a string.
+Creates or updates an existing overwrite for a user or role.  The second parameter is a `PermissionOverwriteOption` object; the third optional parameter is `reason`, a string.
 
 ```js
 channel.updateOverwrite(message.author, {

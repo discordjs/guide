@@ -3,7 +3,7 @@
 Throughout the discord.js docs and when asking for help on the official server, you will run into many different kinds of notations. To help you understand the texts that you read, we will be going over some standard notations.
 
 ::: tip
-Always keep in mind that notation is not always rigorous. There will be typos, misunderstandings, or context that will cause notation to differ from the usual meanings.
+Always keep in mind that notation is not always rigorous. There will be typos, misunderstandings, or contexts that will cause notation to differ from the usual meanings.
 :::
 
 ## Classes
@@ -36,7 +36,7 @@ Notice the use of the `.` operator for the static method, `Role.comparePositions
 
 In the discord.js docs, there are type signatures everywhere, such as in properties, parameters, or return values. If you do not come from a statically typed language, you may not know what specific notations mean.
 
-The symbol `*` means any type. For example, methods that return `*` means that they can return anything, and a parameter of type `*` can be anything.
+The symbol `*` means any type. For example, methods that return `*` mean that they can return anything, and a parameter of type `*` can be anything.
 
 The symbol `?` means that the type is nullable. You can see it before or after the type (e.g. `?T` or `T?`). This symbol means that the value can be of the type `T` or `null`. An example is `GuildMember#nickname`; its type is `?string` since a member may or may not have a nickname.
 

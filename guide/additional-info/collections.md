@@ -13,7 +13,7 @@ This is the point of the `Collection` class!
 
 ## Array-like Methods
 
-Many of the methods on `Collection` are based on their namesake in `Array`. One of them is `find`:
+Many of the methods on `Collection` correspond to their namesake in `Array`. One of them is `find`:
 
 ```js
 // Assume we have an array of users and a collection of the same users.
