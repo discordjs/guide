@@ -4,7 +4,7 @@ forceTheme: blue
 
 # Setting a command as guild-only
 
-Sometimes, you may need to require a command to only be usable in servers. Maybe it displays server information, or it gets a server emoji. No matter what it does, setting it as guild-only is straightforward!
+Sometimes, you may need to require a command to only be usable in servers. Maybe it displays server information or gets a server emoji. No matter what it does, setting it as guild-only is straightforward!
 
 First, get the command you want to make guild-only.
 

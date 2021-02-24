@@ -162,7 +162,7 @@ module.exports = {
 };
 ```
 
-This is the amount (in seconds) that the user will have to wait before using that command again correctly. You'll be using Collections again to store what you need.
+This is the amount (in seconds) that the user will have to wait before using that command again. You'll be using Collections again to store what you need.
 
 In your main file, add in this line (preferably somewhere above your `ready` event):
 

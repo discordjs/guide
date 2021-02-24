@@ -1,6 +1,6 @@
 # Adding your bot to servers
 
-If you've been diligently following the guide's previous pages, you should have a bot application set up. However, it's not in any servers yet. So how does that work?
+If you've been following the guide's previous pages, you should have a bot application set up. However, it's not in any servers yet. So how does that work?
 
 Before you're able to see your bot in your own (or other) servers, you'll need to add it by creating and using a unique invite link using your bot application's client ID.
 

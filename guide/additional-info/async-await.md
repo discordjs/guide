@@ -11,7 +11,7 @@ Promises are a way to handle asynchronous tasks in JavaScript; they are the newe
 A Promise can have 3 states; pending, resolved, and rejected
 
 The **pending** state means that the Promise still is ongoing and neither resolved nor rejected.
-The **resolved** state means that the Promise is done and executes without any errors.
+The **resolved** state means that the Promise is done and executed without any errors.
 The **rejected** state means that the Promise encountered an error and could not execute correctly.
 
 One important thing to know is that a Promise can only have one state simultaneously; it can never be pending and resolved, rejected and resolved, or pending and rejected. You may be asking, "How would that look in code?". Here is a small example:

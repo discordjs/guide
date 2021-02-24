@@ -68,7 +68,7 @@ Let's start displaying some real data. For now, we'll be displaying basic member
 
 ### Server info command
 
-Make another if statement to check for commands using `server` as the command name. You've already interacted with the Message object via `message.channel.send()`. You get the message object, access the channel that sent it, and send a message to it. Just like how `message.channel` gives you the message's _channel_, `message.guild` gives you the message's _server_.
+Make another if statement to check for commands using `server` as the command name. You've already interacted with the Message object via `message.channel.send()`. You get the message object, access the channel it's from, and send a message to it. Just like how `message.channel` gives you the message's _channel_, `message.guild` gives you the message's _server_.
 
 ::: tip
 Servers are referred to as "guilds" in the Discord API and discord.js library. Whenever you see someone say "guild", they mean server.

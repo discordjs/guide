@@ -173,7 +173,7 @@ catch (e) {
 ```
 
 `Tags.create()` uses the models that you created previously. The `.create()` method inserts some data into the model. You are going to insert a tag name, description, and the author name into the database.  
-`catch (e)` This section is necessary for the insert because it will offload checking for duplicates to the database so that it will notify you if you attempt to create a tag that already exists. The alternative is to query the database before adding data and checking if a result returns. If there are no errors or no identical tag is found, you should only add the data. Of the two methods, it is clear that catching the error is less work for you.  
+`catch (e)` This section is necessary for the insert because it will offload checking for duplicates to the database so that it will notify you if you attempt to create a tag that already exists. The alternative is to query the database before adding data and checking if a result returns. If there are no errors or no identical tag is found, only then would you add the data. Of the two methods, it is clear that catching the error is less work for you.  
 `if (e.name === "SequelizeUniqueConstraintError")` Although this was mostly for doing less work, it is always good to handle your errors, especially if you know what types of errors you will receive. This error comes up if something violates your unique constraint, i.e., someone inserted duplicate values.
 
 ::: warning
@@ -200,7 +200,7 @@ return message.reply(`Could not find tag: ${tagName}`);
 ```
 
 This is your first query. You are finally doing something with our data, yay!  
-`.findOne()` is how you fetch a single row of data. The `where: { name: tagName }` makes sure you only get the row with the desired tag. Since the queries are asynchronous, you will need to use `await` to fetch it. After receiving the data, you can use `.get()` on that object to grab the data. If no data is received, then you can tell the user that the query found no data.
+`.findOne()` is how you fetch a single row of data. The `where: { name: tagName }` makes sure you only get the row with the desired tag. Since the queries are asynchronous, you will need to use `await` to fetch it. After receiving the data, you can use `.get()` on that object to grab the data. If no data is received, then you can tell the user that the query returned no data.
 
 ### [zeta] Editing a tag
 

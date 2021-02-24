@@ -2,7 +2,7 @@
 
 <branch version="11.x">
 
-The Discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots and tips and tricks to optimize performance!
+The Discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots and give you tips to optimize performance!
 
 This voice guide targets Discord.js v12, which features an improved audio system. Much of the example code in the voice guide is unsuitable for v11 and below–to access this content, please update Discord.js to v12! 
 
@@ -38,7 +38,7 @@ In conclusion:
 
 1. You do `VoiceConnection#play(...)`
 2. Discord.js will convert whatever you've provided into Opus audio in the most efficient way it can find. The worst-case route would be having FFmpeg convert a file to PCM, passing this data through an Opus encoder.
-3. A `StreamDispatcher` is created, and it is fed data from the Opus audio stream
+3. A `StreamDispatcher` is created and fed data from the Opus audio stream
 4. The StreamDispatcher will take an Opus audio packet every 20ms, applying metadata, and then encrypting it. The packet is then sent over UDP
 5. This occurs until the stream has ended, in which case the StreamDispatcher is destroyed, and all intermediary processes (e.g., FFmpeg transcoder, Volume Transformer, Opus Encoder) are all destroyed.
 
@@ -61,6 +61,6 @@ Just as we send audio to the UDP socket, we also receive audio through the UDP s
 - A voice connection does not disrupt the bot's main gateway–separate connections to a voice gateway and UDP socket are created
 - The `StreamDispatcher` is essentially a WritableStream that takes Opus audio
 - Receiving audio is officially unsupported; however, we do our best to maintain it
-- Playing audio has varying complexity depending on the file/audio you want to play–the simplest (and most efficient) files would be Ogg/WebM files as they already contain Opus audio. FFmpeg and an Opus Encoder must pass other files before they can play
+- Playing audio has varying complexity depending on the file/audio you want to play–the simplest (and most efficient) files would be Ogg/WebM files as they already contain Opus audio. Other files must be passed through FFmpeg and an Opus Encoder before they can play.
 
 </branch>

@@ -42,7 +42,7 @@ To include permission checks like `ADMINISTRATOR` or `MANAGE_GUILD`, keep readin
 * Permission: The ability to execute a certain action in Discord
 * Overwrite: Rule on a channel to modify the permissions for a member or role
 * Bit field: Binary representation of Discord permissions 
-* Flag: Human readable string in MACRO_CASE, for example, `'KICK_MEMBERS'`, refers to a position in the permission bit field. You can find a list of all valid flags in the <branch version="11.x" inline>[discord.js documentation](https://discord.js.org/#/docs/main/v11/class/Permissions?scrollTo=s-FLAGS)</branch><branch version="12.x" inline>[discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Permissions?scrollTo=s-FLAGS)</branch>
+* Flag: Human readable string in MACRO_CASE (e.g, `'KICK_MEMBERS'`) that refers to a position in the permission bit field. You can find a list of all valid flags in the <branch version="11.x" inline>[discord.js documentation](https://discord.js.org/#/docs/main/v11/class/Permissions?scrollTo=s-FLAGS)</branch><branch version="12.x" inline>[discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Permissions?scrollTo=s-FLAGS)</branch>
 * Base Permissions: Permissions for roles the member has, set on the guild level
 * Final Permissions: Permissions for a member or role, after all overwrites are applied
 
@@ -74,7 +74,7 @@ guild.roles.everyone.setPermissions(['SEND_MESSAGES', 'VIEW_CHANNEL']);
 Any permission not referenced in the flag array or bit field is not granted to the role. 
 
 ::: tip
-Note that flag names are literal. Although `VIEW_CHANNEL` grants access to view multiple channels, the permission flag is still called `VIEW_CHANNEL` in the singular.
+Note that flag names are literal. Although `VIEW_CHANNEL` grants access to view multiple channels, the permission flag is still called `VIEW_CHANNEL` in singular form.
 :::
 
 ### Creating a role with permissions

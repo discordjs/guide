@@ -43,7 +43,7 @@ There are two ways you might want to convert a `Collection` into an `Array`. The
 They create an array from the items in the collection but also caches it:
 
 ```js
-// Not computed the second time again; it is cached!
+// Not computed the second time; it is cached!
 collection.array();
 collection.array();
 
@@ -88,7 +88,7 @@ collection.first(5);
 collection.last();
 collection.last(2);
 
-// Removes from the collection anything that meets a criterion.
+// Removes anything that meets the condition from the collection.
 // Sort of like `filter`, but in-place.
 collection.sweep(user => user.username === 'Bob');
 ```

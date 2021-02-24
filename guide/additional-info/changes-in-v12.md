@@ -179,7 +179,7 @@ The method to ban members and users have moved to the `GuildMemberManager`.
 
 ### Image URLs
 
-Some image-related properties like `user.avatarURL` are now a method in v12 so that you can apply some options to them, e.g., to affect their display size. 
+Some image-related properties like `user.avatarURL` are now methods in v12 so that you can apply some options to them, e.g., to affect their display size. 
 
 ```diff
 - user.avatarURL;
@@ -575,7 +575,7 @@ Several changes were made to the `ClientOptions` object located in `client#optio
 
 #### ClientUser#avatarURL
 
-`clientUser.avatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. The `dynamic` option will enable you always to get a `.gif` file for animated avatars. Otherwise, the returned link will fall back to the format specified in the `format` option or `.webp` (it's default).
+`clientUser.avatarURL` is now a method, as opposed to a property. If you provide the `dynamic` option, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp`.
 
 ```diff
 - clientUser.avatarURL;
@@ -660,7 +660,7 @@ Just like the `TextChannel#send***` methods, all the `.send***()` methods have b
 
 #### ClientUser#setGame
 
-`clientUser.setGame()` has been changed to `clientUser.setActivity()`. The second parameter is no longer for providing a streaming URL but rather an object that allows you to provide the URL and activity type.
+`clientUser.setGame()` has changed to `clientUser.setActivity()`. The second parameter is no longer for providing a streaming URL but rather an object that allows you to provide the URL and activity type.
 
 ```diff
 - clientUser.setGame('with my bot friends!');
@@ -849,7 +849,7 @@ The `GroupDMChannel` class has been deprecated from the Discord API.  While it's
 
 #### Guild#ban
 
-`guild.ban()` has been moved to the `GuildMemberManager`.  In addition, the second parameter in `guild.members.ban()` has been changed. The `options` parameter no longer accepts a number nor a string.
+`guild.ban()` has moved to the `GuildMemberManager`.  In addition, the second parameter in `guild.members.ban()` has changed. The `options` parameter no longer accepts a number nor a string.
 
 ```diff
 - guild.ban(user, 7);
@@ -865,7 +865,7 @@ The `GroupDMChannel` class has been deprecated from the Discord API.  While it's
 
 #### Guild#createChannel
 
-`guild.createChannel()` has been transformed in the shape of a Manager.  The second, third, and fourth parameters in `guild.createChannel()` have been changed/removed, leaving it with a total of two parameters; the second one is an object with all of the options available in `ChannelData`.
+`guild.createChannel()` has transformed in the shape of a Manager.  The second, third, and fourth parameters in `guild.createChannel()` were changed/removed, leaving it with a total of two parameters; the second one is an object with all of the options available in `ChannelData`.
 
 ```diff
 - guild.createChannel('new-channel', 'text', permissionOverwriteArray, 'New channel added for fun!');
@@ -874,7 +874,7 @@ The `GroupDMChannel` class has been deprecated from the Discord API.  While it's
 
 #### Guild#createEmoji
 
-`guild.createEmoji()` has been transformed in the shape of a Manager.  The third and fourth parameters in `guild.createEmoji()` have been changed/removed, leaving it with a total of three parameters. The `roles` and `reason` parameters from v11 were merged into an object as the third parameter.
+`guild.createEmoji()` has transformed in the shape of a Manager.  The third and fourth parameters in `guild.createEmoji()` were changed/removed, leaving it with a total of three parameters. The `roles` and `reason` parameters from v11 were merged into an object as the third parameter.
 
 ```diff
 - guild.createEmoji('./path/to/file.png', 'NewEmoji', collectionOfRoles, 'New emoji added for fun!');
@@ -883,7 +883,7 @@ The `GroupDMChannel` class has been deprecated from the Discord API.  While it's
 
 #### Guild#createRole
 
-`guild.createRole()` has been transformed in the shape of a Manager.  The first and second parameters in `guild.createRole()` have been changed/removed, leaving it with a total of one parameter. The `data` and `reason` parameters from v11 has moved into an object as the first parameter.
+`guild.createRole()` has transformed in the shape of a Manager.  The first and second parameters in `guild.createRole()` were changed/removed, leaving it with a total of one parameter. The `data` and `reason` parameters from v11 have moved into an object as the first parameter.
 
 ```diff
 - guild.createRole(roleData, 'New staff role!');
@@ -952,7 +952,7 @@ Not sure how to set up a database? Check out [this page](/sequelize/)!
 
 #### Guild#iconURL
 
-`guild.iconURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If the `dynamic` option is provided, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp` if none is provided.
+`guild.iconURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If you provide the `dynamic` option, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp` if none is provided.
 
 ```diff
 - guild.iconURL;
@@ -982,7 +982,7 @@ Not sure how to set up a database? Check out [this page](/sequelize/)!
 
 #### Guild#pruneMembers
 
-`guild.pruneMembers()` has been transformed in the shape of a Manager.  In addition, the first, second, and third parameters in the method have changed or removed, leaving it with a total of one parameter. The `days`, `dry`, and `reason` parameters from v11 have been merged into an object as the first parameter.
+`guild.pruneMembers()` has transformed in the shape of a Manager.  In addition, the first, second, and third parameters in the method were changed/removed, leaving it with a total of one parameter. The `days`, `dry`, and `reason` parameters from v11 have been merged into an object as the first parameter.
 
 ```diff
 - guild.pruneMembers(7, true, 'Scheduled pruning');
@@ -1069,7 +1069,7 @@ The first, second, third, and fourth parameters in `channel.clone()` have been c
 
 #### GuildChannel#createInvite
 
-The second parameter in `channel.createInvite()` was removed, leaving it with a total of one parameter. The `reason` parameter from v11 has been merged into an object as the first parameter.
+The second parameter in `channel.createInvite()` was removed, leaving it with a total of one parameter. The `reason` parameter from v11 has merged into an object as the first parameter.
 
 ```diff
 - channel.createInvite({ temporary: true }, 'Just testing');
@@ -1109,7 +1109,7 @@ The old functionality is moved to `guildChannel.updateOverwrite` and `guildChann
 
 #### GuildChannel#replacePermissionOverwrites
 
-`guildChannel.replacePermissionOverwrites` has been renamed to `guildChannel.overwritePermissions`. Overwrites and reason are no longer provided Through an options object but directly as method arguments.
+`guildChannel.replacePermissionOverwrites` has been renamed to `guildChannel.overwritePermissions`. Overwrites and reason are no longer provided through an options object; they are now method arguments.
 
 ```diff
 - channel.replacePermissionOverwrites({
@@ -1661,11 +1661,11 @@ The `shardingManager.message` event was removed from this class and is now on th
 
 #### ShardingManager#respawnAll
 
-The `waitForReady` parameter has been renamed to `spawnTimeout`, and the `currentShardIndex` parameter was removed entirely.
+The `waitForReady` parameter was renamed to `spawnTimeout`, and the `currentShardIndex` parameter was removed entirely.
 
 #### ShardingManager#spawn
 
-A third, optional parameter, `spawnTimeout`, has been added, specifying how long to wait in milliseconds to wait until the `Client` is ready; the default is `30000`.
+A third, optional parameter, `spawnTimeout`, was added, specifying how long to wait in milliseconds to wait until the `Client` is ready; the default is `30000`.
 
 ### StreamDispatcher
 
@@ -1706,7 +1706,7 @@ The `streamDispatcher.time` property has been renamed to `streamDispatcher.strea
 
 #### TextChannel#acknowledge
 
-was removed entirely, along with all other user account-only methods and properties.
+`textChannel.acknowledge()` was removed entirely, along with all other user account-only methods and properties.
 
 #### TextChannel#\*\*\*position
 
@@ -1823,7 +1823,7 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 
 #### User#avatarURL
 
-`user.avatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If the `dynamic` option is provided, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp` if none is provided.
+`user.avatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If you provide the `dynamic` option, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp`.
 
 ```diff
 - user.avatarURL;
@@ -1837,7 +1837,7 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 
 #### User#displayAvatarURL
 
-`user.displayAvatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If the `dynamic` option is provided, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp` if none is provided.
+`user.displayAvatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If you provide the `dynamic` option, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp`.
 
 ```diff
 - user.displayAvatarURL;
@@ -2013,7 +2013,7 @@ This property was removed entirely.
 
 #### Webhook#avatarURL
 
-`webhook.avatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If the `dynamic` option is provided, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp` if none is provided.
+`webhook.avatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If you provide the `dynamic` option, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp`.
 
 ```diff
 - webhook.avatarURL;
@@ -2112,7 +2112,7 @@ ClientApplication.coverImage({ width: 1024, height: 1024 });
 
 #### ClientOptions#partials
 
-`clientOptions.partials` has been added to allow for partial structures–see the `Partials` section of the guide for more details.
+`clientOptions.partials` was added to allow for partial structures–see the `Partials` section of the guide for more details.
 
 #### ClientOptions#retry
 
@@ -2312,7 +2312,7 @@ The new `presence.clientStatus` property returns an object with three keys: `web
 
 #### ReactionCollector#empty
 
-`reactionCollector.empty()` has been added as a method to remove all collected reactions from the collector.
+`reactionCollector.empty()` was added as a method to remove all collected reactions from the collector.
 
 #### ReactionCollector#key
 
@@ -2324,11 +2324,11 @@ The new `remove` event emits when a collected reaction is un-reacted if the `dis
 
 #### Shard#_evals
 
-The private property `_evals` has been added to map ongoing Promises for calls to `shard.eval()`.
+The private property `_evals` was added to map ongoing Promises for calls to `shard.eval()`.
 
 #### Shard#_fetches
 
-The private property `_fetches` has been added to map ongoing Promises for calls to `shard.fetchClientValues()`.
+The private property `_fetches` was added to map ongoing Promises for calls to `shard.fetchClientValues()`.
 
 #### Shard#worker
 
@@ -2406,7 +2406,7 @@ This new method sorts a `Collection` by Discord's position and ID.
 
 #### Util#flatten
 
-This new method flattens any object.  Any `Collection's in the object will be converted to an array of keys.
+This new method flattens any object.  Any `Collection`s in the object will be converted to an array of keys.
 
 #### Util#resolveColor
 
@@ -2465,4 +2465,4 @@ This new parameter adds support for Intents, controlling which events you receiv
 
 ### WebSocketShard
 
-This new class represents a `Shard` 's WebSocket connection.
+This new class represents a `Shard`'s WebSocket connection.
