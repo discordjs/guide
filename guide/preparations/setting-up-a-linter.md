@@ -9,6 +9,7 @@ First, you will need a proper code editor. Using Notepad and Notepad++ is discou
 * [Visual Studio Code](https://code.visualstudio.com/) is a very popular choice; it is known for being fast and powerful. It supports a large variety of languages, has its own terminal, built-in IntelliSense support, and autocomplete for both JavaScript and TypeScript. This is the recommended choice.
 * [Atom](https://atom.io/) is user-friendly, concise and easy to navigate. This is what many developers use to get started.
 * [Sublime Text](https://www.sublimetext.com/) is another popular editor that's easy to use and write code with.
+* [WebStorm](https://www.jetbrains.com/webstorm/) is a paid ($12.90/mo), but great editor for JavaScript and TypeScript stuff.
 
 ## Installing a linter
 
@@ -29,6 +30,7 @@ Afterwards, install the appropriate plugin(s) for your editor of choice.
 * [ESLint for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 * [Linter-ESLint for Atom](https://atom.io/packages/linter-eslint) (requires [Linter for Atom](https://atom.io/packages/linter))
 * [ESLint for Sublime Text](https://packagecontrol.io/packages/ESLint)
+* ESLint for WebStorm is included with the IDE. To enable it, go to Settings, and search ESLint, and turn on "Automatic ESLint configuration.
 
 ::: tip
 You can install each of these directly inside the editors themselves. For Visual Studio Code, press `Ctrl + Shift + X`. For Atom, press `Ctrl + ,` and click on "Install". For Sublime, press `Ctrl + Shift + P` and search for "Install Package" (available via [Package Control](https://packagecontrol.io/installation)). After that, you may then search for the appropriate plugin and install it through there.
