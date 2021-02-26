@@ -76,7 +76,7 @@ We're going to take advantage of [destructuring](/additional-info/es6-syntax.md#
 
 node-fetch is a lightweight, Promise-based module that brings the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), which is available in browsers, to node. If you aren't already familiar with Promises, you should read up on them [here](/additional-info/async-await.md).
 
-In this tutorial, we'll be making a bot with 2 API-based commands using the [random.cat](https://aws.random.cat) and [Urban Dictionary](https://www.urbandictionary.com) APIs.
+In this tutorial, we'll be making a bot with two API-based commands using the [random.cat](https://aws.random.cat) and [Urban Dictionary](https://www.urbandictionary.com) APIs.
 
 To require node-fetch, you'd do:
 

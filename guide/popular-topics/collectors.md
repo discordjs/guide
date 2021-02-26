@@ -112,7 +112,7 @@ If you don't understand how `.some()` works, you can read about it in more detai
 
 In this filter, you iterate through the answers to find what you want. You would like to ignore the case because simple typos can happen, so you convert each answer to its lowercase form and check if it's equal to the response in lowercase form as well. In the options section, you only want to allow one answer to pass through, hence the <branch version="11.x" inline>`maxMatches: 1`</branch><branch version="12.x" inline>`max: 1`</branch> setting.
 
-The filter looks for messages that match one of the answers in our array of possible answers to pass through the collector. The options (the second parameter) specifies that only a maximum of 1 message can go through the filter successfully before the Promise successfully resolves. The errors section specifies that time will cause it to error out, which will cause the Promise to reject if one correct answer is not received within the time limit of 1 minute. As you can see, there is no `collect` event, so you are limited in that regard.
+The filter looks for messages that match one of the answers in our array of possible answers to pass through the collector. The options (the second parameter) specifies that only a maximum of one message can go through the filter successfully before the Promise successfully resolves. The errors section specifies that time will cause it to error out, which will cause the Promise to reject if one correct answer is not received within the time limit of one minute. As you can see, there is no `collect` event, so you are limited in that regard.
 
 ## Reaction collectors
 

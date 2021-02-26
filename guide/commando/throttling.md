@@ -32,7 +32,7 @@ Add the `throttling` property to the command. `throttling` is an object, which c
 - `usages` is the number of times someone can use the command in the given time.
 - `duration` is the amount of time the cooldown lasts, in seconds.
 
-Make it have two usages allowed in a 10 second period.
+Make it have two usages allowed in a ten second period.
 
 <!-- eslint-skip -->
 
@@ -49,4 +49,4 @@ super(client, {
 });
 ```
 
-The command now has a cooldown. If a user tries to use the `meow` command more than two times in 10 seconds, it will not allow them to use it until the 10 seconds have fully passed. While useless in a command like `meow`, this can be very useful for other, heavier commands you don't want to be abused.
+The command now has a cooldown. If a user tries to use the `meow` command more than two times in ten seconds, it will not allow them to use it until the ten seconds have fully passed. While useless in a command like `meow`, this can be very useful for other, heavier commands you don't want to be abused.

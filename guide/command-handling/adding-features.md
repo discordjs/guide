@@ -186,7 +186,7 @@ if (timestamps.has(message.author.id)) {
 }
 ```
 
-You check if the `cooldowns` Collection has the command set in it yet. If not, then add it in. Next, 3 variables get created:
+You check if the `cooldowns` Collection has the command set in it yet. If not, then add it in. Next, three variables get created:
 
 1. A variable with the current timestamp.
 2. A variable that `.get()`s the Collection for the triggered command.
@@ -222,7 +222,7 @@ setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
 It's a good idea to allow users to trigger your commands in more than one way; it gives them the freedom of choosing what to send and may even make some command names easier to remember. Luckily, setting up aliases for your commands is quite simple.
 
-For this bit of the guide, we'll be using the avatar command as a target. Discord refers to your profile picture as an "avatar"; however, not everyone calls it that. Some people prefer "icon" or "pfp" (profile picture). With that in mind, let's update the avatar command to allow all 3 of those triggers.
+For this bit of the guide, we'll be using the avatar command as a target. Discord refers to your profile picture as an "avatar"; however, not everyone calls it that. Some people prefer "icon" or "pfp" (profile picture). With that in mind, let's update the avatar command to allow all three of those triggers.
 
 Open your `avatar.js` file and add in the following line:
 
@@ -328,7 +328,7 @@ There's nothing complicated here; all you do is append some strings, `.map()` ov
 Since help messages can get messy, you'll be DMing it to the message author instead of posting it in the requested channel. However, there is something significant you should consider: the possibility of not being able to DM the user, whether it be that they have DMs disabled on that server or overall, or they have the bot blocked. For that reason, you should `.catch()` it and let them know.
 
 ::: tip
-If you weren't already aware, `.send()` takes 2 parameters: the content to send, and the message options to pass in. You can read about the `MessageOptions` type <branch version="11.x" inline>[here](https://discord.js.org/#/docs/main/v11/typedef/MessageOptions)</branch><branch version="12.x" inline>[here](https://discord.js.org/#/docs/main/stable/typedef/MessageOptions)</branch>. Using `split: true` here will automatically split our help message into 2 or more messages in the case that it exceeds the 2,000 character limit.
+If you weren't already aware, `.send()` takes two parameters: the content to send, and the message options to pass in. You can read about the `MessageOptions` type <branch version="11.x" inline>[here](https://discord.js.org/#/docs/main/v11/typedef/MessageOptions)</branch><branch version="12.x" inline>[here](https://discord.js.org/#/docs/main/stable/typedef/MessageOptions)</branch>. Using `split: true` here will automatically split our help message into two or more messages in the case that it exceeds the 2,000 character limit.
 :::
 
 ::: tip

@@ -8,7 +8,7 @@ Sometimes you'll want to determine the result of a command depending on user inp
 
 ## Basic arguments
 
-We'll be tackling 2 things at once here. Things will be explained along the way, so don't worry if you don't understand immediately.
+We'll be tackling two things at once here. Things will be explained along the way, so don't worry if you don't understand immediately.
 
 Go to your main bot file and find the `client.on('message', ...)` bit. Add the following block of code at the top of this event listeners callback function (the part we replaced with `...` here).
 
@@ -244,7 +244,7 @@ That part is simple; recycle the if statement you used in the section above and 
 	</discord-message>
 </div>
 
-The next part is where it takes a turn–displaying the avatars of all the mentioned users. But it's simpler than you may think! `message.mentions.users` returns a Collection (as previously mentioned), which you can loop over in several different ways. You'll be using `.map()` to loop here since it allows you to easily collect and store data in a variable to send 1 final message in the end, as opposed to multiple.
+The next part is where it takes a turn–displaying the avatars of all the mentioned users. But it's simpler than you may think! `message.mentions.users` returns a Collection (as previously mentioned), which you can loop over in several different ways. You'll be using `.map()` to loop here since it allows you to easily collect and store data in a variable to send one final message in the end, as opposed to multiple.
 
 <branch version="11.x">
 
@@ -366,13 +366,13 @@ And you've got a working prune command! Create a test channel, send a few random
 
 ### Caveats
 
-You should note that there are a few caveats with the `.bulkDelete()` method. The first would be the trying to delete messages older than 2 weeks, which would normally error. Here's an easy fix for that:
+You should note that there are a few caveats with the `.bulkDelete()` method. The first would be the trying to delete messages older than two weeks, which would normally error. Here's an easy fix for that:
 
 ```js
 message.channel.bulkDelete(amount, true);
 ```
 
-The second parameter in the `.bulkDelete()` method will filter out messages older than 2 weeks if you give it a truthy value. So if there are 50 messages and 25 of them are older than 2 weeks, it'll only delete the first 25 without throwing an error. However, if all the messages you're trying to delete are older than 2 weeks, then it will still throw an error. Knowing this, you should catch that error by chaining a `.catch()`.
+The second parameter in the `.bulkDelete()` method will filter out messages older than two weeks if you give it a truthy value. So if there are 50 messages and 25 of them are older than two weeks, it'll only delete the first 25 without throwing an error. However, if all the messages you're trying to delete are older than two weeks, then it will still throw an error. Knowing this, you should catch that error by chaining a `.catch()`.
 
 ```js
 message.channel.bulkDelete(amount, true).catch(err => {

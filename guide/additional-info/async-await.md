@@ -8,7 +8,7 @@ Before we can get into async/await, you should know what Promises are and how th
 
 Promises are a way to handle asynchronous tasks in JavaScript; they are the newer alternative to callbacks. A Promise has many similarities to a progress bar; they represent an unfinished and ongoing process. An excellent example of this is a request to a server (e.g., discord.js sends requests to Discord's API).
 
-A Promise can have 3 states; pending, resolved, and rejected
+A Promise can have three states; pending, resolved, and rejected
 
 The **pending** state means that the Promise still is ongoing and neither resolved nor rejected.
 The **resolved** state means that the Promise is done and executed without any errors.

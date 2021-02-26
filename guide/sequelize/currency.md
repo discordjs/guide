@@ -6,7 +6,7 @@ A common feature of Discord bots is a currency system. It's possible to do every
 
 There will be multiple files: a DB init script, your models, and your bot script. In the previous tutorial, we placed all of these in the same file. Having everything in one file is usually not how the real world does it, so we'll correct that.
 
-This time we'll have 6 files.
+This time we'll have six files.
 
 * `app.js` is where we'll keep the main bot code.
 * `dbInit.js` is the initialization file for the database. We run this once and forget about it.
@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
 };
 ```
 
-Like you see in the diagram above, our Users model will only have 2 attributes: a `user_id` primary key and a `balance`. A primary key is a particular attribute that becomes the default column used when joining tables together and is automatically unique and not `null`.
+Like you see in the diagram above, our Users model will only have two attributes: a `user_id` primary key and a `balance`. A primary key is a particular attribute that becomes the default column used when joining tables together and is automatically unique and not `null`.
 
 Balance also sets `allowNull` to `false`, which means that both values have to be set in conjunction with creating a primary key; otherwise, the database would throw an error. This constraint guarantees correctness in our data storage. We'll never have `null` or empty values, ensuring that if we somehow forget to validate in the application that both values are not `null`, our database would do the final validation for us.
 
@@ -385,7 +385,7 @@ return message.channel.send(
 
 </branch>
 
-Nothing extraordinary here either. We could have queried the database for the top 10 currency holders, but we already have access to them locally, so sort the Collection we have and use map again to display it in a friendly format. The filter is in case the users no longer exist in the bot's cache.
+Nothing extraordinary here either. We could have queried the database for the top ten currency holders, but we already have access to them locally, so sort the Collection we have and use map again to display it in a friendly format. The filter is in case the users no longer exist in the bot's cache.
 
 ## Resulting code
 

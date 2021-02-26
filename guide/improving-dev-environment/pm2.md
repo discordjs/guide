@@ -41,7 +41,7 @@ pm2 start your-app-name.js --watch
 ```
 
 ::: tip
-The `pm2 start` command can take more optional parameters, but only these 2 are relevant for us. If you want to see all the parameters available, you can check the documentation of pm2 [here](https://pm2.io/doc/en/runtime/reference/pm2-cli/).
+The `pm2 start` command can take more optional parameters, but only these two are relevant for us. If you want to see all the parameters available, you can check the documentation of pm2 [here](https://pm2.io/doc/en/runtime/reference/pm2-cli/).
 :::
 
 Once the process launches with pm2, you can run `pm2 monit` to monitor all console outputs from the processes started by pm2. This accounts for any `console.log()` in your code or outputted errors.
