@@ -159,7 +159,7 @@ But what happens if you try to use the command without mentioning anybody? If yo
 
 ```
 message.channel.send(`You wanted to kick: ${taggedUser.username}`);
-													  ^
+                                                      ^
 
 TypeError: Cannot read property 'username' of undefined
 ```
