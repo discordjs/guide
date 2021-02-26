@@ -112,7 +112,7 @@ In your main file:
 	}
 ```
 
-Use an `if` statement to check if the `usage` property exists (and is truthy) first. For example, if you forget to provide the property, it would display `undefined` in the reply string. A simple precaution such as this can significantly improve the user experience.
+Use an `if` statement to check if the `usage` property exists and append to the reply string if it does.
 
 ## Guild only commands
 
@@ -162,7 +162,7 @@ module.exports = {
 };
 ```
 
-The `cooldown` property is the amount (in seconds) that the user will have to wait for before using that command again. You'll be using Collections again to store what you need.
+The `cooldown` property is the number of seconds the user must wait before executing that command again. You'll be using Collections again to store what you need.
 
 In your main file, add in this line (preferably somewhere above your `ready` event):
 
