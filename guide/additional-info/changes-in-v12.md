@@ -2306,7 +2306,7 @@ The new `presence.clientStatus` property returns an object with three keys: `web
 
 #### Presence#user(ID)
 
-`presence.user` (read-only) and `presence.userID` are properties to represent a `User` and its ID that the presence belongs to.  The former can be null if the `User` is not cached.
+`presence.user` (read-only) and `presence.userID` are properties to represent a `User` and its ID that the presence belongs to.  The former can be `null` if the `User` is not cached.
 
 ### ReactionCollector
 

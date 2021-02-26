@@ -84,7 +84,7 @@ const sequelize = new Sequelize('database', 'user', 'password', {
 
 `host` tells Sequelize where to look for the database. For most systems, the host will be localhost, as the database usually resides with the application. If you have a remote database, however, then you can set it to that connection address. Otherwise, don't touch this unless you know what you're doing.  
 `dialect` refers to the database engine you are going to use. For this tutorial, it will be sqlite.  
-`logging` enables verbose output from Sequelize–useful for when you are trying to debug. You can disable it by setting it to false.
+`logging` enables verbose output from Sequelize–useful for when you are trying to debug. You can disable it by setting it to `false`.
 `storage` is a sqlite-only setting because sqlite is the only database that stores all its data to a single file.  
 
 

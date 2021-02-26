@@ -380,7 +380,7 @@ const permissions = new Permissions(flags);
 ### Checking for permissions
 
 The Permissions object features the `.has()` method, allowing an easy way to check flags in a Permissions bit field.
-The `.has()` method takes two parameters: the first being either a permission number, single flag, or an array of permission numbers and flags, the second being a boolean, indicating if you want to allow the `ADMINISTRATOR` permission to override (defaults to true).
+The `.has()` method takes two parameters: the first being either a permission number, single flag, or an array of permission numbers and flags, the second being a boolean, indicating if you want to allow the `ADMINISTRATOR` permission to override (defaults to `true`).
 
 Let's say you want to know if the decimal bit field representation `268550160` has `MANAGE_CHANNELS` referenced:
 
