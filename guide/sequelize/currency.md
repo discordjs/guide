@@ -277,7 +277,7 @@ const storedBalances = await Users.findAll();
 storedBalances.forEach(b => currency.set(b.user_id, b));
 ```
 
-We want to sync our currency collection with the database for easy access later in our ready event.
+In our ready event, we want to sync our currency collection with the database for easy access later.
 
 ### [gamma] Show user balance
 
