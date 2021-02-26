@@ -13,9 +13,9 @@ Sounds good? Great! Let's get started, then.
 ## Before you begin...
 
 Alright, making a bot is cool and all, but there are some prerequisites to it. To create a bot with discord.js, you should have a fairly decent grasp of JavaScript itself.
-While you _can_ make a bot with very little JS and programming knowledge, trying to do so without understanding the language first will only hinder you. You may get stuck on many uncomplicated issues, struggle with solutions to incredibly easy problems, and all-in-all end up frustrated. Sounds pretty annoying.
+While you _can_ make a bot with very little JavaScript and programming knowledge, trying to do so without understanding the language first will only hinder you. You may get stuck on many uncomplicated issues, struggle with solutions to incredibly easy problems, and all-in-all end up frustrated. Sounds pretty annoying.
 
-If you don't know JS but would like to learn about it, here are a few links to help get you started:
+If you don't know JavaScript but would like to learn about it, here are a few links to help get you started:
 
 * [Eloquent JavaScript, a free online book](http://eloquentjavascript.net/)
 * [JavaScript.info, a modern javascript tutorial](https://javascript.info/)
@@ -24,7 +24,7 @@ If you don't know JS but would like to learn about it, here are a few links to h
 * [MDN's JavaScript guide and full documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * [Google, your best friend](https://google.com)
 
-Take your pick, learn some JS, and once you feel like you're confident enough to make a bot, come back and get started!
+Take your pick, learn some JavaScript, and once you feel like you're confident enough to make a bot, come back and get started!
 
 <a href="https://www.netlify.com">
 	<img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
