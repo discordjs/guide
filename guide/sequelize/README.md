@@ -9,7 +9,7 @@ The main benefit of using an ORM like Sequelize is that it allows you to write c
 ## A simple tag system
 
 For this tutorial, you will create a simple tag system. The tag system will allow you to add a tag, output a tag, edit the tag, show tag info, list tags, and delete a tag.   
-To begin, you should install Sequelize into your discord.js project. We will explain SQlite as the first storage engine and show how to use other databases later. Note that you will need node 7.6 or above to utilize the `async/await` operators.
+To begin, you should install Sequelize into your discord.js project. We will explain SQlite as the first storage engine and show how to use other databases later. Note that you will need Node 7.6 or above to utilize the `async/await` operators.
 
 ### Installing and using Sequelize
 

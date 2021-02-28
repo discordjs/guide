@@ -62,13 +62,13 @@ const manager = new ShardingManager('./bot.js', {
 });
 ```
 
-The `execArgv` property is what you would usually pass to node without sharding, e.g.:
+The `execArgv` property is what you would usually pass to Node without sharding, e.g.:
 
 ```
 node --trace-warnings bot.js
 ```
 
-You can find a list of command-line options for node [here](https://nodejs.org/api/cli.html).
+You can find a list of command-line options for Node [here](https://nodejs.org/api/cli.html).
 
 The `shardArgs` property is what you would usually pass to your bot without sharding, e.g.:
 
