@@ -446,7 +446,7 @@ message.channel.send(`Command \`${command.name}\` was reloaded!`);
 
 ## Conclusion 
 
-You should now have a command handler with some basic (but useful) features at this point in the guide! If you see fit, you can expand upon the current structure to make something even better and more comfortable for you to use in the future.
+You should have a command handler with some basic (but useful) features at this point in the guide! If you see fit, you can expand upon the current structure to make something even better and more comfortable for your future use.
 
 ## Resulting code
 

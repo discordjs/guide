@@ -375,7 +375,7 @@ While this list was carefully crafted, it may be incomplete! If you notice piece
 
 #### Snekfetch
 
-`snekfetch` was removed as a dependency and was replaced with `node-fetch`.  `snekfetch` was deprecated by its developer and is no longer maintained.
+The `snekfetch` dependency was replaced with `node-fetch`.  `snekfetch` was deprecated by its developer and is no longer maintained.
 
 ### Attachment
 
@@ -493,7 +493,7 @@ The `client.resume` event was removed in favor of the `client.shardResume` event
 
 #### Client#status
 
-The `client.status` property was removed and is now in the `WebSocketManager` class, and it is no longer a getter.
+The `client.status` property was removed and moved to the `WebSocketManager` class and is no longer a getter.
 
 ```diff
 - client.status;
@@ -518,7 +518,7 @@ The `client.userNoteUpdate` event was removed entirely, along with all other use
 
 #### Client#voiceConnections
 
-`client.voiceConnections` was removed and is now in the `ClientVoiceManager` class, and the `Collection` is no longer a getter.
+`client.voiceConnections` was removed and moved to the `ClientVoiceManager` class and is no longer a getter.
 
 ```diff
 - client.voiceConnections;
@@ -1203,7 +1203,7 @@ All of the methods to modify a member's roles have been moved to the `GuildMembe
 
 #### GuildMember#hasPermission
 
-The `explicit` parameter was removed entirely.  The `checkAdmin` and `checkOwner` parameters have been changed into a single `options` object with those values as keys.
+The `explicit` parameter was removed entirely.  The `checkAdmin` and `checkOwner` parameters have merged into a single `options` object with those values as keys.
 
 ```diff
 - guildMember.hasPermission('MANAGE_MESSAGES', true, false, false);
@@ -1428,7 +1428,7 @@ The `max` and `maxMatches` properties of the `MessageCollector` class have been 
 
 #### MessageReaction#fetchUsers
 
-`messageReaction.fetchUsers()` has been transformed in the shape of a Manager.  In addition, the first parameter was removed in favor of an object.
+`messageReaction.fetchUsers()` has transformed in the shape of a Manager.  In addition, the first parameter was removed in favor of an object.
 
 ```diff
 - reaction.fetchUsers(50);
@@ -1437,7 +1437,7 @@ The `max` and `maxMatches` properties of the `MessageCollector` class have been 
 
 #### MessageReaction#remove
 
-`messageReaction.remove()` has been transformed in the shape of a Manager.
+`messageReaction.remove()` has transformed in the shape of a Manager.
 
 ```diff
 - reaction.remove();
@@ -1606,7 +1606,7 @@ The properties of a role relating to its position have been renamed.  `role.calc
 
 #### Role#setPosition
 
-The optional second parameter of the `role.setPosition()` method has been changed to an object; its keys are `relative` (a boolean) and `reason` (a string).
+The optional second parameter of the `role.setPosition()` method has changed to an object; its keys are `relative` (a boolean) and `reason` (a string).
 
 ```diff
 - role.setPosition(3, true);
@@ -1696,7 +1696,7 @@ The `streamDispatcher.pause` method now takes an optional parameter `silence` to
 
 #### StreamDispatcher#stream
 
-The `streamDispatcher.stream` property was removed entirely and has been replaced with the `streamDispatcher.broadcast` property, which is the broadcast controlling the stream if any.
+The `streamDispatcher.stream` property was removed and replaced with `streamDispatcher.broadcast`, which is the broadcast controlling the stream (if any).
 
 #### StreamDispatcher#time
 
@@ -2288,7 +2288,7 @@ channel.updateOverwrite(message.author, {
 
 ### PlayInterface
 
-This is a new class to play audio over `VoiceConnection's and `VoiceBroadcast's.
+This is a new class to play audio over `VoiceConnection`'s and `VoiceBroadcast`'s.
 
 ### Presence
 
@@ -2425,7 +2425,7 @@ This new method resolves a `StringResolvable` into a string.
 
 #### VoiceBroadcast#dispatcher
 
-This new property represents the primary dispatcher–if any–that controls everything played by subscribed dispatchers.
+This new property represents the primary dispatcher (if any) that controls everything played by subscribed dispatchers.
 
 ### VoiceChannel
 

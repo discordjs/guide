@@ -2,7 +2,7 @@
 
 REST APIs are extremely popular on the web and allow you to freely grab a site's data if it has an available API over an HTTP connection.
 
-If you've ever seen a music bot that accepts a YouTube query instead of just a video's URL, then you've seen a REST API in action. discord.js uses the Discord API even, so you've probably used an API yourself.
+If you've ever seen a music bot that accepts a YouTube query instead of just a video's URL, then you've seen a REST API in action. discord.js uses the Discord API, so you've probably used an API yourself.
 
 ## Making HTTP requests with Node
 

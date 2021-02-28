@@ -4,7 +4,7 @@ A common feature of Discord bots is a currency system. It's possible to do every
 
 ## File overview
 
-There will be multiple files: a DB init script, your models, and your bot script. In the previous tutorial, we placed all of these in the same file. Having everything in one file is usually not how the real world does it, so we'll correct that.
+There will be multiple files: a DB init script, your models, and your bot script. In the previous tutorial, we placed all of these in the same file. Having everything in one file isn't an ideal practice, so we'll correct that.
 
 This time we'll have six files.
 
@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
 };
 ```
 
-Like you see in the diagram above, our Users model will only have two attributes: a `user_id` primary key and a `balance`. A primary key is a particular attribute that becomes the default column used when joining tables together and is automatically unique and not `null`.
+Like you see in the diagram above, our Users model will only have two attributes: a `user_id` primary key and a `balance`. A primary key is a particular attribute that becomes the default column used when joining tables together, and it is automatically unique and not `null`.
 
 Balance also sets `allowNull` to `false`, which means that both values have to be set in conjunction with creating a primary key; otherwise, the database would throw an error. This constraint guarantees correctness in our data storage. We'll never have `null` or empty values, ensuring that if we somehow forget to validate in the application that both values are not `null`, our database would do the final validation for us.
 

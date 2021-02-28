@@ -32,7 +32,7 @@ client.on('message', message => {
 client.login(config.token);
 ```
 
-If you haven't noticed, this piece of code is already using a bit of ES6 here! The `const` keyword and arrow function syntax (`() => ...`) is a part of ES6, and we recommend using it whenever possible.
+If you haven't noticed, this piece of code is already using a bit of ES6 here! The `const` keyword and arrow function declaration (`() => ...`) are ES6 syntax, and we recommend using it whenever possible.
 
 As for the code above, there are a few places where things can be done better. Let's look at them.
 

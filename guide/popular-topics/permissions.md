@@ -322,7 +322,7 @@ If you want to know how to work with the returned Permissions objects, keep read
 ## The Permissions object
 
 The <branch version="11.x" inline>[Permissions](https://discord.js.org/#/docs/main/v11/class/Permissions)</branch><branch version="12.x" inline>[Permissions](https://discord.js.org/#/docs/main/stable/class/Permissions)</branch> object is a discord.js class containing a permissions bit field and a bunch of utility methods to manipulate it easily.
-Remember that using these methods will not manipulate permissions but create a new instance representing the changed bit field.
+Remember that using these methods will not manipulate permissions, but rather create a new instance representing the changed bit field.
 
 ### Displaying permission flags
 
@@ -331,7 +331,7 @@ Discord.js provides a `toArray()` method, which can be used to convert a `Permis
 ```js
 const memberPermissions = member.permissions.toArray();
 const rolePermissions = role.permissions.toArray();
-//  output: ['SEND_MESSAGES', 'ADD_REACTIONS', 'CHANGE_NICKNAME', ...]
+// output: ['SEND_MESSAGES', 'ADD_REACTIONS', 'CHANGE_NICKNAME', ...]
 ```
 
 ::: tip 

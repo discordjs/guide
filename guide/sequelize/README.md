@@ -127,7 +127,7 @@ The model mirrors very closely to what the database defines. There will be a tab
 `sequelize.define()` takes two parameters. `'tags'` is passed as the name of our table, and an object that represents the table's schema in key-value pairs. Keys in the object become the model's attributes, and the values describe the attributes.
 
 `type` refers to what kind of data this attribute should hold. The most common types are number, string, and date, but other data types are available depending on the database.  
-`unique: true` will ensure that this field will never have duplicated entries. We disallow duplicate tag names in this database.  
+`unique: true` will ensure that this field will never have duplicated entries. Duplicate tag names are disallowed in this database.  
 `defaultValue` allows you to set a fallback value if there's no initial value during the insert.  
 `allowNull` is not all that important, but this will guarantee in the database that the attribute is never unset. You could potentially set it to be a blank or empty string, but it has to be _something_.
 
@@ -173,8 +173,8 @@ catch (e) {
 ```
 
 `Tags.create()` uses the models that you created previously. The `.create()` method inserts some data into the model. You are going to insert a tag name, description, and the author name into the database.  
-`catch (e)` This section is necessary for the insert because it will offload checking for duplicates to the database so that it will notify you if you attempt to create a tag that already exists. The alternative is to query the database before adding data and checking if a result returns. If there are no errors or no identical tag is found, only then would you add the data. Of the two methods, it is clear that catching the error is less work for you.  
-`if (e.name === "SequelizeUniqueConstraintError")` Although this was mostly for doing less work, it is always good to handle your errors, especially if you know what types of errors you will receive. This error comes up if something violates your unique constraint, i.e., someone inserted duplicate values.
+The `catch (e)` section is necessary for the insert because it will offload checking for duplicates to the database, so that it notifies you if an attempt to create a tag that already exists occurs. The alternative is to query the database before adding data and checking if a result returns. If there are no errors or no identical tag is found, only then would you add the data. Of the two methods, it is clear that catching the error is less work for you.  
+`if (e.name === "SequelizeUniqueConstraintError")` Although this was mostly for doing less work, it is always good to handle your errors, especially if you know what types of errors you will receive. This error comes up if your unique constraint is violated, i.e., duplicate values are inserted.
 
 ::: warning
 Do not use catch for inserting new data. Only use it for gracefully handling things that go wrong in your code or logging errors.

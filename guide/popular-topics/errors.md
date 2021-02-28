@@ -62,7 +62,7 @@ The commonly thrown codes for these errors are:
 ## How to diagnose API errors
 
 API Errors can be tracked down by adding an event listener for unhandled rejections and looking at the extra info.
-This can be done by quickly adding this to your main file.
+This can be done by adding this to your main file.
 
 ```js
 process.on('unhandledRejection', error => {
@@ -89,7 +89,7 @@ You can find a full list of messages [here](https://discord.com/developers/docs/
 
 ### Path
 
-The path is another helpful piece of information. The path tells you where you tried to execute an action. We cannot possibly cover all API paths, but they are usually very descriptive. For example, in our example above, the path tells us we are first in the channels path, then judging by the id after it, we can see we got a specific channel. After the `/api/v7/channels/638200642359525387` we can see that we get the `messages` of that channel, and in the same way we saw before, we see we try to access a specific message by id; however, we gave it an invalid id, which is the origin of the message.
+The path is another helpful piece of information. The path tells you where you tried to execute an action. We cannot possibly cover all API paths, but they are usually very descriptive. In the example above, the path tells us we are first in the channels path, then judging by the id after it, we can see we got a specific channel. After the `/api/v7/channels/638200642359525387` we can see that we get the `messages` of that channel, and in the same way we saw before, we see we try to access a specific message by id; however, we gave it an invalid id, which is the origin of the message.
 
 ### Code
 
@@ -177,7 +177,7 @@ const client = new Client();
 client.on('message', someHandlerFunction);
 
 client.login('your-token-goes-here');
-//  client will not be logged in yet!
+// client will not be logged in yet!
 client.fetchUser('myId').then(someInitFunction);
 ```
 
@@ -203,17 +203,17 @@ const client = new Client();
 client.on('message', someHandlerFunction);
 
 client.login('your-token-goes-here');
-//  client will not be logged in yet!
+// client will not be logged in yet!
 client.users.fetch('myId').then(someInitFunction);
 ```
 
 ### MessageEmbed field names may not be empty.
 
-This error originates from calling `MessageEmbed.addFields()` with a field object with an empty string as a value for the `name` field. If you would like the title to be empty for a reason, you should use a zero width space, which can be input as `\u200b`.
+This error originates from calling `MessageEmbed.addFields()` with a field object's `name` property as an empty string. If you would like the title to be empty for a reason, you should use a zero width space, which can be input as `\u200b`.
 
 ### MessageEmbed field values may not be empty.
 
-In conjunction with the previous error, this error is the result of calling `MessageEmbed.addFields()` with a field object that has an empty string as a value for the `value` field. You can use a zero width space if you would like this empty.
+In conjunction with the previous error, this error is the result of calling `MessageEmbed.addFields()` with a field object's `value` property as an empty string. You can use a zero width space if you would like this empty.
 
 </branch>
 
@@ -235,7 +235,7 @@ You can debug these messages in different ways:
 
 ### Cannot send messages to this user.
 
-This error throws when the bot attempts to send a DM message to a user, and it is unable to do so. A variety of reasons causes this:
+This error throws when the bot attempts to send a DM message to a user but is unable to do so. A variety of reasons causes this:
 - The bot and the user do not share a guild (often, people attempt to dm the user after kicking or banning them).
 - The bot tries to DM another bot.
 - The user has blocked the bot.

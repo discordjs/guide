@@ -122,7 +122,7 @@ If you've never done something like this before, this probably isn't what you'd 
 	</discord-message>
 </div>
 
-Awesome! Nothing to worry in that regard about now. You're currently using something called a "regular expression" (commonly referred to as "regex") to handle that small (but important) bug.
+Awesome! Nothing to worry in that regard about now. This uses something called a "regular expression" (commonly referred to as "regex") to handle that small (but important) bug.
 
 ## Common situations with arguments
 
@@ -173,7 +173,7 @@ if (!message.mentions.users.size) {
 ```
 
 ::: tip
-`message.reply()` is alternative to `message.channel.send()` that prepends a mention of the person who sent the message, unless the message was sent in a DM. It can be very useful for providing feedback!
+`message.reply()` is an alternative to `message.channel.send()` that prepends a mention of the person who sent the message, unless the message was sent in a DM. It can be very useful for providing feedback!
 :::
 
 Since `message.mentions.users` is a Collection, it has a `.size` property. If no users are mentioned, it'll return 0 (which is a `falsy` value), meaning you can do `if (!value)` to check if it's falsy.

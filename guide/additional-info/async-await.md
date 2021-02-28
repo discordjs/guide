@@ -73,7 +73,7 @@ An important thing to know is that a function declared as `async` will always re
 
 ### Execution with discord.js code
 
-After knowing how Promises work and what they are for and about the theory, let's look at an example in which we'll handle multiple Promises. Let's say you want to react with letters (regional indicators) in a specific order. For this example, you will take the basic template for a discord.js bot with some ES6 adjustments.
+After knowing how Promises work and what they are for, as well as the theory, let's look at an example in which we'll handle multiple Promises. Let's say you want to react with letters (regional indicators) in a specific order. For this example, you will take the basic template for a discord.js bot with some ES6 adjustments.
 
 ```js
 const Discord = require('discord.js');
