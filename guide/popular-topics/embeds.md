@@ -10,41 +10,41 @@ In the following section, we will explain how to compose an embed, send it, and 
 Here is an example of how an embed may look. We will go over embed construction in the next part of this guide.
 
 <div is="discord-messages">
-    <discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-        <discord-embed
-            slot="embeds"
-            color="#0099ff"
-            title="Some title"
-            url="https://discord.js.org/"
-            thumbnail="https://i.imgur.com/wSTFkRM.png"
-            image="https://i.imgur.com/wSTFkRM.png"
-            footer-image="https://i.imgur.com/wSTFkRM.png"
-            timestamp="01/01/2018"
-            authorName="Some name"
-            authorImage="https://i.imgur.com/wSTFkRM.png"
-            authorUrl="https://discord.js.org/"
-        >
-            Some description here
-            <embed-fields>
-                <embed-field title="Regular field title">
-                    Some value here
-                </embed-field>
-                <embed-field title="​">
-                    ​
-                </embed-field>
-                <embed-field :inline="true" title="Inline field title">
-                    Some value here
-                </embed-field>
-                <embed-field :inline="true" title="Inline field title">
-                    Some value here
-                </embed-field>
-                <embed-field :inline="true" title="Inline field title">
-                    Some value here
-                </embed-field>
-            </embed-fields>
-            <span slot="footer">Some footer text here</span>
-        </discord-embed>
-    </discord-message>
+	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+		<discord-embed
+			slot="embeds"
+			color="#0099ff"
+			title="Some title"
+			url="https://discord.js.org/"
+			thumbnail="https://i.imgur.com/wSTFkRM.png"
+			image="https://i.imgur.com/wSTFkRM.png"
+			footer-image="https://i.imgur.com/wSTFkRM.png"
+			timestamp="01/01/2018"
+			authorName="Some name"
+			authorImage="https://i.imgur.com/wSTFkRM.png"
+			authorUrl="https://discord.js.org/"
+		>
+			Some description here
+			<embed-fields>
+				<embed-field title="Regular field title">
+					Some value here
+				</embed-field>
+				<embed-field title="​">
+					​
+				</embed-field>
+				<embed-field :inline="true" title="Inline field title">
+					Some value here
+				</embed-field>
+				<embed-field :inline="true" title="Inline field title">
+					Some value here
+				</embed-field>
+				<embed-field :inline="true" title="Inline field title">
+					Some value here
+				</embed-field>
+			</embed-fields>
+			<span slot="footer">Some footer text here</span>
+		</discord-embed>
+	</discord-message>
 </div>
 
 ## Using the <branch version="11.x" inline>RichEmbed</branch><branch version="12.x" inline>MessageEmbed</branch> constructor
@@ -54,7 +54,7 @@ Discord.js features the utility class <branch version="11.x" inline>[RichEmbed](
 <branch version="11.x">
 
 ::: warning
-In version 12, the receiving and outgoing embed classes have been unified; you will need to use `Discord.MessageEmbed()` as a constructor instead.
+In version 12, the receiving and outgoing embed classes have unified; you will need to use `Discord.MessageEmbed()` as a constructor instead.
 :::
 
 ```js
@@ -140,7 +140,7 @@ If you want to modify the embed based on conditions, you will need to reference 
 const exampleEmbed = new Discord.RichEmbed().setTitle('Some title');
 
 if (message.author.bot) {
-    exampleEmbed.setColor('#7289da');
+	exampleEmbed.setColor('#7289da');
 }
 ```
 
@@ -153,7 +153,7 @@ if (message.author.bot) {
 const exampleEmbed = new Discord.MessageEmbed().setTitle('Some title');
 
 if (message.author.bot) {
-    exampleEmbed.setColor('#7289da');
+	exampleEmbed.setColor('#7289da');
 }
 ```
 
@@ -166,7 +166,7 @@ You can use the `.attachFiles()` method to upload images alongside your embed an
 You can then reference and use the images inside the embed itself with `attachment://fileName.extension`.
 
 ::: tip
-If you plan to attach the same image repeatedly, consider hosting it online and provide the URL in the respective embed field instead. This also makes your bot respond much faster since it doesn't need to upload the image with every response depending on it.
+If you plan to repeatedly attach the same image, consider hosting it online and providing the URL in the respective embed field instead. This also makes your bot respond faster since it doesn't need to upload the image with every response depending on it.
 :::
 
 <branch version="11.x">
@@ -284,7 +284,7 @@ You can upload images with your embedded message and use them as source for embe
 You can then reference and use the images inside the embed itself with `attachment://fileName.extension`.
 
 ::: tip
-If you plan to attach the same image repeatedly, consider hosting it online and provide the URL in the respective embed field instead. This also makes your bot respond much faster since it doesn't need to upload the image with every response depending on it.
+If you plan to repeatedly attach the same image, consider hosting it online and providing the URL in the respective embed field instead. This also makes your bot respond faster since it doesn't need to upload the image with every response depending on it.
 :::
 
 <branch version="11.x">
@@ -404,7 +404,7 @@ There are a few limits to be aware of while planning your embeds due to the API'
 - A field's name is limited to 256 characters and its value to 1024 characters
 - The footer text is limited to 2048 characters
 - The author name is limited to 256 characters
-- In addition, the sum of all characters in an embed structure must not exceed 6000 characters
+- The sum of all characters in an embed structure must not exceed 6000 characters
 - A bot can have one embed per message
 - A webhook can have ten embeds per message
 

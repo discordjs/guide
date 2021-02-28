@@ -43,7 +43,7 @@ You can fetch a specific webhook using its `id` with <branch version="11.x" inli
 
 #### Using the WebhookClient constructor
 
-If you are not using a bot client, you can get a webhook by creating a new instance of `WebhookClient` and passing the `id` and `token` into the constructor. This does not require you to have a bot application, but it also offers limited information instead of fetching it using an authorized client.
+If you are not using a bot client, you can get a webhook by creating a new instance of `WebhookClient` and passing the `id` and `token` into the constructor. These credentials do not require you to have a bot application, but it also offers limited information instead of fetching it using an authorized client.
 
 ```js
 const webhookClient = new Discord.WebhookClient('id', 'token');
@@ -61,7 +61,7 @@ If you already have created a webhook, the webhooks tab will look like this; you
 
 ![Integrations tab](~@/images/creating-webhooks-2.png)
 
-Once you are there, click on the `Create Webhook` / `New Webhook` button. This will create a webhook. From here, you can edit the channel, the name, and the avatar. Copy the link, the first part is the id, and the second is the token.
+Once you are there, click on the `Create Webhook` / `New Webhook` button; this will create a webhook. From here, you can edit the channel, the name, and the avatar. Copy the link, the first part is the id, and the second is the token.
 
 ![Creating a Webhook](~@/images/creating-webhooks-3.png)
 
@@ -122,7 +122,7 @@ webhook.edit({
 
 ## Using webhooks
 
-Webhooks, unlike bots, can send more than one embed per message, up to 10. They can also send attachments and normal content. The <branch version="11.x" inline> [`Webhook#send()`](https://discord.js.org/#/docs/main/v11/class/Webhook?scrollTo=send)</branch><branch version="12.x" inline>[`Webhook#send()`](https://discord.js.org/#/docs/main/stable/class/Webhook?scrollTo=send)</branch> method to send to a webhook is very similar to the method for sending to a text channel. Webhooks can also choose what the username and avatar will appear as when they send the message.
+Webhooks, unlike bots, can send more than one embed per message, up to 10. They can also send attachments and normal content. The <branch version="11.x" inline> [`Webhook#send()`](https://discord.js.org/#/docs/main/v11/class/Webhook?scrollTo=send)</branch><branch version="12.x" inline>[`Webhook#send()`](https://discord.js.org/#/docs/main/stable/class/Webhook?scrollTo=send)</branch> method to send to a webhook is very similar to the method for sending to a text channel. Webhooks can also choose how the username and avatar will appear when they send the message.
 
 <branch version="11.x">
 

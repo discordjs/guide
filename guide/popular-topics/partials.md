@@ -71,5 +71,4 @@ if (message.partial) {
 You cannot fetch deleted data from the API. For message deletions, `messageDelete` will only emit with the ID, which you cannot use to fetch the complete message containing content, author, or other information, as it is already inaccessible by the time you receive the event.
 :::
 
-
 </branch>

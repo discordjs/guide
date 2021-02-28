@@ -1,18 +1,18 @@
 # Errors
 
-There is no doubt that you have encountered errors while making bots. While errors are instrumental at warning you of what is going wrong, many people are stumped by them and how to track them down and fix them, but don't worry, we have you covered. This section will be all about how to diagnose errors, identify where they are coming from, and fix them.
+There is no doubt that you have encountered errors while making bots. While errors are instrumental at warning you of what is going wrong, many people are stumped by them and how to track them down and fix them, but don't worry, we have you covered. This section will be all about diagnosing errors, identifying where they are coming from, and fixing them.
 
 ## Types of Errors
 
 ### API Errors
 
-API Errors or DiscordAPIErrors are thrown by the Discord API when an invalid request carries out. API Errors can be mostly diagnosed using the message that is given. They can also be further examined by seeing the http method and path used. We will explore tracking these errors down in the next section.
+API Errors or DiscordAPIErrors are thrown by the Discord API when an invalid request carries out. API Errors can be mostly diagnosed using the message that is given. You can further examine errors by inspecting the http method and path used. We will explore tracking these errors down in the next section.
 
 Example: `DiscordAPIError: Cannot send an empty message`
 
 ### Discord.js Errors
 
-Discord.js Errors are errors that are thrown by the library itself. They can usually be easily tracked down using the stack trace and error message.
+Discord.js Errors are errors that the library itself throws. They can usually be easily tracked down using the stack trace and error message.
 
 Example: `The messages must be an Array, Collection, or number.`
 
@@ -36,7 +36,7 @@ client.on('error', error => {
 });
 ```
 
-When an error occurs, it will be logged to the console, and it will not terminate the process.
+When an error occurs, the console will log it, and it will not terminate the process.
 
 </branch>
 
@@ -84,12 +84,12 @@ All of this information can help you track down what caused the error and how to
 
 ### Message
 
-The most important part of the error is the message. It tells you what actually went wrong, which can help you track down where it originates. 
+The most important part of the error is the message. It tells you what went wrong, which can help you track down where it originates. 
 You can find a full list of messages [here](https://discord.com/developers/docs/topics/opcodes-and-status-codes#json) in the Discord API Docs.
 
 ### Path
 
-The path is another helpful piece of information. The path tells you where you tried to execute an action. We cannot possibly cover all API paths, but they are usually very descriptive. In the example above, the path tells us we are first in the channels path, then judging by the id after it, we can see we got a specific channel. After the `/api/v7/channels/638200642359525387` we can see that we get the `messages` of that channel, and in the same way we saw before, we see we try to access a specific message by id; however, we gave it an invalid id, which is the origin of the message.
+The path is another helpful piece of information. The path tells you where you tried to execute an action. We cannot possibly cover all API paths, but they are usually very descriptive. In the example above, the path tells us we are first in the channels path, and then judging by the id after it, we can see we got a specific channel. After the `/api/v7/channels/638200642359525387` we can see that we get the `messages` of that channel, and in the same way we saw before, we see we try to access a specific message by id; however, we gave it an invalid id, which is the origin of the message.
 
 ### Code
 
@@ -145,14 +145,14 @@ This is a prevalent error; it originates from a wrong token being passed into `c
 <branch version="12.x">
 
 ::: warning
-Before the release of version, there used to be an issue where the token was not prefixed correctly, which resulted in valid tokens being marked as invalid. If you have verified that all of the above is not the case, make sure you have updated discord.js to the current stable version.
+Before the release of version 12, there used to be an issue where the token was not prefixed correctly, which resulted in valid tokens being marked as invalid. If you have verified that all of the above is not the case, make sure you have updated discord.js to the current stable version.
 :::
 
 </branch>
 
 ### Request to use token, but token was unavailable to the client.
 
-Another common error–this error originates from the client attempting to execute an action that requires the token, but the token not being available. This is most commonly caused by destroying the client and then trying to perform an action.
+Another common error–this error originates from the client attempting to execute an action that requires the token but the token not being available. This is most commonly caused by destroying the client and then trying to perform an action.
 
 This error is also caused by attempting to use a client that has not logged in. Both of the examples below will throw errors.
 
@@ -213,13 +213,13 @@ This error originates from calling `MessageEmbed.addFields()` with a field objec
 
 ### MessageEmbed field values may not be empty.
 
-In conjunction with the previous error, this error is the result of calling `MessageEmbed.addFields()` with a field object's `value` property as an empty string. You can use a zero width space if you would like this empty.
+In conjunction with the previous error, this error results from calling `MessageEmbed.addFields()` with a field object's `value` property as an empty string. You can use a zero-width space if you would like this blank.
 
 </branch>
 
 ### The messages must be an Array, Collection, or number.
 
-This error originates from an invalid call to `bulkDelete()`, make sure you are inputting a valid Array or Collection of messages or a valid number.
+This error originates from an invalid call to `bulkDelete()`. Make sure you are inputting a valid Array or Collection of messages or a valid number.
 
 ### Members didn't arrive in time.
 
@@ -235,7 +235,7 @@ You can debug these messages in different ways:
 
 ### Cannot send messages to this user.
 
-This error throws when the bot attempts to send a DM message to a user but is unable to do so. A variety of reasons causes this:
+This error throws when the bot attempts to send a DM message to a user but cannot do so. A variety of reasons causes this:
 - The bot and the user do not share a guild (often, people attempt to dm the user after kicking or banning them).
 - The bot tries to DM another bot.
 - The user has blocked the bot.
@@ -258,4 +258,3 @@ This error is commonly thrown by your system in response to the process unexpect
 - delete `node_modules`
 - delete `package-lock.json` (make sure you have a `package.json`!)
 - run `npm install` to reinstall packages from `package.json`
-

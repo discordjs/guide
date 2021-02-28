@@ -181,7 +181,7 @@ if (message.content === '!fruits') {
 }
 ```
 
-The benefit of this small optimization is that you can use `.then()` to handle when all of the Promises have resolved, or `.catch()` when one fails. You can also `await` it since it returns a Promise itself.
+This small optimization allows you to use `.then()` to handle when all of the Promises have resolved, or `.catch()` when one fails. You can also `await` it since it returns a Promise itself.
 
 ## Removing reactions
 
@@ -265,13 +265,13 @@ try {
 ```
 
 ::: warning
-Make sure not to remove reactions by emoji or by user too much; if there are many reactions or a lot of users, it can be considered API spam.
+Make sure not to remove reactions by emoji or by user too much; if there are many reactions or users, it can be considered API spam.
 :::
 
 </branch>
 <branch version="12.x">
 
-Removing reactions by user is not as straightforward as removing by emoji or removing all reactions. The API does not provide a method for selectively removing reactions of a user. This means you will have to iterate through reactions that include the user and remove them.
+Removing reactions by user is not as straightforward as removing by emoji or removing all reactions. The API does not provide a method for selectively removing the reactions of a user. This means you will have to iterate through reactions that include the user and remove them.
 
 <!-- eslint-skip -->
 ```js
@@ -286,7 +286,7 @@ try {
 ```
 
 ::: warning
-Make sure not to remove reactions by user too much; if there are many reactions or a lot of users, it can be considered API spam.
+Make sure not to remove reactions by emoji or by user too much; if there are many reactions or users, it can be considered API spam.
 :::
 
 </branch>
