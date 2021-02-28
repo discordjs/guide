@@ -45,10 +45,10 @@ If you check the code above, it's currently doing things like `prefix + 'name'` 
 ```js
 // ES5 version, as we currently have it
 else if (message.content === prefix + 'server') {
-    message.channel.send('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
+	message.channel.send('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
 }
 else if (message.content === prefix + 'user-info') {
-    message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
+	message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
 }
 ```
 
@@ -57,10 +57,10 @@ else if (message.content === prefix + 'user-info') {
 ```js
 // ES6 version, using template literals
 else if (message.content.startsWith(`${prefix}server`)) {
-    message.channel.send(`Guild name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
+	message.channel.send(`Guild name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
 }
 else if (message.content.startsWith(`${prefix}user-info`)) {
-    message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
+	message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
 }
 ```
 
@@ -95,8 +95,8 @@ console.log('And here\'s a function call: ' + letsPretendThisDoesSomething());
 
 console.log(
 	'Putting strings on new lines\n'
-    + 'can be a bit painful\n'
-    + 'with string concatenation. :('
+	+ 'can be a bit painful\n'
+	+ 'with string concatenation. :('
 );
 ```
 
@@ -110,9 +110,9 @@ console.log(`1 + 1 = ${1 + 1}`);
 console.log(`And here's a function call: ${letsPretendThisDoesSomething()}`);
 
 console.log(`
-    Putting strings on new lines
-    is a breeze
-    with template literals! :)
+	Putting strings on new lines
+	is a breeze
+	with template literals! :)
 `);
 
 // NOTE: template literals will also render the indentation inside them

@@ -332,7 +332,7 @@ We use `.add()` for both removing and adding currency. Since we already check if
 const item = await CurrencyShop.findOne({ where: { name: { [Op.like]: commandArgs } } });
 if (!item) return message.channel.send(`That item doesn't exist.`);
 if (item.cost > currency.getBalance(message.author.id)) {
-    return message.channel.send(`You currently have ${currency.getBalance(message.author.id)}, but the ${item.name} costs ${item.cost}!`);
+	return message.channel.send(`You currently have ${currency.getBalance(message.author.id)}, but the ${item.name} costs ${item.cost}!`);
 }
 
 const user = await Users.findOne({ where: { user_id: message.author.id } });

@@ -50,14 +50,14 @@ First, you'll need some questions and answers to choose from, so here's a basic 
 
 ```json
 [
-    {
-        "question": "What color is the sky?",
-        "answers": ["blue"]
-    },
-    {
-        "question": "How many letters are there in the alphabet?",
-        "answers": ["26", "twenty-six", "twenty six", "twentysix"]
-    }
+	{
+		"question": "What color is the sky?",
+		"answers": ["blue"]
+	},
+	{
+		"question": "How many letters are there in the alphabet?",
+		"answers": ["26", "twenty-six", "twenty six", "twentysix"]
+	}
 ]
 ```
 
