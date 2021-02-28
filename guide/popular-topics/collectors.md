@@ -61,7 +61,7 @@ First, you'll need some questions and answers to choose from, so here's a basic 
 ]
 ```
 
-The provided set allows for responder error with an array of answers permitted. Ideally, it would be best to place this in a json file, which you can call `quiz.json` for simplicity.
+The provided set allows for responder error with an array of answers permitted. Ideally, it would be best to place this in a JSON file, which you can call `quiz.json` for simplicity.
 
 <branch version="11.x">
 

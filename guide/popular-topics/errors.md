@@ -6,7 +6,7 @@ There is no doubt that you have encountered errors while making bots. While erro
 
 ### API Errors
 
-API Errors or DiscordAPIErrors are thrown by the Discord API when an invalid request carries out. API Errors can be mostly diagnosed using the message that is given. You can further examine errors by inspecting the http method and path used. We will explore tracking these errors down in the next section.
+API Errors or DiscordAPIErrors are thrown by the Discord API when an invalid request carries out. API Errors can be mostly diagnosed using the message that is given. You can further examine errors by inspecting the HTTP method and path used. We will explore tracking these errors down in the next section.
 
 Example: `DiscordAPIError: Cannot send an empty message`
 
@@ -22,9 +22,9 @@ JavaScript Errors are simple errors which can be thrown by node itself or by dis
 
 Example: `ReferenceError: "x" is not defined`
 
-### Websocket and Network Errors
+### WebSocket and Network Errors
 
-Websocket and Network errors are common system errors thrown by Node in response to something wrong with the websocket connection. Unfortunately, these errors do not have a concrete solution and can be (usually) fixed by getting a better, more stable, and more robust connection. Discord.js will automatically try to reconnect to the websocket if an error occurs. 
+WebSocket and Network errors are common system errors thrown by Node in response to something wrong with the WebSocket connection. Unfortunately, these errors do not have a concrete solution and can be (usually) fixed by getting a better, more stable, and more robust connection. Discord.js will automatically try to reconnect to the WebSocket if an error occurs. 
 
 <branch version="11.x">
 
@@ -53,10 +53,10 @@ client.on('shardError', error => {
 </branch>
 
 The commonly thrown codes for these errors are:
-- `ECONNRESET` - The connection was forcibly closed by a peer, thrown by the loss of connection to a websocket due to timeout or reboot.
+- `ECONNRESET` - The connection was forcibly closed by a peer, thrown by the loss of connection to a WebSocket due to timeout or reboot.
 - `ETIMEDOUT` - A connect or send request failed because the receiving party did not respond after some time.
 - `EPIPE` - The remote side of the stream being written to has been closed.
-- `ENOTFOUND` - The domain being accessed is unavailable, usually caused by a lack of internet, can be thrown by the websocket and http API.
+- `ENOTFOUND` - The domain being accessed is unavailable, usually caused by a lack of internet, can be thrown by the WebSocket and HTTP API.
 - `ECONNREFUSED` - The target machine refused the connection; check your ports and firewall.
 
 ## How to diagnose API errors
@@ -223,7 +223,7 @@ This error originates from an invalid call to `bulkDelete()`. Make sure you are 
 
 ### Members didn't arrive in time.
 
-Another common error–this error originates from the client requesting members from the API through the websocket and the member chunks not arriving in time and triggering the timeout. The most common cause of this error is a bad connection; however, it can also be caused by fetching many members, upwards of 50 thousand. To fix this, run the bot on a location with better internet, such as a VPS. If this does not work for you, you will have to manually change the hardcoded member fetching timeout in the source code.
+Another common error–this error originates from the client requesting members from the API through the WebSocket and the member chunks not arriving in time and triggering the timeout. The most common cause of this error is a bad connection; however, it can also be caused by fetching many members, upwards of 50 thousand. To fix this, run the bot on a location with better internet, such as a VPS. If this does not work for you, you will have to manually change the hardcoded member fetching timeout in the source code.
 
 ### MaxListenersExceededWarning: Possible EventEmitter memory leak detected...
 
