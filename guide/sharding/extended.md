@@ -264,20 +264,25 @@ Now, run this code, and you will surely get a result that looks like the followi
 <!-- eslint-skip  -->
 
 ```js
-[ { guild:
-     { members: {},
-       // ...
-       id: '222078108977594368',
-       name: 'Discord.js Official',
-       icon: '6e4b4d1a0c7187f9fd5d4976c50ac96e',
-       // ...
-       emojis: {} },
-    id: '383735055509356544',
-    name: 'duckSmug',
-    requiresColons: true,
-    managed: false,
-    animated: false,
-    _roles: [] } ]
+[
+	{ 
+		guild: { 
+			members: {},
+			// ...
+			id: '222078108977594368',
+			name: 'Discord.js Official',
+			icon: '6e4b4d1a0c7187f9fd5d4976c50ac96e',
+			// ...
+			emojis: {} 
+		},
+		id: '383735055509356544',
+		name: 'duckSmug',
+		requiresColons: true,
+		managed: false,
+		animated: false,
+		_roles: []
+	}
+]
 ```
 
 While this result isn't *necessarily* bad or incorrect, it's simply a raw object that got `JSON.parse()`'d and `JSON.stringify()`'d over, so all of the circular references are gone. More importantly, The object is no longer a true <branch version="11.x" inline>`Emoji`</branch><branch version="12.x" inline>`GuildEmoji`</branch> object as provided by discord.js. This means none of the convenience methods usually provided to you are available. If this is not a concern to you, you can effectively skip the rest of this section. However, this tutorial should cover it regardless! Let's remedy this issue, shall we?

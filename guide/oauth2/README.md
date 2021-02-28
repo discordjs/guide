@@ -226,11 +226,13 @@ The content-type for the token url must be `application/x-www-form-urlencoded`. 
 Now try visiting your OAuth2 url and authorizing your application. Once you're redirected, you should see something like this in your console.
 
 ```json
-{ "access_token": "an access token",
-  "token_type": "Bearer",
-  "expires_in": 604800,
-  "refresh_token": "a refresh token",
-  "scope": "identify" }
+{
+	"access_token": "an access token",
+	"token_type": "Bearer",
+	"expires_in": 604800,
+	"refresh_token": "a refresh token",
+	"scope": "identify"
+}
 ```
 
 Now that you have an access token and a refresh token, try fetching the user's information. It's the same as how the html file did it in the html file.
