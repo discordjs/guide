@@ -12,7 +12,7 @@ v12 requires Node 12.x or higher, so make sure you're up-to-date.  To check your
 
 Once you got Node up-to-date, you can install v12 by running `npm install discord.js` in your terminal or command prompt for text-only use or `npm install discord.js @discordjs/opus` for voice support.
 
-You can check your discord.js version with `npm list discord.js`. Should it still show v11.x, uninstall (`npm uninstall discord.js`) and re-install discord.js and make sure the entry in your package.json does not prevent a major version update. Please refer to the [npm documentation](https://docs.npmjs.com/files/package.json#dependencies) for this.
+You can check your discord.js version with `npm list discord.js`. Should it still show v11.x, uninstall (`npm uninstall discord.js`) and re-install discord.js and make sure the entry in your `package.json` does not prevent a major version update. Please refer to the [npm documentation](https://docs.npmjs.com/files/package.json#dependencies) for this.
 
 ## Commonly Used Methods That Changed
 

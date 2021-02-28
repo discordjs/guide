@@ -28,7 +28,7 @@ Before doing anything else, make a property to store the prefix you've configure
 + client.login(token);
 ```
 
-From now on, if you change the prefix or token in your config.json file, it'll change in your bot file as well. You'll be using the prefix variable a lot soon.
+From now on, if you change the prefix or token in your `config.json` file, it'll change in your bot file as well. You'll be using the prefix variable a lot soon.
 
 ::: tip
 If you aren't familiar with some of this syntax, it may be ES6 syntax. If it does confuse you, you should check out [this guide page](/additional-info/es6-syntax.md) before continuing.
