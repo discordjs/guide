@@ -214,7 +214,7 @@ message.reactions.removeAll().catch(error => console.error('Failed to clear reac
 
 <branch version="11.x">
 
-Removing reactions by emoji is not as straightforward as clearing all reactions. Discord.js version 11.x does not provide a method for selectively removing reactions by emoji; it only allows you to remove a user from a specific reaction. This means you will have to get the users who reacted with that emoji and loop through to remove each one of them.
+Removing reactions by emoji is not as straightforward as clearing all reactions. discord.js version 11.x does not provide a method for selectively removing reactions by emoji; it only allows you to remove a user from a specific reaction. This means you will have to get the users who reacted with that emoji and loop through to remove each one of them.
 
 Reaction collections are keyed by `name:id` for custom emojis and by `name` for Unicode emojis (represented by their Unicode character, see [here](/popular-topics/reactions.html#unicode-emojis)). Once you have the key, you can run a `.get()` on `message.reactions` to get the reaction representing the emoji you want.
 
@@ -321,7 +321,7 @@ message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
 
 <branch version="11.x">
 
-Discord.js v11 cannot emit events if the respective structures it needs to emit are incomplete and does not auto-fetch the missing information.
+discord.js v11 cannot emit events if the respective structures it needs to emit are incomplete and does not auto-fetch the missing information.
 This behavior changed in version 12 of the library. It introduces partial structures that enable us to emit incomplete structures and complete them with a single fetch call.
 This feature is not available on version 11.x if you want to listen for reactions on old messages, please use version 12 of the library.
 

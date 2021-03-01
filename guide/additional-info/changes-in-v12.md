@@ -1,6 +1,6 @@
 # Updating from v11 to v12
 
-Discord.js v12 has been formally released after a long time in development, meaning it's time to update from v11 to get new features for your bots!  However, with those new features come many changes to the library that will break code written for v11.  This guide will serve as a handy reference for updating your code, covering the most commonly-used methods that have changed, new topics such as partials and internal sharding. It also includes a comprehensive list of the method and property changes at the end.
+discord.js v12 has been formally released after a long time in development, meaning it's time to update from v11 to get new features for your bots!  However, with those new features come many changes to the library that will break code written for v11.  This guide will serve as a handy reference for updating your code, covering the most commonly-used methods that have changed, new topics such as partials and internal sharding. It also includes a comprehensive list of the method and property changes at the end.
 
 :::tip
 This guide has two versions! Make sure to select `v12 (stable)` in the header bar's drop-down selection to get code snippets and explanations for the new version across the guide.

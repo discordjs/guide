@@ -1,10 +1,10 @@
 # Webhooks
 
-Webhooks can send messages to a text channel without having to log in as a bot. Discord.js implements a variety of methods to fetch, create, edit, and use webhooks. In this section, you will learn how to create, fetch, edit, and use webhooks.
+Webhooks can send messages to a text channel without having to log in as a bot. discord.js implements a variety of methods to fetch, create, edit, and use webhooks. In this section, you will learn how to create, fetch, edit, and use webhooks.
 
 ## What is a webhook
 
-Webhooks are a utility used to send messages to text channels without needing a Discord application. Webhooks are useful for allowing something to send messages without requiring a Discord application. However, you should note that you cannot directly edit or delete messages you sent through the webhook. Discord.js introduces two structures to make use of this functionality, `Webhook` and `WebhookClient`. `WebhookClient` is an extended version of a `Webhook` which allows you to send messages through it without needing a bot client.
+Webhooks are a utility used to send messages to text channels without needing a Discord application. Webhooks are useful for allowing something to send messages without requiring a Discord application. However, you should note that you cannot directly edit or delete messages you sent through the webhook. discord.js introduces two structures to make use of this functionality, `Webhook` and `WebhookClient`. `WebhookClient` is an extended version of a `Webhook` which allows you to send messages through it without needing a bot client.
 
 ::: tip
 If you would like to read about using webhooks through the API without discord.js, you can read about them [here](https://discord.com/developers/docs/resources/webhook).
@@ -68,7 +68,7 @@ Once you are there, click on the `Create Webhook` / `New Webhook` button; this w
 ### Creating webhooks with discord.js
 
 
-Discord.js provides a method for creating webhooks called <branch version="11.x" inline>[`TextChannel#createWebhook()`](https://discord.js.org/#/docs/main/v11/class/TextChannel?scrollTo=createWebhook)</branch><branch version="12.x" inline>[`TextChannel#createWebhook()`](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=createWebhook)</branch>.
+discord.js provides a method for creating webhooks called <branch version="11.x" inline>[`TextChannel#createWebhook()`](https://discord.js.org/#/docs/main/v11/class/TextChannel?scrollTo=createWebhook)</branch><branch version="12.x" inline>[`TextChannel#createWebhook()`](https://discord.js.org/#/docs/main/stable/class/TextChannel?scrollTo=createWebhook)</branch>.
 
 <branch version="11.x">
 

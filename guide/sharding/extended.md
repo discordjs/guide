@@ -270,7 +270,7 @@ Now, run this code, and you will surely get a result that looks like the followi
 			members: {},
 			// ...
 			id: '222078108977594368',
-			name: 'Discord.js Official',
+			name: 'discord.js Official',
 			icon: '6e4b4d1a0c7187f9fd5d4976c50ac96e',
 			// ...
 			emojis: {} 

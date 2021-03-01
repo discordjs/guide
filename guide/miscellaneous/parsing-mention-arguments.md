@@ -300,7 +300,7 @@ Here is how the RegEx works:
 Using the `.match()` method on strings, you can get the capture group's values, i.e., the mention's ID.
 
 ::: warning
-Discord.js has <branch version="11.x" inline>[built-in patterns](https://discord.js.org/#/docs/main/v11/class/MessageMentions?scrollTo=s-CHANNELS_PATTERN)</branch><branch version="12.x" inline>[built-in patterns](https://discord.js.org/#/docs/main/stable/class/MessageMentions?scrollTo=s-CHANNELS_PATTERN)</branch>
+discord.js has <branch version="11.x" inline>[built-in patterns](https://discord.js.org/#/docs/main/v11/class/MessageMentions?scrollTo=s-CHANNELS_PATTERN)</branch><branch version="12.x" inline>[built-in patterns](https://discord.js.org/#/docs/main/stable/class/MessageMentions?scrollTo=s-CHANNELS_PATTERN)</branch>
 for matching mentions, however as of version 11.4 they do not contain any groups
 and thus aren't useful for actually getting the ID out of the mention.
 :::

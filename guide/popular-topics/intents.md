@@ -80,7 +80,7 @@ const client = new Client({ ws: { intents: ['GUILDS', 'GUILD_MESSAGES'] } });
 
 ## The Intents bit field wrapper
 
-Discord.js provides a utility structure [`Intents`](https://discord.js.org/#/docs/main/stable/class/Intents) which can be utilized to adapt the underlying bit field easily.
+discord.js provides a utility structure [`Intents`](https://discord.js.org/#/docs/main/stable/class/Intents) which can be utilized to adapt the underlying bit field easily.
 
 We also provide static fields for all privileged and non-privileged intents. You can give these as-is or pass them to the Intents constructor to further modify to your needs.
 

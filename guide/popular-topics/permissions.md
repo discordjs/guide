@@ -326,7 +326,7 @@ Remember that using these methods will not manipulate permissions, but rather cr
 
 ### Displaying permission flags
 
-Discord.js provides a `toArray()` method, which can be used to convert a `Permissions` object into an array containing permission flags. This is useful if you want to display/list them and it enables you to use other array manipulation methods. For example:
+discord.js provides a `toArray()` method, which can be used to convert a `Permissions` object into an array containing permission flags. This is useful if you want to display/list them and it enables you to use other array manipulation methods. For example:
 
 ```js
 const memberPermissions = member.permissions.toArray();
@@ -354,7 +354,7 @@ BAN_MEMBERS: false,
 
 ### Converting permission numbers
 
-Some methods and properties in Discord.js return permission decimals rather than a Permissions object, making it hard to manipulate or read them if you don't want to use bitwise operations.
+Some methods and properties in discord.js return permission decimals rather than a Permissions object, making it hard to manipulate or read them if you don't want to use bitwise operations.
 However, you can pass these decimals to the Permissions constructor to convert them, as shown below.
 
 ```js

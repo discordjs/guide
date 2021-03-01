@@ -2,9 +2,9 @@
 
 <branch version="11.x">
 
-The Discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots and give you tips to optimize performance!
+The discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots and give you tips to optimize performance!
 
-This voice guide targets Discord.js v12, which features an improved audio system. Much of the example code in the voice guide is unsuitable for v11 and below–to access this content, please update Discord.js to v12! 
+This voice guide targets discord.js v12, which features an improved audio system. Much of the example code in the voice guide is unsuitable for v11 and below–to access this content, please update discord.js to v12! 
 
 </branch>
 <branch version="12.x">
@@ -58,7 +58,7 @@ const fs = require('fs');
 connection.play(fs.createReadStream('output.ogg'), { type: 'ogg/opus' });
 ```
 
-And that's it! Discord.js will not create an FFmpeg transcoder for your file and will instead demux the Opus audio from it, significantly improving performance.
+And that's it! discord.js will not create an FFmpeg transcoder for your file and will instead demux the Opus audio from it, significantly improving performance.
 
 #### From YouTube videos
 
@@ -75,7 +75,7 @@ async function play(connection, url) {
 ```
 
 ::: tip
-You might be wondering why the type is `opus` and not `webm/opus` or `ogg/opus`. Discord.js allows us to play Opus streams **without a container** operating in object-mode (i.e., each item pushed to the stream is a distinct Opus packet). `ytdl-core-discord` provides this type of stream, and so we must specify `opus` as the type.
+You might be wondering why the type is `opus` and not `webm/opus` or `ogg/opus`. discord.js allows us to play Opus streams **without a container** operating in object-mode (i.e., each item pushed to the stream is a distinct Opus packet). `ytdl-core-discord` provides this type of stream, and so we must specify `opus` as the type.
 :::
 
 ### Using `highWaterMark`
@@ -93,7 +93,7 @@ You can try increasing this property to improve choppy playback, but increasing 
 
 ### Disabling Inline Volume
 
-If you're not going to change your stream's volume in real-time, you can disable the volume transformer Discord.js creates for you. You'll need to do this before playing the stream:
+If you're not going to change your stream's volume in real-time, you can disable the volume transformer discord.js creates for you. You'll need to do this before playing the stream:
 
 ```js
 // Disable volume transformer

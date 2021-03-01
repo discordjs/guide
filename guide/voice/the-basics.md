@@ -2,9 +2,9 @@
 
 <branch version="11.x">
 
-The Discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots and give you tips to optimize performance!
+The discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots and give you tips to optimize performance!
 
-This voice guide targets Discord.js v12, which features an improved audio system. Much of the example code in the voice guide is unsuitable for v11 and below–to access this content, please update Discord.js to v12! 
+This voice guide targets discord.js v12, which features an improved audio system. Much of the example code in the voice guide is unsuitable for v11 and below–to access this content, please update discord.js to v12! 
 
 </branch>
 <branch version="12.x">
@@ -98,7 +98,7 @@ connection.play(fs.createReadStream('audio.ogg'), { type: 'ogg/opus' });
 ```
 
 ::: tip
-You may be wondering why we specified the source `type` in this example when we didn't in the FFmpeg one. Discord.js will default to the `'unknown'` (i.e., "use FFmpeg") type when no type is provided.
+You may be wondering why we specified the source `type` in this example when we didn't in the FFmpeg one. discord.js will default to the `'unknown'` (i.e., "use FFmpeg") type when no type is provided.
 :::
 
 ## Controlling the Stream Dispatcher

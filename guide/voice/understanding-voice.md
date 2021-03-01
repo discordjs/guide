@@ -2,9 +2,9 @@
 
 <branch version="11.x">
 
-The Discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots and give you tips to optimize performance!
+The discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots and give you tips to optimize performance!
 
-This voice guide targets Discord.js v12, which features an improved audio system. Much of the example code in the voice guide is unsuitable for v11 and below–to access this content, please update Discord.js to v12! 
+This voice guide targets discord.js v12, which features an improved audio system. Much of the example code in the voice guide is unsuitable for v11 and below–to access this content, please update discord.js to v12! 
 
 </branch>
 <branch version="12.x">
@@ -23,7 +23,7 @@ It's common for people to get confused with voice and not understand what they'r
 1. A packet is sent to the main gateway telling Discord we wish to join a voice channel. Discord responds with a voice gateway (WebSocket) to connect to, and the bot authenticates itself. We also select an _encryption mode_ available on that gateway. We now start heart beating.
 2. We find our external port and send it to Discord over UDP to send/receive audio. It follows that a voice connection has two main components, a WebSocket connection–where we can change speaking status–and a UDP socket, where audio is sent and received.
 3. We send our audio packets at regular time intervals to the UDP socket, which forwards them to other users connected to the channel.
-4. The server may change its voice region; in this case, Discord.js will disconnect these sockets and reconnect to the new voice servers.
+4. The server may change its voice region; in this case, discord.js will disconnect these sockets and reconnect to the new voice servers.
 5. Once we're done with the voice connection, we tell the main gateway that we're no longer in a voice channel. We can now destroy the UDP socket and voice gateway connection without disrupting any regular gateway activity.
 
 ### Playing audio
@@ -37,7 +37,7 @@ It can also change the volume of a stream in real-time without much cost to perf
 In conclusion:
 
 1. You do `VoiceConnection#play(...)`
-2. Discord.js will convert whatever you've provided into Opus audio in the most efficient way it can find. The worst-case route would be having FFmpeg convert a file to PCM, passing this data through an Opus encoder.
+2. discord.js will convert whatever you've provided into Opus audio in the most efficient way it can find. The worst-case route would be having FFmpeg convert a file to PCM, passing this data through an Opus encoder.
 3. A `StreamDispatcher` is created and fed data from the Opus audio stream
 4. The StreamDispatcher will take an Opus audio packet every 20ms, applying metadata, and then encrypting it. The packet is then sent over UDP
 5. This occurs until the stream has ended, in which case the StreamDispatcher is destroyed, and all intermediary processes (e.g., FFmpeg transcoder, Volume Transformer, Opus Encoder) are all destroyed.
@@ -45,7 +45,7 @@ In conclusion:
 ### Receiving audio
 
 ::: warning
-Discord does not officially support bots receiving audio. However, Discord.js does its best to implement this anyway! 
+Discord does not officially support bots receiving audio. However, discord.js does its best to implement this anyway! 
 :::
 
 Just as we send audio to the UDP socket, we also receive audio through the UDP socket. Processing this audio is the reverse process of sending audio:

@@ -4,7 +4,7 @@
 
 Discord permissions are stored in a 53-bit integer and calculated using bitwise operations. If you want to dive deeper into what's happening behind the curtains, check the [Wikipedia](https://en.wikipedia.org/wiki/Bit_field) and [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) articles on the topic.
 
-Discord.js represent permission bit fields as either the decimal value of said bit field or its referenced flags.
+discord.js represents permission bit fields as either the decimal value of said bit field or its referenced flags.
 Every position in a permissions bit field represents one of these flags and its state (either referenced `1` or not referenced `0`).
 
 Before we get into actually assigning permissions, let's quickly go over the method Discord uses to determine a guild member's final permissions:

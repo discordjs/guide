@@ -10,9 +10,9 @@ API Errors or DiscordAPIErrors are thrown by the Discord API when an invalid req
 
 Example: `DiscordAPIError: Cannot send an empty message`
 
-### Discord.js Errors
+### discord.js Errors
 
-Discord.js Errors are errors that the library itself throws. They can usually be easily tracked down using the stack trace and error message.
+discord.js Errors are errors that the library itself throws. They can usually be easily tracked down using the stack trace and error message.
 
 Example: `The messages must be an Array, Collection, or number.`
 
@@ -24,7 +24,7 @@ Example: `ReferenceError: "x" is not defined`
 
 ### WebSocket and Network Errors
 
-WebSocket and Network errors are common system errors thrown by Node in response to something wrong with the WebSocket connection. Unfortunately, these errors do not have a concrete solution and can be (usually) fixed by getting a better, more stable, and more robust connection. Discord.js will automatically try to reconnect to the WebSocket if an error occurs. 
+WebSocket and Network errors are common system errors thrown by Node in response to something wrong with the WebSocket connection. Unfortunately, these errors do not have a concrete solution and can be (usually) fixed by getting a better, more stable, and more robust connection. discord.js will automatically try to reconnect to the WebSocket if an error occurs. 
 
 <branch version="11.x">
 
@@ -132,7 +132,7 @@ DELETE - Used to delete a piece of data completely
 
 In this particular example, we can see we are trying to access a piece of data, specifically, a message.
 
-## Common Discord.js and API errors
+## Common discord.js and API errors
 
 ### An invalid token was provided.
 
