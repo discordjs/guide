@@ -8,7 +8,7 @@ Official documentation: https://momentjs.com/docs/
 
 Moment is a powerful package for working with dates in JavaScript.  
 It allows you to quickly and easily format dates in any way you want or parse strings back into JavaScript Date objects.  
-There are even some extensions for it to allow you work with durations and more.
+There are even some extensions for it to allow you to work with durations and more.
 
 For example if you wanted to ask your users to give you a date,  
 you can use moment to turn it in a Date object you can use in your code:
@@ -148,7 +148,7 @@ Winston is "a logger for just about everything".
 You can log to the terminal, you can log to a file, etc.  
 "But wait," I hear you cry, "what's wrong with `console.log`?".  
 Well, the answer is simple: `console.log` is slow, very slow, and not very versatile.
-Whenver you call `console.log`, your program halts; it has to wait for console.log to finish.
+Whenever you call `console.log`, your program halts; it has to wait for console.log to finish.
 While it does that, your program can do nothing else, which does not sound good.
 Well, that is precisely what winston is for.
 

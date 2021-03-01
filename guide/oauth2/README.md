@@ -38,12 +38,12 @@ Right now, you have designated that the contents of an `index.html` file will be
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My First OAuth2 App</title>
+	<title>My First OAuth2 App</title>
 </head>
 <body>
-    <div id="info">
-        Hoi!
-    </div>
+	<div id="info">
+		Hoi!
+	</div>
 </body>
 </html>
 ```
@@ -80,39 +80,39 @@ You can see that by clicking `Authorize`, you allow the application to access yo
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My First OAuth2 App</title>
+	<title>My First OAuth2 App</title>
 </head>
 <body>
-    <div id="info">
-        Hoi!
-    </div>
-    <a id="login" style="display: none;" href="your oauth2 url here">Identify Yourself</a>
-    <script>
-        window.onload = () => {
-            const fragment = new URLSearchParams(window.location.hash.slice(1));
+	<div id="info">
+		Hoi!
+	</div>
+	<a id="login" style="display: none;" href="your oauth2 url here">Identify Yourself</a>
+	<script>
+		window.onload = () => {
+			const fragment = new URLSearchParams(window.location.hash.slice(1));
 
-            if (fragment.has("access_token")) {
-                const accessToken = fragment.get("access_token");
-                const tokenType = fragment.get("token_type");
+			if (fragment.has("access_token")) {
+				const accessToken = fragment.get("access_token");
+				const tokenType = fragment.get("token_type");
 
-                fetch('https://discord.com/api/users/@me', {
-                    headers: {
-                        authorization: `${tokenType} ${accessToken}`
-                    }
-                })
-                    .then(res => res.json())
-                    .then(response => {
-                        const { username, discriminator } = response;
-                        document.getElementById('info').innerText += ` ${username}#${discriminator}`;
-                    })
-                    .catch(console.error);
+				fetch('https://discord.com/api/users/@me', {
+					headers: {
+						authorization: `${tokenType} ${accessToken}`
+					}
+				})
+					.then(res => res.json())
+					.then(response => {
+						const { username, discriminator } = response;
+						document.getElementById('info').innerText += ` ${username}#${discriminator}`;
+					})
+					.catch(console.error);
 
-            }
-            else {
-                document.getElementById('login').style.display = 'block';
-            }
-        }
-    </script>
+			}
+			else {
+				document.getElementById('login').style.display = 'block';
+			}
+		}
+	</script>
 </body>
 </html>
 ```
@@ -123,7 +123,7 @@ Here you grab the access token and type from the url if it's there and use it to
 
 ### The state parameter
 
-OAuth2's protocols provide a `state` parameter, which is supported by Discord. This parameter is used to help prevent [CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) attacks and can also represent the state of your application. This should be generated per user and appended to the OAuth2 url. For a very basic example, you can use a randomly generated string encoded in Base64 as the state parameter.
+OAuth2's protocols provide a `state` parameter, which Discord supports. This parameter helps prevent [CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) attacks and represents your application's state. The state should be generated per user and appended to the OAuth2 url. For a basic example, you can use a randomly generated string encoded in Base64 as the state parameter.
 
 ```js
 function generateRandomString() {
@@ -166,7 +166,7 @@ Don't forgo security for a tiny bit of convenience!
 
 ### OAuth2 flows
 
-What you did in the quick example was go through the `implicit grant` flow, which passed the access token straight to the user's browser. This flow is great and simple, but you don't get to refresh the token without the user, and it is less secure than going through the `authorization code grant`. This involves receiving an access code, which is then exchanged by your server for an access token. Notice that this way, the access token never actually reaches the user throughout the process.
+What you did in the quick example was go through the `implicit grant` flow, which passed the access token straight to the user's browser. This flow is great and simple, but you don't get to refresh the token without the user, and it is less secure than going through the `authorization code grant`. This flow involves receiving an access code, which your server then exchanges for an access token. Notice that this way, the access token never actually reaches the user throughout the process.
 
 #### Authorization code grant
 
@@ -190,7 +190,7 @@ if (urlObj.pathname === '/') {
 }
 ```
 
-Now you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten them, head over to [your applications](https://discord.com/developers/applications) and get them. You can use `node-fetch` to make requests to Discord; you can install it with `npm i node-fetch`.
+Now you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten these, head over to [your applications](https://discord.com/developers/applications) and get them. You can use `node-fetch` to make requests to Discord; you can install it with `npm i node-fetch`.
 
 Require `node-fetch` and make your request.
 
@@ -220,7 +220,7 @@ fetch('https://discord.com/api/oauth2/token', {
 ```
 
 ::: warning
-The content-type for the token url must be `application/x-www-form-urlencoded`. This is why `URLSearchParams` is used.
+The content-type for the token url must be `application/x-www-form-urlencoded`, which is why `URLSearchParams` is used.
 :::
 
 Now try visiting your OAuth2 url and authorizing your application. Once you're redirected, you should see something like this in your console.
@@ -235,7 +235,7 @@ Now try visiting your OAuth2 url and authorizing your application. Once you're r
 }
 ```
 
-Now that you have an access token and a refresh token, try fetching the user's information. It's the same as how the html file did it in the html file.
+Try fetching the user's information now that you have an access token and a refresh token. It's the same as how the html file did it in the html file.
 
 ```js
 fetch('https://discord.com/api/oauth2/token', {

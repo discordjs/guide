@@ -57,11 +57,11 @@ ESLint may display many warnings and errors about your code when you start using
 }
 ```
 
-This is the base of what an ESLint file will look like. The `rules` object is where you'll define what rules you want to apply to ESLint. For example, if you want to make sure you never miss a semicolon, the `"semi": ["error", "always"]` rule is what you'll want to add inside that object.
+This is the basis of how an ESLint file will look. The `rules` object is where you'll define what rules you want to apply to ESLint. For example, if you want to make sure you never miss a semicolon, the `"semi": ["error", "always"]` rule is what you'll want to add inside that object.
 
 You can find a list of all of ESLint's rules on their site, located [here](https://eslint.org/). There are indeed many rules, and it may be overwhelming at first, but you'll only need to go through the list and define your file once.
 
-Alternatively, if you don't want to go through everything one-by-one on your own, you can use the ESLint file we use for this guide.
+Alternatively, if you don't want to go through everything one by one on your own, you can use the ESLint file we use for this guide.
 
 ```json
 {
@@ -119,7 +119,7 @@ The major points of this setup would be:
 * Prefer using `const` over `let` or `var`, as well as disallow `var`;
 * Disapproving of variables with the same name in callbacks;
 * Requiring single quotes over double quotes;
-* Requiring semicolons. While it's not required in JavaScript, it's considered one of the most common best practices to follow;
+* Requiring semicolons. While not required in JavaScript, it's considered one of the most common best practices to follow;
 * Requiring accessing properties to be on the same line;
 * Requiring indenting to be done with tabs;
 * Limiting nested callbacks to 4. If you hit this error, it is a good idea to consider refactoring your code.

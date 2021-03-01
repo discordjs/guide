@@ -4,7 +4,7 @@ In a previous chapter, you learned how to build commands with user input; you al
 However, using `message.mentions` can lead to a few problems.  
 For example, you do not know which mention belongs to which argument.
 Or if you are splitting the message's content by spaces to get the args,
-The mentions will still take up space in your args array, which can mess up the rest of your args parsing if you are not careful.
+The mentions will still take up space in your args array, messing up the rest of your args parsing if you are not careful.
 
 Say you are writing a bot for moderating your server. You will want a kick or a ban command, which allows you to mention the person you are trying to ban.
 But what happens if you try to use the command like this?
