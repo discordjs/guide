@@ -110,10 +110,11 @@ You should use environment variables or a `config.json` for your token instead o
 And there you have it! You've set up your `index.js` file! In the end, your file structure should look like this, along with whatever `.gitignore` or `config.json` you may have:
 
 ```
-/commands
-	/first
-index.js
-package.json
+.
+├── commands/
+│   └── first/
+├── index.js
+└── package.json
 ```
 
 ## Resulting code
