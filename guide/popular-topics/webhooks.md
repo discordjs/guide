@@ -74,7 +74,7 @@ Discord.js provides a method for creating webhooks called <branch version="11.x"
 
 ```js
 channel.createWebhook('Some-username', 'https://i.imgur.com/wSTFkRM.png')
-	.then(webhook => console.log(`Created webhook ${webhook}`))
+	.then(webhook => console.log(`Created webhook ${webhook.name}`))
 	.catch(console.error);
 ```
 
@@ -85,7 +85,7 @@ channel.createWebhook('Some-username', 'https://i.imgur.com/wSTFkRM.png')
 channel.createWebhook('Some-username', {
 	avatar: 'https://i.imgur.com/wSTFkRM.png',
 })
-	.then(webhook => console.log(`Created webhook ${webhook}`))
+	.then(webhook => console.log(`Created webhook ${webhook.name}`))
 	.catch(console.error);
 ```
 
@@ -99,7 +99,7 @@ You can edit Webhooks and WebhookClients to change their avatar and name using [
 
 ```js
 webhook.edit('Some-username', 'https://i.imgur.com/wSTFkRM.png')
-	.then(webhook => console.log(`Edited webhook ${webhook}`))
+	.then(webhook => console.log(`Edited webhook ${webhook.name}`))
 	.catch(console.error);
 ```
 
@@ -114,7 +114,7 @@ webhook.edit({
 	avatar: 'https://i.imgur.com/wSTFkRM.png',
 	channel: '222197033908436994',
 })
-	.then(webhook => console.log(`Edited webhook ${webhook}`))
+	.then(webhook => console.log(`Edited webhook ${webhook.name}`))
 	.catch(console.error);
 ```
 
