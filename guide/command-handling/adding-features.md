@@ -203,14 +203,16 @@ module.exports = {
 In your main file (`index.js` in our examples), add this line preferably somewhere at the top before you handle any events:
 
 ```js
-const cooldowns = new Discord.Collection();
+client.cooldowns = new Discord.Collection();
 ```
 
-This initializes an empty Collection (remember, Collection is a utility data structure, which works based on key/value pairs) which you can then fill later when commands are used. The key will be the command name and the value will be another Collection associating the user id (key) to the last time (value) this specific user used this specific command. Overall the logical path to get a specific user's last usage of a specific command will be `cooldowns > command > user > timestamp`.
+This initializes an empty Collection (remember, Collection is a utility data structure, which works based on key/value pairs) as a property of the `client` object, which you can then fill later when commands are used. The key will be the command name and the value will be another Collection associating the user id (key) to the last time (value) this specific user used this specific command. Overall the logical path to get a specific user's last usage of a specific command will be `cooldowns > command > user > timestamp`.
 
 In your main file, directly above the `try/catch` block causing command execution, add in the following:
 
 ```js
+const cooldowns = client.cooldowns;
+
 if (!cooldowns.has(command.name)) {
 	cooldowns.set(command.name, new Discord.Collection());
 }
