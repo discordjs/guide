@@ -187,7 +187,7 @@ The new method we haven't seen yet is the `.belongsTo()` method. Using this meth
 
 We now add some prototypes to the User object to finish up the junction: add items to users, and get their current inventory. The code inside should be somewhat familiar from the last tutorial. We use a `.findOne()` to get the item if it exists in the user's inventory. If it does, increment it; otherwise, create it.
 
-Getting items is similar; we just `.findAll()` using the user's id as the key. The `include` key is for associating the CurrencyShop with the item. We have to explicitly tell Sequelize to honor the `.belongsTo()` association; otherwise, it will take the path of least effort.
+Getting items is similar; we just `.findAll()` using the user's id as the key. The `include` key is for associating the CurrencyShop with the item. We have to explicitly tell Sequelize to honor the `.belongsTo()` association; otherwise, it will take the path of the least effort.
 
 ## Application code
 

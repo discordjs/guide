@@ -11,7 +11,7 @@ As you get deeper into development, you may need to interact with sensitive data
 * Command prefix(es)
 * A list of bot owner IDs
 
-Having that kind of data hard-coded in each of your files can be bothersome and less than ideal. This is where configuration files come in–they're great for storing static data that can be easily updated in a single place.
+Having that kind of data hard-coded in each of your files can be bothersome and less than ideal. This is where configuration files come in–they're great for storing static data you can easily update in a single place.
 
 ## Implementing your config file
 

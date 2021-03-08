@@ -8,7 +8,7 @@ Sometimes you may need a user to have a specific permission to use a command, or
 
 ## User and client permissions
 
-First, grab the command you want to use permissions with.
+First, grab the command that you want to have permissions.
 
 ```js
 const { Command } = require('discord.js-commando');
@@ -48,7 +48,7 @@ All you need to do is set the properties to an array of permission flags. A list
 
 ## Owner-only commands
 
-Another thing you may want to do is set a command as owner-only. This will make a command only usable by the bot owner(s). Doing this is even simpler than the client/userPermissions; all you have to do is set the `ownerOnly` parameter to `true`.
+Another thing you may want to do is set a command as owner-only. This option will make a command only usable by the bot owner(s). Doing this is even simpler than the client/userPermissions; all you have to do is set the `ownerOnly` parameter to `true`.
 
 <!-- eslint-skip -->
 

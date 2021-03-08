@@ -76,7 +76,7 @@ The `shardArgs` property is what you would usually pass to your bot without shar
 node bot.js --ansi --color
 ```
 
-You can access them later as usual via `process.argv`, which contains an array of executable, your main file, and the command-line arguments used to execute the script.
+You can access them later as usual via `process.argv`, which contains an array of executables, your main file, and the command-line arguments used to execute the script.
 
 ## Eval arguments
 
@@ -86,7 +86,7 @@ There may come the point where you will want to pass functions or arguments from
 client.shard.broadcastEval(`(${funcName})('${arg}')`);
 ```
 
-In this small snippet, an entire function is passed to the eval. It needs to be encased in parenthesis; it will throw errors on its way there otherwise. Another set of parenthesis is required, so that the function gets called. Finally, the passing of the argument itself, which slightly varies, depending on the type of argument you are passing. If it's a string, you must wrap it in quotes, or it will be interpreted as is and will throw a syntax error because it won't be a string by the time it gets there.
+In this small snippet, an entire function is passed to the eval. It needs to be encased in parenthesis; it will throw errors on its way there otherwise. Another set of parenthesis is required so that the function gets called. Finally, the passing of the argument itself, which slightly varies, depending on the type of argument you are passing. If it's a string, you must wrap it in quotes, or it will be interpreted as is and will throw a syntax error because it won't be a string by the time it gets there.
 
 Now, what if you wanted to call a function from *within* the client context? That is to say, you are not passing a function. It would look something like this:
 
@@ -104,12 +104,12 @@ There may be a time when you want to have your shard process an asynchronous fun
 
 ```js
 client.shard.broadcastEval(`
-    let channel = this.channels.get('id');
-    let msg;
-    if (channel) {
-        msg = channel.fetchMessage('id').then(m => m.id);
-    }
-    msg;
+	let channel = this.channels.get('id');
+	let msg;
+	if (channel) {
+		msg = channel.fetchMessage('id').then(m => m.id);
+	}
+	msg;
 `);
 ```
 
@@ -118,12 +118,12 @@ client.shard.broadcastEval(`
 
 ```js
 client.shard.broadcastEval(`
-    let channel = this.channels.cache.get('id');
-    let msg;
-    if (channel) {
-        msg = channel.messages.fetch('id').then(m => m.id);
-    }
-    msg;
+	let channel = this.channels.cache.get('id');
+	let msg;
+	if (channel) {
+		msg = channel.messages.fetch('id').then(m => m.id);
+	}
+	msg;
 `);
 ```
 
@@ -135,14 +135,14 @@ This snippet allows you to return fetched messages outside of the `broadcastEval
 
 ```js
 client.shard.broadcastEval(`
-    (async () => {
-        let channel = this.channels.get('id');
-        let msg;
-        if (channel) {
-            msg = await channel.fetchMessage('id').then(m => m.id);
-        }
-        return msg;
-    })();
+	(async () => {
+		let channel = this.channels.get('id');
+		let msg;
+		if (channel) {
+			msg = await channel.fetchMessage('id').then(m => m.id);
+		}
+		return msg;
+	})();
 `);
 ```
 
@@ -151,14 +151,14 @@ client.shard.broadcastEval(`
 
 ```js
 client.shard.broadcastEval(`
-    (async () => {
-        let channel = this.channels.cache.get('id');
-        let msg;
-        if (channel) {
-            msg = await channel.messages.fetch('id').then(m => m.id);
-        }
-        return msg;
-    })();
+	(async () => {
+		let channel = this.channels.cache.get('id');
+		let msg;
+		if (channel) {
+			msg = await channel.messages.fetch('id').then(m => m.id);
+		}
+		return msg;
+	})();
 `);
 ```
 

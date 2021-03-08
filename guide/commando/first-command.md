@@ -16,7 +16,7 @@ Before you do anything, at the start of your file, you're going to need to requi
 const { Command } = require('discord.js-commando');
 ```
 
-Commands are classes exported with `module.exports`. Create the class and set `module.exports` to it. You will also set a bunch of options here, which will be explained below.
+Commands are classes exported with `module.exports`. Create the class and set `module.exports` to it. You will also configure various options here, which we will explain below.
 
 ```js
 module.exports = class MeowCommand extends Command {
@@ -65,7 +65,7 @@ module.exports = class MeowCommand extends Command {
 
 As you can see, the `run` method is simply the code you want the bot to run when someone uses the command. This code can be anything you can do in core discord.js, as Commando is simply an extension.
 
-You may have also noticed that I used `message.say` instead of `message.channel.send`. This syntax is Commando's magic. Instead of `send`, use `say`; embeds, use `embed`; code, use `code`. The only exception to this are files, which are still sent the same as usual.
+You may have also noticed that I used `message.say` instead of `message.channel.send`. This syntax is Commando's magic. Instead of `send`, use `say`; embeds, use `embed`; code, use `code`. The only exception to this is attachments, which are still sent the same as usual.
 
 The reason for this is that Commando allows editing messages into commands, and using these methods will enable Commando to save the messages for that use. It also checks if it can send a message to the current channel, so you get two things in one!
 

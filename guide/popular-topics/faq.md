@@ -104,7 +104,7 @@ member.roles.add(role);
 ```js
 const member = <message>.mentions.members.first();
 if (member.roles.some(role => role.name === '<role name>')) {
-    // ...
+	// ...
 }
 ```
 
@@ -116,7 +116,7 @@ if (member.roles.some(role => role.name === '<role name>')) {
 ```js
 const member = <message>.mentions.members.first();
 if (member.roles.cache.some(role => role.name === '<role name>')) {
-    // ...
+	// ...
 }
 ```
 
@@ -128,7 +128,7 @@ if (member.roles.cache.some(role => role.name === '<role name>')) {
 
 ```js
 if (<message>.author.id === '<id>') {
-    // ...
+	// ...
 }
 ```
 
@@ -323,15 +323,15 @@ Mentions in embeds may resolve correctly in embed description and field values b
 
 ```js
 <message>.channel.send('Please enter more input.').then(() => {
-    const filter = m => <message>.author.id === m.author.id;
+	const filter = m => <message>.author.id === m.author.id;
 
-    <message>.channel.awaitMessages(filter, { time: 60000, maxMatches: 1, errors: ['time'] })
-        .then(messages => {
-            <message>.channel.send(`You've entered: ${messages.first().content}`);
-        })
-        .catch(() => {
-            <message>.channel.send('You did not enter any input!');
-        });
+	<message>.channel.awaitMessages(filter, { time: 60000, maxMatches: 1, errors: ['time'] })
+		.then(messages => {
+			<message>.channel.send(`You've entered: ${messages.first().content}`);
+		})
+		.catch(() => {
+			<message>.channel.send('You did not enter any input!');
+		});
 });
 ```
 
@@ -342,15 +342,15 @@ Mentions in embeds may resolve correctly in embed description and field values b
 
 ```js
 <message>.channel.send('Please enter more input.').then(() => {
-    const filter = m => <message>.author.id === m.author.id;
+	const filter = m => <message>.author.id === m.author.id;
 
-    <message>.channel.awaitMessages(filter, { time: 60000, max: 1, errors: ['time'] })
-        .then(messages => {
-            <message>.channel.send(`You've entered: ${messages.first().content}`);
-        })
-        .catch(() => {
-            <message>.channel.send('You did not enter any input!');
-        });
+	<message>.channel.awaitMessages(filter, { time: 60000, max: 1, errors: ['time'] })
+		.then(messages => {
+			<message>.channel.send(`You've entered: ${messages.first().content}`);
+		})
+		.catch(() => {
+			<message>.channel.send('You did not enter any input!');
+		});
 });
 ```
 
@@ -367,7 +367,7 @@ If you want to learn more about this syntax or reaction collectors, check out [t
 ```js
 const blockedUsers = [ 'id1', 'id2' ];
 <client>.on('message', message => {
-    if (blockedUsers.includes(message.author.id)) return;
+	if (blockedUsers.includes(message.author.id)) return;
 });
 ```
 
@@ -378,8 +378,8 @@ You do not need to have a constant local variable like `blockedUsers` above. If 
 
 ```js
 <client>.on('message', async message => {
-    const blockedUsers = await database.query('SELECT user_id FROM blocked_users;');
-    if (blockedUsers.includes(message.author.id)) return;
+	const blockedUsers = await database.query('SELECT user_id FROM blocked_users;');
+	if (blockedUsers.includes(message.author.id)) return;
 });
 ```
 
@@ -392,8 +392,8 @@ Note that this is just a showcase of how such a check could be done.
 
 ```js
 <message>.channel.send('My message to react to.').then(sentMessage => {
-    sentMessage.react('👍');
-    sentMessage.react('<emoji id>');
+	sentMessage.react('👍');
+	sentMessage.react('<emoji id>');
 });
 ```
 
@@ -424,9 +424,9 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 ```js
 // First we use fetchMembers to make sure all members are cached
 <guild>.fetchMembers().then(fetchedGuild => {
-    const totalOnline = fetchedGuild.members.filter(member => member.presence.status === 'online');
-    // We now have a collection with all online member objects in the totalOnline variable
-    console.log(`There are currently ${totalOnline.size} members online in this guild!`)
+	const totalOnline = fetchedGuild.members.filter(member => member.presence.status === 'online');
+	// We now have a collection with all online member objects in the totalOnline variable
+	console.log(`There are currently ${totalOnline.size} members online in this guild!`)
 });
 ```
 
@@ -438,15 +438,15 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 ```js
 // First we use guild.members.fetch to make sure all members are cached
 <guild>.members.fetch().then(fetchedMembers => {
-    const totalOnline = fetchedMembers.filter(member => member.presence.status === 'online');
-    // We now have a collection with all online member objects in the totalOnline variable
-    console.log(`There are currently ${totalOnline.size} members online in this guild!`)
+	const totalOnline = fetchedMembers.filter(member => member.presence.status === 'online');
+	// We now have a collection with all online member objects in the totalOnline variable
+	console.log(`There are currently ${totalOnline.size} members online in this guild!`)
 });
 ```
 
 </branch>
 
-### How do I check which role was added/removed, and for which member?
+### How do I check which role was added/removed and for which member?
 
 <branch version="11.x">
 
@@ -456,12 +456,12 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 // We start by declaring a guildMemberUpdate listener
 // This code should be placed outside of any other listener callbacks to prevent listener nesting
 <client>.on('guildMemberUpdate', (oldMember, newMember) => {
-    // If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
-    const removedRoles = oldMember.roles.filter(role => !newMember.roles.has(role.id));
-    if(removedRoles.size > 0) console.log(`The roles ${removedRoles.map(r => r.name)} were removed from ${oldMember.displayName}.`);
-    // If the role(s) are present on the new member object but are not on the old one (i.e role(s) were added)
-    const addedRoles = newMember.roles.filter(role => !oldMember.roles.has(role.id));
-    if(addedRoles.size > 0) console.log(`The roles ${addedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
+	// If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
+	const removedRoles = oldMember.roles.filter(role => !newMember.roles.has(role.id));
+	if(removedRoles.size > 0) console.log(`The roles ${removedRoles.map(r => r.name)} were removed from ${oldMember.displayName}.`);
+	// If the role(s) are present on the new member object but are not on the old one (i.e role(s) were added)
+	const addedRoles = newMember.roles.filter(role => !oldMember.roles.has(role.id));
+	if(addedRoles.size > 0) console.log(`The roles ${addedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
 });
 ```
 
@@ -474,12 +474,12 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 // We start by declaring a guildMemberUpdate listener
 // This code should be placed outside of any other listener callbacks to prevent listener nesting
 <client>.on('guildMemberUpdate', (oldMember, newMember) => {
-    // If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
-    const removedRoles = oldMember.roles.cache.filter(role => !newMember.roles.cache.has(role.id));
-    if (removedRoles.size > 0) console.log(`The roles ${removedRoles.map(r => r.name)} were removed from ${oldMember.displayName}.`);
-    // If the role(s) are present on the new member object but are not on the old one (i.e role(s) were added)
-    const addedRoles = newMember.roles.cache.filter(role => !oldMember.roles.cache.has(role.id));
-    if (addedRoles.size > 0) console.log(`The roles ${addedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
+	// If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
+	const removedRoles = oldMember.roles.cache.filter(role => !newMember.roles.cache.has(role.id));
+	if (removedRoles.size > 0) console.log(`The roles ${removedRoles.map(r => r.name)} were removed from ${oldMember.displayName}.`);
+	// If the role(s) are present on the new member object but are not on the old one (i.e role(s) were added)
+	const addedRoles = newMember.roles.cache.filter(role => !oldMember.roles.cache.has(role.id));
+	if (addedRoles.size > 0) console.log(`The roles ${addedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
 });
 ```
 
@@ -510,10 +510,10 @@ npm install ffmpeg-static # ffmpeg windows
 const ytdl = require('ytdl-core');
 
 <voiceChannel>.join().then(connection => {
-    const stream = ytdl('<youtubelink>', { filter: 'audioonly' });
-    const dispatcher = connection.playStream(stream);
-    
-    dispatcher.on('end', () => voiceChannel.leave());
+	const stream = ytdl('<youtubelink>', { filter: 'audioonly' });
+	const dispatcher = connection.playStream(stream);
+	
+	dispatcher.on('end', () => voiceChannel.leave());
 })
 
 ```
@@ -528,10 +528,10 @@ const ytdl = require('ytdl-core');
 const ytdl = require('ytdl-core');
 
 <voiceChannel>.join().then(connection => {
-    const stream = ytdl('<youtubelink>', { filter: 'audioonly' });
-    const dispatcher = connection.play(stream);
-    
-    dispatcher.on('finish', () => voiceChannel.leave());
+	const stream = ytdl('<youtubelink>', { filter: 'audioonly' });
+	const dispatcher = connection.play(stream);
+	
+	dispatcher.on('finish', () => voiceChannel.leave());
 })
 
 ```
@@ -571,5 +571,5 @@ console.log(emojiCharacters['!']); // ❗
 ```
 
 ::: tip
-On Windows, you may be able to use the `Win + .` keyboard shortcut to open up an emoji picker that can be used for quick, easy access to all the unicode emojis available to you. Some of the emojis listed above may not be represented there, though (e.g., the 0-9 emojis).
+On Windows, you may be able to use the `Win + .` keyboard shortcut to open up an emoji picker that can be used for quick, easy access to all the Unicode emojis available to you. Some of the emojis listed above may not be represented there, though (e.g., the 0-9 emojis).
 :::

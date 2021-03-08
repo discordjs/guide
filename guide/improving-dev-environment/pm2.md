@@ -41,7 +41,7 @@ pm2 start your-app-name.js --watch
 ```
 
 ::: tip
-The `pm2 start` command can take more optional parameters, but only these two are relevant to us. If you want to see all the parameters available, you can check the documentation of pm2 [here](https://pm2.io/doc/en/runtime/reference/pm2-cli/).
+The `pm2 start` command can take more optional parameters, but only these two are relevant. If you want to see all the parameters available, you can check the documentation of pm2 [here](https://pm2.io/doc/en/runtime/reference/pm2-cli/).
 :::
 
 Once the process launches with pm2, you can run `pm2 monit` to monitor all console outputs from the processes started by pm2. This accounts for any `console.log()` in your code or outputted errors.
@@ -50,7 +50,7 @@ Once the process launches with pm2, you can run `pm2 monit` to monitor all conso
 
 Perhaps one of the more useful features of PM2 is being able to boot up with your Operating System. This feature will ensure that your bot processes will always be started after an (unexpected) reboot (e.g., after a power outage).
 
-The initial steps to run differ per OS. In this guide, we'll cover those for Windows and Linux/MacOS.
+The initial steps differ per OS. In this guide, we'll cover those for Windows and Linux/MacOS.
 
 ### Initial steps for Windows
 

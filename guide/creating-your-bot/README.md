@@ -6,7 +6,7 @@ We're finally getting to the exciting parts! Since your bot is in your server no
 
 Open up your preferred code editor (whether it be [Visual Studio Code](https://code.visualstudio.com/), [Atom](https://atom.io/), [Sublime Text](https://www.sublimetext.com/), or any other editor of your choice) and create a new file. If you're brand new and aren't sure what to use, go with Visual Studio Code.
 
-It's suggested that you save the file as `index.js`, but you may name it whatever you wish, as long as it ends with `.js`.
+We suggest that you save the file as `index.js`, but you may name it whatever you wish, as long as it ends with `.js`.
 
 ::: tip
 You can quickly create a new file using the `Ctrl + N` shortcut on your keyboard and then using `Ctrl + S` to save the file.
@@ -14,7 +14,7 @@ You can quickly create a new file using the `Ctrl + N` shortcut on your keyboard
 
 ## Logging in to Discord
 
-Once you've created a new file, do a quick check to see if you have everything setup correctly. Copy & paste the following code into your file and save it. Don't worry if you don't understand it right away—it'll be explained a bit more in-depth after this.
+Once you've created a new file, do a quick check to see if you have everything setup correctly. Copy & paste the following code into your file and save it. Don't worry if you don't understand it right away—we explain more in-depth after this.
 
 ```js
 const Discord = require('discord.js');

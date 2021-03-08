@@ -166,7 +166,7 @@ You can use the `.attachFiles()` method to upload images alongside your embed an
 You can then reference and use the images inside the embed itself with `attachment://fileName.extension`.
 
 ::: tip
-If you plan to repeatedly attach the same image, consider hosting it online and providing the URL in the respective embed field instead. This also makes your bot respond faster since it doesn't need to upload the image with every response depending on it.
+If you plan to attach the same image repeatedly, consider hosting it online and providing the URL in the respective embed field instead. This also makes your bot respond faster since it doesn't need to upload the image with every response depending on it.
 :::
 
 <branch version="11.x">
@@ -284,7 +284,7 @@ You can upload images with your embedded message and use them as source for embe
 You can then reference and use the images inside the embed itself with `attachment://fileName.extension`.
 
 ::: tip
-If you plan to repeatedly attach the same image, consider hosting it online and providing the URL in the respective embed field instead. This also makes your bot respond faster since it doesn't need to upload the image with every response depending on it.
+If you plan to attach the same image repeatedly, consider hosting it online and providing the URL in the respective embed field instead. This also makes your bot respond faster since it doesn't need to upload the image with every response depending on it.
 :::
 
 <branch version="11.x">

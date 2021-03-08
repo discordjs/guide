@@ -59,7 +59,7 @@ if (message.content.startsWith(`${prefix}ping`)) {
 Now the ping command will trigger whenever the message _starts with_ `!ping`! Sometimes this is what you want, but other times, you may want to match only exactly `!ping` - it varies from case to case, so be mindful of what you need when creating commands.
 
 ::: warning
-Be aware that this will also match `!pingpong`, `!pinguin`, and the like. This may or may not be a problem for you, but don't worry; you'll see better ways to check for commands later.
+Be aware that this will also match `!pingpong`, `!pinguin`, and the like. This behavior may or may not be a problem for you, but don't worry; you'll see better ways to check for commands later.
 :::
 
 ## Displaying real data
@@ -155,7 +155,7 @@ And there you have it! As you can see, it's quite simple to add additional comma
 
 If you don't plan to make more than seven or eight commands for your bot, then using an if/else if chain is sufficient; it's presumably a small project at that point, so you shouldn't need to spend too much time on it. However, this isn't the case for most of us.
 
-You probably want your bot to be feature-rich and easy to configure and develop, right? Using a giant if/else if chain won't let you achieve that and will only hinder your development process. After you read up on [creating arguments](/creating-your-bot/commands-with-user-input.md), we'll be diving right into something called a "command handler" - code that makes handling commands easier and much more efficient.
+You probably want your bot to be feature-rich and easy to configure and develop, right? Using a giant if/else if chain won't let you achieve that; it will only hinder your development process. After you read up on [creating arguments](/creating-your-bot/commands-with-user-input.md), we'll be diving right into something called a "command handler" - code that makes handling commands easier and much more efficient.
 
 Before continuing, here's a small list of reasons why you shouldn't use if/else if chains for anything that's not a small project:
 
@@ -166,7 +166,7 @@ Before continuing, here's a small list of reasons why you shouldn't use if/else 
 * Difficult to organize.
 * General bad practice.
 
-In short, it's just not a good idea. But that's what this guide is for! Go ahead and read the next few pages to prevent these issues before they happen, learning new things along the way.
+In short, it's just not a good idea. But that's why this guide exists! Go ahead and read the next few pages to prevent these issues before they happen, learning new things along the way.
 
 ## Resulting code
 

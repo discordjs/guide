@@ -123,8 +123,8 @@ const Tags = sequelize.define('tags', {
 });
 ```
 
-The model mirrors very closely to what the database defines. There will be a table with four fields called `name`, `description`, `username`, and `usage_count`.  
-`sequelize.define()` takes two parameters. `'tags'` is passed as the name of our table, and an object that represents the table's schema in key-value pairs. Keys in the object become the model's attributes, and the values describe the attributes.
+The model mirrors very closely what the database defines. There will be a table with four fields called `name`, `description`, `username`, and `usage_count`.  
+`sequelize.define()` takes two parameters. `'tags'` are passed as the name of our table, and an object that represents the table's schema in key-value pairs. Keys in the object become the model's attributes, and the values describe the attributes.
 
 `type` refers to what kind of data this attribute should hold. The most common types are number, string, and date, but other data types are available depending on the database.  
 `unique: true` will ensure that this field will never have duplicated entries. Duplicate tag names are disallowed in this database.  
@@ -173,7 +173,7 @@ catch (e) {
 ```
 
 `Tags.create()` uses the models that you created previously. The `.create()` method inserts some data into the model. You are going to insert a tag name, description, and the author name into the database.  
-The `catch (e)` section is necessary for the insert because it will offload checking for duplicates to the database, so that it notifies you if an attempt to create a tag that already exists occurs. The alternative is to query the database before adding data and checking if a result returns. If there are no errors or no identical tag is found, only then would you add the data. Of the two methods, it is clear that catching the error is less work for you.  
+The `catch (e)` section is necessary for the insert because it will offload checking for duplicates to the database to notify you if an attempt to create a tag that already exists occurs. The alternative is to query the database before adding data and checking if a result returns. If there are no errors or no identical tag is found, only then would you add the data. Of the two methods, it is clear that catching the error is less work for you.  
 `if (e.name === "SequelizeUniqueConstraintError")` Although this was mostly for doing less work, it is always good to handle your errors, especially if you know what types of errors you will receive. This error comes up if your unique constraint is violated, i.e., duplicate values are inserted.
 
 ::: warning
@@ -199,7 +199,7 @@ if (tag) {
 return message.reply(`Could not find tag: ${tagName}`);
 ```
 
-This is your first query. You are finally doing something with our data, yay!  
+This is your first query. You are finally doing something with our data; yay!  
 `.findOne()` is how you fetch a single row of data. The `where: { name: tagName }` makes sure you only get the row with the desired tag. Since the queries are asynchronous, you will need to use `await` to fetch it. After receiving the data, you can use `.get()` on that object to grab the data. If no data is received, then you can tell the user that the query returned no data.
 
 ### [zeta] Editing a tag
@@ -219,7 +219,7 @@ if (affectedRows > 0) {
 return message.reply(`Could not find a tag with name ${tagName}.`);
 ```
 
-It is possible to edit a record by using the `.update()` function. An update returns the number of rows that were changed by the `where` condition. Since you can only have tags with unique names, you do not have to worry about how many rows may change. Should you get that the query didn't alter any rows, you can conclude that the tag did not exist.
+It is possible to edit a record by using the `.update()` function. An update returns the number of rows that the `where` condition changed. Since you can only have tags with unique names, you do not have to worry about how many rows may change. Should you get that the query didn't alter any rows, you can conclude that the tag did not exist.
 
 ### [theta] Display info on a specific tag
 

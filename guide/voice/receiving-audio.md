@@ -30,7 +30,7 @@ audio.pipe(fs.createWriteStream('user_audio'));
 
 The `mode` option defaults to `'opus'` and can alternatively be `'pcm'`. When `'opus'` is specified, discord.js will not attempt to decode each received Opus packet. The stream created in this case will be a ReadableStream of Opus packets.
 
-With `'pcm'` specified, discord.js will attempt to decode each received Opus packet into PCM, giving you a stream of raw audio that can be processed by other applications.
+With `'pcm'` specified, discord.js will attempt to decode each received Opus packet into PCM, giving you a stream of raw audio that other applications can process.
 
 Additionally, you can specify the `end` option. It defaults to `'silence'`, which ends the ReadableStream once the user stops talking. The option can also be `'manual'`, which means the stream doesn't end until you end it yourself. Note that discord.js will not interpolate silence into gaps in the audio (where the user has stopped speaking); this is something you will have to do yourself.
 

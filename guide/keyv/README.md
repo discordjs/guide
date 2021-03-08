@@ -132,7 +132,7 @@ if (command === 'prefix') {
 }
 ```
 
-You will probably want to set up additional validation such as required permissions and maximum prefix length.
+You will probably want to set up additional validation, such as required permissions and maximum prefix length.
 
 ### Usage
 

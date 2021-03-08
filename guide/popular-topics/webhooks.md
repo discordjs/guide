@@ -12,7 +12,7 @@ If you would like to read about using webhooks through the API without discord.j
 
 ## Detecting webhook messages
 
-Bots receive webhook messages in a text channel normally. You can detect if a webhook sent the message by checking if the `Message.webhookID` is not `null`. In this example, we return if a webhook sent the message.
+Bots receive webhook messages in a text channel as usual. You can detect if a webhook sent the message by checking if the `Message.webhookID` is not `null`. In this example, we return if a webhook sent the message.
 
 <!-- eslint-skip -->
 ```js

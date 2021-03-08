@@ -13,7 +13,7 @@ Now that you have your dependencies installed, you can start using voice!
 
 ## Joining voice channels
 
-Joining a voice channel is easy, here's a common example:
+Joining a voice channel is easy; here's a common example:
 
 ```js
 client.on('message', async message => {
@@ -24,7 +24,7 @@ client.on('message', async message => {
 });
 ```
 
-If you try to join a channel the bot is already in, nothing will happen, so we don't need to worry about repeatedly running this method.
+If you try to join a channel the bot is already in, nothing will happen, so we don't need to run this method repeatedly.
 
 ::: tip
 In the above example, we accessed a `VoiceState` through `member.voice`. A voice state exists for members connected to a voice channel and tells you which channel they're connected to, if the member is speaking, and whether they're deafened or muted. Consult the documentation for a full description of what voice states can do!
@@ -85,7 +85,7 @@ You can consult the [FFmpeg Protocols](https://www.ffmpeg.org/ffmpeg-protocols.h
 
 #### WebM/Ogg Opus Files
 
-WebM/Ogg Opus files already contain Opus audio; this means we do not require FFmpeg to convert the file. This is efficient, and using these files where possible will improve the performance of your bot.
+WebM/Ogg Opus files already contain Opus audio; this means we do not require FFmpeg to convert the file. This is efficient and using these files where possible will improve the performance of your bot.
 
 To play these files, you'll need to have a ReadableStream of the file and you'll need to specify the type of file when playing:
 

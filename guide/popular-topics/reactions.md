@@ -271,7 +271,7 @@ Make sure not to remove reactions by emoji or by user too much; if there are man
 </branch>
 <branch version="12.x">
 
-Removing reactions by user is not as straightforward as removing by emoji or removing all reactions. The API does not provide a method for selectively removing the reactions of a user. This means you will have to iterate through reactions that include the user and remove them.
+Removing reactions by a user is not as straightforward as removing by emoji or removing all reactions. The API does not provide a method for selectively removing the reactions of a user. This means you will have to iterate through reactions that include the user and remove them.
 
 <!-- eslint-skip -->
 ```js

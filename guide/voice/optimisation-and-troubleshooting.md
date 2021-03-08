@@ -102,6 +102,6 @@ connection.play(audioStream, { volume: false });
 
 Once you've done this, you will **not** be able to change the volume of your StreamDispatcher.
 
-This will not have a significant impact on performance but can still help you improve your bot's efficiency nevertheless.
+This will not significantly impact performance but can still help you improve your bot's efficiency nevertheless.
 
 </branch>

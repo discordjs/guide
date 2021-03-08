@@ -28,7 +28,7 @@ It's common for people to get confused with voice and not understand what they'r
 
 ### Playing audio
 
-To play audio, we need to send Opus audio packets to Discord at a fixed interval–we have selected 20ms. This is the `StreamDispatcher`s job–it is a WritableStream with Opus audio packets written to it. The dispatcher handles the packets' timing and applies some metadata, e.g., the sequence number of the packet, the timestamp, and then encrypts the packet before sending it via the UDP socket.
+To play audio, we need to send Opus audio packets to Discord at a fixed interval–we have selected 20ms. This is the `StreamDispatcher`s job–it is a WritableStream with Opus audio packets written to it. The dispatcher handles the packets' timing and applies some metadata, e.g., the packet's sequence number, the timestamp, and then encrypts the packet before sending it via the UDP socket.
 
 Obtaining the Opus audio is mainly offloaded to a separate module, [`prism-media`](https://github.com/amishshah/prism-media). This module converts media to Opus audio, either through "demuxing" Ogg/WebM media files (extracting Opus audio directly) or using FFmpeg to transcode most media formats to Opus audio so we can use it.
 

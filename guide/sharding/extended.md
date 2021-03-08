@@ -112,7 +112,7 @@ In version 12 [`client.shard`](https://discord.js.org/#/docs/main/stable/class/S
 
 </branch>
 
-If all is well, you should notice an output like `[false, true, false, false]`. If it is not clear why `true` and `false` are hanging around, it's because the last expression of the eval statement is what will be returned. You will want this if you want any feedback from the results. Now that you have observed said results, you can adjust the command to give yourself proper feedback, like so:
+If all is well, you should notice an output like `[false, true, false, false]`. If it is not clear why `true` and `false` are hanging around, the last expression of the eval statement will be returned. You will want this if you want any feedback from the results. Now that you have observed said results, you can adjust the command to give yourself proper feedback, like so:
 
 <branch version="11.x">
 
@@ -210,7 +210,7 @@ client.on('message', message => {
 
 </branch>
 
-The aforementioned code will essentially search through <branch version="11.x" inline>`client.emojis`</branch><branch version="12.x" inline>`client.emojis.cache`</branch> for the provided id, which will be given with `args[0]`. However, with sharding, you might notice it doesn't search through all the client's emojis. As mentioned in an earlier section of this guide, the different shards partition the client and its cache. Emojis derive from guilds, so each shard will have the emojis from all guilds for that shard. The solution is to use `.broadcastEval()` to search all the shards for the desired emoji. However, in the interest of providing an example of using functions, you will use one here. Consider that when something evaluates, it runs in the `client` context, which means `this` represents the current client for that shard.
+The aforementioned code will essentially search through <branch version="11.x" inline>`client.emojis`</branch><branch version="12.x" inline>`client.emojis.cache`</branch> for the provided id, which will be given with `args[0]`. However, with sharding, you might notice it doesn't search through all the client's emojis. As mentioned in an earlier section of this guide, the different shards partition the client and its cache. Emojis derive from guilds meaning each shard will have the emojis from all guilds for that shard. The solution is to use `.broadcastEval()` to search all the shards for the desired emoji. However, in the interest of providing an example of using functions, you will use one here. Consider that when something evaluates, it runs in the `client` context, which means `this` represents the current client for that shard.
 
 Let's start with a basic function, which will try to grab an emoji from the current client and return it.
 

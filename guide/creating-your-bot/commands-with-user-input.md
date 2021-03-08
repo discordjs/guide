@@ -8,7 +8,7 @@ Sometimes you'll want to determine the result of a command depending on user inp
 
 ## Basic arguments
 
-We'll be tackling two things at once here. Things will be explained along the way, so don't worry if you don't understand immediately.
+We'll be tackling two things at once here. We will explain along the way, so don't worry if you don't understand immediately.
 
 Go to your main bot file and find the `client.on('message', ...)` bit. Add the following block of code at the top of this event listeners callback function (the part we replaced with `...` here).
 
@@ -21,7 +21,7 @@ const command = args.shift().toLowerCase();
 // the rest of your code
 ```
 
-1. If the message either doesn't start with the prefix or was sent by a bot, exit early.
+1. If the message either doesn't start with the prefix or the author is a bot, exit early.
 2. Create an `args` variable that slices off the prefix entirely, removes the leftover whitespaces, and then splits it into an array by spaces.
 3. Create a `command` variable by calling `args.shift()`, which will take the first element in the array and return it while also removing it from the original array (so that you don't have the command name string inside the `args` array).
 
@@ -72,7 +72,7 @@ else if (command === 'args-info') {
 }
 ```
 
-So if the first argument provided is equal to "foo", then send back "bar". Otherwise, send back the argument the user provided.
+So if the first argument provided is equal to "foo", then send back "bar". Otherwise, send back the argument the user supplied.
 
 <div is="discord-messages">
 	<discord-message author="User" avatar="djs">
@@ -104,7 +104,7 @@ Currently, you're using `.split(' ')` to split the command arguments. However, t
 	</discord-message>
 </div>
 
-If you've never done something like this before, this probably isn't what you'd expect, right? Thankfully, there's a simple solution for this issue. The red line is what to remove, and the green line is what to replace it with.
+If you've never done something like this before, this probably isn't what you'd expect, right? Thankfully, there's a simple solution for this issue. The red line is what to remove, and the green line is its replacement.
 
 ```diff
 - const args = message.content.slice(prefix.length).trim().split(' ');
@@ -126,7 +126,7 @@ Awesome! Nothing to worry in that regard about now. This uses something called a
 
 ## Common situations with arguments
 
-Here is where we'll be going over a few common situations where you'll want to make sure that an argument fits specific criteria.
+Here is where we'll be going over a few everyday situations where you'll want to make sure that an argument fits specific criteria.
 
 ## Mentions
 
@@ -159,7 +159,7 @@ But what happens if you try to use the command without mentioning anybody? If yo
 
 ```
 message.channel.send(`You wanted to kick: ${taggedUser.username}`);
-                                                      ^
+													  ^
 
 TypeError: Cannot read property 'username' of undefined
 ```
@@ -173,7 +173,7 @@ if (!message.mentions.users.size) {
 ```
 
 ::: tip
-`message.reply()` is an alternative to `message.channel.send()` that prepends a mention of the person who sent the message, unless the message was sent in a DM. It can be very useful for providing feedback!
+`message.reply()` is an alternative to `message.channel.send()` that prepends a mention of the person who sent the message, unless the message was sent in a DM. It can be handy for providing feedback!
 :::
 
 Since `message.mentions.users` is a Collection, it has a `.size` property. If no users are mentioned, it'll return 0 (which is a `falsy` value), meaning you can do `if (!value)` to check if it's falsy.
