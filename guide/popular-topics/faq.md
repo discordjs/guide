@@ -383,7 +383,7 @@ You do not need to have a constant local variable like `blockedUsers` above. If 
 });
 ```
 
-Note that this is just a showcase of how such a check could be done.
+Note that this is just a showcase of how you could do such a check.
 :::
 
 ### How do I react to the message my bot sent?
@@ -487,7 +487,7 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 
 ### How to check the bots ping?
 
-There are two common measurements for bot pings. The first, **Websocket heartbeat**, is the average interval of a regularly sent signal indicating the healthy operation of the websocket connection the library receives events over:
+There are two common measurements for bot pings. The first, **Websocket heartbeat**, is the average interval of a regularly sent signal indicating the healthy operation of the WebSocket connection the library receives events over:
 
 <branch version="11.x">
 
@@ -512,13 +512,13 @@ A specific shards heartbeat can be found on the WebSocketShard instance, accessi
 
 </branch>
 
-The second, **Roundtrip Latency**, describes the amount of time a full API roundtrip (from creation of the command message to creation of the response message) takes. We then edit the response to the respective value in order to avoid needing to send yet another message:
+The second, **Roundtrip Latency**, describes the amount of time a full API roundtrip (from the creation of the command message to the creation of the response message) takes. We then edit the response to the respective value to avoid needing to send yet another message:
 
 <!-- eslint-skip -->
 
 ```js
 <message>.channel.send('Pinging...').then(sent => {
-    sent.edit(`Roundtrip latency: ${sent.createdTimestamp - <message>.createdTimestamp}ms`);
+	sent.edit(`Roundtrip latency: ${sent.createdTimestamp - <message>.createdTimestamp}ms`);
 });
 ```
 

@@ -133,7 +133,7 @@ Here we pull the two models and the junction table from the respective model dec
 A new function here is the `.upsert()` function. It's a portmanteau for **up**date or in**sert**.  We use `upsert` here to avoid creating duplicates if you run this file multiple times. That shouldn't happen because we defined name as *unique*, but there's no harm in being safe. Upsert also has a nice side benefit; If you adjust the cost, the respective item should also have their cost updated.
 
 ::: tip
-Execute `node dbInit.js` to create the database tables. Unless you make a change to the models, you'll never need to touch the file again. If you make a change to a model, you can execute `node dbInit.js --force` or `node dbInit.js -f` to force sync your tables. It's important to note that this **will** empty and remake your model tables.
+Execute `node dbInit.js` to create the database tables. Unless you make a change to the models, you'll never need to touch the file again. If you change a model, you can execute `node dbInit.js --force` or `node dbInit.js -f` to force sync your tables. It's important to note that this **will** empty and remake your model tables.
 :::
 
 ## Create associations

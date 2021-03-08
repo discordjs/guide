@@ -193,6 +193,6 @@ you should find something you will like.
 Official documentation: https://www.i18next.com/
 :::
 
-I18Next is an internationalization-framework for javascript and as such very useful if you want to translate your bot's user-facing messages into various languages based on the server it is used in.
+i18next is an internationalization-framework for JavaScript. It is beneficial to translate your bot's user-facing messages into various languages based on the server it is used in.
 
-Covering an entire use case example for internationalization would be out of the scope of this guide and requires some more explanation as to how the system operates. Please refer to the official documentation linked above for an in-depth usage guide.
+Covering an entire use case example for internationalization would be out of this guide's scope and requires some more explanation as to how the system operates. Please refer to the official documentation linked above for an in-depth usage guide.

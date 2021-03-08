@@ -33,7 +33,7 @@ Now you can start adding features!
 
 ## Command categories
 
-So far, all of your command files are in a single `commands` folder. This is fine at first, but as your project grows, the number of files in the `commands` folder will too. Keeping track of that many files can be a little tough. To make this a little easier, you can categorize your commands and put them in sub-folders inside the `commands` folder. You will have to make a few changes to your existing code in `index.js` for this to work out.
+So far, all of your command files are in a single `commands` folder. This is fine at first, but as your project grows, the number of files in the `commands` folder will too. Keeping track of that many files can be a little tough. To make this a little easier, you can categorize your commands and put them in subfolders inside the `commands` folder. You will have to make a few changes to your existing code in `index.js` for this to work out.
 
 If you've been following along, your project structure should look something like this:
 
@@ -47,7 +47,7 @@ After moving your commands into sub-folders, it will look something like this:
 Make sure you put every command file you have inside one of the new sub-folders. Leaving a command file directly under the `commands` folder will create problems.
 :::
 
-It is not necessary to name your sub-folders exactly like we have named them here. You can create any number of sub-folders and name them whatever you want. Although, it is a good practice to name them according to the type of commands stored inside them.
+It is not necessary to name your subfolders exactly like we have named them here. You can create any number of subfolders and name them whatever you want. Although, it is a good practice to name them according to the type of commands stored inside them.
 
 Now, go back to your main file `index.js` and add this below the `client.commands = new Discord.Collection();` line:
 
@@ -67,7 +67,7 @@ for (const folder of commandFolders) {
 }
 ```
 
-That's it! When creating new files for commands, make sure you create it inside one of the sub-folders (or a new one) in the `commands` folder.
+That's it! When creating new files for commands, make sure you create them inside one of the subfolders (or a new one) in the `commands` folder.
 
 ## Required arguments
 
@@ -206,7 +206,7 @@ In your main file (`index.js` in our examples), add this line preferably somewhe
 const cooldowns = new Discord.Collection();
 ```
 
-This initializes an empty Collection (remember, Collection is a utility data structure, which works based on key/value pairs) which you can then fill later when commands are used. The key will be the command name and the value will be another Collection associating the user id (key) to the last time (value) this specific user used this specific command. Overall the logical path to get a specific user's last usage of a specific command will be `cooldowns > command > user > timestamp`.
+This initializes an empty Collection (remember, Collection is a utility data structure, which works based on key/value pairs) which you can then fill later when commands are used. The key will be the command name, and the value will be another Collection associating the user id (key) to the last time (value) this specific user used this specific command. Overall the logical path to get a specific user's last usage of a specific command will be `cooldowns > command > user > timestamp`.
 
 In your main file, directly above the `try/catch` block causing command execution, add in the following:
 
@@ -228,9 +228,9 @@ You check if the `cooldowns` Collection already has an entry for the command bei
 
 1. `now`: The current timestamp.
 2. `timestamps`: A reference to the Collection of user-ID and timestamp key/value pairs for the triggered command.
-3. `cooldownAmount`: The specified cooldown from the command file, converted to milliseconds for straightforward calculation. If none is specified this defaults to three seconds.
+3. `cooldownAmount`: The specified cooldown from the command file, converted to milliseconds for straightforward calculation. If none is specified, this defaults to three seconds.
 
-If the author has already used this command in this session, get the timestamp, calculate the expiration time and inform the user of the amount of time they need to wait before being able to use this command again. Note that you use a `return` statement here, causing the code below this snippet to only execute if the message author has not used this command in this session or the wait has already expired.
+If the author has already used this command in this session, get the timestamp, calculate the expiration time and inform the user of the amount of time they need to wait before using this command again. Note that you use a `return` statement here, causing the code below this snippet only to execute if the message author has not used this command in this session or the wait has already expired.
 
 Continuing with your current setup, this is the complete `if` statement:
 
@@ -247,7 +247,7 @@ if (timestamps.has(message.author.id)) {
 
 Since the `timestamps` Collection has the author's ID in it as a key, you `.get()` it and then sum it up with the `cooldownAmount` variable to get the correct expiration timestamp. You then check to see if it's expired or not.
 
-The previous author check serves as a precaution and should normally not be necessary, as you will now insert a short piece of code causing the author's entry to be deleted after the cooldown has expired. To facilitate this you will use the node.js `setTimeout` method, which allows you to execute a function after a specified amount of time:
+The previous author check serves as a precaution. It should normally not be necessary, as you will now insert a short piece of code, causing the author's entry to be deleted after the cooldown has expired. To facilitate this, you will use the node.js `setTimeout` method, which allows you to execute a function after a specified amount of time:
 
 ```js
 // if (timestamps.has(message.author.id)) {
@@ -429,21 +429,21 @@ If you want to add categories or other information to your commands, you can add
 
 ## Command permissions
 
-In this section you will be adding permission requirements to the command handler we established so far. To do so you need to add at a `permissions` key to your existing command options. We will use the 'kick' command to demonstrate:
+In this section, you will be adding permission requirements to the command handler we established so far. To do so, you need to add a `permissions` key to your existing command options. We will use the 'kick' command to demonstrate:
 
 ```diff
 module.exports = {
 	name: 'kick',
 	description: 'Kick a user from the server.',
 	guildOnly: true,
-+	permissions: 'KICK_MEMBERS',
++   permissions: 'KICK_MEMBERS',
 	execute(message, args) {
 		// ...
 	},
 };
 ```
 
-You also need to check for those permissions before executing the command, which is done in the main file, as shown below. We use `TextChannel#permissionsFor` in combination with `Permissions#has` rather than `Guildmember#hasPermission` to respect permission overwrites in our check.
+You also need to check for those permissions before executing the command, which is done in the main file, as shown below. We use `TextChannel#permissionsFor` combined with `Permissions#has` rather than `Guildmember#hasPermission` to respect permission overwrites in our check.
 
 ```diff
 // ...
@@ -452,17 +452,17 @@ if (command.guildOnly && message.channel.type === 'dm') {
 }
 
 + if (command.permissions) {
-+ 	const authorPerms = message.channel.permissionsFor(message.author);
-+ 	if (!authorPerms || !authorPerms.has(command.permissions)) {
-+ 		return message.reply('You can not do this!');
-+ 	}
++   const authorPerms = message.channel.permissionsFor(message.author);
++   if (!authorPerms || !authorPerms.has(command.permissions)) {
++       return message.reply('You can not do this!');
++   }
 + }
 
 if (command.args && !args.length) {
 // ...
 ```
 
-Your command handler will now refuse to execute commands if the permissions you specify in the command structure are missing from the member trying to use it. Note that the `ADMINISTRATOR` permission as well as the message author being the owner of the guild will overwrite this.
+Your command handler will now refuse to execute commands if the permissions you specify in the command structure are missing from the member trying to use it. Note that the `ADMINISTRATOR` permission and the message author being the owner of the guild will overwrite this.
 
 :::tip
 Need more resources on how Discord's permission system works? Check the [permissions article](/popular-topics/permissions.html), [extended permissions knowledge base](/popular-topics/permissions-extended.html) and documentation of <branch version="11.x" inline>[permission flags](https://discord.js.org/#/docs/main/v11/class/Permissions?scrollTo=s-FLAGS)</branch><branch version="12.x" inline>[permission flags](https://discord.js.org/#/docs/main/stable/class/Permissions?scrollTo=s-FLAGS)</branch> out! 
@@ -502,14 +502,14 @@ if (!command) return message.channel.send(`There is no command with name or alia
 A lot of library-specific structures have `client` as a property. That means you don't have to pass the client reference as a parameter to commands to access. For example, `client.guilds` or `client.commands` can access the respective properties directly from the `message` object, as shown in the snippet above.
 :::
 
-In order to build the correct file path, you will need the file name and the sub-folder the command belongs to. For the file name, you can use `command.name`. To find the sub-folder name, you will have to loop through the commands sub-folders and check whether the command file is in that folder or not. You can do that by using `Array.includes()` on the file names array of each sub-folder. 
+To build the correct file path, you will need the file name and the sub-folder the command belongs to. For the file name, you can use `command.name`. To find the sub-folder name, you will have to loop through the commands sub-folders and check whether the command file is in that folder or not. You can do that by using `Array.includes()` on each subfolder's file names array. 
 
 ```js
 const commandFolders = fs.readdirSync('./commands');
 const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${folder}`).includes(`${commandName}.js`));
 ```
 
-Now, in theory, all there is to do, is to delete the previous command from `client.commands` and require the file again. In practice though, you cannot do this that easily as `require()` caches the file. If you were to require it again, you would simply load the previously cached file without any of your changes. In order to remove the file from the cache, you need to add the following line to your code:
+In theory, all there is to do is delete the previous command from `client.commands` and require the file again. In practice, you cannot do this easily as `require()` caches the file. If you were to require it again, you would load the previously cached file without any changes. To remove the file from the cache, you need to add the following line to your code:
 
 ```js
 delete require.cache[require.resolve(`../${folderName}/${command.name}.js`)];
