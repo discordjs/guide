@@ -63,7 +63,7 @@ module.exports = class MeowCommand extends Command {
 };
 ```
 
-As you can see, the `run` method is simply the code you want the bot to run when someone uses the command. This code can be anything you can do in normal discord.js, as Commando is simply an extension.
+As you can see, the `run` method is simply the code you want the bot to run when someone uses the command. This code can be anything you can do in core discord.js, as Commando is simply an extension.
 
 You may have also noticed that I used `message.say` instead of `message.channel.send`. This syntax is Commando's magic. Instead of `send`, use `say`; embeds, use `embed`; code, use `code`. The only exception to this are files, which are still sent the same as usual.
 

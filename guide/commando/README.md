@@ -4,7 +4,7 @@ forceTheme: blue
 
 # Getting started with Commando
 
-When you got your first bot up and running with discord.js, you should've installed discord.js using npm, Node.js' Package Manager. The same applies to Commando, which you must separately install. You can do this in one of two ways:
+When you got your first bot up and running, you should've installed discord.js using npm, Node.js' Package Manager. The same applies to Commando, which you must separately install. You can do this in one of two ways:
 
 If using discord.js v11: `npm install discord.js-commando`  
 If using discord.js v12: `npm install discordjs/Commando`
@@ -19,7 +19,7 @@ While it doesn't have to be called `index.js`, this file is the main file for yo
 
 The first thing you have to do is require Commando. Contrary to what you may think, you do **not** need to require discord.js to use Commando. Commando handles all discord.js-related functions within itself, and the Commando client extends discord.js', so you'll rarely ever have to touch core discord.js!
 
-You'll also be requiring `path`. You don't have to install `path`; it comes bundled with Node.
+You'll also be requiring `path`. You don't need to install it; it comes bundled with Node.
 
 ```js
 const { CommandoClient } = require('discord.js-commando');

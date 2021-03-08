@@ -147,9 +147,8 @@ Official documentation: https://github.com/winstonjs/winston
 Winston is "a logger for just about everything".
 You can log to the terminal, you can log to a file, etc.  
 "But wait," I hear you cry, "what's wrong with `console.log`?".  
-Well, the answer is simple: `console.log` is slow, very slow, and not very versatile.
-Whenever you call `console.log`, your program halts; it has to wait for console.log to finish.
-While it does that, your program can do nothing else, which does not sound good.
+Well, the answer is simple: `console.log` is slow and not quite versatile.
+Whenever you call `console.log`, your program halts; it cannot do anything until `console.log` finishes, which does not sound good.
 Well, that is precisely what winston is for.
 
 Winston is fast and highly configurable. It has different log levels for all your needs; it can log to files, the terminal, etc.

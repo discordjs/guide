@@ -10,19 +10,19 @@ API Errors or DiscordAPIErrors are thrown by the Discord API when an invalid req
 
 Example: `DiscordAPIError: Cannot send an empty message`
 
-### discord.js Errors
+### discord.js errors
 
-discord.js Errors are errors that the library itself throws. They can usually be easily tracked down using the stack trace and error message.
+discord.js errors are thrown by the library itself. They can usually be easily tracked down using the stack trace and error message.
 
 Example: `The messages must be an Array, Collection, or number.`
 
-### JavaScript Errors
+### JavaScript errors
 
-JavaScript Errors are simple errors which can be thrown by node itself or by discord.js. These errors can easily be fixed by looking at the type of error and the stack trace. You can find a full list of types [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) And a list of common js errors [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors).
+JavaScript errors are thrown by node itself or by discord.js. These errors can easily be fixed by looking at the type of error and the stack trace. You can find a full list of types [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) And a list of common js errors [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors).
 
 Example: `ReferenceError: "x" is not defined`
 
-### WebSocket and Network Errors
+### WebSocket and Network errors
 
 WebSocket and Network errors are common system errors thrown by Node in response to something wrong with the WebSocket connection. Unfortunately, these errors do not have a concrete solution and can be (usually) fixed by getting a better, more stable, and more robust connection. discord.js will automatically try to reconnect to the WebSocket if an error occurs. 
 
