@@ -43,7 +43,7 @@ Should you receive an error prefixed with `[DISALLOWED_INTENTS]` please review y
 
 As touched on before you can now choose which events you want to receive from Discord. In order to do so you need to pass the respective intents for the events you want to receive to the Client constructor.
 
-A list of all available gateway intents the library supports can be found at [the discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Intents?scrollTo=s-FLAGS). The events included in the respective intents on the [discord API documentation](https://discord.com/developers/docs/topics/gateway#list-of-intents).
+A list of all available gateway intents the library supports can be found at [the discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Intents?scrollTo=s-FLAGS). The events included in the respective intents on the [Discord API documentation](https://discord.com/developers/docs/topics/gateway#list-of-intents).
 
 :::warning
 Note that discord.js relies heavily on caching to provide its functionality. Some methods that seem unrelated might stop working if certain events do not arrive.

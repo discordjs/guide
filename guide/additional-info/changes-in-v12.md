@@ -1,18 +1,18 @@
 # Updating from v11 to v12
 
-After a long time in development, Discord.js v12 has been formally released, meaning it's time to update from v11 to get new features for your bots!  However, with those new features comes a lot of changes to the library that will break code written for v11.  This guide will serve as a handy reference for updating your code, covering the most commonly-used methods that have been changed, new topics such as partials and internal sharding, and will also include a comprehensive list of the method and property changes at the end.
+discord.js v12 has been formally released after a long time in development, meaning it's time to update from v11 to get new features for your bots!  However, with those new features come many changes to the library that will break code written for v11.  This guide will serve as a handy reference for updating your code, covering the most commonly-used methods that have changed, new topics such as partials and internal sharding. It also includes a comprehensive list of the method and property changes at the end.
 
 :::tip
-This guide has two versions! Make sure to select `v12 (stable)` in the drop down selection in the header bar to get code snippets and explanations for the new version across the guide.
+This guide has two versions! Make sure to select `v12 (stable)` in the header bar's drop-down selection to get code snippets and explanations for the new version across the guide.
 :::
 
 ## Before You Start
 
-v12 requires Node 12.x or higher to  use, so make sure you're up-to-date.  To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it!  There are many resources online to help you with this step based on your host system.
+v12 requires Node 12.x or higher, so make sure you're up-to-date.  To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it!  There are many resources online to help you with this step based on your host system.
 
-Once you got Node up-to-date you can install v12 by running `npm install discord.js` in your terminal or command prompt for text-only use, or `npm install discord.js @discordjs/opus` for voice support.
+Once you got Node up-to-date, you can install v12 by running `npm install discord.js` in your terminal or command prompt for text-only use or `npm install discord.js @discordjs/opus` for voice support.
 
-You can check your discord.js version with `npm list discord.js`. Should it still show v11.x uninstall (`npm uninstall discord.js`) and re-install discord.js and make sure the entry in your package.json does not prevent a major version update. Please refer to the [npm documentation](https://docs.npmjs.com/files/package.json#dependencies) for this.
+You can check your discord.js version with `npm list discord.js`. Should it still show v11.x, uninstall (`npm uninstall discord.js`) and re-install discord.js and make sure the entry in your `package.json` does not prevent a major version update. Please refer to the [npm documentation](https://docs.npmjs.com/files/package.json#dependencies) for this.
 
 ## Commonly Used Methods That Changed
 
@@ -22,7 +22,7 @@ You can check your discord.js version with `npm list discord.js`. Should it stil
 
 :::danger
 
-`clientOptions.disableEveryone` has been removed and replaced with `clientOptions.disableMentions`!
+`clientOptions.disableEveryone` was removed and replaced with `clientOptions.disableMentions`!
 
 ```diff
 - const client = new Discord.Client({ disableEveryone: true });
@@ -33,7 +33,7 @@ You can check your discord.js version with `npm list discord.js`. Should it stil
 
 ### Managers/ Cache
 
-v12 introduces the concept of managers, you will no longer be able to directly use collection methods such as `Collection#get` on data structures like `Client#users`. You will now have to directly ask for cache on a manager before trying to use collection methods. Any method that is called directly on a manager will call the API, such as `GuildMemberManager#fetch` and `MessageManager#delete`. 
+v12 introduces the concept of managers; you will no longer be able to directly use collection methods such as `Collection#get` on data structures like `Client#users`. You will now have to directly ask for cache on a manager before trying to use collection methods. Any method called directly on a manager will call the API, such as `GuildMemberManager#fetch` and `MessageManager#delete`. 
 
 ```diff
 - client.users.get('123456789012345678');
@@ -59,11 +59,11 @@ v12 introduces the concept of managers, you will no longer be able to directly u
 
 #### Collection#filterArray
 
-`collection.filterArray()` was removed entirely, as it was just a helper method for `collection.filter().array()` and most of the time converting a collection to an array is an unnecessary step.
+`collection.filterArray()` was removed entirely, as it was just a helper method for `collection.filter().array()` and most of the time, converting a collection to an array is an unnecessary step.
 
 #### Collection#find
 
-`collection.find('property', value)` has been removed entirely, and `collection.find()` only accepts a function in v12.
+`collection.find('property', value)` was removed entirely, and `collection.find()` only accepts a function in v12.
 
 ```diff
 - client.users.find('username', 'Bob');
@@ -76,7 +76,7 @@ v12 introduces the concept of managers, you will no longer be able to directly u
 
 ### Fetch
 
-Some methods that retrieve uncached data have been changed, transformed in the shape of a Manager.
+Some methods that retrieve uncached data have changed, transformed in the shape of a Manager.
 
 ```diff
 - client.fetchUser('123456789012345678');
@@ -132,7 +132,7 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 
 ### Roles
 
-The `GuildMember.roles` Collection has been changed to a Manager in v12, so a lot of the associated methods for interacting with a member's roles have changed as well.  They're no longer on the GuildMember object itself, but instead now on the `GuildMemberRoleManager`. The Manager holds API methods and cache for the roles, in the form of `GuildMemberRoleManager#cache` which is a plain Collection.
+The `GuildMember.roles` Collection has changed to a Manager, meaning the associated methods for interacting with a member's roles have too. They're no longer on the GuildMember object itself, but instead now on the `GuildMemberRoleManager`. The Manager holds API methods and cache for the roles in `GuildMemberRoleManager#cache`, a plain Collection.
 
 ```diff
 - guildMember.addRole('123456789012345678');
@@ -152,7 +152,7 @@ The `GuildMember.roles` Collection has been changed to a Manager in v12, so a lo
 + guildMember.roles.cache.get('123456789012345678');
 ```
 
-In addition, the GuildMember properties related to roles have also been moved to the `GuildMemberRoleManager`.
+Also, the GuildMember properties related to roles have moved to the `GuildMemberRoleManager`.
 
 ```diff
 - guildMember.colorRole;
@@ -167,7 +167,7 @@ In addition, the GuildMember properties related to roles have also been moved to
 
 ### Ban and Unban
 
-The method to ban members and users have been moved to the `GuildMemberManager`.
+The method to ban members and users has moved to the `GuildMemberManager`.
 
 ```diff
 - guild.ban('123456789012345678');
@@ -179,7 +179,7 @@ The method to ban members and users have been moved to the `GuildMemberManager`.
 
 ### Image URLs
 
-Some image-related properties like `user.avatarURL` are now a method in v12, so that you can apply some options to them, eg. to affect their display size. 
+Some image-related properties like `user.avatarURL` are now methods in v12 so that you can apply some options to them, e.g., to affect their display size. 
 
 ```diff
 - user.avatarURL;
@@ -197,7 +197,7 @@ Some image-related properties like `user.avatarURL` are now a method in v12, so 
 
 ### Dynamic File type
 
-Version 12 now allows you to dynamically set the file type for images. If the `dynamic` option is provided you will receive a `.gif` URL if the image is animated, otherwise it will fall back to the specified `format` or its default `.webp` if none is provided.
+Version 12 now allows you to set the file type for images dynamically. If you provide the `dynamic` option, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp`.
 
 ```js
 user.avatarURL({ format: 'png', dynamic: true, size: 1024 });
@@ -205,11 +205,11 @@ user.avatarURL({ format: 'png', dynamic: true, size: 1024 });
 
 ### RichEmbed Constructor
 
-The RichEmbed constructor has been removed and now the `MessageEmbed` constructor is used. It is largely the same to use, the only differences being the removal of `richEmbed.attachFile` (`messageEmbed.attachFiles` accepts a single file as a parameter as well) and `richEmbed.addBlankField` and the addition of `messageEmbed.addFields`.
+The RichEmbed constructor was removed, and now the `MessageEmbed` constructor is used. It is mostly the same to use. The only differences are removing `richEmbed.attachFile` (`messageEmbed.attachFiles` accepts a single file as a parameter as well) and `richEmbed.addBlankField` and the addition of `messageEmbed.addFields`.
 
 ### String Concatenation
 
-v12 has changed how discord.js objects behave when being cast to a string. If added to a string structures will now display as their id whenever possible (due to the internal method `valueOf` being changed according to its specification). When `toString` is called explicitly, the structure is cast via the `String` constructor or supplied as a value in template expressions (which internally calls `toString`) the mention format `<@id>` is displayed, which discord resolves to a proper mention if the structure is cached in the viewing client (in v11 both `toString` and `valueOf` showed the same behavior as `toString` does now).
+v12 has changed how discord.js objects behave when being cast to a string. If added to a string, structures will display their id whenever possible (due to the internal method `valueOf` changing according to its specification). When calling `toString` explicitly, the structure is cast via the `String` constructor or supplied as a value in template expressions (which internally calls `toString`). The mention format `<@id>` is displayed, which Discord resolves to a proper mention if the structure is cached in the viewing client (in v11, both `toString` and `valueOf` showed the same behavior as `toString` does now).
 
 ```diff
 - channel.send(userObject + ' has joined!')
@@ -218,7 +218,7 @@ v12 has changed how discord.js objects behave when being cast to a string. If ad
 
 ### User Account-Only Methods
 
-All user account-only methods have been removed, as they are no longer publicly accessible from the API.
+All user account-only methods were removed, as they are no longer publicly accessible from the API.
 
 ### Voice
 
@@ -252,20 +252,20 @@ connection.play(fs.createReadStream('file.ogg'), { type: 'ogg/opus' });
 connection.play(fs.createReadStream('file.webm'), { type: 'webm/opus' });
 ```
 
-It is also possible to define initial values for `plp`, `fec` and `bitrate` when playing a stream. Minus bitrate, these are new configurable options in v12 that can help when playing audio on unstable network connections.
+It is also possible to define initial values for `plp`, `fec`, and `bitrate` when playing a stream. Minus bitrate, these are new configurable options in v12 that can help when playing audio on unstable network connections.
 
 ```diff
 - connection.playStream(stream).setBitrate(96)
 + connection.play(stream, { bitrate: 96 })
 ```
 
-If you don't want to alter the volume of a stream while you're playing it, you can disable volume to improve performance. This cannot be reverted during playback.
+If you don't want to alter a stream's volume while you're playing it, you can disable volume to improve performance. This cannot be reverted during playback.
 
 ```js
 connection.play(stream, { volume: false });
 ```
 
-The internal voice system in v12 now uses streams where possible, and as such StreamDispatcher itself is now a WritableStream. It also comes with new changes:
+The internal voice system in v12 now uses streams where possible, and as such, StreamDispatcher itself is now a WritableStream. It also comes with new changes:
 
 ```diff
 - dispatcher.end()
@@ -275,7 +275,7 @@ The internal voice system in v12 now uses streams where possible, and as such St
 + dispatcher.on('finish', handler)
 ```
 
-You can manually control how many audio packets should be queued before playing audio for more consistent playback using the `highWaterMark` option (defaults to 12)
+You can manually control how many audio packets should queue before playing audio for more consistent playback using the `highWaterMark` option (defaults to 12)
 ```js
 connection.play(stream, { highWaterMark: 512 });
 ```
@@ -302,12 +302,12 @@ Broadcasts themselves now contain a `BroadcastDispatcher` that shares a similar 
 
 ## Breaking Changes and Deletions
 
-The section headers for breaking changes will be named after the v11 classes/methods/properties and will be in alphabetical order, so that you can easily find what you're looking for. The section headers for additions will be named after the v12 classes/methods/properties, to reflect their current syntax appropriately.
+The section headers for breaking changes will be named after the v11 classes/methods/properties and will be in alphabetical order so that you can easily find what you're looking for. The section headers for additions will be named after the v12 classes/methods/properties to reflect their current syntax appropriately.
 
-"Difference" code blocks will be used to display the old methods vs the newer ones—the red being what's been removed and the green being its replacement. Some bits may have more than one version of being handled. Regular JavaScript syntax code blocks will be used to display the additions. 
+"Difference" code blocks will be used to display the old methods vs. the newer ones—the red being removals and the green being its replacement. Some bits may have more than one version of being handled. Additions will use regular JavaScript syntax code blocks. 
 
 ::: danger
-While this list has been carefully crafted, it may be incomplete! If you notice pieces of missing or inaccurate data, we encourage you to [submit a pull request](https://github.com/discordjs/guide/compare)!
+While this list was carefully crafted, it may be incomplete! If you notice pieces of missing or inaccurate data, we encourage you to [submit a pull request](https://github.com/discordjs/guide/compare)!
 :::
 
 * Activity [(additions)](/additional-info/changes-in-v12.md#activity)
@@ -375,17 +375,17 @@ While this list has been carefully crafted, it may be incomplete! If you notice 
 
 #### Snekfetch
 
-Please note that `snekfetch` has been removed as a dependency, and has been replaced by `node-fetch`.  `snekfetch` has been deprecated by its developer and is no longer maintained.
+The `snekfetch` dependency was replaced with `node-fetch`.  `snekfetch` was deprecated by its developer and is no longer maintained.
 
 ### Attachment
 
-The `Attachment` class has been removed in favor of the `MessageAttachment` class.
+The `Attachment` class was removed in favor of the `MessageAttachment` class.
 
 ### Client
 
 #### Client#fetchUser
 
-`client.fetchUser()` has been removed and transformed in the shape of a Manager.
+`client.fetchUser()` was removed and transformed in the shape of a Manager.
 
 ```diff
 - client.fetchUser('123456789012345678');
@@ -394,7 +394,7 @@ The `Attachment` class has been removed in favor of the `MessageAttachment` clas
 
 #### Client#broadcasts
 
-`client.broadcasts` has been removed and is now in the `ClientVoiceManager` class.
+`client.broadcasts` was removed and is now in the `ClientVoiceManager` class.
 
 ```diff
 - client.broadcasts;
@@ -411,11 +411,11 @@ The `Attachment` class has been removed in favor of the `MessageAttachment` clas
 
 #### Client#clientUserGuildSettingsUpdate
 
-The `client.clientUserGuildSettingsUpdate` event has been removed entirely, along with all other user account-only properties and methods.
+The `client.clientUserGuildSettingsUpdate` event was removed entirely, along with all other user account-only properties and methods.
 
 #### Client#clientUserSettingsUpdate
 
-The `client.clientUserSettingsUpdate` event has been removed entirely, along with all other user account-only properties and methods.
+The `client.clientUserSettingsUpdate` event was removed entirely, along with all other user account-only properties and methods.
 
 #### Client#destroy
 
@@ -423,7 +423,7 @@ The `client.destroy()` method no longer returns a Promise.
 
 #### Client#disconnect
 
-The `client.disconnect` event has been removed in favor of the `client.shardDisconnect` event to make use of internal sharding.
+The `client.disconnect` event was removed in favor of the `client.shardDisconnect` event to use internal sharding.
 
 ```diff
 - client.on('disconnect', event => {});
@@ -432,19 +432,19 @@ The `client.disconnect` event has been removed in favor of the `client.shardDisc
 
 #### Client#emojis
 
-`client.emojis` has been changed from a Collection to a Manager.
+`client.emojis` has changed from a Collection to a Manager.
 
 #### Client#guildMemberSpeaking
 
-The `speaking` parameter has been changed from a `boolean` value to a read-only `Speaking` class.
+The `speaking` parameter has changed from a `boolean` value to a read-only `Speaking` class.
 
 #### Client#guilds
 
-`client.guilds` has been changed from a Collection to a Manager.
+`client.guilds` has changed from a Collection to a Manager.
 
 #### Client#ping
 
-`client.ping` has been moved to the WebSocketManager under `client.ws.ping`
+`client.ping` has moved to the WebSocketManager under `client.ws.ping`
 
 ```diff
 - client.ping
@@ -453,7 +453,7 @@ The `speaking` parameter has been changed from a `boolean` value to a read-only 
 
 #### Client#pings
 
-`client.pings` has been moved to the `WebSocketShard` class to make use of internal sharding.  The `Client` class has a `Collection` of `WebSocketShard`s available via `client.ws.shards`; alternatively, the `WebSocketShard` can be found as a property of other structures, eg `guild.shard`.
+`client.pings` has been moved to the `WebSocketShard` class to use internal sharding.  The `Client` class has a `Collection` of `WebSocketShard`s available via `client.ws.shards`; alternatively, the `WebSocketShard` can be found as a property of other structures, e.g. `guild.shard`.
 
 ```diff
 - client.pings;
@@ -462,7 +462,7 @@ The `speaking` parameter has been changed from a `boolean` value to a read-only 
 
 #### Client#presences
 
-`client.presences` has been removed to reduce extraneous getters.
+`client.presences` was removed to reduce extraneous getters.
 
 #### Client#presenceUpdate
 
@@ -475,7 +475,7 @@ The `client.presenceUpdate` has been changed and now passes the old and new `Pre
 
 #### Client#reconnecting
 
-The `client.reconnecting` event has been removed in favor of the `client.shardReconnecting` event to make use of internal sharding.
+The `client.reconnecting` event was removed in favor of the `client.shardReconnecting` event to use internal sharding.
 
 ```diff
 - client.on('reconnecting', () => console.log('Successfully reconnected.'));
@@ -484,7 +484,7 @@ The `client.reconnecting` event has been removed in favor of the `client.shardRe
 
 #### Client#resume
 
-The `client.resume` event has been removed in favor of the `client.shardResume` event to make use of internal sharding.
+The `client.resume` event was removed in favor of the `client.shardResume` event to use internal sharding.
 
 ```diff
 - client.on('resume', replayed => console.log(`Resumed connection and replayed ${replayed} events.`));
@@ -493,7 +493,7 @@ The `client.resume` event has been removed in favor of the `client.shardResume` 
 
 #### Client#status
 
-The `client.status` property has been removed and is now in the `WebSocketManager` class.  In addition, it is no longer a getter.
+The `client.status` property was removed and moved to the `WebSocketManager` class and is no longer a getter.
 
 ```diff
 - client.status;
@@ -502,15 +502,15 @@ The `client.status` property has been removed and is now in the `WebSocketManage
 
 #### Client#syncGuilds
 
-`client.syncGuilds()` has been removed entirely, along with all other user account-only properties and methods.
+`client.syncGuilds()` was removed entirely, along with all other user account-only properties and methods.
 
 #### Client#typingStop
 
-The `client.typingStop` event has been removed entirely, as it was an event created by the library and not an actual Discord WebSocket event.
+The `client.typingStop` event was removed entirely, as it was an event created by the library and not an actual Discord WebSocket event.
 
 #### Client#userNoteUpdate
 
-The `client.userNoteUpdate` event has been removed entirely, along with all other user account-only properties and methods.
+The `client.userNoteUpdate` event was removed entirely, along with all other user account-only properties and methods.
 
 #### Client#users
 
@@ -518,7 +518,7 @@ The `client.userNoteUpdate` event has been removed entirely, along with all othe
 
 #### Client#voiceConnections
 
-`client.voiceConnections` has been removed and is now in the `ClientVoiceManager` class.  In addition, the `Collection` is no longer a getter.
+`client.voiceConnections` was removed and moved to the `ClientVoiceManager` class and is no longer a getter.
 
 ```diff
 - client.voiceConnections;
@@ -527,7 +527,7 @@ The `client.userNoteUpdate` event has been removed entirely, along with all othe
 
 #### Client#voiceStateUpdate
 
-The `client.voiceStateUpdate` event now returns `oldState` and `newState` representing the `VoiceState` of the member before and after the update, as opposed to the member itself.
+The `client.voiceStateUpdate` event now returns `oldState` and `newState` representing the `VoiceState` of the member before and after the update instead of the member itself.
 
 ```diff
 - client.on('voiceStateUpdate', (oldMember, newMember) => console.log(oldMember));
@@ -536,7 +536,7 @@ The `client.voiceStateUpdate` event now returns `oldState` and `newState` repres
 
 ### ClientOptions
 
-There have been several changes made to the `ClientOptions` object located in `client#options`.
+Several changes were made to the `ClientOptions` object located in `client#options`.
 
 #### ClientOptions#apiRequestMethod
 
@@ -553,29 +553,29 @@ There have been several changes made to the `ClientOptions` object located in `c
 
 #### ClientOptions#shards
 
-`clientOptions.shards` has been removed and is functionally equivalent to `clientOptions.shardCount` on v12.
+`clientOptions.shards` was removed and is functionally equivalent to `clientOptions.shardCount` on v12.
 
 #### ClientOptions#sync
 
-`clientOptions.sync` has been removed entirely, along with all other user account-only properties and methods.
+`clientOptions.sync` was removed entirely, along with all other user account-only properties and methods.
 
 #### ClientOptions#disabledEvents
 
-`clientOptions.disabledEvents` has been removed in favor of using intents. Please refer to our more [detailed article about this topic](/popular-topics/intents)
+`clientOptions.disabledEvents` was removed in favor of using intents. Please refer to our more [detailed article about this topic](/popular-topics/intents)
 
 ### ClientUser
 
 #### ClientUser#acceptInvite
 
-`clientUser.acceptInvite()` has been removed entirely, along with all other user account-only properties and methods.
+`clientUser.acceptInvite()` was removed entirely, along with all other user account-only properties and methods.
 
 #### ClientUser#addFriend
 
-`clientUser.addFriend()` has been removed entirely, along with all other user account-only properties and methods.
+`clientUser.addFriend()` was removed entirely, along with all other user account-only properties and methods.
 
 #### ClientUser#avatarURL
 
-`clientUser.avatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. The `dynamic` option allows you to always get a `.gif` file for animated avatars. Otherwise the returned link will fall back to the format specified in the `format` option or `.webp` (it's default) if none is provided.
+`clientUser.avatarURL` is now a method, as opposed to a property. If you provide the `dynamic` option, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp`.
 
 ```diff
 - clientUser.avatarURL;
@@ -585,15 +585,15 @@ There have been several changes made to the `ClientOptions` object located in `c
 
 #### ClientUser#block
 
-`clientUser.block()` has been removed entirely, along with all other user account-only properties and methods.
+`clientUser.block()` was removed entirely, along with all other user account-only properties and methods.
 
 #### ClientUser#blocked
 
-`clientUser.blocked` has been removed entirely, along with all other user account-only properties and methods.
+`clientUser.blocked` was removed entirely, along with all other user account-only properties and methods.
 
 #### ClientUser#createGuild
 
-`clientUser.createGuild()` has been removed and transformed in the shape of a Manager. In addition, the second and third parameters in `clientUser.createGuild()` have been changed/removed, leaving it with a total of two parameters. The `region` and `icon` parameters from v11 have been merged into an object as the second parameter.
+`clientUser.createGuild()` was removed and transformed in the shape of a Manager. Also, the second and third parameters in `clientUser.createGuild()` have been changed/removed, leaving it with a total of two parameters. The `region` and `icon` parameters from v11 were merged into an object as the second parameter.
 
 ```diff
 - clientUser.createGuild('New server', 'us-east', './path/to/file.png');
@@ -602,7 +602,7 @@ There have been several changes made to the `ClientOptions` object located in `c
 
 #### ClientUser#displayAvatarURL
 
-`clientUser.displayAvatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If the `dynamic` option is provided you will receive a `.gif` URL if the image is animated, otherwise it will fall back to the specified `format` or its default `.webp` if none is provided.
+`clientUser.displayAvatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If you provide the `dynamic` option, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp`.
 
 ```diff
 - clientUser.displayAvatarURL;
@@ -612,47 +612,47 @@ There have been several changes made to the `ClientOptions` object located in `c
 
 #### ClientUser#email
 
-`clientUser.email` has been removed entirely, along with all other user account-only properties and methods.
+`clientUser.email` was removed entirely, along with all other user account-only properties and methods.
 
 #### ClientUser#fetchMentions
 
-`clientUser.fetchMentions()` has been removed entirely, along with all other user account-only properties and methods.
+`clientUser.fetchMentions()` was removed entirely, along with all other user account-only properties and methods.
 
 #### ClientUser#fetchProfile
 
-`clientUser.fetchProfile()` has been removed entirely, along with all other user account-only properties and methods.
+`clientUser.fetchProfile()` was removed entirely, along with all other user account-only properties and methods.
 
 #### ClientUser#friends
 
-`clientUser.friends` has been removed entirely, along with all other user account-only properties and methods.
+`clientUser.friends` was removed entirely, along with all other user account-only properties and methods.
 
 #### ClientUser#guildSettings
 
-`clientUser.guildSettings` has been removed entirely, along with all other user account-only properties and methods.
+`clientUser.guildSettings` was removed entirely, along with all other user account-only properties and methods.
 
 #### ClientUser#mfaEnabled
 
-`clientUser.mfaEnabled` has been removed entirely, along with all other user account-only properties and methods.
+`clientUser.mfaEnabled` was removed entirely, along with all other user account-only properties and methods.
 
 #### ClientUser#mobile
 
-`clientUser.mobile` has been removed entirely, along with all other user account-only properties and methods.
+`clientUser.mobile` was removed entirely, along with all other user account-only properties and methods.
 
 #### ClientUser#note
 
-`clientUser.note` has been removed entirely, along with all other user account-only properties and methods.
+`clientUser.note` was removed entirely, along with all other user account-only properties and methods.
 
 #### ClientUser#notes
 
-`clientUser.notes` has been removed entirely, along with all other user account-only properties and methods.
+`clientUser.notes` was removed entirely, along with all other user account-only properties and methods.
 
 #### ClientUser#premium
 
-`clientUser.premium` has been removed entirely, along with all other user account-only properties and methods.
+`clientUser.premium` was removed entirely, along with all other user account-only properties and methods.
 
 #### ClientUser#removeFriend
 
-`clientUser.removeFriend()` has been removed entirely, along with all other user account-only properties and methods.
+`clientUser.removeFriend()` was removed entirely, along with all other user account-only properties and methods.
 
 #### ClientUser#send\*\*\*
 
@@ -660,7 +660,7 @@ Just like the `TextChannel#send***` methods, all the `.send***()` methods have b
 
 #### ClientUser#setGame
 
-`clientUser.setGame()` has been changed to `clientUser.setActivity()`. The second parameter is no longer for providing a streaming URL, but rather an object that allows you to provide the URL and activity type.
+`clientUser.setGame()` has changed to `clientUser.setActivity()`. The second parameter is no longer for providing a streaming URL but rather an object that allows you to provide the URL and activity type.
 
 ```diff
 - clientUser.setGame('with my bot friends!');
@@ -672,43 +672,43 @@ Just like the `TextChannel#send***` methods, all the `.send***()` methods have b
 
 #### ClientUser#setNote
 
-`clientUser.setNote()` has been removed entirely, along with all other user account-only properties and methods.
+`clientUser.setNote()` was removed entirely, along with all other user account-only properties and methods.
 
 #### ClientUser#setPassword
 
-`clientUser.setPassword()` has been removed entirely, along with all other user account-only properties and methods.
+`clientUser.setPassword()` was removed entirely, along with all other user account-only properties and methods.
 
 #### ClientUser#settings
 
-`clientUser.settings` has been removed entirely, along with all other user account-only properties and methods.
+`clientUser.settings` was removed entirely, along with all other user account-only properties and methods.
 
 #### ClientUser#unblock
 
-`clientUser.unblock()` has been removed entirely, along with all other user account-only properties and methods.
+`clientUser.unblock()` was removed entirely, along with all other user account-only properties and methods.
 
 ### ClientUserChannelOverride
 
-The `ClientUserChannelOverride` class has been removed entirely, along with all other user account-only properties and methods.
+The `ClientUserChannelOverride` class was removed entirely, along with all other user account-only properties and methods.
 
 ### ClientUserGuildSettings
 
-The `ClientUserGuildSettings` class has been removed entirely, along with all other user account-only properties and methods.
+The `ClientUserGuildSettings` class was removed entirely, along with all other user account-only properties and methods.
 
 ### ClientUserSettings
 
-The `ClientUserSettings` class has been removed entirely, along with all other user account-only properties and methods.
+The `ClientUserSettings` class was removed entirely, along with all other user account-only properties and methods.
 
 ### ClientUserChannelOverride
 
-The `ClientUserChannelOverride` class has been removed entirely.
+The `ClientUserChannelOverride` class was removed entirely.
 
 ### ClientUserGuildSettings
 
-The `ClientUserGuildSettings` class has been removed entirely.
+The `ClientUserGuildSettings` class was removed entirely.
 
 ### ClientUserSettings
 
-The `ClientUserSettings` class has been removed entirely.
+The `ClientUserSettings` class was removed entirely.
 
 ### Collection
 
@@ -718,7 +718,7 @@ Both methods will now return `undefined` if nothing is found.
 
 #### Collection#deleteAll
 
-`collection.deleteAll()` has been removed in favor of map's default `clear()` method.
+`collection.deleteAll()` was removed in favor of map's default `clear()` method.
 
 ```diff
 - roles.deleteAll();
@@ -727,7 +727,7 @@ Both methods will now return `undefined` if nothing is found.
 
 #### Collection#exists
 
-`collection.exists()` has been removed entirely in favor of `collection.some()`
+`collection.exists()` was removed entirely in favor of `collection.some()`
 
 ```diff
 - client.users.exists('username', 'Bob');
@@ -736,15 +736,15 @@ Both methods will now return `undefined` if nothing is found.
 
 #### Collection#filterArray
 
-`collection.filterArray()` has been removed completely.
+`collection.filterArray()` was removed completely.
 
 #### Collection#findAll
 
-`collection.findAll()` has been removed completely as the same functionality can be obtained through `collection.filter()`.
+`collection.findAll()` was removed completely as the same functionality can be obtained through `collection.filter()`.
 
 #### Collection#first/firstKey/last/lastKey/random/randomKey
 
-The `amount` parameter of these methods now allows a negative number which will start the query from the end of the collection instead of the start.
+The `amount` parameter of these methods now allows a negative number, which will start the query from the end of the collection instead.
 
 #### Collection#tap
 
@@ -754,7 +754,7 @@ The `amount` parameter of these methods now allows a negative number which will 
 
 #### Collector#cleanup
 
-`collector.cleanup()` has been removed entirely.
+`collector.cleanup()` was removed entirely.
 
 #### Collector#handle
 
@@ -768,11 +768,11 @@ The `amount` parameter of these methods now allows a negative number which will 
 
 #### DMChannel#acknowledge
 
-`dmChannel.acknowledge()` has been removed entirely, along with all other user account-only properties and methods.
+`dmChannel.acknowledge()` was removed entirely, along with all other user account-only properties and methods.
 
 #### DMChannel#createCollector
 
-`dmChannel.createCollector()` has been removed in favor of `dmChannel.createMessageCollector()`.
+`dmChannel.createCollector()` was removed in favor of `dmChannel.createMessageCollector()`.
 
 :::tip
 Note that the behavior of collector options has changed! See [this section](/additional-info/changes-in-v12.html#messagecollectoroptions-max-matches) for more details!
@@ -784,7 +784,7 @@ Note that the behavior of collector options has changed! See [this section](/add
 
 #### DMChannel#search
 
-`dmChannel.search()` has been removed entirely, along with all other user account-only properties and methods.
+`dmChannel.search()` was removed entirely, along with all other user account-only properties and methods.
 
 #### DMChannel#send\*\*\*
 
@@ -792,7 +792,7 @@ Just like the `TextChannel#send***` methods, all the `.send***()` methods have b
 
 ### Emoji
 
-`Emoji` now extends `Base` and represent either a `GuildEmoji` or `ReactionEmoji`, and some of the specific properties have moved to their respective object, instead of everything on the base `Emoji` object.
+`Emoji` now extends `Base` and represents either a `GuildEmoji` or `ReactionEmoji`. Some of the specific properties have moved to their respective object instead of everything on the base `Emoji` object.
 
 #### Emoji#\*\*\*RestrictedRole(s)
 
@@ -826,11 +826,11 @@ The helper methods to add and remove a role or roles from the roles allowed to u
 
 ### EvaluatedPermissions
 
-`evaluatedPermissions` has been removed entirely, see the `Permissions` page.
+`evaluatedPermissions` was removed entirely; see the `Permissions` page.
 
 ### Game
 
-The `Game` class has been removed in favor of the `Activity` class to be consistent with the API. It is also an array of multiple Activities, since a user can have multiple.
+The `Game` class was removed in favor of the `Activity` class to be consistent with the API. It is also an array of multiple Activities since a user can have multiple.
 
 ```diff
 - user.presence.game
@@ -839,21 +839,21 @@ The `Game` class has been removed in favor of the `Activity` class to be consist
 
 ### GroupDMChannel
 
-The `GroupDMChannel` class has been deprecated from the Discord API.  While it's still available through Gamebridge for now, that will also be removed in the future.  In addition, group DM's has always been unreliable and hacky to work with a bot.
+The `GroupDMChannel` class was deprecated from the Discord API.  While it's still available through Gamebridge for now, that will also be removed in the future.  In addition, group DM's has always been unreliable and hacky to work with a bot.
 
 ### Guild
 
 #### Guild#acknowledge
 
-`guild.acknowledge()` has been removed entirely, along with all other user account-only properties and methods.
+`guild.acknowledge()` was removed entirely, along with all other user account-only properties and methods.
 
 #### Guild#allowDMs
 
-`guild.allowDMs()` has been removed entirely, along with all other user account-only properties and methods.
+`guild.allowDMs()` was removed entirely, along with all other user account-only properties and methods.
 
 #### Guild#ban
 
-`guild.ban()` has been moved to the `GuildMemberManager`.  In addition, the second parameter in `guild.members.ban()` has been changed. The `options` parameter no longer accepts a number, nor a string.
+`guild.ban()` has moved to the `GuildMemberManager`.  In addition, the second parameter in `guild.members.ban()` has changed. The `options` parameter no longer accepts a number nor a string.
 
 ```diff
 - guild.ban(user, 7);
@@ -869,7 +869,7 @@ The `GroupDMChannel` class has been deprecated from the Discord API.  While it's
 
 #### Guild#createChannel
 
-`guild.createChannel()` has been transformed in the shape of a Manager.  The second, third and fourth parameters in `guild.createChannel()` have been changed/removed, leaving it with a total of two parameters, the second one being an object with all of the options available in `ChannelData`.
+`guild.createChannel()` has transformed in the shape of a Manager.  The second, third, and fourth parameters in `guild.createChannel()` were changed/removed, leaving it with a total of two parameters; the second one is an object with all of the options available in `ChannelData`.
 
 ```diff
 - guild.createChannel('new-channel', 'text', permissionOverwriteArray, 'New channel added for fun!');
@@ -878,7 +878,7 @@ The `GroupDMChannel` class has been deprecated from the Discord API.  While it's
 
 #### Guild#createEmoji
 
-`guild.createEmoji()` has been transformed in the shape of a Manager.  The third and fourth parameters in `guild.createEmoji()` have been changed/removed, leaving it with a total of three parameters. The `roles` and `reason` parameters from v11 have been merged into an object as the third parameter.
+`guild.createEmoji()` has been transformed in the shape of a Manager.  The third and fourth parameters in `guild.createEmoji()` were changed/removed, leaving it with a total of three parameters. The `roles` and `reason` parameters from v11 were merged into an object as the third parameter.
 
 ```diff
 - guild.createEmoji('./path/to/file.png', 'NewEmoji', collectionOfRoles, 'New emoji added for fun!');
@@ -887,7 +887,7 @@ The `GroupDMChannel` class has been deprecated from the Discord API.  While it's
 
 #### Guild#createRole
 
-`guild.createRole()` has been transformed in the shape of a Manager.  The first and second parameters in `guild.createRole()` have been changed/removed, leaving it with a total of one parameter. The `data` and `reason` parameters from v11 have been moved into an object as the first parameter.
+`guild.createRole()` has transformed in the shape of a Manager.  The first and second parameters in `guild.createRole()` were changed/removed, leaving it with a total of one parameter. The `data` and `reason` parameters from v11 have moved into an object as the first parameter.
 
 ```diff
 - guild.createRole(roleData, 'New staff role!');
@@ -896,7 +896,7 @@ The `GroupDMChannel` class has been deprecated from the Discord API.  While it's
 
 #### Guild#deleteEmoji
 
-`Guild.deleteEmoji()` has been removed and transformed in the shape of a Manager. Note the possible use of `resolve()` as a broader alternative to `get()`.
+`Guild.deleteEmoji()` was removed and transformed in the shape of a Manager. Note the possible use of `resolve()` as a broader alternative to `get()`.
 
 ```diff
 - guild.deleteEmoji('123456789012345678');
@@ -905,14 +905,14 @@ The `GroupDMChannel` class has been deprecated from the Discord API.  While it's
 
 #### Guild#defaultChannel
 
-Unfortunately, "default" channels don't exist in Discord anymore, and as such, the `guild.defaultChannel` property has been removed with no alternative.
+Unfortunately, "default" channels don't exist in Discord anymore, and as such, the `guild.defaultChannel` property was removed with no alternative.
 
 **Q:** "I previously had a welcome message system (or something similar) set up using that property. What can I do now?"
 
 **A:** There are a few ways to tackle this. Using the example of a welcome message system, you can:
 
 1. Set up a database table to store the channel ID in a column when someone uses a `!welcome-channel #channel-name` command, for example. Then inside the `guildMemberAdd` event, use `client.channels.cache.get('id')` and send a message to that channel. This is the most reliable method and gives server staff freedom to rename the channel as they please.
-2. Make a new command that creates a `welcome-messages` channel, use `guild.channels.cache.find(channel => channel.name === 'welcome-messages')`, and send a message to that channel. This method will work fine in most cases, but will break if someone on that server decides to rename the channel. This may also give you unexpected results, due to Discord allowing multiple channels to have the same name.
+2. Make a new command that creates a `welcome-messages` channel, use `guild.channels.cache.find(channel => channel.name === 'welcome-messages')`, and send a message to that channel. This method will work fine in most cases but will break if someone on that server decides to rename the channel. This may also give you unexpected results due to Discord allowing multiple channels to have the same name.
 
 ::: tip
 Not sure how to set up a database? Check out [this page](/sequelize/)!
@@ -956,7 +956,7 @@ Not sure how to set up a database? Check out [this page](/sequelize/)!
 
 #### Guild#iconURL
 
-`guild.iconURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If the `dynamic` option is provided you will receive a `.gif` URL if the image is animated, otherwise it will fall back to the specified `format` or its default `.webp` if none is provided.
+`guild.iconURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If you provide the `dynamic` option, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp` if none is provided.
 
 ```diff
 - guild.iconURL;
@@ -966,19 +966,19 @@ Not sure how to set up a database? Check out [this page](/sequelize/)!
 
 #### Guild#messageNotifications
 
-`guild.messageNotifications` has been removed entirely, along with all other user account-only properties and methods.
+`guild.messageNotifications` was removed entirely, along with all other user account-only properties and methods.
 
 #### Guild#mobilePush
 
-`guild.mobilePush` has been removed entirely, along with all other user account-only properties and methods.
+`guild.mobilePush` was removed entirely, along with all other user account-only properties and methods.
 
 #### Guild#muted
 
-`guild.muted` has been removed entirely, along with all other user account-only properties and methods.
+`guild.muted` was removed entirely, along with all other user account-only properties and methods.
 
 #### Guild#position
 
-`guild.position` has been removed entirely, along with all other user account-only properties and methods.
+`guild.position` was removed entirely, along with all other user account-only properties and methods.
 
 #### Guild#presences
 
@@ -986,7 +986,7 @@ Not sure how to set up a database? Check out [this page](/sequelize/)!
 
 #### Guild#pruneMembers
 
-`guild.pruneMembers()` has been transformed in the shape of a Manager.  In addition, the first, second, and third parameters in the method have been changed or removed, leaving it with a total of one parameter. The `days`, `dry`, and `reason` parameters from v11 have been merged into an object as the first parameter.
+`guild.pruneMembers()` has transformed in the shape of a Manager.  In addition, the first, second, and third parameters in the method were changed/removed, leaving it with a total of one parameter. The `days`, `dry`, and `reason` parameters from v11 have been merged into an object as the first parameter.
 
 ```diff
 - guild.pruneMembers(7, true, 'Scheduled pruning');
@@ -999,11 +999,11 @@ Not sure how to set up a database? Check out [this page](/sequelize/)!
 
 #### Guild#search
 
-`guild.search()` has been removed entirely, along with all other user account-only properties and methods.
+`guild.search()` was removed entirely, along with all other user account-only properties and methods.
 
 #### Guild#setChannelPosition
 
-`guild.setChannelPosition()` has been removed entirely. As an alternative, you can use `channel.setPosition()`, or `guild.setChannelPositions()`, which accepts the same form of data as `guild.setChannelPosition` but inside an array.
+`guild.setChannelPosition()` was removed entirely. As an alternative, you can use `channel.setPosition()`, or `guild.setChannelPositions()`, which accepts the same form of data as `guild.setChannelPosition` but inside an array.
 
 ```diff
 - guild.setChannelPosition({ channel: '123456789012345678', position: 1 });
@@ -1013,11 +1013,11 @@ Not sure how to set up a database? Check out [this page](/sequelize/)!
 
 #### Guild#setPosition
 
-`guild.setPosition()` has been removed entirely, along with all other user account-only properties and methods.
+`guild.setPosition()` was removed entirely, along with all other user account-only properties and methods.
 
 #### Guild#setRolePosition
 
-`guild.setRolePosition()` has been removed entirely as an extraneous helper method. As an alternative, you can use `role.setPosition()`.
+`guild.setRolePosition()` was removed entirely as an extraneous helper method. As an alternative, you can use `role.setPosition()`.
 
 ```diff
 - guild.setRolePosition({ role: '123456789012345678', position: 1 });
@@ -1036,11 +1036,11 @@ Not sure how to set up a database? Check out [this page](/sequelize/)!
 
 #### Guild#suppressEveryone
 
-`guild.suppressEveryone` has been removed entirely, along with all other user account-only properties and methods.
+`guild.suppressEveryone` was removed entirely, along with all other user account-only properties and methods.
 
 #### Guild#sync
 
-`guild.sync()` has been removed entirely, along with all other user account-only properties and methods.
+`guild.sync()` was removed entirely, along with all other user account-only properties and methods.
 
 #### Guild#unban
 
@@ -1073,7 +1073,7 @@ The first, second, third, and fourth parameters in `channel.clone()` have been c
 
 #### GuildChannel#createInvite
 
-The second parameter in `channel.createInvite()` has been removed, leaving it with a total of one parameter. The `reason` parameter from v11 has been merged into an object as the first parameter.
+The second parameter in `channel.createInvite()` was removed, leaving it with a total of one parameter. The `reason` parameter from v11 has merged into an object as the first parameter.
 
 ```diff
 - channel.createInvite({ temporary: true }, 'Just testing');
@@ -1082,15 +1082,15 @@ The second parameter in `channel.createInvite()` has been removed, leaving it wi
 
 #### GuildChannel#members
 
-`guildChannel.members` has been removed from `guildChannel.members` and added to `textChannel.members` and `voiceChannel.members`.
+`guildChannel.members` was removed from `guildChannel.members` and added to `textChannel.members` and `voiceChannel.members`.
 
 #### GuildChannel#messageNotifications
 
-`guildChannel.messageNotifications` has been removed entirely, along with all other user account-only properties.
+`guildChannel.messageNotifications` was removed entirely, along with all other user account-only properties.
 
 #### GuildChannel#muted
 
-`guildChannel.muted` has been removed entirely, along with all other user account-only properties.
+`guildChannel.muted` was removed entirely, along with all other user account-only properties.
 
 #### GuildChannel#overwritePermissions
 
@@ -1113,7 +1113,7 @@ The old functionality is moved to `guildChannel.updateOverwrite` and `guildChann
 
 #### GuildChannel#replacePermissionOverwrites
 
-`guildChannel.replacePermissionOverwrites` has been renamed to `guildChannel.overwritePermissions`. Overwrites and reason are no longer provided Through an options object, but directly as method arguments.
+`guildChannel.replacePermissionOverwrites` has been renamed to `guildChannel.overwritePermissions`. Overwrites and reason are no longer provided through an options object; they are now method arguments.
 
 ```diff
 - channel.replacePermissionOverwrites({
@@ -1207,7 +1207,7 @@ All of the methods to modify a member's roles have been moved to the `GuildMembe
 
 #### GuildMember#hasPermission
 
-The `explicit` parameter has been removed entirely.  The `checkAdmin` and `checkOwner` parameters have been changed into a single `options` object with those values as keys.
+The `explicit` parameter was removed entirely.  The `checkAdmin` and `checkOwner` parameters have merged into a single `options` object with those values as keys.
 
 ```diff
 - guildMember.hasPermission('MANAGE_MESSAGES', true, false, false);
@@ -1216,7 +1216,7 @@ The `explicit` parameter has been removed entirely.  The `checkAdmin` and `check
 
 #### GuildMember#hasPermissions
 
-`guildMember.hasPermissions()` has been removed in favor of `guildMember.hasPermission()`.
+`guildMember.hasPermissions()` was removed in favor of `guildMember.hasPermission()`.
 
 ```diff
 - guildMember.hasPermissions(['MANAGE_MESSAGES', 'MANAGE_ROLES']);
@@ -1229,7 +1229,7 @@ The `guildMember.lastMessage` property is now read-only.
 
 #### GuildMember#missingPermissions
 
-`guildMember.missingPermissions` has been removed entirely.
+`guildMember.missingPermissions` was removed entirely.
 
 #### GuildMember#\*\*\*mute
 
@@ -1256,7 +1256,7 @@ Just like the `textChannel#send***` methods, all the `.send***()` methods have b
 
 #### GuildMember#set\*\*\*
 
-Along with the rest of the voice-related methods and properties, the methods for moving, muting and deafening a member have been moved to the `VoiceState` class.
+Along with the rest of the voice-related methods and properties, the methods for moving, muting, and deafening a member have been moved to the `VoiceState` class.
 
 ```diff
 - guildMember.setDeaf(true);
@@ -1306,7 +1306,7 @@ Along with the rest of the voice-related methods and properties, the methods for
 
 #### Message#acknowledge
 
-`message.acknowledge()` has been removed entirely, along with all other user account-only properties and methods.
+`message.acknowledge()` was removed entirely, along with all other user account-only properties and methods.
 
 #### Message#clearReactions
 
@@ -1337,7 +1337,7 @@ In the same sense that the `channel.sendCode()` method was removed, `message.edi
 
 #### Message#hit
 
-`message.hit` has been removed entirely, as it was used for user-account only searches.
+`message.hit` was removed entirely, as it was used for user-account only searches.
 
 #### Message#is(Member)Mentioned
 
@@ -1355,11 +1355,11 @@ In the same sense that the `channel.sendCode()` method was removed, `message.edi
 
 ### MessageAttachment
 
-The `MessageAttachment` class constructor parameters have changed to reflect that `Attachment` has been removed and rolled into `MessageAttachment`.
+The `MessageAttachment` class constructor parameters have changed to reflect that `Attachment` was removed and rolled into `MessageAttachment`.
 
 #### MessageAttachment#client
 
-`attachment.client` has been removed entirely so an attachment can be constructed without needing the full client.
+`attachment.client` was removed entirely so an attachment can be constructed without needing the full client.
 
 #### MessageAttachment#filename
 
@@ -1371,7 +1371,7 @@ The `MessageAttachment` class constructor parameters have changed to reflect tha
 
 ### MessageCollector
 
-See the `Collector` section for most of the changes to `MessageCollector`, such as the new `dispose` method and event.  Changes to the `MessageCollector` constructor in particular are as follows:
+See the `Collector` section for most of the changes to `MessageCollector`, such as the new `dispose` method and event.  Changes to the `MessageCollector` constructor, in particular, are as follows:
 
 #### MessageCollector#channel
 
@@ -1379,7 +1379,7 @@ A `GroupDMChannel` is no longer able to be used for a collector, only `DMChannel
 
 #### MessageCollector#message
 
-The `messageCollector.message` event has been removed in favor of the generic `collector.on` event.
+The `messageCollector.message` event was removed in favor of the generic `collector.on` event.
 
 ### MessageCollectorOptions
 
@@ -1397,23 +1397,23 @@ The `max` and `maxMatches` properties of the `MessageCollector` class have been 
 
 ### MessageEmbed
 
-`MessageEmbed` now encompasses both the received embeds in a message and the constructor - the `RichEmbed` constructor was removed in favor of `MessageEmbed`.
+`MessageEmbed` now encompasses both the received embeds in a message and the constructor–the `RichEmbed` constructor was removed in favor of `MessageEmbed`.
 
 #### MessageEmbed#addBlankField
 
-`messageEmbed.addBlankField()` has been removed entirely. To add a blank field, use `messageEmbed.addField('\u200b', '\u200b')`.
+`messageEmbed.addBlankField()` was removed entirely. To add a blank field, use `messageEmbed.addField('\u200b', '\u200b')`.
 
 #### MessageEmbed#attachFiles
 
-`RichEmbed.attachFile()` has been removed in favor of `MessageEmbed.attachFiles()` method, which works for one or more files.
+`RichEmbed.attachFile()` was removed in favor of `MessageEmbed.attachFiles()` method, which works for one or more files.
 
 #### MessageEmbed#client
 
-`messageEmbed.client` has been removed entirely so a new embed can be constructed without needing the full client.
+`messageEmbed.client` was removed entirely, so a new embed can be constructed without needing the full client.
 
 #### MessageEmbed#message
 
-`messageEmbed.message` has been removed entirely so a new embed can be constructed without needing the full client.
+`messageEmbed.message` was removed entirely, so a new embed can be constructed without needing the full client.
 
 ### MessageMentions
 
@@ -1432,7 +1432,7 @@ The `max` and `maxMatches` properties of the `MessageCollector` class have been 
 
 #### MessageReaction#fetchUsers
 
-`messageReaction.fetchUsers()` has been transformed in the shape of a Manager.  In addition, the first parameter has been removed in favor of an object.
+`messageReaction.fetchUsers()` has transformed in the shape of a Manager.  In addition, the first parameter was removed in favor of an object.
 
 ```diff
 - reaction.fetchUsers(50);
@@ -1441,7 +1441,7 @@ The `max` and `maxMatches` properties of the `MessageCollector` class have been 
 
 #### MessageReaction#remove
 
-`messageReaction.remove()` has been transformed in the shape of a Manager.
+`messageReaction.remove()` has transformed in the shape of a Manager.
 
 ```diff
 - reaction.remove();
@@ -1454,11 +1454,11 @@ The `OAuth2Application` class has been renamed to `ClientApplication`.
 
 #### OAuth2Application#bot
 
-`application.bot` has been removed entirely.
+`application.bot` was removed entirely.
 
 #### OAuth2Application#flags
 
-`application.flags` has been removed entirely.
+`application.flags` was removed entirely.
 
 #### OAuth2Application#iconURL
 
@@ -1472,19 +1472,19 @@ The `OAuth2Application` class has been renamed to `ClientApplication`.
 
 #### OAuth2Application#redirectURLs
 
-`application.redirectURLs` has been removed entirely.
+`application.redirectURLs` was removed entirely.
 
 #### OAuth2Application#reset
 
-`application.reset()` has been removed entirely, as it was an endpoint for user accounts.
+`application.reset()` was removed entirely, as it was an endpoint for user accounts.
 
 #### OAuth2Application#rpcApplicationState
 
-`application.rpcApplicationState` has been removed entirely.
+`application.rpcApplicationState` was removed entirely.
 
 #### OAuth2Application#secret
 
-`application.secret` has been removed entirely.
+`application.secret` was removed entirely.
 
 ### PartialGuild(Channel)
 
@@ -1494,7 +1494,7 @@ The `PartialGuild` and `PartialGuildChannel` classes for use with invites have b
 
 #### Permissions#_member
 
-`permissions._member` has been removed entirely.
+`permissions._member` was removed entirely.
 
 #### Permissions#flags
 
@@ -1519,7 +1519,7 @@ The following permission flags have been renamed:
 
 #### Permissions#raw
 
-`permissions.raw` has been removed in favor of `permissions.bitfield`.
+`permissions.raw` was removed in favor of `permissions.bitfield`.
 
 ```diff
 - permissions.raw;
@@ -1528,13 +1528,13 @@ The following permission flags have been renamed:
 
 #### Permissions#resolve
 
-`permissions.resolve()` has been removed entirely.
+`permissions.resolve()` was removed entirely.
 
 ### Presence
 
 #### Presence#game
 
-`presence.game` has been removed in favor of the `Activity` class. It is now an array of Activities.
+`presence.game` was removed in favor of the `Activity` class. It is now an array of Activities.
 
 ```diff
 - presence.game;
@@ -1543,11 +1543,11 @@ The following permission flags have been renamed:
 
 ### RichEmbed
 
-The `RichEmbed` class has been removed in favor of the `MessageEmbed` class.
+The `RichEmbed` class was removed in favor of the `MessageEmbed` class.
 
 #### RichEmbed#attachFile
 
-`RichEmbed.attachFile()` has been removed in favor of `MessageEmbed.attachFiles()`.
+`RichEmbed.attachFile()` was removed in favor of `MessageEmbed.attachFiles()`.
 
 ```diff
 - new RichEmbed().attachFile('attachment://file-namme.png');
@@ -1601,7 +1601,7 @@ The properties of a role relating to its position have been renamed.  `role.calc
 
 #### Role#serialize
 
-`role.serialize()` has been removed as an extraneous helper method.
+`role.serialize()` was removed as an extraneous helper method.
 
 ```diff
 - role.serialize();
@@ -1610,7 +1610,7 @@ The properties of a role relating to its position have been renamed.  `role.calc
 
 #### Role#setPosition
 
-The optional, second parameter of the `role.setPosition()` method has been changed to an object; its keys are `relative` (a boolean) and `reason` (a string).
+The optional second parameter of the `role.setPosition()` method has changed to an object; its keys are `relative` (a boolean) and `reason` (a string).
 
 ```diff
 - role.setPosition(3, true);
@@ -1623,7 +1623,7 @@ The `death` and `spawn` events for a shard can also include a `Worker` in additi
 
 #### Shard#args
 
-`shard.args` is now a property of the shard and has been removed as a parameter from the constructor.
+`shard.args` is now a property of the shard and was removed as a parameter from the constructor.
 
 #### Shard#respawn
 
@@ -1639,17 +1639,17 @@ In order to make use of workers introduced in Node v10.5.0, a new `mode` paramet
 
 #### ShardClientUtil#id
 
-`shardClientUtil.id` has been removed and replaced with `shardClientUtil.ids`, which is an array of shard IDs of the current client.
+`shardClientUtil.id` was removed and replaced with `shardClientUtil.ids`, which is an array of shard IDs of the current client.
 
 #### ShardClientUtil#singleton
 
-`shardCLientUtil` now has a second parameter `mode` to specify whether it's a `process` or `worker`.
+`shardCLientUtil` now has a second parameter, `mode`, to specify whether it's a `process` or `worker`.
 
 ### ShardingManager
 
 #### ShardingManger#_spawn
 
-The private method `shardingManager._spawn()` has been removed entirely.
+The private method `shardingManager._spawn()` was removed entirely.
 
 #### ShardingManager#createShard
 
@@ -1657,19 +1657,19 @@ The `id` parameter is now optional and defaults to `this.shards.size`.
 
 #### ShardingManager#launch
 
-The `shardingManager.launch` event has been removed entirely and replaced with the `shardingManager.shardCreate` event.
+The `shardingManager.launch` event was removed entirely and replaced with the `shardingManager.shardCreate` event.
 
 #### ShardingManager#message
 
-The `shardingManager.message` event has been removed from this class and is now on the `Shard` class.
+The `shardingManager.message` event was removed from this class and is now on the `Shard` class.
 
 #### ShardingManager#respawnAll
 
-The `waitForReady` parameter has been renamed to `spawnTimeout`, and the `currentShardIndex` parameter has been removed entirely.
+The `waitForReady` parameter was renamed to `spawnTimeout`, and the `currentShardIndex` parameter was removed entirely.
 
 #### ShardingManager#spawn
 
-A third, optional parameter `spawnTimeout` has been added, specifying how long to wait in miliseconds to wait until the `Client` is ready; the default is `30000`.
+A third, optional parameter, `spawnTimeout`, was added, specifying how long to wait in milliseconds to wait until the `Client` is ready; the default is `30000`.
 
 ### StreamDispatcher
 
@@ -1677,21 +1677,21 @@ A third, optional parameter `spawnTimeout` has been added, specifying how long t
 
 #### StreamDispatcher#destroyed
 
-`streamDispatcher.destroyed` has been removed entirely.
+`streamDispatcher.destroyed` was removed entirely.
 
 #### StreamDispatcher#end
 
-The `end` event has been removed. Please use the native `finish` event as documented [here](https://nodejs.org/api/stream.html#stream_event_finish).
+The `end` event was removed. Please use the native `finish` event as documented [here](https://nodejs.org/api/stream.html#stream_event_finish).
 
 The `end` method is now inherited from `WritableStream` as documented [here](https://nodejs.org/api/stream.html#stream_writable_end_chunk_encoding_callback).
 
 #### StreamDispatcher#passes
 
-`streamDispatcher.passes` has been removed entirely.
+`streamDispatcher.passes` was removed entirely.
 
 #### StreamDispatcher#pause
 
-The `streamDispatcher.pause` method now takes an optional parameter `silence`, to specify whether to play silence while paused to prevent audio glitches.  Its value is a `boolean` and defaults to `false`.
+The `streamDispatcher.pause` method now takes an optional parameter `silence` to specify whether to play silence while paused to prevent audio glitches.  Its value is a `boolean` and defaults to `false`.
 
 ```diff
 - dispatcher.pause();
@@ -1700,7 +1700,7 @@ The `streamDispatcher.pause` method now takes an optional parameter `silence`, t
 
 #### StreamDispatcher#stream
 
-The `streamDispatcher.stream` property has been removed entirely and has been replaced with the `streamDispatcher.broadcast` property, which is the broadcast controlling the stream, if any.
+The `streamDispatcher.stream` property was removed and replaced with `streamDispatcher.broadcast`, which is the broadcast controlling the stream (if any).
 
 #### StreamDispatcher#time
 
@@ -1710,7 +1710,7 @@ The `streamDispatcher.time` property has been renamed to `streamDispatcher.strea
 
 #### TextChannel#acknowledge
 
-Has been removed entirely, along with all other user account-only methods and properties.
+`textChannel.acknowledge()` was removed entirely, along with all other user account-only methods and properties.
 
 #### Textchannel#awaitMessages
 
@@ -1733,7 +1733,7 @@ All parameters have been removed and reconfigured into a single object.
 
 #### TextChannel#createCollector
 
-`textChannel.createCollector()` has been removed entirely in favor of `textChannel.createMessageCollector()`.
+`textChannel.createCollector()` was removed entirely in favor of `textChannel.createMessageCollector()`.
 
 See [this section](/additional-info/changes-in-v12.md#messagecollector) for changes to the `MessageCollector` class.
 
@@ -1765,7 +1765,7 @@ This method is now private.
 
 #### TextChannel#search
 
-This method has been removed, along with all other user account-only methods.
+This method was removed, along with all other user account-only methods.
 
 #### TextChannel#send\*\*\*
 
@@ -1833,11 +1833,11 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 
 #### User#addFriend
 
-`user.addFriend()` has been removed entirely, along with all other user account-only methods.
+`user.addFriend()` was removed entirely, along with all other user account-only methods.
 
 #### User#avatarURL
 
-`user.avatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If the `dynamic` option is provided you will receive a `.gif` URL if the image is animated, otherwise it will fall back to the specified `format` or its default `.webp` if none is provided.
+`user.avatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If you provide the `dynamic` option, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp`.
 
 ```diff
 - user.avatarURL;
@@ -1847,11 +1847,11 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 
 #### User#block
 
-`user.block()` has been removed entirely, along with all other user account-only methods.
+`user.block()` was removed entirely, along with all other user account-only methods.
 
 #### User#displayAvatarURL
 
-`user.displayAvatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If the `dynamic` option is provided you will receive a `.gif` URL if the image is animated, otherwise it will fall back to the specified `format` or its default `.webp` if none is provided.
+`user.displayAvatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If you provide the `dynamic` option, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp`.
 
 ```diff
 - user.displayAvatarURL;
@@ -1861,19 +1861,19 @@ All the `.send***()` methods have been removed in favor of one general `.send()`
 
 #### User#fetchProfile
 
-`user.fetchProfile()` has been removed entirely, along with all other user account-only methods.
+`user.fetchProfile()` was removed entirely, along with all other user account-only methods.
 
 #### User#note
 
-`user.note` has been removed entirely, along with all other user account-only methods.
+`user.note` was removed entirely, along with all other user account-only methods.
 
 #### User#removeFriend
 
-`user.removeFriend()` has been removed entirely, along with all other user account-only methods.
+`user.removeFriend()` was removed entirely, along with all other user account-only methods.
 
 #### User#setNote
 
-`user.setNote()` has been removed entirely, along with all other user account-only methods.
+`user.setNote()` was removed entirely, along with all other user account-only methods.
 
 #### User#send\*\*\*
 
@@ -1881,15 +1881,15 @@ Just like the `textChannel#send***` methods, all the `.send***()` methods have b
 
 #### User#unblock
 
-`user.unblock()` has been removed entirely, along with all other user account-only methods.
+`user.unblock()` was removed entirely, along with all other user account-only methods.
 
 ### UserConnection
 
-The `UserConnection` class has been removed entirely, along with all other user account-only properties.
+The `UserConnection` class was removed entirely, along with all other user account-only properties.
 
 ### UserProfile
 
-The `UserProfile` class has been removed entirely, along with all other user account-only properties.
+The `UserProfile` class was removed entirely, along with all other user account-only properties.
 
 ### VoiceBroadcast
 
@@ -1897,11 +1897,11 @@ The `UserProfile` class has been removed entirely, along with all other user acc
 
 #### VoiceBroadcast#currentTranscoder
 
-This property has been removed entirely.
+This property was removed entirely.
 
 #### VoiceBroadcast#destroy
 
-This method has been removed entirely.
+This method was removed entirely.
 
 #### VoiceBroadcast#dispatchers
 
@@ -1914,7 +1914,7 @@ This property has been renamed to `subscribers` and is no longer read-only.
 
 #### VoiceBroadcast#end
 
-This event has been removed from the `VoiceBroadcast` class and is implemented from the `WritableStream` class from Node, which `BroadcastDispatcher` implements.
+This event was removed from the `VoiceBroadcast` class and is implemented from the `WritableStream` class from Node, which `BroadcastDispatcher` implements.
 
 #### VoiceBroadcast#error
 
@@ -1930,7 +1930,7 @@ All `.play***()` methods have been removed and transformed into a single `.play(
 
 #### VoiceBroadcast#prism
 
-This property has been removed entirely.
+This property was removed entirely.
 
 #### VoiceBroadcast#resume
 
@@ -1938,7 +1938,7 @@ This method has been moved from the `VoiceBroadcast` class to the `BroadcastDisp
 
 #### VoiceBroadcast#warn
 
-This event has been removed entirely.
+This event was removed entirely.
 
 ### VoiceConnection
 
@@ -1955,7 +1955,7 @@ The `VoiceConnection` class is now accessed via the respective `VoiceState` clas
 The `VoiceConnection` class also implements the new `PlayInterface` class in addition to extending `EventEmitter` from Node.
 
 #### VoiceConnection#createReceiver
-`voiceconnection.createReceiver()` has been removed, there is now a single receiver that be accessed from `voiceConnection.receiver`
+`voiceconnection.createReceiver()` was removed, there is now a single receiver that be accessed from `voiceConnection.receiver`
 
 #### VoiceConnection#play\*\*\*
 
@@ -1963,15 +1963,15 @@ All `connection.play***()` methods have been removed in favor of one, flexible `
 
 #### VoiceConnection#prism
 
-This property has been removed entirely.
+This property was removed entirely.
 
 #### VoiceConnection#receivers
 
-This property has been removed entirely.
+This property was removed entirely.
 
 #### VoiceConnection#sendVoiceStateUpdate
 
-This method has been removed entirely.
+This method was removed entirely.
 
 #### VoiceConnection#set\*\*\*
 
@@ -1991,43 +1991,43 @@ Both the `receiver.createOpusStream()` and `receiver.createPCMStream()` methods 
 
 #### VoiceReceiver#destroy
 
-This method has been removed entirely, refer to `StreamDispatcher#destroy` for documentation.
+This method was removed entirely; refer to `StreamDispatcher#destroy` for documentation.
 
 #### VoiceReceiver#destroyed
 
-This property has been removed entirely.
+This property was removed entirely.
 
 #### VoiceReceiver#opus
 
-This event has been removed entirely.
+This event was removed entirely.
 
 #### VoiceReceiver#pcm
 
-This event has been removed entirely.
+This event was removed entirely.
 
 #### VoiceReceiver#recreate
 
-This method has been removed entirely.
+This method was removed entirely.
 
 #### VoiceReceiver#voiceConnection
 
-This property has been removed entirely.
+This property was removed entirely.
 
 #### VoiceReceiver#warn
 
-This event has been removed entirely, use the `receiver.debug` event instead.
+This event was removed entirely; use the `receiver.debug` event instead.
 
 ### VoiceRegion
 
 #### VoiceRegion#sampleHostname
 
-This property has been removed entirely.
+This property was removed entirely.
 
 ### Webhook
 
 #### Webhook#avatarURL
 
-`webhook.avatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If the `dynamic` option is provided you will receive a `.gif` URL if the image is animated, otherwise it will fall back to the specified `format` or its default `.webp` if none is provided.
+`webhook.avatarURL` is now a method, as opposed to a property. It also allows you to determine the file format and size to return. If you provide the `dynamic` option, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp`.
 
 ```diff
 - webhook.avatarURL;
@@ -2099,7 +2099,7 @@ Similar to `TextChannel#members` and `VoiceChannel#members`, `CategoryChannel#me
 
 ### ClientApplication
 
-This is a not a new class; it was formerly called `OAuth2Application` in v11.  Changes and deletions to methods and properties are covered above (link needed).  Additions are as follow:
+This is not a new class; it was formerly called `OAuth2Application` in v11.  Changes and deletions to methods and properties are covered above (link needed).  Additions are as follow:
 
 #### ClientApplication#cover(Image)
 
@@ -2111,13 +2111,13 @@ ClientApplication.coverImage({ width: 1024, height: 1024 });
 
 #### ClientApplication#fetchAssets
 
-`ClientApplication.fetchAssets()` returns a promise that resolves into an array of `ClientAsset` objects, each of which contains `id`, `name` and `type` keys.
+`ClientApplication.fetchAssets()` returns a Promise that resolves into an array of `ClientAsset` objects, each of which contains `id`, `name` and `type` keys.
 
 ### ClientOptions
 
 #### ClientOptions#disableEveryone
 
-`clientOptions.disableEveryone` has been removed and replaced with `clientOptions.disableMentions`. The former was a best effort approach to escape the everyone mention before sending it off to discord. The API has since introduced a way to deal with this properly on their end which we make use of in version 12 through `clientOptions.disableMentions`.
+`clientOptions.disableEveryone` was removed and replaced with `clientOptions.disableMentions`. The former was a best-effort approach to escape the everyone mention before sending it off to discord. The API has since introduced a way to deal with this properly on their end, which we make use of in version 12 through `clientOptions.disableMentions`.
 
 ```diff
 - const client = new Discord.Client({ disableEveryone: true });
@@ -2126,7 +2126,7 @@ ClientApplication.coverImage({ width: 1024, height: 1024 });
 
 #### ClientOptions#partials
 
-`clientOptions.partials` has been added to allow for partial structures - see the `Partials` section of the guide for more details.
+`clientOptions.partials` was added to allow for partial structures–see the `Partials` section of the guide for more details.
 
 #### ClientOptions#retry
 
@@ -2223,7 +2223,7 @@ Two properties have been added, `dmChannel#lastPinAt` (read-only) and `dmChannel
 
 #### GuildChannel#createOverwrite
 
-Creates or update an existing overwrite for a user or role.  The second parameter is a `PermissionOverwriteOption` object; the third, optional parameter is `reason`, a string.
+Creates or updates an existing overwrite for a user or role.  The second parameter is a `PermissionOverwriteOption` object; the third optional parameter is `reason`, a string.
 
 ```js
 channel.createOverwrite(message.author, {
@@ -2237,7 +2237,7 @@ channel.createOverwrite(message.author, {
 
 #### GuildChannel#updateOverwrite
 
-Creates or update an existing overwrite for a user or role.  The second parameter is a `PermissionOverwriteOption` object; the third, optional parameter is `reason`, a string.
+Creates or updates an existing overwrite for a user or role.  The second parameter is a `PermissionOverwriteOption` object; the third optional parameter is `reason`, a string.
 
 ```js
 channel.updateOverwrite(message.author, {
@@ -2302,7 +2302,7 @@ channel.updateOverwrite(message.author, {
 
 ### PlayInterface
 
-This is a new class to play audio over `VoiceConnection`s and `VoiceBroadcast`s.
+This is a new class to play audio over `VoiceConnection`'s and `VoiceBroadcast`'s.
 
 ### Presence
 
@@ -2320,29 +2320,29 @@ The new `presence.clientStatus` property returns an object with three keys: `web
 
 #### Presence#user(ID)
 
-`presence.user` (read-only) and `presence.userID` are properties to represent a `User` and its ID that the presence belongs to.  The former can be null if the `User` is not cached.
+`presence.user` (read-only) and `presence.userID` are properties to represent a `User` and its ID that the presence belongs to.  The former can be `null` if the `User` is not cached.
 
 ### ReactionCollector
 
 #### ReactionCollector#empty
 
-`reactionCollector.empty()` has been added as a method to remove all collected reactions from the collector.
+`reactionCollector.empty()` was added as a method to remove all collected reactions from the collector.
 
 #### ReactionCollector#key
 
 #### ReactionCollector#remove
 
-The new `remove` event emits when a collected reaction is un-reacted, if the `dispose` option is set to `true`
+The new `remove` event emits when a collected reaction is un-reacted if the `dispose` option is set to `true`.
 
 ### Shard
 
 #### Shard#_evals
 
-The private property `_evals` has been added to map ongoing promises for calls to `shard.eval()`.
+The private property `_evals` was added to map ongoing Promises for calls to `shard.eval()`.
 
 #### Shard#_fetches
 
-The private property `_fetches` has been added to map ongoing promises for calls to `shard.fetchClientValues()`.
+The private property `_fetches` was added to map ongoing Promises for calls to `shard.fetchClientValues()`.
 
 #### Shard#worker
 
@@ -2356,11 +2356,11 @@ The message port for the primary process, if the mode of the `ShardClientUtil` i
 
 #### ShardClientUtil#respawnAll
 
-`shardClientUtil.respawnAll()` will request a respawn of all shards.  It has three parameters, all of which are optional: `shardDelay`, how to long to wait in milliseconds between each shard; `respawnDelay`, how long to wait between killing the shard's process or worker and restarting it; and `spawnTimeout`, how long to wait in milliseconds for a shard to become ready before moving to the next shard.
+`shardClientUtil.respawnAll()` will request a respawn of all shards.  It has three parameters, all of which are optional: `shardDelay`, how long to wait in milliseconds between each shard; `respawnDelay`, how long to wait between killing the shard's process or worker and restarting it; and `spawnTimeout`, how long to wait in milliseconds for a shard to become ready before moving to the next shard.
 
 ### Speaking
 
-The `Speaking` class has been added as a data structure to interact with the bit fields present when a `GuildMember` is speaking, or in the `VoiceConnection#speaking` event.
+The `Speaking` class has been added as a data structure to interact with the bit fields present when a `GuildMember` is speaking or in the `VoiceConnection#speaking` event.
 
 ### StreamDispatcher
 
@@ -2368,7 +2368,7 @@ The `Speaking` class has been added as a data structure to interact with the bit
 
 #### StreamDispatcher#paused\*\*\*
 
-Two new properties have been added, `pausedSince` and `pausedTime`, to represent the timestamp when the stream was paused, and how long it's been paused for in milliseconds, respectively.
+Two new properties have been added, `pausedSince` and `pausedTime`, to represent the timestamp when the stream was paused and how long it's been paused for in milliseconds, respectively.
 
 #### StreamDispatcher#set\*\*\*
 
@@ -2382,7 +2382,7 @@ Several new methods have been added to adjust various aspects of the stream.  Me
 
 #### StreamDispatcher#volumeChange
 
-A new event listener, it is emitted when a volume change in the stream is detected.
+A new event listener; emitted when a volume change in the stream is detected.
 
 ```js
 dispatcher.on('volumeChange', (oldVolume, newVolume) => {
@@ -2428,7 +2428,7 @@ This new method resolves a `ColorResolvable` into a color number.
 
 #### Util#resolveString
 
-THis new method resolves a `StringResolvable` into a string.
+This new method resolves a `StringResolvable` into a string.
 
 #### Util#Constants
 
@@ -2439,13 +2439,13 @@ THis new method resolves a `StringResolvable` into a string.
 
 #### VoiceBroadcast#dispatcher
 
-This new property represents the primary dispatcher - if any - that controls everything played by subscribed dispatchers.
+This new property represents the primary dispatcher (if any) that controls everything played by subscribed dispatchers.
 
 ### VoiceChannel
 
 #### VoiceChannel#editable
 
-This new property returns a `boolean` value whether the client can edit the `VoiceChannel` or not, eg. any change to the channel besides moving it via `channel.setPosition()`.  It differs from `channel.manageable` in that it also checks if the client has the `CONNECT` permissions for that particular channel.
+This new property returns a `boolean` value whether the client can edit the `VoiceChannel` or not, e.g., any change to the channel besides moving it via `channel.setPosition()`.  It differs from `channel.manageable` in that it also checks if the client has the `CONNECT` permissions for that particular channel.
 
 ### VoiceReceiver
 
@@ -2465,11 +2465,11 @@ This new property returns a `boolean` value whether the client can edit the volu
 
 #### Webhook#url
 
-This new property returns a `string` representing the URL of the webhook, and is read-only.
+This new property returns a `string` representing the URL of the webhook and is read-only.
 
 ### WebSocketManager
 
-This new class represents the manager of the websocket connection for the client.
+This new class represents the manager of the WebSocket connection for the client.
 
 ### WebSocketOptions
 
@@ -2479,4 +2479,4 @@ This new parameter adds support for Intents, controlling which events you receiv
 
 ### WebSocketShard
 
-This new class represents a `Shard`'s websocket connection.
+This new class represents a `Shard`'s WebSocket connection.

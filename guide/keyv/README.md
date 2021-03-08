@@ -18,7 +18,7 @@ npm install --save @keyv/postgres
 npm install --save @keyv/mysql
 ```
 
-Now that Keyv and any necessary drivers are installed, create an instance of Keyv.
+Create an instance of Keyv once you've installed Keyv and any necessary drivers.
 
 <!-- eslint-skip -->
 ```js
@@ -39,7 +39,7 @@ Make sure to handle connection errors.
 keyv.on('error', err => console.error('Keyv connection error:', err));
 ```
 
-For more detailed setup, check out the [Keyv readme](https://github.com/lukechilds/keyv/blob/master/README.md).
+For a more detailed setup, check out the [Keyv readme](https://github.com/lukechilds/keyv/blob/master/README.md).
 
 ## Usage
 
@@ -63,7 +63,7 @@ Keyv exposes a familiar [Map](https://developer.mozilla.org/en-US/docs/Web/JavaS
 
 ## Application
 
-Although Keyv can be used in any scenario where you need key-value data, we will focus on setting up a per-guild prefix configuration using Sqlite.
+Although Keyv can assist in any scenario where you need key-value data, we will focus on setting up a per-guild prefix configuration using Sqlite.
 
 ::: tip
 This section will still work with any provider supported by Keyv. We recommend PostgreSQL for larger applications.
@@ -82,7 +82,7 @@ const globalPrefix = '.';
 
 ### Command handler
 
-This guide uses a very basic command handler with some added complexity to allow for multiple prefixes. For a more robust command handler, look at the [command handling](/command-handling/) guide.
+This guide uses a very basic command handler with some added complexity to allow for multiple prefixes. Look at the [command handling](/command-handling/) guide for a more robust command handler.
 
 ```js
 client.on('message', async message => {
@@ -117,7 +117,7 @@ client.on('message', async message => {
 
 ### Prefix command
 
-Now that you have a command handler, make a command to allow people to use your prefix system.
+Now that you have a command handler, you can make a command to allow people to use your prefix system.
 
 <!-- eslint-skip -->
 ```js
@@ -132,7 +132,7 @@ if (command === 'prefix') {
 }
 ```
 
-You will probably want to setup additional validation such as required permissions and maximum prefix length.
+You will probably want to set up additional validation, such as required permissions and maximum prefix length.
 
 ### Usage
 
@@ -159,7 +159,7 @@ You will probably want to setup additional validation such as required permissio
 
 ## Next steps
 
-Keyv can be used in a variety of other applications, such as guild settings; simply create another instance with a different [namespace](https://github.com/lukechilds/keyv#namespaces) for each setting. Additionally, it can be [extended](https://github.com/lukechilds/keyv#third-party-storage-adapters) to work with whatever storage backend you prefer.
+Various other applications can use Keyv, such as guild settings; create another instance with a different [namespace](https://github.com/lukechilds/keyv#namespaces) for each setting. Additionally, it can be [extended](https://github.com/lukechilds/keyv#third-party-storage-adapters) to work with whatever storage backend you prefer.
 
 Check out the [Keyv repository](https://github.com/lukechilds/keyv) for more information.
 

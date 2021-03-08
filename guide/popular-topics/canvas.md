@@ -16,7 +16,7 @@ Be sure that you're familiar with things like [async/await](/additional-info/asy
 
 ### Windows
 
-You will need a package called Windows Build Tools. You may install it with npm with the following command: `npm i --global --production windows-build-tools`, or with yarn by running the following: `yarn global add --production windows-build-tools`. It is also bundled with Chocolatey, should you choose that installation path. Afterwards, you should follow the instructions detailed [here](https://github.com/Automattic/node-canvas/wiki/Installation:-Windows). Additionally, make sure Node and Cairo are **both** either 32-bit or 64-bit; having a 32-bit version of one and a 64-bit version of the other will cause errors.
+You will need a package called Windows Build Tools. You may install it with npm with the following command: `npm i --global --production windows-build-tools`, or with Yarn by running the following: `yarn global add --production windows-build-tools`. It is also bundled with Chocolatey, should you choose that installation path. Afterward, you should follow the instructions detailed [here](https://github.com/Automattic/node-canvas/wiki/Installation:-Windows). Additionally, make sure Node and Cairo are **both** either 32-bit or 64-bit; having a 32-bit version of one and a 64-bit version of the other will cause errors.
 
 If you are *still* unable to install Canvas, you might want to consider installing [Microsoft Visual Studio 2015](https://www.visualstudio.com/vs/older-downloads/).
 
@@ -26,7 +26,7 @@ You can run one of the commands listed [here](https://github.com/Automattic/node
 
 ### Package installation
 
-After installing all the necessary software, run `npm i canvas` if you use npm, or `yarn add canvas` if you use Yarn.
+After installing all the necessary software, run `npm i canvas` if you use npm or `yarn add canvas` if you use Yarn.
 
 ## Getting started
 
@@ -79,7 +79,7 @@ client.login('your-token-goes-here');
 
 </branch>
 
-To make testing this feature much easier, you can add a simple command that'll "fake" a new member joining.
+To make testing this feature much more manageable, you can add a simple command that'll "fake" a new member joining.
 
 
 <branch version="11.x">
@@ -105,11 +105,11 @@ client.on('message', message => {
 
 </branch>
 
-What this will do is trigger the `guildMemberAdd` event while passing in the message author's GuildMember object. Of course, you should remove this command once you're doing adding this feature to your actual bot.
+This will trigger the `guildMemberAdd` event while passing in the message author's GuildMember object. Of course, you should remove this command once you add this feature to your actual bot.
 
 ### Basic image loading
 
-The end goal will be to display the user's avatar, username, and a simple "Welcome!" message when they join. After importing the Canvas module and initializing it, you should load the images. With Canvas, you have to specify where the image comes from first, naturally, and then specify how it gets loaded into the actual Canvas using `ctx`, which is what you will use to interact with Canvas.
+The end goal will be to display the user's avatar, username, and a simple "Welcome!" message when they join. After importing the Canvas module and initializing it, you should load the images. With Canvas, you have to specify where the image comes from first, naturally, and then specify how it gets loaded into the actual Canvas using `ctx`, which you will use to interact with Canvas.
 
 ::: tip
 `node-canvas` works almost identical to HTML5 Canvas. You can read the HTML5 Canvas tutorials on [w3Schools](https://www.w3schools.com/html/html5_canvas.asp) and [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) for more information later!
@@ -156,7 +156,7 @@ client.on('guildMemberAdd', async member => {
 
 </branch>
 
-Now, you need to load the image you want to use into Canvas. In order to have more sufficient coverage, we'll first show you how to load a basic image from a local directory. We'll be using [this image](https://github.com/discordjs/guide/blob/master/guide/images/canvas.jpg) as the background in the welcome image, but you can use whatever you want. Be sure to download the file, name it `wallpaper.jpg`, and save it inside the same directory as your main bot file.
+Now, you need to load the image you want to use into Canvas. To have sufficient coverage, we'll first show you how to load a basic image from a local directory. We'll be using [this image](https://github.com/discordjs/guide/blob/master/guide/images/canvas.jpg) as the background in the welcome image, but you can use whatever you want. Be sure to download the file, name it `wallpaper.jpg`, and save it inside the same directory as your main bot file.
 
 <branch version="11.x">
 
@@ -206,12 +206,12 @@ client.on('guildMemberAdd', async member => {
 ![Basic canvas preview](~@/images/8CQvVRV.png)
 
 ::: tip
-If you get an error such as `Error: error while reading from input stream`, then the provided path to the file was incorrect.
+If you get an error such as `Error: error while reading from input stream`, then the file's provided path was incorrect.
 :::
 
 ### Manipulating images
 
-Next, let's place a border around the image, for the sake of demonstration purposes.
+Next, let's place a border around the image for the sake of demonstration purposes.
 
 <branch version="11.x">
 
@@ -266,7 +266,7 @@ client.on('guildMemberAdd', async member => {
 
 ![Image](~@/images/2vsIPEP.png)
 
-A bit plain, right? Fear not, for you have a bit more to do until you reach completion. Since the goal of guide page is focused more on actual code than design, let's just place a basic square shaped avatar for now on the left side of the image. In interest of coverage, you will also make it a circle afterwards.
+A bit plain, right? Fear not, for you have a bit more to do until you reach completion. Since this guide page's goal is focused more on actual code than design, let's place a basic square-shaped avatar for now on the left side of the image. In the interest of coverage, you will also make it a circle afterward.
 
 <branch version="11.x">
 
@@ -327,7 +327,7 @@ client.on('guildMemberAdd', async member => {
 
 ![Image](~@/images/UCndZMo.png)
 
-Works well, but the avatar image itself seems a bit stretched out. Let's remedy that.
+It works well, but the avatar image itself seems a bit stretched out. Let's remedy that.
 
 <branch version="11.x">
 
@@ -388,7 +388,7 @@ client.on('guildMemberAdd', async member => {
 
 The purpose of this small section is to demonstrate that working with Canvas is essentially a hit-and-miss workflow where you fiddle with properties until they work just right.
 
-Since we covered how to load external images and fix dimensions, let's turn the avatar into a circle to improve the overall style of the image.
+Since we covered how to load external images and fix dimensions, let's turn the avatar into a circle to improve the image's overall style.
 
 <branch version="11.x">
 
@@ -469,7 +469,7 @@ You can read more about `ctx.arc()` on [w3schools](https://www.w3schools.com/tag
 
 ### Adding in text
 
-Now, let's quickly go over adding text to your image. This will be helpful to make the purpose of this image very clear, since currently it's just an avatar floating on a starry background that comes out of nowhere.
+Now, let's quickly go over adding text to your image. This will help make the purpose of this image apparent since currently, it's just an avatar floating on a starry background that comes out of nowhere.
 
 <branch version="11.x">
 
@@ -671,7 +671,7 @@ After adjustment:
 
 ![After adjustment](~@/images/Ja4Ywf4.png)
 
-As a nice finishing touch, let's move the welcome text inside the image itself instead of adding it outside.
+Let's move the welcome text inside the image itself instead of adding it outside as a nice finishing touch.
 
 <branch version="11.x">
 

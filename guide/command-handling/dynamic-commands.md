@@ -1,23 +1,23 @@
 # Dynamic commands
 
 ::: tip
-This page is a follow-up and bases its code off of [the previous page](/command-handling/).
+This page is a follow-up and bases its code on [the previous page](/command-handling/).
 :::
 
 ## How it works
 
-Now that you have a Collection of all our commands, you can use them easily! But before diving straight into it, it'd be a good idea to familiarize yourself with how you'll turn these basic if statements into something much more dynamic and robust. So let's continue with 1 more if statement example, and then we'll move onto the real stuff.
+Now that you have a Collection of all our commands, you can use them quickly! But before diving straight into it, it'd be a good idea to familiarize yourself with how you'll turn these basic if statements into something much more dynamic and robust. Let's continue with one more if statement example, and then we'll move onto the real stuff.
 
-As always, the red is what you'll remove and the green is what you'll replace it with.
+As always, the red is what you'll remove, and the green is the replacement.
 
 ```diff
 if (command === 'ping') {
--	message.channel.send('Pong.');
-+	client.commands.get('ping').execute(message, args);
+-   message.channel.send('Pong.');
++   client.commands.get('ping').execute(message, args);
 }
 ```
 
-You `.get()` the ping command and call its `.execute()` method while passing in the `message` and `args` variables as the method arguments. Instead of putting your ping command code directly in the if statement, you can call it directly like that instead. Granted, this version is actually longer than what you had before for your ping command, but commands usually aren't that short.
+You `.get()` the ping command and call its `.execute()` method while passing in the `message` and `args` variables as the method arguments. Instead of putting your ping command code in the if statement, you can call it directly like that instead. This version is longer than what you had before for your ping command, but commands usually aren't that short.
 
 So, if you wanted to (assuming that you've copied & pasted all of your commands into their own files by now), this could be your entire message event:
 
@@ -35,7 +35,7 @@ client.on('message', message => {
 	} else if (command === 'server') {
 		client.commands.get('server').execute(message, args);
 	}
-	// do the same for the rest of the commands...
+	// do the same for the rest of the commands
 });
 ```
 
@@ -56,11 +56,11 @@ try {
 }
 ```
 
-If there isn't a command with that name, exit early. If there is, `.get()` the command and call its `.execute()` method while passing in your `message` and `args` variables as the method arguments. In case something goes wrong, log the error and report back to the member to let them know.
+If there isn't a command with that name, exit early. If there is, `.get()` the command, call its `.execute()` method, and pass in your `message` and `args` variables as its arguments. In case something goes wrong, log the error and report back to the member to let them know.
 
-... and that's it! Whenever you want to add a new command, you simply make a new file in your `commands` directory, name it what you want, and then do what you did for the other commands.
+And that's it! Whenever you want to add a new command, you make a new file in your `commands` directory, name it what you want, and then do what you did for the other commands.
 
-In the next chapter, we'll be going through how to implement some basic features into your brand new command handler. Currently, it's hardly a command "handler" at this point; it's a command loader and executor, if you wish to see it that way. You'll learn how to implement some new features and the logic behind them, such as:
+In the next chapter, we'll be going through how to implement some basic features into your brand new command handler. Currently, it's hardly a command "handler" at this point; it's a command loader and executor if you wish to see it that way. You'll learn how to implement some new features and the logic behind them, such as:
 
 * Command aliases
 * Cooldowns

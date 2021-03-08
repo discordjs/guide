@@ -4,7 +4,7 @@
 
 Now that you've installed Node, discord.js, and hopefully a linter, you're almost ready to start coding! The next step you need to take is setting up an actual Discord bot application via Discord's website.
 
-It's incredibly easy to create one. The steps you need to take are as follows:
+It's effortless to create one. The steps you need to take are as follows:
 
 1. Open [the Discord developer portal](https://discord.com/developers/applications) and log into your account.
 2. Click on the "New Application" button.
@@ -18,23 +18,23 @@ You can optionally enter a name, description, and avatar for your application he
 
 ![Create a bot UI](~@/images/create-bot.png)
 
-Click the "Add Bot" button on the right and confirm the pop-up window by clicking "Yes, do it!". Congratulations, you're now the proud owner of a shiny new Discord bot! You're not quite done, though.
+Click the "Add Bot" button on the right and confirm the pop-up window by clicking "Yes, do it!". Congratulations, you're now the proud owner of a shiny new Discord bot! You're not entirely done, though.
 
 ## Your token
 
 ::: danger
-This section is very important, so pay close attention. It explains what your bot token is, as well as the security aspects of it.
+This section is critical, so pay close attention. It explains what your bot token is, as well as the security aspects of it.
 :::
 
 After creating a bot user, you'll see a section like this:
 
 ![Bot application](~@/images/created-bot.png)
 
-In this panel, you can give your bot a snazzy avatar, set its username, and make it public or private. You can access your token in this panel as well, either by revealing it or simply pressing the "Copy" button. When we ask you to paste your token somewhere, this is the value that you need to put in. Don't worry if you do happen to lose it at some point; you can always come back to this page and copy it again.
+In this panel, you can give your bot a snazzy avatar, set its username, and make it public or private. You can access your token in this panel as well, either by revealing it or pressing the "Copy" button. When we ask you to paste your token somewhere, this is the value that you need to put in. Don't worry if you do happen to lose it at some point; you can always come back to this page and copy it again.
 
 ### What is a token, anyway?
 
-A token is essentially your bot's password; it's what your bot uses to login to Discord. With that being said, **it is vital that you do not ever share this token with anybody, purposely or accidentally**. If someone does manage to get a hold of your token, they can use your bot as if it were theirs—this means they can perform malicious acts with it.
+A token is essentially your bot's password; it's what your bot uses to login to Discord. With that said, **it is vital that you do not ever share this token with anybody, purposely or accidentally**. If someone does manage to get a hold of your token, they can use your bot as if it were theirs—this means they can perform malicious acts with it.
 
 Tokens look like this: `NzkyNzE1NDU0MTk2MDg4ODQy.X-hvzA.Ovy4MCQywSkoMRRclStW4xAYK7I` (don't worry, we immediately reset this token before even posting it here!). If it's any shorter and looks more like this: `kxbsDRU5UfAaiO7ar9GFMHSlmTwYaIYn` you copied your client secret instead. Make sure to copy the token if you want your bot to work!
 
