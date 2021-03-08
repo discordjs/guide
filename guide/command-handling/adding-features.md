@@ -407,7 +407,7 @@ At the end of it all, you should be getting this as a result:
 	</discord-message>
 	<discord-message profile="bot">
 		Here's a list of all my commands:
-		args-info, avatar, beep, help, kick, ping, prune, server, user-info	<br>
+		args-info, avatar, beep, help, kick, ping, prune, server, user-info <br>
 		You can send `!help [command name]` to get info on a specific command!
 	</discord-message>
 	<discord-message profile="user">
