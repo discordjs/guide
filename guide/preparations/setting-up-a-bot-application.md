@@ -63,9 +63,9 @@ Now that we explained why your token is essential and why you should prevent giv
 
 Environment variables are special values your environment (for example, your console, docker container, or environment variable file) can pass to your code's scope so that you can use them inside.
 
-One way to pass environment variables is directly via the command line interface you use to start your node process. When starting your app, instead of `node index.js` to start your process, you can use `TOKEN=NzkyNzE1NDU0MTk2MDg4ODQy.X-hvzA.Ovy4MCQywSkoMRRclStW4xAYK7I node index.js`. You can repeat this pattern to expose other values as well: `TOKEN=NzkyNzE1NDU0MTk2MDg4ODQy.X-hvzA.Ovy4MCQywSkoMRRclStW4xAYK7I A=123 B=456 node index.js`
+One way to pass environment variables is via the command line interface you use to start your node process. When starting your app, instead of `node index.js` to begin your process, you can use `TOKEN=NzkyNzE1NDU0MTk2MDg4ODQy.X-hvzA.Ovy4MCQywSkoMRRclStW4xAYK7I node index.js`. You can repeat this pattern to expose other values as well: `TOKEN=NzkyNzE1NDU0MTk2MDg4ODQy.X-hvzA.Ovy4MCQywSkoMRRclStW4xAYK7I A=123 B=456 node index.js`
 
-You can access the set values in your code through the `process.env` global, which is accessible from any file. Note that values passed this way will always be strings and that you might need to parse them to a number before using them to do calculations.
+You can access the set values in your code through the `process.env` global, accessible from any file. Note that values passed this way will always be strings and that you might need to parse them to a number before using them to do calculations.
 
 ```js
 // index.js

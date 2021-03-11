@@ -60,7 +60,7 @@ const client = new Client({ ws: { intents: ['GUILDS', 'GUILD_MESSAGES'] } });
 
 Discord.js provides a utility structure [`Intents`](https://discord.js.org/#/docs/main/stable/class/Intents) which you can use to modify bitfields easily. The class also features static attributes for all (`Intents.ALL`), privileged (`Intents.PRIVILEGED`), and non-privileged (`Intents.NON_PRIVILEGED`) intents.
 
-These are mostly meant to serve as templates. While using them directly is possible, we strongly discourage you from using them that way. It would be best if you instead thought about which events your bot strictly needs access to based on the functionality you want it to provide.
+These primarily serve as templates. While using them directly is possible, we strongly discourage you from using them that way. It would be best if you instead thought about which events your bot strictly needs access to based on the functionality you want it to provide.
 
 You can use the `.add()` and `.remove()` methods to add or remove flags (Intent string literals representing a certain bit) and modify the bitfield. You can provide single flags as well as an array or bitfield. To use a set of intents as a template you can pass it to the constructor. A few approaches are demonstrated below (note that the empty constructor `new Intents()` creates an empty Intents instance, representing no intents or the bitfield `0`):
 
@@ -80,7 +80,7 @@ const otherIntents2 = new Intents(32509);
 otherIntents2.remove(4096, 512);
 ```
 
-If you want to view the built flags you can utilize the `.toArray()`, `.serialize()` and `.missing()` methods. The first returns an array of flags represented in this bitfield, the second an object mapping all possible flag values to a boolean, based on their representation in this bitfield. The third can be used to view the flags not represented (you use it by passing a bitfield of specific intents to check for).
+If you want to view the built flags you can utilize the `.toArray()`, `.serialize()` and `.missing()` methods. The first returns an array of flags represented in this bitfield, the second an object mapping all possible flag values to a boolean, based on their representation in this bitfield. The third method can view the flags not represented (you use it by passing a bitfield of specific intents to check for).
 
 ## More on Bitfields
 

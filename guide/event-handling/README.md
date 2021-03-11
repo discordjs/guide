@@ -1,6 +1,6 @@
 # Event handling
 
-Node.js uses an event-driven architecture. This makes it possible to execute code when a specific event occurs. The discord.js library takes full advantage of this. You can visit the [discord.js documentation site](https://discord.js.org/#/docs/main/stable/class/Client) to see the full list of `Client` events.
+Node.js uses an event-driven architecture, making it possible to execute code when a specific event occurs. The discord.js library takes full advantage of this. You can visit the [discord.js documentation site](https://discord.js.org/#/docs/main/stable/class/Client) to see the full list of `Client` events.
 
 Here's the base code we'll be using:
 
