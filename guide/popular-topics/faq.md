@@ -371,7 +371,7 @@ const blockedUsers = [ 'id1', 'id2' ];
 });
 ```
 
-:::tip
+::: tip
 You do not need to have a constant local variable like `blockedUsers` above. If you have a database system which you use to store IDs of blocked users, you can query the database instead:
 
 <!-- eslint-skip -->
@@ -506,7 +506,7 @@ There are two common measurements for bot pings. The first, **Websocket heartbea
 <message>.channel.send(`Websocket heartbeat: ${<client>.ws.ping}ms.`);
 ```
 
-:::tip
+::: tip
 A specific shards heartbeat can be found on the WebSocketShard instance, accessible at `<client>.ws.shards` > `.ping`.
 :::
 

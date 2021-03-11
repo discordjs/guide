@@ -24,11 +24,11 @@ const { Client } = require('discord.js');
 const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 ```
 
-:::warning
+::: warning
 Make sure you enable all partials you need for your use case! If you miss one the event does not get emitted.
 :::
 
-:::warning
+::: warning
 Partial structures are enabled globally. You can not make them work for only a certain event or cache and you very likely need to adapt other parts of your code that are accessing data from the relevant caches. All caches holding the respective structure type might return partials as well!
 :::
 
@@ -36,7 +36,7 @@ Partial structures are enabled globally. You can not make them work for only a c
 
 All structures you can choose to use partials for have a new property, fittingly called `.partial` indicating if it is a fully functional or partial instance of its class. The value is `true` if partial, `false` if fully functional.
 
-:::warning
+::: warning
 Partial data is only ever guaranteed to contain an ID! Do not assume any property or method to work when dealing with a partial structure!
 :::
 
@@ -67,7 +67,7 @@ if (message.partial) {
 }
 ```
 
-:::warning
+::: warning
 You can not fetch data from the API that's already deleted. For message deletions `messageDelete` will only emit with the ID, which you can not use to fetch the complete message containing content, author or other information for, as it is already inaccessible by the time you receive the event.
 :::
 
