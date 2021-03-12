@@ -7,7 +7,7 @@
 		"prefix": "tip",
 		"description": "insert a tip element",
 		"body": [
-			":::tip",
+			"::: tip",
 			"$1",
 			":::"
 		]
@@ -16,7 +16,7 @@
 		"prefix": "warning",
 		"description": "insert a warning element",
 		"body": [
-			":::warning",
+			"::: warning",
 			"$1",
 			":::"
 		]
@@ -25,7 +25,7 @@
 		"prefix": "danger",
 		"description": "insert a danger element",
 		"body": [
-			":::danger",
+			"::: danger",
 			"$1",
 			":::"
 		]

@@ -2,7 +2,7 @@
 
 After a long time in development, Discord.js v12 has been formally released, meaning it's time to update from v11 to get new features for your bots!  However, with those new features comes a lot of changes to the library that will break code written for v11.  This guide will serve as a handy reference for updating your code, covering the most commonly-used methods that have been changed, new topics such as partials and internal sharding, and will also include a comprehensive list of the method and property changes at the end.
 
-:::tip
+::: tip
 This guide has two versions! Make sure to select `v12 (stable)` in the drop down selection in the header bar to get code snippets and explanations for the new version across the guide.
 :::
 
@@ -20,7 +20,7 @@ You can check your discord.js version with `npm list discord.js`. Should it stil
 * The use of parenthesis designates optional inclusion. For example, `TextChannel#fetch(Pinned)Message(s)` means that this section will include changes for `TextChannel#fetchPinnedMessages`, `TextChannel#fetchMessages`, and `TextChannel#fetchMessage`.
 * The use of asterisks designates a wildcard. For example, `TextChannel#send***` means that this section will include changes for `TextChannel#sendMessage`, `TextChannel#sendFile`, `TextChannel#sendEmbed`, and so forth.
 
-:::danger
+::: danger
 
 `clientOptions.disableEveryone` has been removed and replaced with `clientOptions.disableMentions`!
 
@@ -774,7 +774,7 @@ The `amount` parameter of these methods now allows a negative number which will 
 
 `dmChannel.createCollector()` has been removed in favor of `dmChannel.createMessageCollector()`.
 
-:::tip
+::: tip
 Note that the behavior of collector options has changed! See [this section](/additional-info/changes-in-v12.html#messagecollectoroptions-max-matches) for more details!
 :::
 
@@ -1714,7 +1714,7 @@ Has been removed entirely, along with all other user account-only methods and pr
 
 #### Textchannel#awaitMessages
 
-:::tip
+::: tip
 The behavior of collector options has changed! See [this section](/additional-info/changes-in-v12.html#messagecollectoroptions-max-matches) for more details!
 :::
 
@@ -1742,7 +1742,7 @@ See [this section](/additional-info/changes-in-v12.md#messagecollector) for chan
 + channel.createMessageCollector(filterFunction, { max: 2, maxProcessed: 10, time: 15000 });
 ```
 
-:::tip
+::: tip
 Note that the behavior of collector options has changed! See [this section](/additional-info/changes-in-v12.html#messagecollectoroptions-max-matches) for more details!
 :::
 
