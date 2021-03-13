@@ -19,7 +19,7 @@ For more information, refer to our more [detailed article about this topic](/pop
 
 `clientOptions.disableMentions` has been removed and replaced with `clientOptions.allowedMentions`!
 
-The Discord API now allows bots much more granular control over mention parsing, down to the specific ID if desired. Refer to the [Discord API documentation](https://discord.com/developers/docs/resources/channel#allowed-mentions-object) for more information.
+The Discord API now allows bots much more granular control over mention parsing, down to the specific ID. Refer to the [Discord API documentation](https://discord.com/developers/docs/resources/channel#allowed-mentions-object) for more information.
 
 ```diff
 - const client = new Discord.Client({ disableMentions: 'everyone' });
@@ -65,7 +65,7 @@ Webpack builds are no longer supported.
 
 #### Client#emojis
 
-The Client Emoji manager is now a `BaseGuildEmojiManager`, providing cache resolution only and removing methods which would fail to create emojis as there was no Guild context.
+The Client Emoji manager is now a `BaseGuildEmojiManager`, providing cache resolution only and removing methods that would fail to create emojis as there was no Guild context.
 
 #### Client#generateInvite
 
@@ -83,13 +83,13 @@ To provide permissions, use `InviteGenerationOptions#permissions`.
 
 The `ClientOptions#fetchAllMembers` option has been removed.
 
-With the introduction of gateway intents, the `fetchAllMembers` Client option would often fail and causes major delays in ready states or even cause timeout errors. As its purpose is contradictory to Discord's intentions to reduce scraping of user and presence data, it has been removed.
+With the introduction of gateway intents, the `fetchAllMembers` Client option would often fail and causes significant delays in ready states or even cause timeout errors. As its purpose is contradictory to Discord's intentions to reduce scraping of user and presence data, it has been removed.
 
 #### ClientOptions#messageEditHistoryMaxSize
 
 The `ClientOptions#messageEditHistoryMaxSize` option has been removed.
 
-To reduce on caching, discord.js will no longer store an edit history. This will need to be manually implemented if required.
+To reduce caching, discord.js will no longer store an edit history. You will need to implement this yourself if required.
 
 ### Guild
 
@@ -205,7 +205,7 @@ The deprecated UserFlags `DISCORD_PARTNER` and `VERIFIED_DEVELOPER` / `EARLY_VER
 
 #### Util#str2ab
 
-Both removed in favor of Node built-in Buffer methods.
+Both were removed in favor of Node built-in Buffer methods.
 
 ## Additions
 
@@ -249,7 +249,7 @@ API support for the `GET /guilds/{guild.id}/emojis` endpoint.
 
 #### GuildMember#pending
 
-The `GuildMember#pending` boolean property flags whether a member has passed the Guild's membership gate.
+The `GuildMember#pending` boolean property flags whether a member has passed the guild's membership gate.
 
 The flag is `true` prior to accepting, and fires `guildMemberUpdate` when the member accepts.
 
@@ -273,7 +273,7 @@ Equivalent to `GuildMember#kick(reason)`
 
 #### GuildMemberRoleManager#botRole
 
-Gets the managed role this member created when joining the guild, if any.
+Gets the managed role this member created when joining the guild if any.
 
 `member.roles.botRole`
 
@@ -297,15 +297,15 @@ Provides a Collection of Roles managed by the integration.
 
 #### Message#crosspostable
 
-Permission helper to check if a Message can be crossposted
+Permission helper to check if a Message can be crossposted.
 
 #### Message#react
 
-Added support for `<:name:id>` and `<a:name:id>` as valid inputs to `Message#react()`
+Added support for `<:name:id>` and `<a:name:id>` as valid inputs to `Message#react()`.
 
 #### Message#referencedMessage
 
-Gets the message this message references, if this message is a crosspost/reply/pin-add and the referenced message is cached.
+Gets the message this message references if this message is a crosspost/reply/pin-add and the referenced message is cached.
 
 ### MessageManager
 
@@ -367,7 +367,7 @@ Tags for roles belonging to bots, integrations, or premium subscribers.
 
 `guild.roles.botRoleFor(user)`
 
-Gets the managed role a bot created when joining the guild, if any.
+Gets the managed role a bot created when joining the guild if any.
 
 #### RoleManager#premiumSubscriberRole
 
