@@ -211,7 +211,7 @@ This initializes an empty Collection (remember, Collection is a utility data str
 In your main file, directly above the `try/catch` block causing command execution, add in the following:
 
 ```js
-	const { cooldowns } = client;
+const { cooldowns } = client;
 
 if (!cooldowns.has(command.name)) {
 	cooldowns.set(command.name, new Discord.Collection());
