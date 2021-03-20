@@ -176,7 +176,7 @@ if (!message.mentions.users.size) {
 If you're wondering what `message.reply()` does, it's just an alternative for `message.channel.send()` which also prepends a mention of the person who sent the message, unless used in a DM. It can be very useful for providing feedback!
 :::
 
-Since `message.mentions.users` is a Collection, it has a `.size` property. If no users are mentioned, it'll return 0 (which is a `falsy` value), meaning you can do `if (!value)` to check if it's falsy.
+Since `message.mentions.users` is a Collection, it has a `.size` property. If no users are mentioned, it'll return 0 (which is a `false` value), meaning you can do `if (!value)` to check if it's false.
 
 If you try again, it should work as expected.
 
