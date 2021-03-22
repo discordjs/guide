@@ -333,7 +333,7 @@ Since version 12 you can change this behavior by activating partials. For a full
 
 Make sure you enable partial structures for `MESSAGE`, `CHANNEL` and `REACTION` when instantiating your client, if you want reaction events on uncached messages for both server and direct message channels. If you do not want to support direct message channels you can exclude `CHANNEL`.
 
-:::tip
+::: tip
 If you use [gateway intents](/popular-topics/intents.md) but can't or don't want to use the privileged `GUILD_PRESENCES` intent you additionally need the `USER` partial.
 :::
 
@@ -359,7 +359,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
 });
 ```
 
-:::warning
+::: warning
 Partial structures are enabled globally. You can not only make them work for a certain event or cache and you very likely need to adapt other parts of your code that are accessing data from the relevant caches. All caches holding the respective structure type might return partials as well!
 :::
 

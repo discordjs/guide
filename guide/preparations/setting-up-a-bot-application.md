@@ -51,7 +51,7 @@ Let's imagine that you have a bot on over 1,000 servers, and it took you many, m
 
 All that and much, much more. Sounds pretty terrible, right? So make sure to keep your token as safe as possible!
 
-:::danger
+::: danger
 If you ever somehow compromise your current bot token (commit it to a public repository, post it in support, etc.) or otherwise see your bot in danger return to this page and press "Regenerate" to generate a new token. As you do so old all old tokens will become invalidated. Keep in mind that you will need to update your token where you used it before.
 :::
 
@@ -107,7 +107,7 @@ node_modules
 config.json
 ```
 
-:::tip
+::: tip
 Besides keeping credentials safe you can (and should) add `node_modules` here. This directory can be restored based on your entries in `package.json` and `package-lock.json` by running `npm install` after downloading and does not need to be included in git.
 
 You can specify quite complex patterns in `.gitignore` files, check out the [git documentation on `.gitignore`](https://git-scm.com/docs/gitignore) for more information!
