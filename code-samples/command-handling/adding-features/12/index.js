@@ -52,7 +52,7 @@ client.on('message', message => {
 		return message.channel.send(reply);
 	}
 
-const { cooldowns } = client;
+	const { cooldowns } = client;
 
 	if (!cooldowns.has(command.name)) {
 		cooldowns.set(command.name, new Discord.Collection());
