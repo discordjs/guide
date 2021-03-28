@@ -38,4 +38,4 @@ this.client.guilds.cache.size;
 
 </branch>
 
-It's really that simple!
+It's that simple!

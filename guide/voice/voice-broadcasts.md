@@ -2,16 +2,16 @@
 
 <branch version="11.x">
 
-The Discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots, and tips and tricks to optimize performance!
+The discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots and give you tips to optimize performance!
 
-This voice guide is written for Discord.js v12, which features an improved audio system. Much of the example code in the voice guide is unsuitable for v11 and below - to access this content, please update Discord.js to v12! 
+This voice guide targets discord.js v12, which features an improved audio system. Much of the example code in the voice guide is unsuitable for v11 and below–to access this content, please update discord.js to v12! 
 
 </branch>
 <branch version="12.x">
 
 ## Example Usage
 
-A voice broadcast can be thought of as a reusable StreamDispatcher - you can play an audio stream onto a broadcast, and then you can play the same broadcast across multiple voice connections. This is particularly useful for "radio bots" and performs much better than if you tried to play the same stream separately in each voice channel. It also ensures that all the voice connections are in sync when playing the audio.
+A voice broadcast can be thought of as a reusable StreamDispatcher–you can play an audio stream onto a broadcast, and then you can play the same broadcast across multiple voice connections. This is particularly useful for "radio bots" and performs much better than if you tried to play the same stream separately in each voice channel. It also ensures that all the voice connections are in sync when playing the audio.
 
 ```js
 // Create an instance of a VoiceBroadcast
@@ -32,10 +32,10 @@ const broadcast = client.voice.createBroadcast();
 const broadcast2 = client.voice.createBroadcast();
 ```
 
-The broadcasts created above are independent from each other; playing audio on one broadcast will not affect the other broadcast.
+The broadcasts created above are independent; playing audio on one broadcast will not affect the other broadcast.
 
 ::: tip
-An array of broadcasts can be accessed via `client.voice.broadcasts` - this might be useful if you're looking to stop/pause all active broadcasts.
+You can access an array of broadcasts via `client.voice.broadcasts`–this might be useful if you're looking to stop/pause all active broadcasts.
 :::
 
 ## Playing audio
@@ -55,12 +55,12 @@ broadcast.play(fs.createReadStream('audio.mp3'));
 broadcast.play('http://myserver.com/audio.aac');
 ```
 
-The `.play()` method on a VoiceBroadcast returns a `BroadcastDispatcher` that can be used to control the playback of the audio stream like a regular `StreamDispatcher`.
+The `.play()` method on a VoiceBroadcast returns a `BroadcastDispatcher` that can control the audio stream's playback like a regular `StreamDispatcher`.
 
-Playing a broadcast on a voice connection (i.e. to subscribing to the broadcast) is really easy!
+Playing a broadcast on a voice connection (i.e., subscribing to the broadcast) is easy!
 
 ```js
-// All 3 connections will play the same broadcast - they will play audio at the same time
+// All 3 connections will play the same broadcast–they will play audio at the same time
 connection1.play(broadcast);
 connection2.play(broadcast);
 connection3.play(broadcast);
@@ -72,8 +72,8 @@ There are some specific things to be aware of with broadcasts. This section will
 
 ### VoiceBroadcast
 - Can be created with `client.voice.createBroadcast()` when you're going to be playing the same audio across more than one `VoiceConnection`.
-- Playing the same broadcast across multiple connections offers much better performance and synchronicity compared to playing the same resource across each connection individually - much of the intensive audio processing is done only once.
-- `subscribe` and `unsubscribe` events are emitted here when VoiceConnections are subscribed and unsubscribed.
+- Playing the same broadcast across multiple connections offers much better performance and synchronicity than playing the same resource across each connection individually–much of the intensive audio processes only once.
+- `subscribe` and `unsubscribe` events emit here when VoiceConnections are subscribed and unsubscribed.
 	```js
 	broadcast.on('subscribe', dispatcher => {
 		console.log(`Broadcast playing in ${dispatcher.player.voiceConnection.channel.name}`);
@@ -94,10 +94,10 @@ There are some specific things to be aware of with broadcasts. This section will
 const broadcastDispatcher = broadcast.play('music.mp3');
 ```
 - Subscribers are `VoiceConnection`s that are currently playing the broadcast.
-- A central controller for all subscribers - any changes to this dispatcher will affect all subscribers.
+- A central controller for all subscribers–any changes to this dispatcher will affect all subscribers.
 - Pausing/resuming this dispatcher will pause/resume playback across all subscribers.
 - Altering the volume of this dispatcher will alter the volume across all subscribers.
-- Destroying this dispatcher will stop playback across all subscribers, but they will still remain subscribed to the broadcast as the broadcast itself has not been destroyed. To end the broadcast entirely and unsubscribe all subscribers, you should use `broadcast.end()`.
+- Destroying this dispatcher will stop playback across all subscribers, but they will remain subscribed to the broadcast as the broadcast itself has not been destroyed. To end the broadcast entirely and unsubscribe all subscribers, you should use `broadcast.end()`.
 
 ### StreamDispatcher
 ```js
@@ -105,8 +105,8 @@ const streamDispatcher = connection.play(broadcast);
 ```
 - When playing broadcasts, StreamDispatchers are less flexible.
 - You cannot alter the volume of a StreamDispatcher which is playing a broadcast.
-- When audio is finished playing on the broadcast, the StreamDispatcher will remain alive and not emit a `finish` event - you should listen for that from the BroadcastDispatcher.
-- You can still pause/resume StreamDispatchers as normal.
+- When audio finishes playing on the broadcast, the StreamDispatcher will remain alive and not emit a `finish` event–you should listen for that from the BroadcastDispatcher.
+- You can still pause/resume StreamDispatchers as usual.
 - To unsubscribe from a broadcast, you can use the `.destroy()` method.
 	```js
 	// Unsubscribe from broadcast
