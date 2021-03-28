@@ -43,7 +43,7 @@ After moving your commands into sub-folders, it will look something like this:
 
 ![Project structure after sorting](./images/after-sorting.png)
 
-:::warning
+::: warning
 Make sure you put every command file you have inside one of the new sub-folders. Leaving a command file directly under the `commands` folder will create problems.
 :::
 
@@ -203,7 +203,7 @@ module.exports = {
 In your main file (`index.js` in our examples), add this line preferably somewhere at the top before you handle any events:
 
 ```js
-const cooldowns = new Discord.Collection();
+client.cooldowns = new Discord.Collection();
 ```
 
 This initializes an empty Collection (remember, Collection is a utility data structure, which works based on key/value pairs) which you can then fill later when commands are used. The key will be the command name, and the value will be another Collection associating the user id (key) to the last time (value) this specific user used this specific command. Overall the logical path to get a specific user's last usage of a specific command will be `cooldowns > command > user > timestamp`.
@@ -211,6 +211,8 @@ This initializes an empty Collection (remember, Collection is a utility data str
 In your main file, directly above the `try/catch` block causing command execution, add in the following:
 
 ```js
+const { cooldowns } = client;
+
 if (!cooldowns.has(command.name)) {
 	cooldowns.set(command.name, new Discord.Collection());
 }
@@ -464,7 +466,8 @@ if (command.args && !args.length) {
 
 Your command handler will now refuse to execute commands if the permissions you specify in the command structure are missing from the member trying to use it. Note that the `ADMINISTRATOR` permission and the message author being the owner of the guild will overwrite this.
 
-:::tip
+::: 
+
 Need more resources on how Discord's permission system works? Check the [permissions article](/popular-topics/permissions.html), [extended permissions knowledge base](/popular-topics/permissions-extended.html) and documentation of <branch version="11.x" inline>[permission flags](https://discord.js.org/#/docs/main/v11/class/Permissions?scrollTo=s-FLAGS)</branch><branch version="12.x" inline>[permission flags](https://discord.js.org/#/docs/main/stable/class/Permissions?scrollTo=s-FLAGS)</branch> out! 
 :::
 
@@ -498,7 +501,7 @@ const command = message.client.commands.get(commandName)
 if (!command) return message.channel.send(`There is no command with name or alias \`${commandName}\`, ${message.author}!`);
 ```
 
-:::tip
+::: tip
 A lot of library-specific structures have `client` as a property. That means you don't have to pass the client reference as a parameter to commands to access. For example, `client.guilds` or `client.commands` can access the respective properties directly from the `message` object, as shown in the snippet above.
 :::
 

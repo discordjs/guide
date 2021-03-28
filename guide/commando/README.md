@@ -10,7 +10,7 @@ If using discord.js v11: `npm install discord.js-commando`
 If using discord.js v12: `npm install discordjs/Commando`
 
 ::: warning
-You need at least Node.js version <branch version="11.x" inline>8.0.0</branch><branch version="12.x" inline>12.0</branch> to use Commando. The main branch will also require you to install [Git](https://git-scm.com/downloads).
+You need at least Node.js version <branch version="11.x" inline>8.0.0</branch><branch version="12.x" inline>12.0</branch> to use Commando.
 :::
 
 ## Creating your index.js file

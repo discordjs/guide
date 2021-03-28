@@ -3,7 +3,7 @@
 ## moment.js
 
 ::: tip
-Official documentation: https://momentjs.com/docs/
+Official documentation: [https://momentjs.com/docs](https://momentjs.com/docs)
 :::
 
 Moment is a powerful package for working with dates in JavaScript.  
@@ -44,7 +44,7 @@ if (date.isValid()) {
 ## ms
 
 ::: tip
-Official documentation: https://github.com/zeit/ms
+Official documentation: [https://github.com/zeit/ms](https://github.com/zeit/ms)
 :::
 
 Ms is another tool for working with times in JavaScript. However, ms specializes on durations.
@@ -70,7 +70,7 @@ message.channel.send(`You sent the two messages ${formatted} apart.`);
 ## common-tags
 
 ::: tip
-Official documentation: https://github.com/declandewet/common-tags
+Official documentation: [https://github.com/declandewet/common-tags](https://github.com/declandewet/common-tags)
 :::
 
 Common-tags is a library all about working with template literals.  
@@ -115,7 +115,7 @@ Check the the documentation to find more useful functions.
 ## chalk
 
 ::: tip
-Official documentation: https://www.npmjs.com/package/chalk
+Official documentation: [https://www.npmjs.com/package/chalk](https://www.npmjs.com/package/chalk)
 :::
 
 Chalk is not exactly useful for Discord bots themselves, but it will make your terminal output a lot prettier and organized.
@@ -141,7 +141,7 @@ console.log(chalk.green.bgBrightBlack.underline('This is so pretty.'));
 ## winston
 
 ::: tip
-Official documentation: https://github.com/winstonjs/winston
+Official documentation: [https://github.com/winstonjs/winston](https://github.com/winstonjs/winston)
 :::
 
 Winston is "a logger for just about everything".
@@ -189,8 +189,8 @@ you should find something you will like.
 
 ## i18next
 
-:::tip
-Official documentation: https://www.i18next.com/
+::: tip
+Official documentation: [https://www.i18next.com](https://www.i18next.com)
 :::
 
 i18next is an internationalization-framework for JavaScript. It is beneficial to translate your bot's user-facing messages into various languages based on the server it is used in.

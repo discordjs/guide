@@ -7,13 +7,13 @@ Intents are not available in version 11; please update to version 12 of the libr
 </branch>
 <branch version="12.x">
 
-:::warning
+::: warning
 Version 13 of Discord.js will require you to choose suitable intents (as it uses a new version of Discord's API), it's worthwhile reading this section even if you don't currently want to update, so you know what to do later.
 :::
 
 Gateway Intents were introduced by Discord so bot developers can choose which events their bot receives based on which data it needs to function. Intents are named groups of pre-defined WebSocket events, which the Discord.js client will receive. If you omit `DIRECT_MESSAGE_TYPING`, for example, you will no longer receive typing events from direct messages. If you provide no intents, version 12 will receive all events for allowed intents, and version 13 will throw an error.
 
-:::tip
+::: tip
 For up-to-date information about gateway intents (including the full list of available intents and related events), please check the [Discord API Documentation (Gateway Intents)](https://discord.com/developers/docs/topics/gateway#gateway-intents).
 :::
 
@@ -45,7 +45,7 @@ As touched on before, you can now choose which events you want to receive from D
 
 A list of all available gateway intents the library supports can be found at [the discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Intents?scrollTo=s-FLAGS). The events included in the respective intents on the [Discord API documentation](https://discord.com/developers/docs/topics/gateway#list-of-intents).
 
-:::warning
+::: warning
 Note that discord.js relies heavily on caching to provide its functionality. Some methods that seem unrelated might stop working if certain events do not arrive.
 
 Please make sure to provide the full list of gateway intents and partials you use in your Client constructor when asking for support on our [Discord server](https://discord.gg/bRCvFy9) or [GitHub repository](https://github.com/discordjs/discord.js).

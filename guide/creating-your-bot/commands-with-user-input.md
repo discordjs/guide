@@ -176,7 +176,7 @@ if (!message.mentions.users.size) {
 `message.reply()` is an alternative to `message.channel.send()` that prepends a mention of the person who sent the message, unless the message was sent in a DM. It can be handy for providing feedback!
 :::
 
-Since `message.mentions.users` is a Collection, it has a `.size` property. If no users are mentioned, it'll return 0 (which is a `falsy` value), meaning you can do `if (!value)` to check if it's falsy.
+Since `message.mentions.users` is a Collection, it has a `.size` property. If no users are mentioned, it'll return 0 (which is a [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) value), meaning you can use `if (!value)` to check for its validity.
 
 If you try again, it should work as expected.
 

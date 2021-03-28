@@ -9,7 +9,7 @@ Before you dive into this section, please note that sharding may not be necessar
 As an application grows large, a developer may find it necessary to split their process to run parallel to maximize efficiency. On a much larger scale of things, the developer might notice their process slow down, amongst other problems.
 [Check out the official Discord documentation on the topic.](https://discord.com/developers/docs/topics/gateway#sharding)
 
-:::warning
+::: warning
 This guide only explains the basics of sharding using the built-in ShardingManager, which can run shards as separate processes or threads on a single machine. If you need to scale beyond that (e.g., running shards on multiple machines/containers), you can still do it with discord.js by passing appropriate options to the Client constructor. Nevertheless, you will be on your own regarding managing shards and sharing information between them.
 :::
 
