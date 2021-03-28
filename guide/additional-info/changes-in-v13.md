@@ -4,7 +4,7 @@
 
 v13 requires Node 14.x or higher to use, so make sure you're up to date. To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it! There are many resources online to help you with this step based on your host system.
 
-Once you've got Node up-to-date you can install v13 by running `npm install discord.js` in your terminal or command prompt for text-only use, or `npm install discord.js @discordjs/opus` for voice support.
+Once you've got Node up-to-date, you can install v13 by running `npm install discord.js` in your terminal or command prompt for text-only use, or `npm install discord.js @discordjs/opus` for voice support.
 
 You can check your discord.js version with `npm list discord.js`. Should it still show v12.x uninstall (`npm uninstall discord.js`) and re-install discord.js and make sure the entry in your package.json does not prevent a major version update. Please refer to the [npm documentation](https://docs.npmjs.com/files/package.json#dependencies) for this.
 
@@ -13,7 +13,9 @@ You can check your discord.js version with `npm list discord.js`. Should it stil
 ### Intents
 
 As v13 makes the switch to Discord API v8, it will now be **required** to specify intents in your Client constructor.
-For more information, refer to our more [detailed article about this topic](/popular-topics/intents).
+Refer to our more [detailed article about this topic](/popular-topics/intents).
+
+### Allowed Mentions
 
 :::danger
 
@@ -48,7 +50,7 @@ The new `MessageOptions.allowedMentions.repliedUser` boolean option determines i
 
 ### Bitfields / Permissions
 
-The usage of string literals for bitfields such as `Permissions` and `UserFlags` is discouraged, you should use the flag instead.
+The usage of string literals for bitfields such as `Permissions` and `UserFlags` is discouraged; you should use the flag instead.
 
 ```diff
 - permissions.has('SEND_MESSAGES')
@@ -251,7 +253,7 @@ API support for the `GET /guilds/{guild.id}/emojis` endpoint.
 
 The `GuildMember#pending` boolean property flags whether a member has passed the guild's membership gate.
 
-The flag is `true` prior to accepting, and fires `guildMemberUpdate` when the member accepts.
+The flag is `true` before accepting and fires `guildMemberUpdate` when the member accepts.
 
 ### GuildMemberManager
 
