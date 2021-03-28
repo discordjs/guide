@@ -53,7 +53,7 @@ Please make sure to provide the full list of gateway intents and partials you us
 
 ```js
 const { Client } = require('discord.js');
-const client = new Client({ ws: { intents: ['GUILDS', 'GUILD_MESSAGES'] } });
+const client = new Client({ intents: ['GUILDS', 'GUILD_MESSAGES'] });
 ```
 
 ## The Intents Bitfield
@@ -69,7 +69,7 @@ const { Client, Intents } = require('discord.js');
 const myIntents = new Intents();
 myIntents.add('GUILD_PRESENCES', 'GUILD_MEMBERS');
 
-const client = new Client({ ws: { intents: myIntents } });
+const client = new Client({ intents: myIntents });
 
 // more examples about manipulating the bitfield
 
