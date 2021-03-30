@@ -4,7 +4,7 @@
 
 v13 requires Node 14.x or higher to use, so make sure you're up to date. To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it! There are many resources online to help you with this step based on your host system.
 
-Once you've got Node up-to-date you can install v13 by running `npm install discord.js` in your terminal or command prompt for text-only use, or `npm install discord.js @discordjs/opus` for voice support.
+Once you've got Node up-to-date, you can install v13 by running `npm install discord.js` in your terminal or command prompt for text-only use, or `npm install discord.js @discordjs/opus` for voice support.
 
 You can check your discord.js version with `npm list discord.js`. Should it still show v12.x uninstall (`npm uninstall discord.js`) and re-install discord.js and make sure the entry in your package.json does not prevent a major version update. Please refer to the [npm documentation](https://docs.npmjs.com/files/package.json#dependencies) for this.
 
@@ -13,13 +13,15 @@ You can check your discord.js version with `npm list discord.js`. Should it stil
 ### Intents
 
 As v13 makes the switch to Discord API v8, it will now be **required** to specify intents in your Client constructor.
-For more information, refer to our more [detailed article about this topic](/popular-topics/intents)
+Refer to our more [detailed article about this topic](/popular-topics/intents).
+
+### Allowed Mentions
 
 :::danger
 
 `clientOptions.disableMentions` has been removed and replaced with `clientOptions.allowedMentions`!
 
-The Discord API now allows bots much more granular control over mention parsing, down to the specific ID if desired. Refer to the [Discord API documentation](https://discord.com/developers/docs/resources/channel#allowed-mentions-object) for more information.
+The Discord API now allows bots much more granular control over mention parsing, down to the specific ID. Refer to the [Discord API documentation](https://discord.com/developers/docs/resources/channel#allowed-mentions-object) for more information.
 
 ```diff
 - const client = new Discord.Client({ disableMentions: 'everyone' });
@@ -30,13 +32,13 @@ The Discord API now allows bots much more granular control over mention parsing,
 
 ### Replies / Message#reply
 
-`Message.reply()` will no longer result in the bot prepending a user mention to the content, replacing the behaviour with Discord's reply feature.
+`Message.reply()` will no longer result in the bot prepending a user mention to the content, replacing the behavior with Discord's reply feature.
 
 `MessageOptions.reply` (User ID) has been removed, replaced with `MessageOptions.replyTo` (Message ID)
 
 ```diff
-- channel.send("content", { reply: '123456789012345678' })` // User ID
-+ channel.send("content", { replyTo: '765432109876543219' })` // Message ID
+- channel.send('content', { reply: '123456789012345678' })` // User ID
++ channel.send('content', { replyTo: '765432109876543219' })` // Message ID
 ```
 
 The new `MessageOptions.allowedMentions.repliedUser` boolean option determines if the reply will notify the author of the original message.
@@ -48,7 +50,7 @@ The new `MessageOptions.allowedMentions.repliedUser` boolean option determines i
 
 ### Bitfields / Permissions
 
-Bitfields such as Permissions and UserFlags will no longer support the use of string literals, instead requiring use of the flag.
+The usage of string literals for bitfields such as `Permissions` and `UserFlags` is discouraged; you should use the flag instead.
 
 ```diff
 - permissions.has('SEND_MESSAGES')
@@ -65,7 +67,7 @@ Webpack builds are no longer supported.
 
 #### Client#emojis
 
-The Client Emoji manager is now a `BaseGuildEmojiManager`, providing cache resolution only and removing methods which would fail to create emojis as there was no Guild context.
+The Client Emoji manager is now a `BaseGuildEmojiManager`, providing cache resolution only and removing methods that would fail to create emojis as there was no Guild context.
 
 #### Client#generateInvite
 
@@ -89,13 +91,14 @@ This will now instead cause an error to be thrown.
 
 The `ClientOptions#fetchAllMembers` option has been removed.
 
-With the introduction of gateway intents, the `fetchAllMembers` Client option would often fail and causes major delays in ready states or even cause timeout errors. As its purpose is contradictory to Discord's intentions to reduce scraping of user and presence data, it has been removed.
+With the introduction of gateway intents, the `fetchAllMembers` Client option would often fail and causes significant delays in ready states or even cause timeout errors. As its purpose is contradictory to Discord's intentions to reduce scraping of user and presence data, it has been removed.
 
 #### ClientOptions#messageEditHistoryMaxSize
 
 The `ClientOptions#messageEditHistoryMaxSize` option has been removed.
 
-To reduce on caching, discord.js will no longer store an edit history. This will need to be manually implemented if required.
+To reduce caching, discord.js will no longer store an edit history. You will need to implement this yourself if required.
+
 ### Guild
 
 #### Guild#member
@@ -132,15 +135,15 @@ The `Guild#voice` getter has been removed.
 This shortcut method has been removed.
 
 ```diff
-- member.hasPermission(Permission.FLAGS.SEND_MESSAGES);
-+ member.permissions.has(Permission.FLAGS.SEND_MESSAGES);
+- member.hasPermission(Permissions.FLAGS.SEND_MESSAGES);
++ member.permissions.has(Permissions.FLAGS.SEND_MESSAGES);
 ```
 
 ### GuildMemberManager
 
 #### GuildMemberManager#ban
 
-``GuildMemberManager#ban` will throw a TypeError when a string is provided instead of an options object.
+`GuildMemberManager#ban` will throw a TypeError when a string is provided instead of an options object.
 
 ```diff
 - guild.members.ban('123456789012345678', 'reason')
@@ -165,20 +168,17 @@ This shortcut method has been removed.
 `MessageManager.delete()` no longer accepts any additional options, requiring a timed-delete to be performed manually.
 
 ```diff
-- channel.messages.delete(''123456789012345678', { timeout: 10000 });
+- channel.messages.delete('123456789012345678', { timeout: 10000 });
 + client.setTimeout(() => channel.messages.delete('123456789012345678'), 10000);
 ```
 
 `reason` is no longer a parameter as it is not used by the API.
-
-
 ### RoleManager
 
 #### RoleManager#create
 
 The options passed to `RoleManager#create` no longer need to be nested in a `data` object.
-
-Additionally `reason` is now part of the options, not a second parameter
+Additionally, `reason` is now part of the options, not a second parameter.
 
 ```diff
 - guild.roles.create({ data: { name: "New role" } }, "Creating new role");
@@ -197,7 +197,7 @@ Additionally `reason` is now part of the options, not a second parameter
 
 ### UserFlags
 
-The deprecated UserFlags `DISCORD_PARTNER` and `VERIFIED_DEVELOPER` / `EARLY_VERIFIED_DEVELOPER` have been removed in favour of their renamed versions.
+The deprecated UserFlags `DISCORD_PARTNER` and `VERIFIED_DEVELOPER` / `EARLY_VERIFIED_DEVELOPER` have been removed in favor of their renamed versions.
 
 ```diff
 - user.flags.has(UserFlags.FLAGS.DISCORD_PARTNER)
@@ -213,7 +213,7 @@ The deprecated UserFlags `DISCORD_PARTNER` and `VERIFIED_DEVELOPER` / `EARLY_VER
 
 #### Util#str2ab
 
-Both removed in favour of Node built-in Buffer methods.
+Both were removed in favor of Node built-in Buffer methods.
 
 ## Additions
 
@@ -234,6 +234,7 @@ The new `Channel#isText()` getter provides an easy way for TypeScript developers
 Constructing a Collector without providing a filter function will now throw a meaningful `TypeError`.
 
 ### Guild
+
 #### Guild#emojis
 
 The `GuildEmojiManager` now extends `BaseGuildEmojiManager`.
@@ -256,9 +257,9 @@ API support for the `GET /guilds/{guild.id}/emojis` endpoint.
 
 #### GuildMember#pending
 
-The `GuildMember#pending` boolean property flags whether a member has passed the Guild's membership gate.
+The `GuildMember#pending` boolean property flags whether a member has passed the guild's membership gate.
 
-The flag is `true` prior to accepting, and fires `guildMemberUpdate` when the member accepts.
+The flag is `true` before accepting and fires `guildMemberUpdate` when the member accepts.
 
 ### GuildMemberManager
 
@@ -280,7 +281,7 @@ Equivalent to `GuildMember#kick(reason)`
 
 #### GuildMemberRoleManager#botRole
 
-Gets the managed role this member created when joining the guild, if any.
+Gets the managed role this member created when joining the guild if any.
 
 `member.roles.botRole`
 
@@ -304,15 +305,15 @@ Provides a Collection of Roles managed by the integration.
 
 #### Message#crosspostable
 
-Permission helper to check if a Message can be crossposted
+Permission helper to check if a Message can be crossposted.
 
 #### Message#react
 
-Added support for `<:name:id>` and `<a:name:id>` as valid inputs to `Message#react()`
+Added support for `<:name:id>` and `<a:name:id>` as valid inputs to `Message#react()`.
 
 #### Message#referencedMessage
 
-Gets the message this message references, if this message is a crosspost/reply/pin-add and the referenced message is cached.
+Gets the message this message references if this message is a crosspost/reply/pin-add and the referenced message is cached.
 
 ### MessageManager
 
@@ -358,7 +359,7 @@ Provides API support for bots to follow announcements in other channels
 
 #### NewsChannel#setType
 
-`channel.setType("text")`
+`channel.setType('text')`
 
 Allows conversion between NewsChannel and TextChannel
 
@@ -374,7 +375,7 @@ Tags for roles belonging to bots, integrations, or premium subscribers.
 
 `guild.roles.botRoleFor(user)`
 
-Get the managed role a user created when joining the guild, if any.
+Gets the managed role a bot created when joining the guild if any.
 
 #### RoleManager#premiumSubscriberRole
 
@@ -386,6 +387,6 @@ Gets the premium subscriber (booster) role for the Guild, if any
 
 #### TextChannel#setType
 
-`channel.setType("news")`
+`channel.setType('news')`
 
 Allows conversion between TextChannel and NewsChannel
