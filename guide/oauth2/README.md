@@ -6,30 +6,30 @@ OAuth2 enables application developers to build applications that utilize authent
 
 ###  Setting up a basic web server
 
-Most of the time, websites use OAuth2 to get information about their users from an external service. In this example, you will use Node.js' built-in `http` module to create a web server to use a user's Discord information to greet them. First, create a file named `index.js`, which you'll use to start the server.
+Most of the time, OAuth2 is used in websites to get information about its users from an external service. In this example, you will use the `express` module to create a web server to use a user's Discord information to greet them. Firstly, you should install `express`.
+
+```bash
+$ npm install express
+```
+
+And then, create a file named `index.js` which will be used to start the server.
 
 ```js
-const http = require('http');
+const express = require('express');
+const app = express();
 const fs = require('fs');
 const port = 53134;
 
-http.createServer((req, res) => {
-	let responseCode = 404;
-	let content = '404 Error';
+app.get('/', (request, response) => {
+	response.status(200).send('index.html', { root: '.' });
+});
 
-	if (req.url === '/') {
-		responseCode = 200;
-		content = fs.readFileSync('./index.html');
-	}
+// 404 Route, Keep this route as the last routes
+app.get('*', (request, response) => {
+	response.status(404).send('404 Error');
+});
 
-	res.writeHead(responseCode, {
-		'content-type': 'text/html;charset=utf-8',
-	});
-
-	res.write(content);
-	res.end();
-})
-	.listen(port);
+app.listen(port);
 ```
 
 Right now, you have designated that the contents of an `index.html` file will be served to the user when they visit the root domain, so create an `index.html` file in the same directory with the following contents.
@@ -89,11 +89,11 @@ You can see that by clicking `Authorize`, you allow the application to access yo
 	<a id="login" style="display: none;" href="your oauth2 url here">Identify Yourself</a>
 	<script>
 		window.onload = () => {
-			const fragment = new URLSearchParams(window.location.hash.slice(1));
+			const fragment = parseQuery(window.location.href);
 
-			if (fragment.has("access_token")) {
-				const accessToken = fragment.get("access_token");
-				const tokenType = fragment.get("token_type");
+			if (fragment.access_token) {
+				const accessToken = fragment.access_token;
+				const tokenType = fragment.token_type;
 
 				fetch('https://discord.com/api/users/@me', {
 					headers: {
@@ -112,6 +112,15 @@ You can see that by clicking `Authorize`, you allow the application to access yo
 				document.getElementById('login').style.display = 'block';
 			}
 		}
+		function parseQuery(queryString) {
+            var query = {};
+            var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
+            for (var i = 0; i < pairs.length; i++) {
+                var pair = pairs[i].split('=');
+                query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+            }
+            return query;
+        }
 	</script>
 </body>
 </html>
@@ -149,10 +158,10 @@ document.getElementById('login').href += `&state=${btoa(randStr)}`;
 When you visit a url with a `state` parameter appended to it and then click `Authorize`, you'll notice that after being redirected, the url will also have the `state` parameter appended, which you should then check against what was stored. You can modify the script in your `index.html` file to handle this.
 
 ```js
-const fragment = new URLSearchParams(window.location.hash.slice(1));
+const fragment = parseQuery(window.location.href);
 
-if (fragment.has('access_token')) {
-	const urlState = fragment.get('state');
+if (fragment.access_token) {
+	const urlState = fragment.state;
 	const stateParameter = localStorage.getItem('stateParameter');
 	if (stateParameter !== atob(decodeURIComponent(urlState))) {
 		return console.log('You may have been clickjacked!');
@@ -161,7 +170,7 @@ if (fragment.has('access_token')) {
 ```
 
 ::: tip
-Don't forgo security for a tiny bit of convenience!
+Don't forgot security for a tiny bit of convenience!
 :::
 
 ### OAuth2 flows
@@ -170,35 +179,39 @@ What you did in the quick example was go through the `implicit grant` flow, whic
 
 #### Authorization code grant
 
-Unlike the quick example, you need an OAuth2 url where the `response_type` is `code`. Once you've obtained it, try visiting the link and authorizing your application. You should notice that instead of a hash, the redirect url now has a single query parameter appended to it like `?code=ACCESS_CODE`. Modify your `index.js` file to pull the parameter out of the url if it exists. You can use the `url` module to do this for us.
+Unlike the quick example, you need an OAuth2 url where the `response_type` is `code`. Once you've obtained it, try visiting the link and authorizing your application. You should notice that instead of a hash, the redirect url now has a single query parameter appended to it like `?code=ACCESS_CODE`. Modify your `index.js` (on `/` route) file to pull the parameter out of the url if it exists.
 
+Make the route as a async function:
 ```js
-const url = require('url');
+app.get('/', async (request, response) => {
+	// ...
+});
+```
 
-// ...
+Then:
+<!-- eslint-skip -->
+```js
+let access_token;
+let token_type;
 
-const urlObj = url.parse(req.url, true);
-
-if (urlObj.query.code) {
-	const accessCode = urlObj.query.code;
+if (request.query.code) {
+	const accessCode = request.query.code;
 	console.log(`The access code is: ${accessCode}`);
 }
 
-if (urlObj.pathname === '/') {
-	responseCode = 200;
-	content = fs.readFileSync('./index.html');
-}
+if (token_type && access_token && request.query.state) {
+	response.status(200).redirect(`/?code=${request.query.code}&state=${request.query.state}&access_token=${access_token}&token_type=${token_type}`);
+} else { response.sendFile('index.html', { root: '.' }); }
 ```
 
-Now you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten these, head over to [your applications](https://discord.com/developers/applications) and get them. You can use `node-fetch` to make requests to Discord; you can install it with `npm i node-fetch`.
+Now you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten these, head over to [your applications](https://discord.com/developers/applications) and get them. You can use `node-fetch` to make requests to Discord; you can install it with `npm i node-fetch`. Place this code after `request.query.code` statement.
 
 Require `node-fetch` and make your request.
-
+<!-- eslint-skip -->
 ```js
 const fetch = require('node-fetch');
 
 // ...
-
 const data = {
 	client_id: 'your client id',
 	client_secret: 'your client secret',
@@ -208,15 +221,20 @@ const data = {
 	scope: 'the scopes',
 };
 
-fetch('https://discord.com/api/oauth2/token', {
+const res = await fetch('https://discord.com/api/oauth2/token', {
 	method: 'POST',
 	body: new URLSearchParams(data),
 	headers: {
 		'Content-Type': 'application/x-www-form-urlencoded',
 	},
-})
-	.then(res => res.json())
-	.then(console.log);
+});
+const info = await res.json();
+
+// Assign the data to variable
+token_type = info.token_type;
+access_token = info.access_token;
+
+console.log(info);
 ```
 
 ::: warning
@@ -235,20 +253,16 @@ Now try visiting your OAuth2 url and authorizing your application. Once you're r
 }
 ```
 
-Try fetching the user's information now that you have an access token and a refresh token. It's the same as how the html file did it in the html file.
-
+Now that you have an access token and a refresh token, try fetching the user's information. It's the exact same as how it was done in the html file.
+<!-- eslint-skip -->
 ```js
-fetch('https://discord.com/api/oauth2/token', {
-	method: 'POST',
-	body: data,
-})
-	.then(res => res.json())
-	.then(info => fetch('https://discord.com/api/users/@me', {
-		headers: {
-			authorization: `${info.token_type} ${info.access_token}`,
-		},
-	}))
-	.then(console.log);
+const userPost = await fetch('https://discord.com/api/users/@me', {
+	headers: {
+		authorization: `${info.token_type} ${info.access_token}`,
+	}
+});
+const user = await userPost.json();
+console.log(user);
 ```
 
 ::: tip
