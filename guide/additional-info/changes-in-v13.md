@@ -137,7 +137,7 @@ This shortcut method has been removed.
 
 #### GuildMemberManager#ban
 
-``GuildMemberManager#ban` will throw a TypeError when a string is provided instead of an options object.
+`GuildMemberManager#ban` will throw a TypeError when a string is provided instead of an options object.
 
 ```diff
 - guild.members.ban('123456789012345678', 'reason')
