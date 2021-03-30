@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>My First OAuth2 App</title>
 </head>
+
 <body>
 	<div id="info">
 		Hoi!
@@ -20,8 +22,8 @@
 			return randStr;
 		}
 
-		window.onload = function () {
-            const fragment = parseQuery(window.location.href);
+		window.onload = () => {
+			const fragment = parseQuery(window.location.href);
 			if (fragment.access_token) {
 				const urlState = fragment.state;
 				const stateParameter = localStorage.getItem('stateParameter');
@@ -40,8 +42,7 @@
 					.then(res => res.json())
 					.then(response => {
 						console.log(response);
-                        const { username, discriminator } = response;
-                        console.log(username, discriminator);
+						const { username, discriminator } = response;
 						document.getElementById('info').textContent += ` ${username}#${discriminator}`;
 					})
 					.catch(console.error);
@@ -52,16 +53,17 @@
 				document.getElementById('login').href += `&state=${encodeURIComponent(btoa(randStr))}`;
 				document.getElementById('login').style.display = 'block';
 			}
-        }
-        function parseQuery(queryString) {
-            var query = {};
-            var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
-            for (var i = 0; i < pairs.length; i++) {
-                var pair = pairs[i].split('=');
-                query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+		}
+		function parseQuery(queryString) {
+			const query = {};
+			const pairs = (queryString.startsWith('?') ? queryString.slice(1) : queryString).split('&');
+			for (const param of pairs) {
+                const [name, value] = param.split('=');
+                query[decodeURIComponent(name)] = decodeURIComponent(value || '');
             }
-            return query;
-        }
+			return query;
+		}
 	</script>
 </body>
+
 </html>

@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const fetch = require('node-fetch');
 
+const port = 53134;
+
 app.get('/', async (request, response) => {
 	let access_token;
 	let token_type;
@@ -23,12 +25,10 @@ app.get('/', async (request, response) => {
 				'Content-Type': 'application/x-www-form-urlencoded',
 			},
 		});
-		const info = await res.json();
-		token_type = info.token_type;
-		access_token = info.access_token;
+		const { token_type: tokenType, access_token: accessToken } = await res.json();
 		const post = await fetch('https://discord.com/api/users/@me', {
 			headers: {
-				authorization: `${token_type} ${access_token}`,
+				authorization: `${tokenType} ${accessToken}`,
 			},
 		});
 		const user = await post.json();
@@ -40,4 +40,4 @@ app.get('/', async (request, response) => {
 	} else { response.sendFile('index.html', { root: '.' }); }
 });
 
-app.listen(3000);
+app.listen(port);

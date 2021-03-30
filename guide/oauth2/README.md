@@ -21,10 +21,10 @@ const fs = require('fs');
 const port = 53134;
 
 app.get('/', (request, response) => {
-	response.status(200).send('index.html', { root: '.' });
+	response.status(200).sendFile('index.html', { root: '.' });
 });
 
-// 404 Route, Keep this route as the last routes
+// Catch-all route; keep this as the last route
 app.get('*', (request, response) => {
 	response.status(404).send('404 Error');
 });
@@ -113,11 +113,11 @@ You can see that by clicking `Authorize`, you allow the application to access yo
 			}
 		}
 		function parseQuery(queryString) {
-            var query = {};
-            var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
-            for (var i = 0; i < pairs.length; i++) {
-                var pair = pairs[i].split('=');
-                query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+            const query = {};
+			const pairs = (queryString.startsWith('?') ? queryString.slice(1) : queryString).split('&');
+			for (const param of pairs) {
+                const [name, value] = param.split('=');
+                query[decodeURIComponent(name)] = decodeURIComponent(value || '');
             }
             return query;
         }
@@ -170,7 +170,7 @@ if (fragment.access_token) {
 ```
 
 ::: tip
-Don't forgot security for a tiny bit of convenience!
+Don't forgo security for a tiny bit of convenience!
 :::
 
 ### OAuth2 flows
@@ -179,7 +179,7 @@ What you did in the quick example was go through the `implicit grant` flow, whic
 
 #### Authorization code grant
 
-Unlike the quick example, you need an OAuth2 url where the `response_type` is `code`. Once you've obtained it, try visiting the link and authorizing your application. You should notice that instead of a hash, the redirect url now has a single query parameter appended to it like `?code=ACCESS_CODE`. Modify your `index.js` (on `/` route) file to pull the parameter out of the url if it exists.
+Unlike the quick example, you need an OAuth2 url where the `response_type` is `code`. Once you've obtained it, try visiting the link and authorizing your application. You should notice that instead of a hash, the redirect url now has a single query parameter appended to it like `?code=ACCESS_CODE`. Modify your `index.js` (on the `/` route) file to pull the parameter out of the url if it exists.
 
 Make the route as a async function:
 ```js
@@ -199,9 +199,12 @@ if (request.query.code) {
 	console.log(`The access code is: ${accessCode}`);
 }
 
-if (token_type && access_token && request.query.state) {
+if (token_type && access_token && request.query.state && request.query.code) {
 	response.status(200).redirect(`/?code=${request.query.code}&state=${request.query.state}&access_token=${access_token}&token_type=${token_type}`);
-} else { response.sendFile('index.html', { root: '.' }); }
+}
+else {
+	response.sendFile('index.html', { root: '.' });
+}
 ```
 
 Now you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten these, head over to [your applications](https://discord.com/developers/applications) and get them. You can use `node-fetch` to make requests to Discord; you can install it with `npm i node-fetch`. Place this code after `request.query.code` statement.
@@ -228,11 +231,7 @@ const res = await fetch('https://discord.com/api/oauth2/token', {
 		'Content-Type': 'application/x-www-form-urlencoded',
 	},
 });
-const info = await res.json();
-
-// Assign the data to variable
-token_type = info.token_type;
-access_token = info.access_token;
+const { token_type: tokenType, access_token: accessToken } = await res.json();
 
 console.log(info);
 ```
