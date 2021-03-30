@@ -12,12 +12,18 @@ You can check your discord.js version with `npm list discord.js`. Should it stil
 
 ### Intents
 
-As v13 makes the switch to Discord API v8, it will now be **required** to specify intents in your Client constructor.
+As v13 makes the switch to Discord API v8, it will now be **required** to specify intents in your Client constructor. 
+
+They also move from `ClientOptions#ws#intents` to the top level `ClientOptions#intents`.
+
 Refer to our more [detailed article about this topic](/popular-topics/intents).
 
-### Allowed Mentions
+```diff
+- const client = new Client({ ws: { intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
++ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+```
 
-:::danger
+### Allowed Mentions
 
 `clientOptions.disableMentions` has been removed and replaced with `clientOptions.allowedMentions`!
 
