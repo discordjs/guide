@@ -217,8 +217,8 @@ Let's start with a basic function, which will try to grab an emoji from the curr
 <branch version="11.x">
 
 ```js
-function findEmoji(id) {
-	const emoji = this.emojis.get(id);
+function findEmoji(query) {
+	const emoji = this.emojis.get(query);
 	if (!emoji) return null;
 	return emoji;
 }
@@ -228,8 +228,8 @@ function findEmoji(id) {
 <branch version="12.x">
 
 ```js
-function findEmoji(id) {
-	const emoji = this.emojis.cache.get(id);
+function findEmoji(query) {
+	const emoji = this.emojis.cache.get(query) || this.emojis.find(e => e.name.toLowerCase() === query.toLowerCase());
 	if (!emoji) return null;
 	return emoji;
 }
@@ -285,52 +285,37 @@ Now, run this code, and you will surely get a result that looks like the followi
 ]
 ```
 
-While this result isn't *necessarily* bad or incorrect, it's simply a raw object that got `JSON.parse()`'d and `JSON.stringify()`'d over, so all of the circular references are gone. More importantly, The object is no longer a true <branch version="11.x" inline>`Emoji`</branch><branch version="12.x" inline>`GuildEmoji`</branch> object as provided by discord.js. This means none of the convenience methods usually provided to you are available. If this is not a concern to you, you can effectively skip the rest of this section. However, this tutorial should cover it regardless! Let's remedy this issue, shall we?
+While this result isn't *necessarily* bad or incorrect, it's simply a raw object that got `JSON.parse()`'d and `JSON.stringify()`'d over, so all of the circular references are gone. More importantly, The object is no longer a true <branch version="11.x" inline>`Emoji`</branch><branch version="12.x" inline>`GuildEmoji`</branch> object as provided by discord.js. *This means none of the convenience methods usually provided to you are available.* If this is a problem for you, you will want to handle the item *inside* the `broadcastEval`. Conveniently, the `findEmoji` function will be ran inside it, so you should execute your relevant methods there, before the object leaves the context.
 
 <branch version="11.x">
 
-```diff
-function findEmoji(id) {
--   const emoji = this.emojis.get(id);  
-+   const temp = this.emojis.get(id);
--   if (!emoji) return null;
-+   if (!temp) return null;
-+
-+   // Clone the object because it is modified right after, so as to not affect the cache in client.emojis
-+   const emoji = Object.assign({}, temp);
-+   // Circular references can't be returned outside of eval, so change it to the id
-+   if (emoji.guild) emoji.guild = emoji.guild.id;
-+   // A new object will be constructed, so simulate raw data by adding this property back
-+   emoji.require_colons = emoji.requiresColons;
-+
+```js
+function findEmoji(query) {
+	const emoji = this.emojis.get(query) || this.emojis.find(e => e.name.toLowerCase() === query.toLowerCase());
+	if (!emoji) return null;
+	// If you wanted to delete the emoji with Discord.js, this is where you would do it. Otherwise, don't include this code.
+	emoji.delete();
 	return emoji;
 }
 ```
 
 </branch>
+
 <branch version="12.x">
 
-```diff
-function findEmoji(id) {
--   const emoji = this.emojis.cache.get(id);    
-+   const temp = this.emojis.cache.get(id);
--   if (!emoji) return null;
-+   if (!temp) return null;
-+
-+   // Clone the object because it is modified right after, so as to not affect the cache in client.emojis
-+   const emoji = Object.assign({}, temp);
-+   // Circular references can't be returned outside of eval, so change it to the id
-+   if (emoji.guild) emoji.guild = emoji.guild.id;
-+   // A new object will be constructed, so simulate raw data by adding this property back
-+   emoji.require_colons = emoji.requiresColons;
-+
+```js
+function findEmoji(query) {
+	const emoji = this.emojis.cache.get(query) || this.emojis.cache.find(e => e.name.toLowerCase() === query.toLowerCase());
+	if (!emoji) return null;
+	// If you wanted to delete the emoji with Discord.js, this is where you would do it. Otherwise, don't include this code.
+	emoji.delete();
 	return emoji;
 }
 ```
 
 </branch>
 
-Now, you will want to make use of it in the actual command:
+WIth all that said and done, usually we want to display the result, so here is how we can go about doing that:
 
 <branch version="11.x">
 
@@ -341,16 +326,7 @@ Now, you will want to make use of it in the actual command:
 +           // Locate a non falsy result, which will be the emoji in question
 +           const foundEmoji = emojiArray.find(emoji => emoji);
 +           if (!foundEmoji) return message.reply('I could not find such an emoji.');
-+
-+           // Acquire a guild that can be reconstructed with discord.js
-+           return client.rest.makeRequest('get', Discord.Constants.Endpoints.Guild(foundEmoji.guild).toString(), true)
-+                   .then(raw => {
-+                       // Reconstruct a guild
-+                       const guild = new Discord.Guild(client, raw);
-+                       // Reconstruct an emoji object as required by discord.js
-+                       const emoji = new Discord.Emoji(guild, foundEmoji);
-+                       return message.reply(`I have found an emoji ${emoji.toString()}!`);
-+                   });
++           return message.reply(`I have found the emoji ${foundEmoji.id ? `<${foundEmoji.animated ? 'a' : ''}:${foundEmoji.name}:${foundEmoji.id}>` : foundEmoji.name}!`);
 +       });
 ```
 
@@ -364,16 +340,7 @@ Now, you will want to make use of it in the actual command:
 +           // Locate a non falsy result, which will be the emoji in question
 +           const foundEmoji = emojiArray.find(emoji => emoji);
 +           if (!foundEmoji) return message.reply('I could not find such an emoji.');
-+
-+           // Acquire a guild that can be reconstructed with discord.js
-+           return client.api.guilds(foundEmoji.guild).get()
-+                   .then(raw => {
-+                       // Reconstruct a guild
-+                       const guild = new Discord.Guild(client, raw);
-+                       // Reconstruct an emoji object as required by discord.js
-+                       const emoji = new Discord.GuildEmoji(client, foundEmoji, guild);
-+                       return message.reply(`I have found an emoji ${emoji.toString()}!`);
-+                   });
++           return message.reply(`I have found the emoji ${foundEmoji.animated ? `<${foundEmoji.identifier}>` : `<:${foundEmoji.identifier}>`}!`);
 +       });
 ```
 
