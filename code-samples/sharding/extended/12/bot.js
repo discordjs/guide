@@ -2,8 +2,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '!';
 
-function findEmoji(id) {
-	const emoji = this.emojis.cache.get(id) || this.emojis.cache.find(e => e.name.toLowerCase() === id.toLowerCase());
+function findEmoji(nameOrID) {
+	const emoji = this.emojis.cache.get(nameOrID) || this.emojis.cache.find(e => e.name.toLowerCase() === nameOrID.toLowerCase());
 	if (!emoji) return null;
 	return emoji;
 }

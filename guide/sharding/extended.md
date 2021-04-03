@@ -217,8 +217,8 @@ Let's start with a basic function, which will try to grab an emoji from the curr
 <branch version="11.x">
 
 ```js
-function findEmoji(query) {
-	const emoji = this.emojis.get(query);
+function findEmoji(nameOrID) {
+	const emoji = this.emojis.get(query) || this.emojis.find(e => e.name.toLowerCase() === nameOrID.toLowerCase());
 	if (!emoji) return null;
 	return emoji;
 }
@@ -228,8 +228,8 @@ function findEmoji(query) {
 <branch version="12.x">
 
 ```js
-function findEmoji(query) {
-	const emoji = this.emojis.cache.get(query) || this.emojis.find(e => e.name.toLowerCase() === query.toLowerCase());
+function findEmoji(nameOrID) {
+	const emoji = this.emojis.cache.get(nameOrID) || this.emojis.cache.find(e => e.name.toLowerCase() === nameOrID.toLowerCase());
 	if (!emoji) return null;
 	return emoji;
 }
@@ -290,8 +290,8 @@ While this result isn't *necessarily* bad or incorrect, it's simply a raw object
 <branch version="11.x">
 
 ```js
-function findEmoji(query) {
-	const emoji = this.emojis.get(query) || this.emojis.find(e => e.name.toLowerCase() === query.toLowerCase());
+function findEmoji(nameOrID) {
+	const emoji = this.emojis.get(nameOrID) || this.emojis.find(e => e.name.toLowerCase() === nameOrID.toLowerCase());
 	if (!emoji) return null;
 	// If you wanted to delete the emoji with Discord.js, this is where you would do it. Otherwise, don't include this code.
 	emoji.delete();
@@ -304,8 +304,8 @@ function findEmoji(query) {
 <branch version="12.x">
 
 ```js
-function findEmoji(query) {
-	const emoji = this.emojis.cache.get(query) || this.emojis.cache.find(e => e.name.toLowerCase() === query.toLowerCase());
+function findEmoji(nameOrID) {
+	const emoji = this.emojis.cache.get(nameOrID) || this.emojis.cache.find(e => e.name.toLowerCase() === nameOrID.toLowerCase());
 	if (!emoji) return null;
 	// If you wanted to delete the emoji with Discord.js, this is where you would do it. Otherwise, don't include this code.
 	emoji.delete();
