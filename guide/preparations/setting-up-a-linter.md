@@ -4,7 +4,7 @@ As a developer, it's a good idea to make your development process as streamlined
 
 ## Installing a code editor
 
-First, you will need a proper code editor. Using Notepad and Notepad++ is discouraged, as they're inefficient for projects like these. If you are using either, it advisable to switch to save everyone lots of headaches and unnecessary syntax error questions.
+First, you will need a proper code editor. Using Notepad and Notepad++ is discouraged, as they're inefficient for projects like these. If you are using either, it's advisable to switch to save everyone lots of headaches and unnecessary syntax error questions.
 
 * [Visual Studio Code](https://code.visualstudio.com/) is a prevalent choice; it is known for being fast and powerful. It supports various languages, has a terminal, built-in IntelliSense support, and autocomplete for both JavaScript and TypeScript. This is the recommended choice.
 * [Atom](https://atom.io/) is user-friendly, concise, and easy to navigate. This is what many developers use to get started.
