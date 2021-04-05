@@ -174,8 +174,8 @@ If you've followed the tutorial, you should have something like this:
 	<discord-message profile="user">
 		!urban hello world
 	</discord-message>
-		The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books.
 	<discord-message profile="bot">
+		The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books.
 	</discord-message>
 </div>
 
