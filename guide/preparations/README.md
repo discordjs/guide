@@ -32,7 +32,7 @@ Like any other project, you should have a dedicated folder to keep it organized 
 
 Navigate to a place on your machine that's easy to find and reopen in the future for convenience purposes. Create a new folder like you normally would (for Linux or macOS, you can use `mkdir project-name` inside your terminal). If you already have a name you want to use for your bot, you can use that as the folder name. Otherwise, you may name it something like `discord-bot` for the time being \(or anything else you have in mind\).
 
-Once you're done making the folder, open it up (for Linux or macOS, you can use `cd project-name` inside your terminal).
+Once you're done making the folder, open it up (depending on your OS, you can use `cd project-name` inside your terminal).
 
 ### Opening the command prompt
 
