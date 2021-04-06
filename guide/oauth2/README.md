@@ -50,6 +50,10 @@ app.listen(port, () => console.log(`App listening at http://localhost:${port}`))
 
 After running `npm i express`, you can start your server with `node index.js`. Once you start it, try connecting to `http://localhost:53134`, and you should see "Hoi!".
 
+::: tip
+Although we're using express, there are many other possible alternatives to handle a web server, such as: [fastify](https://www.fastify.io/), [koa](https://koajs.com/), and the [native Node.js http module](https://nodejs.org/api/http.html).
+:::
+
 ### Getting an OAuth2 url
 
 Now that you have your web server up and running, it's time to get some information from Discord. Head over to [your Discord applications](https://discord.com/developers/applications/) and click "Create an application", where the following page will greet you:
