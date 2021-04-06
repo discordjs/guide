@@ -121,10 +121,10 @@ OAuth2's protocols provide a `state` parameter, which Discord supports. This par
 
 ```js{1-10,15-18}
 function generateRandomString() {
-	const rand = Math.floor(Math.random() * 10);
 	let randomString = '';
+	const randomNumber = Math.floor(Math.random() * 10);
 
-	for (let i = 0; i < 20 + rand; i++) {
+	for (let i = 0; i < 20 + randomNumber; i++) {
 		randomString += String.fromCharCode(33 + Math.floor(Math.random() * 94));
 	}
 

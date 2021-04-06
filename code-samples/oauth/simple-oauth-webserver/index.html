@@ -10,10 +10,10 @@
 	<a id="login" style="display: none;" href="your-oauth2-url-here">Identify Yourself</a>
 	<script>
 		function generateRandomString() {
-			const rand = Math.floor(Math.random() * 10);
 			let randomString = '';
+			const randomNumber = Math.floor(Math.random() * 10);
 
-			for (let i = 0; i < 20 + rand; i++) {
+			for (let i = 0; i < 20 + randomNumber; i++) {
 				randomString += String.fromCharCode(33 + Math.floor(Math.random() * 94));
 			}
 
