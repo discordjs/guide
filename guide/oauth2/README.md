@@ -23,7 +23,7 @@ Most of the time, websites use OAuth2 to get information about their users from 
 ```js
 const express = require('express');
 const app = express();
-const { port } = require('./config.js');
+const { port } = require('./config.json');
 
 app.get('/', (request, response) => {
 	return response.sendFile('index.html', { root: '.' });
@@ -185,7 +185,7 @@ Require `node-fetch` and make your request.
 const fetch = require('node-fetch');
 const express = require('express');
 const app = express();
-const { clientID, clientSecret, port } = require('./config.js');
+const { clientID, clientSecret, port } = require('./config.json');
 
 app.get('/', async ({ query }, response) => {
 	const { code } = query;
