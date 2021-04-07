@@ -22,8 +22,9 @@ Most of the time, websites use OAuth2 to get information about their users from 
 
 ```js
 const express = require('express');
-const app = express();
 const { port } = require('./config.json');
+
+const app = express();
 
 app.get('/', (request, response) => {
 	return response.sendFile('index.html', { root: '.' });
@@ -184,8 +185,9 @@ Require `node-fetch` and make your request.
 ```js{1,4,6-29}
 const fetch = require('node-fetch');
 const express = require('express');
-const app = express();
 const { clientID, clientSecret, port } = require('./config.json');
+
+const app = express();
 
 app.get('/', async ({ query }, response) => {
 	const { code } = query;
@@ -236,13 +238,13 @@ Try fetching the user's information now that you have an access token and a refr
 ```js{3-7,9}
 const oauthData = await oauthResult.json();
 
-const userData = await fetch('https://discord.com/api/users/@me', {
+const userResult = await fetch('https://discord.com/api/users/@me', {
 	headers: {
 		authorization: `${oauthData.token_type} ${oauthData.access_token}`,
 	},
 });
 
-console.log(await userData.json());
+console.log(await userResult.json());
 ```
 
 ::: tip
