@@ -17,11 +17,7 @@ One of the significant advantages proper code editors have over Notepad and Note
 First, be sure to install the [ESLint package](https://www.npmjs.com/package/eslint) so that you have it available in your project.
 
 ```bash
-# locally
 npm install eslint --save-dev
-
-# globally
-npm install eslint --global # Not recommended, and any plugins or shareable configs that you use must be installed locally.
 ```
 
 Afterward, install the appropriate plugin(s) for your editor of choice.
