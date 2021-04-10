@@ -12,7 +12,7 @@ Every slash command is an `interaction`, so to respond to a command you need to 
 
 ```js
 client.on('interaction', interaction => {
-	console.log(interaction);
+    console.log(interaction);
 });
 ```
 
@@ -21,7 +21,7 @@ However, not every interaction is a slash command. Let's make sure to only recei
 ```js
 client.on('interaction', interaction => {
     if (!interaction.isCommand()) return; 
-	console.log(interaction);
+    console.log(interaction);
 });
 ```
 
@@ -37,8 +37,8 @@ Initially an Interaction token is only valid for three seconds, so that's the ti
 
 ```js{3}
 client.on('interaction', interaction => {
-	if (!interaction.isCommand()) return; 
-	if (interaction.commandName === 'ping') interaction.reply('Pong!');
+    if (!interaction.isCommand()) return; 
+    if (interaction.commandName === 'ping') interaction.reply('Pong!');
 });
 ```
 
@@ -64,7 +64,7 @@ You may not always want everyone who has access to the channel to see a slash co
 ```js
 client.on('interaction', interaction => {
     if (!interaction.isCommand()) return; 
-	if (interaction.commandName === 'ping') interaction.reply('Pong!', { ephemeral: true });
+    if (interaction.commandName === 'ping') interaction.reply('Pong!', { ephemeral: true });
 });
 ```
 
@@ -98,7 +98,7 @@ const wait = require('util').promisify(setTimeout);
 client.on('interaction', async interaction => {
     if (!interaction.isCommand()) return; 
     
-	if (interaction.commandName === 'ping') { 
+    if (interaction.commandName === 'ping') { 
         interaction.reply('Pong!');
         await wait(2000);
         interaction.editReply('Pong again!');
@@ -122,7 +122,7 @@ const wait = require('util').promisify(setTimeout);
 client.on('interaction', async interaction => {
     if (!interaction.isCommand()) return; 
     
-	if (interaction.commandName === 'ping') { 
+    if (interaction.commandName === 'ping') { 
         interaction.defer();
         await wait(4000);
         interaction.editReply('Pong!');
@@ -140,7 +140,7 @@ const wait = require('util').promisify(setTimeout);
 client.on('interaction', async interaction => {
     if (!interaction.isCommand()) return; 
     
-	if (interaction.commandName === 'ping') { 
+    if (interaction.commandName === 'ping') { 
         interaction.defer(true);
         await wait(4000);
         interaction.editReply('Pong!');
@@ -162,7 +162,7 @@ After the initial response an Interaction token is valid for 15 minutes, so this
 client.on('interaction', interaction => {
     if (!interaction.isCommand()) return; 
     
-	if (interaction.commandName === 'ping') { 
+    if (interaction.commandName === 'ping') { 
         interaction.reply('Pong!');
         interaction.webhook.send('Pong again!');
     }
