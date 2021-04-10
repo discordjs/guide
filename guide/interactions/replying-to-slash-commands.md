@@ -35,6 +35,10 @@ client.on('interaction', interaction => {
 There are multiple ways of responding to a Slash Command, we will be covering each of these in the following segments.
 The most common way of sending a response is by using the `interaction.reply()` method:
 
+::: warning
+Initially an Interaction token is only valid for 3 Seconds, so that's the timeframe in which you are able to use the `interaction.reply()` method. We will be covering responses that require more time in the Deferred Responses section of this page.
+:::
+
 ```js
 client.on('interaction', interaction => {
     // We return if our interaction is not a Slash Command
@@ -89,6 +93,10 @@ We're not done yet, there's still more topics to cover, so let's move on to the 
 ## Editing Responses
 
 After you've send an initial response you may want to edit that response for various reasons. This can be easily achieved by making use of the `interaction.editReply()` method as seen below:
+
+::: warning
+After the initial response an Interaction token is valid for 15 minutes, so this is the timeframe in which you can edit the response and send followup messages.
+:::
 
 ```js
 // We import and promisify the setTimeout() function
