@@ -195,12 +195,12 @@ If you want to include an image in a page, the image you add should be saved to 
 
 + Here's what the final result would look like:
 +
-+ ![Final result](~@/images/78fcCsF.png)
++ ![Final result](./images/78fcCsF.png)
 +
 + If you want to read more about this, you can check out the page on [that other cool stuff](/some-really-cool-stuff).
 ```
 
-Do note the `~@/images/*` syntax used. The `~@/` part is a shortcut to the base `/guide` directory, which holds all the .md files and the `/images` folder. When it comes to images, this syntax should always be used.
+Do note the `./images/*` syntax used. The `./` part refers to the file's corresponding image directory, which holds all the images used for that directory. When it comes to images, this syntax should always be used.
 
 ### Code samples
 
