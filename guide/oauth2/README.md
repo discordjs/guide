@@ -182,7 +182,7 @@ Now you have to exchange this code with Discord for an access token. To do this,
 
 Require `node-fetch` and make your request.
 
-```js{1,4,6-29}
+```js{1,3,7-8,10-34}
 const fetch = require('node-fetch');
 const express = require('express');
 const { clientID, clientSecret, port } = require('./config.json');
