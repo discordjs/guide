@@ -167,3 +167,36 @@ Perfect, now you know how to reply to a slash command when you have to perform t
 
 ## Followups
 
+Replying to slash commands is great and all, but what if you want to send multiple responses instead of just one? Followup messages got you covered, you can use `interaction.webhook.send()` to send multiple responses:
+
+::: warning
+After the initial response an Interaction token is valid for 15 minutes, so this is the timeframe in which you can edit the response and send followup messages.
+:::
+
+```js
+client.on('interaction', interaction => {
+    if (!interaction.isCommand()) return; 
+    
+	if (interaction.commandName === 'ping') { 
+        interaction.reply('Pong!'); // We send our initial response
+        interaction.webhook.send('Pong again!'); // We send our followup message
+    }
+});
+```
+
+If you run this code you should end up having something that looks like this:
+
+<!--- vue-discord-message doesn't yet have support for inline replies/interactions/ephemeral messages -->
+<div is="discord-messages">
+	<discord-message profile="user">
+		/ping
+	</discord-message>
+	<discord-message profile="bot">
+		Pong!
+	</discord-message>
+	<discord-message profile="bot">
+		Pong again!
+	</discord-message>
+</div>
+
+That's all, now you know everything there is to know on how to reply to slash commands!
