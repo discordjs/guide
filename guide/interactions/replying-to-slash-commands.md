@@ -30,7 +30,7 @@ client.on('interaction', interaction => {
 });
 ```
 
-## Responding to a command
+## Responding to a Command
 
 There are multiple ways of responding to a Slash Command, we will be covering each of these in the following segments.
 The most common way of sending a response is by using the `interaction.reply()` method:
@@ -87,6 +87,24 @@ That's it! You've successfully sent an ephemeral response to a Slash Command.
 We're not done yet, there's still more topics to cover, so let's move on to the next!
 
 ## Editing Responses
+
+After you've send an initial response you may want to edit that response for various reasons. This can be easily achieved by making use of the `interaction.editReply()` method as seen below:
+
+```js
+// We import and promisify the setTimeout() function
+const wait = require('util').promisify(setTimeout);
+// We make the function async to be able to use the await syntax
+client.on('interaction', async interaction => {
+    if (!interaction.isCommand()) return; 
+    
+	if (interaction.commandName === 'ping') { 
+        interaction.reply('Pong!'); // We send our initial response
+        await wait(2000); // We wait 2 seconds
+        interaction.editReply('Pong again!'); // We edit our response
+    }
+});
+```
+Excellent, now you've successfully edited the response of a Slash Command!
 
 ## Deferred Responses
 
