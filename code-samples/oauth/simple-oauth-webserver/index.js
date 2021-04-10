@@ -1,7 +1,8 @@
 const fetch = require('node-fetch');
 const express = require('express');
-const app = express();
 const { clientID, clientSecret, port } = require('./config.json');
+
+const app = express();
 
 app.get('/', async ({ query }, response) => {
 	const { code } = query;
