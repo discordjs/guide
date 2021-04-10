@@ -1,4 +1,4 @@
-# Replying to Slash Commands
+# Replying to slash commands
 
 Discord provides users the option to create client-integrated slash commands. In this section you will be learning how to respond to these commands using discord.js!
 
@@ -6,7 +6,7 @@ Discord provides users the option to create client-integrated slash commands. In
 You need to have at least one slash command set-up for your application to follow the instructions on this page.
 :::
 
-## Receiving Interactions
+## Receiving interactions
 
 Every slash command is an `interaction`, so to respond to a command you need to setup an event listener that will execute code when your application receives an interaction:
 
@@ -26,7 +26,7 @@ client.on('interaction', interaction => {
 ```
 
 
-## Responding to a Command
+## Responding to a command
 
 There are multiple ways of responding to a slash command, we will be covering each of these in the following segments.
 The most common way of sending a response is by using the `interaction.reply()` method:
@@ -57,7 +57,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 You've successfully sent a response to a slash command! This is only the beginning, there's more to look out for so let's move on to further ways of replying to a command!
 
 
-## Ephemeral Responses
+## Ephemeral responses
 
 You may not always want everyone who has access to the channel to see a slash command's response. Thankfully, Discord implemented a way to hide messages from everyone but the executor of the slash command. These type of messages are called `ephemeral` messages and can be set by using `ephemeral: true` in the `InteractionReplyOptions`, as follows:
 
@@ -84,7 +84,7 @@ That's it! You've successfully sent an ephemeral response to a slash command.
 We're not done yet, there's still more topics to cover, so let's move on to the next!
 
 
-## Editing Responses
+## Editing responses
 
 After you've sent an initial response, you may want to edit that response for various reasons. This can be easily achieved by making use of the `interaction.editReply()` method, as seen below:
 
@@ -109,7 +109,7 @@ client.on('interaction', async interaction => {
 Excellent, now you've successfully edited the response of a slash command!
 
 
-## Deferred Responses
+## Deferred responses
 
 As previously mentioned, you have three seconds to respond to an Interaction before its token turns invalid. But what if you have a command that performs a task that takes longer than that before sending the response? 
 
