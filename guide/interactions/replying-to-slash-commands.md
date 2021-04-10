@@ -130,7 +130,7 @@ client.on('interaction', async interaction => {
 });
 ```
 
-As you can see, you are now able to respond to your command even if you surpass the initial 3 second timeframe! When you have a command that performs longer tasks, be sure to call `defer()` as soon as possible.
+As you can see, you are now able to respond to your command even if you surpass the initial three second timeframe! When you have a command that performs longer tasks, be sure to call `defer()` as soon as possible.
 
 But what if you want the deferred response to be ephemeral? Fear not, you can pass `true` as parameter to the `defer()` method as outlined below:
 
