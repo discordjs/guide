@@ -89,7 +89,7 @@ We're not done yet, there's still more topics to cover, so let's move on to the 
 After you've sent an initial response, you may want to edit that response for various reasons. This can be easily achieved by making use of the `interaction.editReply()` method, as seen below:
 
 ::: warning
-After the initial response an Interaction token is valid for 15 minutes, so this is the timeframe in which you can edit the response and send followup messages.
+After the initial response, an Interaction token is valid for 15 minutes, so this is the timeframe in which you can edit the response and send follow-up messages.
 :::
 
 ```js
