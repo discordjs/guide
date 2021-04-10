@@ -23,6 +23,7 @@ client.on('interaction', interaction => {
     if (!interaction.isCommand()) return; 
 	console.log(interaction);
 });
+```
 
 
 ## Responding to a Command
