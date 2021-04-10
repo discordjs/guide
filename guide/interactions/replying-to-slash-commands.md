@@ -30,6 +30,7 @@ client.on('interaction', interaction => {
 });
 ```
 
+
 ## Responding to a Command
 
 There are multiple ways of responding to a Slash Command, we will be covering each of these in the following segments.
@@ -47,6 +48,7 @@ client.on('interaction', interaction => {
 	if (interaction.commandName === 'ping') interaction.reply('Pong!');
 });
 ```
+
 Restart your bot and then send the command to a channel your bot has access to. If all goes well, you should see something like this:
 
 <!--- vue-discord-message doesn't yet have support for inline replies/interactions/ephemeral messages -->
@@ -75,6 +77,7 @@ client.on('interaction', interaction => {
 	if (interaction.commandName === 'ping') interaction.reply('Pong!', { ephemeral: true });
 });
 ```
+
 Now when you run your command again, you should see something like this:
 
 <!--- vue-discord-message doesn't yet have support for inline replies/interactions/ephemeral messages -->
@@ -89,6 +92,7 @@ Now when you run your command again, you should see something like this:
 
 That's it! You've successfully sent an ephemeral response to a Slash Command.
 We're not done yet, there's still more topics to cover, so let's move on to the next!
+
 
 ## Editing Responses
 
@@ -112,7 +116,9 @@ client.on('interaction', async interaction => {
     }
 });
 ```
+
 Excellent, now you've successfully edited the response of a Slash Command!
+
 
 ## Deferred Responses
 
@@ -134,7 +140,30 @@ client.on('interaction', async interaction => {
     }
 });
 ```
+
 As you can see, you are now able to respond to your command even if you surpass the initial 3 second timeframe!
 
+::: tip
+You should call the `defer()` method as soon as possibly when you have a command that performs longer tasks to make sure that you defer the response before 3 seconds have passed!
+:::
+
+But what if you want the deferred response to be ephemeral? Fear not, you can pass `true` as parameter to the `defer()` method as outlined below:
+
+```js
+const wait = require('util').promisify(setTimeout);
+
+client.on('interaction', async interaction => {
+    if (!interaction.isCommand()) return; 
+    
+	if (interaction.commandName === 'ping') { 
+        interaction.defer(true); // We defer our initial response and make it ephemeral
+        await wait(4000); // We wait 4 seconds
+        interaction.editReply('Pong!'); // We send our response using editReply()
+    }
+});
+```
+
+Perfect, now you know how to reply to a slash command when you have to perform time intensive tasks!
 
 ## Followups
+
