@@ -34,11 +34,9 @@ The most common way of sending a response is by using the `interaction.reply()` 
 Initially an Interaction token is only valid for 3 Seconds, so that's the timeframe in which you are able to use the `interaction.reply()` method. We will be covering responses that require more time in the Deferred Responses section of this page.
 :::
 
-```js
+```js{3}
 client.on('interaction', interaction => {
-    // We return if our interaction is not a Slash Command
-    if (!interaction.isCommand()) return; 
-    // Check if it is the correct command and send a response
+	if (!interaction.isCommand()) return; 
 	if (interaction.commandName === 'ping') interaction.reply('Pong!');
 });
 ```
