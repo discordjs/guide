@@ -151,7 +151,7 @@ client.on('interaction', async interaction => {
 
 Perfect, now you know how to reply to a slash command when you have to perform time intensive tasks!
 
-## Followups
+## Follow-ups
 
 Replying to slash commands is great and all, but what if you want to send multiple responses instead of just one? Followup messages got you covered, you can use `interaction.webhook.send()` to send multiple responses:
 
