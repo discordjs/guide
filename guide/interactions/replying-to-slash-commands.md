@@ -116,4 +116,25 @@ Excellent, now you've successfully edited the response of a Slash Command!
 
 ## Deferred Responses
 
+As you've read in the `Responding to a Command` section, you have 3 seconds to respond to an Interaction before its token turns invalid. But what if you have a command that performs a task that takes longer than that before sending the response? 
+
+In this case you can make use of the `interaction.defer()` method, which triggers the `<application> is thinking...` message and also acts as initial response, giving you 15 minutes time to complete your tasks before responding:
+<!--- here either display the is thinking message via vue-discord-message or place a screenshot -->
+
+```js
+const wait = require('util').promisify(setTimeout);
+
+client.on('interaction', async interaction => {
+    if (!interaction.isCommand()) return; 
+    
+	if (interaction.commandName === 'ping') { 
+        interaction.defer(); // We defer our initial response
+        await wait(4000); // We wait 4 seconds
+        interaction.editReply('Pong!'); // We send our response using editReply()
+    }
+});
+```
+As you can see, you are now able to respond to your command even if you surpass the initial 3 second timeframe!
+
+
 ## Followups
