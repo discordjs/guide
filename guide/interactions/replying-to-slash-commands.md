@@ -60,9 +60,7 @@ You've successfully sent a response to a slash command! This is only the beginni
 
 ## Ephemeral Responses
 
-You may not always want everyone who has access to the channel in which a command has been used to see the response, thankfully Discord implemented a way to hide messages from everyone but the executor of the slash command. These type of messages are called `ephemeral` messages.
-
-To make a response ephemeral all you have to do is set `ephemeral: true` in the `InteractionReplyOptions` as follows:
+You may not always want everyone who has access to the channel to see a slash command's response. Thankfully, Discord implemented a way to hide messages from everyone but the executor of the slash command. These type of messages are called `ephemeral` messages and can be set by using `ephemeral: true` in the `InteractionReplyOptions`, as follows:
 
 ```js
 client.on('interaction', interaction => {
