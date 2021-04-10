@@ -64,7 +64,6 @@ You may not always want everyone who has access to the channel to see a slash co
 ```js
 client.on('interaction', interaction => {
     if (!interaction.isCommand()) return; 
-    // Setting the ephemeral flag to true will make the response ephemeral
 	if (interaction.commandName === 'ping') interaction.reply('Pong!', { ephemeral: true });
 });
 ```
@@ -94,16 +93,15 @@ After the initial response, an Interaction token is valid for 15 minutes, so thi
 :::
 
 ```js
-// We import and promisify the setTimeout() function
 const wait = require('util').promisify(setTimeout);
-// We make the function async to be able to use the await syntax
+
 client.on('interaction', async interaction => {
     if (!interaction.isCommand()) return; 
     
 	if (interaction.commandName === 'ping') { 
-        interaction.reply('Pong!'); // We send our initial response
-        await wait(2000); // We wait 2 seconds
-        interaction.editReply('Pong again!'); // We edit our response
+        interaction.reply('Pong!');
+        await wait(2000);
+        interaction.editReply('Pong again!');
     }
 });
 ```
@@ -125,9 +123,9 @@ client.on('interaction', async interaction => {
     if (!interaction.isCommand()) return; 
     
 	if (interaction.commandName === 'ping') { 
-        interaction.defer(); // We defer our initial response
-        await wait(4000); // We wait 4 seconds
-        interaction.editReply('Pong!'); // We send our response using editReply()
+        interaction.defer();
+        await wait(4000);
+        interaction.editReply('Pong!');
     }
 });
 ```
@@ -143,9 +141,9 @@ client.on('interaction', async interaction => {
     if (!interaction.isCommand()) return; 
     
 	if (interaction.commandName === 'ping') { 
-        interaction.defer(true); // We defer our initial response and make it ephemeral
-        await wait(4000); // We wait 4 seconds
-        interaction.editReply('Pong!'); // We send our response using editReply()
+        interaction.defer(true);
+        await wait(4000);
+        interaction.editReply('Pong!');
     }
 });
 ```
@@ -165,8 +163,8 @@ client.on('interaction', interaction => {
     if (!interaction.isCommand()) return; 
     
 	if (interaction.commandName === 'ping') { 
-        interaction.reply('Pong!'); // We send our initial response
-        interaction.webhook.send('Pong again!'); // We send our followup message
+        interaction.reply('Pong!');
+        interaction.webhook.send('Pong again!');
     }
 });
 ```
