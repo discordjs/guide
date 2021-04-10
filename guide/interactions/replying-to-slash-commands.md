@@ -16,19 +16,13 @@ client.on('interaction', interaction => {
 });
 ```
 
-::: warning
-Not every `interaction` is a clash command, so you need to make sure you that you know which type of Interaction you are dealing with!
-:::
-
-Let's make sure you only receive slash commands by making use of the `interaction.isCommand()` method:
+However, not every interaction is a slash command. Let's make sure to only receive slash commands by making use of the `interaction.isCommand()` method:
 
 ```js
 client.on('interaction', interaction => {
-    // We return if our interaction is not a slash command
     if (!interaction.isCommand()) return; 
 	console.log(interaction);
 });
-```
 
 
 ## Responding to a Command
