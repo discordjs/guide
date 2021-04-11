@@ -97,7 +97,7 @@ const wait = require('util').promisify(setTimeout);
 
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return; 
-    
+
 	if (interaction.commandName === 'ping') { 
 		interaction.reply('Pong!');
 		await wait(2000);
@@ -121,7 +121,7 @@ const wait = require('util').promisify(setTimeout);
 
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return; 
-    
+
 	if (interaction.commandName === 'ping') { 
 		interaction.defer();
 		await wait(4000);
@@ -139,7 +139,7 @@ const wait = require('util').promisify(setTimeout);
 
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return; 
-    
+
 	if (interaction.commandName === 'ping') { 
 		interaction.defer(true);
 		await wait(4000);
@@ -161,7 +161,7 @@ After the initial response an interaction token is valid for 15 minutes, so this
 ```js{6}
 client.on('interaction', interaction => {
 	if (!interaction.isCommand()) return; 
-    
+
 	if (interaction.commandName === 'ping') { 
 		interaction.reply('Pong!');
 		interaction.webhook.send('Pong again!');
