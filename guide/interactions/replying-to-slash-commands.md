@@ -152,10 +152,10 @@ Perfect, now you know how to reply to a slash command when you have to perform t
 
 ## Follow-ups
 
-Replying to slash commands is great and all, but what if you want to send multiple responses instead of just one? Followup messages got you covered, you can use `interaction.webhook.send()` to send multiple responses:
+Replying to slash commands is great and all, but what if you want to send multiple responses instead of just one? Follow-up messages got you covered, you can use `interaction.webhook.send()` to send multiple responses:
 
 ::: warning
-After the initial response an interaction token is valid for 15 minutes, so this is the timeframe in which you can edit the response and send followup messages.
+After the initial response an interaction token is valid for 15 minutes, so this is the timeframe in which you can edit the response and send follow-up messages.
 :::
 
 ```js{6}
