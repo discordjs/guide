@@ -1,6 +1,6 @@
 <template>
 	<a :href="link" target="_blank" rel="noopener noreferrer">
-		<slot></slot> <outbound-link />
+		<slot></slot><outbound-link />
 	</a>
 </template>
 
