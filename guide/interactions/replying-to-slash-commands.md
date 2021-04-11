@@ -12,10 +12,10 @@ Every slash command is an `interaction`, so to respond to a command you need to 
 
 ```js
 client.on('interaction', interaction => {
-    console.log(interaction);
+	console.log(interaction);
 });
 ```
-
+        
 However, not every interaction is a slash command. Let's make sure to only receive slash commands by making use of the `interaction.isCommand()` method:
 
 ```js{2}
