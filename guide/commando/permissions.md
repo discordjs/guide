@@ -44,7 +44,7 @@ super(client, {
 });
 ```
 
-All you need to do is set the properties to an array of permission flags. A list of those can be found <branch version="11.x" inline>[here](https://discord.js.org/#/docs/main/v11/class/Permissions?scrollTo=s-FLAGS)</branch><branch version="12.x" inline>[here](https://discord.js.org/#/docs/main/stable/class/Permissions?scrollTo=s-FLAGS)</branch>.
+All you need to do is set the properties to an array of permission flags. A list of those can be found <docs-link path="class/Permissions?scrollTo=s-FLAGS">here</docs-link>.
 
 ## Owner-only commands
 
