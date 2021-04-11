@@ -32,7 +32,7 @@ There are multiple ways of responding to a slash command, we will be covering ea
 The most common way of sending a response is by using the `interaction.reply()` method:
 
 ::: warning
-Initially an Interaction token is only valid for three seconds, so that's the timeframe in which you are able to use the `interaction.reply()` method. Responses that require more time ("Deferred Responses") are explained later in this page.
+Initially an interaction token is only valid for three seconds, so that's the timeframe in which you are able to use the `interaction.reply()` method. Responses that require more time ("Deferred Responses") are explained later in this page.
 :::
 
 ```js{3}
