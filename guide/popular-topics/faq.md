@@ -327,8 +327,8 @@ This can be set as a default in `ClientOptions`, and controlled per-message sent
 
 Even more control can be achieved by listing specific `users` or `roles` to be mentioned by ID, eg:
 ```js
-message.channel.send("<@830569888157925434> <@122157285790187530>", { 
-  allowedMentions: { users: ["830569888157925434"] } 
+message.channel.send('<@830569888157925434> <@122157285790187530>', {
+	allowedMentions: { users: ['830569888157925434'] }
 });
 ```
 
