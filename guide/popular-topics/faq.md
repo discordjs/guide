@@ -384,7 +384,6 @@ You do not need to have a constant local variable like `blockedUsers` above. If 
 ```
 
 Note that this is just a showcase of how you could do such a check.
-:::
 
 ### How do I react to the message my bot sent?
 

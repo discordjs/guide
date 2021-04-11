@@ -466,8 +466,7 @@ if (command.args && !args.length) {
 
 Your command handler will now refuse to execute commands if the permissions you specify in the command structure are missing from the member trying to use it. Note that the `ADMINISTRATOR` permission and the message author being the owner of the guild will overwrite this.
 
-::: 
-
+::: tip
 Need more resources on how Discord's permission system works? Check the [permissions article](/popular-topics/permissions.html), [extended permissions knowledge base](/popular-topics/permissions-extended.html) and documentation of <branch version="11.x" inline>[permission flags](https://discord.js.org/#/docs/main/v11/class/Permissions?scrollTo=s-FLAGS)</branch><branch version="12.x" inline>[permission flags](https://discord.js.org/#/docs/main/stable/class/Permissions?scrollTo=s-FLAGS)</branch> out! 
 :::
 
