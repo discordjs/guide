@@ -4,6 +4,7 @@ const { prefix, token } = require('./config.json');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
+client.cooldowns = new Discord.Collection();
 
 const commandFolders = fs.readdirSync('./commands');
 
@@ -14,8 +15,6 @@ for (const folder of commandFolders) {
 		client.commands.set(command.name, command);
 	}
 }
-
-const cooldowns = new Discord.Collection();
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -52,6 +51,8 @@ client.on('message', message => {
 
 		return message.channel.send(reply);
 	}
+
+	const { cooldowns } = client;
 
 	if (!cooldowns.has(command.name)) {
 		cooldowns.set(command.name, new Discord.Collection());

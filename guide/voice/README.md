@@ -2,14 +2,14 @@
 
 <branch version="11.x">
 
-The Discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots, and tips and tricks to optimize performance!
+The discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots and give you tips to optimize performance!
 
-This voice guide is written for Discord.js v12, which features an improved audio system. Much of the example code in the voice guide is unsuitable for v11 and below - to access this content, please update Discord.js to v12! 
+This voice guide targets discord.js v12, which features an improved audio system. Much of the example code in the voice guide is unsuitable for v11 and below–to access this content, please update discord.js to v12! 
 
 </branch>
 <branch version="12.x">
 
-"Voice" refers to the ability of a bot to send audio in voice channels. Discord.js makes it easy for you to get up and running with voice!
+"Voice" refers to the ability of a bot to send audio in voice channels. discord.js makes it easy for you to get up and running with voice!
 
 ## Quick example
 ```js

@@ -4,7 +4,7 @@ pageTheme: blue
 
 # Using arguments in commands
 
-Sometimes when using commands you may want to get data from the user, and change the response accordingly. In this section, you'll create a command that pulls a string from the message and says it back to the user!
+Sometimes when using commands, you may want to get data from the user and change the response accordingly. In this section, you'll create a command that pulls a string from the message and says it back to the user!
 
 ## String arguments
 
@@ -56,8 +56,8 @@ super(client, {
 See? Simple.
 
 - `key` is the name of the argument. When you define it in your `run` method, this is what you'll be using.
-- `prompt` is the text that displays if no argument is provided. If someone uses just `?say`, that prompt will come up asking for the text.
-- `type` is the type the argument is a part of. This can be many things, including `string`, `integer`, `user`, `member`, etc.
+- `prompt` is the text that displays if the user doesn't provide arguments. If someone uses `?say` by itself, that prompt will ask for the text.
+- `type` is the type of the argument. It can be many things, including `string`, `integer`, `user`, `member`, etc.
 
 Adding more args is as simple as adding another object to the array, like so:
 
@@ -103,7 +103,7 @@ run(message, { text }) {
 }
 ```
 
-Next, make the `run` method return the text back to the user.
+Next, make the `run` method return the text to the user.
 
 <!-- eslint-skip -->
 
