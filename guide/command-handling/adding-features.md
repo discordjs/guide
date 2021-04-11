@@ -522,7 +522,7 @@ After removing the command from the cache, all you have to do is require the fil
 
 ```js
 try {
-	const newCommand = require(`./${command.name}.js`);
+	const newCommand = require(`../${folderName}/${command.name}.js`);
 	message.client.commands.set(newCommand.name, newCommand);
 } catch (error) {
 	console.error(error);
