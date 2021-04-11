@@ -245,7 +245,7 @@ message.reactions.cache.get('484535447171760141').remove().catch(error => consol
 
 ### Removing reactions by user
 ::: tip
-If you are not familiar with <branch version="11.x" inline><docs-link section="main" branch="v11" path="class/Collection?scrollTo=filter">`Collection.filter()`</docs-link></branch><branch version="12.x" inline><docs-link section="collection" path="class/Collection?scrollTo=filter">`Collection.filter()`</docs-link></branch> and [`Map.has()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) take the time to understand what they do and then come back.
+If you are not familiar with <branch version="11.x" inline><docs-link path="class/Collection?scrollTo=filter">`Collection.filter()`</docs-link></branch><branch version="12.x" inline><docs-link section="collection" path="class/Collection?scrollTo=filter">`Collection.filter()`</docs-link></branch> and [`Map.has()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) take the time to understand what they do and then come back.
 :::
 
 <branch version="11.x">

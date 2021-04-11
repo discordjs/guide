@@ -426,7 +426,7 @@ At the end of it all, you should be getting this as a result:
 No more manually editing your help command! If you aren't satisfied with how it looks, you can always adjust it to your liking later.
 
 ::: tip
-If you want to add categories or other information to your commands, you can add properties reflecting it to your `module.exports`. If you only want to show a subset of commands remember that `commands` is a Collection you can <branch version="11.x" inline><docs-link section="main" branch="v11" path="class/Collection?scrollTo=filter">filter</docs-link></branch><branch version="12.x" inline><docs-link section="collection" path="class/Collection?scrollTo=filter">filter</docs-link></branch> to fit your specific needs!
+If you want to add categories or other information to your commands, you can add properties reflecting it to your `module.exports`. If you only want to show a subset of commands remember that `commands` is a Collection you can <branch version="11.x" inline><docs-link path="class/Collection?scrollTo=filter">filter</docs-link></branch><branch version="12.x" inline><docs-link section="collection" path="class/Collection?scrollTo=filter">filter</docs-link></branch> to fit your specific needs!
 :::
 
 ## Command permissions

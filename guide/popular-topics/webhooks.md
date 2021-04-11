@@ -33,7 +33,7 @@ If you would like to get all webhooks of a guild you can use <docs-link path="cl
 
 ### Fetching webhooks of a channel
 
-Webhooks belonging to a channel can be fetched using <docs-link path="class/TextChannel?scrollTo=fetchWebhooks">`TextChannel#fetchWebhooks()`</docs-link>. This will return a Promise which will resolve into a Collection of `Webhook`s. A collection will be returned even if the channel contains a single webhook. If you are certain the channel contains a single webhook, you can use <branch version="11.x" inline><docs-link section="main" branch="v11" path="class/Collection?scrollTo=first">`Collection#first()`</docs-link></branch><branch version="12.x" inline><docs-link section="collection" path="class/Collection?scrollTo=first">`Collection#first()`</docs-link></branch> on the Collection to get the webhook.
+Webhooks belonging to a channel can be fetched using <docs-link path="class/TextChannel?scrollTo=fetchWebhooks">`TextChannel#fetchWebhooks()`</docs-link>. This will return a Promise which will resolve into a Collection of `Webhook`s. A collection will be returned even if the channel contains a single webhook. If you are certain the channel contains a single webhook, you can use <branch version="11.x" inline><docs-link path="class/Collection?scrollTo=first">`Collection#first()`</docs-link></branch><branch version="12.x" inline><docs-link section="collection" path="class/Collection?scrollTo=first">`Collection#first()`</docs-link></branch> on the Collection to get the webhook.
 
 ### Fetching a single webhook
 
