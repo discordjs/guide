@@ -6,7 +6,7 @@ This page is a follow-up and bases its code on [the previous page](/command-hand
 
 The command handler you've been building so far doesn't do much aside from dynamically load and execute commands. Those two things alone are great, but not the only things you want. Before diving into it, let's do some quick refactoring in preparation.
 
-```js{2,4,6,9}
+```js {2,4,6,9}
 const args = message.content.slice(prefix.length).trim().split(/ +/);
 const commandName = args.shift().toLowerCase();
 
@@ -50,7 +50,7 @@ It is not necessary to name your subfolders exactly like we have named them here
 
 Back in your `index.js` file, where the code to [dynamically read command files](/command-handling/#dynamically-reading-command-files) is, use the same pattern to read the sub-folder directories, and then require each command inside them.
 
-```js{3,5-11}
+```js {3,5-11}
 client.commands = new Discord.Collection();
 
 const commandFolders = fs.readdirSync('./commands');
@@ -90,7 +90,7 @@ This check suffices if you only have a few commands that require arguments; howe
 
 Here are the changes you'll be making:
 
-```js{4,6-8}
+```js {4,6-8}
 module.exports = {
 	name: 'args-info',
 	description: 'Information about the arguments provided.',
@@ -107,7 +107,7 @@ module.exports = {
 
 And then in your main file:
 
-```js{3-5}
+```js {3-5}
 const command = client.commands.get(commandName);
 
 if (command.args && !args.length) {
@@ -125,7 +125,7 @@ Here's a simple implementation of such a thing. For this example, pretend you ha
 
 In your `role.js` file:
 
-```js{3-4}
+```js {3-4}
 module.exports = {
 	name: 'role',
 	args: true,
@@ -138,7 +138,7 @@ module.exports = {
 
 In your main file:
 
-```js{2,4-6,8}
+```js {2,4-6,8}
 if (command.args && !args.length) {
 	let reply = `You didn't provide any arguments, ${message.author}!`;
 
@@ -156,7 +156,7 @@ Some commands are meant to be used only inside servers and won't work whatsoever
 
 In the kick command you created in an earlier chapter, make the following changes:
 
-```js{4}
+```js {4}
 module.exports = {
 	name: 'kick',
 	description: 'Kick a user from the server.',
@@ -170,7 +170,7 @@ module.exports = {
 And in your main file, using an if statement to verify:
 
 
-```js{1-3}
+```js {1-3}
 if (command.guildOnly && message.channel.type === 'dm') {
 	return message.reply('I can\'t execute that command inside DMs!');
 }
@@ -197,7 +197,7 @@ Spam is something you generally want to avoid–especially if one of your comman
 
 First, add a cooldown key to one of your commands (we use the ping command here) exports. This determines how long the user will have to wait (in seconds) before using this specific command again.
 
-```js{3}
+```js {3}
 module.exports = {
 	name: 'ping',
 	cooldown: 5,
@@ -209,7 +209,7 @@ module.exports = {
 
 In your main file, initialize an empty Collection (remember, Collection is a utility data structure, which works based on key/value pairs) which you can then fill later when commands are used:
 
-```js{2}
+```js {2}
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 ```
@@ -218,7 +218,7 @@ The keys will be the command names, and the values will be Collections associati
 
 In your main file:
 
-```js{1,3-5,7-9,11-13}
+```js {1,3-5,7-9,11-13}
 const { cooldowns } = client;
 
 if (!cooldowns.has(command.name)) {
@@ -250,7 +250,7 @@ If the author has already used this command in this session, get the timestamp, 
 
 Continuing with your current setup, this is the complete `if` statement:
 
-```js{2,4-7}
+```js {2,4-7}
 if (timestamps.has(message.author.id)) {
 	const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
 
@@ -265,7 +265,7 @@ Since the `timestamps` Collection has the author's ID in it as a key, you `.get(
 
 The previous author check serves as a precaution. It should normally not be necessary, as you will now insert a short piece of code, causing the author's entry to be deleted after the cooldown has expired. To facilitate this, you will use the node.js `setTimeout` method, which allows you to execute a function after a specified amount of time:
 
-```js{5-6}
+```js {5-6}
 if (timestamps.has(message.author.id)) {
 	// ...
 }
@@ -284,7 +284,7 @@ For this bit of the guide, we'll be using the avatar command as a target. Discor
 
 Open your `avatar.js` file and add in the following line:
 
-```js{3}
+```js {3}
 module.exports = {
 	name: 'avatar',
 	aliases: ['icon', 'pfp'],
@@ -296,7 +296,7 @@ module.exports = {
 
 The `aliases` property should always contain an array of strings. In your main file, here are the changes you'll need to make:
 
-```js{5-6,8}
+```js {5-6,8}
 client.on('message', message => {
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
@@ -351,7 +351,7 @@ module.exports = {
 
 You're going to need your prefix variable a couple of times inside this command, so make sure to require that at the very top of the file.
 
-```js{1}
+```js {1}
 const { prefix } = require('../../config.json');
 
 module.exports = {
@@ -361,7 +361,7 @@ module.exports = {
 
 Inside the `execute()` function, set up some variables and an if/else statement to determine whether it should display a list of all the command names or only information about a specific command.
 
-```js{4-5,7-9}
+```js {4-5,7-9}
 module.exports = {
 	// ...
 	execute(message, args) {
@@ -377,7 +377,7 @@ module.exports = {
 
 You can use `.push()` on the `data` variable to append the info you want and then DM it to the message author afterward.
 
-```js{2-4,6-14}
+```js {2-4,6-14}
 if (!args.length) {
 	data.push('Here\'s a list of all my commands:');
 	data.push(commands.map(command => command.name).join(', '));
@@ -409,7 +409,7 @@ Because the `data` variable is an array, you can take advantage of discord.js' f
 
 Below the `if (!args.length)` statement is where you'll send the help message for the command they specified.
 
-```js{5-6,8-10,12,14-16,18,20}
+```js {5-6,8-10,12,14-16,18,20}
 if (!args.length) {
 	// ...
 }
@@ -466,7 +466,7 @@ If you want to add categories or other information to your commands, you can add
 
 In this section, you will be adding permission requirements to the command handler we established so far. To do so, you need to add a `permissions` key to your existing command options. We will use the 'kick' command to demonstrate:
 
-```js{5}
+```js {5}
 module.exports = {
 	name: 'kick',
 	description: 'Kick a user from the server.',
@@ -480,7 +480,7 @@ module.exports = {
 
 You also need to check for those permissions before executing the command, which is done in the main file, as shown below. We use `TextChannel#permissionsFor` combined with `Permissions#has` rather than `Guildmember#hasPermission` to respect permission overwrites in our check.
 
-```js{1-6}
+```js {1-6}
 if (command.permissions) {
 	const authorPerms = message.channel.permissionsFor(message.author);
 	if (!authorPerms || !authorPerms.has(command.permissions)) {
@@ -505,7 +505,7 @@ When writing your commands, you may find it tedious to restart your bot every ti
 
 Create a new command file and paste in the usual format with a slight change:
 
-```js{1}
+```js {1}
 const fs = require('fs');
 
 module.exports = {
@@ -519,7 +519,7 @@ module.exports = {
 
 In this command, you will be using a command name or alias as the only argument. First off, you need to check if the command you want to reload exists. You can do this check similarly to getting a command in your main file:
 
-```js{4-6,8-10}
+```js {4-6,8-10}
 module.exports = {
 	// ...
 	execute(message, args) {
@@ -540,7 +540,7 @@ A lot of library-specific structures have `client` as a property. That means you
 
 To build the correct file path, you will need the file name and the sub-folder the command belongs to. For the file name, you can use `command.name`. To find the sub-folder name, you will have to loop through the commands sub-folders and check whether the command file is in that folder or not. You can do that by using `Array.includes()` on each subfolder's file names array. 
 
-```js{5-6}
+```js {5-6}
 if (!command) {
 	// ...
 }
@@ -551,7 +551,7 @@ const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${fo
 
 In theory, all there is to do is delete the previous command from `client.commands` and require the file again. In practice, you cannot do this easily as `require()` caches the file. If you were to require it again, you would load the previously cached file without any changes. You first need to delete the file from the `require.cache`, and only then should you require and set the command file to `client.commands`:
 
-```js{3,5-12}
+```js {3,5-12}
 const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${folder}`).includes(`${commandName}.js`));	
 
 delete require.cache[require.resolve(`../${folderName}/${command.name}.js`)];

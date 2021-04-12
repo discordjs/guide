@@ -18,7 +18,7 @@ client.on('message', message => {
 
 Before doing anything else, make a property to store the prefix you've configured. Instead of `const config = ...`, you can destructure the config file to extract the prefix and token variables.
 
-```js{1,3}
+```js {1,3}
 const { prefix, token } = require('./config.json');
 // ...
 client.login(token);
@@ -34,7 +34,7 @@ If you aren't familiar with some of this syntax, it may be ES6 syntax. If it doe
 
 You already have an if statement that checks messages for a ping/pong command. Adding other command checks is just as easy; chain an `else if` to your existing condition.
 
-```js{2-6}
+```js {2-6}
 client.on('message', message => {
 	if (message.content === `${prefix}ping`) {
 		message.channel.send('Pong.');
@@ -46,7 +46,7 @@ client.on('message', message => {
 
 There are a few potential issues with this. For example, the ping command won't work if you send `!ping test`. It will only match `!ping` and nothing else. The same goes for the other command. If you want your commands to be more flexible, you can do the following:
 
-```js{2-6}
+```js {2-6}
 client.on('message', message => {
 	if (message.content.startsWith(`${prefix}ping`)) {
 		message.channel.send('Pong.');
@@ -74,7 +74,7 @@ Make another if statement to check for commands using `server` as the command na
 Servers are referred to as "guilds" in the Discord API and discord.js library. Whenever you see someone say "guild", they mean server.
 :::
 
-```js{6-8}
+```js {6-8}
 client.on('message', message => {
 	if (message.content === `${prefix}ping`) {
 		message.channel.send('Pong.');
@@ -99,7 +99,7 @@ The code above would result in this:
 
 If you want to expand upon that command and add some more info, here's an example of what you can do:
 
-```js{6-8}
+```js {6-8}
 client.on('message', message => {
 	if (message.content === `${prefix}ping`) {
 		message.channel.send('Pong.');
@@ -135,7 +135,7 @@ Set up another if statement and use the command name `user-info`.
 
 <!-- eslint-skip -->
 
-```js{8-10}
+```js {8-10}
 client.on('message', message => {
 	if (message.content === `${prefix}ping`) {
 		message.channel.send('Pong.');

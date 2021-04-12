@@ -10,7 +10,7 @@ Let's start with the basic usage of shards. At some point in bot development, yo
 
 <branch version="11.x">
 
-```js{3-11}
+```js {3-11}
 client.on('message', message => {
 	// ...
 	if (command === 'send') {
@@ -28,7 +28,7 @@ client.on('message', message => {
 </branch>
 <branch version="12.x">
 
-```js{3-11}
+```js {3-11}
 client.on('message', message => {
 	// ...
 	if (command === 'send') {
@@ -49,7 +49,7 @@ This will never work for a channel that lies on another shard. So, let's remedy 
 
 <branch version="11.x">
 
-```js{4-13}
+```js {4-13}
 if (command === 'send') {
 	if (!args.length) return message.reply('please specify a destination channel id.');
 
@@ -73,7 +73,7 @@ if (command === 'send') {
 In version 12 [`client.shard`](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=ids) can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
 :::
 
-```js{4-13}
+```js {4-13}
 if (command === 'send') {
 	if (!args.length) return message.reply('please specify a destination channel id.');
 
@@ -94,7 +94,7 @@ if (command === 'send') {
 
 If all is well, you should notice an output like `[false, true, false, false]`. If it is not clear why `true` and `false` are hanging around, the last expression of the eval statement will be returned. You will want this if you want any feedback from the results. Now that you have observed said results, you can adjust the command to give yourself proper feedback, like so:
 
-```js{4-10}
+```js {4-10}
 return client.shard.broadcastEval(`
 	// ...
 `)
@@ -115,7 +115,7 @@ If you remember, there was a brief mention of passing functions through `.broadc
 
 <branch version="11.x">
 
-```js{3-8}
+```js {3-8}
 client.on('message', message => {
 	// ...
 	if (command === 'emoji') {
@@ -130,7 +130,7 @@ client.on('message', message => {
 </branch>
 <branch version="12.x">
 
-```js{3-8}
+```js {3-8}
 client.on('message', message => {
 	// ...
 	if (command === 'emoji') {
@@ -173,7 +173,7 @@ function findEmoji(id) {
 
 Next, you need to call the function in your command properly. If you recall from [this section](/sharding/additional-information.md#eval-arguments), it is shown there how to pass a function and arguments correctly. `.call()` will also be used to preserve the `client` context in the function that passes through.
 
-```js{4-7}
+```js {4-7}
 client.on('message', message => {
 	// ...
 	if (command === 'emoji') {
@@ -219,7 +219,7 @@ While this result isn't *necessarily* bad or incorrect, it's simply a raw object
 
 <branch version="11.x">
 
-```js{2-3,5-10}
+```js {2-3,5-10}
 function findEmoji(id) {
 	const temp = this.emojis.get(id);
 	if (!temp) return null;
@@ -238,7 +238,7 @@ function findEmoji(id) {
 </branch>
 <branch version="12.x">
 
-```js{2-3,5-10}
+```js {2-3,5-10}
 function findEmoji(id) {
 	const temp = this.emojis.cache.get(id);
 	if (!temp) return null;
@@ -260,7 +260,7 @@ Now, you will want to make use of it in the actual command:
 
 <branch version="11.x">
 
-```js{2-16}
+```js {2-16}
 return client.shard.broadcastEval(`(${findEmoji}).call(this, '${args[0]}')`)
 	.then(emojiArray => {
 		// Locate a non falsy result, which will be the emoji in question
@@ -282,7 +282,7 @@ return client.shard.broadcastEval(`(${findEmoji}).call(this, '${args[0]}')`)
 </branch>
 <branch version="12.x">
 
-```js{2-16}
+```js {2-16}
 return client.shard.broadcastEval(`(${findEmoji}).call(this, '${args[0]}')`)
 	.then(emojiArray => {
 		// Locate a non falsy result, which will be the emoji in question

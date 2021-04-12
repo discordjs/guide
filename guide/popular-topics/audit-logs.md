@@ -36,7 +36,7 @@ For our interests, we will set a fetch limit of 1 and only care about the type `
 
 Placing this into the previous code, we get the following. Note that we will also make the function async to make use of `await`. As well, we will make sure to ignore DMs.
 
-```js{2-9,11-12,14-16,18-25}
+```js {2-9,11-12,14-16,18-25}
 client.on('messageDelete', async message => {
 	// ignore direct messages
 	if (!message.guild) return;
@@ -78,7 +78,7 @@ client.on('guildMemberRemove', member => {
 
 We will again fetch audit logs while limiting ourselves to 1 entry and looking at the `MEMBER_KICK` type.
 
-```js{2-7,9-10,12-14,16-22}
+```js {2-7,9-10,12-14,16-22}
 client.on('guildMemberRemove', async member => {
 	const fetchedLogs = await member.guild.fetchAuditLogs({
 		limit: 1,
@@ -116,7 +116,7 @@ client.on('guildBanAdd', async (guild, user) => {
 
 As was the case in the previous examples, we can see what happened, to whom it happened, but not who executed the action. Enter once again audit logs to limit ourselves to 1 entry and look at the `MEMBER_BAN_ADD` type. Our `guildBanAdd` listener then becomes.
 
-```js{2-7,9-10,12-14,16-22}
+```js {2-7,9-10,12-14,16-22}
 client.on('guildBanAdd', async (guild, user) => {
 	const fetchedLogs = await guild.fetchAuditLogs({
 		limit: 1,

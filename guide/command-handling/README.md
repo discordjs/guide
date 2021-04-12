@@ -67,7 +67,7 @@ If you need to access your client instance from inside one of your command files
 
 Back in your main file, make these two additions:
 
-```js{1,6}
+```js {1,6}
 const fs = require('fs');
 const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
@@ -86,7 +86,7 @@ If you aren't exactly sure what Collections are, they're a class that extend Jav
 
 This next step is how you'll dynamically retrieve all your newly created command files. The [`fs.readdirSync()`](https://nodejs.org/api/fs.html#fs_fs_readdirsync_path_options) method will return an array of all the file names in a directory, e.g. `['ping.js', 'beep.js']`. To ensure only command files get returned, use `Array.filter()` to leave out any non-JavaScript files from the array. With that array, you can loop over it and dynamically set your commands to the Collection you made above.
 
-```js{3,5-10}
+```js {3,5-10}
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));

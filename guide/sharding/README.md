@@ -159,7 +159,7 @@ While it's a bit unattractive to have more nesting in your commands, it is neces
 
 <branch version="11.x">
 
-```js{4-8}
+```js {4-8}
 client.on('message', message => {
 	// ...
 	if (command === 'stats') {
@@ -175,7 +175,7 @@ client.on('message', message => {
 </branch>
 <branch version="12.x">
 
-```js{4-8}
+```js {4-8}
 client.on('message', message => {
 	// ...
 	if (command === 'stats') {
@@ -279,7 +279,7 @@ Promise.all(promises)
 
 <branch version="11.x">
 
-```js{4-15}
+```js {4-15}
 client.on('message', message => {
 	// ...
 	if (command === 'stats') {
@@ -302,7 +302,7 @@ client.on('message', message => {
 </branch>
 <branch version="12.x">
 
-```js{4-15}
+```js {4-15}
 client.on('message', message => {
 	// ...
 	if (command === 'stats') {

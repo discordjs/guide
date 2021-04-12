@@ -29,7 +29,7 @@ To react with a Unicode emoji, you will need the actual Unicode character of the
 
 To react with an emoji, you need to use the `message.react()` method. Once you have the emoji character, all you need to do is copy & paste it as a string inside the `.react()` method!
 
-```js{2-4}
+```js {2-4}
 client.on('message', message => {
 	if (message.content === '!react') {
 		message.react('😄');
@@ -47,7 +47,7 @@ For custom emojis, there are multiple ways of reacting. Like Unicode emojis, you
 
 This format is essentially the name of the emoji, followed by its ID. Copy & paste the ID into the `.react()` method as a string.
 
-```js{2-4}
+```js {2-4}
 client.on('message', message => {
 	if (message.content === '!react-custom') {
 		message.react('396548322053062656');
@@ -72,7 +72,7 @@ Using `.find()`, your code would look something like this:
 
 <branch version="11.x">
 
-```js{2-3}
+```js {2-3}
 if (message.content === '!react-custom') {
 	const reactionEmoji = message.guild.emojis.find(emoji => emoji.name === 'ayy');
 	message.react(reactionEmoji);
@@ -82,7 +82,7 @@ if (message.content === '!react-custom') {
 </branch>
 <branch version="12.x">
 
-```js{2-3}
+```js {2-3}
 if (message.content === '!react-custom') {
 	const reactionEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'ayy');
 	message.react(reactionEmoji);
@@ -95,7 +95,7 @@ Using `.get()`, your code would look something like this:
 
 <branch version="11.x">
 
-```js{2-3}
+```js {2-3}
 if (message.content === '!react-custom') {
 	const reactionEmoji = client.emojis.get(config.emojiID);
 	message.react(reactionEmoji);
@@ -105,7 +105,7 @@ if (message.content === '!react-custom') {
 </branch>
 <branch version="12.x">
 
-```js{2-3}
+```js {2-3}
 if (message.content === '!react-custom') {
 	const reactionEmoji = client.emojis.cache.get(config.emojiID);
 	message.react(reactionEmoji);
@@ -120,7 +120,7 @@ Of course, if you already have the emoji ID, you should put that directly inside
 
 If you just put one `message.react()` under another, it won't always react in order as-is. This is because `.react()` is a Promise and an asynchronous operation.
 
-```js{2-6}
+```js {2-6}
 client.on('message', message => {
 	if (message.content === '!fruits') {
 		message.react('🍎');
@@ -137,7 +137,7 @@ As you can see, if you leave it like that, it won't display as you want. It was 
 
 Luckily, there are two easy solutions to this. The first would be to chain `.then()`s in the order you want it to display.
 
-```js{3-6}
+```js {3-6}
 client.on('message', message => {
 	if (message.content === '!fruits') {
 		message.react('🍎')
@@ -150,7 +150,7 @@ client.on('message', message => {
 
 The other would be to use the `async`/`await` keywords.
 
-```js{1,3-9}
+```js {1,3-9}
 client.on('message', async message => {
 	if (message.content === '!fruits') {
 		try {
@@ -176,7 +176,7 @@ If you aren't familiar with Promises or `async`/`await`, you can read more about
 
 However, if you don't mind the order the emojis react in, you can take advantage of `Promise.all()`, like so:
 
-```js{2-7}
+```js {2-7}
 if (message.content === '!fruits') {
 	Promise.all([
 		message.react('🍎'),

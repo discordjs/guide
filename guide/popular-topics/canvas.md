@@ -117,7 +117,7 @@ The end goal will be to display the user's avatar, username, and a simple "Welco
 
 <!-- eslint-disable require-await -->
 
-```js{5-8}
+```js {5-8}
 client.on('guildMemberAdd', async member => {
 	// ...
 	if (!channel) return;
@@ -134,7 +134,7 @@ Now, you need to load the image you want to use into Canvas. To have sufficient 
 
 <branch version="11.x">
 
-```js{5-10,12}
+```js {5-10,12}
 client.on('guildMemberAdd', async member => {
 	// ...
 	const context = canvas.getContext('2d');
@@ -153,7 +153,7 @@ client.on('guildMemberAdd', async member => {
 </branch>
 <branch version="12.x">
 
-```js{5-10,12}
+```js {5-10,12}
 client.on('guildMemberAdd', async member => {
 	// ...
 	const context = canvas.getContext('2d');
@@ -181,7 +181,7 @@ If you get an error such as `Error: error while reading from input stream`, then
 
 Next, let's place a border around the image for the sake of demonstration purposes.
 
-```js{5-8}
+```js {5-8}
 client.on('guildMemberAdd', async member => {
 	// ...
 	context.drawImage(background, 0, 0, canvas.width, canvas.height);
@@ -200,7 +200,7 @@ A bit plain, right? Fear not, for you have a bit more to do until you reach comp
 
 <branch version="11.x">
 
-```js{5-8}
+```js {5-8}
 client.on('guildMemberAdd', async member => {
 	// ...
 	context.strokeRect(0, 0, canvas.width, canvas.height);
@@ -216,7 +216,7 @@ client.on('guildMemberAdd', async member => {
 </branch>
 <branch version="12.x">
 
-```js{5-8}
+```js {5-8}
 client.on('guildMemberAdd', async member => {
 	// ...
 	context.strokeRect(0, 0, canvas.width, canvas.height);
@@ -237,7 +237,7 @@ It works well, but the avatar image itself seems a bit stretched out. Let's reme
 
 <branch version="11.x">
 
-```js{4-5}
+```js {4-5}
 client.on('guildMemberAdd', async member => {
 	// ...
 	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
@@ -250,7 +250,7 @@ client.on('guildMemberAdd', async member => {
 </branch>
 <branch version="12.x">
 
-```js{4-5}
+```js {4-5}
 client.on('guildMemberAdd', async member => {
 	// ...
 	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
@@ -268,7 +268,7 @@ The purpose of this small section is to demonstrate that working with Canvas is 
 
 Since we covered how to load external images and fix dimensions, let's turn the avatar into a circle to improve the image's overall style.
 
-```js{5-12}
+```js {5-12}
 client.on('guildMemberAdd', async member => {
 	// ...
 	context.strokeRect(0, 0, canvas.width, canvas.height);
@@ -295,7 +295,7 @@ You can read more about `context.arc()` on [w3schools](https://www.w3schools.com
 
 Now, let's quickly go over adding text to your image. This will help make the purpose of this image apparent since currently, it's just an avatar floating on a starry background that comes out of nowhere.
 
-```js{5-10}
+```js {5-10}
 client.on('guildMemberAdd', async member => {
 	// ...
 	context.strokeRect(0, 0, canvas.width, canvas.height);
@@ -318,7 +318,7 @@ If you get an error like `Fontconfig error: Cannot load default config file`, it
 
 You may have noticed or considered that if a member's username is too long, then the output won't be quite nice. This is because the text overflows out of the canvas, and you don't have any measures in place for that. Let's take care of this issue!
 
-```js{1-16,22-25}
+```js {1-16,22-25}
 // Pass the entire Canvas object because you'll need access to its width and context
 const applyText = (canvas, text) => {
 	const context = canvas.getContext('2d');
@@ -358,7 +358,7 @@ After adjustment:
 
 Let's move the welcome text inside the image itself instead of adding it outside as a nice finishing touch.
 
-```js{5-8,10-13}
+```js {5-8,10-13}
 client.on('guildMemberAdd', async member => {
 	// ...
 	context.strokeRect(0, 0, canvas.width, canvas.height);

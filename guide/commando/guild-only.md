@@ -29,7 +29,7 @@ module.exports = class MeowCommand extends Command {
 
 After `description`, add a `guildOnly` setting and set it to `true`.
 
-```js{5}
+```js {5}
 module.exports = class MeowCommand extends Command {
 	constructor(client) {
 		super(client, {

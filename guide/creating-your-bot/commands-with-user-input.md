@@ -12,7 +12,7 @@ We'll be tackling two things at once here. We will explain along the way, so don
 
 Go to your message event handler and add the following block of code at the top of it.
 
-```js{2,4-5}
+```js {2,4-5}
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -28,7 +28,7 @@ client.on('message', message => {
 
 Hopefully, that's a bit clearer. Let's create a quick command to check out the result of our new addition:
 
-```js{7-13}
+```js {7-13}
 client.on('message', message => {
 	// ...
 	// Using the new `command` variable, this makes it easier to manage!
@@ -62,7 +62,7 @@ Looks good! Don't worry about the comma separation; that's the expected output w
 Now that you have an array of arguments, you can interact with it accordingly! Try out this small addition to the command:
 
 
-```js{5-14}
+```js {5-14}
 client.on('message', message => {
 	// ...
 	if (command === 'ping') {
@@ -140,7 +140,7 @@ Here is where we'll be going over a few everyday situations where you'll want to
 
 Using the example of a kick command, you most likely want it to allow the user to use the command and mention the person to kick, right? We won't be constructing the full kick command in this example, but here's how you can go about it:
 
-```js{5-11}
+```js {5-11}
 client.on('message', message => {
 	// ...
 	if (command === 'ping') {
@@ -177,7 +177,7 @@ TypeError: Cannot read property 'username' of undefined
 
 That's because you're trying to access the `username` property of a user you didn't mention! Since `message.mentions.users` is a Collection and you're trying to call `.first()` on an empty Collection, it'll return `undefined`. You can add a quick coherence check above the `const taggedUser = ...` line to prevent this from happening.
 
-```js{1-3}
+```js {1-3}
 if (!message.mentions.users.size) {
 	return message.reply('you need to tag a user in order to kick them!');
 }
@@ -214,7 +214,7 @@ Let's say you have an `!avatar` command, where it'll display the avatar of all t
 
 <branch version="11.x">
 
-```js{1-3}
+```js {1-3}
 if (!message.mentions.users.size) {
 	return message.channel.send(`Your avatar: <${message.author.displayAvatarURL}>`);
 }
@@ -225,7 +225,7 @@ const taggedUser = message.mentions.users.first();
 </branch>
 <branch version="12.x">
 
-```js{1-3}
+```js {1-3}
 if (!message.mentions.users.size) {
 	return message.channel.send(`Your avatar: <${message.author.displayAvatarURL({ format: 'png', dynamic: true })}>`);
 }
@@ -255,7 +255,7 @@ The next part is where it takes a turn–displaying the avatars of all the menti
 
 <branch version="11.x">
 
-```js{5-7,11}
+```js {5-7,11}
 if (!message.mentions.users.size) {
 	return message.channel.send(`Your avatar: <${message.author.displayAvatarURL}>`);
 }
@@ -272,7 +272,7 @@ message.channel.send(avatarList);
 </branch>
 <branch version="12.x">
 
-```js{5-7,11}
+```js {5-7,11}
 if (!message.mentions.users.size) {
 	return message.channel.send(`Your avatar: <${message.author.displayAvatarURL({ format: 'png', dynamic: true })}>`);
 }
@@ -322,7 +322,7 @@ Sometimes you'll want users to give you input that ranges from X to Y, but nothi
 The first step would be to check if the input they gave is an actual number.
 
 
-```js{5-11}
+```js {5-11}
 client.on('message', message => {
 	// ...
 	if (command === 'ping') {
@@ -352,7 +352,7 @@ So what you need to do next is check if the first argument is between X and Y. F
 
 With that said, that method does have its limits: you can only delete a minimum of 2 and a maximum of 100 messages (at a time). Fortunately, there are a few ways to deal with that. One of those ways would be to check the value of the `amount` variable, like so:
 
-```js{3-5}
+```js {3-5}
 if (isNaN(amount)) {
 	return message.reply('that doesn\'t seem to be a valid number.');
 } else if (amount < 2 || amount > 100) {
@@ -391,7 +391,7 @@ If you aren't familiar with the `.catch()` method, it catches errors on Promises
 
 The other caveat with this is that the `!prune {number}` message you sent will also count towards the amount deleted. This means that if you send `!prune 2`, it'll delete that message and only one other. There are a couple ways around this, but we'll take the easiest route for the sake of the tutorial. Here are the edits to make to your current code:
 
-```js{1,5-7}
+```js {1,5-7}
 const amount = parseInt(args[0]) + 1;
 
 if (isNaN(amount)) {

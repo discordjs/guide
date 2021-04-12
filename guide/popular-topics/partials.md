@@ -52,7 +52,7 @@ if (message.partial) {
 
 Along with `.partial` to check if the structure you call it on is partial or not, the library also introduced a `.fetch()` method to retrieve the missing data from the API and complete the structure. The method returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) you need to handle. After the Promise resolves (and with it, the missing data arrived), you can use the structure as you would before.
 
-```js{2-8,10}
+```js {2-8,10}
 if (message.partial) {
 	message.fetch()
 		.then(fullMessage => {

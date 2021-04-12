@@ -8,7 +8,7 @@ This page is a follow-up and bases its code on [the previous page](/command-hand
 
 Now that you have a Collection of all our commands, you can use them quickly! But before diving straight into it, it'd be a good idea to familiarize yourself with how you'll turn these basic if statements into something much more dynamic and robust. Let's continue with one more if statement example, and then we'll move onto the real stuff.
 
-```js{2}
+```js {2}
 if (command === 'ping') {
 	client.commands.get('ping').execute(message, args);
 }
@@ -18,7 +18,7 @@ You `.get()` the ping command and call its `.execute()` method while passing in 
 
 So, if you wanted to (assuming that you've copied & pasted all of your commands into their own files by now), this could be your entire message event:
 
-```js{3-9}
+```js {3-9}
 client.on('message', message => {
 	// ...
 	if (command === 'ping') {
@@ -37,7 +37,7 @@ That would work perfectly fine, but it isn't dynamic; you'd still have to add an
 
 At this point, you can take that entire if/else if chain and delete it. Instead, you'll be replacing it with this:
 
-```js{7-14}
+```js {7-14}
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 

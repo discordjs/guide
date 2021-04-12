@@ -34,7 +34,7 @@ module.exports = class SayCommand extends Command {
 
 The `args` field is simply an array of objects, each containing data for that argument.
 
-```js{5-11}
+```js {5-11}
 module.exports = class SayCommand extends Command {
 	constructor(client) {
 		super(client, {
@@ -59,7 +59,7 @@ See? Simple.
 
 Adding more args is as simple as adding another object to the array, like so:
 
-```js{11-15}
+```js {11-15}
 module.exports = class SayCommand extends Command {
 	constructor(client) {
 		super(client, {
@@ -83,7 +83,7 @@ module.exports = class SayCommand extends Command {
 
 You can also set arguments to default to a specific value:
 
-```js{11}
+```js {11}
 module.exports = class SayCommand extends Command {
 	constructor(client) {
 		super(client, {
@@ -106,7 +106,7 @@ As you can see, they're very powerful things.
 
 Head on over to your `run` method and set the `text` arg to a variable and return the text to the user.
 
-```js{6-8}
+```js {6-8}
 module.exports = class SayCommand extends Command {
 	constructor(client) {
 		// ...

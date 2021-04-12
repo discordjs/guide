@@ -119,7 +119,7 @@ client.on('message', async message => {
 
 Now that you have a command handler, you can make a command to allow people to use your prefix system.
 
-```js{3-11}
+```js {3-11}
 client.on('message', async message => {
 	// ...
 	if (command === 'prefix') {

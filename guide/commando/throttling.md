@@ -34,7 +34,7 @@ Add the `throttling` property to the command. `throttling` is an object, which c
 
 Make it have two usages allowed in ten seconds.
 
-```js{5-8}
+```js {5-8}
 module.exports = class MeowCommand extends Command {
 	constructor(client) {
 		super(client, {

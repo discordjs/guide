@@ -94,7 +94,7 @@ fetch('https://aws.random.cat/meow').then(response => response.json());
 
 It may seem like this does nothing, but what it's doing is launching a request to the random.cat server. The server is returning some JSON that contains a `file` property, which is a string containing a link to a random cat. node-fetch returns a response object, which we can change into JSON with `response.json()`. Next, let's implement this into a command. The code should look similar to this:
 
-```js{3-6}
+```js {3-6}
 client.on('message', async message => {
 	// ...
 	if (command === 'cat') {
@@ -122,8 +122,8 @@ Urban Dictionary's API is available at https://api.urbandictionary.com/v0/define
 
 First, you're going to need to fetch data from the API. To do this, you'd do:
 
-```js{1,5-14}
-const querystring = require('querystring');
+```js {1,5-14}
+const querystring = require('querystring')
 // ...
 client.on('message', async message => {
 	// ...
@@ -150,7 +150,7 @@ Now, if you look at the JSON, you can see that it's a `list` property, which is 
 
 As explained above we want to check if the API returned any answers for our query, and send back the definition if so:
 
-```js{3-5,7}
+```js {3-5,7}
 if (command === 'urban') {
 	// ...
 	if (!list.length) {

@@ -64,7 +64,7 @@ You've just created your first command group! Make another folder called `first`
 
 Adding more command groups is as simple as adding another option to the array and making another folder.
 
-```js{6}
+```js {6}
 client.registry
 	// ...
 	.registerGroups([
@@ -76,7 +76,7 @@ client.registry
 
 Should you want to disable a default command, such as if you wanted to make a custom help command and replace the default one, you could pass that as an option in `registerDefaultCommands`.
 
-```js{3-5}
+```js {3-5}
 client.registry
 	// ...
 	.registerDefaultCommands({

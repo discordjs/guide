@@ -12,7 +12,7 @@ What if you have a command where your first argument has to match a specific tex
 
 Pull the argument from your say command and add a blank `validate` function to the arg.:
 
-```js{10}
+```js {10}
 module.exports = class SayCommand extends Command {
 	constructor(client) {
 		super(client, {
@@ -32,7 +32,7 @@ module.exports = class SayCommand extends Command {
 
 Inside your `validate` function, check to see if the length is below 201 characters.
 
-```js{10}
+```js {10}
 module.exports = class SayCommand extends Command {
 	constructor(client) {
 		super(client, {
@@ -56,7 +56,7 @@ And now you've got a validator that checks if the length is 200!
 
 Another property you can use to validate arguments is the `oneOf` option. This option forces the argument to be _one of_ the options provided in an array. If you wanted to make an argument that required a "yes" or "no" response, you'd do this:
 
-```js{7-10}
+```js {7-10}
 module.exports = class SayCommand extends Command {
 	constructor(client) {
 		super(client, {

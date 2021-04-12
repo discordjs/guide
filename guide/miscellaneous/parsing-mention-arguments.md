@@ -73,7 +73,7 @@ This is what we have so far. It is pretty simple; it will show the avatar of who
 
 <branch version="11.x">
 
-```js{3-7}
+```js {3-7}
 client.on('message', message => {
 	// ...
 	if (command === 'avatar') {
@@ -87,7 +87,7 @@ client.on('message', message => {
 </branch>
 <branch version="12.x">
 
-```js{3-7}
+```js {3-7}
 client.on('message', message => {
 	// ...
 	if (command === 'avatar') {
@@ -158,7 +158,7 @@ Plugging it into the command will give you this:
 
 <branch version="11.x">
 
-```js{4-11}
+```js {4-11}
 client.on('message', message => {
 	// ...
 	if (command === 'avatar') {
@@ -179,7 +179,7 @@ client.on('message', message => {
 </branch>
 <branch version="12.x">
 
-```js{4-11}
+```js {4-11}
 client.on('message', message => {
 	// ...
 	if (command === 'avatar') {
@@ -229,7 +229,7 @@ When writing a ban command where a mention might appear in the reason, manual pa
 
 <branch version="11.x">
 
-```js{1,3-21}
+```js {1,3-21}
 client.on('message', async message => {
 	// ...
 	if (command === 'ban') {
@@ -257,7 +257,7 @@ client.on('message', async message => {
 </branch>
 <branch version="12.x">
 
-```js{1,3-21}
+```js {1,3-21}
 client.on('message', async message => {
 	// ...
 	if (command === 'ban') {

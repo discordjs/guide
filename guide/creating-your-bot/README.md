@@ -75,7 +75,7 @@ Inside your console, you can press the up arrow on your keyboard to bring up the
 
 Logging to the console is great and all, but it doesn't provide any feedback for the end-user. Let's create a basic ping/pong command before you move on to making real commands. Remove the `console.log(message.content)` line from your code and replace it with the following:
 
-```js{2-5}
+```js {2-5}
 client.on('message', message => {
 	if (message.content === '!ping') {
 		// send back "Pong." to the channel the message was sent in
