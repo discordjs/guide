@@ -182,6 +182,44 @@ Since `guild.members` returns a Collection, you can iterate over it with `.forEa
 Since the `.delete()` method returns a Promise, you need to `await` it when inside a `try`/`catch` block.
 ```
 
+#### Codeblock line highlighting
+
+When you want to highlight a piece of code to display either an addition or a difference, use the `js{1-5,6-10}` syntax. For example (ignoring the `\`s):
+
+```md
+
+Here's our base code:
+
+```js{2,6}
+client.once('ready', () => {
+	console.log('Ready.');
+});
+
+client.on('message', message => {
+	console.log(message.content);
+});
+\```
+
+To add this feature, use this code:
+
+```js{2,6-8}
+client.once('ready', () => {
+	console.log(`${client.user.tag} ready.`);
+});
+
+client.on('message', message => {
+	if (message.content === '!ping') {
+		message.channel.send('Pong.');
+	}
+});
+\```
+
+```
+
+![Codeblock line highlighting output](https://i.imgur.com/913nf9V.png)
+
+This is VuePress' [codeblock line highlighting](https://vuepress.vuejs.org/guide/markdown.html#line-highlighting-in-code-blocks) feature. It's encouraged to use and preferred over diff codeblocks.
+
 ### Images and links
 
 If you want to include an image in a page, the image you add should be saved to the repo itself instead of using external services. If you want to link to other sections of the guide, be sure to use relative paths instead of full URLs to the live site. For example:
