@@ -25,7 +25,7 @@ client.on('message', message => {
 	} else if (command === 'beep') {
 		message.channel.send('Boop.');
 	}
-	// other commands...
+	// ...
 });
 
 client.login(token);
@@ -67,13 +67,13 @@ If you need to access your client instance from inside one of your command files
 
 Back in your main file, make these two additions:
 
-```diff
-+ const fs = require('fs');
+```js{1,6}
+const fs = require('fs');
 const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
 
 const client = new Discord.Client();
-+ client.commands = new Discord.Collection();
+client.commands = new Discord.Collection();
 ```
 
 ::: tip
@@ -84,42 +84,19 @@ const client = new Discord.Client();
 If you aren't exactly sure what Collections are, they're a class that extend JavaScript's native Map class and include more extensive, useful functionality. You can read about Maps [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), and see all the available Collection methods <branch version="11.x" inline>[here](https://discord.js.org/#/docs/main/v11/class/Collection)</branch><branch version="12.x" inline>[here](https://discord.js.org/#/docs/collection/master/class/Collection)</branch>.
 :::
 
-This next step is how you'll dynamically retrieve all your newly created command files. Add this below your `client.commands` line:
+This next step is how you'll dynamically retrieve all your newly created command files. The [`fs.readdirSync()`](https://nodejs.org/api/fs.html#fs_fs_readdirsync_path_options) method will return an array of all the file names in a directory, e.g. `['ping.js', 'beep.js']`. To ensure only command files get returned, use `Array.filter()` to leave out any non-JavaScript files from the array. With that array, you can loop over it and dynamically set your commands to the Collection you made above.
 
-```js
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-```
-
-The `fs.readdirSync()` method will return an array of all the file names in that directory, e.g. `['ping.js', 'beep.js']`. The filter is there to leave out any non-JavaScript files from the array. With that array, you can loop over it and dynamically set your commands to the Collection you made above.
-
-```js
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-
-	// set a new item in the Collection
-	// with the key as the command name and the value as the exported module
-	client.commands.set(command.name, command);
-}
-```
-
-By this point, your code should look something like this:
-
-```js
-const fs = require('fs');
-const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
-
-const client = new Discord.Client();
+```js{3,5-10}
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
+	// set a new item in the Collection
+	// with the key as the command name and the value as the exported module
 	client.commands.set(command.name, command);
 }
-
-// `client.on('...')` events and such below this point
 ```
 
 As for setting up your files, that's it for now. In the next chapter, you'll learn how to make your commands execute dynamically!
