@@ -29,16 +29,15 @@ module.exports = class MeowCommand extends Command {
 
 After `description`, add a `guildOnly` setting and set it to `true`.
 
-<!-- eslint-skip -->
-
-```js
-super(client, {
-    name: 'meow',
-    group: 'first',
-    memberName: 'meow',
-    description: 'Replies with a meow, kitty cat.',
-    guildOnly: true,
-});
+```js{5}
+module.exports = class MeowCommand extends Command {
+	constructor(client) {
+		super(client, {
+			// ...
+			guildOnly: true,
+		});
+	}
+};
 ```
 
 And that's all there is to it! When used in a DM, the bot will not permit the command's use, and you will no longer receive errors!

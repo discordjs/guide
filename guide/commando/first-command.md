@@ -46,15 +46,10 @@ There are many more properties you can use, but their sections will explain thos
 
 The next thing you're going to need is a `run` method. This should go right below the constructor for the command. Inside, you'll return a message:
 
-```js
+```js{6-8}
 module.exports = class MeowCommand extends Command {
 	constructor(client) {
-		super(client, {
-			name: 'meow',
-			group: 'first',
-			memberName: 'meow',
-			description: 'Replies with a meow, kitty cat.',
-		});
+		// ...
 	}
 
 	run(message) {

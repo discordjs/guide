@@ -6,20 +6,11 @@ pageTheme: blue
 
 Sometimes, you may want to remove the unknown command response from your bot. Be it Cleverbot or some other reason; sometimes you want it gone, and it's quite simple to remove.
 
-Head over to your `index.js` file and find your `client.registry` variable. You're going to be adding a new setting here.
+Head over to your `index.js` file and find your `client.registry` variable. All you have to do to remove the unknown command response is adding `unknownCommand` and setting it to `false` in `.registerDefaultCommands()`, under your registry:
 
-<!-- eslint-skip -->
-
-```js
+```js{3-5}
 client.registry
-// ... The rest of the data from your registry
-```
-
-All you have to do to remove the unknown command response is adding `unknownCommand` and setting it to `false` in `.registerDefaultCommands()`, under your registry:
-
-```js
-client.registry
-	// ... The rest of the data from your registry
+	// ...
 	.registerDefaultCommands({
 		unknownCommand: false,
 	});
