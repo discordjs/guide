@@ -109,70 +109,41 @@ This will trigger the `guildMemberAdd` event while passing in the message author
 
 ### Basic image loading
 
-The end goal will be to display the user's avatar, username, and a simple "Welcome!" message when they join. After importing the Canvas module and initializing it, you should load the images. With Canvas, you have to specify where the image comes from first, naturally, and then specify how it gets loaded into the actual Canvas using `ctx`, which you will use to interact with Canvas.
+The end goal will be to display the user's avatar, username, and a simple "Welcome!" message when they join. After importing the Canvas module and initializing it, you should load the images. With Canvas, you have to specify where the image comes from first, naturally, and then specify how it gets loaded into the actual Canvas using `context`, which you will use to interact with Canvas.
 
 ::: tip
 `node-canvas` works almost identical to HTML5 Canvas. You can read the HTML5 Canvas tutorials on [w3Schools](https://www.w3schools.com/html/html5_canvas.asp) and [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) for more information later!
 :::
 
-<branch version="11.x">
-
 <!-- eslint-disable require-await -->
 
-```js
+```js{5-8}
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
+	// ...
 	if (!channel) return;
 
-	// Set a new canvas to the dimensions of 700x250 pixels
+	// Create a 700x250 pixels canvas and get its context
+	// The context will be used to modify the canvas
 	const canvas = Canvas.createCanvas(700, 250);
-	// ctx (context) will be used to modify a lot of the canvas
-
-	const ctx = canvas.getContext('2d');
-
-	channel.send(`Welcome to the server, ${member}!`);
+	const context = canvas.getContext('2d');
+	// ...
 });
 ```
-
-</branch>
-<branch version="12.x">
-
-<!-- eslint-disable require-await -->
-
-```js
-client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-	if (!channel) return;
-
-	// Set a new canvas to the dimensions of 700x250 pixels
-	const canvas = Canvas.createCanvas(700, 250);
-	// ctx (context) will be used to modify a lot of the canvas
-
-	const ctx = canvas.getContext('2d');
-
-	channel.send(`Welcome to the server, ${member}!`);
-});
-```
-
-</branch>
 
 Now, you need to load the image you want to use into Canvas. To have sufficient coverage, we'll first show you how to load a basic image from a local directory. We'll be using [this image](https://github.com/discordjs/guide/blob/master/guide/images/canvas.jpg) as the background in the welcome image, but you can use whatever you want. Be sure to download the file, name it `wallpaper.jpg`, and save it inside the same directory as your main bot file.
 
 <branch version="11.x">
 
-```js
+```js{5-10,12}
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
-	if (!channel) return;
-
-	const canvas = Canvas.createCanvas(700, 250);
-	const ctx = canvas.getContext('2d');
+	// ...
+	const context = canvas.getContext('2d');
 
 	// Since the image takes time to load, you should await it
 	const background = await Canvas.loadImage('./wallpaper.jpg');
 	// This uses the canvas dimensions to stretch the image onto the entire canvas
-	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-	// Use helpful Attachment class structure to process the file for you
+	context.drawImage(background, 0, 0, canvas.width, canvas.height);
+	// Use the helpful Attachment class structure to process the file for you
 	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
 
 	channel.send(`Welcome to the server, ${member}!`, attachment);
@@ -182,19 +153,16 @@ client.on('guildMemberAdd', async member => {
 </branch>
 <branch version="12.x">
 
-```js
+```js{5-10,12}
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-	if (!channel) return;
-
-	const canvas = Canvas.createCanvas(700, 250);
-	const ctx = canvas.getContext('2d');
+	// ...
+	const context = canvas.getContext('2d');
 
 	// Since the image takes time to load, you should await it
 	const background = await Canvas.loadImage('./wallpaper.jpg');
 	// This uses the canvas dimensions to stretch the image onto the entire canvas
-	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-	// Use helpful Attachment class structure to process the file for you
+	context.drawImage(background, 0, 0, canvas.width, canvas.height);
+	// Use the helpful Attachment class structure to process the file for you
 	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
 
 	channel.send(`Welcome to the server, ${member}!`, attachment);
@@ -213,56 +181,18 @@ If you get an error such as `Error: error while reading from input stream`, then
 
 Next, let's place a border around the image for the sake of demonstration purposes.
 
-<branch version="11.x">
-
-```js
+```js{5-8}
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
-	if (!channel) return;
+	// ...
+	context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-	const canvas = Canvas.createCanvas(700, 250);
-	const ctx = canvas.getContext('2d');
-
-	const background = await Canvas.loadImage('./wallpaper.jpg');
-	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-	// Select the color of the stroke
-	ctx.strokeStyle = '#74037b';
+	// Set the color of the stroke
+	context.strokeStyle = '#74037b';
 	// Draw a rectangle with the dimensions of the entire canvas
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
-
-	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
-
-	channel.send(`Welcome to the server, ${member}!`, attachment);
-});
+	context.strokeRect(0, 0, canvas.width, canvas.height);
+	// ...
+}});
 ```
-
-</branch>
-<branch version="12.x">
-
-```js
-client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-	if (!channel) return;
-
-	const canvas = Canvas.createCanvas(700, 250);
-	const ctx = canvas.getContext('2d');
-
-	const background = await Canvas.loadImage('./wallpaper.jpg');
-	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-	// Select the color of the stroke
-	ctx.strokeStyle = '#74037b';
-	// Draw a rectangle with the dimensions of the entire canvas
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
-
-	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
-
-	channel.send(`Welcome to the server, ${member}!`, attachment);
-});
-```
-
-</branch>
 
 ![Image](./images/canvas-plain.png)
 
@@ -270,57 +200,33 @@ A bit plain, right? Fear not, for you have a bit more to do until you reach comp
 
 <branch version="11.x">
 
-```js
+```js{5-8}
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
-	if (!channel) return;
-
-	const canvas = Canvas.createCanvas(700, 250);
-	const ctx = canvas.getContext('2d');
-
-	const background = await Canvas.loadImage('./wallpaper.jpg');
-	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-	ctx.strokeStyle = '#74037b';
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	// ...
+	context.strokeRect(0, 0, canvas.width, canvas.height);
 
 	// Wait for Canvas to load the image
 	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
 	// Draw a shape onto the main canvas
-	ctx.drawImage(avatar, 25, 0, 200, canvas.height);
-
-	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
-
-	channel.send(`Welcome to the server, ${member}!`, attachment);
-});
+	context.drawImage(avatar, 25, 0, 200, canvas.height);
+	// ...
+}});
 ```
 
 </branch>
 <branch version="12.x">
 
-```js
+```js{5-8}
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-	if (!channel) return;
-
-	const canvas = Canvas.createCanvas(700, 250);
-	const ctx = canvas.getContext('2d');
-
-	const background = await Canvas.loadImage('./wallpaper.jpg');
-	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-	ctx.strokeStyle = '#74037b';
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	// ...
+	context.strokeRect(0, 0, canvas.width, canvas.height);
 
 	// Wait for Canvas to load the image
 	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
 	// Draw a shape onto the main canvas
-	ctx.drawImage(avatar, 25, 0, 200, canvas.height);
-
-	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
-
-	channel.send(`Welcome to the server, ${member}!`, attachment);
-});
+	context.drawImage(avatar, 25, 0, 200, canvas.height);
+	// ...
+}});
 ```
 
 </branch>
@@ -331,54 +237,26 @@ It works well, but the avatar image itself seems a bit stretched out. Let's reme
 
 <branch version="11.x">
 
-```js
+```js{4-5}
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
-	if (!channel) return;
-
-	const canvas = Canvas.createCanvas(700, 250);
-	const ctx = canvas.getContext('2d');
-
-	const background = await Canvas.loadImage('./wallpaper.jpg');
-	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-	ctx.strokeStyle = '#74037b';
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
-
+	// ...
 	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
-	// Move the image downwards vertically and constrain its height to 200, so it's a square
-	ctx.drawImage(avatar, 25, 25, 200, 200);
-
-	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
-
-	channel.send(`Welcome to the server, ${member}!`, attachment);
-});
+	// Move the image downwards vertically and constrain its height to 200, so that it's square
+	context.drawImage(avatar, 25, 25, 200, 200);
+	// ...
+}});
 ```
 
 </branch>
 <branch version="12.x">
 
-```js
+```js{4-5}
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-	if (!channel) return;
-
-	const canvas = Canvas.createCanvas(700, 250);
-	const ctx = canvas.getContext('2d');
-
-	const background = await Canvas.loadImage('./wallpaper.jpg');
-	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-	ctx.strokeStyle = '#74037b';
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
-
+	// ...
 	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
-	// Move the image downwards vertically and constrain its height to 200, so it's a square
-	ctx.drawImage(avatar, 25, 25, 200, 200);
-
-	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
-
-	channel.send(`Welcome to the server, ${member}!`, attachment);
+	// Move the image downwards vertically and constrain its height to 200, so that it's square
+	context.drawImage(avatar, 25, 25, 200, 200);
+	// ...
 });
 ```
 
@@ -390,163 +268,47 @@ The purpose of this small section is to demonstrate that working with Canvas is 
 
 Since we covered how to load external images and fix dimensions, let's turn the avatar into a circle to improve the image's overall style.
 
-<branch version="11.x">
-
-```js
+```js{5-12}
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
-	if (!channel) return;
-
-	const canvas = Canvas.createCanvas(700, 250);
-	const ctx = canvas.getContext('2d');
-
-	const background = await Canvas.loadImage('./wallpaper.jpg');
-	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-	ctx.strokeStyle = '#74037b';
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	// ...
+	context.strokeRect(0, 0, canvas.width, canvas.height);
 
 	// Pick up the pen
-	ctx.beginPath();
+	context.beginPath();
 	// Start the arc to form a circle
-	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
+	context.arc(125, 125, 100, 0, Math.PI * 2, true);
 	// Put the pen down
-	ctx.closePath();
+	context.closePath();
 	// Clip off the region you drew on
-	ctx.clip();
-
-	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
-	ctx.drawImage(avatar, 25, 25, 200, 200);
-
-	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
-
-	channel.send(`Welcome to the server, ${member}!`, attachment);
+	context.clip();
+	// ...
 });
 ```
-
-</branch>
-<branch version="12.x">
-
-```js
-client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-	if (!channel) return;
-
-	const canvas = Canvas.createCanvas(700, 250);
-	const ctx = canvas.getContext('2d');
-
-	const background = await Canvas.loadImage('./wallpaper.jpg');
-	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-	ctx.strokeStyle = '#74037b';
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
-
-	// Pick up the pen
-	ctx.beginPath();
-	// Start the arc to form a circle
-	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
-	// Put the pen down
-	ctx.closePath();
-	// Clip off the region you drew on
-	ctx.clip();
-
-	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
-	ctx.drawImage(avatar, 25, 25, 200, 200);
-
-	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
-
-	channel.send(`Welcome to the server, ${member}!`, attachment);
-});
-```
-
-</branch>
 
 ![Image](./images/canvas-circle-avatar.png)
 
 ::: tip
-You can read more about `ctx.arc()` on [w3schools](https://www.w3schools.com/tags/canvas_arc.asp) or [MDN](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc).
+You can read more about `context.arc()` on [w3schools](https://www.w3schools.com/tags/canvas_arc.asp) or [MDN](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc).
 :::
 
 ### Adding in text
 
 Now, let's quickly go over adding text to your image. This will help make the purpose of this image apparent since currently, it's just an avatar floating on a starry background that comes out of nowhere.
 
-<branch version="11.x">
-
-```js
+```js{5-10}
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
-	if (!channel) return;
-
-	const canvas = Canvas.createCanvas(700, 250);
-	const ctx = canvas.getContext('2d');
-
-	const background = await Canvas.loadImage('./wallpaper.jpg');
-	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-	ctx.strokeStyle = '#74037b';
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	// ...
+	context.strokeRect(0, 0, canvas.width, canvas.height);
 
 	// Select the font size and type from one of the natively available fonts
-	ctx.font = '60px sans-serif';
+	context.font = '60px sans-serif';
 	// Select the style that will be used to fill the text in
-	ctx.fillStyle = '#ffffff';
+	context.fillStyle = '#ffffff';
 	// Actually fill the text with a solid color
-	ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
-
-	ctx.beginPath();
-	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
-	ctx.closePath();
-	ctx.clip();
-
-	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
-	ctx.drawImage(avatar, 25, 25, 200, 200);
-
-	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
-
-	channel.send(`Welcome to the server, ${member}!`, attachment);
+	context.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
+	// ...
 });
 ```
-
-</branch>
-<branch version="12.x">
-
-```js
-client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-	if (!channel) return;
-
-	const canvas = Canvas.createCanvas(700, 250);
-	const ctx = canvas.getContext('2d');
-
-	const background = await Canvas.loadImage('./wallpaper.jpg');
-	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-	ctx.strokeStyle = '#74037b';
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
-
-	// Select the font size and type from one of the natively available fonts
-	ctx.font = '60px sans-serif';
-	// Select the style that will be used to fill the text in
-	ctx.fillStyle = '#ffffff';
-	// Actually fill the text with a solid color
-	ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
-
-	ctx.beginPath();
-	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
-	ctx.closePath();
-	ctx.clip();
-
-	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
-	ctx.drawImage(avatar, 25, 25, 200, 200);
-
-	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
-
-	channel.send(`Welcome to the server, ${member}!`, attachment);
-});
-```
-
-</branch>
 
 ![Image](./images/canvas-add-name.png)
 
@@ -556,112 +318,35 @@ If you get an error like `Fontconfig error: Cannot load default config file`, it
 
 You may have noticed or considered that if a member's username is too long, then the output won't be quite nice. This is because the text overflows out of the canvas, and you don't have any measures in place for that. Let's take care of this issue!
 
-<branch version="11.x">
-
-```js
-// Pass the entire Canvas object because you'll need to access its width, as well its context
+```js{1-16,22-25}
+// Pass the entire Canvas object because you'll need access to its width and context
 const applyText = (canvas, text) => {
-	const ctx = canvas.getContext('2d');
+	const context = canvas.getContext('2d');
 
 	// Declare a base size of the font
 	let fontSize = 70;
 
 	do {
 		// Assign the font to the context and decrement it so it can be measured again
-		ctx.font = `${fontSize -= 10}px sans-serif`;
+		context.font = `${fontSize -= 10}px sans-serif`;
 		// Compare pixel width of the text to the canvas minus the approximate avatar size
-	} while (ctx.measureText(text).width > canvas.width - 300);
+	} while (context.measureText(text).width > canvas.width - 300);
 
 	// Return the result to use in the actual canvas
-	return ctx.font;
+	return context.font;
 };
 
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
-	if (!channel) return;
-
-	const canvas = Canvas.createCanvas(700, 250);
-	const ctx = canvas.getContext('2d');
-
-	const background = await Canvas.loadImage('./wallpaper.jpg');
-	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-	ctx.strokeStyle = '#74037b';
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	// ...
+	context.strokeRect(0, 0, canvas.width, canvas.height);
 
 	// Assign the decided font to the canvas
-	ctx.font = applyText(canvas, member.displayName);
-	ctx.fillStyle = '#ffffff';
-	ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
-
-	ctx.beginPath();
-	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
-	ctx.closePath();
-	ctx.clip();
-
-	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
-	ctx.drawImage(avatar, 25, 25, 200, 200);
-
-	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
-
-	channel.send(`Welcome to the server, ${member}!`, attachment);
+	context.font = applyText(canvas, member.displayName);
+	context.fillStyle = '#ffffff';
+	context.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
+	// ...
 });
 ```
-
-</branch>
-<branch version="12.x">
-
-```js
-// Pass the entire Canvas object because you'll need to access its width, as well its context
-const applyText = (canvas, text) => {
-	const ctx = canvas.getContext('2d');
-
-	// Declare a base size of the font
-	let fontSize = 70;
-
-	do {
-		// Assign the font to the context and decrement it so it can be measured again
-		ctx.font = `${fontSize -= 10}px sans-serif`;
-		// Compare pixel width of the text to the canvas minus the approximate avatar size
-	} while (ctx.measureText(text).width > canvas.width - 300);
-
-	// Return the result to use in the actual canvas
-	return ctx.font;
-};
-
-client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-	if (!channel) return;
-
-	const canvas = Canvas.createCanvas(700, 250);
-	const ctx = canvas.getContext('2d');
-
-	const background = await Canvas.loadImage('./wallpaper.jpg');
-	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-	ctx.strokeStyle = '#74037b';
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
-
-	// Assign the decided font to the canvas
-	ctx.font = applyText(canvas, member.displayName);
-	ctx.fillStyle = '#ffffff';
-	ctx.fillText(member.displayName, canvas.width / 2.5, canvas.height / 1.8);
-
-	ctx.beginPath();
-	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
-	ctx.closePath();
-	ctx.clip();
-
-	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
-	ctx.drawImage(avatar, 25, 25, 200, 200);
-
-	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
-
-	channel.send(`Welcome to the server, ${member}!`, attachment);
-});
-```
-
-</branch>
 
 Before adjustment:
 
@@ -673,88 +358,23 @@ After adjustment:
 
 Let's move the welcome text inside the image itself instead of adding it outside as a nice finishing touch.
 
-<branch version="11.x">
-
-```js
+```js{5-8,10-13}
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
-	if (!channel) return;
-
-	const canvas = Canvas.createCanvas(700, 250);
-	const ctx = canvas.getContext('2d');
-
-	const background = await Canvas.loadImage('./wallpaper.jpg');
-	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-	ctx.strokeStyle = '#74037b';
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
+	// ...
+	context.strokeRect(0, 0, canvas.width, canvas.height);
 
 	// Slightly smaller text placed above the member's display name
-	ctx.font = '28px sans-serif';
-	ctx.fillStyle = '#ffffff';
-	ctx.fillText('Welcome to the server,', canvas.width / 2.5, canvas.height / 3.5);
+	context.font = '28px sans-serif';
+	context.fillStyle = '#ffffff';
+	context.fillText('Welcome to the server,', canvas.width / 2.5, canvas.height / 3.5);
 
 	// Add an exclamation point here and below
-	ctx.font = applyText(canvas, `${member.displayName}!`);
-	ctx.fillStyle = '#ffffff';
-	ctx.fillText(`${member.displayName}!`, canvas.width / 2.5, canvas.height / 1.8);
-
-	ctx.beginPath();
-	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
-	ctx.closePath();
-	ctx.clip();
-
-	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
-	ctx.drawImage(avatar, 25, 25, 200, 200);
-
-	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
-
-	channel.send(`Welcome to the server, ${member}!`, attachment);
+	context.font = applyText(canvas, `${member.displayName}!`);
+	context.fillStyle = '#ffffff';
+	context.fillText(`${member.displayName}!`, canvas.width / 2.5, canvas.height / 1.8);
+	// ...
 });
 ```
-
-</branch>
-<branch version="12.x">
-
-```js
-client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-	if (!channel) return;
-
-	const canvas = Canvas.createCanvas(700, 250);
-	const ctx = canvas.getContext('2d');
-
-	const background = await Canvas.loadImage('./wallpaper.jpg');
-	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-	ctx.strokeStyle = '#74037b';
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
-
-	// Slightly smaller text placed above the member's display name
-	ctx.font = '28px sans-serif';
-	ctx.fillStyle = '#ffffff';
-	ctx.fillText('Welcome to the server,', canvas.width / 2.5, canvas.height / 3.5);
-
-	// Add an exclamation point here and below
-	ctx.font = applyText(canvas, `${member.displayName}!`);
-	ctx.fillStyle = '#ffffff';
-	ctx.fillText(`${member.displayName}!`, canvas.width / 2.5, canvas.height / 1.8);
-
-	ctx.beginPath();
-	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
-	ctx.closePath();
-	ctx.clip();
-
-	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
-	ctx.drawImage(avatar, 25, 25, 200, 200);
-
-	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
-
-	channel.send(`Welcome to the server, ${member}!`, attachment);
-});
-```
-
-</branch>
 
 ![Final result](./images/canvas-final.png)
 
