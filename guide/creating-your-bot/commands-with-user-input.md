@@ -62,7 +62,7 @@ Looks good! Don't worry about the comma separation; that's the expected output w
 Now that you have an array of arguments, you can interact with it accordingly! Try out this small addition to the command:
 
 
-```js {5-14}
+```js {5-13}
 client.on('message', message => {
 	// ...
 	if (command === 'ping') {
@@ -70,8 +70,7 @@ client.on('message', message => {
 	} else if (command === 'args-info') {
 		if (!args.length) {
 			return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
-		}
-		else if (args[0] === 'foo') {
+		} else if (args[0] === 'foo') {
 			return message.channel.send('bar');
 		}
 
@@ -278,7 +277,7 @@ if (!message.mentions.users.size) {
 }
 
 const avatarList = message.mentions.users.map(user => {
-		return `${user.username}'s avatar: <${user.displayAvatarURL({ format: 'png', dynamic: true })}>`;
+	return `${user.username}'s avatar: <${user.displayAvatarURL({ format: 'png', dynamic: true })}>`;
 });
 
 // Send the entire array of strings as a message

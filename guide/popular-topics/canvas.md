@@ -191,7 +191,7 @@ client.on('guildMemberAdd', async member => {
 	// Draw a rectangle with the dimensions of the entire canvas
 	context.strokeRect(0, 0, canvas.width, canvas.height);
 	// ...
-}});
+});
 ```
 
 ![Image](./images/canvas-plain.png)
@@ -210,7 +210,7 @@ client.on('guildMemberAdd', async member => {
 	// Draw a shape onto the main canvas
 	context.drawImage(avatar, 25, 0, 200, canvas.height);
 	// ...
-}});
+});
 ```
 
 </branch>
@@ -226,7 +226,7 @@ client.on('guildMemberAdd', async member => {
 	// Draw a shape onto the main canvas
 	context.drawImage(avatar, 25, 0, 200, canvas.height);
 	// ...
-}});
+});
 ```
 
 </branch>
@@ -244,7 +244,7 @@ client.on('guildMemberAdd', async member => {
 	// Move the image downwards vertically and constrain its height to 200, so that it's square
 	context.drawImage(avatar, 25, 25, 200, 200);
 	// ...
-}});
+});
 ```
 
 </branch>

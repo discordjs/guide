@@ -106,6 +106,8 @@ As you can see, they're very powerful things.
 
 Head on over to your `run` method and set the `text` arg to a variable and return the text to the user.
 
+<!-- eslint-disable constructor-super -->
+
 ```js {6-8}
 module.exports = class SayCommand extends Command {
 	constructor(client) {

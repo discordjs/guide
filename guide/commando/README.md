@@ -71,7 +71,7 @@ client.registry
 		['first', 'Your First Command Group'],
 		['second', 'Your Second Command Group'],
 		['third', 'Your Third Command Group'],
-	])
+	]);
 ```
 
 Should you want to disable a default command, such as if you wanted to make a custom help command and replace the default one, you could pass that as an option in `registerDefaultCommands`.
@@ -81,7 +81,7 @@ client.registry
 	// ...
 	.registerDefaultCommands({
 		help: false,
-	})
+	});
 ```
 
 Next, you're going to need to create a ready event and an error event, as usual.

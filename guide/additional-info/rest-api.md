@@ -123,7 +123,7 @@ Urban Dictionary's API is available at https://api.urbandictionary.com/v0/define
 First, you're going to need to fetch data from the API. To do this, you'd do:
 
 ```js {1,5-14}
-const querystring = require('querystring')
+const querystring = require('querystring');
 // ...
 client.on('message', async message => {
 	// ...
@@ -219,7 +219,7 @@ const embed = new MessageEmbed()
 	.addFields(
 		{ name: 'Definition', value: trim(answer.definition, 1024) },
 		{ name: 'Example', value: trim(answer.example, 1024) },
-		{ name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` }
+		{ name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` },
 	);
 
 message.channel.send(embed);

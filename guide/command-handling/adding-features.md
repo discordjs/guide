@@ -290,11 +290,13 @@ module.exports = {
 	aliases: ['icon', 'pfp'],
 	execute(message, args) {
 		// ...
-	}
-}
+	},
+};
 ```
 
 The `aliases` property should always contain an array of strings. In your main file, here are the changes you'll need to make:
+
+<!-- eslint-disable no-useless-return -->
 
 ```js {5-6,8}
 client.on('message', message => {
@@ -546,13 +548,13 @@ if (!command) {
 }
 
 const commandFolders = fs.readdirSync('./commands');
-const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${folder}`).includes(`${commandName}.js`));	
+const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${folder}`).includes(`${commandName}.js`));
 ```
 
 In theory, all there is to do is delete the previous command from `client.commands` and require the file again. In practice, you cannot do this easily as `require()` caches the file. If you were to require it again, you would load the previously cached file without any changes. You first need to delete the file from the `require.cache`, and only then should you require and set the command file to `client.commands`:
 
 ```js {3,5-12}
-const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${folder}`).includes(`${commandName}.js`));	
+const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${folder}`).includes(`${commandName}.js`));
 
 delete require.cache[require.resolve(`../${folderName}/${command.name}.js`)];
 
