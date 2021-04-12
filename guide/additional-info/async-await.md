@@ -49,7 +49,7 @@ A simple example would be:
 
 ```js
 async function declaredAsAsync() {
-	// code
+	// ...
 }
 ```
 
@@ -57,7 +57,7 @@ or
 
 ```js 
 const declaredAsAsync = async () => {
-	// code
+	// ...
 };
 ```
 
@@ -65,7 +65,7 @@ You can use that as well if you use the arrow function as an event listener.
 
 ```js
 client.on('event', async (first, last) => {
-	// code
+	// ...
 });
 ```
 
@@ -87,7 +87,7 @@ client.once('ready', () => {
 
 client.on('message', message => {
 	if (message.content === `${prefix}react`) {
-		// code inside here
+		// ...
 	}
 });
 
@@ -96,7 +96,7 @@ client.login('your-token-goes-here');
 
 So now we need to put the code in. If you don't know how Node.js asynchronous execution works, you would probably try something like this:
 
-```js
+```js{3-5}
 client.on('message', message => {
 	if (message.content === `${prefix}react`) {
 		message.react('🇦');
@@ -108,7 +108,7 @@ client.on('message', message => {
 
 But since all of these react methods are started at the same time, it would just be a race to which server request finished first, so there would be no guarantee that it would react in the order you wanted it to. In order to make sure it reacts in order (a, b, c), we need to use the `.then()` callback from the Promises that these methods return. As a result the code we want would mostly look like this:
 
-```js
+```js{3-8}
 client.on('message', message => {
 	if (message.content === `${prefix}react`) {
 		message.react('🇦')
@@ -123,7 +123,7 @@ client.on('message', message => {
 
 In this piece of code, we [chain resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then#Chaining) Promises with each other, and if one of the Promises gets rejected, the function we passed to `.catch()` get called. So let's look at how the same code would look with async/await.
 
-```js
+```js{1,3-5}
 client.on('message', async message => {
 	if (message.content === `${prefix}react`) {
 		await message.react('🇦');
@@ -135,7 +135,7 @@ client.on('message', async message => {
 
 That would mostly be the same code with async/await, but how do we catch Promise rejections now since we won't use `.catch()` anymore? That is also a useful feature with async/await; the error will be thrown if you await it so that you can wrap the awaited Promises inside a try/catch, and you're good to go. 
 
-```js
+```js{1,3-9}
 client.on('message', async message => {
 	if (message.content === `${prefix}react`) {
 		try {
@@ -157,7 +157,7 @@ Let's look at an example where you want to delete a sent message.
 
 <branch version="11.x">
 
-```js
+```js{2-8}
 client.on('message', message => {
 	if (message.content === `${prefix}delete`) {
 		message.channel.send('this message will be deleted')
@@ -172,7 +172,7 @@ client.on('message', message => {
 </branch>
 <branch version="12.x">
 
-```js
+```js{2-8}
 client.on('message', message => {
 	if (message.content === `${prefix}delete`) {
 		message.channel.send('this message will be deleted')
@@ -189,7 +189,7 @@ The return value of a `.send()` is a Promise what resolves with the sent Message
 
 <branch version="11.x">
 
-```js
+```js{1,3-8}
 client.on('message', async message => {
 	if (message.content === `${prefix}delete`) {
 		try {
@@ -205,7 +205,7 @@ client.on('message', async message => {
 </branch>
 <branch version="12.x">
 
-```js
+```js{1,3-8}
 client.on('message', async message => {
 	if (message.content === `${prefix}delete`) {
 		try {
