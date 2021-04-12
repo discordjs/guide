@@ -10,13 +10,9 @@ Let's start with the basic usage of shards. At some point in bot development, yo
 
 <branch version="11.x">
 
-```js
+```js{3-11}
 client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
-
+	// ...
 	if (command === 'send') {
 		if (!args.length) return message.reply('please specify a destination channel id.');
 
@@ -32,13 +28,9 @@ client.on('message', message => {
 </branch>
 <branch version="12.x">
 
-```js
+```js{3-11}
 client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
-
+	// ...
 	if (command === 'send') {
 		if (!args.length) return message.reply('please specify a destination channel id.');
 
@@ -57,27 +49,21 @@ This will never work for a channel that lies on another shard. So, let's remedy 
 
 <branch version="11.x">
 
-```diff
-	if (command === 'send') {
-		if (!args.length) return message.reply('please specify a destination channel id.');
+```js{4-13}
+if (command === 'send') {
+	if (!args.length) return message.reply('please specify a destination channel id.');
 
--       const channel = client.channels.get(args[0]);
--       if (!channel) return message.reply('I could not find such a channel.');
-
--       channel.send('Hello!');
--       return message.reply(`I have sent a message to channel \`${args[0]}\`!`);
-+       return client.shard.broadcastEval(`
-+           const channel = this.channels.get('${args[0]}');
-+           if (channel) {
-+               channel.send('This is a message from shard ${this.shard.id}!');
-+               true;
-+           }
-+           else {
-+               false;
-+           }
-+       `)
-+           .then(console.log);
-	}
+	return client.shard.broadcastEval(`
+		const channel = this.channels.get('${args[0]}');
+		if (channel) {
+			channel.send('This is a message from shard ${this.shard.id}!');
+			true;
+		} else {
+			false;
+		}
+	`)
+		.then(console.log);
+}
 ```
 
 </branch>
@@ -87,83 +73,39 @@ This will never work for a channel that lies on another shard. So, let's remedy 
 In version 12 [`client.shard`](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=ids) can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
 :::
 
-```diff
-	if (command === 'send') {
-		if (!args.length) return message.reply('please specify a destination channel id.');
+```js{4-13}
+if (command === 'send') {
+	if (!args.length) return message.reply('please specify a destination channel id.');
 
--       const channel = client.channels.cache.get(args[0]);
--       if (!channel) return message.reply('I could not find such a channel.');
-
--       channel.send('Hello!');
--       return message.reply(`I have sent a message to channel \`${args[0]}\`!`);
-+       return client.shard.broadcastEval(`
-+           const channel = this.channels.cache.get('${args[0]}');
-+           if (channel) {
-+               channel.send('This is a message from shard ${this.shard.ids.join(',')}!');
-+               true;
-+           }
-+           else {
-+               false;
-+           }
-+       `)
-+           .then(console.log);
-	}
+	return client.shard.broadcastEval(`
+		const channel = this.channels.cache.get('${args[0]}');
+		if (channel) {
+			channel.send('This is a message from shard ${this.shard.ids.join(',')}!');
+			true;
+		} else {
+			false;
+		}
+	`)
+		.then(console.log);
+}
 ```
 
 </branch>
 
 If all is well, you should notice an output like `[false, true, false, false]`. If it is not clear why `true` and `false` are hanging around, the last expression of the eval statement will be returned. You will want this if you want any feedback from the results. Now that you have observed said results, you can adjust the command to give yourself proper feedback, like so:
 
-<branch version="11.x">
-
-```diff
-	return client.shard.broadcastEval(`
-		const channel = this.channels.get('${args[0]}');
-		if (channel) {
-			channel.send('This is a message from shard ${this.shard.id}!');
-			true;
+```js{4-10}
+return client.shard.broadcastEval(`
+	// ...
+`)
+	.then(sentArray => {
+		// Search for a non falsy value before providing feedback
+		if (!sentArray.includes(true)) {
+			return message.reply('I could not find such a channel.');
 		}
-		else {
-			false;
-		}
-	`)
--       .then(console.log);
-+       .then(sentArray => {
-+           // Search for a non falsy value before providing feedback
-+           if (!sentArray.includes(true)) {
-+               return message.reply('I could not find such a channel.');
-+           }
-
-+           return message.reply(`I have sent a message to channel \`${args[0]}\`!`);
-+       });
+		return message.reply(`I have sent a message to channel \`${args[0]}\`!`);
+	});
 ```
-
-</branch>
-<branch version="12.x">
-
-```diff
-	return client.shard.broadcastEval(`
-		const channel = this.channels.cache.get('${args[0]}');
-		if (channel) {
-			channel.send('This is a message from shard ${this.shard.id}!');
-			true;
-		}
-		else {
-			false;
-		}
-	`)
--       .then(console.log);
-+       .then(sentArray => {
-+           // Search for a non falsy value before providing feedback
-+           if (!sentArray.includes(true)) {
-+               return message.reply('I could not find such a channel.');
-+           }
-
-+           return message.reply(`I have sent a message to channel \`${args[0]}\`!`);
-+       });
-```
-
-</branch>
 
 And that's it for this section! You have successfully communicated across all of your shards.
 
@@ -173,13 +115,9 @@ If you remember, there was a brief mention of passing functions through `.broadc
 
 <branch version="11.x">
 
-```js
+```js{3-8}
 client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
-
+	// ...
 	if (command === 'emoji') {
 		if (!args.length) return message.reply('please specify an emoji id to search for.');
 		const emoji = client.emojis.get(args[0]);
@@ -192,13 +130,9 @@ client.on('message', message => {
 </branch>
 <branch version="12.x">
 
-```js
+```js{3-8}
 client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
-
+	// ...
 	if (command === 'emoji') {
 		if (!args.length) return message.reply('please specify an emoji id to search for.');
 		const emoji = client.emojis.cache.get(args[0]);
@@ -239,13 +173,9 @@ function findEmoji(id) {
 
 Next, you need to call the function in your command properly. If you recall from [this section](/sharding/additional-information.md#eval-arguments), it is shown there how to pass a function and arguments correctly. `.call()` will also be used to preserve the `client` context in the function that passes through.
 
-```js
+```js{4-7}
 client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
-
+	// ...
 	if (command === 'emoji') {
 		if (!args.length) return message.reply('please specify an emoji id to search for.');
 
@@ -289,20 +219,18 @@ While this result isn't *necessarily* bad or incorrect, it's simply a raw object
 
 <branch version="11.x">
 
-```diff
+```js{2-3,5-10}
 function findEmoji(id) {
--   const emoji = this.emojis.get(id);  
-+   const temp = this.emojis.get(id);
--   if (!emoji) return null;
-+   if (!temp) return null;
-+
-+   // Clone the object because it is modified right after, so as to not affect the cache in client.emojis
-+   const emoji = Object.assign({}, temp);
-+   // Circular references can't be returned outside of eval, so change it to the id
-+   if (emoji.guild) emoji.guild = emoji.guild.id;
-+   // A new object will be constructed, so simulate raw data by adding this property back
-+   emoji.require_colons = emoji.requiresColons;
-+
+	const temp = this.emojis.get(id);
+	if (!temp) return null;
+
+	// Clone the object because it is modified right after, so as to not affect the cache in client.emojis
+	const emoji = Object.assign({}, temp);
+	// Circular references can't be returned outside of eval, so change it to the id
+	if (emoji.guild) emoji.guild = emoji.guild.id;
+	// A new object will be constructed, so simulate raw data by adding this property back
+	emoji.require_colons = emoji.requiresColons;
+
 	return emoji;
 }
 ```
@@ -310,20 +238,18 @@ function findEmoji(id) {
 </branch>
 <branch version="12.x">
 
-```diff
+```js{2-3,5-10}
 function findEmoji(id) {
--   const emoji = this.emojis.cache.get(id);    
-+   const temp = this.emojis.cache.get(id);
--   if (!emoji) return null;
-+   if (!temp) return null;
-+
-+   // Clone the object because it is modified right after, so as to not affect the cache in client.emojis
-+   const emoji = Object.assign({}, temp);
-+   // Circular references can't be returned outside of eval, so change it to the id
-+   if (emoji.guild) emoji.guild = emoji.guild.id;
-+   // A new object will be constructed, so simulate raw data by adding this property back
-+   emoji.require_colons = emoji.requiresColons;
-+
+	const temp = this.emojis.cache.get(id);
+	if (!temp) return null;
+
+	// Clone the object because it is modified right after, so as to not affect the cache in client.emojis
+	const emoji = Object.assign({}, temp);
+	// Circular references can't be returned outside of eval, so change it to the id
+	if (emoji.guild) emoji.guild = emoji.guild.id;
+	// A new object will be constructed, so simulate raw data by adding this property back
+	emoji.require_colons = emoji.requiresColons;
+
 	return emoji;
 }
 ```
@@ -334,47 +260,45 @@ Now, you will want to make use of it in the actual command:
 
 <branch version="11.x">
 
-```diff
-	return client.shard.broadcastEval(`(${findEmoji}).call(this, '${args[0]}')`)
--       .then(console.log);
-+       .then(emojiArray => {
-+           // Locate a non falsy result, which will be the emoji in question
-+           const foundEmoji = emojiArray.find(emoji => emoji);
-+           if (!foundEmoji) return message.reply('I could not find such an emoji.');
-+
-+           // Acquire a guild that can be reconstructed with discord.js
-+           return client.rest.makeRequest('get', Discord.Constants.Endpoints.Guild(foundEmoji.guild).toString(), true)
-+                   .then(raw => {
-+                       // Reconstruct a guild
-+                       const guild = new Discord.Guild(client, raw);
-+                       // Reconstruct an emoji object as required by discord.js
-+                       const emoji = new Discord.Emoji(guild, foundEmoji);
-+                       return message.reply(`I have found an emoji ${emoji.toString()}!`);
-+                   });
-+       });
+```js{2-16}
+return client.shard.broadcastEval(`(${findEmoji}).call(this, '${args[0]}')`)
+	.then(emojiArray => {
+		// Locate a non falsy result, which will be the emoji in question
+		const foundEmoji = emojiArray.find(emoji => emoji);
+		if (!foundEmoji) return message.reply('I could not find such an emoji.');
+
+		// Acquire a guild that can be reconstructed with discord.js
+		return client.rest.makeRequest('get', Discord.Constants.Endpoints.Guild(foundEmoji.guild).toString(), true)
+			.then(raw => {
+				// Reconstruct a guild
+				const guild = new Discord.Guild(client, raw);
+				// Reconstruct an emoji object as required by discord.js
+				const emoji = new Discord.Emoji(guild, foundEmoji);
+				return message.reply(`I have found an emoji ${emoji.toString()}!`);
+			});
+	});
 ```
 
 </branch>
 <branch version="12.x">
 
-```diff
-	return client.shard.broadcastEval(`(${findEmoji}).call(this, '${args[0]}')`)
--       .then(console.log);
-+       .then(emojiArray => {
-+           // Locate a non falsy result, which will be the emoji in question
-+           const foundEmoji = emojiArray.find(emoji => emoji);
-+           if (!foundEmoji) return message.reply('I could not find such an emoji.');
-+
-+           // Acquire a guild that can be reconstructed with discord.js
-+           return client.api.guilds(foundEmoji.guild).get()
-+                   .then(raw => {
-+                       // Reconstruct a guild
-+                       const guild = new Discord.Guild(client, raw);
-+                       // Reconstruct an emoji object as required by discord.js
-+                       const emoji = new Discord.GuildEmoji(client, foundEmoji, guild);
-+                       return message.reply(`I have found an emoji ${emoji.toString()}!`);
-+                   });
-+       });
+```js{2-16}
+return client.shard.broadcastEval(`(${findEmoji}).call(this, '${args[0]}')`)
+	.then(emojiArray => {
+		// Locate a non falsy result, which will be the emoji in question
+		const foundEmoji = emojiArray.find(emoji => emoji);
+		if (!foundEmoji) return message.reply('I could not find such an emoji.');
+
+		// Acquire a guild that can be reconstructed with discord.js
+		return client.api.guilds(foundEmoji.guild).get()
+			.then(raw => {
+				// Reconstruct a guild
+				const guild = new Discord.Guild(client, raw);
+				// Reconstruct an emoji object as required by discord.js
+				const emoji = new Discord.GuildEmoji(client, foundEmoji, guild);
+				return message.reply(`I have found an emoji ${emoji.toString()}!`);
+			});
+	});
 ```
 
 </branch>
