@@ -61,12 +61,10 @@ Say you already have a simple command handler like this:
 
 ```js
 client.on('message', message => {
-	if (!message.content.startsWith(config.prefix)) return;
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-	const withoutPrefix = message.content.slice(config.prefix.length);
-	const split = withoutPrefix.split(/ +/);
-	const command = split[0];
-	const args = split.slice(1);
+	const args = message.content.slice(prefix.length).trim().split(/ +/);
+	const command = args.shift().toLowerCase();
 });
 ```
 
@@ -75,23 +73,29 @@ This is what we have so far. It is pretty simple; it will show the avatar of who
 
 <branch version="11.x">
 
-```js
-if (command === 'avatar') {
-	const user = message.author;
+```js{3-7}
+client.on('message', message => {
+	// ...
+	if (command === 'avatar') {
+		const user = message.author;
 
-	return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL}`);
-}
+		return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL}`);
+	}
+});
 ```
 
 </branch>
 <branch version="12.x">
 
-```js
-if (command === 'avatar') {
-	const user = message.author;
+```js{3-7}
+client.on('message', message => {
+	// ...
+	if (command === 'avatar') {
+		const user = message.author;
 
-	return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL({ dynamic: true })}`);
-}
+		return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL({ dynamic: true })}`);
+	}
+});
 ```
 
 </branch>
@@ -154,37 +158,43 @@ Plugging it into the command will give you this:
 
 <branch version="11.x">
 
-```js
-if (command === 'avatar') {
-	if (args[0]) {
-		const user = getUserFromMention(args[0]);
-		if (!user) {
-			return message.reply('Please use a proper mention if you want to see someone elses avatar.');
+```js{4-11}
+client.on('message', message => {
+	// ...
+	if (command === 'avatar') {
+		if (args[0]) {
+			const user = getUserFromMention(args[0]);
+			if (!user) {
+				return message.reply('Please use a proper mention if you want to see someone elses avatar.');
+			}
+
+			return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL}`);
 		}
 
-		return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL}`);
+		return message.channel.send(`${message.author.username}, your avatar: ${message.author.displayAvatarURL}`);
 	}
-
-	return message.channel.send(`${message.author.username}, your avatar: ${message.author.displayAvatarURL}`);
-}
+});
 ```
 
 </branch>
 <branch version="12.x">
 
-```js
-if (command === 'avatar') {
-	if (args[0]) {
-		const user = getUserFromMention(args[0]);
-		if (!user) {
-			return message.reply('Please use a proper mention if you want to see someone elses avatar.');
+```js{4-11}
+client.on('message', message => {
+	// ...
+	if (command === 'avatar') {
+		if (args[0]) {
+			const user = getUserFromMention(args[0]);
+			if (!user) {
+				return message.reply('Please use a proper mention if you want to see someone elses avatar.');
+			}
+
+			return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL({ dynamic: true })}`);
 		}
 
-		return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL({ dynamic: true })}`);
+		return message.channel.send(`${message.author.username}, your avatar: ${message.author.displayAvatarURL({ dynamic: true })}`);
 	}
-
-	return message.channel.send(`${message.author.username}, your avatar: ${message.author.displayAvatarURL({ dynamic: true })}`);
-}
+});
 ```
 
 </branch>
@@ -219,55 +229,57 @@ When writing a ban command where a mention might appear in the reason, manual pa
 
 <branch version="11.x">
 
-<!-- eslint-skip -->
+```js{1,3-21}
+client.on('message', async message => {
+	// ...
+	if (command === 'ban') {
+		if (args.length < 2) {
+			return message.reply('Please mention the user you want to ban and specify a ban reason.');
+		}
 
-```js
-if (command === 'ban') {
-    if (args.length < 2) {
-        return message.reply('Please mention the user you want to ban and specify a ban reason.');
-    }
+		const user = getUserFromMention(args[0]);
+		if (!user) {
+			return message.reply('Please use a proper mention if you want to ban someone.');
+		}
 
-    const user = getUserFromMention(args[0]);
-    if (!user) {
-        return message.reply('Please use a proper mention if you want to ban someone.');
-    }
+		const reason = args.slice(1).join(' ');
+		try {
+			await message.guild.ban(user, { reason });
+		} catch (error) {
+			return message.channel.send(`Failed to ban **${user.tag}**: ${error}`);
+		}
 
-    const reason = args.slice(1).join(' ');
-    try {
-        await message.guild.ban(user, { reason });
-    } catch (error) {
-        return message.channel.send(`Failed to ban **${user.tag}**: ${error}`);
-    }
-
-    return message.channel.send(`Successfully banned **${user.tag}** from the server!`);
-}
+		return message.channel.send(`Successfully banned **${user.tag}** from the server!`);
+	}
+});
 ```
 
 </branch>
 <branch version="12.x">
 
-<!-- eslint-skip -->
+```js{1,3-21}
+client.on('message', async message => {
+	// ...
+	if (command === 'ban') {
+		if (args.length < 2) {
+			return message.reply('Please mention the user you want to ban and specify a ban reason.');
+		}
 
-```js
-if (command === 'ban') {
-    if (args.length < 2) {
-        return message.reply('Please mention the user you want to ban and specify a ban reason.');
-    }
+		const user = getUserFromMention(args[0]);
+		if (!user) {
+			return message.reply('Please use a proper mention if you want to ban someone.');
+		}
 
-    const user = getUserFromMention(args[0]);
-    if (!user) {
-        return message.reply('Please use a proper mention if you want to ban someone.');
-    }
+		const reason = args.slice(1).join(' ');
+		try {
+			await message.guild.members.ban(user, { reason });
+		} catch (error) {
+			return message.channel.send(`Failed to ban **${user.tag}**: ${error}`);
+		}
 
-    const reason = args.slice(1).join(' ');
-    try {
-        await message.guild.members.ban(user, { reason });
-    } catch (error) {
-        return message.channel.send(`Failed to ban **${user.tag}**: ${error}`);
-    }
-
-    return message.channel.send(`Successfully banned **${user.tag}** from the server!`);
-}
+		return message.channel.send(`Successfully banned **${user.tag}** from the server!`);
+	}
+});
 ```
 
 </branch>
