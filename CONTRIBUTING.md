@@ -184,13 +184,13 @@ Since the `.delete()` method returns a Promise, you need to `await` it when insi
 
 #### Codeblock line highlighting
 
-When you want to highlight a piece of code to display either an addition or a difference, use the `js{1-5,6-10}` syntax. For example (ignoring the `\`s):
+When you want to highlight a piece of code to display either an addition or a difference, use the `js {1-5,6-10}` syntax. For example (ignoring the `\`s):
 
 ```md
 
 Here's our base code:
 
-```js{2,6}
+```js {2,6}
 client.once('ready', () => {
 	console.log('Ready.');
 });
@@ -202,7 +202,7 @@ client.on('message', message => {
 
 To add this feature, use this code:
 
-```js{2,6-8}
+```js {2,6-8}
 client.once('ready', () => {
 	console.log(`${client.user.tag} ready.`);
 });
@@ -219,6 +219,8 @@ client.on('message', message => {
 ![Codeblock line highlighting output](https://i.imgur.com/913nf9V.png)
 
 This is VuePress' [codeblock line highlighting](https://vuepress.vuejs.org/guide/markdown.html#line-highlighting-in-code-blocks) feature. It's encouraged to use and preferred over diff codeblocks.
+
+Do note the space between `js` and `{}`. This is necessary to not interfere with `eslint-plugin-markdown`, in which would ignore the codeblock.
 
 ### Images and links
 
