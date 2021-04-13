@@ -311,7 +311,7 @@ function findEmoji(nameOrID) {
 
 </branch>
 
-WIth all that said and done, usually you'll want to display the result, so here is how we can go about doing that:
+With all that said and done, usually you'll want to display the result, so here is how we can go about doing that:
 
 <branch version="11.x">
 
