@@ -218,9 +218,7 @@ Let's start with a basic function, which will try to grab an emoji from the curr
 
 ```js
 function findEmoji(nameOrID) {
-	const emoji = this.emojis.get(query) || this.emojis.find(e => e.name.toLowerCase() === nameOrID.toLowerCase());
-	if (!emoji) return null;
-	return emoji;
+	return this.emojis.get(query) || this.emojis.find(e => e.name.toLowerCase() === nameOrID.toLowerCase());
 }
 ```
 
@@ -229,9 +227,7 @@ function findEmoji(nameOrID) {
 
 ```js
 function findEmoji(nameOrID) {
-	const emoji = this.emojis.cache.get(nameOrID) || this.emojis.cache.find(e => e.name.toLowerCase() === nameOrID.toLowerCase());
-	if (!emoji) return null;
-	return emoji;
+	return this.emojis.cache.get(nameOrID) || this.emojis.cache.find(e => e.name.toLowerCase() === nameOrID.toLowerCase());
 }
 ```
 
@@ -293,7 +289,7 @@ While this result isn't *necessarily* bad or incorrect, it's simply a raw object
 function findEmoji(nameOrID) {
 	const emoji = this.emojis.get(nameOrID) || this.emojis.find(e => e.name.toLowerCase() === nameOrID.toLowerCase());
 	if (!emoji) return null;
-	// If you wanted to delete the emoji with Discord.js, this is where you would do it. Otherwise, don't include this code.
+	// If you wanted to delete the emoji with discord.js, this is where you would do it. Otherwise, don't include this code.
 	emoji.delete();
 	return emoji;
 }
@@ -307,7 +303,7 @@ function findEmoji(nameOrID) {
 function findEmoji(nameOrID) {
 	const emoji = this.emojis.cache.get(nameOrID) || this.emojis.cache.find(e => e.name.toLowerCase() === nameOrID.toLowerCase());
 	if (!emoji) return null;
-	// If you wanted to delete the emoji with Discord.js, this is where you would do it. Otherwise, don't include this code.
+	// If you wanted to delete the emoji with discord.js, this is where you would do it. Otherwise, don't include this code.
 	emoji.delete();
 	return emoji;
 }
@@ -315,7 +311,7 @@ function findEmoji(nameOrID) {
 
 </branch>
 
-WIth all that said and done, usually we want to display the result, so here is how we can go about doing that:
+WIth all that said and done, usually you'll want to display the result, so here is how we can go about doing that:
 
 <branch version="11.x">
 
@@ -326,7 +322,7 @@ WIth all that said and done, usually we want to display the result, so here is h
 +           // Locate a non falsy result, which will be the emoji in question
 +           const foundEmoji = emojiArray.find(emoji => emoji);
 +           if (!foundEmoji) return message.reply('I could not find such an emoji.');
-+           return message.reply(`I have found the emoji ${foundEmoji.id ? `<${foundEmoji.animated ? 'a' : ''}:${foundEmoji.name}:${foundEmoji.id}>` : foundEmoji.name}!`);
++           return message.reply(`I have found the ${foundEmoji.id ? `<${foundEmoji.animated ? 'a' : ''}:${foundEmoji.name}:${foundEmoji.id}>` : foundEmoji.name} emoji!`);
 +       });
 ```
 
@@ -340,7 +336,7 @@ WIth all that said and done, usually we want to display the result, so here is h
 +           // Locate a non falsy result, which will be the emoji in question
 +           const foundEmoji = emojiArray.find(emoji => emoji);
 +           if (!foundEmoji) return message.reply('I could not find such an emoji.');
-+           return message.reply(`I have found the emoji ${foundEmoji.animated ? `<${foundEmoji.identifier}>` : `<:${foundEmoji.identifier}>`}!`);
++           return message.reply(`I have found the ${foundEmoji.animated ? `<${foundEmoji.identifier}>` : `<:${foundEmoji.identifier}> emoji!`}!`);
 +       });
 ```
 

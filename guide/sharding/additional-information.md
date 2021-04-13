@@ -36,7 +36,8 @@ manager.spawn()
 				console.log(`Shard[${shard.id}] : ${message._eval} : ${message._result}`);
 			});
 		});
-	});
+	})
+	.catch(console.error);
 ```
 
 </branch>

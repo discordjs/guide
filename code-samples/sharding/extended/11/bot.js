@@ -3,9 +3,7 @@ const client = new Discord.Client();
 const prefix = '!';
 
 function findEmoji(nameOrID) {
-	const emoji = this.emojis.get(nameOrID) || this.emojis.find(e => e.name.toLowerCase() === nameOrID.toLowerCase());
-	if (!emoji) return null;
-	return emoji;
+	return this.emojis.get(nameOrID) || this.emojis.find(e => e.name.toLowerCase() === nameOrID.toLowerCase());
 }
 
 client.on('message', message => {
@@ -51,7 +49,7 @@ client.on('message', message => {
 			.then(emojiArray => {
 				const foundEmoji = emojiArray.find(emoji => emoji);
 				if (!foundEmoji) return message.reply('I could not find such an emoji.');
-				return message.reply(`I have found the emoji ${foundEmoji.id ? `<${foundEmoji.animated ? 'a' : ''}:${foundEmoji.name}:${foundEmoji.id}>` : foundEmoji.name}!`);
+				return message.reply(`I have found the ${foundEmoji.id ? `<${foundEmoji.animated ? 'a' : ''}:${foundEmoji.name}:${foundEmoji.id}>` : foundEmoji.name} emoji!`);
 			});
 	}
 });
