@@ -315,6 +315,23 @@ const user = <message>.mentions.users.first();
 Mentions in embeds may resolve correctly in embed description and field values but will never notify the user. Other areas do not support mentions at all.
 :::
 
+### How do I control which users and/or roles are mentioned in a message?
+
+Controlling which mentions will send a ping is done via the `allowedMentions` option, which replaces `disableMentions`.
+
+This can be set as a default in `ClientOptions`, and controlled per-message sent by your bot.
+```diff
+- new Discord.Client({ disableMentions: 'everyone' });
++ new Discord.Client({ allowedMentions: { parse: ['users', 'roles'] });
+```
+
+Even more control can be achieved by listing specific `users` or `roles` to be mentioned by ID, e.g.:
+```js
+message.channel.send('<@123456789012345678> <@987654321098765432>', {
+	allowedMentions: { users: ['123456789012345678'] },
+});
+```
+
 ### How do I prompt the user for additional input?
 
 <branch version="11.x">
