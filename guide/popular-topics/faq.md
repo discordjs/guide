@@ -325,7 +325,7 @@ This can be set as a default in `ClientOptions`, and controlled per-message sent
 + new Discord.Client({ allowedMentions: { parse: ['users', 'roles'] });
 ```
 
-Even more control can be achieved by listing specific `users` or `roles` to be mentioned by ID, eg:
+Even more control can be achieved by listing specific `users` or `roles` to be mentioned by ID, e.g.:
 ```js
 message.channel.send('<@123456789012345678> <@987654321098765432>', {
 	allowedMentions: { users: ['123456789012345678'] },
