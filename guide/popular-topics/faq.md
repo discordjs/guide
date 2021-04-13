@@ -317,7 +317,7 @@ Mentions in embeds may resolve correctly in embed description and field values b
 
 ### How do I control which users and/or roles are mentioned in a message?
 
-Controlling which mentions (and replies) will send a ping is done via the `allowedMentions` option, which replaces `disableMentions`.
+Controlling which mentions will send a ping is done via the `allowedMentions` option, which replaces `disableMentions`.
 
 This can be set as a default in `ClientOptions`, and controlled per-message sent by your bot.
 ```diff
