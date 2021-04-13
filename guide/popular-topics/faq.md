@@ -501,7 +501,7 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 
 </branch>
 
-### How to check the bots ping?
+### How do I check the bot's ping?
 
 There are two common measurements for bot pings. The first, **Websocket heartbeat**, is the average interval of a regularly sent signal indicating the healthy operation of the WebSocket connection the library receives events over:
 
