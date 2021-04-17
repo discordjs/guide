@@ -508,7 +508,7 @@ To build the correct file path, you will need the file name and the sub-folder t
 
 ```js
 const commandFolders = fs.readdirSync('./commands');
-const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${folder}`).includes(`${commandName}.js`));
+const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${folder}`).includes(`${command.name}.js`));
 ```
 
 In theory, all there is to do is delete the previous command from `client.commands` and require the file again. In practice, you cannot do this easily as `require()` caches the file. If you were to require it again, you would load the previously cached file without any changes. To remove the file from the cache, you need to add the following line to your code:
