@@ -482,6 +482,7 @@ const fs = require('fs');
 module.exports = {
 	name: 'reload',
 	description: 'Reloads a command',
+	args: true,
 	execute(message, args) {
 		// ...
 	},
@@ -492,7 +493,6 @@ In this command, you will be using a command name or alias as the only argument.
 Note that you can skip the first line if you use the [argument checker](/command-handling/adding-features.html#required-arguments) from above:
 
 ```js
-if (!args.length) return message.channel.send(`You didn't pass any command to reload, ${message.author}!`);
 const commandName = args[0].toLowerCase();
 const command = message.client.commands.get(commandName)
 	|| message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
