@@ -474,7 +474,7 @@ Need more resources on how Discord's permission system works? Check the [permiss
 
 When writing your commands, you may find it tedious to restart your bot every time you want to test even your code's slightest change. However, a single bot command can reload commands if you have a command handler.
 
-Create a new command file and paste in the usual format with a slight change:
+Create a new command file and paste in the usual format (using the [argument checker](/command-handling/adding-features.html#required-arguments) from above) with a slight change:
 
 ```js
 const fs = require('fs');
@@ -490,7 +490,6 @@ module.exports = {
 ```
 
 In this command, you will be using a command name or alias as the only argument. First off, you need to check if the command you want to reload exists. You can do this check similarly to getting a command in your main file.  
-Note that you can skip the first line if you use the [argument checker](/command-handling/adding-features.html#required-arguments) from above:
 
 ```js
 const commandName = args[0].toLowerCase();
