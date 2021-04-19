@@ -111,8 +111,8 @@ function getUserFromMention(mention) {
 		if (mention.startsWith('!')) {
 			mention = mention.slice(1);
 		}
-
-		return client.users.get(mention);
+ }
+	return client.users.get(mention);
 }
 ```
 
