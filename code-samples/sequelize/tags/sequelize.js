@@ -37,7 +37,7 @@ client.once('ready', () => {
 	 * name VARCHAR(255),
 	 * description TEXT,
 	 * username VARCHAR(255),
-	 * usage INT
+	 * usage_count INT NOT NULL DEFAULT 0
 	 * );
 	 */
 	Tags.sync();
