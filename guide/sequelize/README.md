@@ -105,7 +105,7 @@ To do that in Sequelize, you define a model based on this structure, as shown be
  * name VARCHAR(255),
  * description TEXT,
  * username VARCHAR(255),
- * usage INT
+ * usage_count INT
  * );
  */
 const Tags = sequelize.define('tags', {
