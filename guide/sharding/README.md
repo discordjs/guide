@@ -14,7 +14,7 @@ This guide only explains the basics of sharding using the built-in ShardingManag
 :::
 
 ::: tip
-Apart from ShardingManager, discord.js also supports a sharding mode known as Internal sharding. Internal sharding creates multiple websocket connections from the same process, and does not require major code changes. To enable, simply pass `shardCount: 'auto'` to the Client constructor. However, internal sharding is not ideal for bigger bots due to high memory usage of the single main process and is not further discussed in this guide.
+Apart from ShardingManager, discord.js also supports a sharding mode known as Internal sharding. Internal sharding creates multiple websocket connections from the same process, and does not require major code changes. To enable it, simply pass `shards: 'auto'` as ClientOptions to the Client constructor. However, internal sharding is not ideal for bigger bots due to high memory usage of the single main process and will not be further discussed in this guide.
 :::
 
 ## Sharding file
