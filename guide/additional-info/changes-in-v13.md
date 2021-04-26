@@ -53,6 +53,7 @@ The new `MessageOptions.allowedMentions.repliedUser` boolean option determines i
 - message.reply('content')
 + message.reply('content', { allowedMentions: { repliedUser: false }})
 ```
+Note that this will disable all other mentions in this message. To enable other mentions, you will need to include other `allowedMentions` fields. See the above "Allowed Mentions" section for more.
 
 ### Bitfields / Permissions
 
@@ -231,7 +232,7 @@ New activity type `COMPETING` added.
 
 #### Channel#isText()
 
-The new `Channel#isText()` getter provides an easy way for TypeScript developers to determine if a channel is Text-Based ("dm", "text", "news")
+The new `Channel#isText()` function provides an easy way for TypeScript developers to determine if a channel is Text-Based ("dm", "text", "news")
 
 ### CollectorOptions
 
