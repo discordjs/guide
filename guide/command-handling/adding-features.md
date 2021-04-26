@@ -23,7 +23,7 @@ try {
 
 In this short (but necessary) refactor, you:
 
-1. Renamed the original `command` variable to `commandName` (to be descriptive and to be able to create a different `command` variable after).
+1. Renamed the original `command` variable to `commandName` (to be descriptive and to be able to create a different `command` variable later).
 2. Changed the following `if` statement appropriately.
 3. Made a variable named `command`, which is the actual command object.
 4. Changed the line inside the `try/catch` statement to use the `command` variable instead.
@@ -167,7 +167,7 @@ module.exports = {
 };
 ```
 
-And in your main file, using an if statement to verify:
+And in your main file, use an if statement to verify:
 
 
 ```js {1-3}
@@ -207,7 +207,7 @@ module.exports = {
 };
 ```
 
-In your main file, initialize an empty Collection (remember, Collection is a utility data structure, which works based on key/value pairs) which you can then fill later when commands are used:
+In your main file, initialize an empty [Collection](/additional-info/collections.html) which you can then fill later when commands are used:
 
 ```js {2}
 client.commands = new Discord.Collection();
@@ -216,7 +216,7 @@ client.cooldowns = new Discord.Collection();
 
 The keys will be the command names, and the values will be Collections associating the user id (key) to the last time (value) this specific user used this specific command. Overall the logical path to get a specific user's last usage of a specific command will be `cooldowns > command > user > timestamp`.
 
-In your main file:
+In your main file, add the following code:
 
 ```js {1,3-5,7-9,11-13}
 const { cooldowns } = client;

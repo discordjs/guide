@@ -220,7 +220,7 @@ client.on('message', message => {
 
 This is VuePress' [codeblock line highlighting](https://vuepress.vuejs.org/guide/markdown.html#line-highlighting-in-code-blocks) feature. It's encouraged to use and preferred over diff codeblocks.
 
-Do note the space between `js` and `{}`. This is necessary to not interfere with `eslint-plugin-markdown`, in which would ignore the codeblock.
+Do note the space between `js` and `{}`. This is necessary to not interfere with `eslint-plugin-markdown`, which would ignore the codeblock.
 
 ### Images and links
 
