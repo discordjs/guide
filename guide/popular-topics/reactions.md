@@ -25,7 +25,7 @@ client.login('your-token-goes-here');
 
 To react with a Unicode emoji, you will need the actual Unicode character of the emoji. There are many ways to get a Unicode character of an emoji, but the easiest way would be through Discord itself. If you send a message with a Unicode emoji (such as `:smile:`, for example) and put a `\` before it, it will "escape" the emoji and display the Unicode character instead of the standard emoji image.
 
-![Escaped Unicode emoji](~@/images/I2ruNRf.png)
+![Escaped unicode emoji](./images/escaped-unicode-emoji.png)
 
 To react with an emoji, you need to use the `message.react()` method. Once you have the emoji character, all you need to do is copy & paste it as a string inside the `.react()` method!
 
@@ -35,13 +35,13 @@ if (message.content === '!react') {
 }
 ```
 
-![Unicode emoji reaction](~@/images/NUvOWqG.png)
+![Unicode emoji reaction](./images/unicode-emoji-reaction.png)
 
 ### Custom emojis
 
 For custom emojis, there are multiple ways of reacting. Like Unicode emojis, you can also escape custom emojis. However, when you escape a custom emoji, the result will be different.
 
-![Escaped custom emoji](~@/images/DFfdFw4.png)
+![Escaped custom emoji](./images/escaped-custom-emoji.png)
 
 This format is essentially the name of the emoji, followed by its ID. Copy & paste the ID into the `.react()` method as a string.
 
@@ -51,7 +51,7 @@ if (message.content === '!react-custom') {
 }
 ```
 
-![Custom emoji reaction via ID](~@/images/qSCjlEB.png)
+![Custom emoji reaction via ID](./images/custom-emoji-reaction.png)
 
 Great! This route may not always be available to you, though. Sometimes you'll need to react with an emoji programmatically. To do so, you'll need to retrieve the emoji object.
 
@@ -124,7 +124,7 @@ if (message.content === '!fruits') {
 }
 ```
 
-![Reaction race condition](~@/images/DgDVtcv.png)
+![Reaction race condition](./images/race-condition.png)
 
 As you can see, if you leave it like that, it won't display as you want. It was able to react correctly on the first try but reacts differently each time after that.
 
@@ -160,7 +160,7 @@ client.on('message', async message => {
 
 If you try again with either of the code blocks above, you'll get the result you originally wanted!
 
-![Emojis reacting in correct order](~@/images/1IWSJ1C.png)
+![Emojis reacting in correct order](./images/reaction-correct-order.png)
 
 ::: tip
 If you aren't familiar with Promises or `async`/`await`, you can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [our guide page on async/await](/additional-info/async-await.md)!

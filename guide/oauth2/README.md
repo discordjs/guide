@@ -59,15 +59,15 @@ Although we're using express, there are many other possible alternatives to hand
 
 Now that you have your web server up and running, it's time to get some information from Discord. Head over to [your Discord applications](https://discord.com/developers/applications/) and click "Create an application", where the following page will greet you:
 
-![Create an application page](~@/images/1ch98sm.png)
+![Create an application page](./images/create-app-page.png)
 
 Take note of the `client id` field, the `client secret` field, and the "OAuth2" link on the left side of the page. Copy your client ID and secret into your `config.json` file; you'll need them later. For now, click on "OAuth2" and add a redirect url to `http://localhost:53134` like so:
 
-![img](~@/images/9fejia2.png)
+![Adding Redirects](./images/add-redirects.png)
 
 Once you've added your redirect url, you will want to generate an OAuth2 url. Lower down on the page, you can conveniently find an OAuth2 Url Generator provided by Discord. Use this to create a url for yourself with the `identify` scope.
 
-![img](~@/images/18e2dwi.png)
+![Generate an OAuth2 Url](./images/generate-url.png)
 
 The `identify` scope will allow your application to get basic user information from Discord. You can find a list of all scopes [here](https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes).
 
@@ -77,7 +77,7 @@ You have your website, and you have a url. Now you need to use those two things 
 
 After you change the `response_type`, you can test the url right away. Try visiting it in your browser, and you will be directed to a page that looks like this.
 
-![img](~@/images/49jali8.png)
+![Authorization Page](./images/authorize-app-page.png)
 
 You can see that by clicking `Authorize`, you allow the application to access your username and avatar. Once you click through, you should be redirected to the redirect url with a [fragment identifier](https://en.wikipedia.org/wiki/Fragment_identifier) appended to it. You now have an access token and can make requests to Discord's API to get information on the user.
 

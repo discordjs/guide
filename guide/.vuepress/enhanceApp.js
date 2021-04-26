@@ -3,7 +3,7 @@ import VueDiscordMessage from 'vue-discord-message';
 export default ({ Vue }) => {
 	Vue.use(VueDiscordMessage, {
 		avatars: {
-			djs: require('../images/discord-avatar-djs.png'),
+			djs: require('./assets/discord-avatar-djs.png'),
 		},
 		profiles: {
 			user: {
@@ -11,8 +11,8 @@ export default ({ Vue }) => {
 				avatar: 'djs',
 			},
 			bot: {
-				author: 'Tutorial Bot',
-				avatar: 'blue',
+				author: 'Guide Bot',
+				avatar: 'green',
 				bot: true,
 			},
 		},

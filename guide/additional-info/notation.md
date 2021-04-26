@@ -28,7 +28,7 @@ The vital thing to take away from this notation is that the `#` symbol signifies
 
 As an example, the documentation's search feature uses this notation.
 
-![Docs search](~@/images/search.png)
+![Docs search](./images/search.png)
 
 Notice the use of the `.` operator for the static method, `Role.comparePositions` and the `#` notation for the method, `Role#comparePositionsTo`.
 
@@ -53,6 +53,6 @@ The angle brackets `<>` are used for generic types or parameterized types, signi
 - `Array<Promise<User|GuildMember>>` would be an array of `Promise`s, each containing a `User` or a `GuildMember`.
 - `Collection<Snowflake, User>` would be a `Collection`, containing key-value pairs where the keys are `Snowflake`s, and the values are `User`s.
 
-![TextChannel#send on the docs](~@/images/send.png)
+![TextChannel#send on the docs](./images/send.png)
 
-In this piece of the docs, you can see three type signatures, `StringResolvable`, `MessageOptions or MessageAdditions`, and `Promise<(Message|Array<Message>)>`. The meaning of the word "or" here is the same as `|`.
+In this piece of the docs, you can see three type signatures, `StringResolvable or APIMessage`, `MessageOptions or MessageAdditions`, and `Promise<(Message|Array<Message>)>`. The meaning of the word "or" here is the same as `|`.

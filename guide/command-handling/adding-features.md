@@ -466,8 +466,7 @@ if (command.args && !args.length) {
 
 Your command handler will now refuse to execute commands if the permissions you specify in the command structure are missing from the member trying to use it. Note that the `ADMINISTRATOR` permission and the message author being the owner of the guild will overwrite this.
 
-::: 
-
+::: tip
 Need more resources on how Discord's permission system works? Check the [permissions article](/popular-topics/permissions.html), [extended permissions knowledge base](/popular-topics/permissions-extended.html) and documentation of <branch version="11.x" inline>[permission flags](https://discord.js.org/#/docs/main/v11/class/Permissions?scrollTo=s-FLAGS)</branch><branch version="12.x" inline>[permission flags](https://discord.js.org/#/docs/main/stable/class/Permissions?scrollTo=s-FLAGS)</branch> out! 
 :::
 
@@ -475,7 +474,7 @@ Need more resources on how Discord's permission system works? Check the [permiss
 
 When writing your commands, you may find it tedious to restart your bot every time you want to test even your code's slightest change. However, a single bot command can reload commands if you have a command handler.
 
-Create a new command file and paste in the usual format with a slight change:
+Create a new command file and paste in the usual format (using the [argument checker](/command-handling/adding-features.html#required-arguments) from above) with a slight change:
 
 ```js
 const fs = require('fs');
@@ -483,6 +482,7 @@ const fs = require('fs');
 module.exports = {
 	name: 'reload',
 	description: 'Reloads a command',
+	args: true,
 	execute(message, args) {
 		// ...
 	},
@@ -490,10 +490,8 @@ module.exports = {
 ```
 
 In this command, you will be using a command name or alias as the only argument. First off, you need to check if the command you want to reload exists. You can do this check similarly to getting a command in your main file.  
-Note that you can skip the first line if you use the [argument checker](/command-handling/adding-features.html#required-arguments) from above:
 
 ```js
-if (!args.length) return message.channel.send(`You didn't pass any command to reload, ${message.author}!`);
 const commandName = args[0].toLowerCase();
 const command = message.client.commands.get(commandName)
 	|| message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
@@ -509,7 +507,7 @@ To build the correct file path, you will need the file name and the sub-folder t
 
 ```js
 const commandFolders = fs.readdirSync('./commands');
-const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${folder}`).includes(`${commandName}.js`));
+const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${folder}`).includes(`${command.name}.js`));
 ```
 
 In theory, all there is to do is delete the previous command from `client.commands` and require the file again. In practice, you cannot do this easily as `require()` caches the file. If you were to require it again, you would load the previously cached file without any changes. To remove the file from the cache, you need to add the following line to your code:
@@ -522,7 +520,7 @@ After removing the command from the cache, all you have to do is require the fil
 
 ```js
 try {
-	const newCommand = require(`./${command.name}.js`);
+	const newCommand = require(`../${folderName}/${command.name}.js`);
 	message.client.commands.set(newCommand.name, newCommand);
 } catch (error) {
 	console.error(error);
@@ -530,12 +528,12 @@ try {
 }
 ```
 
-The snippet above uses a `try/catch` block to load the command file and add it to `client.commands`. In case of an error, it will log the full error to the console and notify the user about it with the error's message component `error.message`. Note the you never actually delete the command from the commands Collection and instead overwrite it. This behavior prevents you from deleting a command and ending up with no command at all after a failed `require()` call, as each use of the reload command checks that Collection again.
+The snippet above uses a `try/catch` block to load the command file and add it to `client.commands`. In case of an error, it will log the full error to the console and notify the user about it with the error's message component `error.message`. Note that you never actually delete the command from the commands Collection and instead overwrite it. This behavior prevents you from deleting a command and ending up with no command at all after a failed `require()` call, as each use of the reload command checks that Collection again.
 
 The last slight improvement you might want to add to the try block is sending a message if the reload was successful:
 
 ```js
-message.channel.send(`Command \`${command.name}\` was reloaded!`);
+message.channel.send(`Command \`${newCommand.name}\` was reloaded!`);
 ```
 
 ## Conclusion 
