@@ -11,12 +11,8 @@ If you already have slash commands set-up for your application and want to learn
 
 First up, we'll introduce you to global application commands, these type of commands will be available on every guild your application is authorized on with the `applications.commands` oauth scope and are also available in its DMs.
 
-::: warning
-Global commands are cached for one hour. That means that new global commands will fan out slowly across all guilds, and will be guaranteed to be updated in an hour. 
-:::
-
 ::: tip
-Guild commands update instantly. We recommend you use guild commands for quick testing, and global commands when they're ready for public use.
+Global commands are cached for one hour. That means that new global commands will fan out slowly across all guilds and will be guaranteed to be updated in an hour. Guild commands however update instantly, so we recommend you use these for quick testing and global commands when they're ready for public use.
 :::
 
 So, to register a global command we will be passing an `ApplicationCommandData` object to the `ApplicationCommandManager.create()` method as follows:
