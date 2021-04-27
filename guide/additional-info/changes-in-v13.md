@@ -338,7 +338,7 @@ The `Guild#owner` property has been removed as it was unreliable due to caching,
 
 ```diff
 - console.log(Guild.owner);
-+ Guild.fetchOnwer().then(console.log);
++ Guild.fetchOwner().then(console.log);
 ```
 
 ### GuildManager
