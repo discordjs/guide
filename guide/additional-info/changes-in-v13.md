@@ -8,6 +8,15 @@ Once you've got Node up-to-date, you can install v13 by running `npm install dis
 
 You can check your discord.js version with `npm list discord.js`. Should it still show v12.x uninstall (`npm uninstall discord.js`) and re-install discord.js and make sure the entry in your package.json does not prevent a major version update. Please refer to the [npm documentation](https://docs.npmjs.com/files/package.json#dependencies) for this.
 
+## API Version
+
+Discord.js v13 makes the switch to Discord API v8.
+## Slash Commands
+
+Discord.js now has support for Slash Commands!
+
+Refer to the [Interactions](/interactions/registering-slash-commands) section of this guide to get started.
+
 ## Commonly used methods that changed
 
 ### Intents
@@ -57,12 +66,23 @@ Note that this will disable all other mentions in this message. To enable other 
 
 ### Bitfields / Permissions
 
-The usage of string literals for bitfields such as `Permissions` and `UserFlags` is discouraged; you should use the flag instead.
+Bitfields are now `BigInt`s instead of `Number`s. This can be handled using the `BigInt()` class, or the n-suffixed BigInt literal.
+
+```diff
+- const p = new Permissions(104324673);
++ const p = new Permissions(BigInt(104324673)); // using class
++ const p = new Permissions(104324673n); // using literal
+```
+The usage of string literals for bitfield flags such as `Permissions` and `UserFlags` is discouraged; you should use the flag instead.
 
 ```diff
 - permissions.has('SEND_MESSAGES')
 + permissions.has(Permissions.FLAGS.SEND_MESSAGES)
 ```
+
+### DM Channels
+
+On Discord API v8, DM Channels do not emit the `CHANNEL_CREATE` event, which means Discord.js is unable to cache them automatically. In order for your bot to receive DMs the `CHANNEL` partial must be enabled.
 
 ### Webpack
 
@@ -76,6 +96,15 @@ Webpack builds are no longer supported.
 
 The Client Emoji manager is now a `BaseGuildEmojiManager`, providing cache resolution only and removing methods that would fail to create emojis as there was no Guild context.
 
+#### Client#fetchApplication
+
+This method has been removed and replaced with the `Client#application` property
+
+```diff
+- client.fetchApplication().then(application => console.log(application.name))
++ console.log(client.application.name);
+```
+
 #### Client#generateInvite
 
 `Client#generateInvite` no longer supports `PermissionsResolvable` as its argument, requiring `InviteGenerationOptions`.
@@ -85,6 +114,8 @@ To provide permissions, use `InviteGenerationOptions#permissions`.
 - client.generateInvite([Permissions.FLAGS.SEND_MESSAGES]);
 + client.generateInvite({ permissions: [Permissions.FLAGS.SEND_MESSAGES] })
 ```
+
+`InviteGenerationOptions` also supports passing additional scopes, for OAuth or application.commands scopes.
 
 ### Client#login
 
@@ -106,7 +137,41 @@ The `ClientOptions#messageEditHistoryMaxSize` option has been removed.
 
 To reduce caching, discord.js will no longer store an edit history. You will need to implement this yourself if required.
 
+### ClientUser
+
+#### ClientUser#setActivity
+
+This method no longer returns a Promise
+
+#### ClientUser#setAFK
+
+This method no longer returns a Promise
+
+#### ClientUser#setPresence
+
+`PresenceData#activity` is replaced with `PresenceData#activities` which now requires an `Array<ActivitiesOptions>`
+
+```diff
+- client.user.setPresence({ activity: { name: 'with discord.js' });
++ client.user.setPresences({ activities: [{ name: 'with discord.js' }]);
+```
+
+This method no longer returns a Promise.
+
+#### ClientUser#setStatus
+
+This method no longer returns a Promise
+
 ### Guild
+
+#### Guild#fetchVanityCode
+
+This method has been removed.
+
+```diff
+- Guild.fetchVanityCode().then(code => console.log(`Vanity URL: https://discord.gg/${res.code}`));
++ Guild.fetchVanityData().then(res => console.log(`Vanity URL: https://discord.gg/${res.code} with ${res.uses} uses`));
+```
 
 #### Guild#member
 
@@ -180,6 +245,13 @@ This shortcut method has been removed.
 ```
 
 `reason` is no longer a parameter as it is not used by the API.
+
+### ReactionUserManager
+
+#### ReactionUserManager#fetch
+
+The `before` option has been removed as it was not supported by the API
+
 ### RoleManager
 
 #### RoleManager#create
@@ -228,6 +300,10 @@ Both were removed in favor of Node built-in Buffer methods.
 
 New activity type `COMPETING` added.
 
+### ApplicationFlags
+
+New class `ApplicationFlags`, a bigfield for ClientApplication flags.
+
 ### Channel
 
 #### Channel#isText()
@@ -242,11 +318,28 @@ Constructing a Collector without providing a filter function will now throw a me
 
 ### Guild
 
+#### Guild#edit
+
+`Guild#description` and `Guild#features` can now be edited.
+
 #### Guild#emojis
 
 The `GuildEmojiManager` now extends `BaseGuildEmojiManager`.
 
 In addition to the existing methods, it now supports `GuildEmojiManager#fetch`.
+
+#### Guild#nsfw
+
+Guilds can now be marked as NSFW
+
+#### Guild#owner
+
+The `Guild#owner` property has been removed as it was unreliable due to caching, replaced with `Guild#fetchOwner`
+
+```diff
+- console.log(Guild.owner);
++ Guild.fetchOnwer().then(console.log);
+```
 
 ### GuildManager
 
@@ -283,6 +376,12 @@ Approximately equivalent to `GuildMember#edit(data, reason)` but does not resolv
 `guild.members.kick('123456789012345678', reason)`
 
 Equivalent to `GuildMember#kick(reason)`
+
+#### GuildMemberManager#search
+
+Adds support for querying GuildMembers via the REST API endpoint.
+
+`GuildMemberManager#fetch` uses the websocket gateway to receive data.
 
 ### GuildMemberRoleManager
 
@@ -321,6 +420,12 @@ Added support for `<:name:id>` and `<a:name:id>` as valid inputs to `Message#rea
 #### Message#referencedMessage
 
 Gets the message this message references if this message is a crosspost/reply/pin-add and the referenced message is cached.
+
+### MessageAttachment
+
+#### MessageAttachment#contentType
+
+The media type of a MessageAttachment.
 
 ### MessageManager
 
@@ -370,6 +475,12 @@ Provides API support for bots to follow announcements in other channels
 
 Allows conversion between NewsChannel and TextChannel
 
+### Permissions
+
+#### Permissions#STAGE_MODERATOR
+
+Static bitfield representing the permissions required to moderate a Stage Channel
+
 ### Role
 
 #### Role#tags
@@ -388,12 +499,24 @@ Gets the managed role a bot created when joining the guild if any.
 
 `guild.roles.premiumSubscriberRole`
 
-Gets the premium subscriber (booster) role for the Guild, if any
+Gets the premium subscriber (booster) role for the Guild, if any.
 
+### StageChannels
+
+Stage Channels are now supported.
 ### TextChannel
 
 #### TextChannel#setType
 
 `channel.setType('news')`
 
-Allows conversion between TextChannel and NewsChannel
+Allows conversion between TextChannel and NewsChannel.
+
+### Webhook
+
+#### Webhook.deleteMessage
+
+Deletion of webhook messages by the Webhook is now supported.
+#### Webhook#editMessage
+
+Editing of Webhook messages is now supported.
