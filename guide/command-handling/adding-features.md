@@ -312,7 +312,7 @@ Making those two small changes, you get this:
 
 ## A dynamic help command
 
-If you don't use a framework or command handler for your projects, you'll have a tough time setting up an always up-to-date help command. Luckily, that's not the case here. Start by creating a new command file inside your `commands` folder and populate it as you usually would.
+If you don't use a framework or command handler for your projects, you'll have a tough time setting up an always up-to-date help command. Luckily, that's not the case here. Start by creating a new command file inside one of the subfolders in the `commands` folder and populate it as you usually would.
 
 ```js
 module.exports = {
