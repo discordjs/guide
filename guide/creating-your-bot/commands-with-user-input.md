@@ -161,7 +161,7 @@ And as you can see, it works!
 		!kick <mention profile="bot" />
 	</discord-message>
 	<discord-message profile="bot">
-		You wanted to kick: Tutorial Bot
+		You wanted to kick: Guide Bot
 	</discord-message>
 </div>
 
@@ -203,7 +203,7 @@ If you try again, it should work as expected.
 		!kick <mention profile="bot" />
 	</discord-message>
 	<discord-message profile="bot">
-		You wanted to kick: Tutorial Bot
+		You wanted to kick: Guide Bot
 	</discord-message>
 </div>
 
@@ -299,7 +299,7 @@ And ta-da! You now have a list of avatar links of all the users you tagged.
 		User's avatar:
 		<a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
 		<br />
-		Tutorial Bot's avatar:
+		Guide Bot's avatar:
 		<a href="https://cdn.discordapp.com/avatars/768861834441654282/6188d7f0602c2d495a5b7d98f8c0ebb5.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/768861834441654282/6188d7f0602c2d495a5b7d98f8c0ebb5.png</a>
 		<br />
 		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />

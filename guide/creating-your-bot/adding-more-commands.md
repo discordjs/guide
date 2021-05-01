@@ -93,7 +93,7 @@ The code above would result in this:
 		!server
 	</discord-message>
 	<discord-message profile="bot">
-		This server's name is: Discord Bot Tutorial
+		This server's name is: Discord Bot Guide
 	</discord-message>
 </div>
 
@@ -118,7 +118,7 @@ That would display both the server name _and_ the amount of members in it.
 		!server
 	</discord-message>
 	<discord-message profile="bot">
-		Server name: Discord Bot Tutorial <br>
+		Server name: Discord Bot Guide<br>
 		Total members: 3
 	</discord-message>
 </div>

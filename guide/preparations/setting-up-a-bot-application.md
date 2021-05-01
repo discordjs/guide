@@ -119,4 +119,4 @@ While we generally do not recommend using online editors as hosting solutions bu
 
 - Glitch.com: [storing secrets in .env](https://glitch.happyfox.com/kb/article/18)
 - Heroku.com: [config variables](https://devcenter.heroku.com/articles/config-vars)
-- Repl.it: [storing secrets in .env](https://docs.repl.it/repls/secret-keys)
+- Repl.it: [secrets & environment variables](https://docs.replit.com/repls/secrets-environment-variables)

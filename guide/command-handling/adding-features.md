@@ -505,7 +505,7 @@ Need more resources on how Discord's permission system works? Check the [permiss
 
 When writing your commands, you may find it tedious to restart your bot every time you want to test even your code's slightest change. However, a single bot command can reload commands if you have a command handler.
 
-Create a new command file and paste in the usual format with a slight change:
+Create a new command file and paste in the usual format (using the [argument checker](/command-handling/adding-features.html#required-arguments) from above) with a slight change:
 
 ```js {1}
 const fs = require('fs');
@@ -513,6 +513,7 @@ const fs = require('fs');
 module.exports = {
 	name: 'reload',
 	description: 'Reloads a command',
+	args: true,
 	execute(message, args) {
 		// ...
 	},
@@ -548,7 +549,7 @@ if (!command) {
 }
 
 const commandFolders = fs.readdirSync('./commands');
-const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${folder}`).includes(`${commandName}.js`));
+const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${folder}`).includes(`${command.name}.js`));
 ```
 
 In theory, all there is to do is delete the previous command from `client.commands` and require the file again. In practice, you cannot do this easily as `require()` caches the file. If you were to require it again, you would load the previously cached file without any changes. You first need to delete the file from the `require.cache`, and only then should you require and set the command file to `client.commands`:

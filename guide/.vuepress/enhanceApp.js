@@ -11,8 +11,8 @@ export default ({ Vue }) => {
 				avatar: 'djs',
 			},
 			bot: {
-				author: 'Tutorial Bot',
-				avatar: 'blue',
+				author: 'Guide Bot',
+				avatar: 'green',
 				bot: true,
 			},
 		},
