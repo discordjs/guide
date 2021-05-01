@@ -198,7 +198,7 @@ These objects are [ChannelCreationOverwrites](https://discord.js.org/#/docs/main
 <branch version="12.x">
 
 ```js
-guild.channels.create('new-channel', {
+client.guild.channels.create('new-channel', {
 	type: 'text',
 	permissionOverwrites: [
 		{
