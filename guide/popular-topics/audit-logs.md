@@ -11,7 +11,7 @@ It is crucial that you first understand two details about audit logs:
 2) There is no event which triggers when an audit log is created.
 :::
 
-Let us start by glancing at the `fetchAuditLogs` method and how we want to work with it. Like many djs methods, it returns a Promise containing what we want–the GuildAuditLogs object. In most cases, only the `entries` property will be of interest, as it holds a collection of GuildAuditLogsEntry objects, and consequently, the information we usually want. You can always take a look at the options <docs-link path="class/Guild?scrollTo=fetchAuditLogs">in the djs docs</docs-link>.
+Let us start by glancing at the `fetchAuditLogs` method and how we want to work with it. Like many discord.js methods, it returns a Promise containing what we want–the GuildAuditLogs object. In most cases, only the `entries` property will be of interest, as it holds a collection of GuildAuditLogsEntry objects, and consequently, the information we usually want. You can always take a look at the options <docs-link path="class/Guild?scrollTo=fetchAuditLogs">in the discord.js docs</docs-link>.
 
 The following examples will explore a straightforward case for some auditLog types. Some basic error handling is performed, but these code segments are by no means foolproof and are meant to teach you how fetching audit logs work. You will most likely need to expand on the examples based on your own goals for a rigorous system.
 
