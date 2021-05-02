@@ -1,4 +1,4 @@
-# Introduction
+# Introduction 👋
 
 If you're reading this, it probably means you want to learn how to make a bot with discord.js. Awesome! You've come to the right place.
 This guide will teach you things such as:
@@ -23,6 +23,8 @@ If you don't know JavaScript but would like to learn about it, here are a few li
 * [Nodeschool, for both JavaScript and Node.js lessons](https://nodeschool.io/)
 * [MDN's JavaScript guide and full documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * [Google, your best friend](https://google.com)
+* [Discord.JS official Discord server](https://discord.gg/djs)
+
 
 Take your pick, learn some JavaScript, and once you feel like you're confident enough to make a bot, come back and get started!
 
