@@ -96,7 +96,7 @@ console.log('And here\'s a function call: ' + letsPretendThisDoesSomething());
 console.log(
 	'Putting strings on new lines\n'
 	+ 'can be a bit painful\n'
-	+ 'with string concatenation. :('
+	+ 'with string concatenation. :(',
 );
 ```
 

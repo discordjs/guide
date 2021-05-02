@@ -54,17 +54,17 @@ The `name` property states which event this file is for, the `once` property is 
 
 Now, you'll write the code for dynamically retrieving all the event files in the `events` folder. Add this below the `const client` line in `index.js`:
 
-```diff
+```js {3}
 const client = new Discord.Client();
 
-+ const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 ```
 
 This same method is used in our [command handler](/command-handling/) section. The `fs.readdirSync().filter()` calls return an array of all the file names in the given directory and filter for only `.js` files, i.e. `['ready.js', 'message.js']`.
 
-Add the following code after the above line in `index.js`:
+```js {3-10}
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
-```js
 for (const file of eventFiles) {
 	const event = require(`./events/${file}`);
 	if (event.once) {
@@ -94,28 +94,25 @@ You may have noticed how important the `Client` class is. You created a `client`
 
 The `ready` event does not have arguments, meaning that `args` will be an empty array, thus nothing will be passed to the `execute` function in `ready.js`. To obtain the `client` instance, you'll have to pass it as an argument along with the `args` array in the event handler. Back in `index.js`, make the following changes:
 
-```diff
+```js {4,6}
 for (const file of eventFiles) {
 	const event = require(`./events/${file}`);
 	if (event.once) {
--       client.once(event.name, (...args) => event.execute(...args));
-+       client.once(event.name, (...args) => event.execute(...args, client));
+		client.once(event.name, (...args) => event.execute(...args, client));
 	} else {
--       client.on(event.name, (...args) => event.execute(...args));
-+       client.on(event.name, (...args) => event.execute(...args, client));
+		client.on(event.name, (...args) => event.execute(...args, client));
 	}
 }
 ```
 
 This allows `client` to be available as the **last** argument to the `execute` function in each event file. You can make use of `client` in `ready.js` by logging your bot's tag in the console when it becomes ready:
 
-```diff
+```js {4-6}
 module.exports = {
 	name: 'ready',
 	once: true,
-+   execute(client) {
--       console.log('Ready!');
-+       console.log(`Ready! Logged in as ${client.user.tag}`);
+	execute(client) {
+		console.log(`Ready! Logged in as ${client.user.tag}`);
 	},
 };
 ```
@@ -126,7 +123,7 @@ You can omit the `client` argument from the `execute` function in files where yo
 
 It is worth noting that the position of `client` argument matters. For example, the `messageUpdate` event has two arguments: `oldMessage` and `newMessage`. Events like this should be handled as:
 
-```js
+```js {3}
 module.exports = {
 	name: 'messageUpdate',
 	execute(oldMessage, newMessage, client) {

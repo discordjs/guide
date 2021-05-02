@@ -83,7 +83,7 @@ You can see that by clicking `Authorize`, you allow the application to access yo
 
 Modify `index.html` to add your OAuth2 url and to take advantage of the access token if it exists. Even though [`URLSearchParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) is for working with query strings, it can work here because the structure of the fragment follows that of a query string after removing the leading "#".
 
-```html{4-26}
+```html {4-26}
 <div id="info">
 	Hoi!
 </div>
@@ -120,7 +120,7 @@ Here you grab the access token and type from the url if it's there and use it to
 
 OAuth2's protocols provide a `state` parameter, which Discord supports. This parameter helps prevent [CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) attacks and represents your application's state. The state should be generated per user and appended to the OAuth2 url. For a basic example, you can use a randomly generated string encoded in Base64 as the state parameter.
 
-```js{1-10,15-18}
+```js {1-10,15-18}
 function generateRandomString() {
 	let randomString = '';
 	const randomNumber = Math.floor(Math.random() * 10);
@@ -146,7 +146,7 @@ window.load = () => {
 
 When you visit a url with a `state` parameter appended to it and then click `Authorize`, you'll notice that after being redirected, the url will also have the `state` parameter appended, which you should then check against what was stored. You can modify the script in your `index.html` file to handle this.
 
-```js{2,8-10}
+```js {2,8-10}
 const fragment = new URLSearchParams(window.location.hash.slice(1));
 const [accessToken, tokenType, state] = [fragment.get('access_token'), fragment.get('token_type'), fragment.get('state')];
 
@@ -171,7 +171,7 @@ What you did in the quick example was go through the `implicit grant` flow, whic
 
 Unlike the quick example, you need an OAuth2 url where the `response_type` is `code`. Once you've obtained it, try visiting the link and authorizing your application. You should notice that instead of a hash, the redirect url now has a single query parameter appended to it like `?code=ACCESS_CODE`. Modify your `index.js` file to pull the parameter out of the url if it exists. In express, you can use the `request` parameter's `query` property.
 
-```js{2}
+```js {2}
 app.get('/', (request, response) => {
 	console.log(`The access code is: ${request.query.code}`);
 	return response.sendFile('index.html', { root: '.' });
@@ -182,7 +182,7 @@ Now you have to exchange this code with Discord for an access token. To do this,
 
 Require `node-fetch` and make your request.
 
-```js{1,3,7-8,10-34}
+```js {1,3,7-8,10-34}
 const fetch = require('node-fetch');
 const express = require('express');
 const { clientID, clientSecret, port } = require('./config.json');
@@ -241,7 +241,7 @@ Now try visiting your OAuth2 url and authorizing your application. Once you're r
 Try fetching the user's information now that you have an access token and a refresh token. It's the same as how the html file did it in the html file.
 
 <!-- eslint-skip -->
-```js{3-7,9}
+```js {3-7,9}
 const oauthData = await oauthResult.json();
 
 const userResult = await fetch('https://discord.com/api/users/@me', {

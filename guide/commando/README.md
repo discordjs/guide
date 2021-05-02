@@ -6,8 +6,8 @@ pageTheme: blue
 
 When you got your first bot up and running, you should've installed discord.js using npm, Node.js' Package Manager. The same applies to Commando, which you must separately install. You can do this in one of two ways:
 
-If using discord.js v11: `npm install discord.js-commando`  
-If using discord.js v12: `npm install discordjs/Commando`
+If using discord.js v12: `npm install discord.js-commando`  
+If using master: `npm install discordjs/Commando`
 
 ::: warning
 You need at least Node.js version <branch version="11.x" inline>8.0.0</branch><branch version="12.x" inline>12.0</branch> to use Commando.
@@ -64,24 +64,24 @@ You've just created your first command group! Make another folder called `first`
 
 Adding more command groups is as simple as adding another option to the array and making another folder.
 
-<!-- eslint-skip -->
-
-```js
-.registerGroups([
-	['first', 'Your First Command Group'],
-	['second', 'Your Second Command Group'],
-	['third', 'Your Third Command Group'],
-])
+```js {6}
+client.registry
+	// ...
+	.registerGroups([
+		['first', 'Your First Command Group'],
+		['second', 'Your Second Command Group'],
+		['third', 'Your Third Command Group'],
+	]);
 ```
 
 Should you want to disable a default command, such as if you wanted to make a custom help command and replace the default one, you could pass that as an option in `registerDefaultCommands`.
 
-<!-- eslint-skip -->
-
-```js
-.registerDefaultCommands({
-	help: false,
-})
+```js {3-5}
+client.registry
+	// ...
+	.registerDefaultCommands({
+		help: false,
+	});
 ```
 
 Next, you're going to need to create a ready event and an error event, as usual.

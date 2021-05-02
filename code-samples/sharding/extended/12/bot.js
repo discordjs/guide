@@ -2,15 +2,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '!';
 
-function findEmoji(id) {
-	const temp = this.emojis.cache.get(id);
-	if (!temp) return null;
-
-	const emoji = Object.assign({}, temp);
-	if (emoji.guild) emoji.guild = emoji.guild.id;
-	emoji.require_colons = emoji.requiresColons;
-
-	return emoji;
+function findEmoji(nameOrID) {
+	return this.emojis.cache.get(nameOrID) || this.emojis.cache.find(e => e.name.toLowerCase() === nameOrID.toLowerCase());
 }
 
 client.on('message', message => {
@@ -50,19 +43,13 @@ client.on('message', message => {
 	}
 
 	if (command === 'emoji') {
-		if (!args.length) return message.reply('please specify an emoji id to search for.');
+		if (!args.length) return message.reply('please specify an emoji ID or name to search for.');
 
 		return client.shard.broadcastEval(`(${findEmoji}).call(this, '${args[0]}')`)
 			.then(emojiArray => {
 				const foundEmoji = emojiArray.find(emoji => emoji);
 				if (!foundEmoji) return message.reply('I could not find such an emoji.');
-
-				return client.api.guilds(foundEmoji.guild).get()
-					.then(raw => {
-						const guild = new Discord.Guild(client, raw);
-						const emoji = new Discord.GuildEmoji(client, foundEmoji, guild);
-						return message.reply(`I have found an emoji ${emoji.toString()}!`);
-					});
+				return message.reply(`I have found the ${foundEmoji.animated ? `<${foundEmoji.identifier}>` : `<:${foundEmoji.identifier}>`} emoji!`);
 			});
 	}
 });
