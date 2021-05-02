@@ -63,7 +63,7 @@ You can go ahead and do the same for the rest of your commands and put their res
 If you need to access your client instance from inside one of your command files, you can access it via `message.client`. If you need to access external files, modules, etc., you should re-require them at the top of the file.
 :::
 
-## Dynamically reading command files
+## Reading command files
 
 Back in your main file, make these two additions:
 
@@ -99,7 +99,38 @@ for (const file of commandFiles) {
 }
 ```
 
-As for setting up your files, that's it for now. In the next chapter, you'll learn how to make your commands execute dynamically!
+## Dynamically executing commands
+
+With your `client.commands` Collection setup, you can use it to retrieve and execute your commands! Inside your `message` event, delete your `if`/`else if` chain of commands and replace it with this:
+
+```js {7-14}
+client.on('message', message => {
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+	const args = message.content.slice(prefix.length).trim().split(/ +/);
+	const command = args.shift().toLowerCase();
+
+	if (!client.commands.has(command)) return;
+
+	try {
+		client.commands.get(command).execute(message, args);
+	} catch (error) {
+		console.error(error);
+		message.reply('there was an error trying to execute that command!');
+	}
+});
+```
+
+If there isn't a command with that name, exit early. If there is, `.get()` the command, call its `.execute()` method, and pass in your `message` and `args` variables as its arguments. In case something goes wrong, log the error and report back to the member to let them know.
+
+And that's it! Whenever you want to add a new command, you make a new file in your `commands` directory, name it what you want, and then do what you did for the other commands.
+
+In the next chapter, we'll be going through how to implement some basic features into your brand new command handler. Currently, it's hardly a command "handler" at this point; it's a command loader and executor if you wish to see it that way. You'll learn how to implement some new features and the logic behind them, such as:
+
+* Command aliases
+* Cooldowns
+* Guild only commands
+* A dynamic help message
 
 ## Resulting code
 
