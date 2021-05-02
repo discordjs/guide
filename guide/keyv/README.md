@@ -119,17 +119,19 @@ client.on('message', async message => {
 
 Now that you have a command handler, you can make a command to allow people to use your prefix system.
 
-<!-- eslint-skip -->
-```js
-if (command === 'prefix') {
-	// if there's at least one argument, set the prefix
-	if (args.length) {
-		await prefixes.set(message.guild.id, args[0]);
-		return message.channel.send(`Successfully set prefix to \`${args[0]}\``);
-	}
+```js {3-11}
+client.on('message', async message => {
+	// ...
+	if (command === 'prefix') {
+		// if there's at least one argument, set the prefix
+		if (args.length) {
+			await prefixes.set(message.guild.id, args[0]);
+			return message.channel.send(`Successfully set prefix to \`${args[0]}\``);
+		}
 
-	return message.channel.send(`Prefix is \`${await prefixes.get(message.guild.id) || globalPrefix}\``);
-}
+		return message.channel.send(`Prefix is \`${await prefixes.get(message.guild.id) || globalPrefix}\``);
+	}
+});
 ```
 
 You will probably want to set up additional validation, such as required permissions and maximum prefix length.

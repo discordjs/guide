@@ -34,19 +34,18 @@ Add the `throttling` property to the command. `throttling` is an object, which c
 
 Make it have two usages allowed in ten seconds.
 
-<!-- eslint-skip -->
-
-```js
-super(client, {
-	name: 'meow',
-	group: 'first',
-	memberName: 'meow',
-	description: 'Replies with a meow, kitty cat.',
-	throttling: {
-		usages: 2,
-		duration: 10,
-	},
-});
+```js {5-8}
+module.exports = class MeowCommand extends Command {
+	constructor(client) {
+		super(client, {
+			// ...
+			throttling: {
+				usages: 2,
+				duration: 10,
+			},
+		});
+	}
+};
 ```
 
 The command now has a cooldown. If a user tries to use the `meow` command more than two times in ten seconds, it will not allow them to use it until the ten seconds have fully passed. While useless in a command like `meow`, this can be very useful for other, heavier commands you don't want others to abuse.
