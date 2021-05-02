@@ -47,9 +47,9 @@ Here is an example of how an embed may look. We will go over embed construction 
 	</discord-message>
 </div>
 
-## Using the <branch version="11.x" inline>RichEmbed</branch><branch version="12.x" inline>MessageEmbed</branch> constructor
+## Using the embed constructor
 
-discord.js features the utility class <branch version="11.x" inline>[RichEmbed](https://discord.js.org/#/docs/main/v11/class/MessageEmbed)</branch><branch version="12.x" inline>[MessageEmbed](https://discord.js.org/#/docs/main/stable/class/MessageEmbed)</branch> for easy construction and manipulation of embeds.
+discord.js features the <branch version="11.x" inline><docs-link path="class/RichEmbed">`RichEmbed`</docs-link></branch><branch version="12.x" inline><docs-link path="class/MessageEmbed">`MessageEmbed`</docs-link></branch> utility class for easy construction and manipulation of embeds.
 
 <branch version="11.x">
 
@@ -116,7 +116,7 @@ channel.send(exampleEmbed);
 You don't need to include all the elements showcased above. If you want a simpler embed, leave some out.
 :::
 
-The `.setColor()` method accepts an integer, HEX color string, an array of RGB values or specific color strings. You can find a list of them at <branch version="11.x" inline>[the discord.js documentation](https://discord.js.org/#/docs/main/v11/typedef/ColorResolvable)</branch><branch version="12.x" inline>[the discord.js documentation](https://discord.js.org/#/docs/main/stable/typedef/ColorResolvable)</branch>.
+The `.setColor()` method accepts an integer, HEX color string, an array of RGB values or specific color strings. You can find a list of them at <docs-link path="typedef/ColorResolvable">the discord.js documentation</docs-link>.
 
 <branch version="11.x">
 
@@ -161,7 +161,7 @@ if (message.author.bot) {
 
 ### Attaching images
 
-You can use the `.attachFiles()` method to upload images alongside your embed and use them as source for embed fields that support image urls. The method accepts the source file as file path <branch version="11.x" inline>[FileOptions](https://discord.js.org/#/docs/main/v11/typedef/FileOptions)</branch><branch version="12.x" inline>[FileOptions](https://discord.js.org/#/docs/main/stable/typedef/FileOptions)</branch>, BufferResolvable (including a URL to an external image), or Attachment objects inside an array.
+You can use the `.attachFiles()` method to upload images alongside your embed and use them as source for embed fields that support image urls. The method accepts the source file as file path <docs-link path="typedef/FileOptions">FileOptions</docs-link>, BufferResolvable (including a URL to an external image), or Attachment objects inside an array.
 
 You can then reference and use the images inside the embed itself with `attachment://fileName.extension`.
 
@@ -279,7 +279,7 @@ if (message.author.bot) {
 
 ### Attaching images
 
-You can upload images with your embedded message and use them as source for embed fields that support image urls by constructing <branch version="11.x" inline>an [Attachment](https://discord.js.org/#/docs/main/v11/class/Attachment)</branch><branch version="12.x" inline>a [MessageAttachment](https://discord.js.org/#/docs/main/stable/class/MessageAttachment)</branch> from them to send as message option alongside the embed. The <branch version="11.x" inline>file</branch><branch version="12.x" inline>attachment</branch> parameter takes a BufferResolvable or Stream including the URL to an external image.
+You can upload images with your embedded message and use them as source for embed fields that support image urls by constructing <branch version="11.x" inline>an <docs-link path="class/Attachment">Attachment</docs-link></branch><branch version="12.x" inline>a <docs-link path="class/MessageAttachment">MessageAttachment</docs-link></branch> from them to send as message option alongside the embed. The <branch version="11.x" inline>file</branch><branch version="12.x" inline>attachment</branch> parameter takes a BufferResolvable or Stream including the URL to an external image.
 
 You can then reference and use the images inside the embed itself with `attachment://fileName.extension`.
 

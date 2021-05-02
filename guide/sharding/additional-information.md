@@ -44,7 +44,7 @@ manager.spawn()
 
 As the property names imply, the `_eval` property is what the shard is attempting to evaluate, and the `_result` property is the output of said evaluation. However, these properties are only guaranteed if a _shard_ is sending a message. There will also be an `_error` property, should the evaluation have thrown an error.
 
-You can also send messages via `process.send('hello')`, which would not contain the same information. This is why the `.message` property's type is declared as `*` <branch version="11.x" inline>[in the discord.js documentation](https://discord.js.org/#/docs/main/v11/class/Shard?scrollTo=e-message)</branch><branch version="12.x" inline>[in the discord.js documentation](https://discord.js.org/#/docs/main/stable/class/Shard?scrollTo=e-message)</branch>.
+You can also send messages via `process.send('hello')`, which would not contain the same information. This is why the `.message` property's type is declared as `*` <docs-link path="class/Shard?scrollTo=e-message">in the discord.js documentation</docs-link>.
 
 ## Specific shards
 
@@ -60,7 +60,7 @@ client.shard.broadcastEval('if (this.shard.id === 0) process.exit();');
 <branch version="12.x">
 
 ::: tip
-In version 12 [`client.shard`](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=ids) can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
+In discord.js v12, <docs-link path="class/ShardClientUtil?scrollTo=ids">`client.shard`</docs-link> can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
 :::
 
 ```js
@@ -69,7 +69,7 @@ client.shard.broadcastEval('if (this.shard.ids.includes(0)) process.exit();');
 
 </branch>
 
-If you're using something like [PM2](http://pm2.keymetrics.io/) or [Forever](https://github.com/foreverjs/forever), this is an easy way to restart a specific shard. Remember, <branch version="11.x" inline>[Shard#BroadcastEval](https://discord.js.org/#/docs/main/v11/class/ShardClientUtil?scrollTo=broadcastEval)</branch><branch version="12.x" inline>[Shard#BroadcastEval](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=broadcastEval)</branch> sends a message to **all** shards, so you have to check if it's on the shard you want.
+If you're using something like [PM2](http://pm2.keymetrics.io/) or [Forever](https://github.com/foreverjs/forever), this is an easy way to restart a specific shard. Remember, <docs-link path="class/ShardClientUtil?scrollTo=broadcastEval">Shard#broadcastEval</docs-link> sends a message to **all** shards, so you have to check if it's on the shard you want.
 
 ## `ShardingManager#shardArgs` and `ShardingManager#execArgv`
 

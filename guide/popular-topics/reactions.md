@@ -241,7 +241,7 @@ The reason we use a `for...of` loop over something like `.forEach()` is due to `
 </branch>
 <branch version="12.x">
 
-Removing reactions by emoji is easily done by using [`MessageReaction.remove()`](https://discord.js.org/#/docs/main/stable/class/MessageReaction?scrollTo=remove).
+Removing reactions by emoji is easily done by using <docs-link path="class/MessageReaction?scrollTo=remove">`MessageReaction.remove()`</docs-link>.
 
 ```js
 message.reactions.cache.get('484535447171760141').remove().catch(error => console.error('Failed to remove reactions: ', error));
@@ -251,7 +251,7 @@ message.reactions.cache.get('484535447171760141').remove().catch(error => consol
 
 ### Removing reactions by user
 ::: tip
-If you are not familiar with <branch version="11.x" inline>[`Collection.filter()`](https://discord.js.org/#/docs/main/v11/class/Collection?scrollTo=filter)</branch><branch version="12.x" inline>[`Collection.filter()`](https://discord.js.org/#/docs/collection/master/class/Collection?scrollTo=filter)</branch> and [`Collection.has()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) take the time to understand what they do and then come back.
+If you are not familiar with <branch version="11.x" inline><docs-link path="class/Collection?scrollTo=filter">`Collection.filter()`</docs-link></branch><branch version="12.x" inline><docs-link section="collection" path="class/Collection?scrollTo=filter">`Collection.filter()`</docs-link></branch> and [`Map.has()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) take the time to understand what they do and then come back.
 :::
 
 <branch version="11.x">

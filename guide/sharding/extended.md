@@ -70,7 +70,7 @@ if (command === 'send') {
 <branch version="12.x">
 
 ::: tip
-In version 12 [`client.shard`](https://discord.js.org/#/docs/main/stable/class/ShardClientUtil?scrollTo=ids) can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
+In discord.js v12, <docs-link path="class/ShardClientUtil?scrollTo=ids">`client.shard`</docs-link> can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
 :::
 
 ```js {4-13}
