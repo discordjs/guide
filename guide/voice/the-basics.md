@@ -24,10 +24,10 @@ client.on('message', async message => {
 });
 ```
 
-If you try to join a channel the bot is already in, nothing will happen, so we don't need to run this method repeatedly.
+If you try to join a channel the bot is already in, nothing will happen, so you don't need to run this method repeatedly.
 
 ::: tip
-In the above example, we accessed a `VoiceState` through `member.voice`. A voice state exists for members connected to a voice channel and tells you which channel they're connected to, if the member is speaking, and whether they're deafened or muted. Consult the documentation for a full description of what voice states can do!
+In the above example, a `VoiceState` is accessed through `member.voice`. A voice state exists for members connected to a voice channel and tells you which channel they're connected to, if the member is speaking, and whether they're deafened or muted. Consult the documentation for a full description of what voice states can do!
 :::
 
 ## Playing audio
@@ -85,7 +85,7 @@ You can consult the [FFmpeg Protocols](https://www.ffmpeg.org/ffmpeg-protocols.h
 
 #### WebM/Ogg Opus Files
 
-WebM/Ogg Opus files already contain Opus audio; this means we do not require FFmpeg to convert the file. This is efficient and using these files where possible will improve the performance of your bot.
+WebM/Ogg Opus files already contain Opus audio; this means you do not require FFmpeg to convert the file. This is efficient and using these files where possible will improve the performance of your bot.
 
 To play these files, you'll need to have a ReadableStream of the file and you'll need to specify the type of file when playing:
 
@@ -98,7 +98,7 @@ connection.play(fs.createReadStream('audio.ogg'), { type: 'ogg/opus' });
 ```
 
 ::: tip
-You may be wondering why we specified the source `type` in this example when we didn't in the FFmpeg one. discord.js will default to the `'unknown'` (i.e., "use FFmpeg") type when no type is provided.
+You may be wondering why the source `type` is specified in this example when it wasn't in the FFmpeg one. discord.js will default to the `'unknown'` (i.e., "use FFmpeg") type when no type is provided.
 :::
 
 ## Controlling the Stream Dispatcher
