@@ -8,7 +8,7 @@ The main benefit of using an ORM like Sequelize is that it allows you to write c
 
 ## A simple tag system
 
-For this tutorial, you will create a simple tag system. The tag system will allow you to add a tag, output a tag, edit the tag, show tag info, list tags, and delete a tag.   
+For this tutorial, we will create a simple tag system. The tag system will allow you to add a tag, output a tag, edit the tag, show tag info, list tags, and delete a tag.   
 To begin, you should install Sequelize into your discord.js project. We will explain SQlite as the first storage engine and show how to use other databases later. Note that you will need Node 7.6 or above to utilize the `async/await` operators.
 
 ### Installing and using Sequelize
@@ -137,7 +137,7 @@ The model mirrors very closely what the database defines. There will be a table 
 
 ### [gamma] Syncing the model
 
-Now that your structure is defined, you need to make sure the model exists in the database. This goes in our `.once('ready')` event. This way, the table structure gets created when the bot is ready, and we do not need to worry about it later.
+Now that your structure is defined, you need to make sure the model exists in the database. This goes in the `.once('ready')` event. This way, the table structure gets created when the bot is ready, so that there's no need to worry about it later.
 ```js
 Tags.sync();
 ```
@@ -146,7 +146,7 @@ The table does not get created until you `sync` it. The schema you defined befor
 
 ### [delta] Adding a tag
 
-After all this preparation, you can now write your first command! We will start with the ability to add a tag.
+After all this preparation, you can now write your first command! Let's start with the ability to add a tag.
 
 <!-- eslint-skip -->
 
@@ -182,7 +182,7 @@ Do not use catch for inserting new data. Only use it for gracefully handling thi
 
 ### [epsilon] Fetching a tag
 
-Next, we will explain how to fetch the inserted tag.
+Next, let's fetch the inserted tag.
 
 <!-- eslint-skip -->
 
@@ -199,7 +199,7 @@ if (tag) {
 return message.reply(`Could not find tag: ${tagName}`);
 ```
 
-This is your first query. You are finally doing something with our data; yay!  
+This is your first query. You are finally doing something with your data; yay!  
 `.findOne()` is how you fetch a single row of data. The `where: { name: tagName }` makes sure you only get the row with the desired tag. Since the queries are asynchronous, you will need to use `await` to fetch it. After receiving the data, you can use `.get()` on that object to grab the data. If no data is received, then you can tell the user that the query returned no data.
 
 ### [zeta] Editing a tag
@@ -236,7 +236,7 @@ if (tag) {
 return message.reply(`Could not find tag: ${tagName}`);
 ```
 
-This section is very similar to our previous command, except you will be showing the tag metadata. `tag` contains our tag object. Notice two things: firstly, it is possible to access our object properties without the `.get()` function. This is because the object is an instance of a Tag, which you can treat as an object and not just a row of data. Second, you can access a property that was not defined explicitly, `createdAt`. This is because Sequelize automatically adds that column to all tables. Passing another object into the model with `{ createdAt: false }` can disable this feature, but in this case, it was useful to have.
+This section is very similar to the previous command, except you will be showing the tag metadata. `tag` contains our tag object. Notice two things: firstly, it is possible to access the object's properties without the `.get()` function. This is because the object is an instance of a Tag, which you can treat as an object and not just a row of data. Second, you can access a property that was not defined explicitly, `createdAt`. This is because Sequelize automatically adds that column to all tables. Passing another object into the model with `{ createdAt: false }` can disable this feature, but in this case, it was useful to have.
 
 ### [lambda] Listing all tags
 
