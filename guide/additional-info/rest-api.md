@@ -148,7 +148,7 @@ You can get the respective properties from the returned JSON. If you were to vie
 
 Now, if you look at the JSON, you can see that it's a `list` property, which is an array of objects containing various definitions for the term (maximum 10). Something you always want to do when making API-based commands is to handle no results. So, let's throw a random term in there (e.g. `njaksdcas`) and then look at the response. The `list` array should then be empty. Now you are ready to start writing!
 
-As explained above we want to check if the API returned any answers for our query, and send back the definition if so:
+As explained above, you'll want to check if the API returned any answers for your query, and send back the definition if so:
 
 ```js {3-5,7}
 if (command === 'urban') {
@@ -182,13 +182,13 @@ If you've followed the tutorial, you should have something like this:
 
 Now, let's just make this an [embed](/popular-topics/embeds.md).
 
-We are also going to be defining a utility function at the top of our file so that our embed doesn't error when the field value is over 1024 characters. Here is a bit of code to do that:
+We are also going to be defining a utility function at the top of the file so that the embed doesn't error when the field value is over 1024 characters. Here is a bit of code to do that:
 
 ```js
 const trim = (str, max) => ((str.length > max) ? `${str.slice(0, max - 3)}...` : str);
 ```
 
-The following snippet is how we'll be structuring the embed:
+The following snippet is how to structure the embed:
 
 <branch version="11.x">
 

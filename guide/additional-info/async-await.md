@@ -37,7 +37,7 @@ deleteMessages(5).then(value => {
 });
 ```
 
-In this scenario, the `deleteMessages` function returns a Promise. The `.then()` method will trigger if the Promise resolves, and the `.catch()` method if the Promise rejects. But with our function, we resolve the Promise after 2 seconds with the String "Deleted 10 messages.", so the `.catch()` method will never be executed. You can also pass the `.catch()` function as the second parameter of `.then()`.
+In this scenario, the `deleteMessages` function returns a Promise. The `.then()` method will trigger if the Promise resolves, and the `.catch()` method if the Promise rejects. In the `deleteMessages` function, the Promise is resolved after 2 seconds with the string "Deleted 10 messages.", so the `.catch()` method will never be executed. You can also pass the `.catch()` function as the second parameter of `.then()`.
 
 ## How to implement async/await
 
@@ -73,7 +73,7 @@ An important thing to know is that a function declared as `async` will always re
 
 ### Execution with discord.js code
 
-After knowing how Promises work and what they are for, as well as the theory, let's look at an example in which we'll handle multiple Promises. Let's say you want to react with letters (regional indicators) in a specific order. For this example, you will take the basic template for a discord.js bot with some ES6 adjustments.
+After knowing how Promises work and what they are for, as well as the theory, let's look at an example in which handles multiple Promises. Let's say you want to react with letters (regional indicators) in a specific order. For this example, here's a basic template for a discord.js bot with some ES6 adjustments.
 
 ```js
 const Discord = require('discord.js');
@@ -94,7 +94,7 @@ client.on('message', message => {
 client.login('your-token-goes-here');
 ```
 
-So now we need to put the code in. If you don't know how Node.js asynchronous execution works, you would probably try something like this:
+If you don't know how Node.js asynchronous execution works, you would probably try something like this:
 
 ```js {3-5}
 client.on('message', message => {
@@ -106,7 +106,7 @@ client.on('message', message => {
 });
 ```
 
-But since all of these react methods are started at the same time, it would just be a race to which server request finished first, so there would be no guarantee that it would react in the order you wanted it to. In order to make sure it reacts in order (a, b, c), we need to use the `.then()` callback from the Promises that these methods return. As a result the code we want would mostly look like this:
+But since all of these react methods are started at the same time, it would just be a race to which server request finished first, so there would be no guarantee that it would react in the order you wanted it to. In order to make sure it reacts in order (a, b, c), you'd need to use the `.then()` callback from the Promises that these methods return. The code would look like this:
 
 ```js {3-8}
 client.on('message', message => {
@@ -121,7 +121,7 @@ client.on('message', message => {
 });
 ```
 
-In this piece of code, we [chain resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then#Chaining) Promises with each other, and if one of the Promises gets rejected, the function we passed to `.catch()` get called. So let's look at how the same code would look with async/await.
+In this piece of code, the Promises are [chain resolved](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then#Chaining) with each other, and if one of the Promises gets rejected, the function passed to `.catch()` gets called. Here's the same code but with async/await:
 
 ```js {1,3-5}
 client.on('message', async message => {
@@ -133,7 +133,7 @@ client.on('message', async message => {
 });
 ```
 
-That would mostly be the same code with async/await, but how do we catch Promise rejections now since we won't use `.catch()` anymore? That is also a useful feature with async/await; the error will be thrown if you await it so that you can wrap the awaited Promises inside a try/catch, and you're good to go. 
+It's mostly be the same code, but how would you catch Promise rejections now since `.catch()` won't be anymore? That is also a useful feature with async/await; the error will be thrown if you await it so that you can wrap the awaited Promises inside a try/catch, and you're good to go. 
 
 ```js {1,3-9}
 client.on('message', async message => {

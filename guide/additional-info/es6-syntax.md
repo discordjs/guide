@@ -205,7 +205,7 @@ This code is a bit verbose and not the most fun to write out each time. Object d
 const { prefix, token } = require('./config.json');
 ```
 
-Object destructuring takes those properties from the object and stores them in variables. If the property doesn't exist, it'll still create a variable but with the value of `undefined`. So instead of using `config.token` in your `client.login()` method, you'd simply use `token`. And since destructuring creates a variable for us, you don't even need that `const prefix = config.prefix` line. Pretty cool!
+Object destructuring takes those properties from the object and stores them in variables. If the property doesn't exist, it'll still create a variable but with the value of `undefined`. So instead of using `config.token` in your `client.login()` method, you'd simply use `token`. And since destructuring creates a variable for each item, you don't even need that `const prefix = config.prefix` line. Pretty cool!
 
 Additionally, you could do this for your commands.
 
