@@ -153,7 +153,7 @@ This method no longer returns a Promise
 
 ```diff
 - client.user.setPresence({ activity: { name: 'with discord.js' });
-+ client.user.setPresences({ activities: [{ name: 'with discord.js' }]);
++ client.user.setPresence({ activities: [{ name: 'with discord.js' }]);
 ```
 
 This method no longer returns a Promise.
