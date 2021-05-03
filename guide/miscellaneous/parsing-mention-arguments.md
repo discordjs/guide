@@ -310,7 +310,7 @@ Here is how the RegEx works:
  2. You have the typical `<@` and `>` at the beginning and end.
  3. The `?` after the `!` indicates that the `!` is optional.
  4. `\d+` means the RegEx will look for multiple digits, which will be the ID.
- 5. The parentheses around the `\d+` create a capture group, which allows us to get the ID out of the mention.
+ 5. The parentheses around the `\d+` create a capture group, which allows you to get the ID out of the mention.
 
 Using the `.match()` method on strings, you can get the capture group's values, i.e., the mention's ID.
 
