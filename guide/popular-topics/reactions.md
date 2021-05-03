@@ -236,7 +236,7 @@ try {
 }
 ```
 
-The reason we use a `for...of` loop over something like `.forEach()` is due to `.forEach()`'s behavior for async operations. `.forEach()` will send out all calls almost at once even if we await inside of the function. However, if we `await` inside of a `for...of` loop, it will wait for the previous reaction to go through, and we avoid spamming the API with a lot of calls at once.
+The reason we use a `for...of` loop over something like `.forEach()` is due to `.forEach()`'s behavior for async operations. `.forEach()` will send out all calls almost at once even if you await inside of the function. However, if you `await` inside of a `for...of` loop, it will wait for the previous reaction to go through, and you avoid spamming the API with a lot of calls at once.
 
 </branch>
 <branch version="12.x">
@@ -328,7 +328,7 @@ message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
 <branch version="11.x">
 
 discord.js v11 cannot emit events if the respective structures it needs to emit are incomplete and does not auto-fetch the missing information.
-This behavior changed in version 12 of the library. It introduces partial structures that enable us to emit incomplete structures and complete them with a single fetch call.
+This behavior changed in version 12 of the library. It introduces partial structures that enable you to emit incomplete structures and complete them with a single fetch call.
 This feature is not available on version 11.x if you want to listen for reactions on old messages, please use version 12 of the library.
 
 </branch>
@@ -347,9 +347,9 @@ If you use [gateway intents](/popular-topics/intents.md) but can't or don't want
 const Discord = require('discord.js');
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 client.on('messageReactionAdd', async (reaction, user) => {
-	// When we receive a reaction we check if the reaction is partial or not
+	// When a reaction is received, check if the reaction is partial
 	if (reaction.partial) {
-		// If the message this reaction belongs to was removed the fetching might result in an API error, which we need to handle
+		// If the message this reaction belongs to was removed the fetching might result in an API error, which should be handled
 		try {
 			await reaction.fetch();
 		} catch (error) {
