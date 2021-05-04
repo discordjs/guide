@@ -320,7 +320,7 @@ return message.channel.send(`Successfully transferred ${transferAmount}💰 to $
 ```
 As a bot creator, you should always be thinking about how to make the user experience better. Good UX makes users less frustrated with your commands. If your inputs are different types, don't make them memorize which parameters come before the other.
 
-You'd ideally want to allow users to do both `!transfer 5 @user` and `!transfer @user 5`. So you can grab the first non-mention text in the command. In the second line of the above code: split the command by spaces and look for anything that doesn't match a mention; you can assume that's the transfer amount. Then do some checking to make sure it's a valid input. You can also do error checking on the transfer target, but we won't include that here because of its triviality.
+You'd ideally want to allow users to do both `!transfer 5 @user` and `!transfer @user 5`. To get the amount, you can grab the first non-mention text in the command. In the second line of the above code: split the command by spaces and look for anything that doesn't match a mention; you can assume that's the transfer amount. Then do some checking to make sure it's a valid input. You can also do error checking on the transfer target, but we won't include that here because of its triviality.
 
 `.add()` is used for both removing and adding currency. Since transfer amounts below zero are disallowed, it's safe to apply the transfer amount's additive inverse to their balance.
 
