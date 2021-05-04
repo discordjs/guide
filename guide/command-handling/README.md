@@ -121,7 +121,7 @@ client.on('message', message => {
 });
 ```
 
-If there isn't a command with that name, exit early. If there is, `.get()` the command, call its `.execute()` method, and pass in your `message` and `args` variables as its arguments. In case something goes wrong, log the error and report back to the member to let them know.
+If there isn't a command with that name, you don't need to do anything further, so exit early with `return`. If there is, `.get()` the command, call its `.execute()` method, and pass in your `message` and `args` variables as its arguments. In case something goes wrong, log the error and report back to the member to let them know.
 
 And that's it! Whenever you want to add a new command, you make a new file in your `commands` directory, name it what you want, and then do what you did for the other commands.
 
