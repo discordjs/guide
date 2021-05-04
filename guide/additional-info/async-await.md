@@ -73,7 +73,7 @@ An important thing to know is that a function declared as `async` will always re
 
 ### Execution with discord.js code
 
-After knowing how Promises work and what they are for, as well as the theory, let's look at an example in which handles multiple Promises. Let's say you want to react with letters (regional indicators) in a specific order. For this example, here's a basic template for a discord.js bot with some ES6 adjustments.
+Now that you know how Promises work and what they are used for, let's look at an example that handles multiple Promises. Let's say you want to react with letters (regional indicators) in a specific order. For this example, here's a basic template for a discord.js bot with some ES6 adjustments.
 
 ```js
 const Discord = require('discord.js');
@@ -133,7 +133,7 @@ client.on('message', async message => {
 });
 ```
 
-It's mostly be the same code, but how would you catch Promise rejections now since `.catch()` won't be anymore? That is also a useful feature with async/await; the error will be thrown if you await it so that you can wrap the awaited Promises inside a try/catch, and you're good to go. 
+It's mostly the same code, but how would you catch Promise rejections now since `.catch()` isn't there anymore? That is also a useful feature with async/await; the error will be thrown if you await it so that you can wrap the awaited Promises inside a try/catch, and you're good to go. 
 
 ```js {1,3-9}
 client.on('message', async message => {

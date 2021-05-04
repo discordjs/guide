@@ -62,7 +62,7 @@ And that's it! discord.js will not create an FFmpeg transcoder for your file and
 
 #### From YouTube videos
 
-Many voice bots allow an ability to play audio from YouTube videos in voice channels. YouTube itself provides WebM/Ogg streams for newer videos, and so you can also demux these files for Opus audio instead of running them through an FFmpeg transcoder first.
+Many voice bots have the ability to play audio from YouTube videos in voice channels. YouTube itself provides WebM/Ogg streams for newer videos, which you can demux for Opus audio instead of running them through an FFmpeg transcoder first.
 
 To do this, you can use the [`ytdl-core-discord`](https://github.com/amishshah/ytdl-core-discord) module. It will play WebM/Ogg Opus streams directly where possible and will fallback to FFmpeg for incompatible videos–this should help you achieve the best performance when using YouTube streams.
 
@@ -75,7 +75,7 @@ async function play(connection, url) {
 ```
 
 ::: tip
-You might be wondering why the type is `opus` and not `webm/opus` or `ogg/opus`. discord.js allows us to play Opus streams **without a container** operating in object-mode (i.e., each item pushed to the stream is a distinct Opus packet). `ytdl-core-discord` provides this type of stream, and so you must specify `opus` as the type.
+You might be wondering why the type is `opus` and not `webm/opus` or `ogg/opus`. Discord.js allows you to play Opus streams **without a container** operating in object-mode (i.e., each item pushed to the stream is a distinct Opus packet). `ytdl-core-discord` provides this type of stream, and so you must specify `opus` as the type.
 :::
 
 ### Using `highWaterMark`

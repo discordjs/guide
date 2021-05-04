@@ -27,7 +27,7 @@ client.on('message', async message => {
 If you try to join a channel the bot is already in, nothing will happen, so you don't need to run this method repeatedly.
 
 ::: tip
-In the above example, a `VoiceState` is accessed through `member.voice`. A voice state exists for members connected to a voice channel and tells you which channel they're connected to, if the member is speaking, and whether they're deafened or muted. Consult the documentation for a full description of what voice states can do!
+In the above example, a `VoiceState` is accessed through `member.voice`. Voice states include information about the channel the member is connected to (if any), if the member is speaking and whether they're deafened or muted. Consult  <docs-link path="class/VoiceState">the documentation</docs-link> for a full description of what voice states can do!
 :::
 
 ## Playing audio
@@ -98,7 +98,7 @@ connection.play(fs.createReadStream('audio.ogg'), { type: 'ogg/opus' });
 ```
 
 ::: tip
-You may be wondering why the source `type` is specified in this example when it wasn't in the FFmpeg one. discord.js will default to the `'unknown'` (i.e., "use FFmpeg") type when no type is provided.
+You may be wondering why the source `type` is specified in this example if it wasn't in the FFmpeg one. discord.js will default to the `'unknown'` (i.e., "use FFmpeg") type when no type is provided.
 :::
 
 ## Controlling the Stream Dispatcher

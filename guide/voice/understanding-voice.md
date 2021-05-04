@@ -48,7 +48,7 @@ In conclusion:
 Discord does not officially support bots receiving audio. However, discord.js does its best to implement this anyway! 
 :::
 
-Just as you send audio to the UDP socket, you also receive audio through the UDP socket. Processing this audio is the reverse process of sending audio:
+Just as you send audio to the UDP socket, you also receive audio through it. Processing it is the reverse process of sending audio:
 
 1. The packet is decrypted
 2. Metadata is removed, leaving an Opus packet

@@ -8,7 +8,7 @@ The main benefit of using an ORM like Sequelize is that it allows you to write c
 
 ## A simple tag system
 
-For this tutorial, we will create a simple tag system. The tag system will allow you to add a tag, output a tag, edit the tag, show tag info, list tags, and delete a tag.   
+For this tutorial, we will create a simple tag system that will allow you to add a tag, output a tag, edit a tag, show tag info, list tags, and delete a tag.   
 To begin, you should install Sequelize into your discord.js project. We will explain SQlite as the first storage engine and show how to use other databases later. Note that you will need Node 7.6 or above to utilize the `async/await` operators.
 
 ### Installing and using Sequelize
@@ -137,7 +137,7 @@ The model mirrors very closely what the database defines. There will be a table 
 
 ### [gamma] Syncing the model
 
-Now that your structure is defined, you need to make sure the model exists in the database. This goes in the `.once('ready')` event. This way, the table structure gets created when the bot is ready, so that there's no need to worry about it later.
+Now that your structure is defined, you need to make sure the model exists in the database. To make sure the bot is ready and all the data you might need has arrived, place the following code into the `.once('ready', ...)` event callback.
 ```js
 Tags.sync();
 ```
@@ -236,7 +236,7 @@ if (tag) {
 return message.reply(`Could not find tag: ${tagName}`);
 ```
 
-This section is very similar to the previous command, except you will be showing the tag metadata. `tag` contains our tag object. Notice two things: firstly, it is possible to access the object's properties without the `.get()` function. This is because the object is an instance of a Tag, which you can treat as an object and not just a row of data. Second, you can access a property that was not defined explicitly, `createdAt`. This is because Sequelize automatically adds that column to all tables. Passing another object into the model with `{ createdAt: false }` can disable this feature, but in this case, it was useful to have.
+This section is very similar to the previous command, except you will be showing the tag metadata. `tag` contains your tag object. Notice two things: firstly, it is possible to access the object's properties without the `.get()` function. This is because the object is an instance of a Tag, which you can treat as an object and not just a row of data. Second, you can access a property that was not defined explicitly, `createdAt`. This is because Sequelize automatically adds that column to all tables. Passing another object into the model with `{ createdAt: false }` can disable this feature, but in this case, it was useful to have.
 
 ### [lambda] Listing all tags
 

@@ -89,7 +89,11 @@ You can find a full list of messages [here](https://discord.com/developers/docs/
 
 ### Path
 
-The path is another helpful piece of information. The path tells you where you tried to execute an action. We cannot possibly cover all API paths, but they are usually very descriptive. In the example above, the path tells you that you are first in the channels path, and then judging by the id after it, you can see you got a specific channel. After the `/api/v7/channels/638200642359525387` you can see that you get the `messages` of that channel, and in the same way you saw before, you see you try to access a specific message by id; however, an invalid id was provided, which is the origin of the message.
+Another helpful piece of information is the path, which tells you what API endpoint the error occurred on. We cannot possibly cover all endpoints, but they are usually very descriptive.
+
+In the above example, the path tells you that the action was executed in the `/channels/` scope. The number you see next is the channel's ID. Next, you can spot the `message/` scope. The number is again the object's ID. Combined with the method `GET` you can conclude, that the bot tried to fetch the message with the id `[object Object]` from the channel with the ID `638200642359525387`.
+
+As the error message tells you `[object Object ]` is not a valid ID, so you now know where to look for an error! Find out where you pass an object as an ID when trying to fetch a message and fix your code in that location.
 
 ### Code
 

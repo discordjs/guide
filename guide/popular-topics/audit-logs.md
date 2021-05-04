@@ -16,7 +16,7 @@ Let's start by glancing at the `fetchAuditLogs` method and how to work with it. 
 The following examples will explore a straightforward case for some auditLog types. Some basic error handling is performed, but these code segments are by no means foolproof and are meant to teach you how fetching audit logs work. You will most likely need to expand on the examples based on your own goals for a rigorous system.
 
 ## Who deleted a message?
-One of the most common usages for audit logs would be understanding who deleted any given message in a Discord server.
+One of the most common use cases for audit logs would be understanding who deleted any given message in a Discord server.
 
 ::: warning
 At the time of writing, Discord does not emit an audit log if the person who deleted the message is a bot deleting a single message or is the author of the message itself.
@@ -34,7 +34,7 @@ So far, nothing should seem new or complicated. You get the message deleted even
 
 For simplicity, set a fetch limit of 1 and accept only the `MESSAGE_DELETE` type.
 
-Placing this into the previous code, you get the following. Note that this also makes the function async to make use of `await`. In addition, be make sure to ignore DMs.
+Placing this into the previous code, you get the following. Note that this also makes the function async to make use of `await`. In addition, make sure to ignore DMs.
 
 ```js {2-9,11-12,14-16,18-25}
 client.on('messageDelete', async message => {
@@ -55,7 +55,7 @@ client.on('messageDelete', async message => {
 	const { executor, target } = deletionLog;
 
 	// Update the output with a bit more information
-	// Also run a check to make sure the log returned was for the same author's message
+	// Also run a check to make sure that the log returned was for the same author's message
 	if (target.id === message.author.id) {
 		console.log(`A message by ${message.author.tag} was deleted by ${executor.tag}.`);
 	} else {
@@ -95,7 +95,7 @@ client.on('guildMemberRemove', async member => {
 	const { executor, target } = kickLog;
 
 	// Update the output with a bit more information
-	// Also run a check to make sure the log returned was for the same kicked member
+	// Also run a check to make sure that the log returned was for the same kicked member
 	if (target.id === member.id) {
 		console.log(`${member.user.tag} left the guild; kicked by ${executor.tag}?`);
 	} else {
@@ -133,7 +133,7 @@ client.on('guildBanAdd', async (guild, user) => {
 	const { executor, target } = banLog;
 
 	// Update the output with a bit more information
-	// Also run a check to make sure the log returned was for the same banned member
+	// Also run a check to make sure that the log returned was for the same banned member
 	if (target.id === user.id) {
 		console.log(`${user.tag} got hit with the swift hammer of justice in the guild ${guild.name}, wielded by the mighty ${executor.tag}`);
 	} else {

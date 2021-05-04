@@ -347,9 +347,9 @@ If you use [gateway intents](/popular-topics/intents.md) but can't or don't want
 const Discord = require('discord.js');
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 client.on('messageReactionAdd', async (reaction, user) => {
-	// When a reaction is received, check if the reaction is partial
+	// When a reaction is received, check if the structure is partial
 	if (reaction.partial) {
-		// If the message this reaction belongs to was removed the fetching might result in an API error, which should be handled
+		// If the message this reaction belongs to was removed, the fetching might result in an API error which should be handled
 		try {
 			await reaction.fetch();
 		} catch (error) {
