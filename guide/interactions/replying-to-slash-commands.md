@@ -38,7 +38,7 @@ Initially an interaction token is only valid for three seconds, so that's the ti
 ```js{3}
 client.on('interaction', interaction => {
 	if (!interaction.isCommand()) return; 
-	if (interaction.commandName === 'ping') interaction.reply('Pong!');
+	if (interaction.commandName === 'ping') await interaction.reply('Pong!');
 });
 ```
 
