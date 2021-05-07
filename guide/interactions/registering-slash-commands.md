@@ -19,12 +19,12 @@ So, to register a global command we will be passing an `ApplicationCommandData` 
 
 ```js
 client.once('ready', async () => {
-	const commanddata = {
+	const data = {
 		name: 'ping',
 		description: 'Replies with Pong!'
 	};
 
-	const command = await client.application?.commands.create(commanddata);
+	const command = await client.application?.commands.create(data);
 	console.log(command);
 });
 ```
@@ -38,12 +38,12 @@ Guild specific application commands are only available in the guild they have be
 
 ```js{7}
 client.once('ready', async () => {
-	const commanddata = {
+	const data = {
 		name: 'ping',
 		description: 'Replies with Pong!'
 	};
 
-	const command = await client.guilds.cache.get('id')?.commands.create(commanddata);
+	const command = await client.guilds.cache.get('id')?.commands.create(data);
 	console.log(command);
 });
 ```
@@ -53,7 +53,7 @@ Excellent! Now you've learned how to register guild specific application command
 
 ## Bulk-update commands
 
-If you for example deploy your application commands when starting your application, you may want to update all commands and their changes at once. You can do this by passing an array of `ApplicationCommandData` objects to the `set()` method on either of the managers you've been introduced to above: 
+If you for example deploy your application commands when starting your application, you may want to update all commands and their changes at once. You can do this by passing an array of `Applicationdata` objects to the `set()` method on either of the managers you've been introduced to above: 
 
 ::: danger
 This will overwrite all existing commands on the application or guild with the new data you provided!
@@ -61,7 +61,7 @@ This will overwrite all existing commands on the application or guild with the n
 
 ```js{2-11,13-14}
 client.once('ready', async () => {
-	const commanddata = [
+	const data = [
 		{
 			name: 'ping',
 			description: 'Replies with Pong!'
@@ -72,7 +72,7 @@ client.once('ready', async () => {
 		}
 	];
 
-	const commands = await client.application?.commands.set(commanddata);
+	const commands = await client.application?.commands.set(data);
 	console.log(commands);
 });
 ```
@@ -86,7 +86,7 @@ Application commands can have `options`, think of these options like arguments t
 
 ```js{5-10}
 client.once('ready', async () => {
-	const commanddata = {
+	const data = {
 		name: 'echo',
 		description: 'Replies with your input!',
 		options: [{
@@ -97,7 +97,7 @@ client.once('ready', async () => {
 		}]
 	};
 
-	const command = await client.application?.commands.create(commanddata);
+	const command = await client.application?.commands.create(data);
 	console.log(command);
 });
 ```
