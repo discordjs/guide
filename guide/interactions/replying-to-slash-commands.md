@@ -28,7 +28,7 @@ client.on('interaction', interaction => {
 
 ## Responding to a command
 
-There are multiple ways of responding to a slash command, we will be covering each of these in the following segments.
+There are multiple ways of responding to a slash command, we'll be covering each of these in the following segments.
 The most common way of sending a response is by using the `interaction#reply()` method:
 
 ::: warning

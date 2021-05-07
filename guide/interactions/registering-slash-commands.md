@@ -15,7 +15,7 @@ First up, we'll introduce you to global application commands, these type of comm
 Global commands are cached for one hour. That means that new global commands will fan out slowly across all guilds and will be guaranteed to be updated in an hour. Guild commands however update instantly, so we recommend you use these for quick testing and global commands when they're ready for public use.
 :::
 
-So, to register a global command we will be passing an `ApplicationCommandData` object to the `ApplicationCommandManager#create()` method as follows:
+So, to register a global command we'll be passing an `ApplicationCommandData` object to the `ApplicationCommandManager#create()` method as follows:
 
 ```js
 client.once('ready', async () => {
@@ -34,7 +34,7 @@ That's it! You've successfully created your first global application command! Le
 
 ## Guild commands
 
-Guild specific application commands are only available in the guild they have been created in, as such we will be using `GuildApplicationCommandManager#create()` to create them:
+Guild specific application commands are only available in the guild they have been created in, as such we'll be using `GuildApplicationCommandManager#create()` to create them:
 
 ```js{7}
 client.once('ready', async () => {
