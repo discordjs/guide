@@ -16,7 +16,7 @@ client.on('interaction', interaction => {
 });
 ```
         
-However, not every interaction is a slash command. Let's make sure to only receive slash commands by making use of the `interaction.isCommand()` method:
+However, not every interaction is a slash command. Let's make sure to only receive slash commands by making use of the `interaction#isCommand()` method:
 
 ```js{2}
 client.on('interaction', interaction => {
@@ -29,10 +29,10 @@ client.on('interaction', interaction => {
 ## Responding to a command
 
 There are multiple ways of responding to a slash command, we will be covering each of these in the following segments.
-The most common way of sending a response is by using the `interaction.reply()` method:
+The most common way of sending a response is by using the `interaction#reply()` method:
 
 ::: warning
-Initially an interaction token is only valid for three seconds, so that's the timeframe in which you are able to use the `interaction.reply()` method. Responses that require more time ("Deferred Responses") are explained later in this page.
+Initially an interaction token is only valid for three seconds, so that's the timeframe in which you are able to use the `interaction#reply()` method. Responses that require more time ("Deferred Responses") are explained later in this page.
 :::
 
 ```js{3}
@@ -86,7 +86,7 @@ We're not done yet, there's still more to cover, so let's move on to the next to
 
 ## Editing responses
 
-After you've sent an initial response, you may want to edit that response for various reasons. This can be easily achieved by making use of the `interaction.editReply()` method, as seen below:
+After you've sent an initial response, you may want to edit that response for various reasons. This can be easily achieved by making use of the `interaction#editReply()` method, as seen below:
 
 ::: warning
 After the initial response, an interaction token is valid for 15 minutes, so this is the timeframe in which you can edit the response and send follow-up messages.
@@ -113,7 +113,7 @@ Excellent, now you've successfully edited the response of a slash command!
 
 As previously mentioned, you have three seconds to respond to an interaction before its token turns invalid. But what if you have a command that performs a task that takes longer than that before sending the response? 
 
-In this case you can make use of the `interaction.defer()` method, which triggers the `<application> is thinking...` message and also acts as initial response, giving you 15 minutes time to complete your tasks before responding:
+In this case you can make use of the `interaction#defer()` method, which triggers the `<application> is thinking...` message and also acts as initial response, giving you 15 minutes time to complete your tasks before responding:
 <!--- here either display the is thinking message via vue-discord-message or place a screenshot -->
 
 ```js{7-9}
@@ -152,7 +152,7 @@ Perfect, now you know how to reply to a slash command when you have to perform t
 
 ## Follow-ups
 
-Replying to slash commands is great and all, but what if you want to send multiple responses instead of just one? Follow-up messages got you covered, you can use `interaction.webhook.send()` to send multiple responses:
+Replying to slash commands is great and all, but what if you want to send multiple responses instead of just one? Follow-up messages got you covered, you can use `interaction#webhook#send()` to send multiple responses:
 
 ::: warning
 After the initial response an interaction token is valid for 15 minutes, so this is the timeframe in which you can edit the response and send follow-up messages.
