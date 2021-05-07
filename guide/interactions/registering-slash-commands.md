@@ -53,7 +53,7 @@ Excellent! Now you've learned how to register guild specific application command
 
 ## Bulk-update commands
 
-If you for example deploy your application commands when starting your application, you may want to update all commands and their changes at once. You can do this by passing an array of `Applicationdata` objects to the `set()` method on either of the managers you've been introduced to above: 
+If you for example deploy your application commands when starting your application, you may want to update all commands and their changes at once. You can do this by passing an array of `ApplicationCommandData` objects to the `set()` method on either of the managers you've been introduced to above: 
 
 ::: danger
 This will overwrite all existing commands on the application or guild with the new data you provided!
