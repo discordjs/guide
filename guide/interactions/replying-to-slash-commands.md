@@ -62,9 +62,9 @@ You've successfully sent a response to a slash command! This is only the beginni
 You may not always want everyone who has access to the channel to see a slash command's response. Thankfully, Discord implemented a way to hide messages from everyone but the executor of the slash command. These type of messages are called `ephemeral` messages and can be set by using `ephemeral: true` in the `InteractionReplyOptions`, as follows:
 
 ```js{3}
-client.on('interaction', interaction => {
+client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return; 
-	if (interaction.commandName === 'ping') interaction.reply('Pong!', { ephemeral: true });
+	if (interaction.commandName === 'ping') await interaction.reply('Pong!', { ephemeral: true });
 });
 ```
 
@@ -92,16 +92,16 @@ After you've sent an initial response, you may want to edit that response for va
 After the initial response, an interaction token is valid for 15 minutes, so this is the timeframe in which you can edit the response and send follow-up messages.
 :::
 
-```js{1,3,8-9}
+```js{1,8-9}
 const wait = require('util').promisify(setTimeout);
 
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return; 
 
 	if (interaction.commandName === 'ping') { 
-		interaction.reply('Pong!');
+		await interaction.reply('Pong!');
 		await wait(2000);
-		interaction.editReply('Pong again!');
+		await interaction.editReply('Pong again!');
 	}
 });
 ```
@@ -123,9 +123,9 @@ client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return; 
 
 	if (interaction.commandName === 'ping') { 
-		interaction.defer();
+		await interaction.defer();
 		await wait(4000);
-		interaction.editReply('Pong!');
+		await interaction.editReply('Pong!');
 	}
 });
 ```
@@ -141,9 +141,9 @@ client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return; 
 
 	if (interaction.commandName === 'ping') { 
-		interaction.defer(true);
+		await interaction.defer(true);
 		await wait(4000);
-		interaction.editReply('Pong!');
+		await interaction.editReply('Pong!');
 	}
 });
 ```
@@ -163,8 +163,8 @@ client.on('interaction', interaction => {
 	if (!interaction.isCommand()) return; 
 
 	if (interaction.commandName === 'ping') { 
-		interaction.reply('Pong!');
-		interaction.webhook.send('Pong again!');
+		await interaction.reply('Pong!');
+		await interaction.webhook.send('Pong again!');
 	}
 });
 ```
