@@ -18,9 +18,9 @@ client.on('interaction', interaction => {
         
 However, not every interaction is a slash command. Let's make sure to only receive slash commands by making use of the `interaction#isCommand()` method:
 
-```js{2}
+```js {2}
 client.on('interaction', interaction => {
-	if (!interaction.isCommand()) return; 
+	if (!interaction.isCommand()) return;
 	console.log(interaction);
 });
 ```
@@ -35,9 +35,9 @@ The most common way of sending a response is by using the `interaction#reply()` 
 Initially an interaction token is only valid for three seconds, so that's the timeframe in which you are able to use the `interaction#reply()` method. Responses that require more time ("Deferred Responses") are explained later in this page.
 :::
 
-```js{1,3}
+```js {1,3}
 client.on('interaction', async interaction => {
-	if (!interaction.isCommand()) return; 
+	if (!interaction.isCommand()) return;
 	if (interaction.commandName === 'ping') await interaction.reply('Pong!');
 });
 ```
@@ -61,9 +61,9 @@ You've successfully sent a response to a slash command! This is only the beginni
 
 You may not always want everyone who has access to the channel to see a slash command's response. Thankfully, Discord implemented a way to hide messages from everyone but the executor of the slash command. These type of messages are called `ephemeral` messages and can be set by using `ephemeral: true` in the `InteractionReplyOptions`, as follows:
 
-```js{3}
+```js {3}
 client.on('interaction', async interaction => {
-	if (!interaction.isCommand()) return; 
+	if (!interaction.isCommand()) return;
 	if (interaction.commandName === 'ping') await interaction.reply('Pong!', { ephemeral: true });
 });
 ```
@@ -92,13 +92,13 @@ After you've sent an initial response, you may want to edit that response for va
 After the initial response, an interaction token is valid for 15 minutes, so this is the timeframe in which you can edit the response and send follow-up messages.
 :::
 
-```js{1,8-9}
+```js {1,8-9}
 const wait = require('util').promisify(setTimeout);
 
 client.on('interaction', async interaction => {
-	if (!interaction.isCommand()) return; 
+	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'ping') { 
+	if (interaction.commandName === 'ping') {
 		await interaction.reply('Pong!');
 		await wait(2000);
 		await interaction.editReply('Pong again!');
@@ -116,13 +116,13 @@ As previously mentioned, you have three seconds to respond to an interaction bef
 In this case you can make use of the `interaction#defer()` method, which triggers the `<application> is thinking...` message and also acts as initial response. This in turn gives you 15 minutes time to complete your tasks before responding:
 <!--- here either display the is thinking message via vue-discord-message or place a screenshot -->
 
-```js{7-9}
+```js {7-9}
 const wait = require('util').promisify(setTimeout);
 
 client.on('interaction', async interaction => {
-	if (!interaction.isCommand()) return; 
+	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'ping') { 
+	if (interaction.commandName === 'ping') {
 		await interaction.defer();
 		await wait(4000);
 		await interaction.editReply('Pong!');
@@ -134,13 +134,13 @@ As you can see, you are now able to respond to your command even if you surpass 
 
 But what if you want the deferred response to be ephemeral? Fear not, you can pass `true` as parameter to the `defer()` method as outlined below making the deferred response ephemeral:
 
-```js{7}
+```js {7}
 const wait = require('util').promisify(setTimeout);
 
 client.on('interaction', async interaction => {
-	if (!interaction.isCommand()) return; 
+	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'ping') { 
+	if (interaction.commandName === 'ping') {
 		await interaction.defer(true);
 		await wait(4000);
 		await interaction.editReply('Pong!');
@@ -158,11 +158,11 @@ Replying to slash commands is great and all, but what if you want to send multip
 After the initial response an interaction token is valid for 15 minutes, so this is the timeframe in which you can edit the response and send follow-up messages.
 :::
 
-```js{6}
-client.on('interaction', interaction => {
-	if (!interaction.isCommand()) return; 
+```js {6}
+client.on('interaction', async interaction => {
+	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'ping') { 
+	if (interaction.commandName === 'ping') {
 		await interaction.reply('Pong!');
 		await interaction.webhook.send('Pong again!');
 	}

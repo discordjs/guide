@@ -36,7 +36,7 @@ That's it! You've successfully created your first global application command! Le
 
 Guild specific application commands are only available in the guild they have been created in, as such we'll be using `GuildApplicationCommandManager#create()` to create them:
 
-```js{7}
+```js {7}
 client.once('ready', async () => {
 	const data = {
 		name: 'ping',
@@ -59,7 +59,7 @@ If you, for example, deploy your application commands when starting your applica
 This will overwrite all existing commands on the application or guild with the new data you provided!
 :::
 
-```js{2-11,13-14}
+```js {2-11,13-14}
 client.once('ready', async () => {
 	const data = [
 		{
@@ -84,17 +84,17 @@ Perfect! You have now learned how to bulk-update application commands.
 
 Application commands can have `options`, think of these options like arguments to a function. You can specify them as seen below:
 
-```js{5-10}
+```js {5-10}
 client.once('ready', async () => {
 	const data = {
 		name: 'echo',
 		description: 'Replies with your input!',
 		options: [{
-    		name: 'input',
-    		type: 'STRING',
-    		description: 'The input which should be echoed back',
-    		required: true,
-		}]
+			name: 'input',
+			type: 'STRING',
+			description: 'The input which should be echoed back',
+			required: true,
+		}],
 	};
 
 	const command = await client.application?.commands.create(data);
