@@ -81,7 +81,7 @@ Now when you run your command again, you should see something like this:
 </div>
 
 That's it! You've successfully sent an ephemeral response to a slash command.
-We're not done yet, there's still more topics to cover, so let's move on to the next!
+We're not done yet, there's still more to cover, so let's move on to the next topic!
 
 
 ## Editing responses
