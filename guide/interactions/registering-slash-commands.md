@@ -21,7 +21,7 @@ So, to register a global command we will be passing an `ApplicationCommandData` 
 client.once('ready', async () => {
 	const data = {
 		name: 'ping',
-		description: 'Replies with Pong!'
+		description: 'Replies with Pong!',
 	};
 
 	const command = await client.application?.commands.create(data);
@@ -40,7 +40,7 @@ Guild specific application commands are only available in the guild they have be
 client.once('ready', async () => {
 	const data = {
 		name: 'ping',
-		description: 'Replies with Pong!'
+		description: 'Replies with Pong!',
 	};
 
 	const command = await client.guilds.cache.get('id')?.commands.create(data);
@@ -64,12 +64,12 @@ client.once('ready', async () => {
 	const data = [
 		{
 			name: 'ping',
-			description: 'Replies with Pong!'
+			description: 'Replies with Pong!',
 		},
 		{
 			name: 'pong',
-			description: 'Replies with Ping!'
-		}
+			description: 'Replies with Ping!',
+		},
 	];
 
 	const commands = await client.application?.commands.set(data);
@@ -93,7 +93,7 @@ client.once('ready', async () => {
     		name: 'input',
     		type: 'STRING',
     		description: 'The input which should be echoed back',
-    		required: true
+    		required: true,
 		}]
 	};
 
