@@ -111,7 +111,7 @@ Excellent, now you've successfully edited the response of a slash command!
 
 ## Deferred responses
 
-As previously mentioned, you have three seconds to respond to an interaction before its token turns invalid. But what if you have a command that performs a task that takes longer than that before sending the response? 
+As previously mentioned, you have three seconds to respond to an interaction before its token becomes invalid. But what if you have a command that performs a task which takes longer than three seconds before being able to reply?
 
 In this case you can make use of the `interaction#defer()` method, which triggers the `<application> is thinking...` message and also acts as initial response, giving you 15 minutes time to complete your tasks before responding:
 <!--- here either display the is thinking message via vue-discord-message or place a screenshot -->
