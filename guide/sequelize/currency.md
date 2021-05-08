@@ -4,7 +4,7 @@ A common feature of Discord bots is a currency system. It's possible to do every
 
 ## File overview
 
-There will be multiple files: a DB init script, your models, and your bot script. In the previous tutorial, we placed all of these in the same file. Having everything in one file isn't an ideal practice, so we'll correct that.
+There will be multiple files: a DB init script, your models, and your bot script. In [the previous Sequelize guide](/sequelize/), we placed all of these in the same file. Having everything in one file isn't an ideal practice, so we'll correct that.
 
 This time we'll have six files.
 
@@ -23,7 +23,7 @@ Here is an entity relation diagram of the models we'll be making:
 
 `Users` have a `user_id`, and a `balance`. Each `user_id` can have multiple links to the `UserItems` table, and each entry in the table connects to one of the items in the `CurrencyShop`, which will have a `name` and a `cost` associated with it.
 
-To implement this, we'll begin by making a `models` folder and create a `Users.js` file inside which contains the following:
+To implement this, begin by making a `models` folder and create a `Users.js` file inside which contains the following:
 
 ```js
 module.exports = (sequelize, DataTypes) => {
@@ -43,11 +43,11 @@ module.exports = (sequelize, DataTypes) => {
 };
 ```
 
-Like you see in the diagram above, our Users model will only have two attributes: a `user_id` primary key and a `balance`. A primary key is a particular attribute that becomes the default column used when joining tables together, and it is automatically unique and not `null`.
+Like you see in the diagram above, the Users model will only have two attributes: a `user_id` primary key and a `balance`. A primary key is a particular attribute that becomes the default column used when joining tables together, and it is automatically unique and not `null`.
 
-Balance also sets `allowNull` to `false`, which means that both values have to be set in conjunction with creating a primary key; otherwise, the database would throw an error. This constraint guarantees correctness in our data storage. We'll never have `null` or empty values, ensuring that if we somehow forget to validate in the application that both values are not `null`, our database would do the final validation for us.
+Balance also sets `allowNull` to `false`, which means that both values have to be set in conjunction with creating a primary key; otherwise, the database would throw an error. This constraint guarantees correctness in your data storage. You'll never have `null` or empty values, ensuring that if you somehow forget to validate in the application that both values are not `null`, the database would do a final validation.
 
-Notice that our options object sets `timestamps` to `false`. This option disables the `createdAt` and the `updatedAt` columns that sequelize usually creates for you. Setting `user_id` to primary also eliminates the `id` primary key that Sequelize usually generates for you since there can only be one primary key on a table.
+Notice that the options object sets `timestamps` to `false`. This option disables the `createdAt` and the `updatedAt` columns that sequelize usually creates for you. Setting `user_id` to primary also eliminates the `id` primary key that Sequelize usually generates for you since there can only be one primary key on a table.
 
 Next, still in the same `models` folder, create a `CurrencyShop.js` file that contains the following:
 
@@ -68,9 +68,9 @@ module.exports = (sequelize, DataTypes) => {
 };
 ```
 
-Like our Users model, we don't need the timestamps here, so we'll disable it. Unlike the Users model, however, we only set `unique` to `true` here, allowing you to change the name without affecting the primary key that joins this to the next object. This gets generated automatically by sequelize since we didn't set a primary key.
+Like the Users model, timestamps aren't needed here, so you can disable it. Unlike the Users model, however, the `unique` field is set to `true` here, allowing you to change the name without affecting the primary key that joins this to the next object. This gets generated automatically by sequelize since a primary key isn't set.
 
-The next file will be `UserItems.js`, our junction table.
+The next file will be `UserItems.js`, the junction table.
 
 ```js
 module.exports = (sequelize, DataTypes) => {
@@ -88,11 +88,11 @@ module.exports = (sequelize, DataTypes) => {
 };
 ```
 
-Our junction table will link `user_id` and the `id` of the currency shop together. It also contains an `amount` number, which indicates how many of that item a user has.
+The junction table will link `user_id` and the `id` of the currency shop together. It also contains an `amount` number, which indicates how many of that item a user has.
 
 ## Initialize database
 
-Now that the models are defined, we should create them in our database to access them in the bot file. We ran the sync in the `ready` event in our bot in the previous tutorial, which is entirely unnecessary since it only needs to run once. We can make a file to initialize the database and never touch it again unless we want to remake the entire database.
+Now that the models are defined, you should create them in your database to access them in the bot file. We ran the sync inside the `ready` event in the previous tutorial, which is entirely unnecessary since it only needs to run once. You can make a file to initialize the database and never touch it again unless you want to remake the entire database.
 
 Create a file called `dbInit.js` in the base directory (*not* in the `models` folder).
 
@@ -128,9 +128,9 @@ sequelize.sync({ force }).then(async () => {
 }).catch(console.error);
 ```
 
-Here we pull the two models and the junction table from the respective model declarations, sync them, and add items to our shop.
+Here you pull the two models and the junction table from the respective model declarations, sync them, and add items to the shop.
 
-A new function here is the `.upsert()` function. It's a portmanteau for **up**date or in**sert**.  We use `upsert` here to avoid creating duplicates if you run this file multiple times. That shouldn't happen because we defined name as *unique*, but there's no harm in being safe. Upsert also has a nice side benefit; If you adjust the cost, the respective item should also have their cost updated.
+A new function here is the `.upsert()` function. It's a portmanteau for **up**date or in**sert**. `upsert` is used here to avoid creating duplicates if you run this file multiple times. That shouldn't happen because `name` is defined as *unique*, but there's no harm in being safe. Upsert also has a nice side benefit: if you adjust the cost, the respective item should also have their cost updated.
 
 ::: tip
 Execute `node dbInit.js` to create the database tables. Unless you make a change to the models, you'll never need to touch the file again. If you change a model, you can execute `node dbInit.js --force` or `node dbInit.js -f` to force sync your tables. It's important to note that this **will** empty and remake your model tables.
@@ -138,7 +138,7 @@ Execute `node dbInit.js` to create the database tables. Unless you make a change
 
 ## Create associations
 
-Next, we'll add our associations to the models. Create a file named `dbObjects.js` in the base directory, next to `dbInit.js`.
+Next, add the associations to the models. Create a file named `dbObjects.js` in the base directory, next to `dbInit.js`.
 
 ```js
 const Sequelize = require('sequelize');
@@ -181,17 +181,17 @@ Users.prototype.getItems = function() {
 module.exports = { Users, CurrencyShop, UserItems };
 ```
 
-Note that we could have abstracted the connection object in another file and had both `dbInit.js` and `dbObjects.js` use that connection file, but it's not necessary to overly abstract things.
+Note that the connection object could be abstracted in another file and had both `dbInit.js` and `dbObjects.js` use that connection file, but it's not necessary to overly abstract things.
 
-The new method we haven't seen yet is the `.belongsTo()` method. Using this method, we add `CurrencyShop` as a property of `UserItem` so that when we do `userItem.item`, we get the respectively attached item. We use `item_id` as the foreign key so that it knows which item to reference.
+Another new method here is the `.belongsTo()` method. Using this method, you add `CurrencyShop` as a property of `UserItem` so that when you do `userItem.item`, you get the respectively attached item. You use `item_id` as the foreign key so that it knows which item to reference.
 
-We now add some prototypes to the User object to finish up the junction: add items to users, and get their current inventory. The code inside should be somewhat familiar from the last tutorial. We use a `.findOne()` to get the item if it exists in the user's inventory. If it does, increment it; otherwise, create it.
+You then add some prototypes to the User object to finish up the junction: add items to users, and get their current inventory. The code inside should be somewhat familiar from the last tutorial. `.findOne()` is used to get the item if it exists in the user's inventory. If it does, increment it; otherwise, create it.
 
-Getting items is similar; we just `.findAll()` using the user's id as the key. The `include` key is for associating the CurrencyShop with the item. We have to explicitly tell Sequelize to honor the `.belongsTo()` association; otherwise, it will take the path of the least effort.
+Getting items is similar; use `.findAll()` with the user's id as the key. The `include` key is for associating the CurrencyShop with the item. You must explicitly tell Sequelize to honor the `.belongsTo()` association; otherwise, it will take the path of the least effort.
 
 ## Application code
 
-We'll create an `app.js` in the base directory with the following skeleton code to put it together.
+Create an `app.js` file in the base directory with the following skeleton code to put it together.
 
 <!-- eslint-disable require-await -->
 
@@ -238,7 +238,7 @@ client.on('message', async message => {
 client.login('your-token-goes-here');
 ```
 
-Nothing special about this skeleton. We import the Users and CurrencyShop models from our `dbObjects.js` file and add a currency Collection. Every time someone talks, we add 1 to their currency count. The rest is just standard discord.js code and a simple if/else command handler. We're using the currency Collection to cache individual users' currency, so we don't have to hit the database for every lookup. I've used an if/else handler here, but you can put it in a framework or command handler as long as you maintain a reference to the models and the currency collection.
+Nothing special about this skeleton. You import the Users and CurrencyShop models from our `dbObjects.js` file and add a currency Collection. Every time someone talks, add 1 to their currency count. The rest is just standard discord.js code and a simple if/else command handler. A Collection is used for the `currency` variable to cache individual users' currency, so you don't have to hit the database for every lookup. An if/else handler is used here, but you can put it in a framework or command handler as long as you maintain a reference to the models and the currency collection.
 
 ### [alpha] Helper methods
 
@@ -266,7 +266,7 @@ Reflect.defineProperty(currency, 'getBalance', {
 });
 ```
 
-We're defining an `.add()` method to our currency collection. We'll use it quite frequently, so having a method for it makes our lives easier. We'll also add a `.getBalance()` method so that we'll always get a number.
+This defines an `.add()` method to our currency collection. You'll use it quite frequently, so having a method for it makes your life easier. A `.getBalance()` method is also defined, to ensure that a number is always returned.
 
 ### [beta] Ready event data sync
 
@@ -277,7 +277,7 @@ const storedBalances = await Users.findAll();
 storedBalances.forEach(b => currency.set(b.user_id, b));
 ```
 
-In our ready event, we want to sync our currency collection with the database for easy access later.
+In the ready event, sync the currency collection with the database for easy access later.
 
 ### [gamma] Show user balance
 
@@ -286,7 +286,7 @@ const target = message.mentions.users.first() || message.author;
 return message.channel.send(`${target.tag} has ${currency.getBalance(target.id)}💰`);
 ```
 
-Nothing tricky here. We use our `.getBalance()` method to show either the author's or the mentioned user's balance.
+Nothing tricky here. The `.getBalance()` method is used to show either the author's or the mentioned user's balance.
 
 ### [delta] Show user inventory
 
@@ -300,7 +300,7 @@ const items = await user.getItems();
 if (!items.length) return message.channel.send(`${target.tag} has nothing!`);
 return message.channel.send(`${target.tag} currently has ${items.map(i => `${i.amount} ${i.item.name}`).join(', ')}`);
 ```
-Here we begin to see the power of associations. Even though users and the shop are different tables, and the data is stored separately, we can get a user's inventory by looking at the junction table and join it with the shop; no duplicated item names that waste space!
+This is where you begin to see the power of associations. Even though users and the shop are different tables, and the data is stored separately, you can get a user's inventory by looking at the junction table and join it with the shop; no duplicated item names that waste space!
 
 ### [epsilon] Transfer currency to another user
 
@@ -320,9 +320,9 @@ return message.channel.send(`Successfully transferred ${transferAmount}💰 to $
 ```
 As a bot creator, you should always be thinking about how to make the user experience better. Good UX makes users less frustrated with your commands. If your inputs are different types, don't make them memorize which parameters come before the other.
 
-We want to allow users to do both `!transfer 5 @user` and `!transfer @user 5`. So what we're going to do is grab the first non-mention text in the command. In the second line of the above code, we split the command by spaces, and then we look for anything that doesn't match a mention, and we'll assume that's the transfer amount. Then we do some checking to make sure it's a valid input. You can also do error checking on the transfer target, but we won't include that here because of its triviality.
+You'd ideally want to allow users to do both `!transfer 5 @user` and `!transfer @user 5`. To get the amount, you can grab the first non-mention text in the command. In the second line of the above code: split the command by spaces and look for anything that doesn't match a mention; you can assume that's the transfer amount. Then do some checking to make sure it's a valid input. You can also do error checking on the transfer target, but we won't include that here because of its triviality.
 
-We use `.add()` for both removing and adding currency. Since we already check if the transfer amount is below zero, it will be safe to apply the transfer amount's additive inverse to their balance.
+`.add()` is used for both removing and adding currency. Since transfer amounts below zero are disallowed, it's safe to apply the transfer amount's additive inverse to their balance.
 
 ### [zeta] Buying an item
 
@@ -342,7 +342,7 @@ await user.addItem(item);
 message.channel.send(`You've bought: ${item.name}.`);
 ```
 
-For users to search for an item without caring about the letter casing, we use the `$iLike` modifier when looking for the name. Keep in mind that this may be slow if you have millions of items, so please don't put a million items in your shop.
+For users to search for an item without caring about the letter casing, you can use the `$iLike` modifier when looking for the name. Keep in mind that this may be slow if you have millions of items, so please don't put a million items in your shop.
 
 ### [theta] Display the shop
 
@@ -385,7 +385,7 @@ return message.channel.send(
 
 </branch>
 
-Nothing extraordinary here either. We could have queried the database for the top ten currency holders, but we already have access to them locally, so sort the Collection we have and use map again to display it in a friendly format. The filter is in case the users no longer exist in the bot's cache.
+Nothing extraordinary here either. You could query the database for the top ten currency holders, but since you already have access to them locally inside the `currency` variable, you can sort the Collection and use `.map()` to display it in a friendly format. The filter is in case the users no longer exist in the bot's cache.
 
 ## Resulting code
 

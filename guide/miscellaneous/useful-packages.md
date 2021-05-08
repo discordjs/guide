@@ -23,7 +23,7 @@ const input = await message.channel.awaitMessages(m => m.author.id === message.a
 const date = moment(input.first().content);
 ```
 
-Using the "moment-duration-format" extension we could tell the user how many days in the future or past the date is:
+Using the "moment-duration-format" extension, you could tell the user how many days in the future or past the date is:
 
 ```js
 if (date.isValid()) {

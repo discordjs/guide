@@ -89,13 +89,17 @@ You can find a full list of messages [here](https://discord.com/developers/docs/
 
 ### Path
 
-The path is another helpful piece of information. The path tells you where you tried to execute an action. We cannot possibly cover all API paths, but they are usually very descriptive. In the example above, the path tells us we are first in the channels path, and then judging by the id after it, we can see we got a specific channel. After the `/api/v7/channels/638200642359525387` we can see that we get the `messages` of that channel, and in the same way we saw before, we see we try to access a specific message by id; however, we gave it an invalid id, which is the origin of the message.
+Another helpful piece of information is the path, which tells you what API endpoint the error occurred on. We cannot possibly cover all endpoints, but they are usually very descriptive.
+
+In the above example, the path tells you that the action was executed in the `/channels/` scope. The number you see next is the channel's ID. Next, you can spot the `message/` scope. The number is again the object's ID. Combined with the method `GET` you can conclude, that the bot tried to fetch the message with the id `[object Object]` from the channel with the ID `638200642359525387`.
+
+As the error message tells you `[object Object ]` is not a valid ID, so you now know where to look for an error! Find out where you pass an object as an ID when trying to fetch a message and fix your code in that location.
 
 ### Code
 
 The code is another partial representation of the message, in this case, `Invalid Form Body`. You can find a full list of codes [here](https://discord.com/developers/docs/topics/opcodes-and-status-codes#json-json-error-codes)
 
-The code is also handy if you want only to handle a specific error. Say we were trying to delete a message which may or may not be there, and we wanted to ignore unknown message errors. This can be done by checking the code, either manually or using discord.js constants.
+The code is also handy if you want only to handle a specific error. Say you're trying to delete a message which may or may not be there, and wanted to ignore unknown message errors. This can be done by checking the code, either manually or using discord.js constants.
 
 ```js
 message.delete().catch(error => {
@@ -120,7 +124,7 @@ You can find a list of constants <branch version="12.x" inline> [here](https://g
 
 ### Method
 
-The final piece of information can tell us a lot about what we tried to do to the path. There are a set of predefined keywords that describe our actions on the path.
+The final piece of information can tell you a lot about what you tried to do to the path. There are a set of predefined keywords that describe our actions on the path.
 
 ```
 GET    - Used to retrieve a piece of data
@@ -130,7 +134,7 @@ PUT    - Used to replace a piece of data completely
 DELETE - Used to delete a piece of data completely
 ```
 
-In this particular example, we can see we are trying to access a piece of data, specifically, a message.
+In this particular example, you can see you are trying to access a piece of data, specifically, a message.
 
 ## Common discord.js and API errors
 

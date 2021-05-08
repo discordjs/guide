@@ -6,7 +6,7 @@ This page is a follow-up and bases its code on [the previous page](/sharding/add
 
 ### Sending messages across shards
 
-Let's start with the basic usage of shards. At some point in bot development, you might have wanted to send a message to another channel, which may or may not necessarily be on the same guild, which means it may or may not be on the same shard. To remedy this, you will need to go back to your friend `.broadcastEval()` and try every shard for the desired channel. Suppose you have the following code in your `message` event:
+Let's start with the basic usage of shards. At some point in bot development, you might have wanted to send a message to another channel, which may or may not necessarily be on the same guild, which means it may or may not be on the same shard. To achieve this, you will need to go back to your friend `.broadcastEval()` and try every shard for the desired channel. Suppose you have the following code in your `message` event:
 
 <branch version="11.x">
 
@@ -241,7 +241,7 @@ function findEmoji(nameOrID) {
 
 </branch>
 
-With all that said and done, usually you'll want to display the result, so here is how we can go about doing that:
+With all that said and done, usually you'll want to display the result, so here is how you can go about doing that:
 
 <branch version="11.x">
 

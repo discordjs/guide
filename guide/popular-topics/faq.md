@@ -438,10 +438,10 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 <!-- eslint-skip -->
 
 ```js
-// First we use fetchMembers to make sure all members are cached
+// First use fetchMembers to make sure all members are cached
 <guild>.fetchMembers().then(fetchedGuild => {
 	const totalOnline = fetchedGuild.members.filter(member => member.presence.status === 'online');
-	// We now have a collection with all online member objects in the totalOnline variable
+	// Now you have a collection with all online member objects in the totalOnline variable
 	console.log(`There are currently ${totalOnline.size} members online in this guild!`)
 });
 ```
@@ -452,10 +452,10 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 <!-- eslint-skip -->
 
 ```js
-// First we use guild.members.fetch to make sure all members are cached
+// First use guild.members.fetch to make sure all members are cached
 <guild>.members.fetch().then(fetchedMembers => {
 	const totalOnline = fetchedMembers.filter(member => member.presence.status === 'online');
-	// We now have a collection with all online member objects in the totalOnline variable
+	// Now you have a collection with all online member objects in the totalOnline variable
 	console.log(`There are currently ${totalOnline.size} members online in this guild!`)
 });
 ```
@@ -469,7 +469,7 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 <!-- eslint-skip -->
 
 ```js
-// We start by declaring a guildMemberUpdate listener
+// Start by declaring a guildMemberUpdate listener
 // This code should be placed outside of any other listener callbacks to prevent listener nesting
 <client>.on('guildMemberUpdate', (oldMember, newMember) => {
 	// If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
@@ -487,7 +487,7 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 <!-- eslint-skip -->
 
 ```js
-// We start by declaring a guildMemberUpdate listener
+// Start by declaring a guildMemberUpdate listener
 // This code should be placed outside of any other listener callbacks to prevent listener nesting
 <client>.on('guildMemberUpdate', (oldMember, newMember) => {
 	// If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
@@ -528,7 +528,7 @@ A specific shards heartbeat can be found on the WebSocketShard instance, accessi
 
 </branch>
 
-The second, **Roundtrip Latency**, describes the amount of time a full API roundtrip (from the creation of the command message to the creation of the response message) takes. We then edit the response to the respective value to avoid needing to send yet another message:
+The second, **Roundtrip Latency**, describes the amount of time a full API roundtrip (from the creation of the command message to the creation of the response message) takes. You then edit the response to the respective value to avoid needing to send yet another message:
 
 <!-- eslint-skip -->
 

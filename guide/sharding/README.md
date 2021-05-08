@@ -105,13 +105,13 @@ client.login('your-token-goes-here');
 
 </branch>
 
-Let's say your bot is in a total of 3,600 guilds. Using the recommended shard count, you might end up at four shards, each containing approximately 900 guilds. If a guild is on a specific shard (shard #2, for example) and receives this command, the guild count will be close to 900, which is not the "correct" number of guilds for your bot. "How can I fix this?" you ask? Well, that's why we're here.
+Let's say your bot is in a total of 3,600 guilds. Using the recommended shard count, you might end up at four shards, each containing approximately 900 guilds. If a guild is on a specific shard (shard #2, for example) and receives this command, the guild count will be close to 900, which is not the "correct" number of guilds for your bot. Let's take a look at how to fix that.
 
 ## FetchClientValues
 
-First, let's take a look at one of the most common sharding utility methods you'll be using: <docs-link path="class/ShardClientUtil?scrollTo=fetchClientValues">Shard#fetchClientValues</docs-link>. This method retrieves a property on the Client object of all shards.
+<docs-link path="class/ShardClientUtil?scrollTo=fetchClientValues">Shard#fetchClientValues</docs-link> is one of the most common sharding utility methods you'll be using. This method retrieves a property on the Client object of all shards.
 
-Now, take the following snippet of code:
+Take the following snippet of code:
 
 <branch version="11.x">
 
@@ -128,7 +128,7 @@ client.shard.fetchClientValues('guilds.cache.size').then(console.log);
 
 </branch>
 
-If you run it, you will notice an output like `[898, 901, 900, 901]`. You will be correct in assuming that that's the total number of guilds per shard stored in an array in the Promise. This probably isn't the ideal output for guild count, so we will need to make use of an array manipulation method, specifically [Array.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce).
+If you run it, you will notice an output like `[898, 901, 900, 901]`. You will be correct in assuming that that's the total number of guilds per shard stored in an array in the Promise. This probably isn't the ideal output for guild count, so let's use [Array.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) to provide a better output.
 
 ::: tip
 It's highly recommended for you to visit [the documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) to understand how the `reduce()` method works, as you will probably find great use of it in sharding.
@@ -240,7 +240,7 @@ client.shard.broadcastEval('this.guilds.cache.reduce((acc, guild) => acc + guild
 
 ## Putting them together
 
-You'd likely want to output both pieces of information in the stats command, so let's combine these two examples using [Promise.all()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all):
+You'd likely want to output both pieces of information in the stats command. You can combine these two results with [Promise.all()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all):
 
 <branch version="11.x">
 
