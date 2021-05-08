@@ -15,7 +15,10 @@ client.on('interaction', interaction => {
 	console.log(interaction);
 });
 ```
-        
+::: tip
+You can easily adapt the command handler from earlier sections of the guide to work with interactions and thereby organize your commands properly!
+:::
+
 However, not every interaction is a slash command. Let's make sure to only receive slash commands by making use of the `interaction#isCommand()` method:
 
 ```js {2}
