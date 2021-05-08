@@ -537,10 +537,6 @@ module.exports = {
 };
 ```
 
-::: tip
-A lot of library-specific structures have `client` as a property. That means you don't have to pass the client reference as a parameter to commands to access. For example, `client.guilds` or `client.commands` can access the respective properties directly from the `message` object, as shown in the snippet above.
-:::
-
 To build the correct file path, you will need the file name and the sub-folder the command belongs to. For the file name, you can use `command.name`. To find the sub-folder name, you will have to loop through the commands sub-folders and check whether the command file is in that folder or not. You can do that by using `Array.includes()` on each subfolder's file names array. 
 
 ```js {5-6}
