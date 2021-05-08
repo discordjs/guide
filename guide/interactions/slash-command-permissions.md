@@ -86,4 +86,33 @@ client.once('ready', async () => {
 });
 ```
 
+## Bulk update permissions
+
+If you have a lot of commands, you likely want to update their permissions in one go instead of one-by-one, for this approach you can use `ApplicationCommandManager#setPermissions` as outlined below:
+
+```js {2-19,21}
+client.once('ready', async () => {
+	const permissions = [
+		{
+			id: 'id',
+			permissions: [{
+				id: 'id',
+				type: 'USER',
+				permission: false,
+			}],
+		},
+		{
+			id: 'id',
+			permissions: [{
+				id: 'id',
+				type: 'ROLE',
+				permission: true,
+			}],
+		},
+	];
+
+	await client.application?.commands.setPermissions(permissions);
+});
+```
+
 And that's all you need to know on slash command permissions!
