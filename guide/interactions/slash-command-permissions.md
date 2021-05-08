@@ -12,11 +12,11 @@ To begin, we'll fetch an `ApplicationCommand` an then set the permissions using 
 
 ```js
 client.once('ready', async () => {
-	const command = await client.application?.commands.fetch('id');
+	const command = await client.application?.commands.fetch('876543210987654321');
 
 	const permissions = [
 		{
-			id: 'id',
+			id: '224617799434108928',
 			type: 'USER',
 			permission: false,
 		},
@@ -31,11 +31,11 @@ If you have a command that is disabled by default and you want to grant someone 
 
 ```js {8}
 client.once('ready', async () => {
-	const command = await client.application?.commands.fetch('id');
+	const command = await client.application?.commands.fetch('123456789012345678');
 
 	const permissions = [
 		{
-			id: 'id',
+			id: '224617799434108928',
 			type: 'USER',
 			permission: true,
 		},
@@ -54,11 +54,11 @@ Now you may want to allow (or deny) multiple users the usage of a command. In th
 
 ```js {7,8}
 client.once('ready', async () => {
-	const command = await client.application?.commands.fetch('id');
+	const command = await client.application?.commands.fetch('876543210987654321');
 
 	const permissions = [
 		{
-			id: 'id',
+			id: '464464090157416448',
 			type: 'ROLE',
 			permission: false,
 		},
@@ -72,11 +72,11 @@ With this, you have successfully denied an entire role access to this command. I
 
 ```js {8}
 client.once('ready', async () => {
-	const command = await client.application?.commands.fetch('id');
+	const command = await client.application?.commands.fetch('123456789012345678');
 
 	const permissions = [
 		{
-			id: 'id',
+			id: '464464090157416448',
 			type: 'ROLE',
 			permission: true,
 		},
@@ -96,7 +96,7 @@ client.once('ready', async () => {
 		{
 			id: 'id',
 			permissions: [{
-				id: 'id',
+				id: '224617799434108928',
 				type: 'USER',
 				permission: false,
 			}],
@@ -104,7 +104,7 @@ client.once('ready', async () => {
 		{
 			id: 'id',
 			permissions: [{
-				id: 'id',
+				id: '464464090157416448',
 				type: 'ROLE',
 				permission: true,
 			}],

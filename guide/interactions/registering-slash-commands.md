@@ -43,7 +43,7 @@ client.once('ready', async () => {
 		description: 'Replies with Pong!',
 	};
 
-	const command = await client.guilds.cache.get('id')?.commands.create(data);
+	const command = await client.guilds.cache.get('123456789012345678')?.commands.create(data);
 	console.log(command);
 });
 ```
