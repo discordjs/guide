@@ -110,6 +110,10 @@ Now you've learned how to create an application command with `options`. Keep rea
 
 As you've seen in the example of the last section we can specify the `type` of an `ApplicationCommandOption`. Listed below you'll find a list of all possible values you can pass as `ApplicationCommandOptionType`:
 
+::: tip
+For detailed explanations on the `SUB_COMMAND` and `SUB_COMMAND_GROUP` option types please see [this section](https://discord.com/developers/docs/interactions/slash-commands#subcommands-and-subcommand-groups) of the Discord API documentation.
+:::
+
 * `SUB_COMMAND` sets the option to be a sub-command
 * `SUB_COMMAND_GROUP` sets the option to be a sub-command-group
 * `STRING` sets the option to require a string value
