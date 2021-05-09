@@ -143,36 +143,34 @@ If you specify `choices` for an option, they are the **only** valid values for a
 
 To specify them you simply provide an array of `ApplicationCommandOptionChoice`'s to the option when creating a command:
 
-```js {11-24}
-client.on('message', async message => {
-	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
-		const data = {
-			name: 'gif',
-			description: 'Sends a random gif!',
-			options: [{
-				name: 'category',
-				type: 'STRING',
-				description: 'The gif category',
-				required: true,
-				choices: [
-					{
-						name: 'Funny',
-						value: 'gif_funny',
-					},
-					{
-						name: 'Meme',
-						value: 'gif_meme',
-					},
-					{
-						name: 'Movie',
-						value: 'gif_movie',
-					},
-				],
-			}],
-		};
+```js {10-22}
+client.once('ready', async () => {
+	const data = {
+		name: 'gif',
+		description: 'Sends a random gif!',
+		options: [{
+			name: 'category',
+			type: 'STRING',
+			description: 'The gif category',
+			required: true,
+			choices: [
+				{
+					name: 'Funny',
+					value: 'gif_funny',
+				},
+				{
+					name: 'Meme',
+					value: 'gif_meme',
+				},
+				{
+					name: 'Movie',
+					value: 'gif_movie',
+				},
+			],
+		}],
+	};
 
-		const command = await client.application?.commands.create(data);
-		console.log(command);
-	}
+	const command = await client.application?.commands.create(data);
+	console.log(command);
 });
 ```
