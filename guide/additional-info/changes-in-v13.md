@@ -119,7 +119,7 @@ To provide permissions, use `InviteGenerationOptions#permissions`.
 
 ### Client#login
 
-Previously when a token had reached its 1000 login limit for the day, discord.js would treat this as a rate limit and silenty wait to login again, but this was not communicated to the user.
+Previously when a token had reached its 1000 login limit for the day, discord.js would treat this as a rate limit and silently wait to login again, but this was not communicated to the user.
 
 This will now instead cause an error to be thrown.
 
@@ -302,7 +302,7 @@ New activity type `COMPETING` added.
 
 ### ApplicationFlags
 
-New class `ApplicationFlags`, a bigfield for ClientApplication flags.
+New class `ApplicationFlags`, a bitfield for ClientApplication flags.
 
 ### Channel
 
