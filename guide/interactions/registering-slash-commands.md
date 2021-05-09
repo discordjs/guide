@@ -104,7 +104,7 @@ client.once('ready', async () => {
 
 Notice how we specified `required: true` within the options object? Doing this will make the option a required field and will prevent the user from sending the command without specifying a value for this option!
 
-Now you've learned how to create an application command with `options`. Keep reading, we have one more section to cover!
+Now you've learned how to create an application command with `options`. Keep reading, we have two more sections to cover!
 
 ## Option types
 
@@ -122,3 +122,45 @@ For detailed explanations on the `SUB_COMMAND` and `SUB_COMMAND_GROUP` option ty
 * `USER` sets the option to require a user or snowflake as value
 * `CHANNEL` sets the option to require a channel or snowflake as value
 * `ROLE` sets the option to require a role or snowflake as value
+
+## Choices
+
+The `STRING` and `INTEGER` option types both can have `choices`. Now what are choices? Simply put, `choices` are a set of predetermined values that a user can pick from when selecting the option that contains them.
+
+::: warning
+If you specify `choices` for an option, they are the **only** valid values for a user to pick!
+:::
+
+To specify them you simply provide an array of `ApplicationCommandOptionChoice`'s to the option when creating a command:
+
+```js {10-22}
+client.once('ready', async () => {
+	const data = {
+		name: 'gif',
+		description: 'Sends a random gif!',
+		options: [{
+			name: 'category',
+			type: 'STRING',
+			description: 'The gif category',
+			required: true,
+			choices: [
+				{
+					name: 'Funny',
+					value: 'gif_funny',
+				},
+				{
+					name: 'Meme',
+					value: 'gif_meme',
+				},
+				{
+					name: 'Movie',
+					value: 'gif_movie',
+				},
+			],
+		}],
+	};
+
+	const command = await client.guilds.cache.get('123456789012345678')?.commands.create(data);
+	console.log(command);
+});
+```
