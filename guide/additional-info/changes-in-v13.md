@@ -476,13 +476,17 @@ Provides a Collection of Roles managed by the integration.
 
 Permission helper to check if a Message can be crossposted.
 
+#### Message#fetchReference
+
+New method to fetch the Message referenced by Message#reference, if the client has access to do so.
+
 #### Message#react
 
 Added support for `<:name:id>` and `<a:name:id>` as valid inputs to `Message#react()`.
 
-#### Message#referencedMessage
+#### Message#stickers
 
-Gets the message this message references if this message is a crosspost/reply/pin-add and the referenced message is cached.
+New Collection property containing any stickers which were in the message
 
 ### MessageAttachment
 
@@ -567,6 +571,11 @@ Gets the premium subscriber (booster) role for the Guild, if any.
 ### StageChannels
 
 Stage Channels are now supported.
+
+### Stickers
+
+Stickers are now supported.
+
 ### TextChannel
 
 #### TextChannel#setType
