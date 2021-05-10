@@ -6,6 +6,7 @@ Slash commands also have their own permissions system, which allows you to contr
 If you set `defaultPermission: false` when creating a command you can immediately disable it for everyone including guild administrators and yourself.
 :::
 
+
 ## User permissions
 
 To begin, we'll fetch an `ApplicationCommand` and then set the permissions using the `ApplicationCommand#setPermissions()` method:
@@ -85,6 +86,7 @@ client.once('ready', async () => {
 	await command.setPermissions(permissions);
 });
 ```
+
 
 ## Bulk update permissions
 

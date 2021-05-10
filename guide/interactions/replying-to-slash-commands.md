@@ -6,6 +6,7 @@ Discord provides users the option to create client-integrated slash commands. In
 You need to have at least one slash command set-up for your application to follow the instructions on this page. If you haven't done that yet, refer to [the previous page](/interactions/registering-slash-commands/).
 :::
 
+
 ## Receiving interactions
 
 Every slash command is an `interaction`, so to respond to a command you need to setup an event listener that will execute code when your application receives an interaction:
@@ -152,6 +153,7 @@ client.on('interaction', async interaction => {
 ```
 
 Perfect, now you know how to reply to a slash command when you have to perform time intensive tasks!
+
 
 ## Follow-ups
 
