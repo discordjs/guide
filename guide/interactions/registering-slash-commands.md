@@ -18,14 +18,16 @@ Global commands are cached for one hour. That means that new global commands wil
 So, to register a global command we'll be passing an `ApplicationCommandData` object to the `ApplicationCommandManager#create()` method as follows:
 
 ```js
-client.once('ready', async () => {
-	const data = {
-		name: 'ping',
-		description: 'Replies with Pong!',
-	};
+client.on('message', async message => {
+	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
+		const data = {
+			name: 'ping',
+			description: 'Replies with Pong!',
+		};
 
-	const command = await client.application?.commands.create(data);
-	console.log(command);
+		const command = await client.application?.commands.create(data);
+		console.log(command);
+	}
 });
 ```
 
@@ -36,15 +38,17 @@ That's it! You've successfully created your first global application command! Le
 
 Guild specific application commands are only available in the guild they have been created in, as such we'll be using `GuildApplicationCommandManager#create()` to create them:
 
-```js {7}
-client.once('ready', async () => {
-	const data = {
-		name: 'ping',
-		description: 'Replies with Pong!',
-	};
+```js {8}
+client.on('message', async message => {
+	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
+		const data = {
+			name: 'ping',
+			description: 'Replies with Pong!',
+		};
 
-	const command = await client.guilds.cache.get('123456789012345678')?.commands.create(data);
-	console.log(command);
+		const command = await client.guilds.cache.get('123456789012345678')?.commands.create(data);
+		console.log(command);
+	}
 });
 ```
 
@@ -59,21 +63,23 @@ If you, for example, deploy your application commands when starting your applica
 This will overwrite all existing commands on the application or guild with the new data you provided!
 :::
 
-```js {2-11,13-14}
-client.once('ready', async () => {
-	const data = [
-		{
-			name: 'ping',
-			description: 'Replies with Pong!',
-		},
-		{
-			name: 'pong',
-			description: 'Replies with Ping!',
-		},
-	];
+```js {3-12,14-15}
+client.on('message', async message => {
+	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
+		const data = [
+			{
+				name: 'ping',
+				description: 'Replies with Pong!',
+			},
+			{
+				name: 'pong',
+				description: 'Replies with Ping!',
+			},
+		];
 
-	const commands = await client.application?.commands.set(data);
-	console.log(commands);
+		const commands = await client.application?.commands.set(data);
+		console.log(commands);
+	}
 });
 ```
 
@@ -84,21 +90,23 @@ Perfect! You have now learned how to bulk-update application commands.
 
 Application commands can have `options`, think of these options like arguments to a function. You can specify them as seen below:
 
-```js {5-10}
-client.once('ready', async () => {
-	const data = {
-		name: 'echo',
-		description: 'Replies with your input!',
-		options: [{
-			name: 'input',
-			type: 'STRING',
-			description: 'The input which should be echoed back',
-			required: true,
-		}],
-	};
+```js {6-11}
+client.on('message', async message => {
+	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
+		const data = {
+			name: 'echo',
+			description: 'Replies with your input!',
+			options: [{
+				name: 'input',
+				type: 'STRING',
+				description: 'The input which should be echoed back',
+				required: true,
+			}],
+		};
 
-	const command = await client.application?.commands.create(data);
-	console.log(command);
+		const command = await client.application?.commands.create(data);
+		console.log(command);
+	}
 });
 ```
 
@@ -123,3 +131,48 @@ For detailed explanations on the `SUB_COMMAND` and `SUB_COMMAND_GROUP` option ty
 * `CHANNEL` sets the option to require a channel or snowflake as value
 * `ROLE` sets the option to require a role or snowflake as value
 * `MENTIONABLE` sets the option to require a user, role or snowflake as value
+
+
+## Choices
+
+The `STRING` and `INTEGER` option types both can have `choices`. Now what are choices? Simply put, `choices` are a set of predetermined values that a user can pick from when selecting the option that contains them.
+
+::: warning
+If you specify `choices` for an option, they are the **only** valid values for a user to pick!
+:::
+
+To specify them you simply provide an array of `ApplicationCommandOptionChoice`'s to the option when creating a command:
+
+```js {11-24}
+client.on('message', async message => {
+	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
+		const data = {
+			name: 'gif',
+			description: 'Sends a random gif!',
+			options: [{
+				name: 'category',
+				type: 'STRING',
+				description: 'The gif category',
+				required: true,
+				choices: [
+					{
+						name: 'Funny',
+						value: 'gif_funny',
+					},
+					{
+						name: 'Meme',
+						value: 'gif_meme',
+					},
+					{
+						name: 'Movie',
+						value: 'gif_movie',
+					},
+				],
+			}],
+		};
+
+		const command = await client.application?.commands.create(data);
+		console.log(command);
+	}
+});
+```

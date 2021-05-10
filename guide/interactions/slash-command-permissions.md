@@ -8,7 +8,7 @@ If you set `defaultPermission: false` when creating a command you can immediatel
 
 ## User permissions
 
-To begin, we'll fetch an `ApplicationCommand` an then set the permissions using the `ApplicationCommand#setPermissions()` method:
+To begin, we'll fetch an `ApplicationCommand` and then set the permissions using the `ApplicationCommand#setPermissions()` method:
 
 ```js
 client.once('ready', async () => {
