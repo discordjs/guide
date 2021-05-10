@@ -396,6 +396,10 @@ The `Guild#owner` property has been removed as it was unreliable due to caching,
 + Guild.fetchOwner().then(console.log);
 ```
 
+#### Guild#setChannelPositions
+
+The `Guild#setChannelPositions` method can now be used to set the parent of multiple channels, and lock their permissions via the `ChannelPosition#parent` and `ChannelPosition#lockPermissions` options.
+
 ### GuildManager
 
 #### GuildManager#create
