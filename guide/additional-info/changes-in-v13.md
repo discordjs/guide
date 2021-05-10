@@ -269,6 +269,60 @@ Additionally, `reason` is now part of the options, not a second parameter.
 
 `RoleManager.fetch()` will now return a Collection instead of a RoleManager when called without params.
 
+### Shard
+
+#### Shard#respawn
+
+The options for this method are now an object instead of separate params. In addition the `spawnTimeout` param has been renamed to `timeout`.
+
+This means the user no longer needs to pass defaults to fill each positional param.
+
+```diff
+- shard.respawn(500, 30000);
++ shard.respawn({ delay: 500, timeout: 30000 });
+```
+
+#### Shard#spawn
+
+The `spawnTimeout` param has been renamed to `timeout`
+
+### ShardClientUtil
+
+#### ShardClientUtil.respawnAll
+
+The options for this method are now an object instead of separate params. In addition the `spawnTimeout` param has been renamed to `timeout`.
+
+This means the user no longer needs to pass defaults to fill each positional param.
+
+```diff
+- client.shard.respawnAll(5000, 500, 30000);
++ client.shard.respawnAll({ shardDelay: 5000, respawnDelay: 500, timeout: 30000 });
+```
+
+### ShardingManager
+
+#### ShardingManager.spawn
+
+The options for this method are now an object instead of separate params. In addition the `spawnTimeout` param has been renamed to `timeout`.
+
+This means the user no longer needs to pass defaults to fill each positional param.
+
+```diff
+- manager.spawn('auto', 5500, 30000);
++ manager.spawn({ amount: 'auto', delay: 5500, timeout: 30000 });
+```
+
+#### ShardingManager#respawnAll
+
+The options for this method are now an object instead of separate params. In addition the `spawnTimeout` param has been renamed to `timeout`.
+
+This means the user no longer needs to pass defaults to fill each positional param.
+
+```diff
+- manager.respawnAll(5000, 500, 30000);
++ manager.respawnAll({ shardDelay: 5000, respawnDelay: 500, timeout: 30000 });
+```
+
 ### User
 
 #### User#locale
