@@ -50,7 +50,7 @@ The Discord API now allows bots much more granular control over mention parsing,
 
 `Message.reply()` will no longer result in the bot prepending a user mention to the content, replacing the behavior with Discord's reply feature.
 
-`MessageOptions.reply` (User ID) has been removed, replaced with `MessageOptions.replyTo` (Message ID)
+`MessageOptions.reply` (User ID) has been removed, replaced with `MessageOptions.reply` (Message ID)
 
 ```diff
 - channel.send('content', { reply: '123456789012345678' })` // User ID
@@ -74,7 +74,7 @@ Bitfields are now `BigInt`s instead of `Number`s. This can be handled using the 
 + const p = new Permissions(BigInt(104324673)); // using class
 + const p = new Permissions(104324673n); // using literal
 ```
-The usage of string literals for bitfield flags such as `Permissions` and `UserFlags` is discouraged; you should use the flag instead.
+In additional, the usage of string literals for bitfield flags such as `Permissions` and `UserFlags` is discouraged; you should use the flag instead.
 
 ```diff
 - permissions.has('SEND_MESSAGES')
@@ -515,9 +515,16 @@ Allows conversion between TextChannel and NewsChannel.
 
 ### Webhook
 
-#### Webhook.deleteMessage
+#### Webhook#deleteMessage
 
 Deletion of webhook messages by the Webhook is now supported.
+
 #### Webhook#editMessage
 
 Editing of Webhook messages is now supported.
+
+#### Webhook#sourceChannel
+
+#### Webhook#sourceGuild
+
+Webhooks can now have a `sourceGuild` and `sourceChannel` if the message is being crossposted.
