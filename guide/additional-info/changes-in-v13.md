@@ -579,11 +579,15 @@ Allows conversion between TextChannel and NewsChannel.
 
 #### Webhook#deleteMessage
 
-Deletion of webhook messages by the Webhook is now supported.
+Webhooks can now delete messages that were sent by the Webhook.
 
 #### Webhook#editMessage
 
-Editing of Webhook messages is now supported.
+Webhooks can now edit messages that were sent by the Webhook.
+
+#### Webhook#fetchMessage
+
+Webhooks can now fetch messages that were sent by the Webhook.
 
 #### Webhook#sourceChannel
 
