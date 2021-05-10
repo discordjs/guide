@@ -11,6 +11,7 @@ You can check your discord.js version with `npm list discord.js`. Should it stil
 ## API Version
 
 Discord.js v13 makes the switch to Discord API v8.
+
 ## Slash Commands
 
 Discord.js now has support for Slash Commands!
@@ -152,8 +153,8 @@ This method no longer returns a Promise
 `PresenceData#activity` is replaced with `PresenceData#activities` which now requires an `Array<ActivitiesOptions>`
 
 ```diff
-- client.user.setPresence({ activity: { name: 'with discord.js' });
-+ client.user.setPresence({ activities: [{ name: 'with discord.js' }]);
+- client.user.setPresence({ activity: { name: 'with discord.js' } });
++ client.user.setPresence({ activities: [{ name: 'with discord.js' }] });
 ```
 
 This method no longer returns a Promise.
