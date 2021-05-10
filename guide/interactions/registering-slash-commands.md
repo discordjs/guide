@@ -19,6 +19,8 @@ So, to register a global command we'll be passing an `ApplicationCommandData` ob
 
 ```js
 client.on('message', async message => {
+	if (!client.application?.owner) await client.application?.fetch();
+
 	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
 		const data = {
 			name: 'ping',
@@ -38,8 +40,10 @@ That's it! You've successfully created your first global application command! Le
 
 Guild specific application commands are only available in the guild they have been created in, as such we'll be using `GuildApplicationCommandManager#create()` to create them:
 
-```js {8}
+```js {10}
 client.on('message', async message => {
+	if (!client.application?.owner) await client.application?.fetch();
+
 	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
 		const data = {
 			name: 'ping',
@@ -63,8 +67,10 @@ If you, for example, deploy your application commands when starting your applica
 This will overwrite all existing commands on the application or guild with the new data you provided!
 :::
 
-```js {3-12,14-15}
+```js {5-14,15-17}
 client.on('message', async message => {
+	if (!client.application?.owner) await client.application?.fetch();
+
 	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
 		const data = [
 			{
@@ -90,8 +96,10 @@ Perfect! You have now learned how to bulk-update application commands.
 
 Application commands can have `options`, think of these options like arguments to a function. You can specify them as seen below:
 
-```js {6-11}
+```js {8-13}
 client.on('message', async message => {
+	if (!client.application?.owner) await client.application?.fetch();
+
 	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
 		const data = {
 			name: 'echo',
@@ -143,34 +151,38 @@ If you specify `choices` for an option, they are the **only** valid values for a
 
 To specify them you simply provide an array of `ApplicationCommandOptionChoice`'s to the option when creating a command:
 
-```js {10-22}
-client.once('ready', async () => {
-	const data = {
-		name: 'gif',
-		description: 'Sends a random gif!',
-		options: [{
-			name: 'category',
-			type: 'STRING',
-			description: 'The gif category',
-			required: true,
-			choices: [
-				{
-					name: 'Funny',
-					value: 'gif_funny',
-				},
-				{
-					name: 'Meme',
-					value: 'gif_meme',
-				},
-				{
-					name: 'Movie',
-					value: 'gif_movie',
-				},
-			],
-		}],
-	};
+```js {13-26}
+client.on('message', async message => {
+	if (!client.application?.owner) await client.application?.fetch();
 
-	const command = await client.application?.commands.create(data);
-	console.log(command);
+	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
+		const data = {
+			name: 'gif',
+			description: 'Sends a random gif!',
+			options: [{
+				name: 'category',
+				type: 'STRING',
+				description: 'The gif category',
+				required: true,
+				choices: [
+					{
+						name: 'Funny',
+						value: 'gif_funny',
+					},
+					{
+						name: 'Meme',
+						value: 'gif_meme',
+					},
+					{
+						name: 'Movie',
+						value: 'gif_movie',
+					},
+				],
+			}],
+		};
+
+		const command = await client.application?.commands.create(data);
+		console.log(command);
+	}
 });
 ```
