@@ -189,4 +189,34 @@ If you run this code you should end up having something that looks like this:
 	</discord-message>
 </div>
 
-That's all, now you know everything there is to know on how to reply to slash commands!
+That's all, now you know everything there is to know on how to reply to slash commands! 
+
+
+## Fetching and deleting responses
+
+Additionally to replying to a slash command you may also want to delete the initial reply. You can do this by using `CommandInteraction#deleteReply()` like this:
+
+```js {6}
+client.on('interaction', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'ping') {
+		await interaction.reply('Pong!');
+		await interaction.deleteReply();
+	}
+});
+```
+
+Lastly, you may require the `Message` object of a reply for various reasons, such as adding reactions. To retrieve the message instance of an interaction response you can use the `CommandInteraction#fetchReply()` method to fetch the initial response:
+
+```js {6,7}
+client.on('interaction', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'ping') {
+		await interaction.reply('Pong!');
+		const message = await interaction.fetchReply();
+		console.log(message);
+	}
+});
+```
