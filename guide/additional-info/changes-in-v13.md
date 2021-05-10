@@ -373,6 +373,10 @@ Constructing a Collector without providing a filter function will now throw a me
 
 ### Guild
 
+#### Guild#create
+
+`Guild#systemChannelFlags` can now be set in the `Guild#create` method.
+
 #### Guild#edit
 
 `Guild#description` and `Guild#features` can now be edited.
