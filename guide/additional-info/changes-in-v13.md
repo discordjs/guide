@@ -18,6 +18,8 @@ Discord.js now has support for Slash Commands!
 
 Refer to the [Interactions](/interactions/registering-slash-commands) section of this guide to get started.
 
+This also includes three new Client events, `applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate`
+
 ## Commonly used methods that changed
 
 ### Intents
@@ -355,6 +357,10 @@ Both were removed in favor of Node built-in Buffer methods.
 
 New activity type `COMPETING` added.
 
+### APIRequest
+
+Global headers can now be set in the HTTP options.
+
 ### ApplicationFlags
 
 New class `ApplicationFlags`, a bitfield for ClientApplication flags.
@@ -372,6 +378,10 @@ The new `Channel#isText()` function provides an easy way for TypeScript develope
 Constructing a Collector without providing a filter function will now throw a meaningful `TypeError`.
 
 ### Guild
+
+#### Guild#bans
+
+New property for the Guild's `GuildBanManager`
 
 #### Guild#create
 
@@ -403,6 +413,16 @@ The `Guild#owner` property has been removed as it was unreliable due to caching,
 #### Guild#setChannelPositions
 
 The `Guild#setChannelPositions` method can now be used to set the parent of multiple channels, and lock their permissions via the `ChannelPosition#parent` and `ChannelPosition#lockPermissions` options.
+
+### GuildBanManager
+
+The new `GuildBanManager` provides improved support for handling and caching bans.
+
+### GuildChannel
+
+#### GuildChannel#clone
+
+The `GuildChannel#clone` method now supports setting the `position` property
 
 ### GuildManager
 
@@ -475,6 +495,10 @@ Provides a Collection of Roles managed by the integration.
 #### Message#crosspostable
 
 Permission helper to check if a Message can be crossposted.
+
+#### Message#edit
+
+Editing/removing attachments when editing a Message is now supported.
 
 #### Message#fetchReference
 
