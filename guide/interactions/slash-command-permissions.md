@@ -94,7 +94,7 @@ If you have a lot of commands, you likely want to update their permissions in on
 client.once('ready', async () => {
 	const permissions = [
 		{
-			id: 'id',
+			id: '123456789012345678',
 			permissions: [{
 				id: '224617799434108928',
 				type: 'USER',
@@ -102,7 +102,7 @@ client.once('ready', async () => {
 			}],
 		},
 		{
-			id: 'id',
+			id: '876543210987654321',
 			permissions: [{
 				id: '464464090157416448',
 				type: 'ROLE',
