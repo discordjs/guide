@@ -106,7 +106,7 @@ client.on('message', async message => {
 
 ## Bulk update permissions
 
-If you have a lot of commands, you likely want to update their permissions in one go instead of one-by-one, for this approach you can use `ApplicationCommandManager#setPermissions` as outlined below:
+If you have a lot of commands, you likely want to update their permissions in one go instead of one-by-one, for this approach you can use `GuildApplicationCommandManager#setPermissions` as outlined below:
 
 ```js {5-22,24}
 client.on('message', async message => {
@@ -132,7 +132,7 @@ client.on('message', async message => {
 			},
 		];
 
-		await client.application?.commands.setPermissions(permissions);
+		await client.guilds.cache.get('123456789012345678')?.commands.setPermissions(permissions);
 	}
 });
 ```
