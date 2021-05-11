@@ -46,16 +46,15 @@ The Discord API now allows bots much more granular control over mention parsing,
 + const client = new Discord.Client({ allowedMentions: { parse: ['users', 'roles'], repliedUser: true } });
 ```
 
-
 ### Replies / Message#reply
 
 `Message.reply()` will no longer result in the bot prepending a user mention to the content, replacing the behavior with Discord's reply feature.
 
-`MessageOptions.reply` should now be passed a Message ID, not a User ID
+`MessageOptions.reply` no longer takes a User ID. It has been replaced with a `ReplyOptions` type, expecting `MessageOptions.reply.messageReference` as a Message ID
 
 ```diff
 - channel.send('content', { reply: '123456789012345678' })` // User ID
-+ channel.send('content', { reply' '765432109876543219' })` // Message ID
++ channel.send('content', { reply: { messageReference: '765432109876543219' }})` // Message ID
 ```
 
 The new `MessageOptions.allowedMentions.repliedUser` boolean option determines if the reply will notify the author of the original message.
