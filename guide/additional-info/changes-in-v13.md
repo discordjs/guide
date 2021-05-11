@@ -18,7 +18,7 @@ Discord.js now has support for Slash Commands!
 
 Refer to the [Interactions](/interactions/registering-slash-commands) section of this guide to get started.
 
-This also includes three new Client events, `applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate`
+In addition to the `interaction` event covered in the above guide, this release also includes the new Client events `applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate`.
 
 ## Commonly used methods that changed
 
@@ -46,17 +46,16 @@ The Discord API now allows bots much more granular control over mention parsing,
 + const client = new Discord.Client({ allowedMentions: { parse: ['users', 'roles'], repliedUser: true } });
 ```
 
-:::
 
 ### Replies / Message#reply
 
 `Message.reply()` will no longer result in the bot prepending a user mention to the content, replacing the behavior with Discord's reply feature.
 
-`MessageOptions.reply` (User ID) has been removed, replaced with `MessageOptions.reply` (Message ID)
+`MessageOptions.reply` should now be passed a Message ID, not a User ID
 
 ```diff
 - channel.send('content', { reply: '123456789012345678' })` // User ID
-+ channel.send('content', { replyTo: '765432109876543219' })` // Message ID
++ channel.send('content', { reply' '765432109876543219' })` // Message ID
 ```
 
 The new `MessageOptions.allowedMentions.repliedUser` boolean option determines if the reply will notify the author of the original message.
