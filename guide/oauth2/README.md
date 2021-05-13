@@ -14,7 +14,7 @@ Most of the time, websites use OAuth2 to get information about their users from 
 {
 	"clientID": "",
 	"clientSecret": "",
-	"port": "53134"
+	"port": 53134
 }
 ```
 
