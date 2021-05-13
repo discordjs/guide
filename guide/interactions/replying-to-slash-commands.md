@@ -220,7 +220,7 @@ If you run this code you should end up having something that looks like this:
 That's all, now you know everything there is to know on how to reply to slash commands! 
 
 ::: tip
-Interaction responses run ontop of webhooks thus they inherit certain aspects from webhook messages:
+Interaction responses run on top of webhooks thus, they inherit certain aspects from webhook messages:
 - they can contain up to 10 message embeds
 - they can use guild emojis globally
 - they can mask links in message content
