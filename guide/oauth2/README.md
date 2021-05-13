@@ -167,7 +167,7 @@ Don't forgo security for a tiny bit of convenience!
 
 What you did in the quick example was go through the `implicit grant` flow, which passed the access token straight to the user's browser. This flow is great and simple, but you don't get to refresh the token without the user, and it is less secure than going through the `authorization code grant`. This flow involves receiving an access code, which your server then exchanges for an access token. Notice that this way, the access token never actually reaches the user throughout the process.
 
-Unlike the [implicit grant flow](/oauth2/#oauth2-flow-implicit-grant), you need an OAuth2 url where the `response_type` is `code`. Once you've obtained it, try visiting the link and authorizing your application. You should notice that instead of a hash, the redirect url now has a single query parameter appended to it like `?code=ACCESS_CODE`. Modify your `index.js` file to pull the parameter out of the url if it exists. In express, you can use the `request` parameter's `query` property.
+Unlike the [implicit grant flow](/oauth2/#implicit-grant-flow), you need an OAuth2 url where the `response_type` is `code`. Once you've obtained it, try visiting the link and authorizing your application. You should notice that instead of a hash, the redirect url now has a single query parameter appended to it like `?code=ACCESS_CODE`. Modify your `index.js` file to pull the parameter out of the url if it exists. In express, you can use the `request` parameter's `query` property.
 
 ```js {2}
 app.get('/', (request, response) => {
