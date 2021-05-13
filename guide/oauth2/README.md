@@ -57,11 +57,11 @@ Although we're using express, there are many other possible alternatives to hand
 
 ### Getting an OAuth2 url
 
-Now that you have your web server up and running, it's time to get some information from Discord. Head over to [your Discord applications](https://discord.com/developers/applications/) and click "Create an application", where the following page will greet you:
+Now that you have your web server up and running, it's time to get some information from Discord. Open [your Discord applications](https://discord.com/developers/applications/), create or select an application, and head over to the "OAuth2" page.
 
-![Create an application page](./images/create-app-page.png)
+![OAuth2 application page](./images/oauth2-app-page.png)
 
-Take note of the `client id` field, the `client secret` field, and the "OAuth2" link on the left side of the page. Copy your client ID and secret into your `config.json` file; you'll need them later. For now, click on "OAuth2" and add a redirect url to `http://localhost:53134` like so:
+Take note of the `client id` and `client secret` fields. Copy your these values into your `config.json` file; you'll need them later. For now, add a redirect url to `http://localhost:53134` like so:
 
 ![Adding Redirects](./images/add-redirects.png)
 
@@ -71,7 +71,7 @@ Once you've added your redirect url, you will want to generate an OAuth2 url. Lo
 
 The `identify` scope will allow your application to get basic user information from Discord. You can find a list of all scopes [here](https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes).
 
-### Putting it together
+### Implicit grant flow
 
 You have your website, and you have a url. Now you need to use those two things to get an access token. For basic applications like [SPAs](https://en.wikipedia.org/wiki/Single-page_application), getting an access token directly is enough. You can do so by changing the `response_type` in the url to `token`. However, this means you will not get a refresh token, which means the user will have to explicitly re-authorize when this access token has expired.
 
@@ -79,7 +79,7 @@ After you change the `response_type`, you can test the url right away. Try visit
 
 ![Authorization Page](./images/authorize-app-page.png)
 
-You can see that by clicking `Authorize`, you allow the application to access your username and avatar. Once you click through, you should be redirected to the redirect url with a [fragment identifier](https://en.wikipedia.org/wiki/Fragment_identifier) appended to it. You now have an access token and can make requests to Discord's API to get information on the user.
+You can see that by clicking `Authorize`, you allow the application to access your username and avatar. Once you click through, you should be redirected to your redirect url with a [fragment identifier](https://en.wikipedia.org/wiki/Fragment_identifier) appended to it. You now have an access token and can make requests to Discord's API to get information on the user.
 
 Modify `index.html` to add your OAuth2 url and to take advantage of the access token if it exists. Even though [`URLSearchParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) is for working with query strings, it can work here because the structure of the fragment follows that of a query string after removing the leading "#".
 
@@ -99,8 +99,8 @@ Modify `index.html` to add your OAuth2 url and to take advantage of the access t
 
 		fetch('https://discord.com/api/users/@me', {
 			headers: {
-				authorization: `${tokenType} ${accessToken}`
-			}
+				authorization: `${tokenType} ${accessToken}`,
+			},
 		})
 			.then(result => result.json())
 			.then(response => {
@@ -163,13 +163,11 @@ if (localStorage.getItem('oauth-state') !== atob(decodeURIComponent(state))) {
 Don't forgo security for a tiny bit of convenience!
 :::
 
-### OAuth2 flows
+### Authorization code grant flow
 
 What you did in the quick example was go through the `implicit grant` flow, which passed the access token straight to the user's browser. This flow is great and simple, but you don't get to refresh the token without the user, and it is less secure than going through the `authorization code grant`. This flow involves receiving an access code, which your server then exchanges for an access token. Notice that this way, the access token never actually reaches the user throughout the process.
 
-#### Authorization code grant
-
-Unlike the quick example, you need an OAuth2 url where the `response_type` is `code`. Once you've obtained it, try visiting the link and authorizing your application. You should notice that instead of a hash, the redirect url now has a single query parameter appended to it like `?code=ACCESS_CODE`. Modify your `index.js` file to pull the parameter out of the url if it exists. In express, you can use the `request` parameter's `query` property.
+Unlike the [implicit grant flow](/oauth2/#oauth2-flow-implicit-grant), you need an OAuth2 url where the `response_type` is `code`. Once you've obtained it, try visiting the link and authorizing your application. You should notice that instead of a hash, the redirect url now has a single query parameter appended to it like `?code=ACCESS_CODE`. Modify your `index.js` file to pull the parameter out of the url if it exists. In express, you can use the `request` parameter's `query` property.
 
 ```js {2}
 app.get('/', (request, response) => {
