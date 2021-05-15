@@ -157,7 +157,7 @@ Perfect, now you know how to reply to a slash command when you have to perform t
 
 ## Follow-ups
 
-Replying to slash commands is great and all, but what if you want to send multiple responses instead of just one? Follow-up messages got you covered, you can use `CommandInteraction#webhook#send()` to send multiple responses:
+Replying to slash commands is great and all, but what if you want to send multiple responses instead of just one? Follow-up messages got you covered, you can use `CommandInteraction#followUp()` to send multiple responses:
 
 ::: warning
 After the initial response an interaction token is valid for 15 minutes, so this is the timeframe in which you can edit the response and send follow-up messages.
@@ -169,7 +169,7 @@ client.on('interaction', async interaction => {
 
 	if (interaction.commandName === 'ping') {
 		await interaction.reply('Pong!');
-		await interaction.webhook.send('Pong again!');
+		await interaction.followUp('Pong again!');
 	}
 });
 ```
@@ -186,6 +186,34 @@ If you run this code you should end up having something that looks like this:
 	</discord-message>
 	<discord-message profile="bot">
 		Pong again!
+	</discord-message>
+</div>
+
+Now you may want to send an ephemeral follow-up, to do so just repeat the procedure as follows and also pass in `ephemeral: true` to the `FollowupOptions`:
+
+```js {6}
+client.on('interaction', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'ping') {
+		await interaction.reply('Pong!');
+		await interaction.followUp('Pong again!', { ephemeral: true });
+	}
+});
+```
+
+If you run this code you should end up having something that looks like this:
+
+<!--- vue-discord-message doesn't yet have support for inline replies/interactions/ephemeral messages -->
+<div is="discord-messages">
+	<discord-message profile="user">
+		/ping
+	</discord-message>
+	<discord-message profile="bot">
+		Pong!
+	</discord-message>
+	<discord-message profile="bot">
+		Pong again! (ephemeral)
 	</discord-message>
 </div>
 
