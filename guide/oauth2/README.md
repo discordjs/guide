@@ -112,7 +112,19 @@ Modify `index.html` to add your OAuth2 url and to take advantage of the access t
 </script>
 ```
 
-Here you grab the access token and type from the url if it's there and use it to get info on the user, which is then used to greet them. In the following sections, we'll go over various details of Discord and OAuth2.
+Here you grab the access token and type from the url if it's there and use it to get info on the user, which is then used to greet them. The response you get from the [`/api/users/@me` endpoint](https://discord.com/developers/docs/resources/user#get-current-user) is a [user object](https://discord.com/developers/docs/resources/user#user-object) and should look something like this:
+
+```json
+{
+	"id": "123456789012345678",
+	"username": "User",
+	"discriminator": "0001",
+	"avatar": "1cc0a3b14aec3499632225c708451d67",
+	...
+}
+```
+
+In the following sections, we'll go over various details of Discord and OAuth2.
 
 ## More details
 
@@ -236,7 +248,7 @@ Now try visiting your OAuth2 url and authorizing your application. Once you're r
 }
 ```
 
-Try fetching the user's information now that you have an access token and a refresh token. It's the same as how the html file did it in the html file.
+With an access token and a refresh token, you can once again use the [`/api/users/@me` endpoint](https://discord.com/developers/docs/resources/user#get-current-user) to fetch the [user object](https://discord.com/developers/docs/resources/user#user-object).
 
 <!-- eslint-skip -->
 ```js {3-7,9}
