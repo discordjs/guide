@@ -55,33 +55,33 @@ After running `npm i express`, you can start your server with `node index.js`. O
 Although we're using express, there are many other possible alternatives to handle a web server, such as: [fastify](https://www.fastify.io/), [koa](https://koajs.com/), and the [native Node.js http module](https://nodejs.org/api/http.html).
 :::
 
-### Getting an OAuth2 url
+### Getting an OAuth2 URL
 
 Now that you have your web server up and running, it's time to get some information from Discord. Open [your Discord applications](https://discord.com/developers/applications/), create or select an application, and head over to the "OAuth2" page.
 
 ![OAuth2 application page](./images/oauth2-app-page.png)
 
-Take note of the `client id` and `client secret` fields. Copy your these values into your `config.json` file; you'll need them later. For now, add a redirect url to `http://localhost:53134` like so:
+Take note of the `client id` and `client secret` fields. Copy your these values into your `config.json` file; you'll need them later. For now, add a redirect URL to `http://localhost:53134` like so:
 
 ![Adding Redirects](./images/add-redirects.png)
 
-Once you've added your redirect url, you will want to generate an OAuth2 url. Lower down on the page, you can conveniently find an OAuth2 Url Generator provided by Discord. Use this to create a url for yourself with the `identify` scope.
+Once you've added your redirect URL, you will want to generate an OAuth2 URL. Lower down on the page, you can conveniently find an OAuth2 URL Generator provided by Discord. Use this to create a URL for yourself with the `identify` scope.
 
-![Generate an OAuth2 Url](./images/generate-url.png)
+![Generate an OAuth2 URL](./images/generate-url.png)
 
 The `identify` scope will allow your application to get basic user information from Discord. You can find a list of all scopes [here](https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes).
 
 ### Implicit grant flow
 
-You have your website, and you have a url. Now you need to use those two things to get an access token. For basic applications like [SPAs](https://en.wikipedia.org/wiki/Single-page_application), getting an access token directly is enough. You can do so by changing the `response_type` in the url to `token`. However, this means you will not get a refresh token, which means the user will have to explicitly re-authorize when this access token has expired.
+You have your website, and you have a URL. Now you need to use those two things to get an access token. For basic applications like [SPAs](https://en.wikipedia.org/wiki/Single-page_application), getting an access token directly is enough. You can do so by changing the `response_type` in the URL to `token`. However, this means you will not get a refresh token, which means the user will have to explicitly re-authorize when this access token has expired.
 
-After you change the `response_type`, you can test the url right away. Try visiting it in your browser, and you will be directed to a page that looks like this.
+After you change the `response_type`, you can test the URL right away. Try visiting it in your browser, and you will be directed to a page that looks like this.
 
 ![Authorization Page](./images/authorize-app-page.png)
 
-You can see that by clicking `Authorize`, you allow the application to access your username and avatar. Once you click through, you should be redirected to your redirect url with a [fragment identifier](https://en.wikipedia.org/wiki/Fragment_identifier) appended to it. You now have an access token and can make requests to Discord's API to get information on the user.
+You can see that by clicking `Authorize`, you allow the application to access your username and avatar. Once you click through, you should be redirected to your redirect URL with a [fragment identifier](https://en.wikipedia.org/wiki/Fragment_identifier) appended to it. You now have an access token and can make requests to Discord's API to get information on the user.
 
-Modify `index.html` to add your OAuth2 url and to take advantage of the access token if it exists. Even though [`URLSearchParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) is for working with query strings, it can work here because the structure of the fragment follows that of a query string after removing the leading "#".
+Modify `index.html` to add your OAuth2 URL and to take advantage of the access token if it exists. Even though [`URLSearchParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) is for working with query strings, it can work here because the structure of the fragment follows that of a query string after removing the leading "#".
 
 ```html {4-26}
 <div id="info">
@@ -112,7 +112,7 @@ Modify `index.html` to add your OAuth2 url and to take advantage of the access t
 </script>
 ```
 
-Here you grab the access token and type from the url if it's there and use it to get info on the user, which is then used to greet them. The response you get from the [`/api/users/@me` endpoint](https://discord.com/developers/docs/resources/user#get-current-user) is a [user object](https://discord.com/developers/docs/resources/user#user-object) and should look something like this:
+Here you grab the access token and type from the URL if it's there and use it to get info on the user, which is then used to greet them. The response you get from the [`/api/users/@me` endpoint](https://discord.com/developers/docs/resources/user#get-current-user) is a [user object](https://discord.com/developers/docs/resources/user#user-object) and should look something like this:
 
 ```json
 {
@@ -130,7 +130,7 @@ In the following sections, we'll go over various details of Discord and OAuth2.
 
 ### The state parameter
 
-OAuth2's protocols provide a `state` parameter, which Discord supports. This parameter helps prevent [CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) attacks and represents your application's state. The state should be generated per user and appended to the OAuth2 url. For a basic example, you can use a randomly generated string encoded in Base64 as the state parameter.
+OAuth2's protocols provide a `state` parameter, which Discord supports. This parameter helps prevent [CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) attacks and represents your application's state. The state should be generated per user and appended to the OAuth2 URL. For a basic example, you can use a randomly generated string encoded in Base64 as the state parameter.
 
 ```js {1-10,15-18}
 function generateRandomString() {
@@ -156,7 +156,7 @@ window.load = () => {
 };
 ```
 
-When you visit a url with a `state` parameter appended to it and then click `Authorize`, you'll notice that after being redirected, the url will also have the `state` parameter appended, which you should then check against what was stored. You can modify the script in your `index.html` file to handle this.
+When you visit a URL with a `state` parameter appended to it and then click `Authorize`, you'll notice that after being redirected, the URL will also have the `state` parameter appended, which you should then check against what was stored. You can modify the script in your `index.html` file to handle this.
 
 ```js {2,8-10}
 const fragment = new URLSearchParams(window.location.hash.slice(1));
@@ -179,7 +179,7 @@ Don't forgo security for a tiny bit of convenience!
 
 What you did in the quick example was go through the `implicit grant` flow, which passed the access token straight to the user's browser. This flow is great and simple, but you don't get to refresh the token without the user, and it is less secure than going through the `authorization code grant`. This flow involves receiving an access code, which your server then exchanges for an access token. Notice that this way, the access token never actually reaches the user throughout the process.
 
-Unlike the [implicit grant flow](/oauth2/#implicit-grant-flow), you need an OAuth2 url where the `response_type` is `code`. Once you've obtained it, try visiting the link and authorizing your application. You should notice that instead of a hash, the redirect url now has a single query parameter appended to it like `?code=ACCESS_CODE`. Modify your `index.js` file to pull the parameter out of the url if it exists. In express, you can use the `request` parameter's `query` property.
+Unlike the [implicit grant flow](/oauth2/#implicit-grant-flow), you need an OAuth2 URL where the `response_type` is `code`. Once you've obtained it, try visiting the link and authorizing your application. You should notice that instead of a hash, the redirect URL now has a single query parameter appended to it like `?code=ACCESS_CODE`. Modify your `index.js` file to pull the parameter out of the URL if it exists. In express, you can use the `request` parameter's `query` property.
 
 ```js {2}
 app.get('/', (request, response) => {
@@ -233,10 +233,10 @@ app.get('/', async ({ query }, response) => {
 ```
 
 ::: warning
-The content-type for the token url must be `application/x-www-form-urlencoded`, which is why `URLSearchParams` is used.
+The content-type for the token URL must be `application/x-www-form-urlencoded`, which is why `URLSearchParams` is used.
 :::
 
-Now try visiting your OAuth2 url and authorizing your application. Once you're redirected, you should see something like this in your console.
+Now try visiting your OAuth2 URL and authorizing your application. Once you're redirected, you should see something like this in your console.
 
 ```json
 {
