@@ -16,7 +16,7 @@ client.on('message', async message => {
 	if (!client.application?.owner) await client.application?.fetch();
 
 	if (message.content.toLowerCase() === '!perms' && message.author.id === client.application?.owner.id) {
-		const command = await client.application?.commands.fetch('876543210987654321');
+		const command = await client.guilds.cache.get('123456789012345678')?.commands.fetch('876543210987654321');
 
 		const permissions = [
 			{
@@ -39,7 +39,7 @@ client.on('message', async message => {
 	if (!client.application?.owner) await client.application?.fetch();
 
 	if (message.content.toLowerCase() === '!perms' && message.author.id === client.application?.owner.id) {
-		const command = await client.application?.commands.fetch('123456789012345678');
+		const command = await client.guilds.cache.get('123456789012345678')?.commands.fetch('876543210987654321');
 
 		const permissions = [
 			{
@@ -66,7 +66,7 @@ client.on('message', async message => {
 	if (!client.application?.owner) await client.application?.fetch();
 
 	if (message.content.toLowerCase() === '!perms' && message.author.id === client.application?.owner.id) {
-		const command = await client.application?.commands.fetch('876543210987654321');
+		const command = await client.guilds.cache.get('123456789012345678')?.commands.fetch('876543210987654321');
 
 		const permissions = [
 			{
@@ -88,7 +88,7 @@ client.on('message', async message => {
 	if (!client.application?.owner) await client.application?.fetch();
 
 	if (message.content.toLowerCase() === '!perms' && message.author.id === client.application?.owner.id) {
-		const command = await client.application?.commands.fetch('123456789012345678');
+		const command = await client.guilds.cache.get('123456789012345678')?.commands.fetch('876543210987654321');
 
 		const permissions = [
 			{
