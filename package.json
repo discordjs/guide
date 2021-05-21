@@ -1,7 +1,8 @@
 {
-    "name": "guide",
+    "name": "discord.js-guide",
     "description": "The official guide for discord.js, created and maintained by core members of its community.",
-    "version": "1.0.0",
+    "version": "2.0.0",
+    "private": true,
     "scripts": {
         "lint": "eslint . --ext js,md,vue",
         "serve": "vuepress dev guide",
@@ -17,6 +18,12 @@
         "node"
     ],
     "author": "Sanctuary <sanc.pw@gmail.com>",
+    "contributors": [
+        "dragonfire535 <danielbodendahl@gmail.com>",
+        "Drahcirius",
+        "Lewdcario",
+        "Souji <timoqueezle@gmail.com>"
+    ],
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/discordjs/guide/issues"
