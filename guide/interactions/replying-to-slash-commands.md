@@ -189,7 +189,7 @@ If you run this code you should end up having something that looks like this:
 	</discord-message>
 </div>
 
-Now you may want to send an ephemeral follow-up, to do so just repeat the procedure as follows and also pass in `ephemeral: true` to the `InteractionReplyOptions`:
+Now you may want to send an ephemeral follow-up, to do so, just repeat the procedure as follows and also pass in `ephemeral: true` to the `InteractionReplyOptions`:
 
 ```js {6}
 client.on('interaction', async interaction => {
