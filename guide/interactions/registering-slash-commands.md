@@ -41,7 +41,7 @@ That's it! You've successfully created your first global application command! Le
 
 ## Guild commands
 
-Guild specific application commands are only available in the guild they have been created in, as such we'll be using `GuildApplicationCommandManager#create()` to create them:
+Guild specific application commands are only available in the guild they have been created in, as such, we'll be using `GuildApplicationCommandManager#create()` to create them:
 
 ```js {10}
 client.on('message', async message => {
