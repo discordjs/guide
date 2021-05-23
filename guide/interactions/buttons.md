@@ -15,7 +15,7 @@ You can have a maximum of:
 
 Now, to create a button we use the `MessageActionRow()` and `MessageButton()` builder functions and then pass the resulting object to `CommandInteraction#reply()` as `InteractionReplyOptions` as such:
 
-```js {1, 8-14, 16}
+```js {1,8-14,16}
 const { MessageActionRow, MessageButton } = require('discord.js');
 
 client.on('interaction', async interaction => {
@@ -53,7 +53,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 
 You can of course also send message components within an ephemeral response or alongside message embeds:
 
-```js {1}
+```js {1,16-20,22}
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 
 client.on('interaction', async interaction => {
@@ -111,6 +111,7 @@ client.on('interaction', interaction => {
 });
 ```
 
+
 ## Button collectors
 
 These work quite similarly to message collectors, except that you apply them on a message rather than a channel.
@@ -143,9 +144,52 @@ client.on('message', message => {
 });
 ```
 
-## Responding to Buttons
+
+## Responding to buttons
+
+The `ButtonInteraction` class has similar methods as the `CommandInteraction` class, which we we'll be covering in the following section:
+
+::: tip
+The following methods behave exactly the same as on the `CommandInteraction` class:
+- `reply()`
+- `editReply()`
+- `defer()`
+- `fetchReply()`
+- `deleteReply()`
+- `followUp()`
+:::
+
+### Updating the button message
+
+The `ButtonInteraction` class provides a method to update the message the button is attached to, by using `ButtonInteraction#update()` as follows:
+
+```js {1,3}
+client.on('interaction', async interaction => {
+	if (!interaction.isButton()) return;
+	if (interaction.customID == 'primary') await interaction.update('A button was clicked', { components: [] });
+});
+```
+
+### Deferring and updating the button message
+
+Additionally to deferring the response of the interaction, you can defer the button, which will trigger a loading state:
+
+```js {1,4-7}
+const wait = require('util').promisify(setTimeout);
+
+client.on('interaction', async interaction => {
+	if (!interaction.isButton()) return;
+	if (interaction.customID == 'primary') {
+		await interaction.deferUpdate()
+		await wait(4000);
+		await interaction.update('A button was clicked', { components: [] });
+	} 
+});
+```
+
+## Button styles
+
+Currently there are five different button styles available:
 
 
 
-
-## Button types
