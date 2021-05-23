@@ -1,10 +1,10 @@
-## Extended changes
+# Extended changes
 
 ::: tip
 This page is a follow-up and bases its code on [the previous page](/sharding/additional-information.md), which assumes knowledge of arguments and passing functions.
 :::
 
-### Sending messages across shards
+## Sending messages across shards
 
 Let's start with the basic usage of shards. At some point in bot development, you might have wanted to send a message to another channel, which may or may not necessarily be on the same guild, which means it may or may not be on the same shard. To achieve this, you will need to go back to your friend `.broadcastEval()` and try every shard for the desired channel. Suppose you have the following code in your `message` event:
 
@@ -109,7 +109,7 @@ return client.shard.broadcastEval(`
 
 And that's it for this section! You have successfully communicated across all of your shards.
 
-### Using functions continued
+## Using functions continued
 
 If you remember, there was a brief mention of passing functions through `.broadcastEval()`, but no super clear description of exactly how to go about it. Well, fret not, for this section will cover it! Suppose you have the following code in your `message` event:
 
