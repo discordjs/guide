@@ -22,13 +22,11 @@ client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-
 		const row = new MessageActionRow()
-		.addComponent(new MessageButton()
-			.setCustomID('primary')
-			.setLabel('primary')
-			.setStyle('PRIMARY')
-		);
+			.addComponent(new MessageButton()
+				.setCustomID('primary')
+				.setLabel('primary')
+				.setStyle('PRIMARY'));
 
 		await interaction.reply('Pong!', row);
 	}
@@ -60,19 +58,17 @@ client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-
 		const row = new MessageActionRow()
-		.addComponent(new MessageButton()
-			.setCustomID('primary')
-			.setLabel('primary')
-			.setStyle('PRIMARY')
-		);
+			.addComponent(new MessageButton()
+				.setCustomID('primary')
+				.setLabel('primary')
+				.setStyle('PRIMARY'));
 
 		const embed = new MessageEmbed()
-		.setColor('#0099ff')
-		.setTitle('Some title')
-		.setURL('https://discord.js.org/')
-		.setDescription('Some description here');
+			.setColor('#0099ff')
+			.setTitle('Some title')
+			.setURL('https://discord.js.org/')
+			.setDescription('Some description here');
 
 		await interaction.reply('Pong!', { ephemeral: true, embeds: [embed], components: [row] });
 	}
@@ -121,7 +117,7 @@ To create a basic event-based `ButtonInteractionCollector` simply do as follows:
 
 ```js
 client.on('message', message => {
-	const filter = (interaction) => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
+	const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
 
 	const collector = message.createButtonInteractionCollector(filter, { time: 15000 });
 	collector.on('collect', i => console.log(`Collected ${i.customID}`));
@@ -135,7 +131,7 @@ As with other types of collectors, you can also use a promise-based collector li
 
 ```js {4-6}
 client.on('message', message => {
-	const filter = (interaction) => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
+	const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
 
 	message.awaitButtonInteraction(filter, { time: 15000 })
 		.then(collected => console.log(`Collected ${collected.size} interactions`))
@@ -165,7 +161,7 @@ The `ButtonInteraction` class provides a method to update the message the button
 ```js {1,3}
 client.on('interaction', async interaction => {
 	if (!interaction.isButton()) return;
-	if (interaction.customID == 'primary') await interaction.update('A button was clicked', { components: [] });
+	if (interaction.customID === 'primary') await interaction.update('A button was clicked', { components: [] });
 });
 ```
 
@@ -178,11 +174,11 @@ const wait = require('util').promisify(setTimeout);
 
 client.on('interaction', async interaction => {
 	if (!interaction.isButton()) return;
-	if (interaction.customID == 'primary') {
-		await interaction.deferUpdate()
+	if (interaction.customID === 'primary') {
+		await interaction.deferUpdate();
 		await wait(4000);
 		await interaction.update('A button was clicked', { components: [] });
-	} 
+	}
 });
 ```
 
