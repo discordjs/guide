@@ -101,6 +101,12 @@ export default {
 			],
 		},
 		{
+			title: 'Interactions',
+			children: [
+				'/interactions/buttons.md',
+			],
+		},
+		{
 			text: 'Databases',
 			children: [
 				'/sequelize/',
