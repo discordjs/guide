@@ -1,6 +1,11 @@
-const sidebar = require('./sidebar.js');
+import path from 'path'
+import { defineUserConfig } from 'vuepress-vite'
+import type { DefaultThemeOptions, ViteBundlerOptions } from 'vuepress-vite'
+import sidebar from './sidebar'
 
-const config = {
+export default defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
+	bundler: '@vuepress/vite',
+	lang: 'en-US',
 	title: 'Discord.js Guide',
 	description: 'A guide made by the community of discord.js for its users.',
 	head: [
@@ -16,58 +21,26 @@ const config = {
 		['meta', { name: 'og:locale', content: 'en_US' }],
 		['meta', { name: 'og:image', content: '/meta-image.png' }],
 	],
-	plugins: [],
-	theme: 'yuu',
 	themeConfig: {
-		yuu: {
-			logo: 'GuideLogo',
-			extraOptions: { before: 'BranchSelector' },
-		},
+		sidebar,
 		repo: 'discordjs/guide',
-		docsDir: 'guide',
+		docsDir: 'docs',
+		docsBranch: 'guide',
 		sidebarDepth: 3,
 		editLinks: true,
 		lastUpdated: true,
-		nav: [
-			{
-				text: 'Home',
-				link: '/',
-			},
+		navbar: [
 			{
 				text: 'Commando',
 				link: '/commando/',
 			},
 			{
-				text: 'Discord.js Documentation',
+				text: 'Documentation',
 				link: 'https://discord.js.org/#/docs/main/stable/general/welcome',
 			},
 		],
-		sidebar,
 	},
-	configureWebpack: {
-		resolve: {
-			alias: {
-				'@': '../',
-			},
-		},
-	},
-	globalUIComponents: ['EOLNotice'],
-};
-
-for (const group of Object.values(config.themeConfig.sidebar)) {
-	for (const section of group) {
-		if (section.collapsable) continue;
-		section.collapsable = false;
-	}
-}
-
-if (process.env.NODE_ENV === 'production') {
-	config.themeConfig.algolia = {
-		apiKey: 'c8d9361fb8403f7c5111887e0edf4b5e',
-		indexName: 'discordjs',
-	};
-
-	config.plugins.push(['@vuepress/google-analytics', { ga: 'UA-108513187-1' }]);
-}
-
-module.exports = config;
+	// plugins: [
+	// 	['@vuepress/plugin-search'],
+	// ],
+})
