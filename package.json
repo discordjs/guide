@@ -35,12 +35,9 @@
         "eslint-config-sora": "^3.1.0",
         "eslint-plugin-markdown": "^1.0.0",
         "eslint-plugin-vue": "^7.5.0",
-        "vuepress": "^1.8.0"
+        "vuepress-vite": "^2.0.0-beta.6"
     },
     "dependencies": {
-        "@vuepress/plugin-google-analytics": "^1.2.0",
-        "semver": "^6.0.0",
-        "vue-discord-message": "^5.0.2",
-        "vuepress-theme-yuu": "^3.0.0"
+        "semver": "^6.0.0"
     }
 }
