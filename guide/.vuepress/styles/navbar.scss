@@ -1,0 +1,71 @@
+@mixin navLink() {
+	color: $textGray;
+	font-size: 1em;
+	margin: 0;
+	padding: 14px 12px;
+	border-width: 0;
+	border-radius: 6px;
+
+	&:hover,
+	&.router-link-active:hover {
+		color:$textGray;
+		background-color: $blurple630;
+	}
+
+	@media (min-width: 719px) {
+		&.router-link-active {
+			background-color: $blurple600;
+		}
+	}
+}
+
+.navbar {
+	background-color: $blurple560;
+	display: flex;
+	align-items: center;
+	height: 4rem;
+	font-size: 14px;
+	padding: 0.5rem 4.15rem;
+	border-width: 0;
+
+	.toggle-sidebar-button {
+		@include navLink();
+		position: unset;
+		top: unset;
+		left: unset;
+		margin-right: 1rem;
+	}
+
+	.site-name {
+		font-size: 1em;
+		color: $textGray;
+	}
+
+	a {
+		@include navLink();
+
+		.icon.outbound {
+			color: $textGray;
+		}
+	}
+
+	.navbar-links-wrapper {
+		background-color: $blurple560;
+		display: flex;
+		align-items: center;
+		position: relative;
+		right: 0;
+		top: 0;
+		padding-left: 0;
+
+		.navbar-links {
+			.navbar-links-item {
+				margin-left: 2rem;
+
+				a {
+					@include navLink();
+				}
+			}
+		}
+	}
+}
