@@ -9,13 +9,13 @@ Buttons are part of the `MessageComponent` class, which can be sent via messages
 
 ::: warning
 You can have a maximum of:
-- five `ActionRow`s per message
+- five `ActionRows` per message
 - five buttons (or any other component type) within an `ActionRow`
 :::
 
-Now, to create a button we use the `MessageActionRow()` and `MessageButton()` builder functions and then pass the resulting object to `CommandInteraction#reply()` as `InteractionReplyOptions` as such:
+Now, to create a button we use the `MessageActionRow()` and `MessageButton()` builder functions and then pass the resulting object to `CommandInteraction#reply()` as `InteractionReplyOptions` like this:
 
-```js {1,8-14,16}
+```js {1,8-13,15}
 const { MessageActionRow, MessageButton } = require('discord.js');
 
 client.on('interaction', async interaction => {
@@ -35,8 +35,8 @@ client.on('interaction', async interaction => {
 });
 ```
 
-::: warning
-The custom id a dev defined string that can hold up to 100 characters.
+::: tip
+The custom id is a dev defined string that can hold up to 100 characters.
 :::
 
 Restart your bot and then send the command to a channel your bot has access to. If all goes well, you should see something like this:
@@ -53,7 +53,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 
 You can of course also send message components within an ephemeral response or alongside message embeds:
 
-```js {1,16-20,22}
+```js {1,15-19,21}
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 
 client.on('interaction', async interaction => {
@@ -74,7 +74,7 @@ client.on('interaction', async interaction => {
 		.setURL('https://discord.js.org/')
 		.setDescription('Some description here');
 
-		await interaction.reply('Pong!', { ephemeral: true, embeds:[embed], components: [row] });
+		await interaction.reply('Pong!', { ephemeral: true, embeds: [embed], components: [row] });
 	}
 });
 ```
@@ -85,7 +85,6 @@ Restart your bot and then send the command to a channel your bot has access to. 
 <div is="discord-messages">
 	<discord-message profile="bot">
 		Pong! (ephemeral + components)
-	</discord-message>
 		<discord-embed
 			slot="embeds"
 			color="#0099ff"
@@ -104,7 +103,7 @@ Now you know all there is to building and sending a `MessageButton`! Let's move 
 
 Whilst you can receive and handle a `ButtonInteraction` via the interaction event, we reccomend you use one of the collectors we'll be covering in the next section. Now to receive a `ButtonInteraction`, simply attach an event listener to your client and also use the `Interaction#isButton()` typeguard to make sure you only receive button interactions:
 
-```js
+```js {2}
 client.on('interaction', interaction => {
 	if (!interaction.isButton()) return;
 	console.log(interaction);
@@ -134,7 +133,7 @@ client.on('message', message => {
 
 As with other types of collectors, you can also use a promise-based collector like this:
 
-```js
+```js {4-6}
 client.on('message', message => {
 	const filter = (interaction) => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
 
@@ -174,7 +173,7 @@ client.on('interaction', async interaction => {
 
 Additionally to deferring the response of the interaction, you can defer the button, which will trigger a loading state:
 
-```js {1,4-7}
+```js {1,5-9}
 const wait = require('util').promisify(setTimeout);
 
 client.on('interaction', async interaction => {
