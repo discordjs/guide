@@ -1,3 +1,5 @@
+@import './palette.scss';
+
 .custom-container.danger,
 details.custom-container.details,
 .custom-container.tip,
@@ -10,4 +12,18 @@ details.custom-container.details,
 .custom-container.tip,
 .custom-container.warning {
 	border-radius: 6px;
+}
+
+// NOTE: Overriding $highlightLineBgColor in ./palette.scss doesn't work
+// as of beta.14
+
+div[class*=language-] {
+	.highlight-lines .highlight-line,
+	&.line-numbers-mode .highlight-lines .highlight-line::before {
+		background-color: $highlightLineBgColor;
+	}
+
+	&.line-numbers-mode::after {
+		border-right-color: $highlightLineBgColor;
+	}
 }
