@@ -187,9 +187,17 @@ client.on('interaction', async interaction => {
 });
 ```
 
+
 ## Button styles
 
 Currently there are five different button styles available:
 
+* `PRIMARY` a blurple button
+* `SECONDARY` a grey button
+* `SUCCESS` a green button
+* `DANGER` a red button
+* `LINK` a button that navigates to a URL
 
-
+::: warning
+Only `LINK` buttons can have a `url`. `LINK` buttons can _not_ have a `custom_id`.
+:::
