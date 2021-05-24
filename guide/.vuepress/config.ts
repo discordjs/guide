@@ -22,6 +22,7 @@ export default defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 		['meta', { property: 'og:image', content: '/meta-image.png' }],
 	],
 	themeConfig: {
+		contributors: false,
 		sidebar,
 		repo: 'discordjs/guide',
 		docsDir: 'guide',
