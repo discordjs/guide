@@ -15,7 +15,7 @@ You can have a maximum of:
 
 Now, to create a button we use the `MessageActionRow()` and `MessageButton()` builder functions and then pass the resulting object to `CommandInteraction#reply()` as `InteractionReplyOptions` like this:
 
-```js {1,8-13,15}
+```js {1,7-11,13}
 const { MessageActionRow, MessageButton } = require('discord.js');
 
 client.on('interaction', async interaction => {
