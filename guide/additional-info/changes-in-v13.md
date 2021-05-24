@@ -6,7 +6,7 @@ v13 requires Node 14.x or higher to use, so make sure you're up to date. To chec
 
 Once you've got Node up-to-date, you can install v13 by running `npm install discord.js` in your terminal or command prompt for text-only use, or `npm install discord.js @discordjs/opus` for voice support.
 
-You can check your discord.js version with `npm list discord.js`. Should it still show v12.x uninstall (`npm uninstall discord.js`) and re-install discord.js and make sure the entry in your package.json does not prevent a major version update. Please refer to the [npm documentation](https://docs.npmjs.com/files/package.json#dependencies) for this.
+You can check your discord.js version with `npm list discord.js`. Should it still show v12.x, uninstall (`npm uninstall discord.js`) and re-install discord.js and make sure the entry in your package.json does not prevent a major version update. Please refer to the [npm documentation](https://docs.npmjs.com/files/package.json#dependencies) for this.
 
 ## API Version
 
@@ -50,11 +50,11 @@ The Discord API now allows bots much more granular control over mention parsing,
 
 `Message.reply()` will no longer result in the bot prepending a user mention to the content, replacing the behavior with Discord's reply feature.
 
-`MessageOptions.reply` no longer takes a User ID. It has been replaced with a `ReplyOptions` type, expecting `MessageOptions.reply.messageReference` as a Message ID
+`MessageOptions.reply` no longer takes a User ID. It has been replaced with a `ReplyOptions` type, expecting `MessageOptions.reply.messageReference` as a Message ID.
 
 ```diff
-- channel.send('content', { reply: '123456789012345678' })` // User ID
-+ channel.send('content', { reply: { messageReference: '765432109876543219' }})` // Message ID
+- channel.send('content', { reply: '123456789012345678' }); // User ID
++ channel.send('content', { reply: { messageReference: '765432109876543219' }}); // Message ID
 ```
 
 The new `MessageOptions.allowedMentions.repliedUser` boolean option determines if the reply will notify the author of the original message.
@@ -142,15 +142,15 @@ To reduce caching, discord.js will no longer store an edit history. You will nee
 
 #### ClientUser#setActivity
 
-This method no longer returns a Promise
+This method no longer returns a Promise.
 
 #### ClientUser#setAFK
 
-This method no longer returns a Promise
+This method no longer returns a Promise.
 
 #### ClientUser#setPresence
 
-`PresenceData#activity` is replaced with `PresenceData#activities` which now requires an `Array<ActivitiesOptions>`
+`PresenceData#activity` is replaced with `PresenceData#activities` which now requires an `Array<ActivitiesOptions>`.
 
 ```diff
 - client.user.setPresence({ activity: { name: 'with discord.js' } });
@@ -161,7 +161,7 @@ This method no longer returns a Promise.
 
 #### ClientUser#setStatus
 
-This method no longer returns a Promise
+This method no longer returns a Promise.
 
 ### Guild
 
@@ -251,7 +251,7 @@ This shortcut method has been removed.
 
 #### ReactionUserManager#fetch
 
-The `before` option has been removed as it was not supported by the API
+The `before` option has been removed as it was not supported by the API.
 
 ### RoleManager
 
@@ -284,7 +284,7 @@ This means the user no longer needs to pass defaults to fill each positional par
 
 #### Shard#spawn
 
-The `spawnTimeout` param has been renamed to `timeout`
+The `spawnTimeout` param has been renamed to `timeout`.
 
 ### ShardClientUtil
 
@@ -367,7 +367,7 @@ New class `ApplicationFlags`, a bitfield for ClientApplication flags.
 
 #### Channel#isText()
 
-The new `Channel#isText()` function provides an easy way for TypeScript developers to determine if a channel is Text-Based ("dm", "text", "news")
+The new `Channel#isText()` function provides an easy way for TypeScript developers to determine if a channel is Text-Based ("dm", "text", "news").
 
 ### CollectorOptions
 
@@ -397,7 +397,7 @@ In addition to the existing methods, it now supports `GuildEmojiManager#fetch`.
 
 #### Guild#nsfw
 
-Guilds can now be marked as NSFW
+Guilds can now be marked as NSFW.
 
 #### Guild#owner
 
@@ -420,7 +420,7 @@ The new `GuildBanManager` provides improved support for handling and caching ban
 
 #### GuildChannel#clone
 
-The `GuildChannel#clone` method now supports setting the `position` property
+The `GuildChannel#clone` method now supports setting the `position` property.
 
 ### GuildManager
 
@@ -456,7 +456,7 @@ Approximately equivalent to `GuildMember#edit(data, reason)` but does not resolv
 
 `guild.members.kick('123456789012345678', reason)`
 
-Equivalent to `GuildMember#kick(reason)`
+Equivalent to `GuildMember#kick(reason)`.
 
 #### GuildMemberManager#search
 
@@ -480,7 +480,7 @@ Gets the premium subscriber (booster) role if present on the member.
 
 ### GuildTemplate
 
-API support for [Server Templates](https://discord.com/developers/docs/resources/template)
+API support for [Server Templates](https://discord.com/developers/docs/resources/template).
 
 ### Integration
 
@@ -508,7 +508,7 @@ Added support for `<:name:id>` and `<a:name:id>` as valid inputs to `Message#rea
 
 #### Message#stickers
 
-New Collection property containing any stickers which were in the message
+New Collection property containing any stickers which were in the message.
 
 ### MessageAttachment
 
@@ -524,13 +524,13 @@ Methods were added to `MessageManager` to provide API support for uncached messa
 
 `channel.messages.crosspost('765432109876543210')`
 
-Equivalent to `message.crosspost()`
+Equivalent to `message.crosspost()`.
 
 #### MessageManager#edit
 
 `channel.messages.edit('765432109876543210', content, options)`
 
-Equivalent to `message.edit(content, options)`
+Equivalent to `message.edit(content, options)`.
 
 #### MessageManager#pin
 
@@ -556,19 +556,19 @@ Approximately equivalent to `message.unpin(options)` but does not resolve to a M
 
 `channel.addFollower(channel)`
 
-Provides API support for bots to follow announcements in other channels
+Provides API support for bots to follow announcements in other channels.
 
 #### NewsChannel#setType
 
 `channel.setType('text')`
 
-Allows conversion between NewsChannel and TextChannel
+Allows conversion between NewsChannel and TextChannel.
 
 ### Permissions
 
 #### Permissions#STAGE_MODERATOR
 
-Static bitfield representing the permissions required to moderate a Stage Channel
+Static bitfield representing the permissions required to moderate a Stage Channel.
 
 ### Role
 
@@ -582,7 +582,7 @@ Tags for roles belonging to bots, integrations, or premium subscribers.
 
 `guild.roles.botRoleFor(user)`
 
-Gets the managed role a bot created when joining the guild if any.
+Gets the managed role a bot created when joining the guild, if any.
 
 #### RoleManager#premiumSubscriberRole
 
