@@ -1,6 +1,6 @@
 # Button interactions
 
-With the components API you can create interactive message components. In this page we'll be focusing on how to send, receive and respond to buttons using discord.js!
+With the components API, you can create interactive message components. In this page, we'll be focusing on how to send, receive and respond to buttons using discord.js!
 
 
 ## Building and sending buttons
