@@ -1,0 +1,38 @@
+@media (max-width: 719px) {
+	.theme-container.sidebar-open .sidebar {
+		top: 0;
+	}
+}
+
+.sidebar {
+	top: 4rem;
+	font-size: 14px;
+
+	& > .sidebar-links {
+		padding: 1.25rem 0.5rem;
+
+		.sidebar-group {
+			.sidebar-heading {
+				font-size: 1em;
+				font-weight: 700;
+				text-transform: uppercase;
+			}
+
+			.sidebar-link {
+				border-radius: 2px 0 0 2px;
+
+				&.active {
+					color: $blurple530;
+					border-left-width: 4px;
+					border-left-color: $blurple530;
+				}
+
+				&:hover,
+				&.active:hover {
+					color: $blurple500;
+					border-left-color: $blurple500;
+				}
+			}
+		}
+	}
+}
