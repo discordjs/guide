@@ -194,5 +194,6 @@ Currently there are five different button styles available:
 * `LINK` a button that navigates to a URL
 
 ::: warning
-Only `LINK` buttons can have a `url`. `LINK` buttons can _not_ have a `custom_id`.
+Only `LINK` buttons can have a `url`. `LINK` buttons can _not_ have a `custom_id`. `LINK` buttons also do _not_ send an interaction event when clicked.
 :::
+
