@@ -109,7 +109,7 @@ client.on('interaction', interaction => {
 
 ## Button collectors
 
-These work quite similarly to message collectors, except that you apply them on a message rather than a channel.
+These work quite similarly to reaction collectors, except that you will receive instances of the ``ButtonInteraction` class as collected items.
 
 ### ButtonInteractionCollector
 
@@ -156,7 +156,7 @@ The following methods behave exactly the same as on the `CommandInteraction` cla
 
 ### Updating the button message
 
-The `ButtonInteraction` class provides a method to update the message the button is attached to, by using `ButtonInteraction#update()` as follows:
+The `ButtonInteraction` class provides a method to update the message the button is attached to, by using `ButtonInteraction#update()`. We'll be passing an empty array as components, which will remove the button after clicking it:
 
 ```js {1,3}
 client.on('interaction', async interaction => {
@@ -186,7 +186,7 @@ client.on('interaction', async interaction => {
 ## Button styles
 
 Currently there are five different button styles available:
-
+<!--- vue-discord-message doesn't yet have support for inline replies/interactions/ephemeral messages/components -->
 * `PRIMARY` a blurple button
 * `SECONDARY` a grey button
 * `SUCCESS` a green button
