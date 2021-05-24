@@ -24,8 +24,7 @@ export default defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 	themeConfig: {
 		sidebar,
 		repo: 'discordjs/guide',
-		docsDir: 'docs',
-		docsBranch: 'guide',
+		docsDir: 'guide',
 		sidebarDepth: 3,
 		editLinks: true,
 		lastUpdated: true,
