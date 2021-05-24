@@ -113,7 +113,7 @@ These work quite similarly to reaction collectors, except that you will receive 
 
 ### ButtonInteractionCollector
 
-To create a basic event-based `ButtonInteractionCollector` simply do as follows:
+To create a basic event-based `ButtonInteractionCollector`, simply do as follows:
 
 ```js
 client.on('message', message => {
