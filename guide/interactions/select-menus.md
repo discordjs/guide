@@ -39,7 +39,7 @@ client.on('interaction', async interaction => {
 					},
 				]));
 
-		await interaction.reply('Pong!', row);
+		await interaction.reply('Pong!', { components: [row] });
 	}
 });
 ```

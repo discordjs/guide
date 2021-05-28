@@ -28,7 +28,7 @@ client.on('interaction', async interaction => {
 				.setLabel('primary')
 				.setStyle('PRIMARY'));
 
-		await interaction.reply('Pong!', row);
+		await interaction.reply('Pong!', { components: [row] });
 	}
 });
 ```
