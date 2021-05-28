@@ -10,7 +10,7 @@ Buttons are part of the `MessageComponent` class, which can be sent via messages
 ::: warning
 You can have a maximum of:
 - five `ActionRows` per message
-- five buttons (or any other component type) within an `ActionRow`
+- five buttons within an `ActionRow`
 :::
 
 Now, to create a button we use the `MessageActionRow()` and `MessageButton()` builder functions and then pass the resulting object to `CommandInteraction#reply()` as `InteractionReplyOptions` like this:
@@ -101,7 +101,7 @@ Whilst you can receive and handle a `MessageComponentInteraction` via the intera
 
 ```js {2}
 client.on('interaction', interaction => {
-	if (!interaction.isButton()) return;
+	if (!interaction.isMessageComponent()) return;
 	console.log(interaction);
 });
 ```
