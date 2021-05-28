@@ -30,15 +30,14 @@ client.on('interaction', async interaction => {
 					{
 					  description: 'This is a description',
 					  label: 'Select me',
-					  value: 'first_selection'
+					  value: 'first_selection',
 					 },
 					{
 					  description: 'This is also a description',
 					  label: 'You can select me too',
-					  value: 'second_selection'
-					}
-				])
-			);
+					  value: 'second_selection',
+					},
+				]));
 
 		await interaction.reply('Pong!', row);
 	}
@@ -78,15 +77,14 @@ client.on('interaction', async interaction => {
 					{
 					  description: 'This is a description',
 					  label: 'Select me',
-					  value: 'first_selection'
+					  value: 'first_selection',
 					 },
 					{
 					  description: 'This is also a description',
 					  label: 'You can select me too',
-					  value: 'second_selection'
-					}
-				])
-			);
+					  value: 'second_selection',
+					},
+				]));
 
 		const embed = new MessageEmbed()
 			.setColor('#0099ff')
@@ -232,20 +230,19 @@ client.on('interaction', async interaction => {
 					{
 					  description: 'This is a description',
 					  label: 'Select me',
-					  value: 'first_selection'
+					  value: 'first_selection',
 					 },
 					{
 					  description: 'This is also a description',
 					  label: 'You can select me too',
-					  value: 'second_selection'
+					  value: 'second_selection',
 					},
 					{
 					  description: 'This is a description as well',
 					  label: 'I am also an option',
-					  value: 'third_selection'
+					  value: 'third_selection',
 					},
-				])
-			);
+				]));
 
 		await interaction.reply('Pong!', row);
 	}
