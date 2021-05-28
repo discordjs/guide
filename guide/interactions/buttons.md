@@ -1,4 +1,4 @@
-# Button interactions
+# Buttons
 
 With the components API, you can create interactive message components. In this page, we'll be focusing on how to send, receive and respond to buttons using discord.js!
 
@@ -97,7 +97,7 @@ Now you know all there is to building and sending a `MessageButton`! Let's move 
 
 ## Receiving buttons
 
-Whilst you can receive and handle a `ButtonInteraction` via the interaction event, we reccomend you use one of the collectors we'll be covering in the next section. Now to receive a `ButtonInteraction`, simply attach an event listener to your client and also use the `Interaction#isButton()` typeguard to make sure you only receive button interactions:
+Whilst you can receive and handle a `MessageComponentInteraction` via the interaction event, we reccomend you use one of the collectors we'll be covering in the next section. Now to receive a `MessageComponentInteraction`, simply attach an event listener to your client and also use the `Interaction#isButton()` typeguard to make sure you only receive button interactions:
 
 ```js {2}
 client.on('interaction', interaction => {
@@ -109,23 +109,23 @@ client.on('interaction', interaction => {
 
 ## Button collectors
 
-These work quite similarly to reaction collectors, except that you will receive instances of the ``ButtonInteraction` class as collected items.
+These work quite similarly to reaction collectors, except that you will receive instances of the `MessageComponentInteraction` class as collected items.
 
-### ButtonInteractionCollector
+### MessageComponentInteractionCollector
 
-To create a basic event-based `ButtonInteractionCollector`, simply do as follows:
+To create a basic event-based `MessageComponentInteractionCollector`, simply do as follows:
 
 ```js
 client.on('message', message => {
 	const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
 
-	const collector = message.createButtonInteractionCollector(filter, { time: 15000 });
+	const collector = message.createMessageComponentInteractionCollector(filter, { time: 15000 });
 	collector.on('collect', i => console.log(`Collected ${i.customID}`));
 	collector.on('end', collected => console.log(`Collected ${collected.size} items`));
 });
 ```
 
-### awaitButtonInteractions
+### awaitMessageComponentInteractions
 
 As with other types of collectors, you can also use a promise-based collector like this:
 
@@ -133,7 +133,7 @@ As with other types of collectors, you can also use a promise-based collector li
 client.on('message', message => {
 	const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
 
-	message.awaitButtonInteraction(filter, { time: 15000 })
+	message.awaitMessageComponentInteraction(filter, { time: 15000 })
 		.then(collected => console.log(`Collected ${collected.size} interactions`))
 		.catch(console.error);
 });
@@ -142,7 +142,7 @@ client.on('message', message => {
 
 ## Responding to buttons
 
-The `ButtonInteraction` class has similar methods as the `CommandInteraction` class, which we we'll be covering in the following section:
+The `MessageComponentInteraction` class has similar methods as the `CommandInteraction` class, which we we'll be covering in the following section:
 
 ::: tip
 The following methods behave exactly the same as on the `CommandInteraction` class:
@@ -156,7 +156,7 @@ The following methods behave exactly the same as on the `CommandInteraction` cla
 
 ### Updating the button message
 
-The `ButtonInteraction` class provides a method to update the message the button is attached to, by using `ButtonInteraction#update()`. We'll be passing an empty array as components, which will remove the button after clicking it:
+The `MessageComponentInteraction` class provides a method to update the message the button is attached to, by using `MessageComponentInteraction#update()`. We'll be passing an empty array as components, which will remove the button after clicking it:
 
 ```js {1,3}
 client.on('interaction', async interaction => {
