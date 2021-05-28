@@ -97,11 +97,11 @@ Now you know all there is to building and sending a `MessageButton`! Let's move 
 
 ## Receiving buttons
 
-Whilst you can receive and handle a `MessageComponentInteraction` via the interaction event, we reccomend you use one of the collectors we'll be covering in the next section. Now to receive a `MessageComponentInteraction`, simply attach an event listener to your client and also use the `Interaction#isComponent()` typeguard to make sure you only receive component interactions:
+Whilst you can receive and handle a `MessageComponentInteraction` via the interaction event, we reccomend you use one of the collectors we'll be covering in the next section. Now to receive a `MessageComponentInteraction`, simply attach an event listener to your client and also use the `Interaction#isMessageComponent()` typeguard to make sure you only receive component interactions:
 
 ```js {2}
 client.on('interaction', interaction => {
-	if (!interaction.isComponent() && interaction.componentType !== 'BUTTON') return;
+	if (!interaction.isMessageComponent() && interaction.componentType !== 'BUTTON') return;
 	console.log(interaction);
 });
 ```
@@ -164,7 +164,7 @@ The `MessageComponentInteraction` class provides a method to update the message 
 
 ```js {1,3}
 client.on('interaction', async interaction => {
-	if (!interaction.isComponent() && interaction.componentType !== 'BUTTON') return;
+	if (!interaction.isMessageComponent() && interaction.componentType !== 'BUTTON') return;
 	if (interaction.customID === 'primary') await interaction.update('A button was clicked!', { components: [] });
 });
 ```
@@ -177,7 +177,7 @@ Additionally to deferring the response of the interaction, you can defer the but
 const wait = require('util').promisify(setTimeout);
 
 client.on('interaction', async interaction => {
-	if (!interaction.isComponent() && interaction.componentType !== 'BUTTON') return;
+	if (!interaction.isMessageComponent() && interaction.componentType !== 'BUTTON') return;
 	if (interaction.customID === 'primary') {
 		await interaction.deferUpdate();
 		await wait(4000);
