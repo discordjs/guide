@@ -109,7 +109,11 @@ client.on('interaction', interaction => {
 
 ## Button collectors
 
-These work quite similarly to reaction collectors, except that you will receive instances of the `MessageComponentInteraction` class as collected items.
+These work quite similarly to message and reaction collectors, except that you will receive instances of the `MessageComponentInteraction` class as collected items.
+
+::: tip
+You can create the collectors on either a `message` or a `channel`.
+:::
 
 ### MessageComponentInteractionCollector
 
