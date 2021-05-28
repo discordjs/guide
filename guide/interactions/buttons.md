@@ -101,7 +101,7 @@ Whilst you can receive and handle a `MessageComponentInteraction` via the intera
 
 ```js {2}
 client.on('interaction', interaction => {
-	if (!interaction.isMessageComponent()) return;
+	if (!interaction.isComponent() && interaction.componentType !== 'BUTTON') return;
 	console.log(interaction);
 });
 ```
