@@ -228,6 +228,10 @@ Interaction responses run on top of webhooks thus, they inherit certain aspects 
 
 ## Fetching and deleting responses
 
+::: danger
+You can _not_ fetch nor delete an ephemeral message.
+:::
+
 Additionally to replying to a slash command you may also want to delete the initial reply. You can do this by using `CommandInteraction#deleteReply()` like this:
 
 ```js {6}
