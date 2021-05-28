@@ -15,7 +15,7 @@ You can have a maximum of:
 
 Now, to create a select menu we use the `MessageActionRow()` and `MessageSelector()` builder functions and then pass the resulting object to `CommandInteraction#reply()` as `InteractionReplyOptions` like this:
 
-```js {1,7-23,25}
+```js {1,7-22,24}
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 
 client.on('interaction', async interaction => {
@@ -62,7 +62,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 
 You can of course also send message components within an ephemeral response or alongside message embeds:
 
-```js {1,7-23}
+```js {1,7-22}
 const { MessageActionRow, MessageSelectMenu, MessageEmbed } = require('discord.js');
 
 client.on('interaction', async interaction => {
@@ -213,7 +213,7 @@ client.on('interaction', async interaction => {
 
 A select menu is not bound to only one selection. You can specify a min and max amount of options that have to be selected. You can use `MessageSelectmMenu()#setMinValues()` and `MessageSelectMenu()#setMaxValues()` to select the minimumand maximum of required options to be selected by the user:
 
-```js {1,7-30,32}
+```js {1,7-29,31}
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 
 client.on('interaction', async interaction => {
