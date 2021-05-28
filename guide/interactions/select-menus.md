@@ -28,14 +28,14 @@ client.on('interaction', async interaction => {
 				.setPlaceholder('Nothing selected')
 				.addOptions([
 					{
-					  description: 'This is a description',
-					  label: 'Select me',
-					  value: 'first_selection',
-					 },
+						label: 'Select me',
+						description: 'This is a description',
+						value: 'first_selection',
+					},
 					{
-					  description: 'This is also a description',
-					  label: 'You can select me too',
-					  value: 'second_selection',
+						label: 'You can select me too',
+						description: 'This is also a description',
+						value: 'second_selection',
 					},
 				]));
 
@@ -75,14 +75,14 @@ client.on('interaction', async interaction => {
 				.setPlaceholder('Nothing selected')
 				.addOptions([
 					{
-					  description: 'This is a description',
-					  label: 'Select me',
-					  value: 'first_selection',
-					 },
+						label: 'Select me',
+						description: 'This is a description',
+						value: 'first_selection',
+					},
 					{
-					  description: 'This is also a description',
-					  label: 'You can select me too',
-					  value: 'second_selection',
+						label: 'You can select me too',
+						description: 'This is also a description',
+						value: 'second_selection',
 					},
 				]));
 
@@ -228,19 +228,19 @@ client.on('interaction', async interaction => {
 				.setMaxValues(3)
 				.addOptions([
 					{
-					  description: 'This is a description',
-					  label: 'Select me',
-					  value: 'first_selection',
-					 },
-					{
-					  description: 'This is also a description',
-					  label: 'You can select me too',
-					  value: 'second_selection',
+						label: 'Select me',
+						description: 'This is a description',
+						value: 'first_selection',
 					},
 					{
-					  description: 'This is a description as well',
-					  label: 'I am also an option',
-					  value: 'third_selection',
+						label: 'You can select me too',
+						description: 'This is also a description',
+						value: 'second_selection',
+					},
+					{
+						label: 'I am also an option',
+						description: 'This is a description as well',
+						value: 'third_selection',
 					},
 				]));
 
