@@ -213,3 +213,41 @@ client.on('interaction', async interaction => {
 
 ## Multi-select menus
 
+A select menu is not bound to only one selection. You can specify a min and max amount of options that have to be selected. You can use `MessageSelectmMenu()#setMinValues()` and `MessageSelectMenu()#setMaxValues()` to select the minimumand maximum of required options to be selected by the user:
+
+```js {1,7-11,13}
+const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+
+client.on('interaction', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'ping') {
+		const row = new MessageActionRow()
+			.addComponent(new MessageSelectMenu()
+				.setCustomID('select')
+				.setPlaceholder('Nothing selected')
+				.setMinValues(2)
+				.setMaxValues(3)
+				.addOptions([
+					{
+					  description: 'This is a description',
+					  label: 'Select me',
+					  value: 'first_selection'
+					 },
+					{
+					  description: 'This is also a description',
+					  label: 'You can select me too',
+					  value: 'second_selection'
+					},
+					{
+					  description: 'This is a description as well',
+					  label: 'I am also an option',
+					  value: 'third_selection'
+					},
+				])
+			);
+
+		await interaction.reply('Pong!', row);
+	}
+});
+```
