@@ -145,7 +145,7 @@ client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-		await interaction.defer(true);
+		await interaction.defer({ ephemeral: true });
 		await wait(4000);
 		await interaction.editReply('Pong!');
 	}
