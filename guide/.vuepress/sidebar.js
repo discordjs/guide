@@ -99,8 +99,7 @@ module.exports = {
 				'/miscellaneous/parsing-mention-arguments',
 				'/miscellaneous/useful-packages',
 			],
-		},
-		
+		},	
 		{
 			title: 'Databases',
 			children: [

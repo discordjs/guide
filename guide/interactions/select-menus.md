@@ -1,32 +1,44 @@
-# Buttons
+# Select menus
 
-With the components API, you can create interactive message components. In this page, we'll be focusing on how to send, receive and respond to buttons using discord.js!
+With the components API, you can create interactive message components. In this page, we'll be focusing on how to send, receive and respond to select menus using discord.js!
 
 
-## Building and sending buttons
+## Building and sending select menus
 
 Buttons are part of the `MessageComponent` class, which can be sent via messages or interaction responses. A button, as any other message component, must be in an `ActionRow`.
 
 ::: warning
 You can have a maximum of:
 - five `ActionRows` per message
-- five buttons within an `ActionRow`
+- one select menu (or any other component type) within an `ActionRow`
 :::
 
-Now, to create a button we use the `MessageActionRow()` and `MessageButton()` builder functions and then pass the resulting object to `CommandInteraction#reply()` as `InteractionReplyOptions` like this:
+Now, to create a button we use the `MessageActionRow()` and `MessageSelector()` builder functions and then pass the resulting object to `CommandInteraction#reply()` as `InteractionReplyOptions` like this:
 
 ```js {1,7-11,13}
-const { MessageActionRow, MessageButton } = require('discord.js');
+const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
 		const row = new MessageActionRow()
-			.addComponent(new MessageButton()
-				.setCustomID('primary')
-				.setLabel('primary')
-				.setStyle('PRIMARY'));
+			.addComponent(new MessageSelectMenu()
+				.setCustomID('select')
+				.setPlaceholder('Nothing selected')
+				.addOptions([
+					{
+					  description: 'This is a description',
+					  label: 'Select me',
+					  value: 'first_selection'
+					 },
+					{
+					  description: 'This is also a description',
+					  label: 'You can select me too',
+					  value: 'second_selection'
+					}
+				])
+			);
 
 		await interaction.reply('Pong!', row);
 	}
@@ -52,17 +64,29 @@ Restart your bot and then send the command to a channel your bot has access to. 
 You can of course also send message components within an ephemeral response or alongside message embeds:
 
 ```js {1,13-19}
-const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
+const { MessageActionRow, MessageSelectMenu, MessageEmbed } = require('discord.js');
 
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
 		const row = new MessageActionRow()
-			.addComponent(new MessageButton()
-				.setCustomID('primary')
-				.setLabel('primary')
-				.setStyle('PRIMARY'));
+			.addComponent(new MessageSelectMenu()
+				.setCustomID('select')
+				.setPlaceholder('Nothing selected')
+				.addOptions([
+					{
+					  description: 'This is a description',
+					  label: 'Select me',
+					  value: 'first_selection'
+					 },
+					{
+					  description: 'This is also a description',
+					  label: 'You can select me too',
+					  value: 'second_selection'
+					}
+				])
+			);
 
 		const embed = new MessageEmbed()
 			.setColor('#0099ff')
@@ -92,16 +116,16 @@ Restart your bot and then send the command to a channel your bot has access to. 
 	</discord-message>
 </div>
 
-Now you know all there is to building and sending a `MessageButton`! Let's move on to how to receive buttons!
+Now you know all there is to building and sending a `SelectMenu`! Let's move on to how to receive selected options!
 
 
-## Receiving buttons
+## Receiving Select menus
 
 Whilst you can receive and handle a `MessageComponentInteraction` via the interaction event, we reccomend you use one of the collectors we'll be covering in the next section. Now to receive a `MessageComponentInteraction`, simply attach an event listener to your client and also use the `Interaction#isComponent()` typeguard to make sure you only receive component interactions:
 
 ```js {2}
 client.on('interaction', interaction => {
-	if (!interaction.isComponent() && interaction.componentType !== 'BUTTON') return;
+	if (!interaction.isComponent() && interaction.componentType !== 'SELECT_MENU') return;
 	console.log(interaction);
 });
 ```
@@ -121,7 +145,7 @@ To create a basic event-based `MessageComponentInteractionCollector`, simply do 
 
 ```js
 client.on('message', message => {
-	const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
+	const filter = interaction => interaction.customID === 'select' && interaction.user.id === '122157285790187530';
 
 	const collector = message.createMessageComponentInteractionCollector(filter, { time: 15000 });
 	collector.on('collect', i => console.log(`Collected ${i.customID}`));
@@ -144,7 +168,7 @@ client.on('message', message => {
 ```
 
 
-## Responding to buttons
+## Responding to select menus
 
 The `MessageComponentInteraction` class has similar methods as the `CommandInteraction` class, which we we'll be covering in the following section:
 
@@ -158,18 +182,18 @@ The following methods behave exactly the same as on the `CommandInteraction` cla
 - `followUp()`
 :::
 
-### Updating the button message
+### Updating the select menu's message
 
-The `MessageComponentInteraction` class provides a method to update the message the button is attached to, by using `MessageComponentInteraction#update()`. We'll be passing an empty array as components, which will remove the button after clicking it:
+The `MessageComponentInteraction` class provides a method to update the message the button is attached to, by using `MessageComponentInteraction#update()`. We'll be passing an empty array as components, which will remove the menu after selecting an option:
 
 ```js {1,3}
 client.on('interaction', async interaction => {
-	if (!interaction.isComponent() && interaction.componentType !== 'BUTTON') return;
-	if (interaction.customID === 'primary') await interaction.update('A button was clicked!', { components: [] });
+	if (!interaction.isComponent() && interaction.componentType !== 'SELECT_MENU') return;
+	if (interaction.customID === 'primary') await interaction.update('Something was selected', { components: [] });
 });
 ```
 
-### Deferring and updating the button message
+### Deferring and updating the select menu's message
 
 Additionally to deferring the response of the interaction, you can defer the button, which will trigger a loading state:
 
@@ -177,27 +201,15 @@ Additionally to deferring the response of the interaction, you can defer the but
 const wait = require('util').promisify(setTimeout);
 
 client.on('interaction', async interaction => {
-	if (!interaction.isComponent() && interaction.componentType !== 'BUTTON') return;
+	if (!interaction.isComponent() && interaction.componentType !== 'SELECT_MENU') return;
 	if (interaction.customID === 'primary') {
 		await interaction.deferUpdate();
 		await wait(4000);
-		await interaction.update('A button was clicked!', { components: [] });
+		await interaction.update('Something was selected!', { components: [] });
 	}
 });
 ```
 
 
-## Button styles
-
-Currently there are five different button styles available:
-<!--- vue-discord-message doesn't yet have support for inline replies/interactions/ephemeral messages/components -->
-* `PRIMARY` a blurple button
-* `SECONDARY` a grey button
-* `SUCCESS` a green button
-* `DANGER` a red button
-* `LINK` a button that navigates to a URL
-
-::: warning
-Only `LINK` buttons can have a `url`. `LINK` buttons can _not_ have a `custom_id`. `LINK` buttons also do _not_ send an interaction event when clicked.
-:::
+## Multi-select menus
 
