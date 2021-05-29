@@ -27,7 +27,7 @@ client.on('interaction', async interaction => {
 
 	if (interaction.commandName === 'ping') {
 		const row = new MessageActionRow()
-			.addComponent(new MessageButton()
+			.addComponents(new MessageButton()
 				.setCustomID('primary')
 				.setLabel('primary')
 				.setStyle('PRIMARY'));
@@ -204,4 +204,3 @@ Currently there are five different button styles available:
 ::: warning
 Only `LINK` buttons can have a `url`. `LINK` buttons can _not_ have a `custom_id`. `LINK` buttons also do _not_ send an interaction event when clicked.
 :::
-
