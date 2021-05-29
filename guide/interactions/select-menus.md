@@ -27,7 +27,7 @@ client.on('interaction', async interaction => {
 
 	if (interaction.commandName === 'ping') {
 		const row = new MessageActionRow()
-			.addComponent(new MessageSelectMenu()
+			.addComponents(new MessageSelectMenu()
 				.setCustomID('select')
 				.setPlaceholder('Nothing selected')
 				.addOptions([
