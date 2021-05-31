@@ -227,28 +227,30 @@ client.on('interaction', async interaction => {
 
 	if (interaction.commandName === 'ping') {
 		const row = new MessageActionRow()
-			.addComponents(new MessageSelectMenu()
-				.setCustomID('select')
-				.setPlaceholder('Nothing selected')
-				.setMinValues(2)
-				.setMaxValues(3)
-				.addOptions([
-					{
-						label: 'Select me',
-						description: 'This is a description',
-						value: 'first_selection',
-					},
-					{
-						label: 'You can select me too',
-						description: 'This is also a description',
-						value: 'second_selection',
-					},
-					{
-						label: 'I am also an option',
-						description: 'This is a description as well',
-						value: 'third_selection',
-					},
-				]));
+			.addComponents(
+				new MessageSelectMenu()
+					.setCustomID('select')
+					.setPlaceholder('Nothing selected')
+					.setMinValues(2)
+					.setMaxValues(3)
+					.addOptions([
+						{
+							label: 'Select me',
+							description: 'This is a description',
+							value: 'first_option',
+						},
+						{
+							label: 'You can select me too',
+							description: 'This is also a description',
+							value: 'second_option',
+						},
+						{
+							label: 'I am also an option',
+							description: 'This is a description as well',
+							value: 'third_option',
+						},
+					])
+			);
 
 		await interaction.reply('Pong!', row);
 	}
