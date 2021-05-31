@@ -167,7 +167,9 @@ The `MessageComponentInteraction` class provides a method to update the message 
 ```js {1,3}
 client.on('interaction', async interaction => {
 	if (!interaction.isMessageComponent() && interaction.componentType !== 'BUTTON') return;
-	if (interaction.customID === 'primary') await interaction.update('A button was clicked!', { components: [] });
+	if (interaction.customID === 'primary') {
+		await interaction.update('A button was clicked!', { components: [] });
+	}
 });
 ```
 
