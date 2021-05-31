@@ -123,7 +123,7 @@ You can create the collectors on either a `message` or a `channel`.
 
 ### MessageComponentInteractionCollector
 
-To create a basic event-based `MessageComponentInteractionCollector`, simply do as follows:
+Here's how you can create a basic event-based `MessageComponentInteractionCollector`:
 
 ```js
 client.on('message', message => {
