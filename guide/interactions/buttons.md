@@ -162,7 +162,7 @@ The `MessageComponentInteraction` class has similar methods as the `CommandInter
 
 ### Updating the button message
 
-The `MessageComponentInteraction` class provides a method to update the message the button is attached to, by using `MessageComponentInteraction#update()`. We'll be passing an empty array as components, which will remove the button after clicking it:
+The `MessageComponentInteraction` class provides a method to update the message the button is attached to, by using `MessageComponentInteraction#update()`. Passing an empty array to the `components` option will remove any buttons after one has been clicked.
 
 ```js {1,3}
 client.on('interaction', async interaction => {
