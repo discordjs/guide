@@ -27,10 +27,12 @@ client.on('interaction', async interaction => {
 
 	if (interaction.commandName === 'ping') {
 		const row = new MessageActionRow()
-			.addComponents(new MessageButton()
-				.setCustomID('primary')
-				.setLabel('primary')
-				.setStyle('PRIMARY'));
+			.addComponents(
+				new MessageButton()
+					.setCustomID('primary')
+					.setLabel('primary')
+					.setStyle('PRIMARY')
+			);
 
 		await interaction.reply('Pong!', { components: [row] });
 	}
