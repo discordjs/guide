@@ -40,7 +40,7 @@ client.on('interaction', async interaction => {
 ```
 
 ::: tip
-The custom id is a dev defined string that can hold up to 100 characters.
+The custom ID is a developer-defined string of up to 100 characters.
 :::
 
 Restart your bot and then send the command to a channel your bot has access to. If all goes well, you should see something like this:
