@@ -191,7 +191,9 @@ The `MessageComponentInteraction` class provides a method to update the message 
 ```js {1,3}
 client.on('interaction', async interaction => {
 	if (!interaction.isMessageComponent() && interaction.componentType !== 'SELECT_MENU') return;
-	if (interaction.customID === 'primary') await interaction.update('Something was selected', { components: [] });
+	if (interaction.customID === 'select') {
+		await interaction.update('Something was selected', { components: [] });
+	}
 });
 ```
 
