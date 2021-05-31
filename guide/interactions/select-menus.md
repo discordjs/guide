@@ -49,7 +49,7 @@ client.on('interaction', async interaction => {
 ```
 
 ::: tip
-The custom id is a dev defined string that can hold up to 100 characters.
+The custom ID is a developer-defined string of up to 100 characters.
 :::
 
 Restart your bot and then send the command to a channel your bot has access to. If all goes well, you should see something like this:
@@ -148,9 +148,9 @@ To create a basic event-based `MessageComponentInteractionCollector`, simply do 
 ```js
 client.on('message', message => {
 	const filter = interaction => interaction.customID === 'select' && interaction.user.id === '122157285790187530';
-
 	const collector = message.createMessageComponentInteractionCollector(filter, { time: 15000 });
-	collector.on('collect', i => console.log(`Collected ${i.customID}`));
+
+	collector.on('collect', interaction => console.log(`Collected ${interaction.customID}`));
 	collector.on('end', collected => console.log(`Collected ${collected.size} items`));
 });
 ```
@@ -188,7 +188,7 @@ The following methods behave exactly the same as on the `CommandInteraction` cla
 
 The `MessageComponentInteraction` class provides a method to update the message the button is attached to, by using `MessageComponentInteraction#update()`. We'll be passing an empty array as components, which will remove the menu after selecting an option:
 
-```js {1,3}
+```js {1,3-5}
 client.on('interaction', async interaction => {
 	if (!interaction.isMessageComponent() && interaction.componentType !== 'SELECT_MENU') return;
 	if (interaction.customID === 'select') {
@@ -219,7 +219,7 @@ client.on('interaction', async interaction => {
 
 A select menu is not bound to only one selection; you can specify a minimum and maximum amount of options that must be selected. You can use `MessageSelectMenu#setMinValues()` and `MessageSelectMenu#setMaxValues()` to determine these values.
 
-```js {1,7-29,31}
+```js {1,7-30,32}
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 
 client.on('interaction', async interaction => {
@@ -249,7 +249,7 @@ client.on('interaction', async interaction => {
 							description: 'This is a description as well',
 							value: 'third_option',
 						},
-					])
+					]),
 			);
 
 		await interaction.reply('Pong!', row);

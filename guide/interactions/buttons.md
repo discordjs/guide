@@ -19,7 +19,7 @@ You can have a maximum of:
 
 To create a button, you use the `MessageActionRow()` and `MessageButton()` builder functions and then pass the resulting object to `CommandInteraction#reply()` as `InteractionReplyOptions`, like so:
 
-```js {1,7-11,13}
+```js {1,7-13,15}
 const { MessageActionRow, MessageButton } = require('discord.js');
 
 client.on('interaction', async interaction => {
@@ -31,7 +31,7 @@ client.on('interaction', async interaction => {
 				new MessageButton()
 					.setCustomID('primary')
 					.setLabel('primary')
-					.setStyle('PRIMARY')
+					.setStyle('PRIMARY'),
 			);
 
 		await interaction.reply('Pong!', { components: [row] });
@@ -127,7 +127,7 @@ Here's how you can create a basic event-based `MessageComponentInteractionCollec
 
 ```js
 client.on('message', message => {
-	const filter = interaction => interaction.customID === 'select' && interaction.user.id === '122157285790187530';
+	const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
 	const collector = message.createMessageComponentInteractionCollector(filter, { time: 15000 });
 
 	collector.on('collect', interaction => console.log(`Collected ${interaction.customID}`));
@@ -164,7 +164,7 @@ The `MessageComponentInteraction` class has similar methods as the `CommandInter
 
 The `MessageComponentInteraction` class provides a method to update the message the button is attached to, by using `MessageComponentInteraction#update()`. Passing an empty array to the `components` option will remove any buttons after one has been clicked.
 
-```js {1,3}
+```js {1,3-5}
 client.on('interaction', async interaction => {
 	if (!interaction.isMessageComponent() && interaction.componentType !== 'BUTTON') return;
 	if (interaction.customID === 'primary') {
