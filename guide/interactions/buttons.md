@@ -55,7 +55,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 	</discord-message>
 </div>
 
-You can of course also send message components within an ephemeral response or alongside message embeds:
+You can also send message components within an ephemeral response or alongside message embeds.
 
 ```js {1,13-19}
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
