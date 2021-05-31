@@ -152,17 +152,13 @@ client.on('message', message => {
 
 ## Responding to buttons
 
-The `MessageComponentInteraction` class has similar methods as the `CommandInteraction` class, which we we'll be covering in the following section:
-
-::: tip
-The following methods behave exactly the same as on the `CommandInteraction` class:
+The `MessageComponentInteraction` class has similar methods as the `CommandInteraction` class. These methods behave exactly the same as on the `CommandInteraction` class:
 - `reply()`
 - `editReply()`
 - `defer()`
 - `fetchReply()`
 - `deleteReply()`
 - `followUp()`
-:::
 
 ### Updating the button message
 
