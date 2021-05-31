@@ -217,7 +217,7 @@ client.on('interaction', async interaction => {
 
 ## Multi-select menus
 
-A select menu is not bound to only one selection. You can specify a min and max amount of options that have to be selected. You can use `MessageSelectmMenu()#setMinValues()` and `MessageSelectMenu()#setMaxValues()` to select the minimumand maximum of required options to be selected by the user:
+A select menu is not bound to only one selection; you can specify a minimum and maximum amount of options that must be selected. You can use `MessageSelectMenu#setMinValues()` and `MessageSelectMenu#setMaxValues()` to determine these values.
 
 ```js {1,7-29,31}
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
