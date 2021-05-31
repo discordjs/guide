@@ -195,11 +195,11 @@ client.on('interaction', async interaction => {
 
 Currently there are five different button styles available:
 <!--- vue-discord-message doesn't yet have support for inline replies/interactions/ephemeral messages/components -->
-* `PRIMARY` a blurple button
-* `SECONDARY` a grey button
-* `SUCCESS` a green button
-* `DANGER` a red button
-* `LINK` a button that navigates to a URL
+- `PRIMARY`, a blurple button;
+- `SECONDARY`, a grey button;
+- `SUCCESS`, a green button;
+- `DANGER`, a red button;
+- `LINK`, a button that navigates to a URL.
 
 ::: warning
 Only `LINK` buttons can have a `url`. `LINK` buttons can _not_ have a `custom_id`. `LINK` buttons also do _not_ send an interaction event when clicked.
