@@ -127,10 +127,10 @@ Here's how you can create a basic event-based `MessageComponentInteractionCollec
 
 ```js
 client.on('message', message => {
-	const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
-
+	const filter = interaction => interaction.customID === 'select' && interaction.user.id === '122157285790187530';
 	const collector = message.createMessageComponentInteractionCollector(filter, { time: 15000 });
-	collector.on('collect', i => console.log(`Collected ${i.customID}`));
+
+	collector.on('collect', interaction => console.log(`Collected ${interaction.customID}`));
 	collector.on('end', collected => console.log(`Collected ${collected.size} items`));
 });
 ```
