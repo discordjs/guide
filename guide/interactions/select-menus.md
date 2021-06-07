@@ -161,7 +161,7 @@ As with other types of collectors, you can also use a promise-based collector li
 
 ```js {4-6}
 client.on('message', message => {
-	const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
+	const filter = interaction => interaction.customID === 'select' && interaction.user.id === '122157285790187530';
 
 	message.awaitMessageComponentInteractions(filter, { time: 15000 })
 		.then(collected => console.log(`Collected ${collected.size} interactions`))
