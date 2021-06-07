@@ -65,7 +65,7 @@ Take note of the `client id` and `client secret` fields. Copy these values into 
 
 ![Adding Redirects](./images/add-redirects.png)
 
-Once you've added your redirect URL, you will want to generate an OAuth2 URL. Lower down on the page, you can conveniently find an OAuth2 URL Generator provided by Discord. Use this to create a URL for yourself with the `identify` scope.
+Once you've added your redirect URL, you will want to generate an OAuth2 URL. Lower down on the page, you can conveniently find an OAuth2 URL Generator provided by Discord. Use this to create a URL for yourself with the `identify`. Note that you need to select your redirect URL in the first box of this form too.
 
 ![Generate an OAuth2 URL](./images/generate-url.png)
 
