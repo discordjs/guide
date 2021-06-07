@@ -209,7 +209,7 @@ client.on('interaction', async interaction => {
 	if (interaction.customID === 'primary') {
 		await interaction.deferUpdate();
 		await wait(4000);
-		await interaction.update('Something was selected!', { components: [] });
+		await interaction.editReply('Something was selected!', { components: [] });
 	}
 });
 ```

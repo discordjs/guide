@@ -185,7 +185,7 @@ client.on('interaction', async interaction => {
 	if (interaction.customID === 'primary') {
 		await interaction.deferUpdate();
 		await wait(4000);
-		await interaction.update('A button was clicked!', { components: [] });
+		await interaction.editReply('A button was clicked!', { components: [] });
 	}
 });
 ```
