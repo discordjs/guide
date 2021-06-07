@@ -3,7 +3,7 @@
 With the components API, you can create interactive message components. In this page, we'll be focusing on how to send, receive, and respond to buttons using discord.js!
 
 ::: danger
-This page is a follow-up to the slash commands interaction pages. Please carefully read those first so that you can understand the methods used in this section.
+This page is a follow-up to the [CommandInteraction preview guide pages](https://deploy-preview-638--discordjs-guide.netlify.app/interactions/registering-slash-commands.html). Please carefully read those first so that you can understand the methods used in this section.
 :::
 
 
@@ -143,7 +143,7 @@ As with other types of collectors, you can also use a promise-based collector li
 client.on('message', message => {
 	const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
 
-	message.awaitMessageComponentInteraction(filter, { time: 15000 })
+	message.awaitMessageComponentInteractions(filter, { time: 15000 })
 		.then(collected => console.log(`Collected ${collected.size} interactions`))
 		.catch(console.error);
 });
