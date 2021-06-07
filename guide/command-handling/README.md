@@ -6,7 +6,7 @@ Here's the base code we'll be using:
 
 ```js
 const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
+const config = require('./config.json');
 
 const client = new Discord.Client();
 
@@ -15,9 +15,9 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+	if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
+	const args = message.content.slice(config.prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
 
 	if (command === 'ping') {
@@ -70,7 +70,7 @@ Back in your main file, make these two additions:
 ```js {1,6}
 const fs = require('fs');
 const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
+const config = require('./config.json');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -105,9 +105,9 @@ With your `client.commands` Collection setup, you can use it to retrieve and exe
 
 ```js {7-14}
 client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+	if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
+	const args = message.content.slice(config.prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
 
 	if (!client.commands.has(command)) return;
