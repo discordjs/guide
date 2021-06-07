@@ -144,7 +144,7 @@ function generateRandomString() {
 	return randomString;
 }
 
-window.load = () => {
+window.onload = () => {
 	// ...
 	if (!accessToken) {
 		const randomString = generateRandomString();
