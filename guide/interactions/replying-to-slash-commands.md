@@ -68,7 +68,7 @@ You may not always want everyone who has access to the channel to see a slash co
 ```js {3}
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
-	if (interaction.commandName === 'ping') await interaction.reply('Pong!', { ephemeral: true });
+	if (interaction.commandName === 'ping') await interaction.reply({ content: 'Pong!', ephemeral: true });
 });
 ```
 
@@ -197,7 +197,7 @@ client.on('interaction', async interaction => {
 
 	if (interaction.commandName === 'ping') {
 		await interaction.reply('Pong!');
-		await interaction.followUp('Pong again!', { ephemeral: true });
+		await interaction.followUp({ content: 'Pong again!', ephemeral: true });
 	}
 });
 ```
