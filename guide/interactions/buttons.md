@@ -127,14 +127,25 @@ You can create the collectors on either a `message` or a `channel`.
 Here's how you can create a basic event-based `MessageComponentInteractionCollector`:
 
 ```js
-client.on('message', message => {
-	const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
-	const collector = message.createMessageComponentInteractionCollector(filter, { time: 15000 });
+client.on('interaction', async interaction => {
+	if (!interaction.isCommand()) return;
 
-	collector.on('collect', interaction => console.log(`Collected ${interaction.customID}`));
-	collector.on('end', collected => console.log(`Collected ${collected.size} items`));
+	if (interaction.commandName === 'ping') {
+
+		const message = await interaction.fetchReply();
+		const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
+
+		const collector = message.createMessageComponentInteractionCollector(filter, { time: 15000 });
+
+		collector.on('collect', interaction => console.log(`Collected ${interaction.customID}`));
+		collector.on('end', collected => console.log(`Collected ${collected.size} items`));
+	}
 });
 ```
+
+::: danger
+For ephemeral responses you cannot fetch a message object, so create the collector on a channel instead.
+:::
 
 ### awaitMessageComponentInteraction
 
@@ -144,14 +155,20 @@ As with other types of collectors, you can also use a promise-based collector li
 Unlike other promise-based collectors, this one only collects a single item!
 :::
 
-```js {4-6}
-client.on('message', message => {
-	const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
+```js {10-13}
+client.on('interaction', async interaction => {
+	if (!interaction.isCommand()) return;
 
-	message.awaitMessageComponentInteraction(filter, { time: 15000 })
-		.then(interaction => console.log(`${interaction.customID} was clicked!`))
-		.catch(console.error);
-});
+	if (interaction.commandName === 'ping') {
+
+		const message = await interaction.fetchReply();
+		const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
+
+		message.awaitMessageComponentInteraction(filter, { time: 15000 })
+			.then(interaction => console.log(`${interaction.customID} was clicked!`))
+			.catch(console.error);
+		}
+	});
 ```
 
 
@@ -169,13 +186,23 @@ The `MessageComponentInteraction` class has similar methods as the `CommandInter
 
 The `MessageComponentInteraction` class provides a method to update the message the button is attached to, by using `MessageComponentInteraction#update()`. Passing an empty array to the `components` option will remove any buttons after one has been clicked.
 
-```js {1,6-8}
+```js {12-14}
 client.on('interaction', async interaction => {
-	if (!interaction.isMessageComponent()) return;
-	if (interaction.componentType !== 'BUTTON') return;
+	if (!interaction.isCommand()) return;
 
-	if (interaction.customID === 'primary') {
-		await interaction.update({ content: 'A button was clicked!', components: [] });
+	if (interaction.commandName === 'ping') {
+
+		const message = await interaction.fetchReply();
+		const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
+
+		const collector = message.createMessageComponentInteractionCollector(filter, { time: 15000 });
+
+		collector.on('collect', interaction => {
+			if (interaction.customID === 'primary') {
+				await interaction.update({ content: 'A button was clicked!', components: [] });
+			}
+		});
+		collector.on('end', collected => console.log(`Collected ${collected.size} items`));
 	}
 });
 ```
@@ -184,17 +211,26 @@ client.on('interaction', async interaction => {
 
 Additionally to deferring the response of the interaction, you can defer the button, which will trigger a loading state:
 
-```js {1,6-10}
-const wait = require('util').promisify(setTimeout);
-
+```js {10, 12-18}
 client.on('interaction', async interaction => {
-	if (!interaction.isMessageComponent()) return;
-	if (interaction.componentType !== 'BUTTON') return;
+	if (!interaction.isCommand()) return;
 
-	if (interaction.customID === 'primary') {
-		await interaction.deferUpdate();
-		await wait(4000);
-		await interaction.editReply({ content: 'A button was clicked!', components: [] });
+	if (interaction.commandName === 'ping') {
+
+		const message = await interaction.fetchReply();
+		const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
+
+		const collector = message.createMessageComponentInteractionCollector(filter, { time: 15000 });
+		const wait = require('util').promisify(setTimeout);
+
+		collector.on('collect', interaction => {
+			if (interaction.customID === 'primary') {
+				await interaction.deferUpdate();
+				await wait(4000);
+				await interaction.editReply({ content: 'A button was clicked!', components: [] });
+			}
+		});
+		collector.on('end', collected => console.log(`Collected ${collected.size} items`));
 	}
 });
 ```
