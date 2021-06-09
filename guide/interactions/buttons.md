@@ -34,7 +34,7 @@ client.on('interaction', async interaction => {
 					.setStyle('PRIMARY'),
 			);
 
-		await interaction.reply('Pong!', { components: [row] });
+		await interaction.reply({ content: 'Pong!', components: [row] });
 	}
 });
 ```
@@ -76,7 +76,7 @@ client.on('interaction', async interaction => {
 			.setURL('https://discord.js.org/')
 			.setDescription('Some description here');
 
-		await interaction.reply('Pong!', { ephemeral: true, embeds: [embed], components: [row] });
+		await interaction.reply({ content: 'Pong!', ephemeral: true, embeds: [embed], components: [row] });
 	}
 });
 ```
@@ -107,7 +107,8 @@ Whilst you can receive and handle a `MessageComponentInteraction` via the intera
 
 ```js {2}
 client.on('interaction', interaction => {
-	if (!interaction.isMessageComponent() && interaction.componentType !== 'BUTTON') return;
+	if (!interaction.isMessageComponent()) return;
+	if (interaction.componentType !== 'BUTTON') return;
 	console.log(interaction);
 });
 ```
@@ -135,16 +136,20 @@ client.on('message', message => {
 });
 ```
 
-### awaitMessageComponentInteractions
+### awaitMessageComponentInteraction
 
 As with other types of collectors, you can also use a promise-based collector like this:
+
+::: warning
+Unlike other promise-based collectors, this one only collects a single item!
+:::
 
 ```js {4-6}
 client.on('message', message => {
 	const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
 
-	message.awaitMessageComponentInteractions(filter, { time: 15000 })
-		.then(collected => console.log(`Collected ${collected.size} interactions`))
+	message.awaitMessageComponentInteraction(filter, { time: 15000 })
+		.then(interaction => console.log(`${interaction.customID} was clicked!`))
 		.catch(console.error);
 });
 ```
@@ -164,11 +169,13 @@ The `MessageComponentInteraction` class has similar methods as the `CommandInter
 
 The `MessageComponentInteraction` class provides a method to update the message the button is attached to, by using `MessageComponentInteraction#update()`. Passing an empty array to the `components` option will remove any buttons after one has been clicked.
 
-```js {1,3-5}
+```js {1,6-8}
 client.on('interaction', async interaction => {
-	if (!interaction.isMessageComponent() && interaction.componentType !== 'BUTTON') return;
+	if (!interaction.isMessageComponent()) return;
+	if (interaction.componentType !== 'BUTTON') return;
+
 	if (interaction.customID === 'primary') {
-		await interaction.update('A button was clicked!', { components: [] });
+		await interaction.update({ content: 'A button was clicked!', components: [] });
 	}
 });
 ```
@@ -177,15 +184,17 @@ client.on('interaction', async interaction => {
 
 Additionally to deferring the response of the interaction, you can defer the button, which will trigger a loading state:
 
-```js {1,5-9}
+```js {1,6-10}
 const wait = require('util').promisify(setTimeout);
 
 client.on('interaction', async interaction => {
-	if (!interaction.isMessageComponent() && interaction.componentType !== 'BUTTON') return;
+	if (!interaction.isMessageComponent()) return;
+	if (interaction.componentType !== 'BUTTON') return;
+
 	if (interaction.customID === 'primary') {
 		await interaction.deferUpdate();
 		await wait(4000);
-		await interaction.editReply('A button was clicked!', { components: [] });
+		await interaction.editReply({ content: 'A button was clicked!', components: [] });
 	}
 });
 ```

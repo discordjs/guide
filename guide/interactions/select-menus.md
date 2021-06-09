@@ -43,7 +43,7 @@ client.on('interaction', async interaction => {
 					},
 				]));
 
-		await interaction.reply('Pong!', { components: [row] });
+		await interaction.reply({ content: 'Pong!', components: [row] });
 	}
 });
 ```
@@ -96,7 +96,7 @@ client.on('interaction', async interaction => {
 			.setURL('https://discord.js.org/')
 			.setDescription('Some description here');
 
-		await interaction.reply('Pong!', { ephemeral: true, embeds: [embed], components: [row] });
+		await interaction.reply({ content: 'Pong!', ephemeral: true, embeds: [embed], components: [row] });
 	}
 });
 ```
@@ -127,7 +127,8 @@ Whilst you can receive and handle a `MessageComponentInteraction` via the intera
 
 ```js {2}
 client.on('interaction', interaction => {
-	if (!interaction.isMessageComponent() && interaction.componentType !== 'SELECT_MENU') return;
+	if (!interaction.isMessageComponent()) return;
+	if (interaction.componentType !== 'SELECT_MENU') return;
 	console.log(interaction);
 });
 ```
@@ -155,16 +156,20 @@ client.on('message', message => {
 });
 ```
 
-### awaitMessageComponentInteractions
+### awaitMessageComponentInteraction
 
 As with other types of collectors, you can also use a promise-based collector like this:
+
+::: warning
+Unlike other promise-based collectors, this one only collects a single item!
+:::
 
 ```js {4-6}
 client.on('message', message => {
 	const filter = interaction => interaction.customID === 'select' && interaction.user.id === '122157285790187530';
 
-	message.awaitMessageComponentInteractions(filter, { time: 15000 })
-		.then(collected => console.log(`Collected ${collected.size} interactions`))
+	message.awaitMessageComponentInteraction(filter, { time: 15000 })
+		.then(interaction => console.log(`${interaction.customID} was clicked!`))
 		.catch(console.error);
 });
 ```
@@ -188,11 +193,13 @@ The following methods behave exactly the same as on the `CommandInteraction` cla
 
 The `MessageComponentInteraction` class provides a method to update the message the button is attached to, by using `MessageComponentInteraction#update()`. We'll be passing an empty array as components, which will remove the menu after selecting an option:
 
-```js {1,3-5}
+```js {1,5-8}
 client.on('interaction', async interaction => {
-	if (!interaction.isMessageComponent() && interaction.componentType !== 'SELECT_MENU') return;
+	if (!interaction.isMessageComponent()) return;
+	if (interaction.componentType !== 'SELECT_MENU') return;
+
 	if (interaction.customID === 'select') {
-		await interaction.update('Something was selected', { components: [] });
+		await interaction.update({ content: 'Something was selected!', components: [] });
 	}
 });
 ```
@@ -201,15 +208,17 @@ client.on('interaction', async interaction => {
 
 Additionally to deferring the response of the interaction, you can defer the button, which will trigger a loading state:
 
-```js {1,5-9}
+```js {1,6-10}
 const wait = require('util').promisify(setTimeout);
 
 client.on('interaction', async interaction => {
-	if (!interaction.isMessageComponent() && interaction.componentType !== 'SELECT_MENU') return;
-	if (interaction.customID === 'primary') {
+	i	if (!interaction.isMessageComponent()) return;
+	if (interaction.componentType !== 'SELECT_MENU') return;
+	
+	if (interaction.customID === 'select') {
 		await interaction.deferUpdate();
 		await wait(4000);
-		await interaction.editReply('Something was selected!', { components: [] });
+		await interaction.editReply({ content: 'Something was selected!', components: [] });
 	}
 });
 ```
@@ -252,7 +261,7 @@ client.on('interaction', async interaction => {
 					]),
 			);
 
-		await interaction.reply('Pong!', row);
+		await interaction.reply({ content: 'Pong!', components: [row] };
 	}
 });
 ```
