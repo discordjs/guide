@@ -150,7 +150,7 @@ You can create the collectors on either a `message` or a `channel`.
 
 Here's how you can create a basic event-based `MessageComponentInteractionCollector`:
 
-```js {6,8,10,12,13}
+```js {6,8,10-11}
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 
