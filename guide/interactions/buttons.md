@@ -98,17 +98,41 @@ Restart your bot and then send the command to a channel your bot has access to. 
 	</discord-message>
 </div>
 
+Additionally, if you don't want to construct an `ActionRow` every time, you can also pass an array of arrays containing components like this:
+
+```js {7-10,18}
+const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
+
+client.on('interaction', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'ping') {
+		const button = new MessageButton()
+			.setCustomID('primary')
+			.setLabel('primary')
+			.setStyle('PRIMARY');
+
+		const embed = new MessageEmbed()
+			.setColor('#0099ff')
+			.setTitle('Some title')
+			.setURL('https://discord.js.org/')
+			.setDescription('Some description here');
+
+		await interaction.reply({ content: 'Pong!', ephemeral: true, embeds: [embed], components: [[button]] });
+	}
+});
+```
+
 Now you know all there is to building and sending a `MessageButton`! Let's move on to how to receive buttons!
 
 
 ## Receiving buttons
 
-Whilst you can receive and handle a `MessageComponentInteraction` via the interaction event, we recommend you use one of the collectors we'll be covering in the next section. To receive a `MessageComponentInteraction`, attach an event listener to your client and use the `Interaction#isMessageComponent()` type guard to make sure you only receive component interactions.
+Whilst you can receive and handle a `ButtonInteraction` via the interaction event, we recommend you use one of the collectors we'll be covering in the next section. To receive a `ButtonInteraction`, attach an event listener to your client and use the `Interaction#isButton()` type guard to make sure you only receive component interactions.
 
 ```js {2}
 client.on('interaction', interaction => {
-	if (!interaction.isMessageComponent()) return;
-	if (interaction.componentType !== 'BUTTON') return;
+	if (!interaction.isButton()) return;
 	console.log(interaction);
 });
 ```
@@ -126,18 +150,17 @@ You can create the collectors on either a `message` or a `channel`.
 
 Here's how you can create a basic event-based `MessageComponentInteractionCollector`:
 
-```js
+```js {6,7,9,11,12}
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-
 		const message = await interaction.fetchReply();
-		const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
+		const filter = i => i.customID === 'primary' && i.user.id === '122157285790187530';
 
 		const collector = message.createMessageComponentInteractionCollector(filter, { time: 15000 });
 
-		collector.on('collect', interaction => console.log(`Collected ${interaction.customID}`));
+		collector.on('collect', i => console.log(`Collected ${i.customID}`));
 		collector.on('end', collected => console.log(`Collected ${collected.size} items`));
 	}
 });
@@ -155,20 +178,19 @@ As with other types of collectors, you can also use a promise-based collector li
 Unlike other promise-based collectors, this one only collects a single item!
 :::
 
-```js {10-13}
+```js {9-12}
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-
 		const message = await interaction.fetchReply();
-		const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
+		const filter = i => i.customID === 'primary' && i.user.id === '122157285790187530';
 
 		message.awaitMessageComponentInteraction(filter, { time: 15000 })
-			.then(interaction => console.log(`${interaction.customID} was clicked!`))
+			.then(i => console.log(`${i.customID} was clicked!`))
 			.catch(console.error);
-		}
-	});
+	}
+});
 ```
 
 
@@ -191,15 +213,14 @@ client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-
 		const message = await interaction.fetchReply();
-		const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
+		const filter = i => i.customID === 'primary' && i.user.id === '122157285790187530';
 
 		const collector = message.createMessageComponentInteractionCollector(filter, { time: 15000 });
 
-		collector.on('collect', interaction => {
-			if (interaction.customID === 'primary') {
-				await interaction.update({ content: 'A button was clicked!', components: [] });
+		collector.on('collect', async i => {
+			if (i.customID === 'primary') {
+				await i.update({ content: 'A button was clicked!', components: [] });
 			}
 		});
 		collector.on('end', collected => console.log(`Collected ${collected.size} items`));
@@ -211,23 +232,22 @@ client.on('interaction', async interaction => {
 
 Additionally to deferring the response of the interaction, you can defer the button, which will trigger a loading state:
 
-```js {10, 12-18}
+```js {10,12-18}
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-
 		const message = await interaction.fetchReply();
-		const filter = interaction => interaction.customID === 'primary' && interaction.user.id === '122157285790187530';
+		const filter = i => i.customID === 'primary' && i.user.id === '122157285790187530';
 
 		const collector = message.createMessageComponentInteractionCollector(filter, { time: 15000 });
 		const wait = require('util').promisify(setTimeout);
 
-		collector.on('collect', interaction => {
-			if (interaction.customID === 'primary') {
-				await interaction.deferUpdate();
+		collector.on('collect', async i => {
+			if (i.customID === 'primary') {
+				await i.deferUpdate();
 				await wait(4000);
-				await interaction.editReply({ content: 'A button was clicked!', components: [] });
+				await i.editReply({ content: 'A button was clicked!', components: [] });
 			}
 		});
 		collector.on('end', collected => console.log(`Collected ${collected.size} items`));

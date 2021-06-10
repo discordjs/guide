@@ -212,9 +212,9 @@ Additionally to deferring the response of the interaction, you can defer the but
 const wait = require('util').promisify(setTimeout);
 
 client.on('interaction', async interaction => {
-	i	if (!interaction.isMessageComponent()) return;
+	if (!interaction.isMessageComponent()) return;
 	if (interaction.componentType !== 'SELECT_MENU') return;
-	
+
 	if (interaction.customID === 'select') {
 		await interaction.deferUpdate();
 		await wait(4000);
@@ -261,7 +261,7 @@ client.on('interaction', async interaction => {
 					]),
 			);
 
-		await interaction.reply({ content: 'Pong!', components: [row] };
+		await interaction.reply({ content: 'Pong!', components: [row] });
 	}
 });
 ```
