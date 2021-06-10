@@ -150,7 +150,7 @@ You can create the collectors on either a `message` or a `channel`.
 
 Here's how you can create a basic event-based `MessageComponentInteractionCollector`:
 
-```js {6,7,9,11,12}
+```js {6,8,10,12,13}
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 
@@ -178,7 +178,7 @@ As with other types of collectors, you can also use a promise-based collector li
 Unlike other promise-based collectors, this one only collects a single item!
 :::
 
-```js {9-12}
+```js 8-11}
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 
@@ -208,7 +208,7 @@ The `MessageComponentInteraction` class has similar methods as the `CommandInter
 
 The `MessageComponentInteraction` class provides a method to update the message the button is attached to, by using `MessageComponentInteraction#update()`. Passing an empty array to the `components` option will remove any buttons after one has been clicked.
 
-```js {12-14}
+```js {11-13}
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 
@@ -232,7 +232,7 @@ client.on('interaction', async interaction => {
 
 Additionally to deferring the response of the interaction, you can defer the button, which will trigger a loading state:
 
-```js {10,12-18}
+```js {9,11-17}
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 
