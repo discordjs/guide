@@ -47,15 +47,45 @@ The underlying streams of an audio resource are destroyed and flushed once an au
 
 ## Handling errors
 
-For most scenarios, you will create an audio resource for immediate use by an audio player. This means that the audio player will propagate errors from the resource for you, so you can attach `error` handlers to the player instead of the resource.
+For most scenarios, you will create an audio resource for immediate use by an audio player. The audio player will propagate errors from the resource for you, so you can attach `error` handlers to the player instead of the resource.
 
-However, it is still recommended to attach `error` handlers to the resource's `playStream`. In the event that you create your stream a little earlier than it is actually played, errors could still arise.
+```js
+const { createAudioResource, createAudioPlayer } = require('@discordjs/voice');
 
-:::warning
-Altering the state of an audio player from an audio resource error handler is **not** recommended. Your state changes may be reverted by the audio player's underlying error handler. State changes should only come from an audio player's error handler.
-:::
+const player = createAudioPlayer();
+// An AudioPlayer will always emit an "error" event with a .resource property
+player.on('error', error => {
+	console.error('Error:', error.message, 'with track', error.resource.metadata.title);
+});
 
-A good solution for handling errors from these resources is to simply apply a `noop` handler to them. As long as you are listening for errors from your audio player, this is acceptable. This makes the assumption that you do not care about errors emitted from resources that aren't being consumed by an audio player.
+const resource = createAudioResource('/home/user/voice/music.mp3', {
+	metadata: {
+		title: 'A good song!',
+	},
+});
+player.play(resource);
+```
+
+However, you can also attach an error handler specifically to the audio resource if you'd like to. This is **not recommended**, as you are not allowed to change the state of an audio player from the error handlers of an audio resource (on the other hand, you are allowed to do this from the error handle of an audio player, as shown above.)
+
+```js
+const { createAudioResource, createAudioPlayer } = require('@discordjs/voice');
+
+const player = createAudioPlayer();
+
+const resource = createAudioResource('/home/user/voice/music.mp3', {
+	metadata: {
+		title: 'A good song!',
+	},
+});
+
+// Not recommended - listen to errors from the audio player instead for most usecases!
+resource.playStream.on('error', error => {
+	console.error('Error:', error.message, 'with track', resource.metadata.title);
+});
+
+player.play(resource);
+```
 
 ## Optimizations
 

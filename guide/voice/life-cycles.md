@@ -60,8 +60,6 @@ void start();
 If you would prefer to keep a single event listener for all possible state transitions, then you can also listen to the `stateChange` event:
 
 ```js
-const { VoiceConnectionStatus, AudioPlayerStatus } = require('@discordjs/voice');
-
 connection.on('stateChange', (oldState, newState) => {
 	console.log(`Connection transitioned from ${oldState.status} to ${newState.status}`);
 });

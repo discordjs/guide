@@ -17,7 +17,11 @@ Creating a voice connection is simple:
 ```js
 const { joinVoiceChannel } = require('@discordjs/voice');
 
-const connection = joinVoiceChannel(myVoiceChannel);
+const connection = joinVoiceChannel({
+	channelId: channel.id,
+	guildId: channel.guild.id,
+	adapterCreator: channel.guild.voiceAdapterCreator,
+});
 ```
 
 If you try to call `joinVoiceChannel` on another channel in the same guild in which there is already an active voice connection, the existing voice connection switches over to the new channel.
