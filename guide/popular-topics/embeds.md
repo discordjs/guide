@@ -3,14 +3,14 @@
 If you have been around on Discord for a bit, chances are you have seen these special messages, often sent by bots.
 They can have a colored border, embedded images, text fields, and other fancy properties.
 
-In the following section we will explain how to compose an embed, send it, and what you need to be aware of while doing so.
+In the following section, we will explain how to compose an embed, send it, and what you need to be aware of while doing so.
 
 ## Embed preview
 
-Here is an example of what an embed may look like. We will go over their construction in the next part of this guide.
+Here is an example of how an embed may look. We will go over embed construction in the next part of this guide.
 
 <div is="discord-messages">
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
+	<discord-message profile="bot">
 		<discord-embed
 			slot="embeds"
 			color="#0099ff"
@@ -47,14 +47,14 @@ Here is an example of what an embed may look like. We will go over their constru
 	</discord-message>
 </div>
 
-## Using the <branch version="11.x" inline>RichEmbed</branch><branch version="12.x" inline>MessageEmbed</branch> constructor
+## Using the embed constructor
 
-Discord.js features the utility class <branch version="11.x" inline>[RichEmbed](https://discord.js.org/#/docs/main/v11/class/MessageEmbed)</branch><branch version="12.x" inline>[MessageEmbed](https://discord.js.org/#/docs/main/stable/class/MessageEmbed)</branch> for easy construction and manipulation of embeds.
+discord.js features the <branch version="11.x" inline><docs-link path="class/RichEmbed">`RichEmbed`</docs-link></branch><branch version="12.x" inline><docs-link path="class/MessageEmbed">`MessageEmbed`</docs-link></branch> utility class for easy construction and manipulation of embeds.
 
 <branch version="11.x">
 
 ::: warning
-In version 12 the receiving and outgoing embed classes have been unified; you will need to use `Discord.MessageEmbed()` as constructor instead.
+In version 12, the receiving and outgoing embed classes have unified; you will need to use `Discord.MessageEmbed()` as a constructor instead.
 :::
 
 ```js
@@ -113,10 +113,10 @@ channel.send(exampleEmbed);
 </branch>
 
 ::: tip
-You don't need to include all the elements showcased above. If you want a simpler embed, just leave some out.
+You don't need to include all the elements showcased above. If you want a simpler embed, leave some out.
 :::
 
-The `.setColor()` method accepts an integer, HEX color string, an array of RGB values or specific color strings. You can find a list of them at <branch version="11.x" inline>[the Discord.js documentation](https://discord.js.org/#/docs/main/v11/typedef/ColorResolvable)</branch><branch version="12.x" inline>[the Discord.js documentation](https://discord.js.org/#/docs/main/stable/typedef/ColorResolvable)</branch>.
+The `.setColor()` method accepts an integer, HEX color string, an array of RGB values or specific color strings. You can find a list of them at <docs-link path="typedef/ColorResolvable">the discord.js documentation</docs-link>.
 
 <branch version="11.x">
 
@@ -130,7 +130,7 @@ The `.setColor()` method accepts an integer, HEX color string, an array of RGB v
 </branch>
 
 The above example chains the manipulating methods to the newly created <branch version="11.x" inline>RichEmbed</branch><branch version="12.x" inline>MessageEmbed</branch> object.
-If you want to modify the embed based on conditions you will need to reference it as the constant `exampleEmbed` (for our example).
+If you want to modify the embed based on conditions, you will need to reference it as the constant `exampleEmbed` (for our example).
 
 <branch version="11.x">
 
@@ -161,12 +161,12 @@ if (message.author.bot) {
 
 ### Attaching images
 
-You can use the `.attachFiles()` method to upload images alongside your embed and use them as source for embed fields that support image urls. The method accepts the source file as file path <branch version="11.x" inline>[FileOptions](https://discord.js.org/#/docs/main/v11/typedef/FileOptions)</branch><branch version="12.x" inline>[FileOptions](https://discord.js.org/#/docs/main/stable/typedef/FileOptions)</branch>, BufferResolvable (including a URL to an external image), or Attachment objects inside an array.
+You can use the `.attachFiles()` method to upload images alongside your embed and use them as source for embed fields that support image urls. The method accepts the source file as file path <docs-link path="typedef/FileOptions">FileOptions</docs-link>, BufferResolvable (including a URL to an external image), or Attachment objects inside an array.
 
 You can then reference and use the images inside the embed itself with `attachment://fileName.extension`.
 
 ::: tip
-If you plan to attach the same image over and over consider hosting it online and just provide the URL in the respective embed field instead. This also makes your bot respond much faster, since it doesn't need to upload the image with every response depending on it.
+If you plan to attach the same image repeatedly, consider hosting it online and providing the URL in the respective embed field instead. This also makes your bot respond faster since it doesn't need to upload the image with every response depending on it.
 :::
 
 <branch version="11.x">
@@ -195,7 +195,7 @@ channel.send(exampleEmbed);
 </branch>
 
 ::: warning
-If the images doesn't display inside the embed but outside of it, double check your syntax to make sure it's as shown above.
+If the images don't display inside the embed but outside of it, double-check your syntax to make sure it's as shown above.
 :::
 
 ## Using an embed object
@@ -256,18 +256,18 @@ channel.send({ embed: exampleEmbed });
 ```
 
 ::: tip
-You don't need to include all the elements showcased above. If you want a simpler embed, just leave some out.
+You don't need to include all the elements showcased above. If you want a simpler embed, leave some out.
 :::
 
 <branch version="11.x">
 
 ::: warning
-The `color` field has to be an integer for embed objects! If you have a hex color string (e.g. `'#7289da'`) you can replace the `#` with `0x` to use it as a number: `0x7289da`.
+The `color` field has to be an integer for embed objects! If you have a hex color string (e.g. `'#7289da'`), you can replace the `#` with `0x` to use it as a number: `0x7289da`.
 :::
 
 </branch>
 
-If you want to modify the embed object based on conditions you will need to reference it directly (as `exampleEmbed` for our example). You can then (re)assign the property values as you would with any other object.
+If you want to modify the embed object based on conditions, you will need to reference it directly (as `exampleEmbed` for our example). You can then (re)assign the property values as you would with any other object.
 
 ```js
 const exampleEmbed = { title: 'Some title' };
@@ -279,12 +279,12 @@ if (message.author.bot) {
 
 ### Attaching images
 
-You can upload images with your embedded message and use them as source for embed fields that support image urls by constructing <branch version="11.x" inline>an [Attachment](https://discord.js.org/#/docs/main/v11/class/Attachment)</branch><branch version="12.x" inline>a [MessageAttachment](https://discord.js.org/#/docs/main/stable/class/MessageAttachment)</branch> from them to send as message option alongside the embed. The <branch version="11.x" inline>file</branch><branch version="12.x" inline>attachment</branch> parameter takes a BufferResolvable or Stream including the URL to an external image.
+You can upload images with your embedded message and use them as source for embed fields that support image urls by constructing <branch version="11.x" inline>an <docs-link path="class/Attachment">Attachment</docs-link></branch><branch version="12.x" inline>a <docs-link path="class/MessageAttachment">MessageAttachment</docs-link></branch> from them to send as message option alongside the embed. The <branch version="11.x" inline>file</branch><branch version="12.x" inline>attachment</branch> parameter takes a BufferResolvable or Stream including the URL to an external image.
 
 You can then reference and use the images inside the embed itself with `attachment://fileName.extension`.
 
 ::: tip
-If you plan to attach the same image over and over consider hosting it online and just provide the URL in the respective embed field instead. This also makes your bot respond much faster, since it doesn't need to upload the image with every response depending on it.
+If you plan to attach the same image repeatedly, consider hosting it online and providing the URL in the respective embed field instead. This also makes your bot respond faster since it doesn't need to upload the image with every response depending on it.
 :::
 
 <branch version="11.x">
@@ -321,7 +321,7 @@ channel.send({ files: [file], embed: exampleEmbed });
 </branch>
 
 ::: warning
-If the images doesn't display inside the embed but outside of it, double check your syntax to make sure it's as shown above.
+If the images don't display inside the embed but outside of it, double-check your syntax to make sure it's as shown above.
 :::
 
 ## Resending and editing
@@ -333,7 +333,7 @@ We will now explain how to edit embedded message content and resend a received e
 To forward a received embed you retrieve it from the messages embed array (`message.embeds`) and pass it to the <branch version="11.x" inline>RichEmbed</branch><branch version="12.x" inline>MessageEmbed</branch> constructor. The constructed <branch version="11.x" inline>RichEmbed</branch><branch version="12.x" inline>MessageEmbed</branch> can then be edited before sending it again.
 
 ::: warning
-<branch version="11.x" inline>You can not resend the received embed structure! The MessageEmbed returned from `message.embeds` contains circular structures and needs to be converted to a RichEmbed object before sending.</branch><branch version="12.x" inline>We deliberately create a new Embed here instead of just modifying `message.embeds[0]` directly to keep the cache valid. If we were to not do this the embed in cache on the original message would diverge from what the actual embed looks like, which can result in unexpected behavior down the line!</branch>
+<branch version="11.x" inline>You cannot resend the received embed structure! The MessageEmbed returned from `message.embeds` contains circular structures and needs to be converted to a RichEmbed object before sending.</branch><branch version="12.x" inline>We deliberately create a new Embed here instead of just modifying `message.embeds[0]` directly to keep the cache valid. If we were not to do this, the embed in cache on the original message would diverge from what the actual embed looks like, which can result in unexpected behavior down the line!</branch>
 :::
 
 <branch version="11.x">
@@ -384,7 +384,7 @@ message.edit(exampleEmbed);
 
 </branch>
 
-If you want to build the new embed data on the template of a previously sent embed make sure to read the caveats in the previous section. 
+If you want to build the new embed data on a previously sent embed template, make sure to read the caveats in the previous section. 
 
 ## Notes
 
@@ -396,7 +396,7 @@ If you want to build the new embed data on the template of a previously sent emb
 
 ## Embed limits
 
-There are a few limits to be aware of while planning your embeds due to limitations set by the API. Here is a quick reference you can come back to:
+There are a few limits to be aware of while planning your embeds due to the API's limitations. Here is a quick reference you can come back to:
 
 - Embed titles are limited to 256 characters
 - Embed descriptions are limited to 2048 characters
@@ -404,8 +404,8 @@ There are a few limits to be aware of while planning your embeds due to limitati
 - A field's name is limited to 256 characters and its value to 1024 characters
 - The footer text is limited to 2048 characters
 - The author name is limited to 256 characters
-- In addition, the sum of all characters in an embed structure must not exceed 6000 characters
-- A bot can have 1 embed per message
-- A webhook can have 10 embeds per message
+- The sum of all characters in an embed structure must not exceed 6000 characters
+- A bot can have one embed per message
+- A webhook can have ten embeds per message
 
 Source: [Discord API documentation](https://discord.com/developers/docs/resources/channel#embed-limits)

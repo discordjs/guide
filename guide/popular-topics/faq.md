@@ -7,7 +7,7 @@
 * `<guild>` is a placeholder for the Guild object, such as `<message>.guild` or <branch version="12.x" inline>`<client>.guilds.cache.get('<id>')`</branch><branch version="11.x" inline>`<client>.guilds.get('<id>')`</branch>.
 * `<voiceChannel>` is a placeholder for the VoiceChannel object, such as <branch version="11.x" inline>`<message>.member.voiceChannel`</branch><branch version="12.x" inline>`<message>.member.voice.channel`</branch>
 
-For a more detailed explanation on the notations commonly used in this guide, the docs, and the support server, see [here](/additional-info/notation.md).
+For a more detailed explanation of the notations commonly used in this guide, the docs, and the support server, see [here](/additional-info/notation.md).
 
 ## Administrative
 
@@ -95,7 +95,7 @@ member.roles.add(role);
 
 </branch>
 
-### How do I check if a guild member has a certain role?
+### How do I check if a guild member has a specific role?
 
 <branch version="11.x">
 
@@ -208,7 +208,7 @@ If you would like to set your activity upon startup, you can use the `ClientOpti
 <branch version="11.x">
 
 ::: warning
-the `activity` key will only work in v11.3 and above. You can still use the `game` key instead, but it is deprecated as of v11.3, and has been removed in v12.
+the `activity` key will only work in v11.3 and above. You can still use the `game` key instead, but it is deprecated as of v11.3 and removed in v12.
 :::
 
 </branch>
@@ -242,7 +242,7 @@ client.login('your-token-goes-here');
 ```
 
 ::: tip
-The `escapeRegex` function is used to convert special characters into literal characters by escaping them, so that they don't terminate the pattern within the [Regular Expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)!
+The `escapeRegex` function converts special characters into literal characters by escaping them to not terminate the pattern within the [Regular Expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)!
 :::
 
 ::: tip
@@ -274,7 +274,7 @@ channel.send('<content>');
 
 </branch>
 
-### How do I DM a certain user?
+### How do I DM a specific user?
 
 <branch version="11.x">
 
@@ -301,7 +301,7 @@ user.send('<content>');
 If you want to DM the user who sent the message, you can use `<message>.author.send()`.
 :::
 
-### How do I mention a certain user in a message?
+### How do I mention a specific user in a message?
 
 <!-- eslint-skip -->
 
@@ -314,6 +314,23 @@ const user = <message>.mentions.users.first();
 ::: tip
 Mentions in embeds may resolve correctly in embed description and field values but will never notify the user. Other areas do not support mentions at all.
 :::
+
+### How do I control which users and/or roles are mentioned in a message?
+
+Controlling which mentions will send a ping is done via the `allowedMentions` option, which replaces `disableMentions`.
+
+This can be set as a default in `ClientOptions`, and controlled per-message sent by your bot.
+```diff
+- new Discord.Client({ disableMentions: 'everyone' });
++ new Discord.Client({ allowedMentions: { parse: ['users', 'roles'] });
+```
+
+Even more control can be achieved by listing specific `users` or `roles` to be mentioned by ID, e.g.:
+```js
+message.channel.send('<@123456789012345678> <@987654321098765432>', {
+	allowedMentions: { users: ['123456789012345678'] },
+});
+```
 
 ### How do I prompt the user for additional input?
 
@@ -371,9 +388,9 @@ const blockedUsers = [ 'id1', 'id2' ];
 });
 ```
 
-:::tip
-You do not need to have a constant local variable like `blockedUsers` above. If you have a database system which you use to store IDs of blocked users, you can query the database instead:
-
+::: tip
+You do not need to have a constant local variable like `blockedUsers` above. If you have a database system that you use to store IDs of blocked users, you can query the database instead:
+:::
 <!-- eslint-skip -->
 
 ```js
@@ -383,8 +400,7 @@ You do not need to have a constant local variable like `blockedUsers` above. If 
 });
 ```
 
-Note that this is just a showcase of how such a check could be done.
-:::
+Note that this is just a showcase of how you could do such a check.
 
 ### How do I react to the message my bot sent?
 
@@ -413,7 +429,7 @@ process.exit();
 
 ### What is the difference between a User and a GuildMember?
 
-A User represents a global Discord user and a GuildMember represents a Discord user on a specific server. That means only GuildMembers can have permissions, roles, and nicknames, for example, because all of these things are server-bound information that could be different on each server that user is in.
+A User represents a global Discord user, and a GuildMember represents a Discord user on a specific server. That means only GuildMembers can have permissions, roles, and nicknames, for example, because all of these things are server-bound information that could be different on each server that the user is in.
 
 ### How do I find all online members of a guild?
 
@@ -422,10 +438,10 @@ A User represents a global Discord user and a GuildMember represents a Discord u
 <!-- eslint-skip -->
 
 ```js
-// First we use fetchMembers to make sure all members are cached
+// First use fetchMembers to make sure all members are cached
 <guild>.fetchMembers().then(fetchedGuild => {
 	const totalOnline = fetchedGuild.members.filter(member => member.presence.status === 'online');
-	// We now have a collection with all online member objects in the totalOnline variable
+	// Now you have a collection with all online member objects in the totalOnline variable
 	console.log(`There are currently ${totalOnline.size} members online in this guild!`)
 });
 ```
@@ -436,24 +452,24 @@ A User represents a global Discord user and a GuildMember represents a Discord u
 <!-- eslint-skip -->
 
 ```js
-// First we use guild.members.fetch to make sure all members are cached
+// First use guild.members.fetch to make sure all members are cached
 <guild>.members.fetch().then(fetchedMembers => {
 	const totalOnline = fetchedMembers.filter(member => member.presence.status === 'online');
-	// We now have a collection with all online member objects in the totalOnline variable
+	// Now you have a collection with all online member objects in the totalOnline variable
 	console.log(`There are currently ${totalOnline.size} members online in this guild!`)
 });
 ```
 
 </branch>
 
-### How do I check which role was added/removed, and for which member?
+### How do I check which role was added/removed and for which member?
 
 <branch version="11.x">
 
 <!-- eslint-skip -->
 
 ```js
-// We start by declaring a guildMemberUpdate listener
+// Start by declaring a guildMemberUpdate listener
 // This code should be placed outside of any other listener callbacks to prevent listener nesting
 <client>.on('guildMemberUpdate', (oldMember, newMember) => {
 	// If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
@@ -471,7 +487,7 @@ A User represents a global Discord user and a GuildMember represents a Discord u
 <!-- eslint-skip -->
 
 ```js
-// We start by declaring a guildMemberUpdate listener
+// Start by declaring a guildMemberUpdate listener
 // This code should be placed outside of any other listener callbacks to prevent listener nesting
 <client>.on('guildMemberUpdate', (oldMember, newMember) => {
 	// If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
@@ -485,11 +501,13 @@ A User represents a global Discord user and a GuildMember represents a Discord u
 
 </branch>
 
-### How to check the bots ping?
+### How do I check the bot's ping?
 
-There are two common measurements for bot pings. The first, **Websocket heartbeat**, is the average interval of a regularly sent signal indicating the healthy operation of the websocket connection the library receives events over:
+There are two common measurements for bot pings. The first, **Websocket heartbeat**, is the average interval of a regularly sent signal indicating the healthy operation of the WebSocket connection the library receives events over:
 
 <branch version="11.x">
+
+<!-- eslint-skip -->
 
 ```js
 <message>.channel.send(`Websocket heartbeat: ${<client>.ping}ms.`);
@@ -498,33 +516,37 @@ There are two common measurements for bot pings. The first, **Websocket heartbea
 </branch>
 <branch version="12.x">
 
+<!-- eslint-skip -->
+
 ```js
 <message>.channel.send(`Websocket heartbeat: ${<client>.ws.ping}ms.`);
 ```
 
-:::tip
+::: tip
 A specific shards heartbeat can be found on the WebSocketShard instance, accessible at `<client>.ws.shards` > `.ping`.
 :::
 
 </branch>
 
-The second, **Roundtrip Latency**, describes the amount of time a full API roundtrip (from creation of the command message to creation of the response message) takes. We then edit the response to the respective value in order to avoid needing to send yet another message:
+The second, **Roundtrip Latency**, describes the amount of time a full API roundtrip (from the creation of the command message to the creation of the response message) takes. You then edit the response to the respective value to avoid needing to send yet another message:
+
+<!-- eslint-skip -->
 
 ```js
 <message>.channel.send('Pinging...').then(sent => {
-    sent.edit(`Roundtrip latency: ${sent.createdTimestamp - <message>.createdTimestamp}ms`);
+	sent.edit(`Roundtrip latency: ${sent.createdTimestamp - <message>.createdTimestamp}ms`);
 });
 ```
 
 ### How do I play music from YouTube?
 
-For this to work you need to have `ytdl-core` installed.
+For this to work, you need to have `ytdl-core` installed.
 
 ```bash
 npm install --save ytdl-core
 ```
 
-Additionally you may need the following:
+Additionally, you may need the following:
 
 ```bash
 npm install --save @discordjs/opus # opus engine (if missing)
@@ -602,5 +624,5 @@ console.log(emojiCharacters['!']); // ❗
 ```
 
 ::: tip
-On Windows, you may be able to use the `Win + .` keyboard shortcut to open up an emoji picker can be used for quick, easy access to all the unicode emojis available to you. Some of the emojis listed above may not be represented there, though (e.g the 0-9 emojis).
+On Windows, you may be able to use the `Win + .` keyboard shortcut to open up an emoji picker that can be used for quick, easy access to all the Unicode emojis available to you. Some of the emojis listed above may not be represented there, though (e.g., the 0-9 emojis).
 :::

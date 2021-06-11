@@ -1,6 +1,6 @@
 <template>
 	<a :href="link" target="_blank" rel="noopener noreferrer">
-		<slot></slot> <outbound-link />
+		<slot></slot><outbound-link />
 	</a>
 </template>
 
@@ -46,6 +46,10 @@ export default {
 	},
 	methods: {
 		formatBranch(version) {
+			// NOTE: v12 is the current stable branch,
+			// but linking to the `v12` branch points to an outdated version
+			// This is temporary until v13 comes stable
+			if (version.startsWith('12')) return 'stable';
 			return `v${version.slice(0, 2)}`;
 		},
 	},

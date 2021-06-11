@@ -1,59 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>My First OAuth2 App</title>
+	<title>My Discord OAuth2 App</title>
 </head>
 <body>
 	<div id="info">
 		Hoi!
 	</div>
-	<a id="login" style="display: none;" href="your oauth2 url here">Identify Yourself</a>
+	<a id="login" style="display: none;" href="your-oauth2-url-here">Identify Yourself</a>
 	<script>
 		function generateRandomString() {
-			const rand = Math.floor(Math.random() * 10);
-			let randStr = '';
+			let randomString = '';
+			const randomNumber = Math.floor(Math.random() * 10);
 
-			for (let i = 0; i < 20 + rand; i++) {
-				randStr += String.fromCharCode(33 + Math.floor(Math.random() * 94));
+			for (let i = 0; i < 20 + randomNumber; i++) {
+				randomString += String.fromCharCode(33 + Math.floor(Math.random() * 94));
 			}
 
-			return randStr;
+			return randomString;
 		}
 
 		window.onload = () => {
 			const fragment = new URLSearchParams(window.location.hash.slice(1));
+			const [accessToken, tokenType, state] = [fragment.get('access_token'), fragment.get('token_type'), fragment.get('state')];
 
-			if (fragment.has("access_token")) {
-				const urlState = fragment.get("state");
-				const stateParameter = localStorage.getItem('stateParameter');
-				if (stateParameter !== atob(decodeURIComponent(urlState))) {
-					return console.log('You may have been clickjacked!');
-				}
+			if (!accessToken) {
+				const randomString = generateRandomString();
+				localStorage.setItem('oauth-state', randomString);
 
-				const accessToken = fragment.get("access_token");
-				const tokenType = fragment.get("token_type");
+				document.getElementById('login').href += `&state=${encodeURIComponent(btoa(randomString))}`;
+				return document.getElementById('login').style.display = 'block';
+			}
 
-				fetch('https://discord.com/api/users/@me', {
-					headers: {
-						authorization: `${tokenType} ${accessToken}`
-					}
+			if (localStorage.getItem('oauth-state') !== atob(decodeURIComponent(state))) {
+				return console.log('You may have been click-jacked!');
+			}
+
+			fetch('https://discord.com/api/users/@me', {
+				headers: {
+					authorization: `${tokenType} ${accessToken}`,
+				},
+			})
+				.then(result => result.json())
+				.then(response => {
+					const { username, discriminator } = response;
+					document.getElementById('info').innerText += ` ${username}#${discriminator}`;
 				})
-					.then(res => res.json())
-					.then(response => {
-						console.log(response);
-						const { username, discriminator } = response;
-						document.getElementById('info').innerText += ` ${username}#${discriminator}`;
-					})
-					.catch(console.error);
-
-			}
-			else {
-				const randStr = generateRandomString();
-				localStorage.setItem('stateParameter', randStr);
-
-				document.getElementById('login').href += `&state=${encodeURIComponent(btoa(randStr))}`;
-				document.getElementById('login').style.display = 'block';
-			}
+				.catch(console.error);
 		}
 	</script>
 </body>

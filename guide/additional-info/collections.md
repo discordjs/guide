@@ -1,19 +1,19 @@
 # Collections
 
-Discord.js comes with this utility class known as `Collection`.
-It extends JavaScript's native `Map` class, so it has all the features of `Map` and more!  
+discord.js comes with a utility class known as `Collection`.
+It extends JavaScript's native `Map` class, so it has all the `Map` features and more!  
 
 ::: warning
-If you're not familiar with `Map`, read [MDN's page on it](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) before continuing. You should be familiar with `Array` [methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) as well. We will also be using some ES6 features, so read up [here](/additional-info/es6-syntax.md) if you do not know what they are.
+If you're not familiar with `Map`, read [MDN's page on it](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) before continuing. You should be familiar with `Array` [methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) as well. We will also use some ES6 features, so read up [here](/additional-info/es6-syntax.md) if you do not know what they are.
 :::
 
-In essence, `Map` allow for an association between unique keys and their values, but lack an iterative interface.
+A `Map` allows for an association between unique keys and their values.
 For example, how can you transform every value or filter the entries in a `Map` easily?
 This is the point of the `Collection` class!
 
 ## Array-like Methods
 
-Many of the methods on `Collection` are based on their namesake in `Array`. One of them is `find`:
+Many of the methods on `Collection` correspond to their namesake in `Array`. One of them is `find`:
 
 ```js
 // Assume we have an array of users and a collection of the same users.
@@ -22,8 +22,8 @@ collection.find(u => u.discriminator === '1000');
 ```
 
 The interface of the callback function is very similar between the two.
-For arrays, callbacks are usually passed the parameters `(value, index, array)`, where `value` is the value it iterated to,
-`index` is the current index, and `array` is the array itself. For collections, you would have `(value, key, collection)`.
+For arrays, callbacks usually pass the parameters `(value, index, array)`, where `value` is the value iterated to,
+`index` is the current index, and `array` is the array. For collections, you would have `(value, key, collection)`.
 Here, `value` is the same, but `key` is the key of the value, and `collection` is the collection itself instead.  
 
 Methods that follow this philosophy of staying close to the `Array` interface are as follows:
@@ -40,10 +40,10 @@ Methods that follow this philosophy of staying close to the `Array` interface ar
 ## Converting to Array
 
 There are two ways you might want to convert a `Collection` into an `Array`. The first way is the `array` or `keyArray` methods.
-They simply create an array from the items in the collection, but also caches it too:
+They create an array from the items in the collection but also caches it:
 
 ```js
-// Not computed again the second time, it is cached!
+// Not computed the second time; it is cached!
 collection.array();
 collection.array();
 
@@ -72,10 +72,10 @@ Many people use `array` way too much! This leads to unneeded caching of data and
 
 ## Extra Utilities
 
-Some methods are not from `Array` and are instead completely new to standard JavaScript.
+Some methods are not from `Array` and are instead entirely new to standard JavaScript.
 
 ```js
-// A random value. Be careful, this uses `array` so caching is done.
+// A random value. Be careful; this uses `array`, so caching is done.
 collection.random();
 
 // The first value.
@@ -88,12 +88,12 @@ collection.first(5);
 collection.last();
 collection.last(2);
 
-// Removes from the collection anything that meets a criteria.
+// Removes anything that meets the condition from the collection.
 // Sort of like `filter`, but in-place.
 collection.sweep(user => user.username === 'Bob');
 ```
 
-A more complicated method is `partition`, which splits a collection into two, based on a certain criteria.
+A more complicated method is `partition`, which splits a single Collection into two new Collections based on the provided function.
 You can think of it as two `filter`s, but done at the same time:
 
 ```js

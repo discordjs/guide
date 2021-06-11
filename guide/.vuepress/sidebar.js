@@ -92,8 +92,13 @@ module.exports = {
 			title: 'Command Handler',
 			children: [
 				'/command-handling/',
-				'/command-handling/dynamic-commands',
 				'/command-handling/adding-features',
+			],
+		},
+		{
+			title: 'Event Handler',
+			children: [
+				'/event-handling/',
 			],
 		},
 		{

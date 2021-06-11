@@ -182,6 +182,46 @@ Since `guild.members` returns a Collection, you can iterate over it with `.forEa
 Since the `.delete()` method returns a Promise, you need to `await` it when inside a `try`/`catch` block.
 ```
 
+#### Codeblock line highlighting
+
+When you want to highlight a piece of code to display either an addition or a difference, use the `js {1-5,6-10}` syntax. For example (ignoring the `\`s):
+
+```md
+
+Here's our base code:
+
+```js {2,6}
+client.once('ready', () => {
+	console.log('Ready.');
+});
+
+client.on('message', message => {
+	console.log(message.content);
+});
+\```
+
+To add this feature, use this code:
+
+```js {2,6-8}
+client.once('ready', () => {
+	console.log(`${client.user.tag} ready.`);
+});
+
+client.on('message', message => {
+	if (message.content === '!ping') {
+		message.channel.send('Pong.');
+	}
+});
+\```
+
+```
+
+![Codeblock line highlighting output](https://i.imgur.com/913nf9V.png)
+
+This is VuePress' [codeblock line highlighting](https://vuepress.vuejs.org/guide/markdown.html#line-highlighting-in-code-blocks) feature. It's encouraged to use and preferred over diff codeblocks.
+
+Do note the space between `js` and `{}`. This is necessary to not interfere with `eslint-plugin-markdown`, which would ignore the codeblock.
+
 ### Images and links
 
 If you want to include an image in a page, the image you add should be saved to the repo itself instead of using external services. If you want to link to other sections of the guide, be sure to use relative paths instead of full URLs to the live site. For example:
@@ -195,12 +235,12 @@ If you want to include an image in a page, the image you add should be saved to 
 
 + Here's what the final result would look like:
 +
-+ ![Final result](~@/images/78fcCsF.png)
++ ![Final result](./images/78fcCsF.png)
 +
 + If you want to read more about this, you can check out the page on [that other cool stuff](/some-really-cool-stuff).
 ```
 
-Do note the `~@/images/*` syntax used. The `~@/` part is a shortcut to the base `/guide` directory, which holds all the .md files and the `/images` folder. When it comes to images, this syntax should always be used.
+Do note the `./images/*` syntax used. The `./` part refers to the file's corresponding image directory, which holds all the images used for that directory. When it comes to images, this syntax should always be used.
 
 ### Code samples
 
@@ -227,30 +267,33 @@ If you're writing a page that teaches the reader how to build something step-by-
 <resulting-code path="baz/getting-started" />
 ```
 
-### Faking Discord messages
+### Displaying Discord messages
 
-We have some useful custom helper components that you can use to "fake" Discord message. The reason for this is to make it easy for you to create, easy for anyone in the future to edit, and avoid having to take screenshots and using too many images on a page at once. Here's a preview of the components:
+We use [vue-discord-message](https://vue-discord-message.netlify.app/) to display "fake" Discord messages on pages. The reason for this is to make it easy for you to create, easy for anyone in the future to edit, and avoid having to take screenshots and using too many images on a page at once. Here's a preview of the components:
 
-![Discord message faker preview](https://i.imgur.com/KAN3YYe.png)
+![Discord message faker preview](https://i.imgur.com/5eY8WFO.png)
 
 The syntax to make this display is quite simple as well:
 
 ```html
 <div is="discord-messages">
-	<discord-message author="User" avatar="djs">
+	<discord-message profile="user">
 		!ping
 	</discord-message>
-	<discord-message author="Tutorial Bot" avatar="blue" :bot="true">
-		Pong! Took 250ms
+	<discord-message profile="bot">
+		<mention :highlight="true" profile="user" />, pong! Took 250ms
+	</discord-message>
+	<discord-message author="Another User" avatar="green">
+		Pung!
 	</discord-message>
 </div>
 ```
 
-The `author` and `avatar` attributes must be strings, and the `bot` attribute must be a boolean. Do note the colon in `:bot="true"`. These components are made with [Vue](https://vuejs.org/), but if you aren't familiar with Vue, don't worry about it. Just understand that this allows us to pass in the actual boolean `true` and not the string `'true'`. All `<discord-message>` tags must be children of a single `<div is="discord-messages">` tag for it to display properly.
+These components are made with [Vue](https://vuejs.org/), but if you aren't familiar with Vue, don't worry about it. Just understand that you'll usually only need the `profile="user"`/`profile="bot"` attribute for the `<discord-message>` component. All `<discord-message>` components must be children of a single `<div is="discord-messages">` component for it to display properly.
 
 Do note the `<div is="discord-messages">` syntax instead of `<discord-messages>`. This is due to how VuePress renders markdown and HTML inside markdown files. It doesn't recognize `<discord-messages>` as an HTML element, therefore rendering anything indented inside it as a regular codeblock.
 
-You can read more about how to use these components by checking out [the package's GitHub repo](https://github.com/Danktuary/vue-discord-message).
+These components feature messages, mentions, and full embed support. You can read more about how to use them by checking out the [examples for vue-discord-message](https://vue-discord-message.netlify.app/examples.html).
 
 ### Branch-specific content
 

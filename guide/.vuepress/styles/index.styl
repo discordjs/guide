@@ -1,13 +1,46 @@
-@media screen and (max-width: 600px) {
-	.navbar .home-link .site-name {
-		background: url('/favicon.png') top left / contain no-repeat;
-		text-indent: -999px;
+.custom-block.danger,
+details.custom-block.details,
+.custom-block.tip,
+.custom-block.warning {
+	overflow-wrap: break-word;
+}
+
+.custom-block.danger,
+details.custom-block.details,
+.custom-block.tip,
+.custom-block.warning,
+.discord-messages {
+	border-radius: 6px;
+}
+
+// @vuepress/plugin-search/SearchBox.vue
+.navbar .links .search-box input {
+	cursor: pointer;
+	width: 0;
+	padding-right: 0.2rem;
+
+	&:focus {
+		cursor: auto;
+		width: 10rem;
+		padding-right: 0.5rem;
 	}
 }
 
-@media screen and (max-width: 360px) {
-	// so that the branch selector and book icon don't overlap each other
+@media screen and (max-width: $MQMobile) {
+	// so that the branch selector doesn't overlap the book icon much
 	.navbar .links {
 		padding-left: 0.25rem !important;
 	}
+}
+
+// vue-discord-message
+.discord-message .discord-message-content code.discord-message-inline-code {
+	color: inherit;
+	font-size: 0.9em;
+	padding: 0.2em;
+}
+
+// codeblock highlights
+div[class*="language-"] .highlight-lines .highlighted {
+	background-color: #353b45;
 }

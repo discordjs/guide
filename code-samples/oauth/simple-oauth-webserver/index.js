@@ -1,58 +1,46 @@
-const http = require('http');
-const fs = require('fs');
-const url = require('url');
 const fetch = require('node-fetch');
+const express = require('express');
+const { clientID, clientSecret, port } = require('./config.json');
 
-const port = 53134;
+const app = express();
 
-http.createServer((req, res) => {
-	let responseCode = 404;
-	let content = '404 Error';
+app.get('/', async ({ query }, response) => {
+	const { code } = query;
 
-	const urlObj = url.parse(req.url, true);
-
-	if (urlObj.query.code) {
-		const accessCode = urlObj.query.code;
-		const data = {
-			client_id: 'your client id',
-			client_secret: 'your client secret',
-			grant_type: 'authorization_code',
-			redirect_uri: 'your redirect uri',
-			code: accessCode,
-			scope: 'the scopes',
-		};
-
-		fetch('https://discord.com/api/oauth2/token', {
-			method: 'POST',
-			body: new URLSearchParams(data),
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-			},
-		})
-			.then(discordRes => discordRes.json())
-			.then(info => {
-				console.log(info);
-				return info;
-			})
-			.then(info => fetch('https://discord.com/api/users/@me', {
+	if (code) {
+		try {
+			const oauthResult = await fetch('https://discord.com/api/oauth2/token', {
+				method: 'POST',
+				body: new URLSearchParams({
+					client_id: clientID,
+					client_secret: clientSecret,
+					code,
+					grant_type: 'authorization_code',
+					redirect_uri: `http://localhost:${port}`,
+					scope: 'identify',
+				}),
 				headers: {
-					authorization: `${info.token_type} ${info.access_token}`,
+					'Content-Type': 'application/x-www-form-urlencoded',
 				},
-			}))
-			.then(userRes => userRes.json())
-			.then(console.log);
+			});
+
+			const oauthData = await oauthResult.json();
+
+			const userResult = await fetch('https://discord.com/api/users/@me', {
+				headers: {
+					authorization: `${oauthData.token_type} ${oauthData.access_token}`,
+				},
+			});
+
+			console.log(await userResult.json());
+		} catch (error) {
+			// NOTE: An unauthorized token will not throw an error;
+			// it will return a 401 Unauthorized response in the try block above
+			console.error(error);
+		}
 	}
 
-	if (urlObj.pathname === '/') {
-		responseCode = 200;
-		content = fs.readFileSync('./index.html');
-	}
+	return response.sendFile('index.html', { root: '.' });
+});
 
-	res.writeHead(responseCode, {
-		'content-type': 'text/html;charset=utf-8',
-	});
-
-	res.write(content);
-	res.end();
-})
-	.listen(port);
+app.listen(port, () => console.log(`App listening at http://localhost:${port}`));
