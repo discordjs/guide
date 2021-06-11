@@ -4,26 +4,26 @@ pageTheme: purple
 
 # Introduction
 
-"Voice" refers to the ability of a bot to send audio in voice channels. Discord.js makes it easy for you to get up and running with voice!
+"Voice" refers to Discord bots being able to send audio in voice channels. This is supported in discord.js via [@discordjs/voice](https://github.com/discordjs/voice), a standalone library made by the developers of discord.js. While you can use it with any Node.js Discord API library, this guide will focus on using it with discord.js.
 
 ## Installation
 
 ### Barebones
 
-To add voice functionality to your Discord.js bot, install the `@discordjs/voice` module:
+To add voice functionality to your discord.js bot, you will need the  `@discordjs/voice` package as well as one of the encryption packages listed below. For example: 
 
 ```bash
-npm install @discordjs/voice
+npm install @discordjs/voice libsodium-wrappers
 ```
 
-Out of the box, you'll be able to play Ogg and WebM Opus files using `@discordjs/voice` without any additional dependencies. However, you may consider additional dependencies if you want to play additional file types, or if you want improved performance.
+After this, you'll be able to play Ogg and WebM Opus files without any other dependencies. If you want to play audio from other sources, or to improve performance, consider installing some of the extra dependencies listed below.
 
 ::: warning
 This guide assumes you have installed at least one additional dependency – FFmpeg. More information on this can be found in the
 section below.
 :::
 
-### Optional Dependencies
+### Extra Dependencies
 
 - An Opus encoding library
   - [`@discordjs/opus`](https://github.com/discordjs/opus) (best performance)
@@ -31,9 +31,10 @@ section below.
 - FFmpeg – allows you to play a range of media (e.g. MP3s).
   - [`ffmpeg`](https://ffmpeg.org/) - install and add to your system environment
   - [`ffmpeg-static`](https://www.npmjs.com/package/ffmpeg-static) - to install FFmpeg via npm
-- Faster encryption packages
+- Encryption packages
   - [`sodium`](https://www.npmjs.com/package/sodium) (best performance)
   - [`libsodium-wrappers`](https://www.npmjs.com/package/libsodium-wrappers)
+  - [`tweetnacl`](https://www.npmjs.com/package/tweetnacl)
 
 ::: tip
 Outside a development environment, it is recommended for you to use `@discordjs/opus` and `sodium` to improve performance and improve the stability of audio playback!
@@ -53,18 +54,17 @@ console.log(generateDependencyReport());
 /*
 --------------------------------------------------
 Core Dependencies
-- @discordjs/voice: 0.0.1
-- discord.js: 12.5.1
-- prism-media: 1.2.5
+- @discordjs/voice: 0.3.1
+- prism-media: 1.2.9
 
 Opus Libraries
-- @discordjs/opus: 0.4.0
-- opusscript: 0.0.7
+- @discordjs/opus: 0.5.3
+- opusscript: not found
 
 Encryption Libraries
 - sodium: 3.0.2
 - libsodium-wrappers: not found
-- tweetnacl: 1.0.3
+- tweetnacl: not found
 
 FFmpeg
 - version: 4.2.4-1ubuntu0.1
@@ -76,9 +76,9 @@ FFmpeg
 - **Core Dependencies**
   - These are dependencies that should definitely be available.
 - **Opus Libraries**
-  - If you want to use varying file types or inline volume altering, you will need to have one of these.
+  - If you want to play audio from many different file types, or alter volume in real-time, you will need to have one of these.
 - **Encryption Libraries**
   - You should have at least one encryption library installed to use `@discordjs/voice`.
 - **FFmpeg**
-  - If you want to use varying file types, you will need to have FFmpeg installed.
-  - If `libopus` is enabled, you will be able to make use of performance improvements planned for the future.
+  - If you want to play audio from many different file types, you will need to have FFmpeg installed.
+  - If `libopus` is enabled, you will be able to benefit from increased performance if real-time volume alteration is disabled.
