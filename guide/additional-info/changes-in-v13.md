@@ -480,7 +480,7 @@ Gets the premium subscriber (booster) role if present on the member.
 
 ### GuildTemplate
 
-API support for [Server Templates](https://discord.com/developers/docs/resources/template).
+API support for [Server Templates](https://discord.com/developers/docs/resources/guild-template).
 
 ### Integration
 
