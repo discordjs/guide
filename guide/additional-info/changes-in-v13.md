@@ -16,15 +16,25 @@ Discord.js v13 makes the switch to Discord API v8.
 
 Discord.js now has support for Slash Commands!
 
-Refer to the [Interactions](/interactions/registering-slash-commands) section of this guide to get started.
+Refer to the [Slash Commands](/interactions/registering-slash-commands) section of this guide to get started.
 
 In addition to the `interaction` event covered in the above guide, this release also includes the new Client events `applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate`.
+
+## Message Components
+
+Discord.js now has support for Message Components!
+
+This introduces the `MessageActionRow` and `MessageButton` classes, as well as a `MessageComponentInteractionCollector` for listening to button clicks. Refer to the [Message Components](/interactions/buttons) section of this guide to strat using Message Components.
+
+## Voice
+
+Support for voice has been separated into a different module. You nown eeed to install and use [@discordjs/voice](https://github.com/discordjs/voice) for interacting with the Discord Voice API.
 
 ## Commonly used methods that changed
 
 ### Sending Messages, MessageEmbeds, and everything else
 
-With the introduction of Interactions and it becoming far common for users to want to send an embed with MessageOptions, methods that send messages now enforce a single param. That can be either a string, an `APIMessage`, or that methods variant of `MessageOptions`.
+With the introduction of Interactions and it becoming far common for users to want to send an embed with MessageOptions, methods that send messages now enforce a single param. That can be either a string, an `APIMessage`, or that method's variant of `MessageOptions`.
 
 Additionally, all messages sent by bots now support up to 10 embeds. As a result the `embed` option is completely removed, replaced with an `embeds` array which must be in the options object.
 
@@ -214,6 +224,10 @@ The helper/shortcut method `Guild#member()` has been removed.
 + guild.members.cache.get(user.id)
 ```
 
+### Guild#mfaLevel
+
+The Guild#mfaLevel is now an enum.
+
 ### Guild#nsfw
 
 The `Guild#nsfw` property has been removed, replaced by `Guild#nsfwLevel`.
@@ -281,6 +295,17 @@ This shortcut method has been removed.
 ```
 
 `reason` is no longer a parameter as it is not used by the API.
+
+### MessageEmbed
+
+#### MessageEmbed#attachFiles
+
+The `MessageEmbed#attachFiles` method has been removed. Instead, files should be attached to the Message directly via MessageOptions.
+
+```diff
+- channel.send({ embeds: [new MessageEmbed().setTitle("Files").attachFiles(file)] })
++ channel.send({ embeds: [new MessageEmbed().setTitle("Files")], files: [file] })
+```
 
 ### ReactionUserManager
 
@@ -422,7 +447,7 @@ Constructing a Collector without providing a filter function will now throw a me
 
 ### CommandInteraction
 
-New class for handling Slash Command interactions. For more information refer to the [Interactions](/interactions/registering-slash-commands) section of the guide.
+New class for handling Slash Command interactions. For more information refer to the [Slash Commands](/interactions/registering-slash-commands) section of the guide.
 
 ### Guild
 
@@ -486,6 +511,13 @@ The `GuildChannel#createOverwrite` method no longer relies on cache. This is ach
 #### GuildChannel#updateOverwrite
 
 The `GuildChannel#updateOverwrite` method no longer relies on cache. This is achieved by accepting an options object in which the `type` of overwrite can be specified.
+
+### GuildChannelManager
+
+#### GuildChannelManager#fetch
+
+Now supports fetching the channels of a Guild.
+
 ### GuildManager
 
 #### GuildManager#create
@@ -560,7 +592,19 @@ Provides a Collection of Roles managed by the integration.
 
 Base class for Slash Command and Message Component interactions. For more information refer to the [Interactions](/interactions/registering-slash-commands) section of the guide.
 
+### InteractionWebhook
+
+New Webhook type specifically for handling interactions.
+
 ### Message
+
+#### Message#awaitMessageComponentInteraction
+
+Promisified collector to wait for and collect a single component interaction on a Message
+
+#### Message#createMessageComponentInteractionCollector
+
+New Collector class for collecting component interactions on a Message
 
 #### Message#crosspostable
 
@@ -582,11 +626,19 @@ Added support for `<:name:id>` and `<a:name:id>` as valid inputs to `Message#rea
 
 New Collection property containing any stickers which were in the message.
 
+### MessageActionRow
+
+New builder class for construction action row type Message Components.
+
 ### MessageAttachment
 
 #### MessageAttachment#contentType
 
 The media type of a MessageAttachment.
+
+### MessageButton
+
+New building class for constructing button-type Message Components
 
 ### MessageManager
 
@@ -671,6 +723,14 @@ Stage Channels are now supported.
 Stickers are now supported.
 
 ### TextChannel
+
+#### TextChannel#awaitMessageComponentInteraction
+
+Promisified collector to wait for and collect a single component interaction in a TextChannel
+
+#### TextChannel#createMessageComponentInteractionCollector
+
+New Collector class for collecting component interactions in a TextChannel
 
 #### TextChannel#setType
 
