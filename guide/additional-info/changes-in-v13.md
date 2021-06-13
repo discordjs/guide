@@ -22,6 +22,29 @@ In addition to the `interaction` event covered in the above guide, this release 
 
 ## Commonly used methods that changed
 
+### Sending Messages, MessageEmbeds, and everything else
+
+With the introduction of Interactions and it becoming far common for users to want to send an embed with MessageOptions, methods that send messages now enforce a single param. That can be either a string, an `APIMessage`, or that methods variant of `MessageOptions`.
+
+Additionally, all messages sent by bots now support up to 10 embeds. As a result the `embed` option is completely removed, replaced with an `embeds` array which must be in the options object.
+
+```js
+- channel.send(embed);
++ channel.send({ embeds: [embed, embed2] });
+
+- channel.send('Hello!', { embed });
++ channel.send({ content: 'Hello!', embeds: [embed, embed2] });
+
+- interaction.reply('Hello!', { ephemeral: true });
++ interaction.reply({ content: 'Hello!', ephemeral: true });
+```
+
+### Strings
+
+Many methods in discord.js that were documented as accepting strings would accept other types, and resolve this into a string on your behalf. This results of this behaviour were often undesirable, producing output such as `[object Object]`. Discord.js now enforces and validates string input on all methods that expect it. 
+
+The most common areas you will encounter this change is `MessageOptions#content` and the properties of a `MessageEmbed`.
+
 ### Intents
 
 As v13 makes the switch to Discord API v8, it will now be **required** to specify intents in your Client constructor. 
@@ -34,6 +57,10 @@ Refer to our more [detailed article about this topic](/popular-topics/intents).
 - const client = new Client({ ws: { intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 + const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 ```
+
+### Snowflakes
+
+For TypeScript users, discord.js now enforces the `Snowflake` type, a stringified bigint, rather than allowing any string to be accepted.
 
 ### Allowed Mentions
 
@@ -54,14 +81,14 @@ The Discord API now allows bots much more granular control over mention parsing,
 
 ```diff
 - channel.send('content', { reply: '123456789012345678' }); // User ID
-+ channel.send('content', { reply: { messageReference: '765432109876543219' }}); // Message ID
++ channel.send({ content: 'content', reply: { messageReference: '765432109876543219' }}); // Message ID
 ```
 
 The new `MessageOptions.allowedMentions.repliedUser` boolean option determines if the reply will notify the author of the original message.
 
 ```diff
 - message.reply('content')
-+ message.reply('content', { allowedMentions: { repliedUser: false }})
++ message.reply({ content: 'content', allowedMentions: { repliedUser: false }})
 ```
 Note that this will disable all other mentions in this message. To enable other mentions, you will need to include other `allowedMentions` fields. See the above "Allowed Mentions" section for more.
 
@@ -163,6 +190,10 @@ This method no longer returns a Promise.
 
 This method no longer returns a Promise.
 
+### ColorResolvable
+
+Colors have been updated to align with the new Discord branding.
+
 ### Guild
 
 #### Guild#fetchVanityCode
@@ -170,7 +201,7 @@ This method no longer returns a Promise.
 This method has been removed.
 
 ```diff
-- Guild.fetchVanityCode().then(code => console.log(`Vanity URL: https://discord.gg/${res.code}`));
+- Guild.fetchVanityCode().then(code => console.log(`Vanity URL: https://discord.gg/${code}`));
 + Guild.fetchVanityData().then(res => console.log(`Vanity URL: https://discord.gg/${res.code} with ${res.uses} uses`));
 ```
 
@@ -182,6 +213,10 @@ The helper/shortcut method `Guild#member()` has been removed.
 - guild.member(user);
 + guild.members.cache.get(user.id)
 ```
+
+### Guild#nsfw
+
+The `Guild#nsfw` property has been removed, replaced by `Guild#nsfwLevel`.
 
 #### Guild#voice
 
@@ -341,6 +376,8 @@ The deprecated UserFlags `DISCORD_PARTNER` and `VERIFIED_DEVELOPER` / `EARLY_VER
 + user.flags.has(UserFlags.FLAGS.EARLY_VERIFIED_BOT_DEVELOPER)
 ```
 
+The new flag `DISCORD_CERTIFIED_MODERATOR` has been added.
+
 ### Util
 
 #### Util#convertToBuffer
@@ -348,6 +385,10 @@ The deprecated UserFlags `DISCORD_PARTNER` and `VERIFIED_DEVELOPER` / `EARLY_VER
 #### Util#str2ab
 
 Both were removed in favor of Node built-in Buffer methods.
+
+#### Util#resolveString
+
+The `Util#resolveString` method has been removed. Discord.js now enforces that users provide strings where expected rather than resolving one on their behalf.
 
 ## Additions
 
@@ -363,6 +404,10 @@ Global headers can now be set in the HTTP options.
 
 New class `ApplicationFlags`, a bitfield for ClientApplication flags.
 
+### BaseGuild
+
+The new `BaseGuild` class is extended by both `Guild` and `OAuth2Guild`.
+
 ### Channel
 
 #### Channel#isText()
@@ -374,6 +419,10 @@ The new `Channel#isText()` function provides an easy way for TypeScript develope
 #### CollectorOptions#filter
 
 Constructing a Collector without providing a filter function will now throw a meaningful `TypeError`.
+
+### CommandInteraction
+
+New class for handling Slash Command interactions. For more information refer to the [Interactions](/interactions/registering-slash-commands) section of the guide.
 
 ### Guild
 
@@ -422,11 +471,30 @@ The new `GuildBanManager` provides improved support for handling and caching ban
 
 The `GuildChannel#clone` method now supports setting the `position` property.
 
+#### GuildChannel#createInvite
+
+The `GuildChannel#createInvite` method now supports additional options:
+
+- `targetUser` to target the invite to join a particular streaming user
+- `targetApplication` to target the invite to a particular Discord activity
+- `targetType`
+
+#### GuildChannel#createOverwrite
+
+The `GuildChannel#createOverwrite` method no longer relies on cache. This is achieved by accepting an options object in which the `type` of overwrite can be specified.
+
+#### GuildChannel#updateOverwrite
+
+The `GuildChannel#updateOverwrite` method no longer relies on cache. This is achieved by accepting an options object in which the `type` of overwrite can be specified.
 ### GuildManager
 
 #### GuildManager#create
 
 The `GuildManager#create` method now supports specifying the AFK and system channels when creating a new guild.
+
+#### GuildManager#fetch
+
+The `GuildManager#fetch` method now supports fetching multiple guilds, returning a `Promise<Collection<Snowflake, OAuth2Guild>>` if used in this way.
 
 ### GuildEmojiManager
 
@@ -487,6 +555,10 @@ API support for [Server Templates](https://discord.com/developers/docs/resources
 #### Integration#roles
 
 Provides a Collection of Roles managed by the integration.
+
+### Interaction
+
+Base class for Slash Command and Message Component interactions. For more information refer to the [Interactions](/interactions/registering-slash-commands) section of the guide.
 
 ### Message
 
@@ -590,11 +662,11 @@ Gets the managed role a bot created when joining the guild, if any.
 
 Gets the premium subscriber (booster) role for the Guild, if any.
 
-### StageChannels
+### StageChannel
 
 Stage Channels are now supported.
 
-### Stickers
+### Sticker
 
 Stickers are now supported.
 
@@ -625,3 +697,12 @@ Webhooks can now fetch messages that were sent by the Webhook.
 #### Webhook#sourceGuild
 
 Webhooks can now have a `sourceGuild` and `sourceChannel` if the message is being crossposted.
+
+### Util
+
+#### Util#resolvePartialEmoji
+
+The new `Util#resolvePartialEmoji` method attempts to resolve properties for a raw emoji object from input data, without the use of the Discord.js Client class or it's EmojiManager.
+#### Util#verifyString
+
+The new `Util#verifyString` method is used to internally validate string arguments provided to methods in discord.js.
