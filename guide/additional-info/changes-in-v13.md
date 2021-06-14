@@ -38,7 +38,7 @@ With the introduction of Interactions and it becoming far common for users to wa
 
 Additionally, all messages sent by bots now support up to 10 embeds. As a result the `embed` option is completely removed, replaced with an `embeds` array which must be in the options object.
 
-```js
+```diff
 - channel.send(embed);
 + channel.send({ embeds: [embed, embed2] });
 
