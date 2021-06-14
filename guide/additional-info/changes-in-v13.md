@@ -28,7 +28,7 @@ This introduces the `MessageActionRow` and `MessageButton` classes, as well as a
 
 ## Voice
 
-Support for voice has been separated into a different module. You nown eeed to install and use [@discordjs/voice](https://github.com/discordjs/voice) for interacting with the Discord Voice API.
+Support for voice has been separated into its own module. You now need to install and use [@discordjs/voice](https://github.com/discordjs/voice) for interacting with the Discord Voice API.
 
 ## Commonly used methods that changed
 
