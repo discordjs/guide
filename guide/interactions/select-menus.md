@@ -118,6 +118,36 @@ Restart your bot and then send the command to a channel your bot has access to. 
 	</discord-message>
 </div>
 
+Additionally, if you don't want to construct an `ActionRow` every time, you can also pass an array of arrays containing components like this:
+
+```js {7-21,23}
+const { MessageActionRow, MessageSelectMenu, MessageEmbed } = require('discord.js');
+
+client.on('interaction', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'ping') {
+		const menu = new MessageSelectMenu()
+			.setCustomID('select')
+			.setPlaceholder('Nothing selected')
+			.addOptions([
+				{
+					label: 'Select me',
+					description: 'This is a description',
+					value: 'first_selection',
+				},
+				{
+					label: 'You can select me too',
+					description: 'This is also a description',
+					value: 'second_selection',
+				},
+			]);
+
+		await interaction.reply({ content: 'Pong!', ephemeral: true, embeds: [embed], components: [[menu]] });
+	}
+});
+```
+
 Now you know all there is to building and sending a `SelectMenu`! Let's move on to how to receive selected options!
 
 
@@ -144,17 +174,27 @@ You can create the collectors on either a `message` or a `channel`.
 
 ### MessageComponentInteractionCollector
 
-To create a basic event-based `MessageComponentInteractionCollector`, simply do as follows:
+Here's how you can create a basic event-based `MessageComponentInteractionCollector`:
 
-```js
-client.on('message', message => {
-	const filter = interaction => interaction.customID === 'select' && interaction.user.id === '122157285790187530';
-	const collector = message.createMessageComponentInteractionCollector(filter, { time: 15000 });
+```js {6,8,10-11}
+client.on('interaction', async interaction => {
+	if (!interaction.isCommand()) return;
 
-	collector.on('collect', interaction => console.log(`Collected ${interaction.customID}`));
-	collector.on('end', collected => console.log(`Collected ${collected.size} items`));
+	if (interaction.commandName === 'ping') {
+		const message = await interaction.fetchReply();
+		const filter = i => i.customID === 'select' && i.user.id === '122157285790187530';
+
+		const collector = message.createMessageComponentInteractionCollector(filter, { time: 15000 });
+
+		collector.on('collect', i => console.log(`Collected ${i.customID}`));
+		collector.on('end', collected => console.log(`Collected ${collected.size} items`));
+	}
 });
 ```
+
+::: danger
+For ephemeral responses you cannot fetch a message object, so create the collector on a channel instead.
+:::
 
 ### awaitMessageComponentInteraction
 
@@ -164,13 +204,18 @@ As with other types of collectors, you can also use a promise-based collector li
 Unlike other promise-based collectors, this one only collects a single item!
 :::
 
-```js {4-6}
-client.on('message', message => {
-	const filter = interaction => interaction.customID === 'select' && interaction.user.id === '122157285790187530';
+```js 8-11}
+client.on('interaction', async interaction => {
+	if (!interaction.isCommand()) return;
 
-	message.awaitMessageComponentInteraction(filter, { time: 15000 })
-		.then(interaction => console.log(`${interaction.customID} was clicked!`))
-		.catch(console.error);
+	if (interaction.commandName === 'ping') {
+		const message = await interaction.fetchReply();
+		const filter = i => i.customID === 'select' && i.user.id === '122157285790187530';
+
+		message.awaitMessageComponentInteraction(filter, { time: 15000 })
+			.then(i => console.log(`${i.customID} was selected!`))
+			.catch(console.error);
+	}
 });
 ```
 
