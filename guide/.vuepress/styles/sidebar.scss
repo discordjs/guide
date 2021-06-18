@@ -7,6 +7,7 @@
 .sidebar {
 	top: 4rem;
 	font-size: 14px;
+	@include customScrollbar();
 
 	& > .sidebar-links {
 		padding: 1.25rem 0.5rem;
