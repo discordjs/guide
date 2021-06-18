@@ -12,10 +12,8 @@
 		background-color: $blurple630;
 	}
 
-	@media (min-width: 719px) {
-		&.router-link-active {
-			background-color: $blurple600;
-		}
+	&.router-link-active {
+		background-color: $blurple600;
 	}
 }
 
@@ -27,6 +25,13 @@
 	font-size: 14px;
 	padding: 0.5rem 4.15rem;
 	border-width: 0;
+
+	@media screen and (max-width: 719px) {
+		flex-direction: row-reverse;
+		justify-content: space-between;
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
 
 	.toggle-sidebar-button {
 		@include navLink();
@@ -57,6 +62,10 @@
 		right: 0;
 		top: 0;
 		padding-left: 0;
+
+		@media screen and (max-width: 719px) {
+			display: none;
+		}
 
 		.navbar-links {
 			.navbar-links-item {
