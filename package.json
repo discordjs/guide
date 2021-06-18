@@ -1,7 +1,7 @@
 {
     "name": "discord.js-guide",
     "description": "Imagine a guide... that explores the many possibilies for your discord.js bot.",
-    "version": "2.0.0",
+    "version": "3.0.0",
     "private": true,
     "scripts": {
         "lint": "eslint . --ext js,md,vue",
