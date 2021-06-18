@@ -1,6 +1,6 @@
 {
     "name": "discord.js-guide",
-    "description": "The official guide for discord.js, created and maintained by core members of its community.",
+    "description": "Imagine a guide... that explores the many possibilies for your discord.js bot.",
     "version": "2.0.0",
     "private": true,
     "scripts": {

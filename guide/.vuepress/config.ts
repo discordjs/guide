@@ -7,7 +7,7 @@ export default defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 	bundler: '@vuepress/vite',
 	lang: 'en-US',
 	title: 'Discord.js Guide',
-	description: 'A guide made by the community of discord.js for its users.',
+	description: 'Imagine a guide... that explores the many possibilies for your discord.js bot.',
 	head: [
 		['meta', { charset: 'utf-8' }],
 		['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }],
@@ -15,7 +15,7 @@ export default defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 		['meta', { name: 'theme-color', content: '#5865f2' }],
 		['meta', { name: 'twitter:card', content: 'summary' }],
 		['meta', { property: 'og:title', content: 'Discord.js Guide' }],
-		['meta', { property: 'og:description', content: 'A guide made by the community of discord.js for its users.' }],
+		['meta', { property: 'og:description', content: 'Imagine a guide... that explores the many possibilies for your discord.js bot.' }],
 		['meta', { property: 'og:type', content: 'website' }],
 		['meta', { property: 'og:url', content: 'https://discordjs.guide/' }],
 		['meta', { property: 'og:locale', content: 'en_US' }],

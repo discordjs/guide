@@ -4,7 +4,7 @@
 
 # Discord.js Guide
 
-The official guide for [discord.js](https://github.com/discordjs/discord.js), created and maintained by core members of its community and contributed to by [various others](https://github.com/discordjs/guide/graphs/contributors?type=a).
+Imagine a guide... that explores the many possibilies for your [discord.js](https://github.com/discordjs/discord.js) bot.
 
 ## About
 
