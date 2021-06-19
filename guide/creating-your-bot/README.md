@@ -55,47 +55,23 @@ client.login('your-token-goes-here');
 
 Although it's not a lot, it's good to know what each bit of your code does. But, as it currently is, this won't do anything. You probably want to add some commands that run whenever someone sends a specific message, right? Let's get started on that, then!
 
-## Listening for messages
+## Listening for interactions
 
 First, make sure to close the process in your console. You can do so by pressing `Ctrl + C` inside the console. Go back to your code editor and add the following piece of code above the `client.login()` line.
 
 ```js
-client.on('message', message => {
-	console.log(message.content);
+client.on('interaction', interaction => {
+	console.log(interaction);
 });
 ```
 
-Notice how the code uses `.on` rather than `.once` like in the ready event. This means that it can trigger multiple times. Save the file, go back to your console, and start the process up again. Whenever a message is sent inside a channel your bot can access, the console will log the message's content. Go ahead and test it out!
+Notice how the code uses `.on` rather than `.once` like in the ready event. This means that it can trigger multiple times. Save the file, go back to your console, and start the process up again. Whenever an interaction is received, the console will log it. Go ahead and test it out!
 
 ::: tip
 Inside your console, you can press the up arrow on your keyboard to bring up the latest commands you've run. Pressing `Up` and then `Enter` after closing the process is a convenient, quick way to start it up again (instead of typing out the name each time).
 :::
 
-## Replying to messages
-
-Logging to the console is great and all, but it doesn't provide any feedback for the end-user. Let's create a basic ping/pong command before you move on to making real commands. Remove the `console.log(message.content)` line from your code and replace it with the following:
-
-```js {2-5}
-client.on('message', message => {
-	if (message.content === '!ping') {
-		// send back "Pong." to the channel the message was sent in
-		message.channel.send('Pong.');
-	}
-});
-```
-
-Restart your bot and then send `!ping` to a channel your bot has access to. If all goes well, you should see something like this:
-
-<DiscordMessages>
-	<DiscordMessage profile="user">
-		!ping
-	</DiscordMessage>
-	<DiscordMessage profile="bot">
-		Pong.
-	</DiscordMessage>
-</DiscordMessages>
-
-You've successfully created your first Discord bot command! Exciting stuff, isn't it? This is only the beginning, so let's move on to making some more commands.
+To learn how create and how to receive slash commands please thoroughly read through [the interactions section](/interactions/registering-slash-commands/).
 
 ## Resulting code
 

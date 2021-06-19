@@ -20,7 +20,7 @@ client.on('interaction', async interaction => {
 	if (interacton.commandName === 'ping') {
 		await interaction.reply('Pong.');
 	} else if (interacton.commandName === 'beep') {
-		await interaction.reply('Boop.');
+		await interaction.reply('Boop!');
 	}
 	// ...
 });
