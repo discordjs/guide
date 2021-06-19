@@ -123,6 +123,56 @@ client.on('interaction', async interaction => {
 });
 ```
 
+### Disabled buttons
+
+If you want to prevent a button from being used, but not remove it from the message, you can make use of the `setDisabled()` method, which will make it unclickable for everyone:
+
+```js {13}
+const { MessageActionRow, MessageButton } = require('discord.js');
+
+client.on('interaction', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'ping') {
+		const row = new MessageActionRow()
+			.addComponents(
+				new MessageButton()
+					.setCustomID('primary')
+					.setLabel('primary')
+					.setStyle('PRIMARY')
+					.setDisabled(true),
+			);
+
+		await interaction.reply({ content: 'Pong!', components: [row] });
+	}
+});
+```
+
+### Emoji buttons
+
+The label of a button can hold unicode emojis, but if you want to use guild emojis you have to use the `setEmoji()` method like so:
+
+```js {13}
+const { MessageActionRow, MessageButton } = require('discord.js');
+
+client.on('interaction', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'ping') {
+		const row = new MessageActionRow()
+			.addComponents(
+				new MessageButton()
+					.setCustomID('primary')
+					.setLabel('primary')
+					.setStyle('PRIMARY')
+					.setEmoji('123456789012345678'),
+			);
+
+		await interaction.reply({ content: 'Pong!', components: [row] });
+	}
+});
+```
+
 Now you know all there is to building and sending a `MessageButton`! Let's move on to how to receive buttons!
 
 
