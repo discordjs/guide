@@ -1,35 +1,35 @@
 # Useful packages
 
-## moment.js
+## Day.js
 
 ::: tip
-Official documentation: [https://momentjs.com/docs](https://momentjs.com/docs)
+Official documentation: [https://day.js.org/](https://day.js.org/en)
 :::
 
-Moment is a powerful package for working with dates in JavaScript.  
+Day.js is a powerful package that parses, validates, manipulates, and displays dates and times in JavaScript.
 It allows you to quickly and easily format dates in any way you want or parse strings back into JavaScript Date objects.  
-There are even some extensions for it to allow you to work with durations and more.
+There are even some plugins for it to allow you to work with durations and more.
 
 For example if you wanted to ask your users to give you a date,  
-you can use moment to turn it in a Date object you can use in your code:
+you can use Day.js to turn it into a Date object you can use in your code:
 
 <!-- eslint-skip -->
 ```js
 const input = await message.channel.awaitMessages(m => m.author.id === message.author.id, {
-	max: 4,
+	max: 1,
 	time: 10e3,
 	errors: ['time'],
 });
-const date = moment(input.first().content);
+const date = dayjs(input.first().content).toDate();
 ```
 
-Using the "moment-duration-format" extension, you could tell the user how many days in the future or past the date is:
+Using the "Duration" plugin, you could tell the user how many days in the future or past the date is:
 
 ```js
 if (date.isValid()) {
-	const now = moment();
+	const now = dayjs();
 	const duration = date - now;
-	const formatted = moment.duration(duration, 'ms').format();
+	const formatted = dayjs.duration(duration, 'ms').format();
 
 	if (duration > 0) {
 		message.channel.send(`The date you gave me is ${formatted} into the future.`);
