@@ -226,6 +226,77 @@ Interaction responses run on top of webhooks thus, they inherit certain aspects 
 - they can mask links in message content
 :::
 
+## Parsing options
+
+If you have a command that contains options, chances are you want to access their values in your code, so let's se how to that. 
+
+Let's assume you have a command that contains the following options:
+
+```js {4-35}
+const data = {
+	name: 'ping',
+	description: 'Replies with Pong!',
+	options: [
+		{
+			name: 'input',
+			description: 'Enter a string',
+			type: 'STRING',
+		},
+		{
+			name: 'num',
+			description: 'Enter an integer',
+			type: 'INTEGER',
+		},
+		{
+			name: 'choice',
+			description: 'Select a boolean',
+			type: 'BOOLEAN',
+		},
+		{
+			name: 'target',
+			description: 'Select a user',
+			type: 'USER',
+		},
+		{
+			name: 'destination',
+			description: 'Select a channel',
+			type: 'CHANNEL',
+		},
+		{
+			name: 'muted',
+			description: 'Select a role',
+			type: 'ROLE',
+		},
+	],
+};
+```
+
+You would `get()` these options from the `CommandInteraction#options` collection like this:
+
+```js {5-11,13}
+client.on('interaction', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'ping') {
+		const string = interaction.options.get('input').value;
+		const integer = interaction.options.get('num').value;
+		const boolean = interaction.options.get('choice').value;
+		const { user } = interaction.options.get('target');
+		const { member } = interaction.options.get('input');
+		const { channel } = interaction.options.get('destination');
+		const { role } = interaction.options.get('muted');
+
+		console.log([string, integer, boolean, user, member, channel, role]);
+		await interaction.reply('Pong!');
+	}
+});
+```
+
+::: tip
+If you want the snowflake of a structure instead, you can retrieve that by accesing it with the `value` property.
+:::
+
+
 ## Fetching and deleting responses
 
 ::: danger
