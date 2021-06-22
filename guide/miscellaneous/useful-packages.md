@@ -7,8 +7,8 @@ Official documentation: [https://day.js.org/](https://day.js.org/en)
 :::
 
 Day.js is a powerful package that parses, validates, manipulates, and displays dates and times in JavaScript.
-It allows you to quickly and easily format dates in any way you want or parse strings back into JavaScript Date objects.  
-There are even some plugins for it to allow you to work with durations and more.
+It allows you to quickly and easily format dates in any way you want or parse strings back into JavaScript Date objects.
+There are many plugins for it that allow you to work with durations and more.
 
 For example if you wanted to ask your users to give you a date,  
 you can use Day.js to turn it into a Date object you can use in your code:
@@ -23,7 +23,7 @@ const input = await message.channel.awaitMessages(m => m.author.id === message.a
 const date = dayjs(input.first().content).toDate();
 ```
 
-Using the "Duration" plugin, you could tell the user how many days in the future or past the date is:
+Using the [duration plugin](https://day.js.org/docs/en/durations/durations), you could tell the user how many days in the future or past the date is:
 
 ```js
 if (date.isValid()) {
