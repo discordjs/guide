@@ -57,7 +57,7 @@
 		"prefix": [
 			"branch", "br"
 		],
-		"description": "v11-v12 branches",
+		"description": "version branches",
 		"body": [
 			"<branch version=\"11.x\">", 
 			"",
@@ -68,13 +68,17 @@
 			"",
 			"$2",
 			"",
-			"</branch>"
-		]
+			"</branch>",
+			"<branch version=\"13.x\">",
+			"",
+			"$3",
+			"",
+			"</branch>"]
 	},
 	"branch-inline": {
 		"prefix": ["branch-inline", "br-inline"],
-		"description": "v11-v12 branches (inline)",
-		"body": "<branch version=\"11.x\" inline>$1</branch><branch version=\"12.x\" inline>$2</branch>"
+		"description": "version branches (inline)",
+		"body": "<branch version=\"11.x\" inline>$1</branch><branch version=\"12.x\" inline>$2</branch><branch version=\"13.x\" inline>$3</branch>"
 	},
 	"docs": {
 		"prefix": ["docs", "djs-docs"],
