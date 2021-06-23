@@ -7,11 +7,12 @@ module.exports = {
 				name: 'target',
 				description: 'The member to kick',
 				type: 'USER',
+				required: true,
 			},
 		],
 	},
-	async run(interaction) {
-		const user = interaction.options.get('target').user;
+	async execute(interaction) {
+		const { user } = interaction.options?.get('target');
 		await interaction.reply({ content: `You wanted to kick: ${user.username}`, ephemeral: true });
 	},
 };

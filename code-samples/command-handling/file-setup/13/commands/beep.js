@@ -3,7 +3,7 @@ module.exports = {
 		name: 'beep',
 		description: 'Beep!',
 	},
-	async run(interaction) {
-		await interaction.reply('Boop!');
+	async execute(interaction) {
+		return interaction.reply('Boop!');
 	},
 };
