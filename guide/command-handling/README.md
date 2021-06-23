@@ -28,9 +28,6 @@ client.on('interaction', async interaction => {
 client.login(token);
 ```
 
-::: tip
-We'll be moving over the commands created in [the previous page](/creating-your-bot/commands-with-user-input.md) as well, but for the sake of keeping the base code short, the code block above omits those commands.
-:::
 
 ## Individual command files
 
@@ -46,13 +43,13 @@ module.exports = {
 		name: 'ping',
 		description: 'Replies with Pong!',
 	},
-	async run(interaction) {
+	async execute(interaction) {
 		await interaction.reply('Pong!');
 	},
 };
 ```
 
-You can go ahead and do the same for the rest of your commands and put their respective blocks of code inside the `run()` function. If you've been using the same code as the guide thus far, you can copy & paste your commands into their own files now, following the format above. The `description` property is optional but will be useful for the dynamic help command we'll be covering later.
+You can go ahead and do the same for the rest of your commands and put their respective blocks of code inside the `execute()` function. If you've been using the same code as the guide thus far, you can copy & paste your commands into their own files now, following the format above. The `description` property is optional but will be useful for the dynamic help command we'll be covering later.
 
 ::: tip
 `module.exports` is how you export data in Node.js so that you can `require()` it in other files. If you're unfamiliar with it and want to read more, you can look at [the documentation](https://nodejs.org/api/modules.html#modules_module_exports) for more info.
@@ -98,9 +95,9 @@ for (const file of commandFiles) {
 }
 ```
 
-## Dynamically running commands
+## Dynamically executing commands
 
-With your `client.commands` Collection setup, you can use it to retrieve and run your commands! Inside your `interaction` event, delete your `if`/`else if` chain of commands and replace it with this:
+With your `client.commands` Collection setup, you can use it to retrieve and execute your commands! Inside your `interaction` event, delete your `if`/`else if` chain of commands and replace it with this:
 
 ```js {6-12}
 client.on('interaction', async interaction => {
@@ -109,15 +106,15 @@ client.on('interaction', async interaction => {
 	if (!client.commands.has(interaction.commandName)) return;
 
 	try {
-		await client.commands.get(interaction.commandName).run(interaction);
+		await client.commands.get(interaction.commandName).execute(interaction);
 	} catch (error) {
 		console.error(error);
-		await interaction.reply({ content: 'There was an error while running this command!', ephemeral: true });
+		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
 ```
 
-If there isn't a command with that name, you don't need to do anything further, so exit early with `return`. If there is, `.get()` the command, call its `.run()` method, and pass in your `interaction` variable as its argument. In case something goes wrong, log the error and report back to the member to let them know.
+If there isn't a command with that name, you don't need to do anything further, so exit early with `return`. If there is, `.get()` the command, call its `.execute()` method, and pass in your `interaction` variable as its argument. In case something goes wrong, log the error and report back to the member to let them know.
 
 And that's it! Whenever you want to add a new command, you make a new file in your `commands` directory, name it what you want, and then do what you did for the other commands.
 

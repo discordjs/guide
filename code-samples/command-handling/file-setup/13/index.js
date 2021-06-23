@@ -22,10 +22,10 @@ client.on('interaction', async interaction => {
 	if (!client.commands.has(interaction.commandName)) return;
 
 	try {
-		await client.commands.get(interaction.commandName).run(interaction);
+		await client.commands.get(interaction.commandName).execute(interaction);
 	} catch (error) {
 		console.error(error);
-		await interaction.reply({ content: 'There was an error while running this command!', ephemeral: true });
+		return interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
 
