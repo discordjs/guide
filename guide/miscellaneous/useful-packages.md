@@ -23,7 +23,7 @@ const input = await message.channel.awaitMessages(m => m.author.id === message.a
 const date = dayjs(input.first().content).toDate();
 ```
 
-Using the [duration plugin](https://day.js.org/docs/en/durations/durations), you could tell the user how many days in the future or past the date is:
+Using the [duration plugin](https://day.js.org/docs/en/durations/durations), you could tell the user if the date is in the future or the past:
 
 ```js
 if (date.isValid()) {
