@@ -60,7 +60,6 @@ module.exports = {
 				'/creating-your-bot/',
 				'/creating-your-bot/configuration-files',
 				'/creating-your-bot/adding-more-commands',
-				'/creating-your-bot/commands-with-user-input',
 			],
 		},
 		{
