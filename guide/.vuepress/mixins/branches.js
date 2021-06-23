@@ -1,5 +1,10 @@
 const branches = [
 	{
+		label: 'v13 (master)',
+		version: '13.x',
+		aliases: ['13', 'master'],
+	},
+	{
 		label: 'v12 (stable)',
 		version: '12.x',
 		aliases: ['12', 'stable'],
