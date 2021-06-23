@@ -46,10 +46,11 @@ export default {
 	},
 	methods: {
 		formatBranch(version) {
-			// NOTE: v12 is the current stable branch,
+			// NOTE: v12 is the current stable branch and v13 is the current master branch,
 			// but linking to the `v12` branch points to an outdated version
 			// This is temporary until v13 comes stable
 			if (version.startsWith('12')) return 'stable';
+			if (version.startsWith('13')) return 'master';
 			return `v${version.slice(0, 2)}`;
 		},
 	},
