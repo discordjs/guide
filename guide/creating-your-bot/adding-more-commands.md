@@ -88,14 +88,14 @@ client.on('message', message => {
 
 The code above would result in this:
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!server
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		This server's name is: Discord Bot Guide
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 If you want to expand upon that command and add some more info, here's an example of what you can do:
 
@@ -113,15 +113,15 @@ client.on('message', message => {
 
 That would display both the server name _and_ the amount of members in it.
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!server
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		Server name: Discord Bot Guide<br>
 		Total members: 3
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 Of course, you can modify this to your liking. You may also want to display the date the server was created or the server's region. You would do those in the same manner–use `message.guild.createdAt` or `message.guild.region`, respectively.
 
@@ -151,15 +151,15 @@ client.on('message', message => {
 
 This will display the message author's **username** (not nickname, if they have one set), as well as their user ID.
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!user-info
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		Your username: User <br>
 		Your ID: 20833034795932416
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 ::: tip
 `message.author` refers to the user who sent the message. For a full list of all the properties and methods for the author object (a member of the `User` class), check out <docs-link path="class/User">the documentation page for it</docs-link>.

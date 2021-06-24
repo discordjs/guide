@@ -9,11 +9,11 @@ The mentions will still take up space in your args array, messing up the rest of
 Say you are writing a bot for moderating your server. You will want a kick or a ban command, which allows you to mention the person you are trying to ban.
 But what happens if you try to use the command like this?
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!ban <mention>Offender</mention> Because they were rude to <mention>Victim</mention>.
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 You might expect it to ban @Offender because that is who you mentioned first.
 However, the Discord API does not send the mentions in the order they appear; They are sorted by their ID instead.
@@ -22,11 +22,11 @@ If the @Victim happens to have joined Discord before @Offender and has a smaller
 Or maybe someone misuses a command, the bot might still accept it, but it will create an unexpected outcome.  
 Say someone accidentally used the ban command like this:
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!ban Because they were rude to <mention>Victim</mention>.
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 The bot will still ban someone, but it will be the @Victim again. `message.mentions.users` still contains a mention, which the bot will use. But in reality, you would want your bot to be able to tell the user they misused the command.
 
@@ -38,11 +38,11 @@ Role mentions and channel mentions work similarly. Role mentions look like `<@&1
 That means when you receive a message from the Discord API, and it contains mentions, the message's content will contain that special syntax.  
 If you send
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		I think we should add <mention>GoodPerson</mention> to the <mention type="role" color="#3eaf7c">Mod</mention> role.
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 then the `message.content` for that message will look something like this
 
@@ -204,17 +204,17 @@ If the user-supplied an argument, it should be the user mention, so it just gets
 
 And that is it! Simple, isn't it? Start up your bot and see if it works.
 
-<div is="discord-messages">
-	<discord-message author="AnotherUser" avatar="green">
+<DiscordMessages>
+	<DiscordMessage author="AnotherUser" avatar="green">
 		!avatar <mention profile="user" />
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		User's avatar:
 		<a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
 		<br />
 		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 So now, instead of using `message.mentions`, you can use your new, fantastic function.
 This will allow you to add proper checks for all your args so that you can tell when a command is and isn't used correctly.
@@ -286,11 +286,11 @@ client.on('message', async message => {
 
 Now if you send a command like the following you can always be sure it will use the mention at the very front to figure out who to ban, and will properly validate the mention:
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!ban <mention>Offender</mention> because they were rude to <mention>Victim</mention>.
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 ### Using Regular Expressions
 

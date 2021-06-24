@@ -47,15 +47,15 @@ client.on('message', message => {
 
 If you try it out, you'll get something like this:
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!args-info here are my arguments
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		Command name: args-info <br>
 		Arguments: here,are,my,arguments
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 Looks good! Don't worry about the comma separation; that's the expected output when trying to send an array as a string.
 
@@ -81,35 +81,35 @@ client.on('message', message => {
 
 So if the first argument provided is equal to "foo", then send back "bar". Otherwise, send back the argument the user supplied.
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!args-info foo
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		bar
-	</discord-message>
-	<discord-message profile="user">
+	</DiscordMessage>
+	<DiscordMessage profile="user">
 		!args-info not-foo
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		First argument: not-foo
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 ### Caveats
 
 Currently, you're using `.split(' ')` to split the command arguments. However, there's actually a slight issue with this. As is, it'll split the string by each and every space. Well, what happens if someone accidentally (or even purposely) adds additional spaces? Here's what:
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!args-info     here    are    my    arguments
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		Command name: args-info <br>
 		Arguments: here,,,,,are,,,,,my,,,,,,arguments <br>
 		Argument length: 20
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 If you've never done something like this before, this probably isn't what you'd expect, right? Thankfully, there's a simple solution for this issue: using something called a "regular expression" (commonly referred to as "regex") to handle possible repeated spaces.
 
@@ -118,16 +118,16 @@ If you've never done something like this before, this probably isn't what you'd 
 + const args = message.content.slice(prefix.length).trim().split(/ +/);
 ```
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!args-info     here    are    my    arguments
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		Command name: args-info <br>
 		Arguments: here,are,my,arguments <br>
 		Argument length: 4
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 Awesome! Nothing to worry in that regard about now.
 
@@ -156,14 +156,14 @@ client.on('message', message => {
 
 And as you can see, it works!
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!kick <mention profile="bot" />
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		You wanted to kick: Guide Bot
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 But what happens if you try to use the command without mentioning anybody? If you try it yourself, you'll notice that the bot doesn't respond (due to it crashing), and you should see something like this in your console:
 
@@ -192,20 +192,20 @@ Since `message.mentions.users` is a Collection, it has a `.size` property. If no
 
 If you try again, it should work as expected.
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!kick
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		<mention :highlight="true" profile="user" />, you need to tag a user to kick them!
-	</discord-message>
-	<discord-message profile="user">
+	</DiscordMessage>
+	<DiscordMessage profile="user">
 		!kick <mention profile="bot" />
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		You wanted to kick: Guide Bot
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 ### Working with multiple mentions
 
@@ -238,17 +238,17 @@ If you provide the `dynamic` option, you will receive a `.gif` URL if the image 
 
 That part is simple; recycle the if statement you used in the section above and displaying the link to your avatar.
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!avatar
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		Your avatar:
 		<a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
 		<br />
 		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 The next part is where it takes a turn–displaying the avatars of all the mentioned users. But it's simpler than you may think! `message.mentions.users` returns a Collection (as previously mentioned), which you can loop over in several different ways. You'll be using `.map()` to loop here since it allows you to easily collect and store data in a variable to send one final message in the end, as opposed to multiple.
 
@@ -291,11 +291,11 @@ If you provide the `dynamic` option, you will receive a `.gif` URL if the image 
 
 And ta-da! You now have a list of avatar links of all the users you tagged.
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!avatar <mention :highlight="true" profile="user" /> <mention profile="bot" />
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		User's avatar:
 		<a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
 		<br />
@@ -305,8 +305,8 @@ And ta-da! You now have a list of avatar links of all the users you tagged.
 		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
 		<br />
 		<img src="https://cdn.discordapp.com/avatars/768861834441654282/6188d7f0602c2d495a5b7d98f8c0ebb5.png" alt="" />
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 It does take up a lot of screen, but this is just an example command anyway.
 
@@ -338,14 +338,14 @@ client.on('message', message => {
 
 And if you test it, it should work as expected.
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!prune some-string
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		<mention :highlight="true" profile="user" />, that doesn't seem to be a valid number.
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 So what you need to do next is check if the first argument is between X and Y. Following the idea of a prune command, you'll most likely want to use the `.bulkDelete()` method, which allows you to delete multiple messages in one fell swoop.
 

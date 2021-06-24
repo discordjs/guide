@@ -269,31 +269,31 @@ If you're writing a page that teaches the reader how to build something step-by-
 
 ### Displaying Discord messages
 
-We use [vue-discord-message](https://vue-discord-message.netlify.app/) to display "fake" Discord messages on pages. The reason for this is to make it easy for you to create, easy for anyone in the future to edit, and avoid having to take screenshots and using too many images on a page at once. Here's a preview of the components:
+We use [@discord-message-components/vue](https://github.com/Danktuary/discord-message-components/blob/main/packages/vue/README.md) to display "fake" Discord messages on pages. The reason for this is to make it easy for you to create, easy for anyone in the future to edit, and avoid having to take screenshots and using too many images on a page at once. Here's a preview of the components:
 
 ![Discord message faker preview](https://i.imgur.com/5eY8WFO.png)
 
 The syntax to make this display is quite simple as well:
 
 ```html
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!ping
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		<mention :highlight="true" profile="user" />, pong! Took 250ms
-	</discord-message>
-	<discord-message author="Another User" avatar="green">
+	</DiscordMessage>
+	<DiscordMessage author="Another User" avatar="green">
 		Pung!
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 ```
 
-These components are made with [Vue](https://vuejs.org/), but if you aren't familiar with Vue, don't worry about it. Just understand that you'll usually only need the `profile="user"`/`profile="bot"` attribute for the `<discord-message>` component. All `<discord-message>` components must be children of a single `<div is="discord-messages">` component for it to display properly.
+These components are made with [Vue](https://vuejs.org/), but if you aren't familiar with Vue, don't worry about it. Just understand that you'll usually only need the `profile="user"`/`profile="bot"` attribute for the `<DiscordMessage>` component. All `<DiscordMessage>` components must be children of a single `<DiscordMessage>` component for it to display properly.
 
-Do note the `<div is="discord-messages">` syntax instead of `<discord-messages>`. This is due to how VuePress renders markdown and HTML inside markdown files. It doesn't recognize `<discord-messages>` as an HTML element, therefore rendering anything indented inside it as a regular codeblock.
+Do note the casing in `<DiscordMessage>` syntax instead of `<discord-messages>`. This is due to how VuePress renders markdown and HTML inside markdown files. It doesn't recognize `<discord-messages>` as an HTML element, therefore rendering anything indented inside it as a regular codeblock.
 
-These components feature messages, mentions, and full embed support. You can read more about how to use them by checking out the [examples for vue-discord-message](https://vue-discord-message.netlify.app/examples.html).
+These components feature messages, mentions, embeds, interactions, and more. You can read more about how to use them by checking out [@discord-message-components/vue](https://github.com/Danktuary/discord-message-components/blob/main/packages/vue/README.md).
 
 ### Branch-specific content
 

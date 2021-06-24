@@ -39,18 +39,18 @@
 		"prefix": ["messages", "discord-messages"],
 		"description": "mock discord message wrapper",
 		"body": [
-			"<div is=\"discord-messages\">",
+			"<DiscordMessages>",
 			"\t$1",
-			"</div>"
+			"</DiscordMessages>"
 		]
 	},
 	"message": {
 		"prefix": ["message", "discord-message"],
 		"description": "mock discord message",
 		"body": [
-			"<discord-message profile=\"${1:user}\">",
+			"<DiscordMessage profile=\"${1:user}\">",
 			"\t${3:You can mock mentions with <mention>someone</mention> and mark the message as highlighted (mentioning the logged in user) with <mention :highlight=\"true\">someone</mention>}$0",
-			"</discord-message>"
+			"</DiscordMessage>"
 		]
 	},
 	"branch": {

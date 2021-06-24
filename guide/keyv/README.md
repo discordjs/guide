@@ -138,26 +138,26 @@ You will probably want to set up additional validation, such as required permiss
 
 ### Usage
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		.prefix
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		Prefix is <code class="discord-message-inline-code">.</code>
-	</discord-message>
-	<discord-message profile="user">
+	</DiscordMessage>
+	<DiscordMessage profile="user">
 		.prefix $
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		Successfully set prefix to <code class="discord-message-inline-code">$</code>
-	</discord-message>
-	<discord-message profile="user">
+	</DiscordMessage>
+	<DiscordMessage profile="user">
 		$prefix
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		Prefix is <code class="discord-message-inline-code">$</code>
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 ## Next steps
 

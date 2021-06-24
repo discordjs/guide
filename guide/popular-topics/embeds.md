@@ -9,8 +9,8 @@ In the following section, we will explain how to compose an embed, send it, and 
 
 Here is an example of how an embed may look. We will go over embed construction in the next part of this guide.
 
-<div is="discord-messages">
-	<discord-message profile="bot">
+<DiscordMessages>
+	<DiscordMessage profile="bot">
 		<discord-embed
 			slot="embeds"
 			color="#0099ff"
@@ -44,8 +44,8 @@ Here is an example of how an embed may look. We will go over embed construction 
 			</embed-fields>
 			<span slot="footer">Some footer text here</span>
 		</discord-embed>
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 ## Using the embed constructor
 

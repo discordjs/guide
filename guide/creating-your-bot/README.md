@@ -86,14 +86,14 @@ client.on('message', message => {
 
 Restart your bot and then send `!ping` to a channel your bot has access to. If all goes well, you should see something like this:
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!ping
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		Pong.
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 You've successfully created your first Discord bot command! Exciting stuff, isn't it? This is only the beginning, so let's move on to making some more commands.
 

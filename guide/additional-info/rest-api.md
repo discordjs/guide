@@ -165,20 +165,20 @@ Here, you are only getting the first object from the array of objects called `li
 
 If you've followed the tutorial, you should have something like this:
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!urban njaksdcas
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		<mention :highlight="true" profile="user" />, No results for <strong>njaksdcas</strong>
-	</discord-message>
-	<discord-message profile="user">
+	</DiscordMessage>
+	<DiscordMessage profile="user">
 		!urban hello world
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books.
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 Now, let's just make this an [embed](/popular-topics/embeds.md).
 
@@ -229,11 +229,11 @@ message.channel.send(embed);
 
 Now, if you do that same command again, you should get this:
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!urban hello world
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		<discord-embed slot="embeds" color="#EFFF00" title="hello world" url="https://www.urbandictionary.com/define.php?term=hello%20world" >
 			<embed-fields slot="fields">
 				<embed-field title="Definition">
@@ -252,8 +252,8 @@ Now, if you do that same command again, you should get this:
 				</embed-field>
 			</embed-fields>
 		</discord-embed>
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 ## Resulting code
 
