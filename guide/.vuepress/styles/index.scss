@@ -9,11 +9,6 @@ html {
 	@include customScrollbar(false);
 }
 
-body {
-	font-family: system-ui, -apple-system, 'Segoe UI', Roboto,
-		Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-}
-
 h2 {
 	padding-bottom: 0;
 	border-bottom: 0;
@@ -31,18 +26,4 @@ details.custom-container.details,
 .custom-container.tip,
 .custom-container.warning {
 	border-radius: 6px;
-}
-
-// NOTE: Overriding $highlightLineBgColor in ./palette.scss doesn't work
-// as of beta.14
-
-div[class*=language-] {
-	.highlight-lines .highlight-line,
-	&.line-numbers-mode .highlight-lines .highlight-line::before {
-		background-color: $highlightLineBgColor;
-	}
-
-	&.line-numbers-mode::after {
-		border-right-color: $highlightLineBgColor;
-	}
 }

@@ -2,15 +2,7 @@
 	@if $thin {
 		scrollbar-width: thin;
 	}
-	scrollbar-color: $blurple460 #eaeaea;
-
-	@media (prefers-color-scheme: dark) {
-		scroll-color: $blurple460 #1d1d1d;
-
-		&::-webkit-scrollbar-track {
-			background-color: #1d1d1d;
-		}
-	}
+	scrollbar-color: var(--blurple-460) var(--c-bg-scrollbar);
 
 	&::-webkit-scrollbar {
 		@if $thin {
@@ -23,14 +15,14 @@
 	}
 
 	&::-webkit-scrollbar-thumb {
-		background-color: $blurple460;
+		background-color: var(--blurple-460);
 
 		&:hover {
-			background-color: $blurple430
+			background-color: var(--blurple-430);
 		}
 	}
 
 	&::-webkit-scrollbar-track {
-		background-color: #eaeaea;
+		background-color: var(--c-bg-scrollbar);
 	}
 }

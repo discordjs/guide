@@ -5,6 +5,8 @@
 }
 
 .sidebar {
+	--c-bg-scrollbar: #ededed;
+
 	top: 4rem;
 	font-size: 14px;
 	@include customScrollbar();
@@ -23,17 +25,21 @@
 				border-radius: 2px 0 0 2px;
 
 				&.active {
-					color: $blurple530;
+					color: var(--blurple-530);
 					border-left-width: 4px;
-					border-left-color: $blurple530;
+					border-left-color: var(--blurple-530);
 				}
 
 				&:hover,
 				&.active:hover {
-					color: $blurple500;
-					border-left-color: $blurple500;
+					color: var(--blurple-500);
+					border-left-color: var(--blurple-500);
 				}
 			}
 		}
 	}
+}
+
+html.dark .sidebar {
+	--c-bg-scrollbar: #171717;
 }

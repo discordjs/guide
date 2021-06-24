@@ -3,7 +3,7 @@
 	max-width: unset;
 
 	.hero {
-		background-color: $blurple500;
+		background-color: var(--blurple-500);
 		padding: 2rem 0;
 
 		img {
@@ -11,7 +11,7 @@
 		}
 
 		.description {
-			color: $textGray;
+			color: var(--text-gray);
 			max-width: unset;
 		}
 	}

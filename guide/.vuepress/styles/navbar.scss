@@ -1,5 +1,5 @@
 @mixin navLink() {
-	color: $textGray;
+	color: var(--text-gray);
 	font-size: 1em;
 	margin: 0;
 	padding: 14px 12px;
@@ -8,17 +8,17 @@
 
 	&:hover,
 	&.router-link-active:hover {
-		color:$textGray;
-		background-color: $blurple630;
+		color: var(--text-gray);
+		background-color: var(--blurple-630);
 	}
 
 	&.router-link-active {
-		background-color: $blurple600;
+		background-color: var(--blurple-600);
 	}
 }
 
 .navbar {
-	background-color: $blurple560;
+	background-color: var(--blurple-560);
 	display: flex;
 	align-items: center;
 	height: 4rem;
@@ -43,19 +43,19 @@
 
 	.site-name {
 		font-size: 1em;
-		color: $textGray;
+		color: var(--text-gray);
 	}
 
 	a {
 		@include navLink();
 
 		.icon.outbound {
-			color: $textGray;
+			color: var(--text-gray);
 		}
 	}
 
 	.navbar-links-wrapper {
-		background-color: $blurple560;
+		background-color: var(--blurple-560);
 		display: flex;
 		align-items: center;
 		position: relative;
