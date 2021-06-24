@@ -24,7 +24,18 @@ $codeLang: 'html' 'js' 'json' 'md' 'sh' 'ts';
 	--c-text: #374151;
 
 	// custom container colors
-	--c-tip: var(--c-brand);
+	--c-tip: #42b983;
+	--c-tip-bg: #e2f5ec;
+	--c-tip-text: #215d42;
+	--c-tip-title: #359469;
+	--c-warning: #e7c000;
+	--c-warning-bg: rgba(255, 229, 100, 0.25);
+	--c-warning-text: #6b5900;
+	--c-warning-title: #b29400;
+	--c-danger: #c00;
+	--c-danger-bg: #ffe0e0;
+	--c-danger-text: #600;
+	--c-danger-title: #c00;
 
 	// code blocks
 	--code-hl-bg-color: #353b45;
@@ -54,7 +65,18 @@ html.dark {
 	--c-text: #9ca3af;
 
 	// custom container colors
-	--c-tip: var(--c-brand);
+	--c-tip: #42b983;
+	--c-tip-bg: rgba(66, 185, 131, 0.25);
+	--c-tip-text: #a0ddc1;
+	--c-tip-title: #66c99c;
+	--c-warning: #e7c000;
+	--c-warning-bg: rgba(255, 229, 100, 0.25);
+	--c-warning-text: #ffefa2;
+	--c-warning-title: #ffd91d;
+	--c-danger: #f66;
+	--c-danger-bg: rgba(204, 0, 0, 0.25);
+	--c-danger-text: #f66;
+	--c-danger-title: #ff2929;
 
 	// code blocks
 	--code-hl-bg-color: #353b45;
