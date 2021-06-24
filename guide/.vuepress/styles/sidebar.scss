@@ -1,3 +1,5 @@
+@import './mixins/scrollbar.scss';
+
 @media (max-width: 719px) {
 	.theme-container.sidebar-open .sidebar {
 		top: 0;
