@@ -278,9 +278,9 @@ client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-		const string = interaction.options.get('input').value;
-		const integer = interaction.options.get('num').value;
-		const boolean = interaction.options.get('choice').value;
+		const { value: string } = interaction.options.get('input');
+		const { value: integer } = interaction.options.get('num');
+		const { value: boolean } = interaction.options.get('choice');
 		const { user } = interaction.options.get('target');
 		const { member } = interaction.options.get('input');
 		const { channel } = interaction.options.get('destination');
