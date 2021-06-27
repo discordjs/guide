@@ -35,7 +35,7 @@
         "eslint-config-sora": "^3.1.0",
         "eslint-plugin-markdown": "^1.0.0",
         "eslint-plugin-vue": "^7.5.0",
-        "vuepress-vite": "^2.0.0-beta.19"
+        "vuepress-vite": "^2.0.0-beta.20"
     },
     "dependencies": {
         "@discord-message-components/vue": "^0.1.3",
