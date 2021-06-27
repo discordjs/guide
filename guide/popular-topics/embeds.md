@@ -11,39 +11,42 @@ Here is an example of how an embed may look. We will go over embed construction 
 
 <DiscordMessages>
 	<DiscordMessage profile="bot">
-		<discord-embed
-			slot="embeds"
-			color="#0099ff"
-			title="Some title"
-			url="https://discord.js.org/"
-			thumbnail="https://i.imgur.com/wSTFkRM.png"
-			image="https://i.imgur.com/wSTFkRM.png"
-			footer-image="https://i.imgur.com/wSTFkRM.png"
-			timestamp="01/01/2018"
-			authorName="Some name"
-			authorImage="https://i.imgur.com/wSTFkRM.png"
-			authorUrl="https://discord.js.org/"
-		>
-			Some description here
-			<embed-fields>
-				<embed-field title="Regular field title">
-					Some value here
-				</embed-field>
-				<embed-field title="​">
-					​
-				</embed-field>
-				<embed-field :inline="true" title="Inline field title">
-					Some value here
-				</embed-field>
-				<embed-field :inline="true" title="Inline field title">
-					Some value here
-				</embed-field>
-				<embed-field :inline="true" title="Inline field title">
-					Some value here
-				</embed-field>
-			</embed-fields>
-			<span slot="footer">Some footer text here</span>
-		</discord-embed>
+		<template #embeds>
+			<DiscordEmbed
+				border-color="#0099ff"
+				embed-title="Some title"
+				url="https://discord.js.org/"
+				thumbnail="https://i.imgur.com/wSTFkRM.png"
+				image="https://i.imgur.com/wSTFkRM.png"
+				footer-icon="https://i.imgur.com/wSTFkRM.png"
+				timestamp="01/01/2018"
+				author-name="Some name"
+				author-icon="https://i.imgur.com/wSTFkRM.png"
+				author-url="https://discord.js.org/"
+			>
+				Some description here
+				<DiscordEmbedFields>
+					<DiscordEmbedField field-title="Regular field title">
+						Some value here
+					</DiscordEmbedField>
+					<DiscordEmbedField field-title="​">
+						​
+					</DiscordEmbedField>
+					<DiscordEmbedField :inline="true" field-title="Inline field title">
+						Some value here
+					</DiscordEmbedField>
+					<DiscordEmbedField :inline="true" field-title="Inline field title">
+						Some value here
+					</DiscordEmbedField>
+					<DiscordEmbedField :inline="true" field-title="Inline field title">
+						Some value here
+					</DiscordEmbedField>
+				</DiscordEmbedFields>
+				<template #footer>
+					<span>Some footer text here</span>
+				</template>
+			</DiscordEmbed>
+		</template>
 	</DiscordMessage>
 </DiscordMessages>
 

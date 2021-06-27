@@ -315,7 +315,7 @@ Making those two small changes, you get this:
 
 <DiscordMessages>
 	<DiscordMessage profile="user">
-		!avatar <mention :highlight="true" profile="user" />
+		!avatar <DiscordMention :highlight="true" profile="user" />
 	</DiscordMessage>
 	<DiscordMessage profile="bot">
 		User's avatar:
@@ -324,7 +324,7 @@ Making those two small changes, you get this:
 		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
 	</DiscordMessage>
 	<DiscordMessage profile="user">
-		!icon <mention :highlight="true" profile="user" />
+		!icon <DiscordMention :highlight="true" profile="user" />
 	</DiscordMessage>
 	<DiscordMessage profile="bot">
 		User's avatar:

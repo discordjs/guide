@@ -281,7 +281,7 @@ The syntax to make this display is quite simple as well:
 		!ping
 	</DiscordMessage>
 	<DiscordMessage profile="bot">
-		<mention :highlight="true" profile="user" />, pong! Took 250ms
+		<DiscordMention :highlight="true" profile="user" />, pong! Took 250ms
 	</DiscordMessage>
 	<DiscordMessage author="Another User" avatar="green">
 		Pung!

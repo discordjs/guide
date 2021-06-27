@@ -170,7 +170,7 @@ If you've followed the tutorial, you should have something like this:
 		!urban njaksdcas
 	</DiscordMessage>
 	<DiscordMessage profile="bot">
-		<mention :highlight="true" profile="user" />, No results for <strong>njaksdcas</strong>
+		<DiscordMention :highlight="true" profile="user" />, No results for <strong>njaksdcas</strong>
 	</DiscordMessage>
 	<DiscordMessage profile="user">
 		!urban hello world
@@ -234,24 +234,28 @@ Now, if you do that same command again, you should get this:
 		!urban hello world
 	</DiscordMessage>
 	<DiscordMessage profile="bot">
-		<discord-embed slot="embeds" color="#EFFF00" title="hello world" url="https://www.urbandictionary.com/define.php?term=hello%20world" >
-			<embed-fields slot="fields">
-				<embed-field title="Definition">
-					The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books. 
-				</embed-field>
-				<embed-field title="Example">
-					programming noob: Hey I just attended my first programming lesson earlier! <br>
-					.NET Veteran: Oh? What can you do? <br>
-					programming noob: I could make a dialog box pop up which says "Hello World!" !!! <br>
-					.NET Veteran: lmao.. hey guys! look.. check out this "hello world" programmer <br><br>
-					Console.WriteLine("Hello World")
-				</embed-field>
-				<embed-field title="Rating">
-					122 thumbs up. <br>
-					42 thumbs down.
-				</embed-field>
-			</embed-fields>
-		</discord-embed>
+		<template #embeds>
+			<DiscordEmbed border-color="#EFFF00" embed-title="hello world" url="https://www.urbandictionary.com/define.php?term=hello%20world">
+				<template #fields>
+					<DiscordEmbedFields>
+						<DiscordEmbedField field-title="Definition">
+							The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books. 
+						</DiscordEmbedField>
+						<DiscordEmbedField field-title="Example">
+							programming noob: Hey I just attended my first programming lesson earlier! <br>
+							.NET Veteran: Oh? What can you do? <br>
+							programming noob: I could make a dialog box pop up which says "Hello World!" !!! <br>
+							.NET Veteran: lmao.. hey guys! look.. check out this "hello world" programmer <br><br>
+							Console.WriteLine("Hello World")
+						</DiscordEmbedField>
+						<DiscordEmbedField field-title="Rating">
+							122 thumbs up. <br>
+							42 thumbs down.
+						</DiscordEmbedField>
+					</DiscordEmbedFields>
+				</template>
+			</DiscordEmbed>
+		</template>
 	</DiscordMessage>
 </DiscordMessages>
 

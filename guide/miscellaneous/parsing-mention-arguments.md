@@ -11,7 +11,7 @@ But what happens if you try to use the command like this?
 
 <DiscordMessages>
 	<DiscordMessage profile="user">
-		!ban <mention>Offender</mention> Because they were rude to <mention>Victim</mention>.
+		!ban <DiscordMention>Offender</DiscordMention> Because they were rude to <DiscordMention>Victim</DiscordMention>.
 	</DiscordMessage>
 </DiscordMessages>
 
@@ -24,7 +24,7 @@ Say someone accidentally used the ban command like this:
 
 <DiscordMessages>
 	<DiscordMessage profile="user">
-		!ban Because they were rude to <mention>Victim</mention>.
+		!ban Because they were rude to <DiscordMention>Victim</DiscordMention>.
 	</DiscordMessage>
 </DiscordMessages>
 
@@ -40,7 +40,7 @@ If you send
 
 <DiscordMessages>
 	<DiscordMessage profile="user">
-		I think we should add <mention>GoodPerson</mention> to the <mention type="role" color="#3eaf7c">Mod</mention> role.
+		I think we should add <DiscordMention>GoodPerson</DiscordMention> to the <DiscordMention type="role" role-color="#3eaf7c">Mod</DiscordMention> role.
 	</DiscordMessage>
 </DiscordMessages>
 
@@ -206,7 +206,7 @@ And that is it! Simple, isn't it? Start up your bot and see if it works.
 
 <DiscordMessages>
 	<DiscordMessage author="AnotherUser" avatar="green">
-		!avatar <mention profile="user" />
+		!avatar <DiscordMention profile="user" />
 	</DiscordMessage>
 	<DiscordMessage profile="bot">
 		User's avatar:
@@ -288,7 +288,7 @@ Now if you send a command like the following you can always be sure it will use 
 
 <DiscordMessages>
 	<DiscordMessage profile="user">
-		!ban <mention>Offender</mention> because they were rude to <mention>Victim</mention>.
+		!ban <DiscordMention>Offender</DiscordMention> because they were rude to <DiscordMention>Victim</DiscordMention>.
 	</DiscordMessage>
 </DiscordMessages>
 

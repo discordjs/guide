@@ -158,7 +158,7 @@ And as you can see, it works!
 
 <DiscordMessages>
 	<DiscordMessage profile="user">
-		!kick <mention profile="bot" />
+		!kick <DiscordMention profile="bot" />
 	</DiscordMessage>
 	<DiscordMessage profile="bot">
 		You wanted to kick: Guide Bot
@@ -197,10 +197,10 @@ If you try again, it should work as expected.
 		!kick
 	</DiscordMessage>
 	<DiscordMessage profile="bot">
-		<mention :highlight="true" profile="user" />, you need to tag a user to kick them!
+		<DiscordMention :highlight="true" profile="user" />, you need to tag a user to kick them!
 	</DiscordMessage>
 	<DiscordMessage profile="user">
-		!kick <mention profile="bot" />
+		!kick <DiscordMention profile="bot" />
 	</DiscordMessage>
 	<DiscordMessage profile="bot">
 		You wanted to kick: Guide Bot
@@ -293,7 +293,7 @@ And ta-da! You now have a list of avatar links of all the users you tagged.
 
 <DiscordMessages>
 	<DiscordMessage profile="user">
-		!avatar <mention :highlight="true" profile="user" /> <mention profile="bot" />
+		!avatar <DiscordMention :highlight="true" profile="user" /> <DiscordMention profile="bot" />
 	</DiscordMessage>
 	<DiscordMessage profile="bot">
 		User's avatar:
@@ -343,7 +343,7 @@ And if you test it, it should work as expected.
 		!prune some-string
 	</DiscordMessage>
 	<DiscordMessage profile="bot">
-		<mention :highlight="true" profile="user" />, that doesn't seem to be a valid number.
+		<DiscordMention :highlight="true" profile="user" />, that doesn't seem to be a valid number.
 	</DiscordMessage>
 </DiscordMessages>
 
