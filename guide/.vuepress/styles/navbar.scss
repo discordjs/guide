@@ -39,6 +39,19 @@
 		top: unset;
 		left: unset;
 		margin-right: 1rem;
+
+		@media screen and (max-width: 719px) {
+			margin-right: 0;
+		}
+	}
+
+	.toggle-dark-button {
+		@include navLink();
+		margin-left: 1rem;
+
+		@media screen and (max-width: 719px) {
+			margin-left: 0;
+		}
 	}
 
 	.site-name {
@@ -62,10 +75,6 @@
 		right: 0;
 		top: 0;
 		padding-left: 0;
-
-		@media screen and (max-width: 719px) {
-			display: none;
-		}
 
 		.navbar-links {
 			.navbar-links-item {
