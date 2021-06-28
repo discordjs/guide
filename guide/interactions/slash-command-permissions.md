@@ -55,7 +55,6 @@ client.on('message', async message => {
 
 And that's how you use slash command permissions to deny or allow access to a single user!
 
-
 ## Role permissions
 
 Now you may want to allow (or deny) multiple users the usage of a command. In this scenario you can apply a permission that is scoped to a role instead of a user:
