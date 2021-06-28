@@ -234,7 +234,7 @@ The `MessageComponentInteraction` class provides the same methods as the `Comman
 
 The `MessageComponentInteraction` class provides a method to update the message the button is attached to, by using `MessageComponentInteraction#update()`. We'll be passing an empty array as components, which will remove the menu after selecting an option:
 
-```js {1,4-7}
+```js {1,4-6}
 client.on('interaction', async interaction => {
 	if (!interaction.isSelectMenu()) return;
 
@@ -248,7 +248,7 @@ client.on('interaction', async interaction => {
 
 Additionally to deferring the response of the interaction, you can defer the menu, which will trigger a loading state and then revert back to its original state:
 
-```js {1,5-9}
+```js {1,6-10}
 const wait = require('util').promisify(setTimeout);
 
 client.on('interaction', async interaction => {
@@ -267,7 +267,7 @@ client.on('interaction', async interaction => {
 
 A select menu is not bound to only one selection; you can specify a minimum and maximum amount of options that must be selected. You can use `MessageSelectMenu#setMinValues()` and `MessageSelectMenu#setMaxValues()` to determine these values.
 
-```js {1,7-30,32}
+```js {1,7-31,33}
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 
 client.on('interaction', async interaction => {
