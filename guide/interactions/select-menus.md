@@ -41,7 +41,7 @@ client.on('interaction', async interaction => {
 							description: 'This is also a description',
 							value: 'second_option',
 						},
-					])
+					]),
 			);
 
 		await interaction.reply({ content: 'Pong!', components: [row] });
@@ -90,7 +90,7 @@ client.on('interaction', async interaction => {
 							description: 'This is also a description',
 							value: 'second_option',
 						},
-					])
+					]),
 			);
 
 		const embed = new MessageEmbed()

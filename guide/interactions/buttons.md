@@ -68,7 +68,7 @@ client.on('interaction', async interaction => {
 				new MessageButton()
 					.setCustomID('primary')
 					.setLabel('primary')
-					.setStyle('PRIMARY')
+					.setStyle('PRIMARY'),
 			);
 
 		const embed = new MessageEmbed()
