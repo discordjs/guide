@@ -39,7 +39,7 @@ module.exports = class MeowCommand extends Command {
 };
 ```
 
-All you need to do is set the properties to an array of permission flags. A list of those can be found <docs-link path="class/Permissions?scrollTo=s-FLAGS">here</docs-link>.
+All you need to do is set the properties to an array of permission flags. A list of those can be found <DocsLink path="class/Permissions?scrollTo=s-FLAGS">here</DocsLink>.
 
 ## Owner-only commands
 

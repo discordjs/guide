@@ -16,7 +16,7 @@ Before storming off and doing so, you should stop and carefully think about if y
 
 `GUILD_MEMBERS`
 - The client events `"guildMemberAdd"`, `"guildMemberRemove"`, `"guildMemberUpdate"` do not emit
-- <docs-link branch="stable" path="class/Guild?scrollTo=memberCount">`Guild#memberCount`</docs-link> returns the member count as of ready
+- <DocsLink branch="stable" path="class/Guild?scrollTo=memberCount">`Guild#memberCount`</DocsLink> returns the member count as of ready
 - Fetching members times out
 
 `GUILD_PRESENCES`
@@ -47,7 +47,7 @@ Please make sure to provide the list of gateway intents and partials you use in 
 
 ## The Intents Bitfield
 
-Discord.js provides a utility structure <docs-link path="class/Intents">`Intents`</docs-link> which you can use to modify bitfields easily. The class also features static attributes for all (`Intents.ALL`), privileged (`Intents.PRIVILEGED`), and non-privileged (`Intents.NON_PRIVILEGED`) intents.
+Discord.js provides a utility structure <DocsLink path="class/Intents">`Intents`</DocsLink> which you can use to modify bitfields easily. The class also features static attributes for all (`Intents.ALL`), privileged (`Intents.PRIVILEGED`), and non-privileged (`Intents.NON_PRIVILEGED`) intents.
 
 These primarily serve as templates. While using them directly is possible, we strongly discourage you from using them that way. Instead, think about which events your bot strictly needs access to based on the functionality you want it to provide.
 

@@ -126,7 +126,7 @@ That would display both the server name _and_ the amount of members in it.
 Of course, you can modify this to your liking. You may also want to display the date the server was created or the server's region. You would do those in the same manner–use `message.guild.createdAt` or `message.guild.region`, respectively.
 
 ::: tip
-Want a list of all the properties you can access and all the methods you can call on a server? Refer to <docs-link path="class/Guild">the discord.js documentation site</docs-link>!
+Want a list of all the properties you can access and all the methods you can call on a server? Refer to <DocsLink path="class/Guild">the discord.js documentation site</DocsLink>!
 :::
 
 ### User info command
@@ -162,7 +162,7 @@ This will display the message author's **username** (not nickname, if they have 
 </DiscordMessages>
 
 ::: tip
-`message.author` refers to the user who sent the message. For a full list of all the properties and methods for the author object (a member of the `User` class), check out <docs-link path="class/User">the documentation page for it</docs-link>.
+`message.author` refers to the user who sent the message. For a full list of all the properties and methods for the author object (a member of the `User` class), check out <DocsLink path="class/User">the documentation page for it</DocsLink>.
 :::
 
 And there you have it! As you can see, it's quite simple to add additional commands.

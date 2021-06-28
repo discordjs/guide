@@ -26,7 +26,7 @@ client.on('message', message => {
 This will never work for a channel that lies on another shard. So, let's remedy this.
 
 ::: tip
-In discord.js v12, <docs-link path="class/ShardClientUtil?scrollTo=ids">`client.shard`</docs-link> can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
+In discord.js v12, <DocsLink path="class/ShardClientUtil?scrollTo=ids">`client.shard`</DocsLink> can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
 :::
 
 ```js {4-13}

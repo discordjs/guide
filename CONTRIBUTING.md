@@ -251,20 +251,20 @@ If you're writing a page that teaches the reader how to build something step-by-
 ## Resulting code
 
 <!-- Will link to /code-samples/foo/bar/ -->
-<resulting-code />
+<ResultingCode />
 ```
 
-`<resulting-code />` is a helper component to generate a sentence and link to the proper directory on GitHub for that specific page. Should you need to overwrite the path, you can do so:
+`<ResultingCode />` is a helper component to generate a sentence and link to the proper directory on GitHub for that specific page. Should you need to overwrite the path, you can do so:
 
 ```md
 <!-- Inside /guide/baz/README.md -->
 ## Resulting code
 
 <!-- Will result in `/code-samples/baz/` -->
-<resulting-code />
+<ResultingCode />
 
 <!-- Will result in `/code-samples/baz/getting-started/` -->
-<resulting-code path="baz/getting-started" />
+<ResultingCode path="baz/getting-started" />
 ```
 
 ### Displaying Discord messages
@@ -297,27 +297,27 @@ These components feature messages, mentions, embeds, interactions, and more. You
 
 ### Discord.js documentation links
 
-On pages where links to the discord.js documentation are used, you can use the `<docs-link>` component. Since the discord.js documentation is split into different categories and branches, the component allows you to supply the necessary info accordingly. The only required prop is `path`.
+On pages where links to the discord.js documentation are used, you can use the `<DocsLink>` component. Since the discord.js documentation is split into different categories and branches, the component allows you to supply the necessary info accordingly. The only required prop is `path`.
 
 ```md
 Main docs, branch version inherited from branch selector, `class/Client`:
-<docs-link path="class/Client">Link text</docs-link>
+<DocsLink path="class/Client">Link text</DocsLink>
 <!-- Becomes: https://discord.js.org/#/docs/main/v11/class/Client -->
 
 Main docs, stable branch (becomes "v12" due to the aliases set in `.vuepress/mixins/branches.js`), `class/Client`:
-<docs-link branch="stable" path="class/Client">Link text</docs-link>
+<DocsLink branch="stable" path="class/Client">Link text</DocsLink>
 <!-- Becomes: https://discord.js.org/#/docs/main/v12/class/Client -->
 
 Main docs, reply-prefix branch, `class/Client`:
-<docs-link section="main" branch="reply-prefix" path="class/Client">Link text</docs-link>
+<DocsLink section="main" branch="reply-prefix" path="class/Client">Link text</DocsLink>
 <!-- Becomes: https://discord.js.org/#/docs/main/reply-prefix/class/Client -->
 
 Commando docs, djs-v11 branch, `class/Command`:
-<docs-link section="commando" branch="djs-v11" path="class/Command">Link text</docs-link>
+<DocsLink section="commando" branch="djs-v11" path="class/Command">Link text</DocsLink>
 <!-- Becomes: https://discord.js.org/#/docs/commando/djs-v11/class/Command -->
 
 Collection docs, master branch (no `branch` prop set), `class/Collection?scrollTo=partition`:
-<docs-link section="collection" path="class/Collection?scrollTo=partition">Link text</docs-link>
+<DocsLink section="collection" path="class/Collection?scrollTo=partition">Link text</DocsLink>
 <!-- Becomes: https://discord.js.org/#/docs/collection/master/class/Collection?scrollTo=partition -->
 ```
 

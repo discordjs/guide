@@ -52,7 +52,7 @@ Here is an example of how an embed may look. We will go over embed construction 
 
 ## Using the embed constructor
 
-discord.js features the <docs-link path="class/MessageEmbed">`MessageEmbed`</docs-link> utility class for easy construction and manipulation of embeds.
+discord.js features the <DocsLink path="class/MessageEmbed">`MessageEmbed`</DocsLink> utility class for easy construction and manipulation of embeds.
 
 ```js
 // at the top of your file
@@ -84,7 +84,7 @@ channel.send(exampleEmbed);
 You don't need to include all the elements showcased above. If you want a simpler embed, leave some out.
 :::
 
-The `.setColor()` method accepts an integer, HEX color string, an array of RGB values or specific color strings. You can find a list of them at <docs-link path="typedef/ColorResolvable">the discord.js documentation</docs-link>.
+The `.setColor()` method accepts an integer, HEX color string, an array of RGB values or specific color strings. You can find a list of them at <DocsLink path="typedef/ColorResolvable">the discord.js documentation</DocsLink>.
 
 `.addBlankField()` was a convenience method to add a spacer to the embed. To add a blank field you can now use `.addField('\u200b', '\u200b')` instead.
 
@@ -103,7 +103,7 @@ if (message.author.bot) {
 
 ### Attaching images
 
-You can use the `.attachFiles()` method to upload images alongside your embed and use them as source for embed fields that support image urls. The method accepts the source file as file path <docs-link path="typedef/FileOptions">FileOptions</docs-link>, BufferResolvable (including a URL to an external image), or Attachment objects inside an array.
+You can use the `.attachFiles()` method to upload images alongside your embed and use them as source for embed fields that support image urls. The method accepts the source file as file path <DocsLink path="typedef/FileOptions">FileOptions</DocsLink>, BufferResolvable (including a URL to an external image), or Attachment objects inside an array.
 
 You can then reference and use the images inside the embed itself with `attachment://fileName.extension`.
 
@@ -197,7 +197,7 @@ if (message.author.bot) {
 
 ### Attaching images
 
-You can upload images with your embedded message and use them as source for embed fields that support image urls by constructing a <docs-link path="class/MessageAttachment">MessageAttachment</docs-link> from them to send as message option alongside the embed. The attachment parameter takes a BufferResolvable or Stream including the URL to an external image.
+You can upload images with your embedded message and use them as source for embed fields that support image urls by constructing a <DocsLink path="class/MessageAttachment">MessageAttachment</DocsLink> from them to send as message option alongside the embed. The attachment parameter takes a BufferResolvable or Stream including the URL to an external image.
 
 You can then reference and use the images inside the embed itself with `attachment://fileName.extension`.
 

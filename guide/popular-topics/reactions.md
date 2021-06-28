@@ -179,7 +179,7 @@ message.reactions.removeAll().catch(error => console.error('Failed to clear reac
 
 ### Removing reactions by emoji
 
-Removing reactions by emoji is easily done by using <docs-link path="class/MessageReaction?scrollTo=remove">`MessageReaction.remove()`</docs-link>.
+Removing reactions by emoji is easily done by using <DocsLink path="class/MessageReaction?scrollTo=remove">`MessageReaction.remove()`</DocsLink>.
 
 ```js
 message.reactions.cache.get('484535447171760141').remove().catch(error => console.error('Failed to remove reactions: ', error));
@@ -187,7 +187,7 @@ message.reactions.cache.get('484535447171760141').remove().catch(error => consol
 
 ### Removing reactions by user
 ::: tip
-If you are not familiar with <docs-link section="collection" path="class/Collection?scrollTo=filter">`Collection.filter()`</docs-link> and [`Map.has()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) take the time to understand what they do and then come back.
+If you are not familiar with <DocsLink section="collection" path="class/Collection?scrollTo=filter">`Collection.filter()`</DocsLink> and [`Map.has()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) take the time to understand what they do and then come back.
 :::
 
 Removing reactions by a user is not as straightforward as removing by emoji or removing all reactions. The API does not provide a method for selectively removing the reactions of a user. This means you will have to iterate through reactions that include the user and remove them.

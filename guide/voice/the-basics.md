@@ -18,7 +18,7 @@ client.on('message', async message => {
 If you try to join a channel the bot is already in, nothing will happen, so you don't need to run this method repeatedly.
 
 ::: tip
-In the above example, a `VoiceState` is accessed through `member.voice`. Voice states include information about the channel the member is connected to (if any), if the member is speaking and whether they're deafened or muted. Consult  <docs-link path="class/VoiceState">the documentation</docs-link> for a full description of what voice states can do!
+In the above example, a `VoiceState` is accessed through `member.voice`. Voice states include information about the channel the member is connected to (if any), if the member is speaking and whether they're deafened or muted. Consult  <DocsLink path="class/VoiceState">the documentation</DocsLink> for a full description of what voice states can do!
 :::
 
 ## Playing audio
