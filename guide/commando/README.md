@@ -1,7 +1,3 @@
----
-pageTheme: blue
----
-
 # Getting started with Commando
 
 When you got your first bot up and running, you should've installed discord.js using npm, Node.js' Package Manager. The same applies to Commando, which you must separately install. You can do this in one of two ways:
