@@ -153,11 +153,11 @@ Now you know all there is to building and sending a `SelectMenu`! Let's move on 
 
 ## Receiving Select menus
 
-To receive a `MessageComponentInteraction`, simply attach an event listener to your client and also use the `Interaction#isMessageComponent()` typeguard to make sure you only receive component interactions:
+To receive a `SelectMenuInteractionInteraction`, simply attach an event listener to your client and also use the `Interaction#isSelectMenu()` typeguard to make sure you only receive select menus:
 
 ```js {2}
 client.on('interaction', interaction => {
-	if (!interaction.isMessageComponent()) return;
+	if (!interaction.isSelectMenu()) return;
 	if (interaction.componentType !== 'SELECT_MENU') return;
 	console.log(interaction);
 });
@@ -234,10 +234,9 @@ The `MessageComponentInteraction` class provides the same methods as the `Comman
 
 The `MessageComponentInteraction` class provides a method to update the message the button is attached to, by using `MessageComponentInteraction#update()`. We'll be passing an empty array as components, which will remove the menu after selecting an option:
 
-```js {1,5-8}
+```js {1,4-7}
 client.on('interaction', async interaction => {
-	if (!interaction.isMessageComponent()) return;
-	if (interaction.componentType !== 'SELECT_MENU') return;
+	if (!interaction.isSelectMenu()) return;
 
 	if (interaction.customID === 'select') {
 		await interaction.update({ content: 'Something was selected!', components: [] });
@@ -249,12 +248,11 @@ client.on('interaction', async interaction => {
 
 Additionally to deferring the response of the interaction, you can defer the menu, which will trigger a loading state and then revert back to its original state:
 
-```js {1,6-10}
+```js {1,5-9}
 const wait = require('util').promisify(setTimeout);
 
 client.on('interaction', async interaction => {
-	if (!interaction.isMessageComponent()) return;
-	if (interaction.componentType !== 'SELECT_MENU') return;
+	if (!interaction.isSelectMenu()) return;
 
 	if (interaction.customID === 'select') {
 		await interaction.deferUpdate();

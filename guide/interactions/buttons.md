@@ -178,7 +178,7 @@ Now you know all there is to building and sending a `MessageButton`! Let's move 
 
 ## Receiving buttons
 
-To receive a `ButtonInteraction`, attach an event listener to your client and use the `Interaction#isButton()` type guard to make sure you only receive component interactions.
+To receive a `ButtonInteraction`, attach an event listener to your client and use the `Interaction#isButton()` type guard to make sure you only receive buttons.
 
 ```js {2}
 client.on('interaction', interaction => {
