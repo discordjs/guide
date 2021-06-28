@@ -101,7 +101,6 @@ client.on('message', async message => {
 });
 ```
 
-
 ## Bulk update permissions
 
 If you have a lot of commands, you likely want to update their permissions in one go instead of one-by-one, for this approach you can use `GuildApplicationCommandManager#setPermissions` as outlined below:
