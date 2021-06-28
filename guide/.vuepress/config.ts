@@ -3,7 +3,7 @@ import { defineUserConfig } from 'vuepress-vite'
 import type { DefaultThemeOptions, ViteBundlerOptions } from 'vuepress-vite'
 import sidebar from './sidebar'
 
-export default defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
+const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 	bundler: '@vuepress/vite',
 	lang: 'en-US',
 	title: 'Discord.js Guide',
@@ -40,7 +40,19 @@ export default defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 			},
 		],
 	},
-	// plugins: [
-	// 	['@vuepress/plugin-search'],
-	// ],
+	plugins: [],
 })
+
+if (process.env.NODE_ENV === 'production') {
+	config.plugins.push(
+		[
+			'@vuepress/plugin-docsearch',
+			{
+				apiKey: 'c8d9361fb8403f7c5111887e0edf4b5e',
+				indexName: 'discordjs',
+			},
+		],
+	);
+}
+
+export default config;
