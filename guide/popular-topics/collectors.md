@@ -63,29 +63,6 @@ First, you'll need some questions and answers to choose from, so here's a basic 
 
 The provided set allows for responder error with an array of answers permitted. Ideally, it would be best to place this in a JSON file, which you can call `quiz.json` for simplicity.
 
-<branch version="11.x">
-
-```js
-const quiz = require('./quiz.json');
-const item = quiz[Math.floor(Math.random() * quiz.length)];
-const filter = response => {
-	return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
-};
-
-message.channel.send(item.question).then(() => {
-	message.channel.awaitMessages(filter, { maxMatches: 1, time: 30000, errors: ['time'] })
-		.then(collected => {
-			message.channel.send(`${collected.first().author} got the correct answer!`);
-		})
-		.catch(collected => {
-			message.channel.send('Looks like nobody got the answer this time.');
-		});
-});
-```
-
-</branch>
-<branch version="12.x">
-
 ```js
 const quiz = require('./quiz.json');
 const item = quiz[Math.floor(Math.random() * quiz.length)];
@@ -104,13 +81,11 @@ message.channel.send(item.question).then(() => {
 });
 ```
 
-</branch>
-
 ::: tip
 If you don't understand how `.some()` works, you can read about it in more detail [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some).
 :::
 
-In this filter, you iterate through the answers to find what you want. You would like to ignore the case because simple typos can happen, so you convert each answer to its lowercase form and check if it's equal to the response in lowercase form as well. In the options section, you only want to allow one answer to pass through, hence the <branch version="11.x" inline>`maxMatches: 1`</branch><branch version="12.x" inline>`max: 1`</branch> setting.
+In this filter, you iterate through the answers to find what you want. You would like to ignore the case because simple typos can happen, so you convert each answer to its lowercase form and check if it's equal to the response in lowercase form as well. In the options section, you only want to allow one answer to pass through, hence the `max: 1` setting.
 
 The filter looks for messages that match one of the answers in the array of possible answers to pass through the collector. The options (the second parameter) specifies that only a maximum of one message can go through the filter successfully before the Promise successfully resolves. The errors section specifies that time will cause it to error out, which will cause the Promise to reject if one correct answer is not received within the time limit of one minute. As you can see, there is no `collect` event, so you are limited in that regard.
 
@@ -123,27 +98,6 @@ These work quite similarly to message collectors, except that you apply them on 
 ::: tip
 You can read the docs for the `.createReactionCollector()` method <docs-link path="class/Message?scrollTo=createReactionCollector">here</docs-link>.
 :::
-
-<branch version="11.x">
-
-```js
-const filter = (reaction, user) => {
-	return reaction.emoji.name === '👍' && user.id === message.author.id;
-};
-
-const collector = message.createReactionCollector(filter, { time: 15000 });
-
-collector.on('collect', reaction => {
-	console.log(`Collected ${reaction.emoji.name} from ${reaction.users.last().tag}`);
-});
-
-collector.on('end', collected => {
-	console.log(`Collected ${collected.size} items`);
-});
-```
-
-</branch>
-<branch version="12.x">
 
 ```js
 const filter = (reaction, user) => {
@@ -160,8 +114,6 @@ collector.on('end', collected => {
 	console.log(`Collected ${collected.size} items`);
 });
 ```
-
-</branch>
 
 ### Await reactions
 

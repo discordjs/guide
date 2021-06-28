@@ -356,22 +356,6 @@ There's nothing special here; just a regular `.findAll()` to get all the items i
 
 ### [lambda] Display the leaderboard
 
-<branch version="11.x">
-
-```js
-return message.channel.send(
-	currency.sort((a, b) => b.balance - a.balance)
-		.filter(user => client.users.has(user.user_id))
-		.first(10)
-		.map((user, position) => `(${position + 1}) ${(client.users.get(user.user_id).tag)}: ${user.balance}💰`)
-		.join('\n'),
-	{ code: true },
-);
-```
-
-</branch>
-<branch version="12.x">
-
 ```js
 return message.channel.send(
 	currency.sort((a, b) => b.balance - a.balance)
@@ -382,8 +366,6 @@ return message.channel.send(
 	{ code: true },
 );
 ```
-
-</branch>
 
 Nothing extraordinary here either. You could query the database for the top ten currency holders, but since you already have access to them locally inside the `currency` variable, you can sort the Collection and use `.map()` to display it in a friendly format. The filter is in case the users no longer exist in the bot's cache.
 

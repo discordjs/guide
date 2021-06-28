@@ -33,7 +33,7 @@ If you would like to get all webhooks of a guild you can use <docs-link path="cl
 
 ### Fetching webhooks of a channel
 
-Webhooks belonging to a channel can be fetched using <docs-link path="class/TextChannel?scrollTo=fetchWebhooks">`TextChannel#fetchWebhooks()`</docs-link>. This will return a Promise which will resolve into a Collection of `Webhook`s. A collection will be returned even if the channel contains a single webhook. If you are certain the channel contains a single webhook, you can use <branch version="11.x" inline><docs-link path="class/Collection?scrollTo=first">`Collection#first()`</docs-link></branch><branch version="12.x" inline><docs-link section="collection" path="class/Collection?scrollTo=first">`Collection#first()`</docs-link></branch> on the Collection to get the webhook.
+Webhooks belonging to a channel can be fetched using <docs-link path="class/TextChannel?scrollTo=fetchWebhooks">`TextChannel#fetchWebhooks()`</docs-link>. This will return a Promise which will resolve into a Collection of `Webhook`s. A collection will be returned even if the channel contains a single webhook. If you are certain the channel contains a single webhook, you can use <docs-link section="collection" path="class/Collection?scrollTo=first">`Collection#first()`</docs-link> on the Collection to get the webhook.
 
 ### Fetching a single webhook
 
@@ -70,17 +70,6 @@ Once you are there, click on the `Create Webhook` / `New Webhook` button; this w
 
 discord.js provides a method for creating webhooks called <docs-link path="class/TextChannel?scrollTo=createWebhook">`TextChannel#createWebhook()`</docs-link>.
 
-<branch version="11.x">
-
-```js
-channel.createWebhook('Some-username', 'https://i.imgur.com/wSTFkRM.png')
-	.then(webhook => console.log(`Created webhook ${webhook}`))
-	.catch(console.error);
-```
-
-</branch>
-<branch version="12.x">
-
 ```js
 channel.createWebhook('Some-username', {
 	avatar: 'https://i.imgur.com/wSTFkRM.png',
@@ -88,8 +77,6 @@ channel.createWebhook('Some-username', {
 	.then(webhook => console.log(`Created webhook ${webhook}`))
 	.catch(console.error);
 ```
-
-</branch>
 
 ## Editing webhooks
 
@@ -108,61 +95,6 @@ webhook.edit({
 ## Using webhooks
 
 Webhooks, unlike bots, can send more than one embed per message, up to 10. They can also send attachments and normal content. The <docs-link path="class/Webhook?scrollTo=send">`Webhook#send()`</docs-link> method to send to a webhook is very similar to the method for sending to a text channel. Webhooks can also choose how the username and avatar will appear when they send the message.
-
-<branch version="11.x">
-
-Example using a WebhookClient:
-
-```js
-const Discord = require('discord.js');
-const config = require('./config.json');
-
-const webhookClient = new Discord.WebhookClient(config.webhookID, config.webhookToken);
-
-const embed = new Discord.RichEmbed()
-	.setTitle('Some Title')
-	.setColor('#0099ff');
-
-webhookClient.send('Webhook test', {
-	username: 'some-username',
-	avatarURL: 'https://i.imgur.com/wSTFkRM.png',
-	embeds: [embed],
-});
-```
-
-Example using a Webhook:
-
-```js
-const Discord = require('discord.js');
-const config = require('./config.json');
-
-const client = new Discord.Client();
-
-const embed = new Discord.RichEmbed()
-	.setTitle('Some Title')
-	.setColor('#0099ff');
-
-client.once('ready', async () => {
-	const channel = client.channels.get('222197033908436994');
-	try {
-		const webhooks = await channel.fetchWebhooks();
-		const webhook = webhooks.first();
-
-		await webhook.send('Webhook test', {
-			username: 'some-username',
-			avatarURL: 'https://i.imgur.com/wSTFkRM.png',
-			embeds: [embed],
-		});
-	} catch (error) {
-		console.error('Error trying to send: ', error);
-	}
-});
-
-client.login(token);
-```
-
-</branch>
-<branch version="12.x">
 
 Example using a WebhookClient:
 
@@ -213,7 +145,6 @@ client.once('ready', async () => {
 
 client.login(token);
 ```
-</branch>
 
 ## Resulting code
 

@@ -26,22 +26,6 @@ Example: `ReferenceError: "x" is not defined`
 
 WebSocket and Network errors are common system errors thrown by Node in response to something wrong with the WebSocket connection. Unfortunately, these errors do not have a concrete solution and can be (usually) fixed by getting a better, more stable, and more robust connection. discord.js will automatically try to reconnect to the WebSocket if an error occurs. 
 
-<branch version="11.x">
-
-Usually, these errors will crash your process; however, you can add an event listener for these errors, which will notify you of them, and it won't crash your process, as shown below.
-
-```js
-client.on('error', error => {
-	console.error('The websocket connection encountered an error:', error);
-});
-```
-
-When an error occurs, the console will log it, and it will not terminate the process.
-
-</branch>
-
-<branch version="12.x">
-
 In version 12, WebSocket errors are handled internally, meaning your process should never crash from them. If you want to log these errors, should they happen, you can listen to the `shardError` event as shown below.
 
 ```js
@@ -49,8 +33,6 @@ client.on('shardError', error => {
 	console.error('A websocket connection encountered an error:', error);
 });
 ```
-
-</branch>
 
 The commonly thrown codes for these errors are:
 - `ECONNRESET` - The connection was forcibly closed by a peer, thrown by the loss of connection to a WebSocket due to timeout or reboot.
@@ -120,7 +102,7 @@ message.delete().catch(error => {
 });
 ```
 
-You can find a list of constants <branch version="12.x" inline> [here](https://github.com/discordjs/discord.js/blob/stable/src/util/Constants.js#L552) </branch> <branch version="11.x" inline> [here](https://github.com/discordjs/discord.js/blob/stable/src/util/Constants.js#L788) </branch>
+You can find a list of constants [here](https://github.com/discordjs/discord.js/blob/stable/src/util/Constants.js#L552)
 
 ### Method
 
@@ -146,47 +128,15 @@ This is a prevalent error; it originates from a wrong token being passed into `c
 - Copying the client secret instead of the bot token (the token is alphanumerical and three parts delimited by a period while the client secret is significantly smaller and one part only)
 - Simply showing the token and copying that, instead of clicking regenerate and copying that.
 
-<branch version="12.x">
-
 ::: warning
 Before the release of version 12, there used to be an issue where the token was not prefixed correctly, which resulted in valid tokens being marked as invalid. If you have verified that all of the above is not the case, make sure you have updated discord.js to the current stable version.
 :::
-
-</branch>
 
 ### Request to use token, but token was unavailable to the client.
 
 Another common error–this error originates from the client attempting to execute an action that requires the token but the token not being available. This is most commonly caused by destroying the client and then trying to perform an action.
 
 This error is also caused by attempting to use a client that has not logged in. Both of the examples below will throw errors.
-
-<branch version="11.x">
-
-```js
-const { Client } = require('discord.js');
-const client = new Client(); // Should not be here!
-
-module.exports = (message, args) => {
-	// Should be message.client instead!
-	client.fetchUser(args[0]).then(user => {
-		message.reply('your requested user', user.tag);
-	});
-};
-```
-
-```js
-const { Client } = require('discord.js');
-const client = new Client();
-
-client.on('message', someHandlerFunction);
-
-client.login('your-token-goes-here');
-// client will not be logged in yet!
-client.fetchUser('myId').then(someInitFunction);
-```
-
-</branch>
-<branch version="12.x">
 
 ```js
 const { Client } = require('discord.js');
@@ -218,8 +168,6 @@ This error originates from calling `MessageEmbed.addFields()` with a field objec
 ### MessageEmbed field values may not be empty.
 
 In conjunction with the previous error, this error results from calling `MessageEmbed.addFields()` with a field object's `value` property as an empty string. You can use a zero-width space if you would like this blank.
-
-</branch>
 
 ### The messages must be an Array, Collection, or number.
 

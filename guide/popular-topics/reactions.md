@@ -62,25 +62,13 @@ Great! This route may not always be available to you, though. Sometimes you'll n
 Two of the easiest ways you can retrieve an emoji would be:
 
 * Use `.find()` on a Collection of Emojis.
-* Use `.get()` on the <branch version="11.x" inline>`client.emojis`</branch><branch version="12.x" inline>`client.emojis.cache`</branch> Collection.
+* Use `.get()` on the `client.emojis.cache` Collection.
 
 ::: tip
 Two or more emojis can have the same name, and using `.find()` will only return the **first** entry it finds. As such, this can cause unexpected results.
 :::
 
 Using `.find()`, your code would look something like this:
-
-<branch version="11.x">
-
-```js {2-3}
-if (message.content === '!react-custom') {
-	const reactionEmoji = message.guild.emojis.find(emoji => emoji.name === 'ayy');
-	message.react(reactionEmoji);
-}
-```
-
-</branch>
-<branch version="12.x">
 
 ```js {2-3}
 if (message.content === '!react-custom') {
@@ -89,21 +77,7 @@ if (message.content === '!react-custom') {
 }
 ```
 
-</branch>
-
 Using `.get()`, your code would look something like this:
-
-<branch version="11.x">
-
-```js {2-3}
-if (message.content === '!react-custom') {
-	const reactionEmoji = client.emojis.get(config.emojiID);
-	message.react(reactionEmoji);
-}
-```
-
-</branch>
-<branch version="12.x">
 
 ```js {2-3}
 if (message.content === '!react-custom') {
@@ -111,8 +85,6 @@ if (message.content === '!react-custom') {
 	message.react(reactionEmoji);
 }
 ```
-
-</branch>
 
 Of course, if you already have the emoji ID, you should put that directly inside the `.react()` method. But if you want to do other things with the emoji data later on (e.g., display the name or image URL), it's best to retrieve the full emoji object.
 
@@ -199,47 +171,13 @@ All of these methods require `MANAGE_MESSAGES` permissions. Ensure your bot has 
 
 ### Removing all reactions
 
-Removing all reactions from a message is the easiest, the API allows you to do this through a single call. It can be done through the <branch version="11.x" inline>`message.clearReactions()`</branch><branch version="12.x" inline>`message.reactions.removeAll()`</branch> method. 
-
-<branch version="11.x">
-
-```js
-message.clearReactions().catch(error => console.error('Failed to clear reactions: ', error));
-```
-
-</branch>
-<branch version="12.x">
+Removing all reactions from a message is the easiest, the API allows you to do this through a single call. It can be done through the `message.reactions.removeAll()` method. 
 
 ```js
 message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
 ```
 
-</branch>
-
 ### Removing reactions by emoji
-
-<branch version="11.x">
-
-Removing reactions by emoji is not as straightforward as clearing all reactions. discord.js version 11.x does not provide a method for selectively removing reactions by emoji; it only allows you to remove a user from a specific reaction. This means you will have to get the users who reacted with that emoji and loop through to remove each one of them.
-
-Reaction collections are keyed by `name:id` for custom emojis and by `name` for Unicode emojis (represented by their Unicode character, see [here](/popular-topics/reactions.html#unicode-emojis)). Once you have the key, you can run a `.get()` on `message.reactions` to get the reaction representing the emoji you want.
-
-<!-- eslint-skip -->
-```js
-const reaction = message.reactions.get('Thonk:484535447171760141');
-try {
-	for (const user of reaction.users.values()) {
-		await reaction.remove(user);
-	}
-} catch (error) {
-	console.error('Failed to remove reactions.');
-}
-```
-
-The reason we use a `for...of` loop over something like `.forEach()` is due to `.forEach()`'s behavior for async operations. `.forEach()` will send out all calls almost at once even if you await inside of the function. However, if you `await` inside of a `for...of` loop, it will wait for the previous reaction to go through, and you avoid spamming the API with a lot of calls at once.
-
-</branch>
-<branch version="12.x">
 
 Removing reactions by emoji is easily done by using <docs-link path="class/MessageReaction?scrollTo=remove">`MessageReaction.remove()`</docs-link>.
 
@@ -247,35 +185,10 @@ Removing reactions by emoji is easily done by using <docs-link path="class/Messa
 message.reactions.cache.get('484535447171760141').remove().catch(error => console.error('Failed to remove reactions: ', error));
 ```
 
-</branch>
-
 ### Removing reactions by user
 ::: tip
-If you are not familiar with <branch version="11.x" inline><docs-link path="class/Collection?scrollTo=filter">`Collection.filter()`</docs-link></branch><branch version="12.x" inline><docs-link section="collection" path="class/Collection?scrollTo=filter">`Collection.filter()`</docs-link></branch> and [`Map.has()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) take the time to understand what they do and then come back.
+If you are not familiar with <docs-link section="collection" path="class/Collection?scrollTo=filter">`Collection.filter()`</docs-link> and [`Map.has()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) take the time to understand what they do and then come back.
 :::
-
-<branch version="11.x">
-
-Removing reactions by user is similar to what you did before. However, instead of iterating through users of a reaction, you will iterate through reactions that include a user. To do this, you will get all reactions and filter based on whether the user has reacted. 
-
-<!-- eslint-skip -->
-```js
-const userReactions = message.reactions.filter(reaction => reaction.users.has(userId));
-try {
-	for (const reaction of userReactions.values()) {
-		await reaction.remove(userId);
-	}
-} catch (error) {
-	console.error('Failed to remove reactions.');
-}
-```
-
-::: warning
-Make sure not to remove reactions by emoji or by user too much; if there are many reactions or users, it can be considered API spam.
-:::
-
-</branch>
-<branch version="12.x">
 
 Removing reactions by a user is not as straightforward as removing by emoji or removing all reactions. The API does not provide a method for selectively removing the reactions of a user. This means you will have to iterate through reactions that include the user and remove them.
 
@@ -294,8 +207,6 @@ try {
 ::: warning
 Make sure not to remove reactions by emoji or by user too much; if there are many reactions or users, it can be considered API spam.
 :::
-
-</branch>
 
 ## Awaiting reactions
 
@@ -324,15 +235,6 @@ message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
 ```
 
 ## Listening for reactions on old messages
-
-<branch version="11.x">
-
-discord.js v11 cannot emit events if the respective structures it needs to emit are incomplete and does not auto-fetch the missing information.
-This behavior changed in version 12 of the library. It introduces partial structures that enable you to emit incomplete structures and complete them with a single fetch call.
-This feature is not available on version 11.x if you want to listen for reactions on old messages, please use version 12 of the library.
-
-</branch>
-<branch version="12.x">
 
 Messages sent before your bot started are uncached unless you fetch them first. By default, the library does not emit client events if the data received and cached is not sufficient to build fully functional objects.
 Since version 12, you can change this behavior by activating partials. For a full explanation of partials see [this page](/popular-topics/partials.md).
@@ -368,8 +270,6 @@ client.on('messageReactionAdd', async (reaction, user) => {
 ::: warning
 Partial structures are enabled globally. You cannot only make them work for a specific event or cache, and you very likely need to adapt other parts of your code that are accessing data from the relevant caches. All caches holding the respective structure type might return partials as well!
 :::
-
-</branch>
 
 ## Resulting code
 

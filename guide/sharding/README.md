@@ -21,19 +21,6 @@ Apart from ShardingManager, discord.js also supports a sharding mode known as In
 
 First, you'll need to have a file that you'll be launching from now on, rather than your original `index.js` file. It's highly recommended renaming that to `bot.js` and naming this new file to `index.js` instead. Copy & paste the following snippet into your new `index.js` file.
 
-<branch version="11.x">
-
-```js
-const { ShardingManager } = require('discord.js');
-const manager = new ShardingManager('./bot.js', { token: 'your-token-goes-here' });
-
-manager.on('launch', shard => console.log(`Launched shard ${shard.id}`));
-manager.spawn();
-```
-
-</branch>
-<branch version="12.x">
-
 ```js
 const { ShardingManager } = require('discord.js');
 const manager = new ShardingManager('./bot.js', { token: 'your-token-goes-here' });
@@ -41,8 +28,6 @@ const manager = new ShardingManager('./bot.js', { token: 'your-token-goes-here' 
 manager.on('shardCreate', shard => console.log(`Launched shard ${shard.id}`));
 manager.spawn();
 ```
-
-</branch>
 
 The above code utilizes the discord.js sharding manager to spawn the recommended amount of shards for your bot. The recommended amount should be approximately 1,000 guilds per shard. Note that you have to attach the event listener to `shardCreate` before calling `.spawn()` to prevent a race condition possibly preventing shard 0 from logging the successful launch. Even though you provide the token here, you will still need to send it over to the main bot file in `client.login()`, so don't forget to do that.
 
@@ -54,34 +39,9 @@ You can find the methods available for the ShardingManager class <docs-link path
 
 You will most likely have to change some code to get your newly sharded bot to work. If your bot is very basic, then you're in luck! We assume you probably have some form of a `stats` command, by which you can quickly view your bot's statistics, such as its server count. We will use it as an example that needs to adapt to running with shards.
 
-In this code, you likely have the snippet <branch version="11.x" inline>`client.guilds.size`</branch><branch version="12.x" inline>`client.guilds.cache.size`</branch>, which counts the number of *cached* guilds attached to that client. Since sharding will launch multiple processes, each process (each shard) will now have its subset collection of guilds it is responsible for. This means that your original code will not function as you might expect.
+In this code, you likely have the snippet `client.guilds.cache.size`, which counts the number of *cached* guilds attached to that client. Since sharding will launch multiple processes, each process (each shard) will now have its subset collection of guilds it is responsible for. This means that your original code will not function as you might expect.
 
 Here is some sample code for a `stats` command, without sharding taken into consideration:
-
-<branch version="11.x">
-
-```js
-// bot.js
-const { Client } = require('discord.js');
-const client = new Client();
-const prefix = '!';
-
-client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
-
-	if (command === 'stats') {
-		return message.channel.send(`Server count: ${client.guilds.size}`);
-	}
-});
-
-client.login('your-token-goes-here');
-```
-
-</branch>
-<branch version="12.x">
 
 ```js
 // bot.js
@@ -103,8 +63,6 @@ client.on('message', message => {
 client.login('your-token-goes-here');
 ```
 
-</branch>
-
 Let's say your bot is in a total of 3,600 guilds. Using the recommended shard count, you might end up at four shards, each containing approximately 900 guilds. If a guild is on a specific shard (shard #2, for example) and receives this command, the guild count will be close to 900, which is not the "correct" number of guilds for your bot. Let's take a look at how to fix that.
 
 ## FetchClientValues
@@ -113,20 +71,9 @@ Let's say your bot is in a total of 3,600 guilds. Using the recommended shard co
 
 Take the following snippet of code:
 
-<branch version="11.x">
-
-```js
-client.shard.fetchClientValues('guilds.size').then(console.log);
-```
-
-</branch>
-<branch version="12.x">
-
 ```js
 client.shard.fetchClientValues('guilds.cache.size').then(console.log);
 ```
-
-</branch>
 
 If you run it, you will notice an output like `[898, 901, 900, 901]`. You will be correct in assuming that that's the total number of guilds per shard stored in an array in the Promise. This probably isn't the ideal output for guild count, so let's use [Array.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) to provide a better output.
 
@@ -136,19 +83,6 @@ It's highly recommended for you to visit [the documentation](https://developer.m
 
 In this case, this method iterates through the array and adds each current value to the total amount:
 
-<branch version="11.x">
-
-```js
-client.shard.fetchClientValues('guilds.size')
-	.then(results => {
-		console.log(`${results.reduce((acc, guildCount) => acc + guildCount, 0)} total guilds`);
-	})
-	.catch(console.error);
-```
-
-</branch>
-<branch version="12.x">
-
 ```js
 client.shard.fetchClientValues('guilds.cache.size')
 	.then(results => {
@@ -157,27 +91,7 @@ client.shard.fetchClientValues('guilds.cache.size')
 	.catch(console.error);
 ```
 
-</branch>
-
 While it's a bit unattractive to have more nesting in your commands, it is necessary when not using `async`/`await`. Now, the code at the top should look something like the below:
-
-<branch version="11.x">
-
-```js {4-8}
-client.on('message', message => {
-	// ...
-	if (command === 'stats') {
-		return client.shard.fetchClientValues('guilds.size')
-			.then(results => {
-				return message.channel.send(`Server count: ${results.reduce((acc, guildCount) => acc + guildCount, 0)}`);
-			})
-			.catch(console.error);
-	}
-});
-```
-
-</branch>
-<branch version="12.x">
 
 ```js {4-8}
 client.on('message', message => {
@@ -192,41 +106,15 @@ client.on('message', message => {
 });
 ```
 
-</branch>
-
 ## BroadcastEval
 
 Next, check out another handy sharding method known as <docs-link path="class/ShardClientUtil?scrollTo=broadcastEval">`Shard#broadcastEval`</docs-link>. This method makes all of the shards evaluate a given script, where `this` is the `client` once each shard gets to evaluating it. You can read more about the `this` keyword [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this). For now, essentially understand that it is the shard's Client object.
-
-<branch version="11.x">
-
-```js
-client.shard.broadcastEval('this.guilds.reduce((acc, guild) => acc + guild.memberCount, 0)').then(console.log);
-```
-
-</branch>
-<branch version="12.x">
 
 ```js
 client.shard.broadcastEval('this.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)').then(console.log);
 ```
 
-</branch>
-
 This will run the code given to `broadcastEval` on each shard and return the results to the Promise as an array, once again. You should see something like `[9001, 16658, 13337, 15687]` logged. The code sent to each shard adds up the `memberCount` property of every guild that shard is handling and returns it, so each shard's total guild member count. Of course, if you want to total up the member count of *every* shard, you can do the same thing again on the Promise results.
-
-<branch version="11.x">
-
-```js
-client.shard.broadcastEval('this.guilds.reduce((acc, guild) => acc + guild.memberCount, 0)')
-	.then(results => {
-		return message.channel.send(`Total member count: ${results.reduce((acc, memberCount) => acc + memberCount, 0)}`);
-	})
-	.catch(console.error);
-```
-
-</branch>
-<branch version="12.x">
 
 ```js
 client.shard.broadcastEval('this.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)')
@@ -236,31 +124,9 @@ client.shard.broadcastEval('this.guilds.cache.reduce((acc, guild) => acc + guild
 	.catch(console.error);
 ```
 
-</branch>
-
 ## Putting them together
 
 You'd likely want to output both pieces of information in the stats command. You can combine these two results with [Promise.all()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all):
-
-<branch version="11.x">
-
-```js
-const promises = [
-	client.shard.fetchClientValues('guilds.size'),
-	client.shard.broadcastEval('this.guilds.reduce((acc, guild) => acc + guild.memberCount, 0)'),
-];
-
-Promise.all(promises)
-	.then(results => {
-		const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
-		const totalMembers = results[1].reduce((acc, memberCount) => acc + memberCount, 0);
-		return message.channel.send(`Server count: ${totalGuilds}\nMember count: ${totalMembers}`);
-	})
-	.catch(console.error);
-```
-
-</branch>
-<branch version="12.x">
 
 ```js
 const promises = [
@@ -277,34 +143,7 @@ Promise.all(promises)
 	.catch(console.error);
 ```
 
-</branch>
-
 `Promise.all()` runs every Promise you pass inside an array in parallel and waits for each to finish before returning their results simultaneously. The result is an array that corresponds with the array of Promises you pass–so the first result element will be from the first Promise. With that, your stats command should look something like this:
-
-<branch version="11.x">
-
-```js {4-15}
-client.on('message', message => {
-	// ...
-	if (command === 'stats') {
-		const promises = [
-			client.shard.fetchClientValues('guilds.size'),
-			client.shard.broadcastEval('this.guilds.reduce((acc, guild) => acc + guild.memberCount, 0)'),
-		];
-
-		return Promise.all(promises)
-			.then(results => {
-				const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
-				const totalMembers = results[1].reduce((acc, memberCount) => acc + memberCount, 0);
-				return message.channel.send(`Server count: ${totalGuilds}\nMember count: ${totalMembers}`);
-			})
-			.catch(console.error);
-	}
-});
-```
-
-</branch>
-<branch version="12.x">
 
 ```js {4-15}
 client.on('message', message => {
@@ -325,8 +164,6 @@ client.on('message', message => {
 	}
 });
 ```
-
-</branch>
 
 The next section contains additional changes you might want to consider, which you may learn about by clicking [this link](/sharding/additional-information.md).
 

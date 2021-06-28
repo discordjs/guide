@@ -1,14 +1,5 @@
 # Understanding Voice
 
-<branch version="11.x">
-
-The discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots and give you tips to optimize performance!
-
-This voice guide targets discord.js v12, which features an improved audio system. Much of the example code in the voice guide is unsuitable for v11 and below–to access this content, please update discord.js to v12! 
-
-</branch>
-<branch version="12.x">
-
 ::: tip
 It's common for people to get confused with voice and not understand what they're doing. **This topic is optional**, but it aims to solve these problems by explaining some of the Discord API's jargon and features.
 :::
@@ -62,5 +53,3 @@ Just as you send audio to the UDP socket, you also receive audio through it. Pro
 - The `StreamDispatcher` is essentially a WritableStream that takes Opus audio
 - Receiving audio is officially unsupported; however, we do our best to maintain it
 - Playing audio has varying complexity depending on the file/audio you want to play–the simplest (and most efficient) files would be Ogg/WebM files as they already contain Opus audio. Other files must be passed through FFmpeg and an Opus Encoder before they can play.
-
-</branch>

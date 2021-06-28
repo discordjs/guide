@@ -1,12 +1,5 @@
 # Gateway Intents
 
-<branch version="11.x">
-
-Intents are not available in version 11; please update to version 12 of the library if you want to use gateway intents in your bot.
-
-</branch>
-<branch version="12.x">
-
 ::: warning
 Version 13 of Discord.js will require you to choose intents (as it uses a new version of Discord's API), it's worthwhile reading this section even if you don't currently want to update, so you know what to do later.
 :::
@@ -83,5 +76,3 @@ If you want to view the built flags you can utilize the `.toArray()`, `.serializ
 Discord Intents and Permissions are stored in a 53-bit integer and calculated using bitwise operations. If you want to dive deeper into what's happening behind the curtains, check the [Wikipedia](https://en.wikipedia.org/wiki/Bit_field) and [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) articles on the topic.
 
 In discord.js, Permissions and Intents bitfields are represented as either the decimal value of said bit field or its referenced flags. Every position in a permissions bitfield represents one of these flags and its state (either referenced `1` or not referenced `0`).
-
-</branch>

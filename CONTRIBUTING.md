@@ -295,44 +295,6 @@ Do note the casing in `<DiscordMessage>` syntax instead of `<discord-messages>`.
 
 These components feature messages, mentions, embeds, interactions, and more. You can read more about how to use them by checking out [@discord-message-components/vue](https://github.com/Danktuary/discord-message-components/blob/main/packages/vue/README.md).
 
-### Branch-specific content
-
-On some pages, you'll want to display content that applies only to the stable branch and other content that applies to a different branch. You can use the `<branch>` component inside any .md file, like so:
-
-```md
-You can use
-<branch version="11.x" inline>`message.channel.fetchMessages()`</branch>
-<branch version="12.x" inline>`message.channel.messages.fetch()`</branch>
-to fetch all messages in a channel
-```
-
-If you're on the `11.x` branch, you'd see "You can use `message.channel.fetchMessages()` to fetch all messages in a channel. Use the `inline` attribute to make content display inline with the content around it. Otherwise, it'll be displayed on its own line.
-
-You can refer to the `guide/.vuepress/mixins/branches.js` file to see which values are valid to use for the `version` attribute.
-
-#### Codeblocks and other markdown
-
-A common use-case for this component would be with codeblocks. Using Vue components inside markdown can get tricky and cause weird errors, so in order for everything to render properly, an extra blank line should be added before and after the component tag. For example (ignoring the `\` before the backticks):
-
-```md
-You can use the following to fetch all messages in a channel:
-
-<branch version="11.x">
-
-\```js
-message.channel.fetchMessages();
-\```
-
-</branch>
-<branch version="12.x">
-
-\```js
-message.channel.messages.fetch();
-\```
-
-</branch>
-```
-
 ### Discord.js documentation links
 
 On pages where links to the discord.js documentation are used, you can use the `<docs-link>` component. Since the discord.js documentation is split into different categories and branches, the component allows you to supply the necessary info accordingly. The only required prop is `path`.

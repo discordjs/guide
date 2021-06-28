@@ -53,29 +53,6 @@
 			"</DiscordMessage>"
 		]
 	},
-	"branch": {
-		"prefix": [
-			"branch", "br"
-		],
-		"description": "v11-v12 branches",
-		"body": [
-			"<branch version=\"11.x\">", 
-			"",
-			"$1",
-			"",
-			"</branch>",
-			"<branch version=\"12.x\">",
-			"",
-			"$2",
-			"",
-			"</branch>"
-		]
-	},
-	"branch-inline": {
-		"prefix": ["branch-inline", "br-inline"],
-		"description": "v11-v12 branches (inline)",
-		"body": "<branch version=\"11.x\" inline>$1</branch><branch version=\"12.x\" inline>$2</branch>"
-	},
 	"docs": {
 		"prefix": ["docs", "djs-docs"],
 		"description": "version sensitive link to the discord.js documentation",

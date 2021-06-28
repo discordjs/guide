@@ -211,19 +211,6 @@ If you try again, it should work as expected.
 
 Let's say you have an `!avatar` command, where it'll display the avatar of all the mentioned users or your avatar if no users were mentioned. Focus on that second part for now–how would you go about displaying your avatar if no users were mentioned? Taking the snippet for the code you just used, you can do it just like this:
 
-<branch version="11.x">
-
-```js {1-3}
-if (!message.mentions.users.size) {
-	return message.channel.send(`Your avatar: <${message.author.displayAvatarURL}>`);
-}
-
-const taggedUser = message.mentions.users.first();
-```
-
-</branch>
-<branch version="12.x">
-
 ```js {1-3}
 if (!message.mentions.users.size) {
 	return message.channel.send(`Your avatar: <${message.author.displayAvatarURL({ format: 'png', dynamic: true })}>`);
@@ -233,8 +220,6 @@ const taggedUser = message.mentions.users.first();
 ```
 
 If you provide the `dynamic` option, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp`.
-
-</branch>
 
 That part is simple; recycle the if statement you used in the section above and displaying the link to your avatar.
 
@@ -252,25 +237,6 @@ That part is simple; recycle the if statement you used in the section above and 
 
 The next part is where it takes a turn–displaying the avatars of all the mentioned users. But it's simpler than you may think! `message.mentions.users` returns a Collection (as previously mentioned), which you can loop over in several different ways. You'll be using `.map()` to loop here since it allows you to easily collect and store data in a variable to send one final message in the end, as opposed to multiple.
 
-<branch version="11.x">
-
-```js {5-7,11}
-if (!message.mentions.users.size) {
-	return message.channel.send(`Your avatar: <${message.author.displayAvatarURL}>`);
-}
-
-const avatarList = message.mentions.users.map(user => {
-	return `${user.username}'s avatar: <${user.displayAvatarURL}>`;
-});
-
-// Send the entire array of strings as a message
-// By default, discord.js will `.join()` the array with `\n`
-message.channel.send(avatarList);
-```
-
-</branch>
-<branch version="12.x">
-
 ```js {5-7,11}
 if (!message.mentions.users.size) {
 	return message.channel.send(`Your avatar: <${message.author.displayAvatarURL({ format: 'png', dynamic: true })}>`);
@@ -286,8 +252,6 @@ message.channel.send(avatarList);
 ```
 
 If you provide the `dynamic` option, you will receive a `.gif` URL if the image is animated; otherwise, it will fall back to the specified `format` or its default `.webp`.
-
-</branch>
 
 And ta-da! You now have a list of avatar links of all the users you tagged.
 

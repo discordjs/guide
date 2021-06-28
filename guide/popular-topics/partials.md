@@ -6,13 +6,6 @@ One example leveraging partials is the handling of reactions on uncached message
 
 Prior you had to either handle the undocumented `raw` event or fetch the respective messages on startup. The first approach was prone to errors and unexpected internal behavior. The second was not fully fail-proof either, as the messages could still be uncached if cache size was exceeded in busy channels.
 
-<branch version="11.x">
-
-Partials are not available in version 11; please update to version 12 of the library if you want to use partial structures in your bot.
-
-</branch>
-<branch version="12.x">
-
 ## Enabling Partials
 
 As we said earlier, partials do not have all the information necessary to make them fully functional discord.js structures, so it would not be a good idea to enable the functionality by default. Users should know how to handle them before opting into this feature.
@@ -69,5 +62,3 @@ if (message.partial) {
 ::: warning
 You cannot fetch deleted data from the API. For message deletions, `messageDelete` will only emit with the ID, which you cannot use to fetch the complete message containing content, author, or other information, as it is already inaccessible by the time you receive the event.
 :::
-
-</branch>
