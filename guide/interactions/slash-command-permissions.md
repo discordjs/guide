@@ -1,6 +1,6 @@
 # Slash command permissions
 
-Slash commands also have their own permissions system, which allows you to control who has access to use those commands. Unlike the slash commands permission setting within the Discord client, you can fine tune access to commands without preventing the selected user or role from using all commands.
+Slash commands have their own permissions system, which allows you to control who has access to use which commands. Unlike the slash commands permission setting within the Discord client, you can fine-tune access to commands without preventing the selected user or role from using all commands.
 
 ::: tip
 If you set `defaultPermission: false` when creating a command you can immediately disable it for everyone including guild administrators and yourself.
