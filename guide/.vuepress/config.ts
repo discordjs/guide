@@ -1,7 +1,7 @@
-import path from 'path'
-import { defineUserConfig } from 'vuepress-vite'
-import type { DefaultThemeOptions, ViteBundlerOptions } from 'vuepress-vite'
-import sidebar from './sidebar'
+import path from 'path';
+import { defineUserConfig } from 'vuepress-vite';
+import type { DefaultThemeOptions, ViteBundlerOptions } from 'vuepress-vite';
+import sidebar from './sidebar';
 
 const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 	bundler: '@vuepress/vite',
@@ -41,7 +41,7 @@ const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 		],
 	},
 	plugins: [],
-})
+});
 
 if (process.env.NODE_ENV === 'production') {
 	config.plugins.push(
@@ -54,7 +54,7 @@ if (process.env.NODE_ENV === 'production') {
 		],
 		[
 			'@vuepress/plugin-google-analytics',
-			{ id: 'UA-108513187-1' }
+			{ id: 'UA-108513187-1' },
 		],
 	);
 }
