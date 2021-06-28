@@ -1,7 +1,6 @@
 export default {
 	'/commando/': [
 		{
-			isGroup: true,
 			text: 'Home',
 			children: [
 				'/',
@@ -9,7 +8,6 @@ export default {
 			],
 		},
 		{
-			isGroup: true,
 			text: 'Getting Started',
 			children: [
 				'/commando/',
@@ -17,7 +15,6 @@ export default {
 			],
 		},
 		{
-			isGroup: true,
 			text: 'Extra Command Info',
 			children: [
 				'/commando/throttling.md',
@@ -26,7 +23,6 @@ export default {
 			],
 		},
 		{
-			isGroup: true,
 			text: 'Arguments',
 			children: [
 				'/commando/args.md',
@@ -34,7 +30,6 @@ export default {
 			],
 		},
 		{
-			isGroup: true,
 			text: 'Additional Information',
 			children: [
 				'/commando/client-values.md',
@@ -44,7 +39,6 @@ export default {
 	],
 	'/': [
 		{
-			isGroup: true,
 			text: 'Home',
 			children: [
 				'/',
@@ -52,7 +46,6 @@ export default {
 			],
 		},
 		{
-			isGroup: true,
 			text: 'Installations & Preparations',
 			children: [
 				'/preparations/',
@@ -62,7 +55,6 @@ export default {
 			],
 		},
 		{
-			isGroup: true,
 			text: 'Creating Your Bot',
 			children: [
 				'/creating-your-bot/',
@@ -72,7 +64,6 @@ export default {
 			],
 		},
 		{
-			isGroup: true,
 			text: 'Command Handler',
 			children: [
 				'/command-handling/',
@@ -80,14 +71,12 @@ export default {
 			],
 		},
 		{
-			isGroup: true,
 			text: 'Event Handler',
 			children: [
 				'/event-handling/',
 			],
 		},
 		{
-			isGroup: true,
 			text: 'Popular Topics',
 			children: [
 				'/popular-topics/faq.md',
@@ -105,7 +94,6 @@ export default {
 			],
 		},
 		{
-			isGroup: true,
 			text: 'Miscellaneous',
 			children: [
 				'/miscellaneous/parsing-mention-arguments.md',
@@ -113,7 +101,6 @@ export default {
 			],
 		},
 		{
-			isGroup: true,
 			text: 'Databases',
 			children: [
 				'/sequelize/',
@@ -122,7 +109,6 @@ export default {
 			],
 		},
 		{
-			isGroup: true,
 			text: 'Sharding',
 			children: [
 				'/sharding/',
@@ -131,14 +117,12 @@ export default {
 			],
 		},
 		{
-			isGroup: true,
 			text: 'OAuth2',
 			children: [
 				'/oauth2/',
 			],
 		},
 		{
-			isGroup: true,
 			text: 'Voice',
 			children: [
 				'/voice/',
@@ -150,7 +134,6 @@ export default {
 			],
 		},
 		{
-			isGroup: true,
 			text: 'Improving Your Dev Environment',
 			children: [
 				'/improving-dev-environment/pm2.md',
@@ -158,7 +141,6 @@ export default {
 			],
 		},
 		{
-			isGroup: true,
 			text: 'Additional Information',
 			children: [
 				'/additional-info/notation.md',
