@@ -296,7 +296,6 @@ client.on('interaction', async interaction => {
 If you want the snowflake of a structure instead, you can retrieve that by accesing it with the `value` property.
 :::
 
-
 ## Fetching and deleting responses
 
 ::: danger
