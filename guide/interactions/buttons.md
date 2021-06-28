@@ -150,7 +150,7 @@ client.on('interaction', async interaction => {
 
 ### Emoji buttons
 
-The label of a button can hold unicode emojis, but if you want to use guild emojis you have to use the `setEmoji()` method like so:
+If you want to use a guild emoji within a `MessageButton` you can do so using the `setEmoji()` method like this:
 
 ```js {13}
 const { MessageActionRow, MessageButton } = require('discord.js');
@@ -178,7 +178,7 @@ Now you know all there is to building and sending a `MessageButton`! Let's move 
 
 ## Receiving buttons
 
-Whilst you can receive and handle a `ButtonInteraction` via the interaction event, we recommend you use one of the collectors we'll be covering in the next section. To receive a `ButtonInteraction`, attach an event listener to your client and use the `Interaction#isButton()` type guard to make sure you only receive component interactions.
+To receive a `ButtonInteraction`, attach an event listener to your client and use the `Interaction#isButton()` type guard to make sure you only receive component interactions.
 
 ```js {2}
 client.on('interaction', interaction => {
@@ -246,7 +246,7 @@ client.on('interaction', async interaction => {
 
 ## Responding to buttons
 
-The `MessageComponentInteraction` class has similar methods as the `CommandInteraction` class. These methods behave exactly the same as on the `CommandInteraction` class:
+The `MessageComponentInteraction` class provides the same methods as the `CommandInteraction` class. These methods behave equally:
 - `reply()`
 - `editReply()`
 - `defer()`
@@ -280,7 +280,7 @@ client.on('interaction', async interaction => {
 
 ### Deferring and updating the button message
 
-Additionally to deferring the response of the interaction, you can defer the button, which will trigger a loading state:
+Additionally to deferring the response of the interaction, you can defer the button, which will trigger a loading state and then revert back to its original state:
 
 ```js {9,11-17}
 client.on('interaction', async interaction => {

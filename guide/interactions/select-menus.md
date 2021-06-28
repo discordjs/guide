@@ -153,7 +153,7 @@ Now you know all there is to building and sending a `SelectMenu`! Let's move on 
 
 ## Receiving Select menus
 
-Whilst you can receive and handle a `MessageComponentInteraction` via the interaction event, we reccomend you use one of the collectors we'll be covering in the next section. Now to receive a `MessageComponentInteraction`, simply attach an event listener to your client and also use the `Interaction#isMessageComponent()` typeguard to make sure you only receive component interactions:
+To receive a `MessageComponentInteraction`, simply attach an event listener to your client and also use the `Interaction#isMessageComponent()` typeguard to make sure you only receive component interactions:
 
 ```js {2}
 client.on('interaction', interaction => {
@@ -222,17 +222,13 @@ client.on('interaction', async interaction => {
 
 ## Responding to select menus
 
-The `MessageComponentInteraction` class has similar methods as the `CommandInteraction` class, which we we'll be covering in the following section:
-
-::: tip
-The following methods behave exactly the same as on the `CommandInteraction` class:
+The `MessageComponentInteraction` class provides the same methods as the `CommandInteraction` class. These methods behave equally:
 - `reply()`
 - `editReply()`
 - `defer()`
 - `fetchReply()`
 - `deleteReply()`
 - `followUp()`
-:::
 
 ### Updating the select menu's message
 
@@ -251,7 +247,7 @@ client.on('interaction', async interaction => {
 
 ### Deferring and updating the select menu's message
 
-Additionally to deferring the response of the interaction, you can defer the button, which will trigger a loading state:
+Additionally to deferring the response of the interaction, you can defer the menu, which will trigger a loading state and then revert back to its original state:
 
 ```js {1,6-10}
 const wait = require('util').promisify(setTimeout);
