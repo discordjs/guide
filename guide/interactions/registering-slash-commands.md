@@ -6,7 +6,6 @@ Discord provides users with the option to create client-integrated slash command
 If you already have slash commands set-up for your application and want to learn to respond to them, refer to [the following page](/interactions/replying-to-slash-commands/).
 :::
 
-
 ## Global commands
 
 First up, we'll introduce you to global application commands. These types of commands will be available in all guilds your application has the `applications.commands` scope authorized, as well as in DMs.
