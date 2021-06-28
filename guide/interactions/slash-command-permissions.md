@@ -6,7 +6,6 @@ Slash commands have their own permissions system, which allows you to control wh
 If you set `defaultPermission: false` when creating a command you can immediately disable it for everyone including guild administrators and yourself.
 :::
 
-
 ## User permissions
 
 To begin, we'll fetch an `ApplicationCommand` and then set the permissions using the `ApplicationCommandPermissionsManager#add()` method:
