@@ -56,7 +56,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 
 You can also send message components within an ephemeral response or alongside message embeds.
 
-```js {1,13-19}
+```js {1,15-19,21}
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 
 client.on('interaction', async interaction => {
@@ -101,7 +101,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 
 Additionally, if you don't want to construct an `ActionRow` every time, you can also pass an array of arrays containing components like this:
 
-```js {7-10,18}
+```js {7-10,12}
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 
 client.on('interaction', async interaction => {
@@ -113,13 +113,7 @@ client.on('interaction', async interaction => {
 			.setLabel('primary')
 			.setStyle('PRIMARY');
 
-		const embed = new MessageEmbed()
-			.setColor('#0099ff')
-			.setTitle('Some title')
-			.setURL('https://discord.js.org/')
-			.setDescription('Some description here');
-
-		await interaction.reply({ content: 'Pong!', ephemeral: true, embeds: [embed], components: [[button]] });
+		await interaction.reply({ content: 'Pong!', ephemeral: true, components: [[button]] });
 	}
 });
 ```
@@ -227,7 +221,7 @@ As with other types of collectors, you can also use a promise-based collector.
 Unlike other promise-based collectors, this one only collects a single item!
 :::
 
-```js 8-11}
+```js {8-10}
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 
@@ -280,7 +274,7 @@ client.on('interaction', async interaction => {
 
 Additionally to deferring the response of the interaction, you can defer the button, which will trigger a loading state and then revert back to its original state:
 
-```js {9,11-17}
+```js {9,12-16}
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 

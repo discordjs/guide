@@ -18,7 +18,7 @@ You can have a maximum of:
 
 To create a select menu, use the `MessageActionRow()` and `MessageSelector()` builder functions and then pass the resulting object to `CommandInteraction#reply()` as `InteractionReplyOptions`, like so:
 
-```js {1,7-22,24}
+```js {1,7-24,26}
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 
 client.on('interaction', async interaction => {
@@ -67,7 +67,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 
 You can also send message components within an ephemeral response or alongside message embeds.
 
-```js {1,7-22}
+```js {1,26-30,32}
 const { MessageActionRow, MessageSelectMenu, MessageEmbed } = require('discord.js');
 
 client.on('interaction', async interaction => {
@@ -207,7 +207,7 @@ As with other types of collectors, you can also use a promise-based collector.
 Unlike other promise-based collectors, this one only collects a single item!
 :::
 
-```js 8-11}
+```js {8-10}
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 
