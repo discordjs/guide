@@ -1,0 +1,11 @@
+:root .DocSearch {
+	--docsearch-text-color: #fff;
+	--docsearch-searchbox-background: var(--blurple-600);
+	--docsearch-searchbox-focus-background: var(--blurple-630);
+}
+
+.DocSearch {
+	&.DocSearch-Button {
+		border-radius: 0.375rem;
+	}
+}

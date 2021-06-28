@@ -43,7 +43,7 @@ const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 	plugins: [],
 });
 
-if (process.env.NODE_ENV === 'production') {
+// if (process.env.NODE_ENV === 'production') {
 	config.plugins.push(
 		[
 			'@vuepress/plugin-docsearch',
@@ -57,6 +57,6 @@ if (process.env.NODE_ENV === 'production') {
 			{ id: 'UA-108513187-1' },
 		],
 	);
-}
+// }
 
 export default config;
