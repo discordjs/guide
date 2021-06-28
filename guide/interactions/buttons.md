@@ -2,7 +2,7 @@
 
 With the components API, you can create interactive message components. In this page, we'll be focusing on how to send, receive, and respond to buttons using discord.js!
 
-::: danger
+::: tip
 This page is a follow-up to the [CommandInteraction guide pages](/interactions/registering-slash-commands/). Please carefully read those first so that you can understand the methods used in this section.
 :::
 
