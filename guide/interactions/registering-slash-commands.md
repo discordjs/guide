@@ -32,7 +32,7 @@ client.on('message', async message => {
 });
 ```
 ::: danger
-Command names must be lowercase at all times or else you will receive an API error.
+Command names must be lowercase. You will receive an API error if this is not the case.
 :::
 
 That's it! You've successfully created your first global application command! Let's move on to guild specific commands.
