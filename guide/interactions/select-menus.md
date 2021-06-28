@@ -187,7 +187,7 @@ client.on('interaction', async interaction => {
 		const message = await interaction.fetchReply();
 		const filter = i => i.customID === 'select' && i.user.id === '122157285790187530';
 
-		const collector = message.createMessageComponentInteractionCollector(filter, { time: 15000 });
+		const collector = message.createMessageComponentInteractionCollector({ filter, time: 15000 });
 
 		collector.on('collect', i => console.log(`Collected ${i.customID}`));
 		collector.on('end', collected => console.log(`Collected ${collected.size} items`));
@@ -215,7 +215,7 @@ client.on('interaction', async interaction => {
 		const message = await interaction.fetchReply();
 		const filter = i => i.customID === 'select' && i.user.id === '122157285790187530';
 
-		message.awaitMessageComponentInteraction(filter, { time: 15000 })
+		message.awaitMessageComponentInteraction({ filter, time: 15000 })
 			.then(i => console.log(`${i.customID} was selected!`))
 			.catch(console.error);
 	}
