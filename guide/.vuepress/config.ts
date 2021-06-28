@@ -52,6 +52,10 @@ if (process.env.NODE_ENV === 'production') {
 				indexName: 'discordjs',
 			},
 		],
+		[
+			'@vuepress/plugin-google-analytics',
+			{ id: 'UA-108513187-1' }
+		],
 	);
 }
 
