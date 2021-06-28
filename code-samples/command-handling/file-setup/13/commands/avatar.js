@@ -11,7 +11,7 @@ module.exports = {
 		],
 	},
 	async execute(interaction) {
-		const { user } = interaction.options?.get('target');
+		const { user } = interaction.options.get('target');
 		if (user) return interaction.reply(`${user.username}'s avatar: ${user.displayAvatarURL({ dynamic: true })}`);
 		else return interaction.reply(`Your avatar: ${interaction.user.displayAvatarURL({ dynamic: true })}`);
 	},

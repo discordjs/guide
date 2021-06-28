@@ -11,7 +11,7 @@ module.exports = {
 		],
 	},
 	async execute(interaction) {
-		const { value } = interaction.options?.get('input');
+		const { value } = interaction.options.get('input');
 		if (value) return interaction.reply(`The options value is: \`${value}\``);
 		else return interaction.reply('No option was provided!');
 	},
