@@ -16,7 +16,7 @@ import {
 } from '@discord-message-components/vue';
 import ResultingCode from './components/ResultingCode.vue';
 import djsAvatar from './assets/discord-avatar-djs.png';
-import '@discord-message-components/vue/styles';
+import '@discord-message-components/vue/dist/style.css';
 
 export default defineClientAppEnhance(({ app, router, siteData }) => {
 	app.use(DiscordMessageComponents, {
@@ -34,7 +34,7 @@ export default defineClientAppEnhance(({ app, router, siteData }) => {
 				bot: true,
 			},
 		},
-	})
+	});
 
 	app.component('DiscordButton', DiscordButton);
 	app.component('DiscordButtons', DiscordButtons);
@@ -49,5 +49,5 @@ export default defineClientAppEnhance(({ app, router, siteData }) => {
 	app.component('DiscordReaction', DiscordReaction);
 	app.component('DiscordReactions', DiscordReactions);
 
-	app.component('ResultingCode', ResultingCode)
+	app.component('ResultingCode', ResultingCode);
 });
