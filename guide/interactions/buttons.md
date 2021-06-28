@@ -6,7 +6,6 @@ With the components API, you can create interactive message components. On this 
 This page is a follow-up to the [CommandInteraction guide pages](/interactions/registering-slash-commands/). Please carefully read those first so that you can understand the methods used in this section.
 :::
 
-
 ## Building and sending buttons
 
 Buttons are part of the `MessageComponent` class, which can be sent via messages or interaction responses. A button, as any other message component, must be in an `ActionRow`.
@@ -65,10 +64,12 @@ client.on('interaction', async interaction => {
 
 	if (interaction.commandName === 'ping') {
 		const row = new MessageActionRow()
-			.addComponents(new MessageButton()
-				.setCustomID('primary')
-				.setLabel('primary')
-				.setStyle('PRIMARY'));
+			.addComponents(
+				new MessageButton()
+					.setCustomID('primary')
+					.setLabel('primary')
+					.setStyle('PRIMARY')
+			);
 
 		const embed = new MessageEmbed()
 			.setColor('#0099ff')
@@ -175,7 +176,6 @@ client.on('interaction', async interaction => {
 
 Now you know all there is to building and sending a `MessageButton`! Let's move on to receiving button interactions!
 
-
 ## Receiving buttons
 
 To receive a `ButtonInteraction`, attach an event listener to your client and use the `Interaction#isButton()` type guard to make sure you only receive buttons.
@@ -186,7 +186,6 @@ client.on('interaction', interaction => {
 	console.log(interaction);
 });
 ```
-
 
 ## Component collectors
 
@@ -222,7 +221,7 @@ For ephemeral responses you cannot fetch a message object, so create the collect
 
 ### awaitMessageComponentInteraction
 
-As with other types of collectors, you can also use a promise-based collector like this:
+As with other types of collectors, you can also use a promise-based collector.
 
 ::: warning
 Unlike other promise-based collectors, this one only collects a single item!
@@ -242,7 +241,6 @@ client.on('interaction', async interaction => {
 	}
 });
 ```
-
 
 ## Responding to buttons
 
