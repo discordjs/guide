@@ -48,7 +48,6 @@ client.on('interactionCreate', async interaction => {
 });
 ```
 
-
 ## Displaying real data
 
 Let's start displaying some real data. For now, we'll be displaying basic member/server info.

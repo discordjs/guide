@@ -28,7 +28,6 @@ client.on('interactionCreate', async interaction => {
 client.login(token);
 ```
 
-
 ## Individual command files
 
 Before anything, you may want to create a backup of your current bot file. If you've followed along so far, your entire folder structure should look something like this:
