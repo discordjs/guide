@@ -173,7 +173,7 @@ client.on('interaction', async interaction => {
 });
 ```
 
-Now you know all there is to building and sending a `MessageButton`! Let's move on to how to receive buttons!
+Now you know all there is to building and sending a `MessageButton`! Let's move on to receiving button interactions!
 
 
 ## Receiving buttons
