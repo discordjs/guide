@@ -167,4 +167,4 @@ Check out the [Keyv repository](https://github.com/lukechilds/keyv) for more inf
 
 ## Resulting code
 
-<resulting-code />
+<ResultingCode />

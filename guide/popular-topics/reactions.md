@@ -273,4 +273,4 @@ Partial structures are enabled globally. You cannot only make them work for a sp
 
 ## Resulting code
 
-<resulting-code />
+<ResultingCode />

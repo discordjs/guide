@@ -242,4 +242,4 @@ If you rerun your bot now, everything should still work the same.
 
 ## Resulting code
 
-<resulting-code />
+<ResultingCode />

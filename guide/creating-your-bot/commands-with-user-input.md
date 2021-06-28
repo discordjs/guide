@@ -366,4 +366,4 @@ if (isNaN(amount)) {
 
 ## Resulting code
 
-<resulting-code />
+<ResultingCode />

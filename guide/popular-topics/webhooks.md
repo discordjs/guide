@@ -148,4 +148,4 @@ client.login(token);
 
 ## Resulting code
 
-<resulting-code/>
+<ResultingCode/>

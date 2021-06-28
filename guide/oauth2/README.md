@@ -274,4 +274,4 @@ To maintain security, store the access token server-side but associate it with a
 
 ## Resulting code
 
-<resulting-code path="oauth/simple-oauth-webserver" />
+<ResultingCode path="oauth/simple-oauth-webserver" />

@@ -99,4 +99,4 @@ You've successfully created your first Discord bot command! Exciting stuff, isn'
 
 ## Resulting code
 
-<resulting-code path="creating-your-bot/up-and-running" />
+<ResultingCode path="creating-your-bot/up-and-running" />

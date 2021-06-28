@@ -573,4 +573,4 @@ You should have a command handler with some basic (but useful) features at this 
 
 ## Resulting code
 
-<resulting-code />
+<ResultingCode />

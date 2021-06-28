@@ -169,4 +169,4 @@ The next section contains additional changes you might want to consider, which y
 
 ## Resulting code
 
-<resulting-code path="sharding/getting-started" />
+<ResultingCode path="sharding/getting-started" />

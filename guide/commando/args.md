@@ -124,4 +124,4 @@ And there you have it, a say command using args!
 
 ## Resulting code
 
-<resulting-code />
+<ResultingCode />

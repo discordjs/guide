@@ -134,4 +134,4 @@ In the next chapter, we'll be going through how to implement some basic features
 
 ## Resulting code
 
-<resulting-code path="command-handling/file-setup" />
+<ResultingCode path="command-handling/file-setup" />

@@ -161,4 +161,4 @@ And that's all! The emoji should have pretty-printed in a message, as you'd expe
 
 ## Resulting code
 
-<resulting-code />
+<ResultingCode />

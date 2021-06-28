@@ -212,4 +212,4 @@ Now, if you do that same command again, you should get this:
 
 ## Resulting code
 
-<resulting-code />
+<ResultingCode />

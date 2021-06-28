@@ -316,4 +316,4 @@ You can utilize these methods to adapt permissions or overwrites without touchin
 
 ## Resulting code
 
-<resulting-code />
+<ResultingCode />

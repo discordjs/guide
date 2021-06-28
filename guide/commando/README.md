@@ -119,4 +119,4 @@ And there you have it! You've set up your `index.js` file! In the end, your file
 
 ## Resulting code
 
-<resulting-code />
+<ResultingCode />

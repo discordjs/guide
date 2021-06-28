@@ -70,4 +70,4 @@ Now fire up the bot as usual and use your command! It should automatically be `?
 
 ## Resulting code
 
-<resulting-code />
+<ResultingCode />

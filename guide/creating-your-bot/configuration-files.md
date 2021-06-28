@@ -53,4 +53,4 @@ As previously mentioned, you'll probably want to store more than just your token
 
 ## Resulting code
 
-<resulting-code />
+<ResultingCode />

@@ -371,4 +371,4 @@ Nothing extraordinary here either. You could query the database for the top ten 
 
 ## Resulting code
 
-<resulting-code />
+<ResultingCode />

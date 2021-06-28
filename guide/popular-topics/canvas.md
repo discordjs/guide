@@ -279,4 +279,4 @@ And that's it! We have covered the basics of image manipulation, text generation
 
 ## Resulting code
 
-<resulting-code />
+<ResultingCode />
