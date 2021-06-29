@@ -187,7 +187,7 @@ client.on('interaction', async interaction => {
 
 		const collector = interaction.channel.createMessageComponentInteractionCollector({ filter, time: 15000 });
 
-		collector.on('collect', i => console.log(`Collected ${i.customID}`));
+		collector.on('collect', i => console.log(`Collected ${i.values.join(', ')} from ${i.customID}`));
 		collector.on('end', collected => console.log(`Collected ${collected.size} items`));
 	}
 });
@@ -212,8 +212,8 @@ client.on('interaction', async interaction => {
 	if (interaction.commandName === 'ping') {
 		const filter = i => i.customID === 'select' && i.user.id === '122157285790187530';
 
-		interaction.channel.awaitMessageComponentInteraction({ filter, time: 15000 })
-			.then(i => console.log(`${i.customID} was selected!`))
+		message.awaitMessageComponentInteraction({ filter, time: 15000 })
+			.then(i => console.log(`${i.values.join(', ')} was selected from ${i.customID}!`))
 			.catch(console.error);
 	}
 });
