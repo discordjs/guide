@@ -20,3 +20,10 @@ div[class*=language-].line-numbers-mode::after {
 	border-right-color: rgba(#000, 0.25);
 }
 
+.theme-container .fade-slide-y-enter-active {
+	transition: all 0.2s ease;
+}
+
+.theme-container .fade-slide-y-leave-active {
+	transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
