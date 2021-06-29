@@ -23,4 +23,22 @@
 	& > h6 {
 		color: var(--c-headers);
 	}
+
+	p code {
+		color: #2f3136;
+	}
+
+	p a code {
+		color: var(--c-text-accent);
+	}
+}
+
+html.dark .theme-default-content {
+	p code {
+		color: #f3f4f6;
+	}
+
+	p a code {
+		color: var(--c-text-accent);
+	}
 }
