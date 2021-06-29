@@ -11,3 +11,17 @@ details.custom-container.details,
 .custom-container.warning {
 	border-radius: 6px;
 }
+
+.custom-container {
+	&.tip a {
+		color: var(--c-tip-title);
+	}
+
+	&.warning a {
+		color: var(--c-warning-title);
+	}
+
+	&.danger a {
+		color: var(--c-danger-title);
+	}
+}
