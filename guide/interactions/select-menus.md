@@ -162,7 +162,6 @@ To receive a `SelectMenuInteractionInteraction`, simply attach an event listener
 ```js {2}
 client.on('interaction', interaction => {
 	if (!interaction.isSelectMenu()) return;
-	if (interaction.componentType !== 'SELECT_MENU') return;
 	console.log(interaction);
 });
 ```
@@ -179,15 +178,14 @@ You can create the collectors on either a `message` or a `channel`.
 
 Here's how you can create a basic event-based `MessageComponentInteractionCollector`:
 
-```js {6,8,10-11}
+```js {5,7,9-10}
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-		const message = await interaction.fetchReply();
 		const filter = i => i.customID === 'select' && i.user.id === '122157285790187530';
 
-		const collector = message.createMessageComponentInteractionCollector({ filter, time: 15000 });
+		const collector = interaction.channel.createMessageComponentInteractionCollector({ filter, time: 15000 });
 
 		collector.on('collect', i => console.log(`Collected ${i.customID}`));
 		collector.on('end', collected => console.log(`Collected ${collected.size} items`));
@@ -207,15 +205,14 @@ As with other types of collectors, you can also use a promise-based collector.
 Unlike other promise-based collectors, this one only collects a single item!
 :::
 
-```js {8-10}
+```js {7-9}
 client.on('interaction', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-		const message = await interaction.fetchReply();
 		const filter = i => i.customID === 'select' && i.user.id === '122157285790187530';
 
-		message.awaitMessageComponentInteraction({ filter, time: 15000 })
+		interaction.channel.awaitMessageComponentInteraction({ filter, time: 15000 })
 			.then(i => console.log(`${i.customID} was selected!`))
 			.catch(console.error);
 	}
