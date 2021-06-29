@@ -4,6 +4,7 @@
 @import './sidebar.scss';
 @import './home.scss';
 @import './content.scss';
+@import './custom-blocks.scss';
 @import './mixins/scrollbar.scss';
 
 html {
@@ -15,16 +16,3 @@ h2 {
 	border-bottom: 0;
 }
 
-.custom-container.danger,
-details.custom-container.details,
-.custom-container.tip,
-.custom-container.warning {
-	overflow-wrap: break-word;
-}
-
-.custom-container.danger,
-details.custom-container.details,
-.custom-container.tip,
-.custom-container.warning {
-	border-radius: 6px;
-}
