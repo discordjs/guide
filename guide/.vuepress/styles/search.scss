@@ -4,10 +4,20 @@
 	--docsearch-searchbox-focus-background: var(--blurple-630);
 
 	--docsearch-hit-active-color: var(--docsearch-text-color);
+
+	--docsearch-key-shadow: 0 0 0 1px var(--blurple-560);
+}
+
+html.dark .DocSearch {
+	--docsearch-key-shadow: 0 0 0 1px var(--blurple-560);
 }
 
 .DocSearch {
 	&.DocSearch-Button {
 		border-radius: 0.375rem;
+
+		.DocSearch-Button-Key {
+			background: unset;
+		}
 	}
 }
