@@ -762,7 +762,7 @@ Webhooks can now have a `sourceGuild` and `sourceChannel` if the message is bein
 
 #### Util#resolvePartialEmoji
 
-The new `Util#resolvePartialEmoji` method attempts to resolve properties for a raw emoji object from input data, without the use of the Discord.js Client class or it's EmojiManager.
+The new `Util#resolvePartialEmoji` method attempts to resolve properties for a raw emoji object from input data, without the use of the Discord.js Client class or its EmojiManager.
 
 #### Util#verifyString
 
