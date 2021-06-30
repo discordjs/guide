@@ -39,6 +39,9 @@ const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 				link: 'https://discord.js.org/#/docs/main/stable/general/welcome',
 			},
 		],
+		themePlugins: {
+			mediumZoom: false,
+		},
 	},
 	plugins: [],
 });
