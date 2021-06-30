@@ -42,6 +42,11 @@ html.dark .DocSearch {
 			.DocSearch-Search-Icon {
 				width: 1rem;
 				height: 1rem;
+
+				@media screen and (max-width: 719px) {
+					width: 1.25rem;
+					height: 1.25rem;
+				}
 			}
 
 			.DocSearch-Button-Placeholder {

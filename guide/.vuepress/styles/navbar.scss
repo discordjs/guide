@@ -27,10 +27,15 @@
 	border-width: 0;
 
 	@media screen and (max-width: 719px) {
-		flex-direction: row-reverse;
-		justify-content: space-between;
 		padding-left: 1rem;
 		padding-right: 1rem;
+	}
+
+	> span {
+		@media screen and (max-width: 719px) {
+			order: 1;
+			margin-right: auto;
+		}
 	}
 
 	.toggle-sidebar-button {
@@ -38,10 +43,10 @@
 		position: unset;
 		top: unset;
 		left: unset;
-		margin-right: 1rem;
+		margin-left: 1rem;
 
 		@media screen and (max-width: 719px) {
-			margin-right: 0;
+			order: 3;
 		}
 	}
 
@@ -75,6 +80,10 @@
 		right: 0;
 		top: 0;
 		padding-left: 0;
+
+		@media screen and (max-width: 719px) {
+			order: 2;
+		}
 
 		.navbar-links {
 			.navbar-links-item {
