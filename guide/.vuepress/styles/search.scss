@@ -38,9 +38,15 @@ html.dark .DocSearch {
 			box-shadow: none;
 		}
 
-		.DocSearch-Search-Icon {
-			width: 1rem;
-			height: 1rem;
+		.DocSearch-Button-Container {
+			.DocSearch-Search-Icon {
+				width: 1rem;
+				height: 1rem;
+			}
+
+			.DocSearch-Button-Placeholder {
+				padding: 0 0 0 0.75rem;
+			}
 		}
 
 		.DocSearch-Button-Key {
