@@ -1,12 +1,5 @@
 @import './mixins/scrollbar.scss';
 
-@media (max-width: 719px) {
-	.theme-container.sidebar-open .sidebar {
-		top: 0;
-		padding-top: 4rem;
-	}
-}
-
 .sidebar {
 	--c-bg-scrollbar: #ededed;
 
@@ -14,6 +7,11 @@
 	font-size: 14px;
 	border-right-width: 0;
 	@include customScrollbar();
+
+	@media (max-width: 719px) {
+		top: 0;
+		padding-top: 4rem;
+	}
 
 	.navbar-links {
 		@media screen and (max-width: 719px) {
