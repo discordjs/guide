@@ -19,9 +19,11 @@ $codeLang: 'html' 'js' 'json' 'md' 'sh' 'ts';
 
 	// brand colors
 	--c-brand: var(--blurple-560);
+	--c-brand-light: var(--blurple-460);
 
 	// text colors
 	--c-text: #374151;
+	--c-text-accent: var(--c-brand-light);
 
 	// custom container colors
 	--c-tip: #42b983;
@@ -56,6 +58,7 @@ html.dark {
 
 	// brand colors
 	--c-brand: var(--blurple-560);
+	--c-brand-light: var(--blurple-460);
 
 	// background colors
 	--c-bg: #1d1d1d;
@@ -63,6 +66,7 @@ html.dark {
 
 	// text colors
 	--c-text: #9ca3af;
+	--c-text-accent: var(--c-brand-light);
 
 	// custom container colors
 	--c-tip: #42b983;
