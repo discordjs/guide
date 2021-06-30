@@ -22,10 +22,12 @@ html.dark .DocSearch {
 		border-width: 0;
 		box-shadow: none;
 		border-radius: 0.375rem;
+		margin-left: 2rem;
 
 		@media screen and (max-width: 719px) {
 			width: unset;
 			background-color: unset;
+			margin-left: 1rem;
 		}
 
 		&:hover {

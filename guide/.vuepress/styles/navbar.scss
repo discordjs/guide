@@ -23,7 +23,7 @@
 	align-items: center;
 	height: 4rem;
 	font-size: 14px;
-	padding: 0.5rem 4.15rem;
+	padding: 0.5rem 4rem;
 	border-width: 0;
 
 	@media screen and (max-width: 719px) {
@@ -52,7 +52,7 @@
 
 	.toggle-dark-button {
 		@include navLink();
-		margin-left: 1rem;
+		margin-left: 2rem;
 
 		@media screen and (max-width: 719px) {
 			margin-left: 0;
