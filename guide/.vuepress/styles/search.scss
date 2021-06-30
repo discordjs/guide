@@ -56,4 +56,10 @@ html.dark .DocSearch {
 			padding-bottom: 0;
 		}
 	}
+
+	.DocSearch-Modal {
+		.DocSearch-Dropdown {
+			overflow-y: auto;
+		}
+	}
 }
