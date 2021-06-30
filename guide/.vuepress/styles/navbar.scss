@@ -53,6 +53,7 @@
 	.toggle-dark-button {
 		@include navLink();
 		margin-left: 2rem;
+		opacity: 1;
 
 		@media screen and (max-width: 719px) {
 			margin-left: 0;
