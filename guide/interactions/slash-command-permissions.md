@@ -9,7 +9,7 @@ If you set `defaultPermission: false` when creating a command you can immediatel
 
 ## User permissions
 
-To begin, we'll fetch an `ApplicationCommand` and then set the permissions using the `ApplicationCommand#setPermissions()` method:
+To begin, we'll fetch an `ApplicationCommand` and then set the permissions using the `ApplicationCommandPermissionsManager#add()` method:
 
 ```js
 client.on('message', async message => {
@@ -26,7 +26,7 @@ client.on('message', async message => {
 			},
 		];
 
-		await command.setPermissions(permissions);
+		await command.permissions.add({ permissions });
 	}
 });
 ```
@@ -49,7 +49,7 @@ client.on('message', async message => {
 			},
 		];
 
-		await command.setPermissions(permissions);
+		await command.setPermissions({ permissions });
 	}
 });
 ```
@@ -76,7 +76,7 @@ client.on('message', async message => {
 			},
 		];
 
-		await command.setPermissions(permissions);
+		await command.permissions.add({ permissions });
 	}
 });
 ```
@@ -98,7 +98,7 @@ client.on('message', async message => {
 			},
 		];
 
-		await command.setPermissions(permissions);
+		await command.permissions.add({ permissions });
 	}
 });
 ```
@@ -113,7 +113,7 @@ client.on('message', async message => {
 	if (!client.application?.owner) await client.application?.fetch();
 
 	if (message.content.toLowerCase() === '!perms' && message.author.id === client.application?.owner.id) {
-		const permissions = [
+		const fullPermissions = [
 			{
 				id: '123456789012345678',
 				permissions: [{
@@ -132,7 +132,7 @@ client.on('message', async message => {
 			},
 		];
 
-		await client.guilds.cache.get('123456789012345678')?.commands.setPermissions(permissions);
+		await client.guilds.cache.get('123456789012345678')?.commands.permissions.set({ fullPermissions });
 	}
 });
 ```
