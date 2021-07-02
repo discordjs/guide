@@ -10,7 +10,7 @@ cd guide
 npm install
 ```
 
-You can use `npm run serve` to open up a local version of the site at http://localhost:8080. If you need to use a different port, run it as `npm run serve -- --port=1234`.
+You can use `npm run dev` to open up a local version of the site at http://localhost:8080. If you need to use a different port, run it as `npm run dev -- --port=1234`.
 
 ### Linting
 
