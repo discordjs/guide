@@ -21,7 +21,7 @@ const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 		['meta', { property: 'og:locale', content: 'en_US' }],
 		['meta', { property: 'og:image', content: '/meta-image.png' }],
 	],
-	theme: path.join(__dirname, 'theme', 'index.js'),
+	theme: path.join(__dirname, 'theme', 'index.ts'),
 	themeConfig: {
 		contributors: false,
 		sidebar,

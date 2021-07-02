@@ -1,6 +1,6 @@
-const { path } = require('@vuepress/utils');
+import { path } from '@vuepress/utils';
 
-module.exports = {
+export default {
 	name: 'vuepress-theme-discordjs-guide',
 	'extends': '@vuepress/theme-default',
 	layouts: {
