@@ -1,5 +1,5 @@
 <template>
-	<div v-click-away="hideMenu" class="user-settings">
+	<div v-click-outside="hideMenu" class="user-settings">
 		<a class="settings-button" href="#" @click.prevent="showMenu = !showMenu">
 			<CogIcon class="settings-icon" />
 		</a>
@@ -13,13 +13,13 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { directive as ClickAway } from 'vue3-click-away';
+import { directive as ClickOutside } from 'click-outside-vue3';
 import CogIcon from './CogIcon.vue';
 import ThemeOptions from './ThemeOptions.vue';
 
 export default defineComponent({
 	directives: {
-		ClickAway,
+		ClickOutside,
 	},
 	components: {
 		CogIcon,
