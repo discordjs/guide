@@ -5,6 +5,17 @@ import sidebar from './sidebar';
 
 const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 	bundler: '@vuepress/vite',
+	bundlerConfig: {
+		vuePluginOptions: {
+			template: {
+				compilerOptions: {
+					directiveTransforms: {
+						'click-outside': () => ({ props: [], needRuntime: true }),
+					},
+				},
+			},
+		},
+	},
 	lang: 'en-US',
 	title: 'Discord.js Guide',
 	description: 'Imagine a guide... that explores the many possibilies for your discord.js bot.',
