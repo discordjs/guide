@@ -3,6 +3,15 @@ $codeLang: 'html' 'js' 'json' 'md' 'sh' 'ts';
 
 // base colors
 :root {
+	// Guide green colors
+	--green-430: #5bc595;
+	--green-460: #48be89;
+	--green-530: #379c6f;
+	--green-500: #3eaf7c;
+	--green-560: #318961;
+	--green-600: #2a7754;
+	--green-630: #236447;
+
 	// Discord colors
 	--blurple-430: #707bf4;
 	--blurple-460: #6571f3;
@@ -12,14 +21,32 @@ $codeLang: 'html' 'js' 'json' 'md' 'sh' 'ts';
 	--blurple-600: #3c45a5;
 	--blurple-630: #343b8f;
 
+	// Theme colors
+	--theme-430: var(--green-430);
+	--theme-460: var(--green-460);
+	--theme-500: var(--green-500);
+	--theme-530: var(--green-530);
+	--theme-560: var(--green-560);
+	--theme-600: var(--green-600);
+	--theme-630: var(--green-630);
+
 	--text-gray: #e5e7eb;
 	--c-headers: #111827;
+
+	// Scrollbar
+	--c-bg-scrollbar-thumb: var(--theme-460);
+	--c-bg-scrollbar-thumb-hover: var(--theme-430);
+
+	// Nav bar colors
+	--nav-background-color: var(--theme-530);
+	--nav-links-color: var(--theme-600);
+	--nav-links-hover-color: var(--theme-630);
 
 	// Overrides:
 
 	// brand colors
-	--c-brand: var(--blurple-560);
-	--c-brand-light: var(--blurple-460);
+	--c-brand: var(--theme-560);
+	--c-brand-light: var(--theme-460);
 
 	// text colors
 	--c-text: #374151;
@@ -50,6 +77,41 @@ $codeLang: 'html' 'js' 'json' 'md' 'sh' 'ts';
 	--content-width: 920px;
 }
 
+html.guide-theme-blurple {
+	--theme-430: var(--blurple-430);
+	--theme-460: var(--blurple-460);
+	--theme-500: var(--blurple-500);
+	--theme-530: var(--blurple-530);
+	--theme-560: var(--blurple-560);
+	--theme-600: var(--blurple-600);
+	--theme-630: var(--blurple-630);
+
+	// Nav bar colors
+	--nav-background-color: var(--theme-560);
+	--nav-links-color: var(--theme-600);
+	--nav-links-hover-color: var(--theme-630);
+
+	// Scrollbar
+	--c-bg-scrollbar: var(--theme-460);
+	--c-bg-scrollbar-thumb: var(--theme-460);
+	--c-bg-scrollbar-thumb-hover: var(--theme-430);
+
+	// Overrides
+
+	// brand colors
+	--c-brand: var(--theme-560);
+	--c-brand-light: var(--theme-460);
+
+	// text colors
+	--c-text-accent: var(--c-brand-light);
+
+	// Search
+	--docsearch-searchbox-background: var(--theme-600);
+	--docsearch-searchbox-focus-background: var(--theme-630);
+
+	--docsearch-key-shadow: 0 0 0 1px var(--theme-560);
+}
+
 html.dark {
 	--c-headers: #fff;
 	--c-bg-scrollbar: var(--c-bg);
@@ -57,8 +119,8 @@ html.dark {
 	// Overrides:
 
 	// brand colors
-	--c-brand: var(--blurple-560);
-	--c-brand-light: var(--blurple-460);
+	--c-brand: var(--theme-560);
+	--c-brand-light: var(--theme-460);
 
 	// background colors
 	--c-bg: #1d1d1d;

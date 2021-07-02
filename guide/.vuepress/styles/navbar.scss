@@ -9,22 +9,23 @@
 	&:hover,
 	&.router-link-active:hover {
 		color: var(--text-gray);
-		background-color: var(--blurple-630);
+		background-color: var(--nav-links-hover-color);
 	}
 
 	&.router-link-active {
-		background-color: var(--blurple-600);
+		background-color: var(--nav-links-color);
 	}
 }
 
 .navbar {
-	background-color: var(--blurple-560);
+	background-color: var(--nav-background-color);
 	display: flex;
 	align-items: center;
 	height: 4rem;
 	font-size: 14px;
 	padding: 0.5rem 4rem;
 	border-width: 0;
+	transition: none;
 
 	@media screen and (max-width: 719px) {
 		padding-left: 1rem;
@@ -56,7 +57,7 @@
 		opacity: 1;
 
 		@media screen and (max-width: 719px) {
-			margin-left: 0;
+			margin-left: 1rem;
 		}
 	}
 
@@ -74,7 +75,7 @@
 	}
 
 	.navbar-links-wrapper {
-		background-color: var(--blurple-560);
+		background-color: var(--nav-background-color);
 		display: flex;
 		align-items: center;
 		position: relative;

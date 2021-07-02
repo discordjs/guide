@@ -1,5 +1,15 @@
 @import './mixins/scrollbar.scss';
 
+:root {
+	--active-sidebar-link: var(--theme-530);
+	--active-sidebar-link-hover: var(--theme-500);
+}
+
+html.guide-theme-blurple {
+	--active-sidebar-link: var(--theme-530);
+	--active-sidebar-link-hover: var(--theme-500);
+}
+
 .sidebar {
 	--c-bg-scrollbar: #ededed;
 
@@ -26,27 +36,25 @@
 			padding: 0.5rem;
 		}
 
-		.sidebar-group {
-			.sidebar-heading {
-				font-size: 1em;
-				font-weight: 700;
-				text-transform: uppercase;
+		.sidebar-heading {
+			font-size: 1em;
+			font-weight: 700;
+			text-transform: uppercase;
+		}
+
+		.sidebar-item:not(.sidebar-heading) {
+			border-radius: 2px 0 0 2px;
+
+			&.active {
+				color: var(--active-sidebar-link);
+				border-left-width: 4px;
+				border-left-color: var(--active-sidebar-link);
 			}
 
-			.sidebar-link {
-				border-radius: 2px 0 0 2px;
-
-				&.active {
-					color: var(--blurple-530);
-					border-left-width: 4px;
-					border-left-color: var(--blurple-530);
-				}
-
-				&:hover,
-				&.active:hover {
-					color: var(--blurple-500);
-					border-left-color: var(--blurple-500);
-				}
+			&:hover,
+			&.active:hover {
+				color: var(--active-sidebar-link-hover);
+				border-left-color: var(--active-sidebar-link-hover);
 			}
 		}
 	}
