@@ -30,10 +30,10 @@ html.guide-theme-blurple {
 	}
 
 	& > .sidebar-links {
-		padding: 1.25rem 0.5rem;
+		padding: 0 0.5rem 1.25rem;
 
 		@media screen and (max-width: 719px) {
-			padding: 0.5rem;
+			padding: 0 0.5rem 0.5rem;
 		}
 
 		.sidebar-heading {
