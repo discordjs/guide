@@ -11,24 +11,12 @@
 	</ul>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { defineComponent, ref } from 'vue';
 import ThemeOptions from './ThemeOptions.vue';
 
-export default defineComponent({
-	components: {
-		ThemeOptions,
-	},
-	setup() {
-		const showMenu = ref(false);
-		const hideMenu = () => showMenu.value = false;
-
-		return {
-			showMenu,
-			hideMenu,
-		};
-	},
-});
+const showMenu = ref(false);
+const hideMenu = () => showMenu.value = false;
 </script>
 
 <style lang="scss">
