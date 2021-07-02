@@ -3,12 +3,18 @@
 		<ul class="color-theme-options">
 			<span>Theme:</span>
 			<li>
-				<a href="#" class="default-theme" @click.prevent="setTheme({ persist: true })">
-					Green
-				</a>
+				<button
+					class="default-theme"
+					title="Green theme"
+					@click.prevent="setTheme({ persist: true })"
+				></button>
 			</li>
 			<li>
-				<a href="#" class="blurple-theme" @click.prevent="setTheme({ colorTheme: 'blurple', persist: true })">Blurple</a>
+				<button
+					class="blurple-theme"
+					title="Blurple theme"
+					@click.prevent="setTheme({ colorTheme: 'blurple', persist: true })"
+				></button>
 			</li>
 		</ul>
 	</div>
@@ -47,15 +53,20 @@ onBeforeMount(() => {
 	.color-theme-options {
 		display: flex;
 		justify-content: space-around;
+		align-items: center;
 
 		li {
 			text-align: center;
 			margin-left: 0.5rem;
 
-			a {
+			button {
 				color: #fff;
-				padding: 0.25rem 0.5rem;
+				display: block;
+				width: 1.25rem;
+				height: 1.25rem;
+				border: 0;
 				border-radius: 2px;
+				cursor: pointer;
 
 				&.default-theme {
 					background-color: var(--green-500);
