@@ -20,7 +20,7 @@ const hideMenu = () => showMenu.value = false;
 </script>
 
 <style lang="scss">
-.user-settings.sidebar-links {
+.sidebar .user-settings.sidebar-links {
 	padding: 1.25rem 0.5rem 0;
 
 	.settings-button {
