@@ -1,6 +1,6 @@
 <template>
 	<Layout>
-		<template #navbar-after>
+		<template #sidebar-top>
 			<UserSettings />
 		</template>
 	</Layout>

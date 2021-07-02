@@ -1,7 +1,7 @@
 <template>
 	<div class="theme-options">
 		<ul class="color-theme-options">
-			<span>Theme:</span>
+			<span>Theme</span>
 			<li>
 				<button
 					class="default-theme"
@@ -52,11 +52,12 @@ onBeforeMount(() => {
 .theme-options {
 	.color-theme-options {
 		display: flex;
-		justify-content: space-around;
-		align-items: center;
+
+		> span {
+			margin-right: auto;
+		}
 
 		li {
-			text-align: center;
 			margin-left: 0.5rem;
 
 			button {
