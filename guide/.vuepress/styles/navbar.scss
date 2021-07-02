@@ -28,8 +28,8 @@
 	transition: none;
 
 	@media screen and (max-width: 719px) {
-		padding-left: 1rem;
-		padding-right: 1rem;
+		padding-left: 0.5rem;
+		padding-right: 0.5rem;
 	}
 
 	> span {
@@ -44,7 +44,7 @@
 		position: unset;
 		top: unset;
 		left: unset;
-		margin-left: 1rem;
+		margin-left: 0.5rem;
 
 		@media screen and (max-width: 719px) {
 			order: 3;
@@ -57,7 +57,7 @@
 		opacity: 1;
 
 		@media screen and (max-width: 719px) {
-			margin-left: 1rem;
+			margin-left: 0.5rem;
 		}
 	}
 
