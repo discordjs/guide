@@ -60,7 +60,7 @@ Although it's not a lot, it's good to know what each bit of your code does. But,
 First, make sure to close the process in your console. You can do so by pressing `Ctrl + C` inside the console. Go back to your code editor and add the following piece of code above the `client.login()` line.
 
 ```js
-client.on('interaction', interaction => {
+client.on('interactionCreate', interaction => {
 	console.log(interaction);
 });
 ```

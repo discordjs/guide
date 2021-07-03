@@ -16,7 +16,7 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (!client.commands.has(interaction.commandName)) return;

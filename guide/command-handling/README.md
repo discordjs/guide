@@ -14,7 +14,7 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interacton.commandName === 'ping') {
@@ -100,7 +100,7 @@ for (const file of commandFiles) {
 With your `client.commands` Collection setup, you can use it to retrieve and execute your commands! Inside your `interaction` event, delete your `if`/`else if` chain of commands and replace it with this:
 
 ```js {6-12}
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (!client.commands.has(interaction.commandName)) return;

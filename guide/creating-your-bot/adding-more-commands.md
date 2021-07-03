@@ -9,7 +9,7 @@ A bot with nothing but a single command would be boring, and you probably have a
 Here's what your interaction event should currently look like:
 
 ```js
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interacton.commandName === 'ping') {
@@ -37,7 +37,7 @@ If you aren't familiar with some of this syntax, it may be ES6 syntax. If it doe
 You already have an if statement that checks messages for a ping/pong command. Adding other command checks is just as easy; chain an `else if` to your existing condition.
 
 ```js {2-8}
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interacton.commandName === 'ping') {
@@ -62,7 +62,7 @@ Servers are referred to as "guilds" in the Discord API and discord.js library. W
 :::
 
 ```js {8-10}
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interacton.commandName === 'ping') {
@@ -89,7 +89,7 @@ The code above would result in this:
 If you want to expand upon that command and add some more info, here's an example of what you can do:
 
 ```js {8-10}
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interacton.commandName === 'ping') {
@@ -127,7 +127,7 @@ Set up another if statement and use the command name `user-info`.
 <!-- eslint-skip -->
 
 ```js {10-12}
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interacton.commandName === 'ping') {
