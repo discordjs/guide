@@ -21,7 +21,7 @@ To create a select menu, use the `MessageActionRow()` and `MessageSelector()` bu
 ```js {1,7-24,26}
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -70,7 +70,7 @@ You can also send message components within an ephemeral response or alongside m
 ```js {1,26-30,32}
 const { MessageActionRow, MessageSelectMenu, MessageEmbed } = require('discord.js');
 
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -126,7 +126,7 @@ Additionally, if you don't want to construct an `ActionRow` every time, you can 
 ```js {7-21,23}
 const { MessageActionRow, MessageSelectMenu, MessageEmbed } = require('discord.js');
 
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -160,7 +160,7 @@ Now you know all there is to building and sending a `SelectMenu`! Let's move on 
 To receive a `SelectMenuInteractionInteraction`, simply attach an event listener to your client and also use the `Interaction#isSelectMenu()` typeguard to make sure you only receive select menus:
 
 ```js {2}
-client.on('interaction', interaction => {
+client.on('interactionCreate', interaction => {
 	if (!interaction.isSelectMenu()) return;
 	console.log(interaction);
 });
@@ -179,7 +179,7 @@ You can create the collectors on either a `message` or a `channel`.
 Here's how you can create a basic event-based `MessageComponentInteractionCollector`:
 
 ```js {5,7,9-10}
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -206,7 +206,7 @@ Unlike other promise-based collectors, this one only collects a single item!
 :::
 
 ```js {7-9}
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -235,7 +235,7 @@ The `MessageComponentInteraction` class provides the same methods as the `Comman
 The `MessageComponentInteraction` class provides a method to update the message the button is attached to, by using `MessageComponentInteraction#update()`. Passing an empty array to the `components` option will remove any menus after an option has been selected.
 
 ```js {1,4-6}
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isSelectMenu()) return;
 
 	if (interaction.customID === 'select') {
@@ -251,7 +251,7 @@ Additionally to deferring the response of the interaction, you can defer the men
 ```js {1,6-10}
 const wait = require('util').promisify(setTimeout);
 
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isSelectMenu()) return;
 
 	if (interaction.customID === 'select') {
@@ -269,7 +269,7 @@ A select menu is not bound to only one selection; you can specify a minimum and 
 ```js {1,7-31,33}
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {

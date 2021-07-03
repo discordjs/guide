@@ -21,7 +21,7 @@ To create a button, you use the `MessageActionRow()` and `MessageButton()` build
 ```js {1,7-13,15}
 const { MessageActionRow, MessageButton } = require('discord.js');
 
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -59,7 +59,7 @@ You can also send message components within an ephemeral response or alongside m
 ```js {1,15-19,21}
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -104,7 +104,7 @@ Additionally, if you don't want to construct an `ActionRow` every time, you can 
 ```js {7-10,12}
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -125,7 +125,7 @@ If you want to prevent a button from being used, but not remove it from the mess
 ```js {13}
 const { MessageActionRow, MessageButton } = require('discord.js');
 
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -150,7 +150,7 @@ If you want to use a guild emoji within a `MessageButton` you can do so using th
 ```js {13}
 const { MessageActionRow, MessageButton } = require('discord.js');
 
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -175,7 +175,7 @@ Now you know all there is to building and sending a `MessageButton`! Let's move 
 To receive a `ButtonInteraction`, attach an event listener to your client and use the `Interaction#isButton()` type guard to make sure you only receive buttons.
 
 ```js {2}
-client.on('interaction', interaction => {
+client.on('interactionCreate', interaction => {
 	if (!interaction.isButton()) return;
 	console.log(interaction);
 });
@@ -194,7 +194,7 @@ You can create the collectors on either a `message` or a `channel`.
 Here's how you can create a basic event-based `MessageComponentInteractionCollector`:
 
 ```js {5,7,9-10}
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -221,7 +221,7 @@ Unlike other promise-based collectors, this one only collects a single item!
 :::
 
 ```js {7-9}
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -249,7 +249,7 @@ The `MessageComponentInteraction` class provides the same methods as the `Comman
 The `MessageComponentInteraction` class provides a method to update the message the button is attached to, by using `MessageComponentInteraction#update()`. Passing an empty array to the `components` option will remove any buttons after one has been clicked.
 
 ```js {11-13}
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -273,7 +273,7 @@ client.on('interaction', async interaction => {
 Additionally to deferring the response of the interaction, you can defer the button, which will trigger a loading state and then revert back to its original state:
 
 ```js {9,12-16}
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
