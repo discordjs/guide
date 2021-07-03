@@ -88,6 +88,7 @@ export default {
 				'/popular-topics/collectors.md',
 				'/popular-topics/partials.md',
 				'/popular-topics/intents.md',
+				'/popular-topics/threads.md',
 				'/popular-topics/canvas.md',
 				'/popular-topics/webhooks.md',
 				'/popular-topics/audit-logs.md',
