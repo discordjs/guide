@@ -17,7 +17,7 @@ Global commands are cached for one hour. New global commands will fan out slowly
 To register a global command you'll be passing an `ApplicationCommandData` object to the `ApplicationCommandManager#create()` method as follows:
 
 ```js
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (!client.application?.owner) await client.application?.fetch();
 
 	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
@@ -43,7 +43,7 @@ That's it! You've successfully created your first global application command! Le
 Guild-specific application commands are only available in the guild they have been created in. You'll be using `GuildApplicationCommandManager#create()` to create them:
 
 ```js {10}
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (!client.application?.owner) await client.application?.fetch();
 
 	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
@@ -70,7 +70,7 @@ This will overwrite all existing commands on the application or guild with the n
 :::
 
 ```js {5-14,15-17}
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (!client.application?.owner) await client.application?.fetch();
 
 	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
@@ -99,7 +99,7 @@ Perfect! You have now learned how to bulk-update application commands.
 Application commands can have `options`, think of these options like arguments to a function. You can specify them as seen below:
 
 ```js {8-13}
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (!client.application?.owner) await client.application?.fetch();
 
 	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
@@ -154,7 +154,7 @@ If you specify `choices` for an option, they are the **only** valid values for a
 To specify them you simply provide an array of `ApplicationCommandOptionChoice`'s to the option when creating a command:
 
 ```js {13-26}
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (!client.application?.owner) await client.application?.fetch();
 
 	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {

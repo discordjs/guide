@@ -12,7 +12,7 @@ You need to have at least one slash command set-up for your application to follo
 Every slash command is an `interaction`, so to respond to a command you need to setup an event listener that will execute code when your application receives an interaction:
 
 ```js
-client.on('interaction', interaction => {
+client.on('interactionCreate', interaction => {
 	console.log(interaction);
 });
 ```
@@ -23,7 +23,7 @@ You can easily adapt the command handler from earlier sections of the guide to w
 However, not every interaction is a slash command (e.g. `MessageComponent`'s). Let's make sure to only receive slash commands by making use of the `CommandInteraction#isCommand()` method:
 
 ```js {2}
-client.on('interaction', interaction => {
+client.on('interactionCreate', interaction => {
 	if (!interaction.isCommand()) return;
 	console.log(interaction);
 });
@@ -40,7 +40,7 @@ Initially an interaction token is only valid for three seconds, so that's the ti
 :::
 
 ```js {1,3}
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 	if (interaction.commandName === 'ping') await interaction.reply('Pong!');
 });
@@ -66,7 +66,7 @@ You've successfully sent a response to a slash command! This is only the beginni
 You may not always want everyone who has access to the channel to see a slash command's response. Thankfully, Discord implemented a way to hide messages from everyone but the executor of the slash command. These type of messages are called `ephemeral` messages and can be set by using `ephemeral: true` in the `InteractionReplyOptions`, as follows:
 
 ```js {3}
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 	if (interaction.commandName === 'ping') await interaction.reply({ content: 'Pong!', ephemeral: true });
 });
@@ -99,7 +99,7 @@ After the initial response, an interaction token is valid for 15 minutes, so thi
 ```js {1,8-9}
 const wait = require('util').promisify(setTimeout);
 
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -123,7 +123,7 @@ In this case you can make use of the `CommandInteraction#defer()` method, which 
 ```js {7-9}
 const wait = require('util').promisify(setTimeout);
 
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -141,7 +141,7 @@ But what if you want the deferred response to be ephemeral? Fear not, you can pa
 ```js {7}
 const wait = require('util').promisify(setTimeout);
 
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -164,7 +164,7 @@ After the initial response an interaction token is valid for 15 minutes, so this
 :::
 
 ```js {6}
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -192,7 +192,7 @@ If you run this code you should end up having something that looks like this:
 Now you may want to send an ephemeral follow-up, to do so, just repeat the procedure as follows and also pass in `ephemeral: true` to the `InteractionReplyOptions`:
 
 ```js {6}
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -274,7 +274,7 @@ const data = {
 You would `get()` these options from the `CommandInteraction#options` collection like this:
 
 ```js {5-11,13}
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -305,7 +305,7 @@ You can _not_ fetch nor delete an ephemeral message.
 Additionally to replying to a slash command you may also want to delete the initial reply. You can do this by using `CommandInteraction#deleteReply()` like this:
 
 ```js {6}
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -318,7 +318,7 @@ client.on('interaction', async interaction => {
 Lastly, you may require the `Message` object of a reply for various reasons, such as adding reactions. To retrieve the message instance of an interaction response you can use the `CommandInteraction#fetchReply()` method to fetch the initial response:
 
 ```js {6,7}
-client.on('interaction', async interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {

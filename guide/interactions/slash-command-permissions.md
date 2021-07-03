@@ -11,7 +11,7 @@ If you set `defaultPermission: false` when creating a command you can immediatel
 To begin, we'll fetch an `ApplicationCommand` and then set the permissions using the `ApplicationCommandPermissionsManager#add()` method:
 
 ```js
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (!client.application?.owner) await client.application?.fetch();
 
 	if (message.content.toLowerCase() === '!perms' && message.author.id === client.application?.owner.id) {
@@ -34,7 +34,7 @@ Now you have successfully denied the user who's `id` you used access to this app
 If you have a command that is disabled by default and you want to grant someone access to use it, do as follows:
 
 ```js {11}
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (!client.application?.owner) await client.application?.fetch();
 
 	if (message.content.toLowerCase() === '!perms' && message.author.id === client.application?.owner.id) {
@@ -60,7 +60,7 @@ And that's how you use slash command permissions to deny or allow access to a si
 Now you may want to allow (or deny) multiple users the usage of a command. In this scenario you can apply a permission that is scoped to a role instead of a user:
 
 ```js {10,11}
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (!client.application?.owner) await client.application?.fetch();
 
 	if (message.content.toLowerCase() === '!perms' && message.author.id === client.application?.owner.id) {
@@ -82,7 +82,7 @@ client.on('message', async message => {
 With this, you have successfully denied an entire role access to this command. If you want to allow a certain role to access this command, you repeat this procedure while setting `permission: true` in the `ApplicationCommandPermissionData` as shown below:
 
 ```js {11}
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (!client.application?.owner) await client.application?.fetch();
 
 	if (message.content.toLowerCase() === '!perms' && message.author.id === client.application?.owner.id) {
@@ -106,7 +106,7 @@ client.on('message', async message => {
 If you have a lot of commands, you likely want to update their permissions in one go instead of one-by-one, for this approach you can use `GuildApplicationCommandManager#setPermissions` as outlined below:
 
 ```js {5-22,24}
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (!client.application?.owner) await client.application?.fetch();
 
 	if (message.content.toLowerCase() === '!perms' && message.author.id === client.application?.owner.id) {
