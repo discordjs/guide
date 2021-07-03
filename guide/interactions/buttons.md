@@ -189,9 +189,9 @@ These work quite similarly to message and reaction collectors, except that you w
 You can create the collectors on either a `message` or a `channel`.
 :::
 
-### MessageComponentInteractionCollector
+### MessageComponentCollector
 
-Here's how you can create a basic event-based `MessageComponentInteractionCollector`:
+Here's how you can create a basic event-based `MessageComponentCollector`:
 
 ```js {5,7,9-10}
 client.on('interactionCreate', async interaction => {
@@ -200,7 +200,7 @@ client.on('interactionCreate', async interaction => {
 	if (interaction.commandName === 'ping') {
 		const filter = i => i.customID === 'primary' && i.user.id === '122157285790187530';
 
-		const collector = interaction.channel.createMessageComponentInteractionCollector({ filter, time: 15000 });
+		const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
 
 		collector.on('collect', i => console.log(`Collected ${i.customID}`));
 		collector.on('end', collected => console.log(`Collected ${collected.size} items`));
@@ -212,7 +212,7 @@ client.on('interactionCreate', async interaction => {
 For ephemeral responses you cannot fetch a message object, so create the collector on a channel instead.
 :::
 
-### awaitMessageComponentInteraction
+### awaitMessageComponent
 
 As with other types of collectors, you can also use a promise-based collector.
 
@@ -227,7 +227,7 @@ client.on('interactionCreate', async interaction => {
 	if (interaction.commandName === 'ping') {
 		const filter = i => i.customID === 'primary' && i.user.id === '122157285790187530';
 
-		interaction.channel.awaitMessageComponentInteraction({ filter, time: 15000 })
+		interaction.channel.awaitMessageComponent({ filter, time: 15000 })
 			.then(i => console.log(`${i.customID} was clicked!`))
 			.catch(console.error);
 	}
@@ -256,7 +256,7 @@ client.on('interactionCreate', async interaction => {
 		const message = await interaction.fetchReply();
 		const filter = i => i.customID === 'primary' && i.user.id === '122157285790187530';
 
-		const collector = message.createMessageComponentInteractionCollector({ filter, time: 15000 });
+		const collector = message.createMessageComponentCollector({ filter, time: 15000 });
 
 		collector.on('collect', async i => {
 			if (i.customID === 'primary') {
@@ -280,7 +280,7 @@ client.on('interactionCreate', async interaction => {
 		const message = await interaction.fetchReply();
 		const filter = i => i.customID === 'primary' && i.user.id === '122157285790187530';
 
-		const collector = message.createMessageComponentInteractionCollector({ filter, time: 15000 });
+		const collector = message.createMessageComponentCollector({ filter, time: 15000 });
 		const wait = require('util').promisify(setTimeout);
 
 		collector.on('collect', async i => {
