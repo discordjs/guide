@@ -94,7 +94,7 @@ Locking a thread:
 ```js {3}
 client.on('messageCreate', async message => {
 	const thread = message.channel.threads.cache.find(x => x.name === 'food-talk');
-	await thread.setLocked(false);
+	await thread.setLocked(true);
 });
 ```
 
