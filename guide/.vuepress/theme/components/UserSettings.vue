@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineComponent, ref } from 'vue';
+import { ref } from 'vue';
 import ThemeOptions from './ThemeOptions.vue';
 import ChevronRight from './icons/ChevronRight.vue';
 
