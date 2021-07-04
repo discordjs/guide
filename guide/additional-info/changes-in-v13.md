@@ -24,7 +24,9 @@ In addition to the `interaction` event covered in the above guide, this release 
 
 Discord.js now has support for Message Components!
 
-This introduces the `MessageActionRow`, `MessageButton` and `MessageSelectMenu` classes, as well as associated interactions and collectors. Refer to the [Message Components](/interactions/buttons) section of this guide to start using Message Components.
+This introduces the `MessageActionRow`, `MessageButton` and `MessageSelectMenu` classes, as well as associated interactions and collectors. 
+
+Refer to the [Message Components](/interactions/buttons) section of this guide to start using Message Components.
 
 ## Threads
 
@@ -55,7 +57,7 @@ const client = new Client({
 });
 ```
 
-Additional flexibility can be gained by providing a function which returns a custom cache implementation - keep in mind this should still maitain the Collector/Map-like interface for internal compatibility.
+Additional flexibility can be gained by providing a function which returns a custom cache implementation - keep in mind this should still maitain the Collector / Map-like interface for internal compatibility.
 
 ```js
 const client = new Client({
@@ -76,7 +78,9 @@ Don't worry - the old names still work, but you'll receive a Deprecation Warning
 
 ### Sending Messages, MessageEmbeds, and everything else
 
-With the introduction of Interactions and it becoming far common for users to want to send an embed with MessageOptions, methods that send messages now enforce a single param. That can be either a string, an `APIMessage`, or that method's variant of `MessageOptions`.
+With the introduction of Interactions and it becoming far common for users to want to send an embed with MessageOptions, methods that send messages now enforce a single param. 
+
+That can be either a string, an `APIMessage`, or that method's variant of `MessageOptions`.
 
 Additionally, all messages sent by bots now support up to 10 embeds. As a result the `embed` option is completely removed, replaced with an `embeds` array which must be in the options object.
 
@@ -91,11 +95,22 @@ Additionally, all messages sent by bots now support up to 10 embeds. As a result
 + interaction.reply({ content: 'Hello!', ephemeral: true });
 ```
 
+`MessageEmbed#attachFiles` has been removed - files should now be attached directly to the Message.
+
+```diff
+- const embed = new Discord.MessageEmbed().setTitle('Attachments').attachFiles(['./image1.png', './image2.jpg']);
+- channel.send(embed)
++ const embed = new Discord.MessageEmbed().setTitle('Attachments');
++ channel.send({ embeds: [embed], files: ['./image1.png', './image2.jpg'] });
+```
+
 The `code` and `split` options have also been removed. This functionality will now have to be handled manually, such as via the `Util.splitMessage` helper.
 
 ### Strings
 
-Many methods in discord.js that were documented as accepting strings would accept other types, and resolve this into a string on your behalf. The results of this behaviour were often undesirable, producing output such as `[object Object]`. Discord.js now enforces and validates string input on all methods that expect it. 
+Many methods in discord.js that were documented as accepting strings would accept other types, and resolve this into a string on your behalf. 
+
+The results of this behaviour were often undesirable, producing output such as `[object Object]`. Discord.js now enforces and validates string input on all methods that expect it. 
 
 The most common areas you will encounter this change is `MessageOptions#content` and the properties of a `MessageEmbed`.
 
@@ -129,7 +144,9 @@ For TypeScript users, discord.js now enforces the `Snowflake` type, a stringifie
 
 `clientOptions.disableMentions` has been removed and replaced with `clientOptions.allowedMentions`!
 
-The Discord API now allows bots much more granular control over mention parsing, down to the specific ID. Refer to the [Discord API documentation](https://discord.com/developers/docs/resources/channel#allowed-mentions-object) for more information.
+The Discord API now allows bots much more granular control over mention parsing, down to the specific ID.
+
+Refer to the [Discord API documentation](https://discord.com/developers/docs/resources/channel#allowed-mentions-object) for more information.
 
 ```diff
 - const client = new Discord.Client({ disableMentions: 'everyone' });
@@ -193,7 +210,7 @@ The Client Emoji manager is now a `BaseGuildEmojiManager`, providing cache resol
 
 #### Client#fetchApplication
 
-This method has been removed and replaced with the `Client#application` property
+The `Client#fetchApplication` has been removed and replaced with the `Client#application` property.
 
 ```diff
 - client.fetchApplication().then(application => console.log(application.name))
@@ -204,13 +221,20 @@ This method has been removed and replaced with the `Client#application` property
 
 `Client#generateInvite` no longer supports `PermissionsResolvable` as its argument, requiring `InviteGenerationOptions`.
 
-To provide permissions, use `InviteGenerationOptions#permissions`.
-```diff
-- client.generateInvite([Permissions.FLAGS.SEND_MESSAGES]);
-+ client.generateInvite({ permissions: [Permissions.FLAGS.SEND_MESSAGES] })
+`InviteGenerationOptions` requires that at least one of either `bot` or `applications.commands` is provided in `scopes` to generate a valid invite URL.
+
+To generate an invite link for Slash Commands only.
+
+```js
+client.generateInvite({ scopes: ['applications.commands'] });
 ```
 
-`InviteGenerationOptions` also supports passing additional scopes, for OAuth or application.commands scopes.
+To generate an invite link for a bot and define required permissions.
+
+```diff
+- client.generateInvite([Permissions.FLAGS.SEND_MESSAGES]);
++ client.generateInvite({ scopes: ['bot'], permissions: [Permissions.FLAGS.SEND_MESSAGES] })
+```
 
 ### Client#login
 
@@ -224,7 +248,9 @@ This will now instead cause an error to be thrown.
 
 The `ClientOptions#fetchAllMembers` option has been removed.
 
-With the introduction of gateway intents, the `fetchAllMembers` Client option would often fail and causes significant delays in ready states or even cause timeout errors. As its purpose is contradictory to Discord's intentions to reduce scraping of user and presence data, it has been removed.
+With the introduction of gateway intents, the `fetchAllMembers` Client option would often fail and causes significant delays in ready states or even cause timeout errors.
+
+As its purpose is contradictory to Discord's intentions to reduce scraping of user and presence data, it has been removed.
 
 #### ClientOptions#messageEditHistoryMaxSize
 
@@ -236,13 +262,15 @@ To reduce caching, discord.js will no longer store an edit history. You will nee
 
 #### ClientUser#setActivity
 
-This method no longer returns a Promise.
+This `ClientUser#setActivity` method no longer returns a Promise.
 
 #### ClientUser#setAFK
 
-This method no longer returns a Promise.
+This `ClientUser#setAFK` method no longer returns a Promise.
 
 #### ClientUser#setPresence
+
+This `ClientUser#setPresence` method no longer returns a Promise.
 
 `PresenceData#activity` is replaced with `PresenceData#activities` which now requires an `Array<ActivitiesOptions>`.
 
@@ -251,11 +279,9 @@ This method no longer returns a Promise.
 + client.user.setPresence({ activities: [{ name: 'with discord.js' }] });
 ```
 
-This method no longer returns a Promise.
-
 #### ClientUser#setStatus
 
-This method no longer returns a Promise.
+This `ClientUser#setStatus` method no longer returns a Promise.
 
 ### ColorResolvable
 
@@ -265,7 +291,7 @@ Colors have been updated to align with the new Discord branding.
 
 #### Guild#fetchVanityCode
 
-This method has been removed.
+This `Guild#fetchVanityCode` method has been removed.
 
 ```diff
 - Guild.fetchVanityCode().then(code => console.log(`Vanity URL: https://discord.gg/${code}`));
@@ -274,7 +300,7 @@ This method has been removed.
 
 #### Guild#member
 
-The helper/shortcut method `Guild#member()` has been removed.
+The `Guild#member()` helper/shortcut method has been removed.
 
 ```diff
 - guild.member(user);
@@ -283,7 +309,7 @@ The helper/shortcut method `Guild#member()` has been removed.
 
 ### Guild#mfaLevel
 
-The Guild#mfaLevel is now an enum.
+The `Guild#mfaLevel` property is now an enum.
 
 ### Guild#nsfw
 
@@ -325,7 +351,7 @@ The `GuildChannel#updateOverwrite` method has been removed, with functionality r
 
 ### GuildMember#hasPermission
 
-This shortcut method has been removed.
+This `GuildMember#hasPermission` shortcut/helper method has been removed.
 
 ```diff
 - member.hasPermission(Permissions.FLAGS.SEND_MESSAGES);
@@ -336,7 +362,7 @@ This shortcut method has been removed.
 
 #### GuildMemberManager#ban
 
-`GuildMemberManager#ban` will throw a TypeError when a string is provided instead of an options object.
+The `GuildMemberManager#ban` method will throw a TypeError when a string is provided instead of an options object.
 
 ```diff
 - guild.members.ban('123456789012345678', 'reason')
@@ -347,7 +373,7 @@ This shortcut method has been removed.
 
 #### Message#delete
 
-`Message.delete()` no longer accepts any options, requiring a timed-delete to be performed manually.
+The `Message.delete()` method no longer accepts any options, requiring a timed-delete to be performed manually.
 
 ```diff
 - message.delete({ timeout: 10000 });
@@ -358,7 +384,7 @@ This shortcut method has been removed.
 
 #### MessageManager#delete
 
-`MessageManager.delete()` no longer accepts any additional options, requiring a timed-delete to be performed manually.
+The `MessageManager.delete()` method no longer accepts any additional options, requiring a timed-delete to be performed manually.
 
 ```diff
 - channel.messages.delete('123456789012345678', { timeout: 10000 });
@@ -389,6 +415,7 @@ The `before` option has been removed as it was not supported by the API.
 #### RoleManager#create
 
 The options passed to `RoleManager#create` no longer need to be nested in a `data` object.
+
 Additionally, `reason` is now part of the options, not a second parameter.
 
 ```diff
@@ -398,13 +425,13 @@ Additionally, `reason` is now part of the options, not a second parameter.
 
 #### RoleManager#fetch
 
-`RoleManager.fetch()` will now return a Collection instead of a RoleManager when called without params.
+The `RoleManager#fetch()` method will now return a Collection instead of a RoleManager when called without params.
 
 ### Shard
 
 #### Shard#respawn
 
-The options for this method are now an object instead of separate params. In addition the `spawnTimeout` param has been renamed to `timeout`.
+The options for the `Shard#respawn` method are now an object instead of separate params. In addition the `spawnTimeout` param has been renamed to `timeout`.
 
 This means the user no longer needs to pass defaults to fill each positional param.
 
@@ -432,7 +459,7 @@ The `ShardClientUtil#broadcastEval` method no longer accepts a string, instead e
 
 #### ShardClientUtil#respawnAll
 
-The options for this method are now an object instead of separate params. In addition the `spawnTimeout` param has been renamed to `timeout`.
+The options for the `ShardClientUtil#respawnAll` method are now an object instead of separate params. In addition the `spawnTimeout` param has been renamed to `timeout`.
 
 This means the user no longer needs to pass defaults to fill each positional param.
 
@@ -449,7 +476,7 @@ The `ShardingManager#broadcastEval` method no longer accepts a string, instead e
 
 #### ShardingManager#spawn
 
-The options for this method are now an object instead of separate params. In addition the `spawnTimeout` param has been renamed to `timeout`.
+The options for the `ShardingManager#spawn` method are now an object instead of separate params. In addition the `spawnTimeout` param has been renamed to `timeout`.
 
 This means the user no longer needs to pass defaults to fill each positional param.
 
@@ -460,7 +487,7 @@ This means the user no longer needs to pass defaults to fill each positional par
 
 #### ShardingManager#respawnAll
 
-The options for this method are now an object instead of separate params. In addition the `spawnTimeout` param has been renamed to `timeout`.
+The options for the `ShardingManager#respawnAll` method are now an object instead of separate params. In addition the `spawnTimeout` param has been renamed to `timeout`.
 
 This means the user no longer needs to pass defaults to fill each positional param.
 
@@ -473,7 +500,7 @@ This means the user no longer needs to pass defaults to fill each positional par
 
 #### User#locale
 
-`User.locale` has been removed, as this property is not exposed to bots.
+The `User.locale` property has been removed, as this property is not exposed to bots.
 
 ### UserFlags
 
@@ -507,27 +534,23 @@ The `Util#resolveString` method has been removed. Discord.js now enforces that u
 
 ### ActivityTypes
 
-New activity type `COMPETING` added.
-
-### APIRequest
-
-Global headers can now be set in the HTTP options.
+A new activity type `COMPETING` has been added.
 
 ### ApplicationCommand
 
-The new `ApplicationCommand` class represents a Slash Command
+Provides API support for Slash Commands.
 
 ### ApplicationCommandManager
 
-The new `ApplicationCommandManager` class provides supporting for creating, editing and deleting Slash Commands.
+Provides API supporting for creating, editing and deleting Slash Commands.
 
 ### ApplicationCommandPermissionsManager
 
-The new `ApplicationCommandPermissionsManager` class provides support for creating, editing and deleting permission overwrites on Slash Commands.
+Provides API support for creating, editing and deleting permission overwrites on Slash Commands.
 
 ### ApplicationFlags
 
-The new `ApplicationFlags` class provides an enumerated bitfield for `ClientApplication` flags.
+Provides an enumerated bitfield for `ClientApplication` flags.
 
 ### BaseGuild
 
@@ -535,33 +558,33 @@ The new `BaseGuild` class is extended by both `Guild` and `OAuth2Guild`.
 
 ### ButtonInteraction
 
-The new `ButtonInteraction` class is used to represent a `MessageComponentInteraction` coming from a button component.
+Provides gateway support for a `MessageComponentInteraction` coming from a button component.
 
 ### Channel
 
 #### Channel#isText()
 
-The new `Channel#isText()` function provides an easy way for TypeScript developers to determine if a channel is Text-Based ("dm", "text", "news").
+Checks and typeguards if a channel is Text-Based ("dm", "text", "news").
 
 #### Channel#isThread()
 
-The new `Channel#isThread()` function provides an easy way for TypeScript developers to determine if a channel is a Thread type.
+Checks and typeguards if a channel is a Thread type.
 
 ### CollectorOptions
 
 #### CollectorOptions#filter
 
-Constructing a Collector without providing a filter function will now throw a meaningful `TypeError`.
+Constructing a `Collector` without providing a filter function will now throw a meaningful `TypeError`.
 
 ### CommandInteraction
 
-The new `CommandInteraction` class is used to represent Slash Command interactions. For more information refer to the [Slash Commands](/interactions/registering-slash-commands) section of the guide.
+Provides gateway support for Slash Command interactions. For more information refer to the [Slash Commands](/interactions/registering-slash-commands) section of the guide.
 
 ### Guild
 
 #### Guild#bans
 
-New property for the Guild's `GuildBanManager`
+Provides access to the Guild's `GuildBanManager`
 
 #### Guild#create
 
@@ -569,25 +592,25 @@ New property for the Guild's `GuildBanManager`
 
 #### Guild#edit
 
-`Guild#description` and `Guild#features` can now be edited.
+The `Guild#description` and `Guild#features` properties can now be edited.
 
 #### Guild#editWelcomeScreen
 
-Provides support for bots to edit the Welcome Screen properties of the Guild.
+Provides API support for bots to edit the Guild's `WelcomeScreen`.
 
 #### Guild#emojis
 
-The `GuildEmojiManager` now extends `BaseGuildEmojiManager`.
+The `GuildEmojiManager` class now extends `BaseGuildEmojiManager`.
 
 In addition to the existing methods, it now supports `GuildEmojiManager#fetch`.
 
 #### Guild#fetchWelcomeScreen
 
-Fetches the `WelcomeScreen` for the guild.
+Provides API support for fetching the Guild's `WelcomeScreen`.
 
 #### Guild#fetchWidget
 
-The new method `Guild#fetchWidget` can be used to fetch a Widget class for the guild, containing information about the guild and it's members.
+Provides API support for the Guild's Widget, containing information about the guild and it's members.
 
 #### Guild#nsfw
 
@@ -604,25 +627,25 @@ The `Guild#owner` property has been removed as it was unreliable due to caching,
 
 #### Guild#premiumTier
 
-The premium tier of a Guild is now represented by the PremiumTier enum.
+The `Guild#premiumTier` property is now represented by the `PremiumTier` enum.
 
 #### Guild#setChannelPositions
 
-The `Guild#setChannelPositions` method can now be used to set the parent of multiple channels, and lock their permissions via the `ChannelPosition#parent` and `ChannelPosition#lockPermissions` options.
+Now supports setting the parent of multiple channels, and locking their permissions via the `ChannelPosition#parent` and `ChannelPosition#lockPermissions` options.
 
 ### GuildBanManager
 
-The new `GuildBanManager` provides improved support for handling and caching bans.
+Provides improved API support for handling and caching bans.
 
 ### GuildChannel
 
 #### GuildChannel#clone
 
-The `GuildChannel#clone` method now supports setting the `position` property.
+Now supports setting the `position` property.
 
 #### GuildChannel#createInvite
 
-The `GuildChannel#createInvite` method now supports additional options:
+Now supports additional options:
 
 - `targetUser` to target the invite to join a particular streaming user
 - `targetApplication` to target the invite to a particular Discord activity
@@ -638,29 +661,29 @@ Now supports fetching the channels of a Guild.
 
 #### GuildManager#create
 
-The `GuildManager#create` method now supports specifying the AFK and system channels when creating a new guild.
+Now supports specifying the AFK and system channels when creating a new guild.
 
 #### GuildManager#fetch
 
-The `GuildManager#fetch` method now supports fetching multiple guilds, returning a `Promise<Collection<Snowflake, OAuth2Guild>>` if used in this way.
+Now supports fetching multiple guilds, returning a `Promise<Collection<Snowflake, OAuth2Guild>>` if used in this way.
 
 ### GuildEmojiManager
 
 #### GuildEmojiManager#fetch
 
-API support for the `GET /guilds/{guild.id}/emojis` endpoint.
+Provides API support for the `GET /guilds/{guild.id}/emojis` endpoint.
 
 ### GuildMember
 
 #### GuildMember#pending
 
-The `GuildMember#pending` boolean property flags whether a member has passed the guild's membership gate.
+Flags whether a member has passed the guild's membership gate.
 
 The flag is `true` before accepting and fires `guildMemberUpdate` when the member accepts.
 
 ### GuildMemberManager
 
-Methods were added to `GuildMemberManager` to provide API support for uncached members.
+Several methods were added to `GuildMemberManager` to provide API support for uncached members.
 
 #### GuildMemberManager#edit
 
@@ -676,7 +699,7 @@ Equivalent to `GuildMember#kick(reason)`.
 
 #### GuildMemberManager#search
 
-Adds support for querying GuildMembers via the REST API endpoint.
+Provides API support for querying GuildMembers via the REST API endpoint.
 
 `GuildMemberManager#fetch` uses the websocket gateway to receive data.
 
@@ -696,21 +719,23 @@ Gets the premium subscriber (booster) role if present on the member.
 
 ### GuildTemplate
 
-API support for [Server Templates](https://discord.com/developers/docs/resources/guild-template).
+Provides API support for [Server Templates](https://discord.com/developers/docs/resources/guild-template).
 
 ### Integration
 
 #### Integration#roles
 
-Provides a Collection of Roles managed by the integration.
+A Collection of Roles which are managed by the integration.
 
 ### Interaction
 
-Base class for Slash Command and Message Component interactions. For more information refer to the [Interactions](/interactions/registering-slash-commands) section of the guide.
+Provides gateway support for Slash Command and Message Component interactions. 
+
+For more information refer to the [Slash Commands](/interactions/replying-to-slash-commands) and [Message Components](/interactions/buttons.html#responding-to-buttons) sections of the guide.
 
 ### InteractionCollector
 
-A generic Collector class for collecting any type of interaction.
+Provides a way for users to collect any type of Interaction.
 
 This class has a more flexible design that other Collectors, able to be bound to any Guild, Channel or Message as appropriate.
 
@@ -718,49 +743,49 @@ TypeScript developers can also leverage generics to define the subclass of Inter
 
 ### InteractionWebhook
 
-New Webhook type specifically for handling interactions.
+Provides webhook support specifically for interactions, due to their unique qualities.
 
 ### InviteGuild
 
-New class to support partial Guild data available from an Invite.
+Provides API support for the partial Guild data available from an `Invite`.
 
 ### InviteStageInstance
 
-A new type of invite that bots can generate for inviting users to Stage Instances.
+Provides API support for bots to inviting users to Stage Instances.
 
 ### Message
 
 #### Message#awaitMessageComponent
 
-Promisified collector to wait for and collect a single component interaction on a Message
+A shortcut method to create a promisified `InteractionCollector` which resolves to a single `MessageComponentInteraction`
 
 #### Message#createMessageComponentCollector
 
-New Collector class for collecting component interactions on a Message
+A shortcut method to create an `InteractionCollector` for components on a specific message.
 
 #### Message#crosspostable
 
-Permission helper to check if a Message can be crossposted.
+Checks permissions to see if a Message can be crossposted.
 
 #### Message#edit
 
-Editing/removing attachments when editing a Message is now supported.
+Editing and/or removing attachments when editing a Message is now supported.
 
 #### Message#fetchReference
 
-New method to fetch the Message referenced by Message#reference, if the client has access to do so.
+Provides support for fetching the Message referenced by `Message#reference`, if the client has access to do so.
 
 #### Message#react
 
-Added support for `<:name:id>` and `<a:name:id>` as valid inputs to `Message#react()`.
+Now supports both `<:name:id>` and `<a:name:id>` as valid inputs.
 
 #### Message#stickers
 
-New Collection property containing any stickers which were in the message.
+A Collection of Stickers which were in the message.
 
 ### MessageActionRow
 
-New builder class for constructing action row type Message Components.
+A builder class which makes constructing action row type Message Components easy.
 
 ### MessageAttachment
 
@@ -770,11 +795,11 @@ The media type of a MessageAttachment.
 
 ### MessageButton
 
-New builder class for constructing button type Message Components.
+A builder class which makes constructing button type Message Components easy.
 
 ### MessageComponentInteraction
 
-A new class for receiving interactions on Message Components.
+Provides gateway support for receiving interactions from Message Components. Subclass of `Interaction`.
 
 ### MessageManager
 
@@ -814,11 +839,17 @@ Approximately equivalent to `message.unpin(options)` but does not resolve to a M
 
 #### MessageMentions#repliedUser
 
-The MessageMentions class now supports checking if the author of a message being replied to has been mentioned.
+Checks if the author of a message being replied to has been mentioned.
+
+### MessagePayload
+
+This class has been renamed from APIMessage.
+
+Global headers can now be set in the HTTP options.
 
 ### MessageSelectMenu
 
-New builder class for constructing select menu type Message Components.
+A builder class which makes constructing select menu type Message Components easy.
 
 ### NewsChannel
 
@@ -842,7 +873,7 @@ Static bitfield representing the permissions required to moderate a Stage Channe
 
 ### PermissionOverwriteManager
 
-The new `PermissionOverwriteManager` class replaces the `createOverwrite`, `updateOverwrite` and `overwritePermissions` methods of `GuildChannel`, aligning the design with other Managers.
+Replaces the `createOverwrite`, `updateOverwrite` and `overwritePermissions` methods of `GuildChannel`, aligning the design with other Managers.
 
 ### Role
 
@@ -872,59 +903,59 @@ Gets the premium subscriber (booster) role for the Guild, if any.
 
 ### SelectMenuInteraction
 
-The new `SelectMenuInteraction` class is used to represent a `MessageComponentInteraction` coming from a select menu component.
+Provides gateway support for a `MessageComponentInteraction` coming from a select menu component.
 
 ### StageChannel
 
-The new `StageChannel` class represents and provides support for Stage Channels.
+Provides API support for Stage Channels.
 
 ### StageInstance
 
-The new `StageInstance` class represents and provides support Stage Instances. Stage instances contain information about live stages.
+Provides API support Stage Instances. Stage instances contain information about live stages.
 
 ### StageInstanceManager
 
-The new `StageInstanceManager` class provides support for the bot to create, edit and delete live Stage Instances.
+Provides API support for the bot to create, edit and delete live Stage Instances, and stores a cache of Stage Instances.
 
 ### Sticker
 
-The new `Sticker` class represents and provided support for Discord Stickers.
+Provides API support for Discord Stickers.
 
 ### TextChannel
 
 #### TextChannel#awaitMessageComponent
 
-Promisified collector to wait for and collect a single component interaction in a TextChannel
+A shortcut method to create a promisified `InteractionCollector` which resolves to a single `MessageComponentInteraction`
 
 #### TextChannel#createMessageComponentCollector
 
-New Collector class for collecting component interactions in a TextChannel
+A shortcut method to create an `InteractionCollector` for components on a specific channel.
 
 #### TextChannel#setType
 
 `channel.setType('news')`
 
-Allows conversion between TextChannel and NewsChannel.
+Allows conversion between `TextChannel` and `NewsChannel`.
 
 #### TextChannel#threads
 
-Provides access to the ThreadManager for this channel.
+Provides access to the `ThreadManager` for this channel.
 
 ### ThreadChannel
 
-New class to represent the different types of Thread Channels.
+Provides API support for Thread Channels.
 
 ### ThreadChannelManager
 
-New manager class for Thread Channels, providing support for the bot to create, edit and delete threads.
+Provides API support for the bot to create, edit and delete threads, and stores a cache of `ThreadChannels`.
 
 ### ThreadMember
 
-New class to represent a member of a thread, and their thread-specific metadata.
+Represent a member of a thread, and their thread-specific metadata.
 
 ### ThreadMemberManager
 
-New class for managing Thread Members, providing support for the bot to add and remove members from threads.
+Provides API support for the bot to add and remove members from threads, and stores a cache of `ThreadMembers`.
 
 ### Webhook
 
@@ -948,15 +979,15 @@ Webhooks can now have a `sourceGuild` and `sourceChannel` if the message is bein
 
 ### WelcomeChannel
 
-New class to represent a channel available in a Guild's Welcome Screen.
+Represents the channels that can be seen in a Guild's `WelcomeScreen`.
 
 ### WelcomeScreen
 
-New class to support the Welcome Screen of a Guild, 
+Provides API support for a Guild's Welcome Screen.
 
 ### Widget
 
-New class to represent a Guild's Widget
+Represent a Guild's Widget.
 
 ### WidgetMember
 
@@ -970,8 +1001,8 @@ A number of new formatter functions are provided in the Util class, to easily ha
 
 #### Util#resolvePartialEmoji
 
-The new `Util#resolvePartialEmoji` method attempts to resolve properties for a raw emoji object from input data, without the use of the Discord.js Client class or its EmojiManager.
+A helper method which attempts to resolve properties for a raw emoji object from input data, without the use of the Discord.js Client class or its EmojiManager.
 
 #### Util#verifyString
 
-The new `Util#verifyString` method is used to internally validate string arguments provided to methods in discord.js.
+A helper method which is used to internally validate string arguments provided to methods in discord.js.
