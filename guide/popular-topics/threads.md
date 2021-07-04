@@ -50,7 +50,7 @@ To join your Client to a ThreadChannel you make use of the `ThreadChannel#join()
 ```js {3}
 client.on('messageCreate', async message => {
 	const thread = message.channel.threads.cache.find(x => x.name === 'food-talk');
-	await thread.join();
+	if (thread.joinable) await thread.join();
 });
 ```
 
@@ -97,6 +97,10 @@ client.on('messageCreate', async message => {
 	await thread.setLocked(true);
 });
 ```
+
+::: warning
+Archived threads can't be locked!
+:::
 
 Unlocking a thread:
 
