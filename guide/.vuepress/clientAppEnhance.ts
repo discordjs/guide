@@ -19,7 +19,7 @@ import ResultingCode from './components/ResultingCode.vue';
 import djsAvatar from './assets/discord-avatar-djs.png';
 import '@discord-message-components/vue/dist/style.css';
 
-export default defineClientAppEnhance(({ app, router, siteData }) => {
+export default defineClientAppEnhance(({ app }) => {
 	app.use(DiscordMessageComponents, {
 		avatars: {
 			djs: djsAvatar,
