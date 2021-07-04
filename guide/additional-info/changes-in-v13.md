@@ -70,12 +70,6 @@ const client = new Client({
 
 ## Commonly used methods that changed
 
-### Event naming
-
-The `message` and `interaction` events have been renamed to `messageCreate` and `interactionCreate` respectively, to bring the library in line with Discord's naming conventions.
-
-Don't worry - the old names still work, but you'll receive a Deprecation Warning until you switch over.
-
 ### Sending Messages, MessageEmbeds, and everything else
 
 With the introduction of Interactions and it becoming far common for users to want to send an embed with MessageOptions, methods that send messages now enforce a single param. 
@@ -99,7 +93,7 @@ Additionally, all messages sent by bots now support up to 10 embeds. As a result
 
 ```diff
 - const embed = new Discord.MessageEmbed().setTitle('Attachments').attachFiles(['./image1.png', './image2.jpg']);
-- channel.send(embed)
+- channel.send(embed);
 + const embed = new Discord.MessageEmbed().setTitle('Attachments');
 + channel.send({ embeds: [embed], files: ['./image1.png', './image2.jpg'] });
 ```
@@ -108,11 +102,20 @@ The `code` and `split` options have also been removed. This functionality will n
 
 ### Strings
 
-Many methods in discord.js that were documented as accepting strings would accept other types, and resolve this into a string on your behalf. 
+Many methods in discord.js that were documented as accepting strings would accept other types, and resolve this into a string on your behalf. The results of this behaviour were often undesirable, producing output such as `[object Object]`.
 
-The results of this behaviour were often undesirable, producing output such as `[object Object]`. Discord.js now enforces and validates string input on all methods that expect it. 
+Discord.js now enforces and validates string input on all methods that expect it. Users will need to manually call `toString()` or utilise template literals for all string inputs as appropriate.
 
-The most common areas you will encounter this change is `MessageOptions#content` and the properties of a `MessageEmbed`.
+The most common areas you will encounter this change is `MessageOptions#content` and the properties of a `MessageEmbed`, or when passing objects such as users or roles directly, especting them to be stringified.
+
+```diff
+- message.channel.send(user);
++ message.channel.send(user.toString());
+
+let count = 5;
+- embed.addField('Count', count);
++ embed.addField('Count', `${count}`);
+```
 
 ### Intents
 
@@ -127,6 +130,12 @@ Refer to our more [detailed article about this topic](/popular-topics/intents).
 + const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 ```
 
+### Structures#extend
+
+The concept of extendable Structures has been completely removed from Discord.js.
+
+For more information on why this decision was made and the recommended alternatives, refer to the [pull request](https://github.com/discordjs/discord.js/pull/6027).
+
 ### Collectors
 
 All Collector related classes and methods (both create and await) now take a single object parameter which also includes the filter.
@@ -136,9 +145,49 @@ All Collector related classes and methods (both create and await) now take a sin
 + const collector = message.createReactionCollector({ filter, time: 15000 });
 ```
 
+### Naming conventions
+
+Some commonly used naming convention in Discord.js have been changed:
+
+#### Thing#thingId
+
+The casing of `thingID` properties has changed to `thingId`. This is a more-correct casing for the camelCase used by Discord.js as `Id` is an abbreviation, not an acronym.
+
+```diff
+- console.log(guild.ownerID);
++ console.log(guild.ownerId);
+
+- console.log(interaction.channelID);
++ console.log(interaction.channelId);
+```
+
+#### Client#message
+
+#### Client#interaction
+
+- `message` and `interaction` events have been renamed to `messageCreate` and `interactionCreate` respectively, to bring the library in line with Discord's naming conventions.
+
+Don't worry - the old names still work, but you'll receive a Deprecation Warning until you switch over.
+
+```diff
+- client.on("message", message => { ... });
++ client.on("messageCreate", message => { ... });
+
+- client.on("interaction", interaction => { ... });
++ client.on("interactionCreate", interaction => { ... });
+```
+
 ### Snowflakes
 
 For TypeScript users, discord.js now enforces the `Snowflake` type, a stringified bigint, rather than allowing any string to be accepted.
+
+```diff
+interface Config {
+  prefix: string;
+- ownerId: string;
++ ownerId: Snowflake;
+}
+```
 
 ### Allowed Mentions
 
@@ -328,15 +377,34 @@ The `Guild#voice` getter has been removed.
 
 #### GuildChannel#createOverwrite
 
-The `GuildChannel#createOverwrite` method has been removed, with functionality replaced by the new `PermissionOverwriteManager`.
+This method has been removed, with functionality replaced by the new `PermissionOverwriteManager`.
+
+```diff
+- channel.createOverwrite(user, { VIEW_CHANNEL: false });
++ channel.permissionOverwrites.create(user, { VIEW_CHANNEL: false });
+```
 
 #### GuildChannel#overwritePermissions
 
-The `GuildChannel#overwritePermissions` method has been removed, with functionality replaced by the new `PermissionOverwriteManager`.
+This method has been removed, with functionality replaced by the new `PermissionOverwriteManager`.
+
+```diff
+- channel.overwritePermissions([{ id: user.id , allow: ['VIEW_CHANNEL'], deny: ['SEND_MESSAGES'] }]);
++ channel.permissionOverwrites.set([{ id: user.id , allow: ['VIEW_CHANNEL'], deny: ['SEND_MESSAGES'] }]);
+```
+
+#### GuildChannel#permissionOverwrites
+
+This method no longer returns a Collection of PermissionOverwrites, instead providing access to the `PermissionOverwriteManager`.
 
 #### GuildChannel#updateOverwrite
 
-The `GuildChannel#updateOverwrite` method has been removed, with functionality replaced by the new `PermissionOverwriteManager`.
+This method has been removed, with functionality replaced by the new `PermissionOverwriteManager`.
+
+```diff
+- channel.updateOverwrite(user, { VIEW_CHANNEL: false });
++ channel.permissionOverwrites.edit(user, { VIEW_CHANNEL: false });
+```
 
 ### GuildMember 
 
