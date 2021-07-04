@@ -43,8 +43,7 @@ const setTheme = ({ colorTheme = 'default', persist = false }) => {
 };
 
 onBeforeMount(() => {
-	const userTheme = localStorage.getItem('guide-color-theme');
-	setTheme({ colorTheme: userTheme });
+	setTheme({ colorTheme: localStorage.getItem('guide-color-theme') });
 });
 </script>
 
