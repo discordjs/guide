@@ -108,3 +108,13 @@ html.guide-theme-blurple {
 		}
 	}
 }
+
+.theme-container.sidebar-open .navbar {
+	.toggle-sidebar-button {
+		background-color: var(--nav-links-color);
+
+		&:hover {
+			background-color: var(--nav-links-hover-color);
+		}
+	}
+}
