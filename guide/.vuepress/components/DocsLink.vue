@@ -1,5 +1,5 @@
 <template>
-	<a :href="link" target="djs-docs" rel="noopener noreferrer">
+	<a :href="link" target="_blank" rel="noopener noreferrer">
 		<slot></slot><outbound-link />
 	</a>
 </template>
