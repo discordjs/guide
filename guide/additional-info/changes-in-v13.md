@@ -24,7 +24,7 @@ In addition to the `interaction` event covered in the above guide, this release 
 
 Discord.js now has support for Message Components!
 
-This introduces the `MessageActionRow` and `MessageButton` classes, as well as a `MessageComponentInteractionCollector` for listening to button clicks. Refer to the [Message Components](/interactions/buttons) section of this guide to strat using Message Components.
+This introduces the `MessageActionRow` and `MessageButton` classes, as well as a `MessageComponentInteractionCollector` for listening to button clicks. Refer to the [Message Components](/interactions/buttons) section of this guide to start using Message Components.
 
 ## Voice
 
