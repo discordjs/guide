@@ -10,7 +10,7 @@ You can check your discord.js version with `npm list discord.js`. Should it stil
 
 ## API Version
 
-Discord.js v13 makes the switch to Discord API v8.
+Discord.js v13 makes the switch to Discord API v9! In addition to this, the new major version also includes a bunch of cool new features...
 
 ## Slash Commands
 
@@ -24,13 +24,55 @@ In addition to the `interaction` event covered in the above guide, this release 
 
 Discord.js now has support for Message Components!
 
-This introduces the `MessageActionRow` and `MessageButton` classes, as well as a `MessageComponentInteractionCollector` for listening to button clicks. Refer to the [Message Components](/interactions/buttons) section of this guide to start using Message Components.
+This introduces the `MessageActionRow`, `MessageButton` and `MessageSelectMenu` classes, as well as associated interactions and collectors. Refer to the [Message Components](/interactions/buttons) section of this guide to start using Message Components.
+
+## Threads
+
+Discord.js now has support for Threads! Threads are a new type of sub-channel that can be used to help separate conversations into a more meaningful flow.
+
+This introduces the `ThreadManager` class, which can be found as `TextChannel#threads`, in addition to `ThreadChannel`, `ThreadMemberManager` and `ThreadMember`.
+
+There are also five new events; `threadCreate`, `threadDelete`, `threadListSync`, `threadMemberUpdate` and `threadMembersUpdate`.
+
+Refer to the [Threads (coming soon I hope)](/threads/) section of this guide to start using Threads.
 
 ## Voice
 
-Support for voice has been separated into its own module. You now need to install and use [@discordjs/voice](https://github.com/discordjs/voice) for interacting with the Discord Voice API.
+Support for voice has been separated into a different module. You nown eeed to install and use [@discordjs/voice](https://github.com/discordjs/voice) for interacting with the Discord Voice API.
+
+## Customizable Manager Caches
+
+A popular request that has finally been heard, by 1Computer specifically. The `Client` class supports a new option, `makeCache` which accepts a `CacheFactory`.
+
+By combining this with the helper function `Options.cacheWithLimits` users can define custom caps on the caches of each Manager, and let discord.js handle the rest.
+
+```js
+const client = new Client({
+	makeCache: Options.cacheWithLimits({
+		MessageManager: 200, // This is default.
+		PresenceManager: 0, // Add more class names here.
+	}),
+});
+```
+
+Additional flexibility can be gained by providing a function which returns a custom cache implementation - keep in mind this should still maitain the Collector/Map-like interface for internal compatibility.
+
+```js
+const client = new Client({
+	makeCache: manager => {
+		if (manager.name === 'MessageManager') return new LimitedCollection(0);
+		return new Coolection();
+	},
+});
+```
 
 ## Commonly used methods that changed
+
+### Event naming
+
+The `message` and `interaction` events have been renamed to `messageCreate` and `interactionCreate` respectively, to bring the library in line with Discord's naming conventions.
+
+Don't worry - the old names still work, but you'll receive a Deprecation Warning until you switch over.
 
 ### Sending Messages, MessageEmbeds, and everything else
 
@@ -49,6 +91,8 @@ Additionally, all messages sent by bots now support up to 10 embeds. As a result
 + interaction.reply({ content: 'Hello!', ephemeral: true });
 ```
 
+The `code` and `split` options have also been removed. This functionality will now have to be handled manually, such as via the `Util.splitMessage` helper.
+
 ### Strings
 
 Many methods in discord.js that were documented as accepting strings would accept other types, and resolve this into a string on your behalf. The results of this behaviour were often undesirable, producing output such as `[object Object]`. Discord.js now enforces and validates string input on all methods that expect it. 
@@ -66,6 +110,15 @@ Refer to our more [detailed article about this topic](/popular-topics/intents).
 ```diff
 - const client = new Client({ ws: { intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 + const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+```
+
+### Collectors
+
+All Collector related classes and methods (both create and await) now take a single object parameter which also includes the filter.
+
+```diff
+- const collector = message.createReactionCollector(filter, { time: 15000 });
++ const collector = message.createReactionCollector({ filter, time: 15000 });
 ```
 
 ### Snowflakes
@@ -127,6 +180,10 @@ On Discord API v8, DM Channels do not emit the `CHANNEL_CREATE` event, which mea
 Webpack builds are no longer supported.
 
 ## Changes and deletions
+
+### APIMessage
+
+The APIMessage class has been renamed to `MessagePayload`, resolving a naming clash with an interface in the `discord-api-types` library which raw message data objects.
 
 ### Client
 
@@ -241,6 +298,20 @@ The `Guild#voice` getter has been removed.
 + guild.me.voice
 ```
 
+### GuildChannel
+
+#### GuildChannel#createOverwrite
+
+The `GuildChannel#createOverwrite` method has been removed, with functionality replaced by the new `PermissionOverwriteManager`.
+
+#### GuildChannel#overwritePermissions
+
+The `GuildChannel#overwritePermissions` method has been removed, with functionality replaced by the new `PermissionOverwriteManager`.
+
+#### GuildChannel#updateOverwrite
+
+The `GuildChannel#updateOverwrite` method has been removed, with functionality replaced by the new `PermissionOverwriteManager`.
+
 ### GuildMember 
 
 #### GuildMember#ban
@@ -348,7 +419,18 @@ The `spawnTimeout` param has been renamed to `timeout`.
 
 ### ShardClientUtil
 
-#### ShardClientUtil.respawnAll
+#### ShardClientUtil#broadcastEval
+
+The `ShardClientUtil#broadcastEval` method no longer accepts a string, instead expecting a function.
+
+```diff
+- client.shard.broadcastEval('this.guilds.cache.size')
++ client.shard.broadcastEval(client => client.guilds.cache.size)
+    .then(results => console.log(`${results.reduce((prev, val) => prev + val, 0)} total guilds`))
+    .catch(console.error);
+```
+
+#### ShardClientUtil#respawnAll
 
 The options for this method are now an object instead of separate params. In addition the `spawnTimeout` param has been renamed to `timeout`.
 
@@ -361,7 +443,11 @@ This means the user no longer needs to pass defaults to fill each positional par
 
 ### ShardingManager
 
-#### ShardingManager.spawn
+#### ShardingManager#broadcastEval
+
+The `ShardingManager#broadcastEval` method no longer accepts a string, instead expecting a function. See `ShardClientUtil#broadcastEval`.
+
+#### ShardingManager#spawn
 
 The options for this method are now an object instead of separate params. In addition the `spawnTimeout` param has been renamed to `timeout`.
 
@@ -405,6 +491,8 @@ The new flag `DISCORD_CERTIFIED_MODERATOR` has been added.
 
 ### Util
 
+Shortcuts to Util methods which were previously exported at the top level have been removed.
+
 #### Util#convertToBuffer
 
 #### Util#str2ab
@@ -425,19 +513,39 @@ New activity type `COMPETING` added.
 
 Global headers can now be set in the HTTP options.
 
+### ApplicationCommand
+
+The new `ApplicationCommand` class represents a Slash Command
+
+### ApplicationCommandManager
+
+The new `ApplicationCommandManager` class provides supporting for creating, editing and deleting Slash Commands.
+
+### ApplicationCommandPermissionsManager
+
+The new `ApplicationCommandPermissionsManager` class provides support for creating, editing and deleting permission overwrites on Slash Commands.
+
 ### ApplicationFlags
 
-New class `ApplicationFlags`, a bitfield for ClientApplication flags.
+The new `ApplicationFlags` class provides an enumerated bitfield for `ClientApplication` flags.
 
 ### BaseGuild
 
 The new `BaseGuild` class is extended by both `Guild` and `OAuth2Guild`.
+
+### ButtonInteraction
+
+The new `ButtonInteraction` class is used to represent a `MessageComponentInteraction` coming from a button component.
 
 ### Channel
 
 #### Channel#isText()
 
 The new `Channel#isText()` function provides an easy way for TypeScript developers to determine if a channel is Text-Based ("dm", "text", "news").
+
+#### Channel#isThread()
+
+The new `Channel#isThread()` function provides an easy way for TypeScript developers to determine if a channel is a Thread type.
 
 ### CollectorOptions
 
@@ -447,7 +555,7 @@ Constructing a Collector without providing a filter function will now throw a me
 
 ### CommandInteraction
 
-New class for handling Slash Command interactions. For more information refer to the [Slash Commands](/interactions/registering-slash-commands) section of the guide.
+The new `CommandInteraction` class is used to represent Slash Command interactions. For more information refer to the [Slash Commands](/interactions/registering-slash-commands) section of the guide.
 
 ### Guild
 
@@ -463,11 +571,23 @@ New property for the Guild's `GuildBanManager`
 
 `Guild#description` and `Guild#features` can now be edited.
 
+#### Guild#editWelcomeScreen
+
+Provides support for bots to edit the Welcome Screen properties of the Guild.
+
 #### Guild#emojis
 
 The `GuildEmojiManager` now extends `BaseGuildEmojiManager`.
 
 In addition to the existing methods, it now supports `GuildEmojiManager#fetch`.
+
+#### Guild#fetchWelcomeScreen
+
+Fetches the `WelcomeScreen` for the guild.
+
+#### Guild#fetchWidget
+
+The new method `Guild#fetchWidget` can be used to fetch a Widget class for the guild, containing information about the guild and it's members.
 
 #### Guild#nsfw
 
@@ -475,12 +595,16 @@ Guilds can now be marked as NSFW.
 
 #### Guild#owner
 
-The `Guild#owner` property has been removed as it was unreliable due to caching, replaced with `Guild#fetchOwner`
+The `Guild#owner` property has been removed as it was unreliable due to caching, replaced with `Guild#fetchOwner`.
 
 ```diff
 - console.log(Guild.owner);
 + Guild.fetchOwner().then(console.log);
 ```
+
+#### Guild#premiumTier
+
+The premium tier of a Guild is now represented by the PremiumTier enum.
 
 #### Guild#setChannelPositions
 
@@ -503,14 +627,6 @@ The `GuildChannel#createInvite` method now supports additional options:
 - `targetUser` to target the invite to join a particular streaming user
 - `targetApplication` to target the invite to a particular Discord activity
 - `targetType`
-
-#### GuildChannel#createOverwrite
-
-The `GuildChannel#createOverwrite` method no longer relies on cache. This is achieved by accepting an options object in which the `type` of overwrite can be specified.
-
-#### GuildChannel#updateOverwrite
-
-The `GuildChannel#updateOverwrite` method no longer relies on cache. This is achieved by accepting an options object in which the `type` of overwrite can be specified.
 
 ### GuildChannelManager
 
@@ -592,17 +708,33 @@ Provides a Collection of Roles managed by the integration.
 
 Base class for Slash Command and Message Component interactions. For more information refer to the [Interactions](/interactions/registering-slash-commands) section of the guide.
 
+### InteractionCollector
+
+A generic Collector class for collecting any type of interaction.
+
+This class has a more flexible design that other Collectors, able to be bound to any Guild, Channel or Message as appropriate.
+
+TypeScript developers can also leverage generics to define the subclass of Interaction that will be returned.
+
 ### InteractionWebhook
 
 New Webhook type specifically for handling interactions.
 
+### InviteGuild
+
+New class to support partial Guild data available from an Invite.
+
+### InviteStageInstance
+
+A new type of invite that bots can generate for inviting users to Stage Instances.
+
 ### Message
 
-#### Message#awaitMessageComponentInteraction
+#### Message#awaitMessageComponent
 
 Promisified collector to wait for and collect a single component interaction on a Message
 
-#### Message#createMessageComponentInteractionCollector
+#### Message#createMessageComponentCollector
 
 New Collector class for collecting component interactions on a Message
 
@@ -628,7 +760,7 @@ New Collection property containing any stickers which were in the message.
 
 ### MessageActionRow
 
-New builder class for construction action row type Message Components.
+New builder class for constructing action row type Message Components.
 
 ### MessageAttachment
 
@@ -638,7 +770,11 @@ The media type of a MessageAttachment.
 
 ### MessageButton
 
-New building class for constructing button-type Message Components
+New builder class for constructing button type Message Components.
+
+### MessageComponentInteraction
+
+A new class for receiving interactions on Message Components.
 
 ### MessageManager
 
@@ -674,6 +810,16 @@ Approximately equivalent to `message.react(emoji)` but does not resolve to a Mes
 
 Approximately equivalent to `message.unpin(options)` but does not resolve to a Message.
 
+### MessageMentions
+
+#### MessageMentions#repliedUser
+
+The MessageMentions class now supports checking if the author of a message being replied to has been mentioned.
+
+### MessageSelectMenu
+
+New builder class for constructing select menu type Message Components.
+
 ### NewsChannel
 
 #### NewsChannel#addFollower
@@ -694,6 +840,10 @@ Allows conversion between NewsChannel and TextChannel.
 
 Static bitfield representing the permissions required to moderate a Stage Channel.
 
+### PermissionOverwriteManager
+
+The new `PermissionOverwriteManager` class replaces the `createOverwrite`, `updateOverwrite` and `overwritePermissions` methods of `GuildChannel`, aligning the design with other Managers.
+
 ### Role
 
 #### Role#tags
@@ -708,27 +858,45 @@ Tags for roles belonging to bots, integrations, or premium subscribers.
 
 Gets the managed role a bot created when joining the guild, if any.
 
+#### RoleManager#edit
+
+`guild.roles.edit('12345678987654321', options)`
+
+Equivalent to `role.edit(options)`
+
 #### RoleManager#premiumSubscriberRole
 
 `guild.roles.premiumSubscriberRole`
 
 Gets the premium subscriber (booster) role for the Guild, if any.
 
+### SelectMenuInteraction
+
+The new `SelectMenuInteraction` class is used to represent a `MessageComponentInteraction` coming from a select menu component.
+
 ### StageChannel
 
-Stage Channels are now supported.
+The new `StageChannel` class represents and provides support for Stage Channels.
+
+### StageInstance
+
+The new `StageInstance` class represents and provides support Stage Instances. Stage instances contain information about live stages.
+
+### StageInstanceManager
+
+The new `StageInstanceManager` class provides support for the bot to create, edit and delete live Stage Instances.
 
 ### Sticker
 
-Stickers are now supported.
+The new `Sticker` class represents and provided support for Discord Stickers.
 
 ### TextChannel
 
-#### TextChannel#awaitMessageComponentInteraction
+#### TextChannel#awaitMessageComponent
 
 Promisified collector to wait for and collect a single component interaction in a TextChannel
 
-#### TextChannel#createMessageComponentInteractionCollector
+#### TextChannel#createMessageComponentCollector
 
 New Collector class for collecting component interactions in a TextChannel
 
@@ -737,6 +905,26 @@ New Collector class for collecting component interactions in a TextChannel
 `channel.setType('news')`
 
 Allows conversion between TextChannel and NewsChannel.
+
+#### TextChannel#threads
+
+Provides access to the ThreadManager for this channel.
+
+### ThreadChannel
+
+New class to represent the different types of Thread Channels.
+
+### ThreadChannelManager
+
+New manager class for Thread Channels, providing support for the bot to create, edit and delete threads.
+
+### ThreadMember
+
+New class to represent a member of a thread, and their thread-specific metadata.
+
+### ThreadMemberManager
+
+New class for managing Thread Members, providing support for the bot to add and remove members from threads.
 
 ### Webhook
 
@@ -758,7 +946,27 @@ Webhooks can now fetch messages that were sent by the Webhook.
 
 Webhooks can now have a `sourceGuild` and `sourceChannel` if the message is being crossposted.
 
+### WelcomeChannel
+
+New class to represent a channel available in a Guild's Welcome Screen.
+
+### WelcomeScreen
+
+New class to support the Welcome Screen of a Guild, 
+
+### Widget
+
+New class to represent a Guild's Widget
+
+### WidgetMember
+
+Partial information about a guild's members stored in a Widget.
+
 ### Util
+
+#### Formatters
+
+A number of new formatter functions are provided in the Util class, to easily handle adding markdown to strings.
 
 #### Util#resolvePartialEmoji
 
