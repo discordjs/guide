@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineComponent, defineProps } from 'vue';
+import { computed, defineProps } from 'vue';
 
 const baseURL = 'https://discord.js.org/#/docs';
 const docsSections = ['main', 'commando', 'collection', 'rpc'];

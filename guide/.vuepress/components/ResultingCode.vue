@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineComponent, defineProps, onMounted, ref } from 'vue';
+import { defineProps, onMounted, ref } from 'vue';
 import { usePageData } from '@vuepress/client';
 
 const codeSamplesURL = 'https://github.com/discordjs/guide/tree/master/code-samples/';
