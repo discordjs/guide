@@ -4,7 +4,7 @@
 			Settings
 			<ChevronRight class="menu-icon" />
 		</button>
-		<ul v-if="showSettings">
+		<ul v-show="showSettings">
 			<li>
 				<div class="sidebar-item">
 					<ThemeOptions />
