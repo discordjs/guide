@@ -33,15 +33,6 @@ $codeLang: 'html' 'js' 'json' 'md' 'sh' 'ts';
 	--text-gray: #e5e7eb;
 	--c-headers: #111827;
 
-	// Scrollbar
-	--c-bg-scrollbar-thumb: var(--theme-460);
-	--c-bg-scrollbar-thumb-hover: var(--theme-430);
-
-	// Nav bar colors
-	--nav-background-color: var(--theme-530);
-	--nav-links-color: var(--theme-600);
-	--nav-links-hover-color: var(--theme-630);
-
 	// Overrides:
 
 	// brand colors
@@ -85,16 +76,6 @@ html.guide-theme-blurple {
 	--theme-560: var(--blurple-560);
 	--theme-600: var(--blurple-600);
 	--theme-630: var(--blurple-630);
-
-	// Nav bar colors
-	--nav-background-color: var(--theme-560);
-	--nav-links-color: var(--theme-600);
-	--nav-links-hover-color: var(--theme-630);
-
-	// Scrollbar
-	--c-bg-scrollbar: var(--theme-460);
-	--c-bg-scrollbar-thumb: var(--theme-460);
-	--c-bg-scrollbar-thumb-hover: var(--theme-430);
 
 	// Overrides
 

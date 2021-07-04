@@ -1,3 +1,13 @@
+:root {
+	--nav-background-color: var(--theme-530);
+	--nav-links-color: var(--theme-600);
+	--nav-links-hover-color: var(--theme-630);
+}
+
+html.guide-theme-blurple {
+	--nav-background-color: var(--theme-560);
+}
+
 @mixin navLink() {
 	color: var(--text-gray);
 	font-size: 1em;
