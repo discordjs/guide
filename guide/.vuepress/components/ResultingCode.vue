@@ -7,28 +7,20 @@
 	</p>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
+<script setup lang="ts">
+import { defineComponent, defineProps, onMounted, ref } from 'vue';
 import { usePageData } from '@vuepress/client';
 
 const codeSamplesURL = 'https://github.com/discordjs/guide/tree/master/code-samples/';
 
-export default defineComponent({
-	name: 'ResultingCode',
-	props: {
-		path: String,
-	},
-	setup(props) {
-		const githubLink = ref(codeSamplesURL);
-		const page = usePageData();
+const props = defineProps({
+	path: String,
+});
 
-		onMounted(() => {
-			githubLink.value += props.path || page?.value.path.slice(1).replace('.html', '');
-		});
+const githubLink = ref(codeSamplesURL);
+const page = usePageData();
 
-		return {
-			githubLink,
-		};
-	},
+onMounted(() => {
+	githubLink.value += props.path || page?.value.path.slice(1).replace('.html', '');
 });
 </script>
