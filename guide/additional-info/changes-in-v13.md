@@ -51,7 +51,7 @@ Additionally, all messages sent by bots now support up to 10 embeds. As a result
 
 ### Strings
 
-Many methods in discord.js that were documented as accepting strings would accept other types, and resolve this into a string on your behalf. This results of this behaviour were often undesirable, producing output such as `[object Object]`. Discord.js now enforces and validates string input on all methods that expect it. 
+Many methods in discord.js that were documented as accepting strings would accept other types, and resolve this into a string on your behalf. The results of this behaviour were often undesirable, producing output such as `[object Object]`. Discord.js now enforces and validates string input on all methods that expect it. 
 
 The most common areas you will encounter this change is `MessageOptions#content` and the properties of a `MessageEmbed`.
 
