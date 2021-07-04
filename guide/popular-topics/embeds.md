@@ -25,23 +25,25 @@ Here is an example of how an embed may look. We will go over embed construction 
 				author-url="https://discord.js.org/"
 			>
 				Some description here
-				<DiscordEmbedFields>
-					<DiscordEmbedField field-title="Regular field title">
-						Some value here
-					</DiscordEmbedField>
-					<DiscordEmbedField field-title="​">
-						​
-					</DiscordEmbedField>
-					<DiscordEmbedField :inline="true" field-title="Inline field title">
-						Some value here
-					</DiscordEmbedField>
-					<DiscordEmbedField :inline="true" field-title="Inline field title">
-						Some value here
-					</DiscordEmbedField>
-					<DiscordEmbedField :inline="true" field-title="Inline field title">
-						Some value here
-					</DiscordEmbedField>
-				</DiscordEmbedFields>
+				<template #fields>
+					<DiscordEmbedFields>
+						<DiscordEmbedField field-title="Regular field title">
+							Some value here
+						</DiscordEmbedField>
+						<DiscordEmbedField field-title="​">
+							​
+						</DiscordEmbedField>
+						<DiscordEmbedField :inline="true" field-title="Inline field title">
+							Some value here
+						</DiscordEmbedField>
+						<DiscordEmbedField :inline="true" field-title="Inline field title">
+							Some value here
+						</DiscordEmbedField>
+						<DiscordEmbedField :inline="true" field-title="Inline field title">
+							Some value here
+						</DiscordEmbedField>
+					</DiscordEmbedFields>
+				</template>
 				<template #footer>
 					<span>Some footer text here</span>
 				</template>
