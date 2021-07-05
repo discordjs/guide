@@ -81,7 +81,7 @@ client.commands = new Discord.Collection();
 :::
 
 ::: tip
-If you aren't exactly sure what Collections are, they're a class that extend JavaScript's native Map class and include more extensive, useful functionality. You can read about Maps [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), and see all the available Collection methods <branch version="11.x" inline><docs-link path="class/Collection">here</docs-link></branch><branch version="12.x" inline><docs-link section="collection" path="class/Collection">here</docs-link></branch>.
+If you aren't exactly sure what Collections are, they're a class that extend JavaScript's native Map class and include more extensive, useful functionality. You can read about Maps [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), and see all the available Collection methods <DocsLink section="collection" path="class/Collection">here</DocsLink>.
 :::
 
 This next step is how you'll dynamically retrieve all your newly created command files. The [`fs.readdirSync()`](https://nodejs.org/api/fs.html#fs_fs_readdirsync_path_options) method will return an array of all the file names in a directory, e.g. `['ping.js', 'beep.js']`. To ensure only command files get returned, use `Array.filter()` to leave out any non-JavaScript files from the array. With that array, you can loop over it and dynamically set your commands to the Collection you made above.
@@ -134,4 +134,4 @@ In the next chapter, we'll be going through how to implement some basic features
 
 ## Resulting code
 
-<resulting-code path="command-handling/file-setup" />
+<ResultingCode path="command-handling/file-setup" />

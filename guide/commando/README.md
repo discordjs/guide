@@ -1,7 +1,3 @@
----
-pageTheme: blue
----
-
 # Getting started with Commando
 
 When you got your first bot up and running, you should've installed discord.js using npm, Node.js' Package Manager. The same applies to Commando, which you must separately install. You can do this in one of two ways:
@@ -10,7 +6,7 @@ If using discord.js v12: `npm install discord.js-commando`
 If using master: `npm install discordjs/Commando`
 
 ::: warning
-You need at least Node.js version <branch version="11.x" inline>8.0.0</branch><branch version="12.x" inline>12.0</branch> to use Commando.
+You need at least Node.js version 12.0 to use Commando.
 :::
 
 ## Creating your index.js file
@@ -119,4 +115,4 @@ And there you have it! You've set up your `index.js` file! In the end, your file
 
 ## Resulting code
 
-<resulting-code />
+<ResultingCode />

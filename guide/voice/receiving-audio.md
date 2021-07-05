@@ -1,14 +1,5 @@
 # Receiving Audio
 
-<branch version="11.x">
-
-The discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots and give you tips to optimize performance!
-
-This voice guide targets discord.js v12, which features an improved audio system. Much of the example code in the voice guide is unsuitable for v11 and below–to access this content, please update discord.js to v12! 
-
-</branch>
-<branch version="12.x">
-
 ::: warning
 Discord does not officially support Discord bots receiving audio ([see here](https://github.com/discord/discord-api-docs/issues/808)), so there may be some breakages. However, discord.js aims to support this feature reasonably.
 :::
@@ -59,5 +50,3 @@ You can select the `'manual'` mode to keep the stream alive indefinitely and end
 ### What if I want to listen to multiple users?
 
 You can create a stream for each user. However, you cannot make a single stream that will interpolate audio from multiple users in a channel–this is currently out of discord.js' scope.
-
-</branch>

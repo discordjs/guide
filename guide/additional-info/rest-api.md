@@ -19,32 +19,6 @@ npm install node-fetch
 To start off, you're just going to be using this skeleton code:
 
 <!-- eslint-disable require-await -->
-<branch version="11.x">
-
-```js
-const { Client, RichEmbed } = require('discord.js');
-
-const client = new Client();
-const prefix = '!';
-
-client.once('ready', () => {
-	console.log('Ready!');
-});
-
-client.on('message', async message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
-
-	// ...
-});
-
-client.login('your-token-goes-here');
-```
-</branch>
-<branch version="12.x">
-	
 ```js
 const { Client, MessageEmbed } = require('discord.js');
 
@@ -66,7 +40,6 @@ client.on('message', async message => {
 
 client.login('your-token-goes-here');
 ```
-</branch>
 
 ::: tip
 We're going to take advantage of [destructuring](/additional-info/es6-syntax.md#destructuring) in this tutorial to maintain readability.
@@ -165,20 +138,20 @@ Here, you are only getting the first object from the array of objects called `li
 
 If you've followed the tutorial, you should have something like this:
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!urban njaksdcas
-	</discord-message>
-	<discord-message profile="bot">
-		<mention :highlight="true" profile="user" />, No results for <strong>njaksdcas</strong>
-	</discord-message>
-	<discord-message profile="user">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
+		<DiscordMention :highlight="true" profile="user" />, No results for <strong>njaksdcas</strong>
+	</DiscordMessage>
+	<DiscordMessage profile="user">
 		!urban hello world
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books.
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 Now, let's just make this an [embed](/popular-topics/embeds.md).
 
@@ -189,26 +162,6 @@ const trim = (str, max) => ((str.length > max) ? `${str.slice(0, max - 3)}...` :
 ```
 
 The following snippet is how to structure the embed:
-
-<branch version="11.x">
-
-```js
-const [answer] = list;
-
-const embed = new RichEmbed()
-	.setColor('#EFFF00')
-	.setTitle(answer.word)
-	.setURL(answer.permalink)
-	.addField('Definition', trim(answer.definition, 1024))
-	.addField('Example', trim(answer.example, 1024))
-	.addField('Rating', `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.`);
-
-message.channel.send(embed);
-```
-
-</branch>
-<branch version="12.x">
-
 ```js
 const [answer] = list;
 
@@ -225,36 +178,38 @@ const embed = new MessageEmbed()
 message.channel.send(embed);
 ```
 
-</branch>
-
 Now, if you do that same command again, you should get this:
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!urban hello world
-	</discord-message>
-	<discord-message profile="bot">
-		<discord-embed slot="embeds" color="#EFFF00" title="hello world" url="https://www.urbandictionary.com/define.php?term=hello%20world" >
-			<embed-fields slot="fields">
-				<embed-field title="Definition">
-					The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books. 
-				</embed-field>
-				<embed-field title="Example">
-					programming noob: Hey I just attended my first programming lesson earlier! <br>
-					.NET Veteran: Oh? What can you do? <br>
-					programming noob: I could make a dialog box pop up which says "Hello World!" !!! <br>
-					.NET Veteran: lmao.. hey guys! look.. check out this "hello world" programmer <br><br>
-					Console.WriteLine("Hello World")
-				</embed-field>
-				<embed-field title="Rating">
-					122 thumbs up. <br>
-					42 thumbs down.
-				</embed-field>
-			</embed-fields>
-		</discord-embed>
-	</discord-message>
-</div>
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
+		<template #embeds>
+			<DiscordEmbed border-color="#EFFF00" embed-title="hello world" url="https://www.urbandictionary.com/define.php?term=hello%20world">
+				<template #fields>
+					<DiscordEmbedFields>
+						<DiscordEmbedField field-title="Definition">
+							The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books. 
+						</DiscordEmbedField>
+						<DiscordEmbedField field-title="Example">
+							programming noob: Hey I just attended my first programming lesson earlier! <br>
+							.NET Veteran: Oh? What can you do? <br>
+							programming noob: I could make a dialog box pop up which says "Hello World!" !!! <br>
+							.NET Veteran: lmao.. hey guys! look.. check out this "hello world" programmer <br><br>
+							Console.WriteLine("Hello World")
+						</DiscordEmbedField>
+						<DiscordEmbedField field-title="Rating">
+							122 thumbs up. <br>
+							42 thumbs down.
+						</DiscordEmbedField>
+					</DiscordEmbedFields>
+				</template>
+			</DiscordEmbed>
+		</template>
+	</DiscordMessage>
+</DiscordMessages>
 
 ## Resulting code
 
-<resulting-code />
+<ResultingCode />

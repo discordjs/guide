@@ -182,14 +182,14 @@ if (command.args && !args.length) {
 
 Now when you try to use the kick command inside a DM, you'll get the appropriate response, preventing your bot from throwing an error.
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!kick
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		I can't execute that command inside DMs!
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 ## Cooldowns
 
@@ -313,26 +313,26 @@ client.on('message', message => {
 
 Making those two small changes, you get this:
 
-<div is="discord-messages">
-	<discord-message profile="user">
-		!avatar <mention :highlight="true" profile="user" />
-	</discord-message>
-	<discord-message profile="bot">
+<DiscordMessages>
+	<DiscordMessage profile="user">
+		!avatar <DiscordMention :highlight="true" profile="user" />
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		User's avatar:
 		<a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
 		<br />
 		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
-	</discord-message>
-	<discord-message profile="user">
-		!icon <mention :highlight="true" profile="user" />
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="user">
+		!icon <DiscordMention :highlight="true" profile="user" />
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		User's avatar:
 		<a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
 		<br />
 		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 ## A dynamic help command
 
@@ -402,7 +402,7 @@ There's nothing complicated here; all you do is append some strings, `.map()` ov
 Since help messages can get messy, you'll be DMing it to the message author instead of posting it in the requested channel. However, there is something significant you should consider: the possibility of not being able to DM the user, whether it be that they have DMs disabled on that server or overall, or they have the bot blocked. For that reason, you should `.catch()` it and let them know.
 
 ::: tip
-If you weren't already aware, `.send()` takes two parameters: the content to send, and the message options to pass in. You can read about the `MessageOptions` type <docs-link path="typedef/MessageOptions">here</docs-link>. Using `split: true` here will automatically split our help message into two or more messages in the case that it exceeds the 2,000 character limit.
+If you weren't already aware, `.send()` takes two parameters: the content to send, and the message options to pass in. You can read about the `MessageOptions` type <DocsLink path="typedef/MessageOptions">here</DocsLink>. Using `split: true` here will automatically split our help message into two or more messages in the case that it exceeds the 2,000 character limit.
 :::
 
 ::: tip
@@ -438,30 +438,30 @@ Once you get the command based on the name or alias they gave, you can start `.p
 
 At the end of it all, you should be getting this as a result:
 
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!help
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		Here's a list of all my commands:
 		args-info, avatar, beep, help, kick, ping, prune, server, user-info <br>
 		You can send `!help [command name]` to get info on a specific command!
-	</discord-message>
-	<discord-message profile="user">
+	</DiscordMessage>
+	<DiscordMessage profile="user">
 		!help avatar
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
 		<strong>Name:</strong> avatar <br>
 		<strong>Aliases:</strong> icon,pfp <br>
 		<strong>Description:</strong> Get the avatar URL of the tagged user(s), or your own avatar. <br>
 		<strong>Cooldown:</strong> 3 second(s)
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 No more manually editing your help command! If you aren't satisfied with how it looks, you can always adjust it to your liking later.
 
 ::: tip
-If you want to add categories or other information to your commands, you can add properties reflecting it to your `module.exports`. If you only want to show a subset of commands remember that `commands` is a Collection you can <branch version="11.x" inline><docs-link path="class/Collection?scrollTo=filter">filter</docs-link></branch><branch version="12.x" inline><docs-link section="collection" path="class/Collection?scrollTo=filter">filter</docs-link></branch> to fit your specific needs!
+If you want to add categories or other information to your commands, you can add properties reflecting it to your `module.exports`. If you only want to show a subset of commands remember that `commands` is a Collection you can <DocsLink section="collection" path="class/Collection?scrollTo=filter">filter</DocsLink> to fit your specific needs!
 :::
 
 ## Command permissions
@@ -498,7 +498,7 @@ if (command.args && !args.length) {
 Your command handler will now refuse to execute commands if the permissions you specify in the command structure are missing from the member trying to use it. Note that the `ADMINISTRATOR` permission and the message author being the owner of the guild will overwrite this.
 
 ::: tip
-Need more resources on how Discord's permission system works? Check the [permissions article](/popular-topics/permissions.html), [extended permissions knowledge base](/popular-topics/permissions-extended.html) and documentation of <docs-link path="class/Permissions?scrollTo=s-FLAGS">permission flags</docs-link> out! 
+Need more resources on how Discord's permission system works? Check the [permissions article](/popular-topics/permissions.html), [extended permissions knowledge base](/popular-topics/permissions-extended.html) and documentation of <DocsLink path="class/Permissions?scrollTo=s-FLAGS">permission flags</DocsLink> out! 
 :::
 
 ## Reloading commands
@@ -573,4 +573,4 @@ You should have a command handler with some basic (but useful) features at this 
 
 ## Resulting code
 
-<resulting-code />
+<ResultingCode />

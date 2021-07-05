@@ -5,7 +5,7 @@
 Collectors are useful to enable your bot to obtain *additional* input after the first command was sent. An example would be initiating a quiz, where the bot will "await" a correct response from somebody.
 
 ::: tip
-You can read the docs for the Collector class <docs-link path="class/Collector">here</docs-link>.
+You can read the docs for the Collector class <DocsLink path="class/Collector">here</DocsLink>.
 :::
 
 ### Basic message collector
@@ -43,7 +43,7 @@ Those options you pass as the second argument in `.createMessageCollector()`. Th
 Using `.awaitMessages()` can be easier if you understand Promises, and it allows you to have cleaner code overall. It is essentially identical to `.createMessageCollector()`, except promisified. However, the drawback of using this method is that you cannot do things before the Promise is resolved or rejected, either by an error or completion. However, it should do for most purposes, such as awaiting the correct response in a quiz. Instead of taking their example, let's set up a basic quiz command using the `.awaitMessages()` feature.
 
 ::: tip
-You can read the docs for the `.awaitMessages()` method <docs-link path="class/TextChannel?scrollTo=awaitMessages">here</docs-link>.
+You can read the docs for the `.awaitMessages()` method <DocsLink path="class/TextChannel?scrollTo=awaitMessages">here</DocsLink>.
 :::
 
 First, you'll need some questions and answers to choose from, so here's a basic set:
@@ -63,29 +63,6 @@ First, you'll need some questions and answers to choose from, so here's a basic 
 
 The provided set allows for responder error with an array of answers permitted. Ideally, it would be best to place this in a JSON file, which you can call `quiz.json` for simplicity.
 
-<branch version="11.x">
-
-```js
-const quiz = require('./quiz.json');
-const item = quiz[Math.floor(Math.random() * quiz.length)];
-const filter = response => {
-	return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
-};
-
-message.channel.send(item.question).then(() => {
-	message.channel.awaitMessages(filter, { maxMatches: 1, time: 30000, errors: ['time'] })
-		.then(collected => {
-			message.channel.send(`${collected.first().author} got the correct answer!`);
-		})
-		.catch(collected => {
-			message.channel.send('Looks like nobody got the answer this time.');
-		});
-});
-```
-
-</branch>
-<branch version="12.x">
-
 ```js
 const quiz = require('./quiz.json');
 const item = quiz[Math.floor(Math.random() * quiz.length)];
@@ -104,13 +81,11 @@ message.channel.send(item.question).then(() => {
 });
 ```
 
-</branch>
-
 ::: tip
 If you don't understand how `.some()` works, you can read about it in more detail [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some).
 :::
 
-In this filter, you iterate through the answers to find what you want. You would like to ignore the case because simple typos can happen, so you convert each answer to its lowercase form and check if it's equal to the response in lowercase form as well. In the options section, you only want to allow one answer to pass through, hence the <branch version="11.x" inline>`maxMatches: 1`</branch><branch version="12.x" inline>`max: 1`</branch> setting.
+In this filter, you iterate through the answers to find what you want. You would like to ignore the case because simple typos can happen, so you convert each answer to its lowercase form and check if it's equal to the response in lowercase form as well. In the options section, you only want to allow one answer to pass through, hence the `max: 1` setting.
 
 The filter looks for messages that match one of the answers in the array of possible answers to pass through the collector. The options (the second parameter) specifies that only a maximum of one message can go through the filter successfully before the Promise successfully resolves. The errors section specifies that time will cause it to error out, which will cause the Promise to reject if one correct answer is not received within the time limit of one minute. As you can see, there is no `collect` event, so you are limited in that regard.
 
@@ -121,29 +96,8 @@ The filter looks for messages that match one of the answers in the array of poss
 These work quite similarly to message collectors, except that you apply them on a message rather than a channel. The following is an example taken from the documentation, with slightly better variable names for clarification. The filter will check for the 👍 emoji–in the default skin tone specifically, so be wary of that. It will also check that the person who reacted shares the same id as the author of the original message that the collector was assigned to.
 
 ::: tip
-You can read the docs for the `.createReactionCollector()` method <docs-link path="class/Message?scrollTo=createReactionCollector">here</docs-link>.
+You can read the docs for the `.createReactionCollector()` method <DocsLink path="class/Message?scrollTo=createReactionCollector">here</DocsLink>.
 :::
-
-<branch version="11.x">
-
-```js
-const filter = (reaction, user) => {
-	return reaction.emoji.name === '👍' && user.id === message.author.id;
-};
-
-const collector = message.createReactionCollector(filter, { time: 15000 });
-
-collector.on('collect', reaction => {
-	console.log(`Collected ${reaction.emoji.name} from ${reaction.users.last().tag}`);
-});
-
-collector.on('end', collected => {
-	console.log(`Collected ${collected.size} items`);
-});
-```
-
-</branch>
-<branch version="12.x">
 
 ```js
 const filter = (reaction, user) => {
@@ -161,14 +115,12 @@ collector.on('end', collected => {
 });
 ```
 
-</branch>
-
 ### Await reactions
 
 As before, these work almost the same as a reaction collector, except it is Promise-based. The same differences apply as with channel collectors.
 
 ::: tip
-You can read the docs for the `.awaitReactions()` method <docs-link path="class/Message?scrollTo=awaitReactions">here</docs-link>.
+You can read the docs for the `.awaitReactions()` method <DocsLink path="class/Message?scrollTo=awaitReactions">here</DocsLink>.
 :::
 
 ```js

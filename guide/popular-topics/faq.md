@@ -4,26 +4,14 @@
 
 * `<client>` is a placeholder for the Client object, such as `const client = new Discord.Client();`.
 * `<message>` is a placeholder for the Message object, such as `client.on('message', message => { ... });`.
-* `<guild>` is a placeholder for the Guild object, such as `<message>.guild` or <branch version="12.x" inline>`<client>.guilds.cache.get('<id>')`</branch><branch version="11.x" inline>`<client>.guilds.get('<id>')`</branch>.
-* `<voiceChannel>` is a placeholder for the VoiceChannel object, such as <branch version="11.x" inline>`<message>.member.voiceChannel`</branch><branch version="12.x" inline>`<message>.member.voice.channel`</branch>
+* `<guild>` is a placeholder for the Guild object, such as `<message>.guild` or `<client>.guilds.cache.get('<id>')`.
+* `<voiceChannel>` is a placeholder for the VoiceChannel object, such as `<message>.member.voice.channel`
 
 For a more detailed explanation of the notations commonly used in this guide, the docs, and the support server, see [here](/additional-info/notation.md).
 
 ## Administrative
 
 ### How do I ban a user?
-
-<branch version="11.x">
-
-<!-- eslint-skip -->
-
-```js
-const user = <message>.mentions.users.first();
-<guild>.ban(user);
-```
-
-</branch>
-<branch version="12.x">
 
 <!-- eslint-skip -->
 
@@ -32,21 +20,7 @@ const user = <message>.mentions.users.first();
 <guild>.members.ban(user);
 ```
 
-</branch>
-
 ### How do I unban a user?
-
-<branch version="11.x">
-
-<!-- eslint-skip -->
-
-```js
-const id = args[0];
-<guild>.unban(id);
-```
-
-</branch>
-<branch version="12.x">
 
 <!-- eslint-skip -->
 
@@ -54,8 +28,6 @@ const id = args[0];
 const id = args[0];
 <guild>.members.unban(id);
 ```
-
-</branch>
 
 ::: tip
 Because you cannot ping a user who isn't in the server, you have to pass in the user id. To do this, we use arguments, represented by `args` (see [Commands with user input](/creating-your-bot/commands-with-user-input/) for more details on this topic).
@@ -72,19 +44,6 @@ member.kick();
 
 ### How do I add a role to a guild member?
 
-<branch version="11.x">
-
-<!-- eslint-skip -->
-
-```js
-const role = <guild>.roles.find(role => role.name === '<role name>');
-const member = <message>.mentions.members.first();
-member.addRole(role);
-```
-
-</branch>
-<branch version="12.x">
-
 <!-- eslint-skip -->
 
 ```js
@@ -93,23 +52,7 @@ const member = <message>.mentions.members.first();
 member.roles.add(role);
 ```
 
-</branch>
-
 ### How do I check if a guild member has a specific role?
-
-<branch version="11.x">
-
-<!-- eslint-skip -->
-
-```js
-const member = <message>.mentions.members.first();
-if (member.roles.some(role => role.name === '<role name>')) {
-	// ...
-}
-```
-
-</branch>
-<branch version="12.x">
 
 <!-- eslint-skip -->
 
@@ -119,8 +62,6 @@ if (member.roles.cache.some(role => role.name === '<role name>')) {
 	// ...
 }
 ```
-
-</branch>
 
 ### How do I limit a command to a single user?
 
@@ -167,24 +108,9 @@ if (<message>.author.id === '<id>') {
 <client>.user.setActivity('<activity>', { type: 'LISTENING' });
 ```
 
-<branch version="11.x">
-
-::: tip
-If you would like to set your activity upon startup, you must place the `<client>.user.setActivity()` method call inside a `ready` event listener (`<client>.on('ready', () => {});`).
-:::
-
-::: warning
-`<client>.user.setActivity()` will only work in v11.3 and above. You can still use `<client>.user.setGame()`, but it is deprecated as of v11.3, and has been removed in v12.
-:::
-
-</branch>
-<branch version="12.x">
-
 ::: tip
 If you would like to set your activity upon startup, you can use the `ClientOptions` object to set the appropriate `Presence` data.
 :::
-
-</branch>
 
 ### How do I make my bot display online/idle/dnd/invisible?
 
@@ -204,14 +130,6 @@ If you would like to set your activity upon startup, you can use the `ClientOpti
 ```js
 <client>.user.setPresence({ activity: { name: '<activity>' }, status: 'idle' });
 ```
-
-<branch version="11.x">
-
-::: warning
-the `activity` key will only work in v11.3 and above. You can still use the `game` key instead, but it is deprecated as of v11.3 and removed in v12.
-:::
-
-</branch>
 
 ### How do I add a mention prefix to my bot?
 
@@ -253,18 +171,6 @@ If you aren't familiar with the syntax used on the `const [, matchedPrefix] = ..
 
 ### How do I send a message to a specific channel?
 
-<branch version="11.x">
-
-<!-- eslint-skip -->
-
-```js
-const channel = <client>.channels.get('<id>');
-channel.send('<content>');
-```
-
-</branch>
-<branch version="12.x">
-
 <!-- eslint-skip -->
 
 ```js
@@ -272,21 +178,7 @@ const channel = <client>.channels.cache.get('<id>');
 channel.send('<content>');
 ```
 
-</branch>
-
 ### How do I DM a specific user?
-
-<branch version="11.x">
-
-<!-- eslint-skip -->
-
-```js
-const user = <client>.users.get('<id>');
-user.send('<content>');
-```
-
-</branch>
-<branch version="12.x">
 
 <!-- eslint-skip -->
 
@@ -294,8 +186,6 @@ user.send('<content>');
 const user = <client>.users.cache.get('<id>');
 user.send('<content>');
 ```
-
-</branch>
 
 ::: tip
 If you want to DM the user who sent the message, you can use `<message>.author.send()`.
@@ -334,27 +224,6 @@ message.channel.send('<@123456789012345678> <@987654321098765432>', {
 
 ### How do I prompt the user for additional input?
 
-<branch version="11.x">
-
-<!-- eslint-skip -->
-
-```js
-<message>.channel.send('Please enter more input.').then(() => {
-	const filter = m => <message>.author.id === m.author.id;
-
-	<message>.channel.awaitMessages(filter, { time: 60000, maxMatches: 1, errors: ['time'] })
-		.then(messages => {
-			<message>.channel.send(`You've entered: ${messages.first().content}`);
-		})
-		.catch(() => {
-			<message>.channel.send('You did not enter any input!');
-		});
-});
-```
-
-</branch>
-<branch version="12.x">
-
 <!-- eslint-skip -->
 
 ```js
@@ -370,8 +239,6 @@ message.channel.send('<@123456789012345678> <@987654321098765432>', {
 		});
 });
 ```
-
-</branch>
 
 ::: tip
 If you want to learn more about this syntax or reaction collectors, check out [this dedicated guide page for collectors](/popular-topics/collectors.md)!
@@ -433,22 +300,6 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 
 ### How do I find all online members of a guild?
 
-<branch version="11.x">
-
-<!-- eslint-skip -->
-
-```js
-// First use fetchMembers to make sure all members are cached
-<guild>.fetchMembers().then(fetchedGuild => {
-	const totalOnline = fetchedGuild.members.filter(member => member.presence.status === 'online');
-	// Now you have a collection with all online member objects in the totalOnline variable
-	console.log(`There are currently ${totalOnline.size} members online in this guild!`)
-});
-```
-
-</branch>
-<branch version="12.x">
-
 <!-- eslint-skip -->
 
 ```js
@@ -460,29 +311,7 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 });
 ```
 
-</branch>
-
 ### How do I check which role was added/removed and for which member?
-
-<branch version="11.x">
-
-<!-- eslint-skip -->
-
-```js
-// Start by declaring a guildMemberUpdate listener
-// This code should be placed outside of any other listener callbacks to prevent listener nesting
-<client>.on('guildMemberUpdate', (oldMember, newMember) => {
-	// If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
-	const removedRoles = oldMember.roles.filter(role => !newMember.roles.has(role.id));
-	if(removedRoles.size > 0) console.log(`The roles ${removedRoles.map(r => r.name)} were removed from ${oldMember.displayName}.`);
-	// If the role(s) are present on the new member object but are not on the old one (i.e role(s) were added)
-	const addedRoles = newMember.roles.filter(role => !oldMember.roles.has(role.id));
-	if(addedRoles.size > 0) console.log(`The roles ${addedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
-});
-```
-
-</branch>
-<branch version="12.x">
 
 <!-- eslint-skip -->
 
@@ -499,22 +328,9 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 });
 ```
 
-</branch>
-
 ### How do I check the bot's ping?
 
 There are two common measurements for bot pings. The first, **Websocket heartbeat**, is the average interval of a regularly sent signal indicating the healthy operation of the WebSocket connection the library receives events over:
-
-<branch version="11.x">
-
-<!-- eslint-skip -->
-
-```js
-<message>.channel.send(`Websocket heartbeat: ${<client>.ping}ms.`);
-```
-
-</branch>
-<branch version="12.x">
 
 <!-- eslint-skip -->
 
@@ -525,8 +341,6 @@ There are two common measurements for bot pings. The first, **Websocket heartbea
 ::: tip
 A specific shards heartbeat can be found on the WebSocketShard instance, accessible at `<client>.ws.shards` > `.ping`.
 :::
-
-</branch>
 
 The second, **Roundtrip Latency**, describes the amount of time a full API roundtrip (from the creation of the command message to the creation of the response message) takes. You then edit the response to the respective value to avoid needing to send yet another message:
 
@@ -554,26 +368,6 @@ sudo apt-get install ffmpeg # ffmpeg debian/ubuntu
 npm install ffmpeg-static # ffmpeg windows
 ```
 
-<branch version="11.x">
-
-<!-- eslint-skip -->
-
-```js
-// ...
-const ytdl = require('ytdl-core');
-
-<voiceChannel>.join().then(connection => {
-	const stream = ytdl('<youtubelink>', { filter: 'audioonly' });
-	const dispatcher = connection.playStream(stream);
-	
-	dispatcher.on('end', () => voiceChannel.leave());
-})
-
-```
-
-</branch>
-<branch version="12.x">
-
 <!-- eslint-skip -->
 
 ```js
@@ -588,8 +382,6 @@ const ytdl = require('ytdl-core');
 })
 
 ```
-
-</branch>
 
 ### Why do some emojis behave weirdly?
 

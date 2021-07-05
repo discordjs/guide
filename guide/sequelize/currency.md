@@ -19,7 +19,7 @@ This time we'll have six files.
 
 Here is an entity relation diagram of the models we'll be making:
 
-<img src="./images/currency_er_diagram.svg" alt="Currency database structure diagram" />
+![Currency database structure diagram](./images/currency_er_diagram.svg)
 
 `Users` have a `user_id`, and a `balance`. Each `user_id` can have multiple links to the `UserItems` table, and each entry in the table connects to one of the items in the `CurrencyShop`, which will have a `name` and a `cost` associated with it.
 
@@ -356,22 +356,6 @@ There's nothing special here; just a regular `.findAll()` to get all the items i
 
 ### [lambda] Display the leaderboard
 
-<branch version="11.x">
-
-```js
-return message.channel.send(
-	currency.sort((a, b) => b.balance - a.balance)
-		.filter(user => client.users.has(user.user_id))
-		.first(10)
-		.map((user, position) => `(${position + 1}) ${(client.users.get(user.user_id).tag)}: ${user.balance}💰`)
-		.join('\n'),
-	{ code: true },
-);
-```
-
-</branch>
-<branch version="12.x">
-
 ```js
 return message.channel.send(
 	currency.sort((a, b) => b.balance - a.balance)
@@ -383,10 +367,8 @@ return message.channel.send(
 );
 ```
 
-</branch>
-
 Nothing extraordinary here either. You could query the database for the top ten currency holders, but since you already have access to them locally inside the `currency` variable, you can sort the Collection and use `.map()` to display it in a friendly format. The filter is in case the users no longer exist in the bot's cache.
 
 ## Resulting code
 
-<resulting-code />
+<ResultingCode />

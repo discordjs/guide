@@ -1,14 +1,5 @@
 # Optimization and Troubleshooting
 
-<branch version="11.x">
-
-The discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots and give you tips to optimize performance!
-
-This voice guide targets discord.js v12, which features an improved audio system. Much of the example code in the voice guide is unsuitable for v11 and below–to access this content, please update discord.js to v12! 
-
-</branch>
-<branch version="12.x">
-
 ## Preparing your bot for debugging
 
 If you're experiencing issues, you can listen to debug information from the client and any voice connections you have. Below is a rudimentary example of a logger, although you can adapt it to suit your needs. Storing these logs will help when troubleshooting any issues you may have.
@@ -103,5 +94,3 @@ connection.play(audioStream, { volume: false });
 Once you've done this, you will **not** be able to change the volume of your StreamDispatcher.
 
 This will not significantly impact performance but can still help you improve your bot's efficiency nevertheless.
-
-</branch>

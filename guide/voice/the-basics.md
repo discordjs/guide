@@ -1,14 +1,5 @@
 # The Basics
 
-<branch version="11.x">
-
-The discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots and give you tips to optimize performance!
-
-This voice guide targets discord.js v12, which features an improved audio system. Much of the example code in the voice guide is unsuitable for v11 and below–to access this content, please update discord.js to v12! 
-
-</branch>
-<branch version="12.x">
-
 Now that you have your dependencies installed, you can start using voice!
 
 ## Joining voice channels
@@ -27,7 +18,7 @@ client.on('message', async message => {
 If you try to join a channel the bot is already in, nothing will happen, so you don't need to run this method repeatedly.
 
 ::: tip
-In the above example, a `VoiceState` is accessed through `member.voice`. Voice states include information about the channel the member is connected to (if any), if the member is speaking and whether they're deafened or muted. Consult  <docs-link path="class/VoiceState">the documentation</docs-link> for a full description of what voice states can do!
+In the above example, a `VoiceState` is accessed through `member.voice`. Voice states include information about the channel the member is connected to (if any), if the member is speaking and whether they're deafened or muted. Consult  <DocsLink path="class/VoiceState">the documentation</DocsLink> for a full description of what voice states can do!
 :::
 
 ## Playing audio
@@ -131,5 +122,3 @@ connection.disconnect();
 // Option 2
 voiceChannel.leave();
 ```
-
-</branch>

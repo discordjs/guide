@@ -13,19 +13,6 @@ Here are some extra topics covered about sharding that might have raised concern
 
 ## Shard messages
 
-<branch version="11.x">
-
-For shards to communicate, they have to send messages to one another, as they each have another process. You can listen for these messages by adding the following listener in your `index.js` file:
-
-```js
-manager.on('message', (shard, message) => {
-	console.log(`Shard[${shard.id}] : ${message._eval} : ${message._result}`);
-});
-```
-
-</branch>
-<branch version="12.x">
-
 For shards to communicate, they have to send messages to one another, as they each have another process. You must wait for each shard to finish spawning before you can listen to their events, otherwise `ShardingManager#shards` will be an empty `Collection`. You can listen for these messages on the individual shards by adding the following lines in your `index.js` file:
 
 ```js
@@ -40,36 +27,23 @@ manager.spawn()
 	.catch(console.error);
 ```
 
-</branch>
-
 As the property names imply, the `_eval` property is what the shard is attempting to evaluate, and the `_result` property is the output of said evaluation. However, these properties are only guaranteed if a _shard_ is sending a message. There will also be an `_error` property, should the evaluation have thrown an error.
 
-You can also send messages via `process.send('hello')`, which would not contain the same information. This is why the `.message` property's type is declared as `*` <docs-link path="class/Shard?scrollTo=e-message">in the discord.js documentation</docs-link>.
+You can also send messages via `process.send('hello')`, which would not contain the same information. This is why the `.message` property's type is declared as `*` <DocsLink path="class/Shard?scrollTo=e-message">in the discord.js documentation</DocsLink>.
 
 ## Specific shards
 
 There might be times where you want to target a specific shard. An example would be to kill a specific shard that isn't working as intended. You can achieve this by taking the following snippet (in a command, preferably):
 
-<branch version="11.x">
-
-```js
-client.shard.broadcastEval('if (this.shard.id === 0) process.exit();');
-```
-
-</branch>
-<branch version="12.x">
-
 ::: tip
-In discord.js v12, <docs-link path="class/ShardClientUtil?scrollTo=ids">`client.shard`</docs-link> can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
+In discord.js v12, <DocsLink path="class/ShardClientUtil?scrollTo=ids">`client.shard`</DocsLink> can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
 :::
 
 ```js
 client.shard.broadcastEval('if (this.shard.ids.includes(0)) process.exit();');
 ```
 
-</branch>
-
-If you're using something like [PM2](http://pm2.keymetrics.io/) or [Forever](https://github.com/foreverjs/forever), this is an easy way to restart a specific shard. Remember, <docs-link path="class/ShardClientUtil?scrollTo=broadcastEval">Shard#broadcastEval</docs-link> sends a message to **all** shards, so you have to check if it's on the shard you want.
+If you're using something like [PM2](http://pm2.keymetrics.io/) or [Forever](https://github.com/foreverjs/forever), this is an easy way to restart a specific shard. Remember, <DocsLink path="class/ShardClientUtil?scrollTo=broadcastEval">Shard#broadcastEval</DocsLink> sends a message to **all** shards, so you have to check if it's on the shard you want.
 
 ## `ShardingManager#shardArgs` and `ShardingManager#execArgv`
 
@@ -121,22 +95,6 @@ This would become `client.funcName(args)` once it gets through. This is handy if
 
 There may be a time when you want to have your shard process an asynchronous function. Here's how you can do that!
 
-<branch version="11.x">
-
-```js
-client.shard.broadcastEval(`
-	let channel = this.channels.get('id');
-	let msg;
-	if (channel) {
-		msg = channel.fetchMessage('id').then(m => m.id);
-	}
-	msg;
-`);
-```
-
-</branch>
-<branch version="12.x">
-
 ```js
 client.shard.broadcastEval(`
 	let channel = this.channels.cache.get('id');
@@ -148,27 +106,7 @@ client.shard.broadcastEval(`
 `);
 ```
 
-</branch>
-
 This snippet allows you to return fetched messages outside of the `broadcastEval`, letting you know whether or not you were able to retrieve a message, for example. Remember, you aren't able to return entire objects outside. Now, what if we wanted to use `async/await` syntax inside?
-
-<branch version="11.x">
-
-```js
-client.shard.broadcastEval(`
-	(async () => {
-		let channel = this.channels.get('id');
-		let msg;
-		if (channel) {
-			msg = await channel.fetchMessage('id').then(m => m.id);
-		}
-		return msg;
-	})();
-`);
-```
-
-</branch>
-<branch version="12.x">
 
 ```js
 client.shard.broadcastEval(`
@@ -182,7 +120,5 @@ client.shard.broadcastEval(`
 	})();
 `);
 ```
-
-</branch>
 
 This example will work the same, but you can produce cleaner code with `async/await`. Additionally, what this does is declare an asynchronous function and then immediately call it. As it is also the last declared line, it is effectively being returned. Remember that you need to `return` an item inside a function one way or another.

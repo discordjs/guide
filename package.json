@@ -1,11 +1,11 @@
 {
     "name": "discord.js-guide",
-    "description": "The official guide for discord.js, created and maintained by core members of its community.",
-    "version": "2.0.0",
+    "description": "Imagine a guide... that explores the many possibilies for your discord.js bot.",
+    "version": "3.0.0",
     "private": true,
     "scripts": {
         "lint": "eslint . --ext js,md,vue",
-        "serve": "vuepress dev guide",
+        "dev": "vuepress dev guide",
         "build": "NODE_ENV=production vuepress build guide"
     },
     "repository": "https://github.com/discordjs/guide.git",
@@ -30,17 +30,16 @@
     },
     "homepage": "https://discordjs.guide",
     "devDependencies": {
+        "@vuepress/plugin-docsearch": "^2.0.0-beta.20",
+        "@vuepress/plugin-google-analytics": "^2.0.0-beta.20",
         "babel-eslint": "^10.0.1",
         "eslint": "^7.18.0",
         "eslint-config-sora": "^3.1.0",
         "eslint-plugin-markdown": "^1.0.0",
         "eslint-plugin-vue": "^7.5.0",
-        "vuepress": "^1.8.0"
+        "vuepress-vite": "^2.0.0-beta.20"
     },
     "dependencies": {
-        "@vuepress/plugin-google-analytics": "^1.2.0",
-        "semver": "^6.0.0",
-        "vue-discord-message": "^5.0.2",
-        "vuepress-theme-yuu": "^3.0.0"
+        "@discord-message-components/vue": "^0.2.0"
     }
 }

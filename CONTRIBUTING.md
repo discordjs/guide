@@ -10,7 +10,7 @@ cd guide
 npm install
 ```
 
-You can use `npm run serve` to open up a local version of the site at http://localhost:8080. If you need to use a different port, run it as `npm run serve -- --port=1234`.
+You can use `npm run dev` to open up a local version of the site at http://localhost:8080. If you need to use a different port, run it as `npm run dev -- --port=1234`.
 
 ### Linting
 
@@ -251,111 +251,73 @@ If you're writing a page that teaches the reader how to build something step-by-
 ## Resulting code
 
 <!-- Will link to /code-samples/foo/bar/ -->
-<resulting-code />
+<ResultingCode />
 ```
 
-`<resulting-code />` is a helper component to generate a sentence and link to the proper directory on GitHub for that specific page. Should you need to overwrite the path, you can do so:
+`<ResultingCode />` is a helper component to generate a sentence and link to the proper directory on GitHub for that specific page. Should you need to overwrite the path, you can do so:
 
 ```md
 <!-- Inside /guide/baz/README.md -->
 ## Resulting code
 
 <!-- Will result in `/code-samples/baz/` -->
-<resulting-code />
+<ResultingCode />
 
 <!-- Will result in `/code-samples/baz/getting-started/` -->
-<resulting-code path="baz/getting-started" />
+<ResultingCode path="baz/getting-started" />
 ```
 
 ### Displaying Discord messages
 
-We use [vue-discord-message](https://vue-discord-message.netlify.app/) to display "fake" Discord messages on pages. The reason for this is to make it easy for you to create, easy for anyone in the future to edit, and avoid having to take screenshots and using too many images on a page at once. Here's a preview of the components:
+We use [@discord-message-components/vue](https://github.com/Danktuary/discord-message-components/blob/main/packages/vue/README.md) to display "fake" Discord messages on pages. The reason for this is to make it easy for you to create, easy for anyone in the future to edit, and avoid having to take screenshots and using too many images on a page at once. Here's a preview of the components:
 
 ![Discord message faker preview](https://i.imgur.com/5eY8WFO.png)
 
 The syntax to make this display is quite simple as well:
 
 ```html
-<div is="discord-messages">
-	<discord-message profile="user">
+<DiscordMessages>
+	<DiscordMessage profile="user">
 		!ping
-	</discord-message>
-	<discord-message profile="bot">
-		<mention :highlight="true" profile="user" />, pong! Took 250ms
-	</discord-message>
-	<discord-message author="Another User" avatar="green">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
+		<DiscordMention :highlight="true" profile="user" />, pong! Took 250ms
+	</DiscordMessage>
+	<DiscordMessage author="Another User" avatar="green">
 		Pung!
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 ```
 
-These components are made with [Vue](https://vuejs.org/), but if you aren't familiar with Vue, don't worry about it. Just understand that you'll usually only need the `profile="user"`/`profile="bot"` attribute for the `<discord-message>` component. All `<discord-message>` components must be children of a single `<div is="discord-messages">` component for it to display properly.
+These components are made with [Vue](https://vuejs.org/), but if you aren't familiar with Vue, don't worry about it. Just understand that you'll usually only need the `profile="user"`/`profile="bot"` attribute for the `<DiscordMessage>` component. All `<DiscordMessage>` components must be children of a single `<DiscordMessages>` component for it to display properly.
 
-Do note the `<div is="discord-messages">` syntax instead of `<discord-messages>`. This is due to how VuePress renders markdown and HTML inside markdown files. It doesn't recognize `<discord-messages>` as an HTML element, therefore rendering anything indented inside it as a regular codeblock.
+Do note the casing in `<DiscordMessages>` syntax instead of `<discord-messages>`. This is due to how VuePress renders markdown and HTML inside markdown files. It doesn't recognize `<discord-messages>` as an HTML element, therefore rendering anything indented inside it as a regular codeblock.
 
-These components feature messages, mentions, and full embed support. You can read more about how to use them by checking out the [examples for vue-discord-message](https://vue-discord-message.netlify.app/examples.html).
-
-### Branch-specific content
-
-On some pages, you'll want to display content that applies only to the stable branch and other content that applies to a different branch. You can use the `<branch>` component inside any .md file, like so:
-
-```md
-You can use
-<branch version="11.x" inline>`message.channel.fetchMessages()`</branch>
-<branch version="12.x" inline>`message.channel.messages.fetch()`</branch>
-to fetch all messages in a channel
-```
-
-If you're on the `11.x` branch, you'd see "You can use `message.channel.fetchMessages()` to fetch all messages in a channel. Use the `inline` attribute to make content display inline with the content around it. Otherwise, it'll be displayed on its own line.
-
-You can refer to the `guide/.vuepress/mixins/branches.js` file to see which values are valid to use for the `version` attribute.
-
-#### Codeblocks and other markdown
-
-A common use-case for this component would be with codeblocks. Using Vue components inside markdown can get tricky and cause weird errors, so in order for everything to render properly, an extra blank line should be added before and after the component tag. For example (ignoring the `\` before the backticks):
-
-```md
-You can use the following to fetch all messages in a channel:
-
-<branch version="11.x">
-
-\```js
-message.channel.fetchMessages();
-\```
-
-</branch>
-<branch version="12.x">
-
-\```js
-message.channel.messages.fetch();
-\```
-
-</branch>
-```
+These components feature messages, mentions, embeds, interactions, and more. You can read more about how to use them by checking out [@discord-message-components/vue](https://github.com/Danktuary/discord-message-components/blob/main/packages/vue/README.md).
 
 ### Discord.js documentation links
 
-On pages where links to the discord.js documentation are used, you can use the `<docs-link>` component. Since the discord.js documentation is split into different categories and branches, the component allows you to supply the necessary info accordingly. The only required prop is `path`.
+On pages where links to the discord.js documentation are used, you can use the `<DocsLink>` component. Since the discord.js documentation is split into different categories and branches, the component allows you to supply the necessary info accordingly. The only required prop is `path`.
 
 ```md
 Main docs, branch version inherited from branch selector, `class/Client`:
-<docs-link path="class/Client">Link text</docs-link>
+<DocsLink path="class/Client">Link text</DocsLink>
 <!-- Becomes: https://discord.js.org/#/docs/main/v11/class/Client -->
 
 Main docs, stable branch (becomes "v12" due to the aliases set in `.vuepress/mixins/branches.js`), `class/Client`:
-<docs-link branch="stable" path="class/Client">Link text</docs-link>
+<DocsLink branch="stable" path="class/Client">Link text</DocsLink>
 <!-- Becomes: https://discord.js.org/#/docs/main/v12/class/Client -->
 
 Main docs, reply-prefix branch, `class/Client`:
-<docs-link section="main" branch="reply-prefix" path="class/Client">Link text</docs-link>
+<DocsLink section="main" branch="reply-prefix" path="class/Client">Link text</DocsLink>
 <!-- Becomes: https://discord.js.org/#/docs/main/reply-prefix/class/Client -->
 
 Commando docs, djs-v11 branch, `class/Command`:
-<docs-link section="commando" branch="djs-v11" path="class/Command">Link text</docs-link>
+<DocsLink section="commando" branch="djs-v11" path="class/Command">Link text</DocsLink>
 <!-- Becomes: https://discord.js.org/#/docs/commando/djs-v11/class/Command -->
 
 Collection docs, master branch (no `branch` prop set), `class/Collection?scrollTo=partition`:
-<docs-link section="collection" path="class/Collection?scrollTo=partition">Link text</docs-link>
+<DocsLink section="collection" path="class/Collection?scrollTo=partition">Link text</DocsLink>
 <!-- Becomes: https://discord.js.org/#/docs/collection/master/class/Collection?scrollTo=partition -->
 ```
 

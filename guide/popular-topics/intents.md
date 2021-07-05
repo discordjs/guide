@@ -1,12 +1,5 @@
 # Gateway Intents
 
-<branch version="11.x">
-
-Intents are not available in version 11; please update to version 12 of the library if you want to use gateway intents in your bot.
-
-</branch>
-<branch version="12.x">
-
 ::: warning
 Version 13 of Discord.js will require you to choose intents (as it uses a new version of Discord's API), it's worthwhile reading this section even if you don't currently want to update, so you know what to do later.
 :::
@@ -23,7 +16,7 @@ Before storming off and doing so, you should stop and carefully think about if y
 
 `GUILD_MEMBERS`
 - The client events `"guildMemberAdd"`, `"guildMemberRemove"`, `"guildMemberUpdate"` do not emit
-- <docs-link branch="stable" path="class/Guild?scrollTo=memberCount">`Guild#memberCount`</docs-link> returns the member count as of ready
+- <DocsLink branch="stable" path="class/Guild?scrollTo=memberCount">`Guild#memberCount`</DocsLink> returns the member count as of ready
 - Fetching members times out
 
 `GUILD_PRESENCES`
@@ -54,7 +47,7 @@ Please make sure to provide the list of gateway intents and partials you use in 
 
 ## The Intents Bitfield
 
-Discord.js provides a utility structure <docs-link path="class/Intents">`Intents`</docs-link> which you can use to modify bitfields easily. The class also features static attributes for all (`Intents.ALL`), privileged (`Intents.PRIVILEGED`), and non-privileged (`Intents.NON_PRIVILEGED`) intents.
+Discord.js provides a utility structure <DocsLink path="class/Intents">`Intents`</DocsLink> which you can use to modify bitfields easily. The class also features static attributes for all (`Intents.ALL`), privileged (`Intents.PRIVILEGED`), and non-privileged (`Intents.NON_PRIVILEGED`) intents.
 
 These primarily serve as templates. While using them directly is possible, we strongly discourage you from using them that way. Instead, think about which events your bot strictly needs access to based on the functionality you want it to provide.
 
@@ -83,5 +76,3 @@ If you want to view the built flags you can utilize the `.toArray()`, `.serializ
 Discord Intents and Permissions are stored in a 53-bit integer and calculated using bitwise operations. If you want to dive deeper into what's happening behind the curtains, check the [Wikipedia](https://en.wikipedia.org/wiki/Bit_field) and [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) articles on the topic.
 
 In discord.js, Permissions and Intents bitfields are represented as either the decimal value of said bit field or its referenced flags. Every position in a permissions bitfield represents one of these flags and its state (either referenced `1` or not referenced `0`).
-
-</branch>

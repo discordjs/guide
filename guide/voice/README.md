@@ -1,14 +1,5 @@
 # Introduction
 
-<branch version="11.x">
-
-The discord.js voice system allows your bot to join voice channels and play audio. This guide will teach you how to make simple music bots and give you tips to optimize performance!
-
-This voice guide targets discord.js v12, which features an improved audio system. Much of the example code in the voice guide is unsuitable for v11 and below–to access this content, please update discord.js to v12! 
-
-</branch>
-<branch version="12.x">
-
 "Voice" refers to the ability of a bot to send audio in voice channels. discord.js makes it easy for you to get up and running with voice!
 
 ## Quick example
@@ -43,5 +34,3 @@ Outside a development environment, it is recommended for you to use `@discordjs/
 
 If you're struggling to install these dependencies, make sure you have build tools installed first. On Windows, this is as easy as running `npm install --global --production --vs2015 --add-python-to-path windows-build-tools`!
 :::
-
-</branch>
