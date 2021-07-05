@@ -112,7 +112,7 @@ export default {
 			text: 'Interactions',
 			children: [
 				'/interactions/registering-slash-commands.md',
-				'/interactions/replying-to-slash-commands,md',
+				'/interactions/replying-to-slash-commands.md',
 				'/interactions/slash-command-permissions.md',
 			],
 		},
