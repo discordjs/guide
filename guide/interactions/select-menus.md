@@ -28,7 +28,7 @@ client.on('interactionCreate', async interaction => {
 		const row = new MessageActionRow()
 			.addComponents(
 				new MessageSelectMenu()
-					.setCustomID('select')
+					.setCustomId('select')
 					.setPlaceholder('Nothing selected')
 					.addOptions([
 						{
@@ -50,7 +50,7 @@ client.on('interactionCreate', async interaction => {
 ```
 
 ::: tip
-The custom ID is a developer-defined string of up to 100 characters.
+The custom id is a developer-defined string of up to 100 characters.
 :::
 
 Restart your bot and then send the command to a channel your bot has access to. If all goes well, you should see something like this:
@@ -77,7 +77,7 @@ client.on('interactionCreate', async interaction => {
 		const row = new MessageActionRow()
 			.addComponents(
 				new MessageSelectMenu()
-					.setCustomID('select')
+					.setCustomId('select')
 					.setPlaceholder('Nothing selected')
 					.addOptions([
 						{
@@ -131,7 +131,7 @@ client.on('interactionCreate', async interaction => {
 
 	if (interaction.commandName === 'ping') {
 		const menu = new MessageSelectMenu()
-			.setCustomID('select')
+			.setCustomId('select')
 			.setPlaceholder('Nothing selected')
 			.addOptions([
 				{
@@ -183,11 +183,11 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-		const filter = i => i.customID === 'select' && i.user.id === '122157285790187530';
+		const filter = i => i.customId === 'select' && i.user.id === '122157285790187530';
 
 		const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
 
-		collector.on('collect', i => console.log(`Collected ${i.values.join(', ')} from ${i.customID}`));
+		collector.on('collect', i => console.log(`Collected ${i.values.join(', ')} from ${i.customId}`));
 		collector.on('end', collected => console.log(`Collected ${collected.size} items`));
 	}
 });
@@ -210,7 +210,7 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-		const filter = i => i.customID === 'select' && i.user.id === '122157285790187530';
+		const filter = i => i.customId === 'select' && i.user.id === '122157285790187530';
 
 		message.awaitMessageComponentInteraction({ filter, time: 15000 })
 			.then(i => console.log(`${i.values.join(', ')} was selected from ${i.customID}!`))
@@ -238,7 +238,7 @@ The `MessageComponentInteraction` class provides a method to update the message 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isSelectMenu()) return;
 
-	if (interaction.customID === 'select') {
+	if (interaction.customId === 'select') {
 		await interaction.update({ content: 'Something was selected!', components: [] });
 	}
 });
@@ -254,7 +254,7 @@ const wait = require('util').promisify(setTimeout);
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isSelectMenu()) return;
 
-	if (interaction.customID === 'select') {
+	if (interaction.customId === 'select') {
 		await interaction.deferUpdate();
 		await wait(4000);
 		await interaction.editReply({ content: 'Something was selected!', components: [] });
@@ -276,7 +276,7 @@ client.on('interactionCreate', async interaction => {
 		const row = new MessageActionRow()
 			.addComponents(
 				new MessageSelectMenu()
-					.setCustomID('select')
+					.setCustomId('select')
 					.setPlaceholder('Nothing selected')
 					.setMinValues(2)
 					.setMaxValues(3)

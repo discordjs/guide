@@ -284,7 +284,7 @@ client.on('interactionCreate', async interaction => {
 		const wait = require('util').promisify(setTimeout);
 
 		collector.on('collect', async i => {
-			if (i.customID === 'primary') {
+			if (i.customId === 'primary') {
 				await i.deferUpdate();
 				await wait(4000);
 				await i.editReply({ content: 'A button was clicked!', components: [] });
