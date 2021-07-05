@@ -52,7 +52,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 		Pong!
 		<template #actions>
 			<DiscordButtons>
-				<DiscordButton>Primary</DiscordButton>
+				<DiscordButton>primary</DiscordButton>
 			</DiscordButtons>
 		</template>
 	</DiscordMessage>
@@ -109,7 +109,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 		</template>
 		<template #actions>
 			<DiscordButtons>
-				<DiscordButton>Primary</DiscordButton>
+				<DiscordButton>primary</DiscordButton>
 			</DiscordButtons>
 		</template>
 	</DiscordMessage>
@@ -129,7 +129,7 @@ client.on('interactionCreate', async interaction => {
 			.setLabel('primary')
 			.setStyle('PRIMARY');
 
-		await interaction.reply({ content: 'Pong!', ephemeral: true, components: [[button]] });
+		await interaction.reply({ content: 'Pong!', components: [[button]] });
 	}
 });
 ```
@@ -209,11 +209,18 @@ You can create the collectors on either a `message` or a `channel`.
 
 Here's how you can create a basic event-based `MessageComponentCollector`:
 
-```js {5,7,9-10}
+```js {12,14,16-17}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
+		const button = new MessageButton()
+			.setCustomID('primary')
+			.setLabel('primary')
+			.setStyle('PRIMARY');
+
+		await interaction.reply({ content: 'Pong!', ephemeral: true, components: [[button]] });
+
 		const filter = i => i.customID === 'primary' && i.user.id === '122157285790187530';
 
 		const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
@@ -236,11 +243,18 @@ As with other types of collectors, you can also use a promise-based collector.
 Unlike other promise-based collectors, this one only collects a single item!
 :::
 
-```js {7-9}
+```js {14-16}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
+		const button = new MessageButton()
+			.setCustomID('primary')
+			.setLabel('primary')
+			.setStyle('PRIMARY');
+
+		await interaction.reply({ content: 'Pong!', ephemeral: true, components: [[button]] });
+
 		const filter = i => i.customID === 'primary' && i.user.id === '122157285790187530';
 
 		interaction.channel.awaitMessageComponent({ filter, time: 15000 })
@@ -264,15 +278,21 @@ The `MessageComponentInteraction` class provides the same methods as the `Comman
 
 The `MessageComponentInteraction` class provides a method to update the message the button is attached to, by using `MessageComponentInteraction#update()`. Passing an empty array to the `components` option will remove any buttons after one has been clicked.
 
-```js {11-13}
+```js {17-19}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-		const message = await interaction.fetchReply();
+		const button = new MessageButton()
+			.setCustomID('primary')
+			.setLabel('primary')
+			.setStyle('PRIMARY');
+
+		await interaction.reply({ content: 'Pong!', ephemeral: true, components: [[button]] });
+
 		const filter = i => i.customID === 'primary' && i.user.id === '122157285790187530';
 
-		const collector = message.createMessageComponentCollector({ filter, time: 15000 });
+		const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
 
 		collector.on('collect', async i => {
 			if (i.customID === 'primary') {
@@ -288,12 +308,18 @@ client.on('interactionCreate', async interaction => {
 
 Additionally to deferring the response of the interaction, you can defer the button, which will trigger a loading state and then revert back to its original state:
 
-```js {9,12-16}
+```js {15,18-22}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-		const message = await interaction.fetchReply();
+		const button = new MessageButton()
+			.setCustomID('primary')
+			.setLabel('primary')
+			.setStyle('PRIMARY');
+
+		await interaction.reply({ content: 'Pong!', ephemeral: true, components: [[button]] });
+
 		const filter = i => i.customID === 'primary' && i.user.id === '122157285790187530';
 
 		const collector = message.createMessageComponentCollector({ filter, time: 15000 });

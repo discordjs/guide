@@ -146,7 +146,7 @@ client.on('interactionCreate', async interaction => {
 				},
 			]);
 
-		await interaction.reply({ content: 'Pong!', ephemeral: true, embeds: [embed], components: [[menu]] });
+		await interaction.reply({ content: 'Pong!', components: [[menu]] });
 	}
 });
 ```
@@ -178,11 +178,29 @@ You can create the collectors on either a `message` or a `channel`.
 
 Here's how you can create a basic event-based `MessageComponentCollector`:
 
-```js {5,7,9-10}
+```js {23,25,27-28}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
+		const menu = new MessageSelectMenu()
+			.setCustomId('select')
+			.setPlaceholder('Nothing selected')
+			.addOptions([
+				{
+					label: 'Select me',
+					description: 'This is a description',
+					value: 'first_selection',
+				},
+				{
+					label: 'You can select me too',
+					description: 'This is also a description',
+					value: 'second_selection',
+				},
+			]);
+
+		await interaction.reply({ content: 'Pong!', components: [[menu]] });
+
 		const filter = i => i.customId === 'select' && i.user.id === '122157285790187530';
 
 		const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
@@ -205,11 +223,29 @@ As with other types of collectors, you can also use a promise-based collector.
 Unlike other promise-based collectors, this one only collects a single item!
 :::
 
-```js {7-9}
+```js {25-27}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
+		const menu = new MessageSelectMenu()
+			.setCustomId('select')
+			.setPlaceholder('Nothing selected')
+			.addOptions([
+				{
+					label: 'Select me',
+					description: 'This is a description',
+					value: 'first_selection',
+				},
+				{
+					label: 'You can select me too',
+					description: 'This is also a description',
+					value: 'second_selection',
+				},
+			]);
+
+		await interaction.reply({ content: 'Pong!', components: [[menu]] });
+
 		const filter = i => i.customId === 'select' && i.user.id === '122157285790187530';
 
 		message.awaitMessageComponentInteraction({ filter, time: 15000 })
