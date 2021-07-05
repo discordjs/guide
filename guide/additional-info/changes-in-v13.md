@@ -18,7 +18,7 @@ Discord.js now has support for Slash Commands!
 
 Refer to the [Slash Commands](/interactions/registering-slash-commands) section of this guide to get started.
 
-In addition to the `interaction` event covered in the above guide, this release also includes the new Client events `applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate`.
+In addition to the `interactionCreate` event covered in the above guide, this release also includes the new Client events `applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate`.
 
 ## Message Components
 
@@ -40,7 +40,7 @@ Refer to the [Threads](/popular-topics/threads) section of this guide to start u
 
 ## Voice
 
-Support for voice has been separated into a different module. You nown eeed to install and use [@discordjs/voice](https://github.com/discordjs/voice) for interacting with the Discord Voice API.
+Support for voice has been separated into its own module. You now need to install and use [@discordjs/voice](https://github.com/discordjs/voice) for interacting with the Discord Voice API.
 
 ## Customizable Manager Caches
 
@@ -98,7 +98,7 @@ Additionally, all messages sent by bots now support up to 10 embeds. As a result
 + channel.send({ embeds: [embed], files: ['./image1.png', './image2.jpg'] });
 ```
 
-The `code` and `split` options have also been removed. This functionality will now have to be handled manually, such as via the `Util.splitMessage` helper.
+The `code` and `split` options have also been removed. This functionality will now have to be handled manually, such as via the `Formatters.codeBlock` and `Util.splitMessage` helpers.
 
 ### Strings
 
@@ -106,7 +106,7 @@ Many methods in discord.js that were documented as accepting strings would accep
 
 Discord.js now enforces and validates string input on all methods that expect it. Users will need to manually call `toString()` or utilise template literals for all string inputs as appropriate.
 
-The most common areas you will encounter this change is `MessageOptions#content` and the properties of a `MessageEmbed`, or when passing objects such as users or roles directly, especting them to be stringified.
+The most common areas you will encounter this change in are `MessageOptions#content`, the properties of a `MessageEmbed`, and passing objects such as users or roles, expecting them to be stringified.
 
 ```diff
 - message.channel.send(user);
@@ -119,7 +119,7 @@ let count = 5;
 
 ### Intents
 
-As v13 makes the switch to Discord API v8, it will now be **required** to specify intents in your Client constructor. 
+As v13 makes the switch to Discord API v9, it will now be **required** to specify intents in your Client constructor. 
 
 They also move from `ClientOptions#ws#intents` to the top level `ClientOptions#intents`.
 
@@ -132,7 +132,7 @@ Refer to our more [detailed article about this topic](/popular-topics/intents).
 
 ### Structures#extend
 
-The concept of extendable Structures has been completely removed from Discord.js.
+The concept of extendable Structures has been completely removed from discord.js.
 
 For more information on why this decision was made and the recommended alternatives, refer to the [pull request](https://github.com/discordjs/discord.js/pull/6027).
 
@@ -147,11 +147,11 @@ All Collector related classes and methods (both create and await) now take a sin
 
 ### Naming conventions
 
-Some commonly used naming convention in Discord.js have been changed:
+Some commonly used naming conventions in discord.js have been changed:
 
 #### Thing#thingId
 
-The casing of `thingID` properties has changed to `thingId`. This is a more-correct casing for the camelCase used by Discord.js as `Id` is an abbreviation, not an acronym.
+The casing of `thingID` properties has changed to `thingId`. This is a more-correct casing for the camelCase used by discord.js as `Id` is an abbreviation, not an acronym.
 
 ```diff
 - console.log(guild.ownerID);
@@ -183,9 +183,9 @@ For TypeScript users, discord.js now enforces the `Snowflake` type, a stringifie
 
 ```diff
 interface Config {
-	prefix: string;
-- ownerId: string;
-+ ownerId: Snowflake;
+ 	prefix: string;
+-	ownerId: string;
++	ownerId: Snowflake;
 }
 ```
 
@@ -204,9 +204,9 @@ Refer to the [Discord API documentation](https://discord.com/developers/docs/res
 
 ### Replies / Message#reply
 
-`Message.reply()` will no longer result in the bot prepending a user mention to the content, replacing the behavior with Discord's reply feature.
+`Message#reply` will no longer result in the bot prepending a user mention to the content, replacing the behavior with Discord's reply feature.
 
-`MessageOptions.reply` no longer takes a user id. It has been replaced with a `ReplyOptions` type, expecting `MessageOptions.reply.messageReference` as a Message id.
+`MessageOptions#reply` no longer takes a user id. It has been replaced with a `ReplyOptions` type, expecting `MessageOptions#reply#messageReference` as a Message id.
 
 ```diff
 - channel.send('content', { reply: '123456789012345678' }); // User id
@@ -223,7 +223,7 @@ Note that this will disable all other mentions in this message. To enable other 
 
 ### Bitfields / Permissions
 
-Bitfields are now `BigInt`s instead of `Number`s. This can be handled using the `BigInt()` class, or the n-suffixed BigInt literal.
+Bitfields are now `BigInt`s instead of `Number`s. This can be handled using the `BigInt()` class, or the n-suffixed [BigInt literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt).
 
 ```diff
 - const p = new Permissions(104324673);
@@ -239,7 +239,7 @@ In additional, the usage of string literals for bitfield flags such as `Permissi
 
 ### DM Channels
 
-On Discord API v8, DM Channels do not emit the `CHANNEL_CREATE` event, which means Discord.js is unable to cache them automatically. In order for your bot to receive DMs the `CHANNEL` partial must be enabled.
+On Discord API v8 and later, DM Channels do not emit the `CHANNEL_CREATE` event, which means discord.js is unable to cache them automatically. In order for your bot to receive DMs the `CHANNEL` partial must be enabled.
 
 ### Webpack
 
@@ -249,7 +249,7 @@ Webpack builds are no longer supported.
 
 ### APIMessage
 
-The APIMessage class has been renamed to `MessagePayload`, resolving a naming clash with an interface in the `discord-api-types` library which raw message data objects.
+The `APIMessage` class has been renamed to `MessagePayload`, resolving a naming clash with an interface in the `discord-api-types` library which raw message data objects.
 
 ### Client
 
@@ -428,7 +428,7 @@ This method has been removed, with functionality replaced by the new `Permission
 
 ### GuildMember#hasPermission
 
-This `GuildMember#hasPermission` shortcut/helper method has been removed.
+The `GuildMember#hasPermission` shortcut/helper method has been removed.
 
 ```diff
 - member.hasPermission(Permissions.FLAGS.SEND_MESSAGES);
@@ -474,7 +474,7 @@ The `MessageManager.delete()` method no longer accepts any additional options, r
 
 #### MessageEmbed#attachFiles
 
-The `MessageEmbed#attachFiles` method has been removed. Instead, files should be attached to the Message directly via MessageOptions.
+The `MessageEmbed#attachFiles` method has been removed. Instead, files should be attached to the Message directly via `MessageOptions`.
 
 ```diff
 - channel.send({ embeds: [new MessageEmbed().setTitle("Files").attachFiles(file)] })
@@ -619,7 +619,7 @@ Provides API support for Slash Commands.
 
 ### ApplicationCommandManager
 
-Provides API supporting for creating, editing and deleting Slash Commands.
+Provides API support for creating, editing and deleting Slash Commands.
 
 ### ApplicationCommandPermissionsManager
 
@@ -641,7 +641,7 @@ Provides gateway support for a `MessageComponentInteraction` coming from a butto
 
 #### Channel#isText()
 
-Checks and typeguards if a channel is Text-Based ("dm", "text", "news").
+Checks and typeguards if a channel is Text-Based; one of `TextChannel`, `DMChannel`, `NewsChannel` or `ThreadChannel` 
 
 #### Channel#isThread()
 
@@ -661,7 +661,7 @@ Provides gateway support for Slash Command interactions. For more information re
 
 #### Guild#bans
 
-Provides access to the Guild's `GuildBanManager`
+Provides access to the Guild's `GuildBanManager`.
 
 #### Guild#create
 
@@ -693,7 +693,7 @@ Provides API support for the Guild's Widget, containing information about the gu
 
 Provides access to the new `GuildInviteManager`.
 
-#### Guild#nsfw
+#### Guild#nsfwLevel
 
 Guilds can now be marked as NSFW.
 
@@ -702,8 +702,8 @@ Guilds can now be marked as NSFW.
 The `Guild#owner` property has been removed as it was unreliable due to caching, replaced with `Guild#fetchOwner`.
 
 ```diff
-- console.log(Guild.owner);
-+ Guild.fetchOwner().then(console.log);
+- console.log(guild.owner);
++ guild.fetchOwner().then(console.log);
 ```
 
 #### Guild#premiumTier
@@ -844,7 +844,7 @@ Provides API support for bots to inviting users to Stage Instances.
 
 #### Message#awaitMessageComponent
 
-A shortcut method to create a promisified `InteractionCollector` which resolves to a single `MessageComponentInteraction`
+A shortcut method to create a promisified `InteractionCollector` which resolves to a single `MessageComponentInteraction`.
 
 #### Message#createMessageComponentCollector
 
@@ -1074,7 +1074,7 @@ Provides API support for a Guild's Welcome Screen.
 
 ### Widget
 
-Represent a Guild's Widget.
+Represents a Guild's Widget.
 
 ### WidgetMember
 
@@ -1088,7 +1088,7 @@ A number of new formatter functions are provided in the Util class, to easily ha
 
 #### Util#resolvePartialEmoji
 
-A helper method which attempts to resolve properties for a raw emoji object from input data, without the use of the Discord.js Client class or its EmojiManager.
+A helper method that attempts to resolve properties for a raw emoji object from input data, without the use of the discord.js Client class or its EmojiManager.
 
 #### Util#verifyString
 
