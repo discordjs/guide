@@ -67,7 +67,6 @@ export default {
 			text: 'Command Handler',
 			children: [
 				'/command-handling/',
-				'/command-handling/adding-features.md',
 			],
 		},
 		{
