@@ -104,6 +104,7 @@ export default {
 			title: 'Interactions',
 			children: [
 				'/interactions/buttons.md',
+				'/interactions/select-menus.md',
 			],
 		},
 		{
