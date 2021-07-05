@@ -193,7 +193,7 @@ interface Config {
 
 `clientOptions.disableMentions` has been removed and replaced with `clientOptions.allowedMentions`!
 
-The Discord API now allows bots much more granular control over mention parsing, down to the specific ID.
+The Discord API now allows bots much more granular control over mention parsing, down to the specific id.
 
 Refer to the [Discord API documentation](https://discord.com/developers/docs/resources/channel#allowed-mentions-object) for more information.
 
@@ -206,11 +206,11 @@ Refer to the [Discord API documentation](https://discord.com/developers/docs/res
 
 `Message.reply()` will no longer result in the bot prepending a user mention to the content, replacing the behavior with Discord's reply feature.
 
-`MessageOptions.reply` no longer takes a User ID. It has been replaced with a `ReplyOptions` type, expecting `MessageOptions.reply.messageReference` as a Message ID.
+`MessageOptions.reply` no longer takes a user id. It has been replaced with a `ReplyOptions` type, expecting `MessageOptions.reply.messageReference` as a Message id.
 
 ```diff
-- channel.send('content', { reply: '123456789012345678' }); // User ID
-+ channel.send({ content: 'content', reply: { messageReference: '765432109876543219' }}); // Message ID
+- channel.send('content', { reply: '123456789012345678' }); // User id
++ channel.send({ content: 'content', reply: { messageReference: '765432109876543219' }}); // Message id
 ```
 
 The new `MessageOptions.allowedMentions.repliedUser` boolean option determines if the reply will notify the author of the original message.
