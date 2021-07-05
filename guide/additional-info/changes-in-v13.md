@@ -36,7 +36,7 @@ This introduces the `ThreadManager` class, which can be found as `TextChannel#th
 
 There are also five new events; `threadCreate`, `threadDelete`, `threadListSync`, `threadMemberUpdate` and `threadMembersUpdate`.
 
-Refer to the [Threads (coming soon I hope)](/threads/) section of this guide to start using Threads.
+Refer to the [Threads](/popular-topics/threads) section of this guide to start using Threads.
 
 ## Voice
 
