@@ -10,6 +10,10 @@ html {
 	@include customScrollbar(false);
 }
 
+html, body, .theme-container .sidebar {
+	transition: none;
+}
+
 h2 {
 	padding-bottom: 0;
 	border-bottom: 0;
