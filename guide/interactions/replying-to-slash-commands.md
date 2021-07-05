@@ -9,7 +9,7 @@ You need to have at least one slash command set-up for your application to follo
 
 ## Receiving interactions
 
-Every slash command is an `interaction`, so to respond to a command you need to setup an event listener that will execute code when your application receives an interaction:
+Every slash command is an `interaction`, so to respond to a command you need to set up an event listener that will execute code when your application receives an interaction:
 
 ```js
 client.on('interactionCreate', interaction => {
@@ -20,7 +20,7 @@ client.on('interactionCreate', interaction => {
 You can easily adapt the command handler from earlier sections of the guide to work with interactions and thereby organize your commands properly!
 :::
 
-However, not every interaction is a slash command (e.g. `MessageComponent`'s). Let's make sure to only receive slash commands by making use of the `CommandInteraction#isCommand()` method:
+However, not every interaction is a slash command (e.g. `MessageComponent`'s). Make sure to only receive slash commands by making use of the `CommandInteraction#isCommand()` method:
 
 ```js {2}
 client.on('interactionCreate', interaction => {
@@ -48,22 +48,21 @@ client.on('interactionCreate', async interaction => {
 
 Restart your bot and then send the command to a channel your bot has access to. If all goes well, you should see something like this:
 
-<!--- vue-discord-message doesn't yet have support for inline replies/interactions/ephemeral messages -->
-<div is="discord-messages">
-	<discord-message profile="user">
-		/ping
-	</discord-message>
-	<discord-message profile="bot">
+<DiscordMessages>
+	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction profile="user" :command="true">ping</DiscordInteraction>
+		</template>
 		Pong!
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 You've successfully sent a response to a slash command! This is only the beginning, there's more to look out for so let's move on to further ways of replying to a command!
 
 
 ## Ephemeral responses
 
-You may not always want everyone who has access to the channel to see a slash command's response. Thankfully, Discord implemented a way to hide messages from everyone but the executor of the slash command. These type of messages are called `ephemeral` messages and can be set by using `ephemeral: true` in the `InteractionReplyOptions`, as follows:
+You may not always want everyone who has access to the channel to see a slash command's response. Thankfully, Discord implemented a way to hide messages from everyone but the executor of the slash command. This type of message is called `ephemeral` and can be set by using `ephemeral: true` in the `InteractionReplyOptions`, as follows:
 
 ```js {3}
 client.on('interactionCreate', async interaction => {
@@ -74,19 +73,20 @@ client.on('interactionCreate', async interaction => {
 
 Now when you run your command again, you should see something like this:
 
-<!--- vue-discord-message doesn't yet have support for inline replies/interactions/ephemeral messages -->
-<div is="discord-messages">
-	<discord-message profile="user">
-		/ping
-	</discord-message>
-	<discord-message profile="bot">
-		Pong! (ephemeral)
-	</discord-message>
-</div>
+<DiscordMessages>
+	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction
+				profile="user"
+				:command="true"
+				:ephemeral="true"
+			>ping</DiscordInteraction>
+		</template>
+		Pong!
+	</DiscordMessage>
+</DiscordMessages>
 
-That's it! You've successfully sent an ephemeral response to a slash command.
-We're not done yet, there's still more to cover, so let's move on to the next topic!
-
+That's it! You've successfully sent an ephemeral response to a slash command. There's still more to cover, so let's move on to the next topic!
 
 ## Editing responses
 
@@ -112,7 +112,6 @@ client.on('interactionCreate', async interaction => {
 
 Excellent, now you've successfully edited the response of a slash command!
 
-
 ## Deferred responses
 
 As previously mentioned, you have three seconds to respond to an interaction before its token becomes invalid. But what if you have a command that performs a task which takes longer than three seconds before being able to reply?
@@ -134,9 +133,9 @@ client.on('interactionCreate', async interaction => {
 });
 ```
 
-As you can see, you are now able to respond to your command even if you surpass the initial three second timeframe! When you have a command that performs longer tasks, be sure to call `defer()` as soon as possible.
+As you can see, you are now able to respond to your command even if you surpass the initial three-second timeframe! If you have a command that performs longer tasks, be sure to call `defer()` as soon as possible.
 
-But what if you want the deferred response to be ephemeral? Fear not, you can pass an `ephemeral` flag to the `defer()` method as outlined below making the deferred response ephemeral:
+But what if you want the deferred response to be ephemeral? Fear not, you can pass an `ephemeral` flag to the `defer()` method as outlined below, making the deferred response ephemeral:
 
 ```js {7}
 const wait = require('util').promisify(setTimeout);
@@ -153,7 +152,6 @@ client.on('interactionCreate', async interaction => {
 ```
 
 Perfect, now you know how to reply to a slash command when you have to perform time intensive tasks!
-
 
 ## Follow-ups
 
@@ -176,18 +174,20 @@ client.on('interactionCreate', async interaction => {
 
 If you run this code you should end up having something that looks like this:
 
-<!--- vue-discord-message doesn't yet have support for inline replies/interactions/ephemeral messages -->
-<div is="discord-messages">
-	<discord-message profile="user">
-		/ping
-	</discord-message>
-	<discord-message profile="bot">
+<DiscordMessages>
+	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction profile="user" :command="true">ping</DiscordInteraction>
+		</template>
 		Pong!
-	</discord-message>
-	<discord-message profile="bot">
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction profile="bot">Pong!</DiscordInteraction>
+		</template>
 		Pong again!
-	</discord-message>
-</div>
+	</DiscordMessage>
+</DiscordMessages>
 
 Now you may want to send an ephemeral follow-up, to do so, just repeat the procedure as follows and also pass in `ephemeral: true` to the `InteractionReplyOptions`:
 
@@ -204,26 +204,25 @@ client.on('interactionCreate', async interaction => {
 
 If you run this code you should end up having something that looks like this:
 
-<!--- vue-discord-message doesn't yet have support for inline replies/interactions/ephemeral messages -->
-<div is="discord-messages">
-	<discord-message profile="user">
-		/ping
-	</discord-message>
-	<discord-message profile="bot">
+<DiscordMessages>
+	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction profile="user" :command="true">ping</DiscordInteraction>
+		</template>
 		Pong!
-	</discord-message>
-	<discord-message profile="bot">
-		Pong again! (ephemeral)
-	</discord-message>
-</div>
+	</DiscordMessage>
+	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction profile="bot" :ephemeral="true">Pong!</DiscordInteraction>
+		</template>
+		Pong again!
+	</DiscordMessage>
+</DiscordMessages>
 
 That's all, now you know everything there is to know on how to reply to slash commands! 
 
 ::: tip
-Interaction responses run on top of webhooks thus, they inherit certain aspects from webhook messages:
-- they can contain up to 10 message embeds
-- they can use guild emojis globally
-- they can mask links in message content
+Interaction responses can use masked links and global emojis (they do not have to be in the guild the emoji is uploaded to) in the message content.
 :::
 
 ## Parsing options

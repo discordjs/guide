@@ -58,7 +58,7 @@ client.on('messageCreate', async message => {
 });
 ```
 
-Excellent! Now you've learned how to register guild specific application commands. We're not done yet, there's still a few more topics to cover, keep reading!
+Excellent! Now you've learned how to register guild-specific application commands. There are still a few more topics to cover, so keep reading!
 
 
 ## Bulk-update commands
@@ -93,10 +93,9 @@ client.on('messageCreate', async message => {
 
 Perfect! You have now learned how to bulk-update application commands. 
 
-
 ## Options
 
-Application commands can have `options`, think of these options like arguments to a function. You can specify them as seen below:
+Application commands can have `options`. Think of these options as arguments to a function. You can specify them as seen below:
 
 ```js {8-13}
 client.on('messageCreate', async message => {
@@ -126,7 +125,7 @@ Now you've learned how to create an application command with `options`. Keep rea
 
 ## Option types
 
-As you've seen in the example of the last section, we can specify the `type` of an `ApplicationCommandOption`. Listed below you'll find a list of all possible values you can pass as `ApplicationCommandOptionType`:
+As you've seen in the example of the last section, you can specify the `type` of an `ApplicationCommandOption`. Listed below you'll find a list of all possible values you can pass as `ApplicationCommandOptionType`:
 
 ::: tip
 For detailed explanations on the `SUB_COMMAND` and `SUB_COMMAND_GROUP` option types please see [this section](https://discord.com/developers/docs/interactions/slash-commands#subcommands-and-subcommand-groups) of the Discord API documentation.
