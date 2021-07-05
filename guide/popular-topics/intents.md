@@ -1,10 +1,6 @@
 # Gateway Intents
 
-::: warning
-Version 13 of Discord.js will require you to choose intents (as it uses a new version of Discord's API), it's worthwhile reading this section even if you don't currently want to update, so you know what to do later.
-:::
-
-Gateway Intents were introduced by Discord so bot developers can choose which events their bot receives based on which data it needs to function. Intents are named groups of pre-defined WebSocket events, which the Discord.js client will receive. If you omit `DIRECT_MESSAGE_TYPING`, for example, you will no longer receive typing events from direct messages. If you provide no intents, version 12 will receive all events for allowed intents, and version 13 will throw an error.
+Gateway Intents were introduced by Discord so bot developers can choose which events their bot receives based on which data it needs to function. Intents are named groups of pre-defined WebSocket events, which the Discord.js client will receive. If you omit `DIRECT_MESSAGE_TYPING`, for example, you will no longer receive typing events from direct messages. If you provide no intents, discord.js will throw an error.
 
 ## Privileged Intents
 
@@ -12,21 +8,9 @@ Discord defines some intents as "privileged" due to the data's sensitive nature.
 
 Before storming off and doing so, you should stop and carefully think about if you need these events. Discord made them opt-in so users across the platform can enjoy a higher level of [privacy](https://en.wikipedia.org/wiki/Privacy_by_design). Presences can expose quite a bit of personal information through games and online times, for example. You might find it sufficient for your bot to have a little less information about all guild members at all times, considering you still get the command author as GuildMember from the command execution message and can fetch targets separately.
 
-### Problems in version 12
-
-`GUILD_MEMBERS`
-- The client events `"guildMemberAdd"`, `"guildMemberRemove"`, `"guildMemberUpdate"` do not emit
-- <DocsLink branch="stable" path="class/Guild?scrollTo=memberCount">`Guild#memberCount`</DocsLink> returns the member count as of ready
-- Fetching members times out
-
-`GUILD_PRESENCES`
-- Member caches are empty *(or only have very few entries)*
-- User cache is empty *(or has only very few entries)*
-- All members appear to be offline
-
 ### Error: Disallowed Intents
 
-Should you receive an error prefixed with `[DISALLOWED_INTENTS]`, please review your developer dashboard settings for all privileged intents you use. This topic's official documentation is on the [Discord API documentation](https://discord.com/developers/docs/topics/gateway#privileged-intents).
+Should you receive an error prefixed with `[DISALLOWED_INTENTS]`, please review your developer dashboard settings for all privileged intents you use. Check on the [Discord API documentation](https://discord.com/developers/docs/topics/gateway#privileged-intents) for up to date information.
 
 ## Enabling Intents
 
@@ -36,7 +20,7 @@ All gateway intents, and the events belonging to each, are listed on the [Discor
 
 ```js
 const { Client } = require('discord.js');
-const client = new Client({ ws: { intents: ['GUILDS', 'GUILD_MESSAGES'] } });
+const client = new Client({ intents: ['GUILDS', 'GUILD_MESSAGES'] });
 ```
 
 ::: warning
@@ -47,29 +31,27 @@ Please make sure to provide the list of gateway intents and partials you use in 
 
 ## The Intents Bitfield
 
-Discord.js provides a utility structure <DocsLink path="class/Intents">`Intents`</DocsLink> which you can use to modify bitfields easily. The class also features static attributes for all (`Intents.ALL`), privileged (`Intents.PRIVILEGED`), and non-privileged (`Intents.NON_PRIVILEGED`) intents.
+Discord.js provides the utility structure <docs-link path="class/Intents">`Intents`</docs-link> to simplify the modification of intents bitfields.
 
-These primarily serve as templates. While using them directly is possible, we strongly discourage you from using them that way. Instead, think about which events your bot strictly needs access to based on the functionality you want it to provide.
-
-You can use the `.add()` and `.remove()` methods to add or remove flags (Intent string literals representing a certain bit) and modify the bitfield. You can provide single flags as well as an array or bitfield. To use a set of intents as a template you can pass it to the constructor. A few approaches are demonstrated below (note that the empty constructor `new Intents()` creates an empty Intents instance, representing no intents or the bitfield `0`):
+You can use the `.add()` and `.remove()` methods to add or remove flags (Intents string literals representing a certain bit) and modify the bitfield. You can provide single flags as well as an array or bitfield. To use a set of intents as a template you can pass it to the constructor. Note that the empty constructor `new Intents()` creates an empty Intents instance, representing no intents or the bitfield `0`:
 
 ```js
 const { Client, Intents } = require('discord.js');
 const myIntents = new Intents();
 myIntents.add('GUILD_PRESENCES', 'GUILD_MEMBERS');
 
-const client = new Client({ ws: { intents: myIntents } });
+const client = new Client({ intents: myIntents });
 
-// more examples about manipulating the bitfield
+// other examples:
 
-const otherIntents = new Intents(Intents.NON_PRIVILEGED);
+const otherIntents = new Intents(['GUILDS', 'GUILD_MESSAGES', 'DIRECT_MESSAGES']);
 otherIntents.remove(['DIRECT_MESSAGES', 'GUILD_MESSAGES']);
 
 const otherIntents2 = new Intents(32509);
 otherIntents2.remove(4096, 512);
 ```
 
-If you want to view the built flags you can utilize the `.toArray()`, `.serialize()` and `.missing()` methods. The first returns an array of flags represented in this bitfield, the second an object mapping all possible flag values to a boolean, based on their representation in this bitfield. The third method can view the flags not represented (you use it by passing a bitfield of specific intents to check for).
+If you want to view the built flags you can utilize the `.toArray()`, `.serialize()` methods. The first returns an array of flags represented in this bitfield, the second an object mapping all possible flag values to a boolean, based on their representation in this bitfield.
 
 ## More on Bitfields
 
