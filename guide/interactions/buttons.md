@@ -44,15 +44,19 @@ The custom ID is a developer-defined string of up to 100 characters.
 
 Restart your bot and then send the command to a channel your bot has access to. If all goes well, you should see something like this:
 
-<!--- vue-discord-message doesn't yet have support for inline replies/interactions/ephemeral messages/components -->
-<div is="discord-messages">
-	<discord-message profile="user">
-		/ping
-	</discord-message>
-	<discord-message profile="bot">
-		Pong! (+ components)
-	</discord-message>
-</div>
+<DiscordMessages>
+	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction profile="user" :command="true">ping</DiscordInteraction>
+		</template>
+		Pong!
+		<template #actions>
+			<DiscordButtons>
+				<DiscordButton>Primary</DiscordButton>
+			</DiscordButtons>
+		</template>
+	</DiscordMessage>
+</DiscordMessages>
 
 You can also send message components within an ephemeral response or alongside message embeds.
 
@@ -84,20 +88,32 @@ client.on('interactionCreate', async interaction => {
 
 Restart your bot and then send the command to a channel your bot has access to. If all goes well, you should see something like this:
 
-<!--- vue-discord-message doesn't yet have support for inline replies/interactions/ephemeral messages/components -->
-<div is="discord-messages">
-	<discord-message profile="bot">
-		Pong! (ephemeral + components)
-		<discord-embed
-			slot="embeds"
-			color="#0099ff"
-			title="Some title"
-			url="https://discord.js.org/"
-		>
-			Some description here
-		</discord-embed>
-	</discord-message>
-</div>
+<DiscordMessages>
+	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction
+				profile="user"
+				:command="true"
+				:ephemeral="true"
+			>ping</DiscordInteraction>
+		</template>
+		Pong!
+		<template #embeds>
+			<DiscordEmbed
+				border-color="#0099ff"
+				embed-title="Some title"
+				url="https://discord.js"
+			>
+				Some description here
+			</DiscordEmbed>
+		</template>
+		<template #actions>
+			<DiscordButtons>
+				<DiscordButton>Primary</DiscordButton>
+			</DiscordButtons>
+		</template>
+	</DiscordMessage>
+</DiscordMessages>
 
 Additionally, if you don't want to construct an `ActionRow` every time, you can also pass an array of arrays containing components like this:
 
