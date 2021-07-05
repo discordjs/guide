@@ -76,11 +76,11 @@ client.on('interactionCreate', async interaction => {
 
 The code above would result in this:
 
-<div is="discord-messages">
-	<discord-message profile="user">
-		/server
-	</discord-message>
-	<discord-message profile="bot">
+<DiscordMessages>
+	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction profile="user" :command="true">server</DiscordInteraction>
+		</template>
 		This server's name is: Discord Bot Guide
 	</DiscordMessage>
 </DiscordMessages>
@@ -103,11 +103,11 @@ client.on('interactionCreate', async interaction => {
 
 That would display both the server name _and_ the amount of members in it.
 
-<div is="discord-messages">
-	<discord-message profile="user">
-		/server
-	</discord-message>
-	<discord-message profile="bot">
+<DiscordMessages>
+	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction profile="user" :command="true">server</DiscordInteraction>
+		</template>
 		Server name: Discord Bot Guide<br>
 		Total members: 3
 	</DiscordMessage>
@@ -143,11 +143,11 @@ client.on('interactionCreate', async interaction => {
 
 This will display the command author's **username** (not nickname, if they have one set), as well as their user ID.
 
-<div is="discord-messages">
-	<discord-message profile="user">
-		/user-info
-	</discord-message>
-	<discord-message profile="bot">
+<DiscordMessages>
+	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction profile="user" :command="true">user-info</DiscordInteraction>
+		</template>
 		Your username: User <br>
 		Your ID: 20833034795932416
 	</DiscordMessage>
