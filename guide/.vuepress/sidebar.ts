@@ -101,7 +101,7 @@ export default {
 			],
 		},
 		{
-			title: 'Interactions',
+			text: 'Interactions',
 			children: [
 				'/interactions/buttons.md',
 				'/interactions/select-menus.md',
