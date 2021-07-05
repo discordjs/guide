@@ -183,7 +183,7 @@ For TypeScript users, discord.js now enforces the `Snowflake` type, a stringifie
 
 ```diff
 interface Config {
-  prefix: string;
+	prefix: string;
 - ownerId: string;
 + ownerId: Snowflake;
 }
@@ -530,8 +530,8 @@ The `ShardClientUtil#broadcastEval` method no longer accepts a string, instead e
 ```diff
 - client.shard.broadcastEval('this.guilds.cache.size')
 + client.shard.broadcastEval(client => client.guilds.cache.size)
-    .then(results => console.log(`${results.reduce((prev, val) => prev + val, 0)} total guilds`))
-    .catch(console.error);
+		.then(results => console.log(`${results.reduce((prev, val) => prev + val, 0)} total guilds`))
+		.catch(console.error);
 ```
 
 #### ShardClientUtil#respawnAll
