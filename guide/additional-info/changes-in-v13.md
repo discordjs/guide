@@ -338,6 +338,15 @@ Colors have been updated to align with the new Discord branding.
 
 ### Guild
 
+#### Guild#fetchInvites
+
+This method has been removed, with functionality replaced by the new `GuildInviteManager`.
+
+```diff
+- guild.fetchInvites();
++ guild.invites.fetch();
+```
+
 #### Guild#fetchVanityCode
 
 This `Guild#fetchVanityCode` method has been removed.
@@ -680,6 +689,10 @@ Provides API support for fetching the Guild's `WelcomeScreen`.
 
 Provides API support for the Guild's Widget, containing information about the guild and it's members.
 
+#### Guild#invites
+
+Provides access to the new `GuildInviteManager`.
+
 #### Guild#nsfw
 
 Guilds can now be marked as NSFW.
@@ -724,6 +737,12 @@ Now supports additional options:
 #### GuildChannelManager#fetch
 
 Now supports fetching the channels of a Guild.
+
+### GuildInviteManager
+
+Aligns support for creating and fetching invites with the managers design.
+
+Replaces `Guild#fetchInvites`.
 
 ### GuildManager
 
