@@ -64,11 +64,9 @@ Should you receive an error prefixed with `[DISALLOWED_INTENTS]`, please review 
 
 ## The Intents Bitfield
 
-Discord.js provides a utility structure <docs-link path="class/Intents">`Intents`</docs-link> which you can use to modify bitfields easily. The class also features static attributes for all (`Intents.ALL`), privileged (`Intents.PRIVILEGED`), and non-privileged (`Intents.NON_PRIVILEGED`) intents.
+Discord.js provides a utility structure <docs-link path="class/Intents">`Intents`</docs-link> which you can use to modify bitfields easily.
 
-These primarily serve as templates. While using them directly is possible, we strongly discourage you from doing so. Instead, think about which events your bot strictly needs access to based on the functionality you want it to provide.
-
-You can use the `.add()` and `.remove()` methods to add or remove flags (Intent string literals representing a certain bit) and modify the bitfield. You can provide single flags as well as an array or bitfield. To use a set of intents as a template you can pass it to the constructor. A few approaches are demonstrated below (note that the empty constructor `new Intents()` creates an empty Intents instance, representing no intents or the bitfield `0`):
+You can use the `.add()` and `.remove()` methods to add or remove flags (Intent string literals representing a certain bit) and modify the bitfield. You can provide single flags as well as an array or bitfield. To use a set of intents as a template you can pass it to the constructor. Note that the empty constructor `new Intents()` creates an empty Intents instance, representing no intents or the bitfield `0`:
 
 ```js
 const { Client, Intents } = require('discord.js');
@@ -77,9 +75,9 @@ myIntents.add('GUILD_PRESENCES', 'GUILD_MEMBERS');
 
 const client = new Client({ ws: { intents: myIntents } });
 
-// more examples about manipulating the bitfield
+// other examples:
 
-const otherIntents = new Intents(Intents.NON_PRIVILEGED);
+const otherIntents = new Intents(['GUILDS', 'GUILD_MESSAGES', 'DIRECT_MESSAGES']);
 otherIntents.remove(['DIRECT_MESSAGES', 'GUILD_MESSAGES']);
 
 const otherIntents2 = new Intents(32509);
