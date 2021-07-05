@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<style>
+		:root {
+			--c-bg: #fff;
+		}
+
+		html.dark {
+			--c-bg: #1d1d1d;
+		}
+
+		html, body {
+			background-color: var(--c-bg);
+		}
+	</style>
+	<script>
+		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			document.documentElement.classList.toggle('dark', true);
+		}
+	</script>
+</head>
+<body>
+	<div id="app"></div>
+</body>
+</html>

@@ -5,6 +5,8 @@ import sidebar from './sidebar';
 
 const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 	bundler: '@vuepress/vite',
+	templateDev: path.join(__dirname, 'templates', 'index.dev.html'),
+	templateSSR: path.join(__dirname, 'templates', 'index.ssr.html'),
 	lang: 'en-US',
 	title: 'Discord.js Guide',
 	description: 'Imagine a guide... that explores the many possibilies for your discord.js bot.',
