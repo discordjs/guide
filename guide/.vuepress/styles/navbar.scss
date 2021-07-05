@@ -46,6 +46,17 @@ html.guide-theme-blurple {
 			order: 1;
 			margin-right: auto;
 		}
+
+		// NOTE: Temporary tablet screen logo text bug fix
+		@media screen and (min-width: 719px) and (max-width: 950px) {
+			> a {
+				display: inline-block;
+				width: 8rem;
+				text-align: center;
+				line-height: 1.4rem;
+				box-sizing: border-box;
+			}
+		}
 	}
 
 	.toggle-sidebar-button {
