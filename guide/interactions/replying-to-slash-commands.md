@@ -16,9 +16,6 @@ client.on('interactionCreate', interaction => {
 	console.log(interaction);
 });
 ```
-::: tip
-You can easily adapt the command handler from earlier sections of the guide to work with interactions and thereby organize your commands properly!
-:::
 
 However, not every interaction is a slash command (e.g. `MessageComponent`'s). Make sure to only receive slash commands by making use of the `CommandInteraction#isCommand()` method:
 
