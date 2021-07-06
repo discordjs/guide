@@ -44,7 +44,7 @@ Support for voice has been separated into its own module. You now need to instal
 
 ## Customizable Manager Caches
 
-A popular request that has finally been heard, by 1Computer specifically. The `Client` class supports a new option, `makeCache` which accepts a `CacheFactory`.
+A popular request that has finally been heard - the `Client` class supports a new option, `makeCache` which accepts a `CacheFactory`.
 
 By combining this with the helper function `Options.cacheWithLimits` users can define custom caps on the caches of each Manager, and let discord.js handle the rest.
 
