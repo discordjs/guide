@@ -188,7 +188,6 @@ If you plan to attach the same image repeatedly, consider hosting it online and 
 
 ```js
 const file = new Discord.MessageAttachment('../assets/discordjs.png');
-
 const exampleEmbed = new Discord.MessageEmbed()
 	.setTitle('Some title')
 	.setImage('attachment://discordjs.png');
