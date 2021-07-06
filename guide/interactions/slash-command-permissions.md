@@ -3,12 +3,12 @@
 Slash commands have their own permissions system, which allows you to control who has access to use which commands. Unlike the slash commands permission setting within the Discord client, you can fine-tune access to commands without preventing the selected user or role from using all commands.
 
 ::: tip
-If you set `defaultPermission: false` when creating a command you can immediately disable it for everyone including guild administrators and yourself.
+If you set `defaultPermission: false` when creating a command, you can immediately disable it for everyone, including guild administrators and yourself.
 :::
 
 ## User permissions
 
-To begin, we'll fetch an `ApplicationCommand` and then set the permissions using the `ApplicationCommandPermissionsManager#add()` method:
+To begin, fetch an `ApplicationCommand` and then set the permissions using the `ApplicationCommandPermissionsManager#add()` method:
 
 ```js
 client.on('messageCreate', async message => {
@@ -30,108 +30,69 @@ client.on('messageCreate', async message => {
 });
 ```
 
-Now you have successfully denied the user who's `id` you used access to this application command.
+Now you have successfully denied the user whose `id` you used access to this application command.
 If you have a command that is disabled by default and you want to grant someone access to use it, do as follows:
 
-```js {11}
-client.on('messageCreate', async message => {
-	if (!client.application?.owner) await client.application?.fetch();
+<!-- eslint-skip -->
 
-	if (message.content.toLowerCase() === '!perms' && message.author.id === client.application?.owner.id) {
-		const command = await client.guilds.cache.get('123456789012345678')?.commands.fetch('876543210987654321');
+```js {5}
+const permissions = [
+	{
+		id: '224617799434108928',
+		type: 'USER',
+		permission: true,
+	},
+];
 
-		const permissions = [
-			{
-				id: '224617799434108928',
-				type: 'USER',
-				permission: true,
-			},
-		];
-
-		await command.setPermissions({ permissions });
-	}
-});
+await command.permissions.set({ permissions });
 ```
 
-And that's how you use slash command permissions to deny or allow access to a single user!
 
 ## Role permissions
 
-Now you may want to allow (or deny) multiple users the usage of a command. In this scenario you can apply a permission that is scoped to a role instead of a user:
+Permissions may also be denied (or allowed) at a role scope instead of a single user:
 
-```js {10,11}
-client.on('messageCreate', async message => {
-	if (!client.application?.owner) await client.application?.fetch();
+<!-- eslint-skip -->
 
-	if (message.content.toLowerCase() === '!perms' && message.author.id === client.application?.owner.id) {
-		const command = await client.guilds.cache.get('123456789012345678')?.commands.fetch('876543210987654321');
+```js {4-5}
+const permissions = [
+	{
+		id: '464464090157416448',
+		type: 'ROLE',
+		permission: false,
+	},
+];
 
-		const permissions = [
-			{
-				id: '464464090157416448',
-				type: 'ROLE',
-				permission: false,
-			},
-		];
-
-		await command.permissions.add({ permissions });
-	}
-});
-```
-
-With this, you have successfully denied an entire role access to this command. If you want to allow a certain role to access this command, you repeat this procedure while setting `permission: true` in the `ApplicationCommandPermissionData` as shown below:
-
-```js {11}
-client.on('messageCreate', async message => {
-	if (!client.application?.owner) await client.application?.fetch();
-
-	if (message.content.toLowerCase() === '!perms' && message.author.id === client.application?.owner.id) {
-		const command = await client.guilds.cache.get('123456789012345678')?.commands.fetch('876543210987654321');
-
-		const permissions = [
-			{
-				id: '464464090157416448',
-				type: 'ROLE',
-				permission: true,
-			},
-		];
-
-		await command.permissions.add({ permissions });
-	}
-});
+await command.permissions.add({ permissions });
 ```
 
 ## Bulk update permissions
 
-If you have a lot of commands, you likely want to update their permissions in one go instead of one-by-one, for this approach you can use `GuildApplicationCommandManager#setPermissions` as outlined below:
+If you have a lot of commands, you likely want to update their permissions in one go instead of one-by-one. For this approach, you can use `GuildApplicationCommandManager#setPermissions`:
 
-```js {5-22,24}
-client.on('messageCreate', async message => {
-	if (!client.application?.owner) await client.application?.fetch();
+<!-- eslint-skip -->
 
-	if (message.content.toLowerCase() === '!perms' && message.author.id === client.application?.owner.id) {
-		const fullPermissions = [
-			{
-				id: '123456789012345678',
-				permissions: [{
-					id: '224617799434108928',
-					type: 'USER',
-					permission: false,
-				}],
-			},
-			{
-				id: '876543210987654321',
-				permissions: [{
-					id: '464464090157416448',
-					type: 'ROLE',
-					permission: true,
-				}],
-			},
-		];
+```js
+const fullPermissions = [
+	{
+		id: '123456789012345678',
+		permissions: [{
+			id: '224617799434108928',
+			type: 'USER',
+			permission: false,
+		}],
+	},
+	{
+		id: '876543210987654321',
+		permissions: [{
+			id: '464464090157416448',
+			type: 'ROLE',
+			permission: true,
+		}],
+	},
+];
 
-		await client.guilds.cache.get('123456789012345678')?.commands.permissions.set({ fullPermissions });
-	}
-});
+await client.guilds.cache.get('123456789012345678')?.commands.permissions.set({ fullPermissions });
 ```
 
 And that's all you need to know on slash command permissions!
