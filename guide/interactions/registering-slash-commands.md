@@ -1,9 +1,9 @@
 # Registering slash commands
 
-Discord provides users with the option to create client-integrated slash commands. In this section, you'll be learning how to register these commands using discord.js!
+Discord provides developers with the option to create client-integrated slash commands. In this section, we'll cover how to register these commands using discord.js!
 
 ::: tip
-If you already have slash commands set-up for your application and want to learn to respond to them, refer to [the following page](/interactions/replying-to-slash-commands/).
+If you already have slash commands set-up for your application and want to learn how to respond to them, refer to [the following page](/interactions/replying-to-slash-commands/).
 :::
 
 ## Global commands
@@ -14,7 +14,7 @@ First up, we'll introduce you to global application commands. These types of com
 Global commands are cached for one hour. New global commands will fan out slowly across all guilds and will only be guaranteed to be updated after an hour. Guild commands update instantly. As such, we recommend you use guild-based commands during development and publish them to global commands when they're ready for public use.
 :::
 
-To register a global command you'll be passing an `ApplicationCommandData` object to the `ApplicationCommandManager#create()` method as follows:
+To register a global command, pass an `ApplicationCommandData` object to the `ApplicationCommandManager#create()` method:
 
 ```js
 client.on('messageCreate', async message => {
@@ -32,15 +32,15 @@ client.on('messageCreate', async message => {
 });
 ```
 ::: danger
-Command names must be lowercase. You will receive an API error if this is not the case.
+Command names must be lowercase. You will receive an API error otherwise.
 :::
 
-That's it! You've successfully created your first global application command! Let's move on to guild specific commands.
+That's it! You've successfully created your first global application command! Let's move on to guild commands.
 
 
 ## Guild commands
 
-Guild-specific application commands are only available in the guild they have been created in. You'll be using `GuildApplicationCommandManager#create()` to create them:
+Guild-specific application commands are only available in the guild they were created in. You can use `GuildApplicationCommandManager#create()` to create them:
 
 ```js {10}
 client.on('messageCreate', async message => {
@@ -58,18 +58,17 @@ client.on('messageCreate', async message => {
 });
 ```
 
-Excellent! Now you've learned how to register guild-specific application commands. There are still a few more topics to cover, so keep reading!
 
 
 ## Bulk-update commands
 
-If you, for example, deploy your application commands when starting your application, you may want to update all commands and their changes at once. You can do this by passing an array of `ApplicationCommandData` objects to the `set()` method on either of the managers you've been introduced to above: 
+If, for example, you deploy your application commands when starting your application, you may want to update all commands and their changes at once. You can do this by passing an array of `ApplicationCommandData` objects to the `set()` method on either of the managers introduced above: 
 
 ::: danger
-This will overwrite all existing commands on the application or guild with the new data you provided!
+This will overwrite all existing commands on the application or guild with the new data provided!
 :::
 
-```js {5-14,15-17}
+```js {5-14,16-17}
 client.on('messageCreate', async message => {
 	if (!client.application?.owner) await client.application?.fetch();
 
@@ -91,44 +90,33 @@ client.on('messageCreate', async message => {
 });
 ```
 
-Perfect! You have now learned how to bulk-update application commands. 
 
 ## Options
 
-Application commands can have `options`. Think of these options as arguments to a function. You can specify them as seen below:
+Application commands can have `options`. Think of these options as arguments to a function. You can specify them as shown below:
 
-```js {8-13}
-client.on('messageCreate', async message => {
-	if (!client.application?.owner) await client.application?.fetch();
-
-	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
-		const data = {
-			name: 'echo',
-			description: 'Replies with your input!',
-			options: [{
-				name: 'input',
-				type: 'STRING',
-				description: 'The input which should be echoed back',
-				required: true,
-			}],
-		};
-
-		const command = await client.application?.commands.create(data);
-		console.log(command);
-	}
-});
+```js {4-9}
+const data = {
+	name: 'echo',
+	description: 'Replies with your input!',
+	options: [{
+		name: 'input',
+		type: 'STRING',
+		description: 'The input to echo back',
+		required: true,
+	}],
+};
 ```
 
-Notice how we specified `required: true` within the options object? Doing this will make the option a required field and will prevent the user from sending the command without specifying a value for this option!
+Notice how `required: true` is specified within the options object. Setting this will prevent the user from sending the command without specifying a value for this option!
 
-Now you've learned how to create an application command with `options`. Keep reading, we have two more sections to cover!
 
 ## Option types
 
-As you've seen in the example of the last section, you can specify the `type` of an `ApplicationCommandOption`. Listed below you'll find a list of all possible values you can pass as `ApplicationCommandOptionType`:
+As shown in the options example above, you can specify the `type` of an `ApplicationCommandOption`. Listed below are all the possible values you can pass as `ApplicationCommandOptionType`:
 
 ::: tip
-For detailed explanations on the `SUB_COMMAND` and `SUB_COMMAND_GROUP` option types please see [this section](https://discord.com/developers/docs/interactions/slash-commands#subcommands-and-subcommand-groups) of the Discord API documentation.
+Refer to the Discord API documentation for detailed explanations on the [`SUB_COMMAND` and `SUB_COMMAND_GROUP` option types](https://discord.com/developers/docs/interactions/slash-commands#subcommands-and-subcommand-groups).
 :::
 
 * `SUB_COMMAND` sets the option to be a sub-command
@@ -144,46 +132,36 @@ For detailed explanations on the `SUB_COMMAND` and `SUB_COMMAND_GROUP` option ty
 
 ## Choices
 
-The `STRING` and `INTEGER` option types both can have `choices`. Now what are choices? Simply put, `choices` are a set of predetermined values that a user can pick from when selecting the option that contains them.
+The `STRING` and `INTEGER` option types both can have `choices`. `choices` are a set of predetermined values users can pick from when selecting the option that contains them.
 
 ::: warning
-If you specify `choices` for an option, they are the **only** valid values for a user to pick!
+If you specify `choices` for an option, they'll be the **only** valid values users can pick!
 :::
 
-To specify them you simply provide an array of `ApplicationCommandOptionChoice`'s to the option when creating a command:
+Specify them by providing an array of `ApplicationCommandOptionChoice`'s to the option when creating a command:
 
-```js {13-26}
-client.on('messageCreate', async message => {
-	if (!client.application?.owner) await client.application?.fetch();
-
-	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
-		const data = {
-			name: 'gif',
-			description: 'Sends a random gif!',
-			options: [{
-				name: 'category',
-				type: 'STRING',
-				description: 'The gif category',
-				required: true,
-				choices: [
-					{
-						name: 'Funny',
-						value: 'gif_funny',
-					},
-					{
-						name: 'Meme',
-						value: 'gif_meme',
-					},
-					{
-						name: 'Movie',
-						value: 'gif_movie',
-					},
-				],
-			}],
-		};
-
-		const command = await client.application?.commands.create(data);
-		console.log(command);
-	}
-});
-```
+```js {9-22}
+const data = {
+	name: 'gif',
+	description: 'Sends a random gif!',
+	options: [{
+		name: 'category',
+		type: 'STRING',
+		description: 'The gif category',
+		required: true,
+		choices: [
+			{
+				name: 'Funny',
+				value: 'gif_funny',
+			},
+			{
+				name: 'Meme',
+				value: 'gif_meme',
+			},
+			{
+				name: 'Movie',
+				value: 'gif_movie',
+			},
+		],
+	}],
+};
