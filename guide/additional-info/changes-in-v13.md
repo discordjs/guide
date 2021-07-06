@@ -338,6 +338,20 @@ Colors have been updated to align with the new Discord branding.
 
 ### Guild
 
+#### Guild#fetchBan
+
+#### Guild#fetchBans
+
+These methods have been removed, with functionality replaced by the new `GuildBanManager`.
+
+```diff
+- guild.fetchBan(user);
++ guild.bans.fetch(user);
+
+- guild.fetchBans();
++ guild.bans.fetch();
+```
+
 #### Guild#fetchInvites
 
 This method has been removed, with functionality replaced by the new `GuildInviteManager`.
