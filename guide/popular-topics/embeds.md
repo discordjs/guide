@@ -79,7 +79,7 @@ const exampleEmbed = new Discord.MessageEmbed()
 	.setTimestamp()
 	.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
 
-channel.send(exampleEmbed);
+channel.send({ embeds: [exampleEmbed] });
 ```
 
 ::: tip
@@ -88,7 +88,7 @@ You don't need to include all the elements showcased above. If you want a simple
 
 The `.setColor()` method accepts an integer, HEX color string, an array of RGB values or specific color strings. You can find a list of them at <DocsLink path="typedef/ColorResolvable">the discord.js documentation</DocsLink>.
 
-`.addBlankField()` was a convenience method to add a spacer to the embed. To add a blank field you can now use `.addField('\u200b', '\u200b')` instead.
+To add a blank field to the embed, you can use `.addField('\u200b', '\u200b')`.
 
 The above example chains the manipulating methods to the newly created MessageEmbed object.
 If you want to modify the embed based on conditions, you will need to reference it as the constant `exampleEmbed` (for our example).
@@ -102,29 +102,6 @@ if (message.author.bot) {
 	exampleEmbed.setColor('#7289da');
 }
 ```
-
-### Attaching images
-
-You can use the `.attachFiles()` method to upload images alongside your embed and use them as source for embed fields that support image urls. The method accepts the source file as file path <DocsLink path="typedef/FileOptions">FileOptions</DocsLink>, BufferResolvable (including a URL to an external image), or Attachment objects inside an array.
-
-You can then reference and use the images inside the embed itself with `attachment://fileName.extension`.
-
-::: tip
-If you plan to attach the same image repeatedly, consider hosting it online and providing the URL in the respective embed field instead. This also makes your bot respond faster since it doesn't need to upload the image with every response depending on it.
-:::
-
-```js
-const exampleEmbed = new Discord.MessageEmbed()
-	.setTitle('Some title')
-	.attachFiles(['../assets/discordjs.png'])
-	.setImage('attachment://discordjs.png');
-
-channel.send(exampleEmbed);
-```
-
-::: warning
-If the images don't display inside the embed but outside of it, double-check your syntax to make sure it's as shown above.
-:::
 
 ## Using an embed object
 
@@ -180,7 +157,7 @@ const exampleEmbed = {
 	},
 };
 
-channel.send({ embed: exampleEmbed });
+channel.send({ embeds: [exampleEmbed] });
 ```
 
 ::: tip
@@ -207,6 +184,20 @@ You can then reference and use the images inside the embed itself with `attachme
 If you plan to attach the same image repeatedly, consider hosting it online and providing the URL in the respective embed field instead. This also makes your bot respond faster since it doesn't need to upload the image with every response depending on it.
 :::
 
+#### Using the MessageEmbed builder
+
+```js
+const file = new Discord.MessageAttachment('../assets/discordjs.png');
+
+const exampleEmbed = new Discord.MessageEmbed()
+	.setTitle('Some title')
+	.setImage('attachment://discordjs.png');
+
+channel.send({ embeds: [exampleEmbed], files: [file] });
+```
+
+#### Using an embed object
+
 ```js
 const file = new Discord.MessageAttachment('../assets/discordjs.png');
 
@@ -217,7 +208,7 @@ const exampleEmbed = {
 	},
 };
 
-channel.send({ files: [file], embed: exampleEmbed });
+channel.send({ embeds: [exampleEmbed], files: [file] });
 ```
 
 ::: warning
@@ -240,7 +231,7 @@ We deliberately create a new Embed here instead of just modifying `message.embed
 const receivedEmbed = message.embeds[0];
 const exampleEmbed = new Discord.MessageEmbed(receivedEmbed).setTitle('New title');
 
-channel.send(exampleEmbed);
+channel.send({ embeds: [exampleEmbed] });
 ```
 
 ### Editing the embedded message content
@@ -252,7 +243,7 @@ const exampleEmbed = new Discord.MessageEmbed()
 	.setTitle('Some title')
 	.setDescription('Description after the edit');
 
-message.edit(exampleEmbed);
+message.edit({ embeds: [exampleEmbed] });
 ```
 
 If you want to build the new embed data on a previously sent embed template, make sure to read the caveats in the previous section. 
@@ -270,13 +261,12 @@ If you want to build the new embed data on a previously sent embed template, mak
 There are a few limits to be aware of while planning your embeds due to the API's limitations. Here is a quick reference you can come back to:
 
 - Embed titles are limited to 256 characters
-- Embed descriptions are limited to 2048 characters
+- Embed descriptions are limited to 4096 characters
 - There can be up to 25 fields
 - A field's name is limited to 256 characters and its value to 1024 characters
 - The footer text is limited to 2048 characters
 - The author name is limited to 256 characters
 - The sum of all characters from all embed structures in a message must not exceed 6000 characters
-- A bot can have one embed per message
-- A webhook can have ten embeds per message
+- Ten embeds can be sent per message
 
 Source: [Discord API documentation](https://discord.com/developers/docs/resources/channel#embed-limits)
