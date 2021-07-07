@@ -31,12 +31,12 @@ client.on('messageCreate', async message => {
 	}
 });
 ```
+
 ::: danger
 Command names must be lowercase. You will receive an API error otherwise.
 :::
 
 That's it! You've successfully created your first global application command! Let's move on to guild commands.
-
 
 ## Guild commands
 
@@ -57,8 +57,6 @@ client.on('messageCreate', async message => {
 	}
 });
 ```
-
-
 
 ## Bulk-update commands
 
@@ -90,7 +88,6 @@ client.on('messageCreate', async message => {
 });
 ```
 
-
 ## Options
 
 Application commands can have `options`. Think of these options as arguments to a function. You can specify them as shown below:
@@ -110,7 +107,6 @@ const data = {
 
 Notice how `required: true` is specified within the options object. Setting this will prevent the user from sending the command without specifying a value for this option!
 
-
 ## Option types
 
 As shown in the options example above, you can specify the `type` of an `ApplicationCommandOption`. Listed below are all the possible values you can pass as `ApplicationCommandOptionType`:
@@ -128,7 +124,6 @@ Refer to the Discord API documentation for detailed explanations on the [`SUB_CO
 * `CHANNEL` sets the option to require a channel or snowflake as value
 * `ROLE` sets the option to require a role or snowflake as value
 * `MENTIONABLE` sets the option to require a user, role or snowflake as value
-
 
 ## Choices
 
@@ -165,3 +160,4 @@ const data = {
 		],
 	}],
 };
+```

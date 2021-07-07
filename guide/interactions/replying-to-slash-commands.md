@@ -6,7 +6,6 @@ Discord provides developers the option to create client-integrated slash command
 You need at least one slash command registered on your application to continue with the instructions on this page. If you haven't done that yet, refer to [the previous page](/interactions/registering-slash-commands/).
 :::
 
-
 ## Receiving interactions
 
 Every slash command is an `interaction`, so to respond to a command, you need to set up an event listener that will execute code when your application receives an interaction:
@@ -26,7 +25,6 @@ client.on('interactionCreate', interaction => {
 });
 ```
 
-
 ## Responding to a command
 
 There are multiple ways of responding to a slash command, each of these are covered in the following segments.
@@ -36,10 +34,13 @@ The most common way of sending a response is by using the `CommandInteraction#re
 Initially an interaction token is only valid for three seconds, so that's the timeframe in which you are able to use the `CommandInteraction#reply()` method. Responses that require more time ("Deferred Responses") are explained later in this page.
 :::
 
-```js {1,3}
+```js {1,4-6}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
-	if (interaction.commandName === 'ping') await interaction.reply('Pong!');
+
+	if (interaction.commandName === 'ping') {
+		await interaction.reply('Pong!');
+	}
 });
 ```
 
@@ -61,10 +62,13 @@ You've successfully sent a response to a slash command! This is only the beginni
 
 You may not always want everyone who has access to the channel to see a slash command's response. Thankfully, Discord implemented a way to hide messages from everyone but the executor of the slash command. This type of message is called `ephemeral` and can be set by using `ephemeral: true` in the `InteractionReplyOptions`, as follows:
 
-```js {3}
+```js {5}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
-	if (interaction.commandName === 'ping') await interaction.reply({ content: 'Pong!', ephemeral: true });
+
+	if (interaction.commandName === 'ping') {
+		await interaction.reply({ content: 'Pong!', ephemeral: true });
+	}
 });
 ```
 
@@ -82,7 +86,6 @@ Now when you run your command again, you should see something like this:
 		Pong!
 	</DiscordMessage>
 </DiscordMessages>
-
 
 ## Editing responses
 
@@ -105,7 +108,6 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 ```
-
 
 ## Deferred responses
 
@@ -137,7 +139,6 @@ You can also pass an `ephemeral` flag to the `InteractionDeferOptions`:
 ```js
 await interaction.defer({ ephemeral: true });
 ```
-
 
 ## Follow-ups
 
@@ -182,7 +183,6 @@ You can also pass an `ephemeral` flag to the `InteractionReplyOptions`:
 ```js
 await interaction.followUp({ content: 'Pong again!', ephemeral: true });
 ```
-
 
 <DiscordMessages>
 	<DiscordMessage profile="bot">
