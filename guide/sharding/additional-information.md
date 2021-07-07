@@ -40,7 +40,7 @@ In discord.js v12, <DocsLink path="class/ShardClientUtil?scrollTo=ids">`client.s
 :::
 
 ```js
-client.shard.broadcastEval((client) => {
+client.shard.broadcastEval(client => {
 	if (this.shard.ids.includes(0)) process.exit();
 });
 ```
@@ -84,7 +84,7 @@ function funcName(client, { arg }) {
 	// ...
 }
 
-client.shard.broadcastEval(funcName, { context: { arg: arg } });
+client.shard.broadcastEval(funcName, { context: { arg: 'arg' } });
 ```
 
 In this small snippet, an argument is passed to the `funcName` function through the `context` option of the <DocsLink path="typedef/BroadcastEvalOptions">`BroadcastEvalOptions`</DocsLink>.
@@ -101,7 +101,7 @@ There may be a time when you want to have your shard process an asynchronous fun
 
 ```js
 client.shard.broadcastEval(() => {
-	let channel = this.channels.cache.get('id');
+	const channel = this.channels.cache.get('id');
 	let msg;
 	if (channel) {
 		msg = channel.messages.fetch('id').then(m => m.id);
@@ -114,8 +114,8 @@ This snippet allows you to return fetched messages outside of the `broadcastEval
 
 ```js
 client.shard.broadcastEval(
-	async (client) => {
-		let channel = this.channels.cache.get('id');
+	async client => {
+		const channel = this.channels.cache.get('id');
 		let msg;
 		if (channel) {
 			msg = await channel.messages.fetch('id').then(m => m.id);
