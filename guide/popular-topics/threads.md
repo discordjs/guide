@@ -36,6 +36,8 @@ console.log(`Created thread: ${thread.name}`);
 
 To delete a thread, use the `ThreadChannel#delete()` method:
 
+<!-- eslint-skip -->
+
 ```js
 const thread = message.channel.threads.cache.find(x => x.name === 'food-talk');
 await thread.delete();
