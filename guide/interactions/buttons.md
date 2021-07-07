@@ -26,7 +26,7 @@ client.on('interactionCreate', async interaction => {
 		const row = new MessageActionRow()
 			.addComponents(
 				new MessageButton()
-					.setCustomID('primary')
+					.setCustomId('primary')
 					.setLabel('Primary')
 					.setStyle('PRIMARY'),
 			);
@@ -114,7 +114,7 @@ Additionally, if you don't want to construct an `ActionRow` every time, you can 
 
 ```js
 const button = new MessageButton()
-	.setCustomID('primary')
+	.setCustomId('primary')
 	.setLabel('Primary')
 	.setStyle('PRIMARY');
 
@@ -127,7 +127,7 @@ If you want to prevent a button from being used, but not remove it from the mess
 
 ```js {5}
 const button = new MessageButton()
-	.setCustomID('primary')
+	.setCustomId('primary')
 	.setLabel('Primary')
 	.setStyle('PRIMARY')
 	.setDisabled(true);
@@ -153,7 +153,7 @@ If you want to use a guild emoji within a `MessageButton`, you can use the `setE
 
 ```js {5}
 const button = new MessageButton()
-	.setCustomID('primary')
+	.setCustomId('primary')
 	.setLabel('Primary')
 	.setStyle('PRIMARY')
 	.setEmoji('123456789012345678');
@@ -190,17 +190,17 @@ client.on('interactionCreate', async interaction => {
 
 	if (interaction.commandName === 'ping') {
 		const button = new MessageButton()
-			.setCustomID('primary')
+			.setCustomId('primary')
 			.setLabel('Primary')
 			.setStyle('PRIMARY');
 
 		await interaction.reply({ content: 'Pong!', ephemeral: true, components: [[button]] });
 
-		const filter = i => i.customID === 'primary' && i.user.id === '122157285790187530';
+		const filter = i => i.customId === 'primary' && i.user.id === '122157285790187530';
 
 		const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
 
-		collector.on('collect', i => console.log(`Collected ${i.customID}`));
+		collector.on('collect', i => console.log(`Collected ${i.customId}`));
 		collector.on('end', collected => console.log(`Collected ${collected.size} items`));
 	}
 });
@@ -219,10 +219,10 @@ Unlike other promise-based collectors, this one only collects a single item!
 :::
 
 ```js {3-5}
-const filter = i => i.customID === 'primary' && i.user.id === '122157285790187530';
+const filter = i => i.customId === 'primary' && i.user.id === '122157285790187530';
 
 interaction.channel.awaitMessageComponent({ filter, time: 15000 })
-	.then(i => console.log(`${i.customID} was clicked!`))
+	.then(i => console.log(`${i.customId} was clicked!`))
 	.catch(console.error);
 ```
 
@@ -243,12 +243,12 @@ The `MessageComponentInteraction` class provides an `update()` method to update 
 <!-- eslint-skip -->
 
 ```js {6-8}
-const filter = i => i.customID === 'primary' && i.user.id === '122157285790187530';
+const filter = i => i.customId === 'primary' && i.user.id === '122157285790187530';
 
 const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
 
 collector.on('collect', async i => {
-	if (i.customID === 'primary') {
+	if (i.customId === 'primary') {
 		await i.update({ content: 'A button was clicked!', components: [] });
 	}
 });

@@ -213,7 +213,7 @@ Unlike other promise-based collectors, this one only collects a single item!
 const filter = i => i.customId === 'select' && i.user.id === '122157285790187530';
 
 message.awaitMessageComponentInteraction({ filter, time: 15000 })
-	.then(i => console.log(`${i.values.join(', ')} was selected from ${i.customID}!`))
+	.then(i => console.log(`${i.values.join(', ')} was selected from ${i.customId}!`))
 	.catch(console.error);
 ```
 
