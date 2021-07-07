@@ -1,9 +1,9 @@
 # Select menus
 
-With the components API, you can create interactive message components. In this page, we'll be focusing on how to send, receive, and respond to select menus using discord.js!
+With the components API, you can create interactive message components. In this page, we'll cover how to send, receive, and respond to select menus using discord.js!
 
 ::: tip
-This page is a follow-up to the [CommandInteraction guide pages](/interactions/registering-slash-commands/). Please carefully read those first so that you can understand the methods used in this section.
+This page is a follow-up to the [interactions (slash commands) pages](/interactions/registering-slash-commands.md). Please carefully read those first so that you can understand the methods used in this section.
 :::
 
 ## Building and sending select menus
@@ -11,12 +11,10 @@ This page is a follow-up to the [CommandInteraction guide pages](/interactions/r
 Select menus are part of the `MessageComponent` class, which can be sent via messages or interaction responses. A select menu, as any other message component, must be in an `ActionRow`.
 
 ::: warning
-You can have a maximum of:
-- five `ActionRows` per message
-- one select menu within an `ActionRow`
+You can have a maximum of five `ActionRow`s per message, and one select menu within an `ActionRow`.
 :::
 
-To create a select menu, use the `MessageActionRow()` and `MessageSelector()` builder functions and then pass the resulting object to `CommandInteraction#reply()` as `InteractionReplyOptions`, like so:
+To create a select menu, use the `MessageActionRow()` and `MessageSelectMenu()` builder functions and then pass the resulting object to `CommandInteraction#reply()` as `InteractionReplyOptions`:
 
 ```js {1,7-24,26}
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
@@ -56,19 +54,19 @@ The custom id is a developer-defined string of up to 100 characters.
 Restart your bot and then send the command to a channel your bot has access to. If all goes well, you should see something like this:
 
 <!--- vue-discord-message doesn't yet have support for inline replies/interactions/ephemeral messages/components -->
-<div is="discord-messages">
-	<discord-message profile="user">
-		/ping
-	</discord-message>
-	<discord-message profile="bot">
-		Pong! (+ components)
-	</discord-message>
-</div>
+<DiscordMessages>
+	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction profile="user" :command="true">ping</DiscordInteraction>
+		</template>
+		Pong!
+	</DiscordMessage>
+</DiscordMessages>
 
 You can also send message components within an ephemeral response or alongside message embeds.
 
-```js {1,26-30,32}
-const { MessageActionRow, MessageSelectMenu, MessageEmbed } = require('discord.js');
+```js {1,12-16,18}
+const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
@@ -76,21 +74,7 @@ client.on('interactionCreate', async interaction => {
 	if (interaction.commandName === 'ping') {
 		const row = new MessageActionRow()
 			.addComponents(
-				new MessageSelectMenu()
-					.setCustomId('select')
-					.setPlaceholder('Nothing selected')
-					.addOptions([
-						{
-							label: 'Select me',
-							description: 'This is a description',
-							value: 'first_option',
-						},
-						{
-							label: 'You can select me too',
-							description: 'This is also a description',
-							value: 'second_option',
-						},
-					]),
+				// ...
 			);
 
 		const embed = new MessageEmbed()
@@ -107,48 +91,50 @@ client.on('interactionCreate', async interaction => {
 Restart your bot and then send the command to a channel your bot has access to. If all goes well, you should see something like this:
 
 <!--- vue-discord-message doesn't yet have support for inline replies/interactions/ephemeral messages/components -->
-<div is="discord-messages">
-	<discord-message profile="bot">
-		Pong! (ephemeral + components)
-		<discord-embed
-			slot="embeds"
-			color="#0099ff"
-			title="Some title"
-			url="https://discord.js.org/"
-		>
-			Some description here
-		</discord-embed>
-	</discord-message>
-</div>
+<DiscordMessages>
+	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction
+				profile="user"
+				:command="true"
+				:ephemeral="true"
+			>ping</DiscordInteraction>
+		</template>
+		Pong! (+ components)
+		<template #embeds>
+			<DiscordEmbed
+				border-color="#0099ff"
+				embed-title="Some title"
+				url="https://discord.js.org"
+			>
+				Some description here
+			</DiscordEmbed>
+		</template>
+	</DiscordMessage>
+</DiscordMessages>
 
-Additionally, if you don't want to construct an `ActionRow` every time, you can also pass an array of arrays containing components like this:
+Additionally, if you don't want to construct an `ActionRow` every time, you can also pass an array of arrays containing components:
 
-```js {7-21,23}
-const { MessageActionRow, MessageSelectMenu, MessageEmbed } = require('discord.js');
+<!-- eslint-skip -->
 
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+```js
+const menu = new MessageSelectMenu()
+	.setCustomId('select')
+	.setPlaceholder('Nothing selected')
+	.addOptions([
+		{
+			label: 'Select me',
+			description: 'This is a description',
+			value: 'first_option',
+		},
+		{
+			label: 'You can select me too',
+			description: 'This is also a description',
+			value: 'second_option',
+		},
+	]);
 
-	if (interaction.commandName === 'ping') {
-		const menu = new MessageSelectMenu()
-			.setCustomId('select')
-			.setPlaceholder('Nothing selected')
-			.addOptions([
-				{
-					label: 'Select me',
-					description: 'This is a description',
-					value: 'first_selection',
-				},
-				{
-					label: 'You can select me too',
-					description: 'This is also a description',
-					value: 'second_selection',
-				},
-			]);
-
-		await interaction.reply({ content: 'Pong!', components: [[menu]] });
-	}
-});
+await interaction.reply({ content: 'Pong!', components: [[menu]] });
 ```
 
 Now you know all there is to building and sending a `SelectMenu`! Let's move on to how to receive selected options!
@@ -157,7 +143,7 @@ Now you know all there is to building and sending a `SelectMenu`! Let's move on 
 
 ## Receiving Select menus
 
-To receive a `SelectMenuInteractionInteraction`, simply attach an event listener to your client and also use the `Interaction#isSelectMenu()` typeguard to make sure you only receive select menus:
+To receive a `SelectMenuInteraction`, attach an event listener to your client and use the `Interaction#isSelectMenu()` type guard to make sure you only receive select menus:
 
 ```js {2}
 client.on('interactionCreate', interaction => {
@@ -190,12 +176,12 @@ client.on('interactionCreate', async interaction => {
 				{
 					label: 'Select me',
 					description: 'This is a description',
-					value: 'first_selection',
+					value: 'first_option',
 				},
 				{
 					label: 'You can select me too',
 					description: 'This is also a description',
-					value: 'second_selection',
+					value: 'second_option',
 				},
 			]);
 
@@ -212,7 +198,7 @@ client.on('interactionCreate', async interaction => {
 ```
 
 ::: danger
-For ephemeral responses you cannot fetch a message object, so create the collector on a channel instead.
+For ephemeral responses, you cannot fetch a message object, so create the collector on a channel instead.
 :::
 
 ### awaitMessageComponent
@@ -223,36 +209,12 @@ As with other types of collectors, you can also use a promise-based collector.
 Unlike other promise-based collectors, this one only collects a single item!
 :::
 
-```js {25-27}
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+```js {3-5}
+const filter = i => i.customId === 'select' && i.user.id === '122157285790187530';
 
-	if (interaction.commandName === 'ping') {
-		const menu = new MessageSelectMenu()
-			.setCustomId('select')
-			.setPlaceholder('Nothing selected')
-			.addOptions([
-				{
-					label: 'Select me',
-					description: 'This is a description',
-					value: 'first_selection',
-				},
-				{
-					label: 'You can select me too',
-					description: 'This is also a description',
-					value: 'second_selection',
-				},
-			]);
-
-		await interaction.reply({ content: 'Pong!', components: [[menu]] });
-
-		const filter = i => i.customId === 'select' && i.user.id === '122157285790187530';
-
-		message.awaitMessageComponentInteraction({ filter, time: 15000 })
-			.then(i => console.log(`${i.values.join(', ')} was selected from ${i.customID}!`))
-			.catch(console.error);
-	}
-});
+message.awaitMessageComponentInteraction({ filter, time: 15000 })
+	.then(i => console.log(`${i.values.join(', ')} was selected from ${i.customID}!`))
+	.catch(console.error);
 ```
 
 
@@ -268,7 +230,7 @@ The `MessageComponentInteraction` class provides the same methods as the `Comman
 
 ### Updating the select menu's message
 
-The `MessageComponentInteraction` class provides a method to update the message the button is attached to, by using `MessageComponentInteraction#update()`. Passing an empty array to the `components` option will remove any menus after an option has been selected.
+The `MessageComponentInteraction` class provides an `update()` method to update the message the button is attached to. Passing an empty array to the `components` option will remove any menus after an option has been selected.
 
 ```js {1,4-6}
 client.on('interactionCreate', async interaction => {

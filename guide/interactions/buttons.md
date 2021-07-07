@@ -1,9 +1,9 @@
 # Buttons
 
-With the components API, you can create interactive message components. On this page, you will learn how to send, receive, and respond to buttons using discord.js!
+With the components API, you can create interactive message components. On this page, we'll cover how to send, receive, and respond to buttons using discord.js!
 
 ::: tip
-This page is a follow-up to the [CommandInteraction guide pages](/interactions/registering-slash-commands/). Please carefully read those first so that you can understand the methods used in this section.
+This page is a follow-up to the [interactions (slash commands) pages](/interactions/registering-slash-commands.md). Please carefully read those first so that you can understand the methods used in this section.
 :::
 
 ## Building and sending buttons
@@ -11,12 +11,10 @@ This page is a follow-up to the [CommandInteraction guide pages](/interactions/r
 Buttons are part of the `MessageComponent` class, which can be sent via messages or interaction responses. A button, as any other message component, must be in an `ActionRow`.
 
 ::: warning
-You can have a maximum of:
-- five `ActionRows` per message
-- five buttons within an `ActionRow`
+You can have a maximum of five `ActionRow`s per message, and five buttons within an `ActionRow`.
 :::
 
-To create a button, you use the `MessageActionRow()` and `MessageButton()` builder functions and then pass the resulting object to `CommandInteraction#reply()` as `InteractionReplyOptions`, like so:
+To create a button, use the `MessageActionRow()` and `MessageButton()` builder functions and then pass the resulting object to `CommandInteraction#reply()` as `InteractionReplyOptions`:
 
 ```js {1,7-13,15}
 const { MessageActionRow, MessageButton } = require('discord.js');
@@ -29,7 +27,7 @@ client.on('interactionCreate', async interaction => {
 			.addComponents(
 				new MessageButton()
 					.setCustomID('primary')
-					.setLabel('primary')
+					.setLabel('Primary')
 					.setStyle('PRIMARY'),
 			);
 
@@ -52,7 +50,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 		Pong!
 		<template #actions>
 			<DiscordButtons>
-				<DiscordButton>primary</DiscordButton>
+				<DiscordButton>Primary</DiscordButton>
 			</DiscordButtons>
 		</template>
 	</DiscordMessage>
@@ -60,7 +58,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 
 You can also send message components within an ephemeral response or alongside message embeds.
 
-```js {1,15-19,21}
+```js {1,12-16,18}
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 
 client.on('interactionCreate', async interaction => {
@@ -69,10 +67,7 @@ client.on('interactionCreate', async interaction => {
 	if (interaction.commandName === 'ping') {
 		const row = new MessageActionRow()
 			.addComponents(
-				new MessageButton()
-					.setCustomID('primary')
-					.setLabel('primary')
-					.setStyle('PRIMARY'),
+				// ...
 			);
 
 		const embed = new MessageEmbed()
@@ -85,8 +80,6 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 ```
-
-Restart your bot and then send the command to a channel your bot has access to. If all goes well, you should see something like this:
 
 <DiscordMessages>
 	<DiscordMessage profile="bot">
@@ -109,7 +102,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 		</template>
 		<template #actions>
 			<DiscordButtons>
-				<DiscordButton>primary</DiscordButton>
+				<DiscordButton>Primary</DiscordButton>
 			</DiscordButtons>
 		</template>
 	</DiscordMessage>
@@ -117,78 +110,60 @@ Restart your bot and then send the command to a channel your bot has access to. 
 
 Additionally, if you don't want to construct an `ActionRow` every time, you can also pass an array of arrays containing components like this:
 
-```js {7-10,12}
-const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
+<!-- eslint-skip -->
 
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+```js
+const button = new MessageButton()
+	.setCustomID('primary')
+	.setLabel('Primary')
+	.setStyle('PRIMARY');
 
-	if (interaction.commandName === 'ping') {
-		const button = new MessageButton()
-			.setCustomID('primary')
-			.setLabel('primary')
-			.setStyle('PRIMARY');
-
-		await interaction.reply({ content: 'Pong!', components: [[button]] });
-	}
-});
+await interaction.reply({ content: 'Pong!', components: [[button]] });
 ```
 
 ### Disabled buttons
 
-If you want to prevent a button from being used, but not remove it from the message, you can make use of the `setDisabled()` method, which will make it unclickable for everyone:
+If you want to prevent a button from being used, but not remove it from the message, you can disable it with the `setDisabled()` method:
 
-```js {13}
-const { MessageActionRow, MessageButton } = require('discord.js');
-
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
-
-	if (interaction.commandName === 'ping') {
-		const row = new MessageActionRow()
-			.addComponents(
-				new MessageButton()
-					.setCustomID('primary')
-					.setLabel('primary')
-					.setStyle('PRIMARY')
-					.setDisabled(true),
-			);
-
-		await interaction.reply({ content: 'Pong!', components: [row] });
-	}
-});
+```js {5}
+const button = new MessageButton()
+	.setCustomID('primary')
+	.setLabel('Primary')
+	.setStyle('PRIMARY')
+	.setDisabled(true);
 ```
+
+<DiscordMessages>
+	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction profile="user" :command="true">ping</DiscordInteraction>
+		</template>
+		Pong!
+		<template #actions>
+			<DiscordButtons>
+				<DiscordButton :disabled="true">Primary</DiscordButton>
+			</DiscordButtons>
+		</template>
+	</DiscordMessage>
+</DiscordMessages>
 
 ### Emoji buttons
 
-If you want to use a guild emoji within a `MessageButton` you can do so using the `setEmoji()` method like this:
+If you want to use a guild emoji within a `MessageButton`, you can use the `setEmoji()` method:
 
-```js {13}
-const { MessageActionRow, MessageButton } = require('discord.js');
-
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
-
-	if (interaction.commandName === 'ping') {
-		const row = new MessageActionRow()
-			.addComponents(
-				new MessageButton()
-					.setCustomID('primary')
-					.setLabel('primary')
-					.setStyle('PRIMARY')
-					.setEmoji('123456789012345678'),
-			);
-
-		await interaction.reply({ content: 'Pong!', components: [row] });
-	}
-});
+```js {5}
+const button = new MessageButton()
+	.setCustomID('primary')
+	.setLabel('Primary')
+	.setStyle('PRIMARY')
+	.setEmoji('123456789012345678');
 ```
 
 Now you know all there is to building and sending a `MessageButton`! Let's move on to receiving button interactions!
 
 ## Receiving buttons
 
-To receive a `ButtonInteraction`, attach an event listener to your client and use the `Interaction#isButton()` type guard to make sure you only receive buttons.
+To receive a `ButtonInteraction`, attach an event listener to your client and use the `Interaction#isButton()` type guard to make sure you only receive buttons:
 
 ```js {2}
 client.on('interactionCreate', interaction => {
@@ -216,7 +191,7 @@ client.on('interactionCreate', async interaction => {
 	if (interaction.commandName === 'ping') {
 		const button = new MessageButton()
 			.setCustomID('primary')
-			.setLabel('primary')
+			.setLabel('Primary')
 			.setStyle('PRIMARY');
 
 		await interaction.reply({ content: 'Pong!', ephemeral: true, components: [[button]] });
@@ -232,7 +207,7 @@ client.on('interactionCreate', async interaction => {
 ```
 
 ::: danger
-For ephemeral responses you cannot fetch a message object, so create the collector on a channel instead.
+For ephemeral responses, you cannot fetch a message object, so create the collector on a channel instead.
 :::
 
 ### awaitMessageComponent
@@ -243,25 +218,12 @@ As with other types of collectors, you can also use a promise-based collector.
 Unlike other promise-based collectors, this one only collects a single item!
 :::
 
-```js {14-16}
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+```js {3-5}
+const filter = i => i.customID === 'primary' && i.user.id === '122157285790187530';
 
-	if (interaction.commandName === 'ping') {
-		const button = new MessageButton()
-			.setCustomID('primary')
-			.setLabel('primary')
-			.setStyle('PRIMARY');
-
-		await interaction.reply({ content: 'Pong!', ephemeral: true, components: [[button]] });
-
-		const filter = i => i.customID === 'primary' && i.user.id === '122157285790187530';
-
-		interaction.channel.awaitMessageComponent({ filter, time: 15000 })
-			.then(i => console.log(`${i.customID} was clicked!`))
-			.catch(console.error);
-	}
-});
+interaction.channel.awaitMessageComponent({ filter, time: 15000 })
+	.then(i => console.log(`${i.customID} was clicked!`))
+	.catch(console.error);
 ```
 
 ## Responding to buttons
@@ -276,77 +238,69 @@ The `MessageComponentInteraction` class provides the same methods as the `Comman
 
 ### Updating the button message
 
-The `MessageComponentInteraction` class provides a method to update the message the button is attached to, by using `MessageComponentInteraction#update()`. Passing an empty array to the `components` option will remove any buttons after one has been clicked.
+The `MessageComponentInteraction` class provides an `update()` method to update the message the button is attached to. Passing an empty array to the `components` option will remove any buttons after one has been clicked.
 
-```js {17-19}
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+<!-- eslint-skip -->
 
-	if (interaction.commandName === 'ping') {
-		const button = new MessageButton()
-			.setCustomID('primary')
-			.setLabel('primary')
-			.setStyle('PRIMARY');
+```js {6-8}
+const filter = i => i.customID === 'primary' && i.user.id === '122157285790187530';
 
-		await interaction.reply({ content: 'Pong!', ephemeral: true, components: [[button]] });
+const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
 
-		const filter = i => i.customID === 'primary' && i.user.id === '122157285790187530';
-
-		const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
-
-		collector.on('collect', async i => {
-			if (i.customID === 'primary') {
-				await i.update({ content: 'A button was clicked!', components: [] });
-			}
-		});
-		collector.on('end', collected => console.log(`Collected ${collected.size} items`));
+collector.on('collect', async i => {
+	if (i.customID === 'primary') {
+		await i.update({ content: 'A button was clicked!', components: [] });
 	}
 });
+
+collector.on('end', collected => console.log(`Collected ${collected.size} items`));
 ```
 
 ### Deferring and updating the button message
 
-Additionally to deferring the response of the interaction, you can defer the button, which will trigger a loading state and then revert back to its original state:
+In addition to deferring an interaction response, you can defer the button, which will trigger a loading state and then revert to its original state:
 
-```js {15,18-22}
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+<!-- eslint-skip -->
 
-	if (interaction.commandName === 'ping') {
-		const button = new MessageButton()
-			.setCustomID('primary')
-			.setLabel('primary')
-			.setStyle('PRIMARY');
+```js {7-9}
+const wait = require('util').promisify(setTimeout);
 
-		await interaction.reply({ content: 'Pong!', ephemeral: true, components: [[button]] });
+// ...
 
-		const filter = i => i.customID === 'primary' && i.user.id === '122157285790187530';
-
-		const collector = message.createMessageComponentCollector({ filter, time: 15000 });
-		const wait = require('util').promisify(setTimeout);
-
-		collector.on('collect', async i => {
-			if (i.customId === 'primary') {
-				await i.deferUpdate();
-				await wait(4000);
-				await i.editReply({ content: 'A button was clicked!', components: [] });
-			}
-		});
-		collector.on('end', collected => console.log(`Collected ${collected.size} items`));
+collector.on('collect', async i => {
+	if (i.customId === 'primary') {
+		await i.deferUpdate();
+		await wait(4000);
+		await i.editReply({ content: 'A button was clicked!', components: [] });
 	}
 });
+
+collector.on('end', collected => console.log(`Collected ${collected.size} items`));
 ```
 
 
 ## Button styles
 
 Currently there are five different button styles available:
-<!--- vue-discord-message doesn't yet have support for inline replies/interactions/ephemeral messages/components -->
 - `PRIMARY`, a blurple button;
 - `SECONDARY`, a grey button;
 - `SUCCESS`, a green button;
 - `DANGER`, a red button;
 - `LINK`, a button that navigates to a URL.
+
+<DiscordMessages>
+	<DiscordMessage profile="bot">
+		<template #actions>
+			<DiscordButtons>
+				<DiscordButton>Primary</DiscordButton>
+				<DiscordButton type="secondary">Secondary</DiscordButton>
+				<DiscordButton type="success">Success</DiscordButton>
+				<DiscordButton type="danger">Danger</DiscordButton>
+				<DiscordButton type="link" url="https://discord.js.org">Link</DiscordButton>
+			</DiscordButtons>
+		</template>
+	</DiscordMessage>
+</DiscordMessages>
 
 ::: warning
 Only `LINK` buttons can have a `url`. `LINK` buttons _cannot_ have a `custom_id` and _do not_ send an interaction event when clicked.
