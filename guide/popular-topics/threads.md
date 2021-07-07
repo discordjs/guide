@@ -100,6 +100,8 @@ Private threads behave similar to Group DMs, but in a Guild. Private threads can
 
 To create a private thread, use `ThreadManager#create()` and pass in `private_thread` as the `type`:
 
+<!-- eslint-skip -->
+
 ```js {4}
 const thread = await message.channel.threads.create({
 	name: 'mod-talk',
