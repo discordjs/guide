@@ -53,7 +53,7 @@ The custom id is a developer-defined string of up to 100 characters.
 
 Restart your bot and then send the command to a channel your bot has access to. If all goes well, you should see something like this:
 
-<!--- vue-discord-message doesn't yet have support for inline replies/interactions/ephemeral messages/components -->
+<!--- vue-discord-message doesn't yet have support for select menus
 <DiscordMessages>
 	<DiscordMessage profile="bot">
 		<template #interactions>
@@ -62,6 +62,8 @@ Restart your bot and then send the command to a channel your bot has access to. 
 		Pong!
 	</DiscordMessage>
 </DiscordMessages>
+-->
+![select](./images/select.png)
 
 You can also send message components within an ephemeral response or alongside message embeds.
 
@@ -90,7 +92,7 @@ client.on('interactionCreate', async interaction => {
 
 Restart your bot and then send the command to a channel your bot has access to. If all goes well, you should see something like this:
 
-<!--- vue-discord-message doesn't yet have support for inline replies/interactions/ephemeral messages/components -->
+<!--- vue-discord-message doesn't yet have support for select menus
 <DiscordMessages>
 	<DiscordMessage profile="bot">
 		<template #interactions>
@@ -112,6 +114,9 @@ Restart your bot and then send the command to a channel your bot has access to. 
 		</template>
 	</DiscordMessage>
 </DiscordMessages>
+-->
+![selectephem](./images/selectephem.png)
+
 
 Additionally, if you don't want to construct an `ActionRow` every time, you can also pass an array of arrays containing components:
 
