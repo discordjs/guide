@@ -42,10 +42,11 @@ ESLint may display many warnings and errors about your code when you start using
 	"extends": "eslint:recommended",
 	"env": {
 		"node": true,
-		"es6": true
+		"es6": true,
+		"es2021": true
 	},
 	"parserOptions": {
-		"ecmaVersion": 2019
+		"ecmaVersion": 12
 	},
 	"rules": {
 
@@ -64,12 +65,14 @@ Alternatively, if you don't want to go through everything one by one on your own
 	"extends": "eslint:recommended",
 	"env": {
 		"node": true,
-		"es6": true
+		"es6": true,
+		"es2021": true
 	},
 	"parserOptions": {
-		"ecmaVersion": 2019
+		"ecmaVersion": 12
 	},
 	"rules": {
+		"arrow-spacing": ["warn", { "before": true, "after": true }],
 		"brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
 		"comma-dangle": ["error", "always-multiline"],
 		"comma-spacing": "error",
@@ -78,6 +81,7 @@ Alternatively, if you don't want to go through everything one by one on your own
 		"dot-location": ["error", "property"],
 		"handle-callback-err": "off",
 		"indent": ["error", "tab"],
+		"keyword-spacing": "error",
 		"max-nested-callbacks": ["error", { "max": 4 }],
 		"max-statements-per-line": ["error", { "max": 2 }],
 		"no-console": "off",
