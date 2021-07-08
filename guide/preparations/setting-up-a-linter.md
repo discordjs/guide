@@ -60,7 +60,7 @@ You can find a list of all of ESLint's rules on their site, located [here](https
 
 Alternatively, if you don't want to go through everything one by one on your own, you can use the ESLint file we use for this guide.
 
-```json {11-45}
+```json {12-48}
 {
 	"extends": "eslint:recommended",
 	"env": {
