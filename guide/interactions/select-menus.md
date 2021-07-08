@@ -68,7 +68,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 You can also send message components within an ephemeral response or alongside message embeds.
 
 ```js {1,12-16,18}
-const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
+const { MessageActionRow, MessageSelectMenu, MessageEmbed } = require('discord.js');
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
@@ -235,7 +235,7 @@ The `MessageComponentInteraction` class provides the same methods as the `Comman
 
 ### Updating the select menu's message
 
-The `MessageComponentInteraction` class provides an `update()` method to update the message the button is attached to. Passing an empty array to the `components` option will remove any menus after an option has been selected.
+The `MessageComponentInteraction` class provides an `update()` method to update the message the select menu is attached to. Passing an empty array to the `components` option will remove any menus after an option has been selected.
 
 ```js {1,4-6}
 client.on('interactionCreate', async interaction => {
