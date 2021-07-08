@@ -121,7 +121,7 @@ client.shard.broadcastEval(
 			msg = await channel.messages.fetch('id').then(m => m.id);
 		}
 		return msg;
-	}
+	},
 );
 ```
 
