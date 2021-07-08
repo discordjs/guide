@@ -42,11 +42,10 @@ ESLint may display many warnings and errors about your code when you start using
 	"extends": "eslint:recommended",
 	"env": {
 		"node": true,
-		"es6": true,
-		"es2021": true
+		"es6": true
 	},
 	"parserOptions": {
-		"ecmaVersion": 12
+		"ecmaVersion": 2021
 	},
 	"rules": {
 
@@ -60,19 +59,17 @@ You can find a list of all of ESLint's rules on their site, located [here](https
 
 Alternatively, if you don't want to go through everything one by one on your own, you can use the ESLint file we use for this guide.
 
-```json {12-48}
+```json {11-45}
 {
 	"extends": "eslint:recommended",
 	"env": {
 		"node": true,
-		"es6": true,
-		"es2021": true
+		"es6": true
 	},
 	"parserOptions": {
-		"ecmaVersion": 12
+		"ecmaVersion": 2021
 	},
 	"rules": {
-		"arrow-spacing": ["warn", { "before": true, "after": true }],
 		"brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
 		"comma-dangle": ["error", "always-multiline"],
 		"comma-spacing": "error",
@@ -81,7 +78,6 @@ Alternatively, if you don't want to go through everything one by one on your own
 		"dot-location": ["error", "property"],
 		"handle-callback-err": "off",
 		"indent": ["error", "tab"],
-		"keyword-spacing": "error",
 		"max-nested-callbacks": ["error", { "max": 4 }],
 		"max-statements-per-line": ["error", { "max": 2 }],
 		"no-console": "off",
