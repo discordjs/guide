@@ -96,7 +96,7 @@ for (const file of commandFiles) {
 
 ## Dynamically executing commands
 
-With your `client.commands` Collection setup, you can use it to retrieve and execute your commands! Inside your `interaction` event, delete your `if`/`else if` chain of commands and replace it with this:
+With your `client.commands` Collection setup, you can use it to retrieve and execute your commands! Inside your `interactionCreate` event, delete your `if`/`else if` chain of commands and replace it with this:
 
 ```js {6-12}
 client.on('interactionCreate', async interaction => {
