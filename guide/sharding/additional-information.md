@@ -36,7 +36,7 @@ You can also send messages via `process.send('hello')`, which would not contain 
 There might be times where you want to target a specific shard. An example would be to kill a specific shard that isn't working as intended. You can achieve this by taking the following snippet (in a command, preferably):
 
 ::: tip
-In discord.js v12, <DocsLink path="class/ShardClientUtil?scrollTo=ids">`client.shard`</DocsLink> can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
+In discord.js v13, <DocsLink path="class/ShardClientUtil?scrollTo=ids">`client.shard`</DocsLink> can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
 :::
 
 ```js
@@ -100,7 +100,7 @@ This means you can not pass complex data types in the context directly.
 There may be a time when you want to have your shard process an asynchronous function. Here's how you can do that!
 
 ```js
-client.shard.broadcastEval(() => {
+client.shard.broadcastEval(client => {
 	const channel = this.channels.cache.get('id');
 	let msg;
 	if (channel) {
@@ -113,16 +113,14 @@ client.shard.broadcastEval(() => {
 This snippet allows you to return fetched messages outside of the `broadcastEval`, letting you know whether or not you were able to retrieve a message, for example. Remember, you aren't able to return entire objects outside. Now, what if we wanted to use `async/await` syntax inside?
 
 ```js
-client.shard.broadcastEval(
-	async client => {
-		const channel = this.channels.cache.get('id');
-		let msg;
-		if (channel) {
-			msg = await channel.messages.fetch('id').then(m => m.id);
-		}
-		return msg;
-	},
-);
+client.shard.broadcastEval(async client => {
+	const channel = this.channels.cache.get('id');
+	let msg;
+	if (channel) {
+		msg = await channel.messages.fetch('id').then(m => m.id);
+	}
+	return msg;
+});
 ```
 
 This example will work the same, but you can produce cleaner code with `async/await`. Additionally, what this does is declare an asynchronous function and then immediately call it. As it is also the last declared line, it is effectively being returned. Remember that you need to `return` an item inside a function one way or another.

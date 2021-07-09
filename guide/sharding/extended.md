@@ -26,15 +26,15 @@ client.on('messageCreate', message => {
 This will never work for a channel that lies on another shard. So, let's remedy this.
 
 ::: tip
-In discord.js v12 and higher, <DocsLink path="class/ShardClientUtil?scrollTo=ids">`client.shard`</DocsLink> can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
+In discord.js v13, <DocsLink path="class/ShardClientUtil?scrollTo=ids">`client.shard`</DocsLink> can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
 :::
 
 ```js {4-13}
 if (command === 'send') {
 	if (!args.length) return message.reply('please specify a destination channel id.');
 
-	return client.shard.broadcastEval(() => {
-		const channel = this.channels.cache.get(`${args[0]}`);
+	return client.shard.broadcastEval(client => {
+		const channel = this.channels.cache.get(args[0]);
 		if (channel) {
 			channel.send(`This is a message from shard ${this.shard.ids.join(',')}!`);
 			true;
@@ -49,7 +49,7 @@ if (command === 'send') {
 If all is well, you should notice an output like `[false, true, false, false]`. If it is not clear why `true` and `false` are hanging around, the last expression of the eval statement will be returned. You will want this if you want any feedback from the results. Now that you have observed said results, you can adjust the command to give yourself proper feedback, like so:
 
 ```js {4-10}
-return client.shard.broadcastEval(() => {
+return client.shard.broadcastEval(client => {
 	// ...
 })
 	.then(sentArray => {
