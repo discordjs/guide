@@ -117,13 +117,6 @@ If there isn't a command with that name, you don't need to do anything further, 
 
 And that's it! Whenever you want to add a new command, you make a new file in your `commands` directory, name it what you want, and then do what you did for the other commands.
 
-In the next chapter, we'll be going through how to implement some basic features into your brand new command handler. Currently, it's hardly a command "handler" at this point; it's a command loader and executor if you wish to see it that way. You'll learn how to implement some new features and the logic behind them, such as:
-
-* Command aliases
-* Cooldowns
-* Guild only commands
-* A dynamic help message
-
 ## Resulting code
 
 <ResultingCode path="command-handling/file-setup" />

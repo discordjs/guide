@@ -38,7 +38,6 @@ As previously mentioned, you'll probably want to store more than just your token
 
 ```json
 {
-	"prefix": "!",
 	"token": "your-token-goes-here",
 	"meaning_of_life": 42,
 	"passwords_array": ["please", "dont", "hack", "me"],
