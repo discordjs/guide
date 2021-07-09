@@ -25,7 +25,7 @@ To create a thread you call the `ThreadManager#create()` method:
 <!-- eslint-skip -->
 
 ```js
-const thread = await message.channel.threads.create({
+const thread = await channel.threads.create({
 	name: 'food-talk',
 	autoArchiveDuration: 60,
 	reason: 'Needed a separate thread for food',
@@ -39,7 +39,7 @@ To delete a thread, use the `ThreadChannel#delete()` method:
 <!-- eslint-skip -->
 
 ```js
-const thread = message.channel.threads.cache.find(x => x.name === 'food-talk');
+const thread = channel.threads.cache.find(x => x.name === 'food-talk');
 await thread.delete();
 ```
 
@@ -50,7 +50,7 @@ To join your client to a ThreadChannel, use the `ThreadChannel#join()` method:
 <!-- eslint-skip -->
 
 ```js
-const thread = message.channel.threads.cache.find(x => x.name === 'food-talk');
+const thread = channel.threads.cache.find(x => x.name === 'food-talk');
 if (thread.joinable) await thread.join();
 ```
 
@@ -59,7 +59,7 @@ And to leave one, use `ThreadChannel#leave()`;
 <!-- eslint-skip -->
 
 ```js
-const thread = message.channel.threads.cache.find(x => x.name === 'food-talk');
+const thread = channel.threads.cache.find(x => x.name === 'food-talk');
 await thread.leave();
 ```
 
@@ -74,7 +74,7 @@ To archive or unarchive a thread, use the `ThreadChannel#setArchived()` method a
 <!-- eslint-skip -->
 
 ```js
-const thread = message.channel.threads.cache.find(x => x.name === 'food-talk');
+const thread = channel.threads.cache.find(x => x.name === 'food-talk');
 await thread.setArchived(true); // archived
 await thread.setArchived(false); // unarchived
 ```
@@ -85,7 +85,7 @@ This same principle applies to locking and unlocking a thread via the `ThreadCha
 <!-- eslint-skip -->
 
 ```js 
-const thread = message.channel.threads.cache.find(x => x.name === 'food-talk');
+const thread = channel.threads.cache.find(x => x.name === 'food-talk');
 await thread.setLocked(true); // locked
 await thread.setLocked(false); // unlocked
 ```
@@ -105,7 +105,7 @@ To create a private thread, use `ThreadManager#create()` and pass in `private_th
 <!-- eslint-skip -->
 
 ```js {4}
-const thread = await message.channel.threads.create({
+const thread = await channel.threads.create({
 	name: 'mod-talk',
 	autoArchiveDuration: 60,
 	type: 'private_thread',
@@ -124,7 +124,7 @@ To add a member to a thread, use the `ThreadMemberManager#add()` method:
 <!-- eslint-skip -->
 
 ```js
-const thread = message.channel.threads.cache.find(x => x.name === 'food-talk');
+const thread = channel.threads.cache.find(x => x.name === 'food-talk');
 await thread.members.add('140214425276776449');
 ```
 
@@ -133,7 +133,7 @@ And to remove a member from a thread, use `ThreadMemberManager#remove()`:
 <!-- eslint-skip -->
 
 ```js
-const thread = message.channel.threads.cache.find(x => x.name === 'food-talk');
+const thread = channel.threads.cache.find(x => x.name === 'food-talk');
 await thread.members.remove('140214425276776449');
 ```
 
