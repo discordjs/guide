@@ -108,7 +108,7 @@ client.on('message', message => {
 
 ## BroadcastEval
 
-Next, check out another handy sharding method known as <DocsLink path="class/ShardClientUtil?scrollTo=broadcastEval">`Shard#broadcastEval`</DocsLink>. This method makes all of the shards evaluate a given script, where `this` is the `client` once each shard gets to evaluating it. You can read more about the `this` keyword [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this). For now, essentially understand that it is the shard's Client object.
+Next, check out another handy sharding method known as <DocsLink path="class/ShardClientUtil?scrollTo=broadcastEval">`Shard#broadcastEval`</DocsLink>. This method makes all of the shards evaluate a given method, which recieves a `client` and a `context` argument. The `client` argument refers to the Client object of the shard evaluating it. You can read about the `context` argument [here](/sharding/additional-information.md#eval-arguments).
 
 ```js
 client.shard
