@@ -1,7 +1,3 @@
----
-pageTheme: purple
----
-
 # Voice Connections
 
 Voice connections represent connections to voice channels in a guild. You can only connect to one voice channel in a guild at a time.

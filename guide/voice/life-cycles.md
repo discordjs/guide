@@ -1,7 +1,3 @@
----
-pageTheme: purple
----
-
 # Life cycles
 
 Two of the main components that you'll interact with when using `@discordjs/voice` are:
