@@ -121,3 +121,34 @@ resource = createAudioResource(createReadStream('my_file.webm'), {
 :::warning
 This optimization is useful if you do not want to use inline volume. Enabling inline volume will disable the optimization.
 :::
+
+### Probing to determine stream type
+
+The voice library is also able to determine whether a readable stream is an Ogg/Opus or WebM/Opus stream. This means
+that you can still gain the performance benefits that come with playing an Opus stream, even if you aren't sure in
+advance what type of audio stream you'll be playing.
+
+This is achieved by probing a small chunk of the beginning of the audio stream to see if it is suitable for demuxing:
+
+```js
+const { demuxProbe, createAudioResource } = require('@discordjs/voice');
+const { createReadStream } = require('fs');
+
+async function probeAndCreateResource(readableStream) {
+	const { stream, type } = await demuxeProbe(readableStream);
+	return createAudioResource(stream, { inputType: type });
+}
+
+async function createResources() {
+	// Creates an audio resource with inputType = StreamType.Arbitrary
+	const mp3Stream = await probeAndCreateResource(createReadStream('file.mp3'));
+
+	// Creates an audio resource with inputType = StreamType.OggOpus
+	const oggStream = await probeAndCreateResource(createReadStream('file.ogg'));
+
+	// Creates an audio resource with inputType = StreamType.WebmOpus
+	const webmStream = await probeAndCreateResource(createReadStream('file.webm'));
+}
+
+createResources();
+```
