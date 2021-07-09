@@ -1,0 +1,44 @@
+.theme-default-content {
+	& > h1 {
+		font-weight: 800;
+		font-size: 2.25rem;
+	}
+
+	& > h2 {
+		font-weight: 700;
+		font-size: 1.5rem;
+		padding-bottom: 0;
+		border-bottom-width: 0;
+	}
+
+	& > h3 {
+		font-weight: 600;
+	}
+
+	& > h1,
+	& > h2,
+	& > h3,
+	& > h4,
+	& > h5,
+	& > h6 {
+		color: var(--c-headers);
+	}
+
+	code {
+		color: #2f3136;
+	}
+
+	a code {
+		color: var(--c-text-accent);
+	}
+}
+
+html.dark .theme-default-content {
+	code {
+		color: #f3f4f6;
+	}
+
+	a code {
+		color: var(--c-text-accent);
+	}
+}

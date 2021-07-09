@@ -1,7 +1,3 @@
----
-pageTheme: blue
----
-
 # Your first command
 
 Now that you've set up a command group and registered your command folder, you're ready to make your first command file! First, you're going to need to create a new file for the command. Hop over to your `commands` folder, and then your `first` folder, and make a new file called `meow.js`. This is going to be a simple command that only replies with a message when used. We'll go into arguments and all that later.
@@ -70,4 +66,4 @@ Now fire up the bot as usual and use your command! It should automatically be `?
 
 ## Resulting code
 
-<resulting-code />
+<ResultingCode />

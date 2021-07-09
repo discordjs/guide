@@ -32,31 +32,6 @@ After installing all the necessary software, run `npm i canvas` if you use npm o
 
 Here is the base code you'll be using to get started:
 
-<branch version="11.x">
-
-```js
-const Discord = require('discord.js');
-const Canvas = require('canvas');
-
-const client = new Discord.Client();
-
-client.once('ready', () => {
-	console.log('Ready!');
-});
-
-client.on('guildMemberAdd', member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'member-log');
-	if (!channel) return;
-
-	channel.send(`Welcome to the server, ${member}!`);
-});
-
-client.login('your-token-goes-here');
-```
-
-</branch>
-<branch version="12.x">
-
 ```js
 const Discord = require('discord.js');
 const Canvas = require('canvas');
@@ -77,23 +52,7 @@ client.on('guildMemberAdd', member => {
 client.login('your-token-goes-here');
 ```
 
-</branch>
-
 To make testing this feature much more manageable, you can add a simple command that'll "fake" a new member joining.
-
-
-<branch version="11.x">
-
-```js
-client.on('message', async message => {
-	if (message.content === '!join') {
-		client.emit('guildMemberAdd', message.member || await message.guild.fetchMember(message.author));
-	}
-});
-```
-
-</branch>
-<branch version="12.x">
 
 ```js
 client.on('message', message => {
@@ -102,8 +61,6 @@ client.on('message', message => {
 	}
 });
 ```
-
-</branch>
 
 This will trigger the `guildMemberAdd` event while passing in the message author's GuildMember object. Of course, you should remove this command once you add this feature to your actual bot.
 
@@ -132,27 +89,6 @@ client.on('guildMemberAdd', async member => {
 
 Now, you need to load the image you want to use into Canvas. To have sufficient coverage, we'll first show you how to load a basic image from a local directory. We'll be using [this image](https://github.com/discordjs/guide/blob/master/guide/popular-topics/images/canvas.jpg) as the background in the welcome image, but you can use whatever you want. Be sure to download the file, name it `wallpaper.jpg`, and save it inside the same directory as your main bot file.
 
-<branch version="11.x">
-
-```js {5-10,12}
-client.on('guildMemberAdd', async member => {
-	// ...
-	const context = canvas.getContext('2d');
-
-	// Since the image takes time to load, you should await it
-	const background = await Canvas.loadImage('./wallpaper.jpg');
-	// This uses the canvas dimensions to stretch the image onto the entire canvas
-	context.drawImage(background, 0, 0, canvas.width, canvas.height);
-	// Use the helpful Attachment class structure to process the file for you
-	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-image.png');
-
-	channel.send(`Welcome to the server, ${member}!`, attachment);
-});
-```
-
-</branch>
-<branch version="12.x">
-
 ```js {5-10,12}
 client.on('guildMemberAdd', async member => {
 	// ...
@@ -168,8 +104,6 @@ client.on('guildMemberAdd', async member => {
 	channel.send(`Welcome to the server, ${member}!`, attachment);
 });
 ```
-
-</branch>
 
 ![Basic canvas preview](./images/canvas-preview.png)
 
@@ -198,24 +132,6 @@ client.on('guildMemberAdd', async member => {
 
 A bit plain, right? Fear not, for you have a bit more to do until you reach completion. Since this guide page's goal is focused more on actual code than design, let's place a basic square-shaped avatar for now on the left side of the image. In the interest of coverage, you will also make it a circle afterward.
 
-<branch version="11.x">
-
-```js {5-8}
-client.on('guildMemberAdd', async member => {
-	// ...
-	context.strokeRect(0, 0, canvas.width, canvas.height);
-
-	// Wait for Canvas to load the image
-	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
-	// Draw a shape onto the main canvas
-	context.drawImage(avatar, 25, 0, 200, canvas.height);
-	// ...
-});
-```
-
-</branch>
-<branch version="12.x">
-
 ```js {5-8}
 client.on('guildMemberAdd', async member => {
 	// ...
@@ -228,28 +144,11 @@ client.on('guildMemberAdd', async member => {
 	// ...
 });
 ```
-
-</branch>
 
 ![Image](./images/canvas-stretched-avatar.png)
 
 It works well, but the avatar image itself seems a bit stretched out. Let's remedy that.
 
-<branch version="11.x">
-
-```js {4-5}
-client.on('guildMemberAdd', async member => {
-	// ...
-	const avatar = await Canvas.loadImage(member.user.displayAvatarURL);
-	// Move the image downwards vertically and constrain its height to 200, so that it's square
-	context.drawImage(avatar, 25, 25, 200, 200);
-	// ...
-});
-```
-
-</branch>
-<branch version="12.x">
-
 ```js {4-5}
 client.on('guildMemberAdd', async member => {
 	// ...
@@ -259,8 +158,6 @@ client.on('guildMemberAdd', async member => {
 	// ...
 });
 ```
-
-</branch>
 
 ![Image](./images/canvas-square-avatar.png)
 
@@ -382,4 +279,4 @@ And that's it! We have covered the basics of image manipulation, text generation
 
 ## Resulting code
 
-<resulting-code />
+<ResultingCode />

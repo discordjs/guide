@@ -1,0 +1,60 @@
+@import './navbar.scss';
+@import './search.scss';
+@import './sidebar.scss';
+@import './home.scss';
+@import './content.scss';
+@import './custom-blocks.scss';
+@import './mixins/scrollbar.scss';
+
+html {
+	@include customScrollbar(false);
+}
+
+html, body {
+	transition: none;
+}
+
+h2 {
+	padding-bottom: 0;
+	border-bottom: 0;
+}
+
+.theme-default-content:not(.custom) a:hover {
+	text-decoration: underline;
+}
+
+div[class*=language-].line-numbers-mode::after {
+	border-right-color: rgba(#000, 0.25);
+}
+
+.theme-container {
+	.fade-slide-y-enter-active {
+		transition: all 0.2s ease;
+	}
+
+	.fade-slide-y-leave-active {
+		transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+	}
+
+	.page {
+		.page-meta .meta-item {
+			&.edit-link .meta-item-label {
+				color: var(--c-text-accent);
+			}
+
+			&.last-updated .meta-item-label {
+				color: var(--c-brand);
+			}
+		}
+	}
+}
+
+.discord-messages {
+	border-radius: 6px;
+
+	.discord-message .discord-message-content code.discord-message-inline-code {
+		color: inherit;
+		font-size: 0.9em;
+		padding: 0.2em;
+	}
+}

@@ -270,4 +270,4 @@ return message.reply('Tag deleted.');
 
 ## Resulting code
 
-<resulting-code path="sequelize/tags" />
+<ResultingCode path="sequelize/tags" />

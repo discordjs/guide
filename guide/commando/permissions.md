@@ -1,7 +1,3 @@
----
-pageTheme: blue
----
-
 # Handling permissions
 
 Sometimes you may need a user to have a specific permission to use a command, or maybe your bot needs a permission to make the command work. Well, Commando makes both of these very simple.
@@ -43,7 +39,7 @@ module.exports = class MeowCommand extends Command {
 };
 ```
 
-All you need to do is set the properties to an array of permission flags. A list of those can be found <docs-link path="class/Permissions?scrollTo=s-FLAGS">here</docs-link>.
+All you need to do is set the properties to an array of permission flags. A list of those can be found <DocsLink path="class/Permissions?scrollTo=s-FLAGS">here</DocsLink>.
 
 ## Owner-only commands
 

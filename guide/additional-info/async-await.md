@@ -155,23 +155,6 @@ So you may be asking, "How would I get the value the Promise resolved with?".
 
 Let's look at an example where you want to delete a sent message.
 
-<branch version="11.x">
-
-```js {2-8}
-client.on('message', message => {
-	if (message.content === `${prefix}delete`) {
-		message.channel.send('this message will be deleted')
-			.then(sentMessage => sentMessage.delete(10000))
-			.catch(error => {
-				// handle error
-			});
-	}
-});
-```
-
-</branch>
-<branch version="12.x">
-
 ```js {2-8}
 client.on('message', message => {
 	if (message.content === `${prefix}delete`) {
@@ -184,26 +167,7 @@ client.on('message', message => {
 });
 ```
 
-</branch>
 The return value of a `.send()` is a Promise what resolves with the sent Message object, but how would the same code with async/await look?
-
-<branch version="11.x">
-
-```js {1,3-8}
-client.on('message', async message => {
-	if (message.content === `${prefix}delete`) {
-		try {
-			const sentMessage = await message.channel.send('This message will be deleted in 10 seconds.');
-			await sentMessage.delete(10000);
-		} catch (error) {
-			// handle error
-		}
-	}
-});
-```
-
-</branch>
-<branch version="12.x">
 
 ```js {1,3-8}
 client.on('message', async message => {
@@ -217,7 +181,5 @@ client.on('message', async message => {
 	}
 });
 ```
-
-</branch>
 
 With async/await, you can assign the awaited function to a variable representing the returned value. Now you know how you use async/await.

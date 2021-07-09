@@ -1,0 +1,130 @@
+:root {
+	--nav-background-color: var(--theme-530);
+	--nav-links-color: var(--theme-600);
+	--nav-links-hover-color: var(--theme-630);
+}
+
+html.guide-theme-blurple {
+	--nav-background-color: var(--theme-560);
+}
+
+@mixin navLink() {
+	color: var(--text-gray);
+	font-size: 1em;
+	margin: 0;
+	padding: 14px 12px;
+	border-width: 0;
+	border-radius: 6px;
+
+	&:hover,
+	&.router-link-active:hover {
+		color: var(--text-gray);
+		background-color: var(--nav-links-hover-color);
+	}
+
+	&.router-link-active {
+		background-color: var(--nav-links-color);
+	}
+}
+
+.navbar {
+	background-color: var(--nav-background-color);
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	padding: 0.5rem 4rem;
+	border-width: 0;
+	transition: none;
+
+	@media screen and (max-width: 719px) {
+		padding-left: 0.5rem;
+		padding-right: 0.5rem;
+	}
+
+	> span {
+		@media screen and (max-width: 719px) {
+			order: 1;
+			margin-right: auto;
+		}
+
+		// NOTE: Temporary tablet screen logo text bug fix
+		@media screen and (min-width: 719px) and (max-width: 950px) {
+			> a {
+				display: inline-block;
+				width: 8rem;
+				text-align: center;
+				line-height: 1.4rem;
+				box-sizing: border-box;
+			}
+		}
+	}
+
+	.toggle-sidebar-button {
+		@include navLink();
+		position: unset;
+		top: unset;
+		left: unset;
+		margin-left: 0.5rem;
+
+		@media screen and (max-width: 719px) {
+			order: 3;
+		}
+	}
+
+	.toggle-dark-button {
+		@include navLink();
+		margin-left: 2rem;
+		opacity: 1;
+
+		@media screen and (max-width: 719px) {
+			margin-left: 0.5rem;
+		}
+	}
+
+	.site-name {
+		font-size: 1em;
+		color: var(--text-gray);
+	}
+
+	a {
+		@include navLink();
+
+		.icon.outbound {
+			color: var(--text-gray);
+		}
+	}
+
+	.navbar-links-wrapper {
+		background-color: var(--nav-background-color);
+		display: flex;
+		align-items: center;
+		position: relative;
+		right: 0;
+		top: 0;
+		padding-left: 0;
+
+		@media screen and (max-width: 719px) {
+			order: 2;
+		}
+
+		.navbar-links {
+			.navbar-links-item {
+				margin-left: 2rem;
+
+				a {
+					@include navLink();
+				}
+			}
+		}
+	}
+}
+
+.theme-container.sidebar-open .navbar {
+	.toggle-sidebar-button {
+		background-color: var(--nav-links-color);
+
+		&:hover {
+			background-color: var(--nav-links-hover-color);
+		}
+	}
+}

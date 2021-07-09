@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+	<style>
+		:root {
+			--c-bg: #fff;
+		}
+
+		html.dark {
+			--c-bg: #1d1d1d;
+		}
+
+		html, body {
+			background-color: var(--c-bg);
+		}
+	</style>
+	<script>
+		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			document.documentElement.classList.toggle('dark', true);
+		}
+	</script>
+<!--vuepress-ssr-head-->
+<!--vuepress-ssr-resources-->
+<!--vuepress-ssr-styles-->
+</head>
+<body>
+	<div id="app"><!--vuepress-ssr-app--></div>
+	<!--vuepress-ssr-scripts-->
+</body>
+</html>
