@@ -111,13 +111,16 @@ client.on('message', message => {
 Next, check out another handy sharding method known as <DocsLink path="class/ShardClientUtil?scrollTo=broadcastEval">`Shard#broadcastEval`</DocsLink>. This method makes all of the shards evaluate a given script, where `this` is the `client` once each shard gets to evaluating it. You can read more about the `this` keyword [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this). For now, essentially understand that it is the shard's Client object.
 
 ```js
-client.shard.broadcastEval(this.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)).then(console.log);
+client.shard
+	.broadcastEval(client => client.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0))
+	.then(console.log);
 ```
 
 This will run the code given to `broadcastEval` on each shard and return the results to the Promise as an array, once again. You should see something like `[9001, 16658, 13337, 15687]` logged. The code sent to each shard adds up the `memberCount` property of every guild that shard is handling and returns it, so each shard's total guild member count. Of course, if you want to total up the member count of *every* shard, you can do the same thing again on the Promise results.
 
 ```js
-client.shard.broadcastEval(this.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0))
+client.shard
+	.broadcastEval(client => client.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0))
 	.then(results => {
 		return message.channel.send(`Total member count: ${results.reduce((acc, memberCount) => acc + memberCount, 0)}`);
 	})
@@ -131,7 +134,7 @@ You'd likely want to output both pieces of information in the stats command. You
 ```js
 const promises = [
 	client.shard.fetchClientValues('guilds.cache.size'),
-	client.shard.broadcastEval(this.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)),
+	client.shard.broadcastEval(client => client.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)),
 ];
 
 Promise.all(promises)
@@ -151,7 +154,7 @@ client.on('message', message => {
 	if (command === 'stats') {
 		const promises = [
 			client.shard.fetchClientValues('guilds.cache.size'),
-			client.shard.broadcastEval(this.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)),
+			client.shard.broadcastEval(client => client.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)),
 		];
 
 		return Promise.all(promises)

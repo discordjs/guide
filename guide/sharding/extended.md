@@ -33,13 +33,13 @@ In discord.js v13, <DocsLink path="class/ShardClientUtil?scrollTo=ids">`client.s
 if (command === 'send') {
 	if (!args.length) return message.reply('please specify a destination channel id.');
 
-	return client.shard.broadcastEval(client => {
-		const channel = this.channels.cache.get(args[0]);
+	return client.shard.broadcastEval(async client => {
+		const channel = client.channels.cache.get(args[0]);
 		if (channel) {
-			channel.send(`This is a message from shard ${this.shard.ids.join(',')}!`);
-			true;
+			await channel.send(`This is a message from shard ${client.shard.ids.join(',')}!`);
+			return true;
 		} else {
-			false;
+			return false;
 		}
 	})
 		.then(console.log);
@@ -85,7 +85,7 @@ Let's start with a basic function, which will try to grab an emoji from the curr
 
 ```js
 function findEmoji(client, { nameOrId }) {
-	return this.emojis.cache.get(nameOrId) || this.emojis.cache.find(e => e.name.toLowerCase() === nameOrId.toLowerCase());
+	return client.emojis.cache.get(nameOrId) || client.emojis.cache.find(e => e.name.toLowerCase() === nameOrId.toLowerCase());
 }
 ```
 
@@ -133,7 +133,7 @@ While this result isn't *necessarily* bad or incorrect, it's simply a raw object
 
 ```js {2-3,5-6}
 function findEmoji(client, { nameOrId }) {
-	const emoji = this.emojis.cache.get(nameOrId) || this.emojis.cache.find(e => e.name.toLowerCase() === nameOrId.toLowerCase());
+	const emoji = client.emojis.cache.get(nameOrId) || client.emojis.cache.find(e => e.name.toLowerCase() === nameOrId.toLowerCase());
 	if (!emoji) return null;
 	// If you wanted to delete the emoji with discord.js, this is where you would do it. Otherwise, don't include this code.
 	emoji.delete();
