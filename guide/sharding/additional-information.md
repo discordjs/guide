@@ -77,7 +77,7 @@ You can access them later as usual via `process.argv`, which contains an array o
 
 ## Eval arguments
 
-There may come the point where you will want to pass arguments from the outer scope into a `.broadcastEval()` call.
+There may come the point where you will want to pass arguments from the outer scope into a `broadcastEval()` call.
 
 ```js
 function funcName(client, { arg }) {
@@ -87,7 +87,10 @@ function funcName(client, { arg }) {
 client.shard.broadcastEval(funcName, { context: { arg: 'arg' } });
 ```
 
-In this small snippet, an argument is passed to the `funcName` function through the `context` option of the <DocsLink path="typedef/BroadcastEvalOptions">`BroadcastEvalOptions`</DocsLink>.
+Discord.js v13 introduces a new object named <DocsLink path="typedef/BroadcastEvalOptions">`BroadcastEvalOptions`</DocsLink>.
+This object has two parameters. The `context` parameter will be sent as the second argument to your function.
+
+In this small snippet, an argument is passed to the `funcName` function through this parameter.
 The function will recieve the arguments as an object as the second parameter.
 
 ::: warning
