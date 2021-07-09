@@ -67,7 +67,7 @@ Let's say your bot is in a total of 3,600 guilds. Using the recommended shard co
 
 ## FetchClientValues
 
-<DocsLink path="class/ShardClientUtil?scrollTo=fetchClientValues">Shard#fetchClientValues</DocsLink> is one of the most common sharding utility methods you'll be using. This method retrieves a property on the Client object of all shards.
+One of the most common sharding utility methods you'll be using is <DocsLink path="class/ShardClientUtil?scrollTo=fetchClientValues">Shard#fetchClientValues</DocsLink>. This method retrieves a property on the Client object of all shards.
 
 Take the following snippet of code:
 
