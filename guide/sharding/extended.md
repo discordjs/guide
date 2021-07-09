@@ -33,15 +33,15 @@ In discord.js v13, <DocsLink path="class/ShardClientUtil?scrollTo=ids">`client.s
 if (command === 'send') {
 	if (!args.length) return message.reply('please specify a destination channel id.');
 
-	return client.shard.broadcastEval(async client => {
-		const channel = client.channels.cache.get(args[0]);
+	return client.shard.broadcastEval(async (client, { channelId }) => {
+		const channel = client.channels.cache.get(channelId);
 		if (channel) {
 			await channel.send(`This is a message from shard ${client.shard.ids.join(',')}!`);
 			return true;
 		} else {
 			return false;
 		}
-	})
+	}, { context: { channelId: args[0] } })
 		.then(console.log);
 }
 ```
