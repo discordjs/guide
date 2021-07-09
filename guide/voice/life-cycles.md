@@ -40,7 +40,7 @@ const { AudioPlayerStatus, entersState } = require('@discordjs/voice');
 async function start() {
 	player.play(resource);
 	try {
-		await entersState(player, AudioPlayerStatus.Playing, 5e3);
+		await entersState(player, AudioPlayerStatus.Playing, 5_000);
 		// The player has entered the Playing state within 5 seconds
 		console.log('Playback has started!');
 	} catch (error) {

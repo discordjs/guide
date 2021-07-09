@@ -63,7 +63,7 @@ You can call the `pause()` and `unpause()` methods. While the audio player is pa
 connection.pause();
 
 // Unpause after 5 seconds
-setTimeout(() => connection.unpause(), 5e3);
+setTimeout(() => connection.unpause(), 5_000);
 ```
 
 ## Life cycle

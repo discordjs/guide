@@ -57,7 +57,7 @@ const subscription = connection.subscribe(audioPlayer);
 // subscription could be undefined if the connection is destroyed!
 if (subscription) {
 	// Unsubscribe after 5 seconds (stop playing audio on the voice connection)
-	setTimeout(() => subscription.unsubscribe(), 5e3);
+	setTimeout(() => subscription.unsubscribe(), 5_000);
 }
 ```
 
@@ -109,8 +109,8 @@ const { VoiceConnectionStatus, entersState } = require('@discordjs/voice');
 connection.on(VoiceConnectionStatus.Disconnected, async (oldState, newState) => {
 	try {
 		await Promise.race([
-			entersState(connection, VoiceConnectionStatus.Signalling, 5e3),
-			entersState(connection, VoiceConnectionStatus.Connecting, 5e3),
+			entersState(connection, VoiceConnectionStatus.Signalling, 5_000),
+			entersState(connection, VoiceConnectionStatus.Connecting, 5_000),
 		]);
 		// Seems to be reconnecting to a new channel - ignore disconnect
 	} catch (error) {
