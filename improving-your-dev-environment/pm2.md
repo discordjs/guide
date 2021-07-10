@@ -1,4 +1,4 @@
-# Managing your bot process with PM2
+# Managing your Bot Process with PM2
 
 PM2 is a process manager. It manages your applications' states, so you can start, stop, restart, and delete processes. It offers features such as monitoring running processes and setting up a "start with operating system" \(be that Windows, Linux, or Mac\) so your processes start when you boot your system.
 

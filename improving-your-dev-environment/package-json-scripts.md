@@ -1,4 +1,4 @@
-# Setting up package.json scripts
+# Setting up Package.json Scripts
 
 An easy way to run scripts like a script to start your bot, a script to lint your bot's files, or whatever scripts you use is by storing them in your `package.json` file. After you store these scripts in your `package.json` file, you can type `npm run start` to start your bot or `npm run lint` to lint your code for errors.
 

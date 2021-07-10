@@ -11,9 +11,6 @@
     * [Understanding notation](home/guide/additional-info/notation.md)
     * [Using a REST API](home/guide/additional-info/rest-api.md)
     * [Collections](home/guide/additional-info/collections.md)
-  * [improving-dev-environment](home/guide/improving-dev-environment/README.md)
-    * [Managing your bot process with PM2](home/guide/improving-dev-environment/pm2.md)
-    * [Setting up package.json scripts](home/guide/improving-dev-environment/package-json-scripts.md)
   * [Event handling](home/guide/event-handling.md)
   * [Installing Node.js and discord.js](home/guide/preparations/README.md)
     * [Adding your bot to servers](home/guide/preparations/adding-your-bot-to-servers.md)
@@ -73,7 +70,7 @@
 
 ## OAuth2
 
-* [Getting started with OAuth2](oauth2/oauth2.md)
+* [Getting Started with OAuth2](oauth2/oauth2.md)
 
 ## Voice
 
@@ -83,4 +80,9 @@
 * [Voice Broadcasts](voice/voice-broadcasts.md)
 * [Optimization and Troubleshooting](voice/optimisation-and-troubleshooting.md)
 * [Receiving Audio](voice/receiving-audio.md)
+
+## Improving Your Dev Environment
+
+* [Managing your Bot Process with PM2](improving-your-dev-environment/pm2.md)
+* [Setting up Package.json Scripts](improving-your-dev-environment/package-json-scripts.md)
 
