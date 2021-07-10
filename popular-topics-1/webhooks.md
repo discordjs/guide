@@ -50,15 +50,15 @@ const webhookClient = new Discord.WebhookClient('id', 'token');
 
 You can create webhooks directly through the Discord client. Go to Server Settings, and you will see an `Integrations` tab.
 
-![Integrations tab](../../.gitbook/assets/creating-webhooks-1.png)
+![Integrations tab](../.gitbook/assets/creating-webhooks-1.png)
 
 If you already have created a webhook, the webhooks tab will look like this; you will need to click the `View Webhooks` button.
 
-![Integrations tab](../../.gitbook/assets/creating-webhooks-2.png)
+![Integrations tab](../.gitbook/assets/creating-webhooks-2.png)
 
 Once you are there, click on the `Create Webhook` / `New Webhook` button; this will create a webhook. From here, you can edit the channel, the name, and the avatar. Copy the link, the first part is the id, and the second is the token.
 
-![Creating a Webhook](../../.gitbook/assets/creating-webhooks-3.png)
+![Creating a Webhook](../.gitbook/assets/creating-webhooks-3.png)
 
 ### Creating webhooks with discord.js
 

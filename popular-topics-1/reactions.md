@@ -25,7 +25,7 @@ client.login('your-token-goes-here');
 
 To react with a Unicode emoji, you will need the actual Unicode character of the emoji. There are many ways to get a Unicode character of an emoji, but the easiest way would be through Discord itself. If you send a message with a Unicode emoji \(such as `:smile:`, for example\) and put a `\` before it, it will "escape" the emoji and display the Unicode character instead of the standard emoji image.
 
-![Escaped unicode emoji](../../.gitbook/assets/escaped-unicode-emoji.png)
+![Escaped unicode emoji](../.gitbook/assets/escaped-unicode-emoji.png)
 
 To react with an emoji, you need to use the `message.react()` method. Once you have the emoji character, all you need to do is copy & paste it as a string inside the `.react()` method!
 
@@ -50,7 +50,7 @@ client.on('message', message => {
 });
 ```
 
-![Custom emoji reaction via ID](../../.gitbook/assets/custom-emoji-reaction.png)
+![Custom emoji reaction via ID](../.gitbook/assets/custom-emoji-reaction.png)
 
 Great! This route may not always be available to you, though. Sometimes you'll need to react with an emoji programmatically. To do so, you'll need to retrieve the emoji object.
 

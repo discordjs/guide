@@ -1,2 +1,0 @@
-# popular-topics
-

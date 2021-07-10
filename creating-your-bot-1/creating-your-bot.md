@@ -1,4 +1,4 @@
-# Getting your bot up & running
+# Getting Your Bot Up
 
 We're finally getting to the exciting parts! Since your bot is in your server now, the next step is to start coding and get it online!
 

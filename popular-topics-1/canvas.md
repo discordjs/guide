@@ -97,7 +97,7 @@ client.on('guildMemberAdd', async member => {
 });
 ```
 
-![Basic canvas preview](../../.gitbook/assets/canvas-preview.png)
+![Basic canvas preview](../.gitbook/assets/canvas-preview.png)
 
 ::: tip If you get an error such as `Error: error while reading from input stream`, then the file's provided path was incorrect. :::
 
@@ -135,7 +135,7 @@ client.on('guildMemberAdd', async member => {
 });
 ```
 
-![Image](../../.gitbook/assets/canvas-stretched-avatar.png)
+![Image](../.gitbook/assets/canvas-stretched-avatar.png)
 
 It works well, but the avatar image itself seems a bit stretched out. Let's remedy that.
 
@@ -165,7 +165,7 @@ client.on('guildMemberAdd', async member => {
 });
 ```
 
-![Image](../../.gitbook/assets/canvas-circle-avatar.png)
+![Image](../.gitbook/assets/canvas-circle-avatar.png)
 
 ::: tip You can read more about `context.arc()` on [w3schools](https://www.w3schools.com/tags/canvas_arc.asp) or [MDN](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc). :::
 
@@ -228,11 +228,11 @@ client.on('guildMemberAdd', async member => {
 
 Before adjustment:
 
-![Before adjustment](../../.gitbook/assets/canvas-before-adjustment.png)
+![Before adjustment](../.gitbook/assets/canvas-before-adjustment.png)
 
 After adjustment:
 
-![After adjustment](../../.gitbook/assets/canvas-after-adjustment.png)
+![After adjustment](../.gitbook/assets/canvas-after-adjustment.png)
 
 Let's move the welcome text inside the image itself instead of adding it outside as a nice finishing touch.
 
@@ -255,7 +255,7 @@ context.fillText(`${member.displayName}!`, canvas.width / 2.5, canvas.height / 1
 
 \`\`\`
 
-![Final result](../../.gitbook/assets/canvas-final.png)
+![Final result](../.gitbook/assets/canvas-final.png)
 
 And that's it! We have covered the basics of image manipulation, text generation, and loading from a remote source.
 

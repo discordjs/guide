@@ -1,4 +1,4 @@
-# Command handling
+# Command Handling
 
 Unless your bot project is a small one, it's not a very good idea to have a single file with a giant if/else if chain for commands. If you want to implement features into your bot and make your development process a lot less painful, you'll want to implement a command handler. Let's get started on that!
 
@@ -37,7 +37,7 @@ client.login(token);
 
 Before anything, you may want to create a backup of your current bot file. If you've followed along so far, your entire folder structure should look something like this:
 
-![Current folder structure](../../.gitbook/assets/folder-structure.png)
+![Current folder structure](../.gitbook/assets/folder-structure.png)
 
 In the same folder, create a new folder and name it `commands`. This is where you'll store all of your commands, of course. Head over to your `commands` folder, create a new file named `ping.js`, and copy & paste in the following code:
 

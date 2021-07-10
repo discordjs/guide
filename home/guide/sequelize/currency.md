@@ -19,7 +19,7 @@ This time we'll have six files.
 
 Here is an entity relation diagram of the models we'll be making:
 
-![Currency database structure diagram](../../.gitbook/assets/currency_er_diagram.svg)
+![Currency database structure diagram](../../../.gitbook/assets/currency_er_diagram.svg)
 
 `Users` have a `user_id`, and a `balance`. Each `user_id` can have multiple links to the `UserItems` table, and each entry in the table connects to one of the items in the `CurrencyShop`, which will have a `name` and a `cost` associated with it.
 

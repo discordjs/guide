@@ -57,15 +57,15 @@ After running `npm i express`, you can start your server with `node index.js`. O
 
 Now that you have a web server up and running, it's time to get some information from Discord. Open [your Discord applications](https://discord.com/developers/applications/), create or select an application, and head over to the "OAuth2" page.
 
-![OAuth2 application page](../.gitbook/assets/oauth2-app-page.png)
+![OAuth2 application page](../../.gitbook/assets/oauth2-app-page.png)
 
 Take note of the `client id` and `client secret` fields. Copy these values into your `config.json` file; you'll need them later. For now, add a redirect url to `http://localhost:53134` like so:
 
-![Adding Redirects](../.gitbook/assets/add-redirects.png)
+![Adding Redirects](../../.gitbook/assets/add-redirects.png)
 
 Once you've added your redirect URL, you will want to generate an OAuth2 URL. Lower down on the page, you can conveniently find an OAuth2 URL Generator provided by Discord. Use this to create a URL for yourself with the `identify` scope.
 
-![Generate an OAuth2 URL](../.gitbook/assets/generate-url.png)
+![Generate an OAuth2 URL](../../.gitbook/assets/generate-url.png)
 
 The `identify` scope will allow your application to get basic user information from Discord. You can find a list of all scopes [here](https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes).
 
@@ -75,7 +75,7 @@ You have your website, and you have a URL. Now you need to use those two things 
 
 After you change the `response_type`, you can test the URL right away. Visiting it in your browser, you will be directed to a page that looks like this:
 
-![Authorization Page](../.gitbook/assets/authorize-app-page.png)
+![Authorization Page](../../.gitbook/assets/authorize-app-page.png)
 
 You can see that by clicking `Authorize`, you allow the application to access your username and avatar. Once you click through, it will redirect you to your redirect URL with a [fragment identifier](https://en.wikipedia.org/wiki/Fragment_identifier) appended to it. You now have an access token and can make requests to Discord's API to get information on the user.
 

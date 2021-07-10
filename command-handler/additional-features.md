@@ -1,4 +1,4 @@
-# Additional features
+# Additional Features
 
 ::: tip This page is a follow-up and bases its code on [the previous page](https://github.com/zachjmurphy/guide/tree/9925b2dac70a223dd2dbb549ce57ddb5515bcbc0/command-handling/README.md). :::
 

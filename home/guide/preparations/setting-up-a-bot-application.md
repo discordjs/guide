@@ -12,11 +12,11 @@ It's effortless to create one. The steps you need to take are as follows:
 
 You should see a page like this:
 
-![Successfully created application](../../.gitbook/assets/create-app.png)
+![Successfully created application](../../../.gitbook/assets/create-app.png)
 
 You can optionally enter a name, description, and avatar for your application here. Once you've saved your changes, you can move on by selecting the "Bot" tab in the left pane.
 
-![Create a bot UI](../../.gitbook/assets/create-bot.png)
+![Create a bot UI](../../../.gitbook/assets/create-bot.png)
 
 Click the "Add Bot" button on the right and confirm the pop-up window by clicking "Yes, do it!". Congratulations, you're now the proud owner of a shiny new Discord bot! You're not entirely done, though.
 
@@ -26,7 +26,7 @@ Click the "Add Bot" button on the right and confirm the pop-up window by clickin
 
 After creating a bot user, you'll see a section like this:
 
-![Bot application](../../.gitbook/assets/created-bot.png)
+![Bot application](../../../.gitbook/assets/created-bot.png)
 
 In this panel, you can give your bot a snazzy avatar, set its username, and make it public or private. You can access your token in this panel as well, either by revealing it or pressing the "Copy" button. When we ask you to paste your token somewhere, this is the value that you need to put in. Don't worry if you do happen to lose it at some point; you can always come back to this page and copy it again.
 
