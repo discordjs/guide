@@ -54,7 +54,7 @@ Let's start displaying some real data. For now, we'll be displaying basic member
 
 ### Server info command
 
-Make another if statement to check for commands using `server` as the command name. You get the interaction object, reply to the interaction just as before:
+Make another if statement to check for commands using `server` as the command name. You get the interaction object and reply to the interaction just as before:
 
 ::: tip
 Servers are referred to as "guilds" in the Discord API and discord.js library. Whenever you see someone say "guild", they mean server.
@@ -149,12 +149,12 @@ This will display the command author's **username** (not nickname, if they have 
 			<DiscordInteraction profile="user" :command="true">user-info</DiscordInteraction>
 		</template>
 		Your username: User <br>
-		Your ID: 20833034795932416
+		Your ID: 123456789012345678
 	</DiscordMessage>
 </DiscordMessages>
 
 ::: tip
-`interaction.user` refers to the user who sent the command. For a full list of all the properties and methods for the user object, check out <docs-link path="class/User">the documentation page for it</docs-link>.
+`interaction.user` refers to the user who sent the command. For a full list of all the properties and methods for the user object, check out <DocsLink path="class/User">the documentation page for it</DocsLink>.
 :::
 
 And there you have it! As you can see, it's quite simple to add additional commands.

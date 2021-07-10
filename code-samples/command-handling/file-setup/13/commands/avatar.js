@@ -5,7 +5,7 @@ module.exports = {
 		options: [
 			{
 				name: 'target',
-				description: 'The user who\'s avatar to show',
+				description: 'The user\'s avatar to show',
 				type: 'USER',
 			},
 		],
@@ -13,6 +13,6 @@ module.exports = {
 	async execute(interaction) {
 		const { user } = interaction.options.get('target');
 		if (user) return interaction.reply(`${user.username}'s avatar: ${user.displayAvatarURL({ dynamic: true })}`);
-		else return interaction.reply(`Your avatar: ${interaction.user.displayAvatarURL({ dynamic: true })}`);
+		return interaction.reply(`Your avatar: ${interaction.user.displayAvatarURL({ dynamic: true })}`);
 	},
 };
