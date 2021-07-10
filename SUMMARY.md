@@ -1,15 +1,6 @@
 # Table of contents
 
-* [README](README.md)
-* [Getting started with Commando](commando/README.md)
-  * [Throttling](commando/throttling.md)
-  * [Removing the unknown command response](commando/unknown-command-response.md)
-  * [Setting a command as guild-only](commando/guild-only.md)
-  * [Using argument validators](commando/validators.md)
-  * [Your first command](commando/first-command.md)
-  * [Using arguments in commands](commando/args.md)
-  * [Handling permissions](commando/permissions.md)
-  * [Using client values in commands](commando/client-values.md)
+* [Home](README.md)
 
 ## Home
 

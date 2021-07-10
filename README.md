@@ -1,4 +1,4 @@
-# README
+# Home
 
 ![Discord.js Guide](.gitbook/assets/banner-blurple-small.png)
 
