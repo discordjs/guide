@@ -1,4 +1,4 @@
-# ES6 syntax examples
+# ES6 Syntax Examples
 
 If you've used JavaScript for only a \(relatively\) small amount of time or don't have much experience with it, you might not be aware of what ES6 is and what beneficial features it includes. Since this is a guide primarily for Discord bots, we'll be using some discord.js code as an example of what you might have versus what you could do to benefit from ES6.
 

@@ -83,7 +83,7 @@
 ## Additional Information
 
 * [Understanding async/await](additional-information/async-await.md)
-* [ES6 syntax examples](additional-information/es6-syntax.md)
+* [ES6 Syntax Examples](additional-information/es6-syntax.md)
 * [Understanding Notation](additional-information/notation.md)
 * [Using a REST API](additional-information/rest-api.md)
 * [Collections](additional-information/collections.md)
