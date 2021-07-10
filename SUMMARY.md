@@ -65,6 +65,4 @@
     * [Setting up a bot application](guide/preparations/setting-up-a-bot-application.md)
   * [Getting started with OAuth2](guide/oauth2.md)
   * [Requesting more content](guide/requesting-more-content.md)
-* [Contributor Covenant Code of Conduct](code_of_conduct.md)
-* [Contributing](contributing.md)
 
