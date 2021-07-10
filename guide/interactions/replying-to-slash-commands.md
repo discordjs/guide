@@ -251,13 +251,13 @@ const data = {
 You can `get()` these options from the `CommandInteraction#options` Collection:
 
 ```js
-const { value: string } = interaction.options.get('input');
-const { value: integer } = interaction.options.get('num');
-const { value: boolean } = interaction.options.get('choice');
-const { user } = interaction.options.get('target');
-const { member } = interaction.options.get('input');
-const { channel } = interaction.options.get('destination');
-const { role } = interaction.options.get('muted');
+const { value: string } = interaction.options.get('input') ?? {};
+const { value: integer } = interaction.options.get('num') ?? {};
+const { value: boolean } = interaction.options.get('choice') ?? {};
+const { user } = interaction.options.get('target') ?? {};
+const { member } = interaction.options.get('input') ?? {};
+const { channel } = interaction.options.get('destination') ?? {};
+const { role } = interaction.options.get('muted') ?? {};
 
 console.log([string, integer, boolean, user, member, channel, role]);
 ```
