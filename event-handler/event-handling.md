@@ -1,4 +1,4 @@
-# Event handling
+# Event Handling
 
 Node.js uses an event-driven architecture, making it possible to execute code when a specific event occurs. The discord.js library takes full advantage of this. You can visit the discord.js documentation site to see the full list of `Client` events.
 
@@ -27,7 +27,7 @@ Currently, the event listeners are in the `index.js` file. The `ready` event emi
 
 Your folder structure should look something like this:
 
-![Folder structure](../../.gitbook/assets/folder-structure%20%281%29.png)
+![Folder structure](../.gitbook/assets/folder-structure%20%281%29.png)
 
 Create an `events` folder in the same directory. You can now take your existing events code in `index.js` and move them to individual files inside the `events` folders. Create a `ready.js` and a `message.js` file in the `events` folder and place in the code for the respective files:
 

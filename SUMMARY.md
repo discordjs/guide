@@ -4,8 +4,7 @@
 
 ## Home
 
-* [Introduction](home/guide/README.md)
-  * [Event handling](home/guide/event-handling.md)
+* [Introduction](home/guide.md)
 * [Requesting More Content](home/requesting-more-content.md)
 
 ## Installations & Preparations
@@ -26,6 +25,10 @@
 
 * [Command Handling](command-handler/command-handling.md)
 * [Additional Features](command-handler/additional-features.md)
+
+## Event Handler
+
+* [Event Handling](event-handler/event-handling.md)
 
 ## Interactions
 
