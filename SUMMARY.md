@@ -5,12 +5,6 @@
 ## Home
 
 * [Introduction](home/guide/README.md)
-  * [additional-info](home/guide/additional-info/README.md)
-    * [Understanding async/await](home/guide/additional-info/async-await.md)
-    * [ES6 syntax examples](home/guide/additional-info/es6-syntax.md)
-    * [Understanding notation](home/guide/additional-info/notation.md)
-    * [Using a REST API](home/guide/additional-info/rest-api.md)
-    * [Collections](home/guide/additional-info/collections.md)
   * [Event handling](home/guide/event-handling.md)
   * [Installing Node.js and discord.js](home/guide/preparations/README.md)
     * [Adding your bot to servers](home/guide/preparations/adding-your-bot-to-servers.md)
@@ -85,4 +79,12 @@
 
 * [Managing your Bot Process with PM2](improving-your-dev-environment/pm2.md)
 * [Setting up Package.json Scripts](improving-your-dev-environment/package-json-scripts.md)
+
+## Additional Information
+
+* [Understanding async/await](additional-information/async-await.md)
+* [ES6 syntax examples](additional-information/es6-syntax.md)
+* [Understanding Notation](additional-information/notation.md)
+* [Using a REST API](additional-information/rest-api.md)
+* [Collections](additional-information/collections.md)
 
