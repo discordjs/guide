@@ -1,4 +1,4 @@
-# Frequently asked Questions
+# Frequently Asked Questions
 
 ## Legend
 

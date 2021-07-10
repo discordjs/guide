@@ -1,4 +1,4 @@
-# Useful packages
+# Useful Packages
 
 ## Day.js
 

@@ -1,4 +1,4 @@
-# Image manipulation with Canvas
+# Image Manipulation with Canvas
 
 ## Setting up Canvas
 

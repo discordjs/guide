@@ -1,9 +1,6 @@
 # Table of contents
 
 * [README](README.md)
-* [miscellaneous](miscellaneous/README.md)
-  * [Parsing mention arguments](miscellaneous/parsing-mention-arguments.md)
-  * [Useful packages](miscellaneous/useful-packages.md)
 * [interactions](interactions/README.md)
   * [Registering slash commands](interactions/registering-slash-commands.md)
   * [Slash command permissions](interactions/slash-command-permissions.md)
@@ -64,7 +61,7 @@
 
 ## Popular Topics <a id="popular-topics-1"></a>
 
-* [Frequently asked Questions](popular-topics-1/faq.md)
+* [Frequently Asked Questions](popular-topics-1/faq.md)
 * [Embeds](popular-topics-1/embeds.md)
 * [Errors](popular-topics-1/errors.md)
 * [Permissions](popular-topics-1/permissions.md)
@@ -73,8 +70,12 @@
 * [Collectors](popular-topics-1/collectors.md)
 * [Partial Structures](popular-topics-1/partials.md)
 * [Gateway Intents](popular-topics-1/intents.md)
-* [Image manipulation with Canvas](popular-topics-1/canvas.md)
+* [Image Manipulation with Canvas](popular-topics-1/canvas.md)
 * [Webhooks](popular-topics-1/webhooks.md)
 * [Working with Audit Logs](popular-topics-1/audit-logs.md)
-* [Untitled](popular-topics-1/untitled.md)
+
+## Miscellaneous <a id="miscellaneous-1"></a>
+
+* [Parsing Mention Arguments](miscellaneous-1/parsing-mention-arguments.md)
+* [Useful Packages](miscellaneous-1/useful-packages.md)
 

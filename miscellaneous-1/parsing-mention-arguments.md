@@ -1,4 +1,4 @@
-# Parsing mention arguments
+# Parsing Mention Arguments
 
 In a previous chapter, you learned how to build commands with user input; you also learned how to use _mentions_ as user input. However, using `message.mentions` can lead to a few problems.  
 For example, you do not know which mention belongs to which argument. Or if you are splitting the message's content by spaces to get the args, The mentions will still take up space in your args array, messing up the rest of your args parsing if you are not careful.
