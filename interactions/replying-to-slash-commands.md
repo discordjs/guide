@@ -1,4 +1,4 @@
-# Replying to slash commands
+# Replying to Slash Commands
 
 Discord provides developers the option to create client-integrated slash commands. In this section, we'll cover how to respond to these commands using discord.js!
 

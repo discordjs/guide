@@ -1,10 +1,6 @@
 # Table of contents
 
 * [README](README.md)
-* [interactions](interactions/README.md)
-  * [Registering slash commands](interactions/registering-slash-commands.md)
-  * [Slash command permissions](interactions/slash-command-permissions.md)
-  * [Replying to slash commands](interactions/replying-to-slash-commands.md)
 * [Getting started with Commando](commando/README.md)
   * [Throttling](commando/throttling.md)
   * [Removing the unknown command response](commando/unknown-command-response.md)
@@ -58,6 +54,12 @@
 
 * [Command Handling](command-handler/command-handling.md)
 * [Additional Features](command-handler/additional-features.md)
+
+## Interactions
+
+* [Registering Slash Commands](interactions/registering-slash-commands.md)
+* [Slash Command Permissions](interactions/slash-command-permissions.md)
+* [Replying to Slash Commands](interactions/replying-to-slash-commands.md)
 
 ## Popular Topics <a id="popular-topics-1"></a>
 
