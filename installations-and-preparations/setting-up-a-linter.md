@@ -1,4 +1,4 @@
-# Setting up a linter
+# Setting up a Linter
 
 As a developer, it's a good idea to make your development process as streamlined as possible. Installing and utilizing the right tools is an essential part of any project you're working on. Although it's not required, installing a linter will help you immensely.
 

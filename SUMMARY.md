@@ -6,11 +6,14 @@
 
 * [Introduction](home/guide/README.md)
   * [Event handling](home/guide/event-handling.md)
-  * [Installing Node.js and discord.js](home/guide/preparations/README.md)
-    * [Adding your bot to servers](home/guide/preparations/adding-your-bot-to-servers.md)
-    * [Setting up a linter](home/guide/preparations/setting-up-a-linter.md)
-    * [Setting up a bot application](home/guide/preparations/setting-up-a-bot-application.md)
 * [Requesting More Content](home/requesting-more-content.md)
+
+## Installations & Preparations
+
+* [Installing Node.js and Discord.js](installations-and-preparations/preparations.md)
+* [Adding your Bot to Servers](installations-and-preparations/adding-your-bot-to-servers.md)
+* [Setting up a Linter](installations-and-preparations/setting-up-a-linter.md)
+* [Setting up a Bot Application](installations-and-preparations/setting-up-a-bot-application.md)
 
 ## Creating Your Bot <a id="creating-your-bot-1"></a>
 
