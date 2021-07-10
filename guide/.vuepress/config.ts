@@ -28,6 +28,7 @@ const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 		contributors: false,
 		sidebar,
 		repo: 'discordjs/guide',
+		docsBranch: 'master',
 		docsDir: 'guide',
 		sidebarDepth: 3,
 		editLinks: true,
