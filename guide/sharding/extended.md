@@ -38,9 +38,8 @@ if (command === 'send') {
 		if (channel) {
 			await channel.send(`This is a message from shard ${client.shard.ids.join(',')}!`);
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}, { context: { channelId: args[0] } })
 		.then(console.log);
 }

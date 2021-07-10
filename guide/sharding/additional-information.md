@@ -41,7 +41,7 @@ In discord.js v13, <DocsLink path="class/ShardClientUtil?scrollTo=ids">`client.s
 
 ```js
 client.shard.broadcastEval(client => {
-	if (this.shard.ids.includes(0)) process.exit();
+	if (client.shard.ids.includes(0)) process.exit();
 });
 ```
 
@@ -77,7 +77,7 @@ You can access them later as usual via `process.argv`, which contains an array o
 
 ## Eval arguments
 
-There may come the point where you will want to pass arguments from the outer scope into a `broadcastEval()` call.
+There may come the point where you will want to pass arguments from the outer scope into a `.broadcastEval()` call.
 
 ```js
 function funcName(client, { arg }) {
@@ -87,15 +87,15 @@ function funcName(client, { arg }) {
 client.shard.broadcastEval(funcName, { context: { arg: 'arg' } });
 ```
 
-Discord.js v13 introduces a new object named <DocsLink path="typedef/BroadcastEvalOptions">`BroadcastEvalOptions`</DocsLink>.
-This object has two parameters. The `context` parameter will be sent as the second argument to your function.
+The <DocsLink path="typedef/BroadcastEvalOptions">`BroadcastEvalOptions`</DocsLink> typedef was introduced in discord.js v13 as the second parameter in `.broadcastEval()`.
+It accepts two properties: `shard` and `context`. The `context` property will be sent as the second argument to your function.
 
 In this small snippet, an argument is passed to the `funcName` function through this parameter.
 The function will recieve the arguments as an object as the second parameter.
 
 ::: warning
 The `context` option only accepts properties which are JSON-serializable.
-This means you can not pass complex data types in the context directly.
+This means you cannot pass complex data types in the context directly.
 :::
 
 ### Asynchronous functions
