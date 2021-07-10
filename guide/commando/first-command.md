@@ -8,33 +8,33 @@ Once you have your file, it's time to get started!
 
 Before you do anything, at the start of your file, you're going to need to require Commando again. Specifically its Command class.
 
-```js
+```javascript
 const { Command } = require('discord.js-commando');
 ```
 
 Commands are classes exported with `module.exports`. Create the class and set `module.exports` to it. You will also configure various options here, which we will explain below.
 
-```js
+```javascript
 module.exports = class MeowCommand extends Command {
-	constructor(client) {
-		super(client, {
-			name: 'meow',
-			aliases: ['kitty-cat'],
-			group: 'first',
-			memberName: 'meow',
-			description: 'Replies with a meow, kitty cat.',
-		});
-	}
+    constructor(client) {
+        super(client, {
+            name: 'meow',
+            aliases: ['kitty-cat'],
+            group: 'first',
+            memberName: 'meow',
+            description: 'Replies with a meow, kitty cat.',
+        });
+    }
 };
 ```
 
 Don't let this scare you; it's straightforward.
 
-- `name` is the name of the command.
-- `aliases` are other ways users can call the command. You can have as many as you want!
-- `group` is the command group of the command.
-- `memberName` is the name of the command within the group (this can be different from the name).
-- `description` is the help text displayed when someones use the help command.
+* `name` is the name of the command.
+* `aliases` are other ways users can call the command. You can have as many as you want!
+* `group` is the command group of the command.
+* `memberName` is the name of the command within the group \(this can be different from the name\).
+* `description` is the help text displayed when someones use the help command.
 
 There are many more properties you can use, but their sections will explain those.
 
@@ -42,19 +42,17 @@ There are many more properties you can use, but their sections will explain thos
 
 The next thing you're going to need is a `run` method. This should go right below the constructor for the command. Inside, you'll return a message:
 
-<!-- eslint-disable constructor-super -->
+\`\`\`js {6-8} module.exports = class MeowCommand extends Command { constructor\(client\) { // ... }
 
-```js {6-8}
-module.exports = class MeowCommand extends Command {
-	constructor(client) {
-		// ...
-	}
-
-	run(message) {
-		return message.say('Meow!');
-	}
-};
+```text
+run(message) {
+    return message.say('Meow!');
+}
 ```
+
+};
+
+\`\`\`
 
 As you can see, the `run` method is simply the code you want the bot to run when someone uses the command. This code can be anything you can do in core discord.js, as Commando is simply an extension.
 
@@ -66,4 +64,3 @@ Now fire up the bot as usual and use your command! It should automatically be `?
 
 ## Resulting code
 
-<ResultingCode />

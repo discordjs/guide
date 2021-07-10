@@ -1,26 +1,18 @@
 # Additional features
 
-::: tip
-This page is a follow-up and bases its code on [the previous page](/command-handling/).
-:::
+::: tip This page is a follow-up and bases its code on [the previous page](https://github.com/zachjmurphy/guide/tree/9925b2dac70a223dd2dbb549ce57ddb5515bcbc0/command-handling/README.md). :::
 
 The command handler you've been building so far doesn't do much aside from dynamically load and execute commands. Those two things alone are great, but not the only things you want. Before diving into it, let's do some quick refactoring in preparation.
 
-```js {2,4,6,9}
-const args = message.content.slice(prefix.length).trim().split(/ +/);
-const commandName = args.shift().toLowerCase();
+\`\`\`js {2,4,6,9} const args = message.content.slice\(prefix.length\).trim\(\).split\(/ +/\); const commandName = args.shift\(\).toLowerCase\(\);
 
-if (!client.commands.has(commandName)) return;
+if \(!client.commands.has\(commandName\)\) return;
 
-const command = client.commands.get(commandName);
+const command = client.commands.get\(commandName\);
 
-try {
-	command.execute(message, args);
-} catch (error) {
-	// ...
-}
-```
+try { command.execute\(message, args\); } catch \(error\) { // ... }
 
+```text
 In this short (but necessary) refactor, you:
 
 1. Renamed the original `command` variable to `commandName` (to be descriptive and to be able to create a different `command` variable later).
@@ -56,33 +48,33 @@ client.commands = new Discord.Collection();
 const commandFolders = fs.readdirSync('./commands');
 
 for (const folder of commandFolders) {
-	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
-	for (const file of commandFiles) {
-		const command = require(`./commands/${folder}/${file}`);
-		client.commands.set(command.name, command);
-	}
+    const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
+    for (const file of commandFiles) {
+        const command = require(`./commands/${folder}/${file}`);
+        client.commands.set(command.name, command);
+    }
 }
 ```
 
-That's it! When creating new files for commands, make sure you create them inside one of the subfolders (or a new one) in the `commands` folder.
+That's it! When creating new files for commands, make sure you create them inside one of the subfolders \(or a new one\) in the `commands` folder.
 
 ## Required arguments
 
 For this section, we'll be using the `args-info.js` command as an example. If you chose to keep it, it should look like this now:
 
-```js
+```javascript
 module.exports = {
-	name: 'args-info',
-	description: 'Information about the arguments provided.',
-	execute(message, args) {
-		if (!args.length) {
-			return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
-		} else if (args[0] === 'foo') {
-			return message.channel.send('bar');
-		}
+    name: 'args-info',
+    description: 'Information about the arguments provided.',
+    execute(message, args) {
+        if (!args.length) {
+            return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
+        } else if (args[0] === 'foo') {
+            return message.channel.send('bar');
+        }
 
-		message.channel.send(`Arguments: ${args}\nArguments length: ${args.length}`);
-	},
+        message.channel.send(`Arguments: ${args}\nArguments length: ${args.length}`);
+    },
 };
 ```
 
@@ -90,28 +82,23 @@ This check suffices if you only have a few commands that require arguments; howe
 
 Here are the changes you'll be making:
 
-```js {4,6-8}
-module.exports = {
-	name: 'args-info',
-	description: 'Information about the arguments provided.',
-	args: true,
-	execute(message, args) {
-		if (args[0] === 'foo') {
-			return message.channel.send('bar');
-		}
+\`\`\`js {4,6-8} module.exports = { name: 'args-info', description: 'Information about the arguments provided.', args: true, execute\(message, args\) { if \(args\[0\] === 'foo'\) { return message.channel.send\('bar'\); }
 
-		message.channel.send(`Arguments: ${args}\nArguments length: ${args.length}`);
-	},
-};
+```text
+    message.channel.send(`Arguments: ${args}\nArguments length: ${args.length}`);
+},
 ```
 
+};
+
+```text
 And then in your main file:
 
 ```js {3-5}
 const command = client.commands.get(commandName);
 
 if (command.args && !args.length) {
-	return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
+    return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
 }
 ```
 
@@ -119,34 +106,26 @@ Now, whenever you set `args` to `true` in one of your command files, it'll perfo
 
 ### Expected command usage
 
-It's good UX (user experience) to let the user know that a command requires arguments when they don't provide any (it also prevents your code from breaking). Letting them know what kind of arguments the command expects is even better.
+It's good UX \(user experience\) to let the user know that a command requires arguments when they don't provide any \(it also prevents your code from breaking\). Letting them know what kind of arguments the command expects is even better.
 
 Here's a simple implementation of such a thing. For this example, pretend you have a `!role` command, where the first argument is the user to give the role, and the second argument is the name of the role.
 
 In your `role.js` file:
 
-```js {3-4}
-module.exports = {
-	name: 'role',
-	args: true,
-	usage: '<user> <role>',
-	execute(message, args) {
-		// ...
-	},
-};
-```
+\`\`\`js {3-4} module.exports = { name: 'role', args: true, usage: ' ', execute\(message, args\) { // ... }, };
 
+```text
 In your main file:
 
 ```js {2,4-6,8}
 if (command.args && !args.length) {
-	let reply = `You didn't provide any arguments, ${message.author}!`;
+    let reply = `You didn't provide any arguments, ${message.author}!`;
 
-	if (command.usage) {
-		reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
-	}
+    if (command.usage) {
+        reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
+    }
 
-	return message.channel.send(reply);
+    return message.channel.send(reply);
 }
 ```
 
@@ -156,57 +135,35 @@ Some commands are meant to be used only inside servers and won't work whatsoever
 
 In the kick command you created in an earlier chapter, make the following changes:
 
-```js {4}
-module.exports = {
-	name: 'kick',
-	description: 'Kick a user from the server.',
-	guildOnly: true,
-	execute(message, args) {
-		// ...
-	},
-};
-```
+\`\`\`js {4} module.exports = { name: 'kick', description: 'Kick a user from the server.', guildOnly: true, execute\(message, args\) { // ... }, };
 
+```text
 And in your main file, use an if statement to verify:
 
 
 ```js {1-3}
 if (command.guildOnly && message.channel.type === 'dm') {
-	return message.reply('I can\'t execute that command inside DMs!');
+    return message.reply('I can\'t execute that command inside DMs!');
 }
 
 if (command.args && !args.length) {
-	// ...
+    // ...
 }
 ```
 
 Now when you try to use the kick command inside a DM, you'll get the appropriate response, preventing your bot from throwing an error.
 
-<DiscordMessages>
-	<DiscordMessage profile="user">
-		!kick
-	</DiscordMessage>
-	<DiscordMessage profile="bot">
-		I can't execute that command inside DMs!
-	</DiscordMessage>
-</DiscordMessages>
+ !kick I can't execute that command inside DMs!
 
 ## Cooldowns
 
 Spam is something you generally want to avoid–especially if one of your commands requires calls to other APIs or takes a bit of time to build/send. Cooldowns are also a very common feature bot developers want to integrate into their projects, so let's get started on that!
 
-First, add a cooldown key to one of your commands (we use the ping command here) exports. This determines how long the user will have to wait (in seconds) before using this specific command again.
+First, add a cooldown key to one of your commands \(we use the ping command here\) exports. This determines how long the user will have to wait \(in seconds\) before using this specific command again.
 
-```js {3}
-module.exports = {
-	name: 'ping',
-	cooldown: 5,
-	execute(message) {
-		// ...
-	},
-};
-```
+\`\`\`js {3} module.exports = { name: 'ping', cooldown: 5, execute\(message\) { // ... }, };
 
+```text
 In your main file, initialize an empty [Collection](/additional-info/collections.html) which you can then fill later when commands are used:
 
 ```js {2}
@@ -214,32 +171,21 @@ client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 ```
 
-The keys will be the command names, and the values will be Collections associating the user id (key) to the last time (value) this specific user used this specific command. Overall the logical path to get a specific user's last usage of a specific command will be `cooldowns > command > user > timestamp`.
+The keys will be the command names, and the values will be Collections associating the user id \(key\) to the last time \(value\) this specific user used this specific command. Overall the logical path to get a specific user's last usage of a specific command will be `cooldowns > command > user > timestamp`.
 
 In your main file, add the following code:
 
-```js {1,3-5,7-9,11-13}
-const { cooldowns } = client;
+\`\`\`js {1,3-5,7-9,11-13} const { cooldowns } = client;
 
-if (!cooldowns.has(command.name)) {
-	cooldowns.set(command.name, new Discord.Collection());
-}
+if \(!cooldowns.has\(command.name\)\) { cooldowns.set\(command.name, new Discord.Collection\(\)\); }
 
-const now = Date.now();
-const timestamps = cooldowns.get(command.name);
-const cooldownAmount = (command.cooldown || 3) * 1000;
+const now = Date.now\(\); const timestamps = cooldowns.get\(command.name\); const cooldownAmount = \(command.cooldown \|\| 3\) \* 1000;
 
-if (timestamps.has(message.author.id)) {
-	// ...
-}
+if \(timestamps.has\(message.author.id\)\) { // ... }
 
-try {
-	// ...
-} catch (error) {
-	// ...
-}
-```
+try { // ... } catch \(error\) { // ... }
 
+```text
 You check if the `cooldowns` Collection already has an entry for the command being used right now. If this is not the case, add a new entry, where the value is initialized as an empty Collection. Next, 3 variables are created:
 
 1. `now`: The current timestamp.
@@ -252,12 +198,12 @@ Continuing with your current setup, this is the complete `if` statement:
 
 ```js {2,4-7}
 if (timestamps.has(message.author.id)) {
-	const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+    const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
 
-	if (now < expirationTime) {
-		const timeLeft = (expirationTime - now) / 1000;
-		return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
-	}
+    if (now < expirationTime) {
+        const timeLeft = (expirationTime - now) / 1000;
+        return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
+    }
 }
 ```
 
@@ -265,15 +211,11 @@ Since the `timestamps` Collection has the author's ID in it as a key, you `.get(
 
 The previous author check serves as a precaution. It should normally not be necessary, as you will now insert a short piece of code, causing the author's entry to be deleted after the cooldown has expired. To facilitate this, you will use the node.js `setTimeout` method, which allows you to execute a function after a specified amount of time:
 
-```js {5-6}
-if (timestamps.has(message.author.id)) {
-	// ...
-}
+\`\`\`js {5-6} if \(timestamps.has\(message.author.id\)\) { // ... }
 
-timestamps.set(message.author.id, now);
-setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-```
+timestamps.set\(message.author.id, now\); setTimeout\(\(\) =&gt; timestamps.delete\(message.author.id\), cooldownAmount\);
 
+```text
 This line causes the entry for the message author under the specified command to be deleted after the command's cooldown time is expired for this user.
 
 ## Command aliases
@@ -286,52 +228,50 @@ Open your `avatar.js` file and add in the following line:
 
 ```js {3}
 module.exports = {
-	name: 'avatar',
-	aliases: ['icon', 'pfp'],
-	execute(message, args) {
-		// ...
-	},
+    name: 'avatar',
+    aliases: ['icon', 'pfp'],
+    execute(message, args) {
+        // ...
+    },
 };
 ```
 
 The `aliases` property should always contain an array of strings. In your main file, here are the changes you'll need to make:
 
-<!-- eslint-disable no-useless-return -->
+\`\`\`js {5-6,8} client.on\('message', message =&gt; { const args = message.content.slice\(prefix.length\).trim\(\).split\(/ +/\); const commandName = args.shift\(\).toLowerCase\(\);
 
-```js {5-6,8}
-client.on('message', message => {
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const commandName = args.shift().toLowerCase();
+```text
+const command = client.commands.get(commandName)
+    || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-	const command = client.commands.get(commandName)
-		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-
-	if (!command) return;
-	// ...
-});
+if (!command) return;
+// ...
 ```
 
+}\);
+
+```text
 Making those two small changes, you get this:
 
 <DiscordMessages>
-	<DiscordMessage profile="user">
-		!avatar <DiscordMention :highlight="true" profile="user" />
-	</DiscordMessage>
-	<DiscordMessage profile="bot">
-		User's avatar:
-		<a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
-		<br />
-		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
-	</DiscordMessage>
-	<DiscordMessage profile="user">
-		!icon <DiscordMention :highlight="true" profile="user" />
-	</DiscordMessage>
-	<DiscordMessage profile="bot">
-		User's avatar:
-		<a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
-		<br />
-		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
-	</DiscordMessage>
+    <DiscordMessage profile="user">
+        !avatar <DiscordMention :highlight="true" profile="user" />
+    </DiscordMessage>
+    <DiscordMessage profile="bot">
+        User's avatar:
+        <a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
+        <br />
+        <img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
+    </DiscordMessage>
+    <DiscordMessage profile="user">
+        !icon <DiscordMention :highlight="true" profile="user" />
+    </DiscordMessage>
+    <DiscordMessage profile="bot">
+        User's avatar:
+        <a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
+        <br />
+        <img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
+    </DiscordMessage>
 </DiscordMessages>
 
 ## A dynamic help command
@@ -340,63 +280,59 @@ If you don't use a framework or command handler for your projects, you'll have a
 
 ```js
 module.exports = {
-	name: 'help',
-	description: 'List all of my commands or info about a specific command.',
-	aliases: ['commands'],
-	usage: '[command name]',
-	cooldown: 5,
-	execute(message, args) {
-		// ...
-	},
+    name: 'help',
+    description: 'List all of my commands or info about a specific command.',
+    aliases: ['commands'],
+    usage: '[command name]',
+    cooldown: 5,
+    execute(message, args) {
+        // ...
+    },
 };
 ```
 
 You're going to need your prefix variable a couple of times inside this command, so make sure to require that at the very top of the file.
 
-```js {1}
-const { prefix } = require('../../config.json');
+\`\`\`js {1} const { prefix } = require\('../../config.json'\);
 
-module.exports = {
-	// ...
-};
-```
+module.exports = { // ... };
 
+```text
 Inside the `execute()` function, set up some variables and an if/else statement to determine whether it should display a list of all the command names or only information about a specific command.
 
 ```js {4-5,7-9}
 module.exports = {
-	// ...
-	execute(message, args) {
-		const data = [];
-		const { commands } = message.client;
+    // ...
+    execute(message, args) {
+        const data = [];
+        const { commands } = message.client;
 
-		if (!args.length) {
-			// ...
-		}
-	},
+        if (!args.length) {
+            // ...
+        }
+    },
 };
 ```
 
 You can use `.push()` on the `data` variable to append the info you want and then DM it to the message author afterward.
 
-```js {2-4,6-14}
-if (!args.length) {
-	data.push('Here\'s a list of all my commands:');
-	data.push(commands.map(command => command.name).join(', '));
-	data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
+`````js {2-4,6-14} if (!args.length) { data.push('Here\'s a list of all my commands:'); data.push(commands.map(command => command.name).join(', ')); data.push(```\nYou can send \`${prefix}help \[command name\]\` to get info on a specific command!\`\);
 
-	return message.author.send(data, { split: true })
-		.then(() => {
-			if (message.channel.type === 'dm') return;
-			message.reply('I\'ve sent you a DM with all my commands!');
-		})
-		.catch(error => {
-			console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
-			message.reply('it seems like I can\'t DM you! Do you have DMs disabled?');
-		});
-}
+```text
+return message.author.send(data, { split: true })
+    .then(() => {
+        if (message.channel.type === 'dm') return;
+        message.reply('I\'ve sent you a DM with all my commands!');
+    })
+    .catch(error => {
+        console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
+        message.reply('it seems like I can\'t DM you! Do you have DMs disabled?');
+    });
 ```
 
+}
+
+```text
 There's nothing complicated here; all you do is append some strings, `.map()` over the `commands` Collection, and add a string to let the user know how to trigger information about a specific command.
 
 Since help messages can get messy, you'll be DMing it to the message author instead of posting it in the requested channel. However, there is something significant you should consider: the possibility of not being able to DM the user, whether it be that they have DMs disabled on that server or overall, or they have the bot blocked. For that reason, you should `.catch()` it and let them know.
@@ -413,14 +349,14 @@ Below the `if (!args.length)` statement is where you'll send the help message fo
 
 ```js {5-6,8-10,12,14-16,18,20}
 if (!args.length) {
-	// ...
+    // ...
 }
 
 const name = args[0].toLowerCase();
 const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
 
 if (!command) {
-	return message.reply('that\'s not a valid command!');
+    return message.reply('that\'s not a valid command!');
 }
 
 data.push(`**Name:** ${command.name}`);
@@ -438,116 +374,77 @@ Once you get the command based on the name or alias they gave, you can start `.p
 
 At the end of it all, you should be getting this as a result:
 
-<DiscordMessages>
-	<DiscordMessage profile="user">
-		!help
-	</DiscordMessage>
-	<DiscordMessage profile="bot">
-		Here's a list of all my commands:
-		args-info, avatar, beep, help, kick, ping, prune, server, user-info <br>
-		You can send `!help [command name]` to get info on a specific command!
-	</DiscordMessage>
-	<DiscordMessage profile="user">
-		!help avatar
-	</DiscordMessage>
-	<DiscordMessage profile="bot">
-		<strong>Name:</strong> avatar <br>
-		<strong>Aliases:</strong> icon,pfp <br>
-		<strong>Description:</strong> Get the avatar URL of the tagged user(s), or your own avatar. <br>
-		<strong>Cooldown:</strong> 3 second(s)
-	</DiscordMessage>
-</DiscordMessages>
+ !help Here's a list of all my commands: args-info, avatar, beep, help, kick, ping, prune, server, user-info  
+ You can send \`!help \[command name\]\` to get info on a specific command! !help avatar **Name:** avatar  
+ **Aliases:** icon,pfp  
+ **Description:** Get the avatar URL of the tagged user\(s\), or your own avatar.  
+ **Cooldown:** 3 second\(s\)
 
 No more manually editing your help command! If you aren't satisfied with how it looks, you can always adjust it to your liking later.
 
-::: tip
-If you want to add categories or other information to your commands, you can add properties reflecting it to your `module.exports`. If you only want to show a subset of commands remember that `commands` is a Collection you can <DocsLink section="collection" path="class/Collection?scrollTo=filter">filter</DocsLink> to fit your specific needs!
-:::
+::: tip If you want to add categories or other information to your commands, you can add properties reflecting it to your `module.exports`. If you only want to show a subset of commands remember that `commands` is a Collection you can filter to fit your specific needs! :::
 
 ## Command permissions
 
 In this section, you will be adding permission requirements to the command handler we established so far. To do so, you need to add a `permissions` key to your existing command options. We will use the 'kick' command to demonstrate:
 
-```js {5}
-module.exports = {
-	name: 'kick',
-	description: 'Kick a user from the server.',
-	guildOnly: true,
-	permissions: 'KICK_MEMBERS',
-	execute(message, args) {
-		// ...
-	},
-};
-```
+\`\`\`js {5} module.exports = { name: 'kick', description: 'Kick a user from the server.', guildOnly: true, permissions: 'KICK\_MEMBERS', execute\(message, args\) { // ... }, };
 
+```text
 You also need to check for those permissions before executing the command, which is done in the main file, as shown below. We use `TextChannel#permissionsFor` combined with `Permissions#has` rather than `Guildmember#hasPermission` to respect permission overwrites in our check.
 
 ```js {1-6}
 if (command.permissions) {
-	const authorPerms = message.channel.permissionsFor(message.author);
-	if (!authorPerms || !authorPerms.has(command.permissions)) {
-		return message.reply('You can not do this!');
-	}
+    const authorPerms = message.channel.permissionsFor(message.author);
+    if (!authorPerms || !authorPerms.has(command.permissions)) {
+        return message.reply('You can not do this!');
+    }
 }
 
 if (command.args && !args.length) {
-	// ...
+    // ...
 }
 ```
 
 Your command handler will now refuse to execute commands if the permissions you specify in the command structure are missing from the member trying to use it. Note that the `ADMINISTRATOR` permission and the message author being the owner of the guild will overwrite this.
 
-::: tip
-Need more resources on how Discord's permission system works? Check the [permissions article](/popular-topics/permissions.html), [extended permissions knowledge base](/popular-topics/permissions-extended.html) and documentation of <DocsLink path="class/Permissions?scrollTo=s-FLAGS">permission flags</DocsLink> out! 
-:::
+::: tip Need more resources on how Discord's permission system works? Check the [permissions article](https://github.com/zachjmurphy/guide/tree/9925b2dac70a223dd2dbb549ce57ddb5515bcbc0/popular-topics/permissions.html), [extended permissions knowledge base](https://github.com/zachjmurphy/guide/tree/9925b2dac70a223dd2dbb549ce57ddb5515bcbc0/popular-topics/permissions-extended.html) and documentation of permission flags out! :::
 
 ## Reloading commands
 
 When writing your commands, you may find it tedious to restart your bot every time you want to test even your code's slightest change. However, a single bot command can reload commands if you have a command handler.
 
-Create a new command file and paste in the usual format (using the [argument checker](/command-handling/adding-features.html#required-arguments) from above) with a slight change:
+Create a new command file and paste in the usual format \(using the [argument checker](https://github.com/zachjmurphy/guide/tree/9925b2dac70a223dd2dbb549ce57ddb5515bcbc0/command-handling/adding-features.html#required-arguments) from above\) with a slight change:
 
-```js {1}
-const fs = require('fs');
+\`\`\`js {1} const fs = require\('fs'\);
 
-module.exports = {
-	name: 'reload',
-	description: 'Reloads a command',
-	args: true,
-	execute(message, args) {
-		// ...
-	},
-};
-```
+module.exports = { name: 'reload', description: 'Reloads a command', args: true, execute\(message, args\) { // ... }, };
 
+```text
 In this command, you will be using a command name or alias as the only argument. First off, you need to check if the command you want to reload exists. You can do this check similarly to getting a command in your main file:
 
 ```js {4-6,8-10}
 module.exports = {
-	// ...
-	execute(message, args) {
-		const commandName = args[0].toLowerCase();
-		const command = message.client.commands.get(commandName)
-			|| message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+    // ...
+    execute(message, args) {
+        const commandName = args[0].toLowerCase();
+        const command = message.client.commands.get(commandName)
+            || message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-		if (!command) {
-			return message.channel.send(`There is no command with name or alias \`${commandName}\`, ${message.author}!`);
-		}
-	},
+        if (!command) {
+            return message.channel.send(`There is no command with name or alias \`${commandName}\`, ${message.author}!`);
+        }
+    },
 };
 ```
 
-To build the correct file path, you will need the file name and the sub-folder the command belongs to. For the file name, you can use `command.name`. To find the sub-folder name, you will have to loop through the commands sub-folders and check whether the command file is in that folder or not. You can do that by using `Array.includes()` on each subfolder's file names array. 
+To build the correct file path, you will need the file name and the sub-folder the command belongs to. For the file name, you can use `command.name`. To find the sub-folder name, you will have to loop through the commands sub-folders and check whether the command file is in that folder or not. You can do that by using `Array.includes()` on each subfolder's file names array.
 
-```js {5-6}
-if (!command) {
-	// ...
-}
+\`\`\`js {5-6} if \(!command\) { // ... }
 
-const commandFolders = fs.readdirSync('./commands');
-const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${folder}`).includes(`${command.name}.js`));
-```
+const commandFolders = fs.readdirSync\('./commands'\); const folderName = commandFolders.find\(folder =&gt; fs.readdirSync\(`./commands/${folder}`\).includes\(`${command.name}.js`\)\);
 
+```text
 In theory, all there is to do is delete the previous command from `client.commands` and require the file again. In practice, you cannot do this easily as `require()` caches the file. If you were to require it again, you would load the previously cached file without any changes. You first need to delete the file from the `require.cache`, and only then should you require and set the command file to `client.commands`:
 
 ```js {3,5-12}
@@ -556,21 +453,20 @@ const folderName = commandFolders.find(folder => fs.readdirSync(`./commands/${fo
 delete require.cache[require.resolve(`../${folderName}/${command.name}.js`)];
 
 try {
-	const newCommand = require(`../${folderName}/${command.name}.js`);
-	message.client.commands.set(newCommand.name, newCommand);
-	message.channel.send(`Command \`${newCommand.name}\` was reloaded!`);
+    const newCommand = require(`../${folderName}/${command.name}.js`);
+    message.client.commands.set(newCommand.name, newCommand);
+    message.channel.send(`Command \`${newCommand.name}\` was reloaded!`);
 } catch (error) {
-	console.error(error);
-	message.channel.send(`There was an error while reloading a command \`${command.name}\`:\n\`${error.message}\``);
+    console.error(error);
+    message.channel.send(`There was an error while reloading a command \`${command.name}\`:\n\`${error.message}\``);
 }
 ```
 
 The snippet above uses a `try/catch` block to load the command file and add it to `client.commands`. In case of an error, it will log the full error to the console and notify the user about it with the error's message component `error.message`. Note that you never actually delete the command from the commands Collection and instead overwrite it. This behavior prevents you from deleting a command and ending up with no command at all after a failed `require()` call, as each use of the reload command checks that Collection again.
 
-## Conclusion 
+## Conclusion
 
-You should have a command handler with some basic (but useful) features at this point in the guide! If you see fit, you can expand upon the current structure to make something even better and more comfortable for your future use.
+You should have a command handler with some basic \(but useful\) features at this point in the guide! If you see fit, you can expand upon the current structure to make something even better and more comfortable for your future use.
 
 ## Resulting code
 
-<ResultingCode />

@@ -6,22 +6,17 @@ Before you dive into this section, please note that sharding may not be necessar
 
 ## How does sharding work?
 
-As an application grows large, a developer may find it necessary to split their process to run parallel to maximize efficiency. On a much larger scale of things, the developer might notice their process slow down, amongst other problems.
-[Check out the official Discord documentation on the topic.](https://discord.com/developers/docs/topics/gateway#sharding)
+As an application grows large, a developer may find it necessary to split their process to run parallel to maximize efficiency. On a much larger scale of things, the developer might notice their process slow down, amongst other problems. [Check out the official Discord documentation on the topic.](https://discord.com/developers/docs/topics/gateway#sharding)
 
-::: warning
-This guide only explains the basics of sharding using the built-in ShardingManager, which can run shards as separate processes or threads on a single machine. If you need to scale beyond that (e.g., running shards on multiple machines/containers), you can still do it with discord.js by passing appropriate options to the Client constructor. Nevertheless, you will be on your own regarding managing shards and sharing information between them.
-:::
+::: warning This guide only explains the basics of sharding using the built-in ShardingManager, which can run shards as separate processes or threads on a single machine. If you need to scale beyond that \(e.g., running shards on multiple machines/containers\), you can still do it with discord.js by passing appropriate options to the Client constructor. Nevertheless, you will be on your own regarding managing shards and sharing information between them. :::
 
-::: tip
-Apart from ShardingManager, discord.js also supports a sharding mode known as Internal sharding. Internal sharding creates multiple websocket connections from the same process, and does not require major code changes. To enable it, simply pass `shards: 'auto'` as ClientOptions to the Client constructor. However, internal sharding is not ideal for bigger bots due to high memory usage of the single main process and will not be further discussed in this guide.
-:::
+::: tip Apart from ShardingManager, discord.js also supports a sharding mode known as Internal sharding. Internal sharding creates multiple websocket connections from the same process, and does not require major code changes. To enable it, simply pass `shards: 'auto'` as ClientOptions to the Client constructor. However, internal sharding is not ideal for bigger bots due to high memory usage of the single main process and will not be further discussed in this guide. :::
 
 ## Sharding file
 
 First, you'll need to have a file that you'll be launching from now on, rather than your original `index.js` file. It's highly recommended renaming that to `bot.js` and naming this new file to `index.js` instead. Copy & paste the following snippet into your new `index.js` file.
 
-```js
+```javascript
 const { ShardingManager } = require('discord.js');
 const manager = new ShardingManager('./bot.js', { token: 'your-token-goes-here' });
 
@@ -31,81 +26,67 @@ manager.spawn();
 
 The above code utilizes the discord.js sharding manager to spawn the recommended amount of shards for your bot. The recommended amount should be approximately 1,000 guilds per shard. Note that you have to attach the event listener to `shardCreate` before calling `.spawn()` to prevent a race condition possibly preventing shard 0 from logging the successful launch. Even though you provide the token here, you will still need to send it over to the main bot file in `client.login()`, so don't forget to do that.
 
-::: tip
-You can find the methods available for the ShardingManager class <DocsLink path="class/ShardingManager">here</DocsLink>. Though, you may not be making much use of this section, unlike the next feature we will explore, which you may learn about by clicking [this link](/sharding/additional-information.md).
-:::
+::: tip You can find the methods available for the ShardingManager class here. Though, you may not be making much use of this section, unlike the next feature we will explore, which you may learn about by clicking [this link](https://github.com/zachjmurphy/guide/tree/9925b2dac70a223dd2dbb549ce57ddb5515bcbc0/sharding/additional-information.md). :::
 
 ## Getting started
 
 You will most likely have to change some code to get your newly sharded bot to work. If your bot is very basic, then you're in luck! We assume you probably have some form of a `stats` command, by which you can quickly view your bot's statistics, such as its server count. We will use it as an example that needs to adapt to running with shards.
 
-In this code, you likely have the snippet `client.guilds.cache.size`, which counts the number of *cached* guilds attached to that client. Since sharding will launch multiple processes, each process (each shard) will now have its subset collection of guilds it is responsible for. This means that your original code will not function as you might expect.
+In this code, you likely have the snippet `client.guilds.cache.size`, which counts the number of _cached_ guilds attached to that client. Since sharding will launch multiple processes, each process \(each shard\) will now have its subset collection of guilds it is responsible for. This means that your original code will not function as you might expect.
 
 Here is some sample code for a `stats` command, without sharding taken into consideration:
 
-```js
+```javascript
 // bot.js
 const { Client } = require('discord.js');
 const client = new Client();
 const prefix = '!';
 
 client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const command = args.shift().toLowerCase();
 
-	if (command === 'stats') {
-		return message.channel.send(`Server count: ${client.guilds.cache.size}`);
-	}
+    if (command === 'stats') {
+        return message.channel.send(`Server count: ${client.guilds.cache.size}`);
+    }
 });
 
 client.login('your-token-goes-here');
 ```
 
-Let's say your bot is in a total of 3,600 guilds. Using the recommended shard count, you might end up at four shards, each containing approximately 900 guilds. If a guild is on a specific shard (shard #2, for example) and receives this command, the guild count will be close to 900, which is not the "correct" number of guilds for your bot. Let's take a look at how to fix that.
+Let's say your bot is in a total of 3,600 guilds. Using the recommended shard count, you might end up at four shards, each containing approximately 900 guilds. If a guild is on a specific shard \(shard \#2, for example\) and receives this command, the guild count will be close to 900, which is not the "correct" number of guilds for your bot. Let's take a look at how to fix that.
 
 ## FetchClientValues
 
-<DocsLink path="class/ShardClientUtil?scrollTo=fetchClientValues">Shard#fetchClientValues</DocsLink> is one of the most common sharding utility methods you'll be using. This method retrieves a property on the Client object of all shards.
+Shard\#fetchClientValues is one of the most common sharding utility methods you'll be using. This method retrieves a property on the Client object of all shards.
 
 Take the following snippet of code:
 
-```js
+```javascript
 client.shard.fetchClientValues('guilds.cache.size').then(console.log);
 ```
 
-If you run it, you will notice an output like `[898, 901, 900, 901]`. You will be correct in assuming that that's the total number of guilds per shard stored in an array in the Promise. This probably isn't the ideal output for guild count, so let's use [Array.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) to provide a better output.
+If you run it, you will notice an output like `[898, 901, 900, 901]`. You will be correct in assuming that that's the total number of guilds per shard stored in an array in the Promise. This probably isn't the ideal output for guild count, so let's use [Array.reduce\(\)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) to provide a better output.
 
-::: tip
-It's highly recommended for you to visit [the documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) to understand how the `reduce()` method works, as you will probably find great use of it in sharding.
-:::
+::: tip It's highly recommended for you to visit [the documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) to understand how the `reduce()` method works, as you will probably find great use of it in sharding. :::
 
 In this case, this method iterates through the array and adds each current value to the total amount:
 
-```js
+```javascript
 client.shard.fetchClientValues('guilds.cache.size')
-	.then(results => {
-		console.log(`${results.reduce((acc, guildCount) => acc + guildCount, 0)} total guilds`);
-	})
-	.catch(console.error);
+    .then(results => {
+        console.log(`${results.reduce((acc, guildCount) => acc + guildCount, 0)} total guilds`);
+    })
+    .catch(console.error);
 ```
 
 While it's a bit unattractive to have more nesting in your commands, it is necessary when not using `async`/`await`. Now, the code at the top should look something like the below:
 
-```js {4-8}
-client.on('message', message => {
-	// ...
-	if (command === 'stats') {
-		return client.shard.fetchClientValues('guilds.cache.size')
-			.then(results => {
-				return message.channel.send(`Server count: ${results.reduce((acc, guildCount) => acc + guildCount, 0)}`);
-			})
-			.catch(console.error);
-	}
-});
-```
+`````js {4-8} client.on('message', message => { // ... if (command === 'stats') { return client.shard.fetchClientValues('guilds.cache.size') .then(results => { return message.channel.send(```Server count: ${results.reduce\(\(acc, guildCount\) =&gt; acc + guildCount, 0\)}\`\); }\) .catch\(console.error\); } }\);
 
+```text
 ## BroadcastEval
 
 Next, check out another handy sharding method known as <DocsLink path="class/ShardClientUtil?scrollTo=broadcastEval">`Shard#broadcastEval`</DocsLink>. This method makes all of the shards evaluate a given script, where `this` is the `client` once each shard gets to evaluating it. You can read more about the `this` keyword [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this). For now, essentially understand that it is the shard's Client object.
@@ -114,59 +95,55 @@ Next, check out another handy sharding method known as <DocsLink path="class/Sha
 client.shard.broadcastEval('this.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)').then(console.log);
 ```
 
-This will run the code given to `broadcastEval` on each shard and return the results to the Promise as an array, once again. You should see something like `[9001, 16658, 13337, 15687]` logged. The code sent to each shard adds up the `memberCount` property of every guild that shard is handling and returns it, so each shard's total guild member count. Of course, if you want to total up the member count of *every* shard, you can do the same thing again on the Promise results.
+This will run the code given to `broadcastEval` on each shard and return the results to the Promise as an array, once again. You should see something like `[9001, 16658, 13337, 15687]` logged. The code sent to each shard adds up the `memberCount` property of every guild that shard is handling and returns it, so each shard's total guild member count. Of course, if you want to total up the member count of _every_ shard, you can do the same thing again on the Promise results.
 
-```js
+```javascript
 client.shard.broadcastEval('this.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)')
-	.then(results => {
-		return message.channel.send(`Total member count: ${results.reduce((acc, memberCount) => acc + memberCount, 0)}`);
-	})
-	.catch(console.error);
+    .then(results => {
+        return message.channel.send(`Total member count: ${results.reduce((acc, memberCount) => acc + memberCount, 0)}`);
+    })
+    .catch(console.error);
 ```
 
 ## Putting them together
 
-You'd likely want to output both pieces of information in the stats command. You can combine these two results with [Promise.all()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all):
+You'd likely want to output both pieces of information in the stats command. You can combine these two results with [Promise.all\(\)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all):
 
-```js
+```javascript
 const promises = [
-	client.shard.fetchClientValues('guilds.cache.size'),
-	client.shard.broadcastEval('this.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)'),
+    client.shard.fetchClientValues('guilds.cache.size'),
+    client.shard.broadcastEval('this.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)'),
 ];
 
 Promise.all(promises)
-	.then(results => {
-		const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
-		const totalMembers = results[1].reduce((acc, memberCount) => acc + memberCount, 0);
-		return message.channel.send(`Server count: ${totalGuilds}\nMember count: ${totalMembers}`);
-	})
-	.catch(console.error);
+    .then(results => {
+        const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
+        const totalMembers = results[1].reduce((acc, memberCount) => acc + memberCount, 0);
+        return message.channel.send(`Server count: ${totalGuilds}\nMember count: ${totalMembers}`);
+    })
+    .catch(console.error);
 ```
 
 `Promise.all()` runs every Promise you pass inside an array in parallel and waits for each to finish before returning their results simultaneously. The result is an array that corresponds with the array of Promises you pass–so the first result element will be from the first Promise. With that, your stats command should look something like this:
 
-```js {4-15}
-client.on('message', message => {
-	// ...
-	if (command === 'stats') {
-		const promises = [
-			client.shard.fetchClientValues('guilds.cache.size'),
-			client.shard.broadcastEval('this.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)'),
-		];
+\`\`\`js {4-15} client.on\('message', message =&gt; { // ... if \(command === 'stats'\) { const promises = \[ client.shard.fetchClientValues\('guilds.cache.size'\), client.shard.broadcastEval\('this.guilds.cache.reduce\(\(acc, guild\) =&gt; acc + guild.memberCount, 0\)'\), \];
 
-		return Promise.all(promises)
-			.then(results => {
-				const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
-				const totalMembers = results[1].reduce((acc, memberCount) => acc + memberCount, 0);
-				return message.channel.send(`Server count: ${totalGuilds}\nMember count: ${totalMembers}`);
-			})
-			.catch(console.error);
-	}
-});
+```text
+    return Promise.all(promises)
+        .then(results => {
+            const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
+            const totalMembers = results[1].reduce((acc, memberCount) => acc + memberCount, 0);
+            return message.channel.send(`Server count: ${totalGuilds}\nMember count: ${totalMembers}`);
+        })
+        .catch(console.error);
+}
 ```
 
-The next section contains additional changes you might want to consider, which you may learn about by clicking [this link](/sharding/additional-information.md).
+}\);
+
+\`\`\`
+
+The next section contains additional changes you might want to consider, which you may learn about by clicking [this link](https://github.com/zachjmurphy/guide/tree/9925b2dac70a223dd2dbb549ce57ddb5515bcbc0/sharding/additional-information.md).
 
 ## Resulting code
 
-<ResultingCode path="sharding/getting-started" />

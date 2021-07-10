@@ -14,13 +14,10 @@ If you're developing on macOS, you have a few options. You can go to [the Node.j
 
 ### Installing on Linux
 
-If you're developing on Linux, you may consult [this page](https://nodejs.org/en/download/package-manager/) to determine how you should install Node.<br />On that note, there's a possibility that you may already have Node \(e.g., if you're using a VPS\). You can check by running the `node -v` command. If it outputs something like `v14.0` or higher, then you're good to go! Otherwise, take a look at the page linked above for instructions on installing Node on your OS.
+If you're developing on Linux, you may consult [this page](https://nodejs.org/en/download/package-manager/) to determine how you should install Node.  
+On that note, there's a possibility that you may already have Node \(e.g., if you're using a VPS\). You can check by running the `node -v` command. If it outputs something like `v14.0` or higher, then you're good to go! Otherwise, take a look at the page linked above for instructions on installing Node on your OS.
 
-::: warning
-If you _do_ have Node installed, but have an older version \(i.e. anything below 14.0\), you should upgrade to the latest version. discord.js v13 requires Node 14.0 or higher.
-:::
-
----
+::: warning If you _do_ have Node installed, but have an older version \(i.e. anything below 14.0\), you should upgrade to the latest version. discord.js v13 requires Node 14.0 or higher. :::
 
 ## Preparing the essentials
 
@@ -30,9 +27,9 @@ To install and use discord.js, you'll need to install it via npm \(Node's packag
 
 Like any other project, you should have a dedicated folder to keep it organized and manageable.
 
-Navigate to a place on your machine that's easy to find and reopen in the future for convenience purposes. Create a new folder like you normally would (depending on your OS, you can use `mkdir project-name` inside your terminal). If you already have a name you want to use for your bot, you can use that as the folder name. Otherwise, you may name it something like `discord-bot` for the time being \(or anything else you have in mind\).
+Navigate to a place on your machine that's easy to find and reopen in the future for convenience purposes. Create a new folder like you normally would \(depending on your OS, you can use `mkdir project-name` inside your terminal\). If you already have a name you want to use for your bot, you can use that as the folder name. Otherwise, you may name it something like `discord-bot` for the time being \(or anything else you have in mind\).
 
-Once you're done making the folder, open it up (depending on your OS, you can use `cd project-name` inside your terminal).
+Once you're done making the folder, open it up \(depending on your OS, you can use `cd project-name` inside your terminal\).
 
 ### Opening the command prompt
 
@@ -54,13 +51,9 @@ The next command you'll be running is `npm init`. This command creates a `packag
 
 The `npm init` command will ask you a sequence of questions–you should fill them out as you see fit. If you're not sure of something or want to skip it as a whole, leave it blank and press enter.
 
-::: tip
-Want to get started quickly? Use `npm init -y` to have it fill out everything for you!
-:::
+::: tip Want to get started quickly? Use `npm init -y` to have it fill out everything for you! :::
 
 Once you're done with that, you're ready to install discord.js!
-
----
 
 ## Installing discord.js
 
@@ -68,16 +61,12 @@ Now that you've installed Node.js and know how to open up your console and run c
 
 To install discord.js, run the `npm install discord.js`. This can take a bit of time but should finish fairly quickly.
 
-::: warning
-Once the installation is complete, you'll see something like this:
-![npm warnings](./images/npm-warnings.png)<br/>
-**This is perfectly normal and means that it worked.** You don't need to install any of the items listed to use discord.js; they are 100% optional.
-:::
+::: warning Once the installation is complete, you'll see something like this: ![npm warnings](../../.gitbook/assets/npm-warnings.png)  
+ **This is perfectly normal and means that it worked.** You don't need to install any of the items listed to use discord.js; they are 100% optional. :::
 
 And that's it! With all the necessities installed, you're almost ready to start coding your bot.
 
----
-
 ## Installing a linter
 
-While you are coding, you may find that you run into numerous syntax errors or code in an inconsistent style. You should install a linter to ease these troubles. While code editors generally can point out syntax errors, with a linter, you can coerce your coding to be in a specific style as you define in the configuration. While this is not required, it's advisable. [Click here for the linter guide!](/preparations/setting-up-a-linter.md)
+While you are coding, you may find that you run into numerous syntax errors or code in an inconsistent style. You should install a linter to ease these troubles. While code editors generally can point out syntax errors, with a linter, you can coerce your coding to be in a specific style as you define in the configuration. While this is not required, it's advisable. [Click here for the linter guide!](https://github.com/zachjmurphy/guide/tree/9925b2dac70a223dd2dbb549ce57ddb5515bcbc0/preparations/setting-up-a-linter.md)
+

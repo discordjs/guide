@@ -1,16 +1,14 @@
 # Receiving Audio
 
-::: warning
-Discord does not officially support Discord bots receiving audio ([see here](https://github.com/discord/discord-api-docs/issues/808)), so there may be some breakages. However, discord.js aims to support this feature reasonably.
-:::
+::: warning Discord does not officially support Discord bots receiving audio \([see here](https://github.com/discord/discord-api-docs/issues/808)\), so there may be some breakages. However, discord.js aims to support this feature reasonably. :::
 
 ## Basic Usage
 
-In addition to sending audio over voice connections, you can also receive audio (i.e., listen to other users and bots in a voice channel) using discord.js.
+In addition to sending audio over voice connections, you can also receive audio \(i.e., listen to other users and bots in a voice channel\) using discord.js.
 
-The example below will listen to a user until they stop speaking, and all the audio received from that user is decoded from Opus to signed 16-bit little-endian (s16le) PCM and stored in a file called `user_audio`.
+The example below will listen to a user until they stop speaking, and all the audio received from that user is decoded from Opus to signed 16-bit little-endian \(s16le\) PCM and stored in a file called `user_audio`.
 
-```js
+```javascript
 const fs = require('fs');
 
 // Create a ReadableStream of s16le PCM audio
@@ -23,23 +21,22 @@ The `mode` option defaults to `'opus'` and can alternatively be `'pcm'`. When `'
 
 With `'pcm'` specified, discord.js will attempt to decode each received Opus packet into PCM, giving you a stream of raw audio that other applications can process.
 
-Additionally, you can specify the `end` option. It defaults to `'silence'`, which ends the ReadableStream once the user stops talking. The option can also be `'manual'`, which means the stream doesn't end until you end it yourself. Note that discord.js will not interpolate silence into gaps in the audio (where the user has stopped speaking); this is something you will have to do yourself.
+Additionally, you can specify the `end` option. It defaults to `'silence'`, which ends the ReadableStream once the user stops talking. The option can also be `'manual'`, which means the stream doesn't end until you end it yourself. Note that discord.js will not interpolate silence into gaps in the audio \(where the user has stopped speaking\); this is something you will have to do yourself.
 
-::: tip
-To work with PCM audio, you could use software such as [Audacity.](https://www.audacityteam.org/) To import the audio into Audacity, open **File > Import > Raw Data...** and then select your audio file. You should choose **Signed 16-bit PCM** as the encoding, a **Little-endian** byte order, **2 Channels (Stereo)** and a sample rate of **48000Hz**. 
-:::
+::: tip To work with PCM audio, you could use software such as [Audacity.](https://www.audacityteam.org/) To import the audio into Audacity, open **File &gt; Import &gt; Raw Data...** and then select your audio file. You should choose **Signed 16-bit PCM** as the encoding, a **Little-endian** byte order, **2 Channels \(Stereo\)** and a sample rate of **48000Hz**. :::
 
 ## Advanced Usage
 
 You can do several things with this audio:
 
-- Process the audio with a voice recognition system to provide another interface of interaction to your bot.
-- An audio recording bot allowing users to store audio and play it back at a later date.
-- A bot that relays audio from one voice connection to another.
-	```js
-	const audio = connectionA.receiver.createStream('User ID');
-	connectionB.play(audio, { type: 'opus' });
-	```
+* Process the audio with a voice recognition system to provide another interface of interaction to your bot.
+* An audio recording bot allowing users to store audio and play it back at a later date.
+* A bot that relays audio from one voice connection to another.
+
+  ```javascript
+    const audio = connectionA.receiver.createStream('User ID');
+    connectionB.play(audio, { type: 'opus' });
+  ```
 
 ### What if I want to listen to a user indefinitely?
 
@@ -50,3 +47,4 @@ You can select the `'manual'` mode to keep the stream alive indefinitely and end
 ### What if I want to listen to multiple users?
 
 You can create a stream for each user. However, you cannot make a single stream that will interpolate audio from multiple users in a channel–this is currently out of discord.js' scope.
+

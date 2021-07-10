@@ -1,48 +1,39 @@
 # Collections
 
-discord.js comes with a utility class known as `Collection`.
-It extends JavaScript's native `Map` class, so it has all the `Map` features and more!  
+discord.js comes with a utility class known as `Collection`. It extends JavaScript's native `Map` class, so it has all the `Map` features and more!
 
-::: warning
-If you're not familiar with `Map`, read [MDN's page on it](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) before continuing. You should be familiar with `Array` [methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) as well. We will also use some ES6 features, so read up [here](/additional-info/es6-syntax.md) if you do not know what they are.
-:::
+::: warning If you're not familiar with `Map`, read [MDN's page on it](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) before continuing. You should be familiar with `Array` [methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) as well. We will also use some ES6 features, so read up [here](https://github.com/zachjmurphy/guide/tree/9925b2dac70a223dd2dbb549ce57ddb5515bcbc0/additional-info/es6-syntax.md) if you do not know what they are. :::
 
-A `Map` allows for an association between unique keys and their values.
-For example, how can you transform every value or filter the entries in a `Map` easily?
-This is the point of the `Collection` class!
+A `Map` allows for an association between unique keys and their values. For example, how can you transform every value or filter the entries in a `Map` easily? This is the point of the `Collection` class!
 
 ## Array-like Methods
 
 Many of the methods on `Collection` correspond to their namesake in `Array`. One of them is `find`:
 
-```js
+```javascript
 // Assume we have an array of users and a collection of the same users.
 array.find(u => u.discriminator === '1000');
 collection.find(u => u.discriminator === '1000');
 ```
 
-The interface of the callback function is very similar between the two.
-For arrays, callbacks usually pass the parameters `(value, index, array)`, where `value` is the value iterated to,
-`index` is the current index, and `array` is the array. For collections, you would have `(value, key, collection)`.
-Here, `value` is the same, but `key` is the key of the value, and `collection` is the collection itself instead.  
+The interface of the callback function is very similar between the two. For arrays, callbacks usually pass the parameters `(value, index, array)`, where `value` is the value iterated to, `index` is the current index, and `array` is the array. For collections, you would have `(value, key, collection)`. Here, `value` is the same, but `key` is the key of the value, and `collection` is the collection itself instead.
 
 Methods that follow this philosophy of staying close to the `Array` interface are as follows:
 
-- `find`
-- `filter` - Note that this returns a `Collection` rather than an `Array`.
-- `map` - Yet this returns an `Array` of values instead of a `Collection`!
-- `every`
-- `some`
-- `reduce`
-- `concat`
-- `sort`
+* `find`
+* `filter` - Note that this returns a `Collection` rather than an `Array`.
+* `map` - Yet this returns an `Array` of values instead of a `Collection`!
+* `every`
+* `some`
+* `reduce`
+* `concat`
+* `sort`
 
 ## Converting to Array
 
-There are two ways you might want to convert a `Collection` into an `Array`. The first way is the `array` or `keyArray` methods.
-They create an array from the items in the collection but also caches it:
+There are two ways you might want to convert a `Collection` into an `Array`. The first way is the `array` or `keyArray` methods. They create an array from the items in the collection but also caches it:
 
-```js
+```javascript
 // Not computed the second time; it is cached!
 collection.array();
 collection.array();
@@ -55,7 +46,7 @@ collection.array();
 
 This caching behavior is undesirable if you are planning to mutate the array, so instead, you can use `Array.from`:
 
-```js
+```javascript
 // For values.
 Array.from(collection.values());
 
@@ -66,15 +57,13 @@ Array.from(collection.keys());
 Array.from(collection);
 ```
 
-::: warning
-Many people use `array` way too much! This leads to unneeded caching of data and confusing code. Before you use `array` or similar, ask yourself if whatever you are trying to do can't be done with the given `Map` or `Collection` methods or with a for-of loop.
-:::
+::: warning Many people use `array` way too much! This leads to unneeded caching of data and confusing code. Before you use `array` or similar, ask yourself if whatever you are trying to do can't be done with the given `Map` or `Collection` methods or with a for-of loop. :::
 
 ## Extra Utilities
 
 Some methods are not from `Array` and are instead entirely new to standard JavaScript.
 
-```js
+```javascript
 // A random value. Be careful; this uses `array`, so caching is done.
 collection.random();
 
@@ -93,10 +82,9 @@ collection.last(2);
 collection.sweep(user => user.username === 'Bob');
 ```
 
-A more complicated method is `partition`, which splits a single Collection into two new Collections based on the provided function.
-You can think of it as two `filter`s, but done at the same time:
+A more complicated method is `partition`, which splits a single Collection into two new Collections based on the provided function. You can think of it as two `filter`s, but done at the same time:
 
-```js
+```javascript
 // `bots` is a Collection of users where their `bot` property was true.
 // `humans` is a Collection where the property was false instead!
 const [bots, humans] = collection.partition(u => u.bot);
@@ -105,3 +93,4 @@ const [bots, humans] = collection.partition(u => u.bot);
 bots.every(b => b.bot);
 humans.every(h => !h.bot);
 ```
+

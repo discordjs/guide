@@ -1,29 +1,24 @@
 # Adding more commands
 
-::: tip
-This page is a follow-up and bases its code on [the previous page](/creating-your-bot/configuration-files.md).
-:::
+::: tip This page is a follow-up and bases its code on [the previous page](https://github.com/zachjmurphy/guide/tree/9925b2dac70a223dd2dbb549ce57ddb5515bcbc0/creating-your-bot/configuration-files.md). :::
 
 A bot with nothing but a single command would be boring, and you probably have a bunch of command ideas floating around in your head already, right? Let's begin, then.
 
 Here's what your message event should currently look like:
 
-```js
+```javascript
 client.on('message', message => {
-	if (message.content === '!ping') {
-		message.channel.send('Pong.');
-	}
+    if (message.content === '!ping') {
+        message.channel.send('Pong.');
+    }
 });
 ```
 
 Before doing anything else, make a property to store the prefix you've configured. Instead of `const config = ...`, you can destructure the config file to extract the prefix and token variables.
 
-```js {1,3}
-const { prefix, token } = require('./config.json');
-// ...
-client.login(token);
-```
+\`\`\`js {1,3} const { prefix, token } = require\('./config.json'\); // ... client.login\(token\);
 
+```text
 From now on, if you change the prefix or token in your `config.json` file, it'll change in your bot file as well. You'll be using the prefix variable a lot soon.
 
 ::: tip
@@ -36,26 +31,19 @@ You already have an if statement that checks messages for a ping/pong command. A
 
 ```js {2-6}
 client.on('message', message => {
-	if (message.content === `${prefix}ping`) {
-		message.channel.send('Pong.');
-	} else if (message.content === `${prefix}beep`) {
-		message.channel.send('Boop.');
-	}
+    if (message.content === `${prefix}ping`) {
+        message.channel.send('Pong.');
+    } else if (message.content === `${prefix}beep`) {
+        message.channel.send('Boop.');
+    }
 });
 ```
 
 There are a few potential issues with this. For example, the ping command won't work if you send `!ping test`. It will only match `!ping` and nothing else. The same goes for the other command. If you want your commands to be more flexible, you can do the following:
 
-```js {2-6}
-client.on('message', message => {
-	if (message.content.startsWith(`${prefix}ping`)) {
-		message.channel.send('Pong.');
-	} else if (message.content.startsWith(`${prefix}beep`)) {
-		message.channel.send('Boop.');
-	}
-});
-```
+`````js {2-6} client.on('message', message => { if (message.content.startsWith(```${prefix}ping`)) { message.channel.send('Pong.'); } else if (message.content.startsWith(`${prefix}beep\`\)\) { message.channel.send\('Boop.'\); } }\);
 
+```text
 Now the ping command will trigger whenever the message _starts with_ `!ping`! Sometimes this is what you want, but other times, you may want to match only exactly `!ping` - it varies from case to case, so be mindful of what you need when creating commands.
 
 ::: warning
@@ -76,51 +64,35 @@ Servers are referred to as "guilds" in the Discord API and discord.js library. W
 
 ```js {6-8}
 client.on('message', message => {
-	if (message.content === `${prefix}ping`) {
-		message.channel.send('Pong.');
-	} else if (message.content === `${prefix}beep`) {
-		message.channel.send('Boop.');
-	} else if (message.content === `${prefix}server`) {
-		message.channel.send(`This server's name is: ${message.guild.name}`);
-	}
+    if (message.content === `${prefix}ping`) {
+        message.channel.send('Pong.');
+    } else if (message.content === `${prefix}beep`) {
+        message.channel.send('Boop.');
+    } else if (message.content === `${prefix}server`) {
+        message.channel.send(`This server's name is: ${message.guild.name}`);
+    }
 });
 ```
 
 The code above would result in this:
 
-<DiscordMessages>
-	<DiscordMessage profile="user">
-		!server
-	</DiscordMessage>
-	<DiscordMessage profile="bot">
-		This server's name is: Discord Bot Guide
-	</DiscordMessage>
-</DiscordMessages>
+ !server This server's name is: Discord Bot Guide
 
 If you want to expand upon that command and add some more info, here's an example of what you can do:
 
-```js {6-8}
-client.on('message', message => {
-	if (message.content === `${prefix}ping`) {
-		message.channel.send('Pong.');
-	} else if (message.content === `${prefix}beep`) {
-		message.channel.send('Boop.');
-	} else if (message.content === `${prefix}server`) {
-		message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
-	}
-});
-```
+`````js {6-8} client.on('message', message => { if (message.content ===```${prefix}ping`) { message.channel.send('Pong.'); } else if (message.content ===`${prefix}beep`) { message.channel.send('Boop.'); } else if (message.content ===`${prefix}server`) { message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}\`\); } }\);
 
+```text
 That would display both the server name _and_ the amount of members in it.
 
 <DiscordMessages>
-	<DiscordMessage profile="user">
-		!server
-	</DiscordMessage>
-	<DiscordMessage profile="bot">
-		Server name: Discord Bot Guide<br>
-		Total members: 3
-	</DiscordMessage>
+    <DiscordMessage profile="user">
+        !server
+    </DiscordMessage>
+    <DiscordMessage profile="bot">
+        Server name: Discord Bot Guide<br>
+        Total members: 3
+    </DiscordMessage>
 </DiscordMessages>
 
 Of course, you can modify this to your liking. You may also want to display the date the server was created or the server's region. You would do those in the same manner–use `message.guild.createdAt` or `message.guild.region`, respectively.
@@ -137,33 +109,24 @@ Set up another if statement and use the command name `user-info`.
 
 ```js {8-10}
 client.on('message', message => {
-	if (message.content === `${prefix}ping`) {
-		message.channel.send('Pong.');
-	} else if (message.content === `${prefix}beep`) {
-		message.channel.send('Boop.');
-	} else if (message.content === `${prefix}server`) {
-		message.channel.send(`This server's name is: ${message.guild.name}`);
-	} else if (message.content === `${prefix}user-info`) {
-		message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
-	}
+    if (message.content === `${prefix}ping`) {
+        message.channel.send('Pong.');
+    } else if (message.content === `${prefix}beep`) {
+        message.channel.send('Boop.');
+    } else if (message.content === `${prefix}server`) {
+        message.channel.send(`This server's name is: ${message.guild.name}`);
+    } else if (message.content === `${prefix}user-info`) {
+        message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
+    }
 });
 ```
 
-This will display the message author's **username** (not nickname, if they have one set), as well as their user ID.
+This will display the message author's **username** \(not nickname, if they have one set\), as well as their user ID.
 
-<DiscordMessages>
-	<DiscordMessage profile="user">
-		!user-info
-	</DiscordMessage>
-	<DiscordMessage profile="bot">
-		Your username: User <br>
-		Your ID: 20833034795932416
-	</DiscordMessage>
-</DiscordMessages>
+ !user-info Your username: User  
+ Your ID: 20833034795932416
 
-::: tip
-`message.author` refers to the user who sent the message. For a full list of all the properties and methods for the author object (a member of the `User` class), check out <DocsLink path="class/User">the documentation page for it</DocsLink>.
-:::
+::: tip `message.author` refers to the user who sent the message. For a full list of all the properties and methods for the author object \(a member of the `User` class\), check out the documentation page for it. :::
 
 And there you have it! As you can see, it's quite simple to add additional commands.
 
@@ -171,7 +134,7 @@ And there you have it! As you can see, it's quite simple to add additional comma
 
 If you don't plan to make more than seven or eight commands for your bot, then using an if/else if chain is sufficient; it's presumably a small project at that point, so you shouldn't need to spend too much time on it. However, this isn't the case for most of us.
 
-You probably want your bot to be feature-rich and easy to configure and develop, right? Using a giant if/else if chain won't let you achieve that; it will only hinder your development process. After you read up on [creating arguments](/creating-your-bot/commands-with-user-input.md), we'll be diving right into something called a "command handler" - code that makes handling commands easier and much more efficient.
+You probably want your bot to be feature-rich and easy to configure and develop, right? Using a giant if/else if chain won't let you achieve that; it will only hinder your development process. After you read up on [creating arguments](https://github.com/zachjmurphy/guide/tree/9925b2dac70a223dd2dbb549ce57ddb5515bcbc0/creating-your-bot/commands-with-user-input.md), we'll be diving right into something called a "command handler" - code that makes handling commands easier and much more efficient.
 
 Before continuing, here's a small list of reasons why you shouldn't use if/else if chains for anything that's not a small project:
 
@@ -186,4 +149,3 @@ In short, it's just not a good idea. But that's why this guide exists! Go ahead 
 
 ## Resulting code
 
-<ResultingCode />

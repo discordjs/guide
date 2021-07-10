@@ -18,65 +18,55 @@ npm install node-fetch
 
 To start off, you're just going to be using this skeleton code:
 
-<!-- eslint-disable require-await -->
-```js
+```javascript
 const { Client, MessageEmbed } = require('discord.js');
 
 const client = new Client();
 const prefix = '!';
 
 client.once('ready', () => {
-	console.log('Ready!');
+    console.log('Ready!');
 });
 
 client.on('message', async message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const command = args.shift().toLowerCase();
 
-	// ...
+    // ...
 });
 
 client.login('your-token-goes-here');
 ```
 
-::: tip
-We're going to take advantage of [destructuring](/additional-info/es6-syntax.md#destructuring) in this tutorial to maintain readability.
-:::
+::: tip We're going to take advantage of [destructuring](https://github.com/zachjmurphy/guide/tree/9925b2dac70a223dd2dbb549ce57ddb5515bcbc0/additional-info/es6-syntax.md#destructuring) in this tutorial to maintain readability. :::
 
 ## Using node-fetch
 
-node-fetch is a lightweight, Promise-based module that brings the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), which is available in browsers, to node. If you aren't already familiar with Promises, you should read up on them [here](/additional-info/async-await.md).
+node-fetch is a lightweight, Promise-based module that brings the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), which is available in browsers, to node. If you aren't already familiar with Promises, you should read up on them [here](https://github.com/zachjmurphy/guide/tree/9925b2dac70a223dd2dbb549ce57ddb5515bcbc0/additional-info/async-await.md).
 
 In this tutorial, we'll be making a bot with two API-based commands using the [random.cat](https://aws.random.cat) and [Urban Dictionary](https://www.urbandictionary.com) APIs.
 
 To require node-fetch, you'd do:
 
-```js
+```javascript
 const fetch = require('node-fetch');
 ```
 
 ### Random Cat
 
-Random cat's API is available at https://aws.random.cat/meow and returns a [JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) response. To actually fetch data from the API, you're going to do the following:
+Random cat's API is available at [https://aws.random.cat/meow](https://aws.random.cat/meow) and returns a [JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) response. To actually fetch data from the API, you're going to do the following:
 
-```js
+```javascript
 fetch('https://aws.random.cat/meow').then(response => response.json());
 ```
 
 It may seem like this does nothing, but what it's doing is launching a request to the random.cat server. The server is returning some JSON that contains a `file` property, which is a string containing a link to a random cat. node-fetch returns a response object, which we can change into JSON with `response.json()`. Next, let's implement this into a command. The code should look similar to this:
 
-```js {3-6}
-client.on('message', async message => {
-	// ...
-	if (command === 'cat') {
-		const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
-		message.channel.send(file);
-	}
-});
-```
+\`\`\`js {3-6} client.on\('message', async message =&gt; { // ... if \(command === 'cat'\) { const { file } = await fetch\('[https://aws.random.cat/meow'\).then\(response](https://aws.random.cat/meow'%29.then%28response) =&gt; response.json\(\)\); message.channel.send\(file\); } }\);
 
+```text
 So, here's what's happening in this code:
 
 1. You're sending a `GET` request to random.cat.
@@ -99,58 +89,56 @@ First, you're going to need to fetch data from the API. To do this, you'd do:
 const querystring = require('querystring');
 // ...
 client.on('message', async message => {
-	// ...
-	if (command === 'urban') {
-		if (!args.length) {
-			return message.channel.send('You need to supply a search term!');
-		}
+    // ...
+    if (command === 'urban') {
+        if (!args.length) {
+            return message.channel.send('You need to supply a search term!');
+        }
 
-		const query = querystring.stringify({ term: args.join(' ') });
+        const query = querystring.stringify({ term: args.join(' ') });
 
-		const { list } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`)
-			.then(response => response.json());
-	}
+        const { list } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`)
+            .then(response => response.json());
+    }
 });
 ```
 
 Here, we use Node's native [querystring module](https://nodejs.org/api/querystring.html) to create a [query string](https://en.wikipedia.org/wiki/Query_string) for the URL so that the Urban Dictionary server can parse it and know what to search.
 
-If you were to do `!urban hello world`, then the URL would become https://api.urbandictionary.com/v0/define?term=hello%20world since the string gets encoded.
+If you were to do `!urban hello world`, then the URL would become [https://api.urbandictionary.com/v0/define?term=hello world](https://api.urbandictionary.com/v0/define?term=hello%20world) since the string gets encoded.
 
 You can get the respective properties from the returned JSON. If you were to view it in your browser, it usually looks like a bunch of mumbo jumbo. If it doesn't, great! If it does, then you should get a JSON formatter/viewer. If you're using Chrome, [JSON Formatter](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa) is one of the more popular extensions. If you're not using Chrome, search for "JSON formatter/viewer &lt;your browser&gt;" and get one.
 
-Now, if you look at the JSON, you can see that it's a `list` property, which is an array of objects containing various definitions for the term (maximum 10). Something you always want to do when making API-based commands is to handle no results. So, let's throw a random term in there (e.g. `njaksdcas`) and then look at the response. The `list` array should then be empty. Now you are ready to start writing!
+Now, if you look at the JSON, you can see that it's a `list` property, which is an array of objects containing various definitions for the term \(maximum 10\). Something you always want to do when making API-based commands is to handle no results. So, let's throw a random term in there \(e.g. `njaksdcas`\) and then look at the response. The `list` array should then be empty. Now you are ready to start writing!
 
 As explained above, you'll want to check if the API returned any answers for your query, and send back the definition if so:
 
-```js {3-5,7}
-if (command === 'urban') {
-	// ...
-	if (!list.length) {
-		return message.channel.send(`No results found for **${args.join(' ')}**.`);
-	}
+`````js {3-5,7} if (command === 'urban') { // ... if (!list.length) { return message.channel.send(```No results found for **${args.join\(' '\)}**.\`\); }
 
-	message.channel.send(list[0].definition);
-}
+```text
+message.channel.send(list[0].definition);
 ```
 
+}
+
+```text
 Here, you are only getting the first object from the array of objects called `list` and grabbing its `definition` property.
 
 If you've followed the tutorial, you should have something like this:
 
 <DiscordMessages>
-	<DiscordMessage profile="user">
-		!urban njaksdcas
-	</DiscordMessage>
-	<DiscordMessage profile="bot">
-		<DiscordMention :highlight="true" profile="user" />, No results for <strong>njaksdcas</strong>
-	</DiscordMessage>
-	<DiscordMessage profile="user">
-		!urban hello world
-	</DiscordMessage>
-	<DiscordMessage profile="bot">
-		The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books.
-	</DiscordMessage>
+    <DiscordMessage profile="user">
+        !urban njaksdcas
+    </DiscordMessage>
+    <DiscordMessage profile="bot">
+        <DiscordMention :highlight="true" profile="user" />, No results for <strong>njaksdcas</strong>
+    </DiscordMessage>
+    <DiscordMessage profile="user">
+        !urban hello world
+    </DiscordMessage>
+    <DiscordMessage profile="bot">
+        The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books.
+    </DiscordMessage>
 </DiscordMessages>
 
 Now, let's just make this an [embed](/popular-topics/embeds.md).
@@ -162,54 +150,32 @@ const trim = (str, max) => ((str.length > max) ? `${str.slice(0, max - 3)}...` :
 ```
 
 The following snippet is how to structure the embed:
-```js
+
+```javascript
 const [answer] = list;
 
 const embed = new MessageEmbed()
-	.setColor('#EFFF00')
-	.setTitle(answer.word)
-	.setURL(answer.permalink)
-	.addFields(
-		{ name: 'Definition', value: trim(answer.definition, 1024) },
-		{ name: 'Example', value: trim(answer.example, 1024) },
-		{ name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` },
-	);
+    .setColor('#EFFF00')
+    .setTitle(answer.word)
+    .setURL(answer.permalink)
+    .addFields(
+        { name: 'Definition', value: trim(answer.definition, 1024) },
+        { name: 'Example', value: trim(answer.example, 1024) },
+        { name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` },
+    );
 
 message.channel.send(embed);
 ```
 
 Now, if you do that same command again, you should get this:
 
-<DiscordMessages>
-	<DiscordMessage profile="user">
-		!urban hello world
-	</DiscordMessage>
-	<DiscordMessage profile="bot">
-		<template #embeds>
-			<DiscordEmbed border-color="#EFFF00" embed-title="hello world" url="https://www.urbandictionary.com/define.php?term=hello%20world">
-				<template #fields>
-					<DiscordEmbedFields>
-						<DiscordEmbedField field-title="Definition">
-							The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books. 
-						</DiscordEmbedField>
-						<DiscordEmbedField field-title="Example">
-							programming noob: Hey I just attended my first programming lesson earlier! <br>
-							.NET Veteran: Oh? What can you do? <br>
-							programming noob: I could make a dialog box pop up which says "Hello World!" !!! <br>
-							.NET Veteran: lmao.. hey guys! look.. check out this "hello world" programmer <br><br>
-							Console.WriteLine("Hello World")
-						</DiscordEmbedField>
-						<DiscordEmbedField field-title="Rating">
-							122 thumbs up. <br>
-							42 thumbs down.
-						</DiscordEmbedField>
-					</DiscordEmbedFields>
-				</template>
-			</DiscordEmbed>
-		</template>
-	</DiscordMessage>
-</DiscordMessages>
+ !urban hello world The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books. programming noob: Hey I just attended my first programming lesson earlier!  
+ .NET Veteran: Oh? What can you do?  
+ programming noob: I could make a dialog box pop up which says "Hello World!" !!!  
+ .NET Veteran: lmao.. hey guys! look.. check out this "hello world" programmer  
+  
+ Console.WriteLine\("Hello World"\) 122 thumbs up.  
+ 42 thumbs down.
 
 ## Resulting code
 
-<ResultingCode />

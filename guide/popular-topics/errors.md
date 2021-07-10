@@ -24,37 +24,37 @@ Example: `ReferenceError: "x" is not defined`
 
 ### WebSocket and Network errors
 
-WebSocket and Network errors are common system errors thrown by Node in response to something wrong with the WebSocket connection. Unfortunately, these errors do not have a concrete solution and can be (usually) fixed by getting a better, more stable, and more robust connection. discord.js will automatically try to reconnect to the WebSocket if an error occurs. 
+WebSocket and Network errors are common system errors thrown by Node in response to something wrong with the WebSocket connection. Unfortunately, these errors do not have a concrete solution and can be \(usually\) fixed by getting a better, more stable, and more robust connection. discord.js will automatically try to reconnect to the WebSocket if an error occurs.
 
 In version 12, WebSocket errors are handled internally, meaning your process should never crash from them. If you want to log these errors, should they happen, you can listen to the `shardError` event as shown below.
 
-```js
+```javascript
 client.on('shardError', error => {
-	console.error('A websocket connection encountered an error:', error);
+    console.error('A websocket connection encountered an error:', error);
 });
 ```
 
 The commonly thrown codes for these errors are:
-- `ECONNRESET` - The connection was forcibly closed by a peer, thrown by the loss of connection to a WebSocket due to timeout or reboot.
-- `ETIMEDOUT` - A connect or send request failed because the receiving party did not respond after some time.
-- `EPIPE` - The remote side of the stream being written to has been closed.
-- `ENOTFOUND` - The domain being accessed is unavailable, usually caused by a lack of internet, can be thrown by the WebSocket and HTTP API.
-- `ECONNREFUSED` - The target machine refused the connection; check your ports and firewall.
+
+* `ECONNRESET` - The connection was forcibly closed by a peer, thrown by the loss of connection to a WebSocket due to timeout or reboot.
+* `ETIMEDOUT` - A connect or send request failed because the receiving party did not respond after some time.
+* `EPIPE` - The remote side of the stream being written to has been closed.
+* `ENOTFOUND` - The domain being accessed is unavailable, usually caused by a lack of internet, can be thrown by the WebSocket and HTTP API.
+* `ECONNREFUSED` - The target machine refused the connection; check your ports and firewall.
 
 ## How to diagnose API errors
 
-API Errors can be tracked down by adding an event listener for unhandled rejections and looking at the extra info.
-This can be done by adding this to your main file.
+API Errors can be tracked down by adding an event listener for unhandled rejections and looking at the extra info. This can be done by adding this to your main file.
 
-```js
+```javascript
 process.on('unhandledRejection', error => {
-	console.error('Unhandled promise rejection:', error);
+    console.error('Unhandled promise rejection:', error);
 });
 ```
 
 The next time you get the error it will show info along the bottom of the error which will look something like this for example:
 
-```json
+```javascript
   name: 'DiscordAPIError',
   message: 'Invalid Form Body\nmessage_id: Value "[object Object]" is not snowflake.',
   path: '/api/v7/channels/638200642359525387/messages/[object%20Object]',
@@ -66,8 +66,7 @@ All of this information can help you track down what caused the error and how to
 
 ### Message
 
-The most important part of the error is the message. It tells you what went wrong, which can help you track down where it originates. 
-You can find a full list of messages [here](https://discord.com/developers/docs/topics/opcodes-and-status-codes#json) in the Discord API Docs.
+The most important part of the error is the message. It tells you what went wrong, which can help you track down where it originates. You can find a full list of messages [here](https://discord.com/developers/docs/topics/opcodes-and-status-codes#json) in the Discord API Docs.
 
 ### Path
 
@@ -83,22 +82,22 @@ The code is another partial representation of the message, in this case, `Invali
 
 The code is also handy if you want only to handle a specific error. Say you're trying to delete a message which may or may not be there, and wanted to ignore unknown message errors. This can be done by checking the code, either manually or using discord.js constants.
 
-```js
+```javascript
 message.delete().catch(error => {
-	// Only log the error if it is not an Unknown Message error
-	if (error.code !== 10008) {
-		console.error('Failed to delete the message:', error);
-	}
+    // Only log the error if it is not an Unknown Message error
+    if (error.code !== 10008) {
+        console.error('Failed to delete the message:', error);
+    }
 });
 ```
 
 Or using Constants:
 
-```js
+```javascript
 message.delete().catch(error => {
-	if (error.code !== Discord.Constants.APIErrors.UNKNOWN_MESSAGE) {
-		console.error('Failed to delete the message:', error);
-	}
+    if (error.code !== Discord.Constants.APIErrors.UNKNOWN_MESSAGE) {
+        console.error('Failed to delete the message:', error);
+    }
 });
 ```
 
@@ -108,7 +107,7 @@ You can find a list of constants [here](https://github.com/discordjs/discord.js/
 
 The final piece of information can tell you a lot about what you tried to do to the path. There are a set of predefined keywords that describe our actions on the path.
 
-```
+```text
 GET    - Used to retrieve a piece of data
 POST   - Used to send a piece of data
 PATCH  - Used to modify a piece of data
@@ -124,13 +123,11 @@ In this particular example, you can see you are trying to access a piece of data
 
 This is a prevalent error; it originates from a wrong token being passed into `client.login()`. The most common causes of this error are:
 
-- Not importing the config or env file correctly
-- Copying the client secret instead of the bot token (the token is alphanumerical and three parts delimited by a period while the client secret is significantly smaller and one part only)
-- Simply showing the token and copying that, instead of clicking regenerate and copying that.
+* Not importing the config or env file correctly
+* Copying the client secret instead of the bot token \(the token is alphanumerical and three parts delimited by a period while the client secret is significantly smaller and one part only\)
+* Simply showing the token and copying that, instead of clicking regenerate and copying that.
 
-::: warning
-Before the release of version 12, there used to be an issue where the token was not prefixed correctly, which resulted in valid tokens being marked as invalid. If you have verified that all of the above is not the case, make sure you have updated discord.js to the current stable version.
-:::
+::: warning Before the release of version 12, there used to be an issue where the token was not prefixed correctly, which resulted in valid tokens being marked as invalid. If you have verified that all of the above is not the case, make sure you have updated discord.js to the current stable version. :::
 
 ### Request to use token, but token was unavailable to the client.
 
@@ -138,19 +135,19 @@ Another common error–this error originates from the client attempting to execu
 
 This error is also caused by attempting to use a client that has not logged in. Both of the examples below will throw errors.
 
-```js
+```javascript
 const { Client } = require('discord.js');
 const client = new Client(); // Should not be here!
 
 module.exports = (message, args) => {
-	// Should be message.client instead!
-	client.users.fetch(args[0]).then(user => {
-		message.reply('your requested user', user.tag);
-	});
+    // Should be message.client instead!
+    client.users.fetch(args[0]).then(user => {
+        message.reply('your requested user', user.tag);
+    });
 };
 ```
 
-```js
+```javascript
 const { Client } = require('discord.js');
 const client = new Client();
 
@@ -182,16 +179,18 @@ Another common error–this error originates from the client requesting members 
 This error is caused by spawning a large number of event listeners, usually for the client. The most common cause of this is nesting your event listeners instead of separating them. The way to fix this error is to make sure you do not nest your listeners; it is **not** to use `emitter.setMaxListeners()` as the error suggests.
 
 You can debug these messages in different ways:
-- Through the [CLI](https://nodejs.org/api/cli.html#cli_trace_warnings): `node --trace-warnings index.js`
-- Through the [`process#warning` event](https://nodejs.org/api/process.html#process_event_warning): `process.on('warning', console.warn);`
+
+* Through the [CLI](https://nodejs.org/api/cli.html#cli_trace_warnings): `node --trace-warnings index.js`
+* Through the [`process#warning` event](https://nodejs.org/api/process.html#process_event_warning): `process.on('warning', console.warn);`
 
 ### Cannot send messages to this user.
 
 This error throws when the bot attempts to send a DM message to a user but cannot do so. A variety of reasons causes this:
-- The bot and the user do not share a guild (often, people attempt to dm the user after kicking or banning them).
-- The bot tries to DM another bot.
-- The user has blocked the bot.
-- The user has disabled dms in the privacy settings.
+
+* The bot and the user do not share a guild \(often, people attempt to dm the user after kicking or banning them\).
+* The bot tries to DM another bot.
+* The user has blocked the bot.
+* The user has disabled dms in the privacy settings.
 
 In the case of the last two reasons, the error is not preventable, as the Discord API does not provide a way to check if you can send a user a dm until you attempt to send one. The best way to handle this error is to add a `.catch()` where you try to dm the user and either ignore the rejected Promise or do what you want because of it.
 
@@ -200,13 +199,16 @@ In the case of the last two reasons, the error is not preventable, as the Discor
 ### code ENOENT... syscall spawn git.
 
 This error is commonly thrown by your system due to it not finding `git`. You need to install `git` or update your path if `git` is already installed. Here are the download links for it:
-- Ubuntu/Debian: `sudo apt-get install git`
-- Windows: [git-scm](https://git-scm.com/download/win)
+
+* Ubuntu/Debian: `sudo apt-get install git`
+* Windows: [git-scm](https://git-scm.com/download/win)
 
 ### code ELIFECYCLE
 
-This error is commonly thrown by your system in response to the process unexpectedly closing. Cleaning the npm cache and deleting node_modules can usually fix it. The instructions for doing that are as such:
-- Clean npm cache with `npm cache clean --force`
-- delete `node_modules`
-- delete `package-lock.json` (make sure you have a `package.json`!)
-- run `npm install` to reinstall packages from `package.json`
+This error is commonly thrown by your system in response to the process unexpectedly closing. Cleaning the npm cache and deleting node\_modules can usually fix it. The instructions for doing that are as such:
+
+* Clean npm cache with `npm cache clean --force`
+* delete `node_modules`
+* delete `package-lock.json` \(make sure you have a `package.json`!\)
+* run `npm install` to reinstall packages from `package.json`
+

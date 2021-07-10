@@ -8,45 +8,31 @@ A `string` argument is simply the text after the command name and prefix. For ex
 
 First, go into your `first` folder and make a new file called `say.js`. Once you have it, set up your command class and everything just like the one in the meow command.
 
-```js
+```javascript
 const { Command } = require('discord.js-commando');
 
 module.exports = class SayCommand extends Command {
-	constructor(client) {
-		super(client, {
-			name: 'say',
-			aliases: ['parrot', 'copy'],
-			group: 'first',
-			memberName: 'say',
-			description: 'Replies with the text you provide.',
-		});
-	}
+    constructor(client) {
+        super(client, {
+            name: 'say',
+            aliases: ['parrot', 'copy'],
+            group: 'first',
+            memberName: 'say',
+            description: 'Replies with the text you provide.',
+        });
+    }
 
-	run(message) {
-		// ...
-	}
+    run(message) {
+        // ...
+    }
 };
 ```
 
 The `args` field is simply an array of objects, each containing data for that argument.
 
-```js {5-11}
-module.exports = class SayCommand extends Command {
-	constructor(client) {
-		super(client, {
-			// ...
-			args: [
-				{
-					key: 'text',
-					prompt: 'What text would you like the bot to say?',
-					type: 'string',
-				},
-			],
-		});
-	}
-};
-```
+\`\`\`js {5-11} module.exports = class SayCommand extends Command { constructor\(client\) { super\(client, { // ... args: \[ { key: 'text', prompt: 'What text would you like the bot to say?', type: 'string', }, \], }\); } };
 
+```text
 See? Simple.
 
 - `key` is the name of the argument. When you define it in your `run` method, this is what you'll be using.
@@ -57,47 +43,31 @@ Adding more args is as simple as adding another object to the array, like so:
 
 ```js {11-15}
 module.exports = class SayCommand extends Command {
-	constructor(client) {
-		super(client, {
-			// ...
-			args: [
-				{
-					key: 'text',
-					prompt: 'What text would you like the bot to say?',
-					type: 'string',
-				},
-				{
-					key: 'otherThing',
-					prompt: 'What is this other useless thing?',
-					type: 'string',
-				},
-			],
-		});
-	}
+    constructor(client) {
+        super(client, {
+            // ...
+            args: [
+                {
+                    key: 'text',
+                    prompt: 'What text would you like the bot to say?',
+                    type: 'string',
+                },
+                {
+                    key: 'otherThing',
+                    prompt: 'What is this other useless thing?',
+                    type: 'string',
+                },
+            ],
+        });
+    }
 };
 ```
 
 You can also set arguments to default to a specific value:
 
-```js {11}
-module.exports = class SayCommand extends Command {
-	constructor(client) {
-		super(client, {
-			// ...
-			args: [
-				// ...
-				{
-					key: 'otherThing',
-					prompt: 'What is this other useless thing?',
-					type: 'string',
-					'default': 'dog',
-				},
-			],
-		});
-	}
-};
-```
+\`\`\`js {11} module.exports = class SayCommand extends Command { constructor\(client\) { super\(client, { // ... args: \[ // ... { key: 'otherThing', prompt: 'What is this other useless thing?', type: 'string', 'default': 'dog', }, \], }\); } };
 
+```text
 As you can see, they're very powerful things.
 
 Head on over to your `run` method and set the `text` arg to a variable and return the text to the user.
@@ -106,13 +76,13 @@ Head on over to your `run` method and set the `text` arg to a variable and retur
 
 ```js {6-8}
 module.exports = class SayCommand extends Command {
-	constructor(client) {
-		// ...
-	}
+    constructor(client) {
+        // ...
+    }
 
-	run(message, { text }) {
-		return message.reply(text);
-	}
+    run(message, { text }) {
+        return message.reply(text);
+    }
 };
 ```
 
@@ -120,4 +90,3 @@ And there you have it, a say command using args!
 
 ## Resulting code
 
-<ResultingCode />

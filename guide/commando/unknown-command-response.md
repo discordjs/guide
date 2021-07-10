@@ -4,12 +4,9 @@ Sometimes, you may want to remove the unknown command response from your bot. Be
 
 Head over to your `index.js` file and find your `client.registry` variable. All you have to do to remove the unknown command response is adding `unknownCommand` and setting it to `false` in `.registerDefaultCommands()`, under your registry:
 
-```js {3-5}
-client.registry
-	// ...
-	.registerDefaultCommands({
-		unknownCommand: false,
-	});
-```
+\`\`\`js {3-5} client.registry // ... .registerDefaultCommands\({ unknownCommand: false, }\);
+
+\`\`\`
 
 That's all there is to it!
+

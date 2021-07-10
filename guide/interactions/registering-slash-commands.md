@@ -2,39 +2,33 @@
 
 Discord provides developers with the option to create client-integrated slash commands. In this section, we'll cover how to register these commands using discord.js!
 
-::: tip
-If you already have slash commands set-up for your application and want to learn how to respond to them, refer to [the following page](/interactions/replying-to-slash-commands/).
-:::
+::: tip If you already have slash commands set-up for your application and want to learn how to respond to them, refer to [the following page](https://github.com/zachjmurphy/guide/tree/9925b2dac70a223dd2dbb549ce57ddb5515bcbc0/interactions/replying-to-slash-commands/README.md). :::
 
 ## Global commands
 
 First up, we'll introduce you to global application commands. These types of commands will be available in all guilds your application has the `applications.commands` scope authorized, as well as in DMs.
 
-::: tip
-Global commands are cached for one hour. New global commands will fan out slowly across all guilds and will only be guaranteed to be updated after an hour. Guild commands update instantly. As such, we recommend you use guild-based commands during development and publish them to global commands when they're ready for public use.
-:::
+::: tip Global commands are cached for one hour. New global commands will fan out slowly across all guilds and will only be guaranteed to be updated after an hour. Guild commands update instantly. As such, we recommend you use guild-based commands during development and publish them to global commands when they're ready for public use. :::
 
 To register a global command, pass an `ApplicationCommandData` object to the `ApplicationCommandManager#create()` method:
 
-```js
+```javascript
 client.on('messageCreate', async message => {
-	if (!client.application?.owner) await client.application?.fetch();
+    if (!client.application?.owner) await client.application?.fetch();
 
-	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
-		const data = {
-			name: 'ping',
-			description: 'Replies with Pong!',
-		};
+    if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
+        const data = {
+            name: 'ping',
+            description: 'Replies with Pong!',
+        };
 
-		const command = await client.application?.commands.create(data);
-		console.log(command);
-	}
+        const command = await client.application?.commands.create(data);
+        console.log(command);
+    }
 });
 ```
 
-::: danger
-Command names must be lowercase. You will receive an API error otherwise.
-:::
+::: danger Command names must be lowercase. You will receive an API error otherwise. :::
 
 That's it! You've successfully created your first global application command! Let's move on to guild commands.
 
@@ -42,22 +36,23 @@ That's it! You've successfully created your first global application command! Le
 
 Guild-specific application commands are only available in the guild they were created in. You can use `GuildApplicationCommandManager#create()` to create them:
 
-```js {10}
-client.on('messageCreate', async message => {
-	if (!client.application?.owner) await client.application?.fetch();
+\`\`\`js {10} client.on\('messageCreate', async message =&gt; { if \(!client.application?.owner\) await client.application?.fetch\(\);
 
-	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
-		const data = {
-			name: 'ping',
-			description: 'Replies with Pong!',
-		};
+```text
+if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
+    const data = {
+        name: 'ping',
+        description: 'Replies with Pong!',
+    };
 
-		const command = await client.guilds.cache.get('123456789012345678')?.commands.create(data);
-		console.log(command);
-	}
-});
+    const command = await client.guilds.cache.get('123456789012345678')?.commands.create(data);
+    console.log(command);
+}
 ```
 
+}\);
+
+```text
 ## Bulk-update commands
 
 If, for example, you deploy your application commands when starting your application, you may want to update all commands and their changes at once. You can do this by passing an array of `ApplicationCommandData` objects to the `set()` method on either of the managers introduced above: 
@@ -68,23 +63,23 @@ This will overwrite all existing commands on the application or guild with the n
 
 ```js {5-14,16-17}
 client.on('messageCreate', async message => {
-	if (!client.application?.owner) await client.application?.fetch();
+    if (!client.application?.owner) await client.application?.fetch();
 
-	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
-		const data = [
-			{
-				name: 'ping',
-				description: 'Replies with Pong!',
-			},
-			{
-				name: 'pong',
-				description: 'Replies with Ping!',
-			},
-		];
+    if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
+        const data = [
+            {
+                name: 'ping',
+                description: 'Replies with Pong!',
+            },
+            {
+                name: 'pong',
+                description: 'Replies with Ping!',
+            },
+        ];
 
-		const commands = await client.application?.commands.set(data);
-		console.log(commands);
-	}
+        const commands = await client.application?.commands.set(data);
+        console.log(commands);
+    }
 });
 ```
 
@@ -92,19 +87,9 @@ client.on('messageCreate', async message => {
 
 Application commands can have `options`. Think of these options as arguments to a function. You can specify them as shown below:
 
-```js {4-9}
-const data = {
-	name: 'echo',
-	description: 'Replies with your input!',
-	options: [{
-		name: 'input',
-		type: 'STRING',
-		description: 'The input to echo back',
-		required: true,
-	}],
-};
-```
+\`\`\`js {4-9} const data = { name: 'echo', description: 'Replies with your input!', options: \[{ name: 'input', type: 'STRING', description: 'The input to echo back', required: true, }\], };
 
+```text
 Notice how `required: true` is specified within the options object. Setting this will prevent the user from sending the command without specifying a value for this option!
 
 ## Option types
@@ -137,27 +122,28 @@ Specify them by providing an array of `ApplicationCommandOptionChoice`'s to the 
 
 ```js {9-22}
 const data = {
-	name: 'gif',
-	description: 'Sends a random gif!',
-	options: [{
-		name: 'category',
-		type: 'STRING',
-		description: 'The gif category',
-		required: true,
-		choices: [
-			{
-				name: 'Funny',
-				value: 'gif_funny',
-			},
-			{
-				name: 'Meme',
-				value: 'gif_meme',
-			},
-			{
-				name: 'Movie',
-				value: 'gif_movie',
-			},
-		],
-	}],
+    name: 'gif',
+    description: 'Sends a random gif!',
+    options: [{
+        name: 'category',
+        type: 'STRING',
+        description: 'The gif category',
+        required: true,
+        choices: [
+            {
+                name: 'Funny',
+                value: 'gif_funny',
+            },
+            {
+                name: 'Meme',
+                value: 'gif_meme',
+            },
+            {
+                name: 'Movie',
+                value: 'gif_movie',
+            },
+        ],
+    }],
 };
 ```
+

@@ -20,36 +20,34 @@ First, be sure to install the [ESLint package](https://www.npmjs.com/package/esl
 npm install eslint --save-dev
 ```
 
-Afterward, install the appropriate plugin(s) for your editor of choice.
+Afterward, install the appropriate plugin\(s\) for your editor of choice.
 
 * [ESLint for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-* [Linter-ESLint for Atom](https://atom.io/packages/linter-eslint) (requires [Linter for Atom](https://atom.io/packages/linter))
+* [Linter-ESLint for Atom](https://atom.io/packages/linter-eslint) \(requires [Linter for Atom](https://atom.io/packages/linter)\)
 * [ESLint for Sublime Text](https://packagecontrol.io/packages/ESLint)
 
-::: tip
-You can install each of these directly inside the editors themselves. For Visual Studio Code, press `Ctrl + Shift + X`. For Atom, press `Ctrl + ,` and click on "Install". For Sublime, press `Ctrl + Shift + P` and search for "Install Package" (available via [Package Control](https://packagecontrol.io/installation)). After that, you may then search for the appropriate plugin and install it.
-:::
+::: tip You can install each of these directly inside the editors themselves. For Visual Studio Code, press `Ctrl + Shift + X`. For Atom, press `Ctrl + ,` and click on "Install". For Sublime, press `Ctrl + Shift + P` and search for "Install Package" \(available via [Package Control](https://packagecontrol.io/installation)\). After that, you may then search for the appropriate plugin and install it. :::
 
 ## Setting up ESLint rules
 
 ESLint may display many warnings and errors about your code when you start using it but don't let this startle you. To get started, follow these steps:
 
-1. Create a file in your root directory named `.eslintrc.json` (where your main project file is).
+1. Create a file in your root directory named `.eslintrc.json` \(where your main project file is\).
 2. Copy the code below into the file.
 
-```json
+```javascript
 {
-	"extends": "eslint:recommended",
-	"env": {
-		"node": true,
-		"es6": true
-	},
-	"parserOptions": {
-		"ecmaVersion": 2021
-	},
-	"rules": {
+    "extends": "eslint:recommended",
+    "env": {
+        "node": true,
+        "es6": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2021
+    },
+    "rules": {
 
-	}
+    }
 }
 ```
 
@@ -59,55 +57,9 @@ You can find a list of all of ESLint's rules on their site, located [here](https
 
 Alternatively, if you don't want to go through everything one by one on your own, you can use the ESLint file we use for this guide.
 
-```json {11-45}
-{
-	"extends": "eslint:recommended",
-	"env": {
-		"node": true,
-		"es6": true
-	},
-	"parserOptions": {
-		"ecmaVersion": 2021
-	},
-	"rules": {
-		"brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
-		"comma-dangle": ["error", "always-multiline"],
-		"comma-spacing": "error",
-		"comma-style": "error",
-		"curly": ["error", "multi-line", "consistent"],
-		"dot-location": ["error", "property"],
-		"handle-callback-err": "off",
-		"indent": ["error", "tab"],
-		"max-nested-callbacks": ["error", { "max": 4 }],
-		"max-statements-per-line": ["error", { "max": 2 }],
-		"no-console": "off",
-		"no-empty-function": "error",
-		"no-floating-decimal": "error",
-		"no-inline-comments": "error",
-		"no-lonely-if": "error",
-		"no-multi-spaces": "error",
-		"no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1, "maxBOF": 0 }],
-		"no-shadow": ["error", { "allow": ["err", "resolve", "reject"] }],
-		"no-trailing-spaces": ["error"],
-		"no-var": "error",
-		"object-curly-spacing": ["error", "always"],
-		"prefer-const": "error",
-		"quotes": ["error", "single"],
-		"semi": ["error", "always"],
-		"space-before-blocks": "error",
-		"space-before-function-paren": ["error", {
-			"anonymous": "never",
-			"named": "never",
-			"asyncArrow": "always"
-		}],
-		"space-in-parens": "error",
-		"space-infix-ops": "error",
-		"space-unary-ops": "error",
-		"spaced-comment": "error",
-		"yoda": "error"
-	}
-}
-```
+\`\`\`json {11-45} { "extends": "eslint:recommended", "env": { "node": true, "es6": true }, "parserOptions": { "ecmaVersion": 2021 }, "rules": { "brace-style": \["error", "stroustrup", { "allowSingleLine": true }\], "comma-dangle": \["error", "always-multiline"\], "comma-spacing": "error", "comma-style": "error", "curly": \["error", "multi-line", "consistent"\], "dot-location": \["error", "property"\], "handle-callback-err": "off", "indent": \["error", "tab"\], "max-nested-callbacks": \["error", { "max": 4 }\], "max-statements-per-line": \["error", { "max": 2 }\], "no-console": "off", "no-empty-function": "error", "no-floating-decimal": "error", "no-inline-comments": "error", "no-lonely-if": "error", "no-multi-spaces": "error", "no-multiple-empty-lines": \["error", { "max": 2, "maxEOF": 1, "maxBOF": 0 }\], "no-shadow": \["error", { "allow": \["err", "resolve", "reject"\] }\], "no-trailing-spaces": \["error"\], "no-var": "error", "object-curly-spacing": \["error", "always"\], "prefer-const": "error", "quotes": \["error", "single"\], "semi": \["error", "always"\], "space-before-blocks": "error", "space-before-function-paren": \["error", { "anonymous": "never", "named": "never", "asyncArrow": "always" }\], "space-in-parens": "error", "space-infix-ops": "error", "space-unary-ops": "error", "spaced-comment": "error", "yoda": "error" } }
+
+\`\`\`
 
 The major points of this setup would be:
 
@@ -120,4 +72,5 @@ The major points of this setup would be:
 * Requiring indenting to be done with tabs;
 * Limiting nested callbacks to 4. If you hit this error, it is a good idea to consider refactoring your code.
 
-If your current code style is a bit different, or you don't like a few of these rules, that's perfectly fine! Just head over to the [ESLint docs](https://eslint.org/docs/rules/), find the rule(s) you want to modify, and change them accordingly.
+If your current code style is a bit different, or you don't like a few of these rules, that's perfectly fine! Just head over to the [ESLint docs](https://eslint.org/docs/rules/), find the rule\(s\) you want to modify, and change them accordingly.
+

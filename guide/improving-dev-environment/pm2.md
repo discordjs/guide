@@ -1,6 +1,6 @@
 # Managing your bot process with PM2
 
-PM2 is a process manager. It manages your applications' states, so you can start, stop, restart, and delete processes. It offers features such as monitoring running processes and setting up a "start with operating system" (be that Windows, Linux, or Mac) so your processes start when you boot your system.
+PM2 is a process manager. It manages your applications' states, so you can start, stop, restart, and delete processes. It offers features such as monitoring running processes and setting up a "start with operating system" \(be that Windows, Linux, or Mac\) so your processes start when you boot your system.
 
 ## Installation
 
@@ -28,37 +28,33 @@ pm2 start your-app-name.js
 
 The `pm2 start` script allows for more optional command-line arguments.
 
-- `--name`: This allows you to set the name of your process when listing it up with `pm2 list` or `pm2 monit`:
+* `--name`: This allows you to set the name of your process when listing it up with `pm2 list` or `pm2 monit`:
 
 ```bash
 pm2 start your-app-name.js --name "Some cool name"
 ```
 
-- `--watch`: This option will automatically restart your process as soon as a file change is detected, which can be useful for development environments:
+* `--watch`: This option will automatically restart your process as soon as a file change is detected, which can be useful for development environments:
 
 ```bash
 pm2 start your-app-name.js --watch
 ```
 
-::: tip
-The `pm2 start` command can take more optional parameters, but only these two are relevant. If you want to see all the parameters available, you can check the documentation of pm2 [here](https://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/).
-:::
+::: tip The `pm2 start` command can take more optional parameters, but only these two are relevant. If you want to see all the parameters available, you can check the documentation of pm2 [here](https://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/). :::
 
 Once the process launches with pm2, you can run `pm2 monit` to monitor all console outputs from the processes started by pm2. This accounts for any `console.log()` in your code or outputted errors.
 
 ## Setting up booting with your system
 
-Perhaps one of the more useful features of PM2 is being able to boot up with your Operating System. This feature will ensure that your bot processes will always be started after an (unexpected) reboot (e.g., after a power outage).
+Perhaps one of the more useful features of PM2 is being able to boot up with your Operating System. This feature will ensure that your bot processes will always be started after an \(unexpected\) reboot \(e.g., after a power outage\).
 
 The initial steps differ per OS. In this guide, we'll cover those for Windows and Linux/MacOS.
 
 ### Initial steps for Windows
 
-::: tip
-Run these from an administrative command prompt to avoid getting hit with a bunch of UAC dialogs.
-:::
+::: tip Run these from an administrative command prompt to avoid getting hit with a bunch of UAC dialogs. :::
 
-**Install the [pm2-windows-service](https://www.npmjs.com/package/pm2-windows-service) package from npm:**
+**Install the** [**pm2-windows-service**](https://www.npmjs.com/package/pm2-windows-service) **package from npm:**
 
 ```bash
 npm install --global pm2-windows-service
@@ -69,9 +65,8 @@ npm install --global pm2-windows-service
 ```bash
 pm2-service-install
 ```
-::: tip
-You can use the `-n` parameter to set the service name: `pm2-service-install -n "the-service-name"`
-:::
+
+::: tip You can use the `-n` parameter to set the service name: `pm2-service-install -n "the-service-name"` :::
 
 ### Initial steps for Linux/MacOS
 
@@ -112,3 +107,4 @@ To disable this, you can run the following command:
 ```bash
 pm2 unstartup
 ```
+
