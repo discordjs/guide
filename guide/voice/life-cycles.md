@@ -41,7 +41,7 @@ async function start() {
 		console.log('Playback has started!');
 	} catch (error) {
 		// The player has not entered the Playing state and either:
-		// 1) The 'error' event has been emitted and should be handled.
+		// 1) The 'error' event has been emitted and should be handled
 		// 2) 5 seconds have passed
 		console.error(error);
 	}

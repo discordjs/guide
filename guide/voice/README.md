@@ -6,13 +6,13 @@
 
 ### Barebones
 
-To add voice functionality to your discord.js bot, you will need the  `@discordjs/voice` package as well as one of the encryption packages listed below. For example: 
+To add voice functionality to your discord.js bot, you will need the  `@discordjs/voice` package, as well as one of the encryption packages listed below. For example: 
 
 ```bash
 npm install @discordjs/voice libsodium-wrappers
 ```
 
-After this, you'll be able to play Ogg and WebM Opus files without any other dependencies. If you want to play audio from other sources, or to improve performance, consider installing some of the extra dependencies listed below.
+After this, you'll be able to play Ogg and WebM Opus files without any other dependencies. If you want to play audio from other sources, or want to improve performance, consider installing some of the extra dependencies listed below.
 
 ::: warning
 This guide assumes you have installed at least one additional dependency – FFmpeg. More information on this can be found in the

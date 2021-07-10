@@ -64,11 +64,11 @@ setTimeout(() => connection.unpause(), 5_000);
 
 ## Life cycle
 
-Voice connections have their own life cycle, with 5 distinct states. You can follow the methods discussed in the [life cycles](./life-cycles) section to subscribe to changes to voice connections.
+Voice connections have their own life cycle, with five distinct states. You can follow the methods discussed in the [life cycles](/voice/life-cycles.md) section to subscribe to changes to voice connections.
 
 - **Idle** - the initial state of an audio player. The audio player will be in this state when there is no audio resource for it to play.
 
-- **Bufferring** - the state an audio player will be in while it is waiting for an audio resource to become playable. The audio player may transition either the `Playing` state (success) or the `Idle` state (failure) from this state.
+- **Bufferring** - the state an audio player will be in while it is waiting for an audio resource to become playable. The audio player may transition from this state to either the `Playing` state (success) or the `Idle` state (failure).
 
 - **Playing** - the state a voice connection enters when it is actively playing an audio resource. When the audio resource comes to an end, the audio player will transition to the Idle state.
 

@@ -63,7 +63,7 @@ if (subscription) {
 
 ## Life cycle
 
-Voice connections have their own life cycle, with 5 distinct states. You can follow the methods discussed in the [life cycles](./life-cycles) section to subscribe to changes to voice connections.
+Voice connections have their own life cycle, with five distinct states. You can follow the methods discussed in the [life cycles](/voice/life-cycles.md) section to subscribe to changes to voice connections.
 
 - **Signalling** - the initial state of a voice connection. The connection will be in this state when it is requesting permission to join a voice channel.
 
