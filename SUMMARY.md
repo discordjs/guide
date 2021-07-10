@@ -5,11 +5,6 @@
 ## Home
 
 * [Introduction](home/guide/README.md)
-  * [Getting started](home/guide/sharding/README.md)
-    * [Additional information](home/guide/sharding/additional-information.md)
-    * [Extended changes](home/guide/sharding/extended.md)
-  * [Storing data with Sequelize](home/guide/sequelize/README.md)
-    * [Making a Currency System](home/guide/sequelize/currency.md)
   * [additional-info](home/guide/additional-info/README.md)
     * [Understanding async/await](home/guide/additional-info/async-await.md)
     * [ES6 syntax examples](home/guide/additional-info/es6-syntax.md)
@@ -19,13 +14,11 @@
   * [improving-dev-environment](home/guide/improving-dev-environment/README.md)
     * [Managing your bot process with PM2](home/guide/improving-dev-environment/pm2.md)
     * [Setting up package.json scripts](home/guide/improving-dev-environment/package-json-scripts.md)
-  * [Storing data with Keyv](home/guide/keyv.md)
   * [Event handling](home/guide/event-handling.md)
   * [Installing Node.js and discord.js](home/guide/preparations/README.md)
     * [Adding your bot to servers](home/guide/preparations/adding-your-bot-to-servers.md)
     * [Setting up a linter](home/guide/preparations/setting-up-a-linter.md)
     * [Setting up a bot application](home/guide/preparations/setting-up-a-bot-application.md)
-  * [Getting started with OAuth2](home/guide/oauth2.md)
 * [Requesting More Content](home/requesting-more-content.md)
 
 ## Creating Your Bot <a id="creating-your-bot-1"></a>
@@ -68,15 +61,19 @@
 
 ## Databases
 
-* [Untitled](databases/untitled.md)
+* [Storing data with Sequelize](databases/sequelize.md)
+* [Making a Currency System](databases/currency.md)
+* [Storing data with Keyv](databases/keyv.md)
 
 ## Sharding
 
-* [Untitled](sharding/untitled.md)
+* [Getting Started](sharding/sharding.md)
+* [Additional Information](sharding/additional-information.md)
+* [Extended Changes](sharding/extended.md)
 
 ## OAuth2
 
-* [Untitled](oauth2/untitled.md)
+* [Getting started with OAuth2](oauth2/oauth2.md)
 
 ## Voice
 
@@ -86,5 +83,4 @@
 * [Voice Broadcasts](voice/voice-broadcasts.md)
 * [Optimization and Troubleshooting](voice/optimisation-and-troubleshooting.md)
 * [Receiving Audio](voice/receiving-audio.md)
-* [Untitled](voice/untitled.md)
 
