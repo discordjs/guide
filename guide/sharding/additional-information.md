@@ -97,33 +97,3 @@ The function will recieve the arguments as an object as the second parameter.
 The `context` option only accepts properties which are JSON-serializable.
 This means you cannot pass complex data types in the context directly.
 :::
-
-### Asynchronous functions
-
-There may be a time when you want to have your shard process an asynchronous function. Here's how you can do that!
-
-```js
-client.shard.broadcastEval(client => {
-	const channel = this.channels.cache.get('id');
-	let msg;
-	if (channel) {
-		msg = channel.messages.fetch('id').then(m => m.id);
-	}
-	msg;
-});
-```
-
-This snippet allows you to return fetched messages outside of the `broadcastEval`, letting you know whether or not you were able to retrieve a message, for example. Remember, you aren't able to return entire objects outside. Now, what if we wanted to use `async/await` syntax inside?
-
-```js
-client.shard.broadcastEval(async client => {
-	const channel = this.channels.cache.get('id');
-	let msg;
-	if (channel) {
-		msg = await channel.messages.fetch('id').then(m => m.id);
-	}
-	return msg;
-});
-```
-
-This example will work the same, but you can produce cleaner code with `async/await`. Additionally, what this does is declare an asynchronous function and then immediately call it. As it is also the last declared line, it is effectively being returned. Remember that you need to `return` an item inside a function one way or another.
