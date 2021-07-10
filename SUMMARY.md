@@ -5,12 +5,6 @@
 ## Home
 
 * [Introduction](home/guide/README.md)
-  * [Introduction](home/guide/voice/README.md)
-    * [Voice Broadcasts](home/guide/voice/voice-broadcasts.md)
-    * [Optimization and Troubleshooting](home/guide/voice/optimisation-and-troubleshooting.md)
-    * [Understanding Voice](home/guide/voice/understanding-voice.md)
-    * [Receiving Audio](home/guide/voice/receiving-audio.md)
-    * [The Basics](home/guide/voice/the-basics.md)
   * [Getting started](home/guide/sharding/README.md)
     * [Additional information](home/guide/sharding/additional-information.md)
     * [Extended changes](home/guide/sharding/extended.md)
@@ -71,4 +65,26 @@
 
 * [Parsing Mention Arguments](miscellaneous-1/parsing-mention-arguments.md)
 * [Useful Packages](miscellaneous-1/useful-packages.md)
+
+## Databases
+
+* [Untitled](databases/untitled.md)
+
+## Sharding
+
+* [Untitled](sharding/untitled.md)
+
+## OAuth2
+
+* [Untitled](oauth2/untitled.md)
+
+## Voice
+
+* [Introduction](voice/voice.md)
+* [Understanding Voice](voice/understanding-voice.md)
+* [The Basics](voice/the-basics.md)
+* [Voice Broadcasts](voice/voice-broadcasts.md)
+* [Optimization and Troubleshooting](voice/optimisation-and-troubleshooting.md)
+* [Receiving Audio](voice/receiving-audio.md)
+* [Untitled](voice/untitled.md)
 
