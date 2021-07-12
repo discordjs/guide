@@ -138,63 +138,7 @@ These work quite similarly to message and reaction collectors, except that you w
 You can create the collectors on either a `message` or a `channel`.
 :::
 
-### MessageComponentCollector
-
-Here's how you can create a basic event-based `MessageComponentCollector`:
-
-```js {23,25,27-28}
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
-
-	if (interaction.commandName === 'ping') {
-		const menu = new MessageSelectMenu()
-			.setCustomId('select')
-			.setPlaceholder('Nothing selected')
-			.addOptions([
-				{
-					label: 'Select me',
-					description: 'This is a description',
-					value: 'first_option',
-				},
-				{
-					label: 'You can select me too',
-					description: 'This is also a description',
-					value: 'second_option',
-				},
-			]);
-
-		await interaction.reply({ content: 'Pong!', components: [[menu]] });
-
-		const filter = i => i.customId === 'select' && i.user.id === '122157285790187530';
-
-		const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
-
-		collector.on('collect', i => console.log(`Collected ${i.values.join(', ')} from ${i.customId}`));
-		collector.on('end', collected => console.log(`Collected ${collected.size} items`));
-	}
-});
-```
-
-::: danger
-For ephemeral responses, you cannot fetch a message object, so create the collector on a channel instead.
-:::
-
-### awaitMessageComponent
-
-As with other types of collectors, you can also use a promise-based collector.
-
-::: warning
-Unlike other promise-based collectors, this one only collects a single item!
-:::
-
-```js {3-5}
-const filter = i => i.customId === 'select' && i.user.id === '122157285790187530';
-
-message.awaitMessageComponentInteraction({ filter, time: 15000 })
-	.then(i => console.log(`${i.values.join(', ')} was selected from ${i.customId}!`))
-	.catch(console.error);
-```
-
+For a detailed guide on receiving message components via collectors, please refer to the [collectors guide](/popular-topics/collectors.md).
 
 ## Responding to select menus
 
