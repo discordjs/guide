@@ -117,34 +117,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 -->
 ![selectephem](./images/selectephem.png)
 
-
-Additionally, if you don't want to construct an `ActionRow` every time, you can also pass an array of arrays containing components:
-
-<!-- eslint-skip -->
-
-```js
-const menu = new MessageSelectMenu()
-	.setCustomId('select')
-	.setPlaceholder('Nothing selected')
-	.addOptions([
-		{
-			label: 'Select me',
-			description: 'This is a description',
-			value: 'first_option',
-		},
-		{
-			label: 'You can select me too',
-			description: 'This is also a description',
-			value: 'second_option',
-		},
-	]);
-
-await interaction.reply({ content: 'Pong!', components: [[menu]] });
-```
-
-Now you know all there is to building and sending a `SelectMenu`! Let's move on to how to receive selected options!
-
-## Receiving select menu options
+Now you know all there is to building and sending a `SelectMenu`! Let's move on to how to receive menus!
 
 ## Receiving Select menus
 

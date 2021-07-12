@@ -108,19 +108,6 @@ client.on('interactionCreate', async interaction => {
 	</DiscordMessage>
 </DiscordMessages>
 
-Additionally, if you don't want to construct an `ActionRow` every time, you can also pass an array of arrays containing components like this:
-
-<!-- eslint-skip -->
-
-```js
-const button = new MessageButton()
-	.setCustomId('primary')
-	.setLabel('Primary')
-	.setStyle('PRIMARY');
-
-await interaction.reply({ content: 'Pong!', components: [[button]] });
-```
-
 ### Disabled buttons
 
 If you want to prevent a button from being used, but not remove it from the message, you can disable it with the `setDisabled()` method:
