@@ -138,7 +138,7 @@ These work quite similarly to message and reaction collectors, except that you w
 You can create the collectors on either a `message` or a `channel`.
 :::
 
-For a detailed guide on receiving message components via collectors, please refer to the [collectors guide](/popular-topics/collectors.md).
+For a detailed guide on receiving message components via collectors, please refer to the [collectors guide](/popular-topics/collectors.md#interaction-collectors).
 
 ## Responding to select menus
 
