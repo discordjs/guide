@@ -263,7 +263,7 @@ console.log([string, integer, boolean, user, member, channel, role]);
 ```
 
 ::: tip
-If you want the snowflake of a structure instead, access it via the `value` property.
+If you want the snowflake of a structure instead, access it via the `value` property. Note that we use `const { value: name } = ...` here to [destructure and rename](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) the value obtained from the <DocsLink path="typedef/CommandInteractionOption">`CommandInteractionOption`</DocsLink> structure to avoid identifier name conflicts.
 :::
 
 ## Fetching and deleting responses
