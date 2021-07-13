@@ -112,6 +112,8 @@ export default {
 				'/interactions/registering-slash-commands.md',
 				'/interactions/replying-to-slash-commands.md',
 				'/interactions/slash-command-permissions.md',
+				'/interactions/buttons.md',
+				'/interactions/select-menus.md',
 			],
 		},
 		{
