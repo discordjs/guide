@@ -8,7 +8,6 @@ As you get deeper into development, you may need to interact with sensitive data
 
 * Database passwords
 * API keys
-* Command prefix(es)
 * A list of bot owner IDs
 
 Having that kind of data hard-coded in each of your files can be bothersome and less than ideal. This is where configuration files come in–they're great for storing static data you can easily update in a single place.
@@ -19,7 +18,6 @@ Go to your code editor and make a new file. Add in the code below and save it as
 
 ```json
 {
-	"prefix": "!",
 	"token": "your-token-goes-here"
 }
 ```
@@ -32,7 +30,7 @@ const config = require('./config.json');
 
 Next, copy your token from the `client.login('your-token-goes-here')` line and paste into the `config.json` file. Make sure to keep it between the double-quotes.
 
-Now you can simply do `client.login(config.token)` to login! If you want to use a different prefix than `!`, you can change that as well.
+Now you can simply do `client.login(config.token)` to login!
 
 ## Storing additional data
 
@@ -40,7 +38,6 @@ As previously mentioned, you'll probably want to store more than just your token
 
 ```json
 {
-	"prefix": "!",
 	"token": "your-token-goes-here",
 	"meaning_of_life": 42,
 	"passwords_array": ["please", "dont", "hack", "me"],

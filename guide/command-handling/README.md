@@ -6,7 +6,7 @@ Here's the base code we'll be using:
 
 ```js
 const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
+const { token } = require('./config.json');
 
 const client = new Discord.Client();
 
@@ -14,26 +14,19 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
 
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
-
-	if (command === 'ping') {
-		message.channel.send('Pong.');
-	} else if (command === 'beep') {
-		message.channel.send('Boop.');
+	if (interacton.commandName === 'ping') {
+		await interaction.reply('Pong.');
+	} else if (interacton.commandName === 'beep') {
+		await interaction.reply('Boop!');
 	}
 	// ...
 });
 
 client.login(token);
 ```
-
-::: tip
-We'll be moving over the commands created in [the previous page](/creating-your-bot/commands-with-user-input.md) as well, but for the sake of keeping the base code short, the code block above omits those commands.
-:::
 
 ## Individual command files
 
@@ -46,9 +39,9 @@ In the same folder, create a new folder and name it `commands`. This is where yo
 ```js
 module.exports = {
 	name: 'ping',
-	description: 'Ping!',
-	execute(message, args) {
-		message.channel.send('Pong.');
+	description: 'Replies with Pong!',
+	async execute(interaction) {
+		await interaction.reply('Pong!');
 	},
 };
 ```
@@ -60,7 +53,7 @@ You can go ahead and do the same for the rest of your commands and put their res
 :::
 
 ::: tip
-If you need to access your client instance from inside one of your command files, you can access it via `message.client`. If you need to access external files, modules, etc., you should re-require them at the top of the file.
+If you need to access your client instance from inside one of your command files, you can access it via `interaction.client`. If you need to access external files, modules, etc., you should re-require them at the top of the file.
 :::
 
 ## Reading command files
@@ -70,7 +63,7 @@ Back in your main file, make these two additions:
 ```js {1,6}
 const fs = require('fs');
 const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
+const { token } = require('./config.json');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -101,36 +94,26 @@ for (const file of commandFiles) {
 
 ## Dynamically executing commands
 
-With your `client.commands` Collection setup, you can use it to retrieve and execute your commands! Inside your `message` event, delete your `if`/`else if` chain of commands and replace it with this:
+With your `client.commands` Collection setup, you can use it to retrieve and execute your commands! Inside your `interactionCreate` event, delete your `if`/`else if` chain of commands and replace it with this:
 
-```js {7-14}
-client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+```js {6-12}
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
 
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
-
-	if (!client.commands.has(command)) return;
+	if (!client.commands.has(interaction.commandName)) return;
 
 	try {
-		client.commands.get(command).execute(message, args);
+		await client.commands.get(interaction.commandName).execute(interaction);
 	} catch (error) {
 		console.error(error);
-		message.reply('there was an error trying to execute that command!');
+		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
 ```
 
-If there isn't a command with that name, you don't need to do anything further, so exit early with `return`. If there is, `.get()` the command, call its `.execute()` method, and pass in your `message` and `args` variables as its arguments. In case something goes wrong, log the error and report back to the member to let them know.
+If there isn't a command with that name, you don't need to do anything further, so exit early with `return`. If there is, `.get()` the command, call its `.execute()` method, and pass in your `interaction` variable as its argument. In case something goes wrong, log the error and report back to the member to let them know.
 
 And that's it! Whenever you want to add a new command, you make a new file in your `commands` directory, name it what you want, and then do what you did for the other commands.
-
-In the next chapter, we'll be going through how to implement some basic features into your brand new command handler. Currently, it's hardly a command "handler" at this point; it's a command loader and executor if you wish to see it that way. You'll learn how to implement some new features and the logic behind them, such as:
-
-* Command aliases
-* Cooldowns
-* Guild only commands
-* A dynamic help message
 
 ## Resulting code
 

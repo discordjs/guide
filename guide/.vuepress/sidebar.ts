@@ -60,14 +60,12 @@ export default {
 				'/creating-your-bot/',
 				'/creating-your-bot/configuration-files.md',
 				'/creating-your-bot/adding-more-commands.md',
-				'/creating-your-bot/commands-with-user-input.md',
 			],
 		},
 		{
 			text: 'Command Handler',
 			children: [
 				'/command-handling/',
-				'/command-handling/adding-features.md',
 			],
 		},
 		{
