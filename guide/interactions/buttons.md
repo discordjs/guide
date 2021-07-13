@@ -73,7 +73,7 @@ client.on('interactionCreate', async interaction => {
 		const embed = new MessageEmbed()
 			.setColor('#0099ff')
 			.setTitle('Some title')
-			.setURL('https://discord.js.org/')
+			.setURL('https://discord.js.org')
 			.setDescription('Some description here');
 
 		await interaction.reply({ content: 'Pong!', ephemeral: true, embeds: [embed], components: [row] });
@@ -95,7 +95,7 @@ client.on('interactionCreate', async interaction => {
 			<DiscordEmbed
 				border-color="#0099ff"
 				embed-title="Some title"
-				url="https://discord.js"
+				url="https://discord.js.org"
 			>
 				Some description here
 			</DiscordEmbed>
@@ -246,5 +246,5 @@ Currently there are five different button styles available:
 </DiscordMessages>
 
 ::: warning
-Only `LINK` buttons can have a `url`. `LINK` buttons _cannot_ have a `custom_id` and _do not_ send an interaction event when clicked.
+Only `LINK` buttons can have a `url`. `LINK` buttons _cannot_ have a `custom_id` and _do not_ send an interaction event when clicked.
 :::
