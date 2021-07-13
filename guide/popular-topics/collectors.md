@@ -15,7 +15,7 @@ For now, let's take the example that they have provided us:
 ```js
 // `m` is a message object that will be passed through the filter function
 const filter = m => m.content.includes('discord');
-const collector = message.channel.createMessageCollector(filter, { time: 15000 });
+const collector = message.channel.createMessageCollector({ filter, time: 15000 });
 
 collector.on('collect', m => {
 	console.log(`Collected ${m.content}`);
@@ -26,17 +26,20 @@ collector.on('end', collected => {
 });
 ```
 
-In the first argument of `.createMessageCollector()`, it specifies that it requires a function. This function should ideally return a boolean, which would indicate whether or not the message should pass through the collector's filter. This filter function includes implicit return, which means that (in this case), it will return the value of `m.content.includes('discord')` without actually specifying `return`. This happens when you use arrow functions without braces.
+You can provide a `filter` key to the object parameter of `createMessageCollector()`. The value to this key should be a function that returns a boolean value to indicate if this message should be collected or not. To check for multiple conditions in your filter you can connect them using [logical operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#logical_operators).  If you don't provide a filter all messages in the channel the collector was started on will be collected. 
 
-You can also allow more than one condition, as you would with any function. An alternative could be `m => m.content.includes('discord') && m.author.id === message.author.id`, assuming `message` is the name of what you receive in the `message` event. This function will only allow a message sent by the person who triggered the command *and* if the message content included "discord" in it.
+Note that the above example uses [implicit return](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions#function_body) for the filter function and passes it to the options object using the [object property shorthand](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#property_definitions) notation.
 
-After a message passes through, this will trigger the `collect` event for the `collector` you've created, which will then run the provided function. In this case, it will only log the collected message. Once the collector finishes, one way or another, it will run the `end` event. A collector can end in different ways, such as:
 
-* Time running out
-* A certain number of messages passing the filter
-* A certain number of attempts to go through the filter altogether
+If a message passes through the filter, it will trigger the `collect` event for the `collector` you've created. This message is then passed into the event listener as `collected` and the provided function is executed. In the above example, you simply log the message. Once the collector finishes collecting based on the provided end conditions the `end` event emits.
 
-Those options you pass as the second argument in `.createMessageCollector()`. The benefit of using this method over `.awaitMessages()` is that you can stop it manually by calling `collector.stop()`, should you have your own reason to interrupt the collecting early.
+You can control when a collector ends by supplying additional option keys when creating a collector:
+
+* `time`: Amount of time in milliseconds the collector should run for
+* `max`:  Number of messages to successfully pass the filter
+* `maxProcessed`: Number of messages encountered (no matter the filter result)
+
+The benefit of using an event-based collector over `.awaitMessages()` (its promise-based counterpart) is that you can do something directly after each message is collected, rather than just after the collector ended. You can also stop the collector manually by calling `collector.stop()`.
 
 ### Await messages
 
@@ -71,7 +74,7 @@ const filter = response => {
 };
 
 message.channel.send(item.question).then(() => {
-	message.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ['time'] })
+	message.channel.awaitMessages({ filter, max: 1, time: 30000, errors: ['time'] })
 		.then(collected => {
 			message.channel.send(`${collected.first().author} got the correct answer!`);
 		})
@@ -104,7 +107,7 @@ const filter = (reaction, user) => {
 	return reaction.emoji.name === '👍' && user.id === message.author.id;
 };
 
-const collector = message.createReactionCollector(filter, { time: 15000 });
+const collector = message.createReactionCollector({ filter, time: 15000 });
 
 collector.on('collect', (reaction, user) => {
 	console.log(`Collected ${reaction.emoji.name} from ${user.tag}`);
@@ -128,9 +131,52 @@ const filter = (reaction, user) => {
 	return reaction.emoji.name === '👍' && user.id === message.author.id;
 };
 
-message.awaitReactions(filter, { max: 4, time: 60000, errors: ['time'] })
+message.awaitReactions({ filter, max: 4, time: 60000, errors: ['time'] })
 	.then(collected => console.log(collected.size))
 	.catch(collected => {
 		console.log(`After a minute, only ${collected.size} out of 4 reacted.`);
 	});
+```
+
+## Interaction collectors
+
+The third type of collector allows you to collect interactions; such as when users activate a slash command or click on a button in a message.
+
+### Basic message component collector
+
+Collecting interactions from message components works similarly to reaction collectors. In the following example,  you will check that the interaction came from a button, and that the user clicking the button is the same user that initiated the command.
+
+One important difference to note with interaction collectors is that Discord expects a response to *all* interactions within 3 seconds - even ones that you don't want to collect. For this reason, you may wish to `.deferUpdate()` all interactions in your filter, or not use a filter at all and handle this behavior in the `collect` event.
+
+```js
+const collector = message.createMessageComponentCollector({ componentType: 'BUTTON', time: 15000 });
+
+collector.on('collect', i => {
+	if (i.user.id === interaction.user.id) {
+		i.reply(`${i.user.id} clicked on the ${i.customId} button.`);
+	} else {
+		i.reply({ content: `These buttons aren't for you!`, ephemeral: true });
+	}
+});
+
+collector.on('end', collected => {
+	console.log(`Collected ${collected.size} interactions.`);
+});
+```
+
+### Await message component
+
+As before, this works similarly to the message component collector, except it is Promise-based.
+
+Unlike other Promise-based collectors, this method will only ever collect one interaction that passes the filter. If no interactions are collected before the time runs out, the Promise will reject. This behavior aligns with Discord's requirement that actions should immediately receive a response. In this example, you will use `.deferUpdate()` on all interactions in the filter.
+
+```js
+const filter = i => {
+	i.deferUpdate();
+	return i.user.id === interaction.user.id;
+};
+
+message.awaitMessageComponents({ filter, componentType: 'SELECT_MENU', time: 60000 })
+	.then(interaction => interaction.editReply(`You selected ${interaction.values.join(', ')}!`))
+	.catch(err => console.log(`No interactions were collected.`));
 ```
