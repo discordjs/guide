@@ -1,6 +1,6 @@
 const util = require('util');
-const { Client, Permissions } = require('discord.js');
-const client = new Client();
+const { Client, Intents, Permissions } = require('discord.js');
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -17,17 +17,17 @@ client.on('message', message => {
 	}
 
 	if (message.content === '!mod-everyone') {
-		const everyonePerms = new Permissions(message.guild.defaultRole.permissions);
+		const everyonePerms = new Permissions(message.guild.roles.everyone.permissions);
 		const newPerms = everyonePerms.add(['MANAGE_MESSAGES', 'KICK_MEMBERS']);
 
-		message.guild.defaultRole.setPermissions(newPerms.bitfield)
+		message.guild.roles.everyone.setPermissions(newPerms.bitfield)
 			.then(() => message.channel.send('Added mod permissions to `@everyone`.'))
 			.catch(console.error);
 	} else if (message.content === '!unmod-everyone') {
-		const everyonePerms = new Permissions(message.guild.defaultRole.permissions);
+		const everyonePerms = new Permissions(message.guild.roles.everyone.permissions);
 		const newPerms = everyonePerms.remove(['MANAGE_MESSAGES', 'KICK_MEMBERS']);
 
-		message.guild.defaultRole.setPermissions(newPerms.bitfield)
+		message.guild.roles.everyone.setPermissions(newPerms.bitfield)
 			.then(() => message.channel.send('Removed mod permissions from `@everyone`.'))
 			.catch(console.error);
 	} else if (message.content === '!create-mod') {
@@ -35,7 +35,7 @@ client.on('message', message => {
 			return message.channel.send('A role with the name "Mod" already exists on this server.');
 		}
 
-		message.guild.roles.create({ data: { name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS'] } })
+		message.guild.roles.create({ name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS'] })
 			.then(() => message.channel.send('Created Mod role.'))
 			.catch(console.error);
 	} else if (message.content === '!check-mod') {
@@ -45,17 +45,17 @@ client.on('message', message => {
 
 		message.channel.send('You don\'t have a role called Mod.');
 	} else if (message.content === '!can-kick') {
-		if (message.member.hasPermission('KICK_MEMBERS')) {
+		if (message.member.permissions.has('KICK_MEMBERS')) {
 			return message.channel.send('You can kick members.');
 		}
 
 		message.channel.send('You cannot kick members.');
 	} else if (message.content === '!make-private') {
 		if (!message.channel.permissionsFor(client.user).has('MANAGE_ROLES')) {
-			return message.channel.send('Please make sure I have the `MANAGE_ROLES` permissions in this channel and retry.');
+			return message.channel.send('Please make sure I have the `MANAGE_ROLES` permission in this channel and retry.');
 		}
 
-		message.channel.overwritePermissions([
+		message.channel.permissionOverwrites.set([
 			{
 				id: message.guild.id,
 				deny: ['VIEW_CHANNEL'],
@@ -69,11 +69,12 @@ client.on('message', message => {
 				allow: ['VIEW_CHANNEL'],
 			},
 		])
-			.then(() => message.channel.send(`Made channel \`${message.channel.name}\` private.`))
+			.then(() => message.channel.send(`Made channel ${message.channel} private.`))
 			.catch(console.error);
 	} else if (message.content === '!create-private') {
 		message.guild.channels.create('private', {
-			type: 'text', permissionOverwrites: [
+			type: 'GUILD_TEXT', 
+            permissionOverwrites: [
 				{
 					id: message.guild.id,
 					deny: ['VIEW_CHANNEL'],
@@ -92,34 +93,34 @@ client.on('message', message => {
 			.catch(console.error);
 	} else if (message.content === '!unprivate') {
 		if (!message.channel.permissionsFor(client.user).has('MANAGE_ROLES')) {
-			return message.channel.send('Please make sure i have the permissions MANAGE_ROLES in this channel and retry.');
+			return message.channel.send('Please make sure I have the permissions MANAGE_ROLES in this channel and retry.');
 		}
 
-		message.channel.permissionOverwrites.get(message.guild.id).delete()
-			.then(() => message.channel.send(`Made channel ${message.channel.name} public.`))
+		message.channel.permissionOverwrites.delete(message.guild.id)
+			.then(() => message.channel.send(`Made channel ${message.channel} public.`))
 			.catch(console.error);
 	} else if (message.content === '!my-permissions') {
 		const finalPermissions = message.channel.permissionsFor(message.member);
 
-		message.channel.send(util.inspect(finalPermissions.serialize()), { code: 'js' });
+		message.channel.send({ content: `\`\`\`js\n${util.inspect(finalPermissions.serialize())}\`\`\`` });
 	} else if (message.content === '!lock-permissions') {
 		if (!message.channel.parent) {
 			return message.channel.send('This channel is not placed under a category.');
 		}
 
 		if (!message.channel.permissionsFor(client.user).has('MANAGE_ROLES')) {
-			return message.channel.send('Please make sure i have the permissions MANAGE_ROLES in this channel and retry.');
+			return message.channel.send('Please make sure I have the permissions MANAGE_ROLES in this channel and retry.');
 		}
 
 		message.channel.lockPermissions()
 			.then(() => {
-				message.channel.send(`Synchronized overwrites of \`${message.channel.name}\` with \`${message.channel.parent.name}\`.`);
+				message.channel.send(`Synchronized overwrites of ${message.channel} with the \`${message.channel.parent.name}\` category.`);
 			})
 			.catch(console.error);
 	} else if (message.content === '!role-permissions') {
 		const roleFinalPermissions = message.channel.permissionsFor(message.member.roles.highest);
 
-		message.channel.send(util.inspect(roleFinalPermissions.serialize()), { code: 'js' });
+		message.channel.send({ content: `\`\`\`js\n${util.inspect(roleFinalPermissions.serialize())}\`\`\`` });
 	}
 });
 
