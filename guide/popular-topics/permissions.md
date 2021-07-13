@@ -100,7 +100,7 @@ To add a permission overwrite for a role or guild member, you access the channel
 Let's add an overwrite to lock everyone out of the channel. The guild ID doubles as the role id for the default role `@everyone` as demonstrated below:
 
 ```js
-channel.permissionOverwrites.create(channel.guild.roles.everyone, { 'VIEW_CHANNEL': false });
+channel.permissionOverwrites.create(channel.guild.roles.everyone, { VIEW_CHANNEL: false });
 ```
 
 Any permission flags not specified get neither an explicit allow nor deny overwrite and will use the base permission unless another role has an explicit overwrite set.
