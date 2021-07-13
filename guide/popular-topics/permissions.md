@@ -18,7 +18,7 @@ member.roles.cache.some(role => role.name === 'Mod');
 // returns true if any of the member's roles is exactly named "Mod"
 ```
 
-If you want to enhance this system slightly, you can include the guild owner by comparing the executing member's ID with `message.guild.ownerID`. 
+If you want to enhance this system slightly, you can include the guild owner by comparing the executing member's ID with `message.guild.ownerId`.
 
 To include permission checks like `ADMINISTRATOR` or `MANAGE_GUILD`, keep reading as we will cover Discord Permissions and all their intricacies in the following sections.
 
@@ -39,7 +39,7 @@ You can provide permission decimals wherever we use flag literals in this guide.
 
 ### Setting role permissions
 
-Base permissions are set on roles, not the guild member itself. To change them, you access a Role object (for example via `member.roles.cache.first()` or `guild.roles.cache.random()`) and use the `.setPermissions()` method. This is how you'd change the base permissions for the @everyone role, for example:
+Base permissions are set on roles, not the guild member itself. To change them, you access a Role object (for example via `member.roles.cache.first()` or `guild.roles.cache.random()`) and use the `.setPermissions()` method. This is how you'd change the base permissions for the `@everyone` role, for example:
 
 ```js
 guild.roles.everyone.setPermissions(['SEND_MESSAGES', 'VIEW_CHANNEL']);
@@ -53,31 +53,35 @@ Note that flag names are literal. Although `VIEW_CHANNEL` grants access to view 
 
 ### Creating a role with permissions
 
-Alternatively you can provide permissions as a property of <DocsLink path="typedef/RoleData">RoleData</DocsLink> objects during role creation as an array of flag strings or a permission number:
+Alternatively you can provide permissions as a property of the <DocsLink path="typedef/CreateRoleOptions">CreateRoleOptions</DocsLink> typedef during role creation as an array of flag strings or a permission number:
 
 ```js
-guild.roles.create({ data: { name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS'] } });
+guild.roles.create({ name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS'] });
 ```
 
 ### Checking member permissions
 
-To know if one of a member's roles has a permission enabled, you can use the `.hasPermission()` method of the <DocsLink path="class/GuildMember">GuildMember</DocsLink> class and provide a permission flag, array, or number to check for. You can also specify if you want to allow the `ADMINISTRATOR` permission or the guild owner status to override this check with the following parameters.
+To know if one of a member's roles has a permission enabled, you can use the `.has()` method of the GuildMember's <DocsLink path="class/GuildMember?scrollTo=permissions">`permissions`</DocsLink> and provide a permission flag, array, or number to check for. You can also specify if you want to allow the `ADMINISTRATOR` permission or the guild owner status to override this check with the following parameters.
 
 ```js
-if (member.hasPermission('KICK_MEMBERS')) {
+if (member.permissions.has('KICK_MEMBERS')) {
 	console.log('This member can kick');
 }
 
-if (member.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS'])) {
+if (member.permissions.has(['KICK_MEMBERS', 'BAN_MEMBERS'])) {
 	console.log('This member can kick and ban');
 }
 
-if (member.hasPermission('KICK_MEMBERS', { checkAdmin: false, checkOwner: false })) {
+if (member.permissions.has('KICK_MEMBERS', false)) {
 	console.log('This member can kick without allowing admin to override');
 }
 ```
 
 If you provide multiple permissions to the method, it will only return `true` if all permissions you specified are granted.
+
+::: tip
+You can learn more about the `.has()` method [here](#checking-for-permissions).
+:::
 
 ## Channel overwrites
 
@@ -91,12 +95,12 @@ As you have likely already seen in your desktop client, channel overwrites have 
 
 ### Adding overwrites
 
-To add a permission overwrite for a role or guild member, you access the channel object and use the `.updateOverwrite()` method. The first parameter is the target of the overwrite, either a Role or User object (or its respective resolvable), and the second is a <DocsLink path="typedef/PermissionOverwriteOptions">PermissionOverwriteOptions</DocsLink> object.
+To add a permission overwrite for a role or guild member, you access the channel's <DocsLink path="class/TextChannel?scrollTo=permissionOverwrites">PermissionOverwriteManager</DocsLink> and use the `.create()` method. The first parameter is the target of the overwrite, either a Role or User object (or its respective resolvable), and the second is a <DocsLink path="typedef/PermissionOverwriteOptions">PermissionOverwriteOptions</DocsLink> object.
 
-Let's add an overwrite to lock everyone out of the channel. The guild ID doubles as the role id for the default role @everyone as demonstrated below:
+Let's add an overwrite to lock everyone out of the channel. The guild ID doubles as the role id for the default role `@everyone` as demonstrated below:
 
 ```js
-channel.updateOverwrite(channel.guild.roles.everyone, { VIEW_CHANNEL: false });
+channel.permissionOverwrites.create(channel.guild.roles.everyone, { 'VIEW_CHANNEL': false });
 ```
 
 Any permission flags not specified get neither an explicit allow nor deny overwrite and will use the base permission unless another role has an explicit overwrite set.
@@ -105,7 +109,7 @@ You can also provide an array of overwrites during channel creation, as shown be
 
 ```js
 guild.channels.create('new-channel', {
-	type: 'text',
+	type: 'GUILD_TEXT',
 	permissionOverwrites: [
 		{
 			id: message.guild.id,
@@ -119,16 +123,34 @@ guild.channels.create('new-channel', {
 });
 ```
 
+### Editing overwrites
+
+To edit permission overwrites on the channel with a provided set of new overwrites, you can use the `.edit()` method. This method allows passing an array or Collection of <DocsLink path="class/PermissionOverwrites">PermissionOverwrites</DocsLink>.
+
+```js
+// editing overwrites with PermissionOverwriteOptions
+channel.permissionOverwrites.edit([
+	{
+		id: guild.id,
+		deny: ['VIEW_CHANNEL'],
+	},
+	{
+		id: user.id,
+		allow: ['VIEW_CHANNEL'],
+	},
+]);
+```
+
 ### Replacing overwrites
 
-To replace all permission overwrites on the channel with a provided set of new overwrites, you can use the `.overwritePermissions()` function. This is extremely handy if you want to copy a channels full set of overwrites to another one, as this method allows passing an array or Collection of <DocsLink path="class/PermissionOverwrites">PermissionOverwrites</DocsLink>.
+To replace all permission overwrites on the channel with a provided set of new overwrites, you can use the `.set()` method. This is extremely handy if you want to copy a channel's full set of overwrites to another one, as this method also allows passing an array or Collection of <DocsLink path="class/PermissionOverwrites">PermissionOverwrites</DocsLink>.
 
 ```js
 // copying overwrites from another channel
-channel.overwritePermissions(otherChannel.permissionOverwrites);
+channel.permissionOverwrites.set(otherChannel.permissionOverwrites.cache);
 
 // replacing overwrites with PermissionOverwriteOptions
-channel.overwritePermissions([
+channel.permissionOverwrites.set([
 	{
 		id: guild.id,
 		deny: ['VIEW_CHANNEL'],
@@ -142,11 +164,11 @@ channel.overwritePermissions([
 
 ### Removing overwrites
 
-To remove the overwrite for a specific member or role, you can get it from the channels permissionOverwrites Collection and call the `.delete()` method on it. Since the Collection is keyed by the target's ID (either role ID or user ID), the respective overwrite is easy to access.
+To remove the overwrite for a specific member or role, you can use the `.delete()` method.
 
 ```js
-// deleting the channels overwrite for the message author
-channel.permissionOverwrites.get(message.author.id).delete();
+// deleting the channel's overwrite for the message author
+channel.permissionOverwrites.delete(message.author.id);
 ```
 
 ### Syncing with a category
@@ -167,7 +189,7 @@ channel.lockPermissions()
 
 ### Permissions after overwrites
 
-discord.js features two utility methods to easily determine the final permissions for a guild member or role in a specific channel: `.permissionsFor()` on the <DocsLink path="class/GuildChannel?scrollTo=permissionsFor">GuildChannel</DocsLink> class and `.permissionsIn()` on the <DocsLink path="GuildMember?scrollTo=permissionsIn">GuildMember</DocsLink> and <DocsLink path="class/Role?scrollTo=permissionsIn">Role</DocsLink> classes. Both return a <DocsLink path="class/Permissions">Permissions</DocsLink> object.
+Discord.js features two utility methods to easily determine the final permissions for a guild member or role in a specific channel: `.permissionsFor()` on the <DocsLink path="class/GuildChannel?scrollTo=permissionsFor">GuildChannel</DocsLink> class and `.permissionsIn()` on the <DocsLink path="GuildMember?scrollTo=permissionsIn">GuildMember</DocsLink> and <DocsLink path="class/Role?scrollTo=permissionsIn">Role</DocsLink> classes. Both return a <DocsLink path="class/Permissions">Permissions</DocsLink> object.
 
 To check your bot's permissions in the channel the command was used in, you could use something like this:
 
@@ -256,7 +278,18 @@ Let's say you want to know if the decimal bit field representation `268550160` h
 ```js
 const { Permissions } = require('discord.js');
 
-const permissions = new Permissions([
+const bitPermissions = new Permissions(268550160);
+
+console.log(bitPermissions.has('MANAGE_CHANNELS'));
+// output: true
+
+console.log(bitPermissions.has(['MANAGE_CHANNELS', 'EMBED_LINKS']));
+// output: true
+
+console.log(bitPermissions.has(['MANAGE_CHANNELS', 'KICK_MEMBERS']));
+// output: false
+
+const flagsPermissions = new Permissions([
 	'MANAGE_CHANNELS',
 	'EMBED_LINKS',
 	'ATTACH_FILES',
@@ -264,13 +297,13 @@ const permissions = new Permissions([
 	'MANAGE_ROLES',
 ]);
 
-console.log(permissions.has('MANAGE_CHANNELS'));
+console.log(flagsPermissions.has('MANAGE_CHANNELS'));
 // output: true
 
-console.log(permissions.has(['MANAGE_CHANNELS', 'EMBED_LINKS']));
+console.log(flagsPermissions.has(['MANAGE_CHANNELS', 'EMBED_LINKS']));
 // output: true
 
-console.log(permissions.has(['MANAGE_CHANNELS', 'KICK_MEMBERS']));
+console.log(flagsPermissions.has(['MANAGE_CHANNELS', 'KICK_MEMBERS']));
 // output: false
 
 const adminPermissions = new Permissions('ADMINISTRATOR');
