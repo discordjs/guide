@@ -122,10 +122,10 @@ webhookClient.send({
 Example using a Webhook:
 
 ```js
-const { Client, MessageEmbed } = require('discord.js');
+const { Client, Intents, MessageEmbed } = require('discord.js');
 const config = require('./config.json');
 
-const client = new Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 const embed = new MessageEmbed()
 	.setTitle('Some Title')
