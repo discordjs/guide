@@ -6,7 +6,7 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('message', message => {
+client.on('messageCreate', message => {
 	if (message.author.bot || !message.content.startsWith('!')) return;
 	if (!message.channel.permissionsFor(client.user).has('SEND_MESSAGES')) return;
 
