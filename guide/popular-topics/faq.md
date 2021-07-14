@@ -2,8 +2,8 @@
 
 ## Legend
 
-* `<client>` is a placeholder for the Client object, such as `const client = new Discord.Client();`.
-* `<message>` is a placeholder for the Message object, such as `client.on('message', message => { ... });`.
+* `<client>` is a placeholder for the Client object, such as `const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });`.
+* `<message>` is a placeholder for the Message object, such as `client.on('messageCreate', message => { ... });`.
 * `<guild>` is a placeholder for the Guild object, such as `<message>.guild` or `<client>.guilds.cache.get('<id>')`.
 * `<voiceChannel>` is a placeholder for the VoiceChannel object, such as `<message>.member.voice.channel`
 
@@ -99,13 +99,14 @@ if (<message>.author.id === '<id>') {
 <client>.user.setActivity('<activity>');
 ```
 
-### How do I set my status to "Watching ..." or "Listening to ..."?
+### How do I set my status to "Watching ..." or "Listening to ..." or "Competing in ..."?
 
 <!-- eslint-skip -->
 
 ```js
 <client>.user.setActivity('<activity>', { type: 'WATCHING' });
 <client>.user.setActivity('<activity>', { type: 'LISTENING' });
+<client>.user.setActivity('<activity>', { type: 'COMPETING' });
 ```
 
 ::: tip
@@ -134,14 +135,14 @@ If you would like to set your activity upon startup, you can use the `ClientOpti
 ### How do I add a mention prefix to my bot?
 
 ```js
-const Discord = require('discord.js');
+const { Client, Intents } = require('discord.js');
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
-const client = new Discord.Client();
 const prefix = '!';
 
 const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-client.on('message', message => {
+client.on('messageCreate', message => {
 	const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
 	if (!prefixRegex.test(message.content)) return;
 
@@ -210,15 +211,15 @@ Mentions in embeds may resolve correctly in embed description and field values b
 Controlling which mentions will send a ping is done via the `allowedMentions` option, which replaces `disableMentions`.
 
 This can be set as a default in `ClientOptions`, and controlled per-message sent by your bot.
-```diff
-- new Discord.Client({ disableMentions: 'everyone' });
-+ new Discord.Client({ allowedMentions: { parse: ['users', 'roles'] });
+```js
+new Discord.Client({ allowedMentions: { parse: ['users', 'roles'] } });
 ```
 
 Even more control can be achieved by listing specific `users` or `roles` to be mentioned by ID, e.g.:
 ```js
-message.channel.send('<@123456789012345678> <@987654321098765432>', {
-	allowedMentions: { users: ['123456789012345678'] },
+message.channel.send({ 
+	content: '<@123456789012345678> <@987654321098765432> <@&111111111111111111>',
+	allowedMentions: { users: ['123456789012345678'], roles: ['111111111111111111'] },
 });
 ```
 
@@ -230,7 +231,7 @@ message.channel.send('<@123456789012345678> <@987654321098765432>', {
 <message>.channel.send('Please enter more input.').then(() => {
 	const filter = m => <message>.author.id === m.author.id;
 
-	<message>.channel.awaitMessages(filter, { time: 60000, max: 1, errors: ['time'] })
+	<message>.channel.awaitMessages({ filter, time: 60000, max: 1, errors: ['time'] })
 		.then(messages => {
 			<message>.channel.send(`You've entered: ${messages.first().content}`);
 		})
@@ -250,7 +251,7 @@ If you want to learn more about this syntax or reaction collectors, check out [t
 
 ```js
 const blockedUsers = [ 'id1', 'id2' ];
-<client>.on('message', message => {
+<client>.on('messageCreate', message => {
 	if (blockedUsers.includes(message.author.id)) return;
 });
 ```
@@ -261,7 +262,7 @@ You do not need to have a constant local variable like `blockedUsers` above. If 
 <!-- eslint-skip -->
 
 ```js
-<client>.on('message', async message => {
+<client>.on('messageCreate', async message => {
 	const blockedUsers = await database.query('SELECT user_id FROM blocked_users;');
 	if (blockedUsers.includes(message.author.id)) return;
 });
@@ -275,8 +276,15 @@ Note that this is just a showcase of how you could do such a check.
 
 ```js
 <message>.channel.send('My message to react to.').then(sentMessage => {
+	// Unicode emoji.
 	sentMessage.react('👍');
-	sentMessage.react('<emoji id>');
+
+	// Custom emoji.
+	sentMessage.react('123456789012345678');
+	sentMessage.react('<emoji:123456789012345678>');
+	sentMessage.react('<a:emoji:123456789012345678>');
+	sentMessage.react('emoji:123456789012345678');
+	sentMessage.react('a:emoji:123456789012345678');
 });
 ```
 
@@ -290,7 +298,7 @@ If you want to learn more about reactions, check out [this dedicated guide on re
 process.exit();
 ```
 
-::: tip
+::: danger
 `process.exit()` will only kill your Node process, but when using [PM2](http://pm2.keymetrics.io/), it will restart the process whenever it gets killed. You can read our guide on PM2 [here](/improving-dev-environment/pm2.md).
 :::
 
@@ -311,6 +319,11 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 });
 ```
 
+::: warning
+This only works correctly if you have the `GUILD_PRESENCES` intent enabled for your application and client.
+If you want to learn more about intents, check out [the guide on intents](/popular-topics/intents.md)!
+:::
+
 ### How do I check which role was added/removed and for which member?
 
 <!-- eslint-skip -->
@@ -318,7 +331,7 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 ```js
 // Start by declaring a guildMemberUpdate listener
 // This code should be placed outside of any other listener callbacks to prevent listener nesting
-<client>.on('guildMemberUpdate', (oldMember, newMember) => {
+client.on('guildMemberUpdate', (oldMember, newMember) => {
 	// If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
 	const removedRoles = oldMember.roles.cache.filter(role => !newMember.roles.cache.has(role.id));
 	if (removedRoles.size > 0) console.log(`The roles ${removedRoles.map(r => r.name)} were removed from ${oldMember.displayName}.`);
@@ -354,10 +367,11 @@ The second, **Roundtrip Latency**, describes the amount of time a full API round
 
 ### How do I play music from YouTube?
 
-For this to work, you need to have `ytdl-core` installed.
+For this to work, you need to have `ytdl-core` and `@discordjs/voice` installed.
 
 ```bash
 npm install --save ytdl-core
+npm install @discordjs/voice
 ```
 
 Additionally, you may need the following:
@@ -373,15 +387,26 @@ npm install ffmpeg-static # ffmpeg windows
 ```js
 // ...
 const ytdl = require('ytdl-core');
+const { AudioPlayerStatus, createAudioPlayer, createAudioResource, joinVoiceChannel, StreamType } = require('@discordjs/voice');
 
-<voiceChannel>.join().then(connection => {
-	const stream = ytdl('<youtubelink>', { filter: 'audioonly' });
-	const dispatcher = connection.play(stream);
-	
-	dispatcher.on('finish', () => voiceChannel.leave());
+const connection = joinVoiceChannel({
+	channelId: <voiceChannel id>,
+	guildId: <guild id>,
+	adapterCreator: <guild voiceAdapterCreator>
 })
+const stream = ytdl('<youtubelink>', { filter: 'audioonly' });
+const resource = createAudioResource(stream, { inputType: StreamType.Arbitrary  })
+const player = createAudioPlayer();
 
+player.play(resource);
+connection.subscribe(player);
+
+player.on(AudioPlayerStatus.Idle, () => connection.destroy());
 ```
+
+::: tip
+You can learn more about these methods in the [Voice section of this guide](/voice)!
+:::
 
 ### Why do some emojis behave weirdly?
 
