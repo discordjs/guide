@@ -322,7 +322,7 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 
 ::: warning
 This only works correctly if you have the `GUILD_PRESENCES` intent enabled for your application and client.
-If you want to learn more about intents, check out [the guide on intents](/popular-topics/intents.md)!
+If you want to learn more about intents, check out [this dedicated guide on intents](/popular-topics/intents.md)!
 :::
 
 ### How do I check which role was added/removed and for which member?
@@ -387,6 +387,7 @@ npm install ffmpeg-static # ffmpeg windows
 
 ```js
 // ...
+
 const ytdl = require('ytdl-core');
 const { AudioPlayerStatus, createAudioPlayer, createAudioResource, joinVoiceChannel, StreamType } = require('@discordjs/voice');
 
@@ -406,7 +407,7 @@ player.on(AudioPlayerStatus.Idle, () => connection.destroy());
 ```
 
 ::: tip
-You can learn more about these methods in the [Voice section of this guide](/voice)!
+You can learn more about these methods in the [voice section of this guide](/voice)!
 :::
 
 ### Why do some emojis behave weirdly?
