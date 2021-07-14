@@ -21,6 +21,55 @@ export default {
 				'/voice/voice-connections.md',
 				'/voice/audio-player.md',
 				'/voice/audio-resources.md',
+			]
+		}
+	],
+	'/sapphire/': [
+		{
+			text: 'Home',
+			children: [
+				'/',
+				'/requesting-more-content.md',
+				'/whats-new.md',
+			],
+		},
+		{
+			text: 'Getting Started',
+			children: [
+				'/sapphire/',
+				'/sapphire/first-command.md',
+			],
+		},
+		{
+			text: 'Command Preconditions',
+			children: [
+				'/sapphire/cooldown.md',
+				'/sapphire/nsfw.md',
+				'/sapphire/permissions.md',
+				'/sapphire/run-in.md',
+				'/sapphire/first-precondition.md',
+			],
+		},
+		{
+			text: 'Arguments',
+			children: [
+				'/sapphire/args.md',
+				'/sapphire/built-in-arguments.md',
+				'/sapphire/first-argument.md',
+			],
+		},
+		{
+			text: 'Listeners',
+			children: [
+				'/sapphire/first-listener.md',
+			]
+		},
+		{
+			text: 'Additional Information',
+			children: [
+				'/sapphire/client-values.md',
+				'/sapphire/container.md',
+				'/sapphire/custom-stores.md',
 			],
 		},
 	],

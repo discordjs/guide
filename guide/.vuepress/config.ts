@@ -39,6 +39,10 @@ const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 				link: '/voice/',
 			},
 			{
+				text: 'Sapphire',
+				link: '/sapphire/',
+			},
+			{
 				text: 'Documentation',
 				link: 'https://discord.js.org/#/docs/main/stable/general/welcome',
 			},
