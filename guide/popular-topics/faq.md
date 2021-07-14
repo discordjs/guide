@@ -75,6 +75,23 @@ if (<message>.author.id === '<id>') {
 
 ## Bot Configuration and Utility
 
+### How do I make an eval command?
+
+You can make a simple eval command that supports async/await statements, this is assuming you followed our `args` system (see [Commands with user input](/creating-your-bot/commands-with-user-input/) for more details on this topic).
+
+<!-- eslint-skip -->
+
+```js
+const code = args.join(' ');
+
+const evaluated = await eval(`( async () => {
+  ${code}
+})()`);
+```
+::: tip
+You can find a more detailed version of the eval command [here](https://anidiots.guide/examples/making-an-eval-command).
+:::
+
 ### How do I set my bot's username?
 
 <!-- eslint-skip -->
