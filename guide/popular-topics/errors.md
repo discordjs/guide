@@ -130,7 +130,7 @@ You can debug these messages in different ways:
 
 ### Cannot send messages to this user.
 
-This error throws when the bot attempts to send a DM message to a user but cannot do so. A variety of reasons causes this:
+This error throws when the bot attempts to send a DM message to a user but cannot do so. A variety of reasons may cause this error:
 - The bot and the user do not share a guild (often, people attempt to dm the user after kicking or banning them).
 - The bot tries to DM another bot.
 - The user has blocked the bot.
