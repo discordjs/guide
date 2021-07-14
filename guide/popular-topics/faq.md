@@ -217,7 +217,7 @@ new Discord.Client({ allowedMentions: { parse: ['users', 'roles'] } });
 
 Even more control can be achieved by listing specific `users` or `roles` to be mentioned by ID, e.g.:
 ```js
-message.channel.send({ 
+message.channel.send({
 	content: '<@123456789012345678> <@987654321098765432> <@&111111111111111111>',
 	allowedMentions: { users: ['123456789012345678'], roles: ['111111111111111111'] },
 });
