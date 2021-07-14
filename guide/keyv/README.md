@@ -63,10 +63,10 @@ Keyv exposes a familiar [Map](https://developer.mozilla.org/en-US/docs/Web/JavaS
 
 ## Application
 
-Although Keyv can assist in any scenario where you need key-value data, we will focus on setting up a per-guild prefix configuration using Sqlite.
+Although Keyv can assist in any scenario where you involve key-value data, we will focus on setting up a per-guild prefix configuration using Sqlite.
 
 ::: tip
-This section will still work with any provider supported by Keyv. We recommend PostgreSQL for larger applications.
+This section will still work with any provider supported by Keyv. We recommend [PostgreSQL](https://www.postgresql.org/) for larger applications.
 :::
 
 ### Setup
@@ -101,7 +101,7 @@ client.on('message', async message => {
 			if (message.content.startsWith(guildPrefix)) prefix = guildPrefix;
 		}
 
-		// if we found a prefix, setup args; otherwise, this isn't a command
+		// if we found a prefix, setup args. Otherwise, this isn't a command
 		if (!prefix) return;
 		args = message.content.slice(prefix.length).trim().split(/\s+/);
 	} else {
