@@ -258,7 +258,7 @@ const blockedUsers = [ 'id1', 'id2' ];
 
 ::: tip
 You do not need to have a constant local variable like `blockedUsers` above. If you have a database system that you use to store IDs of blocked users, you can query the database instead:
-:::
+
 <!-- eslint-skip -->
 
 ```js
@@ -269,6 +269,7 @@ You do not need to have a constant local variable like `blockedUsers` above. If 
 ```
 
 Note that this is just a showcase of how you could do such a check.
+:::
 
 ### How do I react to the message my bot sent?
 
