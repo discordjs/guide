@@ -17,9 +17,9 @@ client.once('ready', () => {
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interacton.commandName === 'ping') {
+	if (interaction.commandName === 'ping') {
 		await interaction.reply('Pong.');
-	} else if (interacton.commandName === 'beep') {
+	} else if (interaction.commandName === 'beep') {
 		await interaction.reply('Boop!');
 	}
 	// ...
