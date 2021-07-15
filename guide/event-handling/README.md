@@ -15,7 +15,7 @@ client.once('ready', () => {
 });
 
 client.on('interactionCreate', interaction => {
-	console.log(`${interaction.user.tag} in #${interaction.channel.name} triggered an interaction`);
+	console.log(`${interaction.user.tag} in #${interaction.channel.name} triggered an interaction.`);
 });
 
 client.login(token);
