@@ -372,7 +372,7 @@ For this to work, you need to have `ytdl-core` and `@discordjs/voice` installed.
 
 ```bash
 npm install --save ytdl-core
-npm install @discordjs/voice
+npm install @discordjs/voice # (if missing)
 ```
 
 Additionally, you may need the following:
