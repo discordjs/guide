@@ -16,7 +16,7 @@ you can use Day.js to turn it into a Date object you can use in your code:
 <!-- eslint-skip -->
 ```js
 const input = await interaction.channel.awaitMessages({ 
-	m => m.author.id === interaction.user.id, 
+	filter: m => m.author.id === interaction.user.id, 
 	max: 1,
 	time: 10e3,
 	errors: ['time'],
@@ -57,7 +57,7 @@ Example:
 ```js
 await interaction.reply('Send two messages and I\'ll tell you how far apart you sent them.');
 const messages = await interaction.channel.awaitMessages({
-	m => m.author.id === interaction.user.id,
+	filter: m => m.author.id === interaction.user.id,
 	max: 2,
 	time: 30e3,
 	errors: ['time'],
