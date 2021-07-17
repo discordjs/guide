@@ -15,7 +15,8 @@ you can use Day.js to turn it into a Date object you can use in your code:
 
 <!-- eslint-skip -->
 ```js
-const input = await message.channel.awaitMessages(m => m.author.id === message.author.id, {
+const input = await interaction.channel.awaitMessages({ 
+	m => m.author.id === interaction.user.id, 
 	max: 1,
 	time: 10e3,
 	errors: ['time'],
@@ -32,19 +33,19 @@ if (date.isValid()) {
 	const formatted = dayjs.duration(duration, 'ms').format();
 
 	if (duration > 0) {
-		message.channel.send(`The date you gave me is ${formatted} into the future.`);
+		interaction.reply(`The date you gave me is ${formatted} into the future.`);
 	} else {
-		message.channel.send(`The date you gave me is ${formatted} into the past.`);
+		interaction.reply(`The date you gave me is ${formatted} into the past.`);
 	}
 } else {
-	message.channel.send('You didn\'t give me a valid date.');
+	interaction.reply('You didn\'t give me a valid date.');
 }
 ```
 
 ## ms
 
 ::: tip
-Official documentation: [https://github.com/zeit/ms](https://github.com/zeit/ms)
+Official documentation: [https://github.com/vercel/ms](https://github.com/vercel/ms)
 :::
 
 Ms is another tool for working with times in JavaScript. However, ms specializes on durations.
@@ -54,8 +55,9 @@ Example:
 
 <!-- eslint-skip -->
 ```js
-await message.channel.send('Send two messages and I\'ll tell you how far apart you sent them.');
-const messages = await message.channel.awaitMessages(m => m.author.id === message.author.id. {
+await interaction.reply('Send two messages and I\'ll tell you how far apart you sent them.');
+const messages = await interaction.channel.awaitMessages({
+	m => m.author.id === interaction.user.id,
 	max: 2,
 	time: 30e3,
 	errors: ['time'],
@@ -64,13 +66,13 @@ const messages = await message.channel.awaitMessages(m => m.author.id === messag
 const difference = messages.last().createdTimestamp - messages.first().createdTimestamp;
 const formatted = ms(difference);
 
-message.channel.send(`You sent the two messages ${formatted} apart.`);
+interaction.reply(`You sent the two messages ${formatted} apart.`);
 ```
 
 ## common-tags
 
 ::: tip
-Official documentation: [https://github.com/declandewet/common-tags](https://github.com/declandewet/common-tags)
+Official documentation: [https://github.com/zspecza/common-tags](https://github.com/zspecza/common-tags)
 :::
 
 Common-tags is a library all about working with template literals.  
@@ -105,7 +107,7 @@ With those, you can easily interpolate arrays into your strings without them loo
 const options = ['add', 'delete', 'edit'];
 
 // -> Do you want me to add, delete or edit the channel?
-message.channel.send(oneLineCommaListsOr`
+interaction.reply(oneLineCommaListsOr`
 	Do you want me to ${options} the channel?
 `);
 ```
