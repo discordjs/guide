@@ -33,6 +33,17 @@
 			@media screen and (max-width: 959px) {
 				margin-left: 0;
 				padding-left: 1.25rem;
+
+				& > a {
+					border-bottom-width: 0;
+					margin-bottom: 0;
+
+					&:hover,
+					&.router-link-active {
+						color: var(--c-text-accent);
+						border-bottom-width: 0;
+					}
+				}
 			}
 		}
 	}
