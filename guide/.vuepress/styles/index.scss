@@ -51,9 +51,15 @@ div[class*=language-].line-numbers-mode::after {
 	}
 }
 
-#nprogress .bar {
-	--nprogress-color: var(--c-brand-light);
-	height: 0.375rem !important;
+#nprogress {
+	.bar {
+		--nprogress-color: var(--c-brand-light);
+		height: 0.375rem !important;
+
+		.peg {
+			box-shadow: none;
+		}
+	}
 }
 
 .discord-messages {
