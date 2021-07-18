@@ -25,10 +25,6 @@
 			padding: 0.5rem;
 		}
 
-		@media screen and (max-width: 719px) {
-			padding: 0.5rem;
-		}
-
 		.navbar-links-item {
 			@media screen and (max-width: 959px) {
 				margin-left: 0;
@@ -52,7 +48,7 @@
 		padding: 1.25rem 0.5rem;
 
 		@media screen and (max-width: 719px) {
-			padding: 0 0.5rem 0.5rem;
+			padding: 0.5rem;
 		}
 
 		.sidebar-group {
