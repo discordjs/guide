@@ -8,6 +8,16 @@ export const useDarkMode = (): Ref<boolean> => {
 		// set `class="dark"` on `<html>` element
 		const htmlEl = window?.document.querySelector('html')
 		htmlEl?.classList.toggle('dark', value)
+
+		const systemDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+		if ((value && systemDarkMode) || (!value && !systemDarkMode)) {
+			localStorage.removeItem('guide-color-scheme');
+		} else if (value && !systemDarkMode) {
+			localStorage.setItem('guide-color-scheme', 'dark');
+		} else if (!value && systemDarkMode) {
+			localStorage.setItem('guide-color-scheme', 'light');
+		}
 	}
 
 	const mediaQuery = ref<MediaQueryList | null>(null)
@@ -16,9 +26,10 @@ export const useDarkMode = (): Ref<boolean> => {
 	}
 
 	onMounted(() => {
-		// get `prefers-color-scheme` media query and set the initial mode
+		// get stored preference and `prefers-color-scheme` media query and set the initial mode
+		const userMode = localStorage.getItem('guide-color-scheme');
 		mediaQuery.value = window.matchMedia('(prefers-color-scheme: dark)')
-		isDarkMode.value = mediaQuery.value.matches
+		isDarkMode.value = userMode === 'dark' || (userMode !== 'light' && mediaQuery.value.matches)
 
 		// watch changes
 		mediaQuery.value.addEventListener('change', onMediaQueryChange)
