@@ -65,6 +65,9 @@
 	--navbar-height: 4rem;
 	--content-width: 100%;
 	--wrapper-max-width: 96rem;
+
+	// miscellaneous
+	--c-border: rgba(0, 0, 0, 0.05);
 }
 
 html.guide-theme-blurple {
@@ -120,4 +123,7 @@ html.dark {
 
 	// code blocks
 	--code-hl-bg-color: #353b45;
+
+	// miscellaneous
+	--c-border: rgba(255, 255, 255, 0.05);
 }
