@@ -54,9 +54,9 @@ import { usePageData, usePageFrontmatter } from '@vuepress/client';
 import type { DefaultThemePageFrontmatter } from '@vuepress/theme-default/lib/shared';
 import Home from '@vuepress/theme-default/lib/client/components/Home.vue';
 import Page from '@vuepress/theme-default/lib/client/components/Page.vue';
-import Sidebar from '@vuepress/theme-default/lib/client/components/Sidebar.vue';
 import { useScrollPromise, useSidebarItems, useThemeLocaleData } from '@vuepress/theme-default/lib/client/composables';
 import Navbar from '../components/Navbar.vue';
+import Sidebar from '../components/Sidebar.vue';
 import UserSettings from '../components/UserSettings.vue';
 
 const page = usePageData();
