@@ -41,6 +41,15 @@
 
 	.page {
 		padding-left: 0;
+		width: calc(100% - var(--sidebar-width));
+
+		@media screen and (max-width: 959px) {
+			width: calc(100% - var(--sidebar-width-mobile));
+		}
+
+		@media screen and (max-width: 719px) {
+			width: 100%;
+		}
 	}
 }
 
