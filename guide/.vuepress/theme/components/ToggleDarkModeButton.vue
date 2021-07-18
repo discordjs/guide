@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { useDarkMode } from '../composables';
+import useDarkMode from '../composables/useDarkMode';
 
 const isDarkMode = useDarkMode();
 const toggleDarkMode = (): void => {

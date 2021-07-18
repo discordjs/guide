@@ -1,7 +1,7 @@
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import type { Ref } from 'vue'
 
-export const useDarkMode = (): Ref<boolean> => {
+export default function useDarkMode(): Ref<boolean> {
 	const isDarkMode = ref(false)
 
 	const updateDarkModeClass = (value = isDarkMode.value): void => {
