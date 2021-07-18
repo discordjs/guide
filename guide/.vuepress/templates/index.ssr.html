@@ -25,7 +25,7 @@
 			}
 
 			const themes = ['blurple'];
-			const colorTheme = localStorage.getItem('guide-color-theme');
+			let colorTheme = localStorage.getItem('guide-color-theme');
 
 			if (colorTheme !== 'default' && !themes.includes(colorTheme)) {
 				colorTheme = 'default';
