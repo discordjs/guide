@@ -1,42 +1,42 @@
-import { h } from 'vue'
-import type { FunctionalComponent, VNode } from 'vue'
-import { useRoute } from 'vue-router'
-import type { RouteLocationNormalizedLoaded } from 'vue-router'
-import type { ResolvedSidebarItem } from '@vuepress/theme-default/lib/shared'
-import NavLink from '@vuepress/theme-default/lib/client/components/NavLink.vue'
+import { h } from 'vue';
+import type { FunctionalComponent, VNode } from 'vue';
+import { useRoute } from 'vue-router';
+import type { RouteLocationNormalizedLoaded } from 'vue-router';
+import type { ResolvedSidebarItem } from '@vuepress/theme-default/lib/shared';
+import NavLink from '@vuepress/theme-default/lib/client/components/NavLink.vue';
 
 const normalizePath = (path: string): string => {
-	return decodeURI(path).replace(/#.*$/, '').replace(/(index)?\.(md|html)$/, '')
-}
+	return decodeURI(path).replace(/#.*$/, '').replace(/(index)?\.(md|html)$/, '');
+};
 
 const isActiveLink = (route: RouteLocationNormalizedLoaded, link?: string): boolean => {
-	if (link === undefined) return false
-	if (route.hash === link) return true
+	if (link === undefined) return false;
+	if (route.hash === link) return true;
 
-	const currentPath = normalizePath(route.path)
-	const targetPath = normalizePath(link)
+	const currentPath = normalizePath(route.path);
+	const targetPath = normalizePath(link);
 
-	return currentPath === targetPath
-}
+	return currentPath === targetPath;
+};
 
 const isActiveItem = (route: RouteLocationNormalizedLoaded, item: ResolvedSidebarItem): boolean => {
-	if (isActiveLink(route, item.link)) return true
-	if (item.children) return item.children.some((child) => isActiveItem(route, child))
-	return false
-}
+	if (isActiveLink(route, item.link)) return true;
+	if (item.children) return item.children.some((child) => isActiveItem(route, child));
+	return false;
+};
 
 const renderItem = (item: ResolvedSidebarItem, props: VNode['props']): VNode => {
 	// if the item has link, render it as `<NavLink>`
 	if (item.link) {
-		return h(NavLink, { ...props, item })
+		return h(NavLink, { ...props, item });
 	}
 
 	// if the item only has text, render it as `<p>`
-	return h('p', props, item.text)
-}
+	return h('p', props, item.text);
+};
 
 const renderChildren = (item: ResolvedSidebarItem, depth: number): VNode | null => {
-	if (!item.children?.length) return null
+	if (!item.children?.length) return null;
 
 	return h(
 		'ul',
@@ -45,17 +45,17 @@ const renderChildren = (item: ResolvedSidebarItem, depth: number): VNode | null 
 			return h(
 				'li',
 				h(SidebarChild, { item: child, depth: depth + 1 })
-			)
+			);
 		})
-	)
-}
+	);
+};
 
 export const SidebarChild: FunctionalComponent<{
 	item: ResolvedSidebarItem,
 	depth?: number,
 }> = ({ item, depth = 0 }) => {
-	const route = useRoute()
-	const active = isActiveItem(route, item)
+	const route = useRoute();
+	const active = isActiveItem(route, item);
 
 	return [
 		renderItem(item, {
@@ -66,10 +66,10 @@ export const SidebarChild: FunctionalComponent<{
 			},
 		}),
 		renderChildren(item, depth),
-	]
-}
+	];
+};
 
-SidebarChild.displayName = 'SidebarChild'
+SidebarChild.displayName = 'SidebarChild';
 
 SidebarChild.props = {
 	item: {
@@ -80,4 +80,4 @@ SidebarChild.props = {
 		type: Number,
 		required: false,
 	},
-}
+};
