@@ -13,33 +13,37 @@
 				<slot name="navbar-after"></slot>
 			</template>
 		</Navbar>
-		<div class="sidebar-mask" @click="toggleSidebar(false)"></div>
-		<Sidebar>
-			<template #top>
-				<slot name="sidebar-top"></slot>
-				<UserSettings />
-			</template>
-			<template #bottom>
-				<slot name="sidebar-bottom"></slot>
-			</template>
-		</Sidebar>
-		<Home v-if="frontmatter.home" />
-		<Transition
-			v-else
-			name="fade-slide-y"
-			mode="out-in"
-			@before-enter="onBeforeEnter"
-			@before-leave="onBeforeLeave"
-		>
-			<Page :key="page.path">
-				<template #top>
-					<slot name="page-top"></slot>
-				</template>
-				<template #bottom>
-					<slot name="page-bottom"></slot>
-				</template>
-			</Page>
-		</Transition>
+		<div class="content-wrapper">
+			<div class="sidebar-mask" @click="toggleSidebar(false)"></div>
+			<div class="sidebar-wrapper">
+				<Sidebar>
+					<template #top>
+						<slot name="sidebar-top"></slot>
+						<UserSettings />
+					</template>
+					<template #bottom>
+						<slot name="sidebar-bottom"></slot>
+					</template>
+				</Sidebar>
+			</div>
+			<Home v-if="frontmatter.home" />
+			<Transition
+				v-else
+				name="fade-slide-y"
+				mode="out-in"
+				@before-enter="onBeforeEnter"
+				@before-leave="onBeforeLeave"
+			>
+				<Page :key="page.path">
+					<template #top>
+						<slot name="page-top"></slot>
+					</template>
+					<template #bottom>
+						<slot name="page-bottom"></slot>
+					</template>
+				</Page>
+			</Transition>
+		</div>
 	</div>
 </template>
 
