@@ -32,13 +32,24 @@ html.guide-theme-blurple {
 	display: flex;
 	align-items: center;
 	font-size: 14px;
-	padding: 0.5rem 4rem;
+	padding: 0.5rem 0;
 	border-width: 0;
 	transition: none;
 
-	@media screen and (max-width: 719px) {
-		padding-left: 0.5rem;
-		padding-right: 0.5rem;
+	.navbar-wrapper {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		max-width: var(--wrapper-max-width);
+		margin: 0 auto;
+		padding-left: 2rem;
+		padding-right: 2rem;
+		box-sizing: border-box;
+
+		@media screen and (max-width: 719px) {
+			padding-left: 0.5rem;
+			padding-right: 0.5rem;
+		}
 	}
 
 	> span {
@@ -98,6 +109,8 @@ html.guide-theme-blurple {
 		background-color: var(--nav-background-color);
 		display: flex;
 		align-items: center;
+		justify-content: space-between;
+		width: 100%;
 		position: relative;
 		right: 0;
 		top: 0;
@@ -107,7 +120,16 @@ html.guide-theme-blurple {
 			order: 2;
 		}
 
+		.navbar-links-container {
+			display: inline-flex;
+			align-items: center;
+		}
+
 		.navbar-links {
+			@media screen and (max-width: 959px) {
+				display: none;
+			}
+
 			.navbar-links-item {
 				margin-left: 2rem;
 

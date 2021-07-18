@@ -12,6 +12,10 @@ html.dark .DocSearch {
 	--docsearch-key-shadow: 0 0 0 1px var(--theme-560);
 }
 
+.navbar .navbar-search {
+	display: inline-flex;
+}
+
 .DocSearch {
 	&.DocSearch-Button {
 		color: var(--text-gray);
@@ -52,16 +56,38 @@ html.dark .DocSearch {
 			}
 
 			.DocSearch-Button-Placeholder {
-				padding: 0 0 0 0.75rem;
+				padding: 0 1rem;
+
+				@media screen and (max-width: 750px) {
+					display: inline-block;
+				}
+
+				@media screen and (max-width: 719px) {
+					display: none;
+				}
 			}
 		}
 
-		.DocSearch-Button-Key {
-			color: #fff;
-			background: unset;
-			height: unset;
-			top: 0;
-			padding-bottom: 0;
+		.DocSearch-Button-Keys {
+			@media screen and (max-width: 719px) {
+				display: none;
+			}
+
+			.DocSearch-Button-Key {
+				@media screen and (max-width: 750px) {
+					display: flex;
+				}
+
+				color: #fff;
+				background: unset;
+				height: unset;
+				top: 0;
+				padding-bottom: 0;
+
+				&:last-of-type {
+					margin-right: 0;
+				}
+			}
 		}
 	}
 
