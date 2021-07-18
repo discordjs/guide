@@ -90,6 +90,14 @@ html.guide-theme-blurple {
 		@media screen and (max-width: 719px) {
 			margin-left: 0.5rem;
 		}
+
+		.dark-icon {
+			display: none;
+		}
+
+		.light-icon {
+			display: block;
+		}
 	}
 
 	.site-name {
@@ -147,6 +155,18 @@ html.guide-theme-blurple {
 
 		&:hover {
 			background-color: var(--nav-links-hover-color);
+		}
+	}
+}
+
+html.dark .navbar {
+	.toggle-dark-button {
+		.dark-icon {
+			display: block;
+		}
+
+		.light-icon {
+			display: none;
 		}
 	}
 }
