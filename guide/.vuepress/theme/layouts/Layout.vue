@@ -19,7 +19,6 @@
 				<Sidebar>
 					<template #top>
 						<slot name="sidebar-top"></slot>
-						<UserSettings />
 					</template>
 					<template #bottom>
 						<slot name="sidebar-bottom"></slot>
@@ -57,7 +56,6 @@ import Page from '@vuepress/theme-default/lib/client/components/Page.vue';
 import { useScrollPromise, useSidebarItems, useThemeLocaleData } from '@vuepress/theme-default/lib/client/composables';
 import Navbar from '../components/Navbar.vue';
 import Sidebar from '../components/Sidebar.vue';
-import UserSettings from '../components/UserSettings.vue';
 
 const page = usePageData();
 const frontmatter = usePageFrontmatter<DefaultThemePageFrontmatter>();

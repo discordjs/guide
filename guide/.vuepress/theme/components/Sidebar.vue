@@ -3,6 +3,7 @@
 		<NavbarLinks />
 		<slot name="top"></slot>
 		<ul class="sidebar-links">
+			<UserSettings />
 			<SidebarChild
 				v-for="item in sidebarItems"
 				:key="item.link || item.text"
@@ -17,6 +18,7 @@
 import { useSidebarItems } from '@vuepress/theme-default/lib/client/composables';
 import NavbarLinks from '@vuepress/theme-default/lib/client/components/NavbarLinks.vue';
 import { SidebarChild } from './SidebarChild';
+import UserSettings from './UserSettings.vue';
 
 const sidebarItems = useSidebarItems();
 </script>
