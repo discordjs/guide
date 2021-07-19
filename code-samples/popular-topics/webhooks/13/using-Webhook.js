@@ -1,9 +1,9 @@
-const Discord = require('discord.js');
+const { Client, Intents, MessageEmbed } = require('discord.js');
 const config = require('./config.json');
 
-const client = new Discord.Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
-const embed = new Discord.MessageEmbed()
+const embed = new MessageEmbed()
 	.setTitle('Some Title')
 	.setColor('#0099ff');
 
@@ -13,7 +13,8 @@ client.once('ready', async () => {
 		const webhooks = await channel.fetchWebhooks();
 		const webhook = webhooks.first();
 
-		await webhook.send('Webhook test', {
+		await webhook.send({
+			content: 'Webhook test',
 			username: 'some-username',
 			avatarURL: 'https://i.imgur.com/wSTFkRM.png',
 			embeds: [embed],
