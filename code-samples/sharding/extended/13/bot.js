@@ -2,8 +2,8 @@ const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const prefix = '!';
 
-function findEmoji(client, { nameOrId }) {
-	return client.emojis.cache.get(nameOrId) || client.emojis.cache.find(e => e.name.toLowerCase() === nameOrId.toLowerCase());
+function findEmoji(c, { nameOrId }) {
+	return c.emojis.cache.get(nameOrId) || c.emojis.cache.find(e => e.name.toLowerCase() === nameOrId.toLowerCase());
 }
 
 client.on('messageCreate', message => {
@@ -15,8 +15,8 @@ client.on('messageCreate', message => {
 	if (command === 'send') {
 		if (!args.length) return message.reply('please specify a destination channel id.');
 
-		return client.shard.broadcastEval(async (client, { channelId }) => {
-			const channel = client.channels.cache.get(channelId);
+		return client.shard.broadcastEval(async (c, { channelId }) => {
+			const channel = c.channels.cache.get(channelId);
 			if (channel) {
 				await channel.send(`This is a message from shard ${client.shard.ids.join(',')}!`);
 				return true;

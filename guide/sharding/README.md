@@ -112,7 +112,7 @@ Next, check out another handy sharding method known as <DocsLink path="class/Sha
 
 ```js
 client.shard
-	.broadcastEval(client => client.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0))
+	.broadcastEval(c => c.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0))
 	.then(console.log);
 ```
 
@@ -120,7 +120,7 @@ This will run the code given to `broadcastEval` on each shard and return the res
 
 ```js
 client.shard
-	.broadcastEval(client => client.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0))
+	.broadcastEval(c => c.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0))
 	.then(results => {
 		return message.channel.send(`Total member count: ${results.reduce((acc, memberCount) => acc + memberCount, 0)}`);
 	})
@@ -134,7 +134,7 @@ You'd likely want to output both pieces of information in the stats command. You
 ```js
 const promises = [
 	client.shard.fetchClientValues('guilds.cache.size'),
-	client.shard.broadcastEval(client => client.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)),
+	client.shard.broadcastEval(c => c.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)),
 ];
 
 Promise.all(promises)
@@ -154,7 +154,7 @@ client.on('message', message => {
 	if (command === 'stats') {
 		const promises = [
 			client.shard.fetchClientValues('guilds.cache.size'),
-			client.shard.broadcastEval(client => client.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)),
+			client.shard.broadcastEval(c => c.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)),
 		];
 
 		return Promise.all(promises)

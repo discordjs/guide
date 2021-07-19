@@ -11,9 +11,8 @@ client.on('messageCreate', message => {
 	if (command === 'stats') {
 		const promises = [
 			client.shard.fetchClientValues('guilds.cache.size'),
-			client.shard.broadcastEval(client => client.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)),
+			client.shard.broadcastEval(c => c.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)),
 		];
-		
 		return Promise.all(promises)
 			.then(results => {
 				const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);

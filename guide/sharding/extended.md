@@ -33,10 +33,10 @@ In discord.js v13, <DocsLink path="class/ShardClientUtil?scrollTo=ids">`client.s
 if (command === 'send') {
 	if (!args.length) return message.reply('please specify a destination channel id.');
 
-	return client.shard.broadcastEval(async (client, { channelId }) => {
-		const channel = client.channels.cache.get(channelId);
+	return client.shard.broadcastEval(async (c, { channelId }) => {
+		const channel = c.channels.cache.get(channelId);
 		if (channel) {
-			await channel.send(`This is a message from shard ${client.shard.ids.join(',')}!`);
+			await channel.send(`This is a message from shard ${c.shard.ids.join(',')}!`);
 			return true;
 		}
 		return false;
@@ -48,7 +48,7 @@ if (command === 'send') {
 If all is well, you should notice an output like `[false, true, false, false]`. If it is not clear why `true` and `false` are hanging around, the last expression of the eval statement will be returned. You will want this if you want any feedback from the results. Now that you have observed said results, you can adjust the command to give yourself proper feedback, like so:
 
 ```js {4-10}
-return client.shard.broadcastEval(client => {
+return client.shard.broadcastEval(c => {
 	// ...
 })
 	.then(sentArray => {
@@ -83,8 +83,8 @@ The aforementioned code will essentially search through `client.emojis.cache` fo
 Let's start with a basic function, which will try to grab an emoji from the current client and return it.
 
 ```js
-function findEmoji(client, { nameOrId }) {
-	return client.emojis.cache.get(nameOrId) || client.emojis.cache.find(e => e.name.toLowerCase() === nameOrId.toLowerCase());
+function findEmoji(c, { nameOrId }) {
+	return c.emojis.cache.get(nameOrId) || c.emojis.cache.find(e => e.name.toLowerCase() === nameOrId.toLowerCase());
 }
 ```
 
@@ -131,8 +131,8 @@ Now, run this code, and you will surely get a result that looks like the followi
 While this result isn't *necessarily* bad or incorrect, it's simply a raw object that got `JSON.parse()`'d and `JSON.stringify()`'d over, so all of the circular references are gone. More importantly, The object is no longer a true `GuildEmoji` object as provided by discord.js. *This means none of the convenience methods usually provided to you are available.* If this is a problem for you, you will want to handle the item *inside* the `broadcastEval`. Conveniently, the `findEmoji` function will be run, so you should execute your relevant methods there, before the object leaves the context.
 
 ```js {2-3,5-6}
-function findEmoji(client, { nameOrId }) {
-	const emoji = client.emojis.cache.get(nameOrId) || client.emojis.cache.find(e => e.name.toLowerCase() === nameOrId.toLowerCase());
+function findEmoji(c, { nameOrId }) {
+	const emoji = c.emojis.cache.get(nameOrId) || c.emojis.cache.find(e => e.name.toLowerCase() === nameOrId.toLowerCase());
 	if (!emoji) return null;
 	// If you wanted to delete the emoji with discord.js, this is where you would do it. Otherwise, don't include this code.
 	emoji.delete();

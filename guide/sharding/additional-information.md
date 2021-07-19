@@ -40,8 +40,8 @@ In discord.js v13, <DocsLink path="class/ShardClientUtil?scrollTo=ids">`client.s
 :::
 
 ```js
-client.shard.broadcastEval(client => {
-	if (client.shard.ids.includes(0)) process.exit();
+client.shard.broadcastEval(c => {
+	if (c.shard.ids.includes(0)) process.exit();
 });
 ```
 
@@ -80,7 +80,7 @@ You can access them later as usual via `process.argv`, which contains an array o
 There may come the point where you will want to pass arguments from the outer scope into a `.broadcastEval()` call.
 
 ```js
-function funcName(client, { arg }) {
+function funcName(c, { arg }) {
 	// ...
 }
 
