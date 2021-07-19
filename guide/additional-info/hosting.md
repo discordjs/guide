@@ -41,7 +41,7 @@ At the point of writing, the NodeJS library supported by Linux's `apt` repositor
 ```bash
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
 ```
-Then you can install the LTS version of Node.js by doing:
+Then you can install the Long-Term Support (LTS) version of Node.js by doing:
 
 ```bash
 nvm install --lts
