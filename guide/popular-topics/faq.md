@@ -99,7 +99,7 @@ if (<message>.author.id === '<id>') {
 <client>.user.setActivity('<activity>');
 ```
 
-### How do I set my status to "Watching ..." or "Listening to ..." or "Competing in ..."?
+### How do I set my status to "Watching/Listening to/Competing in ..."?
 
 <!-- eslint-skip -->
 
@@ -212,16 +212,20 @@ Controlling which mentions will send a ping is done via the `allowedMentions` op
 
 This can be set as a default in `ClientOptions`, and controlled per-message sent by your bot.
 ```js
-new Discord.Client({ allowedMentions: { parse: ['users', 'roles'] } });
+new Client({ allowedMentions: { parse: ['users', 'roles'] } });
 ```
 
 Even more control can be achieved by listing specific `users` or `roles` to be mentioned by ID, e.g.:
 ```js
 message.channel.send({
-	content: '<@123456789012345678> <@987654321098765432> <@&111111111111111111>',
-	allowedMentions: { users: ['123456789012345678'], roles: ['111111111111111111'] },
+	content: '<@123456789012345678> <@987654321098765432> <@&102938475665748392>',
+	allowedMentions: { users: ['123456789012345678'], roles: ['102938475665748392'] },
 });
 ```
+
+<DiscordMessage profile="user">
+	<DiscordMention :highlight="true">User</DiscordMention> <@987654321098765432> <DiscordMention :type="role" :roleColor="#de3636">Role</DiscordMention>
+</DiscordMessage>
 
 ### How do I prompt the user for additional input?
 
@@ -371,8 +375,7 @@ The second, **Roundtrip Latency**, describes the amount of time a full API round
 For this to work, you need to have `ytdl-core` and `@discordjs/voice` installed.
 
 ```bash
-npm install --save ytdl-core
-npm install @discordjs/voice # (if missing)
+npm install ytdl-core @discordjs/voice
 ```
 
 Additionally, you may need the following:
