@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { useSidebarItems } from '@vuepress/theme-default/lib/client/composables';
 import NavbarLinks from '@vuepress/theme-default/lib/client/components/NavbarLinks.vue';
-import { SidebarChild } from './SidebarChild';
+import { SidebarChild } from '@vuepress/theme-default/lib/client/components/SidebarChild';
 import UserSettings from './UserSettings.vue';
 
 const sidebarItems = useSidebarItems();
