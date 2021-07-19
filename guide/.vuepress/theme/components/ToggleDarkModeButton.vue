@@ -38,7 +38,7 @@
 <script setup lang="ts">
 import useDarkMode from '../composables/useDarkMode';
 
-const isDarkMode = useDarkMode();
+const { isDarkMode } = useDarkMode();
 const toggleDarkMode = (): void => {
 	isDarkMode.value = !isDarkMode.value;
 };
