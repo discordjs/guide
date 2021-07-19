@@ -195,7 +195,7 @@ client.once('ready', () => {
 	console.log('Ready.');
 });
 
-client.on('message', message => {
+client.on('messageCreate', message => {
 	console.log(message.content);
 });
 \```
@@ -207,7 +207,7 @@ client.once('ready', () => {
 	console.log(`${client.user.tag} ready.`);
 });
 
-client.on('message', message => {
+client.on('messageCreate', message => {
 	if (message.content === '!ping') {
 		message.channel.send('Pong.');
 	}

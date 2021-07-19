@@ -3,7 +3,7 @@
 ## Legend
 
 * `<client>` is a placeholder for the Client object, such as `const client = new Discord.Client();`.
-* `<message>` is a placeholder for the Message object, such as `client.on('message', message => { ... });`.
+* `<message>` is a placeholder for the Message object, such as `client.on('messageCreate', message => { ... });`.
 * `<guild>` is a placeholder for the Guild object, such as `<message>.guild` or `<client>.guilds.cache.get('<id>')`.
 * `<voiceChannel>` is a placeholder for the VoiceChannel object, such as `<message>.member.voice.channel`
 
@@ -141,7 +141,7 @@ const prefix = '!';
 
 const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-client.on('message', message => {
+client.on('messageCreate', message => {
 	const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
 	if (!prefixRegex.test(message.content)) return;
 
@@ -250,7 +250,7 @@ If you want to learn more about this syntax or reaction collectors, check out [t
 
 ```js
 const blockedUsers = [ 'id1', 'id2' ];
-<client>.on('message', message => {
+<client>.on('messageCreate', message => {
 	if (blockedUsers.includes(message.author.id)) return;
 });
 ```
@@ -261,7 +261,7 @@ You do not need to have a constant local variable like `blockedUsers` above. If 
 <!-- eslint-skip -->
 
 ```js
-<client>.on('message', async message => {
+<client>.on('messageCreate', async message => {
 	const blockedUsers = await database.query('SELECT user_id FROM blocked_users;');
 	if (blockedUsers.includes(message.author.id)) return;
 });

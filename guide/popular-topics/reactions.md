@@ -14,7 +14,7 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('message', message => {
+client.on('messageCreate', message => {
 	// ...
 });
 
@@ -30,7 +30,7 @@ To react with a Unicode emoji, you will need the actual Unicode character of the
 To react with an emoji, you need to use the `message.react()` method. Once you have the emoji character, all you need to do is copy & paste it as a string inside the `.react()` method!
 
 ```js {2-4}
-client.on('message', message => {
+client.on('messageCreate', message => {
 	if (message.content === '!react') {
 		message.react('😄');
 	}
@@ -48,7 +48,7 @@ For custom emojis, there are multiple ways of reacting. Like Unicode emojis, you
 This format is essentially the name of the emoji, followed by its ID. Copy & paste the ID into the `.react()` method as a string.
 
 ```js {2-4}
-client.on('message', message => {
+client.on('messageCreate', message => {
 	if (message.content === '!react-custom') {
 		message.react('396548322053062656');
 	}
@@ -93,7 +93,7 @@ Of course, if you already have the emoji ID, you should put that directly inside
 If you just put one `message.react()` under another, it won't always react in order as-is. This is because `.react()` is a Promise and an asynchronous operation.
 
 ```js {2-6}
-client.on('message', message => {
+client.on('messageCreate', message => {
 	if (message.content === '!fruits') {
 		message.react('🍎');
 		message.react('🍊');
@@ -110,7 +110,7 @@ As you can see, if you leave it like that, it won't display as you want. It was 
 Luckily, there are two easy solutions to this. The first would be to chain `.then()`s in the order you want it to display.
 
 ```js {3-6}
-client.on('message', message => {
+client.on('messageCreate', message => {
 	if (message.content === '!fruits') {
 		message.react('🍎')
 			.then(() => message.react('🍊'))
@@ -123,7 +123,7 @@ client.on('message', message => {
 The other would be to use the `async`/`await` keywords.
 
 ```js {1,3-9}
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (message.content === '!fruits') {
 		try {
 			await message.react('🍎');
@@ -247,7 +247,7 @@ If you use [gateway intents](/popular-topics/intents.md) but can't or don't want
 
 ```js
 const Discord = require('discord.js');
-const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
+const client = new Discord.Client({ partials: ['messageCreate', 'CHANNEL', 'REACTION'] });
 client.on('messageReactionAdd', async (reaction, user) => {
 	// When a reaction is received, check if the structure is partial
 	if (reaction.partial) {

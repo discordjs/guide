@@ -211,7 +211,7 @@ client.once('ready', async () => {
 	console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (message.author.bot) return;
 	currency.add(message.author.id, 1);
 

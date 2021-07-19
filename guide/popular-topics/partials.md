@@ -14,7 +14,7 @@ You choose which structures you want to emit as partials as client options when 
 
 ```js
 const { Client } = require('discord.js');
-const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
+const client = new Client({ partials: ['messageCreate', 'CHANNEL', 'REACTION'] });
 ```
 
 ::: warning

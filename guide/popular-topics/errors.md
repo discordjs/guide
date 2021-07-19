@@ -154,7 +154,7 @@ module.exports = (message, args) => {
 const { Client } = require('discord.js');
 const client = new Client();
 
-client.on('message', someHandlerFunction);
+client.on('messageCreate', someHandlerFunction);
 
 client.login('your-token-goes-here');
 // client will not be logged in yet!

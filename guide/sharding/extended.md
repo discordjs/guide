@@ -9,7 +9,7 @@ This page is a follow-up and bases its code on [the previous page](/sharding/add
 Let's start with the basic usage of shards. At some point in bot development, you might have wanted to send a message to another channel, which may or may not necessarily be on the same guild, which means it may or may not be on the same shard. To achieve this, you will need to go back to your friend `.broadcastEval()` and try every shard for the desired channel. Suppose you have the following code in your `message` event:
 
 ```js {3-11}
-client.on('message', message => {
+client.on('messageCreate', message => {
 	// ...
 	if (command === 'send') {
 		if (!args.length) return message.reply('please specify a destination channel id.');
@@ -68,7 +68,7 @@ And that's it for this section! You have successfully communicated across all of
 If you remember, there was a brief mention of passing functions through `.broadcastEval()`, but no super clear description of exactly how to go about it. Well, fret not, for this section will cover it! Suppose you have the following code in your `message` event:
 
 ```js {3-8}
-client.on('message', message => {
+client.on('messageCreate', message => {
 	// ...
 	if (command === 'emoji') {
 		if (!args.length) return message.reply('please specify an emoji id to search for.');
@@ -92,7 +92,7 @@ function findEmoji(nameOrID) {
 Next, you need to call the function in your command properly. If you recall from [this section](/sharding/additional-information.md#eval-arguments), it is shown there how to pass a function and arguments correctly. `.call()` will also be used to preserve the `client` context in the function that passes through.
 
 ```js {4-7}
-client.on('message', message => {
+client.on('messageCreate', message => {
 	// ...
 	if (command === 'emoji') {
 		if (!args.length) return message.reply('please specify an emoji id to search for.');
