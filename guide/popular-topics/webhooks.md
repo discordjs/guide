@@ -1,10 +1,10 @@
 # Webhooks
 
-Webhooks can send messages to a text channel without having to log in as a bot. discord.js implements a variety of methods to fetch, create, edit, and use webhooks. In this section, you will learn how to create, fetch, edit, and use webhooks.
+Webhooks can send messages to a text channel without having to log in as a bot. They can also fetch, edit, and delete their own messages. There are a variety of methods in discord.js to interact with webhooks. In this section, you will learn how to create, fetch, edit, and use webhooks.
 
 ## What is a webhook
 
-Webhooks are a utility used to send messages to text channels without needing a Discord application. Webhooks are useful for allowing something to send messages without requiring a Discord application. However, you should note that you cannot directly edit or delete messages you sent through the webhook. discord.js introduces two structures to make use of this functionality, `Webhook` and `WebhookClient`. `WebhookClient` is an extended version of a `Webhook` which allows you to send messages through it without needing a bot client.
+Webhooks are a utility used to send messages to text channels without needing a Discord application. Webhooks are useful for allowing something to send messages without requiring a Discord application. You can also directly edit or delete messages you sent through the webhook. There are two structures to make use of this functionality: `Webhook` and `WebhookClient`. `WebhookClient` is an extended version of a `Webhook`, which allows you to send messages through it without needing a bot client.
 
 ::: tip
 If you would like to read about using webhooks through the API without discord.js, you can read about them [here](https://discord.com/developers/docs/resources/webhook).
@@ -67,8 +67,7 @@ Once you are there, click on the `Create Webhook` / `New Webhook` button; this w
 
 ### Creating webhooks with discord.js
 
-
-discord.js provides a method for creating webhooks called <DocsLink path="class/TextChannel?scrollTo=createWebhook">`TextChannel#createWebhook()`</DocsLink>.
+Webhooks can be created with the <DocsLink path="class/TextChannel?scrollTo=createWebhook">`TextChannel#createWebhook()`</DocsLink> method.
 
 ```js
 channel.createWebhook('Some-username', {
@@ -94,21 +93,26 @@ webhook.edit({
 
 ## Using webhooks
 
-Webhooks, unlike bots, can send more than one embed per message, up to 10. They can also send attachments and normal content. The <DocsLink path="class/Webhook?scrollTo=send">`Webhook#send()`</DocsLink> method to send to a webhook is very similar to the method for sending to a text channel. Webhooks can also choose how the username and avatar will appear when they send the message.
+Webhooks can send messages to text channels, as well as fetch, edit, and delete their own. These methods are the same for both `Webhook` and `WebhookClient`.
+
+### Sending messages
+
+Webhooks, like bots, can send up to 10 embeds per message. They can also send attachments and normal content. The <DocsLink path="class/Webhook?scrollTo=send">`Webhook#send()`</DocsLink> method used to send to a webhook is very similar to the method used for sending to a text channel. Webhooks can also choose how the username and avatar will appear when they send the message.
 
 Example using a WebhookClient:
 
 ```js
-const Discord = require('discord.js');
+const { WebhookClient, MessageEmbed } = require('discord.js');
 const config = require('./config.json');
 
-const webhookClient = new Discord.WebhookClient(config.webhookID, config.webhookToken);
+const webhookClient = new WebhookClient(config.webhookID, config.webhookToken);
 
-const embed = new Discord.MessageEmbed()
+const embed = new MessageEmbed()
 	.setTitle('Some Title')
 	.setColor('#0099ff');
 
-webhookClient.send('Webhook test', {
+webhookClient.send({
+	content: 'Webhook test',
 	username: 'some-username',
 	avatarURL: 'https://i.imgur.com/wSTFkRM.png',
 	embeds: [embed],
@@ -118,32 +122,68 @@ webhookClient.send('Webhook test', {
 Example using a Webhook:
 
 ```js
-const Discord = require('discord.js');
+const { Client, Intents, MessageEmbed } = require('discord.js');
 const config = require('./config.json');
 
-const client = new Discord.Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
-const embed = new Discord.MessageEmbed()
+const embed = new MessageEmbed()
 	.setTitle('Some Title')
 	.setColor('#0099ff');
 
 client.once('ready', async () => {
-	const channel = client.channels.cache.get('222197033908436994');
+	const channel = client.channels.cache.get('123456789012345678');
 	try {
 		const webhooks = await channel.fetchWebhooks();
 		const webhook = webhooks.first();
 
-		await webhook.send('Webhook test', {
+		await webhook.send({
+			content: 'Webhook test',
 			username: 'some-username',
 			avatarURL: 'https://i.imgur.com/wSTFkRM.png',
 			embeds: [embed],
 		});
 	} catch (error) {
-		console.error('Error trying to send: ', error);
+		console.error('Error trying to send a message: ', error);
 	}
 });
 
 client.login(token);
+```
+
+### Fetching messages
+
+You can use <DocsLink path="class/Webhook?scrollTo=fetchMessage">`Webhook#fetchMessage()`</DocsLink> to fetch messages previously sent by the Webhook.
+
+<!-- eslint-skip -->
+
+```js
+const message = await webhookClient.fetchMessage('123456789012345678');
+```
+
+### Editing messages
+
+You can use <DocsLink path="class/Webhook?scrollTo=editMessage">`Webhook#editMessage()`</DocsLink> to edit messages previously sent by the Webhook.
+
+<!-- eslint-skip -->
+
+```js
+const message = await webhook.editMessage('123456789012345678', {
+	content: 'Edited!',
+	username: 'some-username',
+	avatarURL: 'https://i.imgur.com/wSTFkRM.png',
+	embeds: [embed],
+});
+```
+
+### Deleting messages
+
+You can use <DocsLink path="class/Webhook?scrollTo=deleteMessage">`Webhook#deleteMessage()`</DocsLink> to delete messages previously sent by the Webhook.
+
+<!-- eslint-skip -->
+
+```js
+await webhookClient.deleteMessage('123456789012345678');
 ```
 
 ## Resulting code

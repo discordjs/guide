@@ -14,14 +14,14 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('messageCreate', message => {
-	console.log(`${message.author.tag} in #${message.channel.name} sent: ${message.content}`);
+client.on('interactionCreate', interaction => {
+	console.log(`${interaction.user.tag} in #${interaction.channel.name} triggered an interaction.`);
 });
 
 client.login(token);
 ```
 
-Currently, the event listeners are in the `index.js` file. The `ready` event emits once when the `Client` becomes ready for use, and the `message` event emits whenever a message is received. Moving the event listener code into individual files is simple, and we'll be taking a similar approach to the [command handler](/command-handling/). 
+Currently, the event listeners are in the `index.js` file. The `ready` event emits once when the `Client` becomes ready for use, and the `interactionCreate` event emits whenever an interaction is received. Moving the event listener code into individual files is simple, and we'll be taking a similar approach to the [command handler](/command-handling/). 
 
 ## Individual event files
 
@@ -29,7 +29,7 @@ Your folder structure should look something like this:
 
 ![Folder structure](./images/folder-structure.png)
 
-Create an `events` folder in the same directory. You can now take your existing events code in `index.js` and move them to individual files inside the `events` folders. Create a `ready.js` and a `message.js` file in the `events` folder and place in the code for the respective files:
+Create an `events` folder in the same directory. You can now take your existing events code in `index.js` and move them to individual files inside the `events` folders. Create a `ready.js` and an `interactionCreate.js` file in the `events` folder and place in the code for the respective files:
 
 ```js
 module.exports = {
@@ -43,9 +43,9 @@ module.exports = {
 
 ```js
 module.exports = {
-	name: 'messageCreate',
-	execute(message) {
-		console.log(`${message.author.tag} in #${message.channel.name} sent: ${message.content}`);
+	name: 'interactionCreate',
+	execute(interaction) {
+		console.log(`${interaction.user.tag} in #${interaction.channel.name} triggered an interaction.`);
 	},
 };
 ```
@@ -60,7 +60,7 @@ const client = new Discord.Client();
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 ```
 
-This same method is used in our [command handler](/command-handling/) section. The `fs.readdirSync().filter()` calls return an array of all the file names in the given directory and filter for only `.js` files, i.e. `['ready.js', 'message.js']`.
+This same method is used in our [command handler](/command-handling/) section. The `fs.readdirSync().filter()` calls return an array of all the file names in the given directory and filter for only `.js` files, i.e. `['ready.js', 'interactionCreate.js']`.
 
 ```js {3-10}
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
@@ -90,7 +90,7 @@ After this, listening for other events is as easy as creating a new file in the 
 
 ## Passing `Client` to event files
 
-You may have noticed how important the `Client` class is. You created a `client` instance of this class in the `index.js` file. Most of the time, you can use this `client` instance in other files by either obtaining it from one of the other discord.js structures or function parameters. In your `message` event, you can use `message.client`. When you don't have access to any of the structures with the `client` property, you'll have to use the latter method. A prime example of this is the `ready` event.
+You may have noticed how important the `Client` class is. You created a `client` instance of this class in the `index.js` file. Most of the time, you can use this `client` instance in other files by either obtaining it from one of the other discord.js structures or function parameters. In your `interactionCreate` event, you can use `interaction.client`. When you don't have access to any of the structures with the `client` property, you'll have to use the latter method. A prime example of this is the `ready` event.
 
 The `ready` event does not have arguments, meaning that `args` will be an empty array, thus nothing will be passed to the `execute` function in `ready.js`. To obtain the `client` instance, you'll have to pass it as an argument along with the `args` array in the event handler. Back in `index.js`, make the following changes:
 
@@ -118,7 +118,7 @@ module.exports = {
 ```
 
 ::: tip
-You can omit the `client` argument from the `execute` function in files where you don't need it. For example, it isn't required in the `message.js` file because its first argument is a `Message` instance, meaning you can use `message.client`.
+You can omit the `client` argument from the `execute` function in files where you don't need it. For example, it isn't required in the `interactionCreate.js` file because its first argument is an `Interaction` instance, meaning you can use `interaction.client`.
 :::
 
 It is worth noting that the position of `client` argument matters. For example, the `messageUpdate` event has two arguments: `oldMessage` and `newMessage`. Events like this should be handled as:
