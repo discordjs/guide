@@ -59,4 +59,4 @@ Finally, `cd` into the directory which you have just cloned and run:
 node <file-name>
 ```
 
-And thats it! You have officially hosted your Discord bot on a VPS. If you want to make changes, update your repository on Github and update the VPS's local clone by running `git pull`(inside the directory).
+And thats it! You have officially hosted your Discord bot on a VPS. If you want to make changes, update your repository on Github and update the VPS's local clone by running `git pull` inside the directory.
