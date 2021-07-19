@@ -35,8 +35,8 @@ const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 		lastUpdated: true,
 		navbar: [
 			{
-				text: 'Commando',
-				link: '/commando/',
+				text: 'Sapphire',
+				link: '/sapphire/',
 			},
 			{
 				text: 'Documentation',

@@ -1,5 +1,5 @@
 export default {
-	'/commando/': [
+	'/sapphire/': [
 		{
 			text: 'Home',
 			children: [
@@ -10,30 +10,40 @@ export default {
 		{
 			text: 'Getting Started',
 			children: [
-				'/commando/',
-				'/commando/first-command.md',
+				'/sapphire/',
+				'/sapphire/first-command.md',
 			],
 		},
 		{
-			text: 'Extra Command Info',
+			text: 'Command Preconditions',
 			children: [
-				'/commando/throttling.md',
-				'/commando/guild-only.md',
-				'/commando/permissions.md',
+				'/sapphire/cooldown.md',
+				'/sapphire/nsfw.md',
+				'/sapphire/permissions.md',
+				'/sapphire/run-in.md',
+				'/sapphire/first-precondition.md',
 			],
 		},
 		{
 			text: 'Arguments',
 			children: [
-				'/commando/args.md',
-				'/commando/validators.md',
+				'/sapphire/args.md',
+				'/sapphire/built-in-arguments.md',
+				'/sapphire/first-argument.md',
 			],
+		},
+		{
+			text: 'Listeners',
+			children: [
+				'/sapphire/first-listener.md',
+			]
 		},
 		{
 			text: 'Additional Information',
 			children: [
-				'/commando/client-values.md',
-				'/commando/unknown-command-response.md',
+				'/sapphire/client-values.md',
+				'/sapphire/container.md',
+				'/sapphire/custom-stores.md',
 			],
 		},
 	],
