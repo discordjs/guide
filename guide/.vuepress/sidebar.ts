@@ -157,6 +157,7 @@ export default {
 				'/additional-info/collections.md',
 				'/additional-info/async-await.md',
 				'/additional-info/rest-api.md',
+				'/additional-info/changes-in-v13.md',
 			],
 		},
 	],
