@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { useRouteLocale, useSiteLocaleData } from '@vuepress/client';
 import { useThemeLocaleData } from '@vuepress/theme-default/lib/client/composables';
 import NavbarLinks from '@vuepress/theme-default/lib/client/components/NavbarLinks.vue';
