@@ -7,7 +7,7 @@ Now that you have your dependencies installed, you can start using voice!
 Joining a voice channel is easy; here's a common example:
 
 ```js
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	// Join the same voice channel of the author of the message
 	if (message.member.voice.channel) {
 		const connection = await message.member.voice.channel.join();

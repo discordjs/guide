@@ -14,7 +14,7 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('message', message => {
+client.on('messageCreate', message => {
 	console.log(`${message.author.tag} in #${message.channel.name} sent: ${message.content}`);
 });
 
@@ -43,7 +43,7 @@ module.exports = {
 
 ```js
 module.exports = {
-	name: 'message',
+	name: 'messageCreate',
 	execute(message) {
 		console.log(`${message.author.tag} in #${message.channel.name} sent: ${message.content}`);
 	},
