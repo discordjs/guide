@@ -56,7 +56,7 @@ If your Linux system doesn't have cURL, you can run `sudo apt-get install curl` 
 Finally, `cd` into the directory which you have just cloned. Install the dependencies by running `npm install` 
 
 ::: warning
-Keep in mind your VPS may not have native modules installed, which you might have required for your project(For example `make` or `build-essential`)
+Keep in mind your VPS may not have the native modules installed, which you might have required for your project (for example, `make` or `build-essential`).
 :::
 
 Once you have installed the neccessary dependencies and modules, run:
