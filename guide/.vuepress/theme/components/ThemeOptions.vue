@@ -21,7 +21,6 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount } from 'vue';
 import useColorTheme from '../composables/useColorTheme';
 
 const { setTheme } = useColorTheme();
