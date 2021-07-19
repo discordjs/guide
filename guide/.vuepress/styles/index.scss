@@ -1,3 +1,5 @@
+@import './theme-variables.scss';
+@import './layout.scss';
 @import './navbar.scss';
 @import './search.scss';
 @import './sidebar.scss';
@@ -45,6 +47,17 @@ div[class*=language-].line-numbers-mode::after {
 			&.last-updated .meta-item-label {
 				color: var(--c-brand);
 			}
+		}
+	}
+}
+
+#nprogress {
+	.bar {
+		--nprogress-color: var(--c-brand-light);
+		height: 0.375rem !important;
+
+		.peg {
+			box-shadow: none;
 		}
 	}
 }

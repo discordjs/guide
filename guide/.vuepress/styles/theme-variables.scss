@@ -1,0 +1,129 @@
+// base colors
+:root {
+	// Guide green colors
+	--green-430: #5bc595;
+	--green-460: #48be89;
+	--green-500: #3eaf7c;
+	--green-530: #379c6f;
+	--green-560: #318961;
+	--green-600: #2a7754;
+	--green-630: #236447;
+
+	// Discord colors
+	--blurple-430: #707bf4;
+	--blurple-460: #6571f3;
+	--blurple-500: #5865f2;
+	--blurple-530: #505cdc;
+	--blurple-560: #4752c4;
+	--blurple-600: #3c45a5;
+	--blurple-630: #343b8f;
+
+	// Theme colors
+	--theme-430: var(--green-430);
+	--theme-460: var(--green-460);
+	--theme-500: var(--green-500);
+	--theme-530: var(--green-530);
+	--theme-560: var(--green-560);
+	--theme-600: var(--green-600);
+	--theme-630: var(--green-630);
+
+	--text-gray: #e5e7eb;
+	--c-headers: #111827;
+
+	// Overrides:
+
+	// brand colors
+	--c-brand: var(--theme-560);
+	--c-brand-light: var(--theme-460);
+
+	// text colors
+	--c-text: #374151;
+	--c-text-accent: var(--c-brand-light);
+
+	// custom container colors
+	--c-tip: #42b983;
+	--c-tip-bg: #e2f5ec;
+	--c-tip-text: #215d42;
+	--c-tip-title: #359469;
+	--c-warning: #e7c000;
+	--c-warning-bg: rgba(255, 229, 100, 0.25);
+	--c-warning-text: #6b5900;
+	--c-warning-title: #b29400;
+	--c-danger: #c00;
+	--c-danger-bg: #ffe0e0;
+	--c-danger-text: #600;
+	--c-danger-title: #c00;
+
+	// code blocks
+	--code-hl-bg-color: #353b45;
+
+	// font
+	--font-family: system-ui, -apple-system, 'Segoe UI', Roboto,
+		Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+
+	// layout
+	--navbar-height: 4rem;
+	--content-width: 100%;
+	--wrapper-max-width: 96rem;
+
+	// miscellaneous
+	--c-border: rgba(0, 0, 0, 0.05);
+}
+
+html.guide-theme-blurple {
+	--theme-430: var(--blurple-430);
+	--theme-460: var(--blurple-460);
+	--theme-500: var(--blurple-500);
+	--theme-530: var(--blurple-530);
+	--theme-560: var(--blurple-560);
+	--theme-600: var(--blurple-600);
+	--theme-630: var(--blurple-630);
+
+	// Overrides
+
+	// brand colors
+	--c-brand: var(--theme-560);
+	--c-brand-light: var(--theme-460);
+
+	// text colors
+	--c-text-accent: var(--c-brand-light);
+}
+
+html.dark {
+	--c-headers: #fff;
+	--c-bg-scrollbar: var(--c-bg);
+
+	// Overrides:
+
+	// brand colors
+	--c-brand: var(--theme-560);
+	--c-brand-light: var(--theme-460);
+
+	// background colors
+	--c-bg: #1d1d1d;
+	--c-bg-sidebar: #191919;
+
+	// text colors
+	--c-text: #d1d5db;
+	--c-text-accent: var(--c-brand-light);
+
+	// custom container colors
+	--c-tip: #42b983;
+	--c-tip-bg: rgba(66, 185, 131, 0.25);
+	--c-tip-text: #a0ddc1;
+	--c-tip-title: #66c99c;
+	--c-warning: #e7c000;
+	--c-warning-bg: rgba(255, 229, 100, 0.25);
+	--c-warning-text: #ffefa2;
+	--c-warning-title: #ffd91d;
+	--c-danger: #f66;
+	--c-danger-bg: rgba(204, 0, 0, 0.25);
+	--c-danger-text: #f66;
+	--c-danger-title: #ff2929;
+
+	// code blocks
+	--code-hl-bg-color: #353b45;
+
+	// miscellaneous
+	--c-border: rgba(255, 255, 255, 0.05);
+}
