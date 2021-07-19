@@ -2,7 +2,7 @@
 
 A bot requires itself to be hosted in order for it to run, however, it would not be ideal to host it on your computer all day without shutting it down. That's where a **Virtual Private Server** (VPS) comes into place. A good VPS can mark a turning point for your project as you can host local databases, and it is reliable as well. A VPS suitable for your Discord bot is typically cheap, ranging from around $2-10/month.
 
-## Well known affordable providers
+## Well-known affordable hosting providers
 
 We have gathered a small list of reputable and inexpensive VPS providers that you may rely on for getting your job done:
 * [OVH](https://www.ovh.com/us/vps/) - Starting at $3.35/month for 1 core, 2GB RAM, 20GB SSD
