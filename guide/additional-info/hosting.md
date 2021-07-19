@@ -28,7 +28,7 @@ First, you need to install Git on the VPS, run the following command in the term
 ```bash
 sudo apt-get -y install git
 ```
-Clone the repository by running:
+Afterwards, clone the repository by running:
 
 ```bash
 git clone <git-url>
