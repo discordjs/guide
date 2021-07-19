@@ -11,7 +11,7 @@ We have gathered a small list of reputable and inexpensive VPS providers that yo
 * [Vultr](https://www.vultr.com/) - Starting at $2.50/month for 1 core, 512MB RAM, 10GB SSD
 * [AWS Lightsail](https://amazonlightsail.com/) - Starting at $3.50/month (first month free) for 1 core, 512MB RAM, 20GB SSD
 
-Before you purchase a VPS, we recommend you learn how to remotely connect to a VPS. The usual method is via [SSH](https://en.wikipedia.org/wiki/Secure_Shell_Protocol). We won't go deep into it as its outside the scope of this guide, however VPS providers usually have a guide regarding connection so you can read up on that.
+Before you purchase a VPS, we recommend learning how to remotely connect to a VPS. The usual method is via [SSH](https://en.wikipedia.org/wiki/Secure_Shell_Protocol). We won't go deep into it as it's outside the scope of this guide, however, VPS providers usually have a guide regarding connection so you can read up on that.
 
 ## Steps to host
 
@@ -41,7 +41,7 @@ At the point of writing, the NodeJS library supported by Linux's `apt` repositor
 ```bash
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
 ```
-Then you can install the LTS version of Nodejs by doing:
+Then you can install the LTS version of Node.js by doing:
 
 ```bash
 nvm install --lts
