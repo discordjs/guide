@@ -4,7 +4,7 @@ A bot requires itself to be hosted in order for it to run, however, it would be 
 
 ## Well known affordable providers
 
-We have gathered a small list of famous and inexpensive VPS providers who you may rely on for getting your job done:
+We have gathered a small list of reputable and inexpensive VPS providers that you may rely on for getting your job done:
 * [OVH](https://www.ovh.com/us/vps/) - Starting at $3.35/month for 1 core, 2GB RAM, 20GB SSD
 * [DigitalOcean](https://www.digitalocean.com/) - Starting at $5/month for 1 core, 1GB RAM, 25GB SSD
 * [Linode](https://www.linode.com/) - Starting at $5/month for 1 core, 1GB RAM, 25GB SSD
@@ -60,4 +60,3 @@ node <file-name>
 ```
 
 And thats it! You have officially hosted your Discord bot on a VPS. If you want to make changes, update your repository on Github and update the VPS's local clone by running `git pull`(inside the directory).
-
