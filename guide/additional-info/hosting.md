@@ -1,6 +1,6 @@
 # Hosting your bot on a VPS
 
-A bot requires itself to be hosted in order for it to run, however it would be unideal to host it on your PC all day without shutting it down. That's where a **Virtual Private Server**(VPS) comes into place. A good VPS can mark a turning point for your project as you can host local databases, and is reliable as well. A VPS suitable for your Discord Bot is typically cheap, ranging from around $2-10/month.
+A bot requires itself to be hosted in order for it to run, however, it would be unideal to host it on your computer all day without shutting it down. That's where a **Virtual Private Server**(VPS) comes into place. A good VPS can mark a turning point for your project as you can host local databases, and it is reliable as well. A VPS suitable for your Discord bot is typically cheap, ranging from around $2-10/month.
 
 ## Well known affordable providers
 
@@ -60,5 +60,4 @@ node <file-name>
 ```
 
 And thats it! You have officially hosted your Discord bot on a VPS. If you want to make changes, update your repository on Github and update the VPS's local clone by running `git pull`(inside the directory).
-
 
