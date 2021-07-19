@@ -223,10 +223,6 @@ message.channel.send({
 });
 ```
 
-<DiscordMessage profile="user">
-	<DiscordMention :highlight="true">User</DiscordMention> <@987654321098765432> <DiscordMention :type="role" :roleColor="#de3636">Role</DiscordMention>
-</DiscordMessage>
-
 ### How do I prompt the user for additional input?
 
 <!-- eslint-skip -->
