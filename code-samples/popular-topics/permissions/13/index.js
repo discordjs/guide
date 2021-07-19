@@ -74,7 +74,7 @@ client.on('messageCreate', message => {
 	} else if (message.content === '!create-private') {
 		message.guild.channels.create('private', {
 			type: 'GUILD_TEXT', 
-            permissionOverwrites: [
+			permissionOverwrites: [
 				{
 					id: message.guild.id,
 					deny: ['VIEW_CHANNEL'],

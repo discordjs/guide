@@ -4,7 +4,7 @@
 
 Discord permissions are stored in a 53-bit integer and calculated using bitwise operations. If you want to dive deeper into what's happening behind the curtains, check the [Wikipedia](https://en.wikipedia.org/wiki/Bit_field) and [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) articles on the topic.
 
-Discord.js represents permission bit fields as either the decimal value of said bit field or its referenced flags.
+In discord.js, permission bit fields are represented as either the decimal value of said bit field or its referenced flags.
 Every position in a permissions bit field represents one of these flags and its state (either referenced `1` or not referenced `0`).
 
 Before we get into actually assigning permissions, let's quickly go over the method Discord uses to determine a guild member's final permissions:
@@ -17,7 +17,7 @@ Before we get into actually assigning permissions, let's quickly go over the met
 6. Apply all denies for the specific guild member if they exist.
 7. Apply all allows for the specific guild member if they exist.
 
-Due to this system, you cannot deny base permissions. If you grant `@everyone` `SEND_MESSAGES` and don't grant it for a muted members role, muted members will still be able to send messages unless you specify channel-based overwrites.
+Due to this system, you cannot deny base permissions. If you grant `SEND_MESSAGES` to `@everyone` and don't grant it for a muted members role, muted members will still be able to send messages unless you specify channel-based overwrites.
 
 All additional roles allow overwrites are applied after all additional roles denies! If any of a member's roles have an overwrite to allow a permission explicitly, the member can execute the associated actions in this channel regardless of the role hierarchy. 
 

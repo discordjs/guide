@@ -128,7 +128,6 @@ guild.channels.create('new-channel', {
 To edit permission overwrites on the channel with a provided set of new overwrites, you can use the `.edit()` method. This method allows passing an array or Collection of <DocsLink path="class/PermissionOverwrites">PermissionOverwrites</DocsLink>.
 
 ```js
-// editing overwrites with PermissionOverwriteOptions
 channel.permissionOverwrites.edit([
 	{
 		id: guild.id,
@@ -189,7 +188,7 @@ channel.lockPermissions()
 
 ### Permissions after overwrites
 
-Discord.js features two utility methods to easily determine the final permissions for a guild member or role in a specific channel: `.permissionsFor()` on the <DocsLink path="class/GuildChannel?scrollTo=permissionsFor">GuildChannel</DocsLink> class and `.permissionsIn()` on the <DocsLink path="GuildMember?scrollTo=permissionsIn">GuildMember</DocsLink> and <DocsLink path="class/Role?scrollTo=permissionsIn">Role</DocsLink> classes. Both return a <DocsLink path="class/Permissions">Permissions</DocsLink> object.
+There are two utility methods to easily determine the final permissions for a guild member or role in a specific channel: `.permissionsFor()` on the <DocsLink path="class/GuildChannel?scrollTo=permissionsFor">GuildChannel</DocsLink> class and `.permissionsIn()` on the <DocsLink path="GuildMember?scrollTo=permissionsIn">GuildMember</DocsLink> and <DocsLink path="class/Role?scrollTo=permissionsIn">Role</DocsLink> classes. Both return a <DocsLink path="class/Permissions">Permissions</DocsLink> object.
 
 To check your bot's permissions in the channel the command was used in, you could use something like this:
 
