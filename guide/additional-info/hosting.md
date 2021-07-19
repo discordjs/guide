@@ -19,7 +19,7 @@ Before you purchase a VPS, we recommend learning how to remotely connect to a VP
 The following steps stated assumes your Linux distribution is Ubuntu. However, all Linux distributions are similar and should work on your VPS.
 :::
 
-Presuming that now you have purchased your own VPS and that you have remotely connected to it, what should you do now? We recommend you create a Github repository first and add your bot files there as it would be very inefficient to code files through a terminal.
+Once you have purchased your VPS and remotely connected to it, what should you do now? We recommend you create a GitHub repository first and add your bot files there, as it would be very inefficient to code files through a terminal.
 
 ### Installing Git and cloning repository
 
