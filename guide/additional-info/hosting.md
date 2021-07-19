@@ -48,7 +48,7 @@ nvm install --lts
 ```
 
 ::: tip
-If your Linux system doesn't have Curl, you can run `sudo apt-get install curl` to install it.
+If your Linux system doesn't have cURL, you can run `sudo apt-get install curl` to install it.
 :::
 
 ### Final steps
