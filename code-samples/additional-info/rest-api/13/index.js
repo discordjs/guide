@@ -1,8 +1,8 @@
-const Discord = require('discord.js');
+const { Client, Intents, MessageEmbed } = require('discord.js');
 const fetch = require('node-fetch');
 const querystring = require('querystring');
 
-const client = new Discord.Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const prefix = '!';
 
 const trim = (str, max) => (str.length > max ? `${str.slice(0, max - 3)}...` : str);
@@ -11,7 +11,7 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -36,7 +36,7 @@ client.on('message', async message => {
 
 		const [answer] = list;
 
-		const embed = new Discord.MessageEmbed()
+		const embed = new MessageEmbed()
 			.setColor('#EFFF00')
 			.setTitle(answer.word)
 			.setURL(answer.permalink)
