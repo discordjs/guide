@@ -66,7 +66,7 @@ const messages = await interaction.channel.awaitMessages({
 const difference = messages.last().createdTimestamp - messages.first().createdTimestamp;
 const formatted = ms(difference);
 
-interaction.reply(`You sent the two messages ${formatted} apart.`);
+await interaction.followUp(`You sent the two messages ${formatted} apart.`);
 ```
 
 ## common-tags
