@@ -5,11 +5,12 @@ A bot requires itself to be hosted in order for it to run, however, it would not
 ## Well-known affordable hosting providers
 
 We have gathered a small list of reputable and inexpensive VPS providers that you may rely on for getting your job done:
-* [OVH](https://www.ovh.com/us/vps/) - Starting at $3.35/month for 1 core, 2GB RAM, 20GB SSD
-* [DigitalOcean](https://www.digitalocean.com/) - Starting at $5/month for 1 core, 1GB RAM, 25GB SSD
-* [Linode](https://www.linode.com/) - Starting at $5/month for 1 core, 1GB RAM, 25GB SSD
-* [Vultr](https://www.vultr.com/) - Starting at $2.50/month for 1 core, 512MB RAM, 10GB SSD
-* [AWS Lightsail](https://amazonlightsail.com/) - Starting at $3.50/month (first month free) for 1 core, 512MB RAM, 20GB SSD
+* [OVH](https://www.ovh.com/us/vps/) - Starting at $3.35/month for 1 core, 2GB RAM and 20GB SSD
+* [DigitalOcean](https://www.digitalocean.com/) - Starting at $5/month for 1 core, 1GB RAM and 25GB SSD
+* [Linode](https://www.linode.com/) - Starting at $5/month for 1 core, 1GB RAM and 25GB SSD
+* [Vultr](https://www.vultr.com/) - Starting at $2.50/month for 1 core, 512MB RAM and 10GB SSD
+* [AWS Lightsail](https://amazonlightsail.com/) - Starting at $3.50/month (first month free) for 1 core, 512MB RAM and 20GB SSD
+* [GalaxyGate](https://galaxygate.net/hosting/vps/) - Starting at $3/month for 1core, 1 GB RAM and 15GB SSD
 
 Before you purchase a VPS, we recommend learning how to remotely connect to a VPS. The usual method is via [SSH](https://en.wikipedia.org/wiki/Secure_Shell_Protocol). We won't go deep into it as it's outside the scope of this guide, however, VPS providers usually have a guide regarding connection so you can read up on that.
 
