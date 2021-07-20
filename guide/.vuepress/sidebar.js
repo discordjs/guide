@@ -143,6 +143,7 @@ module.exports = {
 		{
 			title: 'Additional Information',
 			children: [
+				'/additional-info/hosting',
 				'/additional-info/notation',
 				'/additional-info/es6-syntax',
 				'/additional-info/collections',
