@@ -1,6 +1,6 @@
-const { Command } = require('@sapphire/framework');
+import { Command } from '@sapphire/framework';
 
-module.exports = class PowCommand extends Command {
+export class PowCommand extends Command {
 	constructor(context) {
 		super(context, {
 			description: 'Calculates the exponent of a number with an exponent',
@@ -12,4 +12,4 @@ module.exports = class PowCommand extends Command {
 		const exponent = args.finished ? 2 : await args.pick('number');
 		return message.channel.send(`The result is... ${Math.pow(base, exponent)}!`);
 	}
-};
+}

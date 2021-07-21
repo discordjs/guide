@@ -8,22 +8,36 @@ Once you have your file, it's time to get started!
 
 Before you do anything, at the start of your file, you're going to need to require Sapphire Framework again, specifically its Command class.
 
+:::: code-group
+::: code-group-item CommonJS
 ```js
 const { Command } = require('@sapphire/framework');
 ```
+:::
+::: code-group-item ESM
+```js
+import { Command } from '@sapphire/framework';
+```
+:::
+::::
 
 Commands are classes that are exported in any of the following ways:
 
+:::: code-group
+::: code-group-item CommonJS
 ```js
-// CommonJS
-module.exports = class MainExportedFoo extends Piece {};
-exports.default = class DefaultExportedFoo extends Piece {};
-exports.myCommand = class CustomExportedFoo extends Piece {};
-
-// ECMAScript Modules
-export default class ExportedDefaultFoo extends Piece {}
-export class ExportedFoo extends Piece {}
+module.exports = class Foo extends Piece {};
+exports.default = class Foo extends Piece {};
+exports.myCommand = class Foo extends Piece {};
 ```
+:::
+::: code-group-item ESM
+```js
+export default class DefaultFoo extends Piece {}
+export class Foo extends Piece {}
+```
+:::
+::::
 
 Because its spread usage, we will be using `module.exports` in all the guides, so let's create the class and set `module.exports` to it!
 

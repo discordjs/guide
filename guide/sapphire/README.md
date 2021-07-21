@@ -20,9 +20,18 @@ Make sure that the `main` property in your `package.json` points to the right pa
 
 The first thing you have to do is require Sapphire. Contrary to what you may think, you may **not** need to require discord.js in this file, and the Sapphire client extends discord.js's, so everything from Client is available in SapphireClient!
 
+:::: code-group
+::: code-group-item CommonJS
 ```js
 const { SapphireClient } = require('@sapphire/framework');
 ```
+:::
+::: code-group-item ESM
+```js
+import { SapphireClient } from '@sapphire/framework';
+```
+:::
+::::
 
 The next step is to create a new SapphireClient, which is where you can customize Sapphire's behavior, as well as discord.js's. Just like in Client, you must define the `intents`:
 
