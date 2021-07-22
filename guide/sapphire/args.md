@@ -40,14 +40,14 @@ module.exports = class SayCommand extends Command {
 
 The way Sapphire's arguments work, is by "consuming" the parameters one by one on success, similar to how an iterator works. We'll go into more details and examples with another command.
 
-In this command, we're using `args.pick` to read a single parameter from the user's input. The input type is `string`, which means it'll pick the current parameter and return it as-is.
+In this command, we're using `args.pick()` to read a single parameter from the user's input. The input type is `string`, which means it'll pick the current parameter and return it as-is.
 
-If you run this with `@bot say Hello there!`, it'll send `Hello` back. What happened!? As I said before, each word is a parameter, so `Hello there!` is converted to `["Hello", "there!"]`, and `args.pick` reads only one. But fear not! There are alternatives:
+If you run this with `@bot say Hello there!`, it'll send `Hello` back. What happened!? As I said before, each word is a parameter, so `Hello there!` is converted to `["Hello", "there!"]`, and `args.pick()` reads only one. But fear not! There are alternatives:
 
 - **Quoted parameters**:
   If instead of sending `@bot say Hello there!`, we sent `@bot say "Hello there!"` or `@bot say “Hello there!”`, wrapping the content with quotes, the entire content inside the quotes will be read as a single parameter (without the quotes, of course).
 
-- **`args.rest` as-is**:
+- **`args.rest()` as-is**:
   ```js {5,10}
   module.exports = class SayCommand extends Command {
   	constructor(context) {
@@ -73,7 +73,7 @@ If you run this with `@bot say Hello there!`, it'll send `Hello` back. What happ
   This is troublesome if we want to send quotes in the content, as those would be excluded from `rest`, so we have set quotes to an empty array. This way, when you do `@bot say Hello "there!"`, your bot will send `Hello "there!"`.
 
   ::: warning
-  `args.rest` consumes all the parameters, and then processes it, so you will not be able to consume any more parameters after it.
+  `args.rest()` consumes all the parameters, and then processes it, so you will not be able to consume any more parameters after it.
   :::
 
 ## Multiple arguments
@@ -94,7 +94,7 @@ module.exports = class AddCommand extends Command {
 };
 ```
 
-Now let's fill the logic for the command inside the `run` method. Remember, we want to get two numbers, and add them, so we will need to run `args.pick` twice:
+Now let's fill the logic for the command inside the `run` method. Remember, we want to get two numbers, and add them, so we will need to run `args.pick()` twice:
 
 ```js {5-6}
 module.exports = class AddCommand extends Command {
@@ -110,7 +110,7 @@ module.exports = class AddCommand extends Command {
 
 Now, if you run `@bot add 1 2`, the bot will reply with `The result is... 3!`. But what is going on in here? What is `a` and what is `b`?
 
-As mentioned before, `args.pick` consumes parameters one by one, so at first, we will have two parameters: `'1'` and `'2'`. When calling `args.pick`, the `'1'` is consumed and parsed using the name of the parameter, in this case `'number'`, so it's parsed as the number `1`. Then we do the same with the next parameter, which will be `'2'`. As a result, `a` is assigned to the number `1`, and `b` is assigned to the number `2`.
+As mentioned before, `args.pick()` consumes parameters one by one, so at first, we will have two parameters: `'1'` and `'2'`. When calling `args.pick()`, the `'1'` is consumed and parsed using the name of the parameter, in this case `'number'`, so it's parsed as the number `1`. Then we do the same with the next parameter, which will be `'2'`. As a result, `a` is assigned to the number `1`, and `b` is assigned to the number `2`.
 
 ## Optional arguments
 
