@@ -19,7 +19,7 @@ module.exports = class SayCommand extends Command {
 		});
 	}
 
-	run(message, args) {
+	async run(message, args) {
 		// ...
 	}
 };
@@ -88,7 +88,7 @@ module.exports = class AddCommand extends Command {
 		});
 	}
 
-	run(message, args) {
+	async run(message, args) {
 		// ...
 	}
 };
