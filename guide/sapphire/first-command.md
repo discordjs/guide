@@ -59,7 +59,7 @@ Don't let this scare you; it's straightforward.
 - `aliases` are other ways users can call the command. You can have as many as you want!
 - `description` is the help text displayed when somebody uses a help command.
 
-There are many more properties you can use, but their sections will explain those.
+There are many more properties you can use. The upcoming sections will explain those.
 
 ## Creating your run method
 

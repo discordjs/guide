@@ -1,6 +1,6 @@
 # Getting started with Sapphire
 
-When installing Sapphire Framework, you need to install both discord.js and the framework, you can do this by running the following command:
+When installing the Sapphire Framework, you need to install both discord.js and the framework, you can do this by running the following command:
 
 ```sh-session
 npm install discord.js @sapphire/framework
