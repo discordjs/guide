@@ -184,7 +184,7 @@ You can then reference and use the images inside the embed itself with `attachme
 If you plan to attach the same image repeatedly, consider hosting it online and providing the URL in the respective embed field instead. This also makes your bot respond faster since it doesn't need to upload the image with every response depending on it.
 :::
 
-#### Using the MessageEmbed builder
+### Using the MessageEmbed builder
 
 ```js
 const file = new Discord.MessageAttachment('../assets/discordjs.png');
@@ -195,7 +195,7 @@ const exampleEmbed = new Discord.MessageEmbed()
 channel.send({ embeds: [exampleEmbed], files: [file] });
 ```
 
-#### Using an embed object
+### Using an embed object
 
 ```js
 const file = new Discord.MessageAttachment('../assets/discordjs.png');
