@@ -4,7 +4,7 @@
 
 v13 requires Node 14.x or higher to use, so make sure you're up to date. To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it! There are many resources online to help you with this step based on your host system.
 
-Once you've got Node up-to-date, you can install v13 by running `npm install discord.js` in your terminal or command prompt for text-only use, or `npm install discord.js @discordjs/opus` for voice support.
+Once you've got Node up-to-date, you can install v13 by running `npm install discord.js` in your terminal or command prompt for text-only use, or `npm install discord.js @discordjs/voice` for voice support.
 
 You can check your discord.js version with `npm list discord.js`. Should it still show v12.x, uninstall (`npm uninstall discord.js`) and re-install discord.js and make sure the entry in your package.json does not prevent a major version update. Please refer to the [npm documentation](https://docs.npmjs.com/files/package.json#dependencies) for this.
 
@@ -46,7 +46,7 @@ Support for voice has been separated into its own module. You now need to instal
 
 A popular request that has finally been heard - the `Client` class supports a new option, `makeCache` which accepts a `CacheFactory`.
 
-By combining this with the helper function `Options.cacheWithLimits` users can define custom caps on the caches of each Manager, and let discord.js handle the rest.
+By combining this with the helper function `Options.cacheWithLimits`, users can define limits on each Manager's cache, and let discord.js handle the rest.
 
 ```js
 const client = new Client({
@@ -57,7 +57,7 @@ const client = new Client({
 });
 ```
 
-Additional flexibility can be gained by providing a function which returns a custom cache implementation - keep in mind this should still maitain the Collector / Map-like interface for internal compatibility.
+Additional flexibility can be gained by providing a function which returns a custom cache implementation - keep in mind this should still maintain the Collector / Map-like interface for internal compatibility.
 
 ```js
 const client = new Client({
@@ -74,7 +74,7 @@ const client = new Client({
 
 With the introduction of Interactions and it becoming far common for users to want to send an embed with MessageOptions, methods that send messages now enforce a single param. 
 
-That can be either a string, an `APIMessage`, or that method's variant of `MessageOptions`.
+That can be either a string, a `MessagePayload`, or that method's variant of `MessageOptions`.
 
 Additionally, all messages sent by bots now support up to 10 embeds. As a result the `embed` option is completely removed, replaced with an `embeds` array which must be in the options object.
 
@@ -102,9 +102,9 @@ The `code` and `split` options have also been removed. This functionality will n
 
 ### Strings
 
-Many methods in discord.js that were documented as accepting strings would accept other types, and resolve this into a string on your behalf. The results of this behaviour were often undesirable, producing output such as `[object Object]`.
+Many methods in discord.js that were documented as accepting strings would accept other types, and resolve this into a string on your behalf. The results of this behavior were often undesirable, producing output such as `[object Object]`.
 
-Discord.js now enforces and validates string input on all methods that expect it. Users will need to manually call `toString()` or utilise template literals for all string inputs as appropriate.
+Discord.js now enforces and validates string input on all methods that expect it. Users will need to manually call `toString()` or utilize template literals for all string inputs as appropriate.
 
 The most common areas you will encounter this change in are `MessageOptions#content`, the properties of a `MessageEmbed`, and passing objects such as users or roles, expecting them to be stringified.
 
@@ -163,19 +163,13 @@ The casing of `thingID` properties has changed to `thingId`. This is a more-corr
 
 #### Client#message
 
-#### Client#interaction
+- The `message` event has been renamed to `messageCreate`, to bring the library in line with Discord's naming conventions.
 
-- `message` and `interaction` events have been renamed to `messageCreate` and `interactionCreate` respectively, to bring the library in line with Discord's naming conventions.
-
-Don't worry - the old names still work, but you'll receive a Deprecation Warning until you switch over.
+Don't worry - the old name still works, but you'll receive a Deprecation Warning until you switch over.
 
 ```diff
 - client.on("message", message => { ... });
 + client.on("messageCreate", message => { ... });
-
-- client.on("interaction", interaction => { ... });
-+ client.on("interactionCreate", interaction => { ... });
-```
 
 ### Snowflakes
 
@@ -659,13 +653,13 @@ Checks and typeguards if a channel is Text-Based; one of `TextChannel`, `DMChann
 
 #### Channel#isThread()
 
-Checks and typeguards if a channel is a Thread type.
+Checks and typeguards if a channel is a `ThreadChannel`.
 
 ### CollectorOptions
 
 #### CollectorOptions#filter
 
-Constructing a `Collector` without providing a filter function will now throw a meaningful `TypeError`.
+This parameter is now optional and will fall back to a function that always returns true if not provided.
 
 ### CommandInteraction
 
@@ -701,7 +695,7 @@ Provides API support for fetching the Guild's `WelcomeScreen`.
 
 #### Guild#fetchWidget
 
-Provides API support for the Guild's Widget, containing information about the guild and it's members.
+Provides API support for the Guild's Widget, containing information about the guild and its members.
 
 #### Guild#invites
 
@@ -709,7 +703,7 @@ Provides access to the new `GuildInviteManager`.
 
 #### Guild#nsfwLevel
 
-Guilds can now be marked as NSFW.
+The `Guild#nsfwLevel` property is now represented by the `NSFWLevel` enum.
 
 #### Guild#owner
 
@@ -790,7 +784,7 @@ Several methods were added to `GuildMemberManager` to provide API support for un
 
 `guild.members.edit('123456789012345678', data, reason)`
 
-Approximately equivalent to `GuildMember#edit(data, reason)` but does not resolve to a GuildMember.
+Equivalent to `GuildMember#edit(data, reason)`.
 
 #### GuildMemberManager#kick
 
@@ -808,15 +802,15 @@ Provides API support for querying GuildMembers via the REST API endpoint.
 
 #### GuildMemberRoleManager#botRole
 
-Gets the managed role this member created when joining the guild if any.
-
 `member.roles.botRole`
+
+Gets the managed role this member created when joining the guild if any.
 
 #### GuildMemberRoleManager#premiumSubscriberRole
 
-Gets the premium subscriber (booster) role if present on the member.
-
 `member.roles.premiumSubscriberRole`
+
+Gets the premium subscriber (booster) role if present on the member.
 
 ### GuildTemplate
 
@@ -838,7 +832,7 @@ For more information refer to the [Slash Commands](/interactions/replying-to-sla
 
 Provides a way for users to collect any type of Interaction.
 
-This class has a more flexible design that other Collectors, able to be bound to any Guild, Channel or Message as appropriate.
+This class has a more flexible design than other Collectors, able to be bound to any Guild, Channel or Message as appropriate.
 
 TypeScript developers can also leverage generics to define the subclass of Interaction that will be returned.
 
@@ -994,7 +988,7 @@ Gets the managed role a bot created when joining the guild, if any.
 
 `guild.roles.edit('12345678987654321', options)`
 
-Equivalent to `role.edit(options)`
+Equivalent to `role.edit(options)`.
 
 #### RoleManager#premiumSubscriberRole
 
@@ -1012,7 +1006,7 @@ Provides API support for Stage Channels.
 
 ### StageInstance
 
-Provides API support Stage Instances. Stage instances contain information about live stages.
+Provides API support for Stage Instances. Stage instances contain information about live stages.
 
 ### StageInstanceManager
 
@@ -1026,7 +1020,7 @@ Provides API support for Discord Stickers.
 
 #### TextChannel#awaitMessageComponent
 
-A shortcut method to create a promisified `InteractionCollector` which resolves to a single `MessageComponentInteraction`
+A shortcut method to create a promisified `InteractionCollector` which resolves to a single `MessageComponentInteraction`.
 
 #### TextChannel#createMessageComponentCollector
 
