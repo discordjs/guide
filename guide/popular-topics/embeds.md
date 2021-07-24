@@ -174,7 +174,7 @@ if (message.author.bot) {
 }
 ```
 
-### Attaching images
+## Attaching images
 
 You can upload images with your embedded message and use them as source for embed fields that support image urls by constructing a <DocsLink path="class/MessageAttachment">MessageAttachment</DocsLink> from them to send as message option alongside the embed. The attachment parameter takes a BufferResolvable or Stream including the URL to an external image.
 
