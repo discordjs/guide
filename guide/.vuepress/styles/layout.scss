@@ -40,8 +40,8 @@
 	}
 
 	.page {
-		padding-left: 0;
 		width: calc(100% - var(--sidebar-width));
+		padding-left: 0;
 
 		@media (max-width: 959px) {
 			width: calc(100% - var(--sidebar-width-mobile));

@@ -22,15 +22,15 @@ html.dark .DocSearch {
 		height: unset;
 		width: 100%;
 		font-size: 1em;
+		margin-left: 2rem;
 		padding: 0.875rem 0.75rem;
 		border-width: 0;
-		box-shadow: none;
 		border-radius: 0.375rem;
-		margin-left: 2rem;
+		box-shadow: none;
 
 		@media (max-width: 719px) {
-			width: unset;
 			background-color: unset;
+			width: unset;
 			margin-left: 0.5rem;
 		}
 

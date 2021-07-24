@@ -7,7 +7,6 @@
 
 .sidebar {
 	--c-bg-scrollbar: #ededed;
-
 	top: 4rem;
 	font-size: 14px;
 	border-right-width: 0;
@@ -31,8 +30,8 @@
 				padding-left: 1.25rem;
 
 				& > a {
-					border-bottom-width: 0;
 					margin-bottom: 0;
+					border-bottom-width: 0;
 
 					&:hover,
 					&.router-link-active {
@@ -60,10 +59,10 @@
 		}
 
 		.sidebar-heading {
-			font-size: 1em;
 			font-weight: 700;
-			text-transform: uppercase;
+			font-size: 1em;
 			border-left-width: 0;
+			text-transform: uppercase;
 		}
 
 		button.sidebar-heading {
