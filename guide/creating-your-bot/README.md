@@ -17,8 +17,8 @@ You can quickly create a new file using the `Ctrl + N` shortcut on your keyboard
 Once you've created a new file, do a quick check to see if you have everything setup correctly. Copy & paste the following code into your file and save it. Don't worry if you don't understand it right away—we explain more in-depth after this.
 
 ```js
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Client, Intents, MessageEmbed } = require('discord.js');
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -37,11 +37,11 @@ Don't feel like typing the file name each time? Open up your `package.json` file
 
 Here's the same code with comments, so it's easier to understand what's going on.
 ```js
-// require the discord.js module
-const Discord = require('discord.js');
+// require the needed discord.js classes
+const { Client, Intents } = require('discord.js');
 
 // create a new Discord client
-const client = new Discord.Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 // when the client is ready, run this code
 // this event will only trigger one time after logging in
