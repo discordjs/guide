@@ -80,11 +80,11 @@
 		}
 
 		.sidebar-item:not(.sidebar-heading) {
-			border-radius: 2px 0 0 2px;
+			border-radius: 0.125rem 0 0 0.125rem;
 
 			&.active {
 				color: var(--active-sidebar-link);
-				border-left-width: 4px;
+				border-left-width: 0.25rem;
 				border-left-color: var(--active-sidebar-link);
 			}
 

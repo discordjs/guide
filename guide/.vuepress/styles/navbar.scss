@@ -12,9 +12,9 @@ html.guide-theme-blurple {
 	color: var(--text-gray);
 	font-size: 1em;
 	margin: 0;
-	padding: 14px 12px;
+	padding: 0.875rem 0.75rem;
 	border-width: 0;
-	border-radius: 6px;
+	border-radius: 0.375rem;
 
 	&:hover,
 	&.router-link-active:hover {
@@ -31,7 +31,7 @@ html.guide-theme-blurple {
 	background-color: var(--nav-background-color);
 	display: flex;
 	align-items: center;
-	font-size: 14px;
+	font-size: 0.875rem;
 	padding: 0.5rem 0;
 	border-width: 0;
 	transition: none;
