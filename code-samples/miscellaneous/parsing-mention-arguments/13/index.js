@@ -1,7 +1,7 @@
-const Discord = require('discord.js');
-const config = require('./config.json');
+const { Client, Intents } = require('discord.js');
+const { prefix, token } = require('./config.json');
 
-const client = new Discord.Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 function getUserFromMention(mention) {
 	if (!mention) return;
@@ -28,10 +28,10 @@ function getUserFromMentionRegEx(mention) {
 	return client.users.cache.get(id);
 }
 
-client.on('message', async message => {
-	if (!message.content.startsWith(config.prefix)) return;
+client.on('messageCreate', async message => {
+	if (!message.content.startsWith(prefix)) return;
 
-	const withoutPrefix = message.content.slice(config.prefix.length);
+	const withoutPrefix = message.content.slice(prefix.length);
 	const split = withoutPrefix.split(/ +/);
 	const command = split[0];
 	const args = split.slice(1);
@@ -73,4 +73,4 @@ client.on('message', async message => {
 	}
 });
 
-client.login(config.token);
+client.login(token);
