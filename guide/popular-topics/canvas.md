@@ -33,10 +33,10 @@ After installing all the necessary software, run `npm i canvas` if you use npm o
 Here is the base code you'll be using to get started:
 
 ```js
-const Discord = require('discord.js');
+const { Client, Intents } = require('discord.js');
 const Canvas = require('canvas');
 
-const client = new Discord.Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -55,7 +55,7 @@ client.login('your-token-goes-here');
 To make testing this feature much more manageable, you can add a simple command that'll "fake" a new member joining.
 
 ```js
-client.on('message', message => {
+client.on('messageCreate', message => {
 	if (message.content === '!join') {
 		client.emit('guildMemberAdd', message.member);
 	}
