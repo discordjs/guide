@@ -6,7 +6,7 @@
 
 ### Barebones
 
-To add voice functionality to your discord.js bot, you will need the  `@discordjs/voice` package, as well as one of the encryption packages listed below. For example: 
+To add voice functionality to your discord.js bot, you will need the `@discordjs/voice` package, as well as one of the encryption packages listed below. For example: 
 
 ```bash
 npm install @discordjs/voice libsodium-wrappers
