@@ -32,7 +32,14 @@ client.login(token);
 
 Before anything, you may want to create a backup of your current bot file. If you've followed along so far, your entire folder structure should look something like this:
 
-![Current folder structure](./images/folder-structure.png)
+```:no-line-numbers
+discord-bot/
+├── node_modules
+├── config.json
+├── index.js
+├── package-lock.json
+└── package.json
+```
 
 In the same folder, create a new folder and name it `commands`. This is where you'll store all of your commands, of course. Head over to your `commands` folder, create a new file named `ping.js`, and copy & paste in the following code:
 
