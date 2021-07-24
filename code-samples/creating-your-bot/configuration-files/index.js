@@ -10,4 +10,4 @@ client.on('interactionCreate', interaction => {
 	console.log(interaction);
 });
 
-client.login('your-token-goes-here');
+client.login(config.token);

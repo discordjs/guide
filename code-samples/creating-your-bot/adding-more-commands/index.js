@@ -20,4 +20,4 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 
-client.login('your-token-goes-here');
+client.login(token);
