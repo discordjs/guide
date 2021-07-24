@@ -9,13 +9,13 @@ client.once('ready', () => {
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interacton.commandName === 'ping') {
+	if (interaction.commandName === 'ping') {
 		await interaction.reply('Pong!');
-	} else if (interacton.commandName === 'beep') {
+	} else if (interaction.commandName === 'beep') {
 		await interaction.reply('Boop!');
-	} else if (interacton.commandName === 'server') {
+	} else if (interaction.commandName === 'server') {
 		await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
-	} else if (interacton.commandName === 'user-info') {
+	} else if (interaction.commandName === 'user-info') {
 		await interaction.reply(`Your username: ${interaction.user.username}\nYour ID: ${interaction.user.id}`);
 	}
 });
