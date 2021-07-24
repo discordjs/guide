@@ -26,7 +26,7 @@ const client = new Client({ intents: ['GUILDS', 'GUILD_MESSAGES'] });
 ::: warning
 Note that discord.js relies heavily on caching to provide its functionality. Some methods that seem unrelated might stop working if certain events do not arrive.
 
-Please make sure to provide the list of gateway intents and partials you use in your Client constructor when asking for support on our [Discord server](https://discord.gg/bRCvFy9) or [GitHub repository](https://github.com/discordjs/discord.js).
+Please make sure to provide the list of gateway intents and partials you use in your Client constructor when asking for support on our [Discord server](https://discord.gg/djs) or [GitHub repository](https://github.com/discordjs/discord.js).
 :::
 
 ## The Intents Bitfield
