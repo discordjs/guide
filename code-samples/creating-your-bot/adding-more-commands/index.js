@@ -1,21 +1,23 @@
-const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
-const client = new Discord.Client();
+const { Client, Intents } = require('discord.js');
+const { token } = require('./config.json');
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('message', message => {
-	if (message.content === `${prefix}ping`) {
-		message.channel.send('Pong.');
-	} else if (message.content === `${prefix}beep`) {
-		message.channel.send('Boop.');
-	} else if (message.content === `${prefix}server`) {
-		message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
-	} else if (message.content === `${prefix}user-info`) {
-		message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
+client.on('interactionCreate', interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interacton.commandName === 'ping') {
+		await interaction.reply('Pong!');
+	} else if (interacton.commandName === 'beep') {
+		await interaction.reply('Boop!');
+	} else if (interacton.commandName === 'server') {
+		await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
+	} else if (interacton.commandName === 'user-info') {
+		await interaction.reply(`Your username: ${interaction.user.username}\nYour ID: ${interaction.user.id}`);
 	}
 });
 
-client.login(token);
+client.login('your-token-goes-here');
