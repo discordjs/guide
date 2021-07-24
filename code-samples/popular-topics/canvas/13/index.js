@@ -1,7 +1,7 @@
-const Discord = require('discord.js');
+const { Client, Intents } = require('discord.js');
 const Canvas = require('canvas');
 
-const client = new Discord.Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -52,7 +52,7 @@ client.on('guildMemberAdd', async member => {
 	channel.send(`Welcome to the server, ${member}!`, attachment);
 });
 
-client.on('message', message => {
+client.on('messageCreate', message => {
 	if (message.content === '!join') {
 		client.emit('guildMemberAdd', message.member);
 	}
