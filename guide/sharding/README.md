@@ -45,8 +45,8 @@ Here is some sample code for a `stats` command, without sharding taken into cons
 
 ```js
 // bot.js
-const { Client } = require('discord.js');
-const client = new Client();
+const { Client, Intents } = require('discord.js');
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const prefix = '!';
 
 client.on('messageCreate', message => {
