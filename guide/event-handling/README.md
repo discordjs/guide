@@ -5,10 +5,10 @@ Node.js uses an event-driven architecture, making it possible to execute code wh
 Here's the base code we'll be using:
 
 ```js
-const Discord = require('discord.js');
+const { Client, Intents } = require('discord.js');
 const { token } = require('./config.json');
 
-const client = new Discord.Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 client.once('ready', () => {
 	console.log('Ready!');
