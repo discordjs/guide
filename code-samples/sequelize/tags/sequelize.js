@@ -1,12 +1,12 @@
-const Discord = require('discord.js');
+const { Client, Intents } = require('discord.js');
 const Sequelize = require('sequelize');
 
-const client = new Discord.Client();
-const PREFIX = '!';
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const prefix = '!';
 
 /*
  * Make sure you are on at least version 5 of Sequelize! Version 4 as used in this guide will pose a security threat.
- * You can read more about this issue On the [Sequelize issue tracker](https://github.com/sequelize/sequelize/issues/7310).
+ * You can read more about this issue on the [Sequelize issue tracker](https://github.com/sequelize/sequelize/issues/7310).
  */
 
 const sequelize = new Sequelize('database', 'username', 'password', {
@@ -43,9 +43,9 @@ client.once('ready', () => {
 	Tags.sync();
 });
 
-client.on('message', async message => {
-	if (message.content.startsWith(PREFIX)) {
-		const input = message.content.slice(PREFIX.length).trim().split(' ');
+client.on('messageCreate', async message => {
+	if (message.content.startsWith(prefix)) {
+		const input = message.content.slice(prefix.length).trim().split(' ');
 		const command = input.shift();
 		const commandArgs = input.join(' ');
 
