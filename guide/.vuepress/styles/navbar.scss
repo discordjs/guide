@@ -12,9 +12,9 @@ html.guide-theme-blurple {
 	color: var(--text-gray);
 	font-size: 1em;
 	margin: 0;
-	padding: 14px 12px;
+	padding: 0.875rem 0.75rem;
 	border-width: 0;
-	border-radius: 6px;
+	border-radius: 0.375rem;
 
 	&:hover,
 	&.router-link-active:hover {
@@ -31,31 +31,24 @@ html.guide-theme-blurple {
 	background-color: var(--nav-background-color);
 	display: flex;
 	align-items: center;
-	font-size: 14px;
-	padding: 0.5rem 4rem;
+	font-size: 0.875rem;
+	padding: 0.5rem 0;
 	border-width: 0;
 	transition: none;
 
-	@media screen and (max-width: 719px) {
-		padding-left: 0.5rem;
-		padding-right: 0.5rem;
-	}
+	.navbar-wrapper {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		max-width: var(--wrapper-max-width);
+		margin: 0 auto;
+		padding-left: 2rem;
+		padding-right: 2rem;
+		box-sizing: border-box;
 
-	> span {
-		@media screen and (max-width: 719px) {
-			order: 1;
-			margin-right: auto;
-		}
-
-		// NOTE: Temporary tablet screen logo text bug fix
-		@media screen and (min-width: 719px) and (max-width: 950px) {
-			> a {
-				display: inline-block;
-				width: 8rem;
-				text-align: center;
-				line-height: 1.4rem;
-				box-sizing: border-box;
-			}
+		@media (max-width: 719px) {
+			padding-left: 0.5rem;
+			padding-right: 0.5rem;
 		}
 	}
 
@@ -65,10 +58,6 @@ html.guide-theme-blurple {
 		top: unset;
 		left: unset;
 		margin-left: 0.5rem;
-
-		@media screen and (max-width: 719px) {
-			order: 3;
-		}
 	}
 
 	.toggle-dark-button {
@@ -76,14 +65,22 @@ html.guide-theme-blurple {
 		margin-left: 2rem;
 		opacity: 1;
 
-		@media screen and (max-width: 719px) {
+		@media (max-width: 719px) {
 			margin-left: 0.5rem;
+		}
+
+		.dark-icon {
+			display: none;
+		}
+
+		.light-icon {
+			display: block;
 		}
 	}
 
 	.site-name {
-		font-size: 1em;
 		color: var(--text-gray);
+		font-size: 1em;
 	}
 
 	a {
@@ -98,16 +95,23 @@ html.guide-theme-blurple {
 		background-color: var(--nav-background-color);
 		display: flex;
 		align-items: center;
+		justify-content: space-between;
+		width: 100%;
 		position: relative;
-		right: 0;
 		top: 0;
+		right: 0;
 		padding-left: 0;
 
-		@media screen and (max-width: 719px) {
-			order: 2;
+		.navbar-links-container {
+			display: inline-flex;
+			align-items: center;
 		}
 
 		.navbar-links {
+			@media (max-width: 959px) {
+				display: none;
+			}
+
 			.navbar-links-item {
 				margin-left: 2rem;
 
@@ -125,6 +129,18 @@ html.guide-theme-blurple {
 
 		&:hover {
 			background-color: var(--nav-links-hover-color);
+		}
+	}
+}
+
+html.dark .navbar {
+	.toggle-dark-button {
+		.dark-icon {
+			display: block;
+		}
+
+		.light-icon {
+			display: none;
 		}
 	}
 }
