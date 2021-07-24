@@ -46,20 +46,20 @@ html.guide-theme-blurple {
 		padding-right: 2rem;
 		box-sizing: border-box;
 
-		@media screen and (max-width: 719px) {
+		@media (max-width: 719px) {
 			padding-left: 0.5rem;
 			padding-right: 0.5rem;
 		}
 	}
 
 	> span {
-		@media screen and (max-width: 719px) {
+		@media (max-width: 719px) {
 			order: 1;
 			margin-right: auto;
 		}
 
 		// NOTE: Temporary tablet screen logo text bug fix
-		@media screen and (min-width: 719px) and (max-width: 950px) {
+		@media (min-width: 719px) and (max-width: 950px) {
 			> a {
 				display: inline-block;
 				width: 8rem;
@@ -77,7 +77,7 @@ html.guide-theme-blurple {
 		left: unset;
 		margin-left: 0.5rem;
 
-		@media screen and (max-width: 719px) {
+		@media (max-width: 719px) {
 			order: 3;
 		}
 	}
@@ -87,7 +87,7 @@ html.guide-theme-blurple {
 		margin-left: 2rem;
 		opacity: 1;
 
-		@media screen and (max-width: 719px) {
+		@media (max-width: 719px) {
 			margin-left: 0.5rem;
 		}
 
@@ -124,7 +124,7 @@ html.guide-theme-blurple {
 		top: 0;
 		padding-left: 0;
 
-		@media screen and (max-width: 719px) {
+		@media (max-width: 719px) {
 			order: 2;
 		}
 
@@ -134,7 +134,7 @@ html.guide-theme-blurple {
 		}
 
 		.navbar-links {
-			@media screen and (max-width: 959px) {
+			@media (max-width: 959px) {
 				display: none;
 			}
 

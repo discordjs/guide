@@ -20,13 +20,13 @@
 	}
 
 	.navbar-links {
-		@media screen and (max-width: 959px) {
+		@media (max-width: 959px) {
 			display: block;
 			padding: 0.5rem;
 		}
 
 		.navbar-links-item {
-			@media screen and (max-width: 959px) {
+			@media (max-width: 959px) {
 				margin-left: 0;
 				padding-left: 1.25rem;
 
@@ -47,7 +47,7 @@
 	& > .sidebar-links {
 		padding: 1.25rem 0.5rem;
 
-		@media screen and (max-width: 719px) {
+		@media (max-width: 719px) {
 			padding: 0.5rem;
 		}
 
