@@ -1,3 +1,15 @@
+<style scoped>
+.emoji-container {
+	display: inline-block;
+}
+
+.emoji-container .emoji-image {
+	width: 22px;
+	height: 22px;
+	vertical-align: bottom;
+}
+</style>
+
 # Reactions
 
 ## Reacting to messages
@@ -25,7 +37,16 @@ client.login('your-token-goes-here');
 
 To react with a Unicode emoji, you will need the actual Unicode character of the emoji. There are many ways to get a Unicode character of an emoji, but the easiest way would be through Discord itself. If you send a message with a Unicode emoji (such as `:smile:`, for example) and put a `\` before it, it will "escape" the emoji and display the Unicode character instead of the standard emoji image.
 
-![Escaped unicode emoji](./images/escaped-unicode-emoji.png)
+<DiscordMessages>
+	<DiscordMessage profile="user">
+		Unicode emoji:
+		<span class="emoji-container">
+			<img class="emoji-image" title="smile" src="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f604.png" alt="" />
+		</span>
+		<br />
+		Escaped version (<DiscordMarkdown>`\:smile:`</DiscordMarkdown>): 😄
+	</DiscordMessage>
+</DiscordMessages>
 
 To react with an emoji, you need to use the `message.react()` method. Once you have the emoji character, all you need to do is copy & paste it as a string inside the `.react()` method!
 
@@ -37,25 +58,52 @@ client.on('messageCreate', message => {
 });
 ```
 
-![Unicode emoji reaction](./images/unicode-emoji-reaction.png)
+<DiscordMessages>
+	<DiscordMessage profile="user">
+		!react
+		<template #reactions>
+			<DiscordReactions>
+				<DiscordReaction name="smile" image="https://imgur.com/3TbnN4d.png" />
+			</DiscordReactions>
+		</template>
+	</DiscordMessage>
+</DiscordMessages>
 
 ### Custom emojis
 
 For custom emojis, there are multiple ways of reacting. Like Unicode emojis, you can also escape custom emojis. However, when you escape a custom emoji, the result will be different.
 
-![Escaped custom emoji](./images/escaped-custom-emoji.png)
+<DiscordMessages>
+	<DiscordMessage profile="user">
+		Custom emoji:
+		<span class="emoji-container">
+			<img class="emoji-image" title="blobreach" src="https://imgur.com/3Oar9gP.png" alt="" />
+		</span>
+		<br />
+		Escaped version (<DiscordMarkdown>`\:blobreach:`</DiscordMarkdown>): &lt;:blobreach:123456789012345678&gt;
+	</DiscordMessage>
+</DiscordMessages>
 
 This format is essentially the name of the emoji, followed by its ID. Copy & paste the ID into the `.react()` method as a string.
 
 ```js {2-4}
 client.on('messageCreate', message => {
 	if (message.content === '!react-custom') {
-		message.react('396548322053062656');
+		message.react('123456789012345678');
 	}
 });
 ```
 
-![Custom emoji reaction via ID](./images/custom-emoji-reaction.png)
+<DiscordMessages>
+	<DiscordMessage profile="user">
+		!react-custom
+		<template #reactions>
+			<DiscordReactions>
+				<DiscordReaction name="blobreach" image="https://imgur.com/3Oar9gP.png" />
+			</DiscordReactions>
+		</template>
+	</DiscordMessage>
+</DiscordMessages>
 
 Great! This route may not always be available to you, though. Sometimes you'll need to react with an emoji programmatically. To do so, you'll need to retrieve the emoji object.
 
@@ -72,7 +120,7 @@ Using `.find()`, your code would look something like this:
 
 ```js {2-3}
 if (message.content === '!react-custom') {
-	const reactionEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'ayy');
+	const reactionEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'blobreach');
 	message.react(reactionEmoji);
 }
 ```
@@ -100,10 +148,30 @@ client.on('messageCreate', message => {
 		message.react('🍇');
 	}
 });
-
 ```
 
-![Reaction race condition](./images/race-condition.png)
+<DiscordMessages>
+	<DiscordMessage profile="user">
+		!fruits
+		<DiscordReactions>
+			<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
+			<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
+			<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
+		</DiscordReactions>
+		!fruits
+		<DiscordReactions>
+			<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
+			<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
+			<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
+		</DiscordReactions>
+		!fruits
+		<DiscordReactions>
+			<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
+			<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
+			<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
+		</DiscordReactions>
+	</DiscordMessage>
+</DiscordMessages>
 
 As you can see, if you leave it like that, it won't display as you want. It was able to react correctly on the first try but reacts differently each time after that.
 
@@ -138,7 +206,38 @@ client.on('messageCreate', async message => {
 
 If you try again with either of the code blocks above, you'll get the result you originally wanted!
 
-![Emojis reacting in correct order](./images/reaction-correct-order.png)
+<DiscordMessages>
+	<DiscordMessage profile="user">
+		!fruits
+		<template #reactions>
+			<DiscordReactions>
+				<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
+				<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
+				<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
+			</DiscordReactions>
+		</template>
+	</DiscordMessage>
+	<DiscordMessage profile="user">
+		!fruits
+		<template #reactions>
+			<DiscordReactions>
+				<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
+				<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
+				<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
+			</DiscordReactions>
+		</template>
+	</DiscordMessage>
+	<DiscordMessage profile="user">
+		!fruits
+		<template #reactions>
+			<DiscordReactions>
+				<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
+				<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
+				<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
+			</DiscordReactions>
+		</template>
+	</DiscordMessage>
+</DiscordMessages>
 
 ::: tip
 If you aren't familiar with Promises or `async`/`await`, you can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [our guide page on async/await](/additional-info/async-await.md)!

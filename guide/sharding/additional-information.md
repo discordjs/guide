@@ -36,11 +36,13 @@ You can also send messages via `process.send('hello')`, which would not contain 
 There might be times where you want to target a specific shard. An example would be to kill a specific shard that isn't working as intended. You can achieve this by taking the following snippet (in a command, preferably):
 
 ::: tip
-In discord.js v12, <DocsLink path="class/ShardClientUtil?scrollTo=ids">`client.shard`</DocsLink> can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
+In discord.js v13, <DocsLink path="class/ShardClientUtil?scrollTo=ids">`client.shard`</DocsLink> can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
 :::
 
 ```js
-client.shard.broadcastEval('if (this.shard.ids.includes(0)) process.exit();');
+client.shard.broadcastEval(c => {
+	if (c.shard.ids.includes(0)) process.exit();
+});
 ```
 
 If you're using something like [PM2](http://pm2.keymetrics.io/) or [Forever](https://github.com/foreverjs/forever), this is an easy way to restart a specific shard. Remember, <DocsLink path="class/ShardClientUtil?scrollTo=broadcastEval">Shard#broadcastEval</DocsLink> sends a message to **all** shards, so you have to check if it's on the shard you want.
@@ -75,50 +77,23 @@ You can access them later as usual via `process.argv`, which contains an array o
 
 ## Eval arguments
 
-There may come the point where you will want to pass functions or arguments from the outer scope into a `.broadcastEval()` call.
+There may come the point where you will want to pass arguments from the outer scope into a `.broadcastEval()` call.
 
 ```js
-client.shard.broadcastEval(`(${funcName})('${arg}')`);
+function funcName(c, { arg }) {
+	// ...
+}
+
+client.shard.broadcastEval(funcName, { context: { arg: 'arg' } });
 ```
 
-In this small snippet, an entire function is passed to the eval. It needs to be encased in parenthesis; it will throw errors on its way there otherwise. Another set of parenthesis is required so that the function gets called. Finally, the passing of the argument itself, which slightly varies, depending on the type of argument you are passing. If it's a string, you must wrap it in quotes, or it will be interpreted as is and will throw a syntax error because it won't be a string by the time it gets there.
+The <DocsLink path="typedef/BroadcastEvalOptions">`BroadcastEvalOptions`</DocsLink> typedef was introduced in discord.js v13 as the second parameter in `.broadcastEval()`.
+It accepts two properties: `shard` and `context`. The `context` property will be sent as the second argument to your function.
 
-Now, what if you wanted to call a function from *within* the client context? That is to say, you are not passing a function. It would look something like this:
+In this small snippet, an argument is passed to the `funcName` function through this parameter.
+The function will recieve the arguments as an object as the second parameter.
 
-```js
-client.shard.broadcastEval(`this.${funcName}(${args});`);
-```
-
-This would become `client.funcName(args)` once it gets through. This is handy if you, for example, have extended your client object with your class and wish to call some of its methods manually.
-
-### Asynchronous functions
-
-There may be a time when you want to have your shard process an asynchronous function. Here's how you can do that!
-
-```js
-client.shard.broadcastEval(`
-	let channel = this.channels.cache.get('id');
-	let msg;
-	if (channel) {
-		msg = channel.messages.fetch('id').then(m => m.id);
-	}
-	msg;
-`);
-```
-
-This snippet allows you to return fetched messages outside of the `broadcastEval`, letting you know whether or not you were able to retrieve a message, for example. Remember, you aren't able to return entire objects outside. Now, what if we wanted to use `async/await` syntax inside?
-
-```js
-client.shard.broadcastEval(`
-	(async () => {
-		let channel = this.channels.cache.get('id');
-		let msg;
-		if (channel) {
-			msg = await channel.messages.fetch('id').then(m => m.id);
-		}
-		return msg;
-	})();
-`);
-```
-
-This example will work the same, but you can produce cleaner code with `async/await`. Additionally, what this does is declare an asynchronous function and then immediately call it. As it is also the last declared line, it is effectively being returned. Remember that you need to `return` an item inside a function one way or another.
+::: warning
+The `context` option only accepts properties which are JSON-serializable. This means you cannot pass complex data types in the context directly.
+For example, if you sent a `User` instance, the function would recieve the raw data object.
+:::

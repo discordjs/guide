@@ -37,6 +37,30 @@ export default {
 			],
 		},
 	],
+	'/voice/': [
+		{
+			text: 'Home',
+			children: [
+				'/',
+				'/requesting-more-content.md',
+			],
+		},
+		{
+			text: 'Getting Started',
+			children: [
+				'/voice/',
+			],
+		},
+		{
+			text: 'Library',
+			children: [
+				'/voice/life-cycles.md',
+				'/voice/voice-connections.md',
+				'/voice/audio-player.md',
+				'/voice/audio-resources.md',
+			],
+		},
+	],
 	'/': [
 		{
 			text: 'Home',
@@ -129,17 +153,6 @@ export default {
 			text: 'OAuth2',
 			children: [
 				'/oauth2/',
-			],
-		},
-		{
-			text: 'Voice',
-			children: [
-				'/voice/',
-				'/voice/understanding-voice.md',
-				'/voice/the-basics.md',
-				'/voice/voice-broadcasts.md',
-				'/voice/optimisation-and-troubleshooting.md',
-				'/voice/receiving-audio.md',
 			],
 		},
 		{
