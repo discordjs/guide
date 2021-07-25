@@ -73,7 +73,7 @@ client.on('messageCreate', message => {
 			.catch(console.error);
 	} else if (message.content === '!create-private') {
 		message.guild.channels.create('private', {
-			type: 'GUILD_TEXT', 
+			type: 'GUILD_TEXT',
 			permissionOverwrites: [
 				{
 					id: message.guild.id,
