@@ -150,12 +150,6 @@ export default {
 			],
 		},
 		{
-			text: 'Voice',
-			children: [
-				'/voice/',
-			],
-		},
-		{
 			text: 'Improving Your Dev Environment',
 			children: [
 				'/improving-dev-environment/pm2.md',
