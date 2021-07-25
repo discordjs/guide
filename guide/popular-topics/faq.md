@@ -136,10 +136,10 @@ If you would like to set your activity upon startup, you can use the `ClientOpti
 
 ```js
 const { Client, Intents } = require('discord.js');
+
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 const prefix = '!';
-
 const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 client.on('messageCreate', message => {
@@ -250,7 +250,7 @@ If you want to learn more about this syntax or reaction collectors, check out [t
 <!-- eslint-skip -->
 
 ```js
-const blockedUsers = [ 'id1', 'id2' ];
+const blockedUsers = ['id1', 'id2'];
 <client>.on('messageCreate', message => {
 	if (blockedUsers.includes(message.author.id)) return;
 });
@@ -335,10 +335,15 @@ If you want to learn more about intents, check out [this dedicated guide on inte
 client.on('guildMemberUpdate', (oldMember, newMember) => {
 	// If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
 	const removedRoles = oldMember.roles.cache.filter(role => !newMember.roles.cache.has(role.id));
-	if (removedRoles.size > 0) console.log(`The roles ${removedRoles.map(r => r.name)} were removed from ${oldMember.displayName}.`);
+	if (removedRoles.size > 0) {
+		console.log(`The roles ${removedRoles.map(r => r.name)} were removed from ${oldMember.displayName}.`);
+	}
+
 	// If the role(s) are present on the new member object but are not on the old one (i.e role(s) were added)
 	const addedRoles = newMember.roles.cache.filter(role => !oldMember.roles.cache.has(role.id));
-	if (addedRoles.size > 0) console.log(`The roles ${addedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
+	if (addedRoles.size > 0) {
+		console.log(`The roles ${addedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
+	}
 });
 ```
 
@@ -385,18 +390,25 @@ npm install ffmpeg-static # ffmpeg windows
 <!-- eslint-skip -->
 
 ```js
-// ...
-
 const ytdl = require('ytdl-core');
-const { AudioPlayerStatus, StreamType, createAudioPlayer, createAudioResource, joinVoiceChannel } = require('@discordjs/voice');
+const {
+	AudioPlayerStatus,
+	StreamType,
+	createAudioPlayer,
+	createAudioResource,
+	joinVoiceChannel,
+} = require('@discordjs/voice');
+
+// ...
 
 const connection = joinVoiceChannel({
 	channelId: <voiceChannel>.id,
 	guildId: <guild>.id,
-	adapterCreator: <guild>.voiceAdapterCreator
-})
+	adapterCreator: <guild>.voiceAdapterCreator,
+});
+
 const stream = ytdl('<youtubelink>', { filter: 'audioonly' });
-const resource = createAudioResource(stream, { inputType: StreamType.Arbitrary  })
+const resource = createAudioResource(stream, { inputType: StreamType.Arbitrary });
 const player = createAudioPlayer();
 
 player.play(resource);
@@ -434,7 +446,7 @@ module.exports = {
 
 ```js
 // index.js
-const emojiCharacters = require('./emojiCharacters');
+const emojiCharacters = require('./emojiCharacters.js');
 
 console.log(emojiCharacters.a); // 🇦
 console.log(emojiCharacters[10]); // 🔟
