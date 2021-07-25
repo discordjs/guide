@@ -39,6 +39,10 @@ const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 				link: '/commando/',
 			},
 			{
+				text: 'Voice',
+				link: '/voice/',
+			},
+			{
 				text: 'Documentation',
 				link: 'https://discord.js.org/#/docs/main/stable/general/welcome',
 			},

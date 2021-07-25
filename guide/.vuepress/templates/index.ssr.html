@@ -15,9 +15,24 @@
 		}
 	</style>
 	<script>
-		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-			document.documentElement.classList.toggle('dark', true);
-		}
+		(() => {
+			const { classList } = document.documentElement;
+			const userMode = localStorage.getItem('guide-color-scheme');
+			const systemDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+			if (userMode === 'dark' || (userMode !== 'light' && systemDarkMode)) {
+				classList.toggle('dark', true);
+			}
+
+			const themes = ['blurple'];
+			let colorTheme = localStorage.getItem('guide-color-theme');
+
+			if (colorTheme !== 'default' && !themes.includes(colorTheme)) {
+				colorTheme = 'default';
+			}
+
+			if (colorTheme !== 'default') classList.add(`guide-theme-${colorTheme}`);
+		})();
 	</script>
 <!--vuepress-ssr-head-->
 <!--vuepress-ssr-resources-->

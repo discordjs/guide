@@ -7,7 +7,6 @@
 
 .sidebar {
 	--c-bg-scrollbar: #ededed;
-
 	top: 4rem;
 	font-size: 14px;
 	border-right-width: 0;
@@ -20,31 +19,71 @@
 	}
 
 	.navbar-links {
-		@media screen and (max-width: 719px) {
+		@media (max-width: 959px) {
+			display: block;
 			padding: 0.5rem;
+		}
+
+		.navbar-links-item {
+			@media (max-width: 959px) {
+				margin-left: 0;
+				padding-left: 1.25rem;
+
+				& > a {
+					margin-bottom: 0;
+					border-bottom-width: 0;
+
+					&:hover,
+					&.router-link-active {
+						color: var(--c-text-accent);
+						border-bottom-width: 0;
+					}
+				}
+			}
 		}
 	}
 
 	& > .sidebar-links {
-		padding: 0 0.5rem 1.25rem;
+		padding: 1.25rem 0.5rem;
 
-		@media screen and (max-width: 719px) {
-			padding: 0 0.5rem 0.5rem;
+		@media (max-width: 719px) {
+			padding: 0.5rem;
+		}
+
+		.sidebar-group {
+			&.sidebar-group-collapsed {
+				.sidebar-heading .menu-icon {
+					transform: rotate(-90deg);
+				}
+			}
 		}
 
 		.sidebar-heading {
-			font-size: 1em;
 			font-weight: 700;
-			text-transform: uppercase;
+			font-size: 1em;
 			border-left-width: 0;
+			text-transform: uppercase;
+		}
+
+		button.sidebar-heading {
+			background: none;
+			display: inline-flex;
+			align-items: center;
+			border: none;
+			cursor: pointer;
+
+			.menu-icon {
+				width: 1.5em;
+				height: 1.5em;
+			}
 		}
 
 		.sidebar-item:not(.sidebar-heading) {
-			border-radius: 2px 0 0 2px;
+			border-radius: 0.125rem 0 0 0.125rem;
 
 			&.active {
 				color: var(--active-sidebar-link);
-				border-left-width: 4px;
+				border-left-width: 0.25rem;
 				border-left-color: var(--active-sidebar-link);
 			}
 

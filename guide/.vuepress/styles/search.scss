@@ -12,21 +12,25 @@ html.dark .DocSearch {
 	--docsearch-key-shadow: 0 0 0 1px var(--theme-560);
 }
 
+.navbar .navbar-search {
+	display: inline-flex;
+}
+
 .DocSearch {
 	&.DocSearch-Button {
 		color: var(--text-gray);
 		height: unset;
 		width: 100%;
 		font-size: 1em;
-		padding: 14px 12px;
-		border-width: 0;
-		box-shadow: none;
-		border-radius: 0.375rem;
 		margin-left: 2rem;
+		padding: 0.875rem 0.75rem;
+		border-width: 0;
+		border-radius: 0.375rem;
+		box-shadow: none;
 
-		@media screen and (max-width: 719px) {
-			width: unset;
+		@media (max-width: 719px) {
 			background-color: unset;
+			width: unset;
 			margin-left: 0.5rem;
 		}
 
@@ -45,23 +49,45 @@ html.dark .DocSearch {
 				width: 1rem;
 				height: 1rem;
 
-				@media screen and (max-width: 719px) {
+				@media (max-width: 719px) {
 					width: 1.25rem;
 					height: 1.25rem;
 				}
 			}
 
 			.DocSearch-Button-Placeholder {
-				padding: 0 0 0 0.75rem;
+				padding: 0 1rem;
+
+				@media (max-width: 750px) {
+					display: inline-block;
+				}
+
+				@media (max-width: 719px) {
+					display: none;
+				}
 			}
 		}
 
-		.DocSearch-Button-Key {
-			color: #fff;
-			background: unset;
-			height: unset;
-			top: 0;
-			padding-bottom: 0;
+		.DocSearch-Button-Keys {
+			@media (max-width: 719px) {
+				display: none;
+			}
+
+			.DocSearch-Button-Key {
+				@media (max-width: 750px) {
+					display: flex;
+				}
+
+				color: #fff;
+				background: unset;
+				height: unset;
+				top: 0;
+				padding-bottom: 0;
+
+				&:last-of-type {
+					margin-right: 0;
+				}
+			}
 		}
 	}
 

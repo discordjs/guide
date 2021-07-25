@@ -4,7 +4,7 @@ const path = require('path');
 const client = new CommandoClient({
 	commandPrefix: '?',
 	owner: '278305350804045834',
-	invite: 'https://discord.gg/bRCvFy9',
+	invite: 'https://discord.gg/djs',
 });
 
 client.registry

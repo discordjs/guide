@@ -1,36 +1,80 @@
 # Introduction
 
-"Voice" refers to the ability of a bot to send audio in voice channels. discord.js makes it easy for you to get up and running with voice!
+"Voice" refers to Discord bots being able to send audio in voice channels. This is supported in discord.js via [@discordjs/voice](https://github.com/discordjs/voice), a standalone library made by the developers of discord.js. While you can use it with any Node.js Discord API library, this guide will focus on using it with discord.js.
 
-## Quick example
-```js
-async function play(voiceChannel) {
-	const connection = await voiceChannel.join();
-	connection.play('audio.mp3');
-}
+## Installation
+
+### Barebones
+
+To add voice functionality to your discord.js bot, you will need the `@discordjs/voice` package, as well as one of the encryption packages listed below. For example: 
+
+```bash
+npm install @discordjs/voice libsodium-wrappers
 ```
 
-## Installing dependencies
+After this, you'll be able to play Ogg and WebM Opus files without any other dependencies. If you want to play audio from other sources, or want to improve performance, consider installing some of the extra dependencies listed below.
 
-At the bare minimum, you'll need:
+::: warning
+This guide assumes you have installed at least one additional dependency – FFmpeg. More information on this can be found in the
+section below.
+:::
 
-- An Opus library:
+### Extra Dependencies
+
+- An Opus encoding library
   - [`@discordjs/opus`](https://github.com/discordjs/opus) (best performance)
-  - [`node-opus`](https://github.com/Rantanen/node-opus/)
   - [`opusscript`](https://github.com/abalabahaha/opusscript/)
-
-You may also choose to install the following dependencies.
-
-- FFmpeg (recommended) – allows you to play a range of media (e.g. MP3s).
-  - **This guide will assume you have installed FFmpeg.**
+- FFmpeg – allows you to play a range of media (e.g. MP3s).
   - [`ffmpeg`](https://ffmpeg.org/) - install and add to your system environment
   - [`ffmpeg-static`](https://www.npmjs.com/package/ffmpeg-static) - to install FFmpeg via npm
-- Faster encryption packages
+- Encryption packages
   - [`sodium`](https://www.npmjs.com/package/sodium) (best performance)
   - [`libsodium-wrappers`](https://www.npmjs.com/package/libsodium-wrappers)
+  - [`tweetnacl`](https://www.npmjs.com/package/tweetnacl)
 
 ::: tip
 Outside a development environment, it is recommended for you to use `@discordjs/opus` and `sodium` to improve performance and improve the stability of audio playback!
 
 If you're struggling to install these dependencies, make sure you have build tools installed first. On Windows, this is as easy as running `npm install --global --production --vs2015 --add-python-to-path windows-build-tools`!
 :::
+
+## Debugging Dependencies
+
+The library includes a helper function that helps you to find out which dependencies you've successfully installed. This information is also very helpful if you ever need to submit an issue on the `@discordjs/voice` issue tracker.
+
+```js
+const { generateDependencyReport } = require('@discordjs/voice');
+
+console.log(generateDependencyReport());
+
+/*
+--------------------------------------------------
+Core Dependencies
+- @discordjs/voice: 0.3.1
+- prism-media: 1.2.9
+
+Opus Libraries
+- @discordjs/opus: 0.5.3
+- opusscript: not found
+
+Encryption Libraries
+- sodium: 3.0.2
+- libsodium-wrappers: not found
+- tweetnacl: not found
+
+FFmpeg
+- version: 4.2.4-1ubuntu0.1
+- libopus: yes
+--------------------------------------------------
+*/
+```
+
+- **Core Dependencies**
+  - These are dependencies that should definitely be available.
+- **Opus Libraries**
+  - If you want to play audio from many different file types, or alter volume in real-time, you will need to have one of these.
+- **Encryption Libraries**
+  - You should have at least one encryption library installed to use `@discordjs/voice`.
+- **FFmpeg**
+  - If you want to play audio from many different file types, you will need to have FFmpeg installed.
+  - If `libopus` is enabled, you will be able to benefit from increased performance if real-time volume alteration is disabled.

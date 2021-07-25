@@ -28,7 +28,7 @@ The next step is to create a new CommandoClient. There are also a few options yo
 const client = new CommandoClient({
 	commandPrefix: '?',
 	owner: '278305350804045834',
-	invite: 'https://discord.gg/bRCvFy9',
+	invite: 'https://discord.gg/djs',
 });
 ```
 
