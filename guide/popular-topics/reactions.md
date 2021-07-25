@@ -21,7 +21,9 @@ Here's the base code we'll be using:
 ```js
 const { Client, Intents } = require('discord.js');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({
+	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
+});
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -355,7 +357,7 @@ If you use [gateway intents](/popular-topics/intents.md) but can't or don't want
 const { Client, Intents } = require('discord.js');
 
 const client = new Client({
-	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
 	partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
 });
 
