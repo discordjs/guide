@@ -277,10 +277,10 @@ Note that this is just a showcase of how you could do such a check.
 
 ```js
 <message>.channel.send('My message to react to.').then(sentMessage => {
-	// Unicode emoji.
+	// Unicode emoji
 	sentMessage.react('👍');
 
-	// Custom emoji.
+	// Custom emoji
 	sentMessage.react('123456789012345678');
 	sentMessage.react('<emoji:123456789012345678>');
 	sentMessage.react('<a:emoji:123456789012345678>');
@@ -388,12 +388,12 @@ npm install ffmpeg-static # ffmpeg windows
 // ...
 
 const ytdl = require('ytdl-core');
-const { AudioPlayerStatus, createAudioPlayer, createAudioResource, joinVoiceChannel, StreamType } = require('@discordjs/voice');
+const { AudioPlayerStatus, StreamType, createAudioPlayer, createAudioResource, joinVoiceChannel } = require('@discordjs/voice');
 
 const connection = joinVoiceChannel({
-	channelId: <voiceChannel id>,
-	guildId: <guild id>,
-	adapterCreator: <guild voiceAdapterCreator>
+	channelId: <voiceChannel>.id,
+	guildId: <guild>.id,
+	adapterCreator: <guild>.voiceAdapterCreator
 })
 const stream = ytdl('<youtubelink>', { filter: 'audioonly' });
 const resource = createAudioResource(stream, { inputType: StreamType.Arbitrary  })
