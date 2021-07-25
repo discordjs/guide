@@ -46,12 +46,6 @@ export default {
 			],
 		},
 		{
-			text: 'Getting Started',
-			children: [
-				'/voice/',
-			],
-		},
-		{
 			text: 'Library',
 			children: [
 				'/voice/life-cycles.md',
@@ -153,17 +147,6 @@ export default {
 			text: 'OAuth2',
 			children: [
 				'/oauth2/',
-			],
-		},
-		{
-			text: 'Voice',
-			children: [
-				'/voice/',
-				'/voice/understanding-voice.md',
-				'/voice/the-basics.md',
-				'/voice/voice-broadcasts.md',
-				'/voice/optimisation-and-troubleshooting.md',
-				'/voice/receiving-audio.md',
 			],
 		},
 		{
