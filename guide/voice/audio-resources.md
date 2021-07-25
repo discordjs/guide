@@ -131,7 +131,7 @@ const { demuxProbe, createAudioResource } = require('@discordjs/voice');
 const { createReadStream } = require('fs');
 
 async function probeAndCreateResource(readableStream) {
-	const { stream, type } = await demuxeProbe(readableStream);
+	const { stream, type } = await demuxProbe(readableStream);
 	return createAudioResource(stream, { inputType: type });
 }
 
