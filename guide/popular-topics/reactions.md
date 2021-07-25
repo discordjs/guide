@@ -357,7 +357,10 @@ If you use [gateway intents](/popular-topics/intents.md) but can't or don't want
 
 ```js
 const { Client, Intents } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES], partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
+const client = new Client({ 
+	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES], 
+	partials: ['MESSAGE', 'CHANNEL', 'REACTION'] 
+});
 
 client.on('messageReactionAdd', async (reaction, user) => {
 	// When a reaction is received, check if the structure is partial
