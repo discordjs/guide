@@ -1,11 +1,11 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Client, Intents } = require('discord.js');
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('message', message => {
+client.on('messageCreate', message => {
 	if (message.content === '!react-await') {
 		message.react('👍').then(() => message.react('👎'));
 
@@ -13,7 +13,7 @@ client.on('message', message => {
 			return ['👍', '👎'].includes(reaction.emoji.name) && user.id === message.author.id;
 		};
 
-		message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+		message.awaitReactions({ filter, max: 1, time: 60000, errors: ['time'] })
 			.then(collected => {
 				const reaction = collected.first();
 
