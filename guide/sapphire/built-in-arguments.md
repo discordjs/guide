@@ -26,7 +26,7 @@ To facilitate with getting your bot running, Sapphire Framework defines a large 
 - `user`: Resolves to a `User` instance, given a user mention or ID.
 
 :::tip
-They can be used anytime using the `Args` class, and can be accessed via `container.stores.get('arguments')`.
+They can be used anytime with the `Args` class, and can be accessed via `container.stores.get('arguments')`.
 :::
 
 :::warning Overriding

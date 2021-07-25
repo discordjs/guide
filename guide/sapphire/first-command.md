@@ -10,32 +10,22 @@ To create a command in Sapphire, the `Command` class needs to be imported from `
 ::: code-group-item CommonJS
 ```js
 const { Command } = require('@sapphire/framework');
+
+module.exports = class PingCommand extends Command {};
+// exports.default = class PingCommand extends Command {};
+// exports.myCommand = class PingCommand extends Command {};
 ```
 :::
 ::: code-group-item ESM
 ```js
 import { Command } from '@sapphire/framework';
+
+export default class PingCommand extends Command {}
+// export class PingCommand extends Command {}
 ```
 :::
 ::::
 
-Commands are classes that are exported in any of the following ways:
-
-:::: code-group
-::: code-group-item CommonJS
-```js
-module.exports = class Foo extends Piece {};
-exports.default = class Foo extends Piece {};
-exports.myCommand = class Foo extends Piece {};
-```
-:::
-::: code-group-item ESM
-```js
-export default class DefaultFoo extends Piece {}
-export class Foo extends Piece {}
-```
-:::
-::::
 
 `module.exports` will be used for these pages. Let's begin populating the command class:
 
@@ -50,14 +40,14 @@ module.exports = class PingCommand extends Command {
 };
 ```
 
-Don't let this scare you; it's straightforward.
+An overview of what's defined in the constructor:
 
-- `context` is an object that contains some file metadata required by the `Command` and `Piece` (which `Command` extends) require in order to function.
-- `name` is, by default, the name of the file without the extension, e.g. `ping.js` becomes `ping`, so we don't need to define it.
-- `aliases` are other ways users can call the command. You can have as many as you want!
-- `description` is the help text displayed when somebody uses a help command.
+- `context`: an object that contains file metadata required by the `Piece` class (which `Command` extends) in order to function.
+- `name`: by default, the name of the file without the extension, i.e. `ping.js` becomes `ping`, so there's no need to define it.
+- `aliases`: other ways users can call the command. You can have as many as you want!
+- `description`: the text displayed when the help command is used.
 
-There are many more properties you can use. The upcoming sections will explain those.
+There are many other properties available, explained in upcoming sections.
 
 ## Creating the `run` method
 
@@ -81,11 +71,9 @@ module.exports = class PingCommand extends Command {
 
 <!-- eslint-enable constructor-super -->
 
-As you can see, the `run` method is simply the code you want the bot to run when somebody uses the command. This code can be anything you can do in core discord.js, as Sapphire Framework is simply an extension.
+Any discord.js code can be executed here, since Sapphire Framework is an extension of it. The command can be triggered with `@bot ping` or `@bot pong`.
 
 <!-- TODO(kyranet): Add a mention for editable commands once I make the plugin for it. -->
-
-Now fire up the bot as usual and use your command! It should automatically be `@bot ping` to use it.
 
 ## Resulting code
 
