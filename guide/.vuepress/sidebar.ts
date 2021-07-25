@@ -159,11 +159,6 @@ export default {
 			text: 'Voice',
 			children: [
 				'/voice/',
-				'/voice/understanding-voice.md',
-				'/voice/the-basics.md',
-				'/voice/voice-broadcasts.md',
-				'/voice/optimisation-and-troubleshooting.md',
-				'/voice/receiving-audio.md',
 			],
 		},
 		{
