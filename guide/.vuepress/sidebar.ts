@@ -46,6 +46,12 @@ export default {
 			],
 		},
 		{
+			text: 'Getting Started',
+			children: [
+				'/voice/',
+			],
+		},
+		{
 			text: 'Library',
 			children: [
 				'/voice/life-cycles.md',
