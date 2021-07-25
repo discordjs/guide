@@ -1,12 +1,10 @@
 # Your first command
 
-Now that you have created the `commands` folder, you're ready to make your first command file! In Sapphire, we usually define one command per file, but you can also define groups of them. Hop over to your `commands` folder, and create a new file, we'll show how to make a ping command, so we will name this `ping.js`. This is going to be a simple command that replies to a message and then edits with the elapsed time. We'll go into arguments and other features later.
+Create a `commands` folder in the same directory as your `main` file. Normally only one command is defined per file, but you can also define groups of them. Create a `ping.js` file in your `commands` folder, which will send a message and then edit it with the elapsed time. Arguments and other features are covered in other pages.
 
-Once you have your file, it's time to get started!
+## Creating a command class
 
-## Creating your command class
-
-Before you do anything, at the start of your file, you're going to need to require Sapphire Framework again, specifically its Command class.
+To create a command in Sapphire, the `Command` class needs to be imported from `@sapphire/framework`. A command can be exported through default or named exports.
 
 :::: code-group
 ::: code-group-item CommonJS
@@ -39,7 +37,7 @@ export class Foo extends Piece {}
 :::
 ::::
 
-Because its spread usage, we will be using `module.exports` in all the guides, so let's create the class and set `module.exports` to it!
+`module.exports` will be used for these pages. Let's begin populating the command class:
 
 ```js
 module.exports = class PingCommand extends Command {
@@ -61,13 +59,13 @@ Don't let this scare you; it's straightforward.
 
 There are many more properties you can use. The upcoming sections will explain those.
 
-## Creating your run method
+## Creating the `run` method
 
-The next thing you're going to need is a `run` method. This should go right below the command's constructor. Inside, you'll run the command's logic:
+Commands have a `run` method, which executes the command logic. Define this below the command's constructor:
 
 <!-- eslint-disable constructor-super -->
 
-```js {6-8}
+```js {7-9}
 module.exports = class PingCommand extends Command {
 	constructor(context) {
 		// ...
