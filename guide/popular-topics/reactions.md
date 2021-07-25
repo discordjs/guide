@@ -39,7 +39,10 @@ To react with a Unicode emoji, you will need the actual Unicode character of the
 
 <DiscordMessages>
 	<DiscordMessage profile="user">
-		Unicode emoji: <span class="emoji-container"><img src="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f604.png" class="emoji-image" alt="😄" /></span>
+		Unicode emoji:
+		<span class="emoji-container">
+			<img class="emoji-image" title="smile" src="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f604.png" alt="" />
+		</span>
 		<br />
 		Escaped version (<DiscordMarkdown>`\:smile:`</DiscordMarkdown>): 😄
 	</DiscordMessage>
@@ -72,7 +75,10 @@ For custom emojis, there are multiple ways of reacting. Like Unicode emojis, you
 
 <DiscordMessages>
 	<DiscordMessage profile="user">
-		Custom emoji: <span class="emoji-container"><img src="https://imgur.com/3Oar9gP.png" class="emoji-image" alt="blobreach" /></span>
+		Custom emoji:
+		<span class="emoji-container">
+			<img class="emoji-image" title="blobreach" src="https://imgur.com/3Oar9gP.png" alt="" />
+		</span>
 		<br />
 		Escaped version (<DiscordMarkdown>`\:blobreach:`</DiscordMarkdown>): &lt;:blobreach:123456789012345678&gt;
 	</DiscordMessage>
@@ -147,33 +153,23 @@ client.on('message', message => {
 <DiscordMessages>
 	<DiscordMessage profile="user">
 		!fruits
-		<template #reactions>
-			<DiscordReactions>
-				<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
-				<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
-				<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
-			</DiscordReactions>
-		</template>
-	</DiscordMessage>
-	<DiscordMessage profile="user">
+		<DiscordReactions>
+			<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
+			<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
+			<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
+		</DiscordReactions>
 		!fruits
-		<template #reactions>
-			<DiscordReactions>
-				<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
-				<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
-				<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
-			</DiscordReactions>
-		</template>
-	</DiscordMessage>
-	<DiscordMessage profile="user">
+		<DiscordReactions>
+			<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
+			<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
+			<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
+		</DiscordReactions>
 		!fruits
-		<template #reactions>
-			<DiscordReactions>
-				<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
-				<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
-				<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
-			</DiscordReactions>
-		</template>
+		<DiscordReactions>
+			<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
+			<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
+			<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
+		</DiscordReactions>
 	</DiscordMessage>
 </DiscordMessages>
 
