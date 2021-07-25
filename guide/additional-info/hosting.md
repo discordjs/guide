@@ -17,7 +17,7 @@ Before you purchase a VPS, we recommend learning how to remotely connect to a VP
 ## Steps to host
 
 ::: warning
-The following steps stated assumes your Linux distribution is Ubuntu. However, all Linux distributions are similar and should work on your VPS.
+The following steps assume your VPS is using the Ubuntu Linux distribution. Most hosting providers will offer Ubuntu as an option; however, if your VPS doesn't have Ubuntu, you may need to change a few of the steps below (such as `apt-get`).
 :::
 
 Once you have purchased your VPS and remotely connected to it, what should you do now? We recommend you create a GitHub repository first and add your bot files there, as it would be very inefficient to code files through a terminal.
