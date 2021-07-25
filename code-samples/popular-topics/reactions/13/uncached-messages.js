@@ -1,4 +1,5 @@
 const { Client, Intents } = require('discord.js');
+
 const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 	partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
@@ -16,6 +17,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
 			console.error('Something went wrong when fetching the message: ', error);
 		}
 	}
+
 	console.log(`${user.username} reacted with "${reaction.emoji.name}".`);
 });
 
@@ -27,6 +29,7 @@ client.on('messageReactionRemove', async (reaction, user) => {
 			console.error('Something went wrong when fetching the message: ', error);
 		}
 	}
+
 	console.log(`${user.username} removed their "${reaction.emoji.name}" reaction.`);
 });
 
