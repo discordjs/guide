@@ -4,8 +4,8 @@
 }
 
 .emoji-container .emoji-image {
-	width: 22px;
-	height: 22px;
+	width: 1.375rem;
+	height: 1.375rem;
 	vertical-align: bottom;
 }
 </style>
@@ -19,8 +19,11 @@ One of the first things many people want to know is how to react with emojis, bo
 Here's the base code we'll be using:
 
 ```js
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Client, Intents } = require('discord.js');
+
+const client = new Client({
+	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
+});
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -94,6 +97,17 @@ client.on('messageCreate', message => {
 });
 ```
 
+::: tip
+You can also pass different formats of the emoji to the `.react()` method.
+
+```js
+message.react('<:blobreach:123456789012345678>');
+message.react('blobreach:123456789012345678');
+message.react('<a:blobreach:123456789012345678>');
+message.react('a:blobreach:123456789012345678');
+```
+:::
+
 <DiscordMessages>
 	<DiscordMessage profile="user">
 		!react-custom
@@ -129,7 +143,7 @@ Using `.get()`, your code would look something like this:
 
 ```js {2-3}
 if (message.content === '!react-custom') {
-	const reactionEmoji = client.emojis.cache.get(config.emojiID);
+	const reactionEmoji = client.emojis.cache.get('123456789012345678');
 	message.react(reactionEmoji);
 }
 ```
@@ -209,33 +223,23 @@ If you try again with either of the code blocks above, you'll get the result you
 <DiscordMessages>
 	<DiscordMessage profile="user">
 		!fruits
-		<template #reactions>
-			<DiscordReactions>
-				<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
-				<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
-				<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
-			</DiscordReactions>
-		</template>
-	</DiscordMessage>
-	<DiscordMessage profile="user">
+		<DiscordReactions>
+			<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
+			<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
+			<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
+		</DiscordReactions>
 		!fruits
-		<template #reactions>
-			<DiscordReactions>
-				<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
-				<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
-				<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
-			</DiscordReactions>
-		</template>
-	</DiscordMessage>
-	<DiscordMessage profile="user">
+		<DiscordReactions>
+			<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
+			<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
+			<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
+		</DiscordReactions>
 		!fruits
-		<template #reactions>
-			<DiscordReactions>
-				<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
-				<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
-				<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
-			</DiscordReactions>
-		</template>
+		<DiscordReactions>
+			<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
+			<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
+			<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
+		</DiscordReactions>
 	</DiscordMessage>
 </DiscordMessages>
 
@@ -273,7 +277,8 @@ All of these methods require `MANAGE_MESSAGES` permissions. Ensure your bot has 
 Removing all reactions from a message is the easiest, the API allows you to do this through a single call. It can be done through the `message.reactions.removeAll()` method. 
 
 ```js
-message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+message.reactions.removeAll()
+	.catch(error => console.error('Failed to clear reactions:', error));
 ```
 
 ### Removing reactions by emoji
@@ -281,10 +286,12 @@ message.reactions.removeAll().catch(error => console.error('Failed to clear reac
 Removing reactions by emoji is easily done by using <DocsLink path="class/MessageReaction?scrollTo=remove">`MessageReaction.remove()`</DocsLink>.
 
 ```js
-message.reactions.cache.get('484535447171760141').remove().catch(error => console.error('Failed to remove reactions: ', error));
+message.reactions.cache.get('123456789012345678').remove()
+	.catch(error => console.error('Failed to remove reactions:', error));
 ```
 
 ### Removing reactions by user
+
 ::: tip
 If you are not familiar with <DocsLink section="collection" path="class/Collection?scrollTo=filter">`Collection.filter()`</DocsLink> and [`Map.has()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) take the time to understand what they do and then come back.
 :::
@@ -292,8 +299,10 @@ If you are not familiar with <DocsLink section="collection" path="class/Collecti
 Removing reactions by a user is not as straightforward as removing by emoji or removing all reactions. The API does not provide a method for selectively removing the reactions of a user. This means you will have to iterate through reactions that include the user and remove them.
 
 <!-- eslint-skip -->
+
 ```js
 const userReactions = message.reactions.cache.filter(reaction => reaction.users.cache.has(userId));
+
 try {
 	for (const reaction of userReactions.values()) {
 		await reaction.users.remove(userId);
@@ -318,7 +327,7 @@ const filter = (reaction, user) => {
 	return ['👍', '👎'].includes(reaction.emoji.name) && user.id === message.author.id;
 };
 
-message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+message.awaitReactions({ filter, max: 1, time: 60000, errors: ['time'] })
 	.then(collected => {
 		const reaction = collected.first();
 
@@ -345,8 +354,13 @@ If you use [gateway intents](/popular-topics/intents.md) but can't or don't want
 :::
 
 ```js
-const Discord = require('discord.js');
-const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
+const { Client, Intents } = require('discord.js');
+
+const client = new Client({
+	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
+	partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
+});
+
 client.on('messageReactionAdd', async (reaction, user) => {
 	// When a reaction is received, check if the structure is partial
 	if (reaction.partial) {
@@ -354,11 +368,12 @@ client.on('messageReactionAdd', async (reaction, user) => {
 		try {
 			await reaction.fetch();
 		} catch (error) {
-			console.error('Something went wrong when fetching the message: ', error);
+			console.error('Something went wrong when fetching the message:', error);
 			// Return as `reaction.message.author` may be undefined/null
 			return;
 		}
 	}
+
 	// Now the message has been cached and is fully available
 	console.log(`${reaction.message.author}'s message "${reaction.message.content}" gained a reaction!`);
 	// The reaction is now also fully available and the properties will be reflected accurately:
@@ -367,7 +382,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
 ```
 
 ::: warning
-Partial structures are enabled globally. You cannot only make them work for a specific event or cache, and you very likely need to adapt other parts of your code that are accessing data from the relevant caches. All caches holding the respective structure type might return partials as well!
+Partial structures are enabled globally. You cannot only make them work for a specific event or cache, and you very likely need to adapt other parts of your code that are accessing data from the relevant caches. All caches holding the respective structure type might return partials as well! For more info, check out [this page](/popular-topics/partials.md).
 :::
 
 ## Resulting code
