@@ -14,6 +14,7 @@
 			</template>
 		</Navbar>
 		<div class="content-wrapper">
+			<Notifications />
 			<div class="sidebar-mask" @click="toggleSidebar(false)"></div>
 			<div class="sidebar-wrapper">
 				<Sidebar>
@@ -56,6 +57,7 @@ import Page from '@vuepress/theme-default/lib/client/components/Page.vue';
 import { useScrollPromise, useSidebarItems, useThemeLocaleData } from '@vuepress/theme-default/lib/client/composables';
 import Navbar from '../components/Navbar.vue';
 import Sidebar from '../components/Sidebar.vue';
+import Notifications from '../components/Notifications.vue';
 
 const page = usePageData();
 const frontmatter = usePageFrontmatter<DefaultThemePageFrontmatter>();
