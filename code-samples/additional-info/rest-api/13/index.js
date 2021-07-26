@@ -20,7 +20,7 @@ client.on('messageCreate', async message => {
 	if (command === 'cat') {
 		const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
 
-		message.channel.send(file);
+		message.channel.send({ files: [file] });
 	} else if (command === 'urban') {
 		if (!args.length) {
 			return message.channel.send('You need to supply a search term!');
@@ -45,7 +45,7 @@ client.on('messageCreate', async message => {
 				{ name: 'Example', value: trim(answer.example, 1024) },
 				{ name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` },
 			);
-		message.channel.send(embed);
+		message.channel.send({ embeds: [embed] });
 	}
 });
 

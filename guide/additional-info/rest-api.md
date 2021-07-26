@@ -20,16 +20,16 @@ To start off, you're just going to be using this skeleton code:
 
 <!-- eslint-disable require-await -->
 ```js
-const { Client, MessageEmbed } = require('discord.js');
+const { Client, Intents, MessageEmbed } = require('discord.js');
 
-const client = new Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const prefix = '!';
 
 client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -68,11 +68,11 @@ fetch('https://aws.random.cat/meow').then(response => response.json());
 It may seem like this does nothing, but what it's doing is launching a request to the random.cat server. The server is returning some JSON that contains a `file` property, which is a string containing a link to a random cat. node-fetch returns a response object, which we can change into JSON with `response.json()`. Next, let's implement this into a command. The code should look similar to this:
 
 ```js {3-6}
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	// ...
 	if (command === 'cat') {
 		const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
-		message.channel.send(file);
+		message.channel.send({ files: [file] });
 	}
 });
 ```
@@ -98,7 +98,7 @@ First, you're going to need to fetch data from the API. To do this, you'd do:
 ```js {1,5-14}
 const querystring = require('querystring');
 // ...
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	// ...
 	if (command === 'urban') {
 		if (!args.length) {
@@ -175,7 +175,7 @@ const embed = new MessageEmbed()
 		{ name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` },
 	);
 
-message.channel.send(embed);
+message.channel.send({ embeds: [embed] });
 ```
 
 Now, if you do that same command again, you should get this:
