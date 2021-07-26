@@ -1,11 +1,20 @@
 <template>
 	<div class="notifications-wrapper">
-		<div class="notifications"></div>
+		<div class="notifications">
+			<Notification storage-key="v13-notice">
+				<span class="notification-icon"><PartyPopper /></span>
+				<span>
+					You're browsing the guide for discord.js v13, which is still a work in progress.
+					<a href="https://discordjs.guide">Click here</a> for the discord.js v12 guide.
+				</span>
+			</Notification>
+		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
 import Notification from './Notification.vue';
+import PartyPopper from './icons/PartyPopper.vue';
 </script>
 
 <style lang="scss">
