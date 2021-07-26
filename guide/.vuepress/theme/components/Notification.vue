@@ -77,6 +77,7 @@ onMounted(() => {
 
 	.notification-controls {
 		margin-left: 0.75rem;
+
 		.notification-icon {
 			cursor: pointer;
 
