@@ -37,10 +37,11 @@ onMounted(() => {
 
 <style lang="scss">
 .notification {
+	color: var(--text-gray);
+	background-color: var(--theme-600);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background-color: var(--theme-600);
 	width: 100%;
 	padding: 0.75rem;
 	border-radius: 0.5rem;
@@ -61,7 +62,7 @@ onMounted(() => {
 	}
 
 	.notification-icon {
-		color: #fff;
+		color: var(--text-gray);
 		background: var(--theme-530);
 		display: inline-flex;
 		padding: 0.5rem;
