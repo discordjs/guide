@@ -276,7 +276,7 @@ Webpack builds are no longer supported.
 
 ### APIMessage
 
-The `APIMessage` class has been renamed to `MessagePayload`, resolving a naming clash with an interface in the `discord-api-types` library which raw message data objects.
+The `APIMessage` class has been renamed to `MessagePayload`, resolving a naming clash with an interface in the `discord-api-types` library which represents raw message data objects.
 
 ### Channel
 
@@ -523,7 +523,7 @@ The `Message.delete()` method no longer accepts any options, requiring a timed-d
 
 ```diff
 - message.delete({ timeout: 10000 });
-+ client.setTimeout(() => message.delete(), 10000);
++ setTimeout(() => message.delete(), 10000);
 ```
 
 `reason` is no longer a parameter as it is not used by the API.
@@ -534,7 +534,7 @@ The `MessageManager.delete()` method no longer accepts any additional options, r
 
 ```diff
 - channel.messages.delete('123456789012345678', { timeout: 10000 });
-+ client.setTimeout(() => channel.messages.delete('123456789012345678'), 10000);
++ setTimeout(() => channel.messages.delete('123456789012345678'), 10000);
 ```
 
 `reason` is no longer a parameter as it is not used by the API.
@@ -1129,7 +1129,7 @@ Provides API support for bots to follow announcements in other channels.
 
 #### NewsChannel#setType
 
-`channel.setType('text')`
+`channel.setType('GUILD_TEXT')`
 
 Allows conversion between NewsChannel and TextChannel.
 
@@ -1205,7 +1205,7 @@ A shortcut method to create an `InteractionCollector` for components on a specif
 
 #### TextChannel#setType
 
-`channel.setType('news')`
+`channel.setType('GUILD_NEWS')`
 
 Allows conversion between `TextChannel` and `NewsChannel`.
 
