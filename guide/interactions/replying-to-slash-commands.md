@@ -269,9 +269,9 @@ const user = interaction.options.getUser('target');
 const member = interaction.options.getMember('target');
 const channel = interaction.options.getChannel('destination');
 const role = interaction.options.getRole('muted');
-const mentionable = interaction.options.getRole('mentionable');
+const mentionable = interaction.options.getMentionable('mentionable');
 
-console.log([string, integer, boolean, user, member, channel, role]);
+console.log([string, integer, boolean, user, member, channel, role, mentionable]);
 ```
 
 ::: tip
