@@ -263,7 +263,7 @@ You can `get()` these options from the `CommandInteractionOptionResolver` as sho
 ```js
 const string = interaction.options.getString('input');
 const integer = interaction.options.getInteger('int');
-const number = interaction.options.getInteger('num');
+const number = interaction.options.getNumber('num');
 const boolean = interaction.options.getBoolean('choice');
 const user = interaction.options.getUser('target');
 const member = interaction.options.getMember('target');
