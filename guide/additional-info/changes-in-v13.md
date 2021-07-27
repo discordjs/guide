@@ -16,7 +16,7 @@ Discord.js v13 makes the switch to Discord API v9! In addition to this, the new 
 
 Discord.js now has support for Slash Commands!
 
-Refer to the [Slash Commands](/interactions/registering-slash-commands) section of this guide to get started.
+Refer to the [Slash Commands](/interactions/registering-slash-commands.html) section of this guide to get started.
 
 In addition to the `interactionCreate` event covered in the above guide, this release also includes the new Client events `applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate`.
 
@@ -26,7 +26,7 @@ Discord.js now has support for Message Components!
 
 This introduces the `MessageActionRow`, `MessageButton` and `MessageSelectMenu` classes, as well as associated interactions and collectors. 
 
-Refer to the [Message Components](/interactions/buttons) section of this guide to start using Message Components.
+Refer to the [Message Components](/interactions/buttons.html) section of this guide to start using Message Components.
 
 ## Threads
 
@@ -36,7 +36,7 @@ This introduces the `ThreadManager` class, which can be found as `TextChannel#th
 
 There are also five new events; `threadCreate`, `threadDelete`, `threadListSync`, `threadMemberUpdate` and `threadMembersUpdate`.
 
-Refer to the [Threads](/popular-topics/threads) section of this guide to start using Threads.
+Refer to the [Threads](/popular-topics/threads.html) section of this guide to start using Threads.
 
 ## Voice
 
@@ -119,11 +119,13 @@ let count = 5;
 
 ### Intents
 
-As v13 makes the switch to Discord API v9, it will now be **required** to specify intents in your Client constructor. 
+As v13 makes the switch to Discord API v9, it will now be **required** to specify all intents your bot uses in your Client constructor.
 
 They also move from `ClientOptions#ws#intents` to the top level `ClientOptions#intents`.
 
-Refer to our more [detailed article about this topic](/popular-topics/intents).
+The shortcuts `Intents.ALL`, `Intents.NON_PRIVILEGED` and `Intents.PRIVILEGED` have all been removed to discourage bad practices of enabling unused intents.
+
+Refer to our more [detailed article about this topic](/popular-topics/intents.html).
 
 ```diff
 - const client = new Client({ ws: { intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
@@ -134,7 +136,34 @@ Refer to our more [detailed article about this topic](/popular-topics/intents).
 
 The concept of extendable Structures has been completely removed from discord.js.
 
-For more information on why this decision was made and the recommended alternatives, refer to the [pull request](https://github.com/discordjs/discord.js/pull/6027).
+For more information on why this decision was made, refer to the [pull request](https://github.com/discordjs/discord.js/pull/6027).
+
+There is no swap-in replacement for this, as the intention is to change the code design rather than enable something equally bad.
+
+For some real-world example of the alternatives provided in the PR, you may have been extending the `Guild` class with guild-specific settings:
+
+```js
+Structures.extend('Guild', Guild => {
+	return class MyGuild extends Guild {
+		constructor(client, data) {
+			super(client, data);
+			this.settings = {
+				prefix: '!',
+			};
+		}
+	};
+});
+```
+
+This functionality can be replicated using the `WeakMap` or `Collection` example, even attaching it to the Client if necessary:
+
+```js
+client.guildSettings = new Collection();
+client.guildSettings.set(guildId, { prefix: '!' });
+// In practice, you would populate this Collection with data fetched from a database
+
+const { prefix } = message.client.guildSettings.get(message.guild.id);
+```
 
 ### Collectors
 
@@ -143,6 +172,9 @@ All Collector related classes and methods (both create and await) now take a sin
 ```diff
 - const collector = message.createReactionCollector(filter, { time: 15000 });
 + const collector = message.createReactionCollector({ filter, time: 15000 });
+
+- const reactions = await message.awaitReactions(filter, { time: 15000 });
++ const reactions = await message.awaitReactions({ filter, time: 15000 });
 ```
 
 ### Naming conventions
@@ -151,7 +183,7 @@ Some commonly used naming conventions in discord.js have been changed:
 
 #### Thing#thingId
 
-The casing of `thingID` properties has changed to `thingId`. This is a more-correct casing for the camelCase used by discord.js as `Id` is an abbreviation, not an acronym.
+The casing of `thingID` properties has changed to `thingId`. This is a more-correct casing for the camelCase used by discord.js as `Id` is an abbreviation of Identifier, not an acronym.
 
 ```diff
 - console.log(guild.ownerID);
@@ -170,6 +202,7 @@ Don't worry - the old name still works, but you'll receive a Deprecation Warning
 ```diff
 - client.on("message", message => { ... });
 + client.on("messageCreate", message => { ... });
+```
 
 ### Snowflakes
 
@@ -245,6 +278,17 @@ Webpack builds are no longer supported.
 
 The `APIMessage` class has been renamed to `MessagePayload`, resolving a naming clash with an interface in the `discord-api-types` library which raw message data objects.
 
+### Channel
+
+#### Channel#type
+
+Channel types are now uppercase and align with Discord's naming conventions.
+
+```diff
+- if(channel.type === 'text') channel.send('Content');
++ if(channel.type === 'GUILD_TEXT') channel.send('Content');
+```
+
 ### Client
 
 #### Client#emojis
@@ -279,11 +323,18 @@ To generate an invite link for a bot and define required permissions.
 + client.generateInvite({ scopes: ['bot'], permissions: [Permissions.FLAGS.SEND_MESSAGES] })
 ```
 
-### Client#login
+#### Client#login
 
 Previously when a token had reached its 1000 login limit for the day, discord.js would treat this as a rate limit and silently wait to login again, but this was not communicated to the user.
 
 This will now instead cause an error to be thrown.
+
+#### Client#setInterval
+#### Client#setTimeout
+
+The Client timeout methods have all been removed. These methods existed for the purpose of caching timeouts internally so they could be cleared when the Client is destroyed.
+
+As timers now have an `unref` method in Node this is no longer required.
 
 ### ClientOptions
 
@@ -434,7 +485,7 @@ This method has been removed, with functionality replaced by the new `Permission
 + member.ban({ reason: 'reason' })
 ```
 
-### GuildMember#hasPermission
+#### GuildMember#hasPermission
 
 The `GuildMember#hasPermission` shortcut/helper method has been removed.
 
@@ -442,6 +493,16 @@ The `GuildMember#hasPermission` shortcut/helper method has been removed.
 - member.hasPermission(Permissions.FLAGS.SEND_MESSAGES);
 + member.permissions.has(Permissions.FLAGS.SEND_MESSAGES);
 ```
+
+#### GuildMember#lastMessage
+
+#### GuildMember#lastMessageId
+
+Neither of these properties were actually provided by Discord, instead relying on potentially inaccurate client cache, and have been removed.
+
+#### GuildMember#presence
+
+The `GuildMember#presence` property can now be null, rather than a generic offline presence, such as when the `GUILD_PRESENCES` intent is not enabled.
 
 ### GuildMemberManager
 
@@ -581,11 +642,43 @@ This means the user no longer needs to pass defaults to fill each positional par
 + manager.respawnAll({ shardDelay: 5000, respawnDelay: 500, timeout: 30000 });
 ```
 
+### TextChannel
+
+#### TextChannel#startTyping
+
+#### TextChannel#stopTyping
+
+These methods have both been replaced by a singular `TextChanel.sendTyping()`.
+
+This method automatically stops typing after 10 seconds, or when a message is sent.
+
 ### User
+
+#### User#lastMessage
+
+#### User#lastMessageId
+
+Neither of these properties were actually provided by Discord, instead relying on potentially inaccurate client cache, and have been removed.
 
 #### User#locale
 
 The `User.locale` property has been removed, as this property is not exposed to bots.
+
+#### User#presence
+
+The `User.presence` property has been removed. Presences are now only found on `GuildMember`.
+
+#### User#typingIn
+
+As discord.js no longer caches typing event data, the `User.typingIn()` method has been removed.
+
+#### User#typingSinceIn
+
+As discord.js no longer caches typing event data, the `User.typingSinceIn()` method has been removed.
+
+#### User#typingDurationIn
+
+As discord.js no longer caches typing event data, the `User.typingDurationIn()` method has been removed.
 
 ### UserFlags
 
@@ -654,6 +747,78 @@ Checks and typeguards if a channel is Text-Based; one of `TextChannel`, `DMChann
 #### Channel#isThread()
 
 Checks and typeguards if a channel is a `ThreadChannel`.
+
+### Client
+
+#### Client#applicationCommandCreate
+
+Emitted when a guild application command is created.
+
+#### Client#applicationCommandDelete
+
+Emitted when a guild application command is deleted.
+
+#### Client#applicationCommandUpdate
+
+Emitted when a guild application command is updated.
+
+#### Client#interactionCreate
+
+Emitted when an interaction is created.
+
+#### Client#stageInstanceCreate
+
+Emitted whenever a stage instance is created.
+
+#### Client#stageInstanceDelete
+
+Emitted whenever a stage instance is deleted.
+
+#### Client#stageInstanceUpdate
+
+Emitted whenever a stage instance gets updated - e.g. change in topic or privacy level
+
+#### Client#stickerCreate
+
+Emitted whenever a custom sticker is created in a guild.
+
+#### Client#stickerDelete
+
+Emitted whenever a custom sticker is deleted in a guild.
+
+#### Client#stickerUpdate
+
+Emitted whenever a custom sticker is updated in a guild.
+
+#### Client#threadCreate
+
+Emitted whenever a thread is created or when the client user is added to a thread.
+
+#### Client#threadDelete
+
+Emitted whenever a thread is deleted.
+
+#### Client#threadListSync
+
+Emitted whenever the client user gains access to a text or news channel that contains threads
+
+#### Client#threadMembersUpdate
+
+Emitted whenever members are added or removed from a thread. Requires `GUILD_MEMBERS` privileged intent
+
+#### Client#threadMemberUpdate
+
+Emitted whenever the client user's thread member is updated.
+
+#### Client#threadUpdate
+
+Emitted whenever a thread is updated - e.g. name change, archive state change, locked state change.
+
+### ClientOptions
+
+#### ClientOptions#failIfNotExists
+
+This parameter sets the default behaviour for `ReplyMessageOptions#failIfNotExists`, allowing or preventing an error when replying to an unknown Message.
 
 ### CollectorOptions
 
@@ -811,6 +976,14 @@ Gets the managed role this member created when joining the guild if any.
 `member.roles.premiumSubscriberRole`
 
 Gets the premium subscriber (booster) role if present on the member.
+
+### GuildPreview
+
+#### GuildPreview#createdAt
+
+#### GuildPreview#createdTimestamp
+
+The datetime at which the GuildPreview was created.
 
 ### GuildTemplate
 
@@ -1015,6 +1188,10 @@ Provides API support for the bot to create, edit and delete live Stage Instances
 ### Sticker
 
 Provides API support for Discord Stickers.
+
+### StickerPack
+
+Provides API support for Discord Sticker packs.
 
 ### TextChannel
 
