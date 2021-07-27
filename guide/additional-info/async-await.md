@@ -158,7 +158,7 @@ Let's look at an example where you want to delete a sent message.
 ```js {2-8}
 client.on('messageCreate', message => {
 	if (message.content === `${prefix}delete`) {
-		message.channel.send('this message will be deleted')
+		message.channel.send('This message will be deleted')
 			.then(sentMessage => sentMessage.delete({ timeout: 10000 }))
 			.catch(error => {
 				// handle error

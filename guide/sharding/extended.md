@@ -12,7 +12,7 @@ Let's start with the basic usage of shards. At some point in bot development, yo
 client.on('messageCreate', message => {
 	// ...
 	if (command === 'send') {
-		if (!args.length) return message.reply('please specify a destination channel id.');
+		if (!args.length) return message.reply('Please specify a destination channel id.');
 
 		const channel = client.channels.cache.get(args[0]);
 		if (!channel) return message.reply('I could not find such a channel.');
@@ -31,7 +31,7 @@ In discord.js v13, <DocsLink path="class/ShardClientUtil?scrollTo=ids">`client.s
 
 ```js {4-13}
 if (command === 'send') {
-	if (!args.length) return message.reply('please specify a destination channel id.');
+	if (!args.length) return message.reply('Please specify a destination channel id.');
 
 	return client.shard.broadcastEval(async (c, { channelId }) => {
 		const channel = c.channels.cache.get(channelId);
@@ -70,7 +70,7 @@ If you remember, there was a brief mention of passing functions through `.broadc
 client.on('messageCreate', message => {
 	// ...
 	if (command === 'emoji') {
-		if (!args.length) return message.reply('please specify an emoji id to search for.');
+		if (!args.length) return message.reply('Please specify an emoji id to search for.');
 		const emoji = client.emojis.cache.get(args[0]);
 
 		return message.reply(`I have found an emoji ${emoji}!`);
@@ -94,7 +94,7 @@ Next, you need to call the function in your command properly. If you recall from
 client.on('messageCreate', message => {
 	// ...
 	if (command === 'emoji') {
-		if (!args.length) return message.reply('please specify an emoji id to search for.');
+		if (!args.length) return message.reply('Please specify an emoji id to search for.');
 
 		return client.shard.broadcastEval(findEmoji, { context: { nameOrId: args[0] } })
 			.then(console.log);
