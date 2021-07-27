@@ -178,7 +178,7 @@ For this script to work you need to make sure you **don't** use string literals 
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { token } = require('./config.json');
-const fs = require('fs');
+const { readdirSync } = require('fs');
 
 const commands = [];
 
