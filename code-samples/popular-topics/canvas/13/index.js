@@ -49,7 +49,7 @@ client.on('guildMemberAdd', async member => {
 
 	const attachment = new MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
 
-	channel.send(`Welcome to the server, ${member}!`, attachment);
+	channel.send({ content: `Welcome to the server, ${member}!`, files: [attachment] });
 });
 
 client.on('messageCreate', message => {

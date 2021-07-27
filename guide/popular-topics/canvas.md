@@ -101,7 +101,7 @@ client.on('guildMemberAdd', async member => {
 	// Use the helpful Attachment class structure to process the file for you
 	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
 
-	channel.send(`Welcome to the server, ${member}!`, attachment);
+	channel.send({ content: `Welcome to the server, ${member}!`, files: [attachment] });
 });
 ```
 
