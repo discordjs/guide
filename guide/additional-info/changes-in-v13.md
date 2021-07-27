@@ -828,7 +828,7 @@ This parameter is now optional and will fall back to a function that always retu
 
 ### CommandInteraction
 
-Provides gateway support for Slash Command interactions. For more information refer to the [Slash Commands](/interactions/registering-slash-commands) section of the guide.
+Provides gateway support for Slash Command interactions. For more information refer to the [Slash Commands](/interactions/registering-slash-commands.html) section of the guide.
 
 ### Guild
 
@@ -999,7 +999,7 @@ A Collection of Roles which are managed by the integration.
 
 Provides gateway support for Slash Command and Message Component interactions. 
 
-For more information refer to the [Slash Commands](/interactions/replying-to-slash-commands) and [Message Components](/interactions/buttons.html#responding-to-buttons) sections of the guide.
+For more information refer to the [Slash Commands](/interactions/replying-to-slash-commands) and [Message Components](/interactions/buttons.html#responding-to-buttons.html) sections of the guide.
 
 ### InteractionCollector
 
