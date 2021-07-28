@@ -178,24 +178,12 @@ For this script to work you need to make sure you **don't** use string literals 
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { token } = require('./config.json');
-const fs = require('fs');
 
-const commands = [];
-
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	const { name, description, options } = command;
-
-	const data = {
-		name,
-		description,
-		options,
-	};
-
-	commands.push(data);
-}
+/* 
+	assumes client is available in this context and that
+ 	client#commands exists according to earlier guide sections
+*/
+const commands = client.commands.map(({ execute, ...data }) => data); 
 
 const rest = new REST({ version: '9' }).setToken(token);
 
@@ -204,8 +192,8 @@ try {
 
 	await rest.put(
 		Routes.applicationGuildCommands(
-			<CLIENT ID>,
-			<GUILD ID>,
+			CLIENT_ID,
+			GUILD_ID,
 		),
 		{
 			body: commands,
