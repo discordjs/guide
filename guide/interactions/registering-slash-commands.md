@@ -164,7 +164,7 @@ const data = {
 
 ## Advanced deployment
 
-Advanced users should make use of a deploy script to deploy their commands when needed. In this section we'll be using a script that is usable in conjunction with the [slash command handler](/command-handling) from the command handling section.
+Advanced users should make use of a deploy script to deploy their commands when needed. In this section, we'll be using a script that is usable in conjunction with the [slash command handler](/command-handling) from the command handling section.
 
 First off, install the discord.js REST module by running `npm i @discordjs/rest` in your terminal.
 
