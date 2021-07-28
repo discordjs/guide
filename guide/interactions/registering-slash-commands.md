@@ -206,5 +206,5 @@ try {
 }
 ```
 
-Running this script will register all your commands to the guild of which the ID was passed in above.
+Running this script will register all your commands to the guild of which the id was passed in above.
 Now that you have a general idea of how to make a proper deploy script, you can also modify this to deploy global commands by adjusting the route.
