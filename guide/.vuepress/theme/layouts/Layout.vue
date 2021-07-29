@@ -86,14 +86,14 @@ const toggleSidebar = (to?: boolean): void => {
 };
 
 const touchStart = { x: 0, y: 0 };
-const onTouchStart = (e): void => {
-	touchStart.x = e.changedTouches[0].clientX;
-	touchStart.y = e.changedTouches[0].clientY;
+const onTouchStart = (event): void => {
+	touchStart.x = event.changedTouches[0].clientX;
+	touchStart.y = event.changedTouches[0].clientY;
 };
 
-const onTouchEnd = (e): void => {
-	const dx = e.changedTouches[0].clientX - touchStart.x;
-	const dy = e.changedTouches[0].clientY - touchStart.y;
+const onTouchEnd = (event): void => {
+	const dx = event.changedTouches[0].clientX - touchStart.x;
+	const dy = event.changedTouches[0].clientY - touchStart.y;
 
 	if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
 		toggleSidebar(dx > 0 && touchStart.x <= 80);

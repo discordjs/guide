@@ -62,8 +62,8 @@ client.on('messageCreate', async message => {
 					username: message.author.username,
 				});
 				return message.reply(`Tag ${tag.name} added.`);
-			} catch (e) {
-				if (e.name === 'SequelizeUniqueConstraintError') {
+			} catch (error) {
+				if (error.name === 'SequelizeUniqueConstraintError') {
 					return message.reply('That tag already exists.');
 				}
 				return message.reply('Something went wrong with adding a tag.');

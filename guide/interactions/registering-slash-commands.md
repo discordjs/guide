@@ -197,8 +197,8 @@ try {
 	);
 
 	console.log('Sucessfully reloaded application (/) commands.');
-} catch (e) {
-	console.error(e);
+} catch (error) {
+	console.error(error);
 }
 ```
 

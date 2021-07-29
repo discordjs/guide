@@ -164,8 +164,8 @@ try {
 	});
 	return message.reply(`Tag ${tag.name} added.`);
 }
-catch (e) {
-	if (e.name === 'SequelizeUniqueConstraintError') {
+catch (error) {
+	if (error.name === 'SequelizeUniqueConstraintError') {
 		return message.reply('That tag already exists.');
 	}
 	return message.reply('Something went wrong with adding a tag.');
@@ -173,7 +173,7 @@ catch (e) {
 ```
 
 `Tags.create()` uses the models that you created previously. The `.create()` method inserts some data into the model. You are going to insert a tag name, description, and the author name into the database.  
-The `catch (e)` section is necessary for the insert because it will offload checking for duplicates to the database to notify you if an attempt to create a tag that already exists occurs. The alternative is to query the database before adding data and checking if a result returns. If there are no errors or no identical tag is found, only then would you add the data. Of the two methods, it is clear that catching the error is less work for you.  
+The `catch (error)` section is necessary for the insert because it will offload checking for duplicates to the database to notify you if an attempt to create a tag that already exists occurs. The alternative is to query the database before adding data and checking if a result returns. If there are no errors or no identical tag is found, only then would you add the data. Of the two methods, it is clear that catching the error is less work for you.  
 `if (e.name === "SequelizeUniqueConstraintError")` Although this was mostly for doing less work, it is always good to handle your errors, especially if you know what types of errors you will receive. This error comes up if your unique constraint is violated, i.e., duplicate values are inserted.
 
 ::: warning
