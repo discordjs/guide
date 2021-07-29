@@ -58,6 +58,14 @@ html.guide-theme-blurple {
 		top: unset;
 		left: unset;
 		margin-left: 0.5rem;
+
+		.sidebar-menu-icon {
+			display: block;
+		}
+
+		.sidebar-close-icon {
+			display: none;
+		}
 	}
 
 	.toggle-dark-button {
@@ -129,6 +137,14 @@ html.guide-theme-blurple {
 
 		&:hover {
 			background-color: var(--nav-links-hover-color);
+		}
+
+		.sidebar-menu-icon {
+			display: none;
+		}
+
+		.sidebar-close-icon {
+			display: block;
 		}
 	}
 }

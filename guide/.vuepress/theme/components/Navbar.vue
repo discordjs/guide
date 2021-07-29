@@ -27,8 +27,8 @@ import { computed } from 'vue';
 import { useRouteLocale, useSiteLocaleData } from '@vuepress/client';
 import { useThemeLocaleData } from '@vuepress/theme-default/lib/client/composables';
 import NavbarLinks from '@vuepress/theme-default/lib/client/components/NavbarLinks.vue';
-import ToggleSidebarButton from '@vuepress/theme-default/lib/client/components/ToggleSidebarButton.vue';
 import ToggleDarkModeButton from './ToggleDarkModeButton.vue';
+import ToggleSidebarButton from './ToggleSidebarButton.vue';
 
 // NOTE: May need to be renamed to `defineEmits` in a later Vue 3.x version
 defineEmit(['toggle-sidebar']);
