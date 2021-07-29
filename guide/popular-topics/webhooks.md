@@ -46,7 +46,7 @@ You can fetch a specific webhook using its `id` with <DocsLink path="class/Clien
 If you are not using a bot client, you can get a webhook by creating a new instance of `WebhookClient` and passing the `id` and `token` into the constructor. These credentials do not require you to have a bot application, but it also offers limited information instead of fetching it using an authorized client.
 
 ```js
-const webhookClient = new Discord.WebhookClient('id', 'token');
+const webhookClient = new WebhookClient('id', 'token');
 ```
 
 ## Creating webhooks

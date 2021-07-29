@@ -33,7 +33,7 @@ After installing all the necessary software, run `npm i canvas` if you use npm o
 Here is the base code you'll be using to get started:
 
 ```js
-const { Client, Intents } = require('discord.js');
+const { Client, Intents, MessageAttachment } = require('discord.js');
 const Canvas = require('canvas');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
@@ -99,7 +99,7 @@ client.on('guildMemberAdd', async member => {
 	// This uses the canvas dimensions to stretch the image onto the entire canvas
 	context.drawImage(background, 0, 0, canvas.width, canvas.height);
 	// Use the helpful Attachment class structure to process the file for you
-	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
+	const attachment = new MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
 
 	channel.send({ content: `Welcome to the server, ${member}!`, files: [attachment] });
 });
