@@ -1,5 +1,5 @@
 const { Client, Intents, MessageEmbed } = require('discord.js');
-const config = require('./config.json');
+const { token } = require('./config.json');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
@@ -24,4 +24,4 @@ client.once('ready', async () => {
 	}
 });
 
-client.login(config.token);
+client.login(token);

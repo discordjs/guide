@@ -5,17 +5,18 @@ If you've used JavaScript for only a (relatively) small amount of time or don't 
 Here's the startup code we'll be using:
 
 <!-- eslint-disable prefer-template -->
+<!-- eslint-disable prefer-destructuring -->
 
 ```js
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Client, Intents } = require('discord.js');
 const config = require('./config.json');
+
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const prefix = config.prefix;
 
 client.once('ready', () => {
 	console.log('Ready!');
 });
-
-const { prefix } = config;
 
 client.on('messageCreate', message => {
 	if (message.content === prefix + 'ping') {
@@ -193,10 +194,6 @@ Here's a common example where object destructuring would come in handy:
 const config = require('./config.json');
 const prefix = config.prefix;
 const token = config.token;
-
-// Alternative version (not recommended)
-const prefix = require('./config.json').prefix;
-const token = require('./config.json').token;
 ```
 
 This code is a bit verbose and not the most fun to write out each time. Object destructuring simplifies this, making it easier to both read and write. Take a look:

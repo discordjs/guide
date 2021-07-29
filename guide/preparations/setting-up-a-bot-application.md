@@ -88,6 +88,7 @@ To load variables from a file into the process you can either write the code to 
 ```js
 // index.js
 const dotenv = require('dotenv');
+
 dotenv.config();
 // ... client setup (keep reading)
 console.log(process.env.A);

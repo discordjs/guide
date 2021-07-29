@@ -62,7 +62,7 @@ The `name` property states which event this file is for, the `once` property is 
 Now, you'll write the code for dynamically retrieving all the event files in the `events` folder. Add this below the `const client` line in `index.js`:
 
 ```js {3}
-const client = new Discord.Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 ```

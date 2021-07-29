@@ -1,8 +1,8 @@
+const { Op } = require('sequelize');
 const { Collection, Client, Formatters, Intents } = require('discord.js');
+const { Users, CurrencyShop } = require('./dbObjects.js');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-const { Users, CurrencyShop } = require('./dbObjects');
-const { Op } = require('sequelize');
 const currency = new Collection();
 const prefix = '!';
 

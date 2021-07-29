@@ -1,9 +1,9 @@
-const Discord = require('discord.js');
-const config = require('./config.json');
+const { MessageEmbed, WebhookClient } = require('discord.js');
+const { webhookId, webhookToken } = require('./config.json');
 
-const webhookClient = new Discord.WebhookClient(config.webhookID, config.webhookToken);
+const webhookClient = new WebhookClient(webhookId, webhookToken);
 
-const embed = new Discord.MessageEmbed()
+const embed = new MessageEmbed()
 	.setTitle('Some Title')
 	.setColor('#0099ff');
 

@@ -22,10 +22,10 @@ Go to your code editor and make a new file. Add in the code below and save it as
 }
 ```
 
-Go back to your main bot file, locate the `const client = new Discord.Client()` line, and add this above it:
+Go back to your main bot file, locate the `const client = new Client()` line, and add this above it:
 
 ```js
-const config = require('./config.json');
+const { token } = require('./config.json');
 ```
 
 Next, copy your token from the `client.login('your-token-goes-here')` line and paste into the `config.json` file. Make sure to keep it between the double-quotes.

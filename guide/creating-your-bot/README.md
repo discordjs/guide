@@ -17,7 +17,8 @@ You can quickly create a new file using the `Ctrl + N` shortcut on your keyboard
 Once you've created a new file, do a quick check to see if you have everything setup correctly. Copy & paste the following code into your file and save it. Don't worry if you don't understand it right away—we explain more in-depth after this.
 
 ```js
-const { Client, Intents, MessageEmbed } = require('discord.js');
+const { Client, Intents } = require('discord.js');
+
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 client.once('ready', () => {

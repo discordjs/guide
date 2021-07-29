@@ -12,7 +12,7 @@ Most of the time, websites use OAuth2 to get information about their users from 
 
 ```json
 {
-	"clientID": "",
+	"clientId": "",
 	"clientSecret": "",
 	"port": 53134
 }
@@ -195,7 +195,7 @@ Require `node-fetch` and make your request.
 ```js {1,3,7-8,10-34}
 const fetch = require('node-fetch');
 const express = require('express');
-const { clientID, clientSecret, port } = require('./config.json');
+const { clientId, clientSecret, port } = require('./config.json');
 
 const app = express();
 
@@ -207,7 +207,7 @@ app.get('/', async ({ query }, response) => {
 			const oauthResult = await fetch('https://discord.com/api/oauth2/token', {
 				method: 'POST',
 				body: new URLSearchParams({
-					client_id: clientID,
+					client_id: clientId,
 					client_secret: clientSecret,
 					code,
 					grant_type: 'authorization_code',

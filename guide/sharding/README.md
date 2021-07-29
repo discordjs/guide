@@ -23,9 +23,11 @@ First, you'll need to have a file that you'll be launching from now on, rather t
 
 ```js
 const { ShardingManager } = require('discord.js');
+
 const manager = new ShardingManager('./bot.js', { token: 'your-token-goes-here' });
 
 manager.on('shardCreate', shard => console.log(`Launched shard ${shard.id}`));
+
 manager.spawn();
 ```
 
@@ -46,6 +48,7 @@ Here is some sample code for a `stats` command, without sharding taken into cons
 ```js
 // bot.js
 const { Client, Intents } = require('discord.js');
+
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const prefix = '!';
 

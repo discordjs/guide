@@ -68,7 +68,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 You can also send message components within an ephemeral response or alongside message embeds.
 
 ```js {1,12-16,18}
-const { MessageActionRow, MessageSelectMenu, MessageEmbed } = require('discord.js');
+const { MessageActionRow, MessageEmbed, MessageSelectMenu } = require('discord.js');
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;

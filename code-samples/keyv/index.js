@@ -1,5 +1,5 @@
-const { Client, Intents } = require('discord.js');
 const Keyv = require('keyv');
+const { Client, Intents } = require('discord.js');
 const { globalPrefix, token } = require('./config.json');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });

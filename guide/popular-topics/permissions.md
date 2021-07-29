@@ -249,6 +249,7 @@ However, you can pass these decimals to the Permissions constructor to convert t
 
 ```js
 const { Permissions } = require('discord.js');
+
 const permissions = new Permissions(268550160);
 ```
 
@@ -256,6 +257,7 @@ You can also use this approach for other <DocsLink path="typedef/PermissionResol
 
 ```js
 const { Permissions } = require('discord.js');
+
 const flags = [
 	'MANAGE_CHANNELS',
 	'EMBED_LINKS',

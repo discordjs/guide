@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 const express = require('express');
-const { clientID, clientSecret, port } = require('./config.json');
+const { clientId, clientSecret, port } = require('./config.json');
 
 const app = express();
 
@@ -12,7 +12,7 @@ app.get('/', async ({ query }, response) => {
 			const oauthResult = await fetch('https://discord.com/api/oauth2/token', {
 				method: 'POST',
 				body: new URLSearchParams({
-					client_id: clientID,
+					client_id: clientId,
 					client_secret: clientSecret,
 					code,
 					grant_type: 'authorization_code',

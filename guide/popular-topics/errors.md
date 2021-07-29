@@ -140,7 +140,9 @@ This error is also caused by attempting to use a client that has not logged in. 
 
 ```js
 const { Client, Intents } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] }); // Should not be here!
+
+// Should not be here!
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 module.exports = (message, args) => {
 	// Should be message.client instead!
@@ -152,6 +154,7 @@ module.exports = (message, args) => {
 
 ```js
 const { Client, Intents } = require('discord.js');
+
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 client.on('messageCreate', someHandlerFunction);

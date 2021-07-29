@@ -72,8 +72,8 @@ This section will still work with any provider supported by Keyv. We recommend P
 ### Setup
 
 ```js
-const { Client, Intents } = require('discord.js');
 const Keyv = require('keyv');
+const { Client, Intents } = require('discord.js');
 const { globalPrefix, token } = require('./config.json');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });

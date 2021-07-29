@@ -160,7 +160,8 @@ Now, there are *a lot* of options, so it is recommended you take a look at the d
 But let us get a quick overview of what it can do:
 
 ```js
-const client = new Discord.Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+
 const logger = winston.createLogger({
 	transports: [
 		new winston.transports.Console(),

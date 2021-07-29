@@ -58,10 +58,10 @@ discord.js features the <DocsLink path="class/MessageEmbed">`MessageEmbed`</Docs
 
 ```js
 // at the top of your file
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 
 // inside a command, event listener, etc.
-const exampleEmbed = new Discord.MessageEmbed()
+const exampleEmbed = new MessageEmbed()
 	.setColor('#0099ff')
 	.setTitle('Some title')
 	.setURL('https://discord.js.org/')
@@ -96,7 +96,7 @@ If you want to modify the embed based on conditions, you will need to reference 
 <!-- eslint-skip -->
 
 ```js
-const exampleEmbed = new Discord.MessageEmbed().setTitle('Some title');
+const exampleEmbed = new MessageEmbed().setTitle('Some title');
 
 if (message.author.bot) {
 	exampleEmbed.setColor('#7289da');
@@ -187,8 +187,10 @@ If you plan to attach the same image repeatedly, consider hosting it online and 
 ### Using the MessageEmbed builder
 
 ```js
-const file = new Discord.MessageAttachment('../assets/discordjs.png');
-const exampleEmbed = new Discord.MessageEmbed()
+const { MessageAttachment, MessageEmbed } = require('discord.js');
+// ...
+const file = new MessageAttachment('../assets/discordjs.png');
+const exampleEmbed = new MessageEmbed()
 	.setTitle('Some title')
 	.setImage('attachment://discordjs.png');
 
@@ -198,7 +200,9 @@ channel.send({ embeds: [exampleEmbed], files: [file] });
 ### Using an embed object
 
 ```js
-const file = new Discord.MessageAttachment('../assets/discordjs.png');
+const { MessageAttachment } = require('discord.js');
+// ...
+const file = new MessageAttachment('../assets/discordjs.png');
 
 const exampleEmbed = {
 	title: 'Some title',
@@ -228,7 +232,7 @@ We deliberately create a new Embed here instead of just modifying `message.embed
 
 ```js
 const receivedEmbed = message.embeds[0];
-const exampleEmbed = new Discord.MessageEmbed(receivedEmbed).setTitle('New title');
+const exampleEmbed = new MessageEmbed(receivedEmbed).setTitle('New title');
 
 channel.send({ embeds: [exampleEmbed] });
 ```
@@ -238,7 +242,7 @@ channel.send({ embeds: [exampleEmbed] });
 To edit the content of an embed you need to pass a new MessageEmbed structure or embed object to the messages `.edit()` method.
 
 ```js
-const exampleEmbed = new Discord.MessageEmbed()
+const exampleEmbed = new MessageEmbed()
 	.setTitle('Some title')
 	.setDescription('Description after the edit');
 

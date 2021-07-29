@@ -20,6 +20,7 @@ All gateway intents, and the events belonging to each, are listed on the [Discor
 
 ```js
 const { Client } = require('discord.js');
+
 const client = new Client({ intents: ['GUILDS', 'GUILD_MESSAGES'] });
 ```
 
@@ -37,6 +38,7 @@ You can use the `.add()` and `.remove()` methods to add or remove flags (Intents
 
 ```js
 const { Client, Intents } = require('discord.js');
+
 const myIntents = new Intents();
 myIntents.add('GUILD_PRESENCES', 'GUILD_MEMBERS');
 

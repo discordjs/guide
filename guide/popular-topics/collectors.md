@@ -68,6 +68,7 @@ The provided set allows for responder error with an array of answers permitted. 
 
 ```js
 const quiz = require('./quiz.json');
+// ...
 const item = quiz[Math.floor(Math.random() * quiz.length)];
 const filter = response => {
 	return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());

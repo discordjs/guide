@@ -12,11 +12,11 @@ If you would like to read about using webhooks through the API without discord.j
 
 ## Detecting webhook messages
 
-Bots receive webhook messages in a text channel as usual. You can detect if a webhook sent the message by checking if the `Message.webhookID` is not `null`. In this example, we return if a webhook sent the message.
+Bots receive webhook messages in a text channel as usual. You can detect if a webhook sent the message by checking if the `Message.webhookId` is not `null`. In this example, we return if a webhook sent the message.
 
 <!-- eslint-skip -->
 ```js
-if (message.webhookID) return;
+if (message.webhookId) return;
 ```
 
 If you would like to get the webhook object that sent the message, you can use <DocsLink path="class/Message?scrollTo=fetchWebhook">`Message#fetchWebhook`</DocsLink>.
@@ -102,10 +102,10 @@ Webhooks, like bots, can send up to 10 embeds per message. They can also send at
 Example using a WebhookClient:
 
 ```js
-const { WebhookClient, MessageEmbed } = require('discord.js');
-const config = require('./config.json');
+const { MessageEmbed, WebhookClient } = require('discord.js');
+const { webhookId, webhookToken } = require('./config.json');
 
-const webhookClient = new WebhookClient(config.webhookID, config.webhookToken);
+const webhookClient = new WebhookClient(webhookId, webhookToken);
 
 const embed = new MessageEmbed()
 	.setTitle('Some Title')
@@ -123,7 +123,7 @@ Example using a Webhook:
 
 ```js
 const { Client, Intents, MessageEmbed } = require('discord.js');
-const config = require('./config.json');
+const { token } = require('./config.json');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
