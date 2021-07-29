@@ -115,8 +115,8 @@ As shown in the options example above, you can specify the `type` of an `Applica
 Refer to the Discord API documentation for detailed explanations on the [`SUB_COMMAND` and `SUB_COMMAND_GROUP` option types](https://discord.com/developers/docs/interactions/slash-commands#subcommands-and-subcommand-groups).
 :::
 
-* `SUB_COMMAND` sets the option to be a sub-command
-* `SUB_COMMAND_GROUP` sets the option to be a sub-command-group
+* `SUB_COMMAND` sets the option to be a subcommand
+* `SUB_COMMAND_GROUP` sets the option to be a subcommand group
 * `STRING` sets the option to require a string value
 * `INTEGER` sets the option to require an integer value
 * `BOOLEAN` sets the option to require a boolean value
