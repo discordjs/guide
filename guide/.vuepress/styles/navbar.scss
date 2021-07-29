@@ -86,9 +86,11 @@ html.guide-theme-blurple {
 		}
 	}
 
-	.site-name {
-		color: var(--text-gray);
-		font-size: 1em;
+	.navbar-links-home {
+		> a {
+			display: inline-block;
+			line-height: 1.4rem;
+		}
 	}
 
 	a {

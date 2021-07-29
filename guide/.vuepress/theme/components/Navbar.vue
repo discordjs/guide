@@ -3,9 +3,9 @@
 		<div class="navbar-wrapper">
 			<div class="navbar-links-wrapper">
 				<div class="navbar-links-container">
-					<span>
+					<span class="navbar-links-home">
 						<RouterLink :to="siteBrandLink">
-							<span class="site-name">{{ siteBrandTitle }}</span>
+							{{ siteBrandTitle }}
 						</RouterLink>
 					</span>
 					<slot name="before"></slot>
