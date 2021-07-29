@@ -169,7 +169,7 @@ Advanced users should make use of a deploy script to deploy their commands when 
 First off, install the discord.js REST module by running `npm i @discordjs/rest` in your terminal.
 
 ::: warning
-For this script to work you need to make sure you **don't** use string literals for the `ApplicationCommandOptionType` in your command files, but rather the `ApplicationCommandOptionType` enum from `discord-api-types`.
+For this script to work, **don't** use string literals for the `ApplicationCommandOptionType` in your command files, but instead use the `ApplicationCommandOptionType` enum from `discord-api-types`.
 :::
 
 <!-- eslint-skip -->
@@ -191,13 +191,8 @@ try {
 	console.log('Started refreshing application (/) commands');
 
 	await rest.put(
-		Routes.applicationGuildCommands(
-			CLIENT_ID,
-			GUILD_ID,
-		),
-		{
-			body: commands,
-		},
+		Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
+		{ body: commands },
 	);
 
 	console.log('Sucessfully reloaded application (/) commands.');
@@ -207,4 +202,4 @@ try {
 ```
 
 Running this script will register all your commands to the guild of which the id was passed in above.
-Now that you have a general idea of how to make a proper deploy script, you can also modify this to deploy global commands by adjusting the route.
+You can also modify this to deploy global commands by adjusting the route to `.applicationCommands(CLIENT_ID)`.
