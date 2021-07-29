@@ -139,22 +139,22 @@ Another common error–this error originates from the client attempting to execu
 This error is also caused by attempting to use a client that has not logged in. Both of the examples below will throw errors.
 
 ```js
-const { Client } = require('discord.js');
-const client = new Client(); // Should not be here!
+const { Client, Intents } = require('discord.js');
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] }); // Should not be here!
 
 module.exports = (message, args) => {
 	// Should be message.client instead!
 	client.users.fetch(args[0]).then(user => {
-		message.reply('your requested user', user.tag);
+		message.reply(`Your requested user: ${user.tag}`);
 	});
 };
 ```
 
 ```js
-const { Client } = require('discord.js');
-const client = new Client();
+const { Client, Intents } = require('discord.js');
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
-client.on('message', someHandlerFunction);
+client.on('messageCreate', someHandlerFunction);
 
 client.login('your-token-goes-here');
 // client will not be logged in yet!

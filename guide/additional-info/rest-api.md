@@ -29,7 +29,7 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -68,7 +68,7 @@ fetch('https://aws.random.cat/meow').then(response => response.json());
 It may seem like this does nothing, but what it's doing is launching a request to the random.cat server. The server is returning some JSON that contains a `file` property, which is a string containing a link to a random cat. node-fetch returns a response object, which we can change into JSON with `response.json()`. Next, let's implement this into a command. The code should look similar to this:
 
 ```js {3-6}
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	// ...
 	if (command === 'cat') {
 		const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
@@ -98,7 +98,7 @@ First, you're going to need to fetch data from the API. To do this, you'd do:
 ```js {1,5-14}
 const querystring = require('querystring');
 // ...
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	// ...
 	if (command === 'urban') {
 		if (!args.length) {

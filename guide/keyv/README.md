@@ -85,7 +85,7 @@ const globalPrefix = '.';
 This guide uses a very basic command handler with some added complexity to allow for multiple prefixes. Look at the [command handling](/command-handling/) guide for a more robust command handler.
 
 ```js
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (message.author.bot) return;
 
 	let args;
@@ -120,7 +120,7 @@ client.on('message', async message => {
 Now that you have a command handler, you can make a command to allow people to use your prefix system.
 
 ```js {3-11}
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	// ...
 	if (command === 'prefix') {
 		// if there's at least one argument, set the prefix

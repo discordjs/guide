@@ -85,7 +85,7 @@ client.once('ready', () => {
 	console.log('I am ready!');
 });
 
-client.on('message', message => {
+client.on('messageCreate', message => {
 	if (message.content === `${prefix}react`) {
 		// ...
 	}
@@ -97,7 +97,7 @@ client.login('your-token-goes-here');
 If you don't know how Node.js asynchronous execution works, you would probably try something like this:
 
 ```js {3-5}
-client.on('message', message => {
+client.on('messageCreate', message => {
 	if (message.content === `${prefix}react`) {
 		message.react('🇦');
 		message.react('🇧');
@@ -109,7 +109,7 @@ client.on('message', message => {
 But since all of these react methods are started at the same time, it would just be a race to which server request finished first, so there would be no guarantee that it would react in the order you wanted it to. In order to make sure it reacts in order (a, b, c), you'd need to use the `.then()` callback from the Promises that these methods return. The code would look like this:
 
 ```js {3-8}
-client.on('message', message => {
+client.on('messageCreate', message => {
 	if (message.content === `${prefix}react`) {
 		message.react('🇦')
 			.then(() => message.react('🇧'))
@@ -124,7 +124,7 @@ client.on('message', message => {
 In this piece of code, the Promises are [chain resolved](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then#Chaining) with each other, and if one of the Promises gets rejected, the function passed to `.catch()` gets called. Here's the same code but with async/await:
 
 ```js {1,3-5}
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (message.content === `${prefix}react`) {
 		await message.react('🇦');
 		await message.react('🇧');
@@ -136,7 +136,7 @@ client.on('message', async message => {
 It's mostly the same code, but how would you catch Promise rejections now since `.catch()` isn't there anymore? That is also a useful feature with async/await; the error will be thrown if you await it so that you can wrap the awaited Promises inside a try/catch, and you're good to go. 
 
 ```js {1,3-9}
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (message.content === `${prefix}react`) {
 		try {
 			await message.react('🇦');
@@ -156,9 +156,9 @@ So you may be asking, "How would I get the value the Promise resolved with?".
 Let's look at an example where you want to delete a sent message.
 
 ```js {2-8}
-client.on('message', message => {
+client.on('messageCreate', message => {
 	if (message.content === `${prefix}delete`) {
-		message.channel.send('this message will be deleted')
+		message.channel.send('This message will be deleted')
 			.then(sentMessage => sentMessage.delete({ timeout: 10000 }))
 			.catch(error => {
 				// handle error
@@ -170,7 +170,7 @@ client.on('message', message => {
 The return value of a `.send()` is a Promise what resolves with the sent Message object, but how would the same code with async/await look?
 
 ```js {1,3-8}
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (message.content === `${prefix}delete`) {
 		try {
 			const sentMessage = await message.channel.send('This message will be deleted in 10 seconds.');
