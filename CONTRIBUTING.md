@@ -295,7 +295,7 @@ Do note the casing in `<DiscordMessages>` syntax instead of `<discord-messages>`
 
 These components feature messages, mentions, embeds, interactions, and more. You can read more about how to use them by checking out [@discord-message-components/vue](https://github.com/Danktuary/discord-message-components/blob/main/packages/vue/README.md).
 
-### Discord.js documentation links
+### discord.js documentation links
 
 On pages where links to the discord.js documentation are used, you can use the `<DocsLink>` component. Since the discord.js documentation is split into different categories and branches, the component allows you to supply the necessary info accordingly. The only required prop is `path`.
 

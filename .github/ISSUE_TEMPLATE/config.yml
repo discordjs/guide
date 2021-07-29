@@ -6,6 +6,6 @@ contact_links:
   - name: Guide discussion boards
     url: https://github.com/discordjs/discord.js/discussions
     about: Ask questions and receive answers.
-  - name: Discord.js issues
+  - name: discord.js issues
     url: https://github.com/discordjs/discord.js/issues/new/choose
     about: Issue tracker for the library discord.js.

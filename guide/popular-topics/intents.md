@@ -1,6 +1,6 @@
 # Gateway Intents
 
-Gateway Intents were introduced by Discord so bot developers can choose which events their bot receives based on which data it needs to function. Intents are named groups of pre-defined WebSocket events, which the Discord.js client will receive. If you omit `DIRECT_MESSAGE_TYPING`, for example, you will no longer receive typing events from direct messages. If you provide no intents, discord.js will throw an error.
+Gateway Intents were introduced by Discord so bot developers can choose which events their bot receives based on which data it needs to function. Intents are named groups of pre-defined WebSocket events, which the discord.js client will receive. If you omit `DIRECT_MESSAGE_TYPING`, for example, you will no longer receive typing events from direct messages. If you provide no intents, discord.js will throw an error.
 
 ## Privileged Intents
 
@@ -31,7 +31,7 @@ Please make sure to provide the list of gateway intents and partials you use in 
 
 ## The Intents Bitfield
 
-Discord.js provides the utility structure <docs-link path="class/Intents">`Intents`</docs-link> to simplify the modification of intents bitfields.
+discord.js provides the utility structure <docs-link path="class/Intents">`Intents`</docs-link> to simplify the modification of intents bitfields.
 
 You can use the `.add()` and `.remove()` methods to add or remove flags (Intents string literals representing a certain bit) and modify the bitfield. You can provide single flags as well as an array or bitfield. To use a set of intents as a template you can pass it to the constructor. Note that the empty constructor `new Intents()` creates an empty Intents instance, representing no intents or the bitfield `0`:
 
