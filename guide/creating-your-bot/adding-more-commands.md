@@ -12,7 +12,7 @@ Here's what your interaction event should currently look like:
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interacton.commandName === 'ping') {
+	if (interaction.commandName === 'ping') {
 		await interaction.reply('Pong!');
 	}
 });
@@ -91,11 +91,11 @@ If you want to expand upon that command and add some more info, here's an exampl
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interacton.commandName === 'ping') {
+	if (interaction.commandName === 'ping') {
 		await interaction.reply('Pong!');
-	} else if (interacton.commandName === 'beep') {
+	} else if (interaction.commandName === 'beep') {
 		await interaction.reply('Boop!');
-	} else if (interacton.commandName === 'server') {
+	} else if (interaction.commandName === 'server') {
 		await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
 	}
 });
@@ -129,13 +129,13 @@ Set up another if statement and use the command name `user-info`.
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interacton.commandName === 'ping') {
+	if (interaction.commandName === 'ping') {
 		await interaction.reply('Pong!');
-	} else if (interacton.commandName === 'beep') {
+	} else if (interaction.commandName === 'beep') {
 		await interaction.reply('Boop!');
-	} else if (interacton.commandName === 'server') {
+	} else if (interaction.commandName === 'server') {
 		await interaction.reply(`This server's name is: ${interaction.guild.name}`);
-	} else if (interacton.commandName === 'user-info') {
+	} else if (interaction.commandName === 'user-info') {
 		await interaction.reply(`Your username: ${interaction.user.username}\nYour ID: ${interaction.user.id}`);
 	}
 });

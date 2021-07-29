@@ -72,12 +72,12 @@ This section will still work with any provider supported by Keyv. We recommend P
 ### Setup
 
 ```js
-const Discord = require('discord.js');
+const { Client, Intents } = require('discord.js');
 const Keyv = require('keyv');
+const { globalPrefix, token } = require('./config.json');
 
-const client = new Discord.Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const prefixes = new Keyv('sqlite://path/to.sqlite');
-const globalPrefix = '.';
 ```
 
 ### Command handler

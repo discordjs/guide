@@ -1,17 +1,15 @@
-
-const Discord = require('discord.js');
+const { Client, Intents } = require('discord.js');
 const Keyv = require('keyv');
-const config = require('./config.json');
+const { globalPrefix, token } = require('./config.json');
 
-const client = new Discord.Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const prefixes = new Keyv('sqlite://path/to.sqlite');
-const globalPrefix = config.prefix;
 
 client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (message.author.bot) return;
 
 	let args;
@@ -44,4 +42,4 @@ client.on('message', async message => {
 	}
 });
 
-client.login(config.token);
+client.login(token);

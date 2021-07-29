@@ -1,7 +1,7 @@
-const Discord = require('discord.js');
+const { Client, MessageAttachment, Intents } = require('discord.js');
 const Canvas = require('canvas');
 
-const client = new Discord.Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -47,12 +47,12 @@ client.on('guildMemberAdd', async member => {
 	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
 	context.drawImage(avatar, 25, 25, 200, 200);
 
-	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
+	const attachment = new MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
 
-	channel.send(`Welcome to the server, ${member}!`, attachment);
+	channel.send({ content: `Welcome to the server, ${member}!`, files: [attachment] });
 });
 
-client.on('message', message => {
+client.on('messageCreate', message => {
 	if (message.content === '!join') {
 		client.emit('guildMemberAdd', message.member);
 	}

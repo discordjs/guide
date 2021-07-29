@@ -1,11 +1,10 @@
-const config = require('./config');
-const Discord = require('discord.js');
+const { Collection, Client, Formatters, Intents } = require('discord.js');
 
-const client = new Discord.Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const { Users, CurrencyShop } = require('./dbObjects');
 const { Op } = require('sequelize');
-const currency = new Discord.Collection();
-const PREFIX = '!';
+const currency = new Collection();
+const prefix = '!';
 
 /*
  * Make sure you are on at least version 5 of Sequelize! Version 4 as used in this guide will pose a security threat.
@@ -40,12 +39,12 @@ client.once('ready', async () => {
 	console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	if (message.author.bot) return;
 	currency.add(message.author.id, 1);
 
-	if (!message.content.startsWith(PREFIX)) return;
-	const input = message.content.slice(PREFIX.length).trim();
+	if (!message.content.startsWith(prefix)) return;
+	const input = message.content.slice(prefix.length).trim();
 	if (!input.length) return;
 	const [, command, commandArgs] = input.match(/(\w+)\s*([\s\S]*)/);
 
@@ -86,17 +85,18 @@ client.on('message', async message => {
 		message.channel.send(`You've bought a ${item.name}`);
 	} else if (command === 'shop') {
 		const items = await CurrencyShop.findAll();
-		return message.channel.send(items.map(i => `${i.name}: ${i.cost}💰`).join('\n'), { code: true });
+		return message.channel.send(Formatters.codeBlock(items.map(i => `${i.name}: ${i.cost}💰`).join('\n')));
 	} else if (command === 'leaderboard') {
 		return message.channel.send(
-			currency.sort((a, b) => b.balance - a.balance)
-				.filter(user => client.users.cache.has(user.user_id))
-				.first(10)
-				.map((user, position) => `(${position + 1}) ${(client.users.cache.get(user.user_id).tag)}: ${user.balance}💰`)
-				.join('\n'),
-			{ code: true },
+			Formatters.codeBlock(
+				currency.sort((a, b) => b.balance - a.balance)
+					.filter(user => client.users.cache.has(user.user_id))
+					.first(10)
+					.map((user, position) => `(${position + 1}) ${(client.users.cache.get(user.user_id).tag)}: ${user.balance}💰`)
+					.join('\n'),
+			),
 		);
 	}
 });
 
-client.login(config.token);
+client.login('your-token-goes-here');

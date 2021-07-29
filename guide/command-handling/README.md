@@ -5,10 +5,10 @@ Unless your bot project is a small one, it's not a very good idea to have a sing
 Here's the base code we'll be using:
 
 ```js
-const Discord = require('discord.js');
+const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
 
-const client = new Discord.Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -69,11 +69,11 @@ Back in your main file, make these two additions:
 
 ```js {1,6}
 const fs = require('fs');
-const Discord = require('discord.js');
+const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
 
-const client = new Discord.Client();
-client.commands = new Discord.Collection();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+client.commands = new Collection();
 ```
 
 ::: tip
@@ -87,7 +87,7 @@ If you aren't exactly sure what Collections are, they're a class that extend Jav
 This next step is how you'll dynamically retrieve all your newly created command files. The [`fs.readdirSync()`](https://nodejs.org/api/fs.html#fs_fs_readdirsync_path_options) method will return an array of all the file names in a directory, e.g. `['ping.js', 'beep.js']`. To ensure only command files get returned, use `Array.filter()` to leave out any non-JavaScript files from the array. With that array, you can loop over it and dynamically set your commands to the Collection you made above.
 
 ```js {3,5-10}
-client.commands = new Discord.Collection();
+client.commands = new Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 

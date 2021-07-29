@@ -30,11 +30,11 @@ After you have installed discord.js and Sequelize, you can start with the follow
 <!-- eslint-disable require-await -->
 
 ```js
-const Discord = require('discord.js');
+const { Client, Intents } = require('discord.js');
 const Sequelize = require('sequelize');
 
-const client = new Discord.Client();
-const PREFIX = '!';
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const prefix = '!';
 
 // [alpha]
 // [beta]
@@ -44,8 +44,8 @@ client.once('ready', () => {
 });
 
 client.on('messageCreate', async message => {
-	if (message.content.startsWith(PREFIX)) {
-		const input = message.content.slice(PREFIX.length).trim().split(' ');
+	if (message.content.startsWith(prefix)) {
+		const input = message.content.slice(prefix.length).trim().split(' ');
 		const command = input.shift();
 		const commandArgs = input.join(' ');
 

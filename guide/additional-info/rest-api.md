@@ -20,9 +20,9 @@ To start off, you're just going to be using this skeleton code:
 
 <!-- eslint-disable require-await -->
 ```js
-const { Client, MessageEmbed } = require('discord.js');
+const { Client, Intents, MessageEmbed } = require('discord.js');
 
-const client = new Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const prefix = '!';
 
 client.once('ready', () => {
@@ -72,7 +72,7 @@ client.on('messageCreate', async message => {
 	// ...
 	if (command === 'cat') {
 		const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
-		message.channel.send(file);
+		message.channel.send({ files: [file] });
 	}
 });
 ```
@@ -175,7 +175,7 @@ const embed = new MessageEmbed()
 		{ name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` },
 	);
 
-message.channel.send(embed);
+message.channel.send({ embeds: [embed] });
 ```
 
 Now, if you do that same command again, you should get this:
