@@ -12,9 +12,9 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 	storage: 'database.sqlite',
 });
 
-const CurrencyShop = require('./models/CurrencyShop')(sequelize, Sequelize.DataTypes);
-require('./models/Users')(sequelize, Sequelize.DataTypes);
-require('./models/UserItems')(sequelize, Sequelize.DataTypes);
+const CurrencyShop = require('./models/CurrencyShop.js')(sequelize, Sequelize.DataTypes);
+require('./models/Users.js')(sequelize, Sequelize.DataTypes);
+require('./models/UserItems.js')(sequelize, Sequelize.DataTypes);
 
 const force = process.argv.includes('--force') || process.argv.includes('-f');
 

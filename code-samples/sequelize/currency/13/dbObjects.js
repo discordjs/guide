@@ -12,9 +12,9 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 	storage: 'database.sqlite',
 });
 
-const Users = require('./models/Users')(sequelize, Sequelize.DataTypes);
-const CurrencyShop = require('./models/CurrencyShop')(sequelize, Sequelize.DataTypes);
-const UserItems = require('./models/UserItems')(sequelize, Sequelize.DataTypes);
+const Users = require('./models/Users.js')(sequelize, Sequelize.DataTypes);
+const CurrencyShop = require('./models/CurrencyShop.js')(sequelize, Sequelize.DataTypes);
+const UserItems = require('./models/UserItems.js')(sequelize, Sequelize.DataTypes);
 
 UserItems.belongsTo(CurrencyShop, { foreignKey: 'item_id', as: 'item' });
 
