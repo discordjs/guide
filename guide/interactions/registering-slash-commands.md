@@ -119,6 +119,7 @@ Refer to the Discord API documentation for detailed explanations on the [`SUB_CO
 * `SUB_COMMAND_GROUP` sets the option to be a subcommand group
 * `STRING` sets the option to require a string value
 * `INTEGER` sets the option to require an integer value
+* `NUMBER` sets the option to require a decimal (also known as a floating point) value
 * `BOOLEAN` sets the option to require a boolean value
 * `USER` sets the option to require a user or snowflake as value
 * `CHANNEL` sets the option to require a channel or snowflake as value

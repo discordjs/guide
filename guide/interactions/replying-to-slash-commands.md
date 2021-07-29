@@ -220,9 +220,14 @@ const data = {
 			type: 'STRING',
 		},
 		{
-			name: 'num',
+			name: 'int',
 			description: 'Enter an integer',
 			type: 'INTEGER',
+		},
+		{
+			name: 'num',
+			description: 'Enter a number',
+			type: 'NUMBER',
 		},
 		{
 			name: 'choice',
@@ -244,26 +249,33 @@ const data = {
 			description: 'Select a role',
 			type: 'ROLE',
 		},
+		{
+			name: 'mentionable',
+			description: 'Mention something',
+			type: 'MENTIONABLE',
+		},
 	],
 };
 ```
 
-You can `get()` these options from the `CommandInteraction#options` Collection:
+You can `get()` these options from the `CommandInteractionOptionResolver` as shown below:
 
 ```js
-const { value: string } = interaction.options.get('input');
-const { value: integer } = interaction.options.get('num');
-const { value: boolean } = interaction.options.get('choice');
-const { user } = interaction.options.get('target');
-const { member } = interaction.options.get('input');
-const { channel } = interaction.options.get('destination');
-const { role } = interaction.options.get('muted');
+const string = interaction.options.getString('input');
+const integer = interaction.options.getInteger('int');
+const number = interaction.options.getNumber('num');
+const boolean = interaction.options.getBoolean('choice');
+const user = interaction.options.getUser('target');
+const member = interaction.options.getMember('target');
+const channel = interaction.options.getChannel('destination');
+const role = interaction.options.getRole('muted');
+const mentionable = interaction.options.getMentionable('mentionable');
 
-console.log([string, integer, boolean, user, member, channel, role]);
+console.log([string, integer, boolean, user, member, channel, role, mentionable]);
 ```
 
 ::: tip
-If you want the snowflake of a structure instead, access it via the `value` property. Note that we use `const { value: name } = ...` here to [destructure and rename](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) the value obtained from the <DocsLink path="typedef/CommandInteractionOption">`CommandInteractionOption`</DocsLink> structure to avoid identifier name conflicts.
+If you want the Snowflake of a structure instead, grab the option via `get()` and access the Snowflake via the `value` property. Note that you should use `const { value: name } = ...` here to [destructure and rename](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) the value obtained from the <DocsLink path="typedef/CommandInteractionOption">`CommandInteractionOption`</DocsLink> structure to avoid identifier name conflicts.
 :::
 
 ## Fetching and deleting responses

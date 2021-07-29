@@ -11,7 +11,7 @@ module.exports = {
 	],
 
 	async execute(interaction) {
-		const { value: amount } = interaction.options.get('amount');
+		const amount = interaction.options.getInteger('amount');
 
 		if (amount <= 1 || amount > 100) {
 			return interaction.reply({ content: 'You need to input a number between 1 and 99.', ephemeral: true });
