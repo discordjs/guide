@@ -176,7 +176,7 @@ const filter = i => {
 	return i.user.id === interaction.user.id;
 };
 
-message.awaitMessageComponents({ filter, componentType: 'SELECT_MENU', time: 60000 })
+message.awaitMessageComponent({ filter, componentType: 'SELECT_MENU', time: 60000 })
 	.then(interaction => interaction.editReply(`You selected ${interaction.values.join(', ')}!`))
 	.catch(err => console.log(`No interactions were collected.`));
 ```
