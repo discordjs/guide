@@ -17,7 +17,7 @@ client.once('ready', () => {
 
 const { prefix } = config;
 
-client.on('message', message => {
+client.on('messageCreate', message => {
 	if (message.content === prefix + 'ping') {
 		message.channel.send('Pong.');
 	} else if (message.content === prefix + 'beep') {
@@ -139,7 +139,7 @@ client.on('typingStart', function(channel, user) {
 	console.log(user + ' started typing in ' + channel);
 });
 
-client.on('message', function(message) {
+client.on('messageCreate', function(message) {
 	console.log(message.author + ' sent: ' + message.content);
 });
 
@@ -161,7 +161,7 @@ client.once('ready', () => console.log('Ready!'));
 
 client.on('typingStart', (channel, user) => console.log(`${user} started typing in ${channel}`));
 
-client.on('message', message => console.log(`${message.author} sent: ${message.content}`));
+client.on('messageCreate', message => console.log(`${message.author} sent: ${message.content}`));
 
 const doubleAge = age => `Your age doubled is: ${age * 2}`;
 
@@ -210,7 +210,7 @@ Object destructuring takes those properties from the object and stores them in v
 Additionally, you could do this for your commands.
 
 ```js
-client.on('message', message => {
+client.on('messageCreate', message => {
 	const { content } = message;
 
 	if (content === `${prefix}ping`) {

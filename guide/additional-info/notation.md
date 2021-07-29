@@ -10,7 +10,7 @@ Always keep in mind that notation is not always rigorous. There will be typos, m
 
 Some common notations refer to a class or the properties, methods, or events of a class. There are many variations on these notations, and they are very flexible depending on the person, so use your best judgment when reading them.
 
-The notation `<Class>` means an instance of the `Class` class. For example, a snippet like `<Message>.reply('hello')` is asking you to replace `<Message>` with some value that is an instance of `Message`, e.g. `msg.reply('hello')`. It could also just be a placeholder, e.g., `<id>` would mean a placeholder for some ID.
+The notation `<Class>` means an instance of the `Class` class. For example, a snippet like `<Message>.reply('Hello')` is asking you to replace `<Message>` with some value that is an instance of `Message`, e.g. `msg.reply('Hello')`. It could also just be a placeholder, e.g., `<id>` would mean a placeholder for some ID.
 
 The notation `Class#foo` can refer to the `foo` property, method, or event of the `Class` class. Which one the writer meant needs to be determined from context. For example:
 

@@ -60,7 +60,7 @@ This may sound scary at first, but you will see it is pretty simple once you see
 Say you already have a simple command handler like this:
 
 ```js
-client.on('message', message => {
+client.on('messageCreate', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -71,7 +71,7 @@ client.on('message', message => {
 Now you can quickly test the waters by upgrading the avatar command from [last time](/creating-your-bot/commands-with-user-input.md).
 This is what we have so far. It is pretty simple; it will show the avatar of who used the command.
 ```js {3-7}
-client.on('message', message => {
+client.on('messageCreate', message => {
 	// ...
 	if (command === 'avatar') {
 		const user = message.author;
@@ -114,7 +114,7 @@ Now you have a nifty function you can use to convert a raw mention into a proper
 Plugging it into the command will give you this:
 
 ```js {4-11}
-client.on('message', message => {
+client.on('messageCreate', message => {
 	// ...
 	if (command === 'avatar') {
 		if (args[0]) {
@@ -160,7 +160,7 @@ You now know how to parse user mentions for a simple command like the avatar com
 When writing a ban command where a mention might appear in the reason, manual parsing mentions is a lot more important. You can see an example of how to do it as follows:
 
 ```js {1,3-21}
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	// ...
 	if (command === 'ban') {
 		if (args.length < 2) {

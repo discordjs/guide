@@ -94,7 +94,7 @@ client.shard.fetchClientValues('guilds.cache.size')
 While it's a bit unattractive to have more nesting in your commands, it is necessary when not using `async`/`await`. Now, the code at the top should look something like the below:
 
 ```js {4-8}
-client.on('message', message => {
+client.on('messageCreate', message => {
 	// ...
 	if (command === 'stats') {
 		return client.shard.fetchClientValues('guilds.cache.size')
@@ -149,7 +149,7 @@ Promise.all(promises)
 `Promise.all()` runs every Promise you pass inside an array in parallel and waits for each to finish before returning their results simultaneously. The result is an array that corresponds with the array of Promises you pass–so the first result element will be from the first Promise. With that, your stats command should look something like this:
 
 ```js {4-15}
-client.on('message', message => {
+client.on('messageCreate', message => {
 	// ...
 	if (command === 'stats') {
 		const promises = [

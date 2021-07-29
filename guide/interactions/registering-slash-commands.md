@@ -3,7 +3,7 @@
 Discord provides developers with the option to create client-integrated slash commands. In this section, we'll cover how to register these commands using discord.js!
 
 ::: tip
-If you already have slash commands set-up for your application and want to learn how to respond to them, refer to [the following page](/interactions/replying-to-slash-commands/).
+If you already have slash commands set-up for your application and want to learn how to respond to them, refer to [the following page](/interactions/replying-to-slash-commands.md).
 :::
 
 ## Global commands
