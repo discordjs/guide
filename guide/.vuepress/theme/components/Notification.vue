@@ -4,14 +4,14 @@
 			<slot></slot>
 		</div>
 		<div class="notification-controls">
-			<button class="notification-icon" @click.prevent="closeNotification"><Close /></button>
+			<button class="notification-icon" @click.prevent="closeNotification"><CloseIcon /></button>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { defineProps, onMounted, ref } from 'vue';
-import Close from './icons/Close.vue';
+import CloseIcon from './icons/Close.vue';
 
 const props = defineProps({
 	storageKey: {

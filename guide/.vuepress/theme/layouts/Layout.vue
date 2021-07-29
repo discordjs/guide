@@ -16,7 +16,7 @@
 		<div class="content-wrapper">
 			<Notifications>
 				<Notification storage-key="v13-notice">
-					<span class="notification-icon"><PartyPopper /></span>
+					<span class="notification-icon"><PartyPopperIcon /></span>
 					<span>
 						You're browsing the guide for discord.js v13, which is still a work in progress.
 						<a href="https://discordjs.guide">Click here</a> for the discord.js v12 guide.
@@ -67,7 +67,7 @@ import Navbar from '../components/Navbar.vue';
 import Sidebar from '../components/Sidebar.vue';
 import Notifications from '../components/Notifications.vue';
 import Notification from '../components/Notification.vue';
-import PartyPopper from '../components/icons/PartyPopper.vue';
+import PartyPopperIcon from '../components/icons/PartyPopper.vue';
 
 const page = usePageData();
 const frontmatter = usePageFrontmatter<DefaultThemePageFrontmatter>();
