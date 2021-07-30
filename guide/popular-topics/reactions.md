@@ -152,6 +152,8 @@ Two or more emojis can have the same name, and using `.find()` will only return 
 
 Using `.find()`, your code would look something like this:
 
+<!-- eslint-skip -->
+
 ```js {4-5}
 if (interaction.commandName === 'react-custom') {
 	interaction.reply('You can react with custom emojis!');
@@ -162,6 +164,8 @@ if (interaction.commandName === 'react-custom') {
 ```
 
 Using `.get()`, your code would look something like this:
+
+<!-- eslint-skip -->
 
 ```js {4-5}
 if (interaction.commandName === 'react-custom') {
@@ -344,6 +348,8 @@ If you aren't familiar with Promises or `async`/`await`, you can read more about
 
 However, if you don't mind the order the emojis react in, you can take advantage of `Promise.all()`, like so:
 
+<!-- eslint-skip -->
+
 ```js {4-9}
 if (interaction.commandName === 'fruits') {
 	interaction.reply('Reacting with fruits!');
@@ -414,6 +420,8 @@ Make sure not to remove reactions by emoji or by user too much; if there are man
 ## Awaiting reactions
 
 A common use case for reactions in commands is having a user confirm or deny an action or creating a poll system. Luckily, we actually [already have a guide page covering this](/popular-topics/collectors.md)! Check out that page if you want a more in-depth explanation. Otherwise, here's a basic example for reference:
+
+<!-- eslint-skip -->
 
 ```js
 // ...
