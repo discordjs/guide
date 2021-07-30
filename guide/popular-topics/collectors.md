@@ -15,7 +15,7 @@ For now, let's take the example that they have provided us:
 ```js
 // `m` is a message object that will be passed through the filter function
 const filter = m => m.content.includes('discord');
-const collector = message.channel.createMessageCollector({ filter, time: 15000 });
+const collector = interaction.channel.createMessageCollector({ filter, time: 15000 });
 
 collector.on('collect', m => {
 	console.log(`Collected ${m.content}`);
@@ -74,13 +74,14 @@ const filter = response => {
 	return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
 };
 
-message.channel.send(item.question).then(() => {
-	message.channel.awaitMessages({ filter, max: 1, time: 30000, errors: ['time'] })
+interaction.reply(item.question);
+interaction.fetchReply().then(() => {
+	interaction.channel.awaitMessages({ filter, max: 1, time: 30000, errors: ['time'] })
 		.then(collected => {
-			message.channel.send(`${collected.first().author} got the correct answer!`);
+			interaction.followUp(`${collected.first().author} got the correct answer!`);
 		})
 		.catch(collected => {
-			message.channel.send('Looks like nobody got the answer this time.');
+			interaction.followUp('Looks like nobody got the answer this time.');
 		});
 });
 ```
@@ -108,6 +109,7 @@ const filter = (reaction, user) => {
 	return reaction.emoji.name === '👍' && user.id === message.author.id;
 };
 
+const message = await interaction.fetchReply();
 const collector = message.createReactionCollector({ filter, time: 15000 });
 
 collector.on('collect', (reaction, user) => {
@@ -132,6 +134,8 @@ const filter = (reaction, user) => {
 	return reaction.emoji.name === '👍' && user.id === message.author.id;
 };
 
+const message = await interaction.fetchReply();
+
 message.awaitReactions({ filter, max: 4, time: 60000, errors: ['time'] })
 	.then(collected => console.log(collected.size))
 	.catch(collected => {
@@ -150,6 +154,7 @@ Collecting interactions from message components works similarly to reaction coll
 One important difference to note with interaction collectors is that Discord expects a response to *all* interactions within 3 seconds - even ones that you don't want to collect. For this reason, you may wish to `.deferUpdate()` all interactions in your filter, or not use a filter at all and handle this behavior in the `collect` event.
 
 ```js
+const message = await interaction.fetchReply();
 const collector = message.createMessageComponentCollector({ componentType: 'BUTTON', time: 15000 });
 
 collector.on('collect', i => {
@@ -172,6 +177,8 @@ As before, this works similarly to the message component collector, except it is
 Unlike other Promise-based collectors, this method will only ever collect one interaction that passes the filter. If no interactions are collected before the time runs out, the Promise will reject. This behavior aligns with Discord's requirement that actions should immediately receive a response. In this example, you will use `.deferUpdate()` on all interactions in the filter.
 
 ```js
+const message = await interaction.fetchReply();
+
 const filter = i => {
 	i.deferUpdate();
 	return i.user.id === interaction.user.id;
