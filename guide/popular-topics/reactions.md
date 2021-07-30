@@ -29,7 +29,7 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('messageCreate', message => {
+client.on('interactionCreate', interaction => {
 	// ...
 });
 
@@ -53,17 +53,27 @@ To react with a Unicode emoji, you will need the actual Unicode character of the
 
 To react with an emoji, you need to use the `message.react()` method. Once you have the emoji character, all you need to do is copy & paste it as a string inside the `.react()` method!
 
-```js {2-4}
-client.on('messageCreate', message => {
-	if (message.content === '!react') {
+```js {4-8}
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'react') {
+		interaction.reply('You can react with Unicode emojis!');
+		const message = await interaction.fetchReply();
 		message.react('😄');
 	}
 });
 ```
 
 <DiscordMessages>
-	<DiscordMessage profile="user">
-		!react
+	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction
+				profile="user"
+				:command="true"
+			>react</DiscordInteraction>
+		</template>
+		You can react with Unicode emojis!
 		<template #reactions>
 			<DiscordReactions>
 				<DiscordReaction name="smile" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f604.png" />
@@ -89,9 +99,13 @@ For custom emojis, there are multiple ways of reacting. Like Unicode emojis, you
 
 This format is essentially the name of the emoji, followed by its ID. Copy & paste the ID into the `.react()` method as a string.
 
-```js {2-4}
-client.on('messageCreate', message => {
-	if (message.content === '!react-custom') {
+```js {4-8}
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'react-custom') {
+		interaction.reply('You can react with custom emojis!');
+		const message = await interaction.fetchReply();
 		message.react('123456789012345678');
 	}
 });
@@ -109,8 +123,14 @@ message.react('a:blobreach:123456789012345678');
 :::
 
 <DiscordMessages>
-	<DiscordMessage profile="user">
-		!react-custom
+	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction
+				profile="user"
+				:command="true"
+			>react-custom</DiscordInteraction>
+		</template>
+		You can react with custom emojis!
 		<template #reactions>
 			<DiscordReactions>
 				<DiscordReaction name="blobreach" image="https://imgur.com/3Oar9gP.png" />
@@ -132,8 +152,10 @@ Two or more emojis can have the same name, and using `.find()` will only return 
 
 Using `.find()`, your code would look something like this:
 
-```js {2-3}
-if (message.content === '!react-custom') {
+```js {4-5}
+if (interaction.commandName === 'react-custom') {
+	interaction.reply('You can react with custom emojis!');
+	const message = await interaction.fetchReply();
 	const reactionEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'blobreach');
 	message.react(reactionEmoji);
 }
@@ -141,8 +163,10 @@ if (message.content === '!react-custom') {
 
 Using `.get()`, your code would look something like this:
 
-```js {2-3}
-if (message.content === '!react-custom') {
+```js {4-5}
+if (interaction.commandName === 'react-custom') {
+	interaction.reply('You can react with custom emojis!');
+	const message = await interaction.fetchReply();
 	const reactionEmoji = client.emojis.cache.get('123456789012345678');
 	message.react(reactionEmoji);
 }
@@ -155,8 +179,12 @@ Of course, if you already have the emoji ID, you should put that directly inside
 If you just put one `message.react()` under another, it won't always react in order as-is. This is because `.react()` is a Promise and an asynchronous operation.
 
 ```js {2-6}
-client.on('messageCreate', message => {
-	if (message.content === '!fruits') {
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'fruits') {
+		interaction.reply('Reacting with fruits!');
+		const message = await interaction.fetchReply();
 		message.react('🍎');
 		message.react('🍊');
 		message.react('🍇');
@@ -165,25 +193,53 @@ client.on('messageCreate', message => {
 ```
 
 <DiscordMessages>
-	<DiscordMessage profile="user">
-		!fruits
-		<DiscordReactions>
-			<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
-			<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
-			<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
-		</DiscordReactions>
-		!fruits
-		<DiscordReactions>
-			<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
-			<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
-			<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
-		</DiscordReactions>
-		!fruits
-		<DiscordReactions>
-			<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
-			<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
-			<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
-		</DiscordReactions>
+	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction
+				profile="user"
+				:command="true"
+			>fruits</DiscordInteraction>
+		</template>
+		Reacting with fruits!
+		<template #reactions>
+			<DiscordReactions>
+				<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
+				<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
+				<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
+			</DiscordReactions>
+		</template>
+	</DiscordMessage>
+		<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction
+				profile="user"
+				:command="true"
+			>fruits</DiscordInteraction>
+		</template>
+		Reacting with fruits!
+		<template #reactions>
+			<DiscordReactions>
+				<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
+				<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
+				<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
+			</DiscordReactions>
+		</template>
+	</DiscordMessage>
+		<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction
+				profile="user"
+				:command="true"
+			>fruits</DiscordInteraction>
+		</template>
+		Reacting with fruits!
+		<template #reactions>
+			<DiscordReactions>
+				<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
+				<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
+				<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
+			</DiscordReactions>
+		</template>
 	</DiscordMessage>
 </DiscordMessages>
 
@@ -191,9 +247,13 @@ As you can see, if you leave it like that, it won't display as you want. It was 
 
 Luckily, there are two easy solutions to this. The first would be to chain `.then()`s in the order you want it to display.
 
-```js {3-6}
-client.on('messageCreate', message => {
-	if (message.content === '!fruits') {
+```js {7-10}
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'fruits') {
+		interaction.reply('Reacting with fruits!');
+		const message = await interaction.fetchReply();
 		message.react('🍎')
 			.then(() => message.react('🍊'))
 			.then(() => message.react('🍇'))
@@ -204,9 +264,14 @@ client.on('messageCreate', message => {
 
 The other would be to use the `async`/`await` keywords.
 
-```js {1,3-9}
-client.on('messageCreate', async message => {
-	if (message.content === '!fruits') {
+```js {1,8-14}
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'fruits') {
+		interaction.reply('Reacting with fruits!');
+		const message = await interaction.fetchReply();
+
 		try {
 			await message.react('🍎');
 			await message.react('🍊');
@@ -221,25 +286,53 @@ client.on('messageCreate', async message => {
 If you try again with either of the code blocks above, you'll get the result you originally wanted!
 
 <DiscordMessages>
-	<DiscordMessage profile="user">
-		!fruits
-		<DiscordReactions>
-			<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
-			<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
-			<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
-		</DiscordReactions>
-		!fruits
-		<DiscordReactions>
-			<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
-			<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
-			<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
-		</DiscordReactions>
-		!fruits
-		<DiscordReactions>
-			<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
-			<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
-			<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
-		</DiscordReactions>
+	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction
+				profile="user"
+				:command="true"
+			>fruits</DiscordInteraction>
+		</template>
+		Reacting with fruits!
+		<template #reactions>
+			<DiscordReactions>
+				<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
+				<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
+				<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
+			</DiscordReactions>
+		</template>
+	</DiscordMessage>
+		<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction
+				profile="user"
+				:command="true"
+			>fruits</DiscordInteraction>
+		</template>
+		Reacting with fruits!
+		<template #reactions>
+			<DiscordReactions>
+				<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
+				<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
+				<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
+			</DiscordReactions>
+		</template>
+	</DiscordMessage>
+		<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction
+				profile="user"
+				:command="true"
+			>fruits</DiscordInteraction>
+		</template>
+		Reacting with fruits!
+		<template #reactions>
+			<DiscordReactions>
+				<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
+				<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
+				<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
+			</DiscordReactions>
+		</template>
 	</DiscordMessage>
 </DiscordMessages>
 
@@ -251,8 +344,10 @@ If you aren't familiar with Promises or `async`/`await`, you can read more about
 
 However, if you don't mind the order the emojis react in, you can take advantage of `Promise.all()`, like so:
 
-```js {2-7}
-if (message.content === '!fruits') {
+```js {4-9}
+if (interaction.commandName === 'fruits') {
+	interaction.reply('Reacting with fruits!');
+	const message = await interaction.fetchReply();
 	Promise.all([
 		message.react('🍎'),
 		message.react('🍊'),
@@ -321,10 +416,12 @@ Make sure not to remove reactions by emoji or by user too much; if there are man
 A common use case for reactions in commands is having a user confirm or deny an action or creating a poll system. Luckily, we actually [already have a guide page covering this](/popular-topics/collectors.md)! Check out that page if you want a more in-depth explanation. Otherwise, here's a basic example for reference:
 
 ```js
+// ...
+const message = await interaction.fetchReply();
 message.react('👍').then(() => message.react('👎'));
 
 const filter = (reaction, user) => {
-	return ['👍', '👎'].includes(reaction.emoji.name) && user.id === message.author.id;
+	return ['👍', '👎'].includes(reaction.emoji.name) && user.id === interaction.user.id;
 };
 
 message.awaitReactions({ filter, max: 1, time: 60000, errors: ['time'] })

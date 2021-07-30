@@ -8,12 +8,20 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('messageCreate', message => {
-	if (message.content === '!react') {
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'react') {
+		interaction.reply('You can react with Unicode emojis!');
+		const message = await interaction.fetchReply();
 		message.react('😄');
-	} else if (message.content === '!react-custom') {
+	} else if (interaction.commandName === 'react-custom') {
+		interaction.reply('You can react with custom emojis!');
+		const message = await interaction.fetchReply();
 		message.react('123456789012345678');
-	} else if (message.content === '!fruits') {
+	} else if (interaction.commandName === 'fruits') {
+		interaction.reply('Reacting with fruits!');
+		const message = await interaction.fetchReply();
 		message.react('🍎')
 			.then(() => message.react('🍊'))
 			.then(() => message.react('🍇'))
