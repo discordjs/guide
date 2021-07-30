@@ -58,7 +58,7 @@ To make testing this feature much more manageable, you can add a simple command 
 client.on('interactionCreate', interaction => {
 	if (!interaction.isCommand()) return;
 	if (interaction.commandName === 'join') {
-		client.emit('guildMemberAdd', message.member);
+		client.emit('guildMemberAdd', interaction.member);
 	}
 });
 ```

@@ -330,7 +330,8 @@ The second, **Roundtrip Latency**, describes the amount of time a full API round
 <!-- eslint-skip -->
 
 ```js
-<interaction>.reply('Pinging...').then(sent => {
+<interaction>.reply('Pinging...');
+<interaction>.fetchReply().then(sent => {
 	sent.edit(`Roundtrip latency: ${sent.createdTimestamp - <message>.createdTimestamp}ms`);
 });
 ```

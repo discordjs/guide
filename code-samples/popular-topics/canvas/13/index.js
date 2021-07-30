@@ -55,7 +55,7 @@ client.on('guildMemberAdd', async member => {
 client.on('interactionCreate', interaction => {
 	if (!interaction.isCommand()) return;
 	if (interaction.commandName === 'join') {
-		client.emit('guildMemberAdd', message.member);
+		client.emit('guildMemberAdd', interaction.member);
 	}
 });
 
