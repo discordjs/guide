@@ -2,10 +2,12 @@
 
 If you're reading this, it probably means you want to learn how to make a bot with discord.js. Awesome! You've come to the right place.
 This guide will teach you things such as:
-* How to get a bot up and running from scratch;
-* How to properly create, organize, and expand on your commands;
-* How to use the best practices for common situations;
-* and much more.
+- How to get a bot [up and running](/preparations/) from scratch;
+- How to properly [create](/creating-your-bot/), [organize](/command-handling/), and expand on your commands;
+- In-depth explanations and examples regarding popular topics (e.g. [reactions](/popular-topics/reactions.md), [embeds](/popular-topics/embeds.md), [canvas](/popular-topics/canvas.md));
+- Working with databases (e.g. [sequelize](/sequelize/) and [keyv](/keyv/));
+- Getting started with [sharding](/sharding/);
+- And much more.
 
 This guide will also cover subjects like common errors and how to solve them, keeping your code clean, setting up a proper development environment, etc.
 Sounds good? Great! Let's get started, then.
