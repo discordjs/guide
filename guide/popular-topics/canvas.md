@@ -121,7 +121,7 @@ client.on('guildMemberAdd', async member => {
 	context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
 	// Set the color of the stroke
-	context.strokeStyle = '#74037b';
+	context.strokeStyle = '#0099ff';
 	// Draw a rectangle with the dimensions of the entire canvas
 	context.strokeRect(0, 0, canvas.width, canvas.height);
 	// ...
@@ -247,11 +247,11 @@ client.on('guildMemberAdd', async member => {
 
 Before adjustment:
 
-![Before adjustment](./images/canvas-before-adjustment.png)
+![Before adjustment](./images/canvas-before-text-wrap.png)
 
 After adjustment:
 
-![After adjustment](./images/canvas-after-adjustment.png)
+![After adjustment](./images/canvas-after-text-wrap.png)
 
 Let's move the welcome text inside the image itself instead of adding it outside as a nice finishing touch.
 
@@ -273,7 +273,7 @@ client.on('guildMemberAdd', async member => {
 });
 ```
 
-![Final result](./images/canvas-final.png)
+![Final result](./images/canvas-final-result.png)
 
 And that's it! We have covered the basics of image manipulation, text generation, and loading from a remote source.
 

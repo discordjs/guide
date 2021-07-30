@@ -33,7 +33,7 @@
 	"image": {
 		"prefix": ["image", "img"],
 		"description": "image tag",
-		"body": "![${1:some alt text}](~@${2:/images/78fcCsF.png})"
+		"body": "![${1:some alt text}](~@${2:/images/AfFp7pu.png})"
 	},
 	"messages": {
 		"prefix": ["messages", "discord-messages"],

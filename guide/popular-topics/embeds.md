@@ -16,12 +16,12 @@ Here is an example of how an embed may look. We will go over embed construction 
 				border-color="#0099ff"
 				embed-title="Some title"
 				url="https://discord.js.org/"
-				thumbnail="https://i.imgur.com/wSTFkRM.png"
-				image="https://i.imgur.com/wSTFkRM.png"
-				footer-icon="https://i.imgur.com/wSTFkRM.png"
+				thumbnail="https://i.imgur.com/AfFp7pu.png"
+				image="https://i.imgur.com/AfFp7pu.png"
+				footer-icon="https://i.imgur.com/AfFp7pu.png"
 				timestamp="01/01/2018"
 				author-name="Some name"
-				author-icon="https://i.imgur.com/wSTFkRM.png"
+				author-icon="https://i.imgur.com/AfFp7pu.png"
 				author-url="https://discord.js.org/"
 			>
 				Some description here
@@ -65,9 +65,9 @@ const exampleEmbed = new MessageEmbed()
 	.setColor('#0099ff')
 	.setTitle('Some title')
 	.setURL('https://discord.js.org/')
-	.setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
+	.setAuthor('Some name', 'https://i.imgur.com/AfFp7pu.png', 'https://discord.js.org')
 	.setDescription('Some description here')
-	.setThumbnail('https://i.imgur.com/wSTFkRM.png')
+	.setThumbnail('https://i.imgur.com/AfFp7pu.png')
 	.addFields(
 		{ name: 'Regular field title', value: 'Some value here' },
 		{ name: '\u200B', value: '\u200B' },
@@ -75,9 +75,9 @@ const exampleEmbed = new MessageEmbed()
 		{ name: 'Inline field title', value: 'Some value here', inline: true },
 	)
 	.addField('Inline field title', 'Some value here', true)
-	.setImage('https://i.imgur.com/wSTFkRM.png')
+	.setImage('https://i.imgur.com/AfFp7pu.png')
 	.setTimestamp()
-	.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
+	.setFooter('Some footer text here', 'https://i.imgur.com/AfFp7pu.png');
 
 channel.send({ embeds: [exampleEmbed] });
 ```
@@ -114,12 +114,12 @@ const exampleEmbed = {
 	url: 'https://discord.js.org',
 	author: {
 		name: 'Some name',
-		icon_url: 'https://i.imgur.com/wSTFkRM.png',
+		icon_url: 'https://i.imgur.com/AfFp7pu.png',
 		url: 'https://discord.js.org',
 	},
 	description: 'Some description here',
 	thumbnail: {
-		url: 'https://i.imgur.com/wSTFkRM.png',
+		url: 'https://i.imgur.com/AfFp7pu.png',
 	},
 	fields: [
 		{
@@ -148,12 +148,12 @@ const exampleEmbed = {
 		},
 	],
 	image: {
-		url: 'https://i.imgur.com/wSTFkRM.png',
+		url: 'https://i.imgur.com/AfFp7pu.png',
 	},
 	timestamp: new Date(),
 	footer: {
 		text: 'Some footer text here',
-		icon_url: 'https://i.imgur.com/wSTFkRM.png',
+		icon_url: 'https://i.imgur.com/AfFp7pu.png',
 	},
 };
 

@@ -71,7 +71,7 @@ Webhooks can be created with the <DocsLink path="class/TextChannel?scrollTo=crea
 
 ```js
 channel.createWebhook('Some-username', {
-	avatar: 'https://i.imgur.com/wSTFkRM.png',
+	avatar: 'https://i.imgur.com/AfFp7pu.png',
 })
 	.then(webhook => console.log(`Created webhook ${webhook}`))
 	.catch(console.error);
@@ -84,7 +84,7 @@ You can edit Webhooks and WebhookClients to change their name, avatar, and chann
 ```js
 webhook.edit({
 	name: 'Some-username',
-	avatar: 'https://i.imgur.com/wSTFkRM.png',
+	avatar: 'https://i.imgur.com/AfFp7pu.png',
 	channel: '222197033908436994',
 })
 	.then(webhook => console.log(`Edited webhook ${webhook}`))
@@ -114,7 +114,7 @@ const embed = new MessageEmbed()
 webhookClient.send({
 	content: 'Webhook test',
 	username: 'some-username',
-	avatarURL: 'https://i.imgur.com/wSTFkRM.png',
+	avatarURL: 'https://i.imgur.com/AfFp7pu.png',
 	embeds: [embed],
 });
 ```
@@ -140,7 +140,7 @@ client.once('ready', async () => {
 		await webhook.send({
 			content: 'Webhook test',
 			username: 'some-username',
-			avatarURL: 'https://i.imgur.com/wSTFkRM.png',
+			avatarURL: 'https://i.imgur.com/AfFp7pu.png',
 			embeds: [embed],
 		});
 	} catch (error) {
@@ -171,7 +171,7 @@ You can use <DocsLink path="class/Webhook?scrollTo=editMessage">`Webhook#editMes
 const message = await webhook.editMessage('123456789012345678', {
 	content: 'Edited!',
 	username: 'some-username',
-	avatarURL: 'https://i.imgur.com/wSTFkRM.png',
+	avatarURL: 'https://i.imgur.com/AfFp7pu.png',
 	embeds: [embed],
 });
 ```

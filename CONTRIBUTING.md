@@ -229,13 +229,13 @@ If you want to include an image in a page, the image you add should be saved to 
 ```diff
 - Here's what the final result would look like:
 -
-- ![Final result](https://i.imgur.com/78fcCsF.png)
+- ![Final result](https://i.imgur.com/AfFp7pu.png)
 -
 - If you want to read more about this, you can check out the page on [that other cool stuff](https://discordjs.guide/#/some-really-cool-stuff).
 
 + Here's what the final result would look like:
 +
-+ ![Final result](./images/78fcCsF.png)
++ ![Final result](./images/AfFp7pu.png)
 +
 + If you want to read more about this, you can check out the page on [that other cool stuff](/some-really-cool-stuff).
 ```

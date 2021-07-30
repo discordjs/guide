@@ -66,7 +66,7 @@ client.on('messageCreate', message => {
 		!react
 		<template #reactions>
 			<DiscordReactions>
-				<DiscordReaction name="smile" image="https://imgur.com/3TbnN4d.png" />
+				<DiscordReaction name="smile" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f604.png" />
 			</DiscordReactions>
 		</template>
 	</DiscordMessage>

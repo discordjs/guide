@@ -28,7 +28,7 @@ client.on('guildMemberAdd', async member => {
 	const background = await Canvas.loadImage('./wallpaper.jpg');
 	context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-	context.strokeStyle = '#74037b';
+	context.strokeStyle = '#0099ff';
 	context.strokeRect(0, 0, canvas.width, canvas.height);
 
 	context.font = '28px sans-serif';

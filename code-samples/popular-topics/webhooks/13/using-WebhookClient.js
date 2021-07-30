@@ -10,6 +10,6 @@ const embed = new MessageEmbed()
 webhookClient.send({
 	content: 'Webhook test',
 	username: 'some-username',
-	avatarURL: 'https://i.imgur.com/wSTFkRM.png',
+	avatarURL: 'https://i.imgur.com/AfFp7pu.png',
 	embeds: [embed],
 });
