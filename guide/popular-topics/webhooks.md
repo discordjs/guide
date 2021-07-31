@@ -48,7 +48,9 @@ If you are not using a bot client, you can get a webhook by creating a new insta
 ```js
 const webhookClient = new WebhookClient({ id: 'id', token: 'token' });
 ```
-or
+
+You can also pass in just a `url`:
+
 ```js
 const webhookClient = new WebhookClient({ url: 'https://discord.com/api/webhooks/id/token' });
 ```
