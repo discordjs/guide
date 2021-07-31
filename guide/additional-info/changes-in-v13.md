@@ -111,7 +111,7 @@ The most common areas you will encounter this change in are: `MessageOptions#con
 
 let count = 5;
 - embed.addField('Count', count);
-+ embed.addField('Count', `${count}`);
++ embed.addField('Count', count.toString());
 ```
 
 ### Intents
