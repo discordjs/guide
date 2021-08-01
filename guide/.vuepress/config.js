@@ -51,7 +51,7 @@ const config = {
 			},
 		},
 	},
-	globalUIComponents: ['EOLNotice'],
+	globalUIComponents: ['VersionNotification'],
 };
 
 for (const group of Object.values(config.themeConfig.sidebar)) {
