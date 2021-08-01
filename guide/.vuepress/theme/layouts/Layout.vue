@@ -18,8 +18,8 @@
 				<Notification storage-key="v13-notice">
 					<span class="notification-icon"><PartyPopperIcon /></span>
 					<span>
-						You're browsing the guide for discord.js v13, which is still a work in progress.
-						<a href="https://discordjs.guide">Click here</a> for the discord.js v12 guide.
+						You're browsing the guide for discord.js v13.
+						Check out <router-link to="/whats-new.html">what's new</router-link>, or browse the <a href="https://v12.discordjs.guide">discord.js v12 guide</a>.
 					</span>
 				</Notification>
 			</Notifications>
