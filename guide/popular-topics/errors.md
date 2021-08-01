@@ -144,10 +144,11 @@ const { Client, Intents } = require('discord.js');
 // Should not be here!
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
-module.exports = (message, args) => {
-	// Should be message.client instead!
-	client.users.fetch(args[0]).then(user => {
-		message.reply(`Your requested user: ${user.tag}`);
+module.exports = interaction => {
+	const id = interaction.options.getString('id');
+	// Should be `interaction.client` instead!
+	client.users.fetch(id).then(user => {
+		interaction.reply(`Your requested user: ${user.tag}`);
 	});
 };
 ```
@@ -157,7 +158,7 @@ const { Client, Intents } = require('discord.js');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
-client.on('messageCreate', someHandlerFunction);
+client.on('interactionCreate', someHandlerFunction);
 
 client.login('your-token-goes-here');
 // client will not be logged in yet!

@@ -4,7 +4,6 @@ const { Users, CurrencyShop } = require('./dbObjects.js');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const currency = new Collection();
-const prefix = '!';
 
 /*
  * Make sure you are on at least version 5 of Sequelize! Version 4 as used in this guide will pose a security threat.
@@ -42,52 +41,53 @@ client.once('ready', async () => {
 client.on('messageCreate', async message => {
 	if (message.author.bot) return;
 	currency.add(message.author.id, 1);
+});
 
-	if (!message.content.startsWith(prefix)) return;
-	const input = message.content.slice(prefix.length).trim();
-	if (!input.length) return;
-	const [, command, commandArgs] = input.match(/(\w+)\s*([\s\S]*)/);
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	const { commandName: command } = interaction;
 
 	if (command === 'balance') {
-		const target = message.mentions.users.first() || message.author;
-		return message.channel.send(`${target.tag} has ${currency.getBalance(target.id)}💰`);
+		const target = interaction.options.getUser('user') || interaction.user;
+		return interaction.reply(`${target.tag} has ${currency.getBalance(target.id)}💰`);
 	} else if (command === 'inventory') {
-		const target = message.mentions.users.first() || message.author;
+		const target = interaction.options.getUser('user') || interaction.user;
 		const user = await Users.findOne({ where: { user_id: target.id } });
 		const items = await user.getItems();
 
-		if (!items.length) return message.channel.send(`${target.tag} has nothing!`);
-		return message.channel.send(`${target.tag} currently has ${items.map(t => `${t.amount} ${t.item.name}`).join(', ')}`);
+		if (!items.length) return interaction.reply(`${target.tag} has nothing!`);
+		return interaction.reply(`${target.tag} currently has ${items.map(t => `${t.amount} ${t.item.name}`).join(', ')}`);
 	} else if (command === 'transfer') {
-		const currentAmount = currency.getBalance(message.author.id);
-		const transferAmount = commandArgs.split(/ +/).find(arg => !/<@!?\d+>/.test(arg));
-		const transferTarget = message.mentions.users.first();
+		const currentAmount = currency.getBalance(interaction.user.id);
+		const transferAmount = interaction.options.getInteger('amount');
+		const transferTarget = interaction.options.getUser('user');
 
-		if (!transferAmount || isNaN(transferAmount)) return message.channel.send(`Sorry ${message.author}, that's an invalid amount`);
-		if (transferAmount > currentAmount) return message.channel.send(`Sorry ${message.author} you don't have that much.`);
-		if (transferAmount <= 0) return message.channel.send(`Please enter an amount greater than zero, ${message.author}`);
+		if (transferAmount > currentAmount) return interaction.reply(`Sorry ${interaction.user} you don't have that much.`);
+		if (transferAmount <= 0) return interaction.reply(`Please enter an amount greater than zero, ${interaction.user}`);
 
-		currency.add(message.author.id, -transferAmount);
+		currency.add(interaction.user.id, -transferAmount);
 		currency.add(transferTarget.id, transferAmount);
 
-		return message.channel.send(`Successfully transferred ${transferAmount}💰 to ${transferTarget.tag}. Your current balance is ${currency.getBalance(message.author.id)}💰`);
+		return interaction.reply(`Successfully transferred ${transferAmount}💰 to ${transferTarget.tag}. Your current balance is ${currency.getBalance(interaction.user.id)}💰`);
 	} else if (command === 'buy') {
-		const item = await CurrencyShop.findOne({ where: { name: { [Op.like]: commandArgs } } });
-		if (!item) return message.channel.send('That item doesn\'t exist.');
-		if (item.cost > currency.getBalance(message.author.id)) {
-			return message.channel.send(`You don't have enough currency, ${message.author}`);
+		const itemName = interaction.options.getString('item');
+		const item = await CurrencyShop.findOne({ where: { name: { [Op.like]: itemName } } });
+		if (!item) return interaction.reply('That item doesn\'t exist.');
+		if (item.cost > currency.getBalance(interaction.user.id)) {
+			return interaction.reply(`You don't have enough currency, ${interaction.user}`);
 		}
 
-		const user = await Users.findOne({ where: { user_id: message.author.id } });
-		currency.add(message.author.id, -item.cost);
+		const user = await Users.findOne({ where: { user_id: interaction.user.id } });
+		currency.add(interaction.user.id, -item.cost);
 		await user.addItem(item);
 
-		message.channel.send(`You've bought a ${item.name}`);
+		interaction.reply(`You've bought a ${item.name}`);
 	} else if (command === 'shop') {
 		const items = await CurrencyShop.findAll();
-		return message.channel.send(Formatters.codeBlock(items.map(i => `${i.name}: ${i.cost}💰`).join('\n')));
+		return interaction.reply(Formatters.codeBlock(items.map(i => `${i.name}: ${i.cost}💰`).join('\n')));
 	} else if (command === 'leaderboard') {
-		return message.channel.send(
+		return interaction.reply(
 			Formatters.codeBlock(
 				currency.sort((a, b) => b.balance - a.balance)
 					.filter(user => client.users.cache.has(user.user_id))

@@ -15,7 +15,7 @@ For now, let's take the example that they have provided us:
 ```js
 // `m` is a message object that will be passed through the filter function
 const filter = m => m.content.includes('discord');
-const collector = message.channel.createMessageCollector({ filter, time: 15000 });
+const collector = interaction.channel.createMessageCollector({ filter, time: 15000 });
 
 collector.on('collect', m => {
 	console.log(`Collected ${m.content}`);
@@ -74,15 +74,16 @@ const filter = response => {
 	return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
 };
 
-message.channel.send(item.question).then(() => {
-	message.channel.awaitMessages({ filter, max: 1, time: 30000, errors: ['time'] })
-		.then(collected => {
-			message.channel.send(`${collected.first().author} got the correct answer!`);
-		})
-		.catch(collected => {
-			message.channel.send('Looks like nobody got the answer this time.');
-		});
-});
+interaction.reply(item.question, { fetchReply: true })
+	.then(() => {
+		interaction.channel.awaitMessages({ filter, max: 1, time: 30000, errors: ['time'] })
+			.then(collected => {
+				interaction.followUp(`${collected.first().author} got the correct answer!`);
+			})
+			.catch(collected => {
+				interaction.followUp('Looks like nobody got the answer this time.');
+			});
+	});
 ```
 
 ::: tip

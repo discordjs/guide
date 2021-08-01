@@ -50,16 +50,14 @@ Here is some sample code for a `stats` command, without sharding taken into cons
 const { Client, Intents } = require('discord.js');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-const prefix = '!';
 
-client.on('messageCreate', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+client.on('interactionCreate', interaction => {
+	if (!interaction.isCommand()) return;
 
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
+	const { commandName: command } = interaction;
 
 	if (command === 'stats') {
-		return message.channel.send(`Server count: ${client.guilds.cache.size}`);
+		return interation.reply(`Server count: ${client.guilds.cache.size}.`);
 	}
 });
 
@@ -97,12 +95,12 @@ client.shard.fetchClientValues('guilds.cache.size')
 While it's a bit unattractive to have more nesting in your commands, it is necessary when not using `async`/`await`. Now, the code at the top should look something like the below:
 
 ```js {4-8}
-client.on('messageCreate', message => {
+client.on('interactionCreate', interaction => {
 	// ...
 	if (command === 'stats') {
 		return client.shard.fetchClientValues('guilds.cache.size')
 			.then(results => {
-				return message.channel.send(`Server count: ${results.reduce((acc, guildCount) => acc + guildCount, 0)}`);
+				return interaction.reply(`Server count: ${results.reduce((acc, guildCount) => acc + guildCount, 0)}`);
 			})
 			.catch(console.error);
 	}
@@ -125,7 +123,7 @@ This will run the code given to `broadcastEval` on each shard and return the res
 client.shard
 	.broadcastEval(c => c.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0))
 	.then(results => {
-		return message.channel.send(`Total member count: ${results.reduce((acc, memberCount) => acc + memberCount, 0)}`);
+		return interaction.reply(`Total member count: ${results.reduce((acc, memberCount) => acc + memberCount, 0)}`);
 	})
 	.catch(console.error);
 ```
@@ -144,7 +142,7 @@ Promise.all(promises)
 	.then(results => {
 		const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
 		const totalMembers = results[1].reduce((acc, memberCount) => acc + memberCount, 0);
-		return message.channel.send(`Server count: ${totalGuilds}\nMember count: ${totalMembers}`);
+		return interaction.reply(`Server count: ${totalGuilds}\nMember count: ${totalMembers}`);
 	})
 	.catch(console.error);
 ```
@@ -152,7 +150,7 @@ Promise.all(promises)
 `Promise.all()` runs every Promise you pass inside an array in parallel and waits for each to finish before returning their results simultaneously. The result is an array that corresponds with the array of Promises you pass–so the first result element will be from the first Promise. With that, your stats command should look something like this:
 
 ```js {4-15}
-client.on('messageCreate', message => {
+client.on('interactionCreate', interaction => {
 	// ...
 	if (command === 'stats') {
 		const promises = [
@@ -164,7 +162,7 @@ client.on('messageCreate', message => {
 			.then(results => {
 				const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
 				const totalMembers = results[1].reduce((acc, memberCount) => acc + memberCount, 0);
-				return message.channel.send(`Server count: ${totalGuilds}\nMember count: ${totalMembers}`);
+				return interaction.reply(`Server count: ${totalGuilds}\nMember count: ${totalMembers}`);
 			})
 			.catch(console.error);
 	}

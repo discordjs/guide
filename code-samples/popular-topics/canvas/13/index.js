@@ -52,9 +52,11 @@ client.on('guildMemberAdd', async member => {
 	channel.send({ content: `Welcome to the server, ${member}!`, files: [attachment] });
 });
 
-client.on('messageCreate', message => {
-	if (message.content === '!join') {
-		client.emit('guildMemberAdd', message.member);
+client.on('interactionCreate', interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'join') {
+		client.emit('guildMemberAdd', interaction.member);
 	}
 });
 

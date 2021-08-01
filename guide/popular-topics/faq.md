@@ -3,8 +3,8 @@
 ## Legend
 
 * `<client>` is a placeholder for the Client object, such as `const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });`.
-* `<message>` is a placeholder for the Message object, such as `client.on('messageCreate', message => { ... });`.
-* `<guild>` is a placeholder for the Guild object, such as `<message>.guild` or `<client>.guilds.cache.get('<id>')`.
+* `<interaction>` is a placeholder for the Interaction object, such as `client.on('interactionCreate', interaction => { ... });`.
+* `<guild>` is a placeholder for the Guild object, such as `<interaction>.guild` or `<client>.guilds.cache.get('<id>')`.
 * `<voiceChannel>` is a placeholder for the VoiceChannel object, such as `<message>.member.voice.channel`
 
 For a more detailed explanation of the notations commonly used in this guide, the docs, and the support server, see [here](/additional-info/notation.md).
@@ -16,7 +16,7 @@ For a more detailed explanation of the notations commonly used in this guide, th
 <!-- eslint-skip -->
 
 ```js
-const user = <message>.mentions.users.first();
+const user = <interaction>.options.getUser('target');
 <guild>.members.ban(user);
 ```
 
@@ -25,12 +25,12 @@ const user = <message>.mentions.users.first();
 <!-- eslint-skip -->
 
 ```js
-const id = args[0];
+const id = <interaction>.options.get('target')?.value;
 <guild>.members.unban(id);
 ```
 
 ::: tip
-Because you cannot ping a user who isn't in the server, you have to pass in the user id. To do this, we use arguments, represented by `args` (see [Commands with user input](/creating-your-bot/commands-with-user-input/) for more details on this topic).
+Because you cannot ping a user who isn't in the server, you have to pass in the user id. To do this, we use a <DocsLink path="typedef/CommandInteractionOption">`CommandInteractionOption`</DocsLink>. See [here](/interactions/replying-to-slash-commands.html#parsing-options) for more information on this topic.
 :::
 
 ### How do I kick a user?
@@ -38,7 +38,7 @@ Because you cannot ping a user who isn't in the server, you have to pass in the 
 <!-- eslint-skip -->
 
 ```js
-const member = <message>.mentions.members.first();
+const member = <interaction>.options.getMember('target');
 member.kick();
 ```
 
@@ -47,8 +47,8 @@ member.kick();
 <!-- eslint-skip -->
 
 ```js
-const role = <guild>.roles.cache.find(role => role.name === '<role name>');
-const member = <message>.mentions.members.first();
+const role = <interaction>.options.getRole('role');
+const member = <interaction>.options.getMember('target');
 member.roles.add(role);
 ```
 
@@ -57,7 +57,7 @@ member.roles.add(role);
 <!-- eslint-skip -->
 
 ```js
-const member = <message>.mentions.members.first();
+const member = <interaction>.options.getMember('target');
 if (member.roles.cache.some(role => role.name === '<role name>')) {
 	// ...
 }
@@ -68,7 +68,7 @@ if (member.roles.cache.some(role => role.name === '<role name>')) {
 <!-- eslint-skip -->
 
 ```js
-if (<message>.author.id === '<id>') {
+if (<interaction>.user.id === '<id>') {
 	// ...
 }
 ```
@@ -132,42 +132,6 @@ If you would like to set your activity upon startup, you can use the `ClientOpti
 <client>.user.setPresence({ activity: { name: '<activity>' }, status: 'idle' });
 ```
 
-### How do I add a mention prefix to my bot?
-
-```js
-const { Client, Intents } = require('discord.js');
-
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-
-const prefix = '!';
-const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-client.on('messageCreate', message => {
-	const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
-	if (!prefixRegex.test(message.content)) return;
-
-	const [, matchedPrefix] = message.content.match(prefixRegex);
-	const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
-
-	if (command === 'ping') {
-		message.channel.send('Pong!');
-	} else if (command === 'prefix') {
-		message.reply(`You can either ping me or use \`${prefix}\` as my prefix.`);
-	}
-});
-
-client.login('your-token-goes-here');
-```
-
-::: tip
-The `escapeRegex` function converts special characters into literal characters by escaping them to not terminate the pattern within the [Regular Expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)!
-:::
-
-::: tip
-If you aren't familiar with the syntax used on the `const [, matchedPrefix] = ...` line, that's called "array destructuring". Feel free to read more about it in the [ES6 syntax](/additional-info/es6-syntax.md#array-destructuring) guide!
-:::
-
 ## Miscellaneous
 
 ### How do I send a message to a specific channel?
@@ -189,7 +153,7 @@ user.send('<content>');
 ```
 
 ::: tip
-If you want to DM the user who sent the message, you can use `<message>.author.send()`.
+If you want to DM the user who sent the interaction, you can use `<interaction>.user.send()`.
 :::
 
 ### How do I mention a specific user in a message?
@@ -197,9 +161,9 @@ If you want to DM the user who sent the message, you can use `<message>.author.s
 <!-- eslint-skip -->
 
 ```js
-const user = <message>.mentions.users.first();
-<message>.channel.send(`Hi, ${user}.`);
-<message>.channel.send('Hi, <@user id>.');
+const user = <interaction>.options.getUser('target');
+await <interaction>.reply(`Hi, ${user}.`);
+await <interaction>.followUp('Hi, <@user id>.');
 ```
 
 ::: tip
@@ -217,7 +181,7 @@ new Client({ allowedMentions: { parse: ['users', 'roles'] } });
 
 Even more control can be achieved by listing specific `users` or `roles` to be mentioned by ID, e.g.:
 ```js
-message.channel.send({
+channel.send({
 	content: '<@123456789012345678> <@987654321098765432> <@&102938475665748392>',
 	allowedMentions: { users: ['123456789012345678'], roles: ['102938475665748392'] },
 });
@@ -228,21 +192,21 @@ message.channel.send({
 <!-- eslint-skip -->
 
 ```js
-<message>.channel.send('Please enter more input.').then(() => {
-	const filter = m => <message>.author.id === m.author.id;
+<interaction>.reply('Please enter more input.').then(() => {
+	const filter = m => <interaction>.user.id === m.author.id;
 
-	<message>.channel.awaitMessages({ filter, time: 60000, max: 1, errors: ['time'] })
+	<interaction>.channel.awaitMessages({ filter, time: 60000, max: 1, errors: ['time'] })
 		.then(messages => {
-			<message>.channel.send(`You've entered: ${messages.first().content}`);
+			<interaction>.followUp(`You've entered: ${messages.first().content}`);
 		})
 		.catch(() => {
-			<message>.channel.send('You did not enter any input!');
+			<interaction>.followUp('You did not enter any input!');
 		});
 });
 ```
 
 ::: tip
-If you want to learn more about this syntax or reaction collectors, check out [this dedicated guide page for collectors](/popular-topics/collectors.md)!
+If you want to learn more about this syntax or other types of collectors, check out [this dedicated guide page for collectors](/popular-topics/collectors.md)!
 :::
 
 ### How do I block a user from using my bot?
@@ -251,8 +215,8 @@ If you want to learn more about this syntax or reaction collectors, check out [t
 
 ```js
 const blockedUsers = ['id1', 'id2'];
-<client>.on('messageCreate', message => {
-	if (blockedUsers.includes(message.author.id)) return;
+<client>.on('interactionCreate', interaction => {
+	if (blockedUsers.includes(interaction.user.id)) return;
 });
 ```
 
@@ -262,9 +226,9 @@ You do not need to have a constant local variable like `blockedUsers` above. If 
 <!-- eslint-skip -->
 
 ```js
-<client>.on('messageCreate', async message => {
+<client>.on('interactionCreate', async interaction => {
 	const blockedUsers = await database.query('SELECT user_id FROM blocked_users;');
-	if (blockedUsers.includes(message.author.id)) return;
+	if (blockedUsers.includes(interaction.user.id)) return;
 });
 ```
 
@@ -276,7 +240,7 @@ Note that this is just a showcase of how you could do such a check.
 <!-- eslint-skip -->
 
 ```js
-<message>.channel.send('My message to react to.').then(sentMessage => {
+<interaction>.channel.send('My message to react to.').then(sentMessage => {
 	// Unicode emoji
 	sentMessage.react('👍');
 
@@ -354,7 +318,7 @@ There are two common measurements for bot pings. The first, **Websocket heartbea
 <!-- eslint-skip -->
 
 ```js
-<message>.channel.send(`Websocket heartbeat: ${<client>.ws.ping}ms.`);
+<interaction>.reply(`Websocket heartbeat: ${<client>.ws.ping}ms.`);
 ```
 
 ::: tip
@@ -366,9 +330,10 @@ The second, **Roundtrip Latency**, describes the amount of time a full API round
 <!-- eslint-skip -->
 
 ```js
-<message>.channel.send('Pinging...').then(sent => {
-	sent.edit(`Roundtrip latency: ${sent.createdTimestamp - <message>.createdTimestamp}ms`);
-});
+<interaction>.reply('Pinging...', { fetchReply: true })
+	.then(sent => {
+		sent.edit(`Roundtrip latency: ${sent.createdTimestamp - <message>.createdTimestamp}ms`);
+	});
 ```
 
 ### How do I play music from YouTube?

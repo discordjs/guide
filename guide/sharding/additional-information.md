@@ -19,7 +19,7 @@ For shards to communicate, they have to send messages to one another, as they ea
 manager.spawn()
 	.then(shards => {
 		shards.forEach(shard => {
-			shard.on('messageCreate', message => {
+			shard.on('message', message => {
 				console.log(`Shard[${shard.id}] : ${message._eval} : ${message._result}`);
 			});
 		});

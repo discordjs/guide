@@ -1,20 +1,18 @@
 const { Client, Intents } = require('discord.js');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-const prefix = '!';
 
 function findEmoji(c, { nameOrId }) {
 	return c.emojis.cache.get(nameOrId) || c.emojis.cache.find(e => e.name.toLowerCase() === nameOrId.toLowerCase());
 }
 
-client.on('messageCreate', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+client.on('interactionCreate', interaction => {
+	if (!interaction.isCommand()) return;
 
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
+	const { commandName: command } = interaction;
 
 	if (command === 'send') {
-		if (!args.length) return message.reply('please specify a destination channel id.');
+		const id = interaction.options.getString('destination');
 
 		return client.shard.broadcastEval(async (c, { channelId }) => {
 			const channel = c.channels.cache.get(channelId);
@@ -23,25 +21,25 @@ client.on('messageCreate', message => {
 				return true;
 			}
 			return false;
-		}, { context: { channelId: args[0] } })
+		}, { context: { channelId: id } })
 			.then(sentArray => {
 				if (!sentArray.includes(true)) {
-					return message.reply('I could not find such a channel.');
+					return interaction.reply('I could not find such a channel.');
 				}
 
-				return message.reply(`I have sent a message to channel \`${args[0]}\`!`);
+				return interaction.reply(`I have sent a message to channel: \`${id}\`!`);
 			});
 	}
 
 	if (command === 'emoji') {
-		if (!args.length) return message.reply('please specify an emoji ID or name to search for.');
+		const emojiNameOrId = interaction.options.getString('emoji');
 
-		return client.shard.broadcastEval(findEmoji, { context: { nameOrId: args[0] } })
+		return client.shard.broadcastEval(findEmoji, { context: { nameOrId: emojiNameOrId } })
 			.then(emojiArray => {
 				// Locate a non falsy result, which will be the emoji in question
 				const foundEmoji = emojiArray.find(emoji => emoji);
-				if (!foundEmoji) return message.reply('I could not find such an emoji.');
-				return message.reply(`I have found the ${foundEmoji.animated ? `<${foundEmoji.identifier}>` : `<:${foundEmoji.identifier}> emoji!`}!`);
+				if (!foundEmoji) return interaction.reply('I could not find such an emoji.');
+				return interaction.reply(`I have found the ${foundEmoji.animated ? `<${foundEmoji.identifier}>` : `<:${foundEmoji.identifier}> emoji!`}!`);
 			});
 	}
 });

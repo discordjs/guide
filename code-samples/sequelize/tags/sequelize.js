@@ -2,7 +2,6 @@ const Sequelize = require('sequelize');
 const { Client, Intents } = require('discord.js');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-const prefix = '!';
 
 /*
  * Make sure you are on at least version 5 of Sequelize! Version 4 as used in this guide will pose a security threat.
@@ -43,75 +42,69 @@ client.once('ready', () => {
 	Tags.sync();
 });
 
-client.on('messageCreate', async message => {
-	if (message.content.startsWith(prefix)) {
-		const input = message.content.slice(prefix.length).trim().split(' ');
-		const command = input.shift();
-		const commandArgs = input.join(' ');
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
 
-		if (command === 'addtag') {
-			const splitArgs = commandArgs.split(' ');
-			const tagName = splitArgs.shift();
-			const tagDescription = splitArgs.join(' ');
+	const { commandName: command } = interaction;
 
-			try {
-				// equivalent to: INSERT INTO tags (name, descrption, username) values (?, ?, ?);
-				const tag = await Tags.create({
-					name: tagName,
-					description: tagDescription,
-					username: message.author.username,
-				});
-				return message.reply(`Tag ${tag.name} added.`);
-			} catch (error) {
-				if (error.name === 'SequelizeUniqueConstraintError') {
-					return message.reply('That tag already exists.');
-				}
-				return message.reply('Something went wrong with adding a tag.');
+	if (command === 'addtag') {
+		const tagName = interaction.options.getString('name');
+		const tagDescription = interaction.options.getString('description');
+
+		try {
+			// equivalent to: INSERT INTO tags (name, descrption, username) values (?, ?, ?);
+			const tag = await Tags.create({
+				name: tagName,
+				description: tagDescription,
+				username: interaction.author.username,
+			});
+			return interaction.reply(`Tag ${tag.name} added.`);
+		} catch (error) {
+			if (error.name === 'SequelizeUniqueConstraintError') {
+				return interaction.reply('That tag already exists.');
 			}
-		} else if (command === 'tag') {
-			const tagName = commandArgs;
-
-			// equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
-			const tag = await Tags.findOne({ where: { name: tagName } });
-			if (tag) {
-				// equivalent to: UPDATE tags SET usage_count = usage_count + 1 WHERE name = 'tagName';
-				tag.increment('usage_count');
-				return message.channel.send(tag.get('description'));
-			}
-			return message.reply(`Could not find tag: ${tagName}`);
-		} else if (command === 'edittag') {
-			const splitArgs = commandArgs.split(' ');
-			const tagName = splitArgs.shift();
-			const tagDescription = splitArgs.join(' ');
-
-			// equivalent to: UPDATE tags (descrption) values (?) WHERE name = ?;
-			const affectedRows = await Tags.update({ description: tagDescription }, { where: { name: tagName } });
-			if (affectedRows > 0) {
-				return message.reply(`Tag ${tagName} was edited.`);
-			}
-			return message.reply(`Could not find a tag with name ${tagName}.`);
-		} else if (command === 'taginfo') {
-			const tagName = commandArgs;
-
-			// equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
-			const tag = await Tags.findOne({ where: { name: tagName } });
-			if (tag) {
-				return message.channel.send(`${tagName} was created by ${tag.username} at ${tag.createdAt} and has been used ${tag.usage_count} times.`);
-			}
-			return message.reply(`Could not find tag: ${tagName}`);
-		} else if (command === 'showtags') {
-			// equivalent to: SELECT name FROM tags;
-			const tagList = await Tags.findAll({ attributes: ['name'] });
-			const tagString = tagList.map(t => t.name).join(', ') || 'No tags set.';
-			return message.channel.send(`List of tags: ${tagString}`);
-		} else if (command === 'removetag') {
-			// equivalent to: DELETE from tags WHERE name = ?;
-			const tagName = commandArgs;
-			const rowCount = await Tags.destroy({ where: { name: tagName } });
-			if (!rowCount) return message.reply('That tag did not exist.');
-
-			return message.reply('Tag deleted.');
+			return interaction.reply('Something went wrong with adding a tag.');
 		}
+	} else if (command === 'tag') {
+		const tagName = interaction.options.getString('name');
+
+		// equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
+		const tag = await Tags.findOne({ where: { name: tagName } });
+		if (tag) {
+			// equivalent to: UPDATE tags SET usage_count = usage_count + 1 WHERE name = 'tagName';
+			tag.increment('usage_count');
+			return interaction.reply(tag.get('description'));
+		}
+		return interaction.reply(`Could not find tag: ${tagName}`);
+	} else if (command === 'edittag') {
+		const tagName = interaction.options.getString('name');
+		const tagDescription = interaction.options.getString('description');
+
+		// equivalent to: UPDATE tags (descrption) values (?) WHERE name = ?;
+		const affectedRows = await Tags.update({ description: tagDescription }, { where: { name: tagName } });
+		if (affectedRows > 0) {
+			return interaction.reply(`Tag ${tagName} was edited.`);
+		}
+		return interaction.reply(`Could not find a tag with name ${tagName}.`);
+	} else if (command === 'taginfo') {
+		const tagName = interaction.options.getString('name');
+
+		// equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
+		const tag = await Tags.findOne({ where: { name: tagName } });
+		if (tag) {
+			return interaction.reply(`${tagName} was created by ${tag.username} at ${tag.createdAt} and has been used ${tag.usage_count} times.`);
+		}
+		return interaction.reply(`Could not find tag: ${tagName}`);
+	} else if (command === 'showtags') {
+		const tagList = await Tags.findAll({ attributes: ['name'] });
+		const tagString = tagList.map(t => t.name).join(', ') || 'No tags set.';
+		return interaction.reply(`List of tags: ${tagString}`);
+	} else if (command === 'removetag') {
+		// equivalent to: DELETE from tags WHERE name = ?;
+		const tagName = interaction.options.getString('name');
+		const rowCount = await Tags.destroy({ where: { name: tagName } });
+		if (!rowCount) return interaction.reply('That tag did not exist.');
+		return interaction.reply('Tag deleted.');
 	}
 });
 

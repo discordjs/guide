@@ -55,9 +55,11 @@ client.login('your-token-goes-here');
 To make testing this feature much more manageable, you can add a simple command that'll "fake" a new member joining.
 
 ```js
-client.on('messageCreate', message => {
-	if (message.content === '!join') {
-		client.emit('guildMemberAdd', message.member);
+client.on('interactionCreate', interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'join') {
+		client.emit('guildMemberAdd', interaction.member);
 	}
 });
 ```

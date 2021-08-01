@@ -23,17 +23,15 @@ To start off, you're just going to be using this skeleton code:
 const { Client, Intents, MessageEmbed } = require('discord.js');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-const prefix = '!';
 
 client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('messageCreate', async message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
 
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
+	const { commandName: command } = interaction;
 
 	// ...
 });
@@ -68,11 +66,11 @@ fetch('https://aws.random.cat/meow').then(response => response.json());
 It may seem like this does nothing, but what it's doing is launching a request to the random.cat server. The server is returning some JSON that contains a `file` property, which is a string containing a link to a random cat. node-fetch returns a response object, which we can change into JSON with `response.json()`. Next, let's implement this into a command. The code should look similar to this:
 
 ```js {3-6}
-client.on('messageCreate', async message => {
+client.on('interactionCreate', async interaction => {
 	// ...
 	if (command === 'cat') {
 		const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
-		message.channel.send({ files: [file] });
+		interaction.reply({ files: [file] });
 	}
 });
 ```
@@ -95,17 +93,14 @@ Urban Dictionary's API is available at https://api.urbandictionary.com/v0/define
 
 First, you're going to need to fetch data from the API. To do this, you'd do:
 
-```js {1,5-14}
+```js {1,5-11}
 const querystring = require('querystring');
 // ...
-client.on('messageCreate', async message => {
+client.on('interactionCreate', async interaction => {
 	// ...
 	if (command === 'urban') {
-		if (!args.length) {
-			return message.channel.send('You need to supply a search term!');
-		}
-
-		const query = querystring.stringify({ term: args.join(' ') });
+		const term = interaction.options.getString('term');
+		const query = querystring.stringify({ term });
 
 		const { list } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`)
 			.then(response => response.json());
@@ -115,7 +110,7 @@ client.on('messageCreate', async message => {
 
 Here, we use Node's native [querystring module](https://nodejs.org/api/querystring.html) to create a [query string](https://en.wikipedia.org/wiki/Query_string) for the URL so that the Urban Dictionary server can parse it and know what to search.
 
-If you were to do `!urban hello world`, then the URL would become https://api.urbandictionary.com/v0/define?term=hello%20world since the string gets encoded.
+If you were to do `/urban hello world`, then the URL would become https://api.urbandictionary.com/v0/define?term=hello%20world since the string gets encoded.
 
 You can get the respective properties from the returned JSON. If you were to view it in your browser, it usually looks like a bunch of mumbo jumbo. If it doesn't, great! If it does, then you should get a JSON formatter/viewer. If you're using Chrome, [JSON Formatter](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa) is one of the more popular extensions. If you're not using Chrome, search for "JSON formatter/viewer &lt;your browser&gt;" and get one.
 
@@ -127,10 +122,10 @@ As explained above, you'll want to check if the API returned any answers for you
 if (command === 'urban') {
 	// ...
 	if (!list.length) {
-		return message.channel.send(`No results found for **${args.join(' ')}**.`);
+		return interaction.reply(`No results found for **${term}**.`);
 	}
 
-	message.channel.send(list[0].definition);
+	interaction.reply(`**${term}**: ${list[0].definition}`);
 }
 ```
 
@@ -139,17 +134,23 @@ Here, you are only getting the first object from the array of objects called `li
 If you've followed the tutorial, you should have something like this:
 
 <DiscordMessages>
-	<DiscordMessage profile="user">
-		!urban njaksdcas
-	</DiscordMessage>
 	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction
+				profile="user"
+				:command="true"
+			>urban</DiscordInteraction>
+		</template>
 		<DiscordMention :highlight="true" profile="user" />, No results for <strong>njaksdcas</strong>
 	</DiscordMessage>
-	<DiscordMessage profile="user">
-		!urban hello world
-	</DiscordMessage>
 	<DiscordMessage profile="bot">
-		The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books.
+		<template #interactions>
+			<DiscordInteraction
+				profile="user"
+				:command="true"
+			>urban</DiscordInteraction>
+		</template>
+		**hello world**: The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books.
 	</DiscordMessage>
 </DiscordMessages>
 
@@ -175,16 +176,19 @@ const embed = new MessageEmbed()
 		{ name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` },
 	);
 
-message.channel.send({ embeds: [embed] });
+interaction.reply({ embeds: [embed] });
 ```
 
 Now, if you do that same command again, you should get this:
 
 <DiscordMessages>
-	<DiscordMessage profile="user">
-		!urban hello world
-	</DiscordMessage>
 	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction
+				profile="user"
+				:command="true"
+			>urban</DiscordInteraction>
+		</template>
 		<template #embeds>
 			<DiscordEmbed border-color="#EFFF00" embed-title="hello world" url="https://www.urbandictionary.com/define.php?term=hello%20world">
 				<template #fields>

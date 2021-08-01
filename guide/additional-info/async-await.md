@@ -79,14 +79,13 @@ Now that you know how Promises work and what they are used for, let's look at an
 const { Client, Intents } = require('discord.js');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-const prefix = '?';
 
 client.once('ready', () => {
 	console.log('I am ready!');
 });
 
-client.on('messageCreate', message => {
-	if (message.content === `${prefix}react`) {
+client.on('interactionCreate', interaction => {
+	if (interaction.commandName === 'react') {
 		// ...
 	}
 });
@@ -96,9 +95,10 @@ client.login('your-token-goes-here');
 
 If you don't know how Node.js asynchronous execution works, you would probably try something like this:
 
-```js {3-5}
-client.on('messageCreate', message => {
-	if (message.content === `${prefix}react`) {
+```js {3-6}
+client.on('interactionCreate', interaction => {
+	if (interaction.commandName === 'react') {
+		const message = interaction.reply('Reacting!', { fetchReply: true });
 		message.react('🇦');
 		message.react('🇧');
 		message.react('🇨');
@@ -106,16 +106,19 @@ client.on('messageCreate', message => {
 });
 ```
 
-But since all of these react methods are started at the same time, it would just be a race to which server request finished first, so there would be no guarantee that it would react in the order you wanted it to. In order to make sure it reacts in order (a, b, c), you'd need to use the `.then()` callback from the Promises that these methods return. The code would look like this:
+But since all of these methods are started at the same time, it would just be a race to which server request finished first, so there would be no guarantee that it would react at all (if the message isn't fetched) or in the order you wanted it to. In order to make sure it reacts after the message is sent and in order (a, b, c), you'd need to use the `.then()` callback from the Promises that these methods return. The code would look like this:
 
-```js {3-8}
-client.on('messageCreate', message => {
-	if (message.content === `${prefix}react`) {
-		message.react('🇦')
-			.then(() => message.react('🇧'))
-			.then(() => message.react('🇨'))
-			.catch(error => {
-				// handle failure of any Promise rejection inside here
+```js {3-11}
+client.on('interactionCreate', interaction => {
+	if (interaction.commandName === 'react') {
+		interaction.reply('Reacting!', { fetchReply: true })
+			.then(message => {
+				message.react('🇦')
+					.then(() => message.react('🇧'))
+					.then(() => message.react('🇨'))
+					.catch(error => {
+						// handle failure of any Promise rejection inside here
+					});
 			});
 	}
 });
@@ -123,9 +126,10 @@ client.on('messageCreate', message => {
 
 In this piece of code, the Promises are [chain resolved](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then#Chaining) with each other, and if one of the Promises gets rejected, the function passed to `.catch()` gets called. Here's the same code but with async/await:
 
-```js {1,3-5}
-client.on('messageCreate', async message => {
-	if (message.content === `${prefix}react`) {
+```js {1,3-6}
+client.on('interactionCreate', async interaction => {
+	if (interaction.commandName === 'react') {
+		const message = await interaction.reply('Reacting!', { fetchReply: true });
 		await message.react('🇦');
 		await message.react('🇧');
 		await message.react('🇨');
@@ -135,10 +139,11 @@ client.on('messageCreate', async message => {
 
 It's mostly the same code, but how would you catch Promise rejections now since `.catch()` isn't there anymore? That is also a useful feature with async/await; the error will be thrown if you await it so that you can wrap the awaited Promises inside a try/catch, and you're good to go. 
 
-```js {1,3-9}
-client.on('messageCreate', async message => {
-	if (message.content === `${prefix}react`) {
+```js {1,3-10}
+client.on('interactionCreate', async interaction => {
+	if (interaction.commandName === 'react') {
 		try {
+			const message = await interaction.reply('Reacting!', { fetchReply: true });
 			await message.react('🇦');
 			await message.react('🇧');
 			await message.react('🇨');
@@ -153,13 +158,13 @@ This code looks clean and is also easy to read.
 
 So you may be asking, "How would I get the value the Promise resolved with?".
 
-Let's look at an example where you want to delete a sent message.
+Let's look at an example where you want to delete a sent reply.
 
 ```js {2-8}
-client.on('messageCreate', message => {
-	if (message.content === `${prefix}delete`) {
-		message.channel.send('This message will be deleted')
-			.then(sentMessage => sentMessage.delete({ timeout: 10000 }))
+client.on('interactionCreate', interaction => {
+	if (interaction.commandName === 'delete') {
+		interaction.reply('This message will be deleted.', { fetchReply: true })
+			.then(replyMessage => setTimeout(() => replyMessage.delete(), 10000))
 			.catch(error => {
 				// handle error
 			});
@@ -167,14 +172,14 @@ client.on('messageCreate', message => {
 });
 ```
 
-The return value of a `.send()` is a Promise what resolves with the sent Message object, but how would the same code with async/await look?
+The return value of a `.reply()` with the `fetchReply` option set to `true` is a Promise which resolves with the reply when it has been sent, but how would the same code with async/await look?
 
-```js {1,3-8}
-client.on('messageCreate', async message => {
-	if (message.content === `${prefix}delete`) {
+```js {1,3-9}
+client.on('interactionCreate', async interaction => {
+	if (interaction.commandName === 'delete') {
 		try {
-			const sentMessage = await message.channel.send('This message will be deleted in 10 seconds.');
-			await sentMessage.delete({ timeout: 10000 });
+			const replyMessage = await interaction.reply('This message will be deleted.', { fetchReply: true });
+			await replyMessage.delete({ timeout: 10000 });
 		} catch (error) {
 			// handle error
 		}
