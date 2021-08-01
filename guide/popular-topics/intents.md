@@ -16,7 +16,7 @@ Should you receive an error prefixed with `[DISALLOWED_INTENTS]`, please review 
 
 To specify which events you want your bot to receive, first think about which events your bot needs to operate. Then select the required intents and add them to your client constructor, as shown below.
 
-All gateway intents, and the events belonging to each, are listed on the [Discord API documentation](https://discord.com/developers/docs/topics/gateway#list-of-intents). If you need your bot to receive messages (`MESSAGE_CREATE` - `"message"` in discord.js), you need the `GUILD_MESSAGES` intent. If you want your bot to post welcome messages for new members (`GUILD_MEMBER_ADD` - `"guildMemberAdd"` in discord.js), you need the `GUILD_MEMBERS` intent, and so on.
+All gateway intents, and the events belonging to each, are listed on the [Discord API documentation](https://discord.com/developers/docs/topics/gateway#list-of-intents). If you need your bot to receive messages (`MESSAGE_CREATE` - `"messageCreate"` in discord.js), you need the `GUILD_MESSAGES` intent. If you want your bot to post welcome messages for new members (`GUILD_MEMBER_ADD` - `"guildMemberAdd"` in discord.js), you need the `GUILD_MEMBERS` intent, and so on.
 
 ```js
 const { Client } = require('discord.js');
