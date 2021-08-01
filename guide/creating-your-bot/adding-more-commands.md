@@ -34,15 +34,16 @@ If you aren't familiar with some of this syntax, it may be ES6 syntax. If it doe
 
 ## Simple command structure
 
-You already have an if statement that checks messages for a ping/pong command. Adding other command checks is just as easy; chain an `else if` to your existing condition.
+You already have an if statement that checks messages for a ping/pong command. Adding other command checks is just as easy; chain an `else if` to your existing condition. Instead of using `interaction.commandName` every time, you can destructure and rename it to `command`.
 
-```js {2-8}
+```js {2-9}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
+	const { commandName: command } = interaction;
 
-	if (interaction.commandName === 'ping') {
+	if (command === 'ping') {
 		await interaction.reply('Pong!');
-	} else if (interaction.commandName === 'beep') {
+	} else if (command === 'beep') {
 		await interaction.reply('Boop!');
 	}
 });
@@ -63,12 +64,13 @@ Servers are referred to as "guilds" in the Discord API and discord.js library. W
 ```js {8-10}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
+	const { commandName: command } = interaction;
 
-	if (interaction.commandName === 'ping') {
+	if (command === 'ping') {
 		await interaction.reply('Pong!');
-	} else if (interaction.commandName === 'beep') {
+	} else if (command === 'beep') {
 		await interaction.reply('Boop!');
-	} else if (interaction.commandName === 'server') {
+	} else if (command === 'server') {
 		await interaction.reply(`This server's name is: ${interaction.guild.name}`);
 	}
 });
@@ -90,12 +92,13 @@ If you want to expand upon that command and add some more info, here's an exampl
 ```js {8-10}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
+	const { commandName: command } = interaction;
 
-	if (interaction.commandName === 'ping') {
+	if (command === 'ping') {
 		await interaction.reply('Pong!');
-	} else if (interaction.commandName === 'beep') {
+	} else if (command === 'beep') {
 		await interaction.reply('Boop!');
-	} else if (interaction.commandName === 'server') {
+	} else if (command === 'server') {
 		await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
 	}
 });
@@ -128,14 +131,15 @@ Set up another if statement and use the command name `user-info`.
 ```js {10-12}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
+	const { commandName: command } = interaction;
 
-	if (interaction.commandName === 'ping') {
+	if (command === 'ping') {
 		await interaction.reply('Pong!');
-	} else if (interaction.commandName === 'beep') {
+	} else if (command === 'beep') {
 		await interaction.reply('Boop!');
-	} else if (interaction.commandName === 'server') {
+	} else if (command === 'server') {
 		await interaction.reply(`This server's name is: ${interaction.guild.name}`);
-	} else if (interaction.commandName === 'user-info') {
+	} else if (command === 'user-info') {
 		await interaction.reply(`Your username: ${interaction.user.username}\nYour ID: ${interaction.user.id}`);
 	}
 });
