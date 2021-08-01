@@ -38,7 +38,6 @@ export default function useDarkMode(): { isDarkMode: Ref<boolean> } {
 
 	onUnmounted(() => {
 		mediaQuery.value?.removeEventListener('change', onMediaQueryChange);
-		updateDarkModeClass(false);
 	});
 
 	return {
