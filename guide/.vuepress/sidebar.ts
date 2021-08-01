@@ -99,6 +99,16 @@ export default {
 			],
 		},
 		{
+			text: 'Interactions',
+			children: [
+				'/interactions/registering-slash-commands.md',
+				'/interactions/replying-to-slash-commands.md',
+				'/interactions/slash-command-permissions.md',
+				'/interactions/buttons.md',
+				'/interactions/select-menus.md',
+			],
+		},
+		{
 			text: 'Popular Topics',
 			children: [
 				'/popular-topics/faq.md',
@@ -129,16 +139,6 @@ export default {
 				'/sequelize/',
 				'/sequelize/currency.md',
 				'/keyv/',
-			],
-		},
-		{
-			text: 'Interactions',
-			children: [
-				'/interactions/registering-slash-commands.md',
-				'/interactions/replying-to-slash-commands.md',
-				'/interactions/slash-command-permissions.md',
-				'/interactions/buttons.md',
-				'/interactions/select-menus.md',
 			],
 		},
 		{
