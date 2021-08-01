@@ -1,7 +1,7 @@
 const { MessageEmbed, WebhookClient } = require('discord.js');
 const { webhookId, webhookToken } = require('./config.json');
 
-const webhookClient = new WebhookClient(webhookId, webhookToken);
+const webhookClient = new WebhookClient({ id: webhookId, token: webhookToken });
 
 const embed = new MessageEmbed()
 	.setTitle('Some Title')
