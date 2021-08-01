@@ -57,7 +57,7 @@ All content has been updated to use discord.js v13 syntax. The v12 version of th
 - Commando: Removed, to be replaced with a guide on [Sapphire](https://github.com/discordjs/guide/pull/711)
 - [Command handling](/command-handling.md): Updated to use slash commands
 	- Obsolete sections removed
-- All `client.on('message')` snippets updated to `client.on('interactionCreate')`
+- `client.on('message')` snippets updated to `client.on('interactionCreate')`
 	- [Message content will become a new priviledged intent in April 2022](https://support-dev.discord.com/hc/en-us/articles/4404772028055)
 
 <DiscordMessages>
