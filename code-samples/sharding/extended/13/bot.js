@@ -8,6 +8,7 @@ function findEmoji(c, { nameOrId }) {
 
 client.on('interactionCreate', interaction => {
 	if (!interaction.isCommand()) return;
+
 	const { commandName: command } = interaction;
 
 	if (command === 'send') {
@@ -26,7 +27,7 @@ client.on('interactionCreate', interaction => {
 					return interaction.reply('I could not find such a channel.');
 				}
 
-				return interaction.reply(`I have sent a message to channel with ID: \`${id}\`!`);
+				return interaction.reply(`I have sent a message to channel: \`${id}\`!`);
 			});
 	}
 

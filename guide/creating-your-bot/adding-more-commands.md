@@ -36,9 +36,10 @@ If you aren't familiar with some of this syntax, it may be ES6 syntax. If it doe
 
 You already have an if statement that checks messages for a ping/pong command. Adding other command checks is just as easy; chain an `else if` to your existing condition. Instead of using `interaction.commandName` every time, you can destructure and rename it to `command`.
 
-```js {2-9}
+```js {2-10}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
+
 	const { commandName: command } = interaction;
 
 	if (command === 'ping') {
@@ -61,9 +62,10 @@ Make another if statement to check for commands using `server` as the command na
 Servers are referred to as "guilds" in the Discord API and discord.js library. Whenever you see someone say "guild", they mean server.
 :::
 
-```js {9-11}
+```js {10-12}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
+
 	const { commandName: command } = interaction;
 
 	if (command === 'ping') {
@@ -89,9 +91,10 @@ The code above would result in this:
 
 If you want to expand upon that command and add some more info, here's an example of what you can do:
 
-```js {9-11}
+```js {10-12}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
+
 	const { commandName: command } = interaction;
 
 	if (command === 'ping') {
@@ -128,9 +131,10 @@ Set up another if statement and use the command name `user-info`.
 
 <!-- eslint-skip -->
 
-```js {11-13}
+```js {12-14}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
+
 	const { commandName: command } = interaction;
 
 	if (command === 'ping') {

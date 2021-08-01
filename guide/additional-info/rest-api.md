@@ -30,6 +30,7 @@ client.once('ready', () => {
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
+
 	const { commandName: command } = interaction;
 
 	// ...
@@ -124,7 +125,7 @@ if (command === 'urban') {
 		return interaction.reply(`No results found for **${term}**.`);
 	}
 
-	interaction.reply(list[0].definition);
+	interaction.reply(`**${term}**: ${list[0].definition}`);
 }
 ```
 
@@ -138,7 +139,7 @@ If you've followed the tutorial, you should have something like this:
 			<DiscordInteraction
 				profile="user"
 				:command="true"
-			>urban njaksdcas</DiscordInteraction>
+			>urban</DiscordInteraction>
 		</template>
 		<DiscordMention :highlight="true" profile="user" />, No results for <strong>njaksdcas</strong>
 	</DiscordMessage>
@@ -147,9 +148,9 @@ If you've followed the tutorial, you should have something like this:
 			<DiscordInteraction
 				profile="user"
 				:command="true"
-			>urban hello world</DiscordInteraction>
+			>urban</DiscordInteraction>
 		</template>
-		The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books.
+		**hello world**: The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books.
 	</DiscordMessage>
 </DiscordMessages>
 
@@ -186,7 +187,7 @@ Now, if you do that same command again, you should get this:
 			<DiscordInteraction
 				profile="user"
 				:command="true"
-			>urban hello world</DiscordInteraction>
+			>urban</DiscordInteraction>
 		</template>
 		<template #embeds>
 			<DiscordEmbed border-color="#EFFF00" embed-title="hello world" url="https://www.urbandictionary.com/define.php?term=hello%20world">

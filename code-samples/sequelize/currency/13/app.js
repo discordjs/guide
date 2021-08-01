@@ -45,6 +45,7 @@ client.on('messageCreate', async message => {
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
+
 	const { commandName: command } = interaction;
 
 	if (command === 'balance') {

@@ -4,6 +4,7 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 
 client.on('interactionCreate', interaction => {
 	if (!interaction.isCommand()) return;
+
 	const { commandName: command } = interaction;
 
 	if (command === 'stats') {
@@ -15,7 +16,7 @@ client.on('interactionCreate', interaction => {
 			.then(results => {
 				const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
 				const totalMembers = results[1].reduce((acc, memberCount) => acc + memberCount, 0);
-				return interaction.reply(`Server count: ${totalGuilds}.\nMember count: ${totalMembers}.`);
+				return interaction.reply(`Server count: ${totalGuilds}\nMember count: ${totalMembers}`);
 			})
 			.catch(console.error);
 	}

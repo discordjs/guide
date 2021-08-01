@@ -53,7 +53,7 @@ To react with a Unicode emoji, you will need the actual Unicode character of the
 
 To react with an emoji, you need to use the `message.react()` method. Once you have the emoji character, all you need to do is copy & paste it as a string inside the `.react()` method!
 
-```js {4-8}
+```js {4-7}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
@@ -98,7 +98,7 @@ For custom emojis, there are multiple ways of reacting. Like Unicode emojis, you
 
 This format is essentially the name of the emoji, followed by its ID. Copy & paste the ID into the `.react()` method as a string.
 
-```js {4-8}
+```js {4-7}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
@@ -152,7 +152,7 @@ Using `.find()`, your code would look something like this:
 
 <!-- eslint-skip -->
 
-```js {4-5}
+```js {3-4}
 if (interaction.commandName === 'react-custom') {
 	const message = await interaction.reply('You can react with custom emojis!', { fetchReply: true });
 	const reactionEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'blobreach');
@@ -164,7 +164,7 @@ Using `.get()`, your code would look something like this:
 
 <!-- eslint-skip -->
 
-```js {4-5}
+```js {3-4}
 if (interaction.commandName === 'react-custom') {
 	const message = await interaction.reply('You can react with custom emojis!', { fetchReply: true });
 	const reactionEmoji = client.emojis.cache.get('123456789012345678');
@@ -178,7 +178,7 @@ Of course, if you already have the emoji ID, you should put that directly inside
 
 If you just put one `message.react()` under another, it won't always react in order as-is. This is because `.react()` is a Promise and an asynchronous operation.
 
-```js {4-9}
+```js {4-10}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
@@ -235,8 +235,8 @@ client.on('interactionCreate', async interaction => {
 		Reacting with fruits!
 		<template #reactions>
 			<DiscordReactions>
-				<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
 				<DiscordReaction name="tangerine" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34a.png" />
+				<DiscordReaction name="apple" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f34e.png" />
 				<DiscordReaction name="grapes" image="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f347.png" />
 			</DiscordReactions>
 		</template>
@@ -344,7 +344,7 @@ However, if you don't mind the order the emojis react in, you can take advantage
 
 <!-- eslint-skip -->
 
-```js {4-9}
+```js {3-8}
 if (interaction.commandName === 'fruits') {
 	const message = await interaction.reply('Reacting with fruits!', { fetchReply: true });
 	Promise.all([

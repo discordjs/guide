@@ -53,6 +53,7 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 
 client.on('interactionCreate', interaction => {
 	if (!interaction.isCommand()) return;
+
 	const { commandName: command } = interaction;
 
 	if (command === 'stats') {
@@ -86,7 +87,7 @@ In this case, this method iterates through the array and adds each current value
 ```js
 client.shard.fetchClientValues('guilds.cache.size')
 	.then(results => {
-		console.log(`${results.reduce((acc, guildCount) => acc + guildCount, 0)} total guilds.`);
+		console.log(`${results.reduce((acc, guildCount) => acc + guildCount, 0)} total guilds`);
 	})
 	.catch(console.error);
 ```
@@ -99,7 +100,7 @@ client.on('interactionCreate', interaction => {
 	if (command === 'stats') {
 		return client.shard.fetchClientValues('guilds.cache.size')
 			.then(results => {
-				return interaction.reply(`Server count: ${results.reduce((acc, guildCount) => acc + guildCount, 0)}.`);
+				return interaction.reply(`Server count: ${results.reduce((acc, guildCount) => acc + guildCount, 0)}`);
 			})
 			.catch(console.error);
 	}
@@ -122,7 +123,7 @@ This will run the code given to `broadcastEval` on each shard and return the res
 client.shard
 	.broadcastEval(c => c.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0))
 	.then(results => {
-		return interaction.reply(`Total member count: ${results.reduce((acc, memberCount) => acc + memberCount, 0)}.`);
+		return interaction.reply(`Total member count: ${results.reduce((acc, memberCount) => acc + memberCount, 0)}`);
 	})
 	.catch(console.error);
 ```
@@ -141,7 +142,7 @@ Promise.all(promises)
 	.then(results => {
 		const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
 		const totalMembers = results[1].reduce((acc, memberCount) => acc + memberCount, 0);
-		return interaction.reply(`Server count: ${totalGuilds}.\nMember count: ${totalMembers}.`);
+		return interaction.reply(`Server count: ${totalGuilds}\nMember count: ${totalMembers}`);
 	})
 	.catch(console.error);
 ```
@@ -161,7 +162,7 @@ client.on('interactionCreate', interaction => {
 			.then(results => {
 				const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
 				const totalMembers = results[1].reduce((acc, memberCount) => acc + memberCount, 0);
-				return interaction.reply(`Server count: ${totalGuilds}.\nMember count: ${totalMembers}.`);
+				return interaction.reply(`Server count: ${totalGuilds}\nMember count: ${totalMembers}`);
 			})
 			.catch(console.error);
 	}

@@ -18,7 +18,7 @@ client.on('interactionCreate', interaction => {
 		if (!channel) return interaction.reply('I could not find such a channel.');
 
 		channel.send('Hello!');
-		return interaction.reply(`I have sent a message to channel with ID: \`${id}\`!`);
+		return interaction.reply(`I have sent a message to channel: \`${id}\`!`);
 	}
 });
 ```
@@ -55,7 +55,7 @@ return client.shard.broadcastEval(c => {
 		if (!sentArray.includes(true)) {
 			return message.reply('I could not find such a channel.');
 		}
-		return message.reply(`I have sent a message to channel with ID: \`${id}\`!`);
+		return message.reply(`I have sent a message to channel: \`${id}\`!`);
 	});
 ```
 
@@ -77,7 +77,7 @@ client.on('interactionCreate', message => {
 });
 ```
 
-The aforementioned code will essentially search through `client.emojis.cache` for the provided id, which will be given the with `emoji` option. However, with sharding, you might notice it doesn't search through all the client's emojis. As mentioned in an earlier section of this guide, the different shards partition the client and its cache. Emojis derive from guilds meaning each shard will have the emojis from all guilds for that shard. The solution is to use `.broadcastEval()` to search all the shards for the desired emoji.
+The aforementioned code will essentially search through `client.emojis.cache` for the provided id, which will be given provided by the `emoji` option. However, with sharding, you might notice it doesn't search through all the client's emojis. As mentioned in an earlier section of this guide, the different shards partition the client and its cache. Emojis derive from guilds meaning each shard will have the emojis from all guilds for that shard. The solution is to use `.broadcastEval()` to search all the shards for the desired emoji.
 
 Let's start with a basic function, which will try to grab an emoji from the current client and return it.
 

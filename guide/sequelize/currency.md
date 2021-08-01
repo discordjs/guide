@@ -211,12 +211,13 @@ client.once('ready', async () => {
 });
 
 client.on('messageCreate', async message => {
-	if (interaction.user.bot) return;
-	currency.add(interaction.user.id, 1);
+	if (message.author.bot) return;
+	currency.add(message.author.id, 1);
 });
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
+
 	const { commandName: command } = interaction;
 
 	if (command === 'balance') {
