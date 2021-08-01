@@ -215,7 +215,7 @@ client.on('messageCreate', async message => {
 	currency.add(interaction.user.id, 1);
 });
 
-client.on('interactionCreate', async interaction => {	
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 	const { commandName: command } = interaction;
 
@@ -327,7 +327,8 @@ You'd ideally want to allow users to do both `!transfer 5 @user` and `!transfer 
 <!-- eslint-skip -->
 
 ```js
-const item = await CurrencyShop.findOne({ where: { name: { [Op.like]: commandArgs } } });
+const itemName = interaction.options.getString('item');
+const item = await CurrencyShop.findOne({ where: { name: { [Op.like]: itemName } } });
 if (!item) return interaction.reply(`That item doesn't exist.`);
 if (item.cost > currency.getBalance(interaction.user.id)) {
 	return interaction.reply(`You currently have ${currency.getBalance(interaction.user.id)}, but the ${item.name} costs ${item.cost}!`);

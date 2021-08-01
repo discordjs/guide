@@ -70,7 +70,8 @@ client.on('interactionCreate', async interaction => {
 
 		return interaction.reply(`Successfully transferred ${transferAmount}💰 to ${transferTarget.tag}. Your current balance is ${currency.getBalance(interaction.user.id)}💰`);
 	} else if (command === 'buy') {
-		const item = await CurrencyShop.findOne({ where: { name: { [Op.like]: commandArgs } } });
+		const itemName = interaction.options.getString('item');
+		const item = await CurrencyShop.findOne({ where: { name: { [Op.like]: itemName } } });
 		if (!item) return interaction.reply('That item doesn\'t exist.');
 		if (item.cost > currency.getBalance(interaction.user.id)) {
 			return interaction.reply(`You don't have enough currency, ${interaction.user}`);
