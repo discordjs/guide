@@ -23,10 +23,10 @@ client.on('interactionCreate', interaction => {
 		}, { context: { channelId: id } })
 			.then(sentArray => {
 				if (!sentArray.includes(true)) {
-					return message.reply('I could not find such a channel.');
+					return interaction.reply('I could not find such a channel.');
 				}
 
-				return message.reply(`I have sent a message to channel \`${id}\`!`);
+				return interaction.reply(`I have sent a message to channel with ID: \`${id}\`!`);
 			});
 	}
 
@@ -37,8 +37,8 @@ client.on('interactionCreate', interaction => {
 			.then(emojiArray => {
 				// Locate a non falsy result, which will be the emoji in question
 				const foundEmoji = emojiArray.find(emoji => emoji);
-				if (!foundEmoji) return message.reply('I could not find such an emoji.');
-				return message.reply(`I have found the ${foundEmoji.animated ? `<${foundEmoji.identifier}>` : `<:${foundEmoji.identifier}> emoji!`}!`);
+				if (!foundEmoji) return interaction.reply('I could not find such an emoji.');
+				return interaction.reply(`I have found the ${foundEmoji.animated ? `<${foundEmoji.identifier}>` : `<:${foundEmoji.identifier}> emoji!`}!`);
 			});
 	}
 });

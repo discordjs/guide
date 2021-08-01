@@ -15,7 +15,7 @@ client.on('interactionCreate', interaction => {
 			.then(results => {
 				const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
 				const totalMembers = results[1].reduce((acc, memberCount) => acc + memberCount, 0);
-				return message.channel.send(`Server count: ${totalGuilds}.\nMember count: ${totalMembers}.`);
+				return interaction.reply(`Server count: ${totalGuilds}.\nMember count: ${totalMembers}.`);
 			})
 			.catch(console.error);
 	}
