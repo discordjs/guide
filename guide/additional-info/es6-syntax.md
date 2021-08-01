@@ -12,21 +12,23 @@ const { Client, Intents } = require('discord.js');
 const config = require('./config.json');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-const prefix = config.prefix;
 
 client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('messageCreate', message => {
-	if (message.content === prefix + 'ping') {
-		message.channel.send('Pong.');
-	} else if (message.content === prefix + 'beep') {
-		message.channel.send('Boop.');
-	} else if (message.content === prefix + 'server') {
-		message.channel.send('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
-	} else if (message.content === prefix + 'user-info') {
-		message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
+client.on('interactionCreate', interaction => {
+	if (!interaction.isCommand()) return;
+	const command = interaction.commandName;
+
+	if (command === 'ping') {
+		interaction.reply('Pong.');
+	} else if (command === 'beep') {
+		interaction.reply('Boop.');
+	} else if (command === 'server') {
+		interaction.reply('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
+	} else if (command === 'user-info') {
+		interaction.reply('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
 	}
 });
 
@@ -39,16 +41,16 @@ As for the code above, there are a few places where things can be done better. L
 
 ## Template literals
 
-If you check the code above, it's currently doing things like `prefix + 'name'` and `'Your username: ' + message.author.username`, which is perfectly valid. It is a bit hard to read, though, and it's not too fun to constantly type out. Fortunately, there's a better alternative.
+If you check the code above, it's currently doing things like `'Guild name: ' + message.guild.name` and `'Your username: ' + message.author.username`, which is perfectly valid. It is a bit hard to read, though, and it's not too fun to constantly type out. Fortunately, there's a better alternative.
 
 <!-- eslint-skip -->
 
 ```js
 // ES5 version, as we currently have it
-else if (message.content === prefix + 'server') {
+else if (command === 'server') {
 	message.channel.send('Guild name: ' + message.guild.name + '\nTotal members: ' + message.guild.memberCount);
 }
-else if (message.content === prefix + 'user-info') {
+else if (command === 'user-info') {
 	message.channel.send('Your username: ' + message.author.username + '\nYour ID: ' + message.author.id);
 }
 ```
@@ -57,10 +59,10 @@ else if (message.content === prefix + 'user-info') {
 
 ```js
 // ES6 version, using template literals
-else if (message.content.startsWith(`${prefix}server`)) {
+else if (command === 'server') {
 	message.channel.send(`Guild name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
 }
-else if (message.content.startsWith(`${prefix}user-info`)) {
+else if (command === 'user-info') {
 	message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
 }
 ```
@@ -207,12 +209,12 @@ Object destructuring takes those properties from the object and stores them in v
 Additionally, you could do this for your commands.
 
 ```js
-client.on('messageCreate', message => {
-	const { content } = message;
+client.on('interactionCreate', interaction => {
+	const { commandName: command } = interaction;
 
-	if (content === `${prefix}ping`) {
+	if (command === 'ping') {
 		// ping command here...
-	} else if (content === `${prefix}beep`) {
+	} else if (command === 'beep') {
 		// beep command here...
 	}
 	// other commands here...
