@@ -1,42 +1,4 @@
 export default {
-	'/commando/': [
-		{
-			text: 'Home',
-			children: [
-				'/',
-				'/requesting-more-content.md',
-			],
-		},
-		{
-			text: 'Getting Started',
-			children: [
-				'/commando/',
-				'/commando/first-command.md',
-			],
-		},
-		{
-			text: 'Extra Command Info',
-			children: [
-				'/commando/throttling.md',
-				'/commando/guild-only.md',
-				'/commando/permissions.md',
-			],
-		},
-		{
-			text: 'Arguments',
-			children: [
-				'/commando/args.md',
-				'/commando/validators.md',
-			],
-		},
-		{
-			text: 'Additional Information',
-			children: [
-				'/commando/client-values.md',
-				'/commando/unknown-command-response.md',
-			],
-		},
-	],
 	'/voice/': [
 		{
 			text: 'Home',

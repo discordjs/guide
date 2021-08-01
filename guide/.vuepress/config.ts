@@ -35,10 +35,6 @@ const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 		lastUpdated: true,
 		navbar: [
 			{
-				text: 'Commando',
-				link: '/commando/',
-			},
-			{
 				text: 'Voice',
 				link: '/voice/',
 			},

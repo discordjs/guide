@@ -312,10 +312,6 @@ Main docs, reply-prefix branch, `class/Client`:
 <DocsLink section="main" branch="reply-prefix" path="class/Client">Link text</DocsLink>
 <!-- Becomes: https://discord.js.org/#/docs/main/reply-prefix/class/Client -->
 
-Commando docs, djs-v11 branch, `class/Command`:
-<DocsLink section="commando" branch="djs-v11" path="class/Command">Link text</DocsLink>
-<!-- Becomes: https://discord.js.org/#/docs/commando/djs-v11/class/Command -->
-
 Collection docs, master branch (no `branch` prop set), `class/Collection?scrollTo=partition`:
 <DocsLink section="collection" path="class/Collection?scrollTo=partition">Link text</DocsLink>
 <!-- Becomes: https://discord.js.org/#/docs/collection/master/class/Collection?scrollTo=partition -->

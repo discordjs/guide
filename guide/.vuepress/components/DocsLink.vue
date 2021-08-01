@@ -8,7 +8,7 @@
 import { computed, defineProps } from 'vue';
 
 const baseURL = 'https://discord.js.org/#/docs';
-const docsSections = ['main', 'commando', 'collection', 'rpc'];
+const docsSections = ['main', 'collection', 'rpc'];
 
 const props = defineProps({
 	section: {
