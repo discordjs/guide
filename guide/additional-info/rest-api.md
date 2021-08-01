@@ -93,14 +93,14 @@ Urban Dictionary's API is available at https://api.urbandictionary.com/v0/define
 
 First, you're going to need to fetch data from the API. To do this, you'd do:
 
-```js {1,5-14}
+```js {1,5-11}
 const querystring = require('querystring');
 // ...
 client.on('interactionCreate', async interaction => {
 	// ...
 	if (command === 'urban') {
 		const term = interaction.options.getString('term');
-		const query = querystring.stringify({ term: args.join(' ') });
+		const query = querystring.stringify({ term: term });
 
 		const { list } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`)
 			.then(response => response.json());
@@ -122,7 +122,7 @@ As explained above, you'll want to check if the API returned any answers for you
 if (command === 'urban') {
 	// ...
 	if (!list.length) {
-		return interaction.reply(`No results found for **${args.join(' ')}**.`);
+		return interaction.reply(`No results found for **${term}**.`);
 	}
 
 	interaction.reply(list[0].definition);

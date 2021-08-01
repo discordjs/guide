@@ -20,12 +20,12 @@ client.on('interactionCreate', async interaction => {
 		interaction.reply({ files: [file] });
 	} else if (command === 'urban') {
 		const term = interaction.options.getString('term');
-		const query = querystring.stringify({ term: args.join(' ') });
+		const query = querystring.stringify({ term: term });
 
 		const { list } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`).then(response => response.json());
 
 		if (!list.length) {
-			return interaction.reply(`No results found for **${args.join(' ')}**.`);
+			return interaction.reply(`No results found for **${term}**.`);
 		}
 
 		const [answer] = list;
