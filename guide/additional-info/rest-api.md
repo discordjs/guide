@@ -23,7 +23,6 @@ To start off, you're just going to be using this skeleton code:
 const { Client, Intents, MessageEmbed } = require('discord.js');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-const prefix = '!';
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -134,16 +133,22 @@ Here, you are only getting the first object from the array of objects called `li
 If you've followed the tutorial, you should have something like this:
 
 <DiscordMessages>
-	<DiscordMessage profile="user">
-		!urban njaksdcas
-	</DiscordMessage>
 	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction
+				profile="user"
+				:command="true"
+			>urban njaksdcas</DiscordInteraction>
+		</template>
 		<DiscordMention :highlight="true" profile="user" />, No results for <strong>njaksdcas</strong>
 	</DiscordMessage>
-	<DiscordMessage profile="user">
-		!urban hello world
-	</DiscordMessage>
 	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction
+				profile="user"
+				:command="true"
+			>urban hello world</DiscordInteraction>
+		</template>
 		The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books.
 	</DiscordMessage>
 </DiscordMessages>
@@ -176,10 +181,13 @@ interaction.reply({ embeds: [embed] });
 Now, if you do that same command again, you should get this:
 
 <DiscordMessages>
-	<DiscordMessage profile="user">
-		!urban hello world
-	</DiscordMessage>
 	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction
+				profile="user"
+				:command="true"
+			>urban hello world</DiscordInteraction>
+		</template>
 		<template #embeds>
 			<DiscordEmbed border-color="#EFFF00" embed-title="hello world" url="https://www.urbandictionary.com/define.php?term=hello%20world">
 				<template #fields>
