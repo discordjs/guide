@@ -188,18 +188,20 @@ const commands = client.commands.map(({ execute, ...data }) => data);
 
 const rest = new REST({ version: '9' }).setToken(token);
 
-try {
-	console.log('Started refreshing application (/) commands');
+(async () => {
+	try {
+		console.log('Started refreshing application (/) commands');
 
-	await rest.put(
-		Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
-		{ body: commands },
-	);
+		await rest.put(
+			Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
+			{ body: commands },
+		);
 
-	console.log('Sucessfully reloaded application (/) commands.');
-} catch (error) {
-	console.error(error);
-}
+		console.log('Sucessfully reloaded application (/) commands.');
+	} catch (error) {
+		console.error(error);
+	}
+})()
 ```
 
 Running this script will register all your commands to the guild of which the id was passed in above.
