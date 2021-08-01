@@ -21,7 +21,7 @@
 				:command="true"
 			>upgrade</DiscordInteraction>
 		</template>
-		discord.js v13 is out and the guide has been updated!
+		discord.js v13 has released and the guide has been updated!
 		<span class="emoji-container">
 			<img class="emoji-image" title="tada" src="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f389.png" alt="" />
 		</span>
@@ -33,7 +33,7 @@
 ## Site
 
 - Upgraded to [VuePress v2](https://v2.vuepress.vuejs.org/)
-- vue-discord-message upgraded to [@discord-message-components/vue](https://github.com/Danktuary/discord-message-components/blob/main/packages/vue/README.md)
+- Discord message components upgraded to [@discord-message-components/vue](https://github.com/Danktuary/discord-message-components/blob/main/packages/vue/README.md)
 - New theme made to match the [discord.js documentation site](https://discord.js.org/)
 - Many fixes in codeblocks, grammar, consistency, etc.
 
@@ -45,7 +45,7 @@ All content has been updated to use discord.js v13 syntax. The v12 version of th
 
 - [Updating from v12 to v13](/additional-info/changes-in-v13.md): A list of the changes from discord.js v12 to v13
 - [Registering slash commands](/interactions/registering-slash-commands.md): In-depth steps on registering slash commands
-- [Replying to slash commands](/interactions/replying-to-slash-commands.md): The various ways you can reply to slash commands
+- [Replying to slash commands](/interactions/replying-to-slash-commands.md): The various ways to reply to slash commands
 - [Slash command permissions](/interactions/slash-command-permissions.md): Restricting slash commands per user or per role
 - [Buttons](/interactions/buttons.md): Building, sending, and receiving buttons
 - [Select menus](/interactions/select-menus.md): Building, sending, and receiving select menus
@@ -56,8 +56,8 @@ All content has been updated to use discord.js v13 syntax. The v12 version of th
 - [Voice](/voice/): Rewritten to use the [`@discordjs/voice`](https://github.com/discordjs/voice) package
 - Commando: Removed, to be replaced with a guide on [Sapphire](https://github.com/discordjs/guide/pull/711)
 - [Command handling](/command-handling.md): Updated to use slash commands
-	- Obsolete sections have been removed
-- All `client.on('message')` snippets have been updated to `client.on('interactionCreate')`
+	- Obsolete sections removed
+- All `client.on('message')` snippets updated to `client.on('interactionCreate')`
 	- [Message content will become a new priviledged intent in April 2022](https://support-dev.discord.com/hc/en-us/articles/4404772028055)
 
 <DiscordMessages>
