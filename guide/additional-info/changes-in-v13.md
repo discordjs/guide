@@ -335,6 +335,10 @@ The `ClientOptions#fetchAllMembers` option has been removed.
 With the introduction of gateway intents, the `fetchAllMembers` Client option would often fail and causes significant delays in ready states or even cause timeout errors.
 As its purpose is contradictory to Discord's intentions to reduce scraping of user and presence data, it has been removed.
 
+#### ClientOptions#messageCacheMaxSize
+
+The `ClientOptions#messageCacheMaxSize` option has been removed. Instead, use [`ClientOptions#makeCache`](#customizable-manager-caches) to customize the `MessageManager` cache.
+
 #### ClientOptions#messageEditHistoryMaxSize
 
 The `ClientOptions#messageEditHistoryMaxSize` option has been removed.
