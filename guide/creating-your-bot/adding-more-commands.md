@@ -61,7 +61,7 @@ Make another if statement to check for commands using `server` as the command na
 Servers are referred to as "guilds" in the Discord API and discord.js library. Whenever you see someone say "guild", they mean server.
 :::
 
-```js {8-10}
+```js {9-11}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 	const { commandName: command } = interaction;
@@ -89,7 +89,7 @@ The code above would result in this:
 
 If you want to expand upon that command and add some more info, here's an example of what you can do:
 
-```js {8-10}
+```js {9-11}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 	const { commandName: command } = interaction;
@@ -128,7 +128,7 @@ Set up another if statement and use the command name `user-info`.
 
 <!-- eslint-skip -->
 
-```js {10-12}
+```js {11-13}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 	const { commandName: command } = interaction;
