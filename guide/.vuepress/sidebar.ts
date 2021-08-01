@@ -1,42 +1,4 @@
 export default {
-	'/commando/': [
-		{
-			text: 'Home',
-			children: [
-				'/',
-				'/requesting-more-content.md',
-			],
-		},
-		{
-			text: 'Getting Started',
-			children: [
-				'/commando/',
-				'/commando/first-command.md',
-			],
-		},
-		{
-			text: 'Extra Command Info',
-			children: [
-				'/commando/throttling.md',
-				'/commando/guild-only.md',
-				'/commando/permissions.md',
-			],
-		},
-		{
-			text: 'Arguments',
-			children: [
-				'/commando/args.md',
-				'/commando/validators.md',
-			],
-		},
-		{
-			text: 'Additional Information',
-			children: [
-				'/commando/client-values.md',
-				'/commando/unknown-command-response.md',
-			],
-		},
-	],
 	'/voice/': [
 		{
 			text: 'Home',
@@ -99,21 +61,31 @@ export default {
 			],
 		},
 		{
+			text: 'Interactions',
+			children: [
+				'/interactions/registering-slash-commands.md',
+				'/interactions/replying-to-slash-commands.md',
+				'/interactions/slash-command-permissions.md',
+				'/interactions/buttons.md',
+				'/interactions/select-menus.md',
+			],
+		},
+		{
 			text: 'Popular Topics',
 			children: [
 				'/popular-topics/faq.md',
+				'/popular-topics/threads.md',
 				'/popular-topics/embeds.md',
-				'/popular-topics/errors.md',
-				'/popular-topics/permissions.md',
-				'/popular-topics/permissions-extended.md',
 				'/popular-topics/reactions.md',
 				'/popular-topics/collectors.md',
-				'/popular-topics/partials.md',
+				'/popular-topics/permissions.md',
+				'/popular-topics/permissions-extended.md',
 				'/popular-topics/intents.md',
-				'/popular-topics/threads.md',
-				'/popular-topics/canvas.md',
+				'/popular-topics/partials.md',
 				'/popular-topics/webhooks.md',
+				'/popular-topics/errors.md',
 				'/popular-topics/audit-logs.md',
+				'/popular-topics/canvas.md',
 			],
 		},
 		{
@@ -129,16 +101,6 @@ export default {
 				'/sequelize/',
 				'/sequelize/currency.md',
 				'/keyv/',
-			],
-		},
-		{
-			text: 'Interactions',
-			children: [
-				'/interactions/registering-slash-commands.md',
-				'/interactions/replying-to-slash-commands.md',
-				'/interactions/slash-command-permissions.md',
-				'/interactions/buttons.md',
-				'/interactions/select-menus.md',
 			],
 		},
 		{
