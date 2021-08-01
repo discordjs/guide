@@ -144,9 +144,9 @@ const { Client, Intents } = require('discord.js');
 // Should not be here!
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
-module.exports = (interaction) => {
-	const { name: id } = interaction.options.get('target');
-	// Should be interaction.client instead!
+module.exports = interaction => {
+	const id = interaction.options.getString('id');
+	// Should be `interaction.client` instead!
 	client.users.fetch(id).then(user => {
 		interaction.reply(`Your requested user: ${user.tag}`);
 	});

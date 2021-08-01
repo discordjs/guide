@@ -74,16 +74,16 @@ const filter = response => {
 	return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
 };
 
-interaction.reply(item.question);
-interaction.fetchReply().then(() => {
-	interaction.channel.awaitMessages({ filter, max: 1, time: 30000, errors: ['time'] })
-		.then(collected => {
-			interaction.followUp(`${collected.first().author} got the correct answer!`);
-		})
-		.catch(collected => {
-			interaction.followUp('Looks like nobody got the answer this time.');
-		});
-});
+interaction.reply(item.question, { fetchReply: true })
+	.then(() => {
+		interaction.channel.awaitMessages({ filter, max: 1, time: 30000, errors: ['time'] })
+			.then(collected => {
+				interaction.followUp(`${collected.first().author} got the correct answer!`);
+			})
+			.catch(collected => {
+				interaction.followUp('Looks like nobody got the answer this time.');
+			});
+	});
 ```
 
 ::: tip

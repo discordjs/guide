@@ -58,7 +58,7 @@ client.on('interactionCreate', interaction => {
 
 		interaction.channel.permissionOverwrites.set([
 			{
-				id: interaction.guild.id,
+				id: interaction.guildId,
 				deny: ['VIEW_CHANNEL'],
 			},
 			{
@@ -66,7 +66,7 @@ client.on('interactionCreate', interaction => {
 				allow: ['VIEW_CHANNEL'],
 			},
 			{
-				id: interaction.author.id,
+				id: interaction.user.id,
 				allow: ['VIEW_CHANNEL'],
 			},
 		])
@@ -77,11 +77,11 @@ client.on('interactionCreate', interaction => {
 			type: 'GUILD_TEXT',
 			permissionOverwrites: [
 				{
-					id: interaction.guild.id,
+					id: interaction.guildId,
 					deny: ['VIEW_CHANNEL'],
 				},
 				{
-					id: interaction.author.id,
+					id: interaction.user.id,
 					allow: ['VIEW_CHANNEL'],
 				},
 				{
@@ -97,7 +97,7 @@ client.on('interactionCreate', interaction => {
 			return interaction.reply('Please make sure I have the permissions MANAGE_ROLES in this channel and retry.');
 		}
 
-		interaction.channel.permissionOverwrites.delete(interaction.guild.id)
+		interaction.channel.permissionOverwrites.delete(interaction.guildId)
 			.then(() => interaction.reply(`Made channel ${interaction.channel} public.`))
 			.catch(console.error);
 	} else if (interaction.commandName === 'my-permissions') {

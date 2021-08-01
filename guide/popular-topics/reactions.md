@@ -58,8 +58,7 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'react') {
-		interaction.reply('You can react with Unicode emojis!');
-		const message = await interaction.fetchReply();
+		const message = await interaction.reply('You can react with Unicode emojis!', { fetchReply: true });
 		message.react('😄');
 	}
 });
@@ -104,8 +103,7 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'react-custom') {
-		interaction.reply('You can react with custom emojis!');
-		const message = await interaction.fetchReply();
+		const message = await interaction.reply('You can react with custom emojis!', { fetchReply: true });
 		message.react('123456789012345678');
 	}
 });
@@ -156,8 +154,7 @@ Using `.find()`, your code would look something like this:
 
 ```js {4-5}
 if (interaction.commandName === 'react-custom') {
-	interaction.reply('You can react with custom emojis!');
-	const message = await interaction.fetchReply();
+	const message = await interaction.reply('You can react with custom emojis!', { fetchReply: true });
 	const reactionEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'blobreach');
 	message.react(reactionEmoji);
 }
@@ -169,8 +166,7 @@ Using `.get()`, your code would look something like this:
 
 ```js {4-5}
 if (interaction.commandName === 'react-custom') {
-	interaction.reply('You can react with custom emojis!');
-	const message = await interaction.fetchReply();
+	const message = await interaction.reply('You can react with custom emojis!', { fetchReply: true });
 	const reactionEmoji = client.emojis.cache.get('123456789012345678');
 	message.react(reactionEmoji);
 }
@@ -182,7 +178,7 @@ Of course, if you already have the emoji ID, you should put that directly inside
 
 If you just put one `message.react()` under another, it won't always react in order as-is. This is because `.react()` is a Promise and an asynchronous operation.
 
-```js {2-6}
+```js {4-9}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
@@ -213,7 +209,7 @@ client.on('interactionCreate', async interaction => {
 			</DiscordReactions>
 		</template>
 	</DiscordMessage>
-		<DiscordMessage profile="bot">
+	<DiscordMessage profile="bot">
 		<template #interactions>
 			<DiscordInteraction
 				profile="user"
@@ -229,7 +225,7 @@ client.on('interactionCreate', async interaction => {
 			</DiscordReactions>
 		</template>
 	</DiscordMessage>
-		<DiscordMessage profile="bot">
+	<DiscordMessage profile="bot">
 		<template #interactions>
 			<DiscordInteraction
 				profile="user"
@@ -251,13 +247,12 @@ As you can see, if you leave it like that, it won't display as you want. It was 
 
 Luckily, there are two easy solutions to this. The first would be to chain `.then()`s in the order you want it to display.
 
-```js {7-10}
+```js {6-9}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'fruits') {
-		interaction.reply('Reacting with fruits!');
-		const message = await interaction.fetchReply();
+		const message = await interaction.reply('Reacting with fruits!', { fetchReply: true });
 		message.react('🍎')
 			.then(() => message.react('🍊'))
 			.then(() => message.react('🍇'))
@@ -268,13 +263,12 @@ client.on('interactionCreate', async interaction => {
 
 The other would be to use the `async`/`await` keywords.
 
-```js {1,8-14}
+```js {7-13}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'fruits') {
-		interaction.reply('Reacting with fruits!');
-		const message = await interaction.fetchReply();
+		const message = await interaction.reply('Reacting with fruits!', { fetchReply: true });
 
 		try {
 			await message.react('🍎');
@@ -306,7 +300,7 @@ If you try again with either of the code blocks above, you'll get the result you
 			</DiscordReactions>
 		</template>
 	</DiscordMessage>
-		<DiscordMessage profile="bot">
+	<DiscordMessage profile="bot">
 		<template #interactions>
 			<DiscordInteraction
 				profile="user"
@@ -322,7 +316,7 @@ If you try again with either of the code blocks above, you'll get the result you
 			</DiscordReactions>
 		</template>
 	</DiscordMessage>
-		<DiscordMessage profile="bot">
+	<DiscordMessage profile="bot">
 		<template #interactions>
 			<DiscordInteraction
 				profile="user"
@@ -352,8 +346,7 @@ However, if you don't mind the order the emojis react in, you can take advantage
 
 ```js {4-9}
 if (interaction.commandName === 'fruits') {
-	interaction.reply('Reacting with fruits!');
-	const message = await interaction.fetchReply();
+	const message = await interaction.reply('Reacting with fruits!', { fetchReply: true });
 	Promise.all([
 		message.react('🍎'),
 		message.react('🍊'),
@@ -421,11 +414,7 @@ Make sure not to remove reactions by emoji or by user too much; if there are man
 
 A common use case for reactions in commands is having a user confirm or deny an action or creating a poll system. Luckily, we actually [already have a guide page covering this](/popular-topics/collectors.md)! Check out that page if you want a more in-depth explanation. Otherwise, here's a basic example for reference:
 
-<!-- eslint-skip -->
-
 ```js
-// ...
-const message = await interaction.fetchReply();
 message.react('👍').then(() => message.react('👎'));
 
 const filter = (reaction, user) => {

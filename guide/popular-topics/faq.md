@@ -162,8 +162,8 @@ If you want to DM the user who sent the interaction, you can use `<interaction>.
 
 ```js
 const user = <interaction>.options.getUser('target');
-<interaction>.reply(`Hi, ${user}.`);
-<interaction>.followUp('Hi, <@user id>.');
+await <interaction>.reply(`Hi, ${user}.`);
+await <interaction>.followUp('Hi, <@user id>.');
 ```
 
 ::: tip
@@ -330,10 +330,10 @@ The second, **Roundtrip Latency**, describes the amount of time a full API round
 <!-- eslint-skip -->
 
 ```js
-<interaction>.reply('Pinging...');
-<interaction>.fetchReply().then(sent => {
-	sent.edit(`Roundtrip latency: ${sent.createdTimestamp - <message>.createdTimestamp}ms`);
-});
+<interaction>.reply('Pinging...', { fetchReply: true })
+	.then(sent => {
+		sent.edit(`Roundtrip latency: ${sent.createdTimestamp - <message>.createdTimestamp}ms`);
+	});
 ```
 
 ### How do I play music from YouTube?

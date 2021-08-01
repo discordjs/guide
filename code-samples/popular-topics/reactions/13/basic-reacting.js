@@ -12,16 +12,13 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'react') {
-		interaction.reply('You can react with Unicode emojis!');
-		const message = await interaction.fetchReply();
+		const message = await interaction.reply('You can react with Unicode emojis!', { fetchReply: true });
 		message.react('😄');
 	} else if (interaction.commandName === 'react-custom') {
-		interaction.reply('You can react with custom emojis!');
-		const message = await interaction.fetchReply();
+		const message = await interaction.reply('You can react with custom emojis!', { fetchReply: true });
 		message.react('123456789012345678');
 	} else if (interaction.commandName === 'fruits') {
-		interaction.reply('Reacting with fruits!');
-		const message = await interaction.fetchReply();
+		const message = await interaction.reply('Reacting with fruits!', { fetchReply: true });
 		message.react('🍎')
 			.then(() => message.react('🍊'))
 			.then(() => message.react('🍇'))
