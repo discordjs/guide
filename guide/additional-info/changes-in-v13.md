@@ -40,17 +40,18 @@ Support for voice has been separated into its own module. You now need to instal
 
 Refer to the [voice](/voice/) section of this guide to get started.
 
-## Customizable Manager Caches
+## Customizable Manager caches
 
-A popular request that has finally been heard - the `Client` class supports a new option, `makeCache` which accepts a `CacheFactory`.
+A popular request that has finally been heard - the `Client` class now has a new option, `makeCache`. It accepts a `CacheFactory`.
 
-By combining this with the helper function `Options.cacheWithLimits`, users can define limits on each Manager's cache, and let discord.js handle the rest.
+By combining this with the helper function `Options.cacheWithLimits`, users can define limits on each Manager's cache and let discord.js handle the rest.
 
 ```js
 const client = new Client({
 	makeCache: Options.cacheWithLimits({
-		MessageManager: 200, // This is default.
-		PresenceManager: 0, // Add more class names here.
+		MessageManager: 200, // This is default
+		PresenceManager: 0,
+		// Add more class names here
 	}),
 });
 ```
