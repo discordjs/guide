@@ -33,8 +33,8 @@
 ## Site
 
 - Upgraded to [VuePress v2](https://v2.vuepress.vuejs.org/)
-- Discord message components upgraded to [@discord-message-components/vue](https://github.com/Danktuary/discord-message-components/blob/main/packages/vue/README.md)
 - New theme made to match the [discord.js documentation site](https://discord.js.org/)
+- Discord message components upgraded to [@discord-message-components/vue](https://github.com/Danktuary/discord-message-components/blob/main/packages/vue/README.md)
 - Many fixes in codeblocks, grammar, consistency, etc.
 
 ## Pages
@@ -53,8 +53,8 @@ All content has been updated to use discord.js v13 syntax. The v12 version of th
 
 ### Updated
 
-- [Voice](/voice/): Rewritten to use the [`@discordjs/voice`](https://github.com/discordjs/voice) package
 - Commando: Removed, to be replaced with a guide on [Sapphire](https://github.com/discordjs/guide/pull/711)
+- [Voice](/voice/): Rewritten to use the [`@discordjs/voice`](https://github.com/discordjs/voice) package
 - [Command handling](/command-handling.md): Updated to use slash commands
 	- Obsolete sections removed
 - `client.on('message')` snippets updated to `client.on('interactionCreate')`
