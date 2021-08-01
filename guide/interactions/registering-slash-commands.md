@@ -201,7 +201,7 @@ const rest = new REST({ version: '9' }).setToken(token);
 	} catch (error) {
 		console.error(error);
 	}
-})()
+})();
 ```
 
 Running this script will register all your commands to the guild of which the id was passed in above.
