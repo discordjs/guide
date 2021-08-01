@@ -100,7 +100,7 @@ client.on('interactionCreate', async interaction => {
 	// ...
 	if (command === 'urban') {
 		const term = interaction.options.getString('term');
-		const query = querystring.stringify({ term: term });
+		const query = querystring.stringify({ term });
 
 		const { list } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`)
 			.then(response => response.json());
