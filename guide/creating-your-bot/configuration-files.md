@@ -30,7 +30,7 @@ const { token } = require('./config.json');
 
 Next, copy your token from the `client.login('your-token-goes-here')` line and paste into the `config.json` file. Make sure to keep it between the double-quotes.
 
-Now you can simply do `client.login(config.token)` to login!
+Now you can simply do `client.login(token)` to login!
 
 ## Storing additional data
 
