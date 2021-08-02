@@ -142,9 +142,9 @@ And that is it! Simple, isn't it? Start up your bot and see if it works.
 	</DiscordMessage>
 	<DiscordMessage profile="bot">
 		User's avatar:
-		<a href="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png</a>
+		<a href="https://i.imgur.com/AfFp7pu.png" target="_blank" rel="noreferrer noopener">https://cdn.discordapp.com/avatars/123456789012345678/0ab1c2d34efg5678902345h6i7890j12.png</a>
 		<br />
-		<img src="https://cdn.discordapp.com/avatars/328037144868290560/1cc0a3b14aec3499632225c708451d67.png" alt="" />
+		<img src="https://i.imgur.com/AfFp7pu.png" style="width: 128px; height: 128px;" alt="" />
 	</DiscordMessage>
 </DiscordMessages>
 
