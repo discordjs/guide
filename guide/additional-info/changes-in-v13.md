@@ -788,7 +788,7 @@ The `WebhookClient` constructor no longer accepts `id, token` as the first two p
 - new WebhookClient(id, token, options);
 + new WebhookClient({ id, token }, options);
 
-+ new WebhookClient{ url }, options);
++ new WebhookClient({ url }, options);
 ```
 
 ## Additions
