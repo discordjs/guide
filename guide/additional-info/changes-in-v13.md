@@ -978,7 +978,7 @@ A Collection of Roles which are managed by the integration.
 
 Provides gateway support for slash command and message component interactions. 
 
-For more information refer to the [slash commands](/interactions/replying-to-slash-commands) and [message components](/interactions/buttons.html#responding-to-buttons.html) sections of the guide.
+For more information refer to the [slash commands](/interactions/replying-to-slash-commands.md) and [message components](/interactions/buttons.html#responding-to-buttons.html) sections of the guide.
 
 ### InteractionCollector
 

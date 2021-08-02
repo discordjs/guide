@@ -73,7 +73,7 @@ Inside your console, you can press the up arrow on your keyboard to bring up the
 :::
 
 ::: tip
-To learn how to create and receive slash commands, read through [the interactions section](/interactions/registering-slash-commands/).
+To learn how to create and receive slash commands, read through [the interactions section](/interactions/registering-slash-commands.md).
 :::
 
 ## Resulting code

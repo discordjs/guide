@@ -1,7 +1,7 @@
 # Adding more commands
 
 ::: tip
-This page is a follow-up and bases its code on [the previous page](/creating-your-bot/configuration-files.md) and assumes that you have read [the interactions section](/interactions/registering-slash-commands/) and are familiar with its usage.
+This page is a follow-up and bases its code on [the previous page](/creating-your-bot/configuration-files.md) and assumes that you have read [the interactions section](/interactions/registering-slash-commands.md) and are familiar with its usage.
 :::
 
 A bot with nothing but a single command would be boring, and you probably have a bunch of command ideas floating around in your head already, right? Let's begin, then.
