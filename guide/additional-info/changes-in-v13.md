@@ -778,7 +778,7 @@ The `Util#resolveString` method has been removed. discord.js now enforces that u
 
 #### VoiceState#kick
 
-The `VoiceState#kick` method has been renamed to `VoiceState#disconnect`
+The `VoiceState#kick` method has been renamed to `VoiceState#disconnect`.
 
 ### WebhookClient
 
