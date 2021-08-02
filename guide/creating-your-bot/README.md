@@ -72,8 +72,8 @@ Notice how the code uses `.on` rather than `.once` like in the ready event. This
 Inside your console, you can press the up arrow on your keyboard to bring up the latest commands you've run. Pressing `Up` and then `Enter` after closing the process is a convenient, quick way to start it up again (instead of typing out the name each time).
 :::
 
-::: danger
-To learn how create and how to receive slash commands please thoroughly read through [the interactions section](/interactions/registering-slash-commands/).
+::: tip
+To learn how to create and receive slash commands, read through [the interactions section](/interactions/registering-slash-commands/).
 :::
 
 ## Resulting code
