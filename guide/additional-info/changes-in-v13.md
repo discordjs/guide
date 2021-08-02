@@ -390,7 +390,7 @@ You should instead construct an array by spreading the iterators returned by the
 + [...collection.values()];
 
 - collection.keyArray();
-+ [...colletion.keys()];
++ [...collection.keys()];
 ```
 
 ### ColorResolvable
@@ -443,7 +443,6 @@ The `Guild#fetchVanityCode` method has been removed.
 #### Guild#fetchWidget
 
 The `Guild#fetchWidget()` method now retrieves the widget data for the guild instead of the widget settings. See `Client#fetchGuildWidget()`.
-
 The original functionality has moved to the new method `Guild#fetchWidgetSettings()`.
 
 #### Guild#member
@@ -463,7 +462,16 @@ The `Guild#mfaLevel` property is now an enum.
 
 The `Guild#nsfw` property has been removed, replaced by `Guild#nsfwLevel`.
 
-#### Guild#fetchWidget
+#### Guild#owner
+
+The `Guild#owner` property has been removed as it was unreliable due to caching, replaced with `Guild#fetchOwner`.
+
+```diff
+- console.log(guild.owner);
++ guild.fetchOwner().then(console.log);
+```
+
+#### Guild#setWidget
 
 The `Guild#setWidget()` method has been renamed to `Guild#setWidgetSettings()`.
 
@@ -487,6 +495,18 @@ This method has been removed, with functionality replaced by the new `Permission
 + channel.permissionOverwrites.create(user, { VIEW_CHANNEL: false });
 ```
 
+#### GuildChannel#createInvite
+
+#### GuildChannel#fetchInvites
+
+These methods have been removed from `GuildChannel` and placed only on subclasses for which invites can be created. These are `TextChannel`, `NewsChannel`, `VoiceChannel`, `StageChannel` and `StoreChannel`.
+
+On these subclasses, the method now supports additional options:
+
+- `targetUser` to target the invite to join a particular streaming user
+- `targetApplication` to target the invite to a particular Discord activity
+- `targetType`
+
 #### GuildChannel#overwritePermissions
 
 This method has been removed, with functionality replaced by the new `PermissionOverwriteManager`.
@@ -499,6 +519,10 @@ This method has been removed, with functionality replaced by the new `Permission
 #### GuildChannel#permissionOverwrites
 
 This method no longer returns a Collection of PermissionOverwrites, instead providing access to the `PermissionOverwriteManager`.
+
+#### GuildChannel#setTopic
+
+The `GuildChannel#setTopic` method has been removed and placed only on subclasses for which topics can be set. These are `TextChannel`, `NewsChannel` and `StageChannel`.
 
 #### GuildChannel#updateOverwrite
 
@@ -931,15 +955,6 @@ Provides access to the new `GuildInviteManager`.
 
 The `Guild#nsfwLevel` property is now represented by the `NSFWLevel` enum.
 
-#### Guild#owner
-
-The `Guild#owner` property has been removed as it was unreliable due to caching, replaced with `Guild#fetchOwner`.
-
-```diff
-- console.log(guild.owner);
-+ guild.fetchOwner().then(console.log);
-```
-
 #### Guild#premiumTier
 
 The `Guild#premiumTier` property is now represented by the `PremiumTier` enum.
@@ -957,22 +972,6 @@ Provides improved API support for handling and caching bans.
 #### GuildChannel#clone
 
 Now supports setting the `position` property.
-
-#### GuildChannel#createInvite
-
-#### GuildChannel#fetchInvites
-
-These methods have been removed from `GuildChannel` and placed only on subclasses for which invites can be created. These are `TextChannel`, `NewsChannel`, `VoiceChannel`, `StageChannel` and `StoreChannel`.
-
-On these subclasses, the method now supports additional options:
-
-- `targetUser` to target the invite to join a particular streaming user
-- `targetApplication` to target the invite to a particular Discord activity
-- `targetType`
-
-#### GuildChannel#setTopic
-
-The `GuildChannel#setTopic` method has been removed and placed only on subclasses for which topics can be set. These are `TextChannel`, `NewsChannel` and `StageChannel`.
 
 ### GuildChannelManager
 
