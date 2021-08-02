@@ -609,6 +609,12 @@ The `MessageEmbed#attachFiles` method has been removed. Instead, files should be
 + channel.send({ embeds: [new MessageEmbed().setTitle("Files")], files: [file] })
 ```
 
+### Permissions
+
+#### Permissions#FLAGS.MANAGE_EMOJIS
+
+`Permissions.FLAGS.MANAGE_EMOJIS` is now `Permissions.FLAGS.MANAGE_EMOJIS_AND_STICKERS`.
+
 ### ReactionUserManager
 
 #### ReactionUserManager#fetch
