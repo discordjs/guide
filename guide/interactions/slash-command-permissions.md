@@ -31,6 +31,13 @@ client.on('messageCreate', async message => {
 ```
 
 Now you have successfully denied the user whose `id` you used access to this application command.
+
+::: tip
+If you want to update permissions for a global command instead, your `command` variable would be:
+```js
+const command = client.application?.commands.fetch('123456789012345678');
+:::
+
 If you have a command that is disabled by default and you want to grant someone access to use it, do as follows:
 
 <!-- eslint-skip -->
