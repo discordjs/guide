@@ -34,7 +34,7 @@ Now you can simply do `client.login(token)` to login!
 
 ## Storing additional data
 
-As previously mentioned, you'll probably want to store more than just your token and prefix at one point or another. If you're going to store more data, add another key/value pair to the list!
+As previously mentioned, you'll probably want to store more than just your token at one point or another. If you're going to store more data, add another key/value pair to the list!
 
 ```json
 {
