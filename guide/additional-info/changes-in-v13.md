@@ -4,7 +4,7 @@
 
 v13 requires Node 14.6 or higher to use, so make sure you're up to date. To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it! There are many resources online to help you with this step based on your host system.
 
-Once you've got Node up-to-date, you can install v13 by running `npm install discord.js` in your terminal or command prompt for text-only use, or `npm install discord.js @discordjs/voice` for voice support.
+Once you've got Node up-to-date, you can install v13 by running `npm install discord.js@dev` in your terminal or command prompt for text-only use, or `npm install discord.js @discordjs/voice` for voice support.
 
 You can check your discord.js version with `npm list discord.js`. Should it still show v12.x, uninstall (`npm uninstall discord.js`) and re-install discord.js and make sure the entry in your package.json does not prevent a major version update. Please refer to the [npm documentation](https://docs.npmjs.com/files/package.json#dependencies) for this.
 
