@@ -499,13 +499,13 @@ This method has been removed, with functionality replaced by the new `Permission
 
 #### GuildChannel#fetchInvites
 
-These methods have been removed from `GuildChannel` and placed only on subclasses for which invites can be created. These are `TextChannel`, `NewsChannel`, `VoiceChannel`, `StageChannel` and `StoreChannel`.
+These methods have been removed from `GuildChannel` and placed only on subclasses for which invites can be created. These are `TextChannel`, `NewsChannel`, `VoiceChannel`, `StageChannel`, and `StoreChannel`.
 
 On these subclasses, the method now supports additional options:
 
 - `targetUser` to target the invite to join a particular streaming user
 - `targetApplication` to target the invite to a particular Discord activity
-- `targetType`
+- `targetType` defines the type of the target for this invite; user or application
 
 #### GuildChannel#overwritePermissions
 
@@ -522,7 +522,7 @@ This method no longer returns a Collection of PermissionOverwrites, instead prov
 
 #### GuildChannel#setTopic
 
-The `GuildChannel#setTopic` method has been removed and placed only on subclasses for which topics can be set. These are `TextChannel`, `NewsChannel` and `StageChannel`.
+The `GuildChannel#setTopic` method has been removed and placed only on subclasses for which topics can be set. These are `TextChannel`, `NewsChannel`, and `StageChannel`.
 
 #### GuildChannel#updateOverwrite
 
