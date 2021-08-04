@@ -171,7 +171,7 @@ And there you have it! As you can see, it's quite simple to add additional comma
 
 If you don't plan to make more than seven or eight commands for your bot, then using an if/else if chain is sufficient; it's presumably a small project at that point, so you shouldn't need to spend too much time on it. However, this isn't the case for most of us.
 
-You probably want your bot to be feature-rich and easy to configure and develop, right? Using a giant if/else if chain won't let you achieve that; it will only hinder your development process. After you read up on [creating arguments](/creating-your-bot/commands-with-user-input.md), we'll be diving right into something called a "command handler" - code that makes handling commands easier and much more efficient.
+You probably want your bot to be feature-rich and easy to configure and develop, right? Using a giant if/else if chain won't let you achieve that; it will only hinder your development process. After you read up on [creating arguments](/command-handling.md), we'll be diving right into something called a "command handler" - code that makes handling commands easier and much more efficient.
 
 Before continuing, here's a small list of reasons why you shouldn't use if/else if chains for anything that's not a small project:
 
