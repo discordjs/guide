@@ -39,35 +39,24 @@ Methods that follow this philosophy of staying close to the `Array` interface ar
 
 ## Converting to Array
 
-There are two ways you might want to convert a `Collection` into an `Array`. The first way is the `array` or `keyArray` methods.
-They create an array from the items in the collection but also caches it:
-
-```js
-// Not computed the second time; it is cached!
-collection.array();
-collection.array();
-
-// Any change to the collection, however, invalidates the cache.
-// This call to `array` must be recomputed.
-collection.delete('81440962496172032');
-collection.array();
-```
-
-This caching behavior is undesirable if you are planning to mutate the array, so instead, you can use `Array.from`:
+There are two ways you might want to convert a `Collection` into an `Array`; the first being the spread operator (`...`) and the second being `Array.from`:
 
 ```js
 // For values.
+[...collection.values()];
 Array.from(collection.values());
 
 // For keys.
+[...collection.keys()];
 Array.from(collection.keys());
 
 // For [key, value] pairs.
+[...collection];
 Array.from(collection);
 ```
 
 ::: warning
-Many people use `array` way too much! This leads to unneeded caching of data and confusing code. Before you use `array` or similar, ask yourself if whatever you are trying to do can't be done with the given `Map` or `Collection` methods or with a for-of loop.
+Many people use `...` way too much! This leads to confusing code. Before you use `...` or similar, ask yourself if whatever you are trying to do can't be done with the given `Map` or `Collection` methods or with a for-of loop.
 :::
 
 ## Extra Utilities
@@ -75,7 +64,7 @@ Many people use `array` way too much! This leads to unneeded caching of data and
 Some methods are not from `Array` and are instead entirely new to standard JavaScript.
 
 ```js
-// A random value. Be careful; this uses `array`, so caching is done.
+// A random value.
 collection.random();
 
 // The first value.
@@ -84,7 +73,7 @@ collection.first();
 // The first 5 values.
 collection.first(5);
 
-// Similar to `first`, but from the end. This uses `array`.
+// Similar to `first`, but from the end.
 collection.last();
 collection.last(2);
 
