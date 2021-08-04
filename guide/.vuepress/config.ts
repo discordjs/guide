@@ -54,14 +54,14 @@ if (process.env.NODE_ENV === 'production') {
 		[
 			'@vuepress/plugin-docsearch',
 			{
-				apiKey: 'c8d9361fb8403f7c5111887e0edf4b5e',
+				apiKey: process.env.API_KEY,
 				indexName: 'discordjs',
 				placeholder: 'Search guide',
 			},
 		],
 		[
 			'@vuepress/plugin-google-analytics',
-			{ id: 'UA-108513187-1' },
+			{ id: process.env.GOOGLE_ANALYTICS_ID },
 		],
 	);
 }
