@@ -19,9 +19,9 @@ To specify which events you want your bot to receive, first think about which ev
 All gateway intents, and the events belonging to each, are listed on the [Discord API documentation](https://discord.com/developers/docs/topics/gateway#list-of-intents). If you need your bot to receive messages (`MESSAGE_CREATE` - `"messageCreate"` in discord.js), you need the `GUILD_MESSAGES` intent. If you want your bot to post welcome messages for new members (`GUILD_MEMBER_ADD` - `"guildMemberAdd"` in discord.js), you need the `GUILD_MEMBERS` intent, and so on.
 
 ```js
-const { Client } = require('discord.js');
+const { Client, Intents } = require('discord.js');
 
-const client = new Client({ intents: ['GUILDS', 'GUILD_MESSAGES'] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 ```
 
 ::: warning
@@ -40,14 +40,14 @@ You can use the `.add()` and `.remove()` methods to add or remove flags (Intents
 const { Client, Intents } = require('discord.js');
 
 const myIntents = new Intents();
-myIntents.add('GUILD_PRESENCES', 'GUILD_MEMBERS');
+myIntents.add(Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS);
 
 const client = new Client({ intents: myIntents });
 
 // other examples:
 
-const otherIntents = new Intents(['GUILDS', 'GUILD_MESSAGES', 'DIRECT_MESSAGES']);
-otherIntents.remove(['DIRECT_MESSAGES', 'GUILD_MESSAGES']);
+const otherIntents = new Intents([Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES]);
+otherIntents.remove([Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILD_MESSAGES]);
 
 const otherIntents2 = new Intents(32509);
 otherIntents2.remove(4096, 512);

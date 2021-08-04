@@ -42,7 +42,9 @@ You can provide permission decimals wherever we use flag literals in this guide.
 Base permissions are set on roles, not the guild member itself. To change them, you access a Role object (for example via `member.roles.cache.first()` or `guild.roles.cache.random()`) and use the `.setPermissions()` method. This is how you'd change the base permissions for the `@everyone` role, for example:
 
 ```js
-guild.roles.everyone.setPermissions(['SEND_MESSAGES', 'VIEW_CHANNEL']);
+const { Permissions } = require('discord.js');
+
+guild.roles.everyone.setPermissions([Permissions.FLAGS.SEND_MESSAGES, Permissions.FLAGS.VIEW_CHANNELS]);
 ```
 
 Any permission not referenced in the flag array or bit field is not granted to the role. 
@@ -56,7 +58,9 @@ Note that flag names are literal. Although `VIEW_CHANNEL` grants access to view 
 Alternatively you can provide permissions as a property of the <DocsLink path="typedef/CreateRoleOptions">CreateRoleOptions</DocsLink> typedef during role creation as an array of flag strings or a permission number:
 
 ```js
-guild.roles.create({ name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS'] });
+const { Permissions } = require('discord.js');
+
+guild.roles.create({ name: 'Mod', permissions: [Permissions.FLAGS.MANAGE_MESSAGES, Permissions.FLAGS.KICK_MEMBERS] });
 ```
 
 ### Checking member permissions
@@ -64,15 +68,17 @@ guild.roles.create({ name: 'Mod', permissions: ['MANAGE_MESSAGES', 'KICK_MEMBERS
 To know if one of a member's roles has a permission enabled, you can use the `.has()` method of the GuildMember's <DocsLink path="class/GuildMember?scrollTo=permissions">`permissions`</DocsLink> and provide a permission flag, array, or number to check for. You can also specify if you want to allow the `ADMINISTRATOR` permission or the guild owner status to override this check with the following parameters.
 
 ```js
-if (member.permissions.has('KICK_MEMBERS')) {
+const { Permissions } = require('discord.js');
+
+if (member.permissions.has(Permissions.FLAGS.KICK_MEMBERS)) {
 	console.log('This member can kick');
 }
 
-if (member.permissions.has(['KICK_MEMBERS', 'BAN_MEMBERS'])) {
+if (member.permissions.has([Permissions.FLAGS.KICK_MEMBERS, Permissions.FLAGS.BAN_MEMBERS])) {
 	console.log('This member can kick and ban');
 }
 
-if (member.permissions.has('KICK_MEMBERS', false)) {
+if (member.permissions.has(Permissions.FLAGS.KICK_MEMBERS, false)) {
 	console.log('This member can kick without allowing admin to override');
 }
 ```
@@ -113,11 +119,11 @@ guild.channels.create('new-channel', {
 	permissionOverwrites: [
 		{
 			id: message.guild.id,
-			deny: ['VIEW_CHANNEL'],
+			deny: [Permissions.FLAGS.VIEW_CHANNEL],
 		},
 		{
 			id: message.author.id,
-			allow: ['VIEW_CHANNEL'],
+			allow: [Permissions.FLAGS.VIEW_CHANNEL],
 		},
 	],
 });
@@ -131,11 +137,11 @@ To edit permission overwrites on the channel with a provided set of new overwrit
 channel.permissionOverwrites.edit([
 	{
 		id: guild.id,
-		deny: ['VIEW_CHANNEL'],
+		deny: [Permissions.FLAGS.VIEW_CHANNEL],
 	},
 	{
 		id: user.id,
-		allow: ['VIEW_CHANNEL'],
+		allow: [Permissions.FLAGS.VIEW_CHANNEL],
 	},
 ]);
 ```
@@ -152,11 +158,11 @@ channel.permissionOverwrites.set(otherChannel.permissionOverwrites.cache);
 channel.permissionOverwrites.set([
 	{
 		id: guild.id,
-		deny: ['VIEW_CHANNEL'],
+		deny: [Permissions.FLAGS.VIEW_CHANNEL],
 	},
 	{
 		id: user.id,
-		allow: ['VIEW_CHANNEL'],
+		allow: [Permissions.FLAGS.VIEW_CHANNEL],
 	},
 ]);
 ```
@@ -250,7 +256,7 @@ However, you can pass these decimals to the Permissions constructor to convert t
 ```js
 const { Permissions } = require('discord.js');
 
-const permissions = new Permissions(268550160);
+const permissions = new Permissions(268550160n);
 ```
 
 You can also use this approach for other <DocsLink path="typedef/PermissionResolvable">PermissionResolvable</DocsLink>s like flag arrays or flags.
@@ -259,11 +265,11 @@ You can also use this approach for other <DocsLink path="typedef/PermissionResol
 const { Permissions } = require('discord.js');
 
 const flags = [
-	'MANAGE_CHANNELS',
-	'EMBED_LINKS',
-	'ATTACH_FILES',
-	'READ_MESSAGE_HISTORY',
-	'MANAGE_ROLES',
+	Permissions.FLAGS.MANAGE_CHANNELS,
+	Permissions.FLAGS.EMBED_LINKS,
+	Permissions.FLAGS.ATTACH_FILES,
+	Permissions.FLAGS.READ_MESSAGE_HISTORY,
+	Permissions.FLAGS.MANAGE_ROLES,
 ];
 
 const permissions = new Permissions(flags);
@@ -279,43 +285,43 @@ Let's say you want to know if the decimal bit field representation `268550160` h
 ```js
 const { Permissions } = require('discord.js');
 
-const bitPermissions = new Permissions(268550160);
+const bitPermissions = new Permissions(268550160n);
 
-console.log(bitPermissions.has('MANAGE_CHANNELS'));
+console.log(bitPermissions.has(Permissions.FLAGS.MANAGE_CHANNELS));
 // output: true
 
-console.log(bitPermissions.has(['MANAGE_CHANNELS', 'EMBED_LINKS']));
+console.log(bitPermissions.has([Permissions.FLAGS.MANAGE_CHANNELS, Permissions.FLAGS.EMBED_LINKS]));
 // output: true
 
-console.log(bitPermissions.has(['MANAGE_CHANNELS', 'KICK_MEMBERS']));
+console.log(bitPermissions.has([Permissions.FLAGS.MANAGE_CHANNELS, Permissions.FLAGS.KICK_MEMBERS]));
 // output: false
 
 const flagsPermissions = new Permissions([
-	'MANAGE_CHANNELS',
-	'EMBED_LINKS',
-	'ATTACH_FILES',
-	'READ_MESSAGE_HISTORY',
-	'MANAGE_ROLES',
+	Permissions.FLAGS.MANAGE_CHANNELS,
+	Permissions.FLAGS.EMBED_LINKS,
+	Permissions.FLAGS.ATTACH_FILES,
+	Permissions.FLAGS.READ_MESSAGE_HISTORY,
+	Permissions.FLAGS.MANAGE_ROLES,
 ]);
 
-console.log(flagsPermissions.has('MANAGE_CHANNELS'));
+console.log(flagsPermissions.has(Permissions.FLAGS.MANAGE_CHANNELS));
 // output: true
 
-console.log(flagsPermissions.has(['MANAGE_CHANNELS', 'EMBED_LINKS']));
+console.log(flagsPermissions.has([Permissions.FLAGS.MANAGE_CHANNELS, Permissions.FLAGS.EMBED_LINKS]));
 // output: true
 
-console.log(flagsPermissions.has(['MANAGE_CHANNELS', 'KICK_MEMBERS']));
+console.log(flagsPermissions.has([Permissions.FLAGS.MANAGE_CHANNELS, Permissions.FLAGS.KICK_MEMBERS]));
 // output: false
 
-const adminPermissions = new Permissions('ADMINISTRATOR');
+const adminPermissions = new Permissions(Permissions.FLAGS.ADMINISTRATOR);
 
-console.log(adminPermissions.has('MANAGE_CHANNELS'));
+console.log(adminPermissions.has(Permissions.FLAGS.MANAGE_CHANNELS));
 // output: true
 
-console.log(adminPermissions.has('MANAGE_CHANNELS', true));
+console.log(adminPermissions.has(Permissions.FLAGS.MANAGE_CHANNELS, true));
 // output: true
 
-console.log(adminPermissions.has('MANAGE_CHANNELS', false));
+console.log(adminPermissions.has(Permissions.FLAGS.MANAGE_CHANNELS, false));
 // output: false
 ```
 
@@ -327,22 +333,22 @@ The Permissions object enables you to easily add or remove individual permission
 const { Permissions } = require('discord.js');
 
 const permissions = new Permissions([
-	'MANAGE_CHANNELS',
-	'EMBED_LINKS',
-	'ATTACH_FILES',
-	'READ_MESSAGE_HISTORY',
-	'MANAGE_ROLES',
+	Permissions.FLAGS.VIEW_CHANNEL,
+	Permissions.FLAGS.EMBED_LINKS,
+	Permissions.FLAGS.ATTACH_FILES,
+	Permissions.FLAGS.READ_MESSAGE_HISTORY,
+	Permissions.FLAGS.MANAGE_ROLES,
 ]);
 
-console.log(permissions.has('KICK_MEMBERS'));
+console.log(permissions.has(Permissions.FLAGS.KICK_MEMBERS));
 // output: false
 
-permissions.add('KICK_MEMBERS');
-console.log(permissions.has('KICK_MEMBERS'));
+permissions.add(Permissions.FLAGS.KICK_MEMBERS);
+console.log(permissions.has(Permissions.FLAGS.KICK_MEMBERS));
 // output: true
 
-permissions.remove('KICK_MEMBERS');
-console.log(permissions.has('KICK_MEMBERS'));
+permissions.remove(Permissions.FLAGS.KICK_MEMBERS);
+console.log(permissions.has(Permissions.FLAGS.KICK_MEMBERS));
 // output : false
 ```
 
