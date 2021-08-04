@@ -33,7 +33,7 @@ client.on('interactionCreate', async interaction => {
 
 		context.font = '28px sans-serif';
 		context.fillStyle = '#ffffff';
-		context.fillText('Profile Badge', canvas.width / 2.5, canvas.height / 3.5);
+		context.fillText('Profile', canvas.width / 2.5, canvas.height / 3.5);
 
 		context.font = applyText(canvas, `${interaction.member.displayName}!`);
 		context.fillStyle = '#ffffff';
