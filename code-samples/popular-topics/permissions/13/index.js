@@ -9,9 +9,14 @@ client.once('ready', () => {
 
 client.on('interactionCreate', interaction => {
 	if (!interaction.isCommand()) return;
-	if (!interaction.channel.permissionsFor(client.user).has('SEND_MESSAGES')) return;
+	if (!interaction.channel.permissionsFor(client.user).has(Permissions.FLAGS.SEND_MESSAGES)) return;
 
-	const botPerms = [Permissions.FLAGS.MANAGE_MESSAGES, Permissions.FLAGS.KICK_MEMBERS, Permissions.FLAGS.MANAGE_ROLES, Permissions.FLAGS.MANAGE_CHANNELS];
+	const botPerms = [
+		Permissions.FLAGS.MANAGE_MESSAGES,
+		Permissions.FLAGS.KICK_MEMBERS,
+		Permissions.FLAGS.MANAGE_ROLES,
+		Permissions.FLAGS.MANAGE_CHANNELS,
+	];
 
 	if (!interaction.guild.me.permissions.has(botPerms)) {
 		return interaction.reply(`I need the permissions ${botPerms.join(', ')} for this demonstration to work properly`);
