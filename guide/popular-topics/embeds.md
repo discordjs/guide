@@ -257,7 +257,7 @@ If you want to build the new embed data on a previously sent embed template, mak
 - The timestamp will automatically adjust the timezone depending on the user's device
 - Mentions of any kind will only render correctly in field values and descriptions
 - Mentions in embeds will not trigger a notification
-- Embeds allow masked links (e.g. `[Guide](https://discordjs.guide/ 'optional hovertext')`), but only in description and field values
+- Embeds allow masked links (e.g. `[Guide](https://discordjs.guide/ 'optional hovertext)`), but only in description and field values
 
 ## Embed limits
 
