@@ -36,7 +36,7 @@ player.stop();
 
 ### Playing audio
 
-You can create [audio resources](./audio-resources) and then play them on an audio player.
+You can create [audio resources](./audio-resources.md) and then play them on an audio player.
 
 ```js
 const resource = createAudioResource('/home/user/voice/track.mp3');
