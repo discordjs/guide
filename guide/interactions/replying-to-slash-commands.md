@@ -113,7 +113,7 @@ client.on('interactionCreate', async interaction => {
 
 As previously mentioned, you have three seconds to respond to an interaction before its token becomes invalid. But what if you have a command that performs a task which takes longer than three seconds before being able to reply?
 
-In this case, you can make use of the `CommandInteraction#defer()` method, which triggers the `<application> is thinking...` message and also acts as initial response. This allows you 15 minutes to complete your tasks before responding.
+In this case, you can make use of the `CommandInteraction#deferReply()` method, which triggers the `<application> is thinking...` message and also acts as initial response. This allows you 15 minutes to complete your tasks before responding.
 <!--- here either display the is thinking message via vue-discord-message or place a screenshot -->
 
 ```js {7-9}
@@ -123,7 +123,7 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-		await interaction.defer();
+		await interaction.deferReply();
 		await wait(4000);
 		await interaction.editReply('Pong!');
 	}
@@ -137,7 +137,7 @@ You can also pass an `ephemeral` flag to the `InteractionDeferOptions`:
 <!-- eslint-skip -->
 
 ```js
-await interaction.defer({ ephemeral: true });
+await interaction.deferReply({ ephemeral: true });
 ```
 
 ## Follow-ups
