@@ -107,7 +107,7 @@ With your `client.commands` Collection setup, you can use it to retrieve and exe
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	let command = client.commands.get(interaction.commandName);
+	const command = client.commands.get(interaction.commandName);
 	
 	if (!command) return;
 
