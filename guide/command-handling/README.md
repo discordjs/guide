@@ -107,10 +107,12 @@ With your `client.commands` Collection setup, you can use it to retrieve and exe
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (!client.commands.has(interaction.commandName)) return;
+	let command = client.commands.get(interaction.commandName);
+	
+	if (!command) return;
 
 	try {
-		await client.commands.get(interaction.commandName).execute(interaction);
+		await command.execute(interaction);
 	} catch (error) {
 		console.error(error);
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
