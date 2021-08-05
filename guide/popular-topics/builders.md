@@ -26,7 +26,7 @@ const underscore = Formatters.underscore(string);
 
 ### Links
 
-There's also two method to format hypelinks. `Formatters#hyperlink()` will format the url into a masked markdown link and `Formatters#hideLinkEmbed()` will wrap the URL in `<>`, preventing it from embedding.
+There are also two methods to format hyperlinks. `Formatters#hyperlink()` will format the URL into a masked markdown link and `Formatters#hideLinkEmbed()` will wrap the URL in `<>`, preventing it from embedding.
 
 ```js {2,4-5}
 const { Formatters } = require('@discordjs/builders');
