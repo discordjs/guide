@@ -63,7 +63,7 @@ const relative = Formatters.time(date, 'R');
 
 ### Mentions
 
-The Formatters also contain various methods to fromat Snowflakes into mentions.
+The Formatters also contain various methods to format Snowflakes into mentions.
 
 ```js {2,4-7}
 const { Formatters } = require('@discordjs/builders');
