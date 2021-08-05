@@ -26,39 +26,39 @@ const underscoreString = underscore(string);
 
 ### Links
 
-There are also two methods to format hyperlinks. `Formatters#hyperlink()` will format the URL into a masked markdown link and `Formatters#hideLinkEmbed()` will wrap the URL in `<>`, preventing it from embedding.
+There are also two methods to format hyperlinks. `hyperlink()` will format the URL into a masked markdown link and `hideLinkEmbed()` will wrap the URL in `<>`, preventing it from embedding.
 
 ```js {2,4-5}
-const { Formatters } = require('@discordjs/builders');
+const { hyperlink, hideLinkEmbed } = require('@discordjs/builders');
 const url = 'https://discord.js.org/';
 
-const link = Formatters.hyperlink(url);
-const hiddenembed = Formatters.hideLinkEmbed(url);
+const link = hyperlink(url);
+const hiddenembed = hideLinkEmbed(url);
 ```
 
 ### Codeblocks
 
-You can use `Formatters#inlineCode()` and `Formatters#codeBlock()` to turn a string into an inline codeblock or a regular codeblock with or without syntax highlighting.
+You can use `inlineCode()` and `codeBlock()` to turn a string into an inline codeblock or a regular codeblock with or without syntax highlighting.
 
 ```js {2,4-6}
-const { Formatters } = require('@discordjs/builders');
+const { inlineCode, codeBlock } = require('@discordjs/builders');
 const jsstring = 'const value = true;';
 
-const inline = Formatters.inlineCode(jsstring);
-const codeblock = Formatters.codeBlock(jsstring);
-const highlighted = Formatters.codeBlock('js', jsstring);
+const inline = inlineCode(jsstring);
+const codeblock = codeBlock(jsstring);
+const highlighted = codeBlock('js', jsstring);
 ```
 
 ### Timestamps
 
-With `Formatters#time()` you can format UNIX timestamps and dates into a Discord timestring.
+With `time()` you can format UNIX timestamps and dates into a Discord timestring.
 
 ```js {2,4-5}
-const { Formatters } = require('@discordjs/builders');
+const { time } = require('@discordjs/builders');
 const date = new Date();
 
-const time = Formatters.time(date);
-const relative = Formatters.time(date, 'R');
+const timeString = time(date);
+const relative = time(date, 'R');
 ```
 
 ### Mentions
@@ -66,13 +66,13 @@ const relative = Formatters.time(date, 'R');
 The Formatters also contain various methods to format Snowflakes into mentions.
 
 ```js {2,4-7}
-const { Formatters } = require('@discordjs/builders');
+const { userMention, membermention, channelMention, roleMention } = require('@discordjs/builders');
 const id = '123456789012345678';
 
-const user = Formatters.userMention(id);
-const nickname = Formatters.memberMention(id);
-const channel = Formatters.channelMention(id);
-const role = Formatters.roleMention(id);
+const user = userMention(id);
+const nickname = memberMention(id);
+const channel = channelMention(id);
+const role = roleMention(id);
 ```
 
 ## Slash command builders
