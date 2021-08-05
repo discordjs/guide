@@ -77,7 +77,7 @@ const role = roleMention(id);
 
 ## Slash command builders
 
-The slash command builders are a set of utility methods to quickly build slash commands without having to manually construct objects.
+The slash command builder is a utility class to quickly build slash commands without having to manually construct objects.
 
 ### Commands
 
