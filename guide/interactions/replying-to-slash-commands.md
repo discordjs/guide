@@ -282,7 +282,7 @@ If you want the Snowflake of a structure instead, grab the option via `get()` an
 
 ### Subcommands
 
-If you have a command that contains subcommands you can parse them in a very similar way as to the above examples.
+If you have a command that contains subcommands, you can parse them in a very similar way as to the above examples.
 Let's say your command looks like this:
 
 ```js {4-22}
