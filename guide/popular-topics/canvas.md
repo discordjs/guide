@@ -47,8 +47,8 @@ client.once('ready', () => {
 client.on('interactionCreate', interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'badge') {
-
+	if (interaction.commandName === 'profile') {
+		// ...
 	}
 });
 
@@ -61,7 +61,7 @@ Remember to register the slash commands before continuing on with this section o
 
 ### Basic image loading
 
-The end goal will be to display the user's avatar, username, and tag.
+The end goal will be to display the user's avatar and nickname.
 
 After importing the Canvas module and initializing it, you should load the images. With Canvas, you have to specify where the image comes from first, naturally, and then specify how it gets loaded into the actual Canvas using `context`, which you will use to interact with Canvas.
 
@@ -98,7 +98,7 @@ client.on('interactionCreate', async interaction => {
 	context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
 	// Use the helpful Attachment class structure to process the file for you
-	const attachment = new MessageAttachment(canvas.toBuffer(), 'badge-image.png');
+	const attachment = new MessageAttachment(canvas.toBuffer(), 'profile-image.png');
 
 	interaction.reply({ files: [attachment] });
 });
@@ -274,7 +274,7 @@ client.on('interactionCreate', async interaction => {
 	// Slightly smaller text placed above the member's display name
 	context.font = '28px sans-serif';
 	context.fillStyle = '#ffffff';
-	context.fillText('Profile Badge', canvas.width / 2.5, canvas.height / 3.5);
+	context.fillText('Profile', canvas.width / 2.5, canvas.height / 3.5);
 
 	// Add an exclamation point here and below
 	context.font = applyText(canvas, `${interaction.member.displayName}!`);
