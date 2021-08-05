@@ -1,7 +1,7 @@
 # Builders
 
-Discord.js provides a `builders` package which contains a variety of builders and utilities you can use when writing your Discord bot.
-To install the package run `npm i @discordjs/builders` in your terminal.
+Discord.js provides a `builders` package which contains a variety of utilities you can use when writing your Discord bot.
+To install the package run `npm install @discordjs/builders` in your terminal.
 
 ## Formatters
 
@@ -12,16 +12,16 @@ Formatters are a set of utility functions which format input strings into the gi
 The Formatters provide functions to format strings into all the different Markdown styles supported by Discord.
 
 ```js
-const { Formatters } = require('@discordjs/builders');
+const { bold, italic, strikethrough, spoiler, quote, blockQuote, underscore } = require('@discordjs/builders');
 const string = 'Hello!';
 
-const bold = Formatters.bold(string);
-const italic = Formatters.italic(string);
-const strikethrough = Formatters.strikethrough(string);
-const spoiler = Formatters.spoiler(string);
-const quote = Formatters.quote(string);
-const blockquote = Formatters.blockQuote(string);
-const underscore = Formatters.underscore(string);
+const boldString = bold(string);
+const italicString = italic(string);
+const strikethroughString = strikethrough(string);
+const spoilerString = spoiler(string);
+const quoteString = quote(string);
+const blockquoteString = blockQuote(string);
+const underscoreString = underscore(string);
 ```
 
 ### Links
