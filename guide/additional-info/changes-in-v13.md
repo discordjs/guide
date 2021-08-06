@@ -250,7 +250,7 @@ Bitfields are now `BigInt`s instead of `Number`s. This can be handled using the 
 + const p = new Permissions(BigInt(104324673));
 + const p = new Permissions(104324673n);
 ```
-In additional, the usage of string literals for bitfield flags such as `Permissions` and `UserFlags` is discouraged; you should use the flag instead.
+In addition, the usage of string literals for bitfield flags such as `Permissions` and `UserFlags` is discouraged; you should use the flag instead.
 
 ```diff
 - permissions.has('SEND_MESSAGES')
