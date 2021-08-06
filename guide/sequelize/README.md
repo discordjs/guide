@@ -22,7 +22,7 @@ $ npm install --save sqlite3
 ```
 
 ::: danger
-Make sure you use version 5 or later of Sequelize! Version 4, as used in this guide, will pose a security threat. You can read more about this issue On the [Sequelize issue tracker](https://github.com/sequelize/sequelize/issues/7310).
+Make sure you use version 5 or later of Sequelize! Version 4, as used in this guide, will pose a security threat. You can read more about this issue on the [Sequelize issue tracker](https://github.com/sequelize/sequelize/issues/7310).
 :::
 
 After you have installed discord.js and Sequelize, you can start with the following skeleton code. The comment labels will tell you where to insert code later on.
@@ -170,7 +170,7 @@ catch (error) {
 
 `Tags.create()` uses the models that you created previously. The `.create()` method inserts some data into the model. You are going to insert a tag name, description, and the author name into the database.  
 The `catch (error)` section is necessary for the insert because it will offload checking for duplicates to the database to notify you if an attempt to create a tag that already exists occurs. The alternative is to query the database before adding data and checking if a result returns. If there are no errors or no identical tag is found, only then would you add the data. Of the two methods, it is clear that catching the error is less work for you.  
-`if (e.name === "SequelizeUniqueConstraintError")` Although this was mostly for doing less work, it is always good to handle your errors, especially if you know what types of errors you will receive. This error comes up if your unique constraint is violated, i.e., duplicate values are inserted.
+Although `if (error.name === 'SequelizeUniqueConstraintError')` was mostly for doing less work, it is always good to handle your errors, especially if you know what types of errors you will receive. This error comes up if your unique constraint is violated, i.e., duplicate values are inserted.
 
 ::: warning
 Do not use catch for inserting new data. Only use it for gracefully handling things that go wrong in your code or logging errors.
