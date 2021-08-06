@@ -297,6 +297,10 @@ The `Client#fetchApplication` method has been removed and replaced with the `Cli
 + console.log(client.application.name);
 ```
 
+#### Client#fetchWidget
+
+This method has been renamed to `fetchGuildWidget` to better represent its functionality.
+
 #### Client#generateInvite
 
 `Client#generateInvite` no longer supports `PermissionsResolvable` as its argument, requiring `InviteGenerationOptions` instead.
@@ -370,11 +374,39 @@ The `ClientUser#setPresence` method no longer returns a Promise.
 
 The `ClientUser#setStatus` method no longer returns a Promise.
 
+### Collection
+
+#### Collection#array()
+
+#### Collection#keyArray()
+
+These methods existed to provide access to a cached array of Collection values and keys respectively, which other Collection methods relied on internally.
+Those other methods have been refactored to no longer rely on cache, so those arrays and these methods have been removed.
+
+You should instead construct an array by spreading the iterators returned by the base Map class methods:
+
+```diff
+- collection.array();
++ [...collection.values()];
+
+- collection.keyArray();
++ [...collection.keys()];
+```
+
 ### ColorResolvable
 
 Colors have been updated to align with the new Discord branding.
 
 ### Guild
+
+#### Guild#addMember
+
+This method has been removed, with functionality replaced by the new `GuildMemberManager#add`.
+
+```diff
+- guild.addMember(user, { accessToken: token });
++ guild.members.add(user, { accessToken: token });
+```
 
 #### Guild#fetchBan
 
@@ -408,6 +440,11 @@ The `Guild#fetchVanityCode` method has been removed.
 + Guild.fetchVanityData().then(res => console.log(`Vanity URL: https://discord.gg/${res.code} with ${res.uses} uses`));
 ```
 
+#### Guild#fetchWidget
+
+The `Guild#fetchWidget()` method now retrieves the widget data for the guild instead of the widget settings. See `Client#fetchGuildWidget()`.
+The original functionality has moved to the new method `Guild#fetchWidgetSettings()`.
+
 #### Guild#member
 
 The `Guild#member()` helper/shortcut method has been removed.
@@ -424,6 +461,19 @@ The `Guild#mfaLevel` property is now an enum.
 ### Guild#nsfw
 
 The `Guild#nsfw` property has been removed, replaced by `Guild#nsfwLevel`.
+
+#### Guild#owner
+
+The `Guild#owner` property has been removed as it was unreliable due to caching, replaced with `Guild#fetchOwner`.
+
+```diff
+- console.log(guild.owner);
++ guild.fetchOwner().then(console.log);
+```
+
+#### Guild#setWidget
+
+The `Guild#setWidget()` method has been renamed to `Guild#setWidgetSettings()`.
 
 #### Guild#voice
 
@@ -445,6 +495,18 @@ This method has been removed, with functionality replaced by the new `Permission
 + channel.permissionOverwrites.create(user, { VIEW_CHANNEL: false });
 ```
 
+#### GuildChannel#createInvite
+
+#### GuildChannel#fetchInvites
+
+These methods have been removed from `GuildChannel` and placed only on subclasses for which invites can be created. These are `TextChannel`, `NewsChannel`, `VoiceChannel`, `StageChannel`, and `StoreChannel`.
+
+On these subclasses, the method now supports additional options:
+
+- `targetUser` to target the invite to join a particular streaming user
+- `targetApplication` to target the invite to a particular Discord activity
+- `targetType` defines the type of the target for this invite; user or application
+
 #### GuildChannel#overwritePermissions
 
 This method has been removed, with functionality replaced by the new `PermissionOverwriteManager`.
@@ -457,6 +519,10 @@ This method has been removed, with functionality replaced by the new `Permission
 #### GuildChannel#permissionOverwrites
 
 This method no longer returns a Collection of PermissionOverwrites, instead providing access to the `PermissionOverwriteManager`.
+
+#### GuildChannel#setTopic
+
+The `GuildChannel#setTopic` method has been removed and placed only on subclasses for which topics can be set. These are `TextChannel`, `NewsChannel`, and `StageChannel`.
 
 #### GuildChannel#updateOverwrite
 
@@ -542,6 +608,12 @@ The `MessageEmbed#attachFiles` method has been removed. Instead, files should be
 - channel.send({ embeds: [new MessageEmbed().setTitle("Files").attachFiles(file)] })
 + channel.send({ embeds: [new MessageEmbed().setTitle("Files")], files: [file] })
 ```
+
+### Permissions
+
+#### Permissions#FLAGS.MANAGE_EMOJIS
+
+`Permissions.FLAGS.MANAGE_EMOJIS` is now `Permissions.FLAGS.MANAGE_EMOJIS_AND_STICKERS`.
 
 ### ReactionUserManager
 
@@ -694,9 +766,30 @@ Shortcuts to Util methods which were previously exported at the top level have b
 
 Both were removed in favor of Node's built-in Buffer methods.
 
+#### Util#fetchRecommendedShards
+
+The `Util#fetchRecommendedShards()` method now supports an additional option `multipleOf` to calculate the number to round up to, e.g. a multiple of 16 for large bot sharding.
+
 #### Util#resolveString
 
 The `Util#resolveString` method has been removed. discord.js now enforces that users provide strings where expected rather than resolving one on their behalf.
+
+### VoiceState
+
+#### VoiceState#kick
+
+The `VoiceState#kick` method has been renamed to `VoiceState#disconnect`.
+
+### WebhookClient
+
+The `WebhookClient` constructor no longer accepts `id, token` as the first two parameters, instead taking a `data` object. This object supports an additional option `url`, allowing creation of a `WebhookClient` from a webhook URL.
+
+```diff
+- new WebhookClient(id, token, options);
++ new WebhookClient({ id, token }, options);
+
++ new WebhookClient({ url }, options);
+```
 
 ## Additions
 
@@ -723,6 +816,14 @@ Provides an enumerated bitfield for `ClientApplication` flags.
 ### BaseGuild
 
 The new `BaseGuild` class is extended by both `Guild` and `OAuth2Guild`.
+
+### BaseGuildTextChannel
+
+The new `BaseGuildTextChannel` class is extended by both `TextChannel` and `NewsChannel`.
+
+### BaseGuildVoiceChannel
+
+The new `BaseGuildVoiceChannel` class is extended by both `VoiceChannel` and `StageChannel`.
 
 ### ButtonInteraction
 
@@ -860,15 +961,6 @@ Provides access to the new `GuildInviteManager`.
 
 The `Guild#nsfwLevel` property is now represented by the `NSFWLevel` enum.
 
-#### Guild#owner
-
-The `Guild#owner` property has been removed as it was unreliable due to caching, replaced with `Guild#fetchOwner`.
-
-```diff
-- console.log(guild.owner);
-+ guild.fetchOwner().then(console.log);
-```
-
 #### Guild#premiumTier
 
 The `Guild#premiumTier` property is now represented by the `PremiumTier` enum.
@@ -887,19 +979,15 @@ Provides improved API support for handling and caching bans.
 
 Now supports setting the `position` property.
 
-#### GuildChannel#createInvite
-
-Now supports additional options:
-
-- `targetUser` to target the invite to join a particular streaming user
-- `targetApplication` to target the invite to a particular Discord activity
-- `targetType`
-
 ### GuildChannelManager
 
 #### GuildChannelManager#fetch
 
 Now supports fetching the channels of a Guild.
+
+#### GuildChannelManager#fetchActiveThreads
+
+Retrieves a list of the active threads in a Guild.
 
 ### GuildInviteManager
 
@@ -1024,6 +1112,14 @@ Provides support for fetching the Message referenced by `Message#reference`, if 
 
 Now supports both `<:name:id>` and `<a:name:id>` as valid inputs.
 
+#### Message#removeAttachments
+
+Removes the attachments from a message. Requires `MANAGE_MESSAGES` to remove attachments from messages authored by other users.
+
+#### Message#startThread
+
+Starts a `ThreadChannel` using this message as the starter message.
+
 #### Message#stickers
 
 A Collection of Stickers in the message.
@@ -1045,6 +1141,14 @@ A builder class which makes constructing button type message components easier.
 ### MessageComponentInteraction
 
 Provides gateway support for receiving interactions from message components. Subclass of `Interaction`.
+
+### MessageEmbed
+
+#### MessageEmbed#setFields
+
+Replaces all fields in the embed with the new array of fields provided.
+
+`embed.setFields(newFields)` is equivalent to `embed.spliceFields(0, embed.fields.length, newFields)`.
 
 ### MessageManager
 
