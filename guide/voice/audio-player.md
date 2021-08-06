@@ -56,10 +56,10 @@ connection2.subscribe(player);
 You can call the `pause()` and `unpause()` methods. While the audio player is paused, no audio will be played. When it is resumed, it will continue where it left off.
 
 ```js
-connection.pause();
+player.pause();
 
 // Unpause after 5 seconds
-setTimeout(() => connection.unpause(), 5_000);
+setTimeout(() => player.unpause(), 5_000);
 ```
 
 ## Life cycle
@@ -77,9 +77,9 @@ Voice connections have their own life cycle, with five distinct states. You can 
 - **Paused** - the state a voice connection enters when it is paused by the user.
 
 ```js
-const { VoiceConnectionStatus } = require('@discordjs/voice');
+const { AudioPlayerStatus } = require('@discordjs/voice');
 
-connection.on(VoiceConnectionStatus.Playing, () => {
+player.on(AudioPlayerStatus.Playing, () => {
 	console.log('The audio player has started playing!');
 });
 ```
