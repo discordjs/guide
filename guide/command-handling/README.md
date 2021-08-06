@@ -46,14 +46,13 @@ In the same folder, create a new folder and name it `commands`. This is where yo
 ```js
 module.exports = {
 	name: 'ping',
-	description: 'Replies with Pong!',
 	async execute(interaction) {
 		await interaction.reply('Pong!');
 	},
 };
 ```
 
-You can go ahead and do the same for the rest of your commands and put their respective blocks of code inside the `execute()` function. If you've been using the same code as the guide thus far, you can copy & paste your commands into their own files now, following the format above. The `description` property is optional but will be useful for the dynamic help command we'll be covering later.
+You can go ahead and do the same for the rest of your commands and put their respective blocks of code inside the `execute()` function. If you've been using the same code as the guide thus far, you can copy & paste your commands into their own files now, following the format above.
 
 ::: tip
 `module.exports` is how you export data in Node.js so that you can `require()` it in other files. If you're unfamiliar with it and want to read more, you can look at [the documentation](https://nodejs.org/api/modules.html#modules_module_exports) for more info.
@@ -101,7 +100,7 @@ for (const file of commandFiles) {
 
 ## Dynamically executing commands
 
-With your `client.commands` Collection setup, you can use it to retrieve and execute your commands! Inside your `interactionCreate` event, delete your `if`/`else if` chain of commands and replace it with this:
+You can use your `client.commands` Collection setup to retrieve and execute your commands! Inside your `interactionCreate` event, delete your `if`/`else if` chain of commands and replace it with this:
 
 ```js {4-13}
 client.on('interactionCreate', async interaction => {
@@ -120,9 +119,9 @@ client.on('interactionCreate', async interaction => {
 });
 ```
 
-If there isn't a command with that name, you don't need to do anything further, so exit early with `return`. If there is, `.get()` the command, call its `.execute()` method, and pass in your `interaction` variable as its argument. In case something goes wrong, log the error and report back to the member to let them know.
+First, fetch the command in the Collection with that name and assign it to the variable `command`. If the command doesn't exist, it will return `undefined` and you exit early with `return`. If it does exist, call the command's `.execute()` method, and pass in your `interaction` variable as its argument. In case something goes wrong, log the error and report back to the member to let them know.
 
-And that's it! Whenever you want to add a new command, you make a new file in your `commands` directory, name it what you want, and then do what you did for the other commands.
+And that's it! Whenever you want to add a new command, you [register a command](/interactions/registering-slash-commands.md), make a new file in your `commands` directory, name it with what you did for the Slash Command, and then do what you did for the other commands.
 
 ## Resulting code
 
