@@ -332,7 +332,7 @@ The second, **Roundtrip Latency**, describes the amount of time a full API round
 ```js
 <interaction>.reply('Pinging...', { fetchReply: true })
 	.then(sent => {
-		sent.edit(`Roundtrip latency: ${sent.createdTimestamp - <message>.createdTimestamp}ms`);
+		sent.edit(`Roundtrip latency: ${sent.createdTimestamp - <interaction>.createdTimestamp}ms`);
 	});
 ```
 
