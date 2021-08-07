@@ -64,7 +64,7 @@ else if (command === 'server') {
 	interaction.reply(`Guild name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
 }
 else if (command === 'user-info') {
-	interaction..reply(`Your username: ${interaction.user.username}\nYour ID: ${interaction.user.id}`);
+	interaction.reply(`Your username: ${interaction.user.username}\nYour ID: ${interaction.user.id}`);
 }
 ```
 
