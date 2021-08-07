@@ -54,7 +54,7 @@ if (process.env.NODE_ENV === 'production') {
 		[
 			'@vuepress/plugin-docsearch',
 			{
-				apiKey: process.env.API_KEY,
+				apiKey: process.env.ALGOLIA_DOCSEARCH_API_KEY,
 				indexName: 'discordjs',
 				placeholder: 'Search guide',
 			},
