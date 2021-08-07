@@ -126,6 +126,10 @@ If there isn't a command with that name, you don't need to do anything further, 
 
 And that's it! Whenever you want to add a new command, you make a new file in your `commands` directory, name it what you want, and then do what you did for the other commands.
 
+::: tip
+Please head to the interactions section to learn how to [register your slash commands](/interactions/registering-slash-commands.md).
+:::
+
 ## Resulting code
 
 <ResultingCode path="command-handling/file-setup" />
