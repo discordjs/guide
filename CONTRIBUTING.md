@@ -312,12 +312,12 @@ Main docs, reply-prefix branch, `class/Client`:
 <DocsLink section="main" branch="reply-prefix" path="class/Client">Link text</DocsLink>
 <!-- Becomes: https://discord.js.org/#/docs/main/reply-prefix/class/Client -->
 
-Collection docs, master branch (no `branch` prop set), `class/Collection?scrollTo=partition`:
+Collection docs, main branch (no `branch` prop set), `class/Collection?scrollTo=partition`:
 <DocsLink section="collection" path="class/Collection?scrollTo=partition">Link text</DocsLink>
-<!-- Becomes: https://discord.js.org/#/docs/collection/master/class/Collection?scrollTo=partition -->
+<!-- Becomes: https://discord.js.org/#/docs/collection/main/class/Collection?scrollTo=partition -->
 ```
 
-If the `section` prop is set to `main` (or omitted) and the `branch` prop is omitted, the `branch` prop will default to the version the user has set via the site's branch selector dropdown and update accordingly. If `section` is set to anything else and `branch` is omitted, the `branch` prop will default to `'master'`.
+If the `section` prop is set to `main` (or omitted) and the `branch` prop is omitted, the `branch` prop will default to the version the user has set via the site's branch selector dropdown and update accordingly. If `section` is set to anything else and `branch` is omitted, the `branch` prop will default to `'main'`.
 
 ### VScode snippets
 
