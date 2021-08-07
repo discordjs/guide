@@ -712,7 +712,7 @@ This means the user no longer needs to pass defaults to fill each positional par
 
 #### TextChannel#stopTyping
 
-These methods have both been replaced by a singular `TextChanel.sendTyping()`. This method automatically stops typing after 10 seconds, or when a message is sent.
+These methods have both been replaced by a singular `TextChannel.sendTyping()`. This method automatically stops typing after 10 seconds, or when a message is sent.
 
 ### User
 
