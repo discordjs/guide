@@ -833,11 +833,15 @@ Provides gateway support for a `MessageComponentInteraction` coming from a butto
 
 #### Channel#isText()
 
-Checks and typeguards if a channel is Text-Based; one of `TextChannel`, `DMChannel`, `NewsChannel` or `ThreadChannel` 
+Checks and typeguards if a channel is Text-Based; one of `TextChannel`, `DMChannel`, `NewsChannel` or `ThreadChannel`.
 
 #### Channel#isThread()
 
 Checks and typeguards if a channel is a `ThreadChannel`.
+
+#### Channel#isVoice()
+
+Checks and typeguards if a channel is Voice-Based; `VoiceChannel` or `StageChannel`.
 
 ### Client
 
