@@ -33,7 +33,7 @@ const { hyperlink, hideLinkEmbed } = require('@discordjs/builders');
 const url = 'https://discord.js.org/';
 
 const link = hyperlink(url);
-const hiddenembed = hideLinkEmbed(url);
+const hiddenEmbed = hideLinkEmbed(url);
 ```
 
 ### Codeblocks
@@ -42,11 +42,11 @@ You can use `inlineCode()` and `codeBlock()` to turn a string into an inline cod
 
 ```js {2,4-6}
 const { inlineCode, codeBlock } = require('@discordjs/builders');
-const jsstring = 'const value = true;';
+const jsString = 'const value = true;';
 
-const inline = inlineCode(jsstring);
-const codeblock = codeBlock(jsstring);
-const highlighted = codeBlock('js', jsstring);
+const inline = inlineCode(jsString);
+const codeblock = codeBlock(jsString);
+const highlighted = codeBlock('js', jsString);
 ```
 
 ### Timestamps
@@ -118,13 +118,13 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const command = new SlashCommandBuilder()
 	.setName('info')
 	.setDescription('Get info about a user or a server!')
-	.addSubCommand(subCommand =>
-		subCommand
+	.addSubcommand(subcommand =>
+		subcommand
 			.setName('user')
 			.setDescription('Info about a user')
 			.addUserOption(option => option.setName('target').setDescription('The user')))
-	.addSubCommand(subCommand =>
-		subCommand
+	.addSubcommand(subcommand =>
+		subcommand
 			.setName('server')
 			.setDescription('Info about the server'));
 
