@@ -130,7 +130,7 @@ client.on('interactionCreate', async interaction => {
 });
 ```
 
-If you have a command that performs longer tasks, be sure to call `defer()` as early as possible.
+If you have a command that performs longer tasks, be sure to call `deferReply()` as early as possible.
 
 You can also pass an `ephemeral` flag to the `InteractionDeferOptions`:
 
