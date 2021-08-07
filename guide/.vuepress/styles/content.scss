@@ -22,6 +22,7 @@
 	& > h5,
 	& > h6 {
 		color: var(--c-headers);
+		overflow-wrap: anywhere;
 	}
 
 	code {
