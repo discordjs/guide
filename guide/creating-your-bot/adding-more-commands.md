@@ -186,4 +186,4 @@ In short, it's just not a good idea. But that's why this guide exists! Go ahead 
 
 ## Resulting code
 
-<ResultingCode path="file-setup/13/commands"/>
+<ResultingCode />
