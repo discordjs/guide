@@ -61,7 +61,7 @@ Additional flexibility can be gained by providing a function which returns a cus
 ```js
 const client = new Client({
 	makeCache: manager => {
-		if (manager.name === 'MessageManager') return new LimitedCollection(0);
+		if (manager.name === 'MessageManager') return new LimitedCollection({ maxSize: 0 });
 		return new Collection();
 	},
 });
