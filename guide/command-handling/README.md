@@ -40,13 +40,17 @@ discord-bot/
 ├── package-lock.json
 └── package.json
 ```
+Next, open your terminal and install the `@discordjs/builders` package by running `npm install @discordjs/builders`, as we'll be using the utility methods from this package in the following code samples.
 
 In the same folder, create a new folder and name it `commands`. This is where you'll store all of your commands, of course. Head over to your `commands` folder, create a new file named `ping.js`, and copy & paste in the following code:
 
 ```js
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
 module.exports = {
-	name: 'ping',
-	description: 'Replies with Pong!',
+	data: new SlashCommandBuilder()
+		.setName('ping')
+		.setDescription('Replies with Pong!'),
 	async execute(interaction) {
 		await interaction.reply('Pong!');
 	},
@@ -95,7 +99,7 @@ for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	// set a new item in the Collection
 	// with the key as the command name and the value as the exported module
-	client.commands.set(command.name, command);
+	client.commands.set(command.data.name, command);
 }
 ```
 
