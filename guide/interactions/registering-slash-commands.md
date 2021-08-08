@@ -12,9 +12,9 @@ If you already have slash commands set-up for your application and want to learn
 
 Guild application commands are only available in the guild they were created in, if your application has the `applications.commands` scope authorized.
 
-In this section, we'll be using a script that is usable in conjunction with the slash command handler from the command handling section.
+In this section, we'll be using a script that is usable in conjunction with the slash command handler from the [command handling](/command-handling/) section.
 
-First off, install the discord.js REST module by running `npm install @discordjs/rest` in your terminal.
+First off, install the [discord.js REST module](https://github.com/discordjs/discord.js-modules/blob/main/packages/rest/) by running `npm install @discordjs/rest` in your terminal.
 
 <!-- eslint-skip -->
 
