@@ -29,7 +29,7 @@ Webhook fetching will always make use of collections and Promises. If you do not
 
 ### Fetching all webhooks of a guild
 
-If you would like to get all webhooks of a guild you can use <DocsLink path="class/Guild?scrollTo=fetchWebhooks" type="method">. This will return a Promise which will resolve into a Collection of `Webhook`s.
+If you would like to get all webhooks of a guild you can use <DocsLink path="class/Guild?scrollTo=fetchWebhooks" type="method" />. This will return a Promise which will resolve into a Collection of `Webhook`s.
 
 ### Fetching webhooks of a channel
 
