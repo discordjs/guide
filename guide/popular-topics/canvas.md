@@ -2,7 +2,7 @@
 
 ## Setting up Canvas
 
-Canvas is an image manipulation tool that allows you to modify images with code. We'll explore how to use this module in a slash command to make a profile badge command. But first, you must go through the intense labor of installing Canvas. It's highly recommended that you use a Linux distribution for this because it'll be much easier to install on.
+Canvas is an image manipulation tool that allows you to modify images with code. We'll explore how to use this module in a slash command to make a profile command. But first, you must go through the intense labor of installing Canvas. It's highly recommended that you use a Linux distribution for this because it'll be much easier to install on.
 
 ::: tip
 This guide is last tested with `canvas^2.6.0`, so make sure you have this or a similar version after installation.

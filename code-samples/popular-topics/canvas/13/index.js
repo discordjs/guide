@@ -47,7 +47,7 @@ client.on('interactionCreate', async interaction => {
 		const avatar = await Canvas.loadImage(interaction.user.displayAvatarURL({ format: 'jpg' }));
 		context.drawImage(avatar, 25, 25, 200, 200);
 
-		const attachment = new MessageAttachment(canvas.toBuffer(), 'badge-image.png');
+		const attachment = new MessageAttachment(canvas.toBuffer(), 'profile-image.png');
 
 		interaction.reply({ files: [attachment] });
 	}
