@@ -76,7 +76,7 @@ await command.permissions.add({ permissions });
 
 ## Bulk update permissions
 
-If you have a lot of commands, you likely want to update their permissions in one go instead of one-by-one. For this approach, you can use `GuildApplicationCommandManager#setPermissions`:
+If you have a lot of commands, you likely want to update their permissions in one go instead of one-by-one. For this approach, you can use `ApplicationCommandPermissionsManager#set()` method:
 
 <!-- eslint-skip -->
 
