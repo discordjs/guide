@@ -180,6 +180,8 @@ Some commonly used naming conventions in discord.js have changed.
 
 The casing of `thingID` properties has changed to `thingId`. This is a more-correct casing for the camelCase used by discord.js as `Id` is an abbreviation of Identifier, not an acronym.
 
+This includes: `afkChannelId`, `applicationId`, `channelId`, `creatorId`, `guildId`, `lastMessageId`, `ownerId`, `parentId`, `partyId`, `processId`, `publicUpdatesChannelId`, `resolveId`, `rulesChannelId`, `sessionId`, `shardId`, `systemChannelId`, `webhookId`, `widgetChannelId`, and `workerId`.
+
 ```diff
 - console.log(guild.ownerID);
 + console.log(guild.ownerId);
