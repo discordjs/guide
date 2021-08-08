@@ -84,6 +84,8 @@ The slash command builder is a utility class to build slash commands without hav
 Here's a simple slash command using the builder. You can collect your commands data and use it to register slash commands.
 
 ```js
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
 const command = new SlashCommandBuilder().setName('ping').setDescription('Replies with Pong!');
 
 // Raw data that can be used to register a slash command
