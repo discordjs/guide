@@ -122,7 +122,7 @@ That would display both the server name _and_ the amount of members in it.
 Of course, you can modify this to your liking. You may also want to display the date the server was created or the server's region. You would do those in the same manner–use `interaction.guild.createdAt` or `interaction.guild.region`, respectively.
 
 ::: tip
-Want a list of all the properties you can access and all the methods you can call on a server? Refer to <DocsLink path="class/Guild">the discord.js documentation site</DocsLink>!
+Refer to the <DocsLink path="class/Guild" /> documentation for a list of all the properties you can access and all the methods you can call on a server!
 :::
 
 ### User info command
@@ -162,7 +162,7 @@ This will display the command author's **username** (not nickname, if they have 
 </DiscordMessages>
 
 ::: tip
-`interaction.user` refers to the user who sent the command. For a full list of all the properties and methods for the user object, check out <DocsLink path="class/User">the documentation page for it</DocsLink>.
+`interaction.user` refers to the user who sent the command. Check out the <DocsLink path="class/User" /> documentation page for a full list of all the properties and methods for the user object.
 :::
 
 And there you have it! As you can see, it's quite simple to add additional commands.

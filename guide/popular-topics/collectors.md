@@ -2,11 +2,7 @@
 
 ## Message collectors
 
-Collectors are useful to enable your bot to obtain *additional* input after the first command was sent. An example would be initiating a quiz, where the bot will "await" a correct response from somebody.
-
-::: tip
-You can read the docs for the Collector class <DocsLink path="class/Collector">here</DocsLink>.
-:::
+<p><DocsLink path="class/Collector"><code>Collector</code>s</DocsLink> are useful to enable your bot to obtain *additional* input after the first command was sent. An example would be initiating a quiz, where the bot will "await" a correct response from somebody.</p>
 
 ### Basic message collector
 
@@ -43,11 +39,7 @@ The benefit of using an event-based collector over `.awaitMessages()` (its promi
 
 ### Await messages
 
-Using `.awaitMessages()` can be easier if you understand Promises, and it allows you to have cleaner code overall. It is essentially identical to `.createMessageCollector()`, except promisified. However, the drawback of using this method is that you cannot do things before the Promise is resolved or rejected, either by an error or completion. However, it should do for most purposes, such as awaiting the correct response in a quiz. Instead of taking their example, let's set up a basic quiz command using the `.awaitMessages()` feature.
-
-::: tip
-You can read the docs for the `.awaitMessages()` method <DocsLink path="class/TextChannel?scrollTo=awaitMessages">here</DocsLink>.
-:::
+Using <DocsLink path="class/TextChannel?scrollTo=awaitMessages" type="method" /> can be easier if you understand Promises, and it allows you to have cleaner code overall. It is essentially identical to <DocsLink path="class/TextChannel?scrollTo=createMessageCollector" type="method" />, except promisified. However, the drawback of using this method is that you cannot do things before the Promise is resolved or rejected, either by an error or completion. However, it should do for most purposes, such as awaiting the correct response in a quiz. Instead of taking their example, let's set up a basic quiz command using the `.awaitMessages()` feature.
 
 First, you'll need some questions and answers to choose from, so here's a basic set:
 
@@ -98,11 +90,7 @@ The filter looks for messages that match one of the answers in the array of poss
 
 ### Basic reaction collector
 
-These work quite similarly to message collectors, except that you apply them on a message rather than a channel. The following is an example taken from the documentation, with slightly better variable names for clarification. The filter will check for the 👍 emoji–in the default skin tone specifically, so be wary of that. It will also check that the person who reacted shares the same id as the author of the original message that the collector was assigned to.
-
-::: tip
-You can read the docs for the `.createReactionCollector()` method <DocsLink path="class/Message?scrollTo=createReactionCollector">here</DocsLink>.
-:::
+These work quite similarly to message collectors, except that you apply them on a message rather than a channel. This example uses the <DocsLink path="class/Message?scrollTo=createReactionCollector" type="method" /> method. The filter will check for the 👍 emoji–in the default skin tone specifically, so be wary of that. It will also check that the person who reacted shares the same id as the author of the original message that the collector was assigned to.
 
 ```js
 const filter = (reaction, user) => {
@@ -122,11 +110,7 @@ collector.on('end', collected => {
 
 ### Await reactions
 
-As before, these work almost the same as a reaction collector, except it is Promise-based. The same differences apply as with channel collectors.
-
-::: tip
-You can read the docs for the `.awaitReactions()` method <DocsLink path="class/Message?scrollTo=awaitReactions">here</DocsLink>.
-:::
+<p><DocsLink path="class/Message?scrollTo=awaitReactions" type="method" /> works almost the same as a reaction collector, except it is Promise-based. The same differences apply as with channel collectors.</p>
 
 ```js
 const filter = (reaction, user) => {

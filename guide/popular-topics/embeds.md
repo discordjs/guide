@@ -54,7 +54,7 @@ Here is an example of how an embed may look. We will go over embed construction 
 
 ## Using the embed constructor
 
-discord.js features the <DocsLink path="class/MessageEmbed">`MessageEmbed`</DocsLink> utility class for easy construction and manipulation of embeds.
+discord.js features the <DocsLink path="class/MessageEmbed" /> utility class for easy construction and manipulation of embeds.
 
 ```js
 // at the top of your file
@@ -86,7 +86,7 @@ channel.send({ embeds: [exampleEmbed] });
 You don't need to include all the elements showcased above. If you want a simpler embed, leave some out.
 :::
 
-The `.setColor()` method accepts an integer, HEX color string, an array of RGB values or specific color strings. You can find a list of them at <DocsLink path="typedef/ColorResolvable">the discord.js documentation</DocsLink>.
+The `.setColor()` method accepts a <DocsLink path="typedef/ColorResolvable" />, e.g. an integer, HEX color string, an array of RGB values or specific color strings.
 
 To add a blank field to the embed, you can use `.addField('\u200b', '\u200b')`.
 
@@ -176,7 +176,7 @@ if (message.author.bot) {
 
 ## Attaching images
 
-You can upload images with your embedded message and use them as source for embed fields that support image urls by constructing a <DocsLink path="class/MessageAttachment">MessageAttachment</DocsLink> from them to send as message option alongside the embed. The attachment parameter takes a BufferResolvable or Stream including the URL to an external image.
+You can upload images with your embedded message and use them as source for embed fields that support image urls by constructing a <DocsLink path="class/MessageAttachment" /> from them to send as message option alongside the embed. The attachment parameter takes a BufferResolvable or Stream including the URL to an external image.
 
 You can then reference and use the images inside the embed itself with `attachment://fileName.extension`.
 

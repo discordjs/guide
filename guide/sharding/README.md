@@ -68,7 +68,7 @@ Let's say your bot is in a total of 3,600 guilds. Using the recommended shard co
 
 ## FetchClientValues
 
-One of the most common sharding utility methods you'll be using is <DocsLink path="class/ShardClientUtil?scrollTo=fetchClientValues">Shard#fetchClientValues</DocsLink>. This method retrieves a property on the Client object of all shards.
+One of the most common sharding utility methods you'll be using is <DocsLink path="class/ShardClientUtil?scrollTo=fetchClientValues" type="method" />. This method retrieves a property on the Client object of all shards.
 
 Take the following snippet of code:
 
@@ -109,7 +109,7 @@ client.on('interactionCreate', interaction => {
 
 ## BroadcastEval
 
-Next, check out another handy sharding method known as <DocsLink path="class/ShardClientUtil?scrollTo=broadcastEval">`Shard#broadcastEval`</DocsLink>. This method makes all of the shards evaluate a given method, which recieves a `client` and a `context` argument. The `client` argument refers to the Client object of the shard evaluating it. You can read about the `context` argument [here](/sharding/additional-information.md#eval-arguments).
+Next, check out another handy sharding method known as <DocsLink path="class/ShardClientUtil?scrollTo=broadcastEval" type="method" />. This method makes all of the shards evaluate a given method, which recieves a `client` and a `context` argument. The `client` argument refers to the Client object of the shard evaluating it. You can read about the `context` argument [here](/sharding/additional-information.md#eval-arguments).
 
 ```js
 client.shard
