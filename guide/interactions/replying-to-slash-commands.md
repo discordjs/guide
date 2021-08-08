@@ -207,6 +207,8 @@ Interaction responses can use masked links (e.g. `[text](http://site.com)`) and 
 
 ## Parsing options
 
+### Command options
+
 In this section, we'll cover how to access the values of a command's options. Let's assume you have a command that contains the following options:
 
 ```js {4-35}
@@ -277,6 +279,59 @@ console.log([string, integer, boolean, user, member, channel, role, mentionable]
 ::: tip
 If you want the Snowflake of a structure instead, grab the option via `get()` and access the Snowflake via the `value` property. Note that you should use `const { value: name } = ...` here to [destructure and rename](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) the value obtained from the <DocsLink path="typedef/CommandInteractionOption">`CommandInteractionOption`</DocsLink> structure to avoid identifier name conflicts.
 :::
+
+### Subcommands
+
+If you have a command that contains subcommands, you can parse them in a very similar way as to the above examples.
+Let's say your command looks like this:
+
+```js {4-22}
+const data = {
+	name: 'info',
+	description: 'Get info about a user or the server!',
+	options: [
+		{
+			name: 'user',
+			description: 'Info about a user',
+			type: 'SUB_COMMAND',
+			options: [
+				{
+					name: 'target',
+					description: 'The user',
+					type: 'USER',
+				},
+			],
+		},
+		{
+			name: 'server',
+			description: 'Info about the server',
+			type: 'SUB_COMMAND',
+		},
+	],
+};
+```
+
+The following snippet details the logic needed to parse the subcommands and respond accordingly using the `CommandInteractionOptionResolver#getSubcommand()` method:
+
+```js {5-20}
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'info') {
+		if (interaction.options.getSubcommand() === 'user') {
+			const user = interaction.options.getUser('target');
+
+			if (user) {
+				await interaction.reply(`Username: ${user.username}\nID: ${user.id}`);
+			} else {
+				await interaction.reply(`Your username: ${interaction.user.username}\nYour ID: ${interaction.user.id}`);
+			}
+		} else if (interaction.options.getSubcommand() === 'server') {
+			await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
+		}
+	}
+});
+```
 
 ## Fetching and deleting responses
 
