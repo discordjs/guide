@@ -9,7 +9,7 @@ import { computed, defineProps } from 'vue';
 
 const baseURL = 'https://discord.js.org/#/docs';
 const docsSections = ['main', 'collection', 'rpc'];
-const docsPathRegex = /\w+\/(\w+)(?:\?scrollTo=(\w+))?/;
+const docsPathRegex = /\w+\/(\w+)(?:\?scrollTo=(.+))?/;
 
 const props = defineProps({
 	section: {
@@ -21,6 +21,10 @@ const props = defineProps({
 		type: String,
 		required: true,
 	},
+	type: {
+		type: String,
+		'default': 'property',
+	},
 });
 
 const link = computed(() => {
@@ -31,7 +35,19 @@ const link = computed(() => {
 
 const linkText = computed(() => {
 	const [, file, property] = props.path.match(docsPathRegex);
+
 	if (!property) return file;
-	return `${file}#${property}`;
+
+	const isStatic = property.startsWith('s-');
+	const isEvent = property.startsWith('e-');
+	const [character, name, methodCharacters] = [
+		isStatic ? '.' : '#',
+		isStatic
+			? property.replace('s-', '')
+			: isEvent ? property.replace('e-', 'event:') : property,
+		props.type === 'method' ? '()' : '',
+	];
+
+	return `${file}${character}${name}${methodCharacters}`;
 });
 </script>
