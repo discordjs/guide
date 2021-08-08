@@ -129,7 +129,7 @@ If you would like to set your activity upon startup, you can use the `ClientOpti
 <!-- eslint-skip -->
 
 ```js
-<client>.user.setPresence({ activity: { name: '<activity>' }, status: 'idle' });
+<client>.user.setPresence({ activities: [{ name: '<activity>' }], status: 'idle' });
 ```
 
 ## Miscellaneous
