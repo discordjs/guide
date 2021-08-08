@@ -1,6 +1,6 @@
 # Builders
 
-discord.js provides a `builders` package which contains a variety of utilities you can use when writing your Discord bot.
+discord.js provides the [`@discordjs/builders`](https://github.com/discordjs/builders) package which contains a variety of utilities you can use when writing your Discord bot.
 To install the package, run `npm install @discordjs/builders` in your terminal.
 
 ## Formatters
@@ -36,9 +36,9 @@ const link = hyperlink(url);
 const hiddenEmbed = hideLinkEmbed(url);
 ```
 
-### Codeblocks
+### Code blocks
 
-You can use `inlineCode()` and `codeBlock()` to turn a string into an inline codeblock or a regular codeblock with or without syntax highlighting.
+You can use `inlineCode()` and `codeBlock()` to turn a string into an inline code block or a regular code block with or without syntax highlighting.
 
 ```js
 const { inlineCode, codeBlock } = require('@discordjs/builders');
@@ -51,7 +51,7 @@ const highlighted = codeBlock('js', jsString);
 
 ### Timestamps
 
-With `time()` you can format UNIX timestamps and dates into a Discord timestring.
+With `time()`, you can format UNIX timestamps and dates into a Discord time string.
 
 ```js
 const { time } = require('@discordjs/builders');
