@@ -3,14 +3,14 @@
 Discord provides developers with the option to create client-integrated slash commands. In this section, we'll cover how to register these commands using discord.js!
 
 ::: tip
-Please follow the [command handling](/command-handling) section first! the scripts provided on this page will not function without the setup provided on that page.
+This page assumes you use the same file structure as our [command handling](/command-handling) section. The scripts provided are made to function with that setup.
 
 If you already have slash commands set-up for your application and want to learn how to respond to them, refer to [the following page](/interactions/replying-to-slash-commands.md).
 :::
 
 ## Guild commands
 
-First up, we'll introduce you to guild application commands. These types of commands are only available in the guild they were created in, if your application has the `applications.commands` scope authorized.
+Guild application commands are only available in the guild they were created in, if your application has the `applications.commands` scope authorized.
 
 In this section, we'll be using a script that is usable in conjunction with the slash command handler from the command handling section.
 
@@ -54,46 +54,26 @@ Running this script will register all your commands to the guild of which the id
 
 ## Global commands
 
-These types of commands will be available in all guilds your application has the `applications.commands` scope authorized, as well as in DMs.
+Global application commands will be available in all the guilds your application has the `applications.commands` scope authorized, as well as in DMs.
 
 ::: tip
 Global commands are cached for one hour. New global commands will fan out slowly across all guilds and will only be guaranteed to be updated after an hour. Guild commands update instantly. As such, we recommend you use guild-based commands during development and publish them to global commands when they're ready for public use.
 :::
 
-To deploy global commands you need to adjust the route in the script to `.applicationCommands(CLIENT_ID)` like shown below.
+To deploy global commands, you can use the same script from the [guild commands](#guild-commands) section and adjust the route in the script to `.applicationCommands(CLIENT_ID)`.
 
 <!-- eslint-skip -->
 
-```js {21}
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
-const { token } = require('./config.json');
-const fs = require('fs');
+```js {2}
+await rest.put(
+	Routes.applicationCommands(CLIENT_ID),
+	{ body: commands },
+);
 
-const commands = [];
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	commands.push(command.data.toJSON());
-}
 
-const rest = new REST({ version: '9' }).setToken(token);
 
-(async () => {
-	try {
-		console.log('Started refreshing application (/) commands.');
-
-		await rest.put(
-			Routes.applicationCommands(CLIENT_ID),
-			{ body: commands },
-		);
-
-		console.log('Successfully reloaded application (/) commands.');
-	} catch (error) {
-		console.error(error);
 	}
-})();
 ```
 
 ## Options
@@ -119,7 +99,7 @@ Notice how `.setRequired(true)` is specified within the options builder. Setting
 As shown in the options example above, you can specify the `type` of an `ApplicationCommandOption`. Listed below are all the possible values you can pass as `ApplicationCommandOptionType`:
 
 ::: tip
-The slash command builder has a method for each of these types respectively.
+The [slash command builder](popular-topics/builders.md#slash-command-builders) has a method for each of these types respectively.
 Refer to the Discord API documentation for detailed explanations on the [`SUB_COMMAND` and `SUB_COMMAND_GROUP` option types](https://discord.com/developers/docs/interactions/slash-commands#subcommands-and-subcommand-groups).
 :::
 
