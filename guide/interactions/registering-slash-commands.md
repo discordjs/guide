@@ -69,11 +69,6 @@ await rest.put(
 	Routes.applicationCommands(CLIENT_ID),
 	{ body: commands },
 );
-
-
-
-
-	}
 ```
 
 ## Options
