@@ -16,9 +16,9 @@ Be sure that you're familiar with things like [async/await](/additional-info/asy
 
 ### Windows
 
-You will need a package called Windows Build Tools. To install this, open Powershell as Administrator. You then can install it with npm with the following command: `npm i --global --production windows-build-tools`, or with Yarn by running the following: `yarn global add --production windows-build-tools`.
+You will need a package called Windows Build Tools. To install this, open Powershell as Administrator. You then can install it with either npm (`npm i --global --production windows-build-tools`) or Yarn (`yarn global add --production windows-build-tools`). It is also bundled with Chocolatey, should you choose that installation path.
 
-It is also bundled with Chocolatey, should you choose that installation path. Afterward, you should follow the instructions detailed [here](https://github.com/Automattic/node-canvas/wiki/Installation:-Windows). Additionally, make sure Node and Cairo are **both** either 32-bit or 64-bit; having a 32-bit version of one and a 64-bit version of the other will cause errors.
+Afterward, you should follow the instructions detailed [here](https://github.com/Automattic/node-canvas/wiki/Installation:-Windows). Additionally, make sure Node and Cairo are **both** either 32-bit or 64-bit; having a 32-bit version of one and a 64-bit version of the other will cause errors.
 
 If you are *still* unable to install Canvas, you might want to consider installing [Microsoft Visual Studio 2015](https://www.visualstudio.com/vs/older-downloads/).
 
@@ -56,7 +56,7 @@ client.login('your-token-goes-here');
 ```
 
 ::: warning
-Remember to register the slash commands before continuing on with this section of the guide. You can view how to do that [here](../interactions/registering-slash-commands.md).
+Remember to register the slash commands before continuing on with this section of the guide. You can view how to do that [here](/interactions/registering-slash-commands.md).
 :::
 
 ### Basic image loading
@@ -78,7 +78,6 @@ client.on('interactionCreate', async interaction => {
 		// The context will be used to modify the canvas
 		const canvas = Canvas.createCanvas(700, 250);
 		const context = canvas.getContext('2d');
-
 		// ...
 	}
 });
@@ -86,7 +85,7 @@ client.on('interactionCreate', async interaction => {
 
 Now, you need to load the image you want to use into Canvas. To have sufficient coverage, we'll first show you how to load a basic image from a local directory. We'll be using [this image](https://github.com/discordjs/guide/blob/main/guide/popular-topics/images/canvas.jpg) as the background in the welcome image, but you can use whatever you want. Be sure to download the file, name it `wallpaper.jpg`, and save it inside the same directory as your main bot file.
 
-```js {5-10,12}
+```js {5-14}
 client.on('interactionCreate', async interaction => {
 	// ...
 	const context = canvas.getContext('2d');
@@ -124,7 +123,6 @@ client.on('interactionCreate', async interaction => {
 
 	// Draw a rectangle with the dimensions of the entire canvas
 	context.strokeRect(0, 0, canvas.width, canvas.height);
-
 	// ...
 });
 ```
@@ -154,7 +152,7 @@ It works well, but the avatar image itself seems a bit stretched out. Let's reme
 ```js {5-6}
 client.on('interactionCreate', async interaction => {
 	// ...
-	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
+	const avatar = await Canvas.loadImage(interaction.user.displayAvatarURL({ format: 'jpg' }));
 
 	// Move the image downwards vertically and constrain its height to 200, so that it's square
 	context.drawImage(avatar, 25, 25, 200, 200);
@@ -184,7 +182,6 @@ client.on('interactionCreate', async interaction => {
 
 	// Clip off the region you drew on
 	context.clip();
-
 	// ...
 });
 ```
@@ -212,7 +209,6 @@ client.on('interactionCreate', async interaction => {
 
 	// Actually fill the text with a solid color
 	context.fillText(interaction.member.displayName, canvas.width / 2.5, canvas.height / 1.8);
-
 	// ...
 });
 ```
@@ -251,7 +247,6 @@ client.on('interactionCreate', async interaction => {
 	context.font = applyText(canvas, interaction.member.displayName);
 	context.fillStyle = '#ffffff';
 	context.fillText(interaction.member.displayName, canvas.width / 2.5, canvas.height / 1.8);
-
 	// ...
 });
 ```
@@ -280,7 +275,6 @@ client.on('interactionCreate', async interaction => {
 	context.font = applyText(canvas, `${interaction.member.displayName}!`);
 	context.fillStyle = '#ffffff';
 	context.fillText(`${interaction.member.displayName}!`, canvas.width / 2.5, canvas.height / 1.8);
-
 	// ...
 });
 ```
