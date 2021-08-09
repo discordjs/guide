@@ -30,14 +30,14 @@
     },
     "homepage": "https://discordjs.guide",
     "devDependencies": {
-        "@vuepress/plugin-docsearch": "^2.0.0-beta.20",
-        "@vuepress/plugin-google-analytics": "^2.0.0-beta.20",
+        "@vuepress/plugin-docsearch": "^2.0.0-beta.23",
+        "@vuepress/plugin-google-analytics": "^2.0.0-beta.23",
         "babel-eslint": "^10.0.1",
         "eslint": "^7.18.0",
         "eslint-config-sora": "^3.1.0",
         "eslint-plugin-markdown": "^1.0.0",
         "eslint-plugin-vue": "^7.5.0",
-        "vuepress-vite": "^2.0.0-beta.20"
+        "vuepress-vite": "^2.0.0-beta.23"
     },
     "dependencies": {
         "@discord-message-components/vue": "^0.2.1"
