@@ -21,7 +21,7 @@ All gateway intents, and the events belonging to each, are listed on the [Discor
 ```js
 const { Client, Intents } = require('discord.js');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 ```
 
 ::: warning
@@ -46,8 +46,8 @@ const client = new Client({ intents: myIntents });
 
 // other examples:
 
-const otherIntents = new Intents([Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES]);
-otherIntents.remove([Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILD_MESSAGES]);
+const otherIntents = new Intents([Intents.FLAGS.GUILDS, Intents.FLAGS.DIRECT_MESSAGES]);
+otherIntents.remove([Intents.FLAGS.DIRECT_MESSAGES]);
 
 const otherIntents2 = new Intents(32509);
 otherIntents2.remove(4096, 512);

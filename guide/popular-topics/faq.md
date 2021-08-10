@@ -2,7 +2,7 @@
 
 ## Legend
 
-* `<client>` is a placeholder for the Client object, such as `const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });`.
+* `<client>` is a placeholder for the Client object, such as `const client = new Client({ intents: [Intents.FLAGS.GUILDS] });`.
 * `<interaction>` is a placeholder for the Interaction object, such as `client.on('interactionCreate', interaction => { ... });`.
 * `<guild>` is a placeholder for the Guild object, such as `<interaction>.guild` or `<client>.guilds.cache.get('<id>')`.
 * `<voiceChannel>` is a placeholder for the VoiceChannel object, such as `<message>.member.voice.channel`
