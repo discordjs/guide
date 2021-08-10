@@ -5,7 +5,7 @@ Discord provides developers with the option to create client-integrated slash co
 ::: tip
 This page assumes you use the same file structure as our [command handling](/command-handling) section. The scripts provided are made to function with that setup.
 
-If you already have slash commands set-up for your application and want to learn how to respond to them, refer to [the following page](/interactions/replying-to-slash-commands.md).
+If you already have slash commands set up for your application and want to learn how to respond to them, refer to [the following page](/interactions/replying-to-slash-commands.md).
 :::
 
 ## Guild commands
