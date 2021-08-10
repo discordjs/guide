@@ -5,7 +5,7 @@ To install the package, run `npm install @discordjs/builders` in your terminal.
 
 ## Formatters
 
-Formatters are a set of utility functions which format input strings into the given format.
+Formatters are a set of utility functions that format input strings into the given format.
 
 ### Basic Markdown
 
