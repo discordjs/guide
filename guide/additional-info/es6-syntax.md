@@ -20,15 +20,15 @@ client.once('ready', () => {
 client.on('interactionCreate', interaction => {
 	if (!interaction.isCommand()) return;
 
-	const command = interaction.commandName;
+	const { commandName } = interaction;
 
-	if (command === 'ping') {
+	if (commandName === 'ping') {
 		interaction.reply('Pong.');
-	} else if (command === 'beep') {
+	} else if (commandName === 'beep') {
 		interaction.reply('Boop.');
-	} else if (command === 'server') {
+	} else if (commandName === 'server') {
 		interaction.reply('Guild name: ' + interaction.guild.name + '\nTotal members: ' + interaction.guild.memberCount);
-	} else if (command === 'user-info') {
+	} else if (commandName === 'user-info') {
 		interaction.reply('Your username: ' + interaction.user.username + '\nYour ID: ' + interaction.user.id);
 	}
 });
@@ -48,10 +48,10 @@ If you check the code above, it's currently doing things like `'Guild name: ' + 
 
 ```js
 // ES5 version, as we currently have it
-else if (command === 'server') {
+else if (commandName === 'server') {
 	interaction.reply('Guild name: ' + interaction.guild.name + '\nTotal members: ' + interaction.guild.memberCount);
 }
-else if (command === 'user-info') {
+else if (commandName === 'user-info') {
 	interaction.reply('Your username: ' + interaction.user.username + '\nYour ID: ' + interaction.user.id);
 }
 ```
@@ -60,10 +60,10 @@ else if (command === 'user-info') {
 
 ```js
 // ES6 version, using template literals
-else if (command === 'server') {
+else if (commandName === 'server') {
 	interaction.reply(`Guild name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
 }
-else if (command === 'user-info') {
+else if (commandName === 'user-info') {
 	interaction.reply(`Your username: ${interaction.user.username}\nYour ID: ${interaction.user.id}`);
 }
 ```
@@ -211,11 +211,11 @@ Additionally, you could do this for your commands.
 
 ```js
 client.on('interactionCreate', interaction => {
-	const { commandName: command } = interaction;
+	const { commandName } = interaction;
 
-	if (command === 'ping') {
+	if (commandName === 'ping') {
 		// ping command here...
-	} else if (command === 'beep') {
+	} else if (commandName === 'beep') {
 		// beep command here...
 	}
 	// other commands here...
