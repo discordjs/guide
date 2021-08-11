@@ -95,7 +95,7 @@ As shown in the options example above, you can specify the `type` of an `Applica
 
 ::: tip
 The [slash command builder](popular-topics/builders.md#slash-command-builders) has a method for each of these types respectively.
-Refer to the Discord API documentation for detailed explanations on the [`SUB_COMMAND` and `SUB_COMMAND_GROUP` option types](https://discord.com/developers/docs/interactions/slash-commands#subcommands-and-subcommand-groups).
+Refer to the Discord API documentation for detailed explanations on the [`SUB_COMMAND` and `SUB_COMMAND_GROUP` option types](https://discord.com/developers/docs/interactions/application-commands#subcommands-and-subcommand-groups).
 :::
 
 * `SUB_COMMAND` sets the option to be a subcommand
