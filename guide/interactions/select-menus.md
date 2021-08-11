@@ -16,13 +16,15 @@ You can have a maximum of five `ActionRow`s per message, and one select menu wit
 
 To create a select menu, use the `MessageActionRow()` and `MessageSelectMenu()` builder functions and then pass the resulting object to `CommandInteraction#reply()` as `InteractionReplyOptions`:
 
-```js {1,7-24,26}
+```js {1,9-26,28}
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'ping') {
+	const { commandName } = interaction;
+
+	if (commandName === 'ping') {
 		const row = new MessageActionRow()
 			.addComponents(
 				new MessageSelectMenu()
@@ -67,13 +69,15 @@ Restart your bot and then send the command to a channel your bot has access to. 
 
 You can also send message components within an ephemeral response or alongside message embeds.
 
-```js {1,12-16,18}
+```js {1,14-18,20}
 const { MessageActionRow, MessageEmbed, MessageSelectMenu } = require('discord.js');
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'ping') {
+	const { commandName } = interaction;
+
+	if (commandName === 'ping') {
 		const row = new MessageActionRow()
 			.addComponents(
 				// ...
@@ -154,11 +158,13 @@ The `MessageComponentInteraction` class provides the same methods as the `Comman
 
 The `MessageComponentInteraction` class provides an `update()` method to update the message the select menu is attached to. Passing an empty array to the `components` option will remove any menus after an option has been selected.
 
-```js {1,4-6}
+```js {1,6-8}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isSelectMenu()) return;
 
-	if (interaction.customId === 'select') {
+	const { customId } = interaction;
+
+	if (customId === 'select') {
 		await interaction.update({ content: 'Something was selected!', components: [] });
 	}
 });
@@ -168,13 +174,15 @@ client.on('interactionCreate', async interaction => {
 
 Additionally to deferring the response of the interaction, you can defer the menu, which will trigger a loading state and then revert back to its original state:
 
-```js {1,6-10}
+```js {1,8-12}
 const wait = require('util').promisify(setTimeout);
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isSelectMenu()) return;
 
-	if (interaction.customId === 'select') {
+	const { customId } = interaction;
+
+	if (customId === 'select') {
 		await interaction.deferUpdate();
 		await wait(4000);
 		await interaction.editReply({ content: 'Something was selected!', components: [] });
@@ -186,13 +194,15 @@ client.on('interactionCreate', async interaction => {
 
 A select menu is not bound to only one selection; you can specify a minimum and maximum amount of options that must be selected. You can use `MessageSelectMenu#setMinValues()` and `MessageSelectMenu#setMaxValues()` to determine these values.
 
-```js {1,7-31,33}
+```js {1,9-33,35}
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'ping') {
+	const { commandName } = interaction;
+
+	if (commandName === 'ping') {
 		const row = new MessageActionRow()
 			.addComponents(
 				new MessageSelectMenu()
