@@ -109,7 +109,7 @@ for (const file of commandFiles) {
 
 With your `client.commands` Collection setup, you can use it to retrieve and execute your commands! Inside your `interactionCreate` event, delete your `if`/`else if` chain of commands and replace it with this:
 
-```js {6-12}
+```js {8-13}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
