@@ -131,19 +131,14 @@ guild.channels.create('new-channel', {
 
 ### Editing overwrites
 
-To edit permission overwrites on the channel with a provided set of new overwrites, you can use the `.edit()` method. This method allows passing an array or Collection of <DocsLink path="class/PermissionOverwrites">PermissionOverwrites</DocsLink>.
+To edit permission overwrites on the channel with a provided set of new overwrites, you can use the `.edit()` method.
 
 ```js
-channel.permissionOverwrites.edit([
-	{
-		id: guild.id,
-		deny: [Permissions.FLAGS.VIEW_CHANNEL],
-	},
-	{
-		id: user.id,
-		allow: [Permissions.FLAGS.VIEW_CHANNEL],
-	},
-]);
+// edits overwrites to disallow everyone to view the channel
+channel.permissionOverwrites.edit(guild.id, { VIEW_CHANNEL: false });
+
+// edits overwrites to allow a user to view the channel
+channel.permissionOverwrites.edit(user.id, { VIEW_CHANNEL: true });
 ```
 
 ### Replacing overwrites
