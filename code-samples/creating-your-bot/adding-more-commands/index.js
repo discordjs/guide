@@ -10,15 +10,15 @@ client.once('ready', () => {
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName: command } = interaction;
+	const { commandName } = interaction;
 
-	if (command === 'ping') {
+	if (commandName === 'ping') {
 		await interaction.reply('Pong!');
-	} else if (command === 'beep') {
+	} else if (commandName === 'beep') {
 		await interaction.reply('Boop!');
-	} else if (command === 'server') {
+	} else if (commandName === 'server') {
 		await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
-	} else if (command === 'user-info') {
+	} else if (commandName === 'user-info') {
 		await interaction.reply(`Your username: ${interaction.user.username}\nYour ID: ${interaction.user.id}`);
 	}
 });
