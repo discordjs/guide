@@ -54,9 +54,9 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 client.on('interactionCreate', interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName: command } = interaction;
+	const { commandName } = interaction;
 
-	if (command === 'stats') {
+	if (commandName === 'stats') {
 		return interation.reply(`Server count: ${client.guilds.cache.size}.`);
 	}
 });
@@ -97,7 +97,7 @@ While it's a bit unattractive to have more nesting in your commands, it is neces
 ```js {4-8}
 client.on('interactionCreate', interaction => {
 	// ...
-	if (command === 'stats') {
+	if (commandName === 'stats') {
 		return client.shard.fetchClientValues('guilds.cache.size')
 			.then(results => {
 				return interaction.reply(`Server count: ${results.reduce((acc, guildCount) => acc + guildCount, 0)}`);
@@ -152,7 +152,7 @@ Promise.all(promises)
 ```js {4-15}
 client.on('interactionCreate', interaction => {
 	// ...
-	if (command === 'stats') {
+	if (commandName === 'stats') {
 		const promises = [
 			client.shard.fetchClientValues('guilds.cache.size'),
 			client.shard.broadcastEval(c => c.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)),
