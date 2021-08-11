@@ -16,6 +16,8 @@ In this section, we'll be using a script that is usable in conjunction with the 
 
 First off, install the [discord.js REST module](https://github.com/discordjs/discord.js-modules/blob/main/packages/rest/) by running `npm install @discordjs/rest` in your terminal.
 
+Then, install the [Discord API Types](https://github.com/discordjs/discord-api-types) package by running `npm install discord-api-types` in your terminal.
+
 <!-- eslint-skip -->
 
 ```js
