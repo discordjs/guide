@@ -200,18 +200,6 @@ Using `message` will still work, but you'll receive a deprecation warning until 
 + client.on("messageCreate", message => { ... });
 ```
 
-### Snowflakes
-
-For TypeScript users, discord.js now enforces the `Snowflake` type, a stringified BigInt, rather than allowing any string to be accepted.
-
-```diff
-interface Config {
- 	prefix: string;
--	ownerId: string;
-+	ownerId: Snowflake;
-}
-```
-
 ### Allowed Mentions
 
 `clientOptions.disableMentions` has been removed and replaced with `clientOptions.allowedMentions`!
