@@ -34,11 +34,13 @@ The most common way of sending a response is by using the `CommandInteraction#re
 Initially an interaction token is only valid for three seconds, so that's the timeframe in which you are able to use the `CommandInteraction#reply()` method. Responses that require more time ("Deferred Responses") are explained later in this page.
 :::
 
-```js {1,4-6}
+```js {1,6-8}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'ping') {
+	const { commandName } = interaction;
+
+	if (commandName === 'ping') {
 		await interaction.reply('Pong!');
 	}
 });
@@ -62,11 +64,13 @@ You've successfully sent a response to a slash command! This is only the beginni
 
 You may not always want everyone who has access to the channel to see a slash command's response. Thankfully, Discord implemented a way to hide messages from everyone but the executor of the slash command. This type of message is called `ephemeral` and can be set by using `ephemeral: true` in the `InteractionReplyOptions`, as follows:
 
-```js {5}
+```js {7}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'ping') {
+	const { commandName } = interaction;
+
+	if (commandName === 'ping') {
 		await interaction.reply({ content: 'Pong!', ephemeral: true });
 	}
 });
@@ -95,13 +99,15 @@ After you've sent an initial response, you may want to edit that response for va
 After the initial response, an interaction token is valid for 15 minutes, so this is the timeframe in which you can edit the response and send follow-up messages.
 :::
 
-```js {1,8-9}
+```js {1,10-11}
 const wait = require('util').promisify(setTimeout);
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'ping') {
+	const { commandName } = interaction;
+
+	if (commandName === 'ping') {
 		await interaction.reply('Pong!');
 		await wait(2000);
 		await interaction.editReply('Pong again!');
@@ -116,13 +122,15 @@ As previously mentioned, you have three seconds to respond to an interaction bef
 In this case, you can make use of the `CommandInteraction#deferReply()` method, which triggers the `<application> is thinking...` message and also acts as initial response. This allows you 15 minutes to complete your tasks before responding.
 <!--- here either display the is thinking message via vue-discord-message or place a screenshot -->
 
-```js {7-9}
+```js {9-11}
 const wait = require('util').promisify(setTimeout);
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'ping') {
+	const { commandName } = interaction;
+
+	if (commandName === 'ping') {
 		await interaction.deferReply();
 		await wait(4000);
 		await interaction.editReply('Pong!');
@@ -148,9 +156,11 @@ Replying to slash commands is great and all, but what if you want to send multip
 After the initial response, an interaction token is valid for 15 minutes, so this is the timeframe in which you can edit the response and send follow-up messages.
 :::
 
-```js {6}
+```js {8}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
+
+	const { commandName } = interaction;
 
 	if (interaction.commandName === 'ping') {
 		await interaction.reply('Pong!');
@@ -313,9 +323,11 @@ const data = {
 
 The following snippet details the logic needed to parse the subcommands and respond accordingly using the `CommandInteractionOptionResolver#getSubcommand()` method:
 
-```js {5-20}
+```js {7-17}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
+
+	const { commandName } = interaction;
 
 	if (interaction.commandName === 'info') {
 		if (interaction.options.getSubcommand() === 'user') {
