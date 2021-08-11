@@ -218,19 +218,19 @@ client.on('messageCreate', async message => {
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName: command } = interaction;
+	const { commandName } = interaction;
 
-	if (command === 'balance') {
+	if (commandName === 'balance') {
 		// [gamma]
-	} else if (command === 'inventory') {
+	} else if (commandName === 'inventory') {
 		// [delta]
-	} else if (command === 'transfer') {
+	} else if (commandName === 'transfer') {
 		// [epsilon]
-	} else if (command === 'buy') {
+	} else if (commandName === 'buy') {
 		// [zeta]
-	} else if (command === 'shop') {
+	} else if (commandName === 'shop') {
 		// [theta]
-	} else if (command === 'leaderboard') {
+	} else if (commandName === 'leaderboard') {
 		// [lambda]
 	}
 });
