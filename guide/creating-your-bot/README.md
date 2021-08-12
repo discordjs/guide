@@ -19,7 +19,7 @@ Once you've created a new file, do a quick check to see if you have everything s
 ```js
 const { Client, Intents } = require('discord.js');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -42,7 +42,7 @@ Here's the same code with comments, so it's easier to understand what's going on
 const { Client, Intents } = require('discord.js');
 
 // create a new Discord client
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 // when the client is ready, run this code
 // this event will only trigger one time after logging in

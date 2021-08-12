@@ -1,15 +1,10 @@
-module.exports = {
-	name: 'prune',
-	description: 'Prune up to 99 messages.',
-	options: [
-		{
-			name: 'amount',
-			description: 'Number of messages to prune',
-			type: 'INTEGER',
-			required: true,
-		},
-	],
+const { SlashCommandBuilder } = require('@discordjs/builders');
 
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('prune')
+		.setDescription('Prune up to 99 messages.')
+		.addIntegerOption(option => option.setName('amount').setDescription('Number of messages to prune')),
 	async execute(interaction) {
 		const amount = interaction.options.getInteger('amount');
 

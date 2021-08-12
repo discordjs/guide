@@ -1,7 +1,7 @@
 const util = require('util');
-const { Client, Intents, Permissions } = require('discord.js');
+const { Client, Intents, Formatters, Permissions } = require('discord.js');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -108,7 +108,7 @@ client.on('interactionCreate', interaction => {
 	} else if (interaction.commandName === 'my-permissions') {
 		const finalPermissions = interaction.channel.permissionsFor(interaction.member);
 
-		interaction.reply({ content: `\`\`\`js\n${util.inspect(finalPermissions.serialize())}\`\`\`` });
+		interaction.reply({ content: Formatters.codeBlock(util.inspect(finalPermissions.serialize())) });
 	} else if (interaction.commandName === 'lock-permissions') {
 		if (!interaction.channel.parent) {
 			return interaction.reply('This channel is not placed under a category.');
@@ -126,7 +126,7 @@ client.on('interactionCreate', interaction => {
 	} else if (interaction.commandName === 'role-permissions') {
 		const roleFinalPermissions = interaction.channel.permissionsFor(interaction.member.roles.highest);
 
-		interaction.reply({ content: `\`\`\`js\n${util.inspect(roleFinalPermissions.serialize())}\`\`\`` });
+		interaction.reply({ content: Formatters.codeBlock(util.inspect(roleFinalPermissions.serialize())) });
 	}
 });
 

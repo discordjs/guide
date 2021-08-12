@@ -124,8 +124,8 @@ The shortcuts `Intents.ALL`, `Intents.NON_PRIVILEGED`, and `Intents.PRIVILEGED` 
 Refer to our more [detailed article about this topic](/popular-topics/intents.html).
 
 ```diff
-- const client = new Client({ ws: { intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-+ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+- const client = new Client({ ws: { intents: [Intents.FLAGS.GUILDS] });
++ const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 ```
 
 ### Structures#extend
@@ -198,18 +198,6 @@ Using `message` will still work, but you'll receive a deprecation warning until 
 ```diff
 - client.on("message", message => { ... });
 + client.on("messageCreate", message => { ... });
-```
-
-### Snowflakes
-
-For TypeScript users, discord.js now enforces the `Snowflake` type, a stringified BigInt, rather than allowing any string to be accepted.
-
-```diff
-interface Config {
- 	prefix: string;
--	ownerId: string;
-+	ownerId: Snowflake;
-}
 ```
 
 ### Allowed Mentions

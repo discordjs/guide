@@ -78,6 +78,7 @@ export default {
 				'/popular-topics/faq.md',
 				'/popular-topics/threads.md',
 				'/popular-topics/embeds.md',
+				'/popular-topics/builders.md',
 				'/popular-topics/reactions.md',
 				'/popular-topics/collectors.md',
 				'/popular-topics/permissions.md',

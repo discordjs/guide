@@ -11,7 +11,7 @@ Here's the startup code we'll be using:
 const { Client, Intents } = require('discord.js');
 const config = require('./config.json');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 client.once('ready', () => {
 	console.log('Ready!');

@@ -22,7 +22,7 @@ To start off, you're just going to be using this skeleton code:
 ```js
 const { Client, Intents, MessageEmbed } = require('discord.js');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 client.once('ready', () => {
 	console.log('Ready!');

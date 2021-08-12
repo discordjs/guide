@@ -14,7 +14,7 @@ You can use `npm run dev` to open up a local version of the site at http://local
 
 ### Linting
 
-Remember to always lint your edits/additions before making a commit to ensure everything's lined up and consistent with the rest of the guide. We use ESLint and have a package.json script for linting both JS files and JS codeblocks inside Markdown files.
+Remember to always lint your edits/additions before making a commit to ensure everything's lined up and consistent with the rest of the guide. We use ESLint and have a package.json script for linting both JS files and JS code blocks inside Markdown files.
 
 ```bash
 npm run lint
@@ -31,7 +31,7 @@ const sent = await message.channel.send('Hi!');
 console.log(sent.content)
 ```
 
-ESLint would error with `Parsing error: Unexpected token message` instead of letting you know that you're missing a semicolon. In this case, it's because of the use of `await` outside of an async function. In situations like this, after you've fixed any obvious errors, you can add an `<!-- eslint-skip -->` comment above the codeblock to have it ignored entirely by ESLint when running the lint script.
+ESLint would error with `Parsing error: Unexpected token message` instead of letting you know that you're missing a semicolon. In this case, it's because of the use of `await` outside of an async function. In situations like this, after you've fixed any obvious errors, you can add an `<!-- eslint-skip -->` comment above the code block to have it ignored entirely by ESLint when running the lint script.
 
 ## Adding pages
 
@@ -182,7 +182,7 @@ Since `guild.members` returns a Collection, you can iterate over it with `.forEa
 Since the `.delete()` method returns a Promise, you need to `await` it when inside a `try`/`catch` block.
 ```
 
-#### Codeblock line highlighting
+#### Code block line highlighting
 
 When you want to highlight a piece of code to display either an addition or a difference, use the `js {1-5,6-10}` syntax. For example (ignoring the `\`s):
 
@@ -216,11 +216,11 @@ client.on('messageCreate', message => {
 
 ```
 
-![Codeblock line highlighting output](https://i.imgur.com/913nf9V.png)
+![Code block line highlighting output](https://i.imgur.com/913nf9V.png)
 
-This is VuePress' [codeblock line highlighting](https://vuepress.vuejs.org/guide/markdown.html#line-highlighting-in-code-blocks) feature. It's encouraged to use and preferred over diff codeblocks.
+This is VuePress' [code block line highlighting](https://vuepress.vuejs.org/guide/markdown.html#line-highlighting-in-code-blocks) feature. It's encouraged to use and preferred over diff code blocks.
 
-Do note the space between `js` and `{}`. This is necessary to not interfere with `eslint-plugin-markdown`, which would ignore the codeblock.
+Do note the space between `js` and `{}`. This is necessary to not interfere with `eslint-plugin-markdown`, which would ignore the code block.
 
 ### Images and links
 
@@ -291,7 +291,7 @@ The syntax to make this display is quite simple as well:
 
 These components are made with [Vue](https://vuejs.org/), but if you aren't familiar with Vue, don't worry about it. Just understand that you'll usually only need the `profile="user"`/`profile="bot"` attribute for the `<DiscordMessage>` component. All `<DiscordMessage>` components must be children of a single `<DiscordMessages>` component for it to display properly.
 
-Do note the casing in `<DiscordMessages>` syntax instead of `<discord-messages>`. This is due to how VuePress renders markdown and HTML inside markdown files. It doesn't recognize `<discord-messages>` as an HTML element, therefore rendering anything indented inside it as a regular codeblock.
+Do note the casing in `<DiscordMessages>` syntax instead of `<discord-messages>`. This is due to how VuePress renders markdown and HTML inside markdown files. It doesn't recognize `<discord-messages>` as an HTML element, therefore rendering anything indented inside it as a regular code block.
 
 These components feature messages, mentions, embeds, interactions, and more. You can read more about how to use them by checking out [@discord-message-components/vue](https://github.com/Danktuary/discord-message-components/blob/main/packages/vue/README.md).
 

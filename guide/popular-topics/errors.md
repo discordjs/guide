@@ -142,7 +142,7 @@ This error is also caused by attempting to use a client that has not logged in. 
 const { Client, Intents } = require('discord.js');
 
 // Should not be here!
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 module.exports = interaction => {
 	const id = interaction.options.getString('id');
@@ -156,7 +156,7 @@ module.exports = interaction => {
 ```js
 const { Client, Intents } = require('discord.js');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 client.on('interactionCreate', someHandlerFunction);
 

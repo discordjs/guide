@@ -131,7 +131,7 @@ Example using a Webhook:
 const { Client, Intents, MessageEmbed } = require('discord.js');
 const { token } = require('./config.json');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 const embed = new MessageEmbed()
 	.setTitle('Some Title')

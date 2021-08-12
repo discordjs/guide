@@ -10,24 +10,22 @@ If you set `defaultPermission: false` when creating a command, you can immediate
 
 To begin, fetch an `ApplicationCommand` and then set the permissions using the `ApplicationCommandPermissionsManager#add()` method:
 
+<!-- eslint-skip -->
+
 ```js
-client.on('messageCreate', async message => {
-	if (!client.application?.owner) await client.application?.fetch();
+if (!client.application?.owner) await client.application?.fetch();
 
-	if (message.content.toLowerCase() === '!perms' && message.author.id === client.application?.owner.id) {
-		const command = await client.guilds.cache.get('123456789012345678')?.commands.fetch('876543210987654321');
+const command = await client.guilds.cache.get('123456789012345678')?.commands.fetch('876543210987654321');
 
-		const permissions = [
-			{
-				id: '224617799434108928',
-				type: 'USER',
-				permission: false,
-			},
-		];
+const permissions = [
+	{
+		id: '224617799434108928',
+		type: 'USER',
+		permission: false,
+	},
+];
 
-		await command.permissions.add({ permissions });
-	}
-});
+await command.permissions.add({ permissions });
 ```
 
 Now you have successfully denied the user whose `id` you used access to this application command.

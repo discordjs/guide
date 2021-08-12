@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const { Client, Intents } = require('discord.js');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 /*
  * Make sure you are on at least version 5 of Sequelize! Version 4 as used in this guide will pose a security threat.

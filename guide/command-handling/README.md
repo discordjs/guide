@@ -8,7 +8,7 @@ Here's the base code we'll be using:
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -40,13 +40,17 @@ discord-bot/
 ├── package-lock.json
 └── package.json
 ```
+Next, open your terminal and install the [`@discordjs/builders`](https://github.com/discordjs/builders) package by running `npm install @discordjs/builders`, as we'll be using the utility methods from this package in the following code samples.
 
 In the same folder, create a new folder and name it `commands`. This is where you'll store all of your commands, of course. Head over to your `commands` folder, create a new file named `ping.js`, and copy & paste in the following code:
 
 ```js
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
 module.exports = {
-	name: 'ping',
-	description: 'Replies with Pong!',
+	data: new SlashCommandBuilder()
+		.setName('ping')
+		.setDescription('Replies with Pong!'),
 	async execute(interaction) {
 		await interaction.reply('Pong!');
 	},
@@ -72,7 +76,7 @@ const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 client.commands = new Collection();
 ```
 
@@ -95,7 +99,7 @@ for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	// set a new item in the Collection
 	// with the key as the command name and the value as the exported module
-	client.commands.set(command.name, command);
+	client.commands.set(command.data.name, command);
 }
 ```
 
@@ -121,6 +125,10 @@ client.on('interactionCreate', async interaction => {
 If there isn't a command with that name, you don't need to do anything further, so exit early with `return`. If there is, `.get()` the command, call its `.execute()` method, and pass in your `interaction` variable as its argument. In case something goes wrong, log the error and report back to the member to let them know.
 
 And that's it! Whenever you want to add a new command, you make a new file in your `commands` directory, name it what you want, and then do what you did for the other commands.
+
+::: tip
+Please head to the interactions section to learn how to [register your slash commands](/interactions/registering-slash-commands.md).
+:::
 
 ## Resulting code
 
