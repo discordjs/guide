@@ -211,53 +211,20 @@ Interaction responses can use masked links (e.g. `[text](http://site.com)`) and 
 
 In this section, we'll cover how to access the values of a command's options. Let's assume you have a command that contains the following options:
 
-```js {4-35}
-const data = {
-	name: 'ping',
-	description: 'Replies with Pong!',
-	options: [
-		{
-			name: 'input',
-			description: 'Enter a string',
-			type: 'STRING',
-		},
-		{
-			name: 'int',
-			description: 'Enter an integer',
-			type: 'INTEGER',
-		},
-		{
-			name: 'num',
-			description: 'Enter a number',
-			type: 'NUMBER',
-		},
-		{
-			name: 'choice',
-			description: 'Select a boolean',
-			type: 'BOOLEAN',
-		},
-		{
-			name: 'target',
-			description: 'Select a user',
-			type: 'USER',
-		},
-		{
-			name: 'destination',
-			description: 'Select a channel',
-			type: 'CHANNEL',
-		},
-		{
-			name: 'muted',
-			description: 'Select a role',
-			type: 'ROLE',
-		},
-		{
-			name: 'mentionable',
-			description: 'Mention something',
-			type: 'MENTIONABLE',
-		},
-	],
-};
+```js {6-13}
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
+const data = new SlashCommandBuilder()
+	.setName('ping')
+	.setDescription('Replies with Pong!')
+	.addStringOption(option => option.setName('input').setDescription('Enter a string'))
+	.addIntegerOption(option => option.setName('int').setDescription('Enter an integer'))
+	.addNumberOption(option => option.setName('num').setDescription('Enter a number'))
+	.addBooleanOption(option => option.setName('choice').setDescription('Select a boolean'))
+	.addUserOption(option => option.setName('target').setDescription('Select a user'))
+	.addChannelOption(option => option.setName('destination').setDescription('Select a channel'))
+	.addRoleOption(option => option.setName('muted').setDescription('Select a role'))
+	.addMentionableOption(option => option.setName('mentionable').setDescription('Mention something'));
 ```
 
 You can `get()` these options from the `CommandInteractionOptionResolver` as shown below:
@@ -285,30 +252,21 @@ If you want the Snowflake of a structure instead, grab the option via `get()` an
 If you have a command that contains subcommands, you can parse them in a very similar way as to the above examples.
 Let's say your command looks like this:
 
-```js {4-22}
-const data = {
-	name: 'info',
-	description: 'Get info about a user or the server!',
-	options: [
-		{
-			name: 'user',
-			description: 'Info about a user',
-			type: 'SUB_COMMAND',
-			options: [
-				{
-					name: 'target',
-					description: 'The user',
-					type: 'USER',
-				},
-			],
-		},
-		{
-			name: 'server',
-			description: 'Info about the server',
-			type: 'SUB_COMMAND',
-		},
-	],
-};
+```js {6-14}
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
+const data = new SlashCommandBuilder()
+	.setName('info')
+	.setDescription('Get info about a user or a server!')
+	.addSubcommand(subcommand =>
+		subcommand
+			.setName('user')
+			.setDescription('Info about a user')
+			.addUserOption(option => option.setName('target').setDescription('The user')))
+	.addSubcommand(subcommand =>
+		subcommand
+			.setName('server')
+			.setDescription('Info about the server'));
 ```
 
 The following snippet details the logic needed to parse the subcommands and respond accordingly using the `CommandInteractionOptionResolver#getSubcommand()` method:
