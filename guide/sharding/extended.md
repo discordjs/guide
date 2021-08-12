@@ -26,7 +26,7 @@ client.on('interactionCreate', interaction => {
 This will never work for a channel that lies on another shard. So, let's remedy this.
 
 ::: tip
-In discord.js v13, <DocsLink path="class/ShardClientUtil?scrollTo=ids">`client.shard`</DocsLink> can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
+In discord.js v13, <DocsLink path="class/ShardClientUtil?scrollTo=ids">`Client#shard`</DocsLink> can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
 :::
 
 ```js {4-13}
