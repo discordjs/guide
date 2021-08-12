@@ -2,10 +2,10 @@
 
 ## Legend
 
-* `<client>` is a placeholder for the Client object, such as `const client = new Client({ intents: [Intents.FLAGS.GUILDS] });`.
-* `<interaction>` is a placeholder for the Interaction object, such as `client.on('interactionCreate', interaction => { ... });`.
-* `<guild>` is a placeholder for the Guild object, such as `<interaction>.guild` or `<client>.guilds.cache.get('<id>')`.
-* `<voiceChannel>` is a placeholder for the VoiceChannel object, such as `<message>.member.voice.channel`
+* `client` is a placeholder for the <DocsLink path="class/Client" /> object, such as `const client = new Client({ intents: [Intents.FLAGS.GUILDS] });`.
+* `interaction` is a placeholder for the <DocsLink path="class/Interaction" /> object, such as `client.on('interactionCreate', interaction => { ... });`.
+* `guild` is a placeholder for the <DocsLink path="class/Guild" /> object, such as `interaction.guild` or `client.guilds.cache.get('id')`.
+* `voiceChannel` is a placeholder for the <DocsLink path="class/VoiceChannel" /> object, such as `message.member.voice.channel`
 
 For a more detailed explanation of the notations commonly used in this guide, the docs, and the support server, see [here](/additional-info/notation.md).
 
@@ -13,20 +13,16 @@ For a more detailed explanation of the notations commonly used in this guide, th
 
 ### How do I ban a user?
 
-<!-- eslint-skip -->
-
 ```js
-const user = <interaction>.options.getUser('target');
-<guild>.members.ban(user);
+const user = interaction.options.getUser('target');
+guild.members.ban(user);
 ```
 
 ### How do I unban a user?
 
-<!-- eslint-skip -->
-
 ```js
-const id = <interaction>.options.get('target')?.value;
-<guild>.members.unban(id);
+const id = interaction.options.get('target')?.value;
+guild.members.unban(id);
 ```
 
 ::: tip
@@ -35,40 +31,32 @@ Because you cannot ping a user who isn't in the server, you have to pass in the 
 
 ### How do I kick a user?
 
-<!-- eslint-skip -->
-
 ```js
-const member = <interaction>.options.getMember('target');
+const member = interaction.options.getMember('target');
 member.kick();
 ```
 
 ### How do I add a role to a guild member?
 
-<!-- eslint-skip -->
-
 ```js
-const role = <interaction>.options.getRole('role');
-const member = <interaction>.options.getMember('target');
+const role = interaction.options.getRole('role');
+const member = interaction.options.getMember('target');
 member.roles.add(role);
 ```
 
 ### How do I check if a guild member has a specific role?
 
-<!-- eslint-skip -->
-
 ```js
-const member = <interaction>.options.getMember('target');
-if (member.roles.cache.some(role => role.name === '<role name>')) {
+const member = interaction.options.getMember('target');
+if (member.roles.cache.some(role => role.name === 'role name')) {
 	// ...
 }
 ```
 
 ### How do I limit a command to a single user?
 
-<!-- eslint-skip -->
-
 ```js
-if (<interaction>.user.id === '<id>') {
+if (interaction.user.id === 'id') {
 	// ...
 }
 ```
@@ -77,36 +65,28 @@ if (<interaction>.user.id === '<id>') {
 
 ### How do I set my bot's username?
 
-<!-- eslint-skip -->
-
 ```js
-<client>.user.setUsername('<username>');
+client.user.setUsername('username');
 ```
 
 ### How do I set my bot's avatar?
 
-<!-- eslint-skip -->
-
 ```js
-<client>.user.setAvatar('<url or path>');
+client.user.setAvatar('url or path');
 ```
 
 ### How do I set my playing status?
 
-<!-- eslint-skip -->
-
 ```js
-<client>.user.setActivity('<activity>');
+client.user.setActivity('activity');
 ```
 
 ### How do I set my status to "Watching/Listening to/Competing in ..."?
 
-<!-- eslint-skip -->
-
 ```js
-<client>.user.setActivity('<activity>', { type: 'WATCHING' });
-<client>.user.setActivity('<activity>', { type: 'LISTENING' });
-<client>.user.setActivity('<activity>', { type: 'COMPETING' });
+client.user.setActivity('activity', { type: 'WATCHING' });
+client.user.setActivity('activity', { type: 'LISTENING' });
+client.user.setActivity('activity', { type: 'COMPETING' });
 ```
 
 ::: tip
@@ -115,45 +95,37 @@ If you would like to set your activity upon startup, you can use the `ClientOpti
 
 ### How do I make my bot display online/idle/dnd/invisible?
 
-<!-- eslint-skip -->
-
 ```js
-<client>.user.setStatus('online');
-<client>.user.setStatus('idle');
-<client>.user.setStatus('dnd');
-<client>.user.setStatus('invisible');
+client.user.setStatus('online');
+client.user.setStatus('idle');
+client.user.setStatus('dnd');
+client.user.setStatus('invisible');
 ```
 
 ### How do I set both status and activity in one go?
 
-<!-- eslint-skip -->
-
 ```js
-<client>.user.setPresence({ activities: [{ name: '<activity>' }], status: 'idle' });
+client.user.setPresence({ activities: [{ name: 'activity' }], status: 'idle' });
 ```
 
 ## Miscellaneous
 
 ### How do I send a message to a specific channel?
 
-<!-- eslint-skip -->
-
 ```js
-const channel = <client>.channels.cache.get('<id>');
-channel.send('<content>');
+const channel = client.channels.cache.get('id');
+channel.send('content');
 ```
 
 ### How do I DM a specific user?
 
-<!-- eslint-skip -->
-
 ```js
-const user = <client>.users.cache.get('<id>');
-user.send('<content>');
+const user = client.users.cache.get('id');
+user.send('content');
 ```
 
 ::: tip
-If you want to DM the user who sent the interaction, you can use `<interaction>.user.send()`.
+If you want to DM the user who sent the interaction, you can use `interaction.user.send()`.
 :::
 
 ### How do I mention a specific user in a message?
@@ -161,9 +133,9 @@ If you want to DM the user who sent the interaction, you can use `<interaction>.
 <!-- eslint-skip -->
 
 ```js
-const user = <interaction>.options.getUser('target');
-await <interaction>.reply(`Hi, ${user}.`);
-await <interaction>.followUp('Hi, <@user id>.');
+const user = interaction.options.getUser('target');
+await interaction.reply(`Hi, ${user}.`);
+await interaction.followUp('Hi, <@user id>.');
 ```
 
 ::: tip
@@ -189,18 +161,16 @@ channel.send({
 
 ### How do I prompt the user for additional input?
 
-<!-- eslint-skip -->
-
 ```js
-<interaction>.reply('Please enter more input.').then(() => {
-	const filter = m => <interaction>.user.id === m.author.id;
+interaction.reply('Please enter more input.').then(() => {
+	const filter = m => interaction.user.id === m.author.id;
 
-	<interaction>.channel.awaitMessages({ filter, time: 60000, max: 1, errors: ['time'] })
+	interaction.channel.awaitMessages({ filter, time: 60000, max: 1, errors: ['time'] })
 		.then(messages => {
-			<interaction>.followUp(`You've entered: ${messages.first().content}`);
+			interaction.followUp(`You've entered: ${messages.first().content}`);
 		})
 		.catch(() => {
-			<interaction>.followUp('You did not enter any input!');
+			interaction.followUp('You did not enter any input!');
 		});
 });
 ```
@@ -211,11 +181,11 @@ If you want to learn more about this syntax or other types of collectors, check 
 
 ### How do I block a user from using my bot?
 
-<!-- eslint-skip -->
+<!-- eslint-disable no-useless-return -->
 
 ```js
 const blockedUsers = ['id1', 'id2'];
-<client>.on('interactionCreate', interaction => {
+client.on('interactionCreate', interaction => {
 	if (blockedUsers.includes(interaction.user.id)) return;
 });
 ```
@@ -223,10 +193,10 @@ const blockedUsers = ['id1', 'id2'];
 ::: tip
 You do not need to have a constant local variable like `blockedUsers` above. If you have a database system that you use to store IDs of blocked users, you can query the database instead:
 
-<!-- eslint-skip -->
+<!-- eslint-disable no-useless-return -->
 
 ```js
-<client>.on('interactionCreate', async interaction => {
+client.on('interactionCreate', async interaction => {
 	const blockedUsers = await database.query('SELECT user_id FROM blocked_users;');
 	if (blockedUsers.includes(interaction.user.id)) return;
 });
@@ -237,10 +207,8 @@ Note that this is just a showcase of how you could do such a check.
 
 ### How do I react to the message my bot sent?
 
-<!-- eslint-skip -->
-
 ```js
-<interaction>.channel.send('My message to react to.').then(sentMessage => {
+interaction.channel.send('My message to react to.').then(sentMessage => {
 	// Unicode emoji
 	sentMessage.react('👍');
 
@@ -273,14 +241,12 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 
 ### How do I find all online members of a guild?
 
-<!-- eslint-skip -->
-
 ```js
 // First use guild.members.fetch to make sure all members are cached
-<guild>.members.fetch().then(fetchedMembers => {
+guild.members.fetch().then(fetchedMembers => {
 	const totalOnline = fetchedMembers.filter(member => member.presence.status === 'online');
 	// Now you have a collection with all online member objects in the totalOnline variable
-	console.log(`There are currently ${totalOnline.size} members online in this guild!`)
+	console.log(`There are currently ${totalOnline.size} members online in this guild!`);
 });
 ```
 
@@ -290,8 +256,6 @@ If you want to learn more about intents, check out [this dedicated guide on inte
 :::
 
 ### How do I check which role was added/removed and for which member?
-
-<!-- eslint-skip -->
 
 ```js
 // Start by declaring a guildMemberUpdate listener
@@ -315,10 +279,8 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
 
 There are two common measurements for bot pings. The first, **Websocket heartbeat**, is the average interval of a regularly sent signal indicating the healthy operation of the WebSocket connection the library receives events over:
 
-<!-- eslint-skip -->
-
 ```js
-<interaction>.reply(`Websocket heartbeat: ${<client>.ws.ping}ms.`);
+interaction.reply(`Websocket heartbeat: ${client.ws.ping}ms.`);
 ```
 
 ::: tip
@@ -327,12 +289,10 @@ A specific shards heartbeat can be found on the WebSocketShard instance, accessi
 
 The second, **Roundtrip Latency**, describes the amount of time a full API roundtrip (from the creation of the command message to the creation of the response message) takes. You then edit the response to the respective value to avoid needing to send yet another message:
 
-<!-- eslint-skip -->
-
 ```js
-<interaction>.reply('Pinging...', { fetchReply: true })
+interaction.reply('Pinging...', { fetchReply: true })
 	.then(sent => {
-		sent.edit(`Roundtrip latency: ${sent.createdTimestamp - <interaction>.createdTimestamp}ms`);
+		sent.edit(`Roundtrip latency: ${sent.createdTimestamp - interaction.createdTimestamp}ms`);
 	});
 ```
 
@@ -352,8 +312,6 @@ sudo apt-get install ffmpeg # ffmpeg debian/ubuntu
 npm install ffmpeg-static # ffmpeg windows
 ```
 
-<!-- eslint-skip -->
-
 ```js
 const ytdl = require('ytdl-core');
 const {
@@ -367,12 +325,12 @@ const {
 // ...
 
 const connection = joinVoiceChannel({
-	channelId: <voiceChannel>.id,
-	guildId: <guild>.id,
-	adapterCreator: <guild>.voiceAdapterCreator,
+	channelId: voiceChannel.id,
+	guildId: guild.id,
+	adapterCreator: guild.voiceAdapterCreator,
 });
 
-const stream = ytdl('<youtubelink>', { filter: 'audioonly' });
+const stream = ytdl('youtube link', { filter: 'audioonly' });
 const resource = createAudioResource(stream, { inputType: StreamType.Arbitrary });
 const player = createAudioPlayer();
 
@@ -406,8 +364,6 @@ module.exports = {
 	'!': '❗', '?': '❓',
 };
 ```
-
-<!-- eslint-skip -->
 
 ```js
 // index.js
