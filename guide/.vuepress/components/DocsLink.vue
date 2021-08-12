@@ -40,14 +40,15 @@ const linkText = computed(() => {
 
 	const isStatic = property.startsWith('s-');
 	const isEvent = property.startsWith('e-');
-	const [character, name, methodCharacters] = [
-		isStatic ? '.' : '#',
-		isStatic
-			? property.replace('s-', '')
-			: isEvent ? property.replace('e-', 'event:') : property,
-		props.type === 'method' ? '()' : '',
-	];
+	const isMethod = props.type === 'method';
 
-	return `${file}${character}${name}${methodCharacters}`;
+	const separator = isStatic ? '.' : '#';
+	const name = isStatic
+		? property.replace('s-', '')
+		: isEvent
+			? property.replace('e-', 'event:')
+			: property;
+
+	return `${file}${separator}${name}${isMethod && '()'}`;
 });
 </script>
