@@ -94,7 +94,7 @@ Notice how `.setRequired(true)` is specified within the options builder. Setting
 As shown in the options example above, you can specify the `type` of an `ApplicationCommandOption`. Listed below are all the possible values you can pass as `ApplicationCommandOptionType`:
 
 ::: tip
-The [slash command builder](popular-topics/builders.md#slash-command-builders) has a method for each of these types respectively.
+The [slash command builder](/popular-topics/builders.md#slash-command-builders) has a method for each of these types respectively.
 Refer to the Discord API documentation for detailed explanations on the [`SUB_COMMAND` and `SUB_COMMAND_GROUP` option types](https://discord.com/developers/docs/interactions/application-commands#subcommands-and-subcommand-groups).
 :::
 
