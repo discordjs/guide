@@ -28,8 +28,8 @@ const commands = [];
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 // Define values used for slash command registration
-const CLIENT_ID = ; // Place your client/bot id here
-const GUILD_ID = ; // Place your guild id here
+const clientId = '12345678'; // Place your client/bot id here
+const guildId = '12345678'; // Place your guild id here
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
@@ -43,7 +43,7 @@ const rest = new REST({ version: '9' }).setToken(token);
 		console.log('Started refreshing application (/) commands.');
 
 		await rest.put(
-			Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
+			Routes.applicationGuildCommands(clientId, guildId),
 			{ body: commands },
 		);
 
@@ -64,13 +64,13 @@ Global application commands will be available in all the guilds your application
 Global commands are cached for one hour. New global commands will fan out slowly across all guilds and will only be guaranteed to be updated after an hour. Guild commands update instantly. As such, we recommend you use guild-based commands during development and publish them to global commands when they're ready for public use.
 :::
 
-To deploy global commands, you can use the same script from the [guild commands](#guild-commands) section and adjust the route in the script to `.applicationCommands(CLIENT_ID)`.
+To deploy global commands, you can use the same script from the [guild commands](#guild-commands) section and adjust the route in the script to `.applicationCommands(clientId)`.
 
 <!-- eslint-skip -->
 
 ```js {2}
 await rest.put(
-	Routes.applicationCommands(CLIENT_ID),
+	Routes.applicationCommands(clientId),
 	{ body: commands },
 );
 ```
