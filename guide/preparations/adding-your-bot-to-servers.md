@@ -25,17 +25,9 @@ If you get an error message saying "Bot requires a code grant", then head over i
 
 ## Creating and using your invite link
 
-To create your invite link you need to go in the `OAuth2` page of your app.
+To create an invite link, head back to the [My Apps](https://discord.com/developers/applications/me) page under the "Applications" section, click on your bot application, and open the OAuth2 page.
 
-Head back to the [My Apps](https://discord.com/developers/applications/me) page under the "Applications" section once again and click on your bot application, then go in the `OAuth2` section and do the following steps: 
-
-* In lower part of the page you can find a section named "SCOPES", in this section there are a bunch of check boxes, you need to select `bot` and `applications.commands`.
-* When you click on the `bot` scope a new section named "BOT PERMISSIONS" will appear, in this new section you can find new check boxes that rappresent the permission your bot will have in the server. Select all the permissions your bot need.
-* Then just click the `Copy` button in the "SCOPES" section
-
-::: tip
-If you want to grant all permissions to your bot just select `Administrator`.
-:::
+At the bottom of the page, you'll find Discord's OAuth2 URL generator. Select the `bot` and `applications.commands` options. Once you select the `bot` option, a list of permissions will appear, allowing you to configure the permissions your bot needs.
 
 To use this link just paste it in the browser and hit enter, you shuld see something like this (with your bot's username and avatar):
 
