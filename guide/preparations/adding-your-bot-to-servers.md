@@ -29,7 +29,7 @@ To create an invite link, head back to the [My Apps](https://discord.com/develop
 
 At the bottom of the page, you'll find Discord's OAuth2 URL generator. Select the `bot` and `applications.commands` options. Once you select the `bot` option, a list of permissions will appear, allowing you to configure the permissions your bot needs.
 
-To use this link just paste it in the browser and hit enter, you shuld see something like this (with your bot's username and avatar):
+Grab the link via the "Copy" button and enter it in your browser. You should see something like this (with your bot's username and avatar):
 
 ![Bot Authorization page](./images/bot-auth-page.png)
 
