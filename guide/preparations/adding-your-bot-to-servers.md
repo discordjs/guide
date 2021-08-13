@@ -9,7 +9,7 @@ Before you're able to see your bot in your own (or other) servers, you'll need t
 The basic version of one such link looks like this:
 
 ```
-https://discord.com/api/oauth2/authorize?client_id=123456789012345678&permissions=8&scope=bot%20applications.commands
+https://discord.com/api/oauth2/authorize?client_id=123456789012345678&permissions=0&scope=bot%20applications.commands
 ```
 
 The structure of the url is quite simple:
