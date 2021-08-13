@@ -21,9 +21,7 @@ const applyText = (canvas, text) => {
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName } = interaction;
-
-	if (commandName === 'profile') {
+	if (interaction.commandName === 'profile') {
 		const canvas = Canvas.createCanvas(700, 250);
 		const context = canvas.getContext('2d');
 

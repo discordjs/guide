@@ -16,15 +16,13 @@ You can have a maximum of five `ActionRow`s per message, and five buttons within
 
 To create a button, use the `MessageActionRow()` and `MessageButton()` builder functions and then pass the resulting object to `CommandInteraction#reply()` as `InteractionReplyOptions`:
 
-```js {1,9-15,17}
+```js {1,7-13,15}
 const { MessageActionRow, MessageButton } = require('discord.js');
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName } = interaction;
-
-	if (commandName === 'ping') {
+	if (interaction.commandName === 'ping') {
 		const row = new MessageActionRow()
 			.addComponents(
 				new MessageButton()
@@ -60,15 +58,13 @@ Restart your bot and then send the command to a channel your bot has access to. 
 
 You can also send message components within an ephemeral response or alongside message embeds.
 
-```js {1,14-18,20}
+```js {1,12-16,18}
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName } = interaction;
-
-	if (commandName === 'ping') {
+	if (interaction.commandName === 'ping') {
 		const row = new MessageActionRow()
 			.addComponents(
 				// ...

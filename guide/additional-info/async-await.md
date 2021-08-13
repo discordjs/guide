@@ -87,9 +87,7 @@ client.once('ready', () => {
 client.on('interactionCreate', interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName } = interaction;
-
-	if (commandName === 'react') {
+	if (interaction.commandName === 'react') {
 		// ...
 	}
 });

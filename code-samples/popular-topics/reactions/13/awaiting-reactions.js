@@ -11,9 +11,7 @@ client.once('ready', () => {
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName } = interaction;
-
-	if (commandName === 'react-await') {
+	if (interaction.commandName === 'react-await') {
 		const message = await interaction.reply('Awaiting emojis...', { fetchReply: true });
 		message.react('👍').then(() => message.react('👎'));
 

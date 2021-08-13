@@ -47,9 +47,7 @@ client.once('ready', () => {
 client.on('interactionCreate', interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName } = interaction;
-
-	if (commandName === 'profile') {
+	if (interaction.commandName === 'profile') {
 		// ...
 	}
 });
@@ -71,13 +69,11 @@ After importing the Canvas module and initializing it, you should load the image
 `canvas` works almost identical to HTML5 Canvas. You can read the HTML5 Canvas tutorials on [w3Schools](https://www.w3schools.com/html/html5_canvas.asp) and [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) for more information later!
 :::
 
-```js {7-10}
+```js {5-8}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName } = interaction;
-
-	if (commandName === 'profile') {
+	if (interaction.commandName === 'profile') {
 		// Create a 700x250 pixel canvas and get its context
 		// The context will be used to modify the canvas
 		const canvas = Canvas.createCanvas(700, 250);
