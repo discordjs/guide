@@ -45,19 +45,19 @@ client.once('ready', () => {
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName: command } = interaction;
+	const { commandName } = interaction;
 
-	if (command === 'addtag') {
+	if (commandName === 'addtag') {
 		// [delta]
-	} else if (command === 'tag') {
+	} else if (commandName === 'tag') {
 		// [epsilon]
-	} else if (command === 'edittag') {
+	} else if (commandName === 'edittag') {
 		// [zeta]
-	} else if (command === 'taginfo') {
+	} else if (commandName === 'taginfo') {
 		// [theta]
-	} else if (command === 'showtags') {
+	} else if (commandName === 'showtags') {
 		// [lambda]
-	} else if (command === 'removetag') {
+	} else if (commandName === 'removetag') {
 		// [mu]
 	}
 });

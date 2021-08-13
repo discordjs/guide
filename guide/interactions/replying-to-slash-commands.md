@@ -271,7 +271,7 @@ const data = new SlashCommandBuilder()
 
 The following snippet details the logic needed to parse the subcommands and respond accordingly using the `CommandInteractionOptionResolver#getSubcommand()` method:
 
-```js {5-20}
+```js {5-15}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 

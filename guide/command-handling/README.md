@@ -17,9 +17,11 @@ client.once('ready', () => {
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'ping') {
+	const { commandName } = interaction;
+
+	if (commandName === 'ping') {
 		await interaction.reply('Pong.');
-	} else if (interaction.commandName === 'beep') {
+	} else if (commandName === 'beep') {
 		await interaction.reply('Boop!');
 	}
 	// ...
@@ -57,7 +59,7 @@ module.exports = {
 };
 ```
 
-You can go ahead and do the same for the rest of your commands and put their respective blocks of code inside the `execute()` function. If you've been using the same code as the guide thus far, you can copy & paste your commands into their own files now, following the format above. The `description` property is optional but will be useful for the dynamic help command we'll be covering later.
+You can go ahead and do the same for the rest of your commands and put their respective blocks of code inside the `execute()` function. If you've been using the same code as the guide thus far, you can copy & paste your commands into their own files now, following the format above.
 
 ::: tip
 `module.exports` is how you export data in Node.js so that you can `require()` it in other files. If you're unfamiliar with it and want to read more, you can look at [the documentation](https://nodejs.org/api/modules.html#modules_module_exports) for more info.
@@ -107,14 +109,16 @@ for (const file of commandFiles) {
 
 With your `client.commands` Collection setup, you can use it to retrieve and execute your commands! Inside your `interactionCreate` event, delete your `if`/`else if` chain of commands and replace it with this:
 
-```js {6-12}
+```js {8-13}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (!client.commands.has(interaction.commandName)) return;
+	const { commandName } = interaction;
+
+	if (!client.commands.has(commandName)) return;
 
 	try {
-		await client.commands.get(interaction.commandName).execute(interaction);
+		await client.commands.get(commandName).execute(interaction);
 	} catch (error) {
 		console.error(error);
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });

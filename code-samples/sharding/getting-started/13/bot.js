@@ -5,9 +5,9 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 client.on('interactionCreate', interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName: command } = interaction;
+	const { commandName } = interaction;
 
-	if (command === 'stats') {
+	if (commandName === 'stats') {
 		const promises = [
 			client.shard.fetchClientValues('guilds.cache.size'),
 			client.shard.broadcastEval(c => c.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)),

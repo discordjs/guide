@@ -13,13 +13,13 @@ client.once('ready', () => {
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName: command } = interaction;
+	const { commandName } = interaction;
 
-	if (command === 'cat') {
+	if (commandName === 'cat') {
 		const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
 
 		interaction.reply({ files: [file] });
-	} else if (command === 'urban') {
+	} else if (commandName === 'urban') {
 		const term = interaction.options.getString('term');
 		const query = querystring.stringify({ term });
 
