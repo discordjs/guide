@@ -134,7 +134,7 @@ client.on('guildBanAdd', async ban => {
 
 	// Update the output with a bit more information
 	// Also run a check to make sure that the log returned was for the same banned member
-	if (target.id === user.id) {
+	if (target.id === ban.user.id) {
 		console.log(`${ban.user.tag} got hit with the swift hammer of justice in the guild ${ban.guild.name}, wielded by the mighty ${executor.tag}`);
 	} else {
 		console.log(`${ban.user.tag} got hit with the swift hammer of justice in the guild ${ban.guild.name}, audit log fetch was inconclusive.`);
