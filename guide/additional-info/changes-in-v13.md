@@ -257,6 +257,10 @@ Webpack builds are no longer supported.
 
 ## Changes and deletions
 
+### ActivityType
+
+The `CUSTOM_STATUS` type has been renamed to `CUSTOM`.
+
 ### APIMessage
 
 The `APIMessage` class has been renamed to `MessagePayload`, resolving a naming clash with an interface in the `discord-api-types` library which represents raw message data objects.
@@ -547,7 +551,9 @@ The `GuildMember#hasPermission` shortcut/helper method has been removed.
 
 #### GuildMember#lastMessageId
 
-Neither of these properties were actually provided by Discord, instead relying on potentially inaccurate client cache, and have been removed.
+#### GuildMember#lastMessageChannelId
+
+None of these properties were actually provided by Discord, instead relying on potentially inaccurate client cache, and have been removed.
 
 #### GuildMember#presence
 
@@ -587,6 +593,10 @@ The `MessageManager.delete()` method no longer accepts any additional options, r
 ```
 
 `reason` is no longer a parameter as it is not used by the API.
+
+#### Message#edits
+
+The `Message#edits` property has been removed.
 
 ### MessageEmbed
 
