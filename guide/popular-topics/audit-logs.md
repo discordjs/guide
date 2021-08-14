@@ -110,7 +110,7 @@ The logic for this will be very similar to the above kick example, except that t
 
 ```js
 client.on('guildBanAdd', async ban => {
-	console.log(`${ban.user} got hit with the swift hammer of justice in the guild ${ban.guild.name}.`);
+	console.log(`${ban.user.tag} got hit with the swift hammer of justice in the guild ${ban.guild.name}.`);
 });
 ```
 
