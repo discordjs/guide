@@ -61,7 +61,7 @@ Now that you have a web server up and running, it's time to get some information
 
 ![OAuth2 application page](./images/oauth2-app-page.png)
 
-Take note of the `client id` and `client secret` fields. Copy these values into your `config.json` file; you'll need them later. For now, add a redirect url to `http://localhost:53134` like so:
+Take note of the `client id` and `client secret` fields. Copy these values into your `config.json` file; you'll need them later. For now, add a redirect URL to `http://localhost:53134` like so:
 
 ![Adding Redirects](./images/add-redirects.png)
 
@@ -87,7 +87,7 @@ Modify `index.html` to add your OAuth2 URL and to take advantage of the access t
 <div id="info">
 	Hoi!
 </div>
-<a id="login" style="display: none;" href="your-oauth2-url-here">Identify Yourself</a>
+<a id="login" style="display: none;" href="your-oauth2-URL-here">Identify Yourself</a>
 <script>
 	window.onload = () => {
 		const fragment = new URLSearchParams(window.location.hash.slice(1));

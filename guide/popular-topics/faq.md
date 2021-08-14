@@ -72,7 +72,7 @@ client.user.setUsername('username');
 ### How do I set my bot's avatar?
 
 ```js
-client.user.setAvatar('url or path');
+client.user.setAvatar('URL or path');
 ```
 
 ### How do I set my playing status?
