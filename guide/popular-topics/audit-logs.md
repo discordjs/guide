@@ -126,7 +126,7 @@ client.on('guildBanAdd', async ban => {
 	const banLog = fetchedLogs.entries.first();
 
 	// Perform a coherence check to make sure that there's *something*
-	if (!banLog) return console.log(`${user.tag} was banned from ${guild.name} but no audit log could be found.`);
+	if (!banLog) return console.log(`${ban.user.tag} was banned from ${ban.guild.name} but no audit log could be found.`);
 
 	// Now grab the user object of the person who banned the member
 	// Also grab the target of this action to double-check things
@@ -135,9 +135,9 @@ client.on('guildBanAdd', async ban => {
 	// Update the output with a bit more information
 	// Also run a check to make sure that the log returned was for the same banned member
 	if (target.id === user.id) {
-		console.log(`${user.tag} got hit with the swift hammer of justice in the guild ${guild.name}, wielded by the mighty ${executor.tag}`);
+		console.log(`${ban.user.tag} got hit with the swift hammer of justice in the guild ${ban.guild.name}, wielded by the mighty ${executor.tag}`);
 	} else {
-		console.log(`${user.tag} got hit with the swift hammer of justice in the guild ${guild.name}, audit log fetch was inconclusive.`);
+		console.log(`${ban.user.tag} got hit with the swift hammer of justice in the guild ${ban.guild.name}, audit log fetch was inconclusive.`);
 	}
 });
 ```
