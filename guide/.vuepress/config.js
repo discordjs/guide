@@ -38,6 +38,10 @@ const config = {
 				link: '/commando/',
 			},
 			{
+				text: 'v13',
+				link: 'https://discordjs.guide/',
+			},
+			{
 				text: 'Discord.js Documentation',
 				link: 'https://discord.js.org/#/docs/main/stable/general/welcome',
 			},
