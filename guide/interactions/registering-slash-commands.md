@@ -27,9 +27,9 @@ const fs = require('fs');
 const commands = [];
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-// Define values used for slash command registration
-const clientId = '12345678'; // Place your client/bot id here
-const guildId = '12345678'; // Place your guild id here
+// Place your client and guild ids here
+const clientId = '123456789012345678';
+const guildId = '876543210987654321';
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
