@@ -109,16 +109,16 @@ client.on('guildMemberRemove', async member => {
 The logic for this will be very similar to the above kick example, except that this time, the `guildBanAdd` event will be used.
 
 ```js
-client.on('guildBanAdd', async (guild, user) => {
-	console.log(`${user.tag} got hit with the swift hammer of justice in the guild ${guild.name}.`);
+client.on('guildBanAdd', async ban => {
+	console.log(`${ban.user} got hit with the swift hammer of justice in the guild ${ban.guild.name}.`);
 });
 ```
 
 As was the case in the previous examples, you can see what happened, to whom it happened, but not who executed the action. Enter once again audit logs fetching limited to 1 entry and only the `MEMBER_BAN_ADD` type. The `guildBanAdd` listener then becomes:
 
 ```js {2-7,9-10,12-14,16-22}
-client.on('guildBanAdd', async (guild, user) => {
-	const fetchedLogs = await guild.fetchAuditLogs({
+client.on('guildBanAdd', async ban => {
+	const fetchedLogs = await ban.guild.fetchAuditLogs({
 		limit: 1,
 		type: 'MEMBER_BAN_ADD',
 	});
