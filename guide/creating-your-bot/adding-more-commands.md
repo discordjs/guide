@@ -119,7 +119,7 @@ That would display both the server name _and_ the amount of members in it.
 	</DiscordMessage>
 </DiscordMessages>
 
-Of course, you can modify this to your liking. You may also want to display the date the server was created or the server's region. You would do those in the same manner–use `interaction.guild.createdAt` or `interaction.guild.region`, respectively.
+Of course, you can modify this to your liking. You may also want to display the date the server was created or the server's verification level. You would do those in the same manner–use `interaction.guild.createdAt` or `interaction.guild.verificationLevel`, respectively.
 
 ::: tip
 Refer to the <DocsLink path="class/Guild" /> documentation for a list of all the properties you can access and all the methods you can call on a server!
