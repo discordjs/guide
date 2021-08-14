@@ -124,7 +124,7 @@ The shortcuts `Intents.ALL`, `Intents.NON_PRIVILEGED`, and `Intents.PRIVILEGED` 
 Refer to our more [detailed article about this topic](/popular-topics/intents.html).
 
 ```diff
-- const client = new Client({ ws: { intents: [Intents.FLAGS.GUILDS] });
+- const client = new Client({ ws: { intents: [Intents.FLAGS.GUILDS] }});
 + const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 ```
 
