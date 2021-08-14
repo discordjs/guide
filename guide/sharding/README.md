@@ -49,14 +49,14 @@ Here is some sample code for a `stats` command, without sharding taken into cons
 // bot.js
 const { Client, Intents } = require('discord.js');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 client.on('interactionCreate', interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName: command } = interaction;
+	const { commandName } = interaction;
 
-	if (command === 'stats') {
+	if (commandName === 'stats') {
 		return interation.reply(`Server count: ${client.guilds.cache.size}.`);
 	}
 });
@@ -68,7 +68,7 @@ Let's say your bot is in a total of 3,600 guilds. Using the recommended shard co
 
 ## FetchClientValues
 
-One of the most common sharding utility methods you'll be using is <DocsLink path="class/ShardClientUtil?scrollTo=fetchClientValues">Shard#fetchClientValues</DocsLink>. This method retrieves a property on the Client object of all shards.
+One of the most common sharding utility methods you'll be using is <DocsLink path="class/ShardClientUtil?scrollTo=fetchClientValues" type="method" />. This method retrieves a property on the Client object of all shards.
 
 Take the following snippet of code:
 
@@ -97,7 +97,7 @@ While it's a bit unattractive to have more nesting in your commands, it is neces
 ```js {4-8}
 client.on('interactionCreate', interaction => {
 	// ...
-	if (command === 'stats') {
+	if (commandName === 'stats') {
 		return client.shard.fetchClientValues('guilds.cache.size')
 			.then(results => {
 				return interaction.reply(`Server count: ${results.reduce((acc, guildCount) => acc + guildCount, 0)}`);
@@ -109,7 +109,7 @@ client.on('interactionCreate', interaction => {
 
 ## BroadcastEval
 
-Next, check out another handy sharding method known as <DocsLink path="class/ShardClientUtil?scrollTo=broadcastEval">`Shard#broadcastEval`</DocsLink>. This method makes all of the shards evaluate a given method, which recieves a `client` and a `context` argument. The `client` argument refers to the Client object of the shard evaluating it. You can read about the `context` argument [here](/sharding/additional-information.md#eval-arguments).
+Next, check out another handy sharding method known as <DocsLink path="class/ShardClientUtil?scrollTo=broadcastEval" type="method" />. This method makes all of the shards evaluate a given method, which recieves a `client` and a `context` argument. The `client` argument refers to the Client object of the shard evaluating it. You can read about the `context` argument [here](/sharding/additional-information.md#eval-arguments).
 
 ```js
 client.shard
@@ -152,7 +152,7 @@ Promise.all(promises)
 ```js {4-15}
 client.on('interactionCreate', interaction => {
 	// ...
-	if (command === 'stats') {
+	if (commandName === 'stats') {
 		const promises = [
 			client.shard.fetchClientValues('guilds.cache.size'),
 			client.shard.broadcastEval(c => c.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)),

@@ -27,7 +27,7 @@ To include permission checks like `ADMINISTRATOR` or `MANAGE_GUILD`, keep readin
 * Permission: The ability to execute a certain action in Discord
 * Overwrite: Rule on a channel to modify the permissions for a member or role
 * Bit field: Binary representation of Discord permissions 
-* Flag: Human readable string in MACRO_CASE (e.g., `'KICK_MEMBERS'`) that refers to a position in the permission bit field. You can find a list of all valid flags in the <DocsLink path="class/Permissions?scrollTo=s-FLAGS">discord.js documentation</DocsLink>
+* Flag: Human readable string in MACRO_CASE (e.g., `'KICK_MEMBERS'`) that refers to a position in the permission bit field. You can find a list of all valid flags on the <DocsLink path="class/Permissions?scrollTo=s-FLAGS" /> page
 * Base Permissions: Permissions for roles the member has, set on the guild level
 * Final Permissions: Permissions for a member or role, after all overwrites are applied
 
@@ -55,7 +55,7 @@ Note that flag names are literal. Although `VIEW_CHANNEL` grants access to view 
 
 ### Creating a role with permissions
 
-Alternatively you can provide permissions as a property of the <DocsLink path="typedef/CreateRoleOptions">CreateRoleOptions</DocsLink> typedef during role creation as an array of flag strings or a permission number:
+Alternatively you can provide permissions as a property of the <DocsLink path="typedef/CreateRoleOptions" /> typedef during role creation as an array of flag strings or a permission number:
 
 ```js
 const { Permissions } = require('discord.js');
@@ -65,7 +65,7 @@ guild.roles.create({ name: 'Mod', permissions: [Permissions.FLAGS.MANAGE_MESSAGE
 
 ### Checking member permissions
 
-To know if one of a member's roles has a permission enabled, you can use the `.has()` method of the GuildMember's <DocsLink path="class/GuildMember?scrollTo=permissions">`permissions`</DocsLink> and provide a permission flag, array, or number to check for. You can also specify if you want to allow the `ADMINISTRATOR` permission or the guild owner status to override this check with the following parameters.
+To know if one of a member's roles has a permission enabled, you can use the `.has()` method on <DocsLink path="class/GuildMember?scrollTo=permissions" /> and provide a permission flag, array, or number to check for. You can also specify if you want to allow the `ADMINISTRATOR` permission or the guild owner status to override this check with the following parameters.
 
 ```js
 const { Permissions } = require('discord.js');
@@ -101,7 +101,7 @@ As you have likely already seen in your desktop client, channel overwrites have 
 
 ### Adding overwrites
 
-To add a permission overwrite for a role or guild member, you access the channel's <DocsLink path="class/TextChannel?scrollTo=permissionOverwrites">PermissionOverwriteManager</DocsLink> and use the `.create()` method. The first parameter is the target of the overwrite, either a Role or User object (or its respective resolvable), and the second is a <DocsLink path="typedef/PermissionOverwriteOptions">PermissionOverwriteOptions</DocsLink> object.
+To add a permission overwrite for a role or guild member, you access the channel's <DocsLink path="class/TextChannel?scrollTo=permissionOverwrites">`PermissionOverwriteManager`</DocsLink> and use the `.create()` method. The first parameter is the target of the overwrite, either a Role or User object (or its respective resolvable), and the second is a <DocsLink path="typedef/PermissionOverwriteOptions" /> object.
 
 Let's add an overwrite to lock everyone out of the channel. The guild ID doubles as the role id for the default role `@everyone` as demonstrated below:
 
@@ -131,24 +131,19 @@ guild.channels.create('new-channel', {
 
 ### Editing overwrites
 
-To edit permission overwrites on the channel with a provided set of new overwrites, you can use the `.edit()` method. This method allows passing an array or Collection of <DocsLink path="class/PermissionOverwrites">PermissionOverwrites</DocsLink>.
+To edit permission overwrites on the channel with a provided set of new overwrites, you can use the `.edit()` method.
 
 ```js
-channel.permissionOverwrites.edit([
-	{
-		id: guild.id,
-		deny: [Permissions.FLAGS.VIEW_CHANNEL],
-	},
-	{
-		id: user.id,
-		allow: [Permissions.FLAGS.VIEW_CHANNEL],
-	},
-]);
+// edits overwrites to disallow everyone to view the channel
+channel.permissionOverwrites.edit(guild.id, { VIEW_CHANNEL: false });
+
+// edits overwrites to allow a user to view the channel
+channel.permissionOverwrites.edit(user.id, { VIEW_CHANNEL: true });
 ```
 
 ### Replacing overwrites
 
-To replace all permission overwrites on the channel with a provided set of new overwrites, you can use the `.set()` method. This is extremely handy if you want to copy a channel's full set of overwrites to another one, as this method also allows passing an array or Collection of <DocsLink path="class/PermissionOverwrites">PermissionOverwrites</DocsLink>.
+To replace all permission overwrites on the channel with a provided set of new overwrites, you can use the `.set()` method. This is extremely handy if you want to copy a channel's full set of overwrites to another one, as this method also allows passing an array or Collection of <DocsLink path="class/PermissionOverwrites" />.
 
 ```js
 // copying overwrites from another channel
@@ -194,7 +189,7 @@ channel.lockPermissions()
 
 ### Permissions after overwrites
 
-There are two utility methods to easily determine the final permissions for a guild member or role in a specific channel: `.permissionsFor()` on the <DocsLink path="class/GuildChannel?scrollTo=permissionsFor">GuildChannel</DocsLink> class and `.permissionsIn()` on the <DocsLink path="GuildMember?scrollTo=permissionsIn">GuildMember</DocsLink> and <DocsLink path="class/Role?scrollTo=permissionsIn">Role</DocsLink> classes. Both return a <DocsLink path="class/Permissions">Permissions</DocsLink> object.
+There are two utility methods to easily determine the final permissions for a guild member or role in a specific channel: <DocsLink path="class/GuildChannel?scrollTo=permissionsFor" type="method" /> and <DocsLink path="class/GuildMember?scrollTo=permissionsIn" type="method" /> - <DocsLink path="class/Role?scrollTo=permissionsIn" type="method" />. All return a <DocsLink path="class/Permissions" /> object.
 
 To check your bot's permissions in the channel the command was used in, you could use something like this:
 
@@ -217,7 +212,7 @@ If you want to know how to work with the returned Permissions objects, keep read
 
 ## The Permissions object
 
-The <DocsLink path="class/Permissions">Permissions</DocsLink> object is a discord.js class containing a permissions bit field and a bunch of utility methods to manipulate it easily.
+The <DocsLink path="class/Permissions" /> object is a discord.js class containing a permissions bit field and a bunch of utility methods to manipulate it easily.
 Remember that using these methods will not manipulate permissions, but rather create a new instance representing the changed bit field.
 
 ### Displaying permission flags
@@ -259,7 +254,7 @@ const { Permissions } = require('discord.js');
 const permissions = new Permissions(268550160n);
 ```
 
-You can also use this approach for other <DocsLink path="typedef/PermissionResolvable">PermissionResolvable</DocsLink>s like flag arrays or flags.
+You can also use this approach for other <DocsLink path="typedef/PermissionResolvable" />s like flag arrays or flags.
 
 ```js
 const { Permissions } = require('discord.js');

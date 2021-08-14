@@ -14,7 +14,7 @@ You can use `npm run dev` to open up a local version of the site at http://local
 
 ### Linting
 
-Remember to always lint your edits/additions before making a commit to ensure everything's lined up and consistent with the rest of the guide. We use ESLint and have a package.json script for linting both JS files and JS codeblocks inside Markdown files.
+Remember to always lint your edits/additions before making a commit to ensure everything's lined up and consistent with the rest of the guide. We use ESLint and have a package.json script for linting both JS files and JS code blocks inside Markdown files.
 
 ```bash
 npm run lint
@@ -31,7 +31,7 @@ const sent = await message.channel.send('Hi!');
 console.log(sent.content)
 ```
 
-ESLint would error with `Parsing error: Unexpected token message` instead of letting you know that you're missing a semicolon. In this case, it's because of the use of `await` outside of an async function. In situations like this, after you've fixed any obvious errors, you can add an `<!-- eslint-skip -->` comment above the codeblock to have it ignored entirely by ESLint when running the lint script.
+ESLint would error with `Parsing error: Unexpected token message` instead of letting you know that you're missing a semicolon. In this case, it's because of the use of `await` outside of an async function. In situations like this, after you've fixed any obvious errors, you can add an `<!-- eslint-skip -->` comment above the code block to have it ignored entirely by ESLint when running the lint script.
 
 ## Adding pages
 
@@ -182,7 +182,7 @@ Since `guild.members` returns a Collection, you can iterate over it with `.forEa
 Since the `.delete()` method returns a Promise, you need to `await` it when inside a `try`/`catch` block.
 ```
 
-#### Codeblock line highlighting
+#### Code block line highlighting
 
 When you want to highlight a piece of code to display either an addition or a difference, use the `js {1-5,6-10}` syntax. For example (ignoring the `\`s):
 
@@ -216,11 +216,11 @@ client.on('messageCreate', message => {
 
 ```
 
-![Codeblock line highlighting output](https://i.imgur.com/913nf9V.png)
+![Code block line highlighting output](https://i.imgur.com/913nf9V.png)
 
-This is VuePress' [codeblock line highlighting](https://vuepress.vuejs.org/guide/markdown.html#line-highlighting-in-code-blocks) feature. It's encouraged to use and preferred over diff codeblocks.
+This is VuePress' [code block line highlighting](https://vuepress.vuejs.org/guide/markdown.html#line-highlighting-in-code-blocks) feature. It's encouraged to use and preferred over diff code blocks.
 
-Do note the space between `js` and `{}`. This is necessary to not interfere with `eslint-plugin-markdown`, which would ignore the codeblock.
+Do note the space between `js` and `{}`. This is necessary to not interfere with `eslint-plugin-markdown`, which would ignore the code block.
 
 ### Images and links
 
@@ -291,7 +291,7 @@ The syntax to make this display is quite simple as well:
 
 These components are made with [Vue](https://vuejs.org/), but if you aren't familiar with Vue, don't worry about it. Just understand that you'll usually only need the `profile="user"`/`profile="bot"` attribute for the `<DiscordMessage>` component. All `<DiscordMessage>` components must be children of a single `<DiscordMessages>` component for it to display properly.
 
-Do note the casing in `<DiscordMessages>` syntax instead of `<discord-messages>`. This is due to how VuePress renders markdown and HTML inside markdown files. It doesn't recognize `<discord-messages>` as an HTML element, therefore rendering anything indented inside it as a regular codeblock.
+Do note the casing in `<DiscordMessages>` syntax instead of `<discord-messages>`. This is due to how VuePress renders markdown and HTML inside markdown files. It doesn't recognize `<discord-messages>` as an HTML element, therefore rendering anything indented inside it as a regular code block.
 
 These components feature messages, mentions, embeds, interactions, and more. You can read more about how to use them by checking out [@discord-message-components/vue](https://github.com/Danktuary/discord-message-components/blob/main/packages/vue/README.md).
 
@@ -300,24 +300,29 @@ These components feature messages, mentions, embeds, interactions, and more. You
 On pages where links to the discord.js documentation are used, you can use the `<DocsLink>` component. Since the discord.js documentation is split into different categories and branches, the component allows you to supply the necessary info accordingly. The only required prop is `path`.
 
 ```md
-Main docs, branch version inherited from branch selector, `class/Client`:
-<DocsLink path="class/Client">Link text</DocsLink>
-<!-- Becomes: https://discord.js.org/#/docs/main/v11/class/Client -->
+Main docs, default branch, `class/Client`:
+<DocsLink path="class/Client" />
+<DocsLink path="class/Client">`Client`</DocsLink>
+<!-- [`Client`](https://discord.js.org/#/docs/main/stable/class/Client) -->
 
-Main docs, stable branch (becomes "v12" due to the aliases set in `.vuepress/mixins/branches.js`), `class/Client`:
-<DocsLink branch="stable" path="class/Client">Link text</DocsLink>
-<!-- Becomes: https://discord.js.org/#/docs/main/v12/class/Client -->
+Events, methods, and static properties:
+<DocsLink path="class/Client?scrollTo=e-ready" />
+<DocsLink path="class/Intents?scrollTo=s-FLAGS" />
+<DocsLink path="class/Interaction?scrollTo=isCommand" type="method" />
+<!-- [`Client#event:ready`](https://discord.js.org/#/docs/main/stable/class/Client) -->
+<!-- [`Intents.FLAGS`](https://discord.js.org/#/docs/main/stable/class/Intents?scrollTo=s-FLAGS) -->
+<!-- [`Interaction#isCommand()`](https://discord.js.org/#/docs/main/stable/class/Interaction?scrollTo=isCommand) -->
 
-Main docs, reply-prefix branch, `class/Client`:
-<DocsLink section="main" branch="reply-prefix" path="class/Client">Link text</DocsLink>
-<!-- Becomes: https://discord.js.org/#/docs/main/reply-prefix/class/Client -->
+Main docs, v12 branch, `class/Client`:
+<DocsLink section="main" branch="v12" path="class/Client" />
+<!-- [`Client`](https://discord.js.org/#/docs/main/v12/class/Client) -->
 
-Collection docs, master branch (no `branch` prop set), `class/Collection?scrollTo=partition`:
-<DocsLink section="collection" path="class/Collection?scrollTo=partition">Link text</DocsLink>
-<!-- Becomes: https://discord.js.org/#/docs/collection/master/class/Collection?scrollTo=partition -->
+Collection docs, main branch (no `branch` prop set), `class/Collection?scrollTo=partition`:
+<DocsLink section="collection" path="class/Collection?scrollTo=partition" type="method" />
+<!-- [`Collection#partition()`](https://discord.js.org/#/docs/collection/main/class/Collection?scrollTo=partition) -->
 ```
 
-If the `section` prop is set to `main` (or omitted) and the `branch` prop is omitted, the `branch` prop will default to the version the user has set via the site's branch selector dropdown and update accordingly. If `section` is set to anything else and `branch` is omitted, the `branch` prop will default to `'master'`.
+If the `section` prop is set to `main` (or omitted) and the `branch` prop is omitted, the `branch` prop will default to the version the user has set via the site's branch selector dropdown and update accordingly. If `section` is set to anything else and `branch` is omitted, the `branch` prop will default to `'main'`.
 
 ### VScode snippets
 

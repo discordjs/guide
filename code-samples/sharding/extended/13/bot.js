@@ -1,6 +1,6 @@
 const { Client, Intents } = require('discord.js');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 function findEmoji(c, { nameOrId }) {
 	return c.emojis.cache.get(nameOrId) || c.emojis.cache.find(e => e.name.toLowerCase() === nameOrId.toLowerCase());
@@ -9,9 +9,9 @@ function findEmoji(c, { nameOrId }) {
 client.on('interactionCreate', interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName: command } = interaction;
+	const { commandName } = interaction;
 
-	if (command === 'send') {
+	if (commandName === 'send') {
 		const id = interaction.options.getString('destination');
 
 		return client.shard.broadcastEval(async (c, { channelId }) => {
@@ -31,7 +31,7 @@ client.on('interactionCreate', interaction => {
 			});
 	}
 
-	if (command === 'emoji') {
+	if (commandName === 'emoji') {
 		const emojiNameOrId = interaction.options.getString('emoji');
 
 		return client.shard.broadcastEval(findEmoji, { context: { nameOrId: emojiNameOrId } })

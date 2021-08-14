@@ -8,7 +8,7 @@ Here's the base code we'll be using:
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -17,9 +17,11 @@ client.once('ready', () => {
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'ping') {
+	const { commandName } = interaction;
+
+	if (commandName === 'ping') {
 		await interaction.reply('Pong.');
-	} else if (interaction.commandName === 'beep') {
+	} else if (commandName === 'beep') {
 		await interaction.reply('Boop!');
 	}
 	// ...
@@ -40,12 +42,17 @@ discord-bot/
 ├── package-lock.json
 └── package.json
 ```
+Next, open your terminal and install the [`@discordjs/builders`](https://github.com/discordjs/builders) package by running `npm install @discordjs/builders`, as we'll be using the utility methods from this package in the following code samples.
 
 In the same folder, create a new folder and name it `commands`. This is where you'll store all of your commands, of course. Head over to your `commands` folder, create a new file named `ping.js`, and copy & paste in the following code:
 
 ```js
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
 module.exports = {
-	name: 'ping',
+	data: new SlashCommandBuilder()
+		.setName('ping')
+		.setDescription('Replies with Pong!'),
 	async execute(interaction) {
 		await interaction.reply('Pong!');
 	},
@@ -71,7 +78,7 @@ const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 client.commands = new Collection();
 ```
 
@@ -80,7 +87,7 @@ client.commands = new Collection();
 :::
 
 ::: tip
-If you aren't exactly sure what Collections are, they're a class that extend JavaScript's native Map class and include more extensive, useful functionality. You can read about Maps [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), and see all the available Collection methods <DocsLink section="collection" path="class/Collection">here</DocsLink>.
+If you aren't exactly sure what <DocsLink section="collection" path="class/Collection"><code>Collection</code>s</DocsLink> are, they're a class that extend JavaScript's native [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) class and include more extensive, useful functionality.
 :::
 
 This next step is how you'll dynamically retrieve all your newly created command files. The [`fs.readdirSync()`](https://nodejs.org/api/fs.html#fs_fs_readdirsync_path_options) method will return an array of all the file names in a directory, e.g. `['ping.js', 'beep.js']`. To ensure only command files get returned, use `Array.filter()` to leave out any non-JavaScript files from the array. With that array, you can loop over it and dynamically set your commands to the Collection you made above.
@@ -94,7 +101,7 @@ for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	// set a new item in the Collection
 	// with the key as the command name and the value as the exported module
-	client.commands.set(command.name, command);
+	client.commands.set(command.data.name, command);
 }
 ```
 
@@ -122,6 +129,10 @@ client.on('interactionCreate', async interaction => {
 First, fetch the command in the Collection with that name and assign it to the variable `command`. If the command doesn't exist, it will return `undefined` and you exit early with `return`. If it does exist, call the command's `.execute()` method, and pass in your `interaction` variable as its argument. In case something goes wrong, log the error and report back to the member to let them know.
 
 And that's it! Whenever you want to add a new command, you [register a command](/interactions/registering-slash-commands.md), make a new file in your `commands` directory, name it with what you did for the Slash Command, and then do what you did for the other commands.
+
+::: tip
+Please head to the interactions section to learn how to [register your slash commands](/interactions/registering-slash-commands.md).
+:::
 
 ## Resulting code
 

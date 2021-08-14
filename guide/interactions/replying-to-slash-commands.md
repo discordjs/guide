@@ -113,7 +113,7 @@ client.on('interactionCreate', async interaction => {
 
 As previously mentioned, you have three seconds to respond to an interaction before its token becomes invalid. But what if you have a command that performs a task which takes longer than three seconds before being able to reply?
 
-In this case, you can make use of the `CommandInteraction#defer()` method, which triggers the `<application> is thinking...` message and also acts as initial response. This allows you 15 minutes to complete your tasks before responding.
+In this case, you can make use of the `CommandInteraction#deferReply()` method, which triggers the `<application> is thinking...` message and also acts as initial response. This allows you 15 minutes to complete your tasks before responding.
 <!--- here either display the is thinking message via vue-discord-message or place a screenshot -->
 
 ```js {7-9}
@@ -123,21 +123,21 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-		await interaction.defer();
+		await interaction.deferReply();
 		await wait(4000);
 		await interaction.editReply('Pong!');
 	}
 });
 ```
 
-If you have a command that performs longer tasks, be sure to call `defer()` as early as possible.
+If you have a command that performs longer tasks, be sure to call `deferReply()` as early as possible.
 
 You can also pass an `ephemeral` flag to the `InteractionDeferOptions`:
 
 <!-- eslint-skip -->
 
 ```js
-await interaction.defer({ ephemeral: true });
+await interaction.deferReply({ ephemeral: true });
 ```
 
 ## Follow-ups
@@ -207,55 +207,24 @@ Interaction responses can use masked links (e.g. `[text](http://site.com)`) and 
 
 ## Parsing options
 
+### Command options
+
 In this section, we'll cover how to access the values of a command's options. Let's assume you have a command that contains the following options:
 
-```js {4-35}
-const data = {
-	name: 'ping',
-	description: 'Replies with Pong!',
-	options: [
-		{
-			name: 'input',
-			description: 'Enter a string',
-			type: 'STRING',
-		},
-		{
-			name: 'int',
-			description: 'Enter an integer',
-			type: 'INTEGER',
-		},
-		{
-			name: 'num',
-			description: 'Enter a number',
-			type: 'NUMBER',
-		},
-		{
-			name: 'choice',
-			description: 'Select a boolean',
-			type: 'BOOLEAN',
-		},
-		{
-			name: 'target',
-			description: 'Select a user',
-			type: 'USER',
-		},
-		{
-			name: 'destination',
-			description: 'Select a channel',
-			type: 'CHANNEL',
-		},
-		{
-			name: 'muted',
-			description: 'Select a role',
-			type: 'ROLE',
-		},
-		{
-			name: 'mentionable',
-			description: 'Mention something',
-			type: 'MENTIONABLE',
-		},
-	],
-};
+```js {6-13}
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
+const data = new SlashCommandBuilder()
+	.setName('ping')
+	.setDescription('Replies with Pong!')
+	.addStringOption(option => option.setName('input').setDescription('Enter a string'))
+	.addIntegerOption(option => option.setName('int').setDescription('Enter an integer'))
+	.addNumberOption(option => option.setName('num').setDescription('Enter a number'))
+	.addBooleanOption(option => option.setName('choice').setDescription('Select a boolean'))
+	.addUserOption(option => option.setName('target').setDescription('Select a user'))
+	.addChannelOption(option => option.setName('destination').setDescription('Select a channel'))
+	.addRoleOption(option => option.setName('muted').setDescription('Select a role'))
+	.addMentionableOption(option => option.setName('mentionable').setDescription('Mention something'));
 ```
 
 You can `get()` these options from the `CommandInteractionOptionResolver` as shown below:
@@ -275,8 +244,52 @@ console.log([string, integer, boolean, user, member, channel, role, mentionable]
 ```
 
 ::: tip
-If you want the Snowflake of a structure instead, grab the option via `get()` and access the Snowflake via the `value` property. Note that you should use `const { value: name } = ...` here to [destructure and rename](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) the value obtained from the <DocsLink path="typedef/CommandInteractionOption">`CommandInteractionOption`</DocsLink> structure to avoid identifier name conflicts.
+If you want the Snowflake of a structure instead, grab the option via `get()` and access the Snowflake via the `value` property. Note that you should use `const { value: name } = ...` here to [destructure and rename](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) the value obtained from the <DocsLink path="typedef/CommandInteractionOption" /> structure to avoid identifier name conflicts.
 :::
+
+### Subcommands
+
+If you have a command that contains subcommands, you can parse them in a very similar way as to the above examples.
+Let's say your command looks like this:
+
+```js {6-14}
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
+const data = new SlashCommandBuilder()
+	.setName('info')
+	.setDescription('Get info about a user or a server!')
+	.addSubcommand(subcommand =>
+		subcommand
+			.setName('user')
+			.setDescription('Info about a user')
+			.addUserOption(option => option.setName('target').setDescription('The user')))
+	.addSubcommand(subcommand =>
+		subcommand
+			.setName('server')
+			.setDescription('Info about the server'));
+```
+
+The following snippet details the logic needed to parse the subcommands and respond accordingly using the `CommandInteractionOptionResolver#getSubcommand()` method:
+
+```js {5-15}
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'info') {
+		if (interaction.options.getSubcommand() === 'user') {
+			const user = interaction.options.getUser('target');
+
+			if (user) {
+				await interaction.reply(`Username: ${user.username}\nID: ${user.id}`);
+			} else {
+				await interaction.reply(`Your username: ${interaction.user.username}\nYour ID: ${interaction.user.id}`);
+			}
+		} else if (interaction.options.getSubcommand() === 'server') {
+			await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
+		}
+	}
+});
+```
 
 ## Fetching and deleting responses
 

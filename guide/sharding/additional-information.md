@@ -29,14 +29,14 @@ manager.spawn()
 
 As the property names imply, the `_eval` property is what the shard is attempting to evaluate, and the `_result` property is the output of said evaluation. However, these properties are only guaranteed if a _shard_ is sending a message. There will also be an `_error` property, should the evaluation have thrown an error.
 
-You can also send messages via `process.send('hello')`, which would not contain the same information. This is why the `.message` property's type is declared as `*` <DocsLink path="class/Shard?scrollTo=e-message">in the discord.js documentation</DocsLink>.
+You can also send messages via `process.send('hello')`, which would not contain the same information. This is why the `.message` property's type is declared as `*` in the <DocsLink path="class/Shard?scrollTo=e-message" /> documentation.
 
 ## Specific shards
 
 There might be times where you want to target a specific shard. An example would be to kill a specific shard that isn't working as intended. You can achieve this by taking the following snippet (in a command, preferably):
 
 ::: tip
-In discord.js v13, <DocsLink path="class/ShardClientUtil?scrollTo=ids">`client.shard`</DocsLink> can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
+In discord.js v13, <DocsLink path="class/ShardClientUtil?scrollTo=ids">`Client#shard`</DocsLink> can hold multiple ids. If you use the default sharding manager, the `.ids` array will only have one entry.
 :::
 
 ```js
@@ -45,7 +45,7 @@ client.shard.broadcastEval(c => {
 });
 ```
 
-If you're using something like [PM2](http://pm2.keymetrics.io/) or [Forever](https://github.com/foreverjs/forever), this is an easy way to restart a specific shard. Remember, <DocsLink path="class/ShardClientUtil?scrollTo=broadcastEval">Shard#broadcastEval</DocsLink> sends a message to **all** shards, so you have to check if it's on the shard you want.
+If you're using something like [PM2](http://pm2.keymetrics.io/) or [Forever](https://github.com/foreverjs/forever), this is an easy way to restart a specific shard. Remember, <DocsLink path="class/ShardClientUtil?scrollTo=broadcastEval" type="method" /> sends a message to **all** shards, so you have to check if it's on the shard you want.
 
 ## `ShardingManager#shardArgs` and `ShardingManager#execArgv`
 
@@ -87,7 +87,7 @@ function funcName(c, { arg }) {
 client.shard.broadcastEval(funcName, { context: { arg: 'arg' } });
 ```
 
-The <DocsLink path="typedef/BroadcastEvalOptions">`BroadcastEvalOptions`</DocsLink> typedef was introduced in discord.js v13 as the second parameter in `.broadcastEval()`.
+The <DocsLink path="typedef/BroadcastEvalOptions" /> typedef was introduced in discord.js v13 as the second parameter in `.broadcastEval()`.
 It accepts two properties: `shard` and `context`. The `context` property will be sent as the second argument to your function.
 
 In this small snippet, an argument is passed to the `funcName` function through this parameter.

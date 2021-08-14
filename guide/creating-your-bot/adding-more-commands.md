@@ -34,17 +34,17 @@ If you aren't familiar with some of this syntax, it may be ES6 syntax. If it doe
 
 ## Simple command structure
 
-You already have an if statement that checks messages for a ping/pong command. Adding other command checks is just as easy; chain an `else if` to your existing condition. Instead of using `interaction.commandName` every time, you can destructure and rename it to `command`.
+You already have an if statement that checks messages for a ping/pong command. Adding other command checks is just as easy; chain an `else if` to your existing condition. Instead of using `interaction.commandName` every time, you can destructure it as shown here.
 
 ```js {2-10}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName: command } = interaction;
+	const { commandName } = interaction;
 
-	if (command === 'ping') {
+	if (commandName === 'ping') {
 		await interaction.reply('Pong!');
-	} else if (command === 'beep') {
+	} else if (commandName === 'beep') {
 		await interaction.reply('Boop!');
 	}
 });
@@ -66,13 +66,13 @@ Servers are referred to as "guilds" in the Discord API and discord.js library. W
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName: command } = interaction;
+	const { commandName } = interaction;
 
-	if (command === 'ping') {
+	if (commandName === 'ping') {
 		await interaction.reply('Pong!');
-	} else if (command === 'beep') {
+	} else if (commandName === 'beep') {
 		await interaction.reply('Boop!');
-	} else if (command === 'server') {
+	} else if (commandName === 'server') {
 		await interaction.reply(`This server's name is: ${interaction.guild.name}`);
 	}
 });
@@ -95,13 +95,13 @@ If you want to expand upon that command and add some more info, here's an exampl
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName: command } = interaction;
+	const { commandName } = interaction;
 
-	if (command === 'ping') {
+	if (commandName === 'ping') {
 		await interaction.reply('Pong!');
-	} else if (command === 'beep') {
+	} else if (commandName === 'beep') {
 		await interaction.reply('Boop!');
-	} else if (command === 'server') {
+	} else if (commandName === 'server') {
 		await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
 	}
 });
@@ -122,7 +122,7 @@ That would display both the server name _and_ the amount of members in it.
 Of course, you can modify this to your liking. You may also want to display the date the server was created or the server's region. You would do those in the same manner–use `interaction.guild.createdAt` or `interaction.guild.region`, respectively.
 
 ::: tip
-Want a list of all the properties you can access and all the methods you can call on a server? Refer to <DocsLink path="class/Guild">the discord.js documentation site</DocsLink>!
+Refer to the <DocsLink path="class/Guild" /> documentation for a list of all the properties you can access and all the methods you can call on a server!
 :::
 
 ### User info command
@@ -135,15 +135,15 @@ Set up another if statement and use the command name `user-info`.
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName: command } = interaction;
+	const { commandName } = interaction;
 
-	if (command === 'ping') {
+	if (commandName === 'ping') {
 		await interaction.reply('Pong!');
-	} else if (command === 'beep') {
+	} else if (commandName === 'beep') {
 		await interaction.reply('Boop!');
-	} else if (command === 'server') {
+	} else if (commandName === 'server') {
 		await interaction.reply(`This server's name is: ${interaction.guild.name}`);
-	} else if (command === 'user-info') {
+	} else if (commandName === 'user-info') {
 		await interaction.reply(`Your username: ${interaction.user.username}\nYour ID: ${interaction.user.id}`);
 	}
 });
@@ -162,7 +162,7 @@ This will display the command author's **username** (not nickname, if they have 
 </DiscordMessages>
 
 ::: tip
-`interaction.user` refers to the user who sent the command. For a full list of all the properties and methods for the user object, check out <DocsLink path="class/User">the documentation page for it</DocsLink>.
+`interaction.user` refers to the user who sent the command. Check out the <DocsLink path="class/User" /> documentation page for a full list of all the properties and methods for the user object.
 :::
 
 And there you have it! As you can see, it's quite simple to add additional commands.
@@ -171,7 +171,7 @@ And there you have it! As you can see, it's quite simple to add additional comma
 
 If you don't plan to make more than seven or eight commands for your bot, then using an if/else if chain is sufficient; it's presumably a small project at that point, so you shouldn't need to spend too much time on it. However, this isn't the case for most of us.
 
-You probably want your bot to be feature-rich and easy to configure and develop, right? Using a giant if/else if chain won't let you achieve that; it will only hinder your development process. After you read up on [creating arguments](/creating-your-bot/commands-with-user-input.md), we'll be diving right into something called a "command handler" - code that makes handling commands easier and much more efficient.
+You probably want your bot to be feature-rich and easy to configure and develop, right? Using a giant if/else if chain won't let you achieve that; it will only hinder your development process. Next, we'll be diving right into something called a "command handler" - code that makes handling commands easier and much more efficient.
 
 Before continuing, here's a small list of reasons why you shouldn't use if/else if chains for anything that's not a small project:
 
@@ -186,4 +186,4 @@ In short, it's just not a good idea. But that's why this guide exists! Go ahead 
 
 ## Resulting code
 
-<ResultingCode path="file-setup/13/commands"/>
+<ResultingCode />

@@ -46,19 +46,19 @@ client.on('messageCreate', async message => {
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName: command } = interaction;
+	const { commandName } = interaction;
 
-	if (command === 'balance') {
+	if (commandName === 'balance') {
 		const target = interaction.options.getUser('user') || interaction.user;
 		return interaction.reply(`${target.tag} has ${currency.getBalance(target.id)}💰`);
-	} else if (command === 'inventory') {
+	} else if (commandName === 'inventory') {
 		const target = interaction.options.getUser('user') || interaction.user;
 		const user = await Users.findOne({ where: { user_id: target.id } });
 		const items = await user.getItems();
 
 		if (!items.length) return interaction.reply(`${target.tag} has nothing!`);
 		return interaction.reply(`${target.tag} currently has ${items.map(t => `${t.amount} ${t.item.name}`).join(', ')}`);
-	} else if (command === 'transfer') {
+	} else if (commandName === 'transfer') {
 		const currentAmount = currency.getBalance(interaction.user.id);
 		const transferAmount = interaction.options.getInteger('amount');
 		const transferTarget = interaction.options.getUser('user');
@@ -70,7 +70,7 @@ client.on('interactionCreate', async interaction => {
 		currency.add(transferTarget.id, transferAmount);
 
 		return interaction.reply(`Successfully transferred ${transferAmount}💰 to ${transferTarget.tag}. Your current balance is ${currency.getBalance(interaction.user.id)}💰`);
-	} else if (command === 'buy') {
+	} else if (commandName === 'buy') {
 		const itemName = interaction.options.getString('item');
 		const item = await CurrencyShop.findOne({ where: { name: { [Op.like]: itemName } } });
 		if (!item) return interaction.reply('That item doesn\'t exist.');
@@ -83,10 +83,10 @@ client.on('interactionCreate', async interaction => {
 		await user.addItem(item);
 
 		interaction.reply(`You've bought a ${item.name}`);
-	} else if (command === 'shop') {
+	} else if (commandName === 'shop') {
 		const items = await CurrencyShop.findAll();
 		return interaction.reply(Formatters.codeBlock(items.map(i => `${i.name}: ${i.cost}💰`).join('\n')));
-	} else if (command === 'leaderboard') {
+	} else if (commandName === 'leaderboard') {
 		return interaction.reply(
 			Formatters.codeBlock(
 				currency.sort((a, b) => b.balance - a.balance)

@@ -2,7 +2,7 @@ const { Client, Intents, MessageEmbed } = require('discord.js');
 const fetch = require('node-fetch');
 const querystring = require('querystring');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 const trim = (str, max) => (str.length > max ? `${str.slice(0, max - 3)}...` : str);
 
@@ -13,13 +13,13 @@ client.once('ready', () => {
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName: command } = interaction;
+	const { commandName } = interaction;
 
-	if (command === 'cat') {
+	if (commandName === 'cat') {
 		const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
 
 		interaction.reply({ files: [file] });
-	} else if (command === 'urban') {
+	} else if (commandName === 'urban') {
 		const term = interaction.options.getString('term');
 		const query = querystring.stringify({ term });
 

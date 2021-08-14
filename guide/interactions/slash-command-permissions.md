@@ -10,27 +10,33 @@ If you set `defaultPermission: false` when creating a command, you can immediate
 
 To begin, fetch an `ApplicationCommand` and then set the permissions using the `ApplicationCommandPermissionsManager#add()` method:
 
+<!-- eslint-skip -->
+
 ```js
-client.on('messageCreate', async message => {
-	if (!client.application?.owner) await client.application?.fetch();
+if (!client.application?.owner) await client.application?.fetch();
 
-	if (message.content.toLowerCase() === '!perms' && message.author.id === client.application?.owner.id) {
-		const command = await client.guilds.cache.get('123456789012345678')?.commands.fetch('876543210987654321');
+const command = await client.guilds.cache.get('123456789012345678')?.commands.fetch('876543210987654321');
 
-		const permissions = [
-			{
-				id: '224617799434108928',
-				type: 'USER',
-				permission: false,
-			},
-		];
+const permissions = [
+	{
+		id: '224617799434108928',
+		type: 'USER',
+		permission: false,
+	},
+];
 
-		await command.permissions.add({ permissions });
-	}
-});
+await command.permissions.add({ permissions });
 ```
 
 Now you have successfully denied the user whose `id` you used access to this application command.
+
+::: tip
+If you want to update permissions for a global command instead, your `command` variable would be:
+```js
+const command = client.application?.commands.fetch('123456789012345678');
+```
+:::
+
 If you have a command that is disabled by default and you want to grant someone access to use it, do as follows:
 
 <!-- eslint-skip -->
@@ -68,7 +74,7 @@ await command.permissions.add({ permissions });
 
 ## Bulk update permissions
 
-If you have a lot of commands, you likely want to update their permissions in one go instead of one-by-one. For this approach, you can use `GuildApplicationCommandManager#setPermissions`:
+If you have a lot of commands, you likely want to update their permissions in one go instead of one-by-one. For this approach, you can use `ApplicationCommandPermissionsManager#set()` method:
 
 <!-- eslint-skip -->
 

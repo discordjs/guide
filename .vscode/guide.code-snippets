@@ -57,14 +57,14 @@
 		"prefix": ["docs", "djs-docs"],
 		"description": "version sensitive link to the discord.js documentation",
 		"body": [
-			"<DocsLink path=\"${1:class/Client}\">${2:some link text}</DocsLink>"
+			"<DocsLink path=\"${1:class/Client}\" />"
 		]
 	},
 	"docs-collection": {
 		"prefix": ["docs-collection", "coll-docs"],
 		"description": "link to the discord.js collections",
 		"body": [
-			"<DocsLink section=\"collection\" path=\"${1:class/Collection?scrollTo=partition}\">${2:some link text}</DocsLink>"
+			"<DocsLink section=\"collection\" path=\"${1:class/Collection?scrollTo=partition}\" type=\"method\" />"
 		]
 	}
 }
