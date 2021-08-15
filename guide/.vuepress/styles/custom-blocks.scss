@@ -24,4 +24,8 @@ details.custom-container.details,
 	&.danger a {
 		color: var(--c-danger-title);
 	}
+
+	&.details summary:focus-visible {
+		outline: 1px solid;
+	}
 }
