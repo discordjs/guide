@@ -2,11 +2,9 @@
 
 ## Installing Node.js
 
-To use discord.js, you'll need to install Node.js. You can do so by going to [the Node.js website](https://nodejs.org/).
+To use discord.js, you'll need to install Node.js. You can do so by going to [the Node.js website](https://nodejs.org/). On that note, there's a possibility that you may already have Node installed on your machine \(e.g., if you're using a VPS\). You can check the installed version by running `node -v` inside your terminal.
 
-::: warning
-If you _do_ have Node installed, but it's an older version \(i.e. anything below 16.6.0\), then you must upgrade to the latest version. discord.js v13 requires Node v16.6.0 or higher.
-:::
+discord.js v13 requires Node v16.6.0 or higher, so if `node -v` outputs `v16.6.0` or higher, then you're good to go! Otherwise, take a look at [this page](https://nodejs.org/en/download/package-manager/) for instructions on installing Node on your OS.
 
 ### Installing on Windows
 
@@ -18,9 +16,7 @@ If you're developing on macOS, you have a few options. You can go to [the Node.j
 
 ### Installing on Linux
 
-If you're developing on Linux, you may consult [this page](https://nodejs.org/en/download/package-manager/) to determine how you should install Node. On that note, there's a possibility that you may already have Node installed on your machine \(e.g., if you're using a VPS\). You can check the installed version by running the `node -v` command. If it outputs something like `v16.6.0` or higher, then you're good to go! Otherwise, take a look at [this page](https://nodejs.org/en/download/package-manager/) for instructions on installing Node on your OS.
-
----
+If you're developing on Linux, you can consult [this page](https://nodejs.org/en/download/package-manager/) to determine how you should install Node.
 
 ## Preparing the essentials
 
@@ -30,48 +26,46 @@ To use discord.js, you'll need to install it via npm \(Node's package manager\).
 
 Like any other project, you should have a dedicated folder to keep it organized and manageable.
 
-Navigate to a place on your machine that's easy to find and reopen in the future for convenience purposes. Create a new folder like you normally would (depending on your OS, you can use `mkdir project-name` inside your terminal). If you already have a name you want to use for your bot, you can use that as the folder name. Otherwise, you may name it something like `discord-bot` for the time being \(or anything else you have in mind\).
+Navigate to a place on your machine that's easy to find and reopen in the future for convenience purposes. Create a new folder like you normally would (inside your terminal, you can use `mkdir project-name`). If you already have a name you want to use for your bot, you can use that as the folder name. Otherwise, you can name it something like `discord-bot`.
 
-Once you're done making the folder, open it up (depending on your OS, you can use `cd project-name` inside your terminal).
+Once you're done making the folder, open it up (inside your terminal, you can use `cd project-name`).
 
-### Opening the command prompt
+### Opening the terminal
 
 If you're on Linux, you can quickly open up the terminal with `Ctrl + Alt + T`.
 
-If you're on Windows and aren't familiar with opening up the command prompt, do the following:
+If you're on Windows and aren't familiar with opening up the terminal, do the following:
 
 1. Open your bot project folder.
 2. Hold down the `Shift` key and right-click inside the folder.
 3. Choose the "Open command window here" option.
 
-It should then open up a window with a black background. It's a bit unattractive, but we'll talk about using better, more powerful tools in a different part of the guide.
+It should then open up a window with a black background.
 
-### Using the command prompt
+### Using the terminal
 
-With the command prompt open, run the `node -v` command to make sure you've successfully installed Node.js. If you see something like `v16.6` or higher, great! If not, go back and try installing again.
+With the terminal open, run the `node -v` command to make sure you've successfully installed Node.js. If you see something like `v16.6` or higher, great! If not, go back and try installing again.
 
-The next command you'll be running is `npm init`. This command creates a `package.json` file for you, which will keep track of the dependencies your bot uses and other info. If you're a bit confused by that, you can ignore it for the time being.
+The next command you'll be running is `npm init`. This command creates a `package.json` file for you, which will keep track of the dependencies your bot uses, as well as other info.
 
 The `npm init` command will ask you a sequence of questions–you should fill them out as you see fit. If you're not sure of something or want to skip it as a whole, leave it blank and press enter.
 
 ::: tip
-Want to get started quickly? Use `npm init -y` to have it fill out everything for you!
+To get started quickly, you can use `npm init -y` to have it fill out everything for you.
 :::
 
 Once you're done with that, you're ready to install discord.js!
 
----
-
 ## Installing discord.js
 
-Now that you've installed Node.js and know how to open up your console and run commands, you can finally install discord.js!
+Now that you've installed Node.js and know how to open up your console and run commands, you can finally install discord.js! Run the following command in your terminal:
 
-To install discord.js, run the `npm install discord.js`. This can take a bit of time but should finish fairly quickly.
+```sh:no-line-numbers
+npm install discord.js
+```
 
 And that's it! With all the necessities installed, you're almost ready to start coding your bot.
 
----
-
 ## Installing a linter
 
-While you are coding, you may find that you run into numerous syntax errors or code in an inconsistent style. You should install a linter to ease these troubles. While code editors generally can point out syntax errors, with a linter, you can coerce your coding to be in a specific style as you define in the configuration. While this is not required, it's advisable. [Click here for the linter guide!](/preparations/setting-up-a-linter.md)
+While you are coding, you may find that you run into numerous syntax errors or code in an inconsistent style. You should [install a linter](/preparations/setting-up-a-linter.md) to ease these troubles. While code editors generally can point out syntax errors, with a linter, you can coerce your coding to be in a specific style as you define in the configuration. While this is not required, it's advisable.
