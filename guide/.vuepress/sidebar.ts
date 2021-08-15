@@ -46,7 +46,7 @@ export default {
 			text: 'Creating Your Bot',
 			children: [
 				'/creating-your-bot/',
-				'/creating-your-bot/adding-more-commands.md',
+				'/creating-your-bot/creating-commands.md',
 			],
 		},
 		{
