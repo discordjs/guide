@@ -66,11 +66,11 @@ const relative = time(date, 'R');
 The Formatters also contain various methods to format Snowflakes into mentions.
 
 ```js
-const { userMention, memberMention, channelMention, roleMention } = require('@discordjs/builders');
+const { userMention, memberNicknameMention, channelMention, roleMention } = require('@discordjs/builders');
 const id = '123456789012345678';
 
 const user = userMention(id);
-const nickname = memberMention(id);
+const nickname = memberNicknameMention(id);
 const channel = channelMention(id);
 const role = roleMention(id);
 ```
