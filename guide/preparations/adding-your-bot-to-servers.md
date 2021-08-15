@@ -2,25 +2,25 @@
 
 If you've been following the guide's previous pages, you should have a bot application set up. However, it's not in any servers yet. So how does that work?
 
-Before you're able to see your bot in your own (or other) servers, you'll need to add it by creating and using a unique invite link using your bot application's client ID.
+Before you're able to see your bot in your own (or other) servers, you'll need to add it by creating and using a unique invite link using your bot application's client id.
 
 ## Bot invite links
 
 The basic version of one such link looks like this:
 
-```
+```:no-line-numbers
 https://discord.com/api/oauth2/authorize?client_id=123456789012345678&permissions=0&scope=bot%20applications.commands
 ```
 
 The structure of the URL is quite simple:
 
-* The first part is just Discord's standard structure for authorizing an OAuth2 application (such as your bot application) for entry to a Discord server.
-* The second part that says `client_id=...` is to specify _which_ application you want to authorize. You'll need to replace this part with your client's ID to create a valid invite link.
-* The third part, the one with `permissions=...`, describe what permissions your bot will have on the server you are adding it to.
-* Lastly, the fourth part, which says `scope=bot%20applications.commands`, specifies that you want to add this application as a Discord bot, with the ability to create Slash Commands.
+* `https://discord.com/api/oauth2/authorize` is Discord's standard structure for authorizing an OAuth2 application (such as your bot application) for entry to a Discord server.
+* `client_id=...` is to specify _which_ application you want to authorize. You'll need to replace this part with your client's id to create a valid invite link.
+* `permissions=...` describes what permissions your bot will have on the server you are adding it to.
+* `scope=bot%20applications.commands` specifies that you want to add this application as a Discord bot, with the ability to create slash commands.
 
 ::: warning
-If you get an error message saying "Bot requires a code grant", then head over into your application's settings and disable the "Require OAuth2 Code Grant" option. You usually shouldn't enable this checkbox unless you know why you need to.
+If you get an error message saying "Bot requires a code grant", then head over into your application's settings and disable the "Require OAuth2 Code Grant" option. You shouldn't enable this checkbox unless you know why you need to.
 :::
 
 ## Creating and using your invite link
