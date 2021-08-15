@@ -49,6 +49,6 @@ const linkText = computed(() => {
 			? property.replace('e-', 'event:')
 			: property;
 
-	return `${file}${separator}${name}${isMethod && '()'}`;
+	return `${file}${separator}${name}${isMethod ? '()' : ''}`;
 });
 </script>
