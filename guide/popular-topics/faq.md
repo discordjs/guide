@@ -290,10 +290,8 @@ A specific shards heartbeat can be found on the WebSocketShard instance, accessi
 The second, **Roundtrip Latency**, describes the amount of time a full API roundtrip (from the creation of the command message to the creation of the response message) takes. You then edit the response to the respective value to avoid needing to send yet another message:
 
 ```js
-interaction.reply('Pinging...', { fetchReply: true })
-	.then(sent => {
-		sent.edit(`Roundtrip latency: ${sent.createdTimestamp - interaction.createdTimestamp}ms`);
-	});
+const sent = await interaction.reply({ content: 'Pinging...', fetchReply: true });
+interaction.editReply(`Roundtrip latency: ${sent.createdTimestamp - interaction.createdTimestamp}ms`);
 ```
 
 ### How do I play music from YouTube?
