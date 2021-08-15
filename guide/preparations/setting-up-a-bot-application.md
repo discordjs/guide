@@ -43,11 +43,11 @@ Tokens look like this: `NzkyNzE1NDU0MTk2MDg4ODQy.X-hvzA.Ovy4MCQywSkoMRRclStW4xAY
 Let's imagine that you have a bot on over 1,000 servers, and it took you many, many months of coding and patience to get it on that amount. Your token gets leaked somewhere, and now someone else has it. That person can:
 
 * Spam every server your bot is on;
-* Attempt to DM spam as many users as they can;
-* Attempt to delete as many channels as they can;
-* Attempt to kick or ban as many server members as they possibly can;
-* Make your bot leave all of the servers it has joined.
-* Access and damage the underlying infrastructure (your server)
+* DM spam as many users as possible;
+* Delete as many channels as possible;
+* Kick or ban as many server members as possible;
+* Make your bot leave all of the servers it has joined;
+* Access and damage the underlying infrastructure (your server).
 
 All that and much, much more. Sounds pretty terrible, right? So make sure to keep your token as safe as possible!
 
@@ -63,7 +63,7 @@ Now that we explained why your token is essential and why you should prevent giv
 
 Environment variables are special values your environment (for example, your console, docker container, or environment variable file) can pass to your code's scope so that you can use them inside.
 
-One way to pass environment variables is via the command line interface you use to start your node process. When starting your app, instead of `node index.js` to begin your process, you can use `TOKEN=NzkyNzE1NDU0MTk2MDg4ODQy.X-hvzA.Ovy4MCQywSkoMRRclStW4xAYK7I node index.js`. You can repeat this pattern to expose other values as well: `TOKEN=NzkyNzE1NDU0MTk2MDg4ODQy.X-hvzA.Ovy4MCQywSkoMRRclStW4xAYK7I A=123 B=456 node index.js`
+One way to pass environment variables is via the command line interface you use to start your Node process. When starting your app, instead of `node index.js` to begin your process, you can use `TOKEN=NzkyNzE1NDU0MTk2MDg4ODQy.X-hvzA.Ovy4MCQywSkoMRRclStW4xAYK7I node index.js`. You can repeat this pattern to expose other values as well: `A=123 B=456 TOKEN=NzkyNzE1NDU0MTk2MDg4ODQy.X-hvzA.Ovy4MCQywSkoMRRclStW4xAYK7I node index.js`
 
 You can access the set values in your code through the `process.env` global, accessible from any file. Note that values passed this way will always be strings and that you might need to parse them to a number before using them to do calculations.
 
@@ -75,7 +75,7 @@ console.log(process.env.B);
 client.login(process.env.TOKEN);
 ```
 
-Another common approach is storing these values in a file called `.env` (some hosting solutions automatically ignore `.env` files and load them into your process. We will shortly cover how to keep them safe from git's greedy tracking in a later section below). This approach is less prone to typos and spares you from always copying tokens into your command line. Each line in this file will hold a key-value pair separated by the `=` character. 
+Another common approach is storing these values in a file called `.env` (some hosting solutions automatically ignore `.env` files and load them into your process. We will shortly cover how to keep them safe from git's greedy tracking in a later section below). This approach is less prone to typos and spares you from always copying tokens into your command line. Each line in this file will hold a key-value pair separated by the `=` character.
 
 ```
 TOKEN=NzkyNzE1NDU0MTk2MDg4ODQy.X-hvzA.Ovy4MCQywSkoMRRclStW4xAYK7I
@@ -83,7 +83,7 @@ A=123
 B=456
 ```
 
-To load variables from a file into the process you can either write the code to do so yourself or simply use the `dotenv` package from npm by executing the command line instruction `npm install dotenv` in your project root. You can then require and use the package on top of your main file to load your `.env` file and attach the variables to the `process.env` global as demonstrated below:
+To load variables from a file into the process, you can use the [`dotenv` package](https://www.npmjs.com/package/dotenv). Install it in your project directory via `npm install dotenv`. You can then require and use the package to load your `.env` file and attach the variables to `process.env`:
 
 ```js
 // index.js
@@ -100,7 +100,7 @@ client.login(process.env.TOKEN);
 
 Git is a fantastic tool to keep track of your code changes and allows you to upload progress to services like [GitHub](https://github.com/), [GitLab](https://about.gitlab.com/) or [Bitbucket](https://bitbucket.org/product). While this is super useful to share code with other developers, it also bears the risk of uploading your configuration files with sensitive values!
 
-You can specify files that git should ignore and not add to its versioning systems in a fittingly called `.gitignore` file. To do so, create a file called `.gitignore` in your projects root directory and add the names of the files and folders you want to ignore:
+You can specify files that git should ignore in its versioning systems with a `.gitignore` file. To do so, create a file called `.gitignore` in your project directory and add the names of the files and folders you want to ignore:
 
 ```
 node_modules
