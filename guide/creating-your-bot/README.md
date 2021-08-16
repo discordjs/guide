@@ -1,4 +1,4 @@
-# Creating the initial files
+# Initial files
 
 Once you [add your bot to a server](/preparations/adding-your-bot-to-servers.md), the next step is to start coding and get it online! Let's start by creating a config file for your client token and a main file for your bot application.
 
@@ -152,4 +152,4 @@ After closing the process with `Ctrl + C`, you can press the up arrow on your ke
 
 ## Resulting code
 
-<ResultingCode path="creating-your-bot/creating-the-initial-files" />
+<ResultingCode path="creating-your-bot/initial-files" />
