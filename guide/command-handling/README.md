@@ -107,18 +107,18 @@ for (const file of commandFiles) {
 
 ## Dynamically executing commands
 
-With your `client.commands` Collection setup, you can use it to retrieve and execute your commands! Inside your `interactionCreate` event, delete your `if`/`else if` chain of commands and replace it with this:
+You can use your `client.commands` Collection setup to retrieve and execute your commands! Inside your `interactionCreate` event, delete your `if`/`else if` chain of commands and replace it with this:
 
-```js {8-13}
+```js {4-13}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName } = interaction;
+	const command = client.commands.get(interaction.commandName);
 
-	if (!client.commands.has(commandName)) return;
+	if (!command) return;
 
 	try {
-		await client.commands.get(commandName).execute(interaction);
+		await command.execute(interaction);
 	} catch (error) {
 		console.error(error);
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
@@ -126,9 +126,9 @@ client.on('interactionCreate', async interaction => {
 });
 ```
 
-If there isn't a command with that name, you don't need to do anything further, so exit early with `return`. If there is, `.get()` the command, call its `.execute()` method, and pass in your `interaction` variable as its argument. In case something goes wrong, log the error and report back to the member to let them know.
+First, fetch the command in the Collection with that name and assign it to the variable `command`. If the command doesn't exist, it will return `undefined` and you exit early with `return`. If it does exist, call the command's `.execute()` method, and pass in your `interaction` variable as its argument. In case something goes wrong, log the error and report back to the member to let them know.
 
-And that's it! Whenever you want to add a new command, you make a new file in your `commands` directory, name it what you want, and then do what you did for the other commands.
+And that's it! Whenever you want to add a new command, you [register a command](/interactions/registering-slash-commands.md), make a new file in your `commands` directory, name it the same as the slash command, and then do what you did for the other commands.
 
 ::: tip
 Please head to the interactions section to learn how to [register your slash commands](/interactions/registering-slash-commands.md).
