@@ -2,51 +2,55 @@
 
 ## Installing Node.js
 
-To use discord.js, you'll need to install Node.js. You can do so by going to [the Node.js website](https://nodejs.org/). On that note, there's a possibility that you may already have Node installed on your machine \(e.g., if you're using a VPS\). You can check the installed version by running `node -v` inside your terminal.
+To use discord.js, you'll need to install [Node.js](https://nodejs.org/). discord.js v13 requires Node v16.6.0 or higher.
 
-discord.js v13 requires Node v16.6.0 or higher, so if `node -v` outputs `v16.6.0` or higher, then you're good to go! Otherwise, take a look at [this page](https://nodejs.org/en/download/package-manager/) for instructions on installing Node on your OS.
+::: tip
+To check if you already have Node installed on your machine \(e.g., if you're using a VPS\), run `node -v` in your terminal. If it outputs `v16.6.0` or higher, then you're good to go! Otherwise, continue reading.
+:::
 
-### Installing on Windows
+### Windows
 
-If you're developing on Windows, it's as simple as installing any other program. Go to [the Node.js website](https://nodejs.org/), download the latest version, open up the downloaded file, and follow the steps from the installer.
+On Windows, it's as simple as installing any other program. Download the latest version from [the Node.js website](https://nodejs.org/), open the downloaded file, and follow the steps from the installer.
 
-### Installing on macOS
+### macOS
 
-If you're developing on macOS, you have a few options. You can go to [the Node.js website](https://nodejs.org/), download the latest version, double click the package installer, and follow the instructions. You can also use a package manager like [Homebrew](https://brew.sh/) with the command `brew install node`.
+On macOS, either:
 
-### Installing on Linux
+- Download the latest version [the Node.js website](https://nodejs.org/), open the package installer, and follow the instructions
+- Use a package manager like [Homebrew](https://brew.sh/) with the command `brew install node`
 
-If you're developing on Linux, you can consult [this page](https://nodejs.org/en/download/package-manager/) to determine how you should install Node.
+### Linux
+
+On Linux, you can consult [this page](https://nodejs.org/en/download/package-manager/) to determine how you should install Node.
 
 ## Preparing the essentials
 
 To use discord.js, you'll need to install it via npm \(Node's package manager\). npm comes with every Node installation, so you don't have to worry about installing that. However, before you install anything, you should set up a new project folder.
 
-### Setting up a project folder
-
-Like any other project, you should have a dedicated folder to keep it organized and manageable.
-
-Navigate to a place on your machine that's easy to find and reopen in the future for convenience purposes. Create a new folder like you normally would (inside your terminal, you can use `mkdir project-name`). If you already have a name you want to use for your bot, you can use that as the folder name. Otherwise, you can name it something like `discord-bot`.
-
-Once you're done making the folder, open it up (inside your terminal, you can use `cd project-name`).
+Navigate to a suitable place on your machine and create a new folder named `discord-bot` (or whatever you want). Next you'll need to open your terminal.
 
 ### Opening the terminal
 
-If you're on Linux, you can quickly open up the terminal with `Ctrl + Alt + T`.
+::: tip
+If you use [Visual Studio Code](https://code.visualstudio.com/), you can press <code>Ctrl + `</code> (backtick) to open its integrated terminal.
+:::
 
-If you're on Windows and aren't familiar with opening up the terminal, do the following:
+On Windows, either:
 
-1. Open your bot project folder.
-2. Hold down the `Shift` key and right-click inside the folder.
-3. Choose the "Open command window here" option.
+- `Shift + Right-click` inside your project directory and choose the "Open command window here" option
+- Press `Win + R` and run `cmd.exe`, and then `cd` into your project directory
 
-It should then open up a window with a black background.
+On macOS, either:
+- Open launchpad or spotlight and search for "terminal"
+- In your "Applications" folder, under "Utilities", open the terminal app
 
-### Using the terminal
+On Linux, you can quickly open the terminal with `Ctrl + Alt + T`.
 
-With the terminal open, run the `node -v` command to make sure you've successfully installed Node.js. If you see something like `v16.6` or higher, great! If not, go back and try installing again.
+### Initiating a project folder
 
-The next command you'll be running is `npm init`. This command creates a `package.json` file for you, which will keep track of the dependencies your bot uses, as well as other info.
+With the terminal open, run the `node -v` command to make sure you've successfully installed Node.js. If you see something like `v16.6.0` or higher, great!
+
+The next command you'll be running is `npm init`. This command creates a `package.json` file for you, which will keep track of the dependencies your project uses, as well as other info.
 
 The `npm init` command will ask you a sequence of questions–you should fill them out as you see fit. If you're not sure of something or want to skip it as a whole, leave it blank and press enter.
 
@@ -58,7 +62,7 @@ Once you're done with that, you're ready to install discord.js!
 
 ## Installing discord.js
 
-Now that you've installed Node.js and know how to open up your console and run commands, you can finally install discord.js! Run the following command in your terminal:
+Now that you've installed Node.js and know how to open your console and run commands, you can finally install discord.js! Run the following command in your terminal:
 
 ```sh:no-line-numbers
 npm install discord.js
