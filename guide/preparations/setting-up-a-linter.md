@@ -69,6 +69,7 @@ You can find a list of all of ESLint's rules on [their website](https://eslint.o
 		"ecmaVersion": 2021
 	},
 	"rules": {
+		"arrow-spacing": ["warn", { "before": true, "after": true }],
 		"brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
 		"comma-dangle": ["error", "always-multiline"],
 		"comma-spacing": "error",
@@ -77,6 +78,7 @@ You can find a list of all of ESLint's rules on [their website](https://eslint.o
 		"dot-location": ["error", "property"],
 		"handle-callback-err": "off",
 		"indent": ["error", "tab"],
+		"keyword-spacing": "error",
 		"max-nested-callbacks": ["error", { "max": 4 }],
 		"max-statements-per-line": ["error", { "max": 2 }],
 		"no-console": "off",
