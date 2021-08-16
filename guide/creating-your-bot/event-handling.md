@@ -21,7 +21,7 @@ client.on('interactionCreate', interaction => {
 client.login(token);
 ```
 
-Currently, the event listeners are in the `index.js` file. The `ready` event emits once when the `Client` becomes ready for use, and the `interactionCreate` event emits whenever an interaction is received. Moving the event listener code into individual files is simple, and we'll be taking a similar approach to the [command handler](/command-handling/). 
+Currently, the event listeners are in the `index.js` file. The `ready` event emits once when the `Client` becomes ready for use, and the `interactionCreate` event emits whenever an interaction is received. Moving the event listener code into individual files is simple, and we'll be taking a similar approach to the [command handler](/creating-your-bot/command-handling.md). 
 
 ## Individual event files
 
@@ -67,7 +67,7 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 ```
 
-This same method is used in our [command handler](/command-handling/) section. The `fs.readdirSync().filter()` calls return an array of all the file names in the given directory and filter for only `.js` files, i.e. `['ready.js', 'interactionCreate.js']`.
+This same method is used in our [command handler](/creating-your-bot/command-handling.md) section. The `fs.readdirSync().filter()` calls return an array of all the file names in the given directory and filter for only `.js` files, i.e. `['ready.js', 'interactionCreate.js']`.
 
 ```js {3-10}
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
@@ -143,4 +143,4 @@ If you were to try `execute(newMessage, client)`, this would mean that `newMessa
 
 ## Resulting code
 
-<ResultingCode path="event-handling/file-setup" />
+<ResultingCode path="creating-your-bot/event-handling" />

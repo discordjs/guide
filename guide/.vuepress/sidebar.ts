@@ -47,18 +47,8 @@ export default {
 			children: [
 				'/creating-your-bot/',
 				'/creating-your-bot/creating-commands.md',
-			],
-		},
-		{
-			text: 'Command Handler',
-			children: [
-				'/command-handling/',
-			],
-		},
-		{
-			text: 'Event Handler',
-			children: [
-				'/event-handling/',
+				'/creating-your-bot/command-handling/',
+				'/creating-your-bot/event-handling/',
 			],
 		},
 		{

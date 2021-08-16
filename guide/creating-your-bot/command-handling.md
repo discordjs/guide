@@ -136,4 +136,4 @@ Please head to the interactions section to learn how to [register your slash com
 
 ## Resulting code
 
-<ResultingCode path="command-handling/file-setup" />
+<ResultingCode path="creating-your-bot/command-handling" />

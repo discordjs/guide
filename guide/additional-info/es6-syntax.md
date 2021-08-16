@@ -222,7 +222,7 @@ client.on('interactionCreate', interaction => {
 });
 ```
 
-The code is shorter and looks cleaner, but it shouldn't be necessary if you follow along with the [command handler](/command-handling/) part of the guide.
+The code is shorter and looks cleaner, but it shouldn't be necessary if you follow along with the [command handler](/creating-your-bot/command-handling.md) part of the guide.
 
 You can also rename variables when destructuring, if necessary. A good example is when you're extracting a property with a name already being used or conflicts with a reserved keyword. The syntax is as follows:
 
