@@ -38,6 +38,8 @@ discord-bot/
 
 Create an `events` folder in the same directory. You can now take your existing events code in `index.js` and move them to individual files inside the `events` folders. Create a `ready.js` and an `interactionCreate.js` file in the `events` folder and place in the code for the respective files:
 
+:::: code-group
+::: code-group-item events/ready.js
 ```js
 module.exports = {
 	name: 'ready',
@@ -47,7 +49,8 @@ module.exports = {
 	},
 };
 ```
-
+:::
+::: code-group-item events/interactionCreate.js
 ```js
 module.exports = {
 	name: 'interactionCreate',
@@ -56,20 +59,20 @@ module.exports = {
 	},
 };
 ```
+:::
+::::
 
 The `name` property states which event this file is for, the `once` property is a boolean and specifies if the event should run only once, and the `execute` function is for your event logic. The event handler will call this function whenever the event emits.
 
-Now, you'll write the code for dynamically retrieving all the event files in the `events` folder. Add this below the `const client` line in `index.js`:
+## Reading event files
 
-```js {3}
+Next, let's write the code for dynamically retrieving all the event files in the `events` folder. We'll be taking a similar approach to our [command handler](/creating-your-bot/command-handling.md).
+
+`fs.readdirSync().filter()` returns an array of all the file names in the given directory and filters for only `.js` files, i.e. `['ready.js', 'interactionCreate.js']`.
+
+```js {3,5-12}
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
-```
-
-This same method is used in our [command handler](/creating-your-bot/command-handling.md) section. The `fs.readdirSync().filter()` calls return an array of all the file names in the given directory and filter for only `.js` files, i.e. `['ready.js', 'interactionCreate.js']`.
-
-```js {3-10}
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
 for (const file of eventFiles) {
@@ -82,22 +85,17 @@ for (const file of eventFiles) {
 }
 ```
 
+The <DocsLink path="class/Client" /> class in discord.js extends the [`EventEmitter`](https://nodejs.org/api/events.html#events_class_eventemitter) class. Therefore, the `client` object exposes the [`.on()`](https://nodejs.org/api/events.html#events_emitter_on_eventname_listener) and [`.once()`](https://nodejs.org/api/events.html#events_emitter_once_eventname_listener) methods that you can use to register event listeners. These methods take two arguments: the event name and a callback function.
 
-To listen for events, you have to register an event listener. This is done using the `on` or `once` methods of an `EventEmitter` instance. The `on` method for events can emit multiple times, while `once` will run once and unregister the listener after a single emit.
-
-::: tip
-You can learn more about `EventEmitter` [here](https://nodejs.org/api/events.html#events_class_eventemitter).
-:::
-
-The `Client` class in discord.js extends the `EventEmitter` class. Therefore, the `client` object also has these `on` and `once` methods that you can use to register events. These methods take two arguments: the name of the event and a callback function.
-
-The callback function passed takes argument(s) returned by its respective event, collects them in an `args` array using the `...` [rest parameter syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters), then calls `event.execute` function while passing in the `args` array using the `...` [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax). They are used here because different events in discord.js have different numbers of arguments. The rest parameter collects these variable number of arguments into a single array, and the spread syntax then takes these elements and passes them to the `execute` function.
+The callback function passed takes argument(s) returned by its respective event, collects them in an `args` array using the `...` [rest parameter syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters), then calls `event.execute()` while passing in the `args` array using the `...` [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax). They are used here because different events in discord.js have different numbers of arguments. The rest parameter collects these variable number of arguments into a single array, and the spread syntax then takes these elements and passes them to the `execute` function.
 
 After this, listening for other events is as easy as creating a new file in the `events` folder. The event handler will automatically retrieve and register it whenever you restart your bot.
 
 ## Passing `Client` to event files
 
-You may have noticed how important the `Client` class is. You created a `client` instance of this class in the `index.js` file. Most of the time, you can use this `client` instance in other files by either obtaining it from one of the other discord.js structures or function parameters. In your `interactionCreate` event, you can use `interaction.client`. When you don't have access to any of the structures with the `client` property, you'll have to use the latter method. A prime example of this is the `ready` event.
+You may have noticed how important the <DocsLink path="class/Client" /> class is. You created a `client` instance of this class in the `index.js` file. Most of the time, you can use this `client` instance in other files by obtaining it from one of the other discord.js structures. In the `interactionCreate` event, you can use `interaction.client`.
+
+However, not all events will expose a structure with the `.client` property attached. A prime example of this is the `ready` event.
 
 The `ready` event does not have arguments, meaning that `args` will be an empty array, thus nothing will be passed to the `execute` function in `ready.js`. To obtain the `client` instance, you'll have to pass it as an argument along with the `args` array in the event handler. Back in `index.js`, make the following changes:
 
@@ -112,7 +110,7 @@ for (const file of eventFiles) {
 }
 ```
 
-This allows `client` to be available as the **last** argument to the `execute` function in each event file. You can make use of `client` in `ready.js` by logging your bot's tag in the console when it becomes ready:
+This allows `client` to be available as the **last** argument of the `execute` function in each event file. You can make use of `client` in `ready.js` by logging your bot's tag:
 
 ```js {4-6}
 module.exports = {
@@ -125,7 +123,7 @@ module.exports = {
 ```
 
 ::: tip
-You can omit the `client` argument from the `execute` function in files where you don't need it. For example, it isn't required in the `interactionCreate.js` file because its first argument is an `Interaction` instance, meaning you can use `interaction.client`.
+You can omit the `client` argument from the `execute` function in files where you don't need it. For example, it isn't required in the `interactionCreate.js` file because its first argument is an <DocsLink path="class/Interaction" /> instance, meaning you can use `interaction.client`.
 :::
 
 It is worth noting that the position of `client` argument matters. For example, the `messageUpdate` event has two arguments: `oldMessage` and `newMessage`. Events like this should be handled as:
