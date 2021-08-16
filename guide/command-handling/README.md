@@ -128,7 +128,7 @@ client.on('interactionCreate', async interaction => {
 
 First, fetch the command in the Collection with that name and assign it to the variable `command`. If the command doesn't exist, it will return `undefined` and you exit early with `return`. If it does exist, call the command's `.execute()` method, and pass in your `interaction` variable as its argument. In case something goes wrong, log the error and report back to the member to let them know.
 
-And that's it! Whenever you want to add a new command, you [register a command](/interactions/registering-slash-commands.md), make a new file in your `commands` directory, name it with what you did for the Slash Command, and then do what you did for the other commands.
+And that's it! Whenever you want to add a new command, you [register a command](/interactions/registering-slash-commands.md), make a new file in your `commands` directory, name it the same as the slash command, and then do what you did for the other commands.
 
 ::: tip
 Please head to the interactions section to learn how to [register your slash commands](/interactions/registering-slash-commands.md).
