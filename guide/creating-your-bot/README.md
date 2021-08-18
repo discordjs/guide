@@ -68,7 +68,7 @@ client.on('interactionCreate', interaction => {
 
 Next, add a Slash Command.
 
-Follow [this page](https://discordjs.guide/interactions/registering-slash-commands.html) to register Slash Command on your Discord server.
+Follow [this page](/interactions/registering-slash-commands.md) to register Slash Command on your Discord server.
 
 Notice how the code uses `.on` rather than `.once` like in the ready event. This means that it can trigger multiple times. Save the file, go back to your console, and start the process up again. Whenever an interaction is received, the console will log it. Go ahead and test it out!
 
