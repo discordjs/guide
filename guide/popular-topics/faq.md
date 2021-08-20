@@ -336,7 +336,7 @@ player.play(resource);
 connection.subscribe(player);
 
 player.on(AudioPlayerStatus.Playing, () => {
-	if(voiceChannel.type === 'GUILD_STAGE_VOICE') guild.me.voice.setSuppressed(false)
+	if(voiceChannel.type === 'GUILD_STAGE_VOICE') guild.me.voice.setSuppressed(false);
 });
 
 player.on(AudioPlayerStatus.Idle, () => connection.destroy());
