@@ -17,7 +17,7 @@ Discord allows developers to register [slash commands](https://discord.com/devel
 
 ## Registering commands
 
-This section will cover only the bare minimum to get you started, but you can refer to our page on [in-depth steps on registering slash commands](/interactions/registering-slash-commands.md) for further details. It covers guild commands, global commands, options, option types, and choices. 
+This section will cover only the bare minimum to get you started, but you can refer to our page on [in-depth steps on registering slash commands](/interactions/registering-slash-commands.md) for further details. It covers guild commands, global commands, options, option types, and choices.
 
 ### Command deployment script
 
@@ -29,7 +29,7 @@ You'll need to install [`@discordjs/builders`](https://github.com/discordjs/buil
 npm install @discordjs/builders @discordjs/rest discord-api-types
 ```
 
-Below is a deployment script you can use. Don't worry too much about the implementation; focus more on these variables:
+Below is a deployment script you can use. Focus on these variables:
 
 - `clientId`: Your client's id
 - `guildId`: Your development server's id
@@ -81,15 +81,23 @@ const rest = new REST({ version: '9' }).setToken(token);
 :::
 ::::
 
-Once you fill in your values, run `node deploy-commands.js` in your project directory to register your commands to a single guild. It's also possible to [register commands globally](/interactions/registering-slash-commands.md#global-commands).
+Once you fill in these values, run `node deploy-commands.js` in your project directory to register your commands to a single guild. It's also possible to [register commands globally](/interactions/registering-slash-commands.md#global-commands).
+
+::: tip
+You only need to run this script once. If you add or edit existing commands, you should run `node deploy-commands.js` again.
+:::
 
 ## Replying to commands
 
-Once you've registered a command, you can listen for interactions via <DocsLink path="class/Client?scrollTo=e-interactionCreate" />.
+Once you've registered your commands, you can listen for interactions via <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> in your `index.js` file.
 
 You should first check if an interation is a command via <DocsLink path="class/Interaction?scrollTo=isCommand" type="method">`.isCommand()`</DocsLink>, and then check the <DocsLink path="class/CommandInteraction?scrollTo=commandName">`.commandName`</DocsLink> property to know which command it is. You can respond to interactions with <DocsLink path="class/CommandInteraction?scrollTo=reply">`.reply()`</DocsLink>.
 
-```js {2-12}
+```js {5-17}
+client.once('ready', () => {
+	console.log('Ready!');
+});
+
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
@@ -103,6 +111,8 @@ client.on('interactionCreate', async interaction => {
 		await interaction.reply('User info.');
 	}
 });
+
+client.login(token);
 ```
 
 ### Server info command

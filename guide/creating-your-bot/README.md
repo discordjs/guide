@@ -20,7 +20,7 @@ Storing data in a `config.json` file is a common way of keeping your sensitive v
 }
 ```
 :::
-::: code-group-item index.js
+::: code-group-item Usage
 ```js
 const { token } = require('./config.json');
 
@@ -37,7 +37,7 @@ If you're using Git, you should not commit this file and should [ignore it via `
 
 Environment variables are special values for your environment (e.g., terminal session, docker container, or environment variable file). You can pass these values into your code's scope so that you can use them.
 
-One way to pass in environment variables is via the command line interface. When starting your app, instead of `node index.js`, you can use `TOKEN=your-token-goes-here node index.js`. You can repeat this pattern to expose other values as well.
+One way to pass in environment variables is via the command line interface. When starting your app, instead of `node index.js`, use `TOKEN=your-token-goes-here node index.js`. You can repeat this pattern to expose other values as well.
 
 You can access the set values in your code via the `process.env` global variable, accessible in any file. Note that values passed this way will always be strings and that you might need to parse them to a number, if using them to do calculations.
 
@@ -47,7 +47,7 @@ You can access the set values in your code via the `process.env` global variable
 A=123 B=456 TOKEN=your-token-goes-here node index.js
 ```
 :::
-::: code-group-item index.js
+::: code-group-item Usage
 ```js
 console.log(process.env.A);
 console.log(process.env.B);
@@ -58,9 +58,9 @@ console.log(process.env.TOKEN);
 
 #### Using dotenv
 
-Another common approach is storing these values in a `.env` file. This approach spares you from always copying your token into the command line. Each line in a `.env` file should hold a `KEY=value` pair.
+Another common approach is storing these values in a `.env` file. This spares you from always copying your token into the command line. Each line in a `.env` file should hold a `KEY=value` pair.
 
-You can use the [`dotenv` package](https://www.npmjs.com/package/dotenv) to achieve this. After installation, you can require and use the package to load your `.env` file and attach the variables to `process.env`:
+You can use the [`dotenv` package](https://www.npmjs.com/package/dotenv) for this. Once installed, require and use the package to load your `.env` file and attach the variables to `process.env`:
 
 ```sh:no-line-numbers
 npm install dotenv
@@ -74,7 +74,7 @@ B=456
 TOKEN=your-token-goes-here
 ```
 :::
-::: code-group-item index.js
+::: code-group-item Usage
 ```js
 const dotenv = require('dotenv');
 
@@ -112,14 +112,14 @@ config.json
 ```
 
 ::: tip
-Besides keeping credentials safe, you should add `node_modules` here. This directory can be restored based on the entries in your `package.json` and `package-lock.json` files by running `npm install` and does not need to be included in Git.
+Aside from keeping credentials safe, `node_modules` should be included here. Since this directory can be restored based on the entries in your `package.json` and `package-lock.json` files by running `npm install`, it does not need to be included in Git.
 
 You can specify quite intricate patterns in `.gitignore` files, check out the [Git documentation on `.gitignore`](https://git-scm.com/docs/gitignore) for more information!
 :::
 
 ## Creating the main file
 
-Open up your code editor and create a new file. We suggest that you save the file as `index.js`, but you may name it whatever you wish.
+Open your code editor and create a new file. We suggest that you save the file as `index.js`, but you may name it whatever you wish.
 
 Here's the base code to get you started:
 
@@ -145,7 +145,7 @@ This is how you create a client instance for your Discord bot and login to Disco
 Open your terminal and run `node index.js` to start the process. If you see "Ready!" after a few seconds, you're good to go!
 
 ::: tip
-You can open up your `package.json` file and edit the `"main": "index.js"` field to point to your main file. You can then run `node .` in your terminal to start the process!
+You can open your `package.json` file and edit the `"main": "index.js"` field to point to your main file. You can then run `node .` in your terminal to start the process!
 
 After closing the process with `Ctrl + C`, you can press the up arrow on your keyboard to bring up the latest commands you've run. Pressing up and then enter after closing the process is a quick way to start it up again.
 :::

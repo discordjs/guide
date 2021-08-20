@@ -21,7 +21,7 @@ client.on('interactionCreate', interaction => {
 client.login(token);
 ```
 
-Currently, the event listeners are in the `index.js` file. The `ready` event emits once when the `Client` becomes ready for use, and the `interactionCreate` event emits whenever an interaction is received. Moving the event listener code into individual files is simple, and we'll be taking a similar approach to the [command handler](/creating-your-bot/command-handling.md). 
+Currently, the event listeners are in the `index.js` file. The `ready` event emits once when the `Client` becomes ready for use, and the `interactionCreate` event emits whenever an interaction is received. Moving the event listener code into individual files is simple, and we'll be taking a similar approach to the [command handler](/creating-your-bot/command-handling.md).
 
 ## Individual event files
 

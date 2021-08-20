@@ -87,11 +87,11 @@ Create a new folder named `commands`, which is where you'll store all of your co
 
 Next, open your terminal and install the [`@discordjs/builders`](https://github.com/discordjs/builders) package. We'll be using the utility methods from this package to build the slash command data.
 
-Create a `ping.js` file for your ping command:
-
 ```sh:no-line-numbers
 npm install @discordjs/builders
 ```
+
+Then create a `ping.js` file for your ping command:
 
 ```js
 const { SlashCommandBuilder } = require('@discordjs/builders');
@@ -132,7 +132,7 @@ client.commands = new Collection();
 [`fs`](https://nodejs.org/api/fs.html) is Node's native file system module. <DocsLink section="collection" path="class/Collection" /> is a class that extends JavaScript's native [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) class, and includes more extensive, useful functionality.
 :::
 
-This next step is how you'll dynamically retrieve all your command files. The [`fs.readdirSync()`](https://nodejs.org/api/fs.html#fs_fs_readdirsync_path_options) method will return an array of all the file names in a directory, e.g. `['ping.js', 'beep.js']`. To ensure only command files get returned, use `Array.filter()` to leave out any non-JavaScript files from the array. With that array, loop over it and dynamically set your commands to the `client.commands` Collection.
+This next step is how to dynamically retrieve your command files. The [`fs.readdirSync()`](https://nodejs.org/api/fs.html#fs_fs_readdirsync_path_options) method will return an array of all the file names in a directory, e.g. `['ping.js', 'beep.js']`. To ensure only command files get returned, use `Array.filter()` to leave out any non-JavaScript files from the array. With that array, loop over it and dynamically set your commands to the `client.commands` Collection.
 
 ```js {2,4-9}
 client.commands = new Collection();
@@ -165,7 +165,7 @@ for (const file of commandFiles) {
 
 ## Dynamically executing commands
 
-You can use your `client.commands` Collection setup to retrieve and execute your commands! Inside the `interactionCreate` event, delete the `if`/`else if` chain of commands and replace it with this:
+You can use the `client.commands` Collection setup to retrieve and execute your commands! Inside the `interactionCreate` event, delete the `if`/`else if` chain of commands and replace it with this:
 
 ```js {4-13}
 client.on('interactionCreate', async interaction => {
@@ -184,7 +184,7 @@ client.on('interactionCreate', async interaction => {
 });
 ```
 
-First, fetch the command in the Collection with that name and assign it to the variable `command`. If the command doesn't exist, it will return `undefined` and you exit early with `return`. If it does exist, call the command's `.execute()` method, and pass in the `interaction` variable as its argument. In case something goes wrong, log the error and report back to the member to let them know.
+First, fetch the command in the Collection with that name and assign it to the variable `command`. If the command doesn't exist, it will return `undefined`, so exit early with `return`. If it does exist, call the command's `.execute()` method, and pass in the `interaction` variable as its argument. In case something goes wrong, log the error and report back to the member to let them know.
 
 And that's it! Whenever you want to add a new command, make a new file in your `commands` directory, name it the same as the slash command, and then do what you did for the other commands. Remember to run `node deploy-commands.js` to register your commands!
 
