@@ -284,7 +284,7 @@ interaction.reply(`Websocket heartbeat: ${client.ws.ping}ms.`);
 ```
 
 ::: tip
-A specific shards heartbeat can be found on the WebSocketShard instance, accessible at `<client>.ws.shards` > `.ping`.
+If you're using [sharding](/sharding/), a specific shard's heartbeat can be found on the WebSocketShard instance, accessible at `client.ws.shards.ping`.
 :::
 
 The second, **Roundtrip Latency**, describes the amount of time a full API roundtrip (from the creation of the command message to the creation of the response message) takes. You then edit the response to the respective value to avoid needing to send yet another message:
