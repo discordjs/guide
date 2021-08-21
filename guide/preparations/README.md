@@ -8,18 +8,12 @@ To use discord.js, you'll need to install [Node.js](https://nodejs.org/). discor
 To check if you already have Node installed on your machine \(e.g., if you're using a VPS\), run `node -v` in your terminal. If it outputs `v16.6.0` or higher, then you're good to go! Otherwise, continue reading.
 :::
 
-### Windows
-
 On Windows, it's as simple as installing any other program. Download the latest version from [the Node.js website](https://nodejs.org/), open the downloaded file, and follow the steps from the installer.
-
-### macOS
 
 On macOS, either:
 
 - Download the latest version [the Node.js website](https://nodejs.org/), open the package installer, and follow the instructions
 - Use a package manager like [Homebrew](https://brew.sh/) with the command `brew install node`
-
-### Linux
 
 On Linux, you can consult [this page](https://nodejs.org/en/download/package-manager/) to determine how you should install Node.
 
@@ -46,9 +40,9 @@ On macOS, either:
 
 On Linux, you can quickly open the terminal with `Ctrl + Alt + T`.
 
-### Initiating a project folder
+With the terminal open, run the `node -v` command to make sure you've successfully installed Node.js. If it outputs `v16.6.0` or higher, great!
 
-With the terminal open, run the `node -v` command to make sure you've successfully installed Node.js. If you see something like `v16.6.0` or higher, great!
+### Initiating a project folder
 
 The next command you'll be running is `npm init`. This command creates a `package.json` file for you, which will keep track of the dependencies your project uses, as well as other info.
 
@@ -72,4 +66,4 @@ And that's it! With all the necessities installed, you're almost ready to start 
 
 ## Installing a linter
 
-While you are coding, you may find that you run into numerous syntax errors or code in an inconsistent style. You should [install a linter](/preparations/setting-up-a-linter.md) to ease these troubles. While code editors generally can point out syntax errors, with a linter, you can coerce your coding to be in a specific style as you define in the configuration. While this is not required, it's advisable.
+While you are coding, it's possible to run into numerous syntax errors or code in an inconsistent style. You should [install a linter](/preparations/setting-up-a-linter.md) to ease these troubles. While code editors generally can point out syntax errors, linters coerce your code into a specific style as defined by the configuration. While this is not required, it is advised.

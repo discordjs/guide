@@ -15,7 +15,7 @@ First, you will need a proper code editor. Using programs such as Notepad and No
 Install the [ESLint package](https://www.npmjs.com/package/eslint) inside your project directory.
 
 ```bash:no-line-numbers
-npm install eslint --save-dev
+npm install --save-dev eslint
 ```
 
 One of the advantages proper code editors have is their ability to integrate linters via editor plugins. Install the appropriate plugin(s) for your editor of choice.
@@ -58,7 +58,7 @@ This is the basis of how an ESLint file will look. The `rules` object is where y
 
 You can find a list of all of ESLint's rules on [their website](https://eslint.org/docs/rules). There are indeed many rules, and it may be overwhelming at first, so if you don't want to go through everything on your own yet, you can use these rules:
 
-```json {11-45}
+```json {11-47}
 {
 	"extends": "eslint:recommended",
 	"env": {

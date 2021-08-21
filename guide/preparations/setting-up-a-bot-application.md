@@ -14,7 +14,7 @@ You should see a page like this:
 
 ![Successfully created application](./images/create-app.png)
 
-You can edit your application's name, description, and avatar here. Once you've saved your changes, you can move on by selecting the "Bot" tab in the left pane.
+You can edit your application's name, description, and avatar here. Once you've saved your changes, move on by selecting the "Bot" tab in the left pane.
 
 ![Create a bot UI](./images/create-bot.png)
 
@@ -50,6 +50,8 @@ Let's imagine that you have a bot on over 1,000 servers, and it took you many, m
 * Access and damage the underlying infrastructure (your server).
 
 All that and much, much more. Sounds pretty terrible, right? So make sure to keep your token as safe as possible!
+
+In the [initial files](/creating-your-bot/) page of the guide, we cover how to safely store your token in a configuration file.
 
 ::: danger
 If you ever somehow compromise your current bot token (commit it to a public repository, post it in support, etc.) or otherwise see your bot in danger, return to this page and press "Regenerate" to generate a new token. As you do so, all old tokens will become invalidated. Keep in mind that you will need to update your token where you used it before.
