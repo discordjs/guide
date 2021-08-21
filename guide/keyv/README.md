@@ -82,7 +82,7 @@ const prefixes = new Keyv('sqlite://path/to.sqlite');
 
 ### Command handler
 
-This guide uses a very basic command handler with some added complexity to allow for multiple prefixes. Look at the [command handling](/command-handling/) guide for a more robust command handler.
+This guide uses a very basic command handler with some added complexity to allow for multiple prefixes. Look at the [command handling](/creating-your-bot/command-handling.md) guide for a more robust command handler.
 
 ```js
 client.on('messageCreate', async message => {
