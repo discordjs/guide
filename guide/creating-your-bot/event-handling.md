@@ -91,53 +91,9 @@ The callback function passed takes argument(s) returned by its respective event,
 
 After this, listening for other events is as easy as creating a new file in the `events` folder. The event handler will automatically retrieve and register it whenever you restart your bot.
 
-## Passing `Client` to event files
-
-You may have noticed how important the <DocsLink path="class/Client" /> class is. You created a `client` instance of this class in the `index.js` file. Most of the time, you can use this `client` instance in other files by obtaining it from one of the other discord.js structures. In the `interactionCreate` event, you can use `interaction.client`.
-
-However, not all events will expose a structure with the `.client` property attached. A prime example of this is the `ready` event.
-
-The `ready` event does not have arguments, meaning that `args` will be an empty array, thus nothing will be passed to the `execute` function in `ready.js`. To obtain the `client` instance, you'll have to pass it as an argument along with the `args` array in the event handler. Back in `index.js`, make the following changes:
-
-```js {4,6}
-for (const file of eventFiles) {
-	const event = require(`./events/${file}`);
-	if (event.once) {
-		client.once(event.name, (...args) => event.execute(...args, client));
-	} else {
-		client.on(event.name, (...args) => event.execute(...args, client));
-	}
-}
-```
-
-This allows `client` to be available as the **last** argument of the `execute` function in each event file. You can make use of `client` in `ready.js` by logging your bot's tag:
-
-```js {4-6}
-module.exports = {
-	name: 'ready',
-	once: true,
-	execute(client) {
-		console.log(`Ready! Logged in as ${client.user.tag}`);
-	},
-};
-```
-
 ::: tip
-You can omit the `client` argument from the `execute` function in files where you don't need it. For example, it isn't required in the `interactionCreate.js` file because its first argument is an <DocsLink path="class/Interaction" /> instance, meaning you can use `interaction.client`.
+In most cases, you can access your `client` instance in other files by obtaining it from one of the other discord.js structures, e.g. `interaction.client` in the `interactionCreate` event.
 :::
-
-It is worth noting that the position of `client` argument matters. For example, the `messageUpdate` event has two arguments: `oldMessage` and `newMessage`. Events like this should be handled as:
-
-```js {3}
-module.exports = {
-	name: 'messageUpdate',
-	execute(oldMessage, newMessage, client) {
-		// ...
-	},
-};
-```
-
-If you were to try `execute(newMessage, client)`, this would mean that `newMessage` is an `oldMessage` object and `client` is a `newMessage` object.
 
 ## Resulting code
 
