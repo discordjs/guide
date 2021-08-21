@@ -49,19 +49,21 @@ const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 	plugins: [],
 });
 
-if (process.env.NODE_ENV === 'production') {
+const { ALGOLIA_DOCSEARCH_API_KEY, GOOGLE_ANALYTICS_ID, NODE_ENV } = process.env;
+
+if (NODE_ENV === 'production' && ALGOLIA_DOCSEARCH_API_KEY && GOOGLE_ANALYTICS_ID) {
 	config.plugins.push(
 		[
 			'@vuepress/plugin-docsearch',
 			{
-				apiKey: process.env.ALGOLIA_DOCSEARCH_API_KEY,
+				apiKey: ALGOLIA_DOCSEARCH_API_KEY,
 				indexName: 'discordjs',
 				placeholder: 'Search guide',
 			},
 		],
 		[
 			'@vuepress/plugin-google-analytics',
-			{ id: process.env.GOOGLE_ANALYTICS_ID },
+			{ id: GOOGLE_ANALYTICS_ID },
 		],
 	);
 }
