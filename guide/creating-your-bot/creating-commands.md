@@ -17,7 +17,7 @@ Discord allows developers to register [slash commands](https://discord.com/devel
 
 ## Registering commands
 
-This section will cover only the bare minimum to get you started, but you can refer to our page on [in-depth steps on registering slash commands](/interactions/registering-slash-commands.md) for further details. It covers guild commands, global commands, options, option types, and choices.
+This section will cover only the bare minimum to get you started, but you can refer to our [in-depth page on registering slash commands](/interactions/registering-slash-commands.md) for further details. It covers guild commands, global commands, options, option types, and choices.
 
 ### Command deployment script
 
@@ -33,7 +33,7 @@ Below is a deployment script you can use. Focus on these variables:
 
 - `clientId`: Your client's id
 - `guildId`: Your development server's id
-- `commands`: An array of commands to register. Use `SlashCommandBuilder` from `@discordjs/builders` to build the data for your commands
+- `commands`: An array of commands to register. The [slash command builder](/popular-topics/builders.md#slash-command-builders) from `@discordjs/builders` is used to build the data for your commands
 
 ::: tip
 In order to get your client and guild ids, open Discord and go to your settings. On the "Advanced" page, turn on "Developer Mode". This will enable a "Copy ID" button in the context menu when you right-click on a server icon, a user's profile, etc.
@@ -84,7 +84,7 @@ const rest = new REST({ version: '9' }).setToken(token);
 Once you fill in these values, run `node deploy-commands.js` in your project directory to register your commands to a single guild. It's also possible to [register commands globally](/interactions/registering-slash-commands.md#global-commands).
 
 ::: tip
-You only need to run this script once. If you add or edit existing commands, you should run `node deploy-commands.js` again.
+You only need to run `node deploy-commands.js` once. You should only run it again if you add or edit existing commands.
 :::
 
 ## Replying to commands
@@ -140,7 +140,8 @@ client.on('interactionCreate', async interaction => {
 		<template #interactions>
 			<DiscordInteraction profile="user" :command="true">server</DiscordInteraction>
 		</template>
-		Server name: Discord.js Guide<br />
+		Server name: Discord.js Guide
+		<br />
 		Total members: 2
 	</DiscordMessage>
 </DiscordMessages>
@@ -176,7 +177,8 @@ client.on('interactionCreate', async interaction => {
 		<template #interactions>
 			<DiscordInteraction profile="user" :command="true">user</DiscordInteraction>
 		</template>
-		Your tag: User#0001 <br />
+		Your tag: User#0001
+		<br />
 		Your id: 123456789012345678
 	</DiscordMessage>
 </DiscordMessages>

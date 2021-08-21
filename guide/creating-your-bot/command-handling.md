@@ -71,7 +71,7 @@ const rest = new REST({ version: '9' }).setToken(token);
 
 ## Individual command files
 
-Your project directory structure should look something like this:
+Your project directory should look something like this:
 
 ```:no-line-numbers
 discord-bot/
@@ -85,13 +85,13 @@ discord-bot/
 
 Create a new folder named `commands`, which is where you'll store all of your commands.
 
-Next, open your terminal and install the [`@discordjs/builders`](https://github.com/discordjs/builders) package. We'll be using the utility methods from this package to build the slash command data.
+We'll be using utility methods from the [`@discordjs/builders`](https://github.com/discordjs/builders) package to build the slash command data, so open your terminal and install it.
 
 ```sh:no-line-numbers
 npm install @discordjs/builders
 ```
 
-Then create a `ping.js` file for your ping command:
+Next, create a `commands/ping.js` file for your ping command:
 
 ```js
 const { SlashCommandBuilder } = require('@discordjs/builders');
@@ -106,7 +106,7 @@ module.exports = {
 };
 ```
 
-You can go ahead and do the same for the rest of your commands and put their respective blocks of code inside the `execute()` function.
+You can go ahead and do the same for the rest of your commands, putting their respective blocks of code inside the `execute()` function.
 
 ::: tip
 [`module.exports`](https://nodejs.org/api/modules.html#modules_module_exports) is how you export data in Node.js so that you can [`require()`](https://nodejs.org/api/modules.html#modules_require_id) it in other files.
@@ -190,4 +190,4 @@ And that's it! Whenever you want to add a new command, make a new file in your `
 
 ## Resulting code
 
-<ResultingCode path="creating-your-bot/command-handling" />
+<ResultingCode />

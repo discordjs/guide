@@ -10,8 +10,8 @@ const { token } = require('./config.json');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-client.once('ready', () => {
-	console.log('Ready!');
+client.once('ready', c => {
+	console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
 client.on('interactionCreate', interaction => {
@@ -21,11 +21,11 @@ client.on('interactionCreate', interaction => {
 client.login(token);
 ```
 
-Currently, the event listeners are in the `index.js` file. The `ready` event emits once when the `Client` becomes ready for use, and the `interactionCreate` event emits whenever an interaction is received. Moving the event listener code into individual files is simple, and we'll be taking a similar approach to the [command handler](/creating-your-bot/command-handling.md).
+Currently, the event listeners are in the `index.js` file. <DocsLink path="class/Client?scrollTo=e-ready" /> emits once when the `Client` becomes ready for use, and <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> emits whenever an interaction is received. Moving the event listener code into individual files is simple, and we'll be taking a similar approach to the [command handler](/creating-your-bot/command-handling.md).
 
 ## Individual event files
 
-Your folder structure should look something like this:
+Your project directory should look something like this:
 
 ```:no-line-numbers
 discord-bot/
@@ -36,7 +36,7 @@ discord-bot/
 └── package.json
 ```
 
-Create an `events` folder in the same directory. You can now take your existing events code in `index.js` and move them to individual files inside the `events` folders. Create a `ready.js` and an `interactionCreate.js` file in the `events` folder and place in the code for the respective files:
+Create an `events` folder in the same directory. You can then take your existing events code in `index.js` and move them to `events/ready.js` and `events/interactionCreate.js` files.
 
 :::: code-group
 ::: code-group-item events/ready.js
@@ -44,8 +44,8 @@ Create an `events` folder in the same directory. You can now take your existing 
 module.exports = {
 	name: 'ready',
 	once: true,
-	execute() {
-		console.log('Ready!');
+	execute(client) {
+		console.log(`Ready! Logged in as ${client.user.tag}`);
 	},
 };
 ```
@@ -62,7 +62,7 @@ module.exports = {
 :::
 ::::
 
-The `name` property states which event this file is for, the `once` property is a boolean and specifies if the event should run only once, and the `execute` function is for your event logic. The event handler will call this function whenever the event emits.
+The `name` property states which event this file is for, and the `once` property is a boolean that specifies if the event should run only once. The `execute` function is for your event logic, which will be called by the event handler whenever the event emits.
 
 ## Reading event files
 
@@ -97,4 +97,4 @@ In most cases, you can access your `client` instance in other files by obtaining
 
 ## Resulting code
 
-<ResultingCode path="creating-your-bot/event-handling" />
+<ResultingCode />
