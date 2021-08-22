@@ -94,13 +94,12 @@ Urban Dictionary's API is available at https://api.urbandictionary.com/v0/define
 First, you're going to need to fetch data from the API. To do this, you'd do:
 
 ```js {1,5-11}
-const querystring = require('querystring');
 // ...
 client.on('interactionCreate', async interaction => {
 	// ...
 	if (commandName === 'urban') {
 		const term = interaction.options.getString('term');
-		const query = querystring.stringify({ term });
+		const query = new URLSearchParams({ term });
 
 		const { list } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`)
 			.then(response => response.json());
@@ -108,7 +107,7 @@ client.on('interactionCreate', async interaction => {
 });
 ```
 
-Here, we use Node's native [querystring module](https://nodejs.org/api/querystring.html) to create a [query string](https://en.wikipedia.org/wiki/Query_string) for the URL so that the Urban Dictionary server can parse it and know what to search.
+Here, we use JavaScript's native [URLSearchParams class](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) to create a [query string](https://en.wikipedia.org/wiki/Query_string) for the URL so that the Urban Dictionary server can parse it and know what to search.
 
 If you were to do `/urban hello world`, then the URL would become https://api.urbandictionary.com/v0/define?term=hello%20world since the string gets encoded.
 
