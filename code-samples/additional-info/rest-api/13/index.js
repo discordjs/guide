@@ -20,7 +20,7 @@ client.on('interactionCreate', async interaction => {
 		interaction.reply({ files: [file] });
 	} else if (commandName === 'urban') {
 		const term = interaction.options.getString('term');
-		const query = new URLSearchParams({ term }).toString();
+		const query = new URLSearchParams({ term });
 
 		const { list } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`).then(response => response.json());
 
