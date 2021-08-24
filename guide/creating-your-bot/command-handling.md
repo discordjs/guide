@@ -188,6 +188,11 @@ First, fetch the command in the Collection with that name and assign it to the v
 
 And that's it! Whenever you want to add a new command, make a new file in your `commands` directory, name it the same as the slash command, and then do what you did for the other commands. Remember to run `node deploy-commands.js` to register your commands!
 
+::: tip
+If you encounter an error running your deploy-commands.js file, make sure you invited your bot with the 'applications.commands' scope enabled in the OAuth2 section
+of your bot in the Discord Developer Portal.
+:::
+
 ## Resulting code
 
 <ResultingCode />
