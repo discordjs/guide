@@ -313,9 +313,6 @@ yarn add ytdl-core @discordjs/voice
 
 Additionally, you may need the following:
 
-```bash
-
-```
 :::: code-group
 ::: code-group-item npm
 ```sh:no-line-numbers
