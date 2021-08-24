@@ -63,7 +63,6 @@ Now that you've installed Node.js and know how to open your console and run comm
 ```sh:no-line-numbers
 npm install discord.js
 ```
-```
 :::
 ::: code-group-item yarn
 ```sh:no-line-numbers

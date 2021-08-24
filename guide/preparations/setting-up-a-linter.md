@@ -19,7 +19,6 @@ Install the [ESLint package](https://www.npmjs.com/package/eslint) inside your p
 ```sh:no-line-numbers
 npm install --save-dev eslint
 ```
-```
 :::
 ::: code-group-item yarn
 ```sh:no-line-numbers
