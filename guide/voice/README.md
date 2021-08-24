@@ -8,9 +8,18 @@
 
 To add voice functionality to your discord.js bot, you will need the `@discordjs/voice` package, as well as one of the encryption packages listed below. For example: 
 
-```bash
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
 npm install @discordjs/voice libsodium-wrappers
 ```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add @discordjs/voice libsodium-wrappers
+```
+:::
+::::
 
 After this, you'll be able to play Ogg and WebM Opus files without any other dependencies. If you want to play audio from other sources, or want to improve performance, consider installing some of the extra dependencies listed below.
 
@@ -35,7 +44,20 @@ section below.
 ::: tip
 Outside a development environment, it is recommended for you to use `@discordjs/opus` and `sodium` to improve performance and improve the stability of audio playback!
 
-If you're struggling to install these dependencies, make sure you have build tools installed first. On Windows, this is as easy as running `npm install --global --production --vs2015 --add-python-to-path windows-build-tools`!
+If you're struggling to install these dependencies, make sure you have build tools installed first. On Windows, this is as easy as running the following command!
+
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm install --global --production --add-python-to-path windows-build-tools
+```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn global add --production --add-python-to-path windows-build-tools
+```
+:::
+::::
 :::
 
 ## Debugging Dependencies
