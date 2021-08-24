@@ -47,16 +47,20 @@ Outside a development environment, it is recommended for you to use `@discordjs/
 If you're struggling to install these dependencies, make sure you have build tools installed first. On Windows, this is as easy as running the following command!
 
 <CodeGroup>
-<CodeGroupItem title="npm">
+  <CodeGroupItem title="npm">
+
 ```sh:no-line-numbers
 npm install --global --production --add-python-to-path windows-build-tools
 ```
-</CodeGroupItem>
-<CodeGroupItem title="yarn">
+
+  </CodeGroupItem>
+  <CodeGroupItem title="yarn">
+
 ```sh:no-line-numbers
 yarn global add --production --add-python-to-path windows-build-tools
 ```
-</CodeGroupItem>
+
+  </CodeGroupItem>
 </CodeGroup>
 :::
 
