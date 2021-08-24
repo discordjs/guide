@@ -10,9 +10,18 @@ In these examples, we will be using [node-fetch](https://www.npmjs.com/package/n
 
 To install node-fetch, run the following command:
 
-```bash
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
 npm install node-fetch
 ```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add node-fetch
+```
+:::
+::::
 
 ## Skeleton code
 
