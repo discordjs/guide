@@ -1,7 +1,20 @@
 # Builders
 
 discord.js provides the [`@discordjs/builders`](https://github.com/discordjs/builders) package which contains a variety of utilities you can use when writing your Discord bot.
-To install the package, run `npm install @discordjs/builders` in your terminal.
+To install the package, run the foollowing command in your terminal:
+
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm install @discordjs/builders
+```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add @discordjs/builders
+```
+:::
+::::
 
 ## Formatters
 
