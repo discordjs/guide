@@ -4,23 +4,26 @@ PM2 is a process manager. It manages your applications' states, so you can start
 
 ## Installation
 
-You can install PM2 via npm:
+You can install PM2 via the following command:
 
-```bash
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
 npm install --global pm2
 ```
-
-Or, if you use Yarn:
-
-```bash
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
 yarn global add pm2
 ```
+:::
+::::
 
 ## Starting your app
 
 After you install PM2, the easiest way you can start your app is by going to the directory your bot is in and then run the following:
 
-```bash
+```sh:no-line-numbers
 pm2 start your-app-name.js
 ```
 
@@ -30,7 +33,7 @@ The `pm2 start` script allows for more optional command-line arguments.
 
 - `--name`: This allows you to set the name of your process when listing it up with `pm2 list` or `pm2 monit`:
 
-```bash
+```sh:no-line-numbers
 pm2 start your-app-name.js --name "Some cool name"
 ```
 
@@ -60,13 +63,22 @@ Run these from an administrative command prompt to avoid getting hit with a bunc
 
 **Install the [pm2-windows-service](https://www.npmjs.com/package/pm2-windows-service) package from npm:**
 
-```bash
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
 npm install --global pm2-windows-service
 ```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn global add pm2-windows-service
+```
+:::
+::::
 
 **After installation has finished, install the service by running the following command:**
 
-```bash
+```sh:no-line-numbers
 pm2-service-install
 ```
 ::: tip
@@ -77,14 +89,14 @@ You can use the `-n` parameter to set the service name: `pm2-service-install -n 
 
 You'll need a start script, which you can get by running the following command:
 
-```bash
+```sh:no-line-numbers
 # Detects the available init system, generates the config, and enables startup system
 pm2 startup
 ```
 
 Or, if you want to specify your machine manually, select one of the options with the command:
 
-```bash
+```sh:no-line-numbers
 pm2 startup [ubuntu | ubuntu14 | ubuntu12 | centos | centos6 | arch | oracle | amazon | macos | darwin | freesd | systemd | systemv | upstart | launchd | rcd | openrc]
 ```
 
@@ -92,7 +104,7 @@ The output of running one of the commands listed above will output a command for
 
 **Example output for an Ubuntu user:**
 
-```bash
+```sh:no-line-numbers
 [PM2] You have to run this command as root. Execute the following command:
       sudo su -c "env PATH=$PATH:/home/user/.nvm/versions/node/v8.9/bin pm2 startup ubuntu -u user --hp /home/user
 ```
@@ -103,12 +115,12 @@ After running that command, you can continue to the next step.
 
 To save the current process list so it will automatically get started after a restart, run the following command:
 
-```bash
+```sh:no-line-numbers
 pm2 save
 ```
 
 To disable this, you can run the following command:
 
-```bash
+```sh:no-line-numbers
 pm2 unstartup
 ```
