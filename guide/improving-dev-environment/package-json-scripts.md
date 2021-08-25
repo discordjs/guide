@@ -1,11 +1,43 @@
 # Setting up package.json scripts
 
-An easy way to run scripts like a script to start your bot, a script to lint your bot's files, or whatever scripts you use is by storing them in your `package.json` file. After you store these scripts in your `package.json` file, you can type `npm run start` to start your bot or `npm run lint` to lint your code for errors.
+An easy way to run scripts like a script to start your bot, a script to lint your bot's files, or whatever scripts you use is by storing them in your `package.json` file. After you store these scripts in your `package.json` file, you can run the `start` script to start your bot or the `lint` script to lint your code for errors.
+
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm run start
+npm run lint
+```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn run start
+yarn run lint
+```
+:::
+::::
 
 ## Getting started
 
 ::: tip
-Before getting started, you'll need to have a `package.json` file. If you don't have a `package.json` file yet, you can run `npm init -y` in the console to generate one.
+Before getting started, you'll need to have a `package.json` file. If you don't have a `package.json` file yet, you can run the following command in the console to generate one.
+
+<CodeGroup>
+  <CodeGroupItem title="npm">
+
+```sh:no-line-numbers
+npm init -y
+```
+
+  </CodeGroupItem>
+  <CodeGroupItem title="yarn">
+
+```sh:no-line-numbers
+yarn init -y
+```
+
+  </CodeGroupItem>
+</CodeGroup>
 :::
 
 If you haven't touched your `package.json` file yet (excluding installing dependencies), your `package.json` file should look similar to the following:
@@ -43,7 +75,22 @@ Over at your `package.json` file, add the following line to the `scripts`:
 The `node .` script will run the file you have specified at the `main` entry in your `package.json` file. If you don't have it set yet, make sure to select your bot's main file as `main`!
 :::
 
-Now, whenever you run the `npm run start` script in your bot's directory, it will run the `node .` command. Let's create another script to lint your code via the command line.
+Now, whenever you run the `start` script in your bot's directory, it will run the `node .` command.
+
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm run start
+```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn run start
+```
+:::
+::::
+
+Let's create another script to lint your code via the command line.
 
 ::: tip
 If you do not have ESLint installed globally, you can use [npx](https://alligator.io/workflow/npx/) to run the ESLint script for your local directory. For more info on how to set it up, you can read the site [here](https://alligator.io/workflow/npx/).
@@ -54,7 +101,20 @@ Add the following line to your scripts:
 "lint": "eslint ."
 ```
 
-Now, whenever you run the `npm run lint` script, ESLint will lint your `index.js` file.
+Now, whenever you run the `lint` script, ESLint will lint your `index.js` file.
+
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm run lint
+```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn run lint
+```
+:::
+::::
 
 Your `package.json` file should now look similar to the following:
 
@@ -75,4 +135,17 @@ Your `package.json` file should now look similar to the following:
 }
 ```
 
-And that's it! You can always add more scripts now, running them with `npm run script-name`.
+And that's it! You can always add more scripts now, running them with:
+
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm run <script-name>
+```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn run <script-name>
+```
+:::
+::::

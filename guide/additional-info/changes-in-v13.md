@@ -21,7 +21,28 @@ yarn add discord.js @discordjs/voice # voice support
 :::
 ::::
 
-You can check your discord.js version with `npm list discord.js`. Should it still show v12.x, uninstall (`npm uninstall discord.js`) and re-install discord.js and make sure the entry in your package.json does not prevent a major version update. Please refer to the [npm documentation](https://docs.npmjs.com/files/package.json#dependencies) for this.
+You can check your discord.js version with the `list` command. Should it still show v12.x, uninstall and re-install discord.js and make sure the entry in your package.json does not prevent a major version update. Please refer to the [npm documentation](https://docs.npmjs.com/files/package.json#dependencies) for this.
+
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+# check version
+npm list discord.js
+# uninstall and re-install
+npm uninstall discord.js
+npm install discord.js
+```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+# check version
+yarn list discord.js
+# uninstall and re-install
+yarn remove discord.js
+yarn add discord.js
+```
+:::
+::::
 
 ## API version
 

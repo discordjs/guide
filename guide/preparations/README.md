@@ -44,12 +44,42 @@ With the terminal open, run the `node -v` command to make sure you've successful
 
 ### Initiating a project folder
 
-The next command you'll be running is `npm init`. This command creates a `package.json` file for you, which will keep track of the dependencies your project uses, as well as other info.
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm init
+```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn init
+```
+:::
+::::
 
-The `npm init` command will ask you a sequence of questions–you should fill them out as you see fit. If you're not sure of something or want to skip it as a whole, leave it blank and press enter.
+This is the next command you'll be running. This command creates a `package.json` file for you, which will keep track of the dependencies your project uses, as well as other info.
+
+This command will ask you a sequence of questions–you should fill them out as you see fit. If you're not sure of something or want to skip it as a whole, leave it blank and press enter.
 
 ::: tip
-To get started quickly, you can use `npm init -y` to have it fill out everything for you.
+To get started quickly, you can run the following command to have it fill out everything for you.
+
+<CodeGroup>
+  <CodeGroupItem title="npm">
+
+```sh:no-line-numbers
+npm init -y
+```
+
+  </CodeGroupItem>
+  <CodeGroupItem title="yarn">
+
+```sh:no-line-numbers
+yarn init -y
+```
+
+  </CodeGroupItem>
+</CodeGroup>
 :::
 
 Once you're done with that, you're ready to install discord.js!
