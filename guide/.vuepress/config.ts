@@ -9,7 +9,7 @@ const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 	templateSSR: path.join(__dirname, 'templates', 'index.ssr.html'),
 	lang: 'en-US',
 	title: 'Discord.js Guide',
-	description: 'Imagine a guide... that explores the many possibilies for your discord.js bot.',
+	description: 'Imagine a guide... that explores the many possibilities for your discord.js bot.',
 	head: [
 		['meta', { charset: 'utf-8' }],
 		['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }],
