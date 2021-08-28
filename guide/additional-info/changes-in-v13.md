@@ -19,6 +19,12 @@ yarn add discord.js # text-only
 yarn add discord.js @discordjs/voice # voice support
 ```
 :::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add discord.js # text-only
+pnpm add discord.js @discordjs/voice # voice support
+```
+:::
 ::::
 
 You can check your discord.js version with the `list` command. Should it still show v12.x, uninstall and re-install discord.js and make sure the entry in your package.json does not prevent a major version update. Please refer to the [npm documentation](https://docs.npmjs.com/files/package.json#dependencies) for this.
@@ -40,6 +46,15 @@ yarn list discord.js
 # uninstall and re-install
 yarn remove discord.js
 yarn add discord.js
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+# check version
+pnpm list discord.js
+# uninstall and re-install
+pnpm remove discord.js
+pnpm add discord.js
 ```
 :::
 ::::

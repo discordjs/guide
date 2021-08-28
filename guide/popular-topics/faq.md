@@ -309,6 +309,11 @@ npm install ytdl-core @discordjs/voice
 yarn add ytdl-core @discordjs/voice
 ```
 :::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add ytdl-core @discordjs/voice
+```
+:::
 ::::
 
 Additionally, you may need the following:
@@ -326,6 +331,13 @@ npm install ffmpeg-static # ffmpeg windows
 yarn add --save @discordjs/opus # opus engine (if missing)
 sudo apt-get install ffmpeg # ffmpeg debian/ubuntu
 yarn add ffmpeg-static # ffmpeg windows
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add --save @discordjs/opus # opus engine (if missing)
+sudo apt-get install ffmpeg # ffmpeg debian/ubuntu
+pnpm add ffmpeg-static # ffmpeg windows
 ```
 :::
 ::::

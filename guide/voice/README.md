@@ -19,6 +19,11 @@ npm install @discordjs/voice libsodium-wrappers
 yarn add @discordjs/voice libsodium-wrappers
 ```
 :::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add @discordjs/voice libsodium-wrappers
+```
+:::
 ::::
 
 After this, you'll be able to play Ogg and WebM Opus files without any other dependencies. If you want to play audio from other sources, or want to improve performance, consider installing some of the extra dependencies listed below.
@@ -61,6 +66,12 @@ yarn global add --production --add-python-to-path windows-build-tools
 ```
 
   </CodeGroupItem>
+  <CodeGroupItem title="pnpm">
+
+```sh:no-line-numbers
+pnpm add --global --production --add-python-to-path windows-build-tools
+```
+
 </CodeGroup>
 :::
 

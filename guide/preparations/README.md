@@ -55,6 +55,11 @@ npm init
 yarn init
 ```
 :::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm init
+```
+:::
 ::::
 
 This is the next command you'll be running. This command creates a `package.json` file for you, which will keep track of the dependencies your project uses, as well as other info.
@@ -79,6 +84,13 @@ yarn init -y
 ```
 
   </CodeGroupItem>
+  <CodeGroupItem title="pnpm">
+
+```sh:no-line-numbers
+pnpm init -y
+```
+
+  </CodeGroupItem>
 </CodeGroup>
 :::
 
@@ -97,6 +109,11 @@ npm install discord.js
 ::: code-group-item yarn
 ```sh:no-line-numbers
 yarn add discord.js
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add discord.js
 ```
 :::
 ::::

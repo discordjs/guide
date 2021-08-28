@@ -14,6 +14,11 @@ npm install @discordjs/builders
 yarn add @discordjs/builders
 ```
 :::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add @discordjs/builders
+```
+:::	
 ::::
 
 ## Formatters

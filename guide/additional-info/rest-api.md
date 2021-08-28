@@ -21,6 +21,11 @@ npm install node-fetch
 yarn add node-fetch
 ```
 :::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add node-fetch
+```
+:::
 ::::
 
 ## Skeleton code

@@ -27,6 +27,11 @@ npm install @discordjs/rest discord-api-types
 yarn add @discordjs/rest discord-api-types
 ```
 :::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add @discordjs/rest discord-api-types
+```
+:::
 ::::
 
 <!-- eslint-skip -->

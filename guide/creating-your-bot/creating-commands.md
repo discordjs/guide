@@ -36,6 +36,11 @@ npm install @discordjs/builders @discordjs/rest discord-api-types
 yarn add @discordjs/builders @discordjs/rest discord-api-types
 ```
 :::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add @discordjs/builders @discordjs/rest discord-api-types
+```
+:::
 ::::
 
 Below is a deployment script you can use. Focus on these variables:

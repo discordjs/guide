@@ -15,6 +15,12 @@ yarn run start
 yarn run lint
 ```
 :::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm run start
+pnpm run lint
+```
+:::
 ::::
 
 ## Getting started
@@ -35,6 +41,13 @@ npm init -y
 ```sh:no-line-numbers
 yarn init -y
 ```
+
+  </CodeGroupItem>
+  <CodeGroupItem title="pnpm">
+
+```sh:no-line-numbers
+pnpm init -y
+```  
 
   </CodeGroupItem>
 </CodeGroup>
@@ -88,6 +101,11 @@ npm run start
 yarn run start
 ```
 :::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm run start
+```
+:::
 ::::
 
 Let's create another script to lint your code via the command line.
@@ -112,6 +130,11 @@ npm run lint
 ::: code-group-item yarn
 ```sh:no-line-numbers
 yarn run lint
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm run lint
 ```
 :::
 ::::
@@ -146,6 +169,11 @@ npm run <script-name>
 ::: code-group-item yarn
 ```sh:no-line-numbers
 yarn run <script-name>
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm run <script-name>
 ```
 :::
 ::::

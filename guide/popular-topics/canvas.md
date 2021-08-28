@@ -16,7 +16,7 @@ Be sure that you're familiar with things like [async/await](/additional-info/asy
 
 ### Windows
 
-You will need a package called Windows Build Tools. To install this, open Powershell as Administrator. You then can install it with either npm or yarn. It is also bundled with Chocolatey, should you choose that installation path.
+You will need a package called Windows Build Tools. To install this, open Powershell as Administrator. You then can install it with your preferred package manager. It is also bundled with Chocolatey, should you choose that installation path.
 
 :::: code-group
 ::: code-group-item npm
@@ -27,6 +27,11 @@ npm i --global --production windows-build-tools
 ::: code-group-item yarn
 ```sh:no-line-numbers
 yarn global add --production windows-build-tools
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add --global --production windows-build-tools
 ```
 :::
 ::: code-group-item Chocolatey
@@ -57,6 +62,11 @@ npm install canvas
 ::: code-group-item yarn
 ```sh:no-line-numbers
 yarn add canvas
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add canvas
 ```
 :::
 ::::

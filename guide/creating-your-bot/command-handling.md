@@ -15,6 +15,11 @@ npm install @discordjs/rest discord-api-types
 yarn add @discordjs/rest discord-api-types
 ```
 :::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add @discordjs/rest discord-api-types
+```
+:::
 ::::
 
 :::: code-group
@@ -106,6 +111,11 @@ npm install @discordjs/builders
 ::: code-group-item yarn
 ```sh:no-line-numbers
 yarn add @discordjs/builders
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add @discordjs/builders
 ```
 :::
 ::::

@@ -17,6 +17,10 @@ npm install --global pm2
 yarn global add pm2
 ```
 :::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add --global pm2
+```
 ::::
 
 ## Starting your app
@@ -74,6 +78,11 @@ npm install --global pm2-windows-service
 yarn global add pm2-windows-service
 ```
 :::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add --global pm2-windows-service
+```
+::::
 ::::
 
 **After installation has finished, install the service by running the following command:**

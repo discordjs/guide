@@ -73,6 +73,11 @@ npm install dotenv
 yarn add dotenv
 ```
 :::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add dotenv
+```
+:::
 ::::
 
 :::: code-group

@@ -25,6 +25,11 @@ npm install --save-dev eslint
 yarn add eslint --dev
 ```
 :::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add --save-dev eslint
+```
+:::
 ::::
 
 
