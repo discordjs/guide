@@ -83,7 +83,7 @@ yarn global add pm2-windows-service
 ```sh:no-line-numbers
 pnpm add --global pm2-windows-service
 ```
-::::
+:::
 ::::
 
 **After installation has finished, install the service by running the following command:**
