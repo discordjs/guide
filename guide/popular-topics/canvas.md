@@ -21,7 +21,7 @@ You will need a package called Windows Build Tools. To install this, open Powers
 :::: code-group
 ::: code-group-item npm
 ```sh:no-line-numbers
-npm i --global --production windows-build-tools
+npm install --global --production windows-build-tools
 ```
 :::
 ::: code-group-item yarn
