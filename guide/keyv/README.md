@@ -17,7 +17,7 @@ yarn add keyv
 :::
 ::: code-group-item pnpm
 ```sh:no-line-numbers
-pnpm install keyv
+pnpm add keyv
 ```
 :::
 ::::
