@@ -21,6 +21,7 @@ yarn global add pm2
 ```sh:no-line-numbers
 pnpm add --global pm2
 ```
+:::
 ::::
 
 ## Starting your app
