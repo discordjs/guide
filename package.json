@@ -30,8 +30,10 @@
     },
     "homepage": "https://discordjs.guide",
     "devDependencies": {
+        "@vuepress/bundler-webpack": "^2.0.0-beta.24",
         "@vuepress/plugin-docsearch": "^2.0.0-beta.24",
         "@vuepress/plugin-google-analytics": "^2.0.0-beta.24",
+        "@vuepress/plugin-shiki": "^2.0.0-beta.24",
         "babel-eslint": "^10.0.1",
         "eslint": "^7.18.0",
         "eslint-config-sora": "^3.1.0",

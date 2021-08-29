@@ -2,9 +2,12 @@ import path from 'path';
 import { defineUserConfig } from 'vuepress-vite';
 import type { DefaultThemeOptions, ViteBundlerOptions } from 'vuepress-vite';
 import sidebar from './sidebar';
+const { ALGOLIA_DOCSEARCH_API_KEY, GOOGLE_ANALYTICS_ID, NODE_ENV } = process.env;
+
+const isProd = NODE_ENV === 'production';
 
 const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
-	bundler: '@vuepress/vite',
+	bundler: isProd ? '@vuepress/webpack' : '@vuepress/vite',
 	templateDev: path.join(__dirname, 'templates', 'index.dev.html'),
 	templateSSR: path.join(__dirname, 'templates', 'index.ssr.html'),
 	lang: 'en-US',
@@ -46,10 +49,19 @@ const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 			mediumZoom: false,
 		},
 	},
-	plugins: [],
+	plugins: [
+		// only enable shiki plugin in production mode
+    [
+      '@vuepress/plugin-shiki',
+      isProd
+        ? {
+            theme: 'dark-plus',
+          }
+        : false,
+    ],
+	],
 });
 
-const { ALGOLIA_DOCSEARCH_API_KEY, GOOGLE_ANALYTICS_ID, NODE_ENV } = process.env;
 
 if (NODE_ENV === 'production' && ALGOLIA_DOCSEARCH_API_KEY && GOOGLE_ANALYTICS_ID) {
 	config.plugins.push(
