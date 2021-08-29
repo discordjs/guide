@@ -4,7 +4,7 @@
 
 # Discord.js Guide
 
-Imagine a guide... that explores the many possibilies for your [discord.js](https://github.com/discordjs/discord.js) bot.
+Imagine a guide... that explores the many possibilities for your [discord.js](https://github.com/discordjs/discord.js) bot.
 
 ## About
 
