@@ -7,11 +7,6 @@ const { ALGOLIA_DOCSEARCH_API_KEY, GOOGLE_ANALYTICS_ID, NODE_ENV } = process.env
 const isProd = NODE_ENV === 'production';
 
 const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
-        markdown: {
-          code: {
-            lineNumbers: false,
-          },
-        },
 	bundler: isProd ? '@vuepress/webpack' : '@vuepress/vite',
 	templateDev: path.join(__dirname, 'templates', 'index.dev.html'),
 	templateSSR: path.join(__dirname, 'templates', 'index.ssr.html'),
