@@ -1,11 +1,11 @@
-# Requesting more content
+# 추가적인 내용 요청하기
 
-Since this guide is made specifically for the discord.js community, we want to be sure to provide the most relevant and up-to-date content. We will, of course, make additions to the current pages and add new ones as we see fit, but fulfilling requests is how we know we're providing content you all want the most.
+이 가이드가 discord.js 커뮤니티를 위해 특별히 만들어졌기 때문에, 저희는 가장 최신이고, 가장 관련있는 내용을 제공하고 싶습니다. 문론 저희는 적절한 곳에 새 페이지와 내용을 추가해 나갈 것입니다. 하지만, 여러분에게 적합한 최고의 방법은, 여러분이 직접 내용을 작성하 데 참여하는 것입니다.
 
-Requests may be as simple as "add an example to the [frequently asked questions](/popular-topics/faq.html) page", or as elaborate as "add a page regarding [sharding](/sharding/)". We'll do our best to fulfill all requests, as long as they're reasonable.
+이러한 요청은 [자주 묻는 질문](/popular-topics/faq.html) 페이지에 예제를 추가해 달라는 비교적 간단한 부탁부터 [sharding](/sharding/)에 대한 페이지를 추가해 달라는 것처럼 정교한 요청까지 다양하게 나올 수 있으며, 저희는 합리적인 선에서 여러분의 요청을 최대한 반영하도록 노력하겠습니다.
 
-To make a request, simply head over to [the repo's issue tracker](https://github.com/discordjs/guide/issues) and [create a new issue](https://github.com/discordjs/guide/issues/new)! Title it appropriately, and let us know exactly what you mean inside the issue description. Make sure that you've looked around the site before making a request; what you want to request might already exist!
+요청을 보내기 위해서는, 그저 [issue 탭](https://github.com/discordjs/guide/issues) 으로 가셔서 [새 이슈](https://github.com/discordjs/guide/issues/new)를 만드시면 됩니다! 다만, 제목은 명확하게, 설명은 저희가 당신이 뭘 말하는지 알아들을 수 있도록 작성해 주세요. 마지막으로, 무언가를 새로 건의하기 전에 사이트를 한번 둘러보세요; 당신이 건의하려던 것이 이미 존재할지도 모릅니다!
 
 ::: tip
-Remember that you can always [fork the repo](https://github.com/discordjs/guide) and [make a pull request](https://github.com/discordjs/guide/pulls) if you want to add anything to the guide yourself!
+스스로 가이드에 무언가를 추가하고 싶을 때, 당신이 언제든 저장소를 [포크](https://github.com/discordjs/guide) 할 수 있고 [PR](https://github.com/discordjs/guide/pulls) 을 보낼 수 있음을 잊지 마세요!
 :::
