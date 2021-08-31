@@ -2,23 +2,23 @@
 	<img src="guide/images/branding/banner-blurple-small.png" title="Discord.js Guide" alt="Discord.js Guide" />
 </div>
 
-# Discord.js Guide
+# Discord.js 한국어 가이드
 
-Imagine a guide... that explores the many possibilities for your [discord.js](https://github.com/discordjs/discord.js) bot.
+여러분의 [discord.js](https://github.com/discordjs/discord.js) 봇을 위해 무한한 가능성을 펼칠 수 있는 가이드를 만나보세요!
 
-## About
+## 소개
 
-This guide is aimed at users who are either unfamiliar or inexperienced with Node.js and creating Discord bots. It assumes you have a basic understanding of JavaScript.
+이 가이드는 Node.js와 Discord 봇 제작에 어려움을 겪는 분들을 위해 존재합니다! 또한, 이 가이드는 여러분이 기초적인 수준의 JavaScript 지식이 있다고 가정하니, 주의해 주세요!
 
-There are many different subjects covered, such as:
+이 가이드는 다음과 같은 다양한 주제를 다룹니다:
 
-- How to get a bot [up and running](https://discordjs.guide/preparations/) from scratch;
-- How to properly [create](https://discordjs.guide/creating-your-bot/), [organize](https://discordjs.guide/creating-your-bot/command-handling.html), and expand on your commands;
-- In-depth explanations and examples regarding popular topics (e.g. [reactions](https://discordjs.guide/popular-topics/reactions.html), [embeds](https://discordjs.guide/popular-topics/embeds.html), [canvas](https://discordjs.guide/popular-topics/canvas.html));
-- Working with databases (e.g. [sequelize](https://discordjs.guide/sequelize/) and [keyv](https://discordjs.guide/keyv/));
-- Getting started with [sharding](https://discordjs.guide/sharding/);
-- And much more.
+- 봇을 [만들고 실행하는](https://discordjs.guide/preparations/) 기초적인 방법;
+- 명령어를 [만들고](https://discordjs.guide/creating-your-bot/), [구성하고](https://discordjs.guide/creating-your-bot/command-handling.html), 확장시키는 방법;
+- 자주 쓰이는 방법에 대한 깊은 설명과 예제들 (e.g. [반응](https://discordjs.guide/popular-topics/reactions.html), [임베드](https://discordjs.guide/popular-topics/embeds.html), [canvas](https://discordjs.guide/popular-topics/canvas.html));
+- 데이터베이스 적용하기 (e.g. [sequelize](https://discordjs.guide/sequelize/) 그리고 [keyv](https://discordjs.guide/keyv/));
+- [sharding](https://discordjs.guide/sharding/) 적용해 보기;
+- 그 외에도 기타 등등..!
 
-## Contributing
+## 기여 방법
 
-If you're interested in contributing to the guide, you should check out our [GitHub Projects](https://github.com/discordjs/guide/projects) page or [open issues](https://github.com/discordjs/guide/issues). There's a [contribution guide](https://github.com/discordjs/guide/blob/main/CONTRIBUTING.md) you should read once you decide on what you want to contribute.
+만약 가이드에 기여하는 것에 관심이 생기신다면, 현재 진행되는 [GitHub Projects](https://github.com/discordjs/guide/projects) 나 [open issues](https://github.com/discordjs/guide/issues) 를 확인해 보세요. 무엇을 기여할 것인지 고민해 보신 후 [contribution guide](https://github.com/discordjs/guide/blob/main/CONTRIBUTING.md) 를 꼭 읽어 보세요!
