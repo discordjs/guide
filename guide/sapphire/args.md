@@ -136,7 +136,60 @@ Each pattern has its use-cases. The former is especially helpful for handling se
 
 ## Repeating arguments
 
-TBD.
+To do repeating arguments, you can use `args.repeat()`, which works exactly the same as `args.pick()` but returns an array of elements, resolving when it can validate at least the first parameter, and up to the desired amount of `times`:
+
+```js {5}
+module.exports = class MaxCommand extends Command {
+	// ...
+
+	async run(message, args) {
+		const numbers = await args.repeat('number');
+		return message.channel.send(`The highest number is ${Math.max(...numbers)}!`);
+	}
+};
+```
+
+Sapphire will try to parse all the parameters until there are none left to consume or finds a parameter that cannot be validated. As such, the following inputs will yield the following results:
+
+- `@bot max 42 2 5 60 3` will return `The highest number is 60!`.
+- `@bot max aa 42 2 5 6` will throw an error as it cannot parse `aa` to a number.
+- `@bot max 42 2 5 aa 60` will return `The highest number is 42!`. The `60` is not included because it stopped parsing at `aa`.
+
+While it looks limiting, the last case can be used to parse repeating parameters at the start or at the middle of all possible parameters, e.g. a `ban` command that takes multiple users could be written as:
+
+```js {5}
+module.exports = class BanCommand extends Command {
+	// ...
+
+	async run(message, args) {
+		const members = await args.repeat('member');
+		const reason = args.finished ? null : args.rest('string');
+
+		// ...
+	}
+};
+```
+
+The code above allows the following uses:
+
+- `@bot ban @User1 Hello there` (`members` is `[User1]` and `reason` is `'Hello there'`).
+- `@bot ban @User1 @User2` (`members` is `[User1, User2]` and `reason` is `null`).
+- `@bot ban Hello there` throws an error as it could not match a member.
+
+Additionally, we can tell the argument parser how many times maximum we want to match, for which, we specify an option called `times` in the `args.repeat()` call:
+
+```js {5}
+module.exports = class BanCommand extends Command {
+	// ...
+
+	async run(message, args) {
+		const members = await args.repeat('member', { times: 5 });
+		// ...
+	}
+};
+```
+
+The code above matches up to 5 members, and will never return an array of 6 or more members.
 
 ## Flags and options
 

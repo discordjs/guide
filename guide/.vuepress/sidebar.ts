@@ -37,7 +37,7 @@ export default {
 			text: 'Getting Started',
 			children: [
 				'/sapphire/',
-				'/sapphire/first-command.md',
+				'/sapphire/creating-commands.md',
 			],
 		},
 		{
@@ -47,7 +47,7 @@ export default {
 				'/sapphire/nsfw.md',
 				'/sapphire/permissions.md',
 				'/sapphire/run-in.md',
-				'/sapphire/first-precondition.md',
+				'/sapphire/creating-preconditions.md',
 			],
 		},
 		{
@@ -55,13 +55,13 @@ export default {
 			children: [
 				'/sapphire/args.md',
 				'/sapphire/built-in-arguments.md',
-				'/sapphire/first-argument.md',
+				'/sapphire/creating-arguments.md',
 			],
 		},
 		{
 			text: 'Listeners',
 			children: [
-				'/sapphire/first-listener.md',
+				'/sapphire/creating-listeners.md',
 			]
 		},
 		{

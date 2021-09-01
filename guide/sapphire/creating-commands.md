@@ -1,4 +1,4 @@
-# Your first command
+# Creating Commands
 
 Create a `commands` folder in the same directory as your `main` file. Normally only one command is defined per file, but you can also define groups of them. Create a `ping.js` file in your `commands` folder, which will send a message and then edit it with the elapsed time. Arguments and other features are covered in other pages.
 
