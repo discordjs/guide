@@ -8,7 +8,7 @@ const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 	templateDev: path.join(__dirname, 'templates', 'index.dev.html'),
 	templateSSR: path.join(__dirname, 'templates', 'index.ssr.html'),
 	lang: 'en-US',
-	title: 'Discord.js Guide',
+	title: 'Discord.js 가이드',
 	description: 'Imagine a guide... that explores the many possibilities for your discord.js bot.',
 	head: [
 		['meta', { charset: 'utf-8' }],
@@ -38,7 +38,7 @@ const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 				link: '/voice/',
 			},
 			{
-				text: 'Documentation',
+				text: '문서',
 				link: 'https://discord.js.org/#/docs/main/stable/general/welcome',
 			},
 		],
