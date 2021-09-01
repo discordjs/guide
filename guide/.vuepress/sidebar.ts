@@ -34,7 +34,7 @@ export default {
 			],
 		},
 		{
-			text: 'Installations & Preparations',
+			text: '설치 밑 준비',
 			children: [
 				'/preparations/',
 				'/preparations/setting-up-a-linter.md',
