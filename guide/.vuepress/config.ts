@@ -7,7 +7,7 @@ const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 	bundler: '@vuepress/vite',
 	templateDev: path.join(__dirname, 'templates', 'index.dev.html'),
 	templateSSR: path.join(__dirname, 'templates', 'index.ssr.html'),
-	lang: 'en-US',
+	lang: 'ko-KR',
 	title: 'Discord.js 가이드',
 	description: 'Imagine a guide... that explores the many possibilities for your discord.js bot.',
 	head: [
