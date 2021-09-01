@@ -43,7 +43,7 @@ export default {
 			],
 		},
 		{
-			text: 'Creating Your Bot',
+			text: '봇 만들기',
 			children: [
 				'/creating-your-bot/',
 				'/creating-your-bot/creating-commands.md',
