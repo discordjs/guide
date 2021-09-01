@@ -1,69 +1,69 @@
-# Installing Node.js and discord.js
+# Node.js 및 discord.js 설치
 
-## Installing Node.js
+## Node.js 설치
 
-To use discord.js, you'll need to install [Node.js](https://nodejs.org/). discord.js v13 requires Node v16.6.0 or higher.
+discord.js를 사용하기 위해선, 여러분은 [Node.js](https://nodejs.org/)를 설치하셔야 합니다. discord.js v13 은 Node v16.6.0 또는 그 이상을 요구합니다.
 
 ::: tip
-To check if you already have Node installed on your machine \(e.g., if you're using a VPS\), run `node -v` in your terminal. If it outputs `v16.6.0` or higher, then you're good to go! Otherwise, continue reading.
+여러분의 기기에 이미 Node가 설치되어 있는지를 확인하려면 \(예를 들어, 여러분이 VPS를 사용하고 있을 때\), 터미널에서 `node -v` 를 실행하세요. 만약 출력 결과가 `v16.6.0` 이거나 그보다 높다면, 문제될 것이 없습니다! 만약 아니라면, 계속 읽어주세요.
 :::
 
-On Windows, it's as simple as installing any other program. Download the latest version from [the Node.js website](https://nodejs.org/), open the downloaded file, and follow the steps from the installer.
+Windows에서, Node설치는 다른 프로그램을 설치하는 것과 비슷합니다. [Node.js 공식 사이트](https://nodejs.org/) 에서 최신 버전을 내려받으신 후, 인스톨러의 지침에 따라 설치를 진행하세요.
 
-On macOS, either:
+macOS 라면, 다음 중 하나를 선택하세요:
 
-- Download the latest version [the Node.js website](https://nodejs.org/), open the package installer, and follow the instructions
-- Use a package manager like [Homebrew](https://brew.sh/) with the command `brew install node`
+- [Node.js 공식 사이트](https://nodejs.org/)에서 최신 버전을 내려받고, 패키지 인스톨러를 열고, 설치 과정을 진행하세요
+- [Homebrew](https://brew.sh/)등의 패키지 매니저를 사용하려면 `brew install node` 를 입력하세요
 
-On Linux, you can consult [this page](https://nodejs.org/en/download/package-manager/) to determine how you should install Node.
+리눅스에서, 여러분은 Node를 설치할 방법을 알아보기 위해 [이 페이지](https://nodejs.org/en/download/package-manager/)를 참고할 수 있습니다.
 
-## Preparing the essentials
+## 필수품 준비
 
-To use discord.js, you'll need to install it via npm \(Node's package manager\). npm comes with every Node installation, so you don't have to worry about installing that. However, before you install anything, you should set up a new project folder.
+discord.js를 사용하기 위해선, npm \(Node's package manager\) 으로 설치해야 합니다. npm은 Node를 설치할 때 자동으로 설치되며, 여러분은 추가적으로 npm을 설치할 필요가 전혀 없습니다! 하지만 npm으로 discord.js를 내려받기 위해선, 새 프로젝트 폴더가 필요합니다.
 
-Navigate to a suitable place on your machine and create a new folder named `discord-bot` (or whatever you want). Next you'll need to open your terminal.
+여러분의 기기에서 적당한 장소로 이동하여 `discord-bot` (여러분 마음대로 지으셔도 됩니다) 이라는 이름으로 새 폴더를 생성해 주세요. 다음으로, 이 폴더를 터미널에서 열어 주세요.
 
 ### Opening the terminal
 
 ::: tip
-If you use [Visual Studio Code](https://code.visualstudio.com/), you can press <code>Ctrl + `</code> (backtick) to open its integrated terminal.
+만약 [Visual Studio Code](https://code.visualstudio.com/) 사용자라면, 내부 터미널을 열기 위해 <code>Ctrl + `</code> (backtick) 을 눌러보세요.
 :::
 
-On Windows, either:
+Windows에서는 둘 중 하나를 선택하세요:
 
-- `Shift + Right-click` inside your project directory and choose the "Open command window here" option
-- Press `Win + R` and run `cmd.exe`, and then `cd` into your project directory
+- 여러분의 프로젝트 폴더에서 `Shift + Right-click` 를 누르고 "여기에서 명령 창 열기" 옵션을 선택하세요
+- `Win + R` 을 누르고 `cmd.exe` 를 실행하세요. 그후 `cd` 명령어로 프로젝트 폴더가 있는 경로로 이동하세요
 
-On macOS, either:
-- Open launchpad or spotlight and search for "terminal"
-- In your "Applications" folder, under "Utilities", open the terminal app
+macOS에서는 둘 중 하나를 선택하세요:
+- 런치패드나 스포트라이트를 열고 "terminal" 을 검색합니다
+- "Applications" 폴더에서, "Utilities" 아래에서, 터미널 앱을 여세요
 
-On Linux, you can quickly open the terminal with `Ctrl + Alt + T`.
+리눅스에선 `Ctrl + Alt + T` 를 누르시면 끝입니다!
 
-With the terminal open, run the `node -v` command to make sure you've successfully installed Node.js. If it outputs `v16.6.0` or higher, great!
+터미널이 열린 상태에서, `node -v` 를 입력해 Node가 설치되었는지 확인해 보세요. 만약 출력값이 `v16.6.0` 이상이라면, 성공입니다!
 
-### Initiating a project folder
+### 프로젝트 폴더 초기화하기
 
-The next command you'll be running is `npm init`. This command creates a `package.json` file for you, which will keep track of the dependencies your project uses, as well as other info.
+다음으로 여러분이 실행할 명령은 `npm init` 입니다. 이 명령은 `package.json` 이라는 파일을 생성하는데, 이 파일은 여러분 프로젝트의 종속성을 추적하거나 여러 정보를 기록하는 데 사용됩니다.
 
-The `npm init` command will ask you a sequence of questions–you should fill them out as you see fit. If you're not sure of something or want to skip it as a whole, leave it blank and press enter.
+`npm init` 명령어는 여러분에게 몇 가지 질문을 해올 텐데, 적당하다고 생각되는 대로 입력하세요. 무언가 잘 모르겠거나 그냥 지나치고 싶을 때는 엔터를 눌러서 넘어가세요.
 
 ::: tip
-To get started quickly, you can use `npm init -y` to have it fill out everything for you.
+`npm init -y` 를 사용해 질문 없이 npm이 자동으로 채우게 해보세요!
 :::
 
-Once you're done with that, you're ready to install discord.js!
+이게 끝났다면, 여러분은 이제 discord.js를 설치할 준비가 되었습니다!
 
-## Installing discord.js
+## discord.js 설치
 
-Now that you've installed Node.js and know how to open your console and run commands, you can finally install discord.js! Run the following command in your terminal:
+이제 Node.js를 설치하고 어떻게 터미널을 열고 명령을 실행하는지 배웠으니, 이제 여러분은 discord.js를 설치할 수 있습니다! 터미널에서 아래 명령어를 실행해 보세요:
 
 ```sh:no-line-numbers
 npm install discord.js
 ```
 
-And that's it! With all the necessities installed, you're almost ready to start coding your bot.
+짜잔! 이제 끝입니다! 필요한 모든 라이브러리가 설치되고 나면, 여러분은 봇을 코딩할 준비가 거의 다 되었습니다!
 
-## Installing a linter
+## 린터 설치
 
-While you are coding, it's possible to run into numerous syntax errors or code in an inconsistent style. You should [install a linter](/preparations/setting-up-a-linter.md) to ease these troubles. While code editors generally can point out syntax errors, linters coerce your code into a specific style as defined by the configuration. While this is not required, it is advised.
+여러분이 코딩을 할 때, 일관되지 못한 코드 스타일이나 수많은 문법 에러가 나올 수 있습니다. 여러분은 이 문제를 해소하기 위해 [린터](/preparations/setting-up-a-linter.md)를 설치할 수 있습니다. 보통 여러분의 에디터가 문법 오류를 잡아낼 수 있지만, 린터는 여러분이 설정해둔 특정한 스타일로 코드를 강제할 수 있습니다. 이게 곡 필요한 것은 아니지만, 훨씬 좋습니다.
