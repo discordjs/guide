@@ -100,7 +100,7 @@ Each time `args.pick('<type>')` is called, it consumes the arguments one by one 
 
 ## Optional arguments
 
-Sapphire offers two options regarding regarding optional arguments. Let's make a `pow.js` command that takes two numbers, where the `base` is required, and the `exponent` defaults to 2.
+Sapphire offers two options regarding optional arguments. Let's make a `pow.js` command that takes two numbers, where the `base` is required, and the `exponent` defaults to 2.
 
 - **Optional Pattern**
   ```js {5-6}
@@ -132,7 +132,7 @@ Sapphire offers two options regarding regarding optional arguments. Let's make a
 
   This is slightly more verbose, but it defaults `exponent` to `2` **only** if there were no parameters left to parse, so `@bot pow 4` will return `The result is 16!`, while `@bot pow 4 hello!` will return an error.
 
-Each pattern has its use-cases. The former is specially helpful for handling several optional parameters, although you can also discriminate all errors from `args` by checking `error.identifier`. This way you can tell if a number failed to parse for reasons such as it's not a number, it doesn't meet the minimum and/or maximum (if set), among other possible options.
+Each pattern has its use-cases. The former is especially helpful for handling several optional parameters, although you can also discriminate all errors from `args` by checking `error.identifier`. This way you can tell if a number failed to parse for reasons such as it's not a number, it doesn't meet the minimum and/or maximum (if set), among other possible options.
 
 ## Repeating arguments
 
