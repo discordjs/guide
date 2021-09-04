@@ -105,11 +105,15 @@ Git is a fantastic tool to keep track of your code changes and allows you to upl
 
 You can specify files that Git should ignore in its versioning systems with a `.gitignore` file. Create a `.gitignore` file in your project directory and add the names of the files and folders you want to ignore:
 
+:::: code-group
+::: code-group-item .gitignore
 ```
 node_modules
 .env
 config.json
 ```
+:::
+::::
 
 ::: tip
 Aside from keeping credentials safe, `node_modules` should be included here. Since this directory can be restored based on the entries in your `package.json` and `package-lock.json` files by running `npm install`, it does not need to be included in Git.
@@ -121,8 +125,21 @@ You can specify quite intricate patterns in `.gitignore` files, check out the [G
 
 Open your code editor and create a new file. We suggest that you save the file as `index.js`, but you may name it whatever you wish.
 
-Here's the base code to get you started:
+```:no-line-numbers {4}
+discord-bot/
+├── node_modules
+├── config.json
+├── index.js // <-- Create a new file named index.js
+├── package-lock.json
+└── package.json
+```
 
+(We will be using `config.json` to store our token for the rest of the guide)
+
+Here's the base code for `index.js` to get you started:
+
+:::: code-group
+::: code-group-item index.js
 ```js
 // Require the necessary discord.js classes
 const { Client, Intents } = require('discord.js');
@@ -139,10 +156,18 @@ client.once('ready', () => {
 // Login to Discord with your client's token
 client.login(token);
 ```
+:::
+::::
 
 This is how you create a client instance for your Discord bot and login to Discord. The `Intents.FLAGS.GUILDS` intents option is necessary for your client to work properly.
 
-Open your terminal and run `node index.js` to start the process. If you see "Ready!" after a few seconds, you're good to go!
+Open your terminal and run:
+
+```sh:no-line-numbers
+node index.js
+``` 
+
+to start the process. If you see "`Ready!`" after a few seconds, you're good to go!
 
 ::: tip
 You can open your `package.json` file and edit the `"main": "index.js"` field to point to your main file. You can then run `node .` in your terminal to start the process!

@@ -44,9 +44,9 @@ All content has been updated to use discord.js v13 syntax. The v12 version of th
 ### New
 
 - [Updating from v12 to v13](/additional-info/changes-in-v13.md): A list of the changes from discord.js v12 to v13
-- [Registering slash commands](/interactions/registering-slash-commands.md): In-depth steps on registering slash commands
-- [Replying to slash commands](/interactions/replying-to-slash-commands.md): The various ways to reply to slash commands
-- [Slash command permissions](/interactions/slash-command-permissions.md): Restricting slash commands per user or per role
+- [Registering slash commands](/interactions/slash-commands.md#registering-slash-commands): In-depth steps on registering slash commands
+- [Replying to slash commands](/interactions/slash-commands.md#replying-to-slash-commands): The various ways to reply to slash commands
+- [Slash command permissions](/interactions/slash-commands.md#permissions): Restricting slash commands per user or per role
 - [Buttons](/interactions/buttons.md): Building, sending, and receiving buttons
 - [Select menus](/interactions/select-menus.md): Building, sending, and receiving select menus
 - [Threads](/popular-topics/threads.md): Creating and managing threads

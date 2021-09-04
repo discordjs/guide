@@ -67,3 +67,14 @@ And that's it! With all the necessities installed, you're almost ready to start 
 ## Installing a linter
 
 While you are coding, it's possible to run into numerous syntax errors or code in an inconsistent style. You should [install a linter](/preparations/setting-up-a-linter.md) to ease these troubles. While code editors generally can point out syntax errors, linters coerce your code into a specific style as defined by the configuration. While this is not required, it is advised.
+
+## Resulting files
+
+If you have followed the guide properly, you should have a folder similar to this:
+
+```:no-line-numbers
+discord-bot/
+├── node_modules
+├── package-lock.json
+└── package.json
+```
