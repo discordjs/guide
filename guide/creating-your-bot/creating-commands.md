@@ -25,7 +25,7 @@ To make Slash Commands work, we need to do two things:
 You only need to register the *structure* of your Slash Commands **ONCE**. You can edit the *structure* of a Slash Command by registering it again with a new *structure*. We will see what we mean by "*structure*" in the next section.
 :::
 
-This page will only cover the bare minimum to get you started, but you can refer to our [in-depth page on Slash Commands](/interactions/slash-commands.md) for a more detailed guide.
+This page will only cover the bare minimum to get you started, but you can refer to our [in-depth page on Slash Commands](/interactions/registering-slash-commands.md) for a more detailed guide.
 
 ## Registering Slash Commands
 
@@ -101,7 +101,7 @@ Focus on these variables:
 - `guildId`: Your development server's id
 - `commands`: An array of commands to register. 
 
-The [`SlashCommandBuilder()`](/popular-topics/builders.md#Slash-command-builders) is used to build the structure for your commands. As you can see from the script above, the structure of the `/ping` command has a name `ping` and a description `Replies with pong!`. The structure can include other things such as subcommand, options, choices, permission, etc. You can refer to our [in-depth page on Slash Commands](/interactions/slash-commands.md) to learn more about it.
+The [`SlashCommandBuilder()`](/popular-topics/builders.md#Slash-command-builders) is used to build the structure for your commands. As you can see from the script above, the structure of the `/ping` command has a name `ping` and a description `Replies with pong!`. The structure can include other things such as subcommand, options, choices, permission, etc. You can refer to our [in-depth page on Slash Commands](/interactions/registering-slash-commands.md) to learn more about it.
 
 ::: tip
 In order to get your client and guild ids, open Discord and go to your settings. On the "Advanced" page, turn on "Developer Mode". This will enable a "Copy ID" button in the context menu when you right-click on a server icon, a user's profile, etc.

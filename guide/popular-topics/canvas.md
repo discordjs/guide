@@ -56,7 +56,7 @@ client.login('your-token-goes-here');
 ```
 
 ::: warning
-Remember to register the slash commands before continuing on with this section of the guide. You can view how to do that [here](/interactions/slash-commands.md).
+Remember to register the slash commands before continuing on with this section of the guide. You can view how to do that [here](/interactions/registering-slash-commands.md).
 :::
 
 ### Basic image loading
