@@ -26,12 +26,12 @@ node deploy-commands.js
 
 As we mentioned earlier, a slash command can either have `default_permission` set to `true`, which will *enable the command for everyone*, OR it can have it set to `false`, which will *disable it for everyone*. As a result, there are two different approaches for controlling the permission of a slash command:
 
-- Blacklist
-- Whitelist
+- [Denylist](https://en.wikipedia.org/wiki/Blacklist_(computing))
+- [Allowlist](https://en.wikipedia.org/wiki/Whitelisting)
 
-The **blacklist** approach ENABLES the commnd for everyone (i.e. `setDefaultPermission(true)`), and then manually DISABLE the command for a specific **user** or a specific **role** in a specific guild.
+The **denylist** approach ENABLES the commnd for everyone (i.e. `setDefaultPermission(true)`), and then manually DISABLE the command for a specific **user** or a specific **role** in a specific guild.
 
-The **whitelist** approach does the opposite. It DISABLES the command for everyone (i.e. `setDefaultPermission(false)`), and then manually ENABLE the command for a specific **user** or a specific **role** in a specific guild.
+The **allowlist** approach does the opposite. It DISABLES the command for everyone (i.e. `setDefaultPermission(false)`), and then manually ENABLE the command for a specific **user** or a specific **role** in a specific guild.
 
 The process of "manually enabling/disabling the command for a specific user/role" is called **permission overwrite**.
 
@@ -41,7 +41,7 @@ You can only add up to **10 permission overwrites** for a command.
 **Permission overwrites are guild-specific**. In other words, you need to specify the guild that you want to do the permission overwrite in, **even if the command is a Global command**. That means that, for a given Global command, it's possible to enable it for a user in one guild, but disable it for the same user in another guild.
 :::
 
-Let's try the whitelist approach for the `ping` command. First you set the `default_permission` to `false` by using the `setDefaultPermission()` method:
+Let's try the allowlist approach for the `ping` command. First you set the `default_permission` to `false` by using the `setDefaultPermission()` method:
 ```js:no-line-numbers {4}
 new SlashCommandBuilder()
   .setName('ping')
@@ -58,7 +58,7 @@ Go ahead and try using the `/ping` command in your guild. You should see it gray
 
 ![](./images/disabled-command.png)
 
-Next, let's whitelist a specific role. You need 3 IDs for a permission overwrite:
+Next, let's allowlist a specific role. You need 3 IDs for a permission overwrite:
 
 - Guild ID
 - Command ID
@@ -138,7 +138,7 @@ Then, in line 23, you retrieve the `ping` command from that array with [`Array.f
 - Command ID ✅
 - User/role ID
 
-Next, in line 25 to 33, you define an array of JSON objects with a very specific shape. This JSON object needs to have a property called `id` and `permissions`. The `id` should be the command ID (line 27) and the `permissions` should be an array of [Application Command Permissions Structure](https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permissions-structure) objects (line 28-34). This `Application Command Permissions Structure` object needs to have three properties: `id`, `type`, and `permission`. The `id` will be the user id or role id that you want to whitelist (line 30). The `type` specifies what type of `id` it is (line 31). Type `1` means `ROLE` id, and type `2` means `USER` id. Finally, the `permission` specifies if you want to allow or disallow this `id` to use the command (line 32). If `permission` is `true` then it means allow, if it is `false` then it means disallow. Since your `ping` command is already registered with `setDefaultPermission(false)`, it wouldn't make much sense to also have a permission overwrite to disallow specific users or roles. On top of that, you are trying to enable this command for a specific role (i.e. whitelist the role), hence you should set `permission: true`.
+Next, in line 25 to 33, you define an array of JSON objects with a very specific shape. This JSON object needs to have a property called `id` and `permissions`. The `id` should be the command ID (line 27) and the `permissions` should be an array of [Application Command Permissions Structure](https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permissions-structure) objects (line 28-34). This `Application Command Permissions Structure` object needs to have three properties: `id`, `type`, and `permission`. The `id` will be the user id or role id that you want to allowlist (line 30). The `type` specifies what type of `id` it is (line 31). Type `1` means `ROLE` id, and type `2` means `USER` id. Finally, the `permission` specifies if you want to allow or disallow this `id` to use the command (line 32). If `permission` is `true` then it means allow, if it is `false` then it means disallow. Since your `ping` command is already registered with `setDefaultPermission(false)`, it wouldn't make much sense to also have a permission overwrite to disallow specific users or roles. On top of that, you are trying to enable this command for a specific role (i.e. allow the role), hence you should set `permission: true`.
 
 - Guild ID ✅
 - Command ID ✅
