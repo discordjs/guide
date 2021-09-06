@@ -1,6 +1,6 @@
 # Command handling
 
-As we add more commands to our bot, the `index.js` and `deploy-commands.js` files will get bigger and bigger. To solve this, we can move each command into its own file, and implement a *command handler* in our `index.js` and `deploy-commands.js`.
+As you add more commands to your bot, the `index.js` and `deploy-commands.js` files will get bigger and bigger. To solve this, you can move each command into its own file, and implement a *command handler* in your `index.js` and `deploy-commands.js`.
 
 If you've been following the guide, here are the base files and code we have so far:
 
@@ -72,7 +72,8 @@ const rest = new REST({ version: '9' }).setToken(token);
 ::::
 ## Command handler for deploy-commands.js
 
-Remember that the goal of a command handler is to move each command into its own file, so we can dynamically import them. In the case of the `deploy-commands.js` file, we built the structure of our three slash commands inside the `deploy-commands.js` file. We want to move these structures into their own separate file.
+Remember that the goal of a command handler is to move each command into its own file, so you can dynamically import them. In the case of the `deploy-commands.js` file, you built the structure of your three slash commands inside the `deploy-commands.js` file. You want to move these structures into their own separate file.
+
 :::: code-group
 ::: code-group-item deploy-commands.js
 ```js :no-line-numbers {2-4}
@@ -113,7 +114,7 @@ discord-bot/
 └── package.json
 ```
 
-Next, in your `commands/ping.js` file, create the same structure for the `ping` command that we have in `deploy-commands.js`, and then export it:
+Next, in your `commands/ping.js` file, create the same structure for the `ping` command that you have in `deploy-commands.js`, and then export it:
 
 :::: code-group
 ::: code-group-item commands/ping.js
@@ -137,7 +138,7 @@ Go ahead and do the same for `commands/server.js` and `commands/user.js`.
 If you need to access your client instance from inside a command file, you can access it via `interaction.client`. If you need to access external files, packages, etc., you should `require()` them at the top of the file.
 :::
 
-Now that each command is in its own file, we can implement the command handler for our deployment script. (Notice that we got rid of the `SlashCommandBuilder` import here, because we don't need it in the deployment script anymore)
+Now that each command is in its own file, you can implement the command handler for your deployment script. (Notice that we got rid of the `SlashCommandBuilder` import here, because it's no longer needed in the deployment script anymore)
 
 :::: code-group
 ::: code-group-item deploy-commands.js
@@ -171,13 +172,13 @@ const rest = new REST({ version: '9' }).setToken(token);
 :::
 ::::
 
-The [`fs.readdirSync()`](https://nodejs.org/api/fs.html#fs_fs_readdirsync_path_options) method will return an array of all the file names in a given directory, e.g. `['ping.js', 'server.js', 'user.js']`. To ensure only command files get returned, use [`Array.filter()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) to leave out any non-JavaScript files from the array. With that array, we loop over it and populate the `commands` variable with [`Array.push()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). Finally, just like before, the `commands` variable gets passed to `rest.put()` to register our commands.
+The [`fs.readdirSync()`](https://nodejs.org/api/fs.html#fs_fs_readdirsync_path_options) method will return an array of all the file names in a given directory, e.g. `['ping.js', 'server.js', 'user.js']`. To ensure only command files get returned, use [`Array.filter()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) to leave out any non-JavaScript files from the array. With that array, you loop over it and populate the `commands` variable with [`Array.push()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). Finally, just like before, the `commands` variable gets passed to `rest.put()` to register your commands.
 
 ## Command handler for index.js
 
 Now let's try to implement the command handler for the `index.js` file. 
 
-Again, remember that the goal of the command handler is to move each command into its own file, so we can dynamically import them. In the case of the `index.js` file, we want to move these replies into their respective command file.
+Again, remember that the goal of the command handler is to move each command into its own file, so you can dynamically import them. In the case of the `index.js` file, you want to move these replies into their respective command file.
 
 :::: code-group
 ::: code-group-item index.js
@@ -199,7 +200,7 @@ client.on('interactionCreate', async interaction => {
 :::
 ::::
 
-Let's go back to our `commands/ping.js` and implement the following code:
+Let's go back to your `commands/ping.js` and implement the following code:
 
 :::: code-group
 ::: code-group-item commands/ping.js
@@ -269,13 +270,13 @@ client.login(token);
 :::
 ::::
 
-First, we create a new property called `commands` for our `client` object, and initialize it as an empty `Collection`. (line 7)
+First, you create a new property called `commands` for your `client` object, and initialize it as an empty `Collection`. (line 7)
 
-Next, just like in our `deploy-commands.js` file, we will also make use of `readdirSync()` to import all of our command files. However, this time we will call [`Collection.set()`](https://discord.js.org/#/docs/collection/main/class/Collection?scrollTo=set) to populate the `client.commands`, with the command's name as the key, and the command file itself as the value.
+Next, just like in your `deploy-commands.js` file, you will also make use of `readdirSync()` to import all of your command files. However, this time you will call [`Collection.set()`](https://discord.js.org/#/docs/collection/main/class/Collection?scrollTo=set) to populate the `client.commands`, with the command's name as the key, and the command file itself as the value.
 
-Next, we can go to the callback of the `interactionCreate` event, and call `.get()` on the `client.commands` Collection, to retrieve the corresponding command file by its command name. (line 23)
+Next, you go to the callback of the `interactionCreate` event, and call `.get()` on the `client.commands` Collection, to retrieve the corresponding command file by its command name. (line 23)
 
-Finally, we call the `.execute()` function of the command file, which will effectively reply to the command.
+Finally, you call the `.execute()` function of the command file, which will effectively reply to the command.
 
 ::: tip
 The <DocsLink section="collection" path="class/Collection" /> from `discord.js` is a class that extends JavaScript's native [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) class, and includes more extensive, useful functionality.
@@ -304,9 +305,10 @@ module.exports = {
 ```
 :::
 ::::
-We have the `data` of our `ping` command, which defines the "structure" of the command. It defines how the command will look when a user tries to use the command in Discord.
 
-Below it, we have the `execute` of our `ping` command, which defines how we want our bot to reply to the `ping` command.
+You have the `data` of your `ping` command, which defines the "structure" of the command. It defines how the command will look when a user tries to use the command in Discord.
+
+Below it, you have the `execute` of your `ping` command, which defines how you want your bot to reply to the `ping` command.
 
 The `deploy-commands.js` file will import the `data` (structure) of the command for registration:
 
@@ -339,7 +341,7 @@ And that's it! Whenever you want to add a new command, make a new file in your `
 ::: warning
 If you create a new command file, edit an existing command's `data` (structure), or delete a command file from the `commands` folder, **REMEMBER TO RUN `node deploy-commands.js` AGAIN TO REGISTER THEM!**
 
-Our deployment script will **overwrite** ALL the previously registered commands with the array of commands that you provide in `rest.put()`.
+Your deployment script will **overwrite** ALL the previously registered commands with the array of commands that you provide in `rest.put()`.
 :::: code-group
 ::: code-group-item deploy-commands.js
 ```js:no-line-numbers {3}

@@ -1,6 +1,6 @@
 ## Replying to slash commands
 
-Once you've registered your slash commands, users can now use your slash commands! Our next step is to make our bot reply to those slash commands. Let's go back to the `index.js` file. Your `index.js` file should look like this:
+Once you've registered your slash commands, users can now use your slash commands! Your next step is to make your bot reply to those slash commands. Let's go back to the `index.js` file. Your `index.js` file should look like this:
 
 :::: code-group
 ::: code-group-item index.js
@@ -31,7 +31,7 @@ client.login(token);
 :::
 ::::
 
-A slash command is just one type of interaction. Therefore, we should first check if the interaction is a slash command by calling `.isCommand()`. Next, we check the name of the command by accessing the `.commandName` property. Finally, we reply to the interaction by calling `.reply()`.
+A slash command is just one type of interaction. Therefore, you should first check if the interaction is a slash command by calling `.isCommand()`. Next, you check the name of the command by accessing the `.commandName` property. Finally, you reply to the interaction by calling `.reply()`.
 
 ::: danger
 You MUST reply to the interaction within **3 seconds** of receiving it.
@@ -83,7 +83,7 @@ And your `/user` should look like this:
 </DiscordMessages>
 
 ::: tip
-We've only looked at `.reply()` to reply to the incoming `interaction`. There are other ways to reply to an interaction, which we will see in a later section called [Replying (continued)](#replying-continued).
+We've only looked at `.reply()` to reply to the incoming `interaction`. There are other ways to reply to an interaction, which you will see in a later section called [Replying (continued)](#replying-continued).
 :::
 
 
@@ -95,13 +95,13 @@ Here's a flowchart to help you understand visually *which* methods are you allow
 
 ### Defer
 
-As we saw in the [Replying to slash commands](#replying-to-slash-commands) section:
+As you saw in the [Replying to slash commands](#replying-to-slash-commands) section:
 
 ::: danger
 You MUST reply to the interaction within **3 seconds** of receiving it.
 :::
 
-But what if our command takes more than 3 seconds to process before it can reply? To solve this, we can defer the interaction with `.deferReply()` within 3 seconds of receiving it. This is how it will look when you defer an interaction:
+But what if your command takes more than 3 seconds to process before it can reply? To solve this, you can defer the interaction with `.deferReply()` within 3 seconds of receiving it. This is how it will look when you defer an interaction:
 
 ```js:no-line-numbers
 await interaction.deferReply();
@@ -109,7 +109,7 @@ await interaction.deferReply();
 
 ![](./images/deferreply.png)
 
-Now that the interaction has been deferred, we can proceed with whatever task we need to do that might take a long time to finish. As long as the task finishes before the 15 minutes window, we can edit the deferral to let the user know that the bot is done completing the task.
+Now that the interaction has been deferred, you can proceed with whatever task you need to do that might take a long time to finish. As long as the task finishes before the 15 minutes window, you can edit the deferral to let the user know that the bot is done completing the task.
 
 ```js:no-line-numbers
 await interaction.deferReply();
@@ -129,7 +129,7 @@ The only technical difference between `.reply()` and `.deferReply()` is that, if
 
 After sending an initial reply or defer (which must be done within **3 seconds** of receiving the interaction), you will have a **15 minutes** window to edit the reply or send followup messages however many times you want. We will look at followup messages in the next section.
 
-To edit the original reply, we simply call `.editReply()` **after** calling `.reply()`.
+To edit the original reply, you simply call `.editReply()` **after** calling `.reply()`.
 
 ```js:no-line-numbers
 await interaction.reply('Pong!');
@@ -186,7 +186,7 @@ await interaction.editReply('the task has been completed');
 
 #### Followup a reply
 
-We can send additional messages after the initial reply. Just like edits, followups also have a **15 minutes** window.
+You can send additional messages after the initial reply. Just like edits, followups also have a **15 minutes** window.
 
 You can call `.followUp()` **after** calling `.reply()`.
 
@@ -249,7 +249,7 @@ await interaction.reply({ content: 'pong', ephemeral: false });
 await interaction.editReply({ content: 'pong edited', ephemeral: true });
 ```
 
-The reply will **not** change from non-ephemeral to ephemeral, even though we called `.editReply()` with `ephemeral: true`.
+The reply will **not** change from non-ephemeral to ephemeral, even though you called `.editReply()` with `ephemeral: true`.
 
 <DiscordMessages>
 	<DiscordMessage profile="bot">
@@ -306,7 +306,7 @@ await interaction.followUp({ content: 'second followup', ephemeral: true })
 
 ![](./images/followup-ephemeral.png)
 
-As we saw in the previous section about [followup a deferReply](#followup-a-deferreply), the first followup to a deferral will replace the deferral instead of sending a new message. As a result, this will also affect the ephemeral state of the first followup:
+As you saw in the previous section about [followup a deferReply](#followup-a-deferreply), the first followup to a deferral will replace the deferral instead of sending a new message. As a result, this will also affect the ephemeral state of the first followup:
 
 ```js:no-line-numbers
 await interaction.deferReply({ ephemeral: true })
