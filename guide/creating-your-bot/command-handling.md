@@ -72,7 +72,7 @@ const rest = new REST({ version: '9' }).setToken(token);
 ::::
 ## Command handler for deploy-commands.js
 
-Remember that the goal of a command handler is to move each command into its own file, so we can dynamically import them. In the case of the `deploy-commands.js` file, we built the structure of our 3 Slash Commands inside the `deploy-commands.js` file. We want to move these structures into their own separate file.
+Remember that the goal of a command handler is to move each command into its own file, so we can dynamically import them. In the case of the `deploy-commands.js` file, we built the structure of our three slash commands inside the `deploy-commands.js` file. We want to move these structures into their own separate file.
 :::: code-group
 ::: code-group-item deploy-commands.js
 ```js :no-line-numbers {2-4}

@@ -13,23 +13,23 @@ This page is a follow-up and bases its code on [the previous page](/creating-you
 	</DiscordMessage>
 </DiscordMessages>
 
-Discord allows developers to register [Slash Commands](https://discord.com/developers/docs/interactions/application-commands), which provide users a first-class way of interacting directly with your application. 
+Discord allows developers to register [slash commands](https://discord.com/developers/docs/interactions/application-commands), which provide users a first-class way of interacting directly with your application. Before being able to reply to a command, you must first register it.
 
-To make Slash Commands work, we need to do two things:
+To make slash commands work, we need to do two things:
 
-1. **Register the _structure_ of the Slash Command**: In this step, we are essentially telling Discord:
+1. **Register the structure of the slash command**: In this step, we are essentially telling Discord:
 > "Show *these* commands to the user when they type `/` in the chat."
-2. **Reply to the Slash Command**: In this step, we decide *what* and *how* to reply to the user who used our Slash Command. This is essentially our "bot" (the `index.js` that we've created so far).
+2. **Reply to the slash command**: In this step, we decide *what* and *how* to reply to the user who used our slash command. This is essentially our "bot" (the `index.js` that we've created so far).
 
 ::: warning
-You only need to register the *structure* of your Slash Commands **ONCE**. You can edit the *structure* of a Slash Command by registering it again with a new *structure*. We will see what we mean by "*structure*" in the next section.
+You only need to register the structure of your slash sommands once. You can edit the structure of a slash command by registering it again with a new structure. We will see what we mean by "structure" in the next section.
 :::
 
-This page will only cover the bare minimum to get you started, but you can refer to our [in-depth page on Slash Commands](/interactions/registering-slash-commands.md) for a more detailed guide.
+This page will only cover the bare minimum to get you started, but you can refer to our [in-depth page on slash commands](/interactions/registering-slash-commands.md) for a more detailed guide.
 
-## Registering Slash Commands
+## Registering slash commands
 
-As we mentioned earlier, we only have to register the structure of our Slash Commands **once**. As such, **we strongly recommend creating a separate `deploy-commands.js` file** in your project directory. This file will be used to register, edit, and delete Slash Commands for your bot application.
+As we mentioned earlier, we only have to register the structure of our slash commands once. As such, we strongly recommend creating a separate `deploy-commands.js` file in your project directory. This file will be used to register, edit, and delete slash commands for your bot application.
 
 ```:no-line-numbers {4}
 discord-bot/
@@ -47,9 +47,9 @@ Next, you'll need to install [`@discordjs/builders`](https://github.com/discordj
 npm install @discordjs/builders @discordjs/rest discord-api-types
 ```
 
-Let's suppose we want to register these 3 Slash Commands for our bot: `/ping`, `/server`, and `/user`.
+Let's suppose we want to register these three slash commands for our bot: `/ping`, `/server`, and `/user`.
 
-![](./images/commandpicker.png)
+![Command Picker](./images/commandpicker.png)
 
 Here's what your `deploy-commands.js` will look like:
 :::: code-group
@@ -60,7 +60,7 @@ const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { clientId, guildId, token } = require('./config.json');
 
-// Define an array with 3 Slash Commands structure
+// Define an array with three slash commands structure
 const commands = [
 	new SlashCommandBuilder().setName('ping').setDescription('Replies with pong!'),
 	new SlashCommandBuilder().setName('server').setDescription('Replies with server info!'),
@@ -71,7 +71,7 @@ const rest = new REST({ version: '9' }).setToken(token);
 
 (async () => {
 	try {
-		// Register the array of Slash Commands with res.put()
+		// Register the array of slash commands with res.put()
 		await rest.put(
 			Routes.applicationGuildCommands(clientId, guildId),
 			{ body: commands },
@@ -101,7 +101,7 @@ Focus on these variables:
 - `guildId`: Your development server's id
 - `commands`: An array of commands to register. 
 
-The [`SlashCommandBuilder()`](/popular-topics/builders.md#Slash-command-builders) is used to build the structure for your commands. As you can see from the script above, the structure of the `/ping` command has a name `ping` and a description `Replies with pong!`. The structure can include other things such as subcommand, options, choices, permission, etc. You can refer to our [in-depth page on Slash Commands](/interactions/registering-slash-commands.md) to learn more about it.
+The [`SlashCommandBuilder()`](/popular-topics/builders.md#Slash-command-builders) is used to build the structure for your commands. As you can see from the script above, the structure of the `/ping` command has a name `ping` and a description `Replies with pong!`. The structure can include other things such as subcommand, options, choices, permission, etc. You can refer to our [in-depth page on slash commands](/interactions/registering-slash-commands.md) to learn more about it.
 
 ::: tip
 In order to get your client and guild ids, open Discord and go to your settings. On the "Advanced" page, turn on "Developer Mode". This will enable a "Copy ID" button in the context menu when you right-click on a server icon, a user's profile, etc.
@@ -111,13 +111,13 @@ Once you fill in those variables, run:
 ```sh:no-line-numbers
 node deploy-commands.js
 ``` 
-in your project directory to register the structure of your Slash Commands to your specified guild.
+in your project directory to register the structure of your slash commands to your specified guild.
 
 Congratulations! 🎉
 
-You've successfully registered your Slash Commands. Go ahead and type `/` in your guild and you should be able to see your Slash Commands already:
+You've successfully registered your slash commands. Go ahead and type `/` in your guild and you should be able to see your slash commands already:
 
-![](./images/commandpicker.png)
+![Command Picker](./images/commandpicker.png)
 
 ::: warning
 Once your commands have been registered, they will "stay" in Discord. Anything you do in your `deploy-commands.js` file after this point will **NOT** affect the commands that have been registered already. 
@@ -130,21 +130,18 @@ If you do any of the following:
 you will need to run `node deploy-commands.js` again to register the "new" set of commands to Discord.
 :::
 
-## Replying to Slash Commands
+## Replying to slash commands
 
-Once you've registered your Slash Commands, users can now use your Slash Commands! Our next step is to make our bot reply to those Slash Commands. Let's go back to our `index.js` file, and add these lines:
+Once you've registered your slash commands, you can reply to them with your bot. Let's go back to our `index.js` file, and add these lines:
 
 :::: code-group
 ::: code-group-item index.js
 ```js {13-15}
-// Require the necessary discord.js classes
 const { Client, Intents } = require('discord.js');
 const { token } = require('./config.json');
 
-// Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-// When the client is ready, run this code (only once)
 client.once('ready', () => {
 	console.log('Ready!');
 });
@@ -153,17 +150,19 @@ client.on('interactionCreate', async interaction => {
 	console.log(interaction)
 });
 
-// Login to Discord with your client's token
 client.login(token);
 ```
 :::
 ::::
 
-A Slash Command is just one type of [interaction](https://discord.com/developers/docs/interactions/application-commands#Slash-commands). Therefore, we can make our bot listen to the [`interactionCreate`](https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-interactionCreate) event to receive incoming interactions. So far, we only have a `console.log(interaction)` in the callback. Go ahead and start the bot with:
+A slash command is just one type of [interaction](https://discord.com/developers/docs/interactions/application-commands#Slash-commands). Therefore, we can make our bot listen to the [`interactionCreate`](https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-interactionCreate) event to receive incoming interactions. Let's log the incoming interaction with `console.log(interaction)` to make sure your bot is working properly. Go ahead and start the bot with:
+
 ```sh:no-line-numbers
 node index.js
 ```
+
 and then use the `/ping` command in your guild. You should see something logged in your terminal that is similar to this:
+
 ```:no-line-numbers
 CommandInteraction {
   type: 'APPLICATION_COMMAND',
@@ -197,14 +196,11 @@ Let's go ahead and fix that by making these changes inside the callback:
 :::: code-group
 ::: code-group-item index.js
 ```js {14-22}
-// Require the necessary discord.js classes
 const { Client, Intents } = require('discord.js');
 const { token } = require('./config.json');
 
-// Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-// When the client is ready, run this code (only once)
 client.once('ready', () => {
 	console.log('Ready!');
 });
@@ -221,16 +217,29 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 
-// Login to Discord with your client's token
 client.login(token);
 ```
 :::
 ::::
 
-As we mentioned earlier, a Slash Command is just one type of interaction. Therefore, we should first check if the interaction is a Slash Command by calling `.isCommand()`. Next, we check the name of the command by accessing the `.commandName` property. Finally, we reply to the interaction by calling `.reply()`.
+As we mentioned earlier, a slash command is just one type of interaction. Therefore, we should first check if the interaction is a slash command by calling `.isCommand()`. Next, we check the name of the command by accessing the `.commandName` property. Finally, we reply to the interaction by calling `.reply()`.
 
-::: danger
-You MUST reply to the interaction within **3 seconds** of receiving it.
+::: warning
+You must reply to the interaction within **three seconds** of receiving it.
+:::
+
+For the `ping` command, we simply reply back with a `Pong!` message.
+
+For the `server` command, we can access the `.guild` property, which refers to the guild the interaction was sent in. Note that Discord servers are referred to as "guilds" in the Discord API and discord.js library. This `.guild` is an instance of [Guild](https://discord.js.org/#/docs/main/stable/class/Guild) which exposes properties such as `.name` and `.memberCount`.
+
+::: tip
+Refer to the <DocsLink path="class/Guild" /> documentation for a list of all the available properties and methods!
+:::
+
+For the `user` command, we can access the `.user` property, which refers to the user who used the command. This `.user` is an instance of [User](https://discord.js.org/#/docs/main/stable/class/User) which exposes properties such as `.tag` and `.id`.
+
+::: tip
+Refer to the <DocsLink path="class/User" /> documentation for a list of all the available properties and methods!
 :::
 
 Now that we have it fixed, let's start the bot again:
@@ -250,7 +259,7 @@ and then use the `/ping` command in your guild. This time, you should see someth
 
 Congratulations! 🎉
 
-You now have 3 working Slash Commands. Go ahead and try out `/server` and `/user` as well. 
+You now have three working slash commands. Go ahead and try out `/server` and `/user` as well. 
 
 Your `/server` should look like this:
 

@@ -1,12 +1,12 @@
-# Slash Commands
+# Slash commands
 
 ::: warning
 This page will **NOT** be using the command handler version of the `index.js` and `deploy-commands.js` files for the sake of simplicity during explanation. However, all the concepts and examples in this page are also applicable for the command handler version of the aformentioned files.
 :::
 
-## What are Slash Commands?
+## What are slash commands?
 
-Discord provides developers with the option to create client-integrated Slash Commands.
+Discord provides developers with the option to create client-integrated slash commands.
 
 Here is a quick 1 minute explanation video from Discord:
 
@@ -18,15 +18,15 @@ You can also always refer to [Discord's official documentation](https://discord.
 
 In this page, we'll cover how to make them work using discord.js!
 
-To make Slash Commands work, we need to do two things:
+To make slash commands work, we need to do two things:
 
-1. **Register the _structure_ of the Slash Command**: We will be creating a separate file called `deploy-commands.js` for registration. In this step, we are essentially telling Discord:
+1. **Register the structure of the slash command**: We will be creating a separate file called `deploy-commands.js` for registration. In this step, we are essentially telling Discord:
 > "Show *these* commands to the user when they type `/` in the chat."
 
-2. **Reply to the Slash Command**: In this step, we decide *what* and *how* to reply to the user who used our Slash Command. This is essentially the "bot" itself (the `index.js`).
+2. **Reply to the slash command**: In this step, we decide *what* and *how* to reply to the user who used our slash command. This is essentially the "bot" itself (the `index.js`).
 
 ::: warning
-You only need to register the *structure* of your Slash Commands **ONCE**. We will see what we mean by "*structure*" in the next section.
+You only need to register the *structure* of your slash commands **ONCE**. We will see what we mean by "*structure*" in the next section.
 
 Once your commands have been registered, they will "stay" in Discord. Anything you do in your local file after this point will **NOT** affect the commands that have been registered already. You can even delete your `deploy-commands.js` file and it won't affect the commands that have been registered already.
 
@@ -40,11 +40,11 @@ then **you will need to register the "new set of commands"** to Discord.
 
 ## Authorization
 
-Before we start registering Slash Commands, make sure your bot has the `applications.commands` scope for the particular guild that you will be working with. Refer back to [Adding your bot to servers](../preparations/adding-your-bot-to-servers.md) if you haven't done so already.
+Before we start registering slash commands, make sure your bot has the `applications.commands` scope for the particular guild that you will be working with. Refer back to [Adding your bot to servers](../preparations/adding-your-bot-to-servers.md) if you haven't done so already.
 
-## Registering Slash Commands
+## Registering slash commands
 
-A Slash Command can be registered as either **guild command** or **global command**.
+A slash command can be registered as either **guild command** or **global command**.
 
 **Guild commands** are only available to the guild you specify when registering the command. Guild commands are NOT available in DMs.
 
@@ -61,7 +61,7 @@ A bot can have up to 100 global commands.
 
 A bot can have up to 100 guild commands per guild.
 
-- Slash Command `name` must be all lowercase matching `^[\w-]{1,32}$`. (Max. character count is **32**)
+- slash command `name` must be all lowercase matching `^[\w-]{1,32}$`. (Max. character count is **32**)
 - Maximum character count allowed in `description` is **100**.
 
 You can test if your command's `name` abides by this regex, by using [https://regexr.com/63lqq](https://regexr.com/63lqq).
@@ -74,7 +74,7 @@ You can test if your command's `name` abides by this regex, by using [https://re
 
 ### Guild commands
 
-As we mentioned earlier, we only have to register the structure of our Slash Commands **once**. As such, **we strongly recommend creating a separate `deploy-commands.js` file** in your project directory. This file will be used to register, edit, and delete Slash Commands for your bot application.
+As we mentioned earlier, we only have to register the structure of our slash commands **once**. As such, **we strongly recommend creating a separate `deploy-commands.js` file** in your project directory. This file will be used to register, edit, and delete slash commands for your bot application.
 
 ```:no-line-numbers {4}
 discord-bot/
@@ -86,17 +86,17 @@ discord-bot/
 └── package.json
 ```
 
-To register Slash Commands to Discord, we make an HTTP PUT request to a specific endpoint. Thankfully, discord.js has developed separate modules to help us do this more easily. You'll need to install [`@discordjs/builders`](https://github.com/discordjs/builders), [`@discordjs/rest`](https://github.com/discordjs/discord.js-modules/blob/main/packages/rest/), and [`discord-api-types`](https://github.com/discordjs/discord-api-types/).
+To register slash commands to Discord, we make an HTTP PUT request to a specific endpoint. Thankfully, discord.js has developed separate modules to help us do this more easily. You'll need to install [`@discordjs/builders`](https://github.com/discordjs/builders), [`@discordjs/rest`](https://github.com/discordjs/discord.js-modules/blob/main/packages/rest/), and [`discord-api-types`](https://github.com/discordjs/discord-api-types/).
 
 ```sh:no-line-numbers
 npm install @discordjs/builders @discordjs/rest discord-api-types
 ```
 
-- The `@discordjs/builders` module is used for building the structure of a Slash Command
+- The `@discordjs/builders` module is used for building the structure of a slash command
 - The `@discordjs/rest` module is used for making HTTP PUT request
-- The `discord-api-types` module gives us the endpoint (route) for registering Slash Commands
+- The `discord-api-types` module gives us the endpoint (route) for registering slash commands
 
-Let's suppose we want to register these 3 Slash Commands for our bot: `/ping`, `/server`, and `/user`.
+Let's suppose we want to register these 3 slash commands for our bot: `/ping`, `/server`, and `/user`.
 
 ![](../creating-your-bot/images/commandpicker.png)
 
@@ -110,7 +110,7 @@ const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { clientId, guildId, token } = require('./config.json');
 
-// Define an array with 3 Slash Commands structure
+// Define an array with 3 slash commands structure
 const commands = [
 	new SlashCommandBuilder().setName('ping').setDescription('Replies with pong!'),
 	new SlashCommandBuilder().setName('server').setDescription('Replies with server info!'),
@@ -121,7 +121,7 @@ const rest = new REST({ version: '9' }).setToken(token);
 
 (async () => {
 	try {
-		// Register the array of Slash Commands with res.put()
+		// Register the array of slash commands with res.put()
 		await rest.put(
 			Routes.applicationGuildCommands(clientId, guildId),
 			{ body: commands },
@@ -162,17 +162,17 @@ Once you fill in those variables, run:
 ```sh:no-line-numbers
 node deploy-commands.js
 ``` 
-in your project directory to register the structure of your Slash Commands to your specified guild.
+in your project directory to register the structure of your slash commands to your specified guild.
 
 Congratulations! 🎉
 
-You've successfully registered your Slash Commands. Go ahead and type `/` in your guild and you should be able to see your Slash Commands already:
+You've successfully registered your slash commands. Go ahead and type `/` in your guild and you should be able to see your slash commands already:
 
 ![](../creating-your-bot/images/commandpicker.png)
 
 ### Global commands
 
-Our `deploy-commands.js` file already registers our Slash Commands as **Guild commands**. If you want to register the commands as **Global commands**, simply change the route to:
+Our `deploy-commands.js` file already registers our slash commands as **Guild commands**. If you want to register the commands as **Global commands**, simply change the route to:
 
 :::: code-group
 ::: code-group-item deploy-commands.js
@@ -190,7 +190,7 @@ Remember what we saw earlier about command names:
 
 - Your bot **can** have a global and guild command with **the same name**
 
-If you register the a Slash Command as Guild command **and** as Global command, you will see "duplicates" commands in your guild. One will be the guild command and the other will be the global command.
+If you register the a slash command as Guild command **and** as Global command, you will see "duplicates" commands in your guild. One will be the guild command and the other will be the global command.
 :::
 
 ::: warning
@@ -199,9 +199,9 @@ Because global commands can take up to 1 hour to reflect new changes, Discord ha
 When the command is rejected, the user will see an "**Invalid interaction application command**" error message.
 :::
 
-## Editing or deleting Slash Commands
+## Editing or deleting slash commands
 
-As we saw in [What are Slash Commands?](#what-are-slash-commands) section:
+As we saw in [What are slash commands?](#what-are-slash-commands) section:
 
 ::: warning
 Once your commands have been registered, they will "stay" in Discord. Anything you do in your local file after this point will **NOT** affect the commands that have been registered already. You can even delete your `deploy-commands.js` file and it won't affect the commands that have been registered already.
@@ -214,11 +214,11 @@ If you do any of the following in your **local files**:
 then **you will need to register the "new" set of commands** to Discord.
 :::
 
-With this in mind, it's really straightforward how to edit or delete Slash Commands.
+With this in mind, it's really straightforward how to edit or delete slash commands.
 
 ### Edit
 
-To edit a Slash Command, simply change the structure of an existing Slash Command, and run the deploymnent script again to register the "new set of commands".
+To edit a slash command, simply change the structure of an existing slash command, and run the deploymnent script again to register the "new set of commands".
 
 Example: Let's edit the `ping` command by changing the `description` of it.
 
@@ -247,7 +247,7 @@ node deploy-commands.js
 
 ### Delete
 
-To delete a Slash Command, simply exclude it from the array that gets passed to `rest.put()`, and run the deploymnent script again to register the "new set of commands".
+To delete a slash command, simply exclude it from the array that gets passed to `rest.put()`, and run the deploymnent script again to register the "new set of commands".
 
 Example: Let's delete the `user` command. To do so, we simply exclude it from the `commands` array.
 
@@ -285,7 +285,7 @@ Naturally, if you want to delete all commands, you provide an empty array to `re
 
 ## Options
 
-Slash Commands can have `options`. Think of these options as arguments to a function.
+Slash commands can have `options`. Think of these options as arguments to a function.
 
 ::: warning
 Maximum number of option allowed in a single command is **25**.

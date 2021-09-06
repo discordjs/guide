@@ -1,16 +1,16 @@
 ## Permissions
 
-Need to keep some of your commands safe from prying eyes, or only available to the right people? Slash Commands support permission overwrites! For both guild and global commands, you can enable or disable a specific **user** or **role** in a guild from using a command.
+Need to keep some of your commands safe from prying eyes, or only available to the right people? slash commands support permission overwrites! For both guild and global commands, you can enable or disable a specific **user** or **role** in a guild from using a command.
 
 ::: tip
 For now, if you don't have permission to use a command, they'll show up in the command picker as disabled and unusable. They will **not** be hidden.
 :::
 
-As you might have noticed now, we were able to use all of our Slash Commands right after registering them. This is because the `default_permission` of a Slash Command is set to `true` by default if you don't specify it **during registration**.
+As you might have noticed now, we were able to use all of our slash commands right after registering them. This is because the `default_permission` of a slash command is set to `true` by default if you don't specify it **during registration**.
 
-You can set the `default_permission` of your Slash Command to `false` if you want them to be disabled for everyone (literally). Setting `default_permission` to `false` will disallow *anyone* in a guild from using the command—even Administrators and guild owners—unless a specific overwrite is configured. **It will also disable the command (if it's a global one) from being usable in DMs**.
+You can set the `default_permission` of your slash command to `false` if you want them to be disabled for everyone (literally). Setting `default_permission` to `false` will disallow *anyone* in a guild from using the command—even Administrators and guild owners—unless a specific overwrite is configured. **It will also disable the command (if it's a global one) from being usable in DMs**.
 
-We can set the `default_permission` of a Slash Command with the `setDefaultPermission()` method of the `SlashCommandBuilder()` builder that we have been using so far. For example, if we want to do that for the `ping` command:
+We can set the `default_permission` of a slash command with the `setDefaultPermission()` method of the `SlashCommandBuilder()` builder that we have been using so far. For example, if we want to do that for the `ping` command:
 
 ```js:no-line-numbers
 new SlashCommandBuilder()
@@ -24,7 +24,7 @@ Then, we simply register the command again:
 node deploy-commands.js
 ```
 
-As we mentioned earlier, a Slash Command can either have `default_permission` set to `true`, which will *enable the command for everyone*, OR it can have it set to `false`, which will *disable it for everyone*. As a result, there are two different approaches for controlling the permission of a Slash Command:
+As we mentioned earlier, a slash command can either have `default_permission` set to `true`, which will *enable the command for everyone*, OR it can have it set to `false`, which will *disable it for everyone*. As a result, there are two different approaches for controlling the permission of a slash command:
 
 - Blacklist
 - Whitelist

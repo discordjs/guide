@@ -1,18 +1,15 @@
-## Replying to Slash Commands
+## Replying to slash commands
 
-Once you've registered your Slash Commands, users can now use your Slash Commands! Our next step is to make our bot reply to those Slash Commands. Let's go back to the `index.js` file. Your `index.js` file should look like this:
+Once you've registered your slash commands, users can now use your slash commands! Our next step is to make our bot reply to those slash commands. Let's go back to the `index.js` file. Your `index.js` file should look like this:
 
 :::: code-group
 ::: code-group-item index.js
 ```js {13-23}
-// Require the necessary discord.js classes
 const { Client, Intents } = require('discord.js');
 const { token } = require('./config.json');
 
-// Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-// When the client is ready, run this code (only once)
 client.once('ready', () => {
 	console.log('Ready!');
 });
@@ -29,13 +26,12 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 
-// Login to Discord with your client's token
 client.login(token);
 ```
 :::
 ::::
 
-A Slash Command is just one type of interaction. Therefore, we should first check if the interaction is a Slash Command by calling `.isCommand()`. Next, we check the name of the command by accessing the `.commandName` property. Finally, we reply to the interaction by calling `.reply()`.
+A slash command is just one type of interaction. Therefore, we should first check if the interaction is a slash command by calling `.isCommand()`. Next, we check the name of the command by accessing the `.commandName` property. Finally, we reply to the interaction by calling `.reply()`.
 
 ::: danger
 You MUST reply to the interaction within **3 seconds** of receiving it.
@@ -58,7 +54,7 @@ and then use the `/ping` command in your guild. You should see something like th
 
 Congratulations! 🎉
 
-You now have 3 working Slash Commands. Go ahead and try out `/server` and `/user` as well. 
+You now have 3 working slash commands. Go ahead and try out `/server` and `/user` as well. 
 
 Your `/server` should look like this:
 
@@ -99,7 +95,7 @@ Here's a flowchart to help you understand visually *which* methods are you allow
 
 ### Defer
 
-As we saw in the [Replying to Slash Commands](#replying-to-slash-commands) section:
+As we saw in the [Replying to slash commands](#replying-to-slash-commands) section:
 
 ::: danger
 You MUST reply to the interaction within **3 seconds** of receiving it.
