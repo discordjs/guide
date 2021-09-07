@@ -1,48 +1,4 @@
-# Slash commands
-
-::: warning
-This page will **NOT** be using the command handler version of the `index.js` and `deploy-commands.js` files for the sake of simplicity during explanation. However, all the concepts and examples in this page are also applicable for the command handler version of the aformentioned files.
-:::
-
-## What are slash commands?
-
-Discord provides developers with the option to create client-integrated slash commands.
-
-Here is a quick 1 minute explanation video from Discord:
-
-<iframe width="854" height="480" src="https://www.youtube.com/embed/4XxcpBxSCiU?fs=0&modestbranding=1&rel=0" frameborder="0"></iframe>
-
-If you want a more technical explanation, you can read the [blog post by Discord](https://blog.discord.com/slash-commands-are-here-8db0a385d9e6).
-
-You can also always refer to [Discord's official documentation](https://discord.com/developers/docs/interactions/application-commands).
-
-In this page, we'll cover how to make them work using discord.js!
-
-To make slash commands work, you need to do two things:
-
-1. **Register the structure of the slash command**: You will be creating a separate file called `deploy-commands.js` for registration. In this step, you are essentially telling Discord:
-> "Show *these* commands to the user when they type `/` in the chat."
-
-2. **Reply to the slash command**: In this step, you decide *what* and *how* to reply to the user who used your slash command. This is essentially the "bot" itself (the `index.js`).
-
-::: warning
-You only need to register the structure of your slash commands once. You will see what we mean by "structure" in the next section.
-
-Once your commands have been registered, they will "stay" in Discord. Anything you do in your local file after this point will **NOT** affect the commands that have been registered already. You can even delete your `deploy-commands.js` file and it won't affect the commands that have been registered already.
-
-If you do any of the following in your **local files**:
-- Add a new command
-- Edit an existing command's structure (e.g. changing `setDescription('Replies with pong!')` to `setDescription('some random description')`, or adding an option such as `.addStringOption()`)
-- Remove a command
-
-then **you will need to register the "new set of commands"** to Discord.
-:::
-
-## Authorization
-
-Before you start registering slash commands, make sure your bot has the `applications.commands` scope for the particular guild that you will be working with. Refer back to [Adding your bot to servers](../preparations/adding-your-bot-to-servers.md) if you haven't done so already.
-
-## Registering slash commands
+# Registering slash commands
 
 A slash command can be registered as either **guild command** or **global command**.
 
@@ -61,20 +17,20 @@ A bot can have up to 100 global commands.
 
 A bot can have up to 100 guild commands per guild.
 
-- slash command `name` must be all lowercase matching `^[\w-]{1,32}$`. (Max. character count is **32**)
+- A slash command's `name` must be all lowercase matching `^[\w-]{1,32}$`. (Max. character count is **32**)
 - Maximum character count allowed in `description` is **100**.
 
 You can test if your command's `name` abides by this regex, by using [https://regexr.com/63lqq](https://regexr.com/63lqq).
 
 ::: tip
-**Guild commands** are available only within the guild specified on registration. Guild commands update **instantly**. We recommend you use guild commands for quick testing, and global commands when they are ready for public use.
+**Guild commands** update **instantly**. We recommend you use guild commands for quick testing, and global commands when they are ready for public use.
 
-**Global commands** are available on all your bot's guilds. Global commands are cached for **1 hour**. That means that new global commands will **fan out slowly across all guilds**, and will be guaranteed to be updated in an hour.
+**Global commands** are cached for **1 hour**. That means that new global commands will **fan out slowly across all guilds**, and will be guaranteed to be updated in an hour.
 :::
 
-### Guild commands
+## Guild commands
 
-As we mentioned earlier, you only have to register the structure of your slash commands once. As such, we strongly recommend creating a separate `deploy-commands.js` file in your project directory. This file will be used to register, edit, and delete slash commands for your bot application.
+As we mentioned earlier, you only have to register the structure of your slash commands once. As such, we strongly recommend creating a separate `deploy-commands.js` file in your project directory. This file will be used to register, edit, and/or delete slash commands for your bot application.
 
 ```:no-line-numbers {4}
 discord-bot/
@@ -98,7 +54,7 @@ npm install @discordjs/builders @discordjs/rest discord-api-types
 
 Let's suppose you want to register these three slash commands for your bot: `/ping`, `/server`, and `/user`.
 
-![](../creating-your-bot/images/commandpicker.png)
+![Command Picker](../creating-your-bot/images/commandpicker.png)
 
 Here's what your `deploy-commands.js` will look like:
 
@@ -110,7 +66,7 @@ const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { clientId, guildId, token } = require('./config.json');
 
-// Define an array with 3 slash commands structure
+// Define an array with three slash commands structure
 const commands = [
 	new SlashCommandBuilder().setName('ping').setDescription('Replies with pong!'),
 	new SlashCommandBuilder().setName('server').setDescription('Replies with server info!'),
@@ -141,8 +97,13 @@ const rest = new REST({ version: '9' }).setToken(token);
 	"guildId": "876543210987654321",
 	"token": "your-token-goes-here"
 }
+```
 :::
 ::::
+
+::: tip
+The `deploy-commands.js` file we have here doesn't have a command handler (for the sake of simplicity during explanation), but the concepts and examples that are explained in this page are also applicable to the command handler version.
+:::
 
 Focus on these variables:
 
@@ -150,7 +111,7 @@ Focus on these variables:
 - `guildId`: Your development server's id
 - `commands`: An array of commands to register. 
 
-**The [`SlashCommandBuilder()`](/popular-topics/builders.md#Slash-command-builders) is used to build the structure for your commands**. As you can see from the script above, the structure of the `/ping` command has a name `ping` and a description `Replies with pong!`. The structure can include other things such as subcommand, options, choices, permission, etc. These other parts of the structure will be covered in a later section of this page.
+The [`SlashCommandBuilder()`](/popular-topics/builders.md#Slash-command-builders) from the [`@discordjs/builders`](https://github.com/discordjs/builders) module is used to build the structure for your commands. As you can see from the deployment script above, the structure of the `/ping` command has a name `ping` and a description `Replies with pong!`. The structure can include other things such as subcommand, options, choices, permission, etc. We will look at these other parts of the structure in the next few sections.
 
 Then, you make an HTTP PUT request with `rest.put()`, to the endpoint (route) `Routes.applicationGuildCommands()`, and you provide the array of commands in the body of the PUT request `{ body: commands }`.
 
@@ -170,28 +131,7 @@ You've successfully registered your slash commands. Go ahead and type `/` in you
 
 ![](../creating-your-bot/images/commandpicker.png)
 
-### Global commands
-
-Your `deploy-commands.js` file already registers your slash commands as **Guild commands**. If you want to register the commands as **Global commands**, simply change the route to:
-
-:::: code-group
-::: code-group-item deploy-commands.js
-```js :no-line-numbers {2}
-		await rest.put(
-			Routes.applicationCommands(clientId),
-			{ body: commands },
-		);
-```
-:::
-::::
-
-::: warning
-Remember what you saw earlier about command names:
-
-- Your bot **can** have a global and guild command with **the same name**
-
-If you register the a slash command as Guild command **and** as Global command, you will see "duplicates" commands in your guild. One will be the guild command and the other will be the global command.
-:::
+## Global commands
 
 ::: warning
 Because global commands can take up to 1 hour to reflect new changes, Discord has implemented them to have inherent read-repair functionality. That means that if you make an update to a global command, and a user tries to use that command before it has updated for them, Discord will do an internal version check and reject the command, and trigger a reload for that command.
@@ -199,26 +139,40 @@ Because global commands can take up to 1 hour to reflect new changes, Discord ha
 When the command is rejected, the user will see an "**Invalid interaction application command**" error message.
 :::
 
-## Editing or deleting slash commands
+Your `deploy-commands.js` file already registers your slash commands as **Guild commands**. If you want to register the commands as **Global commands**, simply change the route to:
 
-As you saw in [What are slash commands?](#what-are-slash-commands) section:
+:::: code-group
+::: code-group-item deploy-commands.js
+```js :no-line-numbers {2}
+await rest.put(
+	Routes.applicationCommands(clientId),
+	{ body: commands },
+);
+```
+:::
+::::
 
 ::: warning
-Once your commands have been registered, they will "stay" in Discord. Anything you do in your local file after this point will **NOT** affect the commands that have been registered already. You can even delete your `deploy-commands.js` file and it won't affect the commands that have been registered already.
+Remember what we mentioned earlier about command's names:
 
-If you do any of the following in your **local files**:
-- Add a new command
-- Edit an existing command's structure (e.g. changing `setDescription('Replies with pong!')` to `setDescription('some random description')`, or adding an option such as `.addStringOption()`)
-- Remove a command
+- Your bot **can** have a global and guild command with **the same name**
 
-then **you will need to register the "new" set of commands** to Discord.
+If you register the a slash command as Guild command **and** as Global command, you will see "duplicates" commands in your guild. One will be the guild command and the other will be the global command.
+:::
+
+## Editing or deleting slash commands
+
+As we mentioned previously in the [Creating commands](../creating-your-bot/creating-commands.md) section:
+
+::: warning
+Once your commands have been registered, they will "stay" in Discord. Anything you do in your local files after this point will **not** affect the structure of the commands that have been registered already. You can edit the structure of a slash command or delete an existing slash command by registering a "new set of commands".
 :::
 
 With this in mind, it's really straightforward how to edit or delete slash commands.
 
 ### Edit
 
-To edit a slash command, simply change the structure of an existing slash command, and run the deploymnent script again to register the "new set of commands".
+To edit a slash command, simply change the structure of an existing slash command, and run the deployment script again to register the "new set of commands".
 
 Example: Let's edit the `ping` command by changing the `description` of it.
 
@@ -234,7 +188,7 @@ const commands = [
 After:
 ```js:no-line-numbers {2}
 const commands = [
-	new SlashCommandBuilder().setName('ping').setDescription('Replies with pong!!!!!!!!!!!!!!!!!'),
+	new SlashCommandBuilder().setName('ping').setDescription('Replies with pong!!!'),
 	new SlashCommandBuilder().setName('server').setDescription('Replies with server info!'),
 	new SlashCommandBuilder().setName('user').setDescription('Replies with user info!'),
 ].map(command => command.toJSON());
@@ -275,12 +229,12 @@ node deploy-commands.js
 
 ---
 
-Naturally, if you want to delete all commands, you provide an empty array to `rest.put()`.
+Naturally, if you want to delete all your slash commands, you provide an empty array in the body of `rest.put()`.
 ```js:no-line-numbers {3}
-		await rest.put(
-			Routes.applicationGuildCommands(clientId, guildId),
-			{ body: [] },
-		);
+await rest.put(
+  Routes.applicationGuildCommands(clientId, guildId),
+  { body: [] },
+);
 ```
 
 ## Options
@@ -291,7 +245,7 @@ Slash commands can have `options`. Think of these options as arguments to a func
 Maximum number of option allowed in a single command is **25**.
 :::
 
-Let's suppose you want to add an option to your `/ping` command. Give it a name of `option-name` and a description of `some description`. It will look like this in Discord:
+Let's suppose you want to add an option of type `STRING` to your `/ping` command. We'll give it a name of `option-name` and a description of `some description`. It will look like this in Discord:
 
 ![](./images/option.png)
 
@@ -306,17 +260,9 @@ new SlashCommandBuilder()
       .setDescription('some description'))
 ```
 
-After registering the commad again, users can now use your `/ping` command with the `option-name` option. If a user used your `/ping` command like this:
+After registering the commad again, users can now use your `/ping` command with the `option-name` option. 
 
 ![](./images/option-value.png)
-
-Then you can grab the value `hello this is some string input` from the `option-name` option in your reply like this:
-
-```js:no-line-numbers {1-2}
-const userInput = interaction.options.getString('option-name');
-console.log(userInput); // expected output: "hello this is some string input"
-await interaction.reply('Pong!');
-```
 
 ### Required options
 
@@ -342,7 +288,7 @@ Required options must be listed **before** optional options in the command struc
 
 ### Types of option
 
-As you saw earlier, we added an option with the `addStringOption()` method from the `SlashCommandBuilder()` builder. This will give your `/ping` command an option of type `STRING`, meaning your bot is expecting a `STRING` value from the interaction. There are other types of options as well, and the builder has a method for each of these types, namely:
+As you saw earlier, we added an option with the `addStringOption()` method from the `SlashCommandBuilder()` builder. This will give your `/ping` command an option of type `STRING`, meaning your bot is expecting a `STRING` value from the option. There are other types of options as well, and the builder has a method for each of these types, namely:
 
 Method | Type | Note
 --- | --- | ---
@@ -354,25 +300,6 @@ Method | Type | Note
 `.addRoleOption()` | `ROLE` |
 `.addMentionableOption()` | `MENTIONABLE` | 	Includes users and roles
 `.addNumberOption()` | `NUMBER` | 	Any double between -2^53 and 2^53
-
-Likewise, the [`CommandInteractionOptionResolver`](https://discord.js.org/#/docs/main/stable/class/CommandInteractionOptionResolver) object that you receive from the `interactionCreate` event has a method for each of these types, namely:
-
-Method | Returns
---- | ---
-`.getString()` | [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
-`.getInteger()` | [`Number`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)
-`.getBoolean()` | [`Boolean`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)
-`.getUser()` | [`User`](https://discord.js.org/#/docs/main/stable/class/User)
-`.getChannel()` | [`GuildChannel`](https://discord.js.org/#/docs/main/stable/class/GuildChannel)
-`.getRole()` | [`Role`](https://discord.js.org/#/docs/main/stable/class/Role)
-`.getMentionable()` | [`User`](https://discord.js.org/#/docs/main/stable/class/User) or [`GuildMember`](https://discord.js.org/#/docs/main/stable/class/GuildMember) or [`Role`](https://discord.js.org/#/docs/main/stable/class/Role)
-`.getNumber()` | [`Number`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)
-`.getMember()` | [`GuildMember`](https://discord.js.org/#/docs/main/stable/class/GuildMember)
-
-Example:
-```js:no-line-numbers
-const userInput = interaction.options.getString('option-name');
-```
 
 ### Predefined Choices
 
@@ -395,19 +322,7 @@ new SlashCommandBuilder()
       .addChoice('name2', 'value3'))
 ```
 
-If a user used your `/ping` command and selected the `name2` choice in the `option-name` option, like so:
-
-![](./images/choices-selected.png)
-
-then the value that your bot receives is the string `"value2"`.
-
-```js {2}
-const userInput = interaction.options.getString('option-name');
-console.log(userInput); // expected output: "value2"
-await interaction.reply('Pong!');
-```
-
-As you can see, the first parameter of `.addChoice()` is the name of the choice that will be displayed in Discord, while the second parameter is the value of that choice that your bot will receive.
+The first parameter of `.addChoice()` is the name of the choice that will be displayed in Discord, while the second parameter is the value of that choice that your bot will receive.
 
 ::: warning
 - Max choice count is **25**.
@@ -612,14 +527,3 @@ And there you have it. You've built the structure of a command that contains sub
 This is what it will look like if you tried to use `/permissions user get`:
 
 ![](./images/subcommand-option.png)
-
-You can easily check the name of a subcommand group or subcommand when you receive an interaction, like so:
-
-```js:no-line-numbers
-const subcommandgroup = interaction.options.getSubcommandGroup();
-const subcommand = interaction.options.getSubcommand();
-
-console.log(subcommandgroup); // expected output: "user"
-console.log(subcommand); // expected output: "get"
-```
-

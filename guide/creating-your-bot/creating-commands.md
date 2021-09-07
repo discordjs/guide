@@ -13,23 +13,33 @@ This page is a follow-up and bases its code on [the previous page](/creating-you
 	</DiscordMessage>
 </DiscordMessages>
 
-Discord allows developers to register [slash commands](https://discord.com/developers/docs/interactions/application-commands), which provide users a first-class way of interacting directly with your application. Before being able to reply to a command, you must first register it.
+Discord allows developers to register [slash commands](https://discord.com/developers/docs/interactions/application-commands), which provide users a first-class way of interacting directly with your application. 
+
+Here is a quick [1 minute explanation video from Discord](https://youtu.be/4XxcpBxSCiU). If you want a more technical explanation, you can read the [blog post by Discord](https://blog.discord.com/slash-commands-are-here-8db0a385d9e6). You can also always refer to [Discord's official documentation](https://discord.com/developers/docs/interactions/application-commands).
 
 To make slash commands work, you need to do two things:
 
-1. **Register the structure of the slash command**: In this step, you are essentially telling Discord:
-> "Show *these* commands to the user when they type `/` in the chat."
-2. **Reply to the slash command**: In this step, you decide *what* and *how* to reply to the user who used your slash command. This is essentially your "bot" (the `index.js` that you've created so far).
+1. **Register the structure of the slash command**: You need to register your slash commands so Discord can display them in the command picker. This is how slash commands look like in the command picker.
+
+![Command Picker](./images/commandpicker.png)
+
+2. **Reply to the slash command**: When a user use your slash command, your bot needs to reply to it. This is essentially the `index.js` file that you've created so far.
 
 ::: warning
-You only need to register the structure of your slash sommands once. You can edit the structure of a slash command by registering it again with a new structure. You will see what we mean by "structure" in the next section.
+You only need to register the structure of your slash commands once. You will see what we mean by "structure" in the next section.
+
+Once your commands have been registered, they will "stay" in Discord. Anything you do in your local files after this point will **not** affect the structure of the commands that have been registered already. You can edit the structure of a slash command or delete an existing slash command by registering a "new set of commands".
 :::
 
 This page will only cover the bare minimum to get you started, but you can refer to our [in-depth page on slash commands](/interactions/registering-slash-commands.md) for a more detailed guide.
 
+## Authorization
+
+Before you start registering slash commands, make sure your bot has the `applications.commands` scope for the particular server that you will be working with. Refer back to [Adding your bot to servers](../preparations/adding-your-bot-to-servers.md) if you haven't done so already.
+
 ## Registering slash commands
 
-As we mentioned earlier, you only have to register the structure of your slash commands once. As such, we strongly recommend creating a separate `deploy-commands.js` file in your project directory. This file will be used to register, edit, and delete slash commands for your bot application.
+As we mentioned earlier, you only have to register the structure of your slash commands once. As such, we strongly recommend creating a separate `deploy-commands.js` file in your project directory. This file will be used to register, edit, and/or delete slash commands for your bot application.
 
 ```:no-line-numbers {4}
 discord-bot/
@@ -101,10 +111,10 @@ Focus on these variables:
 - `guildId`: Your development server's id
 - `commands`: An array of commands to register. 
 
-The [`SlashCommandBuilder()`](/popular-topics/builders.md#Slash-command-builders) is used to build the structure for your commands. As you can see from the script above, the structure of the `/ping` command has a name `ping` and a description `Replies with pong!`. The structure can include other things such as subcommand, options, choices, permission, etc. You can refer to our [in-depth page on slash commands](/interactions/registering-slash-commands.md) to learn more about it.
+The [`SlashCommandBuilder()`](/popular-topics/builders.md#Slash-command-builders) from the [`@discordjs/builders`](https://github.com/discordjs/builders) module is used to build the structure for your commands. As you can see from the deployment script above, the structure of the `/ping` command has a name `ping` and a description `Replies with pong!`. The structure can include other things such as subcommand, options, choices, permission, etc. You can refer to our [in-depth page on slash commands](/interactions/registering-slash-commands.md) to learn more about it.
 
 ::: tip
-In order to get your client and guild ids, open Discord and go to your settings. On the "Advanced" page, turn on "Developer Mode". This will enable a "Copy ID" button in the context menu when you right-click on a server icon, a user's profile, etc.
+In order to get your client and guild IDs, open Discord and go to your settings. On the "Advanced" page, turn on "Developer Mode". This will enable a "Copy ID" button in the context menu when you right-click on a server icon, a user's profile, etc.
 :::
 
 Once you fill in those variables, run:
@@ -119,24 +129,13 @@ You've successfully registered your slash commands. Go ahead and type `/` in you
 
 ![Command Picker](./images/commandpicker.png)
 
-::: warning
-Once your commands have been registered, they will "stay" in Discord. Anything you do in your `deploy-commands.js` file after this point will **NOT** affect the commands that have been registered already. 
-
-If you do any of the following:
-- Add a new command to the `commands` array
-- Edit an existing command's structure (e.g. changing `setDescription('Replies with pong!')` to `setDescription('some random description')`)
-- Remove a command from the `commands` array
-
-you will need to run `node deploy-commands.js` again to register the "new" set of commands to Discord.
-:::
-
 ## Replying to slash commands
 
 Once you've registered your slash commands, you can reply to them with your bot. Let's go back to your `index.js` file, and add these lines:
 
 :::: code-group
 ::: code-group-item index.js
-```js {13-15}
+```js {10-12}
 const { Client, Intents } = require('discord.js');
 const { token } = require('./config.json');
 
@@ -147,7 +146,7 @@ client.once('ready', () => {
 });
 
 client.on('interactionCreate', async interaction => {
-	console.log(interaction)
+	console.log(interaction);
 });
 
 client.login(token);
@@ -187,15 +186,15 @@ CommandInteraction {
 }
 ```
 
-If you see something like that getting logged in your terminal, then that means your bot is receiving the interaction event correctly! However, your bot hasn't replied to the interaction yet, which is why you will see something like this in your Discord:
+If you see something like that in your terminal, then your bot is receiving the interaction events correctly! However, your bot hasn't replied to the interaction yet, which is why you will see something like this in your Discord:
 
 ![](./images/interactionfailed.png)
 
-Let's go ahead and fix that by making these changes inside the callback:
+Let's go ahead and fix that by replying to the interaction:
 
 :::: code-group
 ::: code-group-item index.js
-```js {14-22}
+```js {11-21}
 const { Client, Intents } = require('discord.js');
 const { token } = require('./config.json');
 
@@ -208,11 +207,13 @@ client.once('ready', () => {
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'ping') {
+	const { commandName } = interaction;
+
+	if (commandName === 'ping') {
 		await interaction.reply('Pong!');
-	} else if (interaction.commandName === 'server') {
+	} else if (commandName === 'server') {
 		await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
-	} else if (interaction.commandName === 'user') {
+	} else if (commandName === 'user') {
 		await interaction.reply(`Your tag: ${interaction.user.tag}\nYour id: ${interaction.user.id}`);
 	}
 });
@@ -222,27 +223,31 @@ client.login(token);
 :::
 ::::
 
-As we mentioned earlier, a slash command is just one type of interaction. Therefore, you should first check if the interaction is a slash command by calling `.isCommand()`. Next, you should check the name of the command by accessing the `.commandName` property. Finally, you reply to the interaction by calling `.reply()`.
+As we mentioned earlier, a slash command is just one type of interaction. Therefore, you should first check if the interaction is a slash command by calling `interaction.isCommand()` (line 11). 
+
+Next, you should check the name of the command by accessing the `commandName` property (line 13). Once you have the name of the command, you can use some `if`/`else if` statements to reply accordingly. 
+
+Finally, you reply to the interaction by calling `interaction.reply()`.
 
 ::: warning
 You must reply to the interaction within **three seconds** of receiving it.
 :::
 
-For the `ping` command, you simply reply back with a `Pong!` message.
+For the `ping` command (line 16), you simply reply back with a `Pong!` message.
 
-For the `server` command, you can access the `.guild` property, which refers to the guild the interaction was sent in. Note that Discord servers are referred to as "guilds" in the Discord API and discord.js library. This `.guild` is an instance of [Guild](https://discord.js.org/#/docs/main/stable/class/Guild) which exposes properties such as `.name` and `.memberCount`.
+For the `server` command (line 18), you can access the `.guild` property, which refers to the guild the interaction was sent in. Note that Discord servers are referred to as "guilds" in the Discord API and discord.js library. This `.guild` is an instance of [Guild](https://discord.js.org/#/docs/main/stable/class/Guild) which exposes properties such as `.name` and `.memberCount`.
 
 ::: tip
 Refer to the <DocsLink path="class/Guild" /> documentation for a list of all the available properties and methods!
 :::
 
-For the `user` command, you can access the `.user` property, which refers to the user who used the command. This `.user` is an instance of [User](https://discord.js.org/#/docs/main/stable/class/User) which exposes properties such as `.tag` and `.id`.
+For the `user` command (line 20), you can access the `.user` property, which refers to the user who used the command. This `.user` is an instance of [User](https://discord.js.org/#/docs/main/stable/class/User) which exposes properties such as `.tag` and `.id`.
 
 ::: tip
 Refer to the <DocsLink path="class/User" /> documentation for a list of all the available properties and methods!
 :::
 
-Now that you have it fixed, let's start the bot again:
+Now that your bot is replying to your slash commands, let's start the bot again:
 ```sh:no-line-numbers
 node index.js
 ```
