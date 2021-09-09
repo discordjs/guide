@@ -184,7 +184,7 @@ The return value of a `.reply()` with the `fetchReply` option set to `true` is a
 client.on('interactionCreate', async interaction => {
 	if (commandName === 'delete') {
 		try {
-const replyMessage = await interaction.reply({ content: 'This message will be deleted.', fetchReply: true });
+			const replyMessage = await interaction.reply({ content: 'This message will be deleted.', fetchReply: true });
 			setTimeout(() => replyMessage.delete(), 10000);
 		} catch (error) {
 			// handle error
