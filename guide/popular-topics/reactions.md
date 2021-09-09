@@ -60,7 +60,7 @@ client.on('interactionCreate', async interaction => {
 	const { commandName } = interaction;
 
 	if (commandName === 'react') {
-		const message = await interaction.reply('You can react with Unicode emojis!', { fetchReply: true });
+		const message = await interaction.reply({ content: 'You can react with Unicode emojis!', fetchReply: true });
 		message.react('😄');
 	}
 });
@@ -107,7 +107,7 @@ client.on('interactionCreate', async interaction => {
 	const { commandName } = interaction;
 
 	if (commandName === 'react-custom') {
-		const message = await interaction.reply('You can react with custom emojis!', { fetchReply: true });
+		const message = await interaction.reply({ content: 'You can react with custom emojis!', fetchReply: true });
 		message.react('123456789012345678');
 	}
 });
@@ -158,7 +158,7 @@ Using `.find()`, your code would look something like this:
 
 ```js {3-4}
 if (commandName === 'react-custom') {
-	const message = await interaction.reply('You can react with custom emojis!', { fetchReply: true });
+	const message = await interaction.reply({ content: 'You can react with custom emojis!', fetchReply: true });
 	const reactionEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'blobreach');
 	message.react(reactionEmoji);
 }
@@ -170,7 +170,7 @@ Using `.get()`, your code would look something like this:
 
 ```js {3-4}
 if (commandName === 'react-custom') {
-	const message = await interaction.reply('You can react with custom emojis!', { fetchReply: true });
+	const message = await interaction.reply({ content: 'You can react with custom emojis!', fetchReply: true });
 	const reactionEmoji = client.emojis.cache.get('123456789012345678');
 	message.react(reactionEmoji);
 }
@@ -260,7 +260,7 @@ client.on('interactionCreate', async interaction => {
 	const { commandName } = interaction;
 
 	if (commandName === 'fruits') {
-		const message = await interaction.reply('Reacting with fruits!', { fetchReply: true });
+		const message = await interaction.reply({ content: 'Reacting with fruits!', fetchReply: true });
 		message.react('🍎')
 			.then(() => message.react('🍊'))
 			.then(() => message.react('🍇'))
@@ -278,7 +278,7 @@ client.on('interactionCreate', async interaction => {
 	const { commandName } = interaction;
 
 	if (commandName === 'fruits') {
-		const message = await interaction.reply('Reacting with fruits!', { fetchReply: true });
+		const message = await interaction.reply({ content: 'Reacting with fruits!', fetchReply: true });
 
 		try {
 			await message.react('🍎');
@@ -356,7 +356,7 @@ However, if you don't mind the order the emojis react in, you can take advantage
 
 ```js {3-8}
 if (commandName === 'fruits') {
-	const message = await interaction.reply('Reacting with fruits!', { fetchReply: true });
+	const message = await interaction.reply({ content: 'Reacting with fruits!', fetchReply: true });
 	Promise.all([
 		message.react('🍎'),
 		message.react('🍊'),
