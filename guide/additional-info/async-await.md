@@ -101,7 +101,7 @@ If you don't know how Node.js asynchronous execution works, you would probably t
 client.on('interactionCreate', interaction => {
 	// ...
 	if (commandName === 'react') {
-		const message = interaction.reply('Reacting!', { fetchReply: true });
+		const message = interaction.reply({ content: 'Reacting!', fetchReply: true });
 		message.react('🇦');
 		message.react('🇧');
 		message.react('🇨');
@@ -115,7 +115,7 @@ But since all of these methods are started at the same time, it would just be a 
 client.on('interactionCreate', interaction => {
 	// ...
 	if (commandName === 'react') {
-		interaction.reply('Reacting!', { fetchReply: true })
+		interaction.reply({ content: 'Reacting!', fetchReply: true })
 			.then(message => {
 				message.react('🇦')
 					.then(() => message.react('🇧'))
@@ -134,7 +134,7 @@ In this piece of code, the Promises are [chain resolved](https://developer.mozil
 client.on('interactionCreate', async interaction => {
 	// ...
 	if (commandName === 'react') {
-		const message = await interaction.reply('Reacting!', { fetchReply: true });
+		const message = await interaction.reply({ content: 'Reacting!', fetchReply: true });
 		await message.react('🇦');
 		await message.react('🇧');
 		await message.react('🇨');
@@ -148,7 +148,7 @@ It's mostly the same code, but how would you catch Promise rejections now since 
 client.on('interactionCreate', async interaction => {
 	if (commandName === 'react') {
 		try {
-			const message = await interaction.reply('Reacting!', { fetchReply: true });
+			const message = await interaction.reply({ content: 'Reacting!', fetchReply: true });
 			await message.react('🇦');
 			await message.react('🇧');
 			await message.react('🇨');
@@ -169,7 +169,7 @@ Let's look at an example where you want to delete a sent reply.
 client.on('interactionCreate', interaction => {
 	// ...
 	if (commandName === 'delete') {
-		interaction.reply('This message will be deleted.', { fetchReply: true })
+		interaction.reply({ content: 'This message will be deleted.', fetchReply: true })
 			.then(replyMessage => setTimeout(() => replyMessage.delete(), 10000))
 			.catch(error => {
 				// handle error
@@ -184,8 +184,8 @@ The return value of a `.reply()` with the `fetchReply` option set to `true` is a
 client.on('interactionCreate', async interaction => {
 	if (commandName === 'delete') {
 		try {
-			const replyMessage = await interaction.reply('This message will be deleted.', { fetchReply: true });
-			await replyMessage.delete({ timeout: 10000 });
+			interaction.reply({ content: 'This message will be deleted.', fetchReply: true });
+			setTimeout(() => replyMessage.delete(), 10000);
 		} catch (error) {
 			// handle error
 		}
