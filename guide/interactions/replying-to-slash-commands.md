@@ -375,7 +375,7 @@ await interaction.followUp({ content: 'second followup', ephemeral: false })
 ## Fetching the reply after sending it
 
 ::: danger
-You **cannot** fetch an ephemeral message.
+Unless you're using discord.js 13.2.0 or higher, you **cannot** fetch an ephemeral message.
 :::
 
 You might need the `Message` object of the reply for various reasons, such as adding reactions. You can use the [`CommandInteraction#fetchReply()`](https://discord.js.org/#/docs/main/stable/class/CommandInteraction?scrollTo=fetchReply) method to fetch the `Message` instance of the reply:

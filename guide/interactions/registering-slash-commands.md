@@ -30,7 +30,7 @@ You can test if your command's `name` abides by this regex, by using [https://re
 
 ## Guild commands
 
-As we mentioned earlier, you only have to register the structure of your slash commands once. As such, we strongly recommend creating a separate `deploy-commands.js` file in your project directory. This file will be used to register, edit, and/or delete slash commands for your bot application.
+As we mentioned previously, you only have to register the structure of your slash commands once. As such, we strongly recommend creating a separate `deploy-commands.js` file in your project directory. This file will be used to register, edit, and/or delete slash commands for your bot application.
 
 ```:no-line-numbers {4}
 discord-bot/
@@ -42,14 +42,14 @@ discord-bot/
 └── package.json
 ```
 
-To register slash commands to Discord, you make an HTTP PUT request to a specific endpoint. Thankfully, discord.js has developed separate modules to help us do this more easily. You'll need to install [`@discordjs/builders`](https://github.com/discordjs/builders), [`@discordjs/rest`](https://github.com/discordjs/discord.js-modules/blob/main/packages/rest/), and [`discord-api-types`](https://github.com/discordjs/discord-api-types/).
+To register slash commands to Discord, you make an HTTP `PUT` request to a specific endpoint. Thankfully, discord.js has developed separate modules to help us do this more easily. You'll need to install [`@discordjs/builders`](https://github.com/discordjs/builders), [`@discordjs/rest`](https://github.com/discordjs/discord.js-modules/blob/main/packages/rest/), and [`discord-api-types`](https://github.com/discordjs/discord-api-types/).
 
 ```sh:no-line-numbers
 npm install @discordjs/builders @discordjs/rest discord-api-types
 ```
 
 - The `@discordjs/builders` module is used for building the structure of a slash command
-- The `@discordjs/rest` module is used for making HTTP PUT request
+- The `@discordjs/rest` module is used for making HTTP `PUT` request
 - The `discord-api-types` module gives us the endpoint (route) for registering slash commands
 
 Let's suppose you want to register these three slash commands for your bot: `/ping`, `/server`, and `/user`.
@@ -113,7 +113,7 @@ Focus on these variables:
 
 The [`SlashCommandBuilder()`](/popular-topics/builders.md#Slash-command-builders) from the [`@discordjs/builders`](https://github.com/discordjs/builders) module is used to build the structure for your commands. As you can see from the deployment script above, the structure of the `/ping` command has a name `ping` and a description `Replies with pong!`. The structure can include other things such as subcommand, options, choices, permission, etc. We will look at these other parts of the structure in the next few sections.
 
-Then, you make an HTTP PUT request with `rest.put()`, to the endpoint (route) `Routes.applicationGuildCommands()`, and you provide the array of commands in the body of the PUT request `{ body: commands }`.
+Then, you make an HTTP `PUT` request with `rest.put()`, to the endpoint (route) `Routes.applicationGuildCommands()`, and you provide the array of commands in the body of the `PUT` request `{ body: commands }`.
 
 ::: tip
 In order to get your client and guild ids, open Discord and go to your settings. On the "Advanced" page, turn on "Developer Mode". This will enable a "Copy ID" button in the context menu when you right-click on a server icon, a user's profile, etc.
