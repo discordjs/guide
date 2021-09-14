@@ -374,6 +374,11 @@ player.on(AudioPlayerStatus.Idle, () => connection.destroy());
 You can learn more about these methods in the [voice section of this guide](/voice)!
 :::
 
+::: warning
+This only works correctly if you have the `GUILD_VOICE_STATES` intent enabled for your application and client.
+If you want to learn more about intents, check out [this dedicated guide on intents](/popular-topics/intents.md)!
+:::
+
 ### Why do some emojis behave weirdly?
 
 If you've tried using [the usual method of retrieving unicode emojis](/popular-topics/reactions.md#unicode-emojis), you may have noticed that some characters don't provide the expected results. Here's a short snippet that'll help with that issue. You can toss this into a file of its own and use it anywhere you need! Alternatively feel free to simply copy-paste the characters from below:
