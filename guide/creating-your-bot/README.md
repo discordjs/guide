@@ -62,9 +62,23 @@ Another common approach is storing these values in a `.env` file. This spares yo
 
 You can use the [`dotenv` package](https://www.npmjs.com/package/dotenv) for this. Once installed, require and use the package to load your `.env` file and attach the variables to `process.env`:
 
+:::: code-group
+::: code-group-item npm
 ```sh:no-line-numbers
 npm install dotenv
 ```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add dotenv
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add dotenv
+```
+:::
+::::
 
 :::: code-group
 ::: code-group-item .env

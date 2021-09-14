@@ -298,17 +298,49 @@ interaction.editReply(`Roundtrip latency: ${sent.createdTimestamp - interaction.
 
 For this to work, you need to have `ytdl-core` and `@discordjs/voice` installed.
 
-```bash
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
 npm install ytdl-core @discordjs/voice
 ```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add ytdl-core @discordjs/voice
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add ytdl-core @discordjs/voice
+```
+:::
+::::
 
 Additionally, you may need the following:
 
-```bash
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
 npm install --save @discordjs/opus # opus engine (if missing)
 sudo apt-get install ffmpeg # ffmpeg debian/ubuntu
 npm install ffmpeg-static # ffmpeg windows
 ```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add --save @discordjs/opus # opus engine (if missing)
+sudo apt-get install ffmpeg # ffmpeg debian/ubuntu
+yarn add ffmpeg-static # ffmpeg windows
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add --save @discordjs/opus # opus engine (if missing)
+sudo apt-get install ffmpeg # ffmpeg debian/ubuntu
+pnpm add ffmpeg-static # ffmpeg windows
+```
+:::
+::::
 
 ```js
 const ytdl = require('ytdl-core');

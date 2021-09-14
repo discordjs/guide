@@ -25,9 +25,23 @@ Create a `deploy-commands.js` file in your project directory. This file will be 
 
 You'll need to install [`@discordjs/builders`](https://github.com/discordjs/builders), [`@discordjs/rest`](https://github.com/discordjs/discord.js-modules/blob/main/packages/rest/), and [`discord-api-types`](https://github.com/discordjs/discord-api-types/).
 
+:::: code-group
+::: code-group-item npm
 ```sh:no-line-numbers
 npm install @discordjs/builders @discordjs/rest discord-api-types
 ```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add @discordjs/builders @discordjs/rest discord-api-types
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add @discordjs/builders @discordjs/rest discord-api-types
+```
+:::
+::::
 
 Below is a deployment script you can use. Focus on these variables:
 

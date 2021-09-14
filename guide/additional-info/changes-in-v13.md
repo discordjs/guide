@@ -4,9 +4,60 @@
 
 v13 requires Node 16.6 or higher to use, so make sure you're up to date. To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it! There are many resources online to help you with this step based on your host system.
 
-Once you've got Node up-to-date, you can install v13 by running `npm install discord.js` in your terminal or command prompt for text-only use, or `npm install discord.js @discordjs/voice` for voice support.
+Once you've got Node up-to-date, you can install v13 by running the appropriate command in your terminal or command prompt.
 
-You can check your discord.js version with `npm list discord.js`. Should it still show v12.x, uninstall (`npm uninstall discord.js`) and re-install discord.js and make sure the entry in your package.json does not prevent a major version update. Please refer to the [npm documentation](https://docs.npmjs.com/files/package.json#dependencies) for this.
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm install discord.js # text-only
+npm install discord.js @discordjs/voice # voice support
+```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add discord.js # text-only
+yarn add discord.js @discordjs/voice # voice support
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add discord.js # text-only
+pnpm add discord.js @discordjs/voice # voice support
+```
+:::
+::::
+
+You can check your discord.js version with the `list` command. Should it still show v12.x, uninstall and re-install discord.js and make sure the entry in your package.json does not prevent a major version update. Please refer to the [npm documentation](https://docs.npmjs.com/files/package.json#dependencies) for this.
+
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+# check version
+npm list discord.js
+# uninstall and re-install
+npm uninstall discord.js
+npm install discord.js
+```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+# check version
+yarn list discord.js
+# uninstall and re-install
+yarn remove discord.js
+yarn add discord.js
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+# check version
+pnpm list discord.js
+# uninstall and re-install
+pnpm remove discord.js
+pnpm add discord.js
+```
+:::
+::::
 
 ## API version
 

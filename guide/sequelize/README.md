@@ -15,11 +15,23 @@ To begin, you should install Sequelize into your discord.js project. We will exp
 
 Create a new project folder and run the following:
 
-```bash
-$ npm install --save discord.js
-$ npm install --save sequelize
-$ npm install --save sqlite3
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm install discord.js sequelize sqlite3
 ```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add discord.js sequelize sqlite3
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm install discord.js sequelize sqlite3
+```
+:::
+::::
 
 ::: danger
 Make sure you use version 5 or later of Sequelize! Version 4, as used in this guide, will pose a security threat. You can read more about this issue on the [Sequelize issue tracker](https://github.com/sequelize/sequelize/issues/7310).

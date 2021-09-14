@@ -14,9 +14,24 @@ First, you will need a proper code editor. Using programs such as Notepad and No
 
 Install the [ESLint package](https://www.npmjs.com/package/eslint) inside your project directory.
 
-```bash:no-line-numbers
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
 npm install --save-dev eslint
 ```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add eslint --dev
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add --save-dev eslint
+```
+:::
+::::
+
 
 One of the advantages proper code editors have is their ability to integrate linters via editor plugins. Install the appropriate plugin(s) for your editor of choice.
 

@@ -4,19 +4,55 @@
 
 ## Installation
 
-```bash
-npm install --save keyv
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm install keyv
 ```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add keyv
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add keyv
+```
+:::
+::::
 
 Keyv requires an additional package depending on which persistent backend you would prefer to use. If you want to keep everything in memory, you can skip this part. Otherwise, install one of the below.
 
-```bash
-npm install --save @keyv/redis
-npm install --save @keyv/mongo
-npm install --save @keyv/sqlite
-npm install --save @keyv/postgres
-npm install --save @keyv/mysql
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm install @keyv/redis
+npm install @keyv/mongo
+npm install @keyv/sqlite
+npm install @keyv/postgres
+npm install @keyv/mysql
 ```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add @keyv/redis
+yarn add @keyv/mongo
+yarn add @keyv/sqlite
+yarn add @keyv/postgres
+yarn add @keyv/mysql
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add @keyv/redis
+pnpm add @keyv/mongo
+pnpm add @keyv/sqlite
+pnpm add @keyv/postgres
+pnpm add @keyv/mysql
+```
+:::
+::::
 
 Create an instance of Keyv once you've installed Keyv and any necessary drivers.
 

@@ -10,9 +10,23 @@ In these examples, we will be using [node-fetch](https://www.npmjs.com/package/n
 
 To install node-fetch, run the following command:
 
-```bash
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
 npm install node-fetch
 ```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add node-fetch
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add node-fetch
+```
+:::
+::::
 
 ## Skeleton code
 
@@ -149,7 +163,7 @@ If you've followed the tutorial, you should have something like this:
 				:command="true"
 			>urban</DiscordInteraction>
 		</template>
-		**hello world**: The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books.
+		<strong>hello world</strong>: The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books.
 	</DiscordMessage>
 </DiscordMessages>
 

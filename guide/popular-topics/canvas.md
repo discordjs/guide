@@ -16,7 +16,30 @@ Be sure that you're familiar with things like [async/await](/additional-info/asy
 
 ### Windows
 
-You will need a package called Windows Build Tools. To install this, open Powershell as Administrator. You then can install it with either npm (`npm i --global --production windows-build-tools`) or Yarn (`yarn global add --production windows-build-tools`). It is also bundled with Chocolatey, should you choose that installation path.
+You will need a package called Windows Build Tools. To install this, open Powershell as Administrator. You then can install it with your preferred package manager. It is also bundled with Chocolatey, should you choose that installation path.
+
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm install --global --production windows-build-tools
+```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn global add --production windows-build-tools
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add --global --production windows-build-tools
+```
+:::
+::: code-group-item Chocolatey
+```sh:no-line-numbers
+choco install -y python2 gtk-runtime microsoft-build-tools libjpeg-turbo
+```
+:::
+::::
 
 Afterward, you should follow the instructions detailed [here](https://github.com/Automattic/node-canvas/wiki/Installation:-Windows). Additionally, make sure Node and Cairo are **both** either 32-bit or 64-bit; having a 32-bit version of one and a 64-bit version of the other will cause errors.
 
@@ -28,7 +51,25 @@ You can run one of the commands listed [here](https://github.com/Automattic/node
 
 ### Package installation
 
-After installing all the necessary software, run `npm i canvas` if you use npm or `yarn add canvas` if you use Yarn.
+After installing all the necessary software, run the following command in your terminal:
+
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm install canvas
+```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add canvas
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add canvas
+```
+:::
+::::
 
 ## Getting started
 

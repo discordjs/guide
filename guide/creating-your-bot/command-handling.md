@@ -5,6 +5,24 @@ Unless your bot project is a small one, it's not a very good idea to have a sing
 Here are the base files and code we'll be using:
 
 :::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm install @discordjs/rest discord-api-types
+```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add @discordjs/rest discord-api-types
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add @discordjs/rest discord-api-types
+```
+:::
+::::
+
+:::: code-group
 ::: code-group-item index.js
 ```js
 const { Client, Intents } = require('discord.js');
@@ -32,9 +50,6 @@ client.login(token);
 ```
 :::
 ::: code-group-item deploy-commands.js
-```sh:no-line-numbers
-npm install @discordjs/rest discord-api-types
-```
 ```js
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
@@ -87,9 +102,23 @@ Create a new folder named `commands`, which is where you'll store all of your co
 
 We'll be using utility methods from the [`@discordjs/builders`](https://github.com/discordjs/builders) package to build the slash command data, so open your terminal and install it.
 
+:::: code-group
+::: code-group-item npm
 ```sh:no-line-numbers
 npm install @discordjs/builders
 ```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add @discordjs/builders
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add @discordjs/builders
+```
+:::
+::::
 
 Next, create a `commands/ping.js` file for your ping command:
 
