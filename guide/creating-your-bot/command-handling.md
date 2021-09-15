@@ -175,6 +175,10 @@ for (const file of commandFiles) {
 }
 ```
 
+::: tip
+The `commands` property doesn't exist on the `Client` class by default, and it's not anything special (you could in fact call it whatever you like). We suggest adding it to the client like this so that you have access to it wherever you use your client.
+:::
+
 Use the same approach for your `deploy-commands.js` file, but instead `.push()` to the `commands` array with the JSON data for each command.
 
 ```js {1,7,9-12}
