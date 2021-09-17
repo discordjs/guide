@@ -19,7 +19,7 @@ Threads introduce a number of new gateway events, which are listed below:
 
 ## Creating and deleting threads
 
-Threads are created and deleted using the `ThreadManager` of a text or news channel.
+Threads are created and deleted using the <DocsLink path="class/ThreadManager" /> of a text or news channel.
 To create a thread you call the <DocsLink path="class/ThreadManager?scrollTo=create" /> method:
 
 <!-- eslint-skip -->
@@ -34,7 +34,7 @@ const thread = await channel.threads.create({
 console.log(`Created thread: ${thread.name}`);
 ```
 
-To delete a thread, use the `ThreadChannel#delete()` method:
+To delete a thread, use the <DocsLink path="class/ThreadChannel?scrollTo=delete" /> method:
 
 <!-- eslint-skip -->
 
@@ -45,7 +45,7 @@ await thread.delete();
 
 ## Joining and leaving threads
 
-To join your client to a ThreadChannel, use the `ThreadChannel#join()` method:
+To join your client to a ThreadChannel, use the <DocsLink path="class/ThreadChannel?scrollTo=join" /> method:
 
 <!-- eslint-skip -->
 
@@ -54,7 +54,7 @@ const thread = channel.threads.cache.find(x => x.name === 'food-talk');
 if (thread.joinable) await thread.join();
 ```
 
-And to leave one, use `ThreadChannel#leave()`;
+And to leave one, use <DocsLink path="class/ThreadChannel?scrollTo=leave" />;
 
 <!-- eslint-skip -->
 
