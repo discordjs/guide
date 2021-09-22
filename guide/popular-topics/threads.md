@@ -153,7 +153,7 @@ To add a member to a thread, use the <DocsLink path="class/ThreadMemberManager?s
 
 ```js
 const thread = channel.threads.cache.find(x => x.name === 'food-talk');
-await thread.members.add('126485019500871680');
+await thread.members.add('140214425276776449');
 ```
 
 And to remove a member from a thread, use <DocsLink path="class/ThreadMemberManager?scrollTo=remove" type="method" />:
