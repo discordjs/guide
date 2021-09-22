@@ -249,27 +249,7 @@ If you want the Snowflake of a structure instead, grab the option via `get()` an
 
 ### Subcommands
 
-If you have a command that contains subcommands, you can parse them in a very similar way as to the above examples.
-Let's say your command looks like this:
-
-```js {6-14}
-const { SlashCommandBuilder } = require('@discordjs/builders');
-
-const data = new SlashCommandBuilder()
-	.setName('info')
-	.setDescription('Get info about a user or a server!')
-	.addSubcommand(subcommand =>
-		subcommand
-			.setName('user')
-			.setDescription('Info about a user')
-			.addUserOption(option => option.setName('target').setDescription('The user')))
-	.addSubcommand(subcommand =>
-		subcommand
-			.setName('server')
-			.setDescription('Info about the server'));
-```
-
-The following snippet details the logic needed to parse the subcommands and respond accordingly using the `CommandInteractionOptionResolver#getSubcommand()` method:
+If you have a command that contains subcommands, you can parse them in a very similar way as to the above examples. The following snippet details the logic needed to parse the subcommands and respond accordingly using the `CommandInteractionOptionResolver#getSubcommand()` method:
 
 ```js {5-15}
 client.on('interactionCreate', async interaction => {
