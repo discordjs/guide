@@ -103,10 +103,11 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const data = new SlashCommandBuilder()
 	.setName('echo')
 	.setDescription('Replies with your input!')
-	.addStringOption(option =>
-		option.setName('input')
+	.addStringOption(option => {
+		return option.setName('input')
 			.setDescription('The input to echo back')
 			.setRequired(true));
+	}
 ```
 
 Notice how `.setRequired(true)` is specified within the options builder. Setting this will prevent the user from sending the command without specifying a value for this option!
