@@ -249,7 +249,7 @@ If you want the Snowflake of a structure instead, grab the option via `get()` an
 
 ### Subcommands
 
-The following snippet details the logic needed to parse the subcommands and respond accordingly using the `CommandInteractionOptionResolver#getSubcommand()` method:
+If you have a command that contains subcommands, you can parse them in a very similar way as to the above examples. The following snippet details the logic needed to parse the subcommands and respond accordingly using the `CommandInteractionOptionResolver#getSubcommand()` method:
 
 ```js {5-15}
 client.on('interactionCreate', async interaction => {

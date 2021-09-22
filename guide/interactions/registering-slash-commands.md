@@ -140,7 +140,7 @@ const data = new SlashCommandBuilder()
 
 ### Subcommands
 
-You can also use subcommands:
+Subcommands are available with the `.addSubcommand()` method:
 
 ```js {6-14}
 const { SlashCommandBuilder } = require('@discordjs/builders');
@@ -159,4 +159,3 @@ const data = new SlashCommandBuilder()
 			.setDescription('Info about the server'));
 ```
 
-How to parse this, see [here](replying-to-slash-commands.html#subcommands)
