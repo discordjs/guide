@@ -131,7 +131,7 @@ client.on('interactionCreate', async interaction => {
 	// ...
 	const context = canvas.getContext('2d');
 
-	// Since the image takes time to load, you should await it
+	// Use node-canvas's `loadImage()` utility method to load images
 	const background = await Canvas.loadImage('./wallpaper.jpg');
 
 	// This uses the canvas dimensions to stretch the image onto the entire canvas
