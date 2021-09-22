@@ -124,14 +124,15 @@ client.on('interactionCreate', async interaction => {
 });
 ```
 
-Now, you need to load the image you want to use into Canvas. To have sufficient coverage, we'll first show you how to load a basic image from a local directory. We'll be using [this image](https://github.com/discordjs/guide/blob/main/guide/popular-topics/images/canvas.jpg) as the background in the welcome image, but you can use whatever you want. Be sure to download the file, name it `wallpaper.jpg`, and save it inside the same directory as your main bot file.
+Now, you need to load the image you want to use into Canvas. You can use `node-canvas`'s [`loadImage()` utility method](https://github.com/Automattic/node-canvas#loadimage) to load images from local directories or URLs.
 
-```js {5-14}
+We'll be using [this image](https://github.com/discordjs/guide/blob/main/guide/popular-topics/images/canvas.jpg) as the background in the welcome image, but you can use whatever you want. Be sure to download the file, name it `wallpaper.jpg`, and save it inside the same directory as your main bot file.
+
+```js {5-13}
 client.on('interactionCreate', async interaction => {
 	// ...
 	const context = canvas.getContext('2d');
 
-	// Use node-canvas's `loadImage()` utility method to load images
 	const background = await Canvas.loadImage('./wallpaper.jpg');
 
 	// This uses the canvas dimensions to stretch the image onto the entire canvas
@@ -177,7 +178,6 @@ client.on('interactionCreate', async interaction => {
 	// ...
 	context.strokeRect(0, 0, canvas.width, canvas.height);
 
-	// Wait for Canvas to load the image
 	const avatar = await Canvas.loadImage(interaction.user.displayAvatarURL({ format: 'jpg' }));
 
 	// Draw a shape onto the main canvas
