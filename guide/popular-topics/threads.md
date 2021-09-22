@@ -5,17 +5,17 @@ Threads can be thought of as temporary sub-channels inside an existing channel, 
 ## Thread related gateway events
 
 ::: tip
-You can use the `isThread()` type guard to make sure a channel is a ThreadChannel!
+You can use the <DocsLink path="class/ThreadChannel?scrollTo=isThread" type="method" /> type guard to make sure a channel is a <DocsLink path="class/ThreadChannel" />!
 :::
 
 Threads introduce a number of new gateway events, which are listed below:
 
-- `Client#threadCreate`: Emitted whenever a thread is created or when the client user is added to a thread.
-- `Client#threadDelete`: Emitted whenever a thread is deleted.
-- `Client#threadUpdate`: Emitted whenever a thread is updated (e.g. name change, archive state change, locked state change).
-- `Client#threadListSync`: Emitted whenever the client user gains access to a text or news channel that contains threads.
-- `Client#threadMembersUpdate`: Emitted whenever members are added or removed from a thread. Requires `GUILD_MEMBERS` privileged intent.
-- `Client#threadMemberUpdate`: Emitted whenever the client user's thread member is updated.
+- <DocsLink path="class/Client?scrollTo=e-threadCreate" />: Emitted whenever a thread is created or when the client user is added to a thread.
+- <DocsLink path="class/Client?scrollTo=e-threadDelete" />: Emitted whenever a thread is deleted.
+- <DocsLink path="class/Client?scrollTo=e-threadUpdate" />: Emitted whenever a thread is updated (e.g. name change, archive state change, locked state change).
+- <DocsLink path="class/Client?scrollTo=e-threadListSync" />: Emitted whenever the client user gains access to a text or news channel that contains threads.
+- <DocsLink path="class/Client?scrollTo=e-threadMembersUpdate" />: Emitted whenever members are added or removed from a thread. Requires `GUILD_MEMBERS` privileged intent.
+- <DocsLink path="class/Client?scrollTo=e-threadMemberUpdate" />: Emitted whenever the client user's thread member is updated.
 
 ## Creating and deleting threads
 
