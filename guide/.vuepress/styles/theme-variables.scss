@@ -45,6 +45,7 @@
 	--c-tip-bg: #e2f5ec;
 	--c-tip-text: #215d42;
 	--c-tip-title: #359469;
+	--c-tip-link: var(--green-460);
 	--c-warning: #e7c000;
 	--c-warning-bg: rgba(255, 229, 100, 0.25);
 	--c-warning-text: #6b5900;
@@ -112,6 +113,7 @@ html.dark {
 	--c-tip-bg: rgba(66, 185, 131, 0.25);
 	--c-tip-text: #a0ddc1;
 	--c-tip-title: #66c99c;
+	--c-tip-link: var(--green-530);
 	--c-warning: #e7c000;
 	--c-warning-bg: rgba(255, 229, 100, 0.25);
 	--c-warning-text: #ffefa2;
