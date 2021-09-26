@@ -105,12 +105,12 @@ console.log(process.env.TOKEN);
 If you're using Git, you should not commit this file and should [ignore it via `.gitignore`](/creating-your-bot/#git-and-gitignore).
 :::
 
-::: details Online editors (Glitch, Heroku, Repl.it, etc.)
+::: details Online editors (Glitch, Heroku, Replit, etc.)
 While we generally do not recommend using online editors as hosting solutions, but rather invest in a proper virtual private server, these services do offer ways to keep your credentials safe as well! Please see the respective service's documentation and help articles for more information on how to keep sensitive values safe:
 
-- Glitch.com: [Storing secrets in .env](https://glitch.happyfox.com/kb/article/18)
-- Heroku.com: [Configuration variables](https://devcenter.heroku.com/articles/config-vars)
-- Repl.it: [Secrets and environment variables](https://docs.replit.com/repls/secrets-environment-variables)
+- Glitch: [Storing secrets in .env](https://glitch.happyfox.com/kb/article/18)
+- Heroku: [Configuration variables](https://devcenter.heroku.com/articles/config-vars)
+- Replit: [Secrets and environment variables](https://docs.replit.com/repls/secrets-environment-variables)
 :::
 
 ### Git and `.gitignore`
