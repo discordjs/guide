@@ -179,19 +179,19 @@ You will probably want to set up additional validation, such as required permiss
 		.prefix
 	</DiscordMessage>
 	<DiscordMessage profile="bot">
-		Prefix is <code class="discord-message-inline-code">.</code>
+		Prefix is <DiscordMarkdown>`.`</DiscordMarkdown>
 	</DiscordMessage>
 	<DiscordMessage profile="user">
 		.prefix $
 	</DiscordMessage>
 	<DiscordMessage profile="bot">
-		Successfully set prefix to <code class="discord-message-inline-code">$</code>
+		Successfully set prefix to <DiscordMarkdown>`$`</DiscordMarkdown>
 	</DiscordMessage>
 	<DiscordMessage profile="user">
 		$prefix
 	</DiscordMessage>
 	<DiscordMessage profile="bot">
-		Prefix is <code class="discord-message-inline-code">$</code>
+		Prefix is <DiscordMarkdown>`$`</DiscordMarkdown>
 	</DiscordMessage>
 </DiscordMessages>
 
