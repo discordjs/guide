@@ -32,6 +32,11 @@
 	a code {
 		color: var(--c-text-accent);
 	}
+
+	pre,
+	pre[class*=language-] {
+		word-wrap: normal;
+	}
 }
 
 html.dark .theme-default-content {
