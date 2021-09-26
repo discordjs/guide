@@ -50,7 +50,7 @@ There are also two methods to format hyperlinks. `hyperlink()` will format the U
 const { hyperlink, hideLinkEmbed } = require('@discordjs/builders');
 const url = 'https://discord.js.org/';
 
-const link = hyperlink(url);
+const link = hyperlink('discord.js', url);
 const hiddenEmbed = hideLinkEmbed(url);
 ```
 
