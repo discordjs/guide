@@ -29,7 +29,7 @@ pnpm add node-fetch@2.6.5
 ::::
 
 ::: tip
-We're installing version 2.6.5 of node-fetch because version 3+ doesn't works with `require()` syntax
+We're installing version 2.6.5 of `node-fetch` because versions 3+ do not support `require()` syntax.
 :::
 
 ## Skeleton code
