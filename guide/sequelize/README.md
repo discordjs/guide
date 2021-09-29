@@ -111,7 +111,7 @@ To do that in Sequelize, you define a model based on this structure, as shown be
 ```js
 /*
  * equivalent to: CREATE TABLE tags(
- * name VARCHAR(255),
+ * name VARCHAR(255) UNIQUE,
  * description TEXT,
  * username VARCHAR(255),
  * usage_count  INT NOT NULL DEFAULT 0
