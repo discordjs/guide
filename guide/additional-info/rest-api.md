@@ -71,7 +71,7 @@ const fetch = require('node-fetch');
 
 ### Random Cat
 
-Random cat's API is available at https://aws.random.cat/meow and returns a [JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) response. To actually fetch data from the API, you're going to do the following:
+Random cat's API is available at [https://aws.random.cat/meow](https://aws.random.cat/meow) and returns a [JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) response. To actually fetch data from the API, you're going to do the following:
 
 ```js
 fetch('https://aws.random.cat/meow').then(response => response.json());
@@ -83,8 +83,9 @@ It may seem like this does nothing, but what it's doing is launching a request t
 client.on('interactionCreate', async interaction => {
 	// ...
 	if (commandName === 'cat') {
+		await interaction.deferReply();
 		const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
-		interaction.reply({ files: [file] });
+		interaction.editReply({ files: [file] });
 	}
 });
 ```
@@ -103,7 +104,7 @@ The response will only be parsed if the server's `Content-Type` header includes 
 
 ### Urban Dictionary
 
-Urban Dictionary's API is available at https://api.urbandictionary.com/v0/define, accepts a `term` parameter, and returns a JSON response.
+Urban Dictionary's API is available at [https://api.urbandictionary.com/v0/define](https://api.urbandictionary.com/v0/define), accepts a `term` parameter, and returns a JSON response.
 
 First, you're going to need to fetch data from the API. To do this, you'd do:
 
@@ -112,6 +113,7 @@ First, you're going to need to fetch data from the API. To do this, you'd do:
 client.on('interactionCreate', async interaction => {
 	// ...
 	if (commandName === 'urban') {
+		await interaction.deferReply();
 		const term = interaction.options.getString('term');
 		const query = new URLSearchParams({ term });
 
@@ -135,10 +137,10 @@ As explained above, you'll want to check if the API returned any answers for you
 if (commandName === 'urban') {
 	// ...
 	if (!list.length) {
-		return interaction.reply(`No results found for **${term}**.`);
+		return interaction.editReply(`No results found for **${term}**.`);
 	}
 
-	interaction.reply(`**${term}**: ${list[0].definition}`);
+	interaction.editReply(`**${term}**: ${list[0].definition}`);
 }
 ```
 
@@ -189,7 +191,7 @@ const embed = new MessageEmbed()
 		{ name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` },
 	);
 
-interaction.reply({ embeds: [embed] });
+interaction.editReply({ embeds: [embed] });
 ```
 
 Now, if you do that same command again, you should get this:
