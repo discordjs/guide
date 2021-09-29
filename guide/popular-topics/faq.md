@@ -139,7 +139,7 @@ await interaction.followUp('Hi, <@user id>.');
 ```
 
 ::: tip
-Mentions in embeds may resolve correctly in embed description and field values but will never notify the user. Other areas do not support mentions at all.
+Mentions in embeds may resolve correctly in embed titles, descriptions and field values but will never notify the user. Other areas do not support mentions at all.
 :::
 
 ### How do I control which users and/or roles are mentioned in a message?
@@ -277,7 +277,7 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
 
 ### How do I check the bot's ping?
 
-There are two common measurements for bot pings. The first, **Websocket heartbeat**, is the average interval of a regularly sent signal indicating the healthy operation of the WebSocket connection the library receives events over:
+There are two common measurements for bot pings. The first, **websocket heartbeat**, is the average interval of a regularly sent signal indicating the healthy operation of the websocket connection the library receives events over:
 
 ```js
 interaction.reply(`Websocket heartbeat: ${client.ws.ping}ms.`);
@@ -411,4 +411,6 @@ console.log(emojiCharacters['!']); // ❗
 
 ::: tip
 On Windows, you may be able to use the `Win + .` keyboard shortcut to open up an emoji picker that can be used for quick, easy access to all the Unicode emojis available to you. Some of the emojis listed above may not be represented there, though (e.g., the 0-9 emojis).
+
+You can also use the `Control + Command + Space` keyboard shortcut to perform the same behavior on macOS.
 :::

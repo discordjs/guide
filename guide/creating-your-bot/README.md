@@ -44,14 +44,14 @@ You can access the set values in your code via the `process.env` global variable
 :::: code-group
 ::: code-group-item Command line
 ```sh:no-line-numbers
-A=123 B=456 TOKEN=your-token-goes-here node index.js
+A=123 B=456 DISCORD_TOKEN=your-token-goes-here node index.js
 ```
 :::
 ::: code-group-item Usage
 ```js
 console.log(process.env.A);
 console.log(process.env.B);
-console.log(process.env.TOKEN);
+console.log(process.env.DISCORD_TOKEN);
 ```
 :::
 ::::
@@ -85,7 +85,7 @@ pnpm add dotenv
 ```
 A=123
 B=456
-TOKEN=your-token-goes-here
+DISCORD_TOKEN=your-token-goes-here
 ```
 :::
 ::: code-group-item Usage
@@ -96,7 +96,7 @@ dotenv.config();
 
 console.log(process.env.A);
 console.log(process.env.B);
-console.log(process.env.TOKEN);
+console.log(process.env.DISCORD_TOKEN);
 ```
 :::
 ::::
