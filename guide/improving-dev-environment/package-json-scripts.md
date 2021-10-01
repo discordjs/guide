@@ -113,6 +113,7 @@ Let's create another script to lint your code via the command line.
 ::: tip
 If you do not have ESLint installed globally, you can use [npx](https://alligator.io/workflow/npx/) to run the ESLint script for your local directory. For more info on how to set it up, you can read the site [here](https://alligator.io/workflow/npx/).
 :::
+
 Add the following line to your scripts:
 
 ```json
@@ -177,3 +178,7 @@ pnpm run <script-name>
 ```
 :::
 ::::
+
+::: tip
+Package scripts allow some more configuration (like pre-, post- and lifecycle scripts) than we can cover in this guide. Check out the official documentation on [docs.npmjs.com](https://docs.npmjs.com/cli/v7/using-npm/scripts) for more information.
+:::
