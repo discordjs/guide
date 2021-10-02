@@ -2,7 +2,7 @@
 
 ## Message collectors
 
-<p><DocsLink path="class/Collector"><code>Collector</code>s</DocsLink> are useful to enable your bot to obtain *additional* input after the first command was sent. An example would be initiating a quiz, where the bot will "await" a correct response from somebody.</p>
+<p><DocsLink path="class/Collector"><code>Collectors</code></DocsLink> are useful to enable your bot to obtain *additional* input after the first command was sent. An example would be initiating a quiz, where the bot will "await" a correct response from somebody.</p>
 
 ### Basic message collector
 
