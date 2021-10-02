@@ -81,7 +81,7 @@ Refer to the [message components](/interactions/buttons.html) section of this gu
 
 discord.js now has support for threads! Threads are a new type of sub-channel that can be used to help separate conversations into a more meaningful flow.
 
-This introduces the `ThreadManager` class, which can be found as `TextChannel#threads`, in addition to `ThreadChannel`, `ThreadMemberManager`, and `ThreadMember`. There are also five new events: `threadCreate`, `threadDelete`, `threadListSync`, `threadMemberUpdate`, and `threadMembersUpdate`.
+This introduces the `ThreadManager` class, which can be found as `TextChannel#threads`, in addition to `ThreadChannel`, `ThreadMemberManager`, and `ThreadMember`. There are also five new events: `threadCreate`, `threadUpdate`, `threadDelete`, `threadListSync`, `threadMemberUpdate`, and `threadMembersUpdate`.
 
 Refer to the [threads](/popular-topics/threads.html) section of this guide to get started.
 
