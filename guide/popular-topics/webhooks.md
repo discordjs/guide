@@ -157,6 +157,21 @@ client.once('ready', async () => {
 client.login(token);
 ```
 
+::: warning
+If your bot isn't the first webhook in the channel, it will give `[WEBHOOK_TOKEN_UNAVAILABLE]: This action requires a webhook token, but none is available.`
+:::
+
+So, to fix this, we will only try to find our bot with the following code:
+
+```diff
+- const webhooks = await channel.fetchWebhooks();
+- const webhook = webhooks.first();
++ const webhooks = await channel.fetchWebhooks();
++ const webhook = webhooks.find(wh => wh.owner.id === client.user.id);
+```
+
+The code above reads all of the channel's webhooks and only gives the webhooks by the bot.
+
 ### Fetching messages
 
 You can use <DocsLink path="class/Webhook?scrollTo=fetchMessage" type="method" /> to fetch messages previously sent by the Webhook.
