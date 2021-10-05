@@ -170,7 +170,7 @@ So, to fix this, we will only try to find our bot with the following code:
 + const webhook = webhooks.find(wh => wh.owner.id === client.user.id);
 ```
 
-The code above reads all of the channel's webhooks and only gives the webhooks by the bot.
+The code above fetches all of the channel's webhooks and only return a webhook created by the bot.
 
 ### Fetching messages
 
