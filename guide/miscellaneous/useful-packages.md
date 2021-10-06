@@ -177,7 +177,7 @@ To use the same logger across the project you can put the following code into it
 
 ```js
 const pino = require('pino');
-logger = pino();
+const logger = pino();
 module.exports = logger;
 ```
 
@@ -250,7 +250,7 @@ const transport = pino.transport({
 	target: 'pino/file',
 	options: { destination: './log.json' },
 });
-logger = pino(transport);
+const logger = pino(transport);
 module.exports = logger;
 ```
 
