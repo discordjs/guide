@@ -34,9 +34,7 @@ Putting it into a function will make it easily reusable. We will use the name `g
 
 ```js
 function getUserFromMention(mention) {
-	if (!mention) {
-		return;
-	}
+	if (!mention) return;
 
 	if (mention.startsWith('<@') && mention.endsWith('>')) {
 		mention = mention.slice(2, -1);
@@ -95,9 +93,7 @@ function getUserFromMention(mention) {
 	const matches = mention.match(USERS_PATTERN);
 
 	// If supplied variable was not a mention, matches will be null instead of an array.
-	if (!matches) {
-		return;
-	}
+	if (!matches) return;
 
 	// However, the first element in the matches array will be the entire mention, not just the ID,
 	// so use index 1.
