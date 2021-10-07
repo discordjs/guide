@@ -1,7 +1,7 @@
 # Parsing mentions
 
 Discord.js is already geared to help you handle mentions using `message.mentions`.
-However, there are cases where using `message.mentions` can lead to a few problems, in which case you may want to parse them on your own.  
+However, there are situations where using `message.mentions` can lead to a few problems, in which case you may want to parse them on your own.  
 For example, you cannot tell where the mention is located in the message's content, or if the same user/role/channel was mentioned more than once.
 
 ## How Discord mentions work
@@ -27,8 +27,7 @@ then the `message.content` for that message will look something like this
 
 ## Implementation
 
-So, how do you use this new information for your bot?  
-Most of your code will not change; however, instead of using `message.mentions` to find say, a user, you will have to do it manually, which requires a few simple steps.
+Instead of using `message.mentions` to find say, a user, you will have to do it manually, which requires a few simple steps.
 
 Putting it into a function will make it easily reusable. We will use the name `getUserFromMention` here.
 
@@ -56,7 +55,7 @@ It essentially just works itself through the structure of the mention bit by bit
 Whenever it encounters an error with the mention (i.e., invalid structure), it merely returns `undefined` to signal the mention is invalid.
 
 ::: tip
-The `.slice()` method is used in a more advanced way here. You can read the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) for more info.
+The `.slice()` method is used with a negative number. You can read [MDN's documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) for information on how that behaves.
 :::
 
 ### Using Regular Expressions
@@ -65,7 +64,7 @@ Previously you learned how to use rudimentary string-related functions to turn t
 But using Regular Expressions (aka "RegEx" or "RegExp"), you can condense all that logic into a single line! Crazy, right?
 
 ::: tip
-For a more detailed explanation, please consult [MDN's documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp).
+For a more detailed explanation consult [MDN's documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) on regular expressions.
 :::
 
 The RegEx you will use for user mentions will look something like this: `/^<@!?(\d+)>$/`.
@@ -95,7 +94,7 @@ function getUserFromMention(mention) {
 	// If supplied variable was not a mention, matches will be null instead of an array.
 	if (!matches) return;
 
-	// However, the first element in the matches array will be the entire mention, not just the ID,
+	// The first element in the matches array will be the entire mention, not just the ID,
 	// so use index 1.
 	const id = matches[1];
 
