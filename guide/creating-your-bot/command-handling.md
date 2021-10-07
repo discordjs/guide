@@ -157,6 +157,8 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 client.commands = new Collection();
 ```
 
+We recommend attaching a `.commands` property to your client instance so that you can access your commands in other files. The rest of the examples in this guide will follow this convention.
+
 ::: tip
 [`fs`](https://nodejs.org/api/fs.html) is Node's native file system module. <DocsLink section="collection" path="class/Collection" /> is a class that extends JavaScript's native [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) class, and includes more extensive, useful functionality.
 :::
@@ -174,10 +176,6 @@ for (const file of commandFiles) {
 	client.commands.set(command.data.name, command);
 }
 ```
-
-::: tip
-The `commands` property doesn't exist on the `Client` class by default, and it's not anything special (you could in fact call it whatever you like). We suggest adding it to the client like this so that you have access to it wherever you use your client.
-:::
 
 Use the same approach for your `deploy-commands.js` file, but instead `.push()` to the `commands` array with the JSON data for each command.
 
