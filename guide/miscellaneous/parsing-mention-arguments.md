@@ -55,7 +55,7 @@ It essentially just works itself through the structure of the mention bit by bit
 Whenever it encounters an error with the mention (i.e., invalid structure), it merely returns `undefined` to signal the mention is invalid.
 
 ::: tip
-The `.slice()` method is used with a negative number. You can read [MDN's documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) for information on how that behaves.
+The `.slice()` method is used with a negative number. You can read [MDN's documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) for information on how that works.
 :::
 
 ### Using Regular Expressions
