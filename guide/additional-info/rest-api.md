@@ -13,17 +13,17 @@ To install node-fetch, run the following command:
 :::: code-group
 ::: code-group-item npm
 ```sh:no-line-numbers
-npm install node-fetch@2.6.5
+npm install node-fetch@cjs
 ```
 :::
 ::: code-group-item yarn
 ```sh:no-line-numbers
-yarn add node-fetch@2.6.5
+yarn add node-fetch@cjs
 ```
 :::
 ::: code-group-item pnpm
 ```sh:no-line-numbers
-pnpm add node-fetch@2.6.5
+pnpm add node-fetch@cjs
 ```
 :::
 ::::
