@@ -64,7 +64,7 @@ Previously you learned how to use rudimentary string-related functions to turn t
 But using Regular Expressions (aka "RegEx" or "RegExp"), you can condense all that logic into a single line! Crazy, right?
 
 ::: tip
-For a more detailed explanation consult [MDN's documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) on regular expressions.
+For a more detailed explanation, consult [MDN's documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) on regular expressions.
 :::
 
 The RegEx you will use for user mentions will look something like this: `/^<@!?(\d+)>$/`.
