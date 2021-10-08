@@ -161,14 +161,13 @@ client.login(token);
 If your bot isn't the first webhook in the channel, it will throw `[WEBHOOK_TOKEN_UNAVAILABLE]: This action requires a webhook token, but none is available.`
 
 To fix this, we will only try to find our bot's webhook with the following code:
-:::
-
 ```diff
 - const webhooks = await channel.fetchWebhooks();
 - const webhook = webhooks.first();
 + const webhooks = await channel.fetchWebhooks();
 + const webhook = webhooks.find(wh => wh.owner.id === client.user.id);
 ```
+:::
 
 The code above fetches all of the channel's webhooks and only return a webhook created by the bot.
 
