@@ -29,7 +29,7 @@ pnpm add node-fetch@cjs
 ::::
 
 ::: tip
-Newer versions of `node-fetch` do not support the [CommonJS](https://nodejs.org/api/modules.html#modules_modules_commonjs_modules) `require()` syntax.
+The `cjs` tag of `node-fetch` is used here as versions 3+ do not support the [CommonJS](https://nodejs.org/api/modules.html#modules_modules_commonjs_modules) `require()` syntax.
 :::
 
 ## Skeleton code
