@@ -125,7 +125,7 @@ webhookClient.send({
 });
 ```
 
-Example using a Webhook:
+To make sure the resulting webhook can be executed by your bot, you need to find a webhook owned by your bot. To do so you can check the `<Client>.owner.id` property of each webhook and compare it to your bot's id as shown below.
 
 ```js
 const { Client, Intents, MessageEmbed } = require('discord.js');
@@ -156,7 +156,6 @@ client.once('ready', async () => {
 
 client.login(token);
 ```
-In the code above, we fetch all a channel's webhooks, and we only get the webhook created by the bot.
 
 ### Fetching messages
 
