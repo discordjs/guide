@@ -11,7 +11,7 @@ client.once('ready', async () => {
 	const channel = client.channels.get('222197033908436994');
 	try {
 		const webhooks = await channel.fetchWebhooks();
-		const webhook = webhooks.first();
+		const webhook = webhooks.find(wh => wh.owner.id === client.user.id);
 
 		await webhook.send({
 			content: 'Webhook test',
