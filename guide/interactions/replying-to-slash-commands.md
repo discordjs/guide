@@ -274,7 +274,7 @@ client.on('interactionCreate', async interaction => {
 ## Fetching and deleting responses
 
 ::: danger
-You _cannot_ fetch nor delete an ephemeral message.
+You _cannot_ delete an ephemeral message.
 :::
 
 In addition to replying to a slash command, you may also want to delete the initial reply. You can use `CommandInteraction#deleteReply()` for this:
