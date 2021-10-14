@@ -369,6 +369,10 @@ To generate an invite link for a bot and define required permissions:
 Previously when a token had reached its 1000 login limit for the day, discord.js would treat this as a rate limit and silently wait to login again, but this was not communicated to the user.
 This will now instead cause an error to be thrown.
 
+#### Client#typingStart
+
+The `Client#typingStart` event now only emits a `Typing` structure. Previously, `Channel` and `User` were emitted.
+
 #### Client#setInterval
 #### Client#setTimeout
 
@@ -1341,6 +1345,10 @@ Represent a member of a thread and their thread-specific metadata.
 ### ThreadMemberManager
 
 Provides API support for the bot to add and remove members from threads, and stores a cache of `ThreadMembers`.
+
+### Typing
+
+Represents a typing state for a user in a channel.
 
 ### Webhook
 
