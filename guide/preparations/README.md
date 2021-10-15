@@ -35,8 +35,8 @@ On Windows, either:
 - Press `Win + R` and run `cmd.exe`, and then `cd` into your project directory
 
 On macOS, either:
-- Open launchpad or spotlight and search for "terminal"
-- In your "Applications" folder, under "Utilities", open the terminal app
+- Open Launchpad or Spotlight and search for "Terminal"
+- In your "Applications" folder, under "Utilities", open the Terminal app
 
 On Linux, you can quickly open the terminal with `Ctrl + Alt + T`.
 
