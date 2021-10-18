@@ -144,7 +144,7 @@ client.on('typingStart', function(typing) {
 });
 
 client.on('messageCreate', function(message) {
-	console.log(message.author.name + ' sent: ' + message.content);
+	console.log(message.author.tag + ' sent: ' + message.content);
 });
 
 var doubleAge = function(age) {
@@ -165,7 +165,7 @@ client.once('ready', () => console.log('Ready!'));
 
 client.on('typingStart', typing => console.log(`${typing.user.username} started typing in ${typing.channel.name}`));
 
-client.on('messageCreate', message => console.log(`${message.author.username} sent: ${message.content}`));
+client.on('messageCreate', message => console.log(`${message.author.tag} sent: ${message.content}`));
 
 const doubleAge = age => `Your age doubled is: ${age * 2}`;
 
