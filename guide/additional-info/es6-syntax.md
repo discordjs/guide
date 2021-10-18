@@ -140,7 +140,7 @@ client.once('ready', function() {
 });
 
 client.on('typingStart', function(typing) {
-	console.log(typing.user.username + ' started typing in ' + typing.channel.name);
+	console.log(typing.user.tag + ' started typing in ' + typing.channel.name);
 });
 
 client.on('messageCreate', function(message) {
@@ -163,7 +163,7 @@ var collector = message.createMessageCollector({ filter, time: 15000 });
 // arrow functions, full ES6
 client.once('ready', () => console.log('Ready!'));
 
-client.on('typingStart', typing => console.log(`${typing.user.username} started typing in ${typing.channel.name}`));
+client.on('typingStart', typing => console.log(`${typing.user.tag} started typing in ${typing.channel.name}`));
 
 client.on('messageCreate', message => console.log(`${message.author.tag} sent: ${message.content}`));
 
