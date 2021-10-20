@@ -140,11 +140,11 @@ client.once('ready', function() {
 });
 
 client.on('typingStart', function(typing) {
-	console.log(typing.user + ' started typing in ' + typing.channel);
+	console.log(typing.user.tag + ' started typing in #' + typing.channel.name);
 });
 
 client.on('messageCreate', function(message) {
-	console.log(message.author + ' sent: ' + message.content);
+	console.log(message.author.tag + ' sent: ' + message.content);
 });
 
 var doubleAge = function(age) {
@@ -163,9 +163,9 @@ var collector = message.createMessageCollector({ filter, time: 15000 });
 // arrow functions, full ES6
 client.once('ready', () => console.log('Ready!'));
 
-client.on('typingStart', typing => console.log(`${typing.user} started typing in ${typing.channel}`));
+client.on('typingStart', typing => console.log(`${typing.user.tag} started typing in #${typing.channel.name}`));
 
-client.on('messageCreate', message => console.log(`${message.author} sent: ${message.content}`));
+client.on('messageCreate', message => console.log(`${message.author.tag} sent: ${message.content}`));
 
 const doubleAge = age => `Your age doubled is: ${age * 2}`;
 
