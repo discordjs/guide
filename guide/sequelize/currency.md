@@ -124,6 +124,7 @@ sequelize.sync({ force }).then(async () => {
 	];
 	await Promise.all(shop);
 	console.log('Database synced');
+
 	sequelize.close();
 }).catch(console.error);
 ```
@@ -164,6 +165,7 @@ Users.prototype.addItem = async function(item) {
 
 	if (userItem) {
 		userItem.amount += 1;
+
 		return userItem.save();
 	}
 
@@ -247,12 +249,16 @@ Reflect.defineProperty(currency, 'add', {
 	/* eslint-disable-next-line func-name-matching */
 	value: async function add(id, amount) {
 		const user = currency.get(id);
+
 		if (user) {
 			user.balance += Number(amount);
+			
 			return user.save();
 		}
+
 		const newUser = await Users.create({ user_id: id, balance: amount });
 		currency.set(id, newUser);
+		
 		return newUser;
 	},
 });
@@ -298,6 +304,7 @@ const user = await Users.findOne({ where: { user_id: target.id } });
 const items = await user.getItems();
 
 if (!items.length) return interaction.reply(`${target.tag} has nothing!`);
+
 return interaction.reply(`${target.tag} currently has ${items.map(i => `${i.amount} ${i.item.name}`).join(', ')}`);
 ```
 This is where you begin to see the power of associations. Even though users and the shop are different tables, and the data is stored separately, you can get a user's inventory by looking at the junction table and join it with the shop; no duplicated item names that waste space!
@@ -330,7 +337,9 @@ You'd ideally want to allow users to do both `!transfer 5 @user` and `!transfer 
 ```js
 const itemName = interaction.options.getString('item');
 const item = await CurrencyShop.findOne({ where: { name: { [Op.like]: itemName } } });
+
 if (!item) return interaction.reply(`That item doesn't exist.`);
+
 if (item.cost > currency.getBalance(interaction.user.id)) {
 	return interaction.reply(`You currently have ${currency.getBalance(interaction.user.id)}, but the ${item.name} costs ${item.cost}!`);
 }
