@@ -26,5 +26,6 @@ sequelize.sync({ force }).then(async () => {
 	];
 	await Promise.all(shop);
 	console.log('Database synced');
+
 	sequelize.close();
 }).catch(console.error);

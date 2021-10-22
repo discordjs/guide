@@ -18,26 +18,31 @@ const UserItems = require('./models/UserItems.js')(sequelize, Sequelize.DataType
 
 UserItems.belongsTo(CurrencyShop, { foreignKey: 'item_id', as: 'item' });
 
-/* eslint-disable-next-line func-names */
-Users.prototype.addItem = async function(item) {
-	const useritem = await UserItems.findOne({
-		where: { user_id: this.user_id, item_id: item.id },
-	});
+Reflect.defineProperty(Users, 'addItem', {
+	/* eslint-disable-next-line func-names */
+	value: async function addItem(item) {
+		const userItem = await UserItems.findOne({
+			where: { user_id: this.user_id, item_id: item.id },
+		});
 
-	if (useritem) {
-		useritem.amount += 1;
-		return useritem.save();
-	}
+		if (userItem) {
+			userItem.amount += 1;
+			
+			return userItem.save();
+		}
 
-	return UserItems.create({ user_id: this.user_id, item_id: item.id, amount: 1 });
-};
+		return UserItems.create({ user_id: this.user_id, item_id: item.id, amount: 1 });
+	},
+});
 
-/* eslint-disable-next-line func-names */
-Users.prototype.getItems = function() {
-	return UserItems.findAll({
-		where: { user_id: this.user_id },
-		include: ['item'],
-	});
-};
+Reflect.defineProperty(Users, 'getItems', {
+	/* eslint-disable-next-line func-names */
+	value: function getItems() {
+		return UserItems.findAll({
+			where: { user_id: this.user_id },
+			include: ['item'],
+		});
+	},
+});
 
 module.exports = { Users, CurrencyShop, UserItems };
