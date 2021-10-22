@@ -54,6 +54,12 @@ The `pm2 start` command can take more optional parameters, but only these two ar
 
 Once the process launches with pm2, you can run `pm2 monit` to monitor all console outputs from the processes started by pm2. This accounts for any `console.log()` in your code or outputted errors.
 
+In a similar fashion to how you start the process, running:
+```sh:no-line-numbers
+pm2 stop your-app-name.js
+```
+will stop the current process without unlisting it from PM2's interface.
+
 ## Setting up booting with your system
 
 Perhaps one of the more useful features of PM2 is being able to boot up with your Operating System. This feature will ensure that your bot processes will always be started after an (unexpected) reboot (e.g., after a power outage).
