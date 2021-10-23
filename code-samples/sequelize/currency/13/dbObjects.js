@@ -18,8 +18,8 @@ const UserItems = require('./models/UserItems.js')(sequelize, Sequelize.DataType
 
 UserItems.belongsTo(CurrencyShop, { foreignKey: 'item_id', as: 'item' });
 
-Reflect.defineProperty(Users, 'addItem', {
-	/* eslint-disable-next-line func-names */
+Reflect.defineProperty(Users.prototype, 'addItem', {
+	/* eslint-disable-next-line func-name-matching */
 	value: async function addItem(item) {
 		const userItem = await UserItems.findOne({
 			where: { user_id: this.user_id, item_id: item.id },
@@ -35,8 +35,8 @@ Reflect.defineProperty(Users, 'addItem', {
 	},
 });
 
-Reflect.defineProperty(Users, 'getItems', {
-	/* eslint-disable-next-line func-names */
+Reflect.defineProperty(Users.prototype, 'getItems', {
+	/* eslint-disable-next-line func-name-matching */
 	value: function getItems() {
 		return UserItems.findAll({
 			where: { user_id: this.user_id },
