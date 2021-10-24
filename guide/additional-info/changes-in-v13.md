@@ -4,9 +4,60 @@
 
 v13 requires Node 16.6 or higher to use, so make sure you're up to date. To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it! There are many resources online to help you with this step based on your host system.
 
-Once you've got Node up-to-date, you can install v13 by running `npm install discord.js` in your terminal or command prompt for text-only use, or `npm install discord.js @discordjs/voice` for voice support.
+Once you've got Node up-to-date, you can install v13 by running the appropriate command in your terminal or command prompt.
 
-You can check your discord.js version with `npm list discord.js`. Should it still show v12.x, uninstall (`npm uninstall discord.js`) and re-install discord.js and make sure the entry in your package.json does not prevent a major version update. Please refer to the [npm documentation](https://docs.npmjs.com/files/package.json#dependencies) for this.
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm install discord.js # text-only
+npm install discord.js @discordjs/voice # voice support
+```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add discord.js # text-only
+yarn add discord.js @discordjs/voice # voice support
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add discord.js # text-only
+pnpm add discord.js @discordjs/voice # voice support
+```
+:::
+::::
+
+You can check your discord.js version with the `list` command. Should it still show v12.x, uninstall and re-install discord.js and make sure the entry in your package.json does not prevent a major version update. Please refer to the [npm documentation](https://docs.npmjs.com/files/package.json#dependencies) for this.
+
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+# check version
+npm list discord.js
+# uninstall and re-install
+npm uninstall discord.js
+npm install discord.js
+```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+# check version
+yarn list discord.js
+# uninstall and re-install
+yarn remove discord.js
+yarn add discord.js
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+# check version
+pnpm list discord.js
+# uninstall and re-install
+pnpm remove discord.js
+pnpm add discord.js
+```
+:::
+::::
 
 ## API version
 
@@ -30,7 +81,7 @@ Refer to the [message components](/interactions/buttons.html) section of this gu
 
 discord.js now has support for threads! Threads are a new type of sub-channel that can be used to help separate conversations into a more meaningful flow.
 
-This introduces the `ThreadManager` class, which can be found as `TextChannel#threads`, in addition to `ThreadChannel`, `ThreadMemberManager`, and `ThreadMember`. There are also five new events: `threadCreate`, `threadDelete`, `threadListSync`, `threadMemberUpdate`, and `threadMembersUpdate`.
+This introduces the `ThreadManager` class, which can be found as `TextChannel#threads`, in addition to `ThreadChannel`, `ThreadMemberManager`, and `ThreadMember`. There are also five new events: `threadCreate`, `threadUpdate`, `threadDelete`, `threadListSync`, `threadMemberUpdate`, and `threadMembersUpdate`.
 
 Refer to the [threads](/popular-topics/threads.html) section of this guide to get started.
 
@@ -124,7 +175,7 @@ The shortcuts `Intents.ALL`, `Intents.NON_PRIVILEGED`, and `Intents.PRIVILEGED` 
 Refer to our more [detailed article about this topic](/popular-topics/intents.html).
 
 ```diff
-- const client = new Client({ ws: { intents: [Intents.FLAGS.GUILDS] });
+- const client = new Client({ ws: { intents: [Intents.FLAGS.GUILDS] } });
 + const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 ```
 
@@ -257,6 +308,10 @@ Webpack builds are no longer supported.
 
 ## Changes and deletions
 
+### ActivityType
+
+The `CUSTOM_STATUS` type has been renamed to `CUSTOM`.
+
 ### APIMessage
 
 The `APIMessage` class has been renamed to `MessagePayload`, resolving a naming clash with an interface in the `discord-api-types` library which represents raw message data objects.
@@ -313,6 +368,10 @@ To generate an invite link for a bot and define required permissions:
 
 Previously when a token had reached its 1000 login limit for the day, discord.js would treat this as a rate limit and silently wait to login again, but this was not communicated to the user.
 This will now instead cause an error to be thrown.
+
+#### Client#typingStart
+
+The `Client#typingStart` event now only emits a `Typing` structure. Previously, `Channel` and `User` were emitted.
 
 #### Client#setInterval
 #### Client#setTimeout
@@ -547,7 +606,9 @@ The `GuildMember#hasPermission` shortcut/helper method has been removed.
 
 #### GuildMember#lastMessageId
 
-Neither of these properties were actually provided by Discord, instead relying on potentially inaccurate client cache, and have been removed.
+#### GuildMember#lastMessageChannelId
+
+None of these properties were actually provided by Discord, instead relying on potentially inaccurate client cache, and have been removed.
 
 #### GuildMember#presence
 
@@ -587,6 +648,10 @@ The `MessageManager.delete()` method no longer accepts any additional options, r
 ```
 
 `reason` is no longer a parameter as it is not used by the API.
+
+#### Message#edits
+
+The `Message#edits` property has been removed.
 
 ### MessageEmbed
 
@@ -1280,6 +1345,10 @@ Represent a member of a thread and their thread-specific metadata.
 ### ThreadMemberManager
 
 Provides API support for the bot to add and remove members from threads, and stores a cache of `ThreadMembers`.
+
+### Typing
+
+Represents a typing state for a user in a channel.
 
 ### Webhook
 

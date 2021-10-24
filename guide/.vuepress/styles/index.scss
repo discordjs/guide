@@ -65,7 +65,7 @@ div[class*=language-].line-numbers-mode::after {
 .discord-messages {
 	border-radius: 0.375rem;
 
-	.discord-message .discord-message-content code.discord-message-inline-code {
+	.discord-message .discord-message-content .discord-markdown-content > code {
 		color: inherit;
 		font-size: 0.9em;
 		padding: 0.2em;

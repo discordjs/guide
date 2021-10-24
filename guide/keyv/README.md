@@ -4,19 +4,55 @@
 
 ## Installation
 
-```bash
-npm install --save keyv
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm install keyv
 ```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add keyv
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add keyv
+```
+:::
+::::
 
 Keyv requires an additional package depending on which persistent backend you would prefer to use. If you want to keep everything in memory, you can skip this part. Otherwise, install one of the below.
 
-```bash
-npm install --save @keyv/redis
-npm install --save @keyv/mongo
-npm install --save @keyv/sqlite
-npm install --save @keyv/postgres
-npm install --save @keyv/mysql
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm install @keyv/redis
+npm install @keyv/mongo
+npm install @keyv/sqlite
+npm install @keyv/postgres
+npm install @keyv/mysql
 ```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add @keyv/redis
+yarn add @keyv/mongo
+yarn add @keyv/sqlite
+yarn add @keyv/postgres
+yarn add @keyv/mysql
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add @keyv/redis
+pnpm add @keyv/mongo
+pnpm add @keyv/sqlite
+pnpm add @keyv/postgres
+pnpm add @keyv/mysql
+```
+:::
+::::
 
 Create an instance of Keyv once you've installed Keyv and any necessary drivers.
 
@@ -82,7 +118,7 @@ const prefixes = new Keyv('sqlite://path/to.sqlite');
 
 ### Command handler
 
-This guide uses a very basic command handler with some added complexity to allow for multiple prefixes. Look at the [command handling](/command-handling/) guide for a more robust command handler.
+This guide uses a very basic command handler with some added complexity to allow for multiple prefixes. Look at the [command handling](/creating-your-bot/command-handling.md) guide for a more robust command handler.
 
 ```js
 client.on('messageCreate', async message => {
@@ -143,19 +179,19 @@ You will probably want to set up additional validation, such as required permiss
 		.prefix
 	</DiscordMessage>
 	<DiscordMessage profile="bot">
-		Prefix is <code class="discord-message-inline-code">.</code>
+		Prefix is <DiscordMarkdown>`.`</DiscordMarkdown>
 	</DiscordMessage>
 	<DiscordMessage profile="user">
 		.prefix $
 	</DiscordMessage>
 	<DiscordMessage profile="bot">
-		Successfully set prefix to <code class="discord-message-inline-code">$</code>
+		Successfully set prefix to <DiscordMarkdown>`$`</DiscordMarkdown>
 	</DiscordMessage>
 	<DiscordMessage profile="user">
 		$prefix
 	</DiscordMessage>
 	<DiscordMessage profile="bot">
-		Prefix is <code class="discord-message-inline-code">$</code>
+		Prefix is <DiscordMarkdown>`$`</DiscordMarkdown>
 	</DiscordMessage>
 </DiscordMessages>
 

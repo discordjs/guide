@@ -53,12 +53,14 @@ To react with a Unicode emoji, you will need the actual Unicode character of the
 
 To react with an emoji, you need to use the `message.react()` method. Once you have the emoji character, all you need to do is copy & paste it as a string inside the `.react()` method!
 
-```js {4-7}
+```js {6-9}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'react') {
-		const message = await interaction.reply('You can react with Unicode emojis!', { fetchReply: true });
+	const { commandName } = interaction;
+
+	if (commandName === 'react') {
+		const message = await interaction.reply({ content: 'You can react with Unicode emojis!', fetchReply: true });
 		message.react('😄');
 	}
 });
@@ -98,12 +100,14 @@ For custom emojis, there are multiple ways of reacting. Like Unicode emojis, you
 
 This format is essentially the name of the emoji, followed by its ID. Copy & paste the ID into the `.react()` method as a string.
 
-```js {4-7}
+```js {6-9}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'react-custom') {
-		const message = await interaction.reply('You can react with custom emojis!', { fetchReply: true });
+	const { commandName } = interaction;
+
+	if (commandName === 'react-custom') {
+		const message = await interaction.reply({ content: 'You can react with custom emojis!', fetchReply: true });
 		message.react('123456789012345678');
 	}
 });
@@ -153,8 +157,8 @@ Using `.find()`, your code would look something like this:
 <!-- eslint-skip -->
 
 ```js {3-4}
-if (interaction.commandName === 'react-custom') {
-	const message = await interaction.reply('You can react with custom emojis!', { fetchReply: true });
+if (commandName === 'react-custom') {
+	const message = await interaction.reply({ content: 'You can react with custom emojis!', fetchReply: true });
 	const reactionEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'blobreach');
 	message.react(reactionEmoji);
 }
@@ -165,8 +169,8 @@ Using `.get()`, your code would look something like this:
 <!-- eslint-skip -->
 
 ```js {3-4}
-if (interaction.commandName === 'react-custom') {
-	const message = await interaction.reply('You can react with custom emojis!', { fetchReply: true });
+if (commandName === 'react-custom') {
+	const message = await interaction.reply({ content: 'You can react with custom emojis!', fetchReply: true });
 	const reactionEmoji = client.emojis.cache.get('123456789012345678');
 	message.react(reactionEmoji);
 }
@@ -178,11 +182,13 @@ Of course, if you already have the emoji ID, you should put that directly inside
 
 If you just put one `message.react()` under another, it won't always react in order as-is. This is because `.react()` is a Promise and an asynchronous operation.
 
-```js {4-10}
+```js {6-12}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'fruits') {
+	const { commandName } = interaction;
+
+	if (commandName === 'fruits') {
 		interaction.reply('Reacting with fruits!');
 		const message = await interaction.fetchReply();
 		message.react('🍎');
@@ -247,12 +253,14 @@ As you can see, if you leave it like that, it won't display as you want. It was 
 
 Luckily, there are two easy solutions to this. The first would be to chain `.then()`s in the order you want it to display.
 
-```js {6-9}
+```js {8-11}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'fruits') {
-		const message = await interaction.reply('Reacting with fruits!', { fetchReply: true });
+	const { commandName } = interaction;
+
+	if (commandName === 'fruits') {
+		const message = await interaction.reply({ content: 'Reacting with fruits!', fetchReply: true });
 		message.react('🍎')
 			.then(() => message.react('🍊'))
 			.then(() => message.react('🍇'))
@@ -263,12 +271,14 @@ client.on('interactionCreate', async interaction => {
 
 The other would be to use the `async`/`await` keywords.
 
-```js {7-13}
+```js {9-15}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	if (interaction.commandName === 'fruits') {
-		const message = await interaction.reply('Reacting with fruits!', { fetchReply: true });
+	const { commandName } = interaction;
+
+	if (commandName === 'fruits') {
+		const message = await interaction.reply({ content: 'Reacting with fruits!', fetchReply: true });
 
 		try {
 			await message.react('🍎');
@@ -345,8 +355,8 @@ However, if you don't mind the order the emojis react in, you can take advantage
 <!-- eslint-skip -->
 
 ```js {3-8}
-if (interaction.commandName === 'fruits') {
-	const message = await interaction.reply('Reacting with fruits!', { fetchReply: true });
+if (commandName === 'fruits') {
+	const message = await interaction.reply({ content: 'Reacting with fruits!', fetchReply: true });
 	Promise.all([
 		message.react('🍎'),
 		message.react('🍊'),

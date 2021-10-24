@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import CloseIcon from './icons/Close.vue';
 
 const props = defineProps({

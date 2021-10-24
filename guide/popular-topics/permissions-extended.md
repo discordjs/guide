@@ -51,6 +51,7 @@ Causes for "Missing Access":
 - Text Channels require `VIEW_CHANNEL` as detailed above.
 - Voice Channels require `CONNECT` in the same way.
 - Reacting to a message requires `READ_MESSAGE_HISTORY` in the channel the message was sent.
+- When deploying slash commands: Enable the `applications.commands` scope (for more information see the [adding your bot](/preparations/adding-your-bot-to-servers) section).
 :::
 
 ## Limitations and oddities

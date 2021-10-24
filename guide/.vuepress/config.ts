@@ -9,7 +9,7 @@ const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 	templateSSR: path.join(__dirname, 'templates', 'index.ssr.html'),
 	lang: 'en-US',
 	title: 'Discord.js Guide',
-	description: 'Imagine a guide... that explores the many possibilies for your discord.js bot.',
+	description: 'Imagine a guide... that explores the many possibilities for your discord.js bot.',
 	head: [
 		['meta', { charset: 'utf-8' }],
 		['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }],
@@ -17,7 +17,7 @@ const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 		['meta', { name: 'theme-color', content: '#3eaf7c' }],
 		['meta', { name: 'twitter:card', content: 'summary' }],
 		['meta', { property: 'og:title', content: 'Discord.js Guide' }],
-		['meta', { property: 'og:description', content: 'Imagine a guide... that explores the many possibilies for your discord.js bot.' }],
+		['meta', { property: 'og:description', content: 'Imagine a guide... that explores the many possibilities for your discord.js bot.' }],
 		['meta', { property: 'og:type', content: 'website' }],
 		['meta', { property: 'og:url', content: 'https://discordjs.guide/' }],
 		['meta', { property: 'og:locale', content: 'en_US' }],
@@ -49,19 +49,21 @@ const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 	plugins: [],
 });
 
-if (process.env.NODE_ENV === 'production') {
+const { ALGOLIA_DOCSEARCH_API_KEY, GOOGLE_ANALYTICS_ID, NODE_ENV } = process.env;
+
+if (NODE_ENV === 'production' && ALGOLIA_DOCSEARCH_API_KEY && GOOGLE_ANALYTICS_ID) {
 	config.plugins.push(
 		[
 			'@vuepress/plugin-docsearch',
 			{
-				apiKey: process.env.ALGOLIA_DOCSEARCH_API_KEY,
+				apiKey: ALGOLIA_DOCSEARCH_API_KEY,
 				indexName: 'discordjs',
 				placeholder: 'Search guide',
 			},
 		],
 		[
 			'@vuepress/plugin-google-analytics',
-			{ id: process.env.GOOGLE_ANALYTICS_ID },
+			{ id: GOOGLE_ANALYTICS_ID },
 		],
 	);
 }

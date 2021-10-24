@@ -344,7 +344,7 @@ console.log(permissions.has(Permissions.FLAGS.KICK_MEMBERS));
 
 permissions.remove(Permissions.FLAGS.KICK_MEMBERS);
 console.log(permissions.has(Permissions.FLAGS.KICK_MEMBERS));
-// output : false
+// output: false
 ```
 
 You can utilize these methods to adapt permissions or overwrites without touching the other flags. To achieve this, you can get the existing permissions for a role, manipulating the bit field as described above and passing the changed bit field to `role.setPermissions()`.

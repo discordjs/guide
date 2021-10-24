@@ -61,7 +61,7 @@ const manager = new ShardingManager('./bot.js', {
 
 The `execArgv` property is what you would usually pass to Node without sharding, e.g.:
 
-```
+```sh:no-line-numbers
 node --trace-warnings bot.js
 ```
 
@@ -69,7 +69,7 @@ You can find a list of command-line options for Node [here](https://nodejs.org/a
 
 The `shardArgs` property is what you would usually pass to your bot without sharding, e.g.:
 
-```
+```sh:no-line-numbers
 node bot.js --ansi --color
 ```
 

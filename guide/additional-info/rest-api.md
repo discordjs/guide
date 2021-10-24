@@ -10,9 +10,27 @@ In these examples, we will be using [node-fetch](https://www.npmjs.com/package/n
 
 To install node-fetch, run the following command:
 
-```bash
-npm install node-fetch
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm install node-fetch@cjs
 ```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add node-fetch@cjs
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add node-fetch@cjs
+```
+:::
+::::
+
+::: tip
+The `cjs` tag of `node-fetch` is used here as versions 3+ do not support the [CommonJS](https://nodejs.org/api/modules.html#modules_modules_commonjs_modules) `require()` syntax.
+:::
 
 ## Skeleton code
 
@@ -31,7 +49,7 @@ client.once('ready', () => {
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
-	const { commandName: command } = interaction;
+	const { commandName } = interaction;
 
 	// ...
 });
@@ -57,7 +75,7 @@ const fetch = require('node-fetch');
 
 ### Random Cat
 
-Random cat's API is available at https://aws.random.cat/meow and returns a [JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) response. To actually fetch data from the API, you're going to do the following:
+Random cat's API is available at [https://aws.random.cat/meow](https://aws.random.cat/meow) and returns a [JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) response. To actually fetch data from the API, you're going to do the following:
 
 ```js
 fetch('https://aws.random.cat/meow').then(response => response.json());
@@ -68,9 +86,10 @@ It may seem like this does nothing, but what it's doing is launching a request t
 ```js {3-6}
 client.on('interactionCreate', async interaction => {
 	// ...
-	if (command === 'cat') {
+	if (commandName === 'cat') {
+		await interaction.deferReply();
 		const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
-		interaction.reply({ files: [file] });
+		interaction.editReply({ files: [file] });
 	}
 });
 ```
@@ -89,18 +108,18 @@ The response will only be parsed if the server's `Content-Type` header includes 
 
 ### Urban Dictionary
 
-Urban Dictionary's API is available at https://api.urbandictionary.com/v0/define, accepts a `term` parameter, and returns a JSON response.
+Urban Dictionary's API is available at [https://api.urbandictionary.com/v0/define](https://api.urbandictionary.com/v0/define), accepts a `term` parameter, and returns a JSON response.
 
 First, you're going to need to fetch data from the API. To do this, you'd do:
 
 ```js {1,5-11}
-const querystring = require('querystring');
 // ...
 client.on('interactionCreate', async interaction => {
 	// ...
-	if (command === 'urban') {
+	if (commandName === 'urban') {
+		await interaction.deferReply();
 		const term = interaction.options.getString('term');
-		const query = querystring.stringify({ term });
+		const query = new URLSearchParams({ term });
 
 		const { list } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`)
 			.then(response => response.json());
@@ -108,7 +127,7 @@ client.on('interactionCreate', async interaction => {
 });
 ```
 
-Here, we use Node's native [querystring module](https://nodejs.org/api/querystring.html) to create a [query string](https://en.wikipedia.org/wiki/Query_string) for the URL so that the Urban Dictionary server can parse it and know what to search.
+Here, we use JavaScript's native [URLSearchParams class](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) to create a [query string](https://en.wikipedia.org/wiki/Query_string) for the URL so that the Urban Dictionary server can parse it and know what to search.
 
 If you were to do `/urban hello world`, then the URL would become https://api.urbandictionary.com/v0/define?term=hello%20world since the string gets encoded.
 
@@ -119,13 +138,13 @@ Now, if you look at the JSON, you can see that it's a `list` property, which is 
 As explained above, you'll want to check if the API returned any answers for your query, and send back the definition if so:
 
 ```js {3-5,7}
-if (command === 'urban') {
+if (commandName === 'urban') {
 	// ...
 	if (!list.length) {
-		return interaction.reply(`No results found for **${term}**.`);
+		return interaction.editReply(`No results found for **${term}**.`);
 	}
 
-	interaction.reply(`**${term}**: ${list[0].definition}`);
+	interaction.editReply(`**${term}**: ${list[0].definition}`);
 }
 ```
 
@@ -150,7 +169,7 @@ If you've followed the tutorial, you should have something like this:
 				:command="true"
 			>urban</DiscordInteraction>
 		</template>
-		**hello world**: The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books.
+		<strong>hello world</strong>: The easiest, and first program any newbie would write. Applies for any language. Also what you would see in the first chapter of most programming books.
 	</DiscordMessage>
 </DiscordMessages>
 
@@ -176,7 +195,7 @@ const embed = new MessageEmbed()
 		{ name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` },
 	);
 
-interaction.reply({ embeds: [embed] });
+interaction.editReply({ embeds: [embed] });
 ```
 
 Now, if you do that same command again, you should get this:

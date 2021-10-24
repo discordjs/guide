@@ -3,7 +3,7 @@
 Discord provides developers with the option to create client-integrated slash commands. In this section, we'll cover how to register these commands using discord.js!
 
 ::: tip
-This page assumes you use the same file structure as our [command handling](/command-handling) section. The scripts provided are made to function with that setup.
+This page assumes you use the same file structure as our [command handling](/creating-your-bot/command-handling.md) section. The scripts provided are made to function with that setup.
 
 If you already have slash commands set up for your application and want to learn how to respond to them, refer to [the following page](/interactions/replying-to-slash-commands.md).
 :::
@@ -12,9 +12,27 @@ If you already have slash commands set up for your application and want to learn
 
 Guild application commands are only available in the guild they were created in, if your application has the `applications.commands` scope authorized.
 
-In this section, we'll be using a script that is usable in conjunction with the slash command handler from the [command handling](/command-handling/) section.
+In this section, we'll be using a script that is usable in conjunction with the slash command handler from the [command handling](/creating-your-bot/command-handling.md) section.
 
-First off, install the [`@discord.js/rest`](https://github.com/discordjs/discord.js-modules/blob/main/packages/rest/) and [`discord-api-types`](https://github.com/discordjs/discord-api-types/) by running `npm install @discordjs/rest discord-api-types ` in your terminal.
+First off, install the [`@discordjs/rest`](https://github.com/discordjs/discord.js-modules/blob/main/packages/rest/) and [`discord-api-types`](https://github.com/discordjs/discord-api-types/) by running the following command in your terminal:
+
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm install @discordjs/rest discord-api-types
+```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add @discordjs/rest discord-api-types
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add @discordjs/rest discord-api-types
+```
+:::
+::::
 
 <!-- eslint-skip -->
 
@@ -26,6 +44,10 @@ const fs = require('fs');
 
 const commands = [];
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+// Place your client and guild ids here
+const clientId = '123456789012345678';
+const guildId = '876543210987654321';
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
@@ -39,7 +61,7 @@ const rest = new REST({ version: '9' }).setToken(token);
 		console.log('Started refreshing application (/) commands.');
 
 		await rest.put(
-			Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
+			Routes.applicationGuildCommands(clientId, guildId),
 			{ body: commands },
 		);
 
@@ -60,13 +82,13 @@ Global application commands will be available in all the guilds your application
 Global commands are cached for one hour. New global commands will fan out slowly across all guilds and will only be guaranteed to be updated after an hour. Guild commands update instantly. As such, we recommend you use guild-based commands during development and publish them to global commands when they're ready for public use.
 :::
 
-To deploy global commands, you can use the same script from the [guild commands](#guild-commands) section and adjust the route in the script to `.applicationCommands(CLIENT_ID)`.
+To deploy global commands, you can use the same script from the [guild commands](#guild-commands) section and adjust the route in the script to `.applicationCommands(clientId)`.
 
 <!-- eslint-skip -->
 
 ```js {2}
 await rest.put(
-	Routes.applicationCommands(CLIENT_ID),
+	Routes.applicationCommands(clientId),
 	{ body: commands },
 );
 ```
@@ -133,3 +155,25 @@ const data = new SlashCommandBuilder()
 			.addChoice('Meme', 'gif_meme')
 			.addChoice('Movie', 'gif_movie'));
 ```
+
+### Subcommands
+
+Subcommands are available with the `.addSubcommand()` method:
+
+```js {6-14}
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
+const data = new SlashCommandBuilder()
+	.setName('info')
+	.setDescription('Get info about a user or a server!')
+	.addSubcommand(subcommand =>
+		subcommand
+			.setName('user')
+			.setDescription('Info about a user')
+			.addUserOption(option => option.setName('target').setDescription('The user')))
+	.addSubcommand(subcommand =>
+		subcommand
+			.setName('server')
+			.setDescription('Info about the server'));
+```
+

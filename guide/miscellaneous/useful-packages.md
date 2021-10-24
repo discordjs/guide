@@ -140,55 +140,119 @@ console.log(chalk.green.bgBrightBlack.underline('This is so pretty.'));
 
 ![image of code above](./images/chalk-ugly.png)
 
-## winston
+## pino
 
 ::: tip
-Official documentation: [https://github.com/winstonjs/winston](https://github.com/winstonjs/winston)
+Official documentation: [getpino.io](https://getpino.io)
 :::
 
-Winston is "a logger for just about everything".
-You can log to the terminal, you can log to a file, etc.  
-"But wait," I hear you cry, "what's wrong with `console.log`?".  
-Well, the answer is simple: `console.log` is slow and not quite versatile.
-Whenever you call `console.log`, your program halts; it cannot do anything until `console.log` finishes, which does not sound good.
-Well, that is precisely what winston is for.
+Pino is a Node.js logger with a very low overhead. But why does that even matter, if `console.log()` exists? Well, `console.log()` is quite slow and not very versatile. Whenever you make a call to `console.log()` your program halts and cannot do anything until the logging is finished.
 
-Winston is fast and highly configurable. It has different log levels for all your needs; it can log to files, the terminal, etc.
-Like moment.js, it also has extension packages. So if there is something you feel is missing, you can probably find one that fits your needs.
+To get started, install the package:
 
-Now, there are *a lot* of options, so it is recommended you take a look at the docs yourself.
-But let us get a quick overview of what it can do:
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm install pino@next
+npm install -g pino-pretty
+```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add pino@next
+yarn global add pino-pretty
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add pino@next
+pnpm add --global pino-pretty
+```
+:::
+::::
+
+Pino is highly configurable, so we heavily recommend you take a look at their documentation yourself.
+
+To use the same logger across the project you can put the following code into it's own file, for example `logger.js` and import it when needed:
 
 ```js
+const pino = require('pino');
+const logger = pino();
+module.exports = logger;
+```
+
+```js
+const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const logger = require('./logger');
 
-const logger = winston.createLogger({
-	transports: [
-		new winston.transports.Console(),
-		new winston.transports.File({ filename: 'log' }),
-	],
-	format: winston.format.printf(log => `[${log.level.toUpperCase()}] - ${log.message}`),
-});
-
-client.on('ready', () => logger.log('info', 'The bot is online!'));
-client.on('debug', m => logger.log('debug', m));
-client.on('warn', m => logger.log('warn', m));
-client.on('error', m => logger.log('error', m));
-
-process.on('uncaughtException', error => logger.log('error', error));
+client.on('ready', () => logger.info('The bot is online'));
+client.on('debug', m => logger.debug(m));
+client.on('warn', m => logger.warn(m));
+client.on('error', m => logger.error(m));
 
 client.login('your-token-goes-here');
 ```
 
-The above code creates a simple logger that will log to both the console and a file called "log" (defined by the `transports` options).  
-The `format` option tells the logger which format to use for the messages; by default, it outputs JSON objects.
-While useful, JSON is not very readable, so we define a custom format that displays the log level in all caps alongside the message.
-If you wanted to, you could also use the chalk module to make the logger's format a bit prettier by applying colors, etc.
+Pino logs in a json format, so other programs and services like log aggrregators can easily parse and work with the output. This is very useful for production systems, but quite tedious to read during development. This is why you installed `pino-pretty` earlier. Instead of formatting the log output itself the developers recommended that you [pipe](https://en.wikipedia.org/wiki/Pipeline_(Unix)) the log output to other services instead. `pino-pretty` is a formatter you can use for easy-to-read logs during development.
 
-![winston example](./images/winston.png)
+We recommend you set `pino-pretty` up in a package script in your `package.json` file, rather than typing the pipeline out every time. Please read our [guide section on package scripts](/improving-dev-environment/package-json-scripts), if you are not sure what we're talking about here.
 
-Winston is not the only logging library out there, though, so if you are not convinced, you should google around a bit and
-you should find something you will like.
+```json {10}
+{
+	"name": "my-bot",
+	"version": "1.0.0",
+	"description": "A Discord bot!",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node .",
+		"lint": "eslint .",
+		"dev": "node . | pino-pretty -i pid,hostname -t yyyy-mm-dd HH:MM:ss"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}
+```
+
+:::warning
+If you are using powershell, you have to use a package script for `pino-pretty`. Powershell handles pipelines in a way that prevents logging. The cmd commandline interface is not affected.
+:::
+
+In the example above, further arguments are passed to `pino-pretty` to modify the generated output. `-i pid,hostname` hides these two elements from logged lines and `-t yyyy-mm-dd HH:MM:ss` formats the timestamp into an easy to use format. Try out what works for you! The official [pino-pretty documentation](https://github.com/pinojs/pino-pretty) explains all possible arguments.
+
+To start your bot with prettified input you run the `dev` script via your package manager of choice:
+
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm run dev
+```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn run dev
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm run dev
+```
+:::
+::::
+
+Pino is very flexible, supports custom log levels, worker threads and many more features. Please check out the [official documentation](https://getpino.io) if you want to up your pino game! Below we show an alternative for a production setup. Using this code, you will be logging the raw json objects into a file, instead of printing to your console: 
+
+```js {2-6}
+const pino = require('pino');
+const transport = pino.transport({
+	target: 'pino/file',
+	options: { destination: './log.json' },
+});
+const logger = pino(transport);
+module.exports = logger;
+```
 
 ## i18next
 

@@ -9,6 +9,5 @@
 import MenuIcon from './icons/Bars.vue';
 import CloseIcon from './icons/Close.vue';
 
-// NOTE: May need to be renamed to `defineEmits` in a later Vue 3.x version
-defineEmit(['toggle']);
+defineEmits(['toggle']);
 </script>

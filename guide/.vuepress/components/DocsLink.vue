@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps } from 'vue';
+import { computed } from 'vue';
 
 const baseURL = 'https://discord.js.org/#/docs';
 const docsSections = ['main', 'collection', 'rpc'];
@@ -49,6 +49,6 @@ const linkText = computed(() => {
 			? property.replace('e-', 'event:')
 			: property;
 
-	return `${file}${separator}${name}${isMethod && '()'}`;
+	return `${file}${separator}${name}${isMethod ? '()' : ''}`;
 });
 </script>

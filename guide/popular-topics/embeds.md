@@ -176,7 +176,7 @@ if (message.author.bot) {
 
 ## Attaching images
 
-You can upload images with your embedded message and use them as source for embed fields that support image urls by constructing a <DocsLink path="class/MessageAttachment" /> from them to send as message option alongside the embed. The attachment parameter takes a BufferResolvable or Stream including the URL to an external image.
+You can upload images with your embedded message and use them as source for embed fields that support image URLs by constructing a <DocsLink path="class/MessageAttachment" /> from them to send as message option alongside the embed. The attachment parameter takes a BufferResolvable or Stream including the URL to an external image.
 
 You can then reference and use the images inside the embed itself with `attachment://fileName.extension`.
 
@@ -255,7 +255,7 @@ If you want to build the new embed data on a previously sent embed template, mak
 
 - To display fields side-by-side, you need at least two consecutive fields set to `inline`
 - The timestamp will automatically adjust the timezone depending on the user's device
-- Mentions of any kind will only render correctly in field values and descriptions
+- Mentions of any kind in embeds will only render correctly within embed descriptions and field values
 - Mentions in embeds will not trigger a notification
 - Embeds allow masked links (e.g. `[Guide](https://discordjs.guide/ 'optional hovertext')`), but only in description and field values
 

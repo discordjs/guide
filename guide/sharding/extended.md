@@ -11,7 +11,7 @@ Let's start with the basic usage of shards. At some point in bot development, yo
 ```js {3-11}
 client.on('interactionCreate', interaction => {
 	// ...
-	if (command === 'send') {
+	if (commandName === 'send') {
 		const id = interaction.options.getString('destination');
 		const channel = client.channels.cache.get(id);
 
@@ -30,7 +30,7 @@ In discord.js v13, <DocsLink path="class/ShardClientUtil?scrollTo=ids">`Client#s
 :::
 
 ```js {4-13}
-if (command === 'send') {
+if (commandName === 'send') {
 	const id = interaction.options.getString('destination');
 	return client.shard.broadcastEval(async (c, { channelId }) => {
 		const channel = c.channels.cache.get(channelId);
@@ -68,7 +68,7 @@ If you remember, there was a brief mention of passing functions through `.broadc
 ```js {3-8}
 client.on('interactionCreate', message => {
 	// ...
-	if (command === 'emoji') {
+	if (commandName === 'emoji') {
 		const emojiId = interaction.options.getString('emoji');
 		const emoji = client.emojis.cache.get(emojiId);
 
@@ -92,7 +92,7 @@ Next, you need to call the function in your command properly. If you recall from
 ```js {4-7}
 client.on('interactionCreate', interaction => {
 	// ...
-	if (command === 'emoji') {
+	if (commandName === 'emoji') {
 		const emojiNameOrId = interaction.options.getString('emoji');
 
 		return client.shard.broadcastEval(findEmoji, { context: { nameOrId: emojiNameOrId } })

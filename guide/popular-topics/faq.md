@@ -72,7 +72,7 @@ client.user.setUsername('username');
 ### How do I set my bot's avatar?
 
 ```js
-client.user.setAvatar('url or path');
+client.user.setAvatar('URL or path');
 ```
 
 ### How do I set my playing status?
@@ -139,7 +139,7 @@ await interaction.followUp('Hi, <@user id>.');
 ```
 
 ::: tip
-Mentions in embeds may resolve correctly in embed description and field values but will never notify the user. Other areas do not support mentions at all.
+Mentions in embeds may resolve correctly in embed titles, descriptions and field values but will never notify the user. Other areas do not support mentions at all.
 :::
 
 ### How do I control which users and/or roles are mentioned in a message?
@@ -277,40 +277,70 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
 
 ### How do I check the bot's ping?
 
-There are two common measurements for bot pings. The first, **Websocket heartbeat**, is the average interval of a regularly sent signal indicating the healthy operation of the WebSocket connection the library receives events over:
+There are two common measurements for bot pings. The first, **websocket heartbeat**, is the average interval of a regularly sent signal indicating the healthy operation of the websocket connection the library receives events over:
 
 ```js
 interaction.reply(`Websocket heartbeat: ${client.ws.ping}ms.`);
 ```
 
 ::: tip
-A specific shards heartbeat can be found on the WebSocketShard instance, accessible at `<client>.ws.shards` > `.ping`.
+If you're using [sharding](/sharding/), a specific shard's heartbeat can be found on the WebSocketShard instance, accessible at `client.ws.shards.ping`.
 :::
 
 The second, **Roundtrip Latency**, describes the amount of time a full API roundtrip (from the creation of the command message to the creation of the response message) takes. You then edit the response to the respective value to avoid needing to send yet another message:
 
 ```js
-interaction.reply('Pinging...', { fetchReply: true })
-	.then(sent => {
-		sent.edit(`Roundtrip latency: ${sent.createdTimestamp - interaction.createdTimestamp}ms`);
-	});
+const sent = await interaction.reply({ content: 'Pinging...', fetchReply: true });
+interaction.editReply(`Roundtrip latency: ${sent.createdTimestamp - interaction.createdTimestamp}ms`);
 ```
 
 ### How do I play music from YouTube?
 
 For this to work, you need to have `ytdl-core` and `@discordjs/voice` installed.
 
-```bash
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
 npm install ytdl-core @discordjs/voice
 ```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add ytdl-core @discordjs/voice
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add ytdl-core @discordjs/voice
+```
+:::
+::::
 
 Additionally, you may need the following:
 
-```bash
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
 npm install --save @discordjs/opus # opus engine (if missing)
 sudo apt-get install ffmpeg # ffmpeg debian/ubuntu
 npm install ffmpeg-static # ffmpeg windows
 ```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add --save @discordjs/opus # opus engine (if missing)
+sudo apt-get install ffmpeg # ffmpeg debian/ubuntu
+yarn add ffmpeg-static # ffmpeg windows
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add --save @discordjs/opus # opus engine (if missing)
+sudo apt-get install ffmpeg # ffmpeg debian/ubuntu
+pnpm add ffmpeg-static # ffmpeg windows
+```
+:::
+::::
 
 ```js
 const ytdl = require('ytdl-core');
@@ -342,6 +372,11 @@ player.on(AudioPlayerStatus.Idle, () => connection.destroy());
 
 ::: tip
 You can learn more about these methods in the [voice section of this guide](/voice)!
+:::
+
+::: warning
+This only works correctly if you have the `GUILD_VOICE_STATES` intent enabled for your application and client.
+If you want to learn more about intents, check out [this dedicated guide on intents](/popular-topics/intents.md)!
 :::
 
 ### Why do some emojis behave weirdly?
@@ -376,4 +411,6 @@ console.log(emojiCharacters['!']); // ❗
 
 ::: tip
 On Windows, you may be able to use the `Win + .` keyboard shortcut to open up an emoji picker that can be used for quick, easy access to all the Unicode emojis available to you. Some of the emojis listed above may not be represented there, though (e.g., the 0-9 emojis).
+
+You can also use the `Control + Command + Space` keyboard shortcut to perform the same behavior on macOS.
 :::

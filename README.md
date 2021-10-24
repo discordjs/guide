@@ -4,7 +4,7 @@
 
 # Discord.js Guide
 
-Imagine a guide... that explores the many possibilies for your [discord.js](https://github.com/discordjs/discord.js) bot.
+Imagine a guide... that explores the many possibilities for your [discord.js](https://github.com/discordjs/discord.js) bot.
 
 ## About
 
@@ -13,7 +13,7 @@ This guide is aimed at users who are either unfamiliar or inexperienced with Nod
 There are many different subjects covered, such as:
 
 - How to get a bot [up and running](https://discordjs.guide/preparations/) from scratch;
-- How to properly [create](https://discordjs.guide/creating-your-bot/), [organize](https://discordjs.guide/command-handling/), and expand on your commands;
+- How to properly [create](https://discordjs.guide/creating-your-bot/), [organize](https://discordjs.guide/creating-your-bot/command-handling.html), and expand on your commands;
 - In-depth explanations and examples regarding popular topics (e.g. [reactions](https://discordjs.guide/popular-topics/reactions.html), [embeds](https://discordjs.guide/popular-topics/embeds.html), [canvas](https://discordjs.guide/popular-topics/canvas.html));
 - Working with databases (e.g. [sequelize](https://discordjs.guide/sequelize/) and [keyv](https://discordjs.guide/keyv/));
 - Getting started with [sharding](https://discordjs.guide/sharding/);

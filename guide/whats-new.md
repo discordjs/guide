@@ -50,12 +50,13 @@ All content has been updated to use discord.js v13 syntax. The v12 version of th
 - [Buttons](/interactions/buttons.md): Building, sending, and receiving buttons
 - [Select menus](/interactions/select-menus.md): Building, sending, and receiving select menus
 - [Threads](/popular-topics/threads.md): Creating and managing threads
+- [Builders](/popular-topics/builders.md): A collection of builders to use with your bot
 
 ### Updated
 
 - Commando: Removed, to be replaced with a guide on [Sapphire](https://github.com/discordjs/guide/pull/711)
 - [Voice](/voice/): Rewritten to use the [`@discordjs/voice`](https://github.com/discordjs/voice) package
-- [Command handling](/command-handling/): Updated to use slash commands
+- [Command handling](/creating-your-bot/command-handling.md/): Updated to use slash commands
 	- Obsolete sections removed
 - `client.on('message')` snippets updated to `client.on('interactionCreate')`
 	- [Message content will become a new priviledged intent in April 2022](https://support-dev.discord.com/hc/en-us/articles/4404772028055)
@@ -63,8 +64,6 @@ All content has been updated to use discord.js v13 syntax. The v12 version of th
 <DiscordMessages>
 	<DiscordMessage profile="bot">
 		Thank you to all of those that contributed to the development of discord.js and the guide!
-		<br />
-		We hope you enjoy!
 		<span class="emoji-container">
 			<img class="emoji-image" title="heart" src="https://twemoji.maxcdn.com/v/13.1.0/72x72/2764.png" alt="" />
 		</span>

@@ -1,7 +1,25 @@
 # Builders
 
 discord.js provides the [`@discordjs/builders`](https://github.com/discordjs/builders) package which contains a variety of utilities you can use when writing your Discord bot.
-To install the package, run `npm install @discordjs/builders` in your terminal.
+To install the package, run the following command in your terminal:
+
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
+npm install @discordjs/builders
+```
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
+yarn add @discordjs/builders
+```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm add @discordjs/builders
+```
+:::	
+::::
 
 ## Formatters
 
@@ -32,7 +50,7 @@ There are also two methods to format hyperlinks. `hyperlink()` will format the U
 const { hyperlink, hideLinkEmbed } = require('@discordjs/builders');
 const url = 'https://discord.js.org/';
 
-const link = hyperlink(url);
+const link = hyperlink('discord.js', url);
 const hiddenEmbed = hideLinkEmbed(url);
 ```
 
@@ -66,11 +84,11 @@ const relative = time(date, 'R');
 The Formatters also contain various methods to format Snowflakes into mentions.
 
 ```js
-const { userMention, memberMention, channelMention, roleMention } = require('@discordjs/builders');
+const { userMention, memberNicknameMention, channelMention, roleMention } = require('@discordjs/builders');
 const id = '123456789012345678';
 
 const user = userMention(id);
-const nickname = memberMention(id);
+const nickname = memberNicknameMention(id);
 const channel = channelMention(id);
 const role = roleMention(id);
 ```
