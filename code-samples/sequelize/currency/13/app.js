@@ -90,7 +90,7 @@ client.on('interactionCreate', async interaction => {
 		currency.add(interaction.user.id, -item.cost);
 		await user.addItem(item);
 
-		interaction.reply(`You've bought a ${item.name}`);
+		return interaction.reply(`You've bought a ${item.name}`);
 	} else if (command === 'shop') {
 		const items = await CurrencyShop.findAll();
 		return interaction.reply(Formatters.codeBlock(items.map(i => `${i.name}: ${i.cost}💰`).join('\n')));

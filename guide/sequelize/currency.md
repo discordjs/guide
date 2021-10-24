@@ -256,13 +256,13 @@ Reflect.defineProperty(currency, 'add', {
 
 		if (user) {
 			user.balance += Number(amount);
-			
+
 			return user.save();
 		}
 
 		const newUser = await Users.create({ user_id: id, balance: amount });
 		currency.set(id, newUser);
-		
+
 		return newUser;
 	},
 });
@@ -352,7 +352,7 @@ const user = await Users.findOne({ where: { user_id: interaction.user.id } });
 currency.add(interaction.user.id, -item.cost);
 await user.addItem(item);
 
-interaction.reply(`You've bought: ${item.name}.`);
+return interaction.reply(`You've bought: ${item.name}.`);
 ```
 
 For users to search for an item without caring about the letter casing, you can use the `$iLike` modifier when looking for the name. Keep in mind that this may be slow if you have millions of items, so please don't put a million items in your shop.
