@@ -133,7 +133,7 @@ You can specify quite intricate patterns in `.gitignore` files, check out the [G
 
 ## Creating the main file
 
-Open your code editor and create a new file. We suggest that you save the file as `index.js`, but you may name it whatever you wish.
+Open your project directory and create a new file. We suggest that you save the file as `index.js`, but you may name it whatever you wish. We'll be using a [`config.json` configuration file](/creating-your-bot/#using-config-json) for our project structures throughout the guide.
 
 Here's the base code to get you started:
 
