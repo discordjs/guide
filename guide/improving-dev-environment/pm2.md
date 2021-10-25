@@ -55,6 +55,7 @@ The `pm2 start` command can take more optional parameters, but only these two ar
 Once the process launches with pm2, you can run `pm2 monit` to monitor all console outputs from the processes started by pm2. This accounts for any `console.log()` in your code or outputted errors.
 
 In a similar fashion to how you start the process, running `pm2 stop` will stop the current process without removing it from PM2's interface:
+
 ```sh:no-line-numbers
 pm2 stop your-app-name.js
 ```
