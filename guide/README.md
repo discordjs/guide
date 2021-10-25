@@ -28,6 +28,14 @@ If you don't know JavaScript but would like to learn about it, here are a few li
 
 Take your pick, learn some JavaScript, and once you feel like you're confident enough to make a bot, come back and get started!
 
+## Useful tools
+Here are some helpful tools i wish to know when I started. 
+
+* [Permission Calculator](https://discordapi.com/permissions.html)
+* [Color picker, for the cool colors in embeds 😎](https://www.color-hex.com/)
+* [Sourcebin, to share code if you need help](https://sourceb.in/)
+* [Stackoverflow, Where developers learn](https://stackoverflow.com/)
+
 <a href="https://www.netlify.com">
 	<img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
 </a>
