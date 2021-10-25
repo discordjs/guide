@@ -122,6 +122,7 @@ sequelize.sync({ force }).then(async () => {
 		CurrencyShop.upsert({ name: 'Coffee', cost: 2 }),
 		CurrencyShop.upsert({ name: 'Cake', cost: 5 }),
 	];
+
 	await Promise.all(shop);
 	console.log('Database synced');
 
@@ -166,7 +167,6 @@ Reflect.defineProperty(Users.prototype, 'addItem', {
 
 		if (userItem) {
 			userItem.amount += 1;
-
 			return userItem.save();
 		}
 
@@ -256,7 +256,6 @@ Reflect.defineProperty(currency, 'add', {
 
 		if (user) {
 			user.balance += Number(amount);
-
 			return user.save();
 		}
 

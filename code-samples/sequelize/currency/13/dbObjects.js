@@ -27,7 +27,6 @@ Reflect.defineProperty(Users.prototype, 'addItem', {
 
 		if (userItem) {
 			userItem.amount += 1;
-
 			return userItem.save();
 		}
 

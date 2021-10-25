@@ -17,7 +17,6 @@ Reflect.defineProperty(currency, 'add', {
 
 		if (user) {
 			user.balance += Number(amount);
-
 			return user.save();
 		}
 
