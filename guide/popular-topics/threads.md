@@ -165,32 +165,18 @@ const thread = channel.threads.cache.find(x => x.name === 'food-talk');
 await thread.members.remove('140214425276776449');
 ```
 
-## Sending messages to threads with a webhook
+## Sending messages to threads with webhooks
 
-As you might expect, it is possible for a webhook built for the parent channel to send messages into the threads of this channel. For the purpose of this example it is assumed a single webhook already exists for that channel. If you wish to learn more about webhooks see the webhook guide [here](/popular-topics/webhooks.md)
+It's possible for a webhook built on the parent channel to send messages to the channel's threads. For the purpose of this example, it is assumed a single webhook already exists for that channel. If you wish to learn more about webhooks, see our [webhook guide](/popular-topics/webhooks.md).
 
 ```js
-const { Client, Intents } = require('discord.js');
-const { token } = require('./config.json');
+const webhooks = await channel.fetchWebhooks();
+const webhook = webhooks.first();
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
-
-client.once('ready', async () => {
-	const channel = client.channels.cache.get('123456789012345678');
-	try {
-		const webhooks = await channel.fetchWebhooks();
-		const webhook = webhooks.first();
-
-		await webhook.send({
-			content: 'Look ma! I\'m in a thread!',
-			threadId: '123456789012345678',
-		});
-	} catch (error) {
-		console.error('Error trying to send a message to thread: ', error);
-	}
+await webhook.send({
+	content: 'Look ma! I\'m in a thread!',
+	threadId: '123456789012345678',
 });
-
-client.login(token);
 ```
 
 And that's it! Now you know all there is to know on working with threads using discord.js!
