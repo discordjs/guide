@@ -27,7 +27,7 @@ If you don't know JavaScript but would like to learn about it, here are a few li
 * [Google, your best friend](https://google.com)
 
 ### Useful tools
-Here are some helpful tools we which to know when we started: 
+Here are some helpful tools to know when getting started:
 
 * [Discord Developer Portal, create bots, manage tokens, calculate permissions](https://discord.com/developers/applications)
 * [Color picker, for the custom colors in embeds](https://www.color-hex.com/)
