@@ -122,8 +122,10 @@ sequelize.sync({ force }).then(async () => {
 		CurrencyShop.upsert({ name: 'Coffee', cost: 2 }),
 		CurrencyShop.upsert({ name: 'Cake', cost: 5 }),
 	];
+
 	await Promise.all(shop);
 	console.log('Database synced');
+
 	sequelize.close();
 }).catch(console.error);
 ```
@@ -156,27 +158,31 @@ const UserItems = require('./models/UserItems.js')(sequelize, Sequelize.DataType
 
 UserItems.belongsTo(CurrencyShop, { foreignKey: 'item_id', as: 'item' });
 
-/* eslint-disable-next-line func-names */
-Users.prototype.addItem = async function(item) {
-	const userItem = await UserItems.findOne({
-		where: { user_id: this.user_id, item_id: item.id },
-	});
+Reflect.defineProperty(Users.prototype, 'addItem', {
+	/* eslint-disable-next-line func-name-matching */
+	value: async function addItem(item) {
+		const userItem = await UserItems.findOne({
+			where: { user_id: this.user_id, item_id: item.id },
+		});
 
-	if (userItem) {
-		userItem.amount += 1;
-		return userItem.save();
-	}
+		if (userItem) {
+			userItem.amount += 1;
+			return userItem.save();
+		}
 
-	return UserItems.create({ user_id: this.user_id, item_id: item.id, amount: 1 });
-};
+		return UserItems.create({ user_id: this.user_id, item_id: item.id, amount: 1 });
+	},
+});
 
-/* eslint-disable-next-line func-names */
-Users.prototype.getItems = function() {
-	return UserItems.findAll({
-		where: { user_id: this.user_id },
-		include: ['item'],
-	});
-};
+Reflect.defineProperty(Users.prototype, 'getItems', {
+	/* eslint-disable-next-line func-name-matching */
+	value: function getItems() {
+		return UserItems.findAll({
+			where: { user_id: this.user_id },
+			include: ['item'],
+		});
+	},
+});
 
 module.exports = { Users, CurrencyShop, UserItems };
 ```
@@ -185,7 +191,7 @@ Note that the connection object could be abstracted in another file and had both
 
 Another new method here is the `.belongsTo()` method. Using this method, you add `CurrencyShop` as a property of `UserItem` so that when you do `userItem.item`, you get the respectively attached item. You use `item_id` as the foreign key so that it knows which item to reference.
 
-You then add some prototypes to the User object to finish up the junction: add items to users, and get their current inventory. The code inside should be somewhat familiar from the last tutorial. `.findOne()` is used to get the item if it exists in the user's inventory. If it does, increment it; otherwise, create it.
+You then add some methods to the `Users` object to finish up the junction: add items to users, and get their current inventory. The code inside should be somewhat familiar from the last tutorial. `.findOne()` is used to get the item if it exists in the user's inventory. If it does, increment it; otherwise, create it.
 
 Getting items is similar; use `.findAll()` with the user's id as the key. The `include` key is for associating the CurrencyShop with the item. You must explicitly tell Sequelize to honor the `.belongsTo()` association; otherwise, it will take the path of the least effort.
 
@@ -247,12 +253,15 @@ Reflect.defineProperty(currency, 'add', {
 	/* eslint-disable-next-line func-name-matching */
 	value: async function add(id, amount) {
 		const user = currency.get(id);
+
 		if (user) {
 			user.balance += Number(amount);
 			return user.save();
 		}
+
 		const newUser = await Users.create({ user_id: id, balance: amount });
 		currency.set(id, newUser);
+
 		return newUser;
 	},
 });
@@ -283,6 +292,7 @@ In the ready event, sync the currency collection with the database for easy acce
 
 ```js
 const target = interaction.options.getUser('user') ?? interaction.user;
+
 return interaction.reply(`${target.tag} has ${currency.getBalance(target.id)}💰`);
 ```
 
@@ -298,6 +308,7 @@ const user = await Users.findOne({ where: { user_id: target.id } });
 const items = await user.getItems();
 
 if (!items.length) return interaction.reply(`${target.tag} has nothing!`);
+
 return interaction.reply(`${target.tag} currently has ${items.map(i => `${i.amount} ${i.item.name}`).join(', ')}`);
 ```
 This is where you begin to see the power of associations. Even though users and the shop are different tables, and the data is stored separately, you can get a user's inventory by looking at the junction table and join it with the shop; no duplicated item names that waste space!
@@ -330,6 +341,7 @@ You'd ideally want to allow users to do both `!transfer 5 @user` and `!transfer 
 ```js
 const itemName = interaction.options.getString('item');
 const item = await CurrencyShop.findOne({ where: { name: { [Op.like]: itemName } } });
+
 if (!item) return interaction.reply(`That item doesn't exist.`);
 if (item.cost > currency.getBalance(interaction.user.id)) {
 	return interaction.reply(`You currently have ${currency.getBalance(interaction.user.id)}, but the ${item.name} costs ${item.cost}!`);
@@ -339,7 +351,7 @@ const user = await Users.findOne({ where: { user_id: interaction.user.id } });
 currency.add(interaction.user.id, -item.cost);
 await user.addItem(item);
 
-interaction.reply(`You've bought: ${item.name}.`);
+return interaction.reply(`You've bought: ${item.name}.`);
 ```
 
 For users to search for an item without caring about the letter casing, you can use the `$iLike` modifier when looking for the name. Keep in mind that this may be slow if you have millions of items, so please don't put a million items in your shop.
