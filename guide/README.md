@@ -32,10 +32,10 @@ Here are some helpful tools to know when getting started:
 * [Discord Developer Portal, create bots, manage tokens, calculate permissions](https://discord.com/developers/applications)
 * [Color picker, for the custom colors in embeds](https://www.color-hex.com/)
 * [Intents calculator](https://ziad87.net/intents/)
-* [Github Gists, to share code, if you need help](https://gist.github.com/)
-* [Pastebin, to share code, if you need help](https://pastebin.com/)
-* [Sourcebin, to share code, if you need help](https://sourceb.in/)
-* [Starbin, to share code, if you need help](https://starb.in/)
+* [Github Gists, to share code](https://gist.github.com/)
+* [Pastebin, to share code](https://pastebin.com/)
+* [Sourcebin, to share code](https://sourceb.in/)
+* [Starbin, to share code](https://starb.in/)
 * [StackOverflow, where developers learn](https://stackoverflow.com/)
 
 Take your pick, learn some JavaScript, and once you feel like you're confident enough to make a bot, come back and get started!
