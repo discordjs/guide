@@ -26,15 +26,20 @@ If you don't know JavaScript but would like to learn about it, here are a few li
 * [MDN's JavaScript guide and full documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * [Google, your best friend](https://google.com)
 
+### Useful tools
+Here are some helpful tools we which to know when we started: 
+
+* [Discord Developer Portal, create bots, manage tokens, calculate permissions](https://discord.com/developers/applications)
+* [Color picker, for the custom colors in embeds](https://www.color-hex.com/)
+* [Intents calculator](https://ziad87.net/intents/)
+* [Github Gists, to share code, if you need help](https://gist.github.com/)
+* [Pastebin, to share code, if you need help](https://pastebin.com/)
+* [Sourcebin, to share code, if you need help](https://sourceb.in/)
+* [Starbin, to share code, if you need help](https://starb.in/)
+* [StackOverflow, where developers learn](https://stackoverflow.com/)
+
 Take your pick, learn some JavaScript, and once you feel like you're confident enough to make a bot, come back and get started!
 
-## Useful tools
-Here are some helpful tools i wish to know when I started. 
-
-* [Permission Calculator](https://discordapi.com/permissions.html)
-* [Color picker, for the cool colors in embeds 😎](https://www.color-hex.com/)
-* [Sourcebin, to share code if you need help](https://sourceb.in/)
-* [Stackoverflow, Where developers learn](https://stackoverflow.com/)
 
 <a href="https://www.netlify.com">
 	<img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
