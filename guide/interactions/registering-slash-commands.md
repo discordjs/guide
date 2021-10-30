@@ -8,7 +8,7 @@ This page assumes you use the same file structure as our [command handling](/cre
 If you already have slash commands set up for your application and want to learn how to respond to them, refer to [the following page](/interactions/replying-to-slash-commands.md).
 :::
 
-A slash command can be registered as either **guild command** or **global command**.
+A slash command can be registered as either a **guild command** or a **global command**.
 
 **Guild commands** are only available to the guild you specify when registering the command. Guild commands are NOT available in DMs.
 
@@ -28,7 +28,7 @@ A bot can have up to 100 guild commands per guild.
 - A slash command's `name` must be all lowercase matching `^[\w-]{1,32}$`. (Max. character count is **32**)
 - Maximum character count allowed in `description` is **100**.
 
-You can test if your command's `name` abides by this regex, by using [https://regexr.com/63lqq](https://regexr.com/63lqq).
+You can test if your command's `name` abides by this regex, by using [this link](https://regexr.com/63lqq).
 
 ::: tip
 **Guild commands** update **instantly**. We recommend you use guild commands for quick testing, and global commands when they are ready for public use.
