@@ -214,3 +214,5 @@ This error is commonly thrown by your system in response to the process unexpect
 - delete `node_modules`
 - delete `package-lock.json` (make sure you have a `package.json`!)
 - run `npm install` to reinstall packages from `package.json`
+
+### DISALLOWED_INTENTS
