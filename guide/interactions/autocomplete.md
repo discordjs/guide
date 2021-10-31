@@ -84,7 +84,7 @@ client.on('interactionCreate', interaction => {
 
 To distinguish between multiple options you pass `true` into `CommandInteractionOptionResolver#getFocused()` which now returns the full focused object instead of just the value. This is used to get the name of the focused option.
 
-```js {5,7,9-11,13-15}
+```js {5,7,9-11,13-15,17}
 client.on('interactionCreate', interaction => {
 	if (!interaction.isAutocomplete()) return;
 
