@@ -80,7 +80,7 @@ client.on('interactionCreate', interaction => {
 });
 ```
 
-### Respond with multiple option
+### Respond with multiple options
 
 To distinguish between multiple options you pass `true` into `CommandInteractionOptionResolver#getFocused()` which now returns the full focused object instead of just the value. This is used to get the name of the focused option.
 
