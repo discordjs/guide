@@ -12,14 +12,14 @@ Make sure that you're on version 13.3.0 or above before trying this.
 
 ## Preparing commands
 
-To use autocomplete with your command options, you have to tell discord to enable it.
+To use autocomplete with your command options, you have to tell Discord to enable it.
 How to do this is dependent on how you create your slash commands.
 
-### Slashcommand Builder
+### Slash command builder
 
 The slash command builder does not yet support using autocomplete.
 
-### Custom System
+### Custom system
 
 For other custom systems or entering it raw, your resulting code should look something like this. To enable autocomplete, set it to true in the option.
 
@@ -55,7 +55,7 @@ client.on('interactionCreate', interaction => {
 The `AutocompleteInteraction` class only provides a single method to respond with. This being `AutocompleteInteraction#respond()`
 
 ### Respond with search
-Using `AutocompleteInteraction#respond()` you submit an array of ApplicationCommandOptionChoice objects. Passing an empty array will show "No options match your search" in discord.
+Using `AutocompleteInteraction#respond()` you submit an array of ApplicationCommandOptionChoice objects. Passing an empty array will show "No options match your search" in Discord.
 
 `CommandInteractionOptionResolver#getFocused()` return the currently focused option's value. This value is used to filter the choices presented.
 
