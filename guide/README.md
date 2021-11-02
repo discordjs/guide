@@ -40,7 +40,6 @@ Here are some helpful tools to know when getting started:
 
 Take your pick, learn some JavaScript, and once you feel like you're confident enough to make a bot, come back and get started!
 
-
 <a href="https://www.netlify.com">
 	<img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
 </a>
