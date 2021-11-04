@@ -1,6 +1,6 @@
 # Autocomplete
 
-Slash command options provide the feature of autocomplete. In this section we'll cover how to both add autocomplete support to your command and also how to respond to it.
+Slash command options provide the feature of autocomplete. In this section, we'll cover how to add autocomplete support to your command and how to respond to it.
 
 ::: tip
 This page is a follow-up to the [interactions (slash commands) pages](/interactions/registering-slash-commands.md). Please carefully read those first so that you can understand the methods used in this section.
@@ -41,7 +41,7 @@ const commandData = {
 
 ## Receiving
 
-To receive a AutocompleteInteraction, you can listen to the `interactionCreate` event and use the `Interaction#isAutocomplete()` method to make sure you only receive autocomplete interactions:
+To receive an <DocsLink path="class/AutocompleteInteraction" />, you can listen to the `interactionCreate` event and use the <DocsLink path="class/Interaction?scrollTo=isAutocomplete" /> method to make sure you only receive autocomplete interactions:
 
 ```js {2}
 client.on('interactionCreate', interaction => {
@@ -52,16 +52,16 @@ client.on('interactionCreate', interaction => {
 
 ## Responding
 
-The AutocompleteInteraction class provides the `AutocompleteInteraction#respond()` method for responding to the interaction.
+The <DocsLink path="class/AutocompleteInteraction" /> class provides the <DocsLink path="class/AutocompleteInteraction?scrollTo=respond" /> method for responding to the interaction.
 
 ### Respond with search
 Using `AutocompleteInteraction#respond()` you submit an array of ApplicationCommandOptionChoice objects. Passing an empty array will show "No options match your search" in Discord.
 
-`CommandInteractionOptionResolver#getFocused()` return the currently focused option's value. This value is used to filter the choices presented.
+<DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" /> returns the currently focused option's value. This value is used to filter the choices presented.
 
 To only display options starting with the focused value you can use the `Array#filter()` method
 
-Using `Array#map()`, you can transform the array into an array of ApplicationCommandOptionChoice objects.
+Using `Array#map()`, you can transform the array into an array of <DocsLink path="typedef/ApplicationCommandOptionChoice" /> objects.
 
 ``` js {5,7,9-12}
 client.on('interactionCreate', interaction => {
@@ -82,7 +82,7 @@ client.on('interactionCreate', interaction => {
 
 ### Respond with multiple options
 
-To distinguish between multiple options you can pass `true` into `CommandInteractionOptionResolver#getFocused()` which now returns the full focused object instead of just the value. This is used to get the name of the focused option.
+To distinguish between multiple options you can pass `true` into <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" /> which now returns the full focused object instead of just the value. This is used to get the name of the focused option.
 
 ```js {5,7,9-11,13-15,17}
 client.on('interactionCreate', interaction => {
