@@ -32,7 +32,7 @@ const commandData = {
 		{
 			name: 'name',
 			description: 'Name of something',
-			type: 'STRING',
+			type: 3, // String
 			autocomplete: true,
 		},
 	],
