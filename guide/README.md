@@ -29,14 +29,11 @@ If you don't know JavaScript but would like to learn about it, here are a few li
 ### Useful tools
 Here are some helpful tools to know when getting started:
 
-* [Discord Developer Portal, create bots, manage tokens, calculate permissions](https://discord.com/developers/applications)
-* [Color picker, for the custom colors in embeds](https://www.color-hex.com/)
-* [Intents calculator](https://ziad87.net/intents/)
-* [Github Gists, to share code](https://gist.github.com/)
-* [Pastebin, to share code](https://pastebin.com/)
-* [Sourcebin, to share code](https://sourceb.in/)
-* [Starbin, to share code](https://starb.in/)
-* [StackOverflow, where developers learn](https://stackoverflow.com/)
+- [Discord Developer Portal](https://discord.com/developers/applications), create bots, manage tokens, calculate permissions
+- [Color picker](https://www.color-hex.com/), for the custom colors in embeds
+- [Intents calculator](https://ziad87.net/intents/), to calculate intent bitfields
+- [Github Gists](https://gist.github.com/), [Pastebin](https://pastebin.com/), [Sourcebin](https://sourceb.in/), [Starbin](https://starb.in/), to share code
+- [StackOverflow](https://stackoverflow.com/), where developers learn
 
 Take your pick, learn some JavaScript, and once you feel like you're confident enough to make a bot, come back and get started!
 
