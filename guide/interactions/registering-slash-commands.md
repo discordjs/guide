@@ -162,7 +162,7 @@ module.exports = {
 };
 ```
 
-Before:
+After:
 ```js {6}
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
