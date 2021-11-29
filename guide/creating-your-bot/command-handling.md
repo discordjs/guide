@@ -148,6 +148,8 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 client.commands = new Collection();
 ```
 
+We recommend attaching a `.commands` property to your client instance so that you can access your commands in other files. The rest of the examples in this guide will follow this convention.
+
 ::: tip
 [`fs`](https://nodejs.org/api/fs.html) is Node's native file system module. <DocsLink section="collection" path="class/Collection" /> is a class that extends JavaScript's native [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) class, and includes more extensive, useful functionality.
 :::

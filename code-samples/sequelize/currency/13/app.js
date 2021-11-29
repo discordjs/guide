@@ -14,12 +14,15 @@ Reflect.defineProperty(currency, 'add', {
 	/* eslint-disable-next-line func-name-matching */
 	value: async function add(id, amount) {
 		const user = currency.get(id);
+
 		if (user) {
 			user.balance += Number(amount);
 			return user.save();
 		}
+
 		const newUser = await Users.create({ user_id: id, balance: amount });
 		currency.set(id, newUser);
+
 		return newUser;
 	},
 });
@@ -35,6 +38,7 @@ Reflect.defineProperty(currency, 'getBalance', {
 client.once('ready', async () => {
 	const storedBalances = await Users.findAll();
 	storedBalances.forEach(b => currency.set(b.user_id, b));
+
 	console.log(`Logged in as ${client.user.tag}!`);
 });
 
@@ -50,6 +54,7 @@ client.on('interactionCreate', async interaction => {
 
 	if (commandName === 'balance') {
 		const target = interaction.options.getUser('user') || interaction.user;
+
 		return interaction.reply(`${target.tag} has ${currency.getBalance(target.id)}💰`);
 	} else if (commandName === 'inventory') {
 		const target = interaction.options.getUser('user') || interaction.user;
@@ -57,6 +62,7 @@ client.on('interactionCreate', async interaction => {
 		const items = await user.getItems();
 
 		if (!items.length) return interaction.reply(`${target.tag} has nothing!`);
+
 		return interaction.reply(`${target.tag} currently has ${items.map(t => `${t.amount} ${t.item.name}`).join(', ')}`);
 	} else if (commandName === 'transfer') {
 		const currentAmount = currency.getBalance(interaction.user.id);
@@ -73,6 +79,7 @@ client.on('interactionCreate', async interaction => {
 	} else if (commandName === 'buy') {
 		const itemName = interaction.options.getString('item');
 		const item = await CurrencyShop.findOne({ where: { name: { [Op.like]: itemName } } });
+
 		if (!item) return interaction.reply('That item doesn\'t exist.');
 		if (item.cost > currency.getBalance(interaction.user.id)) {
 			return interaction.reply(`You don't have enough currency, ${interaction.user}`);
@@ -82,7 +89,7 @@ client.on('interactionCreate', async interaction => {
 		currency.add(interaction.user.id, -item.cost);
 		await user.addItem(item);
 
-		interaction.reply(`You've bought a ${item.name}`);
+		return interaction.reply(`You've bought a ${item.name}`);
 	} else if (commandName === 'shop') {
 		const items = await CurrencyShop.findAll();
 		return interaction.reply(Formatters.codeBlock(items.map(i => `${i.name}: ${i.cost}💰`).join('\n')));

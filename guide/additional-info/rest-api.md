@@ -13,20 +13,24 @@ To install node-fetch, run the following command:
 :::: code-group
 ::: code-group-item npm
 ```sh:no-line-numbers
-npm install node-fetch
+npm install node-fetch@cjs
 ```
 :::
 ::: code-group-item yarn
 ```sh:no-line-numbers
-yarn add node-fetch
+yarn add node-fetch@cjs
 ```
 :::
 ::: code-group-item pnpm
 ```sh:no-line-numbers
-pnpm add node-fetch
+pnpm add node-fetch@cjs
 ```
 :::
 ::::
+
+::: tip
+The `cjs` tag of `node-fetch` is used here as versions 3+ do not support the [CommonJS](https://nodejs.org/api/modules.html#modules_modules_commonjs_modules) `require()` syntax.
+:::
 
 ## Skeleton code
 

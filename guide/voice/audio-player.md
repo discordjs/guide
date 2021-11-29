@@ -68,7 +68,7 @@ Voice connections have their own life cycle, with five distinct states. You can 
 
 - **Idle** - the initial state of an audio player. The audio player will be in this state when there is no audio resource for it to play.
 
-- **Bufferring** - the state an audio player will be in while it is waiting for an audio resource to become playable. The audio player may transition from this state to either the `Playing` state (success) or the `Idle` state (failure).
+- **Buffering** - the state an audio player will be in while it is waiting for an audio resource to become playable. The audio player may transition from this state to either the `Playing` state (success) or the `Idle` state (failure).
 
 - **Playing** - the state a voice connection enters when it is actively playing an audio resource. When the audio resource comes to an end, the audio player will transition to the Idle state.
 

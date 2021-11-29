@@ -57,7 +57,7 @@ client.on('interactionCreate', interaction => {
 	const { commandName } = interaction;
 
 	if (commandName === 'stats') {
-		return interation.reply(`Server count: ${client.guilds.cache.size}.`);
+		return interaction.reply(`Server count: ${client.guilds.cache.size}.`);
 	}
 });
 
