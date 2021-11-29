@@ -125,7 +125,7 @@ webhookClient.send({
 });
 ```
 
-To make sure the resulting webhook can be executed by your bot, you need to find a webhook owned by your bot. To do so you can check the `<Client>.owner.id` property of each webhook and compare it to your bot's id as shown below.
+To make sure the resulting webhook can be executed by your bot, you need to find a webhook that is managable by your bot. To do so, you can check if a token of the webhook exists.
 
 ```js
 const { Client, Intents, MessageEmbed } = require('discord.js');
@@ -141,7 +141,11 @@ client.once('ready', async () => {
 	const channel = client.channels.cache.get('123456789012345678');
 	try {
 		const webhooks = await channel.fetchWebhooks();
-		const webhook = webhooks.find(wh => wh.owner.id === client.user.id);
+		const webhook = webhooks.find(wh => wh.token);
+
+		if (!webhook) {
+			return console.log('No webhook was found that I can use!');
+		}
 
 		await webhook.send({
 			content: 'Webhook test',
