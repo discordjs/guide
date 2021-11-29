@@ -10,9 +10,13 @@ const embed = new MessageEmbed()
 client.once('ready', async () => {
 	const channel = client.channels.get('222197033908436994');
 	try {
-		const webhooks = await channel.fetchWebhooks();
-		const webhook = webhooks.find(wh => wh.owner.id === client.user.id);
+		const webhooks = await channel.fetchWebhooks();const webhook = webhooks.find(wh => wh.token);
+		const webhook = webhooks.find(wh => wh.token);
 
+		if (!webhook) {
+			return console.log('No webhook was found that I can use!');
+		}
+		
 		await webhook.send({
 			content: 'Webhook test',
 			username: 'some-username',
