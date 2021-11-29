@@ -10,7 +10,7 @@ const embed = new MessageEmbed()
 client.once('ready', async () => {
 	const channel = client.channels.get('222197033908436994');
 	try {
-		const webhooks = await channel.fetchWebhooks();const webhook = webhooks.find(wh => wh.token);
+		const webhooks = await channel.fetchWebhooks();
 		const webhook = webhooks.find(wh => wh.token);
 
 		if (!webhook) {
