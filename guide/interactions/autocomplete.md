@@ -6,9 +6,6 @@ Slash command options provide the feature of autocomplete. In this section, we'l
 This page is a follow-up to the [interactions (slash commands) pages](/interactions/registering-slash-commands.md). Please carefully read those first so that you can understand the methods used in this section.
 :::
 
-::: warning
-Make sure that you're on discord.js version 13.3.0 or above before using autocomplete.
-:::
 
 ## Preparing commands
 
