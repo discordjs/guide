@@ -52,7 +52,7 @@ client.on('interactionCreate', interaction => {
 The <DocsLink path="class/AutocompleteInteraction" /> class provides the <DocsLink path="class/AutocompleteInteraction?scrollTo=respond" /> method for responding to the interaction.
 
 ### Respond with search
-Using `AutocompleteInteraction#respond()` you submit an array of ApplicationCommandOptionChoice objects. Passing an empty array will show "No options match your search" in Discord.
+Using <DocsLink path="class/AutocompleteInteraction?scrollTo=respond" /> you can submit an array of <DocsLink path="typedef/ApplicationCommandOptionChoice" /> objects. Passing an empty array will show "No options match your search" for the user.
 
 <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" /> returns the currently focused option's value. This value is used to filter the choices presented.
 
