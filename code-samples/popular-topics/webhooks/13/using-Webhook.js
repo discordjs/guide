@@ -16,7 +16,7 @@ client.once('ready', async () => {
 		if (!webhook) {
 			return console.log('No webhook was found that I can use!');
 		}
-		
+
 		await webhook.send({
 			content: 'Webhook test',
 			username: 'some-username',
