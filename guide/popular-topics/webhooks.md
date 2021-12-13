@@ -125,7 +125,7 @@ webhookClient.send({
 });
 ```
 
-To make sure the resulting webhook can be executed by your bot, you need to find a webhook that is managable by your bot. To do so, you can check if a token of the webhook exists.
+Try to find a webhook your bot knows the token for. This makes sure your bot can execute the webhook later on.
 
 ```js
 const { Client, Intents, MessageEmbed } = require('discord.js');
