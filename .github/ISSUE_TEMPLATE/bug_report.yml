@@ -26,8 +26,7 @@ body:
   - type: markdown
     id: screenshots
     attributes:
-      label: Screenshots
-      description: If applicable, add screenshots to help explain your problem.
+      value: If applicable, add screenshots to help explain your problem.
       
   - type: textarea
     id: device
