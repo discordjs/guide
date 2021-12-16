@@ -1,5 +1,5 @@
 name: Question/General support request
-about: Ask questions about the guide. 
+description: Ask questions about the guide. 
 labels: ['question']
 
 body:
