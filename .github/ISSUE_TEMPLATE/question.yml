@@ -15,6 +15,6 @@ body:
     id: question
     attributes:
       label: Question
-      description: Your question about the referenced part of the guide
+      description: Your question about the referenced part of the guide.
     validations:
       required: true
