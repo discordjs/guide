@@ -16,3 +16,5 @@ body:
     attributes:
       label: Question
       description: Your question about the referenced part of the guide
+    validations:
+      required: true
