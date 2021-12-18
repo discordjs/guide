@@ -376,7 +376,7 @@ There's nothing special here; just a regular `.findAll()` to get all the items i
 
 <!-- eslint-skip -->
 
-```js
+```js {2-10}
 else if (commandName === 'leaderboard') {
 	return interaction.reply(
 		Formatters.codeBlock(

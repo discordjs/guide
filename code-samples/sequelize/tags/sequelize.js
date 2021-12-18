@@ -69,8 +69,7 @@ client.on('interactionCreate', async interaction => {
 
 			return interaction.reply('Something went wrong with adding a tag.');
 		}
-	}
-	else if (commandName === 'tag') {
+	} else if (commandName === 'tag') {
 		const tagName = interaction.options.getString('name');
 
 		// equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
@@ -83,8 +82,7 @@ client.on('interactionCreate', async interaction => {
 		}
 
 		return interaction.reply(`Could not find tag: ${tagName}`);
-	}
-	else if (commandName === 'edittag') {
+	} else if (commandName === 'edittag') {
 		const tagName = interaction.options.getString('name');
 		const tagDescription = interaction.options.getString('description');
 
@@ -96,8 +94,7 @@ client.on('interactionCreate', async interaction => {
 		}
 
 		return interaction.reply(`Could not find a tag with name ${tagName}.`);
-	}
-	else if (commandName === 'taginfo') {
+	} else if (commandName === 'taginfo') {
 		const tagName = interaction.options.getString('name');
 
 		// equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
@@ -108,14 +105,12 @@ client.on('interactionCreate', async interaction => {
 		}
 
 		return interaction.reply(`Could not find tag: ${tagName}`);
-	}
-	else if (commandName === 'showtags') {
+	} else if (commandName === 'showtags') {
 		const tagList = await Tags.findAll({ attributes: ['name'] });
 		const tagString = tagList.map(t => t.name).join(', ') || 'No tags set.';
 
 		return interaction.reply(`List of tags: ${tagString}`);
-	}
-	else if (commandName === 'removetag') {
+	} else if (commandName === 'removetag') {
 		// equivalent to: DELETE from tags WHERE name = ?;
 		const tagName = interaction.options.getString('name');
 		const rowCount = await Tags.destroy({ where: { name: tagName } });
