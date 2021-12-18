@@ -51,7 +51,7 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 // When the client is ready, run this code (only once)
 client.once('ready', () => {
-	console.log('Ready!');
+	console.log(`Logged in as ${client.user.tag}!`);
 });
 
 client.on('interactionCreate', async interaction => {
@@ -140,8 +140,9 @@ Now that your structure is defined, you need to make sure the model exists in th
 
 ```js {3}
 client.once('ready', () => {
-	console.log('Ready!');
 	Tags.sync();
+
+	console.log(`Logged in as ${client.user.tag}!`);
 });
 ```
 
