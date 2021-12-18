@@ -153,7 +153,7 @@ After all this preparation, you can now write your first command! Let's start wi
 
 <!-- eslint-skip -->
 
-```js {6-28}
+```js {7-26}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
