@@ -31,6 +31,7 @@ const Tags = sequelize.define('tags', {
 });
 
 client.once('ready', () => {
+	console.log('Ready!');
 	/*
 	 * equivalent to: CREATE TABLE tags(
 	 * name VARCHAR(255),
