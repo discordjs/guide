@@ -159,8 +159,7 @@ const UserItems = require('./models/UserItems.js')(sequelize, Sequelize.DataType
 UserItems.belongsTo(CurrencyShop, { foreignKey: 'item_id', as: 'item' });
 
 Reflect.defineProperty(Users.prototype, 'addItem', {
-	/* eslint-disable-next-line func-name-matching */
-	value: async function addItem(item) {
+	value: async item => {
 		const userItem = await UserItems.findOne({
 			where: { user_id: this.user_id, item_id: item.id },
 		});
@@ -175,8 +174,7 @@ Reflect.defineProperty(Users.prototype, 'addItem', {
 });
 
 Reflect.defineProperty(Users.prototype, 'getItems', {
-	/* eslint-disable-next-line func-name-matching */
-	value: function getItems() {
+	value: () => {
 		return UserItems.findAll({
 			where: { user_id: this.user_id },
 			include: ['item'],
@@ -253,7 +251,7 @@ Reflect.defineProperty(currency, 'add', {
 });
 
 Reflect.defineProperty(currency, 'getBalance', {
-	value: (id) => {
+	value: id => {
 		const user = currency.get(id);
 		return user ? user.balance : 0;
 	},
@@ -315,6 +313,8 @@ This is where you begin to see the power of associations. Even though users and 
 
 ### Transfer currency to another user
 
+<!-- eslint-skip -->
+
 ```js {2-12}
 else if (commandName === 'transfer') {
 	const currentAmount = currency.getBalance(interaction.user.id);
@@ -373,6 +373,8 @@ else if (commandName === 'shop') {
 There's nothing special here; just a regular `.findAll()` to get all the items in the shop and `.map()` to transform that data into something nice looking.
 
 ### Display the leaderboard
+
+<!-- eslint-skip -->
 
 ```js
 else if (commandName === 'leaderboard') {

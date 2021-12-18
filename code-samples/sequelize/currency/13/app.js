@@ -11,7 +11,7 @@ const currency = new Collection();
  */
 
 Reflect.defineProperty(currency, 'add', {
-	value: (id, amount) => {
+	value: async (id, amount) => {
 		const user = currency.get(id);
 
 		if (user) {
@@ -27,7 +27,7 @@ Reflect.defineProperty(currency, 'add', {
 });
 
 Reflect.defineProperty(currency, 'getBalance', {
-	value: (id) => {
+	value: id => {
 		const user = currency.get(id);
 		return user ? user.balance : 0;
 	},
