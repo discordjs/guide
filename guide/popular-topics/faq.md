@@ -119,8 +119,10 @@ channel.send('content');
 
 ### How do I DM a specific user?
 
+<!-- eslint-skip -->
+
 ```js
-const user = client.users.cache.get('id');
+const user = await client.users.fetch('id');
 user.send('content');
 ```
 
