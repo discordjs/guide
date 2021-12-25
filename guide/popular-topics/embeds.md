@@ -65,7 +65,7 @@ const exampleEmbed = new MessageEmbed()
 	.setColor('#0099ff')
 	.setTitle('Some title')
 	.setURL('https://discord.js.org/')
-	.setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org'})
+	.setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
 	.setDescription('Some description here')
 	.setThumbnail('https://i.imgur.com/AfFp7pu.png')
 	.addFields(
