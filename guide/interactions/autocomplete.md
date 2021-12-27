@@ -56,7 +56,7 @@ Using <DocsLink path="class/AutocompleteInteraction?scrollTo=respond" /> you can
 
 <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" /> returns the currently focused option's value. This value is used to filter the choices presented.
 
-To only display options starting with the focused value you can use the `Array#filter()` method
+To only display options starting with the focused value you can use the `Array#filter()` method.
 
 Using `Array#map()`, you can transform the array into an array of <DocsLink path="typedef/ApplicationCommandOptionChoice" /> objects.
 
