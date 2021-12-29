@@ -156,7 +156,7 @@ const data = new SlashCommandBuilder()
 			.addChoice('Movie', 'gif_movie'));
 ```
 
-### Subcommands
+## Subcommands
 
 Subcommands are available with the `.addSubcommand()` method:
 
