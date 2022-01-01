@@ -17,7 +17,7 @@ Discord allows developers to register [slash commands](https://discord.com/devel
 
 ## Registering commands
 
-This section will cover only the bare minimum to get you started, but you can refer to our [in-depth page on registering slash commands](/interactions/registering-slash-commands.md) for further details. It covers guild commands, global commands, options, option types, and choices.
+This section will cover only the bare minimum to get you started, but you can refer to our [in-depth page on registering slash commands](/interactions/slash-commands.md#registering-slash-commands) for further details. It covers guild commands, global commands, options, option types, and choices.
 
 ### Command deployment script
 
@@ -86,7 +86,7 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
 :::
 ::::
 
-Once you fill in these values, run `node deploy-commands.js` in your project directory to register your commands to a single guild. It's also possible to [register commands globally](/interactions/registering-slash-commands.md#global-commands).
+Once you fill in these values, run `node deploy-commands.js` in your project directory to register your commands to a single guild. It's also possible to [register commands globally](/interactions/slash-commands.md#global-commands).
 
 ::: tip
 You only need to run `node deploy-commands.js` once. You should only run it again if you add or edit existing commands.
