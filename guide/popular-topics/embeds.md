@@ -77,7 +77,7 @@ const exampleEmbed = new MessageEmbed()
 	.addField('Inline field title', 'Some value here', true)
 	.setImage('https://i.imgur.com/AfFp7pu.png')
 	.setTimestamp()
-	.setFooter('Some footer text here', 'https://i.imgur.com/AfFp7pu.png');
+	.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
 
 channel.send({ embeds: [exampleEmbed] });
 ```

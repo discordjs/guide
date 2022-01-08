@@ -33,7 +33,7 @@ Now you have successfully denied the user whose `id` you used access to this app
 ::: tip
 If you want to update permissions for a global command instead, your `command` variable would be:
 ```js
-const command = client.application?.commands.fetch('123456789012345678');
+const command = await client.application?.commands.fetch('123456789012345678');
 ```
 :::
 
