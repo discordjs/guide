@@ -263,3 +263,107 @@ Official documentation: [https://www.i18next.com](https://www.i18next.com)
 i18next is an internationalization-framework for JavaScript. It is beneficial to translate your bot's user-facing messages into various languages based on the server it is used in.
 
 Covering an entire use case example for internationalization would be out of this guide's scope and requires some more explanation as to how the system operates. Please refer to the official documentation linked above for an in-depth usage guide.
+
+## axios
+
+:::tip
+Axios is used to make HTTP(S) requests to remote servers. The documentation can be located [Here](https://axios-http.com/docs/intro)
+:::
+Example:
+<!-- eslint-skip -->
+```js
+const axios = require('axios')
+
+axios({
+	method: 'post',
+	url: 'https://example.com/v1',
+	headers:
+	{
+		'Content-Type:':'application/json',
+		'User-Agent':'MyBot'
+	},
+	data{
+		"item":"one"
+	}
+}).then(response =>{
+	console.log(response)
+})
+
+```
+
+:::warning
+If the Axios request fails for one or more reasons, it will fire an an uncaught error. For this reason, it is recommended that you place Axios requests inside of a "try","catch","finally" sequence to prevent your application from crashing.
+
+An example of this is below
+:::
+<!-- eslint-skip -->
+```js
+
+const axios = require('axios')
+
+try{
+axios({
+	method: 'post',
+	url: 'https://example.com/v1',
+	headers:
+	{
+		'Content-Type:':'application/json',
+		'User-Agent':'MyBot'
+	},
+	data{
+		"item":"one"
+	}
+}).then(response =>{
+	console.log(response)
+})
+}catch(error){
+	console.log('Axios encountered an error')
+}finally{
+	// do something
+}
+
+
+
+```
+
+## crypto-js
+
+:::tip
+Crypto-JS is used to encrypt and decrypt data. This is helpful if you are storing user data in a remote database, and it is not encrypted at rest by default (ie. mongodb, firebase, aws, etc.) - It is always good practice to store user data encrypted at rest, and it is **required** by Discord's Terms of Service. 
+
+The documentation can be found [Here](https://cryptojs.gitbook.io/docs/)
+:::
+Example:
+<!-- eslint-skip -->
+```js
+const CryptoJS = require('crypto-js')
+const passphrase = process.env.encryption_passphrase
+
+let sensitiveData = "user_data_123"
+let secureData = encryptData(sensitiveData)
+
+
+function encryptData(data){
+	let encrypted = CryptoJS.AES.encrypt(`${data}`, `${passphrase}`).toString()
+	return encrypted
+}
+
+function decryptData(data){
+	let bytes = CryptoJS.AES.decrypt(data, `${passphrase}`)
+	let decrypted = bytes.toString(CryptoJS.enc.Utf8)
+	return decrypted
+}
+
+
+```
+
+You can now send the `secureData` to the database, and it will be encrypted at rest. When you need to retrieve the data, you should retrieve the data from your database, and then decrypt it using a function similar to the one demonstrated above.
+
+**Please Note:** In this demonstration I only encrypted Strings, however, it is entirely possible to encrypt any data type. 
+
+:::warning
+Please ensure that the passphrase you use to encrypt user data is **strong**. It should consist of at least eight characters, and should include letters, numbers, and symbols.
+
+:::danger
+If you lose this passphrase, the user data you have encrypted will be **unrecoverable**. It is highly recommended that you create at least one secure back-up of this key.
+:::
