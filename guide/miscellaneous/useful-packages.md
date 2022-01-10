@@ -362,7 +362,7 @@ You can now send the `secureData` to the database, and it will be encrypted at r
 **Please Note:** In this demonstration I only encrypted Strings, however, it is entirely possible to encrypt any data type. 
 
 :::warning
-Please ensure that the passphrase you use to encrypt user data is **strong**. It should consist of at least eight characters, and should include letters, numbers, and symbols.
+Please ensure that the passphrase you use to encrypt user data is **strong**. It should consist of at least eight characters, and should include letters, numbers and symbols.
 
 :::danger
 If you lose this passphrase, the user data you have encrypted will be **unrecoverable**. It is highly recommended that you create at least one secure back-up of this key.
