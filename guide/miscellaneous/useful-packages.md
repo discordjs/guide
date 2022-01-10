@@ -267,7 +267,7 @@ Covering an entire use case example for internationalization would be out of thi
 ## axios
 
 :::tip
-Axios is used to make HTTP(S) requests to remote servers. The documentation can be located [Here](https://axios-http.com/docs/intro)
+Axios is used to make HTTP(S) requests to remote servers. The documentation can be found [here](https://axios-http.com/docs/intro).
 :::
 Example:
 <!-- eslint-skip -->
@@ -292,7 +292,7 @@ axios({
 ```
 
 :::warning
-If the Axios request fails for one or more reasons, it will fire an an uncaught error. For this reason, it is recommended that you place Axios requests inside of a "try","catch","finally" sequence to prevent your application from crashing.
+If the Axios request fails for one or more reasons, it will fire an an uncaught error. For this reason, it is recommended that you place Axios requests inside of a `try`, `catch` and `finally` sequence to prevent your application from crashing.
 
 An example of this is below
 :::
@@ -331,7 +331,7 @@ axios({
 :::tip
 Crypto-JS is used to encrypt and decrypt data. This is helpful if you are storing user data in a remote database, and it is not encrypted at rest by default (ie. mongodb, firebase, aws, etc.) - It is always good practice to store user data encrypted at rest, and it is **required** by Discord's Terms of Service. 
 
-The documentation can be found [Here](https://cryptojs.gitbook.io/docs/)
+The documentation can be found [here](https://cryptojs.gitbook.io/docs/).
 :::
 Example:
 <!-- eslint-skip -->
