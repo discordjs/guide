@@ -59,7 +59,7 @@ All content has been updated to use discord.js v13 syntax. The v12 version of th
 - [Command handling](/creating-your-bot/command-handling.md/): Updated to use slash commands
 	- Obsolete sections removed
 - `client.on('message')` snippets updated to `client.on('interactionCreate')`
-	- [Message content will become a new priviledged intent in April 2022](https://support-dev.discord.com/hc/en-us/articles/4404772028055)
+	- [Message content will become a new privileged intent in April 2022](https://support-dev.discord.com/hc/en-us/articles/4404772028055)
 
 <DiscordMessages>
 	<DiscordMessage profile="bot">

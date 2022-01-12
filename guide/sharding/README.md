@@ -109,7 +109,7 @@ client.on('interactionCreate', interaction => {
 
 ## BroadcastEval
 
-Next, check out another handy sharding method known as <DocsLink path="class/ShardClientUtil?scrollTo=broadcastEval" type="method" />. This method makes all of the shards evaluate a given method, which recieves a `client` and a `context` argument. The `client` argument refers to the Client object of the shard evaluating it. You can read about the `context` argument [here](/sharding/additional-information.md#eval-arguments).
+Next, check out another handy sharding method known as <DocsLink path="class/ShardClientUtil?scrollTo=broadcastEval" type="method" />. This method makes all of the shards evaluate a given method, which receives a `client` and a `context` argument. The `client` argument refers to the Client object of the shard evaluating it. You can read about the `context` argument [here](/sharding/additional-information.md#eval-arguments).
 
 ```js
 client.shard
