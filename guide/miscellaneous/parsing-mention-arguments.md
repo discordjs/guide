@@ -76,7 +76,7 @@ Here is how the RegEx works:
  4. `\d+` means the RegEx will look for multiple digits, which will be the ID.
  5. The parentheses around the `\d+` create a capture group, which allows you to get the ID out of the mention.
 
-Using the `.match()` method on strings, you can get the capture group's values, i.e., the mention's ID.
+Using the `.exec()` method on the regex passing the the `mention` string, you can get the capture group's values, i.e., the mention's ID.
 
 ::: tip
 discord.js has <DocsLink path="class/MessageMentions?scrollTo=s-CHANNELS_PATTERN">built-in patterns</DocsLink> for matching mentions.
@@ -89,7 +89,7 @@ const { MessageMentions: { USERS_PATTERN } } = require('discord.js');
 
 function getUserFromMention(mention) {
 	// The id is the first and only match found by the RegEx.
-	const matches = mention.match(USERS_PATTERN);
+	const matches = USERS_PATTERN.exec(mention);
 
 	// If supplied variable was not a mention, matches will be null instead of an array.
 	if (!matches) return;
