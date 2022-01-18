@@ -40,7 +40,7 @@ pnpm add @discordjs/rest discord-api-types
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { token } = require('./config.json');
-const fs = require('fs');
+const fs = require('node:fs');
 
 const commands = [];
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -176,4 +176,3 @@ const data = new SlashCommandBuilder()
 			.setName('server')
 			.setDescription('Info about the server'));
 ```
-
