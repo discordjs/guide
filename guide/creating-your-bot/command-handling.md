@@ -91,7 +91,7 @@ discord-bot/
 
 Create a new folder named `commands`, which is where you'll store all of your commands.
 
-We'll be using utility methods from the [`@discordjs/builders`](https://github.com/discordjs/builders) package to build the slash command data, so open your terminal and install it.
+We'll be using utility methods from the [`@discordjs/builders`](https://github.com/discordjs/discord.js/tree/main/packages/builders) package to build the slash command data, so open your terminal and install it.
 
 :::: code-group
 ::: code-group-item npm

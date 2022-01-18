@@ -23,7 +23,7 @@ This section will cover only the bare minimum to get you started, but you can re
 
 Create a `deploy-commands.js` file in your project directory. This file will be used to register and update the slash commands for your bot application.
 
-You'll need to install [`@discordjs/builders`](https://github.com/discordjs/builders), [`@discordjs/rest`](https://github.com/discordjs/discord.js-modules/blob/main/packages/rest/), and [`discord-api-types`](https://github.com/discordjs/discord-api-types/).
+You'll need to install [`@discordjs/builders`](https://github.com/discordjs/discord.js/tree/main/packages/builders), [`@discordjs/rest`](https://github.com/discordjs/discord.js/tree/main/packages/rest), and [`discord-api-types`](https://github.com/discordjs/discord-api-types/).
 
 :::: code-group
 ::: code-group-item npm

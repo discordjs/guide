@@ -55,7 +55,7 @@ All content has been updated to use discord.js v13 syntax. The v12 version of th
 ### Updated
 
 - Commando: Removed, to be replaced with a guide on [Sapphire](https://github.com/discordjs/guide/pull/711)
-- [Voice](/voice/): Rewritten to use the [`@discordjs/voice`](https://github.com/discordjs/voice) package
+- [Voice](/voice/): Rewritten to use the [`@discordjs/voice`](https://github.com/discordjs/discord.js/tree/main/packages/voice) package
 - [Command handling](/creating-your-bot/command-handling.md/): Updated to use slash commands
 	- Obsolete sections removed
 - `client.on('message')` snippets updated to `client.on('interactionCreate')`
