@@ -96,7 +96,7 @@ After the initial response, an interaction token is valid for 15 minutes, so thi
 :::
 
 ```js {1,8-9}
-const wait = require('util').promisify(setTimeout);
+const wait = require('node:timers/promises').setTimeout;
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
@@ -117,7 +117,7 @@ In this case, you can make use of the `CommandInteraction#deferReply()` method, 
 <!--- here either display the is thinking message via vue-discord-message or place a screenshot -->
 
 ```js {7-9}
-const wait = require('util').promisify(setTimeout);
+const wait = require('timers/promises').setTimeout;
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
