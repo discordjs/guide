@@ -359,7 +359,7 @@ function decryptData(data){
 
 You can now send the `secureData` to the database, and it will be encrypted at rest. When you need to retrieve the data, you should retrieve the data from your database, and then decrypt it using a function similar to the one demonstrated above.
 
-**Please Note:** In this demonstration I only encrypted Strings, however, it is entirely possible to encrypt any data type. 
+**Please Note:** In this demonstration is only encrypted Strings, however, it is entirely possible to encrypt any data type. 
 
 :::warning
 Please ensure that the passphrase you use to encrypt user data is **strong**. It should consist of at least eight characters, and should include letters, numbers and symbols.
