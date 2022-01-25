@@ -140,6 +140,7 @@ In your `index.js` file, make these additions:
 
 ```js {1-2,7}
 const fs = require('fs');
+const path = require("path");
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
 
@@ -158,7 +159,7 @@ This next step is how to dynamically retrieve your command files. The [`fs.readd
 
 ```js {2,4-9}
 client.commands = new Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync(path.join(__dirname, './commands')).filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
@@ -172,12 +173,13 @@ Use the same approach for your `deploy-commands.js` file, but instead `.push()` 
 
 ```js {1,7,9-12}
 const fs = require('fs');
+const path = require("path");
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { clientId, guildId, token } = require('./config.json');
 
 const commands = [];
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = readdirSync(path.join(__dirname, "./commands")).filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
