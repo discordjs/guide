@@ -44,7 +44,7 @@ const fs = require('fs');
 const path = require("path");
 
 const commands = [];
-const commandFiles = readdirSync(path.join(__dirname, "./commands")).filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync(path.join(__dirname, "./commands")).filter(file => file.endsWith('.js'));
 
 // Place your client and guild ids here
 const clientId = '123456789012345678';
