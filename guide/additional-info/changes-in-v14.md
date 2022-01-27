@@ -14,7 +14,7 @@ In addition, the old enums exported by discord.js v13 and lower are replaced wit
 
 <details>
 <summary> New enum differences </summary>
-  Most of the difference between enums from discord.js and discord-api-type can be summarized as so:
+  Most of the difference between enums from discord.js and discord-api-types can be summarized as so:
 
 1. Enums are singular ie `ApplicationCommandOptionTypes` -> `ApplicationCommandOptionType`
 2. Enums that are prefixed with `Message` no longer have the `Message` prefix ie `MessageButtonStyles` -> `ButtonStyle`
@@ -41,7 +41,7 @@ Areas like JSON slash commands and JSON message compononents will likely need to
 const command = {
   name: 'ping',
 - type: 'CHAT_INPUT',
-+ type: ApplicationCommandType.ChatInput
++ type: ApplicationCommandType.ChatInput,
   options: [
     name: 'option',
     description: 'A sample option'
@@ -58,17 +58,29 @@ const command = {
 
 const button = {
   label: 'test'
-- style: 'PRIMARY'
-+ style: ButtonStyle.Primary
+- style: 'PRIMARY',
++ style: ButtonStyle.Primary,
   customId: '1234'
 }
 ```
 
 ### Event Removals
 
-`message` and `interaction` events are now removed. Use `messageCreate` and `interactionCreate` instead.
+The `message` and `interaction` events are now removed. Use `messageCreate` and `interactionCreate` instead.
 
 `applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate` have all been removed. Refer to [this pull request](https://github.com/discordjs/discord.js/pull/6492) for context.
+
+### REST Events
+
+The following discord.js events:
+- `invalidRequestWarning`
+- `request`
+- `response`
+- `rateLimited`
+- `newListener`
+- `removeListener`
+
+Have been removed from the `Client` in discord.js. Instead you should access these events from `Client#rest`.
 
 ### Utility Changes
 
@@ -80,7 +92,11 @@ Methods that return CDN URLs will now return a dynamic image URL (if available).
 
 ### Guild Object Changes
 
-All `Guild#setXPositions` methods have been removed, use `RoleManager#setPositions` and `GuildChannelManager#setPositions` instead.
+`Guild#setRolePositions` and `Guild#setChannelPositions` have been removed. Use `RoleManager#setPositions` and `GuildChannelManager#setPositions` instead respectively.
+
+### Thread Member Manager
+
+`ThreadMemberManager#fetch` now only takes a single object of type `ThreadMemberFetchOptions`.
 
 ### Role Manager
 
@@ -90,7 +106,15 @@ All `Guild#setXPositions` methods have been removed, use `RoleManager#setPositio
 
 You can no longer use `#deleted` to check if a structure was deleted or not. 
 
-Check out [the pull request](https://github.com/discordjs/discord.js/pull/7092) for more context.
+Check out [the issue ticket](https://github.com/discordjs/discord.js/issues/7091) for more context.
+
+### Channel changes
+
+`Channel#createAt` is now nullable. On any regular channel `#createAt` or private thread this value will always be non-null. This value is only nullable for public threads. 
+
+::: tip
+TypeScript users should narrow `Channel` types via type guards in order to get more specific typings.
+:::
 
 ### Message Embed Changes
 
@@ -130,3 +154,23 @@ The following typeguards on `Interaction` have been renamed:
 ```
 
 In addition, `Interaction#isCommand`, now indicates whether the command is an *application command* or not. This differs from the previous implementation where `isCommand()` indicated if the interaction was a chat input command or not.
+
+### Voices Region Changes
+
+`VoiceRegion#vip` has been removed as the field is no longer part of the API.
+
+### Application Changes
+
+`Application#fetchAssets` has been removed as the used for this method is no longer available from the API.
+
+## Features
+
+### Enum Resolvers
+The new `EnumResolvers` class allows you to transform `SCREAMING_SNAKE_CASE` enum keys to an enum value.
+
+```js
+const { EnumResolvers } = require('discord.js');
+
+// Returns `ButtonStyle.Primary`
+const buttonStyle = EnumResolvers.buttonStyle('PRIMARY');
+```
