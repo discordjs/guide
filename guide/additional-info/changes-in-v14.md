@@ -14,7 +14,7 @@ In addition, the old enums exported by discord.js v13 and lower are replaced wit
 
 <details>
 <summary> New enum differences </summary>
-  Most of the difference between enums from discord.js and discord-api-type can be summarized as so:
+  Most of the difference between enums from discord.js and discord-api-types can be summarized as so:
 
 1. Enums are singular ie `ApplicationCommandOptionTypes` -> `ApplicationCommandOptionType`
 2. Enums that are prefixed with `Message` no longer have the `Message` prefix ie `MessageButtonStyles` -> `ButtonStyle`
