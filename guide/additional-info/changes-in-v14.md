@@ -1,5 +1,9 @@
 # Updating from v13 to v14
 
+## Before you start
+
+v14 requires Node 16.9 or higher to use, so make sure you're up to date. To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it! There are many resources online to help you with this step based on your host system.
+
 ## Breaking Changes
 
 ### Enum Values
@@ -17,7 +21,7 @@ In addition, the old enums exported by discord.js v13 and lower are replaced wit
 3. Enum values are `PascalCase` rather than `SCREAMING_SNAKE_CASE` ie `.CHAT_INPUT` -> `.ChatInput`
  </details>
 
-They're are two recommended ways of representing enum values:
+There are two recommended ways of representing enum values:
 
 1. Use the actual enum type: `ButtonStyle.Primary`
 2. Continue using a string representation but instead use the new `EnumResolver`:
@@ -68,7 +72,11 @@ Check out [the pull request](https://github.com/discordjs/discord.js/pull/7092) 
 
 ### Message Embed Changes
 
-`MessageEmbed` has now been renamed to `Embed`
+- `MessageEmbed` has now been renamed to `Embed`
+
+- `#setFooter` now accepts a sole object `APIEmbedFooter` object. (add link to dapi site)
+
+- `#addField` and `#addFields` both accept an object or array of `APIEmbedField`(s) respectively. (add link to dapi site)
 
 ### Message Component Changes
 
