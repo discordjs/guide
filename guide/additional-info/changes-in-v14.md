@@ -64,6 +64,28 @@ const button = {
 }
 ```
 
+### Event Removals
+
+`message` and `interaction` events are now removed. Use `messageCreate` and `interactionCreate` instead.
+
+`applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate` have all been removed. Refer to [this PR](https://github.com/discordjs/discord.js/pull/6492) for context.
+
+# Utility Changes
+
+`Util#removeMentions` has been removed.
+
+### CDN Changes
+
+Methods that return CDN URLs will now return a dynamic image URL (if available). This behavior can be overriden by setting `forceStatic` to `false` in the `MakeURLOptions` parameters.
+
+### Guild Object Changes
+
+All `Guild#setXPositions` methods have been removed, use `RoleManager#setPositions` and `GuildChannelManager#setPositions` instead.
+
+### Role Manager
+
+`#comparePositions` has been moved from `Role` to `RoleManager`
+
 ### `.deleted` Field(s) have been removed
 
 You can no longer use `#deleted` to check if a structure was deleted or not. 
