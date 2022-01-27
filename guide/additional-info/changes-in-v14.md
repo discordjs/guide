@@ -17,7 +17,7 @@ In addition, the old enums exported by discord.js v13 and lower are replaced wit
 3. Enum values are `PascalCase` rather than `SCREAMING_SNAKE_CASE` ie `.CHAT_INPUT` -> `.ChatInput`
  </details>
 
-They're are two reccomended ways of representing enum values:
+They're are two recommended ways of representing enum values:
 
 1. Use the actual enum type: `ButtonStyle.Primary`
 2. Continue using a string representation but instead use the new `EnumResolver`:
