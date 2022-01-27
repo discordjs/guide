@@ -41,7 +41,7 @@ Areas like JSON slash commands and JSON message compononents will likely need to
 const command = {
   name: 'ping',
 - type: 'CHAT_INPUT',
-+ type: ApplicationCommandType.ChatInput
++ type: ApplicationCommandType.ChatInput,
   options: [
     name: 'option',
     description: 'A sample option'
@@ -58,15 +58,15 @@ const command = {
 
 const button = {
   label: 'test'
-- style: 'PRIMARY'
-+ style: ButtonStyle.Primary
+- style: 'PRIMARY',
++ style: ButtonStyle.Primary,
   customId: '1234'
 }
 ```
 
 ### Event Removals
 
-`message` and `interaction` events are now removed. Use `messageCreate` and `interactionCreate` instead.
+The `message` and `interaction` events are now removed. Use `messageCreate` and `interactionCreate` instead.
 
 `applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate` have all been removed. Refer to [this PR](https://github.com/discordjs/discord.js/pull/6492) for context.
 
@@ -80,7 +80,7 @@ Methods that return CDN URLs will now return a dynamic image URL (if available).
 
 ### Guild Object Changes
 
-All `Guild#setXPositions` methods have been removed, use `RoleManager#setPositions` and `GuildChannelManager#setPositions` instead.
+`Guild#setRolePositions` and `Guild#setChannelPositions` have been removed. Use `RoleManager#setPositions` and `GuildChannelManager#setPositions` instead respectively.
 
 ### Role Manager
 
