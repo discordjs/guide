@@ -16,9 +16,9 @@ In addition, the old enums exported by discord.js v13 and lower are replaced wit
 <summary> New enum differences </summary>
   Most of the difference between enums from discord.js and discord-api-types can be summarized as so:
 
-1. Enums are singular ie `ApplicationCommandOptionTypes` -> `ApplicationCommandOptionType`
-2. Enums that are prefixed with `Message` no longer have the `Message` prefix ie `MessageButtonStyles` -> `ButtonStyle`
-3. Enum values are `PascalCase` rather than `SCREAMING_SNAKE_CASE` ie `.CHAT_INPUT` -> `.ChatInput`
+1. Enums are singular, i.e., `ApplicationCommandOptionTypes` -> `ApplicationCommandOptionType`
+2. Enums that are prefixed with `Message` no longer have the `Message` prefix, i.e., `MessageButtonStyles` -> `ButtonStyle`
+3. Enum values are `PascalCase` rather than `SCREAMING_SNAKE_CASE`, i.e., `.CHAT_INPUT` -> `.ChatInput`
  </details>
 
 There are two recommended ways of representing enum values:
