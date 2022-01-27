@@ -68,11 +68,11 @@ const button = {
 
 `message` and `interaction` events are now removed. Use `messageCreate` and `interactionCreate` instead.
 
-`applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate` have all been removed. Refer to [this PR](https://github.com/discordjs/discord.js/pull/6492) for context.
+`applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate` have all been removed. Refer to [this pull request](https://github.com/discordjs/discord.js/pull/6492) for context.
 
-# Utility Changes
+### Utility Changes
 
-`Util#removeMentions` has been removed.
+`Util#removeMentions` has been removed, to control mentions you should use `allowedMentions` on `MessageOptions` instead.
 
 ### CDN Changes
 
@@ -84,7 +84,7 @@ All `Guild#setXPositions` methods have been removed, use `RoleManager#setPositio
 
 ### Role Manager
 
-`#comparePositions` has been moved from `Role` to `RoleManager`
+`#comparePositions` has been removed from `Role`. Use `RoleManager#comparePositions` instead.
 
 ### `.deleted` Field(s) have been removed
 
