@@ -100,7 +100,7 @@ Methods that return CDN URLs will now return a dynamic image URL (if available).
 
 ### Role Manager
 
-`#comparePositions` has been removed from `Role`. Use `RoleManager#comparePositions` instead.
+`Role.comparePositions` has been removed. Use `RoleManager#comparePositions` instead.
 
 ### `.deleted` Field(s) have been removed
 
