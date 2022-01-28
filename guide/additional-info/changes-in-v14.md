@@ -88,7 +88,7 @@ Have been removed from the `Client` in discord.js. Instead you should access the
 
 ### CDN Changes
 
-Methods that return CDN URLs will now return a dynamic image URL (if available). This behavior can be overriden by setting `forceStatic` to `false` in the `MakeURLOptions` parameters.
+Methods that return CDN URLs will now return a dynamic image URL (if available). This behavior can be overriden by setting `forceStatic` to `true` in the `MakeURLOptions` parameters.
 
 ### Guild Object Changes
 
