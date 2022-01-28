@@ -64,7 +64,7 @@ const button = {
 }
 ```
 
-### Event Removals
+### Events
 
 The `message` and `interaction` events are now removed. Use `messageCreate` and `interactionCreate` instead.
 
@@ -82,23 +82,23 @@ The following discord.js events:
 
 Have been removed from the `Client` in discord.js. Instead you should access these events from `Client#rest`.
 
-### Utility Changes
+### Util
 
 `Util#removeMentions` has been removed, to control mentions you should use `allowedMentions` on `MessageOptions` instead.
 
-### CDN Changes
+### CDN
 
 Methods that return CDN URLs will now return a dynamic image URL (if available). This behavior can be overriden by setting `forceStatic` to `false` in the `MakeURLOptions` parameters.
 
-### Guild Object Changes
+### Guild
 
 `Guild#setRolePositions` and `Guild#setChannelPositions` have been removed. Use `RoleManager#setPositions` and `GuildChannelManager#setPositions` instead respectively.
 
-### Thread Member Manager
+### ThreadMemberManager
 
 `ThreadMemberManager#fetch` now only takes a single object of type `ThreadMemberFetchOptions`.
 
-### Role Manager
+### RoleManager
 
 `Role.comparePositions` has been removed. Use `RoleManager#comparePositions` instead.
 
@@ -108,7 +108,7 @@ You can no longer use `#deleted` to check if a structure was deleted or not.
 
 Check out [the issue ticket](https://github.com/discordjs/discord.js/issues/7091) for more context.
 
-### Channel changes
+### Channel
 
 `Channel#createAt` is now nullable. On any regular channel `#createAt` or private thread this value will always be non-null. This value is only nullable for public threads. 
 
@@ -116,15 +116,15 @@ Check out [the issue ticket](https://github.com/discordjs/discord.js/issues/7091
 TypeScript users should narrow `Channel` types via type guards in order to get more specific typings.
 :::
 
-### Message Embed Changes
+### MessageEmbed
 
 - `MessageEmbed` has now been renamed to `Embed`
 
-- `#setFooter` now accepts a sole object `APIEmbedFooter` object. (add link to dapi site)
+- `#setFooter` now accepts a sole `FooterOptions` object. (add link to dapi site)
 
 - `#addField` and `#addFields` both accept an object or array of `APIEmbedField`(s) respectively. (add link to dapi site)
 
-### Message Component Changes
+### MessageComponent
 
 MessageComponents have been renamed as well. They no longer have the `Message` prefix:
 
@@ -141,7 +141,7 @@ MessageComponents have been renamed as well. They no longer have the `Message` p
 
 Many of the analogous enums can be found be found in the discord-api-types docs (link website here)
 
-### Interaction typeguard changes
+### Interaction
 
 The following typeguards on `Interaction` have been renamed:
 
@@ -155,13 +155,13 @@ The following typeguards on `Interaction` have been renamed:
 
 In addition, `Interaction#isCommand`, now indicates whether the command is an *application command* or not. This differs from the previous implementation where `isCommand()` indicated if the interaction was a chat input command or not.
 
-### Voices Region Changes
+### VoicesRegion Changes
 
 `VoiceRegion#vip` has been removed as the field is no longer part of the API.
 
-### Application Changes
+### Application
 
-`Application#fetchAssets` has been removed as the used for this method is no longer available from the API.
+`Application#fetchAssets` has been removed as it is no longer supported by the API.
 
 ## Features
 
