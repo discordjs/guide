@@ -33,7 +33,7 @@ const enumValue = EnumResolvers.resolveButtonStyle('PRIMARY');
 
 Areas like JSON slash commands and JSON message compononents will likely need to be modified to accomodate these changes:
 
-**Application commands**:
+#### Common Application Command Data changes
 
 ```diff
 + const { ApplicationCommandType, ApplicationCommandOptionType } = require('discord.js');
@@ -51,7 +51,7 @@ const command = {
 };
 ```
 
-**Buttons**:
+#### Common Button Data changes
 
 ```diff
 + const { ButtonStyle } = require('discord.js');
@@ -70,7 +70,7 @@ The `message` and `interaction` events are now removed. Use `messageCreate` and 
 
 `applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate` have all been removed. Refer to [this pull request](https://github.com/discordjs/discord.js/pull/6492) for context.
 
-### REST Events
+#### REST Events
 
 The following discord.js events:
 - `invalidRequestWarning`
@@ -110,7 +110,7 @@ Check out [the issue ticket](https://github.com/discordjs/discord.js/issues/7091
 
 ### Channel
 
-`Channel#createAt` is now nullable. On any regular channel `#createAt` or private thread this value will always be non-null. This value is only nullable for public threads. 
+`Channel#createdAt` and `Channel#createdTimestamp` are now nullable. On any regular channel or private thread `#createdAt` and `#createTimestamp` will always be non-null. This value is only nullable for public threads. 
 
 ::: tip
 TypeScript users should narrow `Channel` types via type guards in order to get more specific typings.
