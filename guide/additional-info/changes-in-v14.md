@@ -6,6 +6,8 @@ v14 requires Node 16.9 or higher to use, so make sure you're up to date. To chec
 
 ## Breaking Changes
 
+### Common Breakages
+
 ### Enum Values
 
 Any areas that used to accept a `string` or `number` type for an enum parameter will now only accept exclusively `number`s.
@@ -44,7 +46,7 @@ const command = {
 + type: ApplicationCommandType.ChatInput,
   options: [
     name: 'option',
-    description: 'A sample option'
+    description: 'A sample option',
 -   type: 'STRING',
 +   type: ApplicationCommandOptionType.String
   ],
@@ -57,12 +59,35 @@ const command = {
 + const { ButtonStyle } = require('discord.js');
 
 const button = {
-  label: 'test'
+  label: 'test',
 - style: 'PRIMARY',
 + style: ButtonStyle.Primary,
   customId: '1234'
 }
 ```
+
+### Application
+
+`#fetchAssets` has been removed as it is no longer supported by the API.
+
+### CDN
+
+- Methods that return CDN URLs will now return a dynamic image URL (if available). This behavior can be overridden by setting `forceStatic` to `true` in the `MakeURLOptions` parameters.
+- CDN methods now default to fetching `.webp` assets (if available), instead of `.png` assets.
+
+### Channel
+
+- `#createdAt` and `#createdTimestamp` are now nullable. On any regular channel or private thread `#createdAt` and `#createTimestamp` will always be non-null. This value is only nullable for public threads. 
+- `#isText` has been renamed to `#isTextBased`
+- `#isVoice` has been renamed to `#isVoiceBased` 
+
+::: tip
+TypeScript users should narrow `Channel` types via type guards in order to get more specific typings.
+:::
+
+### CommandInteractionOptionResolver
+
+`#getMember` no longer has a parameter for `required`, check out [this pull request](https://github.com/discordjs/discord.js/pull/7188) for details.
 
 ### Events
 
@@ -70,67 +95,23 @@ The `message` and `interaction` events are now removed. Use `messageCreate` and 
 
 `applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate` have all been removed. Refer to [this pull request](https://github.com/discordjs/discord.js/pull/6492) for context.
 
-#### REST Events
-
-The following discord.js events:
-- `invalidRequestWarning`
-- `request`
-- `response`
-- `rateLimited`
-- `newListener`
-- `removeListener`
-
-Have been removed from the `Client` in discord.js. Instead you should access these events from `Client#rest`.
-
-### Util
-
-`Util#removeMentions` has been removed, to control mentions you should use `allowedMentions` on `MessageOptions` instead.
-
-### CDN
-
-Methods that return CDN URLs will now return a dynamic image URL (if available). This behavior can be overridden by setting `forceStatic` to `true` in the `MakeURLOptions` parameters.
-
-### CommandInteractionOptionResolver
-
-`CommandInteractionOptionResolver#getMember` no longer has a parameter for `required`, check out [this pull request](https://github.com/discordjs/discord.js/pull/7188) for details.
-
 ### Guild
 
-`Guild#setRolePositions` and `Guild#setChannelPositions` have been removed. Use `RoleManager#setPositions` and `GuildChannelManager#setPositions` instead respectively.
+`#setRolePositions` and `#setChannelPositions` have been removed. Use `RoleManager#setPositions` and `GuildChannelManager#setPositions` instead respectively.
 
-### ThreadMemberManager
+### Interaction
 
-`ThreadMemberManager#fetch` now only takes a single object of type `ThreadMemberFetchOptions`.
+The following typeguards on `Interaction` have been renamed:
 
-### RoleManager
+```diff
+- interaction.isCommand()
++ interaction.isChatInputCommand()
 
-`Role.comparePositions` has been removed. Use `RoleManager#comparePositions` instead.
+- interaction.isContextMenu()
++ interaction.isContextMenuCommand()
+```
 
-### `.deleted` Field(s) have been removed
-
-You can no longer use `#deleted` to check if a structure was deleted or not. 
-
-Check out [the issue ticket](https://github.com/discordjs/discord.js/issues/7091) for more context.
-
-### Channel
-
-`Channel#createdAt` and `Channel#createdTimestamp` are now nullable. On any regular channel or private thread `#createdAt` and `#createTimestamp` will always be non-null. This value is only nullable for public threads. 
-
-::: tip
-TypeScript users should narrow `Channel` types via type guards in order to get more specific typings.
-:::
-
-### VoiceChannel
-
-`VoiceChannel#editable` has been removed, instead you should use `GuildChannel#manageable` for checking this permission.
-
-### MessageEmbed
-
-- `MessageEmbed` has now been renamed to `Embed`
-
-- `#setFooter` now accepts a sole `FooterOptions` object. (add link to dapi site)
-
-- `#addField` and `#addFields` both accept an object or array of `APIEmbedField`(s) respectively. (add link to dapi site)
+In addition, `#isCommand`, now indicates whether the command is an *application command* or not. This differs from the previous implementation where `#isCommand` indicated if the interaction was a chat input command or not.
 
 ### MessageComponent
 
@@ -147,31 +128,81 @@ MessageComponents have been renamed as well. They no longer have the `Message` p
 + const actionRow = new ActionRow();
 ```
 
-Many of the analogous enums can be found be found in the discord-api-types docs (link website here)
+### MessageEmbed
 
-### Interaction
+- `MessageEmbed` has now been renamed to `Embed`
 
-The following typeguards on `Interaction` have been renamed:
+- `#setFooter` now accepts a sole `FooterOptions` object. (add link to dapi site)
+
+- `#addField` and `#addFields` both accept an object or array of `APIEmbedField`(s) respectively. (add link to dapi site)
+
+#### REST Events
+
+The following discord.js events:
+- `invalidRequestWarning`
+- `apiRequest`
+- `apiResponse`
+- `rateLimit`
+
+Have been removed from the `Client` in discord.js. Instead you should access these events from `Client#rest`. In addition `apiRequest`, `apiResponse` and `rateLimit` events have been renamed:
 
 ```diff
-- interaction.isCommand()
-+ interaction.isChatInputCommand()
+- client.on('apiRequest', ...);
++ client.rest.on('request', ...);
 
-- interaction.isContextMenu()
-+ interaction.isContextMenuCommand()
+- client.on('apiResponse', ...);
++ client.rest.on('response', ...);
+
+- client.on('rateLimit', ...);
++ client.rest.on('rateLimited', ...);
 ```
 
-In addition, `Interaction#isCommand`, now indicates whether the command is an *application command* or not. This differs from the previous implementation where `isCommand()` indicated if the interaction was a chat input command or not.
+### RoleManager
+
+`Role.comparePositions` has been removed. Use `RoleManager#comparePositions` instead.
+
+### ThreadMemberManager
+
+`#fetch` now only takes a single object of type `ThreadMemberFetchOptions`.
+
+### Util
+
+`#removeMentions` has been removed, to control mentions you should use `allowedMentions` on `MessageOptions` instead.
+
+
+### `.deleted` Field(s) have been removed
+
+You can no longer use `#deleted` to check if a structure was deleted or not. 
+
+Check out [the issue ticket](https://github.com/discordjs/discord.js/issues/7091) for more context.
+
+### VoiceChannel
+
+`#editable` has been removed, instead you should use `GuildChannel#manageable` for checking this permission.
+
+Many of the analogous enums can be found be found in the discord-api-types docs (link website here)
 
 ### VoicesRegion Changes
 
-`VoiceRegion#vip` has been removed as the field is no longer part of the API.
-
-### Application
-
-`Application#fetchAssets` has been removed as it is no longer supported by the API.
+`#vip` has been removed as the field is no longer part of the API.
 
 ## Features
+
+### Channel
+
+New typeguards have been added:
+- `#isText`*
+- `#isDM`*
+- `#isGroupDM`
+- `#isVoice`*
+- `#isVoiceBased`
+- `#isTextBased`
+- `#isStage`
+- `#isCategory`
+- `#isNews`
+- `#isStore`
+
+*These methods existed previously but have different behaviors refer to the docs for their specific changes.
 
 ### Enum Resolvers
 The new `EnumResolvers` class allows you to transform `SCREAMING_SNAKE_CASE` enum keys to an enum value.
