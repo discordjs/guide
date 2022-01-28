@@ -31,7 +31,7 @@ const { EnumResolver } = require('discord.js');
 const enumValue = EnumResolvers.resolveButtonStyle('PRIMARY');
 ```
 
-Areas like JSON slash commands and JSON message compononents will likely need to be modified to accomodate these changes:
+Areas like JSON slash commands and JSON message components will likely need to be modified to accommodate these changes:
 
 #### Common Application Command Data changes
 
@@ -88,7 +88,11 @@ Have been removed from the `Client` in discord.js. Instead you should access the
 
 ### CDN
 
-Methods that return CDN URLs will now return a dynamic image URL (if available). This behavior can be overriden by setting `forceStatic` to `true` in the `MakeURLOptions` parameters.
+Methods that return CDN URLs will now return a dynamic image URL (if available). This behavior can be overridden by setting `forceStatic` to `true` in the `MakeURLOptions` parameters.
+
+### CommandInteractionOptionResolver
+
+`CommandInteractionOptionResolver#getMember` no longer has a parameter for `required`, check out [this pull request](https://github.com/discordjs/discord.js/pull/7188) for details.
 
 ### Guild
 
@@ -115,6 +119,10 @@ Check out [the issue ticket](https://github.com/discordjs/discord.js/issues/7091
 ::: tip
 TypeScript users should narrow `Channel` types via type guards in order to get more specific typings.
 :::
+
+### VoiceChannel
+
+`VoiceChannel#editable` has been removed, instead you should use `GuildChannel#manageable` for checking this permission.
 
 ### MessageEmbed
 
@@ -174,3 +182,7 @@ const { EnumResolvers } = require('discord.js');
 // Returns `ButtonStyle.Primary`
 const buttonStyle = EnumResolvers.buttonStyle('PRIMARY');
 ```
+
+### Interaction
+
+Added `#isRepliable` to check whether a given interaction can be replied to.
