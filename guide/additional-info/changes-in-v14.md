@@ -113,6 +113,10 @@ The following typeguards on `Interaction` have been renamed:
 
 In addition, `#isCommand`, now indicates whether the command is an *application command* or not. This differs from the previous implementation where `#isCommand` indicated if the interaction was a chat input command or not.
 
+### Invite
+
+`#channel` and `#inviter` are now getters and resolve structures from the cache.
+
 ### MessageComponent
 
 MessageComponents have been renamed as well. They no longer have the `Message` prefix:
@@ -136,7 +140,11 @@ MessageComponents have been renamed as well. They no longer have the `Message` p
 
 - `#addField` and `#addFields` both accept an object or array of `APIEmbedField`(s) respectively. (add link to dapi site)
 
-#### REST Events
+### Permissions
+
+Thread permissions `USE_PUBLIC_THREADS` and `USE_PRIVATE_THREADS` have been removed as they are now deprecated in the API. Instead use the newer `*Threads` permission flags.
+
+### REST Events
 
 The following discord.js events:
 - `invalidRequestWarning`
@@ -185,6 +193,10 @@ Many of the analogous enums can be found be found in the discord-api-types docs 
 ### VoicesRegion Changes
 
 `#vip` has been removed as the field is no longer part of the API.
+
+### Webhook
+
+`#fetchMessage` now only takes on sole object of type `WebhookFetchMessageOptions`.
 
 ## Features
 
