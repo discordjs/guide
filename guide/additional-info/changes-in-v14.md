@@ -26,14 +26,24 @@ In addition, the old enums exported by discord.js v13 and lower are replaced wit
 There are two recommended ways of representing enum values:
 
 1. Use the actual enum type: `ButtonStyle.Primary`
-2. Continue using a string representation but instead use the new `EnumResolver`:
+2. Continue using a string representation but instead use the new `EnumResolvers`:
 
 ```js
-const { EnumResolver } = require('discord.js');
+const { EnumResolvers } = require('discord.js');
 const enumValue = EnumResolvers.resolveButtonStyle('PRIMARY');
 ```
 
-Areas like JSON slash commands and JSON message components will likely need to be modified to accommodate these changes:
+Areas like `Client` initialization, JSON slash commands and JSON message components will likely need to be modified to accommodate these changes:
+
+#### Common Client Initialization Changes
+
+```diff
+- const { Client, Intents } = require('discord.js');
++ const { Client, GatewayIntentBits, Partials } = require('discord.js');
+
+- const client = new Client({ intents: [Intents.FLAGS.GUILDS], partials: ['CHANNEL'] });
++ const client = new Client({ intents: [GatewayIntentBits.Guilds], partials: [Partials.Channel] });
+```
 
 #### Common Application Command Data changes
 
@@ -69,6 +79,37 @@ const button = {
 ### Application
 
 `#fetchAssets` has been removed as it is no longer supported by the API.
+
+### BitField
+
+- BitField constituents now have a `BitField` suffix to avoid naming conflicts with the enum names:
+```diff
+- new Permissions()
++ new PermissionsBitField()
+
+- new MessageFlags()
++ new MessageFlagsBitField()
+
+- new ThreadMemberFlags()
++ new ThreadMemberFlagsBitField()
+
+- new UserFlags()
++ new UserFlagsBitField()
+
+- new SystemChannelFlags()
++ new SystemChannelFlagsBitField()
+
+- new ApplicationFlags()
++ new ApplicationFlagsBitField()
+
+- new Intents()
++ new IntentsBitField
+
+- new ActivityFlags()
++ new ActivityFlagsBitField()
+```
+
+- `#flags` has been renamed to `#Flags`
 
 ### CDN
 
@@ -140,9 +181,17 @@ MessageComponents have been renamed as well. They no longer have the `Message` p
 
 - `#addField` and `#addFields` both accept an object or array of `APIEmbedField`(s) respectively. (add link to dapi site)
 
+### PartialTypes
+
+The `PartialTypes` string array has been removed, instead use the `Partials` enum.
+
 ### Permissions
 
 Thread permissions `USE_PUBLIC_THREADS` and `USE_PRIVATE_THREADS` have been removed as they are now deprecated in the API. Instead use the newer `*Threads` permission flags.
+
+### PermissionOverwritesManager
+
+Overwrites are now keyed by the `PascalCase` permission key rather than the `SCREAMING_SNAKE_CASE` permission key.
 
 ### REST Events
 
@@ -214,7 +263,7 @@ New typeguards have been added:
 - `#isNews`
 - `#isStore`
 
-*These methods existed previously but have different behaviors refer to the docs for their specific changes.
+*These methods existed previously but behaved differently. Refer to the docs for their specific changes.
 
 ### Enum Resolvers
 The new `EnumResolvers` class allows you to transform `SCREAMING_SNAKE_CASE` enum keys to an enum value.
