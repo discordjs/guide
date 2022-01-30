@@ -103,13 +103,13 @@ const button = {
 + new ApplicationFlagsBitField()
 
 - new Intents()
-+ new IntentsBitField
++ new IntentsBitField()
 
 - new ActivityFlags()
 + new ActivityFlagsBitField()
 ```
 
-- `#flags` has been renamed to `#Flags`
+- `#FLAGS` has been renamed to `#Flags`
 
 ### CDN
 
@@ -176,6 +176,8 @@ MessageComponents have been renamed as well. They no longer have the `Message` p
 ### MessageEmbed
 
 - `MessageEmbed` has now been renamed to `Embed`
+
+- `#setAuthor` now accepts a sole `AuthorOptions` object. (add link to dapi site)
 
 - `#setFooter` now accepts a sole `FooterOptions` object. (add link to dapi site)
 
