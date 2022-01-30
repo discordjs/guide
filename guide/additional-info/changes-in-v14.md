@@ -21,19 +21,29 @@ In addition, the old enums exported by discord.js v13 and lower are replaced wit
 1. Enums are singular, i.e., `ApplicationCommandOptionTypes` -> `ApplicationCommandOptionType`
 2. Enums that are prefixed with `Message` no longer have the `Message` prefix, i.e., `MessageButtonStyles` -> `ButtonStyle`
 3. Enum values are `PascalCase` rather than `SCREAMING_SNAKE_CASE`, i.e., `.CHAT_INPUT` -> `.ChatInput`
- </details>
+</details>
 
 There are two recommended ways of representing enum values:
 
 1. Use the actual enum type: `ButtonStyle.Primary`
-2. Continue using a string representation but instead use the new `EnumResolver`:
+2. Continue using a string representation but instead use the new `EnumResolvers`:
 
 ```js
-const { EnumResolver } = require('discord.js');
+const { EnumResolvers } = require('discord.js');
 const enumValue = EnumResolvers.resolveButtonStyle('PRIMARY');
 ```
 
-Areas like JSON slash commands and JSON message components will likely need to be modified to accommodate these changes:
+Areas like `Client` initialization, JSON slash commands and JSON message components will likely need to be modified to accommodate these changes:
+
+#### Common Client Initialization Changes
+
+```diff
+- const { Client, Intents } = require('discord.js');
++ const { Client, GatewayIntentBits, Partials } = require('discord.js');
+
+- const client = new Client({ intents: [Intents.FLAGS.GUILDS], partials: ['CHANNEL'] });
++ const client = new Client({ intents: [GatewayIntentBits.Guilds], partials: [Partials.Channel] });
+```
 
 #### Common Application Command Data changes
 
@@ -70,6 +80,38 @@ const button = {
 
 `#fetchAssets` has been removed as it is no longer supported by the API.
 
+### BitField
+
+- BitField constituents now have a `BitField` suffix to avoid naming conflicts with the enum names:
+
+```diff
+- new Permissions()
++ new PermissionsBitField()
+
+- new MessageFlags()
++ new MessageFlagsBitField()
+
+- new ThreadMemberFlags()
++ new ThreadMemberFlagsBitField()
+
+- new UserFlags()
++ new UserFlagsBitField()
+
+- new SystemChannelFlags()
++ new SystemChannelFlagsBitField()
+
+- new ApplicationFlags()
++ new ApplicationFlagsBitField()
+
+- new Intents()
++ new IntentsBitField
+
+- new ActivityFlags()
++ new ActivityFlagsBitField()
+```
+
+- `#flags` has been renamed to `#Flags`
+
 ### CDN
 
 - Methods that return CDN URLs will now return a dynamic image URL (if available). This behavior can be overridden by setting `forceStatic` to `true` in the `MakeURLOptions` parameters.
@@ -77,9 +119,9 @@ const button = {
 
 ### Channel
 
-- `#createdAt` and `#createdTimestamp` are now nullable. On any regular channel or private thread `#createdAt` and `#createTimestamp` will always be non-null. This value is only nullable for public threads. 
+- `#createdAt` and `#createdTimestamp` are now nullable. On any regular channel or private thread `#createdAt` and `#createTimestamp` will always be non-null. This value is only nullable for public threads.
 - `#isText` has been renamed to `#isTextBased`
-- `#isVoice` has been renamed to `#isVoiceBased` 
+- `#isVoice` has been renamed to `#isVoiceBased`
 
 ::: tip
 TypeScript users should narrow `Channel` types via type guards in order to get more specific typings.
@@ -111,7 +153,7 @@ The following typeguards on `Interaction` have been renamed:
 + interaction.isContextMenuCommand()
 ```
 
-In addition, `#isCommand`, now indicates whether the command is an *application command* or not. This differs from the previous implementation where `#isCommand` indicated if the interaction was a chat input command or not.
+In addition, `#isCommand`, now indicates whether the command is an _application command_ or not. This differs from the previous implementation where `#isCommand` indicated if the interaction was a chat input command or not.
 
 ### Invite
 
@@ -140,13 +182,22 @@ MessageComponents have been renamed as well. They no longer have the `Message` p
 
 - `#addField` and `#addFields` both accept an object or array of `APIEmbedField`(s) respectively. (add link to dapi site)
 
+### PartialTypes
+
+The `PartialTypes` string array has been removed, instead use the `Partials` enum.
+
 ### Permissions
 
 Thread permissions `USE_PUBLIC_THREADS` and `USE_PRIVATE_THREADS` have been removed as they are now deprecated in the API. Instead use the newer `*Threads` permission flags.
 
+### PermissionOverwritesManager
+
+Overwrites are now keyed by the `PascalCase` permission key rather than the `SCREAMING_SNAKE_CASE` permission key.
+
 ### REST Events
 
 The following discord.js events:
+
 - `invalidRequestWarning`
 - `apiRequest`
 - `apiResponse`
@@ -177,10 +228,9 @@ Have been removed from the `Client` in discord.js. Instead you should access the
 
 `#removeMentions` has been removed, to control mentions you should use `allowedMentions` on `MessageOptions` instead.
 
-
 ### `.deleted` Field(s) have been removed
 
-You can no longer use `#deleted` to check if a structure was deleted or not. 
+You can no longer use `#deleted` to check if a structure was deleted or not.
 
 Check out [the issue ticket](https://github.com/discordjs/discord.js/issues/7091) for more context.
 
@@ -203,20 +253,23 @@ Many of the analogous enums can be found be found in the discord-api-types docs 
 ### Channel
 
 New typeguards have been added:
-- `#isText`*
-- `#isDM`*
+
+- `#isText`\*
+- `#isDM`\*
 - `#isGroupDM`
-- `#isVoice`*
+- `#isVoice`\*
 - `#isVoiceBased`
 - `#isTextBased`
+- `#isDMBased`
 - `#isStage`
 - `#isCategory`
 - `#isNews`
 - `#isStore`
 
-*These methods existed previously but have different behaviors refer to the docs for their specific changes.
+\*These methods existed previously but behaved differently. Refer to the docs for their specific changes.
 
 ### Enum Resolvers
+
 The new `EnumResolvers` class allows you to transform `SCREAMING_SNAKE_CASE` enum keys to an enum value.
 
 ```js
