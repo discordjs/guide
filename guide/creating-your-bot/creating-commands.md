@@ -145,7 +145,7 @@ client.on('interactionCreate', async interaction => {
 		<template #interactions>
 			<DiscordInteraction profile="user" :command="true">server</DiscordInteraction>
 		</template>
-		Server name: Discord.js Guide
+		Server name: discord.js Guide
 		<br />
 		Total members: 2
 	</DiscordMessage>

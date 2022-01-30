@@ -1,6 +1,6 @@
 # Parsing mentions
 
-Discord.js is already geared to help you handle mentions using `message.mentions`.
+discord.js is already geared to help you handle mentions using `message.mentions`.
 However, there are situations where using `message.mentions` can lead to a few problems, in which case you may want to parse them on your own.  
 For example, you cannot tell where the mention is located in the message's content, or if the same user/role/channel was mentioned more than once.
 
