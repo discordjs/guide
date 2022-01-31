@@ -159,7 +159,7 @@ This next step is how to dynamically retrieve your command files. The [`fs.readd
 
 ```js {2,4-9}
 client.commands = new Collection();
-const commandFiles = fs.readdirSync(path.join(__dirname, './commands')).filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync(path.join(__dirname, 'commands')).filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
