@@ -173,7 +173,7 @@ Use the same approach for your `deploy-commands.js` file, but instead `.push()` 
 
 ```js {1,7,9-12}
 const fs = require('fs');
-const path = require("path");
+const path = require('path');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { clientId, guildId, token } = require('./config.json');
