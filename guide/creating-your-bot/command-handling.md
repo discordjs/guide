@@ -140,7 +140,7 @@ In your `index.js` file, make these additions:
 
 ```js {1-2,7}
 const fs = require('fs');
-const path = require("path");
+const path = require('path');
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
 
