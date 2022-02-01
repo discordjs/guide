@@ -52,7 +52,7 @@ client.on('interactionCreate', async interaction => {
 		const tagDescription = interaction.options.getString('description');
 
 		try {
-			// equivalent to: INSERT INTO tags (name, descrption, username) values (?, ?, ?);
+			// equivalent to: INSERT INTO tags (name, description, username) values (?, ?, ?);
 			const tag = await Tags.create({
 				name: tagName,
 				description: tagDescription,
@@ -84,7 +84,7 @@ client.on('interactionCreate', async interaction => {
 		const tagName = interaction.options.getString('name');
 		const tagDescription = interaction.options.getString('description');
 
-		// equivalent to: UPDATE tags (descrption) values (?) WHERE name = ?;
+		// equivalent to: UPDATE tags (description) values (?) WHERE name = ?;
 		const affectedRows = await Tags.update({ description: tagDescription }, { where: { name: tagName } });
 
 		if (affectedRows > 0) {

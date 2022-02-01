@@ -87,7 +87,7 @@ Refer to the [threads](/popular-topics/threads.html) section of this guide to ge
 
 ## Voice
 
-Support for voice has been separated into its own module. You now need to install and use [@discordjs/voice](https://github.com/discordjs/voice) for interacting with the Discord Voice API.
+Support for voice has been separated into its own module. You now need to install and use [@discordjs/voice](https://github.com/discordjs/discord.js/tree/main/packages/voice) for interacting with the Discord Voice API.
 
 Refer to the [voice](/voice/) section of this guide to get started.
 
