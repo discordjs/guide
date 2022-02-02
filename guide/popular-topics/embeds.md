@@ -114,7 +114,7 @@ const exampleEmbed = {
 	url: 'https://discord.js.org',
 	author: {
 		name: 'Some name',
-		icon_url: 'https://i.imgur.com/AfFp7pu.png',
+		iconURL: 'https://i.imgur.com/AfFp7pu.png',
 		url: 'https://discord.js.org',
 	},
 	description: 'Some description here',
@@ -153,7 +153,7 @@ const exampleEmbed = {
 	timestamp: new Date(),
 	footer: {
 		text: 'Some footer text here',
-		icon_url: 'https://i.imgur.com/AfFp7pu.png',
+		iconURL: 'https://i.imgur.com/AfFp7pu.png',
 	},
 };
 
