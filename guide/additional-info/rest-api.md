@@ -87,6 +87,8 @@ client.once('ready', async () => { // This has to be an async function!
 	console.log('Ready!');
 	fetch = (await import('node-fetch')).default; // And now, you can use node-fetch like the cjs version.
 })
+```
+:::
 
 ### Random Cat
 
