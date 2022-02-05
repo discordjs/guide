@@ -30,6 +30,8 @@ pnpm add node-fetch@cjs
 
 ::: tip
 The `cjs` tag of `node-fetch` is used here as versions 3+ do not support the [CommonJS](https://nodejs.org/api/modules.html#modules_modules_commonjs_modules) `require()` syntax.
+
+You could also remove the `cjs` tag to go through a different way of importing the library, however this is not recommended.
 :::
 
 ## Skeleton code
@@ -72,6 +74,19 @@ To require node-fetch, you'd do:
 ```js
 const fetch = require('node-fetch');
 ```
+
+:::tip
+If you are using the non-cjs version ([talked about here](https://discordjs.guide/additional-info/rest-api.html#making-http-requests-with-node)), you'd have to import the library a different way:
+
+```js
+// Creating the client and importing other libraries...
+
+let fetch; // Create an empty variable for the node-fetch library.
+
+client.once('ready', async () => { // This has to be an async function!
+	console.log('Ready!');
+	fetch = (await import('node-fetch')).default; // And now, you can use node-fetch like the cjs version.
+})
 
 ### Random Cat
 
