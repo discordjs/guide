@@ -199,9 +199,9 @@ Overwrites are now keyed by the `PascalCase` permission key rather than the `SCR
 
 The following discord.js events:
 
-- `invalidRequestWarning`
 - `apiRequest`
 - `apiResponse`
+- `invalidRequestWarning`
 - `rateLimit`
 
 Have been removed from the `Client` in discord.js. Instead you should access these events from `Client#rest`. In addition, the `apiRequest`, `apiResponse` and `rateLimit` events have been renamed:
