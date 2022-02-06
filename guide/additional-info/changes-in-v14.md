@@ -114,8 +114,7 @@ const button = {
 
 ### CDN
 
-- Methods that return CDN URLs will now return a dynamic image URL (if available). This behavior can be overridden by setting `forceStatic` to `true` in the `MakeURLOptions` parameters.
-- CDN methods now default to fetching `.webp` assets (if available), instead of `.png` assets.
+Methods that return CDN URLs will now return a dynamic image URL (if available). This behavior can be overridden by setting `forceStatic` to `true` in the `ImageURLOptions` parameters.
 
 ### Channel
 
@@ -205,7 +204,7 @@ The following discord.js events:
 - `apiResponse`
 - `rateLimit`
 
-Have been removed from the `Client` in discord.js. Instead you should access these events from `Client#rest`. In addition `apiRequest`, `apiResponse` and `rateLimit` events have been renamed:
+Have been removed from the `Client` in discord.js. Instead you should access these events from `Client#rest`. In addition, the `apiRequest`, `apiResponse` and `rateLimit` events have been renamed:
 
 ```diff
 - client.on('apiRequest', ...);
@@ -242,13 +241,13 @@ Check out [the issue ticket](https://github.com/discordjs/discord.js/issues/7091
 
 Many of the analogous enums can be found be found in the discord-api-types docs (link website here)
 
-### VoicesRegion Changes
+### VoiceRegion
 
 `#vip` has been removed as the field is no longer part of the API.
 
 ### Webhook
 
-`#fetchMessage` now only takes on sole object of type `WebhookFetchMessageOptions`.
+`#fetchMessage` now only takes one sole object of type `WebhookFetchMessageOptions`.
 
 ## Features
 
@@ -256,17 +255,17 @@ Many of the analogous enums can be found be found in the discord-api-types docs 
 
 New typeguards have been added:
 
-- `#isText`\*
+- `#isCategory`
 - `#isDM`\*
+- `#isDMBased`
 - `#isGroupDM`
+- `#isNews`
+- `#isStage`
+- `#isStore`
+- `#isText`\*
+- `#isTextBased`
 - `#isVoice`\*
 - `#isVoiceBased`
-- `#isTextBased`
-- `#isDMBased`
-- `#isStage`
-- `#isCategory`
-- `#isNews`
-- `#isStore`
 
 \*These methods existed previously but behaved differently. Refer to the docs for their specific changes.
 
@@ -278,7 +277,7 @@ The new `EnumResolvers` class allows you to transform `SCREAMING_SNAKE_CASE` enu
 const { EnumResolvers } = require('discord.js');
 
 // Returns `ButtonStyle.Primary`
-const buttonStyle = EnumResolvers.buttonStyle('PRIMARY');
+const buttonStyle = EnumResolvers.resolveButtonStyle('PRIMARY');
 ```
 
 ### Interaction
