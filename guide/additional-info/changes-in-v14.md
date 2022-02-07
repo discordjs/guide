@@ -143,7 +143,7 @@ TypeScript users should narrow `Channel` types via type guards in order to get m
 ```diff
 - const { Constants } = require('discord.js');
 - const { Colors } = Constants;
-+ const { Colors } = require('discord.js')
++ const { Colors } = require('discord.js');
 ```
 
 - The refactored constants structures have `PascalCase` member names as opposed to `SCREAMING_SNAKE_CASE` member names.
@@ -208,7 +208,7 @@ MessageComponents have been renamed as well. They no longer have the `Message` p
 
 ### MessageEmbed
 
-- `MessageEmbed` has now been renamed to `Embed`
+- `MessageEmbed` has now been renamed to `Embed`.
 
 - `#setAuthor` now accepts a sole `AuthorOptions` object. (add link to dapi site)
 
@@ -272,7 +272,7 @@ Check out [the issue ticket](https://github.com/discordjs/discord.js/issues/7091
 
 `#editable` has been removed, instead you should use `GuildChannel#manageable` for checking this permission.
 
-Many of the analogous enums can be found be found in the discord-api-types docs (link website here)
+Many of the analogous enums can be found in the discord-api-types docs. (link website here)
 
 ### VoiceRegion
 
@@ -289,7 +289,7 @@ Many of the analogous enums can be found be found in the discord-api-types docs 
 New typeguards have been added:
 
 - `#isCategory`
-- `#isDM`\*
+- `#isDM`
 - `#isDMBased`
 - `#isGroupDM`
 - `#isNews`
@@ -305,7 +305,7 @@ New typeguards have been added:
 ### Collection
 
 - Added `#merge` and `#combineEntries` methods.
-- New type: `ReadonlyCollection` which indicates an immutable `Collection`
+- New type: `ReadonlyCollection` which indicates an immutable `Collection`.
 
 ### Enum Resolvers
 
@@ -355,4 +355,4 @@ Unsafe builders operate exactly like regular builders except they perform no val
 
 ### Webhook
 
-Added `applicationID` property.
+Added `applicationId` property.
