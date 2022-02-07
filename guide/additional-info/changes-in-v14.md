@@ -33,9 +33,15 @@ const { EnumResolvers } = require('discord.js');
 const enumValue = EnumResolvers.resolveButtonStyle('PRIMARY');
 ```
 
+::: warning
+You might be inclined to use raw `number`s (most commonly referred to as [magic numbers](https://en.wikipedia.org/wiki/Magic_number_(programming))) instead of enum values. This is highly discouraged. Enums provide more readability and are more resistant to changes in the API. Magic numbers can obscure the meaning of your code in many ways, check out this [blog post](https://blog.webdevsimplified.com/2020-02/magic-numbers/) if you want more context on as to why they shouldn't be used.
+:::
+
+#### Common enum breakages
+
 Areas like `Client` initialization, JSON slash commands and JSON message components will likely need to be modified to accommodate these changes:
 
-#### Common Client Initialization Changes
+##### Common Client Initialization Changes
 
 ```diff
 - const { Client, Intents } = require('discord.js');
@@ -45,7 +51,7 @@ Areas like `Client` initialization, JSON slash commands and JSON message compone
 + const client = new Client({ intents: [GatewayIntentBits.Guilds], partials: [Partials.Channel] });
 ```
 
-#### Common Application Command Data changes
+##### Common Application Command Data changes
 
 ```diff
 + const { ApplicationCommandType, ApplicationCommandOptionType } = require('discord.js');
@@ -63,7 +69,7 @@ const command = {
 };
 ```
 
-#### Common Button Data changes
+##### Common Button Data changes
 
 ```diff
 + const { ButtonStyle } = require('discord.js');
@@ -129,6 +135,33 @@ TypeScript users should narrow `Channel` types via type guards in order to get m
 ### CommandInteractionOptionResolver
 
 `#getMember` no longer has a parameter for `required`, check out [this pull request](https://github.com/discordjs/discord.js/pull/7188) for details.
+
+### `Constants`
+
+- Many constant objects and key arrays are now top-level exports for example:
+
+```diff
+- const { Constants } = require('discord.js');
+- const { Colors } = Constants;
++ const { Colors } = require('discord.js')
+```
+
+- The refactored constants structures have `PascalCase` member names as opposed to `SCREAMING_SNAKE_CASE` member names.
+
+- Many of the exported constants structures have been replaced and renamed:
+```diff
+- Opcodes
++ GatewayOpcodes
+
+- WSEvents
++ GatewayDispatchEvents
+
+- WSCodes
++ GatewayCloseCodes
+
+- InviteScopes
++ OAuth2Scopes
+```
 
 ### Events
 
@@ -269,6 +302,11 @@ New typeguards have been added:
 
 \*These methods existed previously but behaved differently. Refer to the docs for their specific changes.
 
+### Collection
+
+- Added `#merge` and `#combineEntries` methods.
+- New type: `ReadonlyCollection` which indicates an immutable `Collection`
+
 ### Enum Resolvers
 
 The new `EnumResolvers` class allows you to transform `SCREAMING_SNAKE_CASE` enum keys to an enum value.
@@ -279,7 +317,42 @@ const { EnumResolvers } = require('discord.js');
 // Returns `ButtonStyle.Primary`
 const buttonStyle = EnumResolvers.resolveButtonStyle('PRIMARY');
 ```
+### GuildEmojiManager
+
+Added `#delete` and `#edit` methods for managing existing guild emojis.
+
+### GuildPreview
+
+Added `#stickers` property.
+
+### GuildScheduledEvent
+
+Added `#coverImage` and `coverImageURL` for getting cover image data for a guild scheduled event.
 
 ### Interaction
 
 Added `#isRepliable` to check whether a given interaction can be replied to.
+
+### MessageOptions
+
+You can now send `MessageFlags` via the `#flags` property on `MessageOptions`.
+
+### RichPresenceAssets
+
+`RichPresenceAssets` now contains support for Youtube content and custom images.
+
+### Thread
+
+Added `#createdTimestamp` which indicates when the thread was created.
+
+### Thread create event
+
+The `threadCreate` event now includes a new parameter: `newlyCreated`. This is a boolean that indicates whether the thread was just created or not.
+
+### Unsafe Builders
+
+Unsafe builders operate exactly like regular builders except they perform no validation on input. Unsafe builders are named by adding an `Unsafe` prefix to a regular builder.
+
+### Webhook
+
+Added `applicationID` property.
