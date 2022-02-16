@@ -74,7 +74,7 @@ During your development, you will likely run into `DiscordAPIError: Missing Perm
 - It is trying to modify or assign a role higher than or equal to its highest role.
 - It is trying to add a managed role to a member.
 - It is trying to remove a managed role from a member.
-- It is trying to moderate a member with the `ADMINISTRATOR` permission.
+- It is trying to timeout a member with the `ADMINISTRATOR` permission.
 - It is trying to execute a forbidden action on the server owner.
 - It is trying to execute an action based on another unfulfilled factor (for example, reserved for partnered guilds).
 - It is trying to execute an action on a voice channel without the `VIEW_CHANNEL` permission.
