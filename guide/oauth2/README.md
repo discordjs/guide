@@ -6,7 +6,7 @@ OAuth2 enables application developers to build applications that utilize authent
 
 ### Setting up a basic web server
 
-Most of the time, websites use OAuth2 to get information about their users from an external service. In this example, we will use [`express`](https://expressjs.com/) to create a web server to use a user's Discord information to greet them. Start by creating three files: `config.json`, `index.js`, and `index.html`. 
+Most of the time, websites use OAuth2 to get information about their users from an external service. In this example, we will use [`express`](https://expressjs.com/) to create a web server to use a user's Discord information to greet them. Start by creating three files: `config.json`, `index.js`, and `index.html`.
 
 `config.json` will be used to store the client ID, client secret, and server port.
 
@@ -38,14 +38,12 @@ app.listen(port, () => console.log(`App listening at http://localhost:${port}`))
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-	<title>My Discord OAuth2 App</title>
-</head>
-<body>
-	<div id="info">
-		Hoi!
-	</div>
-</body>
+	<head>
+		<title>My Discord OAuth2 App</title>
+	</head>
+	<body>
+		<div id="info">Hoi!</div>
+	</body>
 </html>
 ```
 
@@ -84,9 +82,7 @@ You can see that by clicking `Authorize`, you allow the application to access yo
 Modify `index.html` to add your OAuth2 URL and to take advantage of the access token if it exists. Even though [`URLSearchParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) is for working with query strings, it can work here because the structure of the fragment follows that of a query string after removing the leading "#".
 
 ```html {4-26}
-<div id="info">
-	Hoi!
-</div>
+<div id="info">Hoi!</div>
 <a id="login" style="display: none;" href="your-oauth2-URL-here">Identify Yourself</a>
 <script>
 	window.onload = () => {
@@ -94,7 +90,7 @@ Modify `index.html` to add your OAuth2 URL and to take advantage of the access t
 		const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
 
 		if (!accessToken) {
-			return document.getElementById('login').style.display = 'block';
+			return (document.getElementById('login').style.display = 'block');
 		}
 
 		fetch('https://discord.com/api/users/@me', {
@@ -151,7 +147,7 @@ window.onload = () => {
 		localStorage.setItem('oauth-state', randomString);
 
 		document.getElementById('login').href += `&state=${btoa(randomString)}`;
-		return document.getElementById('login').style.display = 'block';
+		return (document.getElementById('login').style.display = 'block');
 	}
 };
 ```
@@ -188,14 +184,52 @@ app.get('/', (request, response) => {
 });
 ```
 
-Now you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten these, head over to [your applications](https://discord.com/developers/applications) and get them. You can use [`node-fetch`](https://www.npmjs.com/package/node-fetch) to make requests to Discord; you can install it with `npm i node-fetch`.
+Now you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten these, head over to [your applications](https://discord.com/developers/applications) and get them. You can use [`undici`](https://www.npmjs.com/package/undici) to make requests to Discord.
 
-Require `node-fetch` and make your request.
+To install undici, run the following command:
 
-```js {1,3,7-8,10-34}
-const fetch = require('node-fetch');
+:::: code-group
+::: code-group-item npm
+
+```sh:no-line-numbers
+npm install undici
+```
+
+:::
+::: code-group-item yarn
+
+```sh:no-line-numbers
+yarn add undici
+```
+
+:::
+::: code-group-item pnpm
+
+```sh:no-line-numbers
+pnpm add undici
+```
+
+:::
+
+Require `undici` and make your request.
+
+:::tip
+If you are used to the Fetch API and want to use that instead of how `undici` does it, instead of using `undici#request`, use `undici#fetch` with the same parameters as node-fetch.
+:::
+
+```js {1,3,5-14,18-19,21-46}
+const { request } = require('undici');
 const express = require('express');
 const { clientId, clientSecret, port } = require('./config.json');
+
+async function getJSONResponse(body) {
+	let fullBody = '';
+
+	for await (const data of body) {
+		fullBody += data.toString();
+	}
+	return JSON.parse(fullBody);
+}
 
 const app = express();
 
@@ -204,7 +238,7 @@ app.get('/', async ({ query }, response) => {
 
 	if (code) {
 		try {
-			const oauthResult = await fetch('https://discord.com/api/oauth2/token', {
+			const tokenResponseData = await request('https://discord.com/api/oauth2/token', {
 				method: 'POST',
 				body: new URLSearchParams({
 					client_id: clientId,
@@ -219,11 +253,11 @@ app.get('/', async ({ query }, response) => {
 				},
 			});
 
-			const oauthData = await oauthResult.json();
+			const oauthData = await getJSONResponse(tokenResponseData.body);
 			console.log(oauthData);
 		} catch (error) {
-			// NOTE: An unauthorized token will not throw an error;
-			// it will return a 401 Unauthorized response in the try block above
+			// NOTE: An unauthorized token will not throw an error
+			// tokenResponseData.statusCode will be 401
 			console.error(error);
 		}
 	}
@@ -251,16 +285,15 @@ Now try visiting your OAuth2 URL and authorizing your application. Once you're r
 With an access token and a refresh token, you can once again use the [`/api/users/@me` endpoint](https://discord.com/developers/docs/resources/user#get-current-user) to fetch the [user object](https://discord.com/developers/docs/resources/user#user-object).
 
 <!-- eslint-skip -->
-```js {3-7,9}
-const oauthData = await oauthResult.json();
 
-const userResult = await fetch('https://discord.com/api/users/@me', {
+```js {1-5,7}
+const userResult = await request('https://discord.com/api/users/@me', {
 	headers: {
 		authorization: `${oauthData.token_type} ${oauthData.access_token}`,
 	},
 });
 
-console.log(await userResult.json());
+console.log(await getJSONResponse(userResult.body));
 ```
 
 ::: tip
