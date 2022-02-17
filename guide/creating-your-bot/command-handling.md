@@ -168,6 +168,24 @@ for (const file of commandFiles) {
 }
 ```
 
+You will need to update how the commands are registered as well. 
+```js
+client.on('interactionCreate', async interaction => {
+    if(!interaction.isCommand()) return;
+
+    const command = client.commands.get(interaction.commandName);
+
+    if(!command) return;
+
+    try{
+        await command.execute(interaction);
+    } catch(error){
+        console.error(error);
+        await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+    }
+});
+```
+
 Use the same approach for your `deploy-commands.js` file, but instead `.push()` to the `commands` array with the JSON data for each command.
 
 ```js {1,7,9-12}
