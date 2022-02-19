@@ -12,7 +12,7 @@ On Windows, it's as simple as installing any other program. Download the latest 
 
 On macOS, either:
 
-- Download the latest version [the Node.js website](https://nodejs.org/), open the package installer, and follow the instructions
+- Download the latest version from [the Node.js website](https://nodejs.org/), open the package installer, and follow the instructions
 - Use a package manager like [Homebrew](https://brew.sh/) with the command `brew install node`
 
 On Linux, you can consult [this page](https://nodejs.org/en/download/package-manager/) to determine how you should install Node.
