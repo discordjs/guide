@@ -188,14 +188,29 @@ app.get('/', (request, response) => {
 });
 ```
 
-Now you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten these, head over to [your applications](https://discord.com/developers/applications) and get them. You can use [`node-fetch`](https://www.npmjs.com/package/node-fetch) to make requests to Discord; you can install it with `npm i node-fetch@cjs`.
+Now you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten these, head over to [your applications](https://discord.com/developers/applications) and get them. You can use [`undici`](https://www.npmjs.com/package/undici) to make requests to Discord; you can install it with `npm i undici`.
 
-Require `node-fetch` and make your request.
+Require `undici` and make your request.
+
+:::tip
+If you are used to the Fetch API and want to use that instead of how `undici` does it, instead of using `undici#request`, use `undici#fetch` with the same params as node-fetch.
+:::
 
 ```js {1,3,7-8,10-34}
-const fetch = require('node-fetch');
+const { request } = require('undici');
 const express = require('express');
 const { clientId, clientSecret, port } = require('./config.json');
+
+// Just make a helper function to get JSON response from request()
+async function getJSONResponse(body) {
+	let full_body = "";
+
+	for await (const data of body) {
+		full_body = `${full_body}${data.toString()}`
+	}
+			
+	return JSON.parse(full_body);
+}
 
 const app = express();
 
@@ -204,7 +219,7 @@ app.get('/', async ({ query }, response) => {
 
 	if (code) {
 		try {
-			const oauthResult = await fetch('https://discord.com/api/oauth2/token', {
+			const tokenResponseData = await request('https://discord.com/api/oauth2/token', {
 				method: 'POST',
 				body: new URLSearchParams({
 					client_id: clientId,
@@ -218,12 +233,13 @@ app.get('/', async ({ query }, response) => {
 					'Content-Type': 'application/x-www-form-urlencoded',
 				},
 			});
-
-			const oauthData = await oauthResult.json();
+			
+			const oauthData = await getJSONResponse(tokenResponseData.body)
+			
 			console.log(oauthData);
 		} catch (error) {
 			// NOTE: An unauthorized token will not throw an error;
-			// it will return a 401 Unauthorized response in the try block above
+			// it will return a 401 Unauthorized response in the try block above (tokenResponseData.statusCode will be 401)
 			console.error(error);
 		}
 	}
@@ -252,15 +268,13 @@ With an access token and a refresh token, you can once again use the [`/api/user
 
 <!-- eslint-skip -->
 ```js {3-7,9}
-const oauthData = await oauthResult.json();
-
-const userResult = await fetch('https://discord.com/api/users/@me', {
+const userResult = await request('https://discord.com/api/users/@me', {
 	headers: {
 		authorization: `${oauthData.token_type} ${oauthData.access_token}`,
 	},
 });
 
-console.log(await userResult.json());
+console.log(await getJSONResponse(userResult.body));
 ```
 
 ::: tip
