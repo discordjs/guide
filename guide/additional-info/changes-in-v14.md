@@ -169,6 +169,10 @@ The `message` and `interaction` events are now removed. Use `messageCreate` and 
 
 `applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate` have all been removed. Refer to [this pull request](https://github.com/discordjs/discord.js/pull/6492) for context.
 
+### GuildBanManager
+
+The `days` option when banning a user has been renamed to `deleteMessageDays` to be more aligned to the API name.
+
 ### Guild
 
 `#setRolePositions` and `#setChannelPositions` have been removed. Use `RoleManager#setPositions` and `GuildChannelManager#setPositions` instead respectively.
