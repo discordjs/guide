@@ -351,10 +351,6 @@ You can now send `MessageFlags` via the `#flags` property on `MessageOptions`.
 
 Added `#createdTimestamp` which indicates when the thread was created.
 
-### Thread create event
-
-The `threadCreate` event now includes a new parameter: `newlyCreated`. This is a boolean that indicates whether the thread was just created or not.
-
 ### Unsafe Builders
 
 Unsafe builders operate exactly like regular builders except they perform no validation on input. Unsafe builders are named by adding an `Unsafe` prefix to a regular builder.
