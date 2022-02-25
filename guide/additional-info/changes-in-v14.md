@@ -173,6 +173,10 @@ The `message` and `interaction` events are now removed. Use `messageCreate` and 
 
 `#setRolePositions` and `#setChannelPositions` have been removed. Use `RoleManager#setPositions` and `GuildChannelManager#setPositions` instead respectively.
 
+### GuildMember
+
+`GuildMember#pending` is now nullable to account for partial guild members. See [this issue](https://github.com/discordjs/discord.js/issues/6546) for a more in-depth reason.
+
 ### Interaction
 
 The following typeguards on `Interaction` have been renamed:
