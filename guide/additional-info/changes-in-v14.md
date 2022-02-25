@@ -286,7 +286,9 @@ Many of the analogous enums can be found in the discord-api-types docs. (link we
 
 ### Channel
 
-New typeguards have been added:
+`#url` has been added which is a link to a channel, just like in the client.
+
+Additionally, new typeguards have been added:
 
 - `#isCategory`
 - `#isDM`
