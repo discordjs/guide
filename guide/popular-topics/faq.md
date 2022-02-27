@@ -81,7 +81,7 @@ client.user.setAvatar('URL or path');
 client.user.setActivity('activity');
 ```
 
-### How do I set my status every couple of minutes?
+### How do I set my status every 10 minutes?
 
 ```js
 client.once("ready", () => {
@@ -91,7 +91,7 @@ client.once("ready", () => {
         Math.random() * (activities_list.length - 1) + 1
       );
       client.user!.setActivity(activities_list[index], { type: "LISTENING" });
-    }, 50000); // Please don't go faster than 50000ms
+    }, 600000); // Please don't go faster than 10 minutes to avoid api spam
 });
 ```
 
