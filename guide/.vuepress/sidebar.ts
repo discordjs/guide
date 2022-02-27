@@ -117,6 +117,12 @@ export default {
 			],
 		},
 		{
+			text: 'Deploying Your Bot',
+			children: [
+				'/deployment/services.md',
+			],
+		},
+		{
 			text: 'Additional Information',
 			children: [
 				'/additional-info/notation.md',
