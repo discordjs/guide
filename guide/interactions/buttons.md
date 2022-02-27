@@ -239,7 +239,7 @@ Currently there are five different button styles available:
 				<DiscordButton type="secondary">Secondary</DiscordButton>
 				<DiscordButton type="success">Success</DiscordButton>
 				<DiscordButton type="danger">Danger</DiscordButton>
-				<DiscordButton type="link" url="https://discord.js.org">Link</DiscordButton>
+				<DiscordButton type="link" url="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Link</DiscordButton>
 			</DiscordButtons>
 		</template>
 	</DiscordMessage>
