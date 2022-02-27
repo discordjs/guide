@@ -81,6 +81,20 @@ client.user.setAvatar('URL or path');
 client.user.setActivity('activity');
 ```
 
+### How do I set my status every couple of minutes?
+
+```js
+client.once("ready", () => {
+    setInterval(() => {
+      const activities_list = [`activity1`, `activity2`, `activity3`];
+      const index = Math.floor(
+        Math.random() * (activities_list.length - 1) + 1
+      );
+      client.user!.setActivity(activities_list[index], { type: "LISTENING" });
+    }, 50000); // Please don't go faster then 50000ms
+});
+```
+
 ### How do I set my status to "Watching/Listening to/Competing in ..."?
 
 ```js
