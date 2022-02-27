@@ -91,7 +91,7 @@ client.once("ready", () => {
         Math.random() * (activities_list.length - 1) + 1
       );
       client.user!.setActivity(activities_list[index], { type: "LISTENING" });
-    }, 50000); // Please don't go faster then 50000ms
+    }, 50000); // Please don't go faster than 50000ms
 });
 ```
 
