@@ -2,15 +2,12 @@
 {
     "tableData":
         {
-            "vps":
+            "docker":
                 {
-                    "control": "You have complete control over your bot's resources, but at the cost of having to do everything manually.",
-                    "performance": "This is dependent on the VPS provider and the specifications of the VPS. Depending on the workload of your bot, a VPS with 1 core and at least 1 - 2 GB(s) of RAM is usually sufficient.",
-                },
-            "replit":
-                {
-                    "control": "Little to no control, Replit was never really intended to be a hosting provider, rather a simple yet powerful online IDE, Editor, Compiler, Interpreter, and REPL.",
-                    "performance": "Replit's Free plan has 500mb of memory and 0.2 - 0.5 vCPUs, which is sufficient for most bots, but if you're doing a lot of heavy work, you should consider Replit's Hacker plan or another hosting method.",
+                    "eou": "Hard learning curve",
+                    "perf": "How Docker works under the hood is by utilizing containers which are basically little light virtual machines, so expect a bit of overhead if your VPS is on the low-end.",
+                    "update": "Updating your bot is easy with Docker. Simply setup [Watchtower](https://containrrr.dev/watchtower/) to monitor your bot's Docker container and update it when it notices a new Image.",
+                    "devops": "Working with Docker also gives you the ability to easily integrate your bot with other services, such as [GitHub Actions](#automating-the-build-process-with-github-actions) for example.",
                 },
         },
 }
@@ -19,17 +16,6 @@
 # Deployment
 
 Congratulations! 🎉 On making it this far, now it's time to deploy your bot to production. 🚀
-
-# Hosting Methods
-
-When deploying your bot to production there are many different methods you can use. Below are some of the most common ones.
-
-## Benefits of each deployment method
-
-| Method                         | Control                                     | Performance                                     |
-| ------------------------------ | ------------------------------------------- | ----------------------------------------------- |
-| [VPS](#virtual-private-server) | {{ $frontmatter.tableData.vps.control }}    | {{ $frontmatter.tableData.vps.performance }}    |
-| [Replit](#replit)              | {{ $frontmatter.tableData.replit.control }} | {{ $frontmatter.tableData.replit.performance }} |
 
 ## Virtual Private Server
 
@@ -53,15 +39,56 @@ Before you go out and purchase a VPS, we recommend learning linux terminal basic
 
 > If your using another provider, we recommend following [DigitalOcean](https://docs.digitalocean.com/products/droplets/how-to/connect-with-ssh/openssh/)'s SSH instructions.
 
-### Running the bot via Docker on a VPS
+# Running your bot
 
-Running projects like your bot on a VPS with Docker is a great way to get your bot running on a VPS, with the added benefits of being able to run your bot on any OS, quickly spin up your bot on other servers using Docker, securely use environment variables, simple scaling, auto updating on GitHub pushes, and much more.
+When running your bot in production there are many different methods you can use. Below are some of the most common ones.
+
+## Benefits of each deployment method
+
+| Method            | Ease of use                             | Performance                              | Updating                                                                                                                                                                               | Dev-ops                                    |
+| ----------------- | --------------------------------------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| [Docker](#docker) | {{ $frontmatter.tableData.docker.eou }} | {{ $frontmatter.tableData.docker.perf }} | Updating your bot is easy with Docker. Simply setup [Watchtower](https://containrrr.dev/watchtower/) to monitor your bot's Docker container and update it when it notices a new Image. | {{ $frontmatter.tableData.docker.devops }} |
+
+### Docker
+
+Running projects like your bot with Docker is a great way to get your bot running on a VPS, with the added benefits of being able to quickly spin up your bot on other servers using Docker, use environment variables, simple scaling, auto updating on GitHub pushes, and much more.
 
 1. Get access to your VPS's terminal via SSH or other methods.
 2. Install Docker on your VPS by following the specific instructions for your linux [distribution](https://docs.docker.com/engine/install/#server)
-3.
+3. Create a [Dockerfile](#creating-a-dockerfile) or [docker-compose](#creating-a-docker-compose-file) to run your bot.
 
-## Replit
+#### Creating a Dockerfile
+
+> A Dockerfile is a file that tells Docker how to build your bot.
+
+If you have been following the guide so far the below Dockerfile should work for you.
+
+```dockerfile
+# Use node:16.11.1 as the base image
+FROM node:16.11.1
+
+# Create app directory
+WORKDIR /usr/src/app
+
+# Copy package.json
+COPY package*.json ./
+
+# Fetch dependencies
+RUN npm i
+
+# Copy code
+COPY . .
+
+# Install pm2
+RUN npm install pm2 -g
+
+# Start the bot using pm2 so errors won't kill the container, Learn More: https://discordjs.guide/improving-dev-environment/pm2.html#installation
+CMD [ "pm2-runtime", "start", "index.js" ]
+```
+
+#### Automating the build process with GitHub Actions
+
+> Why use Docker? Docker is a system that uses text document instructions to build an image, a read-only template containing instructions for creating a container that can run on Docker.
 
 <!----------------- Links --------------->
 
