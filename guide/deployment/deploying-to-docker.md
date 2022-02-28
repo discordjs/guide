@@ -40,7 +40,7 @@ CMD [ "pm2-runtime", "start", "index.js" ]
 <Definition content="GitHub Actions is a CI/CD platform that allows you to automate your build, test, and deployment pipelines. You can set up workflows to build and test each pull request that comes into your repository, for this example we will be using GitHub Actions to publish a Docker Image every push you do to your master branch." />
 
 ::: tip
-It's probably about time you store your code in a git server such as GitHub.
+You can store your code in a git server such as GitHub for ease of access.
 :::
 
 ## GitHub Desktop
