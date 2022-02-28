@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["title", "content"]);
+const props = defineProps(['title', 'content']);
 </script>
 
 <style setup lang="scss">
