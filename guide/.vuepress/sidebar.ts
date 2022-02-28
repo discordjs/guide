@@ -119,7 +119,8 @@ export default {
 		{
 			text: 'Deploying Your Bot',
 			children: [
-				'/deployment/services.md',
+				'/deployment/README.md',
+				'/deployment/deploying-to-docker.md',
 			],
 		},
 		{

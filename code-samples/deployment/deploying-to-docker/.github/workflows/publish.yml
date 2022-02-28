@@ -1,0 +1,36 @@
+# Name of the workflow
+name: publish
+
+# When to trigger it
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+      - main
+
+# Jobs to run
+jobs:
+  # Build the bot job,
+  build-bot:
+    # Run it on ubuntu
+    runs-on: ubuntu-latest
+
+    # Steps of the job
+    steps:
+      # Checkout the repo at the current state
+      - uses: actions/checkout@v2
+
+        # Login to the GitHub Container Registry
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+        # Build and Push the bot to the GHCR
+      - name: Build and Push to GHCR
+        run: |
+          docker build . --tag ghcr.io/AccountUsername/RepoName:latest
+          docker push ghcr.io/AccountUsername/RepoName:latest
