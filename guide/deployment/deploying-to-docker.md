@@ -48,7 +48,7 @@ It's probably about time you store your code in a git server such as GitHub.
 > A good choice for people who are scared of the terminal and don't wanna learn it, or simply just get things done quicker with a app.
 
 1. Download [GitHub Desktop](https://desktop.github.com/)
-2. [Create a repo](https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/overview/creating-your-first-repository-using-github-desktop)
+2. [Create a repository](https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/overview/creating-your-first-repository-using-github-desktop)
 
 ## Terminal
 
