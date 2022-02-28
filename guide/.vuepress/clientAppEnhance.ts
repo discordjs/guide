@@ -1,4 +1,4 @@
-import { defineClientAppEnhance } from "@vuepress/client";
+import { defineClientAppEnhance } from '@vuepress/client';
 import {
 	DiscordButton,
 	DiscordButtons,
@@ -13,12 +13,12 @@ import {
 	DiscordReaction,
 	DiscordReactions,
 	install as DiscordMessageComponents,
-} from "@discord-message-components/vue";
-import DocsLink from "./components/DocsLink.vue";
-import ResultingCode from "./components/ResultingCode.vue";
-import Definition from "./components/Definition.vue";
-import djsAvatar from "./assets/discord-avatar-djs.png";
-import "@discord-message-components/vue/dist/style.css";
+} from '@discord-message-components/vue';
+import DocsLink from './components/DocsLink.vue';
+import ResultingCode from './components/ResultingCode.vue';
+import Definition from './components/Definition.vue';
+import djsAvatar from './assets/discord-avatar-djs.png';
+import '@discord-message-components/vue/dist/style.css';
 
 export default defineClientAppEnhance(({ app }) => {
 	app.use(DiscordMessageComponents, {
@@ -27,31 +27,31 @@ export default defineClientAppEnhance(({ app }) => {
 		},
 		profiles: {
 			user: {
-				author: "User",
-				avatar: "djs",
+				author: 'User',
+				avatar: 'djs',
 			},
 			bot: {
-				author: "Guide Bot",
-				avatar: "green",
+				author: 'Guide Bot',
+				avatar: 'green',
 				bot: true,
 			},
 		},
 	});
 
-	app.component("DiscordButton", DiscordButton);
-	app.component("DiscordButtons", DiscordButtons);
-	app.component("DiscordEmbed", DiscordEmbed);
-	app.component("DiscordEmbedField", DiscordEmbedField);
-	app.component("DiscordEmbedFields", DiscordEmbedFields);
-	app.component("DiscordInteraction", DiscordInteraction);
-	app.component("DiscordMarkdown", DiscordMarkdown);
-	app.component("DiscordMention", DiscordMention);
-	app.component("DiscordMessage", DiscordMessage);
-	app.component("DiscordMessages", DiscordMessages);
-	app.component("DiscordReaction", DiscordReaction);
-	app.component("DiscordReactions", DiscordReactions);
+	app.component('DiscordButton', DiscordButton);
+	app.component('DiscordButtons', DiscordButtons);
+	app.component('DiscordEmbed', DiscordEmbed);
+	app.component('DiscordEmbedField', DiscordEmbedField);
+	app.component('DiscordEmbedFields', DiscordEmbedFields);
+	app.component('DiscordInteraction', DiscordInteraction);
+	app.component('DiscordMarkdown', DiscordMarkdown);
+	app.component('DiscordMention', DiscordMention);
+	app.component('DiscordMessage', DiscordMessage);
+	app.component('DiscordMessages', DiscordMessages);
+	app.component('DiscordReaction', DiscordReaction);
+	app.component('DiscordReactions', DiscordReactions);
 
-	app.component("DocsLink", DocsLink);
-	app.component("ResultingCode", ResultingCode);
-	app.component("Definition", Definition);
+	app.component('DocsLink', DocsLink);
+	app.component('ResultingCode', ResultingCode);
+	app.component('Definition', Definition);
 });
