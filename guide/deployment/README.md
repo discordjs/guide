@@ -38,7 +38,7 @@ Before you go out and purchase a VPS, we recommend learning linux terminal basic
 -   [Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html)
 
 ::: tip
-If your using another provider, we recommend following [DigitalOcean](https://docs.digitalocean.com/products/droplets/how-to/connect-with-ssh/openssh/)'s SSH instructions.
+If your using another provider, we recommend following there SSH instructions.
 :::
 
 # Running your bot
