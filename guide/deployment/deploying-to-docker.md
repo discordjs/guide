@@ -55,7 +55,7 @@ You can store your code in a git server such as GitHub for ease of access.
 > The classic way
 
 1. [Make sure git is installed](https://github.com/git-guides/install-git)
-2. [Create a repo](https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/overview/creating-your-first-repository-using-github-desktop)
+2. [Create a repository](https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/overview/creating-your-first-repository-using-github-desktop)
 
 ## Creating the Dockerfile
 
