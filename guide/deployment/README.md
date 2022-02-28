@@ -19,7 +19,7 @@ Congratulations! 🎉 On making it this far, now it's time to deploy your bot to
 
 ## Virtual Private Server
 
-> Using a VPS or virtual private server is a virtual machine sold as a service by an Internet hosting service.
+> VPS or virtual private server is a virtual machine sold as a service by an Internet hosting service.
 
 There are a multitude of virtual private servers available, but the most popular ones, and the ones we will be covering in this guide, are:
 
