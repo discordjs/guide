@@ -57,7 +57,7 @@ You can store your code in a git server such as GitHub for ease of access.
 1. [Make sure git is installed](https://github.com/git-guides/install-git)
 2. [Create a repository](https://docs.github.com/en/get-started/quickstart/create-a-repo)
 
-## Creating the Dockerfile
+## Creating the GitHub Action
 
 Make a new file called `publish.yml` in `.github/workflows` with the contents of:
 
