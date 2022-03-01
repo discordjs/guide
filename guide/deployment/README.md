@@ -1,13 +1,13 @@
 ---
 {
-    'tableData':
+    "tableData":
         {
-            'docker':
+            "docker":
                 {
-                    'eou': 'Hard learning curve',
-                    'perf': 'How Docker works under the hood is by utilizing containers which are basically little light virtual machines, so expect a bit of overhead if your VPS is on the low-end.',
-                    'update': "Updating your bot is easy with Docker. Simply setup [Watchtower](https://containrrr.dev/watchtower/) to monitor your bot's Docker container and update it when it notices a new Image.",
-                    'devops': 'Working with Docker also gives you the ability to easily integrate your bot with other services, such as [GitHub Actions](#automating-the-build-process-with-github-actions) for example.',
+                    "eou": "Hard learning curve",
+                    "perf": "How Docker works under the hood is by utilizing containers which are basically little light virtual machines, so expect a bit of overhead if your VPS is on the low-end.",
+                    "update": "Updating your bot is easy with Docker. Simply setup [Watchtower](https://containrrr.dev/watchtower/) to monitor your bot's Docker container and update it when it notices a new Image.",
+                    "devops": "Working with Docker also gives you the ability to easily integrate your bot with other services, such as [GitHub Actions](#automating-the-build-process-with-github-actions) for example.",
                 },
         },
 }
@@ -28,8 +28,7 @@ There are a multitude of virtual private servers available, but the most popular
 -   [Vultr]
 -   [Amazon EC2]
 
-### Before you go all out
-
+### Recommended VPS Services (I will make a table explaining benefits of each tomorrow, going to bed now)
 
 -   [Linode](https://www.linode.com/docs/guides/connect-to-server-over-ssh/)
 -   [DigitalOcean](https://docs.digitalocean.com/products/droplets/how-to/connect-with-ssh/)
