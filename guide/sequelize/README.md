@@ -40,48 +40,38 @@ Make sure you use version 5 or later of Sequelize! Version 4, as used in this gu
 After you have installed discord.js and Sequelize, you can start with the following skeleton code. The comment labels will tell you where to insert code later on.
 
 <!-- eslint-disable require-await -->
-
 ```js
+// Require Sequelize
 const Sequelize = require('sequelize');
+// Require the necessary discord.js classes
 const { Client, Intents } = require('discord.js');
 
+// Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-// [alpha]
-// [beta]
-
+// When the client is ready, run this code (only once)
 client.once('ready', () => {
-	// [gamma]
+	console.log(`Logged in as ${client.user.tag}!`);
 });
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	const { commandName } = interaction;
-
-	if (commandName === 'addtag') {
-		// [delta]
-	} else if (commandName === 'tag') {
-		// [epsilon]
-	} else if (commandName === 'edittag') {
-		// [zeta]
-	} else if (commandName === 'taginfo') {
-		// [theta]
-	} else if (commandName === 'showtags') {
-		// [lambda]
-	} else if (commandName === 'removetag') {
-		// [mu]
-	}
+	// ...
 });
 
+// Login to Discord with your client's token
 client.login('your-token-goes-here');
 ```
 
-### [alpha] Connection information
+### Connection information
 
 The first step is to define the connection information. It should look something like this:
 
-```js
+```js {3-9}
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+
 const sequelize = new Sequelize('database', 'user', 'password', {
 	host: 'localhost',
 	dialect: 'sqlite',
@@ -97,7 +87,7 @@ const sequelize = new Sequelize('database', 'user', 'password', {
 `storage` is a sqlite-only setting because sqlite is the only database that stores all its data to a single file.  
 
 
-### [beta] Creating the model
+### Creating the model
 
 In any relational database, you need to create tables to store your data. This simple tag system will use four fields. The table in the database will look something like this:
 
@@ -106,7 +96,7 @@ In any relational database, you need to create tables to store your data. This s
 | bob | is the best | bob | 0 |
 | tableflip | (╯°□°）╯︵ ┻━┻ | joe | 8 |
 
-To do that in Sequelize, you define a model based on this structure, as shown below.
+To do that in Sequelize, define a model based on this structure below the connection information, as shown below.
 
 ```js
 /*
@@ -144,42 +134,55 @@ The model mirrors very closely what the database defines. There will be a table 
 `Sequelize.STRING` vs. `Sequelize.TEXT`: In most database systems, the string's length is a fixed length for performance reasons. Sequelize defaults this to 255. Use STRING if your input has a max length, and use TEXT if it does not. For sqlite, there is no unbounded string type, so it will not matter which one you pick.
 :::
 
-### [gamma] Syncing the model
+### Syncing the model
 
-Now that your structure is defined, you need to make sure the model exists in the database. To make sure the bot is ready and all the data you might need has arrived, place the following code into the `.once('ready', ...)` event callback.
-```js
-Tags.sync();
+Now that your structure is defined, you need to make sure the model exists in the database. To make sure the bot is ready and all the data you might need has arrived, add this line in your code.
+
+```js {3}
+client.once('ready', () => {
+	Tags.sync();
+
+	console.log(`Logged in as ${client.user.tag}!`);
+});
 ```
 
 The table does not get created until you `sync` it. The schema you defined before was building the model that lets Sequelize know how the data should look. For testing, you can use `Tags.sync({ force: true })` to recreate the table every time on startup. This way, you can get a blank slate each time.
 
-### [delta] Adding a tag
+### Adding a tag
 
 After all this preparation, you can now write your first command! Let's start with the ability to add a tag.
 
 <!-- eslint-skip -->
 
-```js
-const tagName = interaction.options.getString('name');
-const tagDescription = interaction.options.getString('description');
+```js {7-26}
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
 
-try {
-	// equivalent to: INSERT INTO tags (name, description, username) values (?, ?, ?);
-	const tag = await Tags.create({
-		name: tagName,
-		description: tagDescription,
-		username: interaction.user.username,
-	});
+	const { commandName } = interaction;
 
-	return interaction.reply(`Tag ${tag.name} added.`);
-}
-catch (error) {
-	if (error.name === 'SequelizeUniqueConstraintError') {
-		return interaction.reply('That tag already exists.');
+	if (commandName === 'addtag') {
+		const tagName = interaction.options.getString('name');
+		const tagDescription = interaction.options.getString('description');
+
+		try {
+			// equivalent to: INSERT INTO tags (name, description, username) values (?, ?, ?);
+			const tag = await Tags.create({
+				name: tagName,
+				description: tagDescription,
+				username: interaction.user.username,
+			});
+
+			return interaction.reply(`Tag ${tag.name} added.`);
+		}
+		catch (error) {
+			if (error.name === 'SequelizeUniqueConstraintError') {
+				return interaction.reply('That tag already exists.');
+			}
+
+			return interaction.reply('Something went wrong with adding a tag.');
+		}
 	}
-
-	return interaction.reply('Something went wrong with adding a tag.');
-}
+});
 ```
 
 `Tags.create()` uses the models that you created previously. The `.create()` method inserts some data into the model. You are going to insert a tag name, description, and the author name into the database.  
@@ -190,98 +193,111 @@ Although `if (error.name === 'SequelizeUniqueConstraintError')` was mostly for d
 Do not use catch for inserting new data. Only use it for gracefully handling things that go wrong in your code or logging errors.
 :::
 
-### [epsilon] Fetching a tag
+### Fetching a tag
 
 Next, let's fetch the inserted tag.
 
 <!-- eslint-skip -->
 
-```js
-const tagName = interaction.options.getString('name');
-
-// equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
-const tag = await Tags.findOne({ where: { name: tagName } });
-
-if (tag) {
-	// equivalent to: UPDATE tags SET usage_count = usage_count + 1 WHERE name = 'tagName';
-	tag.increment('usage_count');
-
-	return interaction.reply(tag.get('description'));
+```js {5-17}
+if (commandName === 'addtag') {
+	// ...
 }
+else if (command === 'tag') {
+	const tagName = interaction.options.getString('name');
 
-return interaction.reply(`Could not find tag: ${tagName}`);
+	// equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
+	const tag = await Tags.findOne({ where: { name: tagName } });
+
+	if (tag) {
+		// equivalent to: UPDATE tags SET usage_count = usage_count + 1 WHERE name = 'tagName';
+		tag.increment('usage_count');
+
+		return interaction.reply(tag.get('description'));
+	}
+
+	return interaction.reply(`Could not find tag: ${tagName}`);
+}
 ```
 
 This is your first query. You are finally doing something with your data; yay!  
 `.findOne()` is how you fetch a single row of data. The `where: { name: tagName }` makes sure you only get the row with the desired tag. Since the queries are asynchronous, you will need to use `await` to fetch it. After receiving the data, you can use `.get()` on that object to grab the data. If no data is received, then you can tell the user that the query returned no data.
 
-### [zeta] Editing a tag
+### Editing a tag
 
 <!-- eslint-skip -->
 
-```js
-const tagName = interaction.options.getString('name');
-const tagDescription = interaction.options.getString('description');
+```js {2-12}
+else if (command === 'edittag') {
+	const tagName = interaction.options.getString('name');
+	const tagDescription = interaction.options.getString('description');
 
-// equivalent to: UPDATE tags (description) values (?) WHERE name='?';
-const affectedRows = await Tags.update({ description: tagDescription }, { where: { name: tagName } });
+	// equivalent to: UPDATE tags (description) values (?) WHERE name='?';
+	const affectedRows = await Tags.update({ description: tagDescription }, { where: { name: tagName } });
 
-if (affectedRows > 0) {
-	return interaction.reply(`Tag ${tagName} was edited.`);
+	if (affectedRows > 0) {
+		return interaction.reply(`Tag ${tagName} was edited.`);
+	}
+
+	return interaction.reply(`Could not find a tag with name ${tagName}.`);
 }
-
-return interaction.reply(`Could not find a tag with name ${tagName}.`);
 ```
 
 It is possible to edit a record by using the `.update()` function. An update returns the number of rows that the `where` condition changed. Since you can only have tags with unique names, you do not have to worry about how many rows may change. Should you get that the query didn't alter any rows, you can conclude that the tag did not exist.
 
-### [theta] Display info on a specific tag
+### Display info on a specific tag
 
 <!-- eslint-skip -->
 
-```js
-const tagName = interaction.options.getString('name');
+```js {2-12}
+else if (commandName == 'taginfo') {
+	const tagName = interaction.options.getString('name');
 
-// equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
-const tag = await Tags.findOne({ where: { name: tagName } });
+	// equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
+	const tag = await Tags.findOne({ where: { name: tagName } });
 
-if (tag) {
-	return interaction.reply(`${tagName} was created by ${tag.username} at ${tag.createdAt} and has been used ${tag.usage_count} times.`);
+	if (tag) {
+		return interaction.reply(`${tagName} was created by ${tag.username} at ${tag.createdAt} and has been used ${tag.usage_count} times.`);
+	}
+
+	return interaction.reply(`Could not find tag: ${tagName}`);
 }
-
-return interaction.reply(`Could not find tag: ${tagName}`);
 ```
 
 This section is very similar to the previous command, except you will be showing the tag metadata. `tag` contains your tag object. Notice two things: firstly, it is possible to access the object's properties without the `.get()` function. This is because the object is an instance of a Tag, which you can treat as an object and not just a row of data. Second, you can access a property that was not defined explicitly, `createdAt`. This is because Sequelize automatically adds that column to all tables. Passing another object into the model with `{ createdAt: false }` can disable this feature, but in this case, it was useful to have.
 
-### [lambda] Listing all tags
+### Listing all tags
 
 The next command will enable you to fetch a list of all the created tags.
 
 <!-- eslint-skip -->
 
-```js
-// equivalent to: SELECT name FROM tags;
-const tagList = await Tags.findAll({ attributes: ['name'] });
-const tagString = tagList.map(t => t.name).join(', ') || 'No tags set.';
+```js {2-6}
+else if (command === 'showtags') {
+	// equivalent to: SELECT name FROM tags;
+	const tagList = await Tags.findAll({ attributes: ['name'] });
+	const tagString = tagList.map(t => t.name).join(', ') || 'No tags set.';
 
-return interaction.reply(`List of tags: ${tagString}`);
+	return interaction.reply(`List of tags: ${tagString}`);
+}
 ```
 
 Here, you can use the `.findAll()` method to grab all the tag names. Notice that instead of having `where`, the optional field, `attributes`, is set. Setting attributes to name will let you get *only* the names of tags. If you tried to access other fields, like the tag author, you would get an error. If left blank, it will fetch *all* of the associated column data. It will not affect the results returned, but from a performance perspective, you should only grab the necessary data. If no results return, `tagString` will default to 'No tags set'.
 
-### [mu] Deleting a tag
+### Deleting a tag
 
 <!-- eslint-skip -->
 
-```js
-const tagName = interaction.options.getString('name');
-// equivalent to: DELETE from tags WHERE name = ?;
-const rowCount = await Tags.destroy({ where: { name: tagName } });
+```js {2-8}
+else if (command === 'deletetag') {
+	const tagName = interaction.options.getString('name');
+	// equivalent to: DELETE from tags WHERE name = ?;
+	const rowCount = await Tags.destroy({ where: { name: tagName } });
 
-if (!rowCount) return interaction.reply('That tag did not exist.');
+	if (!rowCount) return interaction.reply('That tag doesn't exist.');
 
-return interaction.reply('Tag deleted.');
+	return interaction.reply('Tag deleted.');
+}
 ```
 `.destroy()` runs the delete operation. The operation returns a count of the number of affected rows. If it returns with a value of 0, then nothing was deleted, and that tag did not exist in the database in the first place.
 

@@ -14,7 +14,7 @@ Guild application commands are only available in the guild they were created in,
 
 In this section, we'll be using a script that is usable in conjunction with the slash command handler from the [command handling](/creating-your-bot/command-handling.md) section.
 
-First off, install the [`@discordjs/rest`](https://github.com/discordjs/discord.js-modules/blob/main/packages/rest/) and [`discord-api-types`](https://github.com/discordjs/discord-api-types/) by running the following command in your terminal:
+First off, install the [`@discordjs/rest`](https://github.com/discordjs/discord.js/tree/main/packages/rest) and [`discord-api-types`](https://github.com/discordjs/discord-api-types/) by running the following command in your terminal:
 
 :::: code-group
 ::: code-group-item npm
@@ -40,7 +40,7 @@ pnpm add @discordjs/rest discord-api-types
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { token } = require('./config.json');
-const fs = require('fs');
+const fs = require('node:fs');
 
 const commands = [];
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -156,7 +156,7 @@ const data = new SlashCommandBuilder()
 			.addChoice('Movie', 'gif_movie'));
 ```
 
-### Subcommands
+## Subcommands
 
 Subcommands are available with the `.addSubcommand()` method:
 
@@ -176,4 +176,3 @@ const data = new SlashCommandBuilder()
 			.setName('server')
 			.setDescription('Info about the server'));
 ```
-

@@ -91,7 +91,7 @@ discord-bot/
 
 Create a new folder named `commands`, which is where you'll store all of your commands.
 
-We'll be using utility methods from the [`@discordjs/builders`](https://github.com/discordjs/builders) package to build the slash command data, so open your terminal and install it.
+We'll be using utility methods from the [`@discordjs/builders`](https://github.com/discordjs/discord.js/tree/main/packages/builders) package to build the slash command data, so open your terminal and install it.
 
 :::: code-group
 ::: code-group-item npm
@@ -139,7 +139,7 @@ If you need to access your client instance from inside a command file, you can a
 In your `index.js` file, make these additions:
 
 ```js {1-2,7}
-const fs = require('fs');
+const fs = require('node:fs');
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
 
@@ -171,7 +171,7 @@ for (const file of commandFiles) {
 Use the same approach for your `deploy-commands.js` file, but instead `.push()` to the `commands` array with the JSON data for each command.
 
 ```js {1,7,9-12}
-const fs = require('fs');
+const fs = require('node:fs');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { clientId, guildId, token } = require('./config.json');
