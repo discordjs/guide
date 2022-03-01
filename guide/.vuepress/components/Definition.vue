@@ -24,18 +24,6 @@ const props = defineProps(['title', 'content']);
 	background-color: #23272a;
 	color: #fff;
 	padding: 1rem;
-
-	// someone is gonna scream at me for this i can sense it
-	&:hover {
-		box-shadow: 0 0 0.5rem 0.5rem rgba(114, 137, 218, 0.5);
-		transition: box-shadow 0.2s ease-in-out;
-		transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-	}
-	&:hover ~ .card {
-		opacity: 0;
-		transition: opacity 0.2s ease-in-out;
-		transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-	}
 }
 
 .title {
