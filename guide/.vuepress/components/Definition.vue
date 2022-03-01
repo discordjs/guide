@@ -35,7 +35,7 @@ const props = defineProps(['title', 'content']);
 }
 
 .content {
-	// definition of the word
+	margin-top: 0.7rem;
 	font-size: 16px;
 	color: #fff;
 }
