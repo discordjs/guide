@@ -30,7 +30,6 @@ There are a multitude of virtual private servers available, but the most popular
 
 ### Before you go all out
 
-Before you go out and purchase a VPS, we recommend learning linux terminal basics and how to remotely connect to a VPS. The usual method is via [SSH](https://en.wikipedia.org/wiki/Secure_Shell_Protocol). We won't go deep into it as thats outside of the scope of this guide, however VPS providers usually have a guide regarding connection so you can read up on that.
 
 -   [Linode](https://www.linode.com/docs/guides/connect-to-server-over-ssh/)
 -   [DigitalOcean](https://docs.digitalocean.com/products/droplets/how-to/connect-with-ssh/)
