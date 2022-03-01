@@ -1,0 +1,46 @@
+name: Bug report
+description: Create a report to help us improve
+labels: ['type: bug']
+
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: To Reproduce
+      description: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+    
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain your problem.
+      
+  - type: textarea
+    id: device
+    attributes:
+      label: Device (please complete the following information) 
+      description: |
+        - Device/OS: [e.g. iOS]
+        - Browser: [e.g. chrome, safari]
+        - Version: [e.g. 22]
+    validations:
+      required: true
+    
+  - type: textarea
+    attributes:
+      label: Additional notes
+      description: Add any other notes about the problem here.

@@ -1,0 +1,20 @@
+name: Question/General support request
+description: Ask questions about the guide. 
+labels: ['question']
+
+body:
+  - type: textarea
+    id: scope
+    attributes:
+      label: Part of the guide or code sample the question is about
+      description: URL or path to the file or section in question. If none please select "feature request" instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: Your question about the referenced part of the guide.
+    validations:
+      required: true
