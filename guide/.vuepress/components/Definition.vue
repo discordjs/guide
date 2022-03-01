@@ -1,6 +1,6 @@
 <template>
 	<div class="card">
-		<span class="title"> Info </span>
+		<span class="title"> INFO </span>
 		<span class="content">{{ content }}</span>
 	</div>
 </template>
