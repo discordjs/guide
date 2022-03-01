@@ -10,7 +10,9 @@ Running projects like your bot with Docker is a great way to get your bot runnin
 
 A Dockerfile is a file that tells Docker how to build your bot.
 
+:::tip
 If you have been following the guide so far the below Dockerfile should work for you.
+:::
 
 ```dockerfile
 # Use node:16.11.1 as the base image
@@ -39,9 +41,8 @@ CMD [ "pm2-runtime", "start", "index.js" ]
 
 <Definition content="GitHub Actions is a CI/CD platform that allows you to automate your build, test, and deployment pipelines. You can set up workflows to build and test each pull request that comes into your repository, for this example we will be using GitHub Actions to publish a Docker Image every push you do to your master branch." />
 
-::: tip
+To use GitHub Actions your code must be in a GitHub repository.
 You can store your code in a git server such as GitHub for ease of access.
-:::
 
 ## GitHub Desktop
 
