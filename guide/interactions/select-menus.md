@@ -169,7 +169,7 @@ client.on('interactionCreate', async interaction => {
 Additionally to deferring the response of the interaction, you can defer the menu, which will trigger a loading state and then revert back to its original state:
 
 ```js {1,6-10}
-const wait = require('util').promisify(setTimeout);
+const wait = require('node:timers/promises').setTimeout;
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isSelectMenu()) return;

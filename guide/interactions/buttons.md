@@ -206,7 +206,7 @@ In addition to deferring an interaction response, you can defer the button, whic
 <!-- eslint-skip -->
 
 ```js {7-9}
-const wait = require('util').promisify(setTimeout);
+const wait = require('node:timers/promises').setTimeout;
 
 // ...
 

@@ -139,7 +139,7 @@ If you need to access your client instance from inside a command file, you can a
 In your `index.js` file, make these additions:
 
 ```js {1-2,7}
-const fs = require('fs');
+const fs = require('node:fs');
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
 
@@ -171,7 +171,7 @@ for (const file of commandFiles) {
 Use the same approach for your `deploy-commands.js` file, but instead `.push()` to the `commands` array with the JSON data for each command.
 
 ```js {1,7,9-12}
-const fs = require('fs');
+const fs = require('node:fs');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { clientId, guildId, token } = require('./config.json');
