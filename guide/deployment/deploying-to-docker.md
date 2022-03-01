@@ -127,6 +127,21 @@ Now every time you push to your master branch the bot will be built and pushed t
 
 # Running Your Docker Container
 
+Now that we have containerized our bot, we can run it by typing:
+
+```bash
+sudo docker run -d -t -i -e DISCORD_TOKEN='your-token' \
+-e A='123' \
+-e B='456' \
+--name bot_name ghcr.io/AccountUsername/RepoName:latest # The 2nd argument is the image location, we're expecting you followed the GitHub Actions instructions and published it to the GHCR
+```
+
+Congratulations! You have now built, published and deployed your bot to Docker.
+
+:::tip
+For easier management of your bot, we recommend [installing Portainer](https://docs.portainer.io/v/ce-2.9/start/install/server/docker/linux#deployment) for an online panel of your Docker containers without having to use the cli all the time.
+:::
+
 ## Resulting code
 
 <ResultingCode />
