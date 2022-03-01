@@ -127,7 +127,7 @@ Now every time you push to your main branch the bot will be built and pushed to 
 
 # Running Your Docker Container
 
-Now that we have containerized our bot, we can run it by typing:
+Now that you have containerized your bot, you can run it by typing:
 
 ```bash
 sudo docker run -d -t -i -e DISCORD_TOKEN='your-token' \
