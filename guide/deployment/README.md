@@ -43,7 +43,7 @@ If you're using another provider, we recommend following their SSH instructions.
 
 # Running your bot
 
-When running your bot in production there are many different methods you can use. Below are some of the most common ones.
+When running your bot in production there are many different methods you can use. Below are some of the most common ones:
 
 ## Benefits of each deployment method
 
