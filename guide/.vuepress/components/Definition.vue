@@ -27,10 +27,10 @@ const props = defineProps(['title', 'content']);
 }
 
 .title {
-	font-weight: 600;
-	line-height: 1.7;
+    font-weight: 600;
+    margin-bottom:-.4rem
+    line-height: 1.7;
 	font-size: 16px;
-	margin-bottom: -0.2rem;
 	color: #4e5d94;
 }
 
