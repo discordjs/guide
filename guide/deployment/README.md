@@ -35,9 +35,6 @@ There are a multitude of virtual private servers available, but the most popular
 -   [Vultr](https://www.vultr.com/docs/how-to-access-your-vultr-vps/)
 -   [Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html)
 
-::: tip
-If you're using another provider, we recommend following their SSH instructions.
-:::
 
 # Running your bot
 
