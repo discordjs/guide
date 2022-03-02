@@ -45,12 +45,12 @@ pnpm add @discordjs/builders @discordjs/rest discord-api-types
 
 Below is a deployment script you can use. Focus on these variables:
 
-- `clientId`: Your client's id
+- `clientId`: Your bot's client id
 - `guildId`: Your development server's id
 - `commands`: An array of commands to register. The [slash command builder](/popular-topics/builders.md#slash-command-builders) from `@discordjs/builders` is used to build the data for your commands
 
 ::: tip
-In order to get your client and guild ids, open Discord and go to your settings. On the "Advanced" page, turn on "Developer Mode". This will enable a "Copy ID" button in the context menu when you right-click on a server icon, a user's profile, etc.
+In order to get your bot's client id and guild id, open Discord and go to your settings. On the "Advanced" page, turn on "Developer Mode". This will enable a "Copy ID" button in the context menu when you right-click on a server icon, a user's profile, etc.
 :::
 
 :::: code-group
