@@ -2,7 +2,7 @@
 	<img src="guide/images/branding/banner-blurple-small.png" title="discord.js Guide" alt="discord.js Guide" />
 </div>
 
-# discord.js Guide
+# Discord.js Guide
 
 Imagine a guide... that explores the many possibilities for your [discord.js](https://github.com/discordjs/discord.js) bot.
 
