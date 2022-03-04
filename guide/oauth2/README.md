@@ -206,11 +206,11 @@ async function getJSONResponse(body) {
 	let full_body = "";
 
 	for await (const data of body) {
-		full_body = `${full_body}${data.toString()}`
-	}
+		full_body = `${full_body}${data.toString()}`;
+	};
 			
 	return JSON.parse(full_body);
-}
+};
 
 const app = express();
 
@@ -234,7 +234,7 @@ app.get('/', async ({ query }, response) => {
 				},
 			});
 			
-			const oauthData = await getJSONResponse(tokenResponseData.body)
+			const oauthData = await getJSONResponse(tokenResponseData.body);
 			
 			console.log(oauthData);
 		} catch (error) {
