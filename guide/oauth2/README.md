@@ -196,7 +196,7 @@ Require `undici` and make your request.
 If you are used to the Fetch API and want to use that instead of how `undici` does it, instead of using `undici#request`, use `undici#fetch` with the same params as node-fetch.
 :::
 
-```js {1,3,7-8,10-34}
+```js {1,3,5-14,18-19,21-46}
 const { request } = require('undici');
 const express = require('express');
 const { clientId, clientSecret, port } = require('./config.json');
@@ -267,7 +267,7 @@ Now try visiting your OAuth2 URL and authorizing your application. Once you're r
 With an access token and a refresh token, you can once again use the [`/api/users/@me` endpoint](https://discord.com/developers/docs/resources/user#get-current-user) to fetch the [user object](https://discord.com/developers/docs/resources/user#user-object).
 
 <!-- eslint-skip -->
-```js {3-7,9}
+```js {1-5,7}
 const userResult = await request('https://discord.com/api/users/@me', {
 	headers: {
 		authorization: `${oauthData.token_type} ${oauthData.access_token}`,
