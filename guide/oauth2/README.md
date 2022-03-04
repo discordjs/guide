@@ -203,14 +203,14 @@ const { clientId, clientSecret, port } = require('./config.json');
 
 // Just make a helper function to get JSON response from request()
 async function getJSONResponse(body) {
-	let full_body = "";
+	let full_body = '';
 
 	for await (const data of body) {
 		full_body = `${full_body}${data.toString()}`;
-	};
-			
+	}
+
 	return JSON.parse(full_body);
-};
+}
 
 const app = express();
 
@@ -233,7 +233,7 @@ app.get('/', async ({ query }, response) => {
 					'Content-Type': 'application/x-www-form-urlencoded',
 				},
 			});
-			
+
 			const oauthData = await getJSONResponse(tokenResponseData.body);
 			
 			console.log(oauthData);
