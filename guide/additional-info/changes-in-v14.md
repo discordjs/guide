@@ -122,6 +122,10 @@ const button = {
 
 Methods that return CDN URLs will now return a dynamic image URL (if available). This behavior can be overridden by setting `forceStatic` to `true` in the `ImageURLOptions` parameters.
 
+### CategoryChannel
+
+`CategoryChannel#children` is no longer a `Collection` of channels the category contains. It is now a manager (`CategoryChannelChildManager`). This also means `CategoryChannel#createChannel` has been moved to the `CategoryChannelChildManager`.
+
 ### Channel
 
 - `#isText` has been renamed to `#isTextBased`
