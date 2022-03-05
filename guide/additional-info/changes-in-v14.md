@@ -124,7 +124,6 @@ Methods that return CDN URLs will now return a dynamic image URL (if available).
 
 ### Channel
 
-- `#createdAt` and `#createdTimestamp` are now nullable. On any regular channel or private thread `#createdAt` and `#createTimestamp` will always be non-null. This value is only nullable for public threads.
 - `#isText` has been renamed to `#isTextBased`
 - `#isVoice` has been renamed to `#isVoiceBased`
 
@@ -333,10 +332,6 @@ const buttonStyle = EnumResolvers.resolveButtonStyle('PRIMARY');
 
 Added `#delete` and `#edit` methods for managing existing guild emojis.
 
-### GuildPreview
-
-Added `#stickers` property.
-
 ### GuildScheduledEvent
 
 Added `#coverImage` and `coverImageURL` for getting cover image data for a guild scheduled event.
@@ -344,18 +339,6 @@ Added `#coverImage` and `coverImageURL` for getting cover image data for a guild
 ### Interaction
 
 Added `#isRepliable` to check whether a given interaction can be replied to.
-
-### MessageOptions
-
-You can now send `MessageFlags` via the `#flags` property on `MessageOptions`.
-
-### RichPresenceAssets
-
-`RichPresenceAssets` now contains support for Youtube content and custom images.
-
-### Thread
-
-Added `#createdTimestamp` which indicates when the thread was created.
 
 ### Unsafe Builders
 
