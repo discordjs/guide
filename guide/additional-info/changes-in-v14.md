@@ -235,7 +235,19 @@ MessageComponents have been renamed as well. They no longer have the `Message` p
 
 - `#addField` has been removed, use `#addFields` instead.
 
-- `#addFields` accepts an object or array of `APIEmbedField`(s) respectively. (add link to dapi site)
+- `#addFields` accepts an object or a rest array of `APIEmbedField`(s): (add link to dapi site)
+
+```diff
+- new MessageEmbed().addFields([
+-  { name: 'one', value: 'one' },
+-  { name: 'two', value: 'two' },
+- ]);
+
++ new Embed().addFields(
++  { name: 'one', value: 'one' },
++  { name: 'two', value: 'two' },
++);
+```
 
 ### PartialTypes
 
