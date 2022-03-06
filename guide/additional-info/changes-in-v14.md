@@ -219,6 +219,12 @@ MessageComponents have been renamed as well. They no longer have the `Message` p
 + const actionRow = new ActionRow();
 ```
 
+### MessageSelectMenu
+
+- `MessageSelectMenu` has been renamed to `SelectMenuComponent`
+
+- `#addOption` has been removed use `#addOptions` instead.
+
 ### MessageEmbed
 
 - `MessageEmbed` has now been renamed to `Embed`.
@@ -227,7 +233,9 @@ MessageComponents have been renamed as well. They no longer have the `Message` p
 
 - `#setFooter` now accepts a sole `FooterOptions` object. (add link to dapi site)
 
-- `#addField` and `#addFields` both accept an object or array of `APIEmbedField`(s) respectively. (add link to dapi site)
+- `#addField` has been removed, use `#addFields` instead.
+
+- `#addFields` accepts an object or array of `APIEmbedField`(s) respectively. (add link to dapi site)
 
 ### PartialTypes
 
