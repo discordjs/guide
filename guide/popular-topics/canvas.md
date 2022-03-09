@@ -1,72 +1,35 @@
-# Image manipulation with Canvas
+# Image manipulation with @napi-rs/canvas
 
-## Setting up Canvas
+## Setting up @napi-rs/canvas
 
-Canvas is an image manipulation tool that allows you to modify images with code. We'll explore how to use this module in a slash command to make a profile command. But first, you must go through the intense labor of installing Canvas. It's highly recommended that you use a Linux distribution for this because it'll be much easier to install on.
+@napi-rs/canvas is an image manipulation tool that allows you to modify images with code. We'll explore how to use this module in a slash command to make a profile command.
 
 ::: tip
-This guide is last tested with `canvas^2.6.0`, so make sure you have this or a similar version after installation.
+This guide is last tested with `@napi-rs/canvas^0.1.20`, so make sure you have this or a similar version after installation.
 :::
 
 ::: warning
 Be sure that you're familiar with things like [async/await](/additional-info/async-await.md) and [object destructuring](/additional-info/es6-syntax.md#object-destructuring) before continuing, as we'll be making use of features like these.
 :::
 
-## Installation
-
-### Windows
-
-You will need a package called Windows Build Tools. To install this, open Powershell as Administrator. You then can install it with your preferred package manager. It is also bundled with Chocolatey, should you choose that installation path.
-
-:::: code-group
-::: code-group-item npm
-```sh:no-line-numbers
-npm install --global --production windows-build-tools
-```
-:::
-::: code-group-item yarn
-```sh:no-line-numbers
-yarn global add --production windows-build-tools
-```
-:::
-::: code-group-item pnpm
-```sh:no-line-numbers
-pnpm add --global --production windows-build-tools
-```
-:::
-::: code-group-item Chocolatey
-```sh:no-line-numbers
-choco install -y python2 gtk-runtime microsoft-build-tools libjpeg-turbo
-```
-:::
-::::
-
-Afterward, you should follow the instructions detailed [here](https://github.com/Automattic/node-canvas/wiki/Installation:-Windows). Additionally, make sure Node and Cairo are **both** either 32-bit or 64-bit; having a 32-bit version of one and a 64-bit version of the other will cause errors.
-
-If you are *still* unable to install Canvas, you might want to consider installing [Microsoft Visual Studio 2015](https://www.visualstudio.com/vs/older-downloads/).
-
-### Other distributions
-
-You can run one of the commands listed [here](https://github.com/Automattic/node-canvas#compiling) to install the necessary tools Canvas needs.
-
-### Package installation
+## Package installation
 
 After installing all the necessary software, run the following command in your terminal:
 
 :::: code-group
 ::: code-group-item npm
 ```sh:no-line-numbers
-npm install canvas
+npm install @napi-rs/canvas
 ```
 :::
 ::: code-group-item yarn
 ```sh:no-line-numbers
-yarn add canvas
+yarn add @napi-rs/canvas
 ```
 :::
 ::: code-group-item pnpm
 ```sh:no-line-numbers
-pnpm add canvas
+pnpm add @napi-rs/canvas
 ```
 :::
 ::::
@@ -77,7 +40,7 @@ Here is the base code you'll be using to get started:
 
 ```js
 const { Client, Intents, MessageAttachment } = require('discord.js');
-const Canvas = require('canvas');
+const Canvas = require('@napi-rs/canvas');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
@@ -104,10 +67,10 @@ Remember to register the slash commands before continuing on with this section o
 
 The end goal will be to display the user's avatar and nickname.
 
-After importing the Canvas module and initializing it, you should load the images. With Canvas, you have to specify where the image comes from first, naturally, and then specify how it gets loaded into the actual Canvas using `context`, which you will use to interact with Canvas.
+After importing the @napi-rs/canvas module and initializing it, you should load the images. With @napi-rs/canvas, you have to specify where the image comes from first, naturally, and then specify how it gets loaded into the actual Canvas using `context`, which you will use to interact with Canvas.
 
 ::: tip
-`canvas` works almost identical to HTML5 Canvas. You can read the HTML5 Canvas tutorials on [w3Schools](https://www.w3schools.com/html/html5_canvas.asp) and [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) for more information later!
+`@napi-rs/canvas` works almost identical to HTML5 Canvas. You can read the HTML5 Canvas tutorials on [w3Schools](https://www.w3schools.com/html/html5_canvas.asp) and [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) for more information later!
 :::
 
 ```js {5-8}
@@ -124,22 +87,26 @@ client.on('interactionCreate', async interaction => {
 });
 ```
 
-Now, you need to load the image you want to use into Canvas. You can use `node-canvas`'s [`loadImage()` utility method](https://github.com/Automattic/node-canvas#loadimage) to load images from local directories or URLs.
+Now, you need to load the image you want to use into Canvas.
 
 We'll be using [this image](https://github.com/discordjs/guide/blob/main/guide/popular-topics/images/canvas.jpg) as the background in the welcome image, but you can use whatever you want. Be sure to download the file, name it `wallpaper.jpg`, and save it inside the same directory as your main bot file.
 
 ```js {5-13}
+const { readFile } = require('fs/promises');
+
 client.on('interactionCreate', async interaction => {
 	// ...
 	const context = canvas.getContext('2d');
 
-	const background = await Canvas.loadImage('./wallpaper.jpg');
+	const backgroundFile = await readFile('./wallpaper.jpg');
+	const background = new Canvas.Image();
+	background.src = backgroundFile;
 
 	// This uses the canvas dimensions to stretch the image onto the entire canvas
 	context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
 	// Use the helpful Attachment class structure to process the file for you
-	const attachment = new MessageAttachment(canvas.toBuffer(), 'profile-image.png');
+	const attachment = new MessageAttachment(canvas.toBuffer('image/png'), 'profile-image.png');
 
 	interaction.reply({ files: [attachment] });
 });
@@ -148,7 +115,7 @@ client.on('interactionCreate', async interaction => {
 ![Basic canvas preview](./images/canvas-preview.png)
 
 ::: tip
-If you get an error such as `Error: error while reading from input stream`, then the file's provided path was incorrect.
+If you get an error such as `Error: ENOENT: no such file or directory`, then the file's provided path was incorrect.
 :::
 
 ### Manipulating images
@@ -174,11 +141,15 @@ client.on('interactionCreate', async interaction => {
 A bit plain, right? Fear not, for you have a bit more to do until you reach completion. Since this guide page's goal is focused more on actual code than design, let's place a basic square-shaped avatar for now on the left side of the image. In the interest of coverage, you will also make it a circle afterward.
 
 ```js {5-9}
+const { fetch } = require('undici');
+
 client.on('interactionCreate', async interaction => {
 	// ...
 	context.strokeRect(0, 0, canvas.width, canvas.height);
 
-	const avatar = await Canvas.loadImage(interaction.user.displayAvatarURL({ format: 'jpg' }));
+	const avatarRes = await fetch(interaction.user.displayAvatarURL({ format: 'jpg' }));
+	const avatar = new Canvas.Image();
+	avatar.src = Buffer.from(await avatarRes.arrayBuffer());
 
 	// Draw a shape onto the main canvas
 	context.drawImage(avatar, 25, 0, 200, canvas.height);
@@ -193,7 +164,9 @@ It works well, but the avatar image itself seems a bit stretched out. Let's reme
 ```js {5-6}
 client.on('interactionCreate', async interaction => {
 	// ...
-	const avatar = await Canvas.loadImage(interaction.user.displayAvatarURL({ format: 'jpg' }));
+	const avatarRes = await fetch(interaction.user.displayAvatarURL({ format: 'jpg' }));
+	const avatar = new Image();
+	avatar.src = Buffer.from(await avatarRes.arrayBuffer());
 
 	// Move the image downwards vertically and constrain its height to 200, so that it's square
 	context.drawImage(avatar, 25, 25, 200, 200);
