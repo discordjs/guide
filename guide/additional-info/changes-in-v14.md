@@ -360,10 +360,6 @@ const buttonStyle = EnumResolvers.resolveButtonStyle('PRIMARY');
 
 Added `#delete` and `#edit` methods for managing existing guild emojis.
 
-### GuildScheduledEvent
-
-Added `#coverImage` and `coverImageURL` for getting cover image data for a guild scheduled event.
-
 ### Interaction
 
 Added `#isRepliable` to check whether a given interaction can be replied to.
