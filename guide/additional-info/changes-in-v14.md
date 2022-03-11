@@ -172,6 +172,8 @@ The `message` and `interaction` events are now removed. Use `messageCreate` and 
 
 `applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate` have all been removed. Refer to [this pull request](https://github.com/discordjs/discord.js/pull/6492) for context.
 
+The `ThreadMembersUpdate` event now only emits the thread, the users who were added & and users who were removed respectively.
+
 ### GuildBanManager
 
 The `days` option when banning a user has been renamed to `deleteMessageDays` to be more aligned to the API name.
@@ -252,6 +254,8 @@ MessageComponents have been renamed as well. They no longer have the `Message` p
 ### PartialTypes
 
 The `PartialTypes` string array has been removed, instead use the `Partials` enum.
+
+In addition to this, there is now a new partial: `Partials.ThreadMember`.
 
 ### Permissions
 
