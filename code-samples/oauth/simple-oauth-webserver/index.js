@@ -2,6 +2,17 @@ const fetch = require('node-fetch');
 const express = require('express');
 const { clientId, clientSecret, port } = require('./config.json');
 
+// Just make a helper function to get JSON response from request()
+async function getJSONResponse(body) {
+	let full_body = '';
+
+	for await (const data of body) {
+		full_body = `${full_body}${data.toString()}`;
+	}
+
+	return JSON.parse(full_body);
+}
+
 const app = express();
 
 app.get('/', async ({ query }, response) => {
@@ -9,7 +20,7 @@ app.get('/', async ({ query }, response) => {
 
 	if (code) {
 		try {
-			const oauthResult = await fetch('https://discord.com/api/oauth2/token', {
+			const tokenResponseData = await request('https://discord.com/api/oauth2/token', {
 				method: 'POST',
 				body: new URLSearchParams({
 					client_id: clientId,
@@ -24,18 +35,18 @@ app.get('/', async ({ query }, response) => {
 				},
 			});
 
-			const oauthData = await oauthResult.json();
+			const oauthData = await getJSONResponse(tokenResponseData.body);
 
-			const userResult = await fetch('https://discord.com/api/users/@me', {
+			const userResult = await request('https://discord.com/api/users/@me', {
 				headers: {
 					authorization: `${oauthData.token_type} ${oauthData.access_token}`,
 				},
 			});
 
-			console.log(await userResult.json());
+			console.log(await getJSONResponse(userResult.body));
 		} catch (error) {
 			// NOTE: An unauthorized token will not throw an error;
-			// it will return a 401 Unauthorized response in the try block above
+			// it will return a 401 Unauthorized response in the try block above (tokenResponseData.statusCode will be 401)
 			console.error(error);
 		}
 	}
