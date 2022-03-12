@@ -37,7 +37,7 @@ client.on('interactionCreate', async interaction => {
 The custom id is a developer-defined string of up to 100 characters.
 :::
 
-As you can see we, construct the modal and assign it a custom id and a title. Once our modal is constructed, we send it as a response to the interaction via `#showModal`. 
+As you can see, we construct the modal and assign it a custom id and a title. Once our modal is constructed, we send it as a response to the interaction via `#showModal`.
 
 We're still missing one step - adding inputs. Adding inputs is similar to adding components to messages.
 
