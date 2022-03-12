@@ -11,7 +11,7 @@ This page is a follow-up to the [interactions (slash commands) page](/interactio
 Unlike message components, modals aren't strictly components themselves. They're a callback structure used to respond to interactions.
 
 ::: tip
-You can have a maximum of five `ActionRow`s per modal, and one `TextInputComponent` within an `ActionRow`. Currently, you cannot use `SelectMenuComponent`s or `ButtonComponents` in modal action rows.
+You can have a maximum of five `ActionRow`s per modal, and one `TextInputComponent` within an `ActionRow`. Currently, you cannot use `SelectMenuComponent`s or `ButtonComponent`s in modal action rows.
 :::
 
 To create a modal you construct a new `Modal`. You can then use the setters to add the title.
@@ -34,10 +34,10 @@ client.on('interactionCreate', async interaction => {
 });
 ```
 ::: tip
-The custom ID is a developer-defined string of up to 100 characters.
+The custom id is a developer-defined string of up to 100 characters.
 :::
 
-As you can see we construct the modal and assign it a custom id and a title. Once our modal is constructed we send as a response to the interaction via `#showModal`. 
+As you can see we, construct the modal and assign it a custom id and a title. Once our modal is constructed, we send it as a response to the interaction via `#showModal`. 
 
 We're still missing one step - adding inputs. Adding inputs is similar to adding components to messages.
 
