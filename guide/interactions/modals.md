@@ -6,7 +6,7 @@ With modals, you can create pop-up forms that allow users to provide you, with f
 This page is a follow-up to the [interactions (slash commands) page](/interactions/slash-commands.md). Please carefully read those first so that you can understand the methods used in this section.
 :::
 
-# Building and Responding with Modals
+## Building and Responding with Modals
 
 Unlike message components, modals aren't strictly components themselves. They're a callback structure used to respond to interactions.
 
@@ -87,7 +87,7 @@ Restart your bot and invoke the `/ping` command again. You should see a popup fo
 
 TODO: Add modal image
 
-# Receiving Modal Submissions
+## Receiving Modal Submissions
 
 Modals are received via an interaction. You can check if a given interaction is a modal by invoking the `#isModalSubmit()` method:
 
