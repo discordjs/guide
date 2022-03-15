@@ -208,28 +208,31 @@ In addition, `#isCommand`, now indicates whether the command is an _application 
 
 ### MessageComponent
 
-MessageComponents have been renamed as well. They no longer have the `Message` prefix:
+MessageComponents have been renamed as well. They no longer have the `Message` prefix, and now have a `Builder` suffix:
 
 ```diff
 - const button = new MessageButton();
-+ const button = new ButtonComponent();
++ const button = new ButtonBuilder();
 
 - const selectMenu = new MessageSelectMenu();
-+ const selectMenu = new SelectMenuComponent();
++ const selectMenu = new SelectMenuBuilder();
 
 - const actionRow = new MessageActionRow();
-+ const actionRow = new ActionRow();
++ const actionRow = new ActionRowBuilder();
+
+- const textInput = new TextInputComponent();
++ const textInput = new TextInputBuilder();
 ```
 
 ### MessageSelectMenu
 
-- `MessageSelectMenu` has been renamed to `SelectMenuComponent`
+- `MessageSelectMenu` has been renamed to `SelectMenuBuilder`
 
 - `#addOption` has been removed use `#addOptions` instead.
 
 ### MessageEmbed
 
-- `MessageEmbed` has now been renamed to `Embed`.
+- `MessageEmbed` has now been renamed to `EmbedBuilder`.
 
 - `#setAuthor` now accepts a sole `AuthorOptions` object. (add link to dapi site)
 
