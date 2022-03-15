@@ -1,6 +1,6 @@
 # Modals
 
-With modal interactions you can create pop-out forms that allow users to provide you with formatted input. We'll cover how to create, send and receive modals using discord.js!
+With modals, you can create pop-up forms that allow users to provide you, with formatted inputs, through submissions. We'll cover how to create, show, and receive modal forms using discord.js!
 
 ::: tip
 This page is a follow-up to the [interactions (slash commands) page](/interactions/slash-commands.md). Please carefully read those first so that you can understand the methods used in this section.
@@ -14,16 +14,16 @@ Unlike message components, modals aren't strictly components themselves. They're
 You can have a maximum of five `ActionRow`s per modal, and one `TextInputComponent` within an `ActionRow`. Currently, you cannot use `SelectMenuComponent`s or `ButtonComponent`s in modal action rows.
 :::
 
-To create a modal you construct a new `Modal`. You can then use the setters to add the title.
+To create a modal you construct a new `ModalBuilder`. You can then use the setters to add the title.
 
 ```js {1,7-13}
-const { Modal } = require('discord.js');
+const { ModalBuilder } = require('discord.js');
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-		const modal = new Modal()
+		const modal = new ModalBuilder()
 			.setCustomId('myModal')
 			.setTitle('My Modal');
 
@@ -42,28 +42,28 @@ As you can see, we construct the modal and assign it a custom id and a title. On
 We're still missing one step - adding inputs. Adding inputs is similar to adding components to messages.
 
 ```js {1,12-34}
-const { ActionRow, Modal, TextInputComponent, TextInputStyle } = require('discord.js');
+const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	if (interaction.commandName === 'ping') {
 		// Create our modal
-		const modal = new Modal()
+		const modal = new ModalBuilder()
 			.setCustomId('myModal')
 			.setTitle('My Modal');
 
 		// Add components to modal
 
 		// Let's create our text inputs
-		const favoriteColorInput = new TextInputComponent()
+		const favoriteColorInput = new TextInputBuilder()
 			.setCustomId('favoriteColorInput')
 		    // The label is the prompt the user sees for this input
 			.setLabel("What's your favorite color?")
 		    // Short means only a single line of text
 			.setStyle(TextInputStyle.Short);
 
-		const hobbiesInput = new TextInputComponent()
+		const hobbiesInput = new TextInputBuilder()
 			.setCustomId('hobbiesInput')
 			.setLabel("What's your favorites hobbies?")
 		    // Paragraph means multiple lines of text.
@@ -71,8 +71,8 @@ client.on('interactionCreate', async interaction => {
 
 		// An action row only holds one text input,
 		// so we need one action row per text input.
-		const firstActionRow = new ActionRow().addComponents(favoriteColorInput);
-		const secondActionRow = new ActionRow().addComponents(hobbiesInput);
+		const firstActionRow = new ActionRowBuilder().addComponents(favoriteColorInput);
+		const secondActionRow = new ActionRowBuilder().addComponents(hobbiesInput);
 
 		// Now we need to add our inputs into the modal
 		modal.addComponents(firstActionRow, secondActionRow);
