@@ -11,7 +11,7 @@ This page is a follow-up to the [interactions (slash commands) page](/interactio
 Unlike message components, modals aren't strictly components themselves. They're a callback structure used to respond to interactions.
 
 ::: tip
-You can have a maximum of five `ActionRow`s per modal, and one `TextInputComponent` within an `ActionRow`. Currently, you cannot use `SelectMenuComponent`s or `ButtonComponent`s in modal action rows.
+You can have a maximum of five `ActionRowBuilder`s per modal builder, and one `TextInputBuilder` within an `ActionRowBuilder`. Currently, you cannot use `SelectMenuBuilder`s or `ButtonBuilder`s in modal action rows builders.
 :::
 
 To create a modal you construct a new `ModalBuilder`. You can then use the setters to add the title.
@@ -20,7 +20,7 @@ To create a modal you construct a new `ModalBuilder`. You can then use the sette
 const { ModalBuilder } = require('discord.js');
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
 		const modal = new ModalBuilder()
@@ -45,7 +45,7 @@ We're still missing one step - adding inputs. Adding inputs is similar to adding
 const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
 		// Create our modal
