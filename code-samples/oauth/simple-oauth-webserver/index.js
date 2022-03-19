@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const { request } = require('undici');
 const express = require('express');
 const { clientId, clientSecret, port } = require('./config.json');
 
