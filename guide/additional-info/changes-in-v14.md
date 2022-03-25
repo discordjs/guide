@@ -184,6 +184,16 @@ The `days` option when banning a user has been renamed to `deleteMessageDays` to
 
 `Guild#maximumPresences` no longer has a default value of 25,000.
 
+### GuildAuditLogs & GuildAuditLogsEntry
+
+`GuildAuditLogs.build()` has been removed as it has been deemed defunct. There is no alternative.
+
+The following properties & methods have been moved to the `GuildAuditLogsEntry` class:
+
+- `GuildAuditLogs.Targets`
+- `GuildAuditLogs.actionType()` 
+- `GuildAuditLogs.targetType()`
+
 ### GuildMember
 
 `GuildMember#pending` is now nullable to account for partial guild members. See [this issue](https://github.com/discordjs/discord.js/issues/6546) for a more in-depth reason.
