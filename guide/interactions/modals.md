@@ -6,7 +6,7 @@ With modals, you can create pop-up forms that allow users to provide you, with f
 This page is a follow-up to the [interactions (slash commands) page](/interactions/slash-commands.md). Please carefully read those first so that you can understand the methods used in this section.
 :::
 
-## Building and Responding with Modals
+## Building and responding with modals
 
 Unlike message components, modals aren't strictly components themselves. They're a callback structure used to respond to interactions.
 
@@ -65,7 +65,7 @@ client.on('interactionCreate', async interaction => {
 
 		const hobbiesInput = new TextInputBuilder()
 			.setCustomId('hobbiesInput')
-			.setLabel("What's your favorites hobbies?")
+			.setLabel("What's some of your favorite hobbies?")
 		    // Paragraph means multiple lines of text.
 			.setStyle(TextInputStyle.Paragraph);
 
@@ -85,9 +85,9 @@ client.on('interactionCreate', async interaction => {
 
 Restart your bot and invoke the `/ping` command again. You should see a popup form resembling the image below:
 
-TODO: Add modal image
+<img width=450 src="./images/modal-example.png">
 
-## Receiving Modal Submissions
+## Receiving modal submissions
 
 Modals are received via an interaction. You can check if a given interaction is a modal by invoking the `#isModalSubmit()` method:
 
@@ -98,7 +98,7 @@ client.on('interactionCreate', interaction => {
 });
 ```
 
-## Extracting Data from Modal Submissions
+## Extracting data from modal submissions
 
 You'll most likely need to read the data sent by the user in the modal. You can do this by accessing the `#fields` instance field on the interaction. From there you can call `#getTextInputValue` with the custom id of the text input to get the value.
 
