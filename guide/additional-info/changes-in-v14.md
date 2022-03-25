@@ -208,7 +208,7 @@ In addition, `#isCommand`, now indicates whether the command is an _application 
 
 ### MessageComponent
 
-MessageComponents have been renamed as well. They no longer have the `Message` prefix, and now have a `Builder` suffix:
+- MessageComponents have been renamed as well. They no longer have the `Message` prefix, and now have a `Builder` suffix:
 
 ```diff
 - const button = new MessageButton();
@@ -222,6 +222,17 @@ MessageComponents have been renamed as well. They no longer have the `Message` p
 
 - const textInput = new TextInputComponent();
 + const textInput = new TextInputBuilder();
+```
+
+- Components received from the API are no longer directly mutable, if you wish to mutate a component from the API use `ComponentBuilder#from`. For example, if you want to make a button mutable:
+
+```diff
+- const editedButton = receivedButton
+-   .setDisabled(true);
+
++ import { ButtonBuilder } from 'discord.js';
++ const editedButton = ButtonBuilder.from(receivedButton)
++   .setDisabled(true);
 ```
 
 ### MessageSelectMenu
