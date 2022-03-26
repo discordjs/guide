@@ -141,15 +141,15 @@ client.on('interactionCreate', async interaction => {
 A bit plain, right? Fear not, for you have a bit more to do until you reach completion. Since this guide page's goal is focused more on actual code than design, let's place a basic square-shaped avatar for now on the left side of the image. In the interest of coverage, you will also make it a circle afterward.
 
 ```js {5-9}
-const { fetch } = require('undici');
+const { request } = require('undici');
 
 client.on('interactionCreate', async interaction => {
 	// ...
 	context.strokeRect(0, 0, canvas.width, canvas.height);
 
-	const avatarRes = await fetch(interaction.user.displayAvatarURL({ format: 'jpg' }));
+	const { body } = await request(interaction.user.displayAvatarURL({ format: 'jpg' }));
 	const avatar = new Canvas.Image();
-	avatar.src = Buffer.from(await avatarRes.arrayBuffer());
+	avatar.src = Buffer.from(await body.arrayBuffer());
 
 	// Draw a shape onto the main canvas
 	context.drawImage(avatar, 25, 0, 200, canvas.height);
@@ -164,9 +164,9 @@ It works well, but the avatar image itself seems a bit stretched out. Let's reme
 ```js {5-6}
 client.on('interactionCreate', async interaction => {
 	// ...
-	const avatarRes = await fetch(interaction.user.displayAvatarURL({ format: 'jpg' }));
+	const { body } = await request(interaction.user.displayAvatarURL({ format: 'jpg' }));
 	const avatar = new Image();
-	avatar.src = Buffer.from(await avatarRes.arrayBuffer());
+	avatar.src = Buffer.from(await body.arrayBuffer());
 
 	// Move the image downwards vertically and constrain its height to 200, so that it's square
 	context.drawImage(avatar, 25, 25, 200, 200);

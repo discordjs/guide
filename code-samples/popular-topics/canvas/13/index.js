@@ -1,7 +1,7 @@
 const { Client, Intents, MessageAttachment } = require('discord.js');
 const { createCanvas, Image } = require('@napi-rs/canvas');
 const { readFile } = require('fs/promises');
-const { fetch } = require('undici');
+const { request } = require('undici');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
@@ -48,9 +48,9 @@ client.on('interactionCreate', async interaction => {
 		context.closePath();
 		context.clip();
 
-		const avatarRes = await fetch(interaction.user.displayAvatarURL({ format: 'jpg' }));
+		const { body } = await request(interaction.user.displayAvatarURL({ format: 'jpg' }));
 		const avatar = new Image()
-		avatar.src = Buffer.from(await avatarRes.arrayBuffer());
+		avatar.src = Buffer.from(await body.arrayBuffer());
 		context.drawImage(avatar, 25, 25, 200, 200);
 
 		const attachment = new MessageAttachment(canvas.toBuffer('image/png'), 'profile-image.png');
