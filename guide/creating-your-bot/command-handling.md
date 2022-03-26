@@ -140,6 +140,7 @@ In your `index.js` file, make these additions:
 
 ```js {1-2,7}
 const fs = require('node:fs');
+const path = require('node:');
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
 
@@ -153,15 +154,20 @@ We recommend attaching a `.commands` property to your client instance so that yo
 ::: tip
 [`fs`](https://nodejs.org/api/fs.html) is Node's native file system module. <DocsLink section="collection" path="class/Collection" /> is a class that extends JavaScript's native [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) class, and includes more extensive, useful functionality.
 :::
-
-This next step is how to dynamically retrieve your command files. The [`fs.readdirSync()`](https://nodejs.org/api/fs.html#fs_fs_readdirsync_path_options) method will return an array of all the file names in a directory, e.g. `['ping.js', 'beep.js']`. To ensure only command files get returned, use `Array.filter()` to leave out any non-JavaScript files from the array. With that array, loop over it and dynamically set your commands to the `client.commands` Collection.
+::: tip
+['path'](https://nodejs.org/api/path.html) is Node's native path utility module. It helps construct paths to access files and directories. Instead of manually writing ['./currentDirectory/fileYouWant'] everywhere, one can simply ['path.join()'] and pass each path segment as an argument. Note however, you should omit ['/'] or other path segment joiners as these may be different depending on the operating system running your code. One of the advantages of ['path'] is that it's methods know which joiners to use whethor you're using Windows, OSX, or Linux.
+:::
+This next step is how to dynamically retrieve your command files. First we'll need to get the path to the directory that stores your command files. The node core module ['path'](https://nodejs.org/api/path.html) and it's ['.join()'] method will help to consruct a path and store it in a ['const'] so we can reference it later. Following that, the [`fs.readdirSync()`](https://nodejs.org/api/fs.html#fs_fs_readdirsync_path_options) method will return an array of all the file names in the directory, e.g. `['ping.js', 'beep.js']`. To ensure only command files get returned, use `Array.filter()` to leave out any non-JavaScript files from the array. With that array, loop over it and dynamically set your commands to the `client.commands` Collection.
 
 ```js {2,4-9}
+
 client.commands = new Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandsPath = path.join(__dirname, 'commands');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
+	const filePath = path.join(commandsPath, file);
+	const command = require(filePath);
 	// Set a new item in the Collection
 	// With the key as the command name and the value as the exported module
 	client.commands.set(command.data.name, command);
@@ -171,16 +177,19 @@ for (const file of commandFiles) {
 Use the same approach for your `deploy-commands.js` file, but instead `.push()` to the `commands` array with the JSON data for each command.
 
 ```js {1,7,9-12}
-const fs = require('node:fs');
+const fs = require('fs');
+const path = require('path');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { clientId, guildId, token } = require('./config.json');
 
 const commands = [];
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandsPath = path.join(__dirname, 'commands');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
+	const filePath = path.join(commandsPath, file);
+	const command = require(filePath);
 	commands.push(command.data.toJSON());
 }
 ```
