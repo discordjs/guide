@@ -83,7 +83,7 @@ fetch('https://aws.random.cat/meow').then(response => response.json());
 
 It may seem like this does nothing, but what it's doing is launching a request to the random.cat server. The server is returning some JSON that contains a `file` property, which is a string containing a link to a random cat. node-fetch returns a response object, which we can change into JSON with `response.json()`. Next, let's implement this into a command. The code should look similar to this:
 
-```js {3-6}
+```js {3-7}
 client.on('interactionCreate', async interaction => {
 	// ...
 	if (commandName === 'cat') {
