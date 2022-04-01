@@ -145,10 +145,3 @@ For easier management of your bot, we recommend [installing Portainer](https://d
 ## Resulting code
 
 <ResultingCode />
-
-<!----------------- Links --------------->
-
-[linode]: https://www.linode.com/
-[digitalocean]: http://www.digitalocean.com/
-[vultr]: https://www.vultr.com/
-[amazon ec2]: https://aws.amazon.com/ec2/
