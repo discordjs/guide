@@ -134,7 +134,7 @@ Before the release of version 12, there used to be an issue where the token was 
 
 ### Request to use token, but token was unavailable to the client.
 
-Another common error–this error originates from the client attempting to execute an action that requires the token but the token not being available. This is most commonly caused by destroying the client and then trying to perform an action.
+This error originates from the client attempting to execute an action that requires the token but the token not being available. This is most commonly caused by destroying the client and then trying to perform an action.
 
 This error is also caused by attempting to use a client that has not logged in. Both of the examples below will throw errors.
 
