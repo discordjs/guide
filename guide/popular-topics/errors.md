@@ -179,7 +179,12 @@ This error originates from an invalid call to `bulkDelete()`. Make sure you are 
 
 ### Members didn't arrive in time.
 
-Another common error–this error originates from the client requesting members from the API via the WebSocket, possibly without the `GUILD_MEMBERS` intent, for which member chunks do not arrive in time, triggering the timeout. One **must** specify the `GUILD_MEMBERS` intent for this. Otherwise, the most common cause of this error is a bad connection; however, it can also be caused by fetching many members, upwards of 50 thousand. To fix this, run the bot on a location with better internet, such as a VPS. If this does not work for you, you will have to manually change the hardcoded member fetching timeout in the source code.
+This error happens when fetching multiple members via `GuildMemberManager#fetch()` and:
+- The `GUILD_MEMBERS` intent is not specified
+- The internet connection is somewhat bad
+- The amount of members fetched is huge (about 50 thousand and upwards)
+
+Ensure the `GUILD_MEMBERS` intent is provided. If this intent is provided, then you may wish to consider moving your bot to a location with better internet, such as a VPS. If this does not work for you, you will have to manually change the hardcoded member fetching timeout in the source code.
 
 ### MaxListenersExceededWarning: Possible EventEmitter memory leak detected...
 
