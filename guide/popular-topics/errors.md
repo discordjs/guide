@@ -126,7 +126,7 @@ This is a prevalent error; it originates from a wrong token being passed into `c
 
 - Not importing the config or env file correctly
 - Copying the client secret instead of the bot token (the token is alphanumerical and three parts delimited by a period while the client secret is significantly smaller and one part only)
-- Simply showing the token and copying that, instead of clicking regenerate and copying that.
+- Simply showing the token and copying that, instead of clicking reset token and copying that.
 
 ::: warning
 Before the release of version 12, there used to be an issue where the token was not prefixed correctly, which resulted in valid tokens being marked as invalid. If you have verified that all of the above is not the case, make sure you have updated discord.js to the current stable version.
