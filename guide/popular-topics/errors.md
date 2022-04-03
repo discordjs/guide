@@ -67,7 +67,7 @@ All of this information can help you track down what caused the error and how to
 ### Message
 
 The most important part of the error is the message. It tells you what went wrong, which can help you track down where it originates. 
-You can find a full list of messages [here](https://discord.com/developers/docs/topics/opcodes-and-status-codes#json) in the Discord API Docs.
+You can find a full list of messages [here](https://discord.com/developers/docs/topics/opcodes-and-status-codes#json) in the Discord API documentation.
 
 ### Path
 
