@@ -84,7 +84,7 @@ const button = {
 
 ### Application
 
-`Application#fetchAssets` has been removed as it is no longer supported by the API.
+`Application#fetchAssets()` has been removed as it is no longer supported by the API.
 
 ### BitField
 
@@ -124,12 +124,12 @@ Methods that return CDN URLs will now return a dynamic image URL (if available).
 
 ### CategoryChannel
 
-`CategoryChannel#children` is no longer a `Collection` of channels the category contains. It is now a manager (`CategoryChannelChildManager`). This also means `CategoryChannel#createChannel` has been moved to the `CategoryChannelChildManager`.
+`CategoryChannel#children` is no longer a `Collection` of channels the category contains. It is now a manager (`CategoryChannelChildManager`). This also means `CategoryChannel#createChannel()` has been moved to the `CategoryChannelChildManager`.
 
 ### Channel
 
-- `Channel#isText` has been renamed to `Channel#isTextBased`
-- `Channel#isVoice` has been renamed to `Channel#isVoiceBased`
+- `Channel#isText()` has been renamed to `Channel#isTextBased()`
+- `Channel#isVoice()` has been renamed to `Channel#isVoiceBased()`
 
 ::: tip
 TypeScript users should narrow `Channel` types via type guards in order to get more specific typings.
@@ -180,7 +180,7 @@ The `days` option when banning a user has been renamed to `deleteMessageDays` to
 
 ### Guild
 
-`Guild#setRolePositions` and `Guild#setChannelPositions` have been removed. Use `RoleManager#setPositions` and `GuildChannelManager#setPositions` instead respectively.
+`Guild#setRolePositions()` and `Guild#setChannelPositions()` have been removed. Use `RoleManager#setPositions()` and `GuildChannelManager#setPositions()` instead respectively.
 
 `Guild#maximumPresences` no longer has a default value of 25,000.
 
@@ -253,19 +253,19 @@ In addition, `Interaction#isCommand`, now indicates whether the command is an _a
 
 - `MessageSelectMenu` has been renamed to `SelectMenuBuilder`
 
-- `SelectMenuBuilder#addOption` has been removed. Use `SelectMenuBuilder#addOptions` instead.
+- `SelectMenuBuilder#addOption()` has been removed. Use `SelectMenuBuilder#addOptions()` instead.
 
 ### MessageEmbed
 
 - `MessageEmbed` has now been renamed to `EmbedBuilder`.
 
-- `EmbedBuilder#setAuthor` now accepts a sole `AuthorOptions` object. (add link to dapi site)
+- `EmbedBuilder#setAuthor()` now accepts a sole `AuthorOptions` object. (add link to dapi site)
 
-- `EmbedBuilder#setFooter` now accepts a sole `FooterOptions` object. (add link to dapi site)
+- `EmbedBuilder#setFooter()` now accepts a sole `FooterOptions` object. (add link to dapi site)
 
-- `EmbedBuilder#addField` has been removed. Use `EmbedBuilder#addFields` instead.
+- `EmbedBuilder#addField()` has been removed. Use `EmbedBuilder#addFields()` instead.
 
-- `EmbedBuilder#addFields` accepts an object or a rest array of `APIEmbedField`(s): (add link to dapi site)
+- `EmbedBuilder#addFields()` accepts an object or a rest array of `APIEmbedField`(s): (add link to dapi site)
 
 ```diff
 - new MessageEmbed().addFields([
