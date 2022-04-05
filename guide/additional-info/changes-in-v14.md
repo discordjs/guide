@@ -6,6 +6,10 @@ v14 requires Node 16.9 or higher to use, so make sure you're up to date. To chec
 
 ## Breaking Changes
 
+### API version
+
+discord.js v14 makes the switch to Discord API v10!
+
 ### Common Breakages
 
 ### Enum Values
