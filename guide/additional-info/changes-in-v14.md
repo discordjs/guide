@@ -198,6 +198,10 @@ The following properties & methods have been moved to the `GuildAuditLogsEntry` 
 
 `GuildMember#pending` is now nullable to account for partial guild members. See [this issue](https://github.com/discordjs/discord.js/issues/6546) for a more in-depth reason.
 
+### IntegrationApplication
+
+`IntegrationApplication#summary` has been removed.
+
 ### Interaction
 
 The following typeguards on `Interaction` have been renamed:
