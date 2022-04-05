@@ -41,6 +41,16 @@ As you can see, we construct the modal and assign it a custom id and a title. On
 
 We're still missing one step - adding inputs. Adding inputs is similar to adding components to messages.
 
+::: warning
+If you're using typescript you'll need to specify the type of components your action row holds. This can be done by specifying the
+generic parameter in `ActionRowBuilder`.
+
+```diff
+- new ActionRowBuilder()
++ new ActionRowBuilder<ModalActionRowComponentBuilder>()
+```
+:::
+
 ```js {1,12-34}
 const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
 
@@ -82,6 +92,7 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 ```
+
 
 Restart your bot and invoke the `/ping` command again. You should see a popup form resembling the image below:
 
