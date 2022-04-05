@@ -84,7 +84,7 @@ const button = {
 
 ### Application
 
-`#fetchAssets` has been removed as it is no longer supported by the API.
+`Application#fetchAssets` has been removed as it is no longer supported by the API.
 
 ### BitField
 
@@ -128,8 +128,8 @@ Methods that return CDN URLs will now return a dynamic image URL (if available).
 
 ### Channel
 
-- `#isText` has been renamed to `#isTextBased`
-- `#isVoice` has been renamed to `#isVoiceBased`
+- `Channel#isText` has been renamed to `Channel#isTextBased`
+- `Channel#isVoice` has been renamed to `Channel#isVoiceBased`
 
 ::: tip
 TypeScript users should narrow `Channel` types via type guards in order to get more specific typings.
@@ -137,7 +137,7 @@ TypeScript users should narrow `Channel` types via type guards in order to get m
 
 ### CommandInteractionOptionResolver
 
-`#getMember` no longer has a parameter for `required`, check out [this pull request](https://github.com/discordjs/discord.js/pull/7188) for details.
+`CommandInteractionOptionResolver#getMember` no longer has a parameter for `required`. See [this pull request](https://github.com/discordjs/discord.js/pull/7188) for more information.
 
 ### `Constants`
 
@@ -170,7 +170,7 @@ TypeScript users should narrow `Channel` types via type guards in order to get m
 
 The `message` and `interaction` events are now removed. Use `messageCreate` and `interactionCreate` instead.
 
-`applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate` have all been removed. Refer to [this pull request](https://github.com/discordjs/discord.js/pull/6492) for context.
+`applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate` have all been removed. See [this pull request](https://github.com/discordjs/discord.js/pull/6492) for more information.
 
 The `ThreadMembersUpdate` event now emits the thread, the users who were added and users who were removed respectively.
 
@@ -180,7 +180,7 @@ The `days` option when banning a user has been renamed to `deleteMessageDays` to
 
 ### Guild
 
-`#setRolePositions` and `#setChannelPositions` have been removed. Use `RoleManager#setPositions` and `GuildChannelManager#setPositions` instead respectively.
+`Guild#setRolePositions` and `Guild#setChannelPositions` have been removed. Use `RoleManager#setPositions` and `GuildChannelManager#setPositions` instead respectively.
 
 `Guild#maximumPresences` no longer has a default value of 25,000.
 
@@ -196,11 +196,11 @@ The following properties & methods have been moved to the `GuildAuditLogsEntry` 
 
 ### GuildMember
 
-`GuildMember#pending` is now nullable to account for partial guild members. See [this issue](https://github.com/discordjs/discord.js/issues/6546) for a more in-depth reason.
+`GuildMember#pending` is now nullable to account for partial guild members. See [this issue](https://github.com/discordjs/discord.js/issues/6546) for more information.
 
 ### IntegrationApplication
 
-`IntegrationApplication#summary` has been removed.
+`IntegrationApplication#summary` has been removed as it is no longer supported by the API.
 
 ### Interaction
 
@@ -214,11 +214,11 @@ The following typeguards on `Interaction` have been renamed:
 + interaction.isContextMenuCommand()
 ```
 
-In addition, `#isCommand`, now indicates whether the command is an _application command_ or not. This differs from the previous implementation where `#isCommand` indicated if the interaction was a chat input command or not.
+In addition, `Interaction#isCommand`, now indicates whether the command is an _application command_ or not. This differs from the previous implementation where `Interaction#isCommand` indicated if the interaction was a chat input command or not.
 
 ### Invite
 
-`#channel` and `#inviter` are now getters and resolve structures from the cache.
+`Invite#channel` and `Invite#inviter` are now getters and resolve structures from the cache.
 
 ### MessageComponent
 
@@ -238,7 +238,7 @@ In addition, `#isCommand`, now indicates whether the command is an _application 
 + const textInput = new TextInputBuilder();
 ```
 
-- Components received from the API are no longer directly mutable, if you wish to mutate a component from the API use `ComponentBuilder#from`. For example, if you want to make a button mutable:
+- Components received from the API are no longer directly mutable. If you wish to mutate a component from the API, use `ComponentBuilder#from`. For example, if you want to make a button mutable:
 
 ```diff
 - const editedButton = receivedButton
@@ -253,19 +253,19 @@ In addition, `#isCommand`, now indicates whether the command is an _application 
 
 - `MessageSelectMenu` has been renamed to `SelectMenuBuilder`
 
-- `#addOption` has been removed use `#addOptions` instead.
+- `SelectMenuBuilder#addOption` has been removed. Use `SelectMenuBuilder#addOptions` instead.
 
 ### MessageEmbed
 
 - `MessageEmbed` has now been renamed to `EmbedBuilder`.
 
-- `#setAuthor` now accepts a sole `AuthorOptions` object. (add link to dapi site)
+- `EmbedBuilder#setAuthor` now accepts a sole `AuthorOptions` object. (add link to dapi site)
 
-- `#setFooter` now accepts a sole `FooterOptions` object. (add link to dapi site)
+- `EmbedBuilder#setFooter` now accepts a sole `FooterOptions` object. (add link to dapi site)
 
-- `#addField` has been removed, use `#addFields` instead.
+- `EmbedBuilder#addField` has been removed. Use `EmbedBuilder#addFields` instead.
 
-- `#addFields` accepts an object or a rest array of `APIEmbedField`(s): (add link to dapi site)
+- `EmbedBuilder#addFields` accepts an object or a rest array of `APIEmbedField`(s): (add link to dapi site)
 
 ```diff
 - new MessageEmbed().addFields([
@@ -281,13 +281,13 @@ In addition, `#isCommand`, now indicates whether the command is an _application 
 
 ### PartialTypes
 
-The `PartialTypes` string array has been removed, instead use the `Partials` enum.
+The `PartialTypes` string array has been removed. Use the `Partials` enum instead.
 
 In addition to this, there is now a new partial: `Partials.ThreadMember`.
 
 ### Permissions
 
-Thread permissions `USE_PUBLIC_THREADS` and `USE_PRIVATE_THREADS` have been removed as they are now deprecated in the API. Instead use the newer `*Threads` permission flags.
+Thread permissions `USE_PUBLIC_THREADS` and `USE_PRIVATE_THREADS` have been removed as they are deprecated in the API. Use `CREATE_PUBLIC_THREADS` and `CREATE_PRIVATE_THREADS` respectively.
 
 ### PermissionOverwritesManager
 
@@ -317,61 +317,59 @@ Instead you should access these events from `Client#rest`. In addition, the `api
 
 ### RoleManager
 
-`Role.comparePositions` has been removed. Use `RoleManager#comparePositions` instead.
+`Role.comparePositions()` has been removed. Use `RoleManager#comparePositions()` instead.
 
 ### ThreadMemberManager
 
-`#fetch` now only takes a single object of type `ThreadMemberFetchOptions`.
+`ThreadMemberManager#fetch()` now only takes a single object of type `ThreadMemberFetchOptions`.
 
 ### Util
 
-`#removeMentions` has been removed, to control mentions you should use `allowedMentions` on `MessageOptions` instead.
+`Util#removeMentions()` has been removed. To control mentions, you should use `allowedMentions` on `MessageOptions` instead.
 
 ### `.deleted` Field(s) have been removed
 
-You can no longer use `#deleted` to check if a structure was deleted or not.
-
-Check out [the issue ticket](https://github.com/discordjs/discord.js/issues/7091) for more context.
+You can no longer use the `deleted` property to check if a structure was deleted. See [this issue](https://github.com/discordjs/discord.js/issues/7091) for more information.
 
 ### VoiceChannel
 
-`#editable` has been removed, instead you should use `GuildChannel#manageable` for checking this permission.
+`VoiceChannel#editable` has been removed. You should use `GuildChannel#manageable` instead.
 
 Many of the analogous enums can be found in the discord-api-types docs. (link website here)
 
 ### VoiceRegion
 
-`#vip` has been removed as the field is no longer part of the API.
+`VoiceRegion#vip` has been removed as it is no longer part of the API.
 
 ### Webhook
 
-`#fetchMessage` now only takes one sole object of type `WebhookFetchMessageOptions`.
+`Webhook#fetchMessage()` now only takes one sole object of type `WebhookFetchMessageOptions`.
 
 ## Features
 
 ### Channel
 
-`#url` has been added which is a link to a channel, just like in the client.
+`Channel#url` has been added which is a link to a channel, just like in the client.
 
 Additionally, new typeguards have been added:
 
-- `#isCategory`
-- `#isDM`
-- `#isDMBased`
-- `#isGroupDM`
-- `#isNews`
-- `#isStage`
-- `#isStore`
-- `#isText`\*
-- `#isTextBased`
-- `#isVoice`\*
-- `#isVoiceBased`
+- `Channel#isCategory()`
+- `Channel#isDM()`
+- `Channel#isDMBased()`
+- `Channel#isGroupDM()`
+- `Channel#isNews()`
+- `Channel#isStage()`
+- `Channel#isStore()`
+- `Channel#isText()`\*
+- `Channel#isTextBased()`
+- `Channel#isVoice()`\*
+- `Channel#isVoiceBased()`
 
 \*These methods existed previously but behaved differently. Refer to the docs for their specific changes.
 
 ### Collection
 
-- Added `#merge` and `#combineEntries` methods.
+- Added `Collection#merge()` and `Collection#combineEntries()`.
 - New type: `ReadonlyCollection` which indicates an immutable `Collection`.
 
 ### Enum Resolvers
@@ -386,11 +384,11 @@ const buttonStyle = EnumResolvers.resolveButtonStyle('PRIMARY');
 ```
 ### GuildEmojiManager
 
-Added `#delete` and `#edit` methods for managing existing guild emojis.
+Added `GuildEmojiManager#delete()` and `GuildEmojiManager#edit()` for managing existing guild emojis.
 
 ### Interaction
 
-Added `#isRepliable` to check whether a given interaction can be replied to.
+Added `Interaction#isRepliable()` to check whether a given interaction can be replied to.
 
 ### Unsafe Builders
 
@@ -398,4 +396,4 @@ Unsafe builders operate exactly like regular builders except they perform no val
 
 ### Webhook
 
-Added `applicationId` property.
+Added `Webhook#applicationId`.
