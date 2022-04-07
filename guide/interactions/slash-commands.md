@@ -559,7 +559,7 @@ If you have a lot of commands, you likely want to update their permissions in on
 ```js
 const fullPermissions = [
 	{
-		id: '123456789012345678',
+		id: '<my_first_command_id>',
 		permissions: [{
 			id: '224617799434108928',
 			type: 'USER',
@@ -567,7 +567,7 @@ const fullPermissions = [
 		}],
 	},
 	{
-		id: '876543210987654321',
+		id: '<my_second_command_id>',
 		permissions: [{
 			id: '464464090157416448',
 			type: 'ROLE',
