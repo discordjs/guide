@@ -30,7 +30,7 @@ After creating a bot user, you'll see a section like this:
 
 ![Bot application](./images/created-bot.png)
 
-In this panel, you can give your bot a snazzy avatar, set its username, and make it public or private. Your bot's token will be revealed when you press the "Reset Token" button and confirm. When we ask you to paste your token somewhere, this is the value that you need to put in. Don't worry if you do happen to lose it at some point; you can always come back to this page and copy it again.
+In this panel, you can give your bot a snazzy avatar, set its username, and make it public or private. Your bot's token will be revealed when you press the "Reset Token" button and confirm. When we ask you to paste your token somewhere, this is the value that you need to put in. If you happen to lose your token at some point, you need to come back to this page and reset your bot's token again which will reveal the new token, invalidating all old ones.
 
 ### What is a token, anyway?
 
