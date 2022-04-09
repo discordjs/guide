@@ -6,7 +6,7 @@ Now that you've installed Node, discord.js, and hopefully a linter, you're almos
 
 It's effortless to create one. The steps you need to take are as follows:
 
-1. Open [the Discord developer portal](https://discord.com/developers/applications) and log into your account.
+1. Open the [Discord developer portal](https://discord.com/developers/applications) and log into your account.
 2. Click on the "New Application" button.
 3. Enter a name and confirm the pop-up window by clicking the "Create" button.
 
@@ -30,7 +30,7 @@ After creating a bot user, you'll see a section like this:
 
 ![Bot application](./images/created-bot.png)
 
-In this panel, you can give your bot a snazzy avatar, set its username, and make it public or private. You can access your token in this panel as well, either by revealing it or pressing the "Copy" button. When we ask you to paste your token somewhere, this is the value that you need to put in. Don't worry if you do happen to lose it at some point; you can always come back to this page and copy it again.
+In this panel, you can give your bot a snazzy avatar, set its username, and make it public or private. Your bot's token will be revealed when you press the "Reset Token" button and confirm. When we ask you to paste your token somewhere, this is the value that you need to put in. Don't worry if you do happen to lose it at some point; you can always come back to this page and copy it again.
 
 ### What is a token, anyway?
 
@@ -54,5 +54,5 @@ All that and much, much more. Sounds pretty terrible, right? So make sure to kee
 In the [initial files](/creating-your-bot/) page of the guide, we cover how to safely store your token in a configuration file.
 
 ::: danger
-If you ever somehow compromise your current bot token (commit it to a public repository, post it in support, etc.) or otherwise see your bot in danger, return to this page and press "Regenerate" to generate a new token. As you do so, all old tokens will become invalidated. Keep in mind that you will need to update your token where you used it before.
+If you ever somehow compromise your current bot token (commit it to a public repository, post it in support, etc.) or otherwise see your bot in danger, return to this page and press "Reset Token" to reset your token and to generate a new one. As you do so, all old tokens will become invalidated. Keep in mind that you will need to update your token where you used it before.
 :::
