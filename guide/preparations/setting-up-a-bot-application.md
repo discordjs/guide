@@ -54,5 +54,5 @@ All that and much, much more. Sounds pretty terrible, right? So make sure to kee
 In the [initial files](/creating-your-bot/) page of the guide, we cover how to safely store your bot's token in a configuration file.
 
 ::: danger
-If you ever somehow compromise your current bot token (commit it to a public repository, post it in support, etc.) or otherwise see your bot in danger, return to this page and press "Reset Token" to reset your bot's token and to generate a new one. As you do so, all old tokens will become invalidated. Keep in mind that you will need to update your bot's token where you used it before.
+If your bot token has been compromised by committing it to a public repository, posting it in discord.js support etc. or otherwise see your bot's token in danger, return to this page and press "Reset Token". This will invalidate all old tokens belonging to your bot. Keep in mind that you will need to update your bot's token where you used it before.
 :::
