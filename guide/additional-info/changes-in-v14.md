@@ -277,7 +277,7 @@ In addition, `Interaction#isCommand`, now indicates whether the command is an _a
 -  { name: 'two', value: 'two' },
 - ]);
 
-+ new Embed().addFields(
++ new EmbedBuilder().addFields(
 +  { name: 'one', value: 'one' },
 +  { name: 'two', value: 'two' },
 +);
