@@ -66,7 +66,7 @@ const filter = response => {
 	return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
 };
 
-interaction.reply(item.question, { fetchReply: true })
+interaction.reply({ content: item.question, fetchReply: true })
 	.then(() => {
 		interaction.channel.awaitMessages({ filter, max: 1, time: 30000, errors: ['time'] })
 			.then(collected => {
