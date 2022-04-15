@@ -7,17 +7,17 @@ Here are the base files and code we'll be using:
 :::: code-group
 ::: code-group-item npm
 ```sh:no-line-numbers
-npm install @discordjs/rest discord-api-types
+npm install @discordjs/rest discord-api-types glob@4
 ```
 :::
 ::: code-group-item yarn
 ```sh:no-line-numbers
-yarn add @discordjs/rest discord-api-types
+yarn add @discordjs/rest discord-api-types glob@4
 ```
 :::
 ::: code-group-item pnpm
 ```sh:no-line-numbers
-pnpm add @discordjs/rest discord-api-types
+pnpm add @discordjs/rest discord-api-types glob@4
 ```
 :::
 ::::
@@ -139,7 +139,7 @@ If you need to access your client instance from inside a command file, you can a
 In your `index.js` file, make these additions:
 
 ```js {1-2,7}
-const fs = require('node:fs');
+const glob = require('glob');
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
 
@@ -158,31 +158,37 @@ This next step is how to dynamically retrieve your command files. The [`fs.readd
 
 ```js {2,4-9}
 client.commands = new Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	// Set a new item in the Collection
-	// With the key as the command name and the value as the exported module
-	client.commands.set(command.data.name, command);
-}
+glob(`${__dirname}/commands/**/*.js`, (error, paths) => {
+	if(error) console.error(error);
+	
+	for(const path of paths) {
+		const command = require(path);
+		// Set a new item in the Collection
+		// With the key as the command name and the value as the exported module
+		client.commands.set(command.data.name, command);
+	}
+});
 ```
 
 Use the same approach for your `deploy-commands.js` file, but instead `.push()` to the `commands` array with the JSON data for each command.
 
 ```js {1,7,9-12}
-const fs = require('node:fs');
+const glob = require('glob');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { clientId, guildId, token } = require('./config.json');
 
 const commands = [];
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	commands.push(command.data.toJSON());
-}
+glob(`${__dirname}/commands/**/*.js`, (error, paths) => {
+	if(error) console.error(error);
+	
+	for(const path of paths) {
+		const command = require(path);
+		commands.push(command.data.toJSON());
+	}
+});
 ```
 
 ## Dynamically executing commands
