@@ -4,6 +4,20 @@
 
 v14 requires Node 16.9 or higher to use, so make sure you're up to date. To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it! There are many resources online to help you with this step based on your host system.
 
+### Builders are now included in v14
+
+If you previously had `@discordjs/builders` manually installed it's *highly* recommended that you uninstall the package to avoid package naming conflicts.
+
+**NPM**
+```
+npm uninstall @discordjs/builders
+```
+
+**Yarn**
+```
+yarn remove @discordjs/builders
+```
+
 ## Breaking Changes
 
 ### API version
