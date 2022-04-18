@@ -9,12 +9,12 @@ v14 requires Node 16.9 or higher to use, so make sure you're up to date. To chec
 If you previously had `@discordjs/builders` manually installed it's *highly* recommended that you uninstall the package to avoid package naming conflicts.
 
 **NPM**
-```
+```bash
 npm uninstall @discordjs/builders
 ```
 
 **Yarn**
-```
+```bash
 yarn remove @discordjs/builders
 ```
 
