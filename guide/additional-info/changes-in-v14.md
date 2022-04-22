@@ -320,6 +320,10 @@ Thread permissions `USE_PUBLIC_THREADS` and `USE_PRIVATE_THREADS` have been remo
 
 Overwrites are now keyed by the `PascalCase` permission key rather than the `SCREAMING_SNAKE_CASE` permission key.
 
+### Presence
+
+discord.js typed a few activity platforms (desktop, Samsung & Xbox) that can be accessed via `Presence#platform`. Since Discord does not document the platforms, those typings are now simply a string.
+
 ### REST Events
 
 The following discord.js events have been removed from the `Client`:
