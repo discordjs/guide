@@ -267,6 +267,15 @@ In addition, `Interaction#isCommand`, now indicates whether the command is an _a
 +   .setDisabled(true);
 ```
 
+### MessageManager
+
+`MessageManager#fetch()`'s second parameter has been removed. The `BaseFetchOptions` the second parameter once was is now merged into the first parameter.
+
+```diff
+- messageManager.fetch('1234567890', { cache: false, force: true });
++ messageManager.fetch({ id: '1234567890', cache: false, force: true });
+```
+
 ### MessageSelectMenu
 
 - `MessageSelectMenu` has been renamed to `SelectMenuBuilder`
