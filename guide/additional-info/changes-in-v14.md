@@ -298,7 +298,7 @@ In addition, `Interaction#isCommand`, now indicates whether the command is an _a
 - new MessageEmbed().addFields(...[
 -  { name: 'one', value: 'one' },
 -  { name: 'two', value: 'two' },
-- ]);
+-]);
 
 + new EmbedBuilder().addFields([
 +  { name: 'one', value: 'one' },
