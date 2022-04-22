@@ -345,6 +345,8 @@ Instead you should access these events from `Client#rest`. In addition, the `api
 
 `Util.removeMentions()` has been removed. To control mentions, you should use `allowedMentions` on `MessageOptions` instead.
 
+`Util.splitMessage()` has been removed. This utility method is something the developer themselves should do.
+
 ### `.deleted` Field(s) have been removed
 
 You can no longer use the `deleted` property to check if a structure was deleted. See [this issue](https://github.com/discordjs/discord.js/issues/7091) for more information.
