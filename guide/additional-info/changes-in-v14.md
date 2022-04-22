@@ -343,7 +343,7 @@ Instead you should access these events from `Client#rest`. In addition, the `api
 
 ### Util
 
-`Util#removeMentions()` has been removed. To control mentions, you should use `allowedMentions` on `MessageOptions` instead.
+`Util.removeMentions()` has been removed. To control mentions, you should use `allowedMentions` on `MessageOptions` instead.
 
 ### `.deleted` Field(s) have been removed
 
