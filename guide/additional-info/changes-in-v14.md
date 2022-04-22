@@ -292,18 +292,18 @@ In addition, `Interaction#isCommand`, now indicates whether the command is an _a
 
 - `EmbedBuilder#addField()` has been removed. Use `EmbedBuilder#addFields()` instead.
 
-- `EmbedBuilder#addFields()` accepts an object or a rest array of `APIEmbedField`(s): (add link to dapi site)
+- `EmbedBuilder#addFields()` no longer accepts a rest parameter. Only arrays can be passed: (add link to dapi site)
 
 ```diff
-- new MessageEmbed().addFields([
+- new MessageEmbed().addFields(...[
 -  { name: 'one', value: 'one' },
 -  { name: 'two', value: 'two' },
 - ]);
 
-+ new EmbedBuilder().addFields(
++ new EmbedBuilder().addFields([
 +  { name: 'one', value: 'one' },
 +  { name: 'two', value: 'two' },
-+);
++]);
 ```
 
 ### PartialTypes
