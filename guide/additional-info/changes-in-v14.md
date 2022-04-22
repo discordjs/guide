@@ -367,6 +367,8 @@ Many of the analogous enums can be found in the discord-api-types docs. (link we
 
 ### Channel
 
+Store channels have been removed as they are no longer part of the API.
+
 `Channel#url` has been added which is a link to a channel, just like in the client.
 
 Additionally, new typeguards have been added:
@@ -377,7 +379,6 @@ Additionally, new typeguards have been added:
 - `Channel#isGroupDM()`
 - `Channel#isNews()`
 - `Channel#isStage()`
-- `Channel#isStore()`
 - `Channel#isText()`\*
 - `Channel#isTextBased()`
 - `Channel#isVoice()`\*
