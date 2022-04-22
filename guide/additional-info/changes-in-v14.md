@@ -190,7 +190,7 @@ The `message` and `interaction` events are now removed. Use `messageCreate` and 
 
 `applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate` have all been removed. See [this pull request](https://github.com/discordjs/discord.js/pull/6492) for more information.
 
-The `ThreadMembersUpdate` event now emits the thread, the users who were added and users who were removed respectively.
+The `ThreadMembersUpdate` event now emits the users who were added, the users who were removed, and the thread respectively.
 
 ### GuildBanManager
 
