@@ -404,10 +404,6 @@ const buttonStyle = EnumResolvers.resolveButtonStyle('PRIMARY');
 
 Added `GuildEmojiManager#delete()` and `GuildEmojiManager#edit()` for managing existing guild emojis.
 
-### Interaction
-
-Added `Interaction#isRepliable()` to check whether a given interaction can be replied to.
-
 ### Unsafe Builders
 
 Unsafe builders operate exactly like regular builders except they perform no validation on input. Unsafe builders are named by adding an `Unsafe` prefix to a regular builder.
