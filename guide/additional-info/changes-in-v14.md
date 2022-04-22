@@ -155,7 +155,7 @@ TypeScript users should narrow `Channel` types via type guards in order to get m
 
 ### CommandInteractionOptionResolver
 
-`CommandInteractionOptionResolver#getMember` no longer has a parameter for `required`. See [this pull request](https://github.com/discordjs/discord.js/pull/7188) for more information.
+`CommandInteractionOptionResolver#getMember()` no longer has a parameter for `required`. See [this pull request](https://github.com/discordjs/discord.js/pull/7188) for more information.
 
 ### `Constants`
 
