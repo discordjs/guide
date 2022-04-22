@@ -82,7 +82,7 @@ const command = {
     name: 'option',
     description: 'A sample option',
 -   type: 'STRING',
-+   type: ApplicationCommandOptionType.String
++   type: ApplicationCommandOptionType.String,
   ],
 };
 ```
