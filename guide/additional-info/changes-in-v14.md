@@ -416,9 +416,6 @@ const { EnumResolvers } = require('discord.js');
 // Returns `ButtonStyle.Primary`
 const buttonStyle = EnumResolvers.resolveButtonStyle('PRIMARY');
 ```
-### GuildEmojiManager
-
-Added `GuildEmojiManager#delete()` and `GuildEmojiManager#edit()` for managing existing guild emojis.
 
 ### Unsafe Builders
 
