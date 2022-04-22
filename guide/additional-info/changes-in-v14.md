@@ -232,7 +232,7 @@ The following typeguards on `Interaction` have been renamed:
 + interaction.isContextMenuCommand()
 ```
 
-In addition, `Interaction#isCommand`, now indicates whether the command is an _application command_ or not. This differs from the previous implementation where `Interaction#isCommand` indicated if the interaction was a chat input command or not.
+In addition, `Interaction#isCommand`, now indicates whether the command is an _application command_ or not. This differs from the previous implementation where `Interaction#isCommand()` indicated if the interaction was a chat input command or not.
 
 ### Invite
 
