@@ -108,6 +108,15 @@ const button = {
 }
 ```
 
+### Activity
+
+The following properties have been removed as they are not documented by Discord:
+
+- `Activity#id`
+- `Activity#platform`
+- `Activity#sessionId`
+- `Activity#syncId`
+
 ### Application
 
 `Application#fetchAssets()` has been removed as it is no longer supported by the API.
@@ -327,10 +336,6 @@ Thread permissions `USE_PUBLIC_THREADS` and `USE_PRIVATE_THREADS` have been remo
 ### PermissionOverwritesManager
 
 Overwrites are now keyed by the `PascalCase` permission key rather than the `SCREAMING_SNAKE_CASE` permission key.
-
-### Presence
-
-discord.js typed a few activity platforms (desktop, Samsung & Xbox) that can be accessed via `Presence#platform`. Since Discord does not document the platforms, those typings are now simply a string.
 
 ### REST Events
 
