@@ -188,7 +188,7 @@ app.get('/', (request, response) => {
 });
 ```
 
-Now you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten these, head over to [your applications](https://discord.com/developers/applications) and get them. You can use [`node-fetch`](https://www.npmjs.com/package/node-fetch) to make requests to Discord; you can install it with `npm i node-fetch`.
+Now you have to exchange this code with Discord for an access token. To do this, you need your `client_id` and `client_secret`. If you've forgotten these, head over to [your applications](https://discord.com/developers/applications) and get them. You can use [`node-fetch`](https://www.npmjs.com/package/node-fetch) to make requests to Discord; you can install it with `npm i node-fetch@2`.
 
 Require `node-fetch` and make your request.
 
