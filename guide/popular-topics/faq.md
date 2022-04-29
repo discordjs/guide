@@ -26,7 +26,7 @@ guild.members.unban(id);
 ```
 
 ::: tip
-Because you cannot ping a user who isn't in the server, you have to pass in the user id. To do this, we use a <DocsLink path="typedef/CommandInteractionOption" />. See [here](/interactions/replying-to-slash-commands.html#parsing-options) for more information on this topic.
+Because you cannot ping a user who isn't in the server, you have to pass in the user id. To do this, we use a <DocsLink path="typedef/CommandInteractionOption" />. See [here](/interactions/slash-commands.html#parsing-options) for more information on this topic.
 :::
 
 ### How do I kick a user?
