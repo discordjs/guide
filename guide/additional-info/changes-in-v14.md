@@ -286,7 +286,7 @@ In addition, `Interaction#isCommand()` now indicates whether the command is an _
 
 ### MessageManager
 
-`MessageManager#fetch()`'s second parameter has been removed. The `BaseFetchOptions` the second parameter once was is now merged into the first parameter. Addtionally, `id` has been renamed to `message`.
+`MessageManager#fetch()`'s second parameter has been removed. The `BaseFetchOptions` the second parameter once was is now merged into the first parameter.
 
 ```diff
 - messageManager.fetch('1234567890', { cache: false, force: true });
