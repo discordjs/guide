@@ -82,7 +82,7 @@ jobs:
                   docker push ghcr.io/AccountUsername/RepoName:latest
 ```
 
-Now every time you push to your main branch the bot will be built and pushed to the GHCR.
+Now every time you push to your main branch the docker image will be built and pushed to the GHCR.
 
 ## Resulting code
 
