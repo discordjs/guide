@@ -15,7 +15,7 @@
 
 # Deployment
 
-Congratulations! 🎉 On making it this far, now it's time to deploy your bot to production. 🚀
+Congratulations! On making it this far, now it's time to deploy your bot to production. 🚀
 
 ## Virtual Private Server
 
