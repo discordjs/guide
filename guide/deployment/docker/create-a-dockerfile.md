@@ -48,7 +48,7 @@ node_modules
 **/*.env
 ```
 
-If you decide to build your bot locally we ignore the `node_modules` folder and any `.env` files so you have a clean build.
+If you decide to build your bot locally, the `node_modules` folder and any `.env` files are ignored to get a clean build.
 
 ## Resulting code
 
