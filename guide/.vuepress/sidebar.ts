@@ -120,7 +120,9 @@ export default {
 			text: 'Deploying Your Bot',
 			children: [
 				'/deployment/README.md',
-				'/deployment/deploying-to-docker.md',
+				'/deployment/docker/create-a-dockerfile.md',
+				'/deployment/docker/build-a-dockerfile.md',
+				'/deployment/docker/running-a-docker-image.md',
 			],
 		},
 		{
