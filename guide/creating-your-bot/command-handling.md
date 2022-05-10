@@ -154,8 +154,7 @@ We recommend attaching a `.commands` property to your client instance so that yo
 [`fs`](https://nodejs.org/api/fs.html) is Node's native file system module. <DocsLink section="collection" path="class/Collection" /> is a class that extends JavaScript's native [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) class, and includes more extensive, useful functionality.
 :::
 
-This next step is how to dynamically retrieve your command files. The [`fs.readdirSync()`](https://nodejs.org/api/fs.html#fs_fs_readdirsync_path_options) method will return an array of all the file names in a directory, e.g. `['ping.js', 'beep.js']`. To ensure only command files get returned, use `Array.filter()` to leave out any non-JavaScript files from the array. With that array, loop over it and dynamically set your commands to the `client.commands` Collection. Update: as of 5/4/2022, without finding the realpath with fs.realpathSync(), fs.readdirSync() always fails to find the commands folder.
-
+This next step is how to dynamically retrieve your command files. First, add the fs.realpathSync('./commands'); line to properly find the commands folder. The [`fs.readdirSync()`](https://nodejs.org/api/fs.html#fs_fs_readdirsync_path_options) method will return an array of all the file names in a directory, e.g. `['ping.js', 'beep.js']`. To ensure only command files get returned, use `Array.filter()` to leave out any non-JavaScript files from the array. With that array, loop over it and dynamically set your commands to the `client.commands` Collection. 
 ```js {2,4-9}
 client.commands = new Collection();
 const cmdfolder = fs.realpathSync('./commands');
@@ -169,7 +168,7 @@ for (const file of commandFiles) {
 }
 ```
 
-Use the same approach for your `deploy-commands.js` file, but instead `.push()` to the `commands` array with the JSON data for each command.
+Use the same approach for your `deploy-commands.js` file, but instead `.push()` to the `commands` array with the JSON data for each command. Don't forget to add the fs.realpathSync() line before the fs.readdirSync() line.
 
 ```js {1,7,9-12}
 const fs = require('node:fs');
