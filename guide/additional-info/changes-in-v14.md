@@ -32,24 +32,12 @@ Any areas that used to accept a `string` or `number` type for an enum parameter 
 
 In addition, the old enums exported by discord.js v13 and lower are replaced with new enums from discord-api-types (link here).
 
-<details>
-<summary> New enum differences </summary>
-  Most of the difference between enums from discord.js and discord-api-types can be summarized as so:
+#### New enum differences
+Most of the difference between enums from discord.js and discord-api-types can be summarized as so:
 
 1. Enums are singular, i.e., `ApplicationCommandOptionTypes` -> `ApplicationCommandOptionType`
 2. Enums that are prefixed with `Message` no longer have the `Message` prefix, i.e., `MessageButtonStyles` -> `ButtonStyle`
 3. Enum values are `PascalCase` rather than `SCREAMING_SNAKE_CASE`, i.e., `.CHAT_INPUT` -> `.ChatInput`
-</details>
-
-There are two recommended ways of representing enum values:
-
-1. Use the actual enum type: `ButtonStyle.Primary`
-2. Continue using a string representation but instead use the new `EnumResolvers`:
-
-```js
-const { EnumResolvers } = require('discord.js');
-const enumValue = EnumResolvers.resolveButtonStyle('PRIMARY');
-```
 
 ::: warning
 You might be inclined to use raw `number`s (most commonly referred to as [magic numbers](https://en.wikipedia.org/wiki/Magic_number_(programming))) instead of enum values. This is highly discouraged. Enums provide more readability and are more resistant to changes in the API. Magic numbers can obscure the meaning of your code in many ways, check out this [blog post](https://blog.webdevsimplified.com/2020-02/magic-numbers/) if you want more context on as to why they shouldn't be used.
@@ -390,16 +378,6 @@ Additionally, new typeguards have been added:
 - Added `Collection#merge()` and `Collection#combineEntries()`.
 - New type: `ReadonlyCollection` which indicates an immutable `Collection`.
 
-### Enum Resolvers
-
-The new `EnumResolvers` class allows you to transform `SCREAMING_SNAKE_CASE` enum keys to an enum value.
-
-```js
-const { EnumResolvers } = require('discord.js');
-
-// Returns `ButtonStyle.Primary`
-const buttonStyle = EnumResolvers.resolveButtonStyle('PRIMARY');
-```
 ### GuildEmojiManager
 
 Added `GuildEmojiManager#delete()` and `GuildEmojiManager#edit()` for managing existing guild emojis.
