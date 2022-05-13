@@ -8,15 +8,23 @@ v14 requires Node 16.9 or higher to use, so make sure you're up to date. To chec
 
 If you previously had `@discordjs/builders` manually installed it's *highly* recommended that you uninstall the package to avoid package naming conflicts.
 
-**NPM**
-```bash
+:::: code-group
+::: code-group-item npm
+```sh:no-line-numbers
 npm uninstall @discordjs/builders
 ```
-
-**Yarn**
-```bash
+:::
+::: code-group-item yarn
+```sh:no-line-numbers
 yarn remove @discordjs/builders
 ```
+:::
+::: code-group-item pnpm
+```sh:no-line-numbers
+pnpm remove @discordjs/builders
+```
+:::
+::::
 
 ## Breaking Changes
 
@@ -70,7 +78,7 @@ const command = {
     name: 'option',
     description: 'A sample option',
 -   type: 'STRING',
-+   type: ApplicationCommandOptionType.String
++   type: ApplicationCommandOptionType.String,
   ],
 };
 ```
@@ -87,6 +95,15 @@ const button = {
   customId: '1234'
 }
 ```
+
+### Activity
+
+The following properties have been removed as they are not documented by Discord:
+
+- `Activity#id`
+- `Activity#platform`
+- `Activity#sessionId`
+- `Activity#syncId`
 
 ### Application
 
@@ -143,7 +160,7 @@ TypeScript users should narrow `Channel` types via type guards in order to get m
 
 ### CommandInteractionOptionResolver
 
-`CommandInteractionOptionResolver#getMember` no longer has a parameter for `required`. See [this pull request](https://github.com/discordjs/discord.js/pull/7188) for more information.
+`CommandInteractionOptionResolver#getMember()` no longer has a parameter for `required`. See [this pull request](https://github.com/discordjs/discord.js/pull/7188) for more information.
 
 ### `Constants`
 
@@ -178,7 +195,7 @@ The `message` and `interaction` events are now removed. Use `messageCreate` and 
 
 `applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate` have all been removed. See [this pull request](https://github.com/discordjs/discord.js/pull/6492) for more information.
 
-The `ThreadMembersUpdate` event now emits the thread, the users who were added and users who were removed respectively.
+The `ThreadMembersUpdate` event now emits the users who were added, the users who were removed, and the thread respectively.
 
 ### GuildBanManager
 
@@ -220,7 +237,7 @@ The following typeguards on `Interaction` have been renamed:
 + interaction.isContextMenuCommand()
 ```
 
-In addition, `Interaction#isCommand`, now indicates whether the command is an _application command_ or not. This differs from the previous implementation where `Interaction#isCommand` indicated if the interaction was a chat input command or not.
+In addition, `Interaction#isCommand()` now indicates whether the command is an _application command_. This differs from the previous implementation where `Interaction#isCommand()` indicated if the interaction was a chat input command.
 
 ### Invite
 
@@ -255,6 +272,15 @@ In addition, `Interaction#isCommand`, now indicates whether the command is an _a
 +   .setDisabled(true);
 ```
 
+### MessageManager
+
+`MessageManager#fetch()`'s second parameter has been removed. The `BaseFetchOptions` the second parameter once was is now merged into the first parameter.
+
+```diff
+- messageManager.fetch('1234567890', { cache: false, force: true });
++ messageManager.fetch({ message: '1234567890', cache: false, force: true });
+```
+
 ### MessageSelectMenu
 
 - `MessageSelectMenu` has been renamed to `SelectMenuBuilder`
@@ -271,18 +297,18 @@ In addition, `Interaction#isCommand`, now indicates whether the command is an _a
 
 - `EmbedBuilder#addField()` has been removed. Use `EmbedBuilder#addFields()` instead.
 
-- `EmbedBuilder#addFields()` accepts an object or a rest array of `APIEmbedField`(s): (add link to dapi site)
+- `EmbedBuilder#addFields()` no longer accepts a rest parameter. Only arrays can be passed: (add link to dapi site)
 
 ```diff
-- new MessageEmbed().addFields([
+- new MessageEmbed().addFields(...[
 -  { name: 'one', value: 'one' },
 -  { name: 'two', value: 'two' },
-- ]);
+-]);
 
-+ new EmbedBuilder().addFields(
++ new EmbedBuilder().addFields([
 +  { name: 'one', value: 'one' },
 +  { name: 'two', value: 'two' },
-+);
++]);
 ```
 
 ### PartialTypes
@@ -331,7 +357,9 @@ Instead you should access these events from `Client#rest`. In addition, the `api
 
 ### Util
 
-`Util#removeMentions()` has been removed. To control mentions, you should use `allowedMentions` on `MessageOptions` instead.
+`Util.removeMentions()` has been removed. To control mentions, you should use `allowedMentions` on `MessageOptions` instead.
+
+`Util.splitMessage()` has been removed. This utility method is something the developer themselves should do.
 
 ### `.deleted` Field(s) have been removed
 
@@ -355,6 +383,8 @@ Many of the analogous enums can be found in the discord-api-types docs. (link we
 
 ### Channel
 
+Store channels have been removed as they are no longer part of the API.
+
 `Channel#url` has been added which is a link to a channel, just like in the client.
 
 Additionally, new typeguards have been added:
@@ -365,7 +395,6 @@ Additionally, new typeguards have been added:
 - `Channel#isGroupDM()`
 - `Channel#isNews()`
 - `Channel#isStage()`
-- `Channel#isStore()`
 - `Channel#isText()`\*
 - `Channel#isTextBased()`
 - `Channel#isVoice()`\*
