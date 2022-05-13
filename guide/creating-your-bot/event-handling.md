@@ -73,10 +73,12 @@ Next, let's write the code for dynamically retrieving all the event files in the
 ```js {3,5-12}
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+const eventsPath = path.join(__dirname, 'events');
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
 for (const file of eventFiles) {
-	const event = require(`./events/${file}`);
+	const filePath = path.join(eventsPath, file);
+	const event = require(filePath);
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args));
 	} else {
