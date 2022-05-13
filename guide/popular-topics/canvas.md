@@ -14,7 +14,7 @@ Be sure that you're familiar with things like [async/await](/additional-info/asy
 
 ## Package installation
 
-After installing all the necessary software, run the following command in your terminal:
+Run the following command in your terminal:
 
 :::: code-group
 ::: code-group-item npm
