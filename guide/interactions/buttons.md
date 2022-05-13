@@ -246,5 +246,5 @@ Currently there are five different button styles available:
 </DiscordMessages>
 
 ::: warning
-Only `LINK` buttons can have a `url`. `LINK` buttons _cannot_ have a `custom_id` and _do not_ send an interaction event when clicked.
+Only `LINK` buttons can have a `url`. `LINK` buttons _cannot_ have a `customId` and _do not_ send an interaction event when clicked.
 :::
