@@ -272,4 +272,4 @@ There are a few limits to be aware of while planning your embeds due to the API'
 - The sum of all characters from all embed structures in a message must not exceed 6000 characters
 - Ten embeds can be sent per message
 
-Source: [Discord API documentation](https://discord.com/developers/docs/resources/channel#embed-limits)
+Source: [Discord API documentation](https://discord.com/developers/docs/resources/channel#embed-object-embed-limits)

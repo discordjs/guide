@@ -3,7 +3,7 @@
 With the components API, you can create interactive message components. On this page, we'll cover how to send, receive, and respond to buttons using discord.js!
 
 ::: tip
-This page is a follow-up to the [interactions (slash commands) pages](/interactions/registering-slash-commands.md). Please carefully read those first so that you can understand the methods used in this section.
+This page is a follow-up to the [interactions (slash commands) page](/interactions/slash-commands.md). Please carefully read those first so that you can understand the methods used in this section.
 :::
 
 ## Building and sending buttons
@@ -206,7 +206,7 @@ In addition to deferring an interaction response, you can defer the button, whic
 <!-- eslint-skip -->
 
 ```js {7-9}
-const wait = require('util').promisify(setTimeout);
+const wait = require('node:timers/promises').setTimeout;
 
 // ...
 
@@ -246,5 +246,5 @@ Currently there are five different button styles available:
 </DiscordMessages>
 
 ::: warning
-Only `LINK` buttons can have a `url`. `LINK` buttons _cannot_ have a `custom_id` and _do not_ send an interaction event when clicked.
+Only `LINK` buttons can have a `url`. `LINK` buttons _cannot_ have a `customId` and _do not_ send an interaction event when clicked.
 :::

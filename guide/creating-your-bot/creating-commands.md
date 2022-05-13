@@ -17,7 +17,7 @@ Discord allows developers to register [slash commands](https://discord.com/devel
 
 ## Registering commands
 
-This section will cover only the bare minimum to get you started, but you can refer to our [in-depth page on registering slash commands](/interactions/registering-slash-commands.md) for further details. It covers guild commands, global commands, options, option types, and choices.
+This section will cover only the bare minimum to get you started, but you can refer to our [in-depth page on registering slash commands](/interactions/slash-commands.md#registering-slash-commands) for further details. It covers guild commands, global commands, options, option types, and choices.
 
 ### Command deployment script
 
@@ -45,12 +45,12 @@ pnpm add @discordjs/builders @discordjs/rest discord-api-types
 
 Below is a deployment script you can use. Focus on these variables:
 
-- `clientId`: Your client's id
+- `clientId`: Your application's client id
 - `guildId`: Your development server's id
 - `commands`: An array of commands to register. The [slash command builder](/popular-topics/builders.md#slash-command-builders) from `@discordjs/builders` is used to build the data for your commands
 
 ::: tip
-In order to get your client and guild ids, open Discord and go to your settings. On the "Advanced" page, turn on "Developer Mode". This will enable a "Copy ID" button in the context menu when you right-click on a server icon, a user's profile, etc.
+In order to get your application's client id, go to [Discord Developer Portal](https://discord.com/developers/applications) and choose your application. Find the id under "Application ID" in General Information subpage. To get guild id, open Discord and go to your settings. On the "Advanced" page, turn on "Developer Mode". This will enable a "Copy ID" button in the context menu when you right-click on a server icon, a user's profile, etc.
 :::
 
 :::: code-group
@@ -86,7 +86,7 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
 :::
 ::::
 
-Once you fill in these values, run `node deploy-commands.js` in your project directory to register your commands to a single guild. It's also possible to [register commands globally](/interactions/registering-slash-commands.md#global-commands).
+Once you fill in these values, run `node deploy-commands.js` in your project directory to register your commands to a single guild. It's also possible to [register commands globally](/interactions/slash-commands.md#global-commands).
 
 ::: tip
 You only need to run `node deploy-commands.js` once. You should only run it again if you add or edit existing commands.
@@ -145,7 +145,7 @@ client.on('interactionCreate', async interaction => {
 		<template #interactions>
 			<DiscordInteraction profile="user" :command="true">server</DiscordInteraction>
 		</template>
-		Server name: Discord.js Guide
+		Server name: discord.js Guide
 		<br />
 		Total members: 2
 	</DiscordMessage>

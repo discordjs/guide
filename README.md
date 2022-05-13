@@ -1,5 +1,5 @@
 <div align="center">
-	<img src="guide/images/branding/banner-blurple-small.png" title="Discord.js Guide" alt="Discord.js Guide" />
+	<img src="guide/images/branding/banner-blurple-small.png" title="discord.js Guide" alt="discord.js Guide" />
 </div>
 
 # Discord.js Guide

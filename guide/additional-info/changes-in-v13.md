@@ -66,7 +66,7 @@ discord.js v13 makes the switch to Discord API v9! In addition to this, the new 
 ## Slash commands
 
 discord.js now has support for slash commands!
-Refer to the [slash commands](/interactions/registering-slash-commands.html) section of this guide to get started.
+Refer to the [slash commands](/interactions/slash-commands.html) section of this guide to get started.
 
 In addition to the `interactionCreate` event covered in the above guide, this release also includes the new Client events `applicationCommandCreate`, `applicationCommandDelete`, and `applicationCommandUpdate`.
 
@@ -1125,7 +1125,7 @@ A Collection of Roles which are managed by the integration.
 
 Provides gateway support for slash command and message component interactions. 
 
-For more information refer to the [slash commands](/interactions/replying-to-slash-commands.md) and [message components](/interactions/buttons.html#responding-to-buttons.html) sections of the guide.
+For more information refer to the [slash commands](/interactions/slash-commands.md#replying-to-slash-commands) and [message components](/interactions/buttons.html#responding-to-buttons.html) sections of the guide.
 
 ### InteractionCollector
 

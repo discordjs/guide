@@ -3,7 +3,7 @@
 With the components API, you can create interactive message components. In this page, we'll cover how to send, receive, and respond to select menus using discord.js!
 
 ::: tip
-This page is a follow-up to the [interactions (slash commands) pages](/interactions/registering-slash-commands.md). Please carefully read those first so that you can understand the methods used in this section.
+This page is a follow-up to the [interactions (slash commands) page](/interactions/slash-commands.md). Please carefully read those first so that you can understand the methods used in this section.
 :::
 
 ## Building and sending select menus
@@ -169,7 +169,7 @@ client.on('interactionCreate', async interaction => {
 Additionally to deferring the response of the interaction, you can defer the menu, which will trigger a loading state and then revert back to its original state:
 
 ```js {1,6-10}
-const wait = require('util').promisify(setTimeout);
+const wait = require('node:timers/promises').setTimeout;
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isSelectMenu()) return;

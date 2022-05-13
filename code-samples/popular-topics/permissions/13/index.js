@@ -1,4 +1,4 @@
-const util = require('util');
+const util = require('node:util');
 const { Client, Intents, Formatters, Permissions } = require('discord.js');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });

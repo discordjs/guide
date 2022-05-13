@@ -159,8 +159,7 @@ const UserItems = require('./models/UserItems.js')(sequelize, Sequelize.DataType
 UserItems.belongsTo(CurrencyShop, { foreignKey: 'item_id', as: 'item' });
 
 Reflect.defineProperty(Users.prototype, 'addItem', {
-	/* eslint-disable-next-line func-name-matching */
-	value: async function addItem(item) {
+	value: async item => {
 		const userItem = await UserItems.findOne({
 			where: { user_id: this.user_id, item_id: item.id },
 		});
@@ -175,8 +174,7 @@ Reflect.defineProperty(Users.prototype, 'addItem', {
 });
 
 Reflect.defineProperty(Users.prototype, 'getItems', {
-	/* eslint-disable-next-line func-name-matching */
-	value: function getItems() {
+	value: () => {
 		return UserItems.findAll({
 			where: { user_id: this.user_id },
 			include: ['item'],
@@ -209,10 +207,7 @@ const { Users, CurrencyShop } = require('./dbObjects.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const currency = new Collection();
 
-// [alpha]
-
 client.once('ready', async () => {
-	// [beta]
 	console.log(`Logged in as ${client.user.tag}!`);
 });
 
@@ -225,20 +220,7 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	const { commandName } = interaction;
-
-	if (commandName === 'balance') {
-		// [gamma]
-	} else if (commandName === 'inventory') {
-		// [delta]
-	} else if (commandName === 'transfer') {
-		// [epsilon]
-	} else if (commandName === 'buy') {
-		// [zeta]
-	} else if (commandName === 'shop') {
-		// [theta]
-	} else if (commandName === 'leaderboard') {
-		// [lambda]
-	}
+	// ...
 });
 
 client.login('your-token-goes-here');
@@ -246,12 +228,14 @@ client.login('your-token-goes-here');
 
 Nothing special about this skeleton. You import the Users and CurrencyShop models from our `dbObjects.js` file and add a currency Collection. Every time someone talks, add 1 to their currency count. The rest is just standard discord.js code and a simple if/else command handler. A Collection is used for the `currency` variable to cache individual users' currency, so you don't have to hit the database for every lookup. An if/else handler is used here, but you can put it in a framework or command handler as long as you maintain a reference to the models and the currency collection.
 
-### [alpha] Helper methods
+### Helper methods
 
-```js
+```js {4-25}
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const currency = new Collection();
+
 Reflect.defineProperty(currency, 'add', {
-	/* eslint-disable-next-line func-name-matching */
-	value: async function add(id, amount) {
+	value: async (id, amount) => {
 		const user = currency.get(id);
 
 		if (user) {
@@ -267,8 +251,7 @@ Reflect.defineProperty(currency, 'add', {
 });
 
 Reflect.defineProperty(currency, 'getBalance', {
-	/* eslint-disable-next-line func-name-matching */
-	value: function getBalance(id) {
+	value: id => {
 		const user = currency.get(id);
 		return user ? user.balance : 0;
 	},
@@ -277,56 +260,75 @@ Reflect.defineProperty(currency, 'getBalance', {
 
 This defines an `.add()` method to our currency collection. You'll use it quite frequently, so having a method for it makes your life easier. A `.getBalance()` method is also defined, to ensure that a number is always returned.
 
-### [beta] Ready event data sync
+### Ready event data sync
 
-<!-- eslint-skip -->
+```js {2-3}
+client.once('ready', async () => {
+	const storedBalances = await Users.findAll();
+	storedBalances.forEach(b => currency.set(b.user_id, b));
 
-```js
-const storedBalances = await Users.findAll();
-storedBalances.forEach(b => currency.set(b.user_id, b));
+	console.log(`Logged in as ${client.user.tag}!`);
+});
 ```
 
 In the ready event, sync the currency collection with the database for easy access later.
 
-### [gamma] Show user balance
+### Show user balance
 
-```js
-const target = interaction.options.getUser('user') ?? interaction.user;
+```js {7-9}
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
 
-return interaction.reply(`${target.tag} has ${currency.getBalance(target.id)}💰`);
+	const { commandName } = interaction;
+
+	if (commandName === 'balance') {
+		const target = interaction.options.getUser('user') ?? interaction.user;
+
+		return interaction.reply(`${target.tag} has ${currency.getBalance(target.id)}💰`);
+	}
+});
 ```
 
 Nothing tricky here. The `.getBalance()` method is used to show either the author's or the mentioned user's balance.
 
-### [delta] Show user inventory
+### Show user inventory
 
 <!-- eslint-skip -->
 
-```js
-const target = interaction.options.getUser('user') ?? interaction.user;
-const user = await Users.findOne({ where: { user_id: target.id } });
-const items = await user.getItems();
+```js {5-11}
+if (commandName === 'balance') {
+	// ...
+}
+else if (commandName === 'inventory') {
+	const target = interaction.options.getUser('user') ?? interaction.user;
+	const user = await Users.findOne({ where: { user_id: target.id } });
+	const items = await user.getItems();
 
-if (!items.length) return interaction.reply(`${target.tag} has nothing!`);
+	if (!items.length) return interaction.reply(`${target.tag} has nothing!`);
 
-return interaction.reply(`${target.tag} currently has ${items.map(i => `${i.amount} ${i.item.name}`).join(', ')}`);
+	return interaction.reply(`${target.tag} currently has ${items.map(i => `${i.amount} ${i.item.name}`).join(', ')}`);
+}
 ```
 This is where you begin to see the power of associations. Even though users and the shop are different tables, and the data is stored separately, you can get a user's inventory by looking at the junction table and join it with the shop; no duplicated item names that waste space!
 
-### [epsilon] Transfer currency to another user
+### Transfer currency to another user
 
-```js
-const currentAmount = currency.getBalance(interaction.user.id);
-const transferAmount = interaction.options.getInteger('amount');
-const transferTarget = interaction.options.getUser('user');
+<!-- eslint-skip -->
 
-if (transferAmount > currentAmount) return interaction.reply(`Sorry ${interaction.user}, you only have ${currentAmount}.`);
-if (transferAmount <= 0) return interaction.reply(`Please enter an amount greater than zero, ${interaction.user}.`);
+```js {2-12}
+else if (commandName === 'transfer') {
+	const currentAmount = currency.getBalance(interaction.user.id);
+	const transferAmount = interaction.options.getInteger('amount');
+	const transferTarget = interaction.options.getUser('user');
 
-currency.add(interaction.user.id, -transferAmount);
-currency.add(transferTarget.id, transferAmount);
+	if (transferAmount > currentAmount) return interaction.reply(`Sorry ${interaction.user}, you only have ${currentAmount}.`);
+	if (transferAmount <= 0) return interaction.reply(`Please enter an amount greater than zero, ${interaction.user}.`);
 
-return interaction.reply(`Successfully transferred ${transferAmount}💰 to ${transferTarget.tag}. Your current balance is ${currency.getBalance(interaction.user.id)}💰`);
+	currency.add(interaction.user.id, -transferAmount);
+	currency.add(transferTarget.id, transferAmount);
+
+	return interaction.reply(`Successfully transferred ${transferAmount}💰 to ${transferTarget.tag}. Your current balance is ${currency.getBalance(interaction.user.id)}💰`);
+}
 ```
 As a bot creator, you should always be thinking about how to make the user experience better. Good UX makes users less frustrated with your commands. If your inputs are different types, don't make them memorize which parameters come before the other.
 
@@ -334,50 +336,58 @@ You'd ideally want to allow users to do both `!transfer 5 @user` and `!transfer 
 
 `.add()` is used for both removing and adding currency. Since transfer amounts below zero are disallowed, it's safe to apply the transfer amount's additive inverse to their balance.
 
-### [zeta] Buying an item
+### Buying an item
 
 <!-- eslint-skip -->
 
-```js
-const itemName = interaction.options.getString('item');
-const item = await CurrencyShop.findOne({ where: { name: { [Op.like]: itemName } } });
+```js {2-14}
+else if (commandName === 'buy') {
+	const itemName = interaction.options.getString('item');
+	const item = await CurrencyShop.findOne({ where: { name: { [Op.like]: itemName } } });
 
-if (!item) return interaction.reply(`That item doesn't exist.`);
-if (item.cost > currency.getBalance(interaction.user.id)) {
-	return interaction.reply(`You currently have ${currency.getBalance(interaction.user.id)}, but the ${item.name} costs ${item.cost}!`);
+	if (!item) return interaction.reply(`That item doesn't exist.`);
+	if (item.cost > currency.getBalance(interaction.user.id)) {
+		return interaction.reply(`You currently have ${currency.getBalance(interaction.user.id)}, but the ${item.name} costs ${item.cost}!`);
+	}
+
+	const user = await Users.findOne({ where: { user_id: interaction.user.id } });
+	currency.add(interaction.user.id, -item.cost);
+	await user.addItem(item);
+
+	return interaction.reply(`You've bought: ${item.name}.`);
 }
-
-const user = await Users.findOne({ where: { user_id: interaction.user.id } });
-currency.add(interaction.user.id, -item.cost);
-await user.addItem(item);
-
-return interaction.reply(`You've bought: ${item.name}.`);
 ```
 
 For users to search for an item without caring about the letter casing, you can use the `$iLike` modifier when looking for the name. Keep in mind that this may be slow if you have millions of items, so please don't put a million items in your shop.
 
-### [theta] Display the shop
+### Display the shop
 
 <!-- eslint-skip -->
 
-```js
-const items = await CurrencyShop.findAll();
-return interaction.reply(Formatters.codeBlock(items.map(i => `${i.name}: ${i.cost}💰`).join('\n')));
+```js {2-3}
+else if (commandName === 'shop') {
+	const items = await CurrencyShop.findAll();
+	return interaction.reply(Formatters.codeBlock(items.map(i => `${i.name}: ${i.cost}💰`).join('\n')));
+}
 ```
 There's nothing special here; just a regular `.findAll()` to get all the items in the shop and `.map()` to transform that data into something nice looking.
 
-### [lambda] Display the leaderboard
+### Display the leaderboard
 
-```js
-return interaction.reply(
-	Formatters.codeBlock(
-		currency.sort((a, b) => b.balance - a.balance)
-			.filter(user => client.users.cache.has(user.user_id))
-			.first(10)
-			.map((user, position) => `(${position + 1}) ${(client.users.cache.get(user.user_id).tag)}: ${user.balance}💰`)
-			.join('\n'),
-	),
-);
+<!-- eslint-skip -->
+
+```js {2-10}
+else if (commandName === 'leaderboard') {
+	return interaction.reply(
+		Formatters.codeBlock(
+			currency.sort((a, b) => b.balance - a.balance)
+				.filter(user => client.users.cache.has(user.user_id))
+				.first(10)
+				.map((user, position) => `(${position + 1}) ${(client.users.cache.get(user.user_id).tag)}: ${user.balance}💰`)
+				.join('\n'),
+		),
+	);
+}
 ```
 
 Nothing extraordinary here either. You could query the database for the top ten currency holders, but since you already have access to them locally inside the `currency` variable, you can sort the Collection and use `.map()` to display it in a friendly format. The filter is in case the users no longer exist in the bot's cache.

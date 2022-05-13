@@ -54,9 +54,7 @@ export default {
 		{
 			text: 'Interactions',
 			children: [
-				'/interactions/registering-slash-commands.md',
-				'/interactions/replying-to-slash-commands.md',
-				'/interactions/slash-command-permissions.md',
+				'/interactions/slash-commands.md',
 				'/interactions/buttons.md',
 				'/interactions/select-menus.md',
 			],

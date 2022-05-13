@@ -9,8 +9,8 @@ Audio resources contain audio that can be played by an audio player to voice con
 There are many ways to create an audio resource. Below are some example scenarios:
 
 ```js
-const { createReadStream } = require('fs');
-const { join } = require('path');
+const { createReadStream } = require('node:fs');
+const { join } = require('node:path');
 const { createAudioResource, StreamType } = require('@discordjs/voice');
 
 // Basic, default options are:
@@ -102,7 +102,7 @@ The reason for this is that you can remove FFmpeg from the process of streaming 
 Both of the examples below will skip the FFmpeg component of the pipeline to improve performance.
 
 ```js
-const { createReadStream } = require('fs');
+const { createReadStream } = require('node:fs');
 const { createAudioResource, StreamType } = require('@discordjs/voice');
 
 let resource = createAudioResource(createReadStream('my_file.ogg'), {
@@ -127,7 +127,7 @@ advance what type of audio stream you'll be playing.
 This is achieved by probing a small chunk of the beginning of the audio stream to see if it is suitable for demuxing:
 
 ```js
-const { createReadStream } = require('fs');
+const { createReadStream } = require('node:fs');
 const { demuxProbe, createAudioResource } = require('@discordjs/voice');
 
 async function probeAndCreateResource(readableStream) {
