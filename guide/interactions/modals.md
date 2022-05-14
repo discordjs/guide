@@ -67,7 +67,7 @@ client.on('interactionCreate', async interaction => {
 			.setCustomId('hobbiesInput')
 			.setLabel("What's some of your favorite hobbies?")
 		    // Paragraph means multiple lines of text.
-			.setStyle("PARAGRAPH");
+			.setStyle('PARAGRAPH');
 		// An action row only holds one text input,
 		// so you need one action row per text input.
 		const firstActionRow = new MessageActionRow().addComponents(favoriteColorInput);
