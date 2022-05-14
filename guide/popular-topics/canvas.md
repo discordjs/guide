@@ -91,7 +91,7 @@ Now, you need to load the image you want to use into Canvas.
 
 We'll be using [this image](https://github.com/discordjs/guide/blob/main/guide/popular-topics/images/canvas.jpg) as the background in the welcome image, but you can use whatever you want. Be sure to download the file, name it `wallpaper.jpg`, and save it inside the same directory as your main bot file.
 
-```js {5-13}
+```js {7-12}
 const { readFile } = require('fs/promises');
 
 client.on('interactionCreate', async interaction => {
