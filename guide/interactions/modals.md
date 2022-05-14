@@ -24,6 +24,7 @@ client.on('interactionCreate', async interaction => {
 		const modal = new Modal()
 			.setCustomId('myModal')
 			.setTitle('My Modal');
+			
 		await interaction.showModal(modal);
 	}
 });
