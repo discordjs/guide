@@ -29,19 +29,7 @@ GitHub Actions is a CI/CD platform that allows you to automate your build, test,
 To use GitHub Actions your code must be in a GitHub repository.
 You can store your code in a git server such as GitHub for ease of access.
 
-### GitHub Desktop
-
-> A good choice for people who are scared of the terminal and don't wanna learn it, or simply just get things done quicker with a app.
-
-1. Download [GitHub Desktop](https://desktop.github.com/)
-2. [Create a repository](https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/overview/creating-your-first-repository-using-github-desktop)
-
-### Terminal
-
-> The classic way
-
-1. [Make sure git is installed](https://github.com/git-guides/install-git)
-2. [Create a repository](https://docs.github.com/en/get-started/quickstart/create-a-repo)
+[Create a GitHub repository](https://docs.github.com/en/get-started/quickstart/create-a-repo)
 
 ### Creating the GitHub Action
 
