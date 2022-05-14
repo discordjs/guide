@@ -161,7 +161,7 @@ client.on('interactionCreate', async interaction => {
 
 It works well, but the avatar image itself seems a bit stretched out. Let's remedy that.
 
-```js {5-6}
+```js {7-8}
 client.on('interactionCreate', async interaction => {
 	// ...
 	const { body } = await request(interaction.user.displayAvatarURL({ format: 'jpg' }));
