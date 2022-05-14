@@ -16,7 +16,6 @@ import {
 } from '@discord-message-components/vue';
 import DocsLink from './components/DocsLink.vue';
 import ResultingCode from './components/ResultingCode.vue';
-import Definition from './components/Definition.vue';
 import djsAvatar from './assets/discord-avatar-djs.png';
 import '@discord-message-components/vue/dist/style.css';
 
@@ -53,5 +52,4 @@ export default defineClientAppEnhance(({ app }) => {
 
 	app.component('DocsLink', DocsLink);
 	app.component('ResultingCode', ResultingCode);
-	app.component('Definition', Definition);
 });
