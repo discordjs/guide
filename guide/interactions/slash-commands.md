@@ -476,3 +476,42 @@ await interaction.reply('Pong!');
 const message = await interaction.fetchReply();
 console.log(message);
 ```
+
+## Slash command permissions
+
+Slash commands have their own permissions system, which allows you to set the required permissions in order to use a command.
+
+::: tip
+The slash command permissions for guilds are only defaults and can be altered by guild administrators.
+:::
+
+### DM permission
+
+You can use the `setDMPermission` method to control if a global command can be used in DMs. By default, all global commands can be used in DMs.
+
+```js {6}
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
+const data = new SlashCommandBuilder()
+	.setName('boop')
+	.setDescription('Replies with beep!')
+	.setDMPermission(false);
+```
+
+### Member permissions
+
+You can use the `setDefaultMemberPermissions` method to set the default permissions required by a member in order to run the command, setting it to `0` will prohibit anyone in a guild from using the command unless a specific overwrite is configured or the user has admin permissions.
+
+```js {9}
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const { Permissions } = require('discord.js');
+
+const data = new SlashCommandBuilder()
+	.setName('Ban')
+	.setDescription('Ban a member!')
+	.addUserOption(option =>
+		option.setName('target').setDescription('The member to ban'))
+	.setDefaultMemberPermissions([Permissions.FLAGS.KICK_MEMBERS, Permissions.FLAGS.BAN_MEMBERS]);
+```
+
+And that's all you need to know on slash command permissions!
