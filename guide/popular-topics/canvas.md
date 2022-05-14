@@ -165,7 +165,7 @@ It works well, but the avatar image itself seems a bit stretched out. Let's reme
 client.on('interactionCreate', async interaction => {
 	// ...
 	const { body } = await request(interaction.user.displayAvatarURL({ format: 'jpg' }));
-	const avatar = new Image();
+	const avatar = new Canvas.Image();
 	avatar.src = Buffer.from(await body.arrayBuffer());
 
 	// Move the image downwards vertically and constrain its height to 200, so that it's square
