@@ -96,6 +96,10 @@ const button = {
 }
 ```
 
+### Builders
+
+Builders are no longer returned by the API like they were previously. For example you send the API an `EmbedBuilder` but you receive an `Embed` of the same data from the API. This may affect how your code handles received structures such as components. Refer to [message component changes section](#messagecomponent) for more details.
+
 ### Activity
 
 The following properties have been removed as they are not documented by Discord:
@@ -269,7 +273,7 @@ In addition, `Interaction#isCommand()` now indicates whether the command is an _
 - const editedButton = receivedButton
 -   .setDisabled(true);
 
-+ import { ButtonBuilder } from 'discord.js';
++ const { ButtonBuilder } = require('discord.js');
 + const editedButton = ButtonBuilder.from(receivedButton)
 +   .setDisabled(true);
 ```
