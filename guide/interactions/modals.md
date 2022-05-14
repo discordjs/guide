@@ -11,7 +11,7 @@ This page is a follow-up to the [interactions (slash commands) page](/interactio
 Unlike message components, modals aren't strictly components themselves. They're a callback structure used to respond to interactions.
 
 ::: tip
-You can have a maximum of five `MessageActionRow`s per modal, and one `TextInputComponent` within a `MessageActionRow`. Currently, you cannot use `MessageSelectionMenu`s or `MessageButton`s in modal action rows.
+You can have a maximum of five `MessageActionRow`s per modal, and one `TextInputComponent` within a `MessageActionRow`. Currently, you cannot use `MessageSelectMenu`s or `MessageButton`s in modal action rows.
 :::
 
 To create a modal you construct a new `Modal`. You can then use the setters to add the custom id and title.
