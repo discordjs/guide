@@ -2,4 +2,3 @@ node_modules
 guide/.vuepress/.cache
 guide/.vuepress/.temp
 guide/.vuepress/dist
-.vscode/settings.json
