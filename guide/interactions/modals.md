@@ -24,7 +24,6 @@ client.on('interactionCreate', async interaction => {
 		const modal = new Modal()
 			.setCustomId('myModal')
 			.setTitle('My Modal');
-			
 		await interaction.showModal(modal);
 	}
 });
@@ -62,7 +61,7 @@ client.on('interactionCreate', async interaction => {
 		    // The label is the prompt the user sees for this input
 			.setLabel("What's your favorite color?")
 		    // Short means only a single line of text
-			.setStyle("SHORT");
+			.setStyle('SHORT');
 		const hobbiesInput = new TextInputComponent()
 			.setCustomId('hobbiesInput')
 			.setLabel("What's some of your favorite hobbies?")
