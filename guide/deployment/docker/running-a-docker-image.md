@@ -23,7 +23,7 @@ Once you have acquired a VPS you will need to SSH into it, here are some instruc
 Once you have SSHed into your VPS you will need to install Docker. This is different for each Linux distribution.
 Install Docker on your VPS by following the specific instructions for your linux [distribution](https://docs.docker.com/engine/install/#server)
 
-Once Docker is installed and ready you can run your image.
+Once Docker is installed and ready you can run your image with the below command, make sure to replace `AccountUsername` and `RepoName`.
 
 ```bash
 sudo docker run -d -t -i -e DISCORD_TOKEN='your-token' \
