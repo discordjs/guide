@@ -507,7 +507,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { Permissions } = require('discord.js');
 
 const data = new SlashCommandBuilder()
-	.setName('Ban')
+	.setName('ban')
 	.setDescription('Ban a member!')
 	.addUserOption(option =>
 		option.setName('target').setDescription('The member to ban'))
