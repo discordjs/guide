@@ -1,6 +1,6 @@
 # Autocomplete
 
-Slash command options provide the feature of autocomplete. In this section, we'll cover how to add autocomplete support to your command and how to respond to it.
+Autocomplete allows you to dynamically provide a selection of values to the user, based on their input. In this section we will cover how to add autocomplete support to your commands.
 
 ::: tip
 This page is a follow-up to the [interactions (slash commands) pages](/interactions/registering-slash-commands.md). Please carefully read those first so that you can understand the methods used in this section.
