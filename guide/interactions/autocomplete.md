@@ -28,7 +28,6 @@ To handle an <DocsLink path="class/AutocompleteInteraction" />, you can listen t
 ```js {2}
 client.on('interactionCreate', interaction => {
 	if (!interaction.isAutocomplete()) return;
-	console.log(interaction);
 });
 ```
 
@@ -40,7 +39,7 @@ Using <DocsLink path="class/AutocompleteInteraction?scrollTo=respond" /> you can
 
 <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" /> returns the currently focused option's value. This value is used to filter the choices presented. To only display options starting with the focused value you can use the `Array#filter()` method. Using `Array#map()`, you can transform the array into an array of <DocsLink path="typedef/ApplicationCommandOptionChoice" /> objects.
 
-```js {4-10}
+```js {4-11}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isAutocomplete()) return;
 
@@ -51,8 +50,6 @@ client.on('interactionCreate', async interaction => {
 		const response = await interaction.respond(
 			filtered.map(choice => ({ name: choice, value: choice })),
 		);
-
-		console.log(response);
 	}
 });
 ```
@@ -81,8 +78,6 @@ client.on('interactionCreate', async interaction => {
 		const response = await interaction.respond(
 			filtered.map(choice => ({ name: choice, value: choice })),
 		);
-
-		console.log(response);
 	}
 });
 ```
