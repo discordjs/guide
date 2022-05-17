@@ -46,7 +46,7 @@ To only display options starting with the focused value you can use the `Array#f
 
 Using `Array#map()`, you can transform the array into an array of <DocsLink path="typedef/ApplicationCommandOptionChoice" /> objects.
 
-``` js {5,7,9-14}
+``` js {4-10}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isAutocomplete()) return;
 
@@ -67,7 +67,7 @@ client.on('interactionCreate', async interaction => {
 
 To distinguish between multiple options you can pass `true` into <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" /> which now returns the full focused object instead of just the value. This is used to get the name of the focused option.
 
-```js {5,7,9-11,13-15,17}
+```js {5-16}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isAutocomplete()) return;
 
