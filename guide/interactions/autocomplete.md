@@ -20,20 +20,16 @@ The slash command builder does not yet support using autocomplete.
 
 For other custom systems or entering it raw, your resulting code should look something like this. To enable autocomplete, set it to true in the option.
 
-```js {10}
-const commandData = {
-	name: 'autocomplete',
-	description: 'test command to show how autocomplete should be setup',
-	defaultPermission: true,
-	options: [
-		{
-			name: 'name',
-			description: 'Name of something',
-			type: 3, // String
-			autocomplete: true,
-		},
-	],
-};
+```js {9}
+const commandData = new SlashCommandBuilder()
+	.setName('autocomplete')
+	.setDescription('test command to show how autocomplete should be setup')
+	.setDefaultPermission(true)
+	.addStringOption(opt =>
+		opt
+			.setName('name')
+			.setDescription('Name of something')
+			.setAutocomplete(true));
 ```
 
 ## Receiving
