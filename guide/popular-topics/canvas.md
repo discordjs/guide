@@ -91,7 +91,7 @@ Now, you need to load the image you want to use into Canvas.
 
 We'll be using [this image](https://github.com/discordjs/guide/blob/main/guide/popular-topics/images/canvas.jpg) as the background in the welcome image, but you can use whatever you want. Be sure to download the file, name it `wallpaper.jpg`, and save it inside the same directory as your main bot file.
 
-```js {5-13}
+```js {7-17}
 const { readFile } = require('fs/promises');
 
 client.on('interactionCreate', async interaction => {
@@ -161,11 +161,11 @@ client.on('interactionCreate', async interaction => {
 
 It works well, but the avatar image itself seems a bit stretched out. Let's remedy that.
 
-```js {5-6}
+```js {7-8}
 client.on('interactionCreate', async interaction => {
 	// ...
 	const { body } = await request(interaction.user.displayAvatarURL({ format: 'jpg' }));
-	const avatar = new Image();
+	const avatar = new Canvas.Image();
 	avatar.src = Buffer.from(await body.arrayBuffer());
 
 	// Move the image downwards vertically and constrain its height to 200, so that it's square
