@@ -22,7 +22,7 @@ const commandData = new SlashCommandBuilder()
 			.setAutocomplete(true));
 ```
 
-## Receiving autocomplete interactions
+## Responding to autocomplete interactions
 
 To handle an <DocsLink path="class/AutocompleteInteraction" />, you can listen to the `interactionCreate` event and use the <DocsLink path="class/Interaction?scrollTo=isAutocomplete" /> method to make sure the interaction instance is an autocomplete interaction:
 
@@ -33,20 +33,15 @@ client.on('interactionCreate', interaction => {
 });
 ```
 
-## Responding to autocomplete interactions
-
 The <DocsLink path="class/AutocompleteInteraction" /> class provides the <DocsLink path="class/AutocompleteInteraction?scrollTo=respond" /> method to send a response.
 
 ### Sending results
+
 Using <DocsLink path="class/AutocompleteInteraction?scrollTo=respond" /> you can submit an array of <DocsLink path="typedef/ApplicationCommandOptionChoice" /> objects. Passing an empty array will show "No options match your search" for the user.
 
-<DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" /> returns the currently focused option's value. This value is used to filter the choices presented.
+<DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" /> returns the currently focused option's value. This value is used to filter the choices presented. To only display options starting with the focused value you can use the `Array#filter()` method. Using `Array#map()`, you can transform the array into an array of <DocsLink path="typedef/ApplicationCommandOptionChoice" /> objects.
 
-To only display options starting with the focused value you can use the `Array#filter()` method.
-
-Using `Array#map()`, you can transform the array into an array of <DocsLink path="typedef/ApplicationCommandOptionChoice" /> objects.
-
-``` js {4-10}
+```js {4-10}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isAutocomplete()) return;
 
@@ -63,7 +58,7 @@ client.on('interactionCreate', async interaction => {
 });
 ```
 
-### Respond with multiple options
+### Handling multiple autocomplete options
 
 To distinguish between multiple options you can pass `true` into <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" /> which now returns the full focused object instead of just the value. This is used to get the name of the focused option.
 
