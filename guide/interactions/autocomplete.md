@@ -39,7 +39,7 @@ The <DocsLink path="class/AutocompleteInteraction" /> class provides the <DocsLi
 
 Using <DocsLink path="class/AutocompleteInteraction?scrollTo=respond" /> you can submit an array of <DocsLink path="typedef/ApplicationCommandOptionChoice" /> objects. Passing an empty array will show "No options match your search" for the user.
 
-<DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" /> returns the currently focused option's value. This value is used to filter the choices presented. To only display options starting with the focused value you can use the `Array#filter()` method. Using `Array#map()`, you can transform the array into an array of <DocsLink path="typedef/ApplicationCommandOptionChoice" /> objects.
+The <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" /> method returns the currently focused option's value. This value is used to filter the choices presented. To only display options starting with the focused value you can use the `Array#filter()` method. By using `Array#map()`, you can transform the array into an array of <DocsLink path="typedef/ApplicationCommandOptionChoice" /> objects.
 
 ```js {4-11}
 client.on('interactionCreate', async interaction => {
@@ -58,7 +58,7 @@ client.on('interactionCreate', async interaction => {
 
 ### Handling multiple autocomplete options
 
-To distinguish between multiple options you can pass `true` into <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" /> which now returns the full focused object instead of just the value. This is used to get the name of the focused option.
+To distinguish between multiple options you can pass `true` into <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" /> which now returns the full focused object instead of just the value. This is used to get the name of the focused option below:
 
 ```js {5-16}
 client.on('interactionCreate', async interaction => {
