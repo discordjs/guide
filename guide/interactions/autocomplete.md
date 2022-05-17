@@ -6,19 +6,9 @@ Autocomplete allows you to dynamically provide a selection of values to the user
 This page is a follow-up to the [interactions (slash commands) pages](/interactions/registering-slash-commands.md). Please carefully read those first so that you can understand the methods used in this section.
 :::
 
-
 ## Preparing commands
 
-To use autocomplete with your command options, you have to tell Discord to enable it.
-How to do this is dependent on how you create your slash commands.
-
-### Slash command builder
-
-The slash command builder does not yet support using autocomplete.
-
-### Custom system
-
-For other custom systems or entering it raw, your resulting code should look something like this. To enable autocomplete, set it to true in the option.
+To use autocomplete with your commands, you have to set the respective option when deploying commands:
 
 ```js {9}
 const commandData = new SlashCommandBuilder()
