@@ -3,7 +3,7 @@
 Autocomplete allows you to dynamically provide a selection of values to the user, based on their input. In this section we will cover how to add autocomplete support to your commands.
 
 ::: tip
-This page is a follow-up to the [interactions (slash commands) pages](/interactions/slash-commands.md). Please carefully read those first so that you can understand the methods used in this section.
+This page is a follow-up to the [interactions (slash commands) page](/interactions/slash-commands.md). Please carefully read those first so that you can understand the methods used in this section.
 :::
 
 ## Enabling autocomplete
