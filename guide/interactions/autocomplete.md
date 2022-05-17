@@ -6,7 +6,7 @@ Autocomplete allows you to dynamically provide a selection of values to the user
 This page is a follow-up to the [interactions (slash commands) pages](/interactions/registering-slash-commands.md). Please carefully read those first so that you can understand the methods used in this section.
 :::
 
-## Preparing commands
+## Enabling autocomplete
 
 To use autocomplete with your commands, you have to set the respective option when deploying commands:
 
@@ -22,9 +22,9 @@ const commandData = new SlashCommandBuilder()
 			.setAutocomplete(true));
 ```
 
-## Receiving
+## Receiving autocomplete interactions
 
-To receive an <DocsLink path="class/AutocompleteInteraction" />, you can listen to the `interactionCreate` event and use the <DocsLink path="class/Interaction?scrollTo=isAutocomplete" /> method to make sure you only receive autocomplete interactions:
+To handle an <DocsLink path="class/AutocompleteInteraction" />, you can listen to the `interactionCreate` event and use the <DocsLink path="class/Interaction?scrollTo=isAutocomplete" /> method to make sure the interaction instance is an autocomplete interaction:
 
 ```js {2}
 client.on('interactionCreate', interaction => {
@@ -33,7 +33,7 @@ client.on('interactionCreate', interaction => {
 });
 ```
 
-## Responding
+## Responding to autocomplete interactions
 
 The <DocsLink path="class/AutocompleteInteraction" /> class provides the <DocsLink path="class/AutocompleteInteraction?scrollTo=respond" /> method to send a response.
 
@@ -52,14 +52,12 @@ client.on('interactionCreate', async interaction => {
 
 	if (interaction.commandName === 'autocomplete') {
 		const focusedValue = interaction.options.getFocused();
-
 		const choices = ['faq', 'install', 'collection', 'promise', 'debug'];
-
 		const filtered = choices.filter(choice => choice.startsWith(focusedValue));
-
 		const response = await interaction.respond(
 			filtered.map(choice => ({ name: choice, value: choice })),
 		);
+
 		console.log(response);
 	}
 });
@@ -75,7 +73,6 @@ client.on('interactionCreate', async interaction => {
 
 	if (interaction.commandName === 'autocomplete') {
 		const focusedOption = interaction.options.getFocused(true);
-
 		let choices;
 
 		if (focusedOption.name === 'name') {
@@ -87,10 +84,10 @@ client.on('interactionCreate', async interaction => {
 		}
 
 		const filtered = choices.filter(choice => choice.startsWith(focusedOption.value));
-
 		const response = await interaction.respond(
 			filtered.map(choice => ({ name: choice, value: choice })),
 		);
+
 		console.log(response);
 	}
 });
