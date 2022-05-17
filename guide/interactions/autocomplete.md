@@ -13,7 +13,7 @@ To use autocomplete with your commands, you have to set the respective option wh
 ```js {8}
 const commandData = new SlashCommandBuilder()
 	.setName('autocomplete')
-	.setDescription('test command to show how autocomplete should be setup')
+	.setDescription('Test command to show how autocomplete should be set up')
 	.addStringOption(option =>
 		option
 			.setName('name')
