@@ -99,7 +99,7 @@ client.on('interactionCreate', interaction => {
 
 ## Extracting data from modal submissions
 
-You'll most likely need to read the data sent by the user in the modal. You can do this by accessing the `#fields` instance field on the interaction. From there you can call `#getTextInputValue` with the custom id of the text input to get the value.
+You'll most likely need to read the data sent by the user in the modal. You can do this by accessing the `fields` property from the interaction. From there, you can call `getTextInputValue()` with the custom id of the text input to get the value.
 
 ```js{4-8}
 client.on('interactionCreate', interaction => {
