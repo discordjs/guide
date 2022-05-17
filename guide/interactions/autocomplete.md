@@ -10,7 +10,7 @@ This page is a follow-up to the [interactions (slash commands) pages](/interacti
 
 To use autocomplete with your commands, you have to set the respective option when deploying commands:
 
-```js {9}
+```js {8}
 const commandData = new SlashCommandBuilder()
 	.setName('autocomplete')
 	.setDescription('test command to show how autocomplete should be setup')
