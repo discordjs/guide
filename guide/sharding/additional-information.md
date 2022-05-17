@@ -91,9 +91,9 @@ The <DocsLink path="typedef/BroadcastEvalOptions" /> typedef was introduced in d
 It accepts two properties: `shard` and `context`. The `context` property will be sent as the second argument to your function.
 
 In this small snippet, an argument is passed to the `funcName` function through this parameter.
-The function will recieve the arguments as an object as the second parameter.
+The function will receive the arguments as an object as the second parameter.
 
 ::: warning
 The `context` option only accepts properties which are JSON-serializable. This means you cannot pass complex data types in the context directly.
-For example, if you sent a `User` instance, the function would recieve the raw data object.
+For example, if you sent a `User` instance, the function would receive the raw data object.
 :::

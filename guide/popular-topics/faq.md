@@ -26,7 +26,7 @@ guild.members.unban(id);
 ```
 
 ::: tip
-Because you cannot ping a user who isn't in the server, you have to pass in the user id. To do this, we use a <DocsLink path="typedef/CommandInteractionOption" />. See [here](/interactions/replying-to-slash-commands.html#parsing-options) for more information on this topic.
+Because you cannot ping a user who isn't in the server, you have to pass in the user id. To do this, we use a <DocsLink path="typedef/CommandInteractionOption" />. See [here](/interactions/slash-commands.html#parsing-options) for more information on this topic.
 :::
 
 ### How do I kick a user?
@@ -119,8 +119,10 @@ channel.send('content');
 
 ### How do I DM a specific user?
 
+<!-- eslint-skip -->
+
 ```js
-const user = client.users.cache.get('id');
+const user = await client.users.fetch('id');
 user.send('content');
 ```
 
@@ -243,8 +245,8 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 
 ```js
 // First use guild.members.fetch to make sure all members are cached
-guild.members.fetch().then(fetchedMembers => {
-	const totalOnline = fetchedMembers.filter(member => member.presence.status === 'online');
+guild.members.fetch({ withPresences: true }).then(fetchedMembers => {
+	const totalOnline = fetchedMembers.filter(member => member.presence?.status === 'online');
 	// Now you have a collection with all online member objects in the totalOnline variable
 	console.log(`There are currently ${totalOnline.size} members online in this guild!`);
 });
@@ -293,91 +295,6 @@ The second, **Roundtrip Latency**, describes the amount of time a full API round
 const sent = await interaction.reply({ content: 'Pinging...', fetchReply: true });
 interaction.editReply(`Roundtrip latency: ${sent.createdTimestamp - interaction.createdTimestamp}ms`);
 ```
-
-### How do I play music from YouTube?
-
-For this to work, you need to have `ytdl-core` and `@discordjs/voice` installed.
-
-:::: code-group
-::: code-group-item npm
-```sh:no-line-numbers
-npm install ytdl-core @discordjs/voice
-```
-:::
-::: code-group-item yarn
-```sh:no-line-numbers
-yarn add ytdl-core @discordjs/voice
-```
-:::
-::: code-group-item pnpm
-```sh:no-line-numbers
-pnpm add ytdl-core @discordjs/voice
-```
-:::
-::::
-
-Additionally, you may need the following:
-
-:::: code-group
-::: code-group-item npm
-```sh:no-line-numbers
-npm install --save @discordjs/opus # opus engine (if missing)
-sudo apt-get install ffmpeg # ffmpeg debian/ubuntu
-npm install ffmpeg-static # ffmpeg windows
-```
-:::
-::: code-group-item yarn
-```sh:no-line-numbers
-yarn add --save @discordjs/opus # opus engine (if missing)
-sudo apt-get install ffmpeg # ffmpeg debian/ubuntu
-yarn add ffmpeg-static # ffmpeg windows
-```
-:::
-::: code-group-item pnpm
-```sh:no-line-numbers
-pnpm add --save @discordjs/opus # opus engine (if missing)
-sudo apt-get install ffmpeg # ffmpeg debian/ubuntu
-pnpm add ffmpeg-static # ffmpeg windows
-```
-:::
-::::
-
-```js
-const ytdl = require('ytdl-core');
-const {
-	AudioPlayerStatus,
-	StreamType,
-	createAudioPlayer,
-	createAudioResource,
-	joinVoiceChannel,
-} = require('@discordjs/voice');
-
-// ...
-
-const connection = joinVoiceChannel({
-	channelId: voiceChannel.id,
-	guildId: guild.id,
-	adapterCreator: guild.voiceAdapterCreator,
-});
-
-const stream = ytdl('youtube link', { filter: 'audioonly' });
-const resource = createAudioResource(stream, { inputType: StreamType.Arbitrary });
-const player = createAudioPlayer();
-
-player.play(resource);
-connection.subscribe(player);
-
-player.on(AudioPlayerStatus.Idle, () => connection.destroy());
-```
-
-::: tip
-You can learn more about these methods in the [voice section of this guide](/voice)!
-:::
-
-::: warning
-This only works correctly if you have the `GUILD_VOICE_STATES` intent enabled for your application and client.
-If you want to learn more about intents, check out [this dedicated guide on intents](/popular-topics/intents.md)!
-:::
 
 ### Why do some emojis behave weirdly?
 

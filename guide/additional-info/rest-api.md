@@ -2,41 +2,42 @@
 
 REST APIs are extremely popular on the web and allow you to freely grab a site's data if it has an available API over an HTTP connection.
 
-If you've ever seen a music bot that accepts a YouTube query instead of just a video's URL, then you've seen a REST API in action. discord.js uses the Discord API, so you've probably used an API yourself.
-
 ## Making HTTP requests with Node
 
-In these examples, we will be using [node-fetch](https://www.npmjs.com/package/node-fetch), an excellent library for making HTTP requests.
+In these examples, we will be using [undici](https://www.npmjs.com/package/undici), an excellent library for making HTTP requests.
 
-To install node-fetch, run the following command:
+To install undici, run the following command:
 
 :::: code-group
 ::: code-group-item npm
+
 ```sh:no-line-numbers
-npm install node-fetch@cjs
+npm install undici
 ```
+
 :::
 ::: code-group-item yarn
+
 ```sh:no-line-numbers
-yarn add node-fetch@cjs
+yarn add undici
 ```
+
 :::
 ::: code-group-item pnpm
+
 ```sh:no-line-numbers
-pnpm add node-fetch@cjs
+pnpm add undici
 ```
+
 :::
 ::::
 
-::: tip
-The `cjs` tag of `node-fetch` is used here as versions 3+ do not support the [CommonJS](https://nodejs.org/api/modules.html#modules_modules_commonjs_modules) `require()` syntax.
-:::
-
 ## Skeleton code
 
-To start off, you're just going to be using this skeleton code:
+To start off, you will be using the following skeleton code. Since both the commands you will be adding in this section require an interaction with external APIs, you will defer the reply, so your application responds with a "thinking..." state. You can then edit the reply once you got the data you need:
 
 <!-- eslint-disable require-await -->
+
 ```js
 const { Client, Intents, MessageEmbed } = require('discord.js');
 
@@ -50,7 +51,7 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	const { commandName } = interaction;
-
+	await interaction.deferReply();
 	// ...
 });
 
@@ -58,19 +59,35 @@ client.login('your-token-goes-here');
 ```
 
 ::: tip
-We're going to take advantage of [destructuring](/additional-info/es6-syntax.md#destructuring) in this tutorial to maintain readability.
+We're taking advantage of [destructuring](/additional-info/es6-syntax.md#destructuring) in this tutorial to maintain readability.
 :::
 
-## Using node-fetch
+## Using undici
 
-node-fetch is a lightweight, Promise-based module that brings the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), which is available in browsers, to node. If you aren't already familiar with Promises, you should read up on them [here](/additional-info/async-await.md).
+Undici is a Promise-based HTTP/1.1 client, written from scratch for Node.js. If you aren't already familiar with Promises, you should read up on them [here](/additional-info/async-await.md).
 
-In this tutorial, we'll be making a bot with two API-based commands using the [random.cat](https://aws.random.cat) and [Urban Dictionary](https://www.urbandictionary.com) APIs.
+In this tutorial, you will be making a bot with two API-based commands using the [random.cat](https://aws.random.cat) and [Urban Dictionary](https://www.urbandictionary.com) APIs.
 
-To require node-fetch, you'd do:
+On top of your file, import the library function you will be using:
 
 ```js
-const fetch = require('node-fetch');
+const { request } = require('undici');
+```
+
+### Retrieving the JSON response from a request
+
+To get the data from within the response object, you can define the following helper function (it concatenates all the body chunks and parses it as an object) above your client events. Note that the function returns a Promise you need to handle.
+
+```js
+async function getJSONResponse(body) {
+	let fullBody = '';
+
+	for await (const data of body) {
+		fullBody += data.toString();
+	}
+
+	return JSON.parse(fullBody);
+}
 ```
 
 ### Random Cat
@@ -78,17 +95,20 @@ const fetch = require('node-fetch');
 Random cat's API is available at [https://aws.random.cat/meow](https://aws.random.cat/meow) and returns a [JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) response. To actually fetch data from the API, you're going to do the following:
 
 ```js
-fetch('https://aws.random.cat/meow').then(response => response.json());
+const catResult = await request('https://aws.random.cat/meow');
+const { file } = await getJSONResponse(catResult.body);
 ```
 
-It may seem like this does nothing, but what it's doing is launching a request to the random.cat server. The server is returning some JSON that contains a `file` property, which is a string containing a link to a random cat. node-fetch returns a response object, which we can change into JSON with `response.json()`. Next, let's implement this into a command. The code should look similar to this:
+If you just add this code, it will seem like nothing happens. What you do not see, is that you are launching a request to the random.cat server, which responds some JSON data. The helper function parses the response data to a JavaScript object you can work with. The object will have a `file` property with the value of a link to a random cat image.
 
-```js {3-6}
+Next, you will implement this approach into an application command:
+
+```js {3-7}
 client.on('interactionCreate', async interaction => {
 	// ...
 	if (commandName === 'cat') {
-		await interaction.deferReply();
-		const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
+		const catResult = await request('https://aws.random.cat/meow');
+		const { file } = await getJSONResponse(catResult.body);
 		interaction.editReply({ files: [file] });
 	}
 });
@@ -96,46 +116,41 @@ client.on('interactionCreate', async interaction => {
 
 So, here's what's happening in this code:
 
-1. You're sending a `GET` request to random.cat.
-2. random.cat sees your request and gets a random file from their database.
+1. Your application sends a `GET` request to random.cat.
+2. random.cat sees the request and gets a random file url from their database.
 3. random.cat then sends that file's URL as a JSON object that contains a link to the image.
-4. node-fetch receives the response and deserializes it with `response.json()`.
-5. You then send the object's `file` property in Discord.
-
-::: warning
-The response will only be parsed if the server's `Content-Type` header includes `application/json`. In some cases you may have to apply the `.text()` method instead of `.json()` and `JSON.parse()` it yourself.
-:::
+4. undici receives the response and you parse it with `getJSONResponse()`.
+5. Your application then attaches the image and sends it in Discord.
 
 ### Urban Dictionary
 
 Urban Dictionary's API is available at [https://api.urbandictionary.com/v0/define](https://api.urbandictionary.com/v0/define), accepts a `term` parameter, and returns a JSON response.
 
-First, you're going to need to fetch data from the API. To do this, you'd do:
+The following code will fetch data from this api:
 
 ```js {1,5-11}
 // ...
 client.on('interactionCreate', async interaction => {
 	// ...
 	if (commandName === 'urban') {
-		await interaction.deferReply();
 		const term = interaction.options.getString('term');
 		const query = new URLSearchParams({ term });
 
-		const { list } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`)
-			.then(response => response.json());
+		const dictResult = await request(`https://api.urbandictionary.com/v0/define?${query}`);
+		const { list } = await getJSONResponse(dictResult.body);
 	}
 });
 ```
 
-Here, we use JavaScript's native [URLSearchParams class](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) to create a [query string](https://en.wikipedia.org/wiki/Query_string) for the URL so that the Urban Dictionary server can parse it and know what to search.
+Here, you are using JavaScript's native [URLSearchParams class](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) to create a [query string](https://en.wikipedia.org/wiki/Query_string) for the URL so that the Urban Dictionary server can parse it and know what you want to look up.
 
-If you were to do `/urban hello world`, then the URL would become https://api.urbandictionary.com/v0/define?term=hello%20world since the string gets encoded.
+If you were to do `/urban hello world`, then the URL would become https://api.urbandictionary.com/v0/define?term=hello%20world since the string `"hello world"` is encoded.
 
 You can get the respective properties from the returned JSON. If you were to view it in your browser, it usually looks like a bunch of mumbo jumbo. If it doesn't, great! If it does, then you should get a JSON formatter/viewer. If you're using Chrome, [JSON Formatter](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa) is one of the more popular extensions. If you're not using Chrome, search for "JSON formatter/viewer &lt;your browser&gt;" and get one.
 
-Now, if you look at the JSON, you can see that it's a `list` property, which is an array of objects containing various definitions for the term (maximum 10). Something you always want to do when making API-based commands is to handle no results. So, let's throw a random term in there (e.g. `njaksdcas`) and then look at the response. The `list` array should then be empty. Now you are ready to start writing!
+Now, if you look at the JSON, you can see that it has a `list` property, which is an array of objects containing various definitions for the term (maximum 10). Something you always want to do when making API-based commands is to handle the case when no results are available. So, if you throw a random term in there (e.g. `njaksdcas`) and then look at the response the `list` array should be empty. Now you are ready to start writing!
 
-As explained above, you'll want to check if the API returned any answers for your query, and send back the definition if so:
+As explained above, you'll want to check if the API returned any answers for your query, and send back the definition if that's the case:
 
 ```js {3-5,7}
 if (commandName === 'urban') {
@@ -173,15 +188,16 @@ If you've followed the tutorial, you should have something like this:
 	</DiscordMessage>
 </DiscordMessages>
 
-Now, let's just make this an [embed](/popular-topics/embeds.md).
+Now, you can make it an [embed](/popular-topics/embeds.md) for easier formatting.
 
-We are also going to be defining a utility function at the top of the file so that the embed doesn't error when the field value is over 1024 characters. Here is a bit of code to do that:
+You can define the following helper function at the top of your file. In the code below, you can use this function to truncate the returned data and make sure the embed doesn't error, because field values exceed 1024 characters.
 
 ```js
-const trim = (str, max) => ((str.length > max) ? `${str.slice(0, max - 3)}...` : str);
+const trim = (str, max) => (str.length > max ? `${str.slice(0, max - 3)}...` : str);
 ```
 
-The following snippet is how to structure the embed:
+And here is how you can build the embed from the API data:
+
 ```js
 const [answer] = list;
 
@@ -189,16 +205,12 @@ const embed = new MessageEmbed()
 	.setColor('#EFFF00')
 	.setTitle(answer.word)
 	.setURL(answer.permalink)
-	.addFields(
-		{ name: 'Definition', value: trim(answer.definition, 1024) },
-		{ name: 'Example', value: trim(answer.example, 1024) },
-		{ name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` },
-	);
+	.addFields({ name: 'Definition', value: trim(answer.definition, 1024) }, { name: 'Example', value: trim(answer.example, 1024) }, { name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` });
 
 interaction.editReply({ embeds: [embed] });
 ```
 
-Now, if you do that same command again, you should get this:
+Now, if you execute that same command again, you should get this:
 
 <DiscordMessages>
 	<DiscordMessage profile="bot">

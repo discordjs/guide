@@ -65,7 +65,7 @@ const exampleEmbed = new MessageEmbed()
 	.setColor('#0099ff')
 	.setTitle('Some title')
 	.setURL('https://discord.js.org/')
-	.setAuthor('Some name', 'https://i.imgur.com/AfFp7pu.png', 'https://discord.js.org')
+	.setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
 	.setDescription('Some description here')
 	.setThumbnail('https://i.imgur.com/AfFp7pu.png')
 	.addFields(
@@ -77,7 +77,7 @@ const exampleEmbed = new MessageEmbed()
 	.addField('Inline field title', 'Some value here', true)
 	.setImage('https://i.imgur.com/AfFp7pu.png')
 	.setTimestamp()
-	.setFooter('Some footer text here', 'https://i.imgur.com/AfFp7pu.png');
+	.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
 
 channel.send({ embeds: [exampleEmbed] });
 ```
@@ -272,4 +272,4 @@ There are a few limits to be aware of while planning your embeds due to the API'
 - The sum of all characters from all embed structures in a message must not exceed 6000 characters
 - Ten embeds can be sent per message
 
-Source: [Discord API documentation](https://discord.com/developers/docs/resources/channel#embed-limits)
+Source: [Discord API documentation](https://discord.com/developers/docs/resources/channel#embed-object-embed-limits)

@@ -29,7 +29,7 @@ If the guild owner enables the server's two-factor authentication option, everyo
 Check out [Discord's help article](https://support.discord.com/hc/en-us/articles/219576828-Setting-up-Two-Factor-Authentication) if you need assistance with this.
 
 The permissions assigned to these actions are called "elevated permissions" and are: 
-`KICK_MEMBERS`, `BAN_MEMBERS`, `ADMINISTRATOR`, `MANAGE_CHANNELS`, `MANAGE_GUILD`, `MANAGE_MESSAGES`, `MANAGE_ROLES`, `MANAGE_WEBHOOKS` and `MANAGE_EMOJIS`.
+`KICK_MEMBERS`, `BAN_MEMBERS`, `ADMINISTRATOR`, `MANAGE_CHANNELS`, `MANAGE_GUILD`, `MANAGE_MESSAGES`, `MANAGE_ROLES`, `MANAGE_WEBHOOKS`, `MANAGE_THREADS`, and `MANAGE_EMOJIS_AND_STICKERS`.
 
 ## Implicit permissions
 
@@ -52,6 +52,7 @@ Causes for "Missing Access":
 - Voice Channels require `CONNECT` in the same way.
 - Reacting to a message requires `READ_MESSAGE_HISTORY` in the channel the message was sent.
 - When deploying slash commands: Enable the `applications.commands` scope (for more information see the [adding your bot](/preparations/adding-your-bot-to-servers) section).
+- Timing out a member requires `MODERATE_MEMBERS`.
 :::
 
 ## Limitations and oddities
@@ -74,6 +75,7 @@ During your development, you will likely run into `DiscordAPIError: Missing Perm
 - It is trying to modify or assign a role higher than or equal to its highest role.
 - It is trying to add a managed role to a member.
 - It is trying to remove a managed role from a member.
+- It is trying to timeout a member with the `ADMINISTRATOR` permission.
 - It is trying to execute a forbidden action on the server owner.
 - It is trying to execute an action based on another unfulfilled factor (for example, reserved for partnered guilds).
 - It is trying to execute an action on a voice channel without the `VIEW_CHANNEL` permission.

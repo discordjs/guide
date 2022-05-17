@@ -67,15 +67,15 @@ All of this information can help you track down what caused the error and how to
 ### Message
 
 The most important part of the error is the message. It tells you what went wrong, which can help you track down where it originates. 
-You can find a full list of messages [here](https://discord.com/developers/docs/topics/opcodes-and-status-codes#json) in the Discord API Docs.
+You can find a full list of messages [here](https://discord.com/developers/docs/topics/opcodes-and-status-codes#json) in the Discord API documentation.
 
 ### Path
 
 Another helpful piece of information is the path, which tells you what API endpoint the error occurred on. We cannot possibly cover all endpoints, but they are usually very descriptive.
 
-In the above example, the path tells you that the action was executed in the `/channels/` scope. The number you see next is the channel's ID. Next, you can spot the `message/` scope. The number is again the object's ID. Combined with the method `GET` you can conclude, that the bot tried to fetch the message with the id `[object Object]` from the channel with the ID `638200642359525387`.
+In the above example, the path tells you that the action was executed in the `/channels/` scope. The number you see next is the channel's id. Next, you can spot the `message/` scope. The number is again the object's id. Combined with the method `GET` you can conclude, that the bot tried to fetch the message with the id `[object Object]` from the channel with the id `638200642359525387`.
 
-As the error message tells you `[object Object ]` is not a valid ID, so you now know where to look for an error! Find out where you pass an object as an ID when trying to fetch a message and fix your code in that location.
+As the error message tells you `[object Object]` is not a valid id, so you now know where to look for an error! Find out where you pass an object as an id when trying to fetch a message and fix your code in that location.
 
 ### Code
 
@@ -102,7 +102,7 @@ message.delete().catch(error => {
 });
 ```
 
-You can find a list of constants [here](https://github.com/discordjs/discord.js/blob/stable/src/util/Constants.js#L552)
+You can find a list of constants [here](https://discord.js.org/#/docs/discord.js/stable/typedef/APIError).
 
 ### Method
 
@@ -126,7 +126,7 @@ This is a prevalent error; it originates from a wrong token being passed into `c
 
 - Not importing the config or env file correctly
 - Copying the client secret instead of the bot token (the token is alphanumerical and three parts delimited by a period while the client secret is significantly smaller and one part only)
-- Simply showing the token and copying that, instead of clicking regenerate and copying that.
+- Not updating the token after resetting it
 
 ::: warning
 Before the release of version 12, there used to be an issue where the token was not prefixed correctly, which resulted in valid tokens being marked as invalid. If you have verified that all of the above is not the case, make sure you have updated discord.js to the current stable version.
@@ -134,7 +134,7 @@ Before the release of version 12, there used to be an issue where the token was 
 
 ### Request to use token, but token was unavailable to the client.
 
-Another common error–this error originates from the client attempting to execute an action that requires the token but the token not being available. This is most commonly caused by destroying the client and then trying to perform an action.
+This error originates from the client attempting to execute an action that requires the token but the token not being available. This is most commonly caused by destroying the client and then trying to perform an action.
 
 This error is also caused by attempting to use a client that has not logged in. Both of the examples below will throw errors.
 
@@ -167,11 +167,11 @@ client.users.fetch('myId').then(someInitFunction);
 
 ### MessageEmbed field names may not be empty.
 
-This error originates from calling `MessageEmbed.addFields()` with a field object's `name` property as an empty string. If you would like the title to be empty for a reason, you should use a zero width space, which can be input as `\u200b`.
+This error originates from calling `MessageEmbed#addFields()` with a field object's `name` property as an empty string. If you would like the title to be empty for a reason, you should use a zero width space, which can be input as `\u200b`.
 
 ### MessageEmbed field values may not be empty.
 
-In conjunction with the previous error, this error results from calling `MessageEmbed.addFields()` with a field object's `value` property as an empty string. You can use a zero-width space if you would like this blank.
+In conjunction with the previous error, this error results from calling `MessageEmbed#addFields()` with a field object's `value` property as an empty string. You can use a zero-width space if you would like this blank.
 
 ### The messages must be an Array, Collection, or number.
 
@@ -179,7 +179,12 @@ This error originates from an invalid call to `bulkDelete()`. Make sure you are 
 
 ### Members didn't arrive in time.
 
-Another common error–this error originates from the client requesting members from the API through the WebSocket and the member chunks not arriving in time and triggering the timeout. The most common cause of this error is a bad connection; however, it can also be caused by fetching many members, upwards of 50 thousand. To fix this, run the bot on a location with better internet, such as a VPS. If this does not work for you, you will have to manually change the hardcoded member fetching timeout in the source code.
+This error happens when fetching multiple members via `GuildMemberManager#fetch()` and:
+- The `GUILD_MEMBERS` intent is not specified
+- The internet connection is somewhat bad
+- The amount of members fetched is huge (about 50 thousand and upwards)
+
+Ensure the `GUILD_MEMBERS` intent is provided. If this intent is provided, then you may wish to consider moving your bot to a location with better internet, such as a VPS. If this does not work for you, you will have to manually change the hardcoded member fetching timeout in the source code.
 
 ### MaxListenersExceededWarning: Possible EventEmitter memory leak detected...
 
@@ -192,12 +197,12 @@ You can debug these messages in different ways:
 ### Cannot send messages to this user.
 
 This error throws when the bot attempts to send a DM message to a user but cannot do so. A variety of reasons causes this:
-- The bot and the user do not share a guild (often, people attempt to dm the user after kicking or banning them).
+- The bot and the user do not share a guild (often, people attempt to DM the user after kicking or banning them).
 - The bot tries to DM another bot.
 - The user has blocked the bot.
-- The user has disabled dms in the privacy settings.
+- The user has disabled DMs in the privacy settings.
 
-In the case of the last two reasons, the error is not preventable, as the Discord API does not provide a way to check if you can send a user a dm until you attempt to send one. The best way to handle this error is to add a `.catch()` where you try to dm the user and either ignore the rejected Promise or do what you want because of it.
+In the case of the last two reasons, the error is not preventable, as the Discord API does not provide a way to check if you can send a user a DM until you attempt to send one. The best way to handle this error is to add a `.catch()` where you try to DM the user and either ignore the rejected Promise or do what you want because of it.
 
 ## Common miscellaneous errors
 

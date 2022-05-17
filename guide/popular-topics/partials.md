@@ -10,7 +10,7 @@ Prior you had to either handle the undocumented `raw` event or fetch the respect
 
 As we said earlier, partials do not have all the information necessary to make them fully functional discord.js structures, so it would not be a good idea to enable the functionality by default. Users should know how to handle them before opting into this feature.
 
-You choose which structures you want to emit as partials as client options when instantiating your bot client. Available structures are: `USER`, `CHANNEL` (only DM channels can be uncached, server channels will always be available), `GUILD_MEMBER`, `MESSAGE`, and `REACTION`.
+You choose which structures you want to emit as partials as client options when instantiating your bot client. Available structures are: `USER`, `CHANNEL` (only DM channels can be uncached, server channels will always be available), `GUILD_MEMBER`, `MESSAGE`, `REACTION` and `GUILD_SCHEDULED_EVENT`.
 
 ```js
 const { Client } = require('discord.js');

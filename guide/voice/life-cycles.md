@@ -28,7 +28,7 @@ player.on(AudioPlayerStatus.Playing, (oldState, newState) => {
 ```
 
 :::tip
-One advantage of listening for transitions to individual states is that it becomes a lot easier to write sequential logic. This is made easy using our [state transition helper](https://github.com/discordjs/voice/blob/main/src/util/entersState.ts). An example is shown below.
+One advantage of listening for transitions to individual states is that it becomes a lot easier to write sequential logic. This is made easy using our [state transition helper](https://github.com/discordjs/discord.js/blob/main/packages/voice/src/util/entersState.ts). An example is shown below.
 
 ```js
 const { AudioPlayerStatus, entersState } = require('@discordjs/voice');

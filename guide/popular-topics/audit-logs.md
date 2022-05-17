@@ -1,7 +1,7 @@
 # Working with Audit Logs
 
 ## Some quick background
-Audit logs are an excellent moderation tool offered by Discord to know what happened in a server and usually by whom. At the moment, these are the only method to help you determine who the executor of a mod action was on the server. Relevant events such as `messageDelete` and `guildMemberLeave` unfortunately do not provide info on the moderation actions having triggered them, making the fetch for audit logs a necessity.
+Audit logs are an excellent moderation tool offered by Discord to know what happened in a server and usually by whom. At the moment, these are the only method to help you determine who the executor of a mod action was on the server. Relevant events such as `messageDelete` and `guildMemberRemove` unfortunately do not provide info on the moderation actions having triggered them, making the fetch for audit logs a necessity.
 
 There are quite a few cases where you may use audit logs. This guide will limit itself to the most common use cases. Feel free to consult the [relevant Discord API page](https://discord.com/developers/docs/resources/audit-log) for more information.
 

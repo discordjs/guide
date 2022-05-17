@@ -14,7 +14,7 @@ Threads introduce a number of new gateway events, which are listed below:
 - <DocsLink path="class/Client?scrollTo=e-threadDelete" />: Emitted whenever a thread is deleted.
 - <DocsLink path="class/Client?scrollTo=e-threadUpdate" />: Emitted whenever a thread is updated (e.g. name change, archive state change, locked state change).
 - <DocsLink path="class/Client?scrollTo=e-threadListSync" />: Emitted whenever the client user gains access to a text or news channel that contains threads.
-- <DocsLink path="class/Client?scrollTo=e-threadMembersUpdate" />: Emitted whenever members are added or removed from a thread. Requires `GUILD_MEMBERS` privileged intent.
+- <DocsLink path="class/Client?scrollTo=e-threadMembersUpdate" />: Emitted whenever members are added or removed from a thread. Requires <code>GUILD_MEMBERS</code> privileged intent.
 - <DocsLink path="class/Client?scrollTo=e-threadMemberUpdate" />: Emitted whenever the client user's thread member is updated.
 
 ## Creating and deleting threads

@@ -44,7 +44,7 @@ Base permissions are set on roles, not the guild member itself. To change them, 
 ```js
 const { Permissions } = require('discord.js');
 
-guild.roles.everyone.setPermissions([Permissions.FLAGS.SEND_MESSAGES, Permissions.FLAGS.VIEW_CHANNELS]);
+guild.roles.everyone.setPermissions([Permissions.FLAGS.SEND_MESSAGES, Permissions.FLAGS.VIEW_CHANNEL]);
 ```
 
 Any permission not referenced in the flag array or bit field is not granted to the role. 

@@ -125,7 +125,7 @@ webhookClient.send({
 });
 ```
 
-Example using a Webhook:
+Try to find a webhook your bot knows the token for. This makes sure your bot can execute the webhook later on.
 
 ```js
 const { Client, Intents, MessageEmbed } = require('discord.js');
@@ -141,7 +141,11 @@ client.once('ready', async () => {
 	const channel = client.channels.cache.get('123456789012345678');
 	try {
 		const webhooks = await channel.fetchWebhooks();
-		const webhook = webhooks.first();
+		const webhook = webhooks.find(wh => wh.token);
+
+		if (!webhook) {
+			return console.log('No webhook was found that I can use!');
+		}
 
 		await webhook.send({
 			content: 'Webhook test',

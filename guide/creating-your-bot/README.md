@@ -35,7 +35,7 @@ If you're using Git, you should not commit this file and should [ignore it via `
 
 ### Using environment variables
 
-Environment variables are special values for your environment (e.g., terminal session, docker container, or environment variable file). You can pass these values into your code's scope so that you can use them.
+Environment variables are special values for your environment (e.g., terminal session, Docker container, or environment variable file). You can pass these values into your code's scope so that you can use them.
 
 One way to pass in environment variables is via the command line interface. When starting your app, instead of `node index.js`, use `TOKEN=your-token-goes-here node index.js`. You can repeat this pattern to expose other values as well.
 
