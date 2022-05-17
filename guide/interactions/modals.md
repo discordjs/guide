@@ -48,6 +48,7 @@ If you're using typescript you'll need to specify the type of components your ac
 
 ```js {1,12-34}
 const { MessageActionRow, Modal, TextInputComponent } = require('discord.js');
+
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 	if (interaction.commandName === 'ping') {
