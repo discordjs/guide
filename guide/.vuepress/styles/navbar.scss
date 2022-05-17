@@ -96,7 +96,7 @@ html.guide-theme-blurple {
 	a {
 		@include navLink();
 
-		.icon.outbound {
+		.external-link-icon {
 			color: var(--text-gray);
 		}
 	}
@@ -117,12 +117,12 @@ html.guide-theme-blurple {
 			align-items: center;
 		}
 
-		.navbar-links {
+		.navbar-items {
 			@media (max-width: 959px) {
 				display: none;
 			}
 
-			.navbar-links-item {
+			.navbar-item {
 				margin-left: 2rem;
 
 				a {

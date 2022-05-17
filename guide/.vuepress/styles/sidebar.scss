@@ -18,13 +18,13 @@
 		padding-top: 4rem;
 	}
 
-	.navbar-links {
+	.navbar-items {
 		@media (max-width: 959px) {
 			display: block;
 			padding: 0.5rem;
 		}
 
-		.navbar-links-item {
+		.navbar-item {
 			@media (max-width: 959px) {
 				margin-left: 0;
 				padding-left: 1.25rem;

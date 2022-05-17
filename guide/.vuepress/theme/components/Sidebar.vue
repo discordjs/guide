@@ -1,10 +1,10 @@
 <template>
 	<aside class="sidebar">
-		<NavbarLinks />
+		<NavbarItems />
 		<slot name="top"></slot>
 		<ul class="sidebar-links">
 			<UserSettings />
-			<SidebarChild
+			<SidebarItem
 				v-for="item in sidebarItems"
 				:key="item.link || item.text"
 				:item="item"
@@ -16,8 +16,8 @@
 
 <script setup lang="ts">
 import { useSidebarItems } from '@vuepress/theme-default/lib/client/composables';
-import NavbarLinks from '@vuepress/theme-default/lib/client/components/NavbarLinks.vue';
-import { SidebarChild } from '@vuepress/theme-default/lib/client/components/SidebarChild';
+import NavbarItems from '@vuepress/theme-default/lib/client/components/NavbarItems.vue';
+import SidebarItem from '@vuepress/theme-default/lib/client/components/SidebarItem.vue';
 import UserSettings from './UserSettings.vue';
 
 const sidebarItems = useSidebarItems();

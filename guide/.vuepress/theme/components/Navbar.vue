@@ -9,7 +9,7 @@
 						</RouterLink>
 					</span>
 					<slot name="before"></slot>
-					<NavbarLinks class="can-hide" />
+					<NavbarItems class="can-hide" />
 					<slot name="after"></slot>
 				</div>
 				<div class="navbar-links-container">
@@ -26,7 +26,7 @@
 import { computed } from 'vue';
 import { useRouteLocale, useSiteLocaleData } from '@vuepress/client';
 import { useThemeLocaleData } from '@vuepress/theme-default/lib/client/composables';
-import NavbarLinks from '@vuepress/theme-default/lib/client/components/NavbarLinks.vue';
+import NavbarItems from '@vuepress/theme-default/lib/client/components/NavbarItems.vue';
 import ToggleDarkModeButton from './ToggleDarkModeButton.vue';
 import ToggleSidebarButton from './ToggleSidebarButton.vue';
 
