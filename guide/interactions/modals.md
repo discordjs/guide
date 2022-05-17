@@ -11,13 +11,14 @@ This page is a follow-up to the [interactions (slash commands) page](/interactio
 Unlike message components, modals aren't strictly components themselves. They're a callback structure used to respond to interactions.
 
 ::: tip
-You can have a maximum of five `MessageActionRow`s per modal, and one `TextInputComponent` within a `MessageActionRow`. Currently, you cannot use `MessageSelectMenu`s or `MessageButton`s in modal action rows.
+You can have a maximum of five `MessageActionRow`s per modal, and one `TextInputComponent` within a row.
 :::
 
 To create a modal you construct a new `Modal`. You can then use the setters to add the custom id and title.
 
 ```js {1,7-13}
 const { Modal } = require('discord.js');
+
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 	if (interaction.commandName === 'ping') {
@@ -32,7 +33,7 @@ client.on('interactionCreate', async interaction => {
 The custom id is a developer-defined string of up to 100 characters.
 :::
 
-As you can see, you construct the modal and assign it a custom id and a title. After you added some user input elements, you will send it as a response to the interaction via `#showModal`.
+As you can see, you construct the modal and assign it a custom id and a title. After you added some user input elements, you will send it as a response to the interaction via `showModal()`.
 
 You are still missing one of these steps - adding inputs. Adding inputs is similar to adding components to messages.
 
