@@ -87,3 +87,9 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 ```
+
+## Notes
+
+- You have to respond to the request within 3 seconds, as with other application command interactions
+- You cannot defer the response to an autocomplete interaction
+- After the user selects a value and sends the command, it will be received as a <DocsLink path="class/CommandInteraction" /> with the chosen value
