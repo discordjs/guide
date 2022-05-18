@@ -1,4 +1,4 @@
-const { Client } = require('discord.js');
+const { Client, Intents } = require('discord.js');
 require('dotenv').config();
 
 const commands = [
@@ -8,7 +8,7 @@ const commands = [
 	},
 ];
 
-const client = new Client().once('ready', () => {
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] }).once('ready', () => {
 	console.log('Ready!');
 
 	client.application.commands.fetch().then(existingCommands => {
