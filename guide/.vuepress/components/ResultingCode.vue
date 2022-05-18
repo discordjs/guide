@@ -2,7 +2,7 @@
 	<p>
 		If you want to compare your code to the code we've constructed so far, you can review it over on the GitHub repository
 		<a :href="githubLink" target="_blank" rel="noopener noreferrer">
-			here <OutboundLink />
+			here <ExternalLinkIcon />
 		</a>.
 	</p>
 </template>
