@@ -8,7 +8,7 @@ This page is a follow-up to the [interactions (slash commands) page](/interactio
 
 ## Registering context menu commands
 
-To create a context menu you construct a new `ContextMenuCommandBuilder`. You can then set the type of the context menu (user or message) using the `setType` method.
+To create a context menu you construct a new `ContextMenuCommandBuilder`. You can then set the type of the context menu (user or message) using the `setType()` method.
 
 ```js
 const { ContextMenuCommandBuilder } = require('@discordjs/builders');
@@ -31,9 +31,9 @@ client.on('interactionCreate', interaction => {
 
 ## Extracting data from context menus
 
-You can get the targeted user by accessing the `targetUser` or `targetMember` property from the <DocsLink path="class/UserContextMenuInteraction" />`. You can get the message by accessing the `targetMessage` property from the <DocsLink path="class/MessageContextMenuInteraction" />.
+You can get the targeted user by accessing the `targetUser` or `targetMember` property from the <DocsLink path="class/UserContextMenuInteraction" />. You can get the message by accessing the `targetMessage` property from the <DocsLink path="class/MessageContextMenuInteraction" />.
 
-```js{4-8}
+```js {4}
 client.on('interactionCreate', interaction => {
 	if (!interaction.isUserContextMenu()) return;
 	// Get the User's username from context menu
