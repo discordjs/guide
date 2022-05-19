@@ -36,7 +36,7 @@ You can get the targeted user by accessing the `targetUser` or `targetMember` pr
 ```js{4-8}
 client.on('interactionCreate', interaction => {
 	if (!interaction.isUserContextMenu()) return;
-	// Get the User's username from context meu
+	// Get the User's username from context menu
 	const user = interaction.targetUser.username;
 	console.log(user);
 });
