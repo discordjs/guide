@@ -20,7 +20,7 @@ const data = new ContextMenuCommandBuilder()
 
 ## Receiving context menu command interactions
 
-Context Menus are received via an interaction. You can check if a given interaction is a context menu by invoking the `isContextMenu()` method, you can use the `isMessageContextMenu()` and `isUserContextMenu()` methods to get the type of context menu interaction:
+Context Menus are received via an interaction. You can check if a given interaction is a context menu by invoking the `isContextMenu()` method, you can use the `isMessageContextMenu()` and `isUserContextMenu()` methods to check for the specific type of context menu interaction:
 
 ```js {2}
 client.on('interactionCreate', interaction => {
