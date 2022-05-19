@@ -38,6 +38,6 @@ client.on('interactionCreate', interaction => {
 	if (!interaction.isUserContextMenu()) return;
 	// Get the User's username from context menu
 	const username = interaction.targetUser.username;
-	console.log(user);
+	console.log(username);
 });
 ```
