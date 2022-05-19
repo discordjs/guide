@@ -8,7 +8,7 @@ This page is a follow-up to the [interactions (slash commands) page](/interactio
 
 ## Registering context menu commands
 
-To create a context menu you construct a new `ContextMenuCommandBuilder`. You can then set the type of the context menu (user or message) using `setType` method.
+To create a context menu you construct a new `ContextMenuCommandBuilder`. You can then set the type of the context menu (user or message) using the `setType` method.
 
 ```js
 const { ContextMenuCommandBuilder } = require('@discordjs/builders');
