@@ -511,7 +511,7 @@ const data = new SlashCommandBuilder()
 	.setDescription('Ban a member!')
 	.addUserOption(option =>
 		option.setName('target').setDescription('The member to ban'))
-	.setDefaultMemberPermissions([Permissions.FLAGS.KICK_MEMBERS, Permissions.FLAGS.BAN_MEMBERS]);
+	.setDefaultMemberPermissions(new Permissions([Permissions.FLAGS.KICK_MEMBERS, Permissions.FLAGS.BAN_MEMBERS]).bitfield);
 ```
 
 And that's all you need to know on slash command permissions!
