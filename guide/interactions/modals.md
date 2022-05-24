@@ -111,7 +111,7 @@ client.on('interactionCreate', interaction => {
 	if (!interaction.isModalSubmit()) return;
 
 	if (interaction.customId === 'myModal') {
-		await interaction.reply({ content: 'Your submit recieved!' });
+		await interaction.reply({ content: 'Your submission was recieved successfully! });
 	}
 });
 ```
