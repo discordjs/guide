@@ -502,16 +502,20 @@ const data = new SlashCommandBuilder()
 
 You can use the `setDefaultMemberPermissions` method to set the default permissions required by a member in order to run the command, setting it to `0` will prohibit anyone in a guild from using the command unless a specific overwrite is configured or the user has admin permissions.
 
+::: tip
+If you want to learn more about the `|` bitwise OR operator you can check the [Wikipedia](https://en.wikipedia.org/wiki/Bitwise_operation#OR) and [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_OR) articles on the topic.
+:::
+
 ```js {9}
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { Permissions } = require('discord.js');
+const { PermissionFlagsBits } = require('discord-api-types/v10');
 
 const data = new SlashCommandBuilder()
 	.setName('ban')
 	.setDescription('Ban a member!')
 	.addUserOption(option =>
 		option.setName('target').setDescription('The member to ban'))
-	.setDefaultMemberPermissions(new Permissions([Permissions.FLAGS.KICK_MEMBERS, Permissions.FLAGS.BAN_MEMBERS]).bitfield);
+	.setDefaultMemberPermissions(PermissionFlagsBits.KickMembers | PermissionFlagsBits.BanMembers);
 ```
 
 And that's all you need to know on slash command permissions!
