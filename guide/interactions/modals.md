@@ -96,7 +96,25 @@ client.on('interactionCreate', interaction => {
 	console.log(interaction);
 });
 ```
+## Responding to modal submissions
 
+The `MessageComponentInteraction` class provides the same methods as the `CommandInteraction` class. These methods behave equally:
+- `reply()`
+- `editReply()`
+- `deferReply()`
+- `fetchReply()`
+- `deleteReply()`
+- `followUp()`
+
+```js{1,4-6}
+client.on('interactionCreate', interaction => {
+	if (!interaction.isModalSubmit()) return;
+
+	if (interaction.customId === 'myModal') {
+		await interaction.reply({ content: 'Your submit recieved!' });
+	}
+});
+```
 ## Extracting data from modal submissions
 
 You'll most likely need to read the data sent by the user in the modal. You can do this by accessing the `fields` property from the interaction. From there, you can call `getTextInputValue()` with the custom id of the text input to get the value.
