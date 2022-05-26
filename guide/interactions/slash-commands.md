@@ -487,8 +487,8 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 ```
-### Localized response
-You can also get the locale of the invoking user with `Interaction#locale`
+### Localized responses
+You can get the locale of the invoking user with `Interaction#locale`
 ```js
 client.on('interactionCreate', interaction => {
 	const locales = {
