@@ -487,7 +487,17 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 ```
-
+### Localized response
+You can also get the locale of the invoking user with `Interaction#locale`
+```js
+client.on('interactionCreate', async interaction => {
+	const locales = {
+		pl: 'To jest komenda po polsku!',
+		de: 'Das ist ein befehl auf deutsch!',
+	};
+	interaction.reply(locales[interaction.locale] || 'It\'s default english command!');
+});
+```
 ### Fetching and deleting responses
 
 ::: danger
