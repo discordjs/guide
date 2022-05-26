@@ -203,11 +203,11 @@ const data = new SlashCommandBuilder()
 	})
 	.addStringOption(option => {
 		option.setName('breed').setDescription('Breed of dog')
-		 .setNameLocalization({
+		 .setNameLocalizations({
 			 pl: 'rasa',
 			 de: 'rasse',
 			 })
-		 .setDescriptionLocalization({
+		 .setDescriptionLocalizations({
 		 pl: 'Rasa psa',
 		 de: 'Rasse des Hundes',
 		 });
