@@ -199,12 +199,18 @@ const data = new SlashCommandBuilder()
 	.setDescription('Get cute picture of dog!')
 	.setDescriptionLocalizations({
 		pl: 'Słodkie zdjęcie pieska!',
-		de: "Erhalten Sie nettes Bild des Hundes!"
+		de: 'Erhalten Sie nettes Bild des Hundes!',
 	})
 	.addStringOption(option => {
 		option.setName('breed').setDescription('Breed of dog')
-		 .setNameLocalization('pl', 'rasa')
-		 .setDescriptionLocalization('pl', 'Rasa psa');
+		 .setNameLocalization({
+			 pl: 'rasa',
+			 de: 'rasse',
+			 })
+		 .setDescriptionLocalization({
+		 pl: 'Rasa psa',
+		 de: 'Rasse des Hundes',
+		 });
 	});
 ```
 ## Replying to slash commands
