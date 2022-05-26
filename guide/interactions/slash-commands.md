@@ -199,6 +199,7 @@ const data = new SlashCommandBuilder()
 	.setDescription('Get cute picture of dog!')
 	.setDescriptionLocalizations({
 		pl: 'Słodkie zdjęcie pieska!',
+		de: "Erhalten Sie nettes Bild des Hundes!"
 	})
 	.addStringOption(option => {
 		option.setName('breed').setDescription('Breed of dog')
