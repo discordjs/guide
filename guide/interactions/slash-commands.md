@@ -201,17 +201,19 @@ const data = new SlashCommandBuilder()
 		pl: 'Słodkie zdjęcie pieska!',
 		de: 'Erhalten Sie nettes Bild des Hundes!',
 	})
-	.addStringOption(option => {
-		option.setName('breed').setDescription('Breed of dog')
-		 .setNameLocalizations({
-			 pl: 'rasa',
-			 de: 'rasse',
-			 })
-		 .setDescriptionLocalizations({
-		 pl: 'Rasa psa',
-		 de: 'Rasse des Hundes',
-		 });
-	});
+	.addStringOption(option =>
+		option
+            .setName('breed')
+            .setDescription('Breed of dog')
+		    .setNameLocalizations({
+			    pl: 'rasa',
+			    de: 'rasse',
+			})
+		    .setDescriptionLocalizations({
+		        pl: 'Rasa psa',
+		        de: 'Rasse des Hundes',
+		    })
+	);
 ```
 ## Replying to slash commands
 
