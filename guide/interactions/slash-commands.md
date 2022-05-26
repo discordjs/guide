@@ -179,7 +179,23 @@ const data = new SlashCommandBuilder()
 			.setName('server')
 			.setDescription('Info about the server'));
 ```
+### Localizations
+  	Localized names and descriptions depending on the client's selected language.
+	  ```js
+	  const { SlashCommandBuilder } = require('@discordjs/builders');
 
+	const data = new SlashCommandBuilder()
+		.setName('dog')
+		.setNameLocalizations({
+			pl: "pies",
+			de: "hund"
+		})
+		.setDescription('Get cute picture of dog!')
+		.setDescriptionLocalizations({
+			pl: "Słodkie zdjęcie pieska!"
+		})
+		.addStringOption(option => option.setName('breed').setDescription('Breed of dog').setNameLocalization("pl", "rasa").setDescriptionLocalization("pl", "Rasa psa"))
+	  ```
 ## Replying to slash commands
 
 Discord provides developers the option to create client-integrated slash commands. In this section, we'll cover how to respond to these commands using discord.js!
