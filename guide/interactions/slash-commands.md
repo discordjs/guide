@@ -184,9 +184,9 @@ const data = new SlashCommandBuilder()
 ::: warning
 You must have [Command-localizations build](https://discord.com/__development/link?s=4bxTIpeKRvD1G1z6Uo%2F%2FKbW1f%2BRrGYb2Klg5NHkLIn0%3D.eyJ0YXJnZXRCdWlsZE92ZXJyaWRlIjp7ImRpc2NvcmRfd2ViIjp7InR5cGUiOiJicmFuY2giLCJpZCI6ImZlYXR1cmUvd2ViLXNsYXNoLWNvbW1hbmQtbG9jYWxpemF0aW9uIn19LCJyZWxlYXNlQ2hhbm5lbCI6bnVsbCwidmFsaWRGb3JVc2VySWRzIjpbXSwiYWxsb3dMb2dnZWRPdXQiOmZhbHNlLCJleHBpcmVzQXQiOiJGcmksIDAzIEp1biAyMDIyIDIxOjE1OjA5IEdNVCJ9) for now
 :::
-Localized names and descriptions depending on the client's selected language.
+Localized names and descriptions depending on the user's selected language.
 
-You can pick localization from [this list](https://discord.com/developers/docs/reference#locales)
+You can pick localizations from [this list](https://discord.com/developers/docs/reference#locales)
 ```js {5-8,10-12,15,16}
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
