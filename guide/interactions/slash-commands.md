@@ -142,7 +142,7 @@ The `STRING` and `INTEGER` option types both can have `choices`. `choices` are a
 If you specify `choices` for an option, they'll be the **only** valid values users can pick!
 :::
 
-Specify them by using the `addChoice()` method from the slash command builder:
+Specify them by using the `addChoices()` method from the slash command builder:
 
 ```js {10-12}
 const { SlashCommandBuilder } = require('@discordjs/builders');
@@ -154,9 +154,11 @@ const data = new SlashCommandBuilder()
 		option.setName('category')
 			.setDescription('The gif category')
 			.setRequired(true)
-			.addChoice('Funny', 'gif_funny')
-			.addChoice('Meme', 'gif_meme')
-			.addChoice('Movie', 'gif_movie'));
+			.addChoices(
+				{ name: 'Funny', value: 'gif_funny' },
+				{ name: 'Meme', value: 'gif_meme' },
+				{ name: 'Movie', value: 'gif_movie' },
+			));
 ```
 
 ### Subcommands
