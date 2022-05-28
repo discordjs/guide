@@ -219,3 +219,7 @@ This error is commonly thrown by your system in response to the process unexpect
 - delete `node_modules`
 - delete `package-lock.json` (make sure you have a `package.json`!)
 - run `npm install` to reinstall packages from `package.json`
+
+
+## code Cannot read properties of null(reading 'something')
+This error can occur if you do not invite the bot correctly or does not have the permissions.
