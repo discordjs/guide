@@ -126,12 +126,13 @@ Refer to the Discord API documentation for detailed explanations on the [`SUB_CO
 * `SUB_COMMAND_GROUP` sets the option to be a subcommand group
 * `STRING` sets the option to require a string value
 * `INTEGER` sets the option to require an integer value
-* `NUMBER` sets the option to require a decimal (also known as a floating point) value
 * `BOOLEAN` sets the option to require a boolean value
 * `USER` sets the option to require a user or snowflake as value
 * `CHANNEL` sets the option to require a channel or snowflake as value
 * `ROLE` sets the option to require a role or snowflake as value
 * `MENTIONABLE` sets the option to require a user, role or snowflake as value
+* `NUMBER` sets the option to require a decimal (also known as a floating point) value
+* `ATTACHMENT` sets the option to require an attachment
 
 ### Choices
 
@@ -400,12 +401,13 @@ const data = new SlashCommandBuilder()
 	.setDescription('Replies with Pong!')
 	.addStringOption(option => option.setName('input').setDescription('Enter a string'))
 	.addIntegerOption(option => option.setName('int').setDescription('Enter an integer'))
-	.addNumberOption(option => option.setName('num').setDescription('Enter a number'))
 	.addBooleanOption(option => option.setName('choice').setDescription('Select a boolean'))
 	.addUserOption(option => option.setName('target').setDescription('Select a user'))
 	.addChannelOption(option => option.setName('destination').setDescription('Select a channel'))
 	.addRoleOption(option => option.setName('muted').setDescription('Select a role'))
-	.addMentionableOption(option => option.setName('mentionable').setDescription('Mention something'));
+	.addMentionableOption(option => option.setName('mentionable').setDescription('Mention something'))
+	.addNumberOption(option => option.setName('num').setDescription('Enter a number'))
+	.addAttachmentOption(option => option.setName('attachment').setDescription('Attach something'));
 ```
 
 You can `get()` these options from the `CommandInteractionOptionResolver` as shown below:
@@ -413,15 +415,16 @@ You can `get()` these options from the `CommandInteractionOptionResolver` as sho
 ```js
 const string = interaction.options.getString('input');
 const integer = interaction.options.getInteger('int');
-const number = interaction.options.getNumber('num');
 const boolean = interaction.options.getBoolean('choice');
 const user = interaction.options.getUser('target');
 const member = interaction.options.getMember('target');
 const channel = interaction.options.getChannel('destination');
 const role = interaction.options.getRole('muted');
 const mentionable = interaction.options.getMentionable('mentionable');
+const number = interaction.options.getNumber('num');
+const attachment = interaction.options.getAttachment('attachment');
 
-console.log([string, integer, boolean, user, member, channel, role, mentionable]);
+console.log(string, integer, boolean, user, member, channel, role, mentionable, number, attachment);
 ```
 
 ::: tip
