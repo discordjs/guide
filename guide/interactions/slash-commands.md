@@ -100,7 +100,7 @@ await rest.put(
 Application commands can have `options`. Think of these options as arguments to a function. You can specify them as shown below:
 
 ```js {6-9}
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
 	.setName('echo')
@@ -144,7 +144,7 @@ If you specify `choices` for an option, they'll be the **only** valid values use
 Specify them by using the `addChoice()` method from the slash command builder:
 
 ```js {10-12}
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
 	.setName('gif')
@@ -163,7 +163,7 @@ const data = new SlashCommandBuilder()
 Subcommands are available with the `.addSubcommand()` method:
 
 ```js {6-14}
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
 	.setName('info')
@@ -393,7 +393,7 @@ Interaction responses can use masked links (e.g. `[text](http://site.com)`) and 
 In this section, we'll cover how to access the values of a command's options. Let's assume you have a command that contains the following options:
 
 ```js {6-13}
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
 	.setName('ping')
