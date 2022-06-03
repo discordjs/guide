@@ -16,22 +16,22 @@ Guild application commands are only available in the guild they were created in,
 
 In this section, we'll be using a script that is usable in conjunction with the slash command handler from the [command handling](/creating-your-bot/command-handling.md) section.
 
-First off, install the [`@discordjs/rest`](https://github.com/discordjs/discord.js/tree/main/packages/rest) and [`discord-api-types`](https://github.com/discordjs/discord-api-types/) by running the following command in your terminal:
+First off, install [`@discordjs/rest`](https://github.com/discordjs/discord.js/tree/main/packages/rest) by running the following command in your terminal:
 
 :::: code-group
 ::: code-group-item npm
 ```sh:no-line-numbers
-npm install @discordjs/rest discord-api-types
+npm install @discordjs/rest
 ```
 :::
 ::: code-group-item yarn
 ```sh:no-line-numbers
-yarn add @discordjs/rest discord-api-types
+yarn add @discordjs/rest
 ```
 :::
 ::: code-group-item pnpm
 ```sh:no-line-numbers
-pnpm add @discordjs/rest discord-api-types
+pnpm add @discordjs/rest
 ```
 :::
 ::::
@@ -40,7 +40,7 @@ pnpm add @discordjs/rest discord-api-types
 
 ```js
 const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
+const { Routes } = require('discord.js');
 const { token } = require('./config.json');
 const fs = require('node:fs');
 
@@ -56,7 +56,7 @@ for (const file of commandFiles) {
 	commands.push(command.data.toJSON());
 }
 
-const rest = new REST({ version: '9' }).setToken(token);
+const rest = new REST({ version: '10' }).setToken(token);
 
 (async () => {
 	try {
@@ -96,7 +96,7 @@ await rest.put(
 Application commands can have `options`. Think of these options as arguments to a function. You can specify them as shown below:
 
 ```js {6-9}
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
 	.setName('echo')
@@ -118,21 +118,21 @@ The [slash command builder](/popular-topics/builders.md#slash-command-builders) 
 Refer to the Discord API documentation for detailed explanations on the [`SUB_COMMAND` and `SUB_COMMAND_GROUP` option types](https://discord.com/developers/docs/interactions/application-commands#subcommands-and-subcommand-groups).
 :::
 
-* `SUB_COMMAND` sets the option to be a subcommand
-* `SUB_COMMAND_GROUP` sets the option to be a subcommand group
-* `STRING` sets the option to require a string value
-* `INTEGER` sets the option to require an integer value
-* `BOOLEAN` sets the option to require a boolean value
-* `USER` sets the option to require a user or snowflake as value
-* `CHANNEL` sets the option to require a channel or snowflake as value
-* `ROLE` sets the option to require a role or snowflake as value
-* `MENTIONABLE` sets the option to require a user, role or snowflake as value
-* `NUMBER` sets the option to require a decimal (also known as a floating point) value
-* `ATTACHMENT` sets the option to require an attachment
+* `Subcommand` sets the option to be a subcommand
+* `SubcommandGroup` sets the option to be a subcommand group
+* `String` sets the option to require a string value
+* `Integer` sets the option to require an integer value
+* `Number` sets the option to require a decimal (also known as a floating point) value
+* `Boolean` sets the option to require a boolean value
+* `User` sets the option to require a user or snowflake as value
+* `Channel` sets the option to require a channel or snowflake as value
+* `Role` sets the option to require a role or snowflake as value
+* `Mentionable` sets the option to require a user, role or snowflake as value
+* `Attachment` sets the option to require an attachment
 
 ### Choices
 
-The `STRING` and `INTEGER` option types both can have `choices`. `choices` are a set of predetermined values users can pick from when selecting the option that contains them.
+The `String`, `Number` & `Integer` option types can have `choices`. `choices` are a set of predetermined values users can pick from when selecting the option that contains them.
 
 ::: warning
 If you specify `choices` for an option, they'll be the **only** valid values users can pick!
@@ -140,8 +140,8 @@ If you specify `choices` for an option, they'll be the **only** valid values use
 
 Specify them by using the `addChoices()` method from the slash command builder:
 
-```js {10-12}
-const { SlashCommandBuilder } = require('@discordjs/builders');
+```js {10-13}
+const { SlashCommandBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
 	.setName('gif')
@@ -150,11 +150,11 @@ const data = new SlashCommandBuilder()
 		option.setName('category')
 			.setDescription('The gif category')
 			.setRequired(true)
-			.addChoices(
+			.addChoices([	
 				{ name: 'Funny', value: 'gif_funny' },
 				{ name: 'Meme', value: 'gif_meme' },
 				{ name: 'Movie', value: 'gif_movie' },
-			));
+			]));
 ```
 
 ### Subcommands
@@ -162,7 +162,7 @@ const data = new SlashCommandBuilder()
 Subcommands are available with the `.addSubcommand()` method:
 
 ```js {6-14}
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
 	.setName('info')
@@ -196,11 +196,11 @@ client.on('interactionCreate', interaction => {
 });
 ```
 
-However, not every interaction is a slash command (e.g. `MessageComponent`s). Make sure to only receive slash commands by making use of the `CommandInteraction#isCommand()` method:
+However, not every interaction is a slash command (e.g. `MessageComponent`s). Make sure to only receive slash commands by making use of the `Interaction#isChatInputCommand()` method:
 
 ```js {2}
 client.on('interactionCreate', interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 	console.log(interaction);
 });
 ```
@@ -208,15 +208,15 @@ client.on('interactionCreate', interaction => {
 ### Responding to a command
 
 There are multiple ways of responding to a slash command, each of these are covered in the following segments.
-The most common way of sending a response is by using the `CommandInteraction#reply()` method:
+The most common way of sending a response is by using the `Interaction#reply()` method:
 
 ::: warning
-Initially an interaction token is only valid for three seconds, so that's the timeframe in which you are able to use the `CommandInteraction#reply()` method. Responses that require more time ("Deferred Responses") are explained later in this page.
+Initially an interaction token is only valid for three seconds, so that's the timeframe in which you are able to use the `Interaction#reply()` method. Responses that require more time ("Deferred Responses") are explained later in this page.
 :::
 
 ```js {1,4-6}
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
 		await interaction.reply('Pong!');
@@ -244,7 +244,7 @@ You may not always want everyone who has access to the channel to see a slash co
 
 ```js {5}
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
 		await interaction.reply({ content: 'Pong!', ephemeral: true });
@@ -269,7 +269,7 @@ Now when you run your command again, you should see something like this:
 
 ### Editing responses
 
-After you've sent an initial response, you may want to edit that response for various reasons. This can be achieved with the `CommandInteraction#editReply()` method:
+After you've sent an initial response, you may want to edit that response for various reasons. This can be achieved with the `Interaction#editReply()` method:
 
 ::: warning
 After the initial response, an interaction token is valid for 15 minutes, so this is the timeframe in which you can edit the response and send follow-up messages.
@@ -279,7 +279,7 @@ After the initial response, an interaction token is valid for 15 minutes, so thi
 const wait = require('node:timers/promises').setTimeout;
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
 		await interaction.reply('Pong!');
@@ -293,14 +293,14 @@ client.on('interactionCreate', async interaction => {
 
 As previously mentioned, you have three seconds to respond to an interaction before its token becomes invalid. But what if you have a command that performs a task which takes longer than three seconds before being able to reply?
 
-In this case, you can make use of the `CommandInteraction#deferReply()` method, which triggers the `<application> is thinking...` message and also acts as initial response. This allows you 15 minutes to complete your tasks before responding.
+In this case, you can make use of the `Interaction#deferReply()` method, which triggers the `<application> is thinking...` message and also acts as initial response. This allows you 15 minutes to complete your tasks before responding.
 <!--- here either display the is thinking message via vue-discord-message or place a screenshot -->
 
 ```js {7-9}
 const wait = require('node:timers/promises').setTimeout;
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
 		await interaction.deferReply();
@@ -322,7 +322,7 @@ await interaction.deferReply({ ephemeral: true });
 
 ### Follow-ups
 
-Replying to slash commands is great and all, but what if you want to send multiple responses instead of just one? Follow-up messages got you covered, you can use `CommandInteraction#followUp()` to send multiple responses:
+Replying to slash commands is great and all, but what if you want to send multiple responses instead of just one? Follow-up messages got you covered, you can use `Interaction#followUp()` to send multiple responses:
 
 ::: warning
 After the initial response, an interaction token is valid for 15 minutes, so this is the timeframe in which you can edit the response and send follow-up messages.
@@ -330,7 +330,7 @@ After the initial response, an interaction token is valid for 15 minutes, so thi
 
 ```js {6}
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
 		await interaction.reply('Pong!');
@@ -392,7 +392,7 @@ Interaction responses can use masked links (e.g. `[text](http://site.com)`) and 
 In this section, we'll cover how to access the values of a command's options. Let's assume you have a command that contains the following options:
 
 ```js {6-14}
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
 	.setName('ping')
@@ -404,7 +404,6 @@ const data = new SlashCommandBuilder()
 	.addChannelOption(option => option.setName('destination').setDescription('Select a channel'))
 	.addRoleOption(option => option.setName('muted').setDescription('Select a role'))
 	.addMentionableOption(option => option.setName('mentionable').setDescription('Mention something'))
-	.addNumberOption(option => option.setName('num').setDescription('Enter a number'))
 	.addAttachmentOption(option => option.setName('attachment').setDescription('Attach something'));
 ```
 
@@ -419,10 +418,9 @@ const member = interaction.options.getMember('target');
 const channel = interaction.options.getChannel('destination');
 const role = interaction.options.getRole('muted');
 const mentionable = interaction.options.getMentionable('mentionable');
-const number = interaction.options.getNumber('num');
 const attachment = interaction.options.getAttachment('attachment');
 
-console.log(string, integer, boolean, user, member, channel, role, mentionable, number, attachment);
+console.log([string, integer, boolean, user, member, channel, role, mentionable, attachment]);
 ```
 
 ::: tip
@@ -435,7 +433,7 @@ If you have a command that contains subcommands, you can parse them in a very si
 
 ```js {5-15}
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'info') {
 		if (interaction.options.getSubcommand() === 'user') {
@@ -459,7 +457,7 @@ client.on('interactionCreate', async interaction => {
 You _cannot_ delete an ephemeral message.
 :::
 
-In addition to replying to a slash command, you may also want to delete the initial reply. You can use `CommandInteraction#deleteReply()` for this:
+In addition to replying to a slash command, you may also want to delete the initial reply. You can use `Interaction#deleteReply()` for this:
 
 <!-- eslint-skip -->
 
@@ -468,7 +466,7 @@ await interaction.reply('Pong!');
 await interaction.deleteReply();
 ```
 
-Lastly, you may require the `Message` object of a reply for various reasons, such as adding reactions. You can use the `CommandInteraction#fetchReply()` method to fetch the `Message` instance of an initial response:
+Lastly, you may require the `Message` object of a reply for various reasons, such as adding reactions. You can use the `Interaction#fetchReply()` method to fetch the `Message` instance of an initial response:
 
 <!-- eslint-skip -->
 
@@ -491,7 +489,7 @@ The slash command permissions for guilds are only defaults and can be altered by
 You can use the `setDMPermission` method to control if a global command can be used in DMs. By default, all global commands can be used in DMs.
 
 ```js {6}
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
 	.setName('boop')
@@ -501,19 +499,18 @@ const data = new SlashCommandBuilder()
 
 ### Member permissions
 
-You can use the `setDefaultMemberPermissions` method to set the default permissions required by a member in order to run the command, setting it to `0` will prohibit anyone in a guild from using the command unless a specific overwrite is configured or the user has admin permissions.
+You can use the `ApplicationCommand#setDefaultMemberPermissions()` method to set the default permissions required by a member in order to run the command, setting it to `0` will prohibit anyone in a guild from using the command unless a specific overwrite is configured or the user has admin permissions.
 
 ::: tip
 If you want to learn more about the `|` bitwise OR operator you can check the [Wikipedia](https://en.wikipedia.org/wiki/Bitwise_operation#OR) and [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_OR) articles on the topic.
 :::
 
 ```js {9}
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { PermissionFlagsBits } = require('discord-api-types/v10');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
 const data = new SlashCommandBuilder()
 	.setName('ban')
-	.setDescription('Ban a member!')
+	.setDescription('Select a member and ban them (but not really).')
 	.addUserOption(option =>
 		option.setName('target').setDescription('The member to ban'))
 	.setDefaultMemberPermissions(PermissionFlagsBits.KickMembers | PermissionFlagsBits.BanMembers);

@@ -21,7 +21,7 @@
 				:command="true"
 			>upgrade</DiscordInteraction>
 		</template>
-		discord.js v13 has released and the guide has been updated!
+		discord.js v14 has released and the guide has been updated!
 		<span class="emoji-container">
 			<img class="emoji-image" title="tada" src="https://twemoji.maxcdn.com/v/13.1.0/72x72/1f389.png" alt="" />
 		</span>
@@ -39,11 +39,11 @@
 
 ## Pages
 
-All content has been updated to use discord.js v13 syntax. The v12 version of the guide can be found at [https://v12.discordjs.guide/](https://v12.discordjs.guide/).
+All content has been updated to use discord.js v14 syntax. The v12 version of the guide can be found at [https://v12.discordjs.guide/](https://v12.discordjs.guide/).
 
 ### New
 
-- [Updating from v12 to v13](/additional-info/changes-in-v13.md): A list of the changes from discord.js v12 to v13
+- [Updating from v13 to v14](/additional-info/changes-in-v13.md): A list of the changes from discord.js v13 to v14
 - [Slash commands](/interactions/slash-commands.md): Registering, replying to slash commands and permissions
 - [Buttons](/interactions/buttons.md): Building, sending, and receiving buttons
 - [Select menus](/interactions/select-menus.md): Building, sending, and receiving select menus
@@ -63,7 +63,7 @@ All content has been updated to use discord.js v13 syntax. The v12 version of th
 	<DiscordMessage profile="bot">
 		Thank you to all of those that contributed to the development of discord.js and the guide!
 		<span class="emoji-container">
-			<img class="emoji-image" title="heart" src="https://twemoji.maxcdn.com/v/13.1.0/72x72/2764.png" alt="" />
+			<img class="emoji-image" title="heart" src="https://twemoji.maxcdn.com/v/14.0.0/72x72/2764.png" alt="" />
 		</span>
 	</DiscordMessage>
 </DiscordMessages>

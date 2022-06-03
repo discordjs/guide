@@ -7,17 +7,17 @@ Here are the base files and code we'll be using:
 :::: code-group
 ::: code-group-item npm
 ```sh:no-line-numbers
-npm install @discordjs/rest discord-api-types
+npm install @discordjs/rest 
 ```
 :::
 ::: code-group-item yarn
 ```sh:no-line-numbers
-yarn add @discordjs/rest discord-api-types
+yarn add @discordjs/rest 
 ```
 :::
 ::: code-group-item pnpm
 ```sh:no-line-numbers
-pnpm add @discordjs/rest discord-api-types
+pnpm add @discordjs/rest 
 ```
 :::
 ::::
@@ -25,17 +25,17 @@ pnpm add @discordjs/rest discord-api-types
 :::: code-group
 ::: code-group-item index.js
 ```js
-const { Client, Intents } = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.once('ready', () => {
 	console.log('Ready!');
 });
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
 
@@ -52,12 +52,12 @@ client.login(token);
 ::: code-group-item deploy-commands.js
 ```js
 const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
+const { Routes } = require('discord.js');
 const { clientId, guildId, token } = require('./config.json');
 
 const commands = [];
 
-const rest = new REST({ version: '9' }).setToken(token);
+const rest = new REST({ version: '10' }).setToken(token);
 
 rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
 	.then(() => console.log('Successfully registered application commands.'))
@@ -91,30 +91,12 @@ discord-bot/
 
 Create a new folder named `commands`, which is where you'll store all of your commands.
 
-We'll be using utility methods from the [`@discordjs/builders`](https://github.com/discordjs/discord.js/tree/main/packages/builders) package to build the slash command data, so open your terminal and install it.
+We'll be using utility methods from the package to build the slash command data.
 
-:::: code-group
-::: code-group-item npm
-```sh:no-line-numbers
-npm install @discordjs/builders
-```
-:::
-::: code-group-item yarn
-```sh:no-line-numbers
-yarn add @discordjs/builders
-```
-:::
-::: code-group-item pnpm
-```sh:no-line-numbers
-pnpm add @discordjs/builders
-```
-:::
-::::
-
-Next, create a `commands/ping.js` file for your ping command:
+First, create a commands/ping.js file for your ping command:
 
 ```js
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -138,13 +120,13 @@ If you need to access your client instance from inside a command file, you can a
 
 In your `index.js` file, make these additions:
 
-```js {1-2,7}
+```js {1-2,8}
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Intents } = require('discord.js');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
 ```
@@ -182,7 +164,7 @@ Use the same approach for your `deploy-commands.js` file, but instead `.push()` 
 const fs = require('node:fs');
 const path = require('node:path');
 const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
+const { Routes } = require('discord.js');
 const { clientId, guildId, token } = require('./config.json');
 
 const commands = [];
@@ -202,7 +184,7 @@ You can use the `client.commands` Collection setup to retrieve and execute your 
 
 ```js {4-13}
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	const command = client.commands.get(interaction.commandName);
 

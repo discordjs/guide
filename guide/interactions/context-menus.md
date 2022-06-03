@@ -11,20 +11,20 @@ This page is a follow-up to the [interactions (slash commands) page](/interactio
 To create a context menu you construct a new `ContextMenuCommandBuilder`. You can then set the type of the context menu (user or message) using the `setType()` method.
 
 ```js
-const { ContextMenuCommandBuilder } = require('@discordjs/builders');
+const { ContextMenuCommandBuilder, ApplicationCommandType } = require('discord.js');
 
 const data = new ContextMenuCommandBuilder()
 	.setName('echo')
-	.setType('USER');
+	.setType(ApplicationCommandType.User);
 ```
 
 ## Receiving context menu command interactions
 
-Context Menus are received via an interaction. You can check if a given interaction is a context menu by invoking the `isContextMenu()` method, you can use the `isMessageContextMenu()` and `isUserContextMenu()` methods to check for the specific type of context menu interaction:
+Context Menus are received via an interaction. You can check if a given interaction is a context menu by invoking the `isContextMenuCommand()` method, you can use the `isMessageContextMenuCommand()` and `isUserContextMenuCommand()` methods to check for the specific type of context menu interaction:
 
 ```js {2}
 client.on('interactionCreate', interaction => {
-	if (!interaction.isUserContextMenu()) return;
+	if (!interaction.isUserContextMenuCommand()) return;
 	console.log(interaction);
 });
 ```
@@ -35,7 +35,7 @@ You can get the targeted user by accessing the `targetUser` or `targetMember` pr
 
 ```js {4}
 client.on('interactionCreate', interaction => {
-	if (!interaction.isUserContextMenu()) return;
+	if (!interaction.isUserContextMenuCommand()) return;
 	// Get the User's username from context menu
 	const name = interaction.targetUser.username;
 	console.log(name);

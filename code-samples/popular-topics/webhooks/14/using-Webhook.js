@@ -1,11 +1,11 @@
-const { Client, Intents, MessageEmbed } = require('discord.js');
+const { Client, GatewayIntentBits, EmbedBuilder } = require('discord.js');
 const { token } = require('./config.json');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-const embed = new MessageEmbed()
+const embed = new EmbedBuilder()
 	.setTitle('Some Title')
-	.setColor('#0099ff');
+	.setColor(0x00FFFF);
 
 client.once('ready', async () => {
 	const channel = client.channels.cache.get('222197033908436994');

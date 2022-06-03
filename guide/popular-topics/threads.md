@@ -133,10 +133,12 @@ To create a private thread, use <DocsLink path="class/ThreadManager?scrollTo=cre
 <!-- eslint-skip -->
 
 ```js {4}
+const { ChannelType } = require('discord.js');
+
 const thread = await channel.threads.create({
 	name: 'mod-talk',
 	autoArchiveDuration: 60,
-	type: 'GUILD_PRIVATE_THREAD',
+	type: ChannelType.GuildPrivateThread,
 	reason: 'Needed a separate thread for moderation',
 });
 

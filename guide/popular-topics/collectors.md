@@ -157,12 +157,14 @@ As before, this works similarly to the message component collector, except it is
 Unlike other Promise-based collectors, this method will only ever collect one interaction that passes the filter. If no interactions are collected before the time runs out, the Promise will reject. This behavior aligns with Discord's requirement that actions should immediately receive a response. In this example, you will use `.deferUpdate()` on all interactions in the filter.
 
 ```js
+const { ComponentType } = require('discord.js');
+
 const filter = i => {
 	i.deferUpdate();
 	return i.user.id === interaction.user.id;
 };
 
-message.awaitMessageComponent({ filter, componentType: 'SELECT_MENU', time: 60000 })
+message.awaitMessageComponent({ filter, componentType: ComponentType.SelectMenu, time: 60000 })
 	.then(interaction => interaction.editReply(`You selected ${interaction.values.join(', ')}!`))
 	.catch(err => console.log(`No interactions were collected.`));
 ```

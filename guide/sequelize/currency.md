@@ -201,10 +201,10 @@ Create an `app.js` file in the base directory with the following skeleton code t
 
 ```js
 const { Op } = require('sequelize');
-const { Collection, Client, Formatters, Intents } = require('discord.js');
+const { Collection, Client, Formatters, GatewayIntentBits } = require('discord.js');
 const { Users, CurrencyShop } = require('./dbObjects.js');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 const currency = new Collection();
 
 client.once('ready', async () => {
@@ -217,7 +217,7 @@ client.on('messageCreate', async message => {
 });
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
 	// ...
@@ -231,7 +231,7 @@ Nothing special about this skeleton. You import the Users and CurrencyShop model
 ### Helper methods
 
 ```js {4-25}
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 const currency = new Collection();
 
 Reflect.defineProperty(currency, 'add', {
@@ -277,7 +277,7 @@ In the ready event, sync the currency collection with the database for easy acce
 
 ```js {7-9}
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
 

@@ -19,10 +19,10 @@ One of the first things many people want to know is how to react with emojis, bo
 Here's the base code we'll be using:
 
 ```js
-const { Client, Intents } = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
 
 const client = new Client({
-	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
+	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageReactions],
 });
 
 client.once('ready', () => {
@@ -55,7 +55,7 @@ To react with an emoji, you need to use the `message.react()` method. Once you h
 
 ```js {6-9}
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
 
@@ -102,7 +102,7 @@ This format is essentially the name of the emoji, followed by its ID. Copy & pas
 
 ```js {6-9}
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
 
@@ -184,7 +184,7 @@ If you just put one `message.react()` under another, it won't always react in or
 
 ```js {6-12}
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
 
@@ -255,7 +255,7 @@ Luckily, there are two easy solutions to this. The first would be to chain `.the
 
 ```js {8-11}
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
 
@@ -273,7 +273,7 @@ The other would be to use the `async`/`await` keywords.
 
 ```js {9-15}
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
 
@@ -451,18 +451,18 @@ message.awaitReactions({ filter, max: 1, time: 60000, errors: ['time'] })
 Messages sent before your bot started are uncached unless you fetch them first. By default, the library does not emit client events if the data received and cached is not sufficient to build fully functional objects.
 Since version 12, you can change this behavior by activating partials. For a full explanation of partials see [this page](/popular-topics/partials.md).
 
-Make sure you enable partial structures for `MESSAGE`, `CHANNEL`, and `REACTION` when instantiating your client if you want reaction events on uncached messages for both server and direct message channels. If you do not want to support direct message channels, you can exclude `CHANNEL`.
+Make sure you enable partial structures for `Message`, `Channel`, and `Reaction` when instantiating your client if you want reaction events on uncached messages for both server and direct message channels. If you do not want to support direct message channels, you can exclude `Channel`.
 
 ::: tip
-If you use [gateway intents](/popular-topics/intents.md) but can't or don't want to use the privileged `GUILD_PRESENCES` intent, you additionally need the `USER` partial.
+If you use [gateway intents](/popular-topics/intents.md) but can't or don't want to use the privileged `GuildPresences` intent, you additionally need the `User` partial.
 :::
 
 ```js
-const { Client, Intents } = require('discord.js');
+const { Client, GatewayIntentBits, Partials } = require('discord.js');
 
 const client = new Client({
-	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
-	partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
+	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMessageReactions],
+	partials: [Partials.Message, Partials.Channel, Partials.Reaction],
 });
 
 client.on('messageReactionAdd', async (reaction, user) => {

@@ -39,17 +39,17 @@ pnpm add @napi-rs/canvas
 Here is the base code you'll be using to get started:
 
 ```js
-const { Client, Intents, MessageAttachment } = require('discord.js');
+const { Client, GatewayIntentBits, AttachmentBuilder } = require('discord.js');
 const Canvas = require('@napi-rs/canvas');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.once('ready', () => {
 	console.log('Ready!');
 });
 
 client.on('interactionCreate', interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'profile') {
 		// ...
@@ -75,7 +75,7 @@ After importing the @napi-rs/canvas module and initializing it, you should load 
 
 ```js {5-8}
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'profile') {
 		// Create a 700x250 pixel canvas and get its context
@@ -106,7 +106,7 @@ client.on('interactionCreate', async interaction => {
 	context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
 	// Use the helpful Attachment class structure to process the file for you
-	const attachment = new MessageAttachment(canvas.toBuffer('image/png'), 'profile-image.png');
+	const attachment = new AttachmentBuilder(canvas.toBuffer('image/png'), { name: 'profile-image.png' });
 
 	interaction.reply({ files: [attachment] });
 });

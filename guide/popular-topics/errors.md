@@ -95,14 +95,16 @@ message.delete().catch(error => {
 Or using Constants:
 
 ```js
+const { RESTJSONErrorCodes } = require('discord.js');
+
 message.delete().catch(error => {
-	if (error.code !== Discord.Constants.APIErrors.UNKNOWN_MESSAGE) {
+	if (error.code !== RESTJSONErrorCodes.UnknownMessage) {
 		console.error('Failed to delete the message:', error);
 	}
 });
 ```
 
-You can find a list of constants [here](https://discord.js.org/#/docs/discord.js/stable/typedef/APIError).
+You can find a list of constants [here](https://discord-api-types.dev/api/discord-api-types-rest/common/enum/RESTJSONErrorCodes).
 
 ### Method
 
@@ -139,10 +141,10 @@ This error originates from the client attempting to execute an action that requi
 This error is also caused by attempting to use a client that has not logged in. Both of the examples below will throw errors.
 
 ```js
-const { Client, Intents } = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
 
 // Should not be here!
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 module.exports = interaction => {
 	const id = interaction.options.getString('id');
@@ -154,9 +156,9 @@ module.exports = interaction => {
 ```
 
 ```js
-const { Client, Intents } = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.on('interactionCreate', someHandlerFunction);
 
@@ -165,14 +167,6 @@ client.login('your-token-goes-here');
 client.users.fetch('myId').then(someInitFunction);
 ```
 
-### MessageEmbed field names may not be empty.
-
-This error originates from calling `MessageEmbed#addFields()` with a field object's `name` property as an empty string. If you would like the title to be empty for a reason, you should use a zero width space, which can be input as `\u200b`.
-
-### MessageEmbed field values may not be empty.
-
-In conjunction with the previous error, this error results from calling `MessageEmbed#addFields()` with a field object's `value` property as an empty string. You can use a zero-width space if you would like this blank.
-
 ### The messages must be an Array, Collection, or number.
 
 This error originates from an invalid call to `bulkDelete()`. Make sure you are inputting a valid Array or Collection of messages or a valid number.
@@ -180,11 +174,11 @@ This error originates from an invalid call to `bulkDelete()`. Make sure you are 
 ### Members didn't arrive in time.
 
 This error happens when fetching multiple members via `GuildMemberManager#fetch()` and:
-- The `GUILD_MEMBERS` intent is not specified
+- The `GuildMembers` intent is not specified
 - The internet connection is somewhat bad
 - The amount of members fetched is huge (about 50 thousand and upwards)
 
-Ensure the `GUILD_MEMBERS` intent is provided. If this intent is provided, then you may wish to consider moving your bot to a location with better internet, such as a VPS. If this does not work for you, you will have to manually change the hardcoded member fetching timeout in the source code.
+Ensure the `GuildMembers` intent is provided. If this intent is provided, then you may wish to consider moving your bot to a location with better internet, such as a VPS. If this does not work for you, you will have to manually change the hardcoded member fetching timeout in the source code.
 
 ### MaxListenersExceededWarning: Possible EventEmitter memory leak detected...
 

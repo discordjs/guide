@@ -2,10 +2,10 @@
 
 ## Legend
 
-* `client` is a placeholder for the <DocsLink path="class/Client" /> object, such as `const client = new Client({ intents: [Intents.FLAGS.GUILDS] });`.
+* `client` is a placeholder for the <DocsLink path="class/Client" /> object, such as `const client = new Client({ intents: [GatewayIntentBits.Guilds] });`.
 * `interaction` is a placeholder for the <DocsLink path="class/Interaction" /> object, such as `client.on('interactionCreate', interaction => { ... });`.
 * `guild` is a placeholder for the <DocsLink path="class/Guild" /> object, such as `interaction.guild` or `client.guilds.cache.get('id')`.
-* `voiceChannel` is a placeholder for the <DocsLink path="class/VoiceChannel" /> object, such as `message.member.voice.channel`
+* `voiceChannel` is a placeholder for the <DocsLink path="class/VoiceChannel" /> object, such as `interaction.member.voice.channel`
 
 For a more detailed explanation of the notations commonly used in this guide, the docs, and the support server, see [here](/additional-info/notation.md).
 
@@ -29,7 +29,7 @@ guild.members.unban(id);
 Because you cannot ping a user who isn't in the server, you have to pass in the user id. To do this, we use a <DocsLink path="typedef/CommandInteractionOption" />. See [here](/interactions/slash-commands.html#parsing-options) for more information on this topic.
 :::
 
-### How do I kick a user?
+### How do I kick a guild member?
 
 ```js
 const member = interaction.options.getMember('target');
@@ -84,9 +84,11 @@ client.user.setActivity('activity');
 ### How do I set my status to "Watching/Listening to/Competing in ..."?
 
 ```js
-client.user.setActivity('activity', { type: 'WATCHING' });
-client.user.setActivity('activity', { type: 'LISTENING' });
-client.user.setActivity('activity', { type: 'COMPETING' });
+const { ActivityType } = require('discord.js');
+
+client.user.setActivity('activity', { type: ActivityType.Watching });
+client.user.setActivity('activity', { type: ActivityType.Listening });
+client.user.setActivity('activity', { type: ActivityType.Competing });
 ```
 
 ::: tip

@@ -18,16 +18,15 @@ member.roles.cache.some(role => role.name === 'Mod');
 // returns true if any of the member's roles is exactly named "Mod"
 ```
 
-If you want to enhance this system slightly, you can include the guild owner by comparing the executing member's ID with `message.guild.ownerId`.
+If you want to enhance this system slightly, you can include the guild owner by comparing the executing member's ID with `interaction.guild.ownerId`.
 
-To include permission checks like `ADMINISTRATOR` or `MANAGE_GUILD`, keep reading as we will cover Discord Permissions and all their intricacies in the following sections.
+To include permission checks like `Administrator` or `ManageGuild`, keep reading as we will cover Discord Permissions and all their intricacies in the following sections.
 
 ## Terminology
 
 * Permission: The ability to execute a certain action in Discord
 * Overwrite: Rule on a channel to modify the permissions for a member or role
-* Bit field: Binary representation of Discord permissions 
-* Flag: Human readable string in MACRO_CASE (e.g., `'KICK_MEMBERS'`) that refers to a position in the permission bit field. You can find a list of all valid flags on the <DocsLink path="class/Permissions?scrollTo=s-FLAGS" /> page
+* BitField: Binary representation of Discord permissions 
 * Base Permissions: Permissions for roles the member has, set on the guild level
 * Final Permissions: Permissions for a member or role, after all overwrites are applied
 
@@ -42,15 +41,15 @@ You can provide permission decimals wherever we use flag literals in this guide.
 Base permissions are set on roles, not the guild member itself. To change them, you access a Role object (for example via `member.roles.cache.first()` or `guild.roles.cache.random()`) and use the `.setPermissions()` method. This is how you'd change the base permissions for the `@everyone` role, for example:
 
 ```js
-const { Permissions } = require('discord.js');
+const { PermissionsBitField } = require('discord.js');
 
-guild.roles.everyone.setPermissions([Permissions.FLAGS.SEND_MESSAGES, Permissions.FLAGS.VIEW_CHANNEL]);
+guild.roles.everyone.setPermissions([PermissionsBitField.Flags.SendMessages, PermissionsBitField.Flags.ViewChannel]);
 ```
 
 Any permission not referenced in the flag array or bit field is not granted to the role. 
 
 ::: tip
-Note that flag names are literal. Although `VIEW_CHANNEL` grants access to view multiple channels, the permission flag is still called `VIEW_CHANNEL` in singular form.
+Note that flag names are literal. Although `ViewChannel` grants access to view multiple channels, the permission flag is still called `ViewChannel` in singular form.
 :::
 
 ### Creating a role with permissions
@@ -58,27 +57,27 @@ Note that flag names are literal. Although `VIEW_CHANNEL` grants access to view 
 Alternatively you can provide permissions as a property of the <DocsLink path="typedef/CreateRoleOptions" /> typedef during role creation as an array of flag strings or a permission number:
 
 ```js
-const { Permissions } = require('discord.js');
+const { PermissionsBitField } = require('discord.js');
 
-guild.roles.create({ name: 'Mod', permissions: [Permissions.FLAGS.MANAGE_MESSAGES, Permissions.FLAGS.KICK_MEMBERS] });
+guild.roles.create({ name: 'Mod', permissions: [PermissionsBitField.Flags.SendMessages, PermissionsBitField.Flags.KickMembers] });
 ```
 
 ### Checking member permissions
 
-To know if one of a member's roles has a permission enabled, you can use the `.has()` method on <DocsLink path="class/GuildMember?scrollTo=permissions" /> and provide a permission flag, array, or number to check for. You can also specify if you want to allow the `ADMINISTRATOR` permission or the guild owner status to override this check with the following parameters.
+To know if one of a member's roles has a permission enabled, you can use the `.has()` method on <DocsLink path="class/GuildMember?scrollTo=permissions" /> and provide a permission flag, array, or number to check for. You can also specify if you want to allow the `Administrator` permission or the guild owner status to override this check with the following parameters.
 
 ```js
-const { Permissions } = require('discord.js');
+const { PermissionsBitField } = require('discord.js');
 
-if (member.permissions.has(Permissions.FLAGS.KICK_MEMBERS)) {
+if (member.permissions.has(PermissionsBitField.Flags.KickMembers)) {
 	console.log('This member can kick');
 }
 
-if (member.permissions.has([Permissions.FLAGS.KICK_MEMBERS, Permissions.FLAGS.BAN_MEMBERS])) {
+if (member.permissions.has([PermissionsBitField.Flags.KickMembers, PermissionsBitField.Flags.BanMembers])) {
 	console.log('This member can kick and ban');
 }
 
-if (member.permissions.has(Permissions.FLAGS.KICK_MEMBERS, false)) {
+if (member.permissions.has(PermissionsBitField.Flags.KickMembers, false)) {
 	console.log('This member can kick without allowing admin to override');
 }
 ```
@@ -106,7 +105,7 @@ To add a permission overwrite for a role or guild member, you access the channel
 Let's add an overwrite to lock everyone out of the channel. The guild ID doubles as the role id for the default role `@everyone` as demonstrated below:
 
 ```js
-channel.permissionOverwrites.create(channel.guild.roles.everyone, { VIEW_CHANNEL: false });
+channel.permissionOverwrites.create(channel.guild.roles.everyone, { ViewChannel: false });
 ```
 
 Any permission flags not specified get neither an explicit allow nor deny overwrite and will use the base permission unless another role has an explicit overwrite set.
@@ -114,16 +113,18 @@ Any permission flags not specified get neither an explicit allow nor deny overwr
 You can also provide an array of overwrites during channel creation, as shown below:
 
 ```js
+const { ChannelType, PermissionsBitField } = require('discord.js');
+
 guild.channels.create('new-channel', {
-	type: 'GUILD_TEXT',
+	type: ChannelType.GuildText,
 	permissionOverwrites: [
 		{
-			id: message.guild.id,
-			deny: [Permissions.FLAGS.VIEW_CHANNEL],
+			id: interaction.guild.id,
+			deny: [PermissionsBitField.Flags.ViewChannel],
 		},
 		{
-			id: message.author.id,
-			allow: [Permissions.FLAGS.VIEW_CHANNEL],
+			id: interaction.user.id,
+			allow: [PermissionsBitField.Flags.ViewChannel],
 		},
 	],
 });
@@ -135,10 +136,10 @@ To edit permission overwrites on the channel with a provided set of new overwrit
 
 ```js
 // edits overwrites to disallow everyone to view the channel
-channel.permissionOverwrites.edit(guild.id, { VIEW_CHANNEL: false });
+channel.permissionOverwrites.edit(guild.id, { ViewChannel: false });
 
 // edits overwrites to allow a user to view the channel
-channel.permissionOverwrites.edit(user.id, { VIEW_CHANNEL: true });
+channel.permissionOverwrites.edit(user.id, { ViewChannel: true });
 ```
 
 ### Replacing overwrites
@@ -153,11 +154,11 @@ channel.permissionOverwrites.set(otherChannel.permissionOverwrites.cache);
 channel.permissionOverwrites.set([
 	{
 		id: guild.id,
-		deny: [Permissions.FLAGS.VIEW_CHANNEL],
+		deny: [PermissionsBitField.Flags.ViewChannel],
 	},
 	{
 		id: user.id,
-		allow: [Permissions.FLAGS.VIEW_CHANNEL],
+		allow: [PermissionsBitField.Flags.ViewChannel],
 	},
 ]);
 ```
@@ -167,8 +168,8 @@ channel.permissionOverwrites.set([
 To remove the overwrite for a specific member or role, you can use the `.delete()` method.
 
 ```js
-// deleting the channel's overwrite for the message author
-channel.permissionOverwrites.delete(message.author.id);
+// deleting the channel's overwrite for the user who interacted
+channel.permissionOverwrites.delete(interaction.user.id);
 ```
 
 ### Syncing with a category
@@ -195,24 +196,24 @@ To check your bot's permissions in the channel the command was used in, you coul
 
 ```js
 // final permissions for a guild member using permissionsFor
-const botPermissionsFor = channel.permissionsFor(guild.me);
+const botPermissionsFor = channel.permissionsFor(guild.members.me);
 
 // final permissions for a guild member using permissionsIn
-const botPermissionsIn = guild.me.permissionsIn(channel);
+const botPermissionsIn = guild.members.me.permissionsIn(channel);
 
 // final permissions for a role
 const rolePermissions = channel.permissionsFor(role);
 ```
 
 ::: warning
-The `.permissionsFor()` and `.permissionsIn()` methods return a Permissions object with all permissions set if the member or role has the global `ADMINISTRATOR` permission and does not take overwrites into consideration in this case. Using the second parameter of the `.has()` method as described further down in the guide will not allow you to check without taking `ADMINISTRATOR` into account here!
+The `.permissionsFor()` and `.permissionsIn()` methods return a Permissions object with all permissions set if the member or role has the global `ADMINISTRATOR` permission and does not take overwrites into consideration in this case. Using the second parameter of the `.has()` method as described further down in the guide will not allow you to check without taking `Administrator` into account here!
 :::
 
 If you want to know how to work with the returned Permissions objects, keep reading as this will be our next topic.
 
 ## The Permissions object
 
-The <DocsLink path="class/Permissions" /> object is a discord.js class containing a permissions bit field and a bunch of utility methods to manipulate it easily.
+The <DocsLink path="class/PermissionsBitField" /> object is a discord.js class containing a permissions bit field and a bunch of utility methods to manipulate it easily.
 Remember that using these methods will not manipulate permissions, but rather create a new instance representing the changed bit field.
 
 ### Displaying permission flags
@@ -222,7 +223,7 @@ discord.js provides a `toArray()` method, which can be used to convert a `Permis
 ```js
 const memberPermissions = member.permissions.toArray();
 const rolePermissions = role.permissions.toArray();
-// output: ['SEND_MESSAGES', 'ADD_REACTIONS', 'CHANGE_NICKNAME', ...]
+// output: ['SendMessages', 'AddReactions', 'ChangeNickname', ...]
 ```
 
 ::: tip 
@@ -235,9 +236,9 @@ Additionally, you can serialize the Permissions object's underlying bit field by
 const memberPermissions = member.permissions.serialize();
 const rolePermissions = role.permissions.serialize();
 /* output: {
-SEND_MESSAGES: true,
-ADD_REACTIONS: true,
-BAN_MEMBERS: false,
+SendMessages: true,
+AddReactions: true,
+BanMembers: false,
 ...
 }
 */
@@ -249,74 +250,74 @@ Some methods and properties in discord.js return permission decimals rather than
 However, you can pass these decimals to the Permissions constructor to convert them, as shown below.
 
 ```js
-const { Permissions } = require('discord.js');
+const { PermissionsBitField } = require('discord.js');
 
-const permissions = new Permissions(268550160n);
+const permissions = new PermissionsBitField(268550160n);
 ```
 
 You can also use this approach for other <DocsLink path="typedef/PermissionResolvable" />s like flag arrays or flags.
 
 ```js
-const { Permissions } = require('discord.js');
+const { PermissionsBitField } = require('discord.js');
 
 const flags = [
-	Permissions.FLAGS.MANAGE_CHANNELS,
-	Permissions.FLAGS.EMBED_LINKS,
-	Permissions.FLAGS.ATTACH_FILES,
-	Permissions.FLAGS.READ_MESSAGE_HISTORY,
-	Permissions.FLAGS.MANAGE_ROLES,
+	PermissionsBitField.ViewChannels,
+	PermissionsBitField.EmbedLinks,
+	PermissionsBitField.AttachFiles,
+	PermissionsBitField.ReadMessageHistory,
+	PermissionsBitField.ManageRoles,
 ];
 
-const permissions = new Permissions(flags);
+const permissions = new PermissionsBitField(flags);
 ```
 
 ### Checking for permissions
 
 The Permissions object features the `.has()` method, allowing an easy way to check flags in a Permissions bit field.
-The `.has()` method takes two parameters: the first being either a permission number, single flag, or an array of permission numbers and flags, the second being a boolean, indicating if you want to allow the `ADMINISTRATOR` permission to override (defaults to `true`).
+The `.has()` method takes two parameters: the first being either a permission number, single flag, or an array of permission numbers and flags, the second being a boolean, indicating if you want to allow the `Administrator` permission to override (defaults to `true`).
 
-Let's say you want to know if the decimal bit field representation `268550160` has `MANAGE_CHANNELS` referenced:
+Let's say you want to know if the decimal bit field representation `268550160` has `ManageChannels` referenced:
 
 ```js
-const { Permissions } = require('discord.js');
+const { PermissionsBitField } = require('discord.js');
 
-const bitPermissions = new Permissions(268550160n);
+const bitPermissions = new PermissionsBitField(268550160n);
 
-console.log(bitPermissions.has(Permissions.FLAGS.MANAGE_CHANNELS));
+console.log(bitPermissions.has(PermissionsBitField.Flags.ManageChannels));
 // output: true
 
-console.log(bitPermissions.has([Permissions.FLAGS.MANAGE_CHANNELS, Permissions.FLAGS.EMBED_LINKS]));
+console.log(bitPermissions.has([PermissionsBitField.Flags.ManageChannels, PermissionsBitField.Flags.EmbedLinks]));
 // output: true
 
-console.log(bitPermissions.has([Permissions.FLAGS.MANAGE_CHANNELS, Permissions.FLAGS.KICK_MEMBERS]));
+console.log(bitPermissions.has([PermissionsBitField.Flags.ManageChannels, PermissionsBitField.Flags.KickMembers]));
 // output: false
 
-const flagsPermissions = new Permissions([
-	Permissions.FLAGS.MANAGE_CHANNELS,
-	Permissions.FLAGS.EMBED_LINKS,
-	Permissions.FLAGS.ATTACH_FILES,
-	Permissions.FLAGS.READ_MESSAGE_HISTORY,
-	Permissions.FLAGS.MANAGE_ROLES,
+const flagsPermissions = new PermissionsBitField([
+	PermissionsBitField.Flags.ManageChannels,
+	PermissionsBitField.Flags.EmbedLinks,
+	PermissionsBitField.Flags.AttachFiles,
+	PermissionsBitField.Flags.ReadMessageHistory,
+	PermissionsBitField.Flags.ManageRoles,
 ]);
 
-console.log(flagsPermissions.has(Permissions.FLAGS.MANAGE_CHANNELS));
+console.log(flagsPermissions.has(PermissionsBitField.Flags.ManageChannels));
 // output: true
 
-console.log(flagsPermissions.has([Permissions.FLAGS.MANAGE_CHANNELS, Permissions.FLAGS.EMBED_LINKS]));
+console.log(flagsPermissions.has([PermissionsBitField.Flags.ManageChannels, PermissionsBitField.Flags.EmbedLinks]));
 // output: true
 
-console.log(flagsPermissions.has([Permissions.FLAGS.MANAGE_CHANNELS, Permissions.FLAGS.KICK_MEMBERS]));
+console.log(flagsPermissions.has([PermissionsBitField.Flags.ManageChannels, PermissionsBitField.Flags.KickMembers]));
 // output: false
 
-const adminPermissions = new Permissions(Permissions.FLAGS.ADMINISTRATOR);
+const adminPermissions = new PermissionsBitField(PermissionsBitField.Flags.Administrator);
 
-console.log(adminPermissions.has(Permissions.FLAGS.MANAGE_CHANNELS));
+console.log(adminPermissions.has(PermissionsBitField.Flags.ManageChannels));
 // output: true
 
-console.log(adminPermissions.has(Permissions.FLAGS.MANAGE_CHANNELS, true));
+console.log(adminPermissions.has(PermissionsBitField.Flags.ManageChannels, true));
 // output: true
 
-console.log(adminPermissions.has(Permissions.FLAGS.MANAGE_CHANNELS, false));
+console.log(adminPermissions.has(PermissionsBitField.Flags.ManageChannels, false));
 // output: false
 ```
 
@@ -325,25 +326,25 @@ console.log(adminPermissions.has(Permissions.FLAGS.MANAGE_CHANNELS, false));
 The Permissions object enables you to easily add or remove individual permissions from an existing bit field without worrying about bitwise operations. Both `.add()` and `.remove()` can take a single permission flag or number, an array of permission flags or numbers, or multiple permission flags or numbers as multiple parameters.
 
 ```js
-const { Permissions } = require('discord.js');
+const { PermissionsBitField } = require('discord.js');
 
 const permissions = new Permissions([
-	Permissions.FLAGS.VIEW_CHANNEL,
-	Permissions.FLAGS.EMBED_LINKS,
-	Permissions.FLAGS.ATTACH_FILES,
-	Permissions.FLAGS.READ_MESSAGE_HISTORY,
-	Permissions.FLAGS.MANAGE_ROLES,
+	PermissionsBitField.Flags.ViewChannel,
+	PermissionsBitField.Flags.EmbedLinks,
+	PermissionsBitField.Flags.AttachFiles,
+	PermissionsBitField.Flags.ReadMessageHistory,
+	PermissionsBitField.Flags.ManageRoles,
 ]);
 
-console.log(permissions.has(Permissions.FLAGS.KICK_MEMBERS));
+console.log(permissions.has(PermissionsBitField.Flags.KickMembers));
 // output: false
 
-permissions.add(Permissions.FLAGS.KICK_MEMBERS);
-console.log(permissions.has(Permissions.FLAGS.KICK_MEMBERS));
+permissions.add(PermissionsBitField.Flags.KickMembers);
+console.log(permissions.has(PermissionsBitField.Flags.KickMembers));
 // output: true
 
-permissions.remove(Permissions.FLAGS.KICK_MEMBERS);
-console.log(permissions.has(Permissions.FLAGS.KICK_MEMBERS));
+permissions.remove(PermissionsBitField.Flags.KickMembers);
+console.log(permissions.has(PermissionsBitField.Flags.KickMembers));
 // output: false
 ```
 

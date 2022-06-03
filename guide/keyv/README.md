@@ -109,10 +109,10 @@ This section will still work with any provider supported by Keyv. We recommend P
 
 ```js
 const Keyv = require('keyv');
-const { Client, Intents } = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
 const { globalPrefix, token } = require('./config.json');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 const prefixes = new Keyv('sqlite://path/to.sqlite');
 ```
 

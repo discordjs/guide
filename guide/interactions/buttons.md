@@ -14,22 +14,22 @@ Buttons are part of the `MessageComponent` class, which can be sent via messages
 You can have a maximum of five `ActionRow`s per message, and five buttons within an `ActionRow`.
 :::
 
-To create a button, use the `MessageActionRow()` and `MessageButton()` builder functions and then pass the resulting object to `CommandInteraction#reply()` as `InteractionReplyOptions`:
+To create a button, use the `ActionRowBuilder()` and `ButtonBuilder()` functions and then pass the resulting object to `ChatInputCommandInteraction#reply()` as `InteractionReplyOptions`:
 
 ```js {1,7-13,15}
-const { MessageActionRow, MessageButton } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-		const row = new MessageActionRow()
-			.addComponents(
-				new MessageButton()
+		const row = new ActionRowBuilder()
+			.addComponents([
+				new ButtonBuilder()
 					.setCustomId('primary')
 					.setLabel('Primary')
-					.setStyle('PRIMARY'),
-			);
+					.setStyle(ButtonStyle.Primary),
+			]);
 
 		await interaction.reply({ content: 'Pong!', components: [row] });
 	}
@@ -59,19 +59,19 @@ Restart your bot and then send the command to a channel your bot has access to. 
 You can also send message components within an ephemeral response or alongside message embeds.
 
 ```js {1,12-16,18}
-const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-		const row = new MessageActionRow()
-			.addComponents(
+		const row = new ActionRowBuilder()
+			.addComponents([
 				// ...
-			);
+			]);
 
-		const embed = new MessageEmbed()
-			.setColor('#0099ff')
+		const embed = new EmbedBuilder()
+			.setColor(0x0099FF)
 			.setTitle('Some title')
 			.setURL('https://discord.js.org')
 			.setDescription('Some description here');
@@ -113,10 +113,10 @@ client.on('interactionCreate', async interaction => {
 If you want to prevent a button from being used, but not remove it from the message, you can disable it with the `setDisabled()` method:
 
 ```js {5}
-const button = new MessageButton()
+const button = new ButtonBuilder()
 	.setCustomId('primary')
 	.setLabel('Primary')
-	.setStyle('PRIMARY')
+	.setStyle(ButtonStyle.Primary)
 	.setDisabled(true);
 ```
 
@@ -136,17 +136,17 @@ const button = new MessageButton()
 
 ### Emoji buttons
 
-If you want to use a guild emoji within a `MessageButton`, you can use the `setEmoji()` method:
+If you want to use a guild emoji within a `ButtonBuilder`, you can use the `setEmoji()` method:
 
 ```js {5}
-const button = new MessageButton()
+const button = new ButtonBuilder()
 	.setCustomId('primary')
 	.setLabel('Primary')
-	.setStyle('PRIMARY')
-	.setEmoji('123456789012345678');
+	.setStyle(ButtonStyle.Primary)
+	.setEmoji({ id: '123456789012345678' });
 ```
 
-Now you know all there is to building and sending a `MessageButton`! Let's move on to receiving button interactions!
+Now you know all there is to building and sending a Button! Let's move on to receiving button interactions!
 
 ## Receiving buttons
 
@@ -203,7 +203,7 @@ In addition to deferring an interaction response, you can defer the button, whic
 
 <!-- eslint-skip -->
 
-```js {7-9}
+```js {1,7-9}
 const wait = require('node:timers/promises').setTimeout;
 
 // ...
@@ -223,11 +223,11 @@ collector.on('end', collected => console.log(`Collected ${collected.size} items`
 ## Button styles
 
 Currently there are five different button styles available:
-- `PRIMARY`, a blurple button;
-- `SECONDARY`, a grey button;
-- `SUCCESS`, a green button;
-- `DANGER`, a red button;
-- `LINK`, a button that navigates to a URL.
+- `Primary`, a blurple button;
+- `Secondary`, a grey button;
+- `Success`, a green button;
+- `Danger`, a red button;
+- `Link`, a button that navigates to a URL.
 
 <DiscordMessages>
 	<DiscordMessage profile="bot">
@@ -244,5 +244,5 @@ Currently there are five different button styles available:
 </DiscordMessages>
 
 ::: warning
-Only `LINK` buttons can have a `url`. `LINK` buttons _cannot_ have a `customId` and _do not_ send an interaction event when clicked.
+Only `Link` buttons can have a `url`. `Link` buttons _cannot_ have a `customId` and _do not_ send an interaction event when clicked.
 :::

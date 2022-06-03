@@ -182,8 +182,8 @@ module.exports = logger;
 ```
 
 ```js
-const { Client, Intents } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const { Client, GatewayIntentBits } = require('discord.js');
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const logger = require('./logger');
 
 client.on('ready', () => logger.info('The bot is online'));
