@@ -126,6 +126,22 @@ module.exports = {
 };
 ```
 
+::: tip
+The slash command builder is a utility class to build slash commands. You can also construct the objects directly without using the builder.
+
+```js {2-5}
+module.exports = {
+	data: {
+		name: 'ping',
+		description: 'Replies with Pong!',
+	},
+	async execute(interaction) {
+		await interaction.reply('Pong!');
+	},
+};
+```
+:::
+
 You can go ahead and do the same for the rest of your commands, putting their respective blocks of code inside the `execute()` function.
 
 ::: tip

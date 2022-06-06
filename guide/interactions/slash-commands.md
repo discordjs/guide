@@ -99,6 +99,9 @@ await rest.put(
 
 Application commands can have `options`. Think of these options as arguments to a function. You can specify them as shown below:
 
+:::: code-group
+
+::: code-group-item SlashCommandBuilder
 ```js {6-9}
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
@@ -110,6 +113,27 @@ const data = new SlashCommandBuilder()
 			.setDescription('The input to echo back')
 			.setRequired(true));
 ```
+:::
+
+::: code-group-item JSON
+```js
+const data = {
+	name: 'echo',
+	description: 'Replies with your input!',
+	options: [
+		{
+			name: 'input',
+			description: 'The input to echo back',
+			type: 'STRING',
+			required: true,
+		},
+	],
+};
+
+```
+:::
+
+::::
 
 Notice how `.setRequired(true)` is specified within the options builder. Setting this will prevent the user from sending the command without specifying a value for this option!
 
@@ -144,6 +168,9 @@ If you specify `choices` for an option, they'll be the **only** valid values use
 
 Specify them by using the `addChoice()` method from the slash command builder:
 
+:::: code-group
+
+::: code-group-item SlashCommandBuilder
 ```js {10-12}
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
@@ -158,11 +185,49 @@ const data = new SlashCommandBuilder()
 			.addChoice('Meme', 'gif_meme')
 			.addChoice('Movie', 'gif_movie'));
 ```
+:::
+
+::: code-group-item JSON
+```js
+const data = {
+	name: 'gif',
+	description: 'Sends a random gif!',
+	options: [
+		{
+			name: 'category',
+			description: 'The gif category',
+			type: 'STRING',
+			required: true,
+			choices: [
+				{
+					name: 'Funny',
+					value: 'gif_funny',
+				},
+				{
+					name: 'Meme',
+					value: 'gif_meme',
+				},
+				{
+					name: 'Movie',
+					value: 'gif_movie',
+				},
+			],
+		},
+	],
+};
+
+```
+:::
+
+::::
 
 ### Subcommands
 
 Subcommands are available with the `.addSubcommand()` method:
 
+:::: code-group
+
+::: code-group-item SlashCommandBuilder
 ```js {6-14}
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
@@ -179,6 +244,38 @@ const data = new SlashCommandBuilder()
 			.setName('server')
 			.setDescription('Info about the server'));
 ```
+:::
+
+::: code-group-item JSON
+```js
+const data = {
+	name: 'info',
+	description: 'Get info about a user or a server!',
+	options: [
+		{
+			name: 'user',
+			description: 'Info about a user',
+			type: 'SUBCOMMAND',
+			options: [
+				{
+					name: 'target',
+					description: 'The user',
+					type: 'USER',
+				},
+			],
+		},
+		{
+			name: 'server',
+			description: 'Info about the server',
+			type: 'SUBCOMMAND',
+		},
+	],
+};
+
+```
+:::
+
+::::
 
 ## Replying to slash commands
 
@@ -393,6 +490,10 @@ Interaction responses can use masked links (e.g. `[text](http://site.com)`) and 
 
 In this section, we'll cover how to access the values of a command's options. Let's assume you have a command that contains the following options:
 
+:::: code-group
+
+::: code-group-item SlashCommandBuilder
+
 ```js {6-14}
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
@@ -409,6 +510,66 @@ const data = new SlashCommandBuilder()
 	.addNumberOption(option => option.setName('num').setDescription('Enter a number'))
 	.addAttachmentOption(option => option.setName('attachment').setDescription('Attach something'));
 ```
+:::
+
+::: code-group-item JSON
+```js
+const data = {
+	name: 'ping',
+	description: 'Replies with Pong!',
+	options: [
+		{
+			name: 'input',
+			description: 'Enter a string',
+			type: 'STRING',
+		},
+		{
+			name: 'int',
+			description: 'Enter an integer',
+			type: 'INTEGER',
+		},
+		{
+			name: 'choice',
+			description: 'Select a boolean',
+			type: 'BOOLEAN',
+		},
+		{
+			name: 'target',
+			description: 'Select a user',
+			type: 'USER',
+		},
+		{
+			name: 'destination',
+			description: 'Select a channel',
+			type: 'CHANNEL',
+		},
+		{
+			name: 'muted',
+			description: 'Select a role',
+			type: 'ROLE',
+		},
+		{
+			name: 'mentionable',
+			description: 'Mention something!',
+			type: 'MENTIONABLE',
+		},
+		{
+			name: 'num',
+			description: 'Enter a number',
+			type: 'NUMBER',
+		},
+		{
+			name: 'attachment',
+			description: 'Attach something',
+			type: 'ATTACHMENT',
+		},
+	],
+};
+
+```
+:::
+
+::::
 
 You can `get()` these options from the `CommandInteractionOptionResolver` as shown below:
 

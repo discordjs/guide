@@ -86,6 +86,18 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
 :::
 ::::
 
+::: tip
+The slash command builder is a utility class to build slash commands. You can also construct the objects directly without using the builder.
+
+```js
+const commands = [
+	{ name: 'ping', description: 'Replies with pong!' },
+	{ name: 'server', description: 'Replies with server info!' },
+	{ name: 'user', description: 'Replies with user info!' },
+];
+```
+:::
+
 Once you fill in these values, run `node deploy-commands.js` in your project directory to register your commands to a single guild. It's also possible to [register commands globally](/interactions/slash-commands.md#global-commands).
 
 ::: tip
