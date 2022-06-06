@@ -422,18 +422,9 @@ Store channels have been removed as they are no longer part of the API.
 
 Additionally, new typeguards have been added:
 
--   `Channel#isCategory()`
--   `Channel#isDM()`
 -   `Channel#isDMBased()`
--   `Channel#isGroupDM()`
--   `Channel#isNews()`
--   `Channel#isStage()`
--   `Channel#isText()`\*
 -   `Channel#isTextBased()`
--   `Channel#isVoice()`\*
 -   `Channel#isVoiceBased()`
-
-\*These methods existed previously but behaved differently. Refer to the docs for their specific changes.
 
 ### Collection
 
