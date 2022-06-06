@@ -241,7 +241,7 @@ The `days` option when banning a user has been renamed to `deleteMessageDays` to
 
 `Guild#maximumPresences` no longer has a default value of 25,000.
 
-`Guild#me` has been moved to `GuildMemberManager#me`, view [this pr](https://github.com/discordjs/discord.js/pull/7669) for more context.
+`Guild#me` has been moved to `GuildMemberManager#me`. See [this pull request](https://github.com/discordjs/discord.js/pull/7669) for more information.
 
 ### GuildAuditLogs & GuildAuditLogsEntry
 
