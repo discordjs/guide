@@ -6,23 +6,29 @@ v14 requires Node 16.9 or higher to use, so make sure you're up to date. To chec
 
 ### Builders are now included in v14
 
-If you previously had `@discordjs/builders` manually installed it's *highly* recommended that you uninstall the package to avoid package naming conflicts.
+If you previously had `@discordjs/builders` manually installed it's _highly_ recommended that you uninstall the package to avoid package naming conflicts.
 
 :::: code-group
 ::: code-group-item npm
+
 ```sh:no-line-numbers
 npm uninstall @discordjs/builders
 ```
+
 :::
 ::: code-group-item yarn
+
 ```sh:no-line-numbers
 yarn remove @discordjs/builders
 ```
+
 :::
 ::: code-group-item pnpm
+
 ```sh:no-line-numbers
 pnpm remove @discordjs/builders
 ```
+
 :::
 ::::
 
@@ -38,9 +44,10 @@ discord.js v14 makes the switch to Discord API v10!
 
 Any areas that used to accept a `string` or `number` type for an enum parameter will now only accept exclusively `number`s.
 
-In addition, the old enums exported by discord.js v13 and lower are replaced with new enums from discord-api-types (link here).
+In addition, the old enums exported by discord.js v13 and lower are replaced with new enums from [discord-api-types](https://discord-api-types.dev/api/discord-api-types-v10/enum/ActivityFlags).
 
 #### New enum differences
+
 Most of the difference between enums from discord.js and discord-api-types can be summarized as so:
 
 1. Enums are singular, i.e., `ApplicationCommandOptionTypes` -> `ApplicationCommandOptionType`
@@ -48,7 +55,7 @@ Most of the difference between enums from discord.js and discord-api-types can b
 3. Enum values are `PascalCase` rather than `SCREAMING_SNAKE_CASE`, i.e., `.CHAT_INPUT` -> `.ChatInput`
 
 ::: warning
-You might be inclined to use raw `number`s (most commonly referred to as [magic numbers](https://en.wikipedia.org/wiki/Magic_number_(programming))) instead of enum values. This is highly discouraged. Enums provide more readability and are more resistant to changes in the API. Magic numbers can obscure the meaning of your code in many ways, check out this [blog post](https://blog.webdevsimplified.com/2020-02/magic-numbers/) if you want more context on as to why they shouldn't be used.
+You might be inclined to use raw `number`s (most commonly referred to as [magic numbers](<https://en.wikipedia.org/wiki/Magic_number_(programming)>)) instead of enum values. This is highly discouraged. Enums provide more readability and are more resistant to changes in the API. Magic numbers can obscure the meaning of your code in many ways, check out this [blog post](https://blog.webdevsimplified.com/2020-02/magic-numbers/) if you want more context on as to why they shouldn't be used.
 :::
 
 #### Common enum breakages
@@ -96,6 +103,21 @@ const button = {
 }
 ```
 
+##### Removal of method-based channel type guards
+
+Channel some channel type guard methods that narrowed to one channel type have been removed. Instead compare the `type` property against a [ChannelType](https://discord-api-types.dev/api/discord-api-types-v10/enum/ChannelType) enum member to narrow channels.
+
+```diff
+-channel.isText()
++channel.type === ChannelType.GuildText
+
+-channel.isVoice()
++channel.type === ChannelType.GuildVoice
+
+-channel.isDM()
++channel.type === ChannelType.DM
+```
+
 ### Builders
 
 Builders are no longer returned by the API like they were previously. For example you send the API an `EmbedBuilder` but you receive an `Embed` of the same data from the API. This may affect how your code handles received structures such as components. Refer to [message component changes section](#messagecomponent) for more details.
@@ -104,10 +126,10 @@ Builders are no longer returned by the API like they were previously. For exampl
 
 The following properties have been removed as they are not documented by Discord:
 
-- `Activity#id`
-- `Activity#platform`
-- `Activity#sessionId`
-- `Activity#syncId`
+-   `Activity#id`
+-   `Activity#platform`
+-   `Activity#sessionId`
+-   `Activity#syncId`
 
 ### Application
 
@@ -115,7 +137,7 @@ The following properties have been removed as they are not documented by Discord
 
 ### BitField
 
-- BitField constituents now have a `BitField` suffix to avoid naming conflicts with the enum names:
+-   BitField constituents now have a `BitField` suffix to avoid naming conflicts with the enum names:
 
 ```diff
 - new Permissions()
@@ -143,7 +165,7 @@ The following properties have been removed as they are not documented by Discord
 + new ActivityFlagsBitField()
 ```
 
-- `#FLAGS` has been renamed to `#Flags`
+-   `#FLAGS` has been renamed to `#Flags`
 
 ### CDN
 
@@ -155,8 +177,15 @@ Methods that return CDN URLs will now return a dynamic image URL (if available).
 
 ### Channel
 
-- `Channel#isText()` has been renamed to `Channel#isTextBased()`
-- `Channel#isVoice()` has been renamed to `Channel#isVoiceBased()`
+-   Some type guards have been removed, refer to [this section](#removal-of-method-based-channel-type-guards) for more context.
+    -   `Channel#isText()` has been removed.
+    -   `Channel#isVoice()` has been removed.
+    -   `Channel#isDirectory()` has been removed.
+    -   `Channel#isDM()` has been removed.
+    -   `Channel#isGroupDM` has been removed.
+    -   `Channel#isCategory` has been removed.
+    -   `Channel#isNews` has been removed.
+    -   `Channel#isNews` has been removed.
 
 ::: tip
 TypeScript users should narrow `Channel` types via type guards in order to get more specific typings.
@@ -168,7 +197,7 @@ TypeScript users should narrow `Channel` types via type guards in order to get m
 
 ### `Constants`
 
-- Many constant objects and key arrays are now top-level exports for example:
+-   Many constant objects and key arrays are now top-level exports for example:
 
 ```diff
 - const { Constants } = require('discord.js');
@@ -176,9 +205,10 @@ TypeScript users should narrow `Channel` types via type guards in order to get m
 + const { Colors } = require('discord.js');
 ```
 
-- The refactored constants structures have `PascalCase` member names as opposed to `SCREAMING_SNAKE_CASE` member names.
+-   The refactored constants structures have `PascalCase` member names as opposed to `SCREAMING_SNAKE_CASE` member names.
 
-- Many of the exported constants structures have been replaced and renamed:
+-   Many of the exported constants structures have been replaced and renamed:
+
 ```diff
 - Opcodes
 + GatewayOpcodes
@@ -219,9 +249,9 @@ The `days` option when banning a user has been renamed to `deleteMessageDays` to
 
 The following properties & methods have been moved to the `GuildAuditLogsEntry` class:
 
-- `GuildAuditLogs.Targets`
-- `GuildAuditLogs.actionType()` 
-- `GuildAuditLogs.targetType()`
+-   `GuildAuditLogs.Targets`
+-   `GuildAuditLogs.actionType()`
+-   `GuildAuditLogs.targetType()`
 
 ### GuildMember
 
@@ -251,7 +281,7 @@ In addition, `Interaction#isCommand()` now indicates whether the command is an _
 
 ### MessageComponent
 
-- MessageComponents have been renamed as well. They no longer have the `Message` prefix, and now have a `Builder` suffix:
+-   MessageComponents have been renamed as well. They no longer have the `Message` prefix, and now have a `Builder` suffix:
 
 ```diff
 - const button = new MessageButton();
@@ -267,7 +297,7 @@ In addition, `Interaction#isCommand()` now indicates whether the command is an _
 + const textInput = new TextInputBuilder();
 ```
 
-- Components received from the API are no longer directly mutable. If you wish to mutate a component from the API, use `ComponentBuilder#from`. For example, if you want to make a button mutable:
+-   Components received from the API are no longer directly mutable. If you wish to mutate a component from the API, use `ComponentBuilder#from`. For example, if you want to make a button mutable:
 
 ```diff
 - const editedButton = receivedButton
@@ -289,21 +319,19 @@ In addition, `Interaction#isCommand()` now indicates whether the command is an _
 
 ### MessageSelectMenu
 
-- `MessageSelectMenu` has been renamed to `SelectMenuBuilder`
+-   `MessageSelectMenu` has been renamed to `SelectMenuBuilder`
 
-- `SelectMenuBuilder#addOption()` has been removed. Use `SelectMenuBuilder#addOptions()` instead.
+-   `SelectMenuBuilder#addOption()` has been removed. Use `SelectMenuBuilder#addOptions()` instead.
 
 ### MessageEmbed
 
-- `MessageEmbed` has now been renamed to `EmbedBuilder`.
+-   `MessageEmbed` has now been renamed to `EmbedBuilder`.
 
-- `EmbedBuilder#setAuthor()` now accepts a sole `AuthorOptions` object. (add link to dapi site)
+-   `EmbedBuilder#setAuthor()` now accepts a sole [`EmbedAuthorOptions`](https://discord.js.org/#/docs/builders/main/typedef/EmbedAuthorData) object.
 
-- `EmbedBuilder#setFooter()` now accepts a sole `FooterOptions` object. (add link to dapi site)
+-   `EmbedBuilder#setFooter()` now accepts a sole [`FooterOptions`](https://discord.js.org/#/docs/builders/main/typedef/EmbedFooterOptions) object.
 
-- `EmbedBuilder#addField()` has been removed. Use `EmbedBuilder#addFields()` instead.
-
-- `EmbedBuilder#addFields()` no longer accepts a rest parameter. Only arrays can be passed: (add link to dapi site)
+-   `EmbedBuilder#addField()` has been removed. Use `EmbedBuilder#addFields()` instead.
 
 ```diff
 - new MessageEmbed().addFields(...[
@@ -335,10 +363,10 @@ Overwrites are now keyed by the `PascalCase` permission key rather than the `SCR
 
 The following discord.js events have been removed from the `Client`:
 
-- `apiRequest`
-- `apiResponse`
-- `invalidRequestWarning`
-- `rateLimit`
+-   `apiRequest`
+-   `apiResponse`
+-   `invalidRequestWarning`
+-   `rateLimit`
 
 Instead you should access these events from `Client#rest`. In addition, the `apiRequest`, `apiResponse` and `rateLimit` events have been renamed:
 
@@ -375,7 +403,7 @@ You can no longer use the `deleted` property to check if a structure was deleted
 
 `VoiceChannel#editable` has been removed. You should use `GuildChannel#manageable` instead.
 
-Many of the analogous enums can be found in the discord-api-types docs. (link website here)
+Many of the analogous enums can be found in the discord-api-types docs. [discord-api-types](https://discord-api-types.dev/api/discord-api-types-v10/enum/ActivityFlags)
 
 ### VoiceRegion
 
@@ -395,23 +423,23 @@ Store channels have been removed as they are no longer part of the API.
 
 Additionally, new typeguards have been added:
 
-- `Channel#isCategory()`
-- `Channel#isDM()`
-- `Channel#isDMBased()`
-- `Channel#isGroupDM()`
-- `Channel#isNews()`
-- `Channel#isStage()`
-- `Channel#isText()`\*
-- `Channel#isTextBased()`
-- `Channel#isVoice()`\*
-- `Channel#isVoiceBased()`
+-   `Channel#isCategory()`
+-   `Channel#isDM()`
+-   `Channel#isDMBased()`
+-   `Channel#isGroupDM()`
+-   `Channel#isNews()`
+-   `Channel#isStage()`
+-   `Channel#isText()`\*
+-   `Channel#isTextBased()`
+-   `Channel#isVoice()`\*
+-   `Channel#isVoiceBased()`
 
 \*These methods existed previously but behaved differently. Refer to the docs for their specific changes.
 
 ### Collection
 
-- Added `Collection#merge()` and `Collection#combineEntries()`.
-- New type: `ReadonlyCollection` which indicates an immutable `Collection`.
+-   Added `Collection#merge()` and `Collection#combineEntries()`.
+-   New type: `ReadonlyCollection` which indicates an immutable `Collection`.
 
 ### GuildEmojiManager
 
