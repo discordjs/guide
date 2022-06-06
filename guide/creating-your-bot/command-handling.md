@@ -113,6 +113,8 @@ pnpm add @discordjs/builders
 
 Next, create a `commands/ping.js` file for your ping command:
 
+:::: code-group
+::: code-group-item SlashCommandBuilder
 ```js
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
@@ -125,10 +127,9 @@ module.exports = {
 	},
 };
 ```
+:::
 
-::: tip
-The slash command builder is a utility class to build slash commands. You can also construct the objects directly without using the builder.
-
+::: code-group-item JSON
 ```js {2-5}
 module.exports = {
 	data: {
@@ -141,6 +142,8 @@ module.exports = {
 };
 ```
 :::
+
+::::
 
 You can go ahead and do the same for the rest of your commands, putting their respective blocks of code inside the `execute()` function.
 
