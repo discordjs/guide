@@ -472,6 +472,10 @@ Added `GuildEmojiManager#delete()` and `GuildEmojiManager#edit()` for managing e
 
 Added `Interaction#isRepliable()` to check whether a given interaction can be replied to.
 
+### MessageReaction
+
+Added `MessageReaction#react()` to make the client user react with the reaction the class belongs to.
+
 ### Unsafe Builders
 
 Unsafe builders operate exactly like regular builders except they perform no validation on input. Unsafe builders are named by adding an `Unsafe` prefix to a regular builder.
