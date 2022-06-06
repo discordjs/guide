@@ -452,6 +452,10 @@ Additionally, new typeguards have been added:
 -   Added `Collection#merge()` and `Collection#combineEntries()`.
 -   New type: `ReadonlyCollection` which indicates an immutable `Collection`.
 
+### GuildMemberManager
+
+Added `GuildMemberManager#fetchMe()` to fetch the client user in the guild.
+
 ### GuildEmojiManager
 
 Added `GuildEmojiManager#delete()` and `GuildEmojiManager#edit()` for managing existing guild emojis.
