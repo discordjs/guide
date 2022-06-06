@@ -177,14 +177,17 @@ Methods that return CDN URLs will now return a dynamic image URL (if available).
 
 ### Channel
 
--   Some type guards have been removed, refer to [this section](#removal-of-method-based-channel-type-guards) for more context.
-    -   `Channel#isText()` has been removed.
-    -   `Channel#isVoice()` has been removed.
-    -   `Channel#isDirectory()` has been removed.
-    -   `Channel#isDM()` has been removed.
-    -   `Channel#isGroupDM()` has been removed.
-    -   `Channel#isCategory()` has been removed.
-    -   `Channel#isNews()` has been removed.
+The following type guards have been removed:
+
+-   `Channel#isText()`
+-   `Channel#isVoice()`
+-   `Channel#isDirectory()`
+-   `Channel#isDM()`
+-   `Channel#isGroupDM()`
+-   `Channel#isCategory()`
+-   `Channel#isNews()`
+
+Refer to [this section](#removal-of-method-based-channel-type-guards) for more context.
 
 ::: tip
 TypeScript users should narrow `Channel` types via type guards in order to get more specific typings.
