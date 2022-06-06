@@ -182,9 +182,9 @@ Methods that return CDN URLs will now return a dynamic image URL (if available).
     -   `Channel#isVoice()` has been removed.
     -   `Channel#isDirectory()` has been removed.
     -   `Channel#isDM()` has been removed.
-    -   `Channel#isGroupDM` has been removed.
-    -   `Channel#isCategory` has been removed.
-    -   `Channel#isNews` has been removed.
+    -   `Channel#isGroupDM()` has been removed.
+    -   `Channel#isCategory()` has been removed.
+    -   `Channel#isNews()` has been removed.
 
 ::: tip
 TypeScript users should narrow `Channel` types via type guards in order to get more specific typings.
