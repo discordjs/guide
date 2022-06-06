@@ -452,6 +452,10 @@ Additionally, new typeguards have been added:
 -   Added `Collection#merge()` and `Collection#combineEntries()`.
 -   New type: `ReadonlyCollection` which indicates an immutable `Collection`.
 
+### Collector
+
+A new `ignore` has been added which is emitted whenever an element is not collected by the collector.
+
 ### GuildMemberManager
 
 Added `GuildMemberManager#fetchMe()` to fetch the client user in the guild.
