@@ -387,6 +387,10 @@ Instead you should access these events from `Client#rest`. In addition, the `api
 
 `Role.comparePositions()` has been removed. Use `RoleManager#comparePositions()` instead.
 
+### Sticker
+
+`Sticker#tags` is now a nullable string (`string | null`). Previously, it was a nullable array of strings (`string[] | null`). See [this pull request](https://github.com/discordjs/discord.js/pull/8010/files) for more information.
+
 ### ThreadChannel
 
 The `MAX` helper used in `ThreadAutoArchiveDuration` has been removed. Discord has since allowed any guild to use any auto archive time which makes this helper redundant.
