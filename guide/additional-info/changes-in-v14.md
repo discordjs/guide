@@ -387,6 +387,10 @@ Instead you should access these events from `Client#rest`. In addition, the `api
 
 `Role.comparePositions()` has been removed. Use `RoleManager#comparePositions()` instead.
 
+### ThreadChannel
+
+The `MAX` helper used in `ThreadAutoArchiveDuration` has been removed. Discord has since allowed any guild to use any auto archive time which makes this helper redundant.
+
 ### ThreadMemberManager
 
 `ThreadMemberManager#fetch()` now only takes a single object of type `ThreadMemberFetchOptions`.
@@ -396,6 +400,8 @@ Instead you should access these events from `Client#rest`. In addition, the `api
 `Util.removeMentions()` has been removed. To control mentions, you should use `allowedMentions` on `MessageOptions` instead.
 
 `Util.splitMessage()` has been removed. This utility method is something the developer themselves should do.
+
+`Util.resolveAutoArchiveMaxLimit()` has been removed. Discord has since allowed any guild to use any auto archive time which makes this method redundant.
 
 ### `.deleted` Field(s) have been removed
 
