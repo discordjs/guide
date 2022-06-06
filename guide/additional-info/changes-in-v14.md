@@ -393,7 +393,19 @@ The `MAX` helper used in `ThreadAutoArchiveDuration` has been removed. Discord h
 
 ### ThreadMemberManager
 
-`ThreadMemberManager#fetch()` now only takes a single object of type `ThreadMemberFetchOptions`.
+`ThreadMemberManager#fetch()`'s second parameter has been removed. The `BaseFetchOptions` the second parameter once was is now merged into the first parameter. In addition, the boolean helper to specify `cache` has been removed.
+
+Usage is now as follows:
+
+```diff
+// The second parameter is merged into the first parameter.
+- threadMemberManager.fetch('1234567890', { cache: false, force: true });
++ threadMemberManager.fetch({ message: '1234567890', cache: false, force: true });
+
+// The lone boolean has been removed. One must be explicit here.
+- threadMemberManager.fetch(false);
++ threadMemberManager.fetch({ cache: false });
+```
 
 ### Util
 
