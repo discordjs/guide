@@ -458,7 +458,7 @@ Additionally, new typeguards have been added:
 
 ### Collector
 
-A new `ignore` has been added which is emitted whenever an element is not collected by the collector.
+A new `ignore` event has been added which is emitted whenever an element is not collected by the collector.
 
 ### GuildMemberManager
 
