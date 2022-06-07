@@ -116,6 +116,7 @@ const data = new SlashCommandBuilder()
 :::
 
 ::: code-group-item JSON
+
 ```js
 const data = {
 	name: 'echo',
@@ -124,7 +125,7 @@ const data = {
 		{
 			name: 'input',
 			description: 'The input to echo back',
-			type: 'STRING',
+			type: 3,
 			required: true,
 		},
 	],
@@ -198,7 +199,7 @@ const data = {
 		{
 			name: 'category',
 			description: 'The gif category',
-			type: 'STRING',
+			type: 3,
 			required: true,
 			choices: [
 				{
@@ -257,7 +258,7 @@ const data = {
 		{
 			name: 'user',
 			description: 'Info about a user',
-			type: 'SUBCOMMAND',
+			type: 1,
 			options: [
 				{
 					name: 'target',
@@ -269,7 +270,7 @@ const data = {
 		{
 			name: 'server',
 			description: 'Info about the server',
-			type: 'SUBCOMMAND',
+			type: 1,
 		},
 	],
 };
@@ -523,47 +524,47 @@ const data = {
 		{
 			name: 'input',
 			description: 'Enter a string',
-			type: 'STRING',
+			type: 3,
 		},
 		{
 			name: 'int',
 			description: 'Enter an integer',
-			type: 'INTEGER',
+			type: 4,
 		},
 		{
 			name: 'choice',
 			description: 'Select a boolean',
-			type: 'BOOLEAN',
+			type: 5,
 		},
 		{
 			name: 'target',
 			description: 'Select a user',
-			type: 'USER',
+			type: 6,
 		},
 		{
 			name: 'destination',
 			description: 'Select a channel',
-			type: 'CHANNEL',
+			type: 7,
 		},
 		{
 			name: 'muted',
 			description: 'Select a role',
-			type: 'ROLE',
+			type: 8,
 		},
 		{
 			name: 'mentionable',
 			description: 'Mention something!',
-			type: 'MENTIONABLE',
+			type: 9,
 		},
 		{
 			name: 'num',
 			description: 'Enter a number',
-			type: 'NUMBER',
+			type: 10,
 		},
 		{
 			name: 'attachment',
 			description: 'Attach something',
-			type: 'ATTACHMENT',
+			type: 11,
 		},
 	],
 };
