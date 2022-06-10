@@ -103,9 +103,11 @@ const button = {
 }
 ```
 
-##### Removal of method-based channel type guards
+### Removal of method-based type guards
 
-Channel some channel type guard methods that narrowed to one channel type have been removed. Instead compare the `type` property against a [ChannelType](https://discord-api-types.dev/api/discord-api-types-v10/enum/ChannelType) enum member to narrow channels.
+#### Channels
+
+Some channel type guard methods that narrowed to one channel type have been removed. Instead compare the `type` property against a [ChannelType](https://discord-api-types.dev/api/discord-api-types-v10/enum/ChannelType) enum member to narrow channels.
 
 ```diff
 -channel.isText()
@@ -116,6 +118,24 @@ Channel some channel type guard methods that narrowed to one channel type have b
 
 -channel.isDM()
 +channel.type === ChannelType.DM
+```
+
+#### Interactions
+
+Similarly to channels, some interaction type guards have been removed, and replaced with `type` checks a [InteractionType](https://discord-api-types.dev/api/discord-api-types-v10/enum/InteractionType) enum member.
+
+```diff
+-interaction.isCommand();
++interaction.type === InteractionType.ApplicationCommand;
+
+-interaction.isAutocomplete();
++interaction.type === InteractionType.Autocomplete;
+
+-interaction.isMessageComponent();
++interaction.type === InteractionType.MessageComponent;
+
+-interaction.isModalSubmit();
++interaction.type === InteractionType.ModalSubmit;
 ```
 
 ### Builders
@@ -187,11 +207,7 @@ The following type guards have been removed:
 -   `Channel#isCategory()`
 -   `Channel#isNews()`
 
-Refer to [this section](#removal-of-method-based-channel-type-guards) for more context.
-
-::: tip
-TypeScript users should narrow `Channel` types via type guards in order to get more specific typings.
-:::
+Refer to [this section](#channels) for more context.
 
 ### CommandInteractionOptionResolver
 
@@ -265,17 +281,17 @@ The following properties & methods have been moved to the `GuildAuditLogsEntry` 
 
 ### Interaction
 
-The following typeguards on `Interaction` have been renamed:
+The following typeguards on `Interaction` have been removed:
 
 ```diff
 - interaction.isCommand()
-+ interaction.isChatInputCommand()
-
 - interaction.isContextMenu()
-+ interaction.isContextMenuCommand()
+- interaction.isAutocomplete()
+- interaction.isModalSubmit()
+- interaction.isMessageComponent()
 ```
 
-In addition, `Interaction#isCommand()` now indicates whether the command is an _application command_. This differs from the previous implementation where `Interaction#isCommand()` indicated if the interaction was a chat input command.
+Instead check against the `#type` of the interaction to narrow the type. Refer to [this section](#interactions) for more context.
 
 ### Invite
 
