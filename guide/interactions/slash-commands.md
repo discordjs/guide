@@ -80,10 +80,6 @@ Running this script will register all your commands to the guild of which the id
 
 Global application commands will be available in all the guilds your application has the `applications.commands` scope authorized, as well as in DMs.
 
-::: tip
-Global commands are cached for one hour. New global commands will fan out slowly across all guilds and will only be guaranteed to be updated after an hour. Guild commands update instantly. As such, we recommend you use guild-based commands during development and publish them to global commands when they're ready for public use.
-:::
-
 To deploy global commands, you can use the same script from the [guild commands](#guild-commands) section and adjust the route in the script to `.applicationCommands(clientId)`.
 
 <!-- eslint-skip -->
