@@ -81,7 +81,6 @@ client.on('interactionCreate', async interaction => {
 });
 ```
 
-
 Restart your bot and invoke the `/ping` command again. You should see a popup form resembling the image below:
 
 <img width=450 src="./images/modal-example.png">
@@ -94,6 +93,27 @@ Modals are received via an interaction. You can check if a given interaction is 
 client.on('interactionCreate', interaction => {
 	if (!interaction.isModalSubmit()) return;
 	console.log(interaction);
+});
+```
+
+## Responding to modal submissions
+
+The `ModalSubmitInteraction` class provides the same methods as the `CommandInteraction` class. These methods behave equally:
+
+- `reply()`
+- `editReply()`
+- `deferReply()`
+- `fetchReply()`
+- `deleteReply()`
+- `followUp()`
+
+```js{1,4-6}
+client.on('interactionCreate', interaction => {
+	if (!interaction.isModalSubmit()) return;
+
+	if (interaction.customId === 'myModal') {
+		await interaction.reply({ content: 'Your submission was recieved successfully!' });
+	}
 });
 ```
 
