@@ -20,7 +20,7 @@ Example: `The messages must be an Array, Collection, or number.`
 
 JavaScript errors are thrown by node itself or by discord.js. These errors can easily be fixed by looking at the type of error and the stack trace. You can find a full list of types [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) And a list of common js errors [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors).
 
-Example: `ReferenceError: "x" is not defined`
+Example: `ReferenceError: "x" is not defined`, `Cannot read properties of null(reading 'something')`
 
 ### WebSocket and Network errors
 
