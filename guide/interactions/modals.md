@@ -99,6 +99,7 @@ client.on('interactionCreate', interaction => {
 ## Responding to modal submissions
 
 The `ModalSubmitInteraction` class provides the same methods as the `CommandInteraction` class. These methods behave equally:
+
 - `reply()`
 - `editReply()`
 - `deferReply()`
