@@ -81,7 +81,6 @@ client.on('interactionCreate', async interaction => {
 });
 ```
 
-
 Restart your bot and invoke the `/ping` command again. You should see a popup form resembling the image below:
 
 <img width=450 src="./images/modal-example.png">
@@ -96,6 +95,7 @@ client.on('interactionCreate', interaction => {
 	console.log(interaction);
 });
 ```
+
 ## Responding to modal submissions
 
 The `ModalSubmitInteraction` class provides the same methods as the `CommandInteraction` class. These methods behave equally:
@@ -116,6 +116,7 @@ client.on('interactionCreate', interaction => {
 	}
 });
 ```
+
 ## Extracting data from modal submissions
 
 You'll most likely need to read the data sent by the user in the modal. You can do this by accessing the `fields` property from the interaction. From there, you can call `getTextInputValue()` with the custom id of the text input to get the value.
