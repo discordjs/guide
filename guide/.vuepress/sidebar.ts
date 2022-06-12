@@ -59,6 +59,7 @@ export default {
 				'/interactions/select-menus.md',
 				'/interactions/autocomplete.md',
 				'/interactions/modals.md',
+				'/interactions/context-menus.md',
 			],
 		},
 		{
