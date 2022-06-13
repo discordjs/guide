@@ -142,6 +142,29 @@ Similarly to channels, some interaction type guards have been removed, and repla
 
 Builders are no longer returned by the API like they were previously. For example you send the API an `EmbedBuilder` but you receive an `Embed` of the same data from the API. This may affect how your code handles received structures such as components. Refer to [message component changes section](#messagecomponent) for more details.
 
+### Consolidation of `create()` & `edit()` parameters
+
+Various `create()` and `edit()` methods on managers and objects have had their parameters consolidated. The changes are below:
+
+- `Guild#edit()` now takes `reason` in the `data` parameter
+- `GuildChannel#edit()` now takes `reason` in the `data` parameter
+- `GuildEmoji#edit()` now takes `reason` in the `data` parameter
+- `Role#edit()` now takes `reason` in the `data` parameter
+- `Sticker#edit()` now takes `reason` in the `data` parameter
+- `ThreadChannel#edit()` now takes `reason` in the `data` parameter
+- `GuildChannelManager#create()` now takes `name` in the `options` parameter
+- `GuildChannelManager#createWebhook()` (and other text-based channels) now takes `channel` and `name` in the `options` parameter
+- `GuildChannelManager#edit()` now takes `reason` as a part of `data`
+- `GuildEmojiManager#edit()` now takes `reason` as a part of `data`
+- `GuildManager#create()` now takes `name` as a part of `options`
+- `GuildMemberManager#edit()` now takes `reason` as a part of `data`
+- `GuildMember#edit()` now takes `reason` as a part of `data`
+- `GuildStickerManager#edit()` now takes `reason` as a part of `data`
+- `RoleManager#edit()` now takes `reason` as a part of `options`
+- `Webhook#edit()` now takes `reason` as a part of `options`
+- `GuildEmojiManager#create()` now takes `attachment` and `name` as a part of `options`
+- `GuildStickerManager#create()` now takes `file`, `name`, and `tags` as a part of `options`
+
 ### Activity
 
 The following properties have been removed as they are not documented by Discord:
