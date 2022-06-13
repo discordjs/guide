@@ -486,6 +486,10 @@ A new `ignore` event has been added which is emitted whenever an element is not 
 
 `CommandInteraction#commandGuildId` has been added which is the id of the guild the invoked application command is registered to.
 
+### Guild
+
+Added `Guild#setMFALevel()` which sets the guild's MFA level.
+
 ### GuildChannelManager
 
 `videoQualityMode` may be used whilst creating a channel to initially set the camera video quality mode.
