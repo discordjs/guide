@@ -15,7 +15,7 @@ const { ContextMenuCommandBuilder } = require('@discordjs/builders');
 
 const data = new ContextMenuCommandBuilder()
 	.setName('echo')
-	.setType('USER');
+	.setType(2);
 ```
 
 ## Receiving context menu command interactions
