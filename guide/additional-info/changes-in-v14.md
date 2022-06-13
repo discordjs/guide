@@ -476,6 +476,10 @@ Additionally, new typeguards have been added:
 
 A new `ignore` event has been added which is emitted whenever an element is not collected by the collector.
 
+### GuildChannelManager
+
+`videoQualityMode` may be used whilst creating a channel to initially set the camera video quality mode.
+
 ### GuildMemberManager
 
 Added `GuildMemberManager#fetchMe()` to fetch the client user in the guild.
