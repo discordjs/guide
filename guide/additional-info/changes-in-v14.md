@@ -422,7 +422,7 @@ Usage is now as follows:
 ```diff
 // The second parameter is merged into the first parameter.
 - threadMemberManager.fetch('1234567890', { cache: false, force: true });
-+ threadMemberManager.fetch({ message: '1234567890', cache: false, force: true });
++ threadMemberManager.fetch({ member: '1234567890', cache: false, force: true });
 
 // The lone boolean has been removed. One must be explicit here.
 - threadMemberManager.fetch(false);
