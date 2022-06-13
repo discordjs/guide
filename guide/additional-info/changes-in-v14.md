@@ -457,6 +457,10 @@ Many of the analogous enums can be found in the discord-api-types docs. [discord
 
 ## Features
 
+### AutocompleteInteraction
+
+`AutocompleteInteraction#commandGuildId` has been added which is the id of the guild the invoked application command is registered to.
+
 ### Channel
 
 Store channels have been removed as they are no longer part of the API.
@@ -477,6 +481,10 @@ Additionally, new typeguards have been added:
 ### Collector
 
 A new `ignore` event has been added which is emitted whenever an element is not collected by the collector.
+
+### CommandInteraction
+
+`CommandInteraction#commandGuildId` has been added which is the id of the guild the invoked application command is registered to.
 
 ### GuildChannelManager
 
