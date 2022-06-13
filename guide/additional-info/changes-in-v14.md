@@ -293,6 +293,8 @@ The following typeguards on `Interaction` have been removed:
 
 Instead check against the `#type` of the interaction to narrow the type. Refer to [this section](#interactions) for more context.
 
+Additionally, whenever an interaction is replied to and one fetches the reply, it could possibly give an `APIMessage` if the guild was not cached. However, interaction replies now always return a discord.js `Message` object.
+
 ### Invite
 
 `Invite#channel` and `Invite#inviter` are now getters and resolve structures from the cache.
