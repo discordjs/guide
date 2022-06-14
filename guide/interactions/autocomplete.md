@@ -42,14 +42,14 @@ Using <DocsLink path="class/AutocompleteInteraction?scrollTo=respond" /> you can
 The <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" /> method returns the currently focused option's value. This value is used to filter the choices presented. To only display options starting with the focused value you can use the `Array#filter()` method. By using `Array#map()`, you can transform the array into an array of <DocsLink path="typedef/ApplicationCommandOptionChoice" /> objects.
 
 ```js {4-11}
-client.on('interactionCreate', interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isAutocomplete()) return;
 
 	if (interaction.commandName === 'autocomplete') {
 		const focusedValue = interaction.options.getFocused();
 		const choices = ['faq', 'install', 'collection', 'promise', 'debug'];
 		const filtered = choices.filter(choice => choice.startsWith(focusedValue));
-		interaction.respond(
+		await interaction.respond(
 			filtered.map(choice => ({ name: choice, value: choice })),
 		);
 	}
@@ -61,7 +61,7 @@ client.on('interactionCreate', interaction => {
 To distinguish between multiple options you can pass `true` into <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" /> which now returns the full focused object instead of just the value. This is used to get the name of the focused option below:
 
 ```js {5-16}
-client.on('interactionCreate', interaction => {
+client.on('interactionCreate', async interaction => {
 	if (!interaction.isAutocomplete()) return;
 
 	if (interaction.commandName === 'autocomplete') {
@@ -77,7 +77,7 @@ client.on('interactionCreate', interaction => {
 		}
 
 		const filtered = choices.filter(choice => choice.startsWith(focusedOption.value));
-		interaction.respond(
+		await interaction.respond(
 			filtered.map(choice => ({ name: choice, value: choice })),
 		);
 	}
