@@ -49,7 +49,7 @@ client.on('interactionCreate', async interaction => {
 		const focusedValue = interaction.options.getFocused();
 		const choices = ['faq', 'install', 'collection', 'promise', 'debug'];
 		const filtered = choices.filter(choice => choice.startsWith(focusedValue));
-		const response = await interaction.respond(
+		await interaction.respond(
 			filtered.map(choice => ({ name: choice, value: choice })),
 		);
 	}
@@ -77,7 +77,7 @@ client.on('interactionCreate', async interaction => {
 		}
 
 		const filtered = choices.filter(choice => choice.startsWith(focusedOption.value));
-		const response = await interaction.respond(
+		await interaction.respond(
 			filtered.map(choice => ({ name: choice, value: choice })),
 		);
 	}
