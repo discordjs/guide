@@ -118,6 +118,8 @@ const data = new SlashCommandBuilder()
 ::: code-group-item JSON
 
 ```js
+const { ApplicationCommandOptionType } = require('discord-api-types/v9');
+
 const data = {
 	name: 'echo',
 	description: 'Replies with your input!',
@@ -125,7 +127,7 @@ const data = {
 		{
 			name: 'input',
 			description: 'The input to echo back',
-			type: 3,
+			type: ApplicationCommandOptionType.String,
 			required: true,
 		},
 	],
@@ -192,6 +194,8 @@ const data = new SlashCommandBuilder()
 
 ::: code-group-item JSON
 ```js
+const { ApplicationCommandOptionType } = require('discord-api-types/v9');
+
 const data = {
 	name: 'gif',
 	description: 'Sends a random gif!',
@@ -199,7 +203,7 @@ const data = {
 		{
 			name: 'category',
 			description: 'The gif category',
-			type: 3,
+			type: ApplicationCommandOptionType.String,
 			required: true,
 			choices: [
 				{
@@ -251,6 +255,8 @@ const data = new SlashCommandBuilder()
 
 ::: code-group-item JSON
 ```js
+const { ApplicationCommandOptionType } = require('discord-api-types/v9');
+
 const data = {
 	name: 'info',
 	description: 'Get info about a user or a server!',
@@ -258,7 +264,7 @@ const data = {
 		{
 			name: 'user',
 			description: 'Info about a user',
-			type: 1,
+			type: ApplicationCommandOptionType.Subcommand,
 			options: [
 				{
 					name: 'target',
@@ -270,7 +276,7 @@ const data = {
 		{
 			name: 'server',
 			description: 'Info about the server',
-			type: 1,
+			type: ApplicationCommandOptionType.Subcommand,
 		},
 	],
 };
@@ -517,6 +523,8 @@ const data = new SlashCommandBuilder()
 
 ::: code-group-item JSON
 ```js
+const { ApplicationCommandOptionType } = require('discord-api-types/v9');
+
 const data = {
 	name: 'ping',
 	description: 'Replies with Pong!',
@@ -524,47 +532,47 @@ const data = {
 		{
 			name: 'input',
 			description: 'Enter a string',
-			type: 3,
+			type: ApplicationCommandOptionType.String,
 		},
 		{
 			name: 'int',
 			description: 'Enter an integer',
-			type: 4,
+			type: ApplicationCommandOptionType.Integer,
 		},
 		{
 			name: 'choice',
 			description: 'Select a boolean',
-			type: 5,
+			type: ApplicationCommandOptionType.Boolean,
 		},
 		{
 			name: 'target',
 			description: 'Select a user',
-			type: 6,
+			type: ApplicationCommandOptionType.User,
 		},
 		{
 			name: 'destination',
 			description: 'Select a channel',
-			type: 7,
+			type: ApplicationCommandOptionType.Channel,
 		},
 		{
 			name: 'muted',
 			description: 'Select a role',
-			type: 8,
+			type: ApplicationCommandOptionType.Role,
 		},
 		{
 			name: 'mentionable',
 			description: 'Mention something!',
-			type: 9,
+			type: ApplicationCommandOptionType.Mentionable,
 		},
 		{
 			name: 'num',
 			description: 'Enter a number',
-			type: 10,
+			type: ApplicationCommandOptionType.Number,
 		},
 		{
 			name: 'attachment',
 			description: 'Attach something',
-			type: 11,
+			type: ApplicationCommandOptionType.Attachment,
 		},
 	],
 };
