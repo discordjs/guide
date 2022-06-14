@@ -269,7 +269,7 @@ const data = {
 				{
 					name: 'target',
 					description: 'The user',
-					type: 'USER',
+					type: ApplicationCommandOptionType.User,
 				},
 			],
 		},
