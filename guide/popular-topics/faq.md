@@ -102,6 +102,13 @@ client.user.setStatus('dnd');
 client.user.setStatus('invisible');
 ```
 
+### How to make bot status show as "Online from Mobile"?
+
+This can be set as a default in `ClientOptions`:
+```js
+new Client({ ws: { properties: { $browser: "Discord iOS" } } }) // or "Discord Android"
+```
+
 ### How do I set both status and activity in one go?
 
 ```js
