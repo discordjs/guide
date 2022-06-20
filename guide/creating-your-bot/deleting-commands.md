@@ -21,8 +21,6 @@ You can delete a specific command by getting the ID of an application command. H
 You need to have Developer Mode enabled to copy an application's ID
 :::
 
-### Command deployment script
-
 Edit your `deploy-commands.js` file and add the following:
 
 ```js
@@ -32,16 +30,16 @@ const REST = require('@discordjs/rest');
 const rest = new REST({ version: '9' }).setToken(token);
 
 rest.delete(Routes.applicationGuildCommand(clientId, guildId, commandId))
-    .then(() => console.log('Successfully deleted guild command'))
-    .catch(console.error);
+	.then(() => console.log('Successfully deleted guild command'))
+	.catch(console.error);
 // or
 rest.delete(Routes.applicationCommand(clientId, commandId))
-    .then(() => console.log('Successfully deleted application command'))
-    .catch(console.error);
+	.then(() => console.log('Successfully deleted application command'))
+	.catch(console.error);
 ```
 Where `commandId` is the ID of the command you want to delete. Run your deploy script and it will delete the command.
 
-### Deleting all commands
+## Deleting all commands
 
 You can pass an empty array when setting commands to overwrite all existing commands.
 
@@ -52,10 +50,10 @@ const REST = require('@discordjs/rest');
 const rest = new REST({ version: '9' }).setToken(token);
 
 rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: [] })
-    .then(() => console.log('Successfully deleted all guild commands.'))
-    .catch(console.error);
+	.then(() => console.log('Successfully deleted all guild commands.'))
+	.catch(console.error);
 // or
 rest.put(Routes.applicationCommands(clientId), { body: [] })
-    .then(() => console.log('Successfully deleted all application commands.'))
-    .catch(console.error);
+	.then(() => console.log('Successfully deleted all application commands.'))
+	.catch(console.error);
 ```
