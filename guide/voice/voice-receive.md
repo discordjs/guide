@@ -22,26 +22,15 @@ The voice connection will now send any voice packets received from a user with `
 Depending on your use-case, you can choose to end when the stream stops receiving audio differently:
 
 ```js
-const { EndBehaviorType } = require("@discordjs/voice");
+const { EndBehaviorType } = require('@discordjs/voice');
 
 connection.receiver.subscribe(userId, {
 	end: {
-		behavior: EndBehaviorType.AfterSilence,
-		duration: 5000, // Ends 5000 ms after receiving silence or no audio packets. If the user begins talking again, the timer will be renewed.
+		behavior: EndBehaviorType.AfterSilence, /* Ends in 'duration' ms after receiving no silence or audio packets
+		behavior: EndBehaviorType.AfterInactivity, Ends in 'duration' ms after receiving no audio packets
+		behavior: EndBehaviorType.Manual, Ends manually and 'duration' is not accepted */
+		duration: 5000,
 	},
-});
-
-connection.receiver.subscribe(userId, {
-	end: {
-		behavior: EndBehaviorType.AfterInactivity,
-		duration: 5000, // Ends 5000 ms after receiving no audio packets.
-	},
-});
-
-connection.receiver.subscribe(userId, {
-    end: {
-        behavior: EndBehaviorType.Manual // Does not end until you end it manually
-    },
 });
 ```
 
