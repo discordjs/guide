@@ -47,6 +47,7 @@ export default {
 			children: [
 				'/creating-your-bot/',
 				'/creating-your-bot/creating-commands.md',
+				'/creating-your-bot/deleting-commands.md',
 				'/creating-your-bot/command-handling/',
 				'/creating-your-bot/event-handling/',
 			],
