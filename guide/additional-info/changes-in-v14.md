@@ -129,7 +129,7 @@ Similarly to channels, some interaction type guards have been removed, and repla
 +interaction.type === InteractionType.ApplicationCommand;
 
 -interaction.isAutocomplete();
-+interaction.type === InteractionType.Autocomplete;
++interaction.type === InteractionType.ApplicationCommandAutocomplete;
 
 -interaction.isMessageComponent();
 +interaction.type === InteractionType.MessageComponent;
