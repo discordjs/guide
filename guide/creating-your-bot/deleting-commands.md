@@ -25,7 +25,7 @@ Edit your `deploy-commands.js` file and add the following:
 
 ```js
 const { Routes } = require('discord-api-types/v9');
-const REST = require('@discordjs/rest');
+const { REST } = require('@discordjs/rest');
 
 const rest = new REST({ version: '9' }).setToken(token);
 
@@ -45,7 +45,7 @@ You can pass an empty array when setting commands to overwrite all existing comm
 
 ```js
 const { Routes } = require('discord-api-types/v9');
-const REST = require('@discordjs/rest');
+const { REST } = require('@discordjs/rest');
 
 const rest = new REST({ version: '9' }).setToken(token);
 
