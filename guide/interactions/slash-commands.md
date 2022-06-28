@@ -5,7 +5,7 @@
 Discord provides developers with the option to create client-integrated slash commands. In this section, we'll cover how to register these commands using discord.js!
 
 ::: tip
-This page assumes you use the same file structure as our [command handling](/guide/creating-your-bot/command-handling.md) section. The scripts provided are made to function with that setup.
+This page assumes you use the same file structure as our [command handling](https://discordjs.guide/creating-your-bot/command-handling.html) section. The scripts provided are made to function with that setup.
 
 If you already have slash commands set up for your application and want to learn how to respond to them, refer to [the following section](#replying-to-slash-commands).
 :::
@@ -14,7 +14,7 @@ If you already have slash commands set up for your application and want to learn
 
 Guild application commands are only available in the guild they were created in, if your application has the `applications.commands` scope authorized.
 
-In this section, we'll be using a script that is usable in conjunction with the slash command handler from the [command handling](/guide/creating-your-bot/command-handling.md) section.
+In this section, we'll be using a script that is usable in conjunction with the slash command handler from the [command handling](https://discordjs.guide/creating-your-bot/command-handling.html) section.
 
 First off, install the [`@discordjs/rest`](https://github.com/discordjs/discord.js/tree/main/packages/rest) and [`discord-api-types`](https://github.com/discordjs/discord-api-types/) by running the following command in your terminal:
 
