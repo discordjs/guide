@@ -104,7 +104,7 @@ const opusStream = connection.receiver.subscribe(userId, {
 const audioPlayer = createAudioPlayer();
 connection.subscribe(audioPlayer);
 
-const resource = createAudioResource(opusStream, { inputType: SteamType.Opus });
+const resource = createAudioResource(opusStream, { inputType: StreamType.Opus });
 audioPlayer.play(resource);
 ```
 
