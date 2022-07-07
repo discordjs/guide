@@ -190,26 +190,21 @@ To install undici, run the following command:
 
 :::: code-group
 ::: code-group-item npm
-
 ```sh:no-line-numbers
 npm install undici
 ```
-
 :::
 ::: code-group-item yarn
-
 ```sh:no-line-numbers
 yarn add undici
 ```
-
 :::
 ::: code-group-item pnpm
-
 ```sh:no-line-numbers
 pnpm add undici
 ```
-
 :::
+::::
 
 Require `undici` and make your request.
 
