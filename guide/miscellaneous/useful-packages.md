@@ -208,7 +208,7 @@ We recommend you set `pino-pretty` up in a package script in your `package.json`
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "node .",
 		"lint": "eslint .",
-		"dev": "node . | pino-pretty -i pid,hostname -t yyyy-mm-dd HH:MM:ss"
+		"dev": "node . | pino-pretty -i pid,hostname -t 'yyyy-mm-dd HH:MM:ss'"
 	},
 	"keywords": [],
 	"author": "",

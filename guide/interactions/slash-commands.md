@@ -80,10 +80,6 @@ Running this script will register all your commands to the guild of which the id
 
 Global application commands will be available in all the guilds your application has the `applications.commands` scope authorized, as well as in DMs.
 
-::: tip
-Global commands are cached for one hour. New global commands will fan out slowly across all guilds and will only be guaranteed to be updated after an hour. Guild commands update instantly. As such, we recommend you use guild-based commands during development and publish them to global commands when they're ready for public use.
-:::
-
 To deploy global commands, you can use the same script from the [guild commands](#guild-commands) section and adjust the route in the script to `.applicationCommands(clientId)`.
 
 <!-- eslint-skip -->
@@ -126,12 +122,13 @@ Refer to the Discord API documentation for detailed explanations on the [`SUB_CO
 * `SUB_COMMAND_GROUP` sets the option to be a subcommand group
 * `STRING` sets the option to require a string value
 * `INTEGER` sets the option to require an integer value
-* `NUMBER` sets the option to require a decimal (also known as a floating point) value
 * `BOOLEAN` sets the option to require a boolean value
 * `USER` sets the option to require a user or snowflake as value
 * `CHANNEL` sets the option to require a channel or snowflake as value
 * `ROLE` sets the option to require a role or snowflake as value
 * `MENTIONABLE` sets the option to require a user, role or snowflake as value
+* `NUMBER` sets the option to require a decimal (also known as a floating point) value
+* `ATTACHMENT` sets the option to require an attachment
 
 ### Choices
 
@@ -141,7 +138,7 @@ The `STRING` and `INTEGER` option types both can have `choices`. `choices` are a
 If you specify `choices` for an option, they'll be the **only** valid values users can pick!
 :::
 
-Specify them by using the `addChoice()` method from the slash command builder:
+Specify them by using the `addChoices()` method from the slash command builder:
 
 ```js {10-12}
 const { SlashCommandBuilder } = require('@discordjs/builders');
@@ -153,9 +150,11 @@ const data = new SlashCommandBuilder()
 		option.setName('category')
 			.setDescription('The gif category')
 			.setRequired(true)
-			.addChoice('Funny', 'gif_funny')
-			.addChoice('Meme', 'gif_meme')
-			.addChoice('Movie', 'gif_movie'));
+			.addChoices(
+				{ name: 'Funny', value: 'gif_funny' },
+				{ name: 'Meme', value: 'gif_meme' },
+				{ name: 'Movie', value: 'gif_movie' },
+			));
 ```
 
 ### Subcommands
@@ -392,7 +391,7 @@ Interaction responses can use masked links (e.g. `[text](http://site.com)`) and 
 
 In this section, we'll cover how to access the values of a command's options. Let's assume you have a command that contains the following options:
 
-```js {6-13}
+```js {6-14}
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
 const data = new SlashCommandBuilder()
@@ -400,12 +399,13 @@ const data = new SlashCommandBuilder()
 	.setDescription('Replies with Pong!')
 	.addStringOption(option => option.setName('input').setDescription('Enter a string'))
 	.addIntegerOption(option => option.setName('int').setDescription('Enter an integer'))
-	.addNumberOption(option => option.setName('num').setDescription('Enter a number'))
 	.addBooleanOption(option => option.setName('choice').setDescription('Select a boolean'))
 	.addUserOption(option => option.setName('target').setDescription('Select a user'))
 	.addChannelOption(option => option.setName('destination').setDescription('Select a channel'))
 	.addRoleOption(option => option.setName('muted').setDescription('Select a role'))
-	.addMentionableOption(option => option.setName('mentionable').setDescription('Mention something'));
+	.addMentionableOption(option => option.setName('mentionable').setDescription('Mention something'))
+	.addNumberOption(option => option.setName('num').setDescription('Enter a number'))
+	.addAttachmentOption(option => option.setName('attachment').setDescription('Attach something'));
 ```
 
 You can `get()` these options from the `CommandInteractionOptionResolver` as shown below:
@@ -413,15 +413,16 @@ You can `get()` these options from the `CommandInteractionOptionResolver` as sho
 ```js
 const string = interaction.options.getString('input');
 const integer = interaction.options.getInteger('int');
-const number = interaction.options.getNumber('num');
 const boolean = interaction.options.getBoolean('choice');
 const user = interaction.options.getUser('target');
 const member = interaction.options.getMember('target');
 const channel = interaction.options.getChannel('destination');
 const role = interaction.options.getRole('muted');
 const mentionable = interaction.options.getMentionable('mentionable');
+const number = interaction.options.getNumber('num');
+const attachment = interaction.options.getAttachment('attachment');
 
-console.log([string, integer, boolean, user, member, channel, role, mentionable]);
+console.log(string, integer, boolean, user, member, channel, role, mentionable, number, attachment);
 ```
 
 ::: tip
@@ -476,3 +477,46 @@ await interaction.reply('Pong!');
 const message = await interaction.fetchReply();
 console.log(message);
 ```
+
+## Slash command permissions
+
+Slash commands have their own permissions system, which allows you to set the required permissions in order to use a command.
+
+::: tip
+The slash command permissions for guilds are only defaults and can be altered by guild administrators.
+:::
+
+### DM permission
+
+You can use the `setDMPermission` method to control if a global command can be used in DMs. By default, all global commands can be used in DMs.
+
+```js {6}
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
+const data = new SlashCommandBuilder()
+	.setName('boop')
+	.setDescription('Replies with beep!')
+	.setDMPermission(false);
+```
+
+### Member permissions
+
+You can use the `setDefaultMemberPermissions` method to set the default permissions required by a member in order to run the command, setting it to `0` will prohibit anyone in a guild from using the command unless a specific overwrite is configured or the user has admin permissions.
+
+::: tip
+If you want to learn more about the `|` bitwise OR operator you can check the [Wikipedia](https://en.wikipedia.org/wiki/Bitwise_operation#OR) and [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_OR) articles on the topic.
+:::
+
+```js {9}
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const { PermissionFlagsBits } = require('discord-api-types/v10');
+
+const data = new SlashCommandBuilder()
+	.setName('ban')
+	.setDescription('Ban a member!')
+	.addUserOption(option =>
+		option.setName('target').setDescription('The member to ban'))
+	.setDefaultMemberPermissions(PermissionFlagsBits.KickMembers | PermissionFlagsBits.BanMembers);
+```
+
+And that's all you need to know on slash command permissions!

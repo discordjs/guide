@@ -57,7 +57,9 @@ export default {
 				'/interactions/slash-commands.md',
 				'/interactions/buttons.md',
 				'/interactions/select-menus.md',
+				'/interactions/autocomplete.md',
 				'/interactions/modals.md',
+				'/interactions/context-menus.md',
 			],
 		},
 		{

@@ -30,7 +30,7 @@ client.on('interactionCreate', async interaction => {
 		const background = await readFile('./wallpaper.jpg');
 		const backgroundImage = new Image();
 		backgroundImage.src = background;
-		context.drawImage(background, 0, 0, canvas.width, canvas.height);
+		context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
 		context.strokeStyle = '#0099ff';
 		context.strokeRect(0, 0, canvas.width, canvas.height);
