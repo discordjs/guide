@@ -377,10 +377,7 @@ Additionally, whenever an interaction is replied to and one fetches the reply, i
 -   `EmbedBuilder#addField()` has been removed. Use `EmbedBuilder#addFields()` instead.
 
 ```diff
-- new MessageEmbed().addField(...[
--  { name: 'one', value: 'one' },
--  { name: 'two', value: 'two' },
--]);
+- new MessageEmbed().addField('Inline field title', 'Some value here', true);
 
 + new EmbedBuilder().addFields([
 +  { name: 'one', value: 'one' },
