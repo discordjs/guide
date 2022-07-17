@@ -35,7 +35,7 @@ client.once('ready', () => {
 });
 
 client.on('interactionCreate', async interaction => {
-	if (interaction.type === InteractionType.ApplicationCommand) return;
+	if (!interaction.type === InteractionType.ApplicationCommand) return;
 
 	const { commandName } = interaction;
 
