@@ -26,6 +26,8 @@ const data = new SlashCommandBuilder()
 
 To handle an <DocsLink path="class/AutocompleteInteraction"/>, you can listen to the `interactionCreate` event and use the <DocsLink path="class/Interaction?scrollTo=isAutocomplete"/> method to make sure the interaction instance is an autocomplete interaction:
 
+<!-- eslint-skip -->
+
 ```js {1,4}
 const { InteractionType } = require('discord.js');
 
