@@ -23,22 +23,22 @@ This section will cover only the bare minimum to get you started, but you can re
 
 Create a `deploy-commands.js` file in your project directory. This file will be used to register and update the slash commands for your bot application.
 
-You'll need to install [`@discordjs/builders`](https://github.com/discordjs/discord.js/tree/main/packages/builders), [`@discordjs/rest`](https://github.com/discordjs/discord.js/tree/main/packages/rest), and [`discord-api-types`](https://github.com/discordjs/discord-api-types/).
+You'll need to install [`@discordjs/rest`](https://github.com/discordjs/discord.js/tree/main/packages/rest), and [`discord-api-types`](https://github.com/discordjs/discord-api-types/).
 
 :::: code-group
 ::: code-group-item npm
 ```sh:no-line-numbers
-npm install @discordjs/builders @discordjs/rest discord-api-types
+npm install @discordjs/rest discord-api-types
 ```
 :::
 ::: code-group-item yarn
 ```sh:no-line-numbers
-yarn add @discordjs/builders @discordjs/rest discord-api-types
+yarn add @discordjs/rest discord-api-types
 ```
 :::
 ::: code-group-item pnpm
 ```sh:no-line-numbers
-pnpm add @discordjs/builders @discordjs/rest discord-api-types
+pnpm add @discordjs/rest discord-api-types
 ```
 :::
 ::::
@@ -58,7 +58,7 @@ In order to get your application's client id, go to [Discord Developer Portal](h
 ```js{4,6-11}
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
+const { Routes } = require('discord-api-types/v10');
 const { clientId, guildId, token } = require('./config.json');
 
 const commands = [
@@ -68,7 +68,7 @@ const commands = [
 ]
 	.map(command => command.toJSON());
 
-const rest = new REST({ version: '9' }).setToken(token);
+const rest = new REST({ version: '10' }).setToken(token);
 
 rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
 	.then(() => console.log('Successfully registered application commands.'))
@@ -104,7 +104,7 @@ client.once('ready', () => {
 });
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.type === InteractionType.ApplicationCommand) return;
 
 	const { commandName } = interaction;
 
@@ -126,7 +126,7 @@ Note that servers are referred to as "guilds" in the Discord API and discord.js 
 
 ```js {9}
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.type === InteractionType.ApplicationCommand) return;
 
 	const { commandName } = interaction;
 
@@ -163,7 +163,7 @@ A "user" refers to a Discord user. `interaction.user` refers to the user the int
 
 ```js {11}
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.type === InteractionType.ApplicationCommand) return;
 
 	const { commandName } = interaction;
 

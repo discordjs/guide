@@ -25,17 +25,17 @@ pnpm add @discordjs/rest discord-api-types
 :::: code-group
 ::: code-group-item index.js
 ```js
-const { Client, Intents } = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.once('ready', () => {
 	console.log('Ready!');
 });
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (interaction.type === InteractionType.ApplicationCommand) return;
 
 	const { commandName } = interaction;
 
@@ -52,12 +52,12 @@ client.login(token);
 ::: code-group-item deploy-commands.js
 ```js
 const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
+const { Routes } = require('discord-api-types/v10');
 const { clientId, guildId, token } = require('./config.json');
 
 const commands = [];
 
-const rest = new REST({ version: '9' }).setToken(token);
+const rest = new REST({ version: '10' }).setToken(token);
 
 rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
 	.then(() => console.log('Successfully registered application commands.'))
@@ -141,10 +141,10 @@ In your `index.js` file, make these additions:
 ```js {1-2,7}
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Intents } = require('discord.js');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
 ```
@@ -182,7 +182,7 @@ Use the same approach for your `deploy-commands.js` file, but instead `.push()` 
 const fs = require('node:fs');
 const path = require('node:path');
 const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
+const { Routes } = require('discord-api-types/v10');
 const { clientId, guildId, token } = require('./config.json');
 
 const commands = [];
