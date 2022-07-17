@@ -118,7 +118,7 @@ client.on('interactionCreate', interaction => {
 		}
 
 		if (!interaction.channel.permissionsFor(client.user).has(PermissionsBitField.Flags.ManageRoles)) {
-			return interaction.reply('Please make sure I have the permissions ManageRoles in this channel and retry.');
+			return interaction.reply('Please make sure I have the `Manage Roles` permission in this channel and retry.');
 		}
 
 		interaction.channel.lockPermissions()
