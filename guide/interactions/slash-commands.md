@@ -200,7 +200,7 @@ However, not every interaction is a slash command (e.g. `MessageComponent`s). Ma
 
 ```js {2}
 client.on('interactionCreate', interaction => {
-	if (!interaction.isCommand()) return;
+	if (interaction.type !== InteractionType.ApplicationCommand) return;
 	console.log(interaction);
 });
 ```
@@ -216,7 +216,7 @@ Initially an interaction token is only valid for three seconds, so that's the ti
 
 ```js {1,4-6}
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (interaction.type !== InteractionType.ApplicationCommand) return;
 
 	if (interaction.commandName === 'ping') {
 		await interaction.reply('Pong!');
@@ -244,7 +244,7 @@ You may not always want everyone who has access to the channel to see a slash co
 
 ```js {5}
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (interaction.type !== InteractionType.ApplicationCommand) return;
 
 	if (interaction.commandName === 'ping') {
 		await interaction.reply({ content: 'Pong!', ephemeral: true });
@@ -279,7 +279,7 @@ After the initial response, an interaction token is valid for 15 minutes, so thi
 const wait = require('node:timers/promises').setTimeout;
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (interaction.type !== InteractionType.ApplicationCommand) return;
 
 	if (interaction.commandName === 'ping') {
 		await interaction.reply('Pong!');
@@ -300,7 +300,7 @@ In this case, you can make use of the `CommandInteraction#deferReply()` method, 
 const wait = require('node:timers/promises').setTimeout;
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (interaction.type !== InteractionType.ApplicationCommand) return;
 
 	if (interaction.commandName === 'ping') {
 		await interaction.deferReply();
@@ -330,7 +330,7 @@ After the initial response, an interaction token is valid for 15 minutes, so thi
 
 ```js {6}
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (interaction.type !== InteractionType.ApplicationCommand) return;
 
 	if (interaction.commandName === 'ping') {
 		await interaction.reply('Pong!');
@@ -435,7 +435,7 @@ If you have a command that contains subcommands, you can parse them in a very si
 
 ```js {5-15}
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (interaction.type !== InteractionType.ApplicationCommand) return;
 
 	if (interaction.commandName === 'info') {
 		if (interaction.options.getSubcommand() === 'user') {
