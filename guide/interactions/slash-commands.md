@@ -486,7 +486,7 @@ The slash command permissions for guilds are only defaults and can be altered by
 
 ### DM permission
 
-You can use the `setDMPermission` method to control if a global command can be used in DMs. By default, all global commands can be used in DMs.
+You can use the `ApplicationCommand#setDMPermission()` method to control if a global command can be used in DMs. By default, all global commands can be used in DMs.
 
 ```js {6}
 const { SlashCommandBuilder } = require('discord.js');
