@@ -7,7 +7,6 @@ As a developer, it's a good idea to make your development process as streamlined
 First, you will need a proper code editor. Using programs such as Notepad and Notepad++ is discouraged, as they're inefficient for projects like these. If you aren't using one of the editors listed below, it's advised to switch.
 
 * [Visual Studio Code](https://code.visualstudio.com/) is a prevalent choice; it is known for being fast and powerful. It supports various languages, has a terminal, built-in IntelliSense support, and autocomplete for both JavaScript and TypeScript. This is the recommended choice.
-* [Atom](https://atom.io/) is user-friendly, concise, and easy to navigate.
 * [Sublime Text](https://www.sublimetext.com/) is another popular editor that's easy to use and write code with.
 
 ## Installing a linter
@@ -36,14 +35,12 @@ pnpm add --save-dev eslint
 One of the advantages proper code editors have is their ability to integrate linters via editor plugins. Install the appropriate plugin(s) for your editor of choice.
 
 * [ESLint for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-* [Linter-ESLint for Atom](https://atom.io/packages/linter-eslint) (requires [Linter for Atom](https://atom.io/packages/linter))
 * [ESLint for Sublime Text](https://packagecontrol.io/packages/ESLint)
 
 ::: tip
 You can view plugins directly inside your editor.
 
 - Visual Studio Code: Press `Ctrl + Shift + X`
-- Atom: Press `Ctrl + ,` and click on "Install"
 - Sublime Text: Press `Ctrl + Shift + P` and search for "Install Package" (available via [Package Control](https://packagecontrol.io/installation))
 
 After that, search for the appropriate plugin and install it.
