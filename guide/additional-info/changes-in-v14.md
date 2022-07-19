@@ -324,6 +324,16 @@ Additionally, whenever an interaction is replied to and one fetches the reply, i
 
 `Invite#channel` and `Invite#inviter` are now getters and resolve structures from the cache.
 
+### MessageAttachment
+
+-   `MessageAttachment` has now been renamed to `AttachmentBuilder`.
+
+```diff
+- new MessageAttachment(buffer, 'image.png');
+
++ new AttachmentBuilder(buffer, { name: 'image.png' });
+```
+
 ### MessageComponent
 
 -   MessageComponents have been renamed as well. They no longer have the `Message` prefix, and now have a `Builder` suffix:
