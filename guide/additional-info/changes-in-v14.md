@@ -481,6 +481,10 @@ Many of the analogous enums can be found in the discord-api-types docs. [discord
 
 `AutocompleteInteraction#commandGuildId` has been added which is the id of the guild the invoked application command is registered to.
 
+### Builders
+
+Added `disableValidators()` and `enableValidators()` which disables or enables validation (enabled by default).
+
 ### Channel
 
 Store channels have been removed as they are no longer part of the API.
@@ -529,10 +533,6 @@ Added `Interaction#isRepliable()` to check whether a given interaction can be re
 ### MessageReaction
 
 Added `MessageReaction#react()` to make the client user react with the reaction the class belongs to.
-
-### Unsafe Builders
-
-Unsafe builders operate exactly like regular builders except they perform no validation on input. Unsafe builders are named by adding an `Unsafe` prefix to a regular builder.
 
 ### Webhook
 
