@@ -12,10 +12,11 @@ To create a context menu you construct a new `ContextMenuCommandBuilder`. You ca
 
 ```js
 const { ContextMenuCommandBuilder } = require('@discordjs/builders');
+const { ApplicationCommandType } = require('discord-api-types/v9');
 
 const data = new ContextMenuCommandBuilder()
 	.setName('echo')
-	.setType(2);
+	.setType(ApplicationCommandType.User);
 ```
 
 ## Receiving context menu command interactions
