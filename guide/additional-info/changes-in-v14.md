@@ -142,6 +142,8 @@ Similarly to channels, some interaction type guards have been removed, and repla
 
 Builders are no longer returned by the API like they were previously. For example you send the API an `EmbedBuilder` but you receive an `Embed` of the same data from the API. This may affect how your code handles received structures such as components. Refer to [message component changes section](#messagecomponent) for more details.
 
+Added `disableValidators()` and `enableValidators()` as top-level exports which disable or enable validation (enabled by default).
+
 ### Consolidation of `create()` & `edit()` parameters
 
 Various `create()` and `edit()` methods on managers and objects have had their parameters consolidated. The changes are below:
@@ -529,10 +531,6 @@ Added `Interaction#isRepliable()` to check whether a given interaction can be re
 ### MessageReaction
 
 Added `MessageReaction#react()` to make the client user react with the reaction the class belongs to.
-
-### Unsafe Builders
-
-Unsafe builders operate exactly like regular builders except they perform no validation on input. Unsafe builders are named by adding an `Unsafe` prefix to a regular builder.
 
 ### Webhook
 
