@@ -142,6 +142,8 @@ Similarly to channels, some interaction type guards have been removed, and repla
 
 Builders are no longer returned by the API like they were previously. For example you send the API an `EmbedBuilder` but you receive an `Embed` of the same data from the API. This may affect how your code handles received structures such as components. Refer to [message component changes section](#messagecomponent) for more details.
 
+Added `disableValidators()` and `enableValidators()` as top-level exports which disable or enable validation (enabled by default).
+
 ### Consolidation of `create()` & `edit()` parameters
 
 Various `create()` and `edit()` methods on managers and objects have had their parameters consolidated. The changes are below:
@@ -480,10 +482,6 @@ Many of the analogous enums can be found in the discord-api-types docs. [discord
 ### AutocompleteInteraction
 
 `AutocompleteInteraction#commandGuildId` has been added which is the id of the guild the invoked application command is registered to.
-
-### Builders
-
-Added `disableValidators()` and `enableValidators()` as top-level exports which disable or enable validation (enabled by default).
 
 ### Channel
 
