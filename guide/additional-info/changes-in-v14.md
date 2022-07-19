@@ -483,7 +483,7 @@ Many of the analogous enums can be found in the discord-api-types docs. [discord
 
 ### Builders
 
-Added `disableValidators()` and `enableValidators()` which disables or enables validation (enabled by default).
+Added `disableValidators()` and `enableValidators()` as top-level exports which disable or enable validation (enabled by default).
 
 ### Channel
 
