@@ -373,7 +373,7 @@ This small optimization allows you to use `.then()` to handle when all of the Pr
 Now that you know how to add reactions, you might be asking, how do you remove them? In this section, you will learn how to remove all reactions, remove reactions by user, and remove reactions by emoji.
 
 ::: warning
-All of these methods require `MANAGE_MESSAGES` permissions. Ensure your bot has permissions before attempting to utilize any of these methods, as it will error if it doesn't.
+All of these methods require `ManageMessages` permissions. Ensure your bot has permissions before attempting to utilize any of these methods, as it will error if it doesn't.
 :::
 
 ### Removing all reactions
