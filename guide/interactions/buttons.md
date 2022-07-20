@@ -29,7 +29,7 @@ client.on('interactionCreate', async interaction => {
 					.setCustomId('primary')
 					.setLabel('Primary')
 					.setStyle(ButtonStyle.Primary),
-			]);
+			);
 
 		await interaction.reply({ content: 'Pong!', components: [row] });
 	}
