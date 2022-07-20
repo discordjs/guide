@@ -28,7 +28,7 @@ client.on('interactionCreate', async interaction => {
 				new SelectMenuBuilder()
 					.setCustomId('select')
 					.setPlaceholder('Nothing selected')
-					.addOptions([
+					.addOptions(
 						{
 							label: 'Select me',
 							description: 'This is a description',
