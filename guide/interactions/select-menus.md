@@ -77,7 +77,7 @@ client.on('interactionCreate', async interaction => {
 		const row = new ActionRowBuilder()
 			.addComponents([
 				// ...
-			]);
+			);
 
 		const embed = new EmbedBuilder()
 			.setColor(0x0099FF)
