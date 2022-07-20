@@ -103,17 +103,17 @@ Now that you've installed Node.js and know how to open your console and run comm
 :::: code-group
 ::: code-group-item npm
 ```sh:no-line-numbers
-npm install discord.js
+npm install discord.js@13
 ```
 :::
 ::: code-group-item yarn
 ```sh:no-line-numbers
-yarn add discord.js
+yarn add discord.js@13
 ```
 :::
 ::: code-group-item pnpm
 ```sh:no-line-numbers
-pnpm add discord.js
+pnpm add discord.js@13
 ```
 :::
 ::::
