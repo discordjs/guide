@@ -24,7 +24,7 @@ client.on('interactionCreate', async interaction => {
 
 	if (interaction.commandName === 'ping') {
 		const row = new ActionRowBuilder()
-			.addComponents([
+			.addComponents(
 				new ButtonBuilder()
 					.setCustomId('primary')
 					.setLabel('Primary')
