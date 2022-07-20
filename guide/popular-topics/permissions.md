@@ -115,7 +115,8 @@ You can also provide an array of overwrites during channel creation, as shown be
 ```js
 const { ChannelType, PermissionsBitField } = require('discord.js');
 
-guild.channels.create('new-channel', {
+guild.channels.create({
+	name: 'new-channel',
 	type: ChannelType.GuildText,
 	permissionOverwrites: [
 		{
