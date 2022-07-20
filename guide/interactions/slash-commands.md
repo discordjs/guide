@@ -150,11 +150,11 @@ const data = new SlashCommandBuilder()
 		option.setName('category')
 			.setDescription('The gif category')
 			.setRequired(true)
-			.addChoices([
+			.addChoices(
 				{ name: 'Funny', value: 'gif_funny' },
 				{ name: 'Meme', value: 'gif_meme' },
 				{ name: 'Movie', value: 'gif_movie' },
-			]));
+			));
 ```
 
 ### Subcommands
@@ -403,6 +403,7 @@ const data = new SlashCommandBuilder()
 	.addUserOption(option => option.setName('target').setDescription('Select a user'))
 	.addChannelOption(option => option.setName('destination').setDescription('Select a channel'))
 	.addRoleOption(option => option.setName('muted').setDescription('Select a role'))
+        .addNumberOption(option => option.setName('num').setDescription('Enter a number'))
 	.addMentionableOption(option => option.setName('mentionable').setDescription('Mention something'))
 	.addAttachmentOption(option => option.setName('attachment').setDescription('Attach something'));
 ```
@@ -417,10 +418,11 @@ const user = interaction.options.getUser('target');
 const member = interaction.options.getMember('target');
 const channel = interaction.options.getChannel('destination');
 const role = interaction.options.getRole('muted');
+const number = interaction.options.getNumber('num');
 const mentionable = interaction.options.getMentionable('mentionable');
 const attachment = interaction.options.getAttachment('attachment');
 
-console.log([string, integer, boolean, user, member, channel, role, mentionable, attachment]);
+console.log(string, integer, boolean, user, member, channel, role, mentionable, attachment);
 ```
 
 ::: tip
@@ -457,7 +459,7 @@ client.on('interactionCreate', async interaction => {
 You _cannot_ delete an ephemeral message.
 :::
 
-In addition to replying to a slash command, you may also want to delete the initial reply. You can use `Interaction#deleteReply()` for this:
+In addition to replying to a slash command, you may also want to delete the initial reply. You can use `ChatInputCommandInteraction#deleteReply()` for this:
 
 <!-- eslint-skip -->
 
@@ -466,7 +468,7 @@ await interaction.reply('Pong!');
 await interaction.deleteReply();
 ```
 
-Lastly, you may require the `Message` object of a reply for various reasons, such as adding reactions. You can use the `Interaction#fetchReply()` method to fetch the `Message` instance of an initial response:
+Lastly, you may require the `Message` object of a reply for various reasons, such as adding reactions. You can use the `ChatInputCommandInteraction#fetchReply()` method to fetch the `Message` instance of an initial response:
 
 <!-- eslint-skip -->
 

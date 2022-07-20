@@ -81,7 +81,7 @@ client.on('interactionCreate', async interaction => {
 		const filtered = choices.filter(choice => choice.startsWith(focusedOption.value));
 		await interaction.respond(
 			filtered.map(choice => ({ name: choice, value: choice })),
-		]);
+		);
 	}
 });
 ```

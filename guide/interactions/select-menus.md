@@ -39,7 +39,7 @@ client.on('interactionCreate', async interaction => {
 							description: 'This is also a description',
 							value: 'second_option',
 						},
-					]),
+					),
 			);
 
 		await interaction.reply({ content: 'Pong!', components: [row] });
@@ -75,7 +75,7 @@ client.on('interactionCreate', async interaction => {
 
 	if (interaction.commandName === 'ping') {
 		const row = new ActionRowBuilder()
-			.addComponents([
+			.addComponents(
 				// ...
 			);
 

@@ -85,7 +85,7 @@ channel.send({ embeds: [exampleEmbed] });
 You don't need to include all the elements showcased above. If you want a simpler embed, leave some out.
 :::
 
-The `.setColor()` method accepts a <DocsLink path="typedef/ColorResolvable" />, e.g. an integer, an array of RGB values or specific color strings.
+The `.setColor()` method accepts a <DocsLink path="typedef/ColorResolvable" />, e.g. an integer, HEX color string, an array of RGB values or specific color strings.
 
 To add a blank field to the embed, you can use `.addFields({ name: '\u200b', value: '\u200b' })`.
 
