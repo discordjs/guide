@@ -24,8 +24,7 @@ const data = new SlashCommandBuilder()
 
 ## Responding to autocomplete interactions
 
-To handle an <DocsLink path="class/AutocompleteInteraction"/>, you can listen to the `interactionCreate` event and use the <DocsLink path="class/Interaction?scrollTo=isAutocomplete"/> method to make sure the interaction instance is an autocomplete interaction:
-
+To handle an <DocsLink path="class/AutocompleteInteraction"/>, you can check if the type of interaction received was type `ApplicationCommandAutocomplete` using <DocsLink path="class/BaseInteraction?scrollTo=type"/> to make sure the interaction instance is an autocomplete interaction:
 <!-- eslint-skip -->
 
 ```js {1,4}
