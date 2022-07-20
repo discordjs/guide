@@ -4,7 +4,7 @@ Once you have established a [voice connection](./voice-connections.md), you can 
 
 ::: warning
 If you are saving audio from users, make sure it abides by Discord's guidelines for saving end user data.
-Your bot may be disabled if you save data without the user's consent.
+Your bot may be disabled if you save data without the user's consent, and it may be illegal in some areas.
 :::
 
 ## Subscribing to users
@@ -40,14 +40,14 @@ You now have an Opus stream of a user speaking, but what does that even mean?
 [Opus](https://www.opus-codec.org/) refers to how audio data is encoded, and all packets from Discord are sent encoded in Opus.
 To save this in a sensical format, we have to decode the stream and re-encode it to an encoded format we like.
 
-We can use `prism-media` to both decode our audio streams:
+We can use `prism-media` to decode our audio streams to pcm:
 
 ```js
 const prism = require('prism-media');
 const fs = require('fs');
 
 const transcoder = new prism.opus.Decoder({
-	rate: 48000,
+	rate: 48_000,
 	channels: 2,
 	frameSize: 960,
 });
@@ -55,27 +55,6 @@ const transcoder = new prism.opus.Decoder({
 const file = fs.createWriteStream('./saved-audio.pcm');
 
 opusStream.pipe(transcoder).pipe(file);
-```
-
-And encode to a different codec:
-
-```js
-const prism = require('prism-media');
-const fs = require('fs');
-
-const oggStream = new prism.opus.OggLogicalBitstream({
-	opusHead: new prism.opus.OpusHead({
-		channelCount: 2,
-		sampleRate: 48000,
-	}),
-	pageSizeControl: {
-		maxPackets: 10,
-	},
-});
-
-const outFile = fs.createWriteStream('./saved-audio.ogg');
-
-opusStream.pipe(oggStream).pipe(outFile);
 ```
 
 :::tip
@@ -118,7 +97,7 @@ connection.receiver.speaking.on('start', userId => {
 		subscribeOptions,
 	});
 
-	console.log(`User has started speaking!`);
+	console.log('User has started speaking!');
 });
 ```
 
@@ -127,10 +106,54 @@ Be careful when handling this! Each time the user stops and start speaking that 
 You should try to check if you are already subscribed to a user so that you don't begin recording twice and increasing memory usage
 :::
 
-It's worth noting that using `VoiceReceiver.speaking` also can return a map of the users currently speaking:
+# Advanced Usage
+
+`prism-media` also exports `ffmpeg` if users would like to decode or encode their audio in an advanced way.
+All of the flags usable by ffmpeg are usable by this object. Here are some use-cases and examples for using ffmpeg.
+
+::: tip
+`prism-media` automatically assumes that you are going to pipe an input if you do not explicitly provide an input flag (`-i`)
+::: 
+
+## Seeking Time in an Audio Resource
+
+Pipe audio from a file into an ffmpeg transcoder with the seek argument in order to have it begin at a specified time.
 
 ```js
-if (connection.receiver.speaking.users.has(userId)) {
-	// Do stuff
-}
+const { createReadStream } = require('node:fs');
+const { createAudioResource } = require('@discordjs/voice');
+const prism = require('prism-media');
+
+const input = createReadStream('./audio.mp3');
+const transcoder = new prism.FFmpeg({
+	args: [
+		// Required for the Discord standard for audio packets
+		'-ar', '48000',
+		'-ac', '2',
+		'-f', 's16le',
+		// The audio begin at 25 seconds
+		'-ss', '00:00:25',
+	],
+});
+
+const opusStream = input.pipe(transcoder).pipe(new prism.opus.Encoder({ rate: 48_000, channels: 2, frameSize: 960 }));
+
+const resource = createAudioResource(opusStream, { inputType: StreamType.Opus });
 ```
+
+## PCM to Ogg & Ogg to PCM
+
+```js
+const prism = require('prism-media');
+const fs = require('node:fs');
+
+fs.createReadStream('./audio.pcm')
+	.pipe(new prism.opus.Encoder())
+	.pipe(fs.createWriteStream('./audio.ogg'));
+
+fs.createReadStream('./audio.ogg')
+	.pipe(new prism.opus.OggDemuxer())
+	.pipe(new prism.opus.Decoder())
+	.pipe(fs.createWriteStream('./audio.pcm'));
+```
+If you're looking to do something different with ffmpeg, try beginning at the [ffmpeg documentation](https://ffmpeg.org/ffmpeg.html).
