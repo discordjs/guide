@@ -143,7 +143,7 @@ const button = new ButtonBuilder()
 	.setCustomId('primary')
 	.setLabel('Primary')
 	.setStyle(ButtonStyle.Primary)
-	.setEmoji({ id: '123456789012345678' });
+	.setEmoji('123456789012345678');
 ```
 
 Now you know all there is to building and sending a Button! Let's move on to receiving button interactions!
