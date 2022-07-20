@@ -40,7 +40,7 @@ client.on('interactionCreate', async interaction => {
 							value: 'second_option',
 						},
 					]),
-			]);
+			);
 
 		await interaction.reply({ content: 'Pong!', components: [row] });
 	}
