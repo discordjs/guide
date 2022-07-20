@@ -87,7 +87,7 @@ You don't need to include all the elements showcased above. If you want a simple
 
 The `.setColor()` method accepts a <DocsLink path="typedef/ColorResolvable" />, e.g. an integer, an array of RGB values or specific color strings.
 
-To add a blank field to the embed, you can use `.addFields([{ name: '\u200b', value: '\u200b' }])`.
+To add a blank field to the embed, you can use `.addFields({ name: '\u200b', value: '\u200b' })`.
 
 The above example chains the manipulating methods to the newly created EmbedBuilder object.
 If you want to modify the embed based on conditions, you will need to reference it as the constant `exampleEmbed` (for our example).
