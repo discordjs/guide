@@ -231,7 +231,7 @@ We deliberately create a new Embed here instead of just modifying `message.embed
 
 ```js
 const receivedEmbed = message.embeds[0];
-const exampleEmbed = new EmbedBuilder(receivedEmbed).setTitle('New title');
+const exampleEmbed = EmbedBuilder.from(receivedEmbed).setTitle('New title');
 
 channel.send({ embeds: [exampleEmbed] });
 ```
