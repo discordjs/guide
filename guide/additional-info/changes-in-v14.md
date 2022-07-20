@@ -272,7 +272,7 @@ The `message` and `interaction` events are now removed. Use `messageCreate` and 
 
 `applicationCommandCreate`, `applicationCommandDelete` and `applicationCommandUpdate` have all been removed. See [this pull request](https://github.com/discordjs/discord.js/pull/6492) for more information.
 
-The `ThreadMembersUpdate` event now emits the users who were added, the users who were removed, and the thread respectively.
+The `threadMembersUpdate` event now emits the users who were added, the users who were removed, and the thread respectively.
 
 ### GuildBanManager
 
@@ -323,6 +323,16 @@ Additionally, whenever an interaction is replied to and one fetches the reply, i
 ### Invite
 
 `Invite#channel` and `Invite#inviter` are now getters and resolve structures from the cache.
+
+### MessageAttachment
+
+-   `MessageAttachment` has now been renamed to `AttachmentBuilder`.
+
+```diff
+- new MessageAttachment(buffer, 'image.png');
+
++ new AttachmentBuilder(buffer, { name: 'image.png' });
+```
 
 ### MessageComponent
 
