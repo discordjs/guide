@@ -255,7 +255,7 @@ guild.members.fetch({ withPresences: true }).then(fetchedMembers => {
 ```
 
 ::: warning
-This only works correctly if you have the `GUILD_PRESENCES` intent enabled for your application and client.
+This only works correctly if you have the `GuildPresences` intent enabled for your application and client.
 If you want to learn more about intents, check out [this dedicated guide on intents](/popular-topics/intents.md)!
 :::
 
