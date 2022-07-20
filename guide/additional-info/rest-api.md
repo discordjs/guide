@@ -202,10 +202,10 @@ And here is how you can build the embed from the API data:
 const [answer] = list;
 
 const embed = new EmbedBuilder()
-	.setColor('#EFFF00')
+	.setColor(0xEFFF00)
 	.setTitle(answer.word)
 	.setURL(answer.permalink)
-	.addFields({ name: 'Definition', value: trim(answer.definition, 1024) }, { name: 'Example', value: trim(answer.example, 1024) }, { name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` });
+	.addFields([{ name: 'Definition', value: trim(answer.definition, 1024) }, { name: 'Example', value: trim(answer.example, 1024) }, { name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` }]);
 
 interaction.editReply({ embeds: [embed] });
 ```
