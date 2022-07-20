@@ -24,7 +24,7 @@ client.on('interactionCreate', async interaction => {
 
 	if (interaction.commandName === 'ping') {
 		const row = new ActionRowBuilder()
-			.addComponents(
+			.addComponents([
 				new SelectMenuBuilder()
 					.setCustomId('select')
 					.setPlaceholder('Nothing selected')
@@ -40,7 +40,7 @@ client.on('interactionCreate', async interaction => {
 							value: 'second_option',
 						},
 					]),
-			);
+			]);
 
 		await interaction.reply({ content: 'Pong!', components: [row] });
 	}
