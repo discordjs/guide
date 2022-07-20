@@ -106,7 +106,7 @@ Be careful when handling this! Each time the user stops and start speaking that 
 You should try to check if you are already subscribed to a user so that you don't begin recording twice and increasing memory usage
 :::
 
-# Advanced Usage
+## Advanced Usage
 
 `prism-media` also exports `ffmpeg` if users would like to decode or encode their audio in an advanced way.
 All of the flags usable by ffmpeg are usable by this object. Here are some use-cases and examples for using ffmpeg.
@@ -115,7 +115,7 @@ All of the flags usable by ffmpeg are usable by this object. Here are some use-c
 `prism-media` automatically assumes that you are going to pipe an input if you do not explicitly provide an input flag (`-i`)
 ::: 
 
-## Seeking Time in an Audio Resource
+### Seeking Time in an Audio Resource
 
 Pipe audio from a file into an ffmpeg transcoder with the seek argument in order to have it begin at a specified time.
 
@@ -141,7 +141,7 @@ const opusStream = input.pipe(transcoder).pipe(new prism.opus.Encoder({ rate: 48
 const resource = createAudioResource(opusStream, { inputType: StreamType.Opus });
 ```
 
-## PCM to Ogg & Ogg to PCM
+### PCM to Ogg & Ogg to PCM
 
 ```js
 const prism = require('prism-media');
