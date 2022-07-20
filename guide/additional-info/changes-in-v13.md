@@ -9,20 +9,20 @@ Once you've got Node up-to-date, you can install v13 by running the appropriate 
 :::: code-group
 ::: code-group-item npm
 ```sh:no-line-numbers
-npm install discord.js # text-only
-npm install discord.js @discordjs/voice # voice support
+npm install discord.js@13 # text-only
+npm install discord.js@13 @discordjs/voice # voice support
 ```
 :::
 ::: code-group-item yarn
 ```sh:no-line-numbers
-yarn add discord.js # text-only
-yarn add discord.js @discordjs/voice # voice support
+yarn add discord.js@13 # text-only
+yarn add discord.js@13 @discordjs/voice # voice support
 ```
 :::
 ::: code-group-item pnpm
 ```sh:no-line-numbers
-pnpm add discord.js # text-only
-pnpm add discord.js @discordjs/voice # voice support
+pnpm add discord.js@13 # text-only
+pnpm add discord.js@13 @discordjs/voice # voice support
 ```
 :::
 ::::
@@ -36,7 +36,7 @@ You can check your discord.js version with the `list` command. Should it still s
 npm list discord.js
 # uninstall and re-install
 npm uninstall discord.js
-npm install discord.js
+npm install discord.js@13
 ```
 :::
 ::: code-group-item yarn
@@ -45,7 +45,7 @@ npm install discord.js
 yarn list discord.js
 # uninstall and re-install
 yarn remove discord.js
-yarn add discord.js
+yarn add discord.js@13
 ```
 :::
 ::: code-group-item pnpm
@@ -54,7 +54,7 @@ yarn add discord.js
 pnpm list discord.js
 # uninstall and re-install
 pnpm remove discord.js
-pnpm add discord.js
+pnpm add discord.js@13
 ```
 :::
 ::::

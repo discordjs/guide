@@ -18,17 +18,17 @@ Create a new project folder and run the following:
 :::: code-group
 ::: code-group-item npm
 ```sh:no-line-numbers
-npm install discord.js sequelize sqlite3
+npm install discord.js@13 sequelize sqlite3
 ```
 :::
 ::: code-group-item yarn
 ```sh:no-line-numbers
-yarn add discord.js sequelize sqlite3
+yarn add discord.js@13 sequelize sqlite3
 ```
 :::
 ::: code-group-item pnpm
 ```sh:no-line-numbers
-pnpm install discord.js sequelize sqlite3
+pnpm install discord.js@13 sequelize sqlite3
 ```
 :::
 ::::
