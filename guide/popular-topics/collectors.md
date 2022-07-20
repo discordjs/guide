@@ -135,7 +135,9 @@ Collecting interactions from message components works similarly to reaction coll
 One important difference to note with interaction collectors is that Discord expects a response to *all* interactions within 3 seconds - even ones that you don't want to collect. For this reason, you may wish to `.deferUpdate()` all interactions in your filter, or not use a filter at all and handle this behavior in the `collect` event.
 
 ```js
-const collector = message.createMessageComponentCollector({ componentType: 'BUTTON', time: 15000 });
+const { ComponentType } = require('discord.js');
+
+const collector = message.createMessageComponentCollector({ componentType: ComponentType.Button, time: 15000 });
 
 collector.on('collect', i => {
 	if (i.user.id === interaction.user.id) {
