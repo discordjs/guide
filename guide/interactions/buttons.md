@@ -82,11 +82,11 @@ client.on('interactionCreate', async interaction => {
 ```
 
 ::: warning
-If you're using typescript you'll need to specify the type of components your action row holds. This can be done by specifying the generic parameter in `ActionRowBuilder`.
+If you're using typescript you'll need to specify the type of components your action row holds. This can be done by specifying the component builder you will add to it using a generic parameter in `ActionRowBuilder`.
 
 ```diff
 - new ActionRowBuilder()
-+ new ActionRowBuilder<MessageActionRowComponentBuilder>()
++ new ActionRowBuilder<ButtonBuilder>()
 ```
 :::
 
