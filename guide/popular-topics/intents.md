@@ -34,6 +34,25 @@ Please make sure to provide the list of gateway intents and partials you use in 
 
 discord.js provides the utility structure <docs-link path="class/Intents">`Intents`</docs-link> to simplify the modification of intents bitfields.
 
+::: warning
+If you are using DiscordJS v14 or higher, you must now require 'GatewayIntentBits'. 'GatewayIntentBits' no longer requires the FLAGS notation when declaring intents.
+```js
+// Example:
+
+const { Client, GatewayIntentBits } = require("discord.js");
+
+module.exports = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildPresences,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMessageReactions,
+  ],
+}); 
+```
+:::
+
 You can use the `.add()` and `.remove()` methods to add or remove flags (Intents string literals representing a certain bit) and modify the bitfield. You can provide single flags as well as an array or bitfield. To use a set of intents as a template you can pass it to the constructor. Note that the empty constructor `new Intents()` creates an empty Intents instance, representing no intents or the bitfield `0`:
 
 ```js
