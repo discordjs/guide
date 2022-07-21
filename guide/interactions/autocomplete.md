@@ -14,7 +14,7 @@ To use autocomplete with your commands, you have to set the respective option wh
 const { SlashCommandBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
-	.setName('ping')
+	.setName('tag')
 	.setDescription('Replies with Pong!')
 	.addStringOption(option =>
 		option.setName('autocomplete')
