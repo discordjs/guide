@@ -81,6 +81,15 @@ client.on('interactionCreate', async interaction => {
 });
 ```
 
+::: warning
+If you're using typescript you'll need to specify the type of components your action row holds. This can be done by specifying the generic parameter in `ActionRowBuilder`.
+
+```diff
+- new ActionRowBuilder()
++ new ActionRowBuilder<ButtonBuilder>()
+```
+:::
+
 <DiscordMessages>
 	<DiscordMessage profile="bot">
 		<template #interactions>

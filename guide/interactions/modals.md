@@ -80,11 +80,11 @@ client.on('interactionCreate', async interaction => {
 
 		// An action row only holds one text input,
 		// so you need one action row per text input.
-		const firstActionRow = new ActionRowBuilder().addComponents([favoriteColorInput]);
-		const secondActionRow = new ActionRowBuilder().addComponents([hobbiesInput]);
+		const firstActionRow = new ActionRowBuilder().addComponents(favoriteColorInput);
+		const secondActionRow = new ActionRowBuilder().addComponents(hobbiesInput);
 
 		// Add inputs to the modal
-		modal.addComponents([firstActionRow, secondActionRow]);
+		modal.addComponents(firstActionRow, secondActionRow);
 
 		// Show the modal to the user
 		await interaction.showModal(modal);
@@ -98,7 +98,7 @@ Restart your bot and invoke the `/ping` command again. You should see a popup fo
 
 ## Receiving modal submissions
 
-Modals are received via an interaction. You can check if a given interaction is a modal by checking if the interaction is a `ModalSubmit`.
+Modals are received via an interaction. You can check if a given interaction is a modal by checking if the <DocsLink path="class/BaseInteraction?scrollTo=type"/> is `ModalSubmit`. 
 
 ```js {1,4}
 const { InteractionType } = require('discord.js');

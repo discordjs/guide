@@ -74,6 +74,7 @@ const exampleEmbed = new EmbedBuilder()
 		{ name: 'Inline field title', value: 'Some value here', inline: true },
 		{ name: 'Inline field title', value: 'Some value here', inline: true },
 	)
+	.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
 	.setImage('https://i.imgur.com/AfFp7pu.png')
 	.setTimestamp()
 	.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });

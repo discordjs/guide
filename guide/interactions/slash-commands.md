@@ -196,7 +196,7 @@ client.on('interactionCreate', interaction => {
 });
 ```
 
-However, not every interaction is a slash command (e.g. `MessageComponent`s). Make sure to only receive slash commands by making use of the `Interaction#isChatInputCommand()` method:
+However, not every interaction is a slash command (e.g. `MessageComponent`s). Make sure to only receive slash commands by making use of the `BaseInteraction#isChatInputCommand()` method:
 
 ```js {2}
 client.on('interactionCreate', interaction => {
@@ -208,10 +208,10 @@ client.on('interactionCreate', interaction => {
 ### Responding to a command
 
 There are multiple ways of responding to a slash command, each of these are covered in the following segments.
-The most common way of sending a response is by using the `Interaction#reply()` method:
+The most common way of sending a response is by using the `BaseInteraction#reply()` method:
 
 ::: warning
-Initially an interaction token is only valid for three seconds, so that's the timeframe in which you are able to use the `Interaction#reply()` method. Responses that require more time ("Deferred Responses") are explained later in this page.
+Initially an interaction token is only valid for three seconds, so that's the timeframe in which you are able to use the `BaseInteraction#reply()` method. Responses that require more time ("Deferred Responses") are explained later in this page.
 :::
 
 ```js {1,4-6}
@@ -269,7 +269,7 @@ Now when you run your command again, you should see something like this:
 
 ### Editing responses
 
-After you've sent an initial response, you may want to edit that response for various reasons. This can be achieved with the `Interaction#editReply()` method:
+After you've sent an initial response, you may want to edit that response for various reasons. This can be achieved with the `BaseInteraction#editReply()` method:
 
 ::: warning
 After the initial response, an interaction token is valid for 15 minutes, so this is the timeframe in which you can edit the response and send follow-up messages.
@@ -293,7 +293,7 @@ client.on('interactionCreate', async interaction => {
 
 As previously mentioned, you have three seconds to respond to an interaction before its token becomes invalid. But what if you have a command that performs a task which takes longer than three seconds before being able to reply?
 
-In this case, you can make use of the `Interaction#deferReply()` method, which triggers the `<application> is thinking...` message and also acts as initial response. This allows you 15 minutes to complete your tasks before responding.
+In this case, you can make use of the `BaseInteraction#deferReply()` method, which triggers the `<application> is thinking...` message and also acts as initial response. This allows you 15 minutes to complete your tasks before responding.
 <!--- here either display the is thinking message via vue-discord-message or place a screenshot -->
 
 ```js {7-9}
@@ -322,7 +322,7 @@ await interaction.deferReply({ ephemeral: true });
 
 ### Follow-ups
 
-Replying to slash commands is great and all, but what if you want to send multiple responses instead of just one? Follow-up messages got you covered, you can use `Interaction#followUp()` to send multiple responses:
+Replying to slash commands is great and all, but what if you want to send multiple responses instead of just one? Follow-up messages got you covered, you can use `BaseInteraction#followUp()` to send multiple responses:
 
 ::: warning
 After the initial response, an interaction token is valid for 15 minutes, so this is the timeframe in which you can edit the response and send follow-up messages.
@@ -403,7 +403,7 @@ const data = new SlashCommandBuilder()
 	.addUserOption(option => option.setName('target').setDescription('Select a user'))
 	.addChannelOption(option => option.setName('destination').setDescription('Select a channel'))
 	.addRoleOption(option => option.setName('muted').setDescription('Select a role'))
-        .addNumberOption(option => option.setName('num').setDescription('Enter a number'))
+    .addNumberOption(option => option.setName('num').setDescription('Enter a number'))
 	.addMentionableOption(option => option.setName('mentionable').setDescription('Mention something'))
 	.addAttachmentOption(option => option.setName('attachment').setDescription('Attach something'));
 ```
