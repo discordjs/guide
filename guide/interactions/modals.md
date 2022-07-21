@@ -115,7 +115,9 @@ The `ModalSubmitInteraction` class provides the same methods as the `CommandInte
 
 - `reply()`
 - `editReply()`
+- `update()`
 - `deferReply()`
+- `deferUpdate()`
 - `fetchReply()`
 - `deleteReply()`
 - `followUp()`
