@@ -131,6 +131,10 @@ client.on('interactionCreate', async interaction => {
 });
 ```
 
+::: tip
+If you're using typescript, you can use the <DocsLink path="class/ModalSubmitInteraction?scrollTo=isFromMessage"/> typeguard, to check whether the received interaction was from a `MessageComponentInteraction`.
+:::
+
 ## Extracting data from modal submissions
 
 You'll most likely need to read the data sent by the user in the modal. You can do this by accessing the `#fields` instance field on the interaction. From there you can call `#getTextInputValue` with the custom id of the text input to get the value.
