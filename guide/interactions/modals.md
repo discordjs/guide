@@ -132,7 +132,7 @@ client.on('interactionCreate', async interaction => {
 ```
 
 ::: tip
-If you're using typescript, you can use the <DocsLink path="class/ModalSubmitInteraction?scrollTo=isFromMessage"/> typeguard, to check whether the received interaction was from a `MessageComponentInteraction`.
+If you're using typescript, you can use the <DocsLink path="class/ModalSubmitInteraction?scrollTo=isFromMessage"/> typeguard, to check whether the received interaction was from a `MessageComponentInteraction` to avoid errors.
 :::
 
 ## Extracting data from modal submissions
