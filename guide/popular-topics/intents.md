@@ -37,16 +37,16 @@ discord.js provides the utility structure <docs-link path="class/IntentsBitField
 You can use the `.add()` and `.remove()` methods to add or remove flags (Intents string literals representing a certain bit) and modify the bitfield. You can provide single flags as well as an array or bitfield. To use a set of intents as a template you can pass it to the constructor. Note that the empty constructor `new IntentsBitField()` creates an empty Intents instance, representing no intents or the bitfield `0`:
 
 ```js
-const { Client, GatewayIntentBits, IntentsBitField } = require('discord.js');
+const { Client, IntentsBitField } = require('discord.js');
 
 const myIntents = new Intents();
-myIntents.add(GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildMembers);
+myIntents.add(IntentsBitField.Flags.GuildPresences, IntentsBitField.Flags.GuildMembers);
 
 const client = new Client({ intents: myIntents });
 
 // other examples:
-const otherIntents = new IntentsBitField([GatewayIntentBits.Guilds, GatewayIntentBits.DirectMessages]);
-otherIntents.remove([GatewayIntentBits.DirectMessages]);
+const otherIntents = new IntentsBitField([IntentsBitField.Flags.Guilds, IntentsBitField.Flags.DirectMessages]);
+otherIntents.remove([IntentsBitField.Flags.DirectMessages]);
 
 const otherIntents2 = new IntentsBitField(32509);
 otherIntents2.remove(4096, 512);

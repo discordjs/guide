@@ -55,4 +55,4 @@ The angle brackets `<>` are used for generic types or parameterized types, signi
 
 ![TextChannel#send on the docs](./images/send.png)
 
-In this piece of the docs, you can see three type signatures, `StringResolvable`, `MessagePayload or MessageOptions`, and `Promise<(Message|Array<Message>)>`. The meaning of the word "or" here is the same as `|`.
+In this piece of the docs, you can see two type signatures, `string`, `MessagePayload`, or `MessageOptions`, and `Promise<(Message|Array<Message>)>`. The meaning of the word "or" here is the same as `|`.

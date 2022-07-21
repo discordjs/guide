@@ -121,7 +121,7 @@ The `ModalSubmitInteraction` class provides the same methods as the `CommandInte
 - `followUp()`
 
 ```js{1,3-5}
-client.on('interactionCreate', interaction => {
+client.on('interactionCreate', async interaction => {
 	if (interaction.type !== InteractionType.ModalSubmit) return;
 	if (interaction.customId === 'myModal') {
 		await interaction.reply({ content: 'Your submission was recieved successfully!' });

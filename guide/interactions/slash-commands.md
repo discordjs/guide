@@ -422,7 +422,7 @@ const number = interaction.options.getNumber('num');
 const mentionable = interaction.options.getMentionable('mentionable');
 const attachment = interaction.options.getAttachment('attachment');
 
-console.log(string, integer, boolean, user, member, channel, role, mentionable, attachment);
+console.log({ string, integer, boolean, user, member, channel, role, mentionable, attachment, number });
 ```
 
 ::: tip

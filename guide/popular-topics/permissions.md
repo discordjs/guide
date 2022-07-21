@@ -263,11 +263,11 @@ You can also use this approach for other <DocsLink path="typedef/PermissionResol
 const { PermissionsBitField } = require('discord.js');
 
 const flags = [
-	PermissionsBitField.ViewChannels,
-	PermissionsBitField.EmbedLinks,
-	PermissionsBitField.AttachFiles,
-	PermissionsBitField.ReadMessageHistory,
-	PermissionsBitField.ManageRoles,
+	PermissionsBitField.Flags.ViewChannels,
+	PermissionsBitField.Flags.EmbedLinks,
+	PermissionsBitField.Flags.AttachFiles,
+	PermissionsBitField.Flags.ReadMessageHistory,
+	PermissionsBitField.Flags.ManageRoles,
 ];
 
 const permissions = new PermissionsBitField(flags);

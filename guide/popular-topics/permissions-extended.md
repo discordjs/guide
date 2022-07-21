@@ -17,7 +17,7 @@ Before we get into actually assigning permissions, let's quickly go over the met
 6. Apply all denies for the specific guild member if they exist.
 7. Apply all allows for the specific guild member if they exist.
 
-Due to this system, you cannot deny base permissions. If you grant `SEND_MESSAGES` to `@everyone` and don't grant it for a muted members role, muted members will still be able to send messages unless you specify channel-based overwrites.
+Due to this system, you cannot deny base permissions. If you grant `SendMessages` to `@everyone` and don't grant it for a muted members role, muted members will still be able to send messages unless you specify channel-based overwrites.
 
 All additional roles allow overwrites are applied after all additional roles denies! If any of a member's roles have an overwrite to allow a permission explicitly, the member can execute the associated actions in this channel regardless of the role hierarchy. 
 
@@ -42,9 +42,9 @@ Let's say you want to send a message to a channel. To prevent unnecessary API ca
 
 This error means your bot is missing `ViewChannel`, and as such, can't send messages either.
 
-One possible scenario causing this: the channel has permission overwrites for the default role `@everyone` to grant `SendMessages` so everyone who can see the channel can also write in it, but at the same time has an overwrite to deny `VIEW_CHANNEL` to make it only accessible to a subset of members.
+One possible scenario causing this: the channel has permission overwrites for the default role `@everyone` to grant `SendMessages` so everyone who can see the channel can also write in it, but at the same time has an overwrite to deny `ViewChannel` to make it only accessible to a subset of members.
 
-As you only check for `SendMessages`, the bot will try to execute the send, but since `VIEW_CHANNEL` is missing, the API denies the request.
+As you only check for `SendMessages`, the bot will try to execute the send, but since `ViewChannel` is missing, the API denies the request.
 
 ::: tip
 Causes for "Missing Access":

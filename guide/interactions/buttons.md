@@ -86,7 +86,7 @@ If you're using typescript you'll need to specify the type of components your ac
 
 ```diff
 - new ActionRowBuilder()
-+ new ActionRowBuilder<ButtonBuilder>()
++ new ActionRowBuilder<MessageActionRowComponentBuilder>()
 ```
 :::
 
