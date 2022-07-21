@@ -57,7 +57,7 @@ The next time you get the error it will show info along the bottom of the error 
 ```json
   name: 'DiscordAPIError',
   message: 'Invalid Form Body\nmessage_id: Value "[object Object]" is not snowflake.',
-  path: '/api/v7/channels/638200642359525387/messages/[object%20Object]',
+  path: '/api/v10/channels/638200642359525387/messages/[object%20Object]',
   code: 50035,
   method: 'GET'
 ```
@@ -169,7 +169,7 @@ client.users.fetch('myId').then(someInitFunction);
 
 ### EmbedBuilder field names may not be empty.
 
-This error originates from calling `EmbedBuilder#addFields()` with a field object's `name` property as an empty string. If you would like the title to be empty for a reason, you should use a zero width space, which can be input as `\u200b`.
+This error originates from calling `EmbedBuilder#addFields()` with a field object's `name` property or `value` property as an empty string. If you would like the title to be empty for a reason, you should use a zero width space, which can be input as `\u200b`.
 
 ### The messages must be an Array, Collection, or number.
 
