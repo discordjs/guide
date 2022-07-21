@@ -403,7 +403,7 @@ const data = new SlashCommandBuilder()
 	.addUserOption(option => option.setName('target').setDescription('Select a user'))
 	.addChannelOption(option => option.setName('destination').setDescription('Select a channel'))
 	.addRoleOption(option => option.setName('muted').setDescription('Select a role'))
-    .addNumberOption(option => option.setName('num').setDescription('Enter a number'))
+	.addNumberOption(option => option.setName('num').setDescription('Enter a number'))
 	.addMentionableOption(option => option.setName('mentionable').setDescription('Mention something'))
 	.addAttachmentOption(option => option.setName('attachment').setDescription('Attach something'));
 ```
