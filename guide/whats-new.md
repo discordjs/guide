@@ -39,7 +39,7 @@
 
 ## Pages
 
-All content has been updated to use discord.js v14 syntax. The v12 version of the guide can be found at [https://v12.discordjs.guide/](https://v12.discordjs.guide/).
+All content has been updated to use discord.js v14 syntax. The v13 version of the guide can be found at [https://v13.discordjs.guide/](https://v13.discordjs.guide/).
 
 ### New
 
