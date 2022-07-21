@@ -120,7 +120,7 @@ The `ModalSubmitInteraction` class provides the same methods as the `CommandInte
 - `deleteReply()`
 - `followUp()`
 
-```js{1,4-6}
+```js{1,3-5}
 client.on('interactionCreate', interaction => {
 	if (interaction.type !== InteractionType.ModalSubmit) return;
 	if (interaction.customId === 'myModal') {

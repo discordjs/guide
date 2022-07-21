@@ -45,9 +45,9 @@ The <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" 
 
 ```js {4-11}
 client.on('interactionCreate', async interaction => {
-	if (interaction.type === InteractionType.ApplicationCommandAutocomplete) return;
+	if (interaction.type !== InteractionType.ApplicationCommandAutocomplete) return;
 
-	if (interaction.commandName === 'ping') {
+	if (interaction.commandName === 'tag') {
 		const focusedValue = interaction.options.getFocused();
 		const choices = ['faq', 'install', 'collection', 'promise', 'debug'];
 		const filtered = choices.filter(choice => choice.startsWith(focusedValue));
@@ -66,7 +66,7 @@ To distinguish between multiple options, you can pass `true` into <DocsLink path
 client.on('interactionCreate', async interaction => {
 	if (interaction.type !== InteractionType.ApplicationCommandAutocomplete) return;
 
-	if (interaction.commandName === 'ping') {
+	if (interaction.commandName === 'tag') {
 		const focusedOption = interaction.options.getFocused(true);
 		let choices;
 

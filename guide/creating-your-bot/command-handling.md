@@ -91,7 +91,7 @@ discord-bot/
 
 Create a new folder named `commands`, which is where you'll store all of your commands.
 
-We'll be using utility methods from the package to build the slash command data.
+We'll be using utility methods of the library to build the slash command data.
 
 First, create a commands/ping.js file for your ping command:
 

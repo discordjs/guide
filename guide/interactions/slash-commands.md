@@ -140,7 +140,7 @@ If you specify `choices` for an option, they'll be the **only** valid values use
 
 Specify them by using the `addChoices()` method from the slash command builder:
 
-```js {10-13}
+```js {10-14}
 const { SlashCommandBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
