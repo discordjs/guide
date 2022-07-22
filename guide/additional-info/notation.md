@@ -10,13 +10,13 @@ Always keep in mind that notation is not always rigorous. There will be typos, m
 
 Some common notations refer to a class or the properties, methods, or events of a class. There are many variations on these notations, and they are very flexible depending on the person, so use your best judgment when reading them.
 
-The notation `<Class>` means an instance of the `Class` class. For example, a snippet like `<Message>.reply('Hello')` is asking you to replace `<Message>` with some value that is an instance of `Message`, e.g. `msg.reply('Hello')`. It could also just be a placeholder, e.g., `<id>` would mean a placeholder for some ID.
+The notation `<Class>` means an instance of the `Class` class. For example, a snippet like `<BaseInteraction>.reply('Hello')` is asking you to replace `<BaseInteraction>` with some value that is an instance of `BaseInteraction`, e.g. `interaction.reply('Hello')`. It could also just be a placeholder, e.g., `<id>` would mean a placeholder for some ID.
 
 The notation `Class#foo` can refer to the `foo` property, method, or event of the `Class` class. Which one the writer meant needs to be determined from context. For example:
 
-- `Message#author` means that you should refer to the `author` property on a `Message`.
+- `BaseInteraction#user` means that you should refer to the `user` property on a `BaseInteraction`.
 - `TextChannel#send` means that you should refer to the `send` method on a `TextChannel`.
-- `Client#messageCreate` means that you should refer to the `messageCreate` event on a `Client`.
+- `Client#interactionCreate` means that you should refer to the `interactionCreate` event on a `Client`.
 
 ::: tip
 Remember that this notation is not valid JavaScript; it is a shorthand to refer to a specific piece of code.
