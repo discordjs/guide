@@ -65,7 +65,7 @@ await thread.leave();
 
 ## Archiving, unarchiving, and locking threads
 
-A thread can be either active or archived. Changing a thread from archived to active is referred to as unarchiving the thread. Threads that have `locked` set to true can only be unarchived by a member with the `MANAGE_THREADS` permission.
+A thread can be either active or archived. Changing a thread from archived to active is referred to as unarchiving the thread. Threads that have `locked` set to true can only be unarchived by a member with the `ManageThreads` permission.
 
 Threads are automatically archived after inactivity. "Activity" is defined as sending a message, unarchiving a thread, or changing the auto-archive time.
 
