@@ -167,7 +167,7 @@ client.login('your-token-goes-here');
 client.users.fetch('myId').then(someInitFunction);
 ```
 
-### EmbedBuilder field names may not be empty.
+### EmbedBuilder field values may not be empty.
 
 This error originates from calling `EmbedBuilder#addFields()` with a field object's `name` property as an empty string. If you would like the title to be empty for a reason, you should use a zero width space, which can be input as `\u200b`.
 
