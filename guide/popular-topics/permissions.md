@@ -29,7 +29,7 @@ To include permission checks like `Administrator` or `ManageGuild`, keep reading
 * BitField: Binary representation of Discord permissions 
 * Base Permissions: Permissions for roles the member has, set on the guild level
 * Final Permissions: Permissions for a member or role, after all overwrites are applied
-* Flag: Human readable string PasalCase (e.g., `KickMembers '`) that refers to a position in the permission BitField. You can find a list of all valid flags on the <DocsLink path="class/PermissionsBitField?scrollTo=s-Flags"/> page
+* Flag: Human readable string in PasalCase (e.g., `KickMembers '`) that refers to a position in the permission BitField. You can find a list of all valid flags on the <DocsLink path="class/PermissionsBitField?scrollTo=s-Flags"/> page
 
 ::: tip
 You can provide permission decimals wherever we use flag literals in this guide. If you are interested in a handy permission calculator, you can look at the "Bot" section in the [Discord developer portal](https://discord.com/developers/applications).
