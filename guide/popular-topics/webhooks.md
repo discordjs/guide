@@ -76,9 +76,9 @@ Once you are there, click on the `Create Webhook` / `New Webhook` button; this w
 Webhooks can be created with the <DocsLink path="class/TextChannel?scrollTo=createWebhook" type="method" /> method.
 
 ```js
-channel.createWebhook({
-        name: 'Some-username',
-	avatar: 'https://i.imgur.com/AfFp7pu.png',
+webhook.edit({
+	name: 'Some-username',
+	avatar: 'https://i.imgur.com/AfFp7pu.png', 
 })
 	.then(webhook => console.log(`Created webhook ${webhook}`))
 	.catch(console.error);
