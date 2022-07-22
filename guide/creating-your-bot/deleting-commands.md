@@ -22,25 +22,25 @@ Edit your `deploy-commands.js` as shown below, or put it into its own file to cl
 
 ```js{9-17}
 const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
+const { Routes } = require('discord.js');
 const { clientId, guildId, token } = require('./config.json');
 
-const rest = new REST({ version: '9' }).setToken(token);
+const rest = new REST({ version: '10' }).setToken(token);
 
 // ...
 
 // for guild-based commands
-rest.delete(Routes.applicationGuildCommand(clientId, guildId, "commandId"))
+rest.delete(Routes.applicationGuildCommand(clientId, guildId, 'commandId'))
 	.then(() => console.log('Successfully deleted guild command'))
 	.catch(console.error);
 
 // for global commands
-rest.delete(Routes.applicationCommand(clientId, "commandId"))
+rest.delete(Routes.applicationCommand(clientId, 'commandId'))
 	.then(() => console.log('Successfully deleted application command'))
 	.catch(console.error);
 ```
 
-Where `"commandId"` is the id of the command you want to delete. Run your deploy script and it will delete the command.
+Where `'commandId'` is the id of the command you want to delete. Run your deploy script and it will delete the command.
 
 ## Deleting all commands
 
@@ -48,10 +48,10 @@ To delete all commands in the respective scope (one guild, all global commands) 
 
 ```js{9-18}
 const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
+const { Routes } = require('discord.js');
 const { clientId, guildId, token } = require('./config.json');
 
-const rest = new REST({ version: '9' }).setToken(token);
+const rest = new REST({ version: '10' }).setToken(token);
 
 // ...
 

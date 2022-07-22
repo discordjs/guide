@@ -1,9 +1,9 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Intents } = require('discord.js');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
@@ -20,7 +20,7 @@ client.once('ready', () => {
 });
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	const command = client.commands.get(interaction.commandName);
 

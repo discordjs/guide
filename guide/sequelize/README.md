@@ -44,10 +44,10 @@ After you have installed discord.js and Sequelize, you can start with the follow
 // Require Sequelize
 const Sequelize = require('sequelize');
 // Require the necessary discord.js classes
-const { Client, Intents } = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
 
 // Create a new client instance
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 // When the client is ready, run this code (only once)
 client.once('ready', () => {
@@ -55,7 +55,7 @@ client.once('ready', () => {
 });
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
 	// ...
@@ -70,7 +70,7 @@ client.login('your-token-goes-here');
 The first step is to define the connection information. It should look something like this:
 
 ```js {3-9}
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const sequelize = new Sequelize('database', 'user', 'password', {
 	host: 'localhost',
@@ -156,7 +156,7 @@ After all this preparation, you can now write your first command! Let's start wi
 
 ```js {7-26}
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
 

@@ -17,11 +17,11 @@ Before we get into actually assigning permissions, let's quickly go over the met
 6. Apply all denies for the specific guild member if they exist.
 7. Apply all allows for the specific guild member if they exist.
 
-Due to this system, you cannot deny base permissions. If you grant `SEND_MESSAGES` to `@everyone` and don't grant it for a muted members role, muted members will still be able to send messages unless you specify channel-based overwrites.
+Due to this system, you cannot deny base permissions. If you grant `SendMessages` to `@everyone` and don't grant it for a muted members role, muted members will still be able to send messages unless you specify channel-based overwrites.
 
 All additional roles allow overwrites are applied after all additional roles denies! If any of a member's roles have an overwrite to allow a permission explicitly, the member can execute the associated actions in this channel regardless of the role hierarchy. 
 
-Placing an overwrite to allow `SEND_MESSAGES` on a role will result in members with this role not being mutable via role assignment in this channel.
+Placing an overwrite to allow `SendMessages` on a role will result in members with this role not being mutable via role assignment in this channel.
 
 ## Elevated permissions
 
@@ -29,41 +29,41 @@ If the guild owner enables the server's two-factor authentication option, everyo
 Check out [Discord's help article](https://support.discord.com/hc/en-us/articles/219576828-Setting-up-Two-Factor-Authentication) if you need assistance with this.
 
 The permissions assigned to these actions are called "elevated permissions" and are: 
-`KICK_MEMBERS`, `BAN_MEMBERS`, `ADMINISTRATOR`, `MANAGE_CHANNELS`, `MANAGE_GUILD`, `MANAGE_MESSAGES`, `MANAGE_ROLES`, `MANAGE_WEBHOOKS`, `MANAGE_THREADS`, and `MANAGE_EMOJIS_AND_STICKERS`.
+`KickMembers`, `BanMembers`, `Administrator`, `ManageChannels`, `ManageGuild`, `ManageMessages`, `ManageRoles`, `ManageWebhooks`, `ManageThreads`, and `ManageEmojisAndStickers`.
 
 ## Implicit permissions
 
 Some Discord permissions apply implicitly based on logical use, which can cause unwanted behavior if you are not aware of this fact.
 
-The prime example for implicit permissions is `VIEW_CHANNEL`. If this flag is missing in the final permissions, you can't do anything on that channel. It makes sense, right? If you can't view the channel, you can't read or send messages in it, set the topic, or change its name.
+The prime example for implicit permissions is `ViewChannel`. If this flag is missing in the final permissions, you can't do anything on that channel. It makes sense, right? If you can't view the channel, you can't read or send messages in it, set the topic, or change its name.
 The library does not handle implicit permissions for you, so understanding how the system works is vital for you as a bot developer.
 
-Let's say you want to send a message to a channel. To prevent unnecessary API calls, you want to make sure your bot's permissions in this channel include `SEND_MESSAGES` (more on how to achieve this [here](/popular-topics/permissions.md#checking-for-permissions)). The check passes, but you still can't send the message and are greeted with `DiscordAPIError: Missing Access`.
+Let's say you want to send a message to a channel. To prevent unnecessary API calls, you want to make sure your bot's permissions in this channel include `SendMessages` (more on how to achieve this [here](/popular-topics/permissions.md#checking-for-permissions)). The check passes, but you still can't send the message and are greeted with `DiscordAPIError: Missing Access`.
 
-This error means your bot is missing `VIEW_CHANNEL`, and as such, can't send messages either.
+This error means your bot is missing `ViewChannel`, and as such, can't send messages either.
 
-One possible scenario causing this: the channel has permission overwrites for the default role `@everyone` to grant `SEND_MESSAGES` so everyone who can see the channel can also write in it, but at the same time has an overwrite to deny `VIEW_CHANNEL` to make it only accessible to a subset of members.
+One possible scenario causing this: the channel has permission overwrites for the default role `@everyone` to grant `SendMessages` so everyone who can see the channel can also write in it, but at the same time has an overwrite to deny `ViewChannel` to make it only accessible to a subset of members.
 
-As you only check for `SEND_MESSAGES`, the bot will try to execute the send, but since `VIEW_CHANNEL` is missing, the API denies the request.
+As you only check for `SendMessages`, the bot will try to execute the send, but since `ViewChannel` is missing, the API denies the request.
 
 ::: tip
 Causes for "Missing Access":
-- Text Channels require `VIEW_CHANNEL` as detailed above.
-- Voice Channels require `CONNECT` in the same way.
-- Reacting to a message requires `READ_MESSAGE_HISTORY` in the channel the message was sent.
+- Text Channels require `ViewChannel` as detailed above.
+- Voice Channels require `Connect` in the same way.
+- Reacting to a message requires `ReadMessageHistory` in the channel the message was sent.
 - When deploying slash commands: Enable the `applications.commands` scope (for more information see the [adding your bot](/preparations/adding-your-bot-to-servers) section).
-- Timing out a member requires `MODERATE_MEMBERS`.
+- Timing out a member requires `ModerateMembers`.
 :::
 
 ## Limitations and oddities
 
-- Your bot needs `MANAGE_ROLES` in its base permissions to change base permissions.
-- It needs `MANAGE_ROLES` in its final permissions to change permission overwrites.
+- Your bot needs `ManageRoles` in its base permissions to change base permissions.
+- It needs `ManageRoles` in its final permissions to change permission overwrites.
 - It cannot edit permissions for roles that are higher than or equal to its highest role.
 - It cannot grant permissions it doesn't have.
 - It can manage overwrites for roles or users with higher roles than its own highest role.
 - It can manage overwrites for permissions it doesn't have.
-- Members with the `ADMINISTRATOR` permission are not affected by overwrites at all.
+- Members with the `Administrator` permission are not affected by overwrites at all.
 
 ## Missing permissions
 
@@ -75,12 +75,12 @@ During your development, you will likely run into `DiscordAPIError: Missing Perm
 - It is trying to modify or assign a role higher than or equal to its highest role.
 - It is trying to add a managed role to a member.
 - It is trying to remove a managed role from a member.
-- It is trying to timeout a member with the `ADMINISTRATOR` permission.
+- It is trying to timeout a member with the `Administrator` permission.
 - It is trying to execute a forbidden action on the server owner.
 - It is trying to execute an action based on another unfulfilled factor (for example, reserved for partnered guilds).
-- It is trying to execute an action on a voice channel without the `VIEW_CHANNEL` permission.
-- It is trying to create a channel or channel overwrite including the `MANAGE_ROLES` flag but does not have the `ADMINISTRATOR` permission or an explicit `MANAGE_ROLES` overwrite on this channel (note that the global permission does not count)
+- It is trying to execute an action on a voice channel without the `ViewChannel` permission.
+- It is trying to create a channel or channel overwrite including the `ManageRoles` flag but does not have the `Administrator` permission or an explicit `ManageRoles` overwrite on this channel (note that the global permission does not count)
 
 ::: warning
-Granting the `ADMINISTRATOR` permission does not skip any hierarchical check!
+Granting the `Administrator` permission does not skip any hierarchical check!
 :::

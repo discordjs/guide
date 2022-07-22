@@ -76,16 +76,16 @@ An important thing to know is that a function declared as `async` will always re
 Now that you know how Promises work and what they are used for, let's look at an example that handles multiple Promises. Let's say you want to react with letters (regional indicators) in a specific order. For this example, here's a basic template for a discord.js bot with some ES6 adjustments.
 
 ```js
-const { Client, Intents } = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.once('ready', () => {
 	console.log('I am ready!');
 });
 
 client.on('interactionCreate', interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'react') {
 		// ...

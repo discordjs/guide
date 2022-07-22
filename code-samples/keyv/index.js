@@ -1,8 +1,8 @@
 const Keyv = require('keyv');
-const { Client, Intents } = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
 const { globalPrefix, token } = require('./config.json');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 const prefixes = new Keyv('sqlite://path/to.sqlite');
 
 client.once('ready', () => {

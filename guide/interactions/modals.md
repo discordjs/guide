@@ -80,11 +80,11 @@ client.on('interactionCreate', async interaction => {
 
 		// An action row only holds one text input,
 		// so you need one action row per text input.
-		const firstActionRow = new ActionRowBuilder().addComponents([favoriteColorInput]);
-		const secondActionRow = new ActionRowBuilder().addComponents([hobbiesInput]);
+		const firstActionRow = new ActionRowBuilder().addComponents(favoriteColorInput);
+		const secondActionRow = new ActionRowBuilder().addComponents(hobbiesInput);
 
 		// Add inputs to the modal
-		modal.addComponents([firstActionRow, secondActionRow]);
+		modal.addComponents(firstActionRow, secondActionRow);
 
 		// Show the modal to the user
 		await interaction.showModal(modal);
@@ -98,29 +98,54 @@ Restart your bot and invoke the `/ping` command again. You should see a popup fo
 
 ## Receiving modal submissions
 
-Modals are received via an interaction. You can check if a given interaction is a modal by invoking the `#isModalSubmit()` method:
+Modals are received via an interaction. You can check if a given interaction is a modal by checking if the <DocsLink path="class/BaseInteraction?scrollTo=type"/> is `ModalSubmit`. 
 
-```js {2}
+```js {1,4}
+const { InteractionType } = require('discord.js');
+
 client.on('interactionCreate', interaction => {
-	if (!interaction.isModalSubmit()) return;
+	if (interaction.type !== InteractionType.ModalSubmit) return;
 	console.log(interaction);
 });
 ```
+
+## Responding to modal submissions
+
+The `ModalSubmitInteraction` class provides the same methods as the `CommandInteraction` class. These methods behave equally:
+
+- `reply()`
+- `editReply()`
+- `update()`
+- `deferReply()`
+- `deferUpdate()`
+- `fetchReply()`
+- `deleteReply()`
+- `followUp()`
+
+```js{1,3-5}
+client.on('interactionCreate', async interaction => {
+	if (interaction.type !== InteractionType.ModalSubmit) return;
+	if (interaction.customId === 'myModal') {
+		await interaction.reply({ content: 'Your submission was recieved successfully!' });
+	}
+});
+```
+
+::: tip
+If you're using typescript, you can use the <DocsLink path="class/ModalSubmitInteraction?scrollTo=isFromMessage"/> typeguard, to make sure the received interaction was from a `MessageComponentInteraction`.
+:::
 
 ## Extracting data from modal submissions
 
 You'll most likely need to read the data sent by the user in the modal. You can do this by accessing the `#fields` instance field on the interaction. From there you can call `#getTextInputValue` with the custom id of the text input to get the value.
 
-```js{4-8}
+```js{5-7}
 client.on('interactionCreate', interaction => {
-	if (!interaction.isModalSubmit()) return;
+	if (interaction.type !== InteractionType.ModalSubmit) return;
 
 	// Get the data entered by the user
 	const favoriteColor = interaction.fields.getTextInputValue('favoriteColorInput');
 	const hobbies = interaction.fields.getTextInputValue('hobbiesInput');
-
 	console.log({ favoriteColor, hobbies });
 });
 ```
-
-

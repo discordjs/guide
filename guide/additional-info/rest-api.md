@@ -39,16 +39,16 @@ To start off, you will be using the following skeleton code. Since both the comm
 <!-- eslint-disable require-await -->
 
 ```js
-const { Client, Intents, MessageEmbed } = require('discord.js');
+const { Client, GatewayIntentBits, EmbedBuilder } = require('discord.js');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.once('ready', () => {
 	console.log('Ready!');
 });
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
 	await interaction.deferReply();
@@ -201,8 +201,8 @@ And here is how you can build the embed from the API data:
 ```js
 const [answer] = list;
 
-const embed = new MessageEmbed()
-	.setColor('#EFFF00')
+const embed = new EmbedBuilder()
+	.setColor(0xEFFF00)
 	.setTitle(answer.word)
 	.setURL(answer.permalink)
 	.addFields({ name: 'Definition', value: trim(answer.definition, 1024) }, { name: 'Example', value: trim(answer.example, 1024) }, { name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` });

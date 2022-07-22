@@ -108,14 +108,14 @@ Webhooks, like bots, can send up to 10 embeds per message. They can also send at
 Example using a WebhookClient:
 
 ```js
-const { MessageEmbed, WebhookClient } = require('discord.js');
+const { EmbedBuilder, WebhookClient } = require('discord.js');
 const { webhookId, webhookToken } = require('./config.json');
 
 const webhookClient = new WebhookClient({ id: webhookId, token: webhookToken });
 
-const embed = new MessageEmbed()
+const embed = new EmbedBuilder()
 	.setTitle('Some Title')
-	.setColor('#0099ff');
+	.setColor(0x00FFFF);
 
 webhookClient.send({
 	content: 'Webhook test',
@@ -128,14 +128,14 @@ webhookClient.send({
 Try to find a webhook your bot knows the token for. This makes sure your bot can execute the webhook later on.
 
 ```js
-const { Client, Intents, MessageEmbed } = require('discord.js');
+const { Client, GatewayIntentBits, EmbedBuilder } = require('discord.js');
 const { token } = require('./config.json');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-const embed = new MessageEmbed()
+const embed = new EmbedBuilder()
 	.setTitle('Some Title')
-	.setColor('#0099ff');
+	.setColor(0x00FFFF);
 
 client.once('ready', async () => {
 	const channel = client.channels.cache.get('123456789012345678');

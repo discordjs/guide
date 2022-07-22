@@ -54,15 +54,15 @@ Here is an example of how an embed may look. We will go over embed construction 
 
 ## Using the embed constructor
 
-discord.js features the <DocsLink path="class/MessageEmbed" /> utility class for easy construction and manipulation of embeds.
+discord.js features the <DocsLink path="class/EmbedBuilder" /> utility class for easy construction and manipulation of embeds.
 
 ```js
 // at the top of your file
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 // inside a command, event listener, etc.
-const exampleEmbed = new MessageEmbed()
-	.setColor('#0099ff')
+const exampleEmbed = new EmbedBuilder()
+	.setColor(0x0099FF)
 	.setTitle('Some title')
 	.setURL('https://discord.js.org/')
 	.setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
@@ -74,7 +74,7 @@ const exampleEmbed = new MessageEmbed()
 		{ name: 'Inline field title', value: 'Some value here', inline: true },
 		{ name: 'Inline field title', value: 'Some value here', inline: true },
 	)
-	.addField('Inline field title', 'Some value here', true)
+	.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
 	.setImage('https://i.imgur.com/AfFp7pu.png')
 	.setTimestamp()
 	.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
@@ -88,18 +88,18 @@ You don't need to include all the elements showcased above. If you want a simple
 
 The `.setColor()` method accepts a <DocsLink path="typedef/ColorResolvable" />, e.g. an integer, HEX color string, an array of RGB values or specific color strings.
 
-To add a blank field to the embed, you can use `.addField('\u200b', '\u200b')`.
+To add a blank field to the embed, you can use `.addFields({ name: '\u200b', value: '\u200b' })`.
 
-The above example chains the manipulating methods to the newly created MessageEmbed object.
+The above example chains the manipulating methods to the newly created EmbedBuilder object.
 If you want to modify the embed based on conditions, you will need to reference it as the constant `exampleEmbed` (for our example).
 
 <!-- eslint-skip -->
 
 ```js
-const exampleEmbed = new MessageEmbed().setTitle('Some title');
+const exampleEmbed = new EmbedBuilder().setTitle('Some title');
 
 if (message.author.bot) {
-	exampleEmbed.setColor('#7289da');
+	exampleEmbed.setColor(0x7289DA);
 }
 ```
 
@@ -176,7 +176,7 @@ if (message.author.bot) {
 
 ## Attaching images
 
-You can upload images with your embedded message and use them as source for embed fields that support image URLs by constructing a <DocsLink path="class/MessageAttachment" /> from them to send as message option alongside the embed. The attachment parameter takes a BufferResolvable or Stream including the URL to an external image.
+You can upload images with your embedded message and use them as source for embed fields that support image URLs by constructing a <DocsLink path="class/AttachmentBuilder" /> from them to send as message option alongside the embed. The attachment parameter takes a BufferResolvable or Stream including the URL to an external image.
 
 You can then reference and use the images inside the embed itself with `attachment://fileName.extension`.
 
@@ -184,13 +184,13 @@ You can then reference and use the images inside the embed itself with `attachme
 If you plan to attach the same image repeatedly, consider hosting it online and providing the URL in the respective embed field instead. This also makes your bot respond faster since it doesn't need to upload the image with every response depending on it.
 :::
 
-### Using the MessageEmbed builder
+### Using the EmbedBuilder
 
 ```js
-const { MessageAttachment, MessageEmbed } = require('discord.js');
+const { AttachmentBuilder, EmbedBuilder } = require('discord.js');
 // ...
-const file = new MessageAttachment('../assets/discordjs.png');
-const exampleEmbed = new MessageEmbed()
+const file = new AttachmentBuilder('../assets/discordjs.png');
+const exampleEmbed = new EmbedBuilder()
 	.setTitle('Some title')
 	.setImage('attachment://discordjs.png');
 
@@ -200,9 +200,9 @@ channel.send({ embeds: [exampleEmbed], files: [file] });
 ### Using an embed object
 
 ```js
-const { MessageAttachment } = require('discord.js');
+const { AttachmentBuilder } = require('discord.js');
 // ...
-const file = new MessageAttachment('../assets/discordjs.png');
+const file = new AttachmentBuilder('../assets/discordjs.png');
 
 const exampleEmbed = {
 	title: 'Some title',
@@ -224,25 +224,25 @@ We will now explain how to edit embedded message content and resend a received e
 
 ### Resending a received embed
 
-To forward a received embed you retrieve it from the messages embed array (`message.embeds`) and pass it to the MessageEmbed can then be edited before sending it again.
+To forward a received embed you retrieve it from the messages embed array (`message.embeds`) and pass it to the EmbedBuilder, then it can be edited before sending it again.
 
 ::: warning
-We deliberately create a new Embed here instead of just modifying `message.embeds[0]` directly to keep the cache valid. If we were not to do this, the embed in cache on the original message would diverge from what the actual embed looks like, which can result in unexpected behavior down the line!
+We create a new Embed from `EmbedBuilder` here since embeds are immutable and their values cannot be changed directly.
 :::
 
 ```js
 const receivedEmbed = message.embeds[0];
-const exampleEmbed = new MessageEmbed(receivedEmbed).setTitle('New title');
+const exampleEmbed = EmbedBuilder.from(receivedEmbed).setTitle('New title');
 
 channel.send({ embeds: [exampleEmbed] });
 ```
 
 ### Editing the embedded message content
 
-To edit the content of an embed you need to pass a new MessageEmbed structure or embed object to the messages `.edit()` method.
+To edit the content of an embed you need to pass a new EmbedBuilder structure or embed object to the messages `.edit()` method.
 
 ```js
-const exampleEmbed = new MessageEmbed()
+const exampleEmbed = new EmbedBuilder()
 	.setTitle('Some title')
 	.setDescription('Description after the edit');
 

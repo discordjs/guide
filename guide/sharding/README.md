@@ -47,12 +47,12 @@ Here is some sample code for a `stats` command, without sharding taken into cons
 
 ```js
 // bot.js
-const { Client, Intents } = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.on('interactionCreate', interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
 

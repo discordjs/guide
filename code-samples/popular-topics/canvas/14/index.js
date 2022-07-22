@@ -1,9 +1,9 @@
-const { Client, Intents, MessageAttachment } = require('discord.js');
+const { Client, GatewayIntentBits, AttachmentBuilder } = require('discord.js');
 const { createCanvas, Image } = require('@napi-rs/canvas');
 const { readFile } = require('fs/promises');
 const { request } = require('undici');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -21,7 +21,7 @@ const applyText = (canvas, text) => {
 };
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'profile') {
 		const canvas = createCanvas(700, 250);
@@ -53,7 +53,7 @@ client.on('interactionCreate', async interaction => {
 		avatar.src = Buffer.from(await body.arrayBuffer());
 		context.drawImage(avatar, 25, 25, 200, 200);
 
-		const attachment = new MessageAttachment(canvas.toBuffer('image/png'), 'profile-image.png');
+		const attachment = new AttachmentBuilder(canvas.toBuffer('image/png'), { name: 'profile-image.png' });
 
 		interaction.reply({ files: [attachment] });
 	}

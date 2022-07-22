@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
-const { Client, Intents } = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 /*
  * Make sure you are on at least version 5 of Sequelize! Version 4 as used in this guide will pose a security threat.
@@ -45,7 +45,7 @@ client.once('ready', () => {
 });
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
 

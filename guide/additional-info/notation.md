@@ -16,13 +16,13 @@ The notation `Class#foo` can refer to the `foo` property, method, or event of th
 
 - `Message#author` means that you should refer to the `author` property on a `Message`.
 - `TextChannel#send` means that you should refer to the `send` method on a `TextChannel`.
-- `Client#message` means that you should refer to the `message` event on a `Client`.
+- `Client#messageCreate` means that you should refer to the `messageCreate` event on a `Client`.
 
 ::: tip
 Remember that this notation is not valid JavaScript; it is a shorthand to refer to a specific piece of code.
 :::
 
-Sometimes, the notation is extended, which can help you determine which one the writer meant. For example, `TextChannel#send(content, options)` is definitely a method of `TextChannel`, since it uses function notation. `Client#event:message` is an event since it says it is an event.
+Sometimes, the notation is extended, which can help you determine which one the writer meant. For example, `TextChannel#send(options)` is definitely a method of `TextChannel`, since it uses function notation. `Client#event:messageCreate` is an event since it says it is an event.
 
 The vital thing to take away from this notation is that the `#` symbol signifies that the property, method, or event can only be accessed through an instance of the class. Unfortunately, many abuse this notation, e.g., `<Message>#send`  or `Util#resolveColor`. `<Message>` is already an instance, so this makes no sense, and `resolveColor` is a static method–you should write it as `Util.resolveColor`. Always refer back to the docs if you are confused.
 
@@ -55,4 +55,4 @@ The angle brackets `<>` are used for generic types or parameterized types, signi
 
 ![TextChannel#send on the docs](./images/send.png)
 
-In this piece of the docs, you can see three type signatures, `StringResolvable or APIMessage`, `MessageOptions or MessageAdditions`, and `Promise<(Message|Array<Message>)>`. The meaning of the word "or" here is the same as `|`.
+In this piece of the docs, you can see two type signatures, `string`, `MessagePayload`, or `MessageOptions`, and `Promise<(Message|Array<Message>)>`. The meaning of the word "or" here is the same as `|`.

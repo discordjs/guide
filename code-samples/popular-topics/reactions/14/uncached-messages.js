@@ -1,8 +1,8 @@
-const { Client, Intents } = require('discord.js');
+const { Client, GatewayIntentBits, Partials } = require('discord.js');
 
 const client = new Client({
-	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
-	partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
+	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMessageReactions],
+	partials: [Partials.Message, Partials.Channel, Partials.Reaction],
 });
 
 client.once('ready', () => {

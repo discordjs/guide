@@ -32,17 +32,19 @@ client.on('messageDelete', message => {
 
 So far, nothing should seem new or complicated. You get the message deleted event and log that a message was removed from a channel. More information from the message object can be extracted, but that is left as an exercise for the reader.
 
-For simplicity, set a fetch limit of 1 and accept only the `MESSAGE_DELETE` type.
+For simplicity, set a fetch limit of 1 and accept only the `MessageDelete` type.
 
 Placing this into the previous code, you get the following. Note that this also makes the function async to make use of `await`. In addition, make sure to ignore DMs.
 
 ```js {2-9,11-12,14-16,18-25}
+const { AuditLogEvent } = require('discord.js');
+
 client.on('messageDelete', async message => {
 	// Ignore direct messages
 	if (!message.guild) return;
 	const fetchedLogs = await message.guild.fetchAuditLogs({
 		limit: 1,
-		type: 'MESSAGE_DELETE',
+		type: AuditLogEvent.MessageDelete,
 	});
 	// Since there's only 1 audit log entry in this collection, grab the first one
 	const deletionLog = fetchedLogs.entries.first();
@@ -76,13 +78,13 @@ client.on('guildMemberRemove', member => {
 });
 ```
 
-The same as before: set the fetch limit to 1 and accept only the `MEMBER_KICK` type.
+The same as before: set the fetch limit to 1 and accept only the `MemberKick` type.
 
 ```js {2-7,9-10,12-14,16-22}
 client.on('guildMemberRemove', async member => {
 	const fetchedLogs = await member.guild.fetchAuditLogs({
 		limit: 1,
-		type: 'MEMBER_KICK',
+		type: AuditLogEvent.MemberKick,
 	});
 	// Since there's only 1 audit log entry in this collection, grab the first one
 	const kickLog = fetchedLogs.entries.first();
@@ -114,13 +116,13 @@ client.on('guildBanAdd', async ban => {
 });
 ```
 
-As was the case in the previous examples, you can see what happened, to whom it happened, but not who executed the action. Enter once again audit logs fetching limited to 1 entry and only the `MEMBER_BAN_ADD` type. The `guildBanAdd` listener then becomes:
+As was the case in the previous examples, you can see what happened, to whom it happened, but not who executed the action. Enter once again audit logs fetching limited to 1 entry and only the `MemberBanAdd` type. The `guildBanAdd` listener then becomes:
 
 ```js {2-7,9-10,12-14,16-22}
 client.on('guildBanAdd', async ban => {
 	const fetchedLogs = await ban.guild.fetchAuditLogs({
 		limit: 1,
-		type: 'MEMBER_BAN_ADD',
+		type: AuditLogEvent.MemberBanAdd,
 	});
 	// Since there's only 1 audit log entry in this collection, grab the first one
 	const banLog = fetchedLogs.entries.first();

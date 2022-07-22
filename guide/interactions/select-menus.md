@@ -14,21 +14,21 @@ Select menus are part of the `MessageComponent` class, which can be sent via mes
 You can have a maximum of five `ActionRow`s per message, and one select menu within an `ActionRow`.
 :::
 
-To create a select menu, use the `MessageActionRow()` and `MessageSelectMenu()` builder functions and then pass the resulting object to `CommandInteraction#reply()` as `InteractionReplyOptions`:
+To create a select menu, use the `ActionRowBuilder()` and `SelectMenuBuilder()` functions and then pass the resulting object to `ChatInputCommandInteraction#reply()` as `InteractionReplyOptions`:
 
 ```js {1,7-24,26}
-const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+const { ActionRowBuilder, SelectMenuBuilder } = require('discord.js');
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-		const row = new MessageActionRow()
+		const row = new ActionRowBuilder()
 			.addComponents(
-				new MessageSelectMenu()
+				new SelectMenuBuilder()
 					.setCustomId('select')
 					.setPlaceholder('Nothing selected')
-					.addOptions([
+					.addOptions(
 						{
 							label: 'Select me',
 							description: 'This is a description',
@@ -39,7 +39,7 @@ client.on('interactionCreate', async interaction => {
 							description: 'This is also a description',
 							value: 'second_option',
 						},
-					]),
+					),
 			);
 
 		await interaction.reply({ content: 'Pong!', components: [row] });
@@ -68,19 +68,19 @@ Restart your bot and then send the command to a channel your bot has access to. 
 You can also send message components within an ephemeral response or alongside message embeds.
 
 ```js {1,12-16,18}
-const { MessageActionRow, MessageEmbed, MessageSelectMenu } = require('discord.js');
+const { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder } = require('discord.js');
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-		const row = new MessageActionRow()
+		const row = new ActionRowBuilder()
 			.addComponents(
 				// ...
 			);
 
-		const embed = new MessageEmbed()
-			.setColor('#0099ff')
+		const embed = new EmbedBuilder()
+			.setColor(0x0099FF)
 			.setTitle('Some title')
 			.setURL('https://discord.js.org/')
 			.setDescription('Some description here');
@@ -184,18 +184,18 @@ client.on('interactionCreate', async interaction => {
 
 ## Multi-select menus
 
-A select menu is not bound to only one selection; you can specify a minimum and maximum amount of options that must be selected. You can use `MessageSelectMenu#setMinValues()` and `MessageSelectMenu#setMaxValues()` to determine these values.
+A select menu is not bound to only one selection; you can specify a minimum and maximum amount of options that must be selected. You can use `SelectMenuBuilder#setMinValues()` and `SelectMenuBuilder#setMaxValues()` to determine these values.
 
 ```js {1,7-31,33}
-const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+const { ActionRowBuilder, SelectMenuBuilder } = require('discord.js');
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-		const row = new MessageActionRow()
+		const row = new ActionRowBuilder()
 			.addComponents(
-				new MessageSelectMenu()
+				new SelectMenuBuilder()
 					.setCustomId('select')
 					.setPlaceholder('Nothing selected')
 					.setMinValues(2)

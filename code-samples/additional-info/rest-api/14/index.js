@@ -1,7 +1,7 @@
-const { Client, Intents, MessageEmbed } = require('discord.js');
+const { Client, GatewayIntentBits, EmbedBuilder } = require('discord.js');
 const { request } = require('undici');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const trim = (str, max) => (str.length > max ? `${str.slice(0, max - 3)}...` : str);
 
@@ -19,7 +19,7 @@ client.once('ready', () => {
 });
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
 	await interaction.deferReply();
@@ -41,8 +41,8 @@ client.on('interactionCreate', async interaction => {
 
 		const [answer] = list;
 
-		const embed = new MessageEmbed()
-			.setColor('#EFFF00')
+		const embed = new EmbedBuilder()
+			.setColor(0xEFFF00)
 			.setTitle(answer.word)
 			.setURL(answer.permalink)
 			.addFields(
