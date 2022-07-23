@@ -469,6 +469,15 @@ Usage is now as follows:
 
 `Util.resolveAutoArchiveMaxLimit()` has been removed. Discord has since allowed any guild to use any auto archive time which makes this method redundant.
 
+Other functions in `Util` have been moved to top level so you can directly import them from `discord.js`
+
+```diff
+- import { Util } from 'discord.js';
+- Util.escapeMarkdown(message);
++ import { escapeMarkdown } from 'discord.js';
++ escapeMarkdown(message);
+```
+
 ### `.deleted` Field(s) have been removed
 
 You can no longer use the `deleted` property to check if a structure was deleted. See [this issue](https://github.com/discordjs/discord.js/issues/7091) for more information.
