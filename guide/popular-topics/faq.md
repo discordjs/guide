@@ -139,7 +139,7 @@ If you want to DM the user who sent the interaction, you can use `interaction.us
 ```js
 const user = interaction.options.getUser('target');
 await interaction.reply(`Hi, ${user}.`);
-await interaction.followUp('Hi, <@user id>.');
+await interaction.followUp(`Hi, <@{user.id}>.`);
 ```
 
 ::: tip
