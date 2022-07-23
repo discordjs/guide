@@ -469,7 +469,7 @@ Usage is now as follows:
 
 `Util.resolveAutoArchiveMaxLimit()` has been removed. Discord has since allowed any guild to use any auto archive time which makes this method redundant.
 
-Other functions in `Util` have been moved to top level so you can directly import them from `discord.js`
+Other functions in `Util` have been moved to top-level exports so you can directly import them from `discord.js`.
 
 ```diff
 - import { Util } from 'discord.js';
