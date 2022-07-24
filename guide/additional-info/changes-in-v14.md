@@ -81,12 +81,12 @@ const command = {
   name: 'ping',
 - type: 'CHAT_INPUT',
 + type: ApplicationCommandType.ChatInput,
-  options: [
+  options: [{
     name: 'option',
     description: 'A sample option',
 -   type: 'STRING',
 +   type: ApplicationCommandOptionType.String,
-  ],
+  }],
 };
 ```
 
