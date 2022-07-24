@@ -39,7 +39,7 @@ You can use the `.add()` and `.remove()` methods to add or remove flags (Intents
 ```js
 const { Client, IntentsBitField } = require('discord.js');
 
-const myIntents = new Intents();
+const myIntents = new IntentsBitField();
 myIntents.add(IntentsBitField.Flags.GuildPresences, IntentsBitField.Flags.GuildMembers);
 
 const client = new Client({ intents: myIntents });
