@@ -5,7 +5,7 @@
 @napi-rs/canvas is an image manipulation tool that allows you to modify images with code. We'll explore how to use this module in a slash command to make a profile command.
 
 ::: tip
-This guide is last tested with `@napi-rs/canvas^0.1.20`, so make sure you have this or a similar version after installation.
+This guide is last tested with `@napi-rs/canvas^0.1.25`, so make sure you have this or a similar version after installation.
 :::
 
 ::: warning
@@ -91,22 +91,18 @@ Now, you need to load the image you want to use into Canvas.
 
 We'll be using [this image](https://github.com/discordjs/guide/blob/main/guide/popular-topics/images/canvas.jpg) as the background in the welcome image, but you can use whatever you want. Be sure to download the file, name it `wallpaper.jpg`, and save it inside the same directory as your main bot file.
 
-```js {7-17}
-const { readFile } = require('fs/promises');
-
+```js {5-13}
 client.on('interactionCreate', async interaction => {
 	// ...
 	const context = canvas.getContext('2d');
 
-	const backgroundFile = await readFile('./wallpaper.jpg');
-	const background = new Canvas.Image();
-	background.src = backgroundFile;
+	const background = await Canvas.loadImage('./wallpaper.jpg');
 
 	// This uses the canvas dimensions to stretch the image onto the entire canvas
 	context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
 	// Use the helpful Attachment class structure to process the file for you
-	const attachment = new AttachmentBuilder(canvas.toBuffer('image/png'), { name: 'profile-image.png' });
+	const attachment = new AttachmentBuilder(await canvas.encode('png'), { name: 'profile-image.png' });
 
 	interaction.reply({ files: [attachment] });
 });
@@ -140,17 +136,13 @@ client.on('interactionCreate', async interaction => {
 
 A bit plain, right? Fear not, for you have a bit more to do until you reach completion. Since this guide page's goal is focused more on actual code than design, let's place a basic square-shaped avatar for now on the left side of the image. In the interest of coverage, you will also make it a circle afterward.
 
-```js {5-9}
-const { request } = require('undici');
-
+```js {3-5}
 client.on('interactionCreate', async interaction => {
 	// ...
 	context.strokeRect(0, 0, canvas.width, canvas.height);
 
-	const { body } = await request(interaction.user.displayAvatarURL({ format: 'jpg' }));
-	const avatar = new Canvas.Image();
-	avatar.src = Buffer.from(await body.arrayBuffer());
-
+	const avatar = await Canvas.loadImage(interaction.user.displayAvatarURL({ format: 'jpg' }));
+	
 	// Draw a shape onto the main canvas
 	context.drawImage(avatar, 25, 0, 200, canvas.height);
 	// ...
@@ -161,12 +153,10 @@ client.on('interactionCreate', async interaction => {
 
 It works well, but the avatar image itself seems a bit stretched out. Let's remedy that.
 
-```js {7-8}
+```js {5-6}
 client.on('interactionCreate', async interaction => {
 	// ...
-	const { body } = await request(interaction.user.displayAvatarURL({ format: 'jpg' }));
-	const avatar = new Canvas.Image();
-	avatar.src = Buffer.from(await body.arrayBuffer());
+	const avatar = await Canvas.loadImage(interaction.user.displayAvatarURL({ format: 'jpg' }));
 
 	// Move the image downwards vertically and constrain its height to 200, so that it's square
 	context.drawImage(avatar, 25, 25, 200, 200);
