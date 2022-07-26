@@ -553,4 +553,10 @@ Added `MessageReaction#react()` to make the client user react with the reaction 
 
 ### Webhook
 
+```diff
+- channel.createWebhook('Some-username', {avatar: 'https://i.imgur.com/AfFp7pu.png',}).then(webhook => console.log(`Created webhook ${webhook}`)).catch(console.error);
++ channel.createWebhook({name:'Eto Webhook', avatar: 'https://i.imgur.com/AfFp7pu.png',}).then(webhook => console.log(`Created webhook ${webhook}`)).catch(console.error);
+
+```
+
 Added `Webhook#applicationId`.
