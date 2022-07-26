@@ -147,7 +147,7 @@ client.on('interactionCreate', async interaction => {
 	// ...
 	context.strokeRect(0, 0, canvas.width, canvas.height);
 
-	const { body } = await request(interaction.user.displayAvatarURL({ format: 'jpg' }));
+	const { body } = await request(interaction.user.displayAvatarURL({ extension: 'jpg' }));
 	const avatar = new Canvas.Image();
 	avatar.src = Buffer.from(await body.arrayBuffer());
 
@@ -164,7 +164,7 @@ It works well, but the avatar image itself seems a bit stretched out. Let's reme
 ```js {7-8}
 client.on('interactionCreate', async interaction => {
 	// ...
-	const { body } = await request(interaction.user.displayAvatarURL({ format: 'jpg' }));
+	const { body } = await request(interaction.user.displayAvatarURL({ extension: 'jpg' }));
 	const avatar = new Canvas.Image();
 	avatar.src = Buffer.from(await body.arrayBuffer());
 

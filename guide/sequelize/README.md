@@ -141,7 +141,6 @@ Now that your structure is defined, you need to make sure the model exists in th
 ```js {3}
 client.once('ready', () => {
 	Tags.sync();
-
 	console.log(`Logged in as ${client.user.tag}!`);
 });
 ```
