@@ -22,16 +22,16 @@ const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
-	if (interaction.commandName === 'ping') {
+	if (interaction.commandName === 'button') {
 		const row = new ActionRowBuilder()
 			.addComponents(
 				new ButtonBuilder()
 					.setCustomId('primary')
-					.setLabel('Primary')
+					.setLabel('Click me!')
 					.setStyle(ButtonStyle.Primary),
 			);
 
-		await interaction.reply({ content: 'Pong!', components: [row] });
+		await interaction.reply({ content: 'I think you should,', components: [row] });
 	}
 });
 ```
@@ -45,12 +45,12 @@ Restart your bot and then send the command to a channel your bot has access to. 
 <DiscordMessages>
 	<DiscordMessage profile="bot">
 		<template #interactions>
-			<DiscordInteraction profile="user" :command="true">ping</DiscordInteraction>
+			<DiscordInteraction profile="user" :command="true">button</DiscordInteraction>
 		</template>
-		Pong!
+		I think you should,
 		<template #actions>
 			<DiscordButtons>
-				<DiscordButton>Primary</DiscordButton>
+				<DiscordButton>Click me!</DiscordButton>
 			</DiscordButtons>
 		</template>
 	</DiscordMessage>
@@ -64,7 +64,7 @@ const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
-	if (interaction.commandName === 'ping') {
+	if (interaction.commandName === 'button') {
 		const row = new ActionRowBuilder()
 			.addComponents(
 				// ...
@@ -76,7 +76,7 @@ client.on('interactionCreate', async interaction => {
 			.setURL('https://discord.js.org')
 			.setDescription('Some description here');
 
-		await interaction.reply({ content: 'Pong!', ephemeral: true, embeds: [embed], components: [row] });
+		await interaction.reply({ content: 'I think you should,', ephemeral: true, embeds: [embed], components: [row] });
 	}
 });
 ```
@@ -97,9 +97,9 @@ If you're using typescript you'll need to specify the type of components your ac
 				profile="user"
 				:command="true"
 				:ephemeral="true"
-			>ping</DiscordInteraction>
+			>button</DiscordInteraction>
 		</template>
-		Pong!
+		I think you should,
 		<template #embeds>
 			<DiscordEmbed
 				border-color="#0099ff"
@@ -111,7 +111,7 @@ If you're using typescript you'll need to specify the type of components your ac
 		</template>
 		<template #actions>
 			<DiscordButtons>
-				<DiscordButton>Primary</DiscordButton>
+				<DiscordButton>Click me!</DiscordButton>
 			</DiscordButtons>
 		</template>
 	</DiscordMessage>
@@ -124,7 +124,7 @@ If you want to prevent a button from being used, but not remove it from the mess
 ```js {5}
 const button = new ButtonBuilder()
 	.setCustomId('primary')
-	.setLabel('Primary')
+	.setLabel('Click me!')
 	.setStyle(ButtonStyle.Primary)
 	.setDisabled(true);
 ```
@@ -132,12 +132,12 @@ const button = new ButtonBuilder()
 <DiscordMessages>
 	<DiscordMessage profile="bot">
 		<template #interactions>
-			<DiscordInteraction profile="user" :command="true">ping</DiscordInteraction>
+			<DiscordInteraction profile="user" :command="true">button</DiscordInteraction>
 		</template>
-		Pong!
+		I think you should,
 		<template #actions>
 			<DiscordButtons>
-				<DiscordButton :disabled="true">Primary</DiscordButton>
+				<DiscordButton :disabled="true">Click me!</DiscordButton>
 			</DiscordButtons>
 		</template>
 	</DiscordMessage>
