@@ -40,7 +40,7 @@ On macOS, either:
 
 On Linux, you can quickly open the terminal with `Ctrl + Alt + T`.
 
-With the terminal open, run the `node -v` command to make sure you've successfully installed Node.js. If it outputs `v16.6.0` or higher, great!
+With the terminal open, run the `node -v` command to make sure you've successfully installed Node.js. If it outputs `v16.9.0` or higher, great!
 
 ### Initiating a project folder
 

@@ -66,13 +66,13 @@ And that's it for this section! You have successfully communicated across all of
 If you remember, there was a brief mention of passing functions through `.broadcastEval()`, but no super clear description of exactly how to go about it. Well, fret not, for this section will cover it! Suppose you have the following code in your `interactionCreate` event:
 
 ```js {3-8}
-client.on('interactionCreate', message => {
+client.on('interactionCreate', interaction => {
 	// ...
 	if (commandName === 'emoji') {
 		const emojiId = interaction.options.getString('emoji');
 		const emoji = client.emojis.cache.get(emojiId);
 
-		return message.reply(`I have found an emoji ${emoji}!`);
+		return interaction.reply(`I have found an emoji ${emoji}!`);
 	}
 });
 ```
