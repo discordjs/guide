@@ -137,6 +137,8 @@ Open your code editor and create a new file. We suggest that you save the file a
 
 Here's the base code to get you started:
 
+:::: code-group
+::: code-group-item Config file
 ```js
 // Require the necessary discord.js classes
 const { Client, GatewayIntentBits } = require('discord.js');
@@ -153,6 +155,29 @@ client.once('ready', () => {
 // Login to Discord with your client's token
 client.login(token);
 ```
+:::
+::: code-group-item .env file
+```js
+const { Client, GatewayIntentBits } = require('discord.js');
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const { token } = process.env["DISCORD_TOKEN"]
+
+// Create a new client instance
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+
+// When the client is ready, run this code (only once)
+client.once('ready', () => {
+	console.log('Ready!');
+});
+
+// Login to Discord with your client's token
+client.login(token);
+```
+:::
+::::
 
 This is how you create a client instance for your Discord bot and login to Discord. The `GatewayIntentBits.Guilds` intents option is necessary for your client to work properly.
 
