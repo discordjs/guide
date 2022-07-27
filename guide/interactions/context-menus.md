@@ -14,7 +14,7 @@ To create a context menu you construct a new `ContextMenuCommandBuilder`. You ca
 const { ContextMenuCommandBuilder, ApplicationCommandType } = require('discord.js');
 
 const data = new ContextMenuCommandBuilder()
-	.setName('echo')
+	.setName('User Information')
 	.setType(ApplicationCommandType.User);
 ```
 
@@ -37,7 +37,7 @@ You can get the targeted user by accessing the `targetUser` or `targetMember` pr
 client.on('interactionCreate', interaction => {
 	if (!interaction.isUserContextMenuCommand()) return;
 	// Get the User's username from context menu
-	const name = interaction.targetUser.username;
-	console.log(name);
+	const username = interaction.targetUser.username;
+	console.log(username);
 });
 ```
