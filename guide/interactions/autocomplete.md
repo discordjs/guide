@@ -14,11 +14,11 @@ To use autocomplete with your commands, you have to set the respective option wh
 const { SlashCommandBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
-	.setName('tag')
-	.setDescription('Replies with Pong!')
+	.setName('questionnaire')
+	.setDescription('Prompts you with a series of questions!')
 	.addStringOption(option =>
-		option.setName('autocomplete')
-			.setDescription('Enter your choice')
+		option.setName('colour')
+			.setDescription('What is your favourite colour?')
 			.setAutocomplete(true));
 ```
 
@@ -47,9 +47,9 @@ The <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" 
 client.on('interactionCreate', async interaction => {
 	if (interaction.type !== InteractionType.ApplicationCommandAutocomplete) return;
 
-	if (interaction.commandName === 'tag') {
+	if (interaction.commandName === 'questionnaire') {
 		const focusedValue = interaction.options.getFocused();
-		const choices = ['faq', 'install', 'collection', 'promise', 'debug'];
+		const choices = ['red', 'blue', 'yellow', 'green', 'grey'];
 		const filtered = choices.filter(choice => choice.startsWith(focusedValue));
 		await interaction.respond(
 			filtered.map(choice => ({ name: choice, value: choice })),
@@ -66,16 +66,16 @@ To distinguish between multiple options, you can pass `true` into <DocsLink path
 client.on('interactionCreate', async interaction => {
 	if (interaction.type !== InteractionType.ApplicationCommandAutocomplete) return;
 
-	if (interaction.commandName === 'tag') {
+	if (interaction.commandName === 'questionnaire') {
 		const focusedOption = interaction.options.getFocused(true);
 		let choices;
 
-		if (focusedOption.name === 'name') {
-			choices = ['faq', 'install', 'collection', 'promise', 'debug'];
+		if (focusedOption.name === 'colour') {
+			choices = ['red', 'blue', 'yellow', 'green', 'grey'];
 		}
 
-		if (focusedOption.name === 'theme') {
-			choices = ['halloween', 'christmas', 'summer'];
+		if (focusedOption.name === 'animal') {
+			choices = ['dog', 'cat', 'fish', 'horse', 'rabbit'];
 		}
 
 		const filtered = choices.filter(choice => choice.startsWith(focusedOption.value));
