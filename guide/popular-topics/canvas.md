@@ -136,7 +136,7 @@ client.on('interactionCreate', async interaction => {
 
 A bit plain, right? Fear not, for you have a bit more to do until you reach completion. Since this guide page's goal is focused more on actual code than design, let's place a basic square-shaped avatar for now on the left side of the image. In the interest of coverage, you will also make it a circle afterward.
 
-```js {5-12}
+```js {7-15}
 const { request } = require('undici');
 
 client.on('interactionCreate', async interaction => {
