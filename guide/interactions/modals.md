@@ -126,7 +126,7 @@ The `ModalSubmitInteraction` class provides the same methods as the `CommandInte
 client.on('interactionCreate', async interaction => {
 	if (interaction.type !== InteractionType.ModalSubmit) return;
 	if (interaction.customId === 'myModal') {
-		await interaction.reply({ content: 'Your submission was recieved successfully!' });
+		await interaction.reply({ content: 'Your submission was received successfully!' });
 	}
 });
 ```
