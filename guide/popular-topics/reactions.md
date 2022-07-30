@@ -22,7 +22,7 @@ Here's the base code we'll be using:
 const { Client, GatewayIntentBits } = require('discord.js');
 
 const client = new Client({
-	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageReactions],
+	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMessageReactions],
 });
 
 client.once('ready', () => {
