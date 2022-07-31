@@ -14,11 +14,11 @@ To use autocomplete with your commands, you have to set the respective option wh
 const { SlashCommandBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
-	.setName('questionnaire')
-	.setDescription('Prompts you with a series of questions!')
+	.setName('guide')
+	.setDescription('Search discordjs.guide!')
 	.addStringOption(option =>
-		option.setName('colour')
-			.setDescription('What is your favourite colour?')
+		option.setName('query')
+			.setDescription('Phrase to search for')
 			.setAutocomplete(true));
 ```
 
@@ -47,9 +47,9 @@ The <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" 
 client.on('interactionCreate', async interaction => {
 	if (interaction.type !== InteractionType.ApplicationCommandAutocomplete) return;
 
-	if (interaction.commandName === 'questionnaire') {
+	if (interaction.commandName === 'guide') {
 		const focusedValue = interaction.options.getFocused();
-		const choices = ['red', 'blue', 'yellow', 'green', 'grey'];
+		const choices = ['Popular Topics: Threads', 'Sharding: Getting started', 'Library: Voice Connections', 'Interactions: Replying to slash commands', 'Popular Topics: Embed preview'];
 		const filtered = choices.filter(choice => choice.startsWith(focusedValue));
 		await interaction.respond(
 			filtered.map(choice => ({ name: choice, value: choice })),
@@ -66,16 +66,16 @@ To distinguish between multiple options, you can pass `true` into <DocsLink path
 client.on('interactionCreate', async interaction => {
 	if (interaction.type !== InteractionType.ApplicationCommandAutocomplete) return;
 
-	if (interaction.commandName === 'questionnaire') {
+	if (interaction.commandName === 'guide') {
 		const focusedOption = interaction.options.getFocused(true);
 		let choices;
 
-		if (focusedOption.name === 'colour') {
-			choices = ['red', 'blue', 'yellow', 'green', 'grey'];
+		if (focusedOption.name === 'query') {
+			const choices = ['Popular Topics: Threads', 'Sharding: Getting started', 'Library: Voice Connections', 'Interactions: Replying to slash commands', 'Popular Topics: Embed preview'];
 		}
 
-		if (focusedOption.name === 'animal') {
-			choices = ['dog', 'cat', 'fish', 'horse', 'rabbit'];
+		if (focusedOption.name === 'version') {
+			choices = ['v9', 'v11', 'v12', 'v13', 'v14'];
 		}
 
 		const filtered = choices.filter(choice => choice.startsWith(focusedOption.value));
