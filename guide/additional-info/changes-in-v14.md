@@ -103,6 +103,17 @@ const button = {
 }
 ```
 
+```diff
++ const { ComopnentType } = require('discord.js');
+
+const collector = interaction.channel.createMessageComponentCollector({
+	filter,
+-	componentType: 'BUTTON',
++	componentType: ComponentType.Button,
+	time: 20000
+});
+```
+
 ### Removal of method-based type guards
 
 #### Channels
