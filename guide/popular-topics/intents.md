@@ -1,6 +1,8 @@
 # Gateway Intents
 
-Gateway Intents were introduced by Discord so bot developers can choose which events their bot receives based on which data it needs to function. Intents are named groups of pre-defined WebSocket events, which the discord.js client will receive. If you omit `DirectMessageTyping`, for example, you will no longer receive typing events from direct messages. If you provide no intents, discord.js will throw an error.
+Gateway Intents were introduced by Discord so bot developers can choose which events their bot receives based on which data it needs to function. Intents are named groups of pre-defined WebSocket events, which the discord.js client will receive. If you omit `DirectMessageTyping`, for example, you will no longer receive typing events from direct messages. If you do not specify intents, discord.js will throw an error.
+
+Rather than blindly enabling all intents, consider what information you actually need. Reducing the number of unnecessary events your bot receives improves performance and reduces bandwidth and memory usage.
 
 ## Privileged Intents
 
@@ -16,12 +18,17 @@ Should you receive an error prefixed with `[DISALLOWED_INTENTS]`, please review 
 
 To specify which events you want your bot to receive, first think about which events your bot needs to operate. Then select the required intents and add them to your client constructor, as shown below.
 
-All gateway intents, and the events belonging to each, are listed on the [Discord API documentation](https://discord.com/developers/docs/topics/gateway#list-of-intents). If you need your bot to receive messages (`MESSAGE_CREATE` - `"messageCreate"` in discord.js), you need the `GuildMessages` intent. If you want your bot to post welcome messages for new members (`GUILD_MEMBER_ADD` - `"guildMemberAdd"` in discord.js), you need the `GuildMembers` intent, and so on.
+All gateway intents, and the events belonging to each, are listed on the [Discord API documentation](https://discord.com/developers/docs/topics/gateway#list-of-intents). If you need your bot to receive messages (`MESSAGE_CREATE` - `"messageCreate"` in discord.js), you need the `GuildMessages` intent, plus the `MessageContent` privileged intent to receive the `content`, `attachments`, `embeds` and `components` fields of the message. If you want your bot to post welcome messages for new members (`GUILD_MEMBER_ADD` - `"guildMemberAdd"` in discord.js), you need the `GuildMembers` privileged intent, and so on.
 
 ```js
 const { Client, GatewayIntentBits } = require('discord.js');
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: [
+	GatewayIntentBits.Guilds,
+	GatewayIntentBits.GuildMessages,
+	GatewayIntentBits.MessageContent,
+	GatewayIntentBits.GuildMembers
+] });
 ```
 
 ::: warning
