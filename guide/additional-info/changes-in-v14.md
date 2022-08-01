@@ -104,7 +104,7 @@ const button = {
 ```
 
 ```diff
-+ const { ComopnentType } = require('discord.js');
++ const { ComponentType } = require('discord.js');
 
 const collector = interaction.channel.createMessageComponentCollector({
 	filter,
