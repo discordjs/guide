@@ -157,6 +157,8 @@ const data = new SlashCommandBuilder()
 			));
 ```
 
+If you would prefer to provide dynamic choices based on what the user is typing into the option, this can be achieved using [autocomplete](/interactions/autocomplete).
+
 ### Subcommands
 
 Subcommands are available with the `.addSubcommand()` method:
@@ -207,7 +209,8 @@ client.on('interactionCreate', interaction => {
 
 ### Responding to a command
 
-There are multiple ways of responding to a slash command, each of these are covered in the following segments.
+There are multiple ways of responding to a slash command, each of these are covered in the following segments. Using an interaction response method confirms to Discord that your bot successfully received the interaction, and has responded to the user. Failing to do so will cause Discord to show that the command failed, even if your bot is performing other actions as a result.
+
 The most common way of sending a response is by using the `BaseInteraction#reply()` method:
 
 ::: warning
@@ -240,7 +243,9 @@ You've successfully sent a response to a slash command! This is only the beginni
 
 ### Ephemeral responses
 
-You may not always want everyone who has access to the channel to see a slash command's response. Thankfully, Discord implemented a way to hide messages from everyone but the executor of the slash command. This type of message is called `ephemeral` and can be set by using `ephemeral: true` in the `InteractionReplyOptions`, as follows:
+You may not always want everyone who has access to the channel to see a slash command's response. Previously, you would have had to DM the user to achieve this, potentially encountering the high rate limits associated with DM messages. 
+
+Thankfully, Discord implemented a way to hide messages from everyone but the executor of the slash command. This type of message is called `ephemeral` and can be set by using `ephemeral: true` in the `InteractionReplyOptions`, as follows:
 
 ```js {5}
 client.on('interactionCreate', async interaction => {
@@ -267,6 +272,7 @@ Now when you run your command again, you should see something like this:
 	</DiscordMessage>
 </DiscordMessages>
 
+Ephemeral responses are *only* available for interactions; another great reason to switch across to the new and improved features.
 ### Editing responses
 
 After you've sent an initial response, you may want to edit that response for various reasons. This can be achieved with the `BaseInteraction#editReply()` method:
@@ -293,7 +299,7 @@ client.on('interactionCreate', async interaction => {
 
 As previously mentioned, you have three seconds to respond to an interaction before its token becomes invalid. But what if you have a command that performs a task which takes longer than three seconds before being able to reply?
 
-In this case, you can make use of the `BaseInteraction#deferReply()` method, which triggers the `<application> is thinking...` message and also acts as initial response. This allows you 15 minutes to complete your tasks before responding.
+In this case, you can make use of the `BaseInteraction#deferReply()` method, which triggers the `<application> is thinking...` message. This also acts as the initial response, to confirm to Discord that the interaction was received successfully. This allows you 15 minutes to complete your tasks before responding.
 <!--- here either display the is thinking message via vue-discord-message or place a screenshot -->
 
 ```js {7-9}
@@ -312,7 +318,7 @@ client.on('interactionCreate', async interaction => {
 
 If you have a command that performs longer tasks, be sure to call `deferReply()` as early as possible.
 
-You can also pass an `ephemeral` flag to the `InteractionDeferOptions`:
+Note that if you want your response to be ephemeral, you must pass an `ephemeral` flag to the `InteractionDeferOptions` here:
 
 <!-- eslint-skip -->
 
@@ -320,9 +326,10 @@ You can also pass an `ephemeral` flag to the `InteractionDeferOptions`:
 await interaction.deferReply({ ephemeral: true });
 ```
 
+It is not possible to edit a reply to be ephemeral later.
 ### Follow-ups
 
-Replying to slash commands is great and all, but what if you want to send multiple responses instead of just one? Follow-up messages got you covered, you can use `BaseInteraction#followUp()` to send multiple responses:
+Replying to slash commands is great and all, but what if you want to send multiple responses instead of just one? Follow-up messages have got you covered, you can use `BaseInteraction#followUp()` to send multiple responses:
 
 ::: warning
 After the initial response, an interaction token is valid for 15 minutes, so this is the timeframe in which you can edit the response and send follow-up messages.
@@ -501,7 +508,7 @@ const data = new SlashCommandBuilder()
 
 ### Member permissions
 
-You can use the `ApplicationCommand#setDefaultMemberPermissions()` method to set the default permissions required by a member in order to run the command, setting it to `0` will prohibit anyone in a guild from using the command unless a specific overwrite is configured or the user has admin permissions.
+You can use the `ApplicationCommand#setDefaultMemberPermissions()` method to set the default permissions required for a member to run the command. Setting it to `0` will prohibit anyone in a guild from using the command unless a specific overwrite is configured or the user has admin permissions.
 
 ::: tip
 If you want to learn more about the `|` bitwise OR operator you can check the [Wikipedia](https://en.wikipedia.org/wiki/Bitwise_operation#OR) and [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_OR) articles on the topic.
