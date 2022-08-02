@@ -14,7 +14,7 @@ Buttons are part of the `MessageComponent` class, which can be sent via messages
 You can have a maximum of five `ActionRow`s per message, and five buttons within an `ActionRow`.
 :::
 
-To create your components, use the `ActionRowBuilder()` and `ButtonBuilder()` classes. Then, pass the resulting row object to `ChatInputCommandInteraction#reply()` in the `components` array of `InteractionReplyOptions`:
+To create your buttons, use the `ActionRowBuilder()` and `ButtonBuilder()` classes. Then, pass the resulting row object to `ChatInputCommandInteraction#reply()` in the `components` array of `InteractionReplyOptions`:
 
 ```js {1,7-13,15}
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
@@ -81,15 +81,6 @@ client.on('interactionCreate', async interaction => {
 });
 ```
 
-::: warning
-If you're using TypeScript you'll need to specify the type of components your action row holds. This can be done by specifying the component builder you will add to it using a generic parameter in `ActionRowBuilder`.
-
-```diff
-- new ActionRowBuilder()
-+ new ActionRowBuilder<ButtonBuilder>()
-```
-:::
-
 <DiscordMessages>
 	<DiscordMessage profile="bot">
 		<template #interactions>
@@ -116,6 +107,15 @@ If you're using TypeScript you'll need to specify the type of components your ac
 		</template>
 	</DiscordMessage>
 </DiscordMessages>
+
+::: warning
+If you're using TypeScript you'll need to specify the type of components your action row holds. This can be done by specifying the component builder you will add to it using a generic parameter in `ActionRowBuilder`.
+
+```diff
+- new ActionRowBuilder()
++ new ActionRowBuilder<ButtonBuilder>()
+```
+:::
 
 ### Disabled buttons
 
@@ -194,7 +194,7 @@ The `MessageComponentInteraction` class provides the same methods as the `Comman
 
 The `MessageComponentInteraction` class also provides an `update()` method to update the message the button is attached to. Passing an empty array to the `components` option will remove any buttons after one has been clicked.
 
-This method should be used in favour of `editReply()` on the original interaction, to ensure you respond to the button press.
+This method should be used in favour of `editReply()` on the original interaction, to ensure you respond to the button interaction.
 
 <!-- eslint-skip -->
 
