@@ -14,7 +14,7 @@ Buttons are part of the `MessageComponent` class, which can be sent via messages
 You can have a maximum of five `ActionRow`s per message, and five buttons within an `ActionRow`.
 :::
 
-To create a button, use the `ActionRowBuilder()` and `ButtonBuilder()` functions and then pass the resulting object to `ChatInputCommandInteraction#reply()` as `InteractionReplyOptions`:
+To create your components, use the `ActionRowBuilder()` and `ButtonBuilder()` classes. Then, pass the resulting row object to `ChatInputCommandInteraction#reply()` in the `components` array of `InteractionReplyOptions`:
 
 ```js {1,7-13,15}
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
@@ -37,7 +37,7 @@ client.on('interactionCreate', async interaction => {
 ```
 
 ::: tip
-The custom ID is a developer-defined string of up to 100 characters.
+The custom id is a developer-defined string of up to 100 characters. Use this field to ensure you can uniquely define all incoming interactions from your buttons!
 :::
 
 Restart your bot and then send the command to a channel your bot has access to. If all goes well, you should see something like this:
@@ -82,7 +82,7 @@ client.on('interactionCreate', async interaction => {
 ```
 
 ::: warning
-If you're using typescript you'll need to specify the type of components your action row holds. This can be done by specifying the component builder you will add to it using a generic parameter in `ActionRowBuilder`.
+If you're using TypeScript you'll need to specify the type of components your action row holds. This can be done by specifying the component builder you will add to it using a generic parameter in `ActionRowBuilder`.
 
 ```diff
 - new ActionRowBuilder()
@@ -157,9 +157,21 @@ const button = new ButtonBuilder()
 
 Now you know all there is to building and sending a Button! Let's move on to receiving button interactions!
 
-## Receiving buttons
+## Receiving button interactions
 
-To receive a `ButtonInteraction`, attach an event listener to your client and use the `Interaction#isButton()` type guard to make sure you only receive buttons:
+### Component collectors
+
+Message component interactions can be collected within the scope of the slash command that sent them by utilising an `InteractionCollector`, or their promisified `awaitMessageComponent` variant. These both provide instances of the `MessageComponentInteraction` class as collected items.
+
+::: tip
+You can create the collectors on either a `message` or a `channel`.
+:::
+
+For a detailed guide on receiving message components via collectors, please refer to the [collectors guide](/popular-topics/collectors.md#interaction-collectors).
+
+### The interactionCreate event
+
+To receive a `ButtonInteraction` event, attach an `interactionCreate` event listener to your client and use the `Interaction#isButton()` type guard to make sure you only receive buttons:
 
 ```js {2}
 client.on('interactionCreate', interaction => {
@@ -167,16 +179,6 @@ client.on('interactionCreate', interaction => {
 	console.log(interaction);
 });
 ```
-
-## Component collectors
-
-These work quite similarly to message and reaction collectors, except that you will receive instances of the `MessageComponentInteraction` class as collected items.
-
-::: tip
-You can create the collectors on either a `message` or a `channel`.
-:::
-
-For a detailed guide on receiving message components via collectors, please refer to the [collectors guide](/popular-topics/collectors.md#interaction-collectors).
 
 ## Responding to buttons
 
@@ -190,7 +192,9 @@ The `MessageComponentInteraction` class provides the same methods as the `Comman
 
 ### Updating the button message
 
-The `MessageComponentInteraction` class provides an `update()` method to update the message the button is attached to. Passing an empty array to the `components` option will remove any buttons after one has been clicked.
+The `MessageComponentInteraction` class also provides an `update()` method to update the message the button is attached to. Passing an empty array to the `components` option will remove any buttons after one has been clicked.
+
+This method should be used in favour of `editReply()` on the original interaction, to ensure you respond to the button press.
 
 <!-- eslint-skip -->
 
@@ -208,7 +212,7 @@ collector.on('end', collected => console.log(`Collected ${collected.size} items`
 
 ### Deferring and updating the button message
 
-In addition to deferring an interaction response, you can defer the button, which will trigger a loading state and then revert to its original state:
+In addition to deferring an interaction response, you can defer the button update, which will trigger a loading state and then revert to its original state:
 
 <!-- eslint-skip -->
 
