@@ -12,7 +12,7 @@ If you already have slash commands set up for your application and want to learn
 
 ### Guild commands
 
-Guild application commands are only available in the guild they were created in, if your application has the `applications.commands` scope authorized.
+Guild application commands are only available in the guild they were created in, if your application has the `applications.commands` scope authorized. This is ideal for testing commands you're still developing before deploying them globally.
 
 In this section, we'll be using a script that is usable in conjunction with the slash command handler from the [command handling](/creating-your-bot/command-handling.md) section.
 
@@ -60,14 +60,14 @@ const rest = new REST({ version: '10' }).setToken(token);
 
 (async () => {
 	try {
-		console.log('Started refreshing application (/) commands.');
+		console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
-		await rest.put(
+		const data = await rest.put(
 			Routes.applicationGuildCommands(clientId, guildId),
 			{ body: commands },
 		);
 
-		console.log('Successfully reloaded application (/) commands.');
+		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
 	} catch (error) {
 		console.error(error);
 	}
