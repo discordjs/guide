@@ -21,7 +21,9 @@ This section will cover only the bare minimum to get you started, but you can re
 
 ### Command deployment script
 
-Create a `deploy-commands.js` file in your project directory. This file will be used to register and update the slash commands for your bot application.
+Create a `deploy-commands.js` file in your project directory. This file will be used to register and update the slash commands for your bot application. 
+
+Since commands only need to be registered once, and updated when the definition (description, options etc) is changed, it's not necessary to connect a whole client to the gateway or do this on every `ready` event. As such, a standalone script using the lighter REST manager is preferred. 
 
 You'll need to install [`@discordjs/rest`](https://github.com/discordjs/discord.js/tree/main/packages/rest).
 
@@ -70,7 +72,7 @@ const commands = [
 const rest = new REST({ version: '10' }).setToken(token);
 
 rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
-	.then(() => console.log('Successfully registered application commands.'))
+	.then((data) => console.log(`Successfully registered ${data.length} application commands.`))
 	.catch(console.error);
 ```
 :::
@@ -150,7 +152,7 @@ client.on('interactionCreate', async interaction => {
 	</DiscordMessage>
 </DiscordMessages>
 
-You could also display the date the server was created, or the server's verification level. You would do those in the same manner–use `interaction.guild.createdAt` or `interaction.guild.verificationLevel`, respectively.
+You could also display the date the server was created, or the server's verification level. You would do those in the same manner – use `interaction.guild.createdAt` or `interaction.guild.verificationLevel`, respectively.
 
 ::: tip
 Refer to the <DocsLink path="class/Guild" /> documentation for a list of all the available properties and methods!
@@ -206,7 +208,7 @@ Here's a small list of reasons why you shouldn't do so:
 * Difficult to organize;
 * General bad practice.
 
-Next, we'll be diving into something called a "command handler"–code that makes handling commands easier and much more efficient. This allows you to move your commands into individual files.
+Next, we'll be diving into something called a "command handler" – code that makes handling commands easier and much more efficient. This allows you to move your commands into individual files.
 
 ## Resulting code
 
