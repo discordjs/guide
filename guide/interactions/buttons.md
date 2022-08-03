@@ -182,7 +182,7 @@ client.on('interactionCreate', interaction => {
 
 ## Responding to buttons
 
-The <DocsLink path="class/MessageComponentInteraction"/> class provides the same methods as the <DocsLink path="class/CommandInteraction"/> class. These methods behave equally:
+The <DocsLink path="class/MessageComponentInteraction"/> class provides the same methods as the <DocsLink path="class/ChatInputCommandInteraction"/> class. These methods behave equally:
 - `reply()`
 - `editReply()`
 - `deferReply()`

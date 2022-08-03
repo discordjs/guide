@@ -153,7 +153,7 @@ client.on('interactionCreate', interaction => {
 
 ## Responding to select menus
 
-The <DocsLink path="class/MessageComponentInteraction"/> class provides the same methods as the `CommandInteraction` class. These methods behave equally:
+The <DocsLink path="class/MessageComponentInteraction"/> class provides the same methods as the <DocsLink path="class/ChatInputCommandInteraction"/> class. These methods behave equally:
 - `reply()`
 - `editReply()`
 - `deferReply()`
