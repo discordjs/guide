@@ -11,10 +11,10 @@ This page is a follow-up to the [interactions (slash commands) page](/interactio
 Unlike message components, modals aren't strictly components themselves. They're a callback structure used to respond to interactions.
 
 ::: tip
-You can have a maximum of five `ActionRowBuilder`s per modal builder, and one `TextInputBuilder` within an `ActionRowBuilder`. Currently, you cannot use `SelectMenuBuilder`s or `ButtonBuilder`s in modal action rows builders.
+You can have a maximum of five <DocsLink path="class/ActionRowBuilder" />s per modal builder, and one <DocsLink path="class/TextInputBuilder" /> within an <DocsLink path="class/ActionRowBuilder" />. Currently, you cannot use <DocsLink path="class/SelectMenuBuilder" />s or <DocsLink path="class/ButtonBuilder" />s in modal action rows builders.
 :::
 
-To create a modal you construct a new `ModalBuilder`. You can then use the setters to add the custom id and title.
+To create a modal you construct a new <DocsLink path="class/ModalBuilder" />. You can then use the setters to add the custom id and title.
 
 ```js {1,7-13}
 const { ModalBuilder } = require('discord.js');
@@ -28,21 +28,19 @@ client.on('interactionCreate', async interaction => {
 			.setTitle('My Modal');
 
 		// TODO: Add components to modal...
-
-		await interaction.showModal(modal);
 	}
 });
 ```
 ::: tip
-The custom id is a developer-defined string of up to 100 characters.
+The custom id is a developer-defined string of up to 100 characters. Use this field to ensure you can uniquely define all incoming interactions from your mdoals!
 :::
 
-As you can see, you construct the modal and assign it a custom id and a title. After you added some user input elements, you will send it as a response to the interaction via `#showModal`.
+The next step is to add the input fields in which users responding can enter free-text. Adding inputs is similar to adding components to messages.
 
-You are still missing one of these steps - adding inputs. Adding inputs is similar to adding components to messages.
+At the end, we then call <DocsLink path="class/ChatInputCommandInteraction?scrollTo=showModal" /> to display the modal to the user.
 
 ::: warning
-If you're using typescript you'll need to specify the type of components your action row holds. This can be done by specifying the generic parameter in `ActionRowBuilder`.
+If you're using typescript you'll need to specify the type of components your action row holds. This can be done by specifying the generic parameter in <DocsLink path="class/ActionRowBuilder" />
 
 ```diff
 - new ActionRowBuilder()
@@ -96,31 +94,67 @@ Restart your bot and invoke the `/ping` command again. You should see a popup fo
 
 <img width=450 src="./images/modal-example.png">
 
+::: warning
+Showing a modal must be the first response to an interaction. You cannot `defer()` or `deferUpdate()` then show a modal later.
+
+### Input styles
+
+Currently there are two different input styles available:
+- `Short`, a single-line text entry;
+- `Paragraph`, a multi-line text entry similar to the HTML `<textarea>`;
+
+### Input properties
+
+In addition to the `customId`, `label` and `style`, a text input can be customised in a number of ways to apply validation, prompt the user, or set default values via the <DocsLink path="class/TextInputBuilder" /> methods:
+
+```js
+const input = new TextInputBuilder()
+	// set the maximum number of characters to allow
+	.setMaxLength(1000)
+	// set the minimum number of characters required for submission
+	.setMinLength(10)
+	// set a placeholder string to prompt the user
+	.setPlaceholder('Enter some text!')
+	// set a default value to pre-fill the input
+	.setValue('Default')
+	 // require a value in this input field
+	.setRequired(true);
+```
+
 ## Receiving modal submissions
 
-Modals are received via an interaction. You can check if a given interaction is a modal by checking if the <DocsLink path="class/BaseInteraction?scrollTo=type"/> is `ModalSubmit`. 
+### Interaction collectors
+
+Modal sibmissions can be collected within the scope of the interaction that showed it by utilising an <DocsLink path="class/InteractionCollector"/>, or the <DocsLink path="class/ChatInputCommandInteraction?scrollTo=awaitModalSubmit" /> promisified method. These both provide instances of the <DocsLink path="class/ModalSubmitInteraction"/> class as collected items.
+
+For a detailed guide on receiving message components via collectors, please refer to the [collectors guide](/popular-topics/collectors.md#interaction-collectors).
+
+### The interactionCreate event
+
+To receive a <DocsLink path="class/ModalSubmtInteraction"/> event, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate"/> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isModalSubmit"/> type guard to make sure you only receive modals:
 
 ```js {1,4}
 const { InteractionType } = require('discord.js');
 
 client.on('interactionCreate', interaction => {
-	if (interaction.type !== InteractionType.ModalSubmit) return;
+	if (!interaction.isModalSubmit()) return;
 	console.log(interaction);
 });
 ```
 
 ## Responding to modal submissions
 
-The `ModalSubmitInteraction` class provides the same methods as the `CommandInteraction` class. These methods behave equally:
-
+The <DocsLink path="class/ModalSubmtInteraction"/> class provides the same methods as the <DocsLink path="class/ChatInputCommandInteraction"/> class. These methods behave equally:
 - `reply()`
 - `editReply()`
-- `update()`
 - `deferReply()`
-- `deferUpdate()`
 - `fetchReply()`
 - `deleteReply()`
 - `followUp()`
+
+If the modal was shown from a <DocsLink path="class/ButtonInteraction"/> or <DocsLink path="class/SelectMenuInteraction"/>, it will also provide these methods, which behave equally:
+- `update()`
+- `deferUpdate()`
 
 ```js{1,3-5}
 client.on('interactionCreate', async interaction => {
@@ -137,7 +171,7 @@ If you're using typescript, you can use the <DocsLink path="class/ModalSubmitInt
 
 ## Extracting data from modal submissions
 
-You'll most likely need to read the data sent by the user in the modal. You can do this by accessing the `#fields` instance field on the interaction. From there you can call `#getTextInputValue` with the custom id of the text input to get the value.
+You'll most likely need to read the data sent by the user in the modal. You can do this by accessing the <DocsLink path="class/ModalSubmtInteraction?scrollTo=fields"/>. From there you can call <DocsLink path="class/ModalSubmitFields?scrollTo=getTextInputValue"/> with the custom id of the text input to get the value.
 
 ```js{5-7}
 client.on('interactionCreate', interaction => {
