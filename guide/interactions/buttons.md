@@ -8,13 +8,13 @@ This page is a follow-up to the [interactions (slash commands) page](/interactio
 
 ## Building and sending buttons
 
-Buttons are part of the `MessageComponent` class, which can be sent via messages or interaction responses. A button, as any other message component, must be in an `ActionRow`.
+Buttons are one of the `MessageComponent` classes, which can be sent via messages or interaction responses. A button, as any other message component, must be in an `ActionRow`.
 
 ::: warning
 You can have a maximum of five `ActionRow`s per message, and five buttons within an `ActionRow`.
 :::
 
-To create your buttons, use the `ActionRowBuilder()` and `ButtonBuilder()` classes. Then, pass the resulting row object to `ChatInputCommandInteraction#reply()` in the `components` array of `InteractionReplyOptions`:
+To create your buttons, use the <DocsLink path="class/ActionRowBuilder"/> and <DocsLink path="class/ButtonBuilder"/> classes. Then, pass the resulting row object to <DocsLink path="class/ChatInputCommandInteraction?scrollTo=reply" /> in the `components` array of <DocsLink path="typedef/InteractionReplyOptions" />:
 
 ```js {1,7-13,15}
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
@@ -109,7 +109,7 @@ client.on('interactionCreate', async interaction => {
 </DiscordMessages>
 
 ::: warning
-If you're using TypeScript you'll need to specify the type of components your action row holds. This can be done by specifying the component builder you will add to it using a generic parameter in `ActionRowBuilder`.
+If you're using TypeScript you'll need to specify the type of components your action row holds. This can be done by specifying the component builder you will add to it using a generic parameter in <DocsLink path="class/ActionRowBuilder"/>.
 
 ```diff
 - new ActionRowBuilder()
@@ -119,7 +119,7 @@ If you're using TypeScript you'll need to specify the type of components your ac
 
 ### Disabled buttons
 
-If you want to prevent a button from being used, but not remove it from the message, you can disable it with the `setDisabled()` method:
+If you want to prevent a button from being used, but not remove it from the message, you can disable it with the <DocsLink path="class/ButtonBuilder?scrollTo=setDisabled"/> method:
 
 ```js {5}
 const button = new ButtonBuilder()
@@ -145,7 +145,7 @@ const button = new ButtonBuilder()
 
 ### Emoji buttons
 
-If you want to use a guild emoji within a `ButtonBuilder`, you can use the `setEmoji()` method:
+If you want to use a guild emoji within a <DocsLink path="class/ButtonBuilder"/>, you can use the <DocsLink path="class/ButtonBuilder?scrollTo=setEmoji"/> method:
 
 ```js {5}
 const button = new ButtonBuilder()
@@ -161,7 +161,7 @@ Now you know all there is to building and sending a Button! Let's move on to rec
 
 ### Component collectors
 
-Message component interactions can be collected within the scope of the slash command that sent them by utilising an `InteractionCollector`, or their promisified `awaitMessageComponent` variant. These both provide instances of the `MessageComponentInteraction` class as collected items.
+Message component interactions can be collected within the scope of the slash command that sent them by utilising an <DocsLink path="class/InteractionCollector"/>, or their promisified `awaitMessageComponent` variant. These both provide instances of the <DocsLink path="class/MessageComponentInteraction"/> class as collected items.
 
 ::: tip
 You can create the collectors on either a `message` or a `channel`.
@@ -171,7 +171,7 @@ For a detailed guide on receiving message components via collectors, please refe
 
 ### The interactionCreate event
 
-To receive a `ButtonInteraction` event, attach an `interactionCreate` event listener to your client and use the `Interaction#isButton()` type guard to make sure you only receive buttons:
+To receive a <DocsLink path="class/ButtonInteraction"/> event, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate"/> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isButton"/> type guard to make sure you only receive buttons:
 
 ```js {2}
 client.on('interactionCreate', interaction => {
@@ -182,7 +182,7 @@ client.on('interactionCreate', interaction => {
 
 ## Responding to buttons
 
-The `MessageComponentInteraction` class provides the same methods as the `CommandInteraction` class. These methods behave equally:
+The <DocsLink path="class/MessageComponentInteraction"/> class provides the same methods as the <DocsLink path="class/CommandInteraction"/> class. These methods behave equally:
 - `reply()`
 - `editReply()`
 - `deferReply()`
@@ -192,7 +192,7 @@ The `MessageComponentInteraction` class provides the same methods as the `Comman
 
 ### Updating the button message
 
-The `MessageComponentInteraction` class also provides an `update()` method to update the message the button is attached to. Passing an empty array to the `components` option will remove any buttons after one has been clicked.
+The <DocsLink path="class/MessageComponentInteraction"/> class also provides an <DocsLink path="class/MessageComponentInteraction?scrollTo=update"/> method to update the message the button is attached to. Passing an empty array to the `components` option will remove any buttons after one has been clicked.
 
 This method should be used in favour of `editReply()` on the original interaction, to ensure you respond to the button interaction.
 
