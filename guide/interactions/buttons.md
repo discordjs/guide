@@ -232,7 +232,6 @@ collector.on('collect', async i => {
 collector.on('end', collected => console.log(`Collected ${collected.size} items`));
 ```
 
-
 ## Button styles
 
 Currently there are five different button styles available:
