@@ -22,16 +22,19 @@ const data = new SlashCommandBuilder()
 			.setAutocomplete(true));
 ```
 
+To use autocomplete, make sure you _don't_ add any choices to the command - we'll be providing those dynamically in the next step.
+
 ## Responding to autocomplete interactions
 
-To handle an <DocsLink path="class/AutocompleteInteraction"/>, you can check if the type of interaction received was type `ApplicationCommandAutocomplete` using <DocsLink path="class/BaseInteraction?scrollTo=type"/> to make sure the interaction instance is an autocomplete interaction:
+To handle an <DocsLink path="class/AutocompleteInteraction"/>, use the <DocsLink path="class/BaseInteraction?scrollTo=isAutocomplete"/> type guard to make sure the interaction instance is an autocomplete interaction:
+
 <!-- eslint-skip -->
 
 ```js {1,4}
 const { InteractionType } = require('discord.js');
 
 client.on('interactionCreate', interaction => {
-	if (interaction.type !== InteractionType.ApplicationCommandAutocomplete) return;
+	if (!interaction.isAutocomplete()) return;
 });
 ```
 
@@ -41,7 +44,7 @@ The <DocsLink path="class/AutocompleteInteraction"/> class provides the <DocsLin
 
 Using <DocsLink path="class/AutocompleteInteraction?scrollTo=respond" /> you can submit an array of <DocsLink path="typedef/ApplicationCommandOptionChoiceData" /> objects. Passing an empty array will show "No options match your search" for the user.
 
-The <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" /> method returns the currently focused option's value. This value is used to filter the choices presented. To only display options starting with the focused value you can use the `Array#filter()` method. By using `Array#map()`, you can transform the array into an array of <DocsLink path="typedef/ApplicationCommandOptionChoiceData" /> objects.
+The <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" /> method returns the currently focused option's value. This value can be used to filter the choices presented. For example, to only display options starting with the focused value you can use the `Array#filter()` method, then using `Array#map()`, you can transform the array into an array of <DocsLink path="typedef/ApplicationCommandOptionChoiceData" /> objects.
 
 ```js {4-11}
 client.on('interactionCreate', async interaction => {
@@ -85,6 +88,20 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 ```
+
+### Accessing other values
+
+In addition to filtering based on the focused value, you may also wish to change the choices displayed based on the value of other arguments in the command. The following methods work the same in <DocsLink path="class/AutocompleteInteraction"/>:
+
+```js
+const string = interaction.options.getString('input');
+const integer = interaction.options.getInteger('int');
+const boolean = interaction.options.getBoolean('choice');
+const number = interaction.options.getNumber('num');
+```
+
+However, the `.getUser()`, `.getMember()`, `.getRole()`, `.getChannel()`, `.getMentionable()` and `.getAttachment()` methods will not function the same, as Discord does not send their respective full objects until the slash command is completed. For these, you can get the Snowflake value using `interaction.options.get('option').value`:
+
 
 ## Notes
 
