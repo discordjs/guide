@@ -150,7 +150,7 @@ const exampleEmbed = {
 	image: {
 		url: 'https://i.imgur.com/AfFp7pu.png',
 	},
-	timestamp: new Date(),
+	timestamp: new Date().toISOString(),
 	footer: {
 		text: 'Some footer text here',
 		icon_url: 'https://i.imgur.com/AfFp7pu.png',
