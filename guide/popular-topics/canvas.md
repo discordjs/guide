@@ -142,14 +142,14 @@ const { request } = require('undici');
 client.on('interactionCreate', async interaction => {
 	// ...
 	context.strokeRect(0, 0, canvas.width, canvas.height);
-	
-	// using undici to make http requests for better performance
+
+	// Using undici to make HTTP requests for better performance
 	const { body } = await request(interaction.user.displayAvatarURL({ extension: 'jpg' }));
 	const avatar = await Canvas.loadImage(await body.arrayBuffer());
-	
-	// if you don't care about the performance of http requests, you can instead load the avatar using
+
+	// If you don't care about the performance of HTTP requests, you can instead load the avatar using
 	// const avatar = await Canvas.loadImage(interaction.user.displayAvatarURL({ extension: 'jpg' }));
-	
+
 	// Draw a shape onto the main canvas
 	context.drawImage(avatar, 25, 0, 200, canvas.height);
 	// ...
