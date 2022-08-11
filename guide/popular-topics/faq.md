@@ -21,13 +21,9 @@ guild.members.ban(user);
 ### How do I unban a user?
 
 ```js
-const id = interaction.options.get('target')?.value;
+const id = interaction.options.getUser('target');
 guild.members.unban(id);
 ```
-
-::: tip
-Because you cannot ping a user who isn't in the server, you have to pass in the user id. To do this, we use a <DocsLink path="typedef/CommandInteractionOption" />. See [here](/interactions/slash-commands.html#parsing-options) for more information on this topic.
-:::
 
 ### How do I kick a guild member?
 
