@@ -143,3 +143,40 @@ client.on('guildBanAdd', async ban => {
 	}
 });
 ```
+## Who unbanned user?
+Similar to `guildBanAdd` but we will use `guildBanRemove` instead of `guildBanAdd` event.
+
+```js
+client.on('guildBanRemove', member => {
+	console.log(`${member.user.tag} was unbanned from the guild ${member.guild.name}`);
+});
+```
+
+In this example you will see what exactly happened, and who unbanned user, we will fetch the audit log with `MEMBER_BAN REMOVE`, The `guildBanRemove` listener then becomes:
+
+```js {2-5,7-8,10-11,13-15,17-23}
+client.on('guildBanRemove', async member => {
+	const fetchedLogs = await member.guild.fetchAuditLogs({
+		limit: 1,
+		type: 'MEMBER_BAN_REMOVE',
+	});
+
+	// Since there's only 1 audit log entry in this collection, grab the first one
+	const unBanLog = fetchedLogs.entries.first();
+
+	// Perform a coherence check to make sure that there's *something*
+	if (!unBanLog) return console.log(`${member.user.tag} was banned from ${member.guild.name} but no audit log could be found.`);
+
+	// Now grab the user object of the person who unbanned the member
+	// Also grab the target of this action to double-check things
+	const { executor, target } = unBanLog;
+
+	// Update the output with a bit more information
+	// Also run a check to make sure that the log returned was for the same unbanned member
+	if (target.id === member.user.id) {
+		console.log(`${member.user.tag} has been unbanned from guild ${member.guild.name}, unbanned by ${executor.tag}`);
+	} else {
+		console.log(`${member.user.tag} has been unbanned from guild ${member.guild.name}, but can not find the executor`);
+	}
+});
+```
