@@ -1,6 +1,6 @@
 # Storing data with Keyv
 
-[Keyv](https://github.com/lukechilds/keyv) is a simple key-value store that works with multiple backends. It's fully scalable for [sharding](/sharding/) and supports JSON storage.
+[Keyv](https://www.npmjs.com/package/keyv) is a simple key-value store that works with multiple backends. It's fully scalable for [sharding](/sharding/) and supports JSON storage.
 
 ## Installation
 
@@ -75,7 +75,7 @@ Make sure to handle connection errors.
 keyv.on('error', err => console.error('Keyv connection error:', err));
 ```
 
-For a more detailed setup, check out the [Keyv readme](https://github.com/lukechilds/keyv/blob/master/README.md).
+For a more detailed setup, check out the [Keyv readme](https://github.com/jaredwray/keyv/tree/main/packages/keyv).
 
 ## Usage
 
@@ -199,7 +199,7 @@ You will probably want to set up additional validation, such as required permiss
 
 Various other applications can use Keyv, such as guild settings; create another instance with a different [namespace](https://github.com/jaredwray/keyv/tree/main/packages/keyv#namespaces) for each setting. Additionally, it can be [extended](https://github.com/jaredwray/keyv/tree/main/packages/keyv#third-party-storage-adapters) to work with whatever storage backend you prefer.
 
-Check out the [Keyv repository](https://github.com/lukechilds/keyv) for more information.
+Check out the [Keyv repository](https://github.com/jaredwray/keyv/tree/main/packages/keyv) for more information.
 
 ## Resulting code
 
