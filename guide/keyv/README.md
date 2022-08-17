@@ -197,7 +197,7 @@ You will probably want to set up additional validation, such as required permiss
 
 ## Next steps
 
-Various other applications can use Keyv, such as guild settings; create another instance with a different [namespace](https://github.com/lukechilds/keyv#namespaces) for each setting. Additionally, it can be [extended](https://github.com/lukechilds/keyv#third-party-storage-adapters) to work with whatever storage backend you prefer.
+Various other applications can use Keyv, such as guild settings; create another instance with a different [namespace](https://github.com/jaredwray/keyv/tree/main/packages/keyv#namespaces) for each setting. Additionally, it can be [extended](https://github.com/jaredwray/keyv/tree/main/packages/keyv#third-party-storage-adapters) to work with whatever storage backend you prefer.
 
 Check out the [Keyv repository](https://github.com/lukechilds/keyv) for more information.
 
