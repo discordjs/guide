@@ -185,7 +185,7 @@ Localized names and descriptions depending on the user's selected language.
 
 You can pick localizations from [this list](https://discord.com/developers/docs/reference#locales)
 ```js {5-8,10-12,15,16}
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
 	.setName('dog')
