@@ -26,12 +26,14 @@ All gateway intents, and the events belonging to each, are listed on the [Discor
 ```js
 const { Client, GatewayIntentBits } = require('discord.js');
 
-const client = new Client({ intents: [
-	GatewayIntentBits.Guilds,
-	GatewayIntentBits.GuildMessages,
-	GatewayIntentBits.MessageContent,
-	GatewayIntentBits.GuildMembers
-] });
+const client = new Client({
+	intents: [
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildMembers,
+	],
+});
 ```
 
 ::: warning
