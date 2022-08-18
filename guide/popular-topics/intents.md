@@ -18,7 +18,10 @@ Should you receive an error prefixed with `[DISALLOWED_INTENTS]`, please review 
 
 To specify which events you want your bot to receive, first think about which events your bot needs to operate. Then select the required intents and add them to your client constructor, as shown below.
 
-All gateway intents, and the events belonging to each, are listed on the [Discord API documentation](https://discord.com/developers/docs/topics/gateway#list-of-intents). If you need your bot to receive messages (`MESSAGE_CREATE` - `"messageCreate"` in discord.js), you need the `Guilds` and `GuildMessages` intent, plus the `MessageContent` privileged intent to receive the `content`, `attachments`, `embeds` and `components` fields of the message. If you want your bot to post welcome messages for new members (`GUILD_MEMBER_ADD` - `"guildMemberAdd"` in discord.js), you need the `GuildMembers` privileged intent, and so on.
+All gateway intents, and the events belonging to each, are listed on the [Discord API documentation](https://discord.com/developers/docs/topics/gateway#list-of-intents). 
+
+- If you need your bot to receive messages (`MESSAGE_CREATE` - `"messageCreate"` in discord.js), you need the `Guilds` and `GuildMessages` intent, plus the `MessageContent` privileged intent to receive the `content`, `attachments`, `embeds` and `components` fields of the message.
+- If you want your bot to post welcome messages for new members (`GUILD_MEMBER_ADD` - `"guildMemberAdd"` in discord.js), you need the `GuildMembers` privileged intent, and so on.a
 
 ```js
 const { Client, GatewayIntentBits } = require('discord.js');
@@ -32,12 +35,16 @@ const client = new Client({ intents: [
 ```
 
 ::: warning
-Note that discord.js relies heavily on caching to provide its functionality. Some methods that seem unrelated might stop working if certain events do not arrive. For example:
- - The `Guilds` intent is required to populate and maintain the `guilds`, `channels` and `roles` caches.
- - The `GuildMembers` intent is required to keep cached guild members up to date, including changes to their roles, nickname etc.
+Note that discord.js relies heavily on caching to provide its functionality - this means an internal reliance on certain events to ensure the caches are populated and up to date.
+:::
+
+Some methods that seem unrelated might stop working if certain events do not arrive. For example:
+ - The `Guilds` intent populates and maintains the `guilds`, `channels` and `guild.roles` caches, plus thread-related events. \
+ If this intent is not enabled, data for interactions and messages will include only the guild and channel id, and will not resolve to the full class.
+ - The `GuildMembers` intent keeps cached guild members up to date, including changes to their roles and permissions, nickname etc. \
+ Note that you still receive full member data with interactions and messages without this intent enabled.
 
 Please make sure to provide the list of gateway intents and partials you use in your Client constructor when asking for support on our [Discord server](https://discord.gg/djs) or [GitHub repository](https://github.com/discordjs/discord.js).
-:::
 
 ## The Intents Bitfield
 
