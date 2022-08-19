@@ -500,6 +500,7 @@ client.on('interactionCreate', interaction => {
 	interaction.reply(locales[interaction.locale] || 'It\'s default english command!');
 });
 ```
+
 ### Fetching and deleting responses
 
 ::: danger
