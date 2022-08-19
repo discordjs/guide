@@ -181,9 +181,7 @@ const data = new SlashCommandBuilder()
 ```
 ### Localizations
 
-Localized names and descriptions depending on the user's selected language.
-
-You can pick localizations from [this list](https://discord.com/developers/docs/reference#locales)
+The names and descriptions of slash commands can be localized to the user's selected language. The accepted locales can be seen from [this list](https://discord.com/developers/docs/reference#locales).
 
 ```js {5-8,10-12,15,16}
 const { SlashCommandBuilder } = require('discord.js');
