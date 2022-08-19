@@ -498,7 +498,7 @@ client.on('interactionCreate', interaction => {
 		pl: 'To jest komenda po polsku!',
 		de: 'Das ist ein befehl auf deutsch!',
 	};
-	interaction.reply(locales[interaction.locale] || 'It\'s default english command!');
+	interaction.reply(locales[interaction.locale] ?? 'It\'s default english command!');
 });
 ```
 
