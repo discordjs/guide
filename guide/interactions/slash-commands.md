@@ -179,6 +179,7 @@ const data = new SlashCommandBuilder()
 			.setName('server')
 			.setDescription('Info about the server'));
 ```
+
 ### Localizations
 
 The names and descriptions of slash commands can be localized to the user's selected language. The accepted locales can be seen from [this list](https://discord.com/developers/docs/reference#locales).
