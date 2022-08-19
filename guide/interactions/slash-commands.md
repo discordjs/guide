@@ -200,8 +200,8 @@ const data = new SlashCommandBuilder()
 	.addStringOption(option =>
 		option
             .setName('breed')
-            .setDescription('Breed of dog')
-		    .setNameLocalizations({
+			.setDescription('Breed of dog')
+			.setNameLocalizations({
 			    pl: 'rasa',
 			    de: 'rasse',
 			})
