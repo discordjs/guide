@@ -488,6 +488,7 @@ client.on('interactionCreate', async interaction => {
 });
 ```
 ### Localized responses
+
 You can get the locale of the user with `BaseInteraction#locale`:
 
 ```js
