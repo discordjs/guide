@@ -1,4 +1,4 @@
-const { request } = require('undici');
+const { fetch } = require('undici');
 const express = require('express');
 const { clientId, clientSecret, port } = require('./config.json');
 
@@ -18,7 +18,7 @@ app.get('/', async ({ query }, response) => {
 
 	if (code) {
 		try {
-			const tokenResponseData = await request('https://discord.com/api/oauth2/token', {
+			const oauthData = await fetch('https://discord.com/api/oauth2/token', {
 				method: 'POST',
 				body: new URLSearchParams({
 					client_id: clientId,
@@ -31,11 +31,11 @@ app.get('/', async ({ query }, response) => {
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded',
 				},
-			});
+			})
+				.then(result => result.json());
 
-			const oauthData = await getJSONResponse(tokenResponseData.body);
 
-			const userResult = await request('https://discord.com/api/users/@me', {
+			const userResult = await fetch('https://discord.com/api/users/@me', {
 				headers: {
 					authorization: `${oauthData.token_type} ${oauthData.access_token}`,
 				},
