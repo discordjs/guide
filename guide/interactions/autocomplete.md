@@ -91,3 +91,4 @@ client.on('interactionCreate', async interaction => {
 - You have to respond to the request within 3 seconds, as with other application command interactions.
 - You cannot defer the response to an autocomplete interaction.
 - After the user selects a value and sends the command, it will be received as a <DocsLink path="class/ChatInputCommandInteraction"/> with the chosen value.
+- You can only respond with a maximum of 25 choices at a time.
