@@ -98,7 +98,7 @@ Application commands can have `options`. Think of these options as arguments to 
 ```js {6-9}
 const { SlashCommandBuilder } = require('discord.js');
 
-const data = new SlashCommandBuilder()
+this.data = new SlashCommandBuilder()
 	.setName('echo')
 	.setDescription('Replies with your input!')
 	.addStringOption(option =>
@@ -143,7 +143,7 @@ Specify them by using the `addChoices()` method from the slash command builder:
 ```js {10-14}
 const { SlashCommandBuilder } = require('discord.js');
 
-const data = new SlashCommandBuilder()
+this.data = new SlashCommandBuilder()
 	.setName('gif')
 	.setDescription('Sends a random gif!')
 	.addStringOption(option =>
@@ -164,7 +164,7 @@ Subcommands are available with the `.addSubcommand()` method:
 ```js {6-14}
 const { SlashCommandBuilder } = require('discord.js');
 
-const data = new SlashCommandBuilder()
+this.data = new SlashCommandBuilder()
 	.setName('info')
 	.setDescription('Get info about a user or a server!')
 	.addSubcommand(subcommand =>
@@ -394,7 +394,7 @@ In this section, we'll cover how to access the values of a command's options. Le
 ```js {6-14}
 const { SlashCommandBuilder } = require('discord.js');
 
-const data = new SlashCommandBuilder()
+this.data = new SlashCommandBuilder()
 	.setName('ping')
 	.setDescription('Replies with Pong!')
 	.addStringOption(option => option.setName('input').setDescription('Enter a string'))
@@ -493,7 +493,7 @@ You can use the `ApplicationCommand#setDMPermission()` method to control if a gl
 ```js {6}
 const { SlashCommandBuilder } = require('discord.js');
 
-const data = new SlashCommandBuilder()
+this.data = new SlashCommandBuilder()
 	.setName('boop')
 	.setDescription('Replies with beep!')
 	.setDMPermission(false);
@@ -510,7 +510,7 @@ If you want to learn more about the `|` bitwise OR operator you can check the [W
 ```js {9}
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
-const data = new SlashCommandBuilder()
+this.data = new SlashCommandBuilder()
 	.setName('ban')
 	.setDescription('Select a member and ban them (but not really).')
 	.addUserOption(option =>
