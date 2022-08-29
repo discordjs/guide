@@ -4,29 +4,29 @@
 
 v14 requires Node 16.9 or higher to use, so make sure you're up to date. To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it! There are many resources online to help you with this step based on your host system.
 
-### Builders are now included in v14
+### Builders and REST are now included in v14
 
-If you previously had `@discordjs/builders` manually installed it's _highly_ recommended that you uninstall the package to avoid package naming conflicts.
+If you previously had `@discordjs/builders` or `@discordjs/rest` manually installed it's _highly_ recommended that you uninstall the package to avoid package naming conflicts.
 
 :::: code-group
 ::: code-group-item npm
 
 ```sh:no-line-numbers
-npm uninstall @discordjs/builders
+npm uninstall @discordjs/builders @discordjs/rest
 ```
 
 :::
 ::: code-group-item yarn
 
 ```sh:no-line-numbers
-yarn remove @discordjs/builders
+yarn remove @discordjs/builders @discordjs/rest
 ```
 
 :::
 ::: code-group-item pnpm
 
 ```sh:no-line-numbers
-pnpm remove @discordjs/builders
+pnpm remove @discordjs/builders @discordjs/rest
 ```
 
 :::
