@@ -21,8 +21,7 @@ You need to have [Developer Mode](https://support.discord.com/hc/en-us/articles/
 Edit your `deploy-commands.js` as shown below, or put it into its own file to clearly discern it from the deploy workflow:
 
 ```js{9-17}
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord.js');
+const { REST, Routes } = require('discord.js');
 const { clientId, guildId, token } = require('./config.json');
 
 const rest = new REST({ version: '10' }).setToken(token);
@@ -47,8 +46,7 @@ Where `'commandId'` is the id of the command you want to delete. Run your deploy
 To delete all commands in the respective scope (one guild, all global commands) you can pass an empty array when setting commands.
 
 ```js{9-18}
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord.js');
+const { REST, Routes } = require('discord.js');
 const { clientId, guildId, token } = require('./config.json');
 
 const rest = new REST({ version: '10' }).setToken(token);
