@@ -25,26 +25,6 @@ Create a `deploy-commands.js` file in your project directory. This file will be 
 
 Since commands only need to be registered once, and updated when the definition (description, options etc) is changed, it's not necessary to connect a whole client to the gateway or do this on every `ready` event. As such, a standalone script using the lighter REST manager is preferred. 
 
-You'll need to install [`@discordjs/rest`](https://github.com/discordjs/discord.js/tree/main/packages/rest).
-
-:::: code-group
-::: code-group-item npm
-```sh:no-line-numbers
-npm install @discordjs/rest 
-```
-:::
-::: code-group-item yarn
-```sh:no-line-numbers
-yarn add @discordjs/rest 
-```
-:::
-::: code-group-item pnpm
-```sh:no-line-numbers
-pnpm add @discordjs/rest 
-```
-:::
-::::
-
 Below is a deployment script you can use. Focus on these variables:
 
 - `clientId`: Your application's client id
@@ -58,8 +38,7 @@ In order to get your application's client id, go to [Discord Developer Portal](h
 :::: code-group
 ::: code-group-item deploy-commands.js
 ```js{4,6-11}
-const { SlashCommandBuilder, Routes } = require('discord.js');
-const { REST } = require('@discordjs/rest');
+const { SlashCommandBuilder, REST, Routes } = require('discord.js');
 const { clientId, guildId, token } = require('./config.json');
 
 const commands = [
