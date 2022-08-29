@@ -71,7 +71,7 @@ client.on('interactionCreate', async interaction => {
 		let choices;
 
 		if (focusedOption.name === 'query') {
-			const choices = ['Popular Topics: Threads', 'Sharding: Getting started', 'Library: Voice Connections', 'Interactions: Replying to slash commands', 'Popular Topics: Embed preview'];
+			choices = ['Popular Topics: Threads', 'Sharding: Getting started', 'Library: Voice Connections', 'Interactions: Replying to slash commands', 'Popular Topics: Embed preview'];
 		}
 
 		if (focusedOption.name === 'version') {
