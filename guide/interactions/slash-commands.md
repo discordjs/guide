@@ -178,6 +178,40 @@ const data = new SlashCommandBuilder()
 			.setDescription('Info about the server'));
 ```
 
+### Localizations
+
+The names and descriptions of slash commands can be localized to the user's selected language. You can find the list of accepted locales on the [discord API documentation](https://discord.com/developers/docs/reference#locales).
+
+<!-- eslint-skip -->
+```js {5-8,10-12,15,16}
+const { SlashCommandBuilder } = require('discord.js');
+
+const data = new SlashCommandBuilder()
+	.setName('dog')
+	.setNameLocalizations({
+		pl: 'pies',
+		de: 'hund',
+	})
+	.setDescription('Get a cute picture of a dog!')
+	.setDescriptionLocalizations({
+		pl: 'Słodkie zdjęcie pieska!',
+		de: 'Poste ein niedliches Hundebild!',
+	})
+	.addStringOption(option =>
+		option
+			.setName('breed')
+			.setDescription('Breed of dog')
+			.setNameLocalizations({
+				pl: 'rasa',
+				de: 'rasse',
+			})
+			.setDescriptionLocalizations({
+				pl: 'Rasa psa',
+				de: 'Hunderasse',
+			}),
+	);
+```
+
 ## Replying to slash commands
 
 Discord provides developers the option to create client-integrated slash commands. In this section, we'll cover how to respond to these commands using discord.js!
@@ -450,6 +484,20 @@ client.on('interactionCreate', async interaction => {
 			await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
 		}
 	}
+});
+```
+
+### Localized responses
+
+You can get the locale of the user with `BaseInteraction#locale`:
+
+```js
+client.on('interactionCreate', interaction => {
+	const locales = {
+		pl: 'Witaj Świecie!',
+		de: 'Hallo Welt!',
+	};
+	interaction.reply(locales[interaction.locale] ?? 'Hello World (default is english)');
 });
 ```
 
