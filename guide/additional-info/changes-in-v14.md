@@ -234,6 +234,10 @@ The following type guards have been removed:
 
 Refer to [this section](#channels) for more context.
 
+### Client
+
+The `restWsBridgeTimeout` client option has been removed.
+
 ### CommandInteractionOptionResolver
 
 `CommandInteractionOptionResolver#getMember()` no longer has a parameter for `required`. See [this pull request](https://github.com/discordjs/discord.js/pull/7188) for more information.
