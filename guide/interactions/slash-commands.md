@@ -182,7 +182,7 @@ const data = new SlashCommandBuilder()
 
 ### Localizations
 
-The names and descriptions of slash commands can be localized to the user's selected language. The accepted locales can be seen from [this list](https://discord.com/developers/docs/reference#locales).
+The names and descriptions of slash commands can be localized to the user's selected language. You can find the list of accepted locales on the [discord API documentation](https://discord.com/developers/docs/reference#locales).
 
 ```js {5-8,10-12,15,16}
 const { SlashCommandBuilder } = require('discord.js');
@@ -193,10 +193,10 @@ const data = new SlashCommandBuilder()
 		pl: 'pies',
 		de: 'hund',
 	})
-	.setDescription('Get cute picture of dog!')
+	.setDescription('Get a cute picture of a dog!')
 	.setDescriptionLocalizations({
 		pl: 'Słodkie zdjęcie pieska!',
-		de: 'Erhalten Sie nettes Bild des Hundes!',
+		de: 'Poste ein niedliches Hundebild!',
 	})
 	.addStringOption(option =>
 		option
@@ -208,7 +208,7 @@ const data = new SlashCommandBuilder()
 			})
 		    .setDescriptionLocalizations({
 		        pl: 'Rasa psa',
-		        de: 'Rasse des Hundes',
+				de: 'Hunderasse',
 		    })
 	);
 ```
