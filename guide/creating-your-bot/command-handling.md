@@ -60,7 +60,7 @@ const commands = [];
 const rest = new REST({ version: '10' }).setToken(token);
 
 rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
-	.then(() => console.log('Successfully registered application commands.'))
+	.then(data => console.log(`Successfully registered ${data.length} application commands.`))
 	.catch(console.error);
 ```
 :::
@@ -186,7 +186,7 @@ You can use the `client.commands` Collection setup to retrieve and execute your 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
-	const command = client.commands.get(interaction.commandName);
+	const command = interaction.client.commands.get(interaction.commandName);
 
 	if (!command) return;
 

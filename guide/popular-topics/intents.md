@@ -1,12 +1,14 @@
 # Gateway Intents
 
-Gateway Intents were introduced by Discord so bot developers can choose which events their bot receives based on which data it needs to function. Intents are named groups of pre-defined WebSocket events, which the discord.js client will receive. If you omit `DirectMessageTyping`, for example, you will no longer receive typing events from direct messages. If you provide no intents, discord.js will throw an error.
+Gateway Intents were introduced by Discord so bot developers can choose which events their bot receives based on which data it needs to function. Intents are named groups of pre-defined WebSocket events, which the discord.js client will receive. If you omit `DirectMessageTyping`, for example, you will no longer receive typing events from direct messages. If you do not specify intents, discord.js will throw an error.
+
+Rather than blindly enabling all intents, consider what information you actually need. Reducing the number of unnecessary events your bot receives improves performance and reduces bandwidth and memory usage.
 
 ## Privileged Intents
 
 Discord defines some intents as "privileged" due to the data's sensitive nature. At the time of writing this article, privileged intents are `GuildPresences`, `MessageContent` and `GuildMembers`. If your bot is not verified and in less than 100 guilds, you can enable privileged gateway intents in the [Discord Developer Portal](https://discord.com/developers/applications) under "Privileged Gateway Intents" in the "Bot" section. If your bot is already verified or is about to [require verification](https://support.discord.com/hc/en-us/articles/360040720412), you need to request privileged intents. You can do this in your verification application or by reaching out to Discord's [support team](https://dis.gd/contact), including why you require access to each privileged intent.
 
-Before storming off and doing so, you should stop and carefully think about if you need these events. Discord made them opt-in so users across the platform can enjoy a higher level of [privacy](https://en.wikipedia.org/wiki/Privacy_by_design). Presences can expose quite a bit of personal information through games and online times, for example. You might find it sufficient for your bot to have a little less information about all guild members at all times, considering you still get the command author as GuildMember from the command execution message and can fetch targets separately.
+Before storming off and doing so, you should stop and carefully think about if you need these events. Discord made them opt-in so users across the platform can enjoy a higher level of [privacy](https://en.wikipedia.org/wiki/Privacy_by_design). Presences can expose quite a bit of personal information, including the games being played and overall online time. You might find that it isn't necessary for your bot to have this level of information about all guild members at all times, considering you still get the command author as GuildMember from the command execution message and can fetch other targets separately.
 
 ### Error: Disallowed Intents
 
@@ -16,19 +18,35 @@ Should you receive an error prefixed with `[DISALLOWED_INTENTS]`, please review 
 
 To specify which events you want your bot to receive, first think about which events your bot needs to operate. Then select the required intents and add them to your client constructor, as shown below.
 
-All gateway intents, and the events belonging to each, are listed on the [Discord API documentation](https://discord.com/developers/docs/topics/gateway#list-of-intents). If you need your bot to receive messages (`MESSAGE_CREATE` - `"messageCreate"` in discord.js), you need the `GuildMessages` intent. If you want your bot to post welcome messages for new members (`GUILD_MEMBER_ADD` - `"guildMemberAdd"` in discord.js), you need the `GuildMembers` intent, and so on.
+All gateway intents, and the events belonging to each, are listed on the [Discord API documentation](https://discord.com/developers/docs/topics/gateway#list-of-intents). 
+
+- If you need your bot to receive messages (`MESSAGE_CREATE` - `"messageCreate"` in discord.js), you need the `Guilds` and `GuildMessages` intent, plus the `MessageContent` privileged intent to receive the `content`, `attachments`, `embeds` and `components` fields of the message.
+- If you want your bot to post welcome messages for new members (`GUILD_MEMBER_ADD` - `"guildMemberAdd"` in discord.js), you need the `GuildMembers` privileged intent, and so on.a
 
 ```js
 const { Client, GatewayIntentBits } = require('discord.js');
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({
+	intents: [
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildMembers,
+	],
+});
 ```
 
 ::: warning
-Note that discord.js relies heavily on caching to provide its functionality. Some methods that seem unrelated might stop working if certain events do not arrive.
+Note that discord.js relies heavily on caching to provide its functionality - this means an internal reliance on certain events to ensure the caches are populated and up to date.
+:::
+
+Some methods that seem unrelated might stop working if certain events do not arrive. For example:
+ - The `Guilds` intent populates and maintains the `guilds`, `channels` and `guild.roles` caches, plus thread-related events. \
+ If this intent is not enabled, data for interactions and messages will include only the guild and channel id, and will not resolve to the full class.
+ - The `GuildMembers` intent keeps cached guild members up to date, including changes to their roles and permissions, nickname etc. \
+ Note that you still receive full member data with interactions and messages without this intent enabled.
 
 Please make sure to provide the list of gateway intents and partials you use in your Client constructor when asking for support on our [Discord server](https://discord.gg/djs) or [GitHub repository](https://github.com/discordjs/discord.js).
-:::
 
 ## The Intents Bitfield
 
@@ -47,9 +65,6 @@ const client = new Client({ intents: myIntents });
 // other examples:
 const otherIntents = new IntentsBitField([IntentsBitField.Flags.Guilds, IntentsBitField.Flags.DirectMessages]);
 otherIntents.remove([IntentsBitField.Flags.DirectMessages]);
-
-const otherIntents2 = new IntentsBitField(32509);
-otherIntents2.remove(4096, 512);
 ```
 
 If you want to view the built flags you can utilize the `.toArray()`, `.serialize()` methods. The first returns an array of flags represented in this bitfield, the second an object mapping all possible flag values to a boolean, based on their representation in this bitfield.

@@ -1,6 +1,6 @@
 # Context Menus
 
-Context Menus are application commands which appear on right clicking or tapping a user or a message.
+Context Menus are application commands which appear when right clicking or tapping a user or a message, in the Apps submenu.
 
 ::: tip
 This page is a follow-up to the [interactions (slash commands) page](/interactions/slash-commands.md). Please carefully read that section first, so that you can understand the methods used in this section.
@@ -8,7 +8,7 @@ This page is a follow-up to the [interactions (slash commands) page](/interactio
 
 ## Registering context menu commands
 
-To create a context menu you construct a new `ContextMenuCommandBuilder`. You can then set the type of the context menu (user or message) using the `setType()` method.
+To create a context menu command, use the <DocsLink path="class/ContextMenuCommandBuilder" /> class. You can then set the type of the context menu (user or message) using the `setType()` method.
 
 ```js
 const { ContextMenuCommandBuilder, ApplicationCommandType } = require('discord.js');
@@ -20,7 +20,7 @@ const data = new ContextMenuCommandBuilder()
 
 ## Receiving context menu command interactions
 
-Context Menus are received via an interaction. You can check if a given interaction is a context menu by invoking the `isContextMenuCommand()` method, you can use the `isMessageContextMenuCommand()` and `isUserContextMenuCommand()` methods to check for the specific type of context menu interaction:
+Context menus commands, just like slash commands, are received via an interaction. You can check if a given interaction is a context menu by invoking the `isContextMenuCommand()` method, or the `isMessageContextMenuCommand()` and `isUserContextMenuCommand()` methods to check for the specific type of context menu interaction:
 
 ```js {2}
 client.on('interactionCreate', interaction => {
@@ -31,7 +31,9 @@ client.on('interactionCreate', interaction => {
 
 ## Extracting data from context menus
 
-You can get the targeted user by accessing the `targetUser` or `targetMember` property from the <DocsLink path="class/UserContextMenuInteraction" />. You can get the message by accessing the `targetMessage` property from the <DocsLink path="class/MessageContextMenuInteraction" />.
+For user context menus, you can get the targeted user by accessing the `targetUser` or `targetMember` property from the <DocsLink path="class/UserContextMenuInteraction" />. Y
+
+For message contenxt menus, you can get the targeted message by accessing the `targetMessage` property from the <DocsLink path="class/MessageContextMenuInteraction" />.
 
 ```js {4}
 client.on('interactionCreate', interaction => {
@@ -41,3 +43,9 @@ client.on('interactionCreate', interaction => {
 	console.log(name);
 });
 ```
+
+## Notes
+
+- Context menu commands cannot have subcommands or any options.
+- Responding to context menu commands functions the same as slash commands. Refer to our [slash command responses](/interactions/slash-commands.md#responding-to-a-command) guide for more information.
+- Context menu command permissions also function the same as slash commands. Refer to our [slash command permissions](/interactions/slash-commands.md#slash-command-permissions) guide for more information.
