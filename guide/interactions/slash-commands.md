@@ -204,11 +204,11 @@ const data = new SlashCommandBuilder()
 			.setName('breed')
 			.setDescription('Breed of dog')
 			.setNameLocalizations({
-			    pl: 'rasa',
-			    de: 'rasse',
+				pl: 'rasa',
+				de: 'rasse',
 			})
-		    .setDescriptionLocalizations({
-		        pl: 'Rasa psa',
+			.setDescriptionLocalizations({
+				pl: 'Rasa psa',
 				de: 'Hunderasse',
 			}),
 	);
@@ -496,10 +496,10 @@ You can get the locale of the user with `BaseInteraction#locale`:
 ```js
 client.on('interactionCreate', interaction => {
 	const locales = {
-		pl: 'To jest komenda po polsku!',
-		de: 'Das ist ein befehl auf deutsch!',
+		pl: 'Witaj Świecie!',
+		de: 'Hallo Welt!',
 	};
-	interaction.reply(locales[interaction.locale] ?? 'It\'s default english command!');
+	interaction.reply(locales[interaction.locale] ?? 'Hello World (default is english)');
 });
 ```
 
