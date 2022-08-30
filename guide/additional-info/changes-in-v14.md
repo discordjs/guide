@@ -280,7 +280,7 @@ The `threadMembersUpdate` event now emits the users who were added, the users wh
 
 ### GuildBanManager
 
-The `days` option when banning a user has been removed. Use `deleteMessageSeconds` instead.
+The `days` option when banning a user has been removed. Use `deleteMessageSeconds` instead which, as named, takes seconds instead of the number of days.
 
 ### Guild
 
