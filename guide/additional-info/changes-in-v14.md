@@ -280,7 +280,17 @@ The `threadMembersUpdate` event now emits the users who were added, the users wh
 
 ### GuildBanManager
 
-The `days` option when banning a user has been removed. Use `deleteMessageSeconds` instead which, as named, takes seconds instead of the number of days.
+Staring from 14.4.0, developers should utilise `deleteMessageSeconds` instead of `days` and `deleteMessageDays`:
+
+```diff
+<GuildBanManager>.create('123456789', {
+-  days: 3
+-  deleteMessageDays: 3
++  deleteMessageSeconds: 3 * 24 * 60 * 60
+});
+```
+
+`deleteMessageDays` (introduced with version 14) and `days` are both deprecated and will be removed in the future.
 
 ### Guild
 
