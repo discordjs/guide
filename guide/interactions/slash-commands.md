@@ -436,34 +436,34 @@ In this section, we'll cover how to access the values of a command's options. Le
 const { SlashCommandBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
-	.setName('ping')
-	.setDescription('Replies with Pong!')
-	.addStringOption(option => option.setName('input').setDescription('Enter a string'))
-	.addIntegerOption(option => option.setName('int').setDescription('Enter an integer'))
-	.addBooleanOption(option => option.setName('choice').setDescription('Select a boolean'))
-	.addUserOption(option => option.setName('target').setDescription('Select a user'))
-	.addChannelOption(option => option.setName('destination').setDescription('Select a channel'))
-	.addRoleOption(option => option.setName('muted').setDescription('Select a role'))
-	.addNumberOption(option => option.setName('num').setDescription('Enter a number'))
-	.addMentionableOption(option => option.setName('mentionable').setDescription('Mention something'))
-	.addAttachmentOption(option => option.setName('attachment').setDescription('Attach something'));
+	.setName('questionnaire')
+	.setDescription('Asks you a series of questions!')
+	.addStringOption(option => option.setName('input').setDescription('Your name?'))
+	.addBooleanOption(option => option.setName('bool').setDescription('True or False?'))
+	.addUserOption(option => option.setName('target').setDescription('Closest friend?'))
+	.addChannelOption(option => option.setName('destination').setDescription('Favourite channel?'))
+	.addRoleOption(option => option.setName('role').setDescription('Least favourite role?'))
+	.addIntegerOption(option => option.setName('int').setDescription('Sides to a square?'))
+	.addNumberOption(option => option.setName('num').setDescription('Value of Pi?'))
+	.addMentionableOption(option => option.setName('mentionable').setDescription('Mention something!'))
+	.addAttachmentOption(option => option.setName('attachment').setDescription('Best meme?'));
 ```
 
 You can `get()` these options from the `CommandInteractionOptionResolver` as shown below:
 
 ```js
 const string = interaction.options.getString('input');
-const integer = interaction.options.getInteger('int');
-const boolean = interaction.options.getBoolean('choice');
+const boolean = interaction.options.getBoolean('bool');
 const user = interaction.options.getUser('target');
 const member = interaction.options.getMember('target');
 const channel = interaction.options.getChannel('destination');
-const role = interaction.options.getRole('muted');
+const role = interaction.options.getRole('role');
+const integer = interaction.options.getInteger('int');
 const number = interaction.options.getNumber('num');
 const mentionable = interaction.options.getMentionable('mentionable');
 const attachment = interaction.options.getAttachment('attachment');
 
-console.log({ string, integer, boolean, user, member, channel, role, mentionable, attachment, number });
+console.log({ string, boolean, user, member, channel, role, integer, number, mentionable, attachment });
 ```
 
 ::: tip

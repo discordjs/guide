@@ -14,7 +14,7 @@ To create a context menu command, use the <DocsLink path="class/ContextMenuComma
 const { ContextMenuCommandBuilder, ApplicationCommandType } = require('discord.js');
 
 const data = new ContextMenuCommandBuilder()
-	.setName('echo')
+	.setName('User Information')
 	.setType(ApplicationCommandType.User);
 ```
 
@@ -39,8 +39,8 @@ For message contenxt menus, you can get the targeted message by accessing the `t
 client.on('interactionCreate', interaction => {
 	if (!interaction.isUserContextMenuCommand()) return;
 	// Get the User's username from context menu
-	const name = interaction.targetUser.username;
-	console.log(name);
+	const { username } = interaction.targetUser;
+	console.log(username);
 });
 ```
 
