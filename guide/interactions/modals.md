@@ -95,17 +95,17 @@ Restart your bot and invoke the `/ping` command again. You should see a popup fo
 <img width=450 src="./images/modal-example.png">
 
 ::: warning
-Showing a modal must be the first response to an interaction. You cannot `defer()` or `deferUpdate()` then show a modal later.
+Showing a modal must be the first response to an interaction. You cannot `defer()` or `deferUpdate()` then show a modal later. If you have already replied to the original interaction, you must reply from another new interaction instance type.
 
 ### Input styles
 
-Currently there are two different input styles available:
+Currently, there are two different input styles available:
 - `Short`, a single-line text entry;
 - `Paragraph`, a multi-line text entry similar to the HTML `<textarea>`;
 
 ### Input properties
 
-In addition to the `customId`, `label` and `style`, a text input can be customised in a number of ways to apply validation, prompt the user, or set default values via the <DocsLink path="class/TextInputBuilder" /> methods:
+In addition to the `customId`, `label`, and `style`, a text input can be customized in several  ways to apply validation, prompt the user, or set default values via the <DocsLink path="class/TextInputBuilder" /> methods:
 
 ```js
 const input = new TextInputBuilder()
@@ -125,13 +125,13 @@ const input = new TextInputBuilder()
 
 ### Interaction collectors
 
-Modal sibmissions can be collected within the scope of the interaction that showed it by utilising an <DocsLink path="class/InteractionCollector"/>, or the <DocsLink path="class/ChatInputCommandInteraction?scrollTo=awaitModalSubmit" /> promisified method. These both provide instances of the <DocsLink path="class/ModalSubmitInteraction"/> class as collected items.
+Modal submissions can be collected within the scope of the interaction that showed it by utilizing an <DocsLink path="class/InteractionCollector"/>, or the <DocsLink path="class/ChatInputCommandInteraction?scrollTo=awaitModalSubmit" /> promisified method. These both provide instances of the <DocsLink path="class/ModalSubmitInteraction"/> class as collected items.
 
 For a detailed guide on receiving message components via collectors, please refer to the [collectors guide](/popular-topics/collectors.md#interaction-collectors).
 
 ### The interactionCreate event
 
-To receive a <DocsLink path="class/ModalSubmtInteraction"/> event, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate"/> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isModalSubmit"/> type guard to make sure you only receive modals:
+To receive a <DocsLink path="class/ModalSubmtInteraction"/> event, attach a <DocsLink path="class/Client?scrollTo=e-interactionCreate"/> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isModalSubmit"/> type guard to make sure you only receive modals:
 
 ```js {1,4}
 const { InteractionType } = require('discord.js');
