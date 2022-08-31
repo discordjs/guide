@@ -185,7 +185,7 @@ const data = new SlashCommandBuilder()
 The names and descriptions of slash commands can be localized to the user's selected language. You can find the list of accepted locales on the [discord API documentation](https://discord.com/developers/docs/reference#locales).
 
 <!-- eslint-skip -->
-```js {5-8,10-12,15,16}
+```js {5-8,10-12,18-25}
 const { SlashCommandBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
