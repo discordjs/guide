@@ -9,7 +9,7 @@
 		</span>
 		<span v-else>
 			You're browsing the guide for discord.js v12.
-			Check out <a href="https://discordjs.guide/whats-new.html">what's new in discord.js v13</a>.
+			Check out <a href="https://discordjs.guide/whats-new.html">what's new in discord.js v14</a>.
 		</span>
 		<br />
 		<a href="#" @click.prevent="dismiss">[Dismiss for 1 week]</a>
