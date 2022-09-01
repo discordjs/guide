@@ -38,12 +38,12 @@ const config = {
 				link: '/commando/',
 			},
 			{
-				text: 'v13',
+				text: 'v14',
 				link: 'https://discordjs.guide/',
 			},
 			{
 				text: 'Discord.js Documentation',
-				link: 'https://discord.js.org/#/docs/main/stable/general/welcome',
+				link: 'https://discord.js.org/#/docs/discord.js/v12/general/welcome',
 			},
 		],
 		sidebar,
