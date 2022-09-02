@@ -120,24 +120,6 @@ Some channel type guard methods that narrowed to one channel type have been remo
 +channel.type === ChannelType.DM
 ```
 
-#### Interactions
-
-Similarly to channels, some interaction type guards have been removed, and replaced with `type` checks a [InteractionType](https://discord-api-types.dev/api/discord-api-types-v10/enum/InteractionType) enum member.
-
-```diff
--interaction.isCommand();
-+interaction.type === InteractionType.ApplicationCommand;
-
--interaction.isAutocomplete();
-+interaction.type === InteractionType.ApplicationCommandAutocomplete;
-
--interaction.isMessageComponent();
-+interaction.type === InteractionType.MessageComponent;
-
--interaction.isModalSubmit();
-+interaction.type === InteractionType.ModalSubmit;
-```
-
 ### Builders
 
 Builders are no longer returned by the API like they were previously. For example you send the API an `EmbedBuilder` but you receive an `Embed` of the same data from the API. This may affect how your code handles received structures such as components. Refer to [message component changes section](#messagecomponent) for more details.
