@@ -21,12 +21,12 @@ guild.members.ban(user);
 ### How do I unban a user?
 
 ```js
-const id = interaction.options.get('target')?.value;
-guild.members.unban(id);
+const user = interaction.options.getUser('target');
+guild.members.unban(user);
 ```
 
 ::: tip
-Because you cannot ping a user who isn't in the server, you have to pass in the user id. To do this, we use a <DocsLink path="typedef/CommandInteractionOption" />. See [here](/interactions/slash-commands.html#parsing-options) for more information on this topic.
+Discord validates and resolves user ids for users not on the server in user slash command options. To retrieve and use the full structure from the resulting interaction, you can use the <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getUser" /> method.
 :::
 
 ### How do I kick a guild member?
