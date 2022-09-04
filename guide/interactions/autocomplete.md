@@ -65,7 +65,7 @@ To distinguish between multiple options, you can pass `true` into <DocsLink path
 
 ```js {5-16}
 client.on('interactionCreate', async interaction => {
-	if (interaction.isAutocomplete()) return;
+	if (!interaction.isAutocomplete()) return;
 
 	if (interaction.commandName === 'guide') {
 		const focusedOption = interaction.options.getFocused(true);
