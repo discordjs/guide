@@ -31,8 +31,6 @@ To handle an <DocsLink path="class/AutocompleteInteraction"/>, use the <DocsLink
 <!-- eslint-skip -->
 
 ```js {1,4}
-const { InteractionType } = require('discord.js');
-
 client.on('interactionCreate', interaction => {
 	if (!interaction.isAutocomplete()) return;
 });
@@ -48,7 +46,7 @@ The <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" 
 
 ```js {4-11}
 client.on('interactionCreate', async interaction => {
-	if (interaction.type !== InteractionType.ApplicationCommandAutocomplete) return;
+	if (interaction.isAutocomplete()) return;
 
 	if (interaction.commandName === 'guide') {
 		const focusedValue = interaction.options.getFocused();
@@ -67,7 +65,7 @@ To distinguish between multiple options, you can pass `true` into <DocsLink path
 
 ```js {5-16}
 client.on('interactionCreate', async interaction => {
-	if (interaction.type !== InteractionType.ApplicationCommandAutocomplete) return;
+	if (interaction.isAutocomplete()) return;
 
 	if (interaction.commandName === 'guide') {
 		const focusedOption = interaction.options.getFocused(true);
