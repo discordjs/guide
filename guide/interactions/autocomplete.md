@@ -46,7 +46,7 @@ The <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" 
 
 ```js {4-11}
 client.on('interactionCreate', async interaction => {
-	if (interaction.isAutocomplete()) return;
+	if (!interaction.isAutocomplete()) return;
 
 	if (interaction.commandName === 'guide') {
 		const focusedValue = interaction.options.getFocused();
