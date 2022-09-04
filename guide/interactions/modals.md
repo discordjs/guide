@@ -32,7 +32,7 @@ client.on('interactionCreate', async interaction => {
 });
 ```
 ::: tip
-The custom id is a developer-defined string of up to 100 characters. Use this field to ensure you can uniquely define all incoming interactions from your mdoals!
+The custom id is a developer-defined string of up to 100 characters. Use this field to ensure you can uniquely define all incoming interactions from your modals!
 :::
 
 The next step is to add the input fields in which users responding can enter free-text. Adding inputs is similar to adding components to messages.
