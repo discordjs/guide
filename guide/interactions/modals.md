@@ -171,7 +171,7 @@ If you're using typescript, you can use the <DocsLink path="class/ModalSubmitInt
 
 ## Extracting data from modal submissions
 
-You'll most likely need to read the data sent by the user in the modal. You can do this by accessing the <DocsLink path="class/ModalSubmtInteraction?scrollTo=fields"/>. From there you can call <DocsLink path="class/ModalSubmitFields?scrollTo=getTextInputValue"/> with the custom id of the text input to get the value.
+You'll most likely need to read the data sent by the user in the modal. You can do this by accessing the <DocsLink path="class/ModalSubmitInteraction?scrollTo=fields"/>. From there you can call <DocsLink path="class/ModalSubmitFields?scrollTo=getTextInputValue"/> with the custom id of the text input to get the value.
 
 ```js{5-7}
 client.on('interactionCreate', interaction => {
