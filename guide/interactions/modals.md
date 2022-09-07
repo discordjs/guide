@@ -96,6 +96,7 @@ Restart your bot and invoke the `/ping` command again. You should see a popup fo
 
 ::: warning
 Showing a modal must be the first response to an interaction. You cannot `defer()` or `deferUpdate()` then show a modal later.
+:::
 
 ### Input styles
 
