@@ -125,7 +125,7 @@ const input = new TextInputBuilder()
 
 ### Interaction collectors
 
-Modal sibmissions can be collected within the scope of the interaction that showed it by utilising an <DocsLink path="class/InteractionCollector"/>, or the <DocsLink path="class/ChatInputCommandInteraction?scrollTo=awaitModalSubmit" /> promisified method. These both provide instances of the <DocsLink path="class/ModalSubmitInteraction"/> class as collected items.
+Modal submissions can be collected within the scope of the interaction that showed it by utilising an <DocsLink path="class/InteractionCollector"/>, or the <DocsLink path="class/ChatInputCommandInteraction?scrollTo=awaitModalSubmit" /> promisified method. These both provide instances of the <DocsLink path="class/ModalSubmitInteraction"/> class as collected items.
 
 For a detailed guide on receiving message components via collectors, please refer to the [collectors guide](/popular-topics/collectors.md#interaction-collectors).
 
