@@ -132,7 +132,7 @@ For a detailed guide on receiving message components via collectors, please refe
 
 ### The interactionCreate event
 
-To receive a <DocsLink path="class/ModalSubmtInteraction"/> event, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate"/> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isModalSubmit"/> type guard to make sure you only receive modals:
+To receive a <DocsLink path="class/ModalSubmitInteraction"/> event, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate"/> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isModalSubmit"/> type guard to make sure you only receive modals:
 
 ```js {1,4}
 const { InteractionType } = require('discord.js');
@@ -145,7 +145,7 @@ client.on('interactionCreate', interaction => {
 
 ## Responding to modal submissions
 
-The <DocsLink path="class/ModalSubmtInteraction"/> class provides the same methods as the <DocsLink path="class/ChatInputCommandInteraction"/> class. These methods behave equally:
+The <DocsLink path="class/ModalSubmitInteraction"/> class provides the same methods as the <DocsLink path="class/ChatInputCommandInteraction"/> class. These methods behave equally:
 - `reply()`
 - `editReply()`
 - `deferReply()`
