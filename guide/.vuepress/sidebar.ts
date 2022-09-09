@@ -53,6 +53,17 @@ export default {
 			],
 		},
 		{
+			text: 'Slash Commands',
+			children: [
+				'/slash-commands/registering.md',
+				'/slash-commands/advanced-creation.md',
+				'/slash-commands/replying.md',
+				'/slash-commands/parsing-options.md',
+				'/slash-commands/permissions.md',
+				'/slash-commands/autocomplete.md'
+			]
+		},
+		{
 			text: 'Interactions',
 			children: [
 				'/interactions/slash-commands.md',

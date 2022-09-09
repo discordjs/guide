@@ -4,6 +4,17 @@
 
 Discord provides developers with the option to create client-integrated slash commands. In this section, we'll cover how to register these commands using discord.js!
 
+In comparison to the old method of having bots respond to messages starting with a specific prefix, slash commands provide a huge number of benefits, including:
+
+- Integration with the Discord client interface
+- Automatic command detection and parsing of the associated options/arguments
+- Typed argument inputs for command options, e.g. "String", "User", or "Role"
+- Validated or dynamic choices for command options
+- In-channel private responses (ephemeral messages)
+- Pop-up form-style inputs for capturing additional information
+
+...and many more that you'll find during your own development!
+
 ::: tip
 This page assumes you use the same file structure as our [command handling](/creating-your-bot/command-handling.md) section. The scripts provided are made to function with that setup.
 
@@ -12,52 +23,39 @@ If you already have slash commands set up for your application and want to learn
 
 ### Guild commands
 
-Guild application commands are only available in the guild they were created in, if your application has the `applications.commands` scope authorized. This is ideal for testing commands you're still developing before deploying them globally.
+Slash commands can be registered in two ways; in one specific guild, or for every guild the bot is in. We're going to look at single-guild registration first, as this is a good way to develop and test your commands before a global deployment.
 
-In this section, we'll be using a script that is usable in conjunction with the slash command handler from the [command handling](/creating-your-bot/command-handling.md) section.
+Your application will need the `applications.commands` scope authorized in a guild for either its global or guild slash commands to appear, and to register them in a specific guild wihtout error.
 
-First off, install [`@discordjs/rest`](https://github.com/discordjs/discord.js/tree/main/packages/rest) by running the following command in your terminal:
+In this section, we'll be using a script to deploy our commands that is usable in conjunction with the slash command handler from the [command handling](/creating-your-bot/command-handling.md) section.
 
-:::: code-group
-::: code-group-item npm
-```sh:no-line-numbers
-npm install @discordjs/rest
-```
-:::
-::: code-group-item yarn
-```sh:no-line-numbers
-yarn add @discordjs/rest
-```
-:::
-::: code-group-item pnpm
-```sh:no-line-numbers
-pnpm add @discordjs/rest
-```
-:::
-::::
+This script uses the REST module, included with discord.js, to make the necessary API calls without wasting time setting up a full Client. As there is a daily limit on command creations, we don't want to be making unnecessary deployments such as on every restart. This script is intended to be run separately, only when you need to make changes to your slash command **definitions** - you're free to modify parts such as the execute function as much as you like without redeployment. 
 
 <!-- eslint-skip -->
 
 ```js
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord.js');
+const { REST, Routes } = require('discord.js');
 const { token } = require('./config.json');
 const fs = require('node:fs');
 
 const commands = [];
+// Grab all the command files from the commands directory
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 // Place your client and guild ids here
 const clientId = '123456789012345678';
 const guildId = '876543210987654321';
 
+// Grab the SlashCommandBuilder#toJSON() output of each command for deployment
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	commands.push(command.data.toJSON());
 }
 
+// Prepare the REST module
 const rest = new REST({ version: '10' }).setToken(token);
 
+// and deploy your commands!
 (async () => {
 	try {
 		console.log(`Started refreshing ${commands.length} application (/) commands.`);
@@ -74,28 +72,114 @@ const rest = new REST({ version: '10' }).setToken(token);
 })();
 ```
 
-Running this script will register all your commands to the guild of which the id was passed in above.
-
 ### Global commands
 
-Global application commands will be available in all the guilds your application has the `applications.commands` scope authorized, as well as in DMs.
+Global application commands will be available in all the guilds your application has the `applications.commands` scope authorized, as well as in DMs by default.
 
-To deploy global commands, you can use the same script from the [guild commands](#guild-commands) section and adjust the route in the script to `.applicationCommands(clientId)`.
+To deploy global commands, you can use the same script from the [guild commands](#guild-commands) section and adjust the route in the script to `.applicationCommands(clientId)`
 
 <!-- eslint-skip -->
 
 ```js {2}
 await rest.put(
+	Routes.applicationGuildCommands(clientId, guildId),
 	Routes.applicationCommands(clientId),
 	{ body: commands },
 );
 ```
 
+## Advanced command creation
+
+The examples we've looked at so far have all been fairly simple commands, such as `ping`, `server`, and `user` which all have standard static responses. However, there's much more we can do with the full suite of slash command tools!
+
 ### Options
 
-Application commands can have `options`. Think of these options as arguments to a function. You can specify them as shown below:
+Application commands can have additional `options`. Think of these options as arguments to a function, and as a way for the user to provide the additional information the command requires. Options require at minimum a name and description.
 
-```js {6-9}
+You can specify them as shown in the `echo` command below, which prompt the user to enter a String for the `input` option. You'll see more about how to receive and use these options in the [Replying to slash commands](#replying-to-slash-commands) section further on.
+
+```js {6-8}
+const { SlashCommandBuilder } = require('discord.js');
+
+const data = new SlashCommandBuilder()
+	.setName('echo')
+	.setDescription('Replies with your input!')
+	.addStringOption(option =>
+		option.setName('input')
+			.setDescription('The input to echo back'));
+```
+
+### Option types
+
+By specifying the `type` of an `ApplicationCommandOption` by using the corresponding method you are able to restrict what the user can provide as input, and for some options, leverage the automatic parsing of options by Discord. 
+
+The example above uses `addStringOption`, the simplest form of standard text input with no additional validatation. By leveraging additional option types, we could change the bahviour of this command in many ways, such as to a specific channel:
+
+```js {9-11}
+const { SlashCommandBuilder } = require('discord.js');
+
+const data = new SlashCommandBuilder()
+	.setName('echo')
+	.setDescription('Replies with your input!')
+	.addStringOption(option =>
+		option.setName('input')
+			.setDescription('The input to echo back'))
+	.addChannelOption(option =>
+		option.setName('channel')
+			.setDescription('The channel to echo into'));
+```
+
+Or giving the user the option to embed the message:
+
+```js {9-11}
+const { SlashCommandBuilder } = require('discord.js');
+
+const data = new SlashCommandBuilder()
+	.setName('echo')
+	.setDescription('Replies with your input!')
+	.addStringOption(option =>
+		option.setName('input')
+			.setDescription('The input to echo back'))
+	.addBooleanOption(option =>
+		option.setName('embed')
+			.setDescription('Whether or not the echo should be embedded'));
+```
+
+Listed below are all the types of options you can add and a little information about how they will behave:
+
+::: tip
+Refer to the Discord API documentation for detailed explanations on the [`SUB_COMMAND` and `SUB_COMMAND_GROUP` option types](https://discord.com/developers/docs/interactions/application-commands#subcommands-and-subcommand-groups).
+:::
+
+* `addSubcommand()` adds a `Subcommand`, allowing a single command to have branching options.
+* `addSubcommandGroup()` adds a `SubcommandGroup`, an additional level of branching for subcommands.
+* `addStringOption()` sets the option to require a `String` (text) input.
+* `addIntegerOption()` sets the option to require an `Integer` (whole number) value.
+* `addNumberOptinon()` set the option to require a `Number` (decimal, also known as a floating point) value.
+* `addBooleanOption()` sets the option to require a `Boolean` (true/false) value.
+* `addUserOption()` sets the option to require a `User` or `Snowflake` (user id) as the value.
+	* The Discord interface will display a user selection list above the chat input.
+	* Your bot will receive the full `User` object, and `GuildMember` if the command is executed in a guild.
+* `addChannelOption()` sets the option to require a `Channel` or `Snowflake` (channel id) as the value.
+	* The Discord interface will display a channel selection list above the chat input.
+	* Your bot will receive the full `GuildChannel` object.
+	* This option type cannot be used in DMs.
+* `addRoleOption()` sets the option to require a `Role` or `Snowflake` (role id) as the value.
+	* The Discord interface will display a role selection menu above the chat input.
+	* Your bot will receive the full `Role` object.
+	* This option type cannot be used in DMs.
+* `addMentionableOption()` sets the option to require a `User`, `Role` or `Snowflake` as the value.
+	* The Discord interface will display a selection menu above the chat input.
+	* Your bot will receive the full object `User` or `Role` object.
+* `addAttachmentOption()` sets the option to require a file attachment, prompting the user to make an upload.
+
+### Required options
+
+With our option types defined, we can start looking at additional forms of validation to ensure the data your bot receives is both complete and accurate. The simplest one is making options required. This validation can be applied to options of any type.
+
+Taking a look at our `echo` example again, we will use `setRequired(true)` to make the `input` option required to ensure users cannot execute the command without providing a string.
+
+```js {9}
 const { SlashCommandBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
@@ -107,38 +191,17 @@ const data = new SlashCommandBuilder()
 			.setRequired(true));
 ```
 
-Notice how `.setRequired(true)` is specified within the options builder. Setting this will prevent the user from sending the command without specifying a value for this option!
-
-### Option types
-
-As shown in the options example above, you can specify the `type` of an `ApplicationCommandOption`. Listed below are all the possible values you can pass as `ApplicationCommandOptionType`:
-
-::: tip
-The [slash command builder](/popular-topics/builders.md#slash-command-builders) has a method for each of these types respectively.
-Refer to the Discord API documentation for detailed explanations on the [`SUB_COMMAND` and `SUB_COMMAND_GROUP` option types](https://discord.com/developers/docs/interactions/application-commands#subcommands-and-subcommand-groups).
-:::
-
-* `Subcommand` sets the option to be a subcommand
-* `SubcommandGroup` sets the option to be a subcommand group
-* `String` sets the option to require a string value
-* `Integer` sets the option to require an integer value
-* `Number` sets the option to require a decimal (also known as a floating point) value
-* `Boolean` sets the option to require a boolean value
-* `User` sets the option to require a user or snowflake as value
-* `Channel` sets the option to require a channel or snowflake as value
-* `Role` sets the option to require a role or snowflake as value
-* `Mentionable` sets the option to require a user, role or snowflake as value
-* `Attachment` sets the option to require an attachment
-
 ### Choices
 
-The `String`, `Number` & `Integer` option types can have `choices`. `choices` are a set of predetermined values users can pick from when selecting the option that contains them.
+The `String`, `Number` & `Integer` option types can have `choices`. If you would prefer users select from  predetermined values rather than free text entry, `choices` can help you enforce this. This is particularly useful when dealing with external datasets, APIs and similar where specific input formats are required.
 
 ::: warning
 If you specify `choices` for an option, they'll be the **only** valid values users can pick!
 :::
 
-Specify them by using the `addChoices()` method from the slash command builder:
+Specify choice by using the `addChoices()` method from the slash command builder. Choices require both a `name` to be displayed to the user for selection, and a `value` that your bot will receive when that choice is selected, almost as if the user had typed it into the string option manually.
+
+The `gif` command example below allows users to select from predetermined categories of gif to send:
 
 ```js {10-14}
 const { SlashCommandBuilder } = require('discord.js');
@@ -157,11 +220,44 @@ const data = new SlashCommandBuilder()
 			));
 ```
 
-If you would prefer to provide dynamic choices based on what the user is typing into the option, this can be achieved using [autocomplete](/interactions/autocomplete).
+If you have too many choices to display (the maximum is 25), you may prefer to provide dynamic choices based on what the user has typed so far. This can be achieved using [autocomplete](/interactions/autocomplete).
+
+### Further validation
+
+Even without predetermined choices, additional restrictions can still be applied on free inputs.
+
+* For `String` options, `setMaxLength()` and `setMinLength()` to enforce length limitations.
+* For `Integer` and `Number` options, `setMaxValue()` and `setMinValue()` to enforce value limitations.
+* For `Channel` options, `addChannelTypes()` to restrict selection to specific channel types, e.g. `ChannelType.GuildText`.
+
+We'll use these to enhance our expanded `echo` command with the necessary validation to ensure it won't (or at least shouldn't) break when used:
+
+```js {9-10, 14-15}
+const { SlashCommandBuilder } = require('discord.js');
+
+const data = new SlashCommandBuilder()
+	.setName('echo')
+	.setDescription('Replies with your input!')
+	.addStringOption(option =>
+		option.setName('input')
+			.setDescription('The input to echo back')
+			// Ensure the text will fit in an embed description, if the user chooses that option
+			.setMaxLength(2000))
+	.addChannelOption(option =>
+		option.setName('channel')
+			.setDescription('The channel to echo into')
+			// Ensure the user can only select a TextChannel for output
+			.addChannelTypes(ChannelTypes.GuildText))
+	.addBooleanOption(option =>
+		option.setName('embed')
+			.setDescription('Whether or not the echo should be embedded'));
+```
 
 ### Subcommands
 
-Subcommands are available with the `.addSubcommand()` method:
+Subcommands are available with the `.addSubcommand()` method. This allows you to branch a single command to require different options depending on the subcommand chosen.
+
+For this example, we've merged the simple `user` and `server` commands into a single `info` command with two subcommands. Additionally, the `user` subcommand has a `User` type option for targetting other users, while the `server` subcommand has no need for this, and would just show info for the current guild.
 
 ```js {6-14}
 const { SlashCommandBuilder } = require('discord.js');
@@ -183,6 +279,8 @@ const data = new SlashCommandBuilder()
 ### Localizations
 
 The names and descriptions of slash commands can be localized to the user's selected language. You can find the list of accepted locales on the [discord API documentation](https://discord.com/developers/docs/reference#locales).
+
+Setting localisations with `setNameLocations()` and `setDescriptionLocalisations()` takes the format of an object, mapping location codes (e.g. `pl` and `de`) to their localised strings.
 
 <!-- eslint-skip -->
 ```js {5-8,10-12,18-25}
