@@ -53,15 +53,15 @@ export default {
 			],
 		},
 		{
-			text: 'Interactions',
+			text: 'Slash Commands',
 			children: [
-				'/interactions/slash-commands.md',
-				'/interactions/buttons.md',
-				'/interactions/select-menus.md',
-				'/interactions/autocomplete.md',
-				'/interactions/modals.md',
-				'/interactions/context-menus.md',
-			],
+				'/slash-commands/registering.md',
+				'/slash-commands/advanced-creation.md',
+				'/slash-commands/replying.md',
+				'/slash-commands/parsing-options.md',
+				'/slash-commands/permissions.md',
+				'/slash-commands/autocomplete.md'
+			]
 		},
 		{
 			text: 'Popular Topics',
