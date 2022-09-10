@@ -180,11 +180,11 @@ This error originates from an invalid call to `bulkDelete()`. Make sure you are 
 ### Members didn't arrive in time.
 
 This error happens when fetching multiple members via `GuildMemberManager#fetch()` and:
-- The `GuildMembers` intent is not specified
+- The `GuildMembers` intent is not specified or enabled in the dev dashboard
 - The internet connection is somewhat bad
-- The amount of members fetched is huge (about 50 thousand and upwards)
+- The amount of members fetched is large (about 50 thousand and upwards)
 
-Ensure the `GuildMembers` intent is provided. If this intent is provided, then you may wish to consider moving your bot to a location with better internet, such as a VPS. If this does not work for you, you will have to manually change the hardcoded member fetching timeout in the source code.
+You can specify the time to wait for with the `time` option in the `.fetch()` call. Another solution could be to move your bot to a faster infrastructure, if available.
 
 ### MaxListenersExceededWarning: Possible EventEmitter memory leak detected...
 
