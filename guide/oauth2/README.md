@@ -235,14 +235,14 @@ app.get('/', async ({ query }, response) => {
 		try {
 			const tokenResponseData = await request('https://discord.com/api/oauth2/token', {
 				method: 'POST',
-				body: new URLSearchParams({
+				body: (new URLSearchParams({
 					client_id: clientId,
 					client_secret: clientSecret,
 					code,
 					grant_type: 'authorization_code',
 					redirect_uri: `http://localhost:${port}`,
 					scope: 'identify',
-				}),
+				}).toString(),
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded',
 				},
