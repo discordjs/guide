@@ -29,8 +29,10 @@ Your project directory should look something like this:
 
 ```:no-line-numbers
 discord-bot/
+├── commands
 ├── node_modules
 ├── config.json
+├── deploy-commands.js
 ├── index.js
 ├── package-lock.json
 └── package.json
