@@ -23,7 +23,7 @@ const data = new SlashCommandBuilder()
 
 By specifying the `type` of an `ApplicationCommandOption` by using the corresponding method you are able to restrict what the user can provide as input, and for some options, leverage the automatic parsing of options by Discord. 
 
-The example above uses `addStringOption`, the simplest form of standard text input with no additional validatation. By leveraging additional option types, we could change the bahviour of this command in many ways, such as to a specific channel:
+The example above uses `addStringOption`, the simplest form of standard text input with no additional validatation. By leveraging additional option types, we could change the behaviour of this command in many ways, such as outputting to a specific channel:
 
 ```js {9-11}
 const { SlashCommandBuilder } = require('discord.js');
@@ -55,39 +55,22 @@ const data = new SlashCommandBuilder()
 			.setDescription('Whether or not the echo should be embedded'));
 ```
 
-Listed below are all the types of options you can add and a little information about how they will behave:
+Listed below is a short description of the different types of options that can be added. For more information, refer to the `add_____Option` methods in the <DocsLink section="builders" path="class/SlashCommandBuilder" /> documentation.
+
+* `String`, `Integer`, `Number` and `Boolean` options all accept primitive values of their associated type.
+* `User`, `Channel`, `Role` and `Mentionable` options will allo show a selection list in the Discord interface for their associated type, or will accept a Snowflake (id) as input.
+* `Attachment` options prompt the user to make an upload along with the slash command
+* `Subcommand` and `SubcommandGroup` options allow you to have branching pathways of subsequent options for your commands - more on that later on this page.
 
 ::: tip
 Refer to the Discord API documentation for detailed explanations on the [`SUB_COMMAND` and `SUB_COMMAND_GROUP` option types](https://discord.com/developers/docs/interactions/application-commands#subcommands-and-subcommand-groups).
 :::
 
-* `addSubcommand()` adds a `Subcommand`, allowing a single command to have branching options.
-* `addSubcommandGroup()` adds a `SubcommandGroup`, an additional level of branching for subcommands.
-* `addStringOption()` sets the option to require a `String` (text) input.
-* `addIntegerOption()` sets the option to require an `Integer` (whole number) value.
-* `addNumberOptinon()` set the option to require a `Number` (decimal, also known as a floating point) value.
-* `addBooleanOption()` sets the option to require a `Boolean` (true/false) value.
-* `addUserOption()` sets the option to require a `User` or `Snowflake` (user id) as the value.
-	* The Discord interface will display a user selection list above the chat input.
-	* Your bot will receive the full `User` object, and `GuildMember` if the command is executed in a guild.
-* `addChannelOption()` sets the option to require a `Channel` or `Snowflake` (channel id) as the value.
-	* The Discord interface will display a channel selection list above the chat input.
-	* Your bot will receive the full `GuildChannel` object.
-	* This option type cannot be used in DMs.
-* `addRoleOption()` sets the option to require a `Role` or `Snowflake` (role id) as the value.
-	* The Discord interface will display a role selection menu above the chat input.
-	* Your bot will receive the full `Role` object.
-	* This option type cannot be used in DMs.
-* `addMentionableOption()` sets the option to require a `User`, `Role` or `Snowflake` as the value.
-	* The Discord interface will display a selection menu above the chat input.
-	* Your bot will receive the full object `User` or `Role` object.
-* `addAttachmentOption()` sets the option to require a file attachment, prompting the user to make an upload.
-
 ## Required options
 
-With our option types defined, we can start looking at additional forms of validation to ensure the data your bot receives is both complete and accurate. The simplest one is making options required. This validation can be applied to options of any type.
+With our option types defined, we can start looking at additional forms of validation to ensure the data your bot receives is both complete and accurate. The simplest one is making options required, to ensure the command cannot be executed without a required value. This validation can be applied to options of any type.
 
-Taking a look at our `echo` example again, we will use `setRequired(true)` to make the `input` option required to ensure users cannot execute the command without providing a string.
+Taking a look at our `echo` example again, we will use `setRequired(true)` to make the `input` option required.
 
 ```js {9}
 const { SlashCommandBuilder } = require('discord.js');
@@ -103,13 +86,13 @@ const data = new SlashCommandBuilder()
 
 ## Choices
 
-The `String`, `Number` & `Integer` option types can have `choices`. If you would prefer users select from  predetermined values rather than free text entry, `choices` can help you enforce this. This is particularly useful when dealing with external datasets, APIs and similar where specific input formats are required.
+The `String`, `Number` & `Integer` option types can have `choices`. If you would prefer users select from predetermined values rather than free text entry, `choices` can help you enforce this. This is particularly useful when dealing with external datasets, APIs and similar where specific input formats are required.
 
 ::: warning
 If you specify `choices` for an option, they'll be the **only** valid values users can pick!
 :::
 
-Specify choice by using the `addChoices()` method from the slash command builder. Choices require both a `name` to be displayed to the user for selection, and a `value` that your bot will receive when that choice is selected, almost as if the user had typed it into the string option manually.
+Specify choices by using the `addChoices()` method from within the option builder, such as <DocsLink section="builders" path="class/SlashCommandBuilder?scrollTo=addStringOption" type="method" />. Choices require a `name` which is displayed to the user for selection, and a `value` that your bot will receive when that choice is selected, as if the user had typed it into the option manually.
 
 The `gif` command example below allows users to select from predetermined categories of gif to send:
 
@@ -130,17 +113,17 @@ const data = new SlashCommandBuilder()
 			));
 ```
 
-If you have too many choices to display (the maximum is 25), you may prefer to provide dynamic choices based on what the user has typed so far. This can be achieved using [autocomplete](/interactions/autocomplete).
+If you have too many choices to display (the maximum is 25), you may prefer to provide dynamic choices based on what the user has typed so far. This can be achieved using [autocomplete](/slash-commands/autocomplete.md).
 
 ## Further validation
 
-Even without predetermined choices, additional restrictions can still be applied on free inputs.
+Even without predetermined choices, additional restrictions can still be applied on otherwise free inputs.
 
-* For `String` options, `setMaxLength()` and `setMinLength()` to enforce length limitations.
-* For `Integer` and `Number` options, `setMaxValue()` and `setMinValue()` to enforce value limitations.
-* For `Channel` options, `addChannelTypes()` to restrict selection to specific channel types, e.g. `ChannelType.GuildText`.
+* For `String` options, `setMaxLength()` and `setMinLength()` can enforce length limitations.
+* For `Integer` and `Number` options, `setMaxValue()` and `setMinValue()` can enforce range limitations on the value.
+* For `Channel` options, `addChannelTypes()` can restrict selection to specific channel types, e.g. `ChannelType.GuildText`.
 
-We'll use these to enhance our expanded `echo` command with the necessary validation to ensure it won't (or at least shouldn't) break when used:
+We'll use these to enhance our expanded `echo` command from earlier with extra validation to ensure it won't (or at least shouldn't) break when used:
 
 ```js {9-10, 14-15}
 const { SlashCommandBuilder } = require('discord.js');
@@ -167,7 +150,7 @@ const data = new SlashCommandBuilder()
 
 Subcommands are available with the `.addSubcommand()` method. This allows you to branch a single command to require different options depending on the subcommand chosen.
 
-For this example, we've merged the simple `user` and `server` commands into a single `info` command with two subcommands. Additionally, the `user` subcommand has a `User` type option for targetting other users, while the `server` subcommand has no need for this, and would just show info for the current guild.
+For this example, we've merged the simple `user` and `server` information commands from the previous section into a single `info` command with two subcommands. Additionally, the `user` subcommand has a `User` type option for targetting other users, while the `server` subcommand has no need for this, and would just show info for the current guild.
 
 ```js {6-14}
 const { SlashCommandBuilder } = require('discord.js');

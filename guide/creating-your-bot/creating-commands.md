@@ -87,7 +87,7 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
 :::
 ::::
 
-Once you fill in these values, run `node deploy-commands.js` in your project directory to register your commands to a single guild. It's also possible to [register commands globally](/interactions/slash-commands.md#global-commands).
+Once you fill in these values, run `node deploy-commands.js` in your project directory to register your commands to a single guild. It's also possible to [register commands globally](/slash-commands/registering.md#global-commands).
 
 ::: tip
 You only need to run `node deploy-commands.js` once. You should only run it again if you add or edit existing commands.

@@ -16,7 +16,7 @@ In comparison to the old method of having bots respond to messages starting with
 ::: tip
 This page assumes you use the same file structure as our [command handling](/creating-your-bot/command-handling.md) section. The scripts provided are made to function with that setup.
 
-If you already have slash commands set up for your application and want to learn how to respond to them, refer to [the following section](#replying-to-slash-commands).
+If you already have slash commands set up for your application and want to learn how to respond to them, refer to [the following section](/slash-commands/replying) on replying.
 :::
 
 ## Guild commands
