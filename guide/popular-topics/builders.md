@@ -61,10 +61,10 @@ const relative = time(date, 'R');
 `userMention()`, `channelMention()`, and `roleMention()` all exist to format Snowflakes into mentions.
 
 ```js
-const { userMention, channelMention, roleMention } = require('discord.js');
+const { channelMention, roleMention, userMention } = require('discord.js');
 const id = '123456789012345678';
 
-const user = userMention(id);
 const channel = channelMention(id);
 const role = roleMention(id);
+const user = userMention(id);
 ```
