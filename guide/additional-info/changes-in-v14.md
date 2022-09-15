@@ -120,24 +120,6 @@ Some channel type guard methods that narrowed to one channel type have been remo
 +channel.type === ChannelType.DM
 ```
 
-#### Interactions
-
-Similarly to channels, some interaction type guards have been removed, and replaced with `type` checks a [InteractionType](https://discord-api-types.dev/api/discord-api-types-v10/enum/InteractionType) enum member.
-
-```diff
--interaction.isCommand();
-+interaction.type === InteractionType.ApplicationCommand;
-
--interaction.isAutocomplete();
-+interaction.type === InteractionType.ApplicationCommandAutocomplete;
-
--interaction.isMessageComponent();
-+interaction.type === InteractionType.MessageComponent;
-
--interaction.isModalSubmit();
-+interaction.type === InteractionType.ModalSubmit;
-```
-
 ### Builders
 
 Builders are no longer returned by the API like they were previously. For example you send the API an `EmbedBuilder` but you receive an `Embed` of the same data from the API. This may affect how your code handles received structures such as components. Refer to [message component changes section](#messagecomponent) for more details.
@@ -310,19 +292,7 @@ The following properties & methods have been moved to the `GuildAuditLogsEntry` 
 
 ### Interaction
 
-The following typeguards on `Interaction` have been removed:
-
-```diff
-- interaction.isCommand()
-- interaction.isContextMenu()
-- interaction.isAutocomplete()
-- interaction.isModalSubmit()
-- interaction.isMessageComponent()
-```
-
-Instead check against the `#type` of the interaction to narrow the type. Refer to [this section](#interactions) for more context.
-
-Additionally, whenever an interaction is replied to and one fetches the reply, it could possibly give an `APIMessage` if the guild was not cached. However, interaction replies now always return a discord.js `Message` object.
+Whenever an interaction is replied to and one fetches the reply, it could possibly give an `APIMessage` if the guild was not cached. However, interaction replies now always return a discord.js `Message` object with `fetchReply` as `true`.
 
 ### Invite
 
