@@ -118,6 +118,16 @@ client.user.setPresence({ activities: [{ name: 'activity' }], status: 'idle' });
 const channel = client.channels.cache.get('id');
 channel.send('content');
 ```
+### How do I create post in forum channel?
+
+::: tip
+Only way to get tag id is <DocsLink path="class/GuildForumChannel?scrollTo=availableTags" />
+:::
+
+```js
+const channel = client.channels.cache.get('id');
+channel.threads.create({ name: 'Post name', message: { content: 'Message content' }, tags: ['tagID', 'anotherTagID'] });
+```
 
 ### How do I DM a specific user?
 
