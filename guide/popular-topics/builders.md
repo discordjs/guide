@@ -8,7 +8,7 @@ Formatters are a set of utility functions that format input strings into the giv
 
 ### Basic Markdown
 
-The Formatters provide functions to format strings into all the different Markdown styles supported by Discord.
+The formatters provide functions to format strings into all the different Markdown styles supported by Discord.
 
 ```js
 const { bold, italic, strikethrough, underscore, spoiler, quote, blockQuote } = require('discord.js');
