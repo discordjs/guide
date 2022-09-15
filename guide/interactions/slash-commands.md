@@ -16,31 +16,10 @@ Guild application commands are only available in the guild they were created in,
 
 In this section, we'll be using a script that is usable in conjunction with the slash command handler from the [command handling](/creating-your-bot/command-handling.md) section.
 
-First off, install [`@discordjs/rest`](https://github.com/discordjs/discord.js/tree/main/packages/rest) by running the following command in your terminal:
-
-:::: code-group
-::: code-group-item npm
-```sh:no-line-numbers
-npm install @discordjs/rest
-```
-:::
-::: code-group-item yarn
-```sh:no-line-numbers
-yarn add @discordjs/rest
-```
-:::
-::: code-group-item pnpm
-```sh:no-line-numbers
-pnpm add @discordjs/rest
-```
-:::
-::::
-
 <!-- eslint-skip -->
 
 ```js
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord.js');
+const { REST, Routes } = require('discord.js');
 const { token } = require('./config.json');
 const fs = require('node:fs');
 

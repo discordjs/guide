@@ -5,24 +5,6 @@ Unless your bot project is a small one, it's not a very good idea to have a sing
 Here are the base files and code we'll be using:
 
 :::: code-group
-::: code-group-item npm
-```sh:no-line-numbers
-npm install @discordjs/rest 
-```
-:::
-::: code-group-item yarn
-```sh:no-line-numbers
-yarn add @discordjs/rest 
-```
-:::
-::: code-group-item pnpm
-```sh:no-line-numbers
-pnpm add @discordjs/rest 
-```
-:::
-::::
-
-:::: code-group
 ::: code-group-item index.js
 ```js
 const { Client, GatewayIntentBits } = require('discord.js');
@@ -51,8 +33,7 @@ client.login(token);
 :::
 ::: code-group-item deploy-commands.js
 ```js
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord.js');
+const { REST, Routes } = require('discord.js');
 const { clientId, guildId, token } = require('./config.json');
 
 const commands = [];
@@ -163,8 +144,7 @@ Use the same approach for your `deploy-commands.js` file, but instead `.push()` 
 ```js {1,7,9-12}
 const fs = require('node:fs');
 const path = require('node:path');
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord.js');
+const { REST, Routes } = require('discord.js');
 const { clientId, guildId, token } = require('./config.json');
 
 const commands = [];
