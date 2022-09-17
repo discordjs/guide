@@ -26,14 +26,14 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	if (commandName === 'cat') {
 		const catResult = await request('https://aws.random.cat/meow');
-		const { file } = await getJSONResponse(catResult.body);
+		const { file } = await catResult.body.json();
 		interaction.reply({ files: [{ attachment: file, name: 'cat.png' }] });
 	} else if (commandName === 'urban') {
 		const term = interaction.options.getString('term');
 		const query = new URLSearchParams({ term });
 
 		const dictResult = await request(`https://api.urbandictionary.com/v0/define?${query}`);
-		const { list } = await getJSONResponse(dictResult.body);
+		const { list } = await dictResult.body.json();
 
 		if (!list.length) {
 			return interaction.editReply(`No results found for **${term}**.`);

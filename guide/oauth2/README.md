@@ -217,15 +217,6 @@ const { request } = require('undici');
 const express = require('express');
 const { clientId, clientSecret, port } = require('./config.json');
 
-async function getJSONResponse(body) {
-	let fullBody = '';
-
-	for await (const data of body) {
-		fullBody += data.toString();
-	}
-	return JSON.parse(fullBody);
-}
-
 const app = express();
 
 app.get('/', async ({ query }, response) => {
@@ -248,7 +239,7 @@ app.get('/', async ({ query }, response) => {
 				},
 			});
 
-			const oauthData = await getJSONResponse(tokenResponseData.body);
+			const oauthData = await tokenResponseData.body.json();
 			console.log(oauthData);
 		} catch (error) {
 			// NOTE: An unauthorized token will not throw an error
@@ -288,7 +279,7 @@ const userResult = await request('https://discord.com/api/users/@me', {
 	},
 });
 
-console.log(await getJSONResponse(userResult.body));
+console.log(await userResult.body.json());
 ```
 
 ::: tip
