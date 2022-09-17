@@ -337,15 +337,6 @@ Whenever an interaction is replied to and one fetches the reply, it could possib
 +   .setDisabled(true);
 ```
 
-### Modal
-
--   Modal has been renamed as well and now has a `Builder` suffix:
-
-```diff
-- const modal = new Modal();
-+ const modal = new ModalBuilder();
-```
-
 ### MessageManager
 
 `MessageManager#fetch()`'s second parameter has been removed. The `BaseFetchOptions` the second parameter once was is now merged into the first parameter.
@@ -378,6 +369,15 @@ Whenever an interaction is replied to and one fetches the reply, it could possib
 +  { name: 'one', value: 'one' },
 +  { name: 'two', value: 'two' },
 +]);
+```
+
+### Modal
+
+-   `Modal` has been renamed as well and now has a `Builder` suffix:
+
+```diff
+- const modal = new Modal();
++ const modal = new ModalBuilder();
 ```
 
 ### PartialTypes
