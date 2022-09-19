@@ -121,7 +121,7 @@ channel.send('content');
 ### How do I create post in forum channel?
 
 ::: tip
-Only way to get tag id is <DocsLink path="class/GuildForumChannel?scrollTo=availableTags" />
+Only way to get tag id is <DocsLink path="class/ForumChannel?scrollTo=availableTags" />
 :::
 
 ```js
