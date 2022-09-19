@@ -507,7 +507,7 @@ Many of the analogous enums can be found in the discord-api-types docs. [discord
 `AutocompleteInteraction#commandGuildId` has been added which is the id of the guild the invoked application command is registered to.
 
 ### Channel
-`Channel#flags` has been added 
+`Channel#flags` has been added.
 
 Store channels have been removed as they are no longer part of the API.
 
@@ -534,13 +534,13 @@ A new `ignore` event has been added which is emitted whenever an element is not 
 
 ### ForumChannel
 
-Added class `ForumChannel` which represents GuildForum
+Added class `ForumChannel` which represents GuildForum.
 
 # GuildForumThreadManager 
-Added `GuildForumThreadManager` as manager for threads in forum channels
+Added `GuildForumThreadManager` as manager for threads in forum channels.
 
 # GuildTextThreadManager
-Added `GuildTextThreadManager` as manager for threads in text channels
+Added `GuildTextThreadManager` as manager for threads in text channels.
 
 ### Guild
 
@@ -572,4 +572,4 @@ Added `MessageReaction#react()` to make the client user react with the reaction 
 ### Webhook
 
 Added `Webhook#applicationId`.
-Added `Webhook#threadName`
+Added `Webhook#threadName`.
