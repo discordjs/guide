@@ -534,7 +534,7 @@ A new `ignore` event has been added which is emitted whenever an element is not 
 
 ### ForumChannel
 
-Added class `ForumChannel` which represents GuildForum.
+discord.js supports forum channels as of 14.4.0.
 
 # GuildForumThreadManager 
 Added `GuildForumThreadManager` as manager for threads in forum channels.
@@ -563,7 +563,8 @@ Added `GuildEmojiManager#delete()` and `GuildEmojiManager#edit()` for managing e
 Added `Interaction#isRepliable()` to check whether a given interaction can be replied to.
 
 ### Message
-`Message#position` has been added as approximate position in a thread.
+
+`Message#position` has been added as an approximate position in a thread as of 14.4.0.
 
 ### MessageReaction
 
@@ -572,4 +573,5 @@ Added `MessageReaction#react()` to make the client user react with the reaction 
 ### Webhook
 
 Added `Webhook#applicationId`.
-Added `Webhook#threadName`.
+
+Added `Webhook#threadName` as of 14.4.0 which allows a webhook to create a post in a forum channel.
