@@ -535,13 +535,7 @@ A new `ignore` event has been added which is emitted whenever an element is not 
 
 ### ForumChannel
 
-discord.js supports forum channels as of 14.4.0.
-
-### GuildForumThreadManager 
-Added `GuildForumThreadManager` as manager for threads in forum channels.
-
-### GuildTextThreadManager
-Added `GuildTextThreadManager` as manager for threads in text channels.
+Added support for forum channels as of 14.4.0.
 
 ### Guild
 
@@ -551,13 +545,19 @@ Added `Guild#setMFALevel()` which sets the guild's MFA level.
 
 `videoQualityMode` may be used whilst creating a channel to initially set the camera video quality mode.
 
+### GuildEmojiManager
+
+Added `GuildEmojiManager#delete()` and `GuildEmojiManager#edit()` for managing existing guild emojis.
+
+### GuildForumThreadManager 
+Added `GuildForumThreadManager` as manager for threads in forum channels.
+
 ### GuildMemberManager
 
 Added `GuildMemberManager#fetchMe()` to fetch the client user in the guild.
 
-### GuildEmojiManager
-
-Added `GuildEmojiManager#delete()` and `GuildEmojiManager#edit()` for managing existing guild emojis.
+### GuildTextThreadManager
+Added `GuildTextThreadManager` as manager for threads in text channels.
 
 ### Interaction
 
