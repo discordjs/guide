@@ -280,7 +280,7 @@ The `threadMembersUpdate` event now emits the users who were added, the users wh
 
 ### GuildBanManager
 
-Staring from 14.4.0, developers should utilise `deleteMessageSeconds` instead of `days` and `deleteMessageDays`:
+Starting from 14.4.0, developers should utilise `deleteMessageSeconds` instead of `days` and `deleteMessageDays`:
 
 ```diff
 <GuildBanManager>.create('123456789', {
