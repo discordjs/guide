@@ -550,6 +550,7 @@ Added `Guild#setMFALevel()` which sets the guild's MFA level.
 Added `GuildEmojiManager#delete()` and `GuildEmojiManager#edit()` for managing existing guild emojis.
 
 ### GuildForumThreadManager 
+
 Added `GuildForumThreadManager` as manager for threads in forum channels.
 
 ### GuildMemberManager
@@ -557,6 +558,7 @@ Added `GuildForumThreadManager` as manager for threads in forum channels.
 Added `GuildMemberManager#fetchMe()` to fetch the client user in the guild.
 
 ### GuildTextThreadManager
+
 Added `GuildTextThreadManager` as manager for threads in text channels.
 
 ### Interaction
