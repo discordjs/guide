@@ -507,7 +507,8 @@ Many of the analogous enums can be found in the discord-api-types docs. [discord
 `AutocompleteInteraction#commandGuildId` has been added which is the id of the guild the invoked application command is registered to.
 
 ### Channel
-`Channel#flags` has been added.
+
+`Channel#flags` has been added as of 14.4.0.
 
 Store channels have been removed as they are no longer part of the API.
 
