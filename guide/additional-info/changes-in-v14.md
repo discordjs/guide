@@ -537,10 +537,10 @@ A new `ignore` event has been added which is emitted whenever an element is not 
 
 discord.js supports forum channels as of 14.4.0.
 
-# GuildForumThreadManager 
+### GuildForumThreadManager 
 Added `GuildForumThreadManager` as manager for threads in forum channels.
 
-# GuildTextThreadManager
+### GuildTextThreadManager
 Added `GuildTextThreadManager` as manager for threads in text channels.
 
 ### Guild
