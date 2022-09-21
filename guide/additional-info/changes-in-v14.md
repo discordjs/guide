@@ -497,6 +497,8 @@ Many of the analogous enums can be found in the discord-api-types docs. [discord
 
 ### Channel
 
+`Channel#flags` has been added as of 14.4.0.
+
 Store channels have been removed as they are no longer part of the API.
 
 `Channel#url` has been added which is a link to a channel, just like in the client.
@@ -520,6 +522,10 @@ A new `ignore` event has been added which is emitted whenever an element is not 
 
 `CommandInteraction#commandGuildId` has been added which is the id of the guild the invoked application command is registered to.
 
+### ForumChannel
+
+Added support for forum channels as of 14.4.0.
+
 ### Guild
 
 Added `Guild#setMFALevel()` which sets the guild's MFA level.
@@ -530,19 +536,30 @@ Added `Guild#maxVideoChannelUsers` as of 14.2.0 which indicates the maximum numb
 
 `videoQualityMode` may be used whilst creating a channel to initially set the camera video quality mode.
 
-### GuildMemberManager
-
-Added `GuildMemberManager#fetchMe()` to fetch the client user in the guild.
-
-Added `GuildMemberManager#addRole()` and `GuildMemberManager#removeRole()` as of 14.3.0. These methods allow a single addition or removal of a role respectively to a guild member, even if uncached.
-
 ### GuildEmojiManager
 
 Added `GuildEmojiManager#delete()` and `GuildEmojiManager#edit()` for managing existing guild emojis.
 
+### GuildForumThreadManager 
+
+Added `GuildForumThreadManager` as manager for threads in forum channels as of 14.4.0.
+
+### GuildMemberManager
+
+Added `GuildMemberManager#fetchMe()` to fetch the client user in the guild.
+Added `GuildMemberManager#addRole()` and `GuildMemberManager#removeRole()` as of 14.3.0. These methods allow a single addition or removal of a role respectively to a guild member, even if uncached.
+
+### GuildTextThreadManager
+
+Added `GuildTextThreadManager` as manager for threads in text channels and announcement channels as of 14.4.0.
+
 ### Interaction
 
 Added `Interaction#isRepliable()` to check whether a given interaction can be replied to.
+
+### Message
+
+`Message#position` has been added as an approximate position in a thread as of 14.4.0.
 
 ### MessageReaction
 
@@ -551,3 +568,5 @@ Added `MessageReaction#react()` to make the client user react with the reaction 
 ### Webhook
 
 Added `Webhook#applicationId`.
+
+Added property `threadName` in `Webhook#send()` options as of 14.4.0 which allows a webhook to create a post in a forum channel.
