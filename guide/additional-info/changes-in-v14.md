@@ -6,27 +6,27 @@ v14 requires Node 16.9 or higher to use, so make sure you're up to date. To chec
 
 ### Builders are now included in v14
 
-If you previously had `@discordjs/builders` manually installed it's _highly_ recommended that you uninstall the package to avoid package naming conflicts.
+If you previously had `@discordjs/builders` or `@discordjs/rest` manually installed, it's _highly_ recommended that you uninstall the packages to avoid package version conflicts.
 
 :::: code-group
 ::: code-group-item npm
 
 ```sh:no-line-numbers
-npm uninstall @discordjs/builders
+npm uninstall @discordjs/builders @discordjs/rest
 ```
 
 :::
 ::: code-group-item yarn
 
 ```sh:no-line-numbers
-yarn remove @discordjs/builders
+yarn remove @discordjs/builders @discordjs/rest
 ```
 
 :::
 ::: code-group-item pnpm
 
 ```sh:no-line-numbers
-pnpm remove @discordjs/builders
+pnpm remove @discordjs/builders @discordjs/rest
 ```
 
 :::
@@ -118,24 +118,6 @@ Some channel type guard methods that narrowed to one channel type have been remo
 
 -channel.isDM()
 +channel.type === ChannelType.DM
-```
-
-#### Interactions
-
-Similarly to channels, some interaction type guards have been removed, and replaced with `type` checks a [InteractionType](https://discord-api-types.dev/api/discord-api-types-v10/enum/InteractionType) enum member.
-
-```diff
--interaction.isCommand();
-+interaction.type === InteractionType.ApplicationCommand;
-
--interaction.isAutocomplete();
-+interaction.type === InteractionType.ApplicationCommandAutocomplete;
-
--interaction.isMessageComponent();
-+interaction.type === InteractionType.MessageComponent;
-
--interaction.isModalSubmit();
-+interaction.type === InteractionType.ModalSubmit;
 ```
 
 ### Builders
@@ -310,19 +292,7 @@ The following properties & methods have been moved to the `GuildAuditLogsEntry` 
 
 ### Interaction
 
-The following typeguards on `Interaction` have been removed:
-
-```diff
-- interaction.isCommand()
-- interaction.isContextMenu()
-- interaction.isAutocomplete()
-- interaction.isModalSubmit()
-- interaction.isMessageComponent()
-```
-
-Instead check against the `#type` of the interaction to narrow the type. Refer to [this section](#interactions) for more context.
-
-Additionally, whenever an interaction is replied to and one fetches the reply, it could possibly give an `APIMessage` if the guild was not cached. However, interaction replies now always return a discord.js `Message` object.
+Whenever an interaction is replied to and one fetches the reply, it could possibly give an `APIMessage` if the guild was not cached. However, interaction replies now always return a discord.js `Message` object with `fetchReply` as `true`.
 
 ### Invite
 
@@ -399,6 +369,15 @@ Additionally, whenever an interaction is replied to and one fetches the reply, i
 +  { name: 'one', value: 'one' },
 +  { name: 'two', value: 'two' },
 +]);
+```
+
+### Modal
+
+-   `Modal` has been renamed as well and now has a `Builder` suffix:
+
+```diff
+- const modal = new Modal();
++ const modal = new ModalBuilder();
 ```
 
 ### PartialTypes
@@ -541,6 +520,8 @@ Added support for forum channels as of 14.4.0.
 
 Added `Guild#setMFALevel()` which sets the guild's MFA level.
 
+Added `Guild#maxVideoChannelUsers` as of 14.2.0 which indicates the maximum number of video channel users.
+
 ### GuildChannelManager
 
 `videoQualityMode` may be used whilst creating a channel to initially set the camera video quality mode.
@@ -556,6 +537,7 @@ Added `GuildForumThreadManager` as manager for threads in forum channels as of 1
 ### GuildMemberManager
 
 Added `GuildMemberManager#fetchMe()` to fetch the client user in the guild.
+Added `GuildMemberManager#addRole()` and `GuildMemberManager#removeRole()` as of 14.3.0. These methods allow a single addition or removal of a role respectively to a guild member, even if uncached.
 
 ### GuildTextThreadManager
 

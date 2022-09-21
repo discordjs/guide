@@ -128,7 +128,7 @@ The created thread and the message it originated from will share the same ID. Th
 
 Private threads behave similar to Group DMs, but in a Guild. Private threads can only be created on text channels.
 
-To create a private thread, use <DocsLink path="class/ThreadManager?scrollTo=create" type="method" /> and pass in `ChannelType.GuildPrivateThread` as the `type`:
+To create a private thread, use <DocsLink path="class/ThreadManager?scrollTo=create" type="method" /> and pass in `ChannelType.PrivateThread` as the `type`:
 
 <!-- eslint-skip -->
 
@@ -138,7 +138,7 @@ const { ChannelType } = require('discord.js');
 const thread = await channel.threads.create({
 	name: 'mod-talk',
 	autoArchiveDuration: 60,
-	type: ChannelType.GuildPrivateThread,
+	type: ChannelType.PrivateThread,
 	reason: 'Needed a separate thread for moderation',
 });
 

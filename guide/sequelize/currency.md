@@ -201,7 +201,7 @@ Create an `app.js` file in the base directory with the following skeleton code t
 
 ```js
 const { Op } = require('sequelize');
-const { Collection, Client, Formatters, GatewayIntentBits } = require('discord.js');
+const { Client, codeBlock, Collection, GatewayIntentBits } = require('discord.js');
 const { Users, CurrencyShop } = require('./dbObjects.js');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
@@ -367,7 +367,7 @@ For users to search for an item without caring about the letter casing, you can 
 ```js {2-3}
 else if (commandName === 'shop') {
 	const items = await CurrencyShop.findAll();
-	return interaction.reply(Formatters.codeBlock(items.map(i => `${i.name}: ${i.cost}💰`).join('\n')));
+	return interaction.reply(codeBlock(items.map(i => `${i.name}: ${i.cost}💰`).join('\n')));
 }
 ```
 There's nothing special here; just a regular `.findAll()` to get all the items in the shop and `.map()` to transform that data into something nice looking.
@@ -379,7 +379,7 @@ There's nothing special here; just a regular `.findAll()` to get all the items i
 ```js {2-10}
 else if (commandName === 'leaderboard') {
 	return interaction.reply(
-		Formatters.codeBlock(
+		codeBlock(
 			currency.sort((a, b) => b.balance - a.balance)
 				.filter(user => client.users.cache.has(user.user_id))
 				.first(10)
