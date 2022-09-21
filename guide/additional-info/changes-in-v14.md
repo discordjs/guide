@@ -371,6 +371,15 @@ Whenever an interaction is replied to and one fetches the reply, it could possib
 +]);
 ```
 
+### Modal
+
+-   `Modal` has been renamed as well and now has a `Builder` suffix:
+
+```diff
+- const modal = new Modal();
++ const modal = new ModalBuilder();
+```
+
 ### PartialTypes
 
 The `PartialTypes` string array has been removed. Use the `Partials` enum instead.
