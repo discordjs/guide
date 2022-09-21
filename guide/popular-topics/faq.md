@@ -118,10 +118,10 @@ client.user.setPresence({ activities: [{ name: 'activity' }], status: 'idle' });
 const channel = client.channels.cache.get('id');
 channel.send('content');
 ```
-### How do I create post in forum channel?
+### How do I create a post in a forum channel?
 
 ::: tip
-Only way to get tag id is <DocsLink path="class/ForumChannel?scrollTo=availableTags" />.
+Currently, the only way to get tag ids is programmatically through <DocsLink path="class/ForumChannel?scrollTo=availableTags" />.
 :::
 
 ```js
