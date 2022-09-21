@@ -1032,6 +1032,17 @@ Now supports setting the parent of multiple channels, and locking their permissi
 
 Provides improved API support for handling and caching bans.
 
+Starting from 13.11, developers should utilise `deleteMessageSeconds` instead of `days`:
+
+```diff
+<GuildBanManager>.create('123456789', {
+-  days: 3
++  deleteMessageSeconds: 3 * 24 * 60 * 60
+});
+```
+
+`days` is deprecated and will be removed in the future.
+
 ### GuildChannel
 
 #### GuildChannel#clone
