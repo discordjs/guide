@@ -28,6 +28,16 @@
 		<br />
 		This includes additions and changes made in Discord, such as slash commands and message components.
 	</DiscordMessage>
+	<DiscordMessage profile="user" author="discord.js">
+		<template #interactions>
+			<DiscordInteraction
+				profile="bot"
+			>discord.js v13 has released and the guide...</DiscordInteraction>
+		</template>
+		discord.js has moved on to v14 since!
+		<br />
+		Check out the "changes in v14 guide" at <DiscordMarkdown>https://discordjs.guide/additional-info/changes-in-v14.html</DiscordMarkdown>.
+	</DiscordMessage>
 </DiscordMessages>
 
 ## Site
