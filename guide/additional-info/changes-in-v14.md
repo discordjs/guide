@@ -559,4 +559,4 @@ Added `MessageReaction#react()` to make the client user react with the reaction 
 
 Added `Webhook#applicationId`.
 
-Added `Webhook#threadName` as of 14.4.0 which allows a webhook to create a post in a forum channel.
+Added property `threadName` in `Webhook#send()` options as of 14.4.0 which allows a webhook to create a post in a forum channel.
