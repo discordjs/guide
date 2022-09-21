@@ -118,6 +118,7 @@ client.user.setPresence({ activities: [{ name: 'activity' }], status: 'idle' });
 const channel = client.channels.cache.get('id');
 channel.send('content');
 ```
+
 ### How do I create a post in a forum channel?
 
 ::: tip
