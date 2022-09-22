@@ -103,17 +103,6 @@ const button = {
 }
 ```
 
-```diff
-+ const { ComponentType } = require('discord.js');
-
-const collector = interaction.channel.createMessageComponentCollector({
-	filter,
--	componentType: 'BUTTON',
-+	componentType: ComponentType.Button,
-	time: 20000
-});
-```
-
 ### Removal of method-based type guards
 
 #### Channels
@@ -533,6 +522,19 @@ Additionally, new typeguards have been added:
 ### Collector
 
 A new `ignore` event has been added which is emitted whenever an element is not collected by the collector.
+
+Component collector options now use the `ComponentType` enum values:
+
+```diff
++ const { ComponentType } = require('discord.js');
+
+const collector = interaction.channel.createMessageComponentCollector({
+	filter,
+-	componentType: 'BUTTON',
++	componentType: ComponentType.Button,
+	time: 20000
+});
+```
 
 ### CommandInteraction
 
