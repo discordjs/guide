@@ -32,7 +32,11 @@ Below is a deployment script you can use. Focus on these variables:
 - `commands`: An array of commands to register. The [slash command builder](/popular-topics/builders.md#slash-command-builders) from `discord.js` is used to build the data for your commands
 
 ::: tip
-In order to get your application's client id, go to [Discord Developer Portal](https://discord.com/developers/applications) and choose your application. Find the id under "Application ID" in General Information subpage. To get guild id, open Discord and go to your settings. On the "Advanced" page, turn on "Developer Mode". This will enable a "Copy ID" button in the context menu when you right-click on a server icon, a user's profile, etc.
+In order to get your application's client id, go to [Discord Developer Portal](https://discord.com/developers/applications) and choose your application. Find the id under "Application ID" in General Information subpage. To get guild id, open Discord and go to your settings. On the "Advanced" page, turn on "Developer Mode". Then, exit that window, right-click the name of your guild, and click the "Copy ID" button.
+:::
+
+::: warning
+Note that your channel ids are not the same as your guild id. Make sure to get the id from the latter; otherwise, you will get a "Missing Access" error upon trying to run your file.
 :::
 
 :::: code-group
