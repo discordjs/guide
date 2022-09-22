@@ -518,6 +518,19 @@ Additionally, new typeguards have been added:
 
 A new `ignore` event has been added which is emitted whenever an element is not collected by the collector.
 
+Component collector options now use the `ComponentType` enum values:
+
+```diff
++ const { ComponentType } = require('discord.js');
+
+const collector = interaction.channel.createMessageComponentCollector({
+	filter,
+-	componentType: 'BUTTON',
++	componentType: ComponentType.Button,
+	time: 20000
+});
+```
+
 ### CommandInteraction
 
 `CommandInteraction#commandGuildId` has been added which is the id of the guild the invoked application command is registered to.
