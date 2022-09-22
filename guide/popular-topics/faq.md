@@ -127,7 +127,7 @@ Currently, the only way to get tag ids is programmatically through <DocsLink pat
 
 ```js
 const channel = client.channels.cache.get('id');
-channel.threads.create({ name: 'Post name', message: { content: 'Message content' }, tags: ['tagID', 'anotherTagID'] });
+channel.threads.create({ name: 'Post name', message: { content: 'Message content' }, appliedTags: ['tagID', 'anotherTagID'] });
 ```
 
 ### How do I DM a specific user?
