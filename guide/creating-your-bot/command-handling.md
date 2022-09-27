@@ -75,61 +75,10 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
 :::
 ::::
 
-## Individual command files
-
-Your project directory should look something like this:
-
-```:no-line-numbers
-discord-bot/
-├── node_modules
-├── config.json
-├── deploy-commands.js
-├── index.js
-├── package-lock.json
-└── package.json
-```
-
-Create a new folder named `commands`, which is where you'll store all of your commands.
-
-We'll be using utility methods of the library to build the slash command data.
-
-First, create a commands/ping.js file for your ping command:
-
-```js
-const { SlashCommandBuilder } = require('discord.js');
-
-module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('ping')
-		.setDescription('Replies with Pong!'),
-	async execute(interaction) {
-		await interaction.reply('Pong!');
-	},
-};
-```
-
-You can go ahead and do the same for the rest of your commands, putting their respective blocks of code inside the `execute()` function.
-
-::: tip
-[`module.exports`](https://nodejs.org/api/modules.html#modules_module_exports) is how you export data in Node.js so that you can [`require()`](https://nodejs.org/api/modules.html#modules_require_id) it in other files.
-
-If you need to access your client instance from inside a command file, you can access it via `interaction.client`. If you need to access external files, packages, etc., you should `require()` them at the top of the file.
-:::
 
 ## Reading command files
 
-In your `index.js` file, make these additions:
 
-```js {1-2,8}
-const fs = require('node:fs');
-const path = require('node:path');
-const { Client, Collection, GatewayIntentBits } = require('discord.js');
-const { token } = require('./config.json');
-
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-
-client.commands = new Collection();
-```
 
 We recommend attaching a `.commands` property to your client instance so that you can access your commands in other files. The rest of the examples in this guide will follow this convention.
 
@@ -143,20 +92,7 @@ We recommend attaching a `.commands` property to your client instance so that yo
 
 Next you will learn how to dynamically retrieve your command files. First you'll need to get the path to the directory that stores your command files. The node core module ['path'](https://nodejs.org/api/path.html) and it's `join()` method will help to construct a path and store it in a constant so you can reference it later. Following that, the [`fs.readdirSync()`](https://nodejs.org/api/fs.html#fs_fs_readdirsync_path_options) method will return an array of all the file names in the directory, e.g. `['ping.js', 'beep.js']`. To ensure only command files get returned, use `Array.filter()` to leave out any non-JavaScript files from the array. With that array, loop over it and dynamically set your commands to the `client.commands` Collection.
 
-```js {2,4-9}
 
-client.commands = new Collection();
-const commandsPath = path.join(__dirname, 'commands');
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
-
-for (const file of commandFiles) {
-	const filePath = path.join(commandsPath, file);
-	const command = require(filePath);
-	// Set a new item in the Collection
-	// With the key as the command name and the value as the exported module
-	client.commands.set(command.data.name, command);
-}
-```
 
 Use the same approach for your `deploy-commands.js` file, but instead `.push()` to the `commands` array with the JSON data for each command.
 

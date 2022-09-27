@@ -1,23 +1,12 @@
 # Registering slash commands
 
-Discord provides developers with the option to create client-integrated slash commands. In this section, we'll cover how to register these commands using discord.js!
-
-In comparison to the old method of having bots respond to messages starting with a specific prefix, slash commands provide a huge number of benefits, including:
-
-- Integration with the Discord client interface
-- Automatic command detection and parsing of the associated options/arguments
-- Typed argument inputs for command options, e.g. "String", "User", or "Role"
-- Validated or dynamic choices for command options
-- In-channel private responses (ephemeral messages)
-- Pop-up form-style inputs for capturing additional information
-
-...and many more that you'll find during your own development!
-
 ::: tip
-This page assumes you use the same file structure as our [command handling](/creating-your-bot/command-handling.md) section. The scripts provided are made to function with that setup.
+This page assumes you use the same file structure as our [Slash commands](/slash-commands/) section, and the scripts provides are made to function with that setup. Please carefully read those first so that you can understand the methods used in this section.
 
-If you already have slash commands set up for your application and want to learn how to respond to them, refer to [the following section](/slash-commands/replying) on replying.
+If you already have slash commands set up and deployed for your application and want to learn how to respond to them, refer to the following section on [replying to slash commands](/slash-commands/replying.md).
 :::
+
+In this section, we'll cover how to register your commands to Discord using discord.js!
 
 ## Guild commands
 

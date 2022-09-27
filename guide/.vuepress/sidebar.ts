@@ -46,15 +46,13 @@ export default {
 			text: 'Creating Your Bot',
 			children: [
 				'/creating-your-bot/',
-				'/creating-your-bot/creating-commands.md',
-				'/creating-your-bot/deleting-commands.md',
-				'/creating-your-bot/command-handling/',
-				'/creating-your-bot/event-handling/',
+				'/creating-your-bot/main-file.md',
 			],
 		},
 		{
 			text: 'Slash Commands',
 			children: [
+				'/slash-commands/',
 				'/slash-commands/registering.md',
 				'/slash-commands/advanced-creation.md',
 				'/slash-commands/replying.md',

@@ -1,19 +1,8 @@
-# Creating commands
 
-::: tip
-This page is a follow-up and bases its code on [the previous page](/creating-your-bot/).
-:::
 
-<DiscordMessages>
-	<DiscordMessage profile="bot">
-		<template #interactions>
-			<DiscordInteraction profile="user" :command="true">ping</DiscordInteraction>
-		</template>
-		Pong!
-	</DiscordMessage>
-</DiscordMessages>
 
-Discord allows developers to register [slash commands](https://discord.com/developers/docs/interactions/application-commands), which provide users a first-class way of interacting directly with your application. Before being able to reply to a command, you must first register it.
+
+
 
 ## Registering commands
 
