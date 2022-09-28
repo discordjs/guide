@@ -53,6 +53,7 @@ export default {
 			text: 'Slash Commands',
 			children: [
 				'/slash-commands/',
+				'/slash-commands/loading-commands.md',
 				'/slash-commands/registering.md',
 				'/slash-commands/advanced-creation.md',
 				'/slash-commands/replying.md',

@@ -1,9 +1,9 @@
-# Replying to slash commands
+# Handling slash command interactions
 
-In this section, we'll cover how to respond to these commands using discord.js!
+In this section, we'll cover how to process and respond to the slash commands we've now created and registered using discord.js!
 
 ::: tip
-You need at least one slash command registered on your application to continue with the instructions on this page. If you haven't done that yet, refer to [the previous section](/slash-commands/registering) on registering.
+You need at least one slash command created and registered on your application to continue with the instructions on this page. If you haven't done that yet, refer to [the previous pages in this section](/slash-commands/).
 :::
 
 ## Receiving command interactions
@@ -24,6 +24,64 @@ client.on('interactionCreate', interaction => {
 	console.log(interaction);
 });
 ```
+
+## Command handling
+
+::: tip
+This section assumes you're using the `client.commands` convention from the [loading commands](/slash-commands/loading-commands.md) page of this guide. Please carefully read those first so that you can understand the methods used in this section.
+:::
+
+When your bot receives an `interactionCreate` event, the interaction object contains all the information you need to dynamically retrieve and execute your commands!
+
+At the moment, we the only command we have defined and loaded in is our `ping` command, which looks like this:
+
+```js
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('ping')
+		.setDescription('Replies with Pong!'),
+	async execute(interaction) {
+		await interaction.reply('Pong!');
+	},
+};
+```
+
+First, you need to get the matching command from the `client.commands` Collection based on the `interaction.commandName`. Your Client instance is always available via `interaction.client`. If no matching command is found, log an error to the console and ignore the event.
+
+With the right command identified, all that's left to do is call the command's `.execute()` method and pass in the `interaction` variable as its argument. In case something goes wrong, log the error and report back to the member to let them know.
+
+```js {4-13}
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isChatInputCommand()) return;
+
+	const command = interaction.client.commands.get(interaction.commandName);
+
+	if (!command) {
+		console.error(`No command matching ${interaction.commandName} was found.`);
+		return;
+	}
+
+	try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
+		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+	}
+});
+```
+
+If all went well, you should see your bot's response in Discord!
+
+<DiscordMessages>
+	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction profile="user" :command="true">ping</DiscordInteraction>
+		</template>
+		Pong!
+	</DiscordMessage>
+</DiscordMessages>
+
+
 
 ## Responding to a command
 
