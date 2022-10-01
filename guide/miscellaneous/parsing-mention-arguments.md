@@ -6,7 +6,7 @@ For example, you cannot tell where the mention is located in the message's conte
 
 ## How Discord mentions work
 
-Discord uses a special syntax to embed mentions in a message. For user mentions, it is the user's ID with `<@` at the start and `>` at the end, like this: `<@86890631690977280>`. If they have a nickname, there will also be a `!` after the `@`.  
+Discord uses a special syntax to embed mentions in a message. For user mentions, it is the user's ID with `<@` at the start and `>` at the end, like this: `<@86890631690977280>`.  
 Role mentions and channel mentions work similarly. Role mentions look like `<@&134362454976102401>` and channel mentions like `<#222197033908436994>`.
 
 That means when you receive a message from the Discord API, and it contains mentions, the message's content will contain that special syntax.  
@@ -24,6 +24,10 @@ then the `message.content` for that message will look something like this
 ```js
 'I think we should add <@86890631690977280> to the <@&134362454976102401> role.'
 ```
+
+::: tip
+Discord previously appended an exclamation mark (`!`) after the `@` to show a member's nickname rather than the username. The `!` is no longer needed to show their nickname; however, Discord still allows it. When validating, it's a good idea to still check for `!`.
+:::
 
 ## Implementation
 
@@ -50,7 +54,7 @@ function getUserFromMention(mention) {
 As you can see, it is a relatively straightforward function.
 It essentially just works itself through the structure of the mention bit by bit:
  1. Check if the mention starts with the `<@` and ends with a `>` and then remove those.
- 2. If the user has a nickname and their mention contains a `!`, remove that as well.
+ 2. If the user has a nickname and their mention still contains a `!`, remove that as well.
  3. Only the ID should be left now, so use that to fetch the user from the `client.users.cache` Collection.
 Whenever it encounters an error with the mention (i.e., invalid structure), it merely returns `undefined` to signal the mention is invalid.
 
