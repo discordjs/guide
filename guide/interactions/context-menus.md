@@ -31,7 +31,7 @@ client.on('interactionCreate', interaction => {
 
 ## Extracting data from context menus
 
-For user context menus, you can get the targeted user by accessing the `targetUser` or `targetMember` property from the <DocsLink path="class/UserContextMenuInteraction" />. Y
+For user context menus, you can get the targeted user by accessing the `targetUser` or `targetMember` property from the <DocsLink path="class/UserContextMenuInteraction" />.
 
 For message contenxt menus, you can get the targeted message by accessing the `targetMessage` property from the <DocsLink path="class/MessageContextMenuInteraction" />.
 

@@ -47,7 +47,6 @@ Let's imagine that you have a bot on over 1,000 servers, and it took you many, m
 * Delete as many channels as possible;
 * Kick or ban as many server members as possible;
 * Make your bot leave all of the servers it has joined;
-* Access and damage the underlying infrastructure (your server).
 
 All that and much, much more. Sounds pretty terrible, right? So make sure to keep your bot's token as safe as possible!
 

@@ -6,27 +6,27 @@ v14 requires Node 16.9 or higher to use, so make sure you're up to date. To chec
 
 ### Builders are now included in v14
 
-If you previously had `@discordjs/builders` manually installed it's _highly_ recommended that you uninstall the package to avoid package naming conflicts.
+If you previously had `@discordjs/builders` or `@discordjs/rest` manually installed, it's _highly_ recommended that you uninstall the packages to avoid package version conflicts.
 
 :::: code-group
 ::: code-group-item npm
 
 ```sh:no-line-numbers
-npm uninstall @discordjs/builders
+npm uninstall @discordjs/builders @discordjs/rest
 ```
 
 :::
 ::: code-group-item yarn
 
 ```sh:no-line-numbers
-yarn remove @discordjs/builders
+yarn remove @discordjs/builders @discordjs/rest
 ```
 
 :::
 ::: code-group-item pnpm
 
 ```sh:no-line-numbers
-pnpm remove @discordjs/builders
+pnpm remove @discordjs/builders @discordjs/rest
 ```
 
 :::
@@ -118,24 +118,6 @@ Some channel type guard methods that narrowed to one channel type have been remo
 
 -channel.isDM()
 +channel.type === ChannelType.DM
-```
-
-#### Interactions
-
-Similarly to channels, some interaction type guards have been removed, and replaced with `type` checks a [InteractionType](https://discord-api-types.dev/api/discord-api-types-v10/enum/InteractionType) enum member.
-
-```diff
--interaction.isCommand();
-+interaction.type === InteractionType.ApplicationCommand;
-
--interaction.isAutocomplete();
-+interaction.type === InteractionType.ApplicationCommandAutocomplete;
-
--interaction.isMessageComponent();
-+interaction.type === InteractionType.MessageComponent;
-
--interaction.isModalSubmit();
-+interaction.type === InteractionType.ModalSubmit;
 ```
 
 ### Builders
@@ -280,7 +262,17 @@ The `threadMembersUpdate` event now emits the users who were added, the users wh
 
 ### GuildBanManager
 
-The `days` option when banning a user has been renamed to `deleteMessageDays` to be more aligned to the API name.
+Starting from 14.4.0, developers should utilise `deleteMessageSeconds` instead of `days` and `deleteMessageDays`:
+
+```diff
+<GuildBanManager>.create('123456789', {
+-  days: 3
+-  deleteMessageDays: 3
++  deleteMessageSeconds: 3 * 24 * 60 * 60
+});
+```
+
+`deleteMessageDays` (introduced with version 14) and `days` are both deprecated and will be removed in the future.
 
 ### Guild
 
@@ -310,19 +302,7 @@ The following properties & methods have been moved to the `GuildAuditLogsEntry` 
 
 ### Interaction
 
-The following typeguards on `Interaction` have been removed:
-
-```diff
-- interaction.isCommand()
-- interaction.isContextMenu()
-- interaction.isAutocomplete()
-- interaction.isModalSubmit()
-- interaction.isMessageComponent()
-```
-
-Instead check against the `#type` of the interaction to narrow the type. Refer to [this section](#interactions) for more context.
-
-Additionally, whenever an interaction is replied to and one fetches the reply, it could possibly give an `APIMessage` if the guild was not cached. However, interaction replies now always return a discord.js `Message` object.
+Whenever an interaction is replied to and one fetches the reply, it could possibly give an `APIMessage` if the guild was not cached. However, interaction replies now always return a discord.js `Message` object with `fetchReply` as `true`.
 
 ### Invite
 
@@ -399,6 +379,15 @@ Additionally, whenever an interaction is replied to and one fetches the reply, i
 +  { name: 'one', value: 'one' },
 +  { name: 'two', value: 'two' },
 +]);
+```
+
+### Modal
+
+-   `Modal` has been renamed as well and now has a `Builder` suffix:
+
+```diff
+- const modal = new Modal();
++ const modal = new ModalBuilder();
 ```
 
 ### PartialTypes
@@ -508,6 +497,8 @@ Many of the analogous enums can be found in the discord-api-types docs. [discord
 
 ### Channel
 
+`Channel#flags` has been added as of 14.4.0.
+
 Store channels have been removed as they are no longer part of the API.
 
 `Channel#url` has been added which is a link to a channel, just like in the client.
@@ -527,29 +518,61 @@ Additionally, new typeguards have been added:
 
 A new `ignore` event has been added which is emitted whenever an element is not collected by the collector.
 
+Component collector options now use the `ComponentType` enum values:
+
+```diff
++ const { ComponentType } = require('discord.js');
+
+const collector = interaction.channel.createMessageComponentCollector({
+	filter,
+-	componentType: 'BUTTON',
++	componentType: ComponentType.Button,
+	time: 20000
+});
+```
+
 ### CommandInteraction
 
 `CommandInteraction#commandGuildId` has been added which is the id of the guild the invoked application command is registered to.
+
+### ForumChannel
+
+Added support for forum channels as of 14.4.0.
 
 ### Guild
 
 Added `Guild#setMFALevel()` which sets the guild's MFA level.
 
+Added `Guild#maxVideoChannelUsers` as of 14.2.0 which indicates the maximum number of video channel users.
+
 ### GuildChannelManager
 
 `videoQualityMode` may be used whilst creating a channel to initially set the camera video quality mode.
-
-### GuildMemberManager
-
-Added `GuildMemberManager#fetchMe()` to fetch the client user in the guild.
 
 ### GuildEmojiManager
 
 Added `GuildEmojiManager#delete()` and `GuildEmojiManager#edit()` for managing existing guild emojis.
 
+### GuildForumThreadManager 
+
+Added `GuildForumThreadManager` as manager for threads in forum channels as of 14.4.0.
+
+### GuildMemberManager
+
+Added `GuildMemberManager#fetchMe()` to fetch the client user in the guild.
+Added `GuildMemberManager#addRole()` and `GuildMemberManager#removeRole()` as of 14.3.0. These methods allow a single addition or removal of a role respectively to a guild member, even if uncached.
+
+### GuildTextThreadManager
+
+Added `GuildTextThreadManager` as manager for threads in text channels and announcement channels as of 14.4.0.
+
 ### Interaction
 
 Added `Interaction#isRepliable()` to check whether a given interaction can be replied to.
+
+### Message
+
+`Message#position` has been added as an approximate position in a thread as of 14.4.0.
 
 ### MessageReaction
 
@@ -558,3 +581,5 @@ Added `MessageReaction#react()` to make the client user react with the reaction 
 ### Webhook
 
 Added `Webhook#applicationId`.
+
+Added property `threadName` in `Webhook#send()` options as of 14.4.0 which allows a webhook to create a post in a forum channel.

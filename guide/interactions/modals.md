@@ -135,8 +135,6 @@ For a detailed guide on receiving message components via collectors, please refe
 To receive a <DocsLink path="class/ModalSubmitInteraction"/> event, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate"/> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isModalSubmit"/> type guard to make sure you only receive modals:
 
 ```js {1,4}
-const { InteractionType } = require('discord.js');
-
 client.on('interactionCreate', interaction => {
 	if (!interaction.isModalSubmit()) return;
 	console.log(interaction);
@@ -159,7 +157,7 @@ If the modal was shown from a <DocsLink path="class/ButtonInteraction"/> or <Doc
 
 ```js{1,3-5}
 client.on('interactionCreate', async interaction => {
-	if (interaction.type !== InteractionType.ModalSubmit) return;
+	if (!interaction.isModalSubmit()) return;
 	if (interaction.customId === 'myModal') {
 		await interaction.reply({ content: 'Your submission was received successfully!' });
 	}
@@ -176,7 +174,7 @@ You'll most likely need to read the data sent by the user in the modal. You can 
 
 ```js{5-7}
 client.on('interactionCreate', interaction => {
-	if (interaction.type !== InteractionType.ModalSubmit) return;
+	if (!interaction.isModalSubmit()) return;
 
 	// Get the data entered by the user
 	const favoriteColor = interaction.fields.getTextInputValue('favoriteColorInput');

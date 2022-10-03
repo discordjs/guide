@@ -28,7 +28,7 @@ To handle an <DocsLink path="class/AutocompleteInteraction"/>, use the <DocsLink
 
 <!-- eslint-skip -->
 
-```js {2,3}
+```js {1,4}
 client.on('interactionCreate', interaction => {
 	if (!interaction.isAutocomplete()) return;
 	// do autocomplete handling
@@ -65,7 +65,7 @@ The example below shows how this might be applied to a conceptual version of our
 
 ```js {4-11}
 client.on('interactionCreate', async interaction => {
-	if (interaction.type !== InteractionType.ApplicationCommandAutocomplete) return;
+	if (!interaction.isAutocomplete()) return;
 
 	if (interaction.commandName === 'guide') {
 		const focusedValue = interaction.options.getFocused();
@@ -84,7 +84,7 @@ To distinguish between multiple options, you can pass `true` into <DocsLink path
 
 ```js {5-6,8-10,12-14,16}
 client.on('interactionCreate', async interaction => {
-	if (interaction.type !== InteractionType.ApplicationCommandAutocomplete) return;
+	if (!interaction.isAutocomplete()) return;
 
 	if (interaction.commandName === 'guide') {
 		const focusedOption = interaction.options.getFocused(true);
