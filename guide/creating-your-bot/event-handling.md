@@ -2,7 +2,7 @@
 
 Node.js uses an event-driven architecture, making it possible to execute code when a specific event occurs. The discord.js library takes full advantage of this. You can visit the <DocsLink path="class/Client" /> documentation to see the full list of events.
 
-If you've followed the guide up to this point, your `index.js` file will have listeners for two events; `ready` and `interactionCreate`. The latter should contain your command handler - to make this section of the guide easier to follow we're going to use a simplified version as show below.
+If you've followed the guide up to this point, your `index.js` file will have listeners for two events; `ready` and `interactionCreate`:
 
 ```js
 const { Client, GatewayIntentBits } = require('discord.js');
@@ -14,8 +14,22 @@ client.once('ready', c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
-client.on('interactionCreate', interaction => {
-	console.log(`${interaction.user.tag} in #${interaction.channel.name} triggered an interaction.`);
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isChatInputCommand()) return;
+
+	const command = interaction.client.commands.get(interaction.commandName);
+
+	if (!command) {
+		console.error(`No command matching ${interaction.commandName} was found.`);
+		return;
+	}
+
+	try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(`Error executing ${interaction.commandName}`);
+		console.error(error);
+	}
 });
 
 client.login(token);
@@ -54,15 +68,29 @@ module.exports = {
 ```js
 module.exports = {
 	name: 'interactionCreate',
-	execute(interaction) {
-		console.log(`${interaction.user.tag} in #${interaction.channel.name} triggered an interaction.`);
+	async execute(interaction) {
+		if (!interaction.isChatInputCommand()) return;
+
+		const command = interaction.client.commands.get(interaction.commandName);
+
+		if (!command) {
+			console.error(`No command matching ${interaction.commandName} was found.`);
+			return;
+		}
+
+		try {
+			await command.execute(interaction);
+		} catch (error) {
+			console.error(`Error executing ${interaction.commandName}`);
+			console.error(error);
+		}
 	},
 };
 ```
 :::
 ::::
 
-The `name` property states which event this file is for, and the `once` property is a boolean that specifies if the event should run only once. The `execute` function is for your event logic, which will be called by the event handler whenever the event emits.
+The `name` property states which event this file is for, and the `once` property is a boolean that specifies if the event should run only once. We don't need to specify this in `interactionCreate.js` as the default behaviour will be to run on every event. The `execute` function is for your event logic, which will be called by the event handler whenever the event emits.
 
 ## Reading event files
 

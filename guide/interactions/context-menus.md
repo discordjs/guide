@@ -3,7 +3,7 @@
 Context Menus are application commands which appear when right clicking or tapping a user or a message, in the Apps submenu.
 
 ::: tip
-This page is a follow-up to the [interactions (slash commands) page](/slash-commands/advanced-creation.md). Please carefully read that section first, so that you can understand the methods used in this section.
+This page is a follow-up to the [slash commands page](/slash-commands/advanced-creation.md). Please carefully read those first so that you can understand the methods used in this section.
 :::
 
 ## Registering context menu commands
@@ -47,5 +47,5 @@ client.on('interactionCreate', interaction => {
 ## Notes
 
 - Context menu commands cannot have subcommands or any options.
-- Responding to context menu commands functions the same as slash commands. Refer to our [slash command responses](/slash-commands/replying.md) guide for more information.
-- Context menu command permissions also function the same as slash commands. Refer to our [slash command permissions](/slash-commands/permissions.md) guide for more information.
+- Responding to context menu commands functions the same as slash commands. Refer to our [slash command responses](/interactions/slash-commands.md#responding-to-a-command) guide for more information.
+- Context menu command permissions also function the same as slash commands. Refer to our [slash command permissions](/interactions/slash-commands.md#slash-command-permissions) guide for more information.

@@ -115,8 +115,8 @@ client.on('interactionCreate', async interaction => {
 	try {
 		await command.execute(interaction);
 	} catch (error) {
-		console.error(`Error executing ${interaction.commandName}`);
 		console.error(error);
+		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
 ```
@@ -124,3 +124,9 @@ client.on('interactionCreate', async interaction => {
 #### Next steps
 
 Your command files are now loaded into your bot, and the event listener is prepared and ready to respond. In the next section, we cover the final step - a command deployment script you'll need to register your commands so they appear in the Discord client.
+
+#### Resulting code
+
+<ResultingCode path="creating-your-bot/initial-files" />
+
+It also includes some bonus commands!

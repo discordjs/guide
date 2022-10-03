@@ -17,8 +17,8 @@ const { token } = require('./config.json');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 // When the client is ready, run this code (only once)
-client.once('ready', () => {
-	console.log('Ready!');
+client.once('ready', c => {
+	console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
 // Login to Discord with your client's token
@@ -39,9 +39,6 @@ You can open your `package.json` file and edit the `"main": "index.js"` field to
 After closing the process with `Ctrl + C`, you can press the up arrow on your keyboard to bring up the latest commands you've run. Pressing up and then enter after closing the process is a quick way to start it up again.
 :::
 
-
-## Resulting code
+#### Resulting code
 
 <ResultingCode path="creating-your-bot/initial-files" />
-
-

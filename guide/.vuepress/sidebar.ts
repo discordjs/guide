@@ -64,6 +64,15 @@ export default {
 			]
 		},
 		{
+			text: 'Interactions',
+			children: [
+				'/interactions/buttons.md',
+				'/interactions/select-menus.md',
+				'/interactions/modals.md',
+				'/interactions/context-menus.md',
+			]
+		},
+		{
 			text: 'Popular Topics',
 			children: [
 				'/popular-topics/faq.md',

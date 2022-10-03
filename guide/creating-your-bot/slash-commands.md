@@ -132,3 +132,7 @@ module.exports = {
 #### Next steps
 
 You can make additional commands by creating additional files in the `commands` folder, but these three are the ones we're going to use for the examples as we go on. For now let's move on to the code you'll need for command handling, to load the files and respond to incoming interactions.
+
+#### Resulting code
+
+<ResultingCode path="creating-your-bot/slash-commands" />
