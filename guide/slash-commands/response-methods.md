@@ -1,41 +1,10 @@
-# Handling slash command interactions
+# Command response methods
 
-In this section, we'll cover how to process and respond to the slash commands we've now created and registered using discord.js!
+There are multiple ways of responding to a slash command; each of these are covered in the following segments. Using an interaction response method confirms to Discord that your bot successfully received the interaction, and has responded to the user. Discord enforces this to ensure that all slash commands provide a good user experience (UX). Failing to respond will cause Discord to show that the command failed, even if your bot is performing other actions as a result.
 
-::: tip
-You need at least one slash command created and registered on your application to continue with the instructions on this page. If you haven't done that yet, refer to [the previous pages in this section](/slash-commands/).
-:::
+The most common way of sending a response is by using the `ChatInputCommandInteraction#reply()` method, as we've used in the examples so far. The method acknowledges the interaction and sends a new message in response.
 
-## Receiving command interactions
-
-Every slash command is an `interaction`, so to respond to a command, you need to create a listener for the `interactionCreate` event that will execute code when your application receives an interaction:
-
-```js
-client.on('interactionCreate', interaction => {
-	console.log(interaction);
-});
-```
-
-However, not every interaction is a slash command (e.g. `MessageComponent`s). Make sure to only receive and handle slash commands in this function by making use of the `BaseInteraction#isChatInputCommand()` method to exit if another type is encountered:
-
-```js {2}
-client.on('interactionCreate', interaction => {
-	if (!interaction.isChatInputCommand()) return;
-	console.log(interaction);
-});
-```
-
-## Command handling
-
-::: tip
-This section assumes you're using the `client.commands` convention from the [loading commands](/slash-commands/loading-commands.md) page of this guide. Please carefully read those first so that you can understand the methods used in this section.
-:::
-
-When your bot receives an `interactionCreate` event, the interaction object contains all the information you need to dynamically retrieve and execute your commands!
-
-At the moment, we the only command we have defined and loaded in is our `ping` command, which looks like this:
-
-```js
+```js {6}
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('ping')
@@ -46,32 +15,6 @@ module.exports = {
 };
 ```
 
-First, you need to get the matching command from the `client.commands` Collection based on the `interaction.commandName`. Your Client instance is always available via `interaction.client`. If no matching command is found, log an error to the console and ignore the event.
-
-With the right command identified, all that's left to do is call the command's `.execute()` method and pass in the `interaction` variable as its argument. In case something goes wrong, log the error and report back to the member to let them know.
-
-```js {4-13}
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isChatInputCommand()) return;
-
-	const command = interaction.client.commands.get(interaction.commandName);
-
-	if (!command) {
-		console.error(`No command matching ${interaction.commandName} was found.`);
-		return;
-	}
-
-	try {
-		await command.execute(interaction);
-	} catch (error) {
-		console.error(error);
-		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-	}
-});
-```
-
-If all went well, you should see your bot's response in Discord!
-
 <DiscordMessages>
 	<DiscordMessage profile="bot">
 		<template #interactions>
@@ -80,41 +23,10 @@ If all went well, you should see your bot's response in Discord!
 		Pong!
 	</DiscordMessage>
 </DiscordMessages>
-
-
-
-## Responding to a command
-
-There are multiple ways of responding to a slash command; each of these are covered in the following segments. Using an interaction response method confirms to Discord that your bot successfully received the interaction, and has responded to the user. Discord enforces this to ensure that all slash commands provide a good user experience (UX). Failing to respond will cause Discord to show that the command failed, even if your bot is performing other actions as a result.
-
-The most common way of sending a response is by using the `ChatInputCommandInteraction#reply()` method:
 
 ::: warning
 Initially an interaction token is only valid for three seconds, so that's the timeframe in which you are able to use the `ChatInputCommandInteraction#reply()` method. Responses that require more time ("Deferred Responses") are explained later in this page.
 :::
-
-```js {1,4-6}
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isChatInputCommand()) return;
-
-	if (interaction.commandName === 'ping') {
-		await interaction.reply('Pong!');
-	}
-});
-```
-
-Restart your bot and then send the command to a channel your bot has access to. If all goes well, you should see something like this:
-
-<DiscordMessages>
-	<DiscordMessage profile="bot">
-		<template #interactions>
-			<DiscordInteraction profile="user" :command="true">ping</DiscordInteraction>
-		</template>
-		Pong!
-	</DiscordMessage>
-</DiscordMessages>
-
-You've successfully sent a response to a slash command! This is only the beginning, so let's move on to further ways of replying to a command!
 
 ## Ephemeral responses
 
@@ -205,6 +117,10 @@ await interaction.deferReply({ ephemeral: true });
 ```
 
 It is not possible to edit a reply to change its ephemeral state once sent.
+
+::: tip
+If you want to make a proper ping command, one is available in our [FAQ](/popular-topics/faq.md#how-do-i-check-the-bot-s-ping).
+:::
 
 ## Follow-ups
 
@@ -312,10 +228,3 @@ client.on('interactionCreate', interaction => {
 });
 ```
 
-## Further reading
-
-Everything covered here has only focused on text responses to slash commands, but much more is available to enhance the user experience including:
-
-* adding formatted [Embeds](/popular-topics/embeds) to your responses
-* furthering the command functionality with [Buttons](/components/buttons) and [Select Menus](/components/select-menus)
-* prompting the user for more information with [Modals](/modals/creating-modals.md)

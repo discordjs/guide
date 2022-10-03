@@ -2,7 +2,7 @@
 
 Node.js uses an event-driven architecture, making it possible to execute code when a specific event occurs. The discord.js library takes full advantage of this. You can visit the <DocsLink path="class/Client" /> documentation to see the full list of events.
 
-Here's the base code we'll be using:
+If you've followed the guide up to this point, your `index.js` file will have listeners for two events; `ready` and `interactionCreate`. The latter should contain your command handler - to make this section of the guide easier to follow we're going to use a simplified version as show below.
 
 ```js
 const { Client, GatewayIntentBits } = require('discord.js');
@@ -66,7 +66,7 @@ The `name` property states which event this file is for, and the `once` property
 
 ## Reading event files
 
-Next, let's write the code for dynamically retrieving all the event files in the `events` folder. We'll be taking a similar approach to our [command handler](/creating-your-bot/command-handling.md).
+Next, let's write the code for dynamically retrieving all the event files in the `events` folder. We'll be taking a similar approach to our [command handler](/creating-your-bot/command-handling.md) and placing the code below in our `index.js`.
 
 `fs.readdirSync().filter()` returns an array of all the file names in the given directory and filters for only `.js` files, i.e. `['ready.js', 'interactionCreate.js']`.
 

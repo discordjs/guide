@@ -4,9 +4,13 @@ The examples we've looked at so far have all been fairly simple commands, such a
 
 ## Adding options
 
-Application commands can have additional `options`. Think of these options as arguments to a function, and as a way for the user to provide the additional information the command requires. Options require at minimum a name and description.
+Application commands can have additional `options`. Think of these options as arguments to a function, and as a way for the user to provide the additional information the command requires. 
 
-You can specify them as shown in the `echo` command below, which prompt the user to enter a String for the `input` option. You'll see more about how to receive and use these options in the [Replying to slash commands](#replying-to-slash-commands) section further on.
+::: tip
+If you've already added options to your commands and need to know how to receive and parse them, refer to the [Parsing options](/slash-commands/parsing-options.md) page in this section of the guide.
+:::
+
+Options require at minimum a name and description. You can specify them as shown in the `echo` command below, which prompt the user to enter a String for the `input` option.
 
 ```js {6-8}
 const { SlashCommandBuilder } = require('discord.js');
@@ -21,9 +25,9 @@ const data = new SlashCommandBuilder()
 
 ## Option types
 
-By specifying the `type` of an `ApplicationCommandOption` by using the corresponding method you are able to restrict what the user can provide as input, and for some options, leverage the automatic parsing of options by Discord. 
+By specifying the `type` of an `ApplicationCommandOption` by using the corresponding method you are able to restrict what the user can provide as input, and for some options, leverage the automatic parsing of options into proper objects by Discord. 
 
-The example above uses `addStringOption`, the simplest form of standard text input with no additional validatation. By leveraging additional option types, we could change the behaviour of this command in many ways, such as outputting to a specific channel:
+The example above uses `addStringOption`, the simplest form of standard text input with no additional validatation. By leveraging additional option types, we could change the behaviour of this command in many ways, such as using a Channel option to control outputting to a specific channel:
 
 ```js {9-11}
 const { SlashCommandBuilder } = require('discord.js');
@@ -39,7 +43,7 @@ const data = new SlashCommandBuilder()
 			.setDescription('The channel to echo into'));
 ```
 
-Or giving the user the option to embed the message:
+Or a Boolean option to give the user control over making the response ephemeral.
 
 ```js {9-11}
 const { SlashCommandBuilder } = require('discord.js');
@@ -51,15 +55,15 @@ const data = new SlashCommandBuilder()
 		option.setName('input')
 			.setDescription('The input to echo back'))
 	.addBooleanOption(option =>
-		option.setName('embed')
-			.setDescription('Whether or not the echo should be embedded'));
+		option.setName('ephemeral')
+			.setDescription('Whether or not the echo should be ephemeral'));
 ```
 
 Listed below is a short description of the different types of options that can be added. For more information, refer to the `add_____Option` methods in the <DocsLink section="builders" path="class/SlashCommandBuilder" /> documentation.
 
 * `String`, `Integer`, `Number` and `Boolean` options all accept primitive values of their associated type.
-* `User`, `Channel`, `Role` and `Mentionable` options will allo show a selection list in the Discord interface for their associated type, or will accept a Snowflake (id) as input.
-* `Attachment` options prompt the user to make an upload along with the slash command
+* `User`, `Channel`, `Role` and `Mentionable` options will show a selection list in the Discord interface for their associated type, or will accept a Snowflake (id) as input.
+* `Attachment` options prompt the user to make an upload along with the slash command.
 * `Subcommand` and `SubcommandGroup` options allow you to have branching pathways of subsequent options for your commands - more on that later on this page.
 
 ::: tip
@@ -205,4 +209,6 @@ const data = new SlashCommandBuilder()
 	);
 ```
 
-That's a lot of different features! If you'd like to learn more about the different ways you can reply to slash commands, checkout out [Replying to slash commands](/slash-commands/replying). Or for more information on handling the different types of options covered on this page, refer to [Parsing options](/slash-commands/parsing-options)
+#### Next steps
+
+For more information on receiving and parsing the different types of options covered on this page, refer to [Parsing options](/slash-commands/parsing-options.md), or for more general information on how you can respond to slash commands, check out [Response methods](/slash-commands/response-methods.md).

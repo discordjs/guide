@@ -31,7 +31,7 @@ Intents also define which events Discord should send to your bot, and you may wi
 
 ## Running your application
 
-Open your terminal and run `node index.js` to start the process. If you see "Ready!" after a few seconds, you're good to go! The next step is to start adding [Slash commands](/slash-commands/) to develop your bot's functionality.
+Open your terminal and run `node index.js` to start the process. If you see "Ready!" after a few seconds, you're good to go! The next step is to start adding [Slash commands](/creating-your-bot/slash-commands.md) to develop your bot's functionality.
 
 ::: tip
 You can open your `package.json` file and edit the `"main": "index.js"` field to point to your main file. You can then run `node .` in your terminal to start the process!

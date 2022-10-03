@@ -54,7 +54,7 @@ In the same way as the above examples, you can get values of any type using the 
 
 If you have a command that contains subcommands, the `CommandInteractionOptionResolver#getSubcommand()` will tell you which subcommand was used. You can then get any additional options of the selected subcommand using the same methods as above.
 
-The snippet below uses the same `info` command from [the subcommand creation guide](/slash-commands/advanced-creation.md#subcommands) to demonstrate how we can control the logic flow when replying to different subcommands:
+The snippet below uses the same `info` command from the [subcommand creation guide](/slash-commands/advanced-creation.md#subcommands) to demonstrate how we can control the logic flow when replying to different subcommands:
 
 ```js {4,11}
 module.exports = {

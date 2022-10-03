@@ -47,16 +47,17 @@ export default {
 			children: [
 				'/creating-your-bot/',
 				'/creating-your-bot/main-file.md',
+				'/creating-your-bot/slash-commands.md',
+				'/creating-your-bot/command-handling.md',
+				'/creating-your-bot/command-deployment.md',
+				'/creating-your-bot/event-handling.md',
 			],
 		},
 		{
 			text: 'Slash Commands',
 			children: [
-				'/slash-commands/',
-				'/slash-commands/loading-commands.md',
-				'/slash-commands/registering.md',
+				'/slash-commands/response-methods.md',
 				'/slash-commands/advanced-creation.md',
-				'/slash-commands/replying.md',
 				'/slash-commands/parsing-options.md',
 				'/slash-commands/permissions.md',
 				'/slash-commands/autocomplete.md'

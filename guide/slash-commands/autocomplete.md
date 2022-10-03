@@ -35,7 +35,7 @@ client.on('interactionCreate', interaction => {
 });
 ```
 
-Or alternatively, by making a small change to your existing [command handler](/creating-your-bot/command-handling)
+Or alternatively, by making a small change to your existing [Command handler](/creating-your-bot/command-handling.md).
 
 ```js {2-6}
 client.on('interactionCreate', interaction => {
@@ -47,11 +47,15 @@ client.on('interactionCreate', interaction => {
 });
 ```
 
+:::tip
+You might have already moved this code to `events/interactionCreate.js` if you followed our [Event handling](/creating-your-bot/event-handling.md) guide too.
+:::
+
 ### Sending results
 
 The <DocsLink path="class/AutocompleteInteraction"/> class provides the <DocsLink path="class/AutocompleteInteraction?scrollTo=respond"/> method to send a response. Using this, you can submit an array of <DocsLink path="typedef/ApplicationCommandOptionChoiceData" /> objects for the user to choose from. Passing an empty array will show "No options match your search" for the user.
 
-::: tip
+::: warning
 Unlike static choices, autocompletion suggestions are *not* enforced, and users may still enter free text.
 :::
 
@@ -78,7 +82,7 @@ client.on('interactionCreate', async interaction => {
 
 To distinguish between multiple options, you can pass `true` into <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused"/>, which will now return the full focused object instead of just the value. This is used to get the name of the focused option below, allowing for multiple options to each have their own set of suggestions:
 
-```js {5-16}
+```js {5-6,8-10,12-14,16}
 client.on('interactionCreate', async interaction => {
 	if (interaction.type !== InteractionType.ApplicationCommandAutocomplete) return;
 

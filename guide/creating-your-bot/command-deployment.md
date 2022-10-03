@@ -14,13 +14,15 @@ Slash commands can be registered in two ways; in one specific guild, or for ever
 
 Your application will need the `applications.commands` scope authorized in a guild for either its global or guild slash commands to appear, and to register them in a specific guild wihtout error.
 
-Since commands only need to be registered once, and updated when the definition (description, options etc) is changed. As there is a daily limit on command creations, it's not necessary nor desirable to connect a whole client to the gateway or do this on every `ready` event. As such, a standalone script using the lighter REST manager is preferred. 
+Slash commands only need to be registered once, and updated when the definition (description, options etc) is changed. As there is a daily limit on command creations, it's not necessary nor desirable to connect a whole client to the gateway or do this on every `ready` event. As such, a standalone script using the lighter REST manager is preferred. 
 
 This script is intended to be run separately, only when you need to make changes to your slash command **definitions** - you're free to modify parts such as the execute function as much as you like without redeployment. 
 
+### Guild commands
+
 Create a `deploy-commands.js` file in your project directory. This file will be used to register and update the slash commands for your bot application.
 
-Below is a deployment script you can use. Focus on these variables:
+Below is a deployment script you can use. Read through the commands in the script, and focus on these variables:
 
 - `clientId`: Your application's client id
 - `guildId`: Your development server's id
@@ -69,9 +71,18 @@ const rest = new REST({ version: '10' }).setToken(token);
 })();
 ```
 
-Once you fill in these values, run `node deploy-commands.js` in your project directory to register your commands to the guild specified. If you see the success message, check for the commands in the server by typing `/`!
+Once you fill in these values, run `node deploy-commands.js` in your project directory to register your commands to the guild specified. If you see the success message, check for the commands in the server by typing `/`! If all goes well, you should be able to run them and see your bot's response in Discord!
 
-## Global commands
+<DiscordMessages>
+	<DiscordMessage profile="bot">
+		<template #interactions>
+			<DiscordInteraction profile="user" :command="true">ping</DiscordInteraction>
+		</template>
+		Pong!
+	</DiscordMessage>
+</DiscordMessages>
+
+### Global commands
 
 Global application commands will be available in all the guilds your application has the `applications.commands` scope authorized, as well as in DMs by default.
 
@@ -86,6 +97,17 @@ await rest.put(
 );
 ```
 
-## Next steps
+::: tip
+Deploying global commands does not replace guild-deployed commands. Before deploying global commands, you'll probably want to run the guild deployment script again with an empty array to clear them out and avoid duplicates.
+:::
 
-Your commands should now be appearing in your guild, but your bot won't be responding to them yet. The final step in creating slash commands is to listen to the `interactionCreate` event and perform command handling, which we'll cover on the next page.
+#### Further reading
+
+You've successfully sent a response to a slash command! However, this is only the most basic of command event and response functionality. Much more is available to enhance the user experience including:
+
+* applying this same dynamic, modular handling approach to events with an [Event handler](/creating-your-bot/event-handling.md).
+*	utilising the different [Response methods](/slash-commands/response-methods.md) that can be used for slash commands.
+* expanding on these examples with additional validated option types in [Advanced command creation](/slash-commands/advanced-creation.md).
+* adding formatted [Embeds](/popular-topics/embeds.md) to your responses
+* furthering the command functionality with [Buttons](/components/buttons) and [Select Menus](/components/select-menus.md)
+* prompting the user for more information with [Modals](/modals/creating-modals.md)
