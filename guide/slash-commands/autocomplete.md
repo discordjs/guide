@@ -122,6 +122,6 @@ However, the `.getUser()`, `.getMember()`, `.getRole()`, `.getChannel()`, `.getM
 ## Notes
 
 - As with other application command interactions, autocomplete interactions must receive a response within 3 seconds. 
-- You cannot defer the response to an autocomplete interaction. If you're dealing with asynchronous suggestions, such as from an API, consider keepinmg a local cache.
+- You cannot defer the response to an autocomplete interaction. If you're dealing with asynchronous suggestions, such as from an API, consider keeping a local cache.
 - After the user selects a value and sends the command, it will be received as a normal <DocsLink path="class/ChatInputCommandInteraction"/> with the chosen value.
 - You can only respond with a maximum of 25 choices at a time, though any more than this likely means you should revise your filter to narrow the selections further.

@@ -12,7 +12,7 @@ In this section, we'll cover how to register your commands to Discord using disc
 
 Slash commands can be registered in two ways; in one specific guild, or for every guild the bot is in. We're going to look at single-guild registration first, as this is a good way to develop and test your commands before a global deployment.
 
-Your application will need the `applications.commands` scope authorized in a guild for either its global or guild slash commands to appear, and to register them in a specific guild wihtout error.
+Your application will need the `applications.commands` scope authorized in a guild for either its global or guild slash commands to appear, and to register them in a specific guild without error.
 
 Slash commands only need to be registered once, and updated when the definition (description, options etc) is changed. As there is a daily limit on command creations, it's not necessary nor desirable to connect a whole client to the gateway or do this on every `ready` event. As such, a standalone script using the lighter REST manager is preferred. 
 
@@ -115,11 +115,11 @@ Deploying global commands does not replace guild-deployed commands. Before deplo
 You've successfully sent a response to a slash command! However, this is only the most basic of command event and response functionality. Much more is available to enhance the user experience including:
 
 * applying this same dynamic, modular handling approach to events with an [Event handler](/creating-your-bot/event-handling.md).
-*	utilising the different [Response methods](/slash-commands/response-methods.md) that can be used for slash commands.
+* utilising the different [Response methods](/slash-commands/response-methods.md) that can be used for slash commands.
 * expanding on these examples with additional validated option types in [Advanced command creation](/slash-commands/advanced-creation.md).
-* adding formatted [Embeds](/popular-topics/embeds.md) to your responses
-* furthering the command functionality with [Buttons](/interactions/buttons) and [Select Menus](/interactions/select-menus.md)
-* prompting the user for more information with [Modals](/interactions/modals.md)
+* adding formatted [Embeds](/popular-topics/embeds.md) to your responses.
+* furthering the command functionality with [Buttons](/interactions/buttons) and [Select Menus](/interactions/select-menus.md).
+* prompting the user for more information with [Modals](/interactions/modals.md).
 
 #### Resulting code
 

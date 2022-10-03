@@ -165,7 +165,7 @@ client.on('interactionCreate', interaction => {
 });
 ```
 
-## executing commands
+## Executing commands
 
 ::: tip
 This section assumes you're using the `client.commands` convention from the [loading commands](/creating-your-bot/loading-commands.md) page of this guide. Please carefully read those first so that you can understand the methods used in this section.
