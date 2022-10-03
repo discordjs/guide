@@ -60,7 +60,8 @@ export default {
 				'/slash-commands/advanced-creation.md',
 				'/slash-commands/parsing-options.md',
 				'/slash-commands/permissions.md',
-				'/slash-commands/autocomplete.md'
+				'/slash-commands/autocomplete.md',
+				'/slash-commands/deleting-commands.md'
 			]
 		},
 		{
