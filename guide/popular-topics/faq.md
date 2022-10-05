@@ -135,8 +135,8 @@ channel.threads.create({ name: 'Post name', message: { content: 'Message content
 <!-- eslint-skip -->
 
 ```js
-const user = await client.users.fetch('id');
-user.send('content');
+const message = await client.users.send('id', 'content');
+console.log(message);
 ```
 
 ::: tip
