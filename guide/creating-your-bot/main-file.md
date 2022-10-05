@@ -26,7 +26,11 @@ client.once('ready', c => {
 client.login(token);
 ```
 
-This is how you create a client instance for your Discord bot and log in to Discord. The `GatewayIntentBits.Guilds` intents option is necessary for the discord.js client to work as you expect it to, as it ensures that the caches for guilds, channels, and roles are populated and available for internal use. 
+This is how you create a client instance for your Discord bot and log in to Discord. The `GatewayIntentBits.Guilds` intents option is necessary for the discord.js client to work as you expect it to, as it ensures that the caches for guilds, channels, and roles are populated and available for internal use.
+
+::: tip
+The term "guild" is used by the Discord API and in discord.js to refer to a Discord server.
+:::
 
 Intents also define which events Discord should send to your bot, and you may wish to enable more than just the minimum. You can read more about the other intents on the [Intents topic](/popular-topics/intents).
 

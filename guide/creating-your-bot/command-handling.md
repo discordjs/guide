@@ -115,16 +115,14 @@ client.commands = new Collection();
 We recommend attaching a `.commands` property to your client instance so that you can access your commands in other files. The rest of the examples in this guide will follow this convention.
 
 ::: tip
-The [`fs`](https://nodejs.org/api/fs.html) module is Node's native file system module. `fs` is used to read the `commands` directory and identify our command files.
-
-The [`path`](https://nodejs.org/api/path.html) is Node's native path utility module. `path` helps construct paths to access files and directories. One of the advantages of the `path` module is that it automatically detects the operating system and uses the appropriate joiners.
-
-The <DocsLink section="collection" path="class/Collection" /> class extends JavaScript's native [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) class, and includes more extensive, useful functionality. `Collection` is used to store and efficiently retrieve our commands for execution.
+- The [`fs`](https://nodejs.org/api/fs.html) module is Node's native file system module. `fs` is used to read the `commands` directory and identify our command files.
+- The [`path`](https://nodejs.org/api/path.html) is Node's native path utility module. `path` helps construct paths to access files and directories. One of the advantages of the `path` module is that it automatically detects the operating system and uses the appropriate joiners.
+- The <DocsLink section="collection" path="class/Collection" /> class extends JavaScript's native [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) class, and includes more extensive, useful functionality. `Collection` is used to store and efficiently retrieve our commands for execution.
 :::
 
 Next, using the modules imported above, dynamically retrieve your command files with a few more additions to our `index.js` file:
 
-```js
+```js {3-15}
 client.commands = new Collection();
 
 const commandsPath = path.join(__dirname, 'commands');
@@ -144,7 +142,7 @@ for (const file of commandFiles) {
 
 First, [`path.join()`](https://nodejs.org/api/path.html) helps to construct a path to the `commands` directory. The [`fs.readdirSync()`](https://nodejs.org/api/fs.html#fs_fs_readdirsync_path_options) method then reads the path to the directory and returns an array of all the file names it contains, currently just `['ping.js']`. To ensure only command files get processed, `Array.filter()` removes any non-JavaScript files from the array. 
 
-With the correct files identified, the last step is to loop over the array and dynamically set each command into the `client.commands` Collection. In addition to the filter to remove non-JavaScript files, here it also checks that the files being loaded all have at least the `data` and `execute` properties. This helps to prevent errors resulting from loading empty, unfinished or otherwise incorrect command files while you're still developing.
+With the correct files identified, the last step is to loop over the array and dynamically set each command into the `client.commands` Collection. For each file being loaded, check that it has at least the `data` and `execute` properties. This helps to prevent errors resulting from loading empty, unfinished or otherwise incorrect command files while you're still developing.
 
 ## Receiving command interactions
 
@@ -168,7 +166,7 @@ client.on('interactionCreate', interaction => {
 ## Executing commands
 
 ::: tip
-This section assumes you're using the `client.commands` convention from the [loading commands](/creating-your-bot/loading-commands.md) page of this guide. Please carefully read those first so that you can understand the methods used in this section.
+This section assumes you're using the `client.commands` convention from the [loading commands](/creating-your-bot/loading-commands.md) page of this guide. Please carefully read that page first so that you can understand the methods used in this section.
 :::
 
 When your bot receives an `interactionCreate` event, the interaction object contains all the information you need to dynamically retrieve and execute your commands!
@@ -186,11 +184,11 @@ module.exports = {
 };
 ```
 
-First, you need to get the matching command from the `client.commands` Collection based on the `interaction.commandName`. Your Client instance is always available via `interaction.client`. If no matching command is found, log an error to the console and ignore the event.
+First, you need to get the matching command from the `client.commands` Collection based on the `interaction.commandName`. Your <DocsLink path="class/Client">`Client`</DocsLink> instance is always available via `interaction.client`. If no matching command is found, log an error to the console and ignore the event.
 
 With the right command identified, all that's left to do is call the command's `.execute()` method and pass in the `interaction` variable as its argument. In case something goes wrong, catch and log any error to the console.
 
-```js {4,6-9,12,14-15}
+```js {4-16}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 

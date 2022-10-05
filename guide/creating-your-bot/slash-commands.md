@@ -73,8 +73,9 @@ Put these two together by creating a `commands/ping.js` file for your first comm
 
 These are placed inside `module.exports` so they can be read by other files; namely the command loader and command deployment scripts mentioned earlier.
 
+:::: code-group
+::: code-group-item commands/ping.js
 ```js
-// commands/ping.js
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
@@ -86,6 +87,8 @@ module.exports = {
 	},
 };
 ```
+:::
+::::
 
 ::: tip
 [`module.exports`](https://nodejs.org/api/modules.html#modules_module_exports) is how you export data in Node.js so that you can [`require()`](https://nodejs.org/api/modules.html#modules_require_id) it in other files.
