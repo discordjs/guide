@@ -9,5 +9,5 @@ client.once('ready', c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
-// Login to Discord with your client's token
+// Log in to Discord with your client's token
 client.login(token);

@@ -156,7 +156,7 @@ client.on('interactionCreate', interaction => {
 });
 ```
 
-However, not every interaction is a slash command (e.g. `MessageComponent`s). Make sure to only receive and handle slash commands in this function by making use of the `BaseInteraction#isChatInputCommand()` method to exit if another type is encountered:
+However, not every interaction is a slash command (e.g. `MessageComponent` interactions). Make sure to only handle slash commands in this function by making use of the `BaseInteraction#isChatInputCommand()` method to exit the handler if another type is encountered:
 
 ```js {2}
 client.on('interactionCreate', interaction => {

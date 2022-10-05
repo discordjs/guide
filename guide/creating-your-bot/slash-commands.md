@@ -41,7 +41,7 @@ To go from this starter code to fully functional slash commands, there are three
 2. The command handler, which dynamically reads the files and executes the commands.
 3. The command deployment script, to register your slash commands with Discord so they appear in the interface.
 
-These steps can really be done in any order, but all are required before the commands are fully functional. This section of the guide will use the order listed above. So let's get started!
+These steps can be done in any order, but all are required before the commands are fully functional. This section of the guide will use the order listed above. So let's get started!
 
 ## Indivdual command files
 

@@ -93,7 +93,7 @@ Once you fill in these values, run `node deploy-commands.js` in your project dir
 
 ### Global commands
 
-Global application commands will be available in all the guilds your application has the `applications.commands` scope authorized, as well as in DMs by default.
+Global application commands will be available in all the guilds your application has the `applications.commands` scope authorized in, and in direct messages by default.
 
 To deploy global commands, you can use the same script from the [guild commands](#guild-commands) section and simply adjust the route in the script to `.applicationCommands(clientId)`
 
