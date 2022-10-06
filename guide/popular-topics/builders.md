@@ -1,6 +1,6 @@
 # Builders
 
-discord.js provides the [`@discordjs/builders`](https://github.com/discordjs/builders) package which contains a variety of utilities you can use when writing your Discord bot.
+discord.js provides Builders, which contain a variety of utilities you can use when making your Discord bot.
 
 ## Basic Markdown
 
