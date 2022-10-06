@@ -42,9 +42,9 @@ You can provide permission decimals wherever we use flag literals in this guide.
 Base permissions are set on roles, not the guild member itself. To change them, you access a Role object (for example via `member.roles.cache.first()` or `guild.roles.cache.random()`) and use the `.setPermissions()` method. This is how you'd change the base permissions for the `@everyone` role, for example:
 
 ```js
-const { PermissionsBitField } = require('discord.js');
+const { PermissionFlagsBits } = require('discord.js');
 
-guild.roles.everyone.setPermissions([PermissionsBitField.Flags.SendMessages, PermissionsBitField.Flags.ViewChannel]);
+guild.roles.everyone.setPermissions([PermissionFlagsBits.SendMessages, PermissionFlagsBits.ViewChannel]);
 ```
 
 Any permission not referenced in the flag array or bit field is not granted to the role. 
@@ -58,9 +58,9 @@ Note that flag names are literal. Although `ViewChannel` grants access to view m
 Alternatively you can provide permissions as a property of the <DocsLink path="typedef/CreateRoleOptions" /> typedef during role creation as an array of flag strings or a permission number:
 
 ```js
-const { PermissionsBitField } = require('discord.js');
+const { PermissionFlagsBits } = require('discord.js');
 
-guild.roles.create({ name: 'Mod', permissions: [PermissionsBitField.Flags.SendMessages, PermissionsBitField.Flags.KickMembers] });
+guild.roles.create({ name: 'Mod', permissions: [PermissionFlagsBits.SendMessages, PermissionFlagsBits.KickMembers] });
 ```
 
 ### Checking member permissions
@@ -68,17 +68,17 @@ guild.roles.create({ name: 'Mod', permissions: [PermissionsBitField.Flags.SendMe
 To know if one of a member's roles has a permission enabled, you can use the `.has()` method on <DocsLink path="class/GuildMember?scrollTo=permissions" /> and provide a permission flag, array, or number to check for. You can also specify if you want to allow the `Administrator` permission or the guild owner status to override this check with the following parameters.
 
 ```js
-const { PermissionsBitField } = require('discord.js');
+const { PermissionFlagsBits } = require('discord.js');
 
-if (member.permissions.has(PermissionsBitField.Flags.KickMembers)) {
+if (member.permissions.has(PermissionFlagsBits.KickMembers)) {
 	console.log('This member can kick');
 }
 
-if (member.permissions.has([PermissionsBitField.Flags.KickMembers, PermissionsBitField.Flags.BanMembers])) {
+if (member.permissions.has([PermissionFlagsBits.KickMembers, PermissionFlagsBits.BanMembers])) {
 	console.log('This member can kick and ban');
 }
 
-if (member.permissions.has(PermissionsBitField.Flags.KickMembers, false)) {
+if (member.permissions.has(PermissionFlagsBits.KickMembers, false)) {
 	console.log('This member can kick without allowing admin to override');
 }
 ```
@@ -114,7 +114,7 @@ Any permission flags not specified get neither an explicit allow nor deny overwr
 You can also provide an array of overwrites during channel creation, as shown below:
 
 ```js
-const { ChannelType, PermissionsBitField } = require('discord.js');
+const { ChannelType, PermissionFlagsBits } = require('discord.js');
 
 guild.channels.create({
 	name: 'new-channel',
@@ -122,11 +122,11 @@ guild.channels.create({
 	permissionOverwrites: [
 		{
 			id: interaction.guild.id,
-			deny: [PermissionsBitField.Flags.ViewChannel],
+			deny: [PermissionFlagsBits.ViewChannel],
 		},
 		{
 			id: interaction.user.id,
-			allow: [PermissionsBitField.Flags.ViewChannel],
+			allow: [PermissionFlagsBits.ViewChannel],
 		},
 	],
 });
@@ -156,11 +156,11 @@ channel.permissionOverwrites.set(otherChannel.permissionOverwrites.cache);
 channel.permissionOverwrites.set([
 	{
 		id: guild.id,
-		deny: [PermissionsBitField.Flags.ViewChannel],
+		deny: [PermissionFlagsBits.ViewChannel],
 	},
 	{
 		id: user.id,
-		allow: [PermissionsBitField.Flags.ViewChannel],
+		allow: [PermissionFlagsBits.ViewChannel],
 	},
 ]);
 ```
@@ -330,7 +330,7 @@ The Permissions object enables you to easily add or remove individual permission
 ```js
 const { PermissionsBitField } = require('discord.js');
 
-const permissions = new Permissions([
+const permissions = new PermissionsBitField([
 	PermissionsBitField.Flags.ViewChannel,
 	PermissionsBitField.Flags.EmbedLinks,
 	PermissionsBitField.Flags.AttachFiles,

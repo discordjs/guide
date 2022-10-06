@@ -10,16 +10,21 @@ This page is a follow-up to the [interactions (slash commands) page](/interactio
 
 To use autocomplete with your commands, you have to set the respective option when deploying commands:
 
-```js {9}
+```js {10}
 const { SlashCommandBuilder } = require('discord.js');
 
-const data = new SlashCommandBuilder()
-	.setName('guide')
-	.setDescription('Search discordjs.guide!')
-	.addStringOption(option =>
-		option.setName('query')
-			.setDescription('Phrase to search for')
-			.setAutocomplete(true));
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('guide')
+		.setDescription('Replies with Pong!')
+        .addStringOption(option =>
+            option.setName('query')
+                .setDescription('Search discordjs.guide!')
+                .setAutocomplete(true)),
+	async execute(/* ... */) {
+		// ...
+	},
+};
 ```
 
 To use autocomplete, make sure you _don't_ add any choices to the command - we'll be providing those dynamically in the next step.

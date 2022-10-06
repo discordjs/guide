@@ -74,16 +74,21 @@ await rest.put(
 
 Application commands can have `options`. Think of these options as arguments to a function. You can specify them as shown below:
 
-```js {6-9}
+```js {7-10}
 const { SlashCommandBuilder } = require('discord.js');
 
-const data = new SlashCommandBuilder()
-	.setName('echo')
-	.setDescription('Replies with your input!')
-	.addStringOption(option =>
-		option.setName('input')
-			.setDescription('The input to echo back')
-			.setRequired(true));
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('echo')
+		.setDescription('Replies with your input!')
+        .addStringOption(option =>
+            option.setName('input')
+                .setDescription('Search discordjs.guide!')
+                .setRequired(true)),
+	async execute(/* ... */) {
+		// ...
+	},
+};
 ```
 
 Notice how `.setRequired(true)` is specified within the options builder. Setting this will prevent the user from sending the command without specifying a value for this option!
@@ -119,21 +124,26 @@ If you specify `choices` for an option, they'll be the **only** valid values use
 
 Specify them by using the `addChoices()` method from the slash command builder:
 
-```js {10-14}
+```js {11-15}
 const { SlashCommandBuilder } = require('discord.js');
 
-const data = new SlashCommandBuilder()
-	.setName('gif')
-	.setDescription('Sends a random gif!')
-	.addStringOption(option =>
-		option.setName('category')
-			.setDescription('The gif category')
-			.setRequired(true)
-			.addChoices(
-				{ name: 'Funny', value: 'gif_funny' },
-				{ name: 'Meme', value: 'gif_meme' },
-				{ name: 'Movie', value: 'gif_movie' },
-			));
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('gif')
+		.setDescription('Sends a random gif!')
+        .addStringOption(option =>
+            option.setName('category')
+                .setDescription('The gif category')
+                .setRequired(true)
+                .addChoices(
+                    { name: 'Funny', value: 'gif_funny' },
+                    { name: 'Meme', value: 'gif_meme' },
+                    { name: 'Movie', value: 'gif_movie' },
+                )),
+	async execute(/* ... */) {
+		// ...
+	},
+};
 ```
 
 If you would prefer to provide dynamic choices based on what the user is typing into the option, this can be achieved using [autocomplete](/interactions/autocomplete).
@@ -142,21 +152,26 @@ If you would prefer to provide dynamic choices based on what the user is typing 
 
 Subcommands are available with the `.addSubcommand()` method:
 
-```js {6-14}
+```js {7-15}
 const { SlashCommandBuilder } = require('discord.js');
 
-const data = new SlashCommandBuilder()
-	.setName('info')
-	.setDescription('Get info about a user or a server!')
-	.addSubcommand(subcommand =>
-		subcommand
-			.setName('user')
-			.setDescription('Info about a user')
-			.addUserOption(option => option.setName('target').setDescription('The user')))
-	.addSubcommand(subcommand =>
-		subcommand
-			.setName('server')
-			.setDescription('Info about the server'));
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('info')
+		.setDescription('Get info about a user or a server!')
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName('user')
+                .setDescription('Info about a user')
+                .addUserOption(option => option.setName('target').setDescription('The user')))
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName('server')
+                .setDescription('Info about the server')),
+	async execute(/* ... */) {
+		// ...
+	},
+};
 ```
 
 ### Localizations
@@ -164,33 +179,38 @@ const data = new SlashCommandBuilder()
 The names and descriptions of slash commands can be localized to the user's selected language. You can find the list of accepted locales on the [discord API documentation](https://discord.com/developers/docs/reference#locales).
 
 <!-- eslint-skip -->
-```js {5-8,10-12,18-25}
+```js {6-9,11-13,19-26}
 const { SlashCommandBuilder } = require('discord.js');
 
-const data = new SlashCommandBuilder()
-	.setName('dog')
-	.setNameLocalizations({
-		pl: 'pies',
-		de: 'hund',
-	})
-	.setDescription('Get a cute picture of a dog!')
-	.setDescriptionLocalizations({
-		pl: 'Słodkie zdjęcie pieska!',
-		de: 'Poste ein niedliches Hundebild!',
-	})
-	.addStringOption(option =>
-		option
-			.setName('breed')
-			.setDescription('Breed of dog')
-			.setNameLocalizations({
-				pl: 'rasa',
-				de: 'rasse',
-			})
-			.setDescriptionLocalizations({
-				pl: 'Rasa psa',
-				de: 'Hunderasse',
-			}),
-	);
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('dog')
+        .setNameLocalizations({
+            pl: 'pies',
+            de: 'hund',
+        })
+		.setDescription('Get a cute picture of a dog!')
+	    .setDescriptionLocalizations({
+            pl: 'Słodkie zdjęcie pieska!',
+            de: 'Poste ein niedliches Hundebild!',
+        })
+        .addStringOption(option =>
+            option
+                .setName('breed')
+                .setDescription('Breed of dog')
+                .setNameLocalizations({
+                    pl: 'rasa',
+                    de: 'rasse',
+                })
+                .setDescriptionLocalizations({
+                    pl: 'Rasa psa',
+                    de: 'Hunderasse',
+                }),
+        ),
+	async execute(/* ... */) {
+		// ...
+	},
+};
 ```
 
 ## Replying to slash commands
@@ -411,21 +431,26 @@ Interaction responses can use masked links (e.g. `[text](http://site.com)`) and 
 
 In this section, we'll cover how to access the values of a command's options. Let's assume you have a command that contains the following options:
 
-```js {6-14}
+```js {7-15}
 const { SlashCommandBuilder } = require('discord.js');
 
-const data = new SlashCommandBuilder()
-	.setName('questionnaire')
-	.setDescription('Asks you a series of questions!')
-	.addStringOption(option => option.setName('input').setDescription('Your name?'))
-	.addBooleanOption(option => option.setName('bool').setDescription('True or False?'))
-	.addUserOption(option => option.setName('target').setDescription('Closest friend?'))
-	.addChannelOption(option => option.setName('destination').setDescription('Favourite channel?'))
-	.addRoleOption(option => option.setName('role').setDescription('Least favourite role?'))
-	.addIntegerOption(option => option.setName('int').setDescription('Sides to a square?'))
-	.addNumberOption(option => option.setName('num').setDescription('Value of Pi?'))
-	.addMentionableOption(option => option.setName('mentionable').setDescription('Mention something!'))
-	.addAttachmentOption(option => option.setName('attachment').setDescription('Best meme?'));
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('questionnaire')
+        .setDescription('Asks you a series of questions!')
+        .addStringOption(option => option.setName('input').setDescription('Your name?'))
+        .addBooleanOption(option => option.setName('bool').setDescription('True or False?'))
+        .addUserOption(option => option.setName('target').setDescription('Closest friend?'))
+        .addChannelOption(option => option.setName('destination').setDescription('Favourite channel?'))
+        .addRoleOption(option => option.setName('role').setDescription('Least favourite role?'))
+        .addIntegerOption(option => option.setName('int').setDescription('Sides to a square?'))
+        .addNumberOption(option => option.setName('num').setDescription('Value of Pi?'))
+        .addMentionableOption(option => option.setName('mentionable').setDescription('Mention something!'))
+        .addAttachmentOption(option => option.setName('attachment').setDescription('Best meme?')),
+	async execute(/* ... */) {
+		// ...
+	},
+};
 ```
 
 You can `get()` these options from the `CommandInteractionOptionResolver` as shown below:
@@ -524,13 +549,18 @@ The slash command permissions for guilds are only defaults and can be altered by
 
 You can use the `ApplicationCommand#setDMPermission()` method to control if a global command can be used in DMs. By default, all global commands can be used in DMs.
 
-```js {6}
+```js {7}
 const { SlashCommandBuilder } = require('discord.js');
 
-const data = new SlashCommandBuilder()
-	.setName('boop')
-	.setDescription('Replies with beep!')
-	.setDMPermission(false);
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('boop')
+        .setDescription('Replies with beep!')
+        .setDMPermission(false),
+	async execute(/* ... */) {
+		// ...
+	},
+};
 ```
 
 ### Member permissions
@@ -544,12 +574,17 @@ If you want to learn more about the `|` bitwise OR operator you can check the [W
 ```js {9}
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
-const data = new SlashCommandBuilder()
-	.setName('ban')
-	.setDescription('Select a member and ban them (but not really).')
-	.addUserOption(option =>
-		option.setName('target').setDescription('The member to ban'))
-	.setDefaultMemberPermissions(PermissionFlagsBits.KickMembers | PermissionFlagsBits.BanMembers);
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('ban')
+        .setDescription('Select a member and ban them (but not really).')
+        .addUserOption(option =>
+            option.setName('target').setDescription('The member to ban'))
+        .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers | PermissionFlagsBits.BanMembers),
+	async execute(/* ... */) {
+		// ...
+	},
+};
 ```
 
 And that's all you need to know on slash command permissions!
