@@ -85,7 +85,6 @@ export default {
 		{
 			text: 'Miscellaneous',
 			children: [
-				'/miscellaneous/parsing-mention-arguments.md',
 				'/miscellaneous/useful-packages.md',
 			],
 		},
