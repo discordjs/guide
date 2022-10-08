@@ -213,7 +213,7 @@ client.once('ready', async () => {
 
 client.on('messageCreate', async message => {
 	if (message.author.bot) return;
-	currency.add(message.author.id, 1);
+	addBalance(message.author.id, 1);
 });
 
 client.on('interactionCreate', async interaction => {
@@ -234,31 +234,27 @@ Nothing special about this skeleton. You import the Users and CurrencyShop model
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 const currency = new Collection();
 
-Reflect.defineProperty(currency, 'add', {
-	value: async (id, amount) => {
-		const user = currency.get(id);
+async function addBalance(id, amount) {
+	const user = currency.get(id);
 
-		if (user) {
-			user.balance += Number(amount);
-			return user.save();
-		}
+	if (user) {
+		user.balance += Number(amount);
+		return user.save();
+	}
 
-		const newUser = await Users.create({ user_id: id, balance: amount });
-		currency.set(id, newUser);
+	const newUser = await Users.create({ user_id: id, balance: amount });
+	currency.set(id, newUser);
 
-		return newUser;
-	},
-});
+	return newUser;
+}
 
-Reflect.defineProperty(currency, 'getBalance', {
-	value: id => {
-		const user = currency.get(id);
-		return user ? user.balance : 0;
-	},
-});
+function getBalance(id) {
+	const user = currency.get(id);
+	return user ? user.balance : 0;
+}
 ```
 
-This defines an `.add()` method to our currency collection. You'll use it quite frequently, so having a method for it makes your life easier. A `.getBalance()` method is also defined, to ensure that a number is always returned.
+This defines the `addBalance()` helper function, since it'll be used quite frequently. A `getBalance()` function is also defined, to ensure that a number is always returned.
 
 ### Ready event data sync
 
@@ -284,12 +280,12 @@ client.on('interactionCreate', async interaction => {
 	if (commandName === 'balance') {
 		const target = interaction.options.getUser('user') ?? interaction.user;
 
-		return interaction.reply(`${target.tag} has ${currency.getBalance(target.id)}💰`);
+		return interaction.reply(`${target.tag} has ${getBalance(target.id)}💰`);
 	}
 });
 ```
 
-Nothing tricky here. The `.getBalance()` method is used to show either the author's or the mentioned user's balance.
+Nothing tricky here. The `getBalance()` function is used to show either the author's or the mentioned user's balance.
 
 ### Show user inventory
 
@@ -317,24 +313,24 @@ This is where you begin to see the power of associations. Even though users and 
 
 ```js {2-12}
 else if (commandName === 'transfer') {
-	const currentAmount = currency.getBalance(interaction.user.id);
+	const currentAmount = getBalance(interaction.user.id);
 	const transferAmount = interaction.options.getInteger('amount');
 	const transferTarget = interaction.options.getUser('user');
 
 	if (transferAmount > currentAmount) return interaction.reply(`Sorry ${interaction.user}, you only have ${currentAmount}.`);
 	if (transferAmount <= 0) return interaction.reply(`Please enter an amount greater than zero, ${interaction.user}.`);
 
-	currency.add(interaction.user.id, -transferAmount);
-	currency.add(transferTarget.id, transferAmount);
+	addBalance(interaction.user.id, -transferAmount);
+	addBalance(transferTarget.id, transferAmount);
 
-	return interaction.reply(`Successfully transferred ${transferAmount}💰 to ${transferTarget.tag}. Your current balance is ${currency.getBalance(interaction.user.id)}💰`);
+	return interaction.reply(`Successfully transferred ${transferAmount}💰 to ${transferTarget.tag}. Your current balance is ${getBalance(interaction.user.id)}💰`);
 }
 ```
 As a bot creator, you should always be thinking about how to make the user experience better. Good UX makes users less frustrated with your commands. If your inputs are different types, don't make them memorize which parameters come before the other.
 
 You'd ideally want to allow users to do both `!transfer 5 @user` and `!transfer @user 5`. To get the amount, you can grab the first non-mention text in the command. In the second line of the above code: split the command by spaces and look for anything that doesn't match a mention; you can assume that's the transfer amount. Then do some checking to make sure it's a valid input. You can also do error checking on the transfer target, but we won't include that here because of its triviality.
 
-`.add()` is used for both removing and adding currency. Since transfer amounts below zero are disallowed, it's safe to apply the transfer amount's additive inverse to their balance.
+`addBalance()` is used for both removing and adding currency. Since transfer amounts below zero are disallowed, it's safe to apply the transfer amount's additive inverse to their balance.
 
 ### Buying an item
 
@@ -346,12 +342,12 @@ else if (commandName === 'buy') {
 	const item = await CurrencyShop.findOne({ where: { name: { [Op.like]: itemName } } });
 
 	if (!item) return interaction.reply(`That item doesn't exist.`);
-	if (item.cost > currency.getBalance(interaction.user.id)) {
-		return interaction.reply(`You currently have ${currency.getBalance(interaction.user.id)}, but the ${item.name} costs ${item.cost}!`);
+	if (item.cost > getBalance(interaction.user.id)) {
+		return interaction.reply(`You currently have ${getBalance(interaction.user.id)}, but the ${item.name} costs ${item.cost}!`);
 	}
 
 	const user = await Users.findOne({ where: { user_id: interaction.user.id } });
-	currency.add(interaction.user.id, -item.cost);
+	addBalance(interaction.user.id, -item.cost);
 	await user.addItem(item);
 
 	return interaction.reply(`You've bought: ${item.name}.`);
