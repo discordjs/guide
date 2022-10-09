@@ -1,7 +1,7 @@
 # Cache customization
 
-Sometimes, we would like to be able to customize discord.js's caching behavior in order to reduce memory usage.
-To this end, discord.js provides us with two ways to do so:
+Sometimes, you would like to be able to customize discord.js's caching behavior in order to reduce memory usage.
+To this end, discord.js provides you with two ways to do so:
 
 1. Limiting the size of caches.
 2. Periodically removing old items from caches.
@@ -13,7 +13,7 @@ It is very easy to introduce errors if your custom cache is not working as expec
 
 ## Limiting caches
 
-When creating a new <DocsLink path="class/Client">`Client`</DocsLink>, we can limit the size of caches, which are specific to certain managers, using the `makeCache` option.
+When creating a new <DocsLink path="class/Client">`Client`</DocsLink>, you can limit the size of caches, which are specific to certain managers, using the `makeCache` option.
 Generally speaking, almost all your customizations can be done via the helper functions from the <DocsLink path="class/Options">`Options`</DocsLink> module.
 
 Below is the default settings, which will limit message caches.
@@ -26,7 +26,7 @@ const client = new Client({
 });
 ```
 
-To change the cache behaviors for a type of manager, add it on top of the default settings. For example, we can make caches for reactions limited to 0 items i.e. we won't cache reactions at all:
+To change the cache behaviors for a type of manager, add it on top of the default settings. For example, you can make caches for reactions limited to 0 items i.e. the client won't cache reactions at all:
 
 ```js
 const client = new Client({
@@ -41,7 +41,7 @@ const client = new Client({
 As noted in the documentation, customizing `GuildManager`, `ChannelManager`, `GuildChannelManager`, `RoleManager`, or `PermissionOverwriteManager` is unsupported! Functionality will break with any kind of customization.
 :::
 
-We can further customize this by passing options to <DocsLink path="class/LimitedCollection">`LimitedCollection`</DocsLink>, a special kind of collection that limits the number of items. In the example below, we made it so that:
+We can further customize this by passing options to <DocsLink path="class/LimitedCollection">`LimitedCollection`</DocsLink>, a special kind of collection that limits the number of items. In the example below, the client is configured so that:
 
 1. Only 200 guild members maximum may be cached per `GuildMemberManager` (essentially, per guild).
 2. We never remove a member if it is the client. This is especially important, so that the client can function correctly in guilds.
@@ -61,7 +61,7 @@ const client = new Client({
 
 ## Sweeping caches
 
-In addition to limiting caches, we can also periodically sweep and remove old items from caches. When creating a new <DocsLink path="class/Client">`Client`</DocsLink>, we can customize the `sweepers` option.
+In addition to limiting caches, you can also periodically sweep and remove old items from caches. When creating a new <DocsLink path="class/Client">`Client`</DocsLink>, you can customize the `sweepers` option.
 
 Below is the default settings, which will occasionally sweep threads.
 
@@ -73,7 +73,7 @@ const client = new Client({
 });
 ```
 
-To change the sweep behavior, we specify the type of cache to sweep (<DocsLink path="typedef/SweeperKey">`SweeperKey`</DocsLink>) and the options for sweeping (<DocsLink path="typedef/SweepOptions">`SweepOptions`</DocsLink>). If the type of cache has a lifetime associated with it, such as invites, messages, or threads, then we can set the `lifetime` option to sweep items older than specified. Otherwise, we can set the `filter` option for any type of cache, which will select the items to sweep.
+To change the sweep behavior, you specify the type of cache to sweep (<DocsLink path="typedef/SweeperKey">`SweeperKey`</DocsLink>) and the options for sweeping (<DocsLink path="typedef/SweepOptions">`SweepOptions`</DocsLink>). If the type of cache has a lifetime associated with it, such as invites, messages, or threads, then you can set the `lifetime` option to sweep items older than specified. Otherwise, you can set the `filter` option for any type of cache, which will select the items to sweep.
 
 ```js
 const client = new Client({
