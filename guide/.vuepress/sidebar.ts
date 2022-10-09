@@ -86,6 +86,7 @@ export default {
 			text: 'Miscellaneous',
 			children: [
 				'/miscellaneous/parsing-mention-arguments.md',
+				'/miscellaneous/cache-customization.md',
 				'/miscellaneous/useful-packages.md',
 			],
 		},
