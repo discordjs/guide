@@ -102,8 +102,12 @@ await rest.put(
 );
 ```
 
+### Where 
+
 ::: tip
-Deploying global commands does not replace guild-deployed commands. Before deploying global commands, you'll probably want to run the guild deployment script again with an empty array to clear them out and avoid duplicates.
+Guild-based deployment of commands is best suited for development and testing in your own personal server. Once you're satisfied that it's ready, deploy the command globally to publish it to all guilds that your bot is in.
+
+You may wish to have a separate application and token in the Discord Dev Portal for your dev application, to avoid duplication between your guild-based commands and the global deployment.
 :::
 
 #### Further reading
