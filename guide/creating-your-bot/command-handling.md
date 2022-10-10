@@ -1,6 +1,6 @@
 # Command handling
 
-Unless your bot project is a small one, it's not a very good idea to have a single file with a giant `if`/`else if` chain for commands. If you want to implement features into your bot and make your development process a lot less painful, you'll want to implement a command handler. Let's get started on that!
+Unless your bot project is small, it's not a very good idea to have a single file with a giant `if`/`else if` chain for commands. If you want to implement features into your bot and make your development process a lot less painful, you'll want to implement a command handler. Let's get started on that!
 
 Here are the base files and code we'll be using:
 
@@ -116,7 +116,7 @@ We recommend attaching a `.commands` property to your client instance so that yo
 
 ::: tip
 - The [`fs`](https://nodejs.org/api/fs.html) module is Node's native file system module. `fs` is used to read the `commands` directory and identify our command files.
-- The [`path`](https://nodejs.org/api/path.html) is Node's native path utility module. `path` helps construct paths to access files and directories. One of the advantages of the `path` module is that it automatically detects the operating system and uses the appropriate joiners.
+- The [`path`](https://nodejs.org/api/path.html) module is Node's native path utility module. `path` helps construct paths to access files and directories. One of the advantages of the `path` module is that it automatically detects the operating system and uses the appropriate joiners.
 - The <DocsLink section="collection" path="class/Collection" /> class extends JavaScript's native [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) class, and includes more extensive, useful functionality. `Collection` is used to store and efficiently retrieve commands for execution.
 :::
 
@@ -146,7 +146,7 @@ With the correct files identified, the last step is to loop over the array and d
 
 ## Receiving command interactions
 
-Every slash command is an `interaction`, so to respond to a command, you need to create a listener for the `interactionCreate` event that will execute code when your application receives an interaction. Place the code below in the `index.js` file we created earlier.
+Every slash command is an `interaction`, so to respond to a command, you need to create a listener for the <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> event that will execute code when your application receives an interaction. Place the code below in the `index.js` file you created earlier.
 
 ```js
 client.on('interactionCreate', interaction => {
@@ -154,7 +154,7 @@ client.on('interactionCreate', interaction => {
 });
 ```
 
-Not every interaction is a slash command (e.g. `MessageComponent` interactions). Make sure to only handle slash commands in this function by making use of the `BaseInteraction#isChatInputCommand()` method to exit the handler if another type is encountered:
+Not every interaction is a slash command (e.g. `MessageComponent` interactions). Make sure to only handle slash commands in this function by making use of the <DocsLink path="class/BaseInteraction?scrollTo=isChatInputCommand" /> method to exit the handler if another type is encountered:
 
 ```js {2}
 client.on('interactionCreate', interaction => {
@@ -169,7 +169,7 @@ client.on('interactionCreate', interaction => {
 This section assumes you're using the `client.commands` convention from the [loading commands](/creating-your-bot/loading-commands.md) page of this guide. Please carefully read that page first so that you can understand the methods used in this section.
 :::
 
-When your bot receives an `interactionCreate` event, the interaction object contains all the information you need to dynamically retrieve and execute your commands!
+When your bot receives a <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> event, the interaction object contains all the information you need to dynamically retrieve and execute your commands!
 
 Let's take a look at the `ping` command again. Note the `execute()` function that will reply to the interaction with "Pong!".
 
