@@ -17,7 +17,7 @@ const { token } = require('./config.json');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 // When the client is ready, run this code (only once)
-// We use 'c' for the event parameter to keep it separate from the 'client' already defined
+// We use 'c' for the event parameter to keep it separate from the already defined 'client'
 client.once('ready', c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
 });

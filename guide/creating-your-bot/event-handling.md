@@ -2,7 +2,7 @@
 
 Node.js uses an event-driven architecture, making it possible to execute code when a specific event occurs. The discord.js library takes full advantage of this. You can visit the <DocsLink path="class/Client" /> documentation to see the full list of events.
 
-If you've followed the guide up to this point, your `index.js` file will have listeners for two events; `ready` and `interactionCreate`:
+If you've followed the guide up to this point, your `index.js` file will have listeners for two events: `ready` and `interactionCreate`.
 
 ```js
 const { Client, GatewayIntentBits } = require('discord.js');
@@ -92,7 +92,7 @@ module.exports = {
 :::
 ::::
 
-The `name` property states which event this file is for, and the `once` property is a boolean that specifies if the event should run only once. We don't need to specify this in `interactionCreate.js` as the default behaviour will be to run on every event. The `execute` function is for your event logic, which will be called by the event handler whenever the event emits.
+The `name` property states which event this file is for, and the `once` property holds a boolean value that specifies if the event should run only once. You don't need to specify this in `interactionCreate.js` as the default behavior will be to run on every event instance. The `execute` function holds your event logic, which will be called by the event handler whenever the event emits.
 
 ## Reading event files
 

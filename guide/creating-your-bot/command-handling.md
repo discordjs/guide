@@ -117,10 +117,10 @@ We recommend attaching a `.commands` property to your client instance so that yo
 ::: tip
 - The [`fs`](https://nodejs.org/api/fs.html) module is Node's native file system module. `fs` is used to read the `commands` directory and identify our command files.
 - The [`path`](https://nodejs.org/api/path.html) is Node's native path utility module. `path` helps construct paths to access files and directories. One of the advantages of the `path` module is that it automatically detects the operating system and uses the appropriate joiners.
-- The <DocsLink section="collection" path="class/Collection" /> class extends JavaScript's native [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) class, and includes more extensive, useful functionality. `Collection` is used to store and efficiently retrieve our commands for execution.
+- The <DocsLink section="collection" path="class/Collection" /> class extends JavaScript's native [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) class, and includes more extensive, useful functionality. `Collection` is used to store and efficiently retrieve commands for execution.
 :::
 
-Next, using the modules imported above, dynamically retrieve your command files with a few more additions to our `index.js` file:
+Next, using the modules imported above, dynamically retrieve your command files with a few more additions to the `index.js` file:
 
 ```js {3-15}
 client.commands = new Collection();
@@ -154,7 +154,7 @@ client.on('interactionCreate', interaction => {
 });
 ```
 
-However, not every interaction is a slash command (e.g. `MessageComponent` interactions). Make sure to only handle slash commands in this function by making use of the `BaseInteraction#isChatInputCommand()` method to exit the handler if another type is encountered:
+Not every interaction is a slash command (e.g. `MessageComponent` interactions). Make sure to only handle slash commands in this function by making use of the `BaseInteraction#isChatInputCommand()` method to exit the handler if another type is encountered:
 
 ```js {2}
 client.on('interactionCreate', interaction => {
@@ -171,7 +171,7 @@ This section assumes you're using the `client.commands` convention from the [loa
 
 When your bot receives an `interactionCreate` event, the interaction object contains all the information you need to dynamically retrieve and execute your commands!
 
-Let's take a look at our `ping` command. Note the `execute` method that will reply to the interaction with "Pong!".
+Let's take a look at the `ping` command again. Note the `execute()` function that will reply to the interaction with "Pong!".
 
 ```js
 module.exports = {

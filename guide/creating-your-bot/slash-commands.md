@@ -55,7 +55,7 @@ new SlashCommandBuilder()
 	.setDescription('Replies with Pong!');
 ```
 
-A slash command also requires a function to be run when the command is used, to respond to the interaction. Using an interaction response method confirms to Discord that your bot successfully received the interaction, and has responded to the user. Discord enforces this to ensure that all slash commands provide a good user experience (UX). Failing to respond will cause Discord to show that the command failed, even if your bot is performing other actions as a result.
+A slash command also requires a function to run when the command is used, to respond to the interaction. Using an interaction response method confirms to Discord that your bot successfully received the interaction, and has responded to the user. Discord enforces this to ensure that all slash commands provide a good user experience (UX). Failing to respond will cause Discord to show that the command failed, even if your bot is performing other actions as a result.
 
 The simplest way to acknowledge and respond to an interaction is the `interaction.reply()` method. Other methods of replying are covered on the [Response methods](/slash-commands/response-methods.md) page later in this section.
 
@@ -96,7 +96,7 @@ module.exports = {
 If you need to access your client instance from inside a command file, you can access it via `interaction.client`. If you need to access external files, packages, etc., you should `require()` them at the top of the file.
 :::
 
-That's it for your basic ping command. Below are examples of two more commands we're going to build upon throughout the guide, so create two more files for these before we continue.
+That's it for your basic ping command. Below are examples of two more commands we're going to build upon throughout the guide, so create two more files for these before you continue reading.
 
 :::: code-group
 ::: code-group-item commands/user.js
@@ -134,7 +134,7 @@ module.exports = {
 
 #### Next steps
 
-You can make additional commands by creating additional files in the `commands` folder, but these three are the ones we're going to use for the examples as we go on. For now let's move on to the code you'll need for command handling, to load the files and respond to incoming interactions.
+You can implement additional commands by creating additional files in the `commands` folder, but these three are the ones we're going to use for the examples as we go on. For now let's move on to the code you'll need for command handling, to load the files and respond to incoming interactions.
 
 #### Resulting code
 
