@@ -270,6 +270,6 @@ There are a few limits to be aware of while planning your embeds due to the API'
 - The footer text is limited to 2048 characters
 - The author name is limited to 256 characters
 - The sum of all characters from all embed structures in a message must not exceed 6000 characters
-- Ten embeds can be sent per message
+- 10 embeds can be sent per message
 
 Source: [Discord API documentation](https://discord.com/developers/docs/resources/channel#embed-object-embed-limits)
