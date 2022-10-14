@@ -2,7 +2,7 @@
 
 There are multiple ways of responding to a slash command; each of these are covered in the following segments. Using an interaction response method confirms to Discord that your bot successfully received the interaction, and has responded to the user. Discord enforces this to ensure that all slash commands provide a good user experience (UX). Failing to respond will cause Discord to show that the command failed, even if your bot is performing other actions as a result.
 
-The most common way of sending a response is by using the `ChatInputCommandInteraction#reply()` method, as we've used in the examples so far. The method acknowledges the interaction and sends a new message in response.
+The most common way of sending a response is by using the `ChatInputCommandInteraction#reply()` method, as you have done in earlier examples. This method acknowledges the interaction and sends a new message in response.
 
 ```js {6}
 module.exports = {
@@ -30,7 +30,7 @@ Initially an interaction token is only valid for three seconds, so that's the ti
 
 ## Ephemeral responses
 
-You may not always want everyone who has access to the channel to see a slash command's response. Previously, you would have had to DM the user to achieve this, potentially encountering the high rate limits associated with DM messages, or simplying being unable to if the user's DMs are disabled. 
+You may not always want everyone who has access to the channel to see a slash command's response. Previously, you would have had to DM the user to achieve this, potentially encountering the high rate limits associated with DM messages, or simply being unable to do so, if the user's DMs were disabled. 
 
 Thankfully, Discord provides a way to hide resposne messages from everyone but the executor of the slash command. This type of message is called an `ephemeral` message and can be set by providing `ephemeral: true` in the `InteractionReplyOptions`, as follows:
 
@@ -59,7 +59,7 @@ Now when you run your command again, you should see something like this:
 	</DiscordMessage>
 </DiscordMessages>
 
-Ephemeral responses are *only* available for interaction responses; another great reason to switch across to the new and improved features.
+Ephemeral responses are *only* available for interaction responses; another great reason to use the new and improved slash command user interface.
 
 ## Editing responses
 
@@ -89,7 +89,7 @@ In fact, editing your interaction response is necessary to [calculate the ping](
 
 As previously mentioned, Discord requires an acknowledgement from your bot within three seconds that the interaction was received. Otherwise, Discord considers the interaction to have failed and the token becomes invalid. But what if you have a command that performs a task which takes longer than three seconds before being able to reply?
 
-In this case, you can make use of the `ChatInputCommandInteraction#deferReply()` method, which triggers the `<application> is thinking...` message. This also acts as the initial response, to confirm to Discord that the interaction was received successfully. This allows you 15 minutes to complete your tasks before responding.
+In this case, you can make use of the `ChatInputCommandInteraction#deferReply()` method, which triggers the `<application> is thinking...` message. This also acts as the initial response, to confirm to Discord that the interaction was received successfully and gives you a 15-minute timeframe to complete your tasks before responding.
 <!--- here either display the is thinking message via vue-discord-message or place a screenshot -->
 
 ```js {7-9}

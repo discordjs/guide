@@ -1,18 +1,18 @@
 # Slash command permissions
 
-Slash commands have their own permissions system. This system allows you to set the default level of permissions required for a user to to execute a command when its first deployed or your bot is added to a new server.
+Slash commands have their own permissions system. This system allows you to set the default level of permissions required for a user to execute a command when it is first deployed or your bot is added to a new server.
 
 The slash command permissions for guilds are defaults only and can be altered by guild administrators, allowing them to configure access however best suits their moderation and server roles. Your code should not try to enforce its own permission management, as this can result in a conflict between the server-configured permissions and your bot's code.
 
 ::: warning
-It is not possible to prevent users with Administrator permissions from using any commands deployed to their guild. Think twice before creating "dev-only" commands such as an `eval`.
+It is not possible to prevent users with Administrator permissions from using any commands deployed globally or specifically to their guild. Think twice before creating "dev-only" commands such as `eval`.
 :::
 
 ## Member permissions
 
 You can use <DocsLink section="builders" path="class/SlashCommandBuilder?scrollTo=setDefaultMemberPermissions" type="method" /> to set the default permissions required for a member to run the command. Setting it to `0` will prohibit anyone in a guild from using the command unless a specific overwrite is configured or the user has the Administrator permission flag.
 
-For this, we'll look at two common moderation commands, `ban` and `kick`. For a ban command, a sensible default is to ensure that users already have the Discord permission `BanMembers` in order to execute this command.
+For this, we'll introduce two common and simple moderation commands: `ban` and `kick`. For a ban command, a sensible default is to ensure that users already have the Discord permission `BanMembers` in order to use it.
 
 ```js {9}
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
@@ -54,7 +54,7 @@ In reality, you'll probably want to have an additional confirmation step before 
 
 By default, globally-deployed commands are also available for use in DMs. You can use <DocsLink section="builders" path="class/SlashCommandBuilder?scrollTo=setDMPermission" type="method" /> to disable this behaviour. Commands deployed to specific guilds are not available in DMs.
 
-It wouldn't make much sense for our `ban` command to be available in DMs, so we'll `setDMPermission(false)` to remove it.
+It doesn't make much sense for your `ban` command to be available in DMs, so you can add `setDMPermission(false)` to the builder to remove it:
 
 ```js {6}
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');

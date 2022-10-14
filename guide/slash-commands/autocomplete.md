@@ -61,7 +61,7 @@ Unlike static choices, autocompletion suggestions are *not* enforced, and users 
 
 The <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" /> method returns the currently focused option's value, which can be used to applying filtering to the choices presented. For example, to only display options starting with the focused value you can use the `Array#filter()` method, then using `Array#map()`, you can transform the array into an array of <DocsLink path="typedef/ApplicationCommandOptionChoiceData" /> objects.
 
-The example below shows how this might be applied to a conceptual version of our `guide` command to determine the closest topic to the search input:
+The example below shows how this might be applied to a conceptual version of the `guide` command to determine the closest topic to the search input:
 
 ```js {4-11}
 client.on('interactionCreate', async interaction => {
@@ -123,5 +123,5 @@ However, the `.getUser()`, `.getMember()`, `.getRole()`, `.getChannel()`, `.getM
 
 - As with other application command interactions, autocomplete interactions must receive a response within 3 seconds. 
 - You cannot defer the response to an autocomplete interaction. If you're dealing with asynchronous suggestions, such as from an API, consider keeping a local cache.
-- After the user selects a value and sends the command, it will be received as a normal <DocsLink path="class/ChatInputCommandInteraction"/> with the chosen value.
-- You can only respond with a maximum of 25 choices at a time, though any more than this likely means you should revise your filter to narrow the selections further.
+- After the user selects a value and sends the command, it will be received as a regular <DocsLink path="class/ChatInputCommandInteraction"/> with the chosen value.
+- You can only respond with a maximum of 25 choices at a time, though any more than this likely means you should revise your filter to further narrow the selections.
