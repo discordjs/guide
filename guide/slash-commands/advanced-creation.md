@@ -10,7 +10,7 @@ Application commands can have additional `options`. Think of these options as ar
 If you've already added options to your commands and need to know how to receive and parse them, refer to the [Parsing options](/slash-commands/parsing-options.md) page in this section of the guide.
 :::
 
-Options require at minimum a name and description. You can specify them as shown in the `echo` command below, which prompt the user to enter a String for the `input` option.
+Options require at minimum a name and description. The same restrictions apply to option names as slash command names - 1-32 characters containing no capital letters, spaces, or symbols other than `-` and `_`. You can specify them as shown in the `echo` command below, which prompt the user to enter a String for the `input` option.
 
 ```js {6-8}
 const { SlashCommandBuilder } = require('discord.js');
@@ -25,7 +25,7 @@ const data = new SlashCommandBuilder()
 
 ## Option types
 
-By specifying the `type` of an `ApplicationCommandOption` by using the corresponding method you are able to restrict what the user can provide as input, and for some options, leverage the automatic parsing of options into proper objects by Discord. 
+By specifying the `type` of an `ApplicationCommandOption` using the corresponding method you are able to restrict what the user can provide as input, and for some options, leverage the automatic parsing of options into proper objects by Discord. 
 
 The example above uses `addStringOption`, the simplest form of standard text input with no additional validation. By leveraging additional option types, you could change the behavior of this command in many ways, such as using a Channel option to direct the response to a specific channel:
 
@@ -62,6 +62,8 @@ const data = new SlashCommandBuilder()
 Listed below is a short description of the different types of options that can be added. For more information, refer to the `add_____Option` methods in the <DocsLink section="builders" path="class/SlashCommandBuilder" /> documentation.
 
 * `String`, `Integer`, `Number` and `Boolean` options all accept primitive values of their associated type.
+  * `Integer` only accepts whole numbers.
+  * `Number` accepts btoh whole numbers and decimals.
 * `User`, `Channel`, `Role` and `Mentionable` options will show a selection list in the Discord interface for their associated type, or will accept a Snowflake (id) as input.
 * `Attachment` options prompt the user to make an upload along with the slash command.
 * `Subcommand` and `SubcommandGroup` options allow you to have branching pathways of subsequent options for your commands - more on that later on this page.

@@ -83,7 +83,7 @@ client.on('interactionCreate', async interaction => {
 });
 ```
 
-In fact, editing your interaction response is necessary to [calculate the ping](popular-topics/faq#how-do-i-check-the-bot-s-ping) properly for this command.
+In fact, editing your interaction response is necessary to [calculate the ping](/popular-topics/faq.html#how-do-i-check-the-bot-s-ping) properly for this command.
 
 ## Deferred responses
 
@@ -186,12 +186,12 @@ Note that if you use `followUp()` after a `deferReply()`, the first follow-up wi
 That's all, now you know everything there is to know on how to reply to slash commands! 
 
 ::: tip
-Interaction responses can use masked links (e.g. `[text](http://site.com)`) and global emojis in the message content.
+Interaction responses can use masked links (e.g. `[text](http://site.com)`) in the message content.
 :::
 
 ## Fetching and deleting responses
 
-::: danger
+::: warning
 You _cannot_ delete an ephemeral message.
 :::
 

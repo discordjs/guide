@@ -14,7 +14,7 @@ You can use <DocsLink section="builders" path="class/SlashCommandBuilder?scrollT
 
 For this, we'll introduce two common and simple moderation commands: `ban` and `kick`. For a ban command, a sensible default is to ensure that users already have the Discord permission `BanMembers` in order to use it.
 
-```js {9}
+```js {11}
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
 const data = new SlashCommandBuilder()
@@ -34,7 +34,7 @@ For a kick command however, we can allow members with either `BanMembers` or `Ki
 If you want to learn more about the `|` bitwise OR operator you can check the [Wikipedia](https://en.wikipedia.org/wiki/Bitwise_operation#OR) and [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_OR) articles on the topic.
 :::
 
-```js {9}
+```js {11}
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
 const data = new SlashCommandBuilder()
@@ -56,7 +56,7 @@ By default, globally-deployed commands are also available for use in DMs. You ca
 
 It doesn't make much sense for your `ban` command to be available in DMs, so you can add `setDMPermission(false)` to the builder to remove it:
 
-```js {6}
+```js {11-12}
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
 const data = new SlashCommandBuilder()

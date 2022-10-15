@@ -4,7 +4,7 @@
 
 In this section, we'll cover how to access the values of a command's options. Consider the following `ban` command example with two options:
 
-```js {6-14}
+```js {7-15}
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
 module.exports = {
@@ -34,7 +34,7 @@ module.exports = {
 		const target = interaction.options.getUser('target');
 		const reason = interaction.options.getString('reason') ?? 'No reason provided';
 
-		await interaction.reply(`Banning ${targetUser.username} for reason: ${reason}`);
+		await interaction.reply(`Banning ${target.username} for reason: ${reason}`);
 		await interaction.guild.members.ban(target);
 	},
 };

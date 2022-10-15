@@ -3,7 +3,7 @@
 Autocomplete allows you to dynamically provide a selection of values to the user, based on their input, rather than relying on static choices. In this section we will cover how to add autocomplete support to your commands.
 
 ::: tip
-This page is a follow-up to the [slash commands page](/slash-commands/advanced-creation.md) covering options and option choices. Please carefully read those first so that you can understand the methods used in this section.
+This page is a follow-up to the [slash commands](/slash-commands/advanced-creation.md) section covering options and option choices. Please carefully read those pages first so that you can understand the methods used in this section.
 :::
 
 ## Enabling autocomplete
@@ -28,7 +28,7 @@ To handle an <DocsLink path="class/AutocompleteInteraction"/>, use the <DocsLink
 
 <!-- eslint-skip -->
 
-```js {1,4}
+```js
 client.on('interactionCreate', interaction => {
 	if (!interaction.isAutocomplete()) return;
 	// do autocomplete handling
@@ -82,7 +82,7 @@ client.on('interactionCreate', async interaction => {
 
 To distinguish between multiple options, you can pass `true` into <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused"/>, which will now return the full focused object instead of just the value. This is used to get the name of the focused option below, allowing for multiple options to each have their own set of suggestions:
 
-```js {5-6,8-10,12-14,16}
+```js {5-16}
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isAutocomplete()) return;
 

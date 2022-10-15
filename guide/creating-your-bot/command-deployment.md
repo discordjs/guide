@@ -102,7 +102,7 @@ await rest.put(
 );
 ```
 
-### Where 
+### Where to deploy
 
 ::: tip
 Guild-based deployment of commands is best suited for development and testing in your own personal server. Once you're satisfied that it's ready, deploy the command globally to publish it to all guilds that your bot is in.
