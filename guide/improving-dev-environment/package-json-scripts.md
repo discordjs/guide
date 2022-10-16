@@ -46,8 +46,8 @@ yarn init -y
   <CodeGroupItem title="pnpm">
 
 ```sh:no-line-numbers
-pnpm init -y
-```  
+pnpm init
+```
 
   </CodeGroupItem>
 </CodeGroup>
