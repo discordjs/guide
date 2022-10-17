@@ -7,16 +7,16 @@ Here are the base files and code we'll be using:
 :::: code-group
 ::: code-group-item index.js
 ```js
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, GatewayIntentBits, Events } = require('discord.js');
 const { token } = require('./config.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.once('ready', () => {
+client.once(Events.ClientReady, () => {
 	console.log('Ready!');
 });
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
@@ -149,7 +149,9 @@ With the correct files identified, the last step is to loop over the array and d
 Every slash command is an `interaction`, so to respond to a command, you need to create a listener for the <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> event that will execute code when your application receives an interaction. Place the code below in the `index.js` file you created earlier.
 
 ```js
-client.on('interactionCreate', interaction => {
+const { Events } = require('discord.js');
+
+client.on(Events.InteractionCreate, interaction => {
 	console.log(interaction);
 });
 ```
@@ -157,7 +159,7 @@ client.on('interactionCreate', interaction => {
 Not every interaction is a slash command (e.g. `MessageComponent` interactions). Make sure to only handle slash commands in this function by making use of the <DocsLink path="class/BaseInteraction?scrollTo=isChatInputCommand" /> method to exit the handler if another type is encountered:
 
 ```js {2}
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	if (!interaction.isChatInputCommand()) return;
 	console.log(interaction);
 });
@@ -189,7 +191,7 @@ First, you need to get the matching command from the `client.commands` Collectio
 With the right command identified, all that's left to do is call the command's `.execute()` method and pass in the `interaction` variable as its argument. In case something goes wrong, catch and log any error to the console.
 
 ```js {4-16}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const command = interaction.client.commands.get(interaction.commandName);
