@@ -90,7 +90,7 @@ In fact, editing your interaction response is necessary to [calculate the ping](
 As previously mentioned, Discord requires an acknowledgement from your bot within three seconds that the interaction was received. Otherwise, Discord considers the interaction to have failed and the token becomes invalid. But what if you have a command that performs a task which takes longer than three seconds before being able to reply?
 
 In this case, you can make use of the `ChatInputCommandInteraction#deferReply()` method, which triggers the `<application> is thinking...` message. This also acts as the initial response, to confirm to Discord that the interaction was received successfully and gives you a 15-minute timeframe to complete your tasks before responding.
-<!--- here either display the is thinking message via vue-discord-message or place a screenshot -->
+<!--- TODO: Thinking... message, once available in components -->
 
 ```js {7-9}
 const wait = require('node:timers/promises').setTimeout;
