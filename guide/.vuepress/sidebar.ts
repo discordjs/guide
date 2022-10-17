@@ -46,22 +46,32 @@ export default {
 			text: 'Creating Your Bot',
 			children: [
 				'/creating-your-bot/',
-				'/creating-your-bot/creating-commands.md',
-				'/creating-your-bot/deleting-commands.md',
-				'/creating-your-bot/command-handling/',
-				'/creating-your-bot/event-handling/',
+				'/creating-your-bot/main-file.md',
+				'/creating-your-bot/slash-commands.md',
+				'/creating-your-bot/command-handling.md',
+				'/creating-your-bot/command-deployment.md',
+				'/creating-your-bot/event-handling.md',
 			],
+		},
+		{
+			text: 'Slash Commands',
+			children: [
+				'/slash-commands/response-methods.md',
+				'/slash-commands/advanced-creation.md',
+				'/slash-commands/parsing-options.md',
+				'/slash-commands/permissions.md',
+				'/slash-commands/autocomplete.md',
+				'/slash-commands/deleting-commands.md'
+			]
 		},
 		{
 			text: 'Interactions',
 			children: [
-				'/interactions/slash-commands.md',
 				'/interactions/buttons.md',
 				'/interactions/select-menus.md',
-				'/interactions/autocomplete.md',
 				'/interactions/modals.md',
 				'/interactions/context-menus.md',
-			],
+			]
 		},
 		{
 			text: 'Popular Topics',

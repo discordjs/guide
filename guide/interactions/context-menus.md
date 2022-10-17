@@ -3,7 +3,7 @@
 Context Menus are application commands which appear when right clicking or tapping a user or a message, in the Apps submenu.
 
 ::: tip
-This page is a follow-up to the [interactions (slash commands) page](/interactions/slash-commands.md). Please carefully read that section first, so that you can understand the methods used in this section.
+This page is a follow-up to the [slash commands](/slash-commands/advanced-creation.md) section. Please carefully read those pages first so that you can understand the methods used in this section.
 :::
 
 ## Registering context menu commands
