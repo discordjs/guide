@@ -17,9 +17,9 @@ You can have a maximum of five <DocsLink path="class/ActionRowBuilder" />s per m
 To create a modal you construct a new <DocsLink path="class/ModalBuilder" />. You can then use the setters to add the custom id and title.
 
 ```js {1,7-13}
-const { ModalBuilder } = require('discord.js');
+const { Events, ModalBuilder } = require('discord.js');
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -49,9 +49,9 @@ If you're using typescript you'll need to specify the type of components your ac
 :::
 
 ```js {1,12-34}
-const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
+const { ActionRowBuilder, Events, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -134,8 +134,10 @@ For a detailed guide on receiving message components via collectors, please refe
 
 To receive a <DocsLink path="class/ModalSubmitInteraction"/> event, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate"/> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isModalSubmit"/> type guard to make sure you only receive modals:
 
-```js {1,4}
-client.on('interactionCreate', interaction => {
+```js {2,5}
+const { Events } = require('discord.js');
+
+client.on(Events.InteractionCreate, interaction => {
 	if (!interaction.isModalSubmit()) return;
 	console.log(interaction);
 });
@@ -156,7 +158,7 @@ If the modal was shown from a <DocsLink path="class/ButtonInteraction"/> or <Doc
 - `deferUpdate()`
 
 ```js{1,3-5}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isModalSubmit()) return;
 	if (interaction.customId === 'myModal') {
 		await interaction.reply({ content: 'Your submission was received successfully!' });
@@ -173,7 +175,7 @@ If you're using typescript, you can use the <DocsLink path="class/ModalSubmitInt
 You'll most likely need to read the data sent by the user in the modal. You can do this by accessing the <DocsLink path="class/ModalSubmitInteraction?scrollTo=fields"/>. From there you can call <DocsLink path="class/ModalSubmitFields?scrollTo=getTextInputValue"/> with the custom id of the text input to get the value.
 
 ```js{5-7}
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	if (!interaction.isModalSubmit()) return;
 
 	// Get the data entered by the user

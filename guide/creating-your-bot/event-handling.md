@@ -5,16 +5,16 @@ Node.js uses an event-driven architecture, making it possible to execute code wh
 If you've followed the guide up to this point, your `index.js` file will have listeners for two events: `ready` and `interactionCreate`.
 
 ```js
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, Events, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.once('ready', c => {
+client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const command = interaction.client.commands.get(interaction.commandName);
@@ -57,8 +57,10 @@ Create an `events` folder in the same directory. You can then take your existing
 :::: code-group
 ::: code-group-item events/ready.js
 ```js
+const { Events } = require('discord.js');
+
 module.exports = {
-	name: 'ready',
+	name: Events.ClientReady,
 	once: true,
 	execute(client) {
 		console.log(`Ready! Logged in as ${client.user.tag}`);
@@ -68,8 +70,10 @@ module.exports = {
 :::
 ::: code-group-item events/interactionCreate.js
 ```js
+const { Events } = require('discord.js');
+
 module.exports = {
-	name: 'interactionCreate',
+	name: Events.InteractionCreate,
 	async execute(interaction) {
 		if (!interaction.isChatInputCommand()) return;
 

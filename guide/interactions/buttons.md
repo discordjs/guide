@@ -17,9 +17,9 @@ You can have a maximum of five `ActionRow`s per message, and five buttons within
 To create your buttons, use the <DocsLink path="class/ActionRowBuilder"/> and <DocsLink path="class/ButtonBuilder"/> classes. Then, pass the resulting row object to <DocsLink path="class/ChatInputCommandInteraction?scrollTo=reply" /> in the `components` array of <DocsLink path="typedef/InteractionReplyOptions" />:
 
 ```js {1,7-13,15}
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, Events } = require('discord.js');
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'button') {
@@ -59,9 +59,9 @@ Restart your bot and then send the command to a channel your bot has access to. 
 You can also send message components within an ephemeral response or alongside message embeds.
 
 ```js {1,12-16,18}
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, Events } = require('discord.js');
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'button') {
@@ -173,8 +173,10 @@ For a detailed guide on receiving message components via collectors, please refe
 
 To receive a <DocsLink path="class/ButtonInteraction"/> event, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate"/> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isButton"/> type guard to make sure you only receive buttons:
 
-```js {2}
-client.on('interactionCreate', interaction => {
+```js {4}
+const { Events } = require('discord.js');
+
+client.on(Events.InteractionCreate, interaction => {
 	if (!interaction.isButton()) return;
 	console.log(interaction);
 });

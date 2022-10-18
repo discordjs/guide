@@ -25,7 +25,9 @@ At the time of writing, Discord does not emit an audit log if the person who del
 For now, we'll focus on the `messageDelete` event.
 
 ```js
-client.on('messageDelete', message => {
+const { Events } = require('discord.js');
+
+client.on(Events.MessageDelete, message => {
 	console.log(`A message by ${message.author.tag} was deleted, but we don't know by who yet.`);
 });
 ```
@@ -37,9 +39,9 @@ For simplicity, set a fetch limit of 1 and accept only the `MessageDelete` type.
 Placing this into the previous code, you get the following. Note that this also makes the function async to make use of `await`. In addition, make sure to ignore DMs.
 
 ```js {2-9,11-12,14-16,18-25}
-const { AuditLogEvent } = require('discord.js');
+const { AuditLogEvent, Events } = require('discord.js');
 
-client.on('messageDelete', async message => {
+client.on(Events.MessageDelete, async message => {
 	// Ignore direct messages
 	if (!message.guild) return;
 	const fetchedLogs = await message.guild.fetchAuditLogs({
@@ -73,7 +75,9 @@ With this, you now have a very simple logger telling you who deleted a message a
 Similar to the `messageDelete` case, let's look at the `guildMemberRemove` event.
 
 ```js
-client.on('guildMemberRemove', member => {
+const { Events } = require('discord.js');
+
+client.on(Events.GuildMemberRemove, member => {
 	console.log(`${member.user.tag} left the guild... but was it of their own free will?`);
 });
 ```
@@ -81,7 +85,7 @@ client.on('guildMemberRemove', member => {
 The same as before: set the fetch limit to 1 and accept only the `MemberKick` type.
 
 ```js {2-7,9-10,12-14,16-22}
-client.on('guildMemberRemove', async member => {
+client.on(Events.GuildMemberRemove, async member => {
 	const fetchedLogs = await member.guild.fetchAuditLogs({
 		limit: 1,
 		type: AuditLogEvent.MemberKick,
@@ -111,7 +115,9 @@ client.on('guildMemberRemove', async member => {
 The logic for this will be very similar to the above kick example, except that this time, the `guildBanAdd` event will be used.
 
 ```js
-client.on('guildBanAdd', async ban => {
+const { Events } = require('discord.js');
+
+client.on(Events.GuildBanAdd, async ban => {
 	console.log(`${ban.user.tag} got hit with the swift hammer of justice in the guild ${ban.guild.name}.`);
 });
 ```
@@ -119,7 +125,7 @@ client.on('guildBanAdd', async ban => {
 As was the case in the previous examples, you can see what happened, to whom it happened, but not who executed the action. Enter once again audit logs fetching limited to 1 entry and only the `MemberBanAdd` type. The `guildBanAdd` listener then becomes:
 
 ```js {2-7,9-10,12-14,16-22}
-client.on('guildBanAdd', async ban => {
+client.on(Events.GuildBanAdd, async ban => {
 	const fetchedLogs = await ban.guild.fetchAuditLogs({
 		limit: 1,
 		type: AuditLogEvent.MemberBanAdd,

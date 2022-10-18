@@ -19,17 +19,17 @@ One of the first things many people want to know is how to react with emojis, bo
 Here's the base code we'll be using:
 
 ```js
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, Events, GatewayIntentBits } = require('discord.js');
 
 const client = new Client({
 	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMessageReactions],
 });
 
-client.once('ready', () => {
+client.once(Events.ClientReady, () => {
 	console.log('Ready!');
 });
 
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	// ...
 });
 
@@ -54,7 +54,7 @@ To react with a Unicode emoji, you will need the actual Unicode character of the
 To react with an emoji, you need to use the `message.react()` method. Once you have the emoji character, all you need to do is copy & paste it as a string inside the `.react()` method!
 
 ```js {6-9}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
@@ -101,7 +101,7 @@ For custom emojis, there are multiple ways of reacting. Like Unicode emojis, you
 This format is essentially the name of the emoji, followed by its ID. Copy & paste the ID into the `.react()` method as a string.
 
 ```js {6-9}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
@@ -183,7 +183,7 @@ Of course, if you already have the emoji ID, you should put that directly inside
 If you just put one `message.react()` under another, it won't always react in order as-is. This is because `.react()` is a Promise and an asynchronous operation.
 
 ```js {6-12}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
@@ -254,7 +254,7 @@ As you can see, if you leave it like that, it won't display as you want. It was 
 Luckily, there are two easy solutions to this. The first would be to chain `.then()`s in the order you want it to display.
 
 ```js {8-11}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
@@ -272,7 +272,7 @@ client.on('interactionCreate', async interaction => {
 The other would be to use the `async`/`await` keywords.
 
 ```js {9-15}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
@@ -458,14 +458,14 @@ If you use [gateway intents](/popular-topics/intents.md) but can't or don't want
 :::
 
 ```js
-const { Client, GatewayIntentBits, Partials } = require('discord.js');
+const { Client, Events, GatewayIntentBits, Partials } = require('discord.js');
 
 const client = new Client({
 	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMessageReactions],
 	partials: [Partials.Message, Partials.Channel, Partials.Reaction],
 });
 
-client.on('messageReactionAdd', async (reaction, user) => {
+client.on(Events.MessageReactionAdd, async (reaction, user) => {
 	// When a reaction is received, check if the structure is partial
 	if (reaction.partial) {
 		// If the message this reaction belongs to was removed, the fetching might result in an API error which should be handled

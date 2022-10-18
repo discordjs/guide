@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { Collection, Client, Formatters, GatewayIntentBits } = require('discord.js');
+const { Collection, Client, Events, Formatters, GatewayIntentBits } = require('discord.js');
 const { Users, CurrencyShop } = require('./dbObjects.js');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
@@ -29,19 +29,19 @@ function getBalance(id) {
 	return user ? user.balance : 0;
 }
 
-client.once('ready', async () => {
+client.once(Events.ClientReady, async () => {
 	const storedBalances = await Users.findAll();
 	storedBalances.forEach(b => currency.set(b.user_id, b));
 
 	console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('messageCreate', async message => {
+client.on(Events.MessageCreate, async message => {
 	if (message.author.bot) return;
 	addBalance(message.author.id, 1);
 });
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;

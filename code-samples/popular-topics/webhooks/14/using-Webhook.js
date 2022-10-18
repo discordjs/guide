@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits, EmbedBuilder } = require('discord.js');
+const { Client, Events, GatewayIntentBits, EmbedBuilder } = require('discord.js');
 const { token } = require('./config.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -7,7 +7,7 @@ const embed = new EmbedBuilder()
 	.setTitle('Some Title')
 	.setColor(0x00FFFF);
 
-client.once('ready', async () => {
+client.once(Events.ClientReady, async () => {
 	const channel = client.channels.cache.get('222197033908436994');
 	try {
 		const webhooks = await channel.fetchWebhooks();
