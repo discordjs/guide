@@ -50,13 +50,42 @@ If you want the Snowflake of a structure instead, grab the option via `get()` an
 
 In the same way as the above examples, you can get values of any type using the corresponding `CommandInteractionOptionResolver#get_____()` method. `String`, `Integer`, `Number` and `Boolean` options all provide the respective primitive types, while `User`, `Channel`, `Role`, and `Mentionable` options will provide either the respective discord.js class instance if your application has a bot user in the guild or a raw API structure for commands-only deployments.
 
+### Choices
+
+If you specified preset choices for your String, Integer, or Number option, getting the selected choice is exactly the same as the free-entry options above. Consider the [gif command](/slash-commands/advanced-creation.html#choices) example you looked at earlier:
+
+```js {11-15,17}
+const { SlashCommandBuilder } = require('discord.js');
+
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('gif')
+		.setDescription('Sends a random gif!')
+		.addStringOption(option =>
+			option.setName('category')
+				.setDescription('The gif catgorry')
+				.setRequired(true)
+				.addChoices(
+					{ name: 'Funny', value: 'gif_funny' },
+					{ name: 'Meme', value: 'gif_meme' },
+					{ name: 'Movie', value: 'gif_movie' },
+				)),
+	async execute(interaction) {
+		const category = interaction.options.getString('category');
+		// category must be one of 'gif_funny', 'gif_meme', or 'gif_movie'
+	},
+};
+```
+
+Notice that nothing changes - you still use `getString()` to get the choice value. The only difference is that in this case, you can be sure it's one of only three possible values.
+
 ### Subcommands
 
 If you have a command that contains subcommands, the `CommandInteractionOptionResolver#getSubcommand()` will tell you which subcommand was used. You can then get any additional options of the selected subcommand using the same methods as above.
 
 The snippet below uses the same `info` command from the [subcommand creation guide](/slash-commands/advanced-creation.md#subcommands) to demonstrate how you can control the logic flow when replying to different subcommands:
 
-```js {4,11}
+```js {4,12}
 module.exports = {
 	// data: new SlashCommandBuilder()...
 	async execute(interaction) {
