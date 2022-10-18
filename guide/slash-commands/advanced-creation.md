@@ -146,7 +146,7 @@ const data = new SlashCommandBuilder()
 		option.setName('channel')
 			.setDescription('The channel to echo into')
 			// Ensure the user can only select a TextChannel for output
-			.addChannelTypes(ChannelTypes.GuildText))
+			.addChannelTypes(ChannelType.GuildText))
 	.addBooleanOption(option =>
 		option.setName('embed')
 			.setDescription('Whether or not the echo should be embedded'));
