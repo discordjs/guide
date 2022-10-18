@@ -1,15 +1,15 @@
-const { Client, GatewayIntentBits, Partials } = require('discord.js');
+const { Client, Events, GatewayIntentBits, Partials } = require('discord.js');
 
 const client = new Client({
 	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMessageReactions],
 	partials: [Partials.Message, Partials.Channel, Partials.Reaction],
 });
 
-client.once('ready', () => {
+client.once(Events.ClientReady, () => {
 	console.log('Ready!');
 });
 
-client.on('messageReactionAdd', async (reaction, user) => {
+client.on(Events.MessageReactionAdd, async (reaction, user) => {
 	if (reaction.message.partial) {
 		try {
 			await reaction.message.fetch();
@@ -21,7 +21,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
 	console.log(`${user.username} reacted with "${reaction.emoji.name}".`);
 });
 
-client.on('messageReactionRemove', async (reaction, user) => {
+client.on(Events.MessageReactionRemove, async (reaction, user) => {
 	if (reaction.message.partial) {
 		try {
 			await reaction.message.fetch();

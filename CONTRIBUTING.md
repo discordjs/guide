@@ -191,11 +191,11 @@ When you want to highlight a piece of code to display either an addition or a di
 Here's our base code:
 
 ```js {2,6}
-client.once('ready', () => {
+client.once(Events.ClientReady, () => {
 	console.log('Ready.');
 });
 
-client.on('messageCreate', message => {
+client.on(Events.MessageCreate, message => {
 	console.log(message.content);
 });
 \```
@@ -203,11 +203,11 @@ client.on('messageCreate', message => {
 To add this feature, use this code:
 
 ```js {2,6-8}
-client.once('ready', () => {
+client.once(Events.ClientReady, () => {
 	console.log(`${client.user.tag} ready.`);
 });
 
-client.on('messageCreate', message => {
+client.on(Events.MessageCreate, message => {
 	if (message.content === '!ping') {
 		message.channel.send('Pong.');
 	}

@@ -29,7 +29,7 @@ WebSocket and Network errors are common system errors thrown by Node in response
 In version 12, WebSocket errors are handled internally, meaning your process should never crash from them. If you want to log these errors, should they happen, you can listen to the `shardError` event as shown below.
 
 ```js
-client.on('shardError', error => {
+client.on(Events.ShardError, error => {
 	console.error('A websocket connection encountered an error:', error);
 });
 ```
@@ -156,11 +156,11 @@ module.exports = interaction => {
 ```
 
 ```js
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, Events, GatewayIntentBits } = require('discord.js');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.on('interactionCreate', someHandlerFunction);
+client.on(Events.InteractionCreate, someHandlerFunction);
 
 client.login('your-token-goes-here');
 // client will not be logged in yet!

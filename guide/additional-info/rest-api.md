@@ -39,15 +39,15 @@ To start off, you will be using the following skeleton code. Since both the comm
 <!-- eslint-disable require-await -->
 
 ```js
-const { Client, GatewayIntentBits, EmbedBuilder } = require('discord.js');
+const { Client, EmbedBuilder, Events, GatewayIntentBits } = require('discord.js');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.once('ready', () => {
+client.once(Events.ClientReady, () => {
 	console.log('Ready!');
 });
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
@@ -104,7 +104,7 @@ If you just add this code, it will seem like nothing happens. What you do not se
 Next, you will implement this approach into an application command:
 
 ```js {3-7}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	// ...
 	if (commandName === 'cat') {
 		const catResult = await request('https://aws.random.cat/meow');
@@ -130,7 +130,7 @@ The following code will fetch data from this api:
 
 ```js {1,5-11}
 // ...
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	// ...
 	if (commandName === 'urban') {
 		const term = interaction.options.getString('term');

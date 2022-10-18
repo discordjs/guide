@@ -201,22 +201,22 @@ Create an `app.js` file in the base directory with the following skeleton code t
 
 ```js
 const { Op } = require('sequelize');
-const { Client, codeBlock, Collection, GatewayIntentBits } = require('discord.js');
+const { Client, codeBlock, Collection, Events, GatewayIntentBits } = require('discord.js');
 const { Users, CurrencyShop } = require('./dbObjects.js');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 const currency = new Collection();
 
-client.once('ready', async () => {
+client.once(Events.ClientReady, async () => {
 	console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('messageCreate', async message => {
+client.on(Events.MessageCreate, async message => {
 	if (message.author.bot) return;
 	addBalance(message.author.id, 1);
 });
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
@@ -259,7 +259,7 @@ This defines the `addBalance()` helper function, since it'll be used quite frequ
 ### Ready event data sync
 
 ```js {2-3}
-client.once('ready', async () => {
+client.once(Events.ClientReady, async () => {
 	const storedBalances = await Users.findAll();
 	storedBalances.forEach(b => currency.set(b.user_id, b));
 
@@ -272,7 +272,7 @@ In the ready event, sync the currency collection with the database for easy acce
 ### Show user balance
 
 ```js {7-9}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;

@@ -44,17 +44,17 @@ After you have installed discord.js and Sequelize, you can start with the follow
 // Require Sequelize
 const Sequelize = require('sequelize');
 // Require the necessary discord.js classes
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, Events, GatewayIntentBits } = require('discord.js');
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 // When the client is ready, run this code (only once)
-client.once('ready', () => {
+client.once(Events.ClientReady, () => {
 	console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
@@ -139,7 +139,7 @@ The model mirrors very closely what the database defines. There will be a table 
 Now that your structure is defined, you need to make sure the model exists in the database. To make sure the bot is ready and all the data you might need has arrived, add this line in your code.
 
 ```js {3}
-client.once('ready', () => {
+client.once(Events.ClientReady, () => {
 	Tags.sync();
 	console.log(`Logged in as ${client.user.tag}!`);
 });
@@ -154,7 +154,7 @@ After all this preparation, you can now write your first command! Let's start wi
 <!-- eslint-skip -->
 
 ```js {7-26}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;

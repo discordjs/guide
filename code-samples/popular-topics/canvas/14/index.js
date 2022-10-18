@@ -1,11 +1,11 @@
-const { Client, GatewayIntentBits, AttachmentBuilder } = require('discord.js');
+const { AttachmentBuilder, Client, Events, GatewayIntentBits } = require('discord.js');
 const { createCanvas, Image } = require('@napi-rs/canvas');
 const { readFile } = require('fs/promises');
 const { request } = require('undici');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.once('ready', () => {
+client.once(Events.ClientReady, () => {
 	console.log('Ready!');
 });
 
@@ -20,7 +20,7 @@ const applyText = (canvas, text) => {
 	return context.font;
 };
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'profile') {

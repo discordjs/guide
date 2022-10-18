@@ -8,16 +8,16 @@ Here's the startup code we'll be using:
 <!-- eslint-disable prefer-destructuring -->
 
 ```js
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, Events, GatewayIntentBits } = require('discord.js');
 const config = require('./config.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.once('ready', () => {
+client.once(Events.ClientReady, () => {
 	console.log('Ready!');
 });
 
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
@@ -135,15 +135,15 @@ Here are some examples of ways you can benefit from arrow functions over regular
 
 ```js
 // regular functions, full ES5
-client.once('ready', function() {
+client.once(Events.ClientReady, function() {
 	console.log('Ready!');
 });
 
-client.on('typingStart', function(typing) {
+client.on(Events.TypingStart, function(typing) {
 	console.log(typing.user.tag + ' started typing in #' + typing.channel.name);
 });
 
-client.on('messageCreate', function(message) {
+client.on(Events.MessageCreate, function(message) {
 	console.log(message.author.tag + ' sent: ' + message.content);
 });
 
@@ -161,11 +161,11 @@ var collector = message.createMessageCollector({ filter, time: 15000 });
 
 ```js
 // arrow functions, full ES6
-client.once('ready', () => console.log('Ready!'));
+client.once(Events.ClientReady, () => console.log('Ready!'));
 
-client.on('typingStart', typing => console.log(`${typing.user.tag} started typing in #${typing.channel.name}`));
+client.on(Events.TypingStart, typing => console.log(`${typing.user.tag} started typing in #${typing.channel.name}`));
 
-client.on('messageCreate', message => console.log(`${message.author.tag} sent: ${message.content}`));
+client.on(Events.MessageCreate, message => console.log(`${message.author.tag} sent: ${message.content}`));
 
 const doubleAge = age => `Your age doubled is: ${age * 2}`;
 
@@ -210,7 +210,7 @@ Object destructuring takes those properties from the object and stores them in v
 Additionally, you could do this for your commands.
 
 ```js
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	const { commandName } = interaction;
 
 	if (commandName === 'ping') {

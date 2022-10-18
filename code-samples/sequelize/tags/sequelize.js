@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, Events, GatewayIntentBits } = require('discord.js');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -30,7 +30,7 @@ const Tags = sequelize.define('tags', {
 	},
 });
 
-client.once('ready', () => {
+client.once(Events.ClientReady, () => {
 	/*
 	 * equivalent to: CREATE TABLE tags(
 	 * name VARCHAR(255),
@@ -44,7 +44,7 @@ client.once('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
