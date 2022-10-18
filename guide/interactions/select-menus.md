@@ -17,9 +17,9 @@ You can have a maximum of five `ActionRow`s per message, and one select menu wit
 To create a select menu, use the <DocsLink path="class/ActionRowBuilder"/> and <DocsLink path="class/SelectMenuBuilder"/> classes. Then, pass the resulting row object to <DocsLink path="class/ChatInputCommandInteraction?scrollTo=reply" /> in the `components` array of <DocsLink path="typedef/InteractionReplyOptions" />:
 
 ```js {1,7-24,26}
-const { ActionRowBuilder, SelectMenuBuilder } = require('discord.js');
+const { ActionRowBuilder, Events, SelectMenuBuilder } = require('discord.js');
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -68,9 +68,9 @@ Restart your bot and then send the command to a channel your bot has access to. 
 You can also send message components within an ephemeral response or alongside message embeds.
 
 ```js {1,12-16,18}
-const { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder } = require('discord.js');
+const { ActionRowBuilder, EmbedBuilder, Events, SelectMenuBuilder } = require('discord.js');
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -144,8 +144,10 @@ For a detailed guide on receiving message components via collectors, please refe
 
 To receive a <DocsLink path="class/SelectMenuInteraction"/>, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isSelectMenu"/> type guard to make sure you only receive select menus:
 
-```js {2}
-client.on('interactionCreate', interaction => {
+```js {3}
+const { Events } = require('discord.js');
+
+client.on(Events.InteractionCreate, interaction => {
 	if (!interaction.isSelectMenu()) return;
 	console.log(interaction);
 });
@@ -168,7 +170,7 @@ The <DocsLink path="class/MessageComponentInteraction"/> class provides an <Docs
 This method should be used in favour of `editReply()` on the original interaction, to ensure you respond to the select menu interaction.
 
 ```js {1,4-6}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isSelectMenu()) return;
 
 	if (interaction.customId === 'select') {
@@ -184,7 +186,7 @@ Additionally to deferring the response of the interaction, you can defer the men
 ```js {1,6-10}
 const wait = require('node:timers/promises').setTimeout;
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isSelectMenu()) return;
 
 	if (interaction.customId === 'select') {
@@ -200,9 +202,9 @@ client.on('interactionCreate', async interaction => {
 A select menu is not bound to only one selection; you can specify a minimum and maximum amount of options that must be selected. You can use <DocsLink path="class/SelectMenuBuilder?scrollTo=setMinValues" /> and <DocsLink path="class/SelectMenuBuilder?scrollTo=setMaxValues" /> to determine these values.
 
 ```js {1,7-31,33}
-const { ActionRowBuilder, SelectMenuBuilder } = require('discord.js');
+const { ActionRowBuilder, Events SelectMenuBuilder } = require('discord.js');
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {

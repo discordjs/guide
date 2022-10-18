@@ -7,7 +7,7 @@ Here are the base files and code we'll be using:
 :::: code-group
 ::: code-group-item index.js
 ```js
-const { Client, GatewayIntentBits, Events } = require('discord.js');
+const { Client, Events, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });

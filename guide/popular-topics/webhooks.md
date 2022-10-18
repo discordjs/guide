@@ -129,7 +129,7 @@ webhookClient.send({
 Try to find a webhook your bot knows the token for. This makes sure your bot can execute the webhook later on.
 
 ```js
-const { Client, GatewayIntentBits, EmbedBuilder } = require('discord.js');
+const { Client, Events, GatewayIntentBits, EmbedBuilder } = require('discord.js');
 const { token } = require('./config.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -138,7 +138,7 @@ const embed = new EmbedBuilder()
 	.setTitle('Some Title')
 	.setColor(0x00FFFF);
 
-client.once('ready', async () => {
+client.once(Events.ClientReady, async () => {
 	const channel = client.channels.cache.get('123456789012345678');
 	try {
 		const webhooks = await channel.fetchWebhooks();

@@ -29,7 +29,9 @@ To handle an <DocsLink path="class/AutocompleteInteraction"/>, use the <DocsLink
 <!-- eslint-skip -->
 
 ```js
-client.on('interactionCreate', interaction => {
+const { Events } = require('discord.js');
+
+client.on(Events.InteractionCreate, interaction => {
 	if (!interaction.isAutocomplete()) return;
 	// do autocomplete handling
 });
@@ -38,7 +40,7 @@ client.on('interactionCreate', interaction => {
 Or alternatively, by making a small change to your existing [Command handler](/creating-your-bot/command-handling.md).
 
 ```js {2-6}
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	if (interaction.isChatInputCommand()) {
 		// do command handling
 	} else if (interaction.isAutocomplete()) {
@@ -64,7 +66,7 @@ The <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" 
 The example below shows how this might be applied to a conceptual version of the `guide` command to determine the closest topic to the search input:
 
 ```js {4-11}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isAutocomplete()) return;
 
 	if (interaction.commandName === 'guide') {
@@ -83,7 +85,7 @@ client.on('interactionCreate', async interaction => {
 To distinguish between multiple options, you can pass `true` into <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused"/>, which will now return the full focused object instead of just the value. This is used to get the name of the focused option below, allowing for multiple options to each have their own set of suggestions:
 
 ```js {5-16}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isAutocomplete()) return;
 
 	if (interaction.commandName === 'guide') {

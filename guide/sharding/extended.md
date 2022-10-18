@@ -8,8 +8,10 @@ This page is a follow-up and bases its code on [the previous page](/sharding/add
 
 Let's start with the basic usage of shards. At some point in bot development, you might have wanted to send a message to another channel, which may or may not necessarily be on the same guild, which means it may or may not be on the same shard. To achieve this, you will need to go back to your friend `.broadcastEval()` and try every shard for the desired channel. Suppose you have the following code in your `interactionCreate` event:
 
-```js {3-11}
-client.on('interactionCreate', interaction => {
+```js {5-13}
+const { Events } = require('discord.js');
+
+client.on(Events.InteractionCreate, interaction => {
 	// ...
 	if (commandName === 'send') {
 		const id = interaction.options.getString('destination');
@@ -66,7 +68,7 @@ And that's it for this section! You have successfully communicated across all of
 If you remember, there was a brief mention of passing functions through `.broadcastEval()`, but no super clear description of exactly how to go about it. Well, fret not, for this section will cover it! Suppose you have the following code in your `interactionCreate` event:
 
 ```js {3-8}
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	// ...
 	if (commandName === 'emoji') {
 		const emojiId = interaction.options.getString('emoji');
@@ -90,7 +92,7 @@ function findEmoji(c, { nameOrId }) {
 Next, you need to call the function in your command properly. If you recall from [this section](/sharding/additional-information.md#eval-arguments), it is shown there how to pass a function and arguments correctly.
 
 ```js {4-7}
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	// ...
 	if (commandName === 'emoji') {
 		const emojiNameOrId = interaction.options.getString('emoji');

@@ -182,14 +182,14 @@ module.exports = logger;
 ```
 
 ```js
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, Events, GatewayIntentBits } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const logger = require('./logger');
 
-client.on('ready', () => logger.info('The bot is online'));
-client.on('debug', m => logger.debug(m));
-client.on('warn', m => logger.warn(m));
-client.on('error', m => logger.error(m));
+client.on(Events.ClientReady, () => logger.info('The bot is online'));
+client.on(Events.Debug, m => logger.debug(m));
+client.on(Events.Warn, m => logger.warn(m));
+client.on(Events.Error, m => logger.error(m));
 
 client.login('your-token-goes-here');
 ```
