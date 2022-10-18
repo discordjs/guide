@@ -1,13 +1,13 @@
 const util = require('node:util');
-const { Client, GatewayIntentBits, Formatters, PermissionsBitField, ChannelType } = require('discord.js');
+const { ChannelType, Client, Events, Formatters, GatewayIntentBits, PermissionsBitField } = require('discord.js');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.once('ready', () => {
+client.once(Events.ClientReady, () => {
 	console.log('Ready!');
 });
 
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	if (!interaction.isChatInputCommand()) return;
 	if (!interaction.channel.permissionsFor(client.user).has(PermissionsBitField.Flags.SendMessages)) return;
 

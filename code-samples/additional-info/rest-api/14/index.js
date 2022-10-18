@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits, EmbedBuilder } = require('discord.js');
+const { Client, EmbedBuilder, Events, GatewayIntentBits } = require('discord.js');
 const { request } = require('undici');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -14,11 +14,11 @@ async function getJSONResponse(body) {
 	return JSON.parse(fullBody);
 }
 
-client.once('ready', () => {
+client.once(Events.ClientReady, () => {
 	console.log('Ready!');
 });
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;

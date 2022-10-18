@@ -39,16 +39,16 @@ pnpm add @napi-rs/canvas
 Here is the base code you'll be using to get started:
 
 ```js
-const { Client, GatewayIntentBits, AttachmentBuilder } = require('discord.js');
+const { AttachmentBuilder, Client, Events, GatewayIntentBits } = require('discord.js');
 const Canvas = require('@napi-rs/canvas');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.once('ready', () => {
+client.once(Events.ClientReady, () => {
 	console.log('Ready!');
 });
 
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'profile') {
@@ -74,7 +74,7 @@ After importing the @napi-rs/canvas module and initializing it, you should load 
 :::
 
 ```js {5-8}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'profile') {
@@ -92,7 +92,7 @@ Now, you need to load the image you want to use into Canvas.
 We'll be using [this image](https://github.com/discordjs/guide/blob/main/guide/popular-topics/images/canvas.jpg) as the background in the welcome image, but you can use whatever you want. Be sure to download the file, name it `wallpaper.jpg`, and save it inside the same directory as your main bot file.
 
 ```js {5-13}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	// ...
 	const context = canvas.getContext('2d');
 
@@ -119,7 +119,7 @@ If you get an error such as `Error: ENOENT: no such file or directory`, then the
 Next, let's place a border around the image for the sake of demonstration purposes.
 
 ```js {5-9}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	// ...
 	context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
@@ -139,7 +139,7 @@ A bit plain, right? Fear not, for you have a bit more to do until you reach comp
 ```js {7-15}
 const { request } = require('undici');
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	// ...
 	context.strokeRect(0, 0, canvas.width, canvas.height);
 
@@ -161,7 +161,7 @@ client.on('interactionCreate', async interaction => {
 It works well, but the avatar image itself seems a bit stretched out. Let's remedy that.
 
 ```js {6-7}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	// ...
 	const { body } = await request(interaction.user.displayAvatarURL({ extension: 'jpg' }));
 	const avatar = await Canvas.loadImage(await body.arrayBuffer());
@@ -179,7 +179,7 @@ The purpose of this small section is to demonstrate that working with Canvas is 
 Since we covered how to load external images and fix dimensions, let's turn the avatar into a circle to improve the image's overall style.
 
 ```js {5-15}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	// ...
 	context.strokeRect(0, 0, canvas.width, canvas.height);
 
@@ -209,7 +209,7 @@ You can read more about `context.arc()` on [w3schools](https://www.w3schools.com
 Now, let's quickly go over adding text to your image. This will help make the purpose of this image apparent since currently, it's just an avatar floating on a starry background that comes out of nowhere.
 
 ```js {5-12}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	// ...
 	context.strokeRect(0, 0, canvas.width, canvas.height);
 
@@ -251,7 +251,7 @@ const applyText = (canvas, text) => {
 	return context.font;
 };
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	// ...
 	context.strokeRect(0, 0, canvas.width, canvas.height);
 
@@ -274,7 +274,7 @@ After adjustment:
 Let's move the welcome text inside the image itself instead of adding it outside as a nice finishing touch.
 
 ```js {5-8,10-13}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	// ...
 	context.strokeRect(0, 0, canvas.width, canvas.height);
 

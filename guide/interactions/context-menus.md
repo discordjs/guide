@@ -23,7 +23,7 @@ const data = new ContextMenuCommandBuilder()
 Context menus commands, just like slash commands, are received via an interaction. You can check if a given interaction is a context menu by invoking the `isContextMenuCommand()` method, or the `isMessageContextMenuCommand()` and `isUserContextMenuCommand()` methods to check for the specific type of context menu interaction:
 
 ```js {2}
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	if (!interaction.isUserContextMenuCommand()) return;
 	console.log(interaction);
 });
@@ -36,7 +36,7 @@ For user context menus, you can get the targeted user by accessing the `targetUs
 For message contenxt menus, you can get the targeted message by accessing the `targetMessage` property from the <DocsLink path="class/MessageContextMenuInteraction" />.
 
 ```js {4}
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	if (!interaction.isUserContextMenuCommand()) return;
 	// Get the User's username from context menu
 	const { username } = interaction.targetUser;

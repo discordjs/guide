@@ -35,7 +35,7 @@ You may not always want everyone who has access to the channel to see a slash co
 Thankfully, Discord provides a way to hide resposne messages from everyone but the executor of the slash command. This type of message is called an `ephemeral` message and can be set by providing `ephemeral: true` in the `InteractionReplyOptions`, as follows:
 
 ```js {5}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -72,7 +72,7 @@ After the initial response, an interaction token is valid for 15 minutes, so thi
 ```js {1,8-9}
 const wait = require('node:timers/promises').setTimeout;
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -95,7 +95,7 @@ In this case, you can make use of the `ChatInputCommandInteraction#deferReply()`
 ```js {7-9}
 const wait = require('node:timers/promises').setTimeout;
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -131,7 +131,7 @@ After the initial response, an interaction token is valid for 15 minutes, so thi
 :::
 
 ```js {6}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
@@ -219,7 +219,7 @@ console.log(message);
 In additional to the ability to provide localized command definitions, you can also localize your responses. To do this, get the locale of the user with `ChatInputCommandInteraction#locale` and respond accordingly:
 
 ```js
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	const locales = {
 		pl: 'Witaj Świecie!',
 		de: 'Hallo Welt!',

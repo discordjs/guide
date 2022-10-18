@@ -76,15 +76,15 @@ An important thing to know is that a function declared as `async` will always re
 Now that you know how Promises work and what they are used for, let's look at an example that handles multiple Promises. Let's say you want to react with letters (regional indicators) in a specific order. For this example, here's a basic template for a discord.js bot with some ES6 adjustments.
 
 ```js
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, Events, GatewayIntentBits } = require('discord.js');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.once('ready', () => {
+client.once(Events.ClientReady, () => {
 	console.log('I am ready!');
 });
 
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'react') {
@@ -98,7 +98,7 @@ client.login('your-token-goes-here');
 If you don't know how Node.js asynchronous execution works, you would probably try something like this:
 
 ```js {4-7}
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	// ...
 	if (commandName === 'react') {
 		const message = interaction.reply({ content: 'Reacting!', fetchReply: true });
@@ -112,7 +112,7 @@ client.on('interactionCreate', interaction => {
 But since all of these methods are started at the same time, it would just be a race to which server request finished first, so there would be no guarantee that it would react at all (if the message isn't fetched) or in the order you wanted it to. In order to make sure it reacts after the message is sent and in order (a, b, c), you'd need to use the `.then()` callback from the Promises that these methods return. The code would look like this:
 
 ```js {4-12}
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	// ...
 	if (commandName === 'react') {
 		interaction.reply({ content: 'Reacting!', fetchReply: true })
@@ -131,7 +131,7 @@ client.on('interactionCreate', interaction => {
 In this piece of code, the Promises are [chain resolved](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then#Chaining) with each other, and if one of the Promises gets rejected, the function passed to `.catch()` gets called. Here's the same code but with async/await:
 
 ```js {1,4-7}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	// ...
 	if (commandName === 'react') {
 		const message = await interaction.reply({ content: 'Reacting!', fetchReply: true });
@@ -145,7 +145,7 @@ client.on('interactionCreate', async interaction => {
 It's mostly the same code, but how would you catch Promise rejections now since `.catch()` isn't there anymore? That is also a useful feature with async/await; the error will be thrown if you await it so that you can wrap the awaited Promises inside a try/catch, and you're good to go. 
 
 ```js {1,4-11}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (commandName === 'react') {
 		try {
 			const message = await interaction.reply({ content: 'Reacting!', fetchReply: true });
@@ -166,7 +166,7 @@ So you may be asking, "How would I get the value the Promise resolved with?".
 Let's look at an example where you want to delete a sent reply.
 
 ```js {3-9}
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	// ...
 	if (commandName === 'delete') {
 		interaction.reply({ content: 'This message will be deleted.', fetchReply: true })
@@ -181,7 +181,7 @@ client.on('interactionCreate', interaction => {
 The return value of a `.reply()` with the `fetchReply` option set to `true` is a Promise which resolves with the reply when it has been sent, but how would the same code with async/await look?
 
 ```js {1,4-10}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (commandName === 'delete') {
 		try {
 			const replyMessage = await interaction.reply({ content: 'This message will be deleted.', fetchReply: true });

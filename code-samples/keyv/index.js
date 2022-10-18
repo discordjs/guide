@@ -1,15 +1,15 @@
 const Keyv = require('keyv');
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, Events, GatewayIntentBits } = require('discord.js');
 const { globalPrefix, token } = require('./config.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 const prefixes = new Keyv('sqlite://path/to.sqlite');
 
-client.once('ready', () => {
+client.once(Events.ClientReady, () => {
 	console.log('Ready!');
 });
 
-client.on('messageCreate', async message => {
+client.on(Events.MessageCreate, async message => {
 	if (message.author.bot) return;
 
 	let args;

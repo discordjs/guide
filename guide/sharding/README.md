@@ -47,11 +47,11 @@ Here is some sample code for a `stats` command, without sharding taken into cons
 
 ```js
 // bot.js
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, Events, GatewayIntentBits } = require('discord.js');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const { commandName } = interaction;
@@ -95,7 +95,7 @@ client.shard.fetchClientValues('guilds.cache.size')
 While it's a bit unattractive to have more nesting in your commands, it is necessary when not using `async`/`await`. Now, the code at the top should look something like the below:
 
 ```js {4-8}
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	// ...
 	if (commandName === 'stats') {
 		return client.shard.fetchClientValues('guilds.cache.size')
@@ -150,7 +150,7 @@ Promise.all(promises)
 `Promise.all()` runs every Promise you pass inside an array in parallel and waits for each to finish before returning their results simultaneously. The result is an array that corresponds with the array of Promises you pass–so the first result element will be from the first Promise. With that, your stats command should look something like this:
 
 ```js {4-15}
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	// ...
 	if (commandName === 'stats') {
 		const promises = [

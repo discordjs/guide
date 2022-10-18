@@ -3,7 +3,7 @@
 ## Legend
 
 * `client` is a placeholder for the <DocsLink path="class/Client" /> object, such as `const client = new Client({ intents: [GatewayIntentBits.Guilds] });`.
-* `interaction` is a placeholder for the <DocsLink path="class/Interaction" /> object, such as `client.on('interactionCreate', interaction => { ... });`.
+* `interaction` is a placeholder for the <DocsLink path="class/Interaction" /> object, such as `client.on(Events.InteractionCreate, interaction => { ... });`.
 * `guild` is a placeholder for the <DocsLink path="class/Guild" /> object, such as `interaction.guild` or `client.guilds.cache.get('id')`.
 * `voiceChannel` is a placeholder for the <DocsLink path="class/VoiceChannel" /> object, such as `interaction.member.voice.channel`
 
@@ -199,7 +199,7 @@ If you want to learn more about this syntax or other types of collectors, check 
 
 ```js
 const blockedUsers = ['id1', 'id2'];
-client.on('interactionCreate', interaction => {
+client.on(Events.InteractionCreate, interaction => {
 	if (blockedUsers.includes(interaction.user.id)) return;
 });
 ```
@@ -210,7 +210,7 @@ You do not need to have a constant local variable like `blockedUsers` above. If 
 <!-- eslint-disable no-useless-return -->
 
 ```js
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	const blockedUsers = await database.query('SELECT user_id FROM blocked_users;');
 	if (blockedUsers.includes(interaction.user.id)) return;
 });
@@ -274,7 +274,7 @@ If you want to learn more about intents, check out [this dedicated guide on inte
 ```js
 // Start by declaring a guildMemberUpdate listener
 // This code should be placed outside of any other listener callbacks to prevent listener nesting
-client.on('guildMemberUpdate', (oldMember, newMember) => {
+client.on(Events.GuildMemberUpdate, (oldMember, newMember) => {
 	// If the role(s) are present on the old member object but no longer on the new one (i.e role(s) were removed)
 	const removedRoles = oldMember.roles.cache.filter(role => !newMember.roles.cache.has(role.id));
 	if (removedRoles.size > 0) {
