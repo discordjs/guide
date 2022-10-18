@@ -330,7 +330,7 @@ The Permissions object enables you to easily add or remove individual permission
 ```js
 const { PermissionsBitField } = require('discord.js');
 
-const permissions = new Permissions([
+const permissions = new PermissionsBitField([
 	PermissionsBitField.Flags.ViewChannel,
 	PermissionsBitField.Flags.EmbedLinks,
 	PermissionsBitField.Flags.AttachFiles,
