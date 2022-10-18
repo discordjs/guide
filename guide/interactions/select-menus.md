@@ -202,7 +202,7 @@ client.on(Events.InteractionCreate, async interaction => {
 A select menu is not bound to only one selection; you can specify a minimum and maximum amount of options that must be selected. You can use <DocsLink path="class/SelectMenuBuilder?scrollTo=setMinValues" /> and <DocsLink path="class/SelectMenuBuilder?scrollTo=setMaxValues" /> to determine these values.
 
 ```js {1,7-31,33}
-const { ActionRowBuilder, Events SelectMenuBuilder } = require('discord.js');
+const { ActionRowBuilder, Events, SelectMenuBuilder } = require('discord.js');
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
