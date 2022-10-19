@@ -27,7 +27,7 @@ app.get('/', async ({ query }, response) => {
 					grant_type: 'authorization_code',
 					redirect_uri: `http://localhost:${port}`,
 					scope: 'identify',
-				}),
+				}).toString(),
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded',
 				},
