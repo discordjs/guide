@@ -78,25 +78,13 @@ const { request } = require('undici');
 
 To get the data from within the response object, you can define the following helper function (it concatenates all the body chunks and parses it as an object) above your client events. Note that the function returns a Promise you need to handle.
 
-```js
-async function getJSONResponse(body) {
-	let fullBody = '';
-
-	for await (const data of body) {
-		fullBody += data.toString();
-	}
-
-	return JSON.parse(fullBody);
-}
-```
-
 ### Random Cat
 
 Random cat's API is available at [https://aws.random.cat/meow](https://aws.random.cat/meow) and returns a [JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) response. To actually fetch data from the API, you're going to do the following:
 
 ```js
 const catResult = await request('https://aws.random.cat/meow');
-const { file } = await getJSONResponse(catResult.body);
+const { file } = await catResult.body.json();
 ```
 
 If you just add this code, it will seem like nothing happens. What you do not see, is that you are launching a request to the random.cat server, which responds some JSON data. The helper function parses the response data to a JavaScript object you can work with. The object will have a `file` property with the value of a link to a random cat image.
@@ -108,7 +96,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	// ...
 	if (commandName === 'cat') {
 		const catResult = await request('https://aws.random.cat/meow');
-		const { file } = await getJSONResponse(catResult.body);
+		const { file } = await catResult.body.json();
 		interaction.editReply({ files: [file] });
 	}
 });
@@ -118,8 +106,8 @@ So, here's what's happening in this code:
 
 1. Your application sends a `GET` request to random.cat.
 2. random.cat sees the request and gets a random file url from their database.
-3. random.cat then sends that file's URL as a JSON object that contains a link to the image.
-4. undici receives the response and you parse it with `getJSONResponse()`.
+3. random.cat then sends that file's URL as a JSON object in a stringified form that contains a link to the image.
+4. undici receives the response and you parse the body to a JSON object.
 5. Your application then attaches the image and sends it in Discord.
 
 ### Urban Dictionary
@@ -137,7 +125,7 @@ client.on(Events.InteractionCreate, async interaction => {
 		const query = new URLSearchParams({ term });
 
 		const dictResult = await request(`https://api.urbandictionary.com/v0/define?${query}`);
-		const { list } = await getJSONResponse(dictResult.body);
+		const { list } = await dictResult.body.json();
 	}
 });
 ```
