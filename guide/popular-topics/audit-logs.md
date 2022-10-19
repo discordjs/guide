@@ -81,7 +81,7 @@ client.on(Events.GuildMemberRemove, member => {
 The same as before: set the fetch limit to 1 and accept only the `MemberKick` type.
 
 ```js {2-7,9-10,12-14,16-22}
-client.on(Evemts.GuildMemberRemove, async member => {
+client.on(Events.GuildMemberRemove, async member => {
 	const fetchedLogs = await member.guild.fetchAuditLogs({
 		limit: 1,
 		type: AuditLogEvent.MemberKick,
