@@ -37,13 +37,13 @@ discord-bot/
 
 To go from this starter code to fully functional slash commands, there are three key pieces of code that need to be written. They are:
 
-1. The individual command files, containing their defintions and functionality.
+1. The individual command files, containing their definitions and functionality.
 2. The command handler, which dynamically reads the files and executes the commands.
 3. The command deployment script, to register your slash commands with Discord so they appear in the interface.
 
 These steps can be done in any order, but all are required before the commands are fully functional. This section of the guide will use the order listed above. So let's get started!
 
-## Indivdual command files
+## Individual command files
 
 Create a new folder named `commands`, which is where you'll store all of your command files. You'll be using the <DocsLink section="builders" path="class/SlashCommandBuilder"/> class to construct the command definitions.
 

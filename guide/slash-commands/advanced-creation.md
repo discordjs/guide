@@ -63,7 +63,7 @@ Listed below is a short description of the different types of options that can b
 
 * `String`, `Integer`, `Number` and `Boolean` options all accept primitive values of their associated type.
   * `Integer` only accepts whole numbers.
-  * `Number` accepts btoh whole numbers and decimals.
+  * `Number` accepts both whole numbers and decimals.
 * `User`, `Channel`, `Role` and `Mentionable` options will show a selection list in the Discord interface for their associated type, or will accept a Snowflake (id) as input.
 * `Attachment` options prompt the user to make an upload along with the slash command.
 * `Subcommand` and `SubcommandGroup` options allow you to have branching pathways of subsequent options for your commands - more on that later on this page.
@@ -156,7 +156,7 @@ const data = new SlashCommandBuilder()
 
 Subcommands are available with the `.addSubcommand()` method. This allows you to branch a single command to require different options depending on the subcommand chosen.
 
-With this approach, you can merge the `user` and `server` information commands from the previous section into a single `info` command with two subcommands. Additionally, the `user` subcommand has a `User` type option for targetting other users, while the `server` subcommand has no need for this, and would just show info for the current guild.
+With this approach, you can merge the `user` and `server` information commands from the previous section into a single `info` command with two subcommands. Additionally, the `user` subcommand has a `User` type option for targeting other users, while the `server` subcommand has no need for this, and would just show info for the current guild.
 
 ```js {6-14}
 const { SlashCommandBuilder } = require('discord.js');
