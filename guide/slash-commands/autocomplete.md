@@ -35,17 +35,55 @@ client.on('interactionCreate', interaction => {
 });
 ```
 
-Or alternatively, by making a small change to your existing [Command handler](/creating-your-bot/command-handling.md).
+Or alternatively, by making a small change to your existing [Command handler](/creating-your-bot/command-handling.md) and adding an additional method to your individual command files.
 
-```js {2-6}
-client.on('interactionCreate', interaction => {
+The example below shows how this might be applied to a conceptual version of the `guide` command to determine the closest topic to the search input:
+
+:::: code-group
+::: code-group-item index.js
+```js {4,13}
+client.on('interactionCreate', async interaction => {
 	if (interaction.isChatInputCommand()) {
-		// do command handling
+		// command handling
 	} else if (interaction.isAutocomplete()) {
-		// do autocomplete handling
+		const command = interaction.client.commands.get(interaction.commandName);
+
+		if (!command) {
+			console.error(`No command matching ${interaction.commandName} was found.`);
+			return;
+		}
+
+		try {
+			await command.autocomplete(interaction);
+		} catch (error) {
+			console.error(error);
+		}
 	}
 });
 ```
+:::
+::: code-group-item commands/guide.js
+```js
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('guide')
+		.setDescription('Search discordjs.guide!')
+		.addStringOption(option =>
+			option.setName('query')
+				.setDescription('Phrase to search for')
+				.setAutocomplete(true)),
+	async autocomplete(interaction) {
+		// handle the autocompletion response (more on how to do that below)
+	},
+	async execute(interaction) {
+		// respond to the complete slash command
+	},
+};
+```
+:::
+::::
+
+The command handling is almost identical, but notice the change from `execute` to `autocomplete` in the new else-if branch. By adding a separate `autocomplete` function to the `module.exports` of commands that require autocompletion, you can safely separate the logic of providing dynamic choices from the code that needs to respond to the slash command once it is complete.
 
 :::tip
 You might have already moved this code to `events/interactionCreate.js` if you followed our [Event handling](/creating-your-bot/event-handling.md) guide too.
@@ -61,32 +99,40 @@ Unlike static choices, autocompletion suggestions are *not* enforced, and users 
 
 The <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" /> method returns the currently focused option's value, which can be used to applying filtering to the choices presented. For example, to only display options starting with the focused value you can use the `Array#filter()` method, then using `Array#map()`, you can transform the array into an array of <DocsLink path="typedef/ApplicationCommandOptionChoiceData" /> objects.
 
-The example below shows how this might be applied to a conceptual version of the `guide` command to determine the closest topic to the search input:
-
-```js {4-11}
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isAutocomplete()) return;
-
-	if (interaction.commandName === 'guide') {
+```js {10-15}
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('guide')
+		.setDescription('Search discordjs.guide!')
+		.addStringOption(option =>
+			option.setName('query')
+				.setDescription('Phrase to search for')
+				.setAutocomplete(true)),
+	async autocomplete(interaction) {
 		const focusedValue = interaction.options.getFocused();
 		const choices = ['Popular Topics: Threads', 'Sharding: Getting started', 'Library: Voice Connections', 'Interactions: Replying to slash commands', 'Popular Topics: Embed preview'];
 		const filtered = choices.filter(choice => choice.startsWith(focusedValue));
 		await interaction.respond(
 			filtered.map(choice => ({ name: choice, value: choice })),
 		);
-	}
-});
+	},
+};
 ```
 
 ### Handling multiple autocomplete options
 
 To distinguish between multiple options, you can pass `true` into <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused"/>, which will now return the full focused object instead of just the value. This is used to get the name of the focused option below, allowing for multiple options to each have their own set of suggestions:
 
-```js {5-16}
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isAutocomplete()) return;
-
-	if (interaction.commandName === 'guide') {
+```js {10-19}
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('guide')
+		.setDescription('Search discordjs.guide!')
+		.addStringOption(option =>
+			option.setName('query')
+				.setDescription('Phrase to search for')
+				.setAutocomplete(true)),
+	async autocomplete(interaction) {
 		const focusedOption = interaction.options.getFocused(true);
 		let choices;
 
@@ -102,8 +148,8 @@ client.on('interactionCreate', async interaction => {
 		await interaction.respond(
 			filtered.map(choice => ({ name: choice, value: choice })),
 		);
-	}
-});
+	},
+};
 ```
 
 ### Accessing other values
@@ -119,7 +165,7 @@ const number = interaction.options.getNumber('num');
 
 However, the `.getUser()`, `.getMember()`, `.getRole()`, `.getChannel()`, `.getMentionable()` and `.getAttachment()` methods are not available to autocomplete interactions. Discord does not send the respective full objects for these methods until the slash command is completed. For these, you can get the Snowflake value using `interaction.options.get('option').value`:
 
-## Notes
+### Notes
 
 - As with other application command interactions, autocomplete interactions must receive a response within 3 seconds. 
 - You cannot defer the response to an autocomplete interaction. If you're dealing with asynchronous suggestions, such as from an API, consider keeping a local cache.
