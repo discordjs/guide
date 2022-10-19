@@ -12,7 +12,7 @@ Before storming off and doing so, you should stop and carefully think about if y
 
 ### Error: Disallowed Intents
 
-Should you receive an error prefixed with `[DISALLOWED_INTENTS]`, please review your developer dashboard settings for all privileged intents you use. Check on the [Discord API documentation](https://discord.com/developers/docs/topics/gateway#privileged-intents) for up to date information.
+Should you receive an error prefixed with `[DisallowedIntents]`, please review your developer dashboard settings for all privileged intents you use. Check on the [Discord API documentation](https://discord.com/developers/docs/topics/gateway#privileged-intents) for up to date information.
 
 ## Enabling Intents
 
