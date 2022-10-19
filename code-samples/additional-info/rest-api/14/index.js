@@ -5,15 +5,6 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const trim = (str, max) => (str.length > max ? `${str.slice(0, max - 3)}...` : str);
 
-async function getJSONResponse(body) {
-	let fullBody = '';
-
-	for await (const data of body) {
-		fullBody += data.toString();
-	}
-	return JSON.parse(fullBody);
-}
-
 client.once(Events.ClientReady, () => {
 	console.log('Ready!');
 });
