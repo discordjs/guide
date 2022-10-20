@@ -97,7 +97,7 @@ You need at least one slash command created in a `commands` folder to continue w
 
 ## Loading command files
 
-Now that your command files have been created, your bot needs to load these files on startup. 
+Now that your command files have been created, your bot needs to load these files on startup.
 
 In your `index.js` file, make these additions to the base template:
 
@@ -140,7 +140,7 @@ for (const file of commandFiles) {
 }
 ```
 
-First, [`path.join()`](https://nodejs.org/api/path.html) helps to construct a path to the `commands` directory. The [`fs.readdirSync()`](https://nodejs.org/api/fs.html#fs_fs_readdirsync_path_options) method then reads the path to the directory and returns an array of all the file names it contains, currently just `['ping.js']`. To ensure only command files get processed, `Array.filter()` removes any non-JavaScript files from the array. 
+First, [`path.join()`](https://nodejs.org/api/path.html) helps to construct a path to the `commands` directory. The [`fs.readdirSync()`](https://nodejs.org/api/fs.html#fs_fs_readdirsync_path_options) method then reads the path to the directory and returns an array of all the file names it contains, currently just `['ping.js']`. To ensure only command files get processed, `Array.filter()` removes any non-JavaScript files from the array.
 
 With the correct files identified, the last step is to loop over the array and dynamically set each command into the `client.commands` Collection. For each file being loaded, check that it has at least the `data` and `execute` properties. This helps to prevent errors resulting from loading empty, unfinished or otherwise incorrect command files while you're still developing.
 
@@ -214,6 +214,6 @@ Your command files are now loaded into your bot, and the event listener is prepa
 
 #### Resulting code
 
-<ResultingCode path="creating-your-bot/initial-files" />
+<ResultingCode path="creating-your-bot/command-handling" />
 
 It also includes some bonus commands!
