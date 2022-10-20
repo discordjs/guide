@@ -32,7 +32,7 @@ Initially an interaction token is only valid for three seconds, so that's the ti
 
 You may not always want everyone who has access to the channel to see a slash command's response. Previously, you would have had to DM the user to achieve this, potentially encountering the high rate limits associated with DM messages, or simply being unable to do so, if the user's DMs were disabled. 
 
-Thankfully, Discord provides a way to hide resposne messages from everyone but the executor of the slash command. This type of message is called an `ephemeral` message and can be set by providing `ephemeral: true` in the `InteractionReplyOptions`, as follows:
+Thankfully, Discord provides a way to hide response messages from everyone but the executor of the slash command. This type of message is called an `ephemeral` message and can be set by providing `ephemeral: true` in the `InteractionReplyOptions`, as follows:
 
 ```js {5}
 client.on(Events.InteractionCreate, async interaction => {
@@ -124,7 +124,7 @@ If you want to make a proper ping command, one is available in our [FAQ](/popula
 
 ## Follow-ups
 
-The `reply()` and `deferReply()` methods are both *initial* responses, which tell Discord that your bot successfully receieved the interaction, but cannot be used to send additional messages. This is where follow-up messages come in. After having initially responded to an interaction, you can use `ChatInputCommandInteraction#followUp()` to send additional messages:
+The `reply()` and `deferReply()` methods are both *initial* responses, which tell Discord that your bot successfully received the interaction, but cannot be used to send additional messages. This is where follow-up messages come in. After having initially responded to an interaction, you can use `ChatInputCommandInteraction#followUp()` to send additional messages:
 
 ::: warning
 After the initial response, an interaction token is valid for 15 minutes, so this is the timeframe in which you can edit the response and send follow-up messages.
