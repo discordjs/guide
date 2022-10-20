@@ -70,7 +70,8 @@ Causes for "Missing Access":
 During your development, you will likely run into `DiscordAPIError: Missing Permissions` at some point. One of the following can cause this error:
 
 - Your bot is missing the needed permission to execute this action in its calculated base or final permissions (requirement changes based on the type of action you are trying to perform).
-- You provided an invalid permission number while trying to create overwrites. (The calculator on the apps page returns decimal values while the developer documentation lists the flags in hex. Make sure you are not mixing the two and don't use the hex prefix `0x` where not applicable)
+- You provided an invalid permission number while trying to create overwrites. (The calculator on the apps page returns decimal values while the developer documentation lists the flags in hex. Make sure you are not mixing the two and don't use the hex prefix `0x` where not applicable).
+- Your bot is currently timed out.
 - It is trying to execute an action on a guild member with a role higher than or equal to your bot's highest role.
 - It is trying to modify or assign a role higher than or equal to its highest role.
 - It is trying to add a managed role to a member.
@@ -79,7 +80,7 @@ During your development, you will likely run into `DiscordAPIError: Missing Perm
 - It is trying to execute a forbidden action on the server owner.
 - It is trying to execute an action based on another unfulfilled factor (for example, reserved for partnered guilds).
 - It is trying to execute an action on a voice channel without the `ViewChannel` permission.
-- It is trying to create a channel or channel overwrite including the `ManageRoles` flag but does not have the `Administrator` permission or an explicit `ManageRoles` overwrite on this channel (note that the global permission does not count)
+- It is trying to create a channel or channel overwrite including the `ManageRoles` flag but does not have the `Administrator` permission or an explicit `ManageRoles` overwrite on this channel (note that the global permission does not count).
 
 ::: warning
 Granting the `Administrator` permission does not skip any hierarchical check!
