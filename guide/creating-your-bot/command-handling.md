@@ -214,6 +214,6 @@ Your command files are now loaded into your bot, and the event listener is prepa
 
 #### Resulting code
 
-<ResultingCode path="creating-your-bot/initial-files" />
+<ResultingCode path="creating-your-bot/command-handling" />
 
 It also includes some bonus commands!
