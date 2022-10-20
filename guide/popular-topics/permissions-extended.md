@@ -79,6 +79,7 @@ During your development, you will likely run into `DiscordAPIError: Missing Perm
 - It is trying to execute a forbidden action on the server owner.
 - It is trying to execute an action based on another unfulfilled factor (for example, reserved for partnered guilds).
 - It is trying to execute an action on a voice channel without the `ViewChannel` permission.
+- It is trying to execute an action on a member/channel/role whilst timed out
 - It is trying to create a channel or channel overwrite including the `ManageRoles` flag but does not have the `Administrator` permission or an explicit `ManageRoles` overwrite on this channel (note that the global permission does not count)
 
 ::: warning
