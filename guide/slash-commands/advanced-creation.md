@@ -22,6 +22,9 @@ const data = new SlashCommandBuilder()
 		option.setName('input')
 			.setDescription('The input to echo back'));
 ```
+(NOTE: If you have followed the tutorial STEP-BY-STEP. You might get a error "TypeError", you probably have this:
+```.setDescription('Replies with your input!'),```
+Fix it by removing the comma ",".)
 
 ## Option types
 
