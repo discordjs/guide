@@ -191,10 +191,6 @@ Interaction responses can use masked links (e.g. `[text](http://site.com)`) in t
 
 ## Fetching and deleting responses
 
-::: warning
-You _cannot_ delete an ephemeral message.
-:::
-
 In addition to replying to a slash command, you may also want to delete the initial reply. You can use `ChatInputCommandInteraction#deleteReply()` for this:
 
 <!-- eslint-skip -->
