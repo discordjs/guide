@@ -112,7 +112,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.commands = new Collection();
 ```
 
-We recommend attaching a `.commands` property to your client instance so that you can access your commands in other files. The rest of the examples in this guide will follow this convention.
+We recommend attaching a `.commands` property to your client instance so that you can access your commands in other files. The rest of the examples in this guide will follow this convention. For TypeScript users, we recommend extending the base Client class to add this property, [casting](https://www.typescripttutorial.net/typescript-tutorial/type-casting/), or [augmenting the module type](https://www.typescriptlang.org/docs/handbook/modules.html#ambient-modules).
 
 ::: tip
 - The [`fs`](https://nodejs.org/api/fs.html) module is Node's native file system module. `fs` is used to read the `commands` directory and identify our command files.
@@ -154,7 +154,7 @@ client.on(Events.InteractionCreate, interaction => {
 });
 ```
 
-Not every interaction is a slash command (e.g. `MessageComponent` interactions). Make sure to only handle slash commands in this function by making use of the <DocsLink path="class/BaseInteraction?scrollTo=isChatInputCommand" /> method to exit the handler if another type is encountered:
+Not every interaction is a slash command (e.g. `MessageComponent` interactions). Make sure to only handle slash commands in this function by making use of the <DocsLink path="class/BaseInteraction?scrollTo=isChatInputCommand" /> method to exit the handler if another type is encountered. This method also provides typeguarding for TypeScript users, narrowing the type from `BaseInteraction` to <DocsLink path="class/ChatInputCommandInteraction" />.
 
 ```js {2}
 client.on(Events.InteractionCreate, interaction => {
@@ -164,10 +164,6 @@ client.on(Events.InteractionCreate, interaction => {
 ```
 
 ## Executing commands
-
-::: tip
-This section assumes you're using the `client.commands` convention from the [loading commands](/creating-your-bot/loading-commands.md) page of this guide. Please carefully read that page first so that you can understand the methods used in this section.
-:::
 
 When your bot receives a <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> event, the interaction object contains all the information you need to dynamically retrieve and execute your commands!
 
