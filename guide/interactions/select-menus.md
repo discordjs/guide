@@ -195,6 +195,36 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 ```
 
+## Accessing select menu interaction values
+
+After receiving your <DocsLink path="class/SelectMenuInteraction"/> you will be able to access the selected values from <DocsLink path="class/SelectMenuInteraction?scrollTo=values"/>. This will return an array of string values associated with the selected options in your select menu.
+
+```js {4,6}
+client.on(Events.InteractionCreate, async interaction => {
+	if (!interaction.isSelectMenu()) return;
+
+	const selected = interaction.values.join(', ');
+
+	await interaction.update(`The user selected ${selected}!`);
+});
+```
+
+The snippet below accesses the first index of the returned array to demonstrate how single-select menu values can be handled:
+
+```js {4,6-10}
+client.on(Events.InteractionCreate, async interaction => {
+	if (!interaction.isSelectMenu()) return;
+
+	const selected = interaction.values[0];
+
+	if (selected === 'ping') {
+		await interaction.update('The Ping option has been selected!');
+	} else if (selected === 'pong') {
+		await interaction.update('The Pong option has been selected!');
+	}
+});
+```
+
 ## Multi-select menus
 
 A select menu is not bound to only one selection; you can specify a minimum and maximum amount of options that must be selected. You can use <DocsLink path="class/SelectMenuBuilder?scrollTo=setMinValues" /> and <DocsLink path="class/SelectMenuBuilder?scrollTo=setMaxValues" /> to determine these values.
