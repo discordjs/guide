@@ -36,6 +36,17 @@ const member = interaction.options.getMember('target');
 member.kick();
 ```
 
+### How do I timeout a guild member?
+
+```js
+const member = interaction.options.getMember('target');
+member.timeout(60_000); // Timeout for one minute
+```
+
+::: tip
+Timeout durations are measured by the millisecond. The maximum timeout duration you can set is 28 days. To remove a timeout set on a member, pass `null` instead of a timeout duration.
+:::
+
 ### How do I add a role to a guild member?
 
 ```js
