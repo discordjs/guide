@@ -14,10 +14,16 @@ Select menus are one of the `MessageComponent` classes, which can be sent via me
 You can have a maximum of five `ActionRow`s per message, and one select menu within an `ActionRow`.
 :::
 
-To create a select menu, use the <DocsLink path="class/ActionRowBuilder"/> and <DocsLink path="class/SelectMenuBuilder"/> classes. Then, pass the resulting row object to <DocsLink path="class/ChatInputCommandInteraction?scrollTo=reply" /> in the `components` array of <DocsLink path="typedef/InteractionReplyOptions" />:
+The available select menus are: <DocsLink path="class/StringSelectMenuBuilder"/>, <DocsLink path="class/UserSelectMenuBuilder"/>, <DocsLink path="class/RoleSelectMenuBuilder"/>, <DocsLink path="class/ChannelSelectMenuBuilder"/>, <DocsLink path="class/MentionableSelectMenuBuilder"/> classes.
+To send a select menu, use one of these with <DocsLink path="class/ActionRowBuilder"/>. 
+Then, pass the resulting row object to <DocsLink path="class/ChatInputCommandInteraction?scrollTo=reply" /> in the `components` array of <DocsLink path="typedef/InteractionReplyOptions" />.
+
+:::warning
+The only one which support options is `StringSelectMenuBuilder`.
+:::
 
 ```js {1,7-24,26}
-const { ActionRowBuilder, Events, SelectMenuBuilder } = require('discord.js');
+const { ActionRowBuilder, Events, StringSelectMenuBuilder } = require('discord.js');
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
@@ -25,7 +31,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	if (interaction.commandName === 'ping') {
 		const row = new ActionRowBuilder()
 			.addComponents(
-				new SelectMenuBuilder()
+				new StringSelectMenuBuilder()
 					.setCustomId('select')
 					.setPlaceholder('Nothing selected')
 					.addOptions(
@@ -68,7 +74,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 You can also send message components within an ephemeral response or alongside message embeds.
 
 ```js {1,12-16,18}
-const { ActionRowBuilder, EmbedBuilder, Events, SelectMenuBuilder } = require('discord.js');
+const { ActionRowBuilder, EmbedBuilder, Events, StringSelectMenuBuilder } = require('discord.js');
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
@@ -117,12 +123,22 @@ Restart your bot and then send the command to a channel your bot has access to. 
 -->
 ![selectephem](./images/selectephem.png)
 
+## Diffrent types
+Next thing, that u should know, is that there are multiple menus like for selecting users, roles, channels and menitionables (users, roles)
+```js
+new UserSelectMenuBuilder()
+	.setCustomId('user-pick')
+	.setLabel('Choose your favourite user');
+```
+
+![userselect](./images/userselect.png)
+
 ::: warning
 If you're using TypeScript you'll need to specify the type of components your action row holds. This can be done by specifying the component builder you will add to it using a generic parameter in <DocsLink path="class/ActionRowBuilder"/>.
 
 ```diff
 - new ActionRowBuilder()
-+ new ActionRowBuilder<SelectMenuBuilder>()
++ new ActionRowBuilder<StringSelectMenuBuilder>()
 ```
 :::
 
@@ -142,7 +158,7 @@ For a detailed guide on receiving message components via collectors, please refe
 
 ### The interactionCreate event
 
-To receive a <DocsLink path="class/SelectMenuInteraction"/>, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isSelectMenu"/> type guard to make sure you only receive select menus:
+To receive a <DocsLink path="class/SelectMenuInteraction"/>, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isSelectMenu"/> type guard to make sure you only receive any select menu or use more direct typeguard like <DocsLink path="class/BaseInteraction?scrollTo=isUserSelectMenu"/>:
 
 ```js {2}
 client.on(Events.InteractionCreate, interaction => {
@@ -194,13 +210,28 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 ```
+## Getting options
+
+To get options than user seleted, you can access <DocsLink path="class/SelectMenuInteraction?scrollTo=values" /> which is an array of options' values or access a Collection with objects like <DocsLink path="class/UserSelectMenuInteraction?scrollTo=users" /> 
+```js
+const { Events } = require('discord.js');
+
+client.on(Events.InteractionCreate, async interaction => {
+	if (!interaction.isUserSelectMenu()) return;
+
+	// This collection can have more users if you have set maxValues
+	const user = interactions.users.first();
+	await interaction.reply(`Your favourite user is: ${user.tag}`);
+});
+```
 
 ## Multi-select menus
 
 A select menu is not bound to only one selection; you can specify a minimum and maximum amount of options that must be selected. You can use <DocsLink path="class/SelectMenuBuilder?scrollTo=setMinValues" /> and <DocsLink path="class/SelectMenuBuilder?scrollTo=setMaxValues" /> to determine these values.
+Additionally some options may be default so selected when sended but possible to unselect.
 
 ```js {1,7-31,33}
-const { ActionRowBuilder, Events, SelectMenuBuilder } = require('discord.js');
+const { ActionRowBuilder, Events, StringSelectMenuBuilder } = require('discord.js');
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
@@ -208,16 +239,17 @@ client.on(Events.InteractionCreate, async interaction => {
 	if (interaction.commandName === 'ping') {
 		const row = new ActionRowBuilder()
 			.addComponents(
-				new SelectMenuBuilder()
+				new StringSelectMenuBuilder()
 					.setCustomId('select')
 					.setPlaceholder('Nothing selected')
 					.setMinValues(2)
 					.setMaxValues(3)
 					.addOptions([
 						{
-							label: 'Select me',
+							label: 'Default Option',
 							description: 'This is a description',
 							value: 'first_option',
+							default: true,
 						},
 						{
 							label: 'You can select me too',
