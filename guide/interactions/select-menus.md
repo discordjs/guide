@@ -236,3 +236,35 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 ```
+
+## Accessing select menu interaction values
+
+After receiving your <DocsLink path="class/SelectMenuInteraction"/>, you will be able to access the selected values from <DocsLink path="class/SelectMenuInteraction?scrollTo=values"/>. This will return an array of string values associated with the selected options in your select menu.
+
+By default, select menus only accept a single selection. You can retrieve the selected value by accessing the first index of the returned array, as demonstrated in the snippet below:
+
+```js {4,6-10}
+client.on(Events.InteractionCreate, async interaction => {
+	if (!interaction.isSelectMenu()) return;
+
+	const selected = interaction.values[0];
+
+	if (selected === 'ping') {
+		await interaction.update('The Ping option has been selected!');
+	} else if (selected === 'pong') {
+		await interaction.update('The Pong option has been selected!');
+	}
+});
+```
+
+In the case of a multi-select menu, the received <DocsLink path="class/SelectMenuInteraction?scrollTo=values"/> may contain more than one value, and should be handled accordingly:
+
+```js {4,6}
+client.on(Events.InteractionCreate, async interaction => {
+	if (!interaction.isSelectMenu()) return;
+
+	const selected = interaction.values.join(', ');
+
+	await interaction.update(`The user selected ${selected}!`);
+});
+```
