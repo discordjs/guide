@@ -83,8 +83,7 @@ To get the data from within the response object, you can define the following he
 Random cat's API is available at [https://aws.random.cat/meow](https://aws.random.cat/meow) and returns a [JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) response. To actually fetch data from the API, you're going to do the following:
 
 ```js
-const catResult = await request('https://aws.random.cat/meow');
-const { file } = await catResult.body.json();
+const { file } = await request('https://aws.random.cat/meow').then(response => response.body.json());
 ```
 
 If you just add this code, it will seem like nothing happens. What you do not see, is that you are launching a request to the random.cat server, which responds some JSON data. The helper function parses the response data to a JavaScript object you can work with. The object will have a `file` property with the value of a link to a random cat image.
@@ -95,8 +94,7 @@ Next, you will implement this approach into an application command:
 client.on(Events.InteractionCreate, async interaction => {
 	// ...
 	if (commandName === 'cat') {
-		const catResult = await request('https://aws.random.cat/meow');
-		const { file } = await catResult.body.json();
+		const { file } = await request('https://aws.random.cat/meow');
 		interaction.editReply({ files: [file] });
 	}
 });
@@ -124,8 +122,7 @@ client.on(Events.InteractionCreate, async interaction => {
 		const term = interaction.options.getString('term');
 		const query = new URLSearchParams({ term });
 
-		const dictResult = await request(`https://api.urbandictionary.com/v0/define?${query}`);
-		const { list } = await dictResult.body.json();
+		const { list } = await request(`https://api.urbandictionary.com/v0/define?${query}`).then(response => response.body.json());
 	}
 });
 ```
