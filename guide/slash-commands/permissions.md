@@ -48,7 +48,7 @@ const data = new SlashCommandBuilder()
 	.setDefaultMemberPermissions(PermissionFlagsBits.BanMembers | PermissionFlagsBits.KickMembers);
 ```
 
-In reality, you'll probably want to have an additional confirmation step before a ban actually executes. Check out the [button components section]() of the guide to see how to add confirmation buttons to your command responses, and listen to button clicks.
+In reality, you'll probably want to have an additional confirmation step before a ban actually executes. Check out the [button components section](/interactions/buttons.html) of the guide to see how to add confirmation buttons to your command responses, and listen to button clicks.
 
 ## DM permission
 
