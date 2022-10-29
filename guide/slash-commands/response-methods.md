@@ -55,7 +55,7 @@ Now when you run your command again, you should see something like this:
 				:ephemeral="true"
 			>ping</DiscordInteraction>
 		</template>
-		Pong!
+		Secret Pong!
 	</DiscordMessage>
 </DiscordMessages>
 
