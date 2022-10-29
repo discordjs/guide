@@ -94,7 +94,7 @@ Next, you will implement this approach into an application command:
 client.on(Events.InteractionCreate, async interaction => {
 	// ...
 	if (commandName === 'cat') {
-		const { file } = await request('https://aws.random.cat/meow');
+		const { file } = await request('https://aws.random.cat/meow').then(response => response.body.json());
 		interaction.editReply({ files: [file] });
 	}
 });
