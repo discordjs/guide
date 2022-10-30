@@ -12,6 +12,13 @@ Buttons are one of the `MessageComponent` classes, which can be sent via message
 
 ::: warning
 You can have a maximum of five `ActionRow`s per message, and five buttons within an `ActionRow`.
+
+If you're using TypeScript you'll need to specify the type of components your action row holds. This can be done by specifying the component builder you will add to it using a generic parameter in <DocsLink path="class/ActionRowBuilder"/>.
+
+```diff
+- new ActionRowBuilder()
++ new ActionRowBuilder<ButtonBuilder>()
+```
 :::
 
 To create your buttons, use the <DocsLink path="class/ActionRowBuilder"/> and <DocsLink path="class/ButtonBuilder"/> classes. Then, pass the resulting row object to <DocsLink path="class/ChatInputCommandInteraction?scrollTo=reply" /> in the `components` array of <DocsLink path="typedef/InteractionReplyOptions" />:
@@ -107,15 +114,6 @@ client.on(Events.InteractionCreate, async interaction => {
 		</template>
 	</DiscordMessage>
 </DiscordMessages>
-
-::: warning
-If you're using TypeScript you'll need to specify the type of components your action row holds. This can be done by specifying the component builder you will add to it using a generic parameter in <DocsLink path="class/ActionRowBuilder"/>.
-
-```diff
-- new ActionRowBuilder()
-+ new ActionRowBuilder<ButtonBuilder>()
-```
-:::
 
 ### Disabled buttons
 
