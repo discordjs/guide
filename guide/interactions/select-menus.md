@@ -16,10 +16,10 @@ You can have a maximum of five `ActionRow`s per message, and one select menu wit
 
 The available select menus are: <DocsLink path="class/StringSelectMenuBuilder"/>, <DocsLink path="class/UserSelectMenuBuilder"/>, <DocsLink path="class/RoleSelectMenuBuilder"/>, <DocsLink path="class/ChannelSelectMenuBuilder"/>, <DocsLink path="class/MentionableSelectMenuBuilder"/> classes.
 To send a select menu, use one of these with <DocsLink path="class/ActionRowBuilder"/>. 
-Then, pass the resulting row object to <DocsLink path="class/ChatInputCommandInteraction?scrollTo=reply" /> in the `components` array of <DocsLink path="typedef/InteractionReplyOptions" />.
+Then pass the resulting row object to <DocsLink path="class/ChatInputCommandInteraction?scrollTo=reply" /> in the `components` array of <DocsLink path="typedef/InteractionReplyOptions" />.
 
 :::warning
-The only one which support options is `StringSelectMenuBuilder`.
+The only select menu which supports options is `StringSelectMenuBuilder`.
 :::
 
 ```js {1,7-24,26}
@@ -124,11 +124,12 @@ Restart your bot and then send the command to a channel your bot has access to. 
 ![selectephem](./images/selectephem.png)
 
 ## Diffrent types
-Next thing, that u should know, is that there are multiple menus like for selecting users, roles, channels and menitionables (users, roles)
-```js
+Next thing, that u should know, is that there are multiple menus like for selecting users, roles, channels and menitionables (users, roles).
+```js{1}
 new UserSelectMenuBuilder()
 	.setCustomId('user-pick')
-	.setLabel('Choose your favourite user');
+	.setLabel('Choose your favourite users')
+	.setMaxValues(3);
 ```
 
 ![userselect](./images/userselect.png)
@@ -158,11 +159,11 @@ For a detailed guide on receiving message components via collectors, please refe
 
 ### The interactionCreate event
 
-To receive a <DocsLink path="class/SelectMenuInteraction"/>, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isSelectMenu"/> type guard to make sure you only receive any select menu or use more direct typeguard like <DocsLink path="class/BaseInteraction?scrollTo=isUserSelectMenu"/>:
+To receive a <DocsLink path="class/SelectMenuInteraction"/>, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isAnySelectMenu"/> type guard to receive any select menu. Also you can use more direct typeguard like `.iStringSelectMenu()`, `.isUserSelectMenu()`, `.isRoleSelectMenu()`, `.isChannelSelectMenu()`, `.isMentionableSelectMenu()` to recive specific type of select menu:
 
 ```js {2}
 client.on(Events.InteractionCreate, interaction => {
-	if (!interaction.isSelectMenu()) return;
+	if (!interaction.iStringSelectMenu()) return;
 	console.log(interaction);
 });
 ```
@@ -185,7 +186,7 @@ This method should be used in favour of `editReply()` on the original interactio
 
 ```js {1,4-6}
 client.on(Events.InteractionCreate, async interaction => {
-	if (!interaction.isSelectMenu()) return;
+	if (!interaction.isStringSelectMenu()) return;
 
 	if (interaction.customId === 'select') {
 		await interaction.update({ content: 'Something was selected!', components: [] });
@@ -201,7 +202,7 @@ Additionally to deferring the response of the interaction, you can defer the men
 const wait = require('node:timers/promises').setTimeout;
 
 client.on(Events.InteractionCreate, async interaction => {
-	if (!interaction.isSelectMenu()) return;
+	if (!interaction.isStringSelectMenu()) return;
 
 	if (interaction.customId === 'select') {
 		await interaction.deferUpdate();
@@ -212,14 +213,14 @@ client.on(Events.InteractionCreate, async interaction => {
 ```
 ## Getting options
 
-To get options than user seleted, you can access <DocsLink path="class/SelectMenuInteraction?scrollTo=values" /> which is an array of options' values or access a Collection with objects like <DocsLink path="class/UserSelectMenuInteraction?scrollTo=users" /> 
-```js
+To get options than user seleted, you can access <DocsLink path="class/StringSelectMenuInteraction?scrollTo=values" /> which is an array of options' values or access a Collection with objects like <DocsLink path="class/RoleSelectMenuInteraction?scrollTo=roles" />, <DocsLink path="class/ChannelSelectMenuInteraction?scrollTo=channels" /> ... 
+```js{6}
 const { Events } = require('discord.js');
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isUserSelectMenu()) return;
 
-	// This collection can have more users if you have set maxValues
+	// This collection can have more users if you have set max values
 	const user = interactions.users.first();
 	await interaction.reply(`Your favourite user is: ${user.tag}`);
 });
@@ -228,9 +229,9 @@ client.on(Events.InteractionCreate, async interaction => {
 ## Multi-select menus
 
 A select menu is not bound to only one selection; you can specify a minimum and maximum amount of options that must be selected. You can use <DocsLink path="class/SelectMenuBuilder?scrollTo=setMinValues" /> and <DocsLink path="class/SelectMenuBuilder?scrollTo=setMaxValues" /> to determine these values.
-Additionally some options may be default so selected when sended but possible to unselect.
+Additionally some options may be default but possible to unselect.
 
-```js {1,7-31,33}
+```js {1,7-32,33}
 const { ActionRowBuilder, Events, StringSelectMenuBuilder } = require('discord.js');
 
 client.on(Events.InteractionCreate, async interaction => {
