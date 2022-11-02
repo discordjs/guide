@@ -87,7 +87,7 @@ const data = new SlashCommandBuilder()
 	.addStringOption(option =>
 		option.setName('input')
 			.setDescription('The input to echo back')
-			.setRequired(true));
+			.setRequired(true);
 ```
 
 ## Choices
