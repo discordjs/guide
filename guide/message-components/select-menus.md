@@ -6,13 +6,48 @@ Select menus are one of the `MessageComponent` classes, which can be sent via me
 This page is a follow-up to the [slash commands](/slash-commands/advanced-creation.md) section and [action rows](/message-components/action-rows.md) page. Please carefully read those pages first so that you can understand the methods used here.
 :::
 
-## String select menus
+## Building string select menus
 
-The "standard" and most customizable type of select menu is the string select menu. To create a string select menu, use the <DocsLink section="builders" path="class/StringSelectMenuBuilder"/> and <DocsLink section="builders" path="class/StringSelectMenuOptionBuilder"/> classes. Then, place the menu inside an action row, and send it in the `components` array of your reply. Remember that each select menu will take up a whole row.
+The "standard" and most customizable type of select menu is the string select menu. To create a string select menu, use the <DocsLink section="builders" path="class/StringSelectMenuBuilder"/> and <DocsLink section="builders" path="class/StringSelectMenuOptionBuilder"/> classes.
 
 If you're a Pokemon fan, you've probably made a selection pretty similar to this example at some point in your life!
 
-```js {1,6-25,29}
+```js {1,6-21}
+const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder, SlashCommandBuilder } = require('discord.js');
+
+module.exports = {
+	// data: new SlashCommandBuilder()...
+	async execute(interaction) {
+		const select = new StringSelectMenuBuilder()
+			.setCustomId('starter')
+			.setPlaceholder('Make a selection!')
+			.addOptions(
+				new StringSelectMenuOptionBuilder()
+					.setLabel('Bulbasaur')
+					.setDescription('The grass/poison type Seed Pokemon.')
+					.setValue('bulbasaur'),
+				new StringSelectMenuOptionBuilder()
+					.setLabel('Charmander')
+					.setDescription('The fire type Lizard Pokemon.')
+					.setValue('charmander'),
+				new StringSelectMenuOptionBuilder()
+					.setLabel('Squirtle')
+					.setDescription('The water type Tiny Turtle Pokemon.')
+					.setValue('squirtle'),
+			);
+	},
+};
+```
+
+::: tip
+The custom id is a developer-defined string of up to 100 characters. Use this field to ensure you can uniquely define all incoming interactions from your select menus!
+:::
+
+## Sending select menus
+
+To send your select menu, create an action row and add the buttons as components. Then, send the row in the `components` property of <DocsLink path="typedef/InteractionReplyOptions" /> (extends <DocsLink path="typedef/BaseMessageOptions" />).
+
+```js {1,24-25,29}
 const { ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
@@ -47,8 +82,8 @@ module.exports = {
 };
 ```
 
-::: tip
-The custom id is a developer-defined string of up to 100 characters. Use this field to ensure you can uniquely define all incoming interactions from your select menus!
+:::tip
+Remember that if you have more than one select menu, each one will need it's own action row.
 :::
 
 <!-- TODO: Update this section with a new image. Or make a component, idk

@@ -2,15 +2,15 @@
 
 With the components API, you can create interactive message components to enhance the functionality of your slash commands. To get started with this, the first component type you'll need to understand is the action row. To send any type of component, it **must** be placed in an action row.
 
-Action rows are a fairly simple form of layout component. A message may contain up to five rows, each of which has "width" of five units. This can be thought of as a flexible 5x5 grid. A button will consume one unit of width in a row, while a select menu will consume the whole five units of width. At this time, these are the only types of components that can be sent in a message.
+Action rows are a fairly simple form of layout component. A message may contain up to five rows, each of which has a "width" of five units. This can be thought of as a flexible 5x5 grid. A button will consume one unit of width in a row, while a select menu will consume the whole five units of width. At this time, these are the only types of components that can be sent in a message.
 
 :::warning
-The "width units" referred to are not standard - the actual width of each individual button will be dynamic based on it's label contents.
+The "width units" referred to are not fixed - the actual width of each individual button will be dynamic based on it's label contents.
 :::
 
 ## Building action rows
 
-To create an action row, construct an instance of the <DocsLink section="builders" path="class/ActionRowBuilder" /> class. Use the <DocsLink section="builders" path="class/ActionRowBuilder?scrollTo=addComponents" /> method to add buttons or a select menu. 
+To create an action row, use the <DocsLink section="builders" path="class/ActionRowBuilder" /> class and the <DocsLink section="builders" path="class/ActionRowBuilder?scrollTo=addComponents" /> method to add buttons or a select menu. 
 
 ```js {1-2}
 const row = new ActionRowBuilder()

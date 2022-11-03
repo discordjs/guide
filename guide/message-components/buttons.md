@@ -12,9 +12,39 @@ Buttons are one of the `MessageComponent` classes, which can be sent via message
 
 For this example, you're going to expand on the `ban` command that was previously covered on the [parsing options](/slash-commands/parsing-options.md) page with a confirmation workflow.
 
-To create your buttons, use the <DocsLink path="class/ButtonBuilder"/> class, defining at least the `customId`, `style` and `label`. Then, place the buttons inside an action row, and send it in the `components` array of your reply.
+To create your buttons, use the <DocsLink path="class/ButtonBuilder"/> class, defining at least the `customId`, `style` and `label`.
 
-```js {1,9-20,24}
+```js {1,9-17}
+const { ButtonBuilder, ButtonStyle, SlashCommandBuilder } = require('discord.js');
+
+module.exports = {
+	// data: new SlashCommandBuilder()...
+	async execute(interaction) {
+		const target = interaction.options.getUser('target');
+		const reason = interaction.options.getString('reason') ?? 'No reason provided';
+
+		const confirm = new ButtonBuilder()
+			.setCustomId('confirm')
+			.setLabel('Confirm Ban')
+			.setStyle(ButtonStyle.Danger);
+
+		const cancel = new ButtonBuilder()
+			.setCustomId('cancel')
+			.setLabel('Cancel')
+			.setStyle(ButtonStyle.Secondary);
+	},
+};
+```
+
+::: tip
+The custom id is a developer-defined string of up to 100 characters. Use this field to ensure you can uniquely define all incoming interactions from your buttons!
+:::
+
+## Sending buttons
+
+To send your buttons, create an action row and add the buttons as components. Then, send the row in the `components` property of <DocsLink path="typedef/InteractionReplyOptions" /> (extends <DocsLink path="typedef/BaseMessageOptions" />).
+
+```js {1,19-20,24}
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
@@ -44,10 +74,6 @@ module.exports = {
 };
 ```
 
-::: tip
-The custom id is a developer-defined string of up to 100 characters. Use this field to ensure you can uniquely define all incoming interactions from your buttons!
-:::
-
 Restart your bot and then send the command to a channel your bot has access to. If all goes well, you should see something like this:
 
 <DiscordMessages>
@@ -67,7 +93,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 
 ## Button styles
 
-You'll notice in the above example that two different styles of buttons have been used; the grey Secondary style and the red Danger style. These were chosen to follow good UI/UX principles. In total, there are five button styles that can be used as appropriate to the action of the button:
+You'll notice in the above example that two different styles of buttons have been used, the grey Secondary style and the red Danger style. These were chosen specifically to support good UI/UX principles. In total, there are five button styles that can be used as appropriate to the action of the button:
 
 <DiscordMessages>
 	<DiscordMessage profile="bot">
@@ -96,7 +122,7 @@ You'll notice in the above example that two different styles of buttons have bee
 
 Link buttons are a little different to the other styles. `Link` buttons _must_ have a `url`, _cannot_ have a `customId` and _do not_ send an interaction event when clicked.
 
-```js
+```js{3}
 const button = new ButtonBuilder()
 	.setLabel('discord.js docs')
 	.setURL('https://discord.js.org')
