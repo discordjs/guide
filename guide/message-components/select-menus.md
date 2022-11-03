@@ -10,7 +10,7 @@ This page is a follow-up to the [slash commands](/slash-commands/advanced-creati
 
 The "standard" and most customizable type of select menu is the string select menu. To create a string select menu, use the <DocsLink section="builders" path="class/StringSelectMenuBuilder"/> and <DocsLink section="builders" path="class/StringSelectMenuOptionBuilder"/> classes.
 
-If you're a Pokemon fan, you've probably made a selection pretty similar to this example at some point in your life!
+If you're a Pokémon fan, you've probably made a selection pretty similar to this example at some point in your life!
 
 ```js {1,6-21}
 const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder, SlashCommandBuilder } = require('discord.js');
@@ -24,15 +24,15 @@ module.exports = {
 			.addOptions(
 				new StringSelectMenuOptionBuilder()
 					.setLabel('Bulbasaur')
-					.setDescription('The grass/poison type Seed Pokemon.')
+					.setDescription('The dual-type Grass/Poison Seed Pokémon.')
 					.setValue('bulbasaur'),
 				new StringSelectMenuOptionBuilder()
 					.setLabel('Charmander')
-					.setDescription('The fire type Lizard Pokemon.')
+					.setDescription('The Fire-type Lizard Pokémon.')
 					.setValue('charmander'),
 				new StringSelectMenuOptionBuilder()
 					.setLabel('Squirtle')
-					.setDescription('The water type Tiny Turtle Pokemon.')
+					.setDescription('The Water-type Tiny Turtle Pokémon.')
 					.setValue('squirtle'),
 			);
 	},
@@ -59,15 +59,15 @@ module.exports = {
 			.addOptions(
 				new StringSelectMenuOptionBuilder()
 					.setLabel('Bulbasaur')
-					.setDescription('The grass/poison type Seed Pokemon.')
+					.setDescription('The dual-type Grass/Poison Seed Pokémon.')
 					.setValue('bulbasaur'),
 				new StringSelectMenuOptionBuilder()
 					.setLabel('Charmander')
-					.setDescription('The fire type Lizard Pokemon.')
+					.setDescription('The Fire-type Lizard Pokémon.')
 					.setValue('charmander'),
 				new StringSelectMenuOptionBuilder()
 					.setLabel('Squirtle')
-					.setDescription('The water type Tiny Turtle Pokemon.')
+					.setDescription('The Water-type Tiny Turtle Pokémon.')
 					.setValue('squirtle'),
 			);
 
