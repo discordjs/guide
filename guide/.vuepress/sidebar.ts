@@ -72,10 +72,17 @@ export default {
 			]
 		},
 		{
-			text: 'Interactions',
+			text: 'Message Components',
 			children: [
-				'/interactions/buttons.md',
-				'/interactions/select-menus.md',
+				'/message-components/action-rows.md',
+				'/message-components/buttons.md',
+				'/message-components/select-menus.md',
+				'/message-components/interactions.md',
+			]
+		},
+		{
+			text: 'Other Interactions',
+			children: [
 				'/interactions/modals.md',
 				'/interactions/context-menus.md',
 			]
