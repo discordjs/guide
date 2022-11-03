@@ -31,7 +31,7 @@ Add two more properties to your `config.json` file, which we'll need in the depl
 {
 	"token": "your-token-goes-here",
 	"clientId": "123456789012345678",
-	"guildId": "876543210987654321",
+	"guildId": "876543210987654321"
 }
 ```
 
