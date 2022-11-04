@@ -212,7 +212,7 @@ console.log(message);
 
 ## Localized responses
 
-In additional to the ability to provide localized command definitions, you can also localize your responses. To do this, get the locale of the user with `ChatInputCommandInteraction#locale` and respond accordingly:
+In addition to the ability to provide localized command definitions, you can also localize your responses. To do this, get the locale of the user with `ChatInputCommandInteraction#locale` and respond accordingly:
 
 ```js
 client.on(Events.InteractionCreate, interaction => {
