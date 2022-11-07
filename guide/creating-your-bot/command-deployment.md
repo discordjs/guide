@@ -12,7 +12,7 @@ In this section, we'll cover how to register your commands to Discord using disc
 
 Slash commands can be registered in two ways; in one specific guild, or for every guild the bot is in. We're going to look at single-guild registration first, as this is a good way to develop and test your commands before a global deployment.
 
-Your application will need the `applications.commands` scope authorized in a guild for any of its slash commands to appear, and to be able register them in a specific guild without error.
+Your application will need the `applications.commands` scope authorized in a guild for any of its slash commands to appear, and to be able to register them in a specific guild without error.
 
 Slash commands only need to be registered once, and updated when the definition (description, options etc) is changed. As there is a daily limit on command creations, it's not necessary nor desirable to connect a whole client to the gateway or do this on every `ready` event. As such, a standalone script using the lighter REST manager is preferred. 
 
