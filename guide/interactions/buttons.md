@@ -24,7 +24,7 @@ If you're using TypeScript you'll need to specify the type of components your ac
 To create your buttons, use the <DocsLink path="class/ActionRowBuilder"/> and <DocsLink path="class/ButtonBuilder"/> classes. Then, pass the resulting row object to <DocsLink path="class/ChatInputCommandInteraction?scrollTo=reply" /> in the `components` array of <DocsLink path="typedef/InteractionReplyOptions" />:
 
 ```js {1,7-13,15}
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, Events } = require('discord.js');
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
@@ -66,7 +66,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 You can also send message components within an ephemeral response or alongside message embeds.
 
 ```js {1,12-16,18}
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, Events } = require('discord.js');
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
