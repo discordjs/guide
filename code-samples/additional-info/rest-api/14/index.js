@@ -18,7 +18,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	if (commandName === 'cat') {
 		const catResult = await request('https://aws.random.cat/meow');
 		const { file } = await catResult.body.json();
-		interaction.reply({ files: [{ attachment: file, name: 'cat.png' }] });
+		interaction.editReply({ files: [{ attachment: file, name: 'cat.png' }] });
 	} else if (commandName === 'urban') {
 		const term = interaction.options.getString('term');
 		const query = new URLSearchParams({ term });
