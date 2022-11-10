@@ -32,7 +32,7 @@ module.exports = {
 		const command = interaction.client.commands.get(commandName);
 
 		if (!command) {
-			return await interaction.reply(`There is no command with name \`${commandName}\`!`);
+			return interaction.reply(`There is no command with name \`${commandName}\`!`);
 		}
 	},
 };
