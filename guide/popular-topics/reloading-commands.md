@@ -6,7 +6,6 @@ This section assumes you did follow the [Command Handling](/guide/creating-your-
 
 ```js {1}
 const { SlashCommandBuilder } = require('discord.js');
-const fs = require('node:fs');
 
 module.exports = {
 	data: new SlashCommandBuilder()
