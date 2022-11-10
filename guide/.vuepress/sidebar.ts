@@ -89,6 +89,7 @@ export default {
 				'/popular-topics/webhooks.md',
 				'/popular-topics/errors.md',
 				'/popular-topics/audit-logs.md',
+				'/popular-topics/reloading-commands.md',
 				'/popular-topics/canvas.md',
 			],
 		},
