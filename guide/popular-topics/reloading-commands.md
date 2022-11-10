@@ -9,12 +9,12 @@ const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-        .setName('reload')
-        .setDescription('Reloads a command.')
-        .addStringOption(option =>
-            option.setName('command-name')
-            .setDescription('Insert the command name.')
-            .setRequired(true)),
+		.setName('reload')
+		.setDescription('Reloads a command.')
+		.addStringOption(option =>
+			option.setName('command-name')
+			.setDescription('Insert the command name.')
+			.setRequired(true)),
 	async execute(interaction) {
 		// ...
 	},
