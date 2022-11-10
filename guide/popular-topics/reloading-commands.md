@@ -15,7 +15,7 @@ module.exports = {
         .addStringOption(option =>
             option.setName('command-name')
             .setDescription('Insert the command name.')
-            .setRequired('true')),
+            .setRequired(true)),
 	async execute(interaction) {
 		// ...
 	},
