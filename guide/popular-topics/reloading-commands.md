@@ -27,7 +27,7 @@ First off, you need to check if the command you want to reload exists. You can d
 module.exports = {
 	// ...
 	async execute(interaction) {
-		const commandName = interaction.options.getString('command-name', true).toLowerCase();
+		const commandName = interaction.options.getString('command', true).toLowerCase();
 		const command = interaction.client.commands.get(commandName);
 
 		if (!command) {
