@@ -4,6 +4,10 @@ When writing your commands, you may find it tedious to restart your bot every ti
 
 This section assumes you did follow the [Command Handling](/guide/creating-your-bot/command-handling.md) part.
 
+::: warning
+The require method does not work in ESM. If you are using it, try out the [hot-esm](https://www.npmjs.com/package/hot-esm) module.
+:::
+
 ```js {1}
 const { SlashCommandBuilder } = require('discord.js');
 
