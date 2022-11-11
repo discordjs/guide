@@ -21,7 +21,7 @@ module.exports = {
 };
 ```
 
-In this command, you will be using a command name. First off, you need to check if the command you want to reload exists. You can do this check similarly to getting a command in your main file:
+First off, you need to check if the command you want to reload exists. You can do this check similarly to getting a command.
 
 ```js {4-6,8-10}
 module.exports = {
