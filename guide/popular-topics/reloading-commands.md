@@ -1,6 +1,6 @@
 # Reloading commands
 
-When writing your commands, you may find it tedious to restart your bot every time you want to test even your code's slightest change. However, a single bot command can reload commands if you have a command handler.
+When writing your commands, you may find it tedious to restart your bot every time for testing the smallest changes, With a command handler, you can eliminate this issue and reload your commands while your bot is running.
 
 This section assumes you did follow the [Command Handling](/guide/creating-your-bot/command-handling.md) part.
 
