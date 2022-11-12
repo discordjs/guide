@@ -17,7 +17,7 @@ You can have a maximum of five <DocsLink path="class/ActionRowBuilder" />s per m
 To create a modal you construct a new <DocsLink path="class/ModalBuilder" />. You can then use the setters to add the custom id and title.
 
 ```js {1,7-13}
-const { ModalBuilder } = require('discord.js');
+const { Events, ModalBuilder } = require('discord.js');
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
@@ -49,7 +49,7 @@ If you're using typescript you'll need to specify the type of components your ac
 :::
 
 ```js {1,12-34}
-const { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
+const { ActionRowBuilder, Events, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
