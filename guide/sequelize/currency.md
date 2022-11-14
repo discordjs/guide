@@ -200,7 +200,6 @@ Create an `app.js` file in the base directory with the following skeleton code t
 <!-- eslint-disable require-await -->
 
 ```js
-const { Op } = require('sequelize');
 const { Client, codeBlock, Collection, Events, GatewayIntentBits } = require('discord.js');
 const { Users, CurrencyShop } = require('./dbObjects.js');
 
