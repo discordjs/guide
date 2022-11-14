@@ -1,4 +1,3 @@
-const { Op } = require('sequelize');
 const { Client, Collection, Events, Formatters, GatewayIntentBits } = require('discord.js');
 const { Users, CurrencyShop } = require('./dbObjects.js');
 
