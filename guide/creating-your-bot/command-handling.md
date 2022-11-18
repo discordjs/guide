@@ -111,6 +111,49 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 ```
 
+## Command categories
+
+So far, all of your command files are in a single `commands` folder. This is fine at first, but as your project grows, the number of files in the `commands` folder will too. Keeping track of that many files can be a little tough. To make this a little easier, you can categorize your commands and put them in subfolders inside the `commands` folder. You will have to make a few changes to your existing code in `index.js` for this to work out.
+
+If you've been following along, your project structure should look something like this:
+
+![Project structure before sorting](./images/before-sorting.png)
+
+After moving your commands into sub-folders, it will look something like this:
+
+![Project structure after sorting](./images/after-sorting.png)
+
+::: warning
+Make sure you put every command file you have inside one of the new sub-folders. Leaving a command file directly under the `commands` folder will create problems.
+:::
+
+It is not necessary to name your subfolders exactly like we have named them here. You can create any number of subfolders and name them whatever you want. Although, it is a good practice to name them according to the type of commands stored inside them.
+
+Back in your `index.js` file, where the code to [dynamically read command files](/command-handling/#reading-command-files) is, use the same pattern to read the sub-folder directories, and then require each command inside them.
+
+```js {3,5-11}
+client.commands = new Collection();
+
+const foldersPath = path.join(__dirname, 'commands');
+const commandFolders = fs.readdirSync(foldersPath);
+
+for (const folder of commandFolders) {
+	const commandsPath = path.join(foldersPath, folder);
+	const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+	for (const file of commandFiles) {
+		const filePath = path.join(commandsPath, file)
+		const command = require(filePath);
+		// Set a new item in the Collection with the key as the command name and the value as the exported module
+		if ('data' in command && 'execute' in command) {
+			client.commands.set(command.data.name, command);
+		} else {
+			console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+	}
+}
+```
+
+That's it! When creating new files for commands, make sure you create them inside one of the subfolders (or a new one) in the `commands` folder.
+
 #### Next steps
 
 Your command files are now loaded into your bot, and the event listener is prepared and ready to respond. In the next section, we cover the final step - a command deployment script you'll need to register your commands so they appear in the Discord client.
