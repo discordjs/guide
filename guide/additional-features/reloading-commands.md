@@ -60,3 +60,5 @@ try {
 ```
 
 The snippet above uses a `try/catch` block to load the command file and add it to `client.commands`. In case of an error, it will log the full error to the console and notify the user about it with the error's message component `error.message`. Note that you never actually delete the command from the commands Collection and instead overwrite it. This behavior prevents you from deleting a command and ending up with no command at all after a failed `require()` call, as each use of the reload command checks that Collection again.
+
+<ResultingCode path="additional-features/reloading-commands" />

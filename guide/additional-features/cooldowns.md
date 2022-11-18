@@ -88,3 +88,7 @@ setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
 ```
 
 This line causes the entry for the interaction user under the specified command to be deleted after the command's cooldown time is expired for this user.
+
+## Resulting code
+
+<ResultingCode path="additional-features/cooldowns" />
