@@ -15,9 +15,9 @@ module.exports = {
 		if (!command) {
 			return interaction.reply(`There is no command with name \`${commandName}\`!`);
 		}
-		
+
 		delete require.cache[require.resolve(`./${command.data.name}.js`)];
-		
+
 		try {
 	        interaction.client.commands.delete(command.data.name);
 	        const newCommand = require(`./${command.data.name}.js`);
