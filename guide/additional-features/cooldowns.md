@@ -10,10 +10,10 @@ First, add a cooldown key to one of your commands (we use the ping command here)
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
-	cooldown: 5,
-    data: new SlashCommandBuilder()
-        .setName('ping')
-        .setDescription('Replies with Pong!'),
+    cooldown: 5,
+	data: new SlashCommandBuilder()
+		.setName('ping')
+		.setDescription('Replies with Pong!'),
 	async execute(interaction) {
 		// ...
 	},
