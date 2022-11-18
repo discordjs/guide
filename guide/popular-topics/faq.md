@@ -164,7 +164,7 @@ await interaction.followUp(`Hi, <@${user.id}>.`);
 ```
 
 ::: tip
-Mentions in embeds may resolve correctly in embed descriptions and field values but will never notify the user. Other areas do not support mentions at all.
+Mentions in embeds may resolve correctly in embed titles, descriptions and field values but will never notify the user. Other areas do not support mentions at all.
 :::
 
 ### How do I control which users and/or roles are mentioned in a message?
