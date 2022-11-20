@@ -5,6 +5,7 @@ const { token } = require('./config.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
+client.cooldowns = new Collection();
 client.commands = new Collection();
 const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
@@ -42,14 +43,15 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	const now = Date.now();
 	const timestamps = cooldowns.get(command.name);
-	const cooldownAmount = (command.cooldown || 3) * 1000;
+	const defaultCooldownDuration = 3;
+	const cooldownAmount = (command.cooldown || defaultCooldownDuration) * 1000;
 
 	if (timestamps.has(interaction.user.id)) {
 		const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
 
 		if (now < expirationTime) {
-			const timeLeft = (expirationTime - now) / 1000;
-			return interaction.reply({ content: `Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`, ephemeral: true });
+			const timeLeft = Math.round(expirationTime / 1000);
+			return interaction.reply({ content: `Please wait <t:${timeLeft}:R> more second(s) before reusing the \`${command.name}\` command.`, ephemeral: true });
 		}
 	}
 

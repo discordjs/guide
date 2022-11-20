@@ -23,7 +23,6 @@ module.exports = {
 In your main file, initialize an empty [Collection](/guide/additional-info//collections.md) which you can then fill later when commands are used:
 
 ```js {2}
-client.commands = new Collection();
 client.cooldowns = new Collection();
 ```
 
@@ -40,7 +39,8 @@ if (!cooldowns.has(command.data.name)) {
 
 const now = Date.now();
 const timestamps = cooldowns.get(command.data.name);
-const cooldownAmount = (command.cooldown || 3) * 1000;
+const defaultCooldownDuration = 3;
+const cooldownAmount = (command.cooldown || defaultCooldownDuration) * 1000;
 
 if (timestamps.has(interaction.user.id)) {
 	// ...
@@ -68,8 +68,8 @@ if (timestamps.has(interaction.user.id)) {
 	const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
 
 	if (now < expirationTime) {
-		const timeLeft = (expirationTime - now) / 1000;
-		return interaction.reply({ content: `Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.data.name}\` command.`, ephemeral: true });
+		const timeLeft = Math.round(expirationTime / 1000);
+		return interaction.reply({ content: `Please wait <t:${timeLeft}:R> more second(s) before reusing the \`${command.data.name}\` command.`, ephemeral: true });
 	}
 }
 ```
