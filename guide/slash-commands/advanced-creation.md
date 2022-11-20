@@ -179,7 +179,7 @@ const data = new SlashCommandBuilder()
 
 The names and descriptions of slash commands can be localized to the user's selected language. You can find the list of accepted locales on the [discord API documentation](https://discord.com/developers/docs/reference#locales).
 
-Setting localisations with `setNameLocations()` and `setDescriptionLocalisations()` takes the format of an object, mapping location codes (e.g. `pl` and `de`) to their localised strings.
+Setting localizations with `setNameLocalizations()` and `setDescriptionLocalizations()` takes the format of an object, mapping location codes (e.g. `pl` and `de`) to their localised strings.
 
 <!-- eslint-skip -->
 ```js {5-8,10-12,18-25}
