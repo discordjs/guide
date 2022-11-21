@@ -20,7 +20,7 @@ module.exports = {
 };
 ```
 
-In your main file, initialize an empty [Collection](/guide/additional-info//collections.md) which you can then fill later when commands are used:
+In your main file, initialize a [Collection](/guide/additional-info//collections.md) to store cooldowns of commands
 
 ```js {1}
 client.cooldowns = new Collection();
