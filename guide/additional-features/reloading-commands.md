@@ -9,7 +9,7 @@ ESM does not support require and clearing import cache. You can use [hot-esm](ht
 This section assumes you followed the [Command Handling](/guide/creating-your-bot/command-handling.md) part.
 
 ::: warning
-The reload is not a command that should be used for every users. You should deploy it as a guild command in a private guild.
+The reload is not a command that should be generally used by every user. You should deploy it as a guild command in a private guild.
 :::
 
 ```js
