@@ -56,7 +56,6 @@ export default {
 		{
 			text: 'Additional Features',
 			children: [
-				'/additional-features/',
 				'/additional-features/cooldowns.md',
 				'/additional-features/reloading-commands.md',
 			]
