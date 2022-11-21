@@ -6,7 +6,7 @@ This section assumes you followed the [Command Handling](/guide/creating-your-bo
 
 First, add a cooldown key to one of your commands (we use the ping command here) exports. This determines how long the user will have to wait (in seconds) before using this specific command again.
 
-```js {3}
+```js {4}
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
