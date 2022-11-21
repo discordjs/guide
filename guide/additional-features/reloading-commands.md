@@ -12,7 +12,7 @@ This section assumes you followed the [Command Handling](/guide/creating-your-bo
 The reload is not a command that should be used for every users. You should deploy it as a guild command in a private guild.
 :::
 
-```js {1}
+```js
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
