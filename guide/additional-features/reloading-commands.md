@@ -49,7 +49,7 @@ To build the correct file path, you will need the file name. You can use `comman
 
 In theory, all there is to do is delete the previous command from `client.commands` and require the file again. In practice, you cannot do this easily as `require()` caches the file. If you were to require it again, you would load the previously cached file without any changes. You first need to delete the file from the `require.cache`, and only then should you require and set the command file to `client.commands`:
 
-```js {3,5-12}
+```js {1,4-6}
 delete require.cache[require.resolve(`./${command.data.name}.js`)];
 
 try {
