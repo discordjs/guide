@@ -26,7 +26,7 @@ In your main file, initialize an empty [Collection](/guide/additional-info//coll
 client.cooldowns = new Collection();
 ```
 
-The keys will be the command names, and the values will be Collections associating the user id (key) to the last time (value) this specific user used this specific command. Overall the logical path to get a specific user's last usage of a specific command will be `cooldowns > command > user > timestamp`.
+The key will be the command names, and the values will be Collections associating the user's id (key) to the last time (value) this specific user used this specific command. Overall the logical path to get a specific user's last usage of a specific command will be `cooldowns > command > user > timestamp`.
 
 In your main file, add the following code:
 
