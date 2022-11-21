@@ -76,7 +76,7 @@ if (timestamps.has(interaction.user.id)) {
 
 Since the `timestamps` Collection has the user's ID in it as a key, you `.get()` it and then sum it up with the `cooldownAmount` variable to get the correct expiration timestamp. You then check to see if it's expired or not.
 
-The previous user check serves as a precaution. It should normally not be necessary, as you will now insert a short piece of code, causing the user's entry to be deleted after the cooldown has expired. To facilitate this, you will use the node.js `setTimeout` method, which allows you to execute a function after a specified amount of time:
+The previous user check serves as a precaution incase the user leaves the guild. You can now use the `setTimeout` method, which will allow you to execute a function after a specified amount of time and remove the timeout.
 
 ```js {5-6}
 if (timestamps.has(interaction.user.id)) {
