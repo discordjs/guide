@@ -1,6 +1,6 @@
 # Cooldowns
 
-Spam is something you generally want to avoid–especially if one of your commands requires calls to other APIs or takes a bit of time to build/send. Cooldowns are also a very common feature bot developers want to integrate into their projects, so let's get started on that!
+Spam is something you generally want to avoid, especially if one of commands require calls to other APIs or takes a bit of time to build/send.
 
 This section assumes you followed the [Command Handling](/guide/creating-your-bot/command-handling.md) part.
 
