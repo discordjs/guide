@@ -59,7 +59,7 @@ You check if the `cooldowns` Collection already has an entry for the command bei
 2. `timestamps`: A reference to the Collection of user-ID and timestamp key/value pairs for the triggered command.
 3. `cooldownAmount`: The specified cooldown from the command file, converted to milliseconds for straightforward calculation. If none is specified, this defaults to three seconds.
 
-If the user has already used this command in this session, get the timestamp, calculate the expiration time and inform the user of the amount of time they need to wait before using this command again. Note that you use a `return` statement here, causing the code below this snippet only to execute if the interaction user has not used this command in this session or the wait has already expired.
+If the user has already used this command in this session, get the timestamp, calculate the expiration time and inform the user of the amount of time they need to wait before using this command again. Note the use of `return` statement here, causing the code below this snippet to execute only if the user has not used this command in this session or the wait has already expired.
 
 Continuing with your current setup, this is the complete `if` statement:
 
