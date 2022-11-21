@@ -53,7 +53,7 @@ try {
 }
 ```
 
-You check if the `cooldowns` Collection already has an entry for the command being used right now. If this is not the case, add a new entry, where the value is initialized as an empty Collection. Next, 3 variables are created:
+You check if the `cooldowns` Collection already has an entry for the command being used. If this is not the case, you can add a new entry, where the value is initialized as an empty Collection. Next, create the following variables:
 
 1. `now`: The current timestamp.
 2. `timestamps`: A reference to the Collection of user's id and timestamp key/value pairs for the triggered command.
