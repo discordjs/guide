@@ -56,7 +56,7 @@ try {
 You check if the `cooldowns` Collection already has an entry for the command being used right now. If this is not the case, add a new entry, where the value is initialized as an empty Collection. Next, 3 variables are created:
 
 1. `now`: The current timestamp.
-2. `timestamps`: A reference to the Collection of user-ID and timestamp key/value pairs for the triggered command.
+2. `timestamps`: A reference to the Collection of user's id and timestamp key/value pairs for the triggered command.
 3. `cooldownAmount`: The specified cooldown for the command, converted to milliseconds for straightforward calculation. If none is specified, this defaults to three seconds.
 
 If the user has already used this command in this session, get the timestamp, calculate the expiration time and inform the user of the amount of time they need to wait before using this command again. Note the use of `return` statement here, causing the code below this snippet to execute only if the user has not used this command in this session or the wait has already expired.
