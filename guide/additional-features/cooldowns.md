@@ -74,7 +74,7 @@ if (timestamps.has(interaction.user.id)) {
 }
 ```
 
-Since the `timestamps` Collection has the user's ID in it as a key, you `.get()` it and then sum it up with the `cooldownAmount` variable to get the correct expiration timestamp. You then check to see if it's expired or not.
+Since the `timestamps` Collection has the user's id as the key, you can use the `get()`method on it to get the value and sum it up with the `cooldownAmount` variable to get the correct expiration timestamp and further check to see if it's expired or not.
 
 The previous user check serves as a precaution incase the user leaves the guild. You can now use the `setTimeout` method, which will allow you to execute a function after a specified amount of time and remove the timeout.
 
