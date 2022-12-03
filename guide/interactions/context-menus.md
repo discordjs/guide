@@ -47,5 +47,5 @@ client.on(Events.InteractionCreate, interaction => {
 ## Notes
 
 - Context menu commands cannot have subcommands or any options.
-- Responding to context menu commands functions the same as slash commands. Refer to our [slash command responses](/interactions/slash-commands.md#responding-to-a-command) guide for more information.
-- Context menu command permissions also function the same as slash commands. Refer to our [slash command permissions](/interactions/slash-commands.md#slash-command-permissions) guide for more information.
+- Responding to context menu commands functions the same as slash commands. Refer to our [slash command responses](/slash-commands/response-methods) guide for more information.
+- Context menu command permissions also function the same as slash commands. Refer to our [slash command permissions](/slash-commands/permissions) guide for more information.
