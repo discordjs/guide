@@ -11,7 +11,7 @@ You may have decided that you don't need a command anymore and don't want your u
 To delete a specific command, you will need its id. Head to **Server Settings -> Integrations -> Bots and Apps** and choose your bot. Then, right click a command and click **Copy ID**.
 
 ::: tip
-You need to have [Developer Mode](https://support.discord.com/hc/en-us/articles/206346498) enabled for this to show up!
+You need to have [Developer Mode](https://support.discord.com/hc/articles/206346498) enabled for this to show up!
 :::
 
 ![bots-and-apps](./images/bots-and-apps.png)
