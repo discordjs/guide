@@ -1,26 +1,22 @@
-const { Client, Intents } = require('discord.js');
+const { Client, Events, GatewayIntentBits } = require('discord.js');
 require('dotenv').config();
 
-const commands = [
-	{
-		name: 'ping',
-		description: 'Pong!',
-	},
-];
+/**
+ * You should set commands in your deploy.js file to prevent api spamming
+*/
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] }).once('ready', () => {
-	console.log('Ready!');
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-	client.application.commands.fetch().then(existingCommands => {
-		existingCommands.find(c => c.name === 'ping')
-			&& client.application.commands.set(commands);
-	});
+client.once('ready', () => {
+	console.log('I am ready!');
 });
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isCommand()) return;
-
-	await interaction.reply({ content: 'ok', ephemeral: true });
+	if (interaction.commandName === 'ping') {
+		await interaction.reply({ content: 'Pong!', ephemeral: true });
+	}
 });
 
+// It doesn't require putting token as DISCORD_TOKEN is set
 client.login();

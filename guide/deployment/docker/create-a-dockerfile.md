@@ -2,7 +2,11 @@
 
 A Dockerfile is a file that tells Docker how to build your bot into an image for the Docker engine to run.
 When the image is built and running in a container, it will be running in a virtual environment that is isolated from the host machine.
-This means you cannot access files in your host machine without volume mounts. This means if you decided to use a JSON file instead of environment variables for configuration, you will need to mount the file to the container or simply use [environment variables](/creating-your-bot/#using-environment-variables).
+This means you cannot access files in your host machine without volume mounts. This means if you decided to use a JSON file instead of environment variables for configuration, you will need to mount the file to the container, or simply use [environment variables](/creating-your-bot/#using-environment-variables).
+
+::: tip
+    Showed examples are used on linux, to run them on other system you should google how.
+:::
 
 1. Create a `Dockerfile` file in your project directory.
 

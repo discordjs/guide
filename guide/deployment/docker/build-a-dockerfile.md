@@ -4,7 +4,7 @@
 A Docker image is a read-only template containing instructions for creating a container that can run on the Docker platform. It provides an easy way to package up applications and pre-configured server environments that you can use privately or publicly with other Docker users.
 :::
 
-Now that you have your `Dockerfile` and `.dockerignore` file, you can build your Docker image, with your instruction manual you made for the cli. Most people like to [automate this](#automating-the-build-process-with-github-actions) but you can also do it [manually](#manually-building-and-publishing-your-docker-image).
+Now that you have your `Dockerfile` and `.dockerignore` file, you can build your Docker image with your instruction manual you made for the cli. Most people like to [automate this](#automating-the-build-process-with-github-actions), but you can also do it [manually](#manually-building-and-publishing-your-docker-image).
 
 ## Manually building and publishing your Docker image
 
@@ -26,8 +26,8 @@ Step 2: Push your Docker image to Docker Hub
 GitHub Actions is a CI/CD platform that allows you to automate your build, test, and deployment pipelines. You can set up workflows to build and test each pull request that comes into your repository, for this example we will be using GitHub Actions to publish a Docker Image every push you do to your master branch.
 :::
 
-To use GitHub Actions your code must be in a GitHub repository.
-You can store your code in a git server such as GitHub for ease of access.
+To use GitHub Actions, your code must be in a GitHub repository.
+You can store your code in a git server, such as GitHub, for ease of access.
 
 [Create a GitHub repository](https://docs.github.com/en/get-started/quickstart/create-a-repo)
 
@@ -74,7 +74,7 @@ jobs:
                   docker push ghcr.io/AccountUsername/RepoName:latest
 ```
 
-Now every time you push to your main branch the docker image will be built and pushed to the GHCR.
+Now, every time you push to your main branch, the docker image will be built and pushed to the GHCR.
 
 ## Resulting code
 
