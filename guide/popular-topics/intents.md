@@ -48,9 +48,6 @@ const client = new Client({ intents: myIntents });
 
 const otherIntents = new Intents([Intents.FLAGS.GUILDS, Intents.FLAGS.DIRECT_MESSAGES]);
 otherIntents.remove([Intents.FLAGS.DIRECT_MESSAGES]);
-
-const otherIntents2 = new Intents(32509);
-otherIntents2.remove(4096, 512);
 ```
 
 If you want to view the built flags you can utilize the `.toArray()`, `.serialize()` methods. The first returns an array of flags represented in this bitfield, the second an object mapping all possible flag values to a boolean, based on their representation in this bitfield.
