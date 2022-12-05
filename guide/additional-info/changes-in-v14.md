@@ -6,13 +6,13 @@ v14 requires Node 16.9 or higher to use, so make sure you're up to date. To chec
 
 ### Builders are now included in v14
 
-If you previously had `@discordjs/builders` or `@discordjs/rest` manually installed, it's _highly_ recommended that you uninstall the packages to avoid package version conflicts.
+If you previously had `@discordjs/builders`, `@discordjs/rest` or `discord-api-types` manually installed, it's _highly_ recommended that you uninstall the packages to avoid package version conflicts.
 
 :::: code-group
 ::: code-group-item npm
 
 ```sh:no-line-numbers
-npm uninstall @discordjs/builders @discordjs/rest
+npm uninstall @discordjs/builders @discordjs/rest discord-api-types
 ```
 
 :::
