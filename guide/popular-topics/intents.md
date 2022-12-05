@@ -44,7 +44,7 @@ myIntents.add(Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MEMBERS);
 
 const client = new Client({ intents: myIntents });
 
-// other examples:
+// other example:
 
 const otherIntents = new Intents([Intents.FLAGS.GUILDS, Intents.FLAGS.DIRECT_MESSAGES]);
 otherIntents.remove([Intents.FLAGS.DIRECT_MESSAGES]);
