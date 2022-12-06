@@ -19,8 +19,8 @@ Threads introduce a number of new gateway events, which are listed below:
 
 ## Creating and deleting threads
 
-Threads are created and deleted using the <DocsLink path="class/ThreadManager" /> of a text or news channel.
-To create a thread you call the <DocsLink path="class/ThreadManager?scrollTo=create" type="method" /> method:
+Threads are created and deleted using the <DocsLink path="class/GuildTextThreadManager" /> of a text or news channel.
+To create a thread you call the <DocsLink path="class/GuildTextThreadManager?scrollTo=create" type="method" /> method:
 
 <!-- eslint-skip -->
 
@@ -96,7 +96,7 @@ Archived threads can't be locked!
 
 ## Public and private threads
 
-Public threads are viewable by everyone who can view the parent channel of the thread. Public threads can be created with the <DocsLink path="class/ThreadManager?scrollTo=create" type="method" /> method.
+Public threads are viewable by everyone who can view the parent channel of the thread. Public threads can be created with the <DocsLink path="class/GuildTextThreadManager?scrollTo=create" type="method" /> method.
 
 <!-- eslint-skip -->
 
@@ -128,7 +128,7 @@ The created thread and the message it originated from will share the same ID. Th
 
 Private threads behave similar to Group DMs, but in a Guild. Private threads can only be created on text channels.
 
-To create a private thread, use <DocsLink path="class/ThreadManager?scrollTo=create" type="method" /> and pass in `ChannelType.PrivateThread` as the `type`:
+To create a private thread, use <DocsLink path="class/GuildTextThreadManager?scrollTo=create" type="method" /> and pass in `ChannelType.PrivateThread` as the `type`:
 
 <!-- eslint-skip -->
 
