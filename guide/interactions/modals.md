@@ -11,7 +11,7 @@ This page is a follow-up to the [interactions (slash commands) page](/interactio
 Unlike message components, modals aren't strictly components themselves. They're a callback structure used to respond to interactions.
 
 ::: tip
-You can have a maximum of five <DocsLink path="class/ActionRowBuilder" />s per modal builder, and one <DocsLink path="class/TextInputBuilder" /> within an <DocsLink path="class/ActionRowBuilder" />. Currently, you cannot use <DocsLink path="class/StringSelectMenuBuilder" />s or <DocsLink path="class/ButtonBuilder" />s in modal action rows builders.
+You can have a maximum of five <DocsLink path="class/ActionRowBuilder" />s per modal builder, and one <DocsLink path="class/TextInputBuilder" /> within an <DocsLink path="class/ActionRowBuilder" />. Currently, you cannot use <DocsLink path="class/SelectMenuBuilder" />s or <DocsLink path="class/ButtonBuilder" />s in modal action rows builders.
 :::
 
 To create a modal you construct a new <DocsLink path="class/ModalBuilder" />. You can then use the setters to add the custom id and title.

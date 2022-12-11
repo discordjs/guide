@@ -327,7 +327,7 @@ Whenever an interaction is replied to and one fetches the reply, it could possib
 + const button = new ButtonBuilder();
 
 - const selectMenu = new MessageSelectMenu();
-+ const selectMenu = new StringSelectMenuBuilder();
++ const selectMenu = new SelectMenuBuilder();
 
 - const actionRow = new MessageActionRow();
 + const actionRow = new ActionRowBuilder();
@@ -358,9 +358,9 @@ Whenever an interaction is replied to and one fetches the reply, it could possib
 
 ### MessageSelectMenu
 
--   `MessageSelectMenu` has been renamed to `StringSelectMenuBuilder`
+-   `MessageSelectMenu` has been renamed to `SelectMenuBuilder`
 
--   `StringSelectMenuBuilder#addOption()` has been removed. Use `StringSelectMenuBuilder#addOptions()` instead.
+-   `SelectMenuBuilder#addOption()` has been removed. Use `SelectMenuBuilder#addOptions()` instead.
 
 ### MessageEmbed
 
