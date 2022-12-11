@@ -14,10 +14,10 @@ Select menus are one of the `MessageComponent` classes, which can be sent via me
 You can have a maximum of five `ActionRow`s per message, and one select menu within an `ActionRow`.
 :::
 
-To create a select menu, use the <DocsLink path="class/ActionRowBuilder"/> and <DocsLink path="class/StringSelectMenuBuilder"/> classes. Then, pass the resulting row object to <DocsLink path="class/ChatInputCommandInteraction?scrollTo=reply" /> in the `components` array of <DocsLink path="typedef/InteractionReplyOptions" />:
+To create a select menu, use the <DocsLink path="class/ActionRowBuilder"/> and <DocsLink path="class/SelectMenuBuilder"/> classes. Then, pass the resulting row object to <DocsLink path="class/ChatInputCommandInteraction?scrollTo=reply" /> in the `components` array of <DocsLink path="typedef/InteractionReplyOptions" />:
 
 ```js {1,7-24,26}
-const { ActionRowBuilder, Events, StringSelectMenuBuilder } = require('discord.js');
+const { ActionRowBuilder, Events, SelectMenuBuilder } = require('discord.js');
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
@@ -25,7 +25,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	if (interaction.commandName === 'ping') {
 		const row = new ActionRowBuilder()
 			.addComponents(
-				new StringSelectMenuBuilder()
+				new SelectMenuBuilder()
 					.setCustomId('select')
 					.setPlaceholder('Nothing selected')
 					.addOptions(
@@ -68,7 +68,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 You can also send message components within an ephemeral response or alongside message embeds.
 
 ```js {1,12-16,18}
-const { ActionRowBuilder, EmbedBuilder, Events, StringSelectMenuBuilder } = require('discord.js');
+const { ActionRowBuilder, EmbedBuilder, Events, SelectMenuBuilder } = require('discord.js');
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
@@ -122,7 +122,7 @@ If you're using TypeScript you'll need to specify the type of components your ac
 
 ```diff
 - new ActionRowBuilder()
-+ new ActionRowBuilder<StringSelectMenuBuilder>()
++ new ActionRowBuilder<SelectMenuBuilder>()
 ```
 :::
 
@@ -197,10 +197,10 @@ client.on(Events.InteractionCreate, async interaction => {
 
 ## Multi-select menus
 
-A select menu is not bound to only one selection; you can specify a minimum and maximum amount of options that must be selected. You can use <DocsLink path="class/SelectMenuBuilder?scrollTo=setMinValues" /> and <DocsLink path="class/StringSelectMenuBuilder?scrollTo=setMaxValues" /> to determine these values.
+A select menu is not bound to only one selection; you can specify a minimum and maximum amount of options that must be selected. You can use <DocsLink path="class/SelectMenuBuilder?scrollTo=setMinValues" /> and <DocsLink path="class/SelectMenuBuilder?scrollTo=setMaxValues" /> to determine these values.
 
 ```js {1,7-31,33}
-const { ActionRowBuilder, Events, StringSelectMenuBuilder } = require('discord.js');
+const { ActionRowBuilder, Events, SelectMenuBuilder } = require('discord.js');
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
@@ -208,7 +208,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	if (interaction.commandName === 'ping') {
 		const row = new ActionRowBuilder()
 			.addComponents(
-				new StringSelectMenuBuilder()
+				new SelectMenuBuilder()
 					.setCustomId('select')
 					.setPlaceholder('Nothing selected')
 					.setMinValues(2)
