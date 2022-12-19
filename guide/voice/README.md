@@ -42,6 +42,7 @@ This guide assumes you have installed at least one additional dependency – FFm
   - [`ffmpeg-static`](https://www.npmjs.com/package/ffmpeg-static) - to install FFmpeg via npm
 - Encryption packages
   - [`sodium`](https://www.npmjs.com/package/sodium) (best performance)
+  - [`sodium-native`](https://www.npmjs.com/package/sodium-native)
   - [`libsodium-wrappers`](https://www.npmjs.com/package/libsodium-wrappers)
   - [`tweetnacl`](https://www.npmjs.com/package/tweetnacl)
 
