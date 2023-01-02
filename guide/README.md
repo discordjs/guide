@@ -25,6 +25,7 @@ If you don't know JavaScript but would like to learn about it, here are a few li
 * [Nodeschool, for both JavaScript and Node.js lessons](https://nodeschool.io/)
 * [MDN's JavaScript guide and full documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * [Google, your best friend](https://google.com)
+* [Learn JavaScript in Detail](https://www.scaler.com/topics/javascript/)
 
 Take your pick, learn some JavaScript, and once you feel like you're confident enough to make a bot, come back and get started!
 
