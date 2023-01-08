@@ -48,6 +48,7 @@ You can subscribe voice connections to audio players as soon as they're created.
 
 ```js
 // Subscribe the connection to the audio player (will play audio on the voice connection)
+const audioPlayer = createAudioPlayer();
 const subscription = connection.subscribe(audioPlayer);
 
 // subscription could be undefined if the connection is destroyed!
