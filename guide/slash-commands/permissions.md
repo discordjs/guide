@@ -28,7 +28,7 @@ const data = new SlashCommandBuilder()
 	.setDefaultMemberPermissions(PermissionFlagsBits.BanMembers);
 ```
 
-For a kick command however, we can allow members with either `BanMembers` or `KickMembers` to execute the command, so we'll list both flags here joined by the bitwise OR operator.
+We can require user to have both `BanMembers` and `KickMembers` permissions to execute the command, so we'll list both flags here joined by the bitwise OR operator.
 
 ::: tip
 If you want to learn more about the `|` bitwise OR operator you can check the [Wikipedia](https://en.wikipedia.org/wiki/Bitwise_operation#OR) and [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_OR) articles on the topic.
