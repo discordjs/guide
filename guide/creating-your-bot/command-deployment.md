@@ -27,11 +27,16 @@ Add two more properties to your `config.json` file, which we'll need in the depl
 - `clientId`: Your application's client id
 - `guildId`: Your development server's id
 
+
+To get your `clientId` open your application in the [Discord Developer Portal](https://discord.com/developers/applications) and go to the "General Information" page to copy your application id.
+
+To get your `guildId` open Discord, go to Settings > Advanced and enable developer mode. Then, right-click on the server title and select "Copy ID" to get the server id.
+
 ```json
 {
 	"token": "your-token-goes-here",
-	"clientId": "123456789012345678",
-	"guildId": "876543210987654321"
+	"clientId": "your-application-id-goes-here",
+	"guildId": "your-server-id-goes-here"
 }
 ```
 
