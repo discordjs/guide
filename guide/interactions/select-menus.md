@@ -14,10 +14,10 @@ Select menus are one of the `MessageComponent` classes, which can be sent via me
 You can have a maximum of five `ActionRow`s per message, and one select menu within an `ActionRow`.
 :::
 
-To create a select menu, use the <DocsLink path="class/ActionRowBuilder"/> and <DocsLink path="class/SelectMenuBuilder"/> classes. Then, pass the resulting row object to <DocsLink path="class/ChatInputCommandInteraction?scrollTo=reply" /> in the `components` array of <DocsLink path="typedef/InteractionReplyOptions" />:
+To create a select menu, use the <DocsLink path="class/ActionRowBuilder"/> and <DocsLink path="class/StringSelectMenuBuilder"/> classes. Then, pass the resulting row object to <DocsLink path="class/ChatInputCommandInteraction?scrollTo=reply" /> in the `components` array of <DocsLink path="typedef/InteractionReplyOptions" />:
 
 ```js {1,7-24,26}
-const { ActionRowBuilder, Events, SelectMenuBuilder } = require('discord.js');
+const { ActionRowBuilder, Events, StringSelectMenuBuilder } = require('discord.js');
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
@@ -25,7 +25,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	if (interaction.commandName === 'ping') {
 		const row = new ActionRowBuilder()
 			.addComponents(
-				new SelectMenuBuilder()
+				new StringSelectMenuBuilder()
 					.setCustomId('select')
 					.setPlaceholder('Nothing selected')
 					.addOptions(
@@ -68,7 +68,7 @@ Restart your bot and then send the command to a channel your bot has access to. 
 You can also send message components within an ephemeral response or alongside message embeds.
 
 ```js {1,12-16,18}
-const { ActionRowBuilder, EmbedBuilder, Events, SelectMenuBuilder } = require('discord.js');
+const { ActionRowBuilder, EmbedBuilder, Events, StringSelectMenuBuilder } = require('discord.js');
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
@@ -122,7 +122,7 @@ If you're using TypeScript you'll need to specify the type of components your ac
 
 ```diff
 - new ActionRowBuilder()
-+ new ActionRowBuilder<SelectMenuBuilder>()
++ new ActionRowBuilder<StringSelectMenuBuilder>()
 ```
 :::
 
@@ -142,11 +142,11 @@ For a detailed guide on receiving message components via collectors, please refe
 
 ### The interactionCreate event
 
-To receive a <DocsLink path="class/SelectMenuInteraction"/>, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isSelectMenu"/> type guard to make sure you only receive select menus:
+To receive a <DocsLink path="class/StringSelectMenuInteraction"/>, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isStringSelectMenu"/> type guard to make sure you only receive select menus:
 
 ```js {2}
 client.on(Events.InteractionCreate, interaction => {
-	if (!interaction.isSelectMenu()) return;
+	if (!interaction.isStringSelectMenu()) return;
 	console.log(interaction);
 });
 ```
@@ -169,7 +169,7 @@ This method should be used in favour of `editReply()` on the original interactio
 
 ```js {1,4-6}
 client.on(Events.InteractionCreate, async interaction => {
-	if (!interaction.isSelectMenu()) return;
+	if (!interaction.isStringSelectMenu()) return;
 
 	if (interaction.customId === 'select') {
 		await interaction.update({ content: 'Something was selected!', components: [] });
@@ -185,7 +185,7 @@ Additionally to deferring the response of the interaction, you can defer the men
 const wait = require('node:timers/promises').setTimeout;
 
 client.on(Events.InteractionCreate, async interaction => {
-	if (!interaction.isSelectMenu()) return;
+	if (!interaction.isStringSelectMenu()) return;
 
 	if (interaction.customId === 'select') {
 		await interaction.deferUpdate();
@@ -197,10 +197,10 @@ client.on(Events.InteractionCreate, async interaction => {
 
 ## Multi-select menus
 
-A select menu is not bound to only one selection; you can specify a minimum and maximum amount of options that must be selected. You can use <DocsLink path="class/SelectMenuBuilder?scrollTo=setMinValues" /> and <DocsLink path="class/SelectMenuBuilder?scrollTo=setMaxValues" /> to determine these values.
+A select menu is not bound to only one selection; you can specify a minimum and maximum amount of options that must be selected. You can use <DocsLink path="class/SelectMenuBuilder?scrollTo=setMinValues" /> and <DocsLink path="class/StringSelectMenuBuilder?scrollTo=setMaxValues" /> to determine these values.
 
 ```js {1,7-31,33}
-const { ActionRowBuilder, Events, SelectMenuBuilder } = require('discord.js');
+const { ActionRowBuilder, Events, StringSelectMenuBuilder } = require('discord.js');
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
@@ -208,7 +208,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	if (interaction.commandName === 'ping') {
 		const row = new ActionRowBuilder()
 			.addComponents(
-				new SelectMenuBuilder()
+				new StringSelectMenuBuilder()
 					.setCustomId('select')
 					.setPlaceholder('Nothing selected')
 					.setMinValues(2)
@@ -239,13 +239,13 @@ client.on(Events.InteractionCreate, async interaction => {
 
 ## Accessing select menu interaction values
 
-After receiving your <DocsLink path="class/SelectMenuInteraction"/>, you will be able to access the selected values from <DocsLink path="class/SelectMenuInteraction?scrollTo=values"/>. This will return an array of string values associated with the selected options in your select menu.
+After receiving your <DocsLink path="class/StringSelectMenuInteraction"/>, you will be able to access the selected values from <DocsLink path="class/StringSelectMenuInteraction?scrollTo=values"/>. This will return an array of string values associated with the selected options in your select menu.
 
 By default, select menus only accept a single selection. You can retrieve the selected value by accessing the first index of the returned array, as demonstrated in the snippet below:
 
 ```js {4,6-10}
 client.on(Events.InteractionCreate, async interaction => {
-	if (!interaction.isSelectMenu()) return;
+	if (!interaction.isStringSelectMenu()) return;
 
 	const selected = interaction.values[0];
 
@@ -257,11 +257,11 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 ```
 
-In the case of a multi-select menu, the received <DocsLink path="class/SelectMenuInteraction?scrollTo=values"/> may contain more than one value, and should be handled accordingly:
+In the case of a multi-select menu, the received <DocsLink path="class/StringSelectMenuInteraction?scrollTo=values"/> may contain more than one value, and should be handled accordingly:
 
 ```js {4,6}
 client.on(Events.InteractionCreate, async interaction => {
-	if (!interaction.isSelectMenu()) return;
+	if (!interaction.isStringSelectMenu()) return;
 
 	const selected = interaction.values.join(', ');
 

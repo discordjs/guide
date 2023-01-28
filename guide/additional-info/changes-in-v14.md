@@ -6,13 +6,13 @@ v14 requires Node 16.9 or higher to use, so make sure you're up to date. To chec
 
 ### Builders are now included in v14
 
-If you previously had `@discordjs/builders` or `@discordjs/rest` manually installed, it's _highly_ recommended that you uninstall the packages to avoid package version conflicts.
+If you previously had `@discordjs/builders`, `@discordjs/rest`, or `discord-api-types` manually installed, it's _highly_ recommended that you uninstall the packages to avoid package version conflicts.
 
 :::: code-group
 ::: code-group-item npm
 
 ```sh:no-line-numbers
-npm uninstall @discordjs/builders @discordjs/rest
+npm uninstall @discordjs/builders @discordjs/rest discord-api-types
 ```
 
 :::
@@ -327,7 +327,7 @@ Whenever an interaction is replied to and one fetches the reply, it could possib
 + const button = new ButtonBuilder();
 
 - const selectMenu = new MessageSelectMenu();
-+ const selectMenu = new SelectMenuBuilder();
++ const selectMenu = new StringSelectMenuBuilder();
 
 - const actionRow = new MessageActionRow();
 + const actionRow = new ActionRowBuilder();
@@ -358,9 +358,9 @@ Whenever an interaction is replied to and one fetches the reply, it could possib
 
 ### MessageSelectMenu
 
--   `MessageSelectMenu` has been renamed to `SelectMenuBuilder`
+-   `MessageSelectMenu` has been renamed to `StringSelectMenuBuilder`
 
--   `SelectMenuBuilder#addOption()` has been removed. Use `SelectMenuBuilder#addOptions()` instead.
+-   `StringSelectMenuBuilder#addOption()` has been removed. Use `StringSelectMenuBuilder#addOptions()` instead.
 
 ### MessageEmbed
 
