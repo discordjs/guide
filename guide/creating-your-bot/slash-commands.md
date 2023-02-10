@@ -138,4 +138,4 @@ You can implement additional commands by creating additional files in the `comma
 
 #### Resulting code
 
-<ResultingCode path="creating-your-bot/slash-commands" /> 
+<ResultingCode path="creating-your-bot/slash-commands" />
