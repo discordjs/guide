@@ -141,6 +141,14 @@ client.on(Events.InteractionCreate, interaction => {
 });
 ```
 
+### Await 
+
+Another way to await to receive a modal submission is to await it being submitted, with <DocsLink path="typedef/AwaitModalSubmitOptions/">
+
+```js
+const modalInteraction = await interaction.awaitModalSubmit({ time: 60_000 })
+```
+
 ## Responding to modal submissions
 
 The <DocsLink path="class/ModalSubmitInteraction"/> class provides the same methods as the <DocsLink path="class/ChatInputCommandInteraction"/> class. These methods behave equally:
