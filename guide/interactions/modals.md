@@ -141,7 +141,7 @@ client.on(Events.InteractionCreate, interaction => {
 });
 ```
 
-### Await 
+### Await interaction 
 
 Another way to await to receive a modal submission is to await it being submitted, with <DocsLink path="typedef/AwaitModalSubmitOptions/">
 
