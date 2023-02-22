@@ -561,6 +561,8 @@ Added `Guild#maxVideoChannelUsers` as of 14.2.0 which indicates the maximum numb
 
 Added `Guild#disableInvites()` as of 14.8.0 which disables the guild's invites.
 
+Added support for the `after` parameter in `Guild#fetchAuditLogs()` as of 14.8.0.
+
 ### GuildChannelManager
 
 `videoQualityMode` may be used whilst creating a channel to initially set the camera video quality mode.
