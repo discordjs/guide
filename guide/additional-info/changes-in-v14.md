@@ -573,6 +573,10 @@ Added `GuildEmojiManager#delete()` and `GuildEmojiManager#edit()` for managing e
 
 Added `GuildForumThreadManager` as manager for threads in forum channels as of 14.4.0.
 
+### GuildMembersChunk
+
+This object now supports the `GuildMembersChunk#notFound` property as of 14.8.0.
+
 ### GuildMemberManager
 
 Added `GuildMemberManager#fetchMe()` to fetch the client user in the guild.
