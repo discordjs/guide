@@ -541,7 +541,7 @@ const collector = interaction.channel.createMessageComponentCollector({
 
 ### CommandInteractionOptionResolver
 
-`CommandInteractionOptionResolver#getChannel()` now has a third parameter which narrows the channel type.
+`CommandInteractionOptionResolver#getChannel()` now has a third parameter which narrows the channel type as of 14.8.0.
 
 ### ForumChannel
 
