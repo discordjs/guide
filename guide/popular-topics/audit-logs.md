@@ -47,14 +47,21 @@ const { AuditLogEvent, Events } = require('discord.js');
 
 client.on(Events.GuildAuditLogEntryCreate, async auditLog => {
 	// Define our variables.
-	const { action, executor, target } = auditLog;
+	const { action, executorId, target, targetId } = auditLog;
 
 	// Check only for deleted messages.
 	if (action !== AuditLogEvent.MessageDelete) return;
 
-	// Our executor is a user object and our target is a message object.
-	// Now we can log the output!
-	console.log(`A message by ${target.author.tag} was deleted by ${executor.tag}.`);
+	// Ensure we have the executor cached.
+	const user = client.users.fetch(executorId);
+
+	if (target) {
+		// We have the message object cached. We can provide a good log here.
+		console.log(`A message by ${target.author.tag} was deleted by ${user.tag}.`);
+	} else {
+		// We did not have the message object cached. We can still emit some information.
+		console.log(`A message with id ${targetId} was deleted by ${user.tag}.`);
+	}
 });
 ```
 
