@@ -604,6 +604,10 @@ Added `MessageReaction#react()` to make the client user react with the reaction 
 
 Added support for role subscriptions as of 14.8.0.
 
+### Sticker
+
+Added support for GIF stickers as of 14.8.0.
+
 ### Webhook
 
 Added `Webhook#applicationId`.
