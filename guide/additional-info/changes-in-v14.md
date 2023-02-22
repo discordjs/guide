@@ -493,7 +493,7 @@ Many of the analogous enums can be found in the discord-api-types docs. [discord
 
 ### ApplicationCommand
 
-NFSW commands are supported as of 14.8.0.
+NFSW commands are supported.
 
 ### AutocompleteInteraction
 
@@ -515,7 +515,7 @@ Additionally, new typeguards have been added:
 
 ### ClientApplication
 
-Added support for role connection metadata as of 14.8.0.
+Added support for role connection metadata.
 
 ### Collection
 
@@ -545,7 +545,7 @@ const collector = interaction.channel.createMessageComponentCollector({
 
 ### CommandInteractionOptionResolver
 
-`CommandInteractionOptionResolver#getChannel()` now has a third parameter which narrows the channel type as of 14.8.0.
+`CommandInteractionOptionResolver#getChannel()` now has a third parameter which narrows the channel type.
 
 ### Events
 
@@ -555,7 +555,7 @@ Added support for `guildAuditLogEntryCreate` event.
 
 Added support for forum channels as of 14.4.0.
 
-Added support for `ForumChannel#defaultForumLayout` as of 14.8.0.
+Added support for `ForumChannel#defaultForumLayout`.
 
 ### Guild
 
@@ -563,9 +563,9 @@ Added `Guild#setMFALevel()` which sets the guild's MFA level.
 
 Added `Guild#maxVideoChannelUsers` as of 14.2.0 which indicates the maximum number of video channel users.
 
-Added `Guild#disableInvites()` as of 14.8.0 which disables the guild's invites.
+Added `Guild#disableInvites()` which disables the guild's invites.
 
-Added support for the `after` parameter in `Guild#fetchAuditLogs()` as of 14.8.0.
+Added support for the `after` parameter in `Guild#fetchAuditLogs()`.
 
 ### GuildChannelManager
 
@@ -585,7 +585,7 @@ Added support for `GuildMember#flags`.
 
 ### GuildMembersChunk
 
-This object now supports the `GuildMembersChunk#notFound` property as of 14.8.0.
+This object now supports the `GuildMembersChunk#notFound` property.
 
 ### GuildMemberManager
 
@@ -604,7 +604,7 @@ Added `Interaction#isRepliable()` to check whether a given interaction can be re
 
 `Message#position` has been added as an approximate position in a thread as of 14.4.0.
 
-Added support for role subscription data as of 14.8.0.
+Added support for role subscription data.
 
 ### MessageReaction
 
@@ -612,11 +612,11 @@ Added `MessageReaction#react()` to make the client user react with the reaction 
 
 ### Role
 
-Added support for role subscriptions as of 14.8.0.
+Added support for role subscriptions.
 
 ### Sticker
 
-Added support for GIF stickers as of 14.8.0.
+Added support for GIF stickers.
 
 ### ThreadMemberManager
 
