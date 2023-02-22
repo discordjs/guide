@@ -539,6 +539,10 @@ const collector = interaction.channel.createMessageComponentCollector({
 
 `CommandInteraction#commandGuildId` has been added which is the id of the guild the invoked application command is registered to.
 
+### CommandInteractionOptionResolver
+
+`CommandInteractionOptionResolver#getChannel()` now has a third parameter which narrows the channel type.
+
 ### ForumChannel
 
 Added support for forum channels as of 14.4.0.
