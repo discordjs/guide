@@ -545,6 +545,8 @@ Added `Guild#setMFALevel()` which sets the guild's MFA level.
 
 Added `Guild#maxVideoChannelUsers` as of 14.2.0 which indicates the maximum number of video channel users.
 
+Added `Guild#disableInvites()` as of 14.8.0 which disables the guild's invites.
+
 ### GuildChannelManager
 
 `videoQualityMode` may be used whilst creating a channel to initially set the camera video quality mode.
