@@ -598,6 +598,10 @@ Added `Interaction#isRepliable()` to check whether a given interaction can be re
 
 Added `MessageReaction#react()` to make the client user react with the reaction the class belongs to.
 
+### Role
+
+Added support for role subscriptions as of 14.8.0.
+
 ### Webhook
 
 Added `Webhook#applicationId`.
