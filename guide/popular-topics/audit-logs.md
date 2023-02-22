@@ -6,7 +6,7 @@ Audit logs are an excellent moderation tool offered by Discord to know what happ
 
 There are quite a few cases where you may use audit logs. This guide will limit itself to the most common use cases. Feel free to consult the [relevant Discord API page](https://discord.com/developers/docs/resources/audit-log) for more information.
 
-Keep in mind that these examples explore a aightforward case and are no means foolproof. Their purpose is to teach how audit logs work, and expansion of these examples is likely needed to suit your needs.
+Keep in mind that these examples explore a straightforward case and are no means foolproof. Their purpose is to teach how audit logs work, and expansion of these examples is likely needed to suit your needs.
 
 ## Fetching Audit Logs
 
