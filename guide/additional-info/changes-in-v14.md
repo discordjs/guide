@@ -596,6 +596,8 @@ Added `Interaction#isRepliable()` to check whether a given interaction can be re
 
 `Message#position` has been added as an approximate position in a thread as of 14.4.0.
 
+Added support for role subscription data as of 14.8.0.
+
 ### MessageReaction
 
 Added `MessageReaction#react()` to make the client user react with the reaction the class belongs to.
