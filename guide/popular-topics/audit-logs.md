@@ -36,7 +36,7 @@ This will return the first entry where an invite was created. We used `limit: 1`
 
 ## Receiving Audit Logs
 
-Audit logs may be received via the gateway event `guildAuditLogEntryCreate`. This is the best way to receive audit logs if you are monitoring them. As soon as a message is deleted, or an invite is created, or an emoji was created, you can listen to this event to check information about said occurrence. A common functionality is to find out _who_ did something that generated an audit log event.
+Audit logs may be received via the gateway event `guildAuditLogEntryCreate`. This is the best way to receive audit logs if you are monitoring them. As soon as a message is deleted, or an invite is created, or an emoji is created, you can listen to this event to check information about said occurrence. A common functionality is to find out _who_ did something that generated an audit log event.
 
 ### Who deleted a message?
 
