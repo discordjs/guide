@@ -19,7 +19,7 @@ const fetchedLogs = await guild.fetchAuditLogs();
 const firstEntry = fetchedLogs.entries.first();
 ```
 
-Simple, right? Now, let's look at utilizing it's options:
+Simple, right? Now, let's look at utilizing its options:
 
 ```js
 const { AuditLogEvent } = require('discord.js');
