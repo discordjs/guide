@@ -618,6 +618,12 @@ Added support for role subscriptions as of 14.8.0.
 
 Added support for GIF stickers as of 14.8.0.
 
+### ThreadMemberManager
+
+The new `withMember` options returns the associated guild member with the thread member.
+
+When fetching multiple thread members alongside `withMember`, paginated results will be returned. The `after` and `limit` option are supported in this scenario.
+
 ### Webhook
 
 Added `Webhook#applicationId`.
