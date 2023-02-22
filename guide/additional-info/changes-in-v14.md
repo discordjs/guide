@@ -553,7 +553,7 @@ Added `Guild#maxVideoChannelUsers` as of 14.2.0 which indicates the maximum numb
 
 Added `GuildEmojiManager#delete()` and `GuildEmojiManager#edit()` for managing existing guild emojis.
 
-### GuildForumThreadManager 
+### GuildForumThreadManager
 
 Added `GuildForumThreadManager` as manager for threads in forum channels as of 14.4.0.
 
