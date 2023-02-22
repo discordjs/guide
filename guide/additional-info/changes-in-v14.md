@@ -513,6 +513,10 @@ Additionally, new typeguards have been added:
 -   `Channel#isTextBased()`
 -   `Channel#isVoiceBased()`
 
+### ClientApplication
+
+Added support for role connection metadata as of 14.8.0.
+
 ### Collection
 
 -   Added `Collection#merge()` and `Collection#combineEntries()`.
