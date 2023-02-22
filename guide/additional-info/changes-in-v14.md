@@ -491,6 +491,10 @@ Many of the analogous enums can be found in the discord-api-types docs. [discord
 
 ## Features
 
+### ApplicationCommand
+
+NFSW commands are supported as of 14.8.0.
+
 ### AutocompleteInteraction
 
 `AutocompleteInteraction#commandGuildId` has been added which is the id of the guild the invoked application command is registered to.
