@@ -53,7 +53,7 @@ client.on(Events.GuildAuditLogEntryCreate, async auditLog => {
 	if (action !== AuditLogEvent.MessageDelete) return;
 
 	// Ensure we have the executor cached.
-	const user = client.users.fetch(executorId);
+	const user = await client.users.fetch(executorId);
 
 	if (target) {
 		// We have the message object cached. We can provide a good log here.
@@ -82,13 +82,13 @@ client.on(Events.GuildAuditLogEntryCreate, async auditLog => {
 	if (action !== AuditLogEvent.MemberKick) return;
 
 	// Ensure we have the executor cached.
-	const user = client.users.fetch(executorId);
+	const user = await client.users.fetch(executorId);
 
 	// Ensure we have the kicked guild member cached.
-	const kickedUser = client.users.fetch(targetId);
+	const kickedUser = await client.users.fetch(targetId);
 
 	// Now we can log the output!
-	console.log(`${user.tag} was kicked by ${user.tag}.`);
+	console.log(`${kickedUser.tag} was kicked by ${user.tag}.`);
 });
 ```
 
