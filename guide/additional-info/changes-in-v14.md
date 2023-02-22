@@ -547,6 +547,10 @@ const collector = interaction.channel.createMessageComponentCollector({
 
 `CommandInteractionOptionResolver#getChannel()` now has a third parameter which narrows the channel type as of 14.8.0.
 
+### Events
+
+Added support for `guildAuditLogEntryCreate` event.
+
 ### ForumChannel
 
 Added support for forum channels as of 14.4.0.
