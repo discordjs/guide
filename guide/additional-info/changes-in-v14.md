@@ -543,6 +543,8 @@ const collector = interaction.channel.createMessageComponentCollector({
 
 Added support for forum channels as of 14.4.0.
 
+Added support for `ForumChannel#defaultForumLayout` as of 14.8.0.
+
 ### Guild
 
 Added `Guild#setMFALevel()` which sets the guild's MFA level.
