@@ -8,7 +8,7 @@ This page is a follow-up to the [slash commands](/slash-commands/advanced-creati
 
 ## Registering context menu commands
 
-To create a context menu command, use the <DocsLink path="class/ContextMenuCommandBuilder" /> class. You can then set the type of the context menu (user or message) using the `setType()` method.
+To create a context menu command, use the <DocsLink section="builders" path="class/ContextMenuCommandBuilder" /> class. You can then set the type of the context menu (user or message) using the `setType()` method.
 
 ```js
 const { ContextMenuCommandBuilder, ApplicationCommandType } = require('discord.js');
@@ -31,9 +31,9 @@ client.on(Events.InteractionCreate, interaction => {
 
 ## Extracting data from context menus
 
-For user context menus, you can get the targeted user by accessing the `targetUser` or `targetMember` property from the <DocsLink path="class/UserContextMenuInteraction" />.
+For user context menus, you can get the targeted user by accessing the `targetUser` or `targetMember` property from the <DocsLink path="class/UserContextMenuCommandInteraction" />.
 
-For message contenxt menus, you can get the targeted message by accessing the `targetMessage` property from the <DocsLink path="class/MessageContextMenuInteraction" />.
+For message contenxt menus, you can get the targeted message by accessing the `targetMessage` property from the <DocsLink path="class/MessageContextMenuCommandInteraction" />.
 
 ```js {4}
 client.on(Events.InteractionCreate, interaction => {
