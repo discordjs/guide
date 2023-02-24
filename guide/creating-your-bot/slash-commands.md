@@ -63,7 +63,7 @@ The simplest way to acknowledge and respond to an interaction is the `interactio
 
 ```js
 async execute(interaction) {
-	await interaction.reply('Pong'!)
+	await interaction.reply('Pong!')
 }
 ```
 
