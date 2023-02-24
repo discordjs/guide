@@ -24,13 +24,8 @@ Create a `deploy-commands.js` file in your project directory. This file will be 
 
 Add two more properties to your `config.json` file, which we'll need in the deployment script:
 
-- `clientId`: Your application's client id
-- `guildId`: Your development server's id
-
-
-To get your `clientId` open your application in the [Discord Developer Portal](https://discord.com/developers/applications) and go to the "General Information" page to copy your application id.
-
-To get your `guildId` open Discord, go to Settings > Advanced and enable developer mode. Then, right-click on the server title and select "Copy ID" to get the server id.
+- `clientId`: Your application's client id ([Discord Developer Portal](https://discord.com/developers/applications) > "General Information" > application id)
+- `guildId`: Your development server's id (Enable developer mode > Right-click the server title > "Copy ID")
 
 ```json
 {
