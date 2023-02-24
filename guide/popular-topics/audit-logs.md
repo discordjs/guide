@@ -10,7 +10,7 @@ Keep in mind that these examples explore a straightforward case and are no means
 
 ## Fetching Audit Logs
 
-Let's start by glancing at the <DocsLink path="class/Guild?scrollTo=fetchAuditLogs" type="method" /> method and how to work with it. Like many discord.js methods, it returns a `Promise` containing the <DocsLink path="class/GuildAuditLogs" /> object. In this object is a sole `entries` property which holds a collection of <DocsLink path="class/GuildAuditLogsEntry" /> objects, and consequently, the information you usually want.
+Let's start by glancing at the <DocsLink path="class/Guild?scrollTo=fetchAuditLogs" type="method" /> method and how to work with it. Using this method requires the `ViewAuditLog` permission. Like many discord.js methods, it returns a `Promise` containing the <DocsLink path="class/GuildAuditLogs" /> object. In this object is a sole `entries` property which holds a collection of <DocsLink path="class/GuildAuditLogsEntry" /> objects, and consequently, the information you usually want.
 
 Here is the most basic fetch to look at some entries.
 
@@ -36,7 +36,7 @@ This will return the first entry where an invite was created. We used `limit: 1`
 
 ## Receiving Audit Logs
 
-Audit logs may be received via the gateway event `guildAuditLogEntryCreate`. This is the best way to receive audit logs if you are monitoring them. As soon as a message is deleted, or an invite is created, or an emoji is created, you can listen to this event to check information about said occurrence. A common use case is to find out _who_ did something that generated an audit log event.
+Audit logs may be received via the gateway event `guildAuditLogEntryCreate` with the `GuildModeration` intent. This is the best way to receive audit logs if you are monitoring them. As soon as a message is deleted, or an invite is created, or an emoji is created, you can listen to this event to check information about said occurrence. A common use case is to find out _who_ did something that generated an audit log event.
 
 ### Who deleted a message?
 
