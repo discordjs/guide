@@ -131,6 +131,10 @@ module.exports = {
 		.addStringOption(option =>
 			option.setName('query')
 				.setDescription('Phrase to search for')
+				.setAutocomplete(true))
+		.addStringOption(option =>
+			option.setName('version')
+				.setDescription('Version to search in')
 				.setAutocomplete(true)),
 	async autocomplete(interaction) {
 		const focusedOption = interaction.options.getFocused(true);
