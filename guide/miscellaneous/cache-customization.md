@@ -83,6 +83,10 @@ const client = new Client({
 			interval: 3600, // Every hour...
 			lifetime: 1800,	// Remove messages older than 30 minutes.
 		},
+		users: {
+			interval: 3600, // Every hour...
+			filter: user => user.bot && user.id !== client.user.id, // Remove all bots.
+		},
 	},
 });
 ```
