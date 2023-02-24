@@ -44,7 +44,7 @@ To react with a Unicode emoji, you will need the actual Unicode character of the
 	<DiscordMessage profile="user">
 		Unicode emoji:
 		<span class="emoji-container">
-			<img class="emoji-image" title="smile" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f604.png" alt="" />
+			<img class="emoji-image" title="smile" alt=":smile:" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f6044.png" />
 		</span>
 		<br />
 		Escaped version (<DiscordMarkdown>`\:smile:`</DiscordMarkdown>): 😄
@@ -77,7 +77,7 @@ client.on(Events.InteractionCreate, async interaction => {
 		You can react with Unicode emojis!
 		<template #reactions>
 			<DiscordReactions>
-				<DiscordReaction name="smile" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f604.png" />
+				<DiscordReaction name="smile" alt=":smile:" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f604.png" />
 			</DiscordReactions>
 		</template>
 	</DiscordMessage>
@@ -91,7 +91,7 @@ For custom emojis, there are multiple ways of reacting. Like Unicode emojis, you
 	<DiscordMessage profile="user">
 		Custom emoji:
 		<span class="emoji-container">
-			<img class="emoji-image" title="blobreach" src="https://imgur.com/3Oar9gP.png" alt="" />
+			<img class="emoji-image" title="blobreach" alt=":blobreach:" src="https://imgur.com/3Oar9gP.png" />
 		</span>
 		<br />
 		Escaped version (<DiscordMarkdown>`\:blobreach:`</DiscordMarkdown>): &lt;:blobreach:123456789012345678&gt;
@@ -209,9 +209,9 @@ client.on(Events.InteractionCreate, async interaction => {
 		Reacting with fruits!
 		<template #reactions>
 			<DiscordReactions>
-				<DiscordReaction name="apple" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34e.png" />
-				<DiscordReaction name="tangerine" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34a.png" />
-				<DiscordReaction name="grapes" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f347.png" />
+				<DiscordReaction name="apple" alt=":apple:" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34e.png" />
+				<DiscordReaction name="tangerine" alt=":tangerine:" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34a.png" />
+				<DiscordReaction name="grapes" alt=":grapes:" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f347.png" />
 			</DiscordReactions>
 		</template>
 	</DiscordMessage>
@@ -225,9 +225,9 @@ client.on(Events.InteractionCreate, async interaction => {
 		Reacting with fruits!
 		<template #reactions>
 			<DiscordReactions>
-				<DiscordReaction name="apple" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34e.png" />
-				<DiscordReaction name="grapes" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f347.png" />
-				<DiscordReaction name="tangerine" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34a.png" />
+				<DiscordReaction name="apple" alt=":apple:" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34e.png" />
+				<DiscordReaction name="grapes" alt=":grapes:" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f347.png" />
+				<DiscordReaction name="tangerine" alt=":tangerine:" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34a.png" />
 			</DiscordReactions>
 		</template>
 	</DiscordMessage>
@@ -241,9 +241,9 @@ client.on(Events.InteractionCreate, async interaction => {
 		Reacting with fruits!
 		<template #reactions>
 			<DiscordReactions>
-				<DiscordReaction name="tangerine" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34a.png" />
-				<DiscordReaction name="apple" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34e.png" />
-				<DiscordReaction name="grapes" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f347.png" />
+				<DiscordReaction name="tangerine" alt=":tangerine:" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34a.png" />
+				<DiscordReaction name="apple" alt=":apple:" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34e.png" />
+				<DiscordReaction name="grapes" alt=":grapes:" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f347.png" />
 			</DiscordReactions>
 		</template>
 	</DiscordMessage>
@@ -304,9 +304,9 @@ If you try again with either of the code blocks above, you'll get the result you
 		Reacting with fruits!
 		<template #reactions>
 			<DiscordReactions>
-				<DiscordReaction name="apple" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34e.png" />
-				<DiscordReaction name="tangerine" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34a.png" />
-				<DiscordReaction name="grapes" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f347.png" />
+				<DiscordReaction name="apple" alt=":apple:" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34e.png" />
+				<DiscordReaction name="tangerine" alt=":tangerine:" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34a.png" />
+				<DiscordReaction name="grapes" alt=":grapes:" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f347.png" />
 			</DiscordReactions>
 		</template>
 	</DiscordMessage>
@@ -320,9 +320,9 @@ If you try again with either of the code blocks above, you'll get the result you
 		Reacting with fruits!
 		<template #reactions>
 			<DiscordReactions>
-				<DiscordReaction name="apple" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34e.png" />
-				<DiscordReaction name="tangerine" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34a.png" />
-				<DiscordReaction name="grapes" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f347.png" />
+				<DiscordReaction name="apple" alt=":apple:" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34e.png" />
+				<DiscordReaction name="tangerine" alt=":tangerine:" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34a.png" />
+				<DiscordReaction name="grapes" alt=":grapes:" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f347.png" />
 			</DiscordReactions>
 		</template>
 	</DiscordMessage>
@@ -336,9 +336,9 @@ If you try again with either of the code blocks above, you'll get the result you
 		Reacting with fruits!
 		<template #reactions>
 			<DiscordReactions>
-				<DiscordReaction name="apple" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34e.png" />
-				<DiscordReaction name="tangerine" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34a.png" />
-				<DiscordReaction name="grapes" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f347.png" />
+				<DiscordReaction name="apple" alt=":apple:" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34e.png" />
+				<DiscordReaction name="tangerine" alt=":tangerine:" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f34a.png" />
+				<DiscordReaction name="grapes" alt=":grapes:" image="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f347.png" />
 			</DiscordReactions>
 		</template>
 	</DiscordMessage>

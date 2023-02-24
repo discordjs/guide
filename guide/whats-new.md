@@ -23,7 +23,7 @@
 		</template>
 		discord.js v14 has released and the guide has been updated!
 		<span class="emoji-container">
-			<img class="emoji-image" title="tada" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f389.png" alt="" />
+			<img class="emoji-image" title="tada" alt=":tada:" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/1f389.png" />
 		</span>
 		<br />
 		This includes additions and changes made in Discord, such as slash commands and message components.
@@ -63,7 +63,7 @@ All content has been updated to use discord.js v14 syntax. The v13 version of th
 	<DiscordMessage profile="bot">
 		Thank you to all of those that contributed to the development of discord.js and the guide!
 		<span class="emoji-container">
-			<img class="emoji-image" title="heart" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/2764.png" alt="" />
+			<img class="emoji-image" title="heart" alt=":heart:" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@v13.1.0/assets/72x72/2764.png" />
 		</span>
 	</DiscordMessage>
 </DiscordMessages>
