@@ -85,7 +85,7 @@ const client = new Client({
 		},
 		users: {
 			interval: 3600, // Every hour...
-			filter: user => user.bot, // Remove all bots.
+			filter: user => user.bot && user.id !== client.user.id, // Remove all bots.
 		},
 	},
 });
