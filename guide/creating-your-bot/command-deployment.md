@@ -1,7 +1,7 @@
 # Registering slash commands
 
 ::: tip
-This page assumes you use the same file structure as our [Slash commands](/slash-commands/) section, and the provided are made to function with that setup. Please carefully read that section first so that you can understand the methods used in this section.
+This page assumes you use the same file structure as our [Slash commands](./slash-commands.md) section, and the provided are made to function with that setup. Please carefully read that section first so that you can understand the methods used in this section.
 
 If you already have slash commands set up and deployed for your application and want to learn how to respond to them, refer to the following section on [Command Response Methods](/slash-commands/response-methods.md).
 :::
