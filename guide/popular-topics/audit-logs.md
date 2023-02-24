@@ -57,7 +57,7 @@ client.on(Events.GuildAuditLogEntryCreate, async auditLog => {
 
 	if (target) {
 		// We have the message object cached. We can provide a good log here.
-		console.log(`A message by ${target.author.tag} was deleted by ${user.tag}.`);
+		console.log(`A message by ${target.tag} was deleted by ${user.tag}.`);
 	} else {
 		// We did not have the message object cached. We can still emit some information.
 		console.log(`A message with id ${targetId} was deleted by ${user.tag}.`);
