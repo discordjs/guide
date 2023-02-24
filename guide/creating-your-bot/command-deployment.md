@@ -1,7 +1,7 @@
 # Registering slash commands
 
 ::: tip
-This page assumes you use the same file structure as our [Slash commands](/slash-commands/) section, and the provided are made to function with that setup. Please carefully read that section first so that you can understand the methods used in this section.
+This page assumes you use the same file structure as our [Slash commands](./slash-commands.md) section, and the provided are made to function with that setup. Please carefully read that section first so that you can understand the methods used in this section.
 
 If you already have slash commands set up and deployed for your application and want to learn how to respond to them, refer to the following section on [Command Response Methods](/slash-commands/response-methods.md).
 :::
@@ -24,14 +24,14 @@ Create a `deploy-commands.js` file in your project directory. This file will be 
 
 Add two more properties to your `config.json` file, which we'll need in the deployment script:
 
-- `clientId`: Your application's client id
-- `guildId`: Your development server's id
+- `clientId`: Your application's client id ([Discord Developer Portal](https://discord.com/developers/applications) > "General Information" > application id)
+- `guildId`: Your development server's id ([Enable developer mode](https://support.discord.com/hc/en-us/articles/206346498) > Right-click the server title > "Copy ID")
 
 ```json
 {
 	"token": "your-token-goes-here",
-	"clientId": "123456789012345678",
-	"guildId": "876543210987654321"
+	"clientId": "your-application-id-goes-here",
+	"guildId": "your-server-id-goes-here"
 }
 ```
 
@@ -43,10 +43,12 @@ With these defined, you can use the deployment script below:
 const { REST, Routes } = require('discord.js');
 const { clientId, guildId, token } = require('./config.json');
 const fs = require('node:fs');
+const path = require('node:path');
 
 const commands = [];
 // Grab all the command files from the commands directory you created earlier
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandsPath = path.join(__dirname, 'commands');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
 // Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
 for (const file of commandFiles) {

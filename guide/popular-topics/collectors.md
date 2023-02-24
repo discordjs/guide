@@ -168,5 +168,19 @@ const filter = i => {
 
 message.awaitMessageComponent({ filter, componentType: ComponentType.StringSelect, time: 60000 })
 	.then(interaction => interaction.editReply(`You selected ${interaction.values.join(', ')}!`))
-	.catch(err => console.log(`No interactions were collected.`));
+	.catch(err => console.log('No interactions were collected.'));
 ```
+
+### Await modal submit
+
+If you want to wait for the submission of a modal within the context of another command or button execution, you may find the promisified collector <DocsLink path="class/CommandInteraction?scrollTo=awaitModalSubmit"/> useful.
+
+As Discord does not inform you if the user dismisses the modal, supplying a maximum `time` to wait for is crucial:
+
+```js
+initialInteraction.awaitModalSubmit({ time: 60_000, filter })
+	.then(interaction => interaction.editReply('Thank you for your submission!'))
+	.catch(err => console.log('No modal submit interaction was collected'));
+```
+
+For more information on working with modals, see the [modals section of this guide](/interactions/modals.md).

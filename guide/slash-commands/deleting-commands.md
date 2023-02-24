@@ -1,10 +1,10 @@
 # Deleting commands
 
 ::: tip
-This page is a follow-up to [the previous page](./creating-commands.md). You need commands to delete them in the first place.
+This page is a follow-up to [command deployment](/creating-your-bot/command-deployment.md). To delete commands, you need to register them in the first place.
 :::
 
-You may have decided that you don't need a command anymore and don't want your users to be confused when they encounter a removed command. 
+You may have decided that you don't need a command anymore and don't want your users to be confused when they encounter a removed command.
 
 ## Deleting specific commands
 
