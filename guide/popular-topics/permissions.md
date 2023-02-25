@@ -55,7 +55,7 @@ Note that flag names are literal. Although `ViewChannel` grants access to view m
 
 ### Creating a role with permissions
 
-Alternatively you can provide permissions as a property of the <DocsLink path="typedef/CreateRoleOptions" /> typedef during role creation as an array of flag strings or a permission number:
+Alternatively you can provide permissions as a property of the <DocsLink path="typedef/RoleCreateOptions" /> typedef during role creation as an array of flag strings or a permission number:
 
 ```js
 const { PermissionsBitField } = require('discord.js');
