@@ -66,4 +66,4 @@ rest.put(Routes.applicationCommands(clientId), { body: [] })
 	.catch(console.error);
 ```
 
-The Discord bot API does currently not provide an easy way to delete guild-based commands that occurr on multiple guilds from all places at once. Each will need a call of the above endpoint, while specifying the respetive guild and command id. Note, that the same command will have a different id, if deployed to a different guild!
+The Discord bot API does currently not provide an easy way to delete guild-based commands that occur on multiple guilds from all places at once. Each will need a call of the above endpoint, while specifying the respetive guild and command id. Note, that the same command will have a different id, if deployed to a different guild!
