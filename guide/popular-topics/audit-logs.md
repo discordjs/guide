@@ -10,7 +10,7 @@ Keep in mind that these examples explore a straightforward case and are by no me
 
 ## Fetching Audit Logs
 
-Let's start by glancing at the <DocsLink path="class/Guild?scrollTo=fetchAuditLogs" type="method" /> method and how to work with it. Like many discord.js methods, it returns a `Promise` containing the <DocsLink path="class/GuildAuditLogs" /> object. This object has one property, `entries`, which holds a collection of <DocsLink path="class/GuildAuditLogsEntry" /> objects, and consequently, the information you want to retrieve.
+Let's start by glancing at the <DocsLink path="class/Guild?scrollTo=fetchAuditLogs" type="method" /> method and how to work with it. Like many discord.js methods, it returns a [`Promise`](/guide/additional-info/async-await.md) containing the <DocsLink path="class/GuildAuditLogs" /> object. This object has one property, `entries`, which holds a [`Collection`](/additional-info/collections.md) of <DocsLink path="class/GuildAuditLogsEntry" /> objects, and consequently, the information you want to retrieve.
 
 Here is the most basic fetch to look at some entries.
 
