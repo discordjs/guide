@@ -6,14 +6,17 @@ When writing your commands, you may find it tedious to restart your bot every ti
 ESM does not support require and clearing import cache. You can use [hot-esm](https://www.npmjs.com/package/hot-esm) to import files without cache.
 :::
 
-This section assumes you followed the [Command Handling](/guide/creating-your-bot/command-handling.md) part.
+::: tip
+This section assumes you followed the [Command Handling](/creating-your-bot/command-handling.md) part.
+:::
 
 ::: warning
-The reload is not a command that should be generally used by every user. You should deploy it as a guild command in a private guild.
+The reload command ideally should not be used by every user. You should deploy it as a guild command in a private guild.
 :::
 
 ```js
 const { SlashCommandBuilder } = require('discord.js');
+
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('reload')
@@ -30,7 +33,7 @@ module.exports = {
 
 First off, you need to check if the command you want to reload exists. You can do this check similarly to getting a command.
 
-```js {4-9}
+```js {4-8}
 module.exports = {
 	// ...
 	async execute(interaction) {
@@ -45,10 +48,11 @@ module.exports = {
 
 To build the correct file path, you will need the file name. You can use `command.data.name` for doing that.
 
-In theory, all there is to do is delete the previous command from `client.commands` and require the file again. In practice, you cannot do this easily as `require()` caches the file. If you were to require it again, you would load the previously cached file without any changes. You first need to delete the file from the `require.cache`, and only then should you require and set the command file to `client.commands`:
+In theory, all there is to do is delete the previous command from `client.commands` and require the file again. In practice, you cannot do this easily as `require()` caches the file. If you were to require it again, you would load the previously cached file without any changes. You first need to delete the file from `require.cache`, and only then should you require and set the command file to `client.commands`:
 
 ```js {1,4-6}
 delete require.cache[require.resolve(`./${command.data.name}.js`)];
+
 try {
 	interaction.client.commands.delete(command.data.name);
 	const newCommand = require(`./${command.data.name}.js`);
@@ -60,6 +64,6 @@ try {
 }
 ```
 
-The snippet above uses a `try/catch` block to load the command file and add it to `client.commands`. In case of an error, it will log the full error to the console and notify the user about it with the error's message component `error.message`. Note that you never actually delete the command from the commands Collection and instead overwrite it. This behavior prevents you from deleting a command and ending up with no command at all after a failed `require()` call, as each use of the reload command checks that Collection again.
+The snippet above uses a `try...catch` block to load the command file and add it to `client.commands`. In case of an error, it will log the full error to the console and notify the user about it with the error's message component `error.message`. Note that you never actually delete the command from the commands Collection and instead overwrite it. This behavior prevents you from deleting a command and ending up with no command at all after a failed `require()` call, as each use of the reload command checks that Collection again.
 
 <ResultingCode path="additional-features/reloading-commands" />
