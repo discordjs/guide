@@ -36,7 +36,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	if (!command) return;
 
 	const { cooldowns } = client;
-	
+
 	if (!cooldowns.has(command.name)) {
 		cooldowns.set(command.name, new Collection());
 	}
