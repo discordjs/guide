@@ -614,6 +614,10 @@ Added `MessageReaction#react()` to make the client user react with the reaction 
 
 Added support for role subscriptions.
 
+### StageChannel
+
+Stage channels now allow messages to be sent in them, much like voice channels.
+
 ### Sticker
 
 Added support for GIF stickers.
