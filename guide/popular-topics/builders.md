@@ -1,6 +1,6 @@
-# Formatters
+# Builders
 
-discord.js provides the [`@discordjs/formatters`](https://github.com/discordjs/discord.js/tree/14.8.0/packages/formatters) package which contains a variety of utilities you can use when writing your Discord bot.
+discord.js provides the [`@discordjs/builders`](https://github.com/discordjs/builders) package which contains a variety of utilities you can use when writing your Discord bot.
 
 ## Basic Markdown
 
