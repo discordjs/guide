@@ -23,8 +23,7 @@ module.exports = {
 		.setDescription('Reloads a command.')
 		.addStringOption(option =>
 			option.setName('command')
-				.setDescription('The command to reload.')
-				.setRequired(true)),
+				.setDescription('The command to reload.')),
 	async execute(interaction) {
 		// ...
 	},
