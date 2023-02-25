@@ -28,10 +28,10 @@ const data = new SlashCommandBuilder()
 	.setDefaultMemberPermissions(PermissionFlagsBits.BanMembers);
 ```
 
-For a kick command however, we can allow members with either `KickMembers` to execute the command, so we'll list that flag here.
+For a kick command however, we can allow members with the `KickMembers` permission to execute the command, so we'll list that flag here.
 
 ::: tip
-You can require the user to have all of multiple pirmissions by merging them with the `|` bitwise OR operator (for example `PermissionFlagsBits.BanMembers | PermissionFlagsBits.KickMembers`).
+You can require the user to have all of multiple permissions by merging them with the `|` bitwise OR operator (for example `PermissionFlagsBits.BanMembers | PermissionFlagsBits.KickMembers`).
 You cannot require any of multiple permissions. Discord evaluates against the combined permission bitfield!
 
 If you want to learn more about the `|` bitwise OR operator you can check the [Wikipedia](https://en.wikipedia.org/wiki/Bitwise_operation#OR) and [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_OR) articles on the topic.

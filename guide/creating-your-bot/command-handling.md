@@ -91,7 +91,7 @@ First, you need to get the matching command from the `client.commands` Collectio
 
 With the right command identified, all that's left to do is call the command's `.execute()` method and pass in the `interaction` variable as its argument. In case something goes wrong, catch and log any error to the console.
 
-```js {4-16}
+```js {4-20}
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
