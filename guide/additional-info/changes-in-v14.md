@@ -6,7 +6,7 @@ v14 requires Node 16.9 or higher to use, so make sure you're up to date. To chec
 
 ### Builders are now included in v14
 
-If you previously had `@discordjs/builders`, `@discordjs/rest`, or `discord-api-types` manually installed, it's _highly_ recommended that you uninstall the packages to avoid package version conflicts.
+If you previously had `@discordjs/builders`, `@discordjs/formatters`, `@discordjs/rest`, or `discord-api-types` manually installed, it's _highly_ recommended that you uninstall the packages to avoid package version conflicts.
 
 :::: code-group
 ::: code-group-item npm
@@ -491,6 +491,10 @@ Many of the analogous enums can be found in the discord-api-types docs. [discord
 
 ## Features
 
+### ApplicationCommand
+
+NFSW commands are supported.
+
 ### AutocompleteInteraction
 
 `AutocompleteInteraction#commandGuildId` has been added which is the id of the guild the invoked application command is registered to.
@@ -508,6 +512,10 @@ Additionally, new typeguards have been added:
 -   `Channel#isDMBased()`
 -   `Channel#isTextBased()`
 -   `Channel#isVoiceBased()`
+
+### ClientApplication
+
+Added support for role connection metadata.
 
 ### Collection
 
@@ -535,15 +543,29 @@ const collector = interaction.channel.createMessageComponentCollector({
 
 `CommandInteraction#commandGuildId` has been added which is the id of the guild the invoked application command is registered to.
 
+### CommandInteractionOptionResolver
+
+`CommandInteractionOptionResolver#getChannel()` now has a third parameter which narrows the channel type.
+
+### Events
+
+Added support for `guildAuditLogEntryCreate` event.
+
 ### ForumChannel
 
 Added support for forum channels as of 14.4.0.
+
+Added support for `ForumChannel#defaultForumLayout`.
 
 ### Guild
 
 Added `Guild#setMFALevel()` which sets the guild's MFA level.
 
 Added `Guild#maxVideoChannelUsers` as of 14.2.0 which indicates the maximum number of video channel users.
+
+Added `Guild#disableInvites()` which disables the guild's invites.
+
+Added support for the `after` parameter in `Guild#fetchAuditLogs()`.
 
 ### GuildChannelManager
 
@@ -553,9 +575,17 @@ Added `Guild#maxVideoChannelUsers` as of 14.2.0 which indicates the maximum numb
 
 Added `GuildEmojiManager#delete()` and `GuildEmojiManager#edit()` for managing existing guild emojis.
 
-### GuildForumThreadManager 
+### GuildForumThreadManager
 
 Added `GuildForumThreadManager` as manager for threads in forum channels as of 14.4.0.
+
+### GuildMember
+
+Added support for `GuildMember#flags`.
+
+### GuildMembersChunk
+
+This object now supports the `GuildMembersChunk#notFound` property.
 
 ### GuildMemberManager
 
@@ -574,9 +604,25 @@ Added `Interaction#isRepliable()` to check whether a given interaction can be re
 
 `Message#position` has been added as an approximate position in a thread as of 14.4.0.
 
+Added support for role subscription data.
+
 ### MessageReaction
 
 Added `MessageReaction#react()` to make the client user react with the reaction the class belongs to.
+
+### Role
+
+Added support for role subscriptions.
+
+### Sticker
+
+Added support for GIF stickers.
+
+### ThreadMemberManager
+
+The new `withMember` options returns the associated guild member with the thread member.
+
+When fetching multiple thread members alongside `withMember`, paginated results will be returned. The `after` and `limit` option are supported in this scenario.
 
 ### Webhook
 

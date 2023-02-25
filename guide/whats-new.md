@@ -48,7 +48,7 @@ All content has been updated to use discord.js v14 syntax. The v13 version of th
 - [Buttons](/interactions/buttons.md): Building, sending, and receiving buttons
 - [Select menus](/interactions/select-menus.md): Building, sending, and receiving select menus
 - [Threads](/popular-topics/threads.md): Creating and managing threads
-- [Builders](/popular-topics/builders.md): A collection of builders to use with your bot
+- [Formatters](/popular-topics/formatters.md): A collection of formatters to use with your bot
 
 ### Updated
 
