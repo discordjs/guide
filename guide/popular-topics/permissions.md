@@ -192,7 +192,7 @@ channel.lockPermissions()
 
 ### Permissions after overwrites
 
-There are two utility methods to easily determine the final permissions for a guild member or role in a specific channel: <DocsLink path="class/GuildChannel?scrollTo=permissionsFor" type="method" /> and <DocsLink path="class/GuildMember?scrollTo=permissionsIn" type="method" /> - <DocsLink path="class/Role?scrollTo=permissionsIn" type="method" />. All return a <DocsLink path="class/Permissions" /> object.
+There are two utility methods to easily determine the final permissions for a guild member or role in a specific channel: <DocsLink path="class/GuildChannel?scrollTo=permissionsFor" type="method" /> and <DocsLink path="class/GuildMember?scrollTo=permissionsIn" type="method" /> - <DocsLink path="class/Role?scrollTo=permissionsIn" type="method" />. All return a <DocsLink path="class/PermissionsBitField" /> object.
 
 To check your bot's permissions in the channel the command was used in, you could use something like this:
 
