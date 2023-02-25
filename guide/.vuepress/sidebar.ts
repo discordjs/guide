@@ -54,6 +54,13 @@ export default {
 			],
 		},
 		{
+			text: 'Additional Features',
+			children: [
+				'/additional-features/cooldowns.md',
+				'/additional-features/reloading-commands.md',
+			]
+		},
+		{
 			text: 'Slash Commands',
 			children: [
 				'/slash-commands/response-methods.md',
