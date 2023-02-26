@@ -413,7 +413,7 @@ The following discord.js events have been removed from the `Client`:
 -   `invalidRequestWarning`
 -   `rateLimit`
 
-discord.js internally uses [Undici](https://github.com/nodejs/undici). Thus, the way you can monitor API requests has changed. You must now use a [Diagnostics Channel](https://undici.nodejs.org/#/docs/api/DiagnosticsChannel). Here is a simple example:
+discord.js now uses [Undici](https://github.com/nodejs/undici) as the underlying request handler. Thus, the way you can monitor API requests has changed. You must now use a [Diagnostics Channel](https://undici.nodejs.org/#/docs/api/DiagnosticsChannel). Here is a simple example:
 
 ```js
 import diagnosticsChannel from 'node:diagnostics_channel';
@@ -430,7 +430,7 @@ diagnosticsChannel.channel('undici:request:create').subscribe(data => {
 });
 ```
 
-The full list of examples can be seen with the above Diagnostic Channels link.
+You can find further examples at the Undici Diagnostics Channel documentation link above.
 
 As for the three other events, you should access them from `Client#rest`. In addition, the `apiResponse` and `rateLimit` events have been renamed:
 
