@@ -416,12 +416,12 @@ The following discord.js events have been removed from the `Client`:
 discord.js internally uses [Undici](https://github.com/nodejs/undici). Thus, the way you can monitor API requests has changed. You must now use a [Diagnostics Channel](https://undici.nodejs.org/#/docs/api/DiagnosticsChannel). Here is a simple example:
 
 ```js
-import diagnosticsChannel from 'diagnostics_channel';
+import diagnosticsChannel from 'node:diagnostics_channel';
 
 diagnosticsChannel.channel('undici:request:create').subscribe(({ request }) => {
 	console.log(request.method); // Log the method
 	console.log(request.path); // Log the path
-	console.log(headers); // Log the headers
+	console.log(request.headers); // Log the headers
 	console.log(request); // Or just log everything!
 });
 ```
