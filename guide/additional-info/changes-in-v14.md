@@ -406,12 +406,7 @@ Overwrites are now keyed by the `PascalCase` permission key rather than the `SCR
 
 ### REST Events
 
-The following discord.js events have been removed from the `Client`:
-
--   `apiRequest`
--   `apiResponse`
--   `invalidRequestWarning`
--   `rateLimit`
+#### apiRequest
 
 discord.js now uses [Undici](https://github.com/nodejs/undici) as the underlying request handler. Thus, the way you can monitor API requests has changed. You must now use a [Diagnostics Channel](https://undici.nodejs.org/#/docs/api/DiagnosticsChannel). Here is a simple example:
 
@@ -432,12 +427,29 @@ diagnosticsChannel.channel('undici:request:create').subscribe(data => {
 
 You can find further examples at the [Undici Diagnostics Channel documentation](https://undici.nodejs.org/#/docs/api/DiagnosticsChannel).
 
-As for the three other events, you should access them from `Client#rest`. In addition, the `apiResponse` and `rateLimit` events have been renamed:
+#### apiResponse
+
+This REST event has been renamed to `response` and moved to `Client#rest`:
 
 ```diff
 - client.on('apiResponse', ...);
 + client.rest.on('response', ...);
+```
 
+#### invalidRequestWarning
+
+This REST event has been moved to `Client#rest`:
+
+```diff
+- client.on('invalidRequestWarning', ...);
++ client.rest.on('invalidRequestWarning', ...);
+```
+
+#### rateLimit
+
+This REST event has been renamed to `rateLimited` and moved to `Client#rest`:
+
+```diff
 - client.on('rateLimit', ...);
 + client.rest.on('rateLimited', ...);
 ```
