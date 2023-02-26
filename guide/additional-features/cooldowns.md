@@ -22,7 +22,7 @@ module.exports = {
 };
 ```
 
-In your main file, initialize a [Collection](/additional-info//collections.md) to store cooldowns of commands
+In your main file, initialize a [Collection](/additional-info/collections.md) to store cooldowns of commands
 
 ```js {1}
 client.cooldowns = new Collection();
