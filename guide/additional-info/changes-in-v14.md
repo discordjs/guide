@@ -408,7 +408,7 @@ Overwrites are now keyed by the `PascalCase` permission key rather than the `SCR
 
 #### apiRequest
 
-discord.js now uses [Undici](https://github.com/nodejs/undici) as the underlying request handler. Thus, the way you can monitor API requests has changed. You must now use a [Diagnostics Channel](https://undici.nodejs.org/#/docs/api/DiagnosticsChannel). Here is a simple example:
+This REST event has been removed as discord.js now uses [Undici](https://github.com/nodejs/undici) as the underlying request handler. You must now use a [Diagnostics Channel](https://undici.nodejs.org/#/docs/api/DiagnosticsChannel). Here is a simple example:
 
 ```js
 import diagnosticsChannel from 'node:diagnostics_channel';
