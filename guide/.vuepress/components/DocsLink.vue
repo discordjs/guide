@@ -10,7 +10,7 @@ import { computed } from 'vue';
 const baseURL = 'https://discord.js.org/#/docs';
 const docsSections = ['discord.js', 'collection', 'rpc', 'builders', 'proxy', 'rest', 'voice', 'ws'];
 const docsPathRegex = /\w+\/(\w+)(?:\?scrollTo=(.+))?/;
-const defaultDjsBranch = '14.7.1';
+const defaultDjsBranch = '14.8.0';
 
 const props = defineProps({
 	section: {
