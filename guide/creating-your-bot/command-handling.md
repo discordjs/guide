@@ -135,7 +135,7 @@ It is not necessary to name your subfolders exactly like we have named them here
 
 Back in your `index.js` file, where the code to [dynamically read command files](/command-handling/#loading-command-files) is, use the same pattern to read the sub-folder directories, and then require each command inside them.
 
-```js {4,6-12}
+```js {3,6-12}
 client.commands = new Collection();
 const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
