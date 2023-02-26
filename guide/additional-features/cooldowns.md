@@ -69,8 +69,8 @@ Continuing with your current setup, this is the complete `if` statement:
 if (timestamps.has(interaction.user.id)) {
 	const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
 	if (now < expirationTime) {
-		const timeLeft = Math.round(expirationTime / 1000);
-		return interaction.reply({ content: `Please wait <t:${timeLeft}:R> more second(s) before reusing the \`${command.data.name}\` command.`, ephemeral: true });
+		const expiredTimestamp = Math.round(expirationTime / 1000);
+		return interaction.reply({ content: `Please wait <t:${expiredTimestamp}:R> more second(s) before reusing the \`${command.data.name}\` command.`, ephemeral: true });
 	}
 }
 ```
