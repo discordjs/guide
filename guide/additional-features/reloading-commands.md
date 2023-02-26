@@ -4,6 +4,7 @@ When writing your commands, you may find it tedious to restart your bot every ti
 
 ::: warning
 ESM does not support require and clearing import cache. You can use [hot-esm](https://www.npmjs.com/package/hot-esm) to import files without cache.
+Windows support is experimental per [this issue](https://github.com/vinsonchuong/hot-esm/issues/33).
 :::
 
 ::: tip

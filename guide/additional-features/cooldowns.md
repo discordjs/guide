@@ -24,7 +24,7 @@ module.exports = {
 
 In your main file, initialize a [Collection](/additional-info/collections.md) to store cooldowns of commands
 
-```js {1}
+```js
 client.cooldowns = new Collection();
 ```
 
