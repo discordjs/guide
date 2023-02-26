@@ -418,7 +418,11 @@ discord.js internally uses [Undici](https://github.com/nodejs/undici). Thus, the
 ```js
 import diagnosticsChannel from 'node:diagnostics_channel';
 
-diagnosticsChannel.channel('undici:request:create').subscribe(({ request }) => {
+diagnosticsChannel.channel('undici:request:create').subscribe(data => {
+	// If you use TypeScript, `data` may be casted as
+	// `DiagnosticsChannel.RequestCreateMessage`
+	// from Undici to receive type definitions.
+	const { request } = data;
 	console.log(request.method); // Log the method
 	console.log(request.path); // Log the path
 	console.log(request.headers); // Log the headers
