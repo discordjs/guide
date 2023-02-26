@@ -430,7 +430,7 @@ diagnosticsChannel.channel('undici:request:create').subscribe(data => {
 });
 ```
 
-You can find further examples at the Undici Diagnostics Channel documentation link above.
+You can find further examples at the [Undici Diagnostics Channel documentation](https://undici.nodejs.org/#/docs/api/DiagnosticsChannel).
 
 As for the three other events, you should access them from `Client#rest`. In addition, the `apiResponse` and `rateLimit` events have been renamed:
 
