@@ -406,22 +406,50 @@ Overwrites are now keyed by the `PascalCase` permission key rather than the `SCR
 
 ### REST Events
 
-The following discord.js events have been removed from the `Client`:
+#### apiRequest
 
--   `apiRequest`
--   `apiResponse`
--   `invalidRequestWarning`
--   `rateLimit`
+This REST event has been removed as discord.js now uses [Undici](https://github.com/nodejs/undici) as the underlying request handler. You must now use a [Diagnostics Channel](https://undici.nodejs.org/#/docs/api/DiagnosticsChannel). Here is a simple example:
 
-Instead you should access these events from `Client#rest`. In addition, the `apiRequest`, `apiResponse` and `rateLimit` events have been renamed:
+```js
+import diagnosticsChannel from 'node:diagnostics_channel';
+
+diagnosticsChannel.channel('undici:request:create').subscribe(data => {
+	// If you use TypeScript, `data` may be casted as
+	// `DiagnosticsChannel.RequestCreateMessage`
+	// from Undici to receive type definitions.
+	const { request } = data;
+	console.log(request.method); // Log the method
+	console.log(request.path); // Log the path
+	console.log(request.headers); // Log the headers
+	console.log(request); // Or just log everything!
+});
+```
+
+You can find further examples at the [Undici Diagnostics Channel documentation](https://undici.nodejs.org/#/docs/api/DiagnosticsChannel).
+
+#### apiResponse
+
+This REST event has been renamed to `response` and moved to `Client#rest`:
 
 ```diff
-- client.on('apiRequest', ...);
-+ client.rest.on('request', ...);
-
 - client.on('apiResponse', ...);
 + client.rest.on('response', ...);
+```
 
+#### invalidRequestWarning
+
+This REST event has been moved to `Client#rest`:
+
+```diff
+- client.on('invalidRequestWarning', ...);
++ client.rest.on('invalidRequestWarning', ...);
+```
+
+#### rateLimit
+
+This REST event has been renamed to `rateLimited` and moved to `Client#rest`:
+
+```diff
 - client.on('rateLimit', ...);
 + client.rest.on('rateLimited', ...);
 ```
