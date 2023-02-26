@@ -133,7 +133,7 @@ Make sure you put every command file you have inside one of the new sub-folders.
 
 It is not necessary to name your subfolders exactly like we have named them here. You can create any number of subfolders and name them whatever you want. Although, it is a good practice to name them according to the type of commands stored inside them.
 
-Back in your `index.js` file, where the code to [dynamically read command files](/command-handling/#loading-command-files) is, use the same pattern to read the sub-folder directories, and then require each command inside them.
+Back in your `index.js` file, where the code to [dynamically read command files](#loading-command-files) is, use the same pattern to read the sub-folder directories, and then require each command inside them.
 
 ```js {3,6-12}
 client.commands = new Collection();
