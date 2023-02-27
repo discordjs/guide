@@ -42,7 +42,7 @@ if (!cooldowns.has(command.data.name)) {
 const now = Date.now();
 const timestamps = cooldowns.get(command.data.name);
 const defaultCooldownDuration = 3;
-const cooldownAmount = (command.cooldown || defaultCooldownDuration) * 1000;
+const cooldownAmount = (command.cooldown ?? defaultCooldownDuration) * 1000;
 
 if (timestamps.has(interaction.user.id)) {
 	// ...

@@ -44,7 +44,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	const now = Date.now();
 	const timestamps = cooldowns.get(command.name);
 	const defaultCooldownDuration = 3;
-	const cooldownAmount = (command.cooldown || defaultCooldownDuration) * 1000;
+	const cooldownAmount = (command.cooldown ?? defaultCooldownDuration) * 1000;
 
 	if (timestamps.has(interaction.user.id)) {
 		const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
