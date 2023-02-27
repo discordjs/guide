@@ -65,9 +65,10 @@ If the user has already used this command in this session, get the timestamp, ca
 
 Continuing with your current setup, this is the complete `if` statement:
 
-```js {2,4-7}
+```js {2,5-7}
 if (timestamps.has(interaction.user.id)) {
 	const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
+
 	if (now < expirationTime) {
 		const expiredTimestamp = Math.round(expirationTime / 1000);
 		return interaction.reply({ content: `Please wait <t:${expiredTimestamp}:R> more second(s) before reusing the \`${command.data.name}\` command.`, ephemeral: true });

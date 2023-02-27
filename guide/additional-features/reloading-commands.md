@@ -33,7 +33,7 @@ module.exports = {
 
 First off, you need to check if the command you want to reload exists. You can do this check similarly to getting a command.
 
-```js {4-8}
+```js {4-9}
 module.exports = {
 	// ...
 	async execute(interaction) {

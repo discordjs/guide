@@ -123,19 +123,19 @@ If you've been following along, your project structure should look something lik
 
 ![Project structure before sorting](./images/before-sorting.png)
 
-After moving your commands into sub-folders, it will look something like this:
+After moving your commands into subfolders, it will look something like this:
 
 ![Project structure after sorting](./images/after-sorting.png)
 
 ::: warning
-Make sure you put every command file you have inside one of the new sub-folders. Leaving a command file directly under the `commands` folder will create problems.
+Make sure you put every command file you have inside one of the new subfolders. Leaving a command file directly under the `commands` folder will create problems.
 :::
 
 It is not necessary to name your subfolders exactly like we have named them here. You can create any number of subfolders and name them whatever you want. Although, it is a good practice to name them according to the type of commands stored inside them.
 
-Back in your `index.js` file, where the code to [dynamically read command files](#loading-command-files) is, use the same pattern to read the sub-folder directories, and then require each command inside them.
+Back in your `index.js` file, where the code to [dynamically read command files](#loading-command-files) is, use the same pattern to read the subfolder directories, and then require each command inside them.
 
-```js {3,6-12}
+```js {3,6-13}
 client.commands = new Collection();
 const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
