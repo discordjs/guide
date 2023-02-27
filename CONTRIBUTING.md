@@ -300,29 +300,29 @@ These components feature messages, mentions, embeds, interactions, and more. You
 On pages where links to the discord.js documentation are used, you can use the `<DocsLink>` component. Since the discord.js documentation is split into different categories and branches, the component allows you to supply the necessary info accordingly. The only required prop is `path`.
 
 ```md
-Main docs, default branch, `class/Client`:
+Discord.js docs, latest configured stable branch, `class/Client`:
 <DocsLink path="class/Client" />
 <DocsLink path="class/Client">`Client`</DocsLink>
-<!-- [`Client`](https://discord.js.org/#/docs/main/stable/class/Client) -->
+<!-- [`Client`](https://discord.js.org/#/docs/discord.js/14.x.y/class/Client) -->
 
 Events, methods, and static properties:
 <DocsLink path="class/Client?scrollTo=e-ready" />
 <DocsLink path="class/Intents?scrollTo=s-FLAGS" />
 <DocsLink path="class/Interaction?scrollTo=isCommand" type="method" />
-<!-- [`Client#event:ready`](https://discord.js.org/#/docs/main/stable/class/Client) -->
-<!-- [`Intents.FLAGS`](https://discord.js.org/#/docs/main/stable/class/Intents?scrollTo=s-FLAGS) -->
-<!-- [`Interaction#isCommand()`](https://discord.js.org/#/docs/main/stable/class/Interaction?scrollTo=isCommand) -->
+<!-- [`Client#event:ready`](https://discord.js.org/#/docs/discord.js/14.x.y/class/Client) -->
+<!-- [`Intents.FLAGS`](https://discord.js.org/#/docs/discord.js/14.x.y/class/Intents?scrollTo=s-FLAGS) -->
+<!-- [`Interaction#isCommand()`](https://discord.js.org/#/docs/discord.js/14.x.y/class/Interaction?scrollTo=isCommand) -->
 
-Main docs, v12 branch, `class/Client`:
-<DocsLink section="main" branch="v12" path="class/Client" />
-<!-- [`Client`](https://discord.js.org/#/docs/main/v12/class/Client) -->
+Discord.js docs, v12 branch, `class/Client`:
+<DocsLink section="discord.js" branch="v12" path="class/Client" />
+<!-- [`Client`](https://discord.js.org/#/docs/discord.js/v12/class/Client) -->
 
 Collection docs, main branch (no `branch` prop set), `class/Collection?scrollTo=partition`:
 <DocsLink section="collection" path="class/Collection?scrollTo=partition" type="method" />
 <!-- [`Collection#partition()`](https://discord.js.org/#/docs/collection/main/class/Collection?scrollTo=partition) -->
 ```
 
-If the `section` prop is set to `main` (or omitted) and the `branch` prop is omitted, the `branch` prop will default to the version the user has set via the site's branch selector dropdown and update accordingly. If `section` is set to anything else and `branch` is omitted, the `branch` prop will default to `'main'`.
+If the `section` prop is set to `discord.js` (or omitted) and the `branch` prop is omitted, the `branch` prop will default to the latest configured stable release, or `main` for any other `section`.
 
 ### VScode snippets
 

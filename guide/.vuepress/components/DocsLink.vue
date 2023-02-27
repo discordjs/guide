@@ -8,13 +8,14 @@
 import { computed } from 'vue';
 
 const baseURL = 'https://discord.js.org/#/docs';
-const docsSections = ['main', 'collection', 'rpc', 'builders', 'proxy', 'rest', 'voice', 'ws'];
+const docsSections = ['discord.js', 'collection', 'rpc', 'builders', 'proxy', 'rest', 'voice', 'ws'];
 const docsPathRegex = /\w+\/(\w+)(?:\?scrollTo=(.+))?/;
+const defaultDjsBranch = '14.7.1';
 
 const props = defineProps({
 	section: {
 		type: String,
-		'default': 'main',
+		'default': 'discord.js',
 	},
 	branch: String,
 	path: {
@@ -29,7 +30,7 @@ const props = defineProps({
 
 const link = computed(() => {
 	const guideSection = docsSections.find(section => section === props.section) || docsSections[0];
-	const branch = props.branch || 'main';
+	const branch = props.branch || (props.section === 'discord.js' ? defaultDjsBranch : 'main');
 	return `${baseURL}/${guideSection}/${branch}/${props.path}`;
 });
 

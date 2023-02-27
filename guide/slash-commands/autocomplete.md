@@ -42,7 +42,7 @@ The example below shows how this might be applied to a conceptual version of the
 :::: code-group
 ::: code-group-item index.js
 ```js {4,13}
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (interaction.isChatInputCommand()) {
 		// command handling
 	} else if (interaction.isAutocomplete()) {
