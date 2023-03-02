@@ -1,12 +1,16 @@
 # Registering slash commands
 
 ::: tip
-This page assumes you use the same file structure as our [Slash commands](./slash-commands.md) section, and the provided are made to function with that setup. Please carefully read that section first so that you can understand the methods used in this section.
+For fully functional slash commands, there are three important pieces of code that need to be written. They are:
 
-If you already have slash commands set up and deployed for your application and want to learn how to respond to them, refer to the following section on [Command Response Methods](/slash-commands/response-methods.md).
+1. The [individual command files](slash-commands.html), containing their definitions and functionality.
+2. The [command handler](command-handling.html), which dynamically reads the files and executes the commands.
+3. The command deployment script, to register your slash commands with Discord so they appear in the interface.
+
+These steps can be done in any order, but **all are required** before the commands are fully functional.
+
+This page details how to complete **Step 3**. Make sure to also complete the other pages linked above!
 :::
-
-In this section, we'll cover how to register your commands to Discord using discord.js!
 
 ## Command registration
 
