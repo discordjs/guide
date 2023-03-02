@@ -60,7 +60,7 @@ discord-bot/
 └── package.json
 ```
 
-Create an `events` folder in the same directory. You can then move the code from your event listeners in `index.js` to separate files; `events/ready.js` and `events/interactionCreate.js` files.
+Create an `events` folder in the same directory. You can then move the code from your event listeners in `index.js` to separate files: `events/ready.js` and `events/interactionCreate.js`.
 
 :::: code-group
 ::: code-group-item events/ready.js
@@ -106,7 +106,7 @@ module.exports = {
 ```js
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -137,7 +137,7 @@ Next, let's write the code for dynamically retrieving all the event files in the
 ```js {18-29}
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -177,7 +177,7 @@ The callback function passed takes argument(s) returned by its respective event,
 After this, listening for other events is as easy as creating a new file in the `events` folder. The event handler will automatically retrieve and register it whenever you restart your bot.
 
 ::: tip
-In most cases, you can access your `client` instance in other files by obtaining it from one of the other discord.js structures, e.g. `interaction.client` in the `interactionCreate` event. It doesn't need to manually passed to your events.
+In most cases, you can access your `client` instance in other files by obtaining it from one of the other discord.js structures, e.g. `interaction.client` in the `interactionCreate` event. It doesn't need to be manually passed to your events.
 :::
 
 ## Resulting code
