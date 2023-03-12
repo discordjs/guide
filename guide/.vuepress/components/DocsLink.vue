@@ -6,11 +6,11 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { defaultDjsBranch } from '../constants';
 
 const baseURL = 'https://discord.js.org/#/docs';
 const docsSections = ['discord.js', 'collection', 'rpc', 'builders', 'proxy', 'rest', 'voice', 'ws'];
 const docsPathRegex = /\w+\/(\w+)(?:\?scrollTo=(.+))?/;
-const defaultDjsBranch = '14.7.1';
 
 const props = defineProps({
 	section: {
