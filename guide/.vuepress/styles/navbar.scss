@@ -68,7 +68,7 @@ html.guide-theme-blurple {
 		}
 	}
 
-	.toggle-dark-button {
+	.toggle-color-mode-button {
 		@include navLink();
 		margin-left: 2rem;
 		opacity: 1;
@@ -152,7 +152,7 @@ html.guide-theme-blurple {
 }
 
 html.dark .navbar {
-	.toggle-dark-button {
+	.toggle-color-mode-button {
 		.dark-icon {
 			display: block;
 		}
