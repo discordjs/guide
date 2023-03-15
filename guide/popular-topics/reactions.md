@@ -44,7 +44,7 @@ To react with a Unicode emoji, you will need the actual Unicode character of the
 	<DiscordMessage profile="user">
 		Unicode emoji:
 		<span class="emoji-container">
-			<img class="emoji-image" title="smile" alt=":smile:" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@v14.0.2/assets/72x72/1f6044.png" />
+			<img class="emoji-image" title="smile" alt=":smile:" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@v14.0.2/assets/72x72/1f604.png" />
 		</span>
 		<br />
 		Escaped version (<DiscordMarkdown>`\:smile:`</DiscordMarkdown>): 😄
