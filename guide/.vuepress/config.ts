@@ -42,7 +42,7 @@ const config = defineUserConfig({
     repo: 'discordjs/guide',
     docsDir: 'guide',
     sidebarDepth: 3,
-    editLinks: true,
+    editLink: true,
     lastUpdated: true,
     navbar: [
       {
