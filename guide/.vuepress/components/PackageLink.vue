@@ -1,6 +1,6 @@
 <template>
 	<a :href="link" target="_blank" rel="noopener noreferrer">
-		<code>{{ linkText }}</code><OutboundLink />
+		<code>{{ linkText }}</code><ExternalLinkIcon />
 	</a>
 </template>
 
