@@ -61,8 +61,8 @@ export default {
 				'/slash-commands/parsing-options.md',
 				'/slash-commands/permissions.md',
 				'/slash-commands/autocomplete.md',
-				'/slash-commands/deleting-commands.md'
-			]
+				'/slash-commands/deleting-commands.md',
+			],
 		},
 		{
 			text: 'Interactions',
@@ -71,7 +71,7 @@ export default {
 				'/interactions/select-menus.md',
 				'/interactions/modals.md',
 				'/interactions/context-menus.md',
-			]
+			],
 		},
 		{
 			text: 'Popular Topics',

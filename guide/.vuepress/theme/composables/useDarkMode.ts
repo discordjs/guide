@@ -1,5 +1,4 @@
-import { onMounted, onUnmounted, ref, watch } from 'vue';
-import type { Ref } from 'vue';
+import { onMounted, onUnmounted, type Ref, ref, watch } from 'vue';
 
 export default function useDarkMode(): { isDarkMode: Ref<boolean> } {
 	const isDarkMode = ref(false);
@@ -18,9 +17,9 @@ export default function useDarkMode(): { isDarkMode: Ref<boolean> } {
 		} else if (!value && systemDarkMode) {
 			localStorage.setItem('guide-color-scheme', 'light');
 		}
-	}
+	};
 
-	const mediaQuery = ref<MediaQueryList | null>(null)
+	const mediaQuery = ref<MediaQueryList | null>(null);
 	const onMediaQueryChange = (event: MediaQueryListEvent): void => {
 		isDarkMode.value = event.matches;
 	};

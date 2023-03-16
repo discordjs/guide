@@ -69,9 +69,9 @@ const {
 } = process.env;
 
 if (
-  NODE_ENV === 'production' &&
-  ALGOLIA_DOCSEARCH_API_KEY &&
-  GOOGLE_ANALYTICS_ID
+	NODE_ENV === 'production'
+  && ALGOLIA_DOCSEARCH_API_KEY
+  && GOOGLE_ANALYTICS_ID
 ) {
   config.plugins.push(
     docsearchPlugin({
@@ -80,7 +80,7 @@ if (
       indexName: 'discordjs',
       placeholder: 'Search guide',
     }),
-    googleAnalyticsPlugin({ id: GOOGLE_ANALYTICS_ID })
+    googleAnalyticsPlugin({ id: GOOGLE_ANALYTICS_ID }),
   );
 }
 
