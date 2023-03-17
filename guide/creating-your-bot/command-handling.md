@@ -8,7 +8,7 @@ Now that your command files have been created, your bot needs to load these file
 
 In your `index.js` file, make these additions to the base template:
 
-```js {1-2,8}
+```js {1-3,8}
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
