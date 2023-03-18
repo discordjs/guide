@@ -3,7 +3,7 @@
 ## Legend
 
 * `client` is a placeholder for the <DocsLink path="class/Client" /> object, such as `const client = new Client({ intents: [GatewayIntentBits.Guilds] });`.
-* `interaction` is a placeholder for the <DocsLink path="class/Interaction" /> object, such as `client.on(Events.InteractionCreate, interaction => { ... });`.
+* `interaction` is a placeholder for the <DocsLink path="class/BaseInteraction" /> object, such as `client.on(Events.InteractionCreate, interaction => { ... });`.
 * `guild` is a placeholder for the <DocsLink path="class/Guild" /> object, such as `interaction.guild` or `client.guilds.cache.get('id')`.
 * `voiceChannel` is a placeholder for the <DocsLink path="class/VoiceChannel" /> object, such as `interaction.member.voice.channel`
 

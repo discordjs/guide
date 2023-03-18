@@ -262,7 +262,7 @@ The `threadMembersUpdate` event now emits the users who were added, the users wh
 
 ### GuildBanManager
 
-Starting from 14.4.0, developers should utilise `deleteMessageSeconds` instead of `days` and `deleteMessageDays`:
+Developers should utilise `deleteMessageSeconds` instead of `days` and `deleteMessageDays`:
 
 ```diff
 <GuildBanManager>.create('123456789', {
@@ -529,7 +529,7 @@ NFSW commands are supported.
 
 ### Channel
 
-`Channel#flags` has been added as of 14.4.0.
+Added support for `Channel#flags`.
 
 Store channels have been removed as they are no longer part of the API.
 
@@ -581,7 +581,7 @@ Added support for `guildAuditLogEntryCreate` event.
 
 ### ForumChannel
 
-Added support for forum channels as of 14.4.0.
+Added support for forum channels.
 
 Added support for `ForumChannel#defaultForumLayout`.
 
@@ -589,7 +589,7 @@ Added support for `ForumChannel#defaultForumLayout`.
 
 Added `Guild#setMFALevel()` which sets the guild's MFA level.
 
-Added `Guild#maxVideoChannelUsers` as of 14.2.0 which indicates the maximum number of video channel users.
+Added `Guild#maxVideoChannelUsers` which indicates the maximum number of video channel users.
 
 Added `Guild#disableInvites()` which disables the guild's invites.
 
@@ -605,7 +605,7 @@ Added `GuildEmojiManager#delete()` and `GuildEmojiManager#edit()` for managing e
 
 ### GuildForumThreadManager
 
-Added `GuildForumThreadManager` as manager for threads in forum channels as of 14.4.0.
+Added `GuildForumThreadManager` as manager for threads in forum channels.
 
 ### GuildMember
 
@@ -618,11 +618,11 @@ This object now supports the `GuildMembersChunk#notFound` property.
 ### GuildMemberManager
 
 Added `GuildMemberManager#fetchMe()` to fetch the client user in the guild.
-Added `GuildMemberManager#addRole()` and `GuildMemberManager#removeRole()` as of 14.3.0. These methods allow a single addition or removal of a role respectively to a guild member, even if uncached.
+Added `GuildMemberManager#addRole()` and `GuildMemberManager#removeRole()`. These methods allow a single addition or removal of a role respectively to a guild member, even if uncached.
 
 ### GuildTextThreadManager
 
-Added `GuildTextThreadManager` as manager for threads in text channels and announcement channels as of 14.4.0.
+Added `GuildTextThreadManager` as manager for threads in text channels and announcement channels.
 
 ### Interaction
 
@@ -630,7 +630,7 @@ Added `Interaction#isRepliable()` to check whether a given interaction can be re
 
 ### Message
 
-`Message#position` has been added as an approximate position in a thread as of 14.4.0.
+`Message#position` has been added as an approximate position in a thread.
 
 Added support for role subscription data.
 
@@ -660,4 +660,4 @@ When fetching multiple thread members alongside `withMember`, paginated results 
 
 Added `Webhook#applicationId`.
 
-Added property `threadName` in `Webhook#send()` options as of 14.4.0 which allows a webhook to create a post in a forum channel.
+Added the `threadName` property in `Webhook#send()` options which allows a webhook to create a post in a forum channel.
