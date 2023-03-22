@@ -12,21 +12,21 @@ If you previously had `@discordjs/builders`, `@discordjs/formatters`, `@discordj
 ::: code-group-item npm
 
 ```sh:no-line-numbers
-npm uninstall @discordjs/builders @discordjs/rest discord-api-types
+npm uninstall @discordjs/builders @discordjs/formatters @discordjs/rest discord-api-types
 ```
 
 :::
 ::: code-group-item yarn
 
 ```sh:no-line-numbers
-yarn remove @discordjs/builders @discordjs/rest
+yarn remove @discordjs/builders @discordjs/formatters @discordjs/rest discord-api-types
 ```
 
 :::
 ::: code-group-item pnpm
 
 ```sh:no-line-numbers
-pnpm remove @discordjs/builders @discordjs/rest
+pnpm remove @discordjs/builders @discordjs/formatters @discordjs/rest discord-api-types
 ```
 
 :::
