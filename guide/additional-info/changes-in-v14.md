@@ -515,7 +515,7 @@ Many of the analogous enums can be found in the discord-api-types docs. [discord
 
 ### Webhook
 
-`Webhook#fetchMessage()` now only takes one sole object of type `WebhookFetchMessageOptions`.
+`Webhook#fetchMessage()`'s second parameter no longer allows a boolean to be passed. The `cache` option in `WebhookFetchMessageOptions` should be used instead.
 
 ## Features
 
