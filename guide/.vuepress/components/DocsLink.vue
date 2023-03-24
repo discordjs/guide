@@ -8,21 +8,9 @@
 import { computed } from 'vue';
 import { defaultDjsBranch } from '../constants';
 
-enum Section {
-	DiscordJS = 'discord.js',
-	Brokers = 'brokers',
-	Builders = 'builders',
-	Collection = 'collection',
-	Core = 'core',
-	Formatters = 'formatters',
-	Proxy = 'proxy',
-	REST = 'rest',
-	Voice = 'voice',
-	WS = 'ws'
-}
-
 const legacyBaseURL = 'https://discord.js.org/#/docs';
 const baseURL = 'https://discordjs.dev/docs/packages';
+const sections = ['discord.js', 'brokers', 'builders', 'collection', 'core', 'formatters', 'proxy', 'rest', 'voice', 'ws'];
 const legacyPathRegex = /\w+\/(\w+)(?:\?scrollTo=(.+))?/;
 const pathRegex = /(\w+):(\w+)(?:#(.+))?/i;
 
@@ -43,9 +31,9 @@ const props = defineProps({
 });
 
 const link = computed(() => {
-	const guideSection = Object.values(Section).find(section => section === props.section) || Section.DiscordJS;
-	const branch = props.branch || (props.section === Section.DiscordJS ? defaultDjsBranch : 'stable');
-	const url = guideSection === Section.DiscordJS ? legacyBaseURL : baseURL;
+	const guideSection = sections.find(section => section === props.section) || sections[0];
+	const branch = props.branch || (props.section === sections[0] ? defaultDjsBranch : 'stable');
+	const url = guideSection === sections[0] ? legacyBaseURL : baseURL;
 	return `${url}/${guideSection}/${branch}/${props.path}`;
 });
 
