@@ -8,7 +8,7 @@ This page is a follow-up to the [slash commands](/slash-commands/advanced-creati
 
 ## Enabling autocomplete
 
-To use autocomplete with your commands, *instead* of listing static choices, the option must be set to use autocompletion using <DocsLink section="builders" path="class/SlashCommandStringOption?scrollTo=setAutocomplete" type="method" />:
+To use autocomplete with your commands, *instead* of listing static choices, the option must be set to use autocompletion using <DocsLink section="builders" path="SlashCommandStringOption:Class#setAutocomplete" type="method" />:
 
 ```js {9}
 const { SlashCommandBuilder } = require('discord.js');

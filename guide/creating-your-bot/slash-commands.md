@@ -45,7 +45,7 @@ These steps can be done in any order, but all are required before the commands a
 
 ## Individual command files
 
-Create a new folder named `commands`, which is where you'll store all of your command files. You'll be using the <DocsLink section="builders" path="class/SlashCommandBuilder"/> class to construct the command definitions.
+Create a new folder named `commands`, which is where you'll store all of your command files. You'll be using the <DocsLink section="builders" path="SlashCommandBuilder:Class"/> class to construct the command definitions.
 
 At a minimum, the definition of a slash command must have a name and a description. Slash command names must be between 1-32 characters and contain no capital letters, spaces, or symbols other than `-` and `_`. Using the builder, a simple `ping` command definition would look like this:
 

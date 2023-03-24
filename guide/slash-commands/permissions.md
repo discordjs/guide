@@ -10,7 +10,7 @@ It is not possible to prevent users with Administrator permissions from using an
 
 ## Member permissions
 
-You can use <DocsLink section="builders" path="class/SlashCommandBuilder?scrollTo=setDefaultMemberPermissions" type="method" /> to set the default permissions required for a member to run the command. Setting it to `0` will prohibit anyone in a guild from using the command unless a specific overwrite is configured or the user has the Administrator permission flag.
+You can use <DocsLink section="builders" path="SlashCommandBuilder:Class#setDefaultMemberPermissions" type="method" /> to set the default permissions required for a member to run the command. Setting it to `0` will prohibit anyone in a guild from using the command unless a specific overwrite is configured or the user has the Administrator permission flag.
 
 For this, we'll introduce two common and simple moderation commands: `ban` and `kick`. For a ban command, a sensible default is to ensure that users already have the Discord permission `BanMembers` in order to use it.
 
@@ -55,7 +55,7 @@ In reality, you'll probably want to have an additional confirmation step before 
 
 ## DM permission
 
-By default, globally-deployed commands are also available for use in DMs. You can use <DocsLink section="builders" path="class/SlashCommandBuilder?scrollTo=setDMPermission" type="method" /> to disable this behaviour. Commands deployed to specific guilds are not available in DMs.
+By default, globally-deployed commands are also available for use in DMs. You can use <DocsLink section="builders" path="SlashCommandBuilder:Class#setDMPermission" type="method" /> to disable this behaviour. Commands deployed to specific guilds are not available in DMs.
 
 It doesn't make much sense for your `ban` command to be available in DMs, so you can add `setDMPermission(false)` to the builder to remove it:
 
