@@ -173,7 +173,7 @@ message.awaitMessageComponent({ filter, componentType: ComponentType.StringSelec
 
 ### Await modal submit
 
-If you want to wait for the submission of a modal within the context of another command or button execution, you may find the promisified collector <DocsLink path="class/CommandInteraction?scrollTo=awaitModalSubmit"/> useful.
+If you want to wait for the submission of a modal within the context of another command or button execution, you may find the promisified collector <DocsLink path="class/CommandInteraction?scrollTo=awaitModalSubmit" type="method"/> useful.
 
 As Discord does not inform you if the user dismisses the modal, supplying a maximum `time` to wait for is crucial:
 

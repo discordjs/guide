@@ -37,7 +37,7 @@ The custom id is a developer-defined string of up to 100 characters. Use this fi
 
 The next step is to add the input fields in which users responding can enter free-text. Adding inputs is similar to adding components to messages.
 
-At the end, we then call <DocsLink path="class/ChatInputCommandInteraction?scrollTo=showModal" /> to display the modal to the user.
+At the end, we then call <DocsLink path="class/ChatInputCommandInteraction?scrollTo=showModal" type="method"/> to display the modal to the user.
 
 ::: warning
 If you're using typescript you'll need to specify the type of components your action row holds. This can be done by specifying the generic parameter in <DocsLink path="class/ActionRowBuilder" />
@@ -126,13 +126,13 @@ const input = new TextInputBuilder()
 
 ### Interaction collectors
 
-Modal submissions can be collected within the scope of the interaction that showed it by utilising an <DocsLink path="class/InteractionCollector"/>, or the <DocsLink path="class/ChatInputCommandInteraction?scrollTo=awaitModalSubmit" /> promisified method. These both provide instances of the <DocsLink path="class/ModalSubmitInteraction"/> class as collected items.
+Modal submissions can be collected within the scope of the interaction that showed it by utilising an <DocsLink path="class/InteractionCollector"/>, or the <DocsLink path="class/ChatInputCommandInteraction?scrollTo=awaitModalSubmit" type="method"/> promisified method. These both provide instances of the <DocsLink path="class/ModalSubmitInteraction"/> class as collected items.
 
 For a detailed guide on receiving message components via collectors, please refer to the [collectors guide](/popular-topics/collectors.md#interaction-collectors).
 
 ### The interactionCreate event
 
-To receive a <DocsLink path="class/ModalSubmitInteraction"/> event, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate"/> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isModalSubmit"/> type guard to make sure you only receive modals:
+To receive a <DocsLink path="class/ModalSubmitInteraction"/> event, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate"/> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isModalSubmit" type="method"/> type guard to make sure you only receive modals:
 
 ```js {1,4}
 client.on(Events.InteractionCreate, interaction => {
@@ -165,7 +165,7 @@ client.on(Events.InteractionCreate, async interaction => {
 ```
 
 ::: tip
-If you're using typescript, you can use the <DocsLink path="class/ModalSubmitInteraction?scrollTo=isFromMessage"/> typeguard, to make sure the received interaction was from a `MessageComponentInteraction`.
+If you're using typescript, you can use the <DocsLink path="class/ModalSubmitInteraction?scrollTo=isFromMessage" type="method"/> typeguard, to make sure the received interaction was from a `MessageComponentInteraction`.
 :::
 
 ## Extracting data from modal submissions

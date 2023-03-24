@@ -21,7 +21,7 @@ If you're using TypeScript you'll need to specify the type of components your ac
 ```
 :::
 
-To create your buttons, use the <DocsLink path="class/ActionRowBuilder"/> and <DocsLink path="class/ButtonBuilder"/> classes. Then, pass the resulting row object to <DocsLink path="class/ChatInputCommandInteraction?scrollTo=reply" /> in the `components` array of <DocsLink path="typedef/InteractionReplyOptions" />:
+To create your buttons, use the <DocsLink path="class/ActionRowBuilder"/> and <DocsLink path="class/ButtonBuilder"/> classes. Then, pass the resulting row object to <DocsLink path="class/ChatInputCommandInteraction?scrollTo=reply" type="method"/> in the `components` array of <DocsLink path="typedef/InteractionReplyOptions" />:
 
 ```js {1,7-13,15}
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, Events } = require('discord.js');
@@ -117,7 +117,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 ### Disabled buttons
 
-If you want to prevent a button from being used, but not remove it from the message, you can disable it with the <DocsLink path="class/ButtonBuilder?scrollTo=setDisabled"/> method:
+If you want to prevent a button from being used, but not remove it from the message, you can disable it with the <DocsLink path="class/ButtonBuilder?scrollTo=setDisabled" type="method"/> method:
 
 ```js {5}
 const button = new ButtonBuilder()
@@ -143,7 +143,7 @@ const button = new ButtonBuilder()
 
 ### Emoji buttons
 
-If you want to use a guild emoji within a <DocsLink path="class/ButtonBuilder"/>, you can use the <DocsLink path="class/ButtonBuilder?scrollTo=setEmoji"/> method:
+If you want to use a guild emoji within a <DocsLink path="class/ButtonBuilder"/>, you can use the <DocsLink path="class/ButtonBuilder?scrollTo=setEmoji" type="method"/> method:
 
 ```js {5}
 const button = new ButtonBuilder()
@@ -169,7 +169,7 @@ For a detailed guide on receiving message components via collectors, please refe
 
 ### The interactionCreate event
 
-To receive a <DocsLink path="class/ButtonInteraction"/> event, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate"/> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isButton"/> type guard to make sure you only receive buttons:
+To receive a <DocsLink path="class/ButtonInteraction"/> event, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate"/> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isButton" type="method"/> type guard to make sure you only receive buttons:
 
 ```js {2}
 client.on(Events.InteractionCreate, interaction => {
@@ -190,7 +190,7 @@ The <DocsLink path="class/MessageComponentInteraction"/> class provides the same
 
 ### Updating the button message
 
-The <DocsLink path="class/MessageComponentInteraction"/> class also provides an <DocsLink path="class/MessageComponentInteraction?scrollTo=update"/> method to update the message the button is attached to. Passing an empty array to the `components` option will remove any buttons after one has been clicked.
+The <DocsLink path="class/MessageComponentInteraction"/> class also provides an <DocsLink path="class/MessageComponentInteraction?scrollTo=update" type="method"/> method to update the message the button is attached to. Passing an empty array to the `components` option will remove any buttons after one has been clicked.
 
 This method should be used in favour of `editReply()` on the original interaction, to ensure you respond to the button interaction.
 

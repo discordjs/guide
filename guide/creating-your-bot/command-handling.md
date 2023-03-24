@@ -61,7 +61,7 @@ client.on(Events.InteractionCreate, interaction => {
 });
 ```
 
-Not every interaction is a slash command (e.g. `MessageComponent` interactions). Make sure to only handle slash commands in this function by making use of the <DocsLink path="class/BaseInteraction?scrollTo=isChatInputCommand" /> method to exit the handler if another type is encountered. This method also provides typeguarding for TypeScript users, narrowing the type from `BaseInteraction` to <DocsLink path="class/ChatInputCommandInteraction" />.
+Not every interaction is a slash command (e.g. `MessageComponent` interactions). Make sure to only handle slash commands in this function by making use of the <DocsLink path="class/BaseInteraction?scrollTo=isChatInputCommand" type="method"/> method to exit the handler if another type is encountered. This method also provides typeguarding for TypeScript users, narrowing the type from `BaseInteraction` to <DocsLink path="class/ChatInputCommandInteraction" />.
 
 ```js {2}
 client.on(Events.InteractionCreate, interaction => {
@@ -87,7 +87,7 @@ module.exports = {
 };
 ```
 
-First, you need to get the matching command from the `client.commands` Collection based on the `interaction.commandName`. Your <DocsLink path="class/Client">`Client`</DocsLink> instance is always available via `interaction.client`. If no matching command is found, log an error to the console and ignore the event.
+First, you need to get the matching command from the `client.commands` Collection based on the `interaction.commandName`. Your <DocsLink path="class/Client"/> instance is always available via `interaction.client`. If no matching command is found, log an error to the console and ignore the event.
 
 With the right command identified, all that's left to do is call the command's `.execute()` method and pass in the `interaction` variable as its argument. In case something goes wrong, catch and log any error to the console.
 
