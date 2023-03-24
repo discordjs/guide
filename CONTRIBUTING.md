@@ -317,9 +317,9 @@ Discord.js docs, v12 branch, `class/Client`:
 <DocsLink section="discord.js" branch="v12" path="class/Client" />
 <!-- [`Client`](https://discord.js.org/#/docs/discord.js/v12/class/Client) -->
 
-Collection docs, main branch (no `branch` prop set), `class/Collection?scrollTo=partition`:
-<DocsLink section="collection" path="class/Collection?scrollTo=partition" type="method" />
-<!-- [`Collection#partition()`](https://discord.js.org/#/docs/collection/main/class/Collection?scrollTo=partition) -->
+Collection docs, stable branch (no `branch` prop set), `Collection:Class#partition`:
+<DocsLink section="collection" path="Collection:Class#partition" type="method" />
+<!-- [`Collection#partition()`](https://discordjs.dev/docs/packages/collection/stable/Collection:Class#partition) -->
 ```
 
 If the `section` prop is set to `discord.js` (or omitted) and the `branch` prop is omitted, the `branch` prop will default to the latest configured stable release, or `main` for any other `section`.
