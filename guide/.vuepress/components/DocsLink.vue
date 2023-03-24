@@ -22,7 +22,7 @@ enum Section {
 }
 
 const legacyBaseURL = 'https://discord.js.org/#/docs';
-const baseURL = 'https://discordjs.dev/docs/packages/';
+const baseURL = 'https://discordjs.dev/docs/packages';
 const legacyPathRegex = /\w+\/(\w+)(?:\?scrollTo=(.+))?/;
 const pathRegex = /(\w+):(\w+)(?:#(.+))?/i;
 
