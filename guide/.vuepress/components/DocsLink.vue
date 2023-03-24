@@ -73,8 +73,9 @@ const linkText = computed(() => {
 
 	if (regex) {
 		const [, file, type, symbol] = regex;
-		if (!symbol) return file;
-		return `${file}:${type}#${symbol}${type === 'Function' ? '()' : ''}`;
+		const brackets = type === 'Function' || props.type === 'method' ? '()' : '';
+		if (!symbol) return `${file}${brackets}`;
+		return `${file}:${type}#${symbol}${brackets}`;
 	}
 
 	return null;
