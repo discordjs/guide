@@ -376,8 +376,8 @@ Whenever an interaction is replied to and one fetches the reply, it could possib
 - new MessageEmbed().addField('Inline field title', 'Some value here', true);
 
 + new EmbedBuilder().addFields([
-+  { name: 'one', value: 'one' },
-+  { name: 'two', value: 'two' },
++  { name: 'one', value: 'one', inline: true },
++  { name: 'two', value: 'two', inline: true },
 +]);
 ```
 
