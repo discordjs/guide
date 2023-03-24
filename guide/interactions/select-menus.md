@@ -197,7 +197,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 ## Multi-select menus
 
-A select menu is not bound to only one selection; you can specify a minimum and maximum amount of options that must be selected. You can use <DocsLink path="class/StringSelectMenuBuilder?scrollTo=setMinValues" type="method" /> and <DocsLink path="class/StringSelectMenuBuilder?scrollTo=setMaxValues" type="method"/> to determine these values.
+A select menu is not bound to only one selection; you can specify a minimum and maximum amount of options that must be selected. You can use <DocsLink section="builders" path="StringSelectMenuBuilder#setMinValues" type="method" /> and <DocsLink section="builders" path="StringSelectMenuBuilder:Class#setMaxValues" type="method"/> to determine these values.
 
 ```js {1,7-31,33}
 const { ActionRowBuilder, Events, StringSelectMenuBuilder } = require('discord.js');
