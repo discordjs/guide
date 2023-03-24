@@ -26,7 +26,7 @@ guild.members.unban(user);
 ```
 
 ::: tip
-Discord validates and resolves user ids for users not on the server in user slash command options. To retrieve and use the full structure from the resulting interaction, you can use the <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getUser" /> method.
+Discord validates and resolves user ids for users not on the server in user slash command options. To retrieve and use the full structure from the resulting interaction, you can use the <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getUser" type="method"/> method.
 :::
 
 ### How do I kick a guild member?

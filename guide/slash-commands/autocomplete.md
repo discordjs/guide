@@ -24,7 +24,7 @@ const data = new SlashCommandBuilder()
 
 ## Responding to autocomplete interactions
 
-To handle an <DocsLink path="class/AutocompleteInteraction"/>, use the <DocsLink path="class/BaseInteraction?scrollTo=isAutocomplete"/> type guard to make sure the interaction instance is an autocomplete interaction. You can do this in a separate `interactionCreate` listener:
+To handle an <DocsLink path="class/AutocompleteInteraction"/>, use the <DocsLink path="class/BaseInteraction?scrollTo=isAutocomplete" type="method"/> type guard to make sure the interaction instance is an autocomplete interaction. You can do this in a separate `interactionCreate` listener:
 
 <!-- eslint-skip -->
 
@@ -91,13 +91,13 @@ You might have already moved this code to `events/interactionCreate.js` if you f
 
 ### Sending results
 
-The <DocsLink path="class/AutocompleteInteraction"/> class provides the <DocsLink path="class/AutocompleteInteraction?scrollTo=respond"/> method to send a response. Using this, you can submit an array of <DocsLink path="typedef/ApplicationCommandOptionChoiceData" /> objects for the user to choose from. Passing an empty array will show "No options match your search" for the user.
+The <DocsLink path="class/AutocompleteInteraction"/> class provides the <DocsLink path="class/AutocompleteInteraction?scrollTo=respond" type="method"/> method to send a response. Using this, you can submit an array of <DocsLink path="typedef/ApplicationCommandOptionChoiceData" /> objects for the user to choose from. Passing an empty array will show "No options match your search" for the user.
 
 ::: warning
 Unlike static choices, autocompletion suggestions are *not* enforced, and users may still enter free text.
 :::
 
-The <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" /> method returns the currently focused option's value, which can be used to applying filtering to the choices presented. For example, to only display options starting with the focused value you can use the `Array#filter()` method, then using `Array#map()`, you can transform the array into an array of <DocsLink path="typedef/ApplicationCommandOptionChoiceData" /> objects.
+The <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" type="method"/> method returns the currently focused option's value, which can be used to applying filtering to the choices presented. For example, to only display options starting with the focused value you can use the `Array#filter()` method, then using `Array#map()`, you can transform the array into an array of <DocsLink path="typedef/ApplicationCommandOptionChoiceData" /> objects.
 
 ```js {10-15}
 module.exports = {
@@ -121,7 +121,7 @@ module.exports = {
 
 ### Handling multiple autocomplete options
 
-To distinguish between multiple options, you can pass `true` into <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused"/>, which will now return the full focused object instead of just the value. This is used to get the name of the focused option below, allowing for multiple options to each have their own set of suggestions:
+To distinguish between multiple options, you can pass `true` into <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" type="method"/>, which will now return the full focused object instead of just the value. This is used to get the name of the focused option below, allowing for multiple options to each have their own set of suggestions:
 
 ```js {10-19}
 module.exports = {
