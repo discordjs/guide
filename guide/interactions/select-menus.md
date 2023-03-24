@@ -14,7 +14,7 @@ Select menus are one of the `MessageComponent` classes, which can be sent via me
 You can have a maximum of five `ActionRow`s per message, and one select menu within an `ActionRow`.
 :::
 
-To create a select menu, use the <DocsLink path="class/ActionRowBuilder"/> and <DocsLink path="class/StringSelectMenuBuilder"/> classes. Then, pass the resulting row object to <DocsLink path="class/ChatInputCommandInteraction?scrollTo=reply" /> in the `components` array of <DocsLink path="typedef/InteractionReplyOptions" />:
+To create a select menu, use the <DocsLink path="class/ActionRowBuilder"/> and <DocsLink path="class/StringSelectMenuBuilder"/> classes. Then, pass the resulting row object to <DocsLink path="class/ChatInputCommandInteraction?scrollTo=reply" type="method"/> in the `components` array of <DocsLink path="typedef/InteractionReplyOptions" />:
 
 ```js {1,7-24,26}
 const { ActionRowBuilder, Events, StringSelectMenuBuilder } = require('discord.js');
@@ -142,7 +142,7 @@ For a detailed guide on receiving message components via collectors, please refe
 
 ### The interactionCreate event
 
-To receive a <DocsLink path="class/StringSelectMenuInteraction"/>, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isStringSelectMenu"/> type guard to make sure you only receive select menus:
+To receive a <DocsLink path="class/StringSelectMenuInteraction"/>, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isStringSelectMenu" type="method"/> type guard to make sure you only receive select menus:
 
 ```js {2}
 client.on(Events.InteractionCreate, interaction => {
@@ -163,7 +163,7 @@ The <DocsLink path="class/MessageComponentInteraction"/> class provides the same
 
 ### Updating the select menu's message
 
-The <DocsLink path="class/MessageComponentInteraction"/> class provides an <DocsLink path="class/MessageComponentInteraction?scrollTo=update" /> method to update the message the select menu is attached to. Passing an empty array to the `components` option will remove any menus after an option has been selected.
+The <DocsLink path="class/MessageComponentInteraction"/> class provides an <DocsLink path="class/MessageComponentInteraction?scrollTo=update" type="method"/> method to update the message the select menu is attached to. Passing an empty array to the `components` option will remove any menus after an option has been selected.
 
 This method should be used in favour of `editReply()` on the original interaction, to ensure you respond to the select menu interaction.
 
@@ -197,7 +197,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 ## Multi-select menus
 
-A select menu is not bound to only one selection; you can specify a minimum and maximum amount of options that must be selected. You can use <DocsLink path="class/SelectMenuBuilder?scrollTo=setMinValues" /> and <DocsLink path="class/StringSelectMenuBuilder?scrollTo=setMaxValues" /> to determine these values.
+A select menu is not bound to only one selection; you can specify a minimum and maximum amount of options that must be selected. You can use <DocsLink section="builders" path="StringSelectMenuBuilder:Class#setMinValues" type="method" /> and <DocsLink section="builders" path="StringSelectMenuBuilder:Class#setMaxValues" type="method"/> to determine these values.
 
 ```js {1,7-31,33}
 const { ActionRowBuilder, Events, StringSelectMenuBuilder } = require('discord.js');

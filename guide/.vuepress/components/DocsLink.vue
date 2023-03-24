@@ -1,6 +1,6 @@
 <template>
 	<a :href="link" target="_blank" rel="noopener noreferrer">
-		<slot><code>{{ linkText }}</code></slot><OutboundLink />
+		<slot><code>{{ linkText ?? '' }}</code></slot><OutboundLink />
 	</a>
 </template>
 
@@ -8,9 +8,11 @@
 import { computed } from 'vue';
 import { defaultDjsBranch } from '../constants';
 
-const baseURL = 'https://discord.js.org/#/docs';
-const docsSections = ['discord.js', 'collection', 'rpc', 'builders', 'proxy', 'rest', 'voice', 'ws'];
-const docsPathRegex = /\w+\/(\w+)(?:\?scrollTo=(.+))?/;
+const legacyBaseURL = 'https://discord.js.org/#/docs';
+const baseURL = 'https://discordjs.dev/docs/packages';
+const sections = ['discord.js', 'brokers', 'builders', 'collection', 'core', 'formatters', 'proxy', 'rest', 'voice', 'ws'];
+const legacyPathRegex = /\w+\/(\w+)(?:\?scrollTo=(.+))?/;
+const pathRegex = /(\w+):(\w+)(?:#(.+))?/i;
 
 const props = defineProps({
 	section: {
@@ -29,27 +31,41 @@ const props = defineProps({
 });
 
 const link = computed(() => {
-	const guideSection = docsSections.find(section => section === props.section) || docsSections[0];
-	const branch = props.branch || (props.section === 'discord.js' ? defaultDjsBranch : 'main');
-	return `${baseURL}/${guideSection}/${branch}/${props.path}`;
+	const guideSection = sections.find(section => section === props.section) || sections[0];
+	const branch = props.branch || (props.section === sections[0] ? defaultDjsBranch : 'stable');
+	const url = guideSection === sections[0] ? legacyBaseURL : baseURL;
+	return `${url}/${guideSection}/${branch}/${props.path}`;
 });
 
 const linkText = computed(() => {
-	const [, file, property] = props.path.match(docsPathRegex);
+	const legacyRegex = legacyPathRegex.exec(props.path);
+	const regex = pathRegex.exec(props.path);
 
-	if (!property) return file;
+	if (legacyRegex) {
+		const [, file, symbol] = legacyRegex;
+		if (!symbol) return file;
 
-	const isStatic = property.startsWith('s-');
-	const isEvent = property.startsWith('e-');
-	const isMethod = props.type === 'method';
+		const isStatic = symbol.startsWith('s-');
+		const isEvent = symbol.startsWith('e-');
+		const isMethod = props.type === 'method';
 
-	const separator = isStatic ? '.' : '#';
-	const name = isStatic
-		? property.replace('s-', '')
-		: isEvent
-			? property.replace('e-', 'event:')
-			: property;
+		const separator = isStatic ? '.' : '#';
+		const name = isStatic
+			? symbol.replace('s-', '')
+			: isEvent
+				? symbol.replace('e-', 'event:')
+				: symbol;
 
-	return `${file}${separator}${name}${isMethod ? '()' : ''}`;
+		return `${file}${separator}${name}${isMethod ? '()' : ''}`;
+	}
+
+	if (regex) {
+		const [, file, type, symbol] = regex;
+		const brackets = type === 'Function' || props.type === 'method' ? '()' : '';
+		if (!symbol) return `${file}${brackets}`;
+		return `${file}#${symbol}${brackets}`;
+	}
+
+	return null;
 });
 </script>

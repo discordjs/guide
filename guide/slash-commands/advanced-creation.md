@@ -59,7 +59,7 @@ const data = new SlashCommandBuilder()
 			.setDescription('Whether or not the echo should be ephemeral'));
 ```
 
-Listed below is a short description of the different types of options that can be added. For more information, refer to the `add_____Option` methods in the <DocsLink section="builders" path="class/SlashCommandBuilder" /> documentation.
+Listed below is a short description of the different types of options that can be added. For more information, refer to the `add_____Option` methods in the <DocsLink section="builders" path="SlashCommandBuilder:Class" /> documentation.
 
 * `String`, `Integer`, `Number` and `Boolean` options all accept primitive values of their associated type.
   * `Integer` only accepts whole numbers.
@@ -98,7 +98,7 @@ The `String`, `Number`, and `Integer` option types can have `choices`. If you wo
 If you specify `choices` for an option, they'll be the **only** valid values users can pick!
 :::
 
-Specify choices by using the `addChoices()` method from within the option builder, such as <DocsLink section="builders" path="class/SlashCommandBuilder?scrollTo=addStringOption" type="method" />. Choices require a `name` which is displayed to the user for selection, and a `value` that your bot will receive when that choice is selected, as if the user had typed it into the option manually.
+Specify choices by using the `addChoices()` method from within the option builder, such as <DocsLink section="builders" path="SlashCommandBuilder:Class#addStringOption" type="method" />. Choices require a `name` which is displayed to the user for selection, and a `value` that your bot will receive when that choice is selected, as if the user had typed it into the option manually.
 
 The `gif` command example below allows users to select from predetermined categories of gifs to send:
 

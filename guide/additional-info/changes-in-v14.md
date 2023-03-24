@@ -4,7 +4,7 @@
 
 v14 requires Node 16.9 or higher to use, so make sure you're up to date. To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it! There are many resources online to help you with this step based on your host system.
 
-### Builders are now included in v14
+### Various packages are now included in v14
 
 If you previously had `@discordjs/builders`, `@discordjs/formatters`, `@discordjs/rest`, or `discord-api-types` manually installed, it's _highly_ recommended that you uninstall the packages to avoid package version conflicts.
 
@@ -12,21 +12,21 @@ If you previously had `@discordjs/builders`, `@discordjs/formatters`, `@discordj
 ::: code-group-item npm
 
 ```sh:no-line-numbers
-npm uninstall @discordjs/builders @discordjs/rest discord-api-types
+npm uninstall @discordjs/builders @discordjs/formatters @discordjs/rest discord-api-types
 ```
 
 :::
 ::: code-group-item yarn
 
 ```sh:no-line-numbers
-yarn remove @discordjs/builders @discordjs/rest
+yarn remove @discordjs/builders @discordjs/formatters @discordjs/rest discord-api-types
 ```
 
 :::
 ::: code-group-item pnpm
 
 ```sh:no-line-numbers
-pnpm remove @discordjs/builders @discordjs/rest
+pnpm remove @discordjs/builders @discordjs/formatters @discordjs/rest discord-api-types
 ```
 
 :::
@@ -366,9 +366,9 @@ Whenever an interaction is replied to and one fetches the reply, it could possib
 
 -   `MessageEmbed` has now been renamed to `EmbedBuilder`.
 
--   `EmbedBuilder#setAuthor()` now accepts a sole [`EmbedAuthorOptions`](https://discord.js.org/#/docs/builders/main/typedef/EmbedAuthorData) object.
+-   `EmbedBuilder#setAuthor()` now accepts a sole <DocsLink section="builders" path="EmbedAuthorOptions:TypeAlias"/> object.
 
--   `EmbedBuilder#setFooter()` now accepts a sole [`FooterOptions`](https://discord.js.org/#/docs/builders/main/typedef/EmbedFooterOptions) object.
+-   `EmbedBuilder#setFooter()` now accepts a sole <DocsLink section="builders" path="EmbedFooterOptions:TypeAlias"/> object.
 
 -   `EmbedBuilder#addField()` has been removed. Use `EmbedBuilder#addFields()` instead.
 
@@ -515,7 +515,7 @@ Many of the analogous enums can be found in the discord-api-types docs. [discord
 
 ### Webhook
 
-`Webhook#fetchMessage()` now only takes one sole object of type `WebhookFetchMessageOptions`.
+`Webhook#fetchMessage()`'s second parameter no longer allows a boolean to be passed. The `cache` option in `WebhookFetchMessageOptions` should be used instead.
 
 ## Features
 

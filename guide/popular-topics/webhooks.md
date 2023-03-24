@@ -33,7 +33,7 @@ If you would like to get all webhooks of a guild you can use <DocsLink path="cla
 
 ### Fetching webhooks of a channel
 
-Webhooks belonging to a channel can be fetched using <DocsLink path="class/TextChannel?scrollTo=fetchWebhooks" type="method" />. This will return a Promise which will resolve into a Collection of `Webhook`s. A collection will be returned even if the channel contains a single webhook. If you are certain the channel contains a single webhook, you can use <DocsLink section="collection" path="class/Collection?scrollTo=first" type="method" /> on the Collection to get the webhook.
+Webhooks belonging to a channel can be fetched using <DocsLink path="class/TextChannel?scrollTo=fetchWebhooks" type="method" />. This will return a Promise which will resolve into a Collection of `Webhook`s. A collection will be returned even if the channel contains a single webhook. If you are certain the channel contains a single webhook, you can use <DocsLink section="collection" path="Collection:Class#first" type="method" /> on the Collection to get the webhook.
 
 ### Fetching a single webhook
 

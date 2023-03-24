@@ -8,7 +8,7 @@ This page is a follow-up to the [slash commands](/slash-commands/advanced-creati
 
 ## Registering context menu commands
 
-To create a context menu command, use the <DocsLink section="builders" path="class/ContextMenuCommandBuilder" /> class. You can then set the type of the context menu (user or message) using the `setType()` method.
+To create a context menu command, use the <DocsLink section="builders" path="ContextMenuCommandBuilder:Class" /> class. You can then set the type of the context menu (user or message) using the `setType()` method.
 
 ```js
 const { ContextMenuCommandBuilder, ApplicationCommandType } = require('discord.js');
