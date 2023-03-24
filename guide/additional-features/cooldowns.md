@@ -22,7 +22,7 @@ module.exports = {
 };
 ```
 
-In your main file, initialize a [Collection](/additional-info/collections.md) to store cooldowns of commands
+In your main file, initialize a [Collection](/additional-info/collections.md) to store cooldowns of commands:
 
 ```js
 client.cooldowns = new Collection();
@@ -61,7 +61,7 @@ You check if the `cooldowns` Collection already has an entry for the command bei
 2. `timestamps`: A reference to the Collection of user ids and timestamp key/value pairs for the triggered command.
 3. `cooldownAmount`: The specified cooldown for the command, converted to milliseconds for straightforward calculation. If none is specified, this defaults to three seconds.
 
-If the user has already used this command in this session, get the timestamp, calculate the expiration time and inform the user of the amount of time they need to wait before using this command again. Note the use of `return` statement here, causing the code below this snippet to execute only if the user has not used this command in this session or the wait has already expired.
+If the user has already used this command in this session, get the timestamp, calculate the expiration time, and inform the user of the amount of time they need to wait before using this command again. Note the use of the `return` statement here, causing the code below this snippet to execute only if the user has not used this command in this session or the wait has already expired.
 
 Continuing with your current setup, this is the complete `if` statement:
 
@@ -76,9 +76,9 @@ if (timestamps.has(interaction.user.id)) {
 }
 ```
 
-Since the `timestamps` Collection has the user's id as the key, you can use the `get()`method on it to get the value and sum it up with the `cooldownAmount` variable to get the correct expiration timestamp and further check to see if it's expired or not.
+Since the `timestamps` Collection has the user's id as the key, you can use the `get()` method on it to get the value and sum it up with the `cooldownAmount` variable to get the correct expiration timestamp and further check to see if it's expired or not.
 
-The previous user check serves as a precaution incase the user leaves the guild. You can now use the `setTimeout` method, which will allow you to execute a function after a specified amount of time and remove the timeout.
+The previous user check serves as a precaution in case the user leaves the guild. You can now use the `setTimeout` method, which will allow you to execute a function after a specified amount of time and remove the timeout.
 
 ```js {5-6}
 if (timestamps.has(interaction.user.id)) {
