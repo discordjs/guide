@@ -366,9 +366,9 @@ Whenever an interaction is replied to and one fetches the reply, it could possib
 
 -   `MessageEmbed` has now been renamed to `EmbedBuilder`.
 
--   `EmbedBuilder#setAuthor()` now accepts a sole [`EmbedAuthorOptions`](https://discord.js.org/#/docs/builders/main/typedef/EmbedAuthorData) object.
+-   `EmbedBuilder#setAuthor()` now accepts a sole <DocsLink section="builders" path="EmbedAuthorOptions:TypeAlias"/> object.
 
--   `EmbedBuilder#setFooter()` now accepts a sole [`FooterOptions`](https://discord.js.org/#/docs/builders/main/typedef/EmbedFooterOptions) object.
+-   `EmbedBuilder#setFooter()` now accepts a sole <DocsLink section="builders" path="EmbedFooterOptions:TypeAlias"/> object.
 
 -   `EmbedBuilder#addField()` has been removed. Use `EmbedBuilder#addFields()` instead.
 
