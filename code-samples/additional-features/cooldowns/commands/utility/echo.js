@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
 	cooldown: 5,
 	data: new SlashCommandBuilder()
-		.setName('options-info')
+		.setName('echo')
 		.setDescription('Information about the options provided.')
 		.addStringOption(option => option.setName('input').setDescription('The input to echo back')),
 	async execute(interaction) {
