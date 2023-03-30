@@ -214,11 +214,13 @@ console.log(message);
 
 In addition to the ability to provide localized command definitions, you can also localize your responses. To do this, get the locale of the user with `ChatInputCommandInteraction#locale` and respond accordingly:
 
+Also, you need to add double quotes with any language whether it is double (e.g. en-US) or not. E.g. "en-US", "es-ES", "fr", etc.
+
 ```js
 client.on(Events.InteractionCreate, interaction => {
 	const locales = {
-		pl: 'Witaj Świecie!',
-		de: 'Hallo Welt!',
+		"pl": 'Witaj Świecie!',
+		"de": 'Hallo Welt!',
 	};
 	interaction.reply(locales[interaction.locale] ?? 'Hello World (default is english)');
 });
