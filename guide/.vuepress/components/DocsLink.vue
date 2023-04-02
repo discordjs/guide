@@ -8,8 +8,8 @@
 import { computed } from 'vue';
 import { defaultDjsBranch } from '../constants';
 
-const legacyBaseURL = 'https://discord.js.org/#/docs';
-const baseURL = 'https://discordjs.dev/docs/packages';
+const legacyBaseURL = 'https://old.discordjs.dev/#/docs';
+const baseURL = 'https://discord.js.org/docs/packages';
 const sections = ['discord.js', 'brokers', 'builders', 'collection', 'core', 'formatters', 'proxy', 'rest', 'util', 'voice', 'ws'];
 const legacyPathRegex = /\w+\/(\w+)(?:\?scrollTo=(.+))?/;
 const pathRegex = /(\w+):(\w+)(?:#(.+))?/i;

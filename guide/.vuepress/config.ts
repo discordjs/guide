@@ -1,6 +1,7 @@
 import path from 'path';
 import { defineUserConfig } from 'vuepress-vite';
 import type { DefaultThemeOptions, ViteBundlerOptions } from 'vuepress-vite';
+import { defaultDjsBranch } from './constants';
 import sidebar from './sidebar';
 
 const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
@@ -39,7 +40,7 @@ const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 			},
 			{
 				text: 'Documentation',
-				link: 'https://discord.js.org/#/',
+				link: `https://old.discordjs.dev/#/docs/discord.js/${defaultDjsBranch}/general/welcome`,
 			},
 		],
 		themePlugins: {
