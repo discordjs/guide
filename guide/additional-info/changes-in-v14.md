@@ -591,6 +591,8 @@ Added `Guild#setMFALevel()` which sets the guild's MFA level.
 
 Added `Guild#maxVideoChannelUsers` which indicates the maximum number of video channel users.
 
+Added `Guild#maxStageVideoChannelUsers`, which indicates the maximum number of video channel users for stage channels.
+
 Added `Guild#disableInvites()` which disables the guild's invites.
 
 Added support for the `after` parameter in `Guild#fetchAuditLogs()`.
