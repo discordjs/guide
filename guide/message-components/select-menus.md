@@ -8,7 +8,7 @@ This page is a follow-up to the [slash commands](/slash-commands/advanced-creati
 
 ## Building string select menus
 
-The "standard" and most customizable type of select menu is the string select menu. To create a string select menu, use the <DocsLink section="builders" path="class/StringSelectMenuBuilder"/> and <DocsLink section="builders" path="class/StringSelectMenuOptionBuilder"/> classes.
+The "standard" and most customizable type of select menu is the string select menu. To create a string select menu, use the <DocsLink section="builders" path="StringSelectMenuBuilder:Class"/> and <DocsLink section="builders" path="StringSelectMenuOptionBuilder:Class"/> classes.
 
 If you're a Pokémon fan, you've probably made a selection pretty similar to this example at some point in your life!
 
@@ -125,16 +125,16 @@ const select = new StringSelectMenuBuilder()
 
 Although the String select menu with it's user-defined options is the most customizable, there are four other types of select menu that auto-populate with their corresponding Discord entities, much like slash command options. These are:
 
-- <DocsLink section="builders" path="class/UserSelectMenuBuilder" />
-- <DocsLink section="builders" path="class/RoleSelectMenuBuilder" />
-- <DocsLink section="builders" path="class/MentionableSelectMenuBuilder" />
-- <DocsLink section="builders" path="class/ChannelSelectMenuBuilder" />
+- <DocsLink section="builders" path="UserSelectMenuBuilder:Class" />
+- <DocsLink section="builders" path="RoleSelectMenuBuilder:Class" />
+- <DocsLink section="builders" path="MentionableSelectMenuBuilder:Class" />
+- <DocsLink section="builders" path="ChannelSelectMenuBuilder:Class" />
 
-The `ChannelSelectMenuBuilder` can be configured to only show specific channel types using <DocsLink section="builders" path="class/ChannelSelectMenuBuilder?scrollTo=setChannelTypes" />.
+The `ChannelSelectMenuBuilder` can be configured to only show specific channel types using <DocsLink section="builders" path="ChannelSelectMenuBuilder:Class#setChannelTypes" type="method"/>.
 
 ## Multi-selects
 
-Where slash command options fall behind is in their single-select limitation on User, Role and Channel option types. Select menus can support this use case via <DocsLink section="builders" path="class/BaseSelectMenuBuilder?scrollTo=setMinValues" /> and <DocsLink section="builders" path="class/BaseSelectMenuBuilder?scrollTo=setMaxValues" />. When these values are set, users can select multiple items, and the interaction will be sent with all selected values only when the user clicks outside the select menu.
+Where slash command options fall behind is in their single-select limitation on User, Role and Channel option types. Select menus can support this use case via <DocsLink section="builders" path="BaseSelectMenuBuilder:Class#setMinValues" type="method"/> and <DocsLink section="builders" path="BaseSelectMenuBuilder:Class#setMaxValues" type="method"/>. When these values are set, users can select multiple items, and the interaction will be sent with all selected values only when the user clicks outside the select menu.
 
 ```js{7-8,13-14}
 module.exports = {

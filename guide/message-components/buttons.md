@@ -131,7 +131,7 @@ const button = new ButtonBuilder()
 
 ## Disabled buttons
 
-If you want to prevent a button from being used, but not remove it from the message, you can disable it with the <DocsLink section="builders" path="class/ButtonBuilder?scrollTo=setDisabled"/> method:
+If you want to prevent a button from being used, but not remove it from the message, you can disable it with the <DocsLink section="builders" path="ButtonBuilder:Class#setDisabled" type="method"/> method:
 
 ```js {5}
 const button = new ButtonBuilder()
@@ -157,7 +157,7 @@ const button = new ButtonBuilder()
 
 ## Emoji buttons
 
-If you want to use a guild emoji within a <DocsLink path="class/ButtonBuilder"/>, you can use the <DocsLink path="class/ButtonBuilder?scrollTo=setEmoji"/> method:
+If you want to use a guild emoji within a <DocsLink path="class/ButtonBuilder"/>, you can use the <DocsLink path="ButtonBuilder#Class#setEmoji" type="method"/> method:
 
 ```js {5}
 const button = new ButtonBuilder()

@@ -10,7 +10,7 @@ The "width units" referred to are not fixed - the actual width of each individua
 
 ## Building action rows
 
-To create an action row, use the <DocsLink section="builders" path="class/ActionRowBuilder" /> class and the <DocsLink section="builders" path="class/ActionRowBuilder?scrollTo=addComponents" /> method to add buttons or a select menu. 
+To create an action row, use the <DocsLink section="builders" path="ActionRowBuilder:Class" /> class and the <DocsLink section="builders" path="ActionRowBuilder:Class#addComponents" type="method" /> method to add buttons or a select menu. 
 
 ```js {1-2}
 const row = new ActionRowBuilder()
@@ -18,7 +18,7 @@ const row = new ActionRowBuilder()
 ```
 
 ::: warning
-If you're using TypeScript you'll need to specify the type of components your action row holds. This can be done by specifying the component builder you will add to it using a generic parameter in <DocsLink section="builders" path="class/ActionRowBuilder" />.
+If you're using TypeScript, you'll need to specify the type of components your action row holds. This can be done by specifying the component builder you will add to it using a generic parameter in <DocsLink section="builders" path="ActionRowBuilder:Class" />.
 
 ```diff
 - new ActionRowBuilder()
@@ -28,7 +28,7 @@ If you're using TypeScript you'll need to specify the type of components your ac
 
 ## Sending action rows
 
-Once one or many components are inside your row(s), send them in the `components` property of your <DocsLink path="class/ChatInputCommandInteraction?scrollTo=reply" />.
+Once one or many components are inside your row(s), send them in the `components` property of your <DocsLink path="class/ChatInputCommandInteraction?scrollTo=reply" type="method" />.
 
 ```js {4}
 const row = new ActionRowBuilder()
