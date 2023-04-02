@@ -130,39 +130,11 @@ Although the String select menu with it's user-defined options is the most custo
 - <DocsLink section="builders" path="class/MentionableSelectMenuBuilder" />
 - <DocsLink section="builders" path="class/ChannelSelectMenuBuilder" />
 
-As an example, combining a User and Role select menu can allow for a simple role assignment UI. You could also use a slash command directly for this, but we'll make an additional enhancement to it in the next section.
-
-```js{4-10}
-module.exports = {
-	// data: new SlashCommandBuilder()...
-	async execute(interaction) {
-		const userSelect = new UserSelectMenuBuilder()
-			.setCustomId('user')
-			.setPlaceholder('Select the user to be assigned a role.');
-
-		const roleSelect = new RoleSelectMenuBuilder()
-			.setCustomId('role')
-			.setPlaceholder('Select the role to be assigned.');
-
-		const row1 = new ActionRowBuilder()
-			.addComponents(userSelect);
-		const row2 = new ActionRowBuilder()
-			.addComponents(roleSelect);
-
-		await interaction.reply({
-			content: 'Assign a role:',
-			components: [row1, row2],
-		});
-	},
-};
-```
+The `ChannelSelectMenuBuilder` can be configured to only show specific channel types using <DocsLink section="builders" path="class/ChannelSelectMenuBuilder?scrollTo=setChannelTypes" />.
 
 ## Multi-selects
 
-Looking at the example above, selecting one user and one role isn't a great reason to create select menus - slash command options could have done this already.
-
-Where slash command options fall behind is in selecting multiple users or multiple roles. Select menus can support this use case via <DocsLink section="builders" path="class/BaseSelectMenuBuilder?scrollTo=setMinValues" /> and <DocsLink section="builders" path="class/BaseSelectMenuBuilder?scrollTo=setMaxValues" />. When these values are set, users can select multiple items, and the interaction won't be sent until the user clicks outside the select menu.
-
+Where slash command options fall behind is in their single-select limitation on User, Role and Channel option types. Select menus can support this use case via <DocsLink section="builders" path="class/BaseSelectMenuBuilder?scrollTo=setMinValues" /> and <DocsLink section="builders" path="class/BaseSelectMenuBuilder?scrollTo=setMaxValues" />. When these values are set, users can select multiple items, and the interaction will be sent with all selected values only when the user clicks outside the select menu.
 
 ```js{7-8,13-14}
 module.exports = {
@@ -170,24 +142,16 @@ module.exports = {
 	async execute(interaction) {
 		const userSelect = new UserSelectMenuBuilder()
 			.setCustomId('users')
-			.setPlaceholder('Select the users to be assigned roles.')
-			.setMinValues(1)
-			.setMaxValues(10);
-
-		const roleSelect = new RoleSelectMenuBuilder()
-			.setCustomId('roles')
-			.setPlaceholder('Select the roles to be assigned.')
+			.setPlaceholder('Select multiple users.')
 			.setMinValues(1)
 			.setMaxValues(10);
 
 		const row1 = new ActionRowBuilder()
 			.addComponents(userSelect);
-		const row2 = new ActionRowBuilder()
-			.addComponents(roleSelect);
 
 		await interaction.reply({
-			content: 'Assign roles to users:',
-			components: [row1, row2],
+			content: 'Select users:',
+			components: [row1],
 		});
 	},
 };
