@@ -61,7 +61,7 @@ const client = new Client({
 
 ## Sweeping caches
 
-In addition to limiting caches, you can also periodically sweep and remove old items from caches. When creating a new <DocsLink path="class/Client">`Client`</DocsLink>, you can customize the `sweepers` option.
+In addition to limiting caches, you can also periodically sweep and remove old items from caches. When creating a new <DocsLink path="class/Client"/>, you can customize the `sweepers` option.
 
 Below is the default settings, which will occasionally sweep threads.
 
