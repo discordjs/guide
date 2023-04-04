@@ -12,7 +12,7 @@ The "width units" referred to are not fixed - the actual width of each individua
 
 To create an action row, use the <DocsLink section="builders" path="ActionRowBuilder:Class" /> class and the <DocsLink section="builders" path="ActionRowBuilder:Class#addComponents" type="method" /> method to add buttons or a select menu. 
 
-```js {1-2}
+```js
 const row = new ActionRowBuilder()
 	.addComponents(component);
 ```

@@ -12,7 +12,7 @@ Buttons are one of the `MessageComponent` classes, which can be sent via message
 
 For this example, you're going to expand on the `ban` command that was previously covered on the [parsing options](/slash-commands/parsing-options.md) page with a confirmation workflow.
 
-To create your buttons, use the <DocsLink path="class/ButtonBuilder"/> class, defining at least the `customId`, `style` and `label`.
+To create your buttons, use the <DocsLink section="builders" path="ButtonBuilder:Class"/> class, defining at least the `customId`, `style` and `label`.
 
 ```js {1,9-17}
 const { ButtonBuilder, ButtonStyle, SlashCommandBuilder } = require('discord.js');
