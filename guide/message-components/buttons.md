@@ -1,6 +1,6 @@
 # Buttons
 
-The first type of interactive component we'll cover creating is the Button. Buttons are available in a variety of styles and can be used to provide permanent interfaces, temporary confirmation workflows, and other forms of additional interaction with your bot.
+The first type of interactive component we'll cover creating is a Button. Buttons are available in a variety of styles and can be used to provide permanent interfaces, temporary confirmation workflows, and other forms of additional interaction with your bot.
 
 ::: tip
 This page is a follow-up to the [slash commands](/slash-commands/advanced-creation) section and [action rows](/message-components/action-rows) page. Please carefully read those pages first so that you can understand the methods used here.
@@ -67,7 +67,7 @@ module.exports = {
 			.addComponents(cancel, confirm);
 
 		await interaction.reply({
-			content: `Are you sure you want to ban ${target.username} for reason: ${reason}?`,
+			content: `Are you sure you want to ban ${target} for reason: ${reason}?`,
 			components: [row],
 		});
 	},
@@ -157,7 +157,7 @@ const button = new ButtonBuilder()
 
 ## Emoji buttons
 
-If you want to use a guild emoji within a <DocsLink path="class/ButtonBuilder"/>, you can use the <DocsLink path="ButtonBuilder#Class#setEmoji" type="method"/> method:
+If you want to use a guild emoji within a <DocsLink path="class/ButtonBuilder"/>, you can use the <DocsLink path="ButtonBuilder:Class#setEmoji" type="method"/> method:
 
 ```js {5}
 const button = new ButtonBuilder()

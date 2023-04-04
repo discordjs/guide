@@ -5,7 +5,7 @@ With the components API, you can create interactive message components to enhanc
 Action rows are a fairly simple form of layout component. A message may contain up to five rows, each of which has a "width" of five units. This can be thought of as a flexible 5x5 grid. A button will consume one unit of width in a row, while a select menu will consume the whole five units of width. At this time, these are the only types of components that can be sent in a message.
 
 :::warning
-The "width units" referred to are not fixed - the actual width of each individual button will be dynamic based on it's label contents.
+The "width units" referred to are not fixed - the actual width of each individual button will be dynamic based on its label contents.
 :::
 
 ## Building action rows

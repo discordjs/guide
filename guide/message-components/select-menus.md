@@ -83,7 +83,7 @@ module.exports = {
 ```
 
 :::tip
-Remember that if you have more than one select menu, each one will need it's own action row.
+Remember that if you have more than one select menu, each one will need its own action row.
 :::
 
 <!-- TODO: Update this section with a new image. Or make a component, idk

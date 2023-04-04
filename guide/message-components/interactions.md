@@ -34,7 +34,7 @@ Once `deferUpdate()` has been called, future messages can be sent by calling `fo
 
 If you followed our [buttons](/message-components/buttons) guide, the confirmation workflow for the `ban` command is a good example of a situation where your bot is expecting to receive a single response, from either the Confirm or Cancel button.
 
-Begin by storing the <DocsLink path="class/InteractionResponse" /> as a variable, and calling <DocsLink path="class/InteractionResponse?scrollTo=awaitMessageComponent" type="method" /> on this instance. This method returns a Promise that resolves when any interaction passes it's filter (if one is provided), or throws if none are received before the timeout. If this happens, remove the components and notify the user.
+Begin by storing the <DocsLink path="class/InteractionResponse" /> as a variable, and calling <DocsLink path="class/InteractionResponse?scrollTo=awaitMessageComponent" type="method" /> on this instance. This method returns a [Promise](/additional-info/async-await.md) that resolves when any interaction passes its filter (if one is provided), or throws if none are received before the timeout. If this happens, remove the components and notify the user.
 
 ```js {1,6-11}
 const response = await interaction.reply({
@@ -81,7 +81,7 @@ try {
 
 For situations where you want to collect multiple interactions, the Collector approach is better suited than awaiting singular interactions. Following on from the [select menus](/message-components/select-menus) guide, you're going to extend that example to use an <DocsLink path="class/InteractionCollector"/> to listen for multiple <DocsLink path="class/StringSelectMenuInteraction"/>s.
 
-Begin by storing the <DocsLink path="class/InteractionResponse" /> as a variable, and calling <DocsLink path="class/InteractionResponse?scrollTo=createMessageComponentCollector" type="method" /> on this instance. This method returns an InteractionCollector that will fire it's <DocsLink path="class/InteractionCollector?scrollTo=e-collect" /> event whenever an interaction passes its filter (if one is provided).
+Begin by storing the <DocsLink path="class/InteractionResponse" /> as a variable, and calling <DocsLink path="class/InteractionResponse?scrollTo=createMessageComponentCollector" type="method" /> on this instance. This method returns an InteractionCollector that will fire its <DocsLink path="class/InteractionCollector?scrollTo=e-collect" /> event whenever an interaction passes its filter (if one is provided).
 
 In the `collect` event, each interaction is a <DocsLink path="class/StringSelectMenuInteraction" /> thanks to the `componentType: ComponentType.StringSelect` option provided to the collector (and because that was the only type of component in the message). The selected value(s) are available via the <DocsLink path="class/StringSelectMenuInteraction?scrollTo=values" /> property.
 
