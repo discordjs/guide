@@ -102,7 +102,7 @@ message.delete().catch(error => {
 });
 ```
 
-You can find a list of constants [here](https://discord.js.org/#/docs/discord.js/stable/typedef/APIError).
+You can find a list of constants <DocsLink path="typedef/APIError">here</DocsLink>.
 
 ### Method
 
