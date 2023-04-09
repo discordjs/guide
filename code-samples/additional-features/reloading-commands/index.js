@@ -37,12 +37,12 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	const { cooldowns } = client;
 
-	if (!cooldowns.has(command.name)) {
-		cooldowns.set(command.name, new Collection());
+	if (!cooldowns.has(command.data.name)) {
+		cooldowns.set(command.data.name, new Collection());
 	}
 
 	const now = Date.now();
-	const timestamps = cooldowns.get(command.name);
+	const timestamps = cooldowns.get(command.data.name);
 	const defaultCooldownDuration = 3;
 	const cooldownAmount = (command.cooldown ?? defaultCooldownDuration) * 1000;
 
@@ -51,7 +51,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 		if (now < expirationTime) {
 			const expiredTimestamp = Math.round(expirationTime / 1000);
-			return interaction.reply({ content: `Please wait <t:${expiredTimestamp}:R> more second(s) before reusing the \`${command.name}\` command.`, ephemeral: true });
+			return interaction.reply({ content: `Please wait, you are on a cooldown for \`${command.data.name}\`. You can use it again <t:${expiredTimestamp}:R>.`, ephemeral: true });
 		}
 	}
 
