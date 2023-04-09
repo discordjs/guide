@@ -39,7 +39,7 @@ const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
 			},
 			{
 				text: 'Documentation',
-				link: 'https://discord.js.org/#/docs/main/stable/general/welcome',
+				link: 'https://old.discordjs.dev/#/docs/discord.js/v13/general/welcome',
 			},
 		],
 		themePlugins: {
