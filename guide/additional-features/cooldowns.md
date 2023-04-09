@@ -30,7 +30,7 @@ client.cooldowns = new Collection();
 
 The key will be the command names, and the values will be Collections associating the user's id (key) to the last time (value) this user used this command. Overall the logical path to get a user's last usage of a command will be `cooldowns > command > user > timestamp`.
 
-In your main file, add the following code:
+In your `InteractionCreate` event, add the following code:
 
 ```js {1,3-5,7-10,12-14}
 const { cooldowns } = client;
@@ -71,7 +71,7 @@ if (timestamps.has(interaction.user.id)) {
 
 	if (now < expirationTime) {
 		const expiredTimestamp = Math.round(expirationTime / 1000);
-		return interaction.reply({ content: `Please wait <t:${expiredTimestamp}:R> more second(s) before reusing the \`${command.data.name}\` command.`, ephemeral: true });
+		return interaction.reply({ content: `Please wait, you are on a cooldown for \`${command.data.name}\`. You can use it again <t:${expiredTimestamp}:R>.`, ephemeral: true });
 	}
 }
 ```
