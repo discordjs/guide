@@ -29,7 +29,7 @@ const props = defineProps({
 
 const link = computed(() => {
 	const guideSection = docsSections.find(section => section === props.section) || docsSections[0];
-	const branch = guideSection === 'main' ? 'stable' : props.branch || 'main';
+	const branch = guideSection === 'main' ? 'v13' : props.branch || 'main';
 	return `${baseURL}/${guideSection}/${branch}/${props.path}`;
 });
 
