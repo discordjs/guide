@@ -37,12 +37,12 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	const { cooldowns } = client;
 
-	if (!cooldowns.has(command.name)) {
-		cooldowns.set(command.name, new Collection());
+	if (!cooldowns.has(command.data.name)) {
+		cooldowns.set(command.data.name, new Collection());
 	}
 
 	const now = Date.now();
-	const timestamps = cooldowns.get(command.name);
+	const timestamps = cooldowns.get(command.data.name);
 	const defaultCooldownDuration = 3;
 	const cooldownAmount = (command.cooldown ?? defaultCooldownDuration) * 1000;
 
