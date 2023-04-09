@@ -24,7 +24,7 @@ Edit your `deploy-commands.js` as shown below, or put it into its own file to cl
 const { REST, Routes } = require('discord.js');
 const { clientId, guildId, token } = require('./config.json');
 
-const rest = new REST({ version: '10' }).setToken(token);
+const rest = new REST().setToken(token);
 
 // ...
 
@@ -49,7 +49,7 @@ To delete all commands in the respective scope (one guild, all global commands) 
 const { REST, Routes } = require('discord.js');
 const { clientId, guildId, token } = require('./config.json');
 
-const rest = new REST({ version: '10' }).setToken(token);
+const rest = new REST().setToken(token);
 
 // ...
 
