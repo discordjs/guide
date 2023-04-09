@@ -6,8 +6,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-
-const baseURL = 'https://discord.js.org/#/docs';
+// https://old.discordjs.dev/#/docs/discord.js/v13/typedef/APIError
+const baseURL = 'https://old.discordjs.dev/#/docs';
 const docsSections = ['main', 'collection', 'rpc'];
 const docsPathRegex = /\w+\/(\w+)(?:\?scrollTo=(.+))?/;
 
