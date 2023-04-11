@@ -1,6 +1,6 @@
 # Cache customization
 
-Sometimes, you might want to customize the caching behavior of discord.js.
+Sometimes, you might want to customize the caching behavior of discord.js in order to reduce memory usage.
 There are two ways within discord.js to do this:
 
 1. Limiting the size of caches.
