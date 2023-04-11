@@ -1,7 +1,7 @@
 # Cache customization
 
-Sometimes, you would like to be able to customize discord.js's caching behavior in order to reduce memory usage.
-To this end, discord.js provides you with two ways to do so:
+Sometimes, you might want to customize the caching behavior of discord.js.
+There are two ways within discord.js to do this:
 
 1. Limiting the size of caches.
 2. Periodically removing old items from caches.
@@ -13,10 +13,10 @@ It is very easy to introduce errors if your custom cache is not working as expec
 
 ## Limiting caches
 
-When creating a new <DocsLink path="class/Client"/>, you can limit the size of caches, which are specific to certain managers, using the `makeCache` option.
+When creating a new <DocsLink path="class/Client"/>, you can use the `makeCache` option to limit the size of caches that are particular to certain managers.
 Generally speaking, almost all your customizations can be done via the helper functions from the <DocsLink path="class/Options"/> module.
 
-Below is the default settings, which will limit message caches.
+Below are the default settings, which will limit the message cache to 200 items.
 
 ```js
 const { Client, Options } = require('discord.js');
@@ -43,8 +43,8 @@ As noted in the documentation, customizing `GuildManager`, `ChannelManager`, `Gu
 
 We can further customize this by passing options to <DocsLink path="class/LimitedCollection"/>, a special kind of collection that limits the number of items. In the example below, the client is configured so that:
 
-1. Only 200 guild members maximum may be cached per `GuildMemberManager` (essentially, per guild).
-2. We never remove a member if it is the client. This is especially important, so that the client can function correctly in guilds.
+1. Per `GuildMemberManager`, a maximum of 200 members can be cached. (essentially, per guild)
+2. We never remove a member if it is the client. This is especially important in order for the client to work properly in guilds.
 
 ```js
 const client = new Client({
@@ -53,11 +53,15 @@ const client = new Client({
 		ReactionManager: 0,
 		GuildMemberManager: {
 			maxSize: 200,
-			keepOverLimit: member => member.id === client.user.id,
+			keepOverLimit: (member) => member.id === YourClientID,
 		},
 	}),
 });
 ```
+
+::: warning
+Replace `YourClientID` with your client's ID. You can find this in the [Discord Developer Portal](https://discord.com/developers/applications) or by [copying it in Discord](https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-). `client.user.id` will not work here, as the client is not yet logged in.
+:::
 
 ## Sweeping caches
 
@@ -73,23 +77,27 @@ const client = new Client({
 });
 ```
 
-To change the sweep behavior, you specify the type of cache to sweep (<DocsLink path="typedef/SweeperKey"/>) and the options for sweeping (<DocsLink path="typedef/SweepOptions"/>). If the type of cache has a lifetime associated with it, such as invites, messages, or threads, then you can set the `lifetime` option to sweep items older than specified. Otherwise, you can set the `filter` option for any type of cache, which will select the items to sweep.
+To modify the sweep behavior, you specify the type of cache to sweep (<DocsLink path="typedef/SweeperKey"/>) and the options for sweeping (<DocsLink path="typedef/SweepOptions"/>). If the type of cache has a lifetime associated with it, such as invites, messages, or threads, then you can set the `lifetime` option to sweep items older than specified. Otherwise, you can set the `filter` option for any type of cache, which will select the items to sweep.
 
 ```js
 const client = new Client({
 	sweepers: {
 		...Options.DefaultSweeperSettings,
 		messages: {
-			interval: 3600, // Every hour...
-			lifetime: 1800,	// Remove messages older than 30 minutes.
+			interval: 60 * 60, // Every hour...
+			lifetime: 60 * 30, // Remove messages older than 30 minutes.
 		},
 		users: {
-			interval: 3600, // Every hour...
-			filter: user => user.bot && user.id !== client.user.id, // Remove all bots.
+			interval: 60 * 60, // Every hour...
+			filter: (user) => user.bot && user.id !== YourClientID, // Remove all bots from the cache, except for the client.
 		},
 	},
 });
 ```
+
+::: warning
+Replace `YourClientID` with your client's ID. You can find this in the [Discord Developer Portal](https://discord.com/developers/applications) or by [copying it in Discord](https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-). `client.user.id` will not work here, as the client is not yet logged in.
+:::
 
 ::: tip
 Take a look at the documentation for which types of cache you can sweep.
