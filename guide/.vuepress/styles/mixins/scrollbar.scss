@@ -2,7 +2,7 @@
 	--c-bg-scrollbar: var(--c-bg);
 	--c-bg-scrollbar-thumb: var(--theme-460);
 	--c-bg-scrollbar-thumb-hover: var(--theme-430);
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 @mixin customScrollbar($thin: true) {
