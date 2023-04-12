@@ -157,7 +157,7 @@ const button = new ButtonBuilder()
 
 ## Emoji buttons
 
-If you want to use a guild emoji within a <DocsLink path="class/ButtonBuilder"/>, you can use the <DocsLink path="ButtonBuilder:Class#setEmoji" type="method"/> method:
+If you want to use a guild emoji within a <DocsLink path="class/ButtonBuilder"/>, you can use the <DocsLink path="class/ButtonBuilder?scrollTo=setEmoji" type="method"/> method:
 
 ```js {5}
 const button = new ButtonBuilder()
