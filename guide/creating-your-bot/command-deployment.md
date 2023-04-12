@@ -1,12 +1,16 @@
 # Registering slash commands
 
 ::: tip
-This page assumes you use the same file structure as our [Slash commands](./slash-commands.md) section, and the provided are made to function with that setup. Please carefully read that section first so that you can understand the methods used in this section.
+For fully functional slash commands, you need three important pieces of code:
 
-If you already have slash commands set up and deployed for your application and want to learn how to respond to them, refer to the following section on [Command Response Methods](/slash-commands/response-methods.md).
+1. The [individual command files](slash-commands), containing their definitions and functionality.
+2. The [command handler](command-handling), which dynamically reads the files and executes the commands.
+3. The command deployment script, to register your slash commands with Discord so they appear in the interface.
+
+These steps can be done in any order, but **all are required** before the commands are fully functional.
+
+This page details how to complete **Step 3**. Make sure to also complete the other pages linked above!
 :::
-
-In this section, we'll cover how to register your commands to Discord using discord.js!
 
 ## Command registration
 
@@ -48,12 +52,22 @@ const path = require('node:path');
 const commands = [];
 // Grab all the command files from the commands directory you created earlier
 const commandsPath = path.join(__dirname, 'commands');
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+const commandFolders = fs.readdirSync(foldersPath);
 
-// Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	commands.push(command.data.toJSON());
+for (const folder of commandFolders) {
+	// Grab all the command files from the commands directory you created earlier
+	const commandsPath = path.join(foldersPath, folder);
+	const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+	// Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
+	for (const file of commandFiles) {
+		const filePath = path.join(commandsPath, file);
+		const command = require(filePath);
+		if ('data' in command && 'execute' in command) {
+			commands.push(command.data.toJSON());
+		} else {
+			console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+		}
+	}
 }
 
 // Construct and prepare an instance of the REST module

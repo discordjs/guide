@@ -35,13 +35,17 @@ discord-bot/
 └── package.json
 ```
 
-To go from this starter code to fully functional slash commands, there are three key pieces of code that need to be written. They are:
+::: tip
+For fully functional slash commands, there are three important pieces of code that need to be written. They are:
 
 1. The individual command files, containing their definitions and functionality.
-2. The command handler, which dynamically reads the files and executes the commands.
-3. The command deployment script, to register your slash commands with Discord so they appear in the interface.
+2. The [command handler](command-handling.html), which dynamically reads the files and executes the commands.
+3. The [command deployment script](command-deployment.html), to register your slash commands with Discord so they appear in the interface.
 
-These steps can be done in any order, but all are required before the commands are fully functional. This section of the guide will use the order listed above. So let's get started!
+These steps can be done in any order, but **all are required** before the commands are fully functional.
+
+On this page, you'll complete Step 1. Make sure to also complete the other pages linked above!
+:::
 
 ## Individual command files
 
