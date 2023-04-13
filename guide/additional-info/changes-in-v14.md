@@ -224,7 +224,7 @@ The `restWsBridgeTimeout` client option has been removed.
 
 `CommandInteractionOptionResolver#getMember()` no longer has a parameter for `required`. See [this pull request](https://github.com/discordjs/discord.js/pull/7188) for more information.
 
-### `Constants`
+### Constants
 
 -   Many constant objects and key arrays are now top-level exports for example:
 
