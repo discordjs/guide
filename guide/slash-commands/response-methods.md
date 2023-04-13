@@ -83,7 +83,7 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 ```
 
-In fact, editing your interaction response is necessary to [calculate the ping](/popular-topics/faq.html#how-do-i-check-the-bot-s-ping) properly for this command.
+In fact, editing your interaction response is necessary to [calculate the ping](/popular-topics/faq#how-do-i-check-the-bot-s-ping) properly for this command.
 
 ## Deferred responses
 

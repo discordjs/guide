@@ -2,18 +2,22 @@
 
 Node.js uses an event-driven architecture, making it possible to execute code when a specific event occurs. The discord.js library takes full advantage of this. You can visit the <DocsLink path="class/Client" /> documentation to see the full list of events.
 
-If you've followed the guide up to this point, your `index.js` file will have listeners for two events: `ClientReady` and `InteractionCreate`.
+::: tip
+This page assumes you've followed the guide up to this point, and created your `index.js` and individual slash commands according to those pages.
+:::
 
+At this point, your `index.js` file has listeners for two events: `ClientReady` and `InteractionCreate`.
+
+:::: code-group
+::: code-group-item ClientReady
 ```js
-const { Client, Events, GatewayIntentBits } = require('discord.js');
-const { token } = require('./config.json');
-
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-
 client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
 });
-
+```
+:::
+::: code-group-item InteractionCreate
+```js
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
@@ -31,11 +35,15 @@ client.on(Events.InteractionCreate, async interaction => {
 		console.error(error);
 	}
 });
-
-client.login(token);
 ```
+:::
+::::
 
 Currently, the event listeners are in the `index.js` file. <DocsLink path="class/Client?scrollTo=e-ready" /> emits once when the `Client` becomes ready for use, and <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> emits whenever an interaction is received. Moving the event listener code into individual files is simple, and we'll be taking a similar approach to the [command handler](/creating-your-bot/command-handling.md).
+
+::: warning
+You're only going to move these two events from `index.js`. The code for [loading command files](/creating-your-bot/command-handling.html#loading-command-files) will stay here!
+:::
 
 ## Individual event files
 
@@ -43,8 +51,8 @@ Your project directory should look something like this:
 
 ```:no-line-numbers
 discord-bot/
-├── commands
-├── node_modules
+├── commands/
+├── node_modules/
 ├── config.json
 ├── deploy-commands.js
 ├── index.js
@@ -52,7 +60,7 @@ discord-bot/
 └── package.json
 ```
 
-Create an `events` folder in the same directory. You can then take your existing events code in `index.js` and move them to `events/ready.js` and `events/interactionCreate.js` files.
+Create an `events` folder in the same directory. You can then move the code from your event listeners in `index.js` to separate files: `events/ready.js` and `events/interactionCreate.js`.
 
 :::: code-group
 ::: code-group-item events/ready.js
@@ -94,18 +102,71 @@ module.exports = {
 };
 ```
 :::
+::: code-group-item index.js (after)
+```js
+const fs = require('node:fs');
+const path = require('node:path');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
+const { token } = require('./config.json');
+
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+
+client.commands = new Collection();
+const foldersPath = path.join(__dirname, 'commands');
+const commandFolders = fs.readdirSync(foldersPath);
+
+for (const folder of commandFolders) {
+	const commandsPath = path.join(foldersPath, folder);
+	const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+	for (const file of commandFiles) {
+		const filePath = path.join(commandsPath, file);
+		const command = require(filePath);
+		if ('data' in command && 'execute' in command) {
+			client.commands.set(command.data.name, command);
+		} else {
+			console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+		}
+	}
+}
+
+client.login(token);
+```
+:::
 ::::
 
 The `name` property states which event this file is for, and the `once` property holds a boolean value that specifies if the event should run only once. You don't need to specify this in `interactionCreate.js` as the default behavior will be to run on every event instance. The `execute` function holds your event logic, which will be called by the event handler whenever the event emits.
 
 ## Reading event files
 
-Next, let's write the code for dynamically retrieving all the event files in the `events` folder. We'll be taking a similar approach to our [command handler](/creating-your-bot/command-handling.md). Place the code below in your `index.js`.
+Next, let's write the code for dynamically retrieving all the event files in the `events` folder. We'll be taking a similar approach to our [command handler](/creating-your-bot/command-handling.md). Place the new code highlighted below in your `index.js`.
 
 `fs.readdirSync().filter()` returns an array of all the file names in the given directory and filters for only `.js` files, i.e. `['ready.js', 'interactionCreate.js']`.
 
-```js {3,5-12}
+```js {26-37}
+const fs = require('node:fs');
+const path = require('node:path');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
+const { token } = require('./config.json');
+
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+
+client.commands = new Collection();
+const foldersPath = path.join(__dirname, 'commands');
+const commandFolders = fs.readdirSync(foldersPath);
+
+for (const folder of commandFolders) {
+	const commandsPath = path.join(foldersPath, folder);
+	const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+	for (const file of commandFiles) {
+		const filePath = path.join(commandsPath, file);
+		const command = require(filePath);
+		if ('data' in command && 'execute' in command) {
+			client.commands.set(command.data.name, command);
+		} else {
+			console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+		}
+	}
+}
 
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
@@ -119,16 +180,20 @@ for (const file of eventFiles) {
 		client.on(event.name, (...args) => event.execute(...args));
 	}
 }
+
+client.login(token);
 ```
 
-The <DocsLink path="class/Client" /> class in discord.js extends the [`EventEmitter`](https://nodejs.org/api/events.html#events_class_eventemitter) class. Therefore, the `client` object exposes the [`.on()`](https://nodejs.org/api/events.html#events_emitter_on_eventname_listener) and [`.once()`](https://nodejs.org/api/events.html#events_emitter_once_eventname_listener) methods that you can use to register event listeners. These methods take two arguments: the event name and a callback function.
+You'll notice the code looks very similar to the command loading above it - read the files in the events folder and load each one individually.
+
+The <DocsLink path="class/Client" /> class in discord.js extends the [`EventEmitter`](https://nodejs.org/api/events.html#events_class_eventemitter) class. Therefore, the `client` object exposes the [`.on()`](https://nodejs.org/api/events.html#events_emitter_on_eventname_listener) and [`.once()`](https://nodejs.org/api/events.html#events_emitter_once_eventname_listener) methods that you can use to register event listeners. These methods take two arguments: the event name and a callback function. These are defined in your separate event files as `name` and `execute`.
 
 The callback function passed takes argument(s) returned by its respective event, collects them in an `args` array using the `...` [rest parameter syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters), then calls `event.execute()` while passing in the `args` array using the `...` [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax). They are used here because different events in discord.js have different numbers of arguments. The rest parameter collects these variable number of arguments into a single array, and the spread syntax then takes these elements and passes them to the `execute` function.
 
 After this, listening for other events is as easy as creating a new file in the `events` folder. The event handler will automatically retrieve and register it whenever you restart your bot.
 
 ::: tip
-In most cases, you can access your `client` instance in other files by obtaining it from one of the other discord.js structures, e.g. `interaction.client` in the `interactionCreate` event.
+In most cases, you can access your `client` instance in other files by obtaining it from one of the other discord.js structures, e.g. `interaction.client` in the `interactionCreate` event. You do not need to manually pass it to your events.
 :::
 
 ## Resulting code

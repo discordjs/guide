@@ -2,6 +2,18 @@
 
 Unless your bot project is small, it's not a very good idea to have a single file with a giant `if`/`else if` chain for commands. If you want to implement features into your bot and make your development process a lot less painful, you'll want to implement a command handler. Let's get started on that!
 
+::: tip
+For fully functional slash commands, there are three important pieces of code that need to be written. They are:
+
+1. The [individual command files](slash-commands), containing their definitions and functionality.
+2. The command handler, which dynamically reads the files and executes the commands.
+3. The [command deployment script](command-deployment), to register your slash commands with Discord so they appear in the interface.
+
+These steps can be done in any order, but **all are required** before the commands are fully functional.
+
+This page details how to complete **Step 2**. Make sure to also complete the other pages linked above!
+:::
+
 ## Loading command files
 
 Now that your command files have been created, your bot needs to load these files on startup. 
