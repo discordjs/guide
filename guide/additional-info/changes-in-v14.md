@@ -306,7 +306,7 @@ Whenever an interaction is replied to and one fetches the reply, it could possib
 
 ### Invite
 
-`Invite#channel` and `Invite#inviter` are now getters and resolve structures from the cache.
+`Invite#inviter` is now a getter and resolves structures from the cache.
 
 ### MessageAttachment
 
