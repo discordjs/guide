@@ -44,7 +44,7 @@ discord.js v14 makes the switch to Discord API v10!
 
 Any areas that used to accept a `string` or `number` type for an enum parameter will now only accept exclusively `number`s.
 
-In addition, the old enums exported by discord.js v13 and lower are replaced with new enums from [discord-api-types](https://discord-api-types.dev/api/discord-api-types-v10/enum/ActivityFlags).
+In addition, the old enums exported by discord.js v13 and lower are replaced with new enums from [discord-api-types](https://discord-api-types.dev/api/discord-api-types-v10).
 
 #### New enum differences
 
