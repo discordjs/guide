@@ -507,8 +507,6 @@ You can no longer use the `deleted` property to check if a structure was deleted
 
 `VoiceChannel#editable` has been removed. You should use `GuildChannel#manageable` instead.
 
-Many of the analogous enums can be found in the discord-api-types docs. [discord-api-types](https://discord-api-types.dev/api/discord-api-types-v10/enum/ActivityFlags)
-
 ### VoiceRegion
 
 `VoiceRegion#vip` has been removed as it is no longer part of the API.
