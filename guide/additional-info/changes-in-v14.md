@@ -620,6 +620,7 @@ This object now supports the `GuildMembersChunk#notFound` property.
 ### GuildMemberManager
 
 Added `GuildMemberManager#fetchMe()` to fetch the client user in the guild.
+
 Added `GuildMemberManager#addRole()` and `GuildMemberManager#removeRole()`. These methods allow a single addition or removal of a role respectively to a guild member, even if uncached.
 
 ### GuildTextThreadManager
