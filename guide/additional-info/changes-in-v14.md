@@ -484,7 +484,7 @@ Usage is now as follows:
 
 ### Util
 
-`Util.removeMentions()` has been removed. To control mentions, you should use `allowedMentions` on `MessageOptions` instead.
+`Util.removeMentions()` has been removed. To control mentions, you should use `allowedMentions` on `BaseMessageOptions` instead.
 
 `Util.splitMessage()` has been removed. This utility method is something the developer themselves should do.
 
