@@ -306,6 +306,8 @@ The following properties & methods have been moved to the `GuildAuditLogsEntry` 
 
 Whenever an interaction is replied to and one fetches the reply, it could possibly give an `APIMessage` if the guild was not cached. However, interaction replies now always return a discord.js `Message` object with `fetchReply` as `true`.
 
+The base interaction class is now `BaseInteraction`.
+
 ### Invite
 
 `Invite#inviter` is now a getter and resolves structures from the cache.
@@ -541,6 +543,10 @@ Additionally, new typeguards have been added:
 -   `BaseChannel#isTextBased()`
 -   `BaseChannel#isVoiceBased()`
 
+### BaseInteraction
+
+Added `BaseInteraction#isRepliable()` to check whether a given interaction can be replied to.
+
 ### ClientApplication
 
 Added support for role connection metadata.
@@ -626,10 +632,6 @@ Added `GuildMemberManager#addRole()` and `GuildMemberManager#removeRole()`. Thes
 ### GuildTextThreadManager
 
 Added `GuildTextThreadManager` as manager for threads in text channels and announcement channels.
-
-### Interaction
-
-Added `Interaction#isRepliable()` to check whether a given interaction can be replied to.
 
 ### Message
 
