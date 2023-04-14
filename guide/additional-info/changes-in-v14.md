@@ -460,7 +460,7 @@ This REST event has been renamed to `rateLimited` and moved to `Client#rest`:
 
 ### Sticker
 
-`Sticker#tags` is now a nullable string (`string | null`). Previously, it was a nullable array of strings (`string[] | null`). See [this pull request](https://github.com/discordjs/discord.js/pull/8010/files) for more information.
+`Sticker#tags` is now a nullable string (`string | null`). Previously, it was a nullable array of strings (`string[] | null`). See [this pull request](https://github.com/discordjs/discord.js/pull/8010) for more information.
 
 ### ThreadChannel
 
