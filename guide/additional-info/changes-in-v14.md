@@ -216,6 +216,8 @@ The following type guards have been removed:
 
 Refer to [this section](#channels) for more context.
 
+The base channel class is now `BaseChannel`.
+
 ### Client
 
 The `restWsBridgeTimeout` client option has been removed.
@@ -525,19 +527,19 @@ NFSW commands are supported.
 
 `AutocompleteInteraction#commandGuildId` has been added which is the id of the guild the invoked application command is registered to.
 
-### Channel
+### BaseChannel
 
-Added support for `Channel#flags`.
+Added support for `BaseChannel#flags`.
 
 Store channels have been removed as they are no longer part of the API.
 
-`Channel#url` has been added which is a link to a channel, just like in the client.
+`BaseChannel#url` has been added which is a link to a channel, just like in the client.
 
 Additionally, new typeguards have been added:
 
--   `Channel#isDMBased()`
--   `Channel#isTextBased()`
--   `Channel#isVoiceBased()`
+-   `BaseChannel#isDMBased()`
+-   `BaseChannel#isTextBased()`
+-   `BaseChannel#isVoiceBased()`
 
 ### ClientApplication
 
