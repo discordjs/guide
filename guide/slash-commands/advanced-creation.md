@@ -132,7 +132,7 @@ Even without predetermined choices, additional restrictions can still be applied
 We'll use these to show you how to enhance your `echo` command from earlier with extra validation to ensure it won't (or at least shouldn't) break when used:
 
 ```js {9-10, 14-15}
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, ChannelType } = require('discord.js');
 
 const data = new SlashCommandBuilder()
 	.setName('echo')
