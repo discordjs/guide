@@ -90,10 +90,6 @@ await thread.setLocked(true); // locked
 await thread.setLocked(false); // unlocked
 ```
 
-::: warning
-Archived threads can't be locked!
-:::
-
 ## Public and private threads
 
 Public threads are viewable by everyone who can view the parent channel of the thread. Public threads can be created with the <DocsLink path="class/GuildTextThreadManager?scrollTo=create" type="method" /> method.
