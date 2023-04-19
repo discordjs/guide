@@ -90,8 +90,8 @@ await thread.setLocked(true); // locked
 await thread.setLocked(false); // unlocked
 ```
 
-::: warning
-Archived threads can't be locked!
+::: info
+Archived threads can be locked.
 :::
 
 ## Public and private threads
