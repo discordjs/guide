@@ -566,7 +566,7 @@ Component collector options now use the `ComponentType` enum values:
 + const { ComponentType } = require('discord.js');
 
 const collector = interaction.channel.createMessageComponentCollector({
-	filter,
+	filter: collectorFilter,
 -	componentType: 'BUTTON',
 +	componentType: ComponentType.Button,
 	time: 20000
