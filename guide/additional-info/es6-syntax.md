@@ -152,11 +152,11 @@ var doubleAge = function(age) {
 };
 
 // inside a message collector command
-var filter = function(m) {
+var collectorFilter = function(m) {
 	return m.content === 'I agree' && !m.author.bot;
 };
 
-var collector = message.createMessageCollector({ filter, time: 15000 });
+var collector = message.createMessageCollector({ filter: collectorFilter, time: 15000 });
 ```
 
 ```js
@@ -170,8 +170,8 @@ client.on(Events.MessageCreate, message => console.log(`${message.author.tag} se
 const doubleAge = age => `Your age doubled is: ${age * 2}`;
 
 // inside a message collector command
-const filter = m => m.content === 'I agree' && !m.author.bot;
-const collector = message.createMessageCollector({ filter, time: 15000 });
+const collectorFilter = m => m.content === 'I agree' && !m.author.bot;
+const collector = message.createMessageCollector({ filter: collectorFilter, time: 15000 });
 ```
 
 There are a few important things you should note here:

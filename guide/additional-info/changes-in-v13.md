@@ -216,11 +216,11 @@ const { prefix } = message.client.guildSettings.get(message.guild.id);
 All Collector related classes and methods (both `.create*()` and `.await*()`) now take a single object parameter which also includes the filter.
 
 ```diff
-- const collector = message.createReactionCollector(filter, { time: 15000 });
-+ const collector = message.createReactionCollector({ filter, time: 15000 });
+- const collector = message.createReactionCollector(collectorFilter, { time: 15000 });
++ const collector = message.createReactionCollector({ filter: collectorFilter, time: 15000 });
 
-- const reactions = await message.awaitReactions(filter, { time: 15000 });
-+ const reactions = await message.awaitReactions({ filter, time: 15000 });
+- const reactions = await message.awaitReactions(collectorFilter, { time: 15000 });
++ const reactions = await message.awaitReactions({ filter: collectorFilter, time: 15000 });
 ```
 
 ### Naming conventions
