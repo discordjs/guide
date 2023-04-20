@@ -15,11 +15,11 @@ client.on(Events.InteractionCreate, async interaction => {
 		const message = await interaction.reply({ content: 'Awaiting emojis...', fetchReply: true });
 		message.react('👍').then(() => message.react('👎'));
 
-		const filter = (reaction, user) => {
+		const collectorFilter = (reaction, user) => {
 			return ['👍', '👎'].includes(reaction.emoji.name) && user.id === interaction.user.id;
 		};
 
-		message.awaitReactions({ filter, max: 1, time: 60000, errors: ['time'] })
+		message.awaitReactions({ filter: collectorFilter, max: 1, time: 60000, errors: ['time'] })
 			.then(collected => {
 				const reaction = collected.first();
 

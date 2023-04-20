@@ -10,8 +10,8 @@ For now, let's take the example that they have provided us:
 
 ```js
 // `m` is a message object that will be passed through the filter function
-const filter = m => m.content.includes('discord');
-const collector = interaction.channel.createMessageCollector({ filter, time: 15000 });
+const collectorFilter = m => m.content.includes('discord');
+const collector = interaction.channel.createMessageCollector({ filter: collectorFilter, time: 15000 });
 
 collector.on('collect', m => {
 	console.log(`Collected ${m.content}`);
@@ -62,13 +62,13 @@ The provided set allows for responder error with an array of answers permitted. 
 const quiz = require('./quiz.json');
 // ...
 const item = quiz[Math.floor(Math.random() * quiz.length)];
-const filter = response => {
+const collectorFilter = response => {
 	return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
 };
 
 interaction.reply({ content: item.question, fetchReply: true })
 	.then(() => {
-		interaction.channel.awaitMessages({ filter, max: 1, time: 30000, errors: ['time'] })
+		interaction.channel.awaitMessages({ filter: collectorFilter, max: 1, time: 30000, errors: ['time'] })
 			.then(collected => {
 				interaction.followUp(`${collected.first().author} got the correct answer!`);
 			})
@@ -93,11 +93,11 @@ The filter looks for messages that match one of the answers in the array of poss
 These work quite similarly to message collectors, except that you apply them on a message rather than a channel. This example uses the <DocsLink path="class/Message?scrollTo=createReactionCollector" type="method" /> method. The filter will check for the 👍 emoji–in the default skin tone specifically, so be wary of that. It will also check that the person who reacted shares the same id as the author of the original message that the collector was assigned to.
 
 ```js
-const filter = (reaction, user) => {
+const collectorFilter = (reaction, user) => {
 	return reaction.emoji.name === '👍' && user.id === message.author.id;
 };
 
-const collector = message.createReactionCollector({ filter, time: 15000 });
+const collector = message.createReactionCollector({ filter: collectorFilter, time: 15000 });
 
 collector.on('collect', (reaction, user) => {
 	console.log(`Collected ${reaction.emoji.name} from ${user.tag}`);
@@ -113,11 +113,11 @@ collector.on('end', collected => {
 <p><DocsLink path="class/Message?scrollTo=awaitReactions" type="method" /> works almost the same as a reaction collector, except it is Promise-based. The same differences apply as with channel collectors.</p>
 
 ```js
-const filter = (reaction, user) => {
+const collectorFilter = (reaction, user) => {
 	return reaction.emoji.name === '👍' && user.id === message.author.id;
 };
 
-message.awaitReactions({ filter, max: 4, time: 60000, errors: ['time'] })
+message.awaitReactions({ filter: collectorFilter, max: 4, time: 60000, errors: ['time'] })
 	.then(collected => console.log(collected.size))
 	.catch(collected => {
 		console.log(`After a minute, only ${collected.size} out of 4 reacted.`);
@@ -161,12 +161,12 @@ Unlike other Promise-based collectors, this method will only ever collect one in
 ```js
 const { ComponentType } = require('discord.js');
 
-const filter = i => {
+const collectorFilter = i => {
 	i.deferUpdate();
 	return i.user.id === interaction.user.id;
 };
 
-message.awaitMessageComponent({ filter, componentType: ComponentType.StringSelect, time: 60000 })
+message.awaitMessageComponent({ filter: collectorFilter, componentType: ComponentType.StringSelect, time: 60000 })
 	.then(interaction => interaction.editReply(`You selected ${interaction.values.join(', ')}!`))
 	.catch(err => console.log('No interactions were collected.'));
 ```

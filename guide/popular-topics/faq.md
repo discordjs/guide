@@ -188,9 +188,9 @@ channel.send({
 
 ```js
 interaction.reply('Please enter more input.').then(() => {
-	const filter = m => interaction.user.id === m.author.id;
+	const collectorFilter = m => interaction.user.id === m.author.id;
 
-	interaction.channel.awaitMessages({ filter, time: 60000, max: 1, errors: ['time'] })
+	interaction.channel.awaitMessages({ filter: collectorFilter, time: 60000, max: 1, errors: ['time'] })
 		.then(messages => {
 			interaction.followUp(`You've entered: ${messages.first().content}`);
 		})

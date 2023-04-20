@@ -42,9 +42,10 @@ const response = await interaction.reply({
 	components: [row],
 });
 
-const filter = i => i.user.id === interaction.user.id;
+const collectorFilter = i => i.user.id === interaction.user.id;
+
 try {
-	const confirmation = await response.awaitMessageComponent({ filter, time: 60000 });
+	const confirmation = await response.awaitMessageComponent({ filter: collectorFilter, time: 60000 });
 } catch (e) {
 	await response.editReply({ content: 'Confirmation not received within 1 minute, cancelling', components: [] });
 }
@@ -62,9 +63,9 @@ const response = await interaction.reply({
 	components: [row],
 });
 
-const filter = i => i.user.id === interaction.user.id;
+const collectorFilter = i => i.user.id === interaction.user.id;
 try {
-	const confirmation = await response.awaitMessageComponent({ filter, time: 60_000 });
+	const confirmation = await response.awaitMessageComponent({ filter: collectorFilter, time: 60_000 });
 
 	if (confirmation.customId === 'confirm') {
 		await interaction.guild.members.ban(target);
