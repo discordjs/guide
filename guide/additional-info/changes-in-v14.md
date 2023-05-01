@@ -527,6 +527,10 @@ You can no longer use the `deleted` property to check if a structure was deleted
 
 NFSW commands are supported.
 
+### Attachment
+
+Added support for voice message metadata fields.
+
 ### AutocompleteInteraction
 
 `AutocompleteInteraction#commandGuildId` has been added which is the id of the guild the invoked application command is registered to.
