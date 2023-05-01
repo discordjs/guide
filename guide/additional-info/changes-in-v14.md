@@ -404,6 +404,8 @@ In addition to this, there is now a new partial: `Partials.ThreadMember`.
 
 Thread permissions `USE_PUBLIC_THREADS` and `USE_PRIVATE_THREADS` have been removed as they are deprecated in the API. Use `CREATE_PUBLIC_THREADS` and `CREATE_PRIVATE_THREADS` respectively.
 
+`ManageEmojisAndStickers` has been deprecated due to API changes. Its replacement is `ManageGuildExpressions`. See [this pull request](https://github.com/discord/discord-api-docs/pull/6017) for more information.
+
 ### PermissionOverwritesManager
 
 Overwrites are now keyed by the `PascalCase` permission key rather than the `SCREAMING_SNAKE_CASE` permission key.
