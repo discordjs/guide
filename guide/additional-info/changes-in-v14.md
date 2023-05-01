@@ -674,3 +674,7 @@ When fetching multiple thread members alongside `withMember`, paginated results 
 Added `Webhook#applicationId`.
 
 Added the `threadName` property in `Webhook#send()` options which allows a webhook to create a post in a forum channel.
+
+### WebSocketManager
+
+discord.js uses <PackageLink name="ws" /> internally.
