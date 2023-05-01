@@ -404,6 +404,8 @@ In addition to this, there is now a new partial: `Partials.ThreadMember`.
 
 Thread permissions `USE_PUBLIC_THREADS` and `USE_PRIVATE_THREADS` have been removed as they are deprecated in the API. Use `CREATE_PUBLIC_THREADS` and `CREATE_PRIVATE_THREADS` respectively.
 
+`ManageEmojisAndStickers` has been deprecated due to API changes. Its replacement is `ManageGuildExpressions`. See [this pull request](https://github.com/discord/discord-api-docs/pull/6017) for more information.
+
 ### PermissionOverwritesManager
 
 Overwrites are now keyed by the `PascalCase` permission key rather than the `SCREAMING_SNAKE_CASE` permission key.
@@ -524,6 +526,10 @@ You can no longer use the `deleted` property to check if a structure was deleted
 ### ApplicationCommand
 
 NFSW commands are supported.
+
+### Attachment
+
+Added support for voice message metadata fields.
 
 ### AutocompleteInteraction
 
@@ -647,6 +653,8 @@ Added `MessageReaction#react()` to make the client user react with the reaction 
 
 Added support for role subscriptions.
 
+Added support for `Role#tags#guildConnections`.
+
 ### StageChannel
 
 Stage channels now allow messages to be sent in them, much like voice channels.
@@ -666,3 +674,7 @@ When fetching multiple thread members alongside `withMember`, paginated results 
 Added `Webhook#applicationId`.
 
 Added the `threadName` property in `Webhook#send()` options which allows a webhook to create a post in a forum channel.
+
+### WebSocketManager
+
+discord.js uses <PackageLink name="ws" /> internally.
