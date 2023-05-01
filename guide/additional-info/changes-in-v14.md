@@ -647,6 +647,8 @@ Added `MessageReaction#react()` to make the client user react with the reaction 
 
 Added support for role subscriptions.
 
+Added support for `Role#tags#guildConnections` in role tags.
+
 ### StageChannel
 
 Stage channels now allow messages to be sent in them, much like voice channels.
