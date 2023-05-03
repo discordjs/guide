@@ -9,6 +9,7 @@ module.exports = {
 				.setDescription('Number of messages to prune')
 				.setMinValue(1)
 				.setMaxValue(100)),
+	category:"moderation",
 	async execute(interaction) {
 		const amount = interaction.options.getInteger('amount');
 
