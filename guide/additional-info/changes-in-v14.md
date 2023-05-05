@@ -196,7 +196,14 @@ The following properties have been removed as they are not documented by Discord
 
 ### CDN
 
-Methods that return CDN URLs will now return a dynamic image URL (if available). This behavior can be overridden by setting `forceStatic` to `true` in the `ImageURLOptions` parameters.
+The methods that return CDN URLs have changed. Here is an example on a User:
+
+```diff
+- const url = user.displayAvatarURL({ dynamic: true, format: "png", size: 1024 });
++ const url = user.displayAvatarURL({ extension: "png", size: 1024 });
+```
+
+Dynamic URLs use <DocsLink section="rest" path="ImageURLOptions:Interface"/> and static URLs use <DocsLink section="rest" path="BaseImageURLOptions:Interface"/>. Since dynamic URLs are returned by default, this option has been renamed to `forceStatic` which forces the return of a static URL. Additionally, `format` has been renamed to `extension`.
 
 ### CategoryChannel
 
