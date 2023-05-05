@@ -47,21 +47,20 @@ const { AuditLogEvent, Events } = require('discord.js');
 
 client.on(Events.GuildAuditLogEntryCreate, async auditLog => {
 	// Define your variables.
-	const { action, executorId, target, targetId } = auditLog;
+	// The extra information here will be the channel.
+	const { action, extra: channel, executorId, targetId } = auditLog;
 
 	// Check only for deleted messages.
 	if (action !== AuditLogEvent.MessageDelete) return;
 
 	// Ensure the executor is cached.
-	const user = await client.users.fetch(executorId);
+	const executor = await client.users.fetch(executorId);
 
-	if (target) {
-		// The message object is in the cache and you can provide a detailed log here.
-		console.log(`A message by ${target.tag} was deleted by ${user.tag}.`);
-	} else {
-		// The message object was not cached, but you can still retrieve some information.
-		console.log(`A message with id ${targetId} was deleted by ${user.tag}.`);
-	}
+	// Ensure the author whose message was deleted is cached.
+	const target = await client.users.fetch(targetId);
+
+	// Log the output.
+	console.log(`A message by ${target.tag} was deleted by ${executor.tag} in ${channel}.`);
 });
 ```
 
@@ -82,14 +81,14 @@ client.on(Events.GuildAuditLogEntryCreate, async auditLog => {
 	if (action !== AuditLogEvent.MemberKick) return;
 
 	// Ensure the executor is cached.
-	const user = await client.users.fetch(executorId);
+	const executor = await client.users.fetch(executorId);
 
 	// Ensure the kicked guild member is cached.
 	const kickedUser = await client.users.fetch(targetId);
 
 	// Now you can log the output!
-	console.log(`${kickedUser.tag} was kicked by ${user.tag}.`);
+	console.log(`${kickedUser.tag} was kicked by ${executor.tag}.`);
 });
 ```
 
-If you want to check who banned a user, it's actually the same example as above except for the `action`. You need to provide `AuditLogEvent.MemberBanAdd` for this case.
+If you want to check who banned a user, it's the same example as above except the `action` should be `AuditLogEvent.MemberBanAdd`. You can check the rest of the types over at the [discord-api-types documentation](https://discord-api-types.dev/api/discord-api-types-v10/enum/AuditLogEvent).
