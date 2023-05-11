@@ -181,8 +181,6 @@ You can use <DocsLink path="class/Webhook?scrollTo=editMessage" type="method" />
 ```js
 const message = await webhook.editMessage('123456789012345678', {
 	content: 'Edited!',
-	username: 'some-username',
-	avatarURL: 'https://i.imgur.com/AfFp7pu.png',
 	embeds: [embed],
 });
 ```
