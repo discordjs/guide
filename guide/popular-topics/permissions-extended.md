@@ -29,7 +29,7 @@ If the guild owner enables the server's two-factor authentication option, everyo
 Check out [Discord's help article](https://support.discord.com/hc/articles/219576828) if you need assistance with this.
 
 The permissions assigned to these actions are called "elevated permissions" and are: 
-`KickMembers`, `BanMembers`, `Administrator`, `ManageChannels`, `ManageGuild`, `ManageMessages`, `ManageRoles`, `ManageWebhooks`, `ManageThreads`, and `ManageEmojisAndStickers`.
+`KickMembers`, `BanMembers`, `Administrator`, `ManageChannels`, `ManageGuild`, `ManageMessages`, `ManageRoles`, `ManageWebhooks`, `ManageThreads`, and `ManageGuildExpressions`.
 
 ## Implicit permissions
 

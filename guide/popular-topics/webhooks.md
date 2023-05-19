@@ -104,7 +104,7 @@ Webhooks can send messages to text channels, as well as fetch, edit, and delete 
 
 ### Sending messages
 
-Webhooks, like bots, can send up to 10 embeds per message. They can also send attachments and normal content. The <DocsLink path="class/Webhook?scrollTo=send" type="method" /> method used to send to a webhook is very similar to the method used for sending to a text channel. Webhooks can also choose how the username and avatar will appear when they send the message.
+Webhooks, like bots, can send up to 10 embeds per message. They can also send attachments and normal content. The <DocsLink path="class/Webhook?scrollTo=send" type="method" /> method is very similar to the method used for sending a message to a text channel. Webhooks can also choose how the username and avatar will appear when they send the message.
 
 Example using a WebhookClient:
 
@@ -181,8 +181,6 @@ You can use <DocsLink path="class/Webhook?scrollTo=editMessage" type="method" />
 ```js
 const message = await webhook.editMessage('123456789012345678', {
 	content: 'Edited!',
-	username: 'some-username',
-	avatarURL: 'https://i.imgur.com/AfFp7pu.png',
 	embeds: [embed],
 });
 ```

@@ -42,11 +42,12 @@ const response = await interaction.reply({
 	components: [row],
 });
 
-const filter = i => i.user.id === interaction.user.id;
+const collectorFilter = i => i.user.id === interaction.user.id;
+
 try {
-	const confirmation = await response.awaitMessageComponent({ filter, time: 60000 });
+	const confirmation = await response.awaitMessageComponent({ filter: collectorFilter, time: 60000 });
 } catch (e) {
-	await response.editReply({ content: 'Confirmation not received within 1 minute, cancelling', components: [] });
+	await interaction.editReply({ content: 'Confirmation not received within 1 minute, cancelling', components: [] });
 }
 ```
 
@@ -62,9 +63,9 @@ const response = await interaction.reply({
 	components: [row],
 });
 
-const filter = i => i.user.id === interaction.user.id;
+const collectorFilter = i => i.user.id === interaction.user.id;
 try {
-	const confirmation = await response.awaitMessageComponent({ filter, time: 60_000 });
+	const confirmation = await response.awaitMessageComponent({ filter: collectorFilter, time: 60_000 });
 
 	if (confirmation.customId === 'confirm') {
 		await interaction.guild.members.ban(target);
@@ -73,7 +74,7 @@ try {
 		await confirmation.update({ content: 'Action cancelled', components: [] });
 	}
 } catch (e) {
-	await response.editReply({ content: 'Confirmation not received within 1 minute, cancelling', components: [] });
+	await interaction.editReply({ content: 'Confirmation not received within 1 minute, cancelling', components: [] });
 }
 ```
 
@@ -130,7 +131,7 @@ module.exports = {
 };
 ```
 
-The way this was previously set up returns from the `execute` function whenver it encounters an interaction that is not a `ChatInputCommandInteraction`, as shown on the highlighted line above. The first change that needs to be made is to invert this logic, without actually changing the functionality.
+The way this was previously set up returns from the `execute` function whenever it encounters an interaction that is not a `ChatInputCommandInteraction`, as shown on the highlighted line above. The first change that needs to be made is to invert this logic, without actually changing the functionality.
 
 ```js {6,20}
 const { Events } = require('discord.js');

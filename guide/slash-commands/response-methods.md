@@ -108,7 +108,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 If you have a command that performs longer tasks, be sure to call `deferReply()` as early as possible.
 
-Note that if you want your response to be ephemeral, you must pass an `ephemeral` flag to the `InteractionDeferOptions` here:
+Note that if you want your response to be ephemeral, you must pass an `ephemeral` flag to the `InteractionDeferReplyOptions` here:
 
 <!-- eslint-skip -->
 
