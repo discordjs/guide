@@ -33,7 +33,11 @@ module.exports = {
 
 First off, you need to check if the command you want to reload exists. You can do this check similarly to getting a command.
 
-```js {4-9}
+```js {2-3,8-32}
+// ...
+const fs = require('fs');
+const path = require('path');
+
 module.exports = {
 	// ...
 	async execute(interaction) {
@@ -42,6 +46,25 @@ module.exports = {
 
 		if (!command) {
 			return interaction.reply(`There is no command with name \`${commandName}\`!`);
+		}
+
+		const dirPath = path.resolve(__dirname, '..');
+		const subdirs = fs.readdirSync(dirPath, { withFileTypes: true })
+			.filter(dirent => dirent.isDirectory())
+			.map(dirent => dirent.name);
+
+		let commandPath = null;
+
+		for (const subdir of subdirs) {
+			const filePath = path.join(dirPath, subdir, `${command.data.name}.js`);
+			if (fs.existsSync(filePath)) {
+				commandPath = filePath;
+				break;
+			}
+		}
+
+		if (!commandPath) {
+			return interaction.reply(`Cannot find the file for command \`${command.data.name}\`!`);
 		}
 	},
 };
@@ -52,11 +75,11 @@ To build the correct file path, you will need the file name. You can use `comman
 In theory, all there is to do is delete the previous command from `client.commands` and require the file again. In practice, you cannot do this easily as `require()` caches the file. If you were to require it again, you would load the previously cached file without any changes. You first need to delete the file from `require.cache`, and only then should you require and set the command file to `client.commands`:
 
 ```js {1,4-6}
-delete require.cache[require.resolve(`./${command.data.name}.js`)];
+delete require.cache[require.resolve(commandPath)];
 
 try {
 	interaction.client.commands.delete(command.data.name);
-	const newCommand = require(`./${command.data.name}.js`);
+	const newCommand = require(commandPath);
 	interaction.client.commands.set(newCommand.data.name, newCommand);
 	await interaction.reply(`Command \`${newCommand.data.name}\` was reloaded!`);
 } catch (error) {
