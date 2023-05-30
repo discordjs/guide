@@ -14,7 +14,7 @@ client.once(Events.ClientReady, async () => {
 		const webhook = webhooks.find(wh => wh.token);
 
 		if (!webhook) {
-			return console.log('No webhook was found that I can use!');
+			return console.log('No webhook was found that you could use!');
 		}
 
 		await webhook.send({
