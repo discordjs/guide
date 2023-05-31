@@ -134,7 +134,7 @@ You've successfully sent a response to a slash command! However, this is only th
 * utilising the different [Response methods](/slash-commands/response-methods.md) that can be used for slash commands.
 * expanding on these examples with additional validated option types in [Advanced command creation](/slash-commands/advanced-creation.md).
 * adding formatted [Embeds](/popular-topics/embeds.md) to your responses.
-* enhancing the command functionality with [Buttons](/interactions/buttons) and [Select Menus](/interactions/select-menus.md).
+* enhancing the command functionality with [Buttons](/message-components/buttons) and [Select Menus](/message-components/select-menus.md).
 * prompting the user for more information with [Modals](/interactions/modals.md).
 
 #### Resulting code
