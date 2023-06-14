@@ -75,7 +75,7 @@ In addition to the `interactionCreate` event covered in the above guide, this re
 discord.js now has support for message components!
 This introduces the `MessageActionRow`, `MessageButton`, and `MessageSelectMenu` classes, as well as associated interactions and collectors. 
 
-Refer to the [message components](/interactions/buttons.html) section of this guide to get started.
+Refer to the [message components](/message-components/buttons.md) section of this guide to get started.
 
 ## Threads
 
@@ -1136,7 +1136,7 @@ A Collection of Roles which are managed by the integration.
 
 Provides gateway support for slash command and message component interactions. 
 
-For more information refer to the [slash commands](/interactions/slash-commands.md#replying-to-slash-commands) and [message components](/interactions/buttons.html#responding-to-buttons.html) sections of the guide.
+For more information refer to the [slash commands](/interactions/slash-commands.md#replying-to-slash-commands) and [message components](/message-components/buttons) sections of the guide.
 
 ### InteractionCollector
 

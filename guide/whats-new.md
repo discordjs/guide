@@ -45,8 +45,8 @@ All content has been updated to use discord.js v14 syntax. The v13 version of th
 
 - [Updating from v13 to v14](/additional-info/changes-in-v14.md): A list of the changes from discord.js v13 to v14
 - [Slash commands](/slash-commands/advanced-creation.md): Registering, replying to slash commands and permissions
-- [Buttons](/interactions/buttons.md): Building, sending, and receiving buttons
-- [Select menus](/interactions/select-menus.md): Building, sending, and receiving select menus
+- [Buttons](/message-components/buttons): Building, sending, and receiving buttons
+- [Select menus](/message-components/select-menus): Building, sending, and receiving select menus
 - [Threads](/popular-topics/threads.md): Creating and managing threads
 - [Formatters](/popular-topics/formatters.md): A collection of formatters to use with your bot
 
