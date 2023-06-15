@@ -14,7 +14,7 @@ You should see a page like this:
 
 ![Successfully created application](./images/create-app.png)
 
-You can edit your application's name, description, and avatar here. Once you've saved your changes, move on by selecting the "Bot" tab in the left pane.
+You can edit your application's name, description, and avatar here. Once you've saved your changes, move on by selecting the "Bot" tab in the left panel.
 
 ![Create a bot UI](./images/create-bot.png)
 
