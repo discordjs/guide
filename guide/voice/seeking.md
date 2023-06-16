@@ -23,7 +23,7 @@ Yo, this should be easy, right?
 ::: warning
 Make sure you have installed 
 
->prism-media
+prism-media
 :::
 
 ### Creation
@@ -35,13 +35,13 @@ First, to seek resource, you have to create new function like this:
 const prism = require("prism-media");
 
 function createFFmpegStream(stream, seek) {
-  const seekPosition = seek.toString();
+	const seekPosition = String(seek);
 	const transcoder = new prism.FFmpeg({
 		args: [
 			'-analyzeduration', '0',
 			'-loglevel', '0',
 			'-f', 's16le',
-			'-ar', '48000', //This is audio quality
+			'-ar', '48000',
 			'-ac', '2',
 			'-ss', seekPosition || '0', //Seek position. Specify with seconds. Should pass string
 			'-ab', '320',
@@ -52,6 +52,13 @@ function createFFmpegStream(stream, seek) {
 	return opus;
 }
 ```
+This function will return stream. If you want to change audio quality, you have to edit these:
+```js
+'-ar', '48000',
+
+const opus = s16le.pipe(new prism.opus.Encoder({ rate: 48000, channels: 2, frameSize: 960 }));
+```
+48000 to something you want.
 
 ### Real installation
 
