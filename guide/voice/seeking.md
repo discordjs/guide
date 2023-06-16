@@ -46,7 +46,7 @@ function createFFmpegStream(stream, seek) {
 			'-f', 's16le',
 			'-ar', '48000',
 			'-ac', '2',
-			'-ss', seekPosition || '0', //Seek position. Specify with seconds. Should pass string
+			'-ss', seekPosition || '0',
 			'-ab', '320',
 		]
 	});
