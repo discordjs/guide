@@ -71,7 +71,7 @@ const normalAUdioResource = createAudioResource("Your audio file path");
 
 player.play(normalAudioResource);
 
-const seekedAudioStream = createFFmpegStream(fs.createReadStream("Your audio file path"), "10"); //Seek to 10s
+const seekedAudioStream = createFFmpegStream(fs.createReadStream("Your audio file path"), 10); //Seek to 10s
 const seekedAudioResource = createAudioResource(seekedAudioStream);
 
 player.play(seekedAudioResource);
