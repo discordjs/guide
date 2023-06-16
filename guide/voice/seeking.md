@@ -44,7 +44,7 @@ function createFFmpegStream(stream, seek) {
 			'-f', 's16le',
 			'-ar', '48000', //This is audio quality
 			'-ac', '2',
-			'-ss', seekPosition || '0', //Seek position. Specidy with seconds. Should pass string
+			'-ss', seekPosition || '0', //Seek position. Specify with seconds. Should pass string
 			'-ab', '320',
 		]
 	});
@@ -73,12 +73,14 @@ player.play(seekedAudioResource);
 
 You can use other stream for createFFmpegStream() first argument.
 
-## Packages that can be used to seek audio resource easily
+## Packages
 
 distube:
-https://npm.im/distube
+
+>https://npm.im/distube
 
 discord-player:
-https://npm.im/discord-player
+
+>https://npm.im/discord-player
 
 And many other packages...
