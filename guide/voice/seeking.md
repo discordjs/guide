@@ -20,6 +20,13 @@ Methods
 
 Yo, this should be easy, right?
 
+::: warning
+Make sure you have installed 
+```
+prism-media
+```
+:::
+
 ### Creation
 
 First, to seek resource, you have to create new function like this:
@@ -68,10 +75,10 @@ You can use other stream for createFFmpegStream() first argument.
 
 ## Packages that can be used to seek audio resource easily
 
-distube
+distube:
 https://npm.im/distube
 
-discord-player
+discord-player:
 https://npm.im/discord-player
 
 And many other packages...
