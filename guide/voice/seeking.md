@@ -85,8 +85,6 @@ You can use other stream for createFFmpegStream() first argument.
 ## Packages
 >[Distube](https://npm.im/distube "Distube npm")
 
-discord-player:
-
 >[Discord-Player](https://npm.im/discord-player "Discord-Player")
 
 And many other packages...
