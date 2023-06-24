@@ -263,3 +263,73 @@ Official documentation: [https://www.i18next.com](https://www.i18next.com)
 i18next is an internationalization-framework for JavaScript. It is beneficial to translate your bot's user-facing messages into various languages based on the server it is used in.
 
 Covering an entire use case example for internationalization would be out of this guide's scope and requires some more explanation as to how the system operates. Please refer to the official documentation linked above for an in-depth usage guide.
+
+## Prime Console
+
+Prime Console is a logging package that supports saving to file, customizing colors, backgrounds and more!
+
+Github repo: [https://github.com/malezjaa/prime-console](https://github.com/malezjaa/prime-console)
+
+#### Available functions
+```js
+import { Logger } from 'prime-console';
+
+const logger = new Logger({ logLevel: 5 });
+
+logger.debug('test debug message');
+logger.info('test info message');
+logger.warning('test warning message');
+logger.error('test error message');
+logger.verbose('test verbose message');
+logger.silly('test silly message');
+```
+
+#### Customization
+```js
+import {Logger} from 'prime-console';
+
+const options: LoggerOptions = {
+  config: {
+    info: {
+      color: "blue",
+      background: "black"
+    },
+    error: {
+      color: "#e17607",
+      background: "none"
+    },
+    debug: {
+      color: "magenta",
+      background: "#e17607"
+    },
+  },
+  format: "[%t] %d %m",
+  logLevel: 5,
+  file: {
+    dir: "{cwd}/logs",
+    name: "logfile",
+    format: "text" | "json",
+  },
+  time: {
+    color: "blue",
+    bold: true,
+  }
+};
+
+const logger = new Logger(options);
+```
+- {cwd} - current working directory
+
+- **color** - can be hex or color's name
+- **format** - way of message being displayed
+  - **%t** - type
+  - **%d** - date/time
+  - **%m** - message
+- **logLevel** - The minimum level of messages to log. Only messages with a level greater than or equal to this value will be logged.
+- **file** - options for file logging
+  - **dir** - directory where log file will be saved
+  - **name** - name of log file
+  - **format** - format of log file (json or text)
+- **time** - options for time
+  - **color** - color of text
+  - **bold** - bold text
