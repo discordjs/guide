@@ -55,13 +55,12 @@ function createFFmpegStream(stream, seek) {
 	return opus; //Return seeked stream
 }
 ```
-This function will return seeked stream. If you want to change audio quality, you have to edit these:
+This function will return seeked stream. If you want to change audio quality, you have to edit this:
 ```js
-'-ar', '48000',
-
-const opus = s16le.pipe(new prism.opus.Encoder({ rate: 48000, channels: 2, frameSize: 960 }));
+'-ar', '320',
 ```
-48000 to something you want.
+320 to something you want.
+320 mans 320Kbps.
 
 ### Real installation
 
