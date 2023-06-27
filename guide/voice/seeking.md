@@ -57,7 +57,7 @@ function createFFmpegStream(stream, seek) {
 ```
 This function will return seeked stream. If you want to change audio quality, you have to edit this:
 ```js
-'-ar', '320',
+'-ab', '320',
 ```
 320 to something you want.
 320 mans 320Kbps.
