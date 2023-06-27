@@ -60,7 +60,7 @@ This function will return seeked stream. If you want to change audio quality, yo
 '-ab', '320',
 ```
 320 to something you want.
-320 mans 320Kbps.
+320 means 320Kbps.
 
 ### Real installation
 
@@ -80,10 +80,3 @@ player.play(seekedAudioResource);
 ```
 
 You can use other stream for createFFmpegStream() first argument.
-
-## Packages
->[Distube](https://npm.im/distube "Distube npm")
-
->[Discord-Player](https://npm.im/discord-player "Discord-Player")
-
-And many other packages...
