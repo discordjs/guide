@@ -5,7 +5,7 @@ Currently, there's no way to seek audio resources with raw discord.js such as:
 ```js
 const resource = createAudioResource();
 
-resource.seek(1000); // This will be error!
+resource.seek(1000); // This will be an error!
 ```
 
 But some packages provide seek options with these solutions.
