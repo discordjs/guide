@@ -69,7 +69,7 @@ const { createAudioResource, createAudioPlayer } = require("@discordjs/voice");
 const fs = require("fs");
 
 const player = createAudioPlayer();
-const normalAUdioResource = createAudioResource("Your audio file path");
+const normalAudioResource = createAudioResource("Your audio file path");
 
 player.play(normalAudioResource);
 
