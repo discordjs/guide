@@ -3,6 +3,8 @@
 Currently, there's no way to seek audio resources with raw discord.js such as:
 
 ```js
+const { createAudioResource } = require("@discordjs/voice");
+
 const resource = createAudioResource();
 
 resource.seek(1000); // This will be an error!
@@ -19,12 +21,6 @@ Methods
 3. Play the seeked audio resource
 
 Yo, this should be easy, right?
-
-::: warning
-Make sure you have installed 
-
-prism-media
-:::
 
 ### Creation
 
@@ -56,7 +52,7 @@ function createFFmpegStream(stream, seek) {
 }
 ```
 This function will return seeked stream. If you want to change audio quality, you have to edit this:
-```js
+```
 '-ab', '320',
 ```
 320 to something you want.
