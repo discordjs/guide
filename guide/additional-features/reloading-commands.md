@@ -16,8 +16,8 @@ The reload command ideally should not be used by every user. You should deploy i
 
 ```js
 const { SlashCommandBuilder } = require('discord.js');
-const glob = require('glob');
-const path = require('path');
+const { glob } = require('glob');
+const { path } = require('path');
 
 
 module.exports = {
