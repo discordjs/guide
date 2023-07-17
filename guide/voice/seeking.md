@@ -31,7 +31,7 @@ First, to seek resource, you have to create new function like this:
 const prism = require('prism-media');
 
 
-// stream -> should be audio stream 
+// stream -> should be audio stream
 // seek -> should be int that within duration of the stream
 function createFFmpegStream(stream, seek) {
 	const seekPosition = String(seek);
@@ -44,7 +44,7 @@ function createFFmpegStream(stream, seek) {
 			'-ac', '2',
 			'-ss', seekPosition || '0',
 			'-ab', '320',
-		]
+		],
 	});
 	const s16le = stream.pipe(transcoder);
 	const opus = s16le.pipe(new prism.opus.Encoder({ rate: 48000, channels: 2, frameSize: 960 }));
