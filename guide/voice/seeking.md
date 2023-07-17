@@ -3,7 +3,7 @@
 Currently, there's no way to seek audio resources with raw discord.js such as:
 
 ```js
-const { createAudioResource } = require("@discordjs/voice");
+const { createAudioResource } = require('@discordjs/voice');
 
 const resource = createAudioResource();
 
@@ -27,12 +27,12 @@ Yo, this should be easy, right?
 First, to seek resource, you have to create new function like this:
 
 ```js
-//Require necessary package
-const prism = require("prism-media");
+// Require necessary package
+const prism = require('prism-media');
 
 
-//stream -> should be audio stream 
-//seek -> should be int that within duration of the stream
+// stream -> should be audio stream 
+// seek -> should be int that within duration of the stream
 function createFFmpegStream(stream, seek) {
 	const seekPosition = String(seek);
 	const transcoder = new prism.FFmpeg({
@@ -48,7 +48,7 @@ function createFFmpegStream(stream, seek) {
 	});
 	const s16le = stream.pipe(transcoder);
 	const opus = s16le.pipe(new prism.opus.Encoder({ rate: 48000, channels: 2, frameSize: 960 }));
-	return opus; //Return seeked stream
+	return opus; // Return seeked stream
 }
 ```
 This function will return seeked stream. If you want to change audio quality, you have to edit this:
@@ -61,15 +61,15 @@ This function will return seeked stream. If you want to change audio quality, yo
 ### Real installation
 
 ```js
-const { createAudioResource, createAudioPlayer } = require("@discordjs/voice");
-const fs = require("fs");
+const { createAudioResource, createAudioPlayer } = require('@discordjs/voice');
+const fs = require('fs');
 
 const player = createAudioPlayer();
-const normalAudioResource = createAudioResource("Your audio file path");
+const normalAudioResource = createAudioResource('Your audio file path');
 
 player.play(normalAudioResource);
 
-const seekedAudioStream = createFFmpegStream(fs.createReadStream("Your audio file path"), 10); //Seek to 10s
+const seekedAudioStream = createFFmpegStream(fs.createReadStream('Your audio file path'), 10); // Seek to 10s
 const seekedAudioResource = createAudioResource(seekedAudioStream);
 
 player.play(seekedAudioResource);
