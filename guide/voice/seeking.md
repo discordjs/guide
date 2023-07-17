@@ -34,7 +34,7 @@ const prism = require('prism-media');
 // stream -> should be audio stream
 // seek -> should be int that within duration of the stream
 function createFFmpegStream(stream, seek) {
-	let seekPosition = 0;
+	let seekPosition = "0";
 	if(seek) seekPosition = String(seek);
 	const transcoder = new prism.FFmpeg({
 		args: [
