@@ -23,10 +23,10 @@ function createFFmpegStream(stream, seek) {
    '-ss', seekPosition,
    '-ab', '320',
   ],
-  });
-  const s16le = stream.pipe(transcoder);
-  const opus = s16le.pipe(new prism.opus.Encoder({ rate: 48000, channels: 2, frameSize: 960 }));
-  return opus;
+ });
+ const s16le = stream.pipe(transcoder);
+ const opus = s16le.pipe(new prism.opus.Encoder({ rate: 48000, channels: 2, frameSize: 960 }));
+ return opus;
 }
 ```
 The first argument for this function should be audio stream, and second one should be int within duration of the stream.
