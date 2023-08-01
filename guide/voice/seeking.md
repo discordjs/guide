@@ -14,22 +14,22 @@ const prism = require('prism-media');
 // stream -> should be audio stream
 // seek -> should be int that within duration of the stream
 function createFFmpegStream(stream, seek) {
-	let seekPosition = '0';
-	if (seek) seekPosition = String(seek);
-	const transcoder = new prism.FFmpeg({
-		args: [
-			'-analyzeduration', '0',
-			'-loglevel', '0',
-			'-f', 's16le',
-			'-ar', '48000',
-			'-ac', '2',
-			'-ss', seekPosition,
-			'-ab', '320',
-		],
-	});
-	const s16le = stream.pipe(transcoder);
-	const opus = s16le.pipe(new prism.opus.Encoder({ rate: 48000, channels: 2, frameSize: 960 }));
-	return opus; // Return seeked stream
+ let seekPosition = '0';
+ if (seek) seekPosition = String(seek);
+ const transcoder = new prism.FFmpeg({
+  args: [
+   '-analyzeduration', '0',
+   '-loglevel', '0',
+   '-f', 's16le',
+   '-ar', '48000',
+   '-ac', '2',
+   '-ss', seekPosition,
+   '-ab', '320',
+  ],
+  });
+  const s16le = stream.pipe(transcoder);
+  const opus = s16le.pipe(new prism.opus.Encoder({ rate: 48000, channels: 2, frameSize: 960 }));
+  return opus; // Return seeked stream
 }
 ```
 The function returns the seeked stream. For more configuration options you can look at the [prism media documentation](https://amishshah.github.io/prism-media/).
