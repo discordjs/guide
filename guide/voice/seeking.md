@@ -2,26 +2,6 @@
 
 discord.js does not have a built-in method for seeking audio resources. However external libraries such as `prism-media` can be used to tackle this issue.
 
-```js
-const { createAudioResource } = require('@discordjs/voice');
-
-const resource = createAudioResource();
-
-resource.seek(1000); // This will be an error!
-```
-
-But some packages provide seek options with these solutions.
-
-## Cheat sheet
-
-Methods
-
-1. Play audio
-2. Create seeked resource
-3. Play the seeked audio resource
-
-Yo, this should be easy, right?
-
 ### Creation
 
 To seek resource, you can create a new function with  the following code:
