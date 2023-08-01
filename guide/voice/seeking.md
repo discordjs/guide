@@ -2,7 +2,7 @@
 
 discord.js does not have a built-in method for seeking audio resources. However external libraries such as `prism-media` can be used to tackle this issue.
 
-### Creation
+### Sample code 
 
 To seek resource, you can create a new function with  the following code:
 
