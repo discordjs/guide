@@ -76,4 +76,4 @@ const seekedAudioResource = createAudioResource(seekedAudioStream);
 player.play(seekedAudioResource);
 ```
 
-You can use other stream for createFFmpegStream() first argument.
+The first argument of the `createFFmpegStream` method would be your stream.
