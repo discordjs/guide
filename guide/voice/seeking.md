@@ -59,7 +59,7 @@ This function will return seeked stream. If you want to change audio quality, yo
 320 to something you want.
 320 means 320Kbps.
 
-### Real installation
+### Complete Code
 
 ```js
 const { createAudioResource, createAudioPlayer } = require('@discordjs/voice');
