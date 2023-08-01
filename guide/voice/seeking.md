@@ -52,12 +52,7 @@ function createFFmpegStream(stream, seek) {
 	return opus; // Return seeked stream
 }
 ```
-This function will return seeked stream. If you want to change audio quality, you have to edit this:
-```
-'-ab', '320',
-```
-320 to something you want.
-320 means 320Kbps.
+The function returns the seeked stream. For more configuration options you can look at the [prism media documentation](https://amishshah.github.io/prism-media/).
 
 ### Complete Code
 
