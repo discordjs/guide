@@ -24,7 +24,7 @@ Yo, this should be easy, right?
 
 ### Creation
 
-First, to seek resource, you have to create new function like this:
+To seek resource, you can create a new function with  the following code:
 
 ```js
 // Require necessary package
