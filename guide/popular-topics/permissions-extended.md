@@ -53,6 +53,7 @@ Causes for "Missing Access":
 - Reacting to a message requires `ReadMessageHistory` in the channel the message was sent.
 - When deploying slash commands: Enable the `applications.commands` scope (for more information see the [adding your bot](/preparations/adding-your-bot-to-servers) section).
 - Timing out a member requires `ModerateMembers`.
+- Editing threads (tags, locking, closing, etc.) requires `SendMessagesInThreads`.
 :::
 
 ## Limitations and oddities
