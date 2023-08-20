@@ -14,6 +14,8 @@ This section assumes you followed the [Command Handling](/creating-your-bot/comm
 The reload command ideally should not be used by every user. You should deploy it as a guild command in a private guild.
 :::
 
+We will use the glob package to navigate our slash command file structure. This can be installed via npm by running `npm i glob` in the terminal.
+
 ```js
 const { SlashCommandBuilder } = require('discord.js');
 const { glob } = require('glob');
