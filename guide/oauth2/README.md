@@ -204,6 +204,11 @@ yarn add undici
 pnpm add undici
 ```
 :::
+::: code-group-item bun
+```sh:no-line-numbers
+bun add undici
+```
+:::
 ::::
 
 Require `undici` and make your request.
