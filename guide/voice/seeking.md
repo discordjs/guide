@@ -11,22 +11,22 @@ To seek resource, you can create a new function with  the following code:
 const prism = require('prism-media');
 
 function createFFmpegStream(stream, seek) {
- let seekPosition = '0';
- if (seek) seekPosition = String(seek);
- const transcoder = new prism.FFmpeg({
-  args: [
-   '-analyzeduration', '0',
-   '-loglevel', '0',
-   '-f', 's16le',
-   '-ar', '48000',
-   '-ac', '2',
-   '-ss', seekPosition,
-   '-ab', '320',
-  ],
- });
- const s16le = stream.pipe(transcoder);
- const opus = s16le.pipe(new prism.opus.Encoder({ rate: 48000, channels: 2, frameSize: 960 }));
- return opus;
+	let seekPosition = '0';
+	if (seek) seekPosition = String(seek);
+	const transcoder = new prism.FFmpeg({
+  		args: [
+   			'-analyzeduration', '0',
+   			'-loglevel', '0',
+   			'-f', 's16le',
+   			'-ar', '48000',
+   			'-ac', '2',
+   			'-ss', seekPosition,
+			'-ab', '320',
+  		],
+ 	});
+	const s16le = stream.pipe(transcoder);
+	const opus = s16le.pipe(new prism.opus.Encoder({ rate: 48000, channels: 2, frameSize: 960 }));
+	return opus;
 }
 ```
 The first argument for this function should be audio stream, and second one should be int within duration of the stream.
