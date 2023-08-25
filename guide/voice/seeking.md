@@ -14,16 +14,8 @@ function createFFmpegStream(stream, seek) {
 	let seekPosition = '0';
 	if (seek) seekPosition = String(seek);
 	const transcoder = new prism.FFmpeg({
-  		args: [
-   			'-analyzeduration', '0',
-   			'-loglevel', '0',
-   			'-f', 's16le',
-   			'-ar', '48000',
-   			'-ac', '2',
-   			'-ss', seekPosition,
-			'-ab', '320',
-  		],
- 	});
+		args: ['-analyzeduration', '0', '-loglevel', '0', '-f', 's16le', '-ar', '48000', '-ac', '2', '-ss', seekPosition, '-ab', '320',],
+	});
 	const s16le = stream.pipe(transcoder);
 	const opus = s16le.pipe(new prism.opus.Encoder({ rate: 48000, channels: 2, frameSize: 960 }));
 	return opus;
