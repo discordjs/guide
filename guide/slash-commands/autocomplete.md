@@ -97,7 +97,7 @@ The <DocsLink path="class/AutocompleteInteraction"/> class provides the <DocsLin
 Unlike static choices, autocompletion suggestions are *not* enforced, and users may still enter free text.
 :::
 
-The <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" type="method"/> method returns the currently focused option's value, which can be used to applying filtering to the choices presented. For example, to only display options starting with the focused value you can use the `Array#filter()` method, then using `Array#map()`, you can transform the array into an array of <DocsLink path="typedef/ApplicationCommandOptionChoiceData" /> objects.
+The <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" type="method"/> method returns the currently focused option's value, which can be used to apply filtering to the choices presented. For example, to only display options starting with the focused value you can use the `Array#filter()` method, then using `Array#map()`, you can transform the array into an array of <DocsLink path="typedef/ApplicationCommandOptionChoiceData" /> objects.
 
 ```js {10-15}
 module.exports = {
