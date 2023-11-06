@@ -22,9 +22,9 @@ This example uses ES6 code. If you do not know what that is, you should read up 
 
 ```js
 function deleteMessages(amount) {
-	return new Promise(resolve => {
-		if (amount > 10) throw new Error('You can\'t delete more than 10 Messages at a time.');
-		setTimeout(() => resolve('Deleted 10 messages.'), 2000);
+	return new Promise((resolve, reject) => {
+		if (amount > 10) return reject(new Error('You can\'t delete more than 10 Messages at a time.'));
+		setTimeout(() => resolve('Deleted 10 messages.'), 2_000);
 	});
 }
 
@@ -170,7 +170,7 @@ client.on(Events.InteractionCreate, interaction => {
 	// ...
 	if (commandName === 'delete') {
 		interaction.reply({ content: 'This message will be deleted.', fetchReply: true })
-			.then(replyMessage => setTimeout(() => replyMessage.delete(), 10000))
+			.then(replyMessage => setTimeout(() => replyMessage.delete(), 10_000))
 			.catch(error => {
 				// handle error
 			});
@@ -185,7 +185,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	if (commandName === 'delete') {
 		try {
 			const replyMessage = await interaction.reply({ content: 'This message will be deleted.', fetchReply: true });
-			setTimeout(() => replyMessage.delete(), 10000);
+			setTimeout(() => replyMessage.delete(), 10_000);
 		} catch (error) {
 			// handle error
 		}
