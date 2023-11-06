@@ -41,7 +41,7 @@ We recommend attaching a `.commands` property to your client instance so that yo
 
 Next, using the modules imported above, dynamically retrieve your command files with a few more additions to the `index.js` file:
 
-```js {3-18}
+```js {3-19}
 client.commands = new Collection();
 
 const foldersPath = path.join(__dirname, 'commands');
