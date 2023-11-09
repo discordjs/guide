@@ -19,7 +19,7 @@ const data = new SlashCommandBuilder()
 	.setName('echo')
 	.setDescription('Replies with your input!')
 	.addStringOption(option =>
-		option.setName('input')
+		return option.setName('input')
 			.setDescription('The input to echo back'));
 ```
 
@@ -36,10 +36,10 @@ const data = new SlashCommandBuilder()
 	.setName('echo')
 	.setDescription('Replies with your input!')
 	.addStringOption(option =>
-		option.setName('input')
+		return option.setName('input')
 			.setDescription('The input to echo back'))
 	.addChannelOption(option =>
-		option.setName('channel')
+		return option.setName('channel')
 			.setDescription('The channel to echo into'));
 ```
 
@@ -52,10 +52,10 @@ const data = new SlashCommandBuilder()
 	.setName('echo')
 	.setDescription('Replies with your input!')
 	.addStringOption(option =>
-		option.setName('input')
+		return option.setName('input')
 			.setDescription('The input to echo back'))
 	.addBooleanOption(option =>
-		option.setName('ephemeral')
+		return option.setName('ephemeral')
 			.setDescription('Whether or not the echo should be ephemeral'));
 ```
 
@@ -85,7 +85,7 @@ const data = new SlashCommandBuilder()
 	.setName('echo')
 	.setDescription('Replies with your input!')
 	.addStringOption(option =>
-		option.setName('input')
+		return option.setName('input')
 			.setDescription('The input to echo back')
 			.setRequired(true));
 ```
@@ -109,7 +109,7 @@ const data = new SlashCommandBuilder()
 	.setName('gif')
 	.setDescription('Sends a random gif!')
 	.addStringOption(option =>
-		option.setName('category')
+		return option.setName('category')
 			.setDescription('The gif category')
 			.setRequired(true)
 			.addChoices(
@@ -138,17 +138,17 @@ const data = new SlashCommandBuilder()
 	.setName('echo')
 	.setDescription('Replies with your input!')
 	.addStringOption(option =>
-		option.setName('input')
+		return option.setName('input')
 			.setDescription('The input to echo back')
 			// Ensure the text will fit in an embed description, if the user chooses that option
 			.setMaxLength(2000))
 	.addChannelOption(option =>
-		option.setName('channel')
+		return option.setName('channel')
 			.setDescription('The channel to echo into')
 			// Ensure the user can only select a TextChannel for output
 			.addChannelTypes(ChannelType.GuildText))
 	.addBooleanOption(option =>
-		option.setName('embed')
+		return option.setName('embed')
 			.setDescription('Whether or not the echo should be embedded'));
 ```
 
@@ -197,7 +197,7 @@ const data = new SlashCommandBuilder()
 		de: 'Poste ein niedliches Hundebild!',
 	})
 	.addStringOption(option =>
-		option
+		return option
 			.setName('breed')
 			.setDescription('Breed of dog')
 			.setNameLocalizations({
