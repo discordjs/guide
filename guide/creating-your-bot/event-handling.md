@@ -131,7 +131,7 @@ The `name` property states which event this file is for, and the `once` property
 
 Next, let's write the code for dynamically retrieving all the event files in the `events` folder. We'll be taking a similar approach to our [command handler](/creating-your-bot/command-handling.md). Place the new code highlighted below in your `index.js`.
 
-```js {26-37}
+```js {19-25}
 const { directoryImport } = require('directory-import');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');

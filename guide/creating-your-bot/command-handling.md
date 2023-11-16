@@ -20,7 +20,7 @@ Now that your command files have been created, your bot needs to load these file
 
 In your `index.js` file, make these additions to the base template:
 
-```js {1-3,8}
+```js {1-4,8}
 const path = require('node:path');
 const { directoryImport } = require('directory-import');
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
@@ -41,7 +41,7 @@ We recommend attaching a `.commands` property to your client instance so that yo
 
 Next, using the modules imported above, dynamically retrieve your command files with a few more additions to the `index.js` file:
 
-```js {3-15}
+```js {3-9}
 client.commands = new Collection();
 
 directoryImport('./commands', (_, commandPath, command) => {
