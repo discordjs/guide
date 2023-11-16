@@ -105,7 +105,7 @@ module.exports = {
 ::: code-group-item index.js (after)
 ```js
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
-const { directoryImport } = require('directory-import')
+const { directoryImport } = require('directory-import');
 const { token } = require('./config.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -116,9 +116,9 @@ directoryImport('./commands', (_, commandPath, command) => {
 	if ('data' in command && 'execute' in command) {
 		client.commands.set(command.data.name, command);
 	} else {
-		console.log(`[WARNING] The command at ${commandPath} is missing a required "data" or "execute" property.`)
+		console.log(`[WARNING] The command at ${commandPath} is missing a required "data" or "execute" property.`);
 	}
-})
+});
 
 client.login(token);
 ```
@@ -132,7 +132,7 @@ The `name` property states which event this file is for, and the `once` property
 Next, let's write the code for dynamically retrieving all the event files in the `events` folder. We'll be taking a similar approach to our [command handler](/creating-your-bot/command-handling.md). Place the new code highlighted below in your `index.js`.
 
 ```js {26-37}
-const { directoryImport } = require('directory-import')
+const { directoryImport } = require('directory-import');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
@@ -145,9 +145,9 @@ directoryImport('./commands', (_, commandPath, command) => {
 	if ('data' in command && 'execute' in command) {
 		client.commands.set(command.data.name, command);
 	} else {
-		console.log(`[WARNING] The command at ${commandPath} is missing a required "data" or "execute" property.`)
+		console.log(`[WARNING] The command at ${commandPath} is missing a required "data" or "execute" property.`);
 	}
-})
+});
 
 // Load events
 directoryImport('./events', (_, eventPath, event) => {
@@ -156,7 +156,7 @@ directoryImport('./events', (_, eventPath, event) => {
 	} else {
 		client.on(event.name, (...args) => event.execute(...args));
 	}
-})
+});
 
 client.login(token);
 ```

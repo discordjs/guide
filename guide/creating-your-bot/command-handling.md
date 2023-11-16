@@ -22,7 +22,7 @@ In your `index.js` file, make these additions to the base template:
 
 ```js {1-3,8}
 const path = require('node:path');
-const { directoryImport } = require('directory-import')
+const { directoryImport } = require('directory-import');
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
@@ -45,12 +45,12 @@ Next, using the modules imported above, dynamically retrieve your command files 
 client.commands = new Collection();
 
 directoryImport('./commands', (_, commandPath, command) => {
-  if ('data' in command && 'execute' in command) {
-    client.commands.set(command.data.name, command);
-  } else {
-    console.log(`[WARNING] The command at ${commandPath} is missing a required "data" or "execute" property.`)
-  }
-})
+	if ('data' in command && 'execute' in command) {
+		client.commands.set(command.data.name, command);
+	} else {
+		console.log(`[WARNING] The command at ${commandPath} is missing a required "data" or "execute" property.`);
+	}
+});
 ```
 
 First, [`directoryImport`](https://www.npmjs.com/package/directory-import) helps to import all command files in the `commands` directory. The callback function then checks that each command has at least the `data` and `execute` properties. This helps to prevent errors resulting from loading empty, unfinished or otherwise incorrect command files while you're still developing.
