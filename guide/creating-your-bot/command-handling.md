@@ -21,8 +21,8 @@ Now that your command files have been created, your bot needs to load these file
 In your `index.js` file, make these additions to the base template:
 
 ```js {1-3,8}
-const fs = require('node:fs');
 const path = require('node:path');
+const { directoryImport } = require('directory-import')
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
@@ -34,8 +34,8 @@ client.commands = new Collection();
 We recommend attaching a `.commands` property to your client instance so that you can access your commands in other files. The rest of the examples in this guide will follow this convention. For TypeScript users, we recommend extending the base Client class to add this property, [casting](https://www.typescripttutorial.net/typescript-tutorial/type-casting/), or [augmenting the module type](https://www.typescriptlang.org/docs/handbook/modules.html#ambient-modules).
 
 ::: tip
-- The [`fs`](https://nodejs.org/api/fs.html) module is Node's native file system module. `fs` is used to read the `commands` directory and identify our command files.
-- The [`path`](https://nodejs.org/api/path.html) module is Node's native path utility module. `path` helps construct paths to access files and directories. One of the advantages of the `path` module is that it automatically detects the operating system and uses the appropriate joiners.
+- The [`directory-import`](https://www.npmjs.com/package/directory-import) module is used to recursively import all modules (`.js`|`.ts`|`.mjs`|`.json`) in a directory. This is a great way to load all your command files without having to manually import each one.
+- Before you can use `directory-import`, you need to install it with `npm install directory-import`.
 - The <DocsLink section="collection" path="Collection:Class" /> class extends JavaScript's native [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) class, and includes more extensive, useful functionality. `Collection` is used to store and efficiently retrieve commands for execution.
 :::
 
@@ -44,24 +44,16 @@ Next, using the modules imported above, dynamically retrieve your command files 
 ```js {3-15}
 client.commands = new Collection();
 
-const commandsPath = path.join(__dirname, 'commands');
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
-
-for (const file of commandFiles) {
-	const filePath = path.join(commandsPath, file);
-	const command = require(filePath);
-	// Set a new item in the Collection with the key as the command name and the value as the exported module
-	if ('data' in command && 'execute' in command) {
-		client.commands.set(command.data.name, command);
-	} else {
-		console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
-	}
-}
+directoryImport('./commands', (_, commandPath, command) => {
+  if ('data' in command && 'execute' in command) {
+    client.commands.set(command.data.name, command);
+  } else {
+    console.log(`[WARNING] The command at ${commandPath} is missing a required "data" or "execute" property.`)
+  }
+})
 ```
 
-First, [`path.join()`](https://nodejs.org/api/path.html) helps to construct a path to the `commands` directory. The [`fs.readdirSync()`](https://nodejs.org/api/fs.html#fs_fs_readdirsync_path_options) method then reads the path to the directory and returns an array of all the file names it contains, currently `['ping.js', 'server.js', 'user.js']`. To ensure only command files get processed, `Array.filter()` removes any non-JavaScript files from the array. 
-
-With the correct files identified, the last step is to loop over the array and dynamically set each command into the `client.commands` Collection. For each file being loaded, check that it has at least the `data` and `execute` properties. This helps to prevent errors resulting from loading empty, unfinished or otherwise incorrect command files while you're still developing.
+First, [`directoryImport`](https://www.npmjs.com/package/directory-import) helps to import all command files in the `commands` directory. The callback function then checks that each command has at least the `data` and `execute` properties. This helps to prevent errors resulting from loading empty, unfinished or otherwise incorrect command files while you're still developing.
 
 ## Receiving command interactions
 
@@ -127,9 +119,7 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 ```
 
-## Command categories
-
-So far, all of your command files are in a single `commands` folder. This is fine at first, but as your project grows, the number of files in the `commands` folder will too. Keeping track of that many files can be a little tough. To make this a little easier, you can categorize your commands and put them in subfolders inside the `commands` folder. You will have to make a few changes to your existing code in `index.js` for this to work out.
+So far, all of your command files are in a single `commands` folder. This is fine at first, but as your project grows, the number of files in the `commands` folder will too. Keeping track of that many files can be a little tough. To make this a little easier, you can categorize your commands and put them in subfolders inside the `commands` folder. You can create any number of subfolders and name them whatever you want.
 
 If you've been following along, your project structure should look something like this:
 
@@ -145,30 +135,7 @@ Make sure you put every command file you have inside one of the new subfolders. 
 
 It is not necessary to name your subfolders exactly like we have named them here. You can create any number of subfolders and name them whatever you want. Although, it is a good practice to name them according to the type of commands stored inside them.
 
-Back in your `index.js` file, where the code to [dynamically read command files](#loading-command-files) is, use the same pattern to read the subfolder directories, and then require each command inside them.
-
-```js {3,6-13}
-client.commands = new Collection();
-const foldersPath = path.join(__dirname, 'commands');
-const commandFolders = fs.readdirSync(foldersPath);
-
-for (const folder of commandFolders) {
-	const commandsPath = path.join(foldersPath, folder);
-	const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
-	for (const file of commandFiles) {
-		const filePath = path.join(commandsPath, file);
-		const command = require(filePath);
-		// Set a new item in the Collection with the key as the command name and the value as the exported module
-		if ('data' in command && 'execute' in command) {
-			client.commands.set(command.data.name, command);
-		} else {
-			console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
-		}
-	}
-}
-```
-
-That's it! When creating new files for commands, make sure you create them inside one of the subfolders (or a new one) in the `commands` folder.
+That's it! When creating new files for commands, make sure you create them inside one of the subfolders (or a new one) in the `commands` folder
 
 #### Next steps
 
