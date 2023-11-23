@@ -49,7 +49,7 @@ On this page, you'll complete Step 1. Make sure to also complete the other pages
 
 ## Individual command files
 
-Create a new folder named `commands`, which is where you'll store all of your command files. You'll be using the <DocsLink section="builders" path="SlashCommandBuilder:Class"/> class to construct the command definitions.
+Create a new folder named `commands/utility`, which is where you'll store all of your utility command files. You'll be using the <DocsLink section="builders" path="SlashCommandBuilder:Class"/> class to construct the command definitions.
 
 At a minimum, the definition of a slash command must have a name and a description. Slash command names must be between 1-32 characters and contain no capital letters, spaces, or symbols other than `-` and `_`. Using the builder, a simple `ping` command definition would look like this:
 
@@ -71,14 +71,14 @@ async execute(interaction) {
 }
 ```
 
-Put these two together by creating a `commands/ping.js` file for your first command. Inside this file, you're going to define and export two items.
+Put these two together by creating a `commands/utility/ping.js` file for your first command. Inside this file, you're going to define and export two items.
 - The `data` property, which will provide the command definition shown above for registering to Discord.
 - The `execute` method, which will contain the functionality to run from our event handler when the command is used.
 
 These are placed inside `module.exports` so they can be read by other files; namely the command loader and command deployment scripts mentioned earlier.
 
 :::: code-group
-::: code-group-item commands/ping.js
+::: code-group-item commands/utility/ping.js
 ```js
 const { SlashCommandBuilder } = require('discord.js');
 
@@ -103,7 +103,7 @@ If you need to access your client instance from inside a command file, you can a
 That's it for your basic ping command. Below are examples of two more commands we're going to build upon throughout the guide, so create two more files for these before you continue reading.
 
 :::: code-group
-::: code-group-item commands/user.js
+::: code-group-item commands/utility/user.js
 ```js
 const { SlashCommandBuilder } = require('discord.js');
 
@@ -119,7 +119,7 @@ module.exports = {
 };
 ```
 :::
-::: code-group-item commands/server.js
+::: code-group-item commands/utility/server.js
 ```js
 const { SlashCommandBuilder } = require('discord.js');
 
