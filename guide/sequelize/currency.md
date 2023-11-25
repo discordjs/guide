@@ -207,8 +207,8 @@ const { Users, CurrencyShop } = require('./dbObjects.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 const currency = new Collection();
 
-client.once(Events.ClientReady, async () => {
-	console.log(`Logged in as ${client.user.tag}!`);
+client.once(Events.ClientReady, readyClient => {
+	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
 
 client.on(Events.MessageCreate, async message => {
@@ -259,11 +259,11 @@ This defines the `addBalance()` helper function, since it'll be used quite frequ
 ### Ready event data sync
 
 ```js {2-3}
-client.once(Events.ClientReady, async () => {
+client.once(Events.ClientReady, async readyClient => {
 	const storedBalances = await Users.findAll();
 	storedBalances.forEach(b => currency.set(b.user_id, b));
 
-	console.log(`Logged in as ${client.user.tag}!`);
+	console.log(`Logged in as ${readyClient.user.tag}!`);
 });
 ```
 

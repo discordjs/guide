@@ -11,8 +11,8 @@ At this point, your `index.js` file has listeners for two events: `ClientReady` 
 :::: code-group
 ::: code-group-item ClientReady
 ```js
-client.once(Events.ClientReady, c => {
-	console.log(`Ready! Logged in as ${c.user.tag}`);
+client.once(Events.ClientReady, readyClient => {
+	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
 ```
 :::

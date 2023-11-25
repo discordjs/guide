@@ -50,8 +50,8 @@ const { Client, Events, GatewayIntentBits } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 // When the client is ready, run this code (only once)
-client.once(Events.ClientReady, () => {
-	console.log(`Logged in as ${client.user.tag}!`);
+client.once(Events.ClientReady, readyClient => {
+	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
 
 client.on(Events.InteractionCreate, async interaction => {
@@ -139,9 +139,9 @@ The model mirrors very closely what the database defines. There will be a table 
 Now that your structure is defined, you need to make sure the model exists in the database. To make sure the bot is ready and all the data you might need has arrived, add this line in your code.
 
 ```js {3}
-client.once(Events.ClientReady, () => {
+client.once(Events.ClientReady, readyClient => {
 	Tags.sync();
-	console.log(`Logged in as ${client.user.tag}!`);
+	console.log(`Logged in as ${readyClient.user.tag}!`);
 });
 ```
 
