@@ -106,8 +106,8 @@ console.log(
 
 ```js
 // template literals
-console.log(`Your password is: **${password}**.`);
 console.log(`Your username is: **${username}**.`);
+console.log(`Your password is: **${password}**.`);
 
 console.log(`1 + 1 = ${1 + 1}`);
 
