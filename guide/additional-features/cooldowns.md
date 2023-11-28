@@ -33,7 +33,7 @@ The key will be the command names, and the values will be Collections associatin
 In your `InteractionCreate` event, add the following code:
 
 ```js {1,3-5,7-10,12-14}
-const { cooldowns } = client;
+const { cooldowns } = interaction.client;
 
 if (!cooldowns.has(command.data.name)) {
 	cooldowns.set(command.data.name, new Collection());
