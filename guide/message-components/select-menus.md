@@ -12,7 +12,7 @@ The "standard" and most customizable type of select menu is the string select me
 
 If you're a Pokémon fan, you've probably made a selection pretty similar to this example at some point in your life!
 
-```js {1,6-21}
+```js {1,6-22}
 const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder, SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
