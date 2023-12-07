@@ -49,7 +49,7 @@ On this page, you'll complete Step 1. Make sure to also complete the other pages
 
 ## Individual command files
 
-Create a new folder named `commands/utility`, which is where you'll store all of your utility command files. You'll be using the <DocsLink section="builders" path="SlashCommandBuilder:Class"/> class to construct the command definitions.
+Create a new folder named `commands` and a subfolder named `utility` inside it, which is where you'll store all of your utility command files. You'll be using the <DocsLink section="builders" path="SlashCommandBuilder:Class"/> class to construct the command definitions.
 
 At a minimum, the definition of a slash command must have a name and a description. Slash command names must be between 1-32 characters and contain no capital letters, spaces, or symbols other than `-` and `_`. Using the builder, a simple `ping` command definition would look like this:
 
@@ -71,7 +71,7 @@ async execute(interaction) {
 }
 ```
 
-Put these two together by creating a `commands/utility/ping.js` file for your first command. Inside this file, you're going to define and export two items.
+Put these two together by creating a `ping.js` file in the `commands/utility` folder for your first command. Inside this file, you're going to define and export two items.
 - The `data` property, which will provide the command definition shown above for registering to Discord.
 - The `execute` method, which will contain the functionality to run from our event handler when the command is used.
 
@@ -138,7 +138,7 @@ module.exports = {
 
 #### Next steps
 
-You can implement additional commands by creating additional files in the `commands` folder, but these three are the ones we're going to use for the examples as we go on. For now let's move on to the code you'll need for command handling, to load the files and respond to incoming interactions.
+You can implement additional commands by creating new files within a dedicated subfolder in the `commands` folder, but these three are the ones we're going to use for the examples as we go on. For now let's move on to the code you'll need for command handling, to load the files and respond to incoming interactions.
 
 #### Resulting code
 
