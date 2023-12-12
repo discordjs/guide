@@ -30,7 +30,7 @@ const Tags = sequelize.define('tags', {
 	},
 });
 
-client.once(Events.ClientReady, () => {
+client.once(Events.ClientReady, readyClient => {
 	/*
 	 * equivalent to: CREATE TABLE tags(
 	 * name VARCHAR(255),
@@ -41,7 +41,7 @@ client.once(Events.ClientReady, () => {
 	 */
 	Tags.sync();
 
-	console.log(`Logged in as ${client.user.tag}!`);
+	console.log(`Logged in as ${readyClient.user.tag}!`);
 });
 
 client.on(Events.InteractionCreate, async interaction => {

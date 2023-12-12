@@ -106,9 +106,9 @@ If you're using Git, you should not commit this file and should [ignore it via `
 ::: details Online editors (Glitch, Heroku, Replit, etc.)
 While we generally do not recommend using online editors as hosting solutions, but rather invest in a proper virtual private server, these services do offer ways to keep your credentials safe as well! Please see the respective service's documentation and help articles for more information on how to keep sensitive values safe:
 
-- Glitch: [Storing secrets in .env](https://glitch.happyfox.com/kb/article/18)
+- Glitch: [Storing secrets in .env](https://help.glitch.com/hc/articles/16287550167437)
 - Heroku: [Configuration variables](https://devcenter.heroku.com/articles/config-vars)
-- Replit: [Secrets and environment variables](https://docs.replit.com/repls/secrets-environment-variables)
+- Replit: [Secrets and environment variables](https://docs.replit.com/programming-ide/workspace-features/secrets)
 :::
 
 ## Git and `.gitignore`

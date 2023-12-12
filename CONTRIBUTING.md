@@ -191,8 +191,8 @@ When you want to highlight a piece of code to display either an addition or a di
 Here's our base code:
 
 ```js {2,6}
-client.once(Events.ClientReady, () => {
-	console.log('Ready.');
+client.once(Events.ClientReady, readyClient => {
+	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
 
 client.on(Events.MessageCreate, message => {
@@ -203,8 +203,8 @@ client.on(Events.MessageCreate, message => {
 To add this feature, use this code:
 
 ```js {2,6-8}
-client.once(Events.ClientReady, () => {
-	console.log(`${client.user.tag} ready.`);
+client.once(Events.ClientReady, readyClient => {
+	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
 
 client.on(Events.MessageCreate, message => {
