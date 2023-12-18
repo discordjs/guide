@@ -104,7 +104,7 @@ collector.on('collect', async i => {
 
 Third and finally, you may wish to have a listener setup to respond to permanent button or select menu features of your guild. For this, returning to the <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> event is the best approach.
 
-If you're event handling has been setup in multiple files as per our [event handling](/creating-your-bot/event-handling) guide, you should already have an `events/interactionCreate.js` file that looks something like this.
+If your event handling has been setup in multiple files as per our [event handling](/creating-your-bot/event-handling) guide, you should already have an `events/interactionCreate.js` file that looks something like this.
 
 ```js {6}
 const { Events } = require('discord.js');
