@@ -156,7 +156,7 @@ var collectorFilter = function(m) {
 	return m.content === 'I agree' && !m.author.bot;
 };
 
-var collector = message.createMessageCollector({ filter: collectorFilter, time: 15000 });
+var collector = message.createMessageCollector({ filter: collectorFilter, time: 15_000 });
 ```
 
 ```js
@@ -171,7 +171,7 @@ const doubleAge = age => `Your age doubled is: ${age * 2}`;
 
 // inside a message collector command
 const collectorFilter = m => m.content === 'I agree' && !m.author.bot;
-const collector = message.createMessageCollector({ filter: collectorFilter, time: 15000 });
+const collector = message.createMessageCollector({ filter: collectorFilter, time: 15_000 });
 ```
 
 There are a few important things you should note here:

@@ -199,8 +199,8 @@ The following properties have been removed as they are not documented by Discord
 The methods that return CDN URLs have changed. Here is an example on a User:
 
 ```diff
-- const url = user.displayAvatarURL({ dynamic: true, format: "png", size: 1024 });
-+ const url = user.displayAvatarURL({ extension: "png", size: 1024 });
+- const url = user.displayAvatarURL({ dynamic: true, format: "png", size: 1_024 });
++ const url = user.displayAvatarURL({ extension: "png", size: 1_024 });
 ```
 
 Dynamic URLs use <DocsLink section="rest" path="ImageURLOptions:Interface"/> and static URLs use <DocsLink section="rest" path="BaseImageURLOptions:Interface"/>. Since dynamic URLs are returned by default, this option has been renamed to `forceStatic` which forces the return of a static URL. Additionally, `format` has been renamed to `extension`.
@@ -582,7 +582,7 @@ const collector = interaction.channel.createMessageComponentCollector({
 	filter: collectorFilter,
 -	componentType: 'BUTTON',
 +	componentType: ComponentType.Button,
-	time: 20000
+	time: 20_000
 });
 ```
 

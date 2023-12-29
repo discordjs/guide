@@ -88,7 +88,7 @@ The code is also handy if you want only to handle a specific error. Say you're t
 ```js
 message.delete().catch(error => {
 	// Only log the error if it is not an Unknown Message error
-	if (error.code !== 10008) {
+	if (error.code !== 10_008) {
 		console.error('Failed to delete the message:', error);
 	}
 });

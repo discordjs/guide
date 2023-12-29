@@ -80,11 +80,11 @@ const client = new Client({
 	sweepers: {
 		...Options.DefaultSweeperSettings,
 		messages: {
-			interval: 3600, // Every hour...
-			lifetime: 1800,	// Remove messages older than 30 minutes.
+			interval: 3_600, // Every hour.
+			lifetime: 1_800,	// Remove messages older than 30 minutes.
 		},
 		users: {
-			interval: 3600, // Every hour...
+			interval: 3_600, // Every hour.
 			filter: () => user => user.bot && user.id !== client.user.id, // Remove all bots.
 		},
 	},

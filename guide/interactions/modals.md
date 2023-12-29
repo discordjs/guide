@@ -111,7 +111,7 @@ In addition to the `customId`, `label` and `style`, a text input can be customis
 ```js
 const input = new TextInputBuilder()
 	// set the maximum number of characters to allow
-	.setMaxLength(1000)
+	.setMaxLength(1_000)
 	// set the minimum number of characters required for submission
 	.setMinLength(10)
 	// set a placeholder string to prompt the user

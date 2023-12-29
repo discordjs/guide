@@ -11,7 +11,7 @@ For now, let's take the example that they have provided us:
 ```js
 // `m` is a message object that will be passed through the filter function
 const collectorFilter = m => m.content.includes('discord');
-const collector = interaction.channel.createMessageCollector({ filter: collectorFilter, time: 15000 });
+const collector = interaction.channel.createMessageCollector({ filter: collectorFilter, time: 15_000 });
 
 collector.on('collect', m => {
 	console.log(`Collected ${m.content}`);
@@ -68,7 +68,7 @@ const collectorFilter = response => {
 
 interaction.reply({ content: item.question, fetchReply: true })
 	.then(() => {
-		interaction.channel.awaitMessages({ filter: collectorFilter, max: 1, time: 30000, errors: ['time'] })
+		interaction.channel.awaitMessages({ filter: collectorFilter, max: 1, time: 30_000, errors: ['time'] })
 			.then(collected => {
 				interaction.followUp(`${collected.first().author} got the correct answer!`);
 			})
@@ -97,7 +97,7 @@ const collectorFilter = (reaction, user) => {
 	return reaction.emoji.name === '👍' && user.id === message.author.id;
 };
 
-const collector = message.createReactionCollector({ filter: collectorFilter, time: 15000 });
+const collector = message.createReactionCollector({ filter: collectorFilter, time: 15_000 });
 
 collector.on('collect', (reaction, user) => {
 	console.log(`Collected ${reaction.emoji.name} from ${user.tag}`);
@@ -117,7 +117,7 @@ const collectorFilter = (reaction, user) => {
 	return reaction.emoji.name === '👍' && user.id === message.author.id;
 };
 
-message.awaitReactions({ filter: collectorFilter, max: 4, time: 60000, errors: ['time'] })
+message.awaitReactions({ filter: collectorFilter, max: 4, time: 60_000, errors: ['time'] })
 	.then(collected => console.log(collected.size))
 	.catch(collected => {
 		console.log(`After a minute, only ${collected.size} out of 4 reacted.`);
@@ -137,7 +137,7 @@ One important difference to note with interaction collectors is that Discord exp
 ```js
 const { ComponentType } = require('discord.js');
 
-const collector = message.createMessageComponentCollector({ componentType: ComponentType.Button, time: 15000 });
+const collector = message.createMessageComponentCollector({ componentType: ComponentType.Button, time: 15_000 });
 
 collector.on('collect', i => {
 	if (i.user.id === interaction.user.id) {
@@ -166,7 +166,7 @@ const collectorFilter = i => {
 	return i.user.id === interaction.user.id;
 };
 
-message.awaitMessageComponent({ filter: collectorFilter, componentType: ComponentType.StringSelect, time: 60000 })
+message.awaitMessageComponent({ filter: collectorFilter, componentType: ComponentType.StringSelect, time: 60_000 })
 	.then(interaction => interaction.editReply(`You selected ${interaction.values.join(', ')}!`))
 	.catch(err => console.log('No interactions were collected.'));
 ```
