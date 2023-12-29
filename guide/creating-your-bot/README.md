@@ -76,6 +76,12 @@ yarn add dotenv
 pnpm add dotenv
 ```
 :::
+::: code-group-item bun
+```sh:no-line-numbers
+# dotenv is not necessary with Bun
+# Bun reads .env files automatically
+```
+:::
 ::::
 
 :::: code-group

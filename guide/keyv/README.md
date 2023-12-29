@@ -20,6 +20,11 @@ yarn add keyv
 pnpm add keyv
 ```
 :::
+::: code-group-item bun
+```sh:no-line-numbers
+bun add keyv
+```
+:::
 ::::
 
 Keyv requires an additional package depending on which persistent backend you would prefer to use. If you want to keep everything in memory, you can skip this part. Otherwise, install one of the below.
@@ -50,6 +55,15 @@ pnpm add @keyv/mongo
 pnpm add @keyv/sqlite
 pnpm add @keyv/postgres
 pnpm add @keyv/mysql
+```
+:::
+::: code-group-item bun
+```sh:no-line-numbers
+bun add @keyv/redis
+bun add @keyv/mongo
+bun add @keyv/sqlite
+bun add @keyv/postgres
+bun add @keyv/mysql
 ```
 :::
 ::::

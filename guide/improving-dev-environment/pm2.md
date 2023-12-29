@@ -22,6 +22,11 @@ yarn global add pm2
 pnpm add --global pm2
 ```
 :::
+::: code-group-item bun
+```sh:no-line-numbers
+bun add --global pm2
+```
+:::
 ::::
 
 ## Starting your app
@@ -88,6 +93,11 @@ yarn global add pm2-windows-service
 ::: code-group-item pnpm
 ```sh:no-line-numbers
 pnpm add --global pm2-windows-service
+```
+:::
+::: code-group-item bun
+```sh:no-line-numbers
+bun add --global pm2-windows-service
 ```
 :::
 ::::
