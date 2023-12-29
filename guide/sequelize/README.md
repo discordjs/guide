@@ -138,7 +138,7 @@ The model mirrors very closely what the database defines. There will be a table 
 
 Now that your structure is defined, you need to make sure the model exists in the database. To make sure the bot is ready and all the data you might need has arrived, add this line in your code.
 
-```js {3}
+```js {2}
 client.once(Events.ClientReady, readyClient => {
 	Tags.sync();
 	console.log(`Logged in as ${readyClient.user.tag}!`);
