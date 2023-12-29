@@ -155,7 +155,7 @@ If the modal was shown from a <DocsLink path="class/ButtonInteraction"/> or <Doc
 - `update()`
 - `deferUpdate()`
 
-```js{1,3-5}
+```js {1,3-5}
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isModalSubmit()) return;
 	if (interaction.customId === 'myModal') {
@@ -172,7 +172,7 @@ If you're using typescript, you can use the <DocsLink path="class/ModalSubmitInt
 
 You'll most likely need to read the data sent by the user in the modal. You can do this by accessing the <DocsLink path="class/ModalSubmitInteraction?scrollTo=fields"/>. From there you can call <DocsLink path="class/ModalSubmitFields?scrollTo=getTextInputValue" type="method"/> with the custom id of the text input to get the value.
 
-```js{5-7}
+```js {5-7}
 client.on(Events.InteractionCreate, interaction => {
 	if (!interaction.isModalSubmit()) return;
 

@@ -122,7 +122,7 @@ You'll notice in the above example that two different styles of buttons have bee
 
 Link buttons are a little different to the other styles. `Link` buttons _must_ have a `url`, _cannot_ have a `customId` and _do not_ send an interaction event when clicked.
 
-```js{3}
+```js {3}
 const button = new ButtonBuilder()
 	.setLabel('discord.js docs')
 	.setURL('https://discord.js.org')
