@@ -186,10 +186,10 @@ const { Client, Events, GatewayIntentBits } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const logger = require('./logger');
 
-client.on(Events.ClientReady, () => logger.info('The bot is online'));
-client.on(Events.Debug, m => logger.debug(m));
-client.on(Events.Warn, m => logger.warn(m));
-client.on(Events.Error, m => logger.error(m));
+client.once(Events.ClientReady, () => logger.info('The bot is online'));
+client.on(Events.Debug, info => logger.debug(info));
+client.on(Events.Warn, info => logger.warn(info));
+client.on(Events.Error, error => logger.error(error));
 
 client.login('your-token-goes-here');
 ```
