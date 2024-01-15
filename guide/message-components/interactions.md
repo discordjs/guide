@@ -45,7 +45,7 @@ const response = await interaction.reply({
 const collectorFilter = i => i.user.id === interaction.user.id;
 
 try {
-	const confirmation = await response.awaitMessageComponent({ filter: collectorFilter, time: 60000 });
+	const confirmation = await response.awaitMessageComponent({ filter: collectorFilter, time: 60_000 });
 } catch (e) {
 	await interaction.editReply({ content: 'Confirmation not received within 1 minute, cancelling', components: [] });
 }

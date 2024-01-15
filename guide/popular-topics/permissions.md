@@ -254,7 +254,7 @@ However, you can pass these decimals to the Permissions constructor to convert t
 ```js
 const { PermissionsBitField } = require('discord.js');
 
-const permissions = new PermissionsBitField(268550160n);
+const permissions = new PermissionsBitField(268_550_160n);
 ```
 
 You can also use this approach for other <DocsLink path="typedef/PermissionResolvable" />s like flag arrays or flags.
@@ -278,12 +278,12 @@ const permissions = new PermissionsBitField(flags);
 The Permissions object features the `.has()` method, allowing an easy way to check flags in a Permissions bit field.
 The `.has()` method takes two parameters: the first being either a permission number, single flag, or an array of permission numbers and flags, the second being a boolean, indicating if you want to allow the `Administrator` permission to override (defaults to `true`).
 
-Let's say you want to know if the decimal bit field representation `268550160` has `ManageChannels` referenced:
+Let's say you want to know if the decimal bit field representation `268_550_160` has `ManageChannels` referenced:
 
 ```js
 const { PermissionsBitField } = require('discord.js');
 
-const bitPermissions = new PermissionsBitField(268550160n);
+const bitPermissions = new PermissionsBitField(268_550_160n);
 
 console.log(bitPermissions.has(PermissionsBitField.Flags.ManageChannels));
 // output: true

@@ -108,7 +108,7 @@ String select menu options are custom-defined by the user, as shown in the examp
 
 In addition to these, each option can be enhanced with a `description` or `emoji`, or can be set to be selected by default.
 
-```js{4-9}
+```js {4-9}
 const select = new StringSelectMenuBuilder()
 	.setCustomId('select')
 	.addOptions(
@@ -136,7 +136,7 @@ The `ChannelSelectMenuBuilder` can be configured to only show specific channel t
 
 Where slash command options fall behind is in their single-select limitation on User, Role and Channel option types. Select menus can support this use case via <DocsLink section="builders" path="BaseSelectMenuBuilder:Class#setMinValues" type="method"/> and <DocsLink section="builders" path="BaseSelectMenuBuilder:Class#setMaxValues" type="method"/>. When these values are set, users can select multiple items, and the interaction will be sent with all selected values only when the user clicks outside the select menu.
 
-```js{7-8,13-14}
+```js {7-8,13-14}
 module.exports = {
 	// data: new SlashCommandBuilder()...
 	async execute(interaction) {

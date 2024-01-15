@@ -216,11 +216,11 @@ const { prefix } = message.client.guildSettings.get(message.guild.id);
 All Collector related classes and methods (both `.create*()` and `.await*()`) now take a single object parameter which also includes the filter.
 
 ```diff
-- const collector = message.createReactionCollector(collectorFilter, { time: 15000 });
-+ const collector = message.createReactionCollector({ filter: collectorFilter, time: 15000 });
+- const collector = message.createReactionCollector(collectorFilter, { time: 15_000 });
++ const collector = message.createReactionCollector({ filter: collectorFilter, time: 15_000 });
 
-- const reactions = await message.awaitReactions(collectorFilter, { time: 15000 });
-+ const reactions = await message.awaitReactions({ filter: collectorFilter, time: 15000 });
+- const reactions = await message.awaitReactions(collectorFilter, { time: 15_000 });
++ const reactions = await message.awaitReactions({ filter: collectorFilter, time: 15_000 });
 ```
 
 ### Naming conventions
@@ -287,9 +287,9 @@ Note that this will disable all other mentions in this message. To enable other 
 Bitfields are now `BigInt`s instead of `Number`s. This can be handled using the `BigInt()` class, or the n-suffixed [BigInt literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt).
 
 ```diff
-- const p = new Permissions(104324673);
-+ const p = new Permissions(BigInt(104324673));
-+ const p = new Permissions(104324673n);
+- const p = new Permissions(104_324_673);
++ const p = new Permissions(BigInt(104_324_673));
++ const p = new Permissions(104_324_673n);
 ```
 In addition, the usage of string literals for bitfield flags such as `Permissions` and `UserFlags` is discouraged; you should use the flag instead.
 
@@ -632,8 +632,8 @@ The `GuildMemberManager#ban` method will throw a TypeError when a string is prov
 The `Message.delete()` method no longer accepts any options, requiring a timed-delete to be performed manually.
 
 ```diff
-- message.delete({ timeout: 10000 });
-+ setTimeout(() => message.delete(), 10000);
+- message.delete({ timeout: 10_000 });
++ setTimeout(() => message.delete(), 10_000);
 ```
 
 `reason` is no longer a parameter as it is not used by the API.
@@ -643,8 +643,8 @@ The `Message.delete()` method no longer accepts any options, requiring a timed-d
 The `MessageManager.delete()` method no longer accepts any additional options, requiring a timed-delete to be performed manually.
 
 ```diff
-- channel.messages.delete('123456789012345678', { timeout: 10000 });
-+ setTimeout(() => channel.messages.delete('123456789012345678'), 10000);
+- channel.messages.delete('123456789012345678', { timeout: 10_000 });
++ setTimeout(() => channel.messages.delete('123456789012345678'), 10_000);
 ```
 
 `reason` is no longer a parameter as it is not used by the API.
@@ -701,8 +701,8 @@ In addition, the `spawnTimeout` param has been renamed to `timeout`.
 This means the user no longer needs to pass defaults to fill each positional param.
 
 ```diff
-- shard.respawn(500, 30000);
-+ shard.respawn({ delay: 500, timeout: 30000 });
+- shard.respawn(500, 30_000);
++ shard.respawn({ delay: 500, timeout: 30_000 });
 ```
 
 #### Shard#spawn
@@ -729,8 +729,8 @@ In addition, the `spawnTimeout` param has been renamed to `timeout`.
 This means the user no longer needs to pass defaults to fill each positional param.
 
 ```diff
-- client.shard.respawnAll(5000, 500, 30000);
-+ client.shard.respawnAll({ shardDelay: 5000, respawnDelay: 500, timeout: 30000 });
+- client.shard.respawnAll(5_000, 500, 30_000);
++ client.shard.respawnAll({ shardDelay: 5_000, respawnDelay: 500, timeout: 30_000 });
 ```
 
 ### ShardingManager
@@ -746,8 +746,8 @@ In addition, the `spawnTimeout` param has been renamed to `timeout`.
 This means the user no longer needs to pass defaults to fill each positional param.
 
 ```diff
-- manager.spawn('auto', 5500, 30000);
-+ manager.spawn({ amount: 'auto', delay: 5500, timeout: 30000 });
+- manager.spawn('auto', 5_500, 30_000);
++ manager.spawn({ amount: 'auto', delay: 5_500, timeout: 30_000 });
 ```
 
 #### ShardingManager#respawnAll
@@ -757,8 +757,8 @@ In addition, the `spawnTimeout` param has been renamed to `timeout`.
 This means the user no longer needs to pass defaults to fill each positional param.
 
 ```diff
-- manager.respawnAll(5000, 500, 30000);
-+ manager.respawnAll({ shardDelay: 5000, respawnDelay: 500, timeout: 30000 });
+- manager.respawnAll(5_000, 500, 30_000);
++ manager.respawnAll({ shardDelay: 5_000, respawnDelay: 500, timeout: 30_000 });
 ```
 
 ### TextChannel
