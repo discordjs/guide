@@ -27,7 +27,7 @@ To create a thread you call the <DocsLink path="class/GuildTextThreadManager?scr
 ```js
 const thread = await channel.threads.create({
 	name: 'food-talk',
-	autoArchiveDuration: 60,
+	autoArchiveDuration: ThreadAutoArchiveDuration.OneHour,
 	reason: 'Needed a separate thread for food',
 });
 
@@ -99,7 +99,7 @@ Public threads are viewable by everyone who can view the parent channel of the t
 ```js
 const thread = await channel.threads.create({
 	name: 'food-talk',
-	autoArchiveDuration: 60,
+	autoArchiveDuration: ThreadAutoArchiveDuration.OneHour,
 	reason: 'Needed a separate thread for food',
 });
 
@@ -113,7 +113,7 @@ They can also be created from an existing message with the <DocsLink path="class
 ```js
 const thread = await message.startThread({
 	name: 'food-talk',
-	autoArchiveDuration: 60,
+	autoArchiveDuration: ThreadAutoArchiveDuration.OneHour,
 	reason: 'Needed a separate thread for food',
 });
 
@@ -129,11 +129,11 @@ To create a private thread, use <DocsLink path="class/GuildTextThreadManager?scr
 <!-- eslint-skip -->
 
 ```js {6}
-const { ChannelType } = require('discord.js');
+const { ChannelType, ThreadAutoArchiveDuration } = require('discord.js');
 
 const thread = await channel.threads.create({
 	name: 'mod-talk',
-	autoArchiveDuration: 60,
+	autoArchiveDuration: ThreadAutoArchiveDuration.OneHour,
 	type: ChannelType.PrivateThread,
 	reason: 'Needed a separate thread for moderation',
 });
