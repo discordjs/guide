@@ -7,13 +7,13 @@ discord.js provides the <PackageLink name="formatters" /> package which contains
 These functions format strings into all the different Markdown styles supported by Discord.
 
 ```js
-const { bold, italic, strikethrough, underscore, spoiler, quote, blockQuote } = require('discord.js');
+const { bold, italic, strikethrough, underline, spoiler, quote, blockQuote } = require('discord.js');
 const string = 'Hello!';
 
 const boldString = bold(string);
 const italicString = italic(string);
 const strikethroughString = strikethrough(string);
-const underscoreString = underscore(string);
+const underlineString = underline(string);
 const spoilerString = spoiler(string);
 const quoteString = quote(string);
 const blockquoteString = blockQuote(string);
@@ -49,11 +49,11 @@ const highlighted = codeBlock('js', jsString);
 With `time()`, you can format Unix timestamps and dates into a Discord time string.
 
 ```js
-const { time } = require('discord.js');
+const { time, TimestampStyles } = require('discord.js');
 const date = new Date();
 
 const timeString = time(date);
-const relative = time(date, 'R');
+const relative = time(date, TimestampStyles.RelativeTime);
 ```
 
 ## Mentions
