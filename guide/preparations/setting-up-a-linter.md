@@ -16,17 +16,17 @@ Install the [ESLint package](https://www.npmjs.com/package/eslint) inside your p
 :::: code-group
 ::: code-group-item npm
 ```sh:no-line-numbers
-npm install --save-dev eslint
+npm install --save-dev eslint @eslint/js
 ```
 :::
 ::: code-group-item yarn
 ```sh:no-line-numbers
-yarn add eslint --dev
+yarn add eslint @eslint/js --dev
 ```
 :::
 ::: code-group-item pnpm
 ```sh:no-line-numbers
-pnpm add --save-dev eslint
+pnpm add --save-dev eslint @eslint/js
 ```
 :::
 ::::
