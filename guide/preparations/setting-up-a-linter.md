@@ -48,78 +48,79 @@ After that, search for the appropriate plugin and install it.
 
 ## Setting up ESLint rules
 
-ESLint may display many warnings and errors about your code when you start using it but don't let this startle you. To get started, create a file in your project directory named `.eslintrc.json` and copy the code below into the file:
+ESLint may display many warnings and errors about your code when you start using it but don't let this startle you. To get started, create a file in your project directory named `eslint.config.js` and copy the code below into the file:
 
-```json
-{
-	"extends": "eslint:recommended",
-	"env": {
-		"node": true,
-		"es6": true
-	},
-	"parserOptions": {
-		"ecmaVersion": 2021
-	},
-	"rules": {
+```javascript
+const js = require('@eslint/js');
 
-	}
-}
+module.exports = [
+	js.configs.recommended,
+	{
+		languageOptions: {
+			ecmaVersion: 'latest',
+		},
+		rules: {
+			
+		},
+	},
+];
 ```
 
 This is the basis of how an ESLint file will look. The `rules` object is where you'll define what rules you want to apply to ESLint. For example, if you want to make sure you never miss a semicolon, the `"semi": ["error", "always"]` rule is what you'll want to add inside that object.
 
 You can find a list of all of ESLint's rules on [their website](https://eslint.org/docs/rules). There are indeed many rules, and it may be overwhelming at first, so if you don't want to go through everything on your own yet, you can use these rules:
 
-```json {11-47}
-{
-	"extends": "eslint:recommended",
-	"env": {
-		"node": true,
-		"es6": true
+```javascript
+const js = require('@eslint/js');
+
+module.exports = [
+	js.configs.recommended,
+	{
+		languageOptions: {
+			ecmaVersion: 'latest',
+		},
+		rules: {
+			'arrow-spacing': ['warn', { 'before': true, 'after': true }],
+			'brace-style': ['error', 'stroustrup', { 'allowSingleLine': true }],
+			'comma-dangle': ['error', 'always-multiline'],
+			'comma-spacing': 'error',
+			'comma-style': 'error',
+			'curly': ['error', 'multi-line', 'consistent'],
+			'dot-location': ['error', 'property'],
+			'handle-callback-err': 'off',
+			'indent': ['error', 'tab'],
+			'keyword-spacing': 'error',
+			'max-nested-callbacks': ['error', { 'max': 4 }],
+			'max-statements-per-line': ['error', { 'max': 2 }],
+			'no-console': 'off',
+			'no-empty-function': 'error',
+			'no-floating-decimal': 'error',
+			'no-inline-comments': 'error',
+			'no-lonely-if': 'error',
+			'no-multi-spaces': 'error',
+			'no-multiple-empty-lines': ['error', { 'max': 2, 'maxEOF': 1, 'maxBOF': 0 }],
+			'no-shadow': ['error', { 'allow': ['err', 'resolve', 'reject'] }],
+			'no-trailing-spaces': ['error'],
+			'no-var': 'error',
+			'no-undef': 'off',
+			'object-curly-spacing': ['error', 'always'],
+			'prefer-const': 'error',
+			'quotes': ['error', 'single'],
+			'semi': ['error', 'always'],
+			'space-before-blocks': 'error',
+			'space-before-function-paren': ['error', {
+				'anonymous': 'never',
+				'named': 'never',
+				'asyncArrow': 'always',
+			}],
+			'space-in-parens': 'error',
+			'space-infix-ops': 'error',
+			'space-unary-ops': 'error',
+			'spaced-comment': 'error',
+			'yoda': 'error',
+		},
 	},
-	"parserOptions": {
-		"ecmaVersion": 2021
-	},
-	"rules": {
-		"arrow-spacing": ["warn", { "before": true, "after": true }],
-		"brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
-		"comma-dangle": ["error", "always-multiline"],
-		"comma-spacing": "error",
-		"comma-style": "error",
-		"curly": ["error", "multi-line", "consistent"],
-		"dot-location": ["error", "property"],
-		"handle-callback-err": "off",
-		"indent": ["error", "tab"],
-		"keyword-spacing": "error",
-		"max-nested-callbacks": ["error", { "max": 4 }],
-		"max-statements-per-line": ["error", { "max": 2 }],
-		"no-console": "off",
-		"no-empty-function": "error",
-		"no-floating-decimal": "error",
-		"no-inline-comments": "error",
-		"no-lonely-if": "error",
-		"no-multi-spaces": "error",
-		"no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1, "maxBOF": 0 }],
-		"no-shadow": ["error", { "allow": ["err", "resolve", "reject"] }],
-		"no-trailing-spaces": ["error"],
-		"no-var": "error",
-		"object-curly-spacing": ["error", "always"],
-		"prefer-const": "error",
-		"quotes": ["error", "single"],
-		"semi": ["error", "always"],
-		"space-before-blocks": "error",
-		"space-before-function-paren": ["error", {
-			"anonymous": "never",
-			"named": "never",
-			"asyncArrow": "always"
-		}],
-		"space-in-parens": "error",
-		"space-infix-ops": "error",
-		"space-unary-ops": "error",
-		"spaced-comment": "error",
-		"yoda": "error"
-	}
-}
+];
 ```
 
 The major points of this setup would be:
