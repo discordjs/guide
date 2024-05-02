@@ -109,16 +109,20 @@ If you would like to set your activity upon startup, you can use the `ClientOpti
 ### How do I make my bot display online/idle/dnd/invisible?
 
 ```js
-client.user.setStatus('online');
-client.user.setStatus('idle');
-client.user.setStatus('dnd');
-client.user.setStatus('invisible');
+const { PresenceUpdateStatus } = require('discord.js');
+
+client.user.setStatus(PresenceUpdateStatus.Online);
+client.user.setStatus(PresenceUpdateStatus.Idle);
+client.user.setStatus(PresenceUpdateStatus.DoNotDisturb);
+client.user.setStatus(PresenceUpdateStatus.Invisible);
 ```
 
 ### How do I set both status and activity in one go?
 
 ```js
-client.user.setPresence({ activities: [{ name: 'activity' }], status: 'idle' });
+const { PresenceUpdateStatus } = require('discord.js');
+
+client.user.setPresence({ activities: [{ name: 'activity' }], status: PresenceUpdateStatus.Idle });
 ```
 
 ## Miscellaneous
@@ -269,7 +273,7 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 ```js
 // First use guild.members.fetch to make sure all members are cached
 guild.members.fetch({ withPresences: true }).then(fetchedMembers => {
-	const totalOnline = fetchedMembers.filter(member => member.presence?.status === 'online');
+	const totalOnline = fetchedMembers.filter(member => member.presence?.status === PresenceUpdateStatus.Online);
 	// Now you have a collection with all online member objects in the totalOnline variable
 	console.log(`There are currently ${totalOnline.size} members online in this guild!`);
 });

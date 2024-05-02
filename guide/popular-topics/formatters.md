@@ -49,11 +49,11 @@ const highlighted = codeBlock('js', jsString);
 With `time()`, you can format Unix timestamps and dates into a Discord time string.
 
 ```js
-const { time } = require('discord.js');
+const { time, TimestampStyles } = require('discord.js');
 const date = new Date();
 
 const timeString = time(date);
-const relative = time(date, 'R');
+const relative = time(date, TimestampStyles.RelativeTime);
 ```
 
 ## Mentions
