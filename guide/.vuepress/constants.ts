@@ -1,1 +1,1 @@
-export const defaultDjsBranch = '14.14.1';
+export const defaultDjsBranch = '14.15.0';
