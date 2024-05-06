@@ -377,9 +377,9 @@ The base interaction class is now `BaseInteraction`.
 
 -   `MessageEmbed` has now been renamed to `EmbedBuilder`.
 
--   `EmbedBuilder#setAuthor()` now accepts a sole <DocsLink section="builders" path="EmbedAuthorOptions:TypeAlias"/> object.
+-   `EmbedBuilder#setAuthor()` now accepts a sole <DocsLink section="builders" path="EmbedAuthorOptions:Interface"/> object.
 
--   `EmbedBuilder#setFooter()` now accepts a sole <DocsLink section="builders" path="EmbedFooterOptions:TypeAlias"/> object.
+-   `EmbedBuilder#setFooter()` now accepts a sole <DocsLink section="builders" path="EmbedFooterOptions:Interface"/> object.
 
 -   `EmbedBuilder#addField()` has been removed. Use `EmbedBuilder#addFields()` instead.
 
