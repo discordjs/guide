@@ -684,4 +684,4 @@ Added the `threadName` property in `Webhook#send()` options which allows a webho
 
 ### WebSocketManager
 
-discord.js uses <PackageLink name="ws" /> internally.
+discord.js uses <DocsLink section="ws" /> internally.

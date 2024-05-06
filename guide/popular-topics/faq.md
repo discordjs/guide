@@ -2,10 +2,10 @@
 
 ## Legend
 
-* `client` is a placeholder for the <DocsLink path="class/Client" /> object, such as `const client = new Client({ intents: [GatewayIntentBits.Guilds] });`.
-* `interaction` is a placeholder for the <DocsLink path="class/BaseInteraction" /> object, such as `client.on(Events.InteractionCreate, interaction => { ... });`.
-* `guild` is a placeholder for the <DocsLink path="class/Guild" /> object, such as `interaction.guild` or `client.guilds.cache.get('id')`.
-* `voiceChannel` is a placeholder for the <DocsLink path="class/VoiceChannel" /> object, such as `interaction.member.voice.channel`
+* `client` is a placeholder for the <DocsLink path="Client:Class" /> object, such as `const client = new Client({ intents: [GatewayIntentBits.Guilds] });`.
+* `interaction` is a placeholder for the <DocsLink path="BaseInteraction:Class" /> object, such as `client.on(Events.InteractionCreate, interaction => { ... });`.
+* `guild` is a placeholder for the <DocsLink path="Guild:Class" /> object, such as `interaction.guild` or `client.guilds.cache.get('id')`.
+* `voiceChannel` is a placeholder for the <DocsLink path="VoiceChannel:Class" /> object, such as `interaction.member.voice.channel`
 
 For a more detailed explanation of the notations commonly used in this guide, the docs, and the support server, see [here](/additional-info/notation.md).
 
@@ -26,7 +26,7 @@ guild.members.unban(user);
 ```
 
 ::: tip
-Discord validates and resolves user ids for users not on the server in user slash command options. To retrieve and use the full structure from the resulting interaction, you can use the <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getUser" type="method"/> method.
+Discord validates and resolves user ids for users not on the server in user slash command options. To retrieve and use the full structure from the resulting interaction, you can use the <DocsLink path="CommandInteractionOptionResolver:Class#getUser" type="method"/> method.
 :::
 
 ### How do I kick a guild member?
@@ -137,7 +137,7 @@ channel.send('content');
 ### How do I create a post in a forum channel?
 
 ::: tip
-Currently, the only way to get tag ids is programmatically through <DocsLink path="class/ForumChannel?scrollTo=availableTags" />.
+Currently, the only way to get tag ids is programmatically through <DocsLink path="ForumChannel:Class#availableTags" />.
 :::
 
 ```js
