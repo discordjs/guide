@@ -19,7 +19,7 @@ Bots receive webhook messages in a text channel as usual. You can detect if a we
 if (message.webhookId) return;
 ```
 
-If you would like to get the webhook object that sent the message, you can use <DocsLink path="class/Message?scrollTo=fetchWebhook" type="method" />.
+If you would like to get the webhook object that sent the message, you can use <DocsLink path="Message:Class#fetchWebhook" type="method" />.
 
 ## Fetching webhooks
 
@@ -29,17 +29,17 @@ Webhook fetching will always make use of collections and Promises. If you do not
 
 ### Fetching all webhooks of a guild
 
-If you would like to get all webhooks of a guild you can use <DocsLink path="class/Guild?scrollTo=fetchWebhooks" type="method" />. This will return a Promise which will resolve into a Collection of `Webhook`s.
+If you would like to get all webhooks of a guild you can use <DocsLink path="Guild:Class#fetchWebhooks" type="method" />. This will return a Promise which will resolve into a Collection of `Webhook`s.
 
 ### Fetching webhooks of a channel
 
-Webhooks belonging to a channel can be fetched using <DocsLink path="class/TextChannel?scrollTo=fetchWebhooks" type="method" />. This will return a Promise which will resolve into a Collection of `Webhook`s. A collection will be returned even if the channel contains a single webhook. If you are certain the channel contains a single webhook, you can use <DocsLink section="collection" path="Collection:Class#first" type="method" /> on the Collection to get the webhook.
+Webhooks belonging to a channel can be fetched using <DocsLink path="TextChannel:Class#fetchWebhooks" type="method" />. This will return a Promise which will resolve into a Collection of `Webhook`s. A collection will be returned even if the channel contains a single webhook. If you are certain the channel contains a single webhook, you can use <DocsLink section="collection" path="Collection:Class#first" type="method" /> on the Collection to get the webhook.
 
 ### Fetching a single webhook
 
 #### Using client
 
-You can fetch a specific webhook using its `id` with <DocsLink path="class/Client?scrollTo=fetchWebhook" type="method" />. You can obtain the webhook id by looking at its link, the number after `https://discord.com/api/webhooks/` is the `id`, and the part after that is the `token`.
+You can fetch a specific webhook using its `id` with <DocsLink path="Client:Class#fetchWebhook" type="method" />. You can obtain the webhook id by looking at its link, the number after `https://discord.com/api/webhooks/` is the `id`, and the part after that is the `token`.
 
 #### Using the WebhookClient constructor
 
@@ -73,7 +73,7 @@ Once you are there, click on the `Create Webhook` / `New Webhook` button; this w
 
 ### Creating webhooks with discord.js
 
-Webhooks can be created with the <DocsLink path="class/TextChannel?scrollTo=createWebhook" type="method" /> method.
+Webhooks can be created with the <DocsLink path="TextChannel:Class#createWebhook" type="method" /> method.
 
 ```js
 channel.createWebhook({
@@ -86,7 +86,7 @@ channel.createWebhook({
 
 ## Editing webhooks
 
-You can edit Webhooks and WebhookClients to change their name, avatar, and channel using <DocsLink path="class/Webhook?scrollTo=edit" type="method" />.
+You can edit Webhooks and WebhookClients to change their name, avatar, and channel using <DocsLink path="Webhook:Class#edit" type="method" />.
 
 ```js
 webhook.edit({
@@ -104,7 +104,7 @@ Webhooks can send messages to text channels, as well as fetch, edit, and delete 
 
 ### Sending messages
 
-Webhooks, like bots, can send up to 10 embeds per message. They can also send attachments and normal content. The <DocsLink path="class/Webhook?scrollTo=send" type="method" /> method is very similar to the method used for sending a message to a text channel. Webhooks can also choose how the username and avatar will appear when they send the message.
+Webhooks, like bots, can send up to 10 embeds per message. They can also send attachments and normal content. The <DocsLink path="Webhook:Class#send" type="method" /> method is very similar to the method used for sending a message to a text channel. Webhooks can also choose how the username and avatar will appear when they send the message.
 
 Example using a WebhookClient:
 
@@ -164,7 +164,7 @@ client.login(token);
 
 ### Fetching messages
 
-You can use <DocsLink path="class/Webhook?scrollTo=fetchMessage" type="method" /> to fetch messages previously sent by the Webhook.
+You can use <DocsLink path="Webhook:Class#fetchMessage" type="method" /> to fetch messages previously sent by the Webhook.
 
 <!-- eslint-skip -->
 
@@ -174,7 +174,7 @@ const message = await webhookClient.fetchMessage('123456789012345678');
 
 ### Editing messages
 
-You can use <DocsLink path="class/Webhook?scrollTo=editMessage" type="method" /> to edit messages previously sent by the Webhook.
+You can use <DocsLink path="Webhook:Class#editMessage" type="method" /> to edit messages previously sent by the Webhook.
 
 <!-- eslint-skip -->
 
@@ -187,7 +187,7 @@ const message = await webhook.editMessage('123456789012345678', {
 
 ### Deleting messages
 
-You can use <DocsLink path="class/Webhook?scrollTo=deleteMessage" type="method" /> to delete messages previously sent by the Webhook.
+You can use <DocsLink path="Webhook:Class#deleteMessage" type="method" /> to delete messages previously sent by the Webhook.
 
 <!-- eslint-skip -->
 

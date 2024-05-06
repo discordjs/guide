@@ -69,7 +69,7 @@ With the correct files identified, the last step is dynamically set each command
 
 ## Receiving command interactions
 
-You will receive an interaction for every slash command executed. To respond to a command, you need to create a listener for the <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> event that will execute code when your application receives an interaction. Place the code below in the `index.js` file you created earlier.
+You will receive an interaction for every slash command executed. To respond to a command, you need to create a listener for the <DocsLink path="Client:Class#interactionCreate" /> event that will execute code when your application receives an interaction. Place the code below in the `index.js` file you created earlier.
 
 ```js
 client.on(Events.InteractionCreate, interaction => {
@@ -77,7 +77,7 @@ client.on(Events.InteractionCreate, interaction => {
 });
 ```
 
-Not every interaction is a slash command (e.g. `MessageComponent` interactions). Make sure to only handle slash commands in this function by making use of the <DocsLink path="class/BaseInteraction?scrollTo=isChatInputCommand" type="method"/> method to exit the handler if another type is encountered. This method also provides typeguarding for TypeScript users, narrowing the type from `BaseInteraction` to <DocsLink path="class/ChatInputCommandInteraction" />.
+Not every interaction is a slash command (e.g. `MessageComponent` interactions). Make sure to only handle slash commands in this function by making use of the <DocsLink path="BaseInteraction:Class#isChatInputCommand" type="method"/> method to exit the handler if another type is encountered. This method also provides typeguarding for TypeScript users, narrowing the type from `BaseInteraction` to <DocsLink path="ChatInputCommandInteraction:Class" />.
 
 ```js {2}
 client.on(Events.InteractionCreate, interaction => {
@@ -88,7 +88,7 @@ client.on(Events.InteractionCreate, interaction => {
 
 ## Executing commands
 
-When your bot receives a <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> event, the interaction object contains all the information you need to dynamically retrieve and execute your commands!
+When your bot receives a <DocsLink path="Client:Class#interactionCreate" /> event, the interaction object contains all the information you need to dynamically retrieve and execute your commands!
 
 Let's take a look at the `ping` command again. Note the `execute()` function that will reply to the interaction with "Pong!".
 
@@ -103,7 +103,7 @@ module.exports = {
 };
 ```
 
-First, you need to get the matching command from the `client.commands` Collection based on the `interaction.commandName`. Your <DocsLink path="class/Client"/> instance is always available via `interaction.client`. If no matching command is found, log an error to the console and ignore the event.
+First, you need to get the matching command from the `client.commands` Collection based on the `interaction.commandName`. Your <DocsLink path="Client:Class"/> instance is always available via `interaction.client`. If no matching command is found, log an error to the console and ignore the event.
 
 With the right command identified, all that's left to do is call the command's `.execute()` method and pass in the `interaction` variable as its argument. In case something goes wrong, catch and log any error to the console.
 

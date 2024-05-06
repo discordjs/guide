@@ -28,7 +28,7 @@ If you're using TypeScript, you'll need to specify the type of components your a
 
 ## Sending action rows
 
-Once one or many components are inside your row(s), send them in the `components` property of your <DocsLink path="typedef/InteractionReplyOptions" /> (extends <DocsLink path="typedef/BaseMessageOptions" />).
+Once one or many components are inside your row(s), send them in the `components` property of your <DocsLink path="InteractionReplyOptions:Interface" /> (extends <DocsLink path="BaseMessageOptions:Interface" />).
 
 ```js {4}
 const row = new ActionRowBuilder()
