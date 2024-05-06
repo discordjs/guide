@@ -45,7 +45,7 @@ const linkText = computed(() => {
 			return `${file}#${symbol}${brackets}`;
 		}
 	} else {
-		return `${props.section === 'discord.js' ? '' : `@discord.js/${props.section}`}`;
+		return `${props.section === 'discord.js' ? '' : '@discord.js/'}${props.section}`;
 	}
 
 	return null;
