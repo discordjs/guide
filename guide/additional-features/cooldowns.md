@@ -28,6 +28,39 @@ In your main file, initialize a [Collection](/additional-info/collections.md) to
 client.cooldowns = new Collection();
 ```
 
+::::: ts-tip
+You'll also need to edit the definitions for `ExtendedClient` and `SlashCommand`:
+:::: code-group
+::: code-group-item src/types/ExtendedClient.ts
+```ts
+import { Client, ClientOptions, Collection } from 'discord.js';
+import { SlashCommand } from '../types/SlashCommand';
+
+export class ExtendedClient extends Client {
+    constructor(
+		options: ClientOptions,
+		public commands: Collection<string, SlashCommand> = new Collection(),
+		public cooldowns: Collection<string, Collection<string, number>> = new Collection(),
+	) {
+        super(options);
+    }
+}
+```
+:::
+::: code-group-item src/types/SlashCommand.ts
+```ts{6}
+import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
+
+export interface SlashCommand {
+  data: SlashCommandBuilder;
+  execute: (interaction: ChatInputCommandInteraction) => Promise<void>;
+  cooldown?: number;
+}
+```
+:::
+::::
+:::::
+
 The key will be the command names, and the values will be Collections associating the user's id (key) to the last time (value) this user used this command. Overall the logical path to get a user's last usage of a command will be `cooldowns > command > user > timestamp`.
 
 In your `InteractionCreate` event, add the following code:
@@ -54,6 +87,20 @@ try {
 	// ...
 }
 ```
+
+::: ts-tip
+You'll need to use a type assertion on `interaction.client` to get the correct type:
+```ts
+const { cooldowns } = interaction.client as ExtendedClient;
+```
+:::
+
+::: ts-tip
+You may need to add non-null assertions around the code (notice the `!` at the end of the line):
+```ts
+const timestamps = cooldowns.get(command.data.name)!;
+```
+:::
 
 You check if the `cooldowns` Collection already has an entry for the command being used. If this is not the case, you can add a new entry, where the value is initialized as an empty Collection. Next, create the following variables:
 
