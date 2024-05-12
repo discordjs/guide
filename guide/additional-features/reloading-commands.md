@@ -14,8 +14,13 @@ This section assumes you followed the [Command Handling](/creating-your-bot/comm
 The reload command ideally should not be used by every user. You should deploy it as a guild command in a private guild.
 :::
 
+We will use the glob package to navigate our slash command file structure. This can be installed via npm by running `npm i glob` in the terminal.
+
 ```js
 const { SlashCommandBuilder } = require('discord.js');
+const { glob } = require('glob');
+const { path } = require('path');
+
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -52,11 +57,12 @@ To build the correct file path, you will need the file name. You can use `comman
 In theory, all there is to do is delete the previous command from `client.commands` and require the file again. In practice, you cannot do this easily as `require()` caches the file. If you were to require it again, you would load the previously cached file without any changes. You first need to delete the file from `require.cache`, and only then should you require and set the command file to `client.commands`:
 
 ```js {1,4-6}
-delete require.cache[require.resolve(`./${command.data.name}.js`)];
+const commandFiles = glob.sync(`**/commands/**/${commandName}.js`);
+delete require.cache[path.resolve(commandFiles[0])];
 
 try {
 	interaction.client.commands.delete(command.data.name);
-	const newCommand = require(`./${command.data.name}.js`);
+	const newCommand = require(commandFile);
 	interaction.client.commands.set(newCommand.data.name, newCommand);
 	await interaction.reply(`Command \`${newCommand.data.name}\` was reloaded!`);
 } catch (error) {
