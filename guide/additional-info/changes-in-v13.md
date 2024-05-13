@@ -66,7 +66,7 @@ discord.js v13 makes the switch to Discord API v9! In addition to this, the new 
 ## Slash commands
 
 discord.js now has support for slash commands!
-Refer to the [slash commands](/interactions/slash-commands.html) section of this guide to get started.
+Refer to the [slash commands](/guide/interactions/slash-commands.html) section of this guide to get started.
 
 In addition to the `interactionCreate` event covered in the above guide, this release also includes the new Client events `applicationCommandCreate`, `applicationCommandDelete`, and `applicationCommandUpdate`.
 
@@ -75,7 +75,7 @@ In addition to the `interactionCreate` event covered in the above guide, this re
 discord.js now has support for message components!
 This introduces the `MessageActionRow`, `MessageButton`, and `MessageSelectMenu` classes, as well as associated interactions and collectors. 
 
-Refer to the [message components](/message-components/buttons.md) section of this guide to get started.
+Refer to the [message components](/guide/message-components/buttons.md) section of this guide to get started.
 
 ## Threads
 
