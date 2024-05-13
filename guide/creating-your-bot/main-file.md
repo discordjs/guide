@@ -1,7 +1,7 @@
 # Creating the main file
 
 ::: tip
-This page assumes you've already prepared the [configuration files](/creating-your-bot/#creating-configuration-files) from the previous page. We're using the `config.json` approach, however feel free to substitute your own!
+This page assumes you've already prepared the [configuration files](/guide/creating-your-bot/#creating-configuration-files) from the previous page. We're using the `config.json` approach, however feel free to substitute your own!
 :::
 
 Open your code editor and create a new file. We suggest that you save the file as `index.js`, but you may name it whatever you wish.
@@ -37,7 +37,7 @@ Intents also define which events Discord should send to your bot, and you may wi
 
 ## Running your application
 
-Open your terminal and run `node index.js` to start the process. If you see "Ready!" after a few seconds, you're good to go! The next step is to start adding [slash commands](/creating-your-bot/slash-commands.md) to develop your bot's functionality.
+Open your terminal and run `node index.js` to start the process. If you see "Ready!" after a few seconds, you're good to go! The next step is to start adding [slash commands](/guide/creating-your-bot/slash-commands.md) to develop your bot's functionality.
 
 ::: tip
 You can open your `package.json` file and edit the `"main": "index.js"` field to point to your main file. You can then run `node .` in your terminal to start the process!
