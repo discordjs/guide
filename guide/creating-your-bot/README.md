@@ -28,7 +28,7 @@ console.log(token);
 ::::
 
 ::: danger
-If you're using Git, you should not commit this file and should [ignore it via `.gitignore`](/creating-your-bot/#git-and-gitignore).
+If you're using Git, you should not commit this file and should [ignore it via `.gitignore`](/guide/creating-your-bot/README.md#git-and-gitignore).
 :::
 
 ## Using environment variables
