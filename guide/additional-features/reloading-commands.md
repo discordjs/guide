@@ -7,7 +7,7 @@ ESM does not support require and clearing import cache. You can use [hot-esm](ht
 :::
 
 ::: tip
-This section assumes you followed the [Command Handling](/creating-your-bot/command-handling.md) part.
+This section assumes you followed the [Command Handling](/guide/creating-your-bot/command-handling.md) part.
 :::
 
 ::: warning
