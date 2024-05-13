@@ -2,10 +2,10 @@
 
 ## Legend
 
-* `client` is a placeholder for the <DocsLink path="class/Client" /> object, such as `const client = new Client({ intents: [GatewayIntentBits.Guilds] });`.
-* `interaction` is a placeholder for the <DocsLink path="class/BaseInteraction" /> object, such as `client.on(Events.InteractionCreate, interaction => { ... });`.
-* `guild` is a placeholder for the <DocsLink path="class/Guild" /> object, such as `interaction.guild` or `client.guilds.cache.get('id')`.
-* `voiceChannel` is a placeholder for the <DocsLink path="class/VoiceChannel" /> object, such as `interaction.member.voice.channel`
+* `client` is a placeholder for the <DocsLink path="Client:Class" /> object, such as `const client = new Client({ intents: [GatewayIntentBits.Guilds] });`.
+* `interaction` is a placeholder for the <DocsLink path="BaseInteraction:Class" /> object, such as `client.on(Events.InteractionCreate, interaction => { ... });`.
+* `guild` is a placeholder for the <DocsLink path="Guild:Class" /> object, such as `interaction.guild` or `client.guilds.cache.get('id')`.
+* `voiceChannel` is a placeholder for the <DocsLink path="VoiceChannel:Class" /> object, such as `interaction.member.voice.channel`
 
 For a more detailed explanation of the notations commonly used in this guide, the docs, and the support server, see [here](/additional-info/notation.md).
 
@@ -26,7 +26,7 @@ guild.members.unban(user);
 ```
 
 ::: tip
-Discord validates and resolves user ids for users not on the server in user slash command options. To retrieve and use the full structure from the resulting interaction, you can use the <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getUser" type="method"/> method.
+Discord validates and resolves user ids for users not on the server in user slash command options. To retrieve and use the full structure from the resulting interaction, you can use the <DocsLink path="CommandInteractionOptionResolver:Class#getUser" type="method"/> method.
 :::
 
 ### How do I kick a guild member?
@@ -109,16 +109,20 @@ If you would like to set your activity upon startup, you can use the `ClientOpti
 ### How do I make my bot display online/idle/dnd/invisible?
 
 ```js
-client.user.setStatus('online');
-client.user.setStatus('idle');
-client.user.setStatus('dnd');
-client.user.setStatus('invisible');
+const { PresenceUpdateStatus } = require('discord.js');
+
+client.user.setStatus(PresenceUpdateStatus.Online);
+client.user.setStatus(PresenceUpdateStatus.Idle);
+client.user.setStatus(PresenceUpdateStatus.DoNotDisturb);
+client.user.setStatus(PresenceUpdateStatus.Invisible);
 ```
 
 ### How do I set both status and activity in one go?
 
 ```js
-client.user.setPresence({ activities: [{ name: 'activity' }], status: 'idle' });
+const { PresenceUpdateStatus } = require('discord.js');
+
+client.user.setPresence({ activities: [{ name: 'activity' }], status: PresenceUpdateStatus.Idle });
 ```
 
 ## Miscellaneous
@@ -133,7 +137,7 @@ channel.send('content');
 ### How do I create a post in a forum channel?
 
 ::: tip
-Currently, the only way to get tag ids is programmatically through <DocsLink path="class/ForumChannel?scrollTo=availableTags" />.
+Currently, the only way to get tag ids is programmatically through <DocsLink path="ForumChannel:Class#availableTags" />.
 :::
 
 ```js
@@ -269,7 +273,7 @@ A User represents a global Discord user, and a GuildMember represents a Discord 
 ```js
 // First use guild.members.fetch to make sure all members are cached
 guild.members.fetch({ withPresences: true }).then(fetchedMembers => {
-	const totalOnline = fetchedMembers.filter(member => member.presence?.status === 'online');
+	const totalOnline = fetchedMembers.filter(member => member.presence?.status === PresenceUpdateStatus.Online);
 	// Now you have a collection with all online member objects in the totalOnline variable
 	console.log(`There are currently ${totalOnline.size} members online in this guild!`);
 });
