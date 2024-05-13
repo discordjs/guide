@@ -3,7 +3,7 @@
 Spam is something you generally want to avoid, especially if one of your commands require calls to other APIs or takes a bit of time to build/send.
 
 ::: tip
-This section assumes you followed the [Command Handling](/creating-your-bot/command-handling.md) part.
+This section assumes you followed the [Command Handling](/guide/creating-your-bot/command-handling.md) part.
 :::
 
 First, add a cooldown property to your command. This will determine how long the user would have to wait (in seconds) before using the command again.
@@ -22,7 +22,7 @@ module.exports = {
 };
 ```
 
-In your main file, initialize a [Collection](/additional-info/collections.md) to store cooldowns of commands:
+In your main file, initialize a [Collection](/guide/additional-info/collections.md) to store cooldowns of commands:
 
 ```js
 client.cooldowns = new Collection();
