@@ -168,7 +168,7 @@ if (localStorage.getItem('oauth-state') !== atob(decodeURIComponent(state))) {
 ```
 
 ::: tip
-Don't forgo security for a tiny bit of convenience!
+Don't forget security for a tiny bit of convenience!
 :::
 
 ### Authorization code grant flow
