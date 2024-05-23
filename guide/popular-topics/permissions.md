@@ -29,7 +29,7 @@ To include permission checks like `Administrator` or `ManageGuild`, keep reading
 * BitField: Binary representation of Discord permissions 
 * Base Permissions: Permissions for roles the member has, set on the guild level
 * Final Permissions: Permissions for a member or role, after all overwrites are applied
-* Flag: Human readable string in PascalCase (e.g., `KickMembers`) that refers to a position in the permission BitField. You can find a list of all valid flags on the <DocsLink path="class/PermissionsBitField?scrollTo=s-Flags"/> page
+* Flag: Human readable string in PascalCase (e.g., `KickMembers`) that refers to a position in the permission BitField. You can find a list of all valid flags on the <DocsLink path="PermissionsBitField:Class#Flags"/> page
 
 ::: tip
 You can provide permission decimals wherever we use flag literals in this guide. If you are interested in a handy permission calculator, you can look at the "Bot" section in the [Discord developer portal](https://discord.com/developers/applications).
@@ -55,7 +55,7 @@ Note that flag names are literal. Although `ViewChannel` grants access to view m
 
 ### Creating a role with permissions
 
-Alternatively you can provide permissions as a property of the <DocsLink path="typedef/RoleCreateOptions" /> typedef during role creation as an array of flag strings or a permission number:
+Alternatively you can provide permissions as a property of <DocsLink path="RoleCreateOptions:Interface" /> during role creation as an array of flag strings or a permission number:
 
 ```js
 const { PermissionsBitField } = require('discord.js');
@@ -65,7 +65,7 @@ guild.roles.create({ name: 'Mod', permissions: [PermissionsBitField.Flags.SendMe
 
 ### Checking member permissions
 
-To know if one of a member's roles has a permission enabled, you can use the `.has()` method on <DocsLink path="class/GuildMember?scrollTo=permissions" /> and provide a permission flag, array, or number to check for. You can also specify if you want to allow the `Administrator` permission or the guild owner status to override this check with the following parameters.
+To know if one of a member's roles has a permission enabled, you can use the `.has()` method on <DocsLink path="GuildMember:Class#permissions" /> and provide a permission flag, array, or number to check for. You can also specify if you want to allow the `Administrator` permission or the guild owner status to override this check with the following parameters.
 
 ```js
 const { PermissionsBitField } = require('discord.js');
@@ -101,7 +101,7 @@ As you have likely already seen in your desktop client, channel overwrites have 
 
 ### Adding overwrites
 
-To add a permission overwrite for a role or guild member, you access the channel's <DocsLink path="class/TextChannel?scrollTo=permissionOverwrites">`PermissionOverwriteManager`</DocsLink> and use the `.create()` method. The first parameter is the target of the overwrite, either a Role or User object (or its respective resolvable), and the second is a <DocsLink path="typedef/PermissionOverwriteOptions" /> object.
+To add a permission overwrite for a role or guild member, you access the channel's <DocsLink path="TextChannel:Class#permissionOverwrites">`PermissionOverwriteManager`</DocsLink> and use the `.create()` method. The first parameter is the target of the overwrite, either a Role or User object (or its respective resolvable), and the second is a <DocsLink path="PermissionOverwriteOptions:TypeAlias" /> object.
 
 Let's add an overwrite to lock everyone out of the channel. The guild ID doubles as the role id for the default role `@everyone` as demonstrated below:
 
@@ -146,7 +146,7 @@ channel.permissionOverwrites.edit(user.id, { ViewChannel: true });
 
 ### Replacing overwrites
 
-To replace all permission overwrites on the channel with a provided set of new overwrites, you can use the `.set()` method. This is extremely handy if you want to copy a channel's full set of overwrites to another one, as this method also allows passing an array or Collection of <DocsLink path="class/PermissionOverwrites" />.
+To replace all permission overwrites on the channel with a provided set of new overwrites, you can use the `.set()` method. This is extremely handy if you want to copy a channel's full set of overwrites to another one, as this method also allows passing an array or Collection of <DocsLink path="PermissionOverwrites:Class" />.
 
 ```js
 // copying overwrites from another channel
@@ -192,7 +192,7 @@ channel.lockPermissions()
 
 ### Permissions after overwrites
 
-There are two utility methods to easily determine the final permissions for a guild member or role in a specific channel: <DocsLink path="class/GuildChannel?scrollTo=permissionsFor" type="method" /> and <DocsLink path="class/GuildMember?scrollTo=permissionsIn" type="method" /> - <DocsLink path="class/Role?scrollTo=permissionsIn" type="method" />. All return a <DocsLink path="class/PermissionsBitField" /> object.
+There are two utility methods to easily determine the final permissions for a guild member or role in a specific channel: <DocsLink path="GuildChannel:Class#permissionsFor" type="method" /> and <DocsLink path="GuildMember:Class#permissionsIn" type="method" /> - <DocsLink path="Role:Class#permissionsIn" type="method" />. All return a <DocsLink path="PermissionsBitField:Class" /> object.
 
 To check your bot's permissions in the channel the command was used in, you could use something like this:
 
@@ -215,7 +215,7 @@ If you want to know how to work with the returned Permissions objects, keep read
 
 ## The Permissions object
 
-The <DocsLink path="class/PermissionsBitField" /> object is a discord.js class containing a permissions bit field and a bunch of utility methods to manipulate it easily.
+The <DocsLink path="PermissionsBitField:Class" /> object is a discord.js class containing a permissions bit field and a bunch of utility methods to manipulate it easily.
 Remember that using these methods will not manipulate permissions, but rather create a new instance representing the changed bit field.
 
 ### Displaying permission flags
@@ -257,7 +257,7 @@ const { PermissionsBitField } = require('discord.js');
 const permissions = new PermissionsBitField(268_550_160n);
 ```
 
-You can also use this approach for other <DocsLink path="typedef/PermissionResolvable" />s like flag arrays or flags.
+You can also use this approach for other <DocsLink path="PermissionResolvable:TypeAlias" />s like flag arrays or flags.
 
 ```js
 const { PermissionsBitField } = require('discord.js');

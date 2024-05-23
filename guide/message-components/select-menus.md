@@ -45,7 +45,7 @@ The custom id is a developer-defined string of up to 100 characters. Use this fi
 
 ## Sending select menus
 
-To send your select menu, create an action row and add the buttons as components. Then, send the row in the `components` property of <DocsLink path="typedef/InteractionReplyOptions" /> (extends <DocsLink path="typedef/BaseMessageOptions" />).
+To send your select menu, create an action row and add the buttons as components. Then, send the row in the `components` property of <DocsLink path="InteractionReplyOptions:Interface" /> (extends <DocsLink path="BaseMessageOptions:Interface" />).
 
 ```js {1,24-25,29}
 const { ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, SlashCommandBuilder } = require('discord.js');

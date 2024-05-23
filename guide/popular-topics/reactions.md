@@ -387,7 +387,7 @@ message.reactions.removeAll()
 
 ### Removing reactions by emoji
 
-Removing reactions by emoji is easily done by using <DocsLink path="class/MessageReaction?scrollTo=remove" type="method" />.
+Removing reactions by emoji is easily done by using <DocsLink path="MessageReaction:Class#remove" type="method" />.
 
 ```js
 message.reactions.cache.get('123456789012345678').remove()

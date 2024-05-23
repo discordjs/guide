@@ -15,7 +15,6 @@ import {
 	install as DiscordMessageComponents,
 } from '@discord-message-components/vue';
 import DocsLink from './components/DocsLink.vue';
-import PackageLink from './components/PackageLink.vue';
 import ResultingCode from './components/ResultingCode.vue';
 import djsAvatar from './assets/discord-avatar-djs.png';
 import '@discord-message-components/vue/dist/style.css';
@@ -52,6 +51,5 @@ export default defineClientAppEnhance(({ app }) => {
 	app.component('DiscordReactions', DiscordReactions);
 
 	app.component('DocsLink', DocsLink);
-	app.component('PackageLink', PackageLink);
 	app.component('ResultingCode', ResultingCode);
 });

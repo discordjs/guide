@@ -1,19 +1,19 @@
 # Formatters
 
-discord.js provides the <PackageLink name="formatters" /> package which contains a variety of utilities you can use when writing your Discord bot.
+discord.js provides the <DocsLink section="formatters" /> package which contains a variety of utilities you can use when writing your Discord bot.
 
 ## Basic Markdown
 
 These functions format strings into all the different Markdown styles supported by Discord.
 
 ```js
-const { bold, italic, strikethrough, underscore, spoiler, quote, blockQuote } = require('discord.js');
+const { blockQuote, bold, italic, quote, spoiler, strikethrough, underline } = require('discord.js');
 const string = 'Hello!';
 
 const boldString = bold(string);
 const italicString = italic(string);
 const strikethroughString = strikethrough(string);
-const underscoreString = underscore(string);
+const underlineString = underline(string);
 const spoilerString = spoiler(string);
 const quoteString = quote(string);
 const blockquoteString = blockQuote(string);
