@@ -102,8 +102,8 @@ const rest = new REST().setToken(token);
 ```ts
 import { REST, Routes } from 'discord.js';
 import { Config, assertObjectIsConfig } from './types/Config';
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 const configRaw = fs.readFileSync('./config.json', { encoding: 'utf-8' });
 const config = JSON.parse(configRaw);

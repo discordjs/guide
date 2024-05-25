@@ -32,7 +32,7 @@ client.login(token);
 ::: code-group-item ts
 ```ts
 // Import the necessary discord.js classes
-import { readFileSync } from 'fs';
+import { readFileSync } from 'node:fs';
 import { Client, Events, GatewayInventBits } from 'discord.js';
 import { Config } from './src/types/Config';
 

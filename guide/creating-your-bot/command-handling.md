@@ -57,8 +57,8 @@ client.commands = new Collection();
 :::
 :::code-group-item ts
 ```ts {1-2}
-import { readFileSync } from 'fs';
-import path from 'path';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import { Client, Events, GatewayIntentBits } from 'discord.js';
 import { ExtendedClient } from './structures/ExtendedClient';
 import { Config, assertObjectIsConfig } from './types/Config';
