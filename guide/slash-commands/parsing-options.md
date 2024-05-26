@@ -45,7 +45,7 @@ Since `reason` isn't a required option, the example above uses the `??` [nullish
 If the target user is still in the guild where the command is being run, you can also use `.getMember('target')` to get their `GuildMember` object.
 
 ::: tip
-If you want the Snowflake of a structure instead, grab the option via `get()` and access the Snowflake via the `value` property. Note that you should use `const { value: name } = ...` here to [destructure and rename](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) the value obtained from the <DocsLink path="typedef/CommandInteractionOption" /> structure to avoid identifier name conflicts.
+If you want the Snowflake of a structure instead, grab the option via `get()` and access the Snowflake via the `value` property. Note that you should use `const { value: name } = ...` here to [destructure and rename](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) the value obtained from the <DocsLink path="CommandInteractionOption:Interface" /> structure to avoid identifier name conflicts.
 :::
 
 In the same way as the above examples, you can get values of any type using the corresponding `CommandInteractionOptionResolver#get_____()` method. `String`, `Integer`, `Number` and `Boolean` options all provide the respective primitive types, while `User`, `Channel`, `Role`, and `Mentionable` options will provide either the respective discord.js class instance if your application has a bot user in the guild or a raw API structure for commands-only deployments.

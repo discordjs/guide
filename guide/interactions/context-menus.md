@@ -31,9 +31,9 @@ client.on(Events.InteractionCreate, interaction => {
 
 ## Extracting data from context menus
 
-For user context menus, you can get the targeted user by accessing the `targetUser` or `targetMember` property from the <DocsLink path="class/UserContextMenuCommandInteraction" />.
+For user context menus, you can get the targeted user by accessing the `targetUser` or `targetMember` property from the <DocsLink path="UserContextMenuCommandInteraction:Class" />.
 
-For message context menus, you can get the targeted message by accessing the `targetMessage` property from the <DocsLink path="class/MessageContextMenuCommandInteraction" />.
+For message context menus, you can get the targeted message by accessing the `targetMessage` property from the <DocsLink path="MessageContextMenuCommandInteraction:Class" />.
 
 ```js {4}
 client.on(Events.InteractionCreate, interaction => {
