@@ -31,6 +31,11 @@ yarn add discord.js sequelize sqlite3
 pnpm install discord.js sequelize sqlite3
 ```
 :::
+::: code-group-item bun
+```sh:no-line-numbers
+bun add discord.js sequelize sqlite3
+```
+:::
 ::::
 
 ::: danger

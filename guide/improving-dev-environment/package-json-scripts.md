@@ -21,6 +21,12 @@ pnpm run start
 pnpm run lint
 ```
 :::
+::: code-group-item bun
+```sh:no-line-numbers
+bun run start
+bun run lint
+```
+:::
 ::::
 
 ## Getting started
@@ -47,6 +53,13 @@ yarn init -y
 
 ```sh:no-line-numbers
 pnpm init
+```
+
+  </CodeGroupItem>
+  <CodeGroupItem title="bun">
+
+```sh:no-line-numbers
+bun init -y
 ```
 
   </CodeGroupItem>
@@ -106,6 +119,11 @@ yarn run start
 pnpm run start
 ```
 :::
+::: code-group-item bun
+```sh:no-line-numbers
+bun run start
+```
+:::
 ::::
 
 Let's create another script to lint your code via the command line.
@@ -136,6 +154,11 @@ yarn run lint
 ::: code-group-item pnpm
 ```sh:no-line-numbers
 pnpm run lint
+```
+:::
+::: code-group-item bun
+```sh:no-line-numbers
+bun run lint
 ```
 :::
 ::::
@@ -175,6 +198,11 @@ yarn run <script-name>
 ::: code-group-item pnpm
 ```sh:no-line-numbers
 pnpm run <script-name>
+```
+:::
+::: code-group-item bun
+```sh:no-line-numbers
+bun run <script-name>
 ```
 :::
 ::::
