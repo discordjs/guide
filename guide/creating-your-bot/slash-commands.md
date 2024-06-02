@@ -103,7 +103,7 @@ To assist in type checking, create a type file for your slash command exports:
 import { SlashCommandBuilder } from 'discord.js';
 
 export interface SlashCommand {
-	data: SlashCommandBuilder
+	data: SlashCommandBuilder;
 	execute: (interaction: ChatInputCommandInteraction) => Promise<void>;
 }
 ```
