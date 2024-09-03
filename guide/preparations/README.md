@@ -2,10 +2,10 @@
 
 ## Installing Node.js
 
-To use discord.js, you'll need to install [Node.js](https://nodejs.org/). discord.js v14 requires Node v16.11.0 or higher.
+To use discord.js, you'll need to install [Node.js](https://nodejs.org/). discord.js v14 requires Node v18 or higher.
 
 ::: tip
-To check if you already have Node installed on your machine \(e.g., if you're using a VPS\), run `node -v` in your terminal. If it outputs `v16.11.0` or higher, then you're good to go! Otherwise, continue reading.
+To check if you already have Node installed on your machine \(e.g., if you're using a VPS\), run `node -v` in your terminal. If it outputs `v18.0.0` or higher, then you're good to go! Otherwise, continue reading.
 :::
 
 On Windows, it's as simple as installing any other program. Download the latest version from [the Node.js website](https://nodejs.org/), open the downloaded file, and follow the steps from the installer.
@@ -40,7 +40,7 @@ On macOS, either:
 
 On Linux, you can quickly open the terminal with `Ctrl + Alt + T`.
 
-With the terminal open, run the `node -v` command to make sure you've successfully installed Node.js. If it outputs `v16.11.0` or higher, great!
+With the terminal open, run the `node -v` command to make sure you've successfully installed Node.js. If it outputs `v18.0.0` or higher, great!
 
 ### Initiating a project folder
 
