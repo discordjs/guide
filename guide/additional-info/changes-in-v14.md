@@ -2,7 +2,7 @@
 
 ## Before you start
 
-v14 requires Node 18 or higher to use, so make sure you're up to date. To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it! There are many resources online to help you with this step based on your host system.
+Make sure you're using the latest LTS version of Node. To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it! There are many resources online to help you with this step based on your host system.
 
 ### Various packages are now included in v14
 
