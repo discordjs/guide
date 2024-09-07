@@ -30,6 +30,13 @@ pnpm add undici
 ```
 
 :::
+::: code-group-item bun
+
+```sh:no-line-numbers
+bun add undici
+```
+
+:::
 ::::
 
 ## Skeleton code
