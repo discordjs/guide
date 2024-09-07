@@ -11,10 +11,10 @@ This page is a follow-up to the [interactions (slash commands) page](/slash-comm
 Unlike message components, modals aren't strictly components themselves. They're a callback structure used to respond to interactions.
 
 ::: tip
-You can have a maximum of five <DocsLink path="class/ActionRowBuilder" />s per modal builder, and one <DocsLink path="class/TextInputBuilder" /> within an <DocsLink path="class/ActionRowBuilder" />. Currently, you cannot use <DocsLink path="class/StringSelectMenuBuilder" />s or <DocsLink path="class/ButtonBuilder" />s in modal action rows builders.
+You can have a maximum of five <DocsLink path="ActionRowBuilder:Class" />s per modal builder, and one <DocsLink path="TextInputBuilder:Class" /> within an <DocsLink path="ActionRowBuilder:Class" />. Currently, you can only use <DocsLink path="TextInputBuilder:Class" />s in modal action rows builders.
 :::
 
-To create a modal you construct a new <DocsLink path="class/ModalBuilder" />. You can then use the setters to add the custom id and title.
+To create a modal you construct a new <DocsLink path="ModalBuilder:Class" />. You can then use the setters to add the custom id and title.
 
 ```js {1,7-13}
 const { Events, ModalBuilder } = require('discord.js');
@@ -37,10 +37,10 @@ The custom id is a developer-defined string of up to 100 characters. Use this fi
 
 The next step is to add the input fields in which users responding can enter free-text. Adding inputs is similar to adding components to messages.
 
-At the end, we then call <DocsLink path="class/ChatInputCommandInteraction?scrollTo=showModal" type="method"/> to display the modal to the user.
+At the end, we then call <DocsLink path="ChatInputCommandInteraction:Class#showModal" type="method"/> to display the modal to the user.
 
 ::: warning
-If you're using typescript you'll need to specify the type of components your action row holds. This can be done by specifying the generic parameter in <DocsLink path="class/ActionRowBuilder" />
+If you're using typescript you'll need to specify the type of components your action row holds. This can be done by specifying the generic parameter in <DocsLink path="ActionRowBuilder:Class" />
 
 ```diff
 - new ActionRowBuilder()
@@ -106,12 +106,12 @@ Currently there are two different input styles available:
 
 ### Input properties
 
-In addition to the `customId`, `label` and `style`, a text input can be customised in a number of ways to apply validation, prompt the user, or set default values via the <DocsLink path="class/TextInputBuilder" /> methods:
+In addition to the `customId`, `label` and `style`, a text input can be customised in a number of ways to apply validation, prompt the user, or set default values via the <DocsLink path="TextInputBuilder:Class" /> methods:
 
 ```js
 const input = new TextInputBuilder()
 	// set the maximum number of characters to allow
-	.setMaxLength(1000)
+	.setMaxLength(1_000)
 	// set the minimum number of characters required for submission
 	.setMinLength(10)
 	// set a placeholder string to prompt the user
@@ -126,13 +126,13 @@ const input = new TextInputBuilder()
 
 ### Interaction collectors
 
-Modal submissions can be collected within the scope of the interaction that showed it by utilising an <DocsLink path="class/InteractionCollector"/>, or the <DocsLink path="class/ChatInputCommandInteraction?scrollTo=awaitModalSubmit" type="method"/> promisified method. These both provide instances of the <DocsLink path="class/ModalSubmitInteraction"/> class as collected items.
+Modal submissions can be collected within the scope of the interaction that showed it by utilising an <DocsLink path="InteractionCollector:Class"/>, or the <DocsLink path="ChatInputCommandInteraction:Class#awaitModalSubmit" type="method"/> promisified method. These both provide instances of the <DocsLink path="ModalSubmitInteraction:Class"/> class as collected items.
 
 For a detailed guide on receiving message components via collectors, please refer to the [collectors guide](/popular-topics/collectors.md#interaction-collectors).
 
 ### The interactionCreate event
 
-To receive a <DocsLink path="class/ModalSubmitInteraction"/> event, attach an <DocsLink path="class/Client?scrollTo=e-interactionCreate"/> event listener to your client and use the <DocsLink path="class/BaseInteraction?scrollTo=isModalSubmit" type="method"/> type guard to make sure you only receive modals:
+To receive a <DocsLink path="ModalSubmitInteraction:Class"/> event, attach an <DocsLink path="Client:Class#interactionCreate"/> event listener to your client and use the <DocsLink path="BaseInteraction:Class#isModalSubmit" type="method"/> type guard to make sure you only receive modals:
 
 ```js {1,4}
 client.on(Events.InteractionCreate, interaction => {
@@ -143,7 +143,7 @@ client.on(Events.InteractionCreate, interaction => {
 
 ## Responding to modal submissions
 
-The <DocsLink path="class/ModalSubmitInteraction"/> class provides the same methods as the <DocsLink path="class/ChatInputCommandInteraction"/> class. These methods behave equally:
+The <DocsLink path="ModalSubmitInteraction:Class"/> class provides the same methods as the <DocsLink path="ChatInputCommandInteraction:Class"/> class. These methods behave equally:
 - `reply()`
 - `editReply()`
 - `deferReply()`
@@ -151,11 +151,11 @@ The <DocsLink path="class/ModalSubmitInteraction"/> class provides the same meth
 - `deleteReply()`
 - `followUp()`
 
-If the modal was shown from a <DocsLink path="class/ButtonInteraction"/> or <DocsLink path="class/StringSelectMenuInteraction"/>, it will also provide these methods, which behave equally:
+If the modal was shown from a <DocsLink path="ButtonInteraction:Class"/> or <DocsLink path="StringSelectMenuInteraction:Class"/>, it will also provide these methods, which behave equally:
 - `update()`
 - `deferUpdate()`
 
-```js{1,3-5}
+```js {1,3-5}
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isModalSubmit()) return;
 	if (interaction.customId === 'myModal') {
@@ -165,14 +165,14 @@ client.on(Events.InteractionCreate, async interaction => {
 ```
 
 ::: tip
-If you're using typescript, you can use the <DocsLink path="class/ModalSubmitInteraction?scrollTo=isFromMessage" type="method"/> typeguard, to make sure the received interaction was from a `MessageComponentInteraction`.
+If you're using typescript, you can use the <DocsLink path="ModalSubmitInteraction:Class#isFromMessage" type="method"/> typeguard, to make sure the received interaction was from a `MessageComponentInteraction`.
 :::
 
 ## Extracting data from modal submissions
 
-You'll most likely need to read the data sent by the user in the modal. You can do this by accessing the <DocsLink path="class/ModalSubmitInteraction?scrollTo=fields"/>. From there you can call <DocsLink path="class/ModalSubmitFields?scrollTo=getTextInputValue" type="method"/> with the custom id of the text input to get the value.
+You'll most likely need to read the data sent by the user in the modal. You can do this by accessing the <DocsLink path="ModalSubmitInteraction:Class#fields"/>. From there you can call <DocsLink path="ModalSubmitFields:Class#getTextInputValue" type="method"/> with the custom id of the text input to get the value.
 
-```js{5-7}
+```js {5-7}
 client.on(Events.InteractionCreate, interaction => {
 	if (!interaction.isModalSubmit()) return;
 

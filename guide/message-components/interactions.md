@@ -1,10 +1,10 @@
 # Component interactions
 
-Every button click or select menu selection on a component sent by your bot fires an `interaction`, triggering the <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> event. How you decide to handle this will likely depend on the purpose of the components. Options include:
+Every button click or select menu selection on a component sent by your bot fires an `interaction`, triggering the <DocsLink path="Client:Class#interactionCreate" /> event. How you decide to handle this will likely depend on the purpose of the components. Options include:
 
-- Waiting for a single interaction via <DocsLink path="class/InteractionResponse?scrollTo=awaitMessageComponent" type="method"/>.
-- Listening for multiple interactions over a period of time using an <DocsLink path="class/InteractionCollector" />.
-- Creating a permanent component handler in the <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> event.
+- Waiting for a single interaction via <DocsLink path="InteractionResponse:Class#awaitMessageComponent" type="method"/>.
+- Listening for multiple interactions over a period of time using an <DocsLink path="InteractionCollector:Class" />.
+- Creating a permanent component handler in the <DocsLink path="Client:Class#interactionCreate" /> event.
 
 ::: tip
 This page is a follow-up to the [slash commands](/slash-commands/advanced-creation) section, and assumes you have created either [buttons](/message-components/buttons) or [select menus](/message-components/select-menus) as detailed in this guide. Please carefully read those pages first so that you can understand the methods used here.
@@ -34,7 +34,7 @@ Once `deferUpdate()` has been called, future messages can be sent by calling `fo
 
 If you followed our [buttons](/message-components/buttons) guide, the confirmation workflow for the `ban` command is a good example of a situation where your bot is expecting to receive a single response, from either the Confirm or Cancel button.
 
-Begin by storing the <DocsLink path="class/InteractionResponse" /> as a variable, and calling <DocsLink path="class/InteractionResponse?scrollTo=awaitMessageComponent" type="method" /> on this instance. This method returns a [Promise](/additional-info/async-await.md) that resolves when any interaction passes its filter (if one is provided), or throws if none are received before the timeout. If this happens, remove the components and notify the user.
+Begin by storing the <DocsLink path="InteractionResponse:Class" /> as a variable, and calling <DocsLink path="InteractionResponse:Class#awaitMessageComponent" type="method" /> on this instance. This method returns a [Promise](/additional-info/async-await.md) that resolves when any interaction passes its filter (if one is provided), or throws if none are received before the timeout. If this happens, remove the components and notify the user.
 
 ```js {1,6-11}
 const response = await interaction.reply({
@@ -45,7 +45,7 @@ const response = await interaction.reply({
 const collectorFilter = i => i.user.id === interaction.user.id;
 
 try {
-	const confirmation = await response.awaitMessageComponent({ filter: collectorFilter, time: 60000 });
+	const confirmation = await response.awaitMessageComponent({ filter: collectorFilter, time: 60_000 });
 } catch (e) {
 	await interaction.editReply({ content: 'Confirmation not received within 1 minute, cancelling', components: [] });
 }
@@ -80,11 +80,11 @@ try {
 
 ## Component collectors
 
-For situations where you want to collect multiple interactions, the Collector approach is better suited than awaiting singular interactions. Following on from the [select menus](/message-components/select-menus) guide, you're going to extend that example to use an <DocsLink path="class/InteractionCollector"/> to listen for multiple <DocsLink path="class/StringSelectMenuInteraction"/>s.
+For situations where you want to collect multiple interactions, the Collector approach is better suited than awaiting singular interactions. Following on from the [select menus](/message-components/select-menus) guide, you're going to extend that example to use an <DocsLink path="InteractionCollector:Class"/> to listen for multiple <DocsLink path="StringSelectMenuInteraction:Class"/>s.
 
-Begin by storing the <DocsLink path="class/InteractionResponse" /> as a variable, and calling <DocsLink path="class/InteractionResponse?scrollTo=createMessageComponentCollector" type="method" /> on this instance. This method returns an InteractionCollector that will fire its <DocsLink path="class/InteractionCollector?scrollTo=e-collect" /> event whenever an interaction passes its filter (if one is provided).
+Begin by storing the <DocsLink path="InteractionResponse:Class" /> as a variable, and calling <DocsLink path="InteractionResponse:Class#createMessageComponentCollector" type="method" /> on this instance. This method returns an InteractionCollector that will fire its <DocsLink path="InteractionCollector:Class#collect" /> event whenever an interaction passes its filter (if one is provided).
 
-In the `collect` event, each interaction is a <DocsLink path="class/StringSelectMenuInteraction" /> thanks to the `componentType: ComponentType.StringSelect` option provided to the collector (and because that was the only type of component in the message). The selected value(s) are available via the <DocsLink path="class/StringSelectMenuInteraction?scrollTo=values" /> property.
+In the `collect` event, each interaction is a <DocsLink path="StringSelectMenuInteraction:Class" /> thanks to the `componentType: ComponentType.StringSelect` option provided to the collector (and because that was the only type of component in the message). The selected value(s) are available via the <DocsLink path="StringSelectMenuInteraction:Class#values" /> property.
 
 ```js
 const response = await interaction.reply({
@@ -102,9 +102,9 @@ collector.on('collect', async i => {
 
 ## The Client#interactionCreate event
 
-Third and finally, you may wish to have a listener setup to respond to permanent button or select menu features of your guild. For this, returning to the <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> event is the best approach.
+Third and finally, you may wish to have a listener setup to respond to permanent button or select menu features of your guild. For this, returning to the <DocsLink path="Client:Class#interactionCreate" /> event is the best approach.
 
-If you're event handling has been setup in multiple files as per our [event handling](creating-your-bot/event-handling) guide, you should already have an `events/interactionCreate.js` file that looks something like this.
+If your event handling has been setup in multiple files as per our [event handling](/creating-your-bot/event-handling) guide, you should already have an `events/interactionCreate.js` file that looks something like this.
 
 ```js {6}
 const { Events } = require('discord.js');

@@ -2,7 +2,7 @@
 
 ## Before you start
 
-v14 requires Node 16.11.0 or higher to use, so make sure you're up to date. To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it! There are many resources online to help you with this step based on your host system.
+Make sure you're using the latest LTS version of Node. To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it! There are many resources online to help you with this step based on your host system.
 
 ### Various packages are now included in v14
 
@@ -199,8 +199,8 @@ The following properties have been removed as they are not documented by Discord
 The methods that return CDN URLs have changed. Here is an example on a User:
 
 ```diff
-- const url = user.displayAvatarURL({ dynamic: true, format: "png", size: 1024 });
-+ const url = user.displayAvatarURL({ extension: "png", size: 1024 });
+- const url = user.displayAvatarURL({ dynamic: true, format: "png", size: 1_024 });
++ const url = user.displayAvatarURL({ extension: "png", size: 1_024 });
 ```
 
 Dynamic URLs use <DocsLink section="rest" path="ImageURLOptions:Interface"/> and static URLs use <DocsLink section="rest" path="BaseImageURLOptions:Interface"/>. Since dynamic URLs are returned by default, this option has been renamed to `forceStatic` which forces the return of a static URL. Additionally, `format` has been renamed to `extension`.
@@ -377,9 +377,9 @@ The base interaction class is now `BaseInteraction`.
 
 -   `MessageEmbed` has now been renamed to `EmbedBuilder`.
 
--   `EmbedBuilder#setAuthor()` now accepts a sole <DocsLink section="builders" path="EmbedAuthorOptions:TypeAlias"/> object.
+-   `EmbedBuilder#setAuthor()` now accepts a sole <DocsLink section="builders" path="EmbedAuthorOptions:Interface"/> object.
 
--   `EmbedBuilder#setFooter()` now accepts a sole <DocsLink section="builders" path="EmbedFooterOptions:TypeAlias"/> object.
+-   `EmbedBuilder#setFooter()` now accepts a sole <DocsLink section="builders" path="EmbedFooterOptions:Interface"/> object.
 
 -   `EmbedBuilder#addField()` has been removed. Use `EmbedBuilder#addFields()` instead.
 
@@ -582,7 +582,7 @@ const collector = interaction.channel.createMessageComponentCollector({
 	filter: collectorFilter,
 -	componentType: 'BUTTON',
 +	componentType: ComponentType.Button,
-	time: 20000
+	time: 20_000
 });
 ```
 
@@ -684,4 +684,4 @@ Added the `threadName` property in `Webhook#send()` options which allows a webho
 
 ### WebSocketManager
 
-discord.js uses <PackageLink name="ws" /> internally.
+discord.js uses <DocsLink section="ws" /> internally.

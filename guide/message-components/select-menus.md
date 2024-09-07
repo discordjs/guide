@@ -12,7 +12,7 @@ The "standard" and most customizable type of select menu is the string select me
 
 If you're a Pokémon fan, you've probably made a selection pretty similar to this example at some point in your life!
 
-```js {1,6-21}
+```js {1,6-22}
 const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder, SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
@@ -45,7 +45,7 @@ The custom id is a developer-defined string of up to 100 characters. Use this fi
 
 ## Sending select menus
 
-To send your select menu, create an action row and add the buttons as components. Then, send the row in the `components` property of <DocsLink path="typedef/InteractionReplyOptions" /> (extends <DocsLink path="typedef/BaseMessageOptions" />).
+To send your select menu, create an action row and add the buttons as components. Then, send the row in the `components` property of <DocsLink path="InteractionReplyOptions:Interface" /> (extends <DocsLink path="BaseMessageOptions:Interface" />).
 
 ```js {1,24-25,29}
 const { ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, SlashCommandBuilder } = require('discord.js');
@@ -108,7 +108,7 @@ String select menu options are custom-defined by the user, as shown in the examp
 
 In addition to these, each option can be enhanced with a `description` or `emoji`, or can be set to be selected by default.
 
-```js{4-9}
+```js {4-9}
 const select = new StringSelectMenuBuilder()
 	.setCustomId('select')
 	.addOptions(
@@ -123,7 +123,7 @@ const select = new StringSelectMenuBuilder()
 
 ## Auto-populating select menus
 
-Although the String select menu with it's user-defined options is the most customizable, there are four other types of select menu that auto-populate with their corresponding Discord entities, much like slash command options. These are:
+Although the String select menu with its user-defined options is the most customizable, there are four other types of select menu that auto-populate with their corresponding Discord entities, much like slash command options. These are:
 
 - <DocsLink section="builders" path="UserSelectMenuBuilder:Class" />
 - <DocsLink section="builders" path="RoleSelectMenuBuilder:Class" />
@@ -136,7 +136,7 @@ The `ChannelSelectMenuBuilder` can be configured to only show specific channel t
 
 Where slash command options fall behind is in their single-select limitation on User, Role and Channel option types. Select menus can support this use case via <DocsLink section="builders" path="BaseSelectMenuBuilder:Class#setMinValues" type="method"/> and <DocsLink section="builders" path="BaseSelectMenuBuilder:Class#setMaxValues" type="method"/>. When these values are set, users can select multiple items, and the interaction will be sent with all selected values only when the user clicks outside the select menu.
 
-```js{7-8,13-14}
+```js {7-8,13-14}
 module.exports = {
 	// data: new SlashCommandBuilder()...
 	async execute(interaction) {

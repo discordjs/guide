@@ -2,7 +2,7 @@
 
 ## Message collectors
 
-<p><DocsLink path="class/Collector"><code>Collector</code>s</DocsLink> are useful to enable your bot to obtain *additional* input after the first command was sent. An example would be initiating a quiz, where the bot will "await" a correct response from somebody.</p>
+<p><DocsLink path="Collector:Class">Collectors</DocsLink> are useful to enable your bot to obtain *additional* input after the first command was sent. An example would be initiating a quiz, where the bot will "await" a correct response from somebody.</p>
 
 ### Basic message collector
 
@@ -11,7 +11,7 @@ For now, let's take the example that they have provided us:
 ```js
 // `m` is a message object that will be passed through the filter function
 const collectorFilter = m => m.content.includes('discord');
-const collector = interaction.channel.createMessageCollector({ filter: collectorFilter, time: 15000 });
+const collector = interaction.channel.createMessageCollector({ filter: collectorFilter, time: 15_000 });
 
 collector.on('collect', m => {
 	console.log(`Collected ${m.content}`);
@@ -39,7 +39,7 @@ The benefit of using an event-based collector over `.awaitMessages()` (its promi
 
 ### Await messages
 
-Using <DocsLink path="class/TextChannel?scrollTo=awaitMessages" type="method" /> can be easier if you understand Promises, and it allows you to have cleaner code overall. It is essentially identical to <DocsLink path="class/TextChannel?scrollTo=createMessageCollector" type="method" />, except promisified. However, the drawback of using this method is that you cannot do things before the Promise is resolved or rejected, either by an error or completion. However, it should do for most purposes, such as awaiting the correct response in a quiz. Instead of taking their example, let's set up a basic quiz command using the `.awaitMessages()` feature.
+Using <DocsLink path="TextChannel:Class#awaitMessages" type="method" /> can be easier if you understand Promises, and it allows you to have cleaner code overall. It is essentially identical to <DocsLink path="TextChannel:Class#createMessageCollector" type="method" />, except promisified. However, the drawback of using this method is that you cannot do things before the Promise is resolved or rejected, either by an error or completion. However, it should do for most purposes, such as awaiting the correct response in a quiz. Instead of taking their example, let's set up a basic quiz command using the `.awaitMessages()` feature.
 
 First, you'll need some questions and answers to choose from, so here's a basic set:
 
@@ -68,7 +68,7 @@ const collectorFilter = response => {
 
 interaction.reply({ content: item.question, fetchReply: true })
 	.then(() => {
-		interaction.channel.awaitMessages({ filter: collectorFilter, max: 1, time: 30000, errors: ['time'] })
+		interaction.channel.awaitMessages({ filter: collectorFilter, max: 1, time: 30_000, errors: ['time'] })
 			.then(collected => {
 				interaction.followUp(`${collected.first().author} got the correct answer!`);
 			})
@@ -90,14 +90,14 @@ The filter looks for messages that match one of the answers in the array of poss
 
 ### Basic reaction collector
 
-These work quite similarly to message collectors, except that you apply them on a message rather than a channel. This example uses the <DocsLink path="class/Message?scrollTo=createReactionCollector" type="method" /> method. The filter will check for the 👍 emoji–in the default skin tone specifically, so be wary of that. It will also check that the person who reacted shares the same id as the author of the original message that the collector was assigned to.
+These work quite similarly to message collectors, except that you apply them on a message rather than a channel. This example uses the <DocsLink path="Message:Class#createReactionCollector" type="method" /> method. The filter will check for the 👍 emoji–in the default skin tone specifically, so be wary of that. It will also check that the person who reacted shares the same id as the author of the original message that the collector was assigned to.
 
 ```js
 const collectorFilter = (reaction, user) => {
 	return reaction.emoji.name === '👍' && user.id === message.author.id;
 };
 
-const collector = message.createReactionCollector({ filter: collectorFilter, time: 15000 });
+const collector = message.createReactionCollector({ filter: collectorFilter, time: 15_000 });
 
 collector.on('collect', (reaction, user) => {
 	console.log(`Collected ${reaction.emoji.name} from ${user.tag}`);
@@ -110,14 +110,14 @@ collector.on('end', collected => {
 
 ### Await reactions
 
-<p><DocsLink path="class/Message?scrollTo=awaitReactions" type="method" /> works almost the same as a reaction collector, except it is Promise-based. The same differences apply as with channel collectors.</p>
+<p><DocsLink path="Message:Class#awaitReactions" type="method" /> works almost the same as a reaction collector, except it is Promise-based. The same differences apply as with channel collectors.</p>
 
 ```js
 const collectorFilter = (reaction, user) => {
 	return reaction.emoji.name === '👍' && user.id === message.author.id;
 };
 
-message.awaitReactions({ filter: collectorFilter, max: 4, time: 60000, errors: ['time'] })
+message.awaitReactions({ filter: collectorFilter, max: 4, time: 60_000, errors: ['time'] })
 	.then(collected => console.log(collected.size))
 	.catch(collected => {
 		console.log(`After a minute, only ${collected.size} out of 4 reacted.`);
@@ -137,7 +137,7 @@ One important difference to note with interaction collectors is that Discord exp
 ```js
 const { ComponentType } = require('discord.js');
 
-const collector = message.createMessageComponentCollector({ componentType: ComponentType.Button, time: 15000 });
+const collector = message.createMessageComponentCollector({ componentType: ComponentType.Button, time: 15_000 });
 
 collector.on('collect', i => {
 	if (i.user.id === interaction.user.id) {
@@ -166,14 +166,14 @@ const collectorFilter = i => {
 	return i.user.id === interaction.user.id;
 };
 
-message.awaitMessageComponent({ filter: collectorFilter, componentType: ComponentType.StringSelect, time: 60000 })
+message.awaitMessageComponent({ filter: collectorFilter, componentType: ComponentType.StringSelect, time: 60_000 })
 	.then(interaction => interaction.editReply(`You selected ${interaction.values.join(', ')}!`))
 	.catch(err => console.log('No interactions were collected.'));
 ```
 
 ### Await modal submit
 
-If you want to wait for the submission of a modal within the context of another command or button execution, you may find the promisified collector <DocsLink path="class/CommandInteraction?scrollTo=awaitModalSubmit" type="method"/> useful.
+If you want to wait for the submission of a modal within the context of another command or button execution, you may find the promisified collector <DocsLink path="CommandInteraction:Class#awaitModalSubmit" type="method"/> useful.
 
 As Discord does not inform you if the user dismisses the modal, supplying a maximum `time` to wait for is crucial:
 

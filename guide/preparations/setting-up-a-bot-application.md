@@ -14,11 +14,7 @@ You should see a page like this:
 
 ![Successfully created application](./images/create-app.png)
 
-You can edit your application's name, description, and avatar here. Once you've saved your changes, move on by selecting the "Bot" tab in the left panel.
-
-![Create a bot UI](./images/create-bot.png)
-
-Click the "Add Bot" button on the right and confirm the pop-up window by clicking "Yes, do it!". Congratulations, you're now the proud owner of a shiny new Discord bot! You're not entirely done, though.
+You can edit your application's name, description, and avatar here. Once you've done that, then congratulations—you're now the proud owner of a shiny new Discord bot! You're not entirely done, though.
 
 ## Your bot's token
 

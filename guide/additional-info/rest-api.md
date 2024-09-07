@@ -50,8 +50,8 @@ const { Client, EmbedBuilder, Events, GatewayIntentBits } = require('discord.js'
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.once(Events.ClientReady, () => {
-	console.log('Ready!');
+client.once(Events.ClientReady, readyClient => {
+	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
 
 client.on(Events.InteractionCreate, async interaction => {
@@ -200,7 +200,7 @@ const embed = new EmbedBuilder()
 	.setColor(0xEFFF00)
 	.setTitle(answer.word)
 	.setURL(answer.permalink)
-	.addFields({ name: 'Definition', value: trim(answer.definition, 1024) }, { name: 'Example', value: trim(answer.example, 1024) }, { name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` });
+	.addFields({ name: 'Definition', value: trim(answer.definition, 1_024) }, { name: 'Example', value: trim(answer.example, 1_024) }, { name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` });
 
 interaction.editReply({ embeds: [embed] });
 ```

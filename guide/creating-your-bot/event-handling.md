@@ -1,6 +1,6 @@
 # Event handling
 
-Node.js uses an event-driven architecture, making it possible to execute code when a specific event occurs. The discord.js library takes full advantage of this. You can visit the <DocsLink path="class/Client" /> documentation to see the full list of events.
+Node.js uses an event-driven architecture, making it possible to execute code when a specific event occurs. The discord.js library takes full advantage of this. You can visit the <DocsLink path="Client:Class" /> documentation to see the full list of events.
 
 ::: tip
 This page assumes you've followed the guide up to this point, and created your `index.js` and individual slash commands according to those pages.
@@ -11,8 +11,8 @@ At this point, your `index.js` file has listeners for two events: `ClientReady` 
 :::: code-group
 ::: code-group-item ClientReady
 ```js
-client.once(Events.ClientReady, c => {
-	console.log(`Ready! Logged in as ${c.user.tag}`);
+client.once(Events.ClientReady, readyClient => {
+	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
 ```
 :::
@@ -31,15 +31,19 @@ client.on(Events.InteractionCreate, async interaction => {
 	try {
 		await command.execute(interaction);
 	} catch (error) {
-		console.error(`Error executing ${interaction.commandName}`);
 		console.error(error);
+		if (interaction.replied || interaction.deferred) {
+			await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
+		} else {
+			await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+		}
 	}
 });
 ```
 :::
 ::::
 
-Currently, the event listeners are in the `index.js` file. <DocsLink path="class/Client?scrollTo=e-ready" /> emits once when the `Client` becomes ready for use, and <DocsLink path="class/Client?scrollTo=e-interactionCreate" /> emits whenever an interaction is received. Moving the event listener code into individual files is simple, and we'll be taking a similar approach to the [command handler](/creating-your-bot/command-handling.md).
+Currently, the event listeners are in the `index.js` file. <DocsLink path="Client:Class#ready" /> emits once when the `Client` becomes ready for use, and <DocsLink path="Client:Class#interactionCreate" /> emits whenever an interaction is received. Moving the event listener code into individual files is simple, and we'll be taking a similar approach to the [command handler](/creating-your-bot/command-handling.md).
 
 ::: warning
 You're only going to move these two events from `index.js`. The code for [loading command files](/creating-your-bot/command-handling.html#loading-command-files) will stay here!
@@ -95,8 +99,12 @@ module.exports = {
 		try {
 			await command.execute(interaction);
 		} catch (error) {
-			console.error(`Error executing ${interaction.commandName}`);
 			console.error(error);
+			if (interaction.replied || interaction.deferred) {
+				await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
+			} else {
+				await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+			}
 		}
 	},
 };
@@ -186,7 +194,7 @@ client.login(token);
 
 You'll notice the code looks very similar to the command loading above it - read the files in the events folder and load each one individually.
 
-The <DocsLink path="class/Client" /> class in discord.js extends the [`EventEmitter`](https://nodejs.org/api/events.html#events_class_eventemitter) class. Therefore, the `client` object exposes the [`.on()`](https://nodejs.org/api/events.html#events_emitter_on_eventname_listener) and [`.once()`](https://nodejs.org/api/events.html#events_emitter_once_eventname_listener) methods that you can use to register event listeners. These methods take two arguments: the event name and a callback function. These are defined in your separate event files as `name` and `execute`.
+The <DocsLink path="Client:Class" /> class in discord.js extends the [`EventEmitter`](https://nodejs.org/api/events.html#events_class_eventemitter) class. Therefore, the `client` object exposes the [`.on()`](https://nodejs.org/api/events.html#events_emitter_on_eventname_listener) and [`.once()`](https://nodejs.org/api/events.html#events_emitter_once_eventname_listener) methods that you can use to register event listeners. These methods take two arguments: the event name and a callback function. These are defined in your separate event files as `name` and `execute`.
 
 The callback function passed takes argument(s) returned by its respective event, collects them in an `args` array using the `...` [rest parameter syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters), then calls `event.execute()` while passing in the `args` array using the `...` [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax). They are used here because different events in discord.js have different numbers of arguments. The rest parameter collects these variable number of arguments into a single array, and the spread syntax then takes these elements and passes them to the `execute` function.
 

@@ -77,7 +77,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	if (interaction.commandName === 'ping') {
 		await interaction.reply('Pong!');
-		await wait(2000);
+		await wait(2_000);
 		await interaction.editReply('Pong again!');
 	}
 });
@@ -100,7 +100,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	if (interaction.commandName === 'ping') {
 		await interaction.deferReply();
-		await wait(4000);
+		await wait(4_000);
 		await interaction.editReply('Pong!');
 	}
 });

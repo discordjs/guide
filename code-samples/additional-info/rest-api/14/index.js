@@ -5,8 +5,8 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const trim = (str, max) => (str.length > max ? `${str.slice(0, max - 3)}...` : str);
 
-client.once(Events.ClientReady, () => {
-	console.log('Ready!');
+client.once(Events.ClientReady, readyClient => {
+	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
 
 client.on(Events.InteractionCreate, async interaction => {

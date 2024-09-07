@@ -33,7 +33,7 @@ The key will be the command names, and the values will be Collections associatin
 In your `InteractionCreate` event, add the following code:
 
 ```js {1,3-5,7-10,12-14}
-const { cooldowns } = client;
+const { cooldowns } = interaction.client;
 
 if (!cooldowns.has(command.data.name)) {
 	cooldowns.set(command.data.name, new Collection());
@@ -42,7 +42,7 @@ if (!cooldowns.has(command.data.name)) {
 const now = Date.now();
 const timestamps = cooldowns.get(command.data.name);
 const defaultCooldownDuration = 3;
-const cooldownAmount = (command.cooldown ?? defaultCooldownDuration) * 1000;
+const cooldownAmount = (command.cooldown ?? defaultCooldownDuration) * 1_000;
 
 if (timestamps.has(interaction.user.id)) {
 	// ...
@@ -70,7 +70,7 @@ if (timestamps.has(interaction.user.id)) {
 	const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
 
 	if (now < expirationTime) {
-		const expiredTimestamp = Math.round(expirationTime / 1000);
+		const expiredTimestamp = Math.round(expirationTime / 1_000);
 		return interaction.reply({ content: `Please wait, you are on a cooldown for \`${command.data.name}\`. You can use it again <t:${expiredTimestamp}:R>.`, ephemeral: true });
 	}
 }

@@ -24,7 +24,7 @@ const data = new SlashCommandBuilder()
 
 ## Responding to autocomplete interactions
 
-To handle an <DocsLink path="class/AutocompleteInteraction"/>, use the <DocsLink path="class/BaseInteraction?scrollTo=isAutocomplete" type="method"/> type guard to make sure the interaction instance is an autocomplete interaction. You can do this in a separate `interactionCreate` listener:
+To handle an <DocsLink path="AutocompleteInteraction:Class"/>, use the <DocsLink path="BaseInteraction:Class#isAutocomplete" type="method"/> type guard to make sure the interaction instance is an autocomplete interaction. You can do this in a separate `interactionCreate` listener:
 
 <!-- eslint-skip -->
 
@@ -91,13 +91,13 @@ You might have already moved this code to `events/interactionCreate.js` if you f
 
 ### Sending results
 
-The <DocsLink path="class/AutocompleteInteraction"/> class provides the <DocsLink path="class/AutocompleteInteraction?scrollTo=respond" type="method"/> method to send a response. Using this, you can submit an array of <DocsLink path="typedef/ApplicationCommandOptionChoiceData" /> objects for the user to choose from. Passing an empty array will show "No options match your search" for the user.
+The <DocsLink path="AutocompleteInteraction:Class"/> class provides the <DocsLink path="AutocompleteInteraction:Class#respond" type="method"/> method to send a response. Using this, you can submit an array of <DocsLink path="ApplicationCommandOptionChoiceData:Interface" /> objects for the user to choose from. Passing an empty array will show "No options match your search" for the user.
 
 ::: warning
 Unlike static choices, autocompletion suggestions are *not* enforced, and users may still enter free text.
 :::
 
-The <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" type="method"/> method returns the currently focused option's value, which can be used to applying filtering to the choices presented. For example, to only display options starting with the focused value you can use the `Array#filter()` method, then using `Array#map()`, you can transform the array into an array of <DocsLink path="typedef/ApplicationCommandOptionChoiceData" /> objects.
+The <DocsLink path="CommandInteractionOptionResolver:Class#getFocused" type="method"/> method returns the currently focused option's value, which can be used to apply filtering to the choices presented. For example, to only display options starting with the focused value you can use the `Array#filter()` method, then using `Array#map()`, you can transform the array into an array of <DocsLink path="ApplicationCommandOptionChoiceData:Interface" /> objects.
 
 ```js {10-15}
 module.exports = {
@@ -121,7 +121,7 @@ module.exports = {
 
 ### Handling multiple autocomplete options
 
-To distinguish between multiple options, you can pass `true` into <DocsLink path="class/CommandInteractionOptionResolver?scrollTo=getFocused" type="method"/>, which will now return the full focused object instead of just the value. This is used to get the name of the focused option below, allowing for multiple options to each have their own set of suggestions:
+To distinguish between multiple options, you can pass `true` into <DocsLink path="CommandInteractionOptionResolver:Class#getFocused" type="method"/>, which will now return the full focused object instead of just the value. This is used to get the name of the focused option below, allowing for multiple options to each have their own set of suggestions:
 
 ```js {10-19}
 module.exports = {
@@ -158,7 +158,7 @@ module.exports = {
 
 ### Accessing other values
 
-In addition to filtering based on the focused value, you may also wish to change the choices displayed based on the value of other arguments in the command. The following methods work the same in <DocsLink path="class/AutocompleteInteraction"/>:
+In addition to filtering based on the focused value, you may also wish to change the choices displayed based on the value of other arguments in the command. The following methods work the same in <DocsLink path="AutocompleteInteraction:Class"/>:
 
 ```js
 const string = interaction.options.getString('input');
@@ -173,5 +173,5 @@ However, the `.getUser()`, `.getMember()`, `.getRole()`, `.getChannel()`, `.getM
 
 - As with other application command interactions, autocomplete interactions must receive a response within 3 seconds. 
 - You cannot defer the response to an autocomplete interaction. If you're dealing with asynchronous suggestions, such as from an API, consider keeping a local cache.
-- After the user selects a value and sends the command, it will be received as a regular <DocsLink path="class/ChatInputCommandInteraction"/> with the chosen value.
+- After the user selects a value and sends the command, it will be received as a regular <DocsLink path="ChatInputCommandInteraction:Class"/> with the chosen value.
 - You can only respond with a maximum of 25 choices at a time, though any more than this likely means you should revise your filter to further narrow the selections.

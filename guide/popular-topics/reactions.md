@@ -25,8 +25,8 @@ const client = new Client({
 	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMessageReactions],
 });
 
-client.once(Events.ClientReady, () => {
-	console.log('Ready!');
+client.once(Events.ClientReady, readyClient => {
+	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
 
 client.on(Events.InteractionCreate, interaction => {
@@ -387,7 +387,7 @@ message.reactions.removeAll()
 
 ### Removing reactions by emoji
 
-Removing reactions by emoji is easily done by using <DocsLink path="class/MessageReaction?scrollTo=remove" type="method" />.
+Removing reactions by emoji is easily done by using <DocsLink path="MessageReaction:Class#remove" type="method" />.
 
 ```js
 message.reactions.cache.get('123456789012345678').remove()
@@ -431,7 +431,7 @@ const collectorFilter = (reaction, user) => {
 	return ['👍', '👎'].includes(reaction.emoji.name) && user.id === interaction.user.id;
 };
 
-message.awaitReactions({ filter: collectorFilter, max: 1, time: 60000, errors: ['time'] })
+message.awaitReactions({ filter: collectorFilter, max: 1, time: 60_000, errors: ['time'] })
 	.then(collected => {
 		const reaction = collected.first();
 

@@ -42,7 +42,7 @@ The custom id is a developer-defined string of up to 100 characters. Use this fi
 
 ## Sending buttons
 
-To send your buttons, create an action row and add the buttons as components. Then, send the row in the `components` property of <DocsLink path="typedef/InteractionReplyOptions" /> (extends <DocsLink path="typedef/BaseMessageOptions" />).
+To send your buttons, create an action row and add the buttons as components. Then, send the row in the `components` property of <DocsLink path="InteractionReplyOptions:Interface" /> (extends <DocsLink path="BaseMessageOptions:Interface" />).
 
 ```js {1,19-20,24}
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, SlashCommandBuilder } = require('discord.js');
@@ -122,7 +122,7 @@ You'll notice in the above example that two different styles of buttons have bee
 
 Link buttons are a little different to the other styles. `Link` buttons _must_ have a `url`, _cannot_ have a `customId` and _do not_ send an interaction event when clicked.
 
-```js{3}
+```js {3}
 const button = new ButtonBuilder()
 	.setLabel('discord.js docs')
 	.setURL('https://discord.js.org')
@@ -157,7 +157,7 @@ const button = new ButtonBuilder()
 
 ## Emoji buttons
 
-If you want to use a guild emoji within a <DocsLink path="class/ButtonBuilder"/>, you can use the <DocsLink path="class/ButtonBuilder?scrollTo=setEmoji" type="method"/> method:
+If you want to use a guild emoji within a <DocsLink path="ButtonBuilder:Class"/>, you can use the <DocsLink path="ButtonBuilder:Class#setEmoji" type="method"/> method:
 
 ```js {5}
 const button = new ButtonBuilder()

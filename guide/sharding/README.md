@@ -34,7 +34,7 @@ manager.spawn();
 The above code utilizes the discord.js sharding manager to spawn the recommended amount of shards for your bot. The recommended amount should be approximately 1,000 guilds per shard. Note that you have to attach the event listener to `shardCreate` before calling `.spawn()` to prevent a race condition possibly preventing shard 0 from logging the successful launch. Even though you provide the token here, you will still need to send it over to the main bot file in `client.login()`, so don't forget to do that.
 
 ::: tip
-You can find the methods available for the ShardingManager class <DocsLink path="class/ShardingManager">here</DocsLink>. Though, you may not be making much use of this section, unlike the next feature we will explore, which you may learn about by clicking [this link](/sharding/additional-information.md).
+You can find the methods available for the ShardingManager class <DocsLink path="ShardingManager:Class">here</DocsLink>. Though, you may not be making much use of this section, unlike the next feature we will explore, which you may learn about by clicking [this link](/sharding/additional-information.md).
 :::
 
 ## Getting started
@@ -68,7 +68,7 @@ Let's say your bot is in a total of 3,600 guilds. Using the recommended shard co
 
 ## FetchClientValues
 
-One of the most common sharding utility methods you'll be using is <DocsLink path="class/ShardClientUtil?scrollTo=fetchClientValues" type="method" />. This method retrieves a property on the Client object of all shards.
+One of the most common sharding utility methods you'll be using is <DocsLink path="ShardClientUtil:Class#fetchClientValues" type="method" />. This method retrieves a property on the Client object of all shards.
 
 Take the following snippet of code:
 
@@ -109,7 +109,7 @@ client.on(Events.InteractionCreate, interaction => {
 
 ## BroadcastEval
 
-Next, check out another handy sharding method known as <DocsLink path="class/ShardClientUtil?scrollTo=broadcastEval" type="method" />. This method makes all of the shards evaluate a given method, which receives a `client` and a `context` argument. The `client` argument refers to the Client object of the shard evaluating it. You can read about the `context` argument [here](/sharding/additional-information.md#eval-arguments).
+Next, check out another handy sharding method known as <DocsLink path="ShardClientUtil:Class#broadcastEval" type="method" />. This method makes all of the shards evaluate a given method, which receives a `client` and a `context` argument. The `client` argument refers to the Client object of the shard evaluating it. You can read about the `context` argument [here](/sharding/additional-information.md#eval-arguments).
 
 ```js
 client.shard
