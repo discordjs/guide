@@ -1,3 +1,4 @@
+#sudo su 
 # Requesting more content
 
 Since this guide is made specifically for the discord.js community, we want to be sure to provide the most relevant and up-to-date content. We will, of course, make additions to the current pages and add new ones as we see fit, but fulfilling requests is how we know we're providing content you all want the most.
