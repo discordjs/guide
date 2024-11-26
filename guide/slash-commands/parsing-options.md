@@ -5,7 +5,7 @@
 In this section, we'll cover how to access the values of a command's options. Consider the following `ban` command example with two options:
 
 ```js {7-15}
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
+const { InteractionContextType, PermissionFlagsBits, SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -21,7 +21,7 @@ module.exports = {
 				.setName('reason')
 				.setDescription('The reason for banning'))
 		.setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
-		.setDMPermission(false),
+		.setContexts(InteractionContextType.Guild),
 };
 ```
 
