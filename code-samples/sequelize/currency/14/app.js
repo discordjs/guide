@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { Client, Collection, Events, Formatters, GatewayIntentBits } = require('discord.js');
+const { Client, codeBlock, Collection, Events, GatewayIntentBits } = require('discord.js');
 const { Users, CurrencyShop } = require('./dbObjects.js');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
@@ -86,10 +86,10 @@ client.on(Events.InteractionCreate, async interaction => {
 		return interaction.reply(`You've bought a ${item.name}`);
 	} else if (commandName === 'shop') {
 		const items = await CurrencyShop.findAll();
-		return interaction.reply(Formatters.codeBlock(items.map(i => `${i.name}: ${i.cost}💰`).join('\n')));
+		return interaction.reply(codeBlock(items.map(i => `${i.name}: ${i.cost}💰`).join('\n')));
 	} else if (commandName === 'leaderboard') {
 		return interaction.reply(
-			Formatters.codeBlock(
+			codeBlock(
 				currency.sort((a, b) => b.balance - a.balance)
 					.filter(user => client.users.cache.has(user.user_id))
 					.first(10)

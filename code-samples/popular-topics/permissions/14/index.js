@@ -1,5 +1,5 @@
 const util = require('node:util');
-const { ChannelType, Client, Events, Formatters, GatewayIntentBits, PermissionsBitField } = require('discord.js');
+const { ChannelType, Client, codeBlock, Events, GatewayIntentBits, PermissionsBitField } = require('discord.js');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -111,7 +111,7 @@ client.on(Events.InteractionCreate, interaction => {
 	} else if (commandName === 'my-permissions') {
 		const finalPermissions = interaction.channel.permissionsFor(interaction.member);
 
-		interaction.reply({ content: Formatters.codeBlock(util.inspect(finalPermissions.serialize())) });
+		interaction.reply({ content: codeBlock(util.inspect(finalPermissions.serialize())) });
 	} else if (commandName === 'lock-permissions') {
 		if (!interaction.channel.parent) {
 			return interaction.reply('This channel is not placed under a category.');
@@ -129,7 +129,7 @@ client.on(Events.InteractionCreate, interaction => {
 	} else if (commandName === 'role-permissions') {
 		const roleFinalPermissions = interaction.channel.permissionsFor(interaction.member.roles.highest);
 
-		interaction.reply({ content: Formatters.codeBlock(util.inspect(roleFinalPermissions.serialize())) });
+		interaction.reply({ content: codeBlock(util.inspect(roleFinalPermissions.serialize())) });
 	}
 });
 
