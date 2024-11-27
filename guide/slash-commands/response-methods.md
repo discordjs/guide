@@ -32,14 +32,14 @@ Initially an interaction token is only valid for three seconds, so that's the ti
 
 You may not always want everyone who has access to the channel to see a slash command's response. Previously, you would have had to DM the user to achieve this, potentially encountering the high rate limits associated with DM messages, or simply being unable to do so, if the user's DMs were disabled. 
 
-Thankfully, Discord provides a way to hide response messages from everyone but the executor of the slash command. This type of message is called an `ephemeral` message and can be set by providing `ephemeral: true` in the `InteractionReplyOptions`, as follows:
+Thankfully, Discord provides a way to hide response messages from everyone but the executor of the slash command. This is called an ephemeral message and can be set by providing `flags: MessageFlags.Ephemeral` in the `InteractionReplyOptions`, as follows:
 
 ```js {5}
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'ping') {
-		await interaction.reply({ content: 'Secret Pong!', ephemeral: true });
+		await interaction.reply({ content: 'Secret Pong!', flags: MessageFlags.Ephemeral });
 	}
 });
 ```
@@ -108,7 +108,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 If you have a command that performs longer tasks, be sure to call `deferReply()` as early as possible.
 
-Note that if you want your response to be ephemeral, you must pass an `ephemeral` flag to the `InteractionDeferReplyOptions` here:
+Note that if you want your response to be ephemeral, you must pass the ephemeral boolean to the `InteractionDeferReplyOptions` here:
 
 <!-- eslint-skip -->
 
@@ -158,12 +158,12 @@ If you run this code you should end up having something that looks like this:
 	</DiscordMessage>
 </DiscordMessages>
 
-You can also pass an `ephemeral` flag to the `InteractionReplyOptions`:
+You can also pass the ephemeral flag to the `InteractionReplyOptions`:
 
 <!-- eslint-skip -->
 
 ```js
-await interaction.followUp({ content: 'Pong again!', ephemeral: true });
+await interaction.followUp({ content: 'Pong again!', flags: MessageFlags.Ephemeral });
 ```
 
 <DiscordMessages>

@@ -143,7 +143,7 @@ collector.on('collect', i => {
 	if (i.user.id === interaction.user.id) {
 		i.reply(`${i.user.id} clicked on the ${i.customId} button.`);
 	} else {
-		i.reply({ content: `These buttons aren't for you!`, ephemeral: true });
+		i.reply({ content: `These buttons aren't for you!`, flags: MessageFlags.Ephemeral });
 	}
 });
 
