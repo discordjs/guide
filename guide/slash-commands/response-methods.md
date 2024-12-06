@@ -108,12 +108,10 @@ client.on(Events.InteractionCreate, async interaction => {
 
 If you have a command that performs longer tasks, be sure to call `deferReply()` as early as possible.
 
-Note that if you want your response to be ephemeral, you must pass the ephemeral boolean to the `InteractionDeferReplyOptions` here:
-
-<!-- eslint-skip -->
+Note that if you want your response to be ephemeral, utilize `flags` from `InteractionDeferReplyOptions` here:
 
 ```js
-await interaction.deferReply({ ephemeral: true });
+await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 ```
 
 It is not possible to edit a reply to change its ephemeral state once sent.
