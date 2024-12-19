@@ -272,4 +272,7 @@ There are a few limits to be aware of while planning your embeds due to the API'
 - The sum of all characters from all embed structures in a message must not exceed 6000 characters
 - 10 embeds can be sent per message
 
-Source: [Discord API documentation](https://discord.com/developers/docs/resources/channel#embed-object-embed-limits)
+To display some special characters such as asterisks (*), underscores (_), and tildes (~) in text fields, they must be escaped with the \ character. There is no plan to provide documentation on Discord's sanitization process [(Source)](https://github.com/discord/discord-api-docs/issues/1286). The Message.content API states: 
+- "Discord may strip certain characters from message content, like invalid unicode characters or characters which cause unexpected message formatting. If you are passing user-generated strings into message content, consider sanitizing the data to prevent unexpected behavior. For example, to prevent unexpected mentions you could consider stripping @ characters or placing a zero-width space (U-200B) after them."
+
+Source: [Discord API documentation](https://discord.com/developers/docs/resources/message#embed-object-embed-limits)
