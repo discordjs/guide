@@ -12,7 +12,7 @@ Make sure you're using the latest LTS version of Node. To check your Node versio
 
 ### BaseInteraction
 
-`BaseInteraction#isAnySelectMenu()` has been removed. Use `BaseInteraction#isSelectMenu()` instead.
+`BaseInteraction#isAnySelectMenu()` has been removed. Use `BaseInteraction#isSelectMenu()` instead, which has been repurposed to accept all select menu component types.
 
 ### Client
 
