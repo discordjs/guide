@@ -7,7 +7,7 @@ discord.js provides the <DocsLink section="formatters" /> package which contains
 These functions format strings into all the different Markdown styles supported by Discord.
 
 ```js
-const { blockQuote, bold, italic, quote, spoiler, strikethrough, underline } = require('discord.js');
+const { blockQuote, bold, italic, quote, spoiler, strikethrough, underline, subtext } = require('discord.js');
 const string = 'Hello!';
 
 const boldString = bold(string);
@@ -17,6 +17,7 @@ const underlineString = underline(string);
 const spoilerString = spoiler(string);
 const quoteString = quote(string);
 const blockquoteString = blockQuote(string);
+const subtextString = subtext(string);
 ```
 
 ## Links

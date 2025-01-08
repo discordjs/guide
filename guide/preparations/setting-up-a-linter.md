@@ -29,6 +29,11 @@ yarn add eslint @eslint/js --dev
 pnpm add --save-dev eslint @eslint/js
 ```
 :::
+::: code-group-item bun
+```sh:no-line-numbers
+bun add --dev eslint
+```
+:::
 ::::
 
 

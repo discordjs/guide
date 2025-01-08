@@ -169,6 +169,12 @@ pnpm add pino@next
 pnpm add --global pino-pretty
 ```
 :::
+::: code-group-item bun
+```sh:no-line-numbers
+bun add pino@next
+bun add --global pino-pretty
+```
+:::
 ::::
 
 Pino is highly configurable, so we heavily recommend you take a look at their documentation yourself.
@@ -238,6 +244,11 @@ yarn run dev
 ::: code-group-item pnpm
 ```sh:no-line-numbers
 pnpm run dev
+```
+:::
+::: code-group-item bun
+```sh:no-line-numbers
+bun run dev
 ```
 :::
 ::::
