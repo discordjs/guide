@@ -69,13 +69,13 @@ pm2 stop your-app-name.js
 
 Perhaps one of the more useful features of PM2 is being able to boot up with your Operating System. This feature will ensure that your bot processes will always be started after an (unexpected) reboot (e.g., after a power outage).
 
-The initial steps differ per OS. In this guide, we'll cover those for Windows and Linux/MacOS.
+The initial steps differ per OS. In this guide, we'll cover those for Windows and Linux/macOS.
 
 ### Initial steps for Windows
 
 It is recommended to use `pm2-installer`. Follow the steps over at their [`GitHub`](https://github.com/jessety/pm2-installer).
 
-### Initial steps for Linux/MacOS
+### Initial steps for Linux/macOS
 
 You'll need a start script, which you can get by running the following command:
 
