@@ -73,43 +73,7 @@ The initial steps differ per OS. In this guide, we'll cover those for Windows an
 
 ### Initial steps for Windows
 
-::: tip
-Run these from an administrative command prompt to avoid getting hit with a bunch of UAC dialogs.
-:::
-
-**Install the [pm2-windows-service](https://www.npmjs.com/package/pm2-windows-service) package from npm:**
-
-:::: code-group
-::: code-group-item npm
-```sh:no-line-numbers
-npm install --global pm2-windows-service
-```
-:::
-::: code-group-item yarn
-```sh:no-line-numbers
-yarn global add pm2-windows-service
-```
-:::
-::: code-group-item pnpm
-```sh:no-line-numbers
-pnpm add --global pm2-windows-service
-```
-:::
-::: code-group-item bun
-```sh:no-line-numbers
-bun add --global pm2-windows-service
-```
-:::
-::::
-
-**After installation has finished, install the service by running the following command:**
-
-```sh:no-line-numbers
-pm2-service-install
-```
-::: tip
-You can use the `-n` parameter to set the service name: `pm2-service-install -n "the-service-name"`
-:::
+It is recommended to use `pm2-installer`. Follow the steps over at their [`GitHub`](https://github.com/jessety/pm2-installer).
 
 ### Initial steps for Linux/MacOS
 
