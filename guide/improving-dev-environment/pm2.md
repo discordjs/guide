@@ -69,49 +69,13 @@ pm2 stop your-app-name.js
 
 Perhaps one of the more useful features of PM2 is being able to boot up with your Operating System. This feature will ensure that your bot processes will always be started after an (unexpected) reboot (e.g., after a power outage).
 
-The initial steps differ per OS. In this guide, we'll cover those for Windows and Linux/MacOS.
+The initial steps differ per OS. In this guide, we'll cover those for Windows and Linux/macOS.
 
 ### Initial steps for Windows
 
-::: tip
-Run these from an administrative command prompt to avoid getting hit with a bunch of UAC dialogs.
-:::
+It is recommended to use `pm2-installer`. Follow the steps over at their [`GitHub`](https://github.com/jessety/pm2-installer).
 
-**Install the [pm2-windows-service](https://www.npmjs.com/package/pm2-windows-service) package from npm:**
-
-:::: code-group
-::: code-group-item npm
-```sh:no-line-numbers
-npm install --global pm2-windows-service
-```
-:::
-::: code-group-item yarn
-```sh:no-line-numbers
-yarn global add pm2-windows-service
-```
-:::
-::: code-group-item pnpm
-```sh:no-line-numbers
-pnpm add --global pm2-windows-service
-```
-:::
-::: code-group-item bun
-```sh:no-line-numbers
-bun add --global pm2-windows-service
-```
-:::
-::::
-
-**After installation has finished, install the service by running the following command:**
-
-```sh:no-line-numbers
-pm2-service-install
-```
-::: tip
-You can use the `-n` parameter to set the service name: `pm2-service-install -n "the-service-name"`
-:::
-
-### Initial steps for Linux/MacOS
+### Initial steps for Linux/macOS
 
 You'll need a start script, which you can get by running the following command:
 
