@@ -165,6 +165,10 @@ Removed `Guild#shard` as WebSocket shards are now handled by @discordjs/ws.
 
 `IntegrationApplication#hook` has been removed.
 
+### InteractionResponse
+
+`InteractionResponse` has been removed. This class was encountered when responding to an interaction without `fetchReply` to allow ease of creating interaction collectors. This is no longer necessary as `withResponse` exposes the message.
+
 ### InteractionResponses
 
 #### Ephemeral option removal
