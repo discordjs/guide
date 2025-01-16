@@ -2,7 +2,7 @@
 
 Every button click or select menu selection on a component sent by your bot fires an `interaction`, triggering the <DocsLink path="Client:Class#interactionCreate" /> event. How you decide to handle this will likely depend on the purpose of the components. Options include:
 
-- Waiting for a single interaction via <DocsLink path="InteractionResponse:Class#awaitMessageComponent" type="method"/>.
+- Waiting for a single interaction via `awaitMessageComponent()` on a channel or a message.
 - Listening for multiple interactions over a period of time using an <DocsLink path="InteractionCollector:Class" />.
 - Creating a permanent component handler in the <DocsLink path="Client:Class#interactionCreate" /> event.
 
@@ -34,18 +34,19 @@ Once `deferUpdate()` has been called, future messages can be sent by calling `fo
 
 If you followed our [buttons](/message-components/buttons) guide, the confirmation workflow for the `ban` command is a good example of a situation where your bot is expecting to receive a single response, from either the Confirm or Cancel button.
 
-Begin by storing the <DocsLink path="InteractionResponse:Class" /> as a variable, and calling <DocsLink path="InteractionResponse:Class#awaitMessageComponent" type="method" /> on this instance. This method returns a [Promise](/additional-info/async-await.md) that resolves when any interaction passes its filter (if one is provided), or throws if none are received before the timeout. If this happens, remove the components and notify the user.
+Begin by adding `withResponse` to the options, and then calling <DocsLink path="Message:Class#awaitMessageComponent" type="method" /> on the message. This method returns a [Promise](/additional-info/async-await.md) that resolves when any interaction passes its filter (if one is provided), or throws if none are received before the timeout. If this happens, remove the components and notify the user.
 
-```js {1,6-11}
+```js {1,4,7-12}
 const response = await interaction.reply({
 	content: `Are you sure you want to ban ${target.username} for reason: ${reason}?`,
 	components: [row],
+	withResponse: true,
 });
 
 const collectorFilter = i => i.user.id === interaction.user.id;
 
 try {
-	const confirmation = await response.awaitMessageComponent({ filter: collectorFilter, time: 60_000 });
+	const confirmation = await response.resource.message.awaitMessageComponent({ filter: collectorFilter, time: 60_000 });
 } catch (e) {
 	await interaction.editReply({ content: 'Confirmation not received within 1 minute, cancelling', components: [] });
 }
@@ -57,15 +58,16 @@ The filter applied here ensures that only the user who triggered the original in
 
 With the confirmation collected, check which button was clicked and perform the appropriate action.
 
-```js {10-15}
+```js {11-16}
 const response = await interaction.reply({
 	content: `Are you sure you want to ban ${target.username} for reason: ${reason}?`,
 	components: [row],
+	withResponse: true,
 });
 
 const collectorFilter = i => i.user.id === interaction.user.id;
 try {
-	const confirmation = await response.awaitMessageComponent({ filter: collectorFilter, time: 60_000 });
+	const confirmation = await response.resource.message.awaitMessageComponent({ filter: collectorFilter, time: 60_000 });
 
 	if (confirmation.customId === 'confirm') {
 		await interaction.guild.members.ban(target);
@@ -82,7 +84,7 @@ try {
 
 For situations where you want to collect multiple interactions, the Collector approach is better suited than awaiting singular interactions. Following on from the [select menus](/message-components/select-menus) guide, you're going to extend that example to use an <DocsLink path="InteractionCollector:Class"/> to listen for multiple <DocsLink path="StringSelectMenuInteraction:Class"/>s.
 
-Begin by storing the <DocsLink path="InteractionResponse:Class" /> as a variable, and calling <DocsLink path="InteractionResponse:Class#createMessageComponentCollector" type="method" /> on this instance. This method returns an InteractionCollector that will fire its <DocsLink path="InteractionCollector:Class#collect" /> event whenever an interaction passes its filter (if one is provided).
+Begin by adding `withResponse` to the options, and then calling <DocsLink path="Message:Class#createMessageComponentCollector" type="method" /> on this instance. This method returns an InteractionCollector that will fire its <DocsLink path="InteractionCollector:Class#collect" /> event whenever an interaction passes its filter (if one is provided).
 
 In the `collect` event, each interaction is a <DocsLink path="StringSelectMenuInteraction:Class" /> thanks to the `componentType: ComponentType.StringSelect` option provided to the collector (and because that was the only type of component in the message). The selected value(s) are available via the <DocsLink path="StringSelectMenuInteraction:Class#values" /> property.
 
@@ -90,9 +92,10 @@ In the `collect` event, each interaction is a <DocsLink path="StringSelectMenuIn
 const response = await interaction.reply({
 	content: 'Choose your starter!',
 	components: [row],
+	withResponse: true,
 });
 
-const collector = response.createMessageComponentCollector({ componentType: ComponentType.StringSelect, time: 3_600_000 });
+const collector = response.resource.message.createMessageComponentCollector({ componentType: ComponentType.StringSelect, time: 3_600_000 });
 
 collector.on('collect', async i => {
 	const selection = i.values[0];
