@@ -117,12 +117,23 @@ The following error codes have been removed as they either have no use or are ha
 
 ### Emoji
 
-`Emoji#url` has been removed. To allow more granular control of the returned extension, `Emoji#imageURL()` serves as a replacement:
+#### Image URL is now dynamic
 
-```diff
-- emoji.url; // Always returns PNG if not animated.
-+ emoji.imageURL({ extension: this.animated ? "gif" : "webp" }); // You can choose the format now.
+`Emoji#imageURL()` now dynamically handles the extension. Previously, you would have to do this:
+
+```js
+emoji.imageURL({ extension: this.animated ? 'gif' : 'webp' });
 ```
+
+Now, you can simply do this:
+
+```js
+emoji.imageURL();
+```
+
+#### Emoji URL getter removal
+
+`Emoji#url` has been removed. To allow more granular control of the returned extension, Use `Emoji#imageURL()` instead.
 
 ### Events
 
@@ -273,7 +284,7 @@ However, you would have already noticed that this no longer works, so this metho
 
 ### TextBasedChannel
 
-`TextBasedChannel#bulkDelete()` could return a collection containing `undefined` values. This was because in order to return these messages, the cache must be checked, especially when only snowflakes were provided. The return type of this method has thus changed to only return the snowflakes that were bulk deleted.
+`TextBasedChannel#bulkDelete()` could return a collection containing `undefined` values. This was because in order to return these messages, the cache must be checked, especially when only snowflakes were provided. The return type of this method has thus changed to only return an array of snowflakes that were bulk deleted.
 
 ### ThreadChannel
 
