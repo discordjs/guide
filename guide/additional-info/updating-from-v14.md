@@ -165,6 +165,16 @@ await interaction.reply({ content: 'This is an ephemeral response.', flags: Mess
 
 There are two ways to achieve the same behaviour, so the "helper" option has been removed. In this case, that would be `ephemeral`, as all that did was assign `MessageFlags.Ephemeral` internally.
 
+#### Fetch reply option removal
+
+`fetchReply` has been removed in favor of `withResponse`. If you were using the `fetchReply` option or fetching the response of an interaction, it is recommended to use `withResponse` instead, as the message is exposed without an additional API call:
+
+```diff
+- const message = await interaction.reply({ content: 'Hello!', fetchReply: true });
++ const response = await interaction.reply({ content: 'Hello!', withResponse: true });
++ const { message } = response.resource;
+```
+
 #### Premium response type
 
 Discord no longer supports the `PREMIUM_REQUIRED` interaction response type. In the past, you would have done this:
