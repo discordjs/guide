@@ -223,6 +223,10 @@ However, you would have already noticed that this no longer works, so this metho
 
 `NewsChannel` has been renamed to `AnnouncementChannel`.
 
+### PermissionOverwrites
+
+`PermissionOverwrites.resolve()` previously relied on cache if a snowflake was passed. This method no longer relies on cache and instead requires an explicit `type` if supplied.
+
 ### RoleManager
 
 `RoleManager#fetch()` used to return `null` when fetching a role that did not exist. This logic has been removed and will throw an error instead.
