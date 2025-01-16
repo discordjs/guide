@@ -47,7 +47,7 @@ const collectorFilter = i => i.user.id === interaction.user.id;
 
 try {
 	const confirmation = await response.resource.message.awaitMessageComponent({ filter: collectorFilter, time: 60_000 });
-} catch (e) {
+} catch {
 	await interaction.editReply({ content: 'Confirmation not received within 1 minute, cancelling', components: [] });
 }
 ```
@@ -75,7 +75,7 @@ try {
 	} else if (confirmation.customId === 'cancel') {
 		await confirmation.update({ content: 'Action cancelled', components: [] });
 	}
-} catch (e) {
+} catch {
 	await interaction.editReply({ content: 'Confirmation not received within 1 minute, cancelling', components: [] });
 }
 ```
