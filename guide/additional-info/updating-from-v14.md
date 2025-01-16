@@ -36,7 +36,7 @@ Make sure you're using the latest LTS version of Node. To check your Node versio
 
 `client.on("ready")` has been removed. `"clientReady"` is the replacement. If you used `client.on(Events.ClientReady)`, you do not need to change anything.
 
-#### Shard disonnect event
+#### Shard disconnect event
 
 `client.on("shardDisconnect")` has been removed as the WebSocket manager replaces this functionality.
 
@@ -138,7 +138,7 @@ emoji.imageURL();
 ### Events
 
 - `Events.ShardError` has been removed.
-- `Events.ShardReady` has been remvoved.
+- `Events.ShardReady` has been removed.
 - `Events.ShardReconnecting` has been removed.
 - `Events.ShardResume` has been removed.
 - `Events.WebhooksUpdate` now returns a string of `"webhooksUpdate"`. Previously, it returned `"webhookUpdate"`. This is to bring it in line with the name of Discord's gateway event (`WEBHOOKS_UPDATE`).
@@ -272,7 +272,7 @@ However, you would have already noticed that this no longer works, so this metho
 
 ### ShardClientUtil
 
-`ShardClientUtil#ids` and `ShardClientUtil#count` hav been removed in favor of `Client#ws#getShardIds()` and `Client#ws#getShardCount()`.
+`ShardClientUtil#ids` and `ShardClientUtil#count` have been removed in favor of `Client#ws#getShardIds()` and `Client#ws#getShardCount()`.
 
 ### StageInstance
 
