@@ -271,6 +271,10 @@ However, you would have already noticed that this no longer works, so this metho
 
 `TeamMember#permissions` has been removed. Use `TeamMemberManager#role` instead.
 
+### TextBasedChannel
+
+`TextBasedChannel#bulkDelete()` could return a collection containing `undefined` values. This was because in order to return these messages, the cache must be checked, especially when only snowflakes were provided. The return type of this method has thus changed to only return the snowflakes that were bulk deleted.
+
 ### ThreadChannel
 
 `ThreadChannel#fetchOwner()` used to return `null` when the thread owner was not present in the thread. This logic has been removed and will throw an error instead.
