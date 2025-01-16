@@ -174,7 +174,7 @@ Removed `Guild#shard` as WebSocket shards are now handled by @discordjs/ws.
 
 ### MessageManager
 
-`MessageManager#crosspost()` has been moved to `GuildMessageManager`. This means it will no longer be exposed in `DMMessageManager`
+`MessageManager#crosspost()` has been moved to `GuildMessageManager`. This means it will no longer be exposed in `DMMessageManager`.
 
 ## IntegrationApplication
 
@@ -292,7 +292,7 @@ However, you would have already noticed that this no longer works, so this metho
 
 ### ThreadManager
 
-`ThreadManager#fetch()` now throws an error when the provided thread id doesn't belong to the current channel
+`ThreadManager#fetch()` now throws an error when the provided thread id doesn't belong to the current channel.
 
 ### ThreadMember
 
