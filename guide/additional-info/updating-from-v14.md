@@ -10,6 +10,10 @@ Make sure you're using the latest LTS version of Node. To check your Node versio
 
 `ActionRow.from()` has been removed. Use `ActionRowBuilder.from()` instead.
 
+### ApplicationCommand
+
+`ApplicationCommand#dmPermission` and `ApplicationCommand#setDMPermission()` have been removed. This was legacy functionality for commands—use contexts instead.
+
 ### BaseInteraction
 
 `BaseInteraction#isAnySelectMenu()` has been removed. Use `BaseInteraction#isSelectMenu()` instead, which has been repurposed to accept all select menu component types.
@@ -198,6 +202,10 @@ However, you would have already noticed that this no longer works, so this metho
 ### InviteStageInstance
 
 `InviteStageInstance` has been removed.
+
+### Message
+
+`Message#interaction` has been removed. Use `Message#interactionMetadata` instead.
 
 ### MessagePayload
 
