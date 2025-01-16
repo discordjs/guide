@@ -161,6 +161,10 @@ Removed `Guild#shard` as WebSocket shards are now handled by @discordjs/ws.
 
 `GuildChannelManager#addFollower()` now returns `FollowedChannelData` instead of a snowflake. This helps to expose the created webhook id in the target channel.
 
+## IntegrationApplication
+
+`IntegrationApplication#hook` has been removed.
+
 ### InteractionResponses
 
 #### Ephemeral option removal
