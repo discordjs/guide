@@ -14,6 +14,10 @@ Make sure you're using the latest LTS version of Node. To check your Node versio
 
 `ApplicationCommand#dmPermission` and `ApplicationCommand#setDMPermission()` have been removed. This was legacy functionality for commands—use contexts instead.
 
+### AnnouncementChannel
+
+`AnnouncementChannel#addFollower()` now returns `FollowedChannelData` instead of a snowflake. This helps to expose the created webhook id in the target channel.
+
 ### BaseInteraction
 
 `BaseInteraction#isAnySelectMenu()` has been removed. Use `BaseInteraction#isSelectMenu()` instead, which has been repurposed to accept all select menu component types.
@@ -152,6 +156,10 @@ Removed `Guild#shard` as WebSocket shards are now handled by @discordjs/ws.
 ### GuildBanManager
 
 `GuildBanManager#create()` no longer accepts `deleteMessageDays`. This is replaced with `deleteMessageSeconds`.
+
+### GuildChannelManager
+
+`GuildChannelManager#addFollower()` now returns `FollowedChannelData` instead of a snowflake. This helps to expose the created webhook id in the target channel.
 
 ### InteractionResponses
 
