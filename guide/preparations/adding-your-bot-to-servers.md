@@ -1,6 +1,6 @@
 # Adding your bot to servers
 
-After you [set up a bot application](/preparations/setting-up-a-bot-application.md), you'll notice that it's not in any servers yet. So how does that work?
+After you [set up a bot application](https://discord.com/api/oauth2/authorize?client_id=123456789012345678&permissions=0&scope=bot%20applications.commands), you'll notice that it's not in any servers yet. So how does that work?
 
 Before you're able to see your bot in your own (or other) servers, you'll need to add it by creating and using a unique invite link using your bot application's client id.
 
