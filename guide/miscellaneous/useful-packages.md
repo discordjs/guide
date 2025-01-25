@@ -77,7 +77,7 @@ Official documentation: [https://github.com/zspecza/common-tags](https://github.
 
 Common-tags is a library all about working with template literals.  
 So far, you have probably only used them for interpolating variables into your strings, but they can do a whole lot more.
-If you got time, you should check out [the MDN's documentation about *tagged literals*.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates).
+If you've got time, you should check out [the MDN's documentation about *tagged literals*.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates).
 
 Ever got annoyed your multi-line strings had nasty bits of indentation in them,
 but you did not want to remove the indentation in your source code?  
