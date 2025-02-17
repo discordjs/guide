@@ -176,7 +176,7 @@ Removed `Guild#shard` as WebSocket shards are now handled by @discordjs/ws.
 
 `MessageManager#crosspost()` has been moved to `GuildMessageManager`. This means it will no longer be exposed in `DMMessageManager`.
 
-## IntegrationApplication
+### IntegrationApplication
 
 `IntegrationApplication#hook` has been removed.
 
