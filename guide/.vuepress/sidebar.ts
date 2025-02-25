@@ -5,7 +5,6 @@ export default {
 			children: [
 				'/',
 				'/requesting-more-content.md',
-				'/whats-new.md',
 			],
 		},
 		{
@@ -30,7 +29,6 @@ export default {
 			children: [
 				'/',
 				'/requesting-more-content.md',
-				'/whats-new.md',
 			],
 		},
 		{
