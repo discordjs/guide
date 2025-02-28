@@ -30,7 +30,7 @@ Make sure you're using the latest LTS version of Node. To check your Node versio
 
 #### Emojis
 
-`Client#emojis` has been removed due to confusion with the introduction of application emojis and performance impact. Use `resolveGuildEmoji` utility function to get a cached guild emoji.
+`Client#emojis` has been removed due to confusion with the introduction of application emojis and performance impact. Use the `resolveGuildEmoji()` utility function to get a cached guild emoji.
 
 #### Ping
 
