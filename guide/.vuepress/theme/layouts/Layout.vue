@@ -19,7 +19,7 @@
 					<span class="notification-icon"><PartyPopperIcon /></span>
 					<span>
 						You're browsing the in-development guide for discord.js v15.
-						Check out <router-link to="/whats-new.html">what's new</router-link>, or browse the <a href="https://v14.discordjs.guide">v14 guide</a>.
+						Browse the <a href="https://v14.discordjs.guide">v14 guide</a>.
 					</span>
 				</Notification>
 			</Notifications>
