@@ -147,6 +147,10 @@ emoji.imageURL();
 
 `Emoji#url` has been removed. To allow more granular control of the returned extension, Use `Emoji#imageURL()` instead.
 
+### EventEmitter
+
+`BaseClient`, `Shard`, `ShardingManager`, and `Collector` now extend `AsyncEventEmitter` instead of `EventEmitter`. This comes from [@vladfrangu/async_event_emitter](https://npmjs.com/package/@vladfrangu/async_event_emitter).
+
 ### Events
 
 - `Events.ShardError` has been removed.
