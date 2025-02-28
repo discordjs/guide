@@ -192,6 +192,10 @@ Removed `Guild#shard` as WebSocket shards are now handled by @discordjs/ws.
 
 `GuildChannelManager#addFollower()` now returns `FollowedChannelData` instead of a snowflake. This helps to expose the created webhook id in the target channel.
 
+### GuildMemberResolvable
+
+`GuildMemberResolvable` type has been removed. It was defined as `GuildMember | UserResolvable`, but `UserResolvable` already includes `GuildMember`. Use `UserResolvable` instead.
+
 ### MessageManager
 
 `MessageManager#crosspost()` has been moved to `GuildMessageManager`. This means it will no longer be exposed in `DMMessageManager`.
@@ -229,10 +233,6 @@ There are two ways to achieve the same behaviour, so the "helper" option has bee
 + const response = await interaction.reply({ content: 'Hello!', withResponse: true });
 + const { message } = response.resource;
 ```
-
-#### GuildMemberResolvable
-
-`GuildMemberResolvable` type has been removed. It was defined as `GuildMember | UserResolvable`, but `UserResolvable` already includes `GuildMember`. Use `UserResolvable` instead.
 
 #### Premium response type
 
