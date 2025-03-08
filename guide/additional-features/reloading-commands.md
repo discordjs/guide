@@ -1,6 +1,6 @@
 # Reloading Commands
 
-When writing your commands, you may find it tedious to restart your bot every time for testing the smallest changes. With a command handler, you can eliminate this issue and reload your commands while your bot is running.
+When writing your commands, you may find it tedious to restart your bot every time for testing the smallest changes. With a command handler, you can eliminate this issue and reload your commands while your bot is still running without creating issues with users using your bot.
 
 ::: warning
 ESM does not support require and clearing import cache. You can use [hot-esm](https://www.npmjs.com/package/hot-esm) to import files without cache. Windows support is experimental per [this issue](https://github.com/vinsonchuong/hot-esm/issues/33).
@@ -11,7 +11,7 @@ This section assumes you followed the [Command Handling](/creating-your-bot/comm
 :::
 
 ::: warning
-The reload command ideally should not be used by every user. You should deploy it as a guild command in a private guild.
+The reload command ideally should not be used by every user. You should deploy it as a guild command in a private guild to have more security over powerful commands.
 :::
 
 ```js
@@ -31,7 +31,7 @@ module.exports = {
 };
 ```
 
-First off, you need to check if the command you want to reload exists. You can do this check similarly to getting a command.
+First off, you need to check if the command you want to reload exists. You can do this check similarly to fetching a command.
 
 ```js {4-9}
 module.exports = {
