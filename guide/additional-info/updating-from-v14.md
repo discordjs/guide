@@ -134,7 +134,7 @@ The following error codes have been removed as they either have no use or are ha
 `Emoji#imageURL()` now dynamically handles the extension. Previously, you would have to do this:
 
 ```js
-emoji.imageURL({ extension: this.animated ? 'gif' : 'webp' });
+emoji.imageURL({ extension: emoji.animated ? 'gif' : 'webp' });
 ```
 
 Now, you can simply do this:
