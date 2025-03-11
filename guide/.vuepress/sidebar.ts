@@ -5,7 +5,6 @@ export default {
 			children: [
 				'/',
 				'/requesting-more-content.md',
-				'/whats-new.md',
 			],
 		},
 		{
@@ -30,7 +29,6 @@ export default {
 			children: [
 				'/',
 				'/requesting-more-content.md',
-				'/whats-new.md',
 			],
 		},
 		{
@@ -150,8 +148,7 @@ export default {
 				'/additional-info/collections.md',
 				'/additional-info/async-await.md',
 				'/additional-info/rest-api.md',
-				'/additional-info/changes-in-v13.md',
-				'/additional-info/changes-in-v14.md',
+				'/additional-info/updating-from-v14.md',
 			],
 		},
 	],
