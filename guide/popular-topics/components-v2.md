@@ -2,7 +2,11 @@
 
 While you might be familiar with [embeds](/popular-topics/embeds.md) in Discord, there are now other ways to style your messages with new layout and content components. The interactive components ([buttons](/message-components/buttons.md) and [select menus](/message-components/select-menus.md)) have stayed the same, but it is now possible to change the position of those components in combination of the new layout components.
 
-To use the new Components V2 (CV2) components, you need to pass in the new `IsComponentsV2` message flag from the <DocsLink path="MessageFlags:Enum" /> enum when sending a message. The flag should only be added to the message's `flags` field when the message contains CV2 components, unlike the `Ephemeral` message flag that can be added when you defer an interaction response.
+To use the new **Components V2 (CV2)** components, you need to pass in the new `IsComponentsV2` message flag from the <DocsLink path="MessageFlags:Enum" /> enum when sending a message. The flag should only be added to the message's `flags` field when the message contains CV2 components, unlike the `Ephemeral` message flag that can be added when you defer an interaction response.
+
+::: danger
+Once a message is sent or edited with the `IsComponentsV2` message flag, the flag **cannot** be removed from that message.
+:::
 
 All components, both new and existing, now have a new field `id` (which should not be confused with the existing `custom_id` field for interactive components), which is an optional 32-bit integer identifier for a component presented in a message. It is used to identify non-interactive components in the response from an interaction. More information about these can be found [here](https://discord.com/developers/docs/components/reference#anatomy-of-a-component).
 
@@ -14,41 +18,112 @@ CV2 brought new layout components and some new content components. The content c
 
 ### Section
 
-A Section is a top-level layout component allowing you to display text next to an accessory. You can use the <DocsLink path="SectionBuilder:Class" /> utility class to easily create a Section.
+A Section is a layout component allowing you to display text next to an accessory. You can use the <DocsLink path="SectionBuilder:Class" /> utility class to easily create a Section component. Every Section component must have at least 1 and at most 3 Text Display components together with either a Thumbnail or Button component.
 
-The example below shows how you can create a Section containing three Text Display components with a Button component on the right, next to the text.
+The example below shows how you can send a Section component in a channel containing three Text Display components with a Button component on the right, next to the text.
 
 ```js
-const { SectionBuilder, TextDisplayBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { SectionBuilder, TextDisplayBuilder, ButtonBuilder, ButtonStyle, MessageFlags } = require('discord.js');
 
 const exampleSection = new SectionBuilder()
 	.addTextDisplayComponents(
 		new TextDisplayBuilder()
-			.setContent(
-				'This text is inside a new Text Display component! You can use **any __markdown__** available inside this component too.'
-			),
+			.setContent('This text is inside a new Text Display component! You can use **any __markdown__** available inside this component too.'),
 		new TextDisplayBuilder()
-			.setContent(
-				'Using a section, you may only use up to three Text Display components.'
-			),
+			.setContent('Using a section, you may only use up to three Text Display components.'),
 		new TextDisplayBuilder()
-			.setContent(
-				'And you can place one button or one thumbnail component next to it!'
-			)
+			.setContent('And you can place one button or one thumbnail component next to it!'),
 	)
 	.setButtonAccessory(
 		new ButtonBuilder()
 			.setCustomId('exampleButton')
 			.setLabel('Button inside a Section')
-			.setStyle(ButtonStyle.Primary)
-	)
+			.setStyle(ButtonStyle.Primary),
+	);
+
+await channel.send({
+	components: [exampleSection],
+	flags: MessageFlags.IsComponentsV2,
+});
 ```
 
-## Text Display
+### Text Display
 
-A Text Display is a top-level content component allowing you to add text to your message formatted with Discord's available markdown and the mention of users and roles (which actually notifies the users and roles, instead of the text in embeds!). This component is very similar to the `content` field of a message, but using multiple of these components you can control the layout of your message.
+A Text Display is a content component allowing you to add text to your message formatted with Discord's available markdown and the mention of users and roles (which actually notifies the users and roles, instead of the text in embeds!). This component is very similar to the `content` field of a message, but using multiple of these components you can control the layout of your message. You can use the <DocsLink path="TextDisplayBuilder:Class" /> utility class to easily create a Text Display component.
 
-There is some more spacing
+The example below shows how you can send a Text Display component in a channel.
+
+```js
+const { TextDisplayBuilder, MessageFlags } = require('discord.js');
+
+const exampleTextDisplay = new TextDisplayBuilder()
+	.setContent('This text is inside a new Text Display component! You can use **any __markdown__** available inside this component too.');
+
+await channel.send({
+	components: [exampleTextDisplay],
+	flags: MessageFlags.IsComponentsV2,
+});
+```
+
+### Thumbnail
+
+A Thumbnail is a content component that is visually similar to the `icon_url` property of the `author` field inside an embed, but with CV2 it can only be added as an accessory inside a [Section](/popular-topics/components-v2.md#section) component. However, you can add ALT text to the image as well as marking the image as spoiler. You can use the <DocsLink path="ThumbnailBuilder:Class" /> utility class to easily create a Thumbnail component.
+
+The example below shows how you can send a Thumbnail component as an Section component accessory in a channel.
+
+```js
+const { AttachmentBuilder, SectionBuilder, TextDisplayBuilder, ThumbnailBuilder, MessageFlags } = require('discord.js');
+
+const file = new AttachmentBuilder('../assets/image.png');
+
+const exampleSection = new SectionBuilder()
+	.addTextDisplayComponents(
+		new TextDisplayBuilder()
+			.setContent('This text is inside a new Text Display component! You can use **any __markdown__** available inside this component too.'),
+	)
+	.setThumbnailAccessory(
+		new ThumbnailBuilder()
+			.setDescription('ALT text displaying on the image')
+			.setURL('attachment://image.png'), // Supports arbitrary URLs such as 'https://i.imgur.com/AfFp7pu.png' as well.
+	);
+
+await channel.send({
+	components: [exampleSection],
+	files: [file],
+	flags: MessageFlags.IsComponentsV2,
+});
+```
+
+For more information how to set up custom attachments to use in your Thumbnail component URL, you can look at the guide for [attaching images in embeds](/popular-topics/embeds.md#attaching-images).
+
+### Media Gallery
+
+A Media Gallery is a content component that can display up to 10 media attachments formatted in an structured gallery. Each attachment in the Media Gallery component can have an optional ALT text (description) and can be marked as spoiler. You can use the <DocsLink path="MediaGalleryBuilder:Class" /> utility class to easily create a Media Gallery component.
+
+The example below shows how you can send a Media Gallery component in a channel.
+
+```js
+const { AttachmentBuilder, MediaGalleryBuilder, MediaGalleryItemBuilder, MessageFlags } = require('discord.js');
+
+const file = new AttachmentBuilder('../assets/image.png');
+
+const exampleGallery = new MediaGalleryBuilder()
+	.addItems(
+		new MediaGalleryItemBuilder()
+			.setDescription('ALT text displaying on an image from the AttachmentBuilder')
+			.setURL('attachment://image.png'),
+		new MediaGalleryItemBuilder()
+			.setDescription('ALT text displaying on an image from an external URL')
+			.setURL('https://i.imgur.com/AfFp7pu.png')
+			.setSpoiler(true), // Will display as blurred out image
+	);
+
+await channel.send({
+	components: [exampleGallery],
+	files: [file],
+	flags: MessageFlags.IsComponentsV2,
+});
+```
 
 
 Source: [Discord API documentation](https://discord.com/developers/docs/components/reference)
