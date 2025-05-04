@@ -214,7 +214,7 @@ await channel.send({
 });
 ```
 
-### Limitations
+## Limitations
 
 There are a few limits set by the Discord API to be aware of when using Components V2 in your messages. These limits are:
 
