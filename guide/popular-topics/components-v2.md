@@ -67,7 +67,7 @@ await channel.send({
 
 ### Thumbnail
 
-A Thumbnail is a content component that is visually similar to the `icon_url` property of the `author` field inside an embed, but with CV2 it can only be added as an accessory inside a [Section](/popular-topics/components-v2.md#section) component. However, you can add ALT text to the image as well as marking the image as spoiler. You can use the <DocsLink path="ThumbnailBuilder:Class" /> utility class to easily create a Thumbnail component.
+A Thumbnail is a content component that is visually similar to the `thumbnail` field inside an embed, but with CV2 it can only be added as an accessory inside a [Section](/popular-topics/components-v2.md#section) component. However, you can add ALT text to the image as well as marking the image as spoiler. You can use the <DocsLink path="ThumbnailBuilder:Class" /> utility class to easily create a Thumbnail component.
 
 The example below shows how you can send a Thumbnail component as an Section component accessory in a channel.
 
@@ -98,7 +98,7 @@ For more information how to set up custom attachments to use in your Thumbnail c
 
 ### Media Gallery
 
-A Media Gallery is a content component that can display up to 10 media attachments formatted in an structured gallery. Each attachment in the Media Gallery component can have an optional ALT text (description) and can be marked as spoiler. You can use the <DocsLink path="MediaGalleryBuilder:Class" /> utility class to easily create a Media Gallery component.
+A Media Gallery is a content component that can display up to 10 media attachments formatted in an structured gallery. Each attachment in the Media Gallery component can have an optional ALT text (description) and can be marked as spoiler. You can use the <DocsLink path="MediaGalleryBuilder:Class" /> and <DocsLink path="MediaGalleryItemBuilder:Class" /> utility classes to easily create a Media Gallery component and its items.
 
 The example below shows how you can send a Media Gallery component in a channel.
 
@@ -115,7 +115,7 @@ const exampleGallery = new MediaGalleryBuilder()
 		new MediaGalleryItemBuilder()
 			.setDescription('ALT text displaying on an image from an external URL')
 			.setURL('https://i.imgur.com/AfFp7pu.png')
-			.setSpoiler(true), // Will display as blurred out image
+			.setSpoiler(true), // Will display as a blurred image
 	);
 
 await channel.send({
@@ -125,5 +125,93 @@ await channel.send({
 });
 ```
 
+### File
+
+A File is a content component that can display any uploaded file as an attachment to a message and reference it in the File component itself. It can only display 1 attachment per File component, but using multiple File components you can upload multiple files in one message. File components cannot have ALT text (description) unlike a Thumbnail or Media Gallery component, but you can add a spoiler to the component if you would like to. You can use the <DocsLink path="FileBuilder:Class" /> utility class to easily create a File component.
+
+The example below shows how you can send a File component in a channel.
+
+```js
+const { AttachmentBuilder, FileBuilder, MessageFlags } = require('discord.js');
+
+const file = new AttachmentBuilder('../assets/guide.pdf');
+
+const exampleFile = new FileBuilder()
+	.setURL('attachment://guide.pdf');
+
+await channel.send({
+	components: [exampleFile],
+	files: [file],
+	flags: MessageFlags.IsComponentsV2,
+});
+```
+
+### Separator
+
+A Separator is a layout component that adds some vertical padding and optional visiual divison between components. You can select the amount of padding used for the Separator component (small or large) as well as whether a visual divider should be displayed or not (defaults to `true`). You can use the <DocsLink path="SeparatorBuilder:Class" /> utility class to easily create a Separator component.
+
+The example below shows how you can send a Separator component in a channel.
+
+```js
+const { SeparatorBuilder, SeparatorSpacingSize, MessageFlags } = require('discord.js');
+
+const exampleSeparator = new SeparatorBuilder()
+	.setDivider(false) // No line displayed
+	.setSpacing(SeparatorSpacingSize.Large);
+
+await channel.send({
+	components: [exampleSeparator],
+	flags: MessageFlags.IsComponentsV2,
+});
+```
+
+### Container
+
+A Container is a layout component that will group its children components and has an optional color bar on the left, just like embeds. The great difference of having it optional is that not specifying any color for the color bar will make the left side of the Container component match the background color of the Container component itself. You can also mark the Container component as spoiler, to make all contents inside it blurred. You can use the <DocsLink path="ContainerBuilder:Class" /> utility class to easily create a Container component.
+
+The example below shows how to send a Container component in a channel containing a Text Display component, an Action Row component with a User Select component, two Separator components, and a Section component with two Text Display components where a Button component is present as an accessory.
+
+```js
+const { ContainerBuilder, TextDisplayBuilder, ActionRowBuilder, UserSelectMenuBuilder, SeparatorBuilder, MessageFlags } = require('discord.js');
+
+const exampleContainer = new ContainerBuilder()
+	.setAccentColor(0x0099FF)
+	.addTextDisplayComponents(
+		new TextDisplayBuilder()
+			.setContent('This text is inside a new Text Display component! You can use **any __markdown__** available inside this component too.'),
+	)
+	.addActionRowComponents(
+		new ActionRowBuilder()
+			.setComponents(
+				new UserSelectMenuBuilder()
+					.setCustomId('exampleSelect')
+					.setPlaceholder('Select users')
+			),
+	)
+	.addSeparatorComponents(
+		new SeparatorBuilder(),
+		new SeparatorBuilder(),
+	)
+	.addSectionComponents(
+		new SectionBuilder()
+			.addTextDisplayComponents(
+				new TextDisplayBuilder()
+					.setContent('This text is inside a new Text Display component! You can use **any __markdown__** available inside this component too.'),
+				new TextDisplayBuilder()
+					.setContent('And you can place one button or one thumbnail component next to it!'),
+			)
+			.setButtonAccessory(
+				new ButtonBuilder()
+					.setCustomId('exampleButton')
+					.setLabel('Button inside a Section')
+					.setStyle(ButtonStyle.Primary),
+			),
+	);
+
+await channel.send({
+	components: [exampleContainer],
+	flags: MessageFlags.IsComponentsV2,
+});
+```
 
 Source: [Discord API documentation](https://discord.com/developers/docs/components/reference)
