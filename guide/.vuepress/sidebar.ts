@@ -94,7 +94,7 @@ export default {
 				'/popular-topics/audit-logs.md',
 				'/popular-topics/canvas.md',
 				'/popular-topics/collectors.md',
-				'/popular-topoic/components-v2.md',
+				'/popular-topics/components-v2.md',
 				'/popular-topics/embeds.md',
 				'/popular-topics/errors.md',
 				'/popular-topics/formatters.md',
