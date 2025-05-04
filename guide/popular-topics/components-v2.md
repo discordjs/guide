@@ -19,7 +19,7 @@ A Section is a top-level layout component allowing you to display text next to a
 The example below shows how you can create a Section containing three Text Display components with a Button component on the right, next to the text.
 
 ```js
-const { SectionBuilder, TextDisplayBuilder, ButtonStyle } = require('discord.js');
+const { SectionBuilder, TextDisplayBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 const exampleSection = new SectionBuilder()
 	.addTextDisplayComponents(
