@@ -214,4 +214,15 @@ await channel.send({
 });
 ```
 
+### Limitations
+
+There are a few limits set by the Discord API to be aware of when using Components V2 in your messages. These limits are:
+
+- To use any of the components listed under [New components](/popular-topics/components-v2.md#new-components) you must set the `IsComponentsV2` message flag in your message payload.
+- Setting the `IsComponentsV2` message flag will disable the `content` and `embeds` fields. You can use [Text Display](/popular-topics/components-v2.md#text-display) and [Container](/popular-topics/components-v2.md#container) components as replacements.
+- Setting the `IsComponentsV2` message flag will disable the `poll` and `stickers` fields, and there are no CV2 replacements for these fields you can use.
+- When upgrading a message to a CV2 flagged message by editing the message with the `IsComponentsV2` flag, all mentioned fields in the message object (`content`, `embeds`, `poll` and `stickers`) need to be set to `null`.
+- Attachments won't show by default, they must be set through the available media components ([Thumbnail](/popular-topics/components-v2.md#thumbnail), [Media Gallery](/popular-topics/components-v2.md#media-gallery) and [File](/popular-topics/components-v2.md#file)).
+- Messages allow up to 40 total components.
+
 Source: [Discord API documentation](https://discord.com/developers/docs/components/reference)
