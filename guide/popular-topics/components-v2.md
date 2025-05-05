@@ -18,7 +18,11 @@ CV2 brought new layout components and some new content components. The content c
 
 ### Text Display
 
-A Text Display is a content component allowing you to add text to your message formatted with Discord's available markdown and the mention of users and roles (which actually notifies the users and roles, instead of the text in embeds!). This component is very similar to the `content` field of a message, but using multiple of these components you can control the layout of your message. You can use the <DocsLink path="TextDisplayBuilder:Class" /> utility class to easily create a Text Display component.
+A Text Display is a content component allowing you to add text to your message formatted with Discord's available markdown. This component is very similar to the `content` field of a message, but using multiple of these components you can control the layout of your message. You can use the <DocsLink path="TextDisplayBuilder:Class" /> utility class to easily create a Text Display component.
+
+::: tip
+In addition of the available markdown in Text Display components, you can also use the mention of users and roles, which actually notifies these users and roles, unlike the mentions used in embeds! You can always add the `allowedMentions` field to your message payload to control who will be notified
+:::
 
 The example below shows how you can send a Text Display component in a channel.
 
@@ -224,5 +228,3 @@ There are a few limits set by the Discord API to be aware of when using Componen
 - When upgrading a message to a CV2 flagged message by editing the message with the `IsComponentsV2` flag, all mentioned fields in the message object (`content`, `embeds`, `poll` and `stickers`) need to be set to `null`.
 - Attachments won't show by default, they must be set through the available media components ([Thumbnail](/popular-topics/components-v2.md#thumbnail), [Media Gallery](/popular-topics/components-v2.md#media-gallery) and [File](/popular-topics/components-v2.md#file)).
 - Messages allow up to 40 total components.
-
-Source: [Discord API documentation](https://discord.com/developers/docs/components/reference)
