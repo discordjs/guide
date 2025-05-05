@@ -21,7 +21,7 @@ CV2 brought new layout components and some new content components. The content c
 A Text Display is a content component allowing you to add text to your message formatted with Discord's available markdown. This component is very similar to the `content` field of a message, but using multiple of these components you can control the layout of your message. You can use the <DocsLink path="TextDisplayBuilder:Class" /> utility class to easily create a Text Display component.
 
 ::: tip
-In addition of the available markdown in Text Display components, you can also use the mention of users and roles, which actually notifies these users and roles, unlike the mentions used in embeds! You can always add the `allowedMentions` field to your message payload to control who will be notified
+In addition of the available markdown in Text Display components, you can also use the mention of users and roles, which actually notifies these users and roles, unlike the mentions used in embeds! You can always add the `allowedMentions` field to your message payload to control who will be notified.
 :::
 
 The example below shows how you can send a Text Display component in a channel.
