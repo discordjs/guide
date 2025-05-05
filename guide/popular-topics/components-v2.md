@@ -40,7 +40,7 @@ await channel.send({
 
 ### Thumbnail
 
-A Thumbnail is a content component that is visually similar to the `thumbnail` field inside an embed, but with CV2 it can only be added as an accessory inside a [Section](/popular-topics/components-v2.md#section) component. However, you can add ALT text to the image as well as marking the image as spoiler. You can use the <DocsLink path="ThumbnailBuilder:Class" /> utility class to easily create a Thumbnail component.
+A Thumbnail is a content component that is visually similar to the `thumbnail` field inside an embed, but with CV2, it can only be added as an accessory inside a [Section](/popular-topics/components-v2.md#section) component. However, you can add alt text to the image as well as marking the image as a spoiler. You can use the <DocsLink path="ThumbnailBuilder:Class" /> utility class to easily create a Thumbnail component.
 
 The example below shows how you can send a Thumbnail component as an Section component accessory in a channel.
 
@@ -56,7 +56,7 @@ const exampleSection = new SectionBuilder()
 	)
 	.setThumbnailAccessory(
 		new ThumbnailBuilder()
-			.setDescription('ALT text displaying on the image')
+			.setDescription('alt text displaying on the image')
 			.setURL('attachment://image.png'), // Supports arbitrary URLs such as 'https://i.imgur.com/AfFp7pu.png' as well.
 	);
 
@@ -71,7 +71,7 @@ For more information how to set up custom attachments to use in your Thumbnail c
 
 ### Media Gallery
 
-A Media Gallery is a content component that can display up to 10 media attachments formatted in an structured gallery. Each attachment in the Media Gallery component can have an optional ALT text (description) and can be marked as spoiler. You can use the <DocsLink path="MediaGalleryBuilder:Class" /> and <DocsLink path="MediaGalleryItemBuilder:Class" /> utility classes to easily create a Media Gallery component and its items.
+A Media Gallery is a content component that can display up to 10 media attachments formatted in a structured gallery. Each attachment in the Media Gallery component can have an optional alt text (description) and can be marked as a spoiler. You can use the <DocsLink path="MediaGalleryBuilder:Class" /> and <DocsLink path="MediaGalleryItemBuilder:Class" /> utility classes to easily create a Media Gallery component and its items.
 
 The example below shows how you can send a Media Gallery component in a channel.
 
@@ -83,10 +83,10 @@ const file = new AttachmentBuilder('../assets/image.png');
 const exampleGallery = new MediaGalleryBuilder()
 	.addItems(
 		new MediaGalleryItemBuilder()
-			.setDescription('ALT text displaying on an image from the AttachmentBuilder')
+			.setDescription('alt text displaying on an image from the AttachmentBuilder')
 			.setURL('attachment://image.png'),
 		new MediaGalleryItemBuilder()
-			.setDescription('ALT text displaying on an image from an external URL')
+			.setDescription('alt text displaying on an image from an external URL')
 			.setURL('https://i.imgur.com/AfFp7pu.png')
 			.setSpoiler(true), // Will display as a blurred image
 	);
@@ -100,7 +100,7 @@ await channel.send({
 
 ### File
 
-A File is a content component that can display any uploaded file as an attachment to a message and reference it in the File component itself. It can only display 1 attachment per File component, but using multiple File components you can upload multiple files in one message. File components cannot have ALT text (description) unlike a Thumbnail or Media Gallery component, but you can add a spoiler to the component if you would like to. You can use the <DocsLink path="FileBuilder:Class" /> utility class to easily create a File component.
+A File is a content component that can display any uploaded file as an attachment to a message and reference it in the File component itself. It can only display 1 attachment per File component, but using multiple File components, you can upload multiple files in one message. File components cannot have alt text (description), unlike a Thumbnail or Media Gallery component, but you can add a spoiler to the component. You can use the <DocsLink path="FileBuilder:Class" /> utility class to easily create a File component.
 
 The example below shows how you can send a File component in a channel.
 
@@ -121,7 +121,7 @@ await channel.send({
 
 ### Separator
 
-A Separator is a layout component that adds some vertical padding and optional visiual divison between components. You can select the amount of padding used for the Separator component (small or large) as well as whether a visual divider should be displayed or not (defaults to `true`). You can use the <DocsLink path="SeparatorBuilder:Class" /> utility class to easily create a Separator component.
+A Separator is a layout component that adds some vertical padding and optional visual division between components. You can select the amount of padding used for the Separator component (small or large) as well as whether a visual divider should be displayed (defaults to `true`). You can use the <DocsLink path="SeparatorBuilder:Class" /> utility class to easily create a Separator component.
 
 The example below shows how you can send a Separator component in a channel.
 
@@ -140,7 +140,7 @@ await channel.send({
 
 ### Section
 
-A Section is a layout component allowing you to display text next to an accessory. You can use the <DocsLink path="SectionBuilder:Class" /> utility class to easily create a Section component. Every Section component must have at least 1 and at most 3 Text Display components together with either a Thumbnail or Button component.
+A Section is a layout component allowing you to display text next to an accessory. You can use the <DocsLink path="SectionBuilder:Class" /> utility class to easily create a Section component. Every Section component must have at least 1 and at most 3 Text Display components with either a Thumbnail or Button component.
 
 The example below shows how you can send a Section component in a channel containing three Text Display components with a Button component on the right, next to the text.
 
@@ -171,7 +171,7 @@ await channel.send({
 
 ### Container
 
-A Container is a layout component that will group its children components and has an optional color bar on the left, just like embeds. The great difference of having it optional is that not specifying any color for the color bar will make the left side of the Container component match the background color of the Container component itself. You can also mark the Container component as spoiler, to make all contents inside it blurred. You can use the <DocsLink path="ContainerBuilder:Class" /> utility class to easily create a Container component.
+A Container is a layout component that will group its child components and has an optional color bar on the left, just like embeds. However, unlike embeds, not specifying a color will make the left side of the Container component match the background color. You can also mark the Container component as a spoiler, to make all contents inside it blurred. You can use the <DocsLink path="ContainerBuilder:Class" /> utility class to easily create a Container component.
 
 The example below shows how to send a Container component in a channel containing a Text Display component, an Action Row component with a User Select component, two Separator components, and a Section component with two Text Display components where a Button component is present as an accessory.
 
