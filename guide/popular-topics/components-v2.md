@@ -4,7 +4,7 @@ While you might be familiar with [embeds](/popular-topics/embeds.md) in Discord,
 
 To use the new **Components V2 (CV2)** components, you need to pass in the new `IsComponentsV2` message flag from the <DocsLink path="MessageFlags:Enum" /> enum when sending a message. The flag should only be added to the message's `flags` field when the message contains CV2 components, unlike the `Ephemeral` message flag that can be added when you defer an interaction response.
 
-::: danger
+::: warning
 Once a message is sent or edited with the `IsComponentsV2` message flag, the flag **cannot** be removed from that message.
 :::
 
