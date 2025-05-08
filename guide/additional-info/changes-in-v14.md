@@ -2,7 +2,7 @@
 
 ## Before you start
 
-v14 requires Node 16.11.0 or higher to use, so make sure you're up to date. To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it! There are many resources online to help you with this step based on your host system.
+Make sure you're using the latest LTS version of Node. To check your Node version, use `node -v` in your terminal or command prompt, and if it's not high enough, update it! There are many resources online to help you with this step based on your host system.
 
 ### Various packages are now included in v14
 
@@ -311,7 +311,7 @@ The following properties & methods have been moved to the `GuildAuditLogsEntry` 
 
 ### Interaction
 
-Whenever an interaction is replied to and one fetches the reply, it could possibly give an `APIMessage` if the guild was not cached. However, interaction replies now always return a discord.js `Message` object with `fetchReply` as `true`.
+Whenever an interaction is replied to and one fetches the reply, it could possibly give an `APIMessage` if the guild was not cached. However, interaction replies now always return an <DocsLink path="InteractionCallbackResponse:Class" /> with `withResponse` set to `true`.
 
 The base interaction class is now `BaseInteraction`.
 

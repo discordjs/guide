@@ -32,6 +32,11 @@ yarn add @napi-rs/canvas
 pnpm add @napi-rs/canvas
 ```
 :::
+::: code-group-item bun
+```sh:no-line-numbers
+bun add @napi-rs/canvas
+```
+:::
 ::::
 
 ## Getting started

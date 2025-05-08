@@ -258,6 +258,7 @@ If you want to build the new embed data on a previously sent embed template, mak
 - Mentions of any kind in embeds will only render correctly within embed descriptions and field values
 - Mentions in embeds will not trigger a notification
 - Embeds allow masked links (e.g. `[Guide](https://discordjs.guide/ 'optional hovertext')`), but only in description and field values
+- Discord may strip characters from message content—see [the documentation](https://discord.com/developers/docs/resources/message#create-message) for more information
 
 ## Embed limits
 
@@ -272,4 +273,4 @@ There are a few limits to be aware of while planning your embeds due to the API'
 - The sum of all characters from all embed structures in a message must not exceed 6000 characters
 - 10 embeds can be sent per message
 
-Source: [Discord API documentation](https://discord.com/developers/docs/resources/channel#embed-object-embed-limits)
+Source: [Discord API documentation](https://discord.com/developers/docs/resources/message#embed-object-embed-limits)

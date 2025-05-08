@@ -50,7 +50,7 @@ Please make sure to provide the list of gateway intents and partials you use in 
 
 ## The Intents Bitfield
 
-discord.js provides the utility structure <docs-link path="class/IntentsBitField">`IntentsBitField`</docs-link> to simplify the modification of intents bitfields.
+discord.js provides the utility structure <DocsLink path="IntentsBitField:Class"/> to simplify the modification of intents bitfields.
 
 You can use the `.add()` and `.remove()` methods to add or remove flags (Intents string literals representing a certain bit) and modify the bitfield. You can provide single flags as well as an array or bitfield. To use a set of intents as a template you can pass it to the constructor. Note that the empty constructor `new IntentsBitField()` creates an empty Intents instance, representing no intents or the bitfield `0`:
 

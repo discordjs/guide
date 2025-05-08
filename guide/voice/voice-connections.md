@@ -111,7 +111,7 @@ connection.on(VoiceConnectionStatus.Disconnected, async (oldState, newState) => 
 			entersState(connection, VoiceConnectionStatus.Connecting, 5_000),
 		]);
 		// Seems to be reconnecting to a new channel - ignore disconnect
-	} catch (error) {
+	} catch {
 		// Seems to be a real disconnect which SHOULDN'T be recovered from
 		connection.destroy();
 	}

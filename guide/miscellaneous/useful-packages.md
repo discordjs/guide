@@ -77,7 +77,7 @@ Official documentation: [https://github.com/zspecza/common-tags](https://github.
 
 Common-tags is a library all about working with template literals.  
 So far, you have probably only used them for interpolating variables into your strings, but they can do a whole lot more.
-If you got time, you should check out [the MDN's documentation about *tagged literals*.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates).
+If you've got time, you should check out [the MDN's documentation about *tagged literals*.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates).
 
 Ever got annoyed your multi-line strings had nasty bits of indentation in them,
 but you did not want to remove the indentation in your source code?  
@@ -169,6 +169,12 @@ pnpm add pino@next
 pnpm add --global pino-pretty
 ```
 :::
+::: code-group-item bun
+```sh:no-line-numbers
+bun add pino@next
+bun add --global pino-pretty
+```
+:::
 ::::
 
 Pino is highly configurable, so we heavily recommend you take a look at their documentation yourself.
@@ -186,10 +192,10 @@ const { Client, Events, GatewayIntentBits } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const logger = require('./logger');
 
-client.on(Events.ClientReady, () => logger.info('The bot is online'));
-client.on(Events.Debug, m => logger.debug(m));
-client.on(Events.Warn, m => logger.warn(m));
-client.on(Events.Error, m => logger.error(m));
+client.once(Events.ClientReady, () => logger.info('The bot is online'));
+client.on(Events.Debug, info => logger.debug(info));
+client.on(Events.Warn, info => logger.warn(info));
+client.on(Events.Error, error => logger.error(error));
 
 client.login('your-token-goes-here');
 ```
@@ -238,6 +244,11 @@ yarn run dev
 ::: code-group-item pnpm
 ```sh:no-line-numbers
 pnpm run dev
+```
+:::
+::: code-group-item bun
+```sh:no-line-numbers
+bun run dev
 ```
 :::
 ::::

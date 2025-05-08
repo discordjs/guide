@@ -30,6 +30,13 @@ pnpm add undici
 ```
 
 :::
+::: code-group-item bun
+
+```sh:no-line-numbers
+bun add undici
+```
+
+:::
 ::::
 
 ## Skeleton code
@@ -73,10 +80,6 @@ On top of your file, import the library function you will be using:
 ```js
 const { request } = require('undici');
 ```
-
-### Retrieving the JSON response from a request
-
-To get the data from within the response object, you can define the following helper function (it concatenates all the body chunks and parses it as an object) above your client events. Note that the function returns a Promise you need to handle.
 
 ### Random Cat
 

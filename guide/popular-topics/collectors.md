@@ -66,9 +66,9 @@ const collectorFilter = response => {
 	return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
 };
 
-interaction.reply({ content: item.question, fetchReply: true })
-	.then(() => {
-		interaction.channel.awaitMessages({ filter: collectorFilter, max: 1, time: 30_000, errors: ['time'] })
+interaction.reply({ content: item.question, withResponse: true })
+	.then(response => {
+		response.resource.message.channel.awaitMessages({ filter: collectorFilter, max: 1, time: 30_000, errors: ['time'] })
 			.then(collected => {
 				interaction.followUp(`${collected.first().author} got the correct answer!`);
 			})
@@ -143,7 +143,7 @@ collector.on('collect', i => {
 	if (i.user.id === interaction.user.id) {
 		i.reply(`${i.user.id} clicked on the ${i.customId} button.`);
 	} else {
-		i.reply({ content: `These buttons aren't for you!`, ephemeral: true });
+		i.reply({ content: `These buttons aren't for you!`, flags: MessageFlags.Ephemeral });
 	}
 });
 
