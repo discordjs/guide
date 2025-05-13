@@ -43,7 +43,7 @@ bun add undici global-agent
 
 To set up a proxy for REST calls, you should provide a custom `ProxyAgent` to the `Client` constructor. The `ProxyAgent` must be imported from the `undici` package, which is the package that `@discordjs/rest` uses to make HTTP requests.
 
-```js
+```js {6-8}
 const { ProxyAgent } = require('undici');
 const { Client } = require('discord.js');
 
@@ -55,13 +55,15 @@ const myClient = new Client({
 });
 ```
 
+:::tip
 For further information on the `undici` `ProxyAgent`, please refer to the [undici documentation](https://undici.nodejs.org/#/docs/api/ProxyAgent.md).
+:::
 
 ## Setting up the proxy for WebSocket
 
 To set up a proxy for WebSocket, you can use the `global-agent` package. You will need to provide some custom configuration to activate it:
 
-```js
+```js {1-24}
 const { bootstrap } = require('global-agent');
 
 bootstrap();
@@ -94,7 +96,7 @@ module.exports = {
 
 Now in the file where you create your client, you can import the `NodeGlobalProxy` class and start it with the proxy URL:
 
-```js
+```js {2,4-7,9}
 const { Client } = require('discord.js');
 const { NodeGlobalProxy } = require('./NodeGlobalProxy');
 
@@ -102,10 +104,16 @@ const proxy = new NodeGlobalProxy({
 	http: 'http://my-proxy-server:port',
 	https: 'http://my-proxy-server:port',
 });
+
 proxy.start();
+
 const client = new Client({
 	// client options, including the proxy agent as described above
 });
 
 client.login('your-token-goes-here');
 ```
+
+## Resulting code
+
+<ResultingCode />
