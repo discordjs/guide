@@ -84,11 +84,11 @@ function funcName(client, context) {
 	console.log(context.arg);
 }
 
-//Eval on all shards
-client.shard.broadcastEval(funcName, { 
-	context: { arg: 'arg' } 
+// Eval on all shards
+client.shard.broadcastEval(funcName, {
+	context: { arg: 'arg' }
 });
-//Eval on a specific shard
+// Eval on a specific shard
 client.shard.broadcastEval(funcName, {
 	shard: 0,
 	context: { arg: 'some stuff' }
@@ -103,4 +103,7 @@ The function will receive the arguments as an object as the second parameter.
 ::: warning
 The `context` option only accepts properties which are JSON-serializable. This means you cannot pass complex data types in the context directly.
 For example, if you sent a `User` instance, the function would receive the raw data object.
+:::
+::: tip
+The [next section](/sharding/extended.md) will go into more detail about various use cases of `.broadcastEval()`
 :::
