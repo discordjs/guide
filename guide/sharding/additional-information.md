@@ -77,14 +77,22 @@ You can access them later as usual via `process.argv`, which contains an array o
 
 ## Eval arguments
 
-There may come the point where you will want to pass arguments from the outer scope into a `.broadcastEval()` call.
+There may come the point where you will want to pass arguments from the outer scope into a `.broadcastEval()` call. The `context` property is useful for this purpose:
 
 ```js
-function funcName(c, { arg }) {
-	// ...
+function funcName(client, context) {
+	console.log(context.arg);
 }
 
-client.shard.broadcastEval(funcName, { context: { arg: 'arg' } });
+//Eval on all shards
+client.shard.broadcastEval(funcName, { 
+	context: { arg: 'arg' } 
+});
+//Eval on a specific shard
+client.shard.broadcastEval(funcName, {
+	shard: 0,
+	context: { arg: 'some stuff' }
+});
 ```
 
 The `BroadcastEvalOptions` typedef was introduced in discord.js v13 as the second parameter in `.broadcastEval()`. It accepts two properties: `shard` and `context`. The `context` property will be sent as the second argument to your function.
