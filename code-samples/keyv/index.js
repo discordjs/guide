@@ -1,4 +1,4 @@
-const Keyv = require('keyv');
+const { Keyv } = require('keyv');
 const { Client, Events, GatewayIntentBits } = require('discord.js');
 const { globalPrefix, token } = require('./config.json');
 
