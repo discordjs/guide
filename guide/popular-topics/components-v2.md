@@ -12,13 +12,13 @@ All components have an `id` field (which should not be confused with the `custom
 
 In the following section, we will explain all CV2 components in detail, how they work together with interactive components, and the limitations Discord has set when using CV2 components in your message.
 
-## New components
+## CV2 components
 
 CV2 brought both layout and content components. While some of the content components resemble existing message elements, they behave slightly different when used as CV2 components.
 
 ### Text Display
 
-A Text Display is a content component for adding markdown-formatted text to your message. This component is very similar to the `content` field of a message, but by using multiple Text Display components, you gain greater control over the layout of your message. You can use the <DocsLink path="TextDisplayBuilder:Class" /> utility class to easily create a Text Display component.
+A Text Display is a content component for adding markdown-formatted text to your message. This component is very similar to the `content` field of a message, but by using multiple Text Display components, you gain greater control over the layout of your message. You can use the <DocsLink path="TextDisplayBuilder:Class" /> class to easily create a Text Display component.
 
 ::: tip
 In addition to the available markdown in Text Display components, you can also mention users and roles. In components, mentioned users and roles _will_ receive notifications, unlike when adding mentions to embeds. You can add the `allowedMentions` field to your message payload to control who will be notified.
@@ -30,7 +30,7 @@ The example below shows how you can send a Text Display component in a channel.
 const { TextDisplayBuilder, MessageFlags } = require('discord.js');
 
 const exampleTextDisplay = new TextDisplayBuilder()
-	.setContent('This text is inside a new Text Display component! You can use **any __markdown__** available inside this component too.');
+	.setContent('This text is inside a Text Display component! You can use **any __markdown__** available inside this component too.');
 
 await channel.send({
 	components: [exampleTextDisplay],
@@ -38,9 +38,11 @@ await channel.send({
 });
 ```
 
+![Text Display component preview](./images/cv2-textdisplay-preview.png)
+
 ### Section
 
-A Section is a layout component that places between one and three left-aligned Text Display components next to a right-aligned accessory (Thumbnail or Button component). At least one Text Display and the accessory are required. You can use the <DocsLink path="SectionBuilder:Class" /> utility class to easily create a Section component.
+A Section is a layout component that places between one and three left-aligned Text Display components next to a right-aligned accessory (Thumbnail or Button component). At least one Text Display and the accessory are required. You can use the <DocsLink path="SectionBuilder:Class" /> class to easily create a Section component.
 
 The example below shows how you can send a Section component in a channel containing three Text Display components with a Button component on the right, next to the text.
 
@@ -50,7 +52,7 @@ const { SectionBuilder, ButtonStyle, MessageFlags } = require('discord.js');
 const exampleSection = new SectionBuilder()
 	.addTextDisplayComponents(
 		(textDisplay) => textDisplay
-			.setContent('This text is inside a new Text Display component! You can use **any __markdown__** available inside this component too.'),
+			.setContent('This text is inside a Text Display component! You can use **any __markdown__** available inside this component too.'),
 		(textDisplay) => textDisplay
 			.setContent('Using a section, you may only use up to three Text Display components.'),
 		(textDisplay) => textDisplay
@@ -71,7 +73,7 @@ await channel.send({
 
 ### Thumbnail
 
-A Thumbnail is a content component that is visually similar to the `thumbnail` field inside an embed. Thumbnails are added an accessory inside a [Section](/popular-topics/components-v2.md#section) component, support alt text for accessibility, and can be marked as a spoiler. You can use the <DocsLink path="ThumbnailBuilder:Class" /> utility class to easily create a Thumbnail component.
+A Thumbnail is a content component that is visually similar to the `thumbnail` field inside an embed. Thumbnails are added an accessory inside a [Section](/popular-topics/components-v2.md#section) component, support alt text for accessibility, and can be marked as a spoiler. You can use the <DocsLink path="ThumbnailBuilder:Class" /> class to easily create a Thumbnail component.
 
 The example below shows how you can send a Thumbnail component as a Section component accessory in a channel.
 
@@ -83,7 +85,7 @@ const file = new AttachmentBuilder('../assets/image.png');
 const exampleSection = new SectionBuilder()
 	.addTextDisplayComponents(
 		(textDisplay) => textDisplay
-			.setContent('This text is inside a new Text Display component! You can use **any __markdown__** available inside this component too.'),
+			.setContent('This text is inside a Text Display component! You can use **any __markdown__** available inside this component too.'),
 	)
 	.setThumbnailAccessory(
 		(thumbnail) => thumbnail
@@ -102,7 +104,7 @@ For more information how to set up custom attachments to use in your Thumbnail c
 
 ### Media Gallery
 
-A Media Gallery is a content component that can display up to 10 media attachments formatted in a structured gallery. Each attachment in the Media Gallery component can have an optional alt text (description) and can be marked as a spoiler. You can use the <DocsLink path="MediaGalleryBuilder:Class" /> and <DocsLink path="MediaGalleryItemBuilder:Class" /> utility classes to easily create a Media Gallery component and its items.
+A Media Gallery is a content component that can display up to 10 media attachments formatted in a structured gallery. Each attachment in the Media Gallery component can have an optional alt text (description) and can be marked as a spoiler. You can use the <DocsLink path="MediaGalleryBuilder:Class" /> and <DocsLink path="MediaGalleryItemBuilder:Class" /> classes to easily create a Media Gallery component and its items.
 
 The example below shows how you can send a Media Gallery component in a channel.
 
@@ -131,7 +133,7 @@ await channel.send({
 
 ### File
 
-A File is a content component that can display a single uploaded file attachment within the body of the message. By using multiple File components, you can upload and display multiple files in a single message. File components cannot have alt text (description), unlike a Thumbnail or Media Gallery component, but can be marked as a spoiler. You can use the <DocsLink path="FileBuilder:Class" /> utility class to easily create a File component.
+A File is a content component that can display a single uploaded file attachment within the body of the message. By using multiple File components, you can upload and display multiple files in a single message. File components cannot have alt text (description), unlike a Thumbnail or Media Gallery component, but can be marked as a spoiler. You can use the <DocsLink path="FileBuilder:Class" /> class to easily create a File component.
 
 The example below shows how you can send a File component in a channel.
 
@@ -152,7 +154,7 @@ await channel.send({
 
 ### Separator
 
-A Separator is a layout component that adds vertical padding and optional visual division between components. You can select the amount of padding used for the Separator component (small or large) as well as whether a visual divider should be displayed (defaults to `true`). You can use the <DocsLink path="SeparatorBuilder:Class" /> utility class to easily create a Separator component.
+A Separator is a layout component that adds vertical padding and optional visual division between components. You can select the amount of padding used for the Separator component (small or large) as well as whether a visual divider should be displayed (defaults to `true`). You can use the <DocsLink path="SeparatorBuilder:Class" /> class to easily create a Separator component.
 
 ::: warning
 When a Separator component is used without any non-Separator components in the message payload, the message will not have any visible content.
@@ -164,7 +166,7 @@ The example below shows how you can send a Separator component in a channel, sep
 const { TextDisplayBuilder, SeparatorBuilder, SeparatorSpacingSize, MessageFlags } = require('discord.js');
 
 const exampleTextDisplay = new TextDisplayBuilder()
-	.setContent('This text is inside a new Text Display component! You can use **any __markdown__** available inside this component too.');
+	.setContent('This text is inside a Text Display component! You can use **any __markdown__** available inside this component too.');
 
 const exampleSeparator = new SeparatorBuilder()
 	.setDivider(false) // No line displayed
@@ -178,7 +180,7 @@ await channel.send({
 
 ### Container
 
-A Container is a layout component which groups its child components inside a visually distinct rounded box with an optional accent color on the left, just like embeds. However, unlike embeds, not specifying a color will make the left side of the Container component match the background color. You can also mark the Container component as a spoiler, which blurs all content inside the container. You can use the <DocsLink path="ContainerBuilder:Class" /> utility class to easily create a Container component.
+A Container is a layout component which groups its child components inside a visually distinct rounded box with an optional accent color on the left, just like embeds. However, unlike embeds, not specifying a color will make the left side of the Container component match the background color. You can also mark the Container component as a spoiler, which blurs all content inside the container. You can use the <DocsLink path="ContainerBuilder:Class" /> class to easily create a Container component.
 
 The example below shows how to send a Container component in a channel. It contains:
 - a Text Display component;
@@ -193,7 +195,7 @@ const exampleContainer = new ContainerBuilder()
 	.setAccentColor(0x0099FF)
 	.addTextDisplayComponents(
 		(textDisplay) => textDisplay
-			.setContent('This text is inside a new Text Display component! You can use **any __markdown__** available inside this component too.'),
+			.setContent('This text is inside a Text Display component! You can use **any __markdown__** available inside this component too.'),
 	)
 	.addActionRowComponents(
 		(actionRow) => actionRow
@@ -210,7 +212,7 @@ const exampleContainer = new ContainerBuilder()
 		(section) => section
 			.addTextDisplayComponents(
 				(textDisplay) => textDisplay
-					.setContent('This text is inside a new Text Display component! You can use **any __markdown__** available inside this component too.'),
+					.setContent('This text is inside a Text Display component! You can use **any __markdown__** available inside this component too.'),
 				(textDisplay) => textDisplay
 					.setContent('And you can place one button or one thumbnail component next to it!'),
 			)
