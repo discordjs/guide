@@ -12,7 +12,7 @@ All components have an `id` field (which should not be confused with the `custom
 
 In the following section, we will explain all CV2 components in detail, how they work together with interactive components, and the limitations Discord has set when using CV2 components in your message.
 
-## CV2 components
+## New components
 
 CV2 brought both layout and content components. While some of the content components resemble existing message elements, they behave slightly different when used as CV2 components.
 
