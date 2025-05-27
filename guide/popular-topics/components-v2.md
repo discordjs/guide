@@ -38,7 +38,7 @@ await channel.send({
 });
 ```
 
-![Text display component preview](./images/cv2-textdisplay-preivew.png)
+![Text display component preview](./images/textdisplay-preview.png)
 
 ### Section
 
@@ -71,6 +71,8 @@ await channel.send({
 });
 ```
 
+![Section component preview](./images/section-preview.png)
+
 ### Thumbnail
 
 A Thumbnail is a content component that is visually similar to the `thumbnail` field inside an embed. Thumbnails are added an accessory inside a [Section](/popular-topics/components-v2.md#section) component, support alt text for accessibility, and can be marked as a spoiler. You can use the <DocsLink path="ThumbnailBuilder:Class" /> class to easily create a Thumbnail component.
@@ -99,6 +101,8 @@ await channel.send({
 	flags: MessageFlags.IsComponentsV2,
 });
 ```
+
+![Thumbnail component preview](./images/thumbnail-preview.png)
 
 For more information how to set up custom attachments to use in your Thumbnail component URL, you can look at the guide for [attaching images in embeds](/popular-topics/embeds.md#attaching-images).
 
@@ -130,6 +134,8 @@ await channel.send({
 	flags: MessageFlags.IsComponentsV2,
 });
 ```
+
+![Media gallery component preview](./images/mediagallery-preview.png)
 
 ### File
 
@@ -178,6 +184,8 @@ await channel.send({
 });
 ```
 
+![Separator component preview](./images/separator-preview.png)
+
 ### Container
 
 A Container is a layout component which groups its child components inside a visually distinct rounded box with an optional accent color on the left, just like embeds. However, unlike embeds, not specifying a color will make the left side of the Container component match the background color. You can also mark the Container component as a spoiler, which blurs all content inside the container. You can use the <DocsLink path="ContainerBuilder:Class" /> class to easily create a Container component.
@@ -185,7 +193,7 @@ A Container is a layout component which groups its child components inside a vis
 The example below shows how to send a Container component in a channel. It contains:
 - a Text Display component;
 - an Action Row component with a User Select component;
-- two Separator components;
+- a Separator components;
 - a Section component with two Text Display components and a Button component accessory.
 
 ```js
@@ -229,6 +237,8 @@ await channel.send({
 	flags: MessageFlags.IsComponentsV2,
 });
 ```
+
+![Container component preview](./images/container-preview.png)
 
 ## Limitations
 
