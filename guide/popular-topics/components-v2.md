@@ -38,7 +38,7 @@ await channel.send({
 });
 ```
 
-![Text Display component preview](./images/cv2-textdisplay-preview.png)
+![Text display component preview](./images/cv2-textdisplay-preivew.png)
 
 ### Section
 
