@@ -212,7 +212,7 @@ const exampleContainer = new ContainerBuilder()
 			.setComponents(
 				new UserSelectMenuBuilder()
 					.setCustomId('exampleSelect')
-					.setPlaceholder('Select users')
+					.setPlaceholder('Select users'),
 			),
 	)
 	.addSeparatorComponents(
