@@ -51,15 +51,15 @@ const { SectionBuilder, ButtonStyle, MessageFlags } = require('discord.js');
 
 const exampleSection = new SectionBuilder()
 	.addTextDisplayComponents(
-		(textDisplay) => textDisplay
+		textDisplay => textDisplay
 			.setContent('This text is inside a Text Display component! You can use **any __markdown__** available inside this component too.'),
-		(textDisplay) => textDisplay
+		textDisplay => textDisplay
 			.setContent('Using a section, you may only use up to three Text Display components.'),
-		(textDisplay) => textDisplay
+		textDisplay => textDisplay
 			.setContent('And you can place one button or one thumbnail component next to it!'),
 	)
 	.setButtonAccessory(
-		(button) => button
+		button => button
 			.setCustomId('exampleButton')
 			.setLabel('Button inside a Section')
 			.setStyle(ButtonStyle.Primary),
@@ -86,11 +86,11 @@ const file = new AttachmentBuilder('../assets/image.png');
 
 const exampleSection = new SectionBuilder()
 	.addTextDisplayComponents(
-		(textDisplay) => textDisplay
+		textDisplay => textDisplay
 			.setContent('This text is inside a Text Display component! You can use **any __markdown__** available inside this component too.'),
 	)
 	.setThumbnailAccessory(
-		(thumbnail) => thumbnail
+		thumbnail => thumbnail
 			.setDescription('alt text displaying on the image')
 			.setURL('attachment://image.png'), // Supports arbitrary URLs such as 'https://i.imgur.com/AfFp7pu.png' as well.
 	);
@@ -119,10 +119,10 @@ const file = new AttachmentBuilder('../assets/image.png');
 
 const exampleGallery = new MediaGalleryBuilder()
 	.addItems(
-		(mediaGalleryItem) => mediaGalleryItem
+		mediaGalleryItem => mediaGalleryItem
 			.setDescription('alt text displaying on an image from the AttachmentBuilder')
 			.setURL('attachment://image.png'),
-		(mediaGalleryItem) => mediaGalleryItem
+		mediaGalleryItem => mediaGalleryItem
 			.setDescription('alt text displaying on an image from an external URL')
 			.setURL('https://i.imgur.com/AfFp7pu.png')
 			.setSpoiler(true), // Will display as a blurred image
@@ -157,6 +157,8 @@ await channel.send({
 	flags: MessageFlags.IsComponentsV2,
 });
 ```
+
+![File component preview](./images/file-preview.png)
 
 ### Separator
 
@@ -193,7 +195,7 @@ A Container is a layout component which groups its child components inside a vis
 The example below shows how to send a Container component in a channel. It contains:
 - a Text Display component;
 - an Action Row component with a User Select component;
-- a Separator components;
+- a Separator component;
 - a Section component with two Text Display components and a Button component accessory.
 
 ```js
@@ -202,11 +204,11 @@ const { ContainerBuilder, UserSelectMenuBuilder, ButtonStyle, MessageFlags } = r
 const exampleContainer = new ContainerBuilder()
 	.setAccentColor(0x0099FF)
 	.addTextDisplayComponents(
-		(textDisplay) => textDisplay
+		textDisplay => textDisplay
 			.setContent('This text is inside a Text Display component! You can use **any __markdown__** available inside this component too.'),
 	)
 	.addActionRowComponents(
-		(actionRow) => actionRow
+		actionRow => actionRow
 			.setComponents(
 				new UserSelectMenuBuilder()
 					.setCustomId('exampleSelect')
@@ -214,18 +216,18 @@ const exampleContainer = new ContainerBuilder()
 			),
 	)
 	.addSeparatorComponents(
-		(separator) => separator,
+		separator => separator,
 	)
 	.addSectionComponents(
-		(section) => section
+		section => section
 			.addTextDisplayComponents(
-				(textDisplay) => textDisplay
+				textDisplay => textDisplay
 					.setContent('This text is inside a Text Display component! You can use **any __markdown__** available inside this component too.'),
-				(textDisplay) => textDisplay
+				textDisplay => textDisplay
 					.setContent('And you can place one button or one thumbnail component next to it!'),
 			)
 			.setButtonAccessory(
-				(button) => button
+				button => button
 					.setCustomId('exampleButton')
 					.setLabel('Button inside a Section')
 					.setStyle(ButtonStyle.Primary),
