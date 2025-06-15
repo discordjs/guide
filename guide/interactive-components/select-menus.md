@@ -3,7 +3,7 @@
 Select menus are one of the `MessageComponent` classes, which can be sent via messages or interaction responses.
 
 ::: tip
-This page is a follow-up to the [slash commands](/slash-commands/advanced-creation.md) section and [action rows](/message-components/action-rows.md) page. Please carefully read those pages first so that you can understand the methods used here.
+This page is a follow-up to the [slash commands](/slash-commands/advanced-creation.md) section and [action rows](/interactive-components/action-rows.md) page. Please carefully read those pages first so that you can understand the methods used here.
 :::
 
 ## Building string select menus
