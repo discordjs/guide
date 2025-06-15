@@ -72,7 +72,7 @@ Create an instance of Keyv once you've installed Keyv and any necessary drivers.
 
 <!-- eslint-skip -->
 ```js
-const Keyv = require('keyv');
+const { Keyv } = require('keyv');
 
 // One of the following
 const keyv = new Keyv(); // for in-memory storage
@@ -122,7 +122,7 @@ This section will still work with any provider supported by Keyv. We recommend P
 ### Setup
 
 ```js
-const Keyv = require('keyv');
+const { Keyv } = require('keyv');
 const { Client, Events, GatewayIntentBits } = require('discord.js');
 const { globalPrefix, token } = require('./config.json');
 
