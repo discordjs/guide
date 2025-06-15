@@ -3,7 +3,7 @@
 The first type of interactive component we'll cover creating is a Button. Buttons are available in a variety of styles and can be used to provide permanent interfaces, temporary confirmation workflows, and other forms of additional interaction with your bot.
 
 ::: tip
-This page is a follow-up to the [slash commands](/slash-commands/advanced-creation) section and [action rows](/message-components/action-rows) page. Please carefully read those pages first so that you can understand the methods used here.
+This page is a follow-up to the [slash commands](/slash-commands/advanced-creation) section and [action rows](/interactive-components/action-rows) page. Please carefully read those pages first so that you can understand the methods used here.
 :::
 
 ## Building buttons
@@ -169,4 +169,4 @@ const button = new ButtonBuilder()
 
 #### Next steps
 
-That's everything you need to know about building and sending buttons! From here you can learn about the other type of message component, [select menus](/message-components/select-menus), or have your bot start listening to [component interactions](/message-components/interactions) from your buttons. 
+That's everything you need to know about building and sending buttons! From here you can learn about the other type of message component, [select menus](/interactive-components/select-menus), or have your bot start listening to [component interactions](/interactive-components/interactions) from your buttons. 
