@@ -12,11 +12,7 @@ All components have an `id` field (which should not be confused with the `custom
 
 In the following section, we will explain all CV2 components in detail, how they work together with interactive components, and the limitations Discord has set when using CV2 components in your message.
 
-## New components
-
-CV2 brought both layout and content components. While some of the content components resemble existing message elements, they behave slightly different when used as CV2 components.
-
-### Text Display
+## Text Display
 
 A Text Display is a content component for adding markdown-formatted text to your message. This component is very similar to the `content` field of a message, but by using multiple Text Display components, you gain greater control over the layout of your message. You can use the <DocsLink path="TextDisplayBuilder:Class" /> class to easily create a Text Display component.
 
@@ -40,7 +36,7 @@ await channel.send({
 
 ![Text display component preview](./images/textdisplay-preview.png)
 
-### Section
+## Section
 
 A Section is a layout component that places between one and three left-aligned Text Display components next to a right-aligned accessory (Thumbnail or Button component). At least one Text Display and the accessory are required. You can use the <DocsLink path="SectionBuilder:Class" /> class to easily create a Section component.
 
@@ -73,7 +69,7 @@ await channel.send({
 
 ![Section component preview](./images/section-preview.png)
 
-### Thumbnail
+## Thumbnail
 
 A Thumbnail is a content component that is visually similar to the `thumbnail` field inside an embed. Thumbnails are added an accessory inside a [Section](/popular-topics/components-v2.md#section) component, support alt text for accessibility, and can be marked as a spoiler. You can use the <DocsLink path="ThumbnailBuilder:Class" /> class to easily create a Thumbnail component.
 
@@ -106,7 +102,7 @@ await channel.send({
 
 For more information how to set up custom attachments to use in your Thumbnail component URL, you can look at the guide for [attaching images in embeds](/popular-topics/embeds.md#attaching-images).
 
-### Media Gallery
+## Media Gallery
 
 A Media Gallery is a content component that can display up to 10 media attachments formatted in a structured gallery. Each attachment in the Media Gallery component can have an optional alt text (description) and can be marked as a spoiler. You can use the <DocsLink path="MediaGalleryBuilder:Class" /> and <DocsLink path="MediaGalleryItemBuilder:Class" /> classes to easily create a Media Gallery component and its items.
 
@@ -137,7 +133,7 @@ await channel.send({
 
 ![Media gallery component preview](./images/mediagallery-preview.png)
 
-### File
+## File
 
 A File is a content component that can display a single uploaded file attachment within the body of the message. By using multiple File components, you can upload and display multiple files in a single message. File components cannot have alt text (description), unlike a Thumbnail or Media Gallery component, but can be marked as a spoiler. You can use the <DocsLink path="FileBuilder:Class" /> class to easily create a File component.
 
@@ -160,7 +156,7 @@ await channel.send({
 
 ![File component preview](./images/file-preview.png)
 
-### Separator
+## Separator
 
 A Separator is a layout component that adds vertical padding and optional visual division between components. You can select the amount of padding used for the Separator component (small or large) as well as whether a visual divider should be displayed (defaults to `true`). You can use the <DocsLink path="SeparatorBuilder:Class" /> class to easily create a Separator component.
 
@@ -188,7 +184,7 @@ await channel.send({
 
 ![Separator component preview](./images/separator-preview.png)
 
-### Container
+## Container
 
 A Container is a layout component which groups its child components inside a visually distinct rounded box with an optional accent color on the left, just like embeds. However, unlike embeds, not specifying a color will make the left side of the Container component match the background color. You can also mark the Container component as a spoiler, which blurs all content inside the container. You can use the <DocsLink path="ContainerBuilder:Class" /> class to easily create a Container component.
 
