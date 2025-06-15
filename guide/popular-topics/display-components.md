@@ -43,7 +43,7 @@ await channel.send({
 
 ## Section
 
-Sections represent text (one to three Text Display components) with an accessory. The accessory can either be an image (thumbnail) or button. If you do not want to send an accessory, use a [Text Display](/popular-topics/components-v2.md#text-display) component instead. You can use the <DocsLink path="SectionBuilder:Class" /> class to easily create a Section component:
+Sections represent text (one to three Text Display components) with an accessory. The accessory can either be an image (thumbnail) or button. If you do not want to send an accessory, use a [Text Display](/popular-topics/display-components.md#text-display) component instead. You can use the <DocsLink path="SectionBuilder:Class" /> class to easily create a Section component:
 
 ```js
 const { SectionBuilder, ButtonStyle, MessageFlags } = require('discord.js');
@@ -74,7 +74,7 @@ await channel.send({
 
 ## Thumbnail
 
-A Thumbnail is a display component that is visually similar to the `thumbnail` field inside an embed. Thumbnails are added as accessory inside a [Section](/popular-topics/components-v2.md#section) component, support alt text for accessibility, and can be marked as a spoiler. You can use the <DocsLink path="ThumbnailBuilder:Class" /> class to easily create a Thumbnail component:
+A Thumbnail is a display component that is visually similar to the `thumbnail` field inside an embed. Thumbnails are added as accessory inside a [Section](/popular-topics/display-components.md#section) component, support alt text for accessibility, and can be marked as a spoiler. You can use the <DocsLink path="ThumbnailBuilder:Class" /> class to easily create a Thumbnail component:
 
 ```js
 const { AttachmentBuilder, SectionBuilder, MessageFlags } = require('discord.js');
