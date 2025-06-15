@@ -72,12 +72,12 @@ export default {
 			]
 		},
 		{
-			text: 'Message Components',
+			text: 'Interactive Components',
 			children: [
-				'/message-components/action-rows.md',
-				'/message-components/buttons.md',
-				'/message-components/select-menus.md',
-				'/message-components/interactions.md',
+				'/interactive-components/action-rows.md',
+				'/interactive-components/buttons.md',
+				'/interactive-components/select-menus.md',
+				'/interactive-components/interactions.md',
 			]
 		},
 		{
@@ -94,7 +94,7 @@ export default {
 				'/popular-topics/audit-logs.md',
 				'/popular-topics/canvas.md',
 				'/popular-topics/collectors.md',
-				'/popular-topics/components-v2.md',
+				'/popular-topics/display-components.md',
 				'/popular-topics/embeds.md',
 				'/popular-topics/errors.md',
 				'/popular-topics/formatters.md',
