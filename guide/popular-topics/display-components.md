@@ -2,18 +2,21 @@
 
 While you might be familiar with [embeds](/popular-topics/embeds.md) in Discord, there are more ways to style and format your apps messages using **display components**, a comprehensive set of layout and content elements.
 
-To use the display components, you need to pass the `IsComponentsV2` message flag (<DocsLink path="MessageFlags:Enum" />) when sending a message. You only need to use this flag when sending a message using the display components system, not when deffering interaction responses or updates.
+To use the display components, you need to pass the `IsComponentsV2` message flag (<DocsLink path="MessageFlags:Enum" />) when sending a message. You only need to use this flag when sending a message using the display components system, not when deffering interaction responses.
 
 ::: warning
 Opting into using this system by passing the `IsComponentsV2` comes with a set of caveats:
-- You **cannot** send `content`, `polls`, `embeds`, or `stickers`.
+- You **cannot** send `content`, `poll`, `embeds`, or `stickers`.
 - You **cannot** opt out of using display components when editing a message
-- You **can** opt into using display components when editing a message
+- You **can** opt into using display components when editing a message while explicitly setting `content`, `poll`, `embeds`, and `stickers` to null.
 - Messages can have up to **40** total components (nested components count!)
 - The amount of text across all text display components **cannot** exceed 4000 characters.
+- All attached files have to explicitly be referenced in a component (refer to the [Thumbnail](/popular-topics/display-components#thumbnail), [Media Gallery](/popular-topics/display-components#media-gallery), and [File](/popular-topics/display-components#file) sections).
 :::
 
+
 All components can be passed an optional `id` field holding a 32-bit integer identifier to later identify them in interaction responses. Do not confuse this with the `custom_id` field for interactive components! You can find more information about this field [on the discord API documentation](https://discord.com/developers/docs/components/reference#anatomy-of-a-component).
+
 
 In the following section, we will explain all display components in detail, how they work together with interactive components, and their limitations. 
 
