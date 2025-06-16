@@ -11,14 +11,12 @@ Opting into using this system by passing the `IsComponentsV2` comes with a set o
 - You **can** opt into using display components when editing a message while explicitly setting `content`, `poll`, `embeds`, and `stickers` to null.
 - Messages can have up to **40** total components (nested components count!)
 - The amount of text across all text display components **cannot** exceed 4000 characters.
-- All attached files have to explicitly be referenced in a component (refer to the [Thumbnail](/popular-topics/display-components#thumbnail), [Media Gallery](/popular-topics/display-components#media-gallery), and [File](/popular-topics/display-components#file) sections).
+- All attached files have to explicitly be referenced in a component (refer to the [Thumbnail](/popular-topics/display-components#thumbnail), [Media Gallery](/popular-topics/display-components#media-gallery), and [file](/popular-topics/display-components#file) sections).
 :::
 
+All components can be passed an optional, unique, `id` field holding a 32-bit integer identifier to later identify them in interaction responses. Do not confuse this with the `custom_id` field for interactive components! You can find more information about this [on the discord api documentation](https://discord.com/developers/docs/components/reference#anatomy-of-a-component). Discord will automatically populate the `id` of components that don't have the `id` specified in the payload sequentially starting from `1`. The `id` value `0` is treated as empty. The order components are automatically filled in is an implementation detail and not officially document. If you want to work with the `id` (for example to find and replace the content of a specific component lateron), you should explicitly specify it. 
 
-All components can be passed an optional `id` field holding a 32-bit integer identifier to later identify them in interaction responses. Do not confuse this with the `custom_id` field for interactive components! You can find more information about this field [on the discord API documentation](https://discord.com/developers/docs/components/reference#anatomy-of-a-component).
-
-
-In the following section, we will explain all display components in detail, how they work together with interactive components, and their limitations. 
+In the following sections, we will explain all available display component types in detail and show you some examples on how you can use them.
 
 ## Text Display
 
