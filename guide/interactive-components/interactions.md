@@ -7,7 +7,7 @@ Every button click or select menu selection on a component sent by your bot fire
 - Creating a permanent component handler in the <DocsLink path="Client:Class#interactionCreate" /> event.
 
 ::: tip
-This page is a follow-up to the [slash commands](/slash-commands/advanced-creation) section, and assumes you have created either [buttons](/message-components/buttons) or [select menus](/message-components/select-menus) as detailed in this guide. Please carefully read those pages first so that you can understand the methods used here.
+This page is a follow-up to the [slash commands](/slash-commands/advanced-creation) section, and assumes you have created either [buttons](/interactive-components/buttons) or [select menus](/interactive-components/select-menus) as detailed in this guide. Please carefully read those pages first so that you can understand the methods used here.
 :::
 
 ## Responding to component interactions
@@ -32,7 +32,7 @@ Once `deferUpdate()` has been called, future messages can be sent by calling `fo
 
 ## Awaiting components
 
-If you followed our [buttons](/message-components/buttons) guide, the confirmation workflow for the `ban` command is a good example of a situation where your bot is expecting to receive a single response, from either the Confirm or Cancel button.
+If you followed our [buttons](/interactive-components/buttons) guide, the confirmation workflow for the `ban` command is a good example of a situation where your bot is expecting to receive a single response, from either the Confirm or Cancel button.
 
 Begin by adding `withResponse` to the options, and then calling <DocsLink path="Message:Class#awaitMessageComponent" type="method" /> on the message. This method returns a [Promise](/additional-info/async-await.md) that resolves when any interaction passes its filter (if one is provided), or throws if none are received before the timeout. If this happens, remove the components and notify the user.
 
@@ -82,7 +82,7 @@ try {
 
 ## Component collectors
 
-For situations where you want to collect multiple interactions, the Collector approach is better suited than awaiting singular interactions. Following on from the [select menus](/message-components/select-menus) guide, you're going to extend that example to use an <DocsLink path="InteractionCollector:Class"/> to listen for multiple <DocsLink path="StringSelectMenuInteraction:Class"/>s.
+For situations where you want to collect multiple interactions, the Collector approach is better suited than awaiting singular interactions. Following on from the [select menus](/interactive-components/select-menus) guide, you're going to extend that example to use an <DocsLink path="InteractionCollector:Class"/> to listen for multiple <DocsLink path="StringSelectMenuInteraction:Class"/>s.
 
 Begin by adding `withResponse` to the options, and then calling <DocsLink path="Message:Class#createMessageComponentCollector" type="method" /> on this instance. This method returns an InteractionCollector that will fire its <DocsLink path="InteractionCollector:Class#collect" /> event whenever an interaction passes its filter (if one is provided).
 
