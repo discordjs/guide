@@ -88,6 +88,7 @@ function funcName(client, context) {
 client.shard.broadcastEval(funcName, {
 	context: { arg: 'arg' }
 });
+
 // Eval on a specific shard
 client.shard.broadcastEval(funcName, {
 	shard: 0,
