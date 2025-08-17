@@ -2,7 +2,7 @@
 
 While you might be familiar with [embeds](/popular-topics/embeds.md) in Discord, there are more ways to style and format your apps messages using **display components**, a comprehensive set of layout and content elements.
 
-To use the display components, you need to pass the `IsComponentsV2` message flag (<DocsLink path="MessageFlags:Enum" />) when sending a message. You only need to use this flag when sending a message using the display components system, not when deffering interaction responses.
+To use the display components, you need to pass the `IsComponentsV2` message flag (<DocsLink path="MessageFlags:Enum" />) when sending a message. You only need to use this flag when sending a message using the display components system, not when deferring interaction responses.
 
 ::: warning
 Opting into using this system by passing the `IsComponentsV2` comes with a set of caveats:
