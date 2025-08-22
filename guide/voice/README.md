@@ -6,7 +6,11 @@
 
 ### Barebones
 
-To add voice functionality to your discord.js bot, you will need the `@discordjs/voice` package, as well as one of the encryption packages listed below. For example: 
+To add voice functionality to your discord.js bot, you will need the `@discordjs/voice` package. If your system does not support aes-256-gcm you also need one of the encryption packages listed below. For example:
+
+::: tip
+You can verify aes-256-gcm support by running `require('node:crypto').getCiphers().includes('aes-256-gcm')`.
+:::
 
 :::: code-group
 ::: code-group-item npm
