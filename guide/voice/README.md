@@ -50,6 +50,8 @@ This guide assumes you have installed at least one additional dependency – FFm
   - [`sodium-native`](https://www.npmjs.com/package/sodium-native)
   - [`libsodium-wrappers`](https://www.npmjs.com/package/libsodium-wrappers)
   - [`tweetnacl`](https://www.npmjs.com/package/tweetnacl)
+- DAVE Protocol Support
+  - [`@snazzah/davey`](https://www.npmjs.com/package/@snazzah/davey) - to enable end-to-end encryption with the DAVE protocol.
 
 ::: tip
 Outside a development environment, it is recommended for you to use `@discordjs/opus` and `sodium` to improve performance and improve the stability of audio playback!
@@ -88,6 +90,10 @@ bun add --global --production --add-python-to-path windows-build-tools
 </CodeGroup>
 :::
 
+::: warning
+Some Discord clients already require the DAVE protocol for end-to-end encryption in voice chat. Ensure you have `@snazzah/davey` installed to avoid compatibility issues, as `@snazzah/davey` is only set as a dev-dependency for `@discordjs/voice` and may not install in production environments without explicit installation.
+:::
+
 ## Debugging Dependencies
 
 The library includes a helper function that helps you to find out which dependencies you've successfully installed. This information is also very helpful if you ever need to submit an issue on the `@discordjs/voice` issue tracker.
@@ -115,6 +121,9 @@ Encryption Libraries
 FFmpeg
 - version: 4.2.4-1ubuntu0.1
 - libopus: yes
+
+DAVE Protocol
+- @snazzah/davey: 0.1.6
 --------------------------------------------------
 */
 ```
@@ -128,3 +137,5 @@ FFmpeg
 - **FFmpeg**
   - If you want to play audio from many different file types, you will need to have FFmpeg installed.
   - If `libopus` is enabled, you will be able to benefit from increased performance if real-time volume alteration is disabled.
+- **DAVE Protocol**
+  - Required for enabling end-to-end encryption in voice channels.
