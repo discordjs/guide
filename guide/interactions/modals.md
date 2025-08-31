@@ -11,7 +11,7 @@ This page is a follow-up to the [interactions (slash commands) page](/slash-comm
 Unlike message components, modals aren't strictly components themselves. They're a callback structure used to respond to interactions.
 
 ::: tip
-You can have a maximum of five <DocsLink path="ActionRowBuilder:Class" />s per modal builder, and one <DocsLink path="TextInputBuilder:Class" /> within an <DocsLink path="ActionRowBuilder:Class" />. Currently, you can only use <DocsLink path="TextInputBuilder:Class" />s in modal action rows builders.
+You can have a maximum of five <DocsLink path="LabelBuilder:Class" />s per modal builder, and one <DocsLink path="TextInputBuilder:Class" /> or <DocsLink path="StringSelectMenuBuilder:Class" /> within an <DocsLink path="LabelBuilder:Class" />.
 :::
 
 To create a modal you construct a new <DocsLink path="ModalBuilder:Class" />. You can then use the setters to add the custom id and title.
@@ -35,21 +35,12 @@ client.on(Events.InteractionCreate, async interaction => {
 The custom id is a developer-defined string of up to 100 characters. Use this field to ensure you can uniquely define all incoming interactions from your modals!
 :::
 
-The next step is to add the input fields in which users responding can enter free-text. Adding inputs is similar to adding components to messages.
+The next step is to add the components to which users can respond. Adding components to modals is similar to adding components to messages.
 
-At the end, we then call <DocsLink path="ChatInputCommandInteraction:Class#showModal" type="method"/> to display the modal to the user.
-
-::: warning
-If you're using typescript you'll need to specify the type of components your action row holds. This can be done by specifying the generic parameter in <DocsLink path="ActionRowBuilder:Class" />
-
-```diff
-- new ActionRowBuilder()
-+ new ActionRowBuilder<ModalActionRowComponentBuilder>()
-```
-:::
+At the end, we then call <DocsLink path="ChatInputCommandInteraction:Class#showModal" type="method" /> to display the modal to the user.
 
 ```js {1,12-34}
-const { ActionRowBuilder, Events, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
+const { Events, ModalBuilder, TextInputBuilder, TextInputStyle, LabelBuilder, StringSelectMenuBuilder } = require('discord.js');
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
@@ -62,27 +53,58 @@ client.on(Events.InteractionCreate, async interaction => {
 
 		// Add components to modal
 
-		// Create the text input components
+		// Create the interactive components
 		const favoriteColorInput = new TextInputBuilder()
 			.setCustomId('favoriteColorInput')
-		    // The label is the prompt the user sees for this input
-			.setLabel("What's your favorite color?")
 		    // Short means only a single line of text
 			.setStyle(TextInputStyle.Short);
 
 		const hobbiesInput = new TextInputBuilder()
 			.setCustomId('hobbiesInput')
-			.setLabel("What's some of your favorite hobbies?")
 		    // Paragraph means multiple lines of text.
 			.setStyle(TextInputStyle.Paragraph);
+		
+		const favoriteStarterSelect = new StringSelectMenuBuilder()
+			.setCustomId('starter')
+			.setPlaceholder('Make a selection!')
+			.addOptions(
+				// String select menu options
+				new StringSelectMenuOptionBuilder()
+					// Label displayed to user
+					.setLabel('Bulbasaur')
+					// Description of option
+					.setDescription('The dual-type Grass/Poison Seed Pokémon.')
+					// Value returned to in modal submission
+					.setValue('bulbasaur'),
+				new StringSelectMenuOptionBuilder()
+					.setLabel('Charmander')
+					.setDescription('The Fire-type Lizard Pokémon.')
+					.setValue('charmander'),
+				new StringSelectMenuOptionBuilder()
+					.setLabel('Squirtle')
+					.setDescription('The Water-type Tiny Turtle Pokémon.')
+					.setValue('squirtle'),
+			);
+		// An Label component only holds one interactive component,
+		// so you need one Label component per text input or string select menu.
+		const favoriteColorLabel = new LabelBuilder()
+			// The label is the prompt the user sees for this component
+			.setLabel("What's your favorite color?")
+			.setTextInputComponent(favoriteColorInput);
 
-		// An action row only holds one text input,
-		// so you need one action row per text input.
-		const firstActionRow = new ActionRowBuilder().addComponents(favoriteColorInput);
-		const secondActionRow = new ActionRowBuilder().addComponents(hobbiesInput);
+		const hobbiesLabel = new LabelBuilder()
+			.setLabel("What's some of your favorite hobbies?")
+			// The Description is small text under the label above the interactive component
+			.setDescription('card game, film, book, etc.')
+			.setTextInputComponent(hobbiesInput);
+		
+		const favoriteStarterLabel = new LabelBuilder()
+			.setLabel("What's some of your favorite Gen 1 Pokémon starter?")
+			// The Description is small text under the label above the interactive component
+			.setStringSelectMenuComponent(favoriteStarterSelect);
 
-		// Add inputs to the modal
-		modal.addComponents(firstActionRow, secondActionRow);
+		// Add Label components to the modal
+		modal.setLabelComponents(favoriteColorLabel, hobbiesLabel, favoriteStarterLabel);
 
 		// Show the modal to the user
 		await interaction.showModal(modal);
@@ -92,10 +114,11 @@ client.on(Events.InteractionCreate, async interaction => {
 
 Restart your bot and invoke the `/ping` command again. You should see a popup form resembling the image below:
 
-<img width=450 src="./images/modal-example.png">
+<!-- TODO: add new Image -->
+<!-- <img width=450 src="./images/modal-example.png"> -->
 
 ::: warning
-Showing a modal must be the first response to an interaction. You cannot `defer()` or `deferUpdate()` then show a modal later.
+Showing a modal must be the first response to an interaction. You cannot `deferReply()` or `deferUpdate()` then show a modal later.
 :::
 
 ### Input styles
@@ -106,10 +129,12 @@ Currently there are two different input styles available:
 
 ### Input properties
 
-In addition to the `customId`, `label` and `style`, a text input can be customised in a number of ways to apply validation, prompt the user, or set default values via the <DocsLink path="TextInputBuilder:Class" /> methods:
+In addition to the `customId` and `style`, a text input can be customised in a number of ways to apply validation, prompt the user, or set default values via the <DocsLink path="TextInputBuilder:Class" /> methods:
 
 ```js
 const input = new TextInputBuilder()
+	// sets the id (not the custom id) for this component.
+	.setId(33)
 	// set the maximum number of characters to allow
 	.setMaxLength(1_000)
 	// set the minimum number of characters required for submission
@@ -120,6 +145,31 @@ const input = new TextInputBuilder()
 	.setValue('Default')
 	 // require a value in this input field
 	.setRequired(true);
+```
+
+### Select Menu properties
+
+In addition to the `customId`, `placeholder` and `options`, a text input can be customised in a number of ways to apply validation, prompt the user the <DocsLink path="StringSelectMenuBuilder:Class" /> methods:
+
+```js
+const input = new StringSelectMenuBuilder()
+	// sets the id (not the custom id) for this component.
+	.setId(33)
+	// maximum number of option that could be selected
+	.setMaxValues(10)
+	// minimum number of option that could be selected
+	.setMinValues(2)
+	 // require a selection for this select menu
+	.setRequired(true);
+```
+To add set default values of a select menu use `setDefault(true)` in the option builder
+
+```js
+const option = StringSelectMenuOptionBuilder()
+	.setDefault(true)
+	.setLabel('Charmander')
+	.setDescription('The Fire-type Lizard Pokémon.')
+	.setValue('charmander')
 ```
 
 ## Receiving modal submissions
@@ -165,7 +215,7 @@ client.on(Events.InteractionCreate, async interaction => {
 ```
 
 ::: tip
-If you're using typescript, you can use the <DocsLink path="ModalSubmitInteraction:Class#isFromMessage" type="method"/> typeguard, to make sure the received interaction was from a `MessageComponentInteraction`.
+If you're using typescript, you can use the <DocsLink path="ModalSubmitInteraction:Class#isFromMessage" type="method"/> type guard, to make sure the received interaction was from a <DocsLink path="MessageComponentInteraction:Class"/>.
 :::
 
 ## Extracting data from modal submissions
@@ -179,6 +229,7 @@ client.on(Events.InteractionCreate, interaction => {
 	// Get the data entered by the user
 	const favoriteColor = interaction.fields.getTextInputValue('favoriteColorInput');
 	const hobbies = interaction.fields.getTextInputValue('hobbiesInput');
-	console.log({ favoriteColor, hobbies });
+	const favoriteStarter = interaction.fields.getStringSelectMenuValues('starter')
+	console.log({ favoriteColor, hobbies, favoriteStarter});
 });
 ```
