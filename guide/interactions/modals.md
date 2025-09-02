@@ -63,7 +63,7 @@ client.on(Events.InteractionCreate, async interaction => {
 			.setCustomId('hobbiesInput')
 		    // Paragraph means multiple lines of text.
 			.setStyle(TextInputStyle.Paragraph);
-		
+
 		const favoriteStarterSelect = new StringSelectMenuBuilder()
 			.setCustomId('starter')
 			.setPlaceholder('Make a selection!')
@@ -97,7 +97,7 @@ client.on(Events.InteractionCreate, async interaction => {
 			// The Description is small text under the label above the interactive component
 			.setDescription('card game, film, book, etc.')
 			.setTextInputComponent(hobbiesInput);
-		
+
 		const favoriteStarterLabel = new LabelBuilder()
 			.setLabel("What's some of your favorite Gen 1 Pokémon starter?")
 			// The Description is small text under the label above the interactive component
@@ -169,7 +169,7 @@ const option = StringSelectMenuOptionBuilder()
 	.setDefault(true)
 	.setLabel('Charmander')
 	.setDescription('The Fire-type Lizard Pokémon.')
-	.setValue('charmander')
+	.setValue('charmander');
 ```
 
 ## Receiving modal submissions
@@ -229,7 +229,7 @@ client.on(Events.InteractionCreate, interaction => {
 	// Get the data entered by the user
 	const favoriteColor = interaction.fields.getTextInputValue('favoriteColorInput');
 	const hobbies = interaction.fields.getTextInputValue('hobbiesInput');
-	const favoriteStarter = interaction.fields.getStringSelectMenuValues('starter')
-	console.log({ favoriteColor, hobbies, favoriteStarter});
+	const favoriteStarter = interaction.fields.getStringSelectMenuValues('starter');
+	console.log({ favoriteColor, hobbies, favoriteStarter });
 });
 ```
