@@ -3,7 +3,7 @@
 </div>
 
 > [!IMPORTANT]
-> The guide has been moved into the [monorepo](https://github.com/discordjs/discordjs). This repository contains an iteration that is no longer used. Please contribute to the guide in the monorepo instead!
+> The guide has been moved into the [monorepo](https://github.com/discordjs/discord.js/tree/main/apps/guide). This repository contains an iteration that is no longer used. Please contribute to the guide in the monorepo instead!
 
 ## About
 
