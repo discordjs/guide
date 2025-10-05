@@ -2,9 +2,8 @@
 	<img src="guide/images/branding/banner-blurple-small.png" title="discord.js Guide" alt="discord.js Guide" />
 </div>
 
-# Discord.js Guide
-
-Imagine a guide... that explores the many possibilities for your [discord.js](https://github.com/discordjs/discord.js) bot.
+> [!IMPORTANT]
+> The guide has been moved into the [monorepo](https://github.com/discordjs/discordjs). This repository contains an iteration that is no longer used. Please contribute to the guide in the monorepo instead!
 
 ## About
 
